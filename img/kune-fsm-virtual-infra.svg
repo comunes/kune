@@ -1,0 +1,1241 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:i="http://ns.adobe.com/AdobeIllustrator/10.0/"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   id="svg6293"
+   sodipodi:version="0.32"
+   inkscape:version="0.44"
+   sodipodi:docbase="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual"
+   sodipodi:docname="kune-fsm-virtual-infra.svg">
+  <defs
+     id="defs6295" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="white"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="1"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.994237"
+     inkscape:cx="268.94615"
+     inkscape:cy="835.22171"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:window-width="1373"
+     inkscape:window-height="933"
+     inkscape:window-x="61"
+     inkscape:window-y="0"
+     showguides="true"
+     inkscape:guide-bbox="true" />
+  <metadata
+     id="metadata6298">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:1;color:black;fill:white;fill-opacity:1;fill-rule:nonzero;stroke:#ffe6d5;stroke-width:2.02916408;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       id="rect7207"
+       width="468.68851"
+       height="363.02274"
+       x="34.601894"
+       y="35.629105"
+       rx="4.9848089"
+       ry="5.3163209"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240" />
+    <rect
+       rx="8.0007296"
+       style="color:black;fill:#ffe6d5;fill-opacity:1;fill-rule:nonzero;stroke:#dc5f01;stroke-width:1.96201754;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       id="rect16307"
+       width="411.655"
+       height="253.5591"
+       x="61.798618"
+       y="109.56802"
+       ry="7.6983247"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240" />
+    <rect
+       rx="5.0739031"
+       style="color:black;fill:#ffb380;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16017985;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       id="rect16315"
+       width="29.372091"
+       height="20.295618"
+       x="109.01625"
+       y="295.06982"
+       ry="5.0739045"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240" />
+    <text
+       inkscape:transform-center-x="31"
+       inkscape:transform-center-y="58"
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       x="113.35564"
+       y="308.21179"
+       id="text16317"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240"><tspan
+         id="tspan16319"
+         sodipodi:role="line"
+         x="113.35564"
+         y="308.21179">http</tspan></text>
+    <rect
+       rx="5.0739002"
+       ry="5.0739045"
+       y="319.06982"
+       x="86.619331"
+       height="20.295618"
+       width="155.86276"
+       id="rect16321"
+       style="color:black;fill:#faa;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.1601795;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240" />
+    <text
+       sodipodi:linespacing="100%"
+       id="text16323"
+       y="332.21179"
+       x="102.60611"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       xml:space="preserve"
+       inkscape:transform-center-y="58"
+       inkscape:transform-center-x="31"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240"><tspan
+         y="332.21179"
+         x="102.60611"
+         sodipodi:role="line"
+         id="tspan16325">debian GNU/Linux server</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:17.87772942px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#e57601;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Emblem"
+       x="343.14474"
+       y="79.852554"
+       id="text3418"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240"><tspan
+         id="tspan3426"
+         sodipodi:role="line"
+         x="343.14474"
+         y="79.852554">architecture</tspan></text>
+    <text
+       sodipodi:linespacing="100%"
+       id="text3404"
+       y="330.50812"
+       x="305.15741"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       xml:space="preserve"
+       inkscape:transform-center-y="58"
+       inkscape:transform-center-x="31"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240"><tspan
+         y="330.50812"
+         x="305.15741"
+         sodipodi:role="line"
+         id="tspan3406">. . . </tspan></text>
+    <rect
+       style="color:black;fill:#faa;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018105;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       id="rect3402"
+       width="12.842643"
+       height="20.295618"
+       x="387.8136"
+       y="319.06982"
+       ry="5.0739045"
+       rx="5.0739141"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240" />
+    <rect
+       rx="5.0739141"
+       ry="5.0739045"
+       y="319.06982"
+       x="403.31317"
+       height="20.295618"
+       width="12.842643"
+       id="rect3419"
+       style="color:black;fill:#faa;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018105;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240" />
+    <rect
+       style="color:black;fill:#faa;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018105;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       id="rect3427"
+       width="12.842643"
+       height="20.295618"
+       x="418.81277"
+       y="319.06982"
+       ry="5.0739045"
+       rx="5.0739141"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240" />
+    <rect
+       ry="5.0739045"
+       y="271.06982"
+       x="86.619453"
+       height="20.295618"
+       width="60.478115"
+       id="rect3442"
+       style="color:black;fill:#ac9d93;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018045;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       rx="5.0739088"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240" />
+    <text
+       sodipodi:linespacing="100%"
+       id="text3444"
+       y="284.21179"
+       x="90.60611"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       xml:space="preserve"
+       inkscape:transform-center-y="58"
+       inkscape:transform-center-x="31"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240"><tspan
+         y="284.21179"
+         x="90.60611"
+         sodipodi:role="line"
+         id="tspan3446">hibernate</tspan></text>
+    <g
+       id="g4778"
+       transform="translate(22.70524,0)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240">
+      <rect
+         ry="5.0739045"
+         y="295.06982"
+         x="202.61954"
+         height="20.295618"
+         width="32.259529"
+         id="rect3448"
+         style="color:black;fill:#ffb380;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018081;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+         rx="5.0739107" />
+      <text
+         sodipodi:linespacing="100%"
+         id="text3450"
+         y="308.21179"
+         x="206.60611"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+         xml:space="preserve"
+         inkscape:transform-center-y="58"
+         inkscape:transform-center-x="31"><tspan
+           y="308.21179"
+           x="206.60611"
+           sodipodi:role="line"
+           id="tspan3452">smtp</tspan></text>
+    </g>
+    <rect
+       ry="5.0739045"
+       y="295.06982"
+       x="141.43723"
+       height="20.295618"
+       width="43.866096"
+       id="rect3460"
+       style="color:black;fill:#ffb380;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018057;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       rx="5.0739093"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240" />
+    <text
+       sodipodi:linespacing="100%"
+       id="text3462"
+       y="308.21179"
+       x="145.80513"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       xml:space="preserve"
+       inkscape:transform-center-y="58"
+       inkscape:transform-center-x="31"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240"><tspan
+         y="308.21179"
+         x="145.80513"
+         sodipodi:role="line"
+         id="tspan3464">tomcat</tspan></text>
+    <g
+       id="g4783"
+       transform="translate(23.21006,0)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240">
+      <rect
+         ry="5.0739045"
+         y="295.06982"
+         x="237.4231"
+         height="20.295618"
+         width="36.24942"
+         id="rect3468"
+         style="color:black;fill:#ffb380;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018081;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+         rx="5.0739107" />
+      <text
+         sodipodi:linespacing="100%"
+         id="text3470"
+         y="308.21179"
+         x="241.40967"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+         xml:space="preserve"
+         inkscape:transform-center-y="58"
+         inkscape:transform-center-x="31"><tspan
+           y="308.21179"
+           x="241.40967"
+           sodipodi:role="line"
+           id="tspan3472">xmpp</tspan></text>
+    </g>
+    <g
+       id="g4788"
+       transform="translate(-190,0)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240">
+      <rect
+         rx="5.0739117"
+         style="color:black;fill:#ffb380;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018093;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+         id="rect3474"
+         width="19.791132"
+         height="20.295618"
+         x="276.17627"
+         y="295.06982"
+         ry="5.0739045" />
+      <text
+         inkscape:transform-center-x="31"
+         inkscape:transform-center-y="58"
+         xml:space="preserve"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+         x="278.51553"
+         y="308.21179"
+         id="text3476"
+         sodipodi:linespacing="100%"><tspan
+           id="tspan3480"
+           sodipodi:role="line"
+           x="278.51553"
+           y="308.21179">db</tspan></text>
+    </g>
+    <g
+       id="g4793"
+       transform="translate(1.402387,0)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240">
+      <rect
+         ry="5.0739045"
+         y="295.06982"
+         x="298.52905"
+         height="20.295618"
+         width="22.612417"
+         id="rect3502"
+         style="color:black;fill:#ffb380;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018116;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+         rx="5.0739131" />
+      <text
+         sodipodi:linespacing="100%"
+         id="text3504"
+         y="308.21179"
+         x="300.86819"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+         xml:space="preserve"
+         inkscape:transform-center-y="58"
+         inkscape:transform-center-x="31"><tspan
+           y="308.21179"
+           x="300.86819"
+           sodipodi:role="line"
+           id="tspan3506">dns</tspan></text>
+    </g>
+    <rect
+       rx="5.0739083"
+       style="color:black;fill:#ac9d93;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018057;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       id="rect3516"
+       width="124.66218"
+       height="20.295618"
+       x="150.19576"
+       y="271.06982"
+       ry="5.0739045"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240" />
+    <text
+       inkscape:transform-center-x="31"
+       inkscape:transform-center-y="58"
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       x="153.37024"
+       y="284.21179"
+       id="text3518"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240"><tspan
+         id="tspan3520"
+         sodipodi:role="line"
+         x="153.37024"
+         y="284.21179">otrer services backend</tspan></text>
+    <rect
+       rx="5.0739141"
+       ry="5.0739045"
+       y="319.06982"
+       x="434.31235"
+       height="20.295618"
+       width="12.842643"
+       id="rect3524"
+       style="color:black;fill:#faa;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018105;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240" />
+    <g
+       id="g4798"
+       transform="translate(1.769055,0)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240">
+      <rect
+         rx="5.0739131"
+         style="color:black;fill:#ffb380;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018116;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+         id="rect3530"
+         width="42.361355"
+         height="20.295618"
+         x="323.82367"
+         y="295.06982"
+         ry="5.0739045" />
+      <text
+         inkscape:transform-center-x="31"
+         inkscape:transform-center-y="58"
+         xml:space="preserve"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+         x="326.16287"
+         y="308.21179"
+         id="text3532"
+         sodipodi:linespacing="100%"><tspan
+           id="tspan3534"
+           sodipodi:role="line"
+           x="326.16287"
+           y="308.21179">backup</tspan></text>
+    </g>
+    <rect
+       rx="5.1163588"
+       style="color:black;fill:#bcd35f;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16488838;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       id="rect3544"
+       width="286.94473"
+       height="20.290911"
+       x="86.621933"
+       y="247.07219"
+       ry="5.0727277"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240" />
+    <text
+       inkscape:transform-center-x="31"
+       inkscape:transform-center-y="58"
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       x="90.60611"
+       y="260.21179"
+       id="text3546"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240"><tspan
+         id="tspan3548"
+         sodipodi:role="line"
+         x="90.60611"
+         y="260.21179">spring mvc</tspan></text>
+    <rect
+       ry="5.0739045"
+       y="223.06984"
+       x="86.619446"
+       height="20.295618"
+       width="86.356888"
+       id="rect3550"
+       style="color:black;fill:#aaf;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16017962;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       rx="5.0739026"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240" />
+    <text
+       sodipodi:linespacing="100%"
+       id="text3552"
+       y="236.21181"
+       x="90.60611"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       xml:space="preserve"
+       inkscape:transform-center-y="58"
+       inkscape:transform-center-x="31"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240"><tspan
+         y="236.21181"
+         x="90.60611"
+         sodipodi:role="line"
+         id="tspan3554">gwt rpc servlet</tspan></text>
+    <g
+       id="g4803"
+       transform="translate(1.179212,0)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240">
+      <rect
+         ry="5.0739045"
+         y="295.06982"
+         x="369.82373"
+         height="20.295618"
+         width="43.771996"
+         id="rect3568"
+         style="color:black;fill:#ffb380;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018116;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+         rx="5.0739126" />
+      <text
+         sodipodi:linespacing="100%"
+         id="text3570"
+         y="308.21179"
+         x="372.16287"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+         xml:space="preserve"
+         inkscape:transform-center-y="58"
+         inkscape:transform-center-x="31"><tspan
+           y="308.21179"
+           x="372.16287"
+           sodipodi:role="line"
+           id="tspan3572">a-spam</tspan></text>
+    </g>
+    <g
+       id="g4808"
+       transform="translate(1.251698e-5,0)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240">
+      <rect
+         rx="5.0739136"
+         style="color:black;fill:#ffb380;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018128;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+         id="rect3574"
+         width="28.960297"
+         height="20.295618"
+         x="417.82379"
+         y="295.06982"
+         ry="5.0739045" />
+      <text
+         inkscape:transform-center-x="31"
+         inkscape:transform-center-y="58"
+         xml:space="preserve"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+         x="420.16287"
+         y="308.21179"
+         id="text3576"
+         sodipodi:linespacing="100%"><tspan
+           id="tspan3578"
+           sodipodi:role="line"
+           x="420.16287"
+           y="308.21179">cron</tspan></text>
+    </g>
+    <rect
+       rx="5.0739121"
+       style="color:black;fill:#c87137;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018069;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       id="rect4856"
+       width="360.59171"
+       height="20.295618"
+       x="86.61953"
+       y="199.06984"
+       ry="5.0739045"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240" />
+    <text
+       inkscape:transform-center-x="31"
+       inkscape:transform-center-y="58"
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       x="90.60611"
+       y="212.21181"
+       id="text4858"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240"><tspan
+         id="tspan4860"
+         sodipodi:role="line"
+         x="90.60611"
+         y="212.21181">firewalls</tspan></text>
+    <path
+       style="color:black;fill:#ffe6d5;fill-opacity:1;fill-rule:nonzero;stroke:#dc5f01;stroke-width:1.55009091;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:1.55009084, 6.20036343;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       d="M 87.324667,185.3953 L 402.93905,185.3953"
+       id="path2742"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240" />
+    <text
+       inkscape:transform-center-x="31"
+       inkscape:transform-center-y="58"
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       x="406.74789"
+       y="188.17955"
+       id="text4514"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240"><tspan
+         id="tspan4516"
+         sodipodi:role="line"
+         x="406.74789"
+         y="188.17955">internet</tspan></text>
+    <g
+       id="g4762"
+       transform="translate(0,12)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240">
+      <rect
+         ry="5.073904"
+         y="121.06972"
+         x="86.619629"
+         height="34.180908"
+         width="138.42719"
+         id="rect4520"
+         style="color:black;fill:#aaf;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018164;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+         rx="5.0739212" />
+      <text
+         sodipodi:linespacing="100%"
+         id="text4522"
+         y="134.21181"
+         x="91.637383"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+         xml:space="preserve"
+         inkscape:transform-center-y="58"
+         inkscape:transform-center-x="31"><tspan
+           y="134.21181"
+           x="91.637383"
+           sodipodi:role="line"
+           id="tspan4524">user browser </tspan><tspan
+           id="tspan4546"
+           y="148.21181"
+           x="91.637383"
+           sodipodi:role="line">gwt, js, html, css</tspan></text>
+    </g>
+    <path
+       style="color:black;fill:#450;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.35315001;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block"
+       d="M 134.86979,182.13761 L 129.58854,175.66886 L 124.33854,182.13761 L 126.68229,182.13761 L 126.68229,183.66886 L 126.68229,187.07511 L 126.68229,188.60636 L 124.33854,188.60636 L 129.58854,195.07511 L 134.86979,188.60636 L 132.55729,188.60636 L 132.55729,187.07511 L 132.55729,183.66886 L 132.55729,182.13761 L 134.86979,182.13761 z "
+       id="path4526"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240" />
+    <path
+       id="path4528"
+       d="M 202.86979,182.13761 L 197.58854,175.66886 L 192.33854,182.13761 L 194.68229,182.13761 L 194.68229,183.66886 L 194.68229,187.07511 L 194.68229,188.60636 L 192.33854,188.60636 L 197.58854,195.07511 L 202.86979,188.60636 L 200.55729,188.60636 L 200.55729,187.07511 L 200.55729,183.66886 L 200.55729,182.13761 L 202.86979,182.13761 z "
+       style="color:black;fill:#450;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.35315001;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240" />
+    <text
+       inkscape:transform-center-x="31"
+       inkscape:transform-center-y="58"
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       x="105.83775"
+       y="179.37215"
+       id="text4538"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240"><tspan
+         id="tspan4540"
+         sodipodi:role="line"
+         x="105.83775"
+         y="179.37215">rpc</tspan></text>
+    <text
+       inkscape:transform-center-x="31"
+       inkscape:transform-center-y="58"
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       x="204.67981"
+       y="179.95186"
+       id="text4542"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240"><tspan
+         id="tspan4544"
+         sodipodi:role="line"
+         x="204.67981"
+         y="179.95186">http/s</tspan></text>
+    <rect
+       ry="5.0739045"
+       y="247.06984"
+       x="376.12823"
+       height="20.295618"
+       width="70.730568"
+       id="rect4570"
+       style="color:black;fill:#bcd35f;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018152;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       rx="5.0739183"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240" />
+    <text
+       sodipodi:linespacing="100%"
+       id="text4572"
+       y="260.21179"
+       x="382.60611"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       xml:space="preserve"
+       inkscape:transform-center-y="58"
+       inkscape:transform-center-x="31"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240"><tspan
+         y="260.21179"
+         x="382.60611"
+         sodipodi:role="line"
+         id="tspan4576">templates?</tspan></text>
+    <rect
+       rx="5.0739069"
+       style="color:black;fill:#ffb380;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018021;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       id="rect4835"
+       width="33.728409"
+       height="20.295618"
+       x="188.54747"
+       y="295.06982"
+       ry="5.0739045"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240" />
+    <text
+       inkscape:transform-center-x="31"
+       inkscape:transform-center-y="58"
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       x="189.80513"
+       y="308.21179"
+       id="text4837"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240"><tspan
+         id="tspan4839"
+         sodipodi:role="line"
+         x="189.80513"
+         y="308.21179">cache</tspan></text>
+    <path
+       style="color:black;fill:#dd8a3d;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       d="M 44.509365,74.170751 L 44.509365,75.545751 L 45.759365,75.545751 L 45.759365,74.170751 L 44.509365,74.170751 z "
+       id="path3441"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240" />
+    <g
+       id="g7182"
+       transform="matrix(0.64908,0,0,0.64908,198.9827,-7.386434)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240">
+      <g
+         transform="translate(-2.385332,4.770664)"
+         id="g7173">
+        <g
+           transform="matrix(0.3688,0,0,0.3688,-188.5,-224.5906)"
+           id="g4720">
+          <path
+             transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+             id="path4722"
+             d="M 60.321717,411.99998 L 437.33633,411.99998"
+             style="color:black;fill:#69312f;fill-opacity:1;fill-rule:nonzero;stroke:#dd8a3d;stroke-width:109.23953247;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block" />
+          <path
+             transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+             id="path4724"
+             d="M 252.61203,788.60332 L 252.61203,411.59154"
+             style="color:black;fill:white;fill-opacity:1;fill-rule:nonzero;stroke:#ffdb6b;stroke-width:109.23950958;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block" />
+          <path
+             transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+             id="path4726"
+             d="M 252.86937,597.15755 L 629.88177,597.15755"
+             style="color:black;fill:#69312f;fill-opacity:1;fill-rule:nonzero;stroke:#69312f;stroke-width:109.23951721;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block" />
+          <path
+             transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+             id="path4728"
+             d="M 437.45588,596.97447 L 437.45588,219.95956"
+             style="color:black;fill:white;fill-opacity:1;fill-rule:nonzero;stroke:#c63;stroke-width:109.23950195;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block" />
+          <path
+             transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+             id="path4730"
+             d="M 372.87905,411.27704 L 437.81346,411.27704"
+             style="color:black;fill:#69312f;fill-opacity:1;fill-rule:nonzero;stroke:#dd8a3d;stroke-width:109.23947906;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block" />
+        </g>
+        <path
+           style="font-size:58.13353348px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#a56941;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Emblem"
+           d="M -20.704789,96.645148 C -21.064409,96.645148 -21.410059,96.646418 -21.756929,96.669068 C -21.789299,96.675658 -21.819999,96.686888 -21.852569,96.692978 C -22.175449,96.753278 -22.494019,96.804708 -22.832959,96.812528 C -22.879919,96.819118 -22.929739,96.805498 -22.976439,96.812528 C -25.742889,97.229028 -28.080269,98.430228 -29.958749,100.42326 C -32.152499,102.7401 -33.258609,105.5156 -33.258619,108.74465 C -33.258619,112.00992 -32.152489,114.80428 -29.958749,117.11386 C -27.584029,119.60444 -24.498599,120.84413 -20.704789,120.84414 C -18.692069,120.84413 -16.757069,120.34405 -14.918079,119.33768 C -13.079129,118.36028 -11.480159,116.97691 -10.111759,115.22482 L -14.248549,112.92926 C -16.029619,115.30399 -18.217939,116.49215 -20.824349,116.49215 C -22.634379,116.49215 -24.257269,115.90499 -25.654579,114.74657 C -27.073649,113.58816 -27.782769,112.17717 -27.782749,110.49023 L -8.8683294,110.49023 L -8.8683294,109.53374 C -8.8683594,105.44312 -10.253919,102.16753 -13.005109,99.705888 C -15.321959,97.656978 -17.888419,96.645188 -20.704789,96.645148 z M -108.65329,96.812528 L -108.65329,105.97085 L -111.8575,105.97085 L -111.8575,110.65761 L -108.65329,110.65761 L -108.65329,120.22243 L -103.77523,120.22243 L -103.77523,110.65761 L -100.83405,110.65761 L -94.832129,120.22243 L -89.045409,120.22243 L -97.103769,108.07511 L -89.404089,97.266868 L -95.310369,97.266868 L -101.26446,105.97085 L -103.77523,105.97085 L -103.77523,96.812528 L -108.65329,96.812528 z M -48.801449,96.812528 C -49.641169,96.962408 -50.423599,97.206338 -51.144829,97.577718 C -52.361159,98.229348 -53.321429,99.088718 -54.038179,100.16022 L -54.038179,97.266868 L -58.940149,97.266868 L -58.940149,120.22243 L -54.038179,120.22243 L -54.038179,107.35775 C -54.038189,105.51879 -53.519239,104.10779 -52.483889,103.1014 C -51.441339,102.09506 -50.119629,101.59496 -48.490589,101.59495 C -46.767469,101.59496 -45.421849,102.05733 -44.473369,103.00576 C -43.524939,103.95422 -43.062589,105.44067 -43.062559,107.4534 L -43.062559,120.22243 L -38.160589,120.22243 L -38.160589,106.37736 C -38.160609,103.56098 -39.019979,101.23403 -40.743089,99.395038 C -42.035449,98.015828 -43.530809,97.157348 -45.238549,96.812528 L -48.801449,96.812528 z M -85.960759,97.266868 L -85.960759,110.56196 C -85.960769,113.6752 -84.911229,116.19231 -82.804369,118.11817 C -80.849549,119.92819 -78.428279,120.84413 -75.582929,120.84414 C -72.708639,120.84413 -70.299649,119.92819 -68.337589,118.11817 C -66.230749,116.19231 -65.181219,113.6752 -65.181199,110.56196 L -65.181199,97.266868 L -70.083159,97.266868 L -70.083159,110.13155 C -70.083189,111.82572 -70.602129,113.20404 -71.637439,114.26833 C -72.708989,115.36882 -74.011849,115.91826 -75.582929,115.91826 C -77.096119,115.91827 -78.409069,115.36159 -79.480599,114.26833 C -80.544889,113.16785 -81.058809,111.79677 -81.058789,110.13155 L -81.058789,97.266868 L -85.960759,97.266868 z M -21.326509,101.04497 C -19.726469,101.045 -18.329289,101.49354 -17.141899,102.38405 C -15.990749,103.2963 -15.142999,104.62528 -14.607229,106.37736 L -27.782749,106.37736 C -27.399039,104.69044 -26.602849,103.38033 -25.415459,102.43187 C -24.264309,101.5124 -22.904849,101.045 -21.326509,101.04497 z "
+           id="path4766"
+           inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-logo.png"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90" />
+      </g>
+      <text
+         sodipodi:linespacing="100%"
+         id="text7149"
+         y="141.60875"
+         x="-112.3018"
+         style="font-size:13.38996029px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#dd8a3d;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Emblem"
+         xml:space="preserve"><tspan
+           y="141.60875"
+           x="-112.3018"
+           id="tspan7151"
+           sodipodi:role="line">libre/free projects</tspan><tspan
+           y="154.99871"
+           x="-112.3018"
+           sodipodi:role="line"
+           id="tspan7153">collaborative platform</tspan></text>
+    </g>
+    <g
+       id="g7338"
+       transform="translate(196.8934,-85.66358)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240">
+      <g
+         transform="matrix(0.330985,0,0,0.330985,409.5359,432.3151)"
+         id="g7302">
+        <g
+           id="g7304"
+           transform="translate(-420.3467,-6.57331)">
+          <path
+             style="fill-rule:evenodd"
+             id="path7306"
+             d="M -98.473389,103.17202 C -102.79913,103.17202 -106.46068,104.68144 -109.45707,107.70077 C -112.53301,110.82405 -114.06976,114.51976 -114.06976,118.7884 C -114.06976,123.05656 -112.53301,126.7269 -109.45707,129.79795 C -106.3826,132.8695 -102.72056,134.40479 -98.473389,134.40479 C -94.173515,134.40479 -90.446567,132.85633 -87.293034,129.75891 C -84.322505,126.81815 -82.836996,123.1605 -82.836996,118.7884 C -82.836996,114.41582 -84.348369,110.71961 -87.371116,107.70077 C -90.394838,104.68144 -94.095433,103.17202 -98.473389,103.17202 z M -98.43386,105.98248 C -94.889429,105.98248 -91.879859,107.23179 -89.403686,109.7309 C -86.902136,112.20317 -85.65185,115.22201 -85.65185,118.7884 C -85.65185,122.37968 -86.876272,125.36046 -89.326092,127.72878 C -91.906211,130.27962 -94.942134,131.5548 -98.43386,131.5548 C -101.92607,131.5548 -104.93613,130.29231 -107.46355,127.76782 C -109.99096,125.24334 -111.2554,122.24987 -111.2554,118.7884 C -111.2554,115.32645 -109.97827,112.3076 -107.4245,109.7309 C -104.97468,107.2313 -101.97829,105.98248 -98.43386,105.98248 z "
+             clip-rule="evenodd"
+             i:knockout="Off" />
+          <path
+             style="fill-rule:evenodd"
+             id="path7308"
+             d="M -106.6349,123.08779 L -102.71714,123.08779 C -100.52841,123.08779 -99.198087,122.4114 -99.198087,120.63602 C -99.198087,119.36767 -100.14141,118.7518 -101.31411,118.66738 L -101.31411,118.64298 C -100.14093,118.3775 -99.512366,117.79774 -99.512366,116.69874 C -99.512366,115.0922 -100.68506,114.48853 -102.42677,114.48853 L -106.6349,114.48853 L -106.6349,123.08779 L -106.6349,123.08779 z M -104.55499,119.4643 L -102.41457,119.4643 C -101.61667,119.4643 -101.35022,119.77858 -101.35022,120.49108 C -101.35022,121.04692 -101.66499,121.49345 -102.80157,121.49345 L -104.55499,121.49345 L -104.55499,119.4643 z M -104.57939,116.08287 L -102.78985,116.08287 C -102.07638,116.08287 -101.66548,116.25221 -101.66548,116.9769 C -101.66548,117.60497 -102.10078,117.87094 -102.78985,117.87094 L -104.57939,117.87094 L -104.57939,116.08287 z "
+             clip-rule="evenodd"
+             i:knockout="Off" />
+          <polygon
+             style="fill-rule:evenodd"
+             id="polygon7310"
+             points="36.052,217.597 40.462,217.597 40.462,209.38 47.153,199.976 41.999,199.976 38.257,206.064 34.515,199.976 29.361,199.976 36.052,209.38 36.052,217.597 "
+             clip-rule="evenodd"
+             i:knockout="Off"
+             transform="matrix(0.488012,0,0,0.488012,-114.0698,16.89784)" />
+          <path
+             style="fill-rule:evenodd"
+             id="path7312"
+             d="M -90.271859,118.7884 L -90.271859,116.75925 L -92.231227,116.75925 L -92.231227,118.7884 L -90.271859,118.7884 z M -90.271859,123.08779 L -90.271859,121.05864 L -92.231227,121.05864 L -92.231227,123.08779 L -90.271859,123.08779 z "
+             clip-rule="evenodd"
+             i:knockout="Off" />
+        </g>
+        <g
+           id="g7314"
+           transform="translate(-409.3689,-55.4533)">
+          <path
+             style="fill-rule:evenodd"
+             id="path7316"
+             d="M -75.940045,152.05204 C -80.265783,152.05204 -83.927337,153.56146 -86.923731,156.58031 C -89.999671,159.70358 -91.53642,163.40027 -91.53642,167.66843 C -91.53642,171.93658 -89.999671,175.60741 -86.923731,178.67847 C -83.849255,181.75001 -80.187213,183.28481 -75.940045,183.28481 C -71.640171,183.28481 -67.913224,181.73635 -64.75969,178.63894 C -61.789161,175.69818 -60.303652,172.04053 -60.303652,167.66843 C -60.303652,163.29633 -61.815026,159.60012 -64.837772,156.58031 C -67.861494,153.56098 -71.562089,152.05204 -75.940045,152.05204 z M -75.900516,154.86202 C -72.356085,154.86202 -69.346515,156.11181 -66.870342,158.61092 C -64.368792,161.08271 -63.118506,164.10252 -63.118506,167.66843 C -63.118506,171.25971 -64.342928,174.24048 -66.792748,176.6093 C -69.372867,179.16013 -72.40879,180.43482 -75.900516,180.43482 C -79.39273,180.43482 -82.4023,179.17233 -84.930202,176.64785 C -87.458104,174.12287 -88.722055,171.1299 -88.722055,167.66843 C -88.722055,164.20696 -87.444928,161.18763 -84.891161,158.61092 C -82.441341,156.11181 -79.444947,154.86202 -75.900516,154.86202 z "
+             clip-rule="evenodd"
+             i:knockout="Off" />
+          <path
+             id="path7318"
+             d="M -82.862007,165.46408 C -82.238816,161.53509 -79.473252,159.43469 -76.006903,159.43469 C -71.021372,159.43469 -67.983009,163.05281 -67.983009,167.87632 C -67.983009,172.58368 -71.216089,176.24036 -76.084984,176.24036 C -79.434699,176.24036 -82.433533,174.17851 -82.97913,170.13289 L -79.044777,170.13289 C -78.928142,172.23378 -77.564637,172.97263 -75.617469,172.97263 C -73.397502,172.97263 -71.955915,170.91029 -71.955915,167.7592 C -71.955915,164.45292 -73.202786,162.70242 -75.539875,162.70242 C -77.253285,162.70242 -78.733426,163.32463 -79.045265,165.46408 L -77.901853,165.45773 L -80.998289,168.55417 L -84.094725,165.45773 L -82.862007,165.46408 z "
+             i:knockout="Off" />
+        </g>
+        <g
+           id="g7320"
+           transform="translate(-386.6044,-99.48)"
+           style="fill:#e6e6e6">
+          <path
+             style="fill:#e6e6e6;fill-rule:evenodd"
+             id="path7322"
+             d="M -65.193373,196.07849 C -69.519111,196.07849 -73.180666,197.5884 -76.177059,200.60724 C -79.252999,203.731 -80.789749,207.42672 -80.789749,211.69536 C -80.789749,215.96351 -79.252999,219.63434 -76.177059,222.70491 C -73.102584,225.77646 -69.440542,227.31174 -65.193373,227.31174 C -60.893499,227.31174 -57.166552,225.76328 -54.013018,222.66587 C -51.042489,219.7256 -49.556981,216.06746 -49.556981,211.69536 C -49.556981,207.32228 -51.068354,203.62657 -54.0911,200.60724 C -57.114822,197.5884 -60.815417,196.07849 -65.193373,196.07849 z M -65.153844,198.88944 C -61.609413,198.88944 -58.599843,200.13923 -56.12367,202.63786 C -53.622121,205.11012 -52.371834,208.12946 -52.371834,211.69585 C -52.371834,215.28713 -53.596256,218.2679 -56.046076,220.63623 C -58.626196,223.18707 -61.662118,224.46175 -65.153844,224.46175 C -68.646058,224.46175 -71.656116,223.19927 -74.18353,220.67478 C -76.711432,218.14981 -77.975383,215.15683 -77.975383,211.69585 C -77.975383,208.2334 -76.698256,205.21505 -74.144489,202.63786 C -71.694669,200.13923 -68.698275,198.88944 -65.153844,198.88944 z "
+             clip-rule="evenodd"
+             i:knockout="Off" />
+          <path
+             style="fill:#e6e6e6;fill-rule:evenodd"
+             id="path7324"
+             d="M -59.2733,207.99476 L -70.624459,207.99476 L -70.624459,210.68322 L -59.2733,210.68322 L -59.2733,207.99476 z M -59.2733,213.01348 L -70.624459,213.01348 L -70.624459,215.70243 L -59.2733,215.70243 L -59.2733,213.01348 z "
+             clip-rule="evenodd"
+             i:knockout="Off" />
+        </g>
+        <path
+           i:knockout="Off"
+           d="M -418.28669,96.59871 C -413.90873,96.59871 -410.20814,98.10862 -407.18441,101.12697 C -404.16167,104.14679 -402.65029,107.84251 -402.65029,112.21509 C -402.65029,116.58768 -404.1358,120.24484 -407.10633,123.1856 C -410.25986,126.28302 -413.98681,127.83148 -418.28669,127.83148 C -422.53434,127.83148 -426.1959,126.29619 -429.27037,123.22513 C -432.34631,120.15407 -433.88306,116.48325 -433.88306,112.21509 C -433.88306,107.94694 -432.34631,104.25074 -429.27037,101.12697 C -426.27398,98.10862 -422.61243,96.59871 -418.28669,96.59871 z M -430.36986,108.02014 C -430.83591,109.33778 -431.06919,110.73593 -431.06919,112.21509 C -431.06919,115.67705 -429.80523,118.67003 -427.27733,121.19403 C -424.74943,123.719 -421.73986,124.98149 -418.24765,124.98149 C -414.75592,124.98149 -411.72,123.7068 -409.13988,121.15547 C -408.2761,120.32049 -407.56457,119.41034 -407.00629,118.42309 L -412.89318,115.80149 C -413.29188,117.78233 -415.05751,119.12046 -417.19159,119.2776 L -417.19159,121.68497 L -418.98406,121.68497 L -418.98406,119.2776 C -420.73699,119.2576 -422.42991,118.54119 -423.7246,117.40754 L -421.57345,115.23882 C -420.5374,116.21386 -419.50184,116.6521 -418.08758,116.6521 C -417.17158,116.6521 -416.15554,116.2939 -416.15554,115.09973 C -416.15554,114.67663 -416.32,114.38236 -416.57767,114.16129 L -418.0661,113.49857 L -420.09965,112.85195 C -421.10154,112.5284 -421.87113,112.13164 -422.3938,111.57238 L -430.36986,108.02014 z M -418.24716,99.40917 C -421.79159,99.40917 -424.78798,100.65897 -427.2378,103.15759 C -427.90443,103.83105 -428.48467,104.5333 -428.97708,105.26678 L -423.00723,107.92449 C -422.46846,106.26818 -420.89414,105.26483 -418.98357,105.1521 L -418.98357,102.74473 L -417.1911,102.74473 L -417.1911,105.1521 C -415.95594,105.21163 -414.60122,105.54983 -413.267,106.5849 L -415.3186,108.6936 C -416.0755,108.1563 -417.03152,107.77809 -417.98802,107.77809 C -418.76445,107.77809 -419.86004,108.01721 -419.86004,108.99177 C -419.86004,109.14062 -419.81026,109.27141 -419.71949,109.38804 L -417.72254,110.27671 L -416.23411,110.74227 C -415.27565,111.03313 -414.45823,111.40841 -413.86335,111.995 L -405.8619,115.55798 C -405.59691,114.50973 -405.46515,113.39462 -405.46515,112.21412 C -405.46515,108.64773 -406.71543,105.62937 -409.21698,103.15613 C -411.69365,100.65848 -414.70322,99.40917 -418.24716,99.40917 z "
+           id="path7326"
+           style="fill:#e6e6e6" />
+      </g>
+      <text
+         sodipodi:linespacing="100%"
+         id="text7328"
+         y="456.46991"
+         x="232.49199"
+         style="font-size:5.95772934px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+         xml:space="preserve"><tspan
+           y="456.46991"
+           x="232.49199"
+           sodipodi:role="line"
+           id="tspan7330">about this doc:</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:5.95772934px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+         x="232.54576"
+         y="478.86331"
+         id="text7332"
+         sodipodi:linespacing="100%"><tspan
+           id="tspan7334"
+           sodipodi:role="line"
+           x="232.54576"
+           y="478.86331">version 0.2</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:5.95772934px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+         x="232.49199"
+         y="462.42764"
+         id="text7260"
+         sodipodi:linespacing="100%"><tspan
+           dy="0 -0.31897077 -1.9887733e-07"
+           id="tspan7262"
+           sodipodi:role="line"
+           x="232.49199"
+           y="462.42764">© kune initiative</tspan></text>
+    </g>
+    <g
+       id="g8333"
+       transform="matrix(3.138983e-2,0,0,3.138983e-2,90.26093,322.8819)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240">
+      <g
+         transform="matrix(3.718833,0,0,3.716135,-1017.019,-1477.584)"
+         style="stroke-miterlimit:10"
+         id="g6">
+        <g
+           transform="matrix(0.1,0,0,-0.1,0,840)"
+           id="g8">
+          <path
+             d="M 3255.46,3850.9 C 3237.49,3850.65 3258.86,3841.64 3282.32,3838.03 C 3288.81,3843.1 3294.68,3848.2 3299.92,3853.18 C 3285.31,3849.61 3270.44,3849.53 3255.46,3850.9"
+             style="fill:#d60750;stroke:none"
+             id="path10" />
+          <path
+             d="M 3351.91,3874.94 C 3362.62,3889.71 3370.41,3905.88 3373.15,3922.6 C 3370.75,3910.68 3364.3,3900.39 3358.19,3889.53 C 3324.61,3868.38 3355.03,3902.09 3358.17,3914.9 C 3322.07,3869.43 3353.21,3887.64 3351.91,3874.94"
+             style="fill:#d60750;stroke:none"
+             id="path12" />
+          <path
+             d="M 3387.51,3967.58 C 3389.69,3999.94 3381.14,3989.71 3378.27,3977.36 C 3381.62,3975.62 3384.27,3954.55 3387.51,3967.58"
+             style="fill:#d60750;stroke:none"
+             id="path14" />
+          <path
+             d="M 3187.31,4409.88 C 3196.9,4408.16 3208.05,4406.84 3206.47,4404.55 C 3216.96,4406.85 3219.35,4408.97 3187.31,4409.88"
+             style="fill:#d60750;stroke:none"
+             id="path16" />
+          <path
+             d="M 3206.47,4404.55 L 3199.7,4403.15 L 3206.01,4403.71 L 3206.47,4404.55"
+             style="fill:#d60750;stroke:none"
+             id="path18" />
+          <path
+             d="M 3505.52,3955.31 C 3506.59,3926.25 3497.03,3912.15 3488.39,3887.19 L 3472.86,3879.43 C 3460.16,3854.75 3474.1,3863.75 3464.99,3844.12 C 3445.15,3826.48 3404.79,3788.93 3391.88,3785.49 C 3382.43,3785.7 3398.26,3796.62 3400.33,3800.9 C 3373.77,3782.66 3379.01,3773.52 3338.39,3762.44 L 3337.21,3765.08 C 3237.02,3717.95 3097.86,3811.35 3099.69,3938.79 C 3098.62,3930.7 3096.65,3932.72 3094.43,3929.45 C 3089.26,3995.02 3124.71,4060.88 3184.5,4087.77 C 3242.99,4116.72 3311.54,4104.84 3353.44,4065.8 C 3330.43,4095.94 3284.63,4127.89 3230.35,4124.9 C 3177.18,4124.06 3127.44,4090.27 3110.84,4053.59 C 3083.6,4036.44 3080.44,3987.48 3068.57,3978.52 C 3052.59,3861.15 3098.6,3810.45 3176.44,3750.8 C 3188.68,3742.54 3179.88,3741.29 3181.54,3735 C 3155.68,3747.11 3132,3765.39 3112.53,3787.77 C 3122.86,3772.66 3134.01,3757.95 3148.42,3746.41 C 3124.04,3754.67 3091.47,3805.49 3081.96,3807.56 C 3123.99,3732.3 3252.47,3675.59 3319.77,3703.73 C 3288.63,3702.58 3249.08,3703.09 3214.1,3716.02 C 3199.4,3723.57 3179.42,3739.24 3183,3742.17 C 3274.81,3707.87 3369.67,3716.19 3449.11,3779.88 C 3469.33,3795.62 3491.41,3822.4 3497.79,3822.77 C 3488.18,3808.32 3499.43,3815.82 3492.05,3803.07 C 3512.18,3835.55 3483.3,3816.29 3512.86,3859.16 L 3523.78,3844.12 C 3519.72,3871.09 3557.27,3903.83 3553.45,3946.47 C 3562.07,3959.51 3563.06,3932.44 3553.92,3902.44 C 3566.6,3935.72 3557.27,3941.07 3560.52,3968.53 C 3564.04,3959.3 3568.67,3949.49 3571.04,3939.75 C 3562.77,3971.91 3579.5,3993.91 3583.65,4012.6 C 3579.56,4014.41 3570.9,3998.38 3568.93,4036.37 C 3569.21,4052.87 3573.52,4045.02 3575.17,4049.08 C 3571.93,4050.94 3563.43,4063.59 3558.26,4087.85 C 3562,4093.55 3568.28,4073.07 3573.37,4072.23 C 3570.1,4091.52 3564.45,4106.23 3564.21,4121.03 C 3549.31,4152.17 3558.94,4116.88 3546.85,4134.4 C 3531,4183.87 3560.01,4145.88 3561.97,4168.36 C 3586.02,4133.53 3599.72,4079.55 3606.02,4057.19 C 3601.21,4084.45 3593.46,4110.86 3583.97,4136.41 C 3591.29,4133.34 3572.22,4192.5 3593.48,4153.32 C 3570.77,4236.84 3496.33,4314.88 3427.83,4351.5 C 3436.2,4343.83 3446.79,4334.2 3442.99,4332.69 C 3408.93,4352.97 3414.91,4354.55 3410.03,4363.12 C 3382.29,4374.41 3380.47,4362.21 3362.09,4363.1 C 3309.79,4390.84 3299.71,4387.89 3251.58,4405.27 L 3253.77,4395.04 C 3219.12,4406.58 3213.39,4390.66 3175.95,4395 C 3173.67,4396.78 3187.94,4401.44 3199.7,4403.15 C 3166.2,4398.73 3167.77,4409.75 3134.99,4401.93 C 3143.07,4407.6 3151.61,4411.35 3160.23,4416.17 C 3132.91,4414.51 3095.01,4400.27 3106.71,4413.22 C 3062.15,4393.34 2983.01,4365.43 2938.6,4323.79 L 2937.2,4333.12 C 2916.85,4308.69 2848.46,4260.16 2843.01,4228.52 L 2837.57,4227.25 C 2826.98,4209.32 2820.13,4189 2811.73,4170.55 C 2797.88,4146.95 2791.43,4161.47 2793.4,4157.77 C 2766.16,4102.54 2752.63,4056.13 2740.94,4018.07 C 2749.27,4005.62 2741.14,3943.12 2744.29,3893.1 C 2730.61,3646.05 2917.67,3406.19 3122.14,3350.82 C 3152.11,3340.1 3196.67,3340.51 3234.58,3339.41 C 3189.85,3352.21 3184.07,3346.19 3140.51,3361.39 C 3109.08,3376.19 3102.19,3393.09 3079.93,3412.4 L 3088.74,3396.84 C 3045.08,3412.28 3063.35,3415.96 3027.83,3427.21 L 3037.24,3439.49 C 3023.09,3440.57 2999.76,3463.34 2993.38,3475.96 L 2977.9,3475.35 C 2959.3,3498.3 2949.39,3514.84 2950.11,3527.66 L 2945.11,3518.75 C 2939.44,3528.48 2876.68,3604.82 2909.24,3587.05 C 2903.19,3592.58 2895.15,3596.05 2886.43,3611.9 L 2893.06,3619.47 C 2877.39,3639.63 2864.22,3665.47 2865.22,3674.08 C 2873.58,3662.79 2879.38,3660.68 2885.12,3658.75 C 2845.55,3756.93 2843.33,3664.16 2813.36,3758.69 L 2819.7,3759.2 C 2814.84,3766.52 2811.89,3774.47 2807.98,3782.27 L 2810.74,3809.77 C 2782.27,3842.66 2802.79,3949.78 2806.9,4008.53 C 2809.75,4032.42 2830.68,4057.85 2846.6,4097.73 L 2836.9,4099.4 C 2855.44,4131.74 2942.76,4229.28 2983.2,4224.26 C 3002.79,4248.87 2979.31,4224.35 2975.48,4230.55 C 3018.51,4275.08 3032.04,4262.01 3061.08,4270.02 C 3092.4,4288.61 3034.2,4262.77 3049.05,4277.11 C 3103.19,4290.94 3087.42,4308.55 3158.05,4315.57 C 3165.5,4311.33 3140.76,4309.02 3134.55,4303.52 C 3179.66,4325.59 3277.3,4320.57 3340.71,4291.27 C 3414.31,4256.88 3496.98,4155.22 3500.24,4059.57 L 3503.96,4058.57 C 3502.09,4020.55 3509.78,3976.58 3496.44,3936.19 L 3505.52,3955.31"
+             style="fill:#d60750;stroke:none"
+             id="path20" />
+          <path
+             d="M 3059.32,3826.23 L 3056.8,3813.63 C 3068.61,3797.6 3077.98,3780.22 3093.06,3767.68 C 3082.21,3788.85 3074.15,3797.6 3059.32,3826.23"
+             style="fill:#d60750;stroke:none"
+             id="path22" />
+          <path
+             d="M 3087.24,3827.32 C 3080.99,3834.24 3077.29,3842.56 3073.15,3850.84 C 3077.11,3836.27 3085.22,3823.75 3092.77,3811.02 L 3087.24,3827.32"
+             style="fill:#d60750;stroke:none"
+             id="path24" />
+          <path
+             d="M 3581.28,3934.71 L 3578.65,3928.09 C 3573.81,3893.71 3563.36,3859.69 3547.34,3828.15 C 3565.03,3861.43 3576.47,3897.83 3581.28,3934.71"
+             style="fill:#d60750;stroke:none"
+             id="path26" />
+          <path
+             d="M 3190.88,4418.5 C 3203.03,4422.95 3220.74,4420.94 3233.63,4423.87 C 3216.83,4422.46 3200.12,4421.62 3183.59,4419.49 L 3190.88,4418.5"
+             style="fill:#d60750;stroke:none"
+             id="path28" />
+          <path
+             d="M 2764.32,4191.68 C 2767.12,4165.76 2744.82,4155.7 2769.26,4172.79 C 2782.36,4202.3 2764.14,4180.94 2764.32,4191.68"
+             style="fill:#d60750;stroke:none"
+             id="path30" />
+          <path
+             d="M 2735.6,4071.72 C 2741.23,4089 2742.25,4099.38 2744.4,4109.38 C 2728.84,4089.49 2737.24,4085.25 2735.6,4071.72"
+             style="fill:#d60750;stroke:none"
+             id="path32" />
+        </g>
+      </g>
+    </g>
+    <g
+       transform="matrix(3.138983e-2,0,0,3.138983e-2,389.0949,322.8819)"
+       id="g8349"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240">
+      <g
+         id="g8351"
+         style="stroke-miterlimit:10"
+         transform="matrix(3.718833,0,0,3.716135,-1017.019,-1477.584)">
+        <g
+           id="g8353"
+           transform="matrix(0.1,0,0,-0.1,0,840)">
+          <path
+             id="path8355"
+             style="fill:#d60750;stroke:none"
+             d="M 3255.46,3850.9 C 3237.49,3850.65 3258.86,3841.64 3282.32,3838.03 C 3288.81,3843.1 3294.68,3848.2 3299.92,3853.18 C 3285.31,3849.61 3270.44,3849.53 3255.46,3850.9" />
+          <path
+             id="path8357"
+             style="fill:#d60750;stroke:none"
+             d="M 3351.91,3874.94 C 3362.62,3889.71 3370.41,3905.88 3373.15,3922.6 C 3370.75,3910.68 3364.3,3900.39 3358.19,3889.53 C 3324.61,3868.38 3355.03,3902.09 3358.17,3914.9 C 3322.07,3869.43 3353.21,3887.64 3351.91,3874.94" />
+          <path
+             id="path8359"
+             style="fill:#d60750;stroke:none"
+             d="M 3387.51,3967.58 C 3389.69,3999.94 3381.14,3989.71 3378.27,3977.36 C 3381.62,3975.62 3384.27,3954.55 3387.51,3967.58" />
+          <path
+             id="path8361"
+             style="fill:#d60750;stroke:none"
+             d="M 3187.31,4409.88 C 3196.9,4408.16 3208.05,4406.84 3206.47,4404.55 C 3216.96,4406.85 3219.35,4408.97 3187.31,4409.88" />
+          <path
+             id="path8363"
+             style="fill:#d60750;stroke:none"
+             d="M 3206.47,4404.55 L 3199.7,4403.15 L 3206.01,4403.71 L 3206.47,4404.55" />
+          <path
+             id="path8365"
+             style="fill:#d60750;stroke:none"
+             d="M 3505.52,3955.31 C 3506.59,3926.25 3497.03,3912.15 3488.39,3887.19 L 3472.86,3879.43 C 3460.16,3854.75 3474.1,3863.75 3464.99,3844.12 C 3445.15,3826.48 3404.79,3788.93 3391.88,3785.49 C 3382.43,3785.7 3398.26,3796.62 3400.33,3800.9 C 3373.77,3782.66 3379.01,3773.52 3338.39,3762.44 L 3337.21,3765.08 C 3237.02,3717.95 3097.86,3811.35 3099.69,3938.79 C 3098.62,3930.7 3096.65,3932.72 3094.43,3929.45 C 3089.26,3995.02 3124.71,4060.88 3184.5,4087.77 C 3242.99,4116.72 3311.54,4104.84 3353.44,4065.8 C 3330.43,4095.94 3284.63,4127.89 3230.35,4124.9 C 3177.18,4124.06 3127.44,4090.27 3110.84,4053.59 C 3083.6,4036.44 3080.44,3987.48 3068.57,3978.52 C 3052.59,3861.15 3098.6,3810.45 3176.44,3750.8 C 3188.68,3742.54 3179.88,3741.29 3181.54,3735 C 3155.68,3747.11 3132,3765.39 3112.53,3787.77 C 3122.86,3772.66 3134.01,3757.95 3148.42,3746.41 C 3124.04,3754.67 3091.47,3805.49 3081.96,3807.56 C 3123.99,3732.3 3252.47,3675.59 3319.77,3703.73 C 3288.63,3702.58 3249.08,3703.09 3214.1,3716.02 C 3199.4,3723.57 3179.42,3739.24 3183,3742.17 C 3274.81,3707.87 3369.67,3716.19 3449.11,3779.88 C 3469.33,3795.62 3491.41,3822.4 3497.79,3822.77 C 3488.18,3808.32 3499.43,3815.82 3492.05,3803.07 C 3512.18,3835.55 3483.3,3816.29 3512.86,3859.16 L 3523.78,3844.12 C 3519.72,3871.09 3557.27,3903.83 3553.45,3946.47 C 3562.07,3959.51 3563.06,3932.44 3553.92,3902.44 C 3566.6,3935.72 3557.27,3941.07 3560.52,3968.53 C 3564.04,3959.3 3568.67,3949.49 3571.04,3939.75 C 3562.77,3971.91 3579.5,3993.91 3583.65,4012.6 C 3579.56,4014.41 3570.9,3998.38 3568.93,4036.37 C 3569.21,4052.87 3573.52,4045.02 3575.17,4049.08 C 3571.93,4050.94 3563.43,4063.59 3558.26,4087.85 C 3562,4093.55 3568.28,4073.07 3573.37,4072.23 C 3570.1,4091.52 3564.45,4106.23 3564.21,4121.03 C 3549.31,4152.17 3558.94,4116.88 3546.85,4134.4 C 3531,4183.87 3560.01,4145.88 3561.97,4168.36 C 3586.02,4133.53 3599.72,4079.55 3606.02,4057.19 C 3601.21,4084.45 3593.46,4110.86 3583.97,4136.41 C 3591.29,4133.34 3572.22,4192.5 3593.48,4153.32 C 3570.77,4236.84 3496.33,4314.88 3427.83,4351.5 C 3436.2,4343.83 3446.79,4334.2 3442.99,4332.69 C 3408.93,4352.97 3414.91,4354.55 3410.03,4363.12 C 3382.29,4374.41 3380.47,4362.21 3362.09,4363.1 C 3309.79,4390.84 3299.71,4387.89 3251.58,4405.27 L 3253.77,4395.04 C 3219.12,4406.58 3213.39,4390.66 3175.95,4395 C 3173.67,4396.78 3187.94,4401.44 3199.7,4403.15 C 3166.2,4398.73 3167.77,4409.75 3134.99,4401.93 C 3143.07,4407.6 3151.61,4411.35 3160.23,4416.17 C 3132.91,4414.51 3095.01,4400.27 3106.71,4413.22 C 3062.15,4393.34 2983.01,4365.43 2938.6,4323.79 L 2937.2,4333.12 C 2916.85,4308.69 2848.46,4260.16 2843.01,4228.52 L 2837.57,4227.25 C 2826.98,4209.32 2820.13,4189 2811.73,4170.55 C 2797.88,4146.95 2791.43,4161.47 2793.4,4157.77 C 2766.16,4102.54 2752.63,4056.13 2740.94,4018.07 C 2749.27,4005.62 2741.14,3943.12 2744.29,3893.1 C 2730.61,3646.05 2917.67,3406.19 3122.14,3350.82 C 3152.11,3340.1 3196.67,3340.51 3234.58,3339.41 C 3189.85,3352.21 3184.07,3346.19 3140.51,3361.39 C 3109.08,3376.19 3102.19,3393.09 3079.93,3412.4 L 3088.74,3396.84 C 3045.08,3412.28 3063.35,3415.96 3027.83,3427.21 L 3037.24,3439.49 C 3023.09,3440.57 2999.76,3463.34 2993.38,3475.96 L 2977.9,3475.35 C 2959.3,3498.3 2949.39,3514.84 2950.11,3527.66 L 2945.11,3518.75 C 2939.44,3528.48 2876.68,3604.82 2909.24,3587.05 C 2903.19,3592.58 2895.15,3596.05 2886.43,3611.9 L 2893.06,3619.47 C 2877.39,3639.63 2864.22,3665.47 2865.22,3674.08 C 2873.58,3662.79 2879.38,3660.68 2885.12,3658.75 C 2845.55,3756.93 2843.33,3664.16 2813.36,3758.69 L 2819.7,3759.2 C 2814.84,3766.52 2811.89,3774.47 2807.98,3782.27 L 2810.74,3809.77 C 2782.27,3842.66 2802.79,3949.78 2806.9,4008.53 C 2809.75,4032.42 2830.68,4057.85 2846.6,4097.73 L 2836.9,4099.4 C 2855.44,4131.74 2942.76,4229.28 2983.2,4224.26 C 3002.79,4248.87 2979.31,4224.35 2975.48,4230.55 C 3018.51,4275.08 3032.04,4262.01 3061.08,4270.02 C 3092.4,4288.61 3034.2,4262.77 3049.05,4277.11 C 3103.19,4290.94 3087.42,4308.55 3158.05,4315.57 C 3165.5,4311.33 3140.76,4309.02 3134.55,4303.52 C 3179.66,4325.59 3277.3,4320.57 3340.71,4291.27 C 3414.31,4256.88 3496.98,4155.22 3500.24,4059.57 L 3503.96,4058.57 C 3502.09,4020.55 3509.78,3976.58 3496.44,3936.19 L 3505.52,3955.31" />
+          <path
+             id="path8367"
+             style="fill:#d60750;stroke:none"
+             d="M 3059.32,3826.23 L 3056.8,3813.63 C 3068.61,3797.6 3077.98,3780.22 3093.06,3767.68 C 3082.21,3788.85 3074.15,3797.6 3059.32,3826.23" />
+          <path
+             id="path8369"
+             style="fill:#d60750;stroke:none"
+             d="M 3087.24,3827.32 C 3080.99,3834.24 3077.29,3842.56 3073.15,3850.84 C 3077.11,3836.27 3085.22,3823.75 3092.77,3811.02 L 3087.24,3827.32" />
+          <path
+             id="path8371"
+             style="fill:#d60750;stroke:none"
+             d="M 3581.28,3934.71 L 3578.65,3928.09 C 3573.81,3893.71 3563.36,3859.69 3547.34,3828.15 C 3565.03,3861.43 3576.47,3897.83 3581.28,3934.71" />
+          <path
+             id="path8373"
+             style="fill:#d60750;stroke:none"
+             d="M 3190.88,4418.5 C 3203.03,4422.95 3220.74,4420.94 3233.63,4423.87 C 3216.83,4422.46 3200.12,4421.62 3183.59,4419.49 L 3190.88,4418.5" />
+          <path
+             id="path8375"
+             style="fill:#d60750;stroke:none"
+             d="M 2764.32,4191.68 C 2767.12,4165.76 2744.82,4155.7 2769.26,4172.79 C 2782.36,4202.3 2764.14,4180.94 2764.32,4191.68" />
+          <path
+             id="path8377"
+             style="fill:#d60750;stroke:none"
+             d="M 2735.6,4071.72 C 2741.23,4089 2742.25,4099.38 2744.4,4109.38 C 2728.84,4089.49 2737.24,4085.25 2735.6,4071.72" />
+        </g>
+      </g>
+    </g>
+    <g
+       id="g8391"
+       transform="matrix(3.138983e-2,0,0,3.138983e-2,404.6779,322.8819)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240">
+      <g
+         transform="matrix(3.718833,0,0,3.716135,-1017.019,-1477.584)"
+         style="stroke-miterlimit:10"
+         id="g8393">
+        <g
+           transform="matrix(0.1,0,0,-0.1,0,840)"
+           id="g8395">
+          <path
+             d="M 3255.46,3850.9 C 3237.49,3850.65 3258.86,3841.64 3282.32,3838.03 C 3288.81,3843.1 3294.68,3848.2 3299.92,3853.18 C 3285.31,3849.61 3270.44,3849.53 3255.46,3850.9"
+             style="fill:#d60750;stroke:none"
+             id="path8397" />
+          <path
+             d="M 3351.91,3874.94 C 3362.62,3889.71 3370.41,3905.88 3373.15,3922.6 C 3370.75,3910.68 3364.3,3900.39 3358.19,3889.53 C 3324.61,3868.38 3355.03,3902.09 3358.17,3914.9 C 3322.07,3869.43 3353.21,3887.64 3351.91,3874.94"
+             style="fill:#d60750;stroke:none"
+             id="path8399" />
+          <path
+             d="M 3387.51,3967.58 C 3389.69,3999.94 3381.14,3989.71 3378.27,3977.36 C 3381.62,3975.62 3384.27,3954.55 3387.51,3967.58"
+             style="fill:#d60750;stroke:none"
+             id="path8401" />
+          <path
+             d="M 3187.31,4409.88 C 3196.9,4408.16 3208.05,4406.84 3206.47,4404.55 C 3216.96,4406.85 3219.35,4408.97 3187.31,4409.88"
+             style="fill:#d60750;stroke:none"
+             id="path8403" />
+          <path
+             d="M 3206.47,4404.55 L 3199.7,4403.15 L 3206.01,4403.71 L 3206.47,4404.55"
+             style="fill:#d60750;stroke:none"
+             id="path8405" />
+          <path
+             d="M 3505.52,3955.31 C 3506.59,3926.25 3497.03,3912.15 3488.39,3887.19 L 3472.86,3879.43 C 3460.16,3854.75 3474.1,3863.75 3464.99,3844.12 C 3445.15,3826.48 3404.79,3788.93 3391.88,3785.49 C 3382.43,3785.7 3398.26,3796.62 3400.33,3800.9 C 3373.77,3782.66 3379.01,3773.52 3338.39,3762.44 L 3337.21,3765.08 C 3237.02,3717.95 3097.86,3811.35 3099.69,3938.79 C 3098.62,3930.7 3096.65,3932.72 3094.43,3929.45 C 3089.26,3995.02 3124.71,4060.88 3184.5,4087.77 C 3242.99,4116.72 3311.54,4104.84 3353.44,4065.8 C 3330.43,4095.94 3284.63,4127.89 3230.35,4124.9 C 3177.18,4124.06 3127.44,4090.27 3110.84,4053.59 C 3083.6,4036.44 3080.44,3987.48 3068.57,3978.52 C 3052.59,3861.15 3098.6,3810.45 3176.44,3750.8 C 3188.68,3742.54 3179.88,3741.29 3181.54,3735 C 3155.68,3747.11 3132,3765.39 3112.53,3787.77 C 3122.86,3772.66 3134.01,3757.95 3148.42,3746.41 C 3124.04,3754.67 3091.47,3805.49 3081.96,3807.56 C 3123.99,3732.3 3252.47,3675.59 3319.77,3703.73 C 3288.63,3702.58 3249.08,3703.09 3214.1,3716.02 C 3199.4,3723.57 3179.42,3739.24 3183,3742.17 C 3274.81,3707.87 3369.67,3716.19 3449.11,3779.88 C 3469.33,3795.62 3491.41,3822.4 3497.79,3822.77 C 3488.18,3808.32 3499.43,3815.82 3492.05,3803.07 C 3512.18,3835.55 3483.3,3816.29 3512.86,3859.16 L 3523.78,3844.12 C 3519.72,3871.09 3557.27,3903.83 3553.45,3946.47 C 3562.07,3959.51 3563.06,3932.44 3553.92,3902.44 C 3566.6,3935.72 3557.27,3941.07 3560.52,3968.53 C 3564.04,3959.3 3568.67,3949.49 3571.04,3939.75 C 3562.77,3971.91 3579.5,3993.91 3583.65,4012.6 C 3579.56,4014.41 3570.9,3998.38 3568.93,4036.37 C 3569.21,4052.87 3573.52,4045.02 3575.17,4049.08 C 3571.93,4050.94 3563.43,4063.59 3558.26,4087.85 C 3562,4093.55 3568.28,4073.07 3573.37,4072.23 C 3570.1,4091.52 3564.45,4106.23 3564.21,4121.03 C 3549.31,4152.17 3558.94,4116.88 3546.85,4134.4 C 3531,4183.87 3560.01,4145.88 3561.97,4168.36 C 3586.02,4133.53 3599.72,4079.55 3606.02,4057.19 C 3601.21,4084.45 3593.46,4110.86 3583.97,4136.41 C 3591.29,4133.34 3572.22,4192.5 3593.48,4153.32 C 3570.77,4236.84 3496.33,4314.88 3427.83,4351.5 C 3436.2,4343.83 3446.79,4334.2 3442.99,4332.69 C 3408.93,4352.97 3414.91,4354.55 3410.03,4363.12 C 3382.29,4374.41 3380.47,4362.21 3362.09,4363.1 C 3309.79,4390.84 3299.71,4387.89 3251.58,4405.27 L 3253.77,4395.04 C 3219.12,4406.58 3213.39,4390.66 3175.95,4395 C 3173.67,4396.78 3187.94,4401.44 3199.7,4403.15 C 3166.2,4398.73 3167.77,4409.75 3134.99,4401.93 C 3143.07,4407.6 3151.61,4411.35 3160.23,4416.17 C 3132.91,4414.51 3095.01,4400.27 3106.71,4413.22 C 3062.15,4393.34 2983.01,4365.43 2938.6,4323.79 L 2937.2,4333.12 C 2916.85,4308.69 2848.46,4260.16 2843.01,4228.52 L 2837.57,4227.25 C 2826.98,4209.32 2820.13,4189 2811.73,4170.55 C 2797.88,4146.95 2791.43,4161.47 2793.4,4157.77 C 2766.16,4102.54 2752.63,4056.13 2740.94,4018.07 C 2749.27,4005.62 2741.14,3943.12 2744.29,3893.1 C 2730.61,3646.05 2917.67,3406.19 3122.14,3350.82 C 3152.11,3340.1 3196.67,3340.51 3234.58,3339.41 C 3189.85,3352.21 3184.07,3346.19 3140.51,3361.39 C 3109.08,3376.19 3102.19,3393.09 3079.93,3412.4 L 3088.74,3396.84 C 3045.08,3412.28 3063.35,3415.96 3027.83,3427.21 L 3037.24,3439.49 C 3023.09,3440.57 2999.76,3463.34 2993.38,3475.96 L 2977.9,3475.35 C 2959.3,3498.3 2949.39,3514.84 2950.11,3527.66 L 2945.11,3518.75 C 2939.44,3528.48 2876.68,3604.82 2909.24,3587.05 C 2903.19,3592.58 2895.15,3596.05 2886.43,3611.9 L 2893.06,3619.47 C 2877.39,3639.63 2864.22,3665.47 2865.22,3674.08 C 2873.58,3662.79 2879.38,3660.68 2885.12,3658.75 C 2845.55,3756.93 2843.33,3664.16 2813.36,3758.69 L 2819.7,3759.2 C 2814.84,3766.52 2811.89,3774.47 2807.98,3782.27 L 2810.74,3809.77 C 2782.27,3842.66 2802.79,3949.78 2806.9,4008.53 C 2809.75,4032.42 2830.68,4057.85 2846.6,4097.73 L 2836.9,4099.4 C 2855.44,4131.74 2942.76,4229.28 2983.2,4224.26 C 3002.79,4248.87 2979.31,4224.35 2975.48,4230.55 C 3018.51,4275.08 3032.04,4262.01 3061.08,4270.02 C 3092.4,4288.61 3034.2,4262.77 3049.05,4277.11 C 3103.19,4290.94 3087.42,4308.55 3158.05,4315.57 C 3165.5,4311.33 3140.76,4309.02 3134.55,4303.52 C 3179.66,4325.59 3277.3,4320.57 3340.71,4291.27 C 3414.31,4256.88 3496.98,4155.22 3500.24,4059.57 L 3503.96,4058.57 C 3502.09,4020.55 3509.78,3976.58 3496.44,3936.19 L 3505.52,3955.31"
+             style="fill:#d60750;stroke:none"
+             id="path8407" />
+          <path
+             d="M 3059.32,3826.23 L 3056.8,3813.63 C 3068.61,3797.6 3077.98,3780.22 3093.06,3767.68 C 3082.21,3788.85 3074.15,3797.6 3059.32,3826.23"
+             style="fill:#d60750;stroke:none"
+             id="path8409" />
+          <path
+             d="M 3087.24,3827.32 C 3080.99,3834.24 3077.29,3842.56 3073.15,3850.84 C 3077.11,3836.27 3085.22,3823.75 3092.77,3811.02 L 3087.24,3827.32"
+             style="fill:#d60750;stroke:none"
+             id="path8411" />
+          <path
+             d="M 3581.28,3934.71 L 3578.65,3928.09 C 3573.81,3893.71 3563.36,3859.69 3547.34,3828.15 C 3565.03,3861.43 3576.47,3897.83 3581.28,3934.71"
+             style="fill:#d60750;stroke:none"
+             id="path8413" />
+          <path
+             d="M 3190.88,4418.5 C 3203.03,4422.95 3220.74,4420.94 3233.63,4423.87 C 3216.83,4422.46 3200.12,4421.62 3183.59,4419.49 L 3190.88,4418.5"
+             style="fill:#d60750;stroke:none"
+             id="path8415" />
+          <path
+             d="M 2764.32,4191.68 C 2767.12,4165.76 2744.82,4155.7 2769.26,4172.79 C 2782.36,4202.3 2764.14,4180.94 2764.32,4191.68"
+             style="fill:#d60750;stroke:none"
+             id="path8417" />
+          <path
+             d="M 2735.6,4071.72 C 2741.23,4089 2742.25,4099.38 2744.4,4109.38 C 2728.84,4089.49 2737.24,4085.25 2735.6,4071.72"
+             style="fill:#d60750;stroke:none"
+             id="path8419" />
+        </g>
+      </g>
+    </g>
+    <g
+       transform="matrix(3.138983e-2,0,0,3.138983e-2,420.1219,322.8819)"
+       id="g8421"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240">
+      <g
+         id="g8423"
+         style="stroke-miterlimit:10"
+         transform="matrix(3.718833,0,0,3.716135,-1017.019,-1477.584)">
+        <g
+           id="g8425"
+           transform="matrix(0.1,0,0,-0.1,0,840)">
+          <path
+             id="path8427"
+             style="fill:#d60750;stroke:none"
+             d="M 3255.46,3850.9 C 3237.49,3850.65 3258.86,3841.64 3282.32,3838.03 C 3288.81,3843.1 3294.68,3848.2 3299.92,3853.18 C 3285.31,3849.61 3270.44,3849.53 3255.46,3850.9" />
+          <path
+             id="path8429"
+             style="fill:#d60750;stroke:none"
+             d="M 3351.91,3874.94 C 3362.62,3889.71 3370.41,3905.88 3373.15,3922.6 C 3370.75,3910.68 3364.3,3900.39 3358.19,3889.53 C 3324.61,3868.38 3355.03,3902.09 3358.17,3914.9 C 3322.07,3869.43 3353.21,3887.64 3351.91,3874.94" />
+          <path
+             id="path8431"
+             style="fill:#d60750;stroke:none"
+             d="M 3387.51,3967.58 C 3389.69,3999.94 3381.14,3989.71 3378.27,3977.36 C 3381.62,3975.62 3384.27,3954.55 3387.51,3967.58" />
+          <path
+             id="path8433"
+             style="fill:#d60750;stroke:none"
+             d="M 3187.31,4409.88 C 3196.9,4408.16 3208.05,4406.84 3206.47,4404.55 C 3216.96,4406.85 3219.35,4408.97 3187.31,4409.88" />
+          <path
+             id="path8435"
+             style="fill:#d60750;stroke:none"
+             d="M 3206.47,4404.55 L 3199.7,4403.15 L 3206.01,4403.71 L 3206.47,4404.55" />
+          <path
+             id="path8437"
+             style="fill:#d60750;stroke:none"
+             d="M 3505.52,3955.31 C 3506.59,3926.25 3497.03,3912.15 3488.39,3887.19 L 3472.86,3879.43 C 3460.16,3854.75 3474.1,3863.75 3464.99,3844.12 C 3445.15,3826.48 3404.79,3788.93 3391.88,3785.49 C 3382.43,3785.7 3398.26,3796.62 3400.33,3800.9 C 3373.77,3782.66 3379.01,3773.52 3338.39,3762.44 L 3337.21,3765.08 C 3237.02,3717.95 3097.86,3811.35 3099.69,3938.79 C 3098.62,3930.7 3096.65,3932.72 3094.43,3929.45 C 3089.26,3995.02 3124.71,4060.88 3184.5,4087.77 C 3242.99,4116.72 3311.54,4104.84 3353.44,4065.8 C 3330.43,4095.94 3284.63,4127.89 3230.35,4124.9 C 3177.18,4124.06 3127.44,4090.27 3110.84,4053.59 C 3083.6,4036.44 3080.44,3987.48 3068.57,3978.52 C 3052.59,3861.15 3098.6,3810.45 3176.44,3750.8 C 3188.68,3742.54 3179.88,3741.29 3181.54,3735 C 3155.68,3747.11 3132,3765.39 3112.53,3787.77 C 3122.86,3772.66 3134.01,3757.95 3148.42,3746.41 C 3124.04,3754.67 3091.47,3805.49 3081.96,3807.56 C 3123.99,3732.3 3252.47,3675.59 3319.77,3703.73 C 3288.63,3702.58 3249.08,3703.09 3214.1,3716.02 C 3199.4,3723.57 3179.42,3739.24 3183,3742.17 C 3274.81,3707.87 3369.67,3716.19 3449.11,3779.88 C 3469.33,3795.62 3491.41,3822.4 3497.79,3822.77 C 3488.18,3808.32 3499.43,3815.82 3492.05,3803.07 C 3512.18,3835.55 3483.3,3816.29 3512.86,3859.16 L 3523.78,3844.12 C 3519.72,3871.09 3557.27,3903.83 3553.45,3946.47 C 3562.07,3959.51 3563.06,3932.44 3553.92,3902.44 C 3566.6,3935.72 3557.27,3941.07 3560.52,3968.53 C 3564.04,3959.3 3568.67,3949.49 3571.04,3939.75 C 3562.77,3971.91 3579.5,3993.91 3583.65,4012.6 C 3579.56,4014.41 3570.9,3998.38 3568.93,4036.37 C 3569.21,4052.87 3573.52,4045.02 3575.17,4049.08 C 3571.93,4050.94 3563.43,4063.59 3558.26,4087.85 C 3562,4093.55 3568.28,4073.07 3573.37,4072.23 C 3570.1,4091.52 3564.45,4106.23 3564.21,4121.03 C 3549.31,4152.17 3558.94,4116.88 3546.85,4134.4 C 3531,4183.87 3560.01,4145.88 3561.97,4168.36 C 3586.02,4133.53 3599.72,4079.55 3606.02,4057.19 C 3601.21,4084.45 3593.46,4110.86 3583.97,4136.41 C 3591.29,4133.34 3572.22,4192.5 3593.48,4153.32 C 3570.77,4236.84 3496.33,4314.88 3427.83,4351.5 C 3436.2,4343.83 3446.79,4334.2 3442.99,4332.69 C 3408.93,4352.97 3414.91,4354.55 3410.03,4363.12 C 3382.29,4374.41 3380.47,4362.21 3362.09,4363.1 C 3309.79,4390.84 3299.71,4387.89 3251.58,4405.27 L 3253.77,4395.04 C 3219.12,4406.58 3213.39,4390.66 3175.95,4395 C 3173.67,4396.78 3187.94,4401.44 3199.7,4403.15 C 3166.2,4398.73 3167.77,4409.75 3134.99,4401.93 C 3143.07,4407.6 3151.61,4411.35 3160.23,4416.17 C 3132.91,4414.51 3095.01,4400.27 3106.71,4413.22 C 3062.15,4393.34 2983.01,4365.43 2938.6,4323.79 L 2937.2,4333.12 C 2916.85,4308.69 2848.46,4260.16 2843.01,4228.52 L 2837.57,4227.25 C 2826.98,4209.32 2820.13,4189 2811.73,4170.55 C 2797.88,4146.95 2791.43,4161.47 2793.4,4157.77 C 2766.16,4102.54 2752.63,4056.13 2740.94,4018.07 C 2749.27,4005.62 2741.14,3943.12 2744.29,3893.1 C 2730.61,3646.05 2917.67,3406.19 3122.14,3350.82 C 3152.11,3340.1 3196.67,3340.51 3234.58,3339.41 C 3189.85,3352.21 3184.07,3346.19 3140.51,3361.39 C 3109.08,3376.19 3102.19,3393.09 3079.93,3412.4 L 3088.74,3396.84 C 3045.08,3412.28 3063.35,3415.96 3027.83,3427.21 L 3037.24,3439.49 C 3023.09,3440.57 2999.76,3463.34 2993.38,3475.96 L 2977.9,3475.35 C 2959.3,3498.3 2949.39,3514.84 2950.11,3527.66 L 2945.11,3518.75 C 2939.44,3528.48 2876.68,3604.82 2909.24,3587.05 C 2903.19,3592.58 2895.15,3596.05 2886.43,3611.9 L 2893.06,3619.47 C 2877.39,3639.63 2864.22,3665.47 2865.22,3674.08 C 2873.58,3662.79 2879.38,3660.68 2885.12,3658.75 C 2845.55,3756.93 2843.33,3664.16 2813.36,3758.69 L 2819.7,3759.2 C 2814.84,3766.52 2811.89,3774.47 2807.98,3782.27 L 2810.74,3809.77 C 2782.27,3842.66 2802.79,3949.78 2806.9,4008.53 C 2809.75,4032.42 2830.68,4057.85 2846.6,4097.73 L 2836.9,4099.4 C 2855.44,4131.74 2942.76,4229.28 2983.2,4224.26 C 3002.79,4248.87 2979.31,4224.35 2975.48,4230.55 C 3018.51,4275.08 3032.04,4262.01 3061.08,4270.02 C 3092.4,4288.61 3034.2,4262.77 3049.05,4277.11 C 3103.19,4290.94 3087.42,4308.55 3158.05,4315.57 C 3165.5,4311.33 3140.76,4309.02 3134.55,4303.52 C 3179.66,4325.59 3277.3,4320.57 3340.71,4291.27 C 3414.31,4256.88 3496.98,4155.22 3500.24,4059.57 L 3503.96,4058.57 C 3502.09,4020.55 3509.78,3976.58 3496.44,3936.19 L 3505.52,3955.31" />
+          <path
+             id="path8439"
+             style="fill:#d60750;stroke:none"
+             d="M 3059.32,3826.23 L 3056.8,3813.63 C 3068.61,3797.6 3077.98,3780.22 3093.06,3767.68 C 3082.21,3788.85 3074.15,3797.6 3059.32,3826.23" />
+          <path
+             id="path8441"
+             style="fill:#d60750;stroke:none"
+             d="M 3087.24,3827.32 C 3080.99,3834.24 3077.29,3842.56 3073.15,3850.84 C 3077.11,3836.27 3085.22,3823.75 3092.77,3811.02 L 3087.24,3827.32" />
+          <path
+             id="path8443"
+             style="fill:#d60750;stroke:none"
+             d="M 3581.28,3934.71 L 3578.65,3928.09 C 3573.81,3893.71 3563.36,3859.69 3547.34,3828.15 C 3565.03,3861.43 3576.47,3897.83 3581.28,3934.71" />
+          <path
+             id="path8445"
+             style="fill:#d60750;stroke:none"
+             d="M 3190.88,4418.5 C 3203.03,4422.95 3220.74,4420.94 3233.63,4423.87 C 3216.83,4422.46 3200.12,4421.62 3183.59,4419.49 L 3190.88,4418.5" />
+          <path
+             id="path8447"
+             style="fill:#d60750;stroke:none"
+             d="M 2764.32,4191.68 C 2767.12,4165.76 2744.82,4155.7 2769.26,4172.79 C 2782.36,4202.3 2764.14,4180.94 2764.32,4191.68" />
+          <path
+             id="path8449"
+             style="fill:#d60750;stroke:none"
+             d="M 2735.6,4071.72 C 2741.23,4089 2742.25,4099.38 2744.4,4109.38 C 2728.84,4089.49 2737.24,4085.25 2735.6,4071.72" />
+        </g>
+      </g>
+    </g>
+    <g
+       id="g8451"
+       transform="matrix(3.138983e-2,0,0,3.138983e-2,435.6509,322.8819)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-arch-0.2.png"
+       inkscape:export-xdpi="240"
+       inkscape:export-ydpi="240">
+      <g
+         transform="matrix(3.718833,0,0,3.716135,-1017.019,-1477.584)"
+         style="stroke-miterlimit:10"
+         id="g8453">
+        <g
+           transform="matrix(0.1,0,0,-0.1,0,840)"
+           id="g8455">
+          <path
+             d="M 3255.46,3850.9 C 3237.49,3850.65 3258.86,3841.64 3282.32,3838.03 C 3288.81,3843.1 3294.68,3848.2 3299.92,3853.18 C 3285.31,3849.61 3270.44,3849.53 3255.46,3850.9"
+             style="fill:#d60750;stroke:none"
+             id="path8457" />
+          <path
+             d="M 3351.91,3874.94 C 3362.62,3889.71 3370.41,3905.88 3373.15,3922.6 C 3370.75,3910.68 3364.3,3900.39 3358.19,3889.53 C 3324.61,3868.38 3355.03,3902.09 3358.17,3914.9 C 3322.07,3869.43 3353.21,3887.64 3351.91,3874.94"
+             style="fill:#d60750;stroke:none"
+             id="path8459" />
+          <path
+             d="M 3387.51,3967.58 C 3389.69,3999.94 3381.14,3989.71 3378.27,3977.36 C 3381.62,3975.62 3384.27,3954.55 3387.51,3967.58"
+             style="fill:#d60750;stroke:none"
+             id="path8461" />
+          <path
+             d="M 3187.31,4409.88 C 3196.9,4408.16 3208.05,4406.84 3206.47,4404.55 C 3216.96,4406.85 3219.35,4408.97 3187.31,4409.88"
+             style="fill:#d60750;stroke:none"
+             id="path8463" />
+          <path
+             d="M 3206.47,4404.55 L 3199.7,4403.15 L 3206.01,4403.71 L 3206.47,4404.55"
+             style="fill:#d60750;stroke:none"
+             id="path8465" />
+          <path
+             d="M 3505.52,3955.31 C 3506.59,3926.25 3497.03,3912.15 3488.39,3887.19 L 3472.86,3879.43 C 3460.16,3854.75 3474.1,3863.75 3464.99,3844.12 C 3445.15,3826.48 3404.79,3788.93 3391.88,3785.49 C 3382.43,3785.7 3398.26,3796.62 3400.33,3800.9 C 3373.77,3782.66 3379.01,3773.52 3338.39,3762.44 L 3337.21,3765.08 C 3237.02,3717.95 3097.86,3811.35 3099.69,3938.79 C 3098.62,3930.7 3096.65,3932.72 3094.43,3929.45 C 3089.26,3995.02 3124.71,4060.88 3184.5,4087.77 C 3242.99,4116.72 3311.54,4104.84 3353.44,4065.8 C 3330.43,4095.94 3284.63,4127.89 3230.35,4124.9 C 3177.18,4124.06 3127.44,4090.27 3110.84,4053.59 C 3083.6,4036.44 3080.44,3987.48 3068.57,3978.52 C 3052.59,3861.15 3098.6,3810.45 3176.44,3750.8 C 3188.68,3742.54 3179.88,3741.29 3181.54,3735 C 3155.68,3747.11 3132,3765.39 3112.53,3787.77 C 3122.86,3772.66 3134.01,3757.95 3148.42,3746.41 C 3124.04,3754.67 3091.47,3805.49 3081.96,3807.56 C 3123.99,3732.3 3252.47,3675.59 3319.77,3703.73 C 3288.63,3702.58 3249.08,3703.09 3214.1,3716.02 C 3199.4,3723.57 3179.42,3739.24 3183,3742.17 C 3274.81,3707.87 3369.67,3716.19 3449.11,3779.88 C 3469.33,3795.62 3491.41,3822.4 3497.79,3822.77 C 3488.18,3808.32 3499.43,3815.82 3492.05,3803.07 C 3512.18,3835.55 3483.3,3816.29 3512.86,3859.16 L 3523.78,3844.12 C 3519.72,3871.09 3557.27,3903.83 3553.45,3946.47 C 3562.07,3959.51 3563.06,3932.44 3553.92,3902.44 C 3566.6,3935.72 3557.27,3941.07 3560.52,3968.53 C 3564.04,3959.3 3568.67,3949.49 3571.04,3939.75 C 3562.77,3971.91 3579.5,3993.91 3583.65,4012.6 C 3579.56,4014.41 3570.9,3998.38 3568.93,4036.37 C 3569.21,4052.87 3573.52,4045.02 3575.17,4049.08 C 3571.93,4050.94 3563.43,4063.59 3558.26,4087.85 C 3562,4093.55 3568.28,4073.07 3573.37,4072.23 C 3570.1,4091.52 3564.45,4106.23 3564.21,4121.03 C 3549.31,4152.17 3558.94,4116.88 3546.85,4134.4 C 3531,4183.87 3560.01,4145.88 3561.97,4168.36 C 3586.02,4133.53 3599.72,4079.55 3606.02,4057.19 C 3601.21,4084.45 3593.46,4110.86 3583.97,4136.41 C 3591.29,4133.34 3572.22,4192.5 3593.48,4153.32 C 3570.77,4236.84 3496.33,4314.88 3427.83,4351.5 C 3436.2,4343.83 3446.79,4334.2 3442.99,4332.69 C 3408.93,4352.97 3414.91,4354.55 3410.03,4363.12 C 3382.29,4374.41 3380.47,4362.21 3362.09,4363.1 C 3309.79,4390.84 3299.71,4387.89 3251.58,4405.27 L 3253.77,4395.04 C 3219.12,4406.58 3213.39,4390.66 3175.95,4395 C 3173.67,4396.78 3187.94,4401.44 3199.7,4403.15 C 3166.2,4398.73 3167.77,4409.75 3134.99,4401.93 C 3143.07,4407.6 3151.61,4411.35 3160.23,4416.17 C 3132.91,4414.51 3095.01,4400.27 3106.71,4413.22 C 3062.15,4393.34 2983.01,4365.43 2938.6,4323.79 L 2937.2,4333.12 C 2916.85,4308.69 2848.46,4260.16 2843.01,4228.52 L 2837.57,4227.25 C 2826.98,4209.32 2820.13,4189 2811.73,4170.55 C 2797.88,4146.95 2791.43,4161.47 2793.4,4157.77 C 2766.16,4102.54 2752.63,4056.13 2740.94,4018.07 C 2749.27,4005.62 2741.14,3943.12 2744.29,3893.1 C 2730.61,3646.05 2917.67,3406.19 3122.14,3350.82 C 3152.11,3340.1 3196.67,3340.51 3234.58,3339.41 C 3189.85,3352.21 3184.07,3346.19 3140.51,3361.39 C 3109.08,3376.19 3102.19,3393.09 3079.93,3412.4 L 3088.74,3396.84 C 3045.08,3412.28 3063.35,3415.96 3027.83,3427.21 L 3037.24,3439.49 C 3023.09,3440.57 2999.76,3463.34 2993.38,3475.96 L 2977.9,3475.35 C 2959.3,3498.3 2949.39,3514.84 2950.11,3527.66 L 2945.11,3518.75 C 2939.44,3528.48 2876.68,3604.82 2909.24,3587.05 C 2903.19,3592.58 2895.15,3596.05 2886.43,3611.9 L 2893.06,3619.47 C 2877.39,3639.63 2864.22,3665.47 2865.22,3674.08 C 2873.58,3662.79 2879.38,3660.68 2885.12,3658.75 C 2845.55,3756.93 2843.33,3664.16 2813.36,3758.69 L 2819.7,3759.2 C 2814.84,3766.52 2811.89,3774.47 2807.98,3782.27 L 2810.74,3809.77 C 2782.27,3842.66 2802.79,3949.78 2806.9,4008.53 C 2809.75,4032.42 2830.68,4057.85 2846.6,4097.73 L 2836.9,4099.4 C 2855.44,4131.74 2942.76,4229.28 2983.2,4224.26 C 3002.79,4248.87 2979.31,4224.35 2975.48,4230.55 C 3018.51,4275.08 3032.04,4262.01 3061.08,4270.02 C 3092.4,4288.61 3034.2,4262.77 3049.05,4277.11 C 3103.19,4290.94 3087.42,4308.55 3158.05,4315.57 C 3165.5,4311.33 3140.76,4309.02 3134.55,4303.52 C 3179.66,4325.59 3277.3,4320.57 3340.71,4291.27 C 3414.31,4256.88 3496.98,4155.22 3500.24,4059.57 L 3503.96,4058.57 C 3502.09,4020.55 3509.78,3976.58 3496.44,3936.19 L 3505.52,3955.31"
+             style="fill:#d60750;stroke:none"
+             id="path8467" />
+          <path
+             d="M 3059.32,3826.23 L 3056.8,3813.63 C 3068.61,3797.6 3077.98,3780.22 3093.06,3767.68 C 3082.21,3788.85 3074.15,3797.6 3059.32,3826.23"
+             style="fill:#d60750;stroke:none"
+             id="path8469" />
+          <path
+             d="M 3087.24,3827.32 C 3080.99,3834.24 3077.29,3842.56 3073.15,3850.84 C 3077.11,3836.27 3085.22,3823.75 3092.77,3811.02 L 3087.24,3827.32"
+             style="fill:#d60750;stroke:none"
+             id="path8471" />
+          <path
+             d="M 3581.28,3934.71 L 3578.65,3928.09 C 3573.81,3893.71 3563.36,3859.69 3547.34,3828.15 C 3565.03,3861.43 3576.47,3897.83 3581.28,3934.71"
+             style="fill:#d60750;stroke:none"
+             id="path8473" />
+          <path
+             d="M 3190.88,4418.5 C 3203.03,4422.95 3220.74,4420.94 3233.63,4423.87 C 3216.83,4422.46 3200.12,4421.62 3183.59,4419.49 L 3190.88,4418.5"
+             style="fill:#d60750;stroke:none"
+             id="path8475" />
+          <path
+             d="M 2764.32,4191.68 C 2767.12,4165.76 2744.82,4155.7 2769.26,4172.79 C 2782.36,4202.3 2764.14,4180.94 2764.32,4191.68"
+             style="fill:#d60750;stroke:none"
+             id="path8477" />
+          <path
+             d="M 2735.6,4071.72 C 2741.23,4089 2742.25,4099.38 2744.4,4109.38 C 2728.84,4089.49 2737.24,4085.25 2735.6,4071.72"
+             style="fill:#d60750;stroke:none"
+             id="path8479" />
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
