@@ -1,0 +1,221 @@
+body {
+	background-color: white;
+	color: black;
+	font-family: arial, sans-serif;
+	margin: 5px 5px 0 5px;
+}
+
+code {
+	font-size: small;
+}
+
+a {
+	color: darkblue;
+}
+
+a:visited {
+	color: darkblue;
+}
+
+.kune-sitebar {
+	white-space: nowrap;
+	font-size: 75%;
+}
+
+.kune-sitebar a {
+	color: #B3B3B3;
+	text-decoration: underline;
+}
+
+.kune-status {
+	padding: 0px 3px 0px 3px;
+	background: #E5FF80;
+	border: 1px solid #E5FF80;
+	white-space: nowrap;
+	height: 16px;
+	/* text-decoration: blink; */
+}
+
+.kune-search-icon {
+	
+}
+
+.kune-search-box {
+	border: 1px solid #E4A374;
+}
+
+.kune-sitebar-color {
+	color: #E4A374;
+}
+
+.kune-sitebar-logo {
+	
+}
+
+.kune-menu-item-selected {
+	background: #5FD35F;
+	color: #FFFFFF;
+	font-weight: bold;
+	padding: 0 9px 0 9px;
+}
+
+.kune-menu-item-selected a {
+	color: #FFFFFF;
+}
+
+.kune-menu-item-selected a:link {
+	text-decoration: none;
+}
+
+.kune-menu-item-selected a:visited {
+	text-decoration: none;
+}
+
+.kune-menu-item-selected a:hover {
+	text-decoration: underline;
+}
+
+.kune-menu-item-not-selected {
+	background: #FFFFFF;
+	color: #008000;
+	font-weight: bold;
+	padding: 0 9px 0 9px;
+}
+
+.kune-menu-item-not-selected a {
+	color: #008000;
+}
+
+.kune-menu-item-not-selected a:link {
+	text-decoration: none;
+}
+
+.kune-menu-item-not-selected a:visited {
+	text-decoration: none;
+}
+
+.kune-menu-item-not-selected a:hover {
+	text-decoration: underline;
+}
+
+.kune-menu-item-selected-corner {
+	background: #5FD35F;
+	background-repeat: repeat;
+	margin-right: 1px;
+	height: 1px;
+}
+
+.kune-group-topbar {
+	border-right: 2px solid #5FD35F;
+	border-left: 2px solid #5FD35F;
+	background-color: #AAFFAA;
+	color: #225500;
+	padding: 0 9px 0 9px;
+}
+
+.kune-group-topbar-rc-2l {
+	fontSize: 0px;
+	height: 1px;
+	lineHeight: 1px;
+	margin: 0 0 0 2px;
+	background-color: #5FD35F;
+}
+
+.kune-group-topbar-rc-1l {
+	fontSize: 0px;
+	height: 1px;
+	lineHeight: 1px;
+	margin: 0 0 0 1px;
+	background-color: #5FD35F;
+}
+
+.kune-group-title {
+	background-color: #5FD35F;
+	color: #225500;
+	font-weight: bold;
+	padding: 0 9px 0 9px;
+}
+
+.kune-group-center {
+	background-color: #FFFFFF;
+	border-right: 8px solid #5FD35F;
+}
+
+.kune-group-center-area {
+	background-color: #FFFFFF;
+	padding: 0 16px 0 16px;
+}
+
+.kune-group-center-menubar {
+	background-color: #CCFFAA;
+}
+
+.kune-group-bottombar {
+	background: #5FD35F;
+	color: #FFFFFF;
+	font-weight: bold;
+	padding: 0 9px 0 9px;
+}
+
+.kune-chatroom-subject {
+	backgrond-color: #F2F2F2;
+	border: 1px solid #CCCCCC;
+	padding: 2px;
+}
+
+.kune-chatroom-content-outter {
+	border: 1px solid #999999;
+	background-color: FFFFFF;
+}
+
+.kune-chatroom-content-inner {
+	border: 1px solid #CCCCCC;
+	background-color: #F9F9F9;
+}
+
+.kune-chatroom-content-conversation {
+	border-right: 1px solid #CCCCCC;
+	padding: 0 3px 0 0;
+}
+
+.kune-chatroom-content-users {
+	
+}
+
+.kune-chatroom-content-inner-up {
+	padding: 8px;
+}
+
+.kune-chatroom-content-inner-down {
+	border-top: 1px solid #CCCCCC;
+	padding: 8px;
+}
+
+.kune-chatroom-content-inner-down a {
+	white-space: nowrap;
+}
+
+.gwm-GDesktopPane {
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+}
+
+.gwm-GDesktopPane-FrameContainer {
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+}
+
+.gwm-GDesktopPane-TaskBar {
+	background-color: #EFEFFF;
+	filter: alpha(opacity =         80);
+	-moz-opacity: 0.8;
+	opacity: 0.8;
+	height: 30px;
+	align-text: left;
+}
+
+.rp {
+	background-color: #c3d9ff;
+}

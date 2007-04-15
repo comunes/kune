@@ -1,0 +1,11 @@
+<module>
+	<inherits name="com.google.gwt.user.User"/>
+	<inherits name="com.google.gwt.i18n.I18N"/>
+	<inherits name="org.gwm.GwtWindowManager"/>
+	<!--<inherits name="org.mcarthur.sandy.gwt.login.Login"/>-->
+  <inherits name='org.gwtwidgets.WidgetLibrary'/>
+	<entry-point class="org.ourproject.kune.client.Main"/>
+	<extend-property name="locale" values="es"/>
+	<extend-property name="locale" values="ar"/>
+	<servlet path="/ServiceXmppMuc" class="org.ourproject.kune.server.ServiceXmppMucServiceImpl"/>
+</module>

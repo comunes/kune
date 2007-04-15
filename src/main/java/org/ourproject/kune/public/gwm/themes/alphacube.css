@@ -1,0 +1,168 @@
+
+
+.overlay_alphacube {
+	width:500px;
+	height:500px;
+	background-color: #85BBEF;
+	filter:alpha(opacity=60);
+	-moz-opacity: 	0.6;
+	opacity: 0.6;
+}
+
+.alphacube_caption{
+	width:100%;
+	color:blue;
+	font-size:10px;
+
+}
+
+.alphacube_topBar {
+  width: 100%;
+  cursor:move;
+}
+
+
+.alphacube_nw {
+	background: transparent url(alphacube/left-top.gif) no-repeat 0 0;			
+  width:7px;
+  height:25px;
+}
+
+.alphacube_n {
+  background: transparent url(alphacube/top-middle.gif) repeat-x 0 0;			
+  height:25px;
+}
+
+.alphacube_ne {
+  background: transparent url(alphacube/right-top.gif) no-repeat top right;			
+  width:7px;	  
+  height:25px;
+}
+
+.alphacube_w {
+  background: transparent url(alphacube/frame-left.gif) repeat-y top left;			
+  width:7px;
+}
+
+.alphacube_e {
+  background: transparent url(alphacube/frame-right.gif) repeat-y top right;			
+  background-color:red;
+  width:7px;	  
+}
+
+.alphacube_sw {
+  background: transparent url(alphacube/bottom-left-c.gif) no-repeat 0 0;			
+  width:7px;
+  height:7px;
+}
+
+.alphacube_s {
+  background: transparent url(alphacube/bottom-middle.gif) repeat-x 0 0;			
+  height:7px;
+}
+
+.alphacube_se, .alphacube_sizer  {
+  background: transparent url(alphacube/bottom-right-c.gif) no-repeat top right;			
+  width:7px;
+  height:7px;
+}
+
+.alphacube_sizer {
+	cursor:se-resize;	
+}
+
+.alphacube_close {
+	width: 23px;
+	height: 23px;
+	background: transparent url(alphacube/button-close-focus.gif) no-repeat 0 0;			
+	cursor:pointer;
+}
+
+.alphacube_minimize {
+	width: 23px;
+	height: 23px;
+	background: transparent url(alphacube/button-min-focus.gif) no-repeat 0 0;			
+	cursor:pointer;
+}
+
+.alphacube_maximize {
+	width: 23px;
+	height: 23px;
+	background: transparent url(alphacube/button-max-focus.gif) no-repeat 0 0;			
+	z-index:1000;
+}
+
+.alphacube_title {
+	float:left;
+	height:14px;
+	font-size:14px;
+	text-align:center;
+	margin-top:2px;
+	width:100%;
+	color:#6666FF;
+	font-weight: bold;
+}
+
+.alphacube_content {
+	overflow:auto;
+	color: #000;
+	font-family: Tahoma, Arial, sans-serif;
+	font-size: 10px;
+	background:#FDFDFD;
+}
+
+/* For alert/confirm dialog */
+.alphacube_window {
+	border:1px solid #F00;	
+	background: #FFF;
+	padding:20px;
+	margin-left:auto;
+	margin-right:auto;
+	width:400px;
+}
+
+.alphacube_message {
+	font-size:12px;
+	text-align:center;
+	width:100%;
+	padding-bottom:10px;
+}
+
+.alphacube_buttons {
+	text-align:center;
+	width:100%;
+}
+
+.alphacube_buttons input {
+	width:20%;
+	margin:10px;
+}
+
+.alphacube_progress {
+	float:left;
+	margin:auto;
+	text-align:center;
+	width:100%;
+	height:16px;
+	background: #FFF url('alert/progress.gif') no-repeat center center
+}
+
+.alphacube_topBar_icon {
+        background:#C7CBD1;
+        padding: 5px;
+        border: 1px dashed;
+}
+
+.alphacube_topBar_restore {
+	width: 23px;
+	height: 23px;
+	background: transparent url(alphacube/button-max-focus.gif) no-repeat 0 0;			
+	cursor:pointer;
+}
+
+.alphacube_topBar_iconButton {
+        float: left;
+}
+
+
+
