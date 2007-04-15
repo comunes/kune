@@ -13,9 +13,11 @@
    height="297mm"
    id="svg2531"
    sodipodi:version="0.32"
-   inkscape:version="0.44"
-   sodipodi:docbase="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual"
-   sodipodi:docname="kune-logos.svg">
+   inkscape:version="0.45"
+   sodipodi:docbase="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img"
+   sodipodi:docname="kune-logos.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   sodipodi:modified="TRUE">
   <defs
      id="defs2533">
     <linearGradient
@@ -78,14 +80,14 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.69177704"
-     inkscape:cx="372.04724"
-     inkscape:cy="526.18109"
+     inkscape:zoom="0.64"
+     inkscape:cx="550.45347"
+     inkscape:cy="738.08488"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      inkscape:window-width="1162"
      inkscape:window-height="933"
-     inkscape:window-x="112"
+     inkscape:window-x="61"
      inkscape:window-y="0"
      showguides="true"
      inkscape:guide-bbox="true"
@@ -500,5 +502,50 @@
        style="opacity:1;color:black;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#dc5f01;stroke-width:1.99999976;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
        d="M 143.10969,235.62505 C 152.1417,235.62505 167.67218,231.28839 182.13961,231.28839 C 204.31188,231.28839 239.93322,234.88803 258.75389,244.29836 C 262.00256,245.9227 262.84756,245.1171 265.98165,245.74392"
        id="path8273" />
+    <g
+       id="g5064"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-logo-16px.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-logo-16px.png"
+         id="path5050"
+         d="M 206.0077,119.17481 C 205.76991,119.17481 205.54137,119.17568 205.31203,119.19062 C 205.29064,119.19501 205.27034,119.20243 205.24879,119.20643 C 205.0353,119.24634 204.82469,119.28034 204.60059,119.28548 C 204.56951,119.28987 204.5366,119.28083 204.50573,119.28548 C 202.67658,119.56085 201.13114,120.35507 199.88911,121.67284 C 198.43868,123.2047 197.70733,125.03981 197.70733,127.17481 C 197.70733,129.33374 198.43868,131.1813 199.88911,132.70839 C 201.45924,134.35508 203.49928,135.17475 206.0077,135.17475 C 207.33847,135.17475 208.61786,134.8441 209.83374,134.17874 C 211.04962,133.5325 212.10686,132.61781 213.01164,131.45938 L 210.27646,129.9416 C 209.09881,131.51173 207.65196,132.29729 205.92865,132.29729 C 204.73189,132.29729 203.65884,131.90909 202.73495,131.14319 C 201.79671,130.37723 201.32784,129.4443 201.32784,128.32897 L 213.83374,128.32897 L 213.83374,127.69653 C 213.83374,124.99189 212.91759,122.82613 211.09856,121.19855 C 209.56671,119.8438 207.86983,119.17481 206.0077,119.17481 z M 147.85769,119.28548 L 147.85769,125.34078 L 145.73909,125.34078 L 145.73909,128.43963 L 147.85769,128.43963 L 147.85769,134.7637 L 151.08296,134.7637 L 151.08296,128.43963 L 153.0276,128.43963 L 156.99598,134.7637 L 160.82207,134.7637 L 155.49401,126.73209 L 160.58492,119.58586 L 156.67978,119.58586 L 152.74302,125.34078 L 151.08296,125.34078 L 151.08296,119.28548 L 147.85769,119.28548 z M 187.43069,119.28548 C 186.87546,119.38456 186.35813,119.54585 185.88129,119.79144 C 185.07706,120.22226 184.44213,120.79048 183.96822,121.49894 L 183.96822,119.58586 L 180.72714,119.58586 L 180.72714,134.7637 L 183.96822,134.7637 L 183.96822,126.2578 C 183.96822,125.04192 184.31132,124.10899 184.9959,123.44358 C 185.68524,122.77822 186.5591,122.44757 187.63622,122.44751 C 188.77548,122.44757 189.66521,122.75326 190.29234,123.38034 C 190.91942,124.00747 191.22511,124.99027 191.22511,126.32103 L 191.22511,134.7637 L 194.46624,134.7637 L 194.46624,125.6096 C 194.46619,123.74742 193.89802,122.20891 192.7587,120.99298 C 191.90422,120.08111 190.91552,119.51348 189.78638,119.28548 L 187.43069,119.28548 z M 162.86156,119.58586 L 162.86156,128.37639 C 162.86156,130.43479 163.55551,132.09907 164.94854,133.3724 C 166.24103,134.56916 167.84192,135.17475 169.72321,135.17475 C 171.62367,135.17475 173.21643,134.56916 174.51374,133.3724 C 175.90672,132.09907 176.60067,130.43479 176.60067,128.37639 L 176.60067,119.58586 L 173.35959,119.58586 L 173.35959,128.09177 C 173.35953,129.21192 173.01643,130.12325 172.33191,130.82694 C 171.6234,131.55456 170.76199,131.91786 169.72321,131.91786 C 168.72271,131.91786 167.85464,131.5498 167.14613,130.82694 C 166.44244,130.09932 166.10264,129.19281 166.1027,128.09177 L 166.1027,119.58586 L 162.86156,119.58586 z M 205.5966,122.08389 C 206.65454,122.08389 207.57832,122.38049 208.36339,122.96929 C 209.12453,123.57243 209.68506,124.45111 210.03932,125.6096 L 201.32784,125.6096 C 201.58155,124.49421 202.10798,123.62798 202.89304,123.00091 C 203.65418,122.39294 204.55306,122.08389 205.5966,122.08389 z "
+         style="font-size:58.13353348px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#a56941;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Emblem" />
+      <g
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-logo-16px.png"
+         transform="matrix(0.1111494,0,0,0.111008,121.5678,22.515968)"
+         id="g5052">
+        <path
+           transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+           id="path5054"
+           d="M 60.321717,411.99998 L 437.33633,411.99998"
+           style="color:#000000;fill:#69312f;fill-opacity:1;fill-rule:nonzero;stroke:#dd8a3d;stroke-width:109.23953247;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block" />
+        <path
+           transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+           id="path5056"
+           d="M 252.61203,788.60332 L 252.61203,411.59154"
+           style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffdb6b;stroke-width:109.23950958;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block" />
+        <path
+           transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+           id="path5058"
+           d="M 252.86937,597.15755 L 629.88177,597.15755"
+           style="color:#000000;fill:#69312f;fill-opacity:1;fill-rule:nonzero;stroke:#69312f;stroke-width:109.23951721;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block" />
+        <path
+           transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+           id="path5060"
+           d="M 437.45588,596.97447 L 437.45588,219.95956"
+           style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#cc6633;stroke-width:109.23950195;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block" />
+        <path
+           transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+           id="path5062"
+           d="M 372.87905,411.27704 L 437.81346,411.27704"
+           style="color:#000000;fill:#69312f;fill-opacity:1;fill-rule:nonzero;stroke:#dd8a3d;stroke-width:109.23947906;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block" />
+      </g>
+    </g>
   </g>
 </svg>
