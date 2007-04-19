@@ -17,14 +17,14 @@
  */
 package org.ourproject.kune.client.ui;
 
-import org.ourproject.kune.client.KuneUser;
+import org.ourproject.kune.client.model.User;
 
 public interface SiteBarView {
 	void showProgressBar(boolean show);
 	
 	void setTextProgressBar(String text);
 	
-	void login(KuneUser user);
+	void login(User user);
 	
 	void logout();
 	

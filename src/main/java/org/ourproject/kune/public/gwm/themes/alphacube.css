@@ -171,7 +171,7 @@
 
  /**************************************   DESKTOP **************************/
  .gwm-alphacube-GDesktopPane{
-	background-image: url("alphacube/desktop-bg.jpg");
+	 background-image: url("alphacube/desktop-bg.jpg"); 
   	overflow: hidden;
   	width: 100%;
   	height:100%;

@@ -1,0 +1,47 @@
+.editableLabel-textBox {
+	width: 200px;
+	height: 25px;
+	font-family: arial;
+	border: 2px solid #333;
+
+	/* Remove to display buttons to the right of the textbox */
+	display: block;
+}
+
+.editableLabel-textArea {
+	width: 200px;
+	height: 100px;
+	font-family: arial;
+	border: 2px solid #333;
+
+	/* Remove to display buttons to the right of the textbox */
+	display: block;
+}
+
+.editableLabel-buttonPanel {
+	width: 100px;
+}
+
+/* Style applies to both the "OK" and "Cancel" buttons */
+.editableLabel-buttons {
+	width: 50px;
+	height: 20px;
+	font-family: arial;
+	font-size: 10px;
+	color: #fff;
+	text-transform: uppercase;
+}
+
+.editableLabel-confirm {
+	background: #0c0;
+}
+
+.editableLabel-cancel {
+	background: #c00;
+}
+
+.editableLabel-label {
+	font-family: arial;
+	font-size: 14px;
+	font-weight: bold;
+}

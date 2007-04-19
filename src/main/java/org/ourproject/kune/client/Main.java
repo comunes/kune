@@ -18,11 +18,11 @@
 
 package org.ourproject.kune.client;
 
-import org.gwm.client.FramesManager;
-import org.gwm.client.FramesManagerFactory;
 import org.gwm.client.GDesktopPane;
 import org.gwm.client.GInternalFrame;
 import org.gwm.client.impl.DefaultGDesktopPane;
+import org.gwm.client.impl.DefaultGInternalFrame;
+
 import org.ourproject.kune.client.ui.ChatroomDialog;
 import org.ourproject.kune.client.ui.RoundedPanel;
 import org.ourproject.kune.client.ui.SiteBar;
@@ -111,14 +111,8 @@ public class Main extends AbsolutePanel implements EntryPoint,
 	private ChatroomDialog chatroom1 = null;
 
 	private GDesktopPane desktop;
-
-	private FramesManager framesManager;
-	
-	private GInternalFrame chatroomFrame;
 	
 	private Wizard wizard;
-
-	private GInternalFrame wizardFrame;
 	
 	public Main() {
 		super();
@@ -175,7 +169,7 @@ public class Main extends AbsolutePanel implements EntryPoint,
 	}
 
 	protected void layout() {
-		add(generalDP, 0, 0);
+		//add(generalDP, 0, 0);
 
 		generalDP.add(siteBar, DockPanel.NORTH);
 		generalDP.add(generalDPEastVP, DockPanel.EAST);
@@ -326,11 +320,15 @@ public class Main extends AbsolutePanel implements EntryPoint,
 	
 	public void sandbox() {
 		desktop = new DefaultGDesktopPane();
-        framesManager = new FramesManagerFactory().createFramesManager();
-        chatroomFrame = framesManager.newFrame(Trans.constants().Chatroom());
+
+        GInternalFrame chatroomFrame = new DefaultGInternalFrame(Trans.constants().Chatroom()); 
+        
 		chatroom1 = new ChatroomDialog();
 		
 		add((Widget) desktop, 0, 0);
+		
+		desktop.setWidgetLocation(generalDP, 0, 0);
+		desktop.setTheme("alphacubecustom");
 		
         chatroom1.setSubject("Welcome to sometopic-foorganization chat room");
         ChatroomUser luthorb = new ChatroomUser("luthor.b", true);
@@ -398,7 +396,7 @@ public class Main extends AbsolutePanel implements EntryPoint,
         wizard.add("New Project", (Widget) new HTML("bla, bla, bla"), true, true, true, false);
         wizard.add("New Project", (Widget) new HTML("End"), true, true, true, true);
         
-        wizardFrame = framesManager.newFrame("Wizard example");
+        GInternalFrame wizardFrame = new DefaultGInternalFrame("Wizard example");
         wizardFrame.setTheme("alphacubecustom");
         wizardFrame.setClosable(false);
         wizardFrame.setMaximizable(true);

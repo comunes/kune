@@ -18,8 +18,8 @@
 
 package org.ourproject.kune.client.ui;
 
-import org.ourproject.kune.client.KuneUser;
 import org.ourproject.kune.client.Trans;
+import org.ourproject.kune.client.model.User;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
@@ -204,7 +204,7 @@ public class SiteBar extends Composite implements SiteBarView {
 		sitebarTextProcessingLabel.setText(text);
 	}
 	
-	public void login(KuneUser user) {
+	public void login(User user) {
 		// TODO
 		LoginHyperlink.setText(user.getNickName());
 	}

@@ -18,8 +18,10 @@
 
 package org.ourproject.kune.client;
 
+import org.ourproject.kune.client.model.User;
 
-public class ChatroomUser extends KuneUser {
+
+public class ChatroomUser extends User {
 	
 	private boolean isModerator;
     
