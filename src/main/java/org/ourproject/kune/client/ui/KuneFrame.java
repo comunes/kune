@@ -15,75 +15,29 @@
  * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  *
  */
- 
-Label=Label
+package org.ourproject.kune.client.ui;
 
-Label1=Label1
+import org.gwm.client.impl.DefaultGInternalFrame;
+//import org.gwm.client.event.GFrameListener;
 
-Label2=Label2
+public class KuneFrame extends DefaultGInternalFrame {
 
-Text=Text
-
-Text1=Text1
-
-Text2=Text2
-
-Title=Title
-
-MyContext=MyContext
-
-MyApplication=MyApplication
-
-MyApp=MyApp
-
-Option0=Option0
-
-Option1=Option1
-
-Option2=Option2
-
-NewGroup=New Group
-
-Login=Login to collaborate
-
-Processing=Processing
-
-North=North
-
-East=East
-
-Center=Center
-
-West=West
-
-HelpWithTranslation=Help with the translation
-
-Home=Home
-
-Blogs=Blogs
-
-Forums=Forums
-
-Options=Options
-
-ExternalWindow=External Window
-
-Chatroom=Chat room
-
-Cancel=Cancel
-
-ArrowBack=< Back
-
-NextArrow=Next >
-
-Finish=Finish
-
-Change=Change
-
-Search=Search
-
-Help=Help
-
-GlobalSiteOptions=Global Site Options
-
-ContactUs=Contact Us
+	public KuneFrame() {
+		this.setTheme("alphacubecustom");
+        //setOutlineDragMode(false);
+	}
+	
+	public KuneFrame(String caption) {
+		this();
+		this.setCaption(caption);
+	}
+	
+	public void setFrame(boolean minimizable, boolean maximizable, boolean closable,
+			boolean draggable, boolean resizable) {
+		this.setMinimizable(minimizable);
+        this.setMaximizable(maximizable);
+        this.setClosable(closable);
+        this.setDraggable(draggable);
+        this.setResizable(resizable);
+	}
+}

@@ -29,6 +29,7 @@ import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
+//import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Widget;
 
 public class WizardPage extends Composite {
@@ -60,9 +61,7 @@ public class WizardPage extends Composite {
 	public Button cancelButton = null;
 
 	public VerticalPanel centerContentVP = null;
-	
-	private HTML centerExpandCell = null;
-	
+		
 	private boolean finish = false;
 
 	public WizardPage() {
@@ -76,8 +75,8 @@ public class WizardPage extends Composite {
 		this();
 		setTitle(title);
 		centerContentVP.add(contentWidget);
-		centerContentVP.add(centerExpandCell);
-	}
+		//centerContentVP.setCellVerticalAlignment(contentWidget, HasVerticalAlignment.ALIGN_TOP);
+    }
 	
 	public WizardPage(String title, Widget contentWidget, boolean backActive, boolean nextFinishActive, boolean cancelActive, boolean setButtonFinish) {
 		this(title, contentWidget);
@@ -96,7 +95,8 @@ public class WizardPage extends Composite {
 		kWizardDP = new DockPanel();
 		northVP = new VerticalPanel();
 		titleLabel = new Label();
-		hr1 = new KuneHR();
+		hr1 = new KuneHR(); 
+    	//centerContentVP.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		southVP = new VerticalPanel();
 		hr2 = new KuneHR();
 		buttonsHP = new HorizontalPanel();
@@ -108,7 +108,6 @@ public class WizardPage extends Composite {
 		buttonSpaceHtml2 = new HTML();
 		cancelButton = new Button();
 		centerContentVP = new VerticalPanel();
-		centerExpandCell = new HTML();
 		this.initWidget(kWizardDP);
 	}
 
@@ -144,14 +143,8 @@ public class WizardPage extends Composite {
 		
 		centerContentVP.setHeight("100%");
 		centerContentVP.setWidth("100%");
-		//centerContentVP.setCellWidth(centerExpandCell, "100%");
-		//centerContentVP.setCellHeight(centerExpandCell, "100%");
-		
-		centerExpandCell.setHTML("&nbsp;");
-        centerExpandCell.setHeight("100%");
-        centerExpandCell.setWidth("100%");
-        
-		southVP.setBorderWidth(0);
+				
+        southVP.setBorderWidth(0);
 		southVP.setSpacing(0);
 		southVP.setWidth("100%");
 
@@ -211,6 +204,14 @@ public class WizardPage extends Composite {
     	arrowBackButton.addClickListener(listener);
     	arrowNextFinishButton.addClickListener(listener);
     	cancelButton.addClickListener(listener);
+    }
+    
+    public int getTopHeigth() {
+    	return this.northVP.getOffsetHeight();
+    }
+    
+    public int getBottomHeigth() {
+        return this.southVP.getOffsetHeight();
     }
     
 }

@@ -22,60 +22,9 @@
    inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-home-draft-0.3.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
-   sodipodi:modified="true">
+   sodipodi:modified="TRUE">
   <defs
      id="defs4">
-    <linearGradient
-       inkscape:collect="always"
-       id="linearGradient11977">
-      <stop
-         style="stop-color:#b3b3b3;stop-opacity:1;"
-         offset="0"
-         id="stop11979" />
-      <stop
-         style="stop-color:#b3b3b3;stop-opacity:0;"
-         offset="1"
-         id="stop11981" />
-    </linearGradient>
-    <linearGradient
-       inkscape:collect="always"
-       id="linearGradient10962">
-      <stop
-         style="stop-color:#ececec;stop-opacity:1;"
-         offset="0"
-         id="stop10964" />
-      <stop
-         style="stop-color:#999999;stop-opacity:0"
-         offset="1"
-         id="stop10966" />
-    </linearGradient>
-    <linearGradient
-       inkscape:collect="always"
-       id="linearGradient5783">
-      <stop
-         style="stop-color:#999999;stop-opacity:1;"
-         offset="0"
-         id="stop5785" />
-      <stop
-         style="stop-color:#999999;stop-opacity:0;"
-         offset="1"
-         id="stop5787" />
-    </linearGradient>
-    <linearGradient
-       id="linearGradient16522">
-      <stop
-         style="stop-color:#edd400;stop-opacity:1;"
-         offset="0"
-         id="stop16524" />
-      <stop
-         id="stop16530"
-         offset="0.27272728"
-         style="stop-color:#fff491;stop-opacity:1;" />
-      <stop
-         style="stop-color:#edd400;stop-opacity:1;"
-         offset="1"
-         id="stop16526" />
-    </linearGradient>
     <linearGradient
        x1="30.059999"
        y1="30.059999"
@@ -139,138 +88,6 @@
     </linearGradient>
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#RSSg"
-       id="linearGradient5224"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.5,0,0,0.5,1440,1000)"
-       x1="30.059999"
-       y1="30.059999"
-       x2="225.94"
-       y2="225.94" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient1340"
-       id="linearGradient6580"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(2.015366,0,0,2.015366,445.885,42.24094)"
-       x1="75.847473"
-       y1="79.6325"
-       x2="109.0923"
-       y2="124.12687" />
-    <clipPath
-       clipPathUnits="userSpaceOnUse"
-       id="clipPath34558">
-      <path
-         sodipodi:type="arc"
-         style="opacity:1;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.00000024;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         id="path34560"
-         sodipodi:cx="570"
-         sodipodi:cy="288.18896"
-         sodipodi:rx="150"
-         sodipodi:ry="40"
-         d="M 720 288.18896 A 150 40 0 1 1  420,288.18896 A 150 40 0 1 1  720 288.18896 z"
-         transform="translate(-410.99936,-109.99995)" />
-    </clipPath>
-    <clipPath
-       clipPathUnits="userSpaceOnUse"
-       id="clipPath34819">
-      <path
-         sodipodi:type="arc"
-         style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:1.66148293;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         id="path34821"
-         sodipodi:cx="800"
-         sodipodi:cy="261.52231"
-         sodipodi:rx="100"
-         sodipodi:ry="33.333332"
-         d="M 900 261.52231 A 100 33.333332 0 1 1  700,261.52231 A 100 33.333332 0 1 1  900 261.52231 z"
-         transform="matrix(1.05,0,0,1.3799997,-434.9994,-222.71169)" />
-    </clipPath>
-    <clipPath
-       clipPathUnits="userSpaceOnUse"
-       id="clipPath34828">
-      <path
-         sodipodi:type="arc"
-         style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:1.99204767;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         id="path34830"
-         sodipodi:cx="1115"
-         sodipodi:cy="378.18896"
-         sodipodi:rx="75"
-         sodipodi:ry="50"
-         d="M 1190 378.18896 A 75 50 0 1 1  1040,378.18896 A 75 50 0 1 1  1190 378.18896 z"
-         transform="matrix(1.2,0,0,0.84,-620.99936,-62.48957)" />
-    </clipPath>
-    <clipPath
-       clipPathUnits="userSpaceOnUse"
-       id="clipPath34832">
-      <path
-         sodipodi:type="arc"
-         style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:1.82574201;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         id="path34834"
-         sodipodi:cx="1115"
-         sodipodi:cy="378.18896"
-         sodipodi:rx="75"
-         sodipodi:ry="50"
-         d="M 1190 378.18896 A 75 50 0 1 1  1040,378.18896 A 75 50 0 1 1  1190 378.18896 z"
-         transform="matrix(1.2,0,0,0.9999998,-612.9994,-28.99974)" />
-    </clipPath>
-    <clipPath
-       clipPathUnits="userSpaceOnUse"
-       id="clipPath34836">
-      <path
-         sodipodi:type="arc"
-         style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         id="path34838"
-         sodipodi:cx="980"
-         sodipodi:cy="258.18896"
-         sodipodi:rx="80"
-         sodipodi:ry="30"
-         d="M 1060 258.18896 A 80 30 0 1 1  900,258.18896 A 80 30 0 1 1  1060 258.18896 z"
-         transform="translate(-386,-116.99978)" />
-    </clipPath>
-    <clipPath
-       clipPathUnits="userSpaceOnUse"
-       id="clipPath34844">
-      <path
-         sodipodi:type="arc"
-         style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:1.54303324;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         id="path34846"
-         sodipodi:cx="1115"
-         sodipodi:cy="378.18896"
-         sodipodi:rx="75"
-         sodipodi:ry="50"
-         d="M 1190 378.18896 A 75 50 0 1 1  1040,378.18896 A 75 50 0 1 1  1190 378.18896 z"
-         transform="matrix(2.8000004,0,0,0.6,-2890.9999,328.2758)" />
-    </clipPath>
-    <clipPath
-       clipPathUnits="userSpaceOnUse"
-       id="clipPath10241">
-      <path
-         sodipodi:type="arc"
-         style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:1.82574201;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         id="path10243"
-         sodipodi:cx="1115"
-         sodipodi:cy="378.18896"
-         sodipodi:rx="75"
-         sodipodi:ry="50"
-         d="M 1190 378.18896 A 75 50 0 1 1  1040,378.18896 A 75 50 0 1 1  1190 378.18896 z"
-         transform="matrix(1.2,0,0,0.9999998,-609,53.0003)" />
-    </clipPath>
-    <clipPath
-       clipPathUnits="userSpaceOnUse"
-       id="clipPath10249">
-      <path
-         sodipodi:type="arc"
-         style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:2.16514587;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         id="path10251"
-         sodipodi:cx="1115"
-         sodipodi:cy="378.18896"
-         sodipodi:rx="75"
-         sodipodi:ry="50"
-         d="M 1190 378.18896 A 75 50 0 1 1  1040,378.18896 A 75 50 0 1 1  1190 378.18896 z"
-         transform="matrix(1.035536,0,0,0.8239872,-436.6221,64.5663)" />
-    </clipPath>
-    <linearGradient
-       inkscape:collect="always"
        xlink:href="#linearGradient1340"
        id="linearGradient12187"
        gradientUnits="userSpaceOnUse"
@@ -301,43 +118,6 @@
        y2="200.18896" />
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#linearGradient5783"
-       id="linearGradient5789"
-       x1="1732.5826"
-       y1="838.45941"
-       x2="1743.1776"
-       y2="855.08392"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient10962"
-       id="linearGradient10968"
-       x1="1710.582"
-       y1="745.18896"
-       x2="1710.4818"
-       y2="731.18896"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient11977"
-       id="linearGradient11983"
-       x1="1711.0576"
-       y1="773.25977"
-       x2="1711.1495"
-       y2="758.18896"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient11977"
-       id="linearGradient12001"
-       gradientUnits="userSpaceOnUse"
-       x1="1711.4622"
-       y1="785.21613"
-       x2="1711.1495"
-       y2="758.18896"
-       gradientTransform="translate(0,24)" />
-    <linearGradient
-       inkscape:collect="always"
        xlink:href="#RSSg"
        id="linearGradient6405"
        gradientUnits="userSpaceOnUse"
@@ -346,27 +126,17 @@
        y1="30.059999"
        x2="225.94"
        y2="225.94" />
-    <foreignObject
-       id="foreignObject6331"
-       height="1"
-       width="1"
-       y="0"
-       x="0"
-       requiredExtensions="http://ns.adobe.com/AdobeIllustrator/10.0/">
-      <i:pgfRef
-         xlink:href="#adobe_illustrator_pgf" />
-    </foreignObject>
   </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
      bordercolor="#666666"
      borderopacity="1.0"
-     inkscape:pageopacity="1"
+     inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="1551"
-     inkscape:cy="632"
+     inkscape:cx="1365.4547"
+     inkscape:cy="1391.1332"
      inkscape:document-units="px"
      inkscape:current-layer="layer5"
      inkscape:object-points="false"
@@ -378,9 +148,9 @@
      guidetolerance="3.9"
      showgrid="false"
      gridempspacing="0"
-     inkscape:window-width="1389"
+     inkscape:window-width="1379"
      inkscape:window-height="936"
-     inkscape:window-x="51"
+     inkscape:window-x="61"
      inkscape:window-y="0"
      width="1488.189px"
      height="2104.7244px"
@@ -5494,17 +5264,6 @@
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect
-       transform="scale(1,-1)"
-       y="-992.61993"
-       x="175"
-       height="25"
-       width="623"
-       id="use11841"
-       style="color:#000000;fill:#aaffaa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <rect
        style="color:#000000;fill:#5fd35f;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
        id="use11843"
        width="2"
@@ -7652,92 +7411,24 @@
        ry="3"
        rx="3" />
     <rect
-       inkscape:export-ydpi="90"
-       inkscape:export-xdpi="90"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
-       y="357.18896"
-       x="1636"
-       height="8"
-       width="59"
-       id="rect12003"
-       style="color:#000000;fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-    <rect
-       style="opacity:1;color:#000000;fill:#aaaaaa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="rect12005"
-       width="59"
-       height="1"
-       x="1636"
-       y="348.18896"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <rect
-       style="opacity:1;color:#000000;fill:#aaaaaa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="rect12007"
-       width="59"
-       height="1"
-       x="1636"
-       y="365.18896"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <rect
-       transform="matrix(0,-1,1,0,0,0)"
-       inkscape:export-ydpi="90"
-       inkscape:export-xdpi="90"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
-       y="1635"
-       x="-364.18896"
-       height="1"
+       style="color:#000000;fill:#cccccc;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect4272"
        width="14"
-       id="rect12009"
-       style="color:#000000;fill:#cccccc;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-    <rect
-       style="color:#000000;fill:#aaaaaa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="rect12011"
-       width="16"
        height="1"
-       x="-365.18896"
-       y="1635"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
+       x="-532.18896"
+       y="1635.9628"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90"
        transform="matrix(0,-1,1,0,0,0)" />
     <rect
-       transform="matrix(0,-1,1,0,0,0)"
-       inkscape:export-ydpi="90"
-       inkscape:export-xdpi="90"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
-       y="1695"
-       x="-365.18896"
-       height="1"
-       width="16"
-       id="rect12013"
-       style="opacity:1;color:#000000;fill:#aaaaaa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-    <text
-       inkscape:export-ydpi="90"
-       inkscape:export-xdpi="90"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
-       sodipodi:linespacing="125%"
-       y="360.99762"
-       x="1646.6251"
-       font-size="11"
-       id="text12015"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;color:#000000;fill:#4d4d4d;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial">
-      <tspan
-         y="360.99762"
-         x="1646.6251"
-         id="tspan12017"
-         sodipodi:role="line">Search</tspan>
-    </text>
-    <rect
-       style="color:#000000;fill:#ffe6d5;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="opacity:0.35;color:#000000;fill:#ffba7f;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect4266"
        width="73"
        height="8"
        x="1636.9628"
        y="525.18896"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/various/bgbuttonsidebar.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect
@@ -7761,17 +7452,6 @@
        id="rect4270"
        style="color:#000000;fill:#aaaaaa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <rect
-       style="color:#000000;fill:#cccccc;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="rect4272"
-       width="14"
-       height="1"
-       x="-532.18896"
-       y="1635.9628"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"
-       transform="matrix(0,-1,1,0,0,0)" />
-    <rect
        transform="matrix(0,-1,1,0,0,0)"
        inkscape:export-ydpi="90"
        inkscape:export-xdpi="90"
@@ -7793,6 +7473,16 @@
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90"
        transform="matrix(0,-1,1,0,0,0)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/various/bgbuttonsidebar.png"
+       y="517.18896"
+       x="1636.9628"
+       height="8"
+       width="73"
+       id="rect4407"
+       style="opacity:0.4;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <text
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#4d4d4d;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial"
        id="text4278"
@@ -7809,25 +7499,38 @@
          x="1646.7285"
          y="528.99762">Options</tspan>
     </text>
-    <path
-       sodipodi:type="star"
-       style="color:#000000;fill:#666666;fill-opacity:1;fill-rule:evenodd;stroke:#2b0000;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="path5942"
-       sodipodi:sides="3"
-       sodipodi:cx="1563"
-       sodipodi:cy="674.18896"
-       sodipodi:r1="3.7810335"
-       sodipodi:r2="0.90551758"
-       sodipodi:arg1="1.5657195"
-       sodipodi:arg2="2.6129171"
-       inkscape:flatsided="true"
-       inkscape:rounded="0"
-       inkscape:randomized="0"
-       d="M 1563.0192,677.96995 L 1559.716,672.3151 L 1566.2648,672.28185 L 1563.0192,677.96995 z "
-       transform="translate(135.69794,-149.78098)"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+    <g
+       id="g9943"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/button-sitebar-arrow-down.png"
        inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
+       inkscape:export-ydpi="90">
+      <rect
+         y="517.68896"
+         x="1691.1884"
+         height="15"
+         width="15"
+         id="rect8972"
+         style="opacity:0;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/menu-arrow-down.png"
+         transform="translate(135.69794,-149.78098)"
+         d="M 1563.0192,677.96995 L 1559.716,672.3151 L 1566.2648,672.28185 L 1563.0192,677.96995 z "
+         inkscape:randomized="0"
+         inkscape:rounded="0"
+         inkscape:flatsided="true"
+         sodipodi:arg2="2.6129171"
+         sodipodi:arg1="1.5657195"
+         sodipodi:r2="0.90551758"
+         sodipodi:r1="3.7810335"
+         sodipodi:cy="674.18896"
+         sodipodi:cx="1563"
+         sodipodi:sides="3"
+         id="path5942"
+         style="color:#000000;fill:#666666;fill-opacity:1;fill-rule:evenodd;stroke:#2b0000;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="star" />
+    </g>
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;color:#000000;fill:#225500;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial"
@@ -7850,14 +7553,6 @@
          id="tspan4359"
          x="2185.689"
          y="621.12219">Contextual Navigation Bar</tspan></text>
-    <image
-       y="343.05182"
-       x="1503.7815"
-       id="image4676"
-       height="16"
-       width="16"
-       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/ext/bullet_arrow_up.png"
-       xlink:href="ext/bullet_arrow_up.png" />
     <image
        y="518.18896"
        x="1008.3206"
@@ -10801,7 +10496,7 @@
     </g>
     <g
        id="g16561"
-       transform="translate(-106,-697.99695)"
+       transform="translate(-168,-781.99695)"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90">
@@ -11126,11 +10821,11 @@
            id="image13322"
            height="23"
            width="50"
-           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/top-middle.gif"
-           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/top-middle.gif" />
+           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
+           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif" />
         <image
-           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/top-middle.gif"
-           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/top-middle.gif"
+           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
+           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
            width="50"
            height="23"
            id="image16203"
@@ -11142,11 +10837,11 @@
            id="image16205"
            height="23"
            width="50"
-           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/top-middle.gif"
-           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/top-middle.gif" />
+           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
+           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif" />
         <image
-           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/top-middle.gif"
-           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/top-middle.gif"
+           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
+           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
            width="59.375"
            height="23"
            id="image16207"
@@ -11158,11 +10853,11 @@
            id="image16209"
            height="23"
            width="61"
-           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/top-middle.gif"
-           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/top-middle.gif" />
+           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
+           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif" />
         <image
-           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/top-middle.gif"
-           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/top-middle.gif"
+           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
+           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
            width="59"
            height="23"
            id="image16211"
@@ -11172,16 +10867,16 @@
            id="g16247"
            transform="translate(100,272)">
           <image
-             xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/right-top.gif"
-             sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/right-top.gif"
+             xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/tr.gif"
+             sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/tr.gif"
              width="9"
              height="23"
              id="image12762"
              x="1691"
              y="1263.189" />
           <image
-             xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/top-middle.gif"
-             sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/top-middle.gif"
+             xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
+             sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
              width="33"
              height="23"
              id="image16213"
@@ -11189,8 +10884,8 @@
              y="1263.189" />
         </g>
         <image
-           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/top-middle.gif"
-           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/top-middle.gif"
+           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
+           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
            width="50"
            height="23"
            id="image16215"
@@ -11202,14 +10897,14 @@
            id="image16217"
            height="23"
            width="50"
-           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/top-middle.gif"
-           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/top-middle.gif" />
+           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
+           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif" />
         <g
            id="g16243"
            transform="matrix(1.0169492,0,0,1,79.661017,272)">
           <image
-             xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/left-top.gif"
-             sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/left-top.gif"
+             xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/tl.gif"
+             sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/tl.gif"
              width="9"
              height="23"
              id="image12719"
@@ -11221,8 +10916,8 @@
              id="image16219"
              height="23"
              width="51"
-             sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/top-middle.gif"
-             xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/top-middle.gif" />
+             sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
+             xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif" />
         </g>
         <image
            y="1535.1859"
@@ -11230,16 +10925,16 @@
            id="image12497"
            height="23"
            width="23"
-           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/button-min-focus.gif"
-           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/button-min-focus.gif" />
+           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/min-btn.gif"
+           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/min-btn.gif" />
         <image
            y="1535.1859"
            x="1765.0851"
            id="image12540"
            height="23"
            width="23"
-           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/button-close-focus.gif"
-           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/button-close-focus.gif" />
+           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/close-btn.gif"
+           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/close-btn.gif" />
         <text
            inkscape:export-ydpi="90"
            inkscape:export-xdpi="90"
@@ -11475,5 +11170,39 @@
        width="111"
        id="rect17707"
        style="color:#000000;fill:#225500;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <rect
+       style="fill:#fffcd5;fill-opacity:1;fill-rule:evenodd;stroke:#d38d5f;stroke-width:1.00000012px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="rect4470"
+       width="154"
+       height="45.000004"
+       x="1637"
+       y="536.18896" />
+    <rect
+       style="fill:#ffb958;fill-opacity:1;fill-rule:evenodd;stroke:#c83737;stroke-width:1.00000012px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
+       id="rect5451"
+       width="142"
+       height="16.000002"
+       x="1641"
+       y="542.68896" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial"
+       x="1646"
+       y="554.18896"
+       id="text5441"><tspan
+         sodipodi:role="line"
+         id="tspan5443"
+         x="1646"
+         y="554.18896">Help with the Translation</tspan></text>
+    <text
+       id="text5445"
+       y="571.18896"
+       x="1646"
+       style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial"
+       xml:space="preserve"><tspan
+         y="571.18896"
+         x="1646"
+         id="tspan5447"
+         sodipodi:role="line">Help</tspan></text>
   </g>
 </svg>

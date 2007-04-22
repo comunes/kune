@@ -15,75 +15,14 @@
  * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  *
  */
- 
-Label=Label
+package org.ourproject.kune.client;
 
-Label1=Label1
+import org.ourproject.kune.client.model.Group;
+import org.ourproject.kune.client.model.User;
 
-Label2=Label2
-
-Text=Text
-
-Text1=Text1
-
-Text2=Text2
-
-Title=Title
-
-MyContext=MyContext
-
-MyApplication=MyApplication
-
-MyApp=MyApp
-
-Option0=Option0
-
-Option1=Option1
-
-Option2=Option2
-
-NewGroup=New Group
-
-Login=Login to collaborate
-
-Processing=Processing
-
-North=North
-
-East=East
-
-Center=Center
-
-West=West
-
-HelpWithTranslation=Help with the translation
-
-Home=Home
-
-Blogs=Blogs
-
-Forums=Forums
-
-Options=Options
-
-ExternalWindow=External Window
-
-Chatroom=Chat room
-
-Cancel=Cancel
-
-ArrowBack=< Back
-
-NextArrow=Next >
-
-Finish=Finish
-
-Change=Change
-
-Search=Search
-
-Help=Help
-
-GlobalSiteOptions=Global Site Options
-
-ContactUs=Contact Us
+public class Session {
+    public User currentUser = null;
+    public Group currentGroup = null;
+    // TODO Locale
+    
+}

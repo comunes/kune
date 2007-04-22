@@ -54,4 +54,7 @@ public interface MainConstants extends Constants {
     String Finish();
     String Change();
     String Search();
+    String Help();
+    String GlobalSiteOptions();
+    String ContactUs();
 }

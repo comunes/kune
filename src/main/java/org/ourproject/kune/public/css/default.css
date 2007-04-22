@@ -155,6 +155,7 @@ a:visited {
 	color: #FFFFFF;
 	font-weight: bold;
 	padding: 0 9px 0 9px;
+	font-size: 85%;
 }
 
 .kune-chatroom-subject {
@@ -209,7 +210,7 @@ a:visited {
 
 .gwm-GDesktopPane-TaskBar {
 	background-color: #EFEFFF;
-	filter: alpha(opacity =         80);
+	filter: alpha(opacity =             80);
 	-moz-opacity: 0.8;
 	opacity: 0.8;
 	height: 30px;
@@ -218,4 +219,65 @@ a:visited {
 
 .rp {
 	background-color: #c3d9ff;
+}
+
+.kune-sitebar-options {
+	cursor: default;
+}
+
+.kune-sitebar-options-rp {
+	background-color: #AAAAAA;
+}
+
+.kune-sitebar-options table {
+	margin: 0px;
+	border-collapse: collapse;
+	border-spacing: 0px;
+}
+
+.kune-sitebar-options .gwt-MenuItem {
+	background: transparent url(img/button-bg-soft.gif) repeat-x 0 0;
+	padding: 1px 15px 0 10px;
+	border-left: 1px solid #AAAAAA;
+	border-right: 1px solid #AAAAAA;	
+	font-size: 75%;
+	color: #B3B3B3;
+	cursor: default;
+    white-space: nowrap;
+}
+
+.kune-sitebar-options .gwt-MenuItem-selected {
+	background: transparent url(img/button-bg-hard.gif) repeat-x 0 0;
+	/* border: 1px solid #C83737; */
+	font-size: 75%;
+	color: #B3B3B3;
+}
+
+.kune-sitebar-options b {
+	background-color: transparent;
+	background-image: url(img/button-sitebar-arrow-down.gif);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-x-position: 100%;
+	background-y-position: 50%;
+	padding-left: 5px;
+	font-weight: light;
+}
+
+.kune-sitebar-sub-options {
+	background-color: #FFFCD5;
+	border: 1px solid #D38D5F;
+	cursor: default;
+}
+
+.kune-sitebar-sub-options .gwt-MenuItem {
+	padding: 1px 4px 1px 4px;
+	font-size: 75%;
+	cursor: default;
+	white-space: nowrap;
+}
+
+.kune-sitebar-sub-options .gwt-MenuItem-selected {
+	background-color: #FFB958;
+	border: 1px solid #C83737;
 }

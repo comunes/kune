@@ -17,8 +17,8 @@
  .gwm-alphacubecustom-FrameCaption{
 	width:100%;
 	font-weight:bold;
-	color:blue;
-	font-size:10px;
+	color: #A56941;
+	font-size:80%;
 }
 .gwm-alphacubecustom-Frame-TopBar{
   width: 100%;
@@ -34,9 +34,9 @@
 
 .gwm-alphacubecustom-ActionOverlay{
 	background-color: #000000;
-	filter:alpha(opacity=15);
-	-moz-opacity: 	0.15;
-	opacity: 0.15;
+	filter:alpha(opacity=0);
+	-moz-opacity: 	0;
+	opacity: 0;
 }
 
 .gwm-alphacubecustom-Frame-OutlineDrag{
@@ -65,6 +65,7 @@
     background:#C7CBD1;
     padding: 5px;
     border: 1px dashed;
+		font-size: 80%;
 }
 
 .gwm-alphacubecustom-Frame-TopBar-RestoreButton {
@@ -79,18 +80,18 @@
 .gwm-alphacubecustom-FrameBorder-tl {
   background:  url(alphacubecustom/tl.gif) no-repeat top  left;			
   width:7px;
-  height:25px;
+  height:23px;
 }
 
 .gwm-alphacubecustom-FrameBorder-t {
   background: transparent url(alphacubecustom/t.gif) repeat-x 0 0;	
-  height:25px;
+  height:23px;
 }
 
 .gwm-alphacubecustom-FrameBorder-tr {
   background: transparent url(alphacubecustom/tr.gif) no-repeat top right;			
   width:7px;	  
-  height:25px;
+  height:23px;
 }
 
 .gwm-alphacubecustom-FrameBorder-l{

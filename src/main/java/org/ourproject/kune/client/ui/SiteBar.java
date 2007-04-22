@@ -21,12 +21,16 @@ package org.ourproject.kune.client.ui;
 import org.ourproject.kune.client.Trans;
 import org.ourproject.kune.client.model.User;
 
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.Window;
+
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.TextBox;
 
 import org.gwtwidgets.client.ui.PNGImage;
@@ -60,6 +64,12 @@ public class SiteBar extends Composite implements SiteBarView {
 	private TextBox siteBarSearchTextBox = null;
 
 	private HTML siteBarSpaceHtml5 = null;
+	
+	private SimpleRoundedPanel siteBarOptionsRP = null;
+	
+	private MenuBar siteBarOptionsMenu = null;
+	
+	private MenuBar siteBarOptionsSubMenu = null;
 
 	private HorizontalPanel siteBarHelpTransHP = null;
 
@@ -72,6 +82,8 @@ public class SiteBar extends Composite implements SiteBarView {
 	private HTML siteBarSpaceHtml6 = null;
 
 	private PNGImage siteBarLogoImage = null;
+	
+	private Command inDevCmd = null;
 	
 	public SiteBar() {
 		super();
@@ -96,6 +108,14 @@ public class SiteBar extends Composite implements SiteBarView {
 		siteBarSpaceHtml4 = new HTML();
 		siteBarSearchTextBox = new TextBox();
 		siteBarSpaceHtml5 = new HTML();
+		siteBarOptionsRP = new SimpleRoundedPanel();
+		siteBarOptionsMenu = new MenuBar();
+		siteBarOptionsSubMenu = new MenuBar(true);
+		inDevCmd = new Command() {
+		      public void execute() {
+		          Window.alert("In development!");
+		        }
+		      };
 		siteBarHelpTransHP = new HorizontalPanel();
 		siteBarHelpTransHP
 				.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
@@ -116,14 +136,20 @@ public class SiteBar extends Composite implements SiteBarView {
 		siteBarHP.add(siteBarSpaceHtml2);
 		siteBarHP.add(LoginHyperlink);
 		siteBarHP.add(siteBarSpaceHtml3);
-		siteBarHP.add(siteBarSearchIconImage);
+		siteBarHP.add(siteBarOptionsRP);
+		siteBarOptionsRP.add(siteBarOptionsMenu);
 		siteBarHP.add(siteBarSpaceHtml4);
-		siteBarHP.add(siteBarSearchTextBox);
+		siteBarHP.add(siteBarSearchIconImage);
 		siteBarHP.add(siteBarSpaceHtml5);
-		siteBarHP.add(siteBarHelpTransHP);
-		siteBarHP.add(siteBarSpaceHtml6);
+		siteBarHP.add(siteBarSearchTextBox);
+        siteBarHP.add(siteBarSpaceHtml6);
 		siteBarHP.add(siteBarLogoImage);
 
+        siteBarOptionsMenu.addItem("<b>&nbsp;&nbsp;" + Trans.constants().Options() + "</b>", true, siteBarOptionsSubMenu);
+        //siteBarOptionsMenu.addItem(Trans.constants().Options(), siteBarOptionsSubMenu);
+        siteBarOptionsSubMenu.addItem(Trans.constants().HelpWithTranslation(), inDevCmd);
+        siteBarOptionsSubMenu.addItem(Trans.constants().ContactUs(), inDevCmd);
+		siteBarOptionsSubMenu.addItem(Trans.constants().Help(), inDevCmd);
 		siteBarHelpTransHP.add(siteBarHelpTransImage);
 		siteBarHelpTransHP.add(siteBarHelpTransSpaceHtml);
 		siteBarHelpTransHP.add(siteBarHelpTransHyperlink);
@@ -168,15 +194,21 @@ public class SiteBar extends Composite implements SiteBarView {
 		siteBarSearchIconImage.setStyleName("kune-search-icon");
 		
 		siteBarSpaceHtml4.setHTML("&nbsp;");
-		siteBarSpaceHtml4.setWidth("3");
+		siteBarSpaceHtml4.setWidth("15");
 
 		siteBarSearchTextBox.setStyleName("kune-search-box");
 		siteBarSearchTextBox.setWidth("180");
 		siteBarSearchTextBox.setTitle(Trans.constants().Search());
 
 		siteBarSpaceHtml5.setHTML("&nbsp;");
-		siteBarSpaceHtml5.setWidth("15");
-
+		siteBarSpaceHtml5.setWidth("3");
+		
+		siteBarOptionsRP.setCornerStyleName("kune-sitebar-options-rp");
+		siteBarOptionsMenu.setStyleName("kune-sitebar-options");
+		//siteBarOptionsMenu.setHeight("16");
+		siteBarOptionsMenu.setTitle(Trans.constants().GlobalSiteOptions());
+		siteBarOptionsSubMenu.setStyleName("kune-sitebar-sub-options");
+		
 		siteBarHelpTransHP.setBorderWidth(0);
 		siteBarHelpTransHP.setSpacing(0);
 		

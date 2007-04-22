@@ -19,11 +19,14 @@
 package org.ourproject.kune.client;
 
 import org.gwm.client.GDesktopPane;
-import org.gwm.client.GInternalFrame;
+import org.gwm.client.util.Gwm;
+import org.gwm.client.util.GwmUtilities;
+import org.gwm.client.event.GFrameAdapter;
+import org.gwm.client.event.GFrameEvent;
 import org.gwm.client.impl.DefaultGDesktopPane;
-import org.gwm.client.impl.DefaultGInternalFrame;
 
 import org.ourproject.kune.client.ui.ChatroomDialog;
+import org.ourproject.kune.client.ui.KuneFrame;
 import org.ourproject.kune.client.ui.RoundedPanel;
 import org.ourproject.kune.client.ui.SiteBar;
 import org.ourproject.kune.client.ui.Wizard;
@@ -38,6 +41,7 @@ import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -112,8 +116,6 @@ public class Main extends AbsolutePanel implements EntryPoint,
 
 	private GDesktopPane desktop;
 	
-	private Wizard wizard;
-	
 	public Main() {
 		super();
 		initialize();
@@ -124,7 +126,7 @@ public class Main extends AbsolutePanel implements EntryPoint,
 
 	public void adjustSize(int windowWidth, int windowHeight) {
 		int scrollWidth = windowWidth
-				- groupCenterScrollPanel.getAbsoluteLeft() - 238;
+				- groupCenterScrollPanel.getAbsoluteLeft() - 278;
 		if (scrollWidth < 1) {
 			scrollWidth = 1;
 		}
@@ -139,6 +141,7 @@ public class Main extends AbsolutePanel implements EntryPoint,
 	}
 
 	protected void initialize() {
+		desktop = new DefaultGDesktopPane();
         generalDP = new DockPanel();
         siteBar = new SiteBar();
 		generalDPEastVP = new VerticalPanel();
@@ -169,8 +172,6 @@ public class Main extends AbsolutePanel implements EntryPoint,
 	}
 
 	protected void layout() {
-		//add(generalDP, 0, 0);
-
 		generalDP.add(siteBar, DockPanel.NORTH);
 		generalDP.add(generalDPEastVP, DockPanel.EAST);
 		generalDP.add(generalDPCenterVP, DockPanel.CENTER);
@@ -204,6 +205,9 @@ public class Main extends AbsolutePanel implements EntryPoint,
 		groupCenterVP.add(groupCenterHtml);
 
 		groupCenterMenuVP.add(groupCenterMenuHtml);
+		
+		add((Widget) desktop, 0, 0);
+		desktop.setWidgetLocation(generalDP, 0, 0);		
 	}
 
 	public void onModuleLoad() {
@@ -216,7 +220,10 @@ public class Main extends AbsolutePanel implements EntryPoint,
 		adjustSize(width, height);
 	}
 
-	protected void setProperties() {    
+	protected void setProperties() {
+		Gwm.setOverlayLayerDisplayOnDragAction(false);
+		desktop.setTheme("alphacubecustom");
+
 		generalDP.setBorderWidth(0);
 		generalDP.setSpacing(0);
 		generalDP.setHeight("100%");
@@ -266,7 +273,7 @@ public class Main extends AbsolutePanel implements EntryPoint,
 		groupTitleLabel.setHeight("23");
 
 		groupCenterHP.setCellHeight(groupCenterMenuVP, "100%");
-		groupCenterHP.setCellWidth(groupCenterMenuVP, "95");
+		groupCenterHP.setCellWidth(groupCenterMenuVP, "135"); // 95 in original draft
 		groupCenterHP.setBorderWidth(0);
 		groupCenterHP.setSpacing(0);
 		groupCenterHP.addStyleName("kune-group-center");
@@ -290,11 +297,11 @@ public class Main extends AbsolutePanel implements EntryPoint,
 		groupCenterMenuVP.addStyleName("kune-group-center-menubar");
 		groupCenterMenuVP.setStyleName("kune-group-center-menubar");
 		groupCenterMenuVP.setHeight("100%");
-		groupCenterMenuVP.setWidth("95");
+		groupCenterMenuVP.setWidth("135"); // 95 in original draft
 
 		groupCenterMenuHtml.setHTML("<b>Menu</b>");
 
-		groupBottomBarLabel.setText("License");
+		groupBottomBarLabel.setText("(c) Foo organization, contents under some free/open Commons license");
 		groupBottomBarLabel.setStyleName("kune-group-bottombar");
 		groupBottomBarLabel.setHeight("24");
 
@@ -319,17 +326,9 @@ public class Main extends AbsolutePanel implements EntryPoint,
 	}
 	
 	public void sandbox() {
-		desktop = new DefaultGDesktopPane();
-
-        GInternalFrame chatroomFrame = new DefaultGInternalFrame(Trans.constants().Chatroom()); 
+        KuneFrame chatroomFrame = new KuneFrame(); 
         
 		chatroom1 = new ChatroomDialog();
-		
-		add((Widget) desktop, 0, 0);
-		
-		desktop.setWidgetLocation(generalDP, 0, 0);
-		desktop.setTheme("alphacubecustom");
-		
         chatroom1.setSubject("Welcome to sometopic-foorganization chat room");
         ChatroomUser luthorb = new ChatroomUser("luthor.b", true);
         ChatroomUser anneh = new ChatroomUser("anne.h", false);
@@ -375,35 +374,34 @@ public class Main extends AbsolutePanel implements EntryPoint,
         chatroom1.addToConversation(luthorb, new HTML("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui."));
         chatroom1.addToConversation(anneh, new HTML("Lorem ipsum dolor sit amet?"));
         
-        
         chatroomFrame.setCaption(Trans.constants().Chatroom() + " " + "sometopic-foorganization@kune.ourproject.org");
-		chatroomFrame.setTheme("alphacubecustom");
-        chatroomFrame.setClosable(true);
-        chatroomFrame.setMaximizable(false);
+		chatroomFrame.setFrame(true, false, true, true, false);
         chatroomFrame.setSize(500,250);
         chatroomFrame.setContent(chatroom1);
-        chatroomFrame.setResizable(false);
         desktop.addFrame(chatroomFrame);
         chatroomFrame.setVisible(true);
-        chatroomFrame.setLocation(5, 5);
-				
+        chatroomFrame.setTitleIcon(new Image("images/chat.png"));
+        GwmUtilities.diplayAtScreenCenter(chatroomFrame);
+        chatroomFrame.setLocation(100, 100);
+        
 		//LoginPanel loginPanel = new LoginPanel();
 		//public LoginDialogBox(final LoginPanel.LoginListener loginListener) {
 
-        // FIXME Erase this
-        wizard = new Wizard();
+        final Wizard wizard = new Wizard();
         wizard.add("New Project", (Widget) new HTML("Create here a project"), false, true, true, false);
         wizard.add("New Project", (Widget) new HTML("bla, bla, bla"), true, true, true, false);
         wizard.add("New Project", (Widget) new HTML("End"), true, true, true, true);
         
-        GInternalFrame wizardFrame = new DefaultGInternalFrame("Wizard example");
-        wizardFrame.setTheme("alphacubecustom");
-        wizardFrame.setClosable(false);
-        wizardFrame.setMaximizable(true);
+        final KuneFrame wizardFrame = new KuneFrame("Wizard example");
+        wizardFrame.setFrame(true, true, false, true, true);
         wizardFrame.setContent(wizard);
-        wizardFrame.setResizable(true);
-        desktop.addFrame(wizardFrame);
-        wizardFrame.setVisible(true);
-        wizardFrame.setLocation(500, 500);
+        //desktop.addFrame(wizardFrame);
+        //wizardFrame.setVisible(true);
+        //GwmUtilities.diplayAtScreenCenter(wizardFrame);
+        wizardFrame.addFrameListener(new GFrameAdapter() {   	
+               public void frameResized(GFrameEvent evt) {
+            	   wizard.setSize(wizardFrame.getWidth(), wizardFrame.getHeight());
+            	   }
+        });
 	}
 }

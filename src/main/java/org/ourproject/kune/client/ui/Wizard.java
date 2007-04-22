@@ -25,6 +25,15 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class Wizard extends DeckPanel implements ClickListener {
 	
+	public final static String DEFAULTHEIGHT = "300";
+
+	public final static String DEFAULTWIDTH = "400";
+	
+	public Wizard(){
+        super();
+        setSize(DEFAULTWIDTH, DEFAULTHEIGHT);
+	}
+	
     public void add(String title, Widget content) {
         this.add(title, content, true, true, true, true);
     }
@@ -36,6 +45,10 @@ public class Wizard extends DeckPanel implements ClickListener {
         if (pages() == 1) {
         	showWidget(0);
         }
+    }
+    
+    public WizardPage current() {
+    	return (WizardPage) this.getWidget(getVisibleWidget());
     }
     
     public int pages() {
@@ -83,6 +96,15 @@ public class Wizard extends DeckPanel implements ClickListener {
             }
         }
     }
-          
+    
+    public void setSize(int width, int height) {
+    	WizardPage page = new WizardPage();
+    	for (int i = 0; i < pages(); i++) {
+        	page = (WizardPage) getWidget(i);
+        	page.centerContentVP.setSize("" + (width - 60),
+        			"" + (height - 110));
+    	}
+        super.setSize("" + (width - 30), "" + (height - 30));
+    }
 	
 }
