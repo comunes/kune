@@ -26,6 +26,7 @@ import org.gwm.client.event.GFrameEvent;
 import org.gwm.client.impl.DefaultGDesktopPane;
 
 import org.ourproject.kune.client.ui.ChatroomDialog;
+import org.ourproject.kune.client.ui.DropDownPanel;
 import org.ourproject.kune.client.ui.KuneFrame;
 import org.ourproject.kune.client.ui.RoundedPanel;
 import org.ourproject.kune.client.ui.SiteBar;
@@ -73,6 +74,8 @@ public class Main extends AbsolutePanel implements EntryPoint,
 	private HTML generalMenuSpaceHtml1 = null;
 
 	private HTML generalMenuSpaceHtml2 = null;
+	
+	private HTML generalMenuSpaceHtml3 = null;
 
 	private RoundedPanel menuItem1 = null;
 	
@@ -116,6 +119,8 @@ public class Main extends AbsolutePanel implements EntryPoint,
 
 	private GDesktopPane desktop;
 	
+	private DropDownPanel dropDownPanel = null;
+	
 	public Main() {
 		super();
 		initialize();
@@ -154,6 +159,7 @@ public class Main extends AbsolutePanel implements EntryPoint,
 		menuItem3 = new RoundedPanel(new Label(Trans.constants().Forums()), RoundedPanel.RIGHT, "kune-menu-item-not-selected");
 		generalMenuSpaceHtml1 = new HTML();
 		generalMenuSpaceHtml2 = new HTML();
+		generalMenuSpaceHtml3 = new HTML();
 		generalDPCenterVP = new VerticalPanel();
 		groupLogoImage = new PNGImage("images/foo-org-logo.png", 294, 54);
 		groupTopBarCornerSpace1Html = new HTML();
@@ -168,7 +174,8 @@ public class Main extends AbsolutePanel implements EntryPoint,
 		groupCenterMenuHtml = new HTML();
 		groupBottomBarLabel = new Label();
 		groupBottomBarCornerSpaceHtml1 = new HTML();
-		groupBottomBarCornerSpaceHtml2 = new HTML();	
+		groupBottomBarCornerSpaceHtml2 = new HTML();
+		dropDownPanel = new DropDownPanel(true);
 	}
 
 	protected void layout() {
@@ -186,6 +193,8 @@ public class Main extends AbsolutePanel implements EntryPoint,
         generalMenuItemVP.add(menuItem2);
 		generalMenuItemVP.add(generalMenuSpaceHtml2);
         generalMenuItemVP.add(menuItem3);
+		generalMenuItemVP.add(generalMenuSpaceHtml3);
+        generalMenuItemVP.add(dropDownPanel);
 
 		generalDPCenterVP.add(groupLogoImage);
 		generalDPCenterVP.add(groupTopBarCornerSpace1Html);
@@ -250,6 +259,9 @@ public class Main extends AbsolutePanel implements EntryPoint,
 
 		generalMenuSpaceHtml2.setHTML("&nbsp;");
 		generalMenuSpaceHtml2.setHeight("5");
+
+		generalMenuSpaceHtml3.setHTML("&nbsp;");
+		generalMenuSpaceHtml3.setHeight("5");
 
 		generalDPCenterVP.setCellVerticalAlignment(groupTitleLabel,
 				HasVerticalAlignment.ALIGN_MIDDLE);
@@ -403,5 +415,10 @@ public class Main extends AbsolutePanel implements EntryPoint,
             	   wizard.setSize(wizardFrame.getWidth(), wizardFrame.getHeight());
             	   }
         });
+        
+        dropDownPanel.setContent(new HTML("Lorem ipsum dolor sit amet,<br>consectetuer adipiscing elit."));
+        dropDownPanel.setContentVisible(true);
+        dropDownPanel.setTitle("Members");
+        dropDownPanel.setColor("87DECD");
 	}
 }

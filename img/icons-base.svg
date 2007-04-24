@@ -27,15 +27,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="294.76833"
-     inkscape:cy="865.5375"
+     inkscape:zoom="11.313708"
+     inkscape:cx="359.28381"
+     inkscape:cy="348.57129"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      inkscape:window-width="1274"
-     inkscape:window-height="935"
+     inkscape:window-height="906"
      inkscape:window-x="61"
-     inkscape:window-y="0" />
+     inkscape:window-y="0"
+     showgrid="true" />
   <metadata
      id="metadata21024">
     <rdf:RDF>
@@ -312,5 +313,201 @@
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/button-sitebar-arrow-down.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
+    <g
+       id="g7279"
+       transform="translate(-26.8221,-0.526197)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/arrow-right-white.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         transform="matrix(0,-1,1,0,0,0)"
+         y="358.56131"
+         x="-712.14917"
+         height="2.5215814"
+         width="2.5215812"
+         id="rect7274"
+         style="opacity:0;color:#000000;fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:13.47841835;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <g
+         style="opacity:1;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.09088254;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/arrow-right-black.png"
+         transform="matrix(0,-0.8185892,0.6979611,0,-116.44015,999.03182)"
+         id="g6297">
+        <rect
+           style="opacity:0;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.09088254;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="rect6299"
+           width="2.5215812"
+           height="2.5215814"
+           x="350.73923"
+           y="681.10138" />
+        <path
+           sodipodi:type="star"
+           style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.81307399;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="path6301"
+           sodipodi:sides="3"
+           sodipodi:cx="1563"
+           sodipodi:cy="674.18896"
+           sodipodi:r1="3.7810335"
+           sodipodi:r2="0.90551758"
+           sodipodi:arg1="1.5657195"
+           sodipodi:arg2="2.6129171"
+           inkscape:flatsided="true"
+           inkscape:rounded="0"
+           inkscape:randomized="0"
+           d="M 1563.0192,677.96995 L 1559.716,672.3151 L 1566.2648,672.28185 L 1563.0192,677.96995 z "
+           transform="matrix(1.7115632,0,0,1.0517267,-2323.1568,-28.402137)"
+           inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/button-sitebar-arrow-down.png"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90" />
+      </g>
+    </g>
+    <g
+       id="g7285"
+       transform="translate(-1.8221004,-0.526197)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/arrow-right-black.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         transform="matrix(0,-1,1,0,0,0)"
+         y="358.56131"
+         x="-712.14917"
+         height="2.5215814"
+         width="2.5215812"
+         id="rect7287"
+         style="opacity:0;color:#000000;fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:13.47841835;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <g
+         style="opacity:1;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.09088254;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/arrow-right-black.png"
+         transform="matrix(0,-0.8185892,0.6979611,0,-116.44015,999.03182)"
+         id="g7289">
+        <rect
+           style="opacity:0;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.09088254;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="rect7291"
+           width="2.5215812"
+           height="2.5215814"
+           x="350.73923"
+           y="681.10138" />
+        <path
+           sodipodi:type="star"
+           style="color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.81307399;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="path7293"
+           sodipodi:sides="3"
+           sodipodi:cx="1563"
+           sodipodi:cy="674.18896"
+           sodipodi:r1="3.7810335"
+           sodipodi:r2="0.90551758"
+           sodipodi:arg1="1.5657195"
+           sodipodi:arg2="2.6129171"
+           inkscape:flatsided="true"
+           inkscape:rounded="0"
+           inkscape:randomized="0"
+           d="M 1563.0192,677.96995 L 1559.716,672.3151 L 1566.2648,672.28185 L 1563.0192,677.96995 z "
+           transform="matrix(1.7115632,0,0,1.0517267,-2323.1568,-28.402137)"
+           inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/button-sitebar-arrow-down.png"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90" />
+      </g>
+    </g>
+    <g
+       id="g7295"
+       transform="matrix(0,1,-1,0,1043.8884,370.54008)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/arrow-down-white.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         transform="matrix(0,-1,1,0,0,0)"
+         y="358.56131"
+         x="-712.14917"
+         height="2.5215814"
+         width="2.5215812"
+         id="rect7297"
+         style="opacity:0;color:#000000;fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:13.47841835;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <g
+         style="opacity:1;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.09088254;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/arrow-right-black.png"
+         transform="matrix(0,-0.8185892,0.6979611,0,-116.44015,999.03182)"
+         id="g7299">
+        <rect
+           style="opacity:0;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.09088254;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="rect7301"
+           width="2.5215812"
+           height="2.5215814"
+           x="350.73923"
+           y="681.10138" />
+        <path
+           sodipodi:type="star"
+           style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.81307399;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="path7303"
+           sodipodi:sides="3"
+           sodipodi:cx="1563"
+           sodipodi:cy="674.18896"
+           sodipodi:r1="3.7810335"
+           sodipodi:r2="0.90551758"
+           sodipodi:arg1="1.5657195"
+           sodipodi:arg2="2.6129171"
+           inkscape:flatsided="true"
+           inkscape:rounded="0"
+           inkscape:randomized="0"
+           d="M 1563.0192,677.96995 L 1559.716,672.3151 L 1566.2648,672.28185 L 1563.0192,677.96995 z "
+           transform="matrix(1.7115632,0,0,1.0517267,-2323.1568,-28.402134)"
+           inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/button-sitebar-arrow-down.png"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90" />
+      </g>
+    </g>
+    <g
+       id="g7305"
+       transform="matrix(0,1,-1,0,1068.8884,370.54008)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/arrow-down-black.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         transform="matrix(0,-1,1,0,0,0)"
+         y="358.56131"
+         x="-712.14917"
+         height="2.5215814"
+         width="2.5215812"
+         id="rect7307"
+         style="opacity:0;color:#000000;fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:13.47841835;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <g
+         style="opacity:1;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.09088254;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/arrow-right-black.png"
+         transform="matrix(0,-0.8185892,0.6979611,0,-116.44015,999.03182)"
+         id="g7309">
+        <rect
+           style="opacity:0;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.09088254;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="rect7311"
+           width="2.5215812"
+           height="2.5215814"
+           x="350.73923"
+           y="681.10138" />
+        <path
+           sodipodi:type="star"
+           style="color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.81307399;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="path7313"
+           sodipodi:sides="3"
+           sodipodi:cx="1563"
+           sodipodi:cy="674.18896"
+           sodipodi:r1="3.7810335"
+           sodipodi:r2="0.90551758"
+           sodipodi:arg1="1.5657195"
+           sodipodi:arg2="2.6129171"
+           inkscape:flatsided="true"
+           inkscape:rounded="0"
+           inkscape:randomized="0"
+           d="M 1563.0192,677.96995 L 1559.716,672.3151 L 1566.2648,672.28185 L 1563.0192,677.96995 z "
+           transform="matrix(1.7115632,0,0,1.0517267,-2323.1568,-28.402134)"
+           inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/button-sitebar-arrow-down.png"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90" />
+      </g>
+    </g>
   </g>
 </svg>

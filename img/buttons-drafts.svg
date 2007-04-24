@@ -17,7 +17,7 @@
    sodipodi:docname="buttons-drafts.svg"
    sodipodi:docbase="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   sodipodi:modified="true">
+   sodipodi:modified="TRUE">
   <defs
      id="defs3958">
     <linearGradient
@@ -103,16 +103,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="142"
-     inkscape:cy="705.5"
+     inkscape:zoom="10.019083"
+     inkscape:cx="142.66926"
+     inkscape:cy="702.17811"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
-     inkscape:window-width="1389"
+     inkscape:window-width="1379"
      inkscape:window-height="936"
-     inkscape:window-x="51"
+     inkscape:window-x="61"
      inkscape:window-y="0"
-     showgrid="false" />
+     showgrid="true" />
   <metadata
      id="metadata3961">
     <rdf:RDF>
@@ -128,6 +128,16 @@
      inkscape:label="Capa 1"
      inkscape:groupmode="layer"
      id="layer1">
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/various/button-bg-soft.png"
+       y="330.31812"
+       x="83"
+       height="11.644788"
+       width="118"
+       id="rect4632"
+       style="opacity:0.4;color:#000000;fill:#ffffff;fill-opacity:0;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <rect
        style="color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect5949"
@@ -783,7 +793,7 @@
        height="16"
        x="83"
        y="268.36218"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/various/button-bg-hard.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect
@@ -941,7 +951,7 @@
        height="11.644788"
        x="83"
        y="334.71741"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/various/button-bg-soft.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect
@@ -1013,5 +1023,15 @@
          x="92.765747"
          y="342.17084">Search</tspan>
     </text>
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/various/button-bg-hard.png"
+       y="268.22122"
+       x="83.032013"
+       height="11.644788"
+       width="118"
+       id="rect5606"
+       style="opacity:0.4;color:#000000;fill:#ffffff;fill-opacity:0;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
   </g>
 </svg>
