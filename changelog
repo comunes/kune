@@ -11,6 +11,9 @@ kune (0.0.1)
 	* new KuneFrame class with default frame conf
 	* options button in sidebar
 	* new drow-down-panel widget
-
+	* border panel for add margin space in layouts
+	* rollover images widget (on mouse over)
+	* drow-down-panel improve
+	
 	-- Vicente J. Ruiz Jurado <vjrj@ourproject.org> Fri, 20 Apr 20 13:09:27 BRT 2007
 

@@ -19,12 +19,13 @@
 package org.ourproject.kune.client;
 
 import org.gwm.client.GDesktopPane;
-import org.gwm.client.util.Gwm;
-import org.gwm.client.util.GwmUtilities;
 import org.gwm.client.event.GFrameAdapter;
 import org.gwm.client.event.GFrameEvent;
 import org.gwm.client.impl.DefaultGDesktopPane;
-
+import org.gwm.client.util.Gwm;
+import org.gwm.client.util.GwmUtilities;
+import org.gwtwidgets.client.ui.PNGImage;
+import org.ourproject.kune.client.ui.BorderPanel;
 import org.ourproject.kune.client.ui.ChatroomDialog;
 import org.ourproject.kune.client.ui.DropDownPanel;
 import org.ourproject.kune.client.ui.KuneFrame;
@@ -42,17 +43,15 @@ import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-
-import org.gwtwidgets.client.ui.PNGImage;
 
 public class Main extends AbsolutePanel implements EntryPoint,
 		WindowResizeListener {
@@ -74,14 +73,14 @@ public class Main extends AbsolutePanel implements EntryPoint,
 	private HTML generalMenuSpaceHtml1 = null;
 
 	private HTML generalMenuSpaceHtml2 = null;
-	
-	private HTML generalMenuSpaceHtml3 = null;
 
 	private RoundedPanel menuItem1 = null;
 	
 	private RoundedPanel menuItem2 = null;
     
 	private RoundedPanel menuItem3 = null;
+	
+	private BorderPanel contextNav = null;
 	
 	private VerticalPanel generalDPCenterVP = null;
 
@@ -157,9 +156,9 @@ public class Main extends AbsolutePanel implements EntryPoint,
 		menuItem1 = new RoundedPanel(new Label(Trans.constants().Home()), RoundedPanel.RIGHT, "kune-menu-item-selected");
 		menuItem2 = new RoundedPanel(new Label(Trans.constants().Blogs()), RoundedPanel.RIGHT, "kune-menu-item-not-selected");
 		menuItem3 = new RoundedPanel(new Label(Trans.constants().Forums()), RoundedPanel.RIGHT, "kune-menu-item-not-selected");
+		contextNav = new BorderPanel();
 		generalMenuSpaceHtml1 = new HTML();
 		generalMenuSpaceHtml2 = new HTML();
-		generalMenuSpaceHtml3 = new HTML();
 		generalDPCenterVP = new VerticalPanel();
 		groupLogoImage = new PNGImage("images/foo-org-logo.png", 294, 54);
 		groupTopBarCornerSpace1Html = new HTML();
@@ -193,8 +192,9 @@ public class Main extends AbsolutePanel implements EntryPoint,
         generalMenuItemVP.add(menuItem2);
 		generalMenuItemVP.add(generalMenuSpaceHtml2);
         generalMenuItemVP.add(menuItem3);
-		generalMenuItemVP.add(generalMenuSpaceHtml3);
-        generalMenuItemVP.add(dropDownPanel);
+
+        generalMenuItemVP.add(contextNav);
+		contextNav.setWidgetMargin(dropDownPanel, 5, 0, 0, 5);
 
 		generalDPCenterVP.add(groupLogoImage);
 		generalDPCenterVP.add(groupTopBarCornerSpace1Html);
@@ -259,9 +259,6 @@ public class Main extends AbsolutePanel implements EntryPoint,
 
 		generalMenuSpaceHtml2.setHTML("&nbsp;");
 		generalMenuSpaceHtml2.setHeight("5");
-
-		generalMenuSpaceHtml3.setHTML("&nbsp;");
-		generalMenuSpaceHtml3.setHeight("5");
 
 		generalDPCenterVP.setCellVerticalAlignment(groupTitleLabel,
 				HasVerticalAlignment.ALIGN_MIDDLE);

@@ -17,24 +17,33 @@
  */
 package org.ourproject.kune.client.ui;
 
-import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.DeckPanel;
-import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.SimplePanel;
-import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.DOM;
-
 import org.ourproject.kune.client.Trans;
 
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DeckPanel;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
+
+
+/**
+ * <p>This panel opens when you click on the arrow or the title (gmail
+ *  style) </p>
+ *  
+ *  TODO: pagination (using DeckPanel)
+ *  
+ * @author Vicente J. Ruiz Jurado (vjrj@ourproject.org)
+ *
+ */
 public class DropDownPanel extends Composite implements ClickListener {
     private RoundedPanel outerRP = null;
 	private VerticalPanel dropDownPanelVP = null;
 	private HorizontalPanel titleHP = null;
-	private Image arrowImage = null;
+	private RolloverImage arrowImage = null;
 	private Label titleLabel = null;
 	private DeckPanel contentDeckP = null;
 	private SimplePanel cleanPanel = null;
@@ -58,7 +67,7 @@ public class DropDownPanel extends Composite implements ClickListener {
 		outerRP = new RoundedPanel();
 		dropDownPanelVP = new VerticalPanel();
 		titleHP = new HorizontalPanel();
-		arrowImage = new Image();
+		arrowImage = new RolloverImage();
 		titleLabel = new Label();
 		contentDeckP = new DeckPanel();
 		cleanPanel = new SimplePanel();
@@ -88,7 +97,7 @@ public class DropDownPanel extends Composite implements ClickListener {
 		titleHP.addStyleName("drop-down-label");
 		titleHP.setStyleName("drop-down-label");
 
-		arrowImage.setUrl("images/arrow-down-black.gif");
+		arrowImage.setUrl("images/arrow-down-black.gif", "images/arrow-down-white.gif");
 		arrowImage.setHeight("16");
 		arrowImage.setWidth("16");
 
@@ -113,14 +122,14 @@ public class DropDownPanel extends Composite implements ClickListener {
     public void setContentVisible(boolean visible) {
     	if (visible) {
     		if (!contentEmpty()) {
+        		arrowImage.setUrl("images/arrow-down-black.gif", "images/arrow-down-white.gif");
                 contentDeckP.showWidget(1);
-        		arrowImage.setUrl("images/arrow-down-black.gif");
         		contentDeckP.setVisible(true);
     		}
     	}
     	else {
+    		arrowImage.setUrl("images/arrow-down-black.gif", "images/arrow-down-white.gif");
             contentDeckP.showWidget(0);
-       		arrowImage.setUrl("images/arrow-right-black.gif");
        		contentDeckP.setVisible(false);
     	}
     }

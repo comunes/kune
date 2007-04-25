@@ -289,10 +289,10 @@ a:visited {
 .drop-down-inner {
 	margin-left: 3px;
 	margin-right: 3px;
-	margin-bottom: 1px
-	padding: 3px;
+	margin-bottom: 1px;
 	background: green;
 	background-color: #FFFFFF;
+	padding: 3px;
 }
 
 .drop-down-label {
