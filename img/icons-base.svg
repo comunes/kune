@@ -19,73 +19,7 @@
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    sodipodi:modified="true">
   <defs
-     id="defs21021">
-    <linearGradient
-       inkscape:collect="always"
-       id="linearGradient9779">
-      <stop
-         style="stop-color:#552200;stop-opacity:1"
-         offset="0"
-         id="stop9781" />
-      <stop
-         style="stop-color:#000000;stop-opacity:0"
-         offset="1"
-         id="stop9783" />
-    </linearGradient>
-    <linearGradient
-       inkscape:collect="always"
-       id="linearGradient13535">
-      <stop
-         style="stop-color:red;stop-opacity:1;"
-         offset="0"
-         id="stop13537" />
-      <stop
-         style="stop-color:red;stop-opacity:0;"
-         offset="1"
-         id="stop13539" />
-    </linearGradient>
-    <linearGradient
-       inkscape:collect="always"
-       id="linearGradient13515">
-      <stop
-         style="stop-color:lime;stop-opacity:1;"
-         offset="0"
-         id="stop13517" />
-      <stop
-         style="stop-color:lime;stop-opacity:0;"
-         offset="1"
-         id="stop13519" />
-    </linearGradient>
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient13535"
-       id="linearGradient8669"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0,0.713314,-0.713314,0,1343.181,739.02292)"
-       x1="-429.10291"
-       y1="1069.1875"
-       x2="-298.24084"
-       y2="1069.1875" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient13515"
-       id="linearGradient8672"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0,0.713314,-0.713314,0,1343.181,739.02292)"
-       x1="-136.75916"
-       y1="1069.1875"
-       x2="-266.58459"
-       y2="1069.1875" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient9779"
-       id="linearGradient9785"
-       x1="406.73175"
-       y1="610.01562"
-       x2="394.75729"
-       y2="593.21936"
-       gradientUnits="userSpaceOnUse" />
-  </defs>
+     id="defs21021" />
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -93,7 +27,7 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
+     inkscape:zoom="2"
      inkscape:cx="478"
      inkscape:cy="398"
      inkscape:document-units="px"
@@ -623,5 +557,165 @@
        inkscape:randomized="0"
        d="M 386.08032,589.56078 C 387.16885,590.31802 384.56193,594.84941 384.99747,596.10186 C 385.43302,597.35431 390.28906,599.29039 389.90526,600.55965 C 389.52145,601.82891 384.40626,600.74985 383.34971,601.55111 C 382.29315,602.35237 381.95242,607.56902 380.62668,607.59623 C 379.30094,607.62343 378.7465,602.42515 377.65797,601.6679 C 376.56943,600.91066 371.50281,602.19864 371.06726,600.9462 C 370.63171,599.69375 375.40424,597.56009 375.78805,596.29083 C 376.17185,595.02157 373.38124,590.60093 374.43779,589.79967 C 375.49435,588.99842 378.99837,592.87803 380.32411,592.85082 C 381.64986,592.82362 384.99178,588.80353 386.08032,589.56078 z "
        transform="matrix(0.6033896,0,0,0.6033896,270.4205,279.21475)" />
+    <image
+       y="705.36218"
+       x="524"
+       id="image10476"
+       height="16"
+       width="16"
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/star-yellow.png"
+       xlink:href="icons/star-yellow.png" />
+    <image
+       y="705.36218"
+       x="540"
+       id="image10549"
+       height="16"
+       width="16"
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/star-grey.png"
+       xlink:href="icons/star-grey.png" />
+    <image
+       xlink:href="icons/star-yellow.png"
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/star-yellow.png"
+       width="16"
+       height="16"
+       id="image10552"
+       x="508"
+       y="705.36218" />
+    <image
+       y="705.36218"
+       x="476"
+       id="image10554"
+       height="16"
+       width="16"
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/star-yellow.png"
+       xlink:href="icons/star-yellow.png" />
+    <image
+       y="705.36218"
+       x="492"
+       id="image10556"
+       height="16"
+       width="16"
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/star-yellow.png"
+       xlink:href="icons/star-yellow.png" />
+    <image
+       y="744.36218"
+       x="524"
+       id="image10560"
+       height="16"
+       width="16"
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/star-yellow.png"
+       xlink:href="icons/star-yellow.png" />
+    <image
+       y="744.36218"
+       x="540"
+       id="image10562"
+       height="16"
+       width="16"
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/star-grey.png"
+       xlink:href="icons/star-grey.png" />
+    <image
+       xlink:href="icons/star-yellow.png"
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/star-yellow.png"
+       width="16"
+       height="16"
+       id="image10564"
+       x="508"
+       y="744.36218" />
+    <image
+       y="744.36218"
+       x="476"
+       id="image10566"
+       height="16"
+       width="16"
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/star-yellow.png"
+       xlink:href="icons/star-yellow.png" />
+    <image
+       y="744.36218"
+       x="492"
+       id="image10568"
+       height="16"
+       width="16"
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/star-yellow.png"
+       xlink:href="icons/star-yellow.png" />
+    <image
+       y="784.36218"
+       x="538"
+       id="image10572"
+       height="16"
+       width="16"
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/star-grey.png"
+       xlink:href="icons/star-grey.png" />
+    <image
+       xlink:href="icons/star-yellow.png"
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/star-yellow.png"
+       width="16"
+       height="16"
+       id="image10574"
+       x="506"
+       y="784.36218" />
+    <image
+       y="784.36218"
+       x="474"
+       id="image10576"
+       height="16"
+       width="16"
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/star-yellow.png"
+       xlink:href="icons/star-yellow.png" />
+    <image
+       y="784.36218"
+       x="490"
+       id="image10578"
+       height="16"
+       width="16"
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/star-yellow.png"
+       xlink:href="icons/star-yellow.png" />
+    <image
+       y="820.36218"
+       x="535"
+       id="image10582"
+       height="16"
+       width="16"
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/star-grey.png"
+       xlink:href="icons/star-grey.png" />
+    <image
+       xlink:href="icons/star-yellow.png"
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/star-yellow.png"
+       width="16"
+       height="16"
+       id="image10584"
+       x="503"
+       y="820.36218" />
+    <image
+       y="820.36218"
+       x="471"
+       id="image10586"
+       height="16"
+       width="16"
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/star-yellow.png"
+       xlink:href="icons/star-yellow.png" />
+    <image
+       y="820.36218"
+       x="487"
+       id="image10588"
+       height="16"
+       width="16"
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/star-yellow.png"
+       xlink:href="icons/star-yellow.png" />
+    <image
+       y="820.36218"
+       x="519"
+       id="image10645"
+       height="16"
+       width="16"
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/star-small-yellow.png"
+       xlink:href="icons/star-small-yellow.png" />
+    <image
+       y="784.36218"
+       x="522"
+       id="image10688"
+       height="16"
+       width="16"
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/star-yellow-grey.png"
+       xlink:href="icons/star-yellow-grey.png" />
   </g>
 </svg>
