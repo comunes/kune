@@ -25,10 +25,14 @@ import org.gwm.client.impl.DefaultGDesktopPane;
 import org.gwm.client.util.Gwm;
 import org.gwm.client.util.GwmUtilities;
 import org.gwtwidgets.client.ui.PNGImage;
+import org.ourproject.kune.client.model.Rate;
+import org.ourproject.kune.client.model.User;
 import org.ourproject.kune.client.ui.BorderPanel;
 import org.ourproject.kune.client.ui.ChatroomDialog;
 import org.ourproject.kune.client.ui.DropDownPanel;
 import org.ourproject.kune.client.ui.KuneFrame;
+import org.ourproject.kune.client.ui.RateItDialog;
+import org.ourproject.kune.client.ui.RateDialog;
 import org.ourproject.kune.client.ui.RoundedPanel;
 import org.ourproject.kune.client.ui.SiteBar;
 import org.ourproject.kune.client.ui.Wizard;
@@ -334,7 +338,14 @@ public class Main extends AbsolutePanel implements EntryPoint,
 		});
 	}
 	
+	
 	public void sandbox() {
+		
+		User user = new User("luther.b");
+		user.setId((long) 1);
+		Session session = new Session();
+		session.currentUser = user;
+			
         KuneFrame chatroomFrame = new KuneFrame(); 
         
 		chatroom1 = new ChatroomDialog();
@@ -417,5 +428,24 @@ public class Main extends AbsolutePanel implements EntryPoint,
         dropDownPanel.setContentVisible(true);
         dropDownPanel.setTitle("Members");
         dropDownPanel.setColor("87DECD");
+        
+        Rate rate = new Rate();
+        rate.addRate(4);
+        rate.addRate(3);
+        RateDialog rateTestWidget = new RateDialog(rate);
+        
+        this.groupCenterVP.add(rateTestWidget);
+        rate.addRate(3);
+        rate.addRate(2);
+        rate.addRate(2);
+        
+        Rate rate2 = new Rate();
+        RateDialog rateTestWidget2 = new RateDialog(rate2);
+        this.groupCenterVP.add(rateTestWidget2);
+
+        
+        RateItDialog rateItTestWidget = new RateItDialog(rate2);
+        this.groupCenterVP.add(rateItTestWidget);   
+        
 	}
 }

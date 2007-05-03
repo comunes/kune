@@ -17,12 +17,80 @@
  */
 package org.ourproject.kune.client;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import org.ourproject.kune.client.model.Group;
+import org.ourproject.kune.client.model.Rate;
 import org.ourproject.kune.client.model.User;
+import org.ourproject.kune.client.model.UserRate;
 
 public class Session {
+	private static Session singleton;
     public User currentUser = null;
     public Group currentGroup = null;
     // TODO Locale
+    
+    // sandbox
+    ArrayList userRates = new ArrayList();
+    
+	/**
+	 * Gets the singleton Session instance.
+	 */
+    public Session() {
+        singleton = this;
+    }
+    
+	public static Session get() {
+	  return singleton;
+	}
+	    
+    public User currentUser() {
+    	return this.currentUser;
+    }
+    
+    public Group currentGroup() {
+    	return this.currentGroup;
+    }
+    
+    // sandbox (ERASE LATER)
+    
+    public void addRate(UserRate userRate) {
+        userRates.add(userRate);
+    }
+    
+    public boolean isRated(User user, Rate rate) {
+    	for (Iterator it = userRates.iterator(); it.hasNext();) {
+        	UserRate userRate = (UserRate) it.next();
+            if ((userRate.getUserId() == user.getId()) &
+                (userRate.getRateId() == rate.getId())) {
+            	return true;
+            }
+        }
+        return false;
+    }
+    
+    public float getRate(User user, Rate rate) {
+    	for (Iterator it = userRates.iterator(); it.hasNext();) {
+            UserRate userRate = (UserRate) it.next();
+            if ((userRate.getUserId() == user.getId()) &
+                (userRate.getRateId() == rate.getId())) {
+                return userRate.getRateValue();
+            }
+        }
+        throw new IllegalArgumentException("Not found");
+    }
+
+    public void setRate(User user, Rate rate, float rateValue) {
+    	for (Iterator it = userRates.iterator(); it.hasNext();) {
+            UserRate userRate = (UserRate) it.next();
+            if ((userRate.getUserId() == user.getId()) &
+                (userRate.getRateId() == rate.getId())) {
+            	userRate.setRateValue(rateValue);
+            	return;
+            }
+        }
+        throw new IllegalArgumentException("Not found");
+    }
     
 }

@@ -15,65 +15,12 @@
  * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  *
  */
- 
-Label=Etiqueta
+package org.ourproject.kune.client.model;
 
-Text=Texto
-
-Title=Título
-
-NewGroup=Nuevo Grupo
-
-Login=Entra para colaborar
-
-Processing=Procesando
-
-HelpWithTranslation=Ayuda en la traducción
-
-Home=Inicio
-
-Blogs=Blogs
-
-Forums=Foros
-
-Options=Opciones
-
-ExternalWindow=Ventana externa
-
-Chatroom=Sala de charla
-
-Cancel=Cancelar
-
-ArrowBack=< Atrás
-
-NextArrow=Siguiente >
-
-Finish=Terminar
-
-Change=Cambiar
-
-Search=Buscar
-
-Help=Ayuda
-
-GlobalSiteOptions=Opciones Globales del Sitio
-
-ContactUs=Contáctanos
-
-user=usuario
-
-users=usuarios
-
-NotRated=No puntuado
-
-Poor=Malo
-
-BelowAverage=Inferior a la media
-
-Average=Medio
-
-AboveAverage=Superior a la media
-
-Excellent=Excelente
-
-RatingSaved=Puntuación guardada
+/**
+ * @author vjrj
+ *
+ */
+public interface RateListener {
+    public abstract void onRateChange(Star[] stars, int Users);
+}

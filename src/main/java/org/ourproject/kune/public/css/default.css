@@ -298,5 +298,13 @@ a:visited {
 .drop-down-label {
 	color: #FFFFFF;
 	font-weight: bold;
-	cursor: default;
+	cursor: pointer;
+}
+
+.rateit-star {
+	cursor: pointer;
+}
+
+.rateit-star-label {
+	font-size: 85%;
 }

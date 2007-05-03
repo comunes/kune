@@ -19,44 +19,46 @@
 package org.ourproject.kune.client.model;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
-import java.util.Date;
 
-public class Model implements IsSerializable, Cloneable {
-	protected long id;
-
-	protected Date createdAt = null;
-
-	protected Date updatedAt = null;
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-
-	public Date getUpdatedAt() {
-		return updatedAt;
+public class UserRate extends Model implements IsSerializable, Cloneable {
+	private long userId;
+    private long rateId;
+    private float rateValue;
+    
+	public UserRate(long userId, long rateId, float rateValue) {
+		this.userId = userId;
+		this.rateId = rateId;
+		this.rateValue = rateValue;
 	}
 	
+	public void setUserId(long userId) {
+		this.userId = userId;
+    }
+	
+	public void setRateId(long rateId) {
+        this.rateId = rateId;
+    }
+	
+	public void setRateValue(float rateValue) {
+		this.rateValue = rateValue;
+	}
+	
+	public long getUserId() {
+        return this.userId;
+	}
+
+	public long getRateId() {
+        return this.rateId;
+	}
+
+	public float getRateValue() {
+        return this.rateValue;
+	}
+ 	
     public Object clone() {
- 	 	Model modelClone = new Model();
- 	 	modelClone.setId(this.getId());
- 	 	modelClone.setCreatedAt(this.getCreatedAt());
- 	 	modelClone.setUpdatedAt(this.getUpdatedAt());
- 	 	return modelClone;
-    }  
+ 	 	UserRate userRateClone = new UserRate(this.getUserId(), this.getRateId(), this.getRateValue());
+ 	 	return userRateClone;
+    }
+    
 }
+

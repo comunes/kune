@@ -57,4 +57,13 @@ public interface MainConstants extends Constants {
     String Help();
     String GlobalSiteOptions();
     String ContactUs();
+    String user();
+    String users();
+    String NotRated();
+    String Poor();
+    String BelowAverage();
+    String Average();
+    String AboveAverage();
+    String Excellent();
+    String RatingSaved();
 }
