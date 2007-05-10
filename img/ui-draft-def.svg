@@ -81,8 +81,8 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="743.35794"
-     inkscape:cy="923.1667"
+     inkscape:cx="995"
+     inkscape:cy="775.5"
      inkscape:document-units="px"
      inkscape:current-layer="layer5"
      inkscape:object-points="false"
@@ -92,7 +92,7 @@
      inkscape:object-bbox="false"
      inkscape:object-paths="true"
      guidetolerance="3.9"
-     showgrid="false"
+     showgrid="true"
      gridempspacing="0"
      inkscape:window-width="1379"
      inkscape:window-height="936"
@@ -102,11 +102,15 @@
      height="2104.7244px"
      inkscape:grid-bbox="false"
      inkscape:guide-bbox="true"
-     showguides="false">
+     showguides="true">
     <sodipodi:guide
        orientation="horizontal"
        position="954"
        id="guide4320" />
+    <sodipodi:guide
+       orientation="vertical"
+       position="124"
+       id="guide5141" />
   </sodipodi:namedview>
   <metadata
      id="metadata7">
@@ -127,7 +131,7 @@
     <g
        style="display:inline"
        id="g38231"
-       transform="translate(63.997049,-270.42274)"
+       transform="translate(64.094482,-270.36462)"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90">
@@ -1828,16 +1832,6 @@
        x="1138.8835"
        y="873.42926" />
     <rect
-       style="fill:#e5ff80;fill-opacity:1;fill-rule:evenodd;stroke:#ccff00;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       id="rect4361"
-       width="666"
-       height="32"
-       x="597.38354"
-       y="378.92923"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <rect
        style="fill:#e5ff80;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        id="rect4803"
        width="98.999992"
@@ -2094,17 +2088,6 @@
          id="tspan5780"
          x="283.00461"
          y="367.9039">Loading...</tspan></text>
-    <image
-       y="387.42929"
-       x="605.88354"
-       id="image5797"
-       height="16"
-       width="16"
-       sodipodi:absref="/usr/share/icons/Tango/16x16/emblems/emblem-important.png"
-       xlink:href="/usr/share/icons/Tango/16x16/emblems/emblem-important.png"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
     <g
        id="g14108"
        transform="translate(-38,0)">
@@ -2148,39 +2131,13 @@
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
-    <g
-       style="display:inline"
-       id="g5861"
-       transform="matrix(0.9495891,0,0,0.9170511,122.43664,176.16398)"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
-      <rect
-         width="233.00232"
-         height="59.003399"
-         x="144.74353"
-         y="216.07983"
-         style="color:#000000;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.00275588;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
-         id="rect5863" />
-      <path
-         d="M 166.28546,266.9574 L 187.28463,245.89918 L 149.97822,229.48358 L 157.71559,258.19849 L 190.58512,234.098 L 161.84859,226.4413 L 166.28546,266.9574 z "
-         style="fill:#3c985b;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         id="path5865"
-         inkscape:export-filename="/home/vjrj/Desktop/sandbox/fooicon.png"
-         inkscape:export-xdpi="35.461952"
-         inkscape:export-ydpi="35.461952" />
-      <text
-         x="270.34338"
-         y="189.01137"
-         transform="scale(0.726513,1.3764379)"
-         style="font-size:37.85137939px;font-style:oblique;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#a3bfdd;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline;font-family:Bitstream Vera Sans"
-         id="text5867"
-         xml:space="preserve"
-         sodipodi:linespacing="125%"><tspan
-           x="270.34338"
-           y="189.01137"
-           id="tspan5869">Foo organization</tspan></text>
-    </g>
+    <rect
+       id="rect5863"
+       style="color:#000000;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.00275588;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       y="374.32022"
+       x="259.88351"
+       height="54.109131"
+       width="221.25647" />
     <text
        id="text5871"
        x="271.4371"
@@ -2507,10 +2464,10 @@
     <rect
        style="color:#000000;fill:#ccffaa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
        id="rect5953"
-       width="130"
+       width="131"
        height="466.00018"
-       x="993.88354"
-       y="478.42911"
+       x="995"
+       y="478.18896"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
@@ -3951,10 +3908,10 @@
     <rect
        style="opacity:1;color:#000000;fill:#cdde87;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect7524"
-       width="3"
+       width="4"
        height="466"
-       x="990.88354"
-       y="478.42929"
+       x="991"
+       y="478.18896"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
@@ -3963,14 +3920,14 @@
        id="rect7526"
        width="1"
        height="1"
-       x="991.88354"
-       y="711.42926"
+       x="993"
+       y="711.18896"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect
-       y="-708.42926"
-       x="991.88354"
+       y="-708.18896"
+       x="993"
        height="1"
        width="1"
        id="rect7528"
@@ -3984,8 +3941,8 @@
        id="rect7530"
        width="1"
        height="1"
-       x="991.88354"
-       y="715.42926"
+       x="993"
+       y="715.18896"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
@@ -4500,20 +4457,45 @@
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
-    <text
-       xml:space="preserve"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;color:#000000;fill:#225500;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial"
-       x="632.88354"
-       y="398.42929"
-       id="text11896"
-       sodipodi:linespacing="125%"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"><tspan
-         sodipodi:role="line"
-         id="tspan11898"
+    <g
+       id="g5110"
+       transform="translate(0,-2)">
+      <rect
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+         y="378.92923"
+         x="597.38354"
+         height="32"
+         width="666"
+         id="rect4361"
+         style="fill:#e5ff80;fill-opacity:1;fill-rule:evenodd;stroke:#ccff00;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <image
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+         xlink:href="/usr/share/icons/Tango/16x16/emblems/emblem-important.png"
+         sodipodi:absref="/usr/share/icons/Tango/16x16/emblems/emblem-important.png"
+         width="16"
+         height="16"
+         id="image5797"
+         x="605.88354"
+         y="387.42929" />
+      <text
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+         sodipodi:linespacing="125%"
+         id="text11896"
+         y="398.42929"
          x="632.88354"
-         y="398.42929">Document automatically saved</tspan></text>
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;color:#000000;fill:#225500;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial"
+         xml:space="preserve"><tspan
+           y="398.42929"
+           x="632.88354"
+           id="tspan11898"
+           sodipodi:role="line">Document automatically saved</tspan></text>
+    </g>
     <image
        style="display:inline"
        y="481.42929"
@@ -4763,7 +4745,7 @@
          y="898.42902"
          x="1154.8835"
          id="tspan12108"
-         sodipodi:role="line">Calendar</tspan>
+         sodipodi:role="line">Agenda</tspan>
     </text>
     <path
        inkscape:export-ydpi="90"
@@ -4946,7 +4928,7 @@
        width="16"
        sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/add.png"
        xlink:href="icons/add.png"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.10.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <text
@@ -5024,7 +5006,7 @@
     </g>
     <g
        id="g16561"
-       transform="translate(-914.11652,-943.75662)"
+       transform="translate(-890.00006,-930)"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90">
@@ -5486,14 +5468,14 @@
        id="rect16674"
        width="1"
        height="1"
-       x="991.88354"
-       y="-704.42926"
+       x="993"
+       y="-704.18896"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect
-       y="-700.42926"
-       x="991.88354"
+       y="-700.18896"
+       x="993"
        height="1"
        width="1"
        id="rect16676"
@@ -5503,8 +5485,8 @@
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect
-       y="-699.42926"
-       x="991.88354"
+       y="-699.18896"
+       x="993"
        height="1"
        width="1"
        id="rect16678"
@@ -5519,14 +5501,14 @@
        id="rect16680"
        width="1"
        height="1"
-       x="991.88354"
-       y="-703.42926"
+       x="992"
+       y="-703.18896"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect
-       y="-707.42926"
-       x="991.88354"
+       y="-707.18896"
+       x="992"
        height="1"
        width="1"
        id="rect16682"
@@ -5541,36 +5523,36 @@
        id="rect16684"
        width="1"
        height="1"
-       x="991.88354"
-       y="-711.42926"
+       x="992"
+       y="-711.18896"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect
-       y="-711.42926"
-       x="991.88354"
+       y="-711.18896"
+       x="993"
        height="1"
        width="1"
        id="rect16686"
        style="opacity:1;color:#000000;fill:#2d5016;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       transform="scale(1,-1)"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
        inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
     <rect
        transform="scale(1,-1)"
        style="opacity:1;color:#000000;fill:#2d5016;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect16689"
        width="1"
        height="1"
-       x="991.88354"
-       y="-715.42926"
+       x="992"
+       y="-715.18896"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect
-       y="727.42926"
-       x="991.88354"
+       y="727.18896"
+       x="993"
        height="1"
        width="1"
        id="rect16691"
@@ -5584,14 +5566,14 @@
        id="rect16693"
        width="1"
        height="1"
-       x="991.88354"
-       y="-724.42926"
+       x="993"
+       y="-724.18896"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect
-       y="731.42926"
-       x="991.88354"
+       y="731.18896"
+       x="993"
        height="1"
        width="1"
        id="rect16695"
@@ -5600,8 +5582,8 @@
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect
-       y="-720.42926"
-       x="991.88354"
+       y="-720.18896"
+       x="993"
        height="1"
        width="1"
        id="rect16697"
@@ -5611,8 +5593,8 @@
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect
-       y="-719.42926"
-       x="991.88354"
+       y="-719.18896"
+       x="992"
        height="1"
        width="1"
        id="rect16699"
@@ -5627,8 +5609,8 @@
        id="rect16701"
        width="1"
        height="1"
-       x="991.88354"
-       y="-723.42926"
+       x="992"
+       y="-723.18896"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
@@ -5638,14 +5620,14 @@
        id="rect16703"
        width="1"
        height="1"
-       x="991.88354"
-       y="-727.42926"
+       x="992"
+       y="-727.18896"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect
-       y="-731.42926"
-       x="991.88354"
+       y="-731.18896"
+       x="992"
        height="1"
        width="1"
        id="rect16705"
@@ -5660,8 +5642,8 @@
        id="rect16707"
        width="1"
        height="1"
-       x="991.88354"
-       y="-695.42926"
+       x="992"
+       y="-695.18896"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
@@ -5671,8 +5653,8 @@
        id="rect16709"
        width="1"
        height="1"
-       x="991.88354"
-       y="-696.42926"
+       x="993"
+       y="-696.18896"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
@@ -6062,5 +6044,251 @@
         </g>
       </g>
     </g>
+    <text
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#cccccc;fill-opacity:1;stroke:none;stroke-opacity:1;font-family:Arial"
+       x="483.97205"
+       y="418.72049"
+       id="text3157"><tspan
+         sodipodi:role="line"
+         id="tspan3159"
+         x="483.97205"
+         y="418.72049">put the group logo here</tspan></text>
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#f2f2f2;stroke-opacity:1"
+       id="rect4134"
+       width="327"
+       height="49"
+       x="265"
+       y="376.18896" />
+    <text
+       id="text5116"
+       y="405.5159"
+       x="267.74957"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000080;fill-opacity:1;stroke:none;stroke-opacity:1;display:inline;font-family:Arial"
+       xml:space="preserve"><tspan
+         y="405.5159"
+         x="267.74957"
+         id="tspan5118"
+         sodipodi:role="line">Foo Organization</tspan></text>
+    <rect
+       style="color:#000000;fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect5123"
+       width="102.49883"
+       height="1"
+       x="484.39883"
+       y="420.987"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       y="-712.18896"
+       x="992"
+       height="1"
+       width="1"
+       id="rect5143"
+       style="opacity:1;color:#000000;fill:#2d5016;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       y="-716.18896"
+       x="992"
+       height="1"
+       width="1"
+       id="rect5145"
+       style="opacity:1;color:#000000;fill:#2d5016;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       y="-715.18896"
+       x="993"
+       height="1"
+       width="1"
+       id="rect5147"
+       style="opacity:1;color:#000000;fill:#2d5016;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       y="-719.18896"
+       x="993"
+       height="1"
+       width="1"
+       id="rect5149"
+       style="opacity:1;color:#000000;fill:#2d5016;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       y="-720.18896"
+       x="992"
+       height="1"
+       width="1"
+       id="rect5151"
+       style="opacity:1;color:#000000;fill:#2d5016;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       y="-723.18896"
+       x="993"
+       height="1"
+       width="1"
+       id="rect5153"
+       style="opacity:1;color:#000000;fill:#2d5016;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       y="-724.18896"
+       x="992"
+       height="1"
+       width="1"
+       id="rect5155"
+       style="opacity:1;color:#000000;fill:#2d5016;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       y="-727.18896"
+       x="993"
+       height="1"
+       width="1"
+       id="rect5157"
+       style="opacity:1;color:#000000;fill:#2d5016;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       y="-731.18896"
+       x="993"
+       height="1"
+       width="1"
+       id="rect5159"
+       style="opacity:1;color:#000000;fill:#2d5016;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       y="-732.18896"
+       x="992"
+       height="1"
+       width="1"
+       id="rect5161"
+       style="opacity:1;color:#000000;fill:#2d5016;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       y="-728.18896"
+       x="992"
+       height="1"
+       width="1"
+       id="rect5163"
+       style="opacity:1;color:#000000;fill:#2d5016;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       transform="scale(1,-1)"
+       style="opacity:1;color:#000000;fill:#2d5016;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect5165"
+       width="1"
+       height="1"
+       x="992"
+       y="-704.18896"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       transform="scale(1,-1)"
+       style="opacity:1;color:#000000;fill:#2d5016;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect5167"
+       width="1"
+       height="1"
+       x="993"
+       y="-703.18896"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       transform="scale(1,-1)"
+       style="opacity:1;color:#000000;fill:#2d5016;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect5169"
+       width="1"
+       height="1"
+       x="993"
+       y="-707.18896"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       transform="scale(1,-1)"
+       style="opacity:1;color:#000000;fill:#2d5016;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect5171"
+       width="1"
+       height="1"
+       x="992"
+       y="-708.18896"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       transform="scale(1,-1)"
+       style="opacity:1;color:#000000;fill:#2d5016;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect5173"
+       width="1"
+       height="1"
+       x="992"
+       y="-696.18896"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       transform="scale(1,-1)"
+       style="opacity:1;color:#000000;fill:#2d5016;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect5175"
+       width="1"
+       height="1"
+       x="993"
+       y="-695.18896"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       y="-699.18896"
+       x="992"
+       height="1"
+       width="1"
+       id="rect5177"
+       style="opacity:1;color:#000000;fill:#2d5016;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       transform="scale(1,-1)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       y="-700.18896"
+       x="992"
+       height="1"
+       width="1"
+       id="rect5179"
+       style="opacity:1;color:#000000;fill:#2d5016;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       transform="scale(1,-1)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
   </g>
 </svg>
