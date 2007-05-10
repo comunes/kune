@@ -66,4 +66,6 @@ public interface MainConstants extends Constants {
     String AboveAverage();
     String Excellent();
     String RatingSaved();
+    String PutYourLogoHere();
+    
 }

@@ -15,13 +15,30 @@
  * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  *
  */
-package org.ourproject.kune.client.ui;
+
+package org.ourproject.kune.client.ui.chat;
+
+import java.util.Vector;
+
 
 import com.google.gwt.user.client.ui.HTML;
 
-final class KuneHR extends HTML {
+public interface ChatroomView {
+	void addUser(ChatroomUser user);
 	
-	public KuneHR() {
-        this.setHTML("<hr noshadow size='1'>");
-	}
+	void addTimeDelimiter();
+
+	void addToConversation(ChatroomUser user, HTML chat);
+	
+	void clearConversation();
+
+	void delUser(ChatroomUser user);
+
+	void permitSubjectChange(boolean permit);
+
+	void setSubject(String chatroomSubject);
+
+	void setUsers(Vector userList);
+	
+	void showActivityInTitle(boolean activity);
 }

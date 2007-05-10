@@ -105,6 +105,7 @@ public class RoundedPanel extends ComplexPanel {
 	private Element div1b; // margin 1 bottom line
 	private Element div2b; // margin 2 bottom line
 	private final static String RPSTYLE = "rp";
+	private Widget widget = null;
 
 	/**
 	 * <p>Creates a new <code>RoundedPanel</code> with custom rounded corners on
@@ -240,7 +241,8 @@ public class RoundedPanel extends ComplexPanel {
 	 * @param w widget to apply the rounded corners to.
 	 */
 	public void add(Widget w) {
-		super.add(w, divElement);
+		this.widget = w;
+		super.add(this.widget, divElement);
 	}
 	
     public void setColor(String color) {
@@ -250,4 +252,8 @@ public class RoundedPanel extends ComplexPanel {
     	if(null != div2b) DOM.setStyleAttribute(div2b, "backgroundColor", color);
     	if(null != divElement) DOM.setStyleAttribute(divElement, "backgroundColor", color);
     }
+    
+	public Widget getWidget() {
+		return this.widget;
+	}
 }

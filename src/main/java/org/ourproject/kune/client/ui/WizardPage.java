@@ -40,11 +40,11 @@ public class WizardPage extends Composite {
 
 	private Label titleLabel = null;
 
-	private KuneHR hr1 = null;
+	private HorizontalLine hr1 = null;
 
 	private VerticalPanel southVP = null;
 
-	private KuneHR hr2 = null;
+	private HorizontalLine hr2 = null;
 
 	private HorizontalPanel buttonsHP = null;
 
@@ -95,10 +95,10 @@ public class WizardPage extends Composite {
 		kWizardDP = new DockPanel();
 		northVP = new VerticalPanel();
 		titleLabel = new Label();
-		hr1 = new KuneHR(); 
+		hr1 = new HorizontalLine(); 
     	//centerContentVP.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		southVP = new VerticalPanel();
-		hr2 = new KuneHR();
+		hr2 = new HorizontalLine();
 		buttonsHP = new HorizontalPanel();
 		buttonsHP.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
 		buttonsSpaceExpandHtml = new HTML();

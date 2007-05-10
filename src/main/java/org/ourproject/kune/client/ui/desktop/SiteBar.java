@@ -16,10 +16,12 @@
  *
  */
 
-package org.ourproject.kune.client.ui;
+package org.ourproject.kune.client.ui.desktop;
 
 import org.ourproject.kune.client.Trans;
 import org.ourproject.kune.client.model.User;
+import org.ourproject.kune.client.ui.SimpleRoundedPanel;
+import org.ourproject.kune.client.ui.SiteBarView;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Window;

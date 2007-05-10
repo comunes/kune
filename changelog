@@ -15,6 +15,9 @@ kune (0.0.1)
 	* rollover images widget (on mouse over)
 	* drow-down-panel improve
 	* New Rate Widget
+	* upgrade to gwt-1.4-snapshot
+	* Desktop refactor
+	* new SiteMessageDialog class
 	
 	-- Vicente J. Ruiz Jurado <vjrj@ourproject.org> Fri, 20 Apr 20 13:09:27 BRT 2007
 

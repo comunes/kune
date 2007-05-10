@@ -15,30 +15,14 @@
  * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  *
  */
+package org.ourproject.kune.client.ui.desktop;
 
-package org.ourproject.kune.client;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 
-import org.ourproject.kune.client.model.User;
+/**
+ * @author Vicente J. Ruiz Jurado
+ *
+ */
+public class ContextTitle extends HorizontalPanel {
 
-
-public class ChatroomUser extends User {
-	
-	private boolean isModerator;
-    
-    public ChatroomUser(String nickName, boolean isModerator) {
-        super(nickName);
-    	this.isModerator = isModerator;
-    }
-
-    public ChatroomUser(String nickName) {
-    	this(nickName, false);
-    }
-    
-    public boolean getIsModerator() {
-    	return isModerator;
-    }
-        
-    public void setIsModerator(boolean isModerator) {
-    	this.isModerator = isModerator;
-    }
 }

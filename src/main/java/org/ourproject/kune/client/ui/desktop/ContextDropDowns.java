@@ -15,29 +15,30 @@
  * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  *
  */
-package org.ourproject.kune.client.ui;
+package org.ourproject.kune.client.ui.desktop;
 
-import org.gwm.client.impl.DefaultGInternalFrame;
-//import org.gwm.client.event.GFrameListener;
+import org.ourproject.kune.client.ui.DropDownPanel;
 
-public class KuneFrame extends DefaultGInternalFrame {
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 
-	public KuneFrame() {
-		this.setTheme("alphacubecustom");
-        //setOutlineDragMode(false);
+/**
+ * @author Vicente J. Ruiz Jurado
+ *
+ */
+public class ContextDropDowns extends VerticalPanel {
+	public ContextDropDowns() {
+		super();
+		this.setWidth("100%");
 	}
-	
-	public KuneFrame(String caption) {
-		this();
-		this.setCaption(caption);
-	}
-	
-	public void setFrame(boolean minimizable, boolean maximizable, boolean closable,
-			boolean draggable, boolean resizable) {
-		this.setMinimizable(minimizable);
-        this.setMaximizable(maximizable);
-        this.setClosable(closable);
-        this.setDraggable(draggable);
-        this.setResizable(resizable);
+
+	public void addDropDown(String title, Widget widget, boolean visible, String color) {
+		DropDownPanel d = new DropDownPanel();
+		d.setWidth("100%");
+		d.setContent(widget);
+		d.setContentVisible(visible);
+        d.setTitle(title);
+        d.setColor(color);
+        this.add(d);
 	}
 }

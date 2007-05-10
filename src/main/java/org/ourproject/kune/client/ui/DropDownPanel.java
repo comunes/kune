@@ -84,7 +84,6 @@ public class DropDownPanel extends Composite implements ClickListener {
 	}
 
 	protected void setProperties() {
-		
 		outerRP.setCornerStyleName("drop-down-outer");
 
 		dropDownPanelVP.setBorderWidth(0);
@@ -106,6 +105,7 @@ public class DropDownPanel extends Composite implements ClickListener {
 
 		contentDeckP.addStyleName("drop-down-inner");
 		contentDeckP.setStyleName("drop-down-inner");
+		//contentDeckP.setWidth("100%");
 	}
 
     public boolean contentEmpty() {

@@ -15,31 +15,12 @@
  * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  *
  */
+package org.ourproject.kune.client.ui.desktop;
 
-package org.ourproject.kune.client.ui;
+/**
+ * @author Vicente J. Ruiz Jurado
+ *
+ */
+public class ContextContents {
 
-import java.util.Vector;
-
-import org.ourproject.kune.client.ChatroomUser;
-
-import com.google.gwt.user.client.ui.HTML;
-
-public interface ChatroomView {
-	void addUser(ChatroomUser user);
-	
-	void addTimeDelimiter();
-
-	void addToConversation(ChatroomUser user, HTML chat);
-	
-	void clearConversation();
-
-	void delUser(ChatroomUser user);
-
-	void permitSubjectChange(boolean permit);
-
-	void setSubject(String chatroomSubject);
-
-	void setUsers(Vector userList);
-	
-	void showActivityInTitle(boolean activity);
 }

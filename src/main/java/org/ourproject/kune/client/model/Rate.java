@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.ourproject.kune.client.Session;
+import org.ourproject.kune.client.ui.desktop.SiteMessageDialog;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
@@ -60,6 +61,8 @@ public class Rate extends Model implements IsSerializable, Cloneable,
 		rate = normalizeRate(rate);
 		this.rate = ((this.rate * this.byUsers) + rate) / (++this.byUsers);
 		this.fireRateListeners(genStars(this.rate), this.byUsers);
+		// TODO: i18n 
+		SiteMessageDialog.get().setMessageInfo("Rate saved");
 	}
 
 	public void addRateItListener(RateItListener listener) {
@@ -75,6 +78,7 @@ public class Rate extends Model implements IsSerializable, Cloneable,
 		oldRate = normalizeRate(oldRate);
 		this.rate = this.rate + (newRate - oldRate) / byUsers;
 		this.fireRateListeners(genStars(this.rate), this.byUsers);
+		SiteMessageDialog.get().setMessageInfo("Rate saved");
 	}
 
 	public Object clone() {

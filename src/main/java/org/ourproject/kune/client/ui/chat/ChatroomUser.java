@@ -15,67 +15,30 @@
  * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  *
  */
- 
-Label=Etiqueta
 
-Text=Texto
+package org.ourproject.kune.client.ui.chat;
 
-Title=Título
+import org.ourproject.kune.client.model.User;
 
-NewGroup=Nuevo Grupo
 
-Login=Entra para colaborar
+public class ChatroomUser extends User {
+	
+	private boolean isModerator;
+    
+    public ChatroomUser(String nickName, boolean isModerator) {
+        super(nickName);
+    	this.isModerator = isModerator;
+    }
 
-Processing=Procesando
-
-HelpWithTranslation=Ayuda en la traducción
-
-Home=Inicio
-
-Blogs=Blogs
-
-Forums=Foros
-
-Options=Opciones
-
-ExternalWindow=Ventana externa
-
-Chatroom=Sala de charla
-
-Cancel=Cancelar
-
-ArrowBack=< Atrás
-
-NextArrow=Siguiente >
-
-Finish=Terminar
-
-Change=Cambiar
-
-Search=Buscar
-
-Help=Ayuda
-
-GlobalSiteOptions=Opciones Globales del Sitio
-
-ContactUs=Contáctanos
-
-user=usuario
-
-users=usuarios
-
-NotRated=No puntuado
-
-Poor=Malo
-
-BelowAverage=Inferior a la media
-
-Average=Medio
-
-AboveAverage=Superior a la media
-
-Excellent=Excelente
-
-RatingSaved=Puntuación guardada
-
-PutYourLogoHere=Pon vuestro logo aquí
+    public ChatroomUser(String nickName) {
+    	this(nickName, false);
+    }
+    
+    public boolean getIsModerator() {
+    	return isModerator;
+    }
+        
+    public void setIsModerator(boolean isModerator) {
+    	this.isModerator = isModerator;
+    }
+}

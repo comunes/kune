@@ -15,67 +15,45 @@
  * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  *
  */
- 
-Label=Etiqueta
+package org.ourproject.kune.client.ui.desktop;
 
-Text=Texto
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 
-Title=Título
-
-NewGroup=Nuevo Grupo
-
-Login=Entra para colaborar
-
-Processing=Procesando
-
-HelpWithTranslation=Ayuda en la traducción
-
-Home=Inicio
-
-Blogs=Blogs
-
-Forums=Foros
-
-Options=Opciones
-
-ExternalWindow=Ventana externa
-
-Chatroom=Sala de charla
-
-Cancel=Cancelar
-
-ArrowBack=< Atrás
-
-NextArrow=Siguiente >
-
-Finish=Terminar
-
-Change=Cambiar
-
-Search=Buscar
-
-Help=Ayuda
-
-GlobalSiteOptions=Opciones Globales del Sitio
-
-ContactUs=Contáctanos
-
-user=usuario
-
-users=usuarios
-
-NotRated=No puntuado
-
-Poor=Malo
-
-BelowAverage=Inferior a la media
-
-Average=Medio
-
-AboveAverage=Superior a la media
-
-Excellent=Excelente
-
-RatingSaved=Puntuación guardada
-
-PutYourLogoHere=Pon vuestro logo aquí
+/**
+ * @author Vicente J. Ruiz Jurado
+ *
+ */
+public class ContextNavBar extends VerticalPanel {
+	public ContextNavBar() {
+		super();
+		initialize();
+		layout();
+		setProperties();
+	}
+	
+	private void initialize() {
+		
+	}
+	
+	private void layout() {
+		
+	}
+	
+	private void setProperties() {
+        this.setWidth("100%");
+        this.setHeight("100%");
+        this.setBorderWidth(0);
+        this.setSpacing(0);
+        this.addStyleName("context-navbar");
+        this.setStyleName("context-navbar");
+	}
+	
+	public void add(Widget widget) {
+		super.add(widget);
+	}
+	
+	public void clear() {
+		this.clear();
+	}
+}
