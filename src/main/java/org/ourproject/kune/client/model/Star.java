@@ -17,45 +17,45 @@
  */
 package org.ourproject.kune.client.model;
 
+import org.ourproject.kune.client.Img;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
+
 /**
  * @author vjrj
  *
  */
 public class Star {
-    public final static String YELLOW = "images/star-yellow.png";
-    public final static String GREY = "images/star-grey.png";
-    public final static String SMALL_YELLOW = "images/star-small-yellow.png";
-    public final static String VSMALL_YELLOW = "images/star-vsmall-yellow.png";
-    public final static String STAR_PERC = "images/star-";
-    public final static Star[] CLEAR = {new Star("images/star-grey.png"), 
-    	new Star("images/star-grey.png"), new Star("images/star-grey.png"),
-    	new Star("images/star-grey.png"), new Star("images/star-grey.png")};
+    public static final int GREY = 0;
+    public static final int YELLOW = 1;
     
-    private String url;
+    public final static Star[] CLEAR = {new Star(), new Star(), new Star(), new Star(), new Star()};
+    
+    // private Image image;
+    private AbstractImagePrototype image;
     
     public Star() {
-    	this.url = Star.GREY;
+    	image = Img.ref().starGrey();
     }
     
-    public Star(String url) {
-    	this.setUrl(url);
-    }
-    
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getUrl() {
-    	return this.url;
+    public AbstractImagePrototype  getImg() {
+    	return image;
     }
     
     public Star(float rate) {
-    	if (rate == 1) this.url = Star.YELLOW;
-    	else if (rate == 0) this.url = Star.GREY;
+    	if (rate == 1) image = Img.ref().starYellow();
+    	else if (rate == 0) image = Img.ref().starGrey();
     	else {
             int rateTrucated = (int) rate;
             int rateDecimal = ((int) ((rate - rateTrucated) * 10)) * 10;
-            setUrl(Star.STAR_PERC + rateDecimal + ".png");
+            if (rateDecimal == 10) image = Img.ref().star10();
+            else if (rateDecimal == 20) image = Img.ref().star20();
+            else if (rateDecimal == 30) image = Img.ref().star30();
+            else if (rateDecimal == 40) image = Img.ref().star40();
+            else if (rateDecimal == 50) image = Img.ref().star50();
+            else if (rateDecimal == 60) image = Img.ref().star60();
+            else if (rateDecimal == 70) image = Img.ref().star70();
+            else if (rateDecimal == 80) image = Img.ref().star80();
+            else if (rateDecimal == 90) image = Img.ref().star90();
         }
     }
 }

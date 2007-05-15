@@ -18,20 +18,21 @@
 
 package org.ourproject.kune.client;
 
-import org.gwm.client.GDesktopPane;
-import org.gwm.client.event.GFrameAdapter;
-import org.gwm.client.event.GFrameEvent;
-import org.gwm.client.impl.DefaultGDesktopPane;
-import org.gwm.client.util.Gwm;
-import org.gwm.client.util.GwmUtilities;
+//import org.gwm.client.GDesktopPane;
+//import org.gwm.client.event.GFrameAdapter;
+//import org.gwm.client.event.GFrameEvent;
+//import org.gwm.client.impl.DefaultGDesktopPane;
+//import org.gwm.client.util.Gwm;
+//import org.gwm.client.util.GwmUtilities;
+
 import org.ourproject.kune.client.model.Rate;
 import org.ourproject.kune.client.model.User;
-import org.ourproject.kune.client.ui.KuneDefaultFrame;
+//import org.ourproject.kune.client.ui.KuneDefaultFrame;
 import org.ourproject.kune.client.ui.RateItDialog;
 import org.ourproject.kune.client.ui.RateDialog;
-import org.ourproject.kune.client.ui.Wizard;
-import org.ourproject.kune.client.ui.chat.ChatroomDialog;
-import org.ourproject.kune.client.ui.chat.ChatroomUser;
+//import org.ourproject.kune.client.ui.Wizard;
+//import org.ourproject.kune.client.ui.chat.ChatroomDialog;
+//import org.ourproject.kune.client.ui.chat.ChatroomUser;
 import org.ourproject.kune.client.ui.desktop.KuneDesktop;
 import org.ourproject.kune.client.ui.desktop.SiteMessageDialog;
 
@@ -44,9 +45,10 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
+//import com.google.gwt.user.client.ui.Widget;
 
 public class Main extends AbsolutePanel implements EntryPoint,
 		WindowResizeListener {
@@ -59,9 +61,9 @@ public class Main extends AbsolutePanel implements EntryPoint,
 
 	// Sandbox variables
 	
-	private ChatroomDialog chatroom1 = null;
-
-	private GDesktopPane desktop;
+//	private ChatroomDialog chatroom1 = null;
+//
+//	private GDesktopPane desktop;
 	
 	public Main() {
 		super();
@@ -72,7 +74,7 @@ public class Main extends AbsolutePanel implements EntryPoint,
 	}
 
 	protected void initialize() {
-		desktop = new DefaultGDesktopPane();
+//		desktop = new DefaultGDesktopPane();
         generalVP = new VerticalPanel();
         kuneDesktopPanel = new KuneDesktop();
         siteMessage = new SiteMessageDialog();
@@ -80,9 +82,11 @@ public class Main extends AbsolutePanel implements EntryPoint,
 
 	protected void layout() {
 		generalVP.add(kuneDesktopPanel);
-		add((Widget) desktop, 0, 0);
-		desktop.setWidgetLocation(generalVP, 0, 0);
-		desktop.setWidgetLocation(siteMessage, Window.getClientWidth() * 40 / 100, 23);
+		add(generalVP, 0, 0);
+		add(siteMessage, Window.getClientWidth() * 40 / 100, 23);
+//		add((Widget) desktop, 0, 0);
+//		desktop.setWidgetLocation(generalVP, 0, 0);
+//		desktop.setWidgetLocation(siteMessage, Window.getClientWidth() * 40 / 100, 23);
 	}
 
 	public void onModuleLoad() {
@@ -94,12 +98,13 @@ public class Main extends AbsolutePanel implements EntryPoint,
 	public void onWindowResized(int width, int height) {
 		kuneDesktopPanel.contextContents.adjustSize(width, height);
 		siteMessage.adjustWidth(width);
-		desktop.setWidgetLocation(siteMessage, Window.getClientWidth() * 40 / 100, 23);
+		setWidgetPosition(siteMessage, Window.getClientWidth() * 40 / 100, 23);
+//		desktop.setWidgetLocation(siteMessage, Window.getClientWidth() * 40 / 100, 23);
 	}
 
 	protected void setProperties() {
-		Gwm.setOverlayLayerDisplayOnDragAction(false);
-		desktop.setTheme("alphacubecustom");
+//		Gwm.setOverlayLayerDisplayOnDragAction(false);
+//		desktop.setTheme("alphacubecustom");
 
 		generalVP.setBorderWidth(0);
 		generalVP.setSpacing(0);
@@ -141,84 +146,93 @@ public class Main extends AbsolutePanel implements EntryPoint,
 		Session session = new Session();
 		session.currentUser = user;
 			
-        KuneDefaultFrame chatroomFrame = new KuneDefaultFrame(); 
+//        KuneDefaultFrame chatroomFrame = new KuneDefaultFrame(); 
+//        
+//		chatroom1 = new ChatroomDialog();
+//        chatroom1.setSubject("Welcome to sometopic-foorganization chat room");
+//        ChatroomUser luthorb = new ChatroomUser("luthor.b", true);
+//        ChatroomUser anneh = new ChatroomUser("anne.h", false);
+//        ChatroomUser anneh1 = new ChatroomUser("anne.h1", false);
+//        ChatroomUser anneh2 = new ChatroomUser("anne.h2", false);
+//        ChatroomUser anneh3 = new ChatroomUser("anne.h3", false);
+//        ChatroomUser anneh4 = new ChatroomUser("anne.h4", false);
+//        ChatroomUser anneh5 = new ChatroomUser("anne.h5", false);
+//        ChatroomUser anneh6 = new ChatroomUser("anne.h6", false);
+//        ChatroomUser anneh7 = new ChatroomUser("anne.h7", false);
+//        ChatroomUser anneh8 = new ChatroomUser("anne.h8", false);
+//        ChatroomUser anneh9 = new ChatroomUser("anne.h9", false);
+//        ChatroomUser anneh10 = new ChatroomUser("anne.h10", false);
+//        ChatroomUser anneh11 = new ChatroomUser("anne.h11", false);
+//        ChatroomUser anneh12 = new ChatroomUser("anne.h12", false);
+//        ChatroomUser anneh13 = new ChatroomUser("anne.h13", false);
+//        ChatroomUser anneh14 = new ChatroomUser("anne.h14", false);
+//        chatroom1.addUser(luthorb);
+//        chatroom1.addUser(anneh);
+//        chatroom1.addUser(anneh1);
+//        chatroom1.addUser(anneh2);
+//        chatroom1.addUser(anneh3);
+//        chatroom1.addUser(anneh4);
+//        chatroom1.addUser(anneh5);
+//        chatroom1.addUser(anneh6);
+//        chatroom1.addUser(anneh7);
+//        chatroom1.addUser(anneh8);
+//        chatroom1.addUser(anneh9);
+//        chatroom1.addUser(anneh10);
+//        chatroom1.addUser(anneh11);
+//        chatroom1.addUser(anneh12);
+//        chatroom1.addUser(anneh13);
+//        chatroom1.addUser(anneh14);
+//        chatroom1.addToConversation(luthorb, new HTML("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui."));
+//        chatroom1.addToConversation(anneh, new HTML("Lorem ipsum dolor sit amet?"));
+//        chatroom1.addToConversation(luthorb, new HTML("yes, lorem ipsum dolor sit amet"));
+//        chatroom1.addTimeDelimiter();
+//        chatroom1.addToConversation(luthorb, new HTML("Lorem ipsum dolor sit amet"));
+//        chatroom1.addToConversation(anneh, new HTML("Lorem ipsum dolor sit amet?"));
+//        chatroom1.addToConversation(anneh, new HTML("Lorem ipsum dolor sit amet?"));
+//        chatroom1.addToConversation(anneh, new HTML("Lorem ipsum dolor sit amet?"));
+//        chatroom1.addToConversation(anneh, new HTML("Lorem ipsum dolor sit amet?"));
+//        chatroom1.addToConversation(luthorb, new HTML("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui."));
+//        chatroom1.addToConversation(anneh, new HTML("Lorem ipsum dolor sit amet?"));
+//        
+//        chatroomFrame.setCaption(Trans.constants().Chatroom() + " " + "sometopic-foorganization@kune.ourproject.org");
+//		chatroomFrame.setFrame(true, false, true, true, true);
+//        chatroomFrame.setSize(500,250);
+//        chatroomFrame.setContent(chatroom1);
+//        desktop.addFrame(chatroomFrame);
+//        chatroomFrame.setVisible(true);
+//        //chatroomFrame.setTitleIcon(new Image("images/chat.png"));
+//        GwmUtilities.diplayAtScreenCenter(chatroomFrame);
+//        chatroomFrame.setLocation(100, 100);
+//        
+//		//LoginPanel loginPanel = new LoginPanel();
+//		//public LoginDialogBox(final LoginPanel.LoginListener loginListener) {
+//
+//        final Wizard wizard = new Wizard();
+//        wizard.add("New Project", (Widget) new HTML("Create here a project"), false, true, true, false);
+//        wizard.add("New Project", (Widget) new HTML("bla, bla, bla"), true, true, true, false);
+//        wizard.add("New Project", (Widget) new HTML("End"), true, true, true, true);
+//        
+//        final KuneDefaultFrame wizardFrame = new KuneDefaultFrame("Wizard example");
+//        wizardFrame.setFrame(true, true, false, true, true);
+//        wizardFrame.setContent(wizard);
+//        //desktop.addFrame(wizardFrame);
+//        //wizardFrame.setVisible(true);
+//        //GwmUtilities.diplayAtScreenCenter(wizardFrame);
+//        wizardFrame.addFrameListener(new GFrameAdapter() {   	
+//               public void frameResized(GFrameEvent evt) {
+//            	   wizard.setSize(wizardFrame.getWidth(), wizardFrame.getHeight());
+//            	   }
+//        });
         
-		chatroom1 = new ChatroomDialog();
-        chatroom1.setSubject("Welcome to sometopic-foorganization chat room");
-        ChatroomUser luthorb = new ChatroomUser("luthor.b", true);
-        ChatroomUser anneh = new ChatroomUser("anne.h", false);
-        ChatroomUser anneh1 = new ChatroomUser("anne.h1", false);
-        ChatroomUser anneh2 = new ChatroomUser("anne.h2", false);
-        ChatroomUser anneh3 = new ChatroomUser("anne.h3", false);
-        ChatroomUser anneh4 = new ChatroomUser("anne.h4", false);
-        ChatroomUser anneh5 = new ChatroomUser("anne.h5", false);
-        ChatroomUser anneh6 = new ChatroomUser("anne.h6", false);
-        ChatroomUser anneh7 = new ChatroomUser("anne.h7", false);
-        ChatroomUser anneh8 = new ChatroomUser("anne.h8", false);
-        ChatroomUser anneh9 = new ChatroomUser("anne.h9", false);
-        ChatroomUser anneh10 = new ChatroomUser("anne.h10", false);
-        ChatroomUser anneh11 = new ChatroomUser("anne.h11", false);
-        ChatroomUser anneh12 = new ChatroomUser("anne.h12", false);
-        ChatroomUser anneh13 = new ChatroomUser("anne.h13", false);
-        ChatroomUser anneh14 = new ChatroomUser("anne.h14", false);
-        chatroom1.addUser(luthorb);
-        chatroom1.addUser(anneh);
-        chatroom1.addUser(anneh1);
-        chatroom1.addUser(anneh2);
-        chatroom1.addUser(anneh3);
-        chatroom1.addUser(anneh4);
-        chatroom1.addUser(anneh5);
-        chatroom1.addUser(anneh6);
-        chatroom1.addUser(anneh7);
-        chatroom1.addUser(anneh8);
-        chatroom1.addUser(anneh9);
-        chatroom1.addUser(anneh10);
-        chatroom1.addUser(anneh11);
-        chatroom1.addUser(anneh12);
-        chatroom1.addUser(anneh13);
-        chatroom1.addUser(anneh14);
-        chatroom1.addToConversation(luthorb, new HTML("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui."));
-        chatroom1.addToConversation(anneh, new HTML("Lorem ipsum dolor sit amet?"));
-        chatroom1.addToConversation(luthorb, new HTML("yes, lorem ipsum dolor sit amet"));
-        chatroom1.addTimeDelimiter();
-        chatroom1.addToConversation(luthorb, new HTML("Lorem ipsum dolor sit amet"));
-        chatroom1.addToConversation(anneh, new HTML("Lorem ipsum dolor sit amet?"));
-        chatroom1.addToConversation(anneh, new HTML("Lorem ipsum dolor sit amet?"));
-        chatroom1.addToConversation(anneh, new HTML("Lorem ipsum dolor sit amet?"));
-        chatroom1.addToConversation(anneh, new HTML("Lorem ipsum dolor sit amet?"));
-        chatroom1.addToConversation(luthorb, new HTML("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui."));
-        chatroom1.addToConversation(anneh, new HTML("Lorem ipsum dolor sit amet?"));
-        
-        chatroomFrame.setCaption(Trans.constants().Chatroom() + " " + "sometopic-foorganization@kune.ourproject.org");
-		chatroomFrame.setFrame(true, false, true, true, true);
-        chatroomFrame.setSize(500,250);
-        chatroomFrame.setContent(chatroom1);
-        desktop.addFrame(chatroomFrame);
-        chatroomFrame.setVisible(true);
-        //chatroomFrame.setTitleIcon(new Image("images/chat.png"));
-        GwmUtilities.diplayAtScreenCenter(chatroomFrame);
-        chatroomFrame.setLocation(100, 100);
-        
-		//LoginPanel loginPanel = new LoginPanel();
-		//public LoginDialogBox(final LoginPanel.LoginListener loginListener) {
-
-        final Wizard wizard = new Wizard();
-        wizard.add("New Project", (Widget) new HTML("Create here a project"), false, true, true, false);
-        wizard.add("New Project", (Widget) new HTML("bla, bla, bla"), true, true, true, false);
-        wizard.add("New Project", (Widget) new HTML("End"), true, true, true, true);
-        
-        final KuneDefaultFrame wizardFrame = new KuneDefaultFrame("Wizard example");
-        wizardFrame.setFrame(true, true, false, true, true);
-        wizardFrame.setContent(wizard);
-        //desktop.addFrame(wizardFrame);
-        //wizardFrame.setVisible(true);
-        //GwmUtilities.diplayAtScreenCenter(wizardFrame);
-        wizardFrame.addFrameListener(new GFrameAdapter() {   	
-               public void frameResized(GFrameEvent evt) {
-            	   wizard.setSize(wizardFrame.getWidth(), wizardFrame.getHeight());
-            	   }
-        });
-        
+		kuneDesktopPanel.contextContents.add(Img.ref().arrowDownBlack().createImage());
+		kuneDesktopPanel.contextContents.add(Img.ref().arrowDownBlack().createImage());
+		kuneDesktopPanel.contextContents.add(Img.ref().arrowDownWhite().createImage());
+		kuneDesktopPanel.contextContents.add(Img.ref().arrowDownBlack().createImage());
+		kuneDesktopPanel.contextContents.add(Img.ref().arrowDownWhite().createImage());
+		kuneDesktopPanel.contextContents.add(Img.ref().arrowRightBlack().createImage());
+		kuneDesktopPanel.contextContents.add(Img.ref().arrowRightWhite().createImage());
+		
+		
         Rate rate = new Rate();
         rate.addRate(4);
         rate.addRate(3);

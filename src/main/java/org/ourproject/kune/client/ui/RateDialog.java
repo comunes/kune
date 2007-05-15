@@ -17,6 +17,7 @@
  */
 package org.ourproject.kune.client.ui;
 
+import org.ourproject.kune.client.Img;
 import org.ourproject.kune.client.Trans;
 import org.ourproject.kune.client.model.Rate;
 import org.ourproject.kune.client.model.RateListener;
@@ -58,9 +59,10 @@ public class RateDialog extends Composite implements RateView {
     
     private void initialize() {
     	rateGrid = new Grid(1, 6);
-    	starImg = new Image[5];
+    	starImg = new Image[5];  	
 		for (int i = 0; i < 5; i++) {
-			starImg[i] = new Image(Star.GREY);
+			starImg[i] = new Image();
+			Img.ref().starGrey().applyTo(starImg[i]);
 		}
 		rateDesc = new Label();
 		rateDescBorder = new BorderPanel(rateDesc, 0, 0, 0, 5);
@@ -84,7 +86,7 @@ public class RateDialog extends Composite implements RateView {
     
     public void setRate(Star stars[]) {
         for (int i = 0; i < 5; i++) {
-            starImg[i].setUrl(stars[i].getUrl());
+        	stars[i].getImg().applyTo(starImg[i]);
         }
     }
     

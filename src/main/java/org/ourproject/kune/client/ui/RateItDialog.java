@@ -17,6 +17,7 @@
  */
 package org.ourproject.kune.client.ui;
 
+import org.ourproject.kune.client.Img;
 import org.ourproject.kune.client.Trans;
 import org.ourproject.kune.client.model.Rate;
 import org.ourproject.kune.client.model.RateItListener;
@@ -67,7 +68,8 @@ public class RateItDialog extends Composite implements ClickListener, RateItView
 		rateDesc = new Label();
 		rateDescBorder = new BorderPanel(rateDesc, 0, 0, 0, 5);
 		for (int i = 0; i < 5; i++) {
-			starImg[i] = new Image(Star.GREY);
+			starImg[i] = new Image();
+			Img.ref().starGrey().applyTo(starImg[i]);
 			starImg[i].addStyleName("rateit-star");
 			starImg[i].setStyleName("rateit-star");
 			starImg[i].addClickListener(this);
@@ -118,13 +120,13 @@ public class RateItDialog extends Composite implements ClickListener, RateItView
      */
     public void setRate(Star stars[]) {
         for (int i = 0; i < 5; i++) {
-            starImg[i].setUrl(stars[i].getUrl());
+        	stars[i].getImg().applyTo(starImg[i]);
         }
     }
     
     public void clearRate() {
         for (int i = 0; i < 5; i++) {
-            starImg[i].setUrl(Star.GREY);
+        	Img.ref().starGrey().applyTo(starImg[i]);
         }
     }
     

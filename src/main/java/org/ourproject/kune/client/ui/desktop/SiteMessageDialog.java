@@ -17,6 +17,7 @@
  */
 package org.ourproject.kune.client.ui.desktop;
 
+import org.ourproject.kune.client.Img;
 import org.ourproject.kune.client.ui.BorderPanel;
 
 import com.google.gwt.user.client.Timer;
@@ -33,6 +34,7 @@ import com.google.gwt.user.client.ui.Widget;
  *
  */
 public class SiteMessageDialog extends VerticalPanel implements ClickListener {
+	
 	// TODO permit multiple messages
 	private static SiteMessageDialog singleton;
     private TextArea message = null;
@@ -45,11 +47,6 @@ public class SiteMessageDialog extends VerticalPanel implements ClickListener {
     };
     
     private static final int TIMEVISIBLE = 4000;
-        
-    private static final String INFO = "images/info.png";
-    private static final String IMPORTANT = "images/emblem-important.png";
-    private static final String VERYIMP = "images/important.png";
-    private static final String ERRORALERT = "images/error.png";
     
 	public SiteMessageDialog() {
     	super();
@@ -92,29 +89,34 @@ public class SiteMessageDialog extends VerticalPanel implements ClickListener {
 		message.setStyleName("site-message");
 		messageHP.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		this.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+		// Default
+		Img.ref().info().applyTo(icon);
 	}
 	
-	public void setMessage(String message, String icon) {
-		this.icon.setUrl(icon);
+	public void setMessage(String message) {
 		this.message.setText(message);
 		this.setVisible(true);
 		timer.schedule(TIMEVISIBLE);
 	}
 
     public void setMessageError(String message) {
-		this.setMessage(message, ERRORALERT);
+    	Img.ref().error().applyTo(icon);
+		this.setMessage(message);
 	}
 	
 	public void setMessageVeryImp(String message) {
-		this.setMessage(message, VERYIMP);
+		Img.ref().important().applyTo(icon);
+		this.setMessage(message);
 	}
 	
 	public void setMessageImp(String message) {
-		this.setMessage(message, IMPORTANT);
+		Img.ref().emblemImportant().applyTo(icon);
+		this.setMessage(message);
 	}
 	
 	public void setMessageInfo(String message) {
-		this.setMessage(message, INFO);
+		Img.ref().info().applyTo(icon);
+		this.setMessage(message);
 	}
 
     public void onClick(Widget sender) {

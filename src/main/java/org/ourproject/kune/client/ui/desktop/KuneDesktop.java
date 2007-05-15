@@ -41,8 +41,8 @@ public class KuneDesktop extends VerticalPanel {
 	public ContextContents contextContents = null;
 	public ContextBottomBar contextBottomBar = null;
 
-	private HorizontalPanel generalHSP = null;
-//	private HorizontalSplitPanel generalHSP = null;
+	//private HorizontalPanel generalHSP = null;
+    private HorizontalSplitPanel generalHSP = null;
 	private VerticalPanel localNavVP = null;
 	private VerticalPanel contextVP = null;
 	private VerticalPanel contextNavVP = null;
@@ -74,7 +74,8 @@ public class KuneDesktop extends VerticalPanel {
 		contextContents = new ContextContents();
 		contextBottomBar = new ContextBottomBar();
 		
-		generalHSP = new HorizontalPanel();
+		//generalHSP = new HorizontalPanel();
+		generalHSP = new HorizontalSplitPanel();
 		localNavVP = new VerticalPanel();
 		contextVP = new VerticalPanel();
 //		contextHSP = new HorizontalSplitPanel();
@@ -88,11 +89,11 @@ public class KuneDesktop extends VerticalPanel {
 		this.add(new BorderPanel(entityLogo, 0, 0, 3, 0));
 		this.add(generalHSP);
 		
-//		generalHSP.setRightWidget(localNavVP);
-//		generalHSP.setLeftWidget(contextVP);
+        generalHSP.setRightWidget(localNavVP);
+        generalHSP.setLeftWidget(contextVP);
 		
-		generalHSP.add(contextVP);
-		generalHSP.add(localNavVP);
+//		generalHSP.add(contextVP);
+//		generalHSP.add(localNavVP);
 		
 		localNavVP.add(localNavBar);
 		localNavVP.add(new BorderPanel(contextDropDowns, 5, 0, 0, 5));

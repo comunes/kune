@@ -21,6 +21,7 @@ package org.ourproject.kune.client.ui.chat;
 import java.util.Vector;
 
 import org.gwtwidgets.client.ui.EditableLabel;
+import org.ourproject.kune.client.Img;
 import org.ourproject.kune.client.Trans;
 import org.ourproject.kune.client.rpc.ServiceXmppMucIResponse;
 import org.ourproject.kune.client.rpc.ServiceXmppMucServiceManager;
@@ -103,10 +104,10 @@ public class ChatroomDialog extends Composite implements ChatroomView {
 		
 		userList.add(user);
 		if (user.getIsModerator()) {
-			userModeratorIcon.setUrl("images/bullet_star.png");
+			Img.ref().bulletStar().applyTo(userModeratorIcon);
 		}
 		else {
-			userModeratorIcon.setUrl("images/bullet_black.png");
+			Img.ref().bulletBlack().applyTo(userModeratorIcon);
 		}
 		userGrid.setWidget(0, 0, userModeratorIcon);	
 		userGrid.setWidget(0, 1, userNameLabel);
@@ -271,10 +272,8 @@ public class ChatroomDialog extends Composite implements ChatroomView {
 		optionsHP.setBorderWidth(0);
 		optionsHP.setSpacing(0);
 
-		optionsImage.setUrl("images/kune-preferences.png");
-		optionsImage.setHeight("16");
-		optionsImage.setWidth("16");
-
+		Img.ref().kunePreferences().applyTo(optionsImage);
+		
 		optionsSpaceHtml1.setHTML("<b></b>");
 		optionsSpaceHtml1.setWidth("5");
 
@@ -287,11 +286,9 @@ public class ChatroomDialog extends Composite implements ChatroomView {
 
 		optionsSpaceHtml2.setHTML("<b></b>");
 		optionsSpaceHtml2.setWidth("5");
-
-		maximizeImage.setUrl("images/tango-gtk-fullscreen.png");
-		maximizeImage.setHeight("16");
-		maximizeImage.setWidth("16");
-			
+        
+		Img.ref().tangoGtkFullscreen().applyTo(maximizeImage);
+					
 	}
 	
 	public void setSubject(String chatroomSubject) {

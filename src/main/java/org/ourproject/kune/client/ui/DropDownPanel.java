@@ -17,6 +17,7 @@
  */
 package org.ourproject.kune.client.ui;
 
+import org.ourproject.kune.client.Img;
 import org.ourproject.kune.client.Trans;
 
 import com.google.gwt.user.client.DOM;
@@ -78,8 +79,8 @@ public class DropDownPanel extends Composite implements ClickListener {
 		outerRP.add(dropDownPanelVP);
 		dropDownPanelVP.add(titleHP);
 		dropDownPanelVP.add(contentDeckP);
-		titleHP.add(arrowImage);
-		titleHP.add(titleLabel);
+		titleHP.add(new BorderPanel(arrowImage, 0, 0, 0, 3));
+		titleHP.add(new BorderPanel(titleLabel, 0, 0, 0, 3));
 		contentDeckP.add(cleanPanel);
 	}
 
@@ -96,7 +97,7 @@ public class DropDownPanel extends Composite implements ClickListener {
 		titleHP.addStyleName("drop-down-label");
 		titleHP.setStyleName("drop-down-label");
 
-		arrowImage.setUrl("images/arrow-down-black.gif", "images/arrow-down-white.gif");
+		arrowImage.setImages(Img.ref().arrowDownBlack(), Img.ref().arrowDownWhite());
 		arrowImage.setHeight("16");
 		arrowImage.setWidth("16");
 
@@ -122,13 +123,13 @@ public class DropDownPanel extends Composite implements ClickListener {
     public void setContentVisible(boolean visible) {
     	if (visible) {
     		if (!contentEmpty()) {
-        		arrowImage.setUrl("images/arrow-down-black.gif", "images/arrow-down-white.gif");
+    			arrowImage.setImages(Img.ref().arrowDownBlack(), Img.ref().arrowDownWhite());
                 contentDeckP.showWidget(1);
         		contentDeckP.setVisible(true);
     		}
     	}
     	else {
-    		arrowImage.setUrl("images/arrow-down-black.gif", "images/arrow-down-white.gif");
+    		arrowImage.setImages(Img.ref().arrowRightBlack(), Img.ref().arrowRightWhite());    		
             contentDeckP.showWidget(0);
        		contentDeckP.setVisible(false);
     	}

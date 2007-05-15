@@ -25,11 +25,13 @@
 			<artifactId>gwt-servlet</artifactId>
 			<version>1.4</version>
 		</dependency>
+<!--
 		<dependency>
 			<groupId>com.googlecode.gwtx</groupId>
 			<artifactId>GWTx</artifactId>
 			<version>20070110</version>
 		</dependency>
+-->
 		<dependency>
 			<groupId>org.gwm</groupId>
 			<artifactId>gwm</artifactId>
@@ -38,12 +40,7 @@
 		<dependency>
 			<groupId>org.gwtwidgets</groupId>
 			<artifactId>gwtWidgets</artifactId>
-			<version>0.1.3</version>
-		</dependency>
-		<dependency>
-			<groupId>org.gwtwidgets</groupId>
-			<artifactId>gwtWidgets</artifactId>
-			<version>0.1.3</version>
+			<version>0.1.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jivesoftware.smack</groupId>
@@ -95,7 +92,8 @@
 			<plugin>
 				<groupId>com.totsp.gwt</groupId>
 				<artifactId>maven-googlewebtoolkit2-plugin</artifactId>
-				<version>1.5.3-SNAPSHOT</version>
+				<!-- <version>1.5.3-SNAPSHOT</version> -->
+				<version>1.5.3-SNAPSHOT</version> 
 				<configuration>
 					<logLevel>ALL</logLevel>
 					<runTarget>org.ourproject.kune/Main.html</runTarget>

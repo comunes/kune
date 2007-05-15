@@ -18,6 +18,7 @@
 
 package org.ourproject.kune.client.ui.desktop;
 
+import org.ourproject.kune.client.Img;
 import org.ourproject.kune.client.Trans;
 import org.ourproject.kune.client.model.User;
 import org.ourproject.kune.client.ui.SimpleRoundedPanel;
@@ -31,17 +32,16 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Hyperlink;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.TextBox;
-
-import org.gwtwidgets.client.ui.PNGImage;
 
 public class SiteBar extends Composite implements SiteBarView {
 
 	private HorizontalPanel siteBarHP = null;
 
-	private PNGImage siteBarSpinProcessing = null;
+	private Image siteBarSpinProcessing = null;
 
 	private Label sitebarTextProcessingLabel = null;
 
@@ -59,7 +59,7 @@ public class SiteBar extends Composite implements SiteBarView {
 
 	private HTML siteBarSpaceHtml3 = null;
 
-	private PNGImage siteBarSearchIconImage = null;
+	private Image siteBarSearchIconImage = null;
 
 	private HTML siteBarSpaceHtml4 = null;
 
@@ -75,7 +75,7 @@ public class SiteBar extends Composite implements SiteBarView {
 
 	private HorizontalPanel siteBarHelpTransHP = null;
 
-	private PNGImage siteBarHelpTransImage = null;
+	private Image siteBarHelpTransImage = null;
 
 	private HTML siteBarHelpTransSpaceHtml = null;
 
@@ -83,7 +83,7 @@ public class SiteBar extends Composite implements SiteBarView {
 
 	private HTML siteBarSpaceHtml6 = null;
 
-	private PNGImage siteBarLogoImage = null;
+	private Image siteBarLogoImage = null;
 	
 	private Command inDevCmd = null;
 	
@@ -97,7 +97,8 @@ public class SiteBar extends Composite implements SiteBarView {
 	protected void initialize() {
 		siteBarHP = new HorizontalPanel();
 		initWidget(siteBarHP);
-		siteBarSpinProcessing = new PNGImage("images/spin-kune-thund-green.gif", 16, 16);
+		siteBarSpinProcessing = new Image();
+		Img.ref().spinKuneThundGreen().applyTo(siteBarSpinProcessing);
 		sitebarTextProcessingLabel = new Label();
 		siteBarSpaceExpand = new HTML();
 		siteBarNewGroupHyperlink = new Hyperlink();
@@ -106,7 +107,8 @@ public class SiteBar extends Composite implements SiteBarView {
 		siteBarSpaceHtml2 = new HTML();
 		LoginHyperlink = new Hyperlink();
 		siteBarSpaceHtml3 = new HTML();
-		siteBarSearchIconImage = new PNGImage("images/kune-search-ico.png", 16, 16);
+		siteBarSearchIconImage = new Image();
+		Img.ref().kuneSearchIco().applyTo(siteBarSearchIconImage);
 		siteBarSpaceHtml4 = new HTML();
 		siteBarSearchTextBox = new TextBox();
 		siteBarSpaceHtml5 = new HTML();
@@ -121,11 +123,14 @@ public class SiteBar extends Composite implements SiteBarView {
 		siteBarHelpTransHP = new HorizontalPanel();
 		siteBarHelpTransHP
 				.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
-		siteBarHelpTransImage = new PNGImage("images/kune-help-translation-icon.png", 16, 16);
+		siteBarHelpTransImage = new Image();
+		Img.ref().kuneHelpTranslationIcon().applyTo(siteBarHelpTransImage);
 		siteBarHelpTransSpaceHtml = new HTML();
 		siteBarHelpTransHyperlink = new Hyperlink();
 		siteBarSpaceHtml6 = new HTML();
-		siteBarLogoImage = new PNGImage("images/kune-logo-16px.png", 87, 16);
+		siteBarLogoImage = new Image();
+		Img.ref().kuneLogo16px().applyTo(siteBarLogoImage);
+		
 	}
 
 	protected void layout() {
