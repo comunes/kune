@@ -13,11 +13,10 @@
    height="297mm"
    id="svg21019"
    sodipodi:version="0.32"
-   inkscape:version="0.45"
+   inkscape:version="0.45.1"
    sodipodi:docbase="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img"
    sodipodi:docname="icons-base.svg"
-   inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   sodipodi:modified="true">
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <defs
      id="defs21021" />
   <sodipodi:namedview
@@ -27,9 +26,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2"
-     inkscape:cx="478"
-     inkscape:cy="398"
+     inkscape:zoom="7.3150413"
+     inkscape:cx="319.01909"
+     inkscape:cy="480.11722"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      inkscape:window-width="1379"
@@ -717,5 +716,92 @@
        width="16"
        sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/star-yellow-grey.png"
        xlink:href="icons/star-yellow-grey.png" />
+    <g
+       style="opacity:0.5;display:inline"
+       id="g4822"
+       transform="translate(-156.9822,555.56514)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
+       inkscape:export-xdpi="90.000000"
+       inkscape:export-ydpi="90.000000">
+      <rect
+         style="fill:#dd8a3d;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:12.63039398pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="rect4824"
+         width="15.999997"
+         height="15.999997"
+         x="405.52979"
+         y="8.8522816"
+         rx="3.7996395"
+         ry="3.7996395" />
+      <g
+         transform="matrix(1.635216,0,0,1.635216,-260.6467,-12.57016)"
+         id="g4826">
+        <path
+           style="opacity:1;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:1.74907231;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.37500004;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+           d="M 409.34583,20.876719 L 413.22395,17.041177"
+           id="path4828" />
+        <g
+           id="g4830">
+          <path
+             transform="matrix(0.102065,0,0,0.102065,387.7515,-17.05636)"
+             d="M 277.35793 332.62314 A 26.82268 26.82268 0 1 1  223.71257,332.62314 A 26.82268 26.82268 0 1 1  277.35793 332.62314 z"
+             sodipodi:ry="26.82268"
+             sodipodi:rx="26.82268"
+             sodipodi:cy="332.62314"
+             sodipodi:cx="250.53525"
+             id="path4832"
+             style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+             sodipodi:type="arc" />
+          <path
+             transform="matrix(5.245387e-2,0,0,5.245387e-2,400.1808,-0.554549)"
+             d="M 277.35793 332.62314 A 26.82268 26.82268 0 1 1  223.71257,332.62314 A 26.82268 26.82268 0 1 1  277.35793 332.62314 z"
+             sodipodi:ry="26.82268"
+             sodipodi:rx="26.82268"
+             sodipodi:cy="332.62314"
+             sodipodi:cx="250.53525"
+             id="path4834"
+             style="fill:#dd8a3d;fill-opacity:1;fill-rule:evenodd;stroke:#dd8a3d;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
+             sodipodi:type="arc" />
+        </g>
+      </g>
+    </g>
+    <g
+       id="g3316"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/kune-search-ico-push.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         style="opacity:1;fill:#eec59e;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:12.63039398pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="rect3279"
+         width="15.999997"
+         height="15.999997"
+         x="311"
+         y="564.36218"
+         rx="3.7996395"
+         ry="3.7996395" />
+      <path
+         transform="matrix(0.1668983,0,0,0.1668983,278.88098,515.04891)"
+         d="M 277.35793 332.62314 A 26.82268 26.82268 0 1 1  223.71257,332.62314 A 26.82268 26.82268 0 1 1  277.35793 332.62314 z"
+         sodipodi:ry="26.82268"
+         sodipodi:rx="26.82268"
+         sodipodi:cy="332.62314"
+         sodipodi:cx="250.53525"
+         id="path3287"
+         style="opacity:1;fill:#a02c2c;fill-opacity:1;fill-rule:evenodd;stroke:#a02c2c;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         sodipodi:type="arc" />
+      <path
+         id="path3283"
+         d="M 314.19237,577.07768 L 320.53393,570.80575"
+         style="opacity:1;color:#000000;fill:#800000;fill-opacity:1;fill-rule:nonzero;stroke:#a02c2c;stroke-width:2.860111;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.37500004;stroke-opacity:1;visibility:visible;display:inline;overflow:visible" />
+      <path
+         transform="matrix(8.5773407e-2,0,0,8.5773407e-2,299.20557,542.03293)"
+         d="M 277.35793 332.62314 A 26.82268 26.82268 0 1 1  223.71257,332.62314 A 26.82268 26.82268 0 1 1  277.35793 332.62314 z"
+         sodipodi:ry="26.82268"
+         sodipodi:rx="26.82268"
+         sodipodi:cy="332.62314"
+         sodipodi:cx="250.53525"
+         id="path3289"
+         style="opacity:1;fill:#eec59e;fill-opacity:1;fill-rule:evenodd;stroke:#dd8a3d;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
+         sodipodi:type="arc" />
+    </g>
   </g>
 </svg>
