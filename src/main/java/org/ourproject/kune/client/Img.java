@@ -27,4 +27,5 @@ public class Img {
 	public static MainImageBundle ref() {
 		return _ref;
 	}
+
 }

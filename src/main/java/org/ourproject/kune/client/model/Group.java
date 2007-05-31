@@ -37,6 +37,14 @@ public class Group extends Model implements IsSerializable, Cloneable {
     
 	private User createdBy = null; 
     
+	public Group(String shortName, String longName) {
+		setShortName(shortName);
+		setLongName(longName);
+	}
+	
+	public Group() {
+    }
+	
     public void setShortName(String shortName) {
         this.shortName = shortName;
     }

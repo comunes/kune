@@ -36,6 +36,10 @@ public class BorderPanel extends SimplePanel {
 		setWidgetMargin(widget, 0, 0, 0, 0);
 	}
 
+	public BorderPanel(Widget widget, int border) {
+		setWidgetMargin(widget, border, border, border, border);
+	}
+
 	public BorderPanel(Widget widget, int vertical, int horizontal) {
         setWidgetMargin(widget, vertical, horizontal, vertical, horizontal);
 	}
@@ -66,7 +70,7 @@ public class BorderPanel extends SimplePanel {
 	 * @param bottom margin-bottom css attribute
 	 * @param left margin-left css attribute
 	 */
-	private void setMargins(int top, int right, int bottom, int left) {
+	public void setMargins(int top, int right, int bottom, int left) {
 		DOM.setStyleAttribute(getElement(), "marginTop", "" + top);
 		DOM.setStyleAttribute(getElement(), "marginRight", "" + right);
 		DOM.setStyleAttribute(getElement(), "marginBottom", "" + bottom);

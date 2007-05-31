@@ -20,7 +20,7 @@ package org.ourproject.kune.client.ui.chat;
 
 import java.util.Vector;
 
-import org.gwtwidgets.client.ui.EditableLabel;
+//import org.gwtwidgets.client.ui.EditableLabel;
 import org.ourproject.kune.client.Img;
 import org.ourproject.kune.client.Trans;
 import org.ourproject.kune.client.rpc.ServiceXmppMucIResponse;
@@ -54,7 +54,8 @@ public class ChatroomDialog extends Composite implements ChatroomView {
 	
 	private String chatroomSubject = null;
 	
-	private EditableLabel subjectLabel = null;
+	//private EditableLabel subjectLabel = null;
+	private Label subjectLabel = null;
 
 	private VerticalSplitPanel contentSP = null;
 
@@ -146,21 +147,22 @@ public class ChatroomDialog extends Composite implements ChatroomView {
 		userList = new Vector();
 		chatroomVP = new VerticalPanel();
 		subjectHP = new HorizontalPanel();
-		subjectLabel = new EditableLabel ("", new ChangeListener() {
-			public void onChange(Widget sender) {
-				// TODO Only for tests (put this out of ChatroomDialog) ...
-				ServiceXmppMucServiceManager.INSTANCE.requestChangeSubject(subjectLabel.getText(), new ServiceXmppMucIResponse() {
-					public void accept(Object result) {
-						//TODO
-						SiteMessageDialog.get().setMessageInfo("Success in subject change");
-					}
-					public void failed(Throwable caught) {
-						//TODO
-						SiteMessageDialog.get().setMessageError("Error on subject change");
-					}
-				});
-			}
-		}, Trans.constants().Change(), Trans.constants().Cancel());
+		subjectLabel = new Label();
+//		subjectLabel = new EditableLabel ("", new ChangeListener() {
+//			public void onChange(Widget sender) {
+//				// TODO Only for tests (put this out of ChatroomDialog) ...
+//				ServiceXmppMucServiceManager.INSTANCE.requestChangeSubject(subjectLabel.getText(), new ServiceXmppMucIResponse() {
+//					public void accept(Object result) {
+//						//TODO
+//						SiteMessageDialog.get().setMessageInfo("Success in subject change");
+//					}
+//					public void failed(Throwable caught) {
+//						//TODO
+//						SiteMessageDialog.get().setMessageError("Error on subject change");
+//					}
+//				});
+//			}
+//		}, Trans.constants().Change(), Trans.constants().Cancel());
 		contentSP = new VerticalSplitPanel();
 		conversationUsersSP = new HorizontalSplitPanel();
 		conversationSP = new ScrollPanel();
@@ -212,7 +214,7 @@ public class ChatroomDialog extends Composite implements ChatroomView {
 	}
 	
 	public void permitSubjectChange(boolean permit) {
-		subjectLabel.setEditable(permit);
+		// subjectLabel.setEditable(permit);
 	}
 	
 	protected void setProperties() {
@@ -226,7 +228,7 @@ public class ChatroomDialog extends Composite implements ChatroomView {
 		subjectHP.setWidth("99%");
 		subjectHP.setHeight("20");
 		subjectLabel.setWidth("100%");
-		subjectLabel.setVisibleLength(65);
+		// subjectLabel.setVisibleLength(65);
 
 		//contentVP.setBorderWidth(0);
 		//contentVP.setSpacing(0);

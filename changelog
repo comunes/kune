@@ -23,6 +23,21 @@ kune (0.0.1)
 	public/images/ files
 	* now Images use ImageBundle
 	* remove PNGImage use
+	* sitebar clean
+	* license widgets added
+	* new customPushButton with png rounded corners
+	* groupBox class for widget grouping using Apple guidelines
+	* script for generation of button images
+	* added license to contextBottom
+	* defaul.css fixes (thanks to csstiny)
+	* Rollover image fixed
+	* Splitter button added and style modification using Apple guidelines
+	* favicon.ico added
+	* gwt upgrade r1166
+	* css fonts from yahoo yui added
+	* several desktop modifications
+	* update to gwt 1.4rc
+	* pom.xml update to latest maven-gwt plugin
 
 	-- Vicente J. Ruiz Jurado <vjrj@ourproject.org> Fri, 20 Apr 20 13:09:27 BRT 2007
 

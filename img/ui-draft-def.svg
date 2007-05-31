@@ -14,17 +14,27 @@
    height="1488.189"
    id="svg2"
    sodipodi:version="0.32"
-   inkscape:version="0.45"
+   inkscape:version="0.45.1"
    sodipodi:docbase="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img"
    sodipodi:docname="ui-draft-def.svg"
    version="1.0"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-home-draft-0.3.png"
    inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90"
-   sodipodi:modified="true">
+   inkscape:export-ydpi="90">
   <defs
      id="defs4">
+    <linearGradient
+       id="linearGradient4153">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop4155" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0.8490566;"
+         offset="1"
+         id="stop4157" />
+    </linearGradient>
     <linearGradient
        x1="30.059999"
        y1="30.059999"
@@ -81,10 +91,10 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="995"
-     inkscape:cy="775.5"
+     inkscape:cx="841.57425"
+     inkscape:cy="1039.4209"
      inkscape:document-units="px"
-     inkscape:current-layer="layer5"
+     inkscape:current-layer="layer1"
      inkscape:object-points="false"
      inkscape:grid-points="true"
      gridtolerance="10000"
@@ -131,7 +141,7 @@
     <g
        style="display:inline"
        id="g38231"
-       transform="translate(64.094482,-270.36462)"
+       transform="translate(63.094482,-269.32534)"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90">
@@ -3906,16 +3916,6 @@
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect
-       style="opacity:1;color:#000000;fill:#cdde87;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="rect7524"
-       width="4"
-       height="466"
-       x="991"
-       y="478.18896"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <rect
        style="opacity:1;color:#000000;fill:#89a02c;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect7526"
        width="1"
@@ -5464,7 +5464,7 @@
     </g>
     <rect
        transform="scale(1,-1)"
-       style="opacity:1;color:#000000;fill:#89a02c;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="opacity:1;color:#000000;fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect16674"
        width="1"
        height="1"
@@ -6288,6 +6288,46 @@
        style="opacity:1;color:#000000;fill:#2d5016;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        transform="scale(1,-1)"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:1;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.90017545;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path3182"
+       sodipodi:cx="997.5"
+       sodipodi:cy="685.68896"
+       sodipodi:rx="2.5"
+       sodipodi:ry="2.5"
+       d="M 1000 685.68896 A 2.5 2.5 0 1 1  995,685.68896 A 2.5 2.5 0 1 1  1000 685.68896 z"
+       transform="translate(-3,-2)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/splitter-button.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       transform="matrix(0.6473763,0,0,0.6473763,348.24214,239.29018)"
+       d="M 1000 685.68896 A 2.5 2.5 0 1 1  995,685.68896 A 2.5 2.5 0 1 1  1000 685.68896 z"
+       sodipodi:ry="2.5"
+       sodipodi:rx="2.5"
+       sodipodi:cy="685.68896"
+       sodipodi:cx="997.5"
+       id="path4161"
+       style="opacity:1;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.90017545;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       sodipodi:type="arc" />
+    <rect
+       style="opacity:1;color:#000000;fill:#cdde87;fill-opacity:1;fill-rule:nonzero;stroke:#bcd35f;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect7524"
+       width="6.0000005"
+       height="466"
+       x="991.5"
+       y="478.18896"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="opacity:1;color:#000000;fill:#0b280b;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.90017545;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="M 994.5 681.1875 C 993.12 681.1875 992 682.3075 992 683.6875 C 992 684.0471 992.08187 684.37843 992.21875 684.6875 C 992.60717 683.81047 993.4796 683.1875 994.5 683.1875 C 995.5204 683.1875 996.39283 683.81047 996.78125 684.6875 C 996.91813 684.37843 997 684.0471 997 683.6875 C 997 682.3075 995.88 681.1875 994.5 681.1875 z "
+       id="path4163"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/splitter-button.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
   </g>

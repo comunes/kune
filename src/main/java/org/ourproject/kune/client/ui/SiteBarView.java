@@ -31,6 +31,5 @@ public interface SiteBarView {
 	void clearSearchBox();
 	
 	void setTextSearchBox(String text);
-	
-	void showHelpInTranslation(boolean show);
+
 }

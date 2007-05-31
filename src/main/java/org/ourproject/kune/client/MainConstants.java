@@ -67,5 +67,18 @@ public interface MainConstants extends Constants {
     String Excellent();
     String RatingSaved();
     String PutYourLogoHere();
-    
+    String Close();
+    String CCAllowComercial();
+    String CCAllowModifications();
+    String CCShareAlike();
+    String MoreInfo();
+    String SelectLicense();
+    String SelectThisLicense();
+    String Yes();
+    String No();
+    String ChooseLicense();
+    String OtherLicenses();
+    String CreativeCommons();
+    String CCExplainMessage();
+    String theseContentsUnderLicense();
 }

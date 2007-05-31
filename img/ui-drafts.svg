@@ -14,15 +14,14 @@
    height="1488.189"
    id="svg2"
    sodipodi:version="0.32"
-   inkscape:version="0.45"
+   inkscape:version="0.45.1"
    sodipodi:docbase="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img"
    sodipodi:docname="ui-drafts.svg"
    version="1.0"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-home-draft-0.3.png"
    inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90"
-   sodipodi:modified="true">
+   inkscape:export-ydpi="90">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -31,10 +30,10 @@
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
      inkscape:zoom="0.4858254"
-     inkscape:cx="864.569"
-     inkscape:cy="744.09448"
+     inkscape:cx="401.39895"
+     inkscape:cy="768.09899"
      inkscape:document-units="px"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="g33987"
      inkscape:object-points="false"
      inkscape:grid-points="true"
      gridtolerance="10000"
@@ -485,6 +484,16 @@
        gradientTransform="matrix(0.2250035,0,0,0.2250035,897.5364,1138.2714)"
        y1="79.632538"
        y2="124.12687" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#RSSg"
+       id="linearGradient8133"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.5,0,0,0.5,1440,1000)"
+       x1="30.059999"
+       y1="30.059999"
+       x2="225.94"
+       y2="225.94" />
   </defs>
   <metadata
      id="metadata7">
@@ -20960,7 +20969,7 @@
          height="1488.189"
          x="0"
          inkscape:export-ydpi="90"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          y="0"
          transform="matrix(0.9923076,0,0,0.9999991,66.091732,-489.99989)"
          width="2104.7244"
@@ -20974,7 +20983,7 @@
          sodipodi:linespacing="125%"
          font-size="11"
          y="18.188795"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="881.68921">
         <tspan
@@ -20991,7 +21000,7 @@
       <g
          id="g7444"
          transform="translate(-3.2503e-2,-1.6651753)"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90">
         <rect
@@ -21030,7 +21039,7 @@
       <g
          id="g7780"
          transform="translate(-3.2503e-2,16.334825)"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90">
         <rect
@@ -21069,7 +21078,7 @@
       <g
          id="g7806"
          transform="translate(-3.2503e-2,16.334825)"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90">
         <rect
@@ -21103,7 +21112,7 @@
       <g
          id="g7793"
          transform="translate(-3.2503e-2,16.334825)"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90">
         <rect
@@ -21149,7 +21158,7 @@
          sodipodi:linespacing="100%"
          id="text14130"
          style="font-size:22.05500031px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;opacity:0.8;fill:#d40000;fill-opacity:1;stroke:#d40000;stroke-width:0.5924775;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;font-family:CoolDots"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90"><tspan
            x="279.17435"
@@ -21169,7 +21178,7 @@
          width="2104.7244"
          transform="matrix(1.0032103,0,0,1,56.463245,-489.00015)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21180,7 +21189,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.619363,-490.92047)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21190,7 +21199,7 @@
          inkscape:export-xdpi="90"
          sodipodi:linespacing="125%"
          y="134.75542"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="229.3148">
         <tspan
@@ -21206,7 +21215,7 @@
          width="2104.7244"
          transform="matrix(1.0032103,0,0,1.0000002,56.463239,-490.00024)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21217,7 +21226,7 @@
          width="2104.7244"
          transform="matrix(1,0,0,1.0027027,58.99936,-490.70879)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21228,7 +21237,7 @@
          width="2104.7244"
          transform="matrix(0.9923075,0,0,1.2857145,64.091858,-574.62565)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21239,7 +21248,7 @@
          width="2104.7244"
          transform="matrix(1,0,0,1.0000019,58.99936,-490.00074)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21250,7 +21259,7 @@
          width="2104.7244"
          transform="translate(58.99936,-490.00006)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21261,7 +21270,7 @@
          width="2104.7244"
          transform="matrix(1.0032103,0,0,1.0000001,56.463236,-490.00019)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21272,7 +21281,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.58686,-490.58064)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21281,7 +21290,7 @@
          id="use33716"
          inkscape:export-xdpi="90"
          transform="matrix(1.0025,0,0,1.0025,526.89418,-471.66849)"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          xml:space="preserve"><flowRegion
            id="flowRegion5965"><rect
@@ -21296,7 +21305,7 @@
    id="flowSpan7241">about us</flowSpan>. </flowPara></flowRoot>      <text
          x="857.99939"
          inkscape:export-ydpi="90"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          y="-189.8112"
          sodipodi:linespacing="125%"
          inkscape:export-xdpi="90"
@@ -21311,7 +21320,7 @@
       <text
          x="857.99939"
          inkscape:export-ydpi="90"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          y="-167.8112"
          inkscape:export-xdpi="90"
          id="use33724"
@@ -21325,7 +21334,7 @@
       <text
          x="857.99939"
          inkscape:export-ydpi="90"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          y="-147.8112"
          inkscape:export-xdpi="90"
          id="use33726"
@@ -21339,7 +21348,7 @@
       <text
          x="857.99939"
          inkscape:export-ydpi="90"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          y="-127.8112"
          inkscape:export-xdpi="90"
          id="use33728"
@@ -21356,7 +21365,7 @@
          inkscape:export-xdpi="90"
          sodipodi:linespacing="125%"
          y="-185.63622"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="232.74599">
         <tspan
@@ -21372,7 +21381,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.00436,-490.93064)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21383,7 +21392,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,0.9499375,56.00436,-471.26234)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21394,14 +21403,14 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,0.9500001,55.70186,-471.29075)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
       <text
          x="874.0791"
          inkscape:export-ydpi="90"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          y="-105.95316"
          sodipodi:linespacing="125%"
          inkscape:export-xdpi="90"
@@ -21420,7 +21429,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.00436,-516.99564)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21431,7 +21440,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.00436,-516.99564)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21442,7 +21451,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,0.9999998,56.58686,-490.00012)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21453,7 +21462,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,62.01936,-521.00564)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21464,7 +21473,7 @@
          width="2104.7244"
          transform="matrix(0.9999998,0,0,1.0033557,58.999538,-491.04106)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21474,7 +21483,7 @@
          inkscape:export-xdpi="90"
          sodipodi:linespacing="125%"
          y="-161.57622"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="756.33185">
         <tspan
@@ -21577,7 +21586,7 @@
       <text
          x="762.35681"
          inkscape:export-ydpi="90"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          y="-148.33357"
          sodipodi:linespacing="125%"
          inkscape:export-xdpi="90"
@@ -21601,7 +21610,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.00436,-490.93064)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21612,7 +21621,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.00436,-490.93064)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21623,7 +21632,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.00436,-512.98564)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21643,13 +21652,13 @@
          inkscape:rounded="0"
          sodipodi:r1="136.45316"
          inkscape:flatsided="false"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90" />
       <text
          x="924.11115"
          inkscape:export-ydpi="90"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          y="16.520447"
          font-size="11"
          sodipodi:linespacing="125%"
@@ -21674,7 +21683,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,62.035826,-518.27064)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21685,7 +21694,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.00436,-512.98564)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21696,7 +21705,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.00436,-516.99564)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21707,7 +21716,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.00436,-516.99564)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21718,14 +21727,14 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.00436,-490.93064)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
       <flowRoot
          xml:space="preserve"
          inkscape:export-ydpi="90"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          transform="matrix(1.0025,0,0,1.0025,878.72008,-1487.5236)"
          inkscape:export-xdpi="90"
          id="use33798"
@@ -21756,7 +21765,7 @@
          width="2104.7244"
          transform="matrix(1,0,0,0.9999982,57.99936,-515.99927)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21767,7 +21776,7 @@
          width="2104.7244"
          transform="translate(57.99936,-516.00017)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21778,7 +21787,7 @@
          width="2104.7244"
          transform="translate(57.99936,-516.00017)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21789,14 +21798,14 @@
          width="2104.7244"
          transform="translate(57.99936,-516.00015)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
       <text
          x="874.0791"
          inkscape:export-ydpi="90"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          y="-19.974802"
          sodipodi:linespacing="125%"
          inkscape:export-xdpi="90"
@@ -21815,7 +21824,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.00436,-516.99564)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21826,7 +21835,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.00436,-516.99564)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21837,7 +21846,7 @@
          width="2104.7244"
          transform="translate(57.99936,-518.00017)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21848,7 +21857,7 @@
          width="2104.7244"
          transform="translate(57.99936,-518.00017)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21859,7 +21868,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.00436,-519.00064)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21870,7 +21879,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.00436,-519.00064)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21881,7 +21890,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.00436,-519.00064)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21892,7 +21901,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.00436,-519.00064)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21903,7 +21912,7 @@
          width="2104.7244"
          transform="translate(57.99936,-518.00017)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21914,14 +21923,14 @@
          width="2104.7244"
          transform="translate(57.99936,-518.00017)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
       <text
          x="874.0791"
          inkscape:export-ydpi="90"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          y="53.805447"
          sodipodi:linespacing="125%"
          inkscape:export-xdpi="90"
@@ -21941,7 +21950,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.00436,-519.00064)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21952,7 +21961,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.00436,-519.00064)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21963,7 +21972,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.58436,-490.65314)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21974,7 +21983,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,57.02186,-490.65314)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21985,7 +21994,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.69686,-490.72314)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -21996,7 +22005,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.69686,-490.75814)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -22007,7 +22016,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.58436,-490.58314)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -22018,7 +22027,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.58686,-518.65564)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -22029,7 +22038,7 @@
          width="2104.7244"
          transform="translate(57.99936,-518.00017)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -22040,7 +22049,7 @@
          width="2104.7244"
          transform="translate(57.99936,-518.00017)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -22051,7 +22060,7 @@
          width="2104.7244"
          transform="translate(57.99936,-518.00017)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -22062,7 +22071,7 @@
          width="2104.7244"
          transform="translate(57.99936,-518.00017)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -22073,7 +22082,7 @@
          width="2104.7244"
          transform="translate(57.99936,-515.99767)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -22084,7 +22093,7 @@
          width="2104.7244"
          transform="translate(57.99936,-515.99767)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -22095,7 +22104,7 @@
          width="2104.7244"
          transform="translate(57.99936,-515.99767)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -22106,7 +22115,7 @@
          width="2104.7244"
          transform="translate(57.99936,-516.00017)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -22117,7 +22126,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.00436,-490.93064)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -22128,7 +22137,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.00436,-490.93064)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -22136,7 +22145,7 @@
          height="1488.189"
          x="0"
          inkscape:export-ydpi="90"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          y="0"
          transform="matrix(1,0,0,1.0000017,57.99936,-494.00094)"
          width="2104.7244"
@@ -22147,7 +22156,7 @@
          height="1488.189"
          x="0"
          inkscape:export-ydpi="90"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          y="0"
          transform="translate(57.99936,-494.00017)"
          width="2104.7244"
@@ -22158,7 +22167,7 @@
          height="1488.189"
          x="0"
          inkscape:export-ydpi="90"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          y="0"
          transform="translate(57.99936,-494.00017)"
          width="2104.7244"
@@ -22172,27 +22181,16 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,-80.750639,-135.57314)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
-      <rect
-         style="opacity:1;color:#000000;fill:#99ff55;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
-         id="rect27127"
-         inkscape:export-xdpi="90"
-         width="179"
-         transform="scale(1,-1)"
-         y="-251.97055"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.10.png"
-         inkscape:export-ydpi="90"
-         x="-267.00064"
-         height="1.0025001" />
       <text
          style="font-size:7.01749992px;fill:#002b00;font-family:Bitstream Vera Sans Mono"
          id="text29736"
          inkscape:export-xdpi="90"
          y="77.018623"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="753.91748"
          xml:space="preserve"><tspan
@@ -22228,7 +22226,7 @@
          inkscape:export-xdpi="90"
          sodipodi:linespacing="125%"
          y="61.981121"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="771.55316">
         <tspan
@@ -22244,7 +22242,7 @@
          width="82.204971"
          transform="scale(1,-1)"
          y="-66.993622"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="754.55237"
          height="1.0025001" />
@@ -22264,7 +22262,7 @@
          inkscape:rounded="0"
          sodipodi:r1="3.1889648"
          inkscape:flatsided="true"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90" />
       <use
@@ -22275,13 +22273,13 @@
          xlink:href="#path5771"
          x="0"
          height="1488.189"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90" />
       <g
          id="g20174"
          transform="matrix(1.0025,0,0,1.0025,-31.617501,0.6393523)"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90">
         <use
@@ -22319,22 +22317,12 @@
            height="1488.189" />
       </g>
       <rect
-         style="color:#000000;fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         id="use5989"
-         inkscape:export-xdpi="90"
-         width="39.0975"
-         y="-97.781197"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.10.png"
-         inkscape:export-ydpi="90"
-         x="142.2569"
-         height="1.0025001" />
-      <rect
          style="color:#000000;fill:#217844;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
          id="use6056"
          inkscape:export-xdpi="90"
          width="3"
          y="118.1888"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="855.99939"
          height="11.999998" />
@@ -22344,7 +22332,7 @@
          inkscape:export-xdpi="90"
          width="2.0075295"
          y="118.1888"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="977.99939"
          height="12" />
@@ -22355,7 +22343,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.00436,-444.81564)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -22366,7 +22354,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,56.00436,-444.81564)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -22376,7 +22364,7 @@
          inkscape:export-xdpi="90"
          width="120"
          y="116.1888"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="857.99939"
          height="16" />
@@ -22386,7 +22374,7 @@
          inkscape:export-xdpi="90"
          sodipodi:linespacing="125%"
          y="127.1888"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="873.99939">
         <tspan
@@ -22401,14 +22389,14 @@
          inkscape:export-xdpi="90"
          width="1"
          y="117.1888"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="856.99939"
          height="1" />
       <g
          id="g14073"
          transform="matrix(1.0025,0,0,1.0025,0.480002,0.3045276)"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90">
         <g
@@ -22491,7 +22479,7 @@
       <g
          id="g14099"
          transform="matrix(1.0025,0,0,1.0025,8.500002,0.3045276)"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90">
         <path
@@ -22526,7 +22514,7 @@
       <g
          id="g14085"
          transform="matrix(1.0025,0,0,1.0025,4.490002,0.3045276)"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90">
         <rect
@@ -22655,7 +22643,7 @@
       <g
          id="g14034"
          transform="matrix(1.0025,0,0,1.0025,-1.524998,1.7443348)"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90">
         <text
@@ -22826,13 +22814,13 @@
          y="-282.32043"
          x="217.76476"
          height="54.244404"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90" />
       <g
          id="g15117"
          transform="matrix(0.5267601,0,0,0.5267601,-46.906389,6.3316963)"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90">
         <path
@@ -22881,476 +22869,7 @@
          width="16.040001"
          sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/add.png"
          xlink:href="icons/add.png"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
-         inkscape:export-xdpi="90"
-         inkscape:export-ydpi="90" />
-      <g
-         style="display:inline"
-         id="g16561"
-         transform="translate(-1850.0006,-1690.0002)"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
-         inkscape:export-xdpi="90"
-         inkscape:export-ydpi="90">
-        <g
-           transform="translate(100.91492,271.50308)"
-           id="g16288">
-          <rect
-             style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#999999;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-             id="rect6358"
-             width="499"
-             height="269.51926"
-             x="1199.5851"
-             y="1287.1666" />
-          <rect
-             transform="matrix(0,1,1,0,0,0)"
-             style="fill:#cccccc;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.07597279px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-             id="rect10241"
-             width="155"
-             height="1"
-             x="1327.1859"
-             y="1588.0851" />
-          <g
-             id="g13102">
-            <path
-               style="fill:#ffffff;fill-rule:evenodd"
-               id="path6313"
-               d="M 1419.2171,1501.3709 C 1417.0012,1501.3709 1415.1254,1502.1442 1413.5904,1503.6909 C 1412.0147,1505.2909 1411.2274,1507.1842 1411.2274,1509.3709 C 1411.2274,1511.5575 1412.0147,1513.4377 1413.5904,1515.0109 C 1415.1654,1516.5844 1417.0414,1517.3709 1419.2171,1517.3709 C 1421.4199,1517.3709 1423.3292,1516.5777 1424.9446,1514.9909 C 1426.4664,1513.4844 1427.2274,1511.6107 1427.2274,1509.3709 C 1427.2274,1507.1309 1426.4532,1505.2374 1424.9046,1503.6909 C 1423.3556,1502.1442 1421.4599,1501.3709 1419.2171,1501.3709 z M 1419.2374,1502.8107 C 1421.0531,1502.8107 1422.5949,1503.4507 1423.8634,1504.7309 C 1425.1449,1505.9974 1425.7854,1507.5439 1425.7854,1509.3709 C 1425.7854,1511.2107 1425.1581,1512.7377 1423.9032,1513.9509 C 1422.5814,1515.2577 1421.0261,1515.9109 1419.2374,1515.9109 C 1417.4484,1515.9109 1415.9064,1515.2642 1414.6117,1513.9709 C 1413.3169,1512.6777 1412.6691,1511.1442 1412.6691,1509.3709 C 1412.6691,1507.5974 1413.3234,1506.0509 1414.6317,1504.7309 C 1415.8866,1503.4504 1417.4216,1502.8107 1419.2374,1502.8107 z "
-               clip-rule="evenodd"
-               i:knockout="Off" />
-            <g
-               transform="matrix(0.25,0,0,0.25,1411.2274,1457.1742)"
-               id="g6315"
-               style="fill:#ffffff">
-              <path
-                 style="fill:#ffffff;fill-rule:evenodd"
-                 id="path30383"
-                 d="M 15.235,217.597 L 23.263,217.597 C 27.748,217.597 30.474,216.211 30.474,212.573 C 30.474,209.974 28.541,208.712 26.138,208.539 L 26.138,208.489 C 28.542,207.945 29.83,206.757 29.83,204.505 C 29.83,201.213 27.427,199.976 23.858,199.976 L 15.235,199.976 L 15.235,217.597 L 15.235,217.597 z M 19.497,210.172 L 23.883,210.172 C 25.518,210.172 26.064,210.816 26.064,212.276 C 26.064,213.415 25.419,214.33 23.09,214.33 L 19.497,214.33 L 19.497,210.172 z M 19.447,203.243 L 23.114,203.243 C 24.576,203.243 25.418,203.59 25.418,205.075 C 25.418,206.362 24.526,206.907 23.114,206.907 L 19.447,206.907 L 19.447,203.243 z "
-                 clip-rule="evenodd"
-                 i:knockout="Off" />
-              <polygon
-                 style="fill:#ffffff;fill-rule:evenodd"
-                 id="polygon6319"
-                 points="36.052,217.597 40.462,217.597 40.462,209.38 47.153,199.976 41.999,199.976 38.257,206.064 34.515,199.976 29.361,199.976 36.052,209.38 36.052,217.597 "
-                 clip-rule="evenodd"
-                 i:knockout="Off" />
-              <path
-                 style="fill:#ffffff;fill-rule:evenodd"
-                 id="path30386"
-                 d="M 48.765,208.787 L 48.765,204.629 L 44.75,204.629 L 44.75,208.787 L 48.765,208.787 z M 48.765,217.597 L 48.765,213.439 L 44.75,213.439 L 44.75,217.597 L 48.765,217.597 z "
-                 clip-rule="evenodd"
-                 i:knockout="Off" />
-            </g>
-            <path
-               style="fill:#ffffff;fill-rule:evenodd"
-               id="path30388"
-               d="M 1437.1944,1501.6423 C 1434.9814,1501.6423 1433.1082,1502.4145 1431.5753,1503.9589 C 1430.0017,1505.5568 1429.2155,1507.4479 1429.2155,1509.6315 C 1429.2155,1511.815 1430.0017,1513.693 1431.5753,1515.2641 C 1433.1482,1516.8354 1435.0216,1517.6206 1437.1944,1517.6206 C 1439.3942,1517.6206 1441.3008,1516.8285 1442.9141,1515.2439 C 1444.4338,1513.7394 1445.1938,1511.8682 1445.1938,1509.6315 C 1445.1938,1507.3948 1444.4206,1505.5038 1442.8742,1503.9589 C 1441.3273,1502.4143 1439.4341,1501.6423 1437.1944,1501.6423 z M 1437.2146,1503.0799 C 1439.0279,1503.0799 1440.5676,1503.7193 1441.8344,1504.9978 C 1443.1141,1506.2623 1443.7538,1507.8072 1443.7538,1509.6315 C 1443.7538,1511.4687 1443.1274,1512.9937 1441.8741,1514.2055 C 1440.5541,1515.5105 1439.001,1516.1626 1437.2146,1516.1626 C 1435.4281,1516.1626 1433.8884,1515.5167 1432.5952,1514.2252 C 1431.3019,1512.9335 1430.6553,1511.4023 1430.6553,1509.6315 C 1430.6553,1507.8606 1431.3087,1506.316 1432.6151,1504.9978 C 1433.8684,1503.7193 1435.4014,1503.0799 1437.2146,1503.0799 z "
-               clip-rule="evenodd"
-               i:knockout="Off" />
-            <path
-               id="path6327"
-               d="M 1433.6532,1508.5038 C 1433.972,1506.4937 1435.3869,1505.4192 1437.1602,1505.4192 C 1439.7107,1505.4192 1441.2651,1507.2702 1441.2651,1509.7378 C 1441.2651,1512.1461 1439.6111,1514.0168 1437.1203,1514.0168 C 1435.4066,1514.0168 1433.8724,1512.962 1433.5933,1510.8923 L 1435.6061,1510.8923 C 1435.6657,1511.9671 1436.3633,1512.345 1437.3594,1512.345 C 1438.4951,1512.345 1439.2326,1511.29 1439.2326,1509.6779 C 1439.2326,1507.9865 1438.5948,1507.0909 1437.3991,1507.0909 C 1436.5226,1507.0909 1435.7654,1507.4092 1435.6058,1508.5038 L 1436.1908,1508.5005 L 1434.6067,1510.0846 L 1433.0226,1508.5005 L 1433.6532,1508.5038 z "
-               i:knockout="Off"
-               style="fill:#ffffff" />
-            <g
-               transform="matrix(0.252454,0,0,0.252454,1392.7401,1501.6314)"
-               i:extraneous="self"
-               id="g6333"
-               style="fill:#ffffff">
-              <g
-                 id="g6335"
-                 i:layer="yes"
-                 i:dimmedPercent="100"
-                 i:rgbTrio="#4F008000FFFF"
-                 style="fill:#ffffff" />
-              <g
-                 id="g30393"
-                 i:layer="yes"
-                 i:dimmedPercent="100"
-                 i:rgbTrio="#4F008000FFFF"
-                 style="fill:#ffffff" />
-              <g
-                 id="g6339"
-                 i:layer="yes"
-                 i:dimmedPercent="100"
-                 i:rgbTrio="#4F008000FFFF"
-                 style="fill:#ffffff">
-                <g
-                   id="g30396"
-                   style="fill:#ffffff">
-                  <path
-                     i:knockout="Off"
-                     clip-rule="evenodd"
-                     d="M 31.603,0 C 22.92,0 15.28,3.213 9.376,9.203 C 3.299,15.368 0,23.355 0,31.69 C 0,40.111 3.212,47.925 9.29,54.002 C 15.368,60.08 23.268,63.378 31.603,63.378 C 39.937,63.378 48.012,60.079 54.263,53.915 C 60.167,48.098 63.292,40.371 63.292,31.689 C 63.292,23.094 60.167,15.28 54.176,9.289 C 48.098,3.213 40.285,0 31.603,0 z M 31.689,5.73 C 38.809,5.73 45.147,8.421 50.095,13.37 C 54.957,18.232 57.561,24.657 57.561,31.689 C 57.561,38.808 55.043,45.059 50.182,49.835 C 45.059,54.871 38.461,57.562 31.689,57.562 C 24.831,57.562 18.406,54.871 13.457,49.922 C 8.508,44.973 5.73,38.462 5.73,31.69 C 5.73,24.831 8.508,18.32 13.457,13.284 C 18.319,8.335 24.57,5.73 31.689,5.73 z "
-                     id="path30398"
-                     style="fill:#ffffff;fill-rule:evenodd" />
-                  <path
-                     i:knockout="Off"
-                     clip-rule="evenodd"
-                     d="M 31.281,26.424 C 29.491,23.16 26.437,21.861 22.892,21.861 C 17.732,21.861 13.625,25.511 13.625,31.69 C 13.625,37.973 17.486,41.519 23.067,41.519 C 26.648,41.519 29.702,39.553 31.386,36.57 L 27.455,34.569 C 26.577,36.675 25.243,37.307 23.559,37.307 C 20.645,37.307 19.311,34.885 19.311,31.691 C 19.311,28.497 20.435,26.074 23.559,26.074 C 24.401,26.074 26.086,26.531 27.069,28.636 L 31.281,26.424 z "
-                     id="path6345"
-                     style="fill:#ffffff;fill-rule:evenodd" />
-                  <path
-                     i:knockout="Off"
-                     clip-rule="evenodd"
-                     d="M 49.562,26.424 C 47.772,23.16 44.718,21.861 41.173,21.861 C 36.013,21.861 31.906,25.511 31.906,31.69 C 31.906,37.973 35.767,41.519 41.349,41.519 C 44.929,41.519 47.983,39.553 49.668,36.57 L 45.737,34.569 C 44.859,36.675 43.526,37.307 41.841,37.307 C 38.927,37.307 37.593,34.885 37.593,31.691 C 37.593,28.497 38.717,26.074 41.841,26.074 C 42.683,26.074 44.368,26.531 45.351,28.636 L 49.562,26.424 z "
-                     id="path30401"
-                     style="fill:#ffffff;fill-rule:evenodd" />
-                </g>
-              </g>
-            </g>
-            <rect
-               transform="scale(1,-1)"
-               style="fill:#cccccc;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.07597279px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-               id="rect7329"
-               width="498"
-               height="1"
-               x="1200.0851"
-               y="-1482.1859" />
-            <rect
-               transform="scale(1,-1)"
-               style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#cccccc;stroke-width:0.99999982;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-               id="rect9270"
-               width="481.99997"
-               height="43"
-               x="1209.0851"
-               y="-1533.1859" />
-            <text
-               id="text10243"
-               x="1228.4113"
-               y="1549.6898"
-               style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Bitstream Vera Sans"
-               sodipodi:linespacing="125%"
-               inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
-               inkscape:export-xdpi="90"
-               inkscape:export-ydpi="90">
-              <tspan
-                 sodipodi:role="line"
-                 id="tspan10245"
-                 x="1228.4113"
-                 y="1549.6898">Options</tspan>
-            </text>
-            <image
-               xlink:href="/usr/share/icons/Tango/16x16/categories/package_settings.png"
-               sodipodi:absref="/usr/share/icons/Tango/16x16/categories/package_settings.png"
-               width="16"
-               height="16"
-               id="image10264"
-               x="1207.0851"
-               y="1537.1859" />
-            <image
-               xlink:href="/usr/share/icons/Tango/16x16/apps/kwin.png"
-               sodipodi:absref="/usr/share/icons/Tango/16x16/apps/kwin.png"
-               width="16"
-               height="16"
-               id="image10274"
-               x="1672.0851"
-               y="1536.1859" />
-            <text
-               id="text10277"
-               x="1564.9073"
-               y="1549.016"
-               style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Bitstream Vera Sans"
-               sodipodi:linespacing="125%"
-               inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
-               inkscape:export-xdpi="90"
-               inkscape:export-ydpi="90">
-              <tspan
-                 sodipodi:role="line"
-                 id="tspan10279"
-                 x="1564.9073"
-                 y="1549.016">External Window</tspan>
-            </text>
-          </g>
-          <g
-             id="g13069">
-            <flowRoot
-               xml:space="preserve"
-               id="flowRoot30412"
-               transform="translate(1503.5812,1040.2172)"
-               inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-chat-draft-0.1.png"
-               inkscape:export-xdpi="90"
-               inkscape:export-ydpi="90"
-               style="display:inline"><flowRegion
-                 id="flowRegion30414"><rect
-                   id="rect30416"
-                   width="505.37579"
-                   height="230.06546"
-                   x="-295.37579"
-                   y="298.1235" /></flowRegion><flowPara
-                 id="flowPara30418"><flowSpan
-   id="flowSpan30420"
-   style="fill:#b3b3b3">19:38</flowSpan><flowSpan
-   id="flowSpan30422"
-   style="font-weight:bold;fill:#de8787">     luther.b</flowSpan>: Lorem ipsum dolor sit amet</flowPara></flowRoot>            <flowRoot
-               inkscape:export-ydpi="90"
-               inkscape:export-xdpi="90"
-               inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-chat-draft-0.1.png"
-               transform="translate(1503.5812,1056.2172)"
-               id="flowRoot30424"
-               xml:space="preserve"
-               style="display:inline"><flowRegion
-                 id="flowRegion30426"><rect
-                   y="298.1235"
-                   x="-295.37579"
-                   height="230.06546"
-                   width="505.37579"
-                   id="rect30428" /></flowRegion><flowPara
-                 id="flowPara30430"><flowSpan
-   style="fill:#b3b3b3"
-   id="flowSpan30432">19:39</flowSpan><flowSpan
-   style="font-weight:bold;fill:#d45500"
-   id="flowSpan30434">     anne.h</flowSpan>: yes, lorem ipsum dolor sit amet</flowPara></flowRoot>            <flowRoot
-               xml:space="preserve"
-               id="flowRoot30436"
-               transform="translate(1503.5812,1090.2172)"
-               inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-chat-draft-0.1.png"
-               inkscape:export-xdpi="90"
-               inkscape:export-ydpi="90"
-               style="display:inline"><flowRegion
-                 id="flowRegion30438"><rect
-                   id="rect30440"
-                   width="505.37579"
-                   height="230.06546"
-                   x="-295.37579"
-                   y="298.1235" /></flowRegion><flowPara
-                 id="flowPara30442"><flowSpan
-   id="flowSpan30444"
-   style="fill:#b3b3b3">20:06</flowSpan><flowSpan
-   id="flowSpan30446"
-   style="font-weight:bold;fill:#501616">     marc.a</flowSpan>: lorem ipsum?</flowPara></flowRoot>            <rect
-               inkscape:export-ydpi="90"
-               inkscape:export-xdpi="90"
-               inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-chat-draft-0.1.png"
-               transform="scale(1,-1)"
-               y="-1381.1859"
-               x="1210.0851"
-               height="1"
-               width="318.56055"
-               id="rect30448"
-               style="color:#000000;fill:#b3b3b3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible" />
-            <flowRoot
-               xml:space="preserve"
-               id="flowRoot30450"
-               transform="translate(1834.1887,1074.7133)"
-               inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-chat-draft-0.1.png"
-               inkscape:export-xdpi="90"
-               inkscape:export-ydpi="90"
-               style="display:inline"><flowRegion
-                 id="flowRegion30452"><rect
-                   id="rect30454"
-                   width="505.37579"
-                   height="230.06546"
-                   x="-295.37579"
-                   y="298.1235" /></flowRegion><flowPara
-                 id="flowPara30456"><flowSpan
-                   id="flowSpan30458"
-                   style="fill:#b3b3b3">27 min</flowSpan></flowPara></flowRoot>            <text
-               style="font-size:12px;fill:#d45500;fill-opacity:1"
-               id="text30460"
-               font-size="11"
-               x="1605.3644"
-               y="1368.016"
-               inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/desarrollo/redefinicion2005/sandbox/newUIdraftwithoutcomments-0.1.png"
-               inkscape:export-xdpi="71.000000"
-               inkscape:export-ydpi="71.000000">anne.h</text>
-            <text
-               style="font-size:12px;fill:#501616;fill-opacity:1"
-               id="text30462"
-               font-size="11"
-               x="1604.9952"
-               y="1383.016"
-               inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/desarrollo/redefinicion2005/sandbox/newUIdraftwithoutcomments-0.1.png"
-               inkscape:export-xdpi="71.000000"
-               inkscape:export-ydpi="71.000000">marc.a</text>
-            <text
-               inkscape:export-ydpi="71.000000"
-               inkscape:export-xdpi="71.000000"
-               inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/desarrollo/redefinicion2005/sandbox/newUIdraftwithoutcomments-0.1.png"
-               y="1352.016"
-               x="1604.9542"
-               font-size="11"
-               id="text30464"
-               style="font-size:12px;fill:#de8787;fill-opacity:1">luther.b</text>
-            <rect
-               y="-1319.7858"
-               x="1209.0851"
-               height="17"
-               width="481.99997"
-               id="rect3834"
-               style="color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:evenodd;stroke:#cccccc;stroke-width:0.9999997;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-               transform="scale(1,-1)" />
-            <text
-               inkscape:export-ydpi="90"
-               inkscape:export-xdpi="90"
-               inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
-               sodipodi:linespacing="125%"
-               style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Bitstream Vera Sans"
-               y="1314.1859"
-               x="1211.0851"
-               id="text3840">
-              <tspan
-                 y="1314.1859"
-                 x="1211.0851"
-                 id="tspan3842"
-                 sodipodi:role="line">Welcome to sometopic-foorganization chat room</tspan>
-            </text>
-            <image
-               xlink:href="icons/bullet_green.png"
-               sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/bullet_green.png"
-               width="16"
-               height="16"
-               id="image5849"
-               x="1588.0851"
-               y="1342.1859" />
-          </g>
-        </g>
-        <g
-           id="g16541">
-          <image
-             y="1535.189"
-             x="1459"
-             id="image13322"
-             height="23"
-             width="50"
-             sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
-             xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif" />
-          <image
-             xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
-             sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
-             width="50"
-             height="23"
-             id="image16203"
-             x="1509"
-             y="1535.189" />
-          <image
-             y="1535.189"
-             x="1559"
-             id="image16205"
-             height="23"
-             width="50"
-             sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
-             xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif" />
-          <image
-             xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
-             sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
-             width="59.375"
-             height="23"
-             id="image16207"
-             x="1609"
-             y="1535.189" />
-          <image
-             y="1535.189"
-             x="1659"
-             id="image16209"
-             height="23"
-             width="61"
-             sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
-             xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif" />
-          <image
-             xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
-             sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
-             width="59"
-             height="23"
-             id="image16211"
-             x="1709"
-             y="1535.189" />
-          <g
-             id="g16247"
-             transform="translate(100,272)">
-            <image
-               xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/tr.gif"
-               sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/tr.gif"
-               width="9"
-               height="23"
-               id="image12762"
-               x="1691"
-               y="1263.189" />
-            <image
-               xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
-               sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
-               width="33"
-               height="23"
-               id="image16213"
-               x="1659"
-               y="1263.189" />
-          </g>
-          <image
-             xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
-             sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
-             width="50"
-             height="23"
-             id="image16215"
-             x="1409"
-             y="1535.189" />
-          <image
-             y="1535.189"
-             x="1359"
-             id="image16217"
-             height="23"
-             width="50"
-             sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
-             xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif" />
-          <g
-             id="g16243"
-             transform="matrix(1.0169492,0,0,1,79.661017,272)">
-            <image
-               xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/tl.gif"
-               sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/tl.gif"
-               width="9"
-               height="23"
-               id="image12719"
-               x="1200"
-               y="1263.189" />
-            <image
-               y="1263.189"
-               x="1208"
-               id="image16219"
-               height="23"
-               width="51"
-               sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
-               xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif" />
-          </g>
-          <image
-             y="1535.1859"
-             x="1740.0851"
-             id="image12497"
-             height="23"
-             width="23"
-             sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/min-btn.gif"
-             xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/min-btn.gif" />
-          <image
-             y="1535.1859"
-             x="1765.0851"
-             id="image12540"
-             height="23"
-             width="23"
-             sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/close-btn.gif"
-             xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/close-btn.gif" />
-          <text
-             inkscape:export-ydpi="90"
-             inkscape:export-xdpi="90"
-             inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
-             sodipodi:linespacing="125%"
-             style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#1f241c;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Bitstream Vera Sans"
-             y="1551.9535"
-             x="1311.0851"
-             id="text4952">
-            <tspan
-               y="1551.9535"
-               x="1311.0851"
-               id="tspan4954"
-               sodipodi:role="line">Chat room sometopic-foorganization@kune.ourproject.org</tspan>
-          </text>
-        </g>
-      </g>
-      <rect
-         style="color:#000000;fill:#5fd35f;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         id="rect6147"
-         width="1"
-         height="1"
-         x="-11.117095"
-         y="-400.57108"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90" />
       <rect
@@ -23363,351 +22882,6 @@
          inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90" />
-      <rect
-         style="color:#000000;fill:#87decd;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         id="rect6175"
-         width="1"
-         height="1"
-         x="-2.117095"
-         y="-266.57111"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
-         inkscape:export-xdpi="90"
-         inkscape:export-ydpi="90" />
-      <rect
-         inkscape:export-ydpi="90"
-         inkscape:export-xdpi="90"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
-         style="color:#000000;fill:#aaffaa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
-         id="rect17703"
-         width="130.74353"
-         height="25"
-         x="-145.86063"
-         y="374.57083"
-         transform="scale(1,-1)" />
-      <g
-         style="display:inline"
-         id="g30499"
-         transform="matrix(0.125,0,0,0.125,-217.1172,-520.57109)"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
-         inkscape:export-xdpi="90"
-         inkscape:export-ydpi="90">
-        <rect
-           width="128"
-           height="128"
-           rx="27.5"
-           ry="27.5"
-           x="1440"
-           y="1000"
-           id="rect6187"
-           style="fill:#cc5d15" />
-        <rect
-           width="123"
-           height="123"
-           rx="25"
-           ry="25"
-           x="1442.5"
-           y="1002.5"
-           id="rect6189"
-           style="fill:#f49c52" />
-        <rect
-           width="118"
-           height="118"
-           rx="23.5"
-           ry="23.5"
-           x="1445"
-           y="1005"
-           id="rect6191"
-           style="fill:url(#linearGradient6405)" />
-        <circle
-           transform="matrix(0.5,0,0,0.5,1440,1000)"
-           cx="68"
-           cy="189"
-           r="24"
-           id="circle6193"
-           sodipodi:cx="68"
-           sodipodi:cy="189"
-           sodipodi:rx="24"
-           sodipodi:ry="24"
-           style="fill:#ffffff" />
-        <path
-           d="M 1520,1106.5 L 1503,1106.5 C 1503,1083.8563 1484.6437,1065.5 1462,1065.5 L 1462,1048.5 C 1494.0325,1048.5 1520,1074.4675 1520,1106.5 z "
-           id="path6195"
-           style="fill:#ffffff" />
-        <path
-           d="M 1532,1106.5 C 1532,1067.8401 1500.6599,1036.5 1462,1036.5 L 1462,1019 C 1510.3249,1019 1549.5,1058.1751 1549.5,1106.5 L 1532,1106.5 z "
-           id="path30506"
-           style="fill:#ffffff" />
-      </g>
-      <text
-         inkscape:export-ydpi="90"
-         inkscape:export-xdpi="90"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
-         sodipodi:linespacing="125%"
-         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#225500;display:inline;font-family:Arial"
-         y="-311.57092"
-         x="-124.11716"
-         id="text7578">
-        <tspan
-           y="-311.57092"
-           x="-124.11716"
-           id="tspan7580"
-           sodipodi:role="line">Folder</tspan>
-      </text>
-      <image
-         style="display:inline"
-         y="-323.57089"
-         x="-140.1171"
-         id="image7744"
-         height="16"
-         width="16"
-         sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/bullet_prev.png"
-         xlink:href="icons/bullet_prev.png"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
-         inkscape:export-xdpi="90"
-         inkscape:export-ydpi="90" />
-      <rect
-         style="color:#000000;fill:#ccffaa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         id="rect7746"
-         width="5"
-         height="7"
-         x="-131.11716"
-         y="-319.57089"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
-         inkscape:export-xdpi="90"
-         inkscape:export-ydpi="90" />
-      <rect
-         style="color:#000000;fill:#479018;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         id="rect7754"
-         width="1"
-         height="6"
-         x="-132.11716"
-         y="-318.57089"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
-         inkscape:export-xdpi="90"
-         inkscape:export-ydpi="90" />
-      <text
-         inkscape:export-ydpi="90"
-         inkscape:export-xdpi="90"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
-         sodipodi:linespacing="125%"
-         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#225500;display:inline;font-family:Arial"
-         y="-293.57092"
-         x="-124.11716"
-         id="text7756">
-        <tspan
-           y="-293.57092"
-           x="-124.11716"
-           id="tspan7758"
-           sodipodi:role="line">Document 1</tspan>
-        <tspan
-           y="-278.57092"
-           x="-124.11716"
-           sodipodi:role="line"
-           id="tspan7760">Document 2</tspan>
-      </text>
-      <text
-         inkscape:export-ydpi="90"
-         inkscape:export-xdpi="90"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
-         sodipodi:linespacing="125%"
-         style="font-size:13px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#3e4837;display:inline;font-family:Arial"
-         y="-333.57089"
-         x="-110.1171"
-         id="text7830">
-        <tspan
-           y="-333.57089"
-           x="-110.1171"
-           id="tspan7832"
-           sodipodi:role="line">Current folder</tspan>
-      </text>
-      <rect
-         inkscape:export-ydpi="90"
-         inkscape:export-xdpi="90"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
-         y="308.57092"
-         x="-123.61716"
-         height="1"
-         width="36.5"
-         id="rect7896"
-         style="color:#000000;fill:#225500;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         transform="scale(1,-1)" />
-      <rect
-         inkscape:export-ydpi="90"
-         inkscape:export-xdpi="90"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
-         y="290.57092"
-         x="-123.11716"
-         height="1"
-         width="62"
-         id="rect7898"
-         style="color:#000000;fill:#225500;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         transform="scale(1,-1)" />
-      <rect
-         inkscape:export-ydpi="90"
-         inkscape:export-xdpi="90"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
-         y="275.57092"
-         x="-123.11716"
-         height="1"
-         width="63"
-         id="rect7900"
-         style="color:#000000;fill:#225500;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         transform="scale(1,-1)" />
-      <g
-         id="g30539">
-        <g
-           inkscape:export-ydpi="90"
-           inkscape:export-xdpi="90"
-           inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
-           transform="translate(-2276.1171,-1127.7598)"
-           id="g7872"
-           style="display:inline">
-          <rect
-             inkscape:export-ydpi="90"
-             inkscape:export-xdpi="90"
-             inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
-             y="766.18896"
-             x="2178"
-             height="5"
-             width="34"
-             id="rect7836"
-             style="color:#000000;fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-          <rect
-             style="color:#000000;fill:#aaaaaa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-             id="rect7838"
-             width="34"
-             height="1"
-             x="2178"
-             y="759.18896"
-             inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
-             inkscape:export-xdpi="90"
-             inkscape:export-ydpi="90" />
-          <rect
-             style="color:#000000;fill:#aaaaaa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-             id="rect7840"
-             width="34"
-             height="1"
-             x="2178"
-             y="771.18896"
-             inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
-             inkscape:export-xdpi="90"
-             inkscape:export-ydpi="90" />
-          <rect
-             style="color:#000000;fill:#aaaaaa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-             id="rect7842"
-             width="11"
-             height="1"
-             x="-771.18896"
-             y="2177"
-             inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
-             inkscape:export-xdpi="90"
-             inkscape:export-ydpi="90"
-             transform="matrix(0,-1,1,0,0,0)" />
-          <rect
-             transform="matrix(0,-1,1,0,0,0)"
-             inkscape:export-ydpi="90"
-             inkscape:export-xdpi="90"
-             inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
-             y="2212"
-             x="-771.18896"
-             height="1"
-             width="11"
-             id="rect7844"
-             style="color:#000000;fill:#aaaaaa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-          <rect
-             inkscape:export-ydpi="90"
-             inkscape:export-xdpi="90"
-             inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
-             y="760.18896"
-             x="2178"
-             height="6"
-             width="34"
-             id="rect7846"
-             style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-          <g
-             id="g7866"
-             transform="matrix(-1,0,0,1,4389.4511,0)">
-            <path
-               id="path30516"
-               d="M 2181.9511,762.68896 L 2196.9511,762.68896"
-               style="fill:#225500;fill-opacity:0.75;fill-rule:evenodd;stroke:#225500;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
-            <path
-               style="fill:#225500;fill-opacity:0.75;fill-rule:evenodd;stroke:#225500;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
-               d="M 2183.9511,765.68896 L 2198.9511,765.68896"
-               id="path30518" />
-            <path
-               id="path7852"
-               d="M 2185.9511,768.68896 L 2200.9511,768.68896"
-               style="fill:#225500;fill-opacity:0.75;fill-rule:evenodd;stroke:#225500;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
-            <path
-               transform="translate(641.73517,89.90712)"
-               d="M 1563.0192,677.96995 L 1559.716,672.3151 L 1566.2648,672.28185 L 1563.0192,677.96995 z "
-               inkscape:randomized="0"
-               inkscape:rounded="0"
-               inkscape:flatsided="true"
-               sodipodi:arg2="2.6129171"
-               sodipodi:arg1="1.5657195"
-               sodipodi:r2="0.90551758"
-               sodipodi:r1="3.7810335"
-               sodipodi:cy="674.18896"
-               sodipodi:cx="1563"
-               sodipodi:sides="3"
-               id="path30521"
-               style="color:#000000;fill:#225500;fill-opacity:1;fill-rule:evenodd;stroke:#2b0000;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-               sodipodi:type="star" />
-          </g>
-        </g>
-        <path
-           transform="matrix(-0.3333333,0,0,0.2886751,205.5563,-445.76385)"
-           d="M 1040.0818,288.18896 L 1009.9591,305.58034 L 1009.9591,270.79759 L 1040.0818,288.18896 z "
-           inkscape:randomized="0"
-           inkscape:rounded="0"
-           inkscape:flatsided="true"
-           sodipodi:arg2="1.0471976"
-           sodipodi:arg1="0"
-           sodipodi:r2="10.040914"
-           sodipodi:r1="20.081829"
-           sodipodi:cy="288.18896"
-           sodipodi:cx="1020"
-           sodipodi:sides="3"
-           id="path12137"
-           style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3.22371006;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-           sodipodi:type="star"
-           inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
-           inkscape:export-xdpi="90"
-           inkscape:export-ydpi="90" />
-        <path
-           inkscape:export-ydpi="90"
-           inkscape:export-xdpi="90"
-           inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
-           sodipodi:type="star"
-           style="color:#000000;fill:#cccccc;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3.22371006;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-           id="path12139"
-           sodipodi:sides="3"
-           sodipodi:cx="1020"
-           sodipodi:cy="288.18896"
-           sodipodi:r1="20.081829"
-           sodipodi:r2="10.040914"
-           sodipodi:arg1="0"
-           sodipodi:arg2="1.0471976"
-           inkscape:flatsided="true"
-           inkscape:rounded="0"
-           inkscape:randomized="0"
-           d="M 1040.0818,288.18896 L 1009.9591,305.58034 L 1009.9591,270.79759 L 1040.0818,288.18896 z "
-           transform="matrix(0.3333333,0,0,0.2886751,-368.79062,-444.76385)" />
-      </g>
-      <image
-         style="display:inline"
-         y="-394.57089"
-         x="-142.1171"
-         id="image17705"
-         height="16"
-         width="16"
-         sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/add.png"
-         xlink:href="icons/add.png"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
-         inkscape:export-xdpi="90"
-         inkscape:export-ydpi="90" />
       <text
          style="font-size:22.05500031px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;opacity:0.8;fill:#55d400;fill-opacity:1;stroke:#002b11;stroke-width:0.5924775;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;font-family:CoolDots"
          id="text7192"
@@ -23715,7 +22889,7 @@
          y="-241.8112"
          x="279.99936"
          xml:space="preserve"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90"><tspan
            sodipodi:role="line"
@@ -23726,7 +22900,7 @@
       <g
          transform="matrix(0.5267601,0,0,0.5267601,-46.906389,6.3316963)"
          id="g7200"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90">
         <path
@@ -23760,7 +22934,7 @@
          height="1.0025001"
          x="368.96686"
          inkscape:export-ydpi="90"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          y="-114.44637"
          width="45"
          inkscape:export-xdpi="90"
@@ -23769,7 +22943,7 @@
       <g
          id="g7413"
          transform="matrix(0.6508728,0,0,0.6037001,261.93487,-75.330568)"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90">
         <rect
@@ -23860,7 +23034,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,682.58436,-490.58064)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -23870,7 +23044,7 @@
          inkscape:export-xdpi="90"
          width="1"
          y="130.1888"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="856.99939"
          height="1" />
@@ -23880,7 +23054,7 @@
          inkscape:export-xdpi="90"
          width="1"
          y="117.1888"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="977.99939"
          height="1" />
@@ -23890,14 +23064,14 @@
          inkscape:export-xdpi="90"
          width="1"
          y="130.1888"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="977.99939"
          height="1" />
       <g
          id="g7285"
          transform="translate(506.17726,-586.69958)"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90">
         <rect
@@ -23947,7 +23121,7 @@
          style="display:inline"
          id="g8009"
          transform="matrix(0,1,-1,0,1576.8877,-307.63331)"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90">
         <rect
@@ -23997,7 +23171,7 @@
          style="display:inline"
          id="g8031"
          transform="matrix(0,1,-1,0,1577.8877,-381.63331)"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90">
         <rect
@@ -24046,7 +23220,7 @@
       <g
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          transform="matrix(0,1,-1,0,1577.8877,-467.63331)"
          id="g8041"
          style="display:inline">
@@ -24100,7 +23274,7 @@
          width="2104.7244"
          transform="matrix(1.0025,0,0,1.0025,22.81686,-342.78064)"
          y="0"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.11.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-ydpi="90"
          x="0"
          height="1488.189" />
@@ -24111,7 +23285,7 @@
          height="32.176498"
          x="529.41113"
          y="-273.39944"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90" />
       <image
@@ -24122,7 +23296,7 @@
          width="16"
          sodipodi:absref="/usr/share/icons/Tango/16x16/emblems/emblem-important.png"
          xlink:href="/usr/share/icons/Tango/16x16/emblems/emblem-important.png"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90" />
       <text
@@ -24132,7 +23306,7 @@
          y="-254.31114"
          id="text11896"
          sodipodi:linespacing="125%"
-         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+         inkscape:export-filename="/tmp/kune-org-home-draft-def-0.1.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90"><tspan
            sodipodi:role="line"
@@ -24150,6 +23324,822 @@
          id="tspan29760"
          y="495.99963"
          x="601.76581" /></text>
+    <g
+       style="display:inline"
+       id="g16561"
+       transform="translate(-1500.3411,-624.56693)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <g
+         transform="translate(100.91492,271.50308)"
+         id="g16288">
+        <rect
+           style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#999999;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect6358"
+           width="499"
+           height="269.51926"
+           x="1199.5851"
+           y="1287.1666" />
+        <rect
+           transform="matrix(0,1,1,0,0,0)"
+           style="fill:#cccccc;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.07597279px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           id="rect10241"
+           width="155"
+           height="1"
+           x="1327.1859"
+           y="1588.0851" />
+        <g
+           id="g13102">
+          <path
+             style="fill:#ffffff;fill-rule:evenodd"
+             id="path6313"
+             d="M 1419.2171,1501.3709 C 1417.0012,1501.3709 1415.1254,1502.1442 1413.5904,1503.6909 C 1412.0147,1505.2909 1411.2274,1507.1842 1411.2274,1509.3709 C 1411.2274,1511.5575 1412.0147,1513.4377 1413.5904,1515.0109 C 1415.1654,1516.5844 1417.0414,1517.3709 1419.2171,1517.3709 C 1421.4199,1517.3709 1423.3292,1516.5777 1424.9446,1514.9909 C 1426.4664,1513.4844 1427.2274,1511.6107 1427.2274,1509.3709 C 1427.2274,1507.1309 1426.4532,1505.2374 1424.9046,1503.6909 C 1423.3556,1502.1442 1421.4599,1501.3709 1419.2171,1501.3709 z M 1419.2374,1502.8107 C 1421.0531,1502.8107 1422.5949,1503.4507 1423.8634,1504.7309 C 1425.1449,1505.9974 1425.7854,1507.5439 1425.7854,1509.3709 C 1425.7854,1511.2107 1425.1581,1512.7377 1423.9032,1513.9509 C 1422.5814,1515.2577 1421.0261,1515.9109 1419.2374,1515.9109 C 1417.4484,1515.9109 1415.9064,1515.2642 1414.6117,1513.9709 C 1413.3169,1512.6777 1412.6691,1511.1442 1412.6691,1509.3709 C 1412.6691,1507.5974 1413.3234,1506.0509 1414.6317,1504.7309 C 1415.8866,1503.4504 1417.4216,1502.8107 1419.2374,1502.8107 z "
+             clip-rule="evenodd"
+             i:knockout="Off" />
+          <g
+             transform="matrix(0.25,0,0,0.25,1411.2274,1457.1742)"
+             id="g6315"
+             style="fill:#ffffff">
+            <path
+               style="fill:#ffffff;fill-rule:evenodd"
+               id="path30383"
+               d="M 15.235,217.597 L 23.263,217.597 C 27.748,217.597 30.474,216.211 30.474,212.573 C 30.474,209.974 28.541,208.712 26.138,208.539 L 26.138,208.489 C 28.542,207.945 29.83,206.757 29.83,204.505 C 29.83,201.213 27.427,199.976 23.858,199.976 L 15.235,199.976 L 15.235,217.597 L 15.235,217.597 z M 19.497,210.172 L 23.883,210.172 C 25.518,210.172 26.064,210.816 26.064,212.276 C 26.064,213.415 25.419,214.33 23.09,214.33 L 19.497,214.33 L 19.497,210.172 z M 19.447,203.243 L 23.114,203.243 C 24.576,203.243 25.418,203.59 25.418,205.075 C 25.418,206.362 24.526,206.907 23.114,206.907 L 19.447,206.907 L 19.447,203.243 z "
+               clip-rule="evenodd"
+               i:knockout="Off" />
+            <polygon
+               style="fill:#ffffff;fill-rule:evenodd"
+               id="polygon6319"
+               points="36.052,217.597 40.462,217.597 40.462,209.38 47.153,199.976 41.999,199.976 38.257,206.064 34.515,199.976 29.361,199.976 36.052,209.38 36.052,217.597 "
+               clip-rule="evenodd"
+               i:knockout="Off" />
+            <path
+               style="fill:#ffffff;fill-rule:evenodd"
+               id="path30386"
+               d="M 48.765,208.787 L 48.765,204.629 L 44.75,204.629 L 44.75,208.787 L 48.765,208.787 z M 48.765,217.597 L 48.765,213.439 L 44.75,213.439 L 44.75,217.597 L 48.765,217.597 z "
+               clip-rule="evenodd"
+               i:knockout="Off" />
+          </g>
+          <path
+             style="fill:#ffffff;fill-rule:evenodd"
+             id="path30388"
+             d="M 1437.1944,1501.6423 C 1434.9814,1501.6423 1433.1082,1502.4145 1431.5753,1503.9589 C 1430.0017,1505.5568 1429.2155,1507.4479 1429.2155,1509.6315 C 1429.2155,1511.815 1430.0017,1513.693 1431.5753,1515.2641 C 1433.1482,1516.8354 1435.0216,1517.6206 1437.1944,1517.6206 C 1439.3942,1517.6206 1441.3008,1516.8285 1442.9141,1515.2439 C 1444.4338,1513.7394 1445.1938,1511.8682 1445.1938,1509.6315 C 1445.1938,1507.3948 1444.4206,1505.5038 1442.8742,1503.9589 C 1441.3273,1502.4143 1439.4341,1501.6423 1437.1944,1501.6423 z M 1437.2146,1503.0799 C 1439.0279,1503.0799 1440.5676,1503.7193 1441.8344,1504.9978 C 1443.1141,1506.2623 1443.7538,1507.8072 1443.7538,1509.6315 C 1443.7538,1511.4687 1443.1274,1512.9937 1441.8741,1514.2055 C 1440.5541,1515.5105 1439.001,1516.1626 1437.2146,1516.1626 C 1435.4281,1516.1626 1433.8884,1515.5167 1432.5952,1514.2252 C 1431.3019,1512.9335 1430.6553,1511.4023 1430.6553,1509.6315 C 1430.6553,1507.8606 1431.3087,1506.316 1432.6151,1504.9978 C 1433.8684,1503.7193 1435.4014,1503.0799 1437.2146,1503.0799 z "
+             clip-rule="evenodd"
+             i:knockout="Off" />
+          <path
+             id="path6327"
+             d="M 1433.6532,1508.5038 C 1433.972,1506.4937 1435.3869,1505.4192 1437.1602,1505.4192 C 1439.7107,1505.4192 1441.2651,1507.2702 1441.2651,1509.7378 C 1441.2651,1512.1461 1439.6111,1514.0168 1437.1203,1514.0168 C 1435.4066,1514.0168 1433.8724,1512.962 1433.5933,1510.8923 L 1435.6061,1510.8923 C 1435.6657,1511.9671 1436.3633,1512.345 1437.3594,1512.345 C 1438.4951,1512.345 1439.2326,1511.29 1439.2326,1509.6779 C 1439.2326,1507.9865 1438.5948,1507.0909 1437.3991,1507.0909 C 1436.5226,1507.0909 1435.7654,1507.4092 1435.6058,1508.5038 L 1436.1908,1508.5005 L 1434.6067,1510.0846 L 1433.0226,1508.5005 L 1433.6532,1508.5038 z "
+             i:knockout="Off"
+             style="fill:#ffffff" />
+          <g
+             transform="matrix(0.252454,0,0,0.252454,1392.7401,1501.6314)"
+             i:extraneous="self"
+             id="g6333"
+             style="fill:#ffffff">
+            <g
+               id="g6335"
+               i:layer="yes"
+               i:dimmedPercent="100"
+               i:rgbTrio="#4F008000FFFF"
+               style="fill:#ffffff" />
+            <g
+               id="g30393"
+               i:layer="yes"
+               i:dimmedPercent="100"
+               i:rgbTrio="#4F008000FFFF"
+               style="fill:#ffffff" />
+            <g
+               id="g6339"
+               i:layer="yes"
+               i:dimmedPercent="100"
+               i:rgbTrio="#4F008000FFFF"
+               style="fill:#ffffff">
+              <g
+                 id="g30396"
+                 style="fill:#ffffff">
+                <path
+                   i:knockout="Off"
+                   clip-rule="evenodd"
+                   d="M 31.603,0 C 22.92,0 15.28,3.213 9.376,9.203 C 3.299,15.368 0,23.355 0,31.69 C 0,40.111 3.212,47.925 9.29,54.002 C 15.368,60.08 23.268,63.378 31.603,63.378 C 39.937,63.378 48.012,60.079 54.263,53.915 C 60.167,48.098 63.292,40.371 63.292,31.689 C 63.292,23.094 60.167,15.28 54.176,9.289 C 48.098,3.213 40.285,0 31.603,0 z M 31.689,5.73 C 38.809,5.73 45.147,8.421 50.095,13.37 C 54.957,18.232 57.561,24.657 57.561,31.689 C 57.561,38.808 55.043,45.059 50.182,49.835 C 45.059,54.871 38.461,57.562 31.689,57.562 C 24.831,57.562 18.406,54.871 13.457,49.922 C 8.508,44.973 5.73,38.462 5.73,31.69 C 5.73,24.831 8.508,18.32 13.457,13.284 C 18.319,8.335 24.57,5.73 31.689,5.73 z "
+                   id="path30398"
+                   style="fill:#ffffff;fill-rule:evenodd" />
+                <path
+                   i:knockout="Off"
+                   clip-rule="evenodd"
+                   d="M 31.281,26.424 C 29.491,23.16 26.437,21.861 22.892,21.861 C 17.732,21.861 13.625,25.511 13.625,31.69 C 13.625,37.973 17.486,41.519 23.067,41.519 C 26.648,41.519 29.702,39.553 31.386,36.57 L 27.455,34.569 C 26.577,36.675 25.243,37.307 23.559,37.307 C 20.645,37.307 19.311,34.885 19.311,31.691 C 19.311,28.497 20.435,26.074 23.559,26.074 C 24.401,26.074 26.086,26.531 27.069,28.636 L 31.281,26.424 z "
+                   id="path6345"
+                   style="fill:#ffffff;fill-rule:evenodd" />
+                <path
+                   i:knockout="Off"
+                   clip-rule="evenodd"
+                   d="M 49.562,26.424 C 47.772,23.16 44.718,21.861 41.173,21.861 C 36.013,21.861 31.906,25.511 31.906,31.69 C 31.906,37.973 35.767,41.519 41.349,41.519 C 44.929,41.519 47.983,39.553 49.668,36.57 L 45.737,34.569 C 44.859,36.675 43.526,37.307 41.841,37.307 C 38.927,37.307 37.593,34.885 37.593,31.691 C 37.593,28.497 38.717,26.074 41.841,26.074 C 42.683,26.074 44.368,26.531 45.351,28.636 L 49.562,26.424 z "
+                   id="path30401"
+                   style="fill:#ffffff;fill-rule:evenodd" />
+              </g>
+            </g>
+          </g>
+          <rect
+             transform="scale(1,-1)"
+             style="fill:#cccccc;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.07597279px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+             id="rect7329"
+             width="498"
+             height="1"
+             x="1200.0851"
+             y="-1482.1859" />
+          <rect
+             transform="scale(1,-1)"
+             style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#cccccc;stroke-width:0.99999982;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+             id="rect9270"
+             width="481.99997"
+             height="43"
+             x="1209.0851"
+             y="-1533.1859" />
+          <text
+             id="text10243"
+             x="1228.4113"
+             y="1549.6898"
+             style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Bitstream Vera Sans"
+             sodipodi:linespacing="125%"
+             inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
+             inkscape:export-xdpi="90"
+             inkscape:export-ydpi="90">
+            <tspan
+               sodipodi:role="line"
+               id="tspan10245"
+               x="1228.4113"
+               y="1549.6898">Options</tspan>
+          </text>
+          <image
+             xlink:href="/usr/share/icons/Tango/16x16/categories/package_settings.png"
+             sodipodi:absref="/usr/share/icons/Tango/16x16/categories/package_settings.png"
+             width="16"
+             height="16"
+             id="image10264"
+             x="1207.0851"
+             y="1537.1859" />
+          <image
+             xlink:href="/usr/share/icons/Tango/16x16/apps/kwin.png"
+             sodipodi:absref="/usr/share/icons/Tango/16x16/apps/kwin.png"
+             width="16"
+             height="16"
+             id="image10274"
+             x="1672.0851"
+             y="1536.1859" />
+          <text
+             id="text10277"
+             x="1564.9073"
+             y="1549.016"
+             style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Bitstream Vera Sans"
+             sodipodi:linespacing="125%"
+             inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
+             inkscape:export-xdpi="90"
+             inkscape:export-ydpi="90">
+            <tspan
+               sodipodi:role="line"
+               id="tspan10279"
+               x="1564.9073"
+               y="1549.016">External Window</tspan>
+          </text>
+        </g>
+        <g
+           id="g13069">
+          <flowRoot
+             xml:space="preserve"
+             id="flowRoot30412"
+             transform="translate(1503.5812,1040.2172)"
+             inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-chat-draft-0.1.png"
+             inkscape:export-xdpi="90"
+             inkscape:export-ydpi="90"
+             style="display:inline"><flowRegion
+               id="flowRegion30414"><rect
+                 id="rect30416"
+                 width="505.37579"
+                 height="230.06546"
+                 x="-295.37579"
+                 y="298.1235" /></flowRegion><flowPara
+               id="flowPara30418"><flowSpan
+   id="flowSpan30420"
+   style="fill:#b3b3b3">19:38</flowSpan><flowSpan
+   id="flowSpan30422"
+   style="font-weight:bold;fill:#de8787">     luther.b</flowSpan>: Lorem ipsum dolor sit amet</flowPara></flowRoot>          <flowRoot
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-chat-draft-0.1.png"
+             transform="translate(1503.5812,1056.2172)"
+             id="flowRoot30424"
+             xml:space="preserve"
+             style="display:inline"><flowRegion
+               id="flowRegion30426"><rect
+                 y="298.1235"
+                 x="-295.37579"
+                 height="230.06546"
+                 width="505.37579"
+                 id="rect30428" /></flowRegion><flowPara
+               id="flowPara30430"><flowSpan
+   style="fill:#b3b3b3"
+   id="flowSpan30432">19:39</flowSpan><flowSpan
+   style="font-weight:bold;fill:#d45500"
+   id="flowSpan30434">     anne.h</flowSpan>: yes, lorem ipsum dolor sit amet</flowPara></flowRoot>          <flowRoot
+             xml:space="preserve"
+             id="flowRoot30436"
+             transform="translate(1503.5812,1090.2172)"
+             inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-chat-draft-0.1.png"
+             inkscape:export-xdpi="90"
+             inkscape:export-ydpi="90"
+             style="display:inline"><flowRegion
+               id="flowRegion30438"><rect
+                 id="rect30440"
+                 width="505.37579"
+                 height="230.06546"
+                 x="-295.37579"
+                 y="298.1235" /></flowRegion><flowPara
+               id="flowPara30442"><flowSpan
+   id="flowSpan30444"
+   style="fill:#b3b3b3">20:06</flowSpan><flowSpan
+   id="flowSpan30446"
+   style="font-weight:bold;fill:#501616">     marc.a</flowSpan>: lorem ipsum?</flowPara></flowRoot>          <rect
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-chat-draft-0.1.png"
+             transform="scale(1,-1)"
+             y="-1381.1859"
+             x="1210.0851"
+             height="1"
+             width="318.56055"
+             id="rect30448"
+             style="color:#000000;fill:#b3b3b3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible" />
+          <flowRoot
+             xml:space="preserve"
+             id="flowRoot30450"
+             transform="translate(1834.1887,1074.7133)"
+             inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-chat-draft-0.1.png"
+             inkscape:export-xdpi="90"
+             inkscape:export-ydpi="90"
+             style="display:inline"><flowRegion
+               id="flowRegion30452"><rect
+                 id="rect30454"
+                 width="505.37579"
+                 height="230.06546"
+                 x="-295.37579"
+                 y="298.1235" /></flowRegion><flowPara
+               id="flowPara30456"><flowSpan
+                 id="flowSpan30458"
+                 style="fill:#b3b3b3">27 min</flowSpan></flowPara></flowRoot>          <text
+             style="font-size:12px;fill:#d45500;fill-opacity:1"
+             id="text30460"
+             font-size="11"
+             x="1605.3644"
+             y="1368.016"
+             inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/desarrollo/redefinicion2005/sandbox/newUIdraftwithoutcomments-0.1.png"
+             inkscape:export-xdpi="71.000000"
+             inkscape:export-ydpi="71.000000">anne.h</text>
+          <text
+             style="font-size:12px;fill:#501616;fill-opacity:1"
+             id="text30462"
+             font-size="11"
+             x="1604.9952"
+             y="1383.016"
+             inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/desarrollo/redefinicion2005/sandbox/newUIdraftwithoutcomments-0.1.png"
+             inkscape:export-xdpi="71.000000"
+             inkscape:export-ydpi="71.000000">marc.a</text>
+          <text
+             inkscape:export-ydpi="71.000000"
+             inkscape:export-xdpi="71.000000"
+             inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/desarrollo/redefinicion2005/sandbox/newUIdraftwithoutcomments-0.1.png"
+             y="1352.016"
+             x="1604.9542"
+             font-size="11"
+             id="text30464"
+             style="font-size:12px;fill:#de8787;fill-opacity:1">luther.b</text>
+          <rect
+             y="-1319.7858"
+             x="1209.0851"
+             height="17"
+             width="481.99997"
+             id="rect3834"
+             style="color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:evenodd;stroke:#cccccc;stroke-width:0.9999997;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+             transform="scale(1,-1)" />
+          <text
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
+             sodipodi:linespacing="125%"
+             style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Bitstream Vera Sans"
+             y="1314.1859"
+             x="1211.0851"
+             id="text3840">
+            <tspan
+               y="1314.1859"
+               x="1211.0851"
+               id="tspan3842"
+               sodipodi:role="line">Welcome to sometopic-foorganization chat room</tspan>
+          </text>
+          <image
+             xlink:href="icons/bullet_green.png"
+             sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/bullet_green.png"
+             width="16"
+             height="16"
+             id="image5849"
+             x="1588.0851"
+             y="1342.1859" />
+        </g>
+      </g>
+      <g
+         id="g16541">
+        <image
+           y="1535.189"
+           x="1459"
+           id="image13322"
+           height="23"
+           width="50"
+           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
+           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif" />
+        <image
+           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
+           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
+           width="50"
+           height="23"
+           id="image16203"
+           x="1509"
+           y="1535.189" />
+        <image
+           y="1535.189"
+           x="1559"
+           id="image16205"
+           height="23"
+           width="50"
+           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
+           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif" />
+        <image
+           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
+           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
+           width="59.375"
+           height="23"
+           id="image16207"
+           x="1609"
+           y="1535.189" />
+        <image
+           y="1535.189"
+           x="1659"
+           id="image16209"
+           height="23"
+           width="61"
+           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
+           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif" />
+        <image
+           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
+           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
+           width="59"
+           height="23"
+           id="image16211"
+           x="1709"
+           y="1535.189" />
+        <g
+           id="g16247"
+           transform="translate(100,272)">
+          <image
+             xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/tr.gif"
+             sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/tr.gif"
+             width="9"
+             height="23"
+             id="image12762"
+             x="1691"
+             y="1263.189" />
+          <image
+             xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
+             sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
+             width="33"
+             height="23"
+             id="image16213"
+             x="1659"
+             y="1263.189" />
+        </g>
+        <image
+           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
+           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
+           width="50"
+           height="23"
+           id="image16215"
+           x="1409"
+           y="1535.189" />
+        <image
+           y="1535.189"
+           x="1359"
+           id="image16217"
+           height="23"
+           width="50"
+           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
+           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif" />
+        <g
+           id="g16243"
+           transform="matrix(1.0169492,0,0,1,79.661017,272)">
+          <image
+             xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/tl.gif"
+             sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/tl.gif"
+             width="9"
+             height="23"
+             id="image12719"
+             x="1200"
+             y="1263.189" />
+          <image
+             y="1263.189"
+             x="1208"
+             id="image16219"
+             height="23"
+             width="51"
+             sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif"
+             xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/t.gif" />
+        </g>
+        <image
+           y="1535.1859"
+           x="1740.0851"
+           id="image12497"
+           height="23"
+           width="23"
+           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/min-btn.gif"
+           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/min-btn.gif" />
+        <image
+           y="1535.1859"
+           x="1765.0851"
+           id="image12540"
+           height="23"
+           width="23"
+           sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/close-btn.gif"
+           xlink:href="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/src/main/java/org/ourproject/kune/public/gwm/themes/alphacubecustom/close-btn.gif" />
+        <text
+           inkscape:export-ydpi="90"
+           inkscape:export-xdpi="90"
+           inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
+           sodipodi:linespacing="125%"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#1f241c;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Bitstream Vera Sans"
+           y="1551.9535"
+           x="1311.0851"
+           id="text4952">
+          <tspan
+             y="1551.9535"
+             x="1311.0851"
+             id="tspan4954"
+             sodipodi:role="line">Chat room sometopic-foorganization@kune.ourproject.org</tspan>
+        </text>
+      </g>
+    </g>
+    <rect
+       style="color:#000000;fill:#5fd35f;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect6147"
+       width="1"
+       height="1"
+       x="338.54248"
+       y="664.86218"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="color:#000000;fill:#87decd;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect6175"
+       width="1"
+       height="1"
+       x="347.54248"
+       y="798.86212"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       style="color:#000000;fill:#aaffaa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       id="rect17703"
+       width="130.74353"
+       height="25"
+       x="203.79893"
+       y="-690.86243"
+       transform="scale(1,-1)" />
+    <g
+       style="display:inline"
+       id="g30499"
+       transform="matrix(0.125,0,0,0.125,132.54236,544.86215)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         width="128"
+         height="128"
+         rx="27.5"
+         ry="27.5"
+         x="1440"
+         y="1000"
+         id="rect6187"
+         style="fill:#cc5d15" />
+      <rect
+         width="123"
+         height="123"
+         rx="25"
+         ry="25"
+         x="1442.5"
+         y="1002.5"
+         id="rect6189"
+         style="fill:#f49c52" />
+      <rect
+         width="118"
+         height="118"
+         rx="23.5"
+         ry="23.5"
+         x="1445"
+         y="1005"
+         id="rect6191"
+         style="fill:url(#linearGradient8133)" />
+      <circle
+         transform="matrix(0.5,0,0,0.5,1440,1000)"
+         cx="68"
+         cy="189"
+         r="24"
+         id="circle6193"
+         sodipodi:cx="68"
+         sodipodi:cy="189"
+         sodipodi:rx="24"
+         sodipodi:ry="24"
+         style="fill:#ffffff" />
+      <path
+         d="M 1520,1106.5 L 1503,1106.5 C 1503,1083.8563 1484.6437,1065.5 1462,1065.5 L 1462,1048.5 C 1494.0325,1048.5 1520,1074.4675 1520,1106.5 z "
+         id="path6195"
+         style="fill:#ffffff" />
+      <path
+         d="M 1532,1106.5 C 1532,1067.8401 1500.6599,1036.5 1462,1036.5 L 1462,1019 C 1510.3249,1019 1549.5,1058.1751 1549.5,1106.5 L 1532,1106.5 z "
+         id="path30506"
+         style="fill:#ffffff" />
+    </g>
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       sodipodi:linespacing="125%"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#225500;display:inline;font-family:Arial"
+       y="753.8623"
+       x="225.5424"
+       id="text7578">
+      <tspan
+         y="753.8623"
+         x="225.5424"
+         id="tspan7580"
+         sodipodi:role="line">Folder</tspan>
+    </text>
+    <image
+       style="display:inline"
+       y="741.86237"
+       x="209.54247"
+       id="image7744"
+       height="16"
+       width="16"
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/bullet_prev.png"
+       xlink:href="icons/bullet_prev.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="color:#000000;fill:#ccffaa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect7746"
+       width="5"
+       height="7"
+       x="218.5424"
+       y="745.86237"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="color:#000000;fill:#479018;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect7754"
+       width="1"
+       height="6"
+       x="217.5424"
+       y="746.86237"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       sodipodi:linespacing="125%"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#225500;display:inline;font-family:Arial"
+       y="771.8623"
+       x="225.5424"
+       id="text7756">
+      <tspan
+         y="771.8623"
+         x="225.5424"
+         id="tspan7758"
+         sodipodi:role="line">Document 1</tspan>
+      <tspan
+         y="786.8623"
+         x="225.5424"
+         sodipodi:role="line"
+         id="tspan7760">Document 2</tspan>
+    </text>
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       sodipodi:linespacing="125%"
+       style="font-size:13px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#3e4837;display:inline;font-family:Arial"
+       y="731.86237"
+       x="239.54247"
+       id="text7830">
+      <tspan
+         y="731.86237"
+         x="239.54247"
+         id="tspan7832"
+         sodipodi:role="line">Current folder</tspan>
+    </text>
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       y="-756.8623"
+       x="226.0424"
+       height="1"
+       width="36.5"
+       id="rect7896"
+       style="color:#000000;fill:#225500;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       transform="scale(1,-1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       y="-774.8623"
+       x="226.5424"
+       height="1"
+       width="62"
+       id="rect7898"
+       style="color:#000000;fill:#225500;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       transform="scale(1,-1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       y="-789.8623"
+       x="226.5424"
+       height="1"
+       width="63"
+       id="rect7900"
+       style="color:#000000;fill:#225500;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       transform="scale(1,-1)" />
+    <g
+       transform="translate(349.65956,1065.4332)"
+       style="display:inline"
+       id="g30539">
+      <g
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+         transform="translate(-2276.1171,-1127.7598)"
+         id="g7872"
+         style="display:inline">
+        <rect
+           inkscape:export-ydpi="90"
+           inkscape:export-xdpi="90"
+           inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
+           y="766.18896"
+           x="2178"
+           height="5"
+           width="34"
+           id="rect7836"
+           style="color:#000000;fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+        <rect
+           style="color:#000000;fill:#aaaaaa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="rect7838"
+           width="34"
+           height="1"
+           x="2178"
+           y="759.18896"
+           inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90" />
+        <rect
+           style="color:#000000;fill:#aaaaaa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="rect7840"
+           width="34"
+           height="1"
+           x="2178"
+           y="771.18896"
+           inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90" />
+        <rect
+           style="color:#000000;fill:#aaaaaa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="rect7842"
+           width="11"
+           height="1"
+           x="-771.18896"
+           y="2177"
+           inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90"
+           transform="matrix(0,-1,1,0,0,0)" />
+        <rect
+           transform="matrix(0,-1,1,0,0,0)"
+           inkscape:export-ydpi="90"
+           inkscape:export-xdpi="90"
+           inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
+           y="2212"
+           x="-771.18896"
+           height="1"
+           width="11"
+           id="rect7844"
+           style="color:#000000;fill:#aaaaaa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+        <rect
+           inkscape:export-ydpi="90"
+           inkscape:export-xdpi="90"
+           inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-0.5.png"
+           y="760.18896"
+           x="2178"
+           height="6"
+           width="34"
+           id="rect7846"
+           style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+        <g
+           id="g7866"
+           transform="matrix(-1,0,0,1,4389.4511,0)">
+          <path
+             id="path30516"
+             d="M 2181.9511,762.68896 L 2196.9511,762.68896"
+             style="fill:#225500;fill-opacity:0.75;fill-rule:evenodd;stroke:#225500;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
+          <path
+             style="fill:#225500;fill-opacity:0.75;fill-rule:evenodd;stroke:#225500;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
+             d="M 2183.9511,765.68896 L 2198.9511,765.68896"
+             id="path30518" />
+          <path
+             id="path7852"
+             d="M 2185.9511,768.68896 L 2200.9511,768.68896"
+             style="fill:#225500;fill-opacity:0.75;fill-rule:evenodd;stroke:#225500;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
+          <path
+             transform="translate(641.73517,89.90712)"
+             d="M 1563.0192,677.96995 L 1559.716,672.3151 L 1566.2648,672.28185 L 1563.0192,677.96995 z "
+             inkscape:randomized="0"
+             inkscape:rounded="0"
+             inkscape:flatsided="true"
+             sodipodi:arg2="2.6129171"
+             sodipodi:arg1="1.5657195"
+             sodipodi:r2="0.90551758"
+             sodipodi:r1="3.7810335"
+             sodipodi:cy="674.18896"
+             sodipodi:cx="1563"
+             sodipodi:sides="3"
+             id="path30521"
+             style="color:#000000;fill:#225500;fill-opacity:1;fill-rule:evenodd;stroke:#2b0000;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+             sodipodi:type="star" />
+        </g>
+      </g>
+      <path
+         transform="matrix(-0.3333333,0,0,0.2886751,205.5563,-445.76385)"
+         d="M 1040.0818,288.18896 L 1009.9591,305.58034 L 1009.9591,270.79759 L 1040.0818,288.18896 z "
+         inkscape:randomized="0"
+         inkscape:rounded="0"
+         inkscape:flatsided="true"
+         sodipodi:arg2="1.0471976"
+         sodipodi:arg1="0"
+         sodipodi:r2="10.040914"
+         sodipodi:r1="20.081829"
+         sodipodi:cy="288.18896"
+         sodipodi:cx="1020"
+         sodipodi:sides="3"
+         id="path12137"
+         style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3.22371006;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="star"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+         sodipodi:type="star"
+         style="color:#000000;fill:#cccccc;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3.22371006;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path12139"
+         sodipodi:sides="3"
+         sodipodi:cx="1020"
+         sodipodi:cy="288.18896"
+         sodipodi:r1="20.081829"
+         sodipodi:r2="10.040914"
+         sodipodi:arg1="0"
+         sodipodi:arg2="1.0471976"
+         inkscape:flatsided="true"
+         inkscape:rounded="0"
+         inkscape:randomized="0"
+         d="M 1040.0818,288.18896 L 1009.9591,305.58034 L 1009.9591,270.79759 L 1040.0818,288.18896 z "
+         transform="matrix(0.3333333,0,0,0.2886751,-368.79062,-444.76385)" />
+    </g>
+    <image
+       style="display:inline"
+       y="670.86237"
+       x="207.54247"
+       id="image17705"
+       height="16"
+       width="16"
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/add.png"
+       xlink:href="icons/add.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
   </g>
   <g
      inkscape:label="orange-circles"

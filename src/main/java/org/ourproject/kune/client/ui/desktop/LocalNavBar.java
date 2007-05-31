@@ -17,10 +17,7 @@
  */
 package org.ourproject.kune.client.ui.desktop;
 
-import java.util.Iterator;
-
 import org.ourproject.kune.client.ui.RoundedPanel;
-
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.VerticalPanel;

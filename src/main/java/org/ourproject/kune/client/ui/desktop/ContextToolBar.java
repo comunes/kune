@@ -19,15 +19,15 @@ package org.ourproject.kune.client.ui.desktop;
 
 import org.ourproject.kune.client.ui.RoundedPanel;
 
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 /**
  * @author Vicente J. Ruiz Jurado
  *
  */
-public class ContextToolBar extends VerticalPanel {
+public class ContextToolBar extends Composite {
     private RoundedPanel rn = null;
     private HorizontalPanel toolbarHP = null;
     
@@ -44,7 +44,7 @@ public class ContextToolBar extends VerticalPanel {
 	}
 
 	private void layout() {
-		super.add(rn);
+		initWidget(rn);
         toolbarHP.add(new HTML("<b></b>"));
 	}
 

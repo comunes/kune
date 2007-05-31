@@ -18,11 +18,11 @@ public class RolloverImage extends Image {
     }
     
     public void setNormalImg() {
-        this.imageOver.applyTo(this);
+        this.imageNormal.applyTo(this);
     }
     
     public void setOverImg() {
-    	this.imageNormal.applyTo(this);
+    	this.imageOver.applyTo(this);
     }
     
     public void setImages(AbstractImagePrototype image, AbstractImagePrototype imageOver) {

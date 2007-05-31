@@ -19,6 +19,7 @@ package org.ourproject.kune.client.ui.desktop;
 
 import org.ourproject.kune.client.ui.BorderPanel;
 
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.HorizontalSplitPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -28,6 +29,8 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  *
  */
 public class KuneDesktop extends VerticalPanel {
+	public static final int FIRSTRESIZE = -1;
+	
 	private static KuneDesktop singleton;
 		
 	public SiteBar siteBar = null;
@@ -41,14 +44,12 @@ public class KuneDesktop extends VerticalPanel {
 	public ContextContents contextContents = null;
 	public ContextBottomBar contextBottomBar = null;
 
-	//private HorizontalPanel generalHSP = null;
-    private HorizontalSplitPanel generalHSP = null;
+    private HorizontalPanel generalHP = null;
 	private VerticalPanel localNavVP = null;
 	private VerticalPanel contextVP = null;
-	private VerticalPanel contextNavVP = null;
 	public HorizontalSplitPanel contextHSP = null;
-//	private HorizontalPanel contextHSP = null;
-	private VerticalPanel contextContentsVP = null;
+	
+	int currentContextWidth = FIRSTRESIZE; 
 	
 	public KuneDesktop() {
 		super();
@@ -63,9 +64,9 @@ public class KuneDesktop extends VerticalPanel {
     }
 	
 	private void initialize() {
+		contextMessagesBar = new SiteMessageDialog();
 		siteBar = new SiteBar();
 		entityLogo = new EntityLogo();
-		contextMessagesBar = new SiteMessageDialog();
 		localNavBar = new LocalNavBar();
 		contextDropDowns = new ContextDropDowns();
 		contextNavBar = new ContextNavBar();
@@ -74,43 +75,31 @@ public class KuneDesktop extends VerticalPanel {
 		contextContents = new ContextContents();
 		contextBottomBar = new ContextBottomBar();
 		
-		//generalHSP = new HorizontalPanel();
-		generalHSP = new HorizontalSplitPanel();
+		generalHP = new HorizontalPanel();
 		localNavVP = new VerticalPanel();
 		contextVP = new VerticalPanel();
-//		contextHSP = new HorizontalSplitPanel();
 		contextHSP = new HorizontalSplitPanel();
-		contextNavVP = new VerticalPanel();
-		contextContentsVP = new VerticalPanel();
 	}
 	
 	private void layout() {
 		this.add(siteBar);
-		this.add(new BorderPanel(entityLogo, 0, 0, 3, 0));
-		this.add(generalHSP);
+		this.add(new BorderPanel(entityLogo, 0, 0, 4, 0));
+		this.add(generalHP);
 		
-        generalHSP.setRightWidget(localNavVP);
-        generalHSP.setLeftWidget(contextVP);
-		
-//		generalHSP.add(contextVP);
-//		generalHSP.add(localNavVP);
+		generalHP.add(contextVP);
+        generalHP.add(localNavVP);
 		
 		localNavVP.add(localNavBar);
 		localNavVP.add(new BorderPanel(contextDropDowns, 5, 0, 0, 5));
 		contextVP.add(contextToolBar);
 		contextVP.add(contextTitle);
 		contextVP.add(contextHSP);
-        contextVP.add(contextBottomBar);
+		contextVP.add(contextBottomBar);
+		        
+		contextHSP.setLeftWidget(new BorderPanel(contextContents, 5));
+		contextHSP.setRightWidget(contextNavBar);
 		
-        contextHSP.setRightWidget(contextNavVP);
-		contextHSP.setLeftWidget(contextContentsVP);
-		contextHSP.setSplitPosition("80%");	
-        
-//      contextHSP.add(contextContentsVP);
-//		contextHSP.add(contextNavVP);
-				
-		contextNavVP.add(contextNavBar);
-		contextContentsVP.add(contextContents);
+		contextHSP.sinkEvents(Event.ONMOUSEUP | Event.ONMOUSEDOWN |	Event.ONMOUSEMOVE |	Event.ONMOUSEOUT | Event.ONMOUSEOVER | Event.ONMOUSEUP);
 	}
 	
 	private void setProperties() {
@@ -118,19 +107,48 @@ public class KuneDesktop extends VerticalPanel {
 		this.setSpacing(0);
 		this.setWidth("100%");
 		
+		generalHP.setWidth("100%");
+		
         localNavVP.setBorderWidth(0);
         localNavVP.setSpacing(0);
         localNavVP.setWidth("150");
         
         contextVP.setBorderWidth(0);
         contextVP.setSpacing(0);
-        
-        contextContentsVP.setBorderWidth(0);
-        contextContentsVP.setSpacing(0);
-        
-        contextNavVP.setBorderWidth(0);
-        contextNavVP.setSpacing(0);
-        
-        generalHSP.setStyleName("general-hsp");
-	}	
+        contextVP.setWidth("100%");
+        contextVP.addStyleName("general-context");
+		contextVP.setStyleName("general-context");
+		
+        contextContents.setWidth("100%");
+        contextContents.setHeight("100%");
+        contextNavBar.setWidth("100%");
+        contextNavBar.setHeight("100%"); 
+	}
+	
+	public void adjustSize(int windowWidth, int windowHeight) {
+		int contextWidth = windowWidth - 160 - 3;
+		int contextHeight = windowHeight - 200;
+
+//		if (currentContextWidth != FIRSTRESIZE) {
+//			if ((contextHSP.getRightWidget().getOffsetWidth() + 20) > contextWidth) {
+//				// if right widget greater than context part of the window, set split position
+//				float oldPercent = ((float) contextHSP.getLeftWidget().getOffsetWidth()) / currentContextWidth;
+//				int newContextNavBarWidth = (int) (contextWidth * oldPercent);
+//				contextHSP.setSplitPosition("" + newContextNavBarWidth + "px");	
+//				SiteMessageDialog.get().setMessageInfo("setsize: " + contextWidth 
+//						+ "/" + contextHeight + "(" + oldPercent + "/" + newContextNavBarWidth + ")");
+//			}
+//			contextHSP.setSize("" + contextWidth + "px", "" + contextHeight + "px");
+//		}
+//		currentContextWidth = contextWidth;
+		// While 1.4 stabilizes:
+		contextHSP.setSize("" + contextWidth + "px", "" + contextHeight + "px");
+		contextHSP.setSplitPosition("" + (contextWidth - 95) + "px");
+	}
+	
+    public void onBrowserEvent(Event event) {
+    	//if (DOM.eventGetType(event) == Event.ONMOUSEUP) {
+            SiteMessageDialog.get().setMessageInfo("Mouse");
+    //    }
+    }
 }

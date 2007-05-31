@@ -18,21 +18,15 @@
 
 package org.ourproject.kune.client;
 
-//import org.gwm.client.GDesktopPane;
-//import org.gwm.client.event.GFrameAdapter;
-//import org.gwm.client.event.GFrameEvent;
-//import org.gwm.client.impl.DefaultGDesktopPane;
-//import org.gwm.client.util.Gwm;
-//import org.gwm.client.util.GwmUtilities;
-
+import org.ourproject.kune.client.model.Group;
+import org.ourproject.kune.client.model.License;
 import org.ourproject.kune.client.model.Rate;
 import org.ourproject.kune.client.model.User;
-//import org.ourproject.kune.client.ui.KuneDefaultFrame;
-import org.ourproject.kune.client.ui.RateItDialog;
+import org.ourproject.kune.client.ui.BorderPanel;
+import org.ourproject.kune.client.ui.CustomPushButton;
+import org.ourproject.kune.client.ui.LicenseWidget;
 import org.ourproject.kune.client.ui.RateDialog;
-//import org.ourproject.kune.client.ui.Wizard;
-//import org.ourproject.kune.client.ui.chat.ChatroomDialog;
-//import org.ourproject.kune.client.ui.chat.ChatroomUser;
+import org.ourproject.kune.client.ui.RateItDialog;
 import org.ourproject.kune.client.ui.desktop.KuneDesktop;
 import org.ourproject.kune.client.ui.desktop.SiteMessageDialog;
 
@@ -45,25 +39,23 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-//import com.google.gwt.user.client.ui.Widget;
 
 public class Main extends AbsolutePanel implements EntryPoint,
 		WindowResizeListener {
 
+	//private GDesktopPane desktop;
+	
 	private VerticalPanel generalVP = null;
 	
 	private KuneDesktop kuneDesktopPanel = null;
 	
 	private SiteMessageDialog siteMessage = null;
-
-	// Sandbox variables
-	
-//	private ChatroomDialog chatroom1 = null;
-//
-//	private GDesktopPane desktop;
 	
 	public Main() {
 		super();
@@ -71,10 +63,11 @@ public class Main extends AbsolutePanel implements EntryPoint,
 		layout();
 		setProperties();
 		sandbox();
+		styleTest();
 	}
 
 	protected void initialize() {
-//		desktop = new DefaultGDesktopPane();
+        //desktop = new DefaultGDesktopPane();
         generalVP = new VerticalPanel();
         kuneDesktopPanel = new KuneDesktop();
         siteMessage = new SiteMessageDialog();
@@ -84,9 +77,9 @@ public class Main extends AbsolutePanel implements EntryPoint,
 		generalVP.add(kuneDesktopPanel);
 		add(generalVP, 0, 0);
 		add(siteMessage, Window.getClientWidth() * 40 / 100, 23);
-//		add((Widget) desktop, 0, 0);
-//		desktop.setWidgetLocation(generalVP, 0, 0);
-//		desktop.setWidgetLocation(siteMessage, Window.getClientWidth() * 40 / 100, 23);
+        //add((Widget) desktop, 0, 0);
+		//desktop.setWidgetLocation(generalVP, 0, 0);
+		//desktop.setWidgetLocation(siteMessage, Window.getClientWidth() * 40 / 100, 23);
 	}
 
 	public void onModuleLoad() {
@@ -96,10 +89,10 @@ public class Main extends AbsolutePanel implements EntryPoint,
 	}
 	
 	public void onWindowResized(int width, int height) {
-		kuneDesktopPanel.contextContents.adjustSize(width, height);
+		kuneDesktopPanel.adjustSize(width, height);
 		siteMessage.adjustWidth(width);
-		setWidgetPosition(siteMessage, Window.getClientWidth() * 40 / 100, 23);
-//		desktop.setWidgetLocation(siteMessage, Window.getClientWidth() * 40 / 100, 23);
+		setWidgetPosition(siteMessage, Window.getClientWidth() * 40 / 100 - 10, 23);
+        //desktop.setWidgetLocation(siteMessage, Window.getClientWidth() * 40 / 100, 23);
 	}
 
 	protected void setProperties() {
@@ -111,7 +104,6 @@ public class Main extends AbsolutePanel implements EntryPoint,
 		generalVP.setHeight("100%");
 		generalVP.setWidth("100%");
 		
-		kuneDesktopPanel.entityLogo.setDefaultText("Foo Organization");
 		kuneDesktopPanel.localNavBar.addItem(Trans.constants().Home(), "home");
 		kuneDesktopPanel.localNavBar.addItem(Trans.constants().Blogs(), "blogs");
 		kuneDesktopPanel.localNavBar.addItem(Trans.constants().Forums(), "forums");
@@ -121,15 +113,16 @@ public class Main extends AbsolutePanel implements EntryPoint,
         kuneDesktopPanel.contextContents.add(new HTML("<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui. Integer viverra feugiat sem. Morbi aliquam turpis rhoncus sapien volutpat condimentum. Vestibulum dignissim, risus et ullamcorper sollicitudin, risus mi molestie lectus, ut aliquam nulla dolor eu nisl. Duis volutpat. Sed eget lectus lacinia lacus interdum facilisis. Aliquam tincidunt sem at mi. Duis a ipsum vel turpis volutpat adipiscing. Sed at libero sit amet lacus elementum tempus. Vestibulum sit amet tellus. Duis dolor. Praesent convallis lorem ac metus. Curabitur malesuada pede id dui. Vivamus tincidunt risus vehicula enim. Nulla fermentum. Sed placerat lacus eget erat. Proin dolor enim, aliquam ut, vehicula sit amet, blandit non, arcu. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.\n</p><p>\nLorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis sapien. Suspendisse potenti. Sed imperdiet pulvinar tortor. Ut vel nisi. Nam commodo, mauris vitae congue placerat, mauris eros vulputate odio, ac facilisis erat quam at enim. Cras iaculis pede sit amet dui. Cras arcu. Fusce non orci vitae lacus hendrerit auctor. Aliquam leo.\n</p><p>\nVestibulum orci dolor, hendrerit et, dapibus vel, congue ac, velit. Maecenas est. Nam in velit eget ante consequat vulputate. Nam posuere. Nunc lectus. Vestibulum facilisis. Aliquam elit nunc, facilisis eget, bibendum at, dignissim at, nulla. Sed ullamcorper, mi a eleifend tincidunt, metus tortor ultricies mi, in tempor arcu tellus nec erat. Quisque semper, turpis in gravida suscipit, elit leo sollicitudin risus, vel laoreet velit mi a massa. Aliquam non nulla a sapien dapibus bibendum. Sed auctor neque vel justo. Etiam cursus. Nunc eget lectus. In euismod urna vitae dui luctus consequat. Nunc cursus vulputate erat. Duis vel justo vel ante imperdiet rutrum. Curabitur eget turpis ac pede interdum accumsan. Ut velit.\n</p><p>\nProin vitae eros ut pede lacinia aliquam. Praesent in metus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean sed eros. Phasellus id risus. Vivamus non nunc eget purus feugiat sagittis. Mauris id tortor ut lectus mollis porttitor. Fusce lobortis leo quis augue suscipit tincidunt. Ut tristique, nunc at egestas blandit, sem leo tincidunt nibh, id tempor neque elit vitae tortor. Nulla sapien est, suscipit sed, aliquam eget, viverra suscipit, justo.\n</p>"));
         
     	kuneDesktopPanel.contextTitle.setText(Trans.constants().Text());
-    	kuneDesktopPanel.contextBottomBar.setText("(c) Foo organization, contents under some free/open Commons license");
-    	kuneDesktopPanel.contextNavBar.add(new HTML("<b>Menu</b>"));
+    	    	
+    	kuneDesktopPanel.contextNavBar.add(new HTML("<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros.</p>"));
     	siteMessage.setMessageImp("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui. Integer viverra feugiat sem. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui. Integer viverra feugiat sem. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui. Integer viverra feugiat sem. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui. Integer viverra feugiat sem.");
-
+    	
 		setSize("100%", "100%");
-        
+       
 		Window.addWindowResizeListener(this);
 		Window.enableScrolling(false);
-
+		onWindowResized(Window.getClientWidth(), Window.getClientHeight());
+		
 		DeferredCommand.addCommand(new Command() {
 			public void execute() {
 				onWindowResized(Window.getClientWidth(), Window
@@ -138,17 +131,69 @@ public class Main extends AbsolutePanel implements EntryPoint,
 		});
 	}
 	
+	public void styleTest() {
+		// Licenses
+		License license = new License();
+		LicenseWidget licw1 = new LicenseWidget(license);
+		LicenseWidget licw2 = new LicenseWidget(license);
+		licw1.setView(true, false, true);
+		licw2.setView(true, true, false);
+		HorizontalPanel licHR = new HorizontalPanel();
+		licHR.add(new Label("License: "));
+		licHR.add(licw1);
+		licHR.setBorderWidth(0);
+		licHR.setSpacing(0);
+		kuneDesktopPanel.contextContents.add(licHR);
+		kuneDesktopPanel.contextBottomBar.setLicense(license);
+		
+		// Buttons tests
+		kuneDesktopPanel.contextContents.add(new BorderPanel(new CustomPushButton("Large font", CustomPushButton.LARGE), CustomPushButton.VERSPACELARGE, 0));
+		kuneDesktopPanel.contextContents.add(new BorderPanel(new CustomPushButton("Small font", CustomPushButton.SMALL), 0, 0, CustomPushButton.VERSPACESMALL, 0));
+		kuneDesktopPanel.contextContents.add(new BorderPanel(new CustomPushButton("Mini font", CustomPushButton.MINI), 0, 0, CustomPushButton.VERSPACEMINI, 0));
+		CustomPushButton disableButton = new CustomPushButton("Large Disabled", CustomPushButton.LARGE);
+		disableButton.setEnabled(false);
+		kuneDesktopPanel.contextContents.add(new BorderPanel(disableButton, 0, 0, CustomPushButton.VERSPACELARGE, 0));
+		
+    	Image helpImageUp = new Image();
+    	Image helpImageDown = new Image();
+    	Img.ref().buttonHelpLight().applyTo(helpImageUp);
+    	Img.ref().buttonHelpBlue().applyTo(helpImageDown);
+    	PushButton helpTest = new PushButton(helpImageUp, helpImageDown);
+    	kuneDesktopPanel.contextContents.add(new BorderPanel(helpTest, 0, 0, CustomPushButton.SPACEHELPBUTTON, 0));
+		
+    	// Rate
+        Rate rate = new Rate();
+        rate.addRate(4);
+        rate.addRate(3);
+        RateDialog rateTestWidget = new RateDialog(rate);
+        
+        kuneDesktopPanel.contextContents.add(rateTestWidget);
+        rate.addRate(3);
+        rate.addRate(2);
+        rate.addRate(2);
+        
+        Rate rate2 = new Rate();
+        RateDialog rateTestWidget2 = new RateDialog(rate2);
+        kuneDesktopPanel.contextContents.add(rateTestWidget2);
+
+        RateItDialog rateItTestWidget = new RateItDialog(rate2);
+        kuneDesktopPanel.contextContents.add(rateItTestWidget);
+        
+        kuneDesktopPanel.entityLogo.setDefaultText(Session.get().currentGroup.getLongName());
+	}
 	
 	public void sandbox() {
-		
+		Group group = new Group("yellowsub", "The Yellow Submarine Environmental Initiative");
 		User user = new User("luther.b");
 		user.setId((long) 1);
 		Session session = new Session();
 		session.currentUser = user;
-			
-//        KuneDefaultFrame chatroomFrame = new KuneDefaultFrame(); 
-//        
-//		chatroom1 = new ChatroomDialog();
+        session.currentGroup = group;
+        kuneDesktopPanel.contextBottomBar.setGroup(group);
+        kuneDesktopPanel.entityLogo.setDefaultText(group.getLongName());
+        
+        //KuneDefaultFrame chatroomFrame = new KuneDefaultFrame();  
+//        ChatroomDialog chatroom1 = new ChatroomDialog();
 //        chatroom1.setSubject("Welcome to sometopic-foorganization chat room");
 //        ChatroomUser luthorb = new ChatroomUser("luthor.b", true);
 //        ChatroomUser anneh = new ChatroomUser("anne.h", false);
@@ -193,20 +238,20 @@ public class Main extends AbsolutePanel implements EntryPoint,
 //        chatroom1.addToConversation(anneh, new HTML("Lorem ipsum dolor sit amet?"));
 //        chatroom1.addToConversation(luthorb, new HTML("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui."));
 //        chatroom1.addToConversation(anneh, new HTML("Lorem ipsum dolor sit amet?"));
-//        
+//        DialogBox chatDialog = new DialogBox();
+//        chatDialog.setText(Trans.constants().Chatroom() + " " + "sometopic-foorganization@kune.ourproject.org");
+//        chatDialog.add(chatroom1);
+//        chatDialog.show();
 //        chatroomFrame.setCaption(Trans.constants().Chatroom() + " " + "sometopic-foorganization@kune.ourproject.org");
 //		chatroomFrame.setFrame(true, false, true, true, true);
 //        chatroomFrame.setSize(500,250);
 //        chatroomFrame.setContent(chatroom1);
 //        desktop.addFrame(chatroomFrame);
 //        chatroomFrame.setVisible(true);
-//        //chatroomFrame.setTitleIcon(new Image("images/chat.png"));
+//        chatroomFrame.setTitleIcon(new Image("images/chat.png"));
 //        GwmUtilities.diplayAtScreenCenter(chatroomFrame);
 //        chatroomFrame.setLocation(100, 100);
-//        
-//		//LoginPanel loginPanel = new LoginPanel();
-//		//public LoginDialogBox(final LoginPanel.LoginListener loginListener) {
-//
+        
 //        final Wizard wizard = new Wizard();
 //        wizard.add("New Project", (Widget) new HTML("Create here a project"), false, true, true, false);
 //        wizard.add("New Project", (Widget) new HTML("bla, bla, bla"), true, true, true, false);
@@ -223,33 +268,6 @@ public class Main extends AbsolutePanel implements EntryPoint,
 //            	   wizard.setSize(wizardFrame.getWidth(), wizardFrame.getHeight());
 //            	   }
 //        });
-        
-		kuneDesktopPanel.contextContents.add(Img.ref().arrowDownBlack().createImage());
-		kuneDesktopPanel.contextContents.add(Img.ref().arrowDownBlack().createImage());
-		kuneDesktopPanel.contextContents.add(Img.ref().arrowDownWhite().createImage());
-		kuneDesktopPanel.contextContents.add(Img.ref().arrowDownBlack().createImage());
-		kuneDesktopPanel.contextContents.add(Img.ref().arrowDownWhite().createImage());
-		kuneDesktopPanel.contextContents.add(Img.ref().arrowRightBlack().createImage());
-		kuneDesktopPanel.contextContents.add(Img.ref().arrowRightWhite().createImage());
-		
-		
-        Rate rate = new Rate();
-        rate.addRate(4);
-        rate.addRate(3);
-        RateDialog rateTestWidget = new RateDialog(rate);
-        
-        kuneDesktopPanel.contextContents.add(rateTestWidget);
-        rate.addRate(3);
-        rate.addRate(2);
-        rate.addRate(2);
-        
-        Rate rate2 = new Rate();
-        RateDialog rateTestWidget2 = new RateDialog(rate2);
-        kuneDesktopPanel.contextContents.add(rateTestWidget2);
 
-        
-        RateItDialog rateItTestWidget = new RateItDialog(rate2);
-        kuneDesktopPanel.contextContents.add(rateItTestWidget);   
-        
 	}
 }

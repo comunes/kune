@@ -8,7 +8,6 @@
 }
 
 .gwt-CheckBox {
-  font-size: smaller;
 }
 
 .gwt-DialogBox {
@@ -19,9 +18,10 @@
 
 .gwt-DialogBox .Caption {
   background-color: #C3D9FF;
+  font-size:85%;
+  font-weight:700;
   padding: 3px;
   margin: 2px;
-  font-weight: bold;
   cursor: default;
 }
 
@@ -42,7 +42,7 @@
 }
 
 .gwt-HTML {
-  font-size: smaller;
+font-size:85%;	
 }
 
 .gwt-Hyperlink {
@@ -52,7 +52,7 @@
 }
 
 .gwt-Label {
-  font-size: smaller;
+font-size:85%;
 }
 
 .gwt-ListBox {
@@ -66,7 +66,6 @@
 
 .gwt-MenuBar .gwt-MenuItem {
   padding: 1px 4px 1px 4px;
-  font-size: smaller;
   cursor: default;
 }
 
@@ -78,7 +77,7 @@
 }
 
 .gwt-RadioButton {
-  font-size: smaller;
+font-size:85%;
 }
 
 .gwt-TabPanel {
@@ -90,7 +89,6 @@
 
 .gwt-TabBar {
   background-color: #C3D9FF;
-  font-size: smaller;
 }
 
 .gwt-TabBar .gwt-TabBarFirst {
@@ -113,7 +111,6 @@
 }
 
 .gwt-TabBar .gwt-TabBarItem-selected {
-  font-weight: bold;
   background-color: #E8EEF7;
   border-top: 1px solid #87B3FF;
   border-left: 1px solid #87B3FF;
@@ -133,7 +130,6 @@
 }
 
 .gwt-Tree .gwt-TreeItem {
-  font-size: smaller;
 }
 
 .gwt-Tree .gwt-TreeItem-selected {

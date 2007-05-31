@@ -17,13 +17,13 @@
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>
-			<version>1.4</version>
+			<version>1.4.10</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-servlet</artifactId>
-			<version>1.4</version>
+			<version>1.4.10</version>
 		</dependency>
 <!--
 		<dependency>
@@ -31,7 +31,6 @@
 			<artifactId>GWTx</artifactId>
 			<version>20070110</version>
 		</dependency>
--->
 		<dependency>
 			<groupId>org.gwm</groupId>
 			<artifactId>gwm</artifactId>
@@ -42,6 +41,7 @@
 			<artifactId>gwtWidgets</artifactId>
 			<version>0.1.4</version>
 		</dependency>
+-->
 		<dependency>
 			<groupId>org.jivesoftware.smack</groupId>
 			<artifactId>smack</artifactId>
@@ -89,11 +89,19 @@
 	</pluginRepositories>
 	<build>
 		<plugins>
+      <plugin> 
+        <groupId>org.apache.maven.plugins</groupId> 
+        <artifactId>maven-compiler-plugin</artifactId> 
+        <version>2.0</version> 
+        <configuration> 
+          <source>1.5</source> 
+          <target>1.5</target> 
+        </configuration>   
+      </plugin>
 			<plugin>
 				<groupId>com.totsp.gwt</groupId>
 				<artifactId>maven-googlewebtoolkit2-plugin</artifactId>
 				<!-- <version>1.5.3-SNAPSHOT</version> -->
-				<version>1.5.3-SNAPSHOT</version> 
 				<configuration>
 					<logLevel>ALL</logLevel>
 					<runTarget>org.ourproject.kune/Main.html</runTarget>

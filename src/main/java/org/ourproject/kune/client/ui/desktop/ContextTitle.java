@@ -17,6 +17,8 @@
  */
 package org.ourproject.kune.client.ui.desktop;
 
+import org.ourproject.kune.client.ui.BorderPanel;
+
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -36,21 +38,22 @@ public class ContextTitle extends HorizontalPanel {
 	}
 
 	private void initialize() {
-		titleLabel = new Label(); 
+		titleLabel = new Label();
+		this.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 	}
 
 	private void layout() {
-		this.add(titleLabel);
+		this.add(new BorderPanel(titleLabel, 0, 9));
 	}
 
 	private void setProperties() {
 		this.setSpacing(0);
 		this.setBorderWidth(0);
 		this.setWidth("100%");
+		this.addStyleName("context-title");
+		this.setStyleName("context-title");
 		titleLabel.setWidth("100%");		
-		titleLabel.setStyleName("context-title");
 		titleLabel.setHeight("23");
-		this.setCellVerticalAlignment(titleLabel, HasVerticalAlignment.ALIGN_MIDDLE);
 	}
 
 	public void setText(String title) {

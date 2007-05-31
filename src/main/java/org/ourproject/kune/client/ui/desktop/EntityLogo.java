@@ -19,6 +19,7 @@ package org.ourproject.kune.client.ui.desktop;
 
 import org.ourproject.kune.client.Trans;
 
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Hyperlink;
@@ -34,6 +35,13 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  *
  */
 public class EntityLogo extends Composite {
+	public final static String DEFFONTSIZE = "189%";
+	public final static String MEDFONTSIZE = "152%";
+	public final static String MINFONTSIZE = "122%";
+	
+	public final static int DEFLOGOWIDTH = 468;
+	public final static int DEFLOGOHEIGHT = 60;
+		
     private VerticalPanel defTextLogoVP = null;
 	private Label defTextLogoLabel = null;
     private Hyperlink defTextPutYourLogoHL = null;
@@ -47,8 +55,8 @@ public class EntityLogo extends Composite {
 		initialize();
 		layout();
 		setProperties();
-    	setDefaultText(title);
     	this.initWidget(defTextLogoVP);
+    	setDefaultText(title);
     }
     
     private void initialize() {
@@ -64,8 +72,8 @@ public class EntityLogo extends Composite {
     }
     
     private void setProperties() {
-    	defTextLogoVP.setHeight("60");
-    	defTextLogoVP.setWidth("468");
+    	defTextLogoVP.setHeight(""+  DEFLOGOHEIGHT);
+    	defTextLogoVP.setWidth("" + DEFLOGOWIDTH);
     	defTextLogoVP.setBorderWidth(0);
     	defTextLogoVP.setCellHorizontalAlignment(defTextPutYourLogoHL, HasHorizontalAlignment.ALIGN_RIGHT);
     	defTextLogoVP.setSpacing(0);
@@ -81,6 +89,18 @@ public class EntityLogo extends Composite {
     
 	public void setDefaultText(String title) {
         defTextLogoLabel.setText(title);
+//      While 1.4 stabilizes:
+//        DOM.setStyleAttribute(defTextLogoLabel.getElement(), "fontSize", DEFFONTSIZE);
+//        if (title!="") {
+            //SiteMessageDialog.get().setMessageInfo("Logo Height: " + defTextLogoVP.getOffsetHeight());
+//            SiteMessageDialog.get().setMessageInfo("Logo Height: " + DOM.getIntAttribute(defTextLogoVP.getElement(), "clientHeight"));
+//        }
+//        if (defTextLogoVP.getOffsetHeight() > DEFLOGOHEIGHT) {
+//        	DOM.setStyleAttribute(defTextLogoLabel.getElement(), "fontSize", MEDFONTSIZE);
+//        }
+//        if (defTextLogoVP.getOffsetHeight() > DEFLOGOHEIGHT) {
+//        	DOM.setStyleAttribute(defTextLogoLabel.getElement(), "fontSize", MINFONTSIZE);
+//        }
     }
 
     public void setLogo(String url) {

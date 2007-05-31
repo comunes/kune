@@ -17,27 +17,25 @@
  */
 package org.ourproject.kune.client.ui;
 
-import org.gwm.client.impl.DefaultGInternalFrame;
-//import org.gwm.client.event.GFrameListener;
+//import org.gwm.client.impl.DefaultGInternalFrame;
 
-public class KuneDefaultFrame extends DefaultGInternalFrame {
+public class KuneDefaultFrame { //extends DefaultGInternalFrame {
 
-	public KuneDefaultFrame() {
-		this.setTheme("alphacubecustom");
-        //setOutlineDragMode(false);
-	}
+//	public KuneDefaultFrame() {
+		// this.setTheme("alphacubecustom");
+//	}
 	
-	public KuneDefaultFrame(String caption) {
-		this();
-		this.setCaption(caption);
-	}
-	
-	public void setFrame(boolean minimizable, boolean maximizable, boolean closable,
-			boolean draggable, boolean resizable) {
-		this.setMinimizable(minimizable);
-        this.setMaximizable(maximizable);
-        this.setClosable(closable);
-        this.setDraggable(draggable);
-        this.setResizable(resizable);
-	}
+//	public KuneDefaultFrame(String caption) {
+//		this();
+//		this.setCaption(caption);
+//	}
+//	
+//	public void setFrame(boolean minimizable, boolean maximizable, boolean closable,
+//			boolean draggable, boolean resizable) {
+//		this.setMinimizable(minimizable);
+//        this.setMaximizable(maximizable);
+//        this.setClosable(closable);
+//        this.setDraggable(draggable);
+//        this.setResizable(resizable);
+//	}
 }

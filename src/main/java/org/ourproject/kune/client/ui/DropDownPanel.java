@@ -150,10 +150,9 @@ public class DropDownPanel extends Composite implements ClickListener {
     }
     
     public void setColor(String color) {
-    	outerRP.setColor(color);
+        outerRP.setColor(color);
         DOM.setStyleAttribute(arrowImage.getElement(), "backgroundColor", color);
-    	DOM.setStyleAttribute(contentDeckP.getElement(), "background", color); 
-    	DOM.setStyleAttribute(dropDownPanelVP.getElement(), "backgroundColor", color);
-    	DOM.setStyleAttribute(titleLabel.getElement(), "backgroundColor", color);
+        DOM.setStyleAttribute(dropDownPanelVP.getElement(), "backgroundColor", color);
+        DOM.setStyleAttribute(titleLabel.getElement(), "backgroundColor", color);
     }
 }

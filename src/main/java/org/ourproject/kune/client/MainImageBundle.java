@@ -17,8 +17,8 @@
  */
 package org.ourproject.kune.client;
 
-import com.google.gwt.user.client.ImageBundle;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import com.google.gwt.user.client.ui.ImageBundle;
 
 /**
  * 
@@ -111,9 +111,204 @@ public interface MainImageBundle extends ImageBundle {
 	AbstractImagePrototype bulletYellow();
 
 	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button15cblue.png
+	 */
+	AbstractImagePrototype button15cblue();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button15cdark.png
+	 */
+	AbstractImagePrototype button15cdark();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button15clight.png
+	 */
+	AbstractImagePrototype button15clight();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button15cxlight.png
+	 */
+	AbstractImagePrototype button15cxlight();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button15lblue.png
+	 */
+	AbstractImagePrototype button15lblue();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button15ldark.png
+	 */
+	AbstractImagePrototype button15ldark();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button15llight.png
+	 */
+	AbstractImagePrototype button15llight();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button15lxlight.png
+	 */
+	AbstractImagePrototype button15lxlight();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button15rblue.png
+	 */
+	AbstractImagePrototype button15rblue();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button15rdark.png
+	 */
+	AbstractImagePrototype button15rdark();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button15rlight.png
+	 */
+	AbstractImagePrototype button15rlight();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button15rxlight.png
+	 */
+	AbstractImagePrototype button15rxlight();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button17cblue.png
+	 */
+	AbstractImagePrototype button17cblue();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button17cdark.png
+	 */
+	AbstractImagePrototype button17cdark();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button17clight.png
+	 */
+	AbstractImagePrototype button17clight();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button17cxlight.png
+	 */
+	AbstractImagePrototype button17cxlight();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button17lblue.png
+	 */
+	AbstractImagePrototype button17lblue();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button17ldark.png
+	 */
+	AbstractImagePrototype button17ldark();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button17llight.png
+	 */
+	AbstractImagePrototype button17llight();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button17lxlight.png
+	 */
+	AbstractImagePrototype button17lxlight();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button17rblue.png
+	 */
+	AbstractImagePrototype button17rblue();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button17rdark.png
+	 */
+	AbstractImagePrototype button17rdark();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button17rlight.png
+	 */
+	AbstractImagePrototype button17rlight();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button17rxlight.png
+	 */
+	AbstractImagePrototype button17rxlight();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button20cblue.png
+	 */
+	AbstractImagePrototype button20cblue();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button20cdark.png
+	 */
+	AbstractImagePrototype button20cdark();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button20clight.png
+	 */
+	AbstractImagePrototype button20clight();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button20cxlight.png
+	 */
+	AbstractImagePrototype button20cxlight();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button20lblue.png
+	 */
+	AbstractImagePrototype button20lblue();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button20ldark.png
+	 */
+	AbstractImagePrototype button20ldark();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button20llight.png
+	 */
+	AbstractImagePrototype button20llight();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button20lxlight.png
+	 */
+	AbstractImagePrototype button20lxlight();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button20rblue.png
+	 */
+	AbstractImagePrototype button20rblue();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button20rdark.png
+	 */
+	AbstractImagePrototype button20rdark();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button20rlight.png
+	 */
+	AbstractImagePrototype button20rlight();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button20rxlight.png
+	 */
+	AbstractImagePrototype button20rxlight();
+
+	/**
 	 * @gwt.resource org/ourproject/kune/public/images/button-arrow-down.png
 	 */
 	AbstractImagePrototype buttonArrowDown();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button-help-blue.png
+	 */
+	AbstractImagePrototype buttonHelpBlue();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button-help-dark.png
+	 */
+	AbstractImagePrototype buttonHelpDark();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/button-help-light.png
+	 */
+	AbstractImagePrototype buttonHelpLight();
 
 	/**
 	 * @gwt.resource org/ourproject/kune/public/images/button-sitebar-arrow-down.gif
@@ -126,6 +321,11 @@ public interface MainImageBundle extends ImageBundle {
 	AbstractImagePrototype chat();
 
 	/**
+	 * @gwt.resource org/ourproject/kune/public/images/clear.png
+	 */
+	AbstractImagePrototype clear();
+
+	/**
 	 * @gwt.resource org/ourproject/kune/public/images/emblem-important.png
 	 */
 	AbstractImagePrototype emblemImportant();
@@ -136,9 +336,9 @@ public interface MainImageBundle extends ImageBundle {
 	AbstractImagePrototype error();
 
 	/**
-	 * @gwt.resource org/ourproject/kune/public/images/foo-org-logo.png
+	 * @gwt.resource org/ourproject/kune/public/images/gnu-fdl.gif
 	 */
-	AbstractImagePrototype fooOrgLogo();
+	AbstractImagePrototype gnuFdl();
 
 	/**
 	 * @gwt.resource org/ourproject/kune/public/images/important.png
@@ -179,6 +379,11 @@ public interface MainImageBundle extends ImageBundle {
 	 * @gwt.resource org/ourproject/kune/public/images/kune-search-ico.png
 	 */
 	AbstractImagePrototype kuneSearchIco();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/kune-search-ico-push.png
+	 */
+	AbstractImagePrototype kuneSearchIcoPush();
 
 	/**
 	 * @gwt.resource org/ourproject/kune/public/images/opentriangle.gif
@@ -285,10 +490,34 @@ public interface MainImageBundle extends ImageBundle {
 	 */
 	AbstractImagePrototype triangle();
 
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/cc/by80x15.png
+	 */
+	AbstractImagePrototype ccby80x15();
 
-	
-	
-	
-	
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/cc/bync80x15.png
+	 */
+	AbstractImagePrototype ccbync80x15();
 
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/cc/byncnd80x15.png
+	 */
+	AbstractImagePrototype ccbyncnd80x15();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/cc/byncsa80x15.png
+	 */
+	AbstractImagePrototype ccbyncsa80x15();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/cc/bynd80x15.png
+	 */
+	AbstractImagePrototype ccbynd80x15();
+
+	/**
+	 * @gwt.resource org/ourproject/kune/public/images/cc/bysa80x15.png
+	 */
+	AbstractImagePrototype ccbysa80x15();
+	
 }

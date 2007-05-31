@@ -17,20 +17,14 @@
  */
 package org.ourproject.kune.client.ui.desktop;
 
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.ScrollPanel;
-import com.google.gwt.user.client.ui.Widget;
-
 
 /**
  * @author Vicente J. Ruiz Jurado
  *
  */
-public class ContextContents extends Composite {
-	private ScrollPanel contentSP = null;
-	private VerticalPanel contentInnerVP = null;
-
+public class ContextContents extends VerticalPanel {
+	
 	public ContextContents() {
 		initialize();
 		layout();
@@ -38,43 +32,15 @@ public class ContextContents extends Composite {
 	}
 
 	private void initialize() {
-		contentSP = new ScrollPanel();
-		contentInnerVP = new VerticalPanel();
 	}
 
 	private void layout() {
-		initWidget(contentSP);
-		contentSP.add(contentInnerVP);
-	}
+    }
 
 	private void setPropierties() {
-        contentInnerVP.setBorderWidth(0);
-        contentInnerVP.setSpacing(0);
-        contentInnerVP.setStyleName("context-contents");
-        contentInnerVP.addStyleName("context-contents");
-	}
-
-	public void add(Widget w) {
-		contentInnerVP.add(w);
-	}
-	
-	public void del(Widget w) {
-		contentInnerVP.remove(w);
-	}
-		
-	public void adjustSize(int windowWidth, int windowHeight) {
-		int scrollWidth = windowWidth
-				- contentSP.getAbsoluteLeft() - 278;
-		if (scrollWidth < 1) {
-			scrollWidth = 1;
-		}
-
-		int scrollHeight = windowHeight
-				- contentSP.getAbsoluteTop() - 30 - 24;
-		if (scrollHeight < 1) {
-			scrollHeight = 1;
-		}
-
-		contentSP.setSize("" + scrollWidth, "" + scrollHeight);
+        this.setBorderWidth(0);
+        this.setSpacing(0);
+        this.setStyleName("context-contents");
+        this.addStyleName("context-contents");
 	}
 }

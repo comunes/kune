@@ -16,9 +16,8 @@ Example of .m2/settings.xml:
      <profile>
        <id>gwt-1.2.22</id>
        <properties>
-         <google.webtoolkit.home>/usr/local/lib/gwt/gwt-linux-1.2.22</google.webtoolkit.home>
-        <!-- you only need this is you are on a max -->
-        <!-- <google.webtoolkit.extrajvmargs>-XstartOnFirstThread</google.webtoolkit.extrajvmargs> -->
+         <google.webtoolkit.home>/Users/cooper/gwt-mac-1.2.22</google.webtoolkit.home>
+         <google.webtoolkit.extrajvmargs>-XstartOnFirstThread</google.webtoolkit.extrajvmargs>
        </properties>
      </profile>
      <profile>
@@ -29,10 +28,19 @@ Example of .m2/settings.xml:
         <!-- <google.webtoolkit.extrajvmargs>-XstartOnFirstThread</google.webtoolkit.extrajvmargs> -->
       </properties>
      </profile>
+     <profile>
+       <id>gwt-1.4.10</id>
+       <properties>
+         <google.webtoolkit.home>/usr/local/lib/gwt/gwt-linux-1.4.10</google.webtoolkit.home>
+        <!-- you only need this is you are on a max -->
+        <!-- <google.webtoolkit.extrajvmargs>-XstartOnFirstThread</google.webtoolkit.extrajvmargs> -->
+      </properties>
+     </profile>
    </profiles>
    <activeProfiles>
-     <activeProfile>gwt-1.3.3</activeProfile>
+     <activeProfile>gwt-1.4.10</activeProfile>
    </activeProfiles>
 </settings>
+
 
 The rest of dependencies must be downloaded automatically.
