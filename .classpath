@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src/main/java"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="con" path="org.maven.ide.eclipse.MAVEN2_CLASSPATH_CONTAINER"/>
-	<classpathentry kind="lib" path="/usr/local/lib/gwt/gwt-linux-1.4.10/gwt-user.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/usr/local/lib/gwt/gwt-linux-1.4.10/doc/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="output" path="bin"/>
+  <classpathentry kind="src" path="src/main/java"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="var" path="M2_REPO/org/jivesoftware/smackx/smackx/3.0.0/smackx-3.0.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/gwt/gwt-servlet/1.4.10/gwt-servlet-1.4.10.jar"/>
+  <classpathentry kind="var" path="M2_REPO/junit/junit/3.8.1/junit-3.8.1.jar" sourcepath="M2_REPO/junit/junit/3.8.1/junit-3.8.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/gwt/gwt-user/1.4.10/gwt-user-1.4.10.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/jivesoftware/smackx/debugger/smackx-debugger/3.0.0/smackx-debugger-3.0.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/jivesoftware/smack/smack/3.0.0/smack-3.0.0.jar"/>
 </classpath>
