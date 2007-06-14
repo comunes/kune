@@ -103,7 +103,7 @@
 				<artifactId>maven-googlewebtoolkit2-plugin</artifactId>
 				<version>1.5.3-SNAPSHOT</version> 
 				<configuration>
-					<logLevel>ALL</logLevel>
+					<logLevel>INFO</logLevel>
 					<runTarget>org.ourproject.kune.Main/Main.html</runTarget>
 					<compileTarget>
 						<param>org.ourproject.kune.Main</param>

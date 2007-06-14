@@ -22,6 +22,9 @@ import org.ourproject.kune.client.model.Group;
 import org.ourproject.kune.client.model.License;
 import org.ourproject.kune.client.model.Rate;
 import org.ourproject.kune.client.model.User;
+import org.ourproject.kune.client.rpc.KuneDocumentService;
+import org.ourproject.kune.client.rpc.KuneDocumentServiceAsync;
+import org.ourproject.kune.client.rpc.dto.KuneDoc;
 import org.ourproject.kune.client.ui.BorderPanel;
 import org.ourproject.kune.client.ui.CustomPushButton;
 import org.ourproject.kune.client.ui.LicenseWidget;
@@ -37,6 +40,7 @@ import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowResizeListener;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -56,7 +60,8 @@ public class Main extends AbsolutePanel implements EntryPoint,
 	private KuneDesktop kuneDesktopPanel = null;
 	
 	private SiteMessageDialog siteMessage = null;
-	
+	private KuneDoc doc;
+
 	public Main() {
 		super();
 		initialize();
@@ -110,7 +115,7 @@ public class Main extends AbsolutePanel implements EntryPoint,
 		kuneDesktopPanel.localNavBar.selectItem(0);
 		
         kuneDesktopPanel.contextDropDowns.addDropDown("Members", new HTML("Lorem ipsum dolor sit amet,<br>consectetuer adipiscing elit."), true, "87DECD");
-        kuneDesktopPanel.contextContents.add(new HTML("<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui. Integer viverra feugiat sem. Morbi aliquam turpis rhoncus sapien volutpat condimentum. Vestibulum dignissim, risus et ullamcorper sollicitudin, risus mi molestie lectus, ut aliquam nulla dolor eu nisl. Duis volutpat. Sed eget lectus lacinia lacus interdum facilisis. Aliquam tincidunt sem at mi. Duis a ipsum vel turpis volutpat adipiscing. Sed at libero sit amet lacus elementum tempus. Vestibulum sit amet tellus. Duis dolor. Praesent convallis lorem ac metus. Curabitur malesuada pede id dui. Vivamus tincidunt risus vehicula enim. Nulla fermentum. Sed placerat lacus eget erat. Proin dolor enim, aliquam ut, vehicula sit amet, blandit non, arcu. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.\n</p><p>\nLorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis sapien. Suspendisse potenti. Sed imperdiet pulvinar tortor. Ut vel nisi. Nam commodo, mauris vitae congue placerat, mauris eros vulputate odio, ac facilisis erat quam at enim. Cras iaculis pede sit amet dui. Cras arcu. Fusce non orci vitae lacus hendrerit auctor. Aliquam leo.\n</p><p>\nVestibulum orci dolor, hendrerit et, dapibus vel, congue ac, velit. Maecenas est. Nam in velit eget ante consequat vulputate. Nam posuere. Nunc lectus. Vestibulum facilisis. Aliquam elit nunc, facilisis eget, bibendum at, dignissim at, nulla. Sed ullamcorper, mi a eleifend tincidunt, metus tortor ultricies mi, in tempor arcu tellus nec erat. Quisque semper, turpis in gravida suscipit, elit leo sollicitudin risus, vel laoreet velit mi a massa. Aliquam non nulla a sapien dapibus bibendum. Sed auctor neque vel justo. Etiam cursus. Nunc eget lectus. In euismod urna vitae dui luctus consequat. Nunc cursus vulputate erat. Duis vel justo vel ante imperdiet rutrum. Curabitur eget turpis ac pede interdum accumsan. Ut velit.\n</p><p>\nProin vitae eros ut pede lacinia aliquam. Praesent in metus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean sed eros. Phasellus id risus. Vivamus non nunc eget purus feugiat sagittis. Mauris id tortor ut lectus mollis porttitor. Fusce lobortis leo quis augue suscipit tincidunt. Ut tristique, nunc at egestas blandit, sem leo tincidunt nibh, id tempor neque elit vitae tortor. Nulla sapien est, suscipit sed, aliquam eget, viverra suscipit, justo.\n</p>"));
+        loadRootDocument();
         
     	kuneDesktopPanel.contextTitle.setText(Trans.constants().Text());
     	    	
@@ -130,6 +135,28 @@ public class Main extends AbsolutePanel implements EntryPoint,
 			}
 		});
 	}
+
+	private void loadRootDocument() {
+		KuneDocumentServiceAsync docService = KuneDocumentService.App.getInstance();
+		docService.getRootDocument("yellow submarine", new AsyncCallback () {
+
+			public void onFailure(Throwable exception) {
+				String content = "<h1>no se ha podido cargar el contenido desde el servidor</h1>";
+				content += "<br/>" + exception.toString();
+				setContent(content );
+			}
+
+			public void onSuccess(Object result) {
+				doc = (KuneDoc) result;
+				setContent(doc.getContent());
+			}
+			
+		});
+	}
+	private void setContent(String content) {
+		kuneDesktopPanel.contextContents.add(new HTML(content));
+	}
+
 	
 	public void styleTest() {
 		// Licenses
@@ -270,4 +297,5 @@ public class Main extends AbsolutePanel implements EntryPoint,
 //        });
 
 	}
+
 }
