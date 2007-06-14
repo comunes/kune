@@ -50,7 +50,6 @@
 	overflow:auto;
 	color: #000;
 	font-family: Tahoma, Arial, sans-serif;
-	font-size: 10px;
 	background:#FDFDFD;
 }
 
@@ -112,23 +111,27 @@
   background: transparent url(cloudy-off/bl.gif) no-repeat 0 0;			
   width:7px;
   height:7px;
+  font-size:0px;
 }
 
 .gwm-cloudy-off-FrameBorder-b {
   background: transparent url(cloudy-off/b.gif) repeat-x 0 0;			
   height:7px;
+  font-size:1px;
 }
 
 .gwm-cloudy-off-FrameBorder-br {
   background: transparent url(cloudy-off/br.gif) no-repeat top right;			
   width:7px;
   height:7px;
+  font-size:0px;
 }
 
 .gwm-cloudy-off-Frame-ResizeButton  {
   background: transparent url(cloudy-off/resize-btn.gif) no-repeat top right;			
   width:7px;
   height:7px;
+  font-size:0px;
 }
 
 /************************************* BUTTONS ********************************/

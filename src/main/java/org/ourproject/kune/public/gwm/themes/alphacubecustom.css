@@ -108,23 +108,27 @@
   background: transparent url(alphacubecustom/bl.gif) no-repeat 0 0;			
   width:7px;
   height:7px;
+  font-size:0px;
 }
 
 .gwm-alphacubecustom-FrameBorder-b {
   background: transparent url(alphacubecustom/b.gif) repeat-x 0 0;			
   height:7px;
+  font-size:1px;
 }
 
 .gwm-alphacubecustom-FrameBorder-br {
   background: transparent url(alphacubecustom/br.gif) no-repeat top right;			
   width:7px;
   height:7px;
+  font-size:0px;
 }
 
 .gwm-alphacubecustom-Frame-ResizeButton  {
   background: transparent url(alphacubecustom/resize-btn.gif) no-repeat top right;			
   width:7px;
   height:7px;
+  font-size:0px;
 }
 
 /************************************* BUTTONS ********************************/

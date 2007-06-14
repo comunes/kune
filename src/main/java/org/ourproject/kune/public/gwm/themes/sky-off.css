@@ -50,7 +50,6 @@
 	overflow:auto;
 	color: #000;
 	font-family: Tahoma, Arial, sans-serif;
-	font-size: 10px;
 	background:#FDFDFD;
 }
 
@@ -113,23 +112,27 @@
   background: transparent url(sky-off/bl.gif) no-repeat 0 0;			
   width:10px;
   height:9px;
+  font-size:0px;
 }
 
 .gwm-sky-off-FrameBorder-b {
   background: transparent url(sky-off/b.gif) repeat-x 0 0;			
   height:9px;
+  font-size:1px;
 }
 
 .gwm-sky-off-FrameBorder-br {
   background: transparent url(sky-off/br.gif) no-repeat top right;			
   width:10px;
   height:9px;
+  font-size:0px;
 }
 
 .gwm-sky-off-Frame-ResizeButton  {
   background: transparent url(sky-off/resize-btn.gif) no-repeat top right;			
   width:10px;
   height:9px;
+  font-size:0px;
 }
 
 /************************************* BUTTONS ********************************/

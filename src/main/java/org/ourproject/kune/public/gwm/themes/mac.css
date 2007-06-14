@@ -50,7 +50,6 @@
 	overflow:auto;
 	color: #000;
 	font-family: Tahoma, Arial, sans-serif;
-	font-size: 10px;
 	background:#FDFDFD;
 }
 
@@ -109,17 +108,20 @@
   background: transparent url(mac/bl.gif) no-repeat 0 0;			
   width:9px;
   height:19px;
+  font-size:0px;
 }
 
 .gwm-mac-FrameBorder-b {
   background: transparent url(mac/b.gif) repeat-x 0 0;			
   height:19px;
+  font-size:1px;
 }
 
 .gwm-mac-FrameBorder-br {
   background: transparent url(mac/br.gif) no-repeat top right;			
   width:9px;
   height:19px;
+  font-size:0px;
 }
 
 .gwm-mac-Frame-ResizeButton  {
@@ -127,6 +129,7 @@
   width:9px;
   height:19px;
   cursor:se-resize;	
+  font-size:0px;
 }
 
 /************************************* BUTTONS ********************************/
