@@ -89,7 +89,6 @@ background-color:#F9F9F9;
 }
 
 .kune-chatroom-content-conversation {
-border-right:1px solid #CCC;
 padding:0 3px 0 0;
 }
 
@@ -435,3 +434,13 @@ background-color:#dbdbdb;
 border-left:1px solid #dbdbdb;
 border-right:1px solid #dbdbdb;
 }
+
+.splitter {
+width:5px;
+cursor:e-resize;
+background: #CDDE87 url(img/splitter-button.gif) no-repeat;
+background-position: center center;
+border-right:1px solid #BCD35F;
+border-left:1px solid #BCD35F;
+}
+

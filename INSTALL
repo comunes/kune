@@ -4,6 +4,7 @@ INSTALL
 Build with maven:
 mvn package
 mvn gwt:compile
+mvn jetty:run
 etcetera
 
 Configuration of maven

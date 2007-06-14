@@ -38,17 +38,15 @@ import com.google.gwt.user.client.ui.HorizontalSplitPanel;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.VerticalSplitPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 public class ChatroomDialog extends Composite implements ChatroomView {
 	
 	private Vector userList = null;
 
-	private VerticalPanel chatroomVP = null;
+	private VerticalPanel generalVP = null;
 
 	private HorizontalPanel subjectHP = null;
 	
@@ -61,11 +59,7 @@ public class ChatroomDialog extends Composite implements ChatroomView {
 
 	private HorizontalSplitPanel conversationUsersSP = null;
 
-	private ScrollPanel conversationSP = null;
-
 	private VerticalPanel conversationVP = null;
-
-	private ScrollPanel usersSP = null;
 	
 	private VerticalPanel usersVP = null;
 
@@ -128,7 +122,7 @@ public class ChatroomDialog extends Composite implements ChatroomView {
 		userChat.add(chat);
 		
 		conversationVP.add(userChat);
-		conversationSP.setScrollPosition(151);
+		//conversationHP.setScrollPosition(151);
 	}
 	
 	public void addTimeDelimiter() {
@@ -145,7 +139,7 @@ public class ChatroomDialog extends Composite implements ChatroomView {
 	
 	protected void initialize() {
 		userList = new Vector();
-		chatroomVP = new VerticalPanel();
+		generalVP = new VerticalPanel();
 		subjectHP = new HorizontalPanel();
 		subjectLabel = new Label();
 //		subjectLabel = new EditableLabel ("", new ChangeListener() {
@@ -165,12 +159,10 @@ public class ChatroomDialog extends Composite implements ChatroomView {
 //		}, Trans.constants().Change(), Trans.constants().Cancel());
 		contentSP = new VerticalSplitPanel();
 		conversationUsersSP = new HorizontalSplitPanel();
-		conversationSP = new ScrollPanel();
-		conversationVP = new VerticalPanel();
+        conversationVP = new VerticalPanel();
 		conversationVP
 			.setVerticalAlignment(HasVerticalAlignment.ALIGN_TOP);
-		usersSP = new ScrollPanel();
-		usersVP = new VerticalPanel();
+        usersVP = new VerticalPanel();
 		inputOptionsVP = new VerticalPanel();
 		inputTextArea = new TextArea();
 		optionsHP = new HorizontalPanel();
@@ -186,20 +178,18 @@ public class ChatroomDialog extends Composite implements ChatroomView {
 	}
 
 	protected void layout() {
-		initWidget(chatroomVP);
+		initWidget(generalVP);
 
-		chatroomVP.add(subjectHP);
-		chatroomVP.add(contentSP);
+		generalVP.add(subjectHP);
+		generalVP.add(contentSP);
+		
 		subjectHP.add(subjectLabel);
 
 		contentSP.setTopWidget(conversationUsersSP);
 		contentSP.setBottomWidget(inputOptionsVP);
 
-		conversationUsersSP.setLeftWidget(conversationSP);
-		conversationUsersSP.setRightWidget(usersSP);
-
-		conversationSP.add(conversationVP);
-		usersSP.add(usersVP);
+		conversationUsersSP.setLeftWidget(conversationVP);
+		conversationUsersSP.setRightWidget(usersVP);
 
 		inputOptionsVP.add(inputTextArea);
 		inputOptionsVP.add(optionsHP);
@@ -219,47 +209,50 @@ public class ChatroomDialog extends Composite implements ChatroomView {
 	
 	protected void setProperties() {
 
-		chatroomVP.setBorderWidth(0);
-		chatroomVP.setSpacing(5);
-
+		generalVP.setBorderWidth(0);
+		generalVP.setSpacing(5);
+        generalVP.setWidth("100%");
+        generalVP.setHeight("100%");
+        
 		subjectHP.setBorderWidth(0);
 		subjectHP.setSpacing(0);
 		subjectHP.setStyleName("kune-chatroom-subject");
-		subjectHP.setWidth("99%");
+		subjectHP.setWidth("100%");
 		subjectHP.setHeight("20");
 		subjectLabel.setWidth("100%");
 		// subjectLabel.setVisibleLength(65);
 
-		//contentVP.setBorderWidth(0);
-		//contentVP.setSpacing(0);
-		contentSP.addStyleName("kune-chatroom-content-outter");
+        contentSP.addStyleName("kune-chatroom-content-outter");
 		contentSP.setStyleName("kune-chatroom-content-outter");
-
-		//conversationUsersSP.setBorderWidth(0);
-		//conversationUsersSP.setSpacing(0);
-		conversationUsersSP
+		contentSP.setWidth("100%");
+		contentSP.setHeight("100%");
+		contentSP.setSplitPosition("150");
+		
+        conversationUsersSP
 				.addStyleName("kune-chatroom-content-inner-up");
 		conversationUsersSP
 				.setStyleName("kune-chatroom-content-inner-up");
-		conversationUsersSP.setSplitPosition("80%");
-
-		conversationSP
+		conversationUsersSP.setSplitPosition("330");
+		conversationUsersSP.setWidth("100%");
+		conversationUsersSP.setHeight("100%");
+		
+		conversationVP
 				.addStyleName("kune-chatroom-content-conversation");
-		conversationSP
+		conversationVP
 				.setStyleName("kune-chatroom-content-conversation");
-		conversationSP.setHeight("100%");
-		conversationSP.setWidth("100%");
 		
 		conversationVP.setBorderWidth(0);
 		conversationVP.setSpacing(0);
+		conversationVP.setWidth("100%");
+		conversationVP.setHeight("100%");
 		
-		usersSP.setWidth("100%");
-		usersSP.setHeight("100%");
-		usersVP.setBorderWidth(0);
+        usersVP.setBorderWidth(0);
 		usersVP.setSpacing(0);
 		usersVP.addStyleName("kune-chatroom-content-users");
 		usersVP.setStyleName("kune-chatroom-content-users");
-
+        usersVP.setWidth("100%");
+        usersVP.setHeight("100%");
+        
 		inputOptionsVP.setBorderWidth(0);
 		inputOptionsVP.setSpacing(0);
 		inputOptionsVP.addStyleName("kune-chatroom-content-inner-down");
@@ -289,8 +282,7 @@ public class ChatroomDialog extends Composite implements ChatroomView {
 		optionsSpaceHtml2.setHTML("<b></b>");
 		optionsSpaceHtml2.setWidth("5");
         
-		Img.ref().tangoGtkFullscreen().applyTo(maximizeImage);
-					
+		Img.ref().tangoGtkFullscreen().applyTo(maximizeImage);	
 	}
 	
 	public void setSubject(String chatroomSubject) {

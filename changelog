@@ -38,6 +38,11 @@ kune (0.0.1)
 	* several desktop modifications
 	* update to gwt 1.4rc
 	* pom.xml update to latest maven-gwt plugin
+	* gwm 0.6.6
+	* pom.xml: danigb fixes in pom.xml
+	* .project: danigb fixes
+	* new doc rpc services
+	* pom.xml: mvn jetty:run works now, thanks danigb
 
 	-- Vicente J. Ruiz Jurado <vjrj@ourproject.org> Fri, 20 Apr 20 13:09:27 BRT 2007
 
