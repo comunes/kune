@@ -18,7 +18,7 @@
     </servlet>
 
     <servlet-mapping>
-      <servlet-name>ServiceXmppMuc</servlet-name>
+      <servlet-name>KuneDocumentService</servlet-name>
       <url-pattern>/gwt/org.ourproject.kune/KuneDocumentService</url-pattern>
     </servlet-mapping>
 
