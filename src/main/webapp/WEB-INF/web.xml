@@ -7,11 +7,20 @@
 
     <display-name>kune</display-name>
     <description>kune</description>
-
+ 
     <servlet>
       <servlet-name>ServiceXmppMuc</servlet-name>
       <servlet-class>org.ourproject.kune.server.ServiceXmppMucServiceImpl</servlet-class>
     </servlet>
+    <servlet>
+      <servlet-name>KuneDocumentService</servlet-name>
+      <servlet-class>org.ourproject.kune.server.KuneDocumentServiceServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+      <servlet-name>ServiceXmppMuc</servlet-name>
+      <url-pattern>/gwt/org.ourproject.kune/KuneDocumentService</url-pattern>
+    </servlet-mapping>
 
     <servlet-mapping>
       <servlet-name>ServiceXmppMuc</servlet-name>
