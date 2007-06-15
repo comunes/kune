@@ -20,11 +20,15 @@ inner color
 --> danigb, vjrj
 <vjrj> See differences between star-yellow-grey.png and -50.png
 --> vjrj
+<vjrj> Sometimes the repo is initialized without reason
+--> danigb
 
 MIND-TERM:
 --------------------------------------------------------------------------------
 <danigb> Reorganization & rewriting of code
 --> danigb, vjrj
+<danigb> README is empty
+--> vjrj
 
 LONG-TERM:
 --------------------------------------------------------------------------------
@@ -37,3 +41,38 @@ DO-NOT-IMPLEMENT (stuff that was rejected):
 
 BACKTRACES/DEBUG/VALGRIND/EXCEPTIONS:
 --------------------------------------------------------------------------------
+<vjrj> Sometimes the repo is initialized without reason:
+DEBUG - item added to cache. size=88
+DEBUG - item added to cache. size=89
+DEBUG - item added to cache. size=90
+DEBUG - item added to cache. size=91
+DEBUG - item added to cache. size=92
+DEBUG - item added to cache. size=93
+INFO - workspace 'default' initialized
+DEBUG - JackrabbitTextExtractor(org.apache.jackrabbit.extractor.DefaultTextExtractor)
+INFO - LocalFileSystem initialized at path repository/repository/index
+DEBUG - index added: name=_0, numDocs=96
+DEBUG - index added: name=_1, numDocs=7
+DEBUG - index added: name=_2, numDocs=1
+DEBUG - RedoLog is empty, no recovery needed.
+INFO - Index initialized: repository/repository/index
+DEBUG - org.apache.jackrabbit.core.state.MLRUItemStateCache@109e109e size=1, 1264/4194304
+DEBUG - JackrabbitTextExtractor(org.apache.jackrabbit.extractor.DefaultTextExtractor)
+INFO - LocalFileSystem initialized at path repository/workspaces/default/index
+DEBUG - index added: name=_0, numDocs=1
+DEBUG - index added: name=_1, numDocs=1
+DEBUG - index added: name=_2, numDocs=1
+DEBUG - RedoLog is empty, no recovery needed.
+INFO - Index initialized: repository/workspaces/default/index
+INFO - Repository started
+INFO - Transient repository initialized
+DEBUG - Opening a new session
+DEBUG - org.apache.jackrabbit.core.state.MLRUItemStateCache@2dce2dce size=1, 964/4194304
+INFO - Session opened
+DEBUG - org.apache.jackrabbit.core.state.MLRUItemStateCache@31623162 size=1, 1264/4194304
+DEBUG - created item cafebabe-cafe-babe-cafe-babecafebabe
+DEBUG - caching item cafebabe-cafe-babe-cafe-babecafebabe
+DEBUG - created item 1b6e4c38-deb3-4b6a-8d23-718d105d2629
+DEBUG - caching item 1b6e4c38-deb3-4b6a-8d23-718d105d2629
+(...)
+

@@ -50,7 +50,7 @@ kune (0.0.1)
 	* Added Richarea with a first version of autosave functionality
 	* Change Kitchesink RichTextarea icons with Openoffice-human icons (and
 	others)
+	* initialstatusbar floating over the rest during loading
 
 	-- Vicente J. Ruiz Jurado <vjrj@ourproject.org> Fri, 20 Apr 20 13:09:27 BRT 2007
 
-	
