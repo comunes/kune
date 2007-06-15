@@ -2,7 +2,6 @@ package org.ourproject.kune.server;
 
 import java.io.IOException;
 
-import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.SimpleCredentials;
@@ -11,6 +10,7 @@ import javax.servlet.ServletException;
 import org.apache.jackrabbit.core.TransientRepository;
 import org.ourproject.kune.client.rpc.KuneDocumentService;
 import org.ourproject.kune.client.rpc.dto.KuneDoc;
+import org.ourproject.kune.server.manager.DocumentManager;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -20,7 +20,12 @@ public class KuneDocumentServiceServlet extends RemoteServiceServlet implements
 	private static final long serialVersionUID = 1L;
 	private TransientRepository repository;
 	private Session session;
+	private final DocumentManager manager;
 
+	public KuneDocumentServiceServlet() {
+		this.manager = new DocumentManager();
+	}
+	
 	@Override
 	public void init() throws ServletException {
 		super.init();
@@ -37,25 +42,20 @@ public class KuneDocumentServiceServlet extends RemoteServiceServlet implements
 
 	public KuneDoc getRootDocument(String projectName) throws SerializableException {
 		try {
-			Node rootDocument = session.getRootNode().getNode("documents").getNode("root");
-			String title = rootDocument.getProperty("title").getValue().getString();
-			String content = rootDocument.getProperty("content").getValue().getString();
-			String license = rootDocument.getProperty("license_name").getValue().getString();
-			return new KuneDoc(title, content, license);
+			return manager.readRootDocument(session);
 		} catch (Exception e) {
 			throw new SerializableException(e.toString());
 		}
 	}
+
 	
 	public void setRootDocument(String projectName, KuneDoc doc) throws SerializableException {
 		try {
-			Node rootDocument = session.getRootNode().getNode("documents").getNode("root");
-			rootDocument.setProperty("title", doc.getName());
-			rootDocument.setProperty("content", doc.getContent());
-			rootDocument.setProperty("license_name", doc.getLicenseName());
-			session.save();
+			manager.saveDocument(doc, session);
 		} catch (Exception e) {
 			throw new SerializableException(e.toString());
 		}
 	}
+
+
 }
