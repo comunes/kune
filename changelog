@@ -44,5 +44,10 @@ kune (0.0.1)
 	* new doc rpc services
 	* pom.xml: mvn jetty:run works now, thanks danigb
 
+	* jackrabbit dependencies
+	* CreateRepository utility class
+	* The DocumentService can read a TransientRepository
+
 	-- Vicente J. Ruiz Jurado <vjrj@ourproject.org> Fri, 20 Apr 20 13:09:27 BRT 2007
 
+	
