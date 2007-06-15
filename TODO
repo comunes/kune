@@ -7,16 +7,22 @@ SHORT-TERM (URGENT):
 --------------------------------------------------------------------------------
 <vjrj> apply csstidy to css
 --> vjrj 
-<vjrj> explorer expecific problems: buttom options, navbar links color, dropdown
+<vjrj> explorer specific problems: button options, navbar links color, dropdown
 inner color
 --> vjrj
 <danigb> Richtext editor test
 --> vjrj
-<danigb> JCR prototype
+<danigb> Persistence, Hibernate, JCR prototype (guice)
 --> danigb
 <danigb> MVC in Rate*
---> vjrj,danigb
-<danigb> Reorganization: 
+--> danigb, vjrj
+<danigb> Exploration of some techs (Unit tests, monks, guice, IoC, persistence)
+--> danigb, vjrj
+
+MIND-TERM:
+--------------------------------------------------------------------------------
+<danigb> Reorganization & rewriting of code
+--> danigb, vjrj
 
 LONG-TERM:
 --------------------------------------------------------------------------------
