@@ -33,6 +33,8 @@ public interface KuneDocumentService extends RemoteService {
 
 	public KuneDoc getRootDocument(String projectName);
 	
+	public void setRootDocument(String projectName, KuneDoc doc);
+	
 	   public static class App {
 	        private static KuneDocumentServiceAsync ourInstance = null;
 

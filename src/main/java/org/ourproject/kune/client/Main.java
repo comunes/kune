@@ -125,6 +125,7 @@ public class Main extends AbsolutePanel implements EntryPoint,
 		
         kuneDesktopPanel.contextDropDowns.addDropDown("Members", new HTML("Lorem ipsum dolor sit amet,<br>consectetuer adipiscing elit."), true, "87DECD");
         loadRootDocument();
+        saveRootDocument(); 
         
         kuneDesktopPanel.contextContents.add(new HTML("<p><b>Some tests:</b></p>")); 
     	kuneDesktopPanel.contextTitle.setText(Trans.constants().Text());
@@ -159,6 +160,23 @@ public class Main extends AbsolutePanel implements EntryPoint,
 			public void onSuccess(Object result) {
 				doc = (KuneDoc) result;
 				setContent(doc.getContent());
+			}
+			
+		});
+	}
+	
+	private void saveRootDocument() {
+		KuneDocumentServiceAsync docService = KuneDocumentService.App.getInstance();
+		docService.setRootDocument("yellow submarine", new KuneDoc(), new AsyncCallback () {
+			
+			public void onFailure(Throwable exception) {
+				String content = "<h1>no se ha podido salvar el contenido desde el servidor</h1>";
+				content += "<br/>" + exception.toString();
+				setContent(content );
+			}
+
+			public void onSuccess(Object result) {
+				SiteMessageDialog.get().setMessageInfo("Doc saved");
 			}
 			
 		});

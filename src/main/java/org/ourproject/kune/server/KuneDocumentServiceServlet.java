@@ -16,5 +16,8 @@ public class KuneDocumentServiceServlet extends RemoteServiceServlet implements
 		String head = "<h1>Server content generated at: " + new Date() + "</h1>";
 		return new KuneDoc("name", head + content, "license");
 	}
-
+	
+	public void setRootDocument(String projectName, KuneDoc doc) {
+		System.err.println("la-la-la-laaaaaa la-la-laaaaaaa la-la-laaaaaaa");
+	}
 }

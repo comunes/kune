@@ -18,6 +18,8 @@
 
 package org.ourproject.kune.client.rpc;
 
+import org.ourproject.kune.client.rpc.dto.KuneDoc;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
@@ -27,4 +29,5 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  */
 public interface KuneDocumentServiceAsync {
 	public void getRootDocument(String projectName, AsyncCallback callback);
+	public void setRootDocument(String projectName, KuneDoc doc, AsyncCallback callback);
 }
