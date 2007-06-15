@@ -5,11 +5,6 @@ TODO-list for kune
 
 SHORT-TERM (URGENT):
 --------------------------------------------------------------------------------
-<vjrj> apply csstidy to css
---> vjrj 
-<vjrj> explorer specific problems: button options, navbar links color, dropdown
-inner color
---> vjrj
 <danigb> Richtext editor test
 --> vjrj
 <danigb> Persistence, Hibernate, JCR prototype (guice)
@@ -22,6 +17,8 @@ inner color
 --> vjrj
 <vjrj> Sometimes the repo is initialized without reason
 --> danigb
+<vjrj> explorer specific problems: fonts antialiasing problem?
+--> vjrj
 
 MIND-TERM:
 --------------------------------------------------------------------------------
@@ -29,6 +26,8 @@ MIND-TERM:
 --> danigb, vjrj
 <danigb> README is empty
 --> vjrj
+<vjrj> apply csstidy to css, again
+--> vjrj 
 
 LONG-TERM:
 --------------------------------------------------------------------------------
