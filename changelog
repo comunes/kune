@@ -43,10 +43,13 @@ kune (0.0.1)
 	* .project: danigb fixes
 	* new doc rpc services
 	* pom.xml: mvn jetty:run works now, thanks danigb
-
 	* jackrabbit dependencies
 	* CreateRepository utility class
 	* The DocumentService can read a TransientRepository
+	* fixed mvn download of pom in our mavenrepo
+	* Added Richarea with a first version of autosave functionality
+	* Change Kitchesink RichTextarea icons with Openoffice-human icons (and
+	others)
 
 	-- Vicente J. Ruiz Jurado <vjrj@ourproject.org> Fri, 20 Apr 20 13:09:27 BRT 2007
 

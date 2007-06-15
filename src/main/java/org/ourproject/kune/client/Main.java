@@ -39,12 +39,14 @@ import org.ourproject.kune.client.ui.chat.ChatroomDialog;
 import org.ourproject.kune.client.ui.chat.ChatroomUser;
 import org.ourproject.kune.client.ui.desktop.KuneDesktop;
 import org.ourproject.kune.client.ui.desktop.SiteMessageDialog;
+import org.ourproject.kune.client.ui.ed.RichTextToolbar;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -52,8 +54,10 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PushButton;
+import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -69,7 +73,16 @@ public class Main extends AbsolutePanel implements EntryPoint,
 	private KuneDesktop kuneDesktopPanel = null;
 	
 	private SiteMessageDialog siteMessage = null;
+	
 	private KuneDoc doc;
+	
+	private RichTextArea area;
+    
+	private RichTextToolbar tb;
+	
+	private Timer saveTimer;
+	
+	private boolean savePending = false;
 
 	public Main() {
 		super();
@@ -124,10 +137,52 @@ public class Main extends AbsolutePanel implements EntryPoint,
 		kuneDesktopPanel.localNavBar.selectItem(0);
 		
         kuneDesktopPanel.contextDropDowns.addDropDown("Members", new HTML("Lorem ipsum dolor sit amet,<br>consectetuer adipiscing elit."), true, "87DECD");
-        loadRootDocument();
-        saveRootDocument(); 
         
-        kuneDesktopPanel.contextContents.add(new HTML("<p><b>Some tests:</b></p>")); 
+        
+        saveTimer = new Timer() {
+        	public void run() {
+        		saveRootDocument();
+        	}
+        };
+
+        area = new RichTextArea();
+        tb = new RichTextToolbar(area);
+
+        VerticalPanel ed = new VerticalPanel();
+        ed.add(tb);
+        ed.add(area);
+
+        area.setHeight("20em");
+        area.setWidth("100%");
+        ed.setWidth("100%");
+        
+        
+        // TODO: clickListener in the Toolbar() (now not saving after clicks in the toolbar)
+        
+        area.addKeyboardListener(new KeyboardListener() {
+        	public void onKeyDown(Widget sender, char keyCode, int modifiers) {
+        	}
+
+        	public void onKeyPress(Widget sender, char keyCode, int modifiers) {
+        	}
+
+        	public void onKeyUp(Widget sender, char keyCode, int modifiers) {
+        		if (sender == area) {
+        			if (!savePending) {
+                        saveTimer.schedule(10000);
+                        savePending = true;
+                        // remove keyboard listener... and add after save...
+        			}
+        		}
+        	}
+        });
+    
+		kuneDesktopPanel.contextContents.add(new BorderPanel(ed, 0, 5));
+        
+        loadRootDocument();
+        
+        
+        kuneDesktopPanel.contextContents.add(new HTML("<h1>Some tests</h1>")); 
     	kuneDesktopPanel.contextTitle.setText(Trans.constants().Text());
     	    	
     	kuneDesktopPanel.contextNavBar.add(new HTML("<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros.</p>"));
@@ -152,14 +207,14 @@ public class Main extends AbsolutePanel implements EntryPoint,
 		docService.getRootDocument("yellow submarine", new AsyncCallback () {
 
 			public void onFailure(Throwable exception) {
-				String content = "<h1>no se ha podido cargar el contenido desde el servidor</h1>";
-				content += "<br/>" + exception.toString();
-				setContent(content );
+				SiteMessageDialog.get().setMessageError("No se ha podido recuperar el contenido desde el servidor: " + exception.toString());
+				area.setEnabled(false);
 			}
 
 			public void onSuccess(Object result) {
 				doc = (KuneDoc) result;
 				setContent(doc.getContent());
+				area.setEnabled(true);
 			}
 			
 		});
@@ -167,27 +222,31 @@ public class Main extends AbsolutePanel implements EntryPoint,
 	
 	private void saveRootDocument() {
 		KuneDocumentServiceAsync docService = KuneDocumentService.App.getInstance();
-		docService.setRootDocument("yellow submarine", new KuneDoc(), new AsyncCallback () {
-			
+        doc.setContent(area.getHTML());
+        docService.setRootDocument("yellow submarine", doc, new AsyncCallback () {
+
 			public void onFailure(Throwable exception) {
-				String content = "<h1>no se ha podido salvar el contenido desde el servidor</h1>";
-				content += "<br/>" + exception.toString();
-				setContent(content );
+				SiteMessageDialog.get().setMessageError("No se ha podido salvar el contenido en el servidor (se reintentará): " + exception.toString());
+                saveTimer.schedule(20000);
+                savePending = true;
 			}
 
 			public void onSuccess(Object result) {
-				SiteMessageDialog.get().setMessageInfo("Doc saved");
+				SiteMessageDialog.get().setMessageInfo("Document saved");
+                saveTimer.cancel();
+				savePending = false;
 			}
-			
+
 		});
 	}
+	
 	private void setContent(String content) {
-		kuneDesktopPanel.contextContents.add(new HTML(content));
+        area.setHTML(content);
 	}
 
-	
-	public void styleTest() {
+    public void styleTest() {
 		// Licenses
+		kuneDesktopPanel.contextContents.add(new HTML("<p><b>License tests:</b></p>")); 
 		License license = new License();
 		LicenseWidget licw1 = new LicenseWidget(license);
 		LicenseWidget licw2 = new LicenseWidget(license);
@@ -202,6 +261,7 @@ public class Main extends AbsolutePanel implements EntryPoint,
 		kuneDesktopPanel.contextBottomBar.setLicense(license);
 		
 		// Buttons tests
+		kuneDesktopPanel.contextContents.add(new HTML("<p><b>Buttons tests:</b></p>")); 
 		kuneDesktopPanel.contextContents.add(new BorderPanel(new CustomPushButton("Large font", CustomPushButton.LARGE), CustomPushButton.VERSPACELARGE, 0));
 		kuneDesktopPanel.contextContents.add(new BorderPanel(new CustomPushButton("Small font", CustomPushButton.SMALL), 0, 0, CustomPushButton.VERSPACESMALL, 0));
 		kuneDesktopPanel.contextContents.add(new BorderPanel(new CustomPushButton("Mini font", CustomPushButton.MINI), 0, 0, CustomPushButton.VERSPACEMINI, 0));
@@ -217,6 +277,7 @@ public class Main extends AbsolutePanel implements EntryPoint,
     	kuneDesktopPanel.contextContents.add(new BorderPanel(helpTest, 0, 0, CustomPushButton.SPACEHELPBUTTON, 0));
 		
     	// Rate
+    	kuneDesktopPanel.contextContents.add(new HTML("<p><b>Rate tests:</b></p>")); 
         Rate rate = new Rate();
         rate.addRate(4);
         rate.addRate(3);
@@ -231,6 +292,7 @@ public class Main extends AbsolutePanel implements EntryPoint,
         RateDialog rateTestWidget2 = new RateDialog(rate2);
         kuneDesktopPanel.contextContents.add(rateTestWidget2);
 
+        kuneDesktopPanel.contextContents.add(new HTML("<p><b>RateIt dialog tests:</b></p>")); 
         RateItDialog rateItTestWidget = new RateItDialog(rate2);
         kuneDesktopPanel.contextContents.add(rateItTestWidget);
         
