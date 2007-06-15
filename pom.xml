@@ -8,6 +8,12 @@
 	<name>Main</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
+	    <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.14</version>
+        </dependency>
+	
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -59,6 +65,28 @@
 			<artifactId>smackx-debugger</artifactId>
 			<version>3.0.0</version>
 		</dependency>
+		
+		<!-- jackrabbit -->
+        <dependency>
+            <groupId>org.apache.jackrabbit</groupId>
+            <artifactId>jackrabbit-core</artifactId>
+            <version>1.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.jackrabbit</groupId>
+            <artifactId>jackrabbit-webdav</artifactId>
+            <version>1.3</version>
+        </dependency>
+		<dependency>
+		    <groupId>org.apache.jackrabbit</groupId>
+		    <artifactId>jackrabbit-jcr-server</artifactId>
+		    <version>1.3</version>
+		</dependency>        
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.0.1</version>
+        </dependency>
 	</dependencies>
 	<!-- http://gwt-maven.googlecode.com/svn/docs/maven-googlewebtoolkit2-plugin/index.html -->
 	<repositories>
@@ -127,7 +155,7 @@
 					<execution>
 						<goals>
 							<!-- <goal>mergewebxml</goal> -->
-							<goal>compile</goal>
+							<!-- <goal>compile</goal> -->
 						</goals>
 					</execution>
 				</executions>

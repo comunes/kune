@@ -22,6 +22,7 @@ import org.ourproject.kune.client.rpc.dto.KuneDoc;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 /**
@@ -31,9 +32,9 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
  */
 public interface KuneDocumentService extends RemoteService {
 
-	public KuneDoc getRootDocument(String projectName);
+	public KuneDoc getRootDocument(String projectName) throws SerializableException;
 	
-	public void setRootDocument(String projectName, KuneDoc doc);
+	public void setRootDocument(String projectName, KuneDoc doc) throws SerializableException;
 	
 	   public static class App {
 	        private static KuneDocumentServiceAsync ourInstance = null;

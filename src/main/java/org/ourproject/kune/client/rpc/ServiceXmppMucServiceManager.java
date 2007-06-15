@@ -4,6 +4,14 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
+/**
+ * NOTA: desde mi punto de vista, esta clase no hace falta en absoluto
+ * (con su amiga ServiceXmppMucIResponse)
+ * lo único que hace es duplicar el comportamiento de 
+ * AsyncCallback sin aportar nada nuevo...
+ * @author vicente
+ *
+ */
 public class ServiceXmppMucServiceManager implements
 		ServiceXmppMucIDataProvider {
 
