@@ -92,7 +92,7 @@ public class RichTextToolbar extends Composite {
     AbstractImagePrototype justifyRight();
 
     /**
-     * @gwt.resource sc_defaultbullet.png
+     * @gwt.resource sc_defaultnumbering.png
      */
     AbstractImagePrototype ol();
 
@@ -127,7 +127,7 @@ public class RichTextToolbar extends Composite {
     AbstractImagePrototype superscript();
 
     /**
-     * @gwt.resource sc_defaultnumbering.png
+     * @gwt.resource sc_defaultbullet.png
      */
     AbstractImagePrototype ul();
 

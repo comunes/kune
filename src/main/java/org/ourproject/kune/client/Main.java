@@ -51,6 +51,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -83,6 +84,11 @@ public class Main extends AbsolutePanel implements EntryPoint,
 	private Timer saveTimer;
 	
 	private boolean savePending = false;
+	
+	private KeyboardListener areaKbListener;
+	
+	private ClickListener areaClickListener;
+	
 
 	public Main() {
 		super();
@@ -156,10 +162,21 @@ public class Main extends AbsolutePanel implements EntryPoint,
         area.setWidth("100%");
         ed.setWidth("100%");
         
-        
         // TODO: clickListener in the Toolbar() (now not saving after clicks in the toolbar)
+        areaClickListener = new ClickListener() {
+        	public void onClick(Widget sender) {
+        		if (sender == area) {
+        			if (!savePending) {
+        				saveTimer.schedule(10000);
+        				savePending = true;
+        				area.removeKeyboardListener(areaKbListener);
+        				area.removeClickListener(areaClickListener);
+        			}
+        		}
+        	}
+        };
         
-        area.addKeyboardListener(new KeyboardListener() {
+        areaKbListener = new KeyboardListener() {
         	public void onKeyDown(Widget sender, char keyCode, int modifiers) {
         	}
 
@@ -171,12 +188,16 @@ public class Main extends AbsolutePanel implements EntryPoint,
         			if (!savePending) {
                         saveTimer.schedule(10000);
                         savePending = true;
-                        // remove keyboard listener... and add after save...
+                        area.removeKeyboardListener(areaKbListener);
+                        area.removeClickListener(areaClickListener);
         			}
         		}
         	}
-        });
+        };
     
+        area.addKeyboardListener(areaKbListener);
+        area.addClickListener(areaClickListener);
+        		
 		kuneDesktopPanel.contextContents.add(new BorderPanel(ed, 0, 5));
         
         loadRootDocument();
@@ -235,6 +256,8 @@ public class Main extends AbsolutePanel implements EntryPoint,
 				SiteMessageDialog.get().setMessageInfo("Document saved");
                 saveTimer.cancel();
 				savePending = false;
+				area.addKeyboardListener(areaKbListener);
+				area.addClickListener(areaClickListener);
 			}
 
 		});
