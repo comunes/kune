@@ -51,6 +51,9 @@ kune (0.0.1)
 	* Change Kitchesink RichTextarea icons with Openoffice-human icons (and
 	others)
 	* initialstatusbar floating over the rest during loading
+	* richtext toolbar icons and style improved
+	* siteMessage and options button fonts size fixed
+	* siteMessage position adjust
 
 	-- Vicente J. Ruiz Jurado <vjrj@ourproject.org> Fri, 20 Apr 20 13:09:27 BRT 2007
 

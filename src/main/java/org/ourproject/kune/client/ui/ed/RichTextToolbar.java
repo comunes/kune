@@ -72,37 +72,37 @@ public class RichTextToolbar extends Composite {
     AbstractImagePrototype insertImage();
 
     /**
-     * @gwt.resource sc_italic.png
+     * @gwt.resource italic.png
      */
     AbstractImagePrototype italic();
 
     /**
-     * @gwt.resource sc_centerpara.png
+     * @gwt.resource centerpara.png
      */
     AbstractImagePrototype justifyCenter();
 
     /**
-     * @gwt.resource sc_alignleft.png
+     * @gwt.resource alignleft.png
      */
     AbstractImagePrototype justifyLeft();
 
     /**
-     * @gwt.resource sc_alignright.png
+     * @gwt.resource alignright.png
      */
     AbstractImagePrototype justifyRight();
 
     /**
-     * @gwt.resource sc_defaultnumbering.png
+     * @gwt.resource defaultnumbering.png
      */
     AbstractImagePrototype ol();
 
     /**
-     * @gwt.resource sc_decrementindent.png
+     * @gwt.resource decrementindent.png
      */
     AbstractImagePrototype outdent();
 
     /**
-     * @gwt.resource removeFormat.gif
+     * @gwt.resource removeFormat.png
      */
     AbstractImagePrototype removeFormat();
 
@@ -112,41 +112,41 @@ public class RichTextToolbar extends Composite {
     AbstractImagePrototype removeLink();
 
     /**
-     * @gwt.resource sc_strikeout.png
+     * @gwt.resource strikeout.png
      */
     AbstractImagePrototype strikeThrough();
 
     /**
-     * @gwt.resource sc_subscript.png
+     * @gwt.resource subscript.png
      */
     AbstractImagePrototype subscript();
 
     /**
-     * @gwt.resource sc_superscript.png
+     * @gwt.resource superscript.png
      */
     AbstractImagePrototype superscript();
 
     /**
-     * @gwt.resource sc_defaultbullet.png
+     * @gwt.resource defaultbullet.png
      */
     AbstractImagePrototype ul();
 
     /**
-     * @gwt.resource sc_underline.png
+     * @gwt.resource underline.png
      */
     AbstractImagePrototype underline();
   }
 
   /**
    * Others:
-   * sc_backcolor.png
-   * sc_backgroundcolor.png
-   * sc_charfontname.png
-   * sc_fontcolor.png
-   * sc_fontdialog.png
-   * sc_fontheight.png
-   * sc_imagebutton.png
-   * sc_inserthyperlink.png
+   * backcolor.png
+   * backgroundcolor.png
+   * charfontname.png
+   * fontcolor.png
+   * fontdialog.png
+   * fontheight.png
+   * imagebutton.png
+   * inserthyperlink.png
    */
 
   /**
@@ -380,6 +380,14 @@ public class RichTextToolbar extends Composite {
       topPanel.add(italic = createToggleButton(images.italic(), strings.italic()));
       topPanel.add(underline = createToggleButton(images.underline(),
           strings.underline()));
+    }
+    
+    if (extended != null) {
+      topPanel.add(strikethrough = createToggleButton(images.strikeThrough(),
+          strings.strikeThrough()));
+    }
+    
+    if (basic != null) {
       topPanel.add(subscript = createToggleButton(images.subscript(),
           strings.subscript()));
       topPanel.add(superscript = createToggleButton(images.superscript(),
@@ -393,8 +401,6 @@ public class RichTextToolbar extends Composite {
     }
 
     if (extended != null) {
-      topPanel.add(strikethrough = createToggleButton(images.strikeThrough(),
-          strings.strikeThrough()));
       topPanel.add(indent = createPushButton(images.indent(), strings.indent()));
       topPanel.add(outdent = createPushButton(images.outdent(), strings.outdent()));
       topPanel.add(hr = createPushButton(images.hr(), strings.hr()));
@@ -411,10 +417,10 @@ public class RichTextToolbar extends Composite {
     }
 
     if (basic != null) {
-      bottomPanel.add(backColors = createColorList("Background"));
-      bottomPanel.add(foreColors = createColorList("Foreground"));
-      bottomPanel.add(fonts = createFontList());
-      bottomPanel.add(fontSizes = createFontSizes());
+      topPanel.add(backColors = createColorList("Background"));
+      topPanel.add(foreColors = createColorList("Foreground"));
+      topPanel.add(fonts = createFontList());
+      topPanel.add(fontSizes = createFontSizes());
 
       // We only use these listeners for updating status, so don't hook them up
       // unless at least basic editing is supported.

@@ -110,9 +110,9 @@ public class Main extends AbsolutePanel implements EntryPoint,
 		generalVP.add(kuneDesktopPanel);
         add((Widget) desktop, 0, 0);
         desktop.addWidget(generalVP, 0, 0);
-		desktop.addWidget(siteMessage, Window.getClientWidth() * 40 / 100, 23);
+		desktop.addWidget(siteMessage, Window.getClientWidth() * 40 / 100 - 10, 23);
 //		add(generalVP, 0, 0);
-//		add(siteMessage, Window.getClientWidth() * 40 / 100, 23);
+//		add(siteMessage, Window.getClientWidth() * 40 / 100 - 10, 23);
 	}
 
 	public void onModuleLoad() {
@@ -125,7 +125,7 @@ public class Main extends AbsolutePanel implements EntryPoint,
 		kuneDesktopPanel.adjustSize(width, height);
 		siteMessage.adjustWidth(width);
 		//setWidgetPosition(siteMessage, Window.getClientWidth() * 40 / 100 - 10, 23);
-        desktop.setWidgetPosition(siteMessage, Window.getClientWidth() * 40 / 100, 23);
+        desktop.setWidgetPosition(siteMessage, Window.getClientWidth() * 40 / 100 - 10, 23);
 	}
 
 	protected void setProperties() {
