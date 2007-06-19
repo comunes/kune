@@ -15,6 +15,8 @@
  */
 package org.ourproject.kune.client.ui.ed;
 
+import org.ourproject.kune.client.ui.WebSafePaletteDialog;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.Constants;
 import com.google.gwt.user.client.Window;
@@ -26,6 +28,8 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.ImageBundle;
 import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.PopupListener;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.ToggleButton;
@@ -135,6 +139,17 @@ public class RichTextToolbar extends Composite {
      * @gwt.resource underline.png
      */
     AbstractImagePrototype underline();
+    
+    /**
+     * @gwt.resource backcolor.png
+     */
+    AbstractImagePrototype backcolor();
+    
+    /**
+     * @gwt.resource fontcolor.png
+     */
+    AbstractImagePrototype fontcolor();
+    
   }
 
   /**
@@ -155,6 +170,8 @@ public class RichTextToolbar extends Composite {
    */
   public interface Strings extends Constants {
 
+    String backcolor();
+    
     String black();
 
     String blue();
@@ -166,6 +183,8 @@ public class RichTextToolbar extends Composite {
     String createLink();
 
     String font();
+
+    String fontcolor();
 
     String green();
 
@@ -224,7 +243,7 @@ public class RichTextToolbar extends Composite {
     String xxsmall();
 
     String yellow();
-  }
+}
 
   /**
    * We use an inner EventListener class to avoid exposing event methods on the
@@ -234,13 +253,7 @@ public class RichTextToolbar extends Composite {
       KeyboardListener {
 
     public void onChange(Widget sender) {
-      if (sender == backColors) {
-        basic.setBackColor(backColors.getValue(backColors.getSelectedIndex()));
-        backColors.setSelectedIndex(0);
-      } else if (sender == foreColors) {
-        basic.setForeColor(foreColors.getValue(foreColors.getSelectedIndex()));
-        foreColors.setSelectedIndex(0);
-      } else if (sender == fonts) {
+      if (sender == fonts) {
         basic.setFontName(fonts.getValue(fonts.getSelectedIndex()));
         fonts.setSelectedIndex(0);
       } else if (sender == fontSizes) {
@@ -282,6 +295,26 @@ public class RichTextToolbar extends Composite {
         if (url != null) {
           extended.createLink(url);
         }
+      } else if (sender == backColor) {
+    	  WebSafePaletteDialog.get().show(backColor.getAbsoluteLeft(), backColor.getAbsoluteTop() + 20);
+    	  WebSafePaletteDialog.get().addPopupListener(new PopupListener() {
+              public void onPopupClosed(PopupPanel sender, boolean autoClosed) {
+                  if (WebSafePaletteDialog.get().isColorSelected()) {
+                      basic.setBackColor(WebSafePaletteDialog.get().getColorSelected());
+                  }
+                  sender.removePopupListener(this);
+              }
+          });
+      } else if (sender == fontColor) {
+    	  WebSafePaletteDialog.get().show(fontColor.getAbsoluteLeft(), fontColor.getAbsoluteTop() + 20);
+    	  WebSafePaletteDialog.get().addPopupListener(new PopupListener() {
+              public void onPopupClosed(PopupPanel sender, boolean autoClosed) {
+                  if (WebSafePaletteDialog.get().isColorSelected()) {
+                      basic.setForeColor(WebSafePaletteDialog.get().getColorSelected());
+                  }
+                  sender.removePopupListener(this);
+              }
+          });
       } else if (sender == removeLink) {
         extended.removeLink();
       } else if (sender == hr) {
@@ -352,8 +385,9 @@ public class RichTextToolbar extends Composite {
   private PushButton removeLink;
   private PushButton removeFormat;
 
-  private ListBox backColors;
-  private ListBox foreColors;
+  private PushButton backColor;
+  private PushButton fontColor;
+
   private ListBox fonts;
   private ListBox fontSizes;
 
@@ -417,8 +451,10 @@ public class RichTextToolbar extends Composite {
     }
 
     if (basic != null) {
-      topPanel.add(backColors = createColorList("Background"));
-      topPanel.add(foreColors = createColorList("Foreground"));
+      topPanel.add(backColor = createPushButton(images.backcolor(),
+          strings.backcolor()));
+      topPanel.add(fontColor = createPushButton(images.fontcolor(),
+          strings.fontcolor()));
       topPanel.add(fonts = createFontList());
       topPanel.add(fontSizes = createFontSizes());
 
@@ -427,21 +463,6 @@ public class RichTextToolbar extends Composite {
       richText.addKeyboardListener(listener);
       richText.addClickListener(listener);
     }
-  }
-
-  private ListBox createColorList(String caption) {
-    ListBox lb = new ListBox();
-    lb.addChangeListener(listener);
-    lb.setVisibleItemCount(1);
-
-    lb.addItem(caption);
-    lb.addItem(strings.white(), "white");
-    lb.addItem(strings.black(), "black");
-    lb.addItem(strings.red(), "red");
-    lb.addItem(strings.green(), "green");
-    lb.addItem(strings.yellow(), "yellow");
-    lb.addItem(strings.blue(), "blue");
-    return lb;
   }
 
   private ListBox createFontList() {

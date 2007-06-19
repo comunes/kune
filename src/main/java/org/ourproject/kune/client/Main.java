@@ -35,6 +35,7 @@ import org.ourproject.kune.client.ui.KuneDefaultFrame;
 import org.ourproject.kune.client.ui.LicenseWidget;
 import org.ourproject.kune.client.ui.RateDialog;
 import org.ourproject.kune.client.ui.RateItDialog;
+import org.ourproject.kune.client.ui.WebSafePaletteDialog;
 import org.ourproject.kune.client.ui.chat.ChatroomDialog;
 import org.ourproject.kune.client.ui.chat.ChatroomUser;
 import org.ourproject.kune.client.ui.desktop.KuneDesktop;
@@ -75,6 +76,8 @@ public class Main extends AbsolutePanel implements EntryPoint,
 	
 	private SiteMessageDialog siteMessage = null;
 	
+	private WebSafePaletteDialog webSafePalette = null;
+	
 	private KuneDoc doc;
 	
 	private RichTextArea area;
@@ -104,6 +107,7 @@ public class Main extends AbsolutePanel implements EntryPoint,
         generalVP = new VerticalPanel();
         kuneDesktopPanel = new KuneDesktop();
         siteMessage = new SiteMessageDialog();
+        webSafePalette = new WebSafePaletteDialog();
 	}
 
 	protected void layout() {
@@ -111,6 +115,7 @@ public class Main extends AbsolutePanel implements EntryPoint,
         add((Widget) desktop, 0, 0);
         desktop.addWidget(generalVP, 0, 0);
 		desktop.addWidget(siteMessage, Window.getClientWidth() * 40 / 100 - 10, 23);
+		desktop.addWidget(webSafePalette, 0, 0);
 //		add(generalVP, 0, 0);
 //		add(siteMessage, Window.getClientWidth() * 40 / 100 - 10, 23);
 	}

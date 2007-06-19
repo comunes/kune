@@ -516,4 +516,7 @@ padding: 2px;
 font-size:85%;
 }
 
-
+.web-safe-palette {
+  background-color: #FFF;
+  border: 1px solid #AAA;
+}

@@ -54,6 +54,8 @@ kune (0.0.1)
 	* richtext toolbar icons and style improved
 	* siteMessage and options button fonts size fixed
 	* siteMessage position adjust
+	* WebSafePaletteDialog.java: new palette widget with web safe colors
+	* added web safe palette to richtext toolbar backcolor and fontcolor
 
 	-- Vicente J. Ruiz Jurado <vjrj@ourproject.org> Fri, 20 Apr 20 13:09:27 BRT 2007
 
