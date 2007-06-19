@@ -1,0 +1,1 @@
+java -cp "%~dp0\src\main\java;%~dp0target\classes;C:/java.tools/gwt-windows-1.4.10/gwt-user.jar;C:/java.tools/gwt-windows-1.4.10/gwt-dev-windows.jar;libs/gwm.jar" com.google.gwt.dev.GWTCompiler -style OBF -out "%~dp0\src\main\webapp\gwt" %* org.ourproject.kune.Main
