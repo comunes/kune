@@ -184,6 +184,7 @@ font-size:77%;
 cursor:default;
 white-space:nowrap;
 padding:1px 4px;
+border:1px solid #FFFCD5;
 }
 
 .kune-sitebar-sub-options .gwt-MenuItem-selected {
@@ -512,11 +513,43 @@ padding: 2px;
   border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255) rgb(157, 174, 205);
 }
 
-.gwt-RichTextToolbar .gwt-ListBox {
-font-size:85%;
+.RichTextToolbar-menu table {
+border-collapse:collapse;
+border-spacing:0;
+margin:0;
+}
+
+.RichTextToolbar-menu .gwt-MenuItem {
+margin-right: 2px;
+border: 1px solid #F2F2F2;
+}
+
+.RichTextToolbar-menu .gwt-MenuItem-selected {
+margin-right: 2px;
+background-color: #E8F1FF;
+border: 1px solid #C3D9FF;
+border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255) rgb(157, 174, 205);
+}
+
+.RichTextToolbar-submenu {
+background-color:#FFFCD5;
+border:1px solid #D38D5F;
+cursor:default;	
+}
+
+.RichTextToolbar-submenu .gwt-MenuItem {
+cursor:default;
+white-space:nowrap;
+padding:0px 4px;
+border: 1px solid #FFFCD5;
+}
+
+.RichTextToolbar-submenu .gwt-MenuItem-selected {
+background-color:#FFB958;
+border:1px solid #C83737;	
 }
 
 .web-safe-palette {
-  background-color: #FFF;
-  border: 1px solid #AAA;
+background-color: #FFF;
+border: 1px solid #AAA;
 }

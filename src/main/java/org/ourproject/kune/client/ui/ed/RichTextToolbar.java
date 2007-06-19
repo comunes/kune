@@ -15,19 +15,21 @@
  */
 package org.ourproject.kune.client.ui.ed;
 
-import org.ourproject.kune.client.ui.WebSafePaletteDialog;
+import org.ourproject.kune.client.ui.WebSafePalette;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.Constants;
+import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.ImageBundle;
 import com.google.gwt.user.client.ui.KeyboardListener;
-import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.PopupListener;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.PushButton;
@@ -149,17 +151,22 @@ public class RichTextToolbar extends Composite {
      * @gwt.resource fontcolor.png
      */
     AbstractImagePrototype fontcolor();
-    
+   
+    /**
+     * @gwt.resource charfontname.png
+     */
+    AbstractImagePrototype charfontname();
+   
+    /**
+     * @gwt.resource fontheight.png
+     */
+    AbstractImagePrototype fontheight();
+   
   }
 
   /**
    * Others:
-   * backcolor.png
-   * backgroundcolor.png
-   * charfontname.png
-   * fontcolor.png
    * fontdialog.png
-   * fontheight.png
    * imagebutton.png
    * inserthyperlink.png
    */
@@ -172,21 +179,11 @@ public class RichTextToolbar extends Composite {
 
     String backcolor();
     
-    String black();
-
-    String blue();
-
     String bold();
-
-    String color();
 
     String createLink();
 
-    String font();
-
     String fontcolor();
-
-    String green();
 
     String hr();
 
@@ -202,26 +199,18 @@ public class RichTextToolbar extends Composite {
 
     String justifyRight();
 
-    String large();
-
-    String medium();
-
-    String normal();
-
     String ol();
 
     String outdent();
-
-    String red();
 
     String removeFormat();
 
     String removeLink();
 
-    String size();
+    String fontSize();
 
-    String small();
-
+    String fontType();
+    
     String strikeThrough();
 
     String subscript();
@@ -232,17 +221,19 @@ public class RichTextToolbar extends Composite {
 
     String underline();
 
-    String white();
-
-    String xlarge();
-
-    String xsmall();
-
-    String xxlarge();
-
-    String xxsmall();
-
-    String yellow();
+    String ExtraSmall();
+    
+    String VerySmall();
+    
+    String Small();
+    
+    String Medium();
+    
+    String Large();
+    
+    String VeryLarge();
+    
+    String ExtraLarge();    
 }
 
   /**
@@ -253,13 +244,6 @@ public class RichTextToolbar extends Composite {
       KeyboardListener {
 
     public void onChange(Widget sender) {
-      if (sender == fonts) {
-        basic.setFontName(fonts.getValue(fonts.getSelectedIndex()));
-        fonts.setSelectedIndex(0);
-      } else if (sender == fontSizes) {
-        basic.setFontSize(fontSizesConstants[fontSizes.getSelectedIndex() - 1]);
-        fontSizes.setSelectedIndex(0);
-      }
     }
 
     public void onClick(Widget sender) {
@@ -296,21 +280,21 @@ public class RichTextToolbar extends Composite {
           extended.createLink(url);
         }
       } else if (sender == backColor) {
-    	  WebSafePaletteDialog.get().show(backColor.getAbsoluteLeft(), backColor.getAbsoluteTop() + 20);
-    	  WebSafePaletteDialog.get().addPopupListener(new PopupListener() {
+    	  WebSafePalette.get().show(backColor.getAbsoluteLeft(), backColor.getAbsoluteTop() + 20);
+    	  WebSafePalette.get().addPopupListener(new PopupListener() {
               public void onPopupClosed(PopupPanel sender, boolean autoClosed) {
-                  if (WebSafePaletteDialog.get().isColorSelected()) {
-                      basic.setBackColor(WebSafePaletteDialog.get().getColorSelected());
+                  if (WebSafePalette.get().isColorSelected()) {
+                      basic.setBackColor(WebSafePalette.get().getColorSelected());
                   }
                   sender.removePopupListener(this);
               }
           });
       } else if (sender == fontColor) {
-    	  WebSafePaletteDialog.get().show(fontColor.getAbsoluteLeft(), fontColor.getAbsoluteTop() + 20);
-    	  WebSafePaletteDialog.get().addPopupListener(new PopupListener() {
+    	  WebSafePalette.get().show(fontColor.getAbsoluteLeft(), fontColor.getAbsoluteTop() + 20);
+    	  WebSafePalette.get().addPopupListener(new PopupListener() {
               public void onPopupClosed(PopupPanel sender, boolean autoClosed) {
-                  if (WebSafePaletteDialog.get().isColorSelected()) {
-                      basic.setForeColor(WebSafePaletteDialog.get().getColorSelected());
+                  if (WebSafePalette.get().isColorSelected()) {
+                      basic.setForeColor(WebSafePalette.get().getColorSelected());
                   }
                   sender.removePopupListener(this);
               }
@@ -364,7 +348,7 @@ public class RichTextToolbar extends Composite {
   private RichTextArea.ExtendedFormatter extended;
 
   private VerticalPanel outer = new VerticalPanel();
-  private FlowPanel topPanel = new FlowPanel();
+  private HorizontalPanel topPanel = new HorizontalPanel();
   private ToggleButton bold;
   private ToggleButton italic;
   private ToggleButton underline;
@@ -387,9 +371,8 @@ public class RichTextToolbar extends Composite {
   private PushButton backColor;
   private PushButton fontColor;
 
-  private ListBox fonts;
-  private ListBox fontSizes;
-
+  private HTML expandCell = null;
+  
   /**
    * Creates a new toolbar that drives the given rich text area.
    * 
@@ -401,8 +384,12 @@ public class RichTextToolbar extends Composite {
     this.extended = richText.getExtendedFormatter();
 
     outer.add(topPanel);
+    outer.setWidth("100%");
     topPanel.setWidth("100%");
-
+    outer.setCellWidth(topPanel, "100%");
+    
+    expandCell = new HTML("&nbsp;");
+	    
     initWidget(outer);
     setStyleName("gwt-RichTextToolbar");
 
@@ -452,46 +439,60 @@ public class RichTextToolbar extends Composite {
           strings.backcolor()));
       topPanel.add(fontColor = createPushButton(images.fontcolor(),
           strings.fontcolor()));
-      topPanel.add(fonts = createFontList());
-      topPanel.add(fontSizes = createFontSizes());
+      outer.add(WebSafePalette.get());
+      topPanel.add(createFontsMenu());
+      topPanel.add(createFontSizesMenu());
 
       // We only use these listeners for updating status, so don't hook them up
       // unless at least basic editing is supported.
       richText.addKeyboardListener(listener);
       richText.addClickListener(listener);
     }
+    topPanel.add(expandCell);
+    topPanel.setCellWidth(expandCell, "100%");
+    expandCell.setWidth("100%");
   }
 
-  private ListBox createFontList() {
-    ListBox lb = new ListBox();
-    lb.addChangeListener(listener);
-    lb.setVisibleItemCount(1);
-
-    lb.addItem(strings.font(), "");
-    lb.addItem(strings.normal(), "");
-    lb.addItem("Times New Roman", "Times New Roman");
-    lb.addItem("Arial", "Arial");
-    lb.addItem("Courier New", "Courier New");
-    lb.addItem("Georgia", "Georgia");
-    lb.addItem("Trebuchet", "Trebuchet");
-    lb.addItem("Verdana", "Verdana");
-    return lb;
+  private MenuBar createFontsMenu() {
+	  MenuBar menu = new MenuBar();
+	  MenuBar submenu = new MenuBar(true);
+      String fontName[] = {"Times New Roman", "Arial", "Courier New", "Georgia", "Trebuchet", "Verdana"};
+	
+      // strings.fontType()
+	  menu.addItem(images.charfontname().getHTML(), true, submenu);
+	  for (int i = 0; i < fontName.length; i++) {
+		  final String f = fontName[i];
+          submenu.addItem("<span style=\"font-family: " + f + "\">" + f + "</span>", true, new Command() {
+              public void execute() {
+                  basic.setFontName(f);
+              }
+          });
+      }
+	  menu.setStyleName("RichTextToolbar-menu");
+	  submenu.setStyleName("RichTextToolbar-submenu");
+      return menu;
   }
+  
+  private MenuBar createFontSizesMenu() {
+	  MenuBar menu = new MenuBar();
+	  MenuBar submenu = new MenuBar(true);
+      String fontSizes[] = {strings.ExtraSmall(), strings.VerySmall(), strings.Small(),
+    		  strings.Medium(), strings.Large(), strings.VeryLarge(), strings.ExtraLarge()};
 
-  private ListBox createFontSizes() {
-    ListBox lb = new ListBox();
-    lb.addChangeListener(listener);
-    lb.setVisibleItemCount(1);
-
-    lb.addItem(strings.size());
-    lb.addItem(strings.xxsmall());
-    lb.addItem(strings.xsmall());
-    lb.addItem(strings.small());
-    lb.addItem(strings.medium());
-    lb.addItem(strings.large());
-    lb.addItem(strings.xlarge());
-    lb.addItem(strings.xxlarge());
-    return lb;
+      // strings.fontSize()
+	  menu.addItem(images.fontheight().getHTML(), true, submenu);
+	  for (int i = 0; i < fontSizes.length; i++) {
+		  final String f = fontSizes[i];
+		  final int fontSize = i;
+          submenu.addItem("<font size=\"" + (i + 1) + "\">" + f + "</font>", true, new Command() {
+              public void execute() {
+                  basic.setFontSize(fontSizesConstants[fontSize]);
+              }
+          });
+      }
+	  menu.setStyleName("RichTextToolbar-menu");
+	  submenu.setStyleName("RichTextToolbar-submenu");
+      return menu;
   }
 
   private PushButton createPushButton(AbstractImagePrototype img, String tip) {

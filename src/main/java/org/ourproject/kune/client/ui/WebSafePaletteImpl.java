@@ -23,10 +23,18 @@ import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.SourcesTableEvents;
 import com.google.gwt.user.client.ui.TableListener;
-
-public class WebSafePaletteDialog extends PopupPanel {
 	
-	private static WebSafePaletteDialog singleton;
+/**
+ * 
+ * A Web safe colors palette. See:
+ * http://en.wikipedia.org/wiki/Web_colors#Web-safe_colors
+ * 
+ * @author Vicente J. Ruiz Jurado
+ *
+ */	
+public class WebSafePaletteImpl extends PopupPanel {
+	
+	private static WebSafePaletteImpl singleton;
 	
     private static final int ROWS = 18;
     
@@ -38,7 +46,7 @@ public class WebSafePaletteDialog extends PopupPanel {
     
     String color = null;
     
-    public WebSafePaletteDialog() {
+    public WebSafePaletteImpl() {
     	super(true, true);
     	singleton = this;
         initialize();
@@ -46,7 +54,7 @@ public class WebSafePaletteDialog extends PopupPanel {
         setProperties();
     }
     
-	public static WebSafePaletteDialog get() {
+	public static WebSafePaletteImpl get() {
         return singleton;
     }
 	

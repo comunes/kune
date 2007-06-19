@@ -82,3 +82,5 @@ public interface MainConstants extends Constants {
     String CCExplainMessage();
     String theseContentsUnderLicense();
 }
+
+
