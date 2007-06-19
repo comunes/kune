@@ -34,8 +34,6 @@ import com.google.gwt.user.client.ui.TableListener;
  */	
 public class WebSafePaletteImpl extends PopupPanel {
 	
-	private static WebSafePaletteImpl singleton;
-	
     private static final int ROWS = 18;
     
     private static final int COLS = 12;
@@ -48,14 +46,9 @@ public class WebSafePaletteImpl extends PopupPanel {
     
     public WebSafePaletteImpl() {
     	super(true, true);
-    	singleton = this;
         initialize();
         layout();
         setProperties();
-    }
-    
-	public static WebSafePaletteImpl get() {
-        return singleton;
     }
 	
     private void initialize() {
