@@ -24,7 +24,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.ImageBundle;
 import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.ListBox;
@@ -51,7 +51,7 @@ public class RichTextToolbar extends Composite {
   public interface Images extends ImageBundle {
     
     /**
-     * @gwt.resource sc_bold.png
+     * @gwt.resource bold.png
      */
     AbstractImagePrototype bold();
 
@@ -61,12 +61,12 @@ public class RichTextToolbar extends Composite {
     AbstractImagePrototype createLink();
 
     /**
-     * @gwt.resource sc_hfixedline.png
+     * @gwt.resource hfixedline.png
      */
     AbstractImagePrototype hr();
 
     /**
-     * @gwt.resource sc_incrementindent.png
+     * @gwt.resource incrementindent.png
      */
     AbstractImagePrototype indent();
 
@@ -364,8 +364,7 @@ public class RichTextToolbar extends Composite {
   private RichTextArea.ExtendedFormatter extended;
 
   private VerticalPanel outer = new VerticalPanel();
-  private HorizontalPanel topPanel = new HorizontalPanel();
-  private HorizontalPanel bottomPanel = new HorizontalPanel();
+  private FlowPanel topPanel = new FlowPanel();
   private ToggleButton bold;
   private ToggleButton italic;
   private ToggleButton underline;
@@ -402,9 +401,7 @@ public class RichTextToolbar extends Composite {
     this.extended = richText.getExtendedFormatter();
 
     outer.add(topPanel);
-    outer.add(bottomPanel);
     topPanel.setWidth("100%");
-    bottomPanel.setWidth("100%");
 
     initWidget(outer);
     setStyleName("gwt-RichTextToolbar");
