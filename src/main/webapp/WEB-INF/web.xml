@@ -15,6 +15,7 @@
     <servlet>
       <servlet-name>KuneDocumentService</servlet-name>
       <servlet-class>org.ourproject.kune.server.servlet.KuneDocumentServiceServlet</servlet-class>
+      <load-on-startup>true</load-on-startup>
     </servlet>
 
     <servlet-mapping>
