@@ -23,10 +23,6 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 
-/**
- * @author Vicente J. Ruiz Jurado
- *
- */
 public class ContextTitle extends HorizontalPanel {
 	private Label titleLabel = null;
 

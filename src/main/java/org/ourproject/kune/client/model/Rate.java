@@ -28,8 +28,6 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 /**
  * A Class that implements a rate for a object of the model
  * 
- * @author Vicente J. Ruiz Jurado
- *
  */
 public class Rate extends Model implements IsSerializable, Cloneable,
 		RateItController {

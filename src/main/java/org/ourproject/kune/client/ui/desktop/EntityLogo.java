@@ -31,8 +31,6 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  * 
  * This is the class for the logo of a group or a user. By default, we use a Label instead of image until the user configure the logo.
  * 
- * @author Vicente J. Ruiz Jurado
- *
  */
 public class EntityLogo extends Composite {
 	public final static String DEFFONTSIZE = "189%";

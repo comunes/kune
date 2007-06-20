@@ -32,10 +32,6 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-/**
- * @author Vicente J. Ruiz Jurado
- *
- */
 public class ContextBottomBar extends Composite {
 	private HorizontalPanel bottomHP = null;
     private RoundedPanel rn = null;

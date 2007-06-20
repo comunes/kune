@@ -24,8 +24,6 @@ import org.ourproject.kune.client.model.Star;
  * 
  * Rate interface (view part of MVC)
  * 
- * @author Vicente J. Ruiz Jurado
- *
  */
 public interface RateView {
     public void setRate(Star stars[]);

@@ -22,11 +22,6 @@ import org.ourproject.kune.client.rpc.dto.KuneDoc;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-/**
- * 
- * @author Daniel Gomez
- *
- */
 public interface KuneDocumentServiceAsync {
 	public void getRootDocument(String projectName, AsyncCallback callback);
 	public void setRootDocument(String projectName, KuneDoc doc, AsyncCallback callback);

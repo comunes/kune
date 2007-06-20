@@ -25,11 +25,6 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
-/**
- * 
- * @author Daniel Gomez
- *
- */
 public interface KuneDocumentService extends RemoteService {
 
 	public KuneDoc getRootDocument(String projectName) throws SerializableException;

@@ -25,10 +25,6 @@ import java.util.Iterator;
 
 import org.ourproject.kune.client.Img;
 
-/**
- * @author Vicente J. Ruiz Jurado
- * 
- */
 public class License extends Model implements IsSerializable, Cloneable {
 
 	public final static int ALLOWMODIF = 1;

@@ -23,10 +23,6 @@ import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-/**
- * @author Vicente J. Ruiz Jurado
- *
- */
 public class LocalNavBar extends VerticalPanel implements ClickListener {
 	public final static int NONE = -1;
 	

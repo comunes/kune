@@ -22,10 +22,6 @@ import org.ourproject.kune.client.ui.DropDownPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-/**
- * @author Vicente J. Ruiz Jurado
- *
- */
 public class ContextDropDowns extends VerticalPanel {
 	public ContextDropDowns() {
 		super();

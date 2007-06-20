@@ -19,10 +19,6 @@ package org.ourproject.kune.client.ui.desktop;
 
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-/**
- * @author Vicente J. Ruiz Jurado
- *
- */
 public class ContextContents extends VerticalPanel {
 	
 	public ContextContents() {

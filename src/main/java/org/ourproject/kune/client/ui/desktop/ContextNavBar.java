@@ -20,10 +20,6 @@ package org.ourproject.kune.client.ui.desktop;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-/**
- * @author Vicente J. Ruiz Jurado
- *
- */
 public class ContextNavBar extends VerticalPanel {
 	public ContextNavBar() {
 		super();

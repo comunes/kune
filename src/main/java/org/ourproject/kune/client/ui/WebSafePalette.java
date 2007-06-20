@@ -26,7 +26,6 @@ import com.google.gwt.user.client.ui.PopupPanel;
  * A Web safe colors palette. See:
  * http://en.wikipedia.org/wiki/Web_colors#Web-safe_colors
  * 
- * @author Vicente J. Ruiz Jurado
  *
  */	
 

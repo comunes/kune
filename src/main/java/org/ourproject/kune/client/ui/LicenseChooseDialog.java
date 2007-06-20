@@ -33,10 +33,6 @@ import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-/**
- * @author Vicente J. Ruiz Jurado
- *
- */
 public class LicenseChooseDialog extends DialogBox implements ClickListener {
 	private License license = null;
 	private VerticalPanel generalVP = null;

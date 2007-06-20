@@ -34,8 +34,6 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * Rate it widget (view part of MVC). You can click on the star to rate the element
  * 
- * @author Vicente J. Ruiz Jurado
- *
  */
 public class RateItDialog extends Composite implements ClickListener, RateItView {
 	private Rate rate = null;

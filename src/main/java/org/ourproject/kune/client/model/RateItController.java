@@ -19,8 +19,6 @@ package org.ourproject.kune.client.model;
 
 /**
  * Rate interface (Controller part of MVC)
- * 
- * @author Vicente J. Ruiz Jurado
  *
  */
 public interface RateItController {

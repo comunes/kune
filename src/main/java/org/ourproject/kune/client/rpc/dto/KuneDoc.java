@@ -20,11 +20,6 @@ package org.ourproject.kune.client.rpc.dto;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-/**
- * 
- * @author Daniel Gomez
- * 
- */
 public class KuneDoc implements IsSerializable {
     private String uuid;
     private String name;

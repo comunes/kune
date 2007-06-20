@@ -24,7 +24,6 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * <p>Wrap a Widget with some margins; useful for layouts</p>
  * 
- * @author Vicente J. Ruiz Jurado (vjrj@ourproject.org)
  *
  */
 public class BorderPanel extends SimplePanel {

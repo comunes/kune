@@ -32,10 +32,6 @@ import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.SourcesClickEvents;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-/**
- * @author Vicente J. Ruiz Jurado
- *
- */
 public class CustomPushButton extends FocusPanel implements SourcesClickEvents, EventListener  {
 	
 	// Following: http://developer.apple.com/documentation/UserExperience/Conceptual/OSXHIGuidelines/index.html

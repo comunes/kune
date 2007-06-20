@@ -59,6 +59,7 @@ kune (0.0.1)
 	* sitebar options css fix
 	* font and font size graphical menu in richtext toolbar
 	* RichTextToolbar$Strings_es.properties: spanish translation of toolbar
-
+	* copyrights/credits update
+	
 	-- Vicente J. Ruiz Jurado <vjrj@ourproject.org> Fri, 20 Apr 20 13:09:27 BRT 2007
 

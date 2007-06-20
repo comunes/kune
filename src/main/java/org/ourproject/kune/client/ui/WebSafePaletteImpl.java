@@ -28,8 +28,6 @@ import com.google.gwt.user.client.ui.TableListener;
  * 
  * A Web safe colors palette. See:
  * http://en.wikipedia.org/wiki/Web_colors#Web-safe_colors
- * 
- * @author Vicente J. Ruiz Jurado
  *
  */	
 public class WebSafePaletteImpl extends PopupPanel {

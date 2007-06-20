@@ -31,10 +31,6 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-/**
- * @author Vicente J. Ruiz Jurado
- *
- */
 public class SiteMessageDialog extends VerticalPanel implements ClickListener {
 	private static final int TIMEVISIBLE = 4000;
 	

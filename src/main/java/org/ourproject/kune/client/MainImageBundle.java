@@ -24,8 +24,6 @@ import com.google.gwt.user.client.ui.ImageBundle;
  * 
  * http://code.google.com/p/google-web-toolkit/wiki/ImageBundleDesign
  * 
- * @author Vicente J. Ruiz Jurado
- * 
  */
 public interface MainImageBundle extends ImageBundle {
 

@@ -24,10 +24,6 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.HorizontalSplitPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-/**
- * @author Vicente J. Ruiz Jurado
- *
- */
 public class KuneDesktop extends VerticalPanel {
 	public static final int FIRSTRESIZE = -1;
 	

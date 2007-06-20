@@ -19,10 +19,6 @@ package org.ourproject.kune.client.model;
 
 import org.ourproject.kune.client.model.Star;
 
-/**
- * @author  Vicente J. Ruiz Jurado
- *
- */
 public interface RateItListener {
 	public abstract void onRateItChange(Star[] stars, int rate);
 	public abstract void onRateItChange(Star[] stars);

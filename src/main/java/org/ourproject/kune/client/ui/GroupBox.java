@@ -29,7 +29,6 @@ import com.google.gwt.user.client.ui.Widget;
  * 
  * http://developer.apple.com/documentation/UserExperience/Conceptual/OSXHIGuidelines/index.html
  * 
- * @author Vicente J. Ruiz Jurado
  *
  */
 public class GroupBox extends Composite {

@@ -31,10 +31,6 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-/**
- * @author Vicente J. Ruiz Jurado
- *
- */
 public class LicenseWidget extends Composite implements ClickListener {
 	private Label licenseLabel;
 	private Image licenseIcon;

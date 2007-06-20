@@ -32,7 +32,6 @@ import com.google.gwt.user.client.ui.Label;
  * 
  * Rate widget (view part of MVC)
  * 
- * @author Vicente J. Ruiz Jurado
  *
  */
 public class RateDialog extends Composite implements RateView {

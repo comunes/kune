@@ -23,10 +23,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Widget;
-/**
- * @author Vicente J. Ruiz Jurado
- *
- */
+
 public class ContextToolBar extends Composite {
     private RoundedPanel rn = null;
     private HorizontalPanel toolbarHP = null;

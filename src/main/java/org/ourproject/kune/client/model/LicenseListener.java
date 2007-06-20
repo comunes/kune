@@ -17,10 +17,6 @@
  */
 package org.ourproject.kune.client.model;
 
-/**
- * @author Vicente J. Ruiz Jurado
- *
- */
 public interface LicenseListener {
     public abstract void onLicenseChange(License license);
 }

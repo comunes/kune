@@ -37,8 +37,6 @@ import com.google.gwt.user.client.ui.Widget;
  *  
  *  TODO: pagination (using DeckPanel)
  *  
- * @author Vicente J. Ruiz Jurado (vjrj@ourproject.org)
- *
  */
 public class DropDownPanel extends Composite implements ClickListener {
     private RoundedPanel outerRP = null;
