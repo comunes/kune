@@ -5,13 +5,14 @@ import javax.jcr.Session;
 
 import org.ourproject.kune.client.rpc.dto.KuneDoc;
 import org.ourproject.kune.server.dao.DocumentDao;
-import org.ourproject.kune.server.dao.DocumentDaoJCR;
+
+import com.google.inject.Inject;
 
 public class DocumentManager {
     private final DocumentDao documentDao;
 
-    public DocumentManager() {
-	documentDao = new DocumentDaoJCR();
+    @Inject public DocumentManager(DocumentDao documentDao) {
+	this.documentDao = documentDao;
     }
 
     public KuneDoc readRootDocument(Session session) throws RepositoryException {
