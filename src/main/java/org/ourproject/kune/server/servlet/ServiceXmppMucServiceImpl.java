@@ -1,4 +1,4 @@
-package org.ourproject.kune.server;
+package org.ourproject.kune.server.servlet;
 
 import java.util.Hashtable;
 

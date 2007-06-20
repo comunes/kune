@@ -13,13 +13,19 @@
             <artifactId>log4j</artifactId>
             <version>1.2.14</version>
         </dependency>
-	
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
+        
+        <!-- guice -->
+        <dependency>
+            <groupId>com.google.code.guice</groupId>
+            <artifactId>guice</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>aopalliance</groupId>
+            <artifactId>aopalliance</artifactId>
+            <version>1.0</version>
+        </dependency>
+        
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>
@@ -87,6 +93,20 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.0.1</version>
         </dependency>
+        
+        <!-- testing dependencies -->
+        <dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.easymock</groupId>
+		    <artifactId>easymock</artifactId>
+		    <version>2.2</version>
+		</dependency>
+        
 	</dependencies>
 	<!-- http://gwt-maven.googlecode.com/svn/docs/maven-googlewebtoolkit2-plugin/index.html -->
 	<repositories>

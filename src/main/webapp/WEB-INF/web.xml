@@ -10,11 +10,11 @@
  
     <servlet>
       <servlet-name>ServiceXmppMuc</servlet-name>
-      <servlet-class>org.ourproject.kune.server.ServiceXmppMucServiceImpl</servlet-class>
+      <servlet-class>org.ourproject.kune.server.servlet.ServiceXmppMucServiceImpl</servlet-class>
     </servlet>
     <servlet>
       <servlet-name>KuneDocumentService</servlet-name>
-      <servlet-class>org.ourproject.kune.server.KuneDocumentServiceServlet</servlet-class>
+      <servlet-class>org.ourproject.kune.server.servlet.KuneDocumentServiceServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

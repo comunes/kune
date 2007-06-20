@@ -7,6 +7,6 @@
 	<entry-point class="org.ourproject.kune.client.Main"/>
 	<extend-property name="locale" values="es"/>
 	<extend-property name="locale" values="ar"/>
-	<servlet path="/ServiceXmppMuc" class="org.ourproject.kune.server.ServiceXmppMucServiceImpl"/>
-	<servlet path="/KuneDocumentService" class="org.ourproject.kune.server.KuneDocumentServiceServlet"/>
+	<servlet path="/ServiceXmppMuc" class="org.ourproject.kune.server.servlet.ServiceXmppMucServiceImpl"/>
+	<servlet path="/KuneDocumentService" class="org.ourproject.kune.server.servlet.KuneDocumentServiceServlet"/>
 </module>
