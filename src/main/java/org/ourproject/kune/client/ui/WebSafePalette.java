@@ -18,24 +18,96 @@
 
 package org.ourproject.kune.client.ui;
 
-import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.PopupPanel;
-
+import com.google.gwt.user.client.ui.SourcesTableEvents;
+import com.google.gwt.user.client.ui.TableListener;
+	
 /**
  * 
  * A Web safe colors palette. See:
  * http://en.wikipedia.org/wiki/Web_colors#Web-safe_colors
- * 
  *
  */	
-
 public class WebSafePalette extends PopupPanel {
 	
-	private static WebSafePaletteImpl impl = (WebSafePaletteImpl) GWT.create(WebSafePaletteImpl.class);
+    private static final int ROWS = 18;
+    
+    private static final int COLS = 12;
 	
-	public static WebSafePaletteImpl get() {
-        return impl;
+    Grid paletteGrid = null;
+    
+    boolean colorSelected = false;
+    
+    String color = null;
+    
+    public WebSafePalette() {
+    	super(true, true);
+        initialize();
+        layout();
+        setProperties();
+    }
+	
+    private void initialize() {
+    	paletteGrid = new Grid(ROWS, COLS);
+    }
+    
+    private void layout() {
+        this.setWidget(paletteGrid);
+    }
+    
+    private void setProperties() {
+    	paletteGrid.setVisible(false);
+        // Put color values in the grid cells.
+    	for (int row = 0; row < ROWS; ++row) {
+    		for (int col = 0; col < COLS; ++col) {
+    			paletteGrid.getCellFormatter().setWidth(row, col, "12px");
+    			paletteGrid.getCellFormatter().setHeight(row, col, "10px");
+    			paletteGrid.setText(row, col, " ");
+    			DOM.setStyleAttribute(paletteGrid.getCellFormatter().getElement(row,col),
+    					"backgroundColor", getColor(row, col));
+    		}
+    	}
+    	
+    	paletteGrid.addStyleName("web-safe-palette");
+    	
+        paletteGrid.addTableListener(new TableListener() {
+            public void onCellClicked(SourcesTableEvents sender, int row, int col) {
+                color = getColor(row, col);
+                colorSelected = true;
+                hide();
+            }
+        });
+    }
+    
+    private String getColor(int row, int col) {
+    	String color = null;
+    	int pd = (row*12+col);
+		int da = (pd)/6;
+		int ra = (pd)%6;
+		int aa = (da-ra/6);
+		int db = (aa)/6;
+		int rb = (aa)%6;
+		int rc = (db-rb/6)%6;
+		color = "rgb(" + ra*51 + ", " + rc*51 + ", " + rb*51 +")";
+    	return color;
+    }
+    
+    public void show(int left, int top) {
+    	color = "";
+    	colorSelected = false;
+    	paletteGrid.setVisible(true);
+    	this.show();
+    	this.setPopupPosition(left, top);
+    }
+    
+    public boolean isColorSelected() {
+    	return colorSelected;
     }
 
+    public String getColorSelected() {
+    	return color;
+    }
 }
 	

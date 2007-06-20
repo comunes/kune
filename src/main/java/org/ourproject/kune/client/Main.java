@@ -67,6 +67,8 @@ import com.google.gwt.user.client.ui.Widget;
 public class Main extends AbsolutePanel implements EntryPoint,
 		WindowResizeListener {
 
+    private KuneFactory factory;
+    
 	private GDesktopPane desktop;
 	
 	private VerticalPanel generalVP = null;
@@ -100,10 +102,11 @@ public class Main extends AbsolutePanel implements EntryPoint,
 	}
 
 	protected void initialize() {
+		factory = new KuneFactory();
         desktop = new DefaultGDesktopPane();
         generalVP = new VerticalPanel();
         kuneDesktopPanel = new KuneDesktop();
-        siteMessage = new SiteMessageDialog();
+        siteMessage = factory.getSiteMessageDialog();
 	}
 
 	protected void layout() {
@@ -151,7 +154,7 @@ public class Main extends AbsolutePanel implements EntryPoint,
         };
 
         area = new RichTextArea();
-        tb = new RichTextToolbar(area);
+        tb = new RichTextToolbar(area, factory);
 
         VerticalPanel ed = new VerticalPanel();
         ed.add(tb);

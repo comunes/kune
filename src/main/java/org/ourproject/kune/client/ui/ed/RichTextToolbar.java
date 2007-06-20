@@ -15,7 +15,7 @@
  */
 package org.ourproject.kune.client.ui.ed;
 
-import org.ourproject.kune.client.ui.WebSafePalette;
+import org.ourproject.kune.client.KuneFactory;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.Constants;
@@ -280,21 +280,21 @@ public class RichTextToolbar extends Composite {
           extended.createLink(url);
         }
       } else if (sender == backColor) {
-    	  WebSafePalette.get().show(backColor.getAbsoluteLeft(), backColor.getAbsoluteTop() + 20);
-    	  WebSafePalette.get().addPopupListener(new PopupListener() {
+    	  factory.getWebSafePalette().show(backColor.getAbsoluteLeft(), backColor.getAbsoluteTop() + 20);
+    	  factory.getWebSafePalette().addPopupListener(new PopupListener() {
               public void onPopupClosed(PopupPanel sender, boolean autoClosed) {
-                  if (WebSafePalette.get().isColorSelected()) {
-                      basic.setBackColor(WebSafePalette.get().getColorSelected());
+                  if (factory.getWebSafePalette().isColorSelected()) {
+                      basic.setBackColor(factory.getWebSafePalette().getColorSelected());
                   }
                   sender.removePopupListener(this);
               }
           });
       } else if (sender == fontColor) {
-    	  WebSafePalette.get().show(fontColor.getAbsoluteLeft(), fontColor.getAbsoluteTop() + 20);
-    	  WebSafePalette.get().addPopupListener(new PopupListener() {
+    	  factory.getWebSafePalette().show(fontColor.getAbsoluteLeft(), fontColor.getAbsoluteTop() + 20);
+    	  factory.getWebSafePalette().addPopupListener(new PopupListener() {
               public void onPopupClosed(PopupPanel sender, boolean autoClosed) {
-                  if (WebSafePalette.get().isColorSelected()) {
-                      basic.setForeColor(WebSafePalette.get().getColorSelected());
+                  if (factory.getWebSafePalette().isColorSelected()) {
+                      basic.setForeColor(factory.getWebSafePalette().getColorSelected());
                   }
                   sender.removePopupListener(this);
               }
@@ -367,21 +367,21 @@ public class RichTextToolbar extends Composite {
   private PushButton createLink;
   private PushButton removeLink;
   private PushButton removeFormat;
-
   private PushButton backColor;
   private PushButton fontColor;
-
   private HTML expandCell = null;
+  private KuneFactory factory;
   
   /**
    * Creates a new toolbar that drives the given rich text area.
    * 
    * @param richText the rich text area to be controlled
    */
-  public RichTextToolbar(RichTextArea richText) {
+  public RichTextToolbar(RichTextArea richText, KuneFactory factory) {
     this.richText = richText;
     this.basic = richText.getBasicFormatter();
     this.extended = richText.getExtendedFormatter();
+    this.factory = factory;
 
     outer.add(topPanel);
     outer.setWidth("100%");
@@ -439,7 +439,7 @@ public class RichTextToolbar extends Composite {
           strings.backcolor()));
       topPanel.add(fontColor = createPushButton(images.fontcolor(),
           strings.fontcolor()));
-      outer.add(WebSafePalette.get());
+      outer.add(factory.getWebSafePalette());
       topPanel.add(createFontsMenu());
       topPanel.add(createFontSizesMenu());
 

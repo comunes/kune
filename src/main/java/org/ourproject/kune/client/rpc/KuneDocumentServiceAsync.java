@@ -25,4 +25,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public interface KuneDocumentServiceAsync {
 	public void getRootDocument(String projectName, AsyncCallback callback);
 	public void setRootDocument(String projectName, KuneDoc doc, AsyncCallback callback);
+	public void getChildren(KuneDoc parent, AsyncCallback callback);
+	public void createDocument(KuneDoc parent, String name, AsyncCallback callback);
 }

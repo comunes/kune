@@ -1,31 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.ourproject.kune</groupId>
-  <artifactId>org.ourproject.kune</artifactId>
-  <version>0.0.1</version>
-  <description>kune fre/open/libre collaboration platform</description>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.ourproject.kune</groupId>
+	<artifactId>org.ourproject.kune</artifactId>
+	<version>0.0.1</version>
+	<description>
+		kune fre/open/libre collaboration platform
+	</description>
 	<name>Main</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
-	    <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.14</version>
-        </dependency>
-        
-        <!-- guice -->
-        <dependency>
-            <groupId>com.google.code.guice</groupId>
-            <artifactId>guice</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>aopalliance</groupId>
-            <artifactId>aopalliance</artifactId>
-            <version>1.0</version>
-        </dependency>
-        
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.14</version>
+		</dependency>
+
+		<!-- guice -->
+		<dependency>
+			<groupId>com.google.code.guice</groupId>
+			<artifactId>guice</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>aopalliance</groupId>
+			<artifactId>aopalliance</artifactId>
+			<version>1.0</version>
+		</dependency>
+
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>
@@ -37,25 +39,25 @@
 			<artifactId>gwt-servlet</artifactId>
 			<version>1.4.10</version>
 		</dependency>
-<!--
-		<dependency>
+		<!--
+			<dependency>
 			<groupId>com.googlecode.gwtx</groupId>
 			<artifactId>GWTx</artifactId>
 			<version>20070110</version>
-		</dependency>
--->
+			</dependency>
+		-->
 		<dependency>
 			<groupId>org.gwm</groupId>
 			<artifactId>gwm</artifactId>
 			<version>0.6.6</version>
 		</dependency>
-<!--
-		<dependency>
+		<!--
+			<dependency>
 			<groupId>org.gwtwidgets</groupId>
 			<artifactId>gwtWidgets</artifactId>
 			<version>0.1.4</version>
-		</dependency>
--->
+			</dependency>
+		-->
 		<dependency>
 			<groupId>org.jivesoftware.smack</groupId>
 			<artifactId>smack</artifactId>
@@ -71,42 +73,42 @@
 			<artifactId>smackx-debugger</artifactId>
 			<version>3.0.0</version>
 		</dependency>
-		
+
 		<!-- jackrabbit -->
-        <dependency>
-            <groupId>org.apache.jackrabbit</groupId>
-            <artifactId>jackrabbit-core</artifactId>
-            <version>1.3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.jackrabbit</groupId>
-            <artifactId>jackrabbit-webdav</artifactId>
-            <version>1.3</version>
-        </dependency>
 		<dependency>
-		    <groupId>org.apache.jackrabbit</groupId>
-		    <artifactId>jackrabbit-jcr-server</artifactId>
-		    <version>1.3</version>
-		</dependency>        
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.0.1</version>
-        </dependency>
-        
-        <!-- testing dependencies -->
-        <dependency>
+			<groupId>org.apache.jackrabbit</groupId>
+			<artifactId>jackrabbit-core</artifactId>
+			<version>1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.jackrabbit</groupId>
+			<artifactId>jackrabbit-webdav</artifactId>
+			<version>1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.jackrabbit</groupId>
+			<artifactId>jackrabbit-jcr-server</artifactId>
+			<version>1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+
+		<!-- testing dependencies -->
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-		    <groupId>org.easymock</groupId>
-		    <artifactId>easymock</artifactId>
-		    <version>2.2</version>
+			<groupId>org.easymock</groupId>
+			<artifactId>easymock</artifactId>
+			<version>2.2</version>
 		</dependency>
-        
+
 	</dependencies>
 	<!-- http://gwt-maven.googlecode.com/svn/docs/maven-googlewebtoolkit2-plugin/index.html -->
 	<repositories>
@@ -118,9 +120,7 @@
 		</repository>
 		<repository>
 			<id>kune-maven</id>
-			<url>
-				http://kune.ourproject.org/mavenrepo/
-			</url>
+			<url>http://kune.ourproject.org/mavenrepo/</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
@@ -132,29 +132,29 @@
 		</pluginRepository>
 		<pluginRepository>
 			<id>kune-maven</id>
-			<url>
-				http://kune.ourproject.org/mavenrepo/
-			</url>
+			<url>http://kune.ourproject.org/mavenrepo/</url>
 		</pluginRepository>
 	</pluginRepositories>
 	<build>
 		<plugins>
-      <plugin> 
-        <groupId>org.apache.maven.plugins</groupId> 
-        <artifactId>maven-compiler-plugin</artifactId> 
-        <version>2.0</version> 
-        <configuration> 
-          <source>1.5</source> 
-          <target>1.5</target> 
-        </configuration>   
-      </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0</version>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>com.totsp.gwt</groupId>
 				<artifactId>maven-googlewebtoolkit2-plugin</artifactId>
-				<version>1.5.3-SNAPSHOT</version> 
+				<version>1.5.3-SNAPSHOT</version>
 				<configuration>
 					<logLevel>INFO</logLevel>
-					<runTarget>org.ourproject.kune.Main/Main.html</runTarget>
+					<runTarget>
+						org.ourproject.kune.Main/Main.html
+					</runTarget>
 					<compileTarget>
 						<param>org.ourproject.kune.Main</param>
 					</compileTarget>
@@ -188,31 +188,35 @@
 					<webXml>target/web.xml</webXml>
 				</configuration>
 			</plugin>
-		   <plugin>
-                <artifactId>maven-eclipse-plugin</artifactId>
-                <version>2.3</version>
-                <configuration>
-                    <additionalProjectnatures>
-                        <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
-                    </additionalProjectnatures>
-                    <additionalBuildcommands>
-                        <buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
-                    </additionalBuildcommands>
-                    <downloadSources>true</downloadSources>
-                    <downloadJavadocs>true</downloadJavadocs>
-                    <wtpversion>1.5</wtpversion>
-                </configuration>
-            </plugin>
-			 <plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>maven-jetty-plugin</artifactId>
-                <version>6.1.3</version>
-                <configuration>
-                    <contextPath>/kune</contextPath>
-                    <scanIntervalSeconds>1</scanIntervalSeconds>
-                </configuration>
-            </plugin>
-			
+			<plugin>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<additionalProjectnatures>
+						<projectnature>
+							org.springframework.ide.eclipse.core.springnature
+						</projectnature>
+					</additionalProjectnatures>
+					<additionalBuildcommands>
+						<buildcommand>
+							org.springframework.ide.eclipse.core.springbuilder
+						</buildcommand>
+					</additionalBuildcommands>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
+					<wtpversion>1.5</wtpversion>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<version>6.1.3</version>
+				<configuration>
+					<contextPath>/kune</contextPath>
+					<scanIntervalSeconds>1</scanIntervalSeconds>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
 </project>

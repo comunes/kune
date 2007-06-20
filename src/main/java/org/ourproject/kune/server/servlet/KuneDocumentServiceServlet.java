@@ -36,68 +36,85 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import java.util.List;
 
 public class KuneDocumentServiceServlet extends RemoteServiceServlet implements KuneDocumentService {
-    private static final long serialVersionUID = 1L;
-    private TransientRepository repository;
-    private Session session;
-    private DocumentManager documentManager;
+	private static final long serialVersionUID = 1L;
+	private TransientRepository repository;
+	private Session session;
+	private DocumentManager documentManager;
 
-    public KuneDocumentServiceServlet() {
-    }
-
-    @Override
-    public void init() throws ServletException {
-	super.init();
-	inject();
-	initRepository();
-    }
-
-    @Override
-    public void destroy() {
-	session.logout();
-	super.destroy();
-    }
-
-    private void inject() {
-	Injector injector = Guice.createInjector(new KuneModule());
-	injector.injectMembers(this);
-    }
-
-    private void initRepository() {
-	try {
-	    this.repository = new TransientRepository();
-	    session = repository.login(new SimpleCredentials("username", "password".toCharArray()));
-	} catch (IOException e) {
-	    e.printStackTrace();
-	} catch (RepositoryException e) {
-	    e.printStackTrace();
+	public KuneDocumentServiceServlet() {
 	}
-    }
 
-    public KuneDoc getRootDocument(String projectName) throws SerializableException {
-	try {
-	    return documentManager.readRootDocument(session);
-	} catch (Exception e) {
-	    throw new SerializableException(e.toString());
+	@Override
+	public void init() throws ServletException {
+		super.init();
+		inject();
+		initRepository();
 	}
-    }
 
-    public void setRootDocument(String projectName, KuneDoc doc) throws SerializableException {
-	try {
-	    documentManager.saveDocument(doc, session);
-	} catch (Exception e) {
-	    throw new SerializableException(e.toString());
+	@Override
+	public void destroy() {
+		session.logout();
+		super.destroy();
 	}
-    }
 
-    public DocumentManager getDocumentManager() {
-	return documentManager;
-    }
+	private void inject() {
+		Injector injector = Guice.createInjector(new KuneModule());
+		injector.injectMembers(this);
+	}
 
-    @Inject
-    public void setDocumentManager(DocumentManager documentManager) {
-	this.documentManager = documentManager;
-    }
+	private void initRepository() {
+		try {
+			this.repository = new TransientRepository();
+			session = repository.login(new SimpleCredentials("username", "password".toCharArray()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (RepositoryException e) {
+			e.printStackTrace();
+		}
+	}
 
+	public KuneDoc getRootDocument(String projectName) throws SerializableException {
+		try {
+			return documentManager.readRootDocument(session);
+		} catch (Exception e) {
+			throw new SerializableException(e.toString());
+		}
+	}
+
+	public void setRootDocument(String projectName, KuneDoc doc) throws SerializableException {
+		try {
+			documentManager.saveDocument(doc, session);
+		} catch (Exception e) {
+			throw new SerializableException(e.toString());
+		}
+	}
+
+	public DocumentManager getDocumentManager() {
+		return documentManager;
+	}
+
+	@Inject
+	public void setDocumentManager(DocumentManager documentManager) {
+		this.documentManager = documentManager;
+	}
+	
+    public List<KuneDoc> getChildren(KuneDoc parent) throws SerializableException {
+		try {
+            return documentManager.getChildren(session, parent);
+		} catch (Exception e) {
+            throw new SerializableException(e.toString());
+		}
+	}
+
+	public KuneDoc createDocument(KuneDoc parent, String name) throws SerializableException {
+		try {
+			return documentManager.createDocument(session, parent, name);
+		} catch (Exception e) {
+			throw new SerializableException(e.toString());
+		}
+	}
 }
+

@@ -18,6 +18,8 @@
 
 package org.ourproject.kune.client.rpc;
 
+import java.util.List;
+
 import org.ourproject.kune.client.rpc.dto.KuneDoc;
 
 import com.google.gwt.core.client.GWT;
@@ -30,6 +32,13 @@ public interface KuneDocumentService extends RemoteService {
 	public KuneDoc getRootDocument(String projectName) throws SerializableException;
 	
 	public void setRootDocument(String projectName, KuneDoc doc) throws SerializableException;
+	
+	/** annotated for a list of Strings
+	 * @gwt.typeArgs <org.ourproject.kune.client.rpc.dto.KuneDoc>
+	 */ 
+	public List getChildren(KuneDoc parent) throws SerializableException;
+	
+	public KuneDoc createDocument(KuneDoc parent, String name) throws SerializableException;
 	
 	   public static class App {
 	        private static KuneDocumentServiceAsync ourInstance = null;

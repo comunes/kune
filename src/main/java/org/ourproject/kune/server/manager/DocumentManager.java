@@ -25,6 +25,7 @@ import org.ourproject.kune.client.rpc.dto.KuneDoc;
 import org.ourproject.kune.server.dao.DocumentDao;
 
 import com.google.inject.Inject;
+import java.util.List;
 
 public class DocumentManager {
     private final DocumentDao documentDao;
@@ -39,5 +40,13 @@ public class DocumentManager {
 
     public void saveDocument(KuneDoc doc, Session session) throws RepositoryException {
 	documentDao.saveDocument(session, doc);
+    }
+    
+    public List<KuneDoc> getChildren(Session session, KuneDoc parent) throws RepositoryException {
+    	return documentDao.getChildren(session, parent);
+    }
+    
+    public KuneDoc createDocument(Session session, KuneDoc parent, String name) throws RepositoryException {
+    	return documentDao.createDocument(session, parent, name);
     }
 }
