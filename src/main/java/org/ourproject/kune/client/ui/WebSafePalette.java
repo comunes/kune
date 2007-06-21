@@ -98,8 +98,8 @@ public class WebSafePalette extends PopupPanel {
     	color = "";
     	colorSelected = false;
     	paletteGrid.setVisible(true);
-    	this.show();
-    	this.setPopupPosition(left, top);
+    	super.show();
+    	super.setPopupPosition(left, top);
     }
     
     public boolean isColorSelected() {

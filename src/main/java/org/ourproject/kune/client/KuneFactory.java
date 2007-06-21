@@ -27,9 +27,16 @@ public class KuneFactory {
     private WebSafePalette palette = null;
     private SiteMessageDialog siteMessageDialog = null;
     
-    public KuneFactory() {
+    private KuneFactory() {}
+   
+    private static class SingletonHolder { 
+        private final static KuneFactory INSTANCE = new KuneFactory();
     }
-    
+   
+    public static KuneFactory get() {
+        return SingletonHolder.INSTANCE;
+    }   
+        
     public WebSafePalette getWebSafePalette() {
     	if (palette == null)
     		palette = new WebSafePalette();

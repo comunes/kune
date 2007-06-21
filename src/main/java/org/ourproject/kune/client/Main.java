@@ -18,6 +18,9 @@
 
 package org.ourproject.kune.client;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.gwm.client.GDesktopPane;
 import org.gwm.client.impl.DefaultGDesktopPane;
 import org.gwm.client.util.Gwm;
@@ -39,14 +42,14 @@ import org.ourproject.kune.client.ui.chat.ChatroomDialog;
 import org.ourproject.kune.client.ui.chat.ChatroomUser;
 import org.ourproject.kune.client.ui.desktop.KuneDesktop;
 import org.ourproject.kune.client.ui.desktop.SiteMessageDialog;
-import org.ourproject.kune.client.ui.ed.RichTextToolbar;
+import org.ourproject.kune.client.ui.ed.CustomRichTextArea;
+import org.ourproject.kune.client.ui.ed.CustomRichTextAreaModel;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Element;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -54,11 +57,10 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PushButton;
-import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -79,30 +81,22 @@ public class Main extends AbsolutePanel implements EntryPoint,
 	
 	private KuneDoc doc;
 	
-	private RichTextArea area;
-    
-	private RichTextToolbar tb;
+	private List childrenDocs = null;
 	
-	private Timer saveTimer;
+	private CustomRichTextArea area;
 	
-	private boolean savePending = false;
-	
-	private KeyboardListener areaKbListener;
-	
-	private ClickListener areaClickListener;
-	
+	private CustomRichTextAreaModel areaController;
 
 	public Main() {
 		super();
 		initialize();
 		layout();
 		setProperties();
-		sandbox();
-		styleTest();
+		initTest();
 	}
 
 	protected void initialize() {
-		factory = new KuneFactory();
+		factory = KuneFactory.get();
         desktop = new DefaultGDesktopPane();
         generalVP = new VerticalPanel();
         kuneDesktopPanel = new KuneDesktop();
@@ -114,6 +108,7 @@ public class Main extends AbsolutePanel implements EntryPoint,
         add((Widget) desktop, 0, 0);
         desktop.addWidget(generalVP, 0, 0);
 		desktop.addWidget(siteMessage, Window.getClientWidth() * 40 / 100 - 10, 23);
+	    desktop.addWidget(factory.getWebSafePalette(), 0, 0);
 //		add(generalVP, 0, 0);
 //		add(siteMessage, Window.getClientWidth() * 40 / 100 - 10, 23);
 	}
@@ -139,84 +134,13 @@ public class Main extends AbsolutePanel implements EntryPoint,
 		generalVP.setSpacing(0);
 		generalVP.setHeight("100%");
 		generalVP.setWidth("100%");
-		
-		kuneDesktopPanel.localNavBar.addItem(Trans.constants().Home(), "home");
-		kuneDesktopPanel.localNavBar.addItem(Trans.constants().Blogs(), "blogs");
-		kuneDesktopPanel.localNavBar.addItem(Trans.constants().Forums(), "forums");
-		kuneDesktopPanel.localNavBar.selectItem(0);
-		
-        kuneDesktopPanel.contextDropDowns.addDropDown("Members", new HTML("Lorem ipsum dolor sit amet,<br>consectetuer adipiscing elit."), true, "87DECD");
-        
-        saveTimer = new Timer() {
-        	public void run() {
-        		saveRootDocument();
-        	}
-        };
-
-        area = new RichTextArea();
-        tb = new RichTextToolbar(area, factory);
-
-        VerticalPanel ed = new VerticalPanel();
-        ed.add(tb);
-        ed.add(area);
-
-        area.setHeight("20em");
-        area.setWidth("100%");
-        ed.setWidth("100%");
-        
-        // TODO: clickListener in the Toolbar() (now not saving after clicks in the toolbar)
-        areaClickListener = new ClickListener() {
-        	public void onClick(Widget sender) {
-        		if (sender == area) {
-        			if (!savePending) {
-        				saveTimer.schedule(10000);
-        				savePending = true;
-        				area.removeKeyboardListener(areaKbListener);
-        				area.removeClickListener(areaClickListener);
-        			}
-        		}
-        	}
-        };
-        
-        areaKbListener = new KeyboardListener() {
-        	public void onKeyDown(Widget sender, char keyCode, int modifiers) {
-        	}
-
-        	public void onKeyPress(Widget sender, char keyCode, int modifiers) {
-        	}
-
-        	public void onKeyUp(Widget sender, char keyCode, int modifiers) {
-        		if (sender == area) {
-        			if (!savePending) {
-                        saveTimer.schedule(10000);
-                        savePending = true;
-                        area.removeKeyboardListener(areaKbListener);
-                        area.removeClickListener(areaClickListener);
-        			}
-        		}
-        	}
-        };
-    
-        area.addKeyboardListener(areaKbListener);
-        area.addClickListener(areaClickListener);
-        		
-		kuneDesktopPanel.contextContents.add(new BorderPanel(ed, 0, 5, 0, 0));
-        
-        loadRootDocument();
-        
-        
-        kuneDesktopPanel.contextContents.add(new HTML("<h1>Some tests</h1>")); 
-    	kuneDesktopPanel.contextTitle.setText(Trans.constants().Text());
-    	    	
-    	kuneDesktopPanel.contextNavBar.add(new HTML("<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros.</p>"));
-    	siteMessage.setMessageImp("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui. Integer viverra feugiat sem. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui. Integer viverra feugiat sem. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui. Integer viverra feugiat sem. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui. Integer viverra feugiat sem.");
-    	
+		    	    	
 		setSize("100%", "100%");
        
 		Window.addWindowResizeListener(this);
 		Window.enableScrolling(false);
 		onWindowResized(Window.getClientWidth(), Window.getClientHeight());
-		
+				
 		DeferredCommand.addCommand(new Command() {
 			public void execute() {
 				onWindowResized(Window.getClientWidth(), Window
@@ -233,11 +157,15 @@ public class Main extends AbsolutePanel implements EntryPoint,
 				SiteMessageDialog.get().setMessageError("No se ha podido recuperar el contenido desde el servidor: " + exception.toString());
 				area.setEnabled(false);
 			}
-
+			
 			public void onSuccess(Object result) {
 				doc = (KuneDoc) result;
-				setContent(doc.getContent());
-				area.setEnabled(true);
+				areaController.init(doc.getContent(), area, true, new Command() {
+		            public void execute() {
+		            	saveRootDocument();
+		            }
+		        });
+                getChildren(doc);
 			}
 			
 		});
@@ -250,26 +178,30 @@ public class Main extends AbsolutePanel implements EntryPoint,
 
 			public void onFailure(Throwable exception) {
 				SiteMessageDialog.get().setMessageError("No se ha podido salvar el contenido en el servidor (se reintentará): " + exception.toString());
-                saveTimer.schedule(20000);
-                savePending = true;
-			}
+				areaController.afterFailedSave();
+            }
 
 			public void onSuccess(Object result) {
 				SiteMessageDialog.get().setMessageInfo("Document saved");
-                saveTimer.cancel();
-				savePending = false;
-				area.addKeyboardListener(areaKbListener);
-				area.addClickListener(areaClickListener);
+                areaController.afterSaved();
 			}
 
 		});
 	}
 	
-	private void setContent(String content) {
-        area.setHTML(content);
-	}
-
     public void styleTest() {
+    	kuneDesktopPanel.contextContents.clear();
+        
+    	areaController = new CustomRichTextAreaModel();
+    	area = new CustomRichTextArea(areaController);
+    	
+		kuneDesktopPanel.contextContents.add(new BorderPanel(area, 0, 5, 0, 0));
+		
+        loadRootDocument();
+        
+        kuneDesktopPanel.contextContents.add(new HTML("<h1>Some tests</h1>")); 
+    	kuneDesktopPanel.contextTitle.setText(Trans.constants().Text());
+    	
 		// Licenses
 		kuneDesktopPanel.contextContents.add(new HTML("<p><b>License tests:</b></p>")); 
 		License license = new License();
@@ -322,18 +254,13 @@ public class Main extends AbsolutePanel implements EntryPoint,
         kuneDesktopPanel.contextContents.add(rateItTestWidget);
         
         kuneDesktopPanel.entityLogo.setDefaultText(Session.get().currentGroup.getLongName());
+        
+        siteMessage.setMessageImp("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui. Integer viverra feugiat sem. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui. Integer viverra feugiat sem. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui. Integer viverra feugiat sem. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui. Integer viverra feugiat sem.");
+        
 	}
 	
 	public void sandbox() {
-		Group group = new Group("yellowsub", "The Yellow Submarine Environmental Initiative");
-		User user = new User("luther.b");
-		user.setId((long) 1);
-		Session session = new Session();
-		session.currentUser = user;
-        session.currentGroup = group;
-        kuneDesktopPanel.contextBottomBar.setGroup(group);
-        kuneDesktopPanel.entityLogo.setDefaultText(group.getLongName());
-        
+		kuneDesktopPanel.contextContents.clear();
         KuneDefaultFrame chatroomFrame = new KuneDefaultFrame();  
         ChatroomDialog chatroom1 = new ChatroomDialog();
         chatroom1.setSubject("Welcome to sometopic-foorganization chat room");
@@ -412,4 +339,62 @@ public class Main extends AbsolutePanel implements EntryPoint,
 //        });
 
 	}
+	
+	private void initTest() {	
+        Group group = new Group("yellowsub", "The Yellow Submarine Environmental Initiative");
+		User user = new User("luther.b");
+		user.setId((long) 1);
+		Session session = new Session();
+		session.currentUser = user;
+        session.currentGroup = group;
+        kuneDesktopPanel.contextBottomBar.setGroup(group);
+        kuneDesktopPanel.entityLogo.setDefaultText(group.getLongName());
+		
+		kuneDesktopPanel.localNavBar.addItem(Trans.constants().Home(), "home");
+		kuneDesktopPanel.localNavBar.addItem(Trans.constants().Blogs(), "blogs");
+		kuneDesktopPanel.localNavBar.addItem(Trans.constants().Forums(), "forums");
+		kuneDesktopPanel.localNavBar.selectItem(0);
+		
+        kuneDesktopPanel.contextDropDowns.addDropDown("Members", new HTML("Lorem ipsum dolor sit amet,<br>consectetuer adipiscing elit."), true, "87DECD");
+		
+        final Hyperlink sandboxLink = new Hyperlink("Sandbox", false, "sandbox");
+        sandboxLink.addClickListener(new ClickListener() {
+        	public void onClick(Widget sender) {
+        		if (sender == sandboxLink) {
+        			sandbox();
+        		}
+        	}
+        } );
+        
+        final Hyperlink styleTestLink = new Hyperlink("Style tests", false, "styletest");
+        styleTestLink.addClickListener(new ClickListener() {
+        	public void onClick(Widget sender) {
+        		if (sender == styleTestLink) {
+                    styleTest();
+        		}
+        	}
+        } );
+        
+		this.kuneDesktopPanel.contextNavBar.add(sandboxLink);
+		this.kuneDesktopPanel.contextNavBar.add(styleTestLink);
+		
+	}
+	
+	private void getChildren(KuneDoc parent) {
+		KuneDocumentServiceAsync docService = KuneDocumentService.App.getInstance();
+		docService.getChildren(parent, new AsyncCallback() { 
+			public void onFailure(Throwable exception) {
+				SiteMessageDialog.get().setMessageError("No se ha podido recuperar el contenido del servidor: " + exception.toString());
+            }
+
+			public void onSuccess(Object result) {
+				childrenDocs = (List) result;
+				for (Iterator it = childrenDocs.iterator(); it.hasNext();) {
+					String name = ((KuneDoc) it.next()).getName();
+                    kuneDesktopPanel.contextNavBar.add(new Hyperlink(name, false, name));
+                }
+            }
+        });
+	}
+	
 }

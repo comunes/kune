@@ -16,6 +16,8 @@
 package org.ourproject.kune.client.ui.ed;
 
 import org.ourproject.kune.client.KuneFactory;
+import org.ourproject.kune.client.ui.BorderPanel;
+import org.ourproject.kune.client.ui.CustomPushButton;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.Constants;
@@ -234,6 +236,11 @@ public class RichTextToolbar extends Composite {
     String VeryLarge();
     
     String ExtraLarge();    
+    
+    String Save();
+    
+    String Cancel();
+
 }
 
   /**
@@ -244,6 +251,7 @@ public class RichTextToolbar extends Composite {
       KeyboardListener {
 
     public void onChange(Widget sender) {
+    	fireEdit();
     }
 
     public void onClick(Widget sender) {
@@ -315,6 +323,7 @@ public class RichTextToolbar extends Composite {
         // keyboard, or uses one of the browser's built-in keyboard shortcuts.
         updateStatus();
       }
+      fireEdit();
     }
 
     public void onKeyDown(Widget sender, char keyCode, int modifiers) {
@@ -369,19 +378,24 @@ public class RichTextToolbar extends Composite {
   private PushButton removeFormat;
   private PushButton backColor;
   private PushButton fontColor;
+  private CustomPushButton save;
+  private CustomPushButton cancel;
+  
   private HTML expandCell = null;
   private KuneFactory factory;
+  private CustomRichTextAreaController controller; 
   
   /**
    * Creates a new toolbar that drives the given rich text area.
    * 
    * @param richText the rich text area to be controlled
    */
-  public RichTextToolbar(RichTextArea richText, KuneFactory factory) {
+  public RichTextToolbar(RichTextArea richText, CustomRichTextAreaController controller) {
     this.richText = richText;
     this.basic = richText.getBasicFormatter();
     this.extended = richText.getExtendedFormatter();
-    this.factory = factory;
+    this.factory = KuneFactory.get();
+    this.controller = controller;
 
     outer.add(topPanel);
     outer.setWidth("100%");
@@ -439,7 +453,6 @@ public class RichTextToolbar extends Composite {
           strings.backcolor()));
       topPanel.add(fontColor = createPushButton(images.fontcolor(),
           strings.fontcolor()));
-      outer.add(factory.getWebSafePalette());
       topPanel.add(createFontsMenu());
       topPanel.add(createFontSizesMenu());
 
@@ -451,8 +464,38 @@ public class RichTextToolbar extends Composite {
     topPanel.add(expandCell);
     topPanel.setCellWidth(expandCell, "100%");
     expandCell.setWidth("100%");
+    
+    save = new CustomPushButton(strings.Save(), CustomPushButton.SMALL, new ClickListener() {
+        public void onClick(Widget sender) {
+        	if (sender == save) {
+        		fireSave();
+        	}
+        }
+    });
+    cancel = new CustomPushButton(strings.Cancel(), CustomPushButton.SMALL, new ClickListener() {
+        public void onClick(Widget sender) {
+        	if (sender == cancel) {
+        		fireCancel();
+        	}
+        }
+    });
+    topPanel.add(save); //, ClickListener listener))
+    topPanel.add(new BorderPanel(cancel, 0, 0, 0, CustomPushButton.HORSPACESMALL)); //, ClickListener listener))
+  }
+  
+
+  private void fireEdit() {
+      controller.onEdit();
   }
 
+  private void fireSave() {
+      controller.onSave();
+  }
+  
+  private void fireCancel() {
+      controller.onCancel();
+  }
+  
   private MenuBar createFontsMenu() {
 	  MenuBar menu = new MenuBar();
 	  MenuBar submenu = new MenuBar(true);
@@ -508,7 +551,15 @@ public class RichTextToolbar extends Composite {
     tb.setTitle(tip);
     return tb;
   }
-
+  
+  public void enableSaveButton(boolean enabled) {
+      save.setEnabled(enabled);
+  }
+  
+  public void setTextSaveButton(String text) {
+      save.setText(text);
+  }
+  
   /**
    * Updates the status of all the stateful buttons.
    */
