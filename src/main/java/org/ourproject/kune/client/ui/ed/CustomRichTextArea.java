@@ -17,6 +17,7 @@
  */
 package org.ourproject.kune.client.ui.ed;
 
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.RichTextArea;
@@ -24,6 +25,10 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class CustomRichTextArea extends Composite implements CustomRichTextAreaView {
+	
+    private static final String BACKCOLOR_ENABLED = "#FFF";
+    
+    private static final String BACKCOLOR_DISABLED = "#CCC";
 	
 	private RichTextArea area;
 
@@ -63,6 +68,11 @@ public class CustomRichTextArea extends Composite implements CustomRichTextAreaV
 	}
 	
 	public void setEnabled(boolean enabled) {
+		if (enabled) {
+			DOM.setStyleAttribute(area.getElement(), "backgroundColor", BACKCOLOR_ENABLED);
+		} else {
+			DOM.setStyleAttribute(area.getElement(), "backgroundColor", BACKCOLOR_DISABLED);
+		}
 		area.setEnabled(enabled);
 	}
 	
