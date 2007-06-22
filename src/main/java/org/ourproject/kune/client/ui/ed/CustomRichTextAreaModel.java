@@ -22,7 +22,7 @@ import com.google.gwt.user.client.Timer;
 
 public class CustomRichTextAreaModel implements CustomRichTextAreaController {
 	
-	private CustomRichTextAreaView view;
+	private CustomRichTextAreaView area;
 	
 	private Timer saveTimer;
 	
@@ -32,11 +32,11 @@ public class CustomRichTextAreaModel implements CustomRichTextAreaController {
 	
 	private Command saveCmd;
 	
-	public void init(String html, CustomRichTextAreaView view, boolean autoSave, Command cmd) {
-		this.view = view;
-		this.view.enableSaveButton(false);
-		this.view.setHTML(html);
-		this.view.setEnabled(true);
+	public void init(String html, CustomRichTextAreaView area, boolean autoSave, Command cmd) {
+		this.area = area;
+		this.area.setEnabledSaveButton(false);
+		this.area.setHTML(html);
+		this.area.setEnabled(true);
 		this.saveCmd = cmd;
 		this.autoSave = autoSave;
 		
@@ -51,7 +51,7 @@ public class CustomRichTextAreaModel implements CustomRichTextAreaController {
     public void onEdit() {
 		if (!savePending) {
             savePending = true;
-            this.view.enableSaveButton(true);
+            this.area.setEnabledSaveButton(true);
             if (autoSave) {
                 saveTimer.schedule(10000);
             }
@@ -75,7 +75,7 @@ public class CustomRichTextAreaModel implements CustomRichTextAreaController {
 	public void afterSaved() {
         saveTimer.cancel();
 		savePending = false;
-		view.enableSaveButton(false);
+		area.setEnabledSaveButton(false);
 	}
 	
 	public void afterFailedSave() {

@@ -56,6 +56,10 @@ public class DocumentDaoJCR implements DocumentDao {
     public KuneDoc createDocument(Session session, KuneDoc parent, String name) throws RepositoryException {
 	Node parentNode = session.getNodeByUUID(parent.getUuid());
 	Node newNode = parentNode.addNode(name);
+	// FIXME: Quickfix to DEBUG - EXCEPTION => javax.jcr.PathNotFoundException: title
+	newNode.setProperty("title", name);
+	newNode.setProperty("content", "");
+	newNode.setProperty("license_name", "");
 	newNode.addMixin("mix:referenceable");
 	newNode.addMixin("mix:versionable");
 	session.save();

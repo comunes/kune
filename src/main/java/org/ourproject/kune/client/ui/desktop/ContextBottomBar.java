@@ -65,6 +65,7 @@ public class ContextBottomBar extends Composite {
 	
 	public void setLicense(License license) {
 		this.licenseWidget.setLicense(license);
+		this.licenseWidget.setView(false, true, false);
 		license.addLicenseListener(listener);
 		setLicenseLabel(license);
 	}
@@ -103,7 +104,7 @@ public class ContextBottomBar extends Composite {
 		bottomHP.setStyleName("context-bottombar");
 		bottomHP.setHeight("24");
 		bottomHP.setCellWidth(spaceExpandCell, "100%");
-		licenseWidget.setView(false, true, false);
+		licenseWidget.setView(false, false, false);
 		licenseWidget.setStyleOfLicenseLabel("context-bottombar");
         spaceExpandCell.setWidth("100%");
         rn.setCornerStyleName("context-bottombar-outer");

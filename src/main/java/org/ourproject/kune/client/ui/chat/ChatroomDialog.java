@@ -58,7 +58,9 @@ public class ChatroomDialog extends Composite implements ChatroomView {
 	private VerticalSplitPanel contentSP = null;
 
 	private HorizontalSplitPanel conversationUsersSP = null;
-
+	
+	private VerticalPanel conversationUsersVP = null;
+	
 	private VerticalPanel conversationVP = null;
 	
 	private VerticalPanel usersVP = null;
@@ -158,6 +160,7 @@ public class ChatroomDialog extends Composite implements ChatroomView {
 //			}
 //		}, Trans.constants().Change(), Trans.constants().Cancel());
 		contentSP = new VerticalSplitPanel();
+		conversationUsersVP = new VerticalPanel();
 		conversationUsersSP = new HorizontalSplitPanel();
         conversationVP = new VerticalPanel();
 		conversationVP
@@ -184,8 +187,8 @@ public class ChatroomDialog extends Composite implements ChatroomView {
 		generalVP.add(contentSP);
 		
 		subjectHP.add(subjectLabel);
-
-		contentSP.setTopWidget(conversationUsersSP);
+        conversationUsersVP.add(conversationUsersSP);
+		contentSP.setTopWidget(conversationUsersVP);
 		contentSP.setBottomWidget(inputOptionsVP);
 
 		conversationUsersSP.setLeftWidget(conversationVP);
@@ -222,11 +225,18 @@ public class ChatroomDialog extends Composite implements ChatroomView {
 		subjectLabel.setWidth("100%");
 		// subjectLabel.setVisibleLength(65);
 
-        contentSP.addStyleName("kune-chatroom-content-outter");
-		contentSP.setStyleName("kune-chatroom-content-outter");
+		conversationUsersVP.setWidth("100%");
+		conversationUsersVP.setHeight("100%");
+		conversationUsersVP.setBorderWidth(0);
+		conversationUsersVP.setSpacing(0);
+		
+        //TEST contentSP.addStyleName("kune-chatroom-content-outter");
+		//TEST contentSP.setStyleName("kune-chatroom-content-outter");
+		//http://code.google.com/p/google-web-toolkit/issues/detail?id=1258&can=1&q=verticalsplitpanel
+		contentSP.setSplitPosition("150");
 		contentSP.setWidth("100%");
 		contentSP.setHeight("100%");
-		contentSP.setSplitPosition("150");
+		
 		
         conversationUsersSP
 				.addStyleName("kune-chatroom-content-inner-up");

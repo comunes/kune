@@ -173,4 +173,8 @@ public class CustomPushButton extends FocusPanel implements SourcesClickEvents, 
     public void setEnabled(boolean enabled) {
     	button.setEnabled(enabled);
     }
+    
+    public boolean isEnabled() {
+    	return button.isEnabled();
+    }
 }

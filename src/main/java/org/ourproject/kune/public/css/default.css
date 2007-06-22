@@ -228,6 +228,12 @@ border-right:1px solid #BCD35F;
 border-left:1px solid #BCD35F;
 }
 
+.gwt-VerticalSplitPanel .splitter {
+background-color: red;
+height: 1px;
+cursor: n-resize;
+}
+
 .def-logo-panel {
 border:2px solid #F2F2F2;
 padding:5px;

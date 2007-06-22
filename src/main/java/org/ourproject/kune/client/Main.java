@@ -62,6 +62,8 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.Tree;
+import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -79,7 +81,7 @@ public class Main extends AbsolutePanel implements EntryPoint,
 	
 	private SiteMessageDialog siteMessage = null;
 	
-	private KuneDoc doc;
+	Tree docTree;
 	
 	private List childrenDocs = null;
 	
@@ -155,25 +157,47 @@ public class Main extends AbsolutePanel implements EntryPoint,
 
 			public void onFailure(Throwable exception) {
 				SiteMessageDialog.get().setMessageError("No se ha podido recuperar el contenido desde el servidor: " + exception.toString());
-				area.setEnabled(false);
+			}
+
+			public void onSuccess(Object result) {
+				final KuneDoc doc = (KuneDoc) result;
+				final Hyperlink item = new Hyperlink(doc.getName(), false, doc.getName());
+				final TreeItem rootItem = new TreeItem(item);
+				docTree.addItem(rootItem);
+				item.addClickListener(new ClickListener() {
+					public void onClick(Widget sender) {
+						if (sender == item) {
+							showDoc(doc, rootItem);
+						}
+					}
+				} );	
+				getChildren(doc, rootItem);              
+			}
+		});
+	}
+	
+	private void addChild(KuneDoc parent, TreeItem item) {
+		KuneDocumentServiceAsync docService = KuneDocumentService.App.getInstance();
+		final TreeItem parentItem = item;
+        // FIXME
+		docService.createDocument(parent, "test", new AsyncCallback () {
+
+			public void onFailure(Throwable exception) {
+				SiteMessageDialog.get().setMessageError("No se ha podido crear hijo en el servidor: " + exception.toString());
 			}
 			
 			public void onSuccess(Object result) {
-				doc = (KuneDoc) result;
-				areaController.init(doc.getContent(), area, true, new Command() {
-		            public void execute() {
-		            	saveRootDocument();
-		            }
-		        });
-                getChildren(doc);
+				addDocTree((KuneDoc) result, parentItem);
 			}
 			
 		});
 	}
-	
-	private void saveRootDocument() {
+		
+	private void saveRootDocument(String content) {
 		KuneDocumentServiceAsync docService = KuneDocumentService.App.getInstance();
-        doc.setContent(area.getHTML());
+		//FIXME
+        KuneDoc doc = new KuneDoc();
+        doc.setContent(content);
         docService.setRootDocument("yellow submarine", doc, new AsyncCallback () {
 
 			public void onFailure(Throwable exception) {
@@ -189,16 +213,53 @@ public class Main extends AbsolutePanel implements EntryPoint,
 		});
 	}
 	
-    public void styleTest() {
+	private void showDoc(KuneDoc doc, TreeItem item) {
+		final KuneDoc docShow = doc;
+		final TreeItem parentItem = item;
+		kuneDesktopPanel.contextContents.clear();
+    	kuneDesktopPanel.contextContents.add(new HTML(docShow.getContent()));
+    	
+    	CustomPushButton editButton = new CustomPushButton("Edit", CustomPushButton.SMALL, new ClickListener() {
+    		public void onClick(Widget sender) {
+    				editDoc(docShow);
+    		}
+    	});
+    	CustomPushButton addChildButton = new CustomPushButton("AddChild", CustomPushButton.SMALL, new ClickListener() {
+    		public void onClick(Widget sender) {
+    			addChild(docShow, parentItem);
+    		}
+    	});
+    	
+    	kuneDesktopPanel.contextContents.add(editButton);
+    	kuneDesktopPanel.contextContents.add(addChildButton);
+	}
+
+	private void editDoc(KuneDoc doc) {
+		final KuneDoc docEdit = doc;
+		
     	kuneDesktopPanel.contextContents.clear();
-        
     	areaController = new CustomRichTextAreaModel();
     	area = new CustomRichTextArea(areaController);
-    	
 		kuneDesktopPanel.contextContents.add(new BorderPanel(area, 0, 5, 0, 0));
-		
+		areaController.init(docEdit.getContent(), area, true, new Command() {
+            public void execute() {
+            	saveDoc(docEdit, area.getHTML());	
+            }
+        });
+	}
+	
+	private void saveDoc(KuneDoc doc, String content) {
+		// FIXME: save any other doc
+    	saveRootDocument(content);
+	}
+	
+    public void editTest() {
+    	kuneDesktopPanel.contextContents.clear();
         loadRootDocument();
-        
+    }
+    
+    public void styleTest() {
+    	kuneDesktopPanel.contextContents.clear();
         kuneDesktopPanel.contextContents.add(new HTML("<h1>Some tests</h1>")); 
     	kuneDesktopPanel.contextTitle.setText(Trans.constants().Text());
     	
@@ -355,6 +416,8 @@ public class Main extends AbsolutePanel implements EntryPoint,
 		kuneDesktopPanel.localNavBar.addItem(Trans.constants().Forums(), "forums");
 		kuneDesktopPanel.localNavBar.selectItem(0);
 		
+
+		
         kuneDesktopPanel.contextDropDowns.addDropDown("Members", new HTML("Lorem ipsum dolor sit amet,<br>consectetuer adipiscing elit."), true, "87DECD");
 		
         final Hyperlink sandboxLink = new Hyperlink("Sandbox", false, "sandbox");
@@ -374,14 +437,23 @@ public class Main extends AbsolutePanel implements EntryPoint,
         		}
         	}
         } );
-        
+         
 		this.kuneDesktopPanel.contextNavBar.add(sandboxLink);
 		this.kuneDesktopPanel.contextNavBar.add(styleTestLink);
+		docTree = new Tree();		
+		this.kuneDesktopPanel.contextNavBar.add(docTree);
+		loadRootDocument();
+		
+		HTML expandCell = new HTML("<b></b>");
+		this.kuneDesktopPanel.contextNavBar.add(expandCell);
+		expandCell.setHeight("100%");
+		this.kuneDesktopPanel.contextNavBar.setCellHeight(expandCell, "100%");
 		
 	}
 	
-	private void getChildren(KuneDoc parent) {
+	private void getChildren(KuneDoc parent, TreeItem item) {
 		KuneDocumentServiceAsync docService = KuneDocumentService.App.getInstance();
+		final TreeItem parentItem = item;
 		docService.getChildren(parent, new AsyncCallback() { 
 			public void onFailure(Throwable exception) {
 				SiteMessageDialog.get().setMessageError("No se ha podido recuperar el contenido del servidor: " + exception.toString());
@@ -390,11 +462,27 @@ public class Main extends AbsolutePanel implements EntryPoint,
 			public void onSuccess(Object result) {
 				childrenDocs = (List) result;
 				for (Iterator it = childrenDocs.iterator(); it.hasNext();) {
-					String name = ((KuneDoc) it.next()).getName();
-                    kuneDesktopPanel.contextNavBar.add(new Hyperlink(name, false, name));
+                    KuneDoc currentDoc = ((KuneDoc) it.next());
+                    TreeItem currentItem = addDocTree(currentDoc, parentItem);
+                    getChildren(currentDoc, currentItem);
                 }
             }
         });
+	}
+	
+	private TreeItem addDocTree(KuneDoc doc, TreeItem parentItem) {
+        final KuneDoc currentDoc = doc;
+		final Hyperlink itemLabel = new Hyperlink(currentDoc.getName(), false, currentDoc.getName());
+		final TreeItem currentItem = new TreeItem(itemLabel);
+		parentItem.addItem(currentItem);
+		itemLabel.addClickListener(new ClickListener() {
+			public void onClick(Widget sender) {
+				if (sender == itemLabel) {
+		            showDoc(currentDoc, currentItem);
+				}
+			}
+		} );
+		return currentItem;
 	}
 	
 }

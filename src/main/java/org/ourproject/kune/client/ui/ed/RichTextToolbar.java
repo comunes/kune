@@ -323,7 +323,10 @@ public class RichTextToolbar extends Composite {
         // keyboard, or uses one of the browser's built-in keyboard shortcuts.
         updateStatus();
       }
-      fireEdit();
+      if (sender != richText) {
+    	  // some button pressed is equiv to edit
+          fireEdit();
+      }
     }
 
     public void onKeyDown(Widget sender, char keyCode, int modifiers) {
@@ -338,6 +341,7 @@ public class RichTextToolbar extends Composite {
         // This will catch any cases where the user moves the cursur using the
         // keyboard, or uses one of the browser's built-in keyboard shortcuts.
         updateStatus();
+        fireEdit();
       }
     }
   }
@@ -467,14 +471,14 @@ public class RichTextToolbar extends Composite {
     
     save = new CustomPushButton(strings.Save(), CustomPushButton.SMALL, new ClickListener() {
         public void onClick(Widget sender) {
-        	if (sender == save) {
+        	if (sender == save & save.isEnabled()) {
         		fireSave();
         	}
         }
     });
     cancel = new CustomPushButton(strings.Cancel(), CustomPushButton.SMALL, new ClickListener() {
         public void onClick(Widget sender) {
-        	if (sender == cancel) {
+        	if (sender == cancel & cancel.isEnabled()) {
         		fireCancel();
         	}
         }
@@ -508,6 +512,7 @@ public class RichTextToolbar extends Composite {
           submenu.addItem("<span style=\"font-family: " + f + "\">" + f + "</span>", true, new Command() {
               public void execute() {
                   basic.setFontName(f);
+                  fireEdit();
               }
           });
       }
@@ -530,6 +535,7 @@ public class RichTextToolbar extends Composite {
           submenu.addItem("<font size=\"" + (i + 1) + "\">" + f + "</font>", true, new Command() {
               public void execute() {
                   basic.setFontSize(fontSizesConstants[fontSize]);
+                  fireEdit();
               }
           });
       }
@@ -552,8 +558,12 @@ public class RichTextToolbar extends Composite {
     return tb;
   }
   
-  public void enableSaveButton(boolean enabled) {
+  public void setEnabledSaveButton(boolean enabled) {
       save.setEnabled(enabled);
+  }
+  
+  public void setEnabledCancelButton(boolean enabled) {
+      cancel.setEnabled(enabled);
   }
   
   public void setTextSaveButton(String text) {

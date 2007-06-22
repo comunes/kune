@@ -19,10 +19,8 @@ package org.ourproject.kune.client.ui.ed;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 public class CustomRichTextArea extends Composite implements CustomRichTextAreaView {
 	
@@ -32,40 +30,38 @@ public class CustomRichTextArea extends Composite implements CustomRichTextAreaV
 	
 	private RichTextArea area;
 
-	private RichTextToolbar tb;
-
-	private KeyboardListener areaKbListener;
+	private RichTextToolbar areaToolBar;
 	
-    private CustomRichTextAreaController controller;
+	private VerticalPanel areaVP;
+	
+	private CustomRichTextAreaController controller;
+	
 	
 	public CustomRichTextArea(CustomRichTextAreaController controller) {
+		this.controller = controller;
+		initiaze();
+		layout();
+		setProperties();
+	}
+	
+	private void initiaze() {
 		area = new RichTextArea();
-		tb = new RichTextToolbar(area, controller);
-        this.controller = controller;
-        
-		VerticalPanel ed = new VerticalPanel();
-		ed.add(tb);
-		ed.add(area);
-
+		areaToolBar = new RichTextToolbar(area, controller);
+		areaVP = new VerticalPanel();
+	}
+	
+	private void layout() {
+		areaVP.add(areaToolBar);
+		areaVP.add(area);
+		initWidget(areaVP);
+	}
+	
+	private void setProperties() {
 		//area.setHeight("20em");
 		area.setHeight("100%");
 		area.setWidth("100%");
-		ed.setWidth("100%");
-
-		initWidget(ed);
-
-        areaKbListener = new KeyboardListener() {
-        	public void onKeyDown(Widget sender, char keyCode, int modifiers) {}
-        	public void onKeyPress(Widget sender, char keyCode, int modifiers) {}
-        	public void onKeyUp(Widget sender, char keyCode, int modifiers) {
-        		if (sender == area) {
-        			fireEdit();
-        		}
-        	}
-        };
-
-        area.addKeyboardListener(areaKbListener);
-	}
+		areaVP.setWidth("100%");
+    }
 	
 	public void setEnabled(boolean enabled) {
 		if (enabled) {
@@ -81,6 +77,9 @@ public class CustomRichTextArea extends Composite implements CustomRichTextAreaV
 	}
 	
 	public void setHTML(String html) {
+		// NOTE: Bug with setHTML:
+		// http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/eda382814a62ecb7/f12fbea0c463f905
+		// http://code.google.com/p/google-web-toolkit/issues/detail?id=1228&can=1&q=Richtextarea
 		area.setHTML(html);
 	}
 	
@@ -88,16 +87,15 @@ public class CustomRichTextArea extends Composite implements CustomRichTextAreaV
 		area.setHeight(height);
 	}
 	
-    public void enableSaveButton(boolean enabled) {
-    	tb.enableSaveButton(enabled);
+    public void setEnabledSaveButton(boolean enabled) {
+    	areaToolBar.setEnabledSaveButton(enabled);
+    }
+    
+    public void setEnabledCancelButton(boolean enabled) {
+    	areaToolBar.setEnabledCancelButton(enabled);
     }
     
     public void setTextSaveButton(String text) {
-        tb.setTextSaveButton(text);
+        areaToolBar.setTextSaveButton(text);
     }
-    
-    private void fireEdit() {
-        controller.onEdit();
-    }
-
 }
