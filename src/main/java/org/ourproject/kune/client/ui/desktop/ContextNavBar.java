@@ -17,39 +17,51 @@
  */
 package org.ourproject.kune.client.ui.desktop;
 
+import org.ourproject.kune.client.ui.ExpandPanel;
+
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class ContextNavBar extends VerticalPanel {
+public class ContextNavBar extends Composite {
+
+	private VerticalPanel panel = null;
+	
+	private ExpandPanel expand = null;
+	
 	public ContextNavBar() {
-		super();
 		initialize();
 		layout();
 		setProperties();
 	}
 	
 	private void initialize() {
-		
-	}
+        panel = new VerticalPanel();
+        expand = new ExpandPanel(ExpandPanel.VERT);
+    }
 	
 	private void layout() {
-		
+		panel.add(expand);
+		initWidget(panel);	
 	}
 	
 	private void setProperties() {
-        this.setWidth("100%");
-        this.setHeight("100%");
-        this.setBorderWidth(0);
-        this.setSpacing(0);
-        this.addStyleName("context-navbar");
-        this.setStyleName("context-navbar");
-	}
-	
-	public void add(Widget widget) {
-		super.add(widget);
+        panel.setBorderWidth(0);
+        panel.setSpacing(0);
+        panel.setWidth("100%");
+        panel.setHeight("100%");
+        panel.addStyleName("context-navbar");
+        panel.setStyleName("context-navbar");
+        panel.setCellHeight(expand, "100%");
 	}
 	
 	public void clear() {
-		this.clear();
+        panel.clear();
+        panel.add(expand);
 	}
+	
+	public void add(Widget widget) {
+		panel.insert(widget, panel.getWidgetCount() - 1);
+	}
+	
 }

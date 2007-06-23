@@ -62,6 +62,11 @@ kune (0.0.1)
 	* copyrights/credits update
 	* new KuneFactory class, webSafaPalette Refactor
 	* getChildren, createDocument new rpc services
-	
+	* fast websafecolor palette generation
+	* some desktop improves
+	* new Expand panel widget for manage 100% expansion
+	* prefetching of some important images
+	* css fixes
+
 	-- Vicente J. Ruiz Jurado <vjrj@ourproject.org> Fri, 20 Apr 20 13:09:27 BRT 2007
 

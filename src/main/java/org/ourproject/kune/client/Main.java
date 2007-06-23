@@ -83,8 +83,6 @@ public class Main extends AbsolutePanel implements EntryPoint,
 	
 	Tree docTree;
 	
-	private List childrenDocs = null;
-	
 	private CustomRichTextArea area;
 	
 	private CustomRichTextAreaModel areaController;
@@ -416,8 +414,6 @@ public class Main extends AbsolutePanel implements EntryPoint,
 		kuneDesktopPanel.localNavBar.addItem(Trans.constants().Forums(), "forums");
 		kuneDesktopPanel.localNavBar.selectItem(0);
 		
-
-		
         kuneDesktopPanel.contextDropDowns.addDropDown("Members", new HTML("Lorem ipsum dolor sit amet,<br>consectetuer adipiscing elit."), true, "87DECD");
 		
         final Hyperlink sandboxLink = new Hyperlink("Sandbox", false, "sandbox");
@@ -443,12 +439,6 @@ public class Main extends AbsolutePanel implements EntryPoint,
 		docTree = new Tree();		
 		this.kuneDesktopPanel.contextNavBar.add(docTree);
 		loadRootDocument();
-		
-		HTML expandCell = new HTML("<b></b>");
-		this.kuneDesktopPanel.contextNavBar.add(expandCell);
-		expandCell.setHeight("100%");
-		this.kuneDesktopPanel.contextNavBar.setCellHeight(expandCell, "100%");
-		
 	}
 	
 	private void getChildren(KuneDoc parent, TreeItem item) {
@@ -460,7 +450,7 @@ public class Main extends AbsolutePanel implements EntryPoint,
             }
 
 			public void onSuccess(Object result) {
-				childrenDocs = (List) result;
+				List childrenDocs = (List) result;
 				for (Iterator it = childrenDocs.iterator(); it.hasNext();) {
                     KuneDoc currentDoc = ((KuneDoc) it.next());
                     TreeItem currentItem = addDocTree(currentDoc, parentItem);

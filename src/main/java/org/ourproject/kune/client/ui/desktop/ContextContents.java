@@ -17,9 +17,17 @@
  */
 package org.ourproject.kune.client.ui.desktop;
 
-import com.google.gwt.user.client.ui.VerticalPanel;
+import org.ourproject.kune.client.ui.ExpandPanel;
 
-public class ContextContents extends VerticalPanel {
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
+
+public class ContextContents extends Composite {
+	
+	private VerticalPanel panel = null;
+	
+	private ExpandPanel expand = null;
 	
 	public ContextContents() {
 		initialize();
@@ -28,15 +36,29 @@ public class ContextContents extends VerticalPanel {
 	}
 
 	private void initialize() {
+        panel = new VerticalPanel();
+        expand = new ExpandPanel(ExpandPanel.VERT);
 	}
 
 	private void layout() {
+		panel.add(expand);
+		initWidget(panel);
     }
 
 	private void setPropierties() {
-        this.setBorderWidth(0);
-        this.setSpacing(0);
-        this.setStyleName("context-contents");
-        this.addStyleName("context-contents");
+        panel.setBorderWidth(0);
+        panel.setSpacing(0);
+        panel.setStyleName("context-contents");
+        panel.addStyleName("context-contents");
+        panel.setCellHeight(expand, "100%");
+	}
+	
+	public void clear() {
+        panel.clear();
+        panel.add(expand);
+	}
+	
+	public void add(Widget widget) {
+		panel.insert(widget, panel.getWidgetCount()-1);
 	}
 }

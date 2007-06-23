@@ -20,6 +20,8 @@ package org.ourproject.kune.client;
 import org.ourproject.kune.client.ui.WebSafePalette;
 import org.ourproject.kune.client.ui.desktop.SiteMessageDialog;
 
+import com.google.gwt.user.client.ui.Image;
+
 /**
  * A class for kune using the factory method pattern 
  */
@@ -27,7 +29,9 @@ public class KuneFactory {
     private WebSafePalette palette = null;
     private SiteMessageDialog siteMessageDialog = null;
     
-    private KuneFactory() {}
+    private KuneFactory() {
+    	preFetchImpImages();
+    }
    
     private static class SingletonHolder { 
         private final static KuneFactory INSTANCE = new KuneFactory();
@@ -47,6 +51,20 @@ public class KuneFactory {
     	if (siteMessageDialog == null)
     		siteMessageDialog = new SiteMessageDialog();
     	return siteMessageDialog;
+    }
+    
+    void preFetchImpImages() {
+    	Image.prefetch("css/img/button15cdark.png");
+    	Image.prefetch("css/img/button15clight.png");
+    	Image.prefetch("css/img/button15cxlight.png");
+    	Image.prefetch("css/img/button17cdark.png");
+    	Image.prefetch("css/img/button17clight.png");
+    	Image.prefetch("css/img/button17cxlight.png");
+    	Image.prefetch("css/img/button20cdark.png");
+    	Image.prefetch("css/img/button20clight.png");
+    	Image.prefetch("css/img/button20cxlight.png");
+    	Image.prefetch("css/img/button-bg-soft.gif");
+    	Image.prefetch("css/img/button-bg-hard.gif");
     }
 	
 }

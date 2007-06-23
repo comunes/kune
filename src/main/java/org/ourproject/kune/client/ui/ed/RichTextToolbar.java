@@ -18,6 +18,7 @@ package org.ourproject.kune.client.ui.ed;
 import org.ourproject.kune.client.KuneFactory;
 import org.ourproject.kune.client.ui.BorderPanel;
 import org.ourproject.kune.client.ui.CustomPushButton;
+import org.ourproject.kune.client.ui.ExpandPanel;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.Constants;
@@ -27,7 +28,6 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.ImageBundle;
 import com.google.gwt.user.client.ui.KeyboardListener;
@@ -384,8 +384,6 @@ public class RichTextToolbar extends Composite {
   private PushButton fontColor;
   private CustomPushButton save;
   private CustomPushButton cancel;
-  
-  private HTML expandCell = null;
   private KuneFactory factory;
   private CustomRichTextAreaController controller; 
   
@@ -405,8 +403,6 @@ public class RichTextToolbar extends Composite {
     outer.setWidth("100%");
     topPanel.setWidth("100%");
     outer.setCellWidth(topPanel, "100%");
-    
-    expandCell = new HTML("&nbsp;");
 	    
     initWidget(outer);
     setStyleName("gwt-RichTextToolbar");
@@ -465,10 +461,10 @@ public class RichTextToolbar extends Composite {
       richText.addKeyboardListener(listener);
       richText.addClickListener(listener);
     }
-    topPanel.add(expandCell);
-    topPanel.setCellWidth(expandCell, "100%");
-    expandCell.setWidth("100%");
-    
+    ExpandPanel expand = new ExpandPanel(ExpandPanel.HORIZ);
+    topPanel.add(expand);
+    topPanel.setCellWidth(expand, "100%");
+        
     save = new CustomPushButton(strings.Save(), CustomPushButton.SMALL, new ClickListener() {
         public void onClick(Widget sender) {
         	if (sender == save & save.isEnabled()) {

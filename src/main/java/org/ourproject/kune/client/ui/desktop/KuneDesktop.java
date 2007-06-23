@@ -123,7 +123,7 @@ public class KuneDesktop extends VerticalPanel {
 	
 	public void adjustSize(int windowWidth, int windowHeight) {
 		int contextWidth = windowWidth - 160 - 3;
-		int contextHeight = windowHeight - 200;
+		int contextHeight = windowHeight - 200 - 10;
 
 //		if (currentContextWidth != FIRSTRESIZE) {
 //			if ((contextHSP.getRightWidget().getOffsetWidth() + 20) > contextWidth) {
@@ -139,7 +139,8 @@ public class KuneDesktop extends VerticalPanel {
 //		currentContextWidth = contextWidth;
 		// While 1.4 stabilizes:
 		contextHSP.setSize("" + contextWidth + "px", "" + contextHeight + "px");
-		contextHSP.setSplitPosition("" + (contextWidth - 95) + "px");
+		//contextHSP.setSplitPosition("" + (contextWidth - 95) + "px");
+		contextHSP.setSplitPosition("" + (contextWidth - 125) + "px");
 	}
 	
     public void onBrowserEvent(Event event) {
