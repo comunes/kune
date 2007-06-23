@@ -56,6 +56,7 @@ public class ContextContents extends Composite {
 	public void clear() {
         panel.clear();
         panel.add(expand);
+        panel.setCellHeight(expand, "100%");
 	}
 	
 	public void add(Widget widget) {
