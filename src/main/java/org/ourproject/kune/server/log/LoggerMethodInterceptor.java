@@ -16,7 +16,7 @@
  *
  */
 
-package org.ourproject.kune.log;
+package org.ourproject.kune.server.log;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;

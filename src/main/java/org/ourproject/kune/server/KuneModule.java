@@ -16,11 +16,11 @@
  *
  */
 
-package org.ourproject.kune;
+package org.ourproject.kune.server;
 
-import org.ourproject.kune.log.LoggerMethodInterceptor;
 import org.ourproject.kune.server.dao.DocumentDao;
 import org.ourproject.kune.server.dao.DocumentDaoJCR;
+import org.ourproject.kune.server.log.LoggerMethodInterceptor;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.matcher.Matchers;
