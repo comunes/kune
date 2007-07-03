@@ -57,7 +57,7 @@ public class ChatroomDialog extends Composite implements ChatroomView {
 
 	private VerticalSplitPanel contentSP = null;
 
-	private HorizontalSplitPanel conversationUsersSP = null;
+	private HorizontalPanel conversationUsersHP = null;
 	
 	private VerticalPanel conversationUsersVP = null;
 	
@@ -161,7 +161,7 @@ public class ChatroomDialog extends Composite implements ChatroomView {
 //		}, Trans.constants().Change(), Trans.constants().Cancel());
 		contentSP = new VerticalSplitPanel();
 		conversationUsersVP = new VerticalPanel();
-		conversationUsersSP = new HorizontalSplitPanel();
+		conversationUsersHP = new HorizontalPanel();
         conversationVP = new VerticalPanel();
 		conversationVP
 			.setVerticalAlignment(HasVerticalAlignment.ALIGN_TOP);
@@ -187,12 +187,12 @@ public class ChatroomDialog extends Composite implements ChatroomView {
 		generalVP.add(contentSP);
 		
 		subjectHP.add(subjectLabel);
-        conversationUsersVP.add(conversationUsersSP);
+        conversationUsersVP.add(conversationUsersHP);
 		contentSP.setTopWidget(conversationUsersVP);
 		contentSP.setBottomWidget(inputOptionsVP);
 
-		conversationUsersSP.setLeftWidget(conversationVP);
-		conversationUsersSP.setRightWidget(usersVP);
+		conversationUsersHP.add(conversationVP);
+		conversationUsersHP.add(usersVP);
 
 		inputOptionsVP.add(inputTextArea);
 		inputOptionsVP.add(optionsHP);
@@ -230,21 +230,22 @@ public class ChatroomDialog extends Composite implements ChatroomView {
 		conversationUsersVP.setBorderWidth(0);
 		conversationUsersVP.setSpacing(0);
 		
-        //TEST contentSP.addStyleName("kune-chatroom-content-outter");
-		//TEST contentSP.setStyleName("kune-chatroom-content-outter");
+        contentSP.addStyleName("kune-chatroom-content-outter");
+		contentSP.setStyleName("kune-chatroom-content-outter");
 		//http://code.google.com/p/google-web-toolkit/issues/detail?id=1258&can=1&q=verticalsplitpanel
 		contentSP.setSplitPosition("150");
 		contentSP.setWidth("100%");
 		contentSP.setHeight("100%");
 		
 		
-        conversationUsersSP
+        conversationUsersHP
 				.addStyleName("kune-chatroom-content-inner-up");
-		conversationUsersSP
+		conversationUsersHP
 				.setStyleName("kune-chatroom-content-inner-up");
-		conversationUsersSP.setSplitPosition("330");
-		conversationUsersSP.setWidth("100%");
-		conversationUsersSP.setHeight("100%");
+//		conversationUsersSP.setSplitPosition("330");
+        conversationUsersHP.setCellWidth(usersVP, "150");
+		conversationUsersHP.setWidth("100%");
+		conversationUsersHP.setHeight("100%");
 		
 		conversationVP
 				.addStyleName("kune-chatroom-content-conversation");
@@ -260,7 +261,7 @@ public class ChatroomDialog extends Composite implements ChatroomView {
 		usersVP.setSpacing(0);
 		usersVP.addStyleName("kune-chatroom-content-users");
 		usersVP.setStyleName("kune-chatroom-content-users");
-        usersVP.setWidth("100%");
+        usersVP.setWidth("150");
         usersVP.setHeight("100%");
         
 		inputOptionsVP.setBorderWidth(0);

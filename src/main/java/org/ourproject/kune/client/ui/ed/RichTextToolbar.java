@@ -398,12 +398,13 @@ public class RichTextToolbar extends Composite {
     this.extended = richText.getExtendedFormatter();
     this.factory = KuneFactory.get();
     this.controller = controller;
-
+    
     outer.add(topPanel);
     outer.setWidth("100%");
     topPanel.setWidth("100%");
     outer.setCellWidth(topPanel, "100%");
-	    
+    outer.add(factory.getWebSafePalette());
+    
     initWidget(outer);
     setStyleName("gwt-RichTextToolbar");
 

@@ -61,7 +61,7 @@ public class CreateRepository {
 		return docsNode;
 	}
 
-	private static final String content = "<p>Esto no es latín, pero es la página por defecto guardada en el repositorio</p>";
+	private static final String content = "<p>Esto no es latín, pero es la página por defecto guardada en el repositorio</p><p><table style='text-align: left; width: 100%;' border='1' cellpadding='1' cellspacing='1'> <tbody> <tr> <td align='right' valign='middle'>(0,0)</td> <td align='right' valign='middle'>(0,1)</td> <td align='right' valign='middle'>(0,2)</td> </tr> <tr> <td align='right' valign='middle'>(1,0)</td> <td align='right' valign='middle'>(1,1)</td> <td align='right' valign='middle'>(1,2)</td> </tr> <tr> <td align='right' valign='middle'>(2,0)</td> <td align='right' valign='middle'>(2,1)</td> <td align='right' valign='middle'>(2,2)</td> </tr> </tbody> </table></p>";
 	private static void initRootDocument(Node docsNode)
 			throws RepositoryException {
 		Node rootDocument;

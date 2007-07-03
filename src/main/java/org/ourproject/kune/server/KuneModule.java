@@ -20,6 +20,8 @@ package org.ourproject.kune.server;
 
 import org.ourproject.kune.server.dao.DocumentDao;
 import org.ourproject.kune.server.dao.DocumentDaoJCR;
+import org.ourproject.kune.server.dao.UserDao;
+import org.ourproject.kune.server.dao.UserDaoJPA;
 import org.ourproject.kune.server.log.LoggerMethodInterceptor;
 
 import com.google.inject.AbstractModule;
@@ -30,6 +32,7 @@ public class KuneModule extends AbstractModule {
     @Override
     protected void configure() {
 	bind(DocumentDao.class).to(DocumentDaoJCR.class);
+	bind(UserDao.class).to(UserDaoJPA.class);
 	bindInterceptor(Matchers.any(), Matchers.any(), new LoggerMethodInterceptor());
     }
 

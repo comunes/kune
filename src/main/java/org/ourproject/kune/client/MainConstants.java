@@ -17,9 +17,9 @@
  */
 
 package org.ourproject.kune.client;
-import com.google.gwt.i18n.client.Constants;
+import com.google.gwt.i18n.client.ConstantsWithLookup;
 
-public interface MainConstants extends Constants {
+public interface MainConstants extends ConstantsWithLookup {
 
 	String ExternalWindow();
 	String Home();

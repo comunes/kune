@@ -46,6 +46,7 @@ import org.ourproject.kune.client.ui.ed.CustomRichTextArea;
 import org.ourproject.kune.client.ui.ed.CustomRichTextAreaModel;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.DeferredCommand;
@@ -108,7 +109,6 @@ public class Main extends AbsolutePanel implements EntryPoint,
         add((Widget) desktop, 0, 0);
         desktop.addWidget(generalVP, 0, 0);
 		desktop.addWidget(siteMessage, Window.getClientWidth() * 40 / 100 - 10, 23);
-	    desktop.addWidget(factory.getWebSafePalette(), 0, 0);
 //		add(generalVP, 0, 0);
 //		add(siteMessage, Window.getClientWidth() * 40 / 100 - 10, 23);
 	}
@@ -396,7 +396,10 @@ public class Main extends AbsolutePanel implements EntryPoint,
 //            	   wizard.setSize(wizardFrame.getWidth(), wizardFrame.getHeight());
 //            	   }
 //        });
-
+        
+        kuneDesktopPanel.contextContents.add(new HTML(Trans.t("Cancel")));
+        kuneDesktopPanel.contextContents.add(new HTML(Trans.t("Prueba de algo inexistente")));
+        
 	}
 	
 	private void initTest() {	

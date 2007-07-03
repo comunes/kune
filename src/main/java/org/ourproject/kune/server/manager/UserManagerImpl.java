@@ -15,19 +15,15 @@
  * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  *
  */
+package org.ourproject.kune.server.manager;
 
-package org.ourproject.kune.client;
-import com.google.gwt.core.client.GWT;
+import org.ourproject.kune.server.dao.UserDao;
+import com.google.inject.Inject;
 
-public class Trans {
+public class UserManagerImpl {
+    private final UserDao userDao;
 
-	private static MainConstants _const = (MainConstants)GWT.create(MainConstants.class);
-
-	public static MainConstants constants() {
-		return _const;
-	}
-	
-	public static String t(String constant) {
-		return _const.getString(constant);
-	}
+    @Inject public UserManagerImpl(UserDao userDao) {
+	this.userDao = userDao;
+    }
 }

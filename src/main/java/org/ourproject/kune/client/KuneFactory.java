@@ -20,6 +20,8 @@ package org.ourproject.kune.client;
 import org.ourproject.kune.client.ui.WebSafePalette;
 import org.ourproject.kune.client.ui.desktop.SiteMessageDialog;
 
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.Image;
 
 /**
@@ -30,7 +32,11 @@ public class KuneFactory {
     private SiteMessageDialog siteMessageDialog = null;
     
     private KuneFactory() {
-    	preFetchImpImages();
+		DeferredCommand.addCommand(new Command() {
+			public void execute() {
+				preFetchImpImages();
+			}
+		});
     }
    
     private static class SingletonHolder { 
@@ -65,6 +71,23 @@ public class KuneFactory {
     	Image.prefetch("css/img/button20cxlight.png");
     	Image.prefetch("css/img/button-bg-soft.gif");
     	Image.prefetch("css/img/button-bg-hard.gif");
+    	
+    	Image.prefetch("gwm/themes/alphacubecustom/b.gif");
+    	Image.prefetch("gwm/themes/alphacubecustom/bl.gif");
+    	Image.prefetch("gwm/themes/alphacubecustom/br.gif");
+    	Image.prefetch("gwm/themes/alphacubecustom/close-btn.gif");
+    	Image.prefetch("gwm/themes/alphacubecustom/close-btn-on.gif");
+    	Image.prefetch("gwm/themes/alphacubecustom/l.gif");
+    	Image.prefetch("gwm/themes/alphacubecustom/max-btn.gif");
+    	Image.prefetch("gwm/themes/alphacubecustom/max-btn-on.gif");
+    	Image.prefetch("gwm/themes/alphacubecustom/min-btn.gif");
+    	Image.prefetch("gwm/themes/alphacubecustom/min-btn-on.gif");
+    	Image.prefetch("gwm/themes/alphacubecustom/resize-btn.gif");
+    	Image.prefetch("gwm/themes/alphacubecustom/restore-btn.gif");
+    	Image.prefetch("gwm/themes/alphacubecustom/r.gif");
+    	Image.prefetch("gwm/themes/alphacubecustom/t.gif");
+    	Image.prefetch("gwm/themes/alphacubecustom/tr.gif");
+    	Image.prefetch("gwm/themes/alphacubecustom/tl.gif");
     }
 	
 }
