@@ -32,7 +32,7 @@ public class KuneModule extends AbstractModule {
     @Override
     protected void configure() {
 	bind(DocumentDao.class).to(DocumentDaoJCR.class);
-	bind(UserDao.class).to(UserDaoJPA.class);
+	//bind(UserDao.class).to(UserDaoJPA.class);
 	bindInterceptor(Matchers.any(), Matchers.any(), new LoggerMethodInterceptor());
     }
 

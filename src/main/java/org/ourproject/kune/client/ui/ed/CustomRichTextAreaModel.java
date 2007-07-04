@@ -21,65 +21,83 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Timer;
 
 public class CustomRichTextAreaModel implements CustomRichTextAreaController {
-	
-	private CustomRichTextAreaView area;
-	
-	private Timer saveTimer;
-	
-	private boolean savePending = false;
-	
-	private boolean autoSave = false;	
-	
-	private Command saveCmd;
-	
-	public void init(String html, CustomRichTextAreaView area, boolean autoSave, Command cmd) {
-		this.area = area;
-		this.area.setEnabledSaveButton(false);
-		this.area.setHTML(html);
-		this.area.setEnabled(true);
-		this.saveCmd = cmd;
-		this.autoSave = autoSave;
-		
-		saveTimer = new Timer() {
-			public void run() {
-				onSave();
-			}
-		};
-		
-	}
-	
-    public void onEdit() {
-		if (!savePending) {
-            savePending = true;
-            this.area.setEnabledSaveButton(true);
-            if (autoSave) {
-                saveTimer.schedule(10000);
-            }
-		}    	
-    }
-    
-    public void onSave() {
-    	saveCmd.execute();
-    }
-    
-    public void onCancel() {
-    	// TODO
-    }
-    
 
-	public void setAutoSave(Command saveCmd) {
-		this.autoSave = true;
-		this.saveCmd = saveCmd;
+    private CustomRichTextAreaView area;
+
+    private Timer saveTimer;
+
+    private boolean savePending = false;
+
+    private boolean autoSave = false;	
+
+    private Command saveCmd;
+    
+    private boolean editingHtml = false;
+
+    public void init(String html, CustomRichTextAreaView area, boolean autoSave, Command cmd) {
+	this.area = area;
+	this.area.setEnabledSaveButton(false);
+	this.area.setHTML(html);
+	this.area.setEnabled(true);
+	this.saveCmd = cmd;
+	this.autoSave = autoSave;
+	this.editingHtml = false;
+
+	saveTimer = new Timer() {
+	    public void run() {
+		onSave();
+	    }
+	};
+
+    }
+
+    public void onEdit() {
+	if (!savePending) {
+	    savePending = true;
+	    this.area.setEnabledSaveButton(true);
+	    if (autoSave) {
+		saveTimer.schedule(10000);
+	    }
+	}    	
+    }
+
+    public void onSave() {
+	saveCmd.execute();
+    }
+
+    public void onCancel() {
+	// TODO
+    }
+
+
+    public void setAutoSave(Command saveCmd) {
+	this.autoSave = true;
+	this.saveCmd = saveCmd;
+    }
+
+    public void afterSaved() {
+	saveTimer.cancel();
+	savePending = false;
+	area.setEnabledSaveButton(false);
+    }
+
+    public void afterFailedSave() {
+	saveTimer.schedule(20000);
+    }
+
+    public void onEditHTML() {
+	if (editingHtml) {
+	    // normal editor
+	    String html = area.getText();
+	    area.setHTML(html);
+	    this.editingHtml = false;
 	}
-	
-	public void afterSaved() {
-        saveTimer.cancel();
-		savePending = false;
-		area.setEnabledSaveButton(false);
+	else {
+	    // html editor  
+	    String html = area.getHTML();
+	    area.setText(html);
+	    this.editingHtml = true;
 	}
-	
-	public void afterFailedSave() {
-        saveTimer.schedule(20000);
-	}
+    }
 
 }

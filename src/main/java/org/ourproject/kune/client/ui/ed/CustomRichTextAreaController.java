@@ -21,4 +21,5 @@ public interface CustomRichTextAreaController {
     public void onEdit();
     public void onSave();
     public void onCancel();
+    public void onEditHTML();
 }

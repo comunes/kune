@@ -65,6 +65,11 @@ public class RichTextToolbar extends Composite {
     AbstractImagePrototype createLink();
 
     /**
+     * @gwt.resource edithtml.png
+     */
+    AbstractImagePrototype editHtml();
+
+    /**
      * @gwt.resource hfixedline.png
      */
     AbstractImagePrototype hr();
@@ -240,6 +245,8 @@ public class RichTextToolbar extends Composite {
     String Save();
     
     String Cancel();
+    
+    String EditHTML();
 
 }
 
@@ -317,6 +324,8 @@ public class RichTextToolbar extends Composite {
         extended.insertUnorderedList();
       } else if (sender == removeFormat) {
         extended.removeFormat();
+      } else if (sender == editHtml) {
+	  fireEditHTML();
       } else if (sender == richText) {
         // We use the RichTextArea's onKeyUp event to update the toolbar status.
         // This will catch any cases where the user moves the cursur using the
@@ -382,10 +391,14 @@ public class RichTextToolbar extends Composite {
   private PushButton removeFormat;
   private PushButton backColor;
   private PushButton fontColor;
+  private MenuBar fonts;
+  private MenuBar fontSizes;
   private CustomPushButton save;
   private CustomPushButton cancel;
+  private ToggleButton editHtml;
   private KuneFactory factory;
-  private CustomRichTextAreaController controller; 
+  private CustomRichTextAreaController controller;
+  private boolean editingHtml = false;
   
   /**
    * Creates a new toolbar that drives the given rich text area.
@@ -454,8 +467,8 @@ public class RichTextToolbar extends Composite {
           strings.backcolor()));
       topPanel.add(fontColor = createPushButton(images.fontcolor(),
           strings.fontcolor()));
-      topPanel.add(createFontsMenu());
-      topPanel.add(createFontSizesMenu());
+      topPanel.add(fonts = createFontsMenu());
+      topPanel.add(fontSizes = createFontSizesMenu());
 
       // We only use these listeners for updating status, so don't hook them up
       // unless at least basic editing is supported.
@@ -480,6 +493,10 @@ public class RichTextToolbar extends Composite {
         	}
         }
     });
+    if (basic != null) {
+        topPanel.add(editHtml = createToggleButton(images.editHtml(), strings.EditHTML()));
+    }
+    
     topPanel.add(save); //, ClickListener listener))
     topPanel.add(new BorderPanel(cancel, 0, 0, 0, CustomPushButton.HORSPACESMALL)); //, ClickListener listener))
   }
@@ -495,6 +512,38 @@ public class RichTextToolbar extends Composite {
   
   private void fireCancel() {
       controller.onCancel();
+  }
+  
+  private void fireEditHTML() {
+      boolean enable = editingHtml;
+      editingHtml = !editingHtml;
+      if (basic != null) {
+	  bold.setVisible(enable);
+	  italic.setVisible(enable);
+	  underline.setVisible(enable);
+	  subscript.setVisible(enable);
+	  superscript.setVisible(enable);
+	  justifyLeft.setVisible(enable);
+	  justifyCenter.setVisible(enable);
+	  justifyRight.setVisible(enable);
+	  backColor.setVisible(enable);
+	  fontColor.setVisible(enable);
+      }
+      if (extended != null) {
+	  strikethrough.setVisible(enable);
+	  indent.setVisible(enable);
+	  outdent.setVisible(enable);
+	  insertImage.setVisible(enable);
+	  createLink.setVisible(enable);
+	  removeLink.setVisible(enable);
+	  ol.setVisible(enable);
+	  ul.setVisible(enable);
+	  hr.setVisible(enable);
+	  removeFormat.setVisible(enable);
+	  fonts.setVisible(enable);
+	  fontSizes.setVisible(enable);
+      }
+      controller.onEditHTML();
   }
   
   private MenuBar createFontsMenu() {

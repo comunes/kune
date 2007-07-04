@@ -119,9 +119,9 @@ public class KuneDocumentServiceServlet extends RemoteServiceServlet implements 
 	this.documentManager = documentManager;
     }
 
-    @Inject public void setUserManager(UserManager userManager) {
-        this.userManager = userManager;
-    }
+//    @Inject public void setUserManager(UserManager userManager) {
+//        this.userManager = userManager;
+//    }
     
     
 }

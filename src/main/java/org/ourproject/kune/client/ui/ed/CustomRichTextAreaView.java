@@ -19,10 +19,12 @@ package org.ourproject.kune.client.ui.ed;
 
 public interface CustomRichTextAreaView {
     public String getHTML();
+    public String getText();
     public void setEnabled(boolean enabled);
     public void setEnabledCancelButton(boolean enabled);
     public void setEnabledSaveButton(boolean enabled);
     public void setHeight(String height);
-    public void setHTML(String text);
-	public void setTextSaveButton(String text);
+    public void setHTML(String html);
+    public void setText(String text);
+    public void setTextSaveButton(String text);
 }
