@@ -71,6 +71,7 @@ kune (0.0.1)
 	* edithtml button in editor (only us a dev tool)
 	* new split panel image button
 	* workaround for bug in setHtml in RTE
+	* EntityManager provider implemented
 
 	-- Vicente J. Ruiz Jurado <vjrj@ourproject.org> Fri, 20 Apr 20 13:09:27 BRT 2007
 

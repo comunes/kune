@@ -18,11 +18,17 @@
 
 package org.ourproject.kune.server;
 
+import javax.persistence.EntityManager;
+
 import org.ourproject.kune.server.dao.DocumentDao;
 import org.ourproject.kune.server.dao.DocumentDaoJCR;
 import org.ourproject.kune.server.dao.UserDao;
 import org.ourproject.kune.server.dao.UserDaoJPA;
+import org.ourproject.kune.server.jpa.EntityManagerProvider;
+import org.ourproject.kune.server.jpa.JpaUnit;
 import org.ourproject.kune.server.log.LoggerMethodInterceptor;
+import org.ourproject.kune.server.manager.UserManager;
+import org.ourproject.kune.server.manager.UserManagerImpl;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.matcher.Matchers;
@@ -31,8 +37,11 @@ public class KuneModule extends AbstractModule {
 
     @Override
     protected void configure() {
+	bindConstant().annotatedWith(JpaUnit.class).to("test");
+	bind(EntityManager.class).toProvider(EntityManagerProvider.class);
 	bind(DocumentDao.class).to(DocumentDaoJCR.class);
-	//bind(UserDao.class).to(UserDaoJPA.class);
+	bind(UserDao.class).to(UserDaoJPA.class);
+	bind(UserManager.class).to(UserManagerImpl.class);
 	bindInterceptor(Matchers.any(), Matchers.any(), new LoggerMethodInterceptor());
     }
 

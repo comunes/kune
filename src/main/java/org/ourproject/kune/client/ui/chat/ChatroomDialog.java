@@ -20,21 +20,16 @@ package org.ourproject.kune.client.ui.chat;
 
 import java.util.Vector;
 
-//import org.gwtwidgets.client.ui.EditableLabel;
 import org.ourproject.kune.client.Img;
 import org.ourproject.kune.client.Trans;
 import org.ourproject.kune.client.rpc.ServiceXmppMucIResponse;
-import org.ourproject.kune.client.rpc.ServiceXmppMucServiceManager;
 import org.ourproject.kune.client.ui.HorizontalLine;
-import org.ourproject.kune.client.ui.desktop.SiteMessageDialog;
 
-import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.HorizontalSplitPanel;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;

@@ -22,9 +22,7 @@ import java.util.Hashtable;
 
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.XMPPConnection;
-
 import org.jivesoftware.smack.XMPPException;
-import org.jivesoftware.smackx.Form;
 import org.jivesoftware.smackx.muc.MultiUserChat;
 import org.ourproject.kune.client.rpc.ServiceXmppMucService;
 

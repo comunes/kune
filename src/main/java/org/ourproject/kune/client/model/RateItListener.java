@@ -17,7 +17,6 @@
  */
 package org.ourproject.kune.client.model;
 
-import org.ourproject.kune.client.model.Star;
 
 public interface RateItListener {
 	public abstract void onRateItChange(Star[] stars, int rate);

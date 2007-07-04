@@ -18,9 +18,10 @@
 package org.ourproject.kune.server.manager;
 
 import org.ourproject.kune.server.dao.UserDao;
+
 import com.google.inject.Inject;
 
-public class UserManagerImpl {
+public class UserManagerImpl implements UserManager {
     private final UserDao userDao;
 
     @Inject public UserManagerImpl(UserDao userDao) {

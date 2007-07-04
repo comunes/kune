@@ -17,7 +17,6 @@
  */
 package org.ourproject.kune.client.ui;
 
-import org.ourproject.kune.client.model.Rate;
 import org.ourproject.kune.client.model.Star;
 
 /**

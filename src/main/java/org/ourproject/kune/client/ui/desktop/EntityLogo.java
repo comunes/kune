@@ -19,7 +19,6 @@ package org.ourproject.kune.client.ui.desktop;
 
 import org.ourproject.kune.client.Trans;
 
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Hyperlink;
