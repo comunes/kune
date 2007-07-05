@@ -23,6 +23,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.gwm.client.GDesktopPane;
+import org.gwm.client.event.GFrameAdapter;
+import org.gwm.client.event.GFrameEvent;
 import org.gwm.client.impl.DefaultGDesktopPane;
 import org.gwm.client.util.Gwm;
 import org.gwm.client.util.GwmUtilities;
@@ -337,7 +339,7 @@ WindowResizeListener {
         ConferenceRoomDialogImpl chatroom1 = new ConferenceRoomDialogImpl(chatroomControler);
         chatroomControler.init(chatroom1);
         chatroom1.setSubject("Welcome to sometopic-foorganization chat room");
-        ChatroomUser luthorb = new ChatroomUser("luthor.b", true);
+        ChatroomUser lutherb = new ChatroomUser("luther.b", true);
         ChatroomUser anneh = new ChatroomUser("anne.h", false);
         ChatroomUser anneh1 = new ChatroomUser("anne.h1", false);
         ChatroomUser anneh2 = new ChatroomUser("anne.h2", false);
@@ -353,7 +355,7 @@ WindowResizeListener {
         ChatroomUser anneh12 = new ChatroomUser("anne.h12", false);
         ChatroomUser anneh13 = new ChatroomUser("anne.h13", false);
         ChatroomUser anneh14 = new ChatroomUser("anne.h14", false);
-        chatroom1.addUser(luthorb);
+        chatroom1.addUser(lutherb);
         chatroom1.addUser(anneh);
         chatroom1.addUser(anneh1);
         chatroom1.addUser(anneh2);
@@ -370,34 +372,53 @@ WindowResizeListener {
         chatroom1.addUser(anneh13);
         chatroom1.addUser(anneh14);
         chatroom1.delUser(anneh13);
-        chatroom1.addToConversation("luthorb", new HTML("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui."));
-        chatroom1.addToConversation("anneh", new HTML("Lorem ipsum dolor sit amet?"));
-        chatroom1.addToConversation("luthorb", new HTML("yes, lorem ipsum dolor sit amet"));
+        chatroom1.addToConversation("luther.b", new HTML("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui."));
+        chatroom1.addToConversation("anne.h", new HTML("Lorem ipsum dolor sit amet?"));
+        chatroom1.addToConversation("luther.b", new HTML("yes, lorem ipsum dolor sit amet"));
         Date date = new Date(2007, 07, 04, 0, 52);
         chatroom1.addTimeDelimiter(date.toLocaleString());
-        chatroom1.addToConversation("luthor", new HTML("Lorem ipsum dolor sit amet"));
-        chatroom1.addToConversation("anneh", new HTML("Lorem ipsum dolor sit amet?"));
-        chatroom1.addToConversation("anneh", new HTML("Lorem ipsum dolor sit amet?"));
-        chatroom1.addToConversation("anneh", new HTML("Lorem ipsum dolor sit amet?"));
-        chatroom1.addToConversation("anneh", new HTML("Lorem ipsum dolor sit amet?"));
-        chatroom1.addToConversation("luthorb", new HTML("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui."));
-        chatroom1.addToConversation("anneh", new HTML("Lorem ipsum dolor sit amet?"));
+        chatroom1.addToConversation("luther.b", new HTML("Lorem ipsum dolor sit amet"));
+        chatroom1.addToConversation("anne.h2", new HTML("Lorem ipsum dolor sit amet?"));
+        chatroom1.addToConversation("anne.h3", new HTML("Lorem ipsum dolor sit amet?"));
+        chatroom1.addToConversation("anne.h9", new HTML("Lorem ipsum dolor sit amet?"));
+        chatroom1.addToConversation("anne.h8", new HTML("Lorem ipsum dolor sit amet?"));
+        chatroom1.addToConversation("luther.b", new HTML("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui."));
+        chatroom1.addToConversation("anne.h", new HTML("Lorem ipsum dolor sit amet?"));
 //        DialogBox chatDialog = new DialogBox();
 //        chatDialog.setText(Trans.constants().Chatroom() + " " + "sometopic-foorganization@kune.ourproject.org");
 //        chatDialog.setWidget(chatroom1);
 //        desktop.addWidget(chatDialog, 20, 20);
 
         chatroomFrame.setCaption(Trans.constants().Chatroom() + " " + "sometopic-foorganization@kune.ourproject.org");
-        chatroomFrame.setFrame(true, false, true, true, false);
-        chatroomFrame.setSize(500,250);
+        chatroomFrame.setFrame(true, true, true, true, true);
+        chatroomFrame.setSize(500, 250);
         chatroomFrame.setContent(chatroom1);
         desktop.addFrame(chatroomFrame);
         chatroomFrame.setVisible(true);
         chatroomFrame.setTitleIcon(new Image("images/chat.png"));
         GwmUtilities.diplayAtScreenCenter(chatroomFrame);
         chatroomFrame.setLocation(100, 100);
-        chatroomFrame.setMaximumHeight(100);
-        chatroom1.adjustSize(100, 100);
+        //chatroomFrame.setMaximumHeight(250);
+        chatroom1.adjustSize(500, 250);
+        chatroomFrame.addFrameListener(new GFrameAdapter() {
+            public void frameClosed(GFrameEvent evt) {
+                // TODO Auto-generated method stub
+
+            }
+
+            public void frameMaximized(GFrameEvent evt) {
+                // TODO Auto-generated method stub
+                //chatroom1.adjustSize(500, 250);
+            }
+
+            public void frameResized(GFrameEvent evt) {
+                // TODO Auto-generated method stub
+
+            }
+
+        } );
+
+
 
 //      final Wizard wizard = new Wizard();
 //      wizard.add("New Project", (Widget) new HTML("Create here a project"), false, true, true, false);

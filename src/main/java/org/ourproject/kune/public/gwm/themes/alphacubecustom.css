@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2006-2007 Luciano Broussal <luciano.broussal AT gmail.com>
  * (http://www.gwtwindowmanager.org)
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
@@ -61,7 +61,7 @@
 /********************************** MINIMIZED TOPBAR ****************************************/
 
 .gwm-alphacubecustom-Frame-TopBar-minimized {
-	background: transparent url(alphacubecustom/t.gif) repeat-x 0 0;	
+	background: transparent url(alphacubecustom/t.gif) repeat-x 0 0;
     background:#C7CBD1;
     padding: 5px;
     border: 1px dashed;
@@ -71,61 +71,61 @@
 .gwm-alphacubecustom-Frame-TopBar-RestoreButton {
 	width: 23px;
 	height: 23px;
-	background: transparent url(alphacubecustom/restore-btn.gif) no-repeat 0 center;			
+	background: transparent url(alphacubecustom/restore-btn.gif) no-repeat 0 center;
 	cursor:pointer;
-	
+
 }
 
 /***********************************  BORDERS  **********************************************/
 .gwm-alphacubecustom-FrameBorder-tl {
-  background:  url(alphacubecustom/tl.gif) no-repeat top  left;			
+  background:  url(alphacubecustom/tl.gif) no-repeat top  left;
   width:7px;
   height:23px;
 }
 
 .gwm-alphacubecustom-FrameBorder-t {
-  background: transparent url(alphacubecustom/t.gif) repeat-x 0 0;	
+  background: transparent url(alphacubecustom/t.gif) repeat-x 0 0;
   height:23px;
 }
 
 .gwm-alphacubecustom-FrameBorder-tr {
-  background: transparent url(alphacubecustom/tr.gif) no-repeat top right;			
-  width:7px;	  
+  background: transparent url(alphacubecustom/tr.gif) no-repeat top right;
+  width:7px;
   height:23px;
 }
 
 .gwm-alphacubecustom-FrameBorder-l{
-  background: transparent url(alphacubecustom/l.gif) repeat-y ;			
+  background: transparent url(alphacubecustom/l.gif) repeat-y ;
   width:7px;
 }
 
 .gwm-alphacubecustom-FrameBorder-r {
-  background: transparent url(alphacubecustom/r.gif) repeat-y top right;			
+  background: transparent url(alphacubecustom/r.gif) repeat-y top right;
   width:7px;
 }
 
 .gwm-alphacubecustom-FrameBorder-bl{
-  background: transparent url(alphacubecustom/bl.gif) no-repeat 0 0;			
+  background: transparent url(alphacubecustom/bl.gif) no-repeat 0 0;
   width:7px;
   height:7px;
   font-size:0px;
 }
 
 .gwm-alphacubecustom-FrameBorder-b {
-  background: transparent url(alphacubecustom/b.gif) repeat-x 0 0;			
+  background: transparent url(alphacubecustom/b.gif) repeat-x 0 0;
   height:7px;
-  font-size:1px;
+  /* font-size:1px; */
 }
 
 .gwm-alphacubecustom-FrameBorder-br {
-  background: transparent url(alphacubecustom/br.gif) no-repeat top right;			
+  background: transparent url(alphacubecustom/br.gif) no-repeat top right;
   width:7px;
   height:7px;
   font-size:0px;
 }
 
 .gwm-alphacubecustom-Frame-ResizeButton  {
-  background: transparent url(alphacubecustom/resize-btn.gif) no-repeat top right;			
+  background: transparent url(alphacubecustom/resize-btn.gif) no-repeat top right;
   width:7px;
   height:7px;
   font-size:0px;
@@ -135,42 +135,42 @@
 .gwm-alphacubecustom-Frame-TopBar-CloseButton{
 	width:  23px;
 	height: 23px;
-	background: transparent url(alphacubecustom/close-btn.gif) no-repeat center center;			
+	background: transparent url(alphacubecustom/close-btn.gif) no-repeat center center;
 	cursor:pointer;
 }
 
 .gwm-alphacubecustom-Frame-TopBar-CloseButton-active {
 	width:  23px;
 	height: 23px;
-	background: transparent url(alphacubecustom/close-btn-on.gif) no-repeat  center center;			
+	background: transparent url(alphacubecustom/close-btn-on.gif) no-repeat  center center;
 	cursor:pointer;
 }
 
 .gwm-alphacubecustom-Frame-TopBar-MinimizeButton {
 	width:  23px;
 	height: 23px;
-	background: transparent url(alphacubecustom/min-btn.gif) no-repeat  center center;			
+	background: transparent url(alphacubecustom/min-btn.gif) no-repeat  center center;
 	cursor:pointer;
 }
 
 .gwm-alphacubecustom-Frame-TopBar-MinimizeButton-active {
 	width:  23px;
 	height: 23px;
-	background: transparent url(alphacubecustom/min-btn-on.gif) no-repeat  center center;			
+	background: transparent url(alphacubecustom/min-btn-on.gif) no-repeat  center center;
 	cursor:pointer;
 }
 
 .gwm-alphacubecustom-Frame-TopBar-MaximizeButton {
 	width:  23px;
 	height: 23px;
-	background: transparent url(alphacubecustom/max-btn.gif) no-repeat  center center;			
+	background: transparent url(alphacubecustom/max-btn.gif) no-repeat  center center;
 	cursor:pointer;
 }
 
 .gwm-alphacubecustom-Frame-TopBar-MaximizeButton-active {
 	width:  23px;
 	height: 23px;
-	background: transparent url(alphacubecustom/max-btn-on.gif) no-repeat  center center;			
+	background: transparent url(alphacubecustom/max-btn-on.gif) no-repeat  center center;
 	cursor:pointer;
 }
 

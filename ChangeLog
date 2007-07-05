@@ -74,6 +74,8 @@ kune (0.0.1)
 	* EntityManager provider implemented
 	* fixed ContextContent scroll bug
 	* refactoring of muc services and widgets
+	* ConferenceRoomDialog fixes
+	* gwm custom theme fixes (-off, botthom line)
 
 	-- Vicente J. Ruiz Jurado <vjrj@ourproject.org> Fri, 20 Apr 20 13:09:27 BRT 2007
 

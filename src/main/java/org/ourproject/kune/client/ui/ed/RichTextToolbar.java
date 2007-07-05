@@ -415,6 +415,7 @@ public class RichTextToolbar extends Composite {
         outer.setWidth("100%");
         topPanel.setWidth("100%");
         outer.setCellWidth(topPanel, "100%");
+
         outer.add(factory.getWebSafePalette());
 
         initWidget(outer);

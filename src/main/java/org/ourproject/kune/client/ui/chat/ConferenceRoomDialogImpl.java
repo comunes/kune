@@ -28,13 +28,16 @@ import org.ourproject.kune.client.ui.BorderPanel;
 import org.ourproject.kune.client.ui.CustomPushButton;
 import org.ourproject.kune.client.ui.ExpandPanel;
 import org.ourproject.kune.client.ui.HorizontalLine;
+import org.ourproject.kune.client.ui.desktop.SiteMessageDialog;
 
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.HorizontalSplitPanel;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.KeyboardListener;
@@ -46,7 +49,11 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class ConferenceRoomDialogImpl extends Composite implements ConferenceRoomDialog {
 
+    private final static String[] USERCOLORS = {"green", "navy", "black", "grey", "olive", "teal", "blue", "lime", "purple", "fuchsia", "maroon", "red"};
+
     private Vector userList = null;
+
+    private int currentColor = 0;
 
     private VerticalPanel generalVP = null;
 
@@ -60,13 +67,15 @@ public class ConferenceRoomDialogImpl extends Composite implements ConferenceRoo
 
     private VerticalPanel contentVP = null;
 
-    private HorizontalPanel conversationUsersHP = null;
+    private HorizontalSplitPanel conversationUsersSP = null;
 
     private VerticalPanel conversationUsersVP = null;
 
-    private ScrollPanel conversationScroll = null;
+    private ScrollPanel conversationSP = null;
 
     private VerticalPanel conversationVP = null;
+
+    private ScrollPanel usersSP = null;
 
     private VerticalPanel usersVP = null;
 
@@ -117,10 +126,11 @@ public class ConferenceRoomDialogImpl extends Composite implements ConferenceRoo
         // }, Trans.constants().Change(), Trans.constants().Cancel());
         contentVP = new VerticalPanel();
         conversationUsersVP = new VerticalPanel();
-        conversationUsersHP = new HorizontalPanel();
-        conversationScroll = new ScrollPanel();
+        conversationUsersSP = new HorizontalSplitPanel();
+        conversationSP = new ScrollPanel();
         conversationVP = new VerticalPanel();
         conversationVP.setVerticalAlignment(HasVerticalAlignment.ALIGN_TOP);
+        usersSP = new ScrollPanel();
         usersVP = new VerticalPanel();
         inputOptionsVP = new VerticalPanel();
         inputTextArea = new TextArea();
@@ -143,15 +153,16 @@ public class ConferenceRoomDialogImpl extends Composite implements ConferenceRoo
         generalVP.add(subjectHP);
         generalVP.add(contentVP);
         subjectHP.add(subjectLabel);
-        conversationUsersVP.add(conversationUsersHP);
+        conversationUsersVP.add(conversationUsersSP);
         contentVP.add(conversationUsersVP);
         contentVP.add(inputOptionsVP);
-        conversationScroll.add(conversationVP);
-        conversationUsersHP.add(conversationScroll);
-        conversationUsersHP.add(usersVP);
+        conversationSP.add(conversationVP);
+        conversationUsersSP.setLeftWidget(conversationSP);
+        usersSP.add(usersVP);
+        conversationUsersSP.setRightWidget(usersSP);
         inputOptionsVP.add(inputTextArea);
         inputOptionsVP.add(optionsHP);
-        optionsHP.add(new BorderPanel(sendButton, CustomPushButton.VERSPACESMALL, 0));
+        optionsHP.add(new BorderPanel(sendButton, CustomPushButton.VERSPACESMALL, 0, 0, 0));
         optionsHP.add(expandOptions);
         optionsHP.add(new BorderPanel(optionsImage, 0, 5, 0, 0));
         optionsHP.add(optionsHyperlink);
@@ -183,14 +194,14 @@ public class ConferenceRoomDialogImpl extends Composite implements ConferenceRoo
         contentVP.setWidth("100%");
         //contentVP.setHeight("100%");
 
-        conversationUsersHP.addStyleName("kune-chatroom-content-inner-up");
-        conversationUsersHP.setStyleName("kune-chatroom-content-inner-up");
-        //conversationUsersSP.setSplitPosition("330");
-        conversationUsersHP.setCellWidth(usersVP, "150");
-        conversationUsersHP.setWidth("100%");
-        conversationUsersHP.setHeight("100%");
-        conversationUsersHP.setCellHeight(usersVP, "100%");
-        conversationUsersHP.setCellHeight(conversationVP, "100%");
+        conversationUsersSP.addStyleName("kune-chatroom-content-inner-up");
+        conversationUsersSP.setStyleName("kune-chatroom-content-inner-up");
+        conversationUsersSP.setSplitPosition("330");
+        //conversationUsersSP.setCellWidth(usersVP, "150");
+        conversationUsersSP.setWidth("100%");
+        conversationUsersSP.setHeight("100%");
+        //conversationUsersSP.setCellHeight(usersVP, "100%");
+        //conversationUsersSP.setCellHeight(conversationVP, "100%");
 
         conversationVP.addStyleName("kune-chatroom-content-conversation");
         conversationVP.setStyleName("kune-chatroom-content-conversation");
@@ -198,13 +209,14 @@ public class ConferenceRoomDialogImpl extends Composite implements ConferenceRoo
         conversationVP.setSpacing(0);
         conversationVP.setWidth("100%");
         conversationVP.setHeight("100%");
+        DOM.setStyleAttribute(conversationVP.getElement(), "overflow", "scroll");
 
         usersVP.setBorderWidth(0);
         usersVP.setSpacing(0);
         usersVP.addStyleName("kune-chatroom-content-users");
         usersVP.setStyleName("kune-chatroom-content-users");
-        usersVP.setWidth("150");
-        usersVP.setHeight("100%");
+        //usersVP.setWidth("150");
+        //usersVP.setHeight("100%");
 
         inputOptionsVP.setBorderWidth(0);
         inputOptionsVP.setSpacing(0);
@@ -227,14 +239,14 @@ public class ConferenceRoomDialogImpl extends Composite implements ConferenceRoo
                     if (!sendButton.isEnabled()) {
                         sendButton.setEnabled(true);
                     }
-                    if (key == KEY_ENTER) {
-                        if (mod == MODIFIER_CTRL) {
-                            inputTextArea.setText(inputTextArea.getText() + "\n");
-                        }
-                        else {
-                            controller.onSend(inputTextArea.getText());
-                        }
+                if (key == KEY_ENTER) {
+                    if (mod == MODIFIER_CTRL) {
+                        inputTextArea.setText(inputTextArea.getText() + "\n");
                     }
+                    else {
+                        controller.onSend(inputTextArea.getText());
+                    }
+                }
                 }
 
             }
@@ -252,8 +264,9 @@ public class ConferenceRoomDialogImpl extends Composite implements ConferenceRoo
     }
 
     public void addUser(ChatroomUser user) {
+        user.setColor(getNextColor());
         Grid userGrid = new Grid(1, 2);
-        Label userNameLabel = new Label(user.getNickName());
+        Label userNameLabel = new HTML("<span style=\"color: " + user.getColor() + "\">" + user.getNickName() + "</span>");
         Image userModeratorIcon = new Image();
 
         userList.add(user);
@@ -276,11 +289,18 @@ public class ConferenceRoomDialogImpl extends Composite implements ConferenceRoo
         userChat.setSpacing(0);
         userChat.setVerticalAlignment(HasVerticalAlignment.ALIGN_TOP);
 
-        userChat.add(new HTML("<b>" + nick + "</b>:&nbsp;"));
+        ChatroomUser user = getChatroomUser(nick);
+
+        //<span style="color: rgb(255, 0, 51);">
+        userChat.add(new HTML("<span style=\"color: " + user.getColor() + "; font-weight: bold;\">" + user.getNickName() + "</span>:&nbsp;"));
         userChat.add(chat);
 
         conversationVP.add(userChat);
-        conversationScroll.ensureVisible(userChat);
+
+        //DOM.setElementPropertyInt( conversationVP.getElement(), "scrollTop", conversationVP.getOffsetHeight());
+
+        // This works whit ScrollPanel:
+        conversationSP.setScrollPosition(conversationVP.getOffsetHeight());
     }
 
     public void addTimeDelimiter(String datetime) {
@@ -356,9 +376,30 @@ public class ConferenceRoomDialogImpl extends Composite implements ConferenceRoo
     }
 
     public void adjustSize(int frameWidth, int frameHeight) {
-        int conversationWidth = frameWidth - 190;
-        int conversationHeight = frameHeight - 145 -60;
-        conversationScroll.setWidth("" + conversationWidth);
-        conversationScroll.setHeight("" + conversationHeight);
+        int conversationWidth = frameWidth - 200;
+        int conversationHeight = frameHeight -60;
+        SiteMessageDialog.get().setMessageInfo("" + conversationWidth
+                + "/" + conversationHeight);
+
+        //conversationScroll.setWidth("" + conversationWidth);
+        conversationSP.setHeight("" + conversationHeight);
+        usersSP.setHeight("" + conversationHeight);
+    }
+
+    private String getNextColor() {
+        String color = USERCOLORS[currentColor++];
+        if (currentColor >= USERCOLORS.length) currentColor = 0;
+        return color;
+    }
+
+    public ChatroomUser getChatroomUser(String nick) {
+        // FIXME: out of here MVC
+        for (Iterator it = userList.iterator(); it.hasNext();) {
+            ChatroomUser user = (ChatroomUser) it.next();
+            if (user.getNickName() == nick) {
+                return user;
+            }
+        }
+        throw new IllegalStateException("ChatroomUser not found");
     }
 }
