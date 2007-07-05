@@ -1,15 +1,15 @@
 /*
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; version 2 dated June, 1991.
- * 
+ *
  * This package is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
@@ -18,6 +18,7 @@
 
 package org.ourproject.kune.client;
 
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -38,8 +39,9 @@ import org.ourproject.kune.client.ui.KuneDefaultFrame;
 import org.ourproject.kune.client.ui.LicenseWidget;
 import org.ourproject.kune.client.ui.RateDialog;
 import org.ourproject.kune.client.ui.RateItDialog;
-import org.ourproject.kune.client.ui.chat.ChatroomDialog;
+import org.ourproject.kune.client.ui.chat.ConferenceRoomDialogImpl;
 import org.ourproject.kune.client.ui.chat.ChatroomUser;
+import org.ourproject.kune.client.ui.chat.ConferenceRoomImpl;
 import org.ourproject.kune.client.ui.desktop.KuneDesktop;
 import org.ourproject.kune.client.ui.desktop.SiteMessageDialog;
 import org.ourproject.kune.client.ui.ed.CustomRichTextArea;
@@ -167,8 +169,8 @@ WindowResizeListener {
                             showDoc(doc, rootItem);
                         }
                     }
-                } );	
-                getChildren(doc, rootItem);              
+                } );
+                getChildren(doc, rootItem);
             }
         });
     }
@@ -240,7 +242,7 @@ WindowResizeListener {
         kuneDesktopPanel.contextContents.add(new BorderPanel(area, 0, 5, 0, 0));
         areaController.init(docEdit.getContent(), area, true, new Command() {
             public void execute() {
-                saveDoc(docEdit, area.getHTML());	
+                saveDoc(docEdit, area.getHTML());
             }
         });
     }
@@ -257,11 +259,11 @@ WindowResizeListener {
 
     public void styleTest() {
         kuneDesktopPanel.contextContents.clear();
-        kuneDesktopPanel.contextContents.add(new HTML("<h1>Some tests</h1>")); 
+        kuneDesktopPanel.contextContents.add(new HTML("<h1>Some tests</h1>"));
         kuneDesktopPanel.contextTitle.setText(Trans.constants().Text());
 
         // RTE Test
-        kuneDesktopPanel.contextContents.add(new HTML("<p><b>Rich Text Editor:</b></p>")); 
+        kuneDesktopPanel.contextContents.add(new HTML("<p><b>Rich Text Editor:</b></p>"));
         CustomRichTextAreaModel areaController = new CustomRichTextAreaModel();
         CustomRichTextArea area = new CustomRichTextArea(areaController);
         kuneDesktopPanel.contextContents.add(new BorderPanel(area, 0, 5, 0, 0));
@@ -272,7 +274,7 @@ WindowResizeListener {
         });
 
         // Licenses
-        kuneDesktopPanel.contextContents.add(new HTML("<p><b>License tests:</b></p>")); 
+        kuneDesktopPanel.contextContents.add(new HTML("<p><b>License tests:</b></p>"));
         License license = new License();
         LicenseWidget licw1 = new LicenseWidget(license);
         LicenseWidget licw2 = new LicenseWidget(license);
@@ -287,7 +289,7 @@ WindowResizeListener {
         kuneDesktopPanel.contextBottomBar.setLicense(license);
 
         // Buttons tests
-        kuneDesktopPanel.contextContents.add(new HTML("<p><b>Buttons tests:</b></p>")); 
+        kuneDesktopPanel.contextContents.add(new HTML("<p><b>Buttons tests:</b></p>"));
         kuneDesktopPanel.contextContents.add(new BorderPanel(new CustomPushButton("Large font", CustomPushButton.LARGE), CustomPushButton.VERSPACELARGE, 0));
         kuneDesktopPanel.contextContents.add(new BorderPanel(new CustomPushButton("Small font", CustomPushButton.SMALL), 0, 0, CustomPushButton.VERSPACESMALL, 0));
         kuneDesktopPanel.contextContents.add(new BorderPanel(new CustomPushButton("Mini font", CustomPushButton.MINI), 0, 0, CustomPushButton.VERSPACEMINI, 0));
@@ -303,7 +305,7 @@ WindowResizeListener {
         kuneDesktopPanel.contextContents.add(new BorderPanel(helpTest, 0, 0, CustomPushButton.SPACEHELPBUTTON, 0));
 
         // Rate
-        kuneDesktopPanel.contextContents.add(new HTML("<p><b>Rate tests:</b></p>")); 
+        kuneDesktopPanel.contextContents.add(new HTML("<p><b>Rate tests:</b></p>"));
         Rate rate = new Rate();
         rate.addRate(4);
         rate.addRate(3);
@@ -318,7 +320,7 @@ WindowResizeListener {
         RateDialog rateTestWidget2 = new RateDialog(rate2);
         kuneDesktopPanel.contextContents.add(rateTestWidget2);
 
-        kuneDesktopPanel.contextContents.add(new HTML("<p><b>RateIt dialog tests:</b></p>")); 
+        kuneDesktopPanel.contextContents.add(new HTML("<p><b>RateIt dialog tests:</b></p>"));
         RateItDialog rateItTestWidget = new RateItDialog(rate2);
         kuneDesktopPanel.contextContents.add(rateItTestWidget);
 
@@ -330,8 +332,10 @@ WindowResizeListener {
 
     public void sandbox() {
         kuneDesktopPanel.contextContents.clear();
-        KuneDefaultFrame chatroomFrame = new KuneDefaultFrame();  
-        ChatroomDialog chatroom1 = new ChatroomDialog();
+        KuneDefaultFrame chatroomFrame = new KuneDefaultFrame();
+        ConferenceRoomImpl chatroomControler = new ConferenceRoomImpl();
+        ConferenceRoomDialogImpl chatroom1 = new ConferenceRoomDialogImpl(chatroomControler);
+        chatroomControler.init(chatroom1);
         chatroom1.setSubject("Welcome to sometopic-foorganization chat room");
         ChatroomUser luthorb = new ChatroomUser("luthor.b", true);
         ChatroomUser anneh = new ChatroomUser("anne.h", false);
@@ -365,23 +369,26 @@ WindowResizeListener {
         chatroom1.addUser(anneh12);
         chatroom1.addUser(anneh13);
         chatroom1.addUser(anneh14);
-        chatroom1.addToConversation(luthorb, new HTML("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui."));
-        chatroom1.addToConversation(anneh, new HTML("Lorem ipsum dolor sit amet?"));
-        chatroom1.addToConversation(luthorb, new HTML("yes, lorem ipsum dolor sit amet"));
-        chatroom1.addTimeDelimiter();
-        chatroom1.addToConversation(luthorb, new HTML("Lorem ipsum dolor sit amet"));
-        chatroom1.addToConversation(anneh, new HTML("Lorem ipsum dolor sit amet?"));
-        chatroom1.addToConversation(anneh, new HTML("Lorem ipsum dolor sit amet?"));
-        chatroom1.addToConversation(anneh, new HTML("Lorem ipsum dolor sit amet?"));
-        chatroom1.addToConversation(anneh, new HTML("Lorem ipsum dolor sit amet?"));
-        chatroom1.addToConversation(luthorb, new HTML("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui."));
-        chatroom1.addToConversation(anneh, new HTML("Lorem ipsum dolor sit amet?"));
-//      DialogBox chatDialog = new DialogBox();
-//      chatDialog.setText(Trans.constants().Chatroom() + " " + "sometopic-foorganization@kune.ourproject.org");
-//      chatDialog.add(chatroom1);
-//      chatDialog.show();
+        chatroom1.delUser(anneh13);
+        chatroom1.addToConversation("luthorb", new HTML("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui."));
+        chatroom1.addToConversation("anneh", new HTML("Lorem ipsum dolor sit amet?"));
+        chatroom1.addToConversation("luthorb", new HTML("yes, lorem ipsum dolor sit amet"));
+        Date date = new Date(2007, 07, 04, 0, 52);
+        chatroom1.addTimeDelimiter(date.toLocaleString());
+        chatroom1.addToConversation("luthor", new HTML("Lorem ipsum dolor sit amet"));
+        chatroom1.addToConversation("anneh", new HTML("Lorem ipsum dolor sit amet?"));
+        chatroom1.addToConversation("anneh", new HTML("Lorem ipsum dolor sit amet?"));
+        chatroom1.addToConversation("anneh", new HTML("Lorem ipsum dolor sit amet?"));
+        chatroom1.addToConversation("anneh", new HTML("Lorem ipsum dolor sit amet?"));
+        chatroom1.addToConversation("luthorb", new HTML("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui."));
+        chatroom1.addToConversation("anneh", new HTML("Lorem ipsum dolor sit amet?"));
+//        DialogBox chatDialog = new DialogBox();
+//        chatDialog.setText(Trans.constants().Chatroom() + " " + "sometopic-foorganization@kune.ourproject.org");
+//        chatDialog.setWidget(chatroom1);
+//        desktop.addWidget(chatDialog, 20, 20);
+
         chatroomFrame.setCaption(Trans.constants().Chatroom() + " " + "sometopic-foorganization@kune.ourproject.org");
-        chatroomFrame.setFrame(true, false, true, true, true);
+        chatroomFrame.setFrame(true, true, true, true, true);
         chatroomFrame.setSize(500,250);
         chatroomFrame.setContent(chatroom1);
         desktop.addFrame(chatroomFrame);
@@ -389,6 +396,8 @@ WindowResizeListener {
         chatroomFrame.setTitleIcon(new Image("images/chat.png"));
         GwmUtilities.diplayAtScreenCenter(chatroomFrame);
         chatroomFrame.setLocation(100, 100);
+        chatroomFrame.setMaximumHeight(100);
+        chatroom1.adjustSize(100, 100);
 
 //      final Wizard wizard = new Wizard();
 //      wizard.add("New Project", (Widget) new HTML("Create here a project"), false, true, true, false);
@@ -401,7 +410,7 @@ WindowResizeListener {
 //      desktop.addFrame(wizardFrame);
 //      wizardFrame.setVisible(true);
 //      GwmUtilities.diplayAtScreenCenter(wizardFrame);
-//      wizardFrame.addFrameListener(new GFrameAdapter() {   	
+//      wizardFrame.addFrameListener(new GFrameAdapter() {
 //      public void frameResized(GFrameEvent evt) {
 //      wizard.setSize(wizardFrame.getWidth(), wizardFrame.getHeight());
 //      }
@@ -412,7 +421,7 @@ WindowResizeListener {
 
     }
 
-    private void initTest() {	
+    private void initTest() {
         Group group = new Group("yellowsub", "The Yellow Submarine Environmental Initiative");
         User user = new User("luther.b");
         user.setId((long) 1);
@@ -449,7 +458,7 @@ WindowResizeListener {
 
         this.kuneDesktopPanel.contextNavBar.add(sandboxLink);
         this.kuneDesktopPanel.contextNavBar.add(styleTestLink);
-        docTree = new Tree();		
+        docTree = new Tree();
         this.kuneDesktopPanel.contextNavBar.add(docTree);
         loadRootDocument();
     }
@@ -457,7 +466,7 @@ WindowResizeListener {
     private void getChildren(KuneDoc parent, TreeItem item) {
         KuneDocumentServiceAsync docService = KuneDocumentService.App.getInstance();
         final TreeItem parentItem = item;
-        docService.getChildren(parent, new AsyncCallback() { 
+        docService.getChildren(parent, new AsyncCallback() {
             public void onFailure(Throwable exception) {
                 SiteMessageDialog.get().setMessageError("No se ha podido recuperar el contenido del servidor: " + exception.toString());
             }

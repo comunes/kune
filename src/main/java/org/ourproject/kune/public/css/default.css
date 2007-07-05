@@ -119,6 +119,11 @@ padding:8px;
 white-space:nowrap;
 }
 
+.kune-chatroom-delimiter {
+white-space: nowrap;
+color: #B3B3B3;
+}
+
 .gwm-GDesktopPane {
 overflow:hidden;
 width:100%;
@@ -231,11 +236,12 @@ border-right:1px solid #BCD35F;
 border-left:1px solid #BCD35F;
 }
 
+/*
 .gwt-VerticalSplitPanel .splitter {
 background-color:red;
 height:1px;
 cursor:n-resize;
-}
+} */
 
 .def-logo-panel {
 border:2px solid #F2F2F2;
@@ -304,7 +310,7 @@ text-decoration:none;
 .context-navbar a:hover {
 text-decoration:underline;
 }
-	
+
 .site-message-dialog {
 border:1px solid #CF0;
 background-color:#E5FF80;
@@ -355,7 +361,7 @@ cursor:pointer;
 cursor:hand;
 white-space:nowrap;
 }
-	
+
 .button20 {
 font-size:77%;
 font-weight:600;
@@ -570,7 +576,7 @@ border-color:#9DAECD #e8f1ff #e8f1ff #9daecd;
 .RichTextToolbar-submenu {
 background-color:#FFFCD5;
 border:1px solid #D38D5F;
-cursor:default;	
+cursor:default;
 }
 
 .RichTextToolbar-submenu .gwt-MenuItem {
@@ -582,7 +588,7 @@ padding:0 4px;
 
 .RichTextToolbar-submenu .gwt-MenuItem-selected {
 background-color:#FFB958;
-border:1px solid #C83737;	
+border:1px solid #C83737;
 }
 
 .web-safe-palette {

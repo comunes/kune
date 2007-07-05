@@ -18,12 +18,10 @@
 
 package org.ourproject.kune.client.rpc;
 
-import com.google.gwt.user.client.rpc.RemoteService;
+public interface XmppIDataProvider {
+	void requestCreateRoom(String Owner, String RoomName, final XmppIResponse response);
 
-public interface ServiceXmppMucService extends RemoteService {
-	void CreateRoom(String Owner, String RoomName);
+	void requestJoinRoom(String RoomName, String UserName, final XmppIResponse response);
 	
-	void JoinRoom(String RoomName, String UserName);
-	
-	void ChangeSubject(String subject);
+	void requestChangeSubject(String subject, final XmppIResponse response);
 }

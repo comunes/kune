@@ -24,7 +24,7 @@ package org.ourproject.kune.client.rpc;
  * el funcionamiento de AsyncCallback, sin aportar ninguna
  * ventaja... creo que debería desaparecer
  */
-public interface ServiceXmppMucIResponse {
+public interface XmppIResponse {
 	void accept(Object result);
 	
 	void failed(Throwable caught);

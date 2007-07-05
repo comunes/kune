@@ -15,17 +15,16 @@
  * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  *
  */
-package org.ourproject.kune.client.ui.ed;
 
-public interface CustomRichTextAreaView {
-    public void editHTML(boolean edit);
-    public String getHTML();
-    public String getText();
-    public void setEnabled(boolean enabled);
-    public void setEnabledCancelButton(boolean enabled);
-    public void setEnabledSaveButton(boolean enabled);
-    public void setHeight(String height);
-    public void setHTML(String html);
-    public void setText(String text);
-    public void setTextSaveButton(String text);
+package org.ourproject.kune.client.rpc;
+
+import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.SerializableException;
+
+public interface XmppService extends RemoteService {
+	void CreateRoom(String Owner, String RoomName) throws SerializableException;
+
+	void JoinRoom(String RoomName, String UserName) throws SerializableException;;
+
+	void ChangeSubject(String subject) throws SerializableException;;
 }

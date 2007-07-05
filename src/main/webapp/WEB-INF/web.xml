@@ -9,8 +9,8 @@
     <description>kune</description>
  
     <servlet>
-      <servlet-name>ServiceXmppMuc</servlet-name>
-      <servlet-class>org.ourproject.kune.server.servlet.ServiceXmppMucServiceImpl</servlet-class>
+      <servlet-name>XmppService</servlet-name>
+      <servlet-class>org.ourproject.kune.server.servlet.XmppServiceServlet</servlet-class>
     </servlet>
     <servlet>
       <servlet-name>KuneDocumentService</servlet-name>
@@ -28,8 +28,8 @@
     </servlet-mapping>
 
     <servlet-mapping>
-      <servlet-name>ServiceXmppMuc</servlet-name>
-      <url-pattern>/kune</url-pattern>
+      <servlet-name>XmppService</servlet-name>
+      <url-pattern>/gwt/org.ourproject.kune.Main/XmppService</url-pattern>
     </servlet-mapping>
 
 </web-app>

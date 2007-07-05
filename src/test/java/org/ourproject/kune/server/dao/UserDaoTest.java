@@ -17,12 +17,12 @@ public class UserDaoTest extends TestCase {
     private UserDaoJPA userDao;
 
     public void testPersist() {
-	KUser user = new KUser("vicente", "vicente@dominio.org");
+	KUser user = new KUser("Luther B.", "luther.b@example.com");
 	assertNull("if not saved, not id", user.getId());
-	
+
 	userDao.persist(user);
 	assertNotNull("after saved, an id is assigned", user.getId());
-	
+
 	KUser retrievedCopy = userDao.get(user.getId());
 	assertNotNull("should be something in the db with this id", retrievedCopy);
 	assertEquals ("should be equals", user, retrievedCopy);
@@ -62,7 +62,7 @@ public class UserDaoTest extends TestCase {
      * por lo tanto, cada vez que ejeutemos los test, la base de datos SIEMPRE
      * estará vacía (ideal para test)
      * de moento, en nuestro caso, esto daría igual, porque la base de datos
-     * se crea en memoria... pero no siempre utilizaremos una base de datos en 
+     * se crea en memoria... pero no siempre utilizaremos una base de datos en
      * memoria para los tests...
      */
     private void rollBackAndCloseTransaction() {
