@@ -388,7 +388,7 @@ WindowResizeListener {
 //        desktop.addWidget(chatDialog, 20, 20);
 
         chatroomFrame.setCaption(Trans.constants().Chatroom() + " " + "sometopic-foorganization@kune.ourproject.org");
-        chatroomFrame.setFrame(true, true, true, true, true);
+        chatroomFrame.setFrame(true, false, true, true, false);
         chatroomFrame.setSize(500,250);
         chatroomFrame.setContent(chatroom1);
         desktop.addFrame(chatroomFrame);

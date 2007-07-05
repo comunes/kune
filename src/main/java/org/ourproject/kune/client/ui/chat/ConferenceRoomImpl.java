@@ -18,7 +18,6 @@
 package org.ourproject.kune.client.ui.chat;
 
 import org.ourproject.kune.client.Session;
-import org.ourproject.kune.client.ui.desktop.SiteMessageDialog;
 
 import com.google.gwt.user.client.ui.HTML;
 
@@ -32,13 +31,11 @@ public class ConferenceRoomImpl implements ConferenceRoom {
     public void onSend(String sentence) {
         room.enableSendButton(false);
         room.clearInputArea();
-        sentence.replaceAll("\"", "&quot;");
-        sentence.replaceAll("&", "&amp;");
-        sentence.replaceAll("<", "&lt;");
-        sentence.replaceAll(">", "&gt;");
-        sentence.replaceAll("\\n", "<br>");
-        SiteMessageDialog.get().setMessageInfo(sentence);
-        // TODO test escape text
+        sentence = sentence.replaceAll("&", "&amp;");
+        sentence = sentence.replaceAll("\"", "&quot;");
+        sentence = sentence.replaceAll("<", "&lt;");
+        sentence = sentence.replaceAll(">", "&gt;");
+        sentence = sentence.replaceAll("\n", "<br>\n");
         room.addToConversation(Session.get().currentUser.getNickName(), new HTML(sentence));
     }
 
