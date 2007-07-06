@@ -32,7 +32,7 @@ public class ChatRoomTest extends GWTTestCase {
      * @see com.google.gwt.junit.client.GWTTestCase#getModuleName()
      */
     public String getModuleName() {
-        return "org.ourproject.kune.client.ui.chat.ChatroomDialog";
+        return "org.ourproject.kune.client.ui.chat.ConferenceRoomDialogImpl";
     }
 
     public void testUserLlist() {
