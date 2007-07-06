@@ -44,6 +44,8 @@ public interface ConferenceRoomDialog {
 
 	void permitSubjectChange(boolean permit);
 
+    void setCaption(String caption);
+
 	void setSubject(String chatroomSubject);
 
 	void setUsers(Vector userList);

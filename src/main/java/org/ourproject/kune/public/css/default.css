@@ -103,6 +103,7 @@ background-color:#F9F9F9;
 }
 
 .kune-chatroom-content-conversation {
+border-right:1px solid #CCC;
 padding:0 3px 0 0;
 }
 

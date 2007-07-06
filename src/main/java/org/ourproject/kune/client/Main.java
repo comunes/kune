@@ -23,8 +23,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.gwm.client.GDesktopPane;
-import org.gwm.client.event.GFrameAdapter;
-import org.gwm.client.event.GFrameEvent;
 import org.gwm.client.impl.DefaultGDesktopPane;
 import org.gwm.client.util.Gwm;
 import org.gwm.client.util.GwmUtilities;
@@ -37,7 +35,6 @@ import org.ourproject.kune.client.rpc.KuneDocumentServiceAsync;
 import org.ourproject.kune.client.rpc.dto.KuneDoc;
 import org.ourproject.kune.client.ui.BorderPanel;
 import org.ourproject.kune.client.ui.CustomPushButton;
-import org.ourproject.kune.client.ui.KuneDefaultFrame;
 import org.ourproject.kune.client.ui.LicenseWidget;
 import org.ourproject.kune.client.ui.RateDialog;
 import org.ourproject.kune.client.ui.RateItDialog;
@@ -70,7 +67,6 @@ import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-
 
 public class Main extends AbsolutePanel implements EntryPoint,
 WindowResizeListener {
@@ -334,7 +330,7 @@ WindowResizeListener {
 
     public void sandbox() {
         kuneDesktopPanel.contextContents.clear();
-        KuneDefaultFrame chatroomFrame = new KuneDefaultFrame();
+
         ConferenceRoomImpl chatroomControler = new ConferenceRoomImpl();
         ConferenceRoomDialogImpl chatroom1 = new ConferenceRoomDialogImpl(chatroomControler);
         chatroomControler.init(chatroom1);
@@ -389,36 +385,11 @@ WindowResizeListener {
 //        chatDialog.setWidget(chatroom1);
 //        desktop.addWidget(chatDialog, 20, 20);
 
-        chatroomFrame.setCaption(Trans.constants().Chatroom() + " " + "sometopic-foorganization@kune.ourproject.org");
-        chatroomFrame.setFrame(true, true, true, true, true);
-        chatroomFrame.setSize(500, 250);
-        chatroomFrame.setContent(chatroom1);
-        desktop.addFrame(chatroomFrame);
-        chatroomFrame.setVisible(true);
-        chatroomFrame.setTitleIcon(new Image("images/chat.png"));
-        GwmUtilities.diplayAtScreenCenter(chatroomFrame);
-        chatroomFrame.setLocation(100, 100);
-        //chatroomFrame.setMaximumHeight(250);
-        chatroom1.adjustSize(500, 250);
-        chatroomFrame.addFrameListener(new GFrameAdapter() {
-            public void frameClosed(GFrameEvent evt) {
-                // TODO Auto-generated method stub
+        chatroom1.setCaption("sometopic-foorganization@kune.ourproject.org");
+        desktop.addFrame(chatroom1);
+        chatroom1.setVisible(true);
 
-            }
-
-            public void frameMaximized(GFrameEvent evt) {
-                // TODO Auto-generated method stub
-                //chatroom1.adjustSize(500, 250);
-            }
-
-            public void frameResized(GFrameEvent evt) {
-                // TODO Auto-generated method stub
-
-            }
-
-        } );
-
-
+        //GwmUtilities.diplayAtScreenCenter(chatroom1);
 
 //      final Wizard wizard = new Wizard();
 //      wizard.add("New Project", (Widget) new HTML("Create here a project"), false, true, true, false);

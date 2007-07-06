@@ -13,11 +13,10 @@
    height="297mm"
    id="svg6293"
    sodipodi:version="0.32"
-   inkscape:version="0.45"
+   inkscape:version="0.45.1"
    sodipodi:docbase="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img"
-   sodipodi:docname="kune-fsm-virtual-infra.svg"
-   inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   sodipodi:modified="TRUE">
+   sodipodi:docname="kune-fsm-virtual-arch.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <defs
      id="defs6295" />
   <sodipodi:namedview
@@ -29,11 +28,11 @@
      inkscape:pageshadow="2"
      inkscape:zoom="0.70603069"
      inkscape:cx="372.04724"
-     inkscape:cy="754.21694"
+     inkscape:cy="526.18109"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
-     inkscape:window-width="1373"
-     inkscape:window-height="933"
+     inkscape:window-width="1379"
+     inkscape:window-height="936"
      inkscape:window-x="61"
      inkscape:window-y="0"
      showguides="true"
@@ -1760,5 +1759,36 @@
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
+    <rect
+       ry="5.073904"
+       y="723.67059"
+       x="528.49414"
+       height="189.98151"
+       width="138.42719"
+       id="rect2943"
+       style="color:#000000;fill:#ffe680;fill-opacity:1;fill-rule:nonzero;stroke:#dc5f01;stroke-width:1.96201754;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;opacity:1;enable-background:accumulate"
+       rx="5.0739212"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-xdpi="89.910126"
+       inkscape:export-ydpi="89.910126" />
+    <rect
+       rx="8.0007286"
+       style="color:#000000;fill:#ffe6d5;fill-opacity:1;fill-rule:nonzero;stroke:#dc5f01;stroke-width:1.96201754;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       id="rect2949"
+       width="138.9252"
+       height="189.84825"
+       x="322.87161"
+       y="723.67059"
+       ry="7.6983252"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-xdpi="89.910126"
+       inkscape:export-ydpi="89.910126" />
+    <path
+       inkscape:export-ydpi="89.910126"
+       inkscape:export-xdpi="89.910126"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       style="color:#000000;fill:#445500;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.35315001;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block"
+       d="M 494.10027,783.95988 L 500.56902,778.67863 L 494.10027,773.42863 L 494.10027,775.77238 L 492.56902,775.77238 L 489.16277,775.77238 L 487.63152,775.77238 L 487.63152,773.42863 L 481.16277,778.67863 L 487.63152,783.95988 L 487.63152,781.64738 L 489.16277,781.64738 L 492.56902,781.64738 L 494.10027,781.64738 L 494.10027,783.95988 z "
+       id="path2951" />
   </g>
 </svg>

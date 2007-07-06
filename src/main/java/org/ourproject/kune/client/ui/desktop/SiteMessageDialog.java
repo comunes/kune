@@ -1,15 +1,15 @@
 /*
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; version 2 dated June, 1991.
- * 
+ *
  * This package is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
@@ -32,21 +32,21 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class SiteMessageDialog extends VerticalPanel implements ClickListener {
-	private static final int TIMEVISIBLE = 4000;
-	
+	private static final int TIMEVISIBLE = 6000;
+
 	// TODO permit multiple messages
 	private static SiteMessageDialog singleton;
     private TextArea message = null;
     private Image icon = null;
     private HorizontalPanel messageHP = null;
     private Hyperlink closeLink = null;
-    
+
     Timer timer = new Timer() {
         public void run() {
         	SiteMessageDialog.get().setVisible(false);
         }
     };
-    
+
 	public SiteMessageDialog() {
     	super();
     	singleton = this;
@@ -54,11 +54,11 @@ public class SiteMessageDialog extends VerticalPanel implements ClickListener {
     	layout();
     	setProperties();
     }
-	
+
 	public static SiteMessageDialog get() {
         return singleton;
     }
-    
+
 	private void initialize() {
         message = new TextArea();
         icon = new Image();
@@ -66,7 +66,7 @@ public class SiteMessageDialog extends VerticalPanel implements ClickListener {
         messageHP = new HorizontalPanel();
         closeLink.addClickListener(this);
 	}
-    
+
 	private void layout() {
 		this.add(new BorderPanel(messageHP, 5, 0, 0, 0));
 		this.add(closeLink);
@@ -74,7 +74,7 @@ public class SiteMessageDialog extends VerticalPanel implements ClickListener {
 		messageHP.add(message);
 		this.setCellHorizontalAlignment(closeLink, HasHorizontalAlignment.ALIGN_RIGHT);
 	}
-	
+
 	private void setProperties() {
 		this.setVisible(false);
 		messageHP.setBorderWidth(0);
@@ -90,9 +90,9 @@ public class SiteMessageDialog extends VerticalPanel implements ClickListener {
 		closeLink.addStyleName("site-message");
 		closeLink.setStyleName("site-message");
 		Img.ref().info().applyTo(icon);
-		closeLink.setText(Trans.constants().Close());	
+		closeLink.setText(Trans.constants().Close());
 	}
-	
+
 	public void setMessage(String message) {
 		this.message.setText(message);
 		this.setVisible(true);
@@ -103,17 +103,17 @@ public class SiteMessageDialog extends VerticalPanel implements ClickListener {
     	Img.ref().error().applyTo(icon);
 		this.setMessage(message);
 	}
-	
+
 	public void setMessageVeryImp(String message) {
 		Img.ref().important().applyTo(icon);
 		this.setMessage(message);
 	}
-	
+
 	public void setMessageImp(String message) {
 		Img.ref().emblemImportant().applyTo(icon);
 		this.setMessage(message);
 	}
-	
+
 	public void setMessageInfo(String message) {
 		Img.ref().info().applyTo(icon);
 		this.setMessage(message);
@@ -124,7 +124,7 @@ public class SiteMessageDialog extends VerticalPanel implements ClickListener {
             this.setVisible(false);
         }
     }
-    
+
     public void adjustWidth(int windowWidth) {
     	int messageWidth = windowWidth * 60 / 100 - 3;
     	this.setWidth("" + messageWidth);

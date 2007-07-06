@@ -23,6 +23,7 @@ import com.google.gwt.user.client.ui.HTML;
 
 public class ConferenceRoomImpl implements ConferenceRoom {
     private ConferenceRoomDialog room = null;
+    private String name;
 
     public void init(ConferenceRoomDialog room) {
         this.room = room;
