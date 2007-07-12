@@ -28,7 +28,7 @@ import org.jivesoftware.smackx.muc.MultiUserChat;
 public class XmppManagerImpl implements XmppManager {
     private Hashtable<String, XMPPConnection> connections = new Hashtable<String, XMPPConnection>();
 
-    public XMPPConnection ConnectAndLogin(String login, String pass) {
+    public XMPPConnection connectAndLogin(String login, String pass) {
         ConnectionConfiguration config = new ConnectionConfiguration(
                 "ourproject.org", 5223);
         XMPPConnection conn = new XMPPConnection(config);
@@ -68,7 +68,7 @@ public class XmppManagerImpl implements XmppManager {
         return conn;
     }
 
-    public void CreateRoom(String Owner, String RoomName) {
+    public void createRoom(String Owner, String RoomName) {
         //try {
             //XMPPConnection conn = getConnection(Owner);
         //}
@@ -89,7 +89,7 @@ public class XmppManagerImpl implements XmppManager {
 //      }
     }
 
-    public void JoinRoom(String RoomName, String UserName) {
+    public void joinRoom(String RoomName, String UserName) {
         ConnectionConfiguration config = new ConnectionConfiguration(
                 "ourproject.org", 5222);
         XMPPConnection conn = new XMPPConnection(config);
@@ -115,7 +115,7 @@ public class XmppManagerImpl implements XmppManager {
 
     }
 
-    public void ChangeSubject(String subject) {
+    public void changeSubject(String subject) {
         ConnectionConfiguration config = new ConnectionConfiguration(
                 "ourproject.org", 5222);
         XMPPConnection conn = new XMPPConnection(config);

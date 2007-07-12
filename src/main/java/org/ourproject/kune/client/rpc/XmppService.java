@@ -18,13 +18,37 @@
 
 package org.ourproject.kune.client.rpc;
 
+import java.util.List;
+
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.SerializableException;
+import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 public interface XmppService extends RemoteService {
-	void CreateRoom(String Owner, String RoomName) throws SerializableException;
 
-	void JoinRoom(String RoomName, String UserName) throws SerializableException;;
+    void createRoom(String Owner, String RoomName) throws SerializableException;
 
-	void ChangeSubject(String subject) throws SerializableException;;
+    void joinRoom(String RoomName, String UserName) throws SerializableException;
+
+    void changeSubject(String subject) throws SerializableException;
+
+    void testRemoteEvents() throws SerializableException;
+
+    /** annotated for a list of Strings
+     * @gwt.typeArgs <org.ourproject.kune.client.model.Event>
+     */
+    List getEvents() throws SerializableException;
+
+    public static class App {
+        private static XmppServiceAsync ourInstance = null;
+
+        public static synchronized XmppServiceAsync getInstance() {
+            if (ourInstance == null) {
+                ourInstance = (XmppServiceAsync) GWT.create(XmppService.class);
+                ((ServiceDefTarget) ourInstance).setServiceEntryPoint(GWT.getModuleBaseURL() + "XmppService");
+            }
+            return ourInstance;
+        }
+    }
 }

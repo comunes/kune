@@ -1,15 +1,15 @@
 /*
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; version 2 dated June, 1991.
- * 
+ *
  * This package is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
@@ -18,14 +18,15 @@
 
 package org.ourproject.kune.client.ui.desktop;
 
+import org.gwm.client.impl.DefaultGFrame;
 import org.ourproject.kune.client.Img;
 import org.ourproject.kune.client.Trans;
 import org.ourproject.kune.client.model.User;
 import org.ourproject.kune.client.ui.BorderPanel;
 import org.ourproject.kune.client.ui.SimpleRoundedPanel;
-import org.ourproject.kune.client.ui.SiteBarView;
 
 import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Window;
 
 import com.google.gwt.user.client.ui.Composite;
@@ -55,13 +56,13 @@ public class SiteBar extends Composite implements SiteBarView {
 	private Hyperlink LoginHyperlink = null;
 
 	private PushButton siteBarSearchButton = null;
-	
+
 	private TextBox siteBarSearchTextBox = null;
-	
+
 	private SimpleRoundedPanel siteBarOptionsRP = null;
-	
+
 	private MenuBar siteBarOptionsMenu = null;
-	
+
 	private MenuBar siteBarOptionsSubMenu = null;
 
 	private Image siteBarHelpTransImage = null;
@@ -69,9 +70,9 @@ public class SiteBar extends Composite implements SiteBarView {
 	private Hyperlink siteBarHelpTransHyperlink = null;
 
 	private Image siteBarLogoImage = null;
-	
+
 	private Command inDevCmd = null;
-	
+
 	public SiteBar() {
 		super();
 		initialize();
@@ -88,7 +89,7 @@ public class SiteBar extends Composite implements SiteBarView {
 		siteBarSpaceExpand = new HTML();
 		siteBarNewGroupHyperlink = new Hyperlink();
 		siteBarPipeSeparatorHtml = new HTML();
-		LoginHyperlink = new Hyperlink();		
+		LoginHyperlink = new Hyperlink();
 		siteBarSearchButton = new PushButton(Img.ref().kuneSearchIco().createImage(), Img.ref().kuneSearchIcoPush().createImage());
 		siteBarSearchTextBox = new TextBox();
 		siteBarOptionsRP = new SimpleRoundedPanel();
@@ -104,7 +105,7 @@ public class SiteBar extends Composite implements SiteBarView {
 		siteBarHelpTransHyperlink = new Hyperlink();
 		siteBarLogoImage = new Image();
 		Img.ref().kuneLogo16px().applyTo(siteBarLogoImage);
-		
+
 	}
 
 	protected void layout() {
@@ -156,7 +157,7 @@ public class SiteBar extends Composite implements SiteBarView {
 		siteBarSearchTextBox.setStyleName("kune-search-box");
 		siteBarSearchTextBox.setWidth("180");
 		siteBarSearchTextBox.setTitle(Trans.constants().Search());
-		
+
 		siteBarOptionsRP.setCornerStyleName("kune-sitebar-options-rp");
 		siteBarOptionsMenu.setStyleName("kune-sitebar-options");
 		siteBarOptionsMenu.setTitle(Trans.constants().GlobalSiteOptions());
@@ -165,33 +166,34 @@ public class SiteBar extends Composite implements SiteBarView {
 		siteBarHelpTransHyperlink
 				.setText(Trans.constants().HelpWithTranslation());
 		siteBarHelpTransHyperlink.setStyleName("kune-sitebar");
-		
+
 		showProgressBar(false);
 	}
-	
+
 	public void showProgressBar(boolean show) {
+        DOM.setIntStyleAttribute(getElement(), "zIndex", DefaultGFrame.getLayerOfTheTopWindow() + 10);
 		siteBarSpinProcessing.setVisible(show);
 		sitebarTextProcessingLabel.setVisible(show);
 	}
-	
+
 	public void setTextProgressBar(String text) {
 		sitebarTextProcessingLabel.setText(text);
 	}
-	
+
 	public void login(User user) {
 		// TODO
 		LoginHyperlink.setText(user.getNickName());
 	}
-	
+
 	public void logout() {
 		// TODO
 		LoginHyperlink.setText(Trans.constants().Login());
 	}
-	
+
 	public void clearSearchBox() {
 		siteBarSearchTextBox.setText("");
 	}
-	
+
 	public void setTextSearchBox(String text) {
 		siteBarSearchTextBox.setText(text);
 	}

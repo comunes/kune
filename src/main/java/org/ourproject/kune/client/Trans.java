@@ -28,6 +28,10 @@ public class Trans {
 	}
 	
 	public static String t(String constant) {
+		try {
 		return _const.getString(constant);
+		} catch (Exception MissingResourceException) {
+			return "The string '" + constant + "' is not in properties, getting the string from db";
+		}
 	}
 }

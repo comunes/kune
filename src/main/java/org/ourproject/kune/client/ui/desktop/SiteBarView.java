@@ -15,17 +15,21 @@
  * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  *
  */
+package org.ourproject.kune.client.ui.desktop;
 
-package org.ourproject.kune.client.rpc;
+import org.ourproject.kune.client.model.User;
 
-/**
- * NOTA: mirar la nota de ServiceXmppMucServiceManager
- * en cualquier caso, esta clase lo único que hace es duplicar
- * el funcionamiento de AsyncCallback, sin aportar ninguna
- * ventaja... creo que debería desaparecer
- */
-public interface XmppIResponse {
-	void accept(Object result);
+public interface SiteBarView {
+	void showProgressBar(boolean show);
 	
-	void failed(Throwable caught);
+	void setTextProgressBar(String text);
+	
+	void login(User user);
+	
+	void logout();
+	
+	void clearSearchBox();
+	
+	void setTextSearchBox(String text);
+
 }

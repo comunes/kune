@@ -17,10 +17,12 @@
  */
 package org.ourproject.kune.client.ui.desktop;
 
+import org.gwm.client.impl.DefaultGFrame;
 import org.ourproject.kune.client.Img;
 import org.ourproject.kune.client.Trans;
 import org.ourproject.kune.client.ui.BorderPanel;
 
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
@@ -32,7 +34,12 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class SiteMessageDialog extends VerticalPanel implements ClickListener {
-	private static final int TIMEVISIBLE = 6000;
+	private static final int TIMEVISIBLE = 4000;
+
+    private static final String COLORINFO = "#E5FF80";
+    private static final String COLORIMP = "#FFE6D5";
+    private static final String COLORVERYIMP = "#FFD4AA";
+    private static final String COLORERROR = "#FFB380";
 
 	// TODO permit multiple messages
 	private static SiteMessageDialog singleton;
@@ -41,9 +48,12 @@ public class SiteMessageDialog extends VerticalPanel implements ClickListener {
     private HorizontalPanel messageHP = null;
     private Hyperlink closeLink = null;
 
+    private String currentColor = COLORINFO; // Initial CSS value
+
     Timer timer = new Timer() {
         public void run() {
         	SiteMessageDialog.get().setVisible(false);
+            message.setText("");
         }
     };
 
@@ -91,36 +101,52 @@ public class SiteMessageDialog extends VerticalPanel implements ClickListener {
 		closeLink.setStyleName("site-message");
 		Img.ref().info().applyTo(icon);
 		closeLink.setText(Trans.constants().Close());
+        this.message.setReadOnly(true);
 	}
 
 	public void setMessage(String message) {
-		this.message.setText(message);
+		this.message.setText(this.message.getText() + "\n" + message);
+        // Put on the top of all windows/popup
+        DOM.setIntStyleAttribute(getElement(), "zIndex", DefaultGFrame.getLayerOfTheTopWindow() + 10);
 		this.setVisible(true);
 		timer.schedule(TIMEVISIBLE);
 	}
 
+    public void setBackgroundColor(String color) {
+        if (currentColor != color) {
+            DOM.setStyleAttribute(getElement(), "backgroundColor", color);
+            DOM.setStyleAttribute(message.getElement(), "backgroundColor", color);
+            DOM.setStyleAttribute(closeLink.getElement(), "backgroundColor", color);
+            currentColor = color;
+        }
+    }
+
     public void setMessageError(String message) {
+        setBackgroundColor(COLORERROR);
     	Img.ref().error().applyTo(icon);
 		this.setMessage(message);
 	}
 
 	public void setMessageVeryImp(String message) {
+        setBackgroundColor(COLORVERYIMP);
 		Img.ref().important().applyTo(icon);
 		this.setMessage(message);
 	}
 
 	public void setMessageImp(String message) {
+        setBackgroundColor(COLORIMP);
 		Img.ref().emblemImportant().applyTo(icon);
 		this.setMessage(message);
 	}
 
 	public void setMessageInfo(String message) {
+        setBackgroundColor(COLORINFO);
 		Img.ref().info().applyTo(icon);
 		this.setMessage(message);
 	}
 
     public void onClick(Widget sender) {
-        if  (sender == closeLink) {
+        if (sender == closeLink) {
             this.setVisible(false);
         }
     }

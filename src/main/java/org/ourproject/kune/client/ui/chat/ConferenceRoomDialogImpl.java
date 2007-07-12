@@ -269,6 +269,7 @@ public class ConferenceRoomDialogImpl extends KuneDefaultFrame implements Confer
         super.addFrameListener(new GFrameAdapter() {
             public void frameClosed(GFrameEvent evt) {
                 // TODO: frameClosed confirmation
+                controller.onClose();
             }
 
             public void frameMaximized(GFrameEvent evt) {

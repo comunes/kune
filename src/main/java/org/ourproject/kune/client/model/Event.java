@@ -15,49 +15,46 @@
  * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  *
  */
-
 package org.ourproject.kune.client.model;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
 import java.util.Date;
 
-public class Model implements IsSerializable, Cloneable {
-	protected long id;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
-	protected Date createdAt = null;
+public class Event extends Model implements IsSerializable, Cloneable {
 
-	protected Date updatedAt = null;
+    public static final int EVENT_TEST_1 = 1;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public static final int EVENT_TEST_2 = 2;
 
-	public long getId() {
-		return id;
-	}
+    public static final int EVENT_TEST_3 = 3;
 
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
+    private int type;
 
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
-	}
+    private Date timestamp;
 
-	public Date getCreatedAt() {
-		return createdAt;
-	}
+    public Event() {
+    }
 
-	public Date getUpdatedAt() {
-		return updatedAt;
-	}
+    public Event(int type, Date timestamp) {
+        this.type = type;
+        this.timestamp = timestamp;
+    }
 
-    public Object clone() {
- 	 	Model modelClone = new Model();
- 	 	modelClone.setId(this.getId());
- 	 	modelClone.setCreatedAt(this.getCreatedAt());
- 	 	modelClone.setUpdatedAt(this.getUpdatedAt());
- 	 	return modelClone;
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
     }
 
 }

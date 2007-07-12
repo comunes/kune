@@ -15,7 +15,7 @@
  * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  *
  */
-package org.ourproject.kune.gwt.ui;
+package org.ourproject.kune.client;
 
 import org.ourproject.kune.client.ui.chat.ConferenceRoomDialogImpl;
 import org.ourproject.kune.client.ui.chat.ChatroomUser;
@@ -32,7 +32,7 @@ public class ChatRoomTest extends GWTTestCase {
      * @see com.google.gwt.junit.client.GWTTestCase#getModuleName()
      */
     public String getModuleName() {
-        return "org.ourproject.kune.client.ui.chat.ConferenceRoomDialogImpl";
+        return "org.ourproject.kune.Main";
     }
 
     public void testUserLlist() {

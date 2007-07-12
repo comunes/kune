@@ -22,13 +22,13 @@ import org.jivesoftware.smack.XMPPException;
 
 
 public interface XmppManager {
-    public XMPPConnection ConnectAndLogin(String login, String pass);
+    public XMPPConnection connectAndLogin(String login, String pass);
 
     public XMPPConnection getConnection(String login) throws XMPPException;
 
-    public void CreateRoom(String Owner, String RoomName);
+    public void createRoom(String Owner, String RoomName);
 
-    public void JoinRoom(String RoomName, String UserName);
+    public void joinRoom(String RoomName, String UserName);
 
-    public void ChangeSubject(String subject);
+    public void changeSubject(String subject);
 }

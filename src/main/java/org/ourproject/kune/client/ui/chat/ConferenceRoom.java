@@ -20,4 +20,5 @@ package org.ourproject.kune.client.ui.chat;
 public interface ConferenceRoom {
     void onSend(String send);
     void onMessage(String nick, String send);
+    void onClose();
 }
