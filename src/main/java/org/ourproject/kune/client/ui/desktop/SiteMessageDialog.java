@@ -101,10 +101,10 @@ public class SiteMessageDialog extends VerticalPanel implements ClickListener {
 		closeLink.setStyleName("site-message");
 		Img.ref().info().applyTo(icon);
 		closeLink.setText(Trans.constants().Close());
-        this.message.setReadOnly(true);
 	}
 
 	public void setMessage(String message) {
+        // FIXME: This mix different message levels:
 		this.message.setText(this.message.getText() + "\n" + message);
         // Put on the top of all windows/popup
         DOM.setIntStyleAttribute(getElement(), "zIndex", DefaultGFrame.getLayerOfTheTopWindow() + 10);

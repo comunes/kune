@@ -32,13 +32,11 @@ import com.google.gwt.user.client.ui.HTML;
 
 public class ConferenceRoomImpl implements ConferenceRoom {
     private ConferenceRoomDialog room = null;
-    private boolean doPoll;
     private int pollErrorCount;
     private Timer retryTimer;
 
     public void init(ConferenceRoomDialog room) {
         this.room = room;
-        doPoll = true;
         pollErrorCount = 0;
         retryTimer = new Timer() {
             public void run() {
@@ -73,7 +71,6 @@ public class ConferenceRoomImpl implements ConferenceRoom {
                     // POST are stored as a request attribute so they are available to
                     // retried requests without reparsing»
                     String result = exception.toString().substring(56);
-                    SiteMessageDialog.get().setMessage("List: " + result);
                     processEvents(result);
                 }
                 else {
@@ -94,6 +91,9 @@ public class ConferenceRoomImpl implements ConferenceRoom {
 
     private void processEvents(Object result) {
         pollErrorCount = 0;
+        //FIXME: move this down
+        retryTimer.schedule(2000);
+        SiteMessageDialog.get().setMessage("List: " + result);
         List events = (List) result;
         for (Iterator it = events.iterator(); it.hasNext();) {
             Event currentEvent = ((Event) it.next());
@@ -104,7 +104,6 @@ public class ConferenceRoomImpl implements ConferenceRoom {
             GWT.log(message, null);
             SiteMessageDialog.get().setMessageInfo(message);
         }
-        retryTimer.schedule(1000);
     }
 
     public void onSend(String sentence) {
@@ -123,7 +122,7 @@ public class ConferenceRoomImpl implements ConferenceRoom {
     }
 
     public void onClose() {
-        doPoll = false;
+        retryTimer.cancel();
     }
 
 }

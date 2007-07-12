@@ -32,6 +32,7 @@ import org.ourproject.kune.server.log.Logger;
 import org.ourproject.kune.server.manager.XmppManager;
 
 import com.google.gwt.user.client.rpc.SerializableException;
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.google.inject.Inject;
 
 public class XmppServiceServlet extends AsyncRemoteServiceServlet implements XmppService {
@@ -68,9 +69,14 @@ public class XmppServiceServlet extends AsyncRemoteServiceServlet implements Xmp
         try {
             log.debug("getEvents called");
             return EventQueueCont.getInstance().getEvents(this.getThreadLocalRequest());
+            // return EventQueue.getInstance().getEvents(this.getThreadLocalRequest().getSession().getId());
         } catch (Exception e) {
             if (e instanceof RuntimeException &&
                     "org.mortbay.jetty.RetryRequest".equals(e.getClass().getName())) {
+                // Greg Wilkins says:
+                // «The continuation mechanism throws the retry exception to make the servlet
+                // exit the current handling.
+                // You must let RetryException propogate to the container.»
                 throw (RuntimeException) e;
             }
             else {
@@ -83,11 +89,11 @@ public class XmppServiceServlet extends AsyncRemoteServiceServlet implements Xmp
         try {
             log.debug("testRemoteEvents called");
             final HttpSession session = this.getThreadLocalRequest().getSession();
-            EventQueue.getInstance().addEvent(session.getId(), new Event(Event.EVENT_TEST_1, new Date()));
+            EventQueueCont.getInstance().addEvent(session.getId(), new Event(Event.EVENT_TEST_1, new Date()));
             Timer timer = new Timer();
             timer.scheduleAtFixedRate(new TimerTask() {
                 public void run() {
-                    EventQueue.getInstance().addEvent(session.getId(), new Event(Event.EVENT_TEST_2, new Date()));
+                    EventQueueCont.getInstance().addEvent(session.getId(), new Event(Event.EVENT_TEST_2, new Date()));
                 }}, 5000, 5000);
         } catch (Exception e) {
            throw new SerializableException(e.toString());

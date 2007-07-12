@@ -71,10 +71,12 @@ public class EventQueueCont {
             if (eventList.size() > maxEvents) {
                 eventList.remove(0);
             }
-            // resume continuations waiting for events
-            continuations.get(sessionHandle).resume();
+            Continuation continuation = continuations.get(sessionHandle);
+            if (continuation != null) {
+                log.debug("Was waiting: continutation resume called after add event");
+                continuation.resume();
+            }
         }
-
     }
 
     public List<Event> getEvents(HttpServletRequest request) {
@@ -100,13 +102,13 @@ public class EventQueueCont {
                     currentContinuation.resume();
                 continuations.put(sessionHandle, continuation);
                 if (continuation.suspend(TIMEOUT)) {
-                    log.debug("Resume called");
+                    log.debug("Continutation resume called");
                 }
                 else {
-                    log.debug("Timeout");
+                    log.debug("Continuation timeout");
                 }
                 if (continuation.isPending()) {
-                    log.debug("Continuation is Pending");
+                    log.debug("Continuation is pending");
                 }
                 if (continuation.isResumed()) {
                     log.debug("Continuation is resumed");
@@ -116,6 +118,7 @@ public class EventQueueCont {
             continuations.get(sessionHandle).resume();
             continuations.put(sessionHandle, null);
         }
+        log.debug("Returning " + eventList.size() + (eventList.size() == 1? " event": " events"));
         return eventList;
     }
 
@@ -132,7 +135,7 @@ public class EventQueueCont {
         return eventList;
     }
 
-    public List getNewEvents(HttpServletRequest request) {
+    public List<Event> getNewEvents(HttpServletRequest request) {
         String sessionHandle = request.getSession().getId();
         Date lastTimestamp = (Date) timestamps.get(sessionHandle);
 
