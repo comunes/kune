@@ -17,19 +17,26 @@
  */
 package org.ourproject.kune.client;
 
+import org.ourproject.kune.client.ehub.EventHub;
+import org.ourproject.kune.client.rpc.XmppService;
 import org.ourproject.kune.client.ui.WebSafePalette;
 import org.ourproject.kune.client.ui.desktop.SiteMessageDialog;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Image;
 
 /**
  * A class for kune using the factory method pattern
  */
 public class KuneFactory {
+
     private WebSafePalette palette = null;
+
     private SiteMessageDialog siteMessageDialog = null;
+
+    private EventHub eventHub = null;
 
     private KuneFactory() {
 		DeferredCommand.addCommand(new Command() {
@@ -57,6 +64,13 @@ public class KuneFactory {
     	if (siteMessageDialog == null)
     		siteMessageDialog = new SiteMessageDialog();
     	return siteMessageDialog;
+    }
+
+    public EventHub getEventHub() {
+        if (eventHub == null) {
+            eventHub = new EventHub();
+        }
+        return eventHub;
     }
 
     void preFetchImpImages() {

@@ -18,10 +18,7 @@
 
 package org.ourproject.kune.server.servlet;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.servlet.http.HttpSession;
 
@@ -32,7 +29,6 @@ import org.ourproject.kune.server.log.Logger;
 import org.ourproject.kune.server.manager.XmppManager;
 
 import com.google.gwt.user.client.rpc.SerializableException;
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.google.inject.Inject;
 
 public class XmppServiceServlet extends AsyncRemoteServiceServlet implements XmppService {
@@ -65,7 +61,7 @@ public class XmppServiceServlet extends AsyncRemoteServiceServlet implements Xmp
         }
     }
 
-    public List<Event> getEvents() throws SerializableException, RuntimeException {
+    public List<Event> getEvents() throws SerializableException {
         try {
             log.debug("getEvents called");
             return EventQueueCont.getInstance().getEvents(this.getThreadLocalRequest());
@@ -80,23 +76,20 @@ public class XmppServiceServlet extends AsyncRemoteServiceServlet implements Xmp
                 throw (RuntimeException) e;
             }
             else {
+                log.debug("getEvents exception: " + e.toString());
                 throw new SerializableException(e.toString());
             }
         }
     }
 
-    public void testRemoteEvents() throws SerializableException {
+    public void sendMessage(String message) throws SerializableException {
         try {
-            log.debug("testRemoteEvents called");
+            log.debug("sendMessage called");
             final HttpSession session = this.getThreadLocalRequest().getSession();
-            EventQueueCont.getInstance().addEvent(session.getId(), new Event(Event.EVENT_TEST_1, new Date()));
-            Timer timer = new Timer();
-            timer.scheduleAtFixedRate(new TimerTask() {
-                public void run() {
-                    EventQueueCont.getInstance().addEvent(session.getId(), new Event(Event.EVENT_TEST_2, new Date()));
-                }}, 5000, 5000);
+            EventQueueCont.getInstance().addEvent(session.getId(), new Event("org.ourproject.kune.muc.room", message));
         } catch (Exception e) {
-           throw new SerializableException(e.toString());
+            log.debug("sendMessage exception:" + e.toString());
+            throw new SerializableException(e.toString());
         }
     }
 

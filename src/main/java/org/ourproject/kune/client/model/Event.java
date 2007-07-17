@@ -23,30 +23,32 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class Event extends Model implements IsSerializable, Cloneable {
 
-    public static final int EVENT_TEST_1 = 1;
-
-    public static final int EVENT_TEST_2 = 2;
-
-    public static final int EVENT_TEST_3 = 3;
-
-    private int type;
+    private String name;
 
     private Date timestamp;
 
+    private String publisherData = null;
+
     public Event() {
+        timestamp = new Date();
     }
 
-    public Event(int type, Date timestamp) {
-        this.type = type;
-        this.timestamp = timestamp;
+    public Event(String name) {
+        this();
+        this.name = name;
     }
 
-    public int getType() {
-        return type;
+    public Event(String name, String publisherData) {
+        this(name);
+        this.publisherData = publisherData;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public String getName() {
+        return name;
+    }
+
+    public void setType(String name) {
+        this.name = name;
     }
 
     public Date getTimestamp() {
@@ -55,6 +57,14 @@ public class Event extends Model implements IsSerializable, Cloneable {
 
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getPublisherData() {
+        return publisherData;
+    }
+
+    public void setPublisherData(String publisherData) {
+        this.publisherData = publisherData;
     }
 
 }

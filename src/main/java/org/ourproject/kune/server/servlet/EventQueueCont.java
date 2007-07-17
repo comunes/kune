@@ -18,11 +18,11 @@
 package org.ourproject.kune.server.servlet;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -35,20 +35,20 @@ import org.mortbay.util.ajax.ContinuationSupport;
 
 
 /**
- * Event queue with jetty/continuations adapted from:
+ * Event queue with jetty/continuations inspired in:
  * http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/fd724f4099a29251/ccd9aa8b65909272?lnk=st&q=continuations&rnum=1#ccd9aa8b65909272
  */
 public class EventQueueCont {
+
     private static final long TIMEOUT = 30000L;
-    private static final int MAX_EVENTS = 10;
+
+    private static final int MAX_EVENTS = 20;
 
     public static EventQueueCont eventQueue = new EventQueueCont();
 
-    private Map<String, List<Event>> eventMap = new HashMap<String, List<Event>>();
-    private Map<String, Date> timestamps = new HashMap<String, Date>();
-    private Map<String, Continuation> continuations = new HashMap<String, Continuation>();
+    private Map<String, List<Event>> eventMap = new ConcurrentHashMap<String, List<Event>>();
+    private Map<String, Continuation> continuations = new ConcurrentHashMap<String, Continuation>();
 
-    private boolean showMissedEvents = false;
     private int maxEvents = MAX_EVENTS;
     private Log log = Logger.getLogger();
 
@@ -58,133 +58,73 @@ public class EventQueueCont {
 
     public void addEvent(String sessionHandle, Event event) {
         List<Event> eventList;
-        synchronized (eventMap) {
-            eventList = eventMap.get(sessionHandle);
-            if (eventList == null) {
-                eventList = new ArrayList<Event>();
-                eventMap.put(sessionHandle, eventList);
-            }
-
+        eventList = eventMap.get(sessionHandle);
+        if (eventList == null) {
+            eventList = new ArrayList<Event>();
+            eventMap.put(sessionHandle, eventList);
         }
-        synchronized (this) {
+        synchronized (eventList) {
             eventList.add(event);
+            log.debug("Added event: " + event.getName());
             if (eventList.size() > maxEvents) {
                 eventList.remove(0);
             }
-            Continuation continuation = continuations.get(sessionHandle);
-            if (continuation != null) {
-                log.debug("Was waiting: continutation resume called after add event");
-                continuation.resume();
-            }
+        }
+
+        Continuation continuation = continuations.get(sessionHandle);
+        if (continuation != null) {
+            log.debug("Was waiting: continuation, resume called after add event");
+            continuation.resume();
+            continuations.remove(sessionHandle);
         }
     }
 
     public List<Event> getEvents(HttpServletRequest request) {
         String sessionHandle = request.getSession().getId();
-        List<Event> eventList;
-        synchronized (eventMap) {
-            eventList = eventMap.get(sessionHandle);
-            if (eventList == null) {
-                eventList = new ArrayList<Event>();
-                eventMap.put(sessionHandle, eventList);
-            }
-        }
+        List<Event> eventList = getEventsOfSession(sessionHandle);
+        List<Event> newEvents = new ArrayList<Event>();
 
         // if the session has no events.
         if (eventList.size() == 0) {
-            synchronized (this) {
-                // suspend the continuation waiting for events
-                log.debug("Suspend the continuation waiting for events");
-                Continuation continuation =
-                    ContinuationSupport.getContinuation(request, this);
-                Continuation currentContinuation = continuations.get(sessionHandle);
-;                if (continuation != null && currentContinuation != null && currentContinuation != continuation)
-                    currentContinuation.resume();
-                continuations.put(sessionHandle, continuation);
-                if (continuation.suspend(TIMEOUT)) {
-                    log.debug("Continutation resume called");
-                }
-                else {
-                    log.debug("Continuation timeout");
-                }
-                if (continuation.isPending()) {
-                    log.debug("Continuation is pending");
-                }
-                if (continuation.isResumed()) {
-                    log.debug("Continuation is resumed");
+            // suspend the continuation waiting for events
+            log.debug("No events now: suspend the continuation waiting for events");
+            Continuation continuation =
+                ContinuationSupport.getContinuation(request, this);
+            Continuation currentContinuation = continuations.get(sessionHandle);
+            if (continuation != null && currentContinuation != null && currentContinuation != continuation)
+                currentContinuation.resume();
+            continuations.put(sessionHandle, continuation);
+            if (continuation.suspend(TIMEOUT)) {
+                log.debug("Continuation resume called and try to get new events");
+            }
+            else {
+                log.debug("getEvents: continuation timeout");
+            }
+            log.debug("getEvents: Resume the continuation");
+            continuations.get(sessionHandle).resume();
+            continuations.remove(sessionHandle);
+        }
+        else {
+            synchronized (eventList) {
+                for (Iterator i = eventList.iterator(); i.hasNext();) {
+                    Event event = (Event) i.next();
+                    newEvents.add(event);
+                    i.remove();
                 }
             }
-            log.debug("Resume the continuation");
-            continuations.get(sessionHandle).resume();
-            continuations.put(sessionHandle, null);
         }
         log.debug("Returning " + eventList.size() + (eventList.size() == 1? " event": " events"));
-        return eventList;
-    }
-
-    private List<Event> getEventList(HttpServletRequest request) {
-        String sessionHandle = request.getSession().getId();
-        List<Event> eventList;
-        synchronized (eventMap) {
-            eventList = eventMap.get(sessionHandle);
-            if (eventList == null) {
-                eventList = new ArrayList<Event>();
-                eventMap.put(sessionHandle, eventList);
-            }
-        }
-        return eventList;
-    }
-
-    public List<Event> getNewEvents(HttpServletRequest request) {
-        String sessionHandle = request.getSession().getId();
-        Date lastTimestamp = (Date) timestamps.get(sessionHandle);
-
-        List<Event> eventList = null;
-        List<Event> newEvents = new ArrayList<Event>();
-        if (lastTimestamp == null) {
-            if (showMissedEvents) {
-                lastTimestamp = new Date(0);
-                eventList = getEventList(request);
-            } else {
-                lastTimestamp = new Date();
-                // Wait for next event
-                eventList = getEvents(request);
-            }
-            timestamps.put(sessionHandle, lastTimestamp);
-        } else {
-            // Check for events that might have been occured in the meantime
-            eventList = getEventList(request);
-            synchronized (eventList) {
-                for (Event event : eventList) {
-                    if (event.getTimestamp().after(lastTimestamp)) {
-                        newEvents.add(event);
-                    }
-                }
-                if (newEvents.size() > 0) {
-                    timestamps.put(sessionHandle, new Date());
-                    return newEvents;
-                } else {
-                    // No events in the meantime, so wait for new events
-                    eventList = getEvents(request);
-                    timestamps.put(sessionHandle, new Date());
-                }
-            }
-        }
-        synchronized (eventList) {
-            for (Iterator i = eventList.iterator(); i.hasNext();) {
-                Event event = (Event) i.next();
-                if (event.getTimestamp().after(lastTimestamp)) {
-                    newEvents.add(event);
-                }
-            }
-        }
         return newEvents;
     }
 
-    public void setContinuation(Continuation continuation, Continuation currentContinuation) {
-        if (continuation != null && currentContinuation != null && currentContinuation != continuation)
-            currentContinuation.resume();
-        currentContinuation = continuation;
+    public List<Event> getEventsOfSession(String sessionHandle) {
+        List<Event> eventList;
+        eventList = eventMap.get(sessionHandle);
+        if (eventList == null) {
+            eventList = new ArrayList<Event>();
+            eventMap.put(sessionHandle, eventList);
+        }
+        return eventList;
     }
 
 }

@@ -15,21 +15,12 @@
  * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  *
  */
+package org.ourproject.kune.client.ehub;
 
-package org.ourproject.kune.client.rpc;
+import org.ourproject.kune.client.model.Event;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
+public interface EventSubscriber {
 
-public interface XmppServiceAsync {
-
-    public void createRoom(String Owner, String RoomName, AsyncCallback callback);
-
-	public void joinRoom(String RoomName, String UserName, AsyncCallback callback);
-
-	public void changeSubject(String subject, AsyncCallback callback);
-
-    public void sendMessage(String message, AsyncCallback callback);
-
-    public void getEvents(AsyncCallback callback);
+    void onEvent(Event event);
 
 }

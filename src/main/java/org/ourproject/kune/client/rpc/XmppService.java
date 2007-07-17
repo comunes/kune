@@ -33,7 +33,7 @@ public interface XmppService extends RemoteService {
 
     void changeSubject(String subject) throws SerializableException;
 
-    void testRemoteEvents() throws SerializableException;
+    void sendMessage(String message) throws SerializableException;
 
     /** annotated for a list of Strings
      * @gwt.typeArgs <org.ourproject.kune.client.model.Event>

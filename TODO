@@ -19,6 +19,8 @@ SHORT-TERM (URGENT):
 --> danigb
 <vjrj> explorer specific problems: fonts antialiasing problem?
 --> vjrj
+<vjrj> fix classpath platform problems:
+  <classpathentry kind="lib" path="/usr/local/lib/gwt/gwt-linux-1.4.10/gwt-dev-linux.jar"/>
 
 MIND-TERM:
 --------------------------------------------------------------------------------
@@ -30,6 +32,7 @@ MIND-TERM:
 --> vjrj 
 <vjrj> layout problems (specially resizing) with old Mozilla (wait gwt 1.4)
 <vjrj> RTE right to left writing
+<vjrj> Change to GPLv3 http://www.gnu.org/licenses/rms-why-gplv3.html
 
 LONG-TERM:
 --------------------------------------------------------------------------------
