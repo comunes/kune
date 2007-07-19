@@ -22,14 +22,18 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface XmppServiceAsync {
 
-    public void createRoom(String Owner, String RoomName, AsyncCallback callback);
+    public void createRoom(String owner, String roomName, AsyncCallback callback);
 
-	public void joinRoom(String RoomName, String UserName, AsyncCallback callback);
+	public void joinRoom(String roomName, String nick, AsyncCallback callback);
+
+    public void leaveRoom(String roomName, AsyncCallback callback);
 
 	public void changeSubject(String subject, AsyncCallback callback);
 
-    public void sendMessage(String message, AsyncCallback callback);
+    public void sendMessage(String roomName, String message, AsyncCallback callback);
 
     public void getEvents(AsyncCallback callback);
+
+    public void login(AsyncCallback callback);
 
 }

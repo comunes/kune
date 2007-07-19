@@ -32,6 +32,7 @@ import org.ourproject.kune.client.model.Rate;
 import org.ourproject.kune.client.model.User;
 import org.ourproject.kune.client.rpc.KuneDocumentService;
 import org.ourproject.kune.client.rpc.KuneDocumentServiceAsync;
+import org.ourproject.kune.client.rpc.XmppService;
 import org.ourproject.kune.client.rpc.dto.KuneDoc;
 import org.ourproject.kune.client.ui.BorderPanel;
 import org.ourproject.kune.client.ui.CustomPushButton;
@@ -63,6 +64,7 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -331,65 +333,58 @@ WindowResizeListener {
     public void sandbox() {
         kuneDesktopPanel.contextContents.clear();
 
-        ConferenceRoomImpl chatroomControler = new ConferenceRoomImpl();
-        ConferenceRoomDialogImpl chatroom1 = new ConferenceRoomDialogImpl(chatroomControler);
-        chatroomControler.init(chatroom1);
-        chatroom1.setSubject("Welcome to sometopic-foorganization chat room");
-        ChatroomUser lutherb = new ChatroomUser("luther.b", true);
-        ChatroomUser anneh = new ChatroomUser("anne.h", false);
-        ChatroomUser anneh1 = new ChatroomUser("anne.h1", false);
-        ChatroomUser anneh2 = new ChatroomUser("anne.h2", false);
-        ChatroomUser anneh3 = new ChatroomUser("anne.h3", false);
-        ChatroomUser anneh4 = new ChatroomUser("anne.h4", false);
-        ChatroomUser anneh5 = new ChatroomUser("anne.h5", false);
-        ChatroomUser anneh6 = new ChatroomUser("anne.h6", false);
-        ChatroomUser anneh7 = new ChatroomUser("anne.h7", false);
-        ChatroomUser anneh8 = new ChatroomUser("anne.h8", false);
-        ChatroomUser anneh9 = new ChatroomUser("anne.h9", false);
-        ChatroomUser anneh10 = new ChatroomUser("anne.h10", false);
-        ChatroomUser anneh11 = new ChatroomUser("anne.h11", false);
-        ChatroomUser anneh12 = new ChatroomUser("anne.h12", false);
-        ChatroomUser anneh13 = new ChatroomUser("anne.h13", false);
-        ChatroomUser anneh14 = new ChatroomUser("anne.h14", false);
-        chatroom1.addUser(lutherb);
-        chatroom1.addUser(anneh);
-        chatroom1.addUser(anneh1);
-        chatroom1.addUser(anneh2);
-        chatroom1.addUser(anneh3);
-        chatroom1.addUser(anneh4);
-        chatroom1.addUser(anneh5);
-        chatroom1.addUser(anneh6);
-        chatroom1.addUser(anneh7);
-        chatroom1.addUser(anneh8);
-        chatroom1.addUser(anneh9);
-        chatroom1.addUser(anneh10);
-        chatroom1.addUser(anneh11);
-        chatroom1.addUser(anneh12);
-        chatroom1.addUser(anneh13);
-        chatroom1.addUser(anneh14);
-        chatroom1.delUser(anneh13);
-        chatroom1.addToConversation("luther.b", new HTML("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui."));
-        chatroom1.addToConversation("anne.h", new HTML("Lorem ipsum dolor sit amet?"));
-        chatroom1.addToConversation("luther.b", new HTML("yes, lorem ipsum dolor sit amet"));
-        Date date = new Date(2007, 07, 04, 0, 52);
-        chatroom1.addTimeDelimiter(date.toLocaleString());
-        chatroom1.addToConversation("luther.b", new HTML("Lorem ipsum dolor sit amet"));
-        chatroom1.addToConversation("anne.h2", new HTML("Lorem ipsum dolor sit amet?"));
-        chatroom1.addToConversation("anne.h3", new HTML("Lorem ipsum dolor sit amet?"));
-        chatroom1.addToConversation("anne.h9", new HTML("Lorem ipsum dolor sit amet?"));
-        chatroom1.addToConversation("anne.h8", new HTML("Lorem ipsum dolor sit amet?"));
-        chatroom1.addToConversation("luther.b", new HTML("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui."));
-        chatroom1.addToConversation("anne.h", new HTML("Lorem ipsum dolor sit amet?"));
-//        DialogBox chatDialog = new DialogBox();
-//        chatDialog.setText(Trans.constants().Chatroom() + " " + "sometopic-foorganization@kune.ourproject.org");
-//        chatDialog.setWidget(chatroom1);
-//        desktop.addWidget(chatDialog, 20, 20);
-
-        chatroom1.setCaption("sometopic-foorganization@kune.ourproject.org");
-        desktop.addFrame(chatroom1);
-        chatroom1.setVisible(true);
-
-        //GwmUtilities.diplayAtScreenCenter(chatroom1);
+//        ConferenceRoomImpl chatroomControler = new ConferenceRoomImpl("some-room");
+//        ConferenceRoomDialogImpl chatroom1 = new ConferenceRoomDialogImpl(chatroomControler);
+//        chatroomControler.init(chatroom1);
+//        chatroom1.setSubject("Welcome to sometopic-foorganization chat room");
+//        ChatroomUser lutherb = new ChatroomUser("luther.b", true);
+//        ChatroomUser anneh = new ChatroomUser("anne.h", false);
+//        ChatroomUser anneh1 = new ChatroomUser("anne.h1", false);
+//        ChatroomUser anneh2 = new ChatroomUser("anne.h2", false);
+//        ChatroomUser anneh3 = new ChatroomUser("anne.h3", false);
+//        ChatroomUser anneh4 = new ChatroomUser("anne.h4", false);
+//        ChatroomUser anneh5 = new ChatroomUser("anne.h5", false);
+//        ChatroomUser anneh6 = new ChatroomUser("anne.h6", false);
+//        ChatroomUser anneh7 = new ChatroomUser("anne.h7", false);
+//        ChatroomUser anneh8 = new ChatroomUser("anne.h8", false);
+//        ChatroomUser anneh9 = new ChatroomUser("anne.h9", false);
+//        ChatroomUser anneh10 = new ChatroomUser("anne.h10", false);
+//        ChatroomUser anneh11 = new ChatroomUser("anne.h11", false);
+//        ChatroomUser anneh12 = new ChatroomUser("anne.h12", false);
+//        ChatroomUser anneh13 = new ChatroomUser("anne.h13", false);
+//        ChatroomUser anneh14 = new ChatroomUser("anne.h14", false);
+//        chatroom1.addUser(lutherb);
+//        chatroom1.addUser(anneh);
+//        chatroom1.addUser(anneh1);
+//        chatroom1.addUser(anneh2);
+//        chatroom1.addUser(anneh3);
+//        chatroom1.addUser(anneh4);
+//        chatroom1.addUser(anneh5);
+//        chatroom1.addUser(anneh6);
+//        chatroom1.addUser(anneh7);
+//        chatroom1.addUser(anneh8);
+//        chatroom1.addUser(anneh9);
+//        chatroom1.addUser(anneh10);
+//        chatroom1.addUser(anneh11);
+//        chatroom1.addUser(anneh12);
+//        chatroom1.addUser(anneh13);
+//        chatroom1.addUser(anneh14);
+//        chatroom1.delUser(anneh13);
+//        chatroom1.addToConversation("luther.b", new HTML("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui."));
+//        chatroom1.addToConversation("anne.h", new HTML("Lorem ipsum dolor sit amet?"));
+//        chatroom1.addToConversation("luther.b", new HTML("yes, lorem ipsum dolor sit amet"));
+//        Date date = new Date(2007, 07, 04, 0, 52);
+//        chatroom1.addTimeDelimiter(date.toLocaleString());
+//        chatroom1.addToConversation("luther.b", new HTML("Lorem ipsum dolor sit amet"));
+//        chatroom1.addToConversation("anne.h2", new HTML("Lorem ipsum dolor sit amet?"));
+//        chatroom1.addToConversation("anne.h3", new HTML("Lorem ipsum dolor sit amet?"));
+//        chatroom1.addToConversation("anne.h9", new HTML("Lorem ipsum dolor sit amet?"));
+//        chatroom1.addToConversation("anne.h8", new HTML("Lorem ipsum dolor sit amet?"));
+//        chatroom1.addToConversation("luther.b", new HTML("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. Nunc sit amet neque. Ut id dui."));
+//        chatroom1.addToConversation("anne.h", new HTML("Lorem ipsum dolor sit amet?"));
+//        chatroom1.setCaption("sometopic-foorganization@kune.ourproject.org");
+//        desktop.addFrame(chatroom1);
+//        chatroom1.setVisible(true);
 
 //      final Wizard wizard = new Wizard();
 //      wizard.add("New Project", (Widget) new HTML("Create here a project"), false, true, true, false);
@@ -411,6 +406,63 @@ WindowResizeListener {
         kuneDesktopPanel.contextContents.add(new HTML(Trans.t("Cancel")));
         kuneDesktopPanel.contextContents.add(new HTML(Trans.t("Prueba de algo inexistente")));
 
+        final TextBox roomName = new TextBox();
+        final TextBox nickName = new TextBox();
+        roomName.setText("chatroom");
+        nickName.setText("luther.b");
+        CustomPushButton login = new CustomPushButton("Login xmpp", CustomPushButton.SMALL);
+        CustomPushButton createRoom = new CustomPushButton("Create room", CustomPushButton.SMALL);
+        CustomPushButton joinRoom = new CustomPushButton("Join room", CustomPushButton.SMALL);
+
+        login.addClickListener(new ClickListener() {
+            public void onClick(Widget arg0) {
+                XmppService.App.getInstance().login(new AsyncCallback() {
+                    public void onSuccess(Object result) {
+                        // Do nothing
+                    }
+                    public void onFailure(Throwable exception) {
+                        SiteMessageDialog.get().setMessageError("Error login in instant messaging system: " + exception.toString());
+                    }});
+            }
+        });
+
+        createRoom.addClickListener(new ClickListener() {
+            public void onClick(Widget arg0) {
+                XmppService.App.getInstance().createRoom(nickName.getText(), roomName.getText(), new AsyncCallback() {
+                    public void onSuccess(Object result) {
+                        // Do nothing
+                    }
+                    public void onFailure(Throwable exception) {
+                        SiteMessageDialog.get().setMessageError("Error creating room: " + exception.toString());
+                    }});
+            }
+        });
+
+        joinRoom.addClickListener(new ClickListener() {
+            public void onClick(Widget arg0) {
+                XmppService.App.getInstance().joinRoom(roomName.getText(),
+                        nickName.getText(), new AsyncCallback() {
+                    public void onSuccess(Object result) {
+                        ConferenceRoomImpl chatroomControler = new ConferenceRoomImpl(roomName.getText(), nickName.getText());
+                        ConferenceRoomDialogImpl chatroom = new ConferenceRoomDialogImpl(chatroomControler);
+                        chatroomControler.init(chatroom);
+                        ChatroomUser user = new ChatroomUser(nickName.getText(), true);
+                        chatroom.addUser(user);
+                        chatroom.setCaption(roomName.getText() + "@conference.ourproject.org");
+                        desktop.addFrame(chatroom);
+                        chatroom.setVisible(true);
+                    }
+                    public void onFailure(Throwable exception) {
+                        SiteMessageDialog.get().setMessageError("Error joining chat room: " + exception.toString());
+                    }});
+            }
+        });
+        kuneDesktopPanel.contextContents.add(new BorderPanel(roomName, CustomPushButton.VERSPACESMALL, 0, 0, 0));
+        kuneDesktopPanel.contextContents.add(new BorderPanel(nickName, CustomPushButton.VERSPACESMALL, 0, 0, 0));
+        kuneDesktopPanel.contextContents.add(new BorderPanel(login, CustomPushButton.VERSPACESMALL, 0, 0, 0));
+        kuneDesktopPanel.contextContents.add(new BorderPanel(createRoom, CustomPushButton.VERSPACESMALL, 0, 0, 0));
+        kuneDesktopPanel.contextContents.add(new BorderPanel(joinRoom, CustomPushButton.VERSPACESMALL, 0, 0, 0));
+
     }
 
     private void initTest() {
@@ -420,6 +472,15 @@ WindowResizeListener {
         Session session = new Session();
         session.currentUser = user;
         session.currentGroup = group;
+
+        XmppService.App.getInstance().login(new AsyncCallback() {
+            public void onSuccess(Object result) {
+                // Do nothing
+            }
+            public void onFailure(Throwable exception) {
+                SiteMessageDialog.get().setMessageError("Error login in instant messaging system: " + exception.toString());
+            }});
+
         kuneDesktopPanel.contextBottomBar.setGroup(group);
         kuneDesktopPanel.entityLogo.setDefaultText(group.getLongName());
 

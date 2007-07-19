@@ -36,7 +36,7 @@ public class ChatRoomTest extends GWTTestCase {
     }
 
     public void testUserLlist() {
-        ConferenceRoomImpl chatroomControler = new ConferenceRoomImpl();
+        ConferenceRoomImpl chatroomControler = new ConferenceRoomImpl("chat-room", "luther.b");
         ConferenceRoomDialogImpl chat = new ConferenceRoomDialogImpl(chatroomControler);
         chatroomControler.init(chat);
         ChatroomUser anne = new ChatroomUser("anne.h", false);

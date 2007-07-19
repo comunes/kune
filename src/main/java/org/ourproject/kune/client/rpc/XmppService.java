@@ -27,13 +27,17 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 public interface XmppService extends RemoteService {
 
-    void createRoom(String Owner, String RoomName) throws SerializableException;
+    void createRoom(String owner, String roomName) throws SerializableException;
 
-    void joinRoom(String RoomName, String UserName) throws SerializableException;
+    void joinRoom(String roomName, String nick) throws SerializableException;
+
+    void leaveRoom(String roomName) throws SerializableException;
 
     void changeSubject(String subject) throws SerializableException;
 
-    void sendMessage(String message) throws SerializableException;
+    void sendMessage(String roomName, String message) throws SerializableException;
+
+    void login() throws SerializableException;
 
     /** annotated for a list of Strings
      * @gwt.typeArgs <org.ourproject.kune.client.model.Event>

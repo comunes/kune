@@ -33,9 +33,19 @@ public class ConferenceRoomImpl implements ConferenceRoom {
 
     private EventSubscription subscription = null;
 
+    private String roomName;
+
+    private String nickName;
+
+    public ConferenceRoomImpl(String roomName, String nickName) {
+        this.roomName = roomName;
+        this.nickName = nickName;
+    }
+
     public void init(ConferenceRoomDialog room) {
         this.room = room;
-        subscription = KuneFactory.get().getEventHub().subscribe("org.ourproject.kune.muc.room", new EventSubscriber() {
+        subscription = KuneFactory.get().getEventHub().subscribe("org.ourproject.kune.muc.room"
+                + "." + roomName, new EventSubscriber() {
             public void onEvent(Event event) {
                 processMessage(event.getPublisherData());
             }} );
@@ -49,7 +59,7 @@ public class ConferenceRoomImpl implements ConferenceRoom {
         sentence = sentence.replaceAll("<", "&lt;");
         sentence = sentence.replaceAll(">", "&gt;");
         sentence = sentence.replaceAll("\n", "<br>\n");
-        XmppService.App.getInstance().sendMessage(sentence, new AsyncCallback() {
+        XmppService.App.getInstance().sendMessage(roomName, sentence, new AsyncCallback() {
             public void onSuccess(Object result) {
                 // Do nothing
             }
@@ -69,6 +79,21 @@ public class ConferenceRoomImpl implements ConferenceRoom {
     public void onClose() {
         KuneFactory.get().getEventHub().unSubscribe(subscription);
         subscription = null;
+        XmppService.App.getInstance().leaveRoom(roomName, new AsyncCallback() {
+            public void onSuccess(Object result) {
+                // Do nothing
+            }
+            public void onFailure(Throwable exception) {
+                SiteMessageDialog.get().setMessageError("Error leaving room: " + exception.toString());
+            }});
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public String getNickName() {
+        return nickName;
     }
 
 }

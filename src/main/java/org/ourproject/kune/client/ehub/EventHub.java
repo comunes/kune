@@ -91,8 +91,8 @@ public class EventHub {
     public void localPublish(Event event) {
         List subscribersList = (List) eventSubscribers.get(event.getName());
         if (subscribersList == null) {
-            SiteMessageDialog.get().setMessageError("Nobody subscribed to this event");
-            GWT.log("Subscribers of event: \'" + event.getName() + "'", null);
+            SiteMessageDialog.get().setMessageError("Nobody subscribed to the event: " + event.getName());
+            GWT.log("Nobody subscribed to the event: " + event.getName(), null);
         }
         else {
             for (Iterator i = subscribersList.iterator(); i.hasNext();) {
@@ -126,9 +126,6 @@ public class EventHub {
 
     private void processRemoteEvents(Object result) {
         List events = (List) result;
-        String message = "Success in getting " +
-            + events.size() + " events";
-        SiteMessageDialog.get().setMessageInfo(message);
         for (Iterator it = events.iterator(); it.hasNext();) {
             Event currentEvent = ((Event) it.next());
 

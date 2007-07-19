@@ -70,17 +70,17 @@
 		<dependency>
 			<groupId>org.jivesoftware.smack</groupId>
 			<artifactId>smack</artifactId>
-			<version>3.0.0</version>
+			<version>3.0.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jivesoftware.smackx</groupId>
 			<artifactId>smackx</artifactId>
-			<version>3.0.0</version>
+			<version>3.0.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jivesoftware.smackx.debugger</groupId>
 			<artifactId>smackx-debugger</artifactId>
-			<version>3.0.0</version>
+			<version>3.0.4</version>
 		</dependency>
 
 		<!-- jackrabbit -->

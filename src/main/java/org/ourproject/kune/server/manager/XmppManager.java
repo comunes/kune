@@ -19,16 +19,24 @@ package org.ourproject.kune.server.manager;
 
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
+import org.ourproject.kune.server.xmpp.ServerGroupChat;
 
 
 public interface XmppManager {
-    public XMPPConnection connectAndLogin(String login, String pass);
+    public XMPPConnection connectAndLogin(String session, String login, String pass) throws XMPPException;
 
-    public XMPPConnection getConnection(String login) throws XMPPException;
+    public XMPPConnection getConnection(String session) throws XMPPException;
 
-    public void createRoom(String Owner, String RoomName);
+    public void createRoom(String session, String roomName, String owner) throws XMPPException;
 
-    public void joinRoom(String RoomName, String UserName);
+    public ServerGroupChat getGroupChat(String session, String roomName) throws XMPPException;
+
+    public void joinRoom(String session, String roomName, String nick) throws XMPPException;
+
+    public void leaveRoom(String session, String roomName) throws XMPPException;
 
     public void changeSubject(String subject);
+
+    public void sendMessage(String session, String roomName, String body) throws XMPPException;
+
 }

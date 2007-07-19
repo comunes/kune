@@ -1,3 +1,7 @@
+2007-07-19  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	* XmppManagerImpl.java: first xmpp integration tests
+
 2007-07-16  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* EventHub.java: new EventHub class to permit transmite from the server events to subscribed objects in client
 	* AsyncRemoteServiceServlet.java: gwt 1.4 adaptation of jetty + continuations remote event management

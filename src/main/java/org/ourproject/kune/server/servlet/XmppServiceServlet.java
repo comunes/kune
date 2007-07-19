@@ -20,22 +20,34 @@ package org.ourproject.kune.server.servlet;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.ServletException;
 
-import org.apache.commons.logging.Log;
 import org.ourproject.kune.client.model.Event;
 import org.ourproject.kune.client.rpc.XmppService;
-import org.ourproject.kune.server.log.Logger;
+import org.ourproject.kune.server.KuneModule;
 import org.ourproject.kune.server.manager.XmppManager;
 
 import com.google.gwt.user.client.rpc.SerializableException;
+import com.google.inject.Guice;
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 public class XmppServiceServlet extends AsyncRemoteServiceServlet implements XmppService {
+
     private XmppManager xmppManager;
-    private Log log = Logger.getLogger();
 
     private static final long serialVersionUID = 1L;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        inject();
+    }
+
+    private void inject() {
+        Injector injector = Guice.createInjector(new KuneModule());
+        injector.injectMembers(this);
+    }
 
     public void changeSubject(String subject) throws SerializableException {
         try {
@@ -45,17 +57,33 @@ public class XmppServiceServlet extends AsyncRemoteServiceServlet implements Xmp
         }
     }
 
-    public void createRoom(String Owner, String RoomName) throws SerializableException  {
+    public void createRoom(String owner, String roomName) throws SerializableException  {
         try {
-            xmppManager.createRoom(Owner, RoomName);
+            xmppManager.createRoom(this.getThreadLocalRequest().getSession().getId(), owner, roomName);
         } catch (Exception e) {
             throw new SerializableException(e.toString());
         }
     }
 
-    public void joinRoom(String RoomName, String UserName) throws SerializableException  {
+    public void joinRoom(String roomName, String nick) throws SerializableException  {
         try {
-            xmppManager.joinRoom(RoomName, UserName);
+            xmppManager.joinRoom(this.getThreadLocalRequest().getSession().getId(), roomName, nick);
+        } catch (Exception e) {
+            throw new SerializableException(e.toString());
+        }
+    }
+
+    public void leaveRoom(String roomName) throws SerializableException {
+        try {
+            xmppManager.leaveRoom(this.getThreadLocalRequest().getSession().getId(), roomName);
+        } catch (Exception e) {
+            throw new SerializableException(e.toString());
+        }
+    }
+
+    public void login() throws SerializableException  {
+        try {
+            xmppManager.connectAndLogin(this.getThreadLocalRequest().getSession().getId(), "test2345", "test2345");
         } catch (Exception e) {
             throw new SerializableException(e.toString());
         }
@@ -63,7 +91,6 @@ public class XmppServiceServlet extends AsyncRemoteServiceServlet implements Xmp
 
     public List<Event> getEvents() throws SerializableException {
         try {
-            log.debug("getEvents called");
             return EventQueueCont.getInstance().getEvents(this.getThreadLocalRequest());
             // return EventQueue.getInstance().getEvents(this.getThreadLocalRequest().getSession().getId());
         } catch (Exception e) {
@@ -76,19 +103,15 @@ public class XmppServiceServlet extends AsyncRemoteServiceServlet implements Xmp
                 throw (RuntimeException) e;
             }
             else {
-                log.debug("getEvents exception: " + e.toString());
                 throw new SerializableException(e.toString());
             }
         }
     }
 
-    public void sendMessage(String message) throws SerializableException {
+    public void sendMessage(String roomName, String message) throws SerializableException {
         try {
-            log.debug("sendMessage called");
-            final HttpSession session = this.getThreadLocalRequest().getSession();
-            EventQueueCont.getInstance().addEvent(session.getId(), new Event("org.ourproject.kune.muc.room", message));
+            xmppManager.sendMessage(this.getThreadLocalRequest().getSession().getId(), roomName, message);
         } catch (Exception e) {
-            log.debug("sendMessage exception:" + e.toString());
             throw new SerializableException(e.toString());
         }
     }
