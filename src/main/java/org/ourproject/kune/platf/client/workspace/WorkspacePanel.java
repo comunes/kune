@@ -1,6 +1,8 @@
 package org.ourproject.kune.platf.client.workspace;
 
 
+import org.ourproject.kune.platf.client.Translate;
+
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Hyperlink;
@@ -39,6 +41,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 
         public EntityLogo() {
             this("");
+            this.addStyleName("kune-EntityLogo");
         }
 
         public EntityLogo(String title) {
@@ -59,6 +62,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
             defTextLogoVP.setBorderWidth(0);
             defTextLogoVP.setCellHorizontalAlignment(defTextPutYourLogoHL, HasHorizontalAlignment.ALIGN_RIGHT);
             defTextLogoVP.setSpacing(0);
+            Translate.putYourLogo();
             //TODO: defTextPutYourLogoHL.setText(Trans.constants().PutYourLogoHere());
 
             // TODO: link to configure the logo

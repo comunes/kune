@@ -1,6 +1,7 @@
 package org.ourproject.kune.app.client;
 
 import org.gwm.client.impl.DefaultGDesktopPane;
+import org.ourproject.kune.platf.client.Kune;
 import org.ourproject.kune.platf.client.KuneTool;
 import org.ourproject.kune.platf.client.workspace.WorkspaceView;
 
