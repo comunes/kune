@@ -159,13 +159,14 @@
 			<version>2.2</version>
 			<scope>test</scope>
 		</dependency>
+		<!--
 		<dependency>
 			<groupId>com.google</groupId>
 			<artifactId>gwt-dev</artifactId>
 			<version>1.4.10</version>
 			<scope>test</scope>
 		</dependency>
-
+		-->
 
 	</dependencies>
 	<!-- http://gwt-maven.googlecode.com/svn/docs/maven-googlewebtoolkit2-plugin/index.html -->
