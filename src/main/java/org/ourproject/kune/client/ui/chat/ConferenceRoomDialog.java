@@ -26,7 +26,9 @@ public interface ConferenceRoomDialog {
 
 	void addTimeDelimiter(String dateTime);
 
-	void addToConversation(String nick, HTML chat);
+    void addSrvMsgToConversation(HTML message);
+
+    void addToConversation(String nick, HTML chat);
 
 	void addUser(ChatroomUser user);
 

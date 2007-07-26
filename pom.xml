@@ -40,14 +40,6 @@
 			<artifactId>gwt-servlet</artifactId>
 			<version>1.4.10</version>
 		</dependency>
-		<!-- http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html -->
-		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>${google.webtoolkit.devjar}</artifactId>
-			<version>1.4.10</version>
-			<scope>system</scope>
-      <systemPath>${google.webtoolkit.home}/${google.webtoolkit.devjar}.jar</systemPath>
-		</dependency>
 		<!--
 			<dependency>
 			<groupId>com.googlecode.gwtx</groupId>
@@ -277,6 +269,10 @@
 				</configuration>
 			</plugin>
 			<plugin>
+        <!--
+        http://www.mortbay.org/maven-plugin/index.html
+				http://www.mortbay.org/maven-plugin/run-mojo.html
+        -->
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
 				<version>6.1.3</version>

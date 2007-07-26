@@ -17,6 +17,10 @@
  */
 package org.ourproject.kune.client.ui.chat;
 
+
+import java.util.HashMap;
+import java.util.Map;
+
 import org.ourproject.kune.client.KuneFactory;
 import org.ourproject.kune.client.Session;
 import org.ourproject.kune.client.ehub.EventSubscriber;
@@ -33,6 +37,10 @@ public class ConferenceRoomImpl implements ConferenceRoom {
 
     private EventSubscription subscription = null;
 
+    private EventSubscription subscription2 = null;
+
+    private EventSubscription subscription3 = null;
+
     private String roomName;
 
     private String nickName;
@@ -44,10 +52,21 @@ public class ConferenceRoomImpl implements ConferenceRoom {
 
     public void init(ConferenceRoomDialog room) {
         this.room = room;
+        //FIXME: refactor this
         subscription = KuneFactory.get().getEventHub().subscribe("org.ourproject.kune.muc.room"
                 + "." + roomName, new EventSubscriber() {
             public void onEvent(Event event) {
                 processMessage(event.getPublisherData());
+            }} );
+        subscription2 = KuneFactory.get().getEventHub().subscribe("org.ourproject.kune.muc.room.server-msg"
+                + "." + roomName, new EventSubscriber() {
+            public void onEvent(Event event) {
+                processServerMessage(event.getPublisherData());
+            }} );
+        subscription3 = KuneFactory.get().getEventHub().subscribe("org.ourproject.kune.muc.room.presence"
+                + "." + roomName, new EventSubscriber() {
+            public void onEvent(Event event) {
+                processPresenceMessage(event.getPublisherData());
             }} );
     }
 
@@ -68,8 +87,23 @@ public class ConferenceRoomImpl implements ConferenceRoom {
             }});
     }
 
-    private void processMessage(String message) {
-        room.addToConversation(Session.get().currentUser.getNickName(), new HTML(message));
+    private void processMessage(Map message) {
+        //FIXME
+        room.addToConversation(Session.get().currentUser.getNickName(), new HTML((String) message.get("body")));
+    }
+
+    private void processServerMessage(Map message) {
+        room.addSrvMsgToConversation(new HTML((String) message.get("server-msg")));
+    }
+
+    private void processPresenceMessage(Map message) {
+        ChatroomUser user = new ChatroomUser((String) message.get("user"), false);
+
+        if (message.get("status") == "joined") {
+            room.addUser(user);
+        } else if (message.get("status") == "left") {
+            room.delUser(user);
+        }
     }
 
     public void onMessage(String nick, String sentence) {
@@ -78,7 +112,11 @@ public class ConferenceRoomImpl implements ConferenceRoom {
 
     public void onClose() {
         KuneFactory.get().getEventHub().unSubscribe(subscription);
+        KuneFactory.get().getEventHub().unSubscribe(subscription2);
+        KuneFactory.get().getEventHub().unSubscribe(subscription3);
         subscription = null;
+        subscription2 = null;
+        subscription3 = null;
         XmppService.App.getInstance().leaveRoom(roomName, new AsyncCallback() {
             public void onSuccess(Object result) {
                 // Do nothing

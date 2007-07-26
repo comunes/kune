@@ -18,6 +18,8 @@
 package org.ourproject.kune.client.model;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
@@ -27,7 +29,10 @@ public class Event extends Model implements IsSerializable, Cloneable {
 
     private Date timestamp;
 
-    private String publisherData = null;
+    /**
+     * @gwt.typeArgs <java.lang.String, java.lang.String>
+     */
+    private Map publisherData = null;
 
     public Event() {
         timestamp = new Date();
@@ -38,7 +43,7 @@ public class Event extends Model implements IsSerializable, Cloneable {
         this.name = name;
     }
 
-    public Event(String name, String publisherData) {
+    public Event(String name, Map publisherData) {
         this(name);
         this.publisherData = publisherData;
     }
@@ -59,11 +64,11 @@ public class Event extends Model implements IsSerializable, Cloneable {
         this.timestamp = timestamp;
     }
 
-    public String getPublisherData() {
+    public Map getPublisherData() {
         return publisherData;
     }
 
-    public void setPublisherData(String publisherData) {
+    public void setPublisherData(HashMap publisherData) {
         this.publisherData = publisherData;
     }
 

@@ -18,14 +18,12 @@
 
 package org.ourproject.kune.client;
 
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 import org.gwm.client.GDesktopPane;
 import org.gwm.client.impl.DefaultGDesktopPane;
 import org.gwm.client.util.Gwm;
-import org.gwm.client.util.GwmUtilities;
 import org.ourproject.kune.client.model.Group;
 import org.ourproject.kune.client.model.License;
 import org.ourproject.kune.client.model.Rate;
@@ -418,7 +416,7 @@ WindowResizeListener {
             public void onClick(Widget arg0) {
                 XmppService.App.getInstance().login(new AsyncCallback() {
                     public void onSuccess(Object result) {
-                        // Do nothing
+                        SiteMessageDialog.get().setMessage("User logged");
                     }
                     public void onFailure(Throwable exception) {
                         SiteMessageDialog.get().setMessageError("Error login in instant messaging system: " + exception.toString());
@@ -430,7 +428,7 @@ WindowResizeListener {
             public void onClick(Widget arg0) {
                 XmppService.App.getInstance().createRoom(nickName.getText(), roomName.getText(), new AsyncCallback() {
                     public void onSuccess(Object result) {
-                        // Do nothing
+                        SiteMessageDialog.get().setMessage("Room created");
                     }
                     public void onFailure(Throwable exception) {
                         SiteMessageDialog.get().setMessageError("Error creating room: " + exception.toString());

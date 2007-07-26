@@ -305,6 +305,11 @@ public class ConferenceRoomDialogImpl extends KuneDefaultFrame implements Confer
         usersVP.add(userGrid);
     }
 
+    public void addSrvMsgToConversation(HTML message) {
+        conversationVP.add(message);
+        conversationSP.setScrollPosition(conversationVP.getOffsetHeight());
+    }
+
     public void addToConversation(String nick, HTML chat) {
         HorizontalPanel userChat = new HorizontalPanel();
 
