@@ -3,7 +3,7 @@ package org.ourproject.kune.app.client;
 import java.util.List;
 
 import org.gwm.client.impl.DefaultGDesktopPane;
-import org.ourproject.kune.platf.client.KuneModule;
+import org.ourproject.kune.platf.client.KuneTool;
 import org.ourproject.kune.platf.client.workspace.WorkspaceView;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -21,9 +21,9 @@ public class KuneEntryPoint implements EntryPoint, WindowResizeListener {
 	Kune kune = Kune.getInstance();
 	workspace = kune.getWorkspace();
 
-	List modules = kune.getInstalledModules();
+	List modules = kune.getInstalledTools();
 	for (int index = 0; index < modules.size(); index++) {
-	    KuneModule module = (KuneModule) modules.get(index);
+	    KuneTool module = (KuneTool) modules.get(index);
 	    workspace.addTab(module.getName());
 	}
 	
@@ -34,7 +34,7 @@ public class KuneEntryPoint implements EntryPoint, WindowResizeListener {
         Window.enableScrolling(false);
         onWindowResized(Window.getClientWidth(), Window.getClientHeight());
 
-        kune.getDefaultModule().show();
+        kune.getDefaultTool().show();
         
 	RootPanel.get().add(desktop);
     }

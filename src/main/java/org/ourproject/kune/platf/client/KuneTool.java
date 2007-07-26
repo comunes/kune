@@ -1,6 +1,6 @@
 package org.ourproject.kune.platf.client;
 
-public interface KuneModule {
+public interface KuneTool {
     String getName();
     void show();
 }

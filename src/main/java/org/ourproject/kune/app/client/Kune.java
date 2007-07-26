@@ -2,7 +2,7 @@ package org.ourproject.kune.app.client;
 
 import java.util.List;
 
-import org.ourproject.kune.platf.client.KuneModule;
+import org.ourproject.kune.platf.client.KuneTool;
 import org.ourproject.kune.platf.client.workspace.WorkspacePanel;
 
 public class Kune {
@@ -27,11 +27,11 @@ public class Kune {
 	return workspace;
     }
 
-    public List getInstalledModules() {
+    public List getInstalledTools() {
 	return null;
     }
 
-    public KuneModule getDefaultModule() {
+    public KuneTool getDefaultTool() {
 	return null;
     }
 }
