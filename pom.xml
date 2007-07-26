@@ -40,25 +40,13 @@
 			<artifactId>gwt-servlet</artifactId>
 			<version>1.4.10</version>
 		</dependency>
-		<!--
-			<dependency>
-			<groupId>com.googlecode.gwtx</groupId>
-			<artifactId>GWTx</artifactId>
-			<version>20070110</version>
-			</dependency>
-		-->
+
 		<dependency>
 			<groupId>org.gwm</groupId>
 			<artifactId>gwm</artifactId>
 			<version>0.6.6</version>
 		</dependency>
-		<!--
-			<dependency>
-			<groupId>org.gwtwidgets</groupId>
-			<artifactId>gwtWidgets</artifactId>
-			<version>0.1.4</version>
-			</dependency>
-		-->
+
 		<dependency>
 			<groupId>org.jivesoftware.smack</groupId>
 			<artifactId>smack</artifactId>
@@ -136,6 +124,22 @@
 			<version>2.0</version>
 		</dependency>
 
+
+		<!-- jetty dependencies -->
+		<!--   for jetty:continuations: -->
+    <dependency>
+      <groupId>org.mortbay.jetty</groupId>
+      <artifactId>jetty-util</artifactId>
+      <version>6.1.3</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mortbay.jetty</groupId>
+      <artifactId>jetty</artifactId>
+      <version>6.1.3</version>
+      <scope>provided</scope>
+    </dependency>
+
 		<!-- testing dependencies -->
 		<dependency>
 			<groupId>hsqldb</groupId>
@@ -153,22 +157,15 @@
 			<groupId>org.easymock</groupId>
 			<artifactId>easymock</artifactId>
 			<version>2.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google</groupId>
+			<artifactId>gwt-dev</artifactId>
+			<version>1.4.10</version>
+			<scope>test</scope>
 		</dependency>
 
-		<!-- jetty dependencies -->
-		<!--   for jetty:continuations: -->
-    <dependency>
-      <groupId>org.mortbay.jetty</groupId>
-      <artifactId>jetty-util</artifactId>
-      <version>6.1.3</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.mortbay.jetty</groupId>
-      <artifactId>jetty</artifactId>
-      <version>6.1.3</version>
-      <scope>provided</scope>
-    </dependency>
 
 	</dependencies>
 	<!-- http://gwt-maven.googlecode.com/svn/docs/maven-googlewebtoolkit2-plugin/index.html -->
