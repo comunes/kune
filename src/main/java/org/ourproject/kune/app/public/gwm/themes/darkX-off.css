@@ -1,0 +1,229 @@
+/*
+ * Copyright (c) 2006-2007 Luciano Broussal <luciano.broussal AT gmail.com>
+ * (http://www.gwtwindowmanager.org)
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+ .gwm-darkX-off-FrameCaption{
+	width:100%;
+	font-weight:bold;
+	color:#DDDDDD;
+	font-size:10px;
+}
+.gwm-darkX-off-Frame-TopBar{
+  width: 100%;
+  cursor:move;
+}
+
+.gwm-darkX-off-DialogOverlay{
+	background-color: #85BBEF;
+	filter:alpha(opacity=60);
+	-moz-opacity: 	0.6;
+	opacity: 0.6;
+}
+
+.gwm-darkX-off-ActionOverlay{
+	background-color: white;
+	filter:alpha(opacity=15);
+	-moz-opacity: 	0.15;
+	opacity: 0.15;
+}
+
+.gwm-darkX-off-Frame-OutlineDrag{
+	background-color: #85BBEF;
+	filter:alpha(opacity=60);
+	-moz-opacity: 	0.6;
+	opacity: 0.6;
+}
+
+.gwm-darkX-off-FrameContent {
+	overflow:auto;
+	color: #FFFFFF;
+	font-family: Tahoma, Arial, sans-serif;
+	background:#201F1F;
+}
+
+.gwm-darkX-off-DeskTop-MinimizedFrameBar{
+	float:left;
+}
+
+/********************************** MINIMIZED TOPBAR ****************************************/
+
+.gwm-darkX-off-Frame-TopBar-minimized {
+	background: transparent url(darkX-off/t.png) repeat-x 0 0;	
+    background:#C7CBD1;
+    padding: 5px;
+    border: 1px dashed;
+}
+
+.gwm-darkX-off-Frame-TopBar-RestoreButton {
+	width: 23px;
+	height: 23px;
+	background: transparent url(darkX-off/restore-btn.png) no-repeat 0 center;			
+	cursor:pointer;
+	
+}
+
+/***********************************  BORDERS  **********************************************/
+.gwm-darkX-off-FrameBorder-tl {
+  background:  url(darkX-off/tl.png) no-repeat top  left;			
+  width:4px;
+  height:21px;
+}
+
+.gwm-darkX-off-FrameBorder-t {
+  background: transparent url(darkX-off/t.png) repeat-x 0 0;	
+  height:21px;
+}
+
+.gwm-darkX-off-FrameBorder-tr {
+  background: transparent url(darkX-off/tr.png) no-repeat top right;			
+  width:3px;	  
+  height:21px;
+}
+
+.gwm-darkX-off-FrameBorder-l{
+  background: transparent url(darkX-off/l.png) repeat-y ;			
+  width:3px;
+}
+
+.gwm-darkX-off-FrameBorder-r {
+  background: transparent url(darkX-off/r.png) repeat-y top right;			
+  width:3px;
+}
+
+.gwm-darkX-off-FrameBorder-bl{
+  background: transparent url(darkX-off/bl.png) no-repeat 0 0;			
+  width:3px;
+  height:3px;
+  font-size:0px;
+}
+
+.gwm-darkX-off-FrameBorder-b {
+  background: transparent url(darkX-off/b.png) repeat-x 0 0;			
+  height:3px;
+  font-size:1px;
+}
+
+.gwm-darkX-off-FrameBorder-br {
+  background: transparent url(darkX-off/br.png) no-repeat top right;			
+  width:3px;
+  height:3px;
+  font-size:0px;
+}
+
+.gwm-darkX-off-Frame-ResizeButton  {
+  background: transparent url(darkX-off/resize-btn.png) no-repeat top right;			
+  width:3px;
+  height:3px;
+  font-size:0px;
+}
+
+/************************************* BUTTONS ********************************/
+.gwm-darkX-off-Frame-TopBar-CloseButton{
+	width:  21px;
+	height: 21px;
+	background: transparent url(darkX-off/close-btn.png) no-repeat center center;			
+	cursor:pointer;
+}
+
+.gwm-darkX-off-Frame-TopBar-CloseButton-active {
+	width:  21px;
+	height: 21px;
+	background: transparent url(darkX-off/close-btn-on.png) no-repeat  center center;			
+	cursor:pointer;
+}
+
+.gwm-darkX-off-Frame-TopBar-MinimizeButton {
+	width:  21px;
+	height: 21px;
+	background: transparent url(darkX-off/min-btn.png) no-repeat  center center;			
+	cursor:pointer;
+}
+
+.gwm-darkX-off-Frame-TopBar-MinimizeButton-active {
+	width:  21px;
+	height: 21px;
+	background: transparent url(darkX-off/min-btn-on.png) no-repeat  center center;			
+	cursor:pointer;
+}
+
+.gwm-darkX-off-Frame-TopBar-MaximizeButton {
+	width:  21px;
+	height: 21px;
+	background: transparent url(darkX-off/max-btn.png) no-repeat  center center;			
+	cursor:pointer;
+}
+
+.gwm-darkX-off-Frame-TopBar-MaximizeButton-active {
+	width:  21px;
+	height: 21px;
+	background: transparent url(darkX-off/max-btn-on.png) no-repeat  center center;			
+	cursor:pointer;
+}
+
+/* FOR IE */
+* html .gwm-darkX-off-Frame-TopBar-MinimizeButton {
+	background-color: transparent;
+	background-image: none;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="themes/darkX-off/min-btn.png", sizingMethod="crop");
+}
+
+* html .gwm-darkX-off-Frame-TopBar-MinimizeButton-active {
+	background-color: transparent;
+	background-image: none;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="themes/darkX-off/min-btn-on.png", sizingMethod="crop");
+}
+
+* html .gwm-darkX-off-Frame-TopBar-MaximizeButton {
+	background-color: transparent;
+	background-image: none;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="themes/darkX-off/max-btn.png", sizingMethod="crop");
+}
+
+* html .gwm-darkX-off-Frame-TopBar-MaximizeButton-active {
+	background-color: transparent;
+	background-image: none;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="themes/darkX-off/max-btn-on.png", sizingMethod="crop");
+}
+
+* html .gwm-darkX-off-Frame-TopBar-CloseButton {
+	background-color: transparent;
+	background-image: none;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="themes/darkX-off/close-btn.png", sizingMethod="crop");
+}
+
+* html .gwm-darkX-off-Frame-TopBar-CloseButton-active {
+	background-color: transparent;
+	background-image: none;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="themes/darkX-off/close-btn-on.png", sizingMethod="crop");
+}
+
+* html .gwm-darkX-off-Frame-ResizeButton {
+	background-color: transparent;
+	background-image: none;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="themes/darkX-off/resize-btn.png", sizingMethod="crop");
+}
+
+
+
+* html .gwm-darkX-off-Frame-RestoreButton {
+	background-color: transparent;
+	background-image: none;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="themes/darkX-off/max-btn.png", sizingMethod="crop");
+}
+
+
+
+
+

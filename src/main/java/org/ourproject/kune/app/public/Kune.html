@@ -1,60 +1,34 @@
 <html>
-	<head>
-	
-		<!--                                           -->
-		<!-- Any title is fine                         -->
-		<!--                                           -->
-		<title>Wrapper HTML for Kune</title>
+<head>
+<meta name="gwt:property" content="locale=en">
+<link rel="stylesheet" type="text/css" href="css/reset.css">
+<link rel="stylesheet" type="text/css" href="css/fonts-min.css">
+<link rel="stylesheet" href="css/kune.css">
+<link href="gwm/themes/alphacubecustom.css" rel="stylesheet" type="text/css"></link>
+<link href="gwm/themes/alphacubecustom-off.css" rel="stylesheet" type="text/css"></link>
+<link rel="shortcut icon" href="images/favicon.ico" />
+<title>Kune</title>
+</head>
+<body>
+<script language="javascript" src="org.ourproject.kune.Main.nocache.js"></script>
+<iframe id="__gwt_historyFrame" style="width:0;height:0;border:0"></iframe>
 
-		<!--                                           -->
-		<!-- Use normal html, such as style            -->
-		<!--                                           -->
-		<style>
-			body,td,a,div,.p{font-family:arial,sans-serif}
-			div,td{color:#000000}
-			a:link,.w,.w a:link{color:#0000cc}
-			a:visited{color:#551a8b}
-			a:active{color:#ff0000}
-		</style>
-
-		<!--                                           -->
-		<!-- The module reference below is the link    -->
-		<!-- between html and your Web Toolkit module  -->		
-		<!--                                           -->
-		<meta name='gwt:module' content='org.ourproject.kune.app.Kune'>
-		
-	</head>
-
-	<!--                                           -->
-	<!-- The body can have arbitrary html, or      -->
-	<!-- you can leave the body empty if you want  -->
-	<!-- to create a completely dynamic ui         -->
-	<!--                                           -->
-	<body>
-
-		<!--                                            -->
-		<!-- This script is required bootstrap stuff.   -->
-		<!-- You can put it in the HEAD, but startup    -->
-		<!-- is slightly faster if you include it here. -->
-		<!--                                            -->
-		<script language="javascript" src="gwt.js"></script>
-
-		<!-- OPTIONAL: include this if you want history support -->
-		<iframe id="__gwt_historyFrame" style="width:0;height:0;border:0"></iframe>
-
-		<h1>Kune</h1>
-
-		<p>
-			This is an example of a host page for the Kune application. 
-			You can attach a Web Toolkit module to any HTML page you like, 
-			making it easy to add bits of AJAX functionality to existing pages 
-			without starting from scratch.
-		</p>
-
-		<table align=center>
-			<tr>
-				<td id="slot1"></td><td id="slot2"></td>
-			</tr>
-		</table>
-	</body>
+<table id="initialstatusbar" class="kune-sitebar" cellspacing="0"
+	cellpadding="0" border="0" style="height: 16px; width: 100%;">
+	<tbody>
+		<tr>
+			<td height="16" align="left" style="vertical-align: top;"><img
+				class="kune-status" src="images/spin-kune-thund-green.gif"
+				style="height: 16px; width: 16px;" /></td>
+			<td align="left" style="vertical-align: top;">
+			<div class="kune-status">Loading...</div>
+			</td>
+			<td width="100%" height="16" align="left"
+				style="vertical-align: top;">
+			<div class="gwt-HTML" style="height: 16px; width: 100%;"></div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</body>
 </html>

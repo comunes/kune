@@ -1,0 +1,211 @@
+/*
+ * Copyright (c) 2006-2007 Luciano Broussal <luciano.broussal AT gmail.com>
+ * (http://www.gwtwindowmanager.org)
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+ .gwm-mac-FrameCaption{
+	width:100%;
+	font-weight:bold;
+	color:blue;
+	font-size:10px;
+}
+.gwm-mac-Frame-TopBar{
+  width: 100%;
+  cursor:move;
+}
+
+.gwm-mac-DialogOverlay{
+	background-color: #666666;
+	filter:alpha(opacity=0);
+	-moz-opacity: 0;
+	opacity: 0;
+}
+
+.gwm-mac-ActionOverlay{
+	background-color: #666666;
+	filter:alpha(opacity=0);
+	-moz-opacity: 0;
+	opacity: 0;
+}
+
+.gwm-mac-Frame-OutlineDrag{
+	background-color: #85BBEF;
+	filter:alpha(opacity=60);
+	-moz-opacity: 	0.6;
+	opacity: 0.6;
+}
+
+.gwm-mac-FrameContent {
+	overflow:auto;
+	color: #000;
+	font-family: Tahoma, Arial, sans-serif;
+	background:#FDFDFD;
+}
+
+.gwm-mac-DeskTop-MinimizedFrameBar{
+	float:left;
+}
+
+/********************************** MINIMIZED TOPBAR ****************************************/
+
+.gwm-mac-Frame-TopBar-minimized {
+	background: transparent url(mac/t.gif) repeat-x 0 0;	
+	background:#C7CBD1;
+	padding: 5px;
+	border: 1px dashed;
+}
+
+.gwm-mac-Frame-TopBar-RestoreButton {
+	width: 23px;
+	height: 23px;
+	background: transparent url(mac/restore-btn.gif) no-repeat 0 center;			
+	cursor:pointer;
+	
+}
+
+/***********************************  BORDERS  **********************************************/
+.gwm-mac-FrameBorder-tl {
+  background:  url(mac/tl.gif) no-repeat top  left;			
+  width:9px;
+  height:23px;
+}
+
+.gwm-mac-FrameBorder-t {
+  background: transparent url(mac/t.gif) repeat-x 0 0;	
+  height:23px;
+}
+
+.gwm-mac-FrameBorder-tr {
+  background: transparent url(mac/tr.gif) no-repeat top right;			
+  width:9px;	  
+  height:23px;
+}
+
+.gwm-mac-FrameBorder-l{
+  background: transparent url(mac/l.gif) repeat-y ;			
+  background-color:#FFFFFF;
+  width:2px;
+}
+
+.gwm-mac-FrameBorder-r {
+  background: transparent url(mac/r.gif) repeat-y top right;			
+  background-color:#FFFFFF;
+  width:2px;
+}
+
+.gwm-mac-FrameBorder-bl{
+  background: transparent url(mac/bl.gif) no-repeat 0 0;			
+  width:9px;
+  height:19px;
+  font-size:0px;
+}
+
+.gwm-mac-FrameBorder-b {
+  background: transparent url(mac/b.gif) repeat-x 0 0;			
+  height:19px;
+  font-size:1px;
+}
+
+.gwm-mac-FrameBorder-br {
+  background: transparent url(mac/br.gif) no-repeat top right;			
+  width:9px;
+  height:19px;
+  font-size:0px;
+}
+
+.gwm-mac-Frame-ResizeButton  {
+  background: transparent url(mac/resize-btn.gif) no-repeat top right;			
+  width:9px;
+  height:19px;
+  cursor:se-resize;	
+  font-size:0px;
+}
+
+/************************************* BUTTONS ********************************/
+.gwm-mac-Frame-TopBar-CloseButton{
+	width: 14px;
+	height: 15px;
+	margin-left:4px;
+	background: transparent url(mac/close-btn.gif) no-repeat center center;			
+	cursor:pointer;
+
+}
+
+.gwm-mac-Frame-TopBar-CloseButton-active {
+	width: 14px;
+	height: 15px;
+	margin-left:4px;
+	background: transparent url(mac/close-btn-on.gif) no-repeat  center center;			
+	cursor:pointer;
+}
+
+.gwm-mac-Frame-TopBar-MinimizeButton {
+	width: 14px;
+	height: 15px;
+	margin-left:4px;
+	background: transparent url(mac/min-btn.gif) no-repeat  center center;			
+	cursor:pointer;
+}
+
+.gwm-mac-Frame-TopBar-MinimizeButton-active {
+	width: 14px;
+	height: 15px;
+	margin-left:4px;
+	background: transparent url(mac/min-btn-on.gif) no-repeat  center center;			
+	cursor:pointer;
+}
+
+.gwm-mac-Frame-TopBar-MaximizeButton {
+	width: 14px;
+	height: 15px;
+	margin-left:4px;
+	background: transparent url(mac/max-btn.gif) no-repeat  center center;			
+	cursor:pointer;
+}
+
+.gwm-mac-Frame-TopBar-MaximizeButton-active {
+	width: 14px;
+	height: 15px;
+	margin-left:4px;
+	background: transparent url(mac/max-btn-on.gif) no-repeat  center center;			
+	cursor:pointer;
+}
+
+
+ /**************************************   DESKTOP **************************/
+ .gwm-mac-GDesktopPane{
+	background-image: url("mac/desktop-bg.jpg");
+  	overflow: hidden;
+  	width: 100%;
+  	height:100%;
+}
+.gwm-mac-GDesktopPane-FrameContainer{
+	overflow: hidden;
+  	width: 100%;
+  	height: 100%;
+}
+
+
+.gwm-mac-GDesktopPane-TaskBar{
+	background-color: #EFEFFF;
+	filter:alpha(opacity=80);
+	-moz-opacity: 0.8;
+	opacity: 0.8;
+
+	height:30px;
+	align-text:left;
+}
+
+
+

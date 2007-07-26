@@ -1,0 +1,181 @@
+/*
+ * Copyright (c) 2006-2007 Luciano Broussal <luciano.broussal AT gmail.com>
+ * (http://www.gwtwindowmanager.org)
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+ .gwm-citrus-off-FrameCaption{
+	width:100%;
+	font-weight:bold;
+	color:#AAAAAA;
+	font-size:10px;
+}
+
+.gwm-citrus-off-Frame-TopBar {
+  width: 100%;
+  cursor:move;
+}
+
+.gwm-citrus-off-DialogOverlay{
+	background-color: #85BBEF;
+	filter:alpha(opacity=60);
+	-moz-opacity: 	0.6;
+	opacity: 0.6;
+}
+
+.gwm-citrus-off-Frame-OutlineDrag{
+	background-color: #85BBEF;
+	filter:alpha(opacity=60);
+	-moz-opacity: 	0.6;
+	opacity: 0.6;
+}
+
+.gwm-citrus-off-FrameContent {
+	overflow:auto;
+	color: #000;
+	font-family: Tahoma, Arial, sans-serif;
+	background:#FDFDFD;
+}
+
+.gwm-citrus-off-DeskTop-MinimizedFrameBar{
+	float:left;
+}
+
+/********************************** MINIMIZED TOPBAR ****************************************/
+
+.gwm-citrus-off-Frame-TopBar-minimized {
+	  background: transparent url(citrus-off/t.gif) repeat-x 0 0;	
+      background:#C7CBD1;
+      padding: 5px;
+      border:1px solid #8F9ACA;
+      font-weight:bold;
+	  color:#14316B;
+	  font-size:10px;
+}
+
+.gwm-citrus-off-Frame-TopBar-RestoreButton {
+	width: 25px;
+	height: 21px;
+	background: transparent url(citrus-off/restore-btn.gif) no-repeat 0 center;			
+	cursor:pointer;
+	
+}
+
+/***********************************  BORDERS  **********************************************/
+.gwm-citrus-off-FrameBorder-tl {
+  background:  url(citrus-off/tl.gif) no-repeat top  left;			
+  width:9px;
+  height:15px;
+}
+
+.gwm-citrus-off-FrameBorder-t {
+  background: transparent url(citrus-off/t.gif) repeat-x 0 0;	
+  height:15px;
+}
+
+.gwm-citrus-off-FrameBorder-tr {
+  background: transparent url(citrus-off/tr.gif) no-repeat top right;			
+  width:9px;	  
+  height:15px;
+}
+
+.gwm-citrus-off-FrameBorder-l{
+  background: transparent url(citrus-off/l.gif) repeat-y ;			
+  width:9px;
+  background-color:white;
+}
+
+
+.gwm-citrus-off-FrameBorder-r {
+  background: transparent url(citrus-off/r.gif) repeat-y top right;			
+  width:9px;
+  background-color:white;	  
+}
+
+
+.gwm-citrus-off-FrameBorder-bl{
+  background: transparent url(citrus-off/bl.gif) no-repeat 0 0;			
+  width:9px;
+  height:15px;
+  font-size:0px;
+}
+
+.gwm-citrus-off-FrameBorder-b {
+  background: transparent url(citrus-off/b.gif) repeat-x 0 0;			
+  height:15px;
+  font-size:1px;
+}
+
+.gwm-citrus-off-FrameBorder-br {
+  background: transparent url(citrus-off/br.gif) no-repeat top right;			
+  width:9px;
+  height:15px;
+  font-size:0px;
+}
+
+.gwm-citrus-off-Frame-ResizeButton  {
+  background: transparent url(citrus-off/resize-btn.gif) no-repeat top right;			
+  width:9px;
+  height:15px;
+  font-size:0px;
+}
+
+/************************************* BUTTONS ********************************/
+.gwm-citrus-off-Frame-TopBar-CloseButton{
+	width: 25px;
+	height: 6px;
+	background: transparent url(citrus-off/close-btn.gif) no-repeat center center;			
+	margin:0px 1px;
+	cursor:pointer;
+
+}
+
+.gwm-citrus-off-Frame-TopBar-CloseButton-active {
+	width: 25px;
+	height: 6px;
+	background: transparent url(citrus-off/close-btn-on.gif) no-repeat  center center;			
+	margin:0px 1px;
+	cursor:pointer;
+}
+
+.gwm-citrus-off-Frame-TopBar-MinimizeButton {
+	width: 25px;
+	height: 6px;
+	background: transparent url(citrus-off/min-btn.gif) no-repeat  center center;			
+	margin:0px 1px;
+	cursor:pointer;
+}
+
+.gwm-citrus-off-Frame-TopBar-MinimizeButton-active {
+	width: 25px;
+	height: 6px;
+	background: transparent url(citrus-off/min-btn-on.gif) no-repeat  center center;			
+	margin:0px 1px;
+	cursor:pointer;
+}
+
+.gwm-citrus-off-Frame-TopBar-MaximizeButton {
+	width: 25px;
+	height: 6px;
+	background: transparent url(citrus-off/max-btn.gif) no-repeat  center center;			
+	margin:0px 1px;
+	cursor:pointer;
+}
+
+.gwm-citrus-off-Frame-TopBar-MaximizeButton-active {
+	width: 25px;
+	height: 6px;
+	background: transparent url(citrus-off/max-btn-on.gif) no-repeat  center center;			
+	margin:0px 1px;
+	cursor:pointer;
+}

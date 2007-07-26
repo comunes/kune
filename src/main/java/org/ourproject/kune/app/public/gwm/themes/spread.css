@@ -1,0 +1,200 @@
+/*
+ * Copyright (c) 2006-2007 Luciano Broussal <luciano.broussal AT gmail.com>
+ * (http://www.gwtwindowmanager.org)
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+ .gwm-spread-FrameCaption{
+	width:100%;
+	font-weight:bold;
+	color:green;
+	font-size:10px;
+}
+.gwm-spread-Frame-TopBar{
+  width: 100%;
+  cursor:move;
+}
+
+.gwm-spread-DialogOverlay{
+	background-color: green;
+	filter:alpha(opacity=60);
+	-moz-opacity: 	0.6;
+	opacity: 0.6;
+}
+
+.gwm-spread-ActionOverlay{
+	background-color: green;
+	filter:alpha(opacity=15);
+	-moz-opacity: 	0.15;
+	opacity: 0.15;
+}
+
+.gwm-spread-Frame-OutlineDrag{
+	background-color: #85BBEF;
+	filter:alpha(opacity=60);
+	-moz-opacity: 	0.6;
+	opacity: 0.6;
+}
+
+.gwm-spread-FrameContent {
+	overflow:auto;
+	color: #000;
+	font-family: Tahoma, Arial, sans-serif;
+	background:#A8E606;
+}
+
+.gwm-spread-DeskTop-MinimizedFrameBar{
+	float:left;
+}
+
+/********************************** MINIMIZED TOPBAR ****************************************/
+
+.gwm-spread-Frame-TopBar-minimized {
+	background: transparent url(spread/t.gif) repeat-x 0 0;	
+    background:#C7CBD1;
+    padding: 5px;
+    border: 1px dashed;
+}
+
+.gwm-spread-Frame-TopBar-RestoreButton {
+	width: 23px;
+	height: 23px;
+	background: transparent url(spread/restore-btn.gif) no-repeat 0 center;			
+	cursor:pointer;
+	
+}
+
+/***********************************  BORDERS  **********************************************/
+.gwm-spread-FrameBorder-tl {
+  background:  url(spread/tl.gif) no-repeat top  left;			
+  width:7px;
+  height:25px;
+}
+
+.gwm-spread-FrameBorder-t {
+  background: transparent url(spread/t.gif) repeat-x 0 0;	
+  height:25px;
+}
+
+.gwm-spread-FrameBorder-tr {
+  background: transparent url(spread/tr.gif) no-repeat top right;			
+  width:7px;	  
+  height:25px;
+}
+
+.gwm-spread-FrameBorder-l{
+  background: transparent url(spread/l.gif) repeat-y ;			
+  width:7px;
+}
+
+.gwm-spread-FrameBorder-r {
+  background: transparent url(spread/r.gif) repeat-y top right;			
+  width:7px;
+}
+
+.gwm-spread-FrameBorder-bl{
+  background: transparent url(spread/bl.gif) no-repeat 0 0;			
+  width:7px;
+  height:7px;
+  font-size:0px;
+}
+
+.gwm-spread-FrameBorder-b {
+  background: transparent url(spread/b.gif) repeat-x 0 0;			
+  height:7px;
+  font-size:1px;
+}
+
+.gwm-spread-FrameBorder-br {
+  background: transparent url(spread/br.gif) no-repeat top right;			
+  width:7px;
+  height:7px;
+  font-size:0px;
+}
+
+.gwm-spread-Frame-ResizeButton  {
+  background: transparent url(spread/resize-btn.gif) no-repeat top right;			
+  width:7px;
+  height:7px;
+  font-size:0px;
+}
+
+/************************************* BUTTONS ********************************/
+.gwm-spread-Frame-TopBar-CloseButton{
+	width:  23px;
+	height: 23px;
+	background: transparent url(spread/close-btn.gif) no-repeat center center;			
+	cursor:pointer;
+}
+
+.gwm-spread-Frame-TopBar-CloseButton-active {
+	width:  23px;
+	height: 23px;
+	background: transparent url(spread/close-btn-on.gif) no-repeat  center center;			
+	cursor:pointer;
+}
+
+.gwm-spread-Frame-TopBar-MinimizeButton {
+	width:  23px;
+	height: 23px;
+	background: transparent url(spread/min-btn.gif) no-repeat  center center;			
+	cursor:pointer;
+}
+
+.gwm-spread-Frame-TopBar-MinimizeButton-active {
+	width:  23px;
+	height: 23px;
+	background: transparent url(spread/min-btn-on.gif) no-repeat  center center;			
+	cursor:pointer;
+}
+
+.gwm-spread-Frame-TopBar-MaximizeButton {
+	width:  23px;
+	height: 23px;
+	background: transparent url(spread/max-btn.gif) no-repeat  center center;			
+	cursor:pointer;
+}
+
+.gwm-spread-Frame-TopBar-MaximizeButton-active {
+	width:  23px;
+	height: 23px;
+	background: transparent url(spread/max-btn-on.gif) no-repeat  center center;			
+	cursor:pointer;
+}
+
+
+ /**************************************   DESKTOP **************************/
+ .gwm-spread-GDesktopPane{
+	background-image: url("spread/desktop-bg.jpg");
+  	overflow: hidden;
+  	width: 100%;
+  	height:100%;
+}
+.gwm-spread-GDesktopPane-FrameContainer{
+	overflow: hidden;
+  	width: 100%;
+  	height: 100%;
+}
+
+
+.gwm-spread-GDesktopPane-TaskBar{
+	background-color: #EFEFFF;
+	filter:alpha(opacity=80);
+	-moz-opacity: 0.8;
+	opacity: 0.8;
+
+	height:30px;
+	align-text:left;
+}
+
+

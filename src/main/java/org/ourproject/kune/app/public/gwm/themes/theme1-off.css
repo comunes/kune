@@ -1,0 +1,180 @@
+/*
+ * Copyright (c) 2006-2007 Luciano Broussal <luciano.broussal AT gmail.com>
+ * (http://www.gwtwindowmanager.org)
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+ .gwm-theme1-off-FrameCaption{
+	width:100%;
+	font-weight:bold;
+	color:#CCCCCC;
+	font-size:10px;
+}
+.gwm-theme1-off-Frame-TopBar{
+  width: 100%;
+  cursor:move;
+}
+
+.gwm-theme1-off-DialogOverlay{
+	background-color: #666666;
+	filter:alpha(opacity=60);
+	-moz-opacity: 0.6;
+	opacity: 0.6;
+}
+
+.gwm-theme1-off-ActionOverlay{
+	background-color: #666666;
+	filter:alpha(opacity=15);
+	-moz-opacity: 	0.15;
+	opacity: 0.15;
+}
+
+.gwm-theme1-off-Frame-OutlineDrag{
+	background-color: #666666;
+	filter:alpha(opacity=60);
+	-moz-opacity: 	0.6;
+	opacity: 0.6;
+}
+
+.gwm-theme1-off-FrameContent {
+	overflow:auto;
+	color: #DDD;
+	font-family: Tahoma, Arial, sans-serif;
+	background:#979BA1;
+}
+
+.gwm-theme1-off-DeskTop-MinimizedFrameBar{
+	float:left;
+}
+
+/********************************** MINIMIZED TOPBAR ****************************************/
+
+.gwm-theme1-off-Frame-TopBar-minimized {
+	background: transparent url(theme1-off/t.gif) repeat-x 0 0;	
+    background:#979BA1;
+    color:blue;
+    padding: 5px;
+    border: 1px dashed;
+}
+
+.gwm-theme1-off-Frame-TopBar-RestoreButton {
+	width: 23px;
+	height: 23px;
+	background: transparent url(theme1-off/restore-btn.gif) no-repeat 0 center;			
+	cursor:pointer;
+	
+}
+
+/***********************************  BORDERS  **********************************************/
+.gwm-theme1-off-FrameBorder-tl {
+  background:  url(theme1-off/tl.gif) no-repeat top  left;			
+  width: 12px;
+  height: 33px;
+}
+
+.gwm-theme1-off-FrameBorder-t {
+  background: transparent url(theme1-off/t.gif) repeat-x 0 0;	
+  height:33px;
+}
+
+.gwm-theme1-off-FrameBorder-tr {
+  background: transparent url(theme1-off/tr.gif) no-repeat top right;			
+  width: 12px;
+  height: 33px;
+}
+
+.gwm-theme1-off-FrameBorder-l{
+  background: transparent url(theme1-off/l.gif) repeat-y ;			
+  width: 12px;
+}
+
+.gwm-theme1-off-FrameBorder-r {
+  background: transparent url(theme1-off/r.gif) repeat-y top right;			
+  width: 12px;
+}
+
+.gwm-theme1-off-FrameBorder-bl{
+  background: transparent url(theme1-off/bl.gif) no-repeat 0 0;			
+  width: 12px;
+  height: 17px;
+  font-size:0px;
+}
+
+.gwm-theme1-off-FrameBorder-b {
+  background: transparent url(theme1-off/b.gif) repeat-x 0 0;			
+  height: 17px;
+  font-size:1px;
+}
+
+.gwm-theme1-off-FrameBorder-br {
+  background: transparent url(theme1-off/br.gif) no-repeat top right;			
+  width: 12px;
+  height: 17px;
+  font-size:0px;
+}
+
+.gwm-theme1-off-Frame-ResizeButton  {
+  background: transparent url(theme1-off/resize-btn.gif) no-repeat top right;			
+  width: 12px;
+  height: 17px;
+  font-size:0px;
+}
+
+/************************************* BUTTONS ********************************/
+.gwm-theme1-off-Frame-TopBar-CloseButton{
+	width:  19px;
+	height: 19px;
+	background: transparent url(theme1-off/close-btn.gif) no-repeat center center;			
+	cursor:pointer;
+
+}
+
+.gwm-theme1-off-Frame-TopBar-CloseButton-active {
+	width:  19px;
+	height: 19px;
+	background: transparent url(theme1-off/close-btn-on.gif) no-repeat  center center;			
+	cursor:pointer;
+}
+
+.gwm-theme1-off-Frame-TopBar-MinimizeButton {
+	width:  19px;
+	height: 19px;
+	background: transparent url(theme1-off/min-btn.gif) no-repeat  center center;			
+	cursor:pointer;
+}
+
+.gwm-theme1-off-Frame-TopBar-MinimizeButton-active {
+	width:  19px;
+	height: 19px;
+	background: transparent url(theme1-off/min-btn-on.gif) no-repeat  center center;			
+	cursor:pointer;
+}
+
+.gwm-theme1-off-Frame-TopBar-MaximizeButton {
+	width:  19px;
+	height: 19px;
+	background: transparent url(theme1-off/max-btn.gif) no-repeat  center center;			
+	cursor:pointer;
+}
+
+.gwm-theme1-off-Frame-TopBar-MaximizeButton-active {
+	width:  19px;
+	height: 19px;
+	background: transparent url(theme1-off/max-btn-on.gif) no-repeat  center center;			
+	cursor:pointer;
+}
+
+
+
+
+
