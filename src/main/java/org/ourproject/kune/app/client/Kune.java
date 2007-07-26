@@ -1,7 +1,7 @@
 package org.ourproject.kune.app.client;
 
-import java.util.List;
-
+import org.ourproject.kune.chat.client.ChatTool;
+import org.ourproject.kune.docs.client.DocumentTool;
 import org.ourproject.kune.platf.client.KuneTool;
 import org.ourproject.kune.platf.client.workspace.WorkspacePanel;
 
@@ -9,8 +9,12 @@ public class Kune {
 
     private static Kune instance;
     private WorkspacePanel workspace;
+    private KuneTool[] tools;
 
     private Kune() {
+	this.tools = new KuneTool[2];
+	tools[0] = new DocumentTool();
+	tools[1] = new ChatTool();
     }
 
     public static Kune getInstance() {
@@ -27,11 +31,11 @@ public class Kune {
 	return workspace;
     }
 
-    public List getInstalledTools() {
-	return null;
+    public KuneTool[] getInstalledTools() {
+	return tools;
     }
 
     public KuneTool getDefaultTool() {
-	return null;
+	return tools[0];
     }
 }

@@ -1,7 +1,5 @@
 package org.ourproject.kune.app.client;
 
-import java.util.List;
-
 import org.gwm.client.impl.DefaultGDesktopPane;
 import org.ourproject.kune.platf.client.KuneTool;
 import org.ourproject.kune.platf.client.workspace.WorkspaceView;
@@ -21,9 +19,9 @@ public class KuneEntryPoint implements EntryPoint, WindowResizeListener {
 	Kune kune = Kune.getInstance();
 	workspace = kune.getWorkspace();
 
-	List modules = kune.getInstalledTools();
-	for (int index = 0; index < modules.size(); index++) {
-	    KuneTool module = (KuneTool) modules.get(index);
+	KuneTool[] modules = kune.getInstalledTools();
+	for (int index = 0; index < modules.length; index++) {
+	    KuneTool module = (KuneTool) modules[index];
 	    workspace.addTab(module.getName());
 	}
 	
