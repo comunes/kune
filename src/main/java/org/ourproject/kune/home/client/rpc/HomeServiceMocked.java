@@ -9,5 +9,5 @@ public class HomeServiceMocked implements HomeServiceAsync{
     public void loadHome(String userHash, AsyncCallback asyncCallback) {
         asyncCallback.onSuccess(new Home());
     }
-
+ 
 }
