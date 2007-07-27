@@ -28,7 +28,6 @@ public class KuneEntryPoint implements EntryPoint, WindowResizeListener {
         initWorkspace(kune);
         createDesktop();
         RootPanel.get().add(desktop);
-        kune.getDefaultTool().show();
         initResizeListener();
         UIObject.setVisible(DOM.getElementById("initialstatusbar"), false);
     }

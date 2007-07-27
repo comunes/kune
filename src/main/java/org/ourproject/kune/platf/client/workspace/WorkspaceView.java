@@ -7,4 +7,5 @@ public interface WorkspaceView {
     void setLogo(String groupName);
     void setLogo(Image image);
     void setContextTitle(String title);
+    void setSelectedTab(int tabIndex);
 }

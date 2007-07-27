@@ -72,4 +72,9 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         contextTitle.setTitle(title);
     }
 
+    public void setSelectedTab(int tabIndex) {
+        // poner el tab seleccionado
+        listener.onTabSelected(tabIndex);
+    }
+
 }
