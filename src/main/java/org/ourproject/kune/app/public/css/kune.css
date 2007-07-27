@@ -1,3 +1,10 @@
+body {
+background-color:#FFF;
+color:#000;
+font-family:arial;
+font-size:100%;
+margin:5px 5px;
+}
 
 #initialstatusbar {
 	position: absolute;
@@ -6,6 +13,7 @@
 	width: 1px;
 	z-index: 1000;
 }
+
 
 /* Global styles */
 .kune-status {
@@ -36,11 +44,11 @@ border-left:1px solid #BCD35F;
 
 }
 
-.kune-WorkspacePanel .ContextPanel {
+.kune-WorkspacePanel .GeneralHP {
 	width: 100%;
 }
 
-.kune-WorkspacePanel .NoSeLoQueEs {
+.kune-WorkspacePanel .ContextPanel {
 	width: 100%;
 	border-right: 3px solid #5FD35F;
 }
@@ -78,18 +86,20 @@ border-left:1px solid #BCD35F;
 
 .kune-GroupNavBar .itemSelected {
 	width: 100%;
+	color: blue;
 }
 
 .kune-GroupNavBar .gwt-Hyperlink a {
-color:#FFF;
+/* color:#FFF; */
+color: blue;
 font-size:85%;
 font-weight:700;
 padding:0 9px;
 	text-decoration:none;
-
 }
 
 .kune-GroupNavBar .itemNotSelected {
+color:red;
 	width: 100%;
 }
 
