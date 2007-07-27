@@ -23,6 +23,7 @@ import org.ourproject.kune.platf.client.ui.BorderDecorator;
 import org.ourproject.kune.platf.client.ui.HasColor;
 import org.ourproject.kune.platf.client.workspace.WorkspaceListener;
 
+import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -31,10 +32,8 @@ import com.google.gwt.user.client.ui.Widget;
 public class GroupNavBar extends VerticalPanel {
     private static final String ITEM_SELECTED = "itemSelected";
     private Widget currentTab;
-    private final WorkspaceListener listener;
 
     public GroupNavBar(final WorkspaceListener listener) {
-        this.listener = listener;
         currentTab = null;
     }
 
@@ -42,6 +41,7 @@ public class GroupNavBar extends VerticalPanel {
         final int nextIndex = this.getWidgetCount();
         // TODO: revistar el history token
         final Widget menuItem = createItem(nextIndex, name, "tab" + nextIndex);
+        setTabSelected(menuItem, false);
         this.add(menuItem);
     }
 
@@ -49,6 +49,10 @@ public class GroupNavBar extends VerticalPanel {
         final SimplePanel menuItem = new SimplePanel();
         addStyleName("Tab");
         final Hyperlink hl = new Hyperlink(name, historyToken);
+        hl.addClickListener(new ClickListener() {
+            public void onClick(Widget sender) {
+                selectItem(myIndex);
+            }});
         menuItem.add(hl);
         return new BorderDecorator(menuItem, BorderDecorator.RIGHT);
     }
@@ -59,7 +63,6 @@ public class GroupNavBar extends VerticalPanel {
         }
         currentTab = this.getWidget(index);
         setTabSelected(currentTab, true);
-        listener.onTabSelected(index);
     }
 
     private void setTabSelected(Widget tab, boolean isSelected) {
@@ -69,5 +72,4 @@ public class GroupNavBar extends VerticalPanel {
         String color = isSelected ? scheme.getSelected() : scheme.getUnselected();
         ((HasColor) tab).setColor(color);
     }
-
 }
