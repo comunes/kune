@@ -6,7 +6,6 @@ import com.google.gwt.user.client.ui.Widget;
 public class ContextBottomBar extends HorizontalPanel {
 
     public ContextBottomBar() {
-        super();
         addStyleName("kune-ContextBottomBar");
     }
 
