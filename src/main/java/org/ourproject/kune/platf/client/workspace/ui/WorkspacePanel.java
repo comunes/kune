@@ -59,7 +59,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     }
 
     public void addTab(String name) {
-        //localNavBar.addItem(name, url)
+        localNavBar.addItem(name, name);
     }
 
     public void setLogo(String groupName) {
@@ -75,7 +75,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     }
 
     public void setSelectedTab(int tabIndex) {
-        // poner el tab seleccionado
+        localNavBar.selectItem(tabIndex);
         listener.onTabSelected(tabIndex);
     }
 
