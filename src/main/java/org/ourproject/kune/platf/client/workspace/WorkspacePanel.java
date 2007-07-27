@@ -1,8 +1,6 @@
 package org.ourproject.kune.platf.client.workspace;
 
 
-import org.ourproject.kune.platf.client.Translate;
-
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Hyperlink;
@@ -62,7 +60,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
             defTextLogoVP.setBorderWidth(0);
             defTextLogoVP.setCellHorizontalAlignment(defTextPutYourLogoHL, HasHorizontalAlignment.ALIGN_RIGHT);
             defTextLogoVP.setSpacing(0);
-            defTextPutYourLogoHL.setText(Translate.putYourLogo());
+            defTextPutYourLogoHL.setText("");
 
             // TODO: link to configure the logo
             defTextLogoVP.addStyleName("def-logo-panel");

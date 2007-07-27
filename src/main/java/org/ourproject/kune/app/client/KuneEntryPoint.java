@@ -19,20 +19,8 @@ public class KuneEntryPoint implements EntryPoint, WindowResizeListener {
     private DefaultGDesktopPane desktop;
     private WorkspaceView workspace;
 
+
     public void onModuleLoad() {
-        KuneDocumentServiceAsync docService = KuneDocumentService.App.getInstance();
-        docService.test(new AsyncCallback () {
-            public void onFailure(Throwable caught) {
-                Window.alert("epa!" + caught);
-            }
-
-            public void onSuccess(Object result) {
-                Window.alert("funciona: " + result.toString());
-            }
-        });
-    }
-
-    public void onModuleLoadOld() {
         Kune kune = Kune.getInstance();
         workspace = kune.getWorkspace();
 
