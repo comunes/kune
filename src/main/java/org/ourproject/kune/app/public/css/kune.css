@@ -16,8 +16,14 @@
 	padding: 0 3px;
 }
 
-
-
+.gwt-HorizontalSplitPanel .splitter {
+width:5px;
+cursor:e-resize;
+background:#CDDE87 url(img/splitter-vert-bar.gif) no-repeat;
+background-position:center center;
+border-right:1px solid #BCD35F;
+border-left:1px solid #BCD35F;
+}
 
 /* Workspace styles */
 
@@ -27,7 +33,7 @@
 }
 
 .kuen-WokspacePane .Tab {
- 	
+
 }
 
 .kune-WorkspacePanel .ContextPanel {
@@ -123,6 +129,7 @@
 }
 
 /* Main Content */
+
 .gwt-HorizontalSplitPanel left {
 	background-color: #FFF;
 	margin: 5px;

@@ -27,11 +27,11 @@ public class KuneEntryPoint implements EntryPoint, WindowResizeListener {
     private DefaultGDesktopPane desktop;
     private WorkspacePanel workspacePanel;
     private final boolean useServer;
-    
+
     public KuneEntryPoint() {
         useServer = false;
     }
-    
+
     public void onModuleLoad() {
         if (!useServer) mockServer();
         
@@ -46,14 +46,14 @@ public class KuneEntryPoint implements EntryPoint, WindowResizeListener {
         History.addHistoryListener(dispatcher);
         UIObject.setVisible(DOM.getElementById("initialstatusbar"), false);
     }
-    
+
     public KuneTool[] registerTools() {
         KuneTool[] registeredTools = new KuneTool[] {
                 new HomeTool(),
-                new DocumentTool(), 
+                new DocumentTool(),
                 new ChatTool()
         };
-        
+
         return registeredTools;
     }
 
@@ -80,8 +80,7 @@ public class KuneEntryPoint implements EntryPoint, WindowResizeListener {
     }
 
     public void onWindowResized(int width, int height) {
-        workspacePanel.setWidth("" + width + "px");
-        workspacePanel.setHeight("" + height + "px");
+	workspacePanel.adjustSize(width, height);
     }
 
     private void mockServer() {
