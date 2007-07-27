@@ -2,81 +2,80 @@ package org.ourproject.kune.platf.client.workspace;
 
 
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
-import com.google.gwt.user.client.ui.Hyperlink;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.HorizontalSplitPanel;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class WorkspacePanel extends Composite implements WorkspaceView {
 
+    private LogoPanel logoPanel;
+    private SiteMessageDialog contextMessagesBar;
+    private LocalNavBar localNavBar;
+    private SummaryPanel summaryPanel;
+    private ContextNavBar contextNavBar;
+    private ContextToolBar contextToolBar;
+    private ContextTitle contextTitle;
+    private ContextContents contextContents;
+    private ContextBottomBar contextBottomBar;
+    private HorizontalPanel generalHP;
+    private VerticalPanel localNavVP;
+    private VerticalPanel contextVP;
+    private HorizontalSplitPanel contextHSP;
+    private VerticalPanel generalVP;
+
     public WorkspacePanel() {
-        VerticalPanel panel = new VerticalPanel();
-        initWidget(panel);
+
+        // Initialization
+        generalVP = new VerticalPanel();
+        generalHP = new HorizontalPanel();
+        localNavVP = new VerticalPanel();
+        contextVP = new VerticalPanel();
+        contextHSP = new HorizontalSplitPanel();
+        initWidget(generalVP);
+        logoPanel = new LogoPanel();
+        contextMessagesBar = new SiteMessageDialog();
+        localNavBar = new LocalNavBar();
+        summaryPanel = new SummaryPanel();
+        contextNavBar = new ContextNavBar();
+        contextToolBar = new ContextToolBar();
+        contextTitle = new ContextTitle();
+        contextContents = new ContextContents();
+        contextBottomBar = new ContextBottomBar();
+
+        // Layout
+        generalVP.add(logoPanel);
+        generalHP.add(generalHP);
+        generalHP.add(contextVP);
+        generalHP.add(localNavVP);
+        localNavVP.add(localNavBar);
+        localNavVP.add(summaryPanel);
+        contextVP.add(contextToolBar);
+        contextVP.add(contextTitle);
+        contextVP.add(contextHSP);
+        contextVP.add(contextBottomBar);
+        contextHSP.setLeftWidget(contextContents);
+        contextHSP.setRightWidget(contextNavBar);
+
+        // Set properties
+        addStyleName(".kune-WorkspacePanel");
+        contextVP.addStyleName(".kune-WorkspacePanel-contextVP");
+        generalHP.addStyleName(".kune-WorkspacePanel-generalHP");
     }
 
     public void addTab(String name) {
     }
 
-
-    /**
-     *
-     * This is the class for the logo of a group or a user. By default, we use a Label instead of image until the user configure the logo.
-     *
-     */
-    class EntityLogo extends Composite {
-        public final static String DEFFONTSIZE = "189%";
-        public final static String MEDFONTSIZE = "152%";
-        public final static String MINFONTSIZE = "122%";
-
-        public final static int DEFLOGOWIDTH = 468;
-        public final static int DEFLOGOHEIGHT = 60;
-
-        private VerticalPanel defTextLogoVP = null;
-        private Label defTextLogoLabel = null;
-        private Hyperlink defTextPutYourLogoHL = null;
-        private Image logoImage = null;
-
-        public EntityLogo() {
-            this("");
-            this.addStyleName("kune-EntityLogo");
-        }
-
-        public EntityLogo(String title) {
-            // Initialize
-            defTextLogoVP = new VerticalPanel();
-            defTextLogoLabel = new Label();
-            defTextPutYourLogoHL = new Hyperlink();
-            logoImage = new Image();
-            initWidget(defTextLogoVP);
-
-            // Layout
-            defTextLogoVP.add(defTextLogoLabel);
-            defTextLogoVP.add(defTextPutYourLogoHL);
-
-            // Set properties
-            defTextLogoVP.setHeight(""+ DEFLOGOHEIGHT);
-            defTextLogoVP.setWidth("" + DEFLOGOWIDTH);
-            defTextLogoVP.setBorderWidth(0);
-            defTextLogoVP.setCellHorizontalAlignment(defTextPutYourLogoHL, HasHorizontalAlignment.ALIGN_RIGHT);
-            defTextLogoVP.setSpacing(0);
-            defTextPutYourLogoHL.setText("");
-
-            // TODO: link to configure the logo
-            defTextLogoVP.addStyleName("def-logo-panel");
-            defTextLogoLabel.addStyleName("def-logo-text");
-            defTextPutYourLogoHL.addStyleName("put-you-logo");
-            setDefaultText(title);
-        }
-
-        public void setDefaultText(String title) {
-            defTextLogoLabel.setText(title);
-        }
-
-        public void setLogo(String url) {
-            logoImage.setUrl(url);
-            // TODO: limit size
-            initWidget(logoImage);
-        }
+    public void setLogo(String groupName) {
+        logoPanel.setLogo(groupName);
     }
+
+    public void setLogo(Image image) {
+        logoPanel.setLogo(image);
+    }
+
+    public void setContextTitle(String title) {
+        contextTitle.setTitle(title);
+    }
+
 }

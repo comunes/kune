@@ -1,18 +1,123 @@
+/* Global styles */
 .kune-status {
-background:#E5FF80;
-border:1px solid #E5FF80;
-white-space:nowrap;
-height:16px;
-padding:0 3px;
+	background: #E5FF80;
+	border: 1px solid #E5FF80;
+	white-space: nowrap;
+	height: 16px;
+	padding: 0 3px;
 }
 
 #initialstatusbar {
-position:absolute;
-top:2px;
-left:2px;
-width:1px;
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	width: 1px;
 }
 
 body>#initialstatusbar {
-position:fixed;
+	position: fixed;
+}
+
+/* Workspace styles */
+
+.kune-WorkspacePanel {
+	width: 100%;
+}
+
+.kune-WorkspacePanel-generalHP {
+	width: 100%;
+}
+
+.kune-WorkspacePanel-contextVP {
+	width: 100%;
+	border-right: 3px solid #5FD35F;
+}
+
+.kune-EntityTextLogo {
+	border: 2px solid #F2F2F2;
+	padding: 5px;
+	overflow: hidden;
+	width: 468px;
+	height: 60px;
+	margin-bottom: 4px;
+}
+
+.kune-EntityTextLogo .gwt-Label {
+	font-size: 122%;
+	font-weight: 700;
+	color: navy;
+}
+
+.kune-EntityTextLogo .gwt-Hyperlink {
+	color: #CCC;
+	font-size: 77%;
+	text-decoration: underline;
+	text-align: right;
+}
+
+.kune-LocalNavBar {
+	width: 150px;
+}
+
+.kune-SummaryPanel {
+	margin: 5px, 0px, 0px, 5px;
+	width: 100%;
+}
+
+.kune-SummaryPanel .itemSelected {
+	width: 100%;
+}
+
+.kune-SummaryPanel  .gwt-Hyperlink {
+	text-decoration:none;
+}
+
+.kune-SummaryPanel .itemNotSelected {
+	width: 100%;
+}
+
+.kune-ContextTitle {
+	background-color: #5FD35F;
+	color: #250;
+	font-weight: 700;
+}
+
+.kune-ContextTitle .gwt-Label {
+	width: 100%;
+	height: 23px;
+	vertical-align: middle;
+	margin: 0px 9px;
+}
+
+.kune-ContextNavBar {
+	background-color: #CFA;
+	padding: 5px;
+	width: 100%;
+	height: 100%;
+}
+
+.kune-ContextToolBar {
+	border-left: 2px solid #5FD35F;
+	background-color: #AFA;
+	color: #250;
+	width: 100%;
+	height: 25px;
+}
+
+.kune-ContextBottomBar {
+	background: #5FD35F;
+	color: #FFF;
+	font-weight: 700;
+	font-size: 77%;
+	white-space: nowrap;
+	vertical-align: middle;
+	width: 100%;
+	height: 24px;
+}
+
+.kune-ContextContents {
+	background-color: #FFF;
+	margin: 5px;
+	width: 100%;
+    height: 95%;
 }
