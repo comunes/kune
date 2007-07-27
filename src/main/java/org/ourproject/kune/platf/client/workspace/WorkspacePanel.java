@@ -8,59 +8,48 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class WorkspacePanel extends Composite implements WorkspaceView {
-
     private LogoPanel logoPanel;
-    private SiteMessageDialog contextMessagesBar;
-    private LocalNavBar localNavBar;
-    private SummaryPanel summaryPanel;
-    private ContextNavBar contextNavBar;
-    private ContextToolBar contextToolBar;
-    private ContextTitle contextTitle;
-    private ContextContents contextContents;
-    private ContextBottomBar contextBottomBar;
-    private HorizontalPanel generalHP;
-    private VerticalPanel localNavVP;
-    private VerticalPanel contextVP;
-    private HorizontalSplitPanel contextHSP;
-    private VerticalPanel generalVP;
+    private ContextTitleBar contextTitle;
 
     public WorkspacePanel() {
-
-        // Initialization
-        generalVP = new VerticalPanel();
-        generalHP = new HorizontalPanel();
-        localNavVP = new VerticalPanel();
-        contextVP = new VerticalPanel();
-        contextHSP = new HorizontalSplitPanel();
+        VerticalPanel generalVP = new VerticalPanel();
         initWidget(generalVP);
-        logoPanel = new LogoPanel();
-        contextMessagesBar = new SiteMessageDialog();
-        localNavBar = new LocalNavBar();
-        summaryPanel = new SummaryPanel();
-        contextNavBar = new ContextNavBar();
-        contextToolBar = new ContextToolBar();
-        contextTitle = new ContextTitle();
-        contextContents = new ContextContents();
-        contextBottomBar = new ContextBottomBar();
 
-        // Layout
+        logoPanel = new LogoPanel();
+        HorizontalPanel generalHP = new HorizontalPanel();
         generalVP.add(logoPanel);
-        generalHP.add(generalHP);
+        generalVP.add(generalHP);
+        
+        VerticalPanel contextVP = new VerticalPanel();
+        VerticalPanel localNavVP = new VerticalPanel();
         generalHP.add(contextVP);
         generalHP.add(localNavVP);
+        
+        LocalNavBar localNavBar = new LocalNavBar();
+        SummaryPanel summaryPanel = new SummaryPanel();
         localNavVP.add(localNavBar);
         localNavVP.add(summaryPanel);
+        
+        ContextToolBar contextToolBar = new ContextToolBar();
+        contextTitle = new ContextTitleBar();
+        HorizontalSplitPanel contextHSP = new HorizontalSplitPanel();
+        ContextBottomBar contextBottomBar = new ContextBottomBar();
         contextVP.add(contextToolBar);
         contextVP.add(contextTitle);
         contextVP.add(contextHSP);
         contextVP.add(contextBottomBar);
+        
+        ContextContents contextContents = new ContextContents();
         contextHSP.setLeftWidget(contextContents);
+
+        ContextNavBar contextNavBar = new ContextNavBar();
         contextHSP.setRightWidget(contextNavBar);
+//        SiteMessageDialog contextMessagesBar = new SiteMessageDialog();
 
         // Set properties
-        addStyleName(".kune-WorkspacePanel");
-        contextVP.addStyleName(".kune-WorkspacePanel-contextVP");
-        generalHP.addStyleName(".kune-WorkspacePanel-generalHP");
+        addStyleName("kune-WorkspacePanel");
+        contextVP.addStyleName("ContextPanel");
+        generalHP.addStyleName("NoSeLoQueEs");
     }
 
     public void addTab(String name) {

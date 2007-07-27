@@ -1,3 +1,12 @@
+
+#initialstatusbar {
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	width: 1px;
+	z-index: 1000;
+}
+
 /* Global styles */
 .kune-status {
 	background: #E5FF80;
@@ -7,28 +16,21 @@
 	padding: 0 3px;
 }
 
-#initialstatusbar {
-	position: absolute;
-	top: 2px;
-	left: 2px;
-	width: 1px;
-}
 
-body>#initialstatusbar {
-	position: fixed;
-}
+
 
 /* Workspace styles */
 
 .kune-WorkspacePanel {
 	width: 100%;
+	background-color: white;
 }
 
-.kune-WorkspacePanel-generalHP {
+.kune-WorkspacePanel .ContextPanel {
 	width: 100%;
 }
 
-.kune-WorkspacePanel-contextVP {
+.kune-WorkspacePanel .NoSeLoQueEs {
 	width: 100%;
 	border-right: 3px solid #5FD35F;
 }
