@@ -7,6 +7,7 @@ import org.ourproject.kune.docs.client.DocumentTool;
 import org.ourproject.kune.home.client.HomeTool;
 import org.ourproject.kune.home.client.rpc.HomeService;
 import org.ourproject.kune.home.client.rpc.HomeServiceMocked;
+import org.ourproject.kune.platf.client.EventDispatcher;
 import org.ourproject.kune.platf.client.Kune;
 import org.ourproject.kune.platf.client.KuneTool;
 import org.ourproject.kune.platf.client.workspace.Workspace;
@@ -15,6 +16,7 @@ import org.ourproject.kune.platf.client.workspace.ui.WorkspacePanel;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -32,12 +34,16 @@ public class KuneEntryPoint implements EntryPoint, WindowResizeListener {
     
     public void onModuleLoad() {
         if (!useServer) mockServer();
+        
         Kune kune = Kune.getInstance();
 
         initWorkspace(kune);
         createDesktop();
         RootPanel.get().add(desktop);
         initResizeListener();
+        
+        EventDispatcher dispatcher = new EventDispatcher();
+        History.addHistoryListener(dispatcher);
         UIObject.setVisible(DOM.getElementById("initialstatusbar"), false);
     }
     

@@ -17,10 +17,12 @@
  */
 package org.ourproject.kune.platf.client.workspace.ui;
 
+import org.ourproject.kune.platf.client.ColorScheme;
+import org.ourproject.kune.platf.client.Kune;
 import org.ourproject.kune.platf.client.ui.BorderDecorator;
+import org.ourproject.kune.platf.client.ui.HasColor;
 import org.ourproject.kune.platf.client.workspace.WorkspaceListener;
 
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -28,12 +30,12 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class GroupNavBar extends VerticalPanel {
     private static final String ITEM_SELECTED = "itemSelected";
-    private Widget currentItem;
+    private Widget currentTab;
     private final WorkspaceListener listener;
 
     public GroupNavBar(final WorkspaceListener listener) {
         this.listener = listener;
-        currentItem = null;
+        currentTab = null;
     }
 
     public void addItem(final String name) {
@@ -48,21 +50,24 @@ public class GroupNavBar extends VerticalPanel {
         addStyleName("Tab");
         final Hyperlink hl = new Hyperlink(name, historyToken);
         menuItem.add(hl);
-        hl.addClickListener(new ClickListener() {
-            public void onClick(final Widget arg0) {
-                selectItem(myIndex);
-            }
-        });
         return new BorderDecorator(menuItem, BorderDecorator.RIGHT);
     }
 
     public void selectItem(final int index) {
-        if (currentItem != null) {
-            currentItem.removeStyleName(ITEM_SELECTED);
+        if (currentTab != null) {
+            setTabSelected(currentTab, false);
         }
-        currentItem = this.getWidget(index);
-        currentItem.addStyleName(ITEM_SELECTED);
+        currentTab = this.getWidget(index);
+        setTabSelected(currentTab, true);
         listener.onTabSelected(index);
+    }
+
+    private void setTabSelected(Widget tab, boolean isSelected) {
+        ColorScheme scheme = Kune.getInstance().c;
+        if (isSelected) tab.addStyleName(ITEM_SELECTED);
+        else tab.removeStyleName(ITEM_SELECTED);
+        String color = isSelected ? scheme.getSelected() : scheme.getUnselected();
+        ((HasColor) tab).setColor(color);
     }
 
 }

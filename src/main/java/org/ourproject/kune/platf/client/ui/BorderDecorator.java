@@ -53,7 +53,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Hilbrand Bouwkamp(hs@bouwkamp.com)
  * @version 1.2
  * 
- * adapted by Vicente J. Ruiz Jurado for kune
+ * adapted by Vicente J. Ruiz Jurado and danigb for kune
  */
 
 public class BorderDecorator extends ComplexPanel implements HasColor {
@@ -223,6 +223,8 @@ public class BorderDecorator extends ComplexPanel implements HasColor {
             DOM.setStyleAttribute(div1b, "backgroundColor", color);
         if (null != div2b)
             DOM.setStyleAttribute(div2b, "backgroundColor", color);
+        if (null != divElement)
+            DOM.setStyleAttribute(divElement, "backgroundColor", color);
     }
 
     public String getColor() {
