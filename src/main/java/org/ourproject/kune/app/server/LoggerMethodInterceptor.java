@@ -35,7 +35,7 @@ public class LoggerMethodInterceptor implements MethodInterceptor {
         StringBuffer buffer = new StringBuffer("INVOKING on [");
         addTargetCllassName(invocation, buffer);
         buffer.append("] => ");
-        addMethodName(invocation, buffer);
+        addMethodName(buffer);
         addMethodParameters(invocation, buffer);
         log.debug(buffer.toString());
     }
@@ -53,7 +53,7 @@ public class LoggerMethodInterceptor implements MethodInterceptor {
         buffer.append(" ] ");
     }
 
-    private void addMethodName(MethodInvocation invocation, StringBuffer buffer) {
+    private void addMethodName(StringBuffer buffer) {
         buffer.append(methodName);
     }
 
