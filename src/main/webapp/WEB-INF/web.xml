@@ -8,36 +8,37 @@
     <display-name>kune</display-name>
     <description>kune</description>
 
+	<context-param>
+		    <param-name>com.google.inject.Module</param-name>
+		    <param-value>org.ourproject.kune.app.server.KuneAppModule</param-value>
+	</context-param>
+
     <servlet>
-      <servlet-name>XmppService</servlet-name>
-      <servlet-class>org.ourproject.kune.server.servlet.XmppServiceServlet</servlet-class>
+      <servlet-name>DocumentService</servlet-name>
+      <servlet-class>org.ourproject.kune.app.server.servlet.KuneServlet</servlet-class>
+      <load-on-startup>1</load-on-startup>   
+		<init-param>
+			    <param-name>remote.service</param-name>
+			    <param-value>org.ourproject.kune.docs.server.rpc.KuneDocumentServiceDefault</param-value>
+		</init-param>
     </servlet>
+    <servlet-mapping>
+      <servlet-name>DocumentService</servlet-name>
+      <url-pattern>/gwt/org.ourproject.kune.app.Kune/KuneDocumentService</url-pattern>
+    </servlet-mapping>
+	
+<!--
     <servlet>
-      <servlet-name>KuneDocumentService</servlet-name>
-      <servlet-class>org.ourproject.kune.server.servlet.KuneDocumentServiceServlet</servlet-class>
-      <load-on-startup>1</load-on-startup>
+      <servlet-name>sadDocumentService</servlet-name>
+      <servlet-class>org.ourproject.kune.docs.server.rpc.KuneDocumentServiceDefault</servlet-class>
+		<init-param>
+			    <param-name>com.google.inject.Module</param-name>
+			    <param-value>org.ourproject.kune.app.server.KuneAppModule</param-value>
+		</init-param>
     </servlet>
-
     <servlet-mapping>
-      <servlet-name>KuneDocumentService</servlet-name>
-      <url-pattern>/gwt/org.ourproject.kune/KuneDocumentService</url-pattern>
+      <servlet-name>sadDocumentService</servlet-name>
+      <url-pattern>NO/gwt/org.ourproject.kune.app.Kune/KuneDocumentService</url-pattern>
     </servlet-mapping>
-
-    <servlet-mapping>
-    	<servlet-name>XmppService</servlet-name>
-    	<url-pattern>/gwt/org.ourproject.kune/XmppService</url-pattern>
-    </servlet-mapping>
-
-<!---->
-<!--    <servlet-mapping>-->
-<!--      <servlet-name>KuneDocumentService</servlet-name>-->
-<!--      <url-pattern>/gwt/org.ourproject.kune.Main/KuneDocumentService</url-pattern>-->
-<!--    </servlet-mapping>-->
-<!---->
-<!--    <servlet-mapping>-->
-<!--      <servlet-name>XmppService</servlet-name>-->
-<!--      <url-pattern>/gwt/org.ourproject.kune.Main/XmppService</url-pattern>-->
-<!--    </servlet-mapping>-->
-<!---->
-
+   -->
 </web-app>

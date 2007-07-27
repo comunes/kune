@@ -37,7 +37,7 @@ public class KuneServletContext {
 
     
     private static Module createModule(ServletConfig config) throws ServletException {
-        String routerModuleClassName = config.getInitParameter(Module.class.getName());
+        String routerModuleClassName = config.getServletContext().getInitParameter(Module.class.getName());
         if (routerModuleClassName == null) {
             throw new ServletException(Module.class.getName() + " not defined in web.xml!");
         }
