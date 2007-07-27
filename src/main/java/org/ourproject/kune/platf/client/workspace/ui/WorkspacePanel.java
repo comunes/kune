@@ -1,6 +1,9 @@
 package org.ourproject.kune.platf.client.workspace.ui;
 
 
+import org.ourproject.kune.platf.client.Kune;
+import org.ourproject.kune.platf.client.ui.BorderDecorator;
+import org.ourproject.kune.platf.client.ui.HasColor;
 import org.ourproject.kune.platf.client.workspace.WorkspaceView;
 
 import com.google.gwt.user.client.ui.Composite;
@@ -12,7 +15,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class WorkspacePanel extends Composite implements WorkspaceView {
     private LogoPanel logoPanel;
-    private ContextTitleBar contextTitle;
+    private ContextTitleBar contextTitleBar;
     private GroupNavBar groupNavBar;
     private HorizontalSplitPanel contextHSP;
 
@@ -36,20 +39,25 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         localNavVP.add(summaryPanel);
 
         ContextToolBar contextToolBar = new ContextToolBar();
-        contextTitle = new ContextTitleBar();
+        contextTitleBar = new ContextTitleBar();
         contextHSP = new HorizontalSplitPanel();
+        String mainBorderColor = Kune.getInstance().c.getMainBorder();
         ContextBottomBar contextBottomBar = new ContextBottomBar();
-        contextVP.add(contextToolBar);
-        contextVP.add(contextTitle);
+        BorderDecorator contextToolBarBorderDec = new BorderDecorator(contextToolBar, BorderDecorator.TOPLEFT);
+        contextVP.add(contextToolBarBorderDec);
+        contextToolBarBorderDec.setColor(mainBorderColor);
+        contextVP.add(contextTitleBar);
         contextVP.add(contextHSP);
-        contextVP.add(contextBottomBar);
+        BorderDecorator borderDecorator = new BorderDecorator(contextBottomBar, BorderDecorator.BOTTOMLEFT);
+        contextVP.add(borderDecorator);
+        borderDecorator.setColor(mainBorderColor);
 
         // SiteMessageDialog contextMessagesBar = new SiteMessageDialog();
 
         // Set properties
         addStyleName("kune-WorkspacePanel");
         contextVP.addStyleName("ContextPanel");
-        generalHP.addStyleName("NoSeLoQueEs");
+        generalHP.addStyleName("GeneralHP");
     }
 
     public void addTab(String name) {
@@ -65,7 +73,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     }
 
     public void setContextTitle(String title) {
-        contextTitle.setTitle(title);
+        contextTitleBar.setTitle(title);
     }
 
     public void setSelectedTab(int tabIndex) {

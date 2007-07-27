@@ -63,10 +63,14 @@ public class GroupNavBar extends VerticalPanel {
 
     private void setTabSelected(Widget tab, boolean isSelected) {
         ColorScheme scheme = Kune.getInstance().c;
-        if (isSelected)
+        if (isSelected) {
             tab.addStyleName(ITEM_SELECTED);
-        else
+            // TODO: DOM.setStyleAttribute(tab.getElement(), "color", "white");
+        }
+        else {
             tab.removeStyleName(ITEM_SELECTED);
+            // TODO: DOM.setStyleAttribute(tab.getElement(), "color", "red");
+        }
         String color = isSelected ? scheme.getSelected() : scheme.getUnselected();
         ((HasColor) tab).setColor(color);
     }

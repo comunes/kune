@@ -55,11 +55,11 @@ border-left:1px solid #BCD35F;
 
 .kune-EntityTextLogo {
 	border: 2px solid #F2F2F2;
-	padding: 5px;
 	overflow: hidden;
 	width: 468px;
 	height: 60px;
 	margin-bottom: 4px;
+	padding: 5px;
 }
 
 .kune-EntityTextLogo .gwt-Label {

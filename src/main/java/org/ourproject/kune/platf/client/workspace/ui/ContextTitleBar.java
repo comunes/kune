@@ -8,12 +8,13 @@ class ContextTitleBar extends HorizontalPanel {
 
     public ContextTitleBar() {
         titleLabel = new Label();
+        add(titleLabel);
         addStyleName("kune-ContextTitleBar");
         //FIXME: Borrar esto
-        this.setTitle("Title");
+        setTitleLabel("Title");
     }
 
-    public void setTitle(String title) {
+    public void setTitleLabel(String title) {
         titleLabel.setText(title);
     }
 }
