@@ -67,34 +67,40 @@ border-left:1px solid #BCD35F;
 	text-align: right;
 }
 
-.kune-LocalNavBar {
-	width: 150px;
-}
-
 .kune-SummaryPanel {
 	margin: 5px 0 0 5px;
 	width: 100%;
 }
 
-.kune-SummaryPanel .itemSelected {
+.kune-GroupNavBar {
+	width: 150px;
+}
+
+.kune-GroupNavBar .itemSelected {
 	width: 100%;
 }
 
-.kune-SummaryPanel  .gwt-Hyperlink {
+.kune-GroupNavBar .gwt-Hyperlink a {
+color:#FFF;
+font-size:85%;
+font-weight:700;
+padding:0 9px;
 	text-decoration:none;
+
 }
 
-.kune-SummaryPanel .itemNotSelected {
+.kune-GroupNavBar .itemNotSelected {
 	width: 100%;
 }
 
-.kune-ContextTitle {
+.kune-ContextTitleBar {
 	background-color: #5FD35F;
 	color: #250;
 	font-weight: 700;
+	width:100%;
 }
 
-.kune-ContextTitle .gwt-Label {
+.kune-ContextTitleBar .gwt-Label {
 	width: 100%;
 	height: 23px;
 	vertical-align: middle;

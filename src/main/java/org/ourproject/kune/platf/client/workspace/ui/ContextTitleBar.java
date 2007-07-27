@@ -7,14 +7,8 @@ class ContextTitleBar extends HorizontalPanel {
     private Label titleLabel = null;
 
     public ContextTitleBar() {
-        // Initialize
-        super();
         titleLabel = new Label();
-
-        // Layout
-
-        // Set properties
-        this.addStyleName("kune-ContextTitle");
+        addStyleName("kune-ContextTitleBar");
     }
 
     public void setTitle(String title) {

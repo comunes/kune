@@ -35,6 +35,7 @@ public class GroupNavBar extends VerticalPanel {
 
     public GroupNavBar(final WorkspaceListener listener) {
         currentTab = null;
+        addStyleName("kune-GroupNavBar");
     }
 
     public void addItem(final String name) {

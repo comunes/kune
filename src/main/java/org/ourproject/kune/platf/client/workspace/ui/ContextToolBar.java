@@ -5,8 +5,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 class ContextToolBar extends HorizontalPanel {
 
     public ContextToolBar() {
-        super();
-        this.addStyleName("kune-ContextToolBar");
+        addStyleName("kune-ContextToolBar");
     }
 
 }

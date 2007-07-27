@@ -15,7 +15,9 @@ import org.ourproject.kune.platf.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.platf.client.workspace.ui.WorkspacePanel;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowResizeListener;
@@ -34,17 +36,24 @@ public class KuneEntryPoint implements EntryPoint, WindowResizeListener {
 
     public void onModuleLoad() {
         if (!useServer) mockServer();
-        
+
         Kune kune = Kune.getInstance();
 
         initWorkspace(kune);
         createDesktop();
         RootPanel.get().add(desktop);
         initResizeListener();
-        
+
         EventDispatcher dispatcher = new EventDispatcher();
         History.addHistoryListener(dispatcher);
         UIObject.setVisible(DOM.getElementById("initialstatusbar"), false);
+
+        DeferredCommand.addCommand(new Command() {
+            public void execute() {
+                onWindowResized(Window.getClientWidth(), Window
+                        .getClientHeight());
+            }
+        });
     }
 
     public KuneTool[] registerTools() {
