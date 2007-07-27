@@ -17,6 +17,7 @@
  */
 package org.ourproject.kune.platf.client.workspace.ui;
 
+import org.ourproject.kune.platf.client.ui.BorderDecorator;
 import org.ourproject.kune.platf.client.workspace.WorkspaceListener;
 
 import com.google.gwt.user.client.ui.ClickListener;
@@ -38,21 +39,21 @@ public class GroupNavBar extends VerticalPanel {
     public void addItem(final String name) {
         final int nextIndex = this.getWidgetCount();
         // TODO: revistar el history token
-        final SimplePanel menuItem = createItem(nextIndex, name, "tab" + nextIndex);
+        final Widget menuItem = createItem(nextIndex, name, "tab" + nextIndex);
         this.add(menuItem);
     }
 
-    private SimplePanel createItem(final int myIndex, final String name, final String historyToken) {
+    private Widget createItem(final int myIndex, final String name, final String historyToken) {
         final SimplePanel menuItem = new SimplePanel();
         addStyleName("Tab");
         final Hyperlink hl = new Hyperlink(name, historyToken);
         menuItem.add(hl);
         hl.addClickListener(new ClickListener() {
             public void onClick(final Widget arg0) {
-                listener.onTabSelected(myIndex);
+                selectItem(myIndex);
             }
         });
-        return menuItem;
+        return new BorderDecorator(menuItem, BorderDecorator.RIGHT);
     }
 
     public void selectItem(final int index) {
@@ -61,6 +62,7 @@ public class GroupNavBar extends VerticalPanel {
         }
         currentItem = this.getWidget(index);
         currentItem.addStyleName(ITEM_SELECTED);
+        listener.onTabSelected(index);
     }
 
 }

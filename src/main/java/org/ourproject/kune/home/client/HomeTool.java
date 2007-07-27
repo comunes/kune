@@ -14,6 +14,7 @@ public class HomeTool extends AbstractTool implements KuneTool {
     private Home home;
 
     public HomeTool() {
+        home = null;
         server = HomeService.App.getInstance();
     }
     
@@ -23,7 +24,7 @@ public class HomeTool extends AbstractTool implements KuneTool {
 
     public void show() {
         if (home == null) loadHome();
-        updateWorkspace();
+        else updateWorkspace();
     }
 
     private void loadHome() {
