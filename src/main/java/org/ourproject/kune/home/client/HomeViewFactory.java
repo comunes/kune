@@ -1,7 +1,9 @@
 package org.ourproject.kune.home.client;
 
+import org.ourproject.kune.platf.client.extend.ViewFactory;
 
-public class HomeViewFactory {
+
+public class HomeViewFactory implements ViewFactory {
     private static HomeMainPanel mainView;
     private static HomeMenuPanel menuView;
 

@@ -7,7 +7,7 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 public interface DocumentService extends RemoteService {
     public String test();
 
-    public static class App {
+    public class App {
         private static DocumentServiceAsync ourInstance = null;
 
         public static synchronized DocumentServiceAsync getInstance() {

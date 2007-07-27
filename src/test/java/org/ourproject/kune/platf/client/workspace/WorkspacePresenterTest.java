@@ -16,7 +16,7 @@ public class WorkspacePresenterTest {
     private WorkspaceView view;
 
     @Before public void prepare() {
-        workspace = new Workspace();
+//        workspace = new Workspace();
         presenter = new WorkspacePresenter(workspace);
         view = createStrictMock(WorkspaceView.class);
     }

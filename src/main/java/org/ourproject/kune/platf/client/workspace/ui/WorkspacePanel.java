@@ -1,7 +1,6 @@
 package org.ourproject.kune.platf.client.workspace.ui;
 
 
-import org.ourproject.kune.platf.client.workspace.WorkspaceListener;
 import org.ourproject.kune.platf.client.workspace.WorkspaceView;
 
 import com.google.gwt.user.client.ui.Composite;
@@ -17,66 +16,66 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     private GroupNavBar groupNavBar;
     private HorizontalSplitPanel contextHSP;
 
-    public WorkspacePanel(WorkspaceListener listener) {
-	VerticalPanel generalVP = new VerticalPanel();
-	initWidget(generalVP);
+    public WorkspacePanel() {
+        VerticalPanel generalVP = new VerticalPanel();
+        initWidget(generalVP);
 
-	logoPanel = new LogoPanel();
-	HorizontalPanel generalHP = new HorizontalPanel();
-	generalVP.add(logoPanel);
-	generalVP.add(generalHP);
+        logoPanel = new LogoPanel();
+        HorizontalPanel generalHP = new HorizontalPanel();
+        generalVP.add(logoPanel);
+        generalVP.add(generalHP);
 
-	VerticalPanel contextVP = new VerticalPanel();
-	VerticalPanel localNavVP = new VerticalPanel();
-	generalHP.add(contextVP);
-	generalHP.add(localNavVP);
+        VerticalPanel contextVP = new VerticalPanel();
+        VerticalPanel localNavVP = new VerticalPanel();
+        generalHP.add(contextVP);
+        generalHP.add(localNavVP);
 
-	groupNavBar = new GroupNavBar(listener);
-	SummaryPanel summaryPanel = new SummaryPanel();
-	localNavVP.add(groupNavBar);
-	localNavVP.add(summaryPanel);
+        groupNavBar = new GroupNavBar();
+        SummaryPanel summaryPanel = new SummaryPanel();
+        localNavVP.add(groupNavBar);
+        localNavVP.add(summaryPanel);
 
-	ContextToolBar contextToolBar = new ContextToolBar();
-	contextTitle = new ContextTitleBar();
-	contextHSP = new HorizontalSplitPanel();
-	ContextBottomBar contextBottomBar = new ContextBottomBar();
-	contextVP.add(contextToolBar);
-	contextVP.add(contextTitle);
-	contextVP.add(contextHSP);
-	contextVP.add(contextBottomBar);
+        ContextToolBar contextToolBar = new ContextToolBar();
+        contextTitle = new ContextTitleBar();
+        contextHSP = new HorizontalSplitPanel();
+        ContextBottomBar contextBottomBar = new ContextBottomBar();
+        contextVP.add(contextToolBar);
+        contextVP.add(contextTitle);
+        contextVP.add(contextHSP);
+        contextVP.add(contextBottomBar);
 
-	// SiteMessageDialog contextMessagesBar = new SiteMessageDialog();
+        // SiteMessageDialog contextMessagesBar = new SiteMessageDialog();
 
-	// Set properties
-	addStyleName("kune-WorkspacePanel");
-	contextVP.addStyleName("ContextPanel");
-	generalHP.addStyleName("NoSeLoQueEs");
+        // Set properties
+        addStyleName("kune-WorkspacePanel");
+        contextVP.addStyleName("ContextPanel");
+        generalHP.addStyleName("NoSeLoQueEs");
     }
 
     public void addTab(String name) {
-	groupNavBar.addItem(name);
+        groupNavBar.addItem(name);
     }
 
     public void setLogo(String groupName) {
-	logoPanel.setLogo(groupName);
+        logoPanel.setLogo(groupName);
     }
 
     public void setLogo(Image image) {
-	logoPanel.setLogo(image);
+        logoPanel.setLogo(image);
     }
 
     public void setContextTitle(String title) {
-	contextTitle.setTitle(title);
+        contextTitle.setTitle(title);
     }
 
     public void setSelectedTab(int tabIndex) {
-	groupNavBar.selectItem(tabIndex);
+        groupNavBar.selectItem(tabIndex);
     }
 
     public void setContent(Widget content) {
-	Widget left = contextHSP.getLeftWidget();
-	if (left != null) contextHSP.remove(left);
-	contextHSP.setLeftWidget(content);
+        Widget left = contextHSP.getLeftWidget();
+        if (left != null) contextHSP.remove(left);
+        contextHSP.setLeftWidget(content);
     }
 
     public void setContextMenu(Widget contextMenu) {
@@ -92,5 +91,4 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	contextHSP.setSize("" + contextWidth + "px", "" + contextHeight + "px");
 	contextHSP.setSplitPosition("" + (contextWidth - 125) + "px");
     }
-
 }
