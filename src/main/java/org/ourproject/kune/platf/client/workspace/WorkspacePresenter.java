@@ -19,7 +19,8 @@ public class WorkspacePresenter implements WorkspaceListener {
             view.addTab(module.getName());
         }
         this.view.setLogo(workspace.getGroupName());
-        this.view.setSelectedTab(0);
+        if (tools.length > 0)
+            this.view.setSelectedTab(0);
     }
 
     public void onTabSelected(int tabIndex) {

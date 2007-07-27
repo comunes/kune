@@ -13,11 +13,9 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public class WorkspacePanel extends Composite implements WorkspaceView {
     private LogoPanel logoPanel;
     private ContextTitleBar contextTitle;
-    private final WorkspaceListener listener;
-    private LocalNavBar localNavBar;
+    private GroupNavBar groupNavBar;
 
     public WorkspacePanel(WorkspaceListener listener) {
-        this.listener = listener;
         VerticalPanel generalVP = new VerticalPanel();
         initWidget(generalVP);
 
@@ -31,9 +29,9 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         generalHP.add(contextVP);
         generalHP.add(localNavVP);
 
-        localNavBar = new LocalNavBar();
+        groupNavBar = new GroupNavBar(listener);
         SummaryPanel summaryPanel = new SummaryPanel();
-        localNavVP.add(localNavBar);
+        localNavVP.add(groupNavBar);
         localNavVP.add(summaryPanel);
 
         ContextToolBar contextToolBar = new ContextToolBar();
@@ -59,7 +57,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     }
 
     public void addTab(String name) {
-        localNavBar.addItem(name, name);
+        groupNavBar.addItem(name);
     }
 
     public void setLogo(String groupName) {
@@ -75,8 +73,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     }
 
     public void setSelectedTab(int tabIndex) {
-        localNavBar.selectItem(tabIndex);
-        listener.onTabSelected(tabIndex);
+        groupNavBar.selectItem(tabIndex);
     }
 
 }

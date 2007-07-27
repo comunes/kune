@@ -5,7 +5,7 @@ import org.ourproject.kune.platf.client.KuneTool;
 public class DocumentTool implements KuneTool {
 
     public String getName() {
-	return null;
+	return "Documentos";
     }
 
     public void show() {

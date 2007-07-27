@@ -5,7 +5,7 @@ import org.ourproject.kune.platf.client.KuneTool;
 public class ChatTool implements KuneTool {
 
     public String getName() {
-	return null;
+	return "Chat";
     }
 
     public void show() {

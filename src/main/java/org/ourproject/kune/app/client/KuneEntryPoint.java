@@ -9,7 +9,7 @@ import org.ourproject.kune.platf.client.KuneTool;
 import org.ourproject.kune.platf.client.workspace.Workspace;
 import org.ourproject.kune.platf.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.platf.client.workspace.ui.WorkspacePanel;
-
+ 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Window;
