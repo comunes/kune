@@ -7,7 +7,7 @@
 	<description>
 		kune fre/open/libre collaboration platform
 	</description>
-	<name>Main</name>
+	<name>Kune</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
@@ -217,16 +217,16 @@
 				<configuration>
 					<logLevel>INFO</logLevel>
 					<runTarget>
-						org.ourproject.kune.Main/Main.html
+						org.ourproject.kune.app.Kune/Kune.html
 					</runTarget>
 					<compileTarget>
-						<param>org.ourproject.kune.Main</param>
+						<param>org.ourproject.kune.app.Kune</param>
 					</compileTarget>
 					<generatorRootClasses>
 						kune.server.MyBean
 					</generatorRootClasses>
 					<generatorDestinationPackage>
-						org.ourproject.kune.Main
+						org.ourproject.kune.app.Kune
 					</generatorDestinationPackage>
 					<generateGettersAndSetters>
 						true
