@@ -15,8 +15,9 @@ public class WorkspacePresenter implements WorkspaceListener {
 
         KuneTool[] tools = workspace.getTools();
         for (int index = 0; index < tools.length; index++) {
-            KuneTool module = (KuneTool) tools[index];
-            view.addTab(module.getName());
+            KuneTool tool = (KuneTool) tools[index];
+            tool.setWorkspace(view);
+            view.addTab(tool.getName());
         }
         this.view.setLogo(workspace.getGroupName());
         if (tools.length > 0)

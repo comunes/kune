@@ -2,6 +2,7 @@ package org.ourproject.kune.app.client;
 
 import org.gwm.client.impl.DefaultGDesktopPane;
 import org.gwm.client.util.Gwm;
+import org.ourproject.kune.app.home.client.HomeTool;
 import org.ourproject.kune.chat.client.ChatTool;
 import org.ourproject.kune.docs.client.DocumentTool;
 import org.ourproject.kune.platf.client.Kune;
@@ -31,6 +32,16 @@ public class KuneEntryPoint implements EntryPoint, WindowResizeListener {
         initResizeListener();
         UIObject.setVisible(DOM.getElementById("initialstatusbar"), false);
     }
+    
+    public KuneTool[] registerTools() {
+        KuneTool[] registeredTools = new KuneTool[] {
+                new HomeTool(),
+                new DocumentTool(), 
+                new ChatTool()
+        };
+        
+        return registeredTools;
+    }
 
     private void initResizeListener() {
         Window.addWindowResizeListener(this);
@@ -41,7 +52,7 @@ public class KuneEntryPoint implements EntryPoint, WindowResizeListener {
     private void initWorkspace(Kune kune) {
         Workspace workspace = new Workspace();
         workspace.setGroupName("Vamos a ver si sale");
-        workspace.setTools(new KuneTool[] {new DocumentTool(), new ChatTool()});
+        workspace.setTools(registerTools());
         WorkspacePresenter workspacePresenter = new WorkspacePresenter(workspace);
         workspacePanel = new WorkspacePanel(workspacePresenter);
         workspacePresenter.init(workspacePanel);
