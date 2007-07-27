@@ -1,7 +1,45 @@
-/*
-Copyright (c) 2007, Yahoo! Inc. All rights reserved.
-Code licensed under the BSD License:
-http://developer.yahoo.net/yui/license.txt
-version: 2.2.2
-*/
 body {font:13px arial,helvetica,clean,sans-serif;*font-size:small;*font:x-small;}table {font-size:inherit;font:100%;}select, input, textarea {font:99% arial,helvetica,clean,sans-serif;}pre, code {font:115% monospace;*font-size:100%;}body * {line-height:1.22em;}
+
+.gwm-default-FrameCaption{
+	width:100%;
+	font-weight:bold;
+	color:#FFFFFF;
+	font-size:10px;
+}
+.gwm-default-Frame-TopBar{
+  width: 100%;
+  cursor:move;
+}
+
+.gwm-default-DialogOverlay{
+	background-color: #85BBEF;
+	filter:alpha(opacity=90);
+	-moz-opacity: 	0.9;
+	opacity: 0.9;
+}
+
+.gwm-default-ActionOverlay{
+	background-color: #85BBEF;
+	filter:alpha(opacity=15);
+	-moz-opacity: 	0.15;
+	opacity: 0.15;
+}
+
+.gwm-default-Frame-OutlineDrag{
+	background-color: #85BBEF;
+	filter:alpha(opacity=60);
+	-moz-opacity: 	0.6;
+	opacity: 0.6;
+}
+
+.gwm-default-FrameContent {
+	overflow:auto;
+	color: #000;
+	font-family: Tahoma, Arial, sans-serif;
+	font-size: 10px;
+	background:#FDFDFD;
+}
+
+.gwm-default-DeskTop-MinimizedFrameBar{
+	float:left;
+}
