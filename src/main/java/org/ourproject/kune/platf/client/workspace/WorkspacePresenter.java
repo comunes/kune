@@ -18,8 +18,8 @@ public class WorkspacePresenter implements WorkspaceListener {
             KuneTool module = (KuneTool) tools[index];
             view.addTab(module.getName());
         }
-        view.setLogo(workspace.getGroupName());
-        view.setSelectedTab(0);
+        this.view.setLogo(workspace.getGroupName());
+        this.view.setSelectedTab(0);
     }
 
     public void onTabSelected(int tabIndex) {
