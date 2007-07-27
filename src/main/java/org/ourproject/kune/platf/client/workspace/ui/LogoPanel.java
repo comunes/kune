@@ -1,4 +1,4 @@
-package org.ourproject.kune.platf.client.workspace;
+package org.ourproject.kune.platf.client.workspace.ui;
 
 import org.ourproject.kune.platf.client.Kune;
 

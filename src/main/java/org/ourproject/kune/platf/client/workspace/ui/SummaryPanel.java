@@ -1,4 +1,4 @@
-package org.ourproject.kune.platf.client.workspace;
+package org.ourproject.kune.platf.client.workspace.ui;
 
 import com.google.gwt.user.client.ui.VerticalPanel;
 

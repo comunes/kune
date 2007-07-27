@@ -1,5 +1,8 @@
-package org.ourproject.kune.platf.client.workspace;
+package org.ourproject.kune.platf.client.workspace.ui;
 
+
+import org.ourproject.kune.platf.client.workspace.WorkspaceListener;
+import org.ourproject.kune.platf.client.workspace.WorkspaceView;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -10,8 +13,10 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public class WorkspacePanel extends Composite implements WorkspaceView {
     private LogoPanel logoPanel;
     private ContextTitleBar contextTitle;
+    private final WorkspaceListener listener;
 
-    public WorkspacePanel() {
+    public WorkspacePanel(WorkspaceListener listener) {
+        this.listener = listener;
         VerticalPanel generalVP = new VerticalPanel();
         initWidget(generalVP);
 

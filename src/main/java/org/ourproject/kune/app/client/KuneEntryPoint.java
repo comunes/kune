@@ -2,9 +2,13 @@ package org.ourproject.kune.app.client;
 
 import org.gwm.client.impl.DefaultGDesktopPane;
 import org.gwm.client.util.Gwm;
+import org.ourproject.kune.chat.client.ChatTool;
+import org.ourproject.kune.docs.client.DocumentTool;
 import org.ourproject.kune.platf.client.Kune;
 import org.ourproject.kune.platf.client.KuneTool;
-import org.ourproject.kune.platf.client.workspace.WorkspacePanel;
+import org.ourproject.kune.platf.client.workspace.Workspace;
+import org.ourproject.kune.platf.client.workspace.WorkspacePresenter;
+import org.ourproject.kune.platf.client.workspace.ui.WorkspacePanel;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.DOM;
@@ -15,10 +19,8 @@ import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 
 public class KuneEntryPoint implements EntryPoint, WindowResizeListener {
-
     private DefaultGDesktopPane desktop;
-    private WorkspacePanel workspace;
-
+    private WorkspacePanel workspacePanel;
 
     public void onModuleLoad() {
         Kune kune = Kune.getInstance();
@@ -38,25 +40,24 @@ public class KuneEntryPoint implements EntryPoint, WindowResizeListener {
     }
 
     private void initWorkspace(Kune kune) {
-        workspace = kune.getWorkspace();
-        KuneTool[] modules = kune.getInstalledTools();
-        for (int index = 0; index < modules.length; index++) {
-            KuneTool module = (KuneTool) modules[index];
-            workspace.addTab(module.getName());
-        }
-        workspace.setLogo("Vamos a ver si sale");
+        Workspace workspace = new Workspace();
+        workspace.setGroupName("Vamos a ver si sale");
+        workspace.setTools(new KuneTool[] {new DocumentTool(), new ChatTool()});
+        WorkspacePresenter workspacePresenter = new WorkspacePresenter(workspace);
+        workspacePanel = new WorkspacePanel(workspacePresenter);
+        workspacePresenter.init(workspacePanel);
     }
 
     private void createDesktop() {
         desktop = new DefaultGDesktopPane();
-        desktop.addWidget((Widget) workspace, 0, 0);
+        desktop.addWidget((Widget) workspacePanel, 0, 0);
         Gwm.setOverlayLayerDisplayOnDragAction(false);
         desktop.setTheme("alphacubecustom");
     }
 
     public void onWindowResized(int width, int height) {
-        workspace.setWidth("" + width + "px");
-        workspace.setHeight("" + height + "px");
+        workspacePanel.setWidth("" + width + "px");
+        workspacePanel.setHeight("" + height + "px");
     }
 
 }
