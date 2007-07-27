@@ -223,8 +223,6 @@ public class BorderDecorator extends ComplexPanel implements HasColor {
             DOM.setStyleAttribute(div1b, "backgroundColor", color);
         if (null != div2b)
             DOM.setStyleAttribute(div2b, "backgroundColor", color);
-        if (null != divElement)
-            DOM.setStyleAttribute(divElement, "backgroundColor", color);
     }
 
     public String getColor() {
