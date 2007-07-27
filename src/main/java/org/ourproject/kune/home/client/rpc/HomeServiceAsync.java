@@ -1,7 +1,6 @@
 package org.ourproject.kune.home.client.rpc;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.ourproject.kune.platf.client.extend.ContentProvider;
 
-public interface HomeServiceAsync {
-    void loadHome(String userHash, AsyncCallback asyncCallback);
+public interface HomeServiceAsync extends ContentProvider {
 }

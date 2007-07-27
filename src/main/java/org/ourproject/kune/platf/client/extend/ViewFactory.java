@@ -1,5 +1,8 @@
 package org.ourproject.kune.platf.client.extend;
 
-public interface ViewFactory {
+import org.ourproject.kune.platf.client.dto.ContentTreeDTO;
 
+public interface ViewFactory {
+    Object getContextView(ContentTreeDTO tree);
+    Object getContentView(Object content);
 }

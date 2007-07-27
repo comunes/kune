@@ -1,7 +1,7 @@
 package org.ourproject.kune.platf.client;
 
 public class HistoryToken {
-    private static final String SEPARATOR = "/";
+    private static final String SEPARATOR = ":";
     public final String controller;
     public final String action;
     public final String value;
