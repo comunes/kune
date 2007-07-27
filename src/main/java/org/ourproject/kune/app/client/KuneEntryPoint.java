@@ -5,12 +5,14 @@ import org.gwm.client.util.Gwm;
 import org.ourproject.kune.chat.client.ChatTool;
 import org.ourproject.kune.docs.client.DocumentTool;
 import org.ourproject.kune.home.client.HomeTool;
+import org.ourproject.kune.home.client.rpc.HomeService;
+import org.ourproject.kune.home.client.rpc.HomeServiceMocked;
 import org.ourproject.kune.platf.client.Kune;
 import org.ourproject.kune.platf.client.KuneTool;
 import org.ourproject.kune.platf.client.workspace.Workspace;
 import org.ourproject.kune.platf.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.platf.client.workspace.ui.WorkspacePanel;
- 
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Window;
@@ -22,8 +24,14 @@ import com.google.gwt.user.client.ui.Widget;
 public class KuneEntryPoint implements EntryPoint, WindowResizeListener {
     private DefaultGDesktopPane desktop;
     private WorkspacePanel workspacePanel;
-
+    private final boolean useServer;
+    
+    public KuneEntryPoint() {
+        useServer = false;
+    }
+    
     public void onModuleLoad() {
+        if (!useServer) mockServer();
         Kune kune = Kune.getInstance();
 
         initWorkspace(kune);
@@ -68,6 +76,10 @@ public class KuneEntryPoint implements EntryPoint, WindowResizeListener {
     public void onWindowResized(int width, int height) {
         workspacePanel.setWidth("" + width + "px");
         workspacePanel.setHeight("" + height + "px");
+    }
+
+    private void mockServer() {
+        HomeService.App.setMock(new HomeServiceMocked());
     }
 
 }
