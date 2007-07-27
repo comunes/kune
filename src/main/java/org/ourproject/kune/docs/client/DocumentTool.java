@@ -10,7 +10,7 @@ public class DocumentTool extends AbstractTool implements KuneTool {
     }
 
     public void show() {
-
+        
     }
 
 }

@@ -95,7 +95,8 @@
 	margin: 0 9px;
 }
 
-.kune-ContextNavBar {
+/* ContextMenu */
+.gwt-HorizontalSplitPanel right {
 	background-color: #CFA;
 	padding: 5px;
 	width: 100%;
@@ -121,7 +122,8 @@
 	height: 24px;
 }
 
-.kune-ContextContents {
+/* Main Content */
+.gwt-HorizontalSplitPanel left {
 	background-color: #FFF;
 	margin: 5px;
 	width: 100%;

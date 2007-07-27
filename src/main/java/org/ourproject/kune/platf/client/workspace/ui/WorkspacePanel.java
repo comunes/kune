@@ -9,11 +9,13 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.HorizontalSplitPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 public class WorkspacePanel extends Composite implements WorkspaceView {
     private LogoPanel logoPanel;
     private ContextTitleBar contextTitle;
     private GroupNavBar groupNavBar;
+    private HorizontalSplitPanel contextHSP;
 
     public WorkspacePanel(WorkspaceListener listener) {
         VerticalPanel generalVP = new VerticalPanel();
@@ -36,18 +38,13 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 
         ContextToolBar contextToolBar = new ContextToolBar();
         contextTitle = new ContextTitleBar();
-        HorizontalSplitPanel contextHSP = new HorizontalSplitPanel();
+        contextHSP = new HorizontalSplitPanel();
         ContextBottomBar contextBottomBar = new ContextBottomBar();
         contextVP.add(contextToolBar);
         contextVP.add(contextTitle);
         contextVP.add(contextHSP);
         contextVP.add(contextBottomBar);
 
-        ContextContents contextContents = new ContextContents();
-        contextHSP.setLeftWidget(contextContents);
-
-        ContextNavBar contextNavBar = new ContextNavBar();
-        contextHSP.setRightWidget(contextNavBar);
         // SiteMessageDialog contextMessagesBar = new SiteMessageDialog();
 
         // Set properties
@@ -74,6 +71,18 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 
     public void setSelectedTab(int tabIndex) {
         groupNavBar.selectItem(tabIndex);
+    }
+
+    public void setContent(Widget content) {
+        Widget left = contextHSP.getLeftWidget();
+        if (left != null) contextHSP.remove(left);
+        contextHSP.setLeftWidget(content);
+    }
+
+    public void setContextMenu(Widget contextMenu) {
+        Widget right = contextHSP.getRightWidget();
+        if (right != null) contextHSP.remove(right);
+        contextHSP.setRightWidget(contextMenu);
     }
 
 }

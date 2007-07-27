@@ -1,5 +1,7 @@
 package org.ourproject.kune.app.home.client.rpc;
 
-public interface HomeServiceAsync {
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
+public interface HomeServiceAsync {
+    void loadHome(String userHash, AsyncCallback asyncCallback);
 }
