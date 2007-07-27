@@ -14,6 +14,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     private LogoPanel logoPanel;
     private ContextTitleBar contextTitle;
     private final WorkspaceListener listener;
+    private LocalNavBar localNavBar;
 
     public WorkspacePanel(WorkspaceListener listener) {
         this.listener = listener;
@@ -24,17 +25,17 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         HorizontalPanel generalHP = new HorizontalPanel();
         generalVP.add(logoPanel);
         generalVP.add(generalHP);
-        
+
         VerticalPanel contextVP = new VerticalPanel();
         VerticalPanel localNavVP = new VerticalPanel();
         generalHP.add(contextVP);
         generalHP.add(localNavVP);
-        
-        LocalNavBar localNavBar = new LocalNavBar();
+
+        localNavBar = new LocalNavBar();
         SummaryPanel summaryPanel = new SummaryPanel();
         localNavVP.add(localNavBar);
         localNavVP.add(summaryPanel);
-        
+
         ContextToolBar contextToolBar = new ContextToolBar();
         contextTitle = new ContextTitleBar();
         HorizontalSplitPanel contextHSP = new HorizontalSplitPanel();
@@ -43,13 +44,13 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         contextVP.add(contextTitle);
         contextVP.add(contextHSP);
         contextVP.add(contextBottomBar);
-        
+
         ContextContents contextContents = new ContextContents();
         contextHSP.setLeftWidget(contextContents);
 
         ContextNavBar contextNavBar = new ContextNavBar();
         contextHSP.setRightWidget(contextNavBar);
-//        SiteMessageDialog contextMessagesBar = new SiteMessageDialog();
+        // SiteMessageDialog contextMessagesBar = new SiteMessageDialog();
 
         // Set properties
         addStyleName("kune-WorkspacePanel");
@@ -58,6 +59,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     }
 
     public void addTab(String name) {
+        //localNavBar.addItem(name, url)
     }
 
     public void setLogo(String groupName) {

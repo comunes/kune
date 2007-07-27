@@ -65,7 +65,7 @@ class LocalNavBar extends VerticalPanel implements ClickListener {
 
     public void deleteItem(int item) {
         this.verifyExist(item);
-        this.deleteItem(item);
+        this.remove(item);
         if (currentItem == item) {
             currentItem = NONE ;
         }
