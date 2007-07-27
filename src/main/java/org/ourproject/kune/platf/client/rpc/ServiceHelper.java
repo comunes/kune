@@ -15,5 +15,8 @@ public class ServiceHelper {
         }
         return instance;
     }
-
+    
+    public static void setMock(Object mock) {
+        instance = mock;
+    }
 }
