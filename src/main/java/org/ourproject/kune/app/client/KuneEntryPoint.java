@@ -2,9 +2,9 @@ package org.ourproject.kune.app.client;
 
 import org.gwm.client.impl.DefaultGDesktopPane;
 import org.gwm.client.util.Gwm;
-import org.ourproject.kune.app.home.client.HomeTool;
 import org.ourproject.kune.chat.client.ChatTool;
 import org.ourproject.kune.docs.client.DocumentTool;
+import org.ourproject.kune.home.client.HomeTool;
 import org.ourproject.kune.platf.client.Kune;
 import org.ourproject.kune.platf.client.KuneTool;
 import org.ourproject.kune.platf.client.workspace.Workspace;

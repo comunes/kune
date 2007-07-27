@@ -1,4 +1,4 @@
-package org.ourproject.kune.app.home.client.rpc;
+package org.ourproject.kune.home.client.rpc;
 
 import org.ourproject.kune.platf.client.rpc.ServiceHelper;
 

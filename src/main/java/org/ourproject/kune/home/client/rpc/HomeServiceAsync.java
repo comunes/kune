@@ -1,4 +1,4 @@
-package org.ourproject.kune.app.home.client.rpc;
+package org.ourproject.kune.home.client.rpc;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
