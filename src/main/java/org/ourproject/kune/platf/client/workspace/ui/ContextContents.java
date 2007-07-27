@@ -10,11 +10,4 @@ class ContextContents extends VerticalPanel {
         addStyleName("kune-ContextContents");
     }
 
-    public void clear() {
-        clear();
-    }
-
-    public void add(Widget widget) {
-        insert(widget, getWidgetCount()-1);
-    }
 }

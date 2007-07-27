@@ -10,12 +10,5 @@ class ContextToolBar extends HorizontalPanel {
         this.addStyleName("kune-ContextToolBar");
     }
 
-    public void add(Widget widget) {
-        add(widget);
-    }
-
-    public void clear() {
-        clear();
-    }
 }
 
