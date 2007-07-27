@@ -1,4 +1,4 @@
-package org.ourproject.kune.platf.client;
+package org.ourproject.kune.platf.client.actions;
 
 public class HistoryToken {
     private static final String SEPARATOR = ":";

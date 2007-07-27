@@ -9,15 +9,15 @@ import org.ourproject.kune.docs.client.rpc.DocumentServiceMocked;
 import org.ourproject.kune.home.client.HomeModule;
 import org.ourproject.kune.home.client.rpc.HomeService;
 import org.ourproject.kune.home.client.rpc.HomeServiceMocked;
-import org.ourproject.kune.platf.client.HistoryToken;
 import org.ourproject.kune.platf.client.Kune;
 import org.ourproject.kune.platf.client.KunePlatform;
+import org.ourproject.kune.platf.client.actions.HistoryToken;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.rpc.KuneService;
 import org.ourproject.kune.platf.client.rpc.KuneServiceAsync;
 import org.ourproject.kune.platf.client.rpc.KuneServiceMocked;
 import org.ourproject.kune.platf.client.workspace.WorkspaceActions;
-import org.ourproject.kune.platf.client.workspace.WorkspaceDefault;
+import org.ourproject.kune.platf.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.platf.client.workspace.ui.WorkspacePanel;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -47,22 +47,22 @@ public class KuneEntryPoint implements EntryPoint {
         new DocumentModule().configure(platform);
         new ChatModule().configure(platform);
         
-        final WorkspacePanel workspacePanel = new WorkspacePanel();
-        final WorkspaceDefault workspace = new WorkspaceDefault(platform, workspacePanel);
-        WorkspaceActions wsActions = new WorkspaceActions(workspace);
+        final WorkspacePanel view = new WorkspacePanel();
+        final WorkspacePresenter presenter = new WorkspacePresenter(platform, view);
+        WorkspaceActions wsActions = new WorkspaceActions(presenter);
         platform.dispatcher.register(WorkspaceActions.NAME, wsActions);
         
-        initResizeListener(workspacePanel);
-        RootPanel.get().add(createDesktop(workspacePanel));
+        initResizeListener(view);
+        RootPanel.get().add(createDesktop(view));
 
         int total = platform.getToolCount();
         for (int index = 0; index < total; index++) {
-            workspacePanel.addTab(platform.getTool(index).name);
+            view.addTab(platform.getTool(index).name);
         }
         UIObject.setVisible(DOM.getElementById("initialstatusbar"), false);
         DeferredCommand.addCommand(new Command() {
             public void execute() {
-                workspacePanel.adjustSize(Window.getClientWidth(), Window
+                view.adjustSize(Window.getClientWidth(), Window
                         .getClientHeight());
             }
         });
@@ -70,15 +70,16 @@ public class KuneEntryPoint implements EntryPoint {
         KuneServiceAsync server = KuneService.App.getInstance();
         server.getDefaultGroup(Kune.getUserHash(), new AsyncCallback () {
             public void onFailure(Throwable caught) {
-                workspace.showError(caught);
+                presenter.showError(caught);
             }
 
             public void onSuccess(Object result) {
-                workspace.setGroup((GroupDTO) result);
+                presenter.setGroup((GroupDTO) result);
                 History.newItem(HistoryToken.encode("workspace", "tab", 0));
             }
         });
     } 
+    
 
     private void mockServer() {
         KuneService.App.setMock(new KuneServiceMocked());

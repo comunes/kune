@@ -9,13 +9,13 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
 
-public class WorkspaceDefault {
+public class WorkspacePresenter {
     private final KunePlatform platform;
     private final WorkspaceView view;
     private Tool currentTool;
     private int currentToolIndex;
 
-    public WorkspaceDefault(KunePlatform platform, WorkspaceView view) {
+    public WorkspacePresenter(KunePlatform platform, WorkspaceView view) {
         this.platform = platform;
         this.view = view;
     }

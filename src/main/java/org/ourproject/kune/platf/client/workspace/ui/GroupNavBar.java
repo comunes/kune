@@ -18,8 +18,8 @@
 package org.ourproject.kune.platf.client.workspace.ui;
 
 import org.ourproject.kune.platf.client.ColorScheme;
-import org.ourproject.kune.platf.client.HistoryToken;
 import org.ourproject.kune.platf.client.Kune;
+import org.ourproject.kune.platf.client.actions.HistoryToken;
 import org.ourproject.kune.platf.client.ui.BorderDecorator;
 import org.ourproject.kune.platf.client.ui.HasColor;
 

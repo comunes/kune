@@ -2,7 +2,6 @@ package org.ourproject.kune.platf.client.actions;
 
 import java.util.HashMap;
 
-import org.ourproject.kune.platf.client.HistoryToken;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.HistoryListener;
