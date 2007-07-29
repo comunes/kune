@@ -1,9 +1,8 @@
 body {
-background-color:#FFF;
-color:#000;
-font-family:arial;
-font-size:100%;
-margin:5px 5px;
+	background-color: #FFF;
+	color: #000;
+	font-family: arial;
+	margin: 5px 5px;
 }
 
 #initialstatusbar {
@@ -13,7 +12,6 @@ margin:5px 5px;
 	width: 1px;
 	z-index: 1000;
 }
-
 
 /* Global styles */
 .kune-status {
@@ -25,23 +23,22 @@ margin:5px 5px;
 }
 
 .gwt-HorizontalSplitPanel .splitter {
-width:5px;
-cursor:e-resize;
-background:#CDDE87 url(img/splitter-vert-bar.gif) no-repeat;
-background-position:center center;
-border-right:1px solid #BCD35F;
-border-left:1px solid #BCD35F;
+	width: 5px;
+	cursor: e-resize;
+	background: #CDDE87 url(img/splitter-vert-bar.gif) no-repeat;
+	background-position: center center;
+	border-right: 1px solid #BCD35F;
+	border-left: 1px solid #BCD35F;
 }
 
 /* Workspace styles */
-
 .kune-WorkspacePanel {
 	width: 100%;
 	background-color: #FFF;
 }
 
 .kuen-WokspacePane .Tab {
-
+	
 }
 
 .kune-WorkspacePanel .GeneralHP {
@@ -59,13 +56,13 @@ border-left:1px solid #BCD35F;
 	width: 468px;
 	height: 60px;
 	margin-bottom: 4px;
-	padding: 5px;
 }
 
 .kune-EntityTextLogo .gwt-Label {
 	font-size: 122%;
 	font-weight: 700;
 	color: navy;
+	margin: 5px;
 }
 
 .kune-EntityTextLogo .gwt-Hyperlink {
@@ -73,6 +70,7 @@ border-left:1px solid #BCD35F;
 	font-size: 77%;
 	text-decoration: underline;
 	text-align: right;
+	margin: 5px;
 }
 
 .kune-SummaryPanel {
@@ -89,17 +87,16 @@ border-left:1px solid #BCD35F;
 	color: blue;
 }
 
-.kune-GroupNavBar .gwt-Hyperlink a {
-/* color:#FFF; */
-color: blue;
-font-size:85%;
-font-weight:700;
-padding:0 9px;
-	text-decoration:none;
+.kune-GroupNavBar .gwt-Hyperlink a { /* color:#FFF; */
+	color: blue;
+	font-size: 85%;
+	font-weight: 700;
+	padding: 0 9px;
+	text-decoration: none;
 }
 
 .kune-GroupNavBar .itemNotSelected {
-color:red;
+	color: red;
 	width: 100%;
 }
 
@@ -107,7 +104,7 @@ color:red;
 	background-color: #5FD35F;
 	color: #250;
 	font-weight: 700;
-	width:100%;
+	width: 100%;
 }
 
 .kune-ContextTitleBar .gwt-Label {
@@ -145,10 +142,9 @@ color:red;
 }
 
 /* Main Content */
-
 .gwt-HorizontalSplitPanel left {
 	background-color: #FFF;
 	margin: 5px;
 	width: 100%;
-    height: 95%;
+	height: 95%;
 }

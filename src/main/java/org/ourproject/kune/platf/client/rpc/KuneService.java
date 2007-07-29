@@ -1,11 +1,15 @@
 package org.ourproject.kune.platf.client.rpc;
 
+import org.ourproject.kune.platf.client.dto.GroupDTO;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 public interface KuneService extends RemoteService {
 
+    public GroupDTO getDefaultGroup(String userHash);
+    
     public class App {
         private static KuneServiceAsync ourInstance = null;
 

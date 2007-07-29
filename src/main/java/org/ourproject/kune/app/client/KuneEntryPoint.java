@@ -16,6 +16,7 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.rpc.KuneService;
 import org.ourproject.kune.platf.client.rpc.KuneServiceAsync;
 import org.ourproject.kune.platf.client.rpc.KuneServiceMocked;
+import org.ourproject.kune.platf.client.utils.PrefetchUtilites;
 import org.ourproject.kune.platf.client.workspace.WorkspaceActions;
 import org.ourproject.kune.platf.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.platf.client.workspace.ui.WorkspacePanel;
@@ -64,6 +65,12 @@ public class KuneEntryPoint implements EntryPoint {
             public void execute() {
                 view.adjustSize(Window.getClientWidth(), Window
                         .getClientHeight());
+            }
+        });
+        
+        DeferredCommand.addCommand(new Command() {
+            public void execute() {
+                PrefetchUtilites.preFetchImpImages();
             }
         });
         

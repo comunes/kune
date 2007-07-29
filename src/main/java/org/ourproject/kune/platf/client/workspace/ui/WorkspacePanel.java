@@ -3,13 +3,13 @@ package org.ourproject.kune.platf.client.workspace.ui;
 
 import org.ourproject.kune.platf.client.Kune;
 import org.ourproject.kune.platf.client.ui.BorderDecorator;
-import org.ourproject.kune.platf.client.ui.HasColor;
 import org.ourproject.kune.platf.client.workspace.WorkspaceView;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.HorizontalSplitPanel;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -58,6 +58,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         addStyleName("kune-WorkspacePanel");
         contextVP.addStyleName("ContextPanel");
         generalHP.addStyleName("GeneralHP");
+        setContextMenu(new Label("Menu"));
     }
 
     public void addTab(String name) {
