@@ -16,7 +16,7 @@ public class LoggerMethodInterceptor implements MethodInterceptor {
 
         try {
             Object result = invocation.proceed();
-            logResult(result);
+            logResult(invocation, result);
             return result;
         } catch (Throwable e) {
             logException(e);
@@ -32,41 +32,50 @@ public class LoggerMethodInterceptor implements MethodInterceptor {
     }
 
     private void logInvocation(MethodInvocation invocation) {
-        StringBuffer buffer = new StringBuffer("INVOKING on [");
-        addTargetCllassName(invocation, buffer);
-        buffer.append("] => ");
+        StringBuffer buffer = createBuffer(invocation);
         addMethodName(buffer);
         addMethodParameters(invocation, buffer);
         log.debug(buffer.toString());
     }
 
+    private StringBuffer createBuffer(MethodInvocation invocation) {
+        StringBuffer buffer = new StringBuffer("[");
+        addTargetCllassName(invocation, buffer);
+        buffer.append("]");
+        return buffer;
+    }
+
     private void addTargetCllassName(MethodInvocation invocation, StringBuffer buffer) {
-        buffer.append(invocation.getThis().getClass().getName());
+        buffer.append(invocation.getThis().getClass().getSimpleName());
     }
 
     private void addMethodParameters(MethodInvocation invocation, StringBuffer buffer) {
-        buffer.append(" [ ");
+        buffer.append("(");
         Object[] arguments = invocation.getArguments();
         for (Object arg : arguments) {
-            buffer.append(getValue(arg)).append(" |\n ");
+            buffer.append(getValue(arg)).append(", ");
         }
-        buffer.append(" ] ");
+        buffer.append(")");
     }
 
     private void addMethodName(StringBuffer buffer) {
+        buffer.append(".");
         buffer.append(methodName);
     }
 
-    private void logResult(Object result) {
-        StringBuffer buffer = new StringBuffer("[");
-        buffer.append(methodName).append("] RESULT => ");
-        buffer.append(getValue(result));
+    private void logResult(MethodInvocation invocation, Object result) {
+        StringBuffer buffer = createBuffer(invocation);
+        addMethodName(buffer);
+        if (invocation.getMethod().getReturnType() != null) {
+            buffer.append(" => ");
+            buffer.append(getValue(result));
+        }
         log.debug(buffer.toString());
     }
 
     private String getValue(Object result) {
         if (result == null)
-            return "[null]";
+            return "null";
         else
             return result.toString();
     }

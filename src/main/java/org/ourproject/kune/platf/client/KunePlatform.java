@@ -3,7 +3,7 @@ package org.ourproject.kune.platf.client;
 import java.util.ArrayList;
 
 import org.ourproject.kune.platf.client.actions.EventDispatcher;
-import org.ourproject.kune.platf.client.extend.ContentProvider;
+import org.ourproject.kune.platf.client.extend.ContentProviderAsync;
 import org.ourproject.kune.platf.client.extend.Register;
 import org.ourproject.kune.platf.client.extend.ViewFactory;
 
@@ -19,7 +19,7 @@ public class KunePlatform implements Register {
         History.addHistoryListener(dispatcher);
     }
     
-    public void registerTool(String name, ContentProvider provider, ViewFactory factory) {
+    public void registerTool(String name, ContentProviderAsync provider, ViewFactory factory) {
         tools.add(new Tool(name, provider, factory));
     }
 

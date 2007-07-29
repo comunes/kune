@@ -1,9 +1,11 @@
 package org.ourproject.kune.home.client.rpc;
 
+import org.ourproject.kune.platf.client.rpc.ContentProvider;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
-public interface HomeService {
+public interface HomeService extends ContentProvider {
 
     public class App {
         private static HomeServiceAsync ourInstance = null;

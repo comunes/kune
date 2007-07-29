@@ -40,7 +40,8 @@ public class WorkspacePresenter {
                 public void onSuccess(Object result) {
                     ContentTreeDTO tree = (ContentTreeDTO) result;
                     view.setContextMenu((Widget) currentTool.factory.getContextView(tree));
-                    view.setContent((Widget) currentTool.factory.getContentView(tree.content));
+                    // TODO:
+                    view.setContent((Widget) currentTool.factory.getContentView(null));
                 }
             });
         }
