@@ -130,6 +130,10 @@ body {
 	height: 25px;
 }
 
+.kune-ContextToolBar .gwt-Label {	
+	margin: 0 9px;
+}
+
 .kune-ContextBottomBar {
 	background: #5FD35F;
 	color: #FFF;
