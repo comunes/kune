@@ -2,7 +2,7 @@ package org.ourproject.kune.sitebar.client.ui;
 
 import com.google.gwt.user.client.ui.Image;
 
-public interface SiteBarVIew {
+public interface SiteBarView {
 
         void showLoggedUserName(String user);
 
@@ -17,5 +17,9 @@ public interface SiteBarVIew {
         void clearSearchText();
 
         void setSearchText(String text);
+
+        void showLoginDialog();
+
+        public void hideLoginDialog();
 
 }
