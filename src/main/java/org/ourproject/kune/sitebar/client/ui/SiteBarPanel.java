@@ -89,8 +89,7 @@ public class SiteBarPanel extends Composite implements SiteBarView, ClickListene
             }
             public void onKeyUp(Widget widget, char key, int mod) {
                 if (key == KEY_ENTER) {
-                    FireLog.info("Enter pressed");
-                    if (searchTextBox.getText() != "") {
+                    if (searchTextBox.getText().length() > 0) {
                         listener.doSearch(searchTextBox.getText());
                     }
                 }

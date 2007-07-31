@@ -57,6 +57,8 @@ public class LoginPanel extends Composite implements LoginView, ClickListener, C
         send.addClickListener(this);
         send.setEnabled(false);
         cancel.addClickListener(this);
+        nick.addChangeListener(this);
+        pass.addChangeListener(this);
     }
 
     public void onClick(final Widget sender) {
