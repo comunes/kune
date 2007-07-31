@@ -5,6 +5,8 @@ import org.ourproject.kune.sitebar.client.Images;
 import org.ourproject.kune.sitebar.client.SiteBar;
 import org.ourproject.kune.sitebar.client.Translate;
 
+import to.tipit.gwtlib.FireLog;
+
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
@@ -13,6 +15,7 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.TextBox;
@@ -34,7 +37,7 @@ public class SiteBarPanel extends Composite implements SiteBarView, ClickListene
     private LoginPanel loginPanel;
     DialogBox dialog;
 
-    public SiteBarPanel(SiteBarListener listener) {
+    public SiteBarPanel(final SiteBarListener listener) {
 
         // Initialize
         siteBarHP = new HorizontalPanel();
@@ -75,11 +78,25 @@ public class SiteBarPanel extends Composite implements SiteBarView, ClickListene
         newGroupHyperlink.setText(t.NewGroup());
         newGroupHyperlink.addClickListener(this);
         pipeSeparatorHtml.setHTML("|");
-        pipeSeparatorHtml.setStyleName(".kune-SiteBarPanel-Separator");
+        pipeSeparatorHtml.setStyleName("kune-SiteBarPanel-Separator");
         loginHyperlink.setText(t.Login());
         loginHyperlink.addClickListener(this);
+        searchButton.addClickListener(this);
+        searchTextBox.addKeyboardListener(new KeyboardListener() {
+            public void onKeyDown(Widget arg0, char arg1, int arg2) {
+            }
+            public void onKeyPress(Widget arg0, char arg1, int arg2) {
+            }
+            public void onKeyUp(Widget widget, char key, int mod) {
+                if (key == KEY_ENTER) {
+                    FireLog.info("Enter pressed");
+                    if (searchTextBox.getText() != "") {
+                        listener.doSearch(searchTextBox.getText());
+                    }
+                }
+            }});
         searchTextBox.setWidth("180");
-        searchTextBox.setTitle(t.Search());
+        searchTextBox.setText(t.Search());
 
         // TODO: externalize this
         img.kuneLogo16px().applyTo(logoImage);
@@ -124,17 +141,14 @@ public class SiteBarPanel extends Composite implements SiteBarView, ClickListene
             listener.doLogin();
         } else if (sender == newGroupHyperlink) {
             listener.doNewGroup();
-        } else if (sender == searchButton) {
-            listener.doSearch(searchTextBox.getText());
         }
-
     }
 
     public void showLoginDialog() {
         if (loginPanel == null) {
             LoginPresenter loginPresenter = new LoginPresenter();
             loginPanel = new LoginPanel(loginPresenter);
-            loginPresenter.init(loginPanel);
+            loginPresenter.init(loginPanel, this);
         }
         dialog = new DialogBox();
         dialog.setWidget(loginPanel);
