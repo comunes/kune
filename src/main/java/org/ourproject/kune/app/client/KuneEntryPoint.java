@@ -20,6 +20,8 @@ import org.ourproject.kune.platf.client.utils.PrefetchUtilites;
 import org.ourproject.kune.platf.client.workspace.WorkspaceActions;
 import org.ourproject.kune.platf.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.platf.client.workspace.ui.WorkspacePanel;
+import org.ourproject.kune.sitebar.client.ui.SiteBarPanel;
+import org.ourproject.kune.sitebar.client.ui.SiteBarPresenter;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Command;
@@ -35,47 +37,54 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class KuneEntryPoint implements EntryPoint {
     private final boolean useServer;
-    
+
     public KuneEntryPoint() {
         useServer = false;
     }
-    
+
     public void onModuleLoad() {
         if (!useServer) mockServer();
-        
+
         KunePlatform platform = new KunePlatform();
         new HomeModule().configure(platform);
         new DocumentModule().configure(platform);
         new ChatModule().configure(platform);
-        
+
         final WorkspacePanel view = new WorkspacePanel();
         final WorkspacePresenter presenter = new WorkspacePresenter(platform, view);
         WorkspaceActions wsActions = new WorkspaceActions(presenter);
         platform.dispatcher.register(WorkspaceActions.NAME, wsActions);
-        
+
+
+        final SiteBarPresenter siteBarPresenter = new SiteBarPresenter();
+        final SiteBarPanel siteBar = new SiteBarPanel(siteBarPresenter);
+        siteBarPresenter.init(siteBar);
+
         initResizeListener(view);
-        RootPanel.get().add(createDesktop(view));
+        RootPanel.get().add(createDesktop(view, siteBar));
 
         int total = platform.getToolCount();
         for (int index = 0; index < total; index++) {
             view.addTab(platform.getTool(index).name);
         }
+
         UIObject.setVisible(DOM.getElementById("initialstatusbar"), false);
+
         DeferredCommand.addCommand(new Command() {
             public void execute() {
                 view.adjustSize(Window.getClientWidth(), Window
                         .getClientHeight());
             }
         });
-        
+
         DeferredCommand.addCommand(new Command() {
             public void execute() {
                 PrefetchUtilites.preFetchImpImages();
             }
         });
-        
+
         KuneServiceAsync server = KuneService.App.getInstance();
-        server.getDefaultGroup(Kune.getUserHash(), new AsyncCallback () {
+        server.getDefaultGroup(Kune.getInstance().getUserHash(), new AsyncCallback () {
             public void onFailure(Throwable caught) {
                 presenter.showError(caught);
             }
@@ -85,8 +94,7 @@ public class KuneEntryPoint implements EntryPoint {
                 History.newItem(HistoryToken.encode("workspace", "tab", 0));
             }
         });
-    } 
-    
+    }
 
     private void mockServer() {
         KuneService.App.setMock(new KuneServiceMocked());
@@ -105,13 +113,14 @@ public class KuneEntryPoint implements EntryPoint {
     }
 
 
-    private DefaultGDesktopPane createDesktop(Widget workspacePanel) {
+    private DefaultGDesktopPane createDesktop(Widget workspacePanel, Widget siteBar) {
         DefaultGDesktopPane desktop = new DefaultGDesktopPane();
-        desktop.addWidget((Widget) workspacePanel, 0, 0);
+        desktop.addWidget((Widget) workspacePanel, 0, 20);
+        desktop.addWidget((Widget) siteBar, 0, 0);
         Gwm.setOverlayLayerDisplayOnDragAction(false);
         desktop.setTheme("alphacubecustom");
         return desktop;
     }
-    
+
 
 }

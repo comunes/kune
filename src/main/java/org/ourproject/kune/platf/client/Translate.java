@@ -10,7 +10,6 @@ public interface Translate extends Constants {
     String Label2();
     String Option0();
     String Label1();
-    String NewGroup();
     String MyApp();
     String Title();
     String MyApplication();
@@ -24,10 +23,7 @@ public interface Translate extends Constants {
     String Options();
     String Text();
     String Forums();
-    String HelpWithTranslation();
-    String Login();
     String Blogs();
-    String Processing();
     String North();
     String Chatroom();
     String Cancel();
@@ -35,10 +31,6 @@ public interface Translate extends Constants {
     String NextArrow();
     String Finish();
     String Change();
-    String Search();
-    String Help();
-    String GlobalSiteOptions();
-    String ContactUs();
     String user();
     String users();
     String NotRated();

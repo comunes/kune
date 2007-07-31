@@ -21,7 +21,7 @@ public class WorkspacePresenter {
     }
 
     public void showError(Throwable caught) {
-        
+
     }
 
     public void setGroup(GroupDTO group) {
@@ -33,7 +33,7 @@ public class WorkspacePresenter {
             currentToolIndex = index;
             currentTool = platform.getTool(index);
             view.setSelectedTab(index);
-            currentTool.provider.getContentTree(Kune.getUserHash(), new AsyncCallback() {
+            currentTool.provider.getContentTree(Kune.getInstance().getUserHash(), new AsyncCallback() {
                 public void onFailure(Throwable arg0) {
                 }
 

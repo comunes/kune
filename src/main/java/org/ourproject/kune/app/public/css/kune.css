@@ -1,154 +1,195 @@
 body {
-	background-color: #FFF;
-	color: #000;
-	font-family: arial;
-	margin: 5px 5px;
+    background-color: #FFF;
+    color: #000;
+    font-family: arial;
+    margin: 5px 5px 0 5px;
 }
 
 #initialstatusbar {
-	position: absolute;
-	top: 2px;
-	left: 2px;
-	width: 1px;
-	z-index: 1000;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 1px;
+    z-index: 1000;
 }
 
 /* Global styles */
-.kune-status {
-	background: #E5FF80;
-	border: 1px solid #E5FF80;
-	white-space: nowrap;
-	height: 16px;
-	padding: 0 3px;
-}
 
 .gwt-HorizontalSplitPanel .splitter {
-	width: 5px;
-	cursor: e-resize;
-	background: #CDDE87 url(img/splitter-vert-bar.gif) no-repeat;
-	background-position: center center;
-	border-right: 1px solid #BCD35F;
-	border-left: 1px solid #BCD35F;
+    width: 5px;
+    cursor: e-resize;
+    background: #CDDE87 url(img/splitter-vert-bar.gif) no-repeat;
+    background-position: center center;
+    border-right: 1px solid #BCD35F;
+    border-left: 1px solid #BCD35F;
+}
+
+.gwt-DialogBox {
+  sborder: 8px solid #C3D9FF;
+  border: 2px outset;
+  background-color: white;
+}
+
+.gwt-DialogBox .Caption {
+  background-color: #C3D9FF;
+  font-size:85%;
+  font-weight:700;
+  padding: 3px;
+  margin: 2px;
+  cursor: default;
+}
+
+/* Sitebar */
+
+.kune-SiteBarPanel {
+    width: 100%;
+    height: 16px;
+}
+
+.kune-SiteBarPanel .gwt-TextBox {
+border:1px solid #E4A374;
+margin: 0 15px 0 3px;
+}
+
+.kune-SiteBarPanel .gwt-Hyperlink {
+white-space:nowrap;
+color:#B3B3B3;
+text-decoration:underline;
+margin: 0 3px;
+cursor: pointer;
+}
+
+.kune-SiteBarPanel-Separator {
+color:#E4A374;
+margin: 0 3px;
+}
+
+.kune-Progress {
+background:#E5FF80;
+border:1px solid #E5FF80;
+white-space:nowrap;
+height:16px;
+padding:0 3px;
 }
 
 /* Workspace styles */
 .kune-WorkspacePanel {
-	width: 100%;
-	background-color: #FFF;
+    width: 100%;
+    background-color: #FFF;
 }
 
 .kuen-WokspacePane .Tab {
-	
+
 }
 
 .kune-WorkspacePanel .GeneralHP {
-	width: 100%;
+    width: 100%;
 }
 
 .kune-WorkspacePanel .ContextPanel {
-	width: 100%;
-	border-right: 3px solid #5FD35F;
+    width: 100%;
+    border-right: 3px solid #5FD35F;
 }
 
 .kune-EntityTextLogo {
-	border: 2px solid #F2F2F2;
-	overflow: hidden;
-	width: 468px;
-	height: 60px;
-	margin-bottom: 4px;
+    border: 2px solid #F2F2F2;
+    overflow: hidden;
+    width: 468px;
+    height: 60px;
+    margin-bottom: 4px;
 }
 
 .kune-EntityTextLogo .gwt-Label {
-	font-size: 122%;
-	font-weight: 700;
-	color: navy;
-	margin: 5px;
+    font-size: 122%;
+    font-weight: 700;
+    color: navy;
+    margin: 5px;
 }
 
 .kune-EntityTextLogo .gwt-Hyperlink {
-	color: #CCC;
-	font-size: 77%;
-	text-decoration: underline;
-	text-align: right;
-	margin: 5px;
+    color: #CCC;
+    font-size: 77%;
+    text-decoration: underline;
+    text-align: right;
+    margin: 5px;
 }
 
 .kune-SummaryPanel {
-	margin: 5px 0 0 5px;
-	width: 100%;
+    margin: 5px 0 0 5px;
+    width: 100%;
 }
 
 .kune-GroupNavBar {
-	width: 150px;
+    width: 150px;
 }
 
 .kune-GroupNavBar .itemSelected {
-	width: 100%;
-	color: blue;
+    width: 100%;
+    color: blue;
 }
 
 .kune-GroupNavBar .gwt-Hyperlink a { /* color:#FFF; */
-	color: blue;
-	font-size: 85%;
-	font-weight: 700;
-	padding: 0 9px;
-	text-decoration: none;
+    color: blue;
+    font-size: 85%;
+    font-weight: 700;
+    padding: 0 9px;
+    text-decoration: none;
 }
 
 .kune-GroupNavBar .itemNotSelected {
-	color: red;
-	width: 100%;
+    color: red;
+    width: 100%;
 }
 
 .kune-ContextTitleBar {
-	background-color: #5FD35F;
-	color: #250;
-	font-weight: 700;
-	width: 100%;
+    background-color: #5FD35F;
+    color: #250;
+    font-weight: 700;
+    width: 100%;
 }
 
 .kune-ContextTitleBar .gwt-Label {
-	width: 100%;
-	height: 23px;
-	vertical-align: middle;
-	margin: 0 9px;
+    width: 100%;
+    height: 23px;
+    vertical-align: middle;
+    margin: 0 9px;
 }
 
 /* ContextMenu */
-.gwt-HorizontalSplitPanel right {
-	background-color: #CFA;
-	padding: 5px;
-	width: 100%;
-	height: 100%;
+.gwt-HorizontalSplitPanel .right {
+    background-color: #CFA;
+    padding: 5px;
+    width: 100%;
+    height: 100%;
 }
 
 .kune-ContextToolBar {
-	border-left: 2px solid #5FD35F;
-	background-color: #AFA;
-	color: #250;
-	width: 100%;
-	height: 25px;
+    border-left: 2px solid #5FD35F;
+    background-color: #AFA;
+    color: #250;
+    width: 100%;
+    height: 25px;
 }
 
-.kune-ContextToolBar .gwt-Label {	
-	margin: 0 9px;
+.kune-ContextToolBar .gwt-Label {
+    margin: 0 9px;
 }
 
 .kune-ContextBottomBar {
-	background: #5FD35F;
-	color: #FFF;
-	font-weight: 700;
-	font-size: 77%;
-	white-space: nowrap;
-	vertical-align: middle;
-	width: 100%;
-	height: 24px;
+    background: #5FD35F;
+    color: #FFF;
+    font-weight: 700;
+    font-size: 77%;
+    white-space: nowrap;
+    vertical-align: middle;
+    width: 100%;
+    height: 24px;
 }
 
 /* Main Content */
-.gwt-HorizontalSplitPanel left {
-	background-color: #FFF;
-	margin: 5px;
-	width: 100%;
-	height: 95%;
+.gwt-HorizontalSplitPanel .left {
+    background-color: #FFF;
+    margin: 5px;
+    width: 100%;
+    height: 95%;
 }

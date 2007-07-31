@@ -7,7 +7,7 @@ public class Kune {
     private static Kune instance;
     public Translate t;
     public ColorScheme c;
-    
+
     private Kune() {
         t = (Translate) GWT.create(Translate.class);
         c = (ColorScheme) GWT.create(ColorScheme.class);
@@ -20,7 +20,7 @@ public class Kune {
         return instance;
     }
 
-    public static String getUserHash() {
+    public String getUserHash() {
         return "userHash";
     }
 
