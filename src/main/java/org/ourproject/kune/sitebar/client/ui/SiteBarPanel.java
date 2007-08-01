@@ -19,7 +19,7 @@ import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
-public class SiteBarPanel extends Composite implements SiteBarView, ClickListener {
+public class SiteBarPanel extends Composite implements SiteBarView {
 
     private static final String IMAGE_SPIN = "images/spin-kune-thund-green.gif";
     private final HorizontalPanel siteBarHP;
@@ -30,19 +30,19 @@ public class SiteBarPanel extends Composite implements SiteBarView, ClickListene
     private final TextBox searchTextBox;
     private final Image logoImage;
     private Hyperlink newGroupHyperlink;
-    private SiteBarListener listener;
+    private SiteBarPresenter presenter;
     private PushButton searchButton;
     private LoginPanel loginPanel;
     DialogBox dialog;
     private Hyperlink logoutHyperlink;
     private HTML pipeSeparatorHtml2;
 
-    public SiteBarPanel(final SiteBarListener listener) {
+    public SiteBarPanel(final SiteBarPresenter presenter) {
 
         // Initialize
         siteBarHP = new HorizontalPanel();
         initWidget(siteBarHP);
-        this.listener = listener;
+        this.presenter = presenter;
         final Images img = Images.App.getInstance();
         spinProcessing = new Image();
         img.spinKuneThundGreen().applyTo(spinProcessing);
@@ -80,16 +80,32 @@ public class SiteBarPanel extends Composite implements SiteBarView, ClickListene
         textProcessingLabel.setText(t.Processing());
         textProcessingLabel.addStyleName("kune-Progress");
         newGroupHyperlink.setText(t.NewGroup());
-        newGroupHyperlink.addClickListener(this);
+        newGroupHyperlink.addClickListener(new ClickListener () {
+            public void onClick(Widget arg0) {
+                presenter.doNewGroup();
+            }
+        });
         pipeSeparatorHtml.setHTML("|");
         pipeSeparatorHtml.setStyleName("kune-SiteBarPanel-Separator");
         pipeSeparatorHtml2.setHTML("|");
         pipeSeparatorHtml2.setStyleName("kune-SiteBarPanel-Separator");
         loginHyperlink.setText(t.Login());
-        loginHyperlink.addClickListener(this);
+        loginHyperlink.addClickListener(new ClickListener () {
+            public void onClick(Widget arg0) {
+                presenter.doLogin();
+            }
+        });
         logoutHyperlink.setText(t.Logout());
-        searchButton.addClickListener(this);
-        logoutHyperlink.addClickListener(this);
+        searchButton.addClickListener(new ClickListener () {
+            public void onClick(Widget arg0) {
+                presenter.doSearch(searchTextBox.getText());
+            }
+        });
+        logoutHyperlink.addClickListener(new ClickListener () {
+            public void onClick(Widget arg0) {
+                presenter.doLogout();
+            }
+        });
         searchTextBox.addKeyboardListener(new KeyboardListener() {
             public void onKeyDown(Widget arg0, char arg1, int arg2) {
             }
@@ -98,7 +114,7 @@ public class SiteBarPanel extends Composite implements SiteBarView, ClickListene
             public void onKeyUp(Widget widget, char key, int mod) {
                 if (key == KEY_ENTER) {
                     if (searchTextBox.getText().length() > 0) {
-                        listener.doSearch(searchTextBox.getText());
+                        presenter.doSearch(searchTextBox.getText());
                     }
                 }
             }});
@@ -139,22 +155,11 @@ public class SiteBarPanel extends Composite implements SiteBarView, ClickListene
         textProcessingLabel.setVisible(show);
     }
 
-    public void onClick(Widget sender) {
-        // TODO Auto-generated method stub
-        if (sender == loginHyperlink) {
-            listener.doLogin();
-        } else if (sender == newGroupHyperlink) {
-            listener.doNewGroup();
-        } else if (sender == logoutHyperlink) {
-            listener.doLogout();
-        }
-    }
-
     public void showLoginDialog() {
         if (loginPanel == null) {
-            LoginPresenter loginPresenter = new LoginPresenter();
+            LoginPresenter loginPresenter = new LoginPresenter(presenter);
             loginPanel = new LoginPanel(loginPresenter);
-            loginPresenter.init(loginPanel, this);
+            loginPresenter.init(loginPanel);
         }
         dialog = new DialogBox();
         dialog.setWidget(loginPanel);

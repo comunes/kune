@@ -20,16 +20,16 @@ public class LoginPanel extends Composite implements LoginView, ClickListener, C
 
     final Button send;
     private final Button cancel;
-    private final LoginListener listener;
+    private final LoginPresenter presenter;
     private TextBox nick;
     private PasswordTextBox pass;
 
-    public LoginPanel(final LoginListener listener) {
+    public LoginPanel(final LoginPresenter presenter) {
         final VerticalPanel generalVP = new VerticalPanel();
         final Translate t = SiteBar.getInstance().t;
 
         initWidget(generalVP);
-        this.listener = listener;
+        this.presenter = presenter;
         final HorizontalPanel buttonsHP = new HorizontalPanel();
         final Grid panelGrid = new Grid(2, 2);
         final Label nickLabel = new Label(t.NickName());
@@ -61,9 +61,9 @@ public class LoginPanel extends Composite implements LoginView, ClickListener, C
 
     public void onClick(final Widget sender) {
         if (sender == send) {
-            listener.doLogin(nick.getText(), pass.getText());
+            presenter.doLogin(nick.getText(), pass.getText());
         } else if (sender == cancel) {
-            listener.doCancel();
+            presenter.doCancel();
         }
     }
 
@@ -76,18 +76,18 @@ public class LoginPanel extends Composite implements LoginView, ClickListener, C
     }
 
     public void onChange(Widget sender) {
-        listener.onDataChanged(nick.getText(), pass.getText());
+        presenter.onDataChanged(nick.getText(), pass.getText());
     }
 
     public void onKeyDown(Widget arg0, char arg1, int arg2) {
     }
 
     public void onKeyPress(Widget arg0, char arg1, int arg2) {
-        listener.onDataChanged(nick.getText(), pass.getText());
+        presenter.onDataChanged(nick.getText(), pass.getText());
     }
 
     public void onKeyUp(Widget arg0, char arg1, int arg2) {
-        listener.onDataChanged(nick.getText(), pass.getText());
+        presenter.onDataChanged(nick.getText(), pass.getText());
     }
 
 }

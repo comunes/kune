@@ -6,18 +6,20 @@ import org.ourproject.kune.sitebar.client.rpc.SiteBarServiceAsync;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class LoginPresenter implements LoginListener {
-
+public class LoginPresenter {
     private LoginView view;
-    private SiteBarView sitebar;
+    private final LoginListener listener;
 
-    public void init(LoginView loginview, SiteBarView sitebar) {
+    public LoginPresenter(LoginListener listener) {
+        this.listener = listener;
+    }
+    
+    public void init(LoginView loginview) {
         this.view = loginview;
-        this.sitebar = sitebar;
     }
 
     public void doCancel() {
-        sitebar.hideLoginDialog();
+        listener.onLoginCancelled();
     }
 
     public void onDataChanged(String nick, String pass) {
@@ -30,8 +32,6 @@ public class LoginPresenter implements LoginListener {
     }
 
     public void doLogin(final String nick, String pass) {
-        // TODO Auto-generated method stub
-
         SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
         siteBarService.login(nick, pass, new AsyncCallback () {
 
@@ -39,10 +39,9 @@ public class LoginPresenter implements LoginListener {
                 // TODO Auto-generated method stub
             }
 
-            public void onSuccess(Object arg0) {
-                sitebar.showLoggedUserName(nick);
-                sitebar.hideLoginDialog();
-                sitebar.setLogoutLinkVisible(true);
+            public void onSuccess(Object response) {
+                String hash = (String) response;
+                listener.userLoggedIn(nick, hash);
                 // TODO: Establecer sesión de este usuario
             }});
     }
