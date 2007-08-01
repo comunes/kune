@@ -2,13 +2,9 @@ package org.ourproject.kune.app.client;
 
 import org.gwm.client.impl.DefaultGDesktopPane;
 import org.gwm.client.util.Gwm;
-import org.ourproject.kune.chat.client.ChatModule;
 import org.ourproject.kune.docs.client.DocumentModule;
 import org.ourproject.kune.docs.client.rpc.DocumentService;
 import org.ourproject.kune.docs.client.rpc.DocumentServiceMocked;
-import org.ourproject.kune.home.client.HomeModule;
-import org.ourproject.kune.home.client.rpc.HomeService;
-import org.ourproject.kune.home.client.rpc.HomeServiceMocked;
 import org.ourproject.kune.platf.client.Kune;
 import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.actions.HistoryToken;
@@ -48,9 +44,7 @@ public class KuneEntryPoint implements EntryPoint {
         if (!useServer) mockServer();
 
         KunePlatform platform = new KunePlatform();
-        new HomeModule().configure(platform);
         new DocumentModule().configure(platform);
-        new ChatModule().configure(platform);
 
         final WorkspacePanel view = new WorkspacePanel();
         final WorkspacePresenter presenter = new WorkspacePresenter(platform, view);
@@ -100,7 +94,6 @@ public class KuneEntryPoint implements EntryPoint {
 
     private void mockServer() {
         KuneService.App.setMock(new KuneServiceMocked());
-        HomeService.App.setMock(new HomeServiceMocked());
         DocumentService.App.setMock(new DocumentServiceMocked());
         SiteBarService.App.setMock(new SiteBarServiceMocked());
     }
