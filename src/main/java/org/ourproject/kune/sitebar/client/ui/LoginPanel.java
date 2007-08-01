@@ -59,6 +59,12 @@ public class LoginPanel extends Composite implements LoginView, ClickListener, C
         pass.addKeyboardListener(this);
     }
 
+    public void clearData() {
+        nick.setText("");
+        pass.setText("");
+        send.setEnabled(false);
+    }
+
     public void onClick(final Widget sender) {
         if (sender == send) {
             presenter.doLogin(nick.getText(), pass.getText());
@@ -69,10 +75,6 @@ public class LoginPanel extends Composite implements LoginView, ClickListener, C
 
     public void setEnabledLoginButton(boolean enabled) {
         send.setEnabled(enabled);
-    }
-
-    public boolean isEnabledLoginButton() {
-        return send.isEnabled();
     }
 
     public void onChange(Widget sender) {
