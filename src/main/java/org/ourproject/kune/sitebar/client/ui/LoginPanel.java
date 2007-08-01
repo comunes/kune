@@ -9,16 +9,16 @@ import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Hyperlink;
+import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class LoginPanel extends Composite implements LoginView, ClickListener, ChangeListener {
+public class LoginPanel extends Composite implements LoginView, ClickListener, ChangeListener, KeyboardListener {
 
-    private final Button send;
+    final Button send;
     private final Button cancel;
     private final LoginListener listener;
     private TextBox nick;
@@ -36,8 +36,6 @@ public class LoginPanel extends Composite implements LoginView, ClickListener, C
         final Label passLabel = new Label(t.Password());
         nick = new TextBox();
         pass = new PasswordTextBox();
-        final Hyperlink registerLink = new Hyperlink("register", "registerLink");
-        final Hyperlink rememberPassLink = new Hyperlink("remember password link", "rememberLink");
         send = new Button(t.Login());
         cancel = new Button(t.Cancel());
 
@@ -47,8 +45,6 @@ public class LoginPanel extends Composite implements LoginView, ClickListener, C
         panelGrid.setWidget(0, 1, nick);
         panelGrid.setWidget(1, 0, passLabel);
         panelGrid.setWidget(1, 1, pass);
-        generalVP.add(registerLink);
-        generalVP.add(rememberPassLink);
         buttonsHP.add(send);
         buttonsHP.add(cancel);
         generalVP.add(buttonsHP);
@@ -59,6 +55,8 @@ public class LoginPanel extends Composite implements LoginView, ClickListener, C
         cancel.addClickListener(this);
         nick.addChangeListener(this);
         pass.addChangeListener(this);
+        nick.addKeyboardListener(this);
+        pass.addKeyboardListener(this);
     }
 
     public void onClick(final Widget sender) {
@@ -67,17 +65,29 @@ public class LoginPanel extends Composite implements LoginView, ClickListener, C
         } else if (sender == cancel) {
             listener.doCancel();
         }
-
     }
 
     public void setEnabledLoginButton(boolean enabled) {
         send.setEnabled(enabled);
+    }
 
+    public boolean isEnabledLoginButton() {
+        return send.isEnabled();
     }
 
     public void onChange(Widget sender) {
         listener.onDataChanged(nick.getText(), pass.getText());
+    }
 
+    public void onKeyDown(Widget arg0, char arg1, int arg2) {
+    }
+
+    public void onKeyPress(Widget arg0, char arg1, int arg2) {
+        listener.onDataChanged(nick.getText(), pass.getText());
+    }
+
+    public void onKeyUp(Widget arg0, char arg1, int arg2) {
+        listener.onDataChanged(nick.getText(), pass.getText());
     }
 
 }

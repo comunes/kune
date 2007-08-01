@@ -15,4 +15,5 @@ public interface Translate extends Constants {
     String Cancel();
     String NickName();
     String Password();
+    String Logout();
 }

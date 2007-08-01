@@ -1,6 +1,10 @@
 package org.ourproject.kune.sitebar.client.ui;
 
+import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
+import org.ourproject.kune.sitebar.client.rpc.SiteBarServiceAsync;
+
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class SiteBarPresenter implements SiteBarListener {
 
@@ -23,6 +27,22 @@ public class SiteBarPresenter implements SiteBarListener {
 
     public void init(SiteBarView view) {
         this.view = view;
+        view.setLogoutLinkVisible(false);
+    }
+
+    public void doLogout() {
+        SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
+        siteBarService.logout(new AsyncCallback () {
+
+            public void onFailure(Throwable arg0) {
+                // TODO Auto-generated method stub
+            }
+
+            public void onSuccess(Object arg0) {
+                view.setLogoutLinkVisible(false);
+                view.restoreLoginLink();
+            }});
+
     }
 
 }

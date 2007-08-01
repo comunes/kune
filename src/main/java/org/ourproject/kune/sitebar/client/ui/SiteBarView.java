@@ -20,6 +20,10 @@ public interface SiteBarView {
 
         void showLoginDialog();
 
+        void setLogoutLinkVisible(boolean visible);
+
         public void hideLoginDialog();
+
+        void restoreLoginLink();
 
 }

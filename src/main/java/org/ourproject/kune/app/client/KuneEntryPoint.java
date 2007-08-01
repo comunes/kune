@@ -20,6 +20,8 @@ import org.ourproject.kune.platf.client.utils.PrefetchUtilites;
 import org.ourproject.kune.platf.client.workspace.WorkspaceActions;
 import org.ourproject.kune.platf.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.platf.client.workspace.ui.WorkspacePanel;
+import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
+import org.ourproject.kune.sitebar.client.rpc.SiteBarServiceMocked;
 import org.ourproject.kune.sitebar.client.ui.SiteBarPanel;
 import org.ourproject.kune.sitebar.client.ui.SiteBarPresenter;
 
@@ -100,6 +102,7 @@ public class KuneEntryPoint implements EntryPoint {
         KuneService.App.setMock(new KuneServiceMocked());
         HomeService.App.setMock(new HomeServiceMocked());
         DocumentService.App.setMock(new DocumentServiceMocked());
+        SiteBarService.App.setMock(new SiteBarServiceMocked());
     }
 
 

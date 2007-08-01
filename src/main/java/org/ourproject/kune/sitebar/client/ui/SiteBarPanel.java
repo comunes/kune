@@ -5,8 +5,6 @@ import org.ourproject.kune.sitebar.client.Images;
 import org.ourproject.kune.sitebar.client.SiteBar;
 import org.ourproject.kune.sitebar.client.Translate;
 
-import to.tipit.gwtlib.FireLog;
-
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
@@ -36,6 +34,8 @@ public class SiteBarPanel extends Composite implements SiteBarView, ClickListene
     private PushButton searchButton;
     private LoginPanel loginPanel;
     DialogBox dialog;
+    private Hyperlink logoutHyperlink;
+    private HTML pipeSeparatorHtml2;
 
     public SiteBarPanel(final SiteBarListener listener) {
 
@@ -51,7 +51,9 @@ public class SiteBarPanel extends Composite implements SiteBarView, ClickListene
         final Label expandLabel = new Label("");
         newGroupHyperlink = new Hyperlink();
         final HTML pipeSeparatorHtml = new HTML();
+        pipeSeparatorHtml2 = new HTML();
         loginHyperlink = new Hyperlink();
+        logoutHyperlink = new Hyperlink();
         searchButton = new PushButton(img.kuneSearchIco().createImage(), img.kuneSearchIcoPush()
                 .createImage());
         searchTextBox = new TextBox();
@@ -61,9 +63,11 @@ public class SiteBarPanel extends Composite implements SiteBarView, ClickListene
         siteBarHP.add(spinProcessing);
         siteBarHP.add(textProcessingLabel);
         siteBarHP.add(expandLabel);
-        siteBarHP.add(newGroupHyperlink);
-        siteBarHP.add(pipeSeparatorHtml);
         siteBarHP.add(loginHyperlink);
+        siteBarHP.add(pipeSeparatorHtml);
+        siteBarHP.add(logoutHyperlink);
+        siteBarHP.add(pipeSeparatorHtml2);
+        siteBarHP.add(newGroupHyperlink);
         siteBarHP.add(searchButton);
         siteBarHP.add(searchTextBox);
         siteBarHP.add(logoImage);
@@ -79,9 +83,13 @@ public class SiteBarPanel extends Composite implements SiteBarView, ClickListene
         newGroupHyperlink.addClickListener(this);
         pipeSeparatorHtml.setHTML("|");
         pipeSeparatorHtml.setStyleName("kune-SiteBarPanel-Separator");
+        pipeSeparatorHtml2.setHTML("|");
+        pipeSeparatorHtml2.setStyleName("kune-SiteBarPanel-Separator");
         loginHyperlink.setText(t.Login());
         loginHyperlink.addClickListener(this);
+        logoutHyperlink.setText(t.Logout());
         searchButton.addClickListener(this);
+        logoutHyperlink.addClickListener(this);
         searchTextBox.addKeyboardListener(new KeyboardListener() {
             public void onKeyDown(Widget arg0, char arg1, int arg2) {
             }
@@ -99,9 +107,6 @@ public class SiteBarPanel extends Composite implements SiteBarView, ClickListene
 
         // TODO: externalize this
         img.kuneLogo16px().applyTo(logoImage);
-
-        // showProgress(false);
-
     }
 
     public void clearSearchText() {
@@ -140,6 +145,8 @@ public class SiteBarPanel extends Composite implements SiteBarView, ClickListene
             listener.doLogin();
         } else if (sender == newGroupHyperlink) {
             listener.doNewGroup();
+        } else if (sender == logoutHyperlink) {
+            listener.doLogout();
         }
     }
 
@@ -157,6 +164,15 @@ public class SiteBarPanel extends Composite implements SiteBarView, ClickListene
 
     public void hideLoginDialog() {
         dialog.hide();
+    }
+
+    public void setLogoutLinkVisible(boolean visible) {
+        logoutHyperlink.setVisible(visible);
+        pipeSeparatorHtml2.setVisible(visible);
+    }
+
+    public void restoreLoginLink() {
+        loginHyperlink.setText(t.Login());
     }
 
 }

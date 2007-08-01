@@ -8,27 +8,37 @@
     <display-name>kune</display-name>
     <description>kune</description>
 
-	<context-param>
-		    <param-name>com.google.inject.Module</param-name>
-		    <param-value>org.ourproject.kune.app.server.KuneAppModule</param-value>
-	</context-param>
+    <context-param>
+            <param-name>com.google.inject.Module</param-name>
+            <param-value>org.ourproject.kune.app.server.KuneAppModule</param-value>
+    </context-param>
 
     <servlet>
       <servlet-name>DocumentService</servlet-name>
       <servlet-class>org.ourproject.kune.app.server.servlet.KuneServlet</servlet-class>
-      <load-on-startup>1</load-on-startup>   
-		<init-param>
-			    <param-name>remote.service</param-name>
-			    <param-value>org.ourproject.kune.docs.server.rpc.KuneDocumentServiceDefault</param-value>
-		</init-param>
+      <load-on-startup>1</load-on-startup>
+        <init-param>
+                <param-name>remote.service</param-name>
+                <param-value>org.ourproject.kune.docs.server.rpc.KuneDocumentServiceDefault</param-value>
+        </init-param>
     </servlet>
     <servlet-mapping>
       <servlet-name>DocumentService</servlet-name>
       <url-pattern>/gwt/org.ourproject.kune.app.Kune/KuneDocumentService</url-pattern>
     </servlet-mapping>
-	
-	<welcome-file-list>
-		<welcome-file>/gwt/org.ourproject.kune.app.Kune/Kune.html</welcome-file>
-	</welcome-file-list>
-	
+
+    <welcome-file-list>
+        <welcome-file>/gwt/org.ourproject.kune.app.Kune/Kune.html</welcome-file>
+    </welcome-file-list>
+
+    <servlet>
+      <servlet-name>SiteBarService</servlet-name>
+      <servlet-class>org.ourproject.kune.sitebar.server.rpc.SiteBarServiceServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SiteBarService</servlet-name>
+        <url-pattern>/gwt/org.ourproject.kune.app.Kune/SiteBarService</url-pattern>
+    </servlet-mapping>
+
 </web-app>
