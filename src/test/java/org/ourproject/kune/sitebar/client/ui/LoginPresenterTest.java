@@ -25,24 +25,21 @@ public class LoginPresenterTest {
 
     @Test public void noUserInput() {
         view.setEnabledLoginButton(false);
+        view.clearData();
         EasyMock.replay(view);
 
+        presenter.init(view);
         presenter.onDataChanged("", "");
         EasyMock.verify(view);
     }
 
-    @Test public void nullInput() {
-        view.setEnabledLoginButton(false);
-        EasyMock.replay(view);
-
-        presenter.onDataChanged(null, null);
-        EasyMock.verify(view);
-    }
-
     @Test public void nickPassTyped() {
+        view.setEnabledLoginButton(false);
+        view.clearData();
         view.setEnabledLoginButton(true);
         EasyMock.replay(view);
 
+        presenter.init(view);
         presenter.onDataChanged("luther.b", "somepass");
         EasyMock.verify(view);
     }

@@ -59,6 +59,11 @@ margin: 0 3px;
 cursor: pointer;
 }
 
+.kune-SiteBarPanel .gwt-Button {
+/* FIXME: test this */
+cursor: pointer;
+}
+
 .kune-SiteBarPanel-Separator {
 color:#E4A374;
 margin: 0 3px;
@@ -130,7 +135,7 @@ padding:0 3px;
 
 .kune-GroupNavBar .gwt-Hyperlink a { /* color:#FFF; */
     color: blue;
-    font-size: 85%;
+    /* font-size: 85%; */
     font-weight: 700;
     padding: 0 9px;
     text-decoration: none;

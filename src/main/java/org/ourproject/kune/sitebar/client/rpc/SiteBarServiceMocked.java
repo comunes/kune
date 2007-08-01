@@ -17,8 +17,14 @@ public class SiteBarServiceMocked implements SiteBarServiceAsync {
         timer.schedule(1000);
     }
 
-    public void logout(AsyncCallback callback) {
+    public void logout(final AsyncCallback callback) {
         FireLog.info("Logout");
+        Timer timer = new Timer() {
+            public void run() {
+                callback.onSuccess(null);
+            }
+        };
+        timer.schedule(1000);
     }
 
 }

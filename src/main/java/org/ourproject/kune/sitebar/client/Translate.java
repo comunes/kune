@@ -16,4 +16,13 @@ public interface Translate extends Constants {
     String NickName();
     String Password();
     String Logout();
+    String ShortNameGroup();
+    String LongNameGroup();
+    String PublicDescription();
+    String DefaultLicense();
+    String TypeOfGroup();
+    String Organization();
+    String Community();
+    String Project();
+    String Create();
 }

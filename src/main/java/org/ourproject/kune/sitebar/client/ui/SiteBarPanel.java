@@ -54,8 +54,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         pipeSeparatorHtml2 = new HTML();
         loginHyperlink = new Hyperlink();
         logoutHyperlink = new Hyperlink();
-        searchButton = new PushButton(img.kuneSearchIco().createImage(), img.kuneSearchIcoPush()
-                .createImage());
+        searchButton = new PushButton(img.kuneSearchIco().createImage(), img.kuneSearchIcoPush().createImage());
         searchTextBox = new TextBox();
         logoImage = new Image();
 
@@ -80,7 +79,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         textProcessingLabel.setText(t.Processing());
         textProcessingLabel.addStyleName("kune-Progress");
         newGroupHyperlink.setText(t.NewGroup());
-        newGroupHyperlink.addClickListener(new ClickListener () {
+        newGroupHyperlink.addClickListener(new ClickListener() {
             public void onClick(Widget arg0) {
                 presenter.doNewGroup();
             }
@@ -90,18 +89,18 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         pipeSeparatorHtml2.setHTML("|");
         pipeSeparatorHtml2.setStyleName("kune-SiteBarPanel-Separator");
         loginHyperlink.setText(t.Login());
-        loginHyperlink.addClickListener(new ClickListener () {
+        loginHyperlink.addClickListener(new ClickListener() {
             public void onClick(Widget arg0) {
                 presenter.doLogin();
             }
         });
         logoutHyperlink.setText(t.Logout());
-        searchButton.addClickListener(new ClickListener () {
+        searchButton.addClickListener(new ClickListener() {
             public void onClick(Widget arg0) {
                 presenter.doSearch(searchTextBox.getText());
             }
         });
-        logoutHyperlink.addClickListener(new ClickListener () {
+        logoutHyperlink.addClickListener(new ClickListener() {
             public void onClick(Widget arg0) {
                 presenter.doLogout();
             }
@@ -117,7 +116,8 @@ public class SiteBarPanel extends Composite implements SiteBarView {
                         presenter.doSearch(searchTextBox.getText());
                     }
                 }
-            }});
+            }
+        });
         searchTextBox.setWidth("180");
         searchTextBox.setText(t.Search());
 
@@ -163,6 +163,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         }
         dialog = new DialogBox();
         dialog.setWidget(loginPanel);
+        dialog.setTitle(t.Login()); // TODO: Better description
         dialog.show();
         dialog.center();
     }

@@ -17,11 +17,16 @@ public class LoginPresenter {
 
     public void init(LoginView loginview) {
         this.view = loginview;
+        reset();
+    }
+
+    private void reset() {
         view.setEnabledLoginButton(false);
         view.clearData();
     }
 
     public void doCancel() {
+        reset();
         listener.onLoginCancelled();
     }
 
