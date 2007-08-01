@@ -5,7 +5,6 @@
     <inherits name="org.gwm.GwtWindowManager" />
 
     <inherits name='org.ourproject.kune.platf.Kune-Platform'/>
-    <inherits name='org.ourproject.kune.sitebar.Kune-Sitebar'/>
 
     <inherits name='org.ourproject.kune.home.Kune-Home'/>
     <inherits name='org.ourproject.kune.docs.Kune-Docs'/>

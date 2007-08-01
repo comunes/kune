@@ -1,12 +1,11 @@
-package org.ourproject.kune.platf.client;
-
+package org.ourproject.kune.platf.client.services;
 
 import com.google.gwt.core.client.GWT;
 
 public class Kune {
     private static Kune instance;
-    public Translate t;
-    public ColorScheme c;
+    public final Translate t;
+    public final ColorScheme c;
 
     private Kune() {
         t = (Translate) GWT.create(Translate.class);

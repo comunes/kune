@@ -17,9 +17,9 @@
  */
 package org.ourproject.kune.platf.client.workspace.ui;
 
-import org.ourproject.kune.platf.client.ColorScheme;
-import org.ourproject.kune.platf.client.Kune;
-import org.ourproject.kune.platf.client.actions.HistoryToken;
+import org.ourproject.kune.platf.client.dispatch.HistoryToken;
+import org.ourproject.kune.platf.client.services.ColorScheme;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.BorderDecorator;
 import org.ourproject.kune.platf.client.ui.HasColor;
 
@@ -47,7 +47,7 @@ public class GroupNavBar extends VerticalPanel {
     private Widget createItem(final int index, final String name) {
         final SimplePanel menuItem = new SimplePanel();
         addStyleName("Tab");
-        String historyToken = HistoryToken.encode("workspace", "tab", index);
+        String historyToken = HistoryToken.encode("tab", index);
         final Hyperlink hl = new Hyperlink(name, historyToken);
         menuItem.add(hl);
         return new BorderDecorator(menuItem, BorderDecorator.RIGHT);

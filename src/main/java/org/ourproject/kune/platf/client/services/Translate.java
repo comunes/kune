@@ -1,4 +1,4 @@
-package org.ourproject.kune.platf.client;
+package org.ourproject.kune.platf.client.services;
 
 import com.google.gwt.i18n.client.Constants;
 

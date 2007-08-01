@@ -1,11 +1,13 @@
 package org.ourproject.kune.platf.server.finders;
 
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
+
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.server.domain.User;
-import static junit.framework.Assert.*;
 
 import com.google.inject.Inject;
 
