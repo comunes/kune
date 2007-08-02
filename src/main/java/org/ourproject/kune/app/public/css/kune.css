@@ -172,14 +172,6 @@ padding:0 3px;
     margin: 0 9px;
 }
 
-/* ContextMenu */
-.gwt-HorizontalSplitPanel .right {
-    background-color: #CFA;
-    padding: 5px;
-    width: 100%;
-    height: 100%;
-}
-
 .kune-ContextToolBar {
     border-left: 2px solid #5FD35F;
     background-color: #AFA;
@@ -203,10 +195,35 @@ padding:0 3px;
     height: 24px;
 }
 
-/* Main Content */
+/* Main Content & Context */
 .gwt-HorizontalSplitPanel .left {
     background-color: #FFF;
     margin: 5px;
     width: 100%;
     height: 95%;
+}
+
+.gwt-HorizontalSplitPanel .right {
+    background-color: #CFA;
+    padding: 5px;
+    width: 100%;
+    height: 100%;
+}
+
+.kune-NavigationBar .IconBarHP {
+    background-color: #ececec;
+    border-bottom: 1px solid #e3dbdb;
+    margin: 0 7px;
+    width: 100%;
+}
+
+.kune-NavigationBar .CurrentFolderHP {
+    background-color: #ececec;
+    border-bottom: 1px solid #e3dbdb;
+    margin: 0 7px;
+    width: 100%;
+}
+
+.kune-NavigationBar .ItemsVP {
+    margin: 5px 0;
 }

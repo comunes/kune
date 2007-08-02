@@ -5,27 +5,17 @@ TODO-list for kune
 
 SHORT-TERM (URGENT):
 --------------------------------------------------------------------------------
-<danigb> Richtext editor test
---> vjrj
-<danigb> Persistence, Hibernate, JCR prototype (guice)
---> danigb
-<danigb> MVC in Rate*
---> danigb, vjrj
 <danigb> Exploration of some techs (Unit tests, monks, guice, IoC, persistence)
 --> danigb, vjrj
 <vjrj> See differences between star-yellow-grey.png and -50.png
 --> vjrj
-<vjrj> Sometimes the repo is initialized without reason
---> danigb
 <vjrj> explorer specific problems: fonts antialiasing problem?
 --> vjrj
-<vjrj> fix classpath platform problems:
-  <classpathentry kind="lib" path="/usr/local/lib/gwt/gwt-linux-1.4.10/gwt-dev-linux.jar"/>
+<danigb>Progress bar integred with img
+--> vjrj
 
 MIND-TERM:
 --------------------------------------------------------------------------------
-<danigb> Reorganization & rewriting of code
---> danigb, vjrj
 <danigb> README is empty
 --> vjrj
 <vjrj> apply csstidy to css, again

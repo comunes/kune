@@ -7,23 +7,23 @@ public class DocumentPanel extends VerticalPanel implements DocumentView {
     private String title;
 
     public DocumentPanel() {
-	add(new Label("this is the doc panel"));
+        add(new Label("this is the doc panel"));
     }
 
     public void setContentName(String name) {
-	this.title = name;
-	clear();
-	add(new Label("TÕTULO: " + name));
+        this.title = name;
+        clear();
+        add(new Label("T√çTULO: " + name));
     }
 
     public void setContent(String content) {
-	clear();
-	add(new Label("TÕTULO: " + title));
-	add(new Label("CONTENIDO: " + content));
+        clear();
+        add(new Label("T√çTULO: " + title));
+        add(new Label("CONTENIDO: " + content));
     }
 
     public void setWaiting() {
-	add(new Label("conectando con el servidor..."));
+        add(new Label("conectando con el servidor..."));
     }
 
 }
