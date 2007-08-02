@@ -2,17 +2,17 @@ package org.ourproject.kune.sitebar.client;
 
 import com.google.gwt.core.client.GWT;
 
-public class SiteBar {
-        private static SiteBar instance;
+public class SiteBarTrans {
+        private static SiteBarTrans instance;
         public Translate t;
 
-        private SiteBar() {
+        private SiteBarTrans() {
             t = (Translate) GWT.create(Translate.class);
         }
 
-        public static SiteBar getInstance() {
+        public static SiteBarTrans getInstance() {
             if (instance == null) {
-                instance = new SiteBar();
+                instance = new SiteBarTrans();
             }
             return instance;
         }

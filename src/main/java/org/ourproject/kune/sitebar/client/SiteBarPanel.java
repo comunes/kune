@@ -1,9 +1,10 @@
-package org.ourproject.kune.sitebar.client.ui;
+package org.ourproject.kune.sitebar.client;
 
 import org.gwm.client.impl.DefaultGFrame;
-import org.ourproject.kune.sitebar.client.Images;
-import org.ourproject.kune.sitebar.client.SiteBar;
-import org.ourproject.kune.sitebar.client.Translate;
+import org.ourproject.kune.sitebar.client.group.NewGroupPanel;
+import org.ourproject.kune.sitebar.client.group.NewGroupPresenter;
+import org.ourproject.kune.sitebar.client.login.LoginPanel;
+import org.ourproject.kune.sitebar.client.login.LoginPresenter;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.ClickListener;
@@ -77,7 +78,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         siteBarHP.addStyleName("kune-SiteBarPanel");
         siteBarHP.setCellWidth(expandLabel, "100%");
         spinProcessing.addStyleName("kune-Progress");
-        t = SiteBar.getInstance().t;
+        t = SiteBarTrans.getInstance().t;
         textProcessingLabel.setText(t.Processing());
         textProcessingLabel.addStyleName("kune-Progress");
         newGroupHyperlink.setText(t.NewGroup());

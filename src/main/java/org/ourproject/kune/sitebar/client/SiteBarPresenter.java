@@ -1,12 +1,14 @@
-package org.ourproject.kune.sitebar.client.ui;
+package org.ourproject.kune.sitebar.client;
 
+import org.ourproject.kune.sitebar.client.group.NewGroupListener;
+import org.ourproject.kune.sitebar.client.login.LoginListener;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarServiceAsync;
 
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class SiteBarPresenter implements SiteBarListener, LoginListener, NewGroupListener {
+public class SiteBarPresenter implements  SiteBarListener, LoginListener, NewGroupListener {
 
     private SiteBarView view;
 

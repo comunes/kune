@@ -1,6 +1,6 @@
-package org.ourproject.kune.sitebar.client.ui;
+package org.ourproject.kune.sitebar.client.group;
 
-import org.ourproject.kune.sitebar.client.SiteBar;
+import org.ourproject.kune.sitebar.client.SiteBarTrans;
 import org.ourproject.kune.sitebar.client.Translate;
 
 import com.google.gwt.user.client.ui.Button;
@@ -29,7 +29,7 @@ public class NewGroupPanel extends Composite implements NewGroupView {
         VerticalPanel generalVP = new VerticalPanel();
         initWidget(generalVP);
         this.presenter = newGroupPresenter;
-        Translate t = SiteBar.getInstance().t;
+        Translate t = SiteBarTrans.getInstance().t;
         Grid fieldGrid = new Grid(5, 2);
         shortNameGroup = new TextBox();
         longNameGroup = new TextBox();

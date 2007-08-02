@@ -1,4 +1,4 @@
-package org.ourproject.kune.sitebar.client.ui;
+package org.ourproject.kune.sitebar.client.login;
 
 public interface LoginListener {
     void userLoggedIn(String nick, String hash);

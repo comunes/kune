@@ -1,4 +1,4 @@
-package org.ourproject.kune.sitebar.client.ui;
+package org.ourproject.kune.sitebar.client;
 
 public interface SiteBarListener {
     void doLogin();

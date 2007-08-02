@@ -3,6 +3,9 @@ package org.ourproject.kune.sitebar.client.ui;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
+import org.ourproject.kune.sitebar.client.login.LoginListener;
+import org.ourproject.kune.sitebar.client.login.LoginPresenter;
+import org.ourproject.kune.sitebar.client.login.LoginView;
 
 public class LoginPresenterTest {
     private LoginPresenter presenter;

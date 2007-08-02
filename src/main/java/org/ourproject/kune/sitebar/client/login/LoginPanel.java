@@ -1,6 +1,6 @@
-package org.ourproject.kune.sitebar.client.ui;
+package org.ourproject.kune.sitebar.client.login;
 
-import org.ourproject.kune.sitebar.client.SiteBar;
+import org.ourproject.kune.sitebar.client.SiteBarTrans;
 import org.ourproject.kune.sitebar.client.Translate;
 
 import com.google.gwt.user.client.ui.Button;
@@ -26,7 +26,7 @@ public class LoginPanel extends Composite implements LoginView, ClickListener, C
 
     public LoginPanel(final LoginPresenter presenter) {
         final VerticalPanel generalVP = new VerticalPanel();
-        final Translate t = SiteBar.getInstance().t;
+        final Translate t = SiteBarTrans.getInstance().t;
 
         initWidget(generalVP);
         this.presenter = presenter;

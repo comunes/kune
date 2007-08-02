@@ -11,8 +11,8 @@ import org.ourproject.kune.platf.client.services.Services;
 import org.ourproject.kune.platf.client.workspace.Workspace;
 import org.ourproject.kune.platf.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.platf.client.workspace.ui.WorkspacePanel;
-import org.ourproject.kune.sitebar.client.ui.SiteBarPanel;
-import org.ourproject.kune.sitebar.client.ui.SiteBarPresenter;
+import org.ourproject.kune.sitebar.client.SiteBarPanel;
+import org.ourproject.kune.sitebar.client.SiteBarPresenter;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
@@ -27,6 +27,7 @@ public class DefaultApplication implements Application {
     private String defaultToolName;
     private final State state;
     private DefaultDispatcher dispatcher;
+    private SiteBarPresenter siteBar;
 
     public DefaultApplication(State state, Services services) {
 	this.state = state;
@@ -64,10 +65,10 @@ public class DefaultApplication implements Application {
     }
 
     private SiteBarPanel createSiteBar() {
-	final SiteBarPresenter siteBarPresenter = new SiteBarPresenter();
-	final SiteBarPanel siteBar = new SiteBarPanel(siteBarPresenter);
-	siteBarPresenter.init(siteBar);
-	return siteBar;
+	siteBar = new SiteBarPresenter();
+	final SiteBarPanel siteBarView = new SiteBarPanel(siteBar);
+	siteBar.init(siteBarView);
+	return siteBarView;
     }
 
     public Workspace getWorkspace() {
@@ -110,6 +111,10 @@ public class DefaultApplication implements Application {
 
     public State getState() {
 	return state;
+    }
+
+    public SiteBarPresenter getSiteBar() {
+	return siteBar;
     }
 
 }
