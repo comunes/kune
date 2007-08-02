@@ -3,6 +3,7 @@ package org.ourproject.kune.app.client;
 import org.ourproject.kune.docs.client.DocumentModule;
 import org.ourproject.kune.docs.client.rpc.DocumentService;
 import org.ourproject.kune.docs.client.rpc.DocumentServiceMocked;
+import org.ourproject.kune.platf.client.App;
 import org.ourproject.kune.platf.client.KuneModule;
 import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.rpc.KuneService;
@@ -22,11 +23,18 @@ public class KuneEntryPoint implements EntryPoint {
     public void onModuleLoad() {
         if (!useServer) mockServer();
 
+        String userHash = obtainUserHash();
+
         KunePlatform platform = new KunePlatform();
         platform.install(new KuneModule());
         platform.install(new DocumentModule());
-        platform.prepare();
-        platform.getDispatcher().fire("init", null);
+        App app = platform.buildApplication(userHash);
+        app.getDispatcher().fire("init", null);
+    }
+
+    // TODO: decidir una manera de hacer esto, para mi: meterlo en el html y leerlo
+    private String obtainUserHash() {
+	return "xxxxx";
     }
 
     private void mockServer() {

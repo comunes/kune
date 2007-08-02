@@ -2,6 +2,7 @@ package org.ourproject.kune.platf.client.dispatch;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.inject.Injector;
@@ -58,6 +59,18 @@ public class DefaultDispatcher implements Dispatcher, HistoryListener {
 	public void onHistoryChanged(String encoded) {
 		HistoryToken token = new HistoryToken(encoded);
 		fire(token.eventName, token.value);
+	}
+
+	public void subscribeAll(HashMap actions) {
+	    Action action;
+	    String eventName;
+
+	    Iterator iterator = actions.keySet().iterator();
+	    while (iterator.hasNext()) {
+		eventName = (String) iterator.next();
+		action = (Action) actions.get(eventName);
+		subscribe(eventName, action);
+	    }
 	}
 
 }

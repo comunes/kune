@@ -1,12 +1,10 @@
 package org.ourproject.kune.docs.client.rpc;
 
-import org.ourproject.kune.platf.client.rpc.ContentProvider;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
-public interface DocumentService extends ContentProvider {
-    
+public interface DocumentService {
+
     public class App {
         private static DocumentServiceAsync ourInstance = null;
 

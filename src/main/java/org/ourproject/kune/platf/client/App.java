@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.gwm.client.impl.DefaultGDesktopPane;
 import org.gwm.client.util.Gwm;
+import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
+import org.ourproject.kune.platf.client.services.Services;
 import org.ourproject.kune.platf.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.platf.client.workspace.ui.WorkspacePanel;
 import org.ourproject.kune.sitebar.client.ui.SiteBarPanel;
@@ -21,13 +23,16 @@ public class App {
     private WorkspacePresenter workspace;
     private final HashMap tools;
     private String defaultToolName;
+    public final State state;
+    private DefaultDispatcher dispatcher;
 
-    public App() {
+    public App(State state, Services services) {
+	this.state = state;
 	this.tools = new HashMap();
     }
 
-    public void init(KunePlatform platform) {
-	final WorkspacePanel view = createWorkspace(platform);
+    public void initTools(List toolsList) {
+	final WorkspacePanel view = createWorkspace(toolsList);
 	SiteBarPanel siteBar = createSiteBar();
 	RootPanel.get().add(createDesktop(view, siteBar));
 	DeferredCommand.addCommand(new Command() {
@@ -35,19 +40,18 @@ public class App {
 		view.adjustSize(Window.getClientWidth(), Window.getClientHeight());
 	    }
 	});
-
     }
 
-    private WorkspacePanel createWorkspace(KunePlatform platform) {
-	setTools(platform.getTools());
+    private WorkspacePanel createWorkspace(List toolsList) {
+	indexTools(toolsList);
 	final WorkspacePanel view = new WorkspacePanel();
 	workspace = new WorkspacePresenter(view);
-	workspace.showTools(tools.values().iterator());
+	workspace.showTools(toolsList.iterator());
 	initResizeListener(view);
 	return view;
     }
 
-    private void setTools(List toolList) {
+    private void indexTools(List toolList) {
 	int total = toolList.size();
 	for (int index = 0; index < total ; index++) {
 	    Tool tool = (Tool) toolList.get(index);
@@ -92,4 +96,13 @@ public class App {
     public String getDefaultToolName() {
 	return defaultToolName;
     }
+
+    public void setDispatcher(DefaultDispatcher dispatcher) {
+	this.dispatcher = dispatcher;
+    }
+
+    public DefaultDispatcher getDispatcher() {
+        return dispatcher;
+    }
+
 }

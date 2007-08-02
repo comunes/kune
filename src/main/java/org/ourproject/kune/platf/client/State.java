@@ -9,12 +9,12 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
  *
  */
 public class State {
-    private String userHash;
+    public final String user;
     private GroupDTO group;
     private String currentToolName;
 
-    public State() {
-	userHash = null;
+    public State(String userHash) {
+	user = userHash;
 	group = null;
 	currentToolName = null;
     }
@@ -25,14 +25,6 @@ public class State {
 
     public GroupDTO getGroup() {
 	return group;
-    }
-
-    public String getUserHash() {
-	return userHash;
-    }
-
-    public void setUserHash(String userHash) {
-	this.userHash = userHash;
     }
 
     public boolean isCurrentTool(String toolName) {

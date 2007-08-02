@@ -43,17 +43,17 @@ public class GroupNavBar extends VerticalPanel {
 
     public void addItem(final String name, String caption) {
         final int nextIndex = this.getWidgetCount();
-        final Widget menuItem = createItem(nextIndex, caption);
+        final Widget menuItem = createItem(nextIndex, name, caption);
         setTabSelected(menuItem, false);
         tabs.put(name, menuItem);
         this.add(menuItem);
     }
 
-    private Widget createItem(final int index, final String name) {
+    private Widget createItem(final int index, final String name, String caption) {
         final SimplePanel menuItem = new SimplePanel();
         addStyleName("Tab");
         String historyToken = HistoryToken.encode("tab", name);
-        final Hyperlink hl = new Hyperlink(name, historyToken);
+        final Hyperlink hl = new Hyperlink(caption, historyToken);
         menuItem.add(hl);
         return new BorderDecorator(menuItem, BorderDecorator.RIGHT);
     }

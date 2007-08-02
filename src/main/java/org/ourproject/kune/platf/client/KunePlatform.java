@@ -1,10 +1,11 @@
 package org.ourproject.kune.platf.client;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
-import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.extend.ClientModule;
 import org.ourproject.kune.platf.client.extend.Register;
 import org.ourproject.kune.platf.client.inject.DefaultActionInjector;
@@ -17,44 +18,40 @@ import com.google.gwt.user.client.History;
 
 public class KunePlatform implements Register {
     private List tools;
-    private final App app;
-    private final DefaultDispatcher dispatcher;
+    private HashMap actions;
 
     public KunePlatform() {
-	State state = new State();
-	Services services = new Services();
-	app = new App();
-	this.dispatcher = new DefaultDispatcher(new DefaultActionInjector(state, app, services));
-	History.addHistoryListener(dispatcher);
 	this.tools = new ArrayList();
+	this.actions = new HashMap();
     }
 
-    public void register(Tool tool) {
+    public void addTool(Tool tool) {
 	tools.add(tool);
-	dispatcher.subscribe(tool.getName(), tool.getStateAction());
+	actions.put(tool.getName(), tool.getStateAction());
     }
-
-    public List getTools() {
-	return tools;
-    }
-
-    public Dispatcher getDispatcher() {
-	return dispatcher;
+    public void addAction(String eventName, Action action) {
+	actions.put(eventName, action);
     }
 
     public void install(ClientModule module) {
 	module.configure(this);
-	module.registerActions(dispatcher);
     }
 
-    public void prepare() {
-	app.init(this);
+    public App buildApplication(String userHash) {
+	State state = new State(userHash);
+	Services services = new Services();
+	App app = new App(state, services);
+	DefaultDispatcher dispatcher = new DefaultDispatcher(new DefaultActionInjector(app));
+	app.setDispatcher(dispatcher);
+	History.addHistoryListener(dispatcher);
+	app.initTools(tools);
+	dispatcher.subscribeAll(actions);
 	DeferredCommand.addCommand(new Command() {
 	    public void execute() {
 		PrefetchUtilites.preFetchImpImages();
 	    }
 	});
-
+	return app;
     }
 
 }
