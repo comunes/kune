@@ -6,7 +6,7 @@ public class ContextItemDTO implements IsSerializable {
     private String name;
     private String type;
     private String reference;
-    private String token;
+    private transient String token;
 
     public ContextItemDTO() {
         this(null, null, null);

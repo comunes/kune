@@ -1,4 +1,4 @@
-package org.ourproject.kune.app.server.servlet;
+package org.ourproject.kune.platf.server.servlet;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;

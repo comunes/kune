@@ -33,7 +33,7 @@ public class DocumentContextProvider implements ContextDataProvider {
 
 	    private void encodeReferences(ContextDataDTO ctxData) {
 		ContextItemDTO item;
-		ArrayList items = ctxData.getItems();
+		ArrayList items = ctxData.getChildren();
 		for (int index = 0; index < items.size(); index++) {
 		    item = (ContextItemDTO) items.get(index);
 		    String newRef = HistoryToken

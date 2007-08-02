@@ -1,4 +1,4 @@
-package org.ourproject.kune.app.server;
+package org.ourproject.kune.platf.server;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;

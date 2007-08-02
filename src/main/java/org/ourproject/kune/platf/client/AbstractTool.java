@@ -1,8 +1,6 @@
 package org.ourproject.kune.platf.client;
 
-import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.workspace.WorkspaceComponent;
-import org.ourproject.kune.platf.client.workspace.actions.ToolStateAction;
 
 
 public abstract class AbstractTool implements Tool {
@@ -17,10 +15,6 @@ public abstract class AbstractTool implements Tool {
 
     public String getName() {
 	return name;
-    }
-
-    public Action getStateAction() {
-	return new ToolStateAction(this);
     }
 
     public void useAsUser(String userHash) {

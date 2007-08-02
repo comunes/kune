@@ -32,7 +32,7 @@ public class NavigatorPresenter extends AbstractComponent implements ContextData
     public void accept(ContextDataDTO ctxData) {
 	ContextItemDTO item;
 	view.clear();
-	ArrayList items = ctxData.getItems();
+	ArrayList items = ctxData.getChildren();
 	int size = items.size();
 	for (int index = 0; index < size; index++) {
 	    item = (ContextItemDTO) items.get(index);
@@ -40,7 +40,6 @@ public class NavigatorPresenter extends AbstractComponent implements ContextData
 	}
 	int defaultIndex = ctxData.getDefaultIndex();
 	view.selectItem(defaultIndex);
-	item = (ContextItemDTO) items.get(defaultIndex);
     }
 
     public void failed(Throwable caugth) {

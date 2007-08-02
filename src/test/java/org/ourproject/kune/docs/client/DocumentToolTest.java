@@ -1,5 +1,6 @@
 package org.ourproject.kune.docs.client;
 
+import static org.junit.Assert.assertEquals;
 import static org.ourproject.kune.docs.client.DocumentViewFactory.documentView;
 import static org.ourproject.kune.docs.client.DocumentViewFactory.navigationView;
 
@@ -17,15 +18,22 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class DocumentToolTest {
     private DocumentTool tool;
+    private int getContentCallCount;
+    private int getContextCallCount;
 
     @Before
     public void create() {
+	getContentCallCount = 0;
+	getContextCallCount = 0;
+
 	DocumentService.App.setMock(new DocumentServiceAsync() {
 	    public void getContent(String userHash, String ctxRef, String docRef, AsyncCallback callback) {
+		getContentCallCount++;
 		callback.onSuccess(new ContentDataDTO(docRef, "title", "content"));
 	    }
 
 	    public void getContext(String userHash, String contextRef, AsyncCallback async) {
+		getContextCallCount++;
 		ContextDataDTO ctx = new ContextDataDTO(contextRef);
 		ctx.add(new ContextItemDTO("name", "type", "child"));
 		async.onSuccess(ctx);
@@ -35,6 +43,14 @@ public class DocumentToolTest {
 	navigationView = EasyMock.createStrictMock(NavigationView.class);
 	tool = new DocumentTool();
     }
+
+    @Test
+    public void testCalls () {
+	tool.setEncodedState("ctx.doc");
+	assertEquals(1, getContentCallCount);
+	assertEquals(1, getContextCallCount);
+    }
+
 
     @Test
     public void testEncode() {

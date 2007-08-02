@@ -1,7 +1,11 @@
-package org.ourproject.kune.app.server.servlet;
+package org.ourproject.kune.platf.server.servlet;
+
+import java.io.IOException;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -14,11 +18,11 @@ import com.google.gwt.user.server.rpc.RPCRequest;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.google.inject.Injector;
 
-public class KuneServlet extends RemoteServiceServlet {
-    private static final Log log = LogFactory.getLog(KuneServlet.class);
+public class GuiceRemoteServiceServlet extends RemoteServiceServlet {
+    private static final Log log = LogFactory.getLog(GuiceRemoteServiceServlet.class);
     private static final long serialVersionUID = 1L;
-    private Injector injector;
-    private RemoteService service;
+    private transient Injector injector;
+    private transient RemoteService service;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -26,6 +30,11 @@ public class KuneServlet extends RemoteServiceServlet {
         Class<? extends RemoteService> remoteServiceType = KuneServletContext.getRemoteService(config);
         service = injector.getInstance(remoteServiceType);
         log.debug("KuneService init complete: " + service.getClass().getName());
+    }
+
+    @Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.service(req, resp);
     }
 
     @Override

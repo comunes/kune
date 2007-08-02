@@ -2,6 +2,7 @@ package org.ourproject.kune.docs.client;
 
 import org.ourproject.kune.docs.client.rpc.DocumentService;
 import org.ourproject.kune.platf.client.AbstractTool;
+import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dispatch.HistoryToken;
 import org.ourproject.kune.platf.client.workspace.WorkspaceComponent;
 import org.ourproject.kune.platf.client.workspace.navigation.NavigationView;
@@ -19,6 +20,11 @@ public class DocumentTool extends AbstractTool  {
     public String getCaption() {
 	return "documentos";
     }
+
+    public Action getStateAction() {
+	return new DocumentStateAction(this);
+    }
+
 
     public String getEncodedState() {
 	return HistoryToken.encode(getName(), getContext().getEncodedState(), getContent().getEncodedState());

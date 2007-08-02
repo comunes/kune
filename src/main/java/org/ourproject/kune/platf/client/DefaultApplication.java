@@ -11,6 +11,7 @@ import org.ourproject.kune.platf.client.services.Services;
 import org.ourproject.kune.platf.client.workspace.Workspace;
 import org.ourproject.kune.platf.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.platf.client.workspace.ui.WorkspacePanel;
+import org.ourproject.kune.sitebar.client.SiteBar;
 import org.ourproject.kune.sitebar.client.SiteBarPanel;
 import org.ourproject.kune.sitebar.client.SiteBarPresenter;
 
@@ -113,7 +114,7 @@ public class DefaultApplication implements Application {
 	return state;
     }
 
-    public SiteBarPresenter getSiteBar() {
+    public SiteBar getSiteBar() {
 	return siteBar;
     }
 
