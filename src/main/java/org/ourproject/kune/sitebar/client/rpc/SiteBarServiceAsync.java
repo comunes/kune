@@ -8,4 +8,6 @@ public interface SiteBarServiceAsync {
 
     void logout(AsyncCallback callback);
 
+    void createNewGroup(String shortName, String longName, String publicDesc, int type, AsyncCallback callback);
+
 }

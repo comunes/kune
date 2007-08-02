@@ -1,14 +1,11 @@
 package org.ourproject.kune.sitebar.client.rpc;
 
-import to.tipit.gwtlib.FireLog;
-
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class SiteBarServiceMocked implements SiteBarServiceAsync {
 
     public void login(String nick, String pass, final AsyncCallback callback) {
-        FireLog.info("login:" + nick);
         Timer timer = new Timer() {
             public void run() {
                 callback.onSuccess("ThisIsTheUserHash");
@@ -18,13 +15,23 @@ public class SiteBarServiceMocked implements SiteBarServiceAsync {
     }
 
     public void logout(final AsyncCallback callback) {
-        FireLog.info("Logout");
         Timer timer = new Timer() {
             public void run() {
                 callback.onSuccess(null);
             }
         };
         timer.schedule(1000);
+    }
+
+    public void createNewGroup(String shortName, String longName, String publicDesc, int type,
+            final AsyncCallback callback) {
+        Timer timer = new Timer() {
+            public void run() {
+                callback.onSuccess(null);
+            }
+        };
+        timer.schedule(1000);
+
     }
 
 }

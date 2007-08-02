@@ -6,11 +6,16 @@ import org.ourproject.kune.sitebar.client.rpc.SiteBarServiceAsync;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class SiteBarPresenter implements SiteBarListener, LoginListener {
+public class SiteBarPresenter implements SiteBarListener, LoginListener, NewGroupListener {
 
     private SiteBarView view;
 
     public SiteBarPresenter() {
+    }
+
+    public void init(SiteBarView view) {
+        this.view = view;
+        view.setLogoutLinkVisible(false);
     }
 
     public void doLogin() {
@@ -18,6 +23,7 @@ public class SiteBarPresenter implements SiteBarListener, LoginListener {
     }
 
     public void doNewGroup() {
+        view.showNewGroupDialog();
     }
 
     public void doSearch(String string) {
@@ -25,11 +31,6 @@ public class SiteBarPresenter implements SiteBarListener, LoginListener {
             Window.alert("Type something to search!");
         else
             Window.alert("In development!");
-    }
-
-    public void init(SiteBarView view) {
-        this.view = view;
-        view.setLogoutLinkVisible(false);
     }
 
     public void doLogout() {
@@ -45,7 +46,6 @@ public class SiteBarPresenter implements SiteBarListener, LoginListener {
                 view.restoreLoginLink();
             }
         });
-
     }
 
     public void userLoggedIn(String nick, String hash) {
@@ -56,6 +56,14 @@ public class SiteBarPresenter implements SiteBarListener, LoginListener {
 
     public void onLoginCancelled() {
         view.hideLoginDialog();
+    }
+
+    public void onNewGroupCreated() {
+        view.hideNewGroupDialog();
+    }
+
+    public void onNewGroupCancel() {
+        view.hideNewGroupDialog();
     }
 
 }

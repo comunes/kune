@@ -11,6 +11,8 @@ public interface SiteBarService extends RemoteService {
 
     void logout() throws SerializableException;
 
+    void createNewGroup(String shortName, String longName, String publicDesc, int type) throws SerializableException;
+
     public class App {
         private static SiteBarServiceAsync ourInstance = null;
 

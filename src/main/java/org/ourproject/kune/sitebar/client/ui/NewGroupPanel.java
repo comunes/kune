@@ -7,6 +7,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextArea;
@@ -14,53 +15,73 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class NewGroupPanel extends Composite {
-    private NewGroupPresenter presenter;
+public class NewGroupPanel extends Composite implements NewGroupView {
+    final private NewGroupPresenter presenter;
+    private TextBox shortNameGroup;
+    private TextBox longNameGroup;
+    private TextArea publicDesc;
+    private RadioButton typeOrg;
+    private RadioButton typeCommunity;
+    private RadioButton typeProject;
 
-    public NewGroupPanel(NewGroupPresenter presenter) {
+    public NewGroupPanel(NewGroupPresenter newGroupPresenter) {
         // Intialize
-        VerticalPanel vp = new VerticalPanel();
-        initWidget(vp);
-        this.presenter = presenter;
+        VerticalPanel generalVP = new VerticalPanel();
+        initWidget(generalVP);
+        this.presenter = newGroupPresenter;
         Translate t = SiteBar.getInstance().t;
         Grid fieldGrid = new Grid(5, 2);
-        TextBox shortNameGroup = new TextBox();
-        TextBox longNameGroup = new TextBox();
-        TextArea publicDesc = new TextArea();
+        shortNameGroup = new TextBox();
+        longNameGroup = new TextBox();
+        publicDesc = new TextArea();
         VerticalPanel typesVP = new VerticalPanel();
-        RadioButton typeOrg = new RadioButton("typeGroup", t.Organization());
-        RadioButton typeCommunity = new RadioButton("typeGroup", t.Community());
-        RadioButton typeProject = new RadioButton("typeGroup", t.Project());
+        typeOrg = new RadioButton("typeGroup", t.Organization());
+        typeCommunity = new RadioButton("typeGroup", t.Community());
+        typeProject = new RadioButton("typeGroup", t.Project());
         Button create = new Button(t.Create());
         Button cancel = new Button(t.Cancel());
 
         // Layout
-        vp.add(fieldGrid);
+        generalVP.add(fieldGrid);
         typesVP.add(typeOrg);
         typesVP.add(typeCommunity);
         typesVP.add(typeProject);
+        HorizontalPanel buttonsHP = new HorizontalPanel();
+        buttonsHP.add(create);
+        buttonsHP.add(cancel);
+        generalVP.add(buttonsHP);
         fieldGrid.setWidget(0, 0, new Label(t.ShortNameGroup()));
-        fieldGrid.setWidget(0, 1, new Label(t.LongNameGroup()));
-        fieldGrid.setWidget(0, 2, new Label(t.PublicDescription()));
-        fieldGrid.setWidget(0, 3, new Label(t.DefaultLicense()));
-        fieldGrid.setWidget(0, 4, new Label(t.TypeOfGroup()));
-        fieldGrid.setWidget(1, 0, shortNameGroup);
+        fieldGrid.setWidget(1, 0, new Label(t.LongNameGroup()));
+        fieldGrid.setWidget(2, 0, new Label(t.PublicDescription()));
+        fieldGrid.setWidget(3, 0, new Label(t.DefaultLicense()));
+        fieldGrid.setWidget(4, 0, new Label(t.TypeOfGroup()));
+        fieldGrid.setWidget(0, 1, shortNameGroup);
         fieldGrid.setWidget(1, 1, longNameGroup);
-        fieldGrid.setWidget(1, 2, publicDesc);
+        fieldGrid.setWidget(2, 1, publicDesc);
         // fieldGrid.setWidget(1, 3, );
-        fieldGrid.setWidget(1, 4, typesVP);
+        fieldGrid.setWidget(4, 1, typesVP);
 
         // Set Properties
+        clearData();
         create.addClickListener(new ClickListener() {
             public void onClick(Widget arg0) {
-
+                // TODO group types, licenses
+                presenter.doCreateNewGroup(shortNameGroup.getText(), longNameGroup.getText(), publicDesc.getText(), 0);
             }
         });
 
         cancel.addClickListener(new ClickListener() {
             public void onClick(Widget arg0) {
+                presenter.doCancel();
             }
         });
 
+    }
+
+    public void clearData() {
+        shortNameGroup.setText("");
+        longNameGroup.setText("");
+        publicDesc.setText("");
+        typeOrg.setChecked(true);
     }
 }

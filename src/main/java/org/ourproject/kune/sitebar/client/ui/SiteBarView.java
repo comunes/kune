@@ -4,26 +4,30 @@ import com.google.gwt.user.client.ui.Image;
 
 public interface SiteBarView {
 
-        void showLoggedUserName(String user);
+    void showLoggedUserName(String user);
 
-        void clearUserName();
+    void clearUserName();
 
-        void setLogo(Image logo);
+    void setLogo(Image logo);
 
-        void setProgressText(String text);
+    void setProgressText(String text);
 
-        void showProgress(boolean show);
+    void showProgress(boolean show);
 
-        void clearSearchText();
+    void clearSearchText();
 
-        void setSearchText(String text);
+    void setSearchText(String text);
 
-        void showLoginDialog();
+    void showLoginDialog();
 
-        void setLogoutLinkVisible(boolean visible);
+    void setLogoutLinkVisible(boolean visible);
 
-        public void hideLoginDialog();
+    public void hideLoginDialog();
 
-        void restoreLoginLink();
+    void restoreLoginLink();
+
+    void showNewGroupDialog();
+
+    void hideNewGroupDialog();
 
 }

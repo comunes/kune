@@ -25,4 +25,5 @@ public interface Translate extends Constants {
     String Community();
     String Project();
     String Create();
+    String CreateNewGroup();
 }

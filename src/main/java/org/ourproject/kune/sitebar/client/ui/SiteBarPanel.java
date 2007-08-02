@@ -33,9 +33,11 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     private SiteBarPresenter presenter;
     private PushButton searchButton;
     private LoginPanel loginPanel;
-    DialogBox dialog;
+    private NewGroupPanel newGroupPanel;
+    DialogBox loginDialog;
     private Hyperlink logoutHyperlink;
     private HTML pipeSeparatorHtml2;
+    private DialogBox newGroupDialog;
 
     public SiteBarPanel(final SiteBarPresenter presenter) {
 
@@ -161,15 +163,33 @@ public class SiteBarPanel extends Composite implements SiteBarView {
             loginPanel = new LoginPanel(loginPresenter);
             loginPresenter.init(loginPanel);
         }
-        dialog = new DialogBox();
-        dialog.setWidget(loginPanel);
-        dialog.setTitle(t.Login()); // TODO: Better description
-        dialog.show();
-        dialog.center();
+        loginDialog = new DialogBox();
+        loginDialog.setWidget(loginPanel);
+        loginDialog.setText(t.Login()); // TODO: Better description
+        loginDialog.show();
+        loginDialog.center();
     }
 
     public void hideLoginDialog() {
-        dialog.hide();
+        loginDialog.hide();
+    }
+
+    public void showNewGroupDialog() {
+        if (newGroupPanel == null) {
+            NewGroupPresenter newGroupPresenter = new NewGroupPresenter(presenter);
+            newGroupPanel = new NewGroupPanel(newGroupPresenter);
+            newGroupPresenter.init(newGroupPanel);
+        }
+        newGroupDialog = new DialogBox();
+        newGroupDialog.setWidget(newGroupPanel);
+        newGroupDialog.setText(t.CreateNewGroup()); // TODO: Better description
+        newGroupDialog.show();
+        newGroupDialog.center();
+    }
+
+    public void hideNewGroupDialog() {
+        newGroupDialog.hide();
+
     }
 
     public void setLogoutLinkVisible(boolean visible) {
