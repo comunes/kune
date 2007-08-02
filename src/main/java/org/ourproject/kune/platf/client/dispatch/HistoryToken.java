@@ -7,7 +7,7 @@ public class HistoryToken {
     public final String value;
 
     public HistoryToken(String encoded) {
-	int index = encoded.lastIndexOf(SEPARATOR);
+	int index = encoded.indexOf(SEPARATOR);
 	if (index > 0) {
 	    this.eventName = encoded.substring(0, index);
 	    this.value = encoded.substring(index + 1);

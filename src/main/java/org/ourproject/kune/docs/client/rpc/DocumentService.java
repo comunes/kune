@@ -1,9 +1,12 @@
 package org.ourproject.kune.docs.client.rpc;
 
+import org.ourproject.kune.platf.client.workspace.dto.ContextDataDTO;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 public interface DocumentService {
+    public ContextDataDTO getContext(String userHash, String contextRef);
 
     public class App {
         private static DocumentServiceAsync ourInstance = null;

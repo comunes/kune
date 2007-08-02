@@ -9,8 +9,6 @@ import org.ourproject.kune.platf.client.workspace.navigation.NavigationPanel;
 import org.ourproject.kune.platf.client.workspace.navigation.NavigatorPresenter;
 
 public class DocumentTool extends AbstractTool implements NavigationListener {
-    private DocumentPresenter content;
-    private NavigatorPresenter context;
 
     public DocumentTool() {
 	super("docs");
@@ -31,20 +29,18 @@ public class DocumentTool extends AbstractTool implements NavigationListener {
 	getContent().setEncodedState(split[1]);
     }
 
-    public WorkspaceComponent getContent() {
-	if (content == null) {
-	    DocumentPanel panel = new DocumentPanel();
-	    this.content = new DocumentPresenter(panel);
-	}
+    protected WorkspaceComponent createContent() {
+	DocumentPanel panel = new DocumentPanel();
+	DocumentPresenter content = new DocumentPresenter(panel);
+	content.setEncodedState("welcome");
 	return content;
     }
 
-    public WorkspaceComponent getContext() {
-	if (context == null) {
-	    DocumentContextProvider provider = new DocumentContextProvider(DocumentService.App.getInstance());
-	    NavigationPanel panel = new NavigationPanel(this);
-	    this.context = new NavigatorPresenter(panel);
-	}
+    protected WorkspaceComponent createContext() {
+	DocumentContextProvider provider = new DocumentContextProvider(DocumentService.App.getInstance(), userHash);
+	NavigationPanel panel = new NavigationPanel(this);
+	NavigatorPresenter context = new NavigatorPresenter(provider, panel);
+	context.setEncodedState("home");
 	return context;
     }
 

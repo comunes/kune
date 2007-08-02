@@ -6,6 +6,7 @@ import java.util.List;
 import org.gwm.client.impl.DefaultGDesktopPane;
 import org.gwm.client.util.Gwm;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
+import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.services.Services;
 import org.ourproject.kune.platf.client.workspace.Workspace;
 import org.ourproject.kune.platf.client.workspace.WorkspacePresenter;
@@ -44,7 +45,7 @@ public class DefaultApplication implements Application {
     }
 
     private WorkspacePanel createWorkspace(List toolsList) {
-	indexTools(toolsList);
+	prepareTools(toolsList, state.user);
 	final WorkspacePanel view = new WorkspacePanel();
 	workspace = new WorkspacePresenter(view);
 	workspace.attachTools(toolsList.iterator());
@@ -52,10 +53,11 @@ public class DefaultApplication implements Application {
 	return view;
     }
 
-    private void indexTools(List toolList) {
+    private void prepareTools(List toolList, String userHash) {
 	int total = toolList.size();
 	for (int index = 0; index < total ; index++) {
 	    Tool tool = (Tool) toolList.get(index);
+	    tool.useAsUser(userHash);
 	    tools.put(tool.getName(), tool);
 	}
 	this.defaultToolName = ((Tool) toolList.get(0)).getName();
@@ -102,7 +104,7 @@ public class DefaultApplication implements Application {
 	this.dispatcher = dispatcher;
     }
 
-    public DefaultDispatcher getDispatcher() {
+    public Dispatcher getDispatcher() {
         return dispatcher;
     }
 

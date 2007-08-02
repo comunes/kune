@@ -2,7 +2,7 @@ package org.ourproject.kune.docs.client;
 
 import org.ourproject.kune.platf.client.workspace.AbstractComponent;
 
-public class DocumentPresenter extends AbstractComponent {
+public class DocumentPresenter extends AbstractComponent implements Document {
     private final DocumentView view;
 
     public DocumentPresenter(DocumentView view) {
