@@ -8,7 +8,7 @@ import org.ourproject.kune.sitebar.client.rpc.SiteBarServiceAsync;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class SiteBarPresenter implements  SiteBarListener, LoginListener, NewGroupListener {
+public class SiteBarPresenter implements  SiteBar, SiteBarListener, LoginListener, NewGroupListener {
 
     private SiteBarView view;
 
