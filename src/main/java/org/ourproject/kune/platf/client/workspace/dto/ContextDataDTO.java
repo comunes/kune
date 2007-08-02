@@ -6,9 +6,13 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class ContextDataDTO implements IsSerializable {
     private ArrayList items;
+    private int defaultIndex;
+    private final String contextRef;
 
-    public ContextDataDTO() {
+    public ContextDataDTO(String contextRef) {
+	this.contextRef = contextRef;
 	items = new ArrayList();
+	defaultIndex = 0;
     }
 
     public void setItems(ArrayList items) {
@@ -17,6 +21,14 @@ public class ContextDataDTO implements IsSerializable {
 
     public ArrayList getItems() {
         return items;
+    }
+
+    public int getDefaultIndex() {
+	return defaultIndex;
+    }
+
+    public String getContextRef() {
+	return contextRef;
     }
 
 }

@@ -1,7 +1,9 @@
 package org.ourproject.kune.platf.client.workspace;
 
+import org.ourproject.kune.platf.client.View;
+
 public interface WorkspaceComponent {
-    Object getView();
+    View getView();
     void detach();
     void attach();
     void setEncodedState(String encodedState);

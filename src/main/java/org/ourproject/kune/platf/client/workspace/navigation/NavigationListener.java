@@ -1,5 +1,7 @@
 package org.ourproject.kune.platf.client.workspace.navigation;
 
-public interface NavigationListener {
+import org.ourproject.kune.platf.client.workspace.dto.ContextItemDTO;
 
+public interface NavigationListener {
+    void contextChanged(String contextRef, ContextItemDTO selectedItem);
 }

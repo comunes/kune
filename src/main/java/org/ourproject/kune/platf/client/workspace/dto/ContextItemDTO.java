@@ -3,9 +3,10 @@ package org.ourproject.kune.platf.client.workspace.dto;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class ContextItemDTO implements IsSerializable {
-    private final String name;
-    private final String type;
-    private final String reference;
+    private String name;
+    private String type;
+    private String reference;
+    private String token;
 
     public ContextItemDTO(String name, String type, String reference) {
 	this.name = name;
@@ -14,15 +15,35 @@ public class ContextItemDTO implements IsSerializable {
     }
 
     public String getName() {
-        return name;
+	return name;
     }
 
     public String getType() {
-        return type;
+	return type;
     }
 
     public String getReference() {
-        return reference;
+	return reference;
+    }
+
+    public void setName(String name) {
+	this.name = name;
+    }
+
+    public void setType(String type) {
+	this.type = type;
+    }
+
+    public void setReference(String reference) {
+	this.reference = reference;
+    }
+
+    public void setToken(String token) {
+	this.token = token;
+    }
+
+    public String getToken() {
+        return token;
     }
 
 

@@ -4,14 +4,17 @@ import org.ourproject.kune.docs.client.rpc.DocumentService;
 import org.ourproject.kune.platf.client.AbstractTool;
 import org.ourproject.kune.platf.client.dispatch.HistoryToken;
 import org.ourproject.kune.platf.client.workspace.WorkspaceComponent;
+import org.ourproject.kune.platf.client.workspace.dto.ContextItemDTO;
 import org.ourproject.kune.platf.client.workspace.navigation.NavigationListener;
-import org.ourproject.kune.platf.client.workspace.navigation.NavigationPanel;
+import org.ourproject.kune.platf.client.workspace.navigation.NavigationView;
 import org.ourproject.kune.platf.client.workspace.navigation.NavigatorPresenter;
 
 public class DocumentTool extends AbstractTool implements NavigationListener {
+    protected static final String NAME = "docs";
+    private Document document;
 
     public DocumentTool() {
-	super("docs");
+	super(NAME);
     }
 
     // TODO: translate
@@ -30,18 +33,23 @@ public class DocumentTool extends AbstractTool implements NavigationListener {
     }
 
     protected WorkspaceComponent createContent() {
-	DocumentPanel panel = new DocumentPanel();
-	DocumentPresenter content = new DocumentPresenter(panel);
-	content.setEncodedState("welcome");
-	return content;
+	DocumentContentProvider provider = new DocumentContentProvider(DocumentService.App.getInstance(), userHash);
+	DocumentView view = DocumentViewFactory.getDocumentView();
+	document = new DocumentPresenter(provider, view);
+	document.setEncodedState("welcome");
+	return document;
     }
 
     protected WorkspaceComponent createContext() {
 	DocumentContextProvider provider = new DocumentContextProvider(DocumentService.App.getInstance(), userHash);
-	NavigationPanel panel = new NavigationPanel(this);
-	NavigatorPresenter context = new NavigatorPresenter(provider, panel);
+	NavigationView view = DocumentViewFactory.getNavigationtView();
+	NavigatorPresenter context = new NavigatorPresenter(this, provider, view);
 	context.setEncodedState("home");
 	return context;
+    }
+
+    public void contextChanged(String contextRef, ContextItemDTO selectedItem) {
+//	document.load(contextRef, selectedItem);
     }
 
 }

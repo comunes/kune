@@ -1,5 +1,9 @@
 package org.ourproject.kune.docs.client;
 
-public interface DocumentView {
+import org.ourproject.kune.platf.client.View;
 
+public interface DocumentView extends View{
+    void setWaiting();
+    void setContent(String content);
+    void setContentName(String name);
 }

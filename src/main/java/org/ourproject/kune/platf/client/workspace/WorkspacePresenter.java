@@ -5,8 +5,6 @@ import java.util.Iterator;
 import org.ourproject.kune.platf.client.Tool;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 
-import com.google.gwt.user.client.ui.Widget;
-
 public class WorkspacePresenter implements Workspace {
     private final WorkspaceView view;
     private WorkspaceComponent context;
@@ -36,14 +34,14 @@ public class WorkspacePresenter implements Workspace {
 	view.setTool(toolName);
     }
 
-
     public void setContext(WorkspaceComponent contextComponent) {
 	if (context != null) {
 	    context.detach();
+	} else if (context != contextComponent) {
+	    context = contextComponent;
+	    context.attach();
+	    view.setContext(context.getView());
 	}
-	context = contextComponent;
-	context.attach();
-	view.setContextMenu((Widget) context.getView());
     }
 
     public void setContent(WorkspaceComponent contentComponent) {
@@ -52,7 +50,7 @@ public class WorkspacePresenter implements Workspace {
 	}
 	content = contentComponent;
 	context.attach();
-	view.setContent((Widget) content.getView());
+	view.setContent(content.getView());
     }
 
 }

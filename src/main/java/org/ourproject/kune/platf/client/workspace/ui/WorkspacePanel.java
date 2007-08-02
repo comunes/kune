@@ -1,5 +1,6 @@
 package org.ourproject.kune.platf.client.workspace.ui;
 
+import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.BorderDecorator;
 import org.ourproject.kune.platf.client.workspace.WorkspaceView;
@@ -8,7 +9,6 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.HorizontalSplitPanel;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -59,7 +59,6 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 		addStyleName("kune-WorkspacePanel");
 		contextVP.addStyleName("ContextPanel");
 		generalHP.addStyleName("GeneralHP");
-		setContextMenu(new Label("Menu"));
 	}
 
 	public void addTab(String name, String caption) {
@@ -82,18 +81,18 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	    groupNavBar.selectItem(toolName);
 	}
 
-	public void setContent(Widget content) {
+	public void setContent(View content) {
 		Widget left = contextHSP.getLeftWidget();
 		if (left != null)
 			contextHSP.remove(left);
-		contextHSP.setLeftWidget(content);
+		contextHSP.setLeftWidget((Widget) content);
 	}
 
-	public void setContextMenu(Widget contextMenu) {
+	public void setContext(View contextMenu) {
 		Widget right = contextHSP.getRightWidget();
 		if (right != null)
 			contextHSP.remove(right);
-		contextHSP.setRightWidget(contextMenu);
+		contextHSP.setRightWidget((Widget) contextMenu);
 	}
 
 	public void adjustSize(int windowWidth, int windowHeight) {
@@ -103,5 +102,6 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 		contextHSP.setSize("" + contextWidth + "px", "" + contextHeight + "px");
 		contextHSP.setSplitPosition("" + (contextWidth - 125) + "px");
 	}
+
 
 }
