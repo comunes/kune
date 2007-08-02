@@ -1,7 +1,5 @@
 package org.ourproject.kune.platf.client.workspace.ui;
 
-import org.ourproject.kune.platf.client.services.Kune;
-
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;

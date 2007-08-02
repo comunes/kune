@@ -17,6 +17,8 @@
  */
 package org.ourproject.kune.platf.client.workspace.ui;
 
+import java.util.HashMap;
+
 import org.ourproject.kune.platf.client.dispatch.HistoryToken;
 import org.ourproject.kune.platf.client.services.ColorScheme;
 import org.ourproject.kune.platf.client.services.Kune;
@@ -31,34 +33,41 @@ import com.google.gwt.user.client.ui.Widget;
 public class GroupNavBar extends VerticalPanel {
     private static final String ITEM_SELECTED = "itemSelected";
     private Widget currentTab;
+    private final HashMap tabs;
 
     public GroupNavBar() {
+	tabs = new HashMap();
         currentTab = null;
         addStyleName("kune-GroupNavBar");
     }
 
-    public void addItem(final String name) {
+    public void addItem(final String name, String caption) {
         final int nextIndex = this.getWidgetCount();
-        final Widget menuItem = createItem(nextIndex, name);
+        final Widget menuItem = createItem(nextIndex, caption);
         setTabSelected(menuItem, false);
+        tabs.put(name, menuItem);
         this.add(menuItem);
     }
 
     private Widget createItem(final int index, final String name) {
         final SimplePanel menuItem = new SimplePanel();
         addStyleName("Tab");
-        String historyToken = HistoryToken.encode("tab", index);
+        String historyToken = HistoryToken.encode("tab", name);
         final Hyperlink hl = new Hyperlink(name, historyToken);
         menuItem.add(hl);
         return new BorderDecorator(menuItem, BorderDecorator.RIGHT);
     }
 
-    public void selectItem(final int index) {
+    public void selectItem(final String toolName) {
         if (currentTab != null) {
             setTabSelected(currentTab, false);
         }
-        currentTab = this.getWidget(index);
+        currentTab = getWidget(toolName);
         setTabSelected(currentTab, true);
+    }
+
+    private Widget getWidget(String toolName) {
+	return (Widget) tabs.get(toolName);
     }
 
     private void setTabSelected(Widget tab, boolean isSelected) {

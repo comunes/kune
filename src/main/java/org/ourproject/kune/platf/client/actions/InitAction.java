@@ -24,7 +24,7 @@ public class InitAction extends DefaultAction {
 		state.setGroup(group);
 		workspace.setGroup(group);
 	        UIObject.setVisible(DOM.getElementById("initialstatusbar"), false);
-		dispatcher.fireState(HistoryToken.encode("tab", 0));
+		dispatcher.fireState(HistoryToken.encode("tab", app.getDefaultToolName()));
 	    }
 	});
 

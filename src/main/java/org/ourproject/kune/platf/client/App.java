@@ -1,5 +1,8 @@
 package org.ourproject.kune.platf.client;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.gwm.client.impl.DefaultGDesktopPane;
 import org.gwm.client.util.Gwm;
 import org.ourproject.kune.platf.client.workspace.WorkspacePresenter;
@@ -16,8 +19,11 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class App {
     private WorkspacePresenter workspace;
+    private final HashMap tools;
+    private String defaultToolName;
 
     public App() {
+	this.tools = new HashMap();
     }
 
     public void init(KunePlatform platform) {
@@ -33,14 +39,21 @@ public class App {
     }
 
     private WorkspacePanel createWorkspace(KunePlatform platform) {
+	setTools(platform.getTools());
 	final WorkspacePanel view = new WorkspacePanel();
 	workspace = new WorkspacePresenter(view);
-	int total = platform.getToolCount();
-	for (int index = 0; index < total; index++) {
-	    view.addTab(platform.getTool(index).name);
-	}
+	workspace.showTools(tools.values().iterator());
 	initResizeListener(view);
 	return view;
+    }
+
+    private void setTools(List toolList) {
+	int total = toolList.size();
+	for (int index = 0; index < total ; index++) {
+	    Tool tool = (Tool) toolList.get(index);
+	    tools.put(tool.getName(), tool);
+	}
+	this.defaultToolName = ((Tool) toolList.get(0)).getName();
     }
 
     private SiteBarPanel createSiteBar() {
@@ -70,5 +83,13 @@ public class App {
 	Gwm.setOverlayLayerDisplayOnDragAction(false);
 	desktop.setTheme("alphacubecustom");
 	return desktop;
+    }
+
+    public Tool getTool(String toolName) {
+	return (Tool) tools.get(toolName);
+    }
+
+    public String getDefaultToolName() {
+	return defaultToolName;
     }
 }

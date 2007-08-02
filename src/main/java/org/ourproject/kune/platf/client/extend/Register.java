@@ -1,5 +1,7 @@
 package org.ourproject.kune.platf.client.extend;
 
+import org.ourproject.kune.platf.client.Tool;
+
 public interface Register {
-    public void registerTool(String name, ContentProviderAsync provider, ViewFactory factory);
+    public void register(Tool tool);
 }

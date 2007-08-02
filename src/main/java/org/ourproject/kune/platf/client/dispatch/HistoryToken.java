@@ -2,6 +2,7 @@ package org.ourproject.kune.platf.client.dispatch;
 
 public class HistoryToken {
     private static final char SEPARATOR = '.';
+    private static final String REGEX = "\\.";
     public final String eventName;
     public final String value;
 
@@ -22,6 +23,14 @@ public class HistoryToken {
 
     public static String encode(Object p1, Object p2, Object p3) {
 	return p1.toString() + SEPARATOR + p2 + SEPARATOR + p3;
+    }
+
+    public static String encode(String eventName, String value) {
+	return eventName + SEPARATOR + value;
+    }
+
+    public static String[] split(Object value) {
+	return ((String) value).split(REGEX);
     }
 
 }

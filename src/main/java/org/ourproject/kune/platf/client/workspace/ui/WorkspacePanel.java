@@ -62,8 +62,8 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 		setContextMenu(new Label("Menu"));
 	}
 
-	public void addTab(String name) {
-		groupNavBar.addItem(name);
+	public void addTab(String name, String caption) {
+		groupNavBar.addItem(name, caption);
 	}
 
 	public void setLogo(String groupName) {
@@ -78,8 +78,8 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 		contextTitleBar.setTitle(title);
 	}
 
-	public void setSelectedTab(int tabIndex) {
-		groupNavBar.selectItem(tabIndex);
+	public void setTool(String toolName) {
+	    groupNavBar.selectItem(toolName);
 	}
 
 	public void setContent(Widget content) {
@@ -103,4 +103,5 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 		contextHSP.setSize("" + contextWidth + "px", "" + contextHeight + "px");
 		contextHSP.setSplitPosition("" + (contextWidth - 125) + "px");
 	}
+
 }

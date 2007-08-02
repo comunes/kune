@@ -1,17 +1,14 @@
 package org.ourproject.kune.platf.client;
 
-import org.ourproject.kune.platf.client.extend.ContentProviderAsync;
-import org.ourproject.kune.platf.client.extend.ViewFactory;
+import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.workspace.WorkspaceComponent;
 
-public class Tool {
-    public final String name;
-    public final ContentProviderAsync provider;
-    public final ViewFactory factory;
-
-    public Tool(String name, ContentProviderAsync provider, ViewFactory factory) {
-        this.name = name;
-        this.provider = provider;
-        this.factory = factory;
-    }
-
+public interface Tool {
+    String getName();
+    String getCaption();
+    String getEncodedState();
+    void setEncodedState(Object value);
+    Action getStateAction();
+    WorkspaceComponent getContext();
+    WorkspaceComponent getContent();
 }

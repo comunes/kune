@@ -1,15 +1,19 @@
 package org.ourproject.kune.platf.client.workspace;
 
+import java.util.Iterator;
+
 import org.ourproject.kune.platf.client.Tool;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 
+import com.google.gwt.user.client.ui.Widget;
+
 public class WorkspacePresenter {
     private final WorkspaceView view;
-    private Tool currentTool;
-    private int currentToolIndex;
+    private WorkspaceComponent context;
+    private WorkspaceComponent content;
 
     public WorkspacePresenter(WorkspaceView view) {
-        this.view = view;
+	this.view = view;
     }
 
     public void showError(Throwable caught) {
@@ -17,25 +21,38 @@ public class WorkspacePresenter {
     }
 
     public void setGroup(GroupDTO group) {
-        view.setLogo("group name here");
+	view.setLogo("group name here");
     }
 
-    public void setSelectedTool(int index) {
-        if (currentToolIndex != index) {
-//            currentToolIndex = index;
-//            currentTool = platform.getTool(index);
-//            view.setSelectedTab(index);
-//            currentTool.provider.getContentTree(Kune.getInstance().getUserHash(), new AsyncCallback() {
-//                public void onFailure(Throwable arg0) {
-//                }
-//
-//                public void onSuccess(Object result) {
-//                    ContentTreeDTO tree = (ContentTreeDTO) result;
-//                    view.setContextMenu((Widget) currentTool.factory.getContextView(tree));
-//                    // TODO:
-//                    view.setContent((Widget) currentTool.factory.getContentView(null));
-//                }
-//            });
-        }
+    public void showTools(Iterator iterator) {
+	Tool tool;
+	while (iterator.hasNext()) {
+	    tool = ((Tool) iterator.next());
+	    view.addTab(tool.getName(), tool.getCaption());
+	}
     }
+
+    public void setTool(String toolName) {
+	view.setTool(toolName);
+    }
+
+
+    public void setContext(WorkspaceComponent contextComponent) {
+	if (context != null) {
+	    context.detach();
+	}
+	context = contextComponent;
+	context.attach();
+	view.setContextMenu((Widget) context.getView());
+    }
+
+    public void setContent(WorkspaceComponent contentComponent) {
+	if (content != null) {
+	    content.detach();
+	}
+	content = contentComponent;
+	context.attach();
+	view.setContent((Widget) content.getView());
+    }
+
 }
