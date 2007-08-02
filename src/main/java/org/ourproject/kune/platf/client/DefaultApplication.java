@@ -19,14 +19,14 @@ import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class App {
+public class DefaultApplication {
     private WorkspacePresenter workspace;
     private final HashMap tools;
     private String defaultToolName;
     public final State state;
     private DefaultDispatcher dispatcher;
 
-    public App(State state, Services services) {
+    public DefaultApplication(State state, Services services) {
 	this.state = state;
 	this.tools = new HashMap();
     }

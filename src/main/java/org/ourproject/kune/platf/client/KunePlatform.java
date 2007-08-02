@@ -37,10 +37,10 @@ public class KunePlatform implements Register {
 	module.configure(this);
     }
 
-    public App buildApplication(String userHash) {
+    public DefaultApplication buildApplication(String userHash) {
 	State state = new State(userHash);
 	Services services = new Services();
-	App app = new App(state, services);
+	DefaultApplication app = new DefaultApplication(state, services);
 	DefaultDispatcher dispatcher = new DefaultDispatcher(new DefaultActionInjector(app));
 	app.setDispatcher(dispatcher);
 	History.addHistoryListener(dispatcher);

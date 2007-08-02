@@ -1,14 +1,14 @@
 package org.ourproject.kune.platf.client.inject;
 
-import org.ourproject.kune.platf.client.App;
+import org.ourproject.kune.platf.client.DefaultApplication;
 import org.ourproject.kune.platf.client.dispatch.DefaultAction;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 
 public class DefaultActionInjector implements Injector {
-	private final App app;
+	private final DefaultApplication app;
 	private Dispatcher dispatcher;
 
-	public DefaultActionInjector(App app) {
+	public DefaultActionInjector(DefaultApplication app) {
 		this.app = app;
 	}
 

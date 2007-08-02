@@ -3,7 +3,7 @@ package org.ourproject.kune.app.client;
 import org.ourproject.kune.docs.client.DocumentModule;
 import org.ourproject.kune.docs.client.rpc.DocumentService;
 import org.ourproject.kune.docs.client.rpc.DocumentServiceMocked;
-import org.ourproject.kune.platf.client.App;
+import org.ourproject.kune.platf.client.DefaultApplication;
 import org.ourproject.kune.platf.client.KuneModule;
 import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.rpc.KuneService;
@@ -24,12 +24,20 @@ public class KuneEntryPoint implements EntryPoint {
         if (!useServer) mockServer();
 
         String userHash = obtainUserHash();
-
+        if (isNotValid(userHash)) informUserAndStop();
         KunePlatform platform = new KunePlatform();
         platform.install(new KuneModule());
         platform.install(new DocumentModule());
-        App app = platform.buildApplication(userHash);
+        DefaultApplication app = platform.buildApplication(userHash);
         app.getDispatcher().fire("init", null);
+    }
+
+    private boolean isNotValid(String userHash) {
+	return false;
+    }
+
+    private void informUserAndStop() {
+	throw new RuntimeException("not logged in!");
     }
 
     // TODO: decidir una manera de hacer esto, para mi: meterlo en el html y leerlo
