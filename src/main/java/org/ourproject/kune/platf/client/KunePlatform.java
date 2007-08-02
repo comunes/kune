@@ -37,7 +37,7 @@ public class KunePlatform implements Register {
 	module.configure(this);
     }
 
-    public DefaultApplication buildApplication(String userHash) {
+    public Application buildApplication(String userHash) {
 	State state = new State(userHash);
 	Services services = new Services();
 	DefaultApplication app = new DefaultApplication(state, services);

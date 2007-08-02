@@ -3,7 +3,7 @@ package org.ourproject.kune.app.client;
 import org.ourproject.kune.docs.client.DocumentModule;
 import org.ourproject.kune.docs.client.rpc.DocumentService;
 import org.ourproject.kune.docs.client.rpc.DocumentServiceMocked;
-import org.ourproject.kune.platf.client.DefaultApplication;
+import org.ourproject.kune.platf.client.Application;
 import org.ourproject.kune.platf.client.KuneModule;
 import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.rpc.KuneService;
@@ -28,7 +28,7 @@ public class KuneEntryPoint implements EntryPoint {
         KunePlatform platform = new KunePlatform();
         platform.install(new KuneModule());
         platform.install(new DocumentModule());
-        DefaultApplication app = platform.buildApplication(userHash);
+        Application app = platform.buildApplication(userHash);
         app.getDispatcher().fire("init", null);
     }
 

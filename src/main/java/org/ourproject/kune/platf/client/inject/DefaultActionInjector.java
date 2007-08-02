@@ -1,15 +1,18 @@
 package org.ourproject.kune.platf.client.inject;
 
-import org.ourproject.kune.platf.client.DefaultApplication;
+import org.ourproject.kune.platf.client.Application;
+import org.ourproject.kune.platf.client.State;
 import org.ourproject.kune.platf.client.dispatch.DefaultAction;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 
 public class DefaultActionInjector implements Injector {
-	private final DefaultApplication app;
+	private final Application app;
 	private Dispatcher dispatcher;
+	private final State state;
 
-	public DefaultActionInjector(DefaultApplication app) {
+	public DefaultActionInjector(Application app) {
 		this.app = app;
+		this.state = app.getState();
 	}
 
 	public void setDispatcher(Dispatcher dispatcher) {
@@ -21,8 +24,8 @@ public class DefaultActionInjector implements Injector {
 	}
 
 	private void injectAction(DefaultAction action) {
-		action.setUserHash(app.state.user);
-		action.setState(app.state);
+		action.setUserHash(state.user);
+		action.setState(state);
 		action.setApp(app);
 		action.setWorkspace(app.getWorkspace());
 		action.setDispatcher(dispatcher);

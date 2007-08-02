@@ -1,21 +1,21 @@
 package org.ourproject.kune.platf.client.dispatch;
 
-import org.ourproject.kune.platf.client.DefaultApplication;
+import org.ourproject.kune.platf.client.Application;
 import org.ourproject.kune.platf.client.State;
-import org.ourproject.kune.platf.client.workspace.WorkspacePresenter;
+import org.ourproject.kune.platf.client.workspace.Workspace;
 
 public abstract class DefaultAction implements Action {
     protected String userHash;
-    protected WorkspacePresenter workspace;
+    protected Workspace workspace;
     protected State state;
     protected Dispatcher dispatcher;
-    protected DefaultApplication app;
+    protected Application app;
 
     public void setUserHash(String userHash) {
 	this.userHash = userHash;
     }
 
-    public void setWorkspace(WorkspacePresenter workspace) {
+    public void setWorkspace(Workspace workspace) {
 	this.workspace = workspace;
     }
 
@@ -27,7 +27,7 @@ public abstract class DefaultAction implements Action {
 	this.dispatcher = dispatcher;
     }
 
-    public void setApp(DefaultApplication app) {
+    public void setApp(Application app) {
 	this.app = app;
     }
 

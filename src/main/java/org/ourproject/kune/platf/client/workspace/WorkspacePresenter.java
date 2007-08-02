@@ -7,7 +7,7 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
 
 import com.google.gwt.user.client.ui.Widget;
 
-public class WorkspacePresenter {
+public class WorkspacePresenter implements Workspace {
     private final WorkspaceView view;
     private WorkspaceComponent context;
     private WorkspaceComponent content;
@@ -24,7 +24,7 @@ public class WorkspacePresenter {
 	view.setLogo("group name here");
     }
 
-    public void showTools(Iterator iterator) {
+    public void attachTools(Iterator iterator) {
 	Tool tool;
 	while (iterator.hasNext()) {
 	    tool = ((Tool) iterator.next());

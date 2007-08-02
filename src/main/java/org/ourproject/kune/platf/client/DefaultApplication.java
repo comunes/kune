@@ -7,6 +7,7 @@ import org.gwm.client.impl.DefaultGDesktopPane;
 import org.gwm.client.util.Gwm;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.services.Services;
+import org.ourproject.kune.platf.client.workspace.Workspace;
 import org.ourproject.kune.platf.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.platf.client.workspace.ui.WorkspacePanel;
 import org.ourproject.kune.sitebar.client.ui.SiteBarPanel;
@@ -19,11 +20,11 @@ import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class DefaultApplication {
+public class DefaultApplication implements Application {
     private WorkspacePresenter workspace;
     private final HashMap tools;
     private String defaultToolName;
-    public final State state;
+    private final State state;
     private DefaultDispatcher dispatcher;
 
     public DefaultApplication(State state, Services services) {
@@ -46,7 +47,7 @@ public class DefaultApplication {
 	indexTools(toolsList);
 	final WorkspacePanel view = new WorkspacePanel();
 	workspace = new WorkspacePresenter(view);
-	workspace.showTools(toolsList.iterator());
+	workspace.attachTools(toolsList.iterator());
 	initResizeListener(view);
 	return view;
     }
@@ -67,7 +68,7 @@ public class DefaultApplication {
 	return siteBar;
     }
 
-    public WorkspacePresenter getWorkspace() {
+    public Workspace getWorkspace() {
 	return workspace;
     }
 
@@ -103,6 +104,10 @@ public class DefaultApplication {
 
     public DefaultDispatcher getDispatcher() {
         return dispatcher;
+    }
+
+    public State getState() {
+	return state;
     }
 
 }
