@@ -8,38 +8,42 @@ public class ContextItemDTO implements IsSerializable {
     private String reference;
     private String token;
 
+    public ContextItemDTO() {
+        this(null, null, null);
+    }
+
     public ContextItemDTO(String name, String type, String reference) {
-	this.name = name;
-	this.type = type;
-	this.reference = reference;
+    this.name = name;
+    this.type = type;
+    this.reference = reference;
     }
 
     public String getName() {
-	return name;
+    return name;
     }
 
     public String getType() {
-	return type;
+    return type;
     }
 
     public String getReference() {
-	return reference;
+    return reference;
     }
 
     public void setName(String name) {
-	this.name = name;
+    this.name = name;
     }
 
     public void setType(String type) {
-	this.type = type;
+    this.type = type;
     }
 
     public void setReference(String reference) {
-	this.reference = reference;
+    this.reference = reference;
     }
 
     public void setToken(String token) {
-	this.token = token;
+    this.token = token;
     }
 
     public String getToken() {

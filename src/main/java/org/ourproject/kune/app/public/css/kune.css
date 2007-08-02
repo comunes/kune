@@ -124,26 +124,38 @@ padding:0 3px;
     width: 100%;
 }
 
-.kune-GroupNavBar {
+/* TODO: Split and remove repetead */
+
+.kune-GroupNavBar-itemSelected {
     width: 150px;
-}
-
-.kune-GroupNavBar .itemSelected {
-    width: 100%;
-    color: blue;
-}
-
-.kune-GroupNavBar .gwt-Hyperlink a { /* color:#FFF; */
-    color: blue;
-    /* font-size: 85%; */
+    font-size: 85%;
     font-weight: 700;
+}
+
+.kune-GroupNavBar-itemNotSelected {
+    width: 150px;
+    font-size: 85%;
+    font-weight: 700;
+}
+
+.kune-GroupNavBar-itemSelected .gwt-Hyperlink a {
+    color: #FFF;
     padding: 0 9px;
     text-decoration: none;
 }
 
-.kune-GroupNavBar .itemNotSelected {
-    color: red;
-    width: 100%;
+.kune-GroupNavBar-itemSelected .gwt-Hyperlink a:hover {
+    text-decoration: underline;
+}
+
+.kune-GroupNavBar-itemNotSelected  .gwt-Hyperlink a {
+    color: green;
+    padding: 0 9px;
+    text-decoration: none;
+}
+
+.kune-GroupNavBar-itemSelected  .gwt-Hyperlink a:hover {
+    text-decoration: underline;
 }
 
 .kune-ContextTitleBar {

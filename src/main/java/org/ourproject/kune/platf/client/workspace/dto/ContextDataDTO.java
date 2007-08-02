@@ -7,16 +7,20 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 public class ContextDataDTO implements IsSerializable {
     private ArrayList items;
     private int defaultIndex;
-    private final String contextRef;
+    private String contextRef;
+
+    public ContextDataDTO() {
+        this(null);
+    }
 
     public ContextDataDTO(String contextRef) {
-	this.contextRef = contextRef;
-	items = new ArrayList();
-	defaultIndex = 0;
+    this.contextRef = contextRef;
+    items = new ArrayList();
+    defaultIndex = 0;
     }
 
     public void setItems(ArrayList items) {
-	this.items = items;
+    this.items = items;
     }
 
     public ArrayList getItems() {
@@ -24,15 +28,23 @@ public class ContextDataDTO implements IsSerializable {
     }
 
     public int getDefaultIndex() {
-	return defaultIndex;
+    return defaultIndex;
     }
 
     public String getContextRef() {
-	return contextRef;
+    return contextRef;
     }
 
     public void add(ContextItemDTO item) {
-	items.add(item);
+    items.add(item);
+    }
+
+    public void setContextRef(String contextRef) {
+        this.contextRef = contextRef;
+    }
+
+    public void setDefaultIndex(int defaultIndex) {
+        this.defaultIndex = defaultIndex;
     }
 
 }

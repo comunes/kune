@@ -4,9 +4,10 @@ import org.ourproject.kune.platf.client.workspace.dto.ContentDataDTO;
 import org.ourproject.kune.platf.client.workspace.dto.ContextDataDTO;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
-public interface DocumentService {
+public interface DocumentService extends RemoteService {
     public ContextDataDTO getContext(String userHash, String contextRef);
     public ContentDataDTO getContent(String userHash, String ctxRef, String docRef);
     public class App {

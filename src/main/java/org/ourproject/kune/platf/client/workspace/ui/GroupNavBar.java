@@ -31,14 +31,15 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class GroupNavBar extends VerticalPanel {
-    private static final String ITEM_SELECTED = "itemSelected";
+    private static final String ITEM_SELECTED = "kune-GroupNavBar-itemSelected";
+    private static final String ITEM_NOT_SELECTED = "kune-GroupNavBar-itemNotSelected";
     private Widget currentTab;
     private final HashMap tabs;
 
     public GroupNavBar() {
-	tabs = new HashMap();
+        tabs = new HashMap();
         currentTab = null;
-        addStyleName("kune-GroupNavBar");
+        // addStyleName("kune-GroupNavBar");
     }
 
     public void addItem(final String name, String caption) {
@@ -67,18 +68,17 @@ public class GroupNavBar extends VerticalPanel {
     }
 
     private Widget getWidget(String toolName) {
-	return (Widget) tabs.get(toolName);
+        return (Widget) tabs.get(toolName);
     }
 
     private void setTabSelected(Widget tab, boolean isSelected) {
         ColorScheme scheme = Kune.getInstance().c;
         if (isSelected) {
+            tab.removeStyleName(ITEM_NOT_SELECTED);
             tab.addStyleName(ITEM_SELECTED);
-            // TODO: DOM.setStyleAttribute(tab.getElement(), "color", "white");
-        }
-        else {
+        } else {
             tab.removeStyleName(ITEM_SELECTED);
-            // TODO: DOM.setStyleAttribute(tab.getElement(), "color", "red");
+            tab.addStyleName(ITEM_NOT_SELECTED);
         }
         String color = isSelected ? scheme.getSelected() : scheme.getUnselected();
         ((HasColor) tab).setColor(color);
