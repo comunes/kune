@@ -1,7 +1,7 @@
 package org.ourproject.kune.platf.client.workspace;
 
 public abstract class AbstractComponent implements WorkspaceComponent {
-    private String encodedState;
+    protected String encodedState;
 
     public AbstractComponent() {
 	encodedState = "";

@@ -1,7 +1,5 @@
 package org.ourproject.kune.docs.client.rpc;
 
-import java.util.ArrayList;
-
 import org.ourproject.kune.platf.client.rpc.MockedService;
 import org.ourproject.kune.platf.client.workspace.dto.ContentDataDTO;
 import org.ourproject.kune.platf.client.workspace.dto.ContextDataDTO;
@@ -22,11 +20,9 @@ public class DocumentServiceMocked extends MockedService implements DocumentServ
 
     protected ContextDataDTO createRoot(String contextRef) {
 	ContextDataDTO root = new ContextDataDTO(contextRef);
-	ArrayList list = new ArrayList();
-	list.add(new ContextItemDTO("welcome", "file", "welcome"));
-	list.add(new ContextItemDTO("second", "file", "second"));
-	list.add(new ContextItemDTO("thirth", "file", "thirth"));
-	root.setItems(list);
+	root.add(new ContextItemDTO("welcome", "file", "welcome"));
+	root.add(new ContextItemDTO("second", "file", "second"));
+	root.add(new ContextItemDTO("thirth", "file", "thirth"));
 	return root;
     }
 
@@ -34,11 +30,10 @@ public class DocumentServiceMocked extends MockedService implements DocumentServ
 	GWT.log("DOC SERVICE: getContent - " + ctxRef + ", " + docRef, null);
 	delay(new Delayer() {
 	    public void run() {
-		callback.onSuccess(new ContentDataDTO(docRef, "this is the content from the 'server' ;) for "
+		callback.onSuccess(new ContentDataDTO(docRef, docRef, "this is the content from the 'server' ;) for "
 			+ docRef.toUpperCase()));
 	    }
 	});
     }
-
 
 }

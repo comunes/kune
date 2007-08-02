@@ -6,26 +6,48 @@ import static org.ourproject.kune.docs.client.DocumentViewFactory.navigationView
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.app.client.MockServer;
+import org.ourproject.kune.docs.client.rpc.DocumentService;
+import org.ourproject.kune.docs.client.rpc.DocumentServiceAsync;
+import org.ourproject.kune.platf.client.workspace.dto.ContentDataDTO;
+import org.ourproject.kune.platf.client.workspace.dto.ContextDataDTO;
+import org.ourproject.kune.platf.client.workspace.dto.ContextItemDTO;
 import org.ourproject.kune.platf.client.workspace.navigation.NavigationView;
-public class DocumentToolTest {
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
+
+public class DocumentToolTest {
     private DocumentTool tool;
 
     @Before
     public void create() {
-	MockServer.start(MockServer.TEST);
-	documentView = EasyMock.createMock(DocumentView.class);
-	navigationView = EasyMock.createNiceMock(NavigationView.class);
+	DocumentService.App.setMock(new DocumentServiceAsync() {
+	    public void getContent(String userHash, String ctxRef, String docRef, AsyncCallback callback) {
+		callback.onSuccess(new ContentDataDTO(docRef, "title", "content"));
+	    }
+
+	    public void getContext(String userHash, String contextRef, AsyncCallback async) {
+		ContextDataDTO ctx = new ContextDataDTO(contextRef);
+		ctx.add(new ContextItemDTO("name", "type", "child"));
+		async.onSuccess(ctx);
+	    }
+	});
+	documentView = EasyMock.createStrictMock(DocumentView.class);
+	navigationView = EasyMock.createStrictMock(NavigationView.class);
 	tool = new DocumentTool();
     }
 
     @Test
     public void testEncode() {
 	navigationView.clear();
-//	EasyMock.expectLastCall().times(3);
+	navigationView.add("name", "type", "docs.ctxReference.child");
+	navigationView.selectItem(0);
+
+	documentView.setWaiting();
+	documentView.setContentName("title");
+	documentView.setContent("content");
+
 	EasyMock.replay(documentView, navigationView);
-	tool.setEncodedState("ctx.doc");
+	tool.setEncodedState("ctxReference.root");
 	EasyMock.verify(documentView, navigationView);
 
     }

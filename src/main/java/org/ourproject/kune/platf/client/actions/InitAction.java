@@ -7,6 +7,7 @@ import org.ourproject.kune.platf.client.rpc.KuneService;
 import org.ourproject.kune.platf.client.rpc.KuneServiceAsync;
 
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.UIObject;
 
@@ -24,7 +25,16 @@ public class InitAction extends DefaultAction {
 		state.setGroup(group);
 		workspace.setGroup(group);
 	        UIObject.setVisible(DOM.getElementById("initialstatusbar"), false);
-		dispatcher.fireState(HistoryToken.encode("tab", app.getDefaultToolName()));
+	        fireNext();
+	    }
+
+	    private void fireNext() {
+		String token = History.getToken();
+		if (token.length() > 0) {
+		    dispatcher.onHistoryChanged(token);
+		} else {
+		    dispatcher.fireState(HistoryToken.encode("tab", app.getDefaultToolName()));
+		}
 	    }
 	});
 

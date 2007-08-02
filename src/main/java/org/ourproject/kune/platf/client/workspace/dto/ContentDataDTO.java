@@ -5,9 +5,11 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 public class ContentDataDTO implements IsSerializable {
     private String docRef;
     private String content;
+    private String title;
 
-    public ContentDataDTO(String docRef, String content) {
+    public ContentDataDTO(String docRef, String title, String content) {
 	this.docRef = docRef;
+	this.title = title;
 	this.content = content;
     }
 
@@ -25,6 +27,14 @@ public class ContentDataDTO implements IsSerializable {
 
     public String getContent() {
 	return content;
+    }
+
+    public String getTitle() {
+	return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
 }

@@ -31,4 +31,8 @@ public class ContextDataDTO implements IsSerializable {
 	return contextRef;
     }
 
+    public void add(ContextItemDTO item) {
+	items.add(item);
+    }
+
 }
