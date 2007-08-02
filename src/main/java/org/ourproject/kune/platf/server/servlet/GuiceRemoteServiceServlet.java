@@ -2,7 +2,6 @@ package org.ourproject.kune.platf.server.servlet;
 
 import java.io.IOException;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,22 +17,24 @@ import com.google.gwt.user.server.rpc.RPCRequest;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.google.inject.Injector;
 
-public class GuiceRemoteServiceServlet extends RemoteServiceServlet {
+public abstract class GuiceRemoteServiceServlet extends RemoteServiceServlet {
     private static final Log log = LogFactory.getLog(GuiceRemoteServiceServlet.class);
-    private static final long serialVersionUID = 1L;
     private transient Injector injector;
     private transient RemoteService service;
 
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        injector = KuneServletContext.getInjector(config);
-        Class<? extends RemoteService> remoteServiceType = KuneServletContext.getRemoteService(config);
-        service = injector.getInstance(remoteServiceType);
-        log.debug("KuneService init complete: " + service.getClass().getName());
-    }
+//    @Override
+//    public void init(ServletConfig config) throws ServletException {
+//        injector = KuneServletContext.getInjector(config);
+//        Class<? extends RemoteService> remoteServiceType = KuneServletContext.getRemoteService(config);
+//        service = injector.getInstance(remoteServiceType);
+//        log.debug("KuneService init complete: " + service.getClass().getName());
+//    }
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	injector = KuneServletContext.getInjector(getServletConfig());
+	service = injector.getInstance(getServiceTypeName());
+	log.debug("SERVLET: " + getClass().getSimpleName());
         super.service(req, resp);
     }
 
@@ -48,4 +49,5 @@ public class GuiceRemoteServiceServlet extends RemoteServiceServlet {
           }
     }
 
+    public abstract Class<? extends RemoteService> getServiceTypeName ();
 }
