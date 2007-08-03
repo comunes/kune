@@ -6,8 +6,19 @@ public class Site {
     public static SiteMessage message;
 
     public static void info(final String value) {
-	message.info(value);
+	message.setValue(value, SiteMessage.INFO);
     }
 
-    // TODO: etcétera
+    public static void important(final String value) {
+	message.setValue(value, SiteMessage.IMP);
+    }
+
+    public static void veryImportant(final String value) {
+	message.setValue(value, SiteMessage.VERYIMP);
+    }
+
+    public static void error(final String value) {
+	message.setValue(value, SiteMessage.ERROR);
+    }
+
 }

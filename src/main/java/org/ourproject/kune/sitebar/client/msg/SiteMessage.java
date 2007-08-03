@@ -1,11 +1,10 @@
 package org.ourproject.kune.sitebar.client.msg;
 
 public interface SiteMessage {
-    void info(String message);
+    public static final int ERROR = 0;
+    public static final int VERYIMP = 1;
+    public static final int IMP = 2;
+    public static final int INFO = 3;
 
-    void important(String message);
-
-    void veryImportant(String message);
-
-    void error(String message);
+    void setValue(String message, int level);
 }

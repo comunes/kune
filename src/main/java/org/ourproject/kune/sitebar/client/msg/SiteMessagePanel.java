@@ -72,6 +72,8 @@ public class SiteMessagePanel extends VerticalPanel implements SiteMessageView {
     public void setMessage(final String text) {
 	this.message.setText(text);
 	// Put on the top of all windows/popup
+	// FIXME: hacer esto en css!
+	// no hace falta hacerlo cada vez que se pone el mensaje!!
 	DOM.setIntStyleAttribute(getElement(), "zIndex", DefaultGFrame.getLayerOfTheTopWindow() + 10);
     }
 
