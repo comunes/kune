@@ -15,8 +15,6 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class SiteMessagePanel extends VerticalPanel implements SiteMessageView {
 
-    static final Images IMG = Images.App.getInstance();
-
     Label message = null;
     Image icon = null;
     private final PushButton closeLink;
@@ -29,7 +27,9 @@ public class SiteMessagePanel extends VerticalPanel implements SiteMessageView {
 	icon = new Image();
 	HorizontalPanel closeHP = new HorizontalPanel();
 	Label expandCell = new Label("");
-	closeLink = new PushButton(IMG.cross().createImage(), IMG.crossDark().createImage());
+
+	final Images images = Images.App.getInstance();
+	closeLink = new PushButton(images.cross().createImage(), images.crossDark().createImage());
 	closeLink.addClickListener(new ClickListener() {
 	    public void onClick(final Widget sender) {
 		if (sender == closeLink) {
@@ -55,7 +55,7 @@ public class SiteMessagePanel extends VerticalPanel implements SiteMessageView {
 	// this.setHeight("33");
 	addStyleName("kune-SiteMessagePanel");
 	message.setHeight("27");
-	IMG.info().applyTo(icon);
+	images.info().applyTo(icon);
 	closeHP.setWidth("100%");
 	expandCell.setWidth("100%");
 	closeHP.setCellWidth(expandCell, "100%");
