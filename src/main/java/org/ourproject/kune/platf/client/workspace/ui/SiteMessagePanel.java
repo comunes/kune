@@ -4,6 +4,7 @@ import org.gwm.client.impl.DefaultGFrame;
 import org.ourproject.kune.platf.client.services.Images;
 
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -15,13 +16,6 @@ import com.google.gwt.user.client.ui.Widget;
 class SiteMessagePanel extends VerticalPanel implements SiteMessageView {
 
     static final Images IMG = Images.App.getInstance();
-
-    static final String COLORINFO = "#E5FF80";
-    static final String COLORIMP = "#FFE6D5";
-    static final String COLORVERYIMP = "#FFD4AA";
-    static final String COLORERROR = "#FFB380";
-
-    private String currentColor = COLORINFO; // Initial CSS value
 
     Label message = null;
     Image icon = null;
@@ -58,8 +52,6 @@ class SiteMessagePanel extends VerticalPanel implements SiteMessageView {
         // Set properties
 
         // //FIXME this.setVisible(false);
-        this.message.setText("lalalala");
-        this.adjustWidth(600);
         // this.setHeight("33");
         setStyleName("kune-SiteMessagePanel");
         message.setHeight("27");
@@ -69,45 +61,17 @@ class SiteMessagePanel extends VerticalPanel implements SiteMessageView {
         closeHP.setCellWidth(expandCell, "100%");
     }
 
-    void setMessage(String text) {
-        // FIXME: This mix different message levels:
+    public void setMessage(String text, AbstractImagePrototype type, String oldStyle, String newStyle) {
+        type.applyTo(icon);
+        removeStyleName(oldStyle);
+        addStyleName(newStyle);
+        setMessage(text);
+    }
+
+    public void setMessage(String text) {
         this.message.setText(text);
         // Put on the top of all windows/popup
         DOM.setIntStyleAttribute(getElement(), "zIndex", DefaultGFrame.getLayerOfTheTopWindow() + 10);
-        this.setVisible(true);
-    }
-
-    private void setBackgroundColor(String color) {
-        if (currentColor != color) {
-            DOM.setStyleAttribute(getElement(), "backgroundColor", color);
-            DOM.setStyleAttribute(message.getElement(), "backgroundColor", color);
-            DOM.setStyleAttribute(closeLink.getElement(), "backgroundColor", color);
-            currentColor = color;
-        }
-    }
-
-    public void setMessageError(String message) {
-        setBackgroundColor(COLORERROR);
-        IMG.error().applyTo(icon);
-        this.setMessage(message);
-    }
-
-    public void setMessageVeryImp(String message) {
-        setBackgroundColor(COLORVERYIMP);
-        IMG.important().applyTo(icon);
-        this.setMessage(message);
-    }
-
-    public void setMessageImp(String message) {
-        setBackgroundColor(COLORIMP);
-        IMG.emblemImportant().applyTo(icon);
-        this.setMessage(message);
-    }
-
-    public void setMessageInfo(String message) {
-        setBackgroundColor(COLORINFO);
-        IMG.info().applyTo(icon);
-        this.setMessage(message);
     }
 
     public void adjustWidth(int windowWidth) {

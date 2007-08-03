@@ -5,4 +5,5 @@ public interface SiteMessage {
     void important(String message);
     void veryImportant(String message);
     void error(String message);
+    void adjustWidth(int windowWidth);
 }

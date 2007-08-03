@@ -1,14 +1,12 @@
 package org.ourproject.kune.platf.client.workspace.ui;
 
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
+
 public interface SiteMessageView {
 
-    public void setMessageError(String message);
+    public void setMessage(String message);
 
-    public void setMessageVeryImp(String message);
-
-    public void setMessageImp(String message);
-
-    public void setMessageInfo(String message);
+    public void setMessage(String message, AbstractImagePrototype type, String oldStyle, String newStyle);
 
     public void adjustWidth(int windowWidth);
 

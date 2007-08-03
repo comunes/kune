@@ -28,6 +28,12 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         SiteMessagePresenter siteMessagePresenter = new SiteMessagePresenter();
         SiteMessagePanel siteMessagePanel = new SiteMessagePanel(siteMessagePresenter);
         siteMessagePresenter.init(siteMessagePanel);
+        SiteMessage siteMessage = (SiteMessage) siteMessagePresenter;
+
+        siteMessage.info("lalalala");
+        siteMessage.important("bla bla bla");
+        siteMessage.adjustWidth(800);
+
         generalVP.add(siteMessagePanel);
         generalVP.add(logoPanel);
         generalVP.add(generalHP);
