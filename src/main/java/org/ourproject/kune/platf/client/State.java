@@ -1,8 +1,8 @@
 package org.ourproject.kune.platf.client;
 
-import org.ourproject.kune.platf.client.actions.StateAction;
 import org.ourproject.kune.platf.client.dispatch.HistoryToken;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.workspace.actions.StateAction;
 
 /**
  * RESPONSABILITIES:

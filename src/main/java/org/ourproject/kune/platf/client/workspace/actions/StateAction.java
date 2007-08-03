@@ -1,4 +1,4 @@
-package org.ourproject.kune.platf.client.actions;
+package org.ourproject.kune.platf.client.workspace.actions;
 
 import org.ourproject.kune.platf.client.dispatch.DefaultAction;
 import org.ourproject.kune.platf.client.dispatch.HistoryToken;
