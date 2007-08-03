@@ -13,10 +13,10 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class WorkspacePanel extends Composite implements WorkspaceView {
-    private LogoPanel logoPanel;
-    private ContextTitleBar contextTitleBar;
-    private GroupNavBar groupNavBar;
-    private HorizontalSplitPanel contextHSP;
+    private final LogoPanel logoPanel;
+    private final ContextTitleBar contextTitleBar;
+    private final GroupNavBar groupNavBar;
+    private final HorizontalSplitPanel contextHSP;
 
     public WorkspacePanel() {
         VerticalPanel generalVP = new VerticalPanel();
@@ -28,11 +28,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         SiteMessagePresenter siteMessagePresenter = new SiteMessagePresenter();
         SiteMessagePanel siteMessagePanel = new SiteMessagePanel(siteMessagePresenter);
         siteMessagePresenter.init(siteMessagePanel);
-        SiteMessage siteMessage = (SiteMessage) siteMessagePresenter;
-
-        siteMessage.info("lalalala");
-        siteMessage.important("bla bla bla");
-        siteMessage.adjustWidth(800);
+        SiteMessage siteMessage = siteMessagePresenter;
 
         generalVP.add(siteMessagePanel);
         generalVP.add(logoPanel);
@@ -68,41 +64,43 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         generalHP.addStyleName("GeneralHP");
     }
 
-    public void addTab(String name, String caption) {
+    public void addTab(final String name, final String caption) {
         groupNavBar.addItem(name, caption);
     }
 
-    public void setLogo(String groupName) {
+    public void setLogo(final String groupName) {
         logoPanel.setLogo(groupName);
     }
 
-    public void setLogo(Image image) {
+    public void setLogo(final Image image) {
         logoPanel.setLogo(image);
     }
 
-    public void setContextTitle(String title) {
+    public void setContextTitle(final String title) {
         contextTitleBar.setTitle(title);
     }
 
-    public void setTool(String toolName) {
+    public void setTool(final String toolName) {
         groupNavBar.selectItem(toolName);
     }
 
-    public void setContent(View content) {
+    public void setContent(final View content) {
         Widget left = contextHSP.getLeftWidget();
-        if (left != null)
+        if (left != null) {
             contextHSP.remove(left);
+        }
         contextHSP.setLeftWidget((Widget) content);
     }
 
-    public void setContext(View contextMenu) {
+    public void setContext(final View contextMenu) {
         Widget right = contextHSP.getRightWidget();
-        if (right != null)
+        if (right != null) {
             contextHSP.remove(right);
+        }
         contextHSP.setRightWidget((Widget) contextMenu);
     }
 
-    public void adjustSize(int windowWidth, int windowHeight) {
+    public void adjustSize(final int windowWidth, final int windowHeight) {
         int contextWidth = windowWidth - 163;
         int contextHeight = windowHeight - 204;
 

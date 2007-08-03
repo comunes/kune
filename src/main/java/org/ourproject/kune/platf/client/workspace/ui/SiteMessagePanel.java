@@ -51,7 +51,7 @@ class SiteMessagePanel extends VerticalPanel implements SiteMessageView {
 
         // Set properties
 
-        this.setVisible(false);
+        setVisible(false);
         // this.setHeight("33");
         addStyleName("kune-SiteMessagePanel");
         message.setHeight("27");
