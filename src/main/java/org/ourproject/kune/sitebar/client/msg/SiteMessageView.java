@@ -1,4 +1,4 @@
-package org.ourproject.kune.platf.client.workspace.ui;
+package org.ourproject.kune.sitebar.client.msg;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 

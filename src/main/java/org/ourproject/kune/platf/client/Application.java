@@ -2,7 +2,7 @@ package org.ourproject.kune.platf.client;
 
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.workspace.Workspace;
-import org.ourproject.kune.sitebar.client.SiteBar;
+import org.ourproject.kune.sitebar.client.bar.SiteBar;
 
 public interface Application {
     State getState();

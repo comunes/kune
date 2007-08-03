@@ -1,9 +1,11 @@
-package org.ourproject.kune.platf.client.workspace.ui;
+package org.ourproject.kune.sitebar.client.msg;
 
 public interface SiteMessage {
     void info(String message);
+
     void important(String message);
+
     void veryImportant(String message);
+
     void error(String message);
-    void adjustWidth(int windowWidth);
 }

@@ -1,4 +1,4 @@
-package org.ourproject.kune.sitebar.client;
+package org.ourproject.kune.sitebar.client.bar;
 
 import org.ourproject.kune.sitebar.client.group.NewGroupListener;
 import org.ourproject.kune.sitebar.client.login.LoginListener;

@@ -1,6 +1,9 @@
-package org.ourproject.kune.sitebar.client;
+package org.ourproject.kune.sitebar.client.bar;
 
 import org.gwm.client.impl.DefaultGFrame;
+import org.ourproject.kune.sitebar.client.Images;
+import org.ourproject.kune.sitebar.client.Translate;
+import org.ourproject.kune.sitebar.client.Images.App;
 import org.ourproject.kune.sitebar.client.group.NewGroupPanel;
 import org.ourproject.kune.sitebar.client.group.NewGroupPresenter;
 import org.ourproject.kune.sitebar.client.login.LoginPanel;

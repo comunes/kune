@@ -44,7 +44,7 @@ public class KunePlatform implements Register {
 	DefaultDispatcher dispatcher = new DefaultDispatcher(new DefaultActionInjector(app));
 	app.setDispatcher(dispatcher);
 	History.addHistoryListener(dispatcher);
-	app.initTools(tools);
+	app.init(tools);
 	dispatcher.subscribeAll(actions);
 	DeferredCommand.addCommand(new Command() {
 	    public void execute() {

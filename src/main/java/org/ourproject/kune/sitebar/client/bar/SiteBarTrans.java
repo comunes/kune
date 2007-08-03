@@ -1,4 +1,6 @@
-package org.ourproject.kune.sitebar.client;
+package org.ourproject.kune.sitebar.client.bar;
+
+import org.ourproject.kune.sitebar.client.Translate;
 
 import com.google.gwt.core.client.GWT;
 

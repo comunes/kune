@@ -1,4 +1,4 @@
-package org.ourproject.kune.sitebar.client;
+package org.ourproject.kune.sitebar.client.bar;
 
 import com.google.gwt.user.client.ui.Image;
 

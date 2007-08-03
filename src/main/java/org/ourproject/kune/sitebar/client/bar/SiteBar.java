@@ -1,4 +1,4 @@
-package org.ourproject.kune.sitebar.client;
+package org.ourproject.kune.sitebar.client.bar;
 
 public interface SiteBar {
 
