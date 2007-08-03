@@ -13,41 +13,37 @@ public class DocumentPresenter extends AbstractComponent implements Document, Co
     private final ContentDataProvider provider;
 
     public DocumentPresenter(ContentDataProvider provider, DocumentView view, String initalState) {
-	this.provider = provider;
-	this.view = view;
-	encodedState = initalState;
+        this.provider = provider;
+        this.view = view;
+        encodedState = initalState;
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void setEncodedState(String encodedState) {
         super.setEncodedState(encodedState);
-	String[] split = HistoryToken.split(encodedState);
-	load(split[0], split[1]);
+        String[] split = HistoryToken.split(encodedState);
+        load(split[0], split[1]);
     }
 
     private void load(String contextRef, String docRef) {
-	view.setWaiting();
-	provider.getContent(contextRef, docRef, this);
+        provider.getContent(contextRef, docRef, this);
     }
 
     public void load(String contextRef, ContextItemDTO item) {
-	view.setContentName(item.getName());
-	String docRef = item.getReference();
-	load(contextRef, docRef);
+        view.setContentName(item.getName());
+        String docRef = item.getReference();
+        load(contextRef, docRef);
     }
 
     public void accept(ContentDataDTO ctxData) {
-	view.setContentName(ctxData.getTitle());
-	view.setContent(ctxData.getContent());
+        view.setContentName(ctxData.getTitle());
+        view.setContent(ctxData.getContent());
     }
 
     public void failed(Throwable caugth) {
     }
-
-
-
 
 }

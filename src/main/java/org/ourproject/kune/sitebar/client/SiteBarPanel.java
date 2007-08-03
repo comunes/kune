@@ -126,6 +126,8 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 
         // TODO: externalize this
         img.kuneLogo16px().applyTo(logoImage);
+
+        showProgress(false);
     }
 
     public void clearSearchText() {

@@ -21,50 +21,45 @@ public class DocumentToolTest {
     private int getContentCallCount;
     private int getContextCallCount;
 
-    @Before
-    public void create() {
-	getContentCallCount = 0;
-	getContextCallCount = 0;
+    @Before public void create() {
+        getContentCallCount = 0;
+        getContextCallCount = 0;
 
-	DocumentService.App.setMock(new DocumentServiceAsync() {
-	    public void getContent(String userHash, String ctxRef, String docRef, AsyncCallback callback) {
-		getContentCallCount++;
-		callback.onSuccess(new ContentDataDTO(docRef, "title", "content"));
-	    }
+        DocumentService.App.setMock(new DocumentServiceAsync() {
+            public void getContent(String userHash, String ctxRef, String docRef, AsyncCallback callback) {
+                getContentCallCount++;
+                callback.onSuccess(new ContentDataDTO(docRef, "title", "content"));
+            }
 
-	    public void getContext(String userHash, String contextRef, AsyncCallback async) {
-		getContextCallCount++;
-		ContextDataDTO ctx = new ContextDataDTO(contextRef);
-		ctx.add(new ContextItemDTO("name", "type", "child"));
-		async.onSuccess(ctx);
-	    }
-	});
-	documentView = EasyMock.createStrictMock(DocumentView.class);
-	navigationView = EasyMock.createStrictMock(NavigationView.class);
-	tool = new DocumentTool();
+            public void getContext(String userHash, String contextRef, AsyncCallback async) {
+                getContextCallCount++;
+                ContextDataDTO ctx = new ContextDataDTO(contextRef);
+                ctx.add(new ContextItemDTO("name", "type", "child"));
+                async.onSuccess(ctx);
+            }
+        });
+        documentView = EasyMock.createStrictMock(DocumentView.class);
+        navigationView = EasyMock.createStrictMock(NavigationView.class);
+        tool = new DocumentTool();
     }
 
-    @Test
-    public void testCalls () {
-	tool.setEncodedState("ctx.doc");
-	assertEquals(1, getContentCallCount);
-	assertEquals(1, getContextCallCount);
+    @Test public void testCalls() {
+        tool.setEncodedState("ctx.doc");
+        assertEquals(1, getContentCallCount);
+        assertEquals(1, getContextCallCount);
     }
 
+    @Test public void testEncode() {
+        navigationView.clear();
+        navigationView.add("name", "type", "docs.ctxReference.child");
+        navigationView.selectItem(0);
 
-    @Test
-    public void testEncode() {
-	navigationView.clear();
-	navigationView.add("name", "type", "docs.ctxReference.child");
-	navigationView.selectItem(0);
+        documentView.setContentName("title");
+        documentView.setContent("content");
 
-	documentView.setWaiting();
-	documentView.setContentName("title");
-	documentView.setContent("content");
-
-	EasyMock.replay(documentView, navigationView);
-	tool.setEncodedState("ctxReference.root");
-	EasyMock.verify(documentView, navigationView);
+        EasyMock.replay(documentView, navigationView);
+        tool.setEncodedState("ctxReference.root");
+        EasyMock.verify(documentView, navigationView);
 
     }
 }

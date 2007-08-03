@@ -5,9 +5,9 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ImageBundle;
 
 /**
- *
+ * 
  * http://code.google.com/p/google-web-toolkit/wiki/ImageBundleDesign
- *
+ * 
  */
 public interface Images extends ImageBundle {
 
@@ -353,6 +353,16 @@ public interface Images extends ImageBundle {
     AbstractImagePrototype clear();
 
     /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/cross.png
+     */
+    AbstractImagePrototype cross();
+
+    /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/cross-dark.png
+     */
+    AbstractImagePrototype crossDark();
+
+    /**
      * @gwt.resource org/ourproject/kune/platf/public/images/emblem-important.png
      */
     AbstractImagePrototype emblemImportant();
@@ -436,11 +446,6 @@ public interface Images extends ImageBundle {
      * @gwt.resource org/ourproject/kune/platf/public/images/search-ico.png
      */
     AbstractImagePrototype searchIco();
-
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/spin-kune-thund-green.gif
-     */
-    AbstractImagePrototype spinKuneThundGreen();
 
     /**
      * @gwt.resource org/ourproject/kune/platf/public/images/star-10.png

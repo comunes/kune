@@ -1,83 +1,83 @@
 package org.ourproject.kune.platf.client.workspace.ui;
 
+import org.gwm.client.impl.DefaultGFrame;
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.platf.client.services.Kune;
 
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.TextArea;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-class SiteMessagePanel extends VerticalPanel {
+class SiteMessagePanel extends VerticalPanel implements SiteMessageView {
 
-    private static final Images IMG = Images.App.getInstance();
+    static final Images IMG = Images.App.getInstance();
 
-    private static final int TIMEVISIBLE = 4000;
-
-    private static final String COLORINFO = "#E5FF80";
-    private static final String COLORIMP = "#FFE6D5";
-    private static final String COLORVERYIMP = "#FFD4AA";
-    private static final String COLORERROR = "#FFB380";
-
-    // TODO permit multiple messages
-    private TextArea message = null;
-    private Image icon = null;
-    private HorizontalPanel messageHP = null;
-    private Hyperlink closeLink = null;
+    static final String COLORINFO = "#E5FF80";
+    static final String COLORIMP = "#FFE6D5";
+    static final String COLORVERYIMP = "#FFD4AA";
+    static final String COLORERROR = "#FFB380";
 
     private String currentColor = COLORINFO; // Initial CSS value
 
-    Timer timer = new Timer() {
-        public void run() {
-            // SiteMessageDialog.setVisible(false);
-            message.setText("");
-        }
-    };
+    Label message = null;
+    Image icon = null;
+    private PushButton closeLink;
+    private SiteMessagePresenter presenter;
 
-    public SiteMessagePanel() {
-        message = new TextArea();
+    public SiteMessagePanel(final SiteMessagePresenter sitePresenter) {
+        this.presenter = sitePresenter;
+        HorizontalPanel messageHP = new HorizontalPanel();
+        message = new Label();
         icon = new Image();
-        closeLink = new Hyperlink();
-        messageHP = new HorizontalPanel();
-        //closeLink.addClickListener(this);
+        HorizontalPanel closeHP = new HorizontalPanel();
+        Label expandCell = new Label("");
+        closeLink = new PushButton(IMG.cross().createImage(), IMG.crossDark().createImage());
+        closeLink.addClickListener(new ClickListener() {
+            public void onClick(Widget sender) {
+                if (sender == closeLink) {
+                    setVisible(false);
+                    presenter.onClose();
+                }
+            }
+        });
 
         // Layout
         // this.add(new BorderPanel(messageHP, 5, 0, 0, 0));
         add(messageHP);
-        add(closeLink);
+        add(closeHP);
+        closeHP.add(expandCell);
+        closeHP.add(closeLink);
         // messageHP.add(new BorderPanel(icon, 0, 10, 0, 5));
         messageHP.add(icon);
         messageHP.add(message);
-        // this.setCellHorizontalAlignment(closeLink,
-        // HasHorizontalAlignment.ALIGN_RIGHT);
 
         // Set properties
-        this.setVisible(false);
 
+        // //FIXME this.setVisible(false);
+        this.message.setText("lalalala");
+        this.adjustWidth(600);
         // this.setHeight("33");
-        this.addStyleName("site-message-dialog");
+        setStyleName("kune-SiteMessagePanel");
         message.setHeight("27");
-        message.addStyleName("site-message");
-        closeLink.addStyleName("site-message");
         IMG.info().applyTo(icon);
-        closeLink.setText(Kune.getInstance().t.Close());
+        closeHP.setWidth("100%");
+        expandCell.setWidth("100%");
+        closeHP.setCellWidth(expandCell, "100%");
     }
 
-    public void setMessage(String message) {
+    void setMessage(String text) {
         // FIXME: This mix different message levels:
-        this.message.setText(this.message.getText() + "\n" + message);
+        this.message.setText(text);
         // Put on the top of all windows/popup
-        // DOM.setIntStyleAttribute(getElement(), "zIndex",
-        // DefaultGFrame.getLayerOfTheTopWindow() + 10);
+        DOM.setIntStyleAttribute(getElement(), "zIndex", DefaultGFrame.getLayerOfTheTopWindow() + 10);
         this.setVisible(true);
-        timer.schedule(TIMEVISIBLE);
     }
 
-    public void setBackgroundColor(String color) {
+    private void setBackgroundColor(String color) {
         if (currentColor != color) {
             DOM.setStyleAttribute(getElement(), "backgroundColor", color);
             DOM.setStyleAttribute(message.getElement(), "backgroundColor", color);
@@ -110,15 +110,21 @@ class SiteMessagePanel extends VerticalPanel {
         this.setMessage(message);
     }
 
-    public void onClick(Widget sender) {
-        if (sender == closeLink) {
-            this.setVisible(false);
-        }
-    }
-
     public void adjustWidth(int windowWidth) {
         int messageWidth = windowWidth * 60 / 100 - 3;
         this.setWidth("" + messageWidth);
         message.setWidth("" + (messageWidth - 16 - 40));
+    }
+
+    public void hide() {
+        this.setVisible(false);
+    }
+
+    public void show() {
+        this.setVisible(true);
+    }
+
+    public void reset() {
+        message.setText("");
     }
 }

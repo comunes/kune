@@ -22,8 +22,4 @@ public class DocumentPanel extends VerticalPanel implements DocumentView {
         add(new Label("CONTENIDO: " + content));
     }
 
-    public void setWaiting() {
-        add(new Label("conectando con el servidor..."));
-    }
-
 }

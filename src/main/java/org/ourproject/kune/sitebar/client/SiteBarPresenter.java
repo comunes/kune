@@ -8,7 +8,7 @@ import org.ourproject.kune.sitebar.client.rpc.SiteBarServiceAsync;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class SiteBarPresenter implements  SiteBar, SiteBarListener, LoginListener, NewGroupListener {
+public class SiteBarPresenter implements SiteBar, SiteBarListener, LoginListener, NewGroupListener {
 
     private SiteBarView view;
 
@@ -66,6 +66,14 @@ public class SiteBarPresenter implements  SiteBar, SiteBarListener, LoginListene
 
     public void onNewGroupCancel() {
         view.hideNewGroupDialog();
+    }
+
+    public void setProgressText(String text) {
+        view.setProgressText(text);
+    }
+
+    public void showProgress(boolean show) {
+        view.showProgress(show);
     }
 
 }
