@@ -1,6 +1,5 @@
 package org.ourproject.kune.platf.client.workspace.actions;
 
-import org.ourproject.kune.platf.client.dispatch.DefaultAction;
 import org.ourproject.kune.platf.client.dispatch.HistoryToken;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.rpc.KuneService;
@@ -11,7 +10,7 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.UIObject;
 
-public class InitAction extends DefaultAction {
+public class InitAction extends WorkspaceAction {
     public void execute(Object value) {
 
 	String token = History.getToken();

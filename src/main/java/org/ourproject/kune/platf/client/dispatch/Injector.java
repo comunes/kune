@@ -1,6 +1,5 @@
-package org.ourproject.kune.platf.client.inject;
+package org.ourproject.kune.platf.client.dispatch;
 
-import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 
 
 public interface Injector {

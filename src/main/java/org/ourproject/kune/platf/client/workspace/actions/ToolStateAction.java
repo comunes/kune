@@ -1,9 +1,8 @@
 package org.ourproject.kune.platf.client.workspace.actions;
 
 import org.ourproject.kune.platf.client.Tool;
-import org.ourproject.kune.platf.client.dispatch.DefaultAction;
 
-public class ToolStateAction extends DefaultAction{
+public class ToolStateAction extends WorkspaceAction{
     private final Tool tool;
 
     public ToolStateAction(Tool tool) {

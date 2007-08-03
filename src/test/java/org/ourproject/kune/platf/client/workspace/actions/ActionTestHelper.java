@@ -3,9 +3,8 @@ package org.ourproject.kune.platf.client.workspace.actions;
 import org.easymock.EasyMock;
 import org.ourproject.kune.platf.client.Application;
 import org.ourproject.kune.platf.client.State;
-import org.ourproject.kune.platf.client.dispatch.DefaultAction;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
-import org.ourproject.kune.platf.client.inject.Injector;
+import org.ourproject.kune.platf.client.dispatch.Injector;
 import org.ourproject.kune.platf.client.stubs.NiceState;
 import org.ourproject.kune.platf.client.workspace.Workspace;
 
@@ -19,9 +18,9 @@ public class ActionTestHelper implements Injector {
     public State state;
     public String userHash;
     public Workspace workspace;
-    private final DefaultAction action;
+    private final WorkspaceAction action;
 
-    public ActionTestHelper(final DefaultAction action, final boolean useNiceMocks) {
+    public ActionTestHelper(final WorkspaceAction action, final boolean useNiceMocks) {
 	this.action = action;
 	this.useNiceMocks = useNiceMocks;
 	app = mock(Application.class);
@@ -41,7 +40,7 @@ public class ActionTestHelper implements Injector {
     }
 
     public void inject(final Object object) {
-	DefaultAction action = (DefaultAction) object;
+	WorkspaceAction action = (WorkspaceAction) object;
 	action.setApp(app);
 	action.setDispatcher(dispatcher);
 	action.setState(state);

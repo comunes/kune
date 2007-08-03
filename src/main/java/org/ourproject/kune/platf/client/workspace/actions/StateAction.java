@@ -1,9 +1,8 @@
 package org.ourproject.kune.platf.client.workspace.actions;
 
-import org.ourproject.kune.platf.client.dispatch.DefaultAction;
 import org.ourproject.kune.platf.client.dispatch.HistoryToken;
 
-public class StateAction extends DefaultAction {
+public class StateAction extends WorkspaceAction {
     public static final String NAME = "group";
 
     public void execute(Object value) {

@@ -3,7 +3,6 @@ package org.ourproject.kune.platf.client.dispatch;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.inject.Injector;
 
 public class DispatcherTest {
 	private Dispatcher dispatcher;

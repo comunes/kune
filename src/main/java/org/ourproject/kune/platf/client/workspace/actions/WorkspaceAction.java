@@ -1,10 +1,12 @@
-package org.ourproject.kune.platf.client.dispatch;
+package org.ourproject.kune.platf.client.workspace.actions;
 
 import org.ourproject.kune.platf.client.Application;
 import org.ourproject.kune.platf.client.State;
+import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.workspace.Workspace;
 
-public abstract class DefaultAction implements Action {
+public abstract class WorkspaceAction implements Action {
     protected String userHash;
     protected Workspace workspace;
     protected State state;
