@@ -316,7 +316,7 @@ body
 .kune-SiteMessagePanel
 {
   border:1px solid #CF0;
-  background-color:#E5FF80;
+  Background-color:#E5FF80;
   font-size:85%;
   color:#250;
   cursor:pointer;
@@ -330,4 +330,12 @@ body
   color:#250;
   }
 
+/*
+        messageStyle = new String[] { "error", "veryimp", "imp", "info" };
+
+        // backGroundColor.put(ERROR, "#FFB380");
+        // backGroundColor.put(VERYIMP, "#FFD4AA");
+        // backGroundColor.put(IMP, "#FFE6D5");
+        // backGroundColor.put(INFO, "#E5FF80");
+*/
 

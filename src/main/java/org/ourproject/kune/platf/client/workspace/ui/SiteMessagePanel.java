@@ -19,8 +19,8 @@ class SiteMessagePanel extends VerticalPanel implements SiteMessageView {
 
     Label message = null;
     Image icon = null;
-    private PushButton closeLink;
-    private SiteMessagePresenter presenter;
+    private final PushButton closeLink;
+    private final SiteMessagePresenter presenter;
 
     public SiteMessagePanel(final SiteMessagePresenter sitePresenter) {
         this.presenter = sitePresenter;
@@ -31,7 +31,7 @@ class SiteMessagePanel extends VerticalPanel implements SiteMessageView {
         Label expandCell = new Label("");
         closeLink = new PushButton(IMG.cross().createImage(), IMG.crossDark().createImage());
         closeLink.addClickListener(new ClickListener() {
-            public void onClick(Widget sender) {
+            public void onClick(final Widget sender) {
                 if (sender == closeLink) {
                     setVisible(false);
                     presenter.onClose();
@@ -51,9 +51,9 @@ class SiteMessagePanel extends VerticalPanel implements SiteMessageView {
 
         // Set properties
 
-        // //FIXME this.setVisible(false);
+        this.setVisible(false);
         // this.setHeight("33");
-        setStyleName("kune-SiteMessagePanel");
+        addStyleName("kune-SiteMessagePanel");
         message.setHeight("27");
         IMG.info().applyTo(icon);
         closeHP.setWidth("100%");
@@ -61,20 +61,21 @@ class SiteMessagePanel extends VerticalPanel implements SiteMessageView {
         closeHP.setCellWidth(expandCell, "100%");
     }
 
-    public void setMessage(String text, AbstractImagePrototype type, String oldStyle, String newStyle) {
+    public void setMessage(final String text, final AbstractImagePrototype type, final String oldStyle,
+            final String newStyle) {
         type.applyTo(icon);
         removeStyleName(oldStyle);
         addStyleName(newStyle);
         setMessage(text);
     }
 
-    public void setMessage(String text) {
+    public void setMessage(final String text) {
         this.message.setText(text);
         // Put on the top of all windows/popup
         DOM.setIntStyleAttribute(getElement(), "zIndex", DefaultGFrame.getLayerOfTheTopWindow() + 10);
     }
 
-    public void adjustWidth(int windowWidth) {
+    public void adjustWidth(final int windowWidth) {
         int messageWidth = windowWidth * 60 / 100 - 3;
         this.setWidth("" + messageWidth);
         message.setWidth("" + (messageWidth - 16 - 40));

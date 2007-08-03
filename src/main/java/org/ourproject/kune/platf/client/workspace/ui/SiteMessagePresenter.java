@@ -1,7 +1,5 @@
 package org.ourproject.kune.platf.client.workspace.ui;
 
-import java.util.HashMap;
-
 import org.ourproject.kune.platf.client.services.Images;
 
 import com.google.gwt.user.client.Timer;
@@ -22,32 +20,21 @@ public class SiteMessagePresenter implements SiteMessage {
     private String message;
     private int lastMessageType;
 
-    private HashMap messageIcons;
+    private AbstractImagePrototype[] messageIcons;
 
-    private HashMap messageStyle;
+    private String[] messageStyle;
 
     public SiteMessagePresenter() {
-
         lastMessageType = INFO;
         isVisible = false;
         message = "";
 
-        messageIcons = new (AbsIMG.error());
-        messageIcons.put(VERYIMP, IMG.important());
-        messageIcons.put(IMP, IMG.emblemImportant());
-        messageIcons.put(INFO, IMG.emblemImportant());
+        messageIcons = new AbstractImagePrototype[] { IMG.error(), IMG.important(), IMG.emblemImportant(),
+                IMG.emblemImportant() };
 
-        messageStyle = new HashMap();
-        messageStyle.put(INFO, "info");
-        messageStyle.put(IMP, "imp");
-        messageStyle.put(VERYIMP, "veryimp");
-        messageStyle.put(ERROR, "error");
-
-        // backGroundColor.put(ERROR, "#FFB380");
-        // backGroundColor.put(VERYIMP, "#FFD4AA");
-        // backGroundColor.put(IMP, "#FFE6D5");
-        // backGroundColor.put(INFO, "#E5FF80");
+        messageStyle = new String[] { "error", "veryimp", "imp", "info" };
     }
+
     public void init(SiteMessageView siteMessageView) {
         this.view = siteMessageView;
     }
@@ -73,8 +60,7 @@ public class SiteMessagePresenter implements SiteMessage {
             isVisible = true;
         }
         if (lastMessageType != type) {
-            view.setMessage(message, (AbstractImagePrototype) messageIcons.get(lastMessageType), (String) messageStyle
-                    .get(lastMessageType), (String) messageStyle.get(type));
+            view.setMessage(message, messageIcons[lastMessageType], messageStyle[lastMessageType], messageStyle[type]);
             lastMessageType = type;
         } else {
             view.setMessage(message);
