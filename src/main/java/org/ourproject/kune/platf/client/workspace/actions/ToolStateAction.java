@@ -17,4 +17,5 @@ public class ToolStateAction extends DefaultAction{
 	workspace.setContent(tool.getContent());
     }
 
+
 }

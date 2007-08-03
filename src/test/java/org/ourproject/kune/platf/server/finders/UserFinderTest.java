@@ -16,15 +16,16 @@ public class UserFinderTest extends PersistenceTest {
 
     @Before
     public void addData() {
+	prepare();
         persist(new User("one@here.com", "password1"));
         persist(new User("two@here.com", "password1"));
     }
-    
+
     @Test public void findAll() {
          List<User> all = finder.getAll();
          assertEquals(2, all.size());
     }
-    
+
     @Test public void findByEmail () {
         User user = finder.getByEmail("one@here.com");
         assertNotNull(user);

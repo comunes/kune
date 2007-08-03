@@ -8,7 +8,7 @@ public class KuneServiceMocked extends MockedService implements KuneServiceAsync
     public void getDefaultGroup(String userHash, final AsyncCallback callback) {
 	delay(new Delayer() {
 	    public void run() {
-		callback.onSuccess(new GroupDTO());
+		callback.onSuccess(new GroupDTO("desarrollo de kune", "kune"));
 	    }
 	});
     }

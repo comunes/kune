@@ -13,31 +13,26 @@ import com.google.gwt.user.client.ui.UIObject;
 
 public class InitAction extends DefaultAction {
     public void execute(Object value) {
-	KuneServiceAsync server = KuneService.App.getInstance();
-	server.getDefaultGroup(userHash, new AsyncCallback() {
 
-	    public void onFailure(Throwable caught) {
-		workspace.showError(caught);
-	    }
+	String token = History.getToken();
+	if (token.length() > 0) {
+	    dispatcher.onHistoryChanged(token);
+	} else {
+	    KuneServiceAsync server = KuneService.App.getInstance();
+	    server.getDefaultGroup(userHash, new AsyncCallback() {
 
-	    public void onSuccess(Object result) {
-		GroupDTO group = (GroupDTO) result;
-		state.setGroup(group);
-		workspace.setGroup(group);
-	        UIObject.setVisible(DOM.getElementById("initialstatusbar"), false);
-	        fireNext();
-	    }
+		public void onFailure(Throwable caught) {
+		    workspace.showError(caught);
+		}
 
-	    private void fireNext() {
-		String token = History.getToken();
-		if (token.length() > 0) {
-		    dispatcher.onHistoryChanged(token);
-		} else {
+		public void onSuccess(Object result) {
+		    GroupDTO group = (GroupDTO) result;
+		    state.setGroup(group);
+		    workspace.setGroup(group);
+		    UIObject.setVisible(DOM.getElementById("initialstatusbar"), false);
 		    dispatcher.fireState(HistoryToken.encode("tab", app.getDefaultToolName()));
 		}
-	    }
-	});
-
+	    });
+	}
     }
-
 }

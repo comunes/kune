@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.docs.client.rpc.DocumentService;
 import org.ourproject.kune.docs.client.rpc.DocumentServiceAsync;
+import org.ourproject.kune.platf.client.stubs.NiceState;
 import org.ourproject.kune.platf.client.workspace.dto.ContentDataDTO;
 import org.ourproject.kune.platf.client.workspace.dto.ContextDataDTO;
 import org.ourproject.kune.platf.client.workspace.dto.ContextItemDTO;
@@ -41,6 +42,7 @@ public class DocumentToolTest {
         documentView = EasyMock.createStrictMock(DocumentView.class);
         navigationView = EasyMock.createStrictMock(NavigationView.class);
         tool = new DocumentTool();
+        tool.setState(new NiceState());
     }
 
     @Test public void testCalls() {
@@ -51,7 +53,7 @@ public class DocumentToolTest {
 
     @Test public void testEncode() {
         navigationView.clear();
-        navigationView.add("name", "type", "docs.ctxReference.child");
+        navigationView.add("name", "type", "group.groupShortName.docs.ctxReference.child");
         navigationView.selectItem(0);
 
         documentView.setContentName("title");

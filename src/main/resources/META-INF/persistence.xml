@@ -28,9 +28,9 @@
 	<persistence-unit name="test" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<properties>
-		      <property name="hibernate.show_sql" value="true"/>
-		      <property name="hibernate.format_sql" value="true"/>
-		      <property name="use_sql_comments" value="true"/>
+		      <property name="hibernate.show_sql" value="false"/>
+		      <property name="hibernate.format_sql" value="false"/>
+		      <property name="use_sql_comments" value="false"/>
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.HSQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="create" />

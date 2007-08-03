@@ -4,8 +4,6 @@ import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.workspace.WorkspaceComponent;
 
 public interface Tool {
-    void useAsUser(String userHash);
-
     String getName();
     String getCaption();
     String getEncodedState();
@@ -13,4 +11,5 @@ public interface Tool {
     Action getStateAction();
     WorkspaceComponent getContext();
     WorkspaceComponent getContent();
+    void setState(State state);
 }

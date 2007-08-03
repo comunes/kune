@@ -1,6 +1,7 @@
 package org.ourproject.kune.docs.client;
 
 import org.ourproject.kune.docs.client.rpc.DocumentServiceAsync;
+import org.ourproject.kune.platf.client.State;
 import org.ourproject.kune.platf.client.workspace.ContentDataProvider;
 import org.ourproject.kune.platf.client.workspace.dto.ContentDataDTO;
 
@@ -10,9 +11,9 @@ public class DocumentContentProvider implements ContentDataProvider {
     private final DocumentServiceAsync server;
     private final String userHash;
 
-    public DocumentContentProvider(DocumentServiceAsync server, String userHash) {
+    public DocumentContentProvider(DocumentServiceAsync server, State state) {
 	this.server = server;
-	this.userHash = userHash;
+	this.userHash = state.user;
     }
 
     public void getContent(String ctxRef, String reference, final ContentDataAcceptor acceptor) {

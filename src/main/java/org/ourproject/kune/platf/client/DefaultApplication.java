@@ -47,7 +47,7 @@ public class DefaultApplication implements Application {
     }
 
     private WorkspacePanel createWorkspace(List toolsList) {
-	prepareTools(toolsList, state.user);
+	prepareTools(toolsList, state);
 	final WorkspacePanel view = new WorkspacePanel();
 	workspace = new WorkspacePresenter(view);
 	workspace.attachTools(toolsList.iterator());
@@ -55,11 +55,11 @@ public class DefaultApplication implements Application {
 	return view;
     }
 
-    private void prepareTools(List toolList, String userHash) {
+    private void prepareTools(List toolList, State state) {
 	int total = toolList.size();
 	for (int index = 0; index < total ; index++) {
 	    Tool tool = (Tool) toolList.get(index);
-	    tool.useAsUser(userHash);
+	    tool.setState(state);
 	    tools.put(tool.getName(), tool);
 	}
 	this.defaultToolName = ((Tool) toolList.get(0)).getName();

@@ -36,14 +36,14 @@ public class DocumentTool extends AbstractTool  {
     }
 
     protected WorkspaceComponent createContent() {
-	DocumentContentProvider provider = new DocumentContentProvider(DocumentService.App.getInstance(), userHash);
+	DocumentContentProvider provider = new DocumentContentProvider(DocumentService.App.getInstance(), state);
 	DocumentView view = DocumentViewFactory.getDocumentView();
 	document = new DocumentPresenter(provider, view, "welcome");
 	return document;
     }
 
     protected WorkspaceComponent createContext() {
-	DocumentContextProvider provider = new DocumentContextProvider(DocumentService.App.getInstance(), userHash);
+	DocumentContextProvider provider = new DocumentContextProvider(DocumentService.App.getInstance(), state);
 	NavigationView view = DocumentViewFactory.getNavigationtView();
 	NavigatorPresenter context = new NavigatorPresenter(provider, view, "home");
 	return context;

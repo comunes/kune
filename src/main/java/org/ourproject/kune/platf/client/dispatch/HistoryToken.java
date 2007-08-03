@@ -5,15 +5,15 @@ public class HistoryToken {
     private static final String REGEX = "\\.";
     public final String eventName;
     public final String value;
+    private final String[] tokens;
 
     public HistoryToken(String encoded) {
-	int index = encoded.indexOf(SEPARATOR);
-	if (index > 0) {
-	    this.eventName = encoded.substring(0, index);
-	    this.value = encoded.substring(index + 1);
+	tokens = encoded.split(REGEX);
+	eventName = tokens[0];
+	if (tokens.length > 1) {
+	    value = encoded.substring(eventName.length() + 1);
 	} else {
-	    this.eventName = encoded;
-	    this.value = null;
+	    value = null;
 	}
     }
 
@@ -31,6 +31,24 @@ public class HistoryToken {
 
     public static String[] split(Object value) {
 	return ((String) value).split(REGEX);
+    }
+
+    public static String encodeState(String actionName, String groupName, String toolName, String contextRef,
+	    String reference) {
+	return actionName + SEPARATOR + groupName + SEPARATOR + toolName + SEPARATOR + contextRef + SEPARATOR
+		+ reference;
+    }
+
+    public String getParam(int index) {
+	return tokens[index + 1];
+    }
+
+    public String reencodeFrom(int begin) {
+	String result = tokens[begin + 1];
+	for (int index = begin + 2; index < tokens.length; index++) {
+	    result += SEPARATOR + tokens[index];
+	}
+	return result;
     }
 
 }

@@ -5,9 +5,9 @@ import org.ourproject.kune.platf.client.workspace.WorkspaceComponent;
 
 public abstract class AbstractTool implements Tool {
     public final String name;
-    protected String userHash;
     private WorkspaceComponent content;
     private WorkspaceComponent context;
+    protected State state;
 
     public AbstractTool(String name) {
         this.name = name;
@@ -17,12 +17,9 @@ public abstract class AbstractTool implements Tool {
 	return name;
     }
 
-    public void useAsUser(String userHash) {
-	this.userHash = userHash;
+    public void setState(State state) {
+	this.state = state;
     }
-
-    protected abstract WorkspaceComponent createContent();
-    protected abstract WorkspaceComponent createContext();
 
     public WorkspaceComponent getContent() {
 	if (content == null) {
@@ -38,4 +35,6 @@ public abstract class AbstractTool implements Tool {
 	return context;
     }
 
+    protected abstract WorkspaceComponent createContent();
+    protected abstract WorkspaceComponent createContext();
 }
