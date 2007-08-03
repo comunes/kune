@@ -8,8 +8,6 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 public class SiteMessagePresenter implements SiteMessage {
     private static final int TIMEVISIBLE = 4000;
 
-    static final Images IMG = Images.App.getInstance();
-
     private SiteMessageView view;
     private boolean isVisible;
     private String message;
@@ -24,8 +22,9 @@ public class SiteMessagePresenter implements SiteMessage {
 	isVisible = false;
 	message = "";
 
-	messageIcons = new AbstractImagePrototype[] { IMG.error(), IMG.important(), IMG.emblemImportant(),
-		IMG.emblemImportant() };
+	final Images images = Images.App.getInstance();
+	messageIcons = new AbstractImagePrototype[] { images.error(), images.important(), images.emblemImportant(),
+		images.emblemImportant() };
 
 	messageStyle = new String[] { "error", "veryimp", "imp", "info" };
     }
