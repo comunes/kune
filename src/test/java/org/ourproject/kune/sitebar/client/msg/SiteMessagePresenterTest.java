@@ -42,14 +42,14 @@ public class SiteMessagePresenterTest {
     }
 
     @Test public void testTwoMessagesDifTypes() {
-        view.setMessage("test 1", 3, 0);
+        view.setMessage("test 1", 3, 1);
         view.show();
-        view.setMessage("test 1<br>test 2", 0, 1);
+        view.setMessage("test 1<br>test 2", 1, 0);
         view.show();
         EasyMock.replay(view);
         presenter.init(view);
-        presenter.setValue("test 1", 0);
-        presenter.setValue("test 2", 1);
+        presenter.setValue("test 1", 1);
+        presenter.setValue("test 2", 0);
         EasyMock.verify(view);
     }
 

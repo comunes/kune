@@ -18,7 +18,7 @@ public class SiteMessagePanel extends VerticalPanel implements SiteMessageView {
 
     final Images images = Images.App.getInstance();
     AbstractImagePrototype[] messageIcons = new AbstractImagePrototype[] { images.error(), images.important(),
-            images.emblemImportant(), images.emblemImportant() };
+            images.emblemImportant(), images.info() };
     String[] messageStyle = new String[] { "error", "veryimp", "imp", "info" };
 
     HTML message = null;
@@ -29,15 +29,25 @@ public class SiteMessagePanel extends VerticalPanel implements SiteMessageView {
     private final Timer timer;
 
     public SiteMessagePanel(final SiteMessagePresenter sitePresenter) {
+        // Initialize
         this.presenter = sitePresenter;
         HorizontalPanel messageHP = new HorizontalPanel();
         message = new HTML();
         icon = new Image();
         HorizontalPanel closeHP = new HorizontalPanel();
         Label expandCell = new Label("");
-
         final Images images = Images.App.getInstance();
         closeLink = new PushButton(images.cross().createImage(), images.crossDark().createImage());
+
+        // Layout
+        add(messageHP);
+        add(closeHP);
+        closeHP.add(expandCell);
+        closeHP.add(closeLink);
+        messageHP.add(icon);
+        messageHP.add(message);
+
+        // Set properties
         closeLink.addClickListener(new ClickListener() {
             public void onClick(final Widget sender) {
                 if (sender == closeLink) {
@@ -51,22 +61,9 @@ public class SiteMessagePanel extends VerticalPanel implements SiteMessageView {
                 presenter.reset();
             }
         };
-        // Layout
-        // this.add(new BorderPanel(messageHP, 5, 0, 0, 0));
-        add(messageHP);
-        add(closeHP);
-        closeHP.add(expandCell);
-        closeHP.add(closeLink);
-        // messageHP.add(new BorderPanel(icon, 0, 10, 0, 5));
-        messageHP.add(icon);
-        messageHP.add(message);
-
-        // Set properties
-
         setVisible(false);
-        // this.setHeight("33");
         addStyleName("kune-SiteMessagePanel");
-        // message.setHeight("27");
+        addStyleName("info");
         images.info().applyTo(icon);
         closeHP.setWidth("100%");
         expandCell.setWidth("100%");

@@ -17,10 +17,10 @@ public class SiteMessagePresenter implements SiteMessage {
     }
 
     public void reset() {
-        view.hide();
-        view.reset();
         this.message = "";
         this.isVisible = false;
+        view.hide();
+        view.reset();
     }
 
     public void setValue(final String message, final int type) {
@@ -31,8 +31,13 @@ public class SiteMessagePresenter implements SiteMessage {
             isVisible = true;
         }
         if (lastMessageType != type) {
-            view.setMessage(this.message, lastMessageType, type);
-            lastMessageType = type;
+            if (type < lastMessageType) {
+                // more severe message
+                view.setMessage(this.message, lastMessageType, type);
+                lastMessageType = type;
+            } else {
+                view.setMessage(this.message);
+            }
         } else {
             view.setMessage(this.message);
         }
