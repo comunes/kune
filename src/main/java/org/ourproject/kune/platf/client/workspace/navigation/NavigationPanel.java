@@ -71,6 +71,8 @@ public class NavigationPanel extends VerticalPanel implements NavigationView {
         currentFolderHP.addStyleName("topBar");
         firstRow.setWidth("100%");
         secondRow.setWidth("100%");
+        setCellWidth(firstRow, "100%");
+        setCellWidth(secondRow, "100%");
         itemsVP.addStyleName("itemsVP");
         pathMenu.setStyleName("pathMenu");
         upIcon.addClickListener(new ClickListener() {
