@@ -38,6 +38,25 @@ body {
     cursor: default;
 }
 
+.gwt-MenuBar {
+    background-color: #FFFCD5;
+    border: 1px solid #D38D5F;
+    cursor: default;
+    padding: 2px;
+}
+
+.gwt-MenuBar .gwt-MenuItem {
+    padding: 1px 4px 1px 4px;
+    cursor: default;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.gwt-MenuBar .gwt-MenuItem-selected {
+    background-color: #FFB958;
+    vertical-align: middle;
+}
+
 .kune-expandHoriz {
     width: 100%;
 }
@@ -209,7 +228,7 @@ body {
 }
 
 .kune-NavigationBar {
-
+    width: 100%;
 }
 
 .kune-NavigationBar .topBar {
@@ -223,23 +242,8 @@ body {
     margin: 5px;
 }
 
-.gwt-MenuBar {
-    background-color: #FFFCD5;
-    border: 1px solid #D38D5F;
-    cursor: default;
-    padding: 2px;
-}
-
-.gwt-MenuBar .gwt-MenuItem {
-    padding: 1px 4px 1px 4px;
-    cursor: default;
-    white-space: nowrap;
-    vertical-align: middle;
-}
-
-.gwt-MenuBar .gwt-MenuItem-selected {
-    background-color: #FFB958;
-    vertical-align: middle;
+.kune-NavigationBar .ItemsVP .gwt-Hyperlink {
+    color: red;
 }
 
 .kune-NavigationBar .pathMenu {
@@ -255,13 +259,13 @@ body {
     cursor: hand;
     white-space: nowrap;
     padding: 1px 10px;
-    height: 14px;
+    height: 10px;
 }
 
 .kune-NavigationBar .pathMenu .gwt-MenuItem-selected {
     background: transparent url(img/button-bg-soft.gif) repeat-x 0 0;
     color: #000;
-    height: 14px;
+    height: 10px;
 }
 
 .kune-SiteMessagePanel {
@@ -273,18 +277,18 @@ body {
     width: 100%;
 }
 
-.kune-SiteMessagePanel .error .gwt-nostyle {
+.kune-SiteMessagePanel .error {
     background-color: #FFB380;
 }
 
-.kune-SiteMessagePanel .veryimp .gwt-nostyle {
+.kune-SiteMessagePanel .veryimp {
     background-color: #FFD4AA;
 }
 
-.kune-SiteMessagePanel .imp .gwt-nostyle {
+.kune-SiteMessagePanel .imp {
     background-color: #FFE6D5;
 }
 
-.kune-SiteMessagePanel .info .gwt-nostyle {
+.kune-SiteMessagePanel .info {
     background-color: #E5FF80;
 }
