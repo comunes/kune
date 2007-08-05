@@ -8,12 +8,11 @@ import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class SiteMessagePanel extends VerticalPanel implements SiteMessageView {
+public class SiteMessagePanel extends HorizontalPanel implements SiteMessageView {
     private static final int TIMEVISIBLE = 4000;
 
     final Images images = Images.App.getInstance();
@@ -22,8 +21,8 @@ public class SiteMessagePanel extends VerticalPanel implements SiteMessageView {
     String[] messageStyle = new String[] { "error", "veryimp", "imp", "info" };
 
     HTML message = null;
-    Image icon = null;
-    private final PushButton closeLink;
+    Image messageIcon = null;
+    private final PushButton closeIcon;
     private final SiteMessagePresenter presenter;
 
     private final Timer timer;
@@ -31,27 +30,22 @@ public class SiteMessagePanel extends VerticalPanel implements SiteMessageView {
     public SiteMessagePanel(final SiteMessagePresenter sitePresenter) {
         // Initialize
         this.presenter = sitePresenter;
-        HorizontalPanel messageHP = new HorizontalPanel();
         message = new HTML();
-        icon = new Image();
-        HorizontalPanel closeHP = new HorizontalPanel();
-        Label expandCell = new Label("");
+        messageIcon = new Image();
         final Images images = Images.App.getInstance();
-        closeLink = new PushButton(images.cross().createImage(), images.crossDark().createImage());
+        closeIcon = new PushButton(images.cross().createImage(), images.crossDark().createImage());
 
         // Layout
-        add(messageHP);
-        add(closeHP);
-        closeHP.add(expandCell);
-        closeHP.add(closeLink);
-        messageHP.add(icon);
-        messageHP.add(message);
+        add(messageIcon);
+        add(message);
+        add(closeIcon);
 
         // Set properties
-        messageHP.setCellVerticalAlignment(icon, VerticalPanel.ALIGN_MIDDLE);
-        closeLink.addClickListener(new ClickListener() {
+        setCellVerticalAlignment(messageIcon, VerticalPanel.ALIGN_MIDDLE);
+        setCellVerticalAlignment(closeIcon, VerticalPanel.ALIGN_BOTTOM);
+        closeIcon.addClickListener(new ClickListener() {
             public void onClick(final Widget sender) {
-                if (sender == closeLink) {
+                if (sender == closeIcon) {
                     setVisible(false);
                     presenter.onClose();
                 }
@@ -65,15 +59,13 @@ public class SiteMessagePanel extends VerticalPanel implements SiteMessageView {
         setVisible(false);
         addStyleName("kune-SiteMessagePanel");
         addStyleName("info");
-        images.info().applyTo(icon);
-        closeHP.setWidth("100%");
-        expandCell.setWidth("100%");
-        closeHP.setCellWidth(expandCell, "100%");
+        images.info().applyTo(messageIcon);
+        messageIcon.addStyleName("gwt-Image");
     }
 
     public void setMessage(final String text, final int lastMessageType, final int type) {
 
-        messageIcons[type].applyTo(icon);
+        messageIcons[type].applyTo(messageIcon);
         removeStyleName(messageStyle[lastMessageType]);
         addStyleName(messageStyle[type]);
         setMessage(text);

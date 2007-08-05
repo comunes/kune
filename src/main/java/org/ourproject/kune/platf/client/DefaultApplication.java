@@ -40,7 +40,7 @@ public class DefaultApplication implements Application {
     }
 
     public void init(final List toolsList) {
-        SiteMessagePresenter siteMessagePresenter = createSiteMessage();
+        final SiteMessagePresenter siteMessagePresenter = createSiteMessage();
         SiteBarPanel siteBar = createSiteBar();
         final WorkspacePanel workspace = createWorkspace(toolsList, siteMessagePresenter);
         DefaultGDesktopPane desktop = createDesktop(workspace, siteBar, siteMessagePresenter);
@@ -48,7 +48,9 @@ public class DefaultApplication implements Application {
         RootPanel.get().add(desktop);
         DeferredCommand.addCommand(new Command() {
             public void execute() {
-                workspace.adjustSize(Window.getClientWidth(), Window.getClientHeight());
+                int windowWidth = Window.getClientWidth();
+                workspace.adjustSize(windowWidth, Window.getClientHeight());
+                siteMessagePresenter.adjustWidth(windowWidth);
             }
         });
     }

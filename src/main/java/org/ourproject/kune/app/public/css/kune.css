@@ -245,16 +245,15 @@ body {
 }
 
 .kune-NavigationBar .ItemsVP {
-    margin: 5px;
+    margin: 2px;
 }
 
 .kune-NavigationBar .ItemsVP .gwt-Image {
     /* space between navbar items (images) */
-    margin: 2px 0;
+    margin: 1px 3px;
 }
 
 .kune-NavigationBar .ItemsVP .gwt-Hyperlink a {
-    margin: 0 3px;
     color: green; /* FIXME: other color */
 }
 
@@ -285,14 +284,16 @@ body {
     background-color: #E5FF80;
     border: 1px solid #CF0;
     color: #250;
-    padding: 0 5px;
     z-index: 1000;
-    width: 100%;
     vertical-align: middle;
 }
 
+.kune-SiteMessagePanel .gwt-HTML {
+    margin: 10px 5px 10px 2px;
+}
+
 .kune-SiteMessagePanel .gwt-Image {
-    margin: 0 5px;
+    margin: 3px;
 }
 
 .kune-SiteMessagePanel .error {
