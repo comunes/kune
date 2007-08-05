@@ -48,6 +48,7 @@ public class SiteMessagePanel extends VerticalPanel implements SiteMessageView {
         messageHP.add(message);
 
         // Set properties
+        messageHP.setCellVerticalAlignment(icon, VerticalPanel.ALIGN_MIDDLE);
         closeLink.addClickListener(new ClickListener() {
             public void onClick(final Widget sender) {
                 if (sender == closeLink) {
