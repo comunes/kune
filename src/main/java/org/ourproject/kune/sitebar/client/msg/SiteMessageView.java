@@ -1,12 +1,10 @@
 package org.ourproject.kune.sitebar.client.msg;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-
 public interface SiteMessageView {
 
     public void setMessage(String message);
 
-    public void setMessage(String message, AbstractImagePrototype type, String oldStyle, String newStyle);
+    public void setMessage(String message, int oldStyle, int newStyle);
 
     public void adjustWidth(int windowWidth);
 

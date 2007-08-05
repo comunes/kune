@@ -3,7 +3,6 @@ package org.ourproject.kune.sitebar.client.bar;
 import org.gwm.client.impl.DefaultGFrame;
 import org.ourproject.kune.sitebar.client.Images;
 import org.ourproject.kune.sitebar.client.Translate;
-import org.ourproject.kune.sitebar.client.Images.App;
 import org.ourproject.kune.sitebar.client.group.NewGroupPanel;
 import org.ourproject.kune.sitebar.client.group.NewGroupPresenter;
 import org.ourproject.kune.sitebar.client.login.LoginPanel;
@@ -33,14 +32,14 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     private final Translate t;
     private final TextBox searchTextBox;
     private final Image logoImage;
-    private Hyperlink newGroupHyperlink;
-    private SiteBarPresenter presenter;
-    private PushButton searchButton;
+    private final Hyperlink newGroupHyperlink;
+    private final SiteBarPresenter presenter;
+    private final PushButton searchButton;
     private LoginPanel loginPanel;
     private NewGroupPanel newGroupPanel;
     DialogBox loginDialog;
-    private Hyperlink logoutHyperlink;
-    private HTML pipeSeparatorHtml2;
+    private final Hyperlink logoutHyperlink;
+    private final HTML pipeSeparatorHtml2;
     private DialogBox newGroupDialog;
 
     public SiteBarPanel(final SiteBarPresenter presenter) {
@@ -86,7 +85,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         textProcessingLabel.addStyleName("kune-Progress");
         newGroupHyperlink.setText(t.NewGroup());
         newGroupHyperlink.addClickListener(new ClickListener() {
-            public void onClick(Widget arg0) {
+            public void onClick(final Widget arg0) {
                 presenter.doNewGroup();
             }
         });
@@ -96,27 +95,27 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         pipeSeparatorHtml2.setStyleName("kune-SiteBarPanel-Separator");
         loginHyperlink.setText(t.Login());
         loginHyperlink.addClickListener(new ClickListener() {
-            public void onClick(Widget arg0) {
+            public void onClick(final Widget arg0) {
                 presenter.doLogin();
             }
         });
         logoutHyperlink.setText(t.Logout());
         searchButton.addClickListener(new ClickListener() {
-            public void onClick(Widget arg0) {
+            public void onClick(final Widget arg0) {
                 presenter.doSearch(searchTextBox.getText());
             }
         });
         logoutHyperlink.addClickListener(new ClickListener() {
-            public void onClick(Widget arg0) {
+            public void onClick(final Widget arg0) {
                 presenter.doLogout();
             }
         });
         searchTextBox.addKeyboardListener(new KeyboardListener() {
-            public void onKeyDown(Widget arg0, char arg1, int arg2) {
+            public void onKeyDown(final Widget arg0, final char arg1, final int arg2) {
             }
-            public void onKeyPress(Widget arg0, char arg1, int arg2) {
+            public void onKeyPress(final Widget arg0, final char arg1, final int arg2) {
             }
-            public void onKeyUp(Widget widget, char key, int mod) {
+            public void onKeyUp(final Widget widget, final char key, final int mod) {
                 if (key == KEY_ENTER) {
                     if (searchTextBox.getText().length() > 0) {
                         presenter.doSearch(searchTextBox.getText());
@@ -198,7 +197,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 
     }
 
-    public void setLogoutLinkVisible(boolean visible) {
+    public void setLogoutLinkVisible(final boolean visible) {
         logoutHyperlink.setVisible(visible);
         pipeSeparatorHtml2.setVisible(visible);
     }
