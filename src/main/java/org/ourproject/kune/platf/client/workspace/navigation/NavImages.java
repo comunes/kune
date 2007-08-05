@@ -38,9 +38,9 @@ interface NavImages extends ImageBundle {
     AbstractImagePrototype folderAdd();
 
     /**
-     * @gwt.resource folderpath.png
+     * @gwt.resource folderpathmenu.png
      */
-    AbstractImagePrototype folderpath();
+    AbstractImagePrototype folderpathmenu();
 
     /**
      * @gwt.resource go-up.png

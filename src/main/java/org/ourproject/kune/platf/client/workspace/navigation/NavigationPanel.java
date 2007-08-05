@@ -32,7 +32,6 @@ public class NavigationPanel extends VerticalPanel implements NavigationView {
         HorizontalPanel secondRow = new HorizontalPanel();
         HorizontalPanel iconBarHP = new HorizontalPanel();
         HorizontalPanel currentFolderHP = new HorizontalPanel();
-
         PushButton upIcon = new PushButton(Img.goUp().createImage(), Img.goUpLight().createImage());
         MenuBar pathMenu = new MenuBar();
         MenuBar pathSubmenu = new MenuBar(true);
@@ -46,7 +45,7 @@ public class NavigationPanel extends VerticalPanel implements NavigationView {
         add(itemsVP);
         iconBarHP.add(upIcon);
         iconBarHP.add(pathMenu);
-        pathMenu.addItem(Img.folderpath().getHTML(), true, pathSubmenu);
+        pathMenu.addItem(Img.folderpathmenu().getHTML(), true, pathSubmenu);
         pathSubmenu.addItem(Img.folder().getHTML() + "&nbsp;Folder", true, new Command() {
             public void execute() {
                 // FIXME
@@ -67,8 +66,6 @@ public class NavigationPanel extends VerticalPanel implements NavigationView {
         addStyleName("kune-NavigationBar");
         firstRow.addStyleName("topBar");
         secondRow.addStyleName("topBar");
-        iconBarHP.addStyleName("topBar");
-        currentFolderHP.addStyleName("topBar");
         firstRow.setWidth("100%");
         secondRow.setWidth("100%");
         setCellWidth(firstRow, "100%");

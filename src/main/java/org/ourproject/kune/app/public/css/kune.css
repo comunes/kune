@@ -144,17 +144,15 @@ body {
     width: 100%;
 }
 
-/* TODO: Split and remove repetead */
+/* TODO: Split and remove repeted */
 .kune-GroupNavBar-itemSelected {
     width: 150px;
-    /* font-size: 85%; */
-    font-weight: 700;
+    /* font-size: 85%;
+    font-weight: 700; */
 }
 
 .kune-GroupNavBar-itemNotSelected {
     width: 150px;
-    font-size: 85%;
-    font-weight: 700;
 }
 
 .kune-GroupNavBar-itemSelected .gwt-Hyperlink a {
@@ -236,18 +234,33 @@ body {
     background: #ececec;
     border-bottom: 1px solid #e3dbdb;
     padding: 0 5px;
+    vertical-align: middle;
+}
+.kune-NavigationBar .topBar .gwt-PushButton {
+    margin: 1px 5px;
+}
+
+.kune-NavigationBar .topBar .gwt-Image {
+    margin: 0 2px;
 }
 
 .kune-NavigationBar .ItemsVP {
     margin: 5px;
 }
 
-.kune-NavigationBar .ItemsVP .gwt-Hyperlink {
-    color: red;
+.kune-NavigationBar .ItemsVP .gwt-Image {
+    /* space between navbar items (images) */
+    margin: 2px 0;
+}
+
+.kune-NavigationBar .ItemsVP .gwt-Hyperlink a {
+    margin: 0 3px;
+    color: green; /* FIXME: other color */
 }
 
 .kune-NavigationBar .pathMenu {
-    height: 14px;
+    margin: 2px 3px;
+    vertical-align: middle;
 }
 
 .kune-NavigationBar .pathMenu .gwt-MenuItem {
@@ -259,13 +272,13 @@ body {
     cursor: hand;
     white-space: nowrap;
     padding: 1px 10px;
-    height: 10px;
+    height: 11px;
 }
 
 .kune-NavigationBar .pathMenu .gwt-MenuItem-selected {
     background: transparent url(img/button-bg-soft.gif) repeat-x 0 0;
     color: #000;
-    height: 10px;
+    height: 11px;
 }
 
 .kune-SiteMessagePanel {
