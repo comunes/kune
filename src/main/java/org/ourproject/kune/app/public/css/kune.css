@@ -128,7 +128,7 @@ body {
 /* TODO: Split and remove repetead */
 .kune-GroupNavBar-itemSelected {
     width: 150px;
-    font-size: 85%;
+    /* font-size: 85%; */
     font-weight: 700;
 }
 
