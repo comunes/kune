@@ -288,6 +288,11 @@ body {
     padding: 0 5px;
     z-index: 1000;
     width: 100%;
+    vertical-align: middle;
+}
+
+.kune-SiteMessagePanel .gwt-Image {
+    margin: 0 5px;
 }
 
 .kune-SiteMessagePanel .error {
