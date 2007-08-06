@@ -7,12 +7,32 @@ import org.ourproject.kune.platf.client.workspace.dto.ContextDataDTO;
 public class DocumentServiceDefault implements DocumentService {
     private static final long serialVersionUID = 1L;
 
-    public ContextDataDTO getContext(String userHash, String contextRef) {
+    // private ContentManager contentManager;
+    // private AccessManager accessManager;
+    // private UserSession userSession;
+
+    public ContextDataDTO getContext(final String userHash, final String contextRef) {
+	// ContextData context;
+	//
+	// Folder folder = folderManager.getFolder(contextRef);
+	// if (accessManager.isAllowed(userSession.getUser(),
+	// folder.getAccess(), Access.VIEW)) {
+	//
+	// }
 	return null;
     }
 
-    public ContentDataDTO getContent(String userHash, String ctxRef, String docRef) {
+    public ContentDataDTO getContent(final String userHash, final String ctxRef, final String docRef) {
+
+	// Content content = contentManager.getContent(docRef);
+	// if (accessManager.isAllowed(userSession.getUser(),
+	// content.getAccess(), Access.VIEW)) {
+	// content.setSimplifiedAcess(accessManager.getSimplified(userSession.getUser(),
+	// content.getAccess())));
+	// return mapper.map(content);
+	// } else {
+	// throw new AccessException();
+	// }
 	return null;
     }
-
 }

@@ -1,23 +1,25 @@
 package org.ourproject.kune.platf.client;
 
+import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.workspace.WorkspaceComponent;
-
 
 public abstract class AbstractTool implements Tool {
     public final String name;
     private WorkspaceComponent content;
     private WorkspaceComponent context;
     protected State state;
+    protected Dispatcher dispatcher;
 
-    public AbstractTool(String name) {
-        this.name = name;
+    public AbstractTool(final String name) {
+	this.name = name;
     }
 
     public String getName() {
 	return name;
     }
 
-    public void setState(State state) {
+    public void setEnvironment(final Dispatcher dispatcher, final State state) {
+	this.dispatcher = dispatcher;
 	this.state = state;
     }
 
@@ -36,5 +38,6 @@ public abstract class AbstractTool implements Tool {
     }
 
     protected abstract WorkspaceComponent createContent();
+
     protected abstract WorkspaceComponent createContext();
 }

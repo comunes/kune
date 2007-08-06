@@ -9,7 +9,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class DocumentServiceMocked extends MockedService implements DocumentServiceAsync {
-    public void getContext(String userHash, final String contextRef, final AsyncCallback async) {
+    public void getContext(final String userHash, final String contextRef, final AsyncCallback async) {
 	GWT.log("DOC SERVICE: getContext - " + contextRef, null);
 	delay(new Delayer() {
 	    public void run() {
@@ -18,7 +18,7 @@ public class DocumentServiceMocked extends MockedService implements DocumentServ
 	});
     }
 
-    protected ContextDataDTO createRoot(String contextRef) {
+    protected ContextDataDTO createRoot(final String contextRef) {
 	ContextDataDTO root = new ContextDataDTO(contextRef);
 	root.add(new ContextItemDTO("welcome", "file", "welcome"));
 	root.add(new ContextItemDTO("second", "file", "second"));
@@ -26,7 +26,7 @@ public class DocumentServiceMocked extends MockedService implements DocumentServ
 	return root;
     }
 
-    public void getContent(String userHash, String ctxRef, final String docRef, final AsyncCallback callback) {
+    public void getContent(final String userHash, final String ctxRef, final String docRef, final AsyncCallback callback) {
 	GWT.log("DOC SERVICE: getContent - " + ctxRef + ", " + docRef, null);
 	delay(new Delayer() {
 	    public void run() {

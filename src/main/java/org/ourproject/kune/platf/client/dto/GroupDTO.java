@@ -3,32 +3,40 @@ package org.ourproject.kune.platf.client.dto;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class GroupDTO implements IsSerializable {
+    private Long id;
     private String shortName;
     private String name;
 
-    public GroupDTO(String name, String shortName) {
+    public GroupDTO(final String name, final String shortName) {
 	this.name = name;
 	this.shortName = shortName;
     }
+
     public GroupDTO() {
 	this(null, null);
     }
 
-    public String getName() {
-        return name;
+    public Long getId() {
+	return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(final Long id) {
+	this.id = id;
+    }
+
+    public String getName() {
+	return name;
+    }
+
+    public void setName(final String name) {
+	this.name = name;
     }
 
     public String getShortName() {
-        return shortName;
+	return shortName;
     }
 
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
+    public void setShortName(final String shortName) {
+	this.shortName = shortName;
     }
-
-
 }

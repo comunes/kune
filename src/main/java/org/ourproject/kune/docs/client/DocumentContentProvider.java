@@ -11,17 +11,17 @@ public class DocumentContentProvider implements ContentDataProvider {
     private final DocumentServiceAsync server;
     private final String userHash;
 
-    public DocumentContentProvider(DocumentServiceAsync server, State state) {
+    public DocumentContentProvider(final DocumentServiceAsync server, final State state) {
 	this.server = server;
 	this.userHash = state.user;
     }
 
-    public void getContent(String ctxRef, String reference, final ContentDataAcceptor acceptor) {
-	server.getContent(userHash, ctxRef, reference, new AsyncCallback () {
-	    public void onFailure(Throwable arg0) {
+    public void getContent(final String ctxRef, final String reference, final ContentDataAcceptor acceptor) {
+	server.getContent(userHash, ctxRef, reference, new AsyncCallback() {
+	    public void onFailure(final Throwable arg0) {
 	    }
 
-	    public void onSuccess(Object ctxData) {
+	    public void onSuccess(final Object ctxData) {
 		acceptor.accept((ContentDataDTO) ctxData);
 	    }
 

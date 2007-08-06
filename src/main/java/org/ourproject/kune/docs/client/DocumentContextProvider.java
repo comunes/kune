@@ -14,24 +14,24 @@ public class DocumentContextProvider implements ContextDataProvider {
     private final DocumentServiceAsync docService;
     private final State state;
 
-    public DocumentContextProvider(DocumentServiceAsync docService, State state) {
+    public DocumentContextProvider(final DocumentServiceAsync docService, final State state) {
 	this.docService = docService;
 	this.state = state;
     }
 
-    public void getContext(String id, final ContextDataAcceptor acceptor) {
+    public void getContext(final String id, final ContextDataAcceptor acceptor) {
 	docService.getContext(state.user, id, new AsyncCallback() {
-	    public void onFailure(Throwable caugth) {
+	    public void onFailure(final Throwable caugth) {
 		acceptor.failed(caugth);
 	    }
 
-	    public void onSuccess(Object data) {
+	    public void onSuccess(final Object data) {
 		ContextDataDTO ctxData = (ContextDataDTO) data;
 		encodeReferences(ctxData);
 		acceptor.accept(ctxData);
 	    }
 
-	    private void encodeReferences(ContextDataDTO ctxData) {
+	    private void encodeReferences(final ContextDataDTO ctxData) {
 		ContextItemDTO item;
 		ArrayList items = ctxData.getChildren();
 		for (int index = 0; index < items.size(); index++) {

@@ -17,34 +17,34 @@ import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.History;
 
 public class KunePlatform implements Register {
-    private List tools;
-    private HashMap actions;
+    private final List tools;
+    private final HashMap actions;
 
     public KunePlatform() {
 	this.tools = new ArrayList();
 	this.actions = new HashMap();
     }
 
-    public void addTool(Tool tool) {
+    public void addTool(final Tool tool) {
 	tools.add(tool);
 	actions.put(tool.getName(), tool.getStateAction());
     }
-    public void addAction(String eventName, Action action) {
+
+    public void addAction(final String eventName, final Action action) {
 	actions.put(eventName, action);
     }
 
-    public void install(ClientModule module) {
+    public void install(final ClientModule module) {
 	module.configure(this);
     }
 
-    public Application buildApplication(String userHash) {
+    public Application buildApplication(final String userHash) {
 	State state = new State(userHash);
 	Services services = new Services();
 	DefaultApplication app = new DefaultApplication(state, services);
 	DefaultDispatcher dispatcher = new DefaultDispatcher(new DefaultActionInjector(app));
-	app.setDispatcher(dispatcher);
 	History.addHistoryListener(dispatcher);
-	app.init(tools);
+	app.init(dispatcher, tools);
 	dispatcher.subscribeAll(actions);
 	DeferredCommand.addCommand(new Command() {
 	    public void execute() {

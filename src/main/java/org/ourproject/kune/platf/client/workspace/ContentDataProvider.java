@@ -5,6 +5,7 @@ import org.ourproject.kune.platf.client.workspace.dto.ContentDataDTO;
 public interface ContentDataProvider {
     interface ContentDataAcceptor {
 	void accept(ContentDataDTO ctxData);
+
 	void failed(Throwable caugth);
     }
 
