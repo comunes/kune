@@ -1,12 +1,12 @@
 package org.ourproject.kune.sitebar.client.bar;
 
 import org.gwm.client.impl.DefaultGFrame;
-import org.ourproject.kune.sitebar.client.Images;
-import org.ourproject.kune.sitebar.client.Translate;
 import org.ourproject.kune.sitebar.client.group.NewGroupPanel;
 import org.ourproject.kune.sitebar.client.group.NewGroupPresenter;
 import org.ourproject.kune.sitebar.client.login.LoginPanel;
 import org.ourproject.kune.sitebar.client.login.LoginPresenter;
+import org.ourproject.kune.sitebar.client.services.Images;
+import org.ourproject.kune.sitebar.client.services.Translate;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.ClickListener;

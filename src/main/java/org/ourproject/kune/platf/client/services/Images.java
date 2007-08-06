@@ -353,26 +353,6 @@ public interface Images extends ImageBundle {
     AbstractImagePrototype clear();
 
     /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/cross.png
-     */
-    AbstractImagePrototype cross();
-
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/cross-dark.png
-     */
-    AbstractImagePrototype crossDark();
-
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/emblem-important.png
-     */
-    AbstractImagePrototype emblemImportant();
-
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/error.png
-     */
-    AbstractImagePrototype error();
-
-    /**
      * @gwt.resource org/ourproject/kune/platf/public/images/fullscreen.png
      */
     AbstractImagePrototype fullscreen();
@@ -381,16 +361,6 @@ public interface Images extends ImageBundle {
      * @gwt.resource org/ourproject/kune/platf/public/images/gnu-fdl.gif
      */
     AbstractImagePrototype gnuFdl();
-
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/important.png
-     */
-    AbstractImagePrototype important();
-
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/info.png
-     */
-    AbstractImagePrototype info();
 
     /**
      * @gwt.resource org/ourproject/kune/platf/public/images/kune-close.png

@@ -1,13 +1,13 @@
-package org.ourproject.kune.sitebar.client;
+package org.ourproject.kune.sitebar.client.services;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ImageBundle;
 
 /**
- *
+ * 
  * http://code.google.com/p/google-web-toolkit/wiki/ImageBundleDesign
- *
+ * 
  */
 public interface Images extends ImageBundle {
 
@@ -41,5 +41,35 @@ public interface Images extends ImageBundle {
      * @gwt.resource org/ourproject/kune/sitebar/public/images/kune-logo-16px.png
      */
     AbstractImagePrototype kuneLogo16px();
+
+    /**
+     * @gwt.resource org/ourproject/kune/sitebar/public/images/cross.png
+     */
+    AbstractImagePrototype cross();
+
+    /**
+     * @gwt.resource org/ourproject/kune/sitebar/public/images/cross-dark.png
+     */
+    AbstractImagePrototype crossDark();
+
+    /**
+     * @gwt.resource org/ourproject/kune/sitebar/public/images/emblem-important.png
+     */
+    AbstractImagePrototype emblemImportant();
+
+    /**
+     * @gwt.resource org/ourproject/kune/sitebar/public/images/error.png
+     */
+    AbstractImagePrototype error();
+
+    /**
+     * @gwt.resource org/ourproject/kune/sitebar/public/images/important.png
+     */
+    AbstractImagePrototype important();
+
+    /**
+     * @gwt.resource org/ourproject/kune/sitebar/public/images/info.png
+     */
+    AbstractImagePrototype info();
 
 }

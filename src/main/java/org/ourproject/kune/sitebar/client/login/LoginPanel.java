@@ -1,7 +1,7 @@
 package org.ourproject.kune.sitebar.client.login;
 
-import org.ourproject.kune.sitebar.client.Translate;
 import org.ourproject.kune.sitebar.client.bar.SiteBarTrans;
+import org.ourproject.kune.sitebar.client.services.Translate;
 
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ChangeListener;

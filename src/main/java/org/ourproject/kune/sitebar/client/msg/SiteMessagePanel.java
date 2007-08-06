@@ -1,6 +1,6 @@
 package org.ourproject.kune.sitebar.client.msg;
 
-import org.ourproject.kune.platf.client.services.Images;
+import org.ourproject.kune.sitebar.client.services.Images;
 
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;

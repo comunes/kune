@@ -1,4 +1,4 @@
-package org.ourproject.kune.sitebar.client;
+package org.ourproject.kune.sitebar.client.services;
 
 import com.google.gwt.i18n.client.Constants;
 
