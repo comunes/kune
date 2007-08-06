@@ -1,20 +1,18 @@
 package org.ourproject.kune.platf.server.domain;
 
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ajos")
-public class Ajo implements HasId, HasLicense, HasTags, HasAccessRights, HasRate {
+@Table(name = "translations")
+public class Translation implements HasId {
     @Id
     @GeneratedValue
     private Long id;
     private String locale;
-    @Embedded
-    private AccessRights accessRights;
+    private Long contentId;
 
     public Long getId() {
 	return id;
@@ -32,12 +30,12 @@ public class Ajo implements HasId, HasLicense, HasTags, HasAccessRights, HasRate
 	this.locale = locale;
     }
 
-    public AccessRights getAccessRights() {
-	return accessRights;
+    public Long getContentId() {
+	return contentId;
     }
 
-    public void setAccessRights(final AccessRights accessRights) {
-	this.accessRights = accessRights;
+    public void setContentId(final Long contentId) {
+	this.contentId = contentId;
     }
 
 }

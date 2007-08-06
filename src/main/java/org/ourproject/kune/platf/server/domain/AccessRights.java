@@ -1,11 +1,17 @@
 package org.ourproject.kune.platf.server.domain;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+
+@Entity
+@Embeddable
 public class AccessRights {
-    private ArrayList<Group> admin;
-    private ArrayList<Group> edit;
-    private ArrayList<Group> view;
+    private List<Group> admin;
+    private List<Group> edit;
+    private List<Group> view;
 
     public AccessRights() {
 	this.admin = new ArrayList<Group>();
@@ -13,29 +19,28 @@ public class AccessRights {
 	this.view = new ArrayList<Group>();
     }
 
-    public ArrayList<Group> getAdmin() {
-        return admin;
+    public List<Group> getAdmin() {
+	return admin;
     }
 
-    public void setAdmin(ArrayList<Group> admin) {
-        this.admin = admin;
+    public void setAdmin(final ArrayList<Group> admin) {
+	this.admin = admin;
     }
 
-    public ArrayList<Group> getEdit() {
-        return edit;
+    public List<Group> getEdit() {
+	return edit;
     }
 
-    public void setEdit(ArrayList<Group> edit) {
-        this.edit = edit;
+    public void setEdit(final ArrayList<Group> edit) {
+	this.edit = edit;
     }
 
-    public ArrayList<Group> getView() {
-        return view;
+    public List<Group> getView() {
+	return view;
     }
 
-    public void setView(ArrayList<Group> view) {
-        this.view = view;
+    public void setView(final ArrayList<Group> view) {
+	this.view = view;
     }
-    
-    
+
 }

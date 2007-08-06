@@ -12,11 +12,16 @@ import com.wideplay.warp.persist.TransactionType;
 import com.wideplay.warp.persist.Transactional;
 
 public class UserManager {
-    @Inject public UserManager(Provider<EntityManager> provider) {
+    @Inject
+    public UserManager(final Provider<EntityManager> provider) {
     }
-    
-    @Transactional(type=TransactionType.READ_ONLY)
+
+    @Transactional(type = TransactionType.READ_ONLY)
     public List<User> getAll() {
-        return null;
+	return null;
+    }
+
+    public User createUser(final User user) {
+	return null;
     }
 }
