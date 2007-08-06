@@ -10,9 +10,9 @@ public interface SiteBarView {
 
     void setLogo(Image logo);
 
-    void setProgressText(String text);
+    void showProgress(String text);
 
-    void showProgress(boolean show);
+    void hideProgress();
 
     void clearSearchText();
 

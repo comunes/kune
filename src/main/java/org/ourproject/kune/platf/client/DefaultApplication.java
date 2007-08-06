@@ -59,7 +59,7 @@ public class DefaultApplication implements Application {
         SiteMessagePresenter siteMessagePresenter = new SiteMessagePresenter();
         SiteMessageView siteMessageView = SiteBarViewFactory.createSiteMessageView(siteMessagePresenter);
         siteMessagePresenter.init(siteMessageView);
-        Site.message = siteMessagePresenter;
+        Site.siteUserMessage = siteMessagePresenter;
         return siteMessagePresenter;
     }
 
@@ -85,6 +85,7 @@ public class DefaultApplication implements Application {
         siteBar = new SiteBarPresenter();
         final SiteBarPanel siteBarView = new SiteBarPanel(siteBar);
         siteBar.init(siteBarView);
+        Site.sitebar = siteBar;
         return siteBarView;
     }
 

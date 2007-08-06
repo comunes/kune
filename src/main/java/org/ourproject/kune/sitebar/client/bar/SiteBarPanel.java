@@ -1,6 +1,5 @@
 package org.ourproject.kune.sitebar.client.bar;
 
-import org.gwm.client.impl.DefaultGFrame;
 import org.ourproject.kune.sitebar.client.group.NewGroupPanel;
 import org.ourproject.kune.sitebar.client.group.NewGroupPresenter;
 import org.ourproject.kune.sitebar.client.login.LoginPanel;
@@ -8,7 +7,6 @@ import org.ourproject.kune.sitebar.client.login.LoginPresenter;
 import org.ourproject.kune.sitebar.client.services.Images;
 import org.ourproject.kune.sitebar.client.services.Translate;
 
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -129,7 +127,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         // TODO: externalize this
         img.kuneLogo16px().applyTo(logoImage);
 
-        showProgress(false);
+        this.hideProgress();
     }
 
     public void clearSearchText() {
@@ -144,22 +142,12 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         // TODO
     }
 
-    public void setProgressText(final String text) {
-        textProcessingLabel.setText(text);
-    }
-
     public void setSearchText(final String text) {
         searchTextBox.setText(text);
     }
 
     public void showLoggedUserName(final String user) {
         loginHyperlink.setText(user);
-    }
-
-    public void showProgress(final boolean show) {
-        DOM.setIntStyleAttribute(getElement(), "zIndex", DefaultGFrame.getLayerOfTheTopWindow() + 10);
-        spinProcessing.setVisible(show);
-        textProcessingLabel.setVisible(show);
     }
 
     public void showLoginDialog() {
@@ -204,6 +192,17 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 
     public void restoreLoginLink() {
         loginHyperlink.setText(t.Login());
+    }
+
+    public void showProgress(final String text) {
+        textProcessingLabel.setText(text);
+        spinProcessing.setVisible(true);
+        textProcessingLabel.setVisible(true);
+    }
+
+    public void hideProgress() {
+        spinProcessing.setVisible(false);
+        textProcessingLabel.setVisible(false);
     }
 
 }

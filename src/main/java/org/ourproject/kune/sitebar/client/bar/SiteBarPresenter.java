@@ -15,7 +15,7 @@ public class SiteBarPresenter implements SiteBar, SiteBarListener, LoginListener
     public SiteBarPresenter() {
     }
 
-    public void init(SiteBarView view) {
+    public void init(final SiteBarView view) {
         this.view = view;
         view.setLogoutLinkVisible(false);
     }
@@ -28,29 +28,30 @@ public class SiteBarPresenter implements SiteBar, SiteBarListener, LoginListener
         view.showNewGroupDialog();
     }
 
-    public void doSearch(String string) {
-        if (string == null)
+    public void doSearch(final String string) {
+        if (string == null) {
             Window.alert("Type something to search!");
-        else
+        } else {
             Window.alert("In development!");
+        }
     }
 
     public void doLogout() {
         SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
         siteBarService.logout(new AsyncCallback() {
 
-            public void onFailure(Throwable arg0) {
+            public void onFailure(final Throwable arg0) {
                 // TODO Auto-generated method stub
             }
 
-            public void onSuccess(Object arg0) {
+            public void onSuccess(final Object arg0) {
                 view.setLogoutLinkVisible(false);
                 view.restoreLoginLink();
             }
         });
     }
 
-    public void userLoggedIn(String nick, String hash) {
+    public void userLoggedIn(final String nick, final String hash) {
         view.showLoggedUserName(nick);
         view.hideLoginDialog();
         view.setLogoutLinkVisible(true);
@@ -68,12 +69,12 @@ public class SiteBarPresenter implements SiteBar, SiteBarListener, LoginListener
         view.hideNewGroupDialog();
     }
 
-    public void setProgressText(String text) {
-        view.setProgressText(text);
+    public void hideProgress() {
+        view.hideProgress();
     }
 
-    public void showProgress(boolean show) {
-        view.showProgress(show);
+    public void showProgress(final String text) {
+        view.showProgress(text);
     }
 
 }
