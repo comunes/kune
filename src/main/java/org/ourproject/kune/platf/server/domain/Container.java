@@ -13,7 +13,14 @@ public class Container extends Ajo {
     private String name;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Alias> aliases;
-    private License defaultLicense;
+
+    public Container(final String name) {
+	this.name = name;
+    }
+
+    public Container() {
+	this(null);
+    }
 
     public String getName() {
 	return name;
@@ -29,14 +36,6 @@ public class Container extends Ajo {
 
     public void setAliases(final List<Alias> aliases) {
 	this.aliases = aliases;
-    }
-
-    public License getDefaultLicense() {
-	return defaultLicense;
-    }
-
-    public void setDefaultLicense(final License defaultLicense) {
-	this.defaultLicense = defaultLicense;
     }
 
 }

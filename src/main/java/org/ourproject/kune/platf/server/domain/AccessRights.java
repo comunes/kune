@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
-@Entity
 @Embeddable
 public class AccessRights {
+    @OneToMany
     private List<Group> admin;
+    @OneToMany
     private List<Group> edit;
+    @OneToMany
     private List<Group> view;
 
     public AccessRights() {

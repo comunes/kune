@@ -5,6 +5,7 @@ import static junit.framework.Assert.assertNotNull;
 
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.server.domain.User;
@@ -17,8 +18,9 @@ public class UserFinderTest extends PersistenceTest {
 
     @Before
     public void addData() {
-	persist(new User("one@here.com", "password1"));
-	persist(new User("two@here.com", "password1"));
+	openTransaction();
+	persist(new User("the name1", "shortName1", "one@here.com", "password1"));
+	persist(new User("the name2", "shortName2", "two@here.com", "password1"));
     }
 
     @Test
@@ -31,6 +33,11 @@ public class UserFinderTest extends PersistenceTest {
     public void findByEmail() {
 	User user = finder.getByEmail("one@here.com");
 	assertNotNull(user);
+    }
+
+    @After
+    public void close() {
+	closeTransaction();
     }
 
 }

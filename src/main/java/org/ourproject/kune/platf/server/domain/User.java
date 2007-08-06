@@ -2,10 +2,12 @@ package org.ourproject.kune.platf.server.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.google.inject.name.Named;
@@ -23,15 +25,23 @@ public class User implements HasId {
 
     private String password;
 
+    @OneToOne(cascade = CascadeType.ALL)
     private Group userGroup;
 
-    public User(final String email, final String password) {
+    private String name;
+
+    private String shortName;
+
+    public User(final String name, final String shortName, final String email, final String password) {
+	this.name = name;
+	this.shortName = shortName;
 	this.email = email;
 	this.password = password;
+	this.userGroup = new Group(name, shortName);
     }
 
     public User() {
-	this(null, null);
+	this(null, null, null, null);
     }
 
     @Finder(query = "from User")
@@ -75,6 +85,22 @@ public class User implements HasId {
 
     public void setUserGroup(final Group userGroup) {
 	this.userGroup = userGroup;
+    }
+
+    public String getName() {
+	return name;
+    }
+
+    public void setName(final String name) {
+	this.name = name;
+    }
+
+    public String getShortName() {
+	return shortName;
+    }
+
+    public void setShortName(final String shortName) {
+	this.shortName = shortName;
     }
 
 }

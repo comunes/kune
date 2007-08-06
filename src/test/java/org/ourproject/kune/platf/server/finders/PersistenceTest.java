@@ -2,7 +2,6 @@ package org.ourproject.kune.platf.server.finders;
 
 import javax.persistence.EntityManager;
 
-import org.junit.After;
 import org.junit.Before;
 import org.ourproject.kune.platf.server.KunePlatformModule;
 import org.ourproject.kune.platf.server.properties.PropertiesFileName;
@@ -23,6 +22,9 @@ public abstract class PersistenceTest {
     public void prepare() {
 	Injector create = create(new KunePlatformModule());
 	create.injectMembers(this);
+    }
+
+    public void openTransaction() {
 	getManager().getTransaction().begin();
     }
 
@@ -38,7 +40,6 @@ public abstract class PersistenceTest {
 	return injector;
     }
 
-    @After
     public void closeTransaction() {
 	getManager().getTransaction().rollback();
     }

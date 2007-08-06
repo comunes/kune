@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 public class Content extends Ajo implements HasContent {
     @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private List<Tag> tags;
+    @OneToOne
     private License license;
     private Rate rate;
     private String uuid;

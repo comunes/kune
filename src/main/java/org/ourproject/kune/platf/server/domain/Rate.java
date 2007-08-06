@@ -4,9 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
 
-@Entity
 @Embeddable
 public class Rate {
     private HashMap<User, Float> scores;
