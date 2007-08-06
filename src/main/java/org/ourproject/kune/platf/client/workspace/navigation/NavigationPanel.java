@@ -2,6 +2,7 @@ package org.ourproject.kune.platf.client.workspace.navigation;
 
 import java.util.HashMap;
 
+import org.ourproject.kune.platf.client.ui.BorderDecorator;
 import org.ourproject.kune.sitebar.client.Site;
 
 import com.google.gwt.user.client.Command;
@@ -44,7 +45,8 @@ public class NavigationPanel extends VerticalPanel implements NavigationView {
         secondRow.add(currentFolderHP);
         add(itemsVP);
         iconBarHP.add(upIcon);
-        iconBarHP.add(pathMenu);
+        BorderDecorator buttonRounded = new BorderDecorator(pathMenu, BorderDecorator.ALL, BorderDecorator.SIMPLE);
+        iconBarHP.add(buttonRounded);
         pathMenu.addItem(Img.folderpathmenu().getHTML(), true, pathSubmenu);
         pathSubmenu.addItem(Img.folder().getHTML() + "&nbsp;Folder", true, new Command() {
             public void execute() {
@@ -70,8 +72,12 @@ public class NavigationPanel extends VerticalPanel implements NavigationView {
         secondRow.setWidth("100%");
         setCellWidth(firstRow, "100%");
         setCellWidth(secondRow, "100%");
+        firstRow.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
+        iconBarHP.setCellVerticalAlignment(upIcon, VerticalPanel.ALIGN_MIDDLE);
+        iconBarHP.setCellVerticalAlignment(buttonRounded, VerticalPanel.ALIGN_MIDDLE);
         itemsVP.addStyleName("itemsVP");
         pathMenu.setStyleName("pathMenu");
+        buttonRounded.setColor("AAA");
         upIcon.addClickListener(new ClickListener() {
             public void onClick(final Widget sender) {
                 // TODO

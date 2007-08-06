@@ -258,7 +258,6 @@ body {
 }
 
 .kune-NavigationBar .pathMenu {
-    margin: 2px 3px;
     vertical-align: middle;
 }
 
@@ -270,14 +269,12 @@ body {
     cursor: pointer;
     cursor: hand;
     white-space: nowrap;
-    padding: 1px 10px;
-    height: 11px;
+    padding: 3px 6px;
 }
 
 .kune-NavigationBar .pathMenu .gwt-MenuItem-selected {
     background: transparent url(img/button-bg-soft.gif) repeat-x 0 0;
     color: #000;
-    height: 11px;
 }
 
 .kune-SiteMessagePanel {

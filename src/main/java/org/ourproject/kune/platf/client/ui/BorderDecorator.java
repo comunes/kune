@@ -94,11 +94,21 @@ public class BorderDecorator extends ComplexPanel implements HasColor {
      */
     public final static int ALL = TOP | BOTTOM;
 
+    /**
+     * <code>ALL</code> rounded corners of size 1px
+     */
+    public final static int SIMPLE = 1;
+
+    /**
+     * <code>DOUBLE</code> rounded corners of size 2px
+     */
+    public final static int DOUBLE = 2;
+
     // private Element variables
-    private Element body; // body of widget
+    private final Element body; // body of widget
     private Element div2t; // margin 2 top line
     private Element div1t; // margin 1 top line
-    private Element divElement; // div element containing widget
+    private final Element divElement; // div element containing widget
     private Element div1b; // margin 1 bottom line
     private Element div2b; // margin 2 bottom line
     private String color;
@@ -116,12 +126,17 @@ public class BorderDecorator extends ComplexPanel implements HasColor {
      *                set custom rounded corners.
      * @param decorated
      *                widget to add corners to.
+     * 
+     * @param size
+     *                size of the corners: DOUBLE (2px) or SIMPLE (1px)
      */
-    public BorderDecorator(Widget decorated, int corners) {
+    public BorderDecorator(final Widget decorated, final int corners, final int size) {
         body = DOM.createDiv();
         if (is(corners, TOP)) {
-            div2t = createLine(corners & TOP, '2');
-            DOM.appendChild(body, div2t);
+            if ((is(size, DOUBLE))) {
+                div2t = createLine(corners & TOP, '2');
+                DOM.appendChild(body, div2t);
+            }
             div1t = createLine(corners & TOP, '1');
             DOM.appendChild(body, div1t);
         }
@@ -130,8 +145,10 @@ public class BorderDecorator extends ComplexPanel implements HasColor {
         if (is(corners, BOTTOM)) {
             div1b = createLine(corners & BOTTOM, '1');
             DOM.appendChild(body, div1b);
-            div2b = createLine(corners & BOTTOM, '2');
-            DOM.appendChild(body, div2b);
+            if ((is(size, DOUBLE))) {
+                div2b = createLine(corners & BOTTOM, '2');
+                DOM.appendChild(body, div2b);
+            }
         }
         setElement(body);
         add(decorated, divElement);
@@ -139,6 +156,9 @@ public class BorderDecorator extends ComplexPanel implements HasColor {
         setColor("red");
     }
 
+    public BorderDecorator(final Widget decorated, final int corners) {
+        this(decorated, corners, DOUBLE);
+    }
     /**
      * <p>
      * Creates div element representing part of the rounded corner.
@@ -149,7 +169,7 @@ public class BorderDecorator extends ComplexPanel implements HasColor {
      * @param width
      *                margin width for line.
      */
-    private Element createLine(int corner, char width) {
+    private Element createLine(final int corner, final char width) {
         // margin 2 fields : top/bottom right/left => "0 <width>px"
         // margin 4 fields : top right bottom left => "0 <width>px 0
         // <width>px"
@@ -165,7 +185,7 @@ public class BorderDecorator extends ComplexPanel implements HasColor {
     }
 
     // convience method for mask test
-    private boolean is(int input, int mask) {
+    private boolean is(final int input, final int mask) {
         return (input & mask) > 0;
     }
 
@@ -180,7 +200,7 @@ public class BorderDecorator extends ComplexPanel implements HasColor {
      * @param style
      *                css style name
      */
-    public void setStyleName(String style) {
+    public void setStyleName(final String style) {
         DOM.setElementProperty(body, "className", style);
     }
 
@@ -200,31 +220,41 @@ public class BorderDecorator extends ComplexPanel implements HasColor {
      * @param style
      *                css style name.
      */
-    public void setCornerStyleName(String style) {
-        if (null != div2t)
+    public void setCornerStyleName(final String style) {
+        if (null != div2t) {
             DOM.setElementProperty(div2t, "className", style);
-        if (null != div1t)
+        }
+        if (null != div1t) {
             DOM.setElementProperty(div1t, "className", style);
-        if (null != div1b)
+        }
+        if (null != div1b) {
             DOM.setElementProperty(div1b, "className", style);
-        if (null != div2b)
+        }
+        if (null != div2b) {
             DOM.setElementProperty(div2b, "className", style);
-        if (null != divElement)
+        }
+        if (null != divElement) {
             DOM.setElementProperty(divElement, "className", style);
+        }
     }
 
-    public void setColor(String color) {
+    public void setColor(final String color) {
         this.color = color;
-        if (null != div2t)
+        if (null != div2t) {
             DOM.setStyleAttribute(div2t, "backgroundColor", color);
-        if (null != div1t)
+        }
+        if (null != div1t) {
             DOM.setStyleAttribute(div1t, "backgroundColor", color);
-        if (null != div1b)
+        }
+        if (null != div1b) {
             DOM.setStyleAttribute(div1b, "backgroundColor", color);
-        if (null != div2b)
+        }
+        if (null != div2b) {
             DOM.setStyleAttribute(div2b, "backgroundColor", color);
-        if (null != divElement)
+        }
+        if (null != divElement) {
             DOM.setStyleAttribute(divElement, "backgroundColor", color);
+        }
     }
 
     public String getColor() {
