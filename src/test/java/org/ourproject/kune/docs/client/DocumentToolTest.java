@@ -57,7 +57,7 @@ public class DocumentToolTest {
 
     @Test
     public void testCalls() {
-	tool.setEncodedState("ctx.doc");
+	// tool.setEncodedState("ctx.doc");
 	assertEquals(1, getContentCallCount);
 	assertEquals(1, getContextCallCount);
     }
@@ -71,7 +71,7 @@ public class DocumentToolTest {
 	documentReaderView.setContent("content");
 
 	EasyMock.replay(documentReaderView, navigationView);
-	tool.setEncodedState("ctxReference.root");
+	// tool.setEncodedState("ctxReference.root");
 	EasyMock.verify(documentReaderView, navigationView);
 
     }

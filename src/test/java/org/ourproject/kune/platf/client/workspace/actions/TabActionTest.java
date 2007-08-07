@@ -21,7 +21,7 @@ public class TabActionTest {
     public void testAction() {
 	Tool tool = createStrictMock(Tool.class);
 
-	expect(tool.getEncodedState()).andReturn("");
+	// expect(tool.getEncodedState()).andReturn("");
 
 	expect(helper.app.getTool("doc")).andReturn(tool);
 	replay(tool, helper.app);

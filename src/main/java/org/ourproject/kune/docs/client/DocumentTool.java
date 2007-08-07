@@ -6,7 +6,6 @@ import org.ourproject.kune.docs.client.reader.DocumentReaderView;
 import org.ourproject.kune.docs.client.rpc.DocumentService;
 import org.ourproject.kune.platf.client.AbstractTool;
 import org.ourproject.kune.platf.client.dispatch.Action;
-import org.ourproject.kune.platf.client.dispatch.HistoryToken;
 import org.ourproject.kune.platf.client.workspace.WorkspaceComponent;
 import org.ourproject.kune.platf.client.workspace.admin.AjoAdmin;
 
@@ -27,23 +26,36 @@ public class DocumentTool extends AbstractTool {
 	return new DocumentStateAction(this);
     }
 
-    public String getEncodedState() {
-	String cntEncodedState;
-
-	String ctxEncodedState = getContext().getEncodedState();
-	if (ctxEncodedState == null) {
-	    ctxEncodedState = "home";
-	    cntEncodedState = "welcome";
-	} else {
-	    cntEncodedState = getContent().getEncodedState();
-	}
-	return HistoryToken.encode(getName(), ctxEncodedState, cntEncodedState);
+    public String getContentRef() {
+	return null;
     }
 
-    public void setEncodedState(final Object value) {
-	getContext().setEncodedState((String) value);
-	getContent().setEncodedState((String) value);
+    public String getContextRef() {
+	return null;
     }
+
+    public void setReferences(final String ctxRef, final String cntRef) {
+	getContext().setReferences(ctxRef, cntRef);
+	getContent().setReferences(ctxRef, cntRef);
+    }
+
+    // public String getEncodedState() {
+    // String cntEncodedState;
+    //
+    // String ctxEncodedState = getContext().getEncodedState();
+    // if (ctxEncodedState == null) {
+    // ctxEncodedState = "home";
+    // cntEncodedState = "welcome";
+    // } else {
+    // cntEncodedState = getContent().getEncodedState();
+    // }
+    // return HistoryToken.encode(getName(), ctxEncodedState, cntEncodedState);
+    // }
+    //
+    // public void setEncodedState(final Object value) {
+    // getContext().setEncodedState((String) value);
+    // getContent().setEncodedState((String) value);
+    // }
 
     protected WorkspaceComponent createContent() {
 	DocumentContentDriver provider = new DocumentContentDriver(DocumentService.App.getInstance(), state);

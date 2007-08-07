@@ -5,9 +5,9 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.ourproject.kune.platf.server.PersistenceTest;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.finders.PersistenceTest;
 
 import com.google.inject.Inject;
 

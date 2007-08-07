@@ -3,7 +3,6 @@ package org.ourproject.kune.docs.client;
 import org.ourproject.kune.docs.client.reader.DocumentReaderListener;
 import org.ourproject.kune.docs.client.reader.DocumentReaderView;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dispatch.HistoryToken;
 import org.ourproject.kune.platf.client.workspace.ContentDataDriver.ContentDataAcceptor;
 import org.ourproject.kune.platf.client.workspace.ContentDataDriver.SaveListener;
 import org.ourproject.kune.platf.client.workspace.dto.ContentDataDTO;
@@ -17,7 +16,6 @@ public class DocumentPresenter implements Document, DocumentReaderListener, Text
     private final DocumentContentDriver dataDriver;
     private DocumentView documentView;
     private DocumentReaderView readerView;
-    private String encodedState;
     private ContentDataDTO contentDTO;
 
     public DocumentPresenter(final DocumentContentDriver driver) {
@@ -33,14 +31,8 @@ public class DocumentPresenter implements Document, DocumentReaderListener, Text
 	documentView.show(readerView);
     }
 
-    public void setEncodedState(final String encodedState) {
-	this.encodedState = encodedState;
-	String[] split = HistoryToken.split(encodedState);
-	load(split[0], split[1]);
-    }
-
-    public String getEncodedState() {
-	return encodedState;
+    public void setReferences(final String ctxRef, final String cntRef) {
+	load(ctxRef, cntRef);
     }
 
     private void load(final String contextRef, final String docRef) {

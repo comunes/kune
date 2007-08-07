@@ -1,4 +1,4 @@
-package org.ourproject.kune.platf.server.finders;
+package org.ourproject.kune.platf.server;
 
 import javax.persistence.EntityManager;
 

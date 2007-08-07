@@ -55,7 +55,7 @@ public class DefaultDispatcher implements Dispatcher, HistoryListener {
     }
 
     public void onHistoryChanged(final String encoded) {
-	HistoryToken token = new HistoryToken(encoded);
+	HistoryTokenOld token = new HistoryTokenOld(encoded);
 	fire(token.eventName, token.value);
     }
 

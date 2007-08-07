@@ -3,7 +3,6 @@ package org.ourproject.kune.docs.client.folder;
 import java.util.ArrayList;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dispatch.HistoryToken;
 import org.ourproject.kune.platf.client.workspace.AbstractComponent;
 import org.ourproject.kune.platf.client.workspace.ContextDataProvider;
 import org.ourproject.kune.platf.client.workspace.ContextDataProvider.ContextDataAcceptor;
@@ -19,13 +18,12 @@ public class NavigatorPresenter extends AbstractComponent implements ContextData
 	this.view = view;
     }
 
-    public void setEncodedState(final String encodedState) {
-	super.setEncodedState(encodedState);
-	provider.getContext(HistoryToken.split(encodedState)[0], this);
-    }
-
     public View getView() {
 	return view;
+    }
+
+    public void setReferences(final String ctxRef, final String cntRef) {
+	provider.getContext(ctxRef, this);
     }
 
     public void accept(final ContextDataDTO ctxData) {

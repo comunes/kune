@@ -31,7 +31,7 @@ public class DatabaseInitializer {
     }
 
     // TODO: sacar al properties
-    private void start() {
+    void start() {
 	createUsers();
 	createLicenses();
     }

@@ -19,7 +19,7 @@ package org.ourproject.kune.platf.client.workspace.ui;
 
 import java.util.HashMap;
 
-import org.ourproject.kune.platf.client.dispatch.HistoryToken;
+import org.ourproject.kune.platf.client.dispatch.HistoryTokenOld;
 import org.ourproject.kune.platf.client.services.ColorScheme;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.BorderDecorator;
@@ -53,7 +53,7 @@ public class GroupNavBar extends VerticalPanel {
     private Widget createItem(final int index, final String name, String caption) {
         final SimplePanel menuItem = new SimplePanel();
         addStyleName("Tab");
-        String historyToken = HistoryToken.encode("tab", name);
+        String historyToken = HistoryTokenOld.encode("tab", name);
         final Hyperlink hl = new Hyperlink(caption, historyToken);
         menuItem.add(hl);
         return new BorderDecorator(menuItem, BorderDecorator.RIGHT);

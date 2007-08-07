@@ -1,7 +1,6 @@
 package org.ourproject.kune.docs.client.reader;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dispatch.HistoryToken;
 import org.ourproject.kune.platf.client.workspace.AbstractComponent;
 import org.ourproject.kune.platf.client.workspace.ContentDataDriver;
 import org.ourproject.kune.platf.client.workspace.ContentDataDriver.ContentDataAcceptor;
@@ -21,10 +20,8 @@ public class DocumentReaderPresenter extends AbstractComponent implements Docume
 	return view;
     }
 
-    public void setEncodedState(final String encodedState) {
-	super.setEncodedState(encodedState);
-	String[] split = HistoryToken.split(encodedState);
-	load(split[0], split[1]);
+    public void setReferences(final String ctxRef, final String cntRef) {
+	load(ctxRef, cntRef);
     }
 
     private void load(final String contextRef, final String docRef) {

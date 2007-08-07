@@ -9,9 +9,9 @@ public interface Tool {
 
     String getCaption();
 
-    String getEncodedState();
+    // String getEncodedState();
 
-    void setEncodedState(Object value);
+    // void setEncodedState(Object value);
 
     Action getStateAction();
 
@@ -20,4 +20,11 @@ public interface Tool {
     WorkspaceComponent getContent();
 
     void setEnvironment(Dispatcher dispatcher, State state);
+
+    String getContextRef();
+
+    String getContentRef();
+
+    void setReferences(String ctxRef, String cntRef);
+
 }

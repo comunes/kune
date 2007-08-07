@@ -10,10 +10,6 @@ public abstract class ToolStateAction extends WorkspaceAction {
     }
 
     public void execute(final Object value) {
-	tool.setEncodedState(value);
-	workspace.setTool(tool.getName());
-	workspace.setContext(tool.getContext());
-	workspace.setContent(tool.getContent());
     }
 
 }

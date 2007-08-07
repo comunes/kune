@@ -1,6 +1,6 @@
 package org.ourproject.kune.platf.client;
 
-import org.ourproject.kune.platf.client.dispatch.HistoryToken;
+import org.ourproject.kune.platf.client.dispatch.HistoryTokenOld;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.workspace.actions.StateAction;
 
@@ -40,7 +40,7 @@ public class State {
     }
 
     public String encode(String toolName, String contextRef, String reference) {
-	return HistoryToken.encodeState(StateAction.NAME, group.getShortName(),
+	return HistoryTokenOld.encodeState(StateAction.NAME, group.getShortName(),
 		toolName, contextRef, reference);
     }
 

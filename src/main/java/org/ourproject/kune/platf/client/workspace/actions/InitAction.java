@@ -1,6 +1,6 @@
 package org.ourproject.kune.platf.client.workspace.actions;
 
-import org.ourproject.kune.platf.client.dispatch.HistoryToken;
+import org.ourproject.kune.platf.client.dispatch.HistoryTokenOld;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.rpc.KuneService;
 import org.ourproject.kune.platf.client.rpc.KuneServiceAsync;
@@ -31,7 +31,7 @@ public class InitAction extends WorkspaceAction {
 		    state.setGroup(group);
 		    workspace.setGroup(group);
 		    UIObject.setVisible(DOM.getElementById("initialstatusbar"), false);
-		    dispatcher.fireState(HistoryToken.encode(TabAction.NAME, app.getDefaultToolName()));
+		    dispatcher.fireState(HistoryTokenOld.encode(TabAction.NAME, app.getDefaultToolName()));
 		}
 	    });
 	}
