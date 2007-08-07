@@ -2,6 +2,7 @@ package org.ourproject.kune.platf.server.domain;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,8 +17,12 @@ public class License implements HasId {
     @GeneratedValue
     private Long id;
 
+    @Column(unique = true)
     private String shortName;
+
+    @Column(unique = true)
     private String longName;
+
     private String description;
     private String imageUrl;
     private boolean isCC;
