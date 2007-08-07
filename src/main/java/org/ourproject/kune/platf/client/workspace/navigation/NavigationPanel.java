@@ -33,7 +33,7 @@ public class NavigationPanel extends VerticalPanel implements NavigationView {
         HorizontalPanel secondRow = new HorizontalPanel();
         HorizontalPanel iconBarHP = new HorizontalPanel();
         HorizontalPanel currentFolderHP = new HorizontalPanel();
-        PushButton upIcon = new PushButton(Img.goUp().createImage(), Img.goUpLight().createImage());
+        final PushButton upIcon = new PushButton(Img.goUp().createImage(), Img.goUpLight().createImage());
         MenuBar pathMenu = new MenuBar();
         MenuBar pathSubmenu = new MenuBar(true);
         itemsVP = new VerticalPanel();
@@ -92,6 +92,7 @@ public class NavigationPanel extends VerticalPanel implements NavigationView {
             }
         });
     }
+
     public void add(final String name, final String type, final String event) {
         HorizontalPanel itemHP = new HorizontalPanel();
         itemsVP.add(itemHP);
