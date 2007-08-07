@@ -3,7 +3,6 @@ package org.ourproject.kune.platf.server;
 import javax.persistence.EntityManager;
 
 import org.junit.Before;
-import org.ourproject.kune.platf.server.KunePlatformModule;
 import org.ourproject.kune.platf.server.properties.PropertiesFileName;
 
 import com.google.inject.Binder;
@@ -16,6 +15,7 @@ import com.wideplay.warp.jpa.JpaUnit;
 import com.wideplay.warp.persist.PersistenceService;
 
 public abstract class PersistenceTest {
+    @Inject
     Provider<EntityManager> provider;
 
     @Before
@@ -52,8 +52,4 @@ public abstract class PersistenceTest {
 	return provider.get();
     }
 
-    @Inject
-    public void setProvider(final Provider<EntityManager> provider) {
-	this.provider = provider;
-    }
 }

@@ -44,6 +44,10 @@ public class License implements HasId {
 	this.url = url;
     }
 
+    public License() {
+	this(null, null, null, null, false, false, false, null, null);
+    }
+
     public Long getId() {
 	return id;
     }

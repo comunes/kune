@@ -1,6 +1,7 @@
 package org.ourproject.kune.platf.server.domain;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,11 +16,14 @@ public class Revision {
     @Id
     @GeneratedValue
     private Long id;
+
+    @OneToOne
     private User editor;
 
     @Basic(optional = false)
     private Long modifiedOn;
 
+    @OneToOne(cascade = { CascadeType.ALL })
     private Text content;
 
     @Version

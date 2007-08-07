@@ -24,6 +24,10 @@ public class ContentDescriptor extends Ajo implements HasContent {
     @OneToOne
     private Revision revision;
 
+    @OneToOne
+    Container container;
+
+    @OneToOne
     private User creator;
 
     @Basic(optional = false)
