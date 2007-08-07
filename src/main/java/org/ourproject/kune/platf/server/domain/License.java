@@ -133,4 +133,13 @@ public class License implements HasId {
 	return null;
     }
 
+    @Finder(query = "from License where isCC = true")
+    public List<License> getCC() {
+	return null;
+    }
+
+    @Finder(query = "from License where isCC = false")
+    public List<License> getNotCC() {
+	return null;
+    }
 }
