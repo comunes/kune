@@ -12,11 +12,11 @@ public class LicenseDTO implements IsSerializable {
 
     private String imageUrl;
 
-    private final boolean isCC;
+    private boolean isCC;
 
-    private final boolean isCopyleft;
+    private boolean isCopyleft;
 
-    private final boolean isDeprecated;
+    private boolean isDeprecated;
 
     private String rdf;
 
@@ -97,6 +97,18 @@ public class LicenseDTO implements IsSerializable {
 
     public boolean isDeprecated() {
 	return isDeprecated;
+    }
+
+    public void setCC(final boolean isCC) {
+	this.isCC = isCC;
+    }
+
+    public void setCopyleft(final boolean isCopyleft) {
+	this.isCopyleft = isCopyleft;
+    }
+
+    public void setDeprecated(final boolean isDeprecated) {
+	this.isDeprecated = isDeprecated;
     }
 
 }
