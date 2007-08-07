@@ -1,4 +1,4 @@
-package org.ourproject.kune.platf.client.workspace.navigation;
+package org.ourproject.kune.docs.client.folder;
 
 import java.util.ArrayList;
 
@@ -14,13 +14,12 @@ public class NavigatorPresenter extends AbstractComponent implements ContextData
     private final NavigationView view;
     private final ContextDataProvider provider;
 
-    public NavigatorPresenter(ContextDataProvider provider, NavigationView view, String initalState) {
+    public NavigatorPresenter(final ContextDataProvider provider, final NavigationView view) {
 	this.provider = provider;
 	this.view = view;
-	encodedState = initalState;
     }
 
-    public void setEncodedState(String encodedState) {
+    public void setEncodedState(final String encodedState) {
 	super.setEncodedState(encodedState);
 	provider.getContext(HistoryToken.split(encodedState)[0], this);
     }
@@ -29,7 +28,7 @@ public class NavigatorPresenter extends AbstractComponent implements ContextData
 	return view;
     }
 
-    public void accept(ContextDataDTO ctxData) {
+    public void accept(final ContextDataDTO ctxData) {
 	ContextItemDTO item;
 	view.clear();
 	ArrayList items = ctxData.getChildren();
@@ -42,7 +41,7 @@ public class NavigatorPresenter extends AbstractComponent implements ContextData
 	view.selectItem(defaultIndex);
     }
 
-    public void failed(Throwable caugth) {
+    public void failed(final Throwable caugth) {
     }
 
 }

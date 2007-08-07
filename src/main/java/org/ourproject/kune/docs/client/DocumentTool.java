@@ -1,21 +1,17 @@
 package org.ourproject.kune.docs.client;
 
-import org.ourproject.kune.docs.client.editor.DocumentEditor;
-import org.ourproject.kune.docs.client.reader.DocumentReader;
-import org.ourproject.kune.docs.client.reader.DocumentReaderPresenter;
-import org.ourproject.kune.docs.client.reader.DocumentReaderView;
+import org.ourproject.kune.docs.client.folder.NavigationView;
+import org.ourproject.kune.docs.client.folder.NavigatorPresenter;
 import org.ourproject.kune.docs.client.rpc.DocumentService;
 import org.ourproject.kune.platf.client.AbstractTool;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dispatch.HistoryToken;
 import org.ourproject.kune.platf.client.workspace.WorkspaceComponent;
 import org.ourproject.kune.platf.client.workspace.admin.AjoAdmin;
-import org.ourproject.kune.platf.client.workspace.navigation.NavigationView;
-import org.ourproject.kune.platf.client.workspace.navigation.NavigatorPresenter;
 
 public class DocumentTool extends AbstractTool {
     public static final String NAME = "docs";
-    private DocumentReader document;
+    private Document document;
 
     public DocumentTool() {
 	super(NAME);
@@ -31,7 +27,16 @@ public class DocumentTool extends AbstractTool {
     }
 
     public String getEncodedState() {
-	return HistoryToken.encode(getName(), getContext().getEncodedState(), getContent().getEncodedState());
+	String cntEncodedState;
+
+	String ctxEncodedState = getContext().getEncodedState();
+	if (ctxEncodedState == null) {
+	    ctxEncodedState = "home";
+	    cntEncodedState = "welcome";
+	} else {
+	    cntEncodedState = getContent().getEncodedState();
+	}
+	return HistoryToken.encode(getName(), ctxEncodedState, cntEncodedState);
     }
 
     public void setEncodedState(final Object value) {
@@ -41,21 +46,16 @@ public class DocumentTool extends AbstractTool {
 
     protected WorkspaceComponent createContent() {
 	DocumentContentProvider provider = new DocumentContentProvider(DocumentService.App.getInstance(), state);
-	DocumentReaderView view = DocumentViewFactory.getDocumentView();
-	document = new DocumentReaderPresenter(dispatcher, provider, view, "welcome");
+	DocumentView view = DocumentViewFactory.getDocumentView();
+	document = new DocumentPresenter(provider, view);
 	return document;
     }
 
     protected WorkspaceComponent createContext() {
 	DocumentContextProvider provider = new DocumentContextProvider(DocumentService.App.getInstance(), state);
 	NavigationView view = DocumentViewFactory.getNavigationtView();
-	NavigatorPresenter context = new NavigatorPresenter(provider, view, "home");
+	NavigatorPresenter context = new NavigatorPresenter(provider, view);
 	return context;
-    }
-
-    public DocumentEditor getEditor() {
-	// TODO Auto-generated method stub
-	return null;
     }
 
     public AjoAdmin getAdmin() {

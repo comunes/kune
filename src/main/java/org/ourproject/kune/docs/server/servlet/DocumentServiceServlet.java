@@ -1,6 +1,6 @@
 package org.ourproject.kune.docs.server.servlet;
 
-import org.ourproject.kune.docs.server.rpc.DocumentServiceDefault;
+import org.ourproject.kune.docs.server.services.DocumentServiceDefault;
 import org.ourproject.kune.platf.server.servlet.GuiceRemoteServiceServlet;
 
 import com.google.gwt.user.client.rpc.RemoteService;

@@ -1,4 +1,4 @@
-package org.ourproject.kune.platf.client.workspace.navigation;
+package org.ourproject.kune.docs.client.folder;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;

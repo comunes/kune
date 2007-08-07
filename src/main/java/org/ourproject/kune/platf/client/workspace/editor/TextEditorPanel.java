@@ -7,74 +7,63 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class TextEditorPanel extends Composite implements TextEditorView {
     private static final String BACKCOLOR_ENABLED = "#FFF";
-
     private static final String BACKCOLOR_DISABLED = "#CCC";
-
-    private final TextEditorPresenter presenter;
-
     private final RichTextArea gwtRTarea;
-
     private final TextEditorToolbar textEditorToolbar;
 
-    public TextEditorPanel(final TextEditorPresenter initPresenter) {
-        this.presenter = initPresenter;
+    public TextEditorPanel(final TextEditorPresenter panelListener) {
 
-        gwtRTarea = new RichTextArea();
-        textEditorToolbar = new TextEditorToolbar(gwtRTarea, presenter);
-        VerticalPanel areaVP = new VerticalPanel();
-        areaVP.add(textEditorToolbar);
-        areaVP.add(gwtRTarea);
-        initWidget(areaVP);
+	gwtRTarea = new RichTextArea();
+	textEditorToolbar = new TextEditorToolbar(gwtRTarea, panelListener);
+	VerticalPanel areaVP = new VerticalPanel();
+	areaVP.add(textEditorToolbar);
+	areaVP.add(gwtRTarea);
+	initWidget(areaVP);
 
-        // area.setHeight("20em");
-        gwtRTarea.setWidth("100%");
-        areaVP.setWidth("100%");
-        // textEditorToolbar.setWidth("100%");
+	gwtRTarea.setWidth("100%");
+	areaVP.setWidth("100%");
     }
 
     public void setEnabled(final boolean enabled) {
-        if (enabled) {
-            DOM.setStyleAttribute(gwtRTarea.getElement(), "backgroundColor", BACKCOLOR_ENABLED);
-        } else {
-            DOM.setStyleAttribute(gwtRTarea.getElement(), "backgroundColor", BACKCOLOR_DISABLED);
-        }
-        gwtRTarea.setEnabled(enabled);
+	String bgColor = enabled ? BACKCOLOR_ENABLED : BACKCOLOR_DISABLED;
+	DOM.setStyleAttribute(gwtRTarea.getElement(), "backgroundColor", bgColor);
+	gwtRTarea.setEnabled(enabled);
     }
 
     public String getHTML() {
-        return gwtRTarea.getHTML();
+	return gwtRTarea.getHTML();
     }
 
     public String getText() {
-        return gwtRTarea.getText();
+	return gwtRTarea.getText();
     }
 
     public void setHTML(final String html) {
-        gwtRTarea.setHTML(html);
+	gwtRTarea.setHTML(html);
     }
 
     public void setText(final String text) {
-        gwtRTarea.setText(text);
+	gwtRTarea.setText(text);
     }
 
     public void setHeight(final String height) {
-        gwtRTarea.setHeight(height);
+	gwtRTarea.setHeight(height);
     }
 
     public void setEnabledSaveButton(final boolean enabled) {
-        textEditorToolbar.setEnabledSaveButton(enabled);
+	textEditorToolbar.setEnabledSaveButton(enabled);
     }
 
     public void setEnabledCancelButton(final boolean enabled) {
-        textEditorToolbar.setEnabledCancelButton(enabled);
+	textEditorToolbar.setEnabledCancelButton(enabled);
     }
 
     public void setTextSaveButton(final String text) {
-        textEditorToolbar.setTextSaveButton(text);
+	textEditorToolbar.setTextSaveButton(text);
     }
 
     public void editHTML(final boolean edit) {
-        textEditorToolbar.editHTML(edit);
+	textEditorToolbar.editHTML(edit);
     }
 
 }

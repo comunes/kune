@@ -3,6 +3,10 @@ package org.ourproject.kune.platf.client.dto;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class GroupDTO implements IsSerializable {
+    public static final int TYPE_A = 1;
+    public static final int TYPE_B = 1;
+    public static final int TYPE_C = 1;
+
     private Long id;
     private String shortName;
     private String name;

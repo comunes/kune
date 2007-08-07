@@ -1,4 +1,4 @@
-package org.ourproject.kune.docs.server.rpc;
+package org.ourproject.kune.docs.server.services;
 
 import org.ourproject.kune.docs.client.rpc.DocumentService;
 import org.ourproject.kune.platf.client.workspace.dto.ContentDataDTO;

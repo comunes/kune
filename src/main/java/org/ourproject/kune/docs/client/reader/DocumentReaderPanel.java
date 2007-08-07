@@ -1,34 +1,44 @@
 package org.ourproject.kune.docs.client.reader;
 
-import org.ourproject.kune.platf.client.workspace.editor.TextEditorPanel;
-import org.ourproject.kune.platf.client.workspace.editor.TextEditorPresenter;
-
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 public class DocumentReaderPanel extends VerticalPanel implements DocumentReaderView {
-    private String title;
+    private Button btnEdit;
+    private final HTML content;
 
-    public DocumentReaderPanel() {
-        add(new Label("this is the doc panel"));
+    public DocumentReaderPanel(final DocumentReaderListener listener) {
+	add(createToolBar(listener));
+	btnEdit.setVisible(false);
+	content = new HTML();
+	add(content);
     }
 
-    public void setContentName(final String name) {
-        this.title = name;
-        clear();
-        add(new Label("TÍTULO: " + name));
+    private Widget createToolBar(final DocumentReaderListener listener) {
+	FlowPanel panel = new FlowPanel();
+	btnEdit = new Button("editar", new ClickListener() {
+	    public void onClick(final Widget sender) {
+		listener.onEdit();
+	    }
+	});
+	panel.add(btnEdit);
+	return panel;
     }
 
-    public void setContent(final String content) {
-        clear();
-        add(new Label("TÍTULO: " + title));
-        add(new Label("CONTENIDO: " + content));
+    public void setContent(final String text) {
+	content.setHTML(text);
+    }
 
-        // TODO DELETE THIS
-        TextEditorPresenter textEditorPresenter = new TextEditorPresenter();
-        TextEditorPanel textEditorPanel = new TextEditorPanel(textEditorPresenter);
-        textEditorPresenter.init("Prueba de edición desde DocumentReaderPanel", textEditorPanel, true);
-        add(textEditorPanel);
+    public void setEditEnabled(final boolean isEnabled) {
+	btnEdit.setVisible(isEnabled);
+    }
+
+    public String getContent() {
+	return content.getHTML();
     }
 
 }

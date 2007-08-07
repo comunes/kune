@@ -3,6 +3,9 @@ package org.ourproject.kune.docs.client.reader;
 import org.ourproject.kune.platf.client.View;
 
 public interface DocumentReaderView extends View {
-    void setContent(String content);
-    void setContentName(String name);
+    public void setContent(String content);
+
+    public void setEditEnabled(boolean isEnabled);
+
+    public String getContent();
 }

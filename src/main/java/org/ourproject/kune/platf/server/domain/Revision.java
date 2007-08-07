@@ -28,4 +28,52 @@ public class Revision {
     @OneToOne(fetch = FetchType.LAZY)
     private Revision previous;
 
+    public Long getId() {
+	return id;
+    }
+
+    public void setId(final Long id) {
+	this.id = id;
+    }
+
+    public User getEditor() {
+	return editor;
+    }
+
+    public void setEditor(final User editor) {
+	this.editor = editor;
+    }
+
+    public Long getModifiedOn() {
+	return modifiedOn;
+    }
+
+    public void setModifiedOn(final Long modifiedOn) {
+	this.modifiedOn = modifiedOn;
+    }
+
+    public Text getContent() {
+	return content;
+    }
+
+    public void setContent(final Text content) {
+	this.content = content;
+    }
+
+    public int getVersion() {
+	return version;
+    }
+
+    public void setVersion(final int version) {
+	this.version = version;
+    }
+
+    public Revision getPrevious() {
+	return previous;
+    }
+
+    public void setPrevious(final Revision previous) {
+	this.previous = previous;
+    }
+
 }

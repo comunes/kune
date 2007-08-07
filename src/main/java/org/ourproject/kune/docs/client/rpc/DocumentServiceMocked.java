@@ -30,8 +30,8 @@ public class DocumentServiceMocked extends MockedService implements DocumentServ
 	GWT.log("DOC SERVICE: getContent - " + ctxRef + ", " + docRef, null);
 	delay(new Delayer() {
 	    public void run() {
-		callback.onSuccess(new ContentDataDTO(docRef, docRef, "this is the content from the 'server' ;) for "
-			+ docRef.toUpperCase()));
+		callback.onSuccess(new ContentDataDTO(docRef, docRef,
+			"<h1>welcome<h1>this is the content from the <b>'server'</b> ;) for " + docRef.toUpperCase()));
 	    }
 	});
     }

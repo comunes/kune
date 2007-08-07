@@ -10,19 +10,19 @@ public class WorkspacePresenter implements Workspace {
     private WorkspaceComponent context;
     private WorkspaceComponent content;
 
-    public WorkspacePresenter(WorkspaceView view) {
+    public WorkspacePresenter(final WorkspaceView view) {
 	this.view = view;
     }
 
-    public void showError(Throwable caught) {
+    public void showError(final Throwable caught) {
 
     }
 
-    public void setGroup(GroupDTO group) {
+    public void setGroup(final GroupDTO group) {
 	view.setLogo("group name here");
     }
 
-    public void attachTools(Iterator iterator) {
+    public void attachTools(final Iterator iterator) {
 	Tool tool;
 	while (iterator.hasNext()) {
 	    tool = ((Tool) iterator.next());
@@ -30,11 +30,11 @@ public class WorkspacePresenter implements Workspace {
 	}
     }
 
-    public void setTool(String toolName) {
+    public void setTool(final String toolName) {
 	view.setTool(toolName);
     }
 
-    public void setContext(WorkspaceComponent contextComponent) {
+    public void setContext(final WorkspaceComponent contextComponent) {
 	if (context != null) {
 	    context.detach();
 	} else if (context != contextComponent) {
@@ -44,12 +44,12 @@ public class WorkspacePresenter implements Workspace {
 	}
     }
 
-    public void setContent(WorkspaceComponent contentComponent) {
+    public void setContent(final WorkspaceComponent contentComponent) {
 	if (content != null) {
 	    content.detach();
 	}
 	content = contentComponent;
-	context.attach();
+	content.attach();
 	view.setContent(content.getView());
     }
 

@@ -14,18 +14,18 @@ public interface SiteBarService extends RemoteService {
     void createNewGroup(String shortName, String longName, String publicDesc, int type) throws SerializableException;
 
     public class App {
-        private static SiteBarServiceAsync ourInstance = null;
+	private static SiteBarServiceAsync ourInstance = null;
 
-        public static synchronized SiteBarServiceAsync getInstance() {
-            if (ourInstance == null) {
-                ourInstance = (SiteBarServiceAsync) GWT.create(SiteBarService.class);
-                ((ServiceDefTarget) ourInstance).setServiceEntryPoint(GWT.getModuleBaseURL() + "SiteBarService");
-            }
-            return ourInstance;
-        }
+	public static synchronized SiteBarServiceAsync getInstance() {
+	    if (ourInstance == null) {
+		ourInstance = (SiteBarServiceAsync) GWT.create(SiteBarService.class);
+		((ServiceDefTarget) ourInstance).setServiceEntryPoint(GWT.getModuleBaseURL() + "SiteBarService");
+	    }
+	    return ourInstance;
+	}
 
-        public static void setMock(SiteBarServiceAsync mock) {
-            ourInstance = mock;
-        }
+	public static void setMock(final SiteBarServiceAsync mock) {
+	    ourInstance = mock;
+	}
     }
 }

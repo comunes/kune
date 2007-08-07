@@ -11,7 +11,9 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.UIObject;
 
 public class InitAction extends WorkspaceAction {
-    public void execute(Object value) {
+    public static final String NAME = "init";
+
+    public void execute(final Object value) {
 
 	String token = History.getToken();
 	if (token.length() > 0) {
@@ -20,16 +22,16 @@ public class InitAction extends WorkspaceAction {
 	    KuneServiceAsync server = KuneService.App.getInstance();
 	    server.getDefaultGroup(userHash, new AsyncCallback() {
 
-		public void onFailure(Throwable caught) {
+		public void onFailure(final Throwable caught) {
 		    workspace.showError(caught);
 		}
 
-		public void onSuccess(Object result) {
+		public void onSuccess(final Object result) {
 		    GroupDTO group = (GroupDTO) result;
 		    state.setGroup(group);
 		    workspace.setGroup(group);
 		    UIObject.setVisible(DOM.getElementById("initialstatusbar"), false);
-		    dispatcher.fireState(HistoryToken.encode("tab", app.getDefaultToolName()));
+		    dispatcher.fireState(HistoryToken.encode(TabAction.NAME, app.getDefaultToolName()));
 		}
 	    });
 	}

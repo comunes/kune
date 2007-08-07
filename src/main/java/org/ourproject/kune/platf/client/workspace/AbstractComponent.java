@@ -4,10 +4,10 @@ public abstract class AbstractComponent implements WorkspaceComponent {
     protected String encodedState;
 
     public AbstractComponent() {
-	encodedState = "";
+	encodedState = null;
     }
 
-    public void setEncodedState(String encodedState) {
+    public void setEncodedState(final String encodedState) {
 	this.encodedState = encodedState;
     }
 

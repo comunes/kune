@@ -3,6 +3,7 @@ package org.ourproject.kune.platf.client.workspace.actions;
 import org.ourproject.kune.platf.client.Tool;
 
 public class TabAction extends WorkspaceAction {
+    public static final String NAME = "tab";
 
     /**
      * @param (String)toolName
