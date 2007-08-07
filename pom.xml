@@ -11,16 +11,15 @@
 	<url>http://maven.apache.org</url>
 	<dependencies>
 
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.14</version>
-		</dependency>
-
 		<!-- guice -->
 		<dependency>
 			<groupId>com.google.code.guice</groupId>
 			<artifactId>guice</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.guice</groupId>
+			<artifactId>guice-servlet</artifactId>
 			<version>1.0</version>
 		</dependency>
 		<dependency>
@@ -41,60 +40,42 @@
 			<artifactId>gwt-servlet</artifactId>
 			<version>1.4.10</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.gwm</groupId>
 			<artifactId>gwm</artifactId>
 			<version>0.6.6</version>
 		</dependency>
 
+		<!-- utilities -->
 		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.14</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.dozer</groupId>
+			<artifactId>dozer</artifactId>
+			<version>4.0</version>
+		</dependency>
+
+		<!--  smack -->
+		<!--
+			<dependency>
 			<groupId>org.jivesoftware.smack</groupId>
 			<artifactId>smack</artifactId>
 			<version>3.0.4</version>
-		</dependency>
-		<dependency>
+			</dependency>
+			<dependency>
 			<groupId>org.jivesoftware.smackx</groupId>
 			<artifactId>smackx</artifactId>
 			<version>3.0.4</version>
-		</dependency>
-		<dependency>
+			</dependency>
+			<dependency>
 			<groupId>org.jivesoftware.smackx.debugger</groupId>
 			<artifactId>smackx-debugger</artifactId>
 			<version>3.0.4</version>
-		</dependency>
-
-		<!-- jackrabbit -->
-		<dependency>
-			<groupId>javax.jcr</groupId>
-			<artifactId>jcr</artifactId>
-			<version>1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.jackrabbit</groupId>
-			<artifactId>jackrabbit-core</artifactId>
-			<version>1.4-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.jackrabbit</groupId>
-			<artifactId>jackrabbit-webdav</artifactId>
-			<version>1.4-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.jackrabbit</groupId>
-			<artifactId>jackrabbit-jcr-server</artifactId>
-			<version>1.4-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>1.0.20070617</version>
-		</dependency>
+			</dependency>
+		-->
 
 		<!--  mysql -->
 		<dependency>
@@ -158,6 +139,12 @@
 
 
 		<!-- testing dependencies -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.0.20070617</version>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -288,8 +275,8 @@
 				<artifactId>maven-jetty-plugin</artifactId>
 				<version>6.1.5</version>
 				<configuration>
-					<contextPath>/kune</contextPath>
-					<scanIntervalSeconds>10</scanIntervalSeconds>
+					<contextPath>/</contextPath>
+					<scanIntervalSeconds>5</scanIntervalSeconds>
 				</configuration>
 			</plugin>
 
