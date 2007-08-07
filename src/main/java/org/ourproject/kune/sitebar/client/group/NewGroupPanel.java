@@ -1,5 +1,6 @@
 package org.ourproject.kune.sitebar.client.group;
 
+import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.sitebar.client.bar.SiteBarTrans;
 import org.ourproject.kune.sitebar.client.services.Translate;
 
@@ -17,14 +18,14 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class NewGroupPanel extends Composite implements NewGroupView {
     final private NewGroupPresenter presenter;
-    private TextBox shortNameGroup;
-    private TextBox longNameGroup;
-    private TextArea publicDesc;
-    private RadioButton typeOrg;
-    private RadioButton typeCommunity;
-    private RadioButton typeProject;
+    private final TextBox shortNameGroup;
+    private final TextBox longNameGroup;
+    private final TextArea publicDesc;
+    private final RadioButton typeOrg;
+    private final RadioButton typeCommunity;
+    private final RadioButton typeProject;
 
-    public NewGroupPanel(NewGroupPresenter newGroupPresenter) {
+    public NewGroupPanel(final NewGroupPresenter newGroupPresenter) {
         // Intialize
         VerticalPanel generalVP = new VerticalPanel();
         initWidget(generalVP);
@@ -64,18 +65,35 @@ public class NewGroupPanel extends Composite implements NewGroupView {
         // Set Properties
         clearData();
         create.addClickListener(new ClickListener() {
-            public void onClick(Widget arg0) {
+            public void onClick(final Widget arg0) {
                 // TODO group types, licenses
-                presenter.doCreateNewGroup(shortNameGroup.getText(), longNameGroup.getText(), publicDesc.getText(), 0);
+                presenter.doCreateNewGroup(shortNameGroup.getText(), longNameGroup.getText(), publicDesc.getText());
             }
         });
 
         cancel.addClickListener(new ClickListener() {
-            public void onClick(Widget arg0) {
+            public void onClick(final Widget arg0) {
                 presenter.doCancel();
             }
         });
 
+        typeOrg.addClickListener(new ClickListener() {
+            public void onClick(final Widget arg0) {
+                presenter.selectType(GroupDTO.TYPE_ORGANIZATION);
+            }
+        });
+
+        typeCommunity.addClickListener(new ClickListener() {
+            public void onClick(final Widget arg0) {
+                presenter.selectType(GroupDTO.TYPE_COMNUNITY);
+            }
+        });
+
+        typeProject.addClickListener(new ClickListener() {
+            public void onClick(final Widget arg0) {
+                presenter.selectType(GroupDTO.TYPE_PROJECT);
+            }
+        });
     }
 
     public void clearData() {

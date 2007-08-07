@@ -1,5 +1,9 @@
 package org.ourproject.kune.sitebar.client.rpc;
 
+import java.util.List;
+
+import org.ourproject.kune.platf.client.dto.GroupDTO;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.SerializableException;
@@ -11,21 +15,26 @@ public interface SiteBarService extends RemoteService {
 
     void logout() throws SerializableException;
 
-    void createNewGroup(String shortName, String longName, String publicDesc, int type) throws SerializableException;
+    void createNewGroup(GroupDTO group) throws SerializableException;
+
+    /**
+     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.LicenseDTO>
+     */
+    List getAllLicenses() throws SerializableException;
 
     public class App {
-	private static SiteBarServiceAsync ourInstance = null;
+        private static SiteBarServiceAsync ourInstance = null;
 
-	public static synchronized SiteBarServiceAsync getInstance() {
-	    if (ourInstance == null) {
-		ourInstance = (SiteBarServiceAsync) GWT.create(SiteBarService.class);
-		((ServiceDefTarget) ourInstance).setServiceEntryPoint(GWT.getModuleBaseURL() + "SiteBarService");
-	    }
-	    return ourInstance;
-	}
+        public static synchronized SiteBarServiceAsync getInstance() {
+            if (ourInstance == null) {
+                ourInstance = (SiteBarServiceAsync) GWT.create(SiteBarService.class);
+                ((ServiceDefTarget) ourInstance).setServiceEntryPoint(GWT.getModuleBaseURL() + "SiteBarService");
+            }
+            return ourInstance;
+        }
 
-	public static void setMock(final SiteBarServiceAsync mock) {
-	    ourInstance = mock;
-	}
+        public static void setMock(final SiteBarServiceAsync mock) {
+            ourInstance = mock;
+        }
     }
 }

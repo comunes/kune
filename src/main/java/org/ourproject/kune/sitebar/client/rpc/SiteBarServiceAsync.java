@@ -1,5 +1,7 @@
 package org.ourproject.kune.sitebar.client.rpc;
 
+import org.ourproject.kune.platf.client.dto.GroupDTO;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface SiteBarServiceAsync {
@@ -8,6 +10,7 @@ public interface SiteBarServiceAsync {
 
     void logout(AsyncCallback callback);
 
-    void createNewGroup(String shortName, String longName, String publicDesc, int type, AsyncCallback callback);
+    void createNewGroup(GroupDTO group, AsyncCallback callback);
 
+    void getAllLicenses(AsyncCallback callback);
 }

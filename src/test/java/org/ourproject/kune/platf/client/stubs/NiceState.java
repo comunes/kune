@@ -7,8 +7,7 @@ public class NiceState extends State {
 
     public NiceState() {
 	super("userHash");
-	setGroup(new GroupDTO("group name", "groupShortName"));
+	setGroup(new GroupDTO("group name", "groupShortName", "group description", null, GroupDTO.TYPE_ORGANIZATION));
     }
-
 
 }
