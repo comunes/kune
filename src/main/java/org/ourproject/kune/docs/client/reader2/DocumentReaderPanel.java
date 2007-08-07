@@ -1,4 +1,4 @@
-package org.ourproject.kune.docs.client.reader;
+package org.ourproject.kune.docs.client.reader2;
 
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;

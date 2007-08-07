@@ -1,4 +1,4 @@
-package org.ourproject.kune.docs.client.reader;
+package org.ourproject.kune.docs.client.reader2;
 
 import org.ourproject.kune.docs.client.actions.EditAction;
 import org.ourproject.kune.platf.client.View;
