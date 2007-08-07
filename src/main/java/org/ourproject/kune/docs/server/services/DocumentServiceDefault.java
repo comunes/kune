@@ -35,4 +35,9 @@ public class DocumentServiceDefault implements DocumentService {
 	// }
 	return null;
     }
+
+    public String saveContent(final String userHash, final ContentDataDTO contentData) {
+	// TODO Auto-generated method stub
+	return null;
+    }
 }

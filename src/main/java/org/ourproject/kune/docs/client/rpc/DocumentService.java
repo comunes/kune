@@ -12,6 +12,9 @@ public interface DocumentService extends RemoteService {
 
     public ContentDataDTO getContent(String userHash, String ctxRef, String docRef);
 
+    // TODO: cambiar lo que devuelve
+    String saveContent(String userHash, ContentDataDTO contentData);
+
     public class App {
 	private static DocumentServiceAsync ourInstance = null;
 
