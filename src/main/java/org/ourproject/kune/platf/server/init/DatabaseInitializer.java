@@ -32,9 +32,18 @@ public class DatabaseInitializer {
 
     // TODO: sacar al properties
     private void start() {
+	createUsers();
+	createLicenses();
+    }
+
+    private void createUsers() {
 	User user = new User("administrator", "admin", "kune_admin@localhost", "admin");
 	manager.createUser(user);
 	user = new User("site", "site", "kune_site@localhost", "site");
 	manager.createUser(user);
     }
+
+    private void createLicenses() {
+    }
+
 }
