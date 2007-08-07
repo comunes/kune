@@ -8,23 +8,28 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-
-import org.ourproject.kune.platf.server.servlet.KuneServletContext;
-
-import com.google.inject.Injector;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class GWTFilter implements Filter {
-    private Injector injector;
+    // private Injector injector;
+    private final ApplicationFilter app;
+
+    public GWTFilter() {
+	app = new ApplicationFilter("edit", "Kune.html", "gwt/org.ourproject.kune.app.Kune");
+    }
 
     public void init(final FilterConfig config) throws ServletException {
-	injector = KuneServletContext.getInjector(config.getServletContext());
+	app.init(config);
     }
 
     public void destroy() {
     }
 
-    public void doFilter(final ServletRequest req, final ServletResponse resp, final FilterChain chain)
-	    throws IOException, ServletException {
-
+    public void doFilter(final ServletRequest servletRequest, final ServletResponse servletResponse,
+	    final FilterChain filterChain) throws IOException, ServletException {
+	if (!app.doFilter((HttpServletRequest) servletRequest, (HttpServletResponse) servletResponse)) {
+	    filterChain.doFilter(servletRequest, servletResponse);
+	}
     }
 }

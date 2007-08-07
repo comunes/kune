@@ -3,15 +3,10 @@ package org.ourproject.kune.platf.server;
 import javax.persistence.EntityManager;
 
 import org.junit.Before;
-import org.ourproject.kune.platf.server.properties.PropertiesFileName;
 
-import com.google.inject.Binder;
-import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.Module;
 import com.google.inject.Provider;
-import com.wideplay.warp.jpa.JpaUnit;
 import com.wideplay.warp.persist.PersistenceService;
 
 public abstract class PersistenceTest {
@@ -20,24 +15,14 @@ public abstract class PersistenceTest {
 
     @Before
     public void prepare() {
-	Injector create = create(new KunePlatformModule());
-	create.injectMembers(this);
+	Injector injector = TestHelper.create(new KunePlatformModule());
+	PersistenceService persistence = injector.getInstance(PersistenceService.class);
+	persistence.start();
+	injector.injectMembers(this);
     }
 
     public void openTransaction() {
 	getManager().getTransaction().begin();
-    }
-
-    public static Injector create(final Module module) {
-	Injector injector = Guice.createInjector(module, new Module() {
-	    public void configure(Binder binder) {
-		binder.bindConstant().annotatedWith(JpaUnit.class).to("test");
-		binder.bindConstant().annotatedWith(PropertiesFileName.class).to("kune.test.properties");
-	    }
-	});
-	PersistenceService persistence = injector.getInstance(PersistenceService.class);
-	persistence.start();
-	return injector;
     }
 
     public void closeTransaction() {

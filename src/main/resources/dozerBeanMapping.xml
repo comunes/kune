@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mappings PUBLIC "-//DOZER//DTD MAPPINGS//EN"
+   "http://dozer.sourceforge.net/dtd/dozerbeanmapping.dtd">
+<mappings>
+  <configuration>
+    <stop-on-errors>true</stop-on-errors>
+    <date-format>dd/mm/yyyy</date-format>
+    <wildcard>true</wildcard>
+  </configuration>
+
+  <mapping>
+  	<class-a>org.ourproject.kune.platf.client.dto.GroupDTO</class-a>
+  	<class-b>org.ourproject.kune.platf.server.domain.Group</class-b>
+  </mapping>
+</mappings>
