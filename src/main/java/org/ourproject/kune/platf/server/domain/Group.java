@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.wideplay.warp.persist.dao.Finder;
@@ -13,8 +14,12 @@ import com.wideplay.warp.persist.dao.Finder;
 @Table(name = "groups")
 public class Group extends Container {
     private String shortName;
+
     @Enumerated(EnumType.STRING)
     AdmissionType admissionType;
+
+    @OneToOne
+    private ContentDescriptor defaultContent;
 
     public Group() {
 	this(null, null);
