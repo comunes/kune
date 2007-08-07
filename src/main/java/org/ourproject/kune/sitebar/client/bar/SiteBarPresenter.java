@@ -1,6 +1,6 @@
 package org.ourproject.kune.sitebar.client.bar;
 
-import org.ourproject.kune.sitebar.client.group.NewGroupListener;
+import org.ourproject.kune.platf.client.group.NewGroupListener;
 import org.ourproject.kune.sitebar.client.login.LoginListener;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarServiceAsync;

@@ -1,7 +1,7 @@
 package org.ourproject.kune.sitebar.client.bar;
 
-import org.ourproject.kune.sitebar.client.group.NewGroupPanel;
-import org.ourproject.kune.sitebar.client.group.NewGroupPresenter;
+import org.ourproject.kune.platf.client.group.NewGroupPanel;
+import org.ourproject.kune.platf.client.group.NewGroupPresenter;
 import org.ourproject.kune.sitebar.client.login.LoginPanel;
 import org.ourproject.kune.sitebar.client.login.LoginPresenter;
 import org.ourproject.kune.sitebar.client.services.Images;

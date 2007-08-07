@@ -1,6 +1,8 @@
 package org.ourproject.kune.platf.client.dto;
 
-public class LicenseDTO {
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+public class LicenseDTO implements IsSerializable {
 
     private String shortName;
 
@@ -21,80 +23,80 @@ public class LicenseDTO {
     private String url;
 
     public LicenseDTO() {
-        this(null, null, null, null, false, false, false, null, null);
+	this(null, null, null, null, false, false, false, null, null);
     }
 
     public LicenseDTO(final String shortName, final String longName, final String description, final String imageUrl,
-            final boolean isCC, final boolean isCopyleft, final boolean isDeprecated, final String rdf, final String url) {
-        this.shortName = shortName;
-        this.longName = longName;
-        this.description = description;
-        this.imageUrl = imageUrl;
-        this.isCC = isCC;
-        this.isCopyleft = isCopyleft;
-        this.isDeprecated = isDeprecated;
-        this.rdf = rdf;
-        this.url = url;
+	    final boolean isCC, final boolean isCopyleft, final boolean isDeprecated, final String rdf, final String url) {
+	this.shortName = shortName;
+	this.longName = longName;
+	this.description = description;
+	this.imageUrl = imageUrl;
+	this.isCC = isCC;
+	this.isCopyleft = isCopyleft;
+	this.isDeprecated = isDeprecated;
+	this.rdf = rdf;
+	this.url = url;
     }
 
     public String getShortName() {
-        return shortName;
+	return shortName;
     }
 
     public void setShortName(final String shortName) {
-        this.shortName = shortName;
+	this.shortName = shortName;
     }
 
     public String getLongName() {
-        return longName;
+	return longName;
     }
 
     public void setLongName(final String longName) {
-        this.longName = longName;
+	this.longName = longName;
     }
 
     public String getDescription() {
-        return description;
+	return description;
     }
 
     public void setDescription(final String description) {
-        this.description = description;
+	this.description = description;
     }
 
     public String getImageUrl() {
-        return imageUrl;
+	return imageUrl;
     }
 
     public void setImageUrl(final String imageUrl) {
-        this.imageUrl = imageUrl;
+	this.imageUrl = imageUrl;
     }
 
     public String getRdf() {
-        return rdf;
+	return rdf;
     }
 
     public void setRdf(final String rdf) {
-        this.rdf = rdf;
+	this.rdf = rdf;
     }
 
     public String getUrl() {
-        return url;
+	return url;
     }
 
     public void setUrl(final String url) {
-        this.url = url;
+	this.url = url;
     }
 
     public boolean isCC() {
-        return isCC;
+	return isCC;
     }
 
     public boolean isCopyleft() {
-        return isCopyleft;
+	return isCopyleft;
     }
 
     public boolean isDeprecated() {
-        return isDeprecated;
+	return isDeprecated;
     }
 
 }

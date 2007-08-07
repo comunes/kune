@@ -1,4 +1,4 @@
-package org.ourproject.kune.sitebar.client.group;
+package org.ourproject.kune.platf.client.group;
 
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
@@ -27,6 +27,8 @@ public class NewGroupPresenter {
     }
 
     void doCreateNewGroup(final String shortName, final String longName, final String publicDesc) {
+
+	// FIXME: Move out of sitebar
 	SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
 	// TODO
 	GroupDTO group = new GroupDTO(shortName, longName, publicDesc, null, groupType);
@@ -49,6 +51,15 @@ public class NewGroupPresenter {
 
     public void selectType(final int type) {
 	groupType = type;
+    }
+
+    protected void doChooseLicense() {
+
+	// LicenseChoosePresenter licensePresenter = new
+	// LicenseChoosePresenter();
+	// LicenseChoosePanel licensePanel = new
+	// LicenseChoosePanel(licensePresenter);
+	// licensePresenter.init(licensePanel, listener, nonCCLicenses);
     }
 
 }
