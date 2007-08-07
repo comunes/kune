@@ -4,10 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.HashMap;
-
 import javax.jcr.ItemNotFoundException;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,6 +20,7 @@ public class ContentManagerTest {
     ContentManager manager;
     @Inject
     ContentService service;
+    private HashMapContent values;
 
     @Before
     public void init() {
@@ -30,16 +30,26 @@ public class ContentManagerTest {
 	    }
 	}).injectMembers(this);
 	service.start();
+	values = new HashMapContent();
+	values.put("name", "theName");
+	values.put("content", "theContent");
+    }
+
+    @After
+    public void close() {
+	service.stop();
+    }
+
+    @Test
+    public void testPersistOnParent() {
+	String uuid = manager.persist("/kune/group/documents", "theName", values);
+	assertNotNull(uuid);
     }
 
     @Test
     public void testPersist() throws ItemNotFoundException {
-	HashMap<String, String> values = new HashMap<String, String>();
-	values.put("name", "theName");
-	values.put("content", "theContent");
-	String uuid = manager.persist("pages", "theData", new HashMapContent(values));
+	String uuid = manager.persist("/pages", "theData", values);
 	assertNotNull(uuid);
-	System.out.println("UUID: " + uuid);
 	assertTrue(uuid.length() > 1);
 
 	HashMapContent result = (HashMapContent) manager.get(uuid, new HashMapContent("name", "content"));

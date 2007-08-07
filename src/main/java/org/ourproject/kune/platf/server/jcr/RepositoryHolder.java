@@ -21,7 +21,7 @@ public class RepositoryHolder {
 	if (repository == null) {
 	    createRepository(name, configFilePath, homeDir);
 	} else {
-	    throw new RuntimeException("repository already opened!.");
+	    // throw new RuntimeException("repository already opened!.");
 	}
     }
 
@@ -43,5 +43,6 @@ public class RepositoryHolder {
     }
 
     public static void closeRepository() {
+	// repository = null;
     }
 }

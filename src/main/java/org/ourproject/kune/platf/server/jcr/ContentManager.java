@@ -1,5 +1,6 @@
 package org.ourproject.kune.platf.server.jcr;
 
+import javax.jcr.ItemExistsException;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
@@ -14,6 +15,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class ContentManager {
+    private static final String SEPARATOR_REGEX = "/";
     @Inject
     Provider<Session> sessionProvider;
 
@@ -26,9 +28,9 @@ public class ContentManager {
     @JcrTransactional
     public String persist(final String path, final String name, final ContentSource values) {
 	try {
+	    assert (path.charAt(0) == '/');
 	    Session session = sessionProvider.get();
-	    Node root = session.getRootNode();
-	    Node newNode = root.addNode(path);
+	    Node newNode = createPath(path.substring(1), session);
 	    newNode.addMixin("mix:referenceable");
 	    newNode.addMixin("mix:versionable");
 	    persist(newNode, values);
@@ -36,6 +38,16 @@ public class ContentManager {
 	} catch (RepositoryException e) {
 	    throw new RuntimeException(e);
 	}
+    }
+
+    private Node createPath(final String path, final Session session) throws RepositoryException, ItemExistsException,
+	    PathNotFoundException, VersionException, ConstraintViolationException, LockException {
+	Node parent = session.getRootNode();
+	String[] segments = path.split(SEPARATOR_REGEX);
+	for (String segment : segments) {
+	    parent = parent.addNode(segment);
+	}
+	return parent;
     }
 
     private void persist(final Node newNode, final ContentSource values) throws ValueFormatException, VersionException,
