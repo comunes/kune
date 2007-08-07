@@ -2,7 +2,7 @@ body {
     background-color: #FFF;
     color: #000;
     font-family: arial;
-    margin: 0px 5px 0 5px;
+    margin: 5px 5px 0 5px;
 }
 
 #initialstatusbar {
@@ -408,4 +408,10 @@ body {
 .kune-WebSafePalette {
     background-color: #FFF;
     border: 1px solid #AAA;
+    margin: 1px solid red;
+}
+
+.kune-WebSafePalette td {
+    width: 12px;
+    height: 10px;
 }

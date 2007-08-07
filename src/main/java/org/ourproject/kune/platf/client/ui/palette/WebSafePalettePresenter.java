@@ -5,30 +5,23 @@ import java.util.Iterator;
 
 public class WebSafePalettePresenter {
 
-    private WebSafePaletteView view;
-
-    private final ArrayList colorSelectListners;
+    private final ArrayList colorSelectListeners;
 
     public WebSafePalettePresenter() {
-        colorSelectListners = new ArrayList();
-    }
-
-    public void init(final WebSafePaletteView view) {
-        this.view = view;
+        colorSelectListeners = new ArrayList();
     }
 
     public void addColorSelectListener(final ColorSelectListener listener) {
-        colorSelectListners.add(listener);
+        colorSelectListeners.add(listener);
     }
 
     protected void fireColorSelectListeners(final String color) {
-        for (Iterator it = colorSelectListners.iterator(); it.hasNext();) {
+        for (Iterator it = colorSelectListeners.iterator(); it.hasNext();) {
             ((ColorSelectListener) it.next()).onColorSelected(color);
         }
     }
     public void onColorSelected(final int row, final int col) {
         String color = getColor(row, col);
-        view.hide();
         fireColorSelectListeners(color);
     }
 
@@ -43,6 +36,10 @@ public class WebSafePalettePresenter {
         int rc = (db - rb / 6) % 6;
         color = "rgb(" + ra * 51 + ", " + rc * 51 + ", " + rb * 51 + ")";
         return color;
+    }
+
+    public void reset() {
+        colorSelectListeners.clear();
     }
 
 }

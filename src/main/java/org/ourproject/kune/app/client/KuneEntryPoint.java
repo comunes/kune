@@ -15,10 +15,14 @@ public class KuneEntryPoint implements EntryPoint {
     }
 
     public void onModuleLoad() {
-        if (!useServer) MockServer.start(MockServer.GWT);
+        if (!useServer) {
+            MockServer.start(MockServer.GWT);
+        }
 
         String userHash = obtainUserHash();
-        if (isNotValid(userHash)) informUserAndStop();
+        if (isNotValid(userHash)) {
+            informUserAndStop();
+        }
         KunePlatform platform = new KunePlatform();
         platform.install(new KuneModule());
         platform.install(new DocumentModule());
@@ -26,25 +30,18 @@ public class KuneEntryPoint implements EntryPoint {
         app.getDispatcher().fire("init", null);
     }
 
-    private boolean isNotValid(String userHash) {
-	return false;
+    private boolean isNotValid(final String userHash) {
+        return false;
     }
 
     private void informUserAndStop() {
-	throw new RuntimeException("not logged in!");
+        throw new RuntimeException("not logged in!");
     }
 
-    // TODO: decidir una manera de hacer esto, para mi: meterlo en el html y leerlo
+    // TODO: decidir una manera de hacer esto, para mi: meterlo en el html y
+    // leerlo
     private String obtainUserHash() {
-	return "xxxxx";
+        return "xxxxx";
     }
-
-
-
-
-
-
-
-
 
 }

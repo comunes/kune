@@ -10,29 +10,26 @@ public class TextEditorPanel extends Composite implements TextEditorView {
 
     private static final String BACKCOLOR_DISABLED = "#CCC";
 
+    private final TextEditorPresenter presenter;
+
     private final RichTextArea gwtRTarea;
 
     private final TextEditorToolbar textEditorToolbar;
-
-    private final VerticalPanel areaVP;
-
-    private final TextEditorPresenter presenter;
 
     public TextEditorPanel(final TextEditorPresenter initPresenter) {
         this.presenter = initPresenter;
 
         gwtRTarea = new RichTextArea();
         textEditorToolbar = new TextEditorToolbar(gwtRTarea, presenter);
-
-        areaVP = new VerticalPanel();
+        VerticalPanel areaVP = new VerticalPanel();
         areaVP.add(textEditorToolbar);
         areaVP.add(gwtRTarea);
         initWidget(areaVP);
 
         // area.setHeight("20em");
-        gwtRTarea.setHeight("100%");
         gwtRTarea.setWidth("100%");
         areaVP.setWidth("100%");
+        // textEditorToolbar.setWidth("100%");
     }
 
     public void setEnabled(final boolean enabled) {

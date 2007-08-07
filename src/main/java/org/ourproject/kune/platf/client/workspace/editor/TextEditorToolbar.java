@@ -3,7 +3,6 @@ package org.ourproject.kune.platf.client.workspace.editor;
 import org.ourproject.kune.platf.client.ui.palette.ColorSelectListener;
 import org.ourproject.kune.platf.client.ui.palette.WebSafePalettePanel;
 import org.ourproject.kune.platf.client.ui.palette.WebSafePalettePresenter;
-import org.ourproject.kune.sitebar.client.Site;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.Constants;
@@ -16,6 +15,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.ImageBundle;
 import com.google.gwt.user.client.ui.KeyboardListener;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.PushButton;
@@ -156,10 +156,6 @@ public class TextEditorToolbar extends Composite {
     }
 
     /**
-     * Others: fontdialog.png imagebutton.png inserthyperlink.png
-     */
-
-    /**
      * This {@link Constants} interface is used to make the toolbar's strings
      * internationalizable.
      */
@@ -275,9 +271,23 @@ public class TextEditorToolbar extends Composite {
                     extended.createLink(url);
                 }
             } else if (sender == backColor) {
-                showPalette(backColor.getAbsoluteLeft(), backColor.getAbsoluteTop() + 20);
+                showPalette(sender, sender.getAbsoluteLeft(), sender.getAbsoluteTop() + 20);
+                palettePresenter.addColorSelectListener(new ColorSelectListener() {
+                    public void onColorSelected(final String color) {
+                        basic.setBackColor(color);
+                        popupPalette.hide();
+                        palettePresenter.reset();
+                    }
+                });
             } else if (sender == fontColor) {
-                showPalette(fontColor.getAbsoluteLeft(), fontColor.getAbsoluteTop() + 20);
+                showPalette(sender, sender.getAbsoluteLeft(), sender.getAbsoluteTop() + 20);
+                palettePresenter.addColorSelectListener(new ColorSelectListener() {
+                    public void onColorSelected(final String color) {
+                        basic.setForeColor(color);
+                        popupPalette.hide();
+                        palettePresenter.reset();
+                    }
+                });
             } else if (sender == removeLink) {
                 extended.removeLink();
             } else if (sender == hr) {
@@ -370,6 +380,8 @@ public class TextEditorToolbar extends Composite {
 
     private PopupPanel popupPalette;
 
+    private WebSafePalettePresenter palettePresenter;
+
     /**
      * Creates a new toolbar that drives the given rich text area.
      * 
@@ -433,9 +445,11 @@ public class TextEditorToolbar extends Composite {
             richText.addKeyboardListener(listener);
             richText.addClickListener(listener);
         }
-        // ExpandPanel expand = new ExpandPanel(ExpandPanel.HORIZ);
-        // topPanel.add(expand);
-        // topPanel.setCellWidth(expand, "100%");
+
+        Label expand = new Label("");
+        expand.setWidth("100%");
+        topPanel.add(expand);
+        topPanel.setCellWidth(expand, "100%");
 
         save = new PushButton("Save", new ClickListener() {
             public void onClick(final Widget sender) {
@@ -567,17 +581,10 @@ public class TextEditorToolbar extends Composite {
         return tb;
     }
 
-    public void showPalette(final int left, final int top) {
+    public void showPalette(final Widget sender, final int left, final int top) {
         if (palettePanel == null) {
-            WebSafePalettePresenter palettePresenter = new WebSafePalettePresenter();
+            palettePresenter = new WebSafePalettePresenter();
             palettePanel = new WebSafePalettePanel(palettePresenter);
-            palettePresenter.init(palettePanel);
-            palettePresenter.addColorSelectListener(new ColorSelectListener() {
-                public void onColorSelected(final String color) {
-                    Site.info(color);
-                    popupPalette.hide();
-                }
-            });
         }
         popupPalette = new PopupPanel(true, true);
         popupPalette.setWidget(palettePanel);

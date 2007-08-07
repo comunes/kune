@@ -32,14 +32,12 @@ import com.google.gwt.user.client.ui.TableListener;
  */
 public class WebSafePalettePanel extends Composite implements WebSafePaletteView {
 
-    Grid paletteGrid = null;
-
     private final WebSafePalettePresenter presenter;
 
     public WebSafePalettePanel(final WebSafePalettePresenter initPresenter) {
         this.presenter = initPresenter;
 
-        paletteGrid = new Grid(ROWS, COLS);
+        Grid paletteGrid = new Grid(ROWS, COLS);
 
         initWidget(paletteGrid);
 
@@ -55,8 +53,6 @@ public class WebSafePalettePanel extends Composite implements WebSafePaletteView
                     row = n / COLS;
                     col = n % COLS;
                     String currentColor = "#" + COLORS[c] + COLORS[a] + COLORS[b];
-                    paletteGrid.getCellFormatter().setWidth(row, col, "12px");
-                    paletteGrid.getCellFormatter().setHeight(row, col, "10px");
                     paletteGrid.setText(row, col, " ");
                     DOM.setStyleAttribute(paletteGrid.getCellFormatter().getElement(row, col), "backgroundColor",
                             currentColor);
@@ -64,7 +60,7 @@ public class WebSafePalettePanel extends Composite implements WebSafePaletteView
                 }
             }
         }
-        paletteGrid.addStyleName("web-safe-palette");
+        paletteGrid.addStyleName("kune-WebSafePalette");
         paletteGrid.addTableListener(new TableListener() {
             public void onCellClicked(final SourcesTableEvents sender, final int row, final int col) {
                 presenter.onColorSelected(row, col);
@@ -72,20 +68,12 @@ public class WebSafePalettePanel extends Composite implements WebSafePaletteView
         });
     }
 
-    public void hide() {
-        // TODO Auto-generated method stub
-
-    }
-
     public void show() {
-        // TODO Auto-generated method stub
-
+        this.setVisible(true);
     }
 
-    // public void show(final int left, final int top) {
-    // paletteGrid.setVisible(true);
-    // super.show();
-    // super.setPopupPosition(left, top);
-    // }
+    public void hide() {
+        this.setVisible(false);
+    }
 
 }
