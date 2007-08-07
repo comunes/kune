@@ -42,6 +42,11 @@ public class DocumentToolTest {
 		ctx.add(new ContextItemDTO("name", "type", "child"));
 		async.onSuccess(ctx);
 	    }
+
+	    public void saveContent(final String userHash, final ContentDataDTO contentData,
+		    final AsyncCallback asyncCallback) {
+
+	    }
 	});
 	documentReaderView = EasyMock.createStrictMock(DocumentReaderView.class);
 	navigationView = EasyMock.createStrictMock(NavigationView.class);

@@ -10,7 +10,7 @@ import org.ourproject.kune.platf.client.workspace.editor.TextEditorPresenter;
 
 public class DocumentFactory {
 
-    public static final DocumentReaderPresenter createDocumentReader(final DocumentContentProvider provider,
+    public static final DocumentReaderPresenter createDocumentReader(final DocumentContentDriver provider,
 	    final DocumentReaderListener listener) {
 	DocumentReaderView readerView = DocumentViewFactory.getDocumentReaderView(listener);
 	return new DocumentReaderPresenter(provider, readerView);

@@ -36,4 +36,12 @@ public class DocumentServiceMocked extends MockedService implements DocumentServ
 	});
     }
 
+    public void saveContent(final String userHash, final ContentDataDTO contentData, final AsyncCallback asyncCallback) {
+	delay(new Delayer() {
+	    public void run() {
+		asyncCallback.onSuccess(null);
+	    }
+	});
+    }
+
 }

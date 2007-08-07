@@ -1,23 +1,19 @@
 package org.ourproject.kune.platf.client.workspace.editor;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.sitebar.client.Site;
 
 import com.google.gwt.user.client.Timer;
 
 public class TextEditorPresenter implements TextEditor {
-
     private boolean editingHtml;
-
     private TextEditorView view;
-
     private final Timer saveTimer;
-
     private boolean savePending;
-
     private final boolean autoSave;
+    private final TextEditorListener listener;
 
     public TextEditorPresenter(final TextEditorListener listener, final boolean isAutoSave) {
+	this.listener = listener;
 	autoSave = isAutoSave;
 	savePending = false;
 	editingHtml = false;
@@ -49,13 +45,11 @@ public class TextEditorPresenter implements TextEditor {
     }
 
     public void onSave() {
-	// TODO
-	Site.info("Saved hardcoded in TextEditorPresenter");
+	listener.onSave();
     }
 
     public void onCancel() {
-	// TODO
-	Site.info("Cancel hardcoded in TextEditorPresenter");
+	listener.onCancel();
     }
 
     public void onEditHTML() {
@@ -86,5 +80,9 @@ public class TextEditorPresenter implements TextEditor {
 
     public View getView() {
 	return view;
+    }
+
+    public String getContent() {
+	return view.getHTML();
     }
 }

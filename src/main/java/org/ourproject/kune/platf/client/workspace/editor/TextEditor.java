@@ -6,4 +6,6 @@ public interface TextEditor {
     public View getView();
 
     public void setContent(String content);
+
+    public String getContent();
 }

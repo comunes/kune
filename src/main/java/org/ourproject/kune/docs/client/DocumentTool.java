@@ -2,6 +2,7 @@ package org.ourproject.kune.docs.client;
 
 import org.ourproject.kune.docs.client.folder.NavigationView;
 import org.ourproject.kune.docs.client.folder.NavigatorPresenter;
+import org.ourproject.kune.docs.client.reader.DocumentReaderView;
 import org.ourproject.kune.docs.client.rpc.DocumentService;
 import org.ourproject.kune.platf.client.AbstractTool;
 import org.ourproject.kune.platf.client.dispatch.Action;
@@ -45,9 +46,12 @@ public class DocumentTool extends AbstractTool {
     }
 
     protected WorkspaceComponent createContent() {
-	DocumentContentProvider provider = new DocumentContentProvider(DocumentService.App.getInstance(), state);
-	DocumentView view = DocumentViewFactory.getDocumentView();
-	document = new DocumentPresenter(provider, view);
+	DocumentContentDriver provider = new DocumentContentDriver(DocumentService.App.getInstance(), state);
+	DocumentPresenter presenter = new DocumentPresenter(provider);
+	DocumentView docView = DocumentViewFactory.getDocumentView();
+	DocumentReaderView readerView = DocumentViewFactory.getDocumentReaderView(presenter);
+	presenter.setViews(docView, readerView);
+	document = presenter;
 	return document;
     }
 
