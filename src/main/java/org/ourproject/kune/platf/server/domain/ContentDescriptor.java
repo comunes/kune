@@ -11,17 +11,18 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "contents")
-public class Content extends Ajo implements HasContent {
+public class ContentDescriptor extends Ajo implements HasContent {
     @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private List<Tag> tags;
     @OneToOne
     private License license;
     private Rate rate;
-    private String uuid;
+    @OneToOne
+    private Revision revision;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Translation> translations;
 
-    public Content() {
+    public ContentDescriptor() {
 	translations = new ArrayList<Translation>();
 	tags = new ArrayList<Tag>();
     }
@@ -50,12 +51,12 @@ public class Content extends Ajo implements HasContent {
 	this.rate = rate;
     }
 
-    public String getUuid() {
-	return uuid;
+    public Revision getRevision() {
+	return revision;
     }
 
-    public void setUuid(final String uuid) {
-	this.uuid = uuid;
+    public void setRevision(final Revision revision) {
+	this.revision = revision;
     }
 
     public List<Translation> getTranslations() {
