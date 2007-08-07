@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- <!DOCTYPE Repository PUBLIC "-//The Apache Software Foundation//DTD Repository//EN" "file://config.dtd"> -->
+
+<Repository>
+
+    <FileSystem class="org.apache.jackrabbit.core.fs.mem.MemoryFileSystem">
+		<param name="path" value="${rep.home}/repository"/>
+    </FileSystem>
+
+    <Security appName="Jackrabbit">
+        <AccessManager class="org.apache.jackrabbit.core.security.SimpleAccessManager"/>
+
+		<LoginModule
+			class="org.apache.jackrabbit.core.security.SimpleLoginModule">
+	    	<param name="anonymousId" value="anonymous" />
+		</LoginModule>
+    </Security>
+
+    <Workspaces rootPath="${rep.home}/workspaces" defaultWorkspace="default"/>
+    	<Workspace name="${wsp.name}">
+	    <FileSystem class="org.apache.jackrabbit.core.fs.mem.MemoryFileSystem">
+	        <param name="path" value="${wsp.home}"/>
+	    </FileSystem>
+	    <!--
+	    <PersistenceManager class="org.apache.jackrabbit.core.state.db.DerbyPersistenceManager">
+	      <param name="url" value="jdbc:derby:${wsp.home}/db;create=true"/>
+	      <param name="schemaObjectPrefix" value="${wsp.name}_"/>
+	      <param name="externalBLOBs" value="false"/>
+	    </PersistenceManager>
+	    -->
+		<PersistenceManager
+        	class="org.apache.jackrabbit.core.persistence.db.SimpleDbPersistenceManager">
+  		  <param name="url" value="jdbc:h2:mem:workspace"/>
+		  <param name="driver" value="org.h2.Driver"/>
+  		  <param name="schema" value="h2"/>
+  		  <param name="schemaObjectPrefix" value="${wsp.name}_"/>
+		</PersistenceManager>
+		<SearchIndex class="org.apache.jackrabbit.core.query.lucene.SearchIndex">
+	  		<param name="path" value="${wsp.home}/index"/>
+	    	<param name="textFilterClasses" value="org.apache.jackrabbit.extractor.PlainTextExtractor,org.apache.jackrabbit.extractor.MsExcelTextExtractor,org.apache.jackrabbit.extractor.MsPowerPointTextExtractor,org.apache.jackrabbit.extractor.MsWordTextExtractor,org.apache.jackrabbit.extractor.PdfTextExtractor,org.apache.jackrabbit.extractor.HTMLTextExtractor,org.apache.jackrabbit.extractor.XMLTextExtractor,org.apache.jackrabbit.extractor.RTFTextExtractor,org.apache.jackrabbit.extractor.OpenOfficeTextExtractor" />
+
+			<!-- These are all default values. You can change them if you want -->
+	        <param name="useCompoundFile" value="true"/>
+	        <param name="minMergeDocs" value="100"/>
+	        <param name="volatileIdleTime" value="3"/>
+	        <param name="maxMergeDocs" value="100000"/>
+	        <param name="mergeFactor" value="10"/>
+	        <param name="bufferSize" value="10"/>
+	        <param name="cacheSize" value="1000"/>
+	        <param name="forceConsistencyCheck" value="false"/>
+	        <param name="autoRepair" value="true"/>
+	        <param name="analyzer" value="org.apache.lucene.analysis.standard.StandardAnalyzer"/>
+	        <param name="queryClass" value="org.apache.jackrabbit.core.query.QueryImpl"/>
+	        <param name="maxIdleTime" value="-1"/>
+	        <!-- end of default values -->
+
+	    	<param name="supportHighlighting" value="true"/>
+	    	<param name="excerptProviderClass" value="org.apache.jackrabbit.core.query.lucene.DefaultXMLExcerpt"/>
+	    	<param name="respectDocumentOrder" value="false"/>
+		</SearchIndex>
+    </Workspace>
+
+    <Versioning rootPath="${rep.home}/versions">
+
+	    <FileSystem class="org.apache.jackrabbit.core.fs.mem.MemoryFileSystem">
+	        <param name="path" value="${rep.home}/versions"/>
+	    </FileSystem>
+	    <PersistenceManager class="org.apache.jackrabbit.core.state.db.SimpleDbPersistenceManager">
+		    <param name="driver" value="org.h2.Driver"/>
+       		<param name="url" value="jdbc:h2:mem:versions"/>
+       		<param name="schema" value="h2"/>
+	       	<param name="user" value="sa"/>
+       		<param name="externalBLOBs" value="false"/>
+	   </PersistenceManager>
+    </Versioning>
+
+    <SearchIndex class="org.apache.jackrabbit.core.query.lucene.SearchIndex">
+        <param name="path" value="${rep.home}/repository/index"/>
+    </SearchIndex>
+</Repository>
