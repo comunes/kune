@@ -1,7 +1,7 @@
 package org.ourproject.kune.platf.client;
 
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
-import org.ourproject.kune.platf.client.workspace.WorkspaceComponent;
+import org.ourproject.kune.workspace.client.WorkspaceComponent;
 
 public abstract class AbstractTool implements Tool {
     public final String name;

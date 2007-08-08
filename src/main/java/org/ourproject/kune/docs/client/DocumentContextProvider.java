@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import org.ourproject.kune.docs.client.rpc.DocumentServiceAsync;
 import org.ourproject.kune.platf.client.State;
-import org.ourproject.kune.platf.client.workspace.ContextDataProvider;
-import org.ourproject.kune.platf.client.workspace.dto.ContextDataDTO;
-import org.ourproject.kune.platf.client.workspace.dto.ContextItemDTO;
+import org.ourproject.kune.workspace.client.ContextDataProvider;
+import org.ourproject.kune.workspace.client.dto.ContextDataDTO;
+import org.ourproject.kune.workspace.client.dto.ContextItemDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 

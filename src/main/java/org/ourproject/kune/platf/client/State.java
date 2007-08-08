@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.ourproject.kune.platf.client.dispatch.HistoryTokenOld;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.workspace.actions.StateAction;
+import org.ourproject.kune.workspace.client.actions.StateAction;
 
 /**
  * RESPONSABILITIES: - Mantains the user's application state - Gererates

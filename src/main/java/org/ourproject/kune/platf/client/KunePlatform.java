@@ -10,7 +10,7 @@ import org.ourproject.kune.platf.client.extend.ClientModule;
 import org.ourproject.kune.platf.client.extend.Register;
 import org.ourproject.kune.platf.client.services.Services;
 import org.ourproject.kune.platf.client.utils.PrefetchUtilites;
-import org.ourproject.kune.platf.client.workspace.actions.DefaultActionInjector;
+import org.ourproject.kune.workspace.client.actions.DefaultActionInjector;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;

@@ -1,8 +1,8 @@
 package org.ourproject.kune.docs.server.services;
 
 import org.ourproject.kune.docs.client.rpc.DocumentService;
-import org.ourproject.kune.platf.client.workspace.dto.ContentDataDTO;
-import org.ourproject.kune.platf.client.workspace.dto.ContextDataDTO;
+import org.ourproject.kune.workspace.client.dto.ContentDataDTO;
+import org.ourproject.kune.workspace.client.dto.ContextDataDTO;
 
 public class DocumentServiceDefault implements DocumentService {
     private static final long serialVersionUID = 1L;

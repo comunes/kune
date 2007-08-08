@@ -13,9 +13,9 @@ import org.ourproject.kune.docs.client.rpc.DocumentService;
 import org.ourproject.kune.docs.client.rpc.DocumentServiceAsync;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.stubs.NiceState;
-import org.ourproject.kune.platf.client.workspace.dto.ContentDataDTO;
-import org.ourproject.kune.platf.client.workspace.dto.ContextDataDTO;
-import org.ourproject.kune.platf.client.workspace.dto.ContextItemDTO;
+import org.ourproject.kune.workspace.client.dto.ContentDataDTO;
+import org.ourproject.kune.workspace.client.dto.ContextDataDTO;
+import org.ourproject.kune.workspace.client.dto.ContextItemDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 

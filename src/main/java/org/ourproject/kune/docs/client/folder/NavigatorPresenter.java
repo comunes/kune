@@ -3,11 +3,11 @@ package org.ourproject.kune.docs.client.folder;
 import java.util.ArrayList;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.workspace.AbstractComponent;
-import org.ourproject.kune.platf.client.workspace.ContextDataProvider;
-import org.ourproject.kune.platf.client.workspace.ContextDataProvider.ContextDataAcceptor;
-import org.ourproject.kune.platf.client.workspace.dto.ContextDataDTO;
-import org.ourproject.kune.platf.client.workspace.dto.ContextItemDTO;
+import org.ourproject.kune.workspace.client.AbstractComponent;
+import org.ourproject.kune.workspace.client.ContextDataProvider;
+import org.ourproject.kune.workspace.client.ContextDataProvider.ContextDataAcceptor;
+import org.ourproject.kune.workspace.client.dto.ContextDataDTO;
+import org.ourproject.kune.workspace.client.dto.ContextItemDTO;
 
 public class NavigatorPresenter extends AbstractComponent implements ContextDataAcceptor {
     private final NavigationView view;

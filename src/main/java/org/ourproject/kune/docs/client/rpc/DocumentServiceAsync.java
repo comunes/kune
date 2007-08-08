@@ -1,6 +1,6 @@
 package org.ourproject.kune.docs.client.rpc;
 
-import org.ourproject.kune.platf.client.workspace.dto.ContentDataDTO;
+import org.ourproject.kune.workspace.client.dto.ContentDataDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 

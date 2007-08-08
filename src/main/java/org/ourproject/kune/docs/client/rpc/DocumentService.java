@@ -1,7 +1,7 @@
 package org.ourproject.kune.docs.client.rpc;
 
-import org.ourproject.kune.platf.client.workspace.dto.ContentDataDTO;
-import org.ourproject.kune.platf.client.workspace.dto.ContextDataDTO;
+import org.ourproject.kune.workspace.client.dto.ContentDataDTO;
+import org.ourproject.kune.workspace.client.dto.ContextDataDTO;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;

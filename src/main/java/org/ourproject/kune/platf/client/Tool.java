@@ -2,7 +2,7 @@ package org.ourproject.kune.platf.client;
 
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
-import org.ourproject.kune.platf.client.workspace.WorkspaceComponent;
+import org.ourproject.kune.workspace.client.WorkspaceComponent;
 
 public interface Tool {
     String getName();

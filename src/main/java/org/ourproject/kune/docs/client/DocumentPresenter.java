@@ -3,12 +3,12 @@ package org.ourproject.kune.docs.client;
 import org.ourproject.kune.docs.client.reader.DocumentReaderListener;
 import org.ourproject.kune.docs.client.reader.DocumentReaderView;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.workspace.ContentDataDriver.ContentDataAcceptor;
-import org.ourproject.kune.platf.client.workspace.ContentDataDriver.SaveListener;
-import org.ourproject.kune.platf.client.workspace.dto.ContentDataDTO;
-import org.ourproject.kune.platf.client.workspace.editor.TextEditor;
-import org.ourproject.kune.platf.client.workspace.editor.TextEditorListener;
 import org.ourproject.kune.sitebar.client.Site;
+import org.ourproject.kune.workspace.client.ContentDataDriver.ContentDataAcceptor;
+import org.ourproject.kune.workspace.client.ContentDataDriver.SaveListener;
+import org.ourproject.kune.workspace.client.dto.ContentDataDTO;
+import org.ourproject.kune.workspace.client.editor.TextEditor;
+import org.ourproject.kune.workspace.client.editor.TextEditorListener;
 
 public class DocumentPresenter implements Document, DocumentReaderListener, TextEditorListener {
 

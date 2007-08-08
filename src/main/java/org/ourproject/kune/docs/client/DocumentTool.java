@@ -6,8 +6,8 @@ import org.ourproject.kune.docs.client.reader.DocumentReaderView;
 import org.ourproject.kune.docs.client.rpc.DocumentService;
 import org.ourproject.kune.platf.client.AbstractTool;
 import org.ourproject.kune.platf.client.dispatch.Action;
-import org.ourproject.kune.platf.client.workspace.WorkspaceComponent;
-import org.ourproject.kune.platf.client.workspace.admin.AjoAdmin;
+import org.ourproject.kune.workspace.client.WorkspaceComponent;
+import org.ourproject.kune.workspace.client.admin.AjoAdmin;
 
 public class DocumentTool extends AbstractTool {
     public static final String NAME = "docs";

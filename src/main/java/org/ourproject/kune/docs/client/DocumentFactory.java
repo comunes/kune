@@ -3,10 +3,10 @@ package org.ourproject.kune.docs.client;
 import org.ourproject.kune.docs.client.reader.DocumentReaderListener;
 import org.ourproject.kune.docs.client.reader.DocumentReaderPresenter;
 import org.ourproject.kune.docs.client.reader.DocumentReaderView;
-import org.ourproject.kune.platf.client.workspace.editor.TextEditor;
-import org.ourproject.kune.platf.client.workspace.editor.TextEditorListener;
-import org.ourproject.kune.platf.client.workspace.editor.TextEditorPanel;
-import org.ourproject.kune.platf.client.workspace.editor.TextEditorPresenter;
+import org.ourproject.kune.workspace.client.editor.TextEditor;
+import org.ourproject.kune.workspace.client.editor.TextEditorListener;
+import org.ourproject.kune.workspace.client.editor.TextEditorPanel;
+import org.ourproject.kune.workspace.client.editor.TextEditorPresenter;
 
 public class DocumentFactory {
 

@@ -1,11 +1,11 @@
 package org.ourproject.kune.docs.client.reader;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.workspace.AbstractComponent;
-import org.ourproject.kune.platf.client.workspace.ContentDataDriver;
-import org.ourproject.kune.platf.client.workspace.ContentDataDriver.ContentDataAcceptor;
-import org.ourproject.kune.platf.client.workspace.dto.ContentDataDTO;
-import org.ourproject.kune.platf.client.workspace.dto.ContextItemDTO;
+import org.ourproject.kune.workspace.client.AbstractComponent;
+import org.ourproject.kune.workspace.client.ContentDataDriver;
+import org.ourproject.kune.workspace.client.ContentDataDriver.ContentDataAcceptor;
+import org.ourproject.kune.workspace.client.dto.ContentDataDTO;
+import org.ourproject.kune.workspace.client.dto.ContextItemDTO;
 
 public class DocumentReaderPresenter extends AbstractComponent implements DocumentReader, ContentDataAcceptor {
     private final DocumentReaderView view;
