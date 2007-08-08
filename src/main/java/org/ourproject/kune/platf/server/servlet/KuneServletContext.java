@@ -27,6 +27,12 @@ public class KuneServletContext {
 	return injector;
     }
 
+    public static Injector installInjector(final ServletContext ctx, final Module... modules) {
+	Injector injector = Guice.createInjector(modules);
+	ctx.setAttribute(KEY_IOC, injector);
+	return injector;
+    }
+
     public static Class<? extends RemoteService> getRemoteService(final ServletConfig config) throws ServletException {
 	String serviceClassName = config.getInitParameter(REMOTE_SERVICE);
 	if (serviceClassName == null) {

@@ -8,24 +8,23 @@ import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 
 import com.google.gwt.user.client.rpc.SerializableException;
-import com.wideplay.warp.persist.Transactional;
+import com.google.inject.Inject;
 
 public class KuneServiceDefault implements KuneService {
     private Mapper mapper;
     private UserSession userSession;
 
-    @Transactional
     public GroupDTO getDefaultGroup(final String userHash) {
 	User user = userSession.getUser();
 	return mapper.map(user.getUserGroup(), GroupDTO.class);
     }
 
+    @Inject
     public void setUserSession(final UserSession userSession) {
 	this.userSession = userSession;
     }
 
     public void createNewGroup(final GroupDTO group) throws SerializableException {
-	// TODO
     }
 
     public List getAllLicenses() throws SerializableException {
@@ -37,4 +36,10 @@ public class KuneServiceDefault implements KuneService {
 	// TODO Auto-generated method stub
 	return null;
     }
+
+    @Inject
+    public void setMapper(final Mapper mapper) {
+	this.mapper = mapper;
+    }
+
 }

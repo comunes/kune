@@ -8,18 +8,30 @@
     <display-name>kune</display-name>
     <description>kune</description>
 
+<!--
     <context-param>
             <param-name>com.google.inject.Module</param-name>
             <param-value>org.ourproject.kune.app.server.KuneAppModule</param-value>
     </context-param>
+ -->
 
     <filter>
-        <filter-name>gwt</filter-name>
-        <filter-class>org.ourproject.kune.app.server.servlet.GWTFilter</filter-class>
+        <filter-name>guice</filter-name>
+        <filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
     </filter>
 
     <filter-mapping>
-        <filter-name>gwt</filter-name>
+        <filter-name>guice</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>kune</filter-name>
+        <filter-class>org.ourproject.kune.app.server.KuneAppFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>kune</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 

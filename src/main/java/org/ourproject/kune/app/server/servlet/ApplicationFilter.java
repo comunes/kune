@@ -3,7 +3,6 @@ package org.ourproject.kune.app.server.servlet;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,6 +14,7 @@ public class ApplicationFilter extends AbstractProcessor {
     private final String applicationName;
     private final String appHome;
     private final String defaultFile;
+    private ApplicationListener appListener;
 
     public ApplicationFilter(final String applicationName, final String defaultFile, final String appHome) {
 	super(SimpleFilter.GET);
@@ -51,12 +51,16 @@ public class ApplicationFilter extends AbstractProcessor {
     }
 
     private void onShowHome(final HttpServletRequest request, final HttpServletResponse response) {
-	log.debug("SETTING COOKIE!!!");
-	response.addCookie(new Cookie("userHash", "from.server:25938475932847"));
+	injector.injectMembers(appListener);
+	appListener.onApplicationStart(request, response);
     }
 
     private boolean isHome(final String relativeURL) {
 	return relativeURL.length() == 1 && relativeURL.charAt(0) == '/';
+    }
+
+    public void setListener(final ApplicationListener appListener) {
+	this.appListener = appListener;
     }
 
 }

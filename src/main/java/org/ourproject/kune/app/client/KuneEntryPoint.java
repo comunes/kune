@@ -4,6 +4,7 @@ import org.ourproject.kune.docs.client.DocumentModule;
 import org.ourproject.kune.platf.client.Application;
 import org.ourproject.kune.platf.client.KuneModule;
 import org.ourproject.kune.platf.client.KunePlatform;
+import org.ourproject.kune.platf.client.workspace.actions.InitAction;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -28,7 +29,7 @@ public class KuneEntryPoint implements EntryPoint {
 	platform.install(new KuneModule());
 	platform.install(new DocumentModule());
 	Application app = platform.buildApplication(userHash);
-	app.getDispatcher().fire("init", null);
+	app.getDispatcher().fire(InitAction.NAME, null);
     }
 
     private boolean isNotValid(final String userHash) {
