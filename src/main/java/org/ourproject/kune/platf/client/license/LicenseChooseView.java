@@ -1,7 +1,5 @@
 package org.ourproject.kune.platf.client.license;
 
-import java.util.List;
-
 import org.ourproject.kune.platf.client.View;
 
 public interface LicenseChooseView extends View {
@@ -16,5 +14,9 @@ public interface LicenseChooseView extends View {
 
     boolean permitComercial();
 
-    void setDefaults(List nonCCLicenses);
+    void reset();
+
+    void showNotCCoptiones();
+
+    void showCCoptions();
 }

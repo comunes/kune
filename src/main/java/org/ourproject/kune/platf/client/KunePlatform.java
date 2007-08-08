@@ -39,7 +39,7 @@ public class KunePlatform implements Register {
     }
 
     public Application buildApplication(final String userHash) {
-	State state = new State(userHash);
+	final State state = new State(userHash);
 	Services services = new Services();
 	DefaultApplication app = new DefaultApplication(state, services);
 	DefaultDispatcher dispatcher = new DefaultDispatcher(new DefaultActionInjector(app));
@@ -49,6 +49,7 @@ public class KunePlatform implements Register {
 	DeferredCommand.addCommand(new Command() {
 	    public void execute() {
 		PrefetchUtilites.preFetchImpImages();
+		PrefetchUtilites.preFetchLicenses(state);
 	    }
 	});
 	return app;

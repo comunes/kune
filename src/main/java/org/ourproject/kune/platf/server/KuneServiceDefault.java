@@ -1,10 +1,13 @@
 package org.ourproject.kune.platf.server;
 
+import java.util.List;
+
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.rpc.KuneService;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 
+import com.google.gwt.user.client.rpc.SerializableException;
 import com.wideplay.warp.persist.Transactional;
 
 public class KuneServiceDefault implements KuneService {
@@ -21,4 +24,17 @@ public class KuneServiceDefault implements KuneService {
 	this.userSession = userSession;
     }
 
+    public void createNewGroup(final GroupDTO group) throws SerializableException {
+	// TODO
+    }
+
+    public List getAllLicenses() throws SerializableException {
+	// TODO Auto-generated method stub
+	return null;
+    }
+
+    public List getNotCCLicenses() throws SerializableException {
+	// TODO Auto-generated method stub
+	return null;
+    }
 }

@@ -24,6 +24,7 @@ public class NewGroupPanel extends Composite implements NewGroupView {
     private final RadioButton typeOrg;
     private final RadioButton typeCommunity;
     private final RadioButton typeProject;
+    private final Label licenseLabel;
 
     public NewGroupPanel(final NewGroupPresenter newGroupPresenter) {
 	// Intialize
@@ -36,7 +37,7 @@ public class NewGroupPanel extends Composite implements NewGroupView {
 	longNameGroup = new TextBox();
 	publicDesc = new TextArea();
 	HorizontalPanel licenseHP = new HorizontalPanel();
-	Label licenseLabel = new Label();
+	licenseLabel = new Label();
 	Button chooseLicense = new Button(t.ChooseLicense());
 	VerticalPanel typesVP = new VerticalPanel();
 	typeOrg = new RadioButton("typeGroup", t.Organization());
@@ -48,8 +49,8 @@ public class NewGroupPanel extends Composite implements NewGroupView {
 
 	// Layout
 	generalVP.add(fieldGrid);
-	licenseHP.add(licenseLabel);
 	licenseHP.add(chooseLicense);
+	licenseHP.add(licenseLabel);
 	typesVP.add(typeOrg);
 	typesVP.add(typeCommunity);
 	typesVP.add(typeProject);
@@ -110,6 +111,11 @@ public class NewGroupPanel extends Composite implements NewGroupView {
 	shortNameGroup.setText("");
 	longNameGroup.setText("");
 	publicDesc.setText("");
+	licenseLabel.setText("");
 	typeOrg.setChecked(true);
+    }
+
+    public void setLicense(final String longName) {
+	licenseLabel.setText(longName);
     }
 }

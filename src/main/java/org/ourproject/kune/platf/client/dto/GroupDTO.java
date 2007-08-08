@@ -11,24 +11,24 @@ public class GroupDTO implements IsSerializable {
     private String shortName;
     private String name;
     private String publicDesc;
-    private Long defaultLicense;
+    private String defaultLicenseShortName;
     private int type;
 
     public GroupDTO() {
 	this(null, null, null, null, TYPE_ORGANIZATION);
     }
 
-    public GroupDTO(final String name, final String shortName, final String publicDesc, final Long defaultLicense,
-	    final int type) {
+    public GroupDTO(final String name, final String shortName, final String publicDesc,
+	    final String defaultLicenseShortName, final int type) {
 	this.name = name;
 	this.shortName = shortName;
 	this.publicDesc = publicDesc;
-	this.defaultLicense = defaultLicense;
+	this.defaultLicenseShortName = defaultLicenseShortName;
 	this.type = type;
     }
 
-    public Long getDefaultLicense() {
-	return defaultLicense;
+    public String getDefaultLicense() {
+	return defaultLicenseShortName;
     }
 
     public Long getId() {
@@ -51,8 +51,8 @@ public class GroupDTO implements IsSerializable {
 	return type;
     }
 
-    public void setDefaultLicense(final Long defaultLicense) {
-	this.defaultLicense = defaultLicense;
+    public void setDefaultLicense(final String defaultLicense) {
+	this.defaultLicenseShortName = defaultLicense;
     }
 
     public void setId(final Long id) {

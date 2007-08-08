@@ -29,7 +29,7 @@ public class LicenseChoosePanel extends Composite implements LicenseChooseView {
     private final ListBox otherLicenses;
     private final DeckPanel options;
 
-    public LicenseChoosePanel(final LicenseChoosePresenter initPresenter) {
+    public LicenseChoosePanel(final LicenseChoosePresenter initPresenter, final List nonCCLicenses) {
 	this.presenter = initPresenter;
 	VerticalPanel generalVP = new VerticalPanel();
 	initWidget(generalVP);
@@ -92,6 +92,18 @@ public class LicenseChoosePanel extends Composite implements LicenseChooseView {
 
 	// optionsGroupBox.setTitle(t.Options());
 
+	ccRB.addClickListener(new ClickListener() {
+	    public void onClick(final Widget arg0) {
+		presenter.onCCselected();
+	    }
+	});
+
+	notCcRB.addClickListener(new ClickListener() {
+	    public void onClick(final Widget arg0) {
+		presenter.onNotCCselected();
+	    }
+	});
+
 	selectBT.addClickListener(new ClickListener() {
 	    public void onClick(final Widget arg0) {
 		presenter.onSelect();
@@ -104,6 +116,14 @@ public class LicenseChoosePanel extends Composite implements LicenseChooseView {
 	    }
 	});
 
+	for (int i = 0; i < nonCCLicenses.size(); i++) {
+	    String licenseDescrip = ((LicenseDTO) nonCCLicenses.get(i)).getLongName();
+	    otherLicenses.addItem(licenseDescrip);
+	}
+	if (nonCCLicenses.size() > 0) {
+	    otherLicenses.setItemSelected(0, true);
+	    otherLicenses.setVisibleItemCount(1);
+	}
 	// cancelBT.setWidth("" + selectBT.getOffsetWidth());
 
 	// setText(t.ChooseLicense());
@@ -129,18 +149,19 @@ public class LicenseChoosePanel extends Composite implements LicenseChooseView {
 	return commercialRB.isChecked();
     }
 
-    public void setDefaults(final List nonCCLicenses) {
+    public void reset() {
 	options.showWidget(0);
 	ccRB.setChecked(true);
 	commercialRB.setChecked(true);
 	allowModifShareAlikeRB.setChecked(true);
-	for (int i = 0; i < nonCCLicenses.size(); i++) {
-	    String licenseDescrip = ((LicenseDTO) nonCCLicenses.get(i)).getLongName();
-	    otherLicenses.addItem(licenseDescrip);
-	}
-	if (nonCCLicenses.size() > 0) {
-	    otherLicenses.setItemSelected(0, true);
-	    otherLicenses.setVisibleItemCount(1);
-	}
+
+    }
+
+    public void showCCoptions() {
+	options.showWidget(0);
+    }
+
+    public void showNotCCoptiones() {
+	options.showWidget(1);
     }
 }

@@ -12,11 +12,15 @@ public class LicenseChoosePresenter {
 
     private List nonCCLicenses;
 
-    public void init(final LicenseChooseView view, final LicenseChangeListener listener, final List nonCCLicenses) {
+    private List allLicenses;
+
+    public void init(final LicenseChooseView view, final List allLicenses, final List nonCCLicenses,
+	    final LicenseChangeListener listener) {
 	this.view = view;
 	this.listener = listener;
+	this.allLicenses = allLicenses;
 	this.nonCCLicenses = nonCCLicenses;
-	this.view.setDefaults(nonCCLicenses);
+	this.view.reset();
     }
 
     public void onCancel() {
@@ -35,9 +39,26 @@ public class LicenseChoosePresenter {
 	    }
 	} else {
 	    licenseShortName = ((LicenseDTO) nonCCLicenses.get(view.getSelectedNonCCLicenseIndex())).getShortName();
-
 	}
-	listener.onLicenseChange(licenseShortName);
+	listener.onLicenseChange(getLicenseFromShortName(licenseShortName));
+    }
+
+    private LicenseDTO getLicenseFromShortName(final String shortName) {
+	for (int i = 0; i < allLicenses.size(); i++) {
+	    LicenseDTO licenseDTO = ((LicenseDTO) allLicenses.get(i));
+	    if (licenseDTO.getShortName() == shortName) {
+		return licenseDTO;
+	    }
+	}
+	return null;
+    }
+
+    public void onCCselected() {
+	view.showCCoptions();
+    }
+
+    public void onNotCCselected() {
+	view.showNotCCoptiones();
     }
 
 }
