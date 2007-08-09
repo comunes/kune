@@ -6,10 +6,11 @@ public class GroupDTO implements IsSerializable {
     public static final int TYPE_ORGANIZATION = 0;
     public static final int TYPE_COMNUNITY = 1;
     public static final int TYPE_PROJECT = 2;
+    public static final int TYPE_PERSONAL = 3;
 
     private Long id;
     private String shortName;
-    private String name;
+    private String longName;
     private String publicDesc;
     private String defaultLicenseShortName;
     private int type;
@@ -20,7 +21,7 @@ public class GroupDTO implements IsSerializable {
 
     public GroupDTO(final String name, final String shortName, final String publicDesc,
 	    final String defaultLicenseShortName, final int type) {
-	this.name = name;
+	this.longName = name;
 	this.shortName = shortName;
 	this.publicDesc = publicDesc;
 	this.defaultLicenseShortName = defaultLicenseShortName;
@@ -35,8 +36,8 @@ public class GroupDTO implements IsSerializable {
 	return id;
     }
 
-    public String getName() {
-	return name;
+    public String getLongName() {
+	return longName;
     }
 
     public String getPublicDesc() {
@@ -59,8 +60,8 @@ public class GroupDTO implements IsSerializable {
 	this.id = id;
     }
 
-    public void setName(final String name) {
-	this.name = name;
+    public void setLongName(final String name) {
+	this.longName = name;
     }
 
     public void setPublicDesc(final String publicDesc) {

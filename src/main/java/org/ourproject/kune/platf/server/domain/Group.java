@@ -2,9 +2,12 @@ package org.ourproject.kune.platf.server.domain;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -12,8 +15,17 @@ import com.wideplay.warp.persist.dao.Finder;
 
 @Entity
 @Table(name = "groups")
-public class Group extends Container {
+public class Group implements HasId {
+
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @Column(unique = true)
     private String shortName;
+
+    @Column(unique = true)
+    private String longName;
 
     @Enumerated(EnumType.STRING)
     AdmissionType admissionType;
@@ -21,12 +33,13 @@ public class Group extends Container {
     @OneToOne
     private ContentDescriptor defaultContent;
 
+    private SocialNetwork socialNetwork;
+
     public Group() {
 	this(null, null);
     }
 
     public Group(final String name, final String shortName) {
-	super(name);
 	this.shortName = shortName;
     }
 
@@ -49,6 +62,22 @@ public class Group extends Container {
 
     public void setAdmissionType(final AdmissionType admissionType) {
 	this.admissionType = admissionType;
+    }
+
+    public Long getId() {
+	return id;
+    }
+
+    public void setId(final Long id) {
+	this.id = id;
+    }
+
+    public String getLongName() {
+	return longName;
+    }
+
+    public void setLongName(final String longName) {
+	this.longName = longName;
     }
 
 }

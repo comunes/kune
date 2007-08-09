@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "containers")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Container extends Ajo {
+public class Container {
     private String name;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Alias> aliases;

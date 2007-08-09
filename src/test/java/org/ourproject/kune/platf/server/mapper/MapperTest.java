@@ -23,7 +23,7 @@ public class MapperTest {
     public void testGroupMapping() {
 	Group group = new Group("name", "shortName");
 	GroupDTO dto = mapper.map(group, GroupDTO.class);
-	assertEquals(group.getName(), dto.getName());
+	assertEquals(group.getLongName(), dto.getLongName());
 	assertEquals(group.getShortName(), dto.getShortName());
     }
 }

@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
@@ -15,7 +17,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "contents")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class ContentDescriptor extends Ajo implements HasContent {
+public class ContentDescriptor implements HasContent {
+    @Id
+    @GeneratedValue
+    private Long id;
+
     @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private List<Tag> tags;
     @OneToOne
@@ -35,6 +41,35 @@ public class ContentDescriptor extends Ajo implements HasContent {
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Translation> translations;
+
+    // TODO: lang, languages, etc
+    private String locale;
+
+    private AccessRights accessRights;
+
+    public Long getId() {
+	return id;
+    }
+
+    public void setId(final Long id) {
+	this.id = id;
+    }
+
+    public String getLocale() {
+	return locale;
+    }
+
+    public void setLocale(final String locale) {
+	this.locale = locale;
+    }
+
+    public AccessRights getAccessRights() {
+	return accessRights;
+    }
+
+    public void setAccessRights(final AccessRights accessRights) {
+	this.accessRights = accessRights;
+    }
 
     public ContentDescriptor() {
 	translations = new ArrayList<Translation>();

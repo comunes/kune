@@ -23,13 +23,16 @@ public class User implements HasId {
     @Column(unique = true)
     private String email;
 
+    @Column(nullable = false)
     private String password;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Group userGroup;
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(unique = true)
     private String shortName;
 
     public User(final String name, final String shortName, final String email, final String password) {
