@@ -15,8 +15,9 @@ public class UserSession {
 	return user;
     }
 
-    public void setUser(final User user) {
+    public User setUser(final User user) {
 	this.user = user;
+	return user;
     }
 
 }

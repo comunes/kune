@@ -1,5 +1,6 @@
 package org.ourproject.kune.platf.server.services;
 
+import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.manager.ContentManagerDefault;
@@ -19,7 +20,7 @@ public class ContentServerService implements ContentService {
     }
 
     public ContentDataDTO getContent(final String userHash, final String groupName, final String toolName,
-	    final String folderRef, final String contentRef) {
+	    final String folderRef, final String contentRef) throws ContentNotFoundException {
 
 	Content descriptor = contentManager.getContent(session, groupName, toolName, folderRef, contentRef);
 

@@ -9,6 +9,7 @@ import static org.junit.Assert.assertSame;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.server.TestDomainHelper;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.domain.ContentDescriptor;
@@ -35,7 +36,7 @@ public class ContentManagerTest {
     }
 
     @Test
-    public void testDefaultContent() {
+    public void testDefaultContent() throws ContentNotFoundException {
 
 	User user = TestDomainHelper.createUser(1);
 	ContentDescriptor defaultContentDescriptor = new ContentDescriptor();
@@ -48,8 +49,8 @@ public class ContentManagerTest {
     }
 
     @Test
-    public void testCompleteToken() {
-	Folder folder = new Folder();
+    public void testCompleteToken() throws ContentNotFoundException {
+	Folder folder = TestDomainHelper.createFolderWithId(1);
 	ContentDescriptor descriptor = new ContentDescriptor();
 	descriptor.setFolder(folder);
 
@@ -62,8 +63,25 @@ public class ContentManagerTest {
 	verify(contentDescriptorManager);
     }
 
+    @Test(expected = ContentNotFoundException.class)
+    public void contentAndFolderMatch() throws ContentNotFoundException {
+	ContentDescriptor descriptor = new ContentDescriptor();
+	Folder folder = TestDomainHelper.createFolderWithId(1);
+	descriptor.setFolder(folder);
+	expect(contentDescriptorManager.get(1l)).andReturn(descriptor);
+	replay(contentDescriptorManager);
+
+	contentManager.getContent(session, "groupShortName", "toolName", "5", "1");
+	verify(contentDescriptorManager);
+    }
+
+    @Test(expected = ContentNotFoundException.class)
+    public void voyAJoder() throws ContentNotFoundException {
+	contentManager.getContent(session, null, "toolName", "1", "2");
+    }
+
     @Test
-    public void testDocMissing() {
+    public void testDocMissing() throws ContentNotFoundException {
 	Folder folder = new Folder();
 	expect(folderManager.get(1l)).andReturn(folder);
 
@@ -75,7 +93,7 @@ public class ContentManagerTest {
     }
 
     @Test
-    public void testFolderMissing() {
+    public void testFolderMissing() throws ContentNotFoundException {
 	Group group = new Group();
 	Folder folder = group.setRootFolder("toolName", new Folder());
 	expect(groupManager.get("groupShortName")).andReturn(group);
@@ -87,7 +105,7 @@ public class ContentManagerTest {
     }
 
     @Test
-    public void getGroupDefaultContent() {
+    public void getGroupDefaultContent() throws ContentNotFoundException {
 	Group group = new Group();
 	ContentDescriptor ct = new ContentDescriptor();
 	group.setDefaultContent(ct);
@@ -99,4 +117,15 @@ public class ContentManagerTest {
 	verify(groupManager);
     }
 
+    @Test
+    public void testDefaultUserContent() throws ContentNotFoundException {
+	User user = session.setUser(new User());
+	ContentDescriptor contentDescriptor = new ContentDescriptor();
+	Group group = new Group();
+
+	user.setUserGroup(group);
+	group.setDefaultContent(contentDescriptor);
+	Content content = contentManager.getContent(session, null, null, null, null);
+	assertSame(contentDescriptor, content.getDescriptor());
+    }
 }
