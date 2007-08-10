@@ -50,7 +50,7 @@ public class ContentManagerTest {
 
     @Test
     public void testCompleteToken() throws ContentNotFoundException {
-	Folder folder = TestDomainHelper.createFolderWithId(1);
+	Folder folder = TestDomainHelper.createFolderWithIdAndGroupAndTool(1, "groupShortName", "toolName");
 	ContentDescriptor descriptor = new ContentDescriptor();
 	descriptor.setFolder(folder);
 
@@ -66,7 +66,31 @@ public class ContentManagerTest {
     @Test(expected = ContentNotFoundException.class)
     public void contentAndFolderMatch() throws ContentNotFoundException {
 	ContentDescriptor descriptor = new ContentDescriptor();
+	Folder folder = TestDomainHelper.createFolderWithIdAndToolName(5, "toolName2");
+	descriptor.setFolder(folder);
+	expect(contentDescriptorManager.get(1l)).andReturn(descriptor);
+	replay(contentDescriptorManager);
+
+	contentManager.getContent(session, "groupShortName", "toolName", "5", "1");
+	verify(contentDescriptorManager);
+    }
+
+    @Test(expected = ContentNotFoundException.class)
+    public void contentAndToolMatch() throws ContentNotFoundException {
+	ContentDescriptor descriptor = new ContentDescriptor();
 	Folder folder = TestDomainHelper.createFolderWithId(1);
+	descriptor.setFolder(folder);
+	expect(contentDescriptorManager.get(1l)).andReturn(descriptor);
+	replay(contentDescriptorManager);
+
+	contentManager.getContent(session, "groupShortName", "toolName", "5", "1");
+	verify(contentDescriptorManager);
+    }
+
+    @Test(expected = ContentNotFoundException.class)
+    public void contentAndGrouplMatch() throws ContentNotFoundException {
+	ContentDescriptor descriptor = new ContentDescriptor();
+	Folder folder = TestDomainHelper.createFolderWithIdAndGroupAndTool(5, "groupOther", "toolName");
 	descriptor.setFolder(folder);
 	expect(contentDescriptorManager.get(1l)).andReturn(descriptor);
 	replay(contentDescriptorManager);
@@ -128,4 +152,17 @@ public class ContentManagerTest {
 	Content content = contentManager.getContent(session, null, null, null, null);
 	assertSame(contentDescriptor, content.getDescriptor());
     }
+
+    @Test(expected = ContentNotFoundException.class)
+    public void testIds() throws ContentNotFoundException {
+	ContentDescriptor descriptor = new ContentDescriptor();
+	Folder folder = TestDomainHelper.createFolderWithIdAndToolName(5, "toolName");
+	descriptor.setFolder(folder);
+	expect(contentDescriptorManager.get(1l)).andReturn(descriptor);
+	replay(contentDescriptorManager);
+
+	contentManager.getContent(session, "groupShortName", "toolName", "5", "1a");
+	verify(contentDescriptorManager);
+    }
+
 }

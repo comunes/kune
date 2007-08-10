@@ -21,10 +21,14 @@ public class ContentManagerDefault implements ContentManager {
 
     public Content getContent(final UserSession session, final String groupName, final String toolName,
 	    final String folderRef, final String contentRef) throws ContentNotFoundException {
+
+	Long contentId = checkAndParse(contentRef);
+	Long folderId = checkAndParse(folderRef);
+
 	if (noneNull(groupName, toolName, folderRef, contentRef)) {
-	    return findByContentReference(groupName, toolName, folderRef, contentRef);
+	    return findByContentReference(groupName, toolName, folderId, contentId);
 	} else if (noneNull(groupName, toolName, folderRef)) {
-	    return findByFolderReference(groupName, toolName, folderRef);
+	    return findByFolderReference(groupName, toolName, folderId);
 	} else if (noneNull(groupName, toolName)) {
 	    return findByRootOnGroup(groupName, toolName);
 	} else if (noneNull(groupName)) {
@@ -36,18 +40,35 @@ public class ContentManagerDefault implements ContentManager {
 	}
     }
 
-    private Content findByContentReference(final String groupName, final String toolName, final String folderRef,
-	    final String contentRef) throws ContentNotFoundException {
-	ContentDescriptor descriptor = contentDescriptorManager.get(Long.parseLong(contentRef));
+    public Long checkAndParse(final String s) throws ContentNotFoundException {
+	if (s != null) {
+	    try {
+		return Long.parseLong(s);
+	    } catch (NumberFormatException e) {
+		throw new ContentNotFoundException();
+	    }
+	}
+	return null;
+    }
+
+    private Content findByContentReference(final String groupName, final String toolName, final Long folderId,
+	    final Long contentId) throws ContentNotFoundException {
+	ContentDescriptor descriptor = contentDescriptorManager.get(contentId);
 	Folder folder = descriptor.getFolder();
-	if (!folder.getId().equals(Long.parseLong(folderRef))) {
+	if (!folder.getId().equals(folderId)) {
+	    throw new ContentNotFoundException();
+	}
+	if (!folder.getToolName().equals(toolName)) {
+	    throw new ContentNotFoundException();
+	}
+	if (!folder.getOwner().getShortName().equals(groupName)) {
 	    throw new ContentNotFoundException();
 	}
 	return new Content(descriptor, folder);
     }
 
-    private Content findByFolderReference(final String groupName, final String toolName, final String folderRef) {
-	Folder folder = folderManager.get(Long.parseLong(folderRef));
+    private Content findByFolderReference(final String groupName, final String toolName, final Long folderId) {
+	Folder folder = folderManager.get(folderId);
 	return new Content(null, folder);
     }
 

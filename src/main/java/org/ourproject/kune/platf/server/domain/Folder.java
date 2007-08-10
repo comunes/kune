@@ -36,6 +36,8 @@ public class Folder implements HasId {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Alias> aliases;
 
+    private String toolName;
+
     public Folder getParent() {
 	return parent;
     }
@@ -90,5 +92,13 @@ public class Folder implements HasId {
 
     public void setOwner(final Group owner) {
 	this.owner = owner;
+    }
+
+    public String getToolName() {
+	return toolName;
+    }
+
+    public void setToolName(final String toolName) {
+	this.toolName = toolName;
     }
 }
