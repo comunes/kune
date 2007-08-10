@@ -2,12 +2,15 @@ package org.ourproject.kune.platf.server.domain;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.persistence.Embeddable;
+import javax.persistence.OneToMany;
 
 @Embeddable
 public class Score {
-    private HashMap<User, Float> scores;
+    @OneToMany
+    private Map<User, Float> scores;
 
     public Score() {
 	scores = new HashMap<User, Float>();
@@ -22,11 +25,15 @@ public class Score {
 	return (float) sum / scores.size();
     }
 
-    public HashMap<User, Float> getScores() {
+    public Map<User, Float> getScores() {
 	return scores;
     }
 
-    public void setScores(final HashMap<User, Float> scores) {
+    public void setScore(final User user, final Float scoreValue) {
+	scores.put(user, scoreValue);
+    }
+
+    public void setScores(final Map<User, Float> scores) {
 	this.scores = scores;
     }
 }
