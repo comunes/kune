@@ -26,7 +26,7 @@ public class ContentDescriptor implements HasContent {
     private List<Tag> tags;
     @OneToOne
     private License license;
-    private Rate rate;
+    private Score score;
     @OneToOne
     private Revision revision;
 
@@ -92,12 +92,12 @@ public class ContentDescriptor implements HasContent {
 	this.license = license;
     }
 
-    public Rate getRate() {
-	return rate;
+    public Score getRate() {
+	return score;
     }
 
-    public void setRate(final Rate rate) {
-	this.rate = rate;
+    public void setRate(final Score rate) {
+	this.score = rate;
     }
 
     public Revision getRevision() {

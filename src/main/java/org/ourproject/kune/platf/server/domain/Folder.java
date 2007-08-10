@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "folders")
-public class Folder extends Container {
+public class Folder {
 
     @OneToOne
     private Group owner;

@@ -6,10 +6,10 @@ import java.util.HashMap;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class Rate {
+public class Score {
     private HashMap<User, Float> scores;
 
-    public Rate() {
+    public Score() {
 	scores = new HashMap<User, Float>();
     }
 
