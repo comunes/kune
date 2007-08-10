@@ -42,4 +42,8 @@ public class NavigatorPresenter extends AbstractComponent implements ContextData
     public void failed(final Throwable caugth) {
     }
 
+    public void setState(final String group, final String folder, final String document) {
+
+    }
+
 }

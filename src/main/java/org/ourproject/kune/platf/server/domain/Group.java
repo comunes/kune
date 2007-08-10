@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.google.inject.name.Named;
 import com.wideplay.warp.persist.dao.Finder;
 
 @Entity
@@ -48,6 +49,12 @@ public class Group implements HasId {
 	return null;
     }
 
+    @Finder(query = "from Group g where g.shortName = :shortName")
+    public Group findByShortName(@Named("shortName")
+    final String shortName) {
+	return null;
+    }
+
     public String getShortName() {
 	return shortName;
     }
@@ -78,6 +85,22 @@ public class Group implements HasId {
 
     public void setLongName(final String longName) {
 	this.longName = longName;
+    }
+
+    public ContentDescriptor getDefaultContent() {
+	return defaultContent;
+    }
+
+    public void setDefaultContent(final ContentDescriptor defaultContent) {
+	this.defaultContent = defaultContent;
+    }
+
+    public SocialNetwork getSocialNetwork() {
+	return socialNetwork;
+    }
+
+    public void setSocialNetwork(final SocialNetwork socialNetwork) {
+	this.socialNetwork = socialNetwork;
     }
 
 }

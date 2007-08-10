@@ -6,13 +6,18 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "folders")
-public class Folder {
+public class Folder implements HasId {
+    @Id
+    @GeneratedValue
+    Long id;
 
     @OneToOne
     private Group owner;
@@ -33,6 +38,14 @@ public class Folder {
 
     public Folder getParent() {
 	return parent;
+    }
+
+    public Long getId() {
+	return id;
+    }
+
+    public void setId(final Long id) {
+	this.id = id;
     }
 
     public void setParent(final Folder parent) {

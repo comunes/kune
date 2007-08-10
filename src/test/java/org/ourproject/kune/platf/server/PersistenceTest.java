@@ -12,21 +12,32 @@ import com.wideplay.warp.persist.PersistenceService;
 public abstract class PersistenceTest {
     @Inject
     Provider<EntityManager> provider;
+    private final String persistenceUnit;
+
+    public PersistenceTest(final String persistenceUnit) {
+	this.persistenceUnit = persistenceUnit;
+    }
+
+    public PersistenceTest() {
+	this("test");
+    }
 
     @Before
     public void prepare() {
-	Injector injector = TestHelper.create(new KunePlatformModule());
+	Injector injector = TestHelper.create(new KunePlatformModule(), persistenceUnit);
 	PersistenceService persistence = injector.getInstance(PersistenceService.class);
 	persistence.start();
 	injector.injectMembers(this);
     }
 
-    public void openTransaction() {
-	getManager().getTransaction().begin();
+    public EntityManager openTransaction() {
+	EntityManager manager = getManager();
+	manager.getTransaction().begin();
+	return manager;
     }
 
     public void closeTransaction() {
-	getManager().getTransaction().rollback();
+	getManager().getTransaction().commit();
     }
 
     public void persist(final Object entity) {

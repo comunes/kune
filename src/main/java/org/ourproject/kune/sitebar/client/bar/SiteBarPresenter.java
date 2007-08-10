@@ -1,5 +1,6 @@
 package org.ourproject.kune.sitebar.client.bar;
 
+import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.group.NewGroupListener;
 import org.ourproject.kune.sitebar.client.login.LoginListener;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
@@ -16,65 +17,69 @@ public class SiteBarPresenter implements SiteBar, SiteBarListener, LoginListener
     }
 
     public void init(final SiteBarView view) {
-        this.view = view;
-        view.setLogoutLinkVisible(false);
+	this.view = view;
+	view.setLogoutLinkVisible(false);
     }
 
     public void doLogin() {
-        view.showLoginDialog();
+	view.showLoginDialog();
     }
 
     public void doNewGroup() {
-        view.showNewGroupDialog();
+	view.showNewGroupDialog();
     }
 
     public void doSearch(final String string) {
-        if (string == null) {
-            Window.alert("Type something to search!");
-        } else {
-            Window.alert("In development!");
-        }
+	if (string == null) {
+	    Window.alert("Type something to search!");
+	} else {
+	    Window.alert("In development!");
+	}
     }
 
     public void doLogout() {
-        SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
-        siteBarService.logout(new AsyncCallback() {
+	SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
+	siteBarService.logout(new AsyncCallback() {
 
-            public void onFailure(final Throwable arg0) {
-                // TODO Auto-generated method stub
-            }
+	    public void onFailure(final Throwable arg0) {
+		// TODO Auto-generated method stub
+	    }
 
-            public void onSuccess(final Object arg0) {
-                view.setLogoutLinkVisible(false);
-                view.restoreLoginLink();
-            }
-        });
+	    public void onSuccess(final Object arg0) {
+		view.setLogoutLinkVisible(false);
+		view.restoreLoginLink();
+	    }
+	});
     }
 
     public void userLoggedIn(final String nick, final String hash) {
-        view.showLoggedUserName(nick);
-        view.hideLoginDialog();
-        view.setLogoutLinkVisible(true);
+	view.showLoggedUserName(nick);
+	view.hideLoginDialog();
+	view.setLogoutLinkVisible(true);
     }
 
     public void onLoginCancelled() {
-        view.hideLoginDialog();
+	view.hideLoginDialog();
     }
 
     public void onNewGroupCreated() {
-        view.hideNewGroupDialog();
+	view.hideNewGroupDialog();
     }
 
     public void onNewGroupCancel() {
-        view.hideNewGroupDialog();
+	view.hideNewGroupDialog();
     }
 
     public void hideProgress() {
-        view.hideProgress();
+	view.hideProgress();
     }
 
     public void showProgress(final String text) {
-        view.showProgress(text);
+	view.showProgress(text);
+    }
+
+    public View getView() {
+	return view;
     }
 
 }

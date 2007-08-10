@@ -9,5 +9,5 @@ public interface WorkspaceComponent {
 
     void attach();
 
-    void setReferences(String ctxRef, String cntRef);
+    void setState(String group, String folder, String document);
 }

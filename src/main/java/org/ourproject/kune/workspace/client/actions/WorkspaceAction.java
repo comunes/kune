@@ -1,39 +1,29 @@
 package org.ourproject.kune.workspace.client.actions;
 
-import org.ourproject.kune.platf.client.Application;
 import org.ourproject.kune.platf.client.State;
+import org.ourproject.kune.platf.client.StateManager;
+import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.workspace.client.Workspace;
 
 public abstract class WorkspaceAction implements Action {
-    protected String userHash;
-    protected Workspace workspace;
-    protected State state;
-    protected Dispatcher dispatcher;
     protected Application app;
+    protected Workspace workspace;
+    protected Dispatcher dispatcher;
+    protected StateManager stateManager;
+    protected String user;
 
-    public void setUserHash(String userHash) {
-	this.userHash = userHash;
-    }
-
-    public void setWorkspace(Workspace workspace) {
-	this.workspace = workspace;
-    }
-
-    public void setState(State state) {
-	this.state = state;
-    }
-
-    public void setDispatcher(Dispatcher dispatcher) {
-	this.dispatcher = dispatcher;
-    }
-
-    public void setApp(Application app) {
+    public void init(final Application app, final State state, final StateManager stateManager) {
 	this.app = app;
+	this.stateManager = stateManager;
+	this.workspace = app.getWorkspace();
+	this.dispatcher = app.getDispatcher();
+	this.stateManager = stateManager;
+	this.user = stateManager.getUser();
     }
 
-    public int toInt(Object value) {
+    public int toInt(final Object value) {
 	return Integer.parseInt((String) value);
     }
 

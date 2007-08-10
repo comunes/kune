@@ -1,19 +1,16 @@
 package org.ourproject.kune.workspace.client.actions;
 
-import org.easymock.EasyMock;
-import org.ourproject.kune.platf.client.Application;
 import org.ourproject.kune.platf.client.State;
+import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
-import org.ourproject.kune.platf.client.dispatch.Injector;
+import org.ourproject.kune.platf.client.stubs.ApplicationStub;
 import org.ourproject.kune.platf.client.stubs.NiceState;
 import org.ourproject.kune.workspace.client.Workspace;
-import org.ourproject.kune.workspace.client.actions.WorkspaceAction;
 
-public class ActionTestHelper implements Injector {
+public class ActionTestHelper {
     public static final boolean STRICT = false;
     public static final boolean NICE = true;
 
-    private final boolean useNiceMocks;
     public Application app;
     public Dispatcher dispatcher;
     public State state;
@@ -23,33 +20,14 @@ public class ActionTestHelper implements Injector {
 
     public ActionTestHelper(final WorkspaceAction action, final boolean useNiceMocks) {
 	this.action = action;
-	this.useNiceMocks = useNiceMocks;
-	app = mock(Application.class);
-	dispatcher = mock(Dispatcher.class);
+	app = new ApplicationStub(useNiceMocks);
 	state = new NiceState();
-	userHash = state.user;
-	workspace = mock(Workspace.class);
 	inject(action);
-    }
-
-    private <T> T mock(final Class<T> type) {
-	if (useNiceMocks) {
-	    return EasyMock.createNiceMock(type);
-	} else {
-	    return EasyMock.createStrictMock(type);
-	}
     }
 
     public void inject(final Object object) {
 	WorkspaceAction action = (WorkspaceAction) object;
-	action.setApp(app);
-	action.setDispatcher(dispatcher);
-	action.setState(state);
-	action.setUserHash(userHash);
-	action.setWorkspace(workspace);
-    }
-
-    public void setDispatcher(final Dispatcher dispatcher) {
+	action.init(app, null, null);
     }
 
     public void execute(final Object value) {

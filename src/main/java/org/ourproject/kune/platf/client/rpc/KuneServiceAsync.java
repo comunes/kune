@@ -14,4 +14,6 @@ public interface KuneServiceAsync {
 
     void getNotCCLicenses(AsyncCallback callback);
 
+    void getGroup(String userHash, String shortName, AsyncCallback asyncCallback);
+
 }

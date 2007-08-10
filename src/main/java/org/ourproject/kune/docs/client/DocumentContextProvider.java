@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.ourproject.kune.docs.client.rpc.DocumentServiceAsync;
 import org.ourproject.kune.platf.client.State;
+import org.ourproject.kune.platf.client.dispatch.HistoryToken;
 import org.ourproject.kune.workspace.client.ContextDataProvider;
 import org.ourproject.kune.workspace.client.dto.ContextDataDTO;
 import org.ourproject.kune.workspace.client.dto.ContextItemDTO;
@@ -36,7 +37,8 @@ public class DocumentContextProvider implements ContextDataProvider {
 		ArrayList items = ctxData.getChildren();
 		for (int index = 0; index < items.size(); index++) {
 		    item = (ContextItemDTO) items.get(index);
-		    String newRef = state.encode(DocumentTool.NAME, ctxData.getContextRef(), item.getReference());
+		    String newRef = HistoryToken.encode(ctxData.getGroupName(), ctxData.getToolName(), ctxData
+			    .getContextRef(), null);
 		    item.setToken(newRef);
 		}
 	    }

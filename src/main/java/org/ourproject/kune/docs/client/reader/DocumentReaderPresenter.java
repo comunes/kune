@@ -45,4 +45,8 @@ public class DocumentReaderPresenter extends AbstractComponent implements Docume
 	return view.getContent();
     }
 
+    public void setState(final String group, final String folder, final String document) {
+
+    }
+
 }

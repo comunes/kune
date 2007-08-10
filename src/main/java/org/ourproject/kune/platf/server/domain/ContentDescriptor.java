@@ -14,6 +14,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.google.inject.name.Named;
+import com.wideplay.warp.persist.dao.Finder;
+
 @Entity
 @Table(name = "contents")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -26,7 +29,6 @@ public class ContentDescriptor implements HasContent {
     private List<Tag> tags;
     @OneToOne
     private License license;
-    private Score score;
     @OneToOne
     private Revision revision;
 
@@ -46,6 +48,18 @@ public class ContentDescriptor implements HasContent {
     private String locale;
 
     private AccessRights accessRights;
+
+    public ContentDescriptor() {
+	translations = new ArrayList<Translation>();
+	tags = new ArrayList<Tag>();
+	this.createdOn = System.currentTimeMillis();
+    }
+
+    @Finder(query = "select AVG(r.value) from Rate r where r.contentDescriptor = :descriptor")
+    public Double calculateRate(@Named("descriptor")
+    final ContentDescriptor descriptor) {
+	return null;
+    }
 
     public Long getId() {
 	return id;
@@ -71,11 +85,6 @@ public class ContentDescriptor implements HasContent {
 	this.accessRights = accessRights;
     }
 
-    public ContentDescriptor() {
-	translations = new ArrayList<Translation>();
-	tags = new ArrayList<Tag>();
-    }
-
     public List<Tag> getTags() {
 	return tags;
     }
@@ -92,12 +101,12 @@ public class ContentDescriptor implements HasContent {
 	this.license = license;
     }
 
-    public Score getRate() {
-	return score;
+    public Container getContainer() {
+	return container;
     }
 
-    public void setRate(final Score rate) {
-	this.score = rate;
+    public void setContainer(final Container container) {
+	this.container = container;
     }
 
     public Revision getRevision() {

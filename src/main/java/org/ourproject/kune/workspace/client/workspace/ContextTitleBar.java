@@ -1,4 +1,4 @@
-package org.ourproject.kune.workspace.client.ui;
+package org.ourproject.kune.workspace.client.workspace;
 
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;

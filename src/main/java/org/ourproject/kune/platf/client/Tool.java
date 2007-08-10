@@ -25,6 +25,6 @@ public interface Tool {
 
     String getContentRef();
 
-    void setReferences(String ctxRef, String cntRef);
+    void setState(String group, String folder, String document);
 
 }

@@ -1,8 +1,10 @@
 package org.ourproject.kune.sitebar.client.bar;
 
+import org.ourproject.kune.platf.client.View;
+
 import com.google.gwt.user.client.ui.Image;
 
-public interface SiteBarView {
+public interface SiteBarView extends View {
 
     void showLoggedUserName(String user);
 

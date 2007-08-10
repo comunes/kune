@@ -34,32 +34,9 @@ public class DocumentTool extends AbstractTool {
 	return null;
     }
 
-    public void setReferences(final String ctxRef, final String cntRef) {
-	getContext().setReferences(ctxRef, cntRef);
-	getContent().setReferences(ctxRef, cntRef);
-    }
-
-    // public String getEncodedState() {
-    // String cntEncodedState;
-    //
-    // String ctxEncodedState = getContext().getEncodedState();
-    // if (ctxEncodedState == null) {
-    // ctxEncodedState = "home";
-    // cntEncodedState = "welcome";
-    // } else {
-    // cntEncodedState = getContent().getEncodedState();
-    // }
-    // return HistoryToken.encode(getName(), ctxEncodedState, cntEncodedState);
-    // }
-    //
-    // public void setEncodedState(final Object value) {
-    // getContext().setEncodedState((String) value);
-    // getContent().setEncodedState((String) value);
-    // }
-
     protected WorkspaceComponent createContent() {
 	DocumentContentDriver provider = new DocumentContentDriver(DocumentService.App.getInstance(), state);
-	DocumentPresenter presenter = new DocumentPresenter(provider);
+	DocumentPresenter presenter = new DocumentPresenter();
 	DocumentView docView = DocumentViewFactory.getDocumentView();
 	DocumentReaderView readerView = DocumentViewFactory.getDocumentReaderView(presenter);
 	presenter.setViews(docView, readerView);
@@ -77,6 +54,11 @@ public class DocumentTool extends AbstractTool {
     public AjoAdmin getAdmin() {
 	// TODO Auto-generated method stub
 	return null;
+    }
+
+    public void setState(final String group, final String folder, final String document) {
+	getContent().setState(group, folder, document);
+	getContext().setState(group, folder, document);
     }
 
 }

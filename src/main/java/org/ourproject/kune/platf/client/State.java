@@ -2,9 +2,7 @@ package org.ourproject.kune.platf.client;
 
 import java.util.List;
 
-import org.ourproject.kune.platf.client.dispatch.HistoryTokenOld;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.workspace.client.actions.StateAction;
 
 /**
  * RESPONSABILITIES: - Mantains the user's application state - Gererates
@@ -44,10 +42,6 @@ public class State {
 	this.currentToolName = toolName;
     }
 
-    public String encode(final String toolName, final String contextRef, final String reference) {
-	return HistoryTokenOld.encodeState(StateAction.NAME, group.getShortName(), toolName, contextRef, reference);
-    }
-
     public boolean isCurrentGroup(final String groupName) {
 	return group.getShortName().equals(groupName);
     }
@@ -66,5 +60,9 @@ public class State {
 
     public void setLicensesNotCC(final List licensesNotCC) {
 	this.licensesNotCC = licensesNotCC;
+    }
+
+    public boolean currentGroupIs(final String groupName) {
+	return group != null && group.getShortName().equals(groupName);
     }
 }

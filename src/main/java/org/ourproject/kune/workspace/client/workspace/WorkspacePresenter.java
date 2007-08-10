@@ -1,9 +1,13 @@
-package org.ourproject.kune.workspace.client;
+package org.ourproject.kune.workspace.client.workspace;
 
 import java.util.Iterator;
 
 import org.ourproject.kune.platf.client.Tool;
+import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.workspace.client.Workspace;
+import org.ourproject.kune.workspace.client.WorkspaceComponent;
+import org.ourproject.kune.workspace.client.WorkspaceView;
 
 public class WorkspacePresenter implements Workspace {
     private final WorkspaceView view;
@@ -18,7 +22,7 @@ public class WorkspacePresenter implements Workspace {
 
     }
 
-    public void setGroup(final GroupDTO group) {
+    public void showGroupLogo(final GroupDTO group) {
 	view.setLogo("group name here");
     }
 
@@ -51,6 +55,14 @@ public class WorkspacePresenter implements Workspace {
 	content = contentComponent;
 	content.attach();
 	view.setContent(content.getView());
+    }
+
+    public void adjustSize(final int windowWidth, final int clientHeight) {
+	view.adjustSize(windowWidth, clientHeight);
+    }
+
+    public View getView() {
+	return view;
     }
 
 }

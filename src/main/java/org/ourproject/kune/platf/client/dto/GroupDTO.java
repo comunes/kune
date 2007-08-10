@@ -15,6 +15,10 @@ public class GroupDTO implements IsSerializable {
     private String defaultLicenseShortName;
     private int type;
 
+    private String defaultToolName;
+    private Long defaultFolderId;
+    private Long defaultContentId;
+
     public GroupDTO() {
 	this(null, null, null, null, TYPE_ORGANIZATION);
     }
@@ -74,5 +78,37 @@ public class GroupDTO implements IsSerializable {
 
     public void setType(final int type) {
 	this.type = type;
+    }
+
+    public String getDefaultLicenseShortName() {
+	return defaultLicenseShortName;
+    }
+
+    public void setDefaultLicenseShortName(final String defaultLicenseShortName) {
+	this.defaultLicenseShortName = defaultLicenseShortName;
+    }
+
+    public Long getDefaultFolderId() {
+	return defaultFolderId;
+    }
+
+    public void setDefaultFolderId(final Long defaultFolderId) {
+	this.defaultFolderId = defaultFolderId;
+    }
+
+    public Long getDefaultContentId() {
+	return defaultContentId;
+    }
+
+    public void setDefaultContentId(final Long defaultContentId) {
+	this.defaultContentId = defaultContentId;
+    }
+
+    public String getDefaultToolName() {
+	return defaultToolName;
+    }
+
+    public void setDefaultToolName(final String defaultToolName) {
+	this.defaultToolName = defaultToolName;
     }
 }

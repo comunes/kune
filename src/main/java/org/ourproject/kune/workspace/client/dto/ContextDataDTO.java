@@ -58,4 +58,12 @@ public class ContextDataDTO implements IsSerializable {
 	this.defaultIndex = defaultIndex;
     }
 
+    public String getGroupName() {
+	return null;
+    }
+
+    public String getToolName() {
+	return null;
+    }
+
 }

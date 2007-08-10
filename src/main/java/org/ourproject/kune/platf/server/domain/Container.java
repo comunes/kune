@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
@@ -13,7 +15,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "containers")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Container {
+public class Container implements HasId {
+    @Id
+    @GeneratedValue
+    private Long id;
+
     private String name;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Alias> aliases;
@@ -27,6 +33,14 @@ public class Container {
 
     public Container() {
 	this(null);
+    }
+
+    public Long getId() {
+	return id;
+    }
+
+    public void setId(final Long id) {
+	this.id = id;
     }
 
     public String getName() {

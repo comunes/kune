@@ -53,4 +53,9 @@ public class KuneServiceMocked extends MockedService implements KuneServiceAsync
 		"http://www.gnu.org/copyleft/fdl.html", false, true, false, "", ""));
 	callback.onSuccess(licenseList);
     }
+
+    public void getGroup(final String userHash, final String shortName, final AsyncCallback asyncCallback) {
+	// TODO Auto-generated method stub
+
+    }
 }

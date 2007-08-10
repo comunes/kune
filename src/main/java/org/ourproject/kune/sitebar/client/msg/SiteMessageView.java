@@ -1,6 +1,8 @@
 package org.ourproject.kune.sitebar.client.msg;
 
-public interface SiteMessageView {
+import org.ourproject.kune.platf.client.View;
+
+public interface SiteMessageView extends View {
 
     public void setMessage(String message);
 
