@@ -3,6 +3,7 @@ package org.ourproject.kune.platf.server.manager;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.domain.ContentDescriptor;
 import org.ourproject.kune.platf.server.domain.Folder;
+import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.model.Content;
 
 public class ContentManagerDefault implements ContentManager {
@@ -30,8 +31,18 @@ public class ContentManagerDefault implements ContentManager {
 		descriptor = contentDescriptorManager.get(Long.parseLong(contentRef));
 		content = new Content(descriptor, descriptor.getFolder());
 	    } else {
-		Folder folder = folderManager.get(Long.parseLong(folderRef));
-		content = new Content(null, folder);
+		if (folderRef != null) {
+		    Folder folder = folderManager.get(Long.parseLong(folderRef));
+		    content = new Content(null, folder);
+		} else {
+		    if (toolName != null) {
+			Group group = groupManager.get(groupName);
+			content = new Content(null, group.getRoot(toolName));
+		    } else {
+			Group group = groupManager.get(groupName);
+			content = new Content(group.getDefaultContent(), group.getDefaultContent().getFolder());
+		    }
+		}
 	    }
 	}
 	return content;

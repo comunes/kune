@@ -4,6 +4,6 @@ import org.ourproject.kune.platf.server.domain.Group;
 
 public interface GroupManager {
 
-    Group find(String groupName);
+    Group get(String groupName);
 
 }

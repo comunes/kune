@@ -1,6 +1,8 @@
 package org.ourproject.kune.platf.server.domain;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +10,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -34,6 +37,9 @@ public class Group implements HasId {
     @OneToOne
     private ContentDescriptor defaultContent;
 
+    @OneToMany
+    private Map<String, Folder> toolRoots;
+
     private SocialNetwork socialNetwork;
 
     public Group() {
@@ -42,6 +48,7 @@ public class Group implements HasId {
 
     public Group(final String name, final String shortName) {
 	this.shortName = shortName;
+	toolRoots = new HashMap<String, Folder>();
     }
 
     @Finder(query = "from Group")
@@ -101,6 +108,23 @@ public class Group implements HasId {
 
     public void setSocialNetwork(final SocialNetwork socialNetwork) {
 	this.socialNetwork = socialNetwork;
+    }
+
+    public Map<String, Folder> getToolRoots() {
+	return toolRoots;
+    }
+
+    public void setToolRoots(final Map<String, Folder> toolRoots) {
+	this.toolRoots = toolRoots;
+    }
+
+    public Folder setRootFolder(final String toolName, final Folder root) {
+	toolRoots.put(toolName, root);
+	return root;
+    }
+
+    public Folder getRoot(final String toolName) {
+	return toolRoots.get(toolName);
     }
 
 }

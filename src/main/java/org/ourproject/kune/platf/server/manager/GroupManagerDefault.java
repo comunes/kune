@@ -13,7 +13,7 @@ public class GroupManagerDefault implements GroupManager {
 	this.finder = finder;
     }
 
-    public Group find(final String shortName) {
+    public Group get(final String shortName) {
 	return finder.findByShortName(shortName);
     }
 

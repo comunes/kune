@@ -13,6 +13,7 @@ import org.ourproject.kune.platf.server.TestDomainHelper;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.domain.ContentDescriptor;
 import org.ourproject.kune.platf.server.domain.Folder;
+import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.model.Content;
 
@@ -72,4 +73,30 @@ public class ContentManagerTest {
 	assertNull(content.getDescriptor());
 	verify(folderManager);
     }
+
+    @Test
+    public void testFolderMissing() {
+	Group group = new Group();
+	Folder folder = group.setRootFolder("toolName", new Folder());
+	expect(groupManager.get("groupShortName")).andReturn(group);
+	replay(groupManager);
+
+	Content content = contentManager.getContent(session, "groupShortName", "toolName", null, null);
+	assertSame(folder, content.getFolder());
+	verify(groupManager);
+    }
+
+    @Test
+    public void getGroupDefaultContent() {
+	Group group = new Group();
+	ContentDescriptor ct = new ContentDescriptor();
+	group.setDefaultContent(ct);
+	expect(groupManager.get("groupShortName")).andReturn(group);
+	replay(groupManager);
+
+	Content content = contentManager.getContent(session, "groupShortName", null, null, null);
+	assertSame(ct, content.getDescriptor());
+	verify(groupManager);
+    }
+
 }
