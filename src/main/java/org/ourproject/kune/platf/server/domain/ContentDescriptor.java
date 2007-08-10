@@ -33,9 +33,6 @@ public class ContentDescriptor implements HasContent {
     private Revision revision;
 
     @OneToOne
-    Container container;
-
-    @OneToOne
     private User creator;
 
     @Basic(optional = false)
@@ -43,6 +40,9 @@ public class ContentDescriptor implements HasContent {
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Translation> translations;
+
+    @OneToOne
+    private Folder folder;
 
     // TODO: lang, languages, etc
     private String locale;
@@ -101,14 +101,6 @@ public class ContentDescriptor implements HasContent {
 	this.license = license;
     }
 
-    public Container getContainer() {
-	return container;
-    }
-
-    public void setContainer(final Container container) {
-	this.container = container;
-    }
-
     public Revision getRevision() {
 	return revision;
     }
@@ -139,6 +131,14 @@ public class ContentDescriptor implements HasContent {
 
     public void setCreatedOn(final Long createdOn) {
 	this.createdOn = createdOn;
+    }
+
+    public Folder getFolder() {
+	return folder;
+    }
+
+    public void setFolder(final Folder folder) {
+	this.folder = folder;
     }
 
 }

@@ -2,8 +2,8 @@ package org.ourproject.kune.platf.server.services;
 
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.server.UserSession;
-import org.ourproject.kune.platf.server.domain.ContentDescriptor;
 import org.ourproject.kune.platf.server.manager.ContentManagerDefault;
+import org.ourproject.kune.platf.server.model.Content;
 import org.ourproject.kune.workspace.client.dto.ContentDataDTO;
 
 import com.google.inject.Inject;
@@ -21,12 +21,12 @@ public class ContentServerService implements ContentService {
     public ContentDataDTO getContent(final String userHash, final String groupName, final String toolName,
 	    final String folderRef, final String contentRef) {
 
-	ContentDescriptor descriptor = contentManager.getContent(session, groupName, toolName, folderRef, contentRef);
+	Content descriptor = contentManager.getContent(session, groupName, toolName, folderRef, contentRef);
 
 	return map(descriptor);
     }
 
-    private ContentDataDTO map(final ContentDescriptor descriptor) {
+    private ContentDataDTO map(final Content descriptor) {
 	return null;
     }
 
