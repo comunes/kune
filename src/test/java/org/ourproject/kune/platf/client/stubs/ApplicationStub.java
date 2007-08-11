@@ -6,6 +6,7 @@ import org.easymock.EasyMock;
 import org.ourproject.kune.platf.client.Tool;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
+import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.Workspace;
 
 public class ApplicationStub implements Application {
@@ -15,11 +16,13 @@ public class ApplicationStub implements Application {
     private final boolean useNiceMocks;
     private final Workspace workspace;
     private final HashMap<String, Tool> tools;
+    private final StateManager stateManager;
 
     public ApplicationStub(final boolean useNiceMocks) {
 	this.useNiceMocks = useNiceMocks;
 	dispatcher = mock(Dispatcher.class);
 	workspace = mock(Workspace.class);
+	stateManager = mock(StateManager.class);
 	tools = new HashMap<String, Tool>();
     }
 
@@ -29,10 +32,6 @@ public class ApplicationStub implements Application {
 	} else {
 	    return EasyMock.createStrictMock(type);
 	}
-    }
-
-    public String getDefaultToolName() {
-	return defaultToolName;
     }
 
     public Dispatcher getDispatcher() {
@@ -47,10 +46,8 @@ public class ApplicationStub implements Application {
 	return workspace;
     }
 
-    public void setState(final String shortName, final String defaultToolName, final Long defaultFolderId,
-	    final Long defaultContentId) {
-	// TODO Auto-generated method stub
-
+    public StateManager getStateManager() {
+	return stateManager;
     }
 
 }

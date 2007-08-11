@@ -5,12 +5,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.ourproject.kune.platf.client.DefaultStateManager;
 import org.ourproject.kune.platf.client.KunePlatform;
-import org.ourproject.kune.platf.client.State;
-import org.ourproject.kune.platf.client.StateManager;
 import org.ourproject.kune.platf.client.Tool;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
+import org.ourproject.kune.platf.client.state.State;
+import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.platf.client.state.StateManagerDefault;
 import org.ourproject.kune.platf.client.utils.PrefetchUtilites;
 import org.ourproject.kune.workspace.client.actions.WorkspaceAction;
 
@@ -21,25 +21,25 @@ import com.google.gwt.user.client.History;
 public class ApplicationBuilder {
     private final String userHash;
     private final KunePlatform platform;
-    private final HashMap tools;
 
     public ApplicationBuilder(final String userHash, final KunePlatform platform) {
 	this.userHash = userHash;
 	this.platform = platform;
-	this.tools = new HashMap();
     }
 
     public Application build() {
+	HashMap tools = indexTools(platform.getTools());
+	DefaultApplication application = new DefaultApplication(tools);
 
-	DefaultDispatcher dispatcher = new DefaultDispatcher();
 	final State state = new State(userHash);
-	String defaultToolName = prepareTools(platform.getTools(), state, dispatcher);
-	DefaultApplication application = new DefaultApplication(tools, defaultToolName, dispatcher);
+	final StateManager stateManager = new StateManagerDefault(application, state);
+	History.addHistoryListener(stateManager);
 
-	StateManager stateManager = new DefaultStateManager(application, state);
+	final DefaultDispatcher dispatcher = new DefaultDispatcher();
 	prepareActions(dispatcher, platform.getActions(), application, state, stateManager);
 
-	History.addHistoryListener(stateManager);
+	application.init(dispatcher, stateManager);
+
 	DeferredCommand.addCommand(new Command() {
 	    public void execute() {
 		PrefetchUtilites.preFetchImpImages();
@@ -63,14 +63,13 @@ public class ApplicationBuilder {
 	}
     }
 
-    private String prepareTools(final List toolList, final State state, final DefaultDispatcher dispatcher) {
+    private HashMap indexTools(final List toolList) {
+	HashMap tools = new HashMap();
 	int total = toolList.size();
 	for (int index = 0; index < total; index++) {
 	    Tool tool = (Tool) toolList.get(index);
-	    tool.setEnvironment(dispatcher, state);
 	    tools.put(tool.getName(), tool);
 	}
-	return ((Tool) toolList.get(0)).getName();
+	return tools;
     }
-
 }

@@ -3,7 +3,7 @@ package org.ourproject.kune.platf.client.utils;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.rpc.KuneService;
-import org.ourproject.kune.platf.client.State;
+import org.ourproject.kune.platf.client.state.State;
 import org.ourproject.kune.sitebar.client.Site;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;

@@ -3,8 +3,8 @@ package org.ourproject.kune.docs.client;
 import java.util.ArrayList;
 
 import org.ourproject.kune.docs.client.rpc.DocumentServiceAsync;
-import org.ourproject.kune.platf.client.State;
 import org.ourproject.kune.platf.client.dispatch.HistoryToken;
+import org.ourproject.kune.platf.client.state.State;
 import org.ourproject.kune.workspace.client.ContextDataProvider;
 import org.ourproject.kune.workspace.client.dto.ContextDataDTO;
 import org.ourproject.kune.workspace.client.dto.ContextItemDTO;

@@ -1,7 +1,7 @@
 package org.ourproject.kune.docs.client;
 
 import org.ourproject.kune.docs.client.rpc.DocumentServiceAsync;
-import org.ourproject.kune.platf.client.State;
+import org.ourproject.kune.platf.client.state.State;
 import org.ourproject.kune.workspace.client.ContentDataDriver;
 import org.ourproject.kune.workspace.client.dto.ContentDataDTO;
 

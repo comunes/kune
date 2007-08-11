@@ -5,7 +5,6 @@ import org.ourproject.kune.platf.client.KuneModule;
 import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.ApplicationBuilder;
-import org.ourproject.kune.workspace.client.actions.InitAction;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -33,11 +32,7 @@ public class KuneEntryPoint implements EntryPoint {
 	Application app = new ApplicationBuilder(userHash, platform).build();
 
 	String token = History.getToken();
-	if (token.length() > 0) {
-	    app.getDispatcher().onHistoryChanged(token);
-	} else {
-	    app.getDispatcher().fire(InitAction.NAME, null);
-	}
+	app.getStateManager().onHistoryChanged(token);
     }
 
     private boolean isNotValid(final String userHash) {

@@ -3,7 +3,9 @@ package org.ourproject.kune.platf.client.app;
 import java.util.Map;
 
 import org.ourproject.kune.platf.client.Tool;
+import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
+import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.Workspace;
 import org.ourproject.kune.workspace.client.WorkspaceFactory;
 
@@ -11,15 +13,12 @@ import com.google.gwt.user.client.ui.RootPanel;
 
 public class DefaultApplication implements Application {
     private final Workspace workspace;
-    private final String defaultToolName;
     private final Map tools;
-    private final Dispatcher dispatcher;
+    private Dispatcher dispatcher;
+    private StateManager stateManager;
 
-    public DefaultApplication(final Map tools, final String defaultToolName, final Dispatcher dispatcher) {
+    public DefaultApplication(final Map tools) {
 	this.tools = tools;
-	this.defaultToolName = defaultToolName;
-	this.dispatcher = dispatcher;
-
 	workspace = WorkspaceFactory.getWorkspace();
 	workspace.attachTools(tools.values().iterator());
 	Desktop desktop = new Desktop(workspace);
@@ -38,8 +37,13 @@ public class DefaultApplication implements Application {
 	return (Tool) tools.get(toolName);
     }
 
-    public String getDefaultToolName() {
-	return defaultToolName;
+    public void init(final DefaultDispatcher dispatcher, final StateManager stateManager) {
+	this.dispatcher = dispatcher;
+	this.stateManager = stateManager;
+    }
+
+    public StateManager getStateManager() {
+	return stateManager;
     }
 
 }

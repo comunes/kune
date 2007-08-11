@@ -1,6 +1,7 @@
 package org.ourproject.kune.platf.client.dispatch;
 
 public class HistoryToken {
+    private static final String[] EMPTY = new String[0];
     private static final String DOT = ".";
     public final String group;
     public final String tool;
@@ -15,7 +16,12 @@ public class HistoryToken {
     }
 
     public HistoryToken(final String encoded) {
-	String[] splitted = encoded.split("\\.");
+	String[] splitted;
+	if (encoded != null) {
+	    splitted = encoded.split("\\.");
+	} else {
+	    splitted = EMPTY;
+	}
 	group = conditionalAssign(0, splitted);
 	tool = conditionalAssign(1, splitted);
 	folder = conditionalAssign(2, splitted);

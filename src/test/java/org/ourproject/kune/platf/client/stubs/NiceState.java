@@ -1,7 +1,7 @@
 package org.ourproject.kune.platf.client.stubs;
 
-import org.ourproject.kune.platf.client.State;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.state.State;
 
 public class NiceState extends State {
 

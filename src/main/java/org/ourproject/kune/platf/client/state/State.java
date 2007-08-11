@@ -1,4 +1,4 @@
-package org.ourproject.kune.platf.client;
+package org.ourproject.kune.platf.client.state;
 
 import java.util.List;
 

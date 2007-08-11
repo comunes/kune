@@ -1,8 +1,8 @@
 package org.ourproject.kune.workspace.client.actions;
 
-import org.ourproject.kune.platf.client.State;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
+import org.ourproject.kune.platf.client.state.State;
 import org.ourproject.kune.platf.client.stubs.ApplicationStub;
 import org.ourproject.kune.platf.client.stubs.NiceState;
 import org.ourproject.kune.workspace.client.Workspace;

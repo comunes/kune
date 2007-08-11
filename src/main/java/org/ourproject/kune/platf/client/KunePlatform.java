@@ -20,7 +20,6 @@ public class KunePlatform implements Register {
 
     public void addTool(final Tool tool) {
 	tools.add(tool);
-	actions.put(tool.getName(), tool.getStateAction());
     }
 
     public void addAction(final String eventName, final Action action) {
