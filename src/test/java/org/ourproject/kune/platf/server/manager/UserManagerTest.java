@@ -31,10 +31,6 @@ public class UserManagerTest extends PersistenceTest {
     }
 
     @Test
-    public void testUserRemoval() {
-    }
-
-    @Test
     public void testUserCreation() {
 	assertNotNull(user.getId());
 	assertNotNull(user.getUserGroup());

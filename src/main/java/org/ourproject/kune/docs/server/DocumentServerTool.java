@@ -12,7 +12,7 @@ import org.ourproject.kune.platf.server.tool.ServerTool;
 import com.google.inject.Inject;
 
 public class DocumentServerTool implements ServerTool {
-    private static final String NAME = "docs";
+    public static final String NAME = "docs";
     private final ContentDescriptorManager contentDescriptorManager;
     private final ToolConfigurationManager configurationManager;
 

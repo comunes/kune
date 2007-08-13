@@ -8,6 +8,8 @@ import org.ourproject.kune.docs.server.DocumentServerTool;
 import org.ourproject.kune.docs.server.KuneDocumentModule;
 import org.ourproject.kune.platf.server.KunePersistenceService;
 import org.ourproject.kune.platf.server.KunePlatformModule;
+import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.ToolConfiguration;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.UserManagerDefault;
 import org.ourproject.kune.platf.server.properties.KuneProperties;
@@ -57,5 +59,10 @@ public class TestKuneInitialization {
     public void testDatabase() {
 	User user = manager.getByShortName(properties.get(KuneProperties.DEFAULT_SITE_SHORT_NAME));
 	assertNotNull(user);
+	Group group = user.getUserGroup();
+	assertNotNull(group);
+	ToolConfiguration toolConfiguration = group.getToolConfiguration(DocumentServerTool.NAME);
+	assertNotNull(toolConfiguration);
+	assertNotNull(toolConfiguration.getWelcome());
     }
 }
