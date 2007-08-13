@@ -6,8 +6,9 @@ import org.ourproject.kune.platf.server.model.Content;
 
 public class MetadataManagerDefault implements MetadataManager {
 
-    public void fill(final Content content, final AccessLists accessList, final AccessRights accessRight) {
-	// TODO Auto-generated method stub
+    public void fill(final Content content, final AccessLists accessList, final AccessRights accessRights) {
+	content.setAccessLists(accessList);
+	content.setAccessRights(accessRights);
     }
 
 }
