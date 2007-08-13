@@ -10,7 +10,7 @@ import org.ourproject.kune.platf.server.manager.ContentManagerDefault;
 import org.ourproject.kune.platf.server.manager.MetadataManagerDefault;
 import org.ourproject.kune.platf.server.model.AccessRight;
 import org.ourproject.kune.platf.server.model.Content;
-import org.ourproject.kune.workspace.client.dto.ContentDataDTO;
+import org.ourproject.kune.workspace.client.dto.ContentDTO;
 
 import com.google.inject.Inject;
 
@@ -32,7 +32,7 @@ public class ContentServerService implements ContentService {
 	this.metadataManager = metadaManager;
     }
 
-    public ContentDataDTO getContent(final String userHash, final String groupName, final String toolName,
+    public ContentDTO getContent(final String userHash, final String groupName, final String toolName,
 	    final String folderRef, final String contentRef) throws ContentNotFoundException {
 
 	Content content = contentManager.getContent(session.getUser(), groupName, toolName, folderRef, contentRef);
@@ -42,7 +42,7 @@ public class ContentServerService implements ContentService {
 	return map(content);
     }
 
-    private ContentDataDTO map(final Content descriptor) {
+    private ContentDTO map(final Content descriptor) {
 	return null;
     }
 

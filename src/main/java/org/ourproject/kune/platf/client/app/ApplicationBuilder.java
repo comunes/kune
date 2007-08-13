@@ -68,7 +68,7 @@ public class ApplicationBuilder {
 	int total = toolList.size();
 	for (int index = 0; index < total; index++) {
 	    Tool tool = (Tool) toolList.get(index);
-	    tools.put(tool.getName(), tool);
+	    tools.put(tool.getLabel(), tool);
 	}
 	return tools;
     }

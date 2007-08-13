@@ -3,18 +3,13 @@ package org.ourproject.kune.docs.client.folder;
 import java.util.ArrayList;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.workspace.client.AbstractComponent;
-import org.ourproject.kune.workspace.client.ContextDataProvider;
-import org.ourproject.kune.workspace.client.ContextDataProvider.ContextDataAcceptor;
 import org.ourproject.kune.workspace.client.dto.ContextDataDTO;
 import org.ourproject.kune.workspace.client.dto.ContextItemDTO;
 
-public class NavigatorPresenter extends AbstractComponent implements ContextDataAcceptor {
+public class NavigatorPresenter {
     private final NavigationView view;
-    private final ContextDataProvider provider;
 
-    public NavigatorPresenter(final ContextDataProvider provider, final NavigationView view) {
-	this.provider = provider;
+    public NavigatorPresenter(final NavigationView view) {
 	this.view = view;
     }
 
@@ -23,7 +18,6 @@ public class NavigatorPresenter extends AbstractComponent implements ContextData
     }
 
     public void setReferences(final String ctxRef, final String cntRef) {
-	provider.getContext(ctxRef, this);
     }
 
     public void accept(final ContextDataDTO ctxData) {

@@ -1,7 +1,7 @@
 package org.ourproject.kune.docs.client.rpc;
 
 import org.ourproject.kune.platf.client.rpc.MockedService;
-import org.ourproject.kune.workspace.client.dto.ContentDataDTO;
+import org.ourproject.kune.workspace.client.dto.ContentDTO;
 import org.ourproject.kune.workspace.client.dto.ContextDataDTO;
 import org.ourproject.kune.workspace.client.dto.ContextItemDTO;
 
@@ -30,13 +30,13 @@ public class DocumentServiceMocked extends MockedService implements DocumentServ
 	GWT.log("DOC SERVICE: getContent - " + ctxRef + ", " + docRef, null);
 	delay(new Delayer() {
 	    public void run() {
-		callback.onSuccess(new ContentDataDTO(docRef, docRef,
+		callback.onSuccess(new ContentDTO(docRef, docRef,
 			"<h1>welcome<h1>this is the content from the <b>'server'</b> ;) for " + docRef.toUpperCase()));
 	    }
 	});
     }
 
-    public void saveContent(final String userHash, final ContentDataDTO contentData, final AsyncCallback asyncCallback) {
+    public void saveContent(final String userHash, final ContentDTO contentData, final AsyncCallback asyncCallback) {
 	delay(new Delayer() {
 	    public void run() {
 		asyncCallback.onSuccess(null);

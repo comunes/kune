@@ -2,7 +2,6 @@ package org.ourproject.kune.app.server;
 
 import org.ourproject.kune.app.server.servlet.Application;
 import org.ourproject.kune.app.server.servlet.GWTFilter;
-import org.ourproject.kune.docs.server.KuneDocumentModule;
 import org.ourproject.kune.platf.server.KunePlatformModule;
 import org.ourproject.kune.platf.server.KuneServiceDefault;
 import org.ourproject.kune.platf.server.properties.PropertiesFileName;
@@ -17,7 +16,6 @@ public class KuneAppFilter extends GWTFilter {
     @Override
     protected void configure(final Application app) {
 	app.use(new KunePlatformModule());
-	app.use(new KuneDocumentModule());
 
 	app.use(new AbstractModule() {
 	    public void configure() {

@@ -1,19 +1,23 @@
 package org.ourproject.kune.workspace.client.dto;
 
+import org.ourproject.kune.platf.client.dto.GroupDTO;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-public class ContentDataDTO implements IsSerializable {
+public class ContentDTO implements IsSerializable {
     private String docRef;
     private String content;
     private String title;
+    private String toolName;
+    private GroupDTO group;
 
     // private SimplifiedAccessDTO access;
 
-    public ContentDataDTO() {
+    public ContentDTO() {
 	this(null, null, null);
     }
 
-    public ContentDataDTO(final String docRef, final String title, final String content) {
+    public ContentDTO(final String docRef, final String title, final String content) {
 	this.docRef = docRef;
 	this.title = title;
 	this.content = content;
@@ -41,6 +45,22 @@ public class ContentDataDTO implements IsSerializable {
 
     public void setTitle(final String title) {
 	this.title = title;
+    }
+
+    public String getToolName() {
+	return toolName;
+    }
+
+    public void setToolName(final String toolName) {
+	this.toolName = toolName;
+    }
+
+    public GroupDTO getGroup() {
+	return this.group;
+    }
+
+    public void setGroup(final GroupDTO group) {
+	this.group = group;
     }
 
 }

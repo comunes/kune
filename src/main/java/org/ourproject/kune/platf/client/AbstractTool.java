@@ -15,7 +15,7 @@ public abstract class AbstractTool implements Tool {
 	this.name = name;
     }
 
-    public String getName() {
+    public String getLabel() {
 	return name;
     }
 

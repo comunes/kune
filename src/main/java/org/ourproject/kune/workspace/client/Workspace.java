@@ -8,7 +8,7 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
 public interface Workspace {
     public void showError(Throwable caught);
 
-    public void showGroupLogo(GroupDTO group);
+    public void showGroup(GroupDTO group);
 
     public void setTool(String toolName);
 

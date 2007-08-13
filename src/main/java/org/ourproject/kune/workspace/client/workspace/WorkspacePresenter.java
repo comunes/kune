@@ -22,7 +22,7 @@ public class WorkspacePresenter implements Workspace {
 
     }
 
-    public void showGroupLogo(final GroupDTO group) {
+    public void showGroup(final GroupDTO group) {
 	view.setLogo("group name here");
     }
 
@@ -30,7 +30,7 @@ public class WorkspacePresenter implements Workspace {
 	Tool tool;
 	while (iterator.hasNext()) {
 	    tool = ((Tool) iterator.next());
-	    view.addTab(tool.getName(), tool.getCaption());
+	    view.addTab(tool.getLabel(), tool.getCaption());
 	}
     }
 
