@@ -9,8 +9,8 @@ import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.Tool;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.state.State;
-import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.platf.client.state.StateManagerDefault;
+import org.ourproject.kune.platf.client.state.StateController;
+import org.ourproject.kune.platf.client.state.StateControllerDefault;
 import org.ourproject.kune.platf.client.utils.PrefetchUtilites;
 import org.ourproject.kune.workspace.client.actions.WorkspaceAction;
 
@@ -32,7 +32,7 @@ public class ApplicationBuilder {
 	DefaultApplication application = new DefaultApplication(tools);
 
 	final State state = new State(userHash);
-	final StateManager stateManager = new StateManagerDefault(application, state);
+	final StateController stateManager = new StateControllerDefault(application, state);
 	History.addHistoryListener(stateManager);
 
 	final DefaultDispatcher dispatcher = new DefaultDispatcher();
@@ -50,7 +50,7 @@ public class ApplicationBuilder {
     }
 
     public void prepareActions(final DefaultDispatcher dispatcher, final Map actions,
-	    final DefaultApplication application, final State state, final StateManager stateManager) {
+	    final DefaultApplication application, final State state, final StateController stateManager) {
 	WorkspaceAction action;
 	String eventName;
 

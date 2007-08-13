@@ -5,12 +5,12 @@ import org.ourproject.kune.platf.client.dispatch.HistoryToken;
 import org.ourproject.kune.platf.client.rpc.KuneService;
 import org.ourproject.kune.platf.client.rpc.KuneServiceAsync;
 
-public class StateManagerDefault implements StateManager {
+public class StateControllerDefault implements StateController {
     private final Application app;
     private final State state;
     private final KuneServiceAsync server;
 
-    public StateManagerDefault(final Application app, final State state) {
+    public StateControllerDefault(final Application app, final State state) {
 	this.app = app;
 	this.state = state;
 	this.server = KuneService.App.getInstance();

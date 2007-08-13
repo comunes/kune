@@ -5,7 +5,7 @@ import java.util.Map;
 import org.ourproject.kune.platf.client.Tool;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
-import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.platf.client.state.StateController;
 import org.ourproject.kune.workspace.client.Workspace;
 import org.ourproject.kune.workspace.client.WorkspaceFactory;
 
@@ -15,7 +15,7 @@ public class DefaultApplication implements Application {
     private final Workspace workspace;
     private final Map tools;
     private Dispatcher dispatcher;
-    private StateManager stateManager;
+    private StateController stateManager;
 
     public DefaultApplication(final Map tools) {
 	this.tools = tools;
@@ -37,12 +37,12 @@ public class DefaultApplication implements Application {
 	return (Tool) tools.get(toolName);
     }
 
-    public void init(final DefaultDispatcher dispatcher, final StateManager stateManager) {
+    public void init(final DefaultDispatcher dispatcher, final StateController stateManager) {
 	this.dispatcher = dispatcher;
 	this.stateManager = stateManager;
     }
 
-    public StateManager getStateManager() {
+    public StateController getStateManager() {
 	return stateManager;
     }
 
