@@ -62,6 +62,12 @@ public class ContentDescriptor implements HasContent {
 	return null;
     }
 
+    @Finder(query = "select count(*) from Rate r where r.contentDescriptor = :descriptor")
+    public Integer calculateRateNumberOfUsers(@Named("descriptor")
+    final ContentDescriptor descriptor) {
+	return null;
+    }
+
     public Long getId() {
 	return id;
     }

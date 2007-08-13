@@ -3,12 +3,40 @@ package org.ourproject.kune.platf.server.model;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.ContentDescriptor;
 import org.ourproject.kune.platf.server.domain.Folder;
+import org.ourproject.kune.platf.server.domain.Group;
 
 public class Content {
-    private ContentDescriptor descriptor;
+
+    // Mapped fields from ContentDescriptor
+    private String docRef;
+    private String content;
+    private String title;
+
+    // Mapped fields from Folder
+    private String toolName;
+    private Group group;
+
+    // Other mapped fields
     private Folder folder;
     private AccessLists accessLists;
     private AccessRights accessRights;
+    private Double rate;
+    private Integer rateByUsers;
+
+    // Unmapped fields
+    private ContentDescriptor descriptor;
+
+    public void setFieldsFromContentDescriptor() {
+	docRef = descriptor.getId().toString();
+	title = descriptor.getLastRevision().getData().getTitle();
+	// TODO: take mime in consideration
+	content = descriptor.getLastRevision().getData().getContent().toString();
+    }
+
+    public void setFieldsFromFolder() {
+	toolName = folder.getToolName();
+	group = folder.getOwner();
+    }
 
     public AccessLists getAccessLists() {
 	return accessLists;
@@ -22,6 +50,46 @@ public class Content {
 	return accessRights;
     }
 
+    public String getDocRef() {
+	return docRef;
+    }
+
+    public void setDocRef(final String docRef) {
+	this.docRef = docRef;
+    }
+
+    public String getContent() {
+	return content;
+    }
+
+    public void setContent(final String content) {
+	this.content = content;
+    }
+
+    public String getTitle() {
+	return title;
+    }
+
+    public void setTitle(final String title) {
+	this.title = title;
+    }
+
+    public String getToolName() {
+	return toolName;
+    }
+
+    public void setToolName(final String toolName) {
+	this.toolName = toolName;
+    }
+
+    public Group getGroup() {
+	return group;
+    }
+
+    public void setGroup(final Group group) {
+	this.group = group;
+    }
+
     public void setAccessRights(final AccessRights accessRights) {
 	this.accessRights = accessRights;
     }
@@ -29,6 +97,8 @@ public class Content {
     public Content(final ContentDescriptor descriptor, final Folder folder) {
 	this.descriptor = descriptor;
 	this.folder = folder;
+	this.setFieldsFromContentDescriptor();
+	this.setFieldsFromFolder();
     }
 
     public ContentDescriptor getDescriptor() {
@@ -37,6 +107,7 @@ public class Content {
 
     public void setDescriptor(final ContentDescriptor descriptor) {
 	this.descriptor = descriptor;
+	this.setFieldsFromContentDescriptor();
     }
 
     public Folder getFolder() {
@@ -45,6 +116,23 @@ public class Content {
 
     public void setFolder(final Folder folder) {
 	this.folder = folder;
+	this.setFieldsFromFolder();
+    }
+
+    public Double getRate() {
+	return rate;
+    }
+
+    public void setRate(final Double rate) {
+	this.rate = rate;
+    }
+
+    public Integer getRateByUsers() {
+	return rateByUsers;
+    }
+
+    public void setRateByUsers(final Integer rateByUsers) {
+	this.rateByUsers = rateByUsers;
     }
 
 }

@@ -25,7 +25,7 @@ public class ContentServiceMocked extends MockedService implements ContentServic
 	content.setToolName(DocumentTool.NAME);
 	content.setAccessRights(new AccessRightsDTO(false, true, true));
 
-	content.setText("this is the content");
+	content.setContent("this is the content");
 
 	answer(content, callback);
     }

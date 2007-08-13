@@ -85,8 +85,12 @@ public class Revision {
 	this.previous = previous;
     }
 
-    public void setTextData(final String text) {
+    public void setDataContent(final String text) {
 	this.data.setContent(text.toCharArray());
+    }
+
+    public void setDataTitle(final String text) {
+	this.data.setTitle(text);
     }
 
 }

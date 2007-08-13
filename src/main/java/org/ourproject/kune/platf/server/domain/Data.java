@@ -6,13 +6,22 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "text")
+@Table(name = "data")
 public class Data implements HasId {
     @Id
     @GeneratedValue
     Long id;
 
+    String title;
     char[] content;
+
+    public String getTitle() {
+	return title;
+    }
+
+    public void setTitle(final String title) {
+	this.title = title;
+    }
 
     public Long getId() {
 	return id;

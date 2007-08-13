@@ -28,7 +28,7 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
     private void showContent() {
 	if (content.hasDocument()) {
 	    DocumentReader reader = components.getDocumentReader();
-	    reader.showDocument(content.getText(), content.getAccessRights());
+	    reader.showDocument(content.getContent(), content.getAccessRights());
 	    view.show(reader.getView());
 	} else {
 	    FolderViewer viewer = components.getFolderViewer();
@@ -40,7 +40,7 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
     public void onEdit() {
 	if (content.hasDocument()) {
 	    TextEditor editor = components.getDocumentEditor();
-	    editor.setContent(content.getText());
+	    editor.setContent(content.getContent());
 	    view.show(editor.getView());
 	} else {
 	    FolderEditor editor = components.getFolderEditor();

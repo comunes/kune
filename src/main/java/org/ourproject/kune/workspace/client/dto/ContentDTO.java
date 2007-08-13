@@ -12,11 +12,11 @@ public class ContentDTO implements IsSerializable {
     private String title;
     private String toolName;
     private GroupDTO group;
-    private String text;
-    private AccessRightsDTO accessRights;
     private FolderDTO folder;
-
-    // private SimplifiedAccessDTO access;
+    private AccessListsDTO accessLists;
+    private AccessRightsDTO accessRights;
+    private Double rate;
+    private Integer rateByUsers;
 
     public ContentDTO() {
 	this(null, null, null);
@@ -68,14 +68,6 @@ public class ContentDTO implements IsSerializable {
 	this.group = group;
     }
 
-    public String getText() {
-	return this.text;
-    }
-
-    public void setText(final String text) {
-	this.text = text;
-    }
-
     public AccessRightsDTO getAccessRights() {
 	return this.accessRights;
     }
@@ -98,5 +90,29 @@ public class ContentDTO implements IsSerializable {
 
     public boolean hasDocument() {
 	return docRef != null;
+    }
+
+    public AccessListsDTO getAccessLists() {
+	return accessLists;
+    }
+
+    public void setAccessLists(final AccessListsDTO accessLists) {
+	this.accessLists = accessLists;
+    }
+
+    public Double getRate() {
+	return rate;
+    }
+
+    public void setRate(final Double rate) {
+	this.rate = rate;
+    }
+
+    public Integer getRateByUsers() {
+	return rateByUsers;
+    }
+
+    public void setRateByUsers(final Integer rateByUsers) {
+	this.rateByUsers = rateByUsers;
     }
 }
