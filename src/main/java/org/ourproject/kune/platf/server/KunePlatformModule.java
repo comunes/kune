@@ -23,6 +23,7 @@ public class KunePlatformModule extends AbstractModule {
     protected void configure() {
 	bindManagers();
 	install(PersistenceService.usingJpa().buildModule());
+	bind(KunePersistenceService.class).in(Scopes.SINGLETON);
 	bind(KuneProperties.class).to(KunePropertiesDefault.class).in(Scopes.SINGLETON);
 	bind(Mapper.class).to(DozerMapper.class).in(Scopes.SINGLETON);
 	bind(ToolRegistry.class).in(Scopes.SINGLETON);

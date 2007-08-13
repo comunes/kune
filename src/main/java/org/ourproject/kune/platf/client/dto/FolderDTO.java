@@ -1,6 +1,8 @@
 package org.ourproject.kune.platf.client.dto;
 
-public class FolderDTO {
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+public class FolderDTO implements IsSerializable {
     Long id;
 
     public Long getId() {
