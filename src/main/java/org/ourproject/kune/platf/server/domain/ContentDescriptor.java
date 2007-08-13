@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -25,11 +26,11 @@ public class ContentDescriptor implements HasContent {
     @GeneratedValue
     private Long id;
 
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private List<Tag> tags;
     @OneToOne
     private License license;
-    @OneToOne
+    @OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private Revision lastRevision;
 
     @OneToOne

@@ -21,7 +21,7 @@ public class Revision {
     private User editor;
 
     @Basic(optional = false)
-    private Long modifiedOn;
+    private Long createdOn;
 
     @OneToOne(cascade = { CascadeType.ALL })
     private Data data;
@@ -34,6 +34,7 @@ public class Revision {
 
     public Revision() {
 	this.data = new Data();
+	createdOn = System.currentTimeMillis();
     }
 
     public Long getId() {
@@ -52,12 +53,12 @@ public class Revision {
 	this.editor = editor;
     }
 
-    public Long getModifiedOn() {
-	return modifiedOn;
+    public Long getCreatedOn() {
+	return createdOn;
     }
 
-    public void setModifiedOn(final Long modifiedOn) {
-	this.modifiedOn = modifiedOn;
+    public void setCreatedOn(final Long modifiedOn) {
+	this.createdOn = modifiedOn;
     }
 
     public Data getData() {
