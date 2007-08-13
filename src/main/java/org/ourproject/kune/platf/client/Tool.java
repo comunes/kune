@@ -4,7 +4,7 @@ import org.ourproject.kune.workspace.client.WorkspaceComponent;
 import org.ourproject.kune.workspace.client.dto.ContentDTO;
 
 public interface Tool {
-    String getLabel();
+    String getName();
 
     String getCaption();
 

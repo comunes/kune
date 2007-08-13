@@ -1,5 +1,6 @@
 package org.ourproject.kune.docs.client;
 
+import org.ourproject.kune.docs.client.ui.cnt.DocumentContent;
 import org.ourproject.kune.platf.client.Tool;
 import org.ourproject.kune.workspace.client.WorkspaceComponent;
 import org.ourproject.kune.workspace.client.dto.ContentDTO;
@@ -17,23 +18,20 @@ public class DocumentTool implements Tool {
     }
 
     public WorkspaceComponent getContent() {
-	// TODO Auto-generated method stub
-	return null;
+	return DocumentFactory.createDocumentContent();
     }
 
     public WorkspaceComponent getContext() {
-	// TODO Auto-generated method stub
-	return null;
+	return DocumentFactory.createDocumentContext();
     }
 
-    public String getLabel() {
-	// TODO Auto-generated method stub
-	return null;
+    public String getName() {
+	return NAME;
     }
 
     public void setContent(final ContentDTO content) {
-	// TODO Auto-generated method stub
-
+	DocumentContent docContent = DocumentFactory.createDocumentContent();
+	docContent.setContent(content);
     }
 
 }

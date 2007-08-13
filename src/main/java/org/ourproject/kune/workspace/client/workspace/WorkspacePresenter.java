@@ -30,7 +30,7 @@ public class WorkspacePresenter implements Workspace {
 	Tool tool;
 	while (iterator.hasNext()) {
 	    tool = ((Tool) iterator.next());
-	    view.addTab(tool.getLabel(), tool.getCaption());
+	    view.addTab(tool.getName(), tool.getCaption());
 	}
     }
 
