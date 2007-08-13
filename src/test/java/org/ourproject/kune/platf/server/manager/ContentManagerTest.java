@@ -43,7 +43,7 @@ public class ContentManagerTest {
 	user.getUserGroup().setDefaultContent(defaultContentDescriptor);
 	session.setUser(user);
 
-	Content content = contentManager.getContent(session, null, null, null, null);
+	Content content = contentManager.getContent(session.getUser(), null, null, null, null);
 	assertSame(defaultContentDescriptor, content.getDescriptor());
 	assertSame(defaultContentDescriptor.getFolder(), content.getFolder());
     }
@@ -57,7 +57,7 @@ public class ContentManagerTest {
 	expect(contentDescriptorManager.get(2l)).andReturn(descriptor);
 	replay(contentDescriptorManager);
 
-	Content content = contentManager.getContent(session, "groupShortName", "toolName", "1", "2");
+	Content content = contentManager.getContent(session.getUser(), "groupShortName", "toolName", "1", "2");
 	assertSame(descriptor, content.getDescriptor());
 	assertSame(folder, content.getFolder());
 	verify(contentDescriptorManager);
@@ -71,7 +71,7 @@ public class ContentManagerTest {
 	expect(contentDescriptorManager.get(1l)).andReturn(descriptor);
 	replay(contentDescriptorManager);
 
-	contentManager.getContent(session, "groupShortName", "toolName", "5", "1");
+	contentManager.getContent(session.getUser(), "groupShortName", "toolName", "5", "1");
 	verify(contentDescriptorManager);
     }
 
@@ -83,7 +83,7 @@ public class ContentManagerTest {
 	expect(contentDescriptorManager.get(1l)).andReturn(descriptor);
 	replay(contentDescriptorManager);
 
-	contentManager.getContent(session, "groupShortName", "toolName", "5", "1");
+	contentManager.getContent(session.getUser(), "groupShortName", "toolName", "5", "1");
 	verify(contentDescriptorManager);
     }
 
@@ -95,13 +95,13 @@ public class ContentManagerTest {
 	expect(contentDescriptorManager.get(1l)).andReturn(descriptor);
 	replay(contentDescriptorManager);
 
-	contentManager.getContent(session, "groupShortName", "toolName", "5", "1");
+	contentManager.getContent(session.getUser(), "groupShortName", "toolName", "5", "1");
 	verify(contentDescriptorManager);
     }
 
     @Test(expected = ContentNotFoundException.class)
     public void voyAJoder() throws ContentNotFoundException {
-	contentManager.getContent(session, null, "toolName", "1", "2");
+	contentManager.getContent(session.getUser(), null, "toolName", "1", "2");
     }
 
     @Test
@@ -110,7 +110,7 @@ public class ContentManagerTest {
 	expect(folderManager.get(1l)).andReturn(folder);
 
 	replay(folderManager);
-	Content content = contentManager.getContent(session, "groupShortName", "toolName", "1", null);
+	Content content = contentManager.getContent(session.getUser(), "groupShortName", "toolName", "1", null);
 	assertSame(folder, content.getFolder());
 	assertNull(content.getDescriptor());
 	verify(folderManager);
@@ -123,7 +123,7 @@ public class ContentManagerTest {
 	expect(groupManager.get("groupShortName")).andReturn(group);
 	replay(groupManager);
 
-	Content content = contentManager.getContent(session, "groupShortName", "toolName", null, null);
+	Content content = contentManager.getContent(session.getUser(), "groupShortName", "toolName", null, null);
 	assertSame(folder, content.getFolder());
 	verify(groupManager);
     }
@@ -136,7 +136,7 @@ public class ContentManagerTest {
 	expect(groupManager.get("groupShortName")).andReturn(group);
 	replay(groupManager);
 
-	Content content = contentManager.getContent(session, "groupShortName", null, null, null);
+	Content content = contentManager.getContent(session.getUser(), "groupShortName", null, null, null);
 	assertSame(ct, content.getDescriptor());
 	verify(groupManager);
     }
@@ -149,7 +149,7 @@ public class ContentManagerTest {
 
 	user.setUserGroup(group);
 	group.setDefaultContent(contentDescriptor);
-	Content content = contentManager.getContent(session, null, null, null, null);
+	Content content = contentManager.getContent(session.getUser(), null, null, null, null);
 	assertSame(contentDescriptor, content.getDescriptor());
     }
 
@@ -161,7 +161,7 @@ public class ContentManagerTest {
 	expect(contentDescriptorManager.get(1l)).andReturn(descriptor);
 	replay(contentDescriptorManager);
 
-	contentManager.getContent(session, "groupShortName", "toolName", "5", "1a");
+	contentManager.getContent(session.getUser(), "groupShortName", "toolName", "5", "1a");
 	verify(contentDescriptorManager);
     }
 

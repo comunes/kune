@@ -1,10 +1,10 @@
 package org.ourproject.kune.platf.server.manager;
 
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
-import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.domain.ContentDescriptor;
 import org.ourproject.kune.platf.server.domain.Folder;
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.model.Content;
 
 public class ContentManagerDefault implements ContentManager {
@@ -19,8 +19,8 @@ public class ContentManagerDefault implements ContentManager {
 	this.contentDescriptorManager = contentDescriptorManager;
     }
 
-    public Content getContent(final UserSession session, final String groupName, final String toolName,
-	    final String folderRef, final String contentRef) throws ContentNotFoundException {
+    public Content getContent(final User user, final String groupName, final String toolName, final String folderRef,
+	    final String contentRef) throws ContentNotFoundException {
 
 	Long contentId = checkAndParse(contentRef);
 	Long folderId = checkAndParse(folderRef);
@@ -34,7 +34,7 @@ public class ContentManagerDefault implements ContentManager {
 	} else if (noneNull(groupName)) {
 	    return findDefaultOfGroup(groupName);
 	} else if (allNull(groupName, toolName, folderRef, contentRef)) {
-	    return findDefaultOfGroup(session.getUser().getUserGroup());
+	    return findDefaultOfGroup(user.getUserGroup());
 	} else {
 	    throw new ContentNotFoundException();
 	}

@@ -7,18 +7,23 @@ import org.ourproject.kune.platf.server.domain.User;
 
 public class AccessListManagerTest {
 
-    private AccessListManager accessManager;
+    private AccessListManager accessListManager;
 
     @Before
     public void createSession() {
-	accessManager = new AccessListManagerDefault();
+	accessListManager = new AccessListManagerDefault();
     }
 
     @Test
-    public void checkUserHasAccess() {
+    public void getUserAccessListFromContents() {
 	User user = new TestDomainHelper().createUser(1);
 
-	// accessManager.check(user, content);
+	// accessListManager.get(user, content);
+
+    }
+
+    @Test
+    public void getUserAccessListFromSocialNet() {
 
     }
 }

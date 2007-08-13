@@ -6,8 +6,8 @@ import org.ourproject.kune.platf.server.model.Content;
 
 public class AccessListManagerDefault implements AccessListManager {
 
-    public void check(final User user, final Content content) {
+    public AccessList get(final User user, final Content content) {
 	AccessList accessList = content.getDescriptor().getAccessLists();
+	return null;
     }
-
 }
