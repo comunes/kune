@@ -12,12 +12,12 @@ public class SocialNetwork {
     List<Group> admins;
 
     @OneToMany
-    List<Group> editors;
+    List<Group> collaborators;
 
     @OneToMany
     List<Group> viewer;
 
     @OneToMany
-    List<Group> pendingEditors;
+    List<Group> pendingCollaborators;
 
 }
