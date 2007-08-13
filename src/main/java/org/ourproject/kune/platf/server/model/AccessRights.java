@@ -2,6 +2,10 @@ package org.ourproject.kune.platf.server.model;
 
 public class AccessRights {
 
+    public static final int ADMIN = 1;
+    public static final int EDIT = 2;
+    public static final int VIEW = 3;
+
     boolean isAdministrable;
     boolean isEditable;
     boolean isVisible;
