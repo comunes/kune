@@ -15,6 +15,7 @@ import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.domain.ContentDescriptor;
 import org.ourproject.kune.platf.server.domain.Folder;
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.ToolConfiguration;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.model.Content;
 
@@ -119,7 +120,8 @@ public class ContentManagerTest {
     @Test
     public void testFolderMissing() throws ContentNotFoundException {
 	Group group = new Group();
-	Folder folder = group.setRootFolder("toolName", new Folder());
+	ToolConfiguration config = group.setToolConfig("toolName", new ToolConfiguration());
+	Folder folder = config.setRoot(new Folder());
 	expect(groupManager.get("groupShortName")).andReturn(group);
 	replay(groupManager);
 

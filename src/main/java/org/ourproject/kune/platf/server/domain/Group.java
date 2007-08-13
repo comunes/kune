@@ -110,11 +110,6 @@ public class Group implements HasId {
 	this.socialNetwork = socialNetwork;
     }
 
-    public Folder setRootFolder(final String toolName, final Folder root) {
-	toolsConfig.get(toolName).setRoot(root);
-	return root;
-    }
-
     public Folder getRoot(final String toolName) {
 	return toolsConfig.get(toolName).getRoot();
     }
@@ -127,8 +122,9 @@ public class Group implements HasId {
 	return toolsConfig.get(name);
     }
 
-    public void setToolConfig(final String name, final ToolConfiguration config) {
+    public ToolConfiguration setToolConfig(final String name, final ToolConfiguration config) {
 	toolsConfig.put(name, config);
+	return config;
     }
 
 }

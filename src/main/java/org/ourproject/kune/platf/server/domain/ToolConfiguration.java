@@ -21,9 +21,9 @@ public class ToolConfiguration {
     @OneToOne
     private ContentDescriptor welcome;
 
-    public void setRoot(final Folder root) {
+    public Folder setRoot(final Folder root) {
 	this.root = root;
-
+	return root;
     }
 
     public Long getId() {

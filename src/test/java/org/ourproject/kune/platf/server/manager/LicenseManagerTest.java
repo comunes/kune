@@ -3,6 +3,7 @@ package org.ourproject.kune.platf.server.manager;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.server.PersistenceTest;
@@ -19,6 +20,7 @@ public class LicenseManagerTest extends PersistenceTest {
 
     @Before
     public void insertData() {
+	openTransaction();
 	assertEquals(0, licenseFinder.getAll().size());
 	license = new License("by", "Creative Commons Attribution", "", "http://creativecommons.org/licenses/by/3.0/",
 		true, false, false, "", "");
@@ -29,5 +31,10 @@ public class LicenseManagerTest extends PersistenceTest {
     public void testLicenseCreation() {
 	assertNotNull(license.getId());
 	assertEquals(1, licenseFinder.getAll().size());
+    }
+
+    @After
+    public void close() {
+	closeTransaction();
     }
 }

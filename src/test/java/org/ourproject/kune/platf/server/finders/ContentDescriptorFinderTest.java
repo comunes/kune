@@ -34,5 +34,6 @@ public class ContentDescriptorFinderTest extends PersistenceTest {
 	Double rate = finder.calculateRate(cd);
 	Double average = (1.3 + 5.3) / 2;
 	assertEquals(average, rate);
+	closeTransaction();
     }
 }
