@@ -31,7 +31,7 @@ public class DocumentServerTool implements ServerTool {
 	ToolConfiguration config = group.getToolConfiguration(NAME);
 	if (config == null) {
 	    config = new ToolConfiguration();
-	    config.setRoot(new Folder());
+	    config.setRoot(new Folder("/"));
 	    group.setToolConfig(NAME, config);
 	    ContentDescriptor descriptor = contentDescriptorManager.createContent(user);
 	    config.setWelcome(descriptor);

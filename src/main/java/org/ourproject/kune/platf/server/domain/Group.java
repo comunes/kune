@@ -10,6 +10,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -38,6 +39,7 @@ public class Group implements HasId {
 
     private SocialNetwork socialNetwork;
 
+    @OneToMany
     private final Map<String, ToolConfiguration> toolsConfig;
 
     public Group() {

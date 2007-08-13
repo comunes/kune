@@ -30,13 +30,19 @@ public class Folder implements HasId {
 
     @Basic(optional = false)
     private String absolutePath;
-    @Basic(optional = false)
-    private String idPath;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Alias> aliases;
 
     private String toolName;
+
+    public Folder(final String absolutePath) {
+	this.absolutePath = absolutePath;
+    }
+
+    public Folder() {
+	this(null);
+    }
 
     public Folder getParent() {
 	return parent;
@@ -68,14 +74,6 @@ public class Folder implements HasId {
 
     public void setAbsolutePath(final String absolutePath) {
 	this.absolutePath = absolutePath;
-    }
-
-    public String getIdPath() {
-	return idPath;
-    }
-
-    public void setIdPath(final String idPath) {
-	this.idPath = idPath;
     }
 
     public List<Alias> getAliases() {
