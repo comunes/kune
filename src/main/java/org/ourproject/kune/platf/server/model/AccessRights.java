@@ -1,18 +1,18 @@
 package org.ourproject.kune.platf.server.model;
 
-public class AccessRight {
+public class AccessRights {
 
     boolean isAdministrable;
     boolean isEditable;
     boolean isVisible;
 
-    public AccessRight(final boolean isAdministrable, final boolean isEditable, final boolean isVisible) {
+    public AccessRights(final boolean isAdministrable, final boolean isEditable, final boolean isVisible) {
 	this.isAdministrable = isAdministrable;
 	this.isEditable = isEditable;
 	this.isVisible = isVisible;
     }
 
-    public AccessRight() {
+    public AccessRights() {
 	this(false, false, false);
     }
 

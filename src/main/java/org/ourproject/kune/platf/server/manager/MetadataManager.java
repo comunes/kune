@@ -1,11 +1,11 @@
 package org.ourproject.kune.platf.server.manager;
 
-import org.ourproject.kune.platf.server.domain.AccessList;
-import org.ourproject.kune.platf.server.model.AccessRight;
+import org.ourproject.kune.platf.server.domain.AccessLists;
+import org.ourproject.kune.platf.server.model.AccessRights;
 import org.ourproject.kune.platf.server.model.Content;
 
 public interface MetadataManager {
 
-    void fill(final Content content, final AccessList accessList, final AccessRight accessRight);
+    void fill(final Content content, final AccessLists accessList, final AccessRights accessRight);
 
 }
