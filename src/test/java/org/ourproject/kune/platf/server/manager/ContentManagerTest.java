@@ -108,7 +108,7 @@ public class ContentManagerTest {
     @Test
     public void testDocMissing() throws ContentNotFoundException {
 	Folder folder = new Folder();
-	expect(folderManager.get(1l)).andReturn(folder);
+	expect(folderManager.find(1l)).andReturn(folder);
 
 	replay(folderManager);
 	Content content = contentManager.getContent(session.getUser(), "groupShortName", "toolName", "1", null);

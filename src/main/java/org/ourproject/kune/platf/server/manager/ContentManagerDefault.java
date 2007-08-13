@@ -7,11 +7,16 @@ import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.model.Content;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+
+@Singleton
 public class ContentManagerDefault implements ContentManager {
     private final GroupManager groupManager;
     private final ContentDescriptorManager contentDescriptorManager;
     private final FolderManager folderManager;
 
+    @Inject
     public ContentManagerDefault(final GroupManager groupManager, final FolderManager folderManager,
 	    final ContentDescriptorManager contentDescriptorManager) {
 	this.groupManager = groupManager;
@@ -68,7 +73,7 @@ public class ContentManagerDefault implements ContentManager {
     }
 
     private Content findByFolderReference(final String groupName, final String toolName, final Long folderId) {
-	Folder folder = folderManager.get(folderId);
+	Folder folder = folderManager.find(folderId);
 	return new Content(null, folder);
     }
 

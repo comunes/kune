@@ -8,7 +8,9 @@ import org.ourproject.kune.platf.server.domain.User;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 
+@Singleton
 public class ContentDescriptorManagerDefault extends DefaultManager<ContentDescriptor, Long> implements
 	ContentDescriptorManager {
 

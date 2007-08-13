@@ -4,6 +4,6 @@ import org.ourproject.kune.platf.server.domain.Folder;
 
 public interface FolderManager {
 
-    Folder get(Long id);
+    Folder find(Long id);
 
 }

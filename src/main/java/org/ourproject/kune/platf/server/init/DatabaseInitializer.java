@@ -19,8 +19,8 @@ public class DatabaseInitializer {
     KuneProperties properties;
 
     public void initConditional() {
-	properties.get(KuneProperties.DEFAULT_SITE_SHORT_NAME);
-	User user = userManager.getByShortName("site");
+	String shortName = properties.get(KuneProperties.DEFAULT_SITE_SHORT_NAME);
+	User user = userManager.getByShortName(shortName);
 	if (user == null) {
 	    initDatabase();
 	}

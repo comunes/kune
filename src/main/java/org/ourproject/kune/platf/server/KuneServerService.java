@@ -9,8 +9,10 @@ import org.ourproject.kune.platf.server.mapper.Mapper;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
-public class KuneServiceDefault implements KuneService {
+@Singleton
+public class KuneServerService implements KuneService {
     private Mapper mapper;
     private UserSession userSession;
 

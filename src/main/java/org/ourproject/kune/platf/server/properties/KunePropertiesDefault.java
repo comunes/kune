@@ -6,7 +6,9 @@ import java.text.MessageFormat;
 import java.util.Properties;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
+@Singleton
 public class KunePropertiesDefault implements KuneProperties {
     private Properties properties;
 

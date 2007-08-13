@@ -17,9 +17,11 @@ import org.ourproject.kune.platf.server.properties.KuneProperties;
 import org.ourproject.kune.workspace.client.dto.ContentDTO;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.wideplay.warp.persist.TransactionType;
 import com.wideplay.warp.persist.Transactional;
 
+@Singleton
 public class ContentServerService implements ContentService {
     private final ContentManager contentManager;
     private final AccessListsManager accessListsManager;

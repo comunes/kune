@@ -3,6 +3,9 @@ package org.ourproject.kune.platf.server.manager;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.ContentDescriptor;
 
+import com.google.inject.Singleton;
+
+@Singleton
 public class AccessListsManagerDefault implements AccessListsManager {
 
     public AccessLists get(final ContentDescriptor contentDescriptor) {

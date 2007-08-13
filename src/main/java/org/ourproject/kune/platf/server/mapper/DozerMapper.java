@@ -1,8 +1,11 @@
 package org.ourproject.kune.platf.server.mapper;
 
+import com.google.inject.Singleton;
+
 import net.sf.dozer.util.mapping.DozerBeanMapperSingletonWrapper;
 import net.sf.dozer.util.mapping.MapperIF;
 
+@Singleton
 public class DozerMapper implements Mapper {
     private final MapperIF mapper;
 

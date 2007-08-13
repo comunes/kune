@@ -11,7 +11,8 @@ import org.ourproject.kune.platf.server.KunePlatformModule;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.ToolConfiguration;
 import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.manager.UserManagerDefault;
+import org.ourproject.kune.platf.server.manager.LicenseManager;
+import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.properties.KuneProperties;
 import org.ourproject.kune.platf.server.properties.PropertiesFileName;
 import org.ourproject.kune.platf.server.tool.ToolRegistry;
@@ -37,7 +38,10 @@ public class TestKuneInitialization {
     KuneProperties properties;
 
     @Inject
-    UserManagerDefault manager;
+    UserManager manager;
+
+    @Inject
+    LicenseManager licenseManager;
 
     @Before
     public void create() {
@@ -64,5 +68,6 @@ public class TestKuneInitialization {
 	ToolConfiguration toolConfiguration = group.getToolConfiguration(DocumentServerTool.NAME);
 	assertNotNull(toolConfiguration);
 	assertNotNull(toolConfiguration.getWelcome());
+	assertNotNull(licenseManager.getAll());
     }
 }

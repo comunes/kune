@@ -76,14 +76,14 @@ public abstract class GWTFilter implements Filter {
 
 	HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
 	HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
-	log.debug("FILTER: " + httpRequest.getRequestURI());
+	// log.debug("FILTER: " + httpRequest.getRequestURI());
 
 	for (SimpleFilter filter : filters) {
 	    if (filter.doFilter(httpRequest, httpResponse)) {
 		return;
 	    }
 	}
-	log.debug("NOT FILTERED!");
+	// log.debug("NOT FILTERED!");
 	filterChain.doFilter(servletRequest, servletResponse);
     }
 }

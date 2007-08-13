@@ -8,6 +8,9 @@ import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.model.AccessRights;
 
+import com.google.inject.Singleton;
+
+@Singleton
 public class AccessRightsManagerDefault implements AccessRightsManager {
 
     HashSet<Group> visited;

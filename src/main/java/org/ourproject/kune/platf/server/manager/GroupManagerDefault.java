@@ -9,7 +9,9 @@ import org.ourproject.kune.platf.server.tool.ToolRegistry;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 
+@Singleton
 public class GroupManagerDefault extends DefaultManager<Group, Long> implements GroupManager {
 
     private final Group finder;

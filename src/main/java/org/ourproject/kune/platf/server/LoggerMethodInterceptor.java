@@ -8,75 +8,97 @@ import org.apache.commons.logging.LogFactory;
 public class LoggerMethodInterceptor implements MethodInterceptor {
 
     private static final Log log = LogFactory.getLog(LoggerMethodInterceptor.class);
-    private String methodName;
+    private final boolean simplifyNames;
 
-    public Object invoke(MethodInvocation invocation) throws Throwable {
-        this.methodName = invocation.getMethod().getName();
-        logInvocation(invocation);
-
-        try {
-            Object result = invocation.proceed();
-            logResult(invocation, result);
-            return result;
-        } catch (Throwable e) {
-            logException(e);
-            throw e;
-        }
+    public LoggerMethodInterceptor(final boolean simplifyNames) {
+	this.simplifyNames = simplifyNames;
     }
 
-    private void logException(Throwable e) {
-        StringBuffer buffer = new StringBuffer("[");
-        buffer.append(methodName).append("] EXCEPTION => ");
-        buffer.append(e.toString());
-        log.debug(buffer);
+    public LoggerMethodInterceptor() {
+	this(true);
     }
 
-    private void logInvocation(MethodInvocation invocation) {
-        StringBuffer buffer = createBuffer(invocation);
-        addMethodName(buffer);
-        addMethodParameters(invocation, buffer);
-        log.debug(buffer.toString());
+    public Object invoke(final MethodInvocation invocation) throws Throwable {
+	logInvocation(invocation);
+	try {
+	    Object result = invocation.proceed();
+	    logResult(invocation, result);
+	    return result;
+	} catch (Throwable e) {
+	    logException(invocation, e);
+	    throw e;
+	}
     }
 
-    private StringBuffer createBuffer(MethodInvocation invocation) {
-        StringBuffer buffer = new StringBuffer("[");
-        addTargetCllassName(invocation, buffer);
-        buffer.append("]");
-        return buffer;
+    protected void log(final String output) {
+	log.debug(output);
     }
 
-    private void addTargetCllassName(MethodInvocation invocation, StringBuffer buffer) {
-        buffer.append(invocation.getThis().getClass().getSimpleName());
+    protected void logInvocation(final MethodInvocation invocation) {
+	StringBuffer buffer = createBuffer(invocation);
+	addMethodName(invocation, buffer);
+	addMethodParameters(invocation, buffer);
+	log(buffer.toString());
     }
 
-    private void addMethodParameters(MethodInvocation invocation, StringBuffer buffer) {
-        buffer.append("(");
-        Object[] arguments = invocation.getArguments();
-        for (Object arg : arguments) {
-            buffer.append(getValue(arg)).append(", ");
-        }
-        buffer.append(")");
+    protected void logResult(final MethodInvocation invocation, final Object result) {
+	StringBuffer buffer = createBuffer(invocation);
+	addMethodName(invocation, buffer);
+	if (invocation.getMethod().getReturnType() != null) {
+	    buffer.append(" => ");
+	    buffer.append(getValue(result));
+	}
+	log(buffer.toString());
     }
 
-    private void addMethodName(StringBuffer buffer) {
-        buffer.append(".");
-        buffer.append(methodName);
+    protected void logException(final MethodInvocation invocation, final Throwable e) {
+	StringBuffer buffer = createBuffer(invocation);
+	addMethodName(invocation, buffer);
+	buffer.append(" EXCEPTION => ");
+	buffer.append(e.toString());
+	log(buffer.toString());
     }
 
-    private void logResult(MethodInvocation invocation, Object result) {
-        StringBuffer buffer = createBuffer(invocation);
-        addMethodName(buffer);
-        if (invocation.getMethod().getReturnType() != null) {
-            buffer.append(" => ");
-            buffer.append(getValue(result));
-        }
-        log.debug(buffer.toString());
+    private StringBuffer createBuffer(final MethodInvocation invocation) {
+	StringBuffer buffer = new StringBuffer();
+	addTargetCllassName(invocation, buffer);
+	return buffer;
     }
 
-    private String getValue(Object result) {
-        if (result == null)
-            return "null";
-        else
-            return result.toString();
+    private void addTargetCllassName(final MethodInvocation invocation, final StringBuffer buffer) {
+	buffer.append(getSimpleName(invocation.getThis().getClass()));
+    }
+
+    private void addMethodParameters(final MethodInvocation invocation, final StringBuffer buffer) {
+	buffer.append("(");
+	Object[] arguments = invocation.getArguments();
+	for (Object arg : arguments) {
+	    buffer.append(getValue(arg)).append(", ");
+	}
+	buffer.append(")");
+    }
+
+    private void addMethodName(final MethodInvocation invocation, final StringBuffer buffer) {
+	buffer.append(".");
+	buffer.append(invocation.getMethod().getName());
+    }
+
+    private String getSimpleName(final Class<? extends Object> type) {
+	String simpleName = type.getSimpleName();
+	if (simplifyNames == true) {
+	    int index = simpleName.indexOf('$');
+	    if (index > 0) {
+		simpleName = simpleName.substring(0, index);
+	    }
+	}
+	return simpleName;
+    }
+
+    private String getValue(final Object result) {
+	if (result == null) {
+	    return "null";
+	} else {
+	    return result.toString();
+	}
     }
 }

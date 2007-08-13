@@ -1,9 +1,21 @@
 package org.ourproject.kune.platf.server;
 
+import org.ourproject.kune.platf.client.rpc.ContentService;
+import org.ourproject.kune.platf.client.rpc.KuneService;
+import org.ourproject.kune.platf.server.manager.AccessListsManager;
+import org.ourproject.kune.platf.server.manager.AccessListsManagerDefault;
+import org.ourproject.kune.platf.server.manager.AccessRightsManager;
+import org.ourproject.kune.platf.server.manager.AccessRightsManagerDefault;
 import org.ourproject.kune.platf.server.manager.ContentDescriptorManager;
 import org.ourproject.kune.platf.server.manager.ContentDescriptorManagerDefault;
+import org.ourproject.kune.platf.server.manager.ContentManager;
+import org.ourproject.kune.platf.server.manager.ContentManagerDefault;
+import org.ourproject.kune.platf.server.manager.FolderManager;
+import org.ourproject.kune.platf.server.manager.FolderManagerDefault;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.GroupManagerDefault;
+import org.ourproject.kune.platf.server.manager.MetadataManager;
+import org.ourproject.kune.platf.server.manager.MetadataManagerDefault;
 import org.ourproject.kune.platf.server.manager.ToolConfigurationManager;
 import org.ourproject.kune.platf.server.manager.ToolConfigurationManagerDefault;
 import org.ourproject.kune.platf.server.manager.UserManager;
@@ -12,27 +24,40 @@ import org.ourproject.kune.platf.server.mapper.DozerMapper;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.platf.server.properties.KuneProperties;
 import org.ourproject.kune.platf.server.properties.KunePropertiesDefault;
+import org.ourproject.kune.platf.server.services.ContentServerService;
 import org.ourproject.kune.platf.server.tool.ToolRegistry;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.Scopes;
 import com.wideplay.warp.persist.PersistenceService;
 
 public class KunePlatformModule extends AbstractModule {
     @Override
     protected void configure() {
-	bindManagers();
 	install(PersistenceService.usingJpa().buildModule());
-	bind(KunePersistenceService.class).in(Scopes.SINGLETON);
-	bind(KuneProperties.class).to(KunePropertiesDefault.class).in(Scopes.SINGLETON);
-	bind(Mapper.class).to(DozerMapper.class).in(Scopes.SINGLETON);
-	bind(ToolRegistry.class).in(Scopes.SINGLETON);
+	bind(KunePersistenceService.class);
+
+	bindManagers();
+	bindRemoteServices();
+	bind(KuneProperties.class).to(KunePropertiesDefault.class);
+	bind(Mapper.class).to(DozerMapper.class);
+	bind(ToolRegistry.class);
+
+    }
+
+    private void bindRemoteServices() {
+	bind(KuneService.class).to(KuneServerService.class);
+	bind(ContentService.class).to(ContentServerService.class);
     }
 
     private void bindManagers() {
-	bind(UserManager.class).to(UserManagerDefault.class).in(Scopes.SINGLETON);
-	bind(GroupManager.class).to(GroupManagerDefault.class).in(Scopes.SINGLETON);
-	bind(ContentDescriptorManager.class).to(ContentDescriptorManagerDefault.class).in(Scopes.SINGLETON);
-	bind(ToolConfigurationManager.class).to(ToolConfigurationManagerDefault.class).in(Scopes.SINGLETON);
+	bind(UserManager.class).to(UserManagerDefault.class);
+	bind(GroupManager.class).to(GroupManagerDefault.class);
+	bind(ContentDescriptorManager.class).to(ContentDescriptorManagerDefault.class);
+	bind(ToolConfigurationManager.class).to(ToolConfigurationManagerDefault.class);
+	bind(ContentManager.class).to(ContentManagerDefault.class);
+	bind(AccessListsManager.class).to(AccessListsManagerDefault.class);
+	bind(AccessRightsManager.class).to(AccessRightsManagerDefault.class);
+	bind(MetadataManager.class).to(MetadataManagerDefault.class);
+	bind(FolderManager.class).to(FolderManagerDefault.class);
     }
 }
