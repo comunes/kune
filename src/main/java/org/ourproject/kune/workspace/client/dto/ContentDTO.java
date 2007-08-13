@@ -10,6 +10,8 @@ public class ContentDTO implements IsSerializable {
     private String title;
     private String toolName;
     private GroupDTO group;
+    private String text;
+    private AccessRightsDTO accessRights;
 
     // private SimplifiedAccessDTO access;
 
@@ -61,6 +63,22 @@ public class ContentDTO implements IsSerializable {
 
     public void setGroup(final GroupDTO group) {
 	this.group = group;
+    }
+
+    public String getText() {
+	return this.text;
+    }
+
+    public void setText(final String text) {
+	this.text = text;
+    }
+
+    public AccessRightsDTO getAccessRights() {
+	return this.accessRights;
+    }
+
+    public void setAccessRights(final AccessRightsDTO accessRights) {
+	this.accessRights = accessRights;
     }
 
 }

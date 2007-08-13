@@ -1,6 +1,6 @@
 package org.ourproject.kune.platf.client;
 
-import org.ourproject.kune.workspace.client.WorkspaceComponent;
+import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 import org.ourproject.kune.workspace.client.dto.ContentDTO;
 
 public interface Tool {

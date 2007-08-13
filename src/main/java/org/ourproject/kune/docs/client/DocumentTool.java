@@ -1,13 +1,14 @@
 package org.ourproject.kune.docs.client;
 
+import org.ourproject.kune.docs.client.ui.DocumentFactory;
 import org.ourproject.kune.docs.client.ui.cnt.DocumentContent;
+import org.ourproject.kune.docs.client.ui.ctx.DocumentContext;
 import org.ourproject.kune.platf.client.Tool;
-import org.ourproject.kune.workspace.client.WorkspaceComponent;
+import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 import org.ourproject.kune.workspace.client.dto.ContentDTO;
 
 public class DocumentTool implements Tool {
     public static final String NAME = "docs";
-    private Document document;
 
     public DocumentTool() {
     }
@@ -32,6 +33,8 @@ public class DocumentTool implements Tool {
     public void setContent(final ContentDTO content) {
 	DocumentContent docContent = DocumentFactory.createDocumentContent();
 	docContent.setContent(content);
+	DocumentContext context = DocumentFactory.createDocumentContext();
+	context.setContent(content);
     }
 
 }

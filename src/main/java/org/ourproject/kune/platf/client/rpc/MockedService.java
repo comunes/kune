@@ -1,6 +1,7 @@
 package org.ourproject.kune.platf.client.rpc;
 
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class MockedService {
     public static boolean isTest;
@@ -9,11 +10,20 @@ public class MockedService {
 	void run();
     }
 
-    protected void delay(Delayer timer) {
-	if (isTest)
+    protected void answer(final Object response, final AsyncCallback callback) {
+	delay(new Delayer() {
+	    public void run() {
+		callback.onSuccess(response);
+	    }
+	});
+    }
+
+    protected void delay(final Delayer timer) {
+	if (isTest) {
 	    timer.run();
-	else
+	} else {
 	    schedule(timer);
+	}
     }
 
     private void schedule(final Delayer delayer) {
@@ -24,4 +34,5 @@ public class MockedService {
 	};
 	timer.schedule(1500);
     }
+
 }

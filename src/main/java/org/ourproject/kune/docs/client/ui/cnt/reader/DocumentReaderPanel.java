@@ -1,4 +1,4 @@
-package org.ourproject.kune.docs.client.reader;
+package org.ourproject.kune.docs.client.ui.cnt.reader;
 
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
@@ -11,18 +11,17 @@ public class DocumentReaderPanel extends VerticalPanel implements DocumentReader
     private Button btnEdit;
     private final HTML content;
 
-    public DocumentReaderPanel(final DocumentReaderListener listener) {
-	add(createToolBar(listener));
+    public DocumentReaderPanel() {
+	add(createToolBar());
 	btnEdit.setVisible(false);
 	content = new HTML();
 	add(content);
     }
 
-    private Widget createToolBar(final DocumentReaderListener listener) {
+    private Widget createToolBar() {
 	FlowPanel panel = new FlowPanel();
 	btnEdit = new Button("editar", new ClickListener() {
 	    public void onClick(final Widget sender) {
-		listener.onEdit();
 	    }
 	});
 	panel.add(btnEdit);

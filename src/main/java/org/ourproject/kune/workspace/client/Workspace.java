@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 
 public interface Workspace {
     public void showError(Throwable caught);

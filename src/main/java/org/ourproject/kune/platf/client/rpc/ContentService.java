@@ -13,15 +13,19 @@ public interface ContentService extends RemoteService {
 	    throws ContentNotFoundException;
 
     public static class App {
-	public static ContentServiceAsync instance;
+	private static ContentServiceAsync instance;
 
 	public static ContentServiceAsync getInstance() {
-	    if (instance != null) {
+	    if (instance == null) {
 		instance = (ContentServiceAsync) GWT.create(ContentService.class);
 		((ServiceDefTarget) instance).setServiceEntryPoint(GWT.getModuleBaseURL() + "ContentService");
 
 	    }
 	    return instance;
+	}
+
+	public static void setMock(final ContentServiceMocked mock) {
+	    instance = mock;
 	}
     }
 }

@@ -17,12 +17,12 @@ import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class NavigationPanel extends VerticalPanel implements NavigationView {
+public class FolderContextPanel extends VerticalPanel implements FolderContentView {
     private final HashMap fileIcons;
     private final VerticalPanel itemsVP;
 
-    public NavigationPanel() {
-        NavImages Img = NavImages.App.getInstance();
+    public FolderContextPanel() {
+        FolderContextImages Img = FolderContextImages.App.getInstance();
         fileIcons = new HashMap();
         // FIXME
         fileIcons.put("folder", Img.folder());
