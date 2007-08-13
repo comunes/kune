@@ -30,7 +30,7 @@ public class ContentDescriptor implements HasContent {
     @OneToOne
     private License license;
     @OneToOne
-    private Revision revision;
+    private Revision lastRevision;
 
     @OneToOne
     private User creator;
@@ -101,12 +101,12 @@ public class ContentDescriptor implements HasContent {
 	this.license = license;
     }
 
-    public Revision getRevision() {
-	return revision;
+    public Revision getLastRevision() {
+	return lastRevision;
     }
 
-    public void setRevision(final Revision revision) {
-	this.revision = revision;
+    public void setLastRevision(final Revision revision) {
+	this.lastRevision = revision;
     }
 
     public List<Translation> getTranslations() {
@@ -141,4 +141,12 @@ public class ContentDescriptor implements HasContent {
 	this.folder = folder;
     }
 
+    public void addRevision(final Revision revision) {
+	if (lastRevision == null) {
+	    lastRevision = revision;
+	} else {
+	    revision.setPrevious(lastRevision);
+	    lastRevision = revision;
+	}
+    }
 }

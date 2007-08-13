@@ -2,6 +2,7 @@ package org.ourproject.kune.workspace.client.workspace;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.tool.ToolTrigger;
 import org.ourproject.kune.platf.client.ui.BorderDecorator;
 import org.ourproject.kune.workspace.client.WorkspaceView;
 
@@ -58,8 +59,8 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	generalHP.addStyleName("GeneralHP");
     }
 
-    public void addTab(final String name, final String caption) {
-	groupNavBar.addItem(name, caption);
+    public void addTab(final ToolTrigger trigger) {
+	groupNavBar.addItem(trigger);
     }
 
     public void setLogo(final String groupName) {

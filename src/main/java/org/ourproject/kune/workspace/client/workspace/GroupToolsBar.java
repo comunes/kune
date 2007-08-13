@@ -19,9 +19,10 @@ package org.ourproject.kune.workspace.client.workspace;
 
 import java.util.HashMap;
 
-import org.ourproject.kune.platf.client.dispatch.HistoryTokenOld;
 import org.ourproject.kune.platf.client.services.ColorScheme;
 import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.tool.ToolTrigger;
+import org.ourproject.kune.platf.client.tool.ToolTrigger.TriggerListener;
 import org.ourproject.kune.platf.client.ui.BorderDecorator;
 import org.ourproject.kune.platf.client.ui.HasColor;
 
@@ -42,19 +43,23 @@ class GroupToolsBar extends VerticalPanel {
 	// addStyleName("kune-GroupNavBar");
     }
 
-    public void addItem(final String name, final String caption) {
+    public void addItem(final ToolTrigger trigger) {
 	final int nextIndex = this.getWidgetCount();
-	final Widget menuItem = createItem(nextIndex, name, caption);
+	final Widget menuItem = createItem(nextIndex, trigger);
 	setTabSelected(menuItem, false);
-	tabs.put(name, menuItem);
+	tabs.put(trigger.getName(), menuItem);
 	this.add(menuItem);
     }
 
-    private Widget createItem(final int index, final String name, final String caption) {
+    private Widget createItem(final int index, final ToolTrigger trigger) {
 	final SimplePanel menuItem = new SimplePanel();
 	addStyleName("Tab");
-	String historyToken = HistoryTokenOld.encode("tab", name);
-	final Hyperlink hl = new Hyperlink(caption, historyToken);
+	final Hyperlink hl = new Hyperlink(trigger.getLabel(), "");
+	trigger.setListener(new TriggerListener() {
+	    public void onStateChanged(final String encoded) {
+		hl.setTargetHistoryToken(encoded);
+	    }
+	});
 	menuItem.add(hl);
 	return new BorderDecorator(menuItem, BorderDecorator.RIGHT);
     }
@@ -83,4 +88,5 @@ class GroupToolsBar extends VerticalPanel {
 	String color = isSelected ? scheme.getSelected() : scheme.getUnselected();
 	((HasColor) tab).setColor(color);
     }
+
 }

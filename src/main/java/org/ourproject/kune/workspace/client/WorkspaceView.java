@@ -1,12 +1,11 @@
 package org.ourproject.kune.workspace.client;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.tool.ToolTrigger;
 
 import com.google.gwt.user.client.ui.Image;
 
 public interface WorkspaceView extends View {
-    void addTab(String name, String caption);
-
     void setLogo(String groupName);
 
     void setLogo(Image image);
@@ -20,4 +19,6 @@ public interface WorkspaceView extends View {
     void setTool(String toolName);
 
     void adjustSize(int windowWidth, int clientHeight);
+
+    void addTab(ToolTrigger trigger);
 }

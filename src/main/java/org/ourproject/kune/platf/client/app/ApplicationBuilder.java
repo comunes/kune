@@ -6,14 +6,15 @@ import java.util.List;
 import java.util.Map;
 
 import org.ourproject.kune.platf.client.KunePlatform;
-import org.ourproject.kune.platf.client.Tool;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.state.State;
 import org.ourproject.kune.platf.client.state.StateController;
 import org.ourproject.kune.platf.client.state.StateControllerDefault;
+import org.ourproject.kune.platf.client.tool.Tool;
 import org.ourproject.kune.platf.client.utils.PrefetchUtilites;
 import org.ourproject.kune.workspace.client.actions.WorkspaceAction;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.History;
@@ -42,10 +43,12 @@ public class ApplicationBuilder {
 
 	DeferredCommand.addCommand(new Command() {
 	    public void execute() {
+		GWT.log("Prefetching operation", null);
 		PrefetchUtilites.preFetchImpImages();
 		PrefetchUtilites.preFetchLicenses(state);
 	    }
 	});
+	GWT.log("application builded!", null);
 	return application;
     }
 

@@ -58,6 +58,12 @@ public class User implements HasId {
 	return null;
     }
 
+    @Finder(query = "from User where shortName = :shortName")
+    public User getByShortName(@Named("shortName")
+    final String shortName) {
+	return null;
+    }
+
     public Long getId() {
 	return id;
     }

@@ -1,6 +1,8 @@
 package org.ourproject.kune.workspace.client.dto;
 
+import org.ourproject.kune.platf.client.dto.FolderDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.state.HistoryToken;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
@@ -12,6 +14,7 @@ public class ContentDTO implements IsSerializable {
     private GroupDTO group;
     private String text;
     private AccessRightsDTO accessRights;
+    private FolderDTO folder;
 
     // private SimplifiedAccessDTO access;
 
@@ -81,4 +84,19 @@ public class ContentDTO implements IsSerializable {
 	this.accessRights = accessRights;
     }
 
+    public FolderDTO getFolder() {
+	return folder;
+    }
+
+    public void setFolder(final FolderDTO folder) {
+	this.folder = folder;
+    }
+
+    public String encodeState() {
+	return HistoryToken.encode(group.getShortName(), toolName, folder.getId().toString(), getDocRef());
+    }
+
+    public boolean hasDocument() {
+	return docRef != null;
+    }
 }

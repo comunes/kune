@@ -1,13 +1,13 @@
 package org.ourproject.kune.platf.client.state;
 
-import org.ourproject.kune.platf.client.Tool;
 import org.ourproject.kune.platf.client.app.Application;
-import org.ourproject.kune.platf.client.dispatch.HistoryToken;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
+import org.ourproject.kune.platf.client.tool.Tool;
 import org.ourproject.kune.workspace.client.Workspace;
 import org.ourproject.kune.workspace.client.dto.ContentDTO;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class StateControllerDefault implements StateController {
@@ -22,6 +22,7 @@ public class StateControllerDefault implements StateController {
     }
 
     public void onHistoryChanged(final String historyToken) {
+	GWT.log("State: " + historyToken, null);
 	onHistoryChanged(new HistoryToken(historyToken));
     }
 
@@ -32,6 +33,7 @@ public class StateControllerDefault implements StateController {
 		    }
 
 		    public void onSuccess(final Object result) {
+			GWT.log("State response: " + result, null);
 			loadContent((ContentDTO) result);
 		    }
 
@@ -45,7 +47,10 @@ public class StateControllerDefault implements StateController {
     private void loadContent(final ContentDTO content) {
 	Workspace workspace = app.getWorkspace();
 	workspace.showGroup(content.getGroup());
-	Tool tool = app.getTool(content.getToolName());
+	String toolName = content.getToolName();
+	workspace.setTool(toolName);
+
+	Tool tool = app.getTool(toolName);
 	tool.setContent(content);
 	workspace.setContent(tool.getContent());
 	workspace.setContext(tool.getContext());

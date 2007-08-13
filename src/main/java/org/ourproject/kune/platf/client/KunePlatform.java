@@ -8,6 +8,7 @@ import java.util.Map;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.extend.ClientModule;
 import org.ourproject.kune.platf.client.extend.Register;
+import org.ourproject.kune.platf.client.tool.Tool;
 
 public class KunePlatform implements Register {
     private final List tools;

@@ -6,9 +6,8 @@ import java.util.List;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.HistoryListener;
 
-public class DefaultDispatcher implements Dispatcher, HistoryListener {
+public class DefaultDispatcher implements Dispatcher {
     private final HashMap subscriptors;
 
     public DefaultDispatcher() {
@@ -44,11 +43,6 @@ public class DefaultDispatcher implements Dispatcher, HistoryListener {
 
     public void fireState(final String encodedEvent) {
 	History.newItem(encodedEvent);
-    }
-
-    public void onHistoryChanged(final String encoded) {
-	HistoryTokenOld token = new HistoryTokenOld(encoded);
-	fire(token.eventName, token.value);
     }
 
 }

@@ -24,13 +24,17 @@ public class Revision {
     private Long modifiedOn;
 
     @OneToOne(cascade = { CascadeType.ALL })
-    private Text content;
+    private Data data;
 
     @Version
     private int version;
 
     @OneToOne(fetch = FetchType.LAZY)
     private Revision previous;
+
+    public Revision() {
+	this.data = new Data();
+    }
 
     public Long getId() {
 	return id;
@@ -56,12 +60,12 @@ public class Revision {
 	this.modifiedOn = modifiedOn;
     }
 
-    public Text getContent() {
-	return content;
+    public Data getData() {
+	return data;
     }
 
-    public void setContent(final Text content) {
-	this.content = content;
+    public void setData(final Data content) {
+	this.data = content;
     }
 
     public int getVersion() {
@@ -78,6 +82,10 @@ public class Revision {
 
     public void setPrevious(final Revision previous) {
 	this.previous = previous;
+    }
+
+    public void setTextData(final String text) {
+	this.data.setContent(text.toCharArray());
     }
 
 }

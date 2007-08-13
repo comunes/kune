@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "text")
-public class Text implements HasId {
+public class Data implements HasId {
     @Id
     @GeneratedValue
     Long id;

@@ -1,4 +1,4 @@
-package org.ourproject.kune.platf.client.dispatch;
+package org.ourproject.kune.platf.client.state;
 
 public class HistoryToken {
     private static final String[] EMPTY = new String[0];
@@ -37,7 +37,20 @@ public class HistoryToken {
     }
 
     public static String encode(final String group, final String tool, final String folder, final String document) {
-	return group + DOT + tool + DOT + folder + DOT + document;
+	String encoded = "";
+	if (group != null) {
+	    encoded += group;
+	}
+	if (tool != null) {
+	    encoded += DOT + tool;
+	}
+	if (folder != null) {
+	    encoded += DOT + folder;
+	}
+	if (document != null) {
+	    encoded += DOT + document;
+	}
+	return encoded;
     }
 
     public boolean isComplete() {

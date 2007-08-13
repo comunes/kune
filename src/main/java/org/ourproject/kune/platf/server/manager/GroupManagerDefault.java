@@ -1,16 +1,32 @@
 package org.ourproject.kune.platf.server.manager;
 
+import javax.persistence.EntityManager;
+
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.tool.ServerTool;
+import org.ourproject.kune.platf.server.tool.ToolRegistry;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
-public class GroupManagerDefault implements GroupManager {
+public class GroupManagerDefault extends DefaultManager<Group, Long> implements GroupManager {
 
     private final Group finder;
+    private final ToolRegistry registry;
 
     @Inject
-    public GroupManagerDefault(final Group finder) {
+    public GroupManagerDefault(final Provider<EntityManager> provider, final Group finder, final ToolRegistry registry) {
+	super(provider, Group.class);
 	this.finder = finder;
+	this.registry = registry;
+    }
+
+    public void initGroup(final User user, final Group group) {
+	for (ServerTool tool : registry.all()) {
+	    tool.initGroup(user, group);
+	    persist(group);
+	}
     }
 
     public Group get(final String shortName) {

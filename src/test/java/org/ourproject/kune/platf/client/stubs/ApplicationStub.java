@@ -3,10 +3,10 @@ package org.ourproject.kune.platf.client.stubs;
 import java.util.HashMap;
 
 import org.easymock.EasyMock;
-import org.ourproject.kune.platf.client.Tool;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.state.StateController;
+import org.ourproject.kune.platf.client.tool.Tool;
 import org.ourproject.kune.workspace.client.Workspace;
 
 public class ApplicationStub implements Application {

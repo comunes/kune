@@ -8,26 +8,21 @@ import org.ourproject.kune.platf.server.domain.License;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.wideplay.warp.persist.TransactionType;
-import com.wideplay.warp.persist.Transactional;
 
-public class LicenseManager extends DefaultManager {
+public class LicenseManager extends DefaultManager<License, Long> {
     private License licenseFinder;
 
     @Inject
     public LicenseManager(final Provider<EntityManager> provider) {
-	super(provider);
+	super(provider, License.class);
     }
 
-    @Transactional(type = TransactionType.READ_ONLY)
     public List<License> getAll() {
 	return licenseFinder.getAll();
     }
 
-    @Transactional(type = TransactionType.READ_WRITE)
     public License createLicense(final License license) {
-	getEntityManager().persist(license);
-	return license;
+	return persist(license);
     }
 
     @Inject

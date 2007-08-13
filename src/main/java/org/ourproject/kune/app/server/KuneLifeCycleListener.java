@@ -8,20 +8,19 @@ import java.util.logging.Logger;
 
 import org.apache.log4j.PropertyConfigurator;
 import org.ourproject.kune.app.server.servlet.LifeCycleListener;
+import org.ourproject.kune.platf.server.KunePersistenceService;
 
 import com.google.inject.Inject;
-import com.wideplay.warp.persist.PersistenceService;
 
 public class KuneLifeCycleListener implements LifeCycleListener {
     @Inject
-    PersistenceService persistenceService;
+    KunePersistenceService persistenceService;
 
     @Inject
     Logger logger;
 
     public void start() {
 	configureLog4j();
-
 	logger.log(Level.INFO, "starting Kune...");
 	persistenceService.start();
 	logger.log(Level.INFO, "started");

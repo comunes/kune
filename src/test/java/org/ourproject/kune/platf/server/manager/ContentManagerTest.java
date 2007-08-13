@@ -36,7 +36,7 @@ public class ContentManagerTest {
     }
 
     @Test
-    public void testDefaultContent() throws ContentNotFoundException {
+    public void testDefaultGroupContent() throws ContentNotFoundException {
 
 	User user = TestDomainHelper.createUser(1);
 	ContentDescriptor defaultContentDescriptor = new ContentDescriptor();

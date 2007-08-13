@@ -10,7 +10,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -37,10 +36,9 @@ public class Group implements HasId {
     @OneToOne
     private ContentDescriptor defaultContent;
 
-    @OneToMany
-    private Map<String, Folder> toolRoots;
-
     private SocialNetwork socialNetwork;
+
+    private final Map<String, ToolConfiguration> toolsConfig;
 
     public Group() {
 	this(null, null);
@@ -48,7 +46,7 @@ public class Group implements HasId {
 
     public Group(final String name, final String shortName) {
 	this.shortName = shortName;
-	toolRoots = new HashMap<String, Folder>();
+	toolsConfig = new HashMap<String, ToolConfiguration>();
     }
 
     @Finder(query = "from Group")
@@ -110,91 +108,25 @@ public class Group implements HasId {
 	this.socialNetwork = socialNetwork;
     }
 
-    public Map<String, Folder> getToolRoots() {
-	return toolRoots;
-    }
-
-    public void setToolRoots(final Map<String, Folder> toolRoots) {
-	this.toolRoots = toolRoots;
-    }
-
     public Folder setRootFolder(final String toolName, final Folder root) {
-	toolRoots.put(toolName, root);
+	toolsConfig.get(toolName).setRoot(root);
 	return root;
     }
 
     public Folder getRoot(final String toolName) {
-	return toolRoots.get(toolName);
+	return toolsConfig.get(toolName).getRoot();
     }
 
-    @Override
-    public int hashCode() {
-	final int prime = 31;
-	int result = 1;
-	result = prime * result + ((admissionType == null) ? 0 : admissionType.hashCode());
-	result = prime * result + ((defaultContent == null) ? 0 : defaultContent.hashCode());
-	result = prime * result + ((longName == null) ? 0 : longName.hashCode());
-	result = prime * result + ((shortName == null) ? 0 : shortName.hashCode());
-	result = prime * result + ((socialNetwork == null) ? 0 : socialNetwork.hashCode());
-	result = prime * result + ((toolRoots == null) ? 0 : toolRoots.hashCode());
-	return result;
+    public Map<String, ToolConfiguration> getToolsConfig() {
+	return toolsConfig;
     }
 
-    @Override
-    public boolean equals(final Object obj) {
-	if (this == obj) {
-	    return true;
-	}
-	if (obj == null) {
-	    return false;
-	}
-	if (getClass() != obj.getClass()) {
-	    return false;
-	}
-	final Group other = (Group) obj;
-	if (admissionType == null) {
-	    if (other.admissionType != null) {
-		return false;
-	    }
-	} else if (!admissionType.equals(other.admissionType)) {
-	    return false;
-	}
-	if (defaultContent == null) {
-	    if (other.defaultContent != null) {
-		return false;
-	    }
-	} else if (!defaultContent.equals(other.defaultContent)) {
-	    return false;
-	}
-	if (longName == null) {
-	    if (other.longName != null) {
-		return false;
-	    }
-	} else if (!longName.equals(other.longName)) {
-	    return false;
-	}
-	if (shortName == null) {
-	    if (other.shortName != null) {
-		return false;
-	    }
-	} else if (!shortName.equals(other.shortName)) {
-	    return false;
-	}
-	if (socialNetwork == null) {
-	    if (other.socialNetwork != null) {
-		return false;
-	    }
-	} else if (!socialNetwork.equals(other.socialNetwork)) {
-	    return false;
-	}
-	if (toolRoots == null) {
-	    if (other.toolRoots != null) {
-		return false;
-	    }
-	} else if (!toolRoots.equals(other.toolRoots)) {
-	    return false;
-	}
-	return true;
+    public ToolConfiguration getToolConfiguration(final String name) {
+	return toolsConfig.get(name);
+    }
+
+    public void setToolConfig(final String name, final ToolConfiguration config) {
+	toolsConfig.put(name, config);
     }
 
 }

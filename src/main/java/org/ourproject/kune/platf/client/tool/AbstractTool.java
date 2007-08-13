@@ -1,4 +1,4 @@
-package org.ourproject.kune.platf.client;
+package org.ourproject.kune.platf.client.tool;
 
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.state.State;

@@ -1,8 +1,7 @@
 package org.ourproject.kune.platf.client.dispatch;
 
-import com.google.gwt.user.client.HistoryListener;
 
-public interface Dispatcher extends HistoryListener {
+public interface Dispatcher {
     Action subscribe(String eventName, Action action);
 
     void fireState(String encodedEvent);

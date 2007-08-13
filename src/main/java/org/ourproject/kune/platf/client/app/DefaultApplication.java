@@ -2,10 +2,10 @@ package org.ourproject.kune.platf.client.app;
 
 import java.util.Map;
 
-import org.ourproject.kune.platf.client.Tool;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.state.StateController;
+import org.ourproject.kune.platf.client.tool.Tool;
 import org.ourproject.kune.workspace.client.Workspace;
 import org.ourproject.kune.workspace.client.WorkspaceFactory;
 

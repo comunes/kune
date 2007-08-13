@@ -11,17 +11,18 @@ public class DocumentReaderPanel extends VerticalPanel implements DocumentReader
     private Button btnEdit;
     private final HTML content;
 
-    public DocumentReaderPanel() {
-	add(createToolBar());
+    public DocumentReaderPanel(final DocumentReaderListener listener) {
+	add(createToolBar(listener));
 	btnEdit.setVisible(false);
 	content = new HTML();
 	add(content);
     }
 
-    private Widget createToolBar() {
+    private Widget createToolBar(final DocumentReaderListener listener) {
 	FlowPanel panel = new FlowPanel();
 	btnEdit = new Button("editar", new ClickListener() {
 	    public void onClick(final Widget sender) {
+		listener.onEdit();
 	    }
 	});
 	panel.add(btnEdit);

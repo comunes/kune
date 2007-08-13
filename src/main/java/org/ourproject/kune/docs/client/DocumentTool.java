@@ -3,19 +3,18 @@ package org.ourproject.kune.docs.client;
 import org.ourproject.kune.docs.client.ui.DocumentFactory;
 import org.ourproject.kune.docs.client.ui.cnt.DocumentContent;
 import org.ourproject.kune.docs.client.ui.ctx.DocumentContext;
-import org.ourproject.kune.platf.client.Tool;
+import org.ourproject.kune.platf.client.tool.Tool;
+import org.ourproject.kune.platf.client.tool.ToolTrigger;
+import org.ourproject.kune.platf.client.tool.ToolTriggerDefault;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 import org.ourproject.kune.workspace.client.dto.ContentDTO;
 
 public class DocumentTool implements Tool {
     public static final String NAME = "docs";
+    private final ToolTriggerDefault trigger;
 
     public DocumentTool() {
-    }
-
-    public String getCaption() {
-	// TODO Auto-generated method stub
-	return null;
+	trigger = new ToolTriggerDefault(NAME, "documentos");
     }
 
     public WorkspaceComponent getContent() {
@@ -35,6 +34,11 @@ public class DocumentTool implements Tool {
 	docContent.setContent(content);
 	DocumentContext context = DocumentFactory.createDocumentContext();
 	context.setContent(content);
+	trigger.setState(content.encodeState());
+    }
+
+    public ToolTrigger getTrigger() {
+	return trigger;
     }
 
 }

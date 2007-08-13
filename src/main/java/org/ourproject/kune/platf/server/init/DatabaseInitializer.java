@@ -1,49 +1,50 @@
 package org.ourproject.kune.platf.server.init;
 
-import org.ourproject.kune.platf.server.KunePlatformModule;
 import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
-import org.ourproject.kune.platf.server.properties.PropertiesFileName;
+import org.ourproject.kune.platf.server.properties.KuneProperties;
 
-import com.google.inject.Binder;
-import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
-import com.google.inject.Module;
-import com.wideplay.warp.jpa.JpaUnit;
-import com.wideplay.warp.persist.PersistenceService;
+import com.wideplay.warp.persist.TransactionType;
+import com.wideplay.warp.persist.Transactional;
 
 public class DatabaseInitializer {
     @Inject
     UserManager userManager;
     @Inject
     LicenseManager licenseManager;
+    @Inject
+    KuneProperties properties;
 
-    public static void main(final String[] args) {
-	DatabaseInitializer databaseInitializer = new DatabaseInitializer();
-	Injector injector = Guice.createInjector(new KunePlatformModule(), new Module() {
-	    public void configure(Binder binder) {
-		binder.bindConstant().annotatedWith(JpaUnit.class).to("development");
-		binder.bindConstant().annotatedWith(PropertiesFileName.class).to("kune.dev.properties");
-	    }
-	});
-	injector.injectMembers(databaseInitializer);
-	injector.getInstance(PersistenceService.class).start();
-	databaseInitializer.start();
+    public void initConditional() {
+	properties.get(KuneProperties.DEFAULT_SITE_SHORT_NAME);
+	User user = userManager.getByShortName("site");
+	if (user == null) {
+	    initDatabase();
+	}
     }
 
-    // TODO: sacar al properties
-    void start() {
+    @Transactional(type = TransactionType.READ_WRITE)
+    public void initDatabase() {
 	createUsers();
 	createLicenses();
     }
 
     private void createUsers() {
-	User user = new User("administrator", "admin", "kune_admin@localhost", "admin");
+	String adminName = "administrator";
+	String adminShortName = "admin";
+	String adminEmail = "kune_admin@localhost";
+	String adminPassword = "psw4admin";
+	User user = new User(adminName, adminShortName, adminEmail, adminPassword);
 	userManager.createUser(user);
-	user = new User("site", "site", "kune_site@localhost", "site");
+
+	String sitePassword = "site";
+	String siteName = "default";
+	String siteShortName = properties.get(KuneProperties.DEFAULT_SITE_SHORT_NAME);
+	String siteEmail = "kune_site@localhost";
+	user = new User(siteName, siteShortName, siteEmail, sitePassword);
 	userManager.createUser(user);
     }
 
