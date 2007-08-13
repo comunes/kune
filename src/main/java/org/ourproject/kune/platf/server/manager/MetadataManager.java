@@ -4,6 +4,6 @@ import org.ourproject.kune.platf.server.model.Content;
 
 public interface MetadataManager {
 
-    void fillOtherContents(Content content);
+    void fill(Content content);
 
 }

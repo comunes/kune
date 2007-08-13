@@ -7,7 +7,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.OneToMany;
 
 @Embeddable
-public class AccessRights {
+public class AccessList {
     @OneToMany
     private List<Group> admin;
     @OneToMany
@@ -15,7 +15,7 @@ public class AccessRights {
     @OneToMany
     private List<Group> view;
 
-    public AccessRights() {
+    public AccessList() {
 	this.admin = new ArrayList<Group>();
 	this.edit = new ArrayList<Group>();
 	this.view = new ArrayList<Group>();

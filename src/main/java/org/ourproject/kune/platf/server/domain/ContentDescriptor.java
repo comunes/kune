@@ -47,7 +47,7 @@ public class ContentDescriptor implements HasContent {
     // TODO: lang, languages, etc
     private String locale;
 
-    private AccessRights accessRights;
+    private AccessList accessRights;
 
     public ContentDescriptor() {
 	translations = new ArrayList<Translation>();
@@ -77,11 +77,11 @@ public class ContentDescriptor implements HasContent {
 	this.locale = locale;
     }
 
-    public AccessRights getAccessRights() {
+    public AccessList getAccessLists() {
 	return accessRights;
     }
 
-    public void setAccessRights(final AccessRights accessRights) {
+    public void setAccessRights(final AccessList accessRights) {
 	this.accessRights = accessRights;
     }
 
