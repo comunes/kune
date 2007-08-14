@@ -15,12 +15,15 @@ import org.ourproject.kune.platf.server.domain.ToolConfiguration;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
-import org.ourproject.kune.platf.server.properties.KuneProperties;
+import org.ourproject.kune.platf.server.properties.DatabaseProperties;
 import org.ourproject.kune.platf.server.properties.PropertiesFileName;
 import org.ourproject.kune.platf.server.services.ContentServerService;
 import org.ourproject.kune.platf.server.tool.ToolRegistry;
+import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
 import org.ourproject.kune.workspace.client.dto.ContentDTO;
 
+import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -32,21 +35,16 @@ import com.wideplay.warp.jpa.JpaUnit;
 public class TestKuneInitialization {
     @Inject
     KunePersistenceService persistenceService;
-
     @Inject
     ToolRegistry registry;
     @Inject
     DocumentServerTool documentTool;
-
     @Inject
-    KuneProperties properties;
-
+    DatabaseProperties properties;
     @Inject
     UserManager manager;
-
     @Inject
     LicenseManager licenseManager;
-
     private Injector injector;
 
     @Before
@@ -65,8 +63,16 @@ public class TestKuneInitialization {
     }
 
     @Test
+    public void testLogin() throws SerializableException {
+	SiteBarService service = getService(SiteBarService.class);
+	service.login(properties.getDefaultSiteShortName(), properties.getDefaultSiteAdminPassword());
+	// service.login(properties.getDefaultSiteAdminEmail(),
+	// properties.getAdminPassword());
+    }
+
+    @Test
     public void testCallDefault() throws ContentNotFoundException {
-	ContentServerService service = injector.getInstance(ContentServerService.class);
+	ContentServerService service = getService(ContentServerService.class);
 	ContentDTO content = service.getContent(null, null, null, null, null);
 	assertNotNull(content);
 	assertNotNull(content.getGroup());
@@ -76,9 +82,13 @@ public class TestKuneInitialization {
 	assertNotNull(content.getDocRef());
     }
 
+    private <T extends RemoteService> T getService(final Class<T> type) {
+	return injector.getInstance(type);
+    }
+
     @Test
     public void testDatabase() {
-	User user = manager.getByShortName(properties.get(KuneProperties.DEFAULT_SITE_SHORT_NAME));
+	User user = manager.getByShortName(properties.getDefaultSiteShortName());
 	assertNotNull(user);
 	Group group = user.getUserGroup();
 	assertNotNull(group);

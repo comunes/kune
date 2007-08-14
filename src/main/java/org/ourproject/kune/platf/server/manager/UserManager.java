@@ -8,5 +8,4 @@ public interface UserManager {
     User getByShortName(String string);
 
     User login(String nick, String pass);
-
 }

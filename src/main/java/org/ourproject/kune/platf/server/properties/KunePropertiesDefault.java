@@ -11,10 +11,12 @@ import com.google.inject.Singleton;
 @Singleton
 public class KunePropertiesDefault implements KuneProperties {
     private Properties properties;
+    private final String fileName;
 
     @Inject
     public KunePropertiesDefault(@PropertiesFileName
     final String fileName) {
+	this.fileName = fileName;
 	try {
 	    properties = new Properties();
 	    InputStream input = getInputStream(fileName);
@@ -27,7 +29,16 @@ public class KunePropertiesDefault implements KuneProperties {
     }
 
     public String get(final String key) {
-	return properties.getProperty(key);
+	String value = properties.getProperty(key);
+	if (value == null) {
+	    throw new RuntimeException("PROPERTY: " + key + " not defined in " + fileName);
+	}
+	return value;
+    }
+
+    public String get(final String key, final String defaultValue) {
+	String value = properties.getProperty(key);
+	return value != null ? value : defaultValue;
     }
 
     private InputStream getInputStream(final String fileName) {
@@ -38,4 +49,5 @@ public class KunePropertiesDefault implements KuneProperties {
 	}
 	return input;
     }
+
 }

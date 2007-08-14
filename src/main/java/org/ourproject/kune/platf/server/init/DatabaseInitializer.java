@@ -4,22 +4,27 @@ import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
-import org.ourproject.kune.platf.server.properties.KuneProperties;
+import org.ourproject.kune.platf.server.properties.DatabaseProperties;
 
 import com.google.inject.Inject;
 import com.wideplay.warp.persist.TransactionType;
 import com.wideplay.warp.persist.Transactional;
 
 public class DatabaseInitializer {
+    private final LicenseManager licenseManager;
+    private final UserManager userManager;
+    private final DatabaseProperties properties;
+
     @Inject
-    UserManager userManager;
-    @Inject
-    LicenseManager licenseManager;
-    @Inject
-    KuneProperties properties;
+    public DatabaseInitializer(final DatabaseProperties properties, final UserManager userManager,
+	    final LicenseManager licenseManager) {
+	this.properties = properties;
+	this.userManager = userManager;
+	this.licenseManager = licenseManager;
+    }
 
     public void initConditional() {
-	String shortName = properties.get(KuneProperties.DEFAULT_SITE_SHORT_NAME);
+	String shortName = properties.getDefaultSiteShortName();
 	User user = userManager.getByShortName(shortName);
 	if (user == null) {
 	    initDatabase();
@@ -33,17 +38,17 @@ public class DatabaseInitializer {
     }
 
     private void createUsers() {
-	String adminName = "administrator";
-	String adminShortName = "admin";
-	String adminEmail = "kune_admin@localhost";
-	String adminPassword = "psw4admin";
+	String adminName = properties.getAdminUserName();
+	String adminShortName = properties.getAdminShortName();
+	String adminEmail = properties.getAdminEmail();
+	String adminPassword = properties.getAdminPassword();
 	User user = new User(adminName, adminShortName, adminEmail, adminPassword);
 	userManager.createUser(user);
 
-	String sitePassword = "site";
-	String siteName = "default";
-	String siteShortName = properties.get(KuneProperties.DEFAULT_SITE_SHORT_NAME);
-	String siteEmail = "kune_site@localhost";
+	String siteName = properties.getDefaultSiteName();
+	String siteShortName = properties.getDefaultSiteShortName();
+	String siteEmail = properties.getDefaultSiteAdminEmail();
+	String sitePassword = properties.getDefaultSiteAdminPassword();
 	user = new User(siteName, siteShortName, siteEmail, sitePassword);
 	userManager.createUser(user);
     }
