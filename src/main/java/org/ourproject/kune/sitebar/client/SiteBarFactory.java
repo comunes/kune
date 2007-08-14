@@ -5,6 +5,7 @@ import org.ourproject.kune.platf.client.group.NewGroupListener;
 import org.ourproject.kune.platf.client.group.NewGroupPanel;
 import org.ourproject.kune.platf.client.group.NewGroupPresenter;
 import org.ourproject.kune.sitebar.client.bar.SiteBar;
+import org.ourproject.kune.sitebar.client.bar.SiteBarListener;
 import org.ourproject.kune.sitebar.client.bar.SiteBarPanel;
 import org.ourproject.kune.sitebar.client.bar.SiteBarPresenter;
 import org.ourproject.kune.sitebar.client.login.Login;
@@ -17,18 +18,14 @@ import org.ourproject.kune.sitebar.client.msg.SiteMessagePresenter;
 import org.ourproject.kune.sitebar.client.msg.SiteMessageView;
 
 public class SiteBarFactory {
-    private static SiteBar siteBar;
     private static SiteMessage siteMessage;
 
-    public static SiteBar getSiteBar() {
-	if (siteBar == null) {
-	    SiteBarPresenter siteBarPresenter = new SiteBarPresenter();
-	    SiteBarPanel siteBarView = new SiteBarPanel(siteBarPresenter);
-	    siteBarPresenter.init(siteBarView);
-	    siteBar = siteBarPresenter;
-	    Site.sitebar = siteBar;
-	}
-	return siteBar;
+    public static SiteBar createSiteBar(final SiteBarListener listener) {
+	SiteBarPresenter siteBarPresenter = new SiteBarPresenter(listener);
+	SiteBarPanel siteBarView = new SiteBarPanel(siteBarPresenter);
+	siteBarPresenter.init(siteBarView);
+	Site.sitebar = siteBarPresenter;
+	return siteBarPresenter;
     }
 
     public static SiteMessage getSiteMessage() {

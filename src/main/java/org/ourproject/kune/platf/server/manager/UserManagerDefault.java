@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
+import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
 
 import com.google.inject.Inject;
@@ -28,6 +29,8 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
 
     public User createUser(final User user) {
 	persist(user);
+	SocialNetwork socialNetwork = user.getUserGroup().getSocialNetwork();
+	socialNetwork.addAdmin(user.getUserGroup());
 	groupManager.initGroup(user, user.getUserGroup());
 	return user;
     }

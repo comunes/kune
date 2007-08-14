@@ -1,6 +1,7 @@
 package org.ourproject.kune.platf.integration;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -8,8 +9,10 @@ import org.junit.Test;
 import org.ourproject.kune.docs.server.DocumentServerTool;
 import org.ourproject.kune.docs.server.KuneDocumentModule;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
+import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.server.KunePersistenceService;
 import org.ourproject.kune.platf.server.KunePlatformModule;
+import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.ToolConfiguration;
 import org.ourproject.kune.platf.server.domain.User;
@@ -46,6 +49,8 @@ public class TestKuneInitialization {
     @Inject
     LicenseManager licenseManager;
     private Injector injector;
+    @Inject
+    UserSession session;
 
     @Before
     public void create() {
@@ -63,9 +68,22 @@ public class TestKuneInitialization {
     }
 
     @Test
+    public void testWithLoggedUser() throws SerializableException {
+	SiteBarService loginService = getService(SiteBarService.class);
+	loginService.login(properties.getDefaultSiteShortName(), properties.getDefaultSiteAdminPassword());
+	ContentService contentService = getService(ContentService.class);
+	ContentDTO response = contentService.getContent(null, null, null, null, null);
+	assertNotNull(response.getAccessRights());
+	assertTrue(response.getAccessRights().isEditable);
+    }
+
+    @Test
     public void testLogin() throws SerializableException {
+	assertNull(session.getUser());
 	SiteBarService service = getService(SiteBarService.class);
 	service.login(properties.getDefaultSiteShortName(), properties.getDefaultSiteAdminPassword());
+	assertNotNull(session.getUser());
+	// TODO: esto es para ti, vicente
 	// service.login(properties.getDefaultSiteAdminEmail(),
 	// properties.getAdminPassword());
     }

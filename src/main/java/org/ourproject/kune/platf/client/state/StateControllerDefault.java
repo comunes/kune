@@ -9,6 +9,7 @@ import org.ourproject.kune.workspace.client.Workspace;
 import org.ourproject.kune.workspace.client.dto.ContentDTO;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class StateControllerDefault implements StateController {
@@ -20,6 +21,10 @@ public class StateControllerDefault implements StateController {
 	this.app = app;
 	this.state = state;
 	this.server = ContentService.App.getInstance();
+    }
+
+    public void reload() {
+	onHistoryChanged(History.getToken());
     }
 
     public void onHistoryChanged(final String historyToken) {

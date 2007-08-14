@@ -3,11 +3,18 @@ package org.ourproject.kune.platf.server.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-@Embeddable
+@Entity
+@Table(name = "social_networks")
 public class SocialNetwork {
+    @Id
+    @GeneratedValue
+    private Long id;
 
     @OneToMany
     List<Group> admins;
@@ -26,7 +33,6 @@ public class SocialNetwork {
 	collaborators = new ArrayList<Group>();
 	viewer = new ArrayList<Group>();
 	pendingCollaborators = new ArrayList<Group>();
-
     }
 
     public SocialNetwork(final ArrayList<Group> admins, final ArrayList<Group> collaborators,
@@ -35,6 +41,14 @@ public class SocialNetwork {
 	this.collaborators = collaborators;
 	this.viewer = viewer;
 	this.pendingCollaborators = pendingCollaborators;
+    }
+
+    public Long getId() {
+	return id;
+    }
+
+    public void setId(final Long id) {
+	this.id = id;
     }
 
     public void addAdmin(final Group group) {

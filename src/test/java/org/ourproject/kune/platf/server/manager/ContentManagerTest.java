@@ -40,19 +40,20 @@ public class ContentManagerTest {
     public void testDefaultGroupContent() throws ContentNotFoundException {
 
 	User user = TestDomainHelper.createUser(1);
-	ContentDescriptor defaultContentDescriptor = new ContentDescriptor();
-	user.getUserGroup().setDefaultContent(defaultContentDescriptor);
+	ContentDescriptor descriptor = TestDomainHelper.createDescriptor(1l, "title", "content");
+	user.getUserGroup().setDefaultContent(descriptor);
 	session.setUser(user);
 
 	Content content = contentManager.getContent(session.getUser(), null, null, null, null);
-	assertSame(defaultContentDescriptor, content.getDescriptor());
-	assertSame(defaultContentDescriptor.getFolder(), content.getFolder());
+	assertSame(descriptor, content.getDescriptor());
+	assertSame(descriptor.getFolder(), content.getFolder());
     }
 
     @Test
     public void testCompleteToken() throws ContentNotFoundException {
 	Folder folder = TestDomainHelper.createFolderWithIdAndGroupAndTool(1, "groupShortName", "toolName");
 	ContentDescriptor descriptor = new ContentDescriptor();
+	descriptor.setId(1l);
 	descriptor.setFolder(folder);
 
 	expect(contentDescriptorManager.get(2l)).andReturn(descriptor);

@@ -3,8 +3,11 @@ package org.ourproject.kune.platf.server;
 import java.util.ArrayList;
 
 import org.ourproject.kune.platf.server.domain.AccessLists;
+import org.ourproject.kune.platf.server.domain.ContentDescriptor;
+import org.ourproject.kune.platf.server.domain.Data;
 import org.ourproject.kune.platf.server.domain.Folder;
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.Revision;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
 
@@ -64,5 +67,16 @@ public class TestDomainHelper {
 	editList.add(groupEdit);
 	viewerList.add(groupView);
 	return new AccessLists(adminList, editList, viewerList);
+    }
+
+    public static ContentDescriptor createDescriptor(final long id, final String title, final String content) {
+	ContentDescriptor descriptor = new ContentDescriptor();
+	descriptor.setId(id);
+	Revision rev = new Revision();
+	descriptor.addRevision(rev);
+	Data data = rev.getData();
+	data.setTitle(title);
+	data.setContent(content.toCharArray());
+	return descriptor;
     }
 }

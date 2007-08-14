@@ -9,11 +9,13 @@ import org.ourproject.kune.sitebar.client.rpc.SiteBarServiceAsync;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class SiteBarPresenter implements SiteBar, SiteBarListener, LoginListener, NewGroupListener {
+public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListener {
 
     private SiteBarView view;
+    private final SiteBarListener listener;
 
-    public SiteBarPresenter() {
+    public SiteBarPresenter(final SiteBarListener listener) {
+	this.listener = listener;
     }
 
     public void init(final SiteBarView view) {
@@ -48,6 +50,7 @@ public class SiteBarPresenter implements SiteBar, SiteBarListener, LoginListener
 	    public void onSuccess(final Object arg0) {
 		view.setLogoutLinkVisible(false);
 		view.restoreLoginLink();
+		listener.onUserLoggedIn();
 	    }
 	});
     }

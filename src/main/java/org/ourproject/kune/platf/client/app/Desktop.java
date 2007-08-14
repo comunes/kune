@@ -4,6 +4,7 @@ import org.gwm.client.impl.DefaultGDesktopPane;
 import org.gwm.client.util.Gwm;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
 import org.ourproject.kune.sitebar.client.bar.SiteBar;
+import org.ourproject.kune.sitebar.client.bar.SiteBarListener;
 import org.ourproject.kune.sitebar.client.msg.SiteMessage;
 import org.ourproject.kune.workspace.client.Workspace;
 
@@ -16,8 +17,8 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class Desktop extends DefaultGDesktopPane {
 
-    public Desktop(final Workspace workspace) {
-	SiteBar siteBar = SiteBarFactory.getSiteBar();
+    public Desktop(final Workspace workspace, final SiteBarListener listener) {
+	SiteBar siteBar = SiteBarFactory.createSiteBar(listener);
 	SiteMessage siteMessage = SiteBarFactory.getSiteMessage();
 	this.addWidget((Widget) workspace.getView(), 0, 20);
 	this.addWidget((Widget) siteBar.getView(), 0, 0);

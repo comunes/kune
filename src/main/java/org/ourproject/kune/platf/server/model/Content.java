@@ -26,15 +26,12 @@ public class Content {
     // Unmapped fields
     private ContentDescriptor descriptor;
 
-    private void setFieldsFromContentDescriptor() {
+    public void prepare() {
 	docRef = descriptor.getId().toString();
 	title = descriptor.getLastRevision().getData().getTitle();
 	// TODO: take mime in consideration
 	char[] data = descriptor.getLastRevision().getData().getContent();
 	content = data != null ? data.toString() : null;
-    }
-
-    private void setFieldsFromFolder() {
 	toolName = folder.getToolName();
 	group = folder.getOwner();
     }
@@ -98,8 +95,6 @@ public class Content {
     public Content(final ContentDescriptor descriptor, final Folder folder) {
 	this.descriptor = descriptor;
 	this.folder = folder;
-	this.setFieldsFromContentDescriptor();
-	this.setFieldsFromFolder();
     }
 
     public ContentDescriptor getDescriptor() {
@@ -108,7 +103,6 @@ public class Content {
 
     public void setDescriptor(final ContentDescriptor descriptor) {
 	this.descriptor = descriptor;
-	this.setFieldsFromContentDescriptor();
     }
 
     public Folder getFolder() {
@@ -117,7 +111,6 @@ public class Content {
 
     public void setFolder(final Folder folder) {
 	this.folder = folder;
-	this.setFieldsFromFolder();
     }
 
     public Double getRate() {

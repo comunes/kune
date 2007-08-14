@@ -20,7 +20,7 @@ import com.google.inject.Injector;
 import com.google.inject.Module;
 
 public abstract class GWTFilter implements Filter {
-    private static final Log log = LogFactory.getLog(GWTFilter.class);
+    static final Log log = LogFactory.getLog(GWTFilter.class);
     private final SimpleFilter[] filters;
     private ServletContext servletContext;
     private final Module[] modules;

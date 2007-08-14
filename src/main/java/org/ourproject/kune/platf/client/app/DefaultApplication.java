@@ -6,6 +6,7 @@ import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.state.StateController;
 import org.ourproject.kune.platf.client.tool.Tool;
+import org.ourproject.kune.sitebar.client.bar.SiteBarListener;
 import org.ourproject.kune.workspace.client.Workspace;
 import org.ourproject.kune.workspace.client.WorkspaceFactory;
 
@@ -21,7 +22,11 @@ public class DefaultApplication implements Application {
 	this.tools = tools;
 	workspace = WorkspaceFactory.getWorkspace();
 	workspace.attachTools(tools.values().iterator());
-	Desktop desktop = new Desktop(workspace);
+	Desktop desktop = new Desktop(workspace, new SiteBarListener() {
+	    public void onUserLoggedIn() {
+		stateManager.reload();
+	    }
+	});
 	RootPanel.get().add(desktop);
     }
 
