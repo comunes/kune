@@ -69,6 +69,11 @@ public class TestKuneInitialization {
 	ContentServerService service = injector.getInstance(ContentServerService.class);
 	ContentDTO content = service.getContent(null, null, null, null, null);
 	assertNotNull(content);
+	assertNotNull(content.getGroup());
+	assertNotNull(content.getFolder());
+	assertNotNull(content.getFolder().getId());
+	assertNotNull(content.getToolName());
+	assertNotNull(content.getDocRef());
     }
 
     @Test
