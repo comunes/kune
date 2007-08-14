@@ -69,17 +69,17 @@ public class ContentManagerDefault implements ContentManager {
 	if (!folder.getOwner().getShortName().equals(groupName)) {
 	    throw new ContentNotFoundException();
 	}
-	return new Content(descriptor, folder);
+	return new Content(folder, descriptor);
     }
 
     private Content findByFolderReference(final String groupName, final String toolName, final Long folderId) {
 	Folder folder = folderManager.find(folderId);
-	return new Content(null, folder);
+	return new Content(folder, null);
     }
 
     private Content findByRootOnGroup(final String groupName, final String toolName) {
 	Group group = groupManager.findByShortName(groupName);
-	return new Content(null, group.getRoot(toolName));
+	return new Content(group.getRoot(toolName), null);
     }
 
     private Content findDefaultOfGroup(final String groupName) {
@@ -88,7 +88,7 @@ public class ContentManagerDefault implements ContentManager {
     }
 
     private Content findDefaultOfGroup(final Group group) {
-	return new Content(group.getDefaultContent(), group.getDefaultContent().getFolder());
+	return new Content(group.getDefaultContent().getFolder(), group.getDefaultContent());
     }
 
     private boolean allNull(final String... args) {

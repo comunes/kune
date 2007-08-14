@@ -112,6 +112,7 @@ public class TestKuneInitialization {
 	assertNotNull(group);
 	ToolConfiguration toolConfiguration = group.getToolConfiguration(DocumentServerTool.NAME);
 	assertNotNull(toolConfiguration);
+	assertNotNull(group.getDefaultContent());
 	assertTrue(licenseManager.getAll().size() > 0);
     }
 }

@@ -26,19 +26,13 @@ public class Content {
     // Unmapped fields
     private ContentDescriptor descriptor;
 
-    public Content(final ContentDescriptor descriptor, final Folder folder) {
-	this.folder = folder;
-	this.group = folder == null ? null : folder.getOwner();
+    public Content(final Folder folder, final ContentDescriptor descriptor) {
+	setFolder(folder);
 	this.descriptor = descriptor;
     }
 
-    public void prepare() {
-	docRef = descriptor.getId().toString();
-	title = descriptor.getLastRevision().getData().getTitle();
-	// TODO: take mime in consideration
-	char[] data = descriptor.getLastRevision().getData().getContent();
-	content = data != null ? data.toString() : null;
-	toolName = folder.getToolName();
+    public Content() {
+	this(null, null);
     }
 
     public AccessLists getAccessLists() {
@@ -111,6 +105,7 @@ public class Content {
 
     public void setFolder(final Folder folder) {
 	this.folder = folder;
+	this.group = folder == null ? null : folder.getOwner();
     }
 
     public Double getRate() {
