@@ -6,7 +6,8 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,16 +17,16 @@ public class SocialNetwork {
     @GeneratedValue
     private Long id;
 
-    @OneToMany
+    @ManyToMany(targetEntity = Group.class)
     List<Group> admins;
 
-    @OneToMany
+    @ManyToMany(targetEntity = Group.class)
     List<Group> collaborators;
 
-    @OneToMany
+    @ManyToMany(targetEntity = Group.class)
     List<Group> viewer;
 
-    @OneToMany
+    @ManyToOne(targetEntity = Group.class)
     List<Group> pendingCollaborators;
 
     public SocialNetwork() {
