@@ -6,8 +6,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface KuneServiceAsync {
 
-    void getDefaultGroup(String userHash, AsyncCallback callback);
-
     void createNewGroup(GroupDTO group, AsyncCallback callback);
 
     void getAllLicenses(AsyncCallback callback);

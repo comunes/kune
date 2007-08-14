@@ -15,7 +15,8 @@ public class MetadataManagerDefault implements MetadataManager {
 	Data data = descriptor.getLastRevision().getData();
 	content.setDocRef(descriptor.getId().toString());
 	content.setTitle(data.getTitle());
-	content.setContent(new String(data.getContent()));
+	char[] text = data.getContent();
+	content.setContent(text == null ? null : new String(text));
 	content.setToolName(descriptor.getFolder().getToolName());
 	content.setAccessLists(accessList);
 	content.setAccessRights(accessRights);

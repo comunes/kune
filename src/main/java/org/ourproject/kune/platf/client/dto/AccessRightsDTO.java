@@ -16,4 +16,29 @@ public class AccessRightsDTO implements IsSerializable {
     public AccessRightsDTO() {
 	this(false, false, false);
     }
+
+    public boolean isAdministrable() {
+	return isAdministrable;
+    }
+
+    public void setAdministrable(final boolean isAdministrable) {
+	this.isAdministrable = isAdministrable;
+    }
+
+    public boolean isEditable() {
+	return isEditable;
+    }
+
+    public void setEditable(final boolean isEditable) {
+	this.isEditable = isEditable;
+    }
+
+    public boolean isVisible() {
+	return isVisible;
+    }
+
+    public void setVisible(final boolean isVisible) {
+	this.isVisible = isVisible;
+    }
+
 }

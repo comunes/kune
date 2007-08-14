@@ -75,6 +75,7 @@ public class TestKuneInitialization {
 	ContentDTO response = contentService.getContent(null, null, null, null, null);
 	assertNotNull(response.getAccessRights());
 	assertTrue(response.getAccessRights().isEditable);
+	// assertTrue(response.getAccessLists().getAdmin().size() == 1);
     }
 
     @Test
