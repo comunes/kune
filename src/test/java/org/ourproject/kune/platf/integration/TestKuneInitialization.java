@@ -13,7 +13,7 @@ import org.ourproject.kune.platf.server.KunePlatformModule;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.ToolConfiguration;
 import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.manager.LicenseManager;
+import org.ourproject.kune.platf.server.manager.LicenseManager1;
 import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.properties.DatabaseProperties;
 import org.ourproject.kune.platf.server.properties.PropertiesFileName;
@@ -44,7 +44,7 @@ public class TestKuneInitialization {
     @Inject
     UserManager manager;
     @Inject
-    LicenseManager licenseManager;
+    LicenseManager1 licenseManager;
     private Injector injector;
 
     @Before

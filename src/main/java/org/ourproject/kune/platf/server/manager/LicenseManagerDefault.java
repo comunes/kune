@@ -9,11 +9,11 @@ import org.ourproject.kune.platf.server.domain.License;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class LicenseManager extends DefaultManager<License, Long> {
+public class LicenseManagerDefault extends DefaultManager<License, Long> implements LicenseManager1 {
     private License licenseFinder;
 
     @Inject
-    public LicenseManager(final Provider<EntityManager> provider) {
+    public LicenseManagerDefault(final Provider<EntityManager> provider) {
 	super(provider, License.class);
     }
 

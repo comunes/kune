@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.rpc.KuneService;
-import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.manager.GroupManagerDefault;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 
 import com.google.gwt.user.client.rpc.SerializableException;
@@ -13,20 +13,19 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class KuneServerService implements KuneService {
-    private Mapper mapper;
-    private UserSession userSession;
-
-    public GroupDTO getDefaultGroup(final String userHash) {
-	User user = userSession.getUser();
-	return mapper.map(user.getUserGroup(), GroupDTO.class);
-    }
+    private final Mapper mapper;
+    private final GroupManagerDefault groupManager;
+    private final UserSession session;
 
     @Inject
-    public void setUserSession(final UserSession userSession) {
-	this.userSession = userSession;
+    public KuneServerService(final UserSession session, final GroupManagerDefault groupManager, final Mapper mapper) {
+	this.session = session;
+	this.groupManager = groupManager;
+	this.mapper = mapper;
     }
 
     public void createNewGroup(final GroupDTO group) throws SerializableException {
+	groupManager.create(session.getUser(), group);
     }
 
     public List getAllLicenses() throws SerializableException {
@@ -37,11 +36,6 @@ public class KuneServerService implements KuneService {
     public List getNotCCLicenses() throws SerializableException {
 	// TODO Auto-generated method stub
 	return null;
-    }
-
-    @Inject
-    public void setMapper(final Mapper mapper) {
-	this.mapper = mapper;
     }
 
 }

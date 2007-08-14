@@ -11,8 +11,6 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 public interface KuneService extends RemoteService {
 
-    public GroupDTO getDefaultGroup(String userHash);
-
     void createNewGroup(GroupDTO group) throws SerializableException;
 
     /**
