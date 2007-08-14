@@ -37,7 +37,15 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     }
 
     public void create(final User user, final Group group) throws SerializableException {
-	initGroup(user, group);
+	try {
+	    initGroup(user, group);
+	} catch (javax.persistence.EntityExistsException e) {
+	    throw new SerializableException("Already exist a group with this name");
+	} catch (Exception e) {
+	    e.printStackTrace();
+	    throw new SerializableException("Cannot create group");
+	}
+
     }
 
 }

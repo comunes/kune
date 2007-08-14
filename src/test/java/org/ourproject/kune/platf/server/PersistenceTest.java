@@ -19,13 +19,14 @@ public abstract class PersistenceTest {
     }
 
     public PersistenceTest() {
-	this("test");
+	this("test_db");
     }
 
     @Before
     public void prepare() {
 	Injector injector = TestHelper.create(new KunePlatformModule(), persistenceUnit);
 	PersistenceService persistence = injector.getInstance(PersistenceService.class);
+	// To Debug insert breakpoint here
 	persistence.start();
 	injector.injectMembers(this);
     }
@@ -38,6 +39,10 @@ public abstract class PersistenceTest {
 
     public void closeTransaction() {
 	getManager().getTransaction().commit();
+    }
+
+    public void rollbackTransaction() {
+	getManager().getTransaction().rollback();
     }
 
     public void persist(final Object entity) {
