@@ -41,9 +41,6 @@ public class User implements HasId {
 	this.email = email;
 	this.password = password;
 	this.userGroup = new Group(name, shortName);
-	SocialNetwork socialNetwork = new SocialNetwork();
-	socialNetwork.addAdmin(this.userGroup);
-	this.userGroup.setSocialNetwork(socialNetwork);
     }
 
     public User() {

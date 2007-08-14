@@ -44,8 +44,7 @@ public class GroupManagerTest extends PersistenceTest {
 	assertEquals(0, socialNetwork.getCollaborators().getList().size());
     }
 
-    @Test
-    // (expected = SerializableException.class)
+    @Test(expected = SerializableException.class)
     public void createGroupWithExistingShortName() throws SerializableException {
 	Group group = new Group("ysei", "Yellow Submarine Environmental Initiative");
 	Group group2 = new Group("ysei", "Yellow Submarine Environmental Initiative");

@@ -1,21 +1,22 @@
 package org.ourproject.kune.platf.server.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.OneToOne;
 
 @Embeddable
 public class SocialNetwork {
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     GroupList admins;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     GroupList collaborators;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     GroupList viewer;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     GroupList pendingCollaborators;
 
     public SocialNetwork() {

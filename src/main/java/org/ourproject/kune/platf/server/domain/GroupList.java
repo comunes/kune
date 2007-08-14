@@ -3,6 +3,7 @@ package org.ourproject.kune.platf.server.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,7 +17,7 @@ public class GroupList {
     @GeneratedValue
     private Long id;
 
-    @ManyToMany()
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     List<Group> list;
 
     public GroupList() {
@@ -44,7 +45,7 @@ public class GroupList {
     }
 
     public void add(final Group group) {
-	this.add(group);
+	list.add(group);
     }
 
 }
