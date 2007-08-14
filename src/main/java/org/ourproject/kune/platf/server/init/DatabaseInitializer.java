@@ -6,6 +6,7 @@ import org.ourproject.kune.platf.server.manager.LicenseManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.properties.DatabaseProperties;
 
+import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
 import com.wideplay.warp.persist.TransactionType;
 import com.wideplay.warp.persist.Transactional;
@@ -23,7 +24,7 @@ public class DatabaseInitializer {
 	this.licenseManager = licenseManager;
     }
 
-    public void initConditional() {
+    public void initConditional() throws SerializableException {
 	String shortName = properties.getDefaultSiteShortName();
 	User user = userManager.getByShortName(shortName);
 	if (user == null) {
@@ -32,12 +33,12 @@ public class DatabaseInitializer {
     }
 
     @Transactional(type = TransactionType.READ_WRITE)
-    public void initDatabase() {
+    public void initDatabase() throws SerializableException {
 	createUsers();
 	createLicenses();
     }
 
-    private void createUsers() {
+    private void createUsers() throws SerializableException {
 	String adminName = properties.getAdminUserName();
 	String adminShortName = properties.getAdminShortName();
 	String adminEmail = properties.getAdminEmail();

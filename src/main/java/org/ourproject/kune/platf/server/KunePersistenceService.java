@@ -14,8 +14,12 @@ public class KunePersistenceService {
     PersistenceService persistenceService;
 
     public void start() {
-	persistenceService.start();
-	databaseInitializer.initConditional();
+	try {
+	    persistenceService.start();
+	    databaseInitializer.initConditional();
+	} catch (Exception e) {
+	    throw new RuntimeException(e);
+	}
     }
 
 }

@@ -48,4 +48,16 @@ public class GroupList {
 	list.add(group);
     }
 
+    public boolean contains(final Group group) {
+	return list.contains(group);
+    }
+
+    public ArrayList<Group> duplicate() {
+	return new ArrayList<Group>(list);
+    }
+
+    public boolean isEmpty() {
+	return list.size() == 0;
+    }
+
 }

@@ -26,6 +26,12 @@ public class Content {
     // Unmapped fields
     private ContentDescriptor descriptor;
 
+    public Content(final ContentDescriptor descriptor, final Folder folder) {
+	this.folder = folder;
+	this.group = folder == null ? null : folder.getOwner();
+	this.descriptor = descriptor;
+    }
+
     public void prepare() {
 	docRef = descriptor.getId().toString();
 	title = descriptor.getLastRevision().getData().getTitle();
@@ -33,7 +39,6 @@ public class Content {
 	char[] data = descriptor.getLastRevision().getData().getContent();
 	content = data != null ? data.toString() : null;
 	toolName = folder.getToolName();
-	group = folder.getOwner();
     }
 
     public AccessLists getAccessLists() {
@@ -90,11 +95,6 @@ public class Content {
 
     public void setAccessRights(final AccessRights accessRights) {
 	this.accessRights = accessRights;
-    }
-
-    public Content(final ContentDescriptor descriptor, final Folder folder) {
-	this.descriptor = descriptor;
-	this.folder = folder;
     }
 
     public ContentDescriptor getDescriptor() {

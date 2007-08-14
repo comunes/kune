@@ -10,6 +10,7 @@ import org.ourproject.kune.platf.server.PersistenceTest;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 
+import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
 
 public class UserManagerTest extends PersistenceTest {
@@ -22,7 +23,7 @@ public class UserManagerTest extends PersistenceTest {
     private User user;
 
     @Before
-    public void insertData() {
+    public void insertData() throws SerializableException {
 	openTransaction();
 	assertEquals(0, userFinder.getAll().size());
 	assertEquals(0, groupFinder.getAll().size());

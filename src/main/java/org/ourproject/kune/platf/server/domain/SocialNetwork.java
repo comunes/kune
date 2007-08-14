@@ -6,84 +6,34 @@ import javax.persistence.OneToOne;
 
 @Embeddable
 public class SocialNetwork {
-
-    @OneToOne(cascade = CascadeType.ALL)
-    GroupList admins;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    GroupList collaborators;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    GroupList viewer;
+    AccessLists accessList;
 
     @OneToOne(cascade = CascadeType.ALL)
     GroupList pendingCollaborators;
 
     public SocialNetwork() {
-	admins = new GroupList();
-	collaborators = new GroupList();
-	viewer = new GroupList();
+	accessList = new AccessLists();
 	pendingCollaborators = new GroupList();
     }
 
-    public SocialNetwork(final GroupList admins, final GroupList collaborators, final GroupList viewer,
-	    final GroupList pendingCollab) {
-	this.admins = admins;
-	this.collaborators = collaborators;
-	this.viewer = viewer;
-	this.pendingCollaborators = pendingCollab;
-    }
-
     public void addAdmin(final Group group) {
-	admins.add(group);
+	accessList.addAdmin(group);
     }
 
     public void addCollaborator(final Group group) {
-	collaborators.add(group);
+	accessList.addEditor(group);
     }
 
     public void addViewer(final Group group) {
-	viewer.add(group);
+	accessList.addViewer(group);
     }
 
     public void addPendingCollaborator(final Group group) {
 	pendingCollaborators.add(group);
     }
 
-    public GroupList getAdmins() {
-	return admins;
-    }
-
-    public void setAdmins(final GroupList admins) {
-	this.admins = admins;
-    }
-
-    public GroupList getCollaborators() {
-	return collaborators;
-    }
-
-    public void setCollaborators(final GroupList collaborators) {
-	this.collaborators = collaborators;
-    }
-
-    public GroupList getViewer() {
-	return viewer;
-    }
-
-    public void setViewer(final GroupList viewer) {
-	this.viewer = viewer;
-    }
-
-    public GroupList getPendingCollaborators() {
-	return pendingCollaborators;
-    }
-
-    public void setPendingCollaborators(final GroupList pendingCollaborators) {
-	this.pendingCollaborators = pendingCollaborators;
-    }
-
-    public AccessLists getDefaultAccessLists() {
-	return new AccessLists(admins.getList(), collaborators.getList(), viewer.getList());
+    public AccessLists getAccessList() {
+	return accessList;
     }
 
 }

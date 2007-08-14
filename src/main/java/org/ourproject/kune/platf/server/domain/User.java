@@ -14,7 +14,7 @@ import com.google.inject.name.Named;
 import com.wideplay.warp.persist.dao.Finder;
 
 @Entity
-@Table(name = "users")
+@Table(name = "kusers")
 public class User implements HasId {
     @Id
     @GeneratedValue
@@ -40,7 +40,7 @@ public class User implements HasId {
 	this.shortName = shortName;
 	this.email = email;
 	this.password = password;
-	this.userGroup = new Group(name, shortName);
+	this.userGroup = null;
     }
 
     public User() {

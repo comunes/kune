@@ -21,7 +21,7 @@ public class MapperTest {
 
     @Test
     public void testGroupMapping() {
-	Group group = new Group("name", "shortName");
+	Group group = new Group("shortName", "name");
 	GroupDTO dto = mapper.map(group, GroupDTO.class);
 	assertEquals(group.getLongName(), dto.getLongName());
 	assertEquals(group.getShortName(), dto.getShortName());

@@ -1,6 +1,7 @@
 package org.ourproject.kune.platf.server;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 import org.junit.Before;
 
@@ -19,7 +20,7 @@ public abstract class PersistenceTest {
     }
 
     public PersistenceTest() {
-	this("test_db");
+	this("test");
     }
 
     @Before
@@ -33,7 +34,8 @@ public abstract class PersistenceTest {
 
     public EntityManager openTransaction() {
 	EntityManager manager = getManager();
-	manager.getTransaction().begin();
+	EntityTransaction transaction = manager.getTransaction();
+	transaction.begin();
 	return manager;
     }
 
@@ -51,6 +53,10 @@ public abstract class PersistenceTest {
 
     private EntityManager getManager() {
 	return provider.get();
+    }
+
+    public EntityTransaction getTransaction() {
+	return getManager().getTransaction();
     }
 
 }

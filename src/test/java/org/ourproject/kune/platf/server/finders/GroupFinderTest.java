@@ -17,8 +17,8 @@ public class GroupFinderTest extends PersistenceTest {
     @Before
     public void insertData() {
 	openTransaction();
-	persist(new Group("name1", "shortName1"));
-	persist(new Group("name2", "shortName2"));
+	persist(new Group("shortName1", "name1"));
+	persist(new Group("shortName2", "name2"));
     }
 
     @Test

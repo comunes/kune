@@ -1,13 +1,10 @@
 package org.ourproject.kune.platf.server;
 
-import java.util.ArrayList;
-
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.ContentDescriptor;
 import org.ourproject.kune.platf.server.domain.Data;
 import org.ourproject.kune.platf.server.domain.Folder;
 import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.GroupList;
 import org.ourproject.kune.platf.server.domain.Revision;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
@@ -48,27 +45,22 @@ public class TestDomainHelper {
 
     public static SocialNetwork createSocialNetwork(final Group groupInAdmins, final Group groupInCollab,
 	    final Group groupInViewer, final Group groupInPendings) {
-	ArrayList<Group> adminList = new ArrayList<Group>();
-	ArrayList<Group> collabList = new ArrayList<Group>();
-	ArrayList<Group> viewerList = new ArrayList<Group>();
-	ArrayList<Group> pendingList = new ArrayList<Group>();
-	adminList.add(groupInAdmins);
-	collabList.add(groupInCollab);
-	viewerList.add(groupInViewer);
-	pendingList.add(groupInPendings);
-	SocialNetwork socialNetwork = new SocialNetwork(new GroupList(adminList), new GroupList(collabList),
-		new GroupList(viewerList), new GroupList(pendingList));
+
+	SocialNetwork socialNetwork = new SocialNetwork();
+	socialNetwork.addAdmin(groupInAdmins);
+	socialNetwork.addCollaborator(groupInCollab);
+	socialNetwork.addViewer(groupInViewer);
+	socialNetwork.addPendingCollaborator(groupInPendings);
 	return socialNetwork;
     }
 
     public static AccessLists createAccessLists(final Group groupAdmins, final Group groupEdit, final Group groupView) {
-	ArrayList<Group> adminList = new ArrayList<Group>();
-	ArrayList<Group> editList = new ArrayList<Group>();
-	ArrayList<Group> viewerList = new ArrayList<Group>();
-	adminList.add(groupAdmins);
-	editList.add(groupEdit);
-	viewerList.add(groupView);
-	return new AccessLists(adminList, editList, viewerList);
+
+	AccessLists lists = new AccessLists();
+	lists.addAdmin(groupAdmins);
+	lists.addEditor(groupEdit);
+	lists.addViewer(groupView);
+	return lists;
     }
 
     public static ContentDescriptor createDescriptor(final long id, final String title, final String content) {

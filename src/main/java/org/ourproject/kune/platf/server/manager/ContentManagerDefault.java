@@ -78,12 +78,12 @@ public class ContentManagerDefault implements ContentManager {
     }
 
     private Content findByRootOnGroup(final String groupName, final String toolName) {
-	Group group = groupManager.get(groupName);
+	Group group = groupManager.findByShortName(groupName);
 	return new Content(null, group.getRoot(toolName));
     }
 
     private Content findDefaultOfGroup(final String groupName) {
-	Group group = groupManager.get(groupName);
+	Group group = groupManager.findByShortName(groupName);
 	return findDefaultOfGroup(group);
     }
 

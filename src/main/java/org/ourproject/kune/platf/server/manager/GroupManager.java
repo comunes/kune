@@ -5,12 +5,14 @@ import org.ourproject.kune.platf.server.domain.User;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 
-public interface GroupManager {
+public interface GroupManager extends Manager<Group, Long> {
 
-    Group get(String groupName);
+    Group findByShortName(String groupName);
 
-    void initGroup(User user, Group userGroup);
+    Group createGroup(String shortName, String longName, User user) throws SerializableException;
 
-    void create(User user, Group group) throws SerializableException;
+    Group createGroup(Group group, User user) throws SerializableException;
+
+    Group createUserGroup(User user);
 
 }

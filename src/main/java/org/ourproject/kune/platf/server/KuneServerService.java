@@ -31,7 +31,7 @@ public class KuneServerService implements KuneService {
     }
 
     public void createNewGroup(final GroupDTO group) throws SerializableException {
-	groupManager.create(session.getUser(), mapper.map(group, Group.class));
+	groupManager.createGroup(mapper.map(group, Group.class), session.getUser());
     }
 
     public List getAllLicenses() throws SerializableException {

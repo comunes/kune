@@ -46,7 +46,8 @@ public class Group implements HasId {
 	this(null, null);
     }
 
-    public Group(final String name, final String shortName) {
+    public Group(final String shortName, final String longName) {
+	this.longName = longName;
 	this.shortName = shortName;
 	toolsConfig = new HashMap<String, ToolConfiguration>();
 	socialNetwork = new SocialNetwork();

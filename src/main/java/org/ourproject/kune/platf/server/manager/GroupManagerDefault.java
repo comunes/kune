@@ -1,5 +1,6 @@
 package org.ourproject.kune.platf.server.manager;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 
 import org.ourproject.kune.platf.server.domain.Group;
@@ -25,27 +26,42 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 	this.registry = registry;
     }
 
-    public void initGroup(final User user, final Group group) {
+    public Group findByShortName(final String shortName) {
+	return finder.findByShortName(shortName);
+    }
+
+    public Group createGroup(final String shortName, final String longName, final User user)
+	    throws SerializableException {
+	Group group = new Group(shortName, longName);
+	return createGroup(group, user);
+    }
+
+    public Group createUserGroup(final User user) {
+	Group group = new Group(user.getShortName(), user.getName());
+	user.setUserGroup(group);
+	initSocialNetwork(group, group);
+	initGroup(user, group);
+	return group;
+    }
+
+    public Group createGroup(final Group group, final User user) throws SerializableException {
+	try {
+	    initSocialNetwork(group, user.getUserGroup());
+	    initGroup(user, group);
+	    return group;
+	} catch (EntityExistsException e) {
+	    throw new SerializableException("Already exist a group with this name");
+	}
+    }
+
+    private void initSocialNetwork(final Group group, final Group userGroup) {
+	group.getSocialNetwork().addAdmin(userGroup);
+    }
+
+    private void initGroup(final User user, final Group group) {
 	for (ServerTool tool : registry.all()) {
 	    tool.initGroup(user, group);
 	}
 	persist(group);
     }
-
-    public Group get(final String shortName) {
-	return finder.findByShortName(shortName);
-    }
-
-    public void create(final User user, final Group group) throws SerializableException {
-	try {
-	    initGroup(user, group);
-	} catch (javax.persistence.EntityExistsException e) {
-	    throw new SerializableException("Already exist a group with this name");
-	} catch (Exception e) {
-	    e.printStackTrace();
-	    throw new SerializableException("Cannot create group");
-	}
-
-    }
-
 }

@@ -40,6 +40,7 @@ public class ContentManagerTest {
     public void testDefaultGroupContent() throws ContentNotFoundException {
 
 	User user = TestDomainHelper.createUser(1);
+	user.setUserGroup(new Group());
 	ContentDescriptor descriptor = TestDomainHelper.createDescriptor(1l, "title", "content");
 	user.getUserGroup().setDefaultContent(descriptor);
 	session.setUser(user);
@@ -123,7 +124,7 @@ public class ContentManagerTest {
 	Group group = new Group();
 	ToolConfiguration config = group.setToolConfig("toolName", new ToolConfiguration());
 	Folder folder = config.setRoot(new Folder());
-	expect(groupManager.get("groupShortName")).andReturn(group);
+	expect(groupManager.findByShortName("groupShortName")).andReturn(group);
 	replay(groupManager);
 
 	Content content = contentManager.getContent(session.getUser(), "groupShortName", "toolName", null, null);
@@ -136,7 +137,7 @@ public class ContentManagerTest {
 	Group group = new Group();
 	ContentDescriptor ct = new ContentDescriptor();
 	group.setDefaultContent(ct);
-	expect(groupManager.get("groupShortName")).andReturn(group);
+	expect(groupManager.findByShortName("groupShortName")).andReturn(group);
 	replay(groupManager);
 
 	Content content = contentManager.getContent(session.getUser(), "groupShortName", null, null, null);

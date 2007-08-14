@@ -1,10 +1,12 @@
 package org.ourproject.kune.platf.server.manager;
 
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.GroupList;
+import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.model.AccessRights;
 
@@ -12,7 +14,7 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class AccessRightsManagerDefault implements AccessRightsManager {
-
+    // TODO: mirar rendimiento
     HashSet<Group> visited;
 
     public AccessRights get(final User user, final AccessLists accessList) {
@@ -22,13 +24,13 @@ public class AccessRightsManagerDefault implements AccessRightsManager {
 	boolean isEditable = false;
 	boolean isVisible = false;
 
-	isAdministrable = dfs(user.getUserGroup(), accessList.getAdmin(), AccessRights.ADMIN);
+	isAdministrable = depthFirstSearch(user.getUserGroup(), accessList.getAdmins(), AccessRights.ADMIN);
 	if (!isAdministrable) {
 	    visited.clear();
-	    isEditable = dfs(user.getUserGroup(), accessList.getEdit(), AccessRights.EDIT);
+	    isEditable = depthFirstSearch(user.getUserGroup(), accessList.getEditors(), AccessRights.EDIT);
 	    if (!isEditable) {
 		visited.clear();
-		isVisible = dfs(user.getUserGroup(), accessList.getView(), AccessRights.VIEW);
+		isVisible = depthFirstSearch(user.getUserGroup(), accessList.getViewers(), AccessRights.VIEW);
 	    } else {
 		isVisible = true;
 	    }
@@ -45,19 +47,22 @@ public class AccessRightsManagerDefault implements AccessRightsManager {
     /*
      * http://en.wikipedia.org/wiki/Depth-first_search
      */
-    private boolean dfs(final Group searchedGroup, final List<Group> list, final int type) {
+    private boolean depthFirstSearch(final Group searchedGroup, final GroupList list, final int type) {
 	if (list.contains(searchedGroup)) {
 	    return true;
 	}
-	list.removeAll(visited);
-	for (Group group : list) {
+	ArrayList<Group> noVisitedYet = list.duplicate();
+	noVisitedYet.removeAll(visited);
+	for (Group group : noVisitedYet) {
 	    visited.add(group);
+	    SocialNetwork socialNetwork = group.getSocialNetwork();
+	    AccessLists accessLists = socialNetwork.getAccessList();
 	    if (type == AccessRights.ADMIN) {
-		return dfs(searchedGroup, group.getSocialNetwork().getAdmins().getList(), type);
+		return depthFirstSearch(searchedGroup, accessLists.getAdmins(), type);
 	    } else if (type == AccessRights.EDIT) {
-		return dfs(searchedGroup, group.getSocialNetwork().getCollaborators().getList(), type);
+		return depthFirstSearch(searchedGroup, accessLists.getEditors(), type);
 	    } else if (type == AccessRights.VIEW) {
-		return dfs(searchedGroup, group.getSocialNetwork().getViewer().getList(), type);
+		return depthFirstSearch(searchedGroup, accessLists.getViewers(), type);
 	    }
 	}
 	return false;

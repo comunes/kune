@@ -5,9 +5,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
-import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
 
+import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -16,24 +16,23 @@ import com.google.inject.Singleton;
 public class UserManagerDefault extends DefaultManager<User, Long> implements UserManager {
     private User userFinder;
     private final GroupManager groupManager;
+    private final SocialNetworkManager socialNetworkManager;
 
     @Inject
-    public UserManagerDefault(final Provider<EntityManager> provider, final GroupManager groupManager) {
+    public UserManagerDefault(final Provider<EntityManager> provider, final GroupManager groupManager,
+	    final SocialNetworkManager socialNetworkManager) {
 	super(provider, User.class);
 	this.groupManager = groupManager;
+	this.socialNetworkManager = socialNetworkManager;
     }
 
     public List<User> getAll() {
 	return userFinder.getAll();
     }
 
-    public User createUser(final User user) {
+    public User createUser(final User user) throws SerializableException {
+	groupManager.createUserGroup(user);
 	persist(user);
-	SocialNetwork socialNetwork = user.getUserGroup().getSocialNetwork();
-	socialNetwork.addAdmin(user.getUserGroup());
-	user.getUserGroup().setSocialNetwork(socialNetwork);
-	// FIXME: persist user.getUserGroup()?
-	groupManager.initGroup(user, user.getUserGroup());
 	return user;
     }
 

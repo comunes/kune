@@ -2,14 +2,14 @@ package org.ourproject.kune.platf.server.manager;
 
 import org.ourproject.kune.platf.server.domain.User;
 
-public interface UserManager { // extends Manager<User, Long> {
+import com.google.gwt.user.client.rpc.SerializableException;
 
-    User createUser(User user);
+public interface UserManager extends Manager<User, Long> {
+
+    User createUser(User user) throws SerializableException;
 
     User getByShortName(String string);
 
     User login(String nick, String pass);
-
-    User find(Long id);
 
 }

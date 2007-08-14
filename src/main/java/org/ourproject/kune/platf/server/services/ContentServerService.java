@@ -5,7 +5,6 @@ import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.manager.AccessListsManager;
 import org.ourproject.kune.platf.server.manager.AccessRightsManager;
 import org.ourproject.kune.platf.server.manager.ContentManager;
 import org.ourproject.kune.platf.server.manager.MetadataManager;
@@ -24,7 +23,6 @@ import com.wideplay.warp.persist.Transactional;
 @Singleton
 public class ContentServerService implements ContentService {
     private final ContentManager contentManager;
-    private final AccessListsManager accessListsManager;
     private final AccessRightsManager accessRightsManager;
     private final MetadataManager metadataManager;
     private final UserSession session;
@@ -34,12 +32,10 @@ public class ContentServerService implements ContentService {
 
     @Inject
     public ContentServerService(final UserSession session, final ContentManager contentManager,
-	    final AccessListsManager accessListsManager, final AccessRightsManager accessRightManager,
-	    final MetadataManager metadaManager, final UserManager userManager, final KuneProperties properties,
-	    final Mapper mapper) {
+	    final AccessRightsManager accessRightManager, final MetadataManager metadaManager,
+	    final UserManager userManager, final KuneProperties properties, final Mapper mapper) {
 	this.session = session;
 	this.contentManager = contentManager;
-	this.accessListsManager = accessListsManager;
 	this.accessRightsManager = accessRightManager;
 	this.metadataManager = metadaManager;
 	this.userManager = userManager;
@@ -58,10 +54,12 @@ public class ContentServerService implements ContentService {
 	}
 
 	Content content = contentManager.getContent(user, groupName, toolName, folderRef, contentRef);
-	AccessLists accessLists = accessListsManager.get(content.getDescriptor());
+	AccessLists accessLists = content.getAccessLists();
+	if (accessLists == null) {
+	    accessLists = content.getGroup().getSocialNetwork().getAccessList();
+	}
 	AccessRights accessRights = accessRightsManager.get(user, accessLists);
 	metadataManager.fill(content, accessLists, accessRights);
 	return mapper.map(content, ContentDTO.class);
     }
-
 }

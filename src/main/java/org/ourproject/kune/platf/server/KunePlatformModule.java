@@ -2,8 +2,6 @@ package org.ourproject.kune.platf.server;
 
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.KuneService;
-import org.ourproject.kune.platf.server.manager.AccessListsManager;
-import org.ourproject.kune.platf.server.manager.AccessListsManagerDefault;
 import org.ourproject.kune.platf.server.manager.AccessRightsManager;
 import org.ourproject.kune.platf.server.manager.AccessRightsManagerDefault;
 import org.ourproject.kune.platf.server.manager.ContentDescriptorManager;
@@ -18,6 +16,8 @@ import org.ourproject.kune.platf.server.manager.LicenseManager;
 import org.ourproject.kune.platf.server.manager.LicenseManagerDefault;
 import org.ourproject.kune.platf.server.manager.MetadataManager;
 import org.ourproject.kune.platf.server.manager.MetadataManagerDefault;
+import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
+import org.ourproject.kune.platf.server.manager.SocialNetworkManagerDefault;
 import org.ourproject.kune.platf.server.manager.ToolConfigurationManager;
 import org.ourproject.kune.platf.server.manager.ToolConfigurationManagerDefault;
 import org.ourproject.kune.platf.server.manager.UserManager;
@@ -60,10 +60,10 @@ public class KunePlatformModule extends AbstractModule {
 	bind(ContentDescriptorManager.class).to(ContentDescriptorManagerDefault.class);
 	bind(ToolConfigurationManager.class).to(ToolConfigurationManagerDefault.class);
 	bind(ContentManager.class).to(ContentManagerDefault.class);
-	bind(AccessListsManager.class).to(AccessListsManagerDefault.class);
 	bind(AccessRightsManager.class).to(AccessRightsManagerDefault.class);
 	bind(MetadataManager.class).to(MetadataManagerDefault.class);
 	bind(FolderManager.class).to(FolderManagerDefault.class);
 	bind(LicenseManager.class).to(LicenseManagerDefault.class);
+	bind(SocialNetworkManager.class).to(SocialNetworkManagerDefault.class);
     }
 }
