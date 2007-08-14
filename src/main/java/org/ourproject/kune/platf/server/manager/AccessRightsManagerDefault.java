@@ -53,11 +53,11 @@ public class AccessRightsManagerDefault implements AccessRightsManager {
 	for (Group group : list) {
 	    visited.add(group);
 	    if (type == AccessRights.ADMIN) {
-		return dfs(searchedGroup, group.getSocialNetwork().getAdmins(), type);
+		return dfs(searchedGroup, group.getSocialNetwork().getAdmins().getList(), type);
 	    } else if (type == AccessRights.EDIT) {
-		return dfs(searchedGroup, group.getSocialNetwork().getCollaborators(), type);
+		return dfs(searchedGroup, group.getSocialNetwork().getCollaborators().getList(), type);
 	    } else if (type == AccessRights.VIEW) {
-		return dfs(searchedGroup, group.getSocialNetwork().getViewer(), type);
+		return dfs(searchedGroup, group.getSocialNetwork().getViewer().getList(), type);
 	    }
 	}
 	return false;

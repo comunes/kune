@@ -31,6 +31,8 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
 	persist(user);
 	SocialNetwork socialNetwork = user.getUserGroup().getSocialNetwork();
 	socialNetwork.addAdmin(user.getUserGroup());
+	user.getUserGroup().setSocialNetwork(socialNetwork);
+	// FIXME: persist user.getUserGroup()?
 	groupManager.initGroup(user, user.getUserGroup());
 	return user;
     }

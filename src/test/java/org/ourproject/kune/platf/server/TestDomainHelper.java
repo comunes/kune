@@ -7,6 +7,7 @@ import org.ourproject.kune.platf.server.domain.ContentDescriptor;
 import org.ourproject.kune.platf.server.domain.Data;
 import org.ourproject.kune.platf.server.domain.Folder;
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.GroupList;
 import org.ourproject.kune.platf.server.domain.Revision;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
@@ -55,7 +56,8 @@ public class TestDomainHelper {
 	collabList.add(groupInCollab);
 	viewerList.add(groupInViewer);
 	pendingList.add(groupInPendings);
-	SocialNetwork socialNetwork = new SocialNetwork(adminList, collabList, viewerList, pendingList);
+	SocialNetwork socialNetwork = new SocialNetwork(new GroupList(adminList), new GroupList(collabList),
+		new GroupList(viewerList), new GroupList(pendingList));
 	return socialNetwork;
     }
 

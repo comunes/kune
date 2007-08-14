@@ -1,55 +1,36 @@
 package org.ourproject.kune.platf.server.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Embeddable;
+import javax.persistence.OneToOne;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "social_networks")
+@Embeddable
 public class SocialNetwork {
-    @Id
-    @GeneratedValue
-    private Long id;
 
-    @ManyToMany(targetEntity = Group.class)
-    List<Group> admins;
+    @OneToOne
+    GroupList admins;
 
-    @ManyToMany(targetEntity = Group.class)
-    List<Group> collaborators;
+    @OneToOne
+    GroupList collaborators;
 
-    @ManyToMany(targetEntity = Group.class)
-    List<Group> viewer;
+    @OneToOne
+    GroupList viewer;
 
-    @ManyToOne(targetEntity = Group.class)
-    List<Group> pendingCollaborators;
+    @OneToOne
+    GroupList pendingCollaborators;
 
     public SocialNetwork() {
-	admins = new ArrayList<Group>();
-	collaborators = new ArrayList<Group>();
-	viewer = new ArrayList<Group>();
-	pendingCollaborators = new ArrayList<Group>();
+	admins = new GroupList();
+	collaborators = new GroupList();
+	viewer = new GroupList();
+	pendingCollaborators = new GroupList();
     }
 
-    public SocialNetwork(final ArrayList<Group> admins, final ArrayList<Group> collaborators,
-	    final ArrayList<Group> viewer, final ArrayList<Group> pendingCollaborators) {
+    public SocialNetwork(final GroupList admins, final GroupList collaborators, final GroupList viewer,
+	    final GroupList pendingCollab) {
 	this.admins = admins;
 	this.collaborators = collaborators;
 	this.viewer = viewer;
-	this.pendingCollaborators = pendingCollaborators;
-    }
-
-    public Long getId() {
-	return id;
-    }
-
-    public void setId(final Long id) {
-	this.id = id;
+	this.pendingCollaborators = pendingCollab;
     }
 
     public void addAdmin(final Group group) {
@@ -68,40 +49,40 @@ public class SocialNetwork {
 	pendingCollaborators.add(group);
     }
 
-    public List<Group> getAdmins() {
+    public GroupList getAdmins() {
 	return admins;
     }
 
-    public void setAdmins(final List<Group> admins) {
+    public void setAdmins(final GroupList admins) {
 	this.admins = admins;
     }
 
-    public List<Group> getCollaborators() {
+    public GroupList getCollaborators() {
 	return collaborators;
     }
 
-    public void setCollaborators(final List<Group> collaborators) {
+    public void setCollaborators(final GroupList collaborators) {
 	this.collaborators = collaborators;
     }
 
-    public List<Group> getViewer() {
+    public GroupList getViewer() {
 	return viewer;
     }
 
-    public void setViewer(final List<Group> viewer) {
+    public void setViewer(final GroupList viewer) {
 	this.viewer = viewer;
     }
 
-    public List<Group> getPendingCollaborators() {
+    public GroupList getPendingCollaborators() {
 	return pendingCollaborators;
     }
 
-    public void setPendingCollaborators(final List<Group> pendingCollaborators) {
+    public void setPendingCollaborators(final GroupList pendingCollaborators) {
 	this.pendingCollaborators = pendingCollaborators;
     }
 
     public AccessLists getDefaultAccessLists() {
-	return new AccessLists(admins, collaborators, viewer);
+	return new AccessLists(admins.getList(), collaborators.getList(), viewer.getList());
     }
 
 }

@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -38,7 +37,6 @@ public class Group implements HasId {
     @OneToOne
     private ContentDescriptor defaultContent;
 
-    @OneToOne(cascade = CascadeType.ALL)
     private SocialNetwork socialNetwork;
 
     @OneToMany

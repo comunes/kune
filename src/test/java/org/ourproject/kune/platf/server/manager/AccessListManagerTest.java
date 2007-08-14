@@ -12,6 +12,7 @@ import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.ContentDescriptor;
 import org.ourproject.kune.platf.server.domain.Folder;
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.GroupList;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 
 public class AccessListManagerTest {
@@ -52,7 +53,8 @@ public class AccessListManagerTest {
 	viewerList.add(group3);
 	viewerList.add(group1);
 	pendingList.add(group4);
-	SocialNetwork socialNetwork = new SocialNetwork(adminList, collabList, viewerList, pendingList);
+	SocialNetwork socialNetwork = new SocialNetwork(new GroupList(adminList), new GroupList(collabList),
+		new GroupList(viewerList), new GroupList(pendingList));
 
 	folder.setOwner(group1);
 	contentDesc.setFolder(folder);
