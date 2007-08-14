@@ -26,14 +26,15 @@ public class Content {
     // Unmapped fields
     private ContentDescriptor descriptor;
 
-    public void setFieldsFromContentDescriptor() {
+    private void setFieldsFromContentDescriptor() {
 	docRef = descriptor.getId().toString();
 	title = descriptor.getLastRevision().getData().getTitle();
 	// TODO: take mime in consideration
-	content = descriptor.getLastRevision().getData().getContent().toString();
+	char[] data = descriptor.getLastRevision().getData().getContent();
+	content = data != null ? data.toString() : null;
     }
 
-    public void setFieldsFromFolder() {
+    private void setFieldsFromFolder() {
 	toolName = folder.getToolName();
 	group = folder.getOwner();
     }

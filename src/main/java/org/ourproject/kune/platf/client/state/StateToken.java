@@ -1,6 +1,6 @@
 package org.ourproject.kune.platf.client.state;
 
-public class HistoryToken {
+public class StateToken {
     private static final String[] EMPTY = new String[0];
     private static final String DOT = ".";
     public final String group;
@@ -8,16 +8,16 @@ public class HistoryToken {
     public final String folder;
     public final String document;
 
-    public HistoryToken(final String group, final String tool, final String folder, final String document) {
+    public StateToken(final String group, final String tool, final String folder, final String document) {
 	this.group = group;
 	this.tool = tool;
 	this.folder = folder;
 	this.document = document;
     }
 
-    public HistoryToken(final String encoded) {
+    public StateToken(final String encoded) {
 	String[] splitted;
-	if (encoded != null) {
+	if (encoded != null && encoded.length() > 0) {
 	    splitted = encoded.split("\\.");
 	} else {
 	    splitted = EMPTY;

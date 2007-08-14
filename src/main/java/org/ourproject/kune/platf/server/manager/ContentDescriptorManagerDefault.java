@@ -3,6 +3,7 @@ package org.ourproject.kune.platf.server.manager;
 import javax.persistence.EntityManager;
 
 import org.ourproject.kune.platf.server.domain.ContentDescriptor;
+import org.ourproject.kune.platf.server.domain.Folder;
 import org.ourproject.kune.platf.server.domain.Revision;
 import org.ourproject.kune.platf.server.domain.User;
 
@@ -19,9 +20,10 @@ public class ContentDescriptorManagerDefault extends DefaultManager<ContentDescr
 	super(provider, ContentDescriptor.class);
     }
 
-    public ContentDescriptor createContent(final User user) {
+    public ContentDescriptor createContent(final User user, final Folder folder) {
 	ContentDescriptor descriptor = new ContentDescriptor();
 	descriptor.setCreator(user);
+	descriptor.setFolder(folder);
 	Revision revision = new Revision();
 	descriptor.addRevision(revision);
 	return persist(descriptor);

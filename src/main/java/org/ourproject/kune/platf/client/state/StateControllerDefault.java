@@ -23,10 +23,10 @@ public class StateControllerDefault implements StateController {
 
     public void onHistoryChanged(final String historyToken) {
 	GWT.log("State: " + historyToken, null);
-	onHistoryChanged(new HistoryToken(historyToken));
+	onHistoryChanged(new StateToken(historyToken));
     }
 
-    private void onHistoryChanged(final HistoryToken newState) {
+    private void onHistoryChanged(final StateToken newState) {
 	server.getContent(state.user, newState.group, newState.tool, newState.folder, newState.document,
 		new AsyncCallback() {
 		    public void onFailure(final Throwable caught) {

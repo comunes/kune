@@ -1,7 +1,7 @@
 package org.ourproject.kune.docs.client.ui.cnt.reader;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.workspace.client.dto.AccessRightsDTO;
+import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 
 public class DocumentReaderPresenter implements DocumentReader {
     private final DocumentReaderView view;

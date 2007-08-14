@@ -1,11 +1,13 @@
 package org.ourproject.kune.platf.integration;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.docs.server.DocumentServerTool;
 import org.ourproject.kune.docs.server.KuneDocumentModule;
+import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.server.KunePersistenceService;
 import org.ourproject.kune.platf.server.KunePlatformModule;
 import org.ourproject.kune.platf.server.domain.Group;
@@ -15,7 +17,9 @@ import org.ourproject.kune.platf.server.manager.LicenseManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.properties.KuneProperties;
 import org.ourproject.kune.platf.server.properties.PropertiesFileName;
+import org.ourproject.kune.platf.server.services.ContentServerService;
 import org.ourproject.kune.platf.server.tool.ToolRegistry;
+import org.ourproject.kune.workspace.client.dto.ContentDTO;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
@@ -43,20 +47,28 @@ public class TestKuneInitialization {
     @Inject
     LicenseManager licenseManager;
 
+    private Injector injector;
+
     @Before
     public void create() {
-	Injector injector = Guice.createInjector(new KunePlatformModule(), new KuneDocumentModule(),
-		new AbstractModule() {
-		    @Override
-		    protected void configure() {
-			bindScope(SessionScoped.class, Scopes.SINGLETON);
-			bindConstant().annotatedWith(JpaUnit.class).to("test");
-			bindConstant().annotatedWith(PropertiesFileName.class).to("kune.properties");
-		    }
-		});
+	injector = Guice.createInjector(new KunePlatformModule(), new KuneDocumentModule(), new AbstractModule() {
+	    @Override
+	    protected void configure() {
+		bindScope(SessionScoped.class, Scopes.SINGLETON);
+		bindConstant().annotatedWith(JpaUnit.class).to("test");
+		bindConstant().annotatedWith(PropertiesFileName.class).to("kune.properties");
+	    }
+	});
 	injector.injectMembers(this);
 	registry.register(documentTool);
 	persistenceService.start();
+    }
+
+    @Test
+    public void testCallDefault() throws ContentNotFoundException {
+	ContentServerService service = injector.getInstance(ContentServerService.class);
+	ContentDTO content = service.getContent(null, null, null, null, null);
+	assertNotNull(content);
     }
 
     @Test
@@ -67,7 +79,6 @@ public class TestKuneInitialization {
 	assertNotNull(group);
 	ToolConfiguration toolConfiguration = group.getToolConfiguration(DocumentServerTool.NAME);
 	assertNotNull(toolConfiguration);
-	assertNotNull(toolConfiguration.getWelcome());
-	assertNotNull(licenseManager.getAll());
+	assertTrue(licenseManager.getAll().size() > 0);
     }
 }

@@ -20,7 +20,7 @@
 
   <mapping>
       <class-a>org.ourproject.kune.platf.client.dto.AccessRightsDTO</class-a>
-      <class-b>org.ourproject.kune.platf.server.domain.AccessRights</class-b>
+      <class-b>org.ourproject.kune.platf.server.model.AccessRights</class-b>
   </mapping>
 
   <mapping>

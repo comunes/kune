@@ -1,4 +1,4 @@
-package org.ourproject.kune.workspace.client.dto;
+package org.ourproject.kune.platf.client.dto;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 

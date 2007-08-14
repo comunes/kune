@@ -11,6 +11,7 @@ import org.ourproject.kune.platf.server.manager.ContentManager;
 import org.ourproject.kune.platf.server.manager.MetadataManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.manager.UserManagerDefault;
+import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.platf.server.model.AccessRights;
 import org.ourproject.kune.platf.server.model.Content;
 import org.ourproject.kune.platf.server.properties.KuneProperties;
@@ -30,11 +31,13 @@ public class ContentServerService implements ContentService {
     private final UserSession session;
     private final KuneProperties properties;
     private final UserManager userManager;
+    private final Mapper mapper;
 
     @Inject
     public ContentServerService(final UserSession session, final ContentManager contentManager,
 	    final AccessListsManager accessListsManager, final AccessRightsManager accessRightManager,
-	    final MetadataManager metadaManager, final UserManagerDefault userManager, final KuneProperties properties) {
+	    final MetadataManager metadaManager, final UserManagerDefault userManager, final KuneProperties properties,
+	    final Mapper mapper) {
 	this.session = session;
 	this.contentManager = contentManager;
 	this.accessListsManager = accessListsManager;
@@ -42,6 +45,7 @@ public class ContentServerService implements ContentService {
 	this.metadataManager = metadaManager;
 	this.userManager = userManager;
 	this.properties = properties;
+	this.mapper = mapper;
     }
 
     @Transactional(type = TransactionType.READ_ONLY)
@@ -58,11 +62,7 @@ public class ContentServerService implements ContentService {
 	AccessLists accessLists = accessListsManager.get(content.getDescriptor());
 	AccessRights accessRights = accessRightsManager.get(user, accessLists);
 	metadataManager.fill(content, accessLists, accessRights);
-	return map(content);
-    }
-
-    private ContentDTO map(final Content descriptor) {
-	return null;
+	return mapper.map(content, ContentDTO.class);
     }
 
 }

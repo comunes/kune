@@ -1,8 +1,10 @@
 package org.ourproject.kune.workspace.client.dto;
 
+import org.ourproject.kune.platf.client.dto.AccessListsDTO;
+import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.FolderDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.state.HistoryToken;
+import org.ourproject.kune.platf.client.state.StateToken;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
@@ -85,7 +87,7 @@ public class ContentDTO implements IsSerializable {
     }
 
     public String encodeState() {
-	return HistoryToken.encode(group.getShortName(), toolName, folder.getId().toString(), getDocRef());
+	return StateToken.encode(group.getShortName(), toolName, folder.getId().toString(), getDocRef());
     }
 
     public boolean hasDocument() {

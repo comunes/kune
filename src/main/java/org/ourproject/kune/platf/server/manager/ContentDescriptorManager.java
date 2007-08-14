@@ -1,10 +1,12 @@
 package org.ourproject.kune.platf.server.manager;
 
 import org.ourproject.kune.platf.server.domain.ContentDescriptor;
+import org.ourproject.kune.platf.server.domain.Folder;
 import org.ourproject.kune.platf.server.domain.User;
 
 public interface ContentDescriptorManager {
     public ContentDescriptor get(Long id);
 
-    public ContentDescriptor createContent(User user);
+    public ContentDescriptor createContent(User user, Folder folder);
+
 }

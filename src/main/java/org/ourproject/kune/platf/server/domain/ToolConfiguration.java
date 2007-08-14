@@ -18,9 +18,6 @@ public class ToolConfiguration {
     @OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private Folder root;
 
-    @OneToOne
-    private ContentDescriptor welcome;
-
     public Folder setRoot(final Folder root) {
 	this.root = root;
 	return root;
@@ -36,14 +33,6 @@ public class ToolConfiguration {
 
     public Folder getRoot() {
 	return root;
-    }
-
-    public void setWelcome(final ContentDescriptor descriptor) {
-	this.welcome = descriptor;
-    }
-
-    public ContentDescriptor getWelcome() {
-	return welcome;
     }
 
 }

@@ -31,11 +31,11 @@ public class DocumentServerTool implements ServerTool {
 	ToolConfiguration config = group.getToolConfiguration(NAME);
 	if (config == null) {
 	    config = new ToolConfiguration();
-	    config.setRoot(new Folder("/"));
+	    Folder folder = config.setRoot(new Folder("/", NAME));
 	    group.setToolConfig(NAME, config);
-	    ContentDescriptor descriptor = contentDescriptorManager.createContent(user);
-	    config.setWelcome(descriptor);
 	    configurationManager.persist(config);
+	    ContentDescriptor descriptor = contentDescriptorManager.createContent(user, folder);
+	    group.setDefaultContent(descriptor);
 	}
 	return group;
     }
