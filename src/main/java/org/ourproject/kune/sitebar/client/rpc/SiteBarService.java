@@ -7,7 +7,7 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 public interface SiteBarService extends RemoteService {
 
-    String login(String nick, String pass) throws SerializableException;
+    void login(String nick, String pass) throws SerializableException;
 
     void logout() throws SerializableException;
 

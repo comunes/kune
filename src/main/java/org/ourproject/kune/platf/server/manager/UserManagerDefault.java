@@ -40,9 +40,18 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
 	}
     }
 
+    public User login(final String nick, final String pass) {
+	// TODO: integrate a existing Auth manager
+	User user = userFinder.getByShortName(nick);
+	if (user.getPassword().equals(pass)) {
+	    return user;
+	} else {
+	    return null;
+	}
+    }
+
     @Inject
     public void setUserFinder(final User userFinder) {
 	this.userFinder = userFinder;
     }
-
 }
