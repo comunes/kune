@@ -1,6 +1,5 @@
 package org.ourproject.kune.platf.server.manager;
 
-import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 
@@ -12,6 +11,6 @@ public interface GroupManager {
 
     void initGroup(User user, Group userGroup);
 
-    void create(User user, GroupDTO group) throws SerializableException;
+    void create(User user, Group group) throws SerializableException;
 
 }

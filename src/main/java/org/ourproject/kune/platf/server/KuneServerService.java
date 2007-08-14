@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.rpc.KuneService;
+import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
@@ -30,7 +31,7 @@ public class KuneServerService implements KuneService {
     }
 
     public void createNewGroup(final GroupDTO group) throws SerializableException {
-	groupManager.create(session.getUser(), group);
+	groupManager.create(session.getUser(), mapper.map(group, Group.class));
     }
 
     public List getAllLicenses() throws SerializableException {

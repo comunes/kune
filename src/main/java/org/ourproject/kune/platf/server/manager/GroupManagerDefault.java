@@ -2,7 +2,6 @@ package org.ourproject.kune.platf.server.manager;
 
 import javax.persistence.EntityManager;
 
-import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.tool.ServerTool;
@@ -37,10 +36,8 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 	return finder.findByShortName(shortName);
     }
 
-    public void create(final User user, final GroupDTO groupDTO) throws SerializableException {
-	Group group = new Group(groupDTO.getShortName(), groupDTO.getLongName());
+    public void create(final User user, final Group group) throws SerializableException {
 	initGroup(user, group);
-	throw new SerializableException("Only for test");
     }
 
 }
