@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.ourproject.kune.platf.server.domain.License;
 
-public interface LicenseManager1 {
+public interface LicenseManager {
 
     List<License> getAll();
 

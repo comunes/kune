@@ -9,7 +9,7 @@ import org.ourproject.kune.platf.server.domain.License;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class LicenseManagerDefault extends DefaultManager<License, Long> implements LicenseManager1 {
+public class LicenseManagerDefault extends DefaultManager<License, Long> implements LicenseManager {
     private License licenseFinder;
 
     @Inject

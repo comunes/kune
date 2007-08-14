@@ -2,7 +2,7 @@ package org.ourproject.kune.platf.server.init;
 
 import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.manager.LicenseManager1;
+import org.ourproject.kune.platf.server.manager.LicenseManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.properties.DatabaseProperties;
 
@@ -11,13 +11,13 @@ import com.wideplay.warp.persist.TransactionType;
 import com.wideplay.warp.persist.Transactional;
 
 public class DatabaseInitializer {
-    private final LicenseManager1 licenseManager;
+    private final LicenseManager licenseManager;
     private final UserManager userManager;
     private final DatabaseProperties properties;
 
     @Inject
     public DatabaseInitializer(final DatabaseProperties properties, final UserManager userManager,
-	    final LicenseManager1 licenseManager) {
+	    final LicenseManager licenseManager) {
 	this.properties = properties;
 	this.userManager = userManager;
 	this.licenseManager = licenseManager;

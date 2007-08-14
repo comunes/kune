@@ -13,7 +13,7 @@ import com.google.inject.Inject;
 
 public class LicenseManagerTest extends PersistenceTest {
     @Inject
-    LicenseManager1 licenseManager;
+    LicenseManager licenseManager;
     @Inject
     License licenseFinder;
     private License license;
