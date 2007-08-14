@@ -8,7 +8,9 @@ import org.ourproject.kune.platf.server.domain.License;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 
+@Singleton
 public class LicenseManagerDefault extends DefaultManager<License, Long> implements LicenseManager {
     private License licenseFinder;
 

@@ -10,7 +10,6 @@ import org.ourproject.kune.platf.server.manager.AccessRightsManager;
 import org.ourproject.kune.platf.server.manager.ContentManager;
 import org.ourproject.kune.platf.server.manager.MetadataManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
-import org.ourproject.kune.platf.server.manager.UserManagerDefault;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.platf.server.model.AccessRights;
 import org.ourproject.kune.platf.server.model.Content;
@@ -36,7 +35,7 @@ public class ContentServerService implements ContentService {
     @Inject
     public ContentServerService(final UserSession session, final ContentManager contentManager,
 	    final AccessListsManager accessListsManager, final AccessRightsManager accessRightManager,
-	    final MetadataManager metadaManager, final UserManagerDefault userManager, final KuneProperties properties,
+	    final MetadataManager metadaManager, final UserManager userManager, final KuneProperties properties,
 	    final Mapper mapper) {
 	this.session = session;
 	this.contentManager = contentManager;

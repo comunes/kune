@@ -1,10 +1,12 @@
 package org.ourproject.kune.platf.server;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.rpc.KuneService;
-import org.ourproject.kune.platf.server.manager.GroupManagerDefault;
+import org.ourproject.kune.platf.server.manager.GroupManager;
+import org.ourproject.kune.platf.server.manager.LicenseManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 
 import com.google.gwt.user.client.rpc.SerializableException;
@@ -14,13 +16,16 @@ import com.google.inject.Singleton;
 @Singleton
 public class KuneServerService implements KuneService {
     private final Mapper mapper;
-    private final GroupManagerDefault groupManager;
+    private final GroupManager groupManager;
     private final UserSession session;
+    private final LicenseManager licenseManager;
 
     @Inject
-    public KuneServerService(final UserSession session, final GroupManagerDefault groupManager, final Mapper mapper) {
+    public KuneServerService(final UserSession session, final GroupManager groupManager,
+	    final LicenseManager licenseManager, final Mapper mapper) {
 	this.session = session;
 	this.groupManager = groupManager;
+	this.licenseManager = licenseManager;
 	this.mapper = mapper;
     }
 
@@ -29,12 +34,11 @@ public class KuneServerService implements KuneService {
     }
 
     public List getAllLicenses() throws SerializableException {
-	// TODO Auto-generated method stub
-	return null;
+	return mapper.map(licenseManager.getAll(), ArrayList.class);
     }
 
     public List getNotCCLicenses() throws SerializableException {
-	// TODO Auto-generated method stub
+	// TODO: see if is necessary;
 	return null;
     }
 

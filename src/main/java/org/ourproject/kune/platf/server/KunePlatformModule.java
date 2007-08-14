@@ -14,6 +14,8 @@ import org.ourproject.kune.platf.server.manager.FolderManager;
 import org.ourproject.kune.platf.server.manager.FolderManagerDefault;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.GroupManagerDefault;
+import org.ourproject.kune.platf.server.manager.LicenseManager;
+import org.ourproject.kune.platf.server.manager.LicenseManagerDefault;
 import org.ourproject.kune.platf.server.manager.MetadataManager;
 import org.ourproject.kune.platf.server.manager.MetadataManagerDefault;
 import org.ourproject.kune.platf.server.manager.ToolConfigurationManager;
@@ -62,5 +64,6 @@ public class KunePlatformModule extends AbstractModule {
 	bind(AccessRightsManager.class).to(AccessRightsManagerDefault.class);
 	bind(MetadataManager.class).to(MetadataManagerDefault.class);
 	bind(FolderManager.class).to(FolderManagerDefault.class);
+	bind(LicenseManager.class).to(LicenseManagerDefault.class);
     }
 }
