@@ -4,6 +4,7 @@ import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.tool.Tool;
+import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.workspace.client.Workspace;
 import org.ourproject.kune.workspace.client.dto.ContentDTO;
 
@@ -27,14 +28,17 @@ public class StateControllerDefault implements StateController {
     }
 
     private void onHistoryChanged(final StateToken newState) {
+	Site.showProgress("cargando...");
 	server.getContent(state.user, newState.group, newState.tool, newState.folder, newState.document,
 		new AsyncCallback() {
 		    public void onFailure(final Throwable caught) {
+			Site.hideProgress();
 		    }
 
 		    public void onSuccess(final Object result) {
 			GWT.log("State response: " + result, null);
 			loadContent((ContentDTO) result);
+			Site.hideProgress();
 		    }
 
 		});

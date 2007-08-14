@@ -28,14 +28,15 @@ public abstract class GWTFilter implements Filter {
     private Injector injector;
 
     public GWTFilter() {
-	Application app = new Application();
-	configure(app);
+	ApplicationBuilder builder = new ApplicationBuilder();
+	configure(builder);
+	Application app = builder.getApplication();
+	modules = builder.getModules();
 	filters = app.getFilters();
-	modules = app.getModules();
 	listeners = app.getCycleListeners();
     }
 
-    protected abstract void configure(Application builder);
+    protected abstract void configure(ApplicationBuilder builder);
 
     public void init(final FilterConfig config) throws ServletException {
 	servletContext = config.getServletContext();

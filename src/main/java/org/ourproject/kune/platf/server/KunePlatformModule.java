@@ -25,7 +25,9 @@ import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.platf.server.properties.KuneProperties;
 import org.ourproject.kune.platf.server.properties.KunePropertiesDefault;
 import org.ourproject.kune.platf.server.services.ContentServerService;
+import org.ourproject.kune.platf.server.services.SiteBarServerService;
 import org.ourproject.kune.platf.server.tool.ToolRegistry;
+import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
 
 import com.google.inject.AbstractModule;
 import com.wideplay.warp.persist.PersistenceService;
@@ -47,6 +49,7 @@ public class KunePlatformModule extends AbstractModule {
     private void bindRemoteServices() {
 	bind(KuneService.class).to(KuneServerService.class);
 	bind(ContentService.class).to(ContentServerService.class);
+	bind(SiteBarService.class).to(SiteBarServerService.class);
     }
 
     private void bindManagers() {

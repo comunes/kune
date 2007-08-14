@@ -27,5 +27,4 @@
       <class-a>org.ourproject.kune.workspace.client.dto.ContentDTO</class-a>
       <class-b>org.ourproject.kune.platf.server.model.Content</class-b>
   </mapping>
-
 </mappings>

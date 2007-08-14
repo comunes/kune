@@ -3,6 +3,7 @@ package org.ourproject.kune.platf.client.group;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.license.LicenseChangeListener;
@@ -14,7 +15,7 @@ import org.ourproject.kune.platf.client.rpc.KuneServiceAsync;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.DialogBox;
 
-public class NewGroupPresenter {
+public class NewGroupPresenter implements NewGroupForm {
 
     private final NewGroupListener listener;
     private NewGroupView view;
@@ -105,6 +106,10 @@ public class NewGroupPresenter {
 	licenseDialog.show();
 	licenseDialog.center();
 
+    }
+
+    public View getView() {
+	return view;
     }
 
 }

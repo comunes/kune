@@ -8,7 +8,9 @@ import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
+@Singleton
 public class SiteBarServerService implements SiteBarService {
 
     private final UserManager userManager;

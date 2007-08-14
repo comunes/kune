@@ -18,6 +18,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.ui.RootPanel;
 
 public class ApplicationBuilder {
     private final String userHash;
@@ -31,6 +32,7 @@ public class ApplicationBuilder {
     public Application build() {
 	HashMap tools = indexTools(platform.getTools());
 	DefaultApplication application = new DefaultApplication(tools);
+	RootPanel.get("initialStatusBar").setVisible(false);
 
 	final State state = new State(userHash);
 	final StateController stateManager = new StateControllerDefault(application, state);

@@ -36,13 +36,14 @@ public class Folder implements HasId {
 
     private String toolName;
 
-    public Folder(final String absolutePath, final String toolName) {
+    public Folder(final String absolutePath, final Group group, final String toolName) {
 	this.absolutePath = absolutePath;
+	owner = group;
 	this.toolName = toolName;
     }
 
     public Folder() {
-	this(null, null);
+	this(null, null, null);
     }
 
     public Folder getParent() {
