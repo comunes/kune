@@ -16,14 +16,12 @@ import com.google.inject.Singleton;
 public class UserManagerDefault extends DefaultManager<User, Long> implements UserManager {
     private User userFinder;
     private final GroupManager groupManager;
-    private final SocialNetworkManager socialNetworkManager;
 
     @Inject
     public UserManagerDefault(final Provider<EntityManager> provider, final GroupManager groupManager,
 	    final SocialNetworkManager socialNetworkManager) {
 	super(provider, User.class);
 	this.groupManager = groupManager;
-	this.socialNetworkManager = socialNetworkManager;
     }
 
     public List<User> getAll() {
@@ -44,10 +42,19 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
 	}
     }
 
-    public User login(final String nick, final String pass) {
+    public User login(final String nickOrEmail, final String passwd) {
 	// TODO: integrate a existing Auth manager
-	User user = userFinder.getByShortName(nick);
-	if (user.getPassword().equals(pass)) {
+	User user;
+	try {
+	    user = userFinder.getByShortName(nickOrEmail);
+	} catch (NoResultException e) {
+	    try {
+		user = userFinder.getByEmail(nickOrEmail);
+	    } catch (NoResultException e2) {
+		return null;
+	    }
+	}
+	if (user.getPassword().equals(passwd)) {
 	    return user;
 	} else {
 	    return null;

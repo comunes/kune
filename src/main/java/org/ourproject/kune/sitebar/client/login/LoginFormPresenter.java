@@ -1,23 +1,24 @@
 package org.ourproject.kune.sitebar.client.login;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarServiceAsync;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class LoginPresenter implements Login {
-    LoginView view;
+public class LoginFormPresenter implements LoginForm {
+    LoginFormView view;
     final LoginListener listener;
 
     // private boolean loginButtonEnabled;
 
-    public LoginPresenter(final LoginListener listener) {
+    public LoginFormPresenter(final LoginListener listener) {
 	this.listener = listener;
 	// //this.loginButtonEnabled = false;
     }
 
-    public void init(final LoginView loginview) {
+    public void init(final LoginFormView loginview) {
 	this.view = loginview;
 	reset();
     }
@@ -28,19 +29,20 @@ public class LoginPresenter implements Login {
     }
 
     public void doLogin() {
-	final String nick = view.getUsername();
-	final String pass = view.getPassword();
+	final String nickOrEmail = view.getNickOrEmail();
+	final String passwd = view.getPassword();
 
 	SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
-	siteBarService.login(nick, pass, new AsyncCallback() {
+	siteBarService.login(nickOrEmail, passwd, new AsyncCallback() {
 
 	    public void onFailure(final Throwable arg0) {
-		// TODO Auto-generated method stub
+		// i18n: Error in authentication
+		Site.important("Error in authentication");
 	    }
 
 	    public void onSuccess(final Object response) {
 		String hash = (String) response;
-		listener.userLoggedIn(nick, hash);
+		listener.userLoggedIn(nickOrEmail, hash);
 		// TODO: Establecer sesión de este usuario
 	    }
 	});

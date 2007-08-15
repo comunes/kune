@@ -18,8 +18,8 @@ public class TwoButtonsDialog {
     private final LayoutDialog dialog;
 
     public TwoButtonsDialog(final String caption, final String firstButton, final String secondButton,
-	    final boolean modal, final int width, final int height, final int minWidth, final int minHeight,
-	    final FormListener listener) {
+	    final boolean modal, final boolean minimizable, final int width, final int height, final int minWidth,
+	    final int minHeight, final FormListener listener) {
 
 	dialog = new LayoutDialog(new LayoutDialogConfig() {
 	    {
@@ -30,6 +30,7 @@ public class TwoButtonsDialog {
 		setHeight(height);
 		setMinWidth(minWidth);
 		setMinHeight(minHeight);
+		setCollapsible(minimizable);
 
 		// Def values
 		setShadow(true);

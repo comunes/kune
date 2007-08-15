@@ -8,7 +8,7 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 // TODO: cambiar nombre a UserService
 public interface SiteBarService extends RemoteService {
 
-    void login(String nick, String pass) throws SerializableException;
+    void login(String nickOrEmail, String passwd) throws SerializableException;
 
     void logout() throws SerializableException;
 

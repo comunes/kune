@@ -4,19 +4,19 @@ import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.sitebar.client.login.LoginListener;
-import org.ourproject.kune.sitebar.client.login.LoginPresenter;
-import org.ourproject.kune.sitebar.client.login.LoginView;
+import org.ourproject.kune.sitebar.client.login.LoginFormPresenter;
+import org.ourproject.kune.sitebar.client.login.LoginFormView;
 
 public class LoginPresenterTest {
-    private LoginPresenter presenter;
-    private LoginView view;
+    private LoginFormPresenter presenter;
+    private LoginFormView view;
     private LoginListener listener;
 
     @Before
     public void createObjects() {
 	listener = EasyMock.createStrictMock(LoginListener.class);
-	presenter = new LoginPresenter(listener);
-	view = EasyMock.createStrictMock(LoginView.class);
+	presenter = new LoginFormPresenter(listener);
+	view = EasyMock.createStrictMock(LoginFormView.class);
     }
 
     @Test

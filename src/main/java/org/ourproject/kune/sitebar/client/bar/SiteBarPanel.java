@@ -3,7 +3,7 @@ package org.ourproject.kune.sitebar.client.bar;
 import org.ourproject.kune.platf.client.group.NewGroupForm;
 import org.ourproject.kune.platf.client.ui.dialogs.TwoButtonsDialog;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
-import org.ourproject.kune.sitebar.client.login.Login;
+import org.ourproject.kune.sitebar.client.login.LoginForm;
 import org.ourproject.kune.sitebar.client.services.Images;
 import org.ourproject.kune.sitebar.client.services.Translate;
 import org.ourproject.kune.workspace.client.ui.form.FormListener;
@@ -152,8 +152,8 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     public void showLoginDialog() {
-	final Login login = SiteBarFactory.createLogin(presenter);
-	loginDialog = new TwoButtonsDialog(t.Login(), t.Login(), t.Cancel(), true, 350, 200, 350, 200,
+	final LoginForm login = SiteBarFactory.createLogin(presenter);
+	loginDialog = new TwoButtonsDialog(t.Login(), t.Login(), t.Cancel(), true, false, 350, 200, 350, 200,
 		new FormListener() {
 		    public void onAccept() {
 			login.doLogin();

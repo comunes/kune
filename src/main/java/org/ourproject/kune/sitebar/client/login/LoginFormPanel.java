@@ -10,29 +10,30 @@ import com.gwtext.client.widgets.form.FormConfig;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.form.TextFieldConfig;
 
-public class LoginFormPanel extends Composite implements LoginView {
+public class LoginFormPanel extends Composite implements LoginFormView {
     private static final Translate t = SiteBarTrans.getInstance().t;
-    private static final String USERNAME_FIELD = "username";
+    private static final String NICKOREMAIL_FIELD = "nickOrEmail";
     private static final String PASSWORD_FIELD = "password";
     private final Form signInForm;
 
-    public LoginFormPanel(final Login initialPresenter) {
+    public LoginFormPanel(final LoginForm initialPresenter) {
 	final VerticalPanel generalVP = new VerticalPanel();
 
 	initWidget(generalVP);
 
 	signInForm = createSignInForm();
 	generalVP.add(signInForm);
-
+	generalVP.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
+	generalVP.setSpacing(30);
     }
 
     public void clearData() {
-	signInForm.findField(USERNAME_FIELD).clearInvalid();
+	signInForm.findField(NICKOREMAIL_FIELD).clearInvalid();
 	signInForm.findField(PASSWORD_FIELD).clearInvalid();
     }
 
-    public String getUsername() {
-	return signInForm.findField(USERNAME_FIELD).getRawValue();
+    public String getNickOrEmail() {
+	return signInForm.findField(NICKOREMAIL_FIELD).getRawValue();
     }
 
     public String getPassword() {
@@ -50,7 +51,7 @@ public class LoginFormPanel extends Composite implements LoginView {
 	form.add(new TextField(new TextFieldConfig() {
 	    {
 		setFieldLabel(t.UserNameOrEmail());
-		setName(USERNAME_FIELD);
+		setName(NICKOREMAIL_FIELD);
 		setWidth(175);
 		setAllowBlank(false);
 	    }

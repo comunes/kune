@@ -54,8 +54,8 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 	});
     }
 
-    public void userLoggedIn(final String nick, final String hash) {
-	view.showLoggedUserName(nick);
+    public void userLoggedIn(final String userOrEmail, final String hash) {
+	view.showLoggedUserName(userOrEmail);
 	view.hideLoginDialog();
 	view.setLogoutLinkVisible(true);
 	listener.onUserLoggedIn();

@@ -10,6 +10,6 @@ public interface UserManager extends Manager<User, Long> {
 
     User getByShortName(String string);
 
-    User login(String nick, String pass);
+    User login(String nickOrEmail, String passwd);
 
 }

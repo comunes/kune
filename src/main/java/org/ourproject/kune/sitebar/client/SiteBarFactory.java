@@ -8,10 +8,10 @@ import org.ourproject.kune.sitebar.client.bar.SiteBar;
 import org.ourproject.kune.sitebar.client.bar.SiteBarListener;
 import org.ourproject.kune.sitebar.client.bar.SiteBarPanel;
 import org.ourproject.kune.sitebar.client.bar.SiteBarPresenter;
-import org.ourproject.kune.sitebar.client.login.Login;
+import org.ourproject.kune.sitebar.client.login.LoginForm;
 import org.ourproject.kune.sitebar.client.login.LoginListener;
 import org.ourproject.kune.sitebar.client.login.LoginFormPanel;
-import org.ourproject.kune.sitebar.client.login.LoginPresenter;
+import org.ourproject.kune.sitebar.client.login.LoginFormPresenter;
 import org.ourproject.kune.sitebar.client.msg.SiteMessage;
 import org.ourproject.kune.sitebar.client.msg.SiteMessagePanel;
 import org.ourproject.kune.sitebar.client.msg.SiteMessagePresenter;
@@ -39,8 +39,8 @@ public class SiteBarFactory {
 	return siteMessage;
     }
 
-    public static Login createLogin(final LoginListener listener) {
-	LoginPresenter presenter = new LoginPresenter(listener);
+    public static LoginForm createLogin(final LoginListener listener) {
+	LoginFormPresenter presenter = new LoginFormPresenter(listener);
 	LoginFormPanel view = new LoginFormPanel(presenter);
 	presenter.init(view);
 	return presenter;

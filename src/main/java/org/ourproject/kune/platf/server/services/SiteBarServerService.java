@@ -22,8 +22,8 @@ public class SiteBarServerService implements SiteBarService {
 	this.userManager = userManager;
     }
 
-    public void login(final String nick, final String pass) throws SerializableException {
-	User user = userManager.login(nick, pass);
+    public void login(final String nickOrEmail, final String passwd) throws SerializableException {
+	User user = userManager.login(nickOrEmail, passwd);
 	if (user != null) {
 	    session.setUser(user);
 	} else {
