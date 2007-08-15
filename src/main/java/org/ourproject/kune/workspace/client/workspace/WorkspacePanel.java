@@ -93,7 +93,8 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	if (right != null) {
 	    contextHSP.remove(right);
 	}
-	contextHSP.setRightWidget((Widget) contextMenu);
+	Widget widget = (Widget) contextMenu;
+	contextHSP.setRightWidget(widget);
     }
 
     public void adjustSize(final int windowWidth, final int windowHeight) {

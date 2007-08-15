@@ -41,7 +41,7 @@ public class DocumentFactory {
 	return presenter;
     }
 
-    public static FolderContext getFolderContext() {
+    public static FolderContext createFolderContext() {
 	FolderContextPanel view = new FolderContextPanel();
 	FolderContextPresenter presenter = new FolderContextPresenter(view);
 	return presenter;
