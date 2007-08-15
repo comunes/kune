@@ -117,4 +117,5 @@ public class ContentDTO implements IsSerializable {
     public void setRateByUsers(final Integer rateByUsers) {
 	this.rateByUsers = rateByUsers;
     }
+
 }

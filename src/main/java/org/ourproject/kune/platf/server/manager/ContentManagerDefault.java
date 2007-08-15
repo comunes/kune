@@ -109,4 +109,9 @@ public class ContentManagerDefault implements ContentManager {
 	return true;
     }
 
+    public void save(final Content content, final User user, final String content2) {
+	// TODO Auto-generated method stub
+
+    }
+
 }

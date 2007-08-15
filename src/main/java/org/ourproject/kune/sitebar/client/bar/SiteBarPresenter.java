@@ -50,7 +50,6 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 	    public void onSuccess(final Object arg0) {
 		view.setLogoutLinkVisible(false);
 		view.restoreLoginLink();
-		listener.onUserLoggedIn();
 	    }
 	});
     }
@@ -59,6 +58,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 	view.showLoggedUserName(nick);
 	view.hideLoginDialog();
 	view.setLogoutLinkVisible(true);
+	listener.onUserLoggedIn();
     }
 
     public void onLoginCancelled() {

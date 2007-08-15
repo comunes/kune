@@ -7,7 +7,7 @@ import org.ourproject.kune.docs.client.ui.cnt.reader.DocumentReader;
 import org.ourproject.kune.workspace.client.WorkspaceFactory;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
 
-public class DocumentComponents {
+class DocumentComponents {
     private DocumentReader reader;
     private TextEditor editor;
     private final DocumentContentPresenter documentContentPresenter;

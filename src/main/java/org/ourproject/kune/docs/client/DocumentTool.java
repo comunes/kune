@@ -1,6 +1,5 @@
 package org.ourproject.kune.docs.client;
 
-import org.ourproject.kune.docs.client.ui.DocumentFactory;
 import org.ourproject.kune.docs.client.ui.cnt.DocumentContent;
 import org.ourproject.kune.docs.client.ui.ctx.DocumentContext;
 import org.ourproject.kune.platf.client.tool.Tool;
@@ -12,17 +11,19 @@ import org.ourproject.kune.workspace.client.dto.ContentDTO;
 public class DocumentTool implements Tool {
     public static final String NAME = "docs";
     private final ToolTriggerDefault trigger;
+    private final DocToolComponents components;
 
     public DocumentTool() {
 	trigger = new ToolTriggerDefault(NAME, "documentos");
+	components = new DocToolComponents();
     }
 
     public WorkspaceComponent getContent() {
-	return DocumentFactory.createDocumentContent();
+	return components.getContent();
     }
 
     public WorkspaceComponent getContext() {
-	return DocumentFactory.createDocumentContext();
+	return components.getContext();
     }
 
     public String getName() {
@@ -30,9 +31,9 @@ public class DocumentTool implements Tool {
     }
 
     public void setContent(final ContentDTO content) {
-	DocumentContent docContent = DocumentFactory.createDocumentContent();
+	DocumentContent docContent = components.getContent();
 	docContent.setContent(content);
-	DocumentContext context = DocumentFactory.createDocumentContext();
+	DocumentContext context = components.getContext();
 	context.setContent(content);
 	trigger.setState(content.encodeState());
     }

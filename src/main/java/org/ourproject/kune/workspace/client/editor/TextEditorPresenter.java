@@ -45,7 +45,7 @@ public class TextEditorPresenter implements TextEditor {
     }
 
     public void onSave() {
-	listener.onSave();
+	listener.onSave(view.getHTML());
     }
 
     public void onCancel() {

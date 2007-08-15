@@ -1,8 +1,10 @@
 package org.ourproject.kune.platf.server.services;
 
+import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.server.UserSession;
+import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.AccessRightsManager;
@@ -54,12 +56,23 @@ public class ContentServerService implements ContentService {
 	}
 
 	Content content = contentManager.getContent(user, groupName, toolName, folderRef, contentRef);
+	AccessLists accessLists = getAccessList(content);
+	AccessRights accessRights = accessRightsManager.get(user, accessLists);
+
+	metadataManager.fill(content, accessLists, accessRights);
+	return mapper.map(content, ContentDTO.class);
+    }
+
+    @Authenticated
+    public void save(final String userHash, final ContentDTO dto) throws AccessViolationException {
+
+    }
+
+    private AccessLists getAccessList(final Content content) {
 	AccessLists accessLists = content.getAccessLists();
 	if (accessLists == null) {
 	    accessLists = content.getGroup().getSocialNetwork().getAccessList();
 	}
-	AccessRights accessRights = accessRightsManager.get(user, accessLists);
-	metadataManager.fill(content, accessLists, accessRights);
-	return mapper.map(content, ContentDTO.class);
+	return accessLists;
     }
 }

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
+import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.state.State;
 import org.ourproject.kune.platf.client.state.StateController;
 import org.ourproject.kune.platf.client.state.StateControllerDefault;
@@ -39,6 +40,7 @@ public class ApplicationBuilder {
 	History.addHistoryListener(stateManager);
 
 	final DefaultDispatcher dispatcher = new DefaultDispatcher();
+	Dispatcher.App.instance = dispatcher;
 	prepareActions(dispatcher, platform.getActions(), application, state, stateManager);
 
 	application.init(dispatcher, stateManager);

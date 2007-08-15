@@ -4,6 +4,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -14,7 +15,7 @@ public class DocumentReaderPanel extends VerticalPanel implements DocumentReader
     public DocumentReaderPanel(final DocumentReaderListener listener) {
 	add(createToolBar(listener));
 	btnEdit.setVisible(false);
-	content = new HTML();
+	content = new HTML("this is the content");
 	add(content);
     }
 
@@ -26,11 +27,12 @@ public class DocumentReaderPanel extends VerticalPanel implements DocumentReader
 	    }
 	});
 	panel.add(btnEdit);
+	panel.add(new Label("this is the toolBar"));
 	return panel;
     }
 
     public void setContent(final String text) {
-	content.setHTML(text);
+	content.setHTML(text + "(content)");
     }
 
     public void setEditEnabled(final boolean isEnabled) {
