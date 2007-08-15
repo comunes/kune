@@ -16,6 +16,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "folders")
 public class Folder implements HasId {
+    public static final String SEP = "/";
+
     @Id
     @GeneratedValue
     Long id;

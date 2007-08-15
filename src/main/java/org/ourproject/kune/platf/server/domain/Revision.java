@@ -93,4 +93,8 @@ public class Revision {
 	this.data.setTitle(text);
     }
 
+    public void setTitle(final String title) {
+	data.setTitle(title);
+    }
+
 }

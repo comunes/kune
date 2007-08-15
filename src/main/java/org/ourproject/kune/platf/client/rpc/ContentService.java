@@ -17,6 +17,9 @@ public interface ContentService extends RemoteService {
 
     ContentDTO addContent(String user, Long parentFolderId, String name);
 
+    ContentDTO addFolder(String hash, String groupShortName, Long parentFolderId, String title)
+	    throws ContentNotFoundException;
+
     public static class App {
 	private static ContentServiceAsync instance;
 
@@ -33,4 +36,5 @@ public interface ContentService extends RemoteService {
 	    instance = mock;
 	}
     }
+
 }

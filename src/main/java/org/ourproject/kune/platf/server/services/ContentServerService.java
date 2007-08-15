@@ -1,7 +1,5 @@
 package org.ourproject.kune.platf.server.services;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
@@ -18,6 +16,7 @@ import org.ourproject.kune.platf.server.manager.AccessRightsManager;
 import org.ourproject.kune.platf.server.manager.ContentDescriptorManager;
 import org.ourproject.kune.platf.server.manager.ContentManager;
 import org.ourproject.kune.platf.server.manager.FolderManager;
+import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.MetadataManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
@@ -42,11 +41,12 @@ public class ContentServerService implements ContentService {
     private final Mapper mapper;
     private final FolderManager folderManager;
     private final ContentDescriptorManager contentDescriptorManager;
+    private final GroupManager groupManager;
 
     @Inject
     public ContentServerService(final UserSession session, final ContentManager contentManager,
 	    final AccessRightsManager accessRightManager, final MetadataManager metadaManager,
-	    final UserManager userManager, final FolderManager folderManager,
+	    final UserManager userManager, final FolderManager folderManager, final GroupManager groupManager,
 	    final ContentDescriptorManager contentDescriptorManager, final KuneProperties properties,
 	    final Mapper mapper) {
 	this.session = session;
@@ -55,6 +55,7 @@ public class ContentServerService implements ContentService {
 	this.metadataManager = metadaManager;
 	this.userManager = userManager;
 	this.folderManager = folderManager;
+	this.groupManager = groupManager;
 	this.contentDescriptorManager = contentDescriptorManager;
 	this.properties = properties;
 	this.mapper = mapper;
@@ -116,11 +117,22 @@ public class ContentServerService implements ContentService {
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
-    public ContentDTO addContent(final String userHash, final Long parentFolderId, final String name) {
+    public ContentDTO addContent(final String userHash, final Long parentFolderId, final String title) {
 	User user = session.getUser();
 	Folder folder = folderManager.find(parentFolderId);
-	Log log = LogFactory.getLog(ContentServerService.class);
-	ContentDescriptor descriptor = contentDescriptorManager.createContent(user, folder);
+	ContentDescriptor descriptor = contentDescriptorManager.createContent(title, user, folder);
 	return buildResponse(user, descriptor);
+    }
+
+    @Authenticated
+    @Transactional(type = TransactionType.READ_WRITE)
+    public ContentDTO addFolder(final String hash, final String groupShotName, final Long parentFolderId,
+	    final String title) throws ContentNotFoundException {
+	Group group = groupManager.findByShortName(groupShotName);
+	Folder folder = folderManager.createFolder(group, parentFolderId, title);
+	String toolName = folder.getToolName();
+	StateToken token = new StateToken(group.getShortName(), toolName, folder.getId().toString(), null);
+	ContentDescriptor descriptor = contentManager.getContent(group, token);
+	return buildResponse(session.getUser(), descriptor);
     }
 }

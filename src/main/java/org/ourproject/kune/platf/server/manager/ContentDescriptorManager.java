@@ -7,6 +7,6 @@ import org.ourproject.kune.platf.server.domain.User;
 public interface ContentDescriptorManager {
     public ContentDescriptor get(Long id);
 
-    public ContentDescriptor createContent(User user, Folder folder);
+    public ContentDescriptor createContent(String title, User user, Folder folder);
 
 }

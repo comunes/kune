@@ -87,8 +87,8 @@ public class ContentDTO implements IsSerializable {
 	this.folder = folder;
     }
 
-    public String encodeState() {
-	return StateToken.encode(group.getShortName(), toolName, folder.getId().toString(), getDocumentId());
+    public StateToken encodeState() {
+	return new StateToken(group.getShortName(), toolName, folder.getId().toString(), getDocumentId());
     }
 
     public boolean hasDocument() {

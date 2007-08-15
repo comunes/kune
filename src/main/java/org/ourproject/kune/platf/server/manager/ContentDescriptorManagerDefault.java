@@ -20,12 +20,13 @@ public class ContentDescriptorManagerDefault extends DefaultManager<ContentDescr
 	super(provider, ContentDescriptor.class);
     }
 
-    public ContentDescriptor createContent(final User user, final Folder folder) {
+    public ContentDescriptor createContent(final String title, final User user, final Folder folder) {
 	ContentDescriptor descriptor = new ContentDescriptor();
 	descriptor.setCreator(user);
 	descriptor.setFolder(folder);
 	folder.addContent(descriptor);
 	Revision revision = new Revision();
+	revision.setTitle(title);
 	descriptor.addRevision(revision);
 	return persist(descriptor);
     }

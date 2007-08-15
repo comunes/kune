@@ -6,6 +6,7 @@ import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.ToolConfiguration;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.ContentDescriptorManager;
+import org.ourproject.kune.platf.server.manager.FolderManager;
 import org.ourproject.kune.platf.server.manager.ToolConfigurationManager;
 import org.ourproject.kune.platf.server.tool.ServerTool;
 import org.ourproject.kune.platf.server.tool.ToolRegistry;
@@ -16,11 +17,13 @@ public class DocumentServerTool implements ServerTool {
     public static final String NAME = "docs";
     private final ContentDescriptorManager contentDescriptorManager;
     private final ToolConfigurationManager configurationManager;
+    private final FolderManager folderManager;
 
     @Inject
     public DocumentServerTool(final ContentDescriptorManager contentDescriptorManager,
-	    final ToolConfigurationManager configurationManager) {
+	    final FolderManager folderManager, final ToolConfigurationManager configurationManager) {
 	this.contentDescriptorManager = contentDescriptorManager;
+	this.folderManager = folderManager;
 	this.configurationManager = configurationManager;
     }
 
@@ -37,10 +40,12 @@ public class DocumentServerTool implements ServerTool {
 	ToolConfiguration config = group.getToolConfiguration(NAME);
 	if (config == null) {
 	    config = new ToolConfiguration();
-	    Folder folder = config.setRoot(new Folder("/", group, NAME));
+	    // i18n
+	    Folder folder = folderManager.createRootFolder(group, NAME, "docs");
+	    config.setRoot(folder);
 	    group.setToolConfig(NAME, config);
 	    configurationManager.persist(config);
-	    ContentDescriptor descriptor = contentDescriptorManager.createContent(user, folder);
+	    ContentDescriptor descriptor = contentDescriptorManager.createContent("Kune docs!", user, folder);
 	    group.setDefaultContent(descriptor);
 	}
 	return group;
