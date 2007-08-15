@@ -1,38 +1,22 @@
 package org.ourproject.kune.platf.server.model;
 
 import org.ourproject.kune.platf.server.domain.AccessLists;
-import org.ourproject.kune.platf.server.domain.ContentDescriptor;
 import org.ourproject.kune.platf.server.domain.Folder;
 import org.ourproject.kune.platf.server.domain.Group;
 
 public class Content {
-
-    // Mapped fields from ContentDescriptor
-    private String docRef;
+    private String documentId;
     private String content;
     private String title;
-
-    // Mapped fields from Folder
     private String toolName;
     private Group group;
-
-    // Other mapped fields
     private Folder folder;
     private AccessLists accessLists;
     private AccessRights accessRights;
     private Double rate;
     private Integer rateByUsers;
 
-    // Unmapped fields
-    private ContentDescriptor descriptor;
-
-    public Content(final Folder folder, final ContentDescriptor descriptor) {
-	setFolder(folder);
-	this.descriptor = descriptor;
-    }
-
     public Content() {
-	this(null, null);
     }
 
     public AccessLists getAccessLists() {
@@ -47,12 +31,12 @@ public class Content {
 	return accessRights;
     }
 
-    public String getDocRef() {
-	return docRef;
+    public String getDocumentId() {
+	return documentId;
     }
 
-    public void setDocRef(final String docRef) {
-	this.docRef = docRef;
+    public void setDocumentId(final String docRef) {
+	this.documentId = docRef;
     }
 
     public String getContent() {
@@ -89,14 +73,6 @@ public class Content {
 
     public void setAccessRights(final AccessRights accessRights) {
 	this.accessRights = accessRights;
-    }
-
-    public ContentDescriptor getDescriptor() {
-	return descriptor;
-    }
-
-    public void setDescriptor(final ContentDescriptor descriptor) {
-	this.descriptor = descriptor;
     }
 
     public Folder getFolder() {

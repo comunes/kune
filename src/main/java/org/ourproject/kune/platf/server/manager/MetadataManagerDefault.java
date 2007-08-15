@@ -14,21 +14,20 @@ public class MetadataManagerDefault implements MetadataManager {
     public Content fill(final ContentDescriptor descriptor, final AccessLists accessList,
 	    final AccessRights accessRights) {
 	Folder folder = descriptor.getFolder();
-
 	Content content = new Content();
-	content.setDescriptor(descriptor);
-	content.setFolder(folder);
-	content.setGroup(folder.getOwner());
+
+	content.setDocumentId(descriptor.getId().toString());
 	Data data = descriptor.getLastRevision().getData();
-	content.setDocRef(descriptor.getId().toString());
-	content.setTitle(data.getTitle());
 	char[] text = data.getContent();
 	content.setContent(text == null ? null : new String(text));
+	content.setTitle(data.getTitle());
 	content.setToolName(folder.getToolName());
-	content.setRate(descriptor.calculateRate(descriptor));
-	content.setRateByUsers(descriptor.calculateRateNumberOfUsers(descriptor));
+	content.setGroup(folder.getOwner());
+	content.setFolder(folder);
 	content.setAccessLists(accessList);
 	content.setAccessRights(accessRights);
+	content.setRate(descriptor.calculateRate(descriptor));
+	content.setRateByUsers(descriptor.calculateRateNumberOfUsers(descriptor));
 	return content;
     }
 }
