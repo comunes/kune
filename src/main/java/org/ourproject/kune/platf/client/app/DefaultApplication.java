@@ -6,10 +6,14 @@ import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.state.StateController;
 import org.ourproject.kune.platf.client.tool.Tool;
+import org.ourproject.kune.sitebar.client.SiteBarFactory;
 import org.ourproject.kune.sitebar.client.bar.SiteBarListener;
 import org.ourproject.kune.workspace.client.Workspace;
 import org.ourproject.kune.workspace.client.WorkspaceFactory;
 
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
 
 public class DefaultApplication implements Application {
@@ -28,6 +32,14 @@ public class DefaultApplication implements Application {
 	    }
 	});
 	RootPanel.get().add(desktop);
+	DeferredCommand.addCommand(new Command() {
+	    public void execute() {
+		int windowWidth = Window.getClientWidth();
+		workspace.adjustSize(windowWidth, Window.getClientHeight());
+		SiteBarFactory.getSiteMessage().adjustWidth(windowWidth);
+	    }
+	});
+
     }
 
     public Dispatcher getDispatcher() {
