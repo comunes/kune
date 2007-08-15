@@ -17,6 +17,7 @@ class ControlsPanel extends VerticalPanel {
 	});
 	btnAddFolder = new Button("add folder", new ClickListener() {
 	    public void onClick(final Widget sender) {
+		listener.onAddFolder();
 	    }
 	});
 	add(btnAddDocument);

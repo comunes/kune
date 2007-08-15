@@ -41,4 +41,24 @@ public class AccessRightsDTO implements IsSerializable {
 	this.isVisible = isVisible;
     }
 
+    public boolean equals(final Object obj) {
+	if (this == obj) {
+	    return true;
+	}
+	if (obj == null) {
+	    return false;
+	}
+	final AccessRightsDTO other = (AccessRightsDTO) obj;
+	if (isAdministrable != other.isAdministrable) {
+	    return false;
+	}
+	if (isEditable != other.isEditable) {
+	    return false;
+	}
+	if (isVisible != other.isVisible) {
+	    return false;
+	}
+	return true;
+    }
+
 }

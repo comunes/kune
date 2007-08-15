@@ -1,7 +1,7 @@
 package org.ourproject.kune.docs.client.actions;
 
 import org.ourproject.kune.docs.client.ui.DocumentFactory;
-import org.ourproject.kune.docs.client.ui.forms.newdoc.NewDocumentForm;
+import org.ourproject.kune.docs.client.ui.forms.newitem.NewDocumentForm;
 import org.ourproject.kune.platf.client.dto.FolderDTO;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
@@ -25,7 +25,7 @@ public class AddDocument extends WorkspaceAction {
     }
 
     protected void addDocument() {
-	// TODO: i18n
+	// i18n
 	Site.showProgress("adding document");
 	ContentServiceAsync server = ContentService.App.getInstance();
 	String name = form.getName();

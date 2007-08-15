@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.FolderDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.ContentService;
@@ -43,12 +44,18 @@ public class ContentServiceAddTest {
     @Test
     public void testAddContent() throws SerializableException {
 	assertEquals(1, defaultContent.getFolder().getContents().size());
+	AccessRightsDTO cntRights = defaultContent.getContentRights();
+	AccessRightsDTO ctxRight = defaultContent.getFolderRights();
+
 	String title = "New Content Title";
 	ContentDTO added = contentService.addContent(session.getHash(), defaultContent.getFolder().getId(), title);
 	assertNotNull(added);
 	List contents = added.getFolder().getContents();
 	assertEquals(title, added.getTitle());
 	assertEquals(2, contents.size());
+	assertEquals(cntRights, added.getContentRights());
+	assertEquals(ctxRight, added.getFolderRights());
+
 	StateToken newState = added.encodeState();
 	ContentDTO sameAgain = contentService.getContent(session.getHash(), newState);
 	assertNotNull(sameAgain);

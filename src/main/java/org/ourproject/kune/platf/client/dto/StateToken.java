@@ -5,10 +5,10 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 public class StateToken implements IsSerializable {
     private static final String[] EMPTY = new String[0];
     private static final String DOT = ".";
-    public final String group;
-    public final String tool;
-    public final String folder;
-    public final String document;
+    public String group;
+    public String tool;
+    public String folder;
+    public String document;
 
     public StateToken(final String group, final String tool, final String folder, final String document) {
 	this.group = group;

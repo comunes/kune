@@ -1,6 +1,7 @@
 package org.ourproject.kune.docs.client.ui.ctx;
 
 import org.ourproject.kune.docs.client.actions.AddDocument;
+import org.ourproject.kune.docs.client.actions.AddFolder;
 import org.ourproject.kune.docs.client.ui.ctx.folder.FolderContext;
 import org.ourproject.kune.docs.client.ui.ctx.folder.FolderContextListener;
 import org.ourproject.kune.platf.client.View;
@@ -37,5 +38,9 @@ public class DocumentContextPresenter implements DocumentContext, FolderContextL
 
     public void onAddDocument() {
 	Dispatcher.App.instance.fire(AddDocument.KEY, content.getFolder());
+    }
+
+    public void onAddFolder() {
+	Dispatcher.App.instance.fire(AddFolder.KEY, content.getFolder());
     }
 }

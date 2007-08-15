@@ -38,4 +38,8 @@ public class ContentServiceMocked extends MockedService implements ContentServic
 
     }
 
+    public void addFolder(final String hash, final String groupShortName, final Long parentFolderId,
+	    final String title, final AsyncCallback callback) {
+    }
+
 }
