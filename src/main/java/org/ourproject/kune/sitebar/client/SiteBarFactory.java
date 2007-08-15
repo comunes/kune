@@ -10,7 +10,7 @@ import org.ourproject.kune.sitebar.client.bar.SiteBarPanel;
 import org.ourproject.kune.sitebar.client.bar.SiteBarPresenter;
 import org.ourproject.kune.sitebar.client.login.Login;
 import org.ourproject.kune.sitebar.client.login.LoginListener;
-import org.ourproject.kune.sitebar.client.login.LoginPanel;
+import org.ourproject.kune.sitebar.client.login.LoginFormPanel;
 import org.ourproject.kune.sitebar.client.login.LoginPresenter;
 import org.ourproject.kune.sitebar.client.msg.SiteMessage;
 import org.ourproject.kune.sitebar.client.msg.SiteMessagePanel;
@@ -41,7 +41,7 @@ public class SiteBarFactory {
 
     public static Login createLogin(final LoginListener listener) {
 	LoginPresenter presenter = new LoginPresenter(listener);
-	LoginPanel view = new LoginPanel(presenter);
+	LoginFormPanel view = new LoginFormPanel(presenter);
 	presenter.init(view);
 	return presenter;
     }

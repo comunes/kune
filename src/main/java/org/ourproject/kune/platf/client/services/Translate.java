@@ -3,6 +3,9 @@ package org.ourproject.kune.platf.client.services;
 import com.google.gwt.i18n.client.Constants;
 
 public interface Translate extends Constants {
+
+    String Locale();
+
     String ExternalWindow();
 
     String Home();

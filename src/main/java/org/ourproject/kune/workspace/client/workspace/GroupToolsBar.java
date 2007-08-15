@@ -32,15 +32,15 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 class GroupToolsBar extends VerticalPanel {
-    private static final String ITEM_SELECTED = "kune-GroupNavBar-itemSelected";
-    private static final String ITEM_NOT_SELECTED = "kune-GroupNavBar-itemNotSelected";
+    private static final String ITEM_SELECTED = "kune-GroupToolsBar-itemSelected";
+    private static final String ITEM_NOT_SELECTED = "kune-GroupToolsBar-itemNotSelected";
     private Widget currentTab;
     private final HashMap tabs;
 
     public GroupToolsBar() {
 	tabs = new HashMap();
 	currentTab = null;
-	// addStyleName("kune-GroupNavBar");
+	addStyleName("kune-GroupToolsBar");
     }
 
     public void addItem(final ToolTrigger trigger) {

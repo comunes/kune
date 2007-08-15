@@ -3,6 +3,9 @@ package org.ourproject.kune.sitebar.client.services;
 import com.google.gwt.i18n.client.Constants;
 
 public interface Translate extends Constants {
+
+    String locale();
+
     String Processing();
 
     String NewGroup();
@@ -30,4 +33,8 @@ public interface Translate extends Constants {
     String Logout();
 
     String CreateNewGroup();
+
+    String UserNameOrEmail();
+
+    String SignIn();
 }

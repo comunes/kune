@@ -8,6 +8,7 @@ import java.util.Map;
 import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.state.State;
 import org.ourproject.kune.platf.client.state.StateController;
 import org.ourproject.kune.platf.client.state.StateControllerDefault;
@@ -33,7 +34,7 @@ public class ApplicationBuilder {
     public Application build() {
 	HashMap tools = indexTools(platform.getTools());
 	DefaultApplication application = new DefaultApplication(tools);
-	RootPanel.get("initialStatusBar").setVisible(false);
+	RootPanel.get("initialstatusbar").setVisible(false);
 
 	final State state = new State(userHash);
 	final StateController stateManager = new StateControllerDefault(application, state);
@@ -48,6 +49,7 @@ public class ApplicationBuilder {
 	DeferredCommand.addCommand(new Command() {
 	    public void execute() {
 		GWT.log("Prefetching operation", null);
+		GWT.log("Locale: " + Kune.getInstance().t.Locale(), null);
 		PrefetchUtilites.preFetchImpImages();
 		PrefetchUtilites.preFetchLicenses(state);
 	    }

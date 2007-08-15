@@ -145,33 +145,35 @@ body {
 }
 
 /* TODO: Split and remove repeted */
-.kune-GroupNavBar-itemSelected {
+.kune-GroupToolsBar {
     width: 150px;
+}
+
+.kune-GroupToolsBar-itemSelected {
     /* font-size: 85%;
     font-weight: 700; */
 }
 
-.kune-GroupNavBar-itemNotSelected {
-    width: 150px;
-}
-
-.kune-GroupNavBar-itemSelected .gwt-Hyperlink a {
+.kune-GroupToolsBar-itemSelected .gwt-Hyperlink a {
     color: #FFF;
     padding: 0 9px;
     text-decoration: none;
 }
 
-.kune-GroupNavBar-itemSelected .gwt-Hyperlink a:hover {
+.kune-GroupToolsBar-itemSelected .gwt-Hyperlink a:hover {
     text-decoration: underline;
 }
 
-.kune-GroupNavBar-itemNotSelected  .gwt-Hyperlink a {
+.kune-GroupToolsBar-itemNotSelected {
+}
+
+.kune-GroupToolsBar-itemNotSelected  .gwt-Hyperlink a {
     color: green;
     padding: 0 9px;
     text-decoration: none;
 }
 
-.kune-GroupNavBar-itemSelected  .gwt-Hyperlink a:hover {
+.kune-GroupToolsBar-itemNotSelected  .gwt-Hyperlink a:hover {
     text-decoration: underline;
 }
 

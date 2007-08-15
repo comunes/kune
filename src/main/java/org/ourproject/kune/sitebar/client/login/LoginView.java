@@ -4,8 +4,10 @@ import org.ourproject.kune.platf.client.View;
 
 public interface LoginView extends View {
 
-    void setEnabledLoginButton(boolean enable);
+    public void clearData();
 
-    void clearData();
+    public String getUsername();
+
+    public String getPassword();
 
 }

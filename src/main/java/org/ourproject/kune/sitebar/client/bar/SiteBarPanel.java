@@ -1,10 +1,12 @@
 package org.ourproject.kune.sitebar.client.bar;
 
 import org.ourproject.kune.platf.client.group.NewGroupForm;
+import org.ourproject.kune.platf.client.ui.dialogs.TwoButtonsDialog;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
 import org.ourproject.kune.sitebar.client.login.Login;
 import org.ourproject.kune.sitebar.client.services.Images;
 import org.ourproject.kune.sitebar.client.services.Translate;
+import org.ourproject.kune.workspace.client.ui.form.FormListener;
 
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
@@ -35,6 +37,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     private DialogBox currentDialog;
     private final Hyperlink logoutHyperlink;
     private final HTML pipeSeparatorHtml2;
+    private TwoButtonsDialog loginDialog;
 
     public SiteBarPanel(final SiteBarPresenter presenter) {
 
@@ -149,16 +152,24 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     public void showLoginDialog() {
-	Login login = SiteBarFactory.createLogin(presenter);
-	currentDialog = new DialogBox();
-	currentDialog.setWidget((Widget) login.getView());
-	currentDialog.setText(t.Login()); // TODO: Better description
-	currentDialog.show();
-	currentDialog.center();
+	final Login login = SiteBarFactory.createLogin(presenter);
+	loginDialog = new TwoButtonsDialog(t.Login(), t.Login(), t.Cancel(), true, 350, 200, 350, 200,
+		new FormListener() {
+		    public void onAccept() {
+			login.doLogin();
+		    }
+
+		    public void onCancel() {
+			login.doCancel();
+		    }
+		});
+	loginDialog.add((Widget) login.getView());
+	loginDialog.hide();
+	loginDialog.center();
     }
 
     public void hideLoginDialog() {
-	currentDialog.hide();
+	loginDialog.hide();
     }
 
     public void showNewGroupDialog() {
