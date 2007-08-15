@@ -9,34 +9,40 @@ import org.ourproject.kune.platf.server.TestDomainHelper;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
-import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.model.AccessRights;
 
 public class AccessRightsManagerTest {
     private AccessRightsManagerDefault accessRightsManager;
-    private User user;
     private Group group1;
     private Group group2;
-    private Group group3;
+    private Group userGroup;
 
     @Before
     public void init() {
 	accessRightsManager = new AccessRightsManagerDefault();
-	user = TestDomainHelper.createUser(1);
+	userGroup = new Group();
 	group1 = TestDomainHelper.createGroup(1);
 	group2 = TestDomainHelper.createGroup(2);
-	group3 = user.getUserGroup();
+    }
+
+    @Test
+    public void userCanBeLoggedOut() {
+	AccessLists accessLists = TestDomainHelper.createAccessLists(userGroup, group1, group2);
+	AccessRights response = accessRightsManager.get(null, accessLists);
+	assertTrue(response.isVisible());
+	assertFalse(response.isEditable());
+	assertFalse(response.isAdministrable());
     }
 
     @Test
     public void checkUserAccessRightsTrue() {
-	SocialNetwork socialNetwork = TestDomainHelper.createSocialNetwork(group2, group2, group2, group3);
-	SocialNetwork socialNetwork2 = TestDomainHelper.createSocialNetwork(group3, group3, group3, group1);
+	SocialNetwork socialNetwork = TestDomainHelper.createSocialNetwork(group2, group2, group2, userGroup);
+	SocialNetwork socialNetwork2 = TestDomainHelper.createSocialNetwork(userGroup, userGroup, userGroup, group1);
 	group1.setSocialNetwork(socialNetwork);
 	group2.setSocialNetwork(socialNetwork2);
-	AccessLists accessLists = TestDomainHelper.createAccessLists(group3, group1, group2);
+	AccessLists accessLists = TestDomainHelper.createAccessLists(userGroup, group1, group2);
 
-	AccessRights response = accessRightsManager.get(user, accessLists);
+	AccessRights response = accessRightsManager.get(userGroup, accessLists);
 	assertTrue(response.isAdministrable());
 	assertTrue(response.isEditable());
 	assertTrue(response.isVisible());
@@ -44,13 +50,13 @@ public class AccessRightsManagerTest {
 
     @Test
     public void checkUserAccessRightsAdminsFalse() {
-	SocialNetwork socialNetwork = TestDomainHelper.createSocialNetwork(group2, group2, group2, group3);
-	SocialNetwork socialNetwork2 = TestDomainHelper.createSocialNetwork(group1, group3, group3, group1);
+	SocialNetwork socialNetwork = TestDomainHelper.createSocialNetwork(group2, group2, group2, userGroup);
+	SocialNetwork socialNetwork2 = TestDomainHelper.createSocialNetwork(group1, userGroup, userGroup, group1);
 	group1.setSocialNetwork(socialNetwork);
 	group2.setSocialNetwork(socialNetwork2);
 	AccessLists accessLists = TestDomainHelper.createAccessLists(group1, group1, group2);
 
-	AccessRights response = accessRightsManager.get(user, accessLists);
+	AccessRights response = accessRightsManager.get(userGroup, accessLists);
 	assertFalse(response.isAdministrable());
 	assertTrue(response.isEditable());
 	assertTrue(response.isVisible());
@@ -58,13 +64,13 @@ public class AccessRightsManagerTest {
 
     @Test
     public void checkUserAccessRightsAdminsAndEditFalse() {
-	SocialNetwork socialNetwork = TestDomainHelper.createSocialNetwork(group2, group2, group2, group3);
-	SocialNetwork socialNetwork2 = TestDomainHelper.createSocialNetwork(group1, group1, group3, group1);
+	SocialNetwork socialNetwork = TestDomainHelper.createSocialNetwork(group2, group2, group2, userGroup);
+	SocialNetwork socialNetwork2 = TestDomainHelper.createSocialNetwork(group1, group1, userGroup, group1);
 	group1.setSocialNetwork(socialNetwork);
 	group2.setSocialNetwork(socialNetwork2);
 	AccessLists accessLists = TestDomainHelper.createAccessLists(group1, group1, group2);
 
-	AccessRights response = accessRightsManager.get(user, accessLists);
+	AccessRights response = accessRightsManager.get(userGroup, accessLists);
 	assertFalse(response.isAdministrable());
 	assertFalse(response.isEditable());
 	assertTrue(response.isVisible());
@@ -72,13 +78,13 @@ public class AccessRightsManagerTest {
 
     @Test
     public void checkUserAccessRightsAdminsAndEditAndViewFalse() {
-	SocialNetwork socialNetwork = TestDomainHelper.createSocialNetwork(group2, group2, group2, group3);
+	SocialNetwork socialNetwork = TestDomainHelper.createSocialNetwork(group2, group2, group2, userGroup);
 	SocialNetwork socialNetwork2 = TestDomainHelper.createSocialNetwork(group1, group1, group1, group1);
 	group1.setSocialNetwork(socialNetwork);
 	group2.setSocialNetwork(socialNetwork2);
 	AccessLists accessLists = TestDomainHelper.createAccessLists(group1, group1, group2);
 
-	AccessRights response = accessRightsManager.get(user, accessLists);
+	AccessRights response = accessRightsManager.get(userGroup, accessLists);
 	assertFalse(response.isAdministrable());
 	assertFalse(response.isEditable());
 	assertFalse(response.isVisible());

@@ -25,9 +25,8 @@ public class ContentManagerDefault implements ContentManager {
 	this.contentDescriptorManager = contentDescriptorManager;
     }
 
-    public ContentDescriptor getContent(final User user, final String groupName, final String toolName,
+    public ContentDescriptor getContent(final Group group, final String groupName, final String toolName,
 	    final String folderRef, final String contentRef) throws ContentNotFoundException {
-
 	Long contentId = checkAndParse(contentRef);
 	Long folderId = checkAndParse(folderRef);
 
@@ -40,7 +39,7 @@ public class ContentManagerDefault implements ContentManager {
 	} else if (noneNull(groupName)) {
 	    return findDefaultOfGroup(groupName);
 	} else if (allNull(groupName, toolName, folderRef, contentRef)) {
-	    return findDefaultOfGroup(user.getUserGroup());
+	    return findDefaultOfGroup(group);
 	} else {
 	    throw new ContentNotFoundException();
 	}

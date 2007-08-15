@@ -16,7 +16,8 @@ public class ContentDTO implements IsSerializable {
     private GroupDTO group;
     private FolderDTO folder;
     private AccessListsDTO accessLists;
-    private AccessRightsDTO accessRights;
+    private AccessRightsDTO contentRights;
+    private AccessRightsDTO folderRights;
     private Double rate;
     private Integer rateByUsers;
 
@@ -70,12 +71,12 @@ public class ContentDTO implements IsSerializable {
 	this.group = group;
     }
 
-    public AccessRightsDTO getAccessRights() {
-	return this.accessRights;
+    public AccessRightsDTO getContentRights() {
+	return this.contentRights;
     }
 
-    public void setAccessRights(final AccessRightsDTO accessRights) {
-	this.accessRights = accessRights;
+    public void setContentRights(final AccessRightsDTO accessRights) {
+	this.contentRights = accessRights;
     }
 
     public FolderDTO getFolder() {
@@ -116,6 +117,14 @@ public class ContentDTO implements IsSerializable {
 
     public void setRateByUsers(final Integer rateByUsers) {
 	this.rateByUsers = rateByUsers;
+    }
+
+    public AccessRightsDTO getFolderRights() {
+	return folderRights;
+    }
+
+    public void setFolderRights(final AccessRightsDTO folderRights) {
+	this.folderRights = folderRights;
     }
 
 }

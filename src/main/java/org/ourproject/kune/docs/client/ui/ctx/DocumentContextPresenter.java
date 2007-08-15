@@ -31,7 +31,7 @@ public class DocumentContextPresenter implements DocumentContext, FolderContextL
     public void setContent(final ContentDTO content) {
 	this.content = content;
 	FolderContext folderContext = components.getFolderContext();
-	folderContext.setFolder(content.getFolder());
+	folderContext.setFolder(content.getFolder(), content.getFolderRights());
 	view.show(folderContext.getView());
     }
 

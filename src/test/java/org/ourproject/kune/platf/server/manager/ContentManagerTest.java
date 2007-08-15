@@ -11,16 +11,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.server.TestDomainHelper;
-import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.domain.ContentDescriptor;
 import org.ourproject.kune.platf.server.domain.Folder;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.ToolConfiguration;
-import org.ourproject.kune.platf.server.domain.User;
 
 public class ContentManagerTest {
 
-    private UserSession session;
     private GroupManager groupManager;
     private FolderManager folderManager;
     private ContentDescriptorManager contentDescriptorManager;
@@ -28,7 +25,6 @@ public class ContentManagerTest {
 
     @Before
     public void createSession() {
-	this.session = new UserSession();
 	this.groupManager = createStrictMock(GroupManager.class);
 	this.folderManager = createStrictMock(FolderManager.class);
 	this.contentDescriptorManager = createStrictMock(ContentDescriptorManager.class);
@@ -38,13 +34,11 @@ public class ContentManagerTest {
     @Test
     public void testDefaultGroupContent() throws ContentNotFoundException {
 
-	User user = TestDomainHelper.createUser(1);
-	user.setUserGroup(new Group());
+	Group userGroup = new Group();
 	ContentDescriptor descriptor = TestDomainHelper.createDescriptor(1l, "title", "content");
-	user.getUserGroup().setDefaultContent(descriptor);
-	session.setUser(user);
+	userGroup.setDefaultContent(descriptor);
 
-	ContentDescriptor content = contentManager.getContent(session.getUser(), null, null, null, null);
+	ContentDescriptor content = contentManager.getContent(userGroup, null, null, null, null);
 	assertSame(descriptor, content);
     }
 
@@ -58,8 +52,7 @@ public class ContentManagerTest {
 	expect(contentDescriptorManager.get(2l)).andReturn(descriptor);
 	replay(contentDescriptorManager);
 
-	ContentDescriptor content = contentManager
-		.getContent(session.getUser(), "groupShortName", "toolName", "1", "2");
+	ContentDescriptor content = contentManager.getContent(null, "groupShortName", "toolName", "1", "2");
 	assertSame(descriptor, content);
 	verify(contentDescriptorManager);
     }
@@ -72,7 +65,7 @@ public class ContentManagerTest {
 	expect(contentDescriptorManager.get(1l)).andReturn(descriptor);
 	replay(contentDescriptorManager);
 
-	contentManager.getContent(session.getUser(), "groupShortName", "toolName", "5", "1");
+	contentManager.getContent(null, "groupShortName", "toolName", "5", "1");
 	verify(contentDescriptorManager);
     }
 
@@ -84,7 +77,7 @@ public class ContentManagerTest {
 	expect(contentDescriptorManager.get(1l)).andReturn(descriptor);
 	replay(contentDescriptorManager);
 
-	contentManager.getContent(session.getUser(), "groupShortName", "toolName", "5", "1");
+	contentManager.getContent(null, "groupShortName", "toolName", "5", "1");
 	verify(contentDescriptorManager);
     }
 
@@ -96,13 +89,13 @@ public class ContentManagerTest {
 	expect(contentDescriptorManager.get(1l)).andReturn(descriptor);
 	replay(contentDescriptorManager);
 
-	contentManager.getContent(session.getUser(), "groupShortName", "toolName", "5", "1");
+	contentManager.getContent(null, "groupShortName", "toolName", "5", "1");
 	verify(contentDescriptorManager);
     }
 
     @Test(expected = ContentNotFoundException.class)
     public void voyAJoder() throws ContentNotFoundException {
-	contentManager.getContent(session.getUser(), null, "toolName", "1", "2");
+	contentManager.getContent(null, null, "toolName", "1", "2");
     }
 
     @Test
@@ -111,8 +104,7 @@ public class ContentManagerTest {
 	expect(folderManager.find(1l)).andReturn(folder);
 
 	replay(folderManager);
-	ContentDescriptor content = contentManager.getContent(session.getUser(), "groupShortName", "toolName", "1",
-		null);
+	ContentDescriptor content = contentManager.getContent(null, "groupShortName", "toolName", "1", null);
 	assertNotNull(content);
 	assertSame(folder, content.getFolder());
 	verify(folderManager);
@@ -126,8 +118,7 @@ public class ContentManagerTest {
 	expect(groupManager.findByShortName("groupShortName")).andReturn(group);
 	replay(groupManager);
 
-	ContentDescriptor content = contentManager.getContent(session.getUser(), "groupShortName", "toolName", null,
-		null);
+	ContentDescriptor content = contentManager.getContent(null, "groupShortName", "toolName", null, null);
 	assertSame(folder, content.getFolder());
 	verify(groupManager);
     }
@@ -140,20 +131,17 @@ public class ContentManagerTest {
 	expect(groupManager.findByShortName("groupShortName")).andReturn(group);
 	replay(groupManager);
 
-	ContentDescriptor content = contentManager.getContent(session.getUser(), "groupShortName", null, null, null);
+	ContentDescriptor content = contentManager.getContent(null, "groupShortName", null, null, null);
 	assertSame(descriptor, content);
 	verify(groupManager);
     }
 
     @Test
     public void testDefaultUserContent() throws ContentNotFoundException {
-	User user = session.setUser(new User());
 	ContentDescriptor contentDescriptor = new ContentDescriptor();
 	Group group = new Group();
-
-	user.setUserGroup(group);
 	group.setDefaultContent(contentDescriptor);
-	ContentDescriptor content = contentManager.getContent(session.getUser(), null, null, null, null);
+	ContentDescriptor content = contentManager.getContent(group, null, null, null, null);
 	assertSame(contentDescriptor, content);
     }
 
@@ -165,7 +153,7 @@ public class ContentManagerTest {
 	expect(contentDescriptorManager.get(1l)).andReturn(descriptor);
 	replay(contentDescriptorManager);
 
-	contentManager.getContent(session.getUser(), "groupShortName", "toolName", "5", "1a");
+	contentManager.getContent(null, "groupShortName", "toolName", "5", "1a");
 	verify(contentDescriptorManager);
     }
 

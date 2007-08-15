@@ -8,6 +8,7 @@ import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.ContentDescriptor;
 import org.ourproject.kune.platf.server.domain.Folder;
+import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.AccessRightsManager;
@@ -60,17 +61,36 @@ public class ContentServerService implements ContentService {
     public ContentDTO getContent(final String userHash, final String groupName, final String toolName,
 	    final String folderRef, final String contentRef) throws ContentNotFoundException {
 
+	// siempre tenenemos un grupo (aunque sea por defecto)
+	// pero no siempre tenemos un usuario loggeado!
+	Group group;
 	User user = session.getUser();
 	if (user == null) {
 	    String shortName = properties.get(KuneProperties.DEFAULT_SITE_SHORT_NAME);
-	    user = userManager.getByShortName(shortName);
+	    group = userManager.getByShortName(shortName).getUserGroup();
+	} else {
+	    group = user.getUserGroup();
 	}
 
-	ContentDescriptor descriptor = contentManager.getContent(user, groupName, toolName, folderRef, contentRef);
-	AccessLists accessLists = getAccessList(descriptor);
-	AccessRights accessRights = accessRightsManager.get(user, accessLists);
+	ContentDescriptor descriptor = contentManager.getContent(group, groupName, toolName, folderRef, contentRef);
+	return buildResponse(user, descriptor);
+    }
 
-	Content content = metadataManager.fill(descriptor, accessLists, accessRights);
+    private ContentDTO buildResponse(final User user, final ContentDescriptor descriptor) {
+	Group group = user != null ? user.getUserGroup() : null;
+	AccessLists contentAccessLists = getContentAccessList(descriptor);
+	AccessLists folderAccessLists = getFolderAccessLists(descriptor.getFolder());
+
+	AccessRights contentRights = accessRightsManager.get(group, contentAccessLists);
+	AccessRights folderRights;
+	if (contentAccessLists != folderAccessLists) {
+	    folderRights = accessRightsManager.get(group, folderAccessLists);
+	} else {
+	    folderRights = contentRights;
+	}
+	// FIXME: si accRights.isVisible == false > throw Exception!!
+
+	Content content = metadataManager.fill(descriptor, contentAccessLists, contentRights, folderRights);
 	return mapper.map(content, ContentDTO.class);
     }
 
@@ -79,20 +99,24 @@ public class ContentServerService implements ContentService {
 
     }
 
-    private AccessLists getAccessList(final ContentDescriptor content) {
-	AccessLists accessLists = content.getAccessLists();
+    private AccessLists getContentAccessList(final ContentDescriptor descriptor) {
+	AccessLists accessLists = descriptor.getAccessLists();
 	if (accessLists == null) {
-	    SocialNetwork socialNetwork = content.getFolder().getOwner().getSocialNetwork();
+	    SocialNetwork socialNetwork = descriptor.getFolder().getOwner().getSocialNetwork();
 	    accessLists = socialNetwork.getAccessList();
 	}
 	return accessLists;
+    }
+
+    private AccessLists getFolderAccessLists(final Folder folder) {
+	return folder.getOwner().getSocialNetwork().getAccessList();
     }
 
     @Authenticated
     public ContentDTO addContent(final String userHash, final Long parentFolderId, final String name) {
 	User user = session.getUser();
 	Folder folder = folderManager.find(parentFolderId);
-	contentDescriptorManager.createContent(user, folder);
-	return null;
+	ContentDescriptor descriptor = contentDescriptorManager.createContent(user, folder);
+	return buildResponse(user, descriptor);
     }
 }

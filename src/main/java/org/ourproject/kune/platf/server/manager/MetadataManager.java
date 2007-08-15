@@ -6,5 +6,6 @@ import org.ourproject.kune.platf.server.model.AccessRights;
 import org.ourproject.kune.platf.server.model.Content;
 
 public interface MetadataManager {
-    Content fill(final ContentDescriptor content, final AccessLists accessList, final AccessRights accessRight);
+    Content fill(final ContentDescriptor content, final AccessLists contentAccessList, final AccessRights accessRight,
+	    AccessRights folderAccessRights);
 }

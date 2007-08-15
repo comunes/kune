@@ -30,7 +30,7 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
     private void showContent() {
 	if (content.hasDocument()) {
 	    DocumentReader reader = components.getDocumentReader();
-	    reader.showDocument(content.getContent(), content.getAccessRights());
+	    reader.showDocument(content.getContent(), content.getContentRights());
 	    view.show(reader.getView());
 	} else {
 	    FolderViewer viewer = components.getFolderViewer();

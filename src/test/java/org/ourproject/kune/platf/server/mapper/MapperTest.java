@@ -31,10 +31,10 @@ public class MapperTest {
     @Test
     public void testContentMapping() {
 	Content c = new Content();
-	c.setAccessRights(new AccessRights(true, true, true));
+	c.setContentRights(new AccessRights(true, true, true));
 
 	ContentDTO dto = mapper.map(c, ContentDTO.class);
-	assertEquals(c.getAccessRights().isAdministrable(), dto.getAccessRights().isAdministrable);
+	assertEquals(c.getContentRights().isAdministrable(), dto.getContentRights().isAdministrable);
     }
 
     @Test

@@ -12,7 +12,8 @@ public class Content {
     private Group group;
     private Folder folder;
     private AccessLists accessLists;
-    private AccessRights accessRights;
+    private AccessRights contentRights;
+    private AccessRights folderRights;
     private Double rate;
     private Integer rateByUsers;
 
@@ -27,8 +28,8 @@ public class Content {
 	this.accessLists = accessLists;
     }
 
-    public AccessRights getAccessRights() {
-	return accessRights;
+    public AccessRights getContentRights() {
+	return contentRights;
     }
 
     public String getDocumentId() {
@@ -37,6 +38,14 @@ public class Content {
 
     public void setDocumentId(final String docRef) {
 	this.documentId = docRef;
+    }
+
+    public AccessRights getFolderRights() {
+	return folderRights;
+    }
+
+    public void setFolderRights(final AccessRights folderRights) {
+	this.folderRights = folderRights;
     }
 
     public String getContent() {
@@ -71,8 +80,8 @@ public class Content {
 	this.group = group;
     }
 
-    public void setAccessRights(final AccessRights accessRights) {
-	this.accessRights = accessRights;
+    public void setContentRights(final AccessRights accessRights) {
+	this.contentRights = accessRights;
     }
 
     public Folder getFolder() {

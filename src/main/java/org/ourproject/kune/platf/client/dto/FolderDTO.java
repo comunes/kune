@@ -17,6 +17,9 @@ public class FolderDTO implements IsSerializable {
      */
     private List contents;
 
+    public FolderDTO() {
+    }
+
     public Long getId() {
 	return id;
     }

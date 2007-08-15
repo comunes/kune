@@ -9,6 +9,6 @@ public interface FolderContentView extends View {
 
     void selectItem(int index);
 
-    void setVisibleControls(boolean b, boolean c);
+    void setAddControlsVisibles(boolean b, boolean c);
 
 }

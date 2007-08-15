@@ -12,7 +12,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class MetadataManagerDefault implements MetadataManager {
     public Content fill(final ContentDescriptor descriptor, final AccessLists accessList,
-	    final AccessRights accessRights) {
+	    final AccessRights contentRights, final AccessRights folderRights) {
 	Folder folder = descriptor.getFolder();
 	Content content = new Content();
 
@@ -25,7 +25,8 @@ public class MetadataManagerDefault implements MetadataManager {
 	content.setGroup(folder.getOwner());
 	content.setFolder(folder);
 	content.setAccessLists(accessList);
-	content.setAccessRights(accessRights);
+	content.setContentRights(contentRights);
+	content.setFolderRights(folderRights);
 	content.setRate(descriptor.calculateRate(descriptor));
 	content.setRateByUsers(descriptor.calculateRateNumberOfUsers(descriptor));
 	return content;

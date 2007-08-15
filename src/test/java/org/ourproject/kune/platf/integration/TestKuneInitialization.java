@@ -1,5 +1,6 @@
 package org.ourproject.kune.platf.integration;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -73,8 +74,8 @@ public class TestKuneInitialization {
 	loginService.login(properties.getDefaultSiteShortName(), properties.getDefaultSiteAdminPassword());
 	ContentService contentService = getService(ContentService.class);
 	ContentDTO response = contentService.getContent(null, null, null, null, null);
-	assertNotNull(response.getAccessRights());
-	assertTrue(response.getAccessRights().isEditable);
+	assertNotNull(response.getContentRights());
+	assertTrue(response.getContentRights().isEditable);
 	// assertTrue(response.getAccessLists().getAdmin().size() == 1);
     }
 
@@ -90,7 +91,19 @@ public class TestKuneInitialization {
     }
 
     @Test
-    public void testCallDefault() throws ContentNotFoundException {
+    public void notLoggedUserShouldNotEditDefaultDoc() throws ContentNotFoundException {
+	ContentServerService service = getService(ContentServerService.class);
+	ContentDTO content = service.getContent(null, null, null, null, null);
+	assertFalse(content.getContentRights().isAdministrable);
+	assertFalse(content.getContentRights().isEditable);
+	assertTrue(content.getContentRights().isVisible);
+	assertFalse(content.getFolderRights().isAdministrable);
+	assertFalse(content.getFolderRights().isEditable);
+	assertTrue(content.getFolderRights().isVisible);
+    }
+
+    @Test
+    public void defaultCountentShouldExist() throws ContentNotFoundException {
 	ContentServerService service = getService(ContentServerService.class);
 	ContentDTO content = service.getContent(null, null, null, null, null);
 	assertNotNull(content);

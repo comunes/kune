@@ -26,7 +26,7 @@ public class FolderContextPanel extends DockPanel implements FolderContentView {
 	items.clear();
     }
 
-    public void setVisibleControls(final boolean isAddDocumentVisible, final boolean isAddFolderVisible) {
+    public void setAddControlsVisibles(final boolean isAddDocumentVisible, final boolean isAddFolderVisible) {
 	controls.setVisibleControls(isAddDocumentVisible, isAddFolderVisible);
     }
 
