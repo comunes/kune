@@ -6,9 +6,14 @@ import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.domain.AccessLists;
+import org.ourproject.kune.platf.server.domain.ContentDescriptor;
+import org.ourproject.kune.platf.server.domain.Folder;
+import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.AccessRightsManager;
+import org.ourproject.kune.platf.server.manager.ContentDescriptorManager;
 import org.ourproject.kune.platf.server.manager.ContentManager;
+import org.ourproject.kune.platf.server.manager.FolderManager;
 import org.ourproject.kune.platf.server.manager.MetadataManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
@@ -31,16 +36,22 @@ public class ContentServerService implements ContentService {
     private final KuneProperties properties;
     private final UserManager userManager;
     private final Mapper mapper;
+    private final FolderManager folderManager;
+    private final ContentDescriptorManager contentDescriptorManager;
 
     @Inject
     public ContentServerService(final UserSession session, final ContentManager contentManager,
 	    final AccessRightsManager accessRightManager, final MetadataManager metadaManager,
-	    final UserManager userManager, final KuneProperties properties, final Mapper mapper) {
+	    final UserManager userManager, final FolderManager folderManager,
+	    final ContentDescriptorManager contentDescriptorManager, final KuneProperties properties,
+	    final Mapper mapper) {
 	this.session = session;
 	this.contentManager = contentManager;
 	this.accessRightsManager = accessRightManager;
 	this.metadataManager = metadaManager;
 	this.userManager = userManager;
+	this.folderManager = folderManager;
+	this.contentDescriptorManager = contentDescriptorManager;
 	this.properties = properties;
 	this.mapper = mapper;
     }
@@ -55,11 +66,11 @@ public class ContentServerService implements ContentService {
 	    user = userManager.getByShortName(shortName);
 	}
 
-	Content content = contentManager.getContent(user, groupName, toolName, folderRef, contentRef);
-	AccessLists accessLists = getAccessList(content);
+	ContentDescriptor descriptor = contentManager.getContent(user, groupName, toolName, folderRef, contentRef);
+	AccessLists accessLists = getAccessList(descriptor);
 	AccessRights accessRights = accessRightsManager.get(user, accessLists);
 
-	metadataManager.fill(content, accessLists, accessRights);
+	Content content = metadataManager.fill(descriptor, accessLists, accessRights);
 	return mapper.map(content, ContentDTO.class);
     }
 
@@ -68,11 +79,20 @@ public class ContentServerService implements ContentService {
 
     }
 
-    private AccessLists getAccessList(final Content content) {
+    private AccessLists getAccessList(final ContentDescriptor content) {
 	AccessLists accessLists = content.getAccessLists();
 	if (accessLists == null) {
-	    accessLists = content.getGroup().getSocialNetwork().getAccessList();
+	    SocialNetwork socialNetwork = content.getFolder().getOwner().getSocialNetwork();
+	    accessLists = socialNetwork.getAccessList();
 	}
 	return accessLists;
+    }
+
+    @Authenticated
+    public ContentDTO addContent(final String userHash, final Long parentFolderId, final String name) {
+	User user = session.getUser();
+	Folder folder = folderManager.find(parentFolderId);
+	contentDescriptorManager.createContent(user, folder);
+	return null;
     }
 }

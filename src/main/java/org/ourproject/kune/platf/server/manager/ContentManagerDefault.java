@@ -1,6 +1,7 @@
 package org.ourproject.kune.platf.server.manager;
 
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
+import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.ContentDescriptor;
 import org.ourproject.kune.platf.server.domain.Folder;
 import org.ourproject.kune.platf.server.domain.Group;
@@ -24,8 +25,8 @@ public class ContentManagerDefault implements ContentManager {
 	this.contentDescriptorManager = contentDescriptorManager;
     }
 
-    public Content getContent(final User user, final String groupName, final String toolName, final String folderRef,
-	    final String contentRef) throws ContentNotFoundException {
+    public ContentDescriptor getContent(final User user, final String groupName, final String toolName,
+	    final String folderRef, final String contentRef) throws ContentNotFoundException {
 
 	Long contentId = checkAndParse(contentRef);
 	Long folderId = checkAndParse(folderRef);
@@ -56,10 +57,11 @@ public class ContentManagerDefault implements ContentManager {
 	return null;
     }
 
-    private Content findByContentReference(final String groupName, final String toolName, final Long folderId,
-	    final Long contentId) throws ContentNotFoundException {
+    private ContentDescriptor findByContentReference(final String groupName, final String toolName,
+	    final Long folderId, final Long contentId) throws ContentNotFoundException {
 	ContentDescriptor descriptor = contentDescriptorManager.get(contentId);
 	Folder folder = descriptor.getFolder();
+
 	if (!folder.getId().equals(folderId)) {
 	    throw new ContentNotFoundException();
 	}
@@ -69,26 +71,36 @@ public class ContentManagerDefault implements ContentManager {
 	if (!folder.getOwner().getShortName().equals(groupName)) {
 	    throw new ContentNotFoundException();
 	}
-	return new Content(folder, descriptor);
+	return descriptor;
     }
 
-    private Content findByFolderReference(final String groupName, final String toolName, final Long folderId) {
+    private ContentDescriptor findByFolderReference(final String groupName, final String toolName, final Long folderId) {
 	Folder folder = folderManager.find(folderId);
-	return new Content(folder, null);
+	return generateFolderFakeContent(folder);
     }
 
-    private Content findByRootOnGroup(final String groupName, final String toolName) {
+    private ContentDescriptor findByRootOnGroup(final String groupName, final String toolName) {
 	Group group = groupManager.findByShortName(groupName);
-	return new Content(group.getRoot(toolName), null);
+	Folder folder = group.getRoot(toolName);
+	return generateFolderFakeContent(folder);
     }
 
-    private Content findDefaultOfGroup(final String groupName) {
+    private ContentDescriptor generateFolderFakeContent(final Folder folder) {
+	ContentDescriptor descriptor = new ContentDescriptor();
+	descriptor.setFolder(folder);
+	AccessLists emptyAccessList = new AccessLists();
+	descriptor.setAccessLists(emptyAccessList);
+	return descriptor;
+    }
+
+    private ContentDescriptor findDefaultOfGroup(final String groupName) {
 	Group group = groupManager.findByShortName(groupName);
 	return findDefaultOfGroup(group);
     }
 
-    private Content findDefaultOfGroup(final Group group) {
-	return new Content(group.getDefaultContent().getFolder(), group.getDefaultContent());
+    private ContentDescriptor findDefaultOfGroup(final Group group) {
+	ContentDescriptor defaultContent = group.getDefaultContent();
+	return defaultContent;
     }
 
     private boolean allNull(final String... args) {

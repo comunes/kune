@@ -4,7 +4,7 @@ import static org.easymock.EasyMock.createStrictMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 
 import org.junit.Before;
@@ -17,7 +17,6 @@ import org.ourproject.kune.platf.server.domain.Folder;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.ToolConfiguration;
 import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.model.Content;
 
 public class ContentManagerTest {
 
@@ -45,9 +44,8 @@ public class ContentManagerTest {
 	user.getUserGroup().setDefaultContent(descriptor);
 	session.setUser(user);
 
-	Content content = contentManager.getContent(session.getUser(), null, null, null, null);
-	assertSame(descriptor, content.getDescriptor());
-	assertSame(descriptor.getFolder(), content.getFolder());
+	ContentDescriptor content = contentManager.getContent(session.getUser(), null, null, null, null);
+	assertSame(descriptor, content);
     }
 
     @Test
@@ -60,9 +58,9 @@ public class ContentManagerTest {
 	expect(contentDescriptorManager.get(2l)).andReturn(descriptor);
 	replay(contentDescriptorManager);
 
-	Content content = contentManager.getContent(session.getUser(), "groupShortName", "toolName", "1", "2");
-	assertSame(descriptor, content.getDescriptor());
-	assertSame(folder, content.getFolder());
+	ContentDescriptor content = contentManager
+		.getContent(session.getUser(), "groupShortName", "toolName", "1", "2");
+	assertSame(descriptor, content);
 	verify(contentDescriptorManager);
     }
 
@@ -113,9 +111,10 @@ public class ContentManagerTest {
 	expect(folderManager.find(1l)).andReturn(folder);
 
 	replay(folderManager);
-	Content content = contentManager.getContent(session.getUser(), "groupShortName", "toolName", "1", null);
+	ContentDescriptor content = contentManager.getContent(session.getUser(), "groupShortName", "toolName", "1",
+		null);
+	assertNotNull(content);
 	assertSame(folder, content.getFolder());
-	assertNull(content.getDescriptor());
 	verify(folderManager);
     }
 
@@ -127,7 +126,8 @@ public class ContentManagerTest {
 	expect(groupManager.findByShortName("groupShortName")).andReturn(group);
 	replay(groupManager);
 
-	Content content = contentManager.getContent(session.getUser(), "groupShortName", "toolName", null, null);
+	ContentDescriptor content = contentManager.getContent(session.getUser(), "groupShortName", "toolName", null,
+		null);
 	assertSame(folder, content.getFolder());
 	verify(groupManager);
     }
@@ -135,13 +135,13 @@ public class ContentManagerTest {
     @Test
     public void getGroupDefaultContent() throws ContentNotFoundException {
 	Group group = new Group();
-	ContentDescriptor ct = new ContentDescriptor();
-	group.setDefaultContent(ct);
+	ContentDescriptor descriptor = new ContentDescriptor();
+	group.setDefaultContent(descriptor);
 	expect(groupManager.findByShortName("groupShortName")).andReturn(group);
 	replay(groupManager);
 
-	Content content = contentManager.getContent(session.getUser(), "groupShortName", null, null, null);
-	assertSame(ct, content.getDescriptor());
+	ContentDescriptor content = contentManager.getContent(session.getUser(), "groupShortName", null, null, null);
+	assertSame(descriptor, content);
 	verify(groupManager);
     }
 
@@ -153,8 +153,8 @@ public class ContentManagerTest {
 
 	user.setUserGroup(group);
 	group.setDefaultContent(contentDescriptor);
-	Content content = contentManager.getContent(session.getUser(), null, null, null, null);
-	assertSame(contentDescriptor, content.getDescriptor());
+	ContentDescriptor content = contentManager.getContent(session.getUser(), null, null, null, null);
+	assertSame(contentDescriptor, content);
     }
 
     @Test(expected = ContentNotFoundException.class)

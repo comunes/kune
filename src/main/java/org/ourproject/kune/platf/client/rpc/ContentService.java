@@ -15,6 +15,8 @@ public interface ContentService extends RemoteService {
 
     void save(String userHash, ContentDTO dto) throws AccessViolationException;
 
+    ContentDTO addContent(String user, Long parentFolderId, String name);
+
     public static class App {
 	private static ContentServiceAsync instance;
 

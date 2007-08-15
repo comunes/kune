@@ -2,35 +2,95 @@
 <!DOCTYPE mappings PUBLIC "-//DOZER//DTD MAPPINGS//EN"
    "http://dozer.sourceforge.net/dtd/dozerbeanmapping.dtd">
 <mappings>
-  <configuration>
-    <stop-on-errors>true</stop-on-errors>
-    <date-format>dd/mm/yyyy</date-format>
-    <wildcard>true</wildcard>
-  </configuration>
+	<configuration>
+		<stop-on-errors>true</stop-on-errors>
+		<date-format>dd/mm/yyyy</date-format>
+		<wildcard>true</wildcard>
+	</configuration>
 
-  <mapping>
-      <class-a>org.ourproject.kune.platf.client.dto.GroupDTO</class-a>
-      <class-b>org.ourproject.kune.platf.server.domain.Group</class-b>
-  </mapping>
+	<mapping>
+		<class-a>org.ourproject.kune.platf.client.dto.GroupDTO</class-a>
+		<class-b>org.ourproject.kune.platf.server.domain.Group</class-b>
+	</mapping>
 
-  <mapping>
-      <class-a>org.ourproject.kune.platf.client.dto.AccessListsDTO</class-a>
-      <class-b>org.ourproject.kune.platf.server.domain.AccessLists</class-b>
-  </mapping>
+	<mapping>
+		<class-a>
+			org.ourproject.kune.platf.client.dto.AccessListsDTO
+		</class-a>
+		<class-b>
+			org.ourproject.kune.platf.server.domain.AccessLists
+		</class-b>
+	</mapping>
 
-  <mapping>
-      <class-a>org.ourproject.kune.platf.client.dto.AccessRightsDTO</class-a>
-      <class-b>org.ourproject.kune.platf.server.model.AccessRights</class-b>
-  </mapping>
+	<mapping>
+		<class-a>
+			org.ourproject.kune.platf.client.dto.AccessRightsDTO
+		</class-a>
+		<class-b>
+			org.ourproject.kune.platf.server.model.AccessRights
+		</class-b>
+	</mapping>
 
-  <mapping>
-      <class-a>org.ourproject.kune.workspace.client.dto.ContentDTO</class-a>
-      <class-b>org.ourproject.kune.platf.server.model.Content</class-b>
-  </mapping>
+	<mapping>
+		<class-a>
+			org.ourproject.kune.workspace.client.dto.ContentDTO
+		</class-a>
+		<class-b>
+			org.ourproject.kune.platf.server.model.Content
+		</class-b>
+	</mapping>
 
-  <mapping>
-      <class-a>org.ourproject.kune.platf.client.dto.LicenseDTO</class-a>
-     <class-b>org.ourproject.kune.platf.server.domain.License</class-b>
-  </mapping>
+	<mapping>
+		<class-a>
+			org.ourproject.kune.platf.client.dto.LicenseDTO
+		</class-a>
+		<class-b>
+			org.ourproject.kune.platf.server.domain.License
+		</class-b>
+	</mapping>
+
+	<mapping>
+		<class-a>
+			org.ourproject.kune.platf.client.dto.ContentDescriptorDTO
+		</class-a>
+		<class-b>
+			org.ourproject.kune.platf.server.domain.ContentDescriptor
+		</class-b>
+		<field>
+			<a>title</a>
+			<b>lastRevision.data.title</b>
+		</field>
+	</mapping>
+
+
+	<mapping>
+		<class-a>
+			org.ourproject.kune.platf.client.dto.FolderDTO
+		</class-a>
+		<class-b>
+			org.ourproject.kune.platf.server.domain.Folder
+		</class-b>
+		<field>
+			<a>contents</a>
+			<b>contents</b>
+			<a-hint>
+				org.ourproject.kune.platf.client.dto.ContentDescriptorDTO
+			</a-hint>
+			<b-hint>
+				org.ourproject.kune.platf.server.domain.ContentDescriptor
+			</b-hint>
+		</field>
+		<field>
+			<a>childs</a>
+			<b>childs</b>
+			<a-hint>
+				org.ourproject.kune.platf.client.dto.FolderDTO
+			</a-hint>
+			<b-hint>
+				org.ourproject.kune.platf.server.domain.Folder
+			</b-hint>
+		</field>
+	</mapping>
+
 
 </mappings>

@@ -29,7 +29,7 @@ public class Revision {
     @Version
     private int version;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Revision previous;
 
     public Revision() {

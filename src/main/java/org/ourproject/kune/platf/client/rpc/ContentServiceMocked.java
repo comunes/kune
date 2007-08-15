@@ -34,4 +34,9 @@ public class ContentServiceMocked extends MockedService implements ContentServic
 
     }
 
+    public void addContent(final String user, final Long parentFolderId, final String name,
+	    final AsyncCallback asyncCallback) {
+
+    }
+
 }

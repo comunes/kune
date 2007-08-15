@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -30,7 +31,8 @@ public class ContentDescriptor implements HasContent {
     private List<Tag> tags;
     @OneToOne
     private License license;
-    @OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+
+    @OneToOne(cascade = { CascadeType.ALL })
     private Revision lastRevision;
 
     @OneToOne
@@ -42,7 +44,7 @@ public class ContentDescriptor implements HasContent {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Translation> translations;
 
-    @OneToOne
+    @ManyToOne
     private Folder folder;
 
     // TODO: lang, languages, etc
@@ -54,6 +56,7 @@ public class ContentDescriptor implements HasContent {
 	translations = new ArrayList<Translation>();
 	tags = new ArrayList<Tag>();
 	this.createdOn = System.currentTimeMillis();
+	this.lastRevision = new Revision();
     }
 
     @Finder(query = "select AVG(r.value) from Rate r where r.contentDescriptor = :descriptor")

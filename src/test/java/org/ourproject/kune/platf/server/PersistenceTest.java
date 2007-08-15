@@ -47,8 +47,10 @@ public abstract class PersistenceTest {
 	getManager().getTransaction().rollback();
     }
 
-    public void persist(final Object entity) {
-	getManager().persist(entity);
+    public void persist(final Object... entities) {
+	for (Object entity : entities) {
+	    getManager().persist(entity);
+	}
     }
 
     private EntityManager getManager() {

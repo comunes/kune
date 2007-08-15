@@ -6,12 +6,12 @@ public class FolderContextPanel extends DockPanel implements FolderContentView {
     private final ControlsPanel controls;
     private final ItemsPanel items;
 
-    public FolderContextPanel() {
+    public FolderContextPanel(final FolderContextListener listener) {
 	add(new TopBar(), DockPanel.NORTH);
 	items = new ItemsPanel();
 	add(items, DockPanel.CENTER);
 
-	controls = new ControlsPanel();
+	controls = new ControlsPanel(listener);
 	add(controls, DockPanel.SOUTH);
     }
 

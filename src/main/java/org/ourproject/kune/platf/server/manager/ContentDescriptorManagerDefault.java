@@ -16,7 +16,7 @@ public class ContentDescriptorManagerDefault extends DefaultManager<ContentDescr
 	ContentDescriptorManager {
 
     @Inject
-    public ContentDescriptorManagerDefault(final Provider<EntityManager> provider, final ContentDescriptor finder) {
+    public ContentDescriptorManagerDefault(final Provider<EntityManager> provider) {
 	super(provider, ContentDescriptor.class);
     }
 
@@ -24,6 +24,7 @@ public class ContentDescriptorManagerDefault extends DefaultManager<ContentDescr
 	ContentDescriptor descriptor = new ContentDescriptor();
 	descriptor.setCreator(user);
 	descriptor.setFolder(folder);
+	folder.addContent(descriptor);
 	Revision revision = new Revision();
 	descriptor.addRevision(revision);
 	return persist(descriptor);

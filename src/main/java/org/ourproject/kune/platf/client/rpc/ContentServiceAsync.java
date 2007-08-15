@@ -9,4 +9,6 @@ public interface ContentServiceAsync {
 	    AsyncCallback callback);
 
     void save(String userHash, ContentDTO content, AsyncCallback asyncCallback);
+
+    void addContent(String user, Long parentFolderId, String name, AsyncCallback asyncCallback);
 }

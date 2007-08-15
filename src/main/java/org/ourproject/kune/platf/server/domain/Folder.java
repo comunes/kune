@@ -1,5 +1,6 @@
 package org.ourproject.kune.platf.server.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -28,6 +29,9 @@ public class Folder implements HasId {
     @OneToMany(fetch = FetchType.LAZY)
     private List<Folder> childs;
 
+    @OneToMany(mappedBy = "folder")
+    private final List<ContentDescriptor> contents;
+
     @Basic(optional = false)
     private String absolutePath;
 
@@ -40,6 +44,8 @@ public class Folder implements HasId {
 	this.absolutePath = absolutePath;
 	owner = group;
 	this.toolName = toolName;
+	this.contents = new ArrayList<ContentDescriptor>();
+	this.childs = new ArrayList<Folder>();
     }
 
     public Folder() {
@@ -101,4 +107,17 @@ public class Folder implements HasId {
     public void setToolName(final String toolName) {
 	this.toolName = toolName;
     }
+
+    public void addContent(final ContentDescriptor descriptor) {
+	contents.add(descriptor);
+    }
+
+    public List<ContentDescriptor> getContents() {
+	return contents;
+    }
+
+    public void addFolder(final Folder folder) {
+	childs.add(folder);
+    }
+
 }

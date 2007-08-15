@@ -105,7 +105,6 @@ public class Content {
 
     public void setFolder(final Folder folder) {
 	this.folder = folder;
-	this.group = folder == null ? null : folder.getOwner();
     }
 
     public Double getRate() {
