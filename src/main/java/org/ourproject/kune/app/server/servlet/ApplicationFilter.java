@@ -42,17 +42,29 @@ public class ApplicationFilter extends AbstractProcessor {
 	    throws ServletException, IOException {
 	String forward;
 	if (isHome(relativeURL)) {
-	    onShowHome(request, response);
-	    forward = appHome + relativeURL + defaultFile;
+	    callAppLifecycleListeners(request, response);
+	    String extraParameters = extractParameters(relativeURL);
+	    forward = appHome + relativeURL + defaultFile + extraParameters;
 	} else {
 	    forward = appHome + relativeURL;
 	}
 	request.getRequestDispatcher(forward).forward(request, response);
     }
 
-    private void onShowHome(final HttpServletRequest request, final HttpServletResponse response) {
+    private String extractParameters(final String relativeURL) {
+	int index = relativeURL.indexOf('?');
+	if (index > 0) {
+	    return relativeURL.substring(index);
+	} else {
+	    return "";
+	}
+    }
+
+    private void callAppLifecycleListeners(final HttpServletRequest request, final HttpServletResponse response) {
 	injector.injectMembers(appListener);
-	appListener.onApplicationStart(request, response);
+	if (appListener != null) {
+	    appListener.onApplicationStart(request, response);
+	}
     }
 
     private boolean isHome(final String relativeURL) {
