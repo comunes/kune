@@ -8,7 +8,9 @@ import java.util.Map;
 import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
+import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.state.ContentProviderImpl;
 import org.ourproject.kune.platf.client.state.State;
 import org.ourproject.kune.platf.client.state.StateController;
 import org.ourproject.kune.platf.client.state.StateControllerDefault;
@@ -37,7 +39,8 @@ public class ApplicationBuilder {
 	RootPanel.get("initialstatusbar").setVisible(false);
 
 	final State state = new State(userHash);
-	final StateController stateManager = new StateControllerDefault(application, state);
+	ContentProviderImpl provider = new ContentProviderImpl(ContentService.App.getInstance());
+	final StateController stateManager = new StateControllerDefault(provider, application, state);
 	History.addHistoryListener(stateManager);
 
 	final DefaultDispatcher dispatcher = new DefaultDispatcher();

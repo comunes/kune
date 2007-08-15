@@ -20,6 +20,7 @@ public class ContentDTO implements IsSerializable {
     private AccessRightsDTO folderRights;
     private Double rate;
     private Integer rateByUsers;
+    private StateToken state;
 
     public ContentDTO() {
 	this(null, null, null);
@@ -29,6 +30,7 @@ public class ContentDTO implements IsSerializable {
 	this.documentId = docRef;
 	this.title = title;
 	this.content = content;
+	this.state = null;
     }
 
     public void setDocumentId(final String docRef) {
@@ -87,8 +89,11 @@ public class ContentDTO implements IsSerializable {
 	this.folder = folder;
     }
 
-    public StateToken encodeState() {
-	return new StateToken(group.getShortName(), toolName, folder.getId().toString(), getDocumentId());
+    public StateToken getState() {
+	if (state == null) {
+	    state = new StateToken(group.getShortName(), toolName, folder.getId().toString(), getDocumentId());
+	}
+	return state;
     }
 
     public boolean hasDocument() {

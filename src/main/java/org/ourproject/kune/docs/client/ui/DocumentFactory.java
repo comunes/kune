@@ -20,9 +20,9 @@ import org.ourproject.kune.docs.client.ui.ctx.folder.FolderContext;
 import org.ourproject.kune.docs.client.ui.ctx.folder.FolderContextListener;
 import org.ourproject.kune.docs.client.ui.ctx.folder.FolderContextPanel;
 import org.ourproject.kune.docs.client.ui.ctx.folder.FolderContextPresenter;
-import org.ourproject.kune.docs.client.ui.forms.newdoc.NewDocumentForm;
-import org.ourproject.kune.docs.client.ui.forms.newdoc.NewDocumentFormPanel;
-import org.ourproject.kune.docs.client.ui.forms.newdoc.NewDocumentFormPresenter;
+import org.ourproject.kune.docs.client.ui.forms.create.NewDocumentForm;
+import org.ourproject.kune.docs.client.ui.forms.create.NewDocumentFormPanel;
+import org.ourproject.kune.docs.client.ui.forms.create.NewDocumentFormPresenter;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckPanel;
 import org.ourproject.kune.workspace.client.ui.form.FormListener;
 

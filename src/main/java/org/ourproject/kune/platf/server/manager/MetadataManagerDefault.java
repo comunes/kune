@@ -16,7 +16,12 @@ public class MetadataManagerDefault implements MetadataManager {
 	Folder folder = descriptor.getFolder();
 	Content content = new Content();
 
-	content.setDocumentId(descriptor.getId().toString());
+	Long documentId = descriptor.getId();
+	if (documentId != null) {
+	    content.setDocumentId(documentId.toString());
+	} else {
+	    content.setDocumentId(null);
+	}
 	Data data = descriptor.getLastRevision().getData();
 	char[] text = data.getContent();
 	content.setContent(text == null ? null : new String(text));

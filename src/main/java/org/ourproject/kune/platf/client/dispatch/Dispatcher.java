@@ -7,6 +7,8 @@ public interface Dispatcher {
 
     Action subscribe(String eventName, Action action);
 
+    void fire(String eventName, Object value, Object extra);
+
     void fire(String eventName, Object value);
 
 }

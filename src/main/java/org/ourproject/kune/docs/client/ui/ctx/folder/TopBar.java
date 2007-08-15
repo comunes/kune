@@ -15,14 +15,22 @@ import com.google.gwt.user.client.ui.Widget;
 
 class TopBar extends VerticalPanel {
 
-    public TopBar() {
+    private final Label currentFolder;
+    private final PushButton btnGoParent;
+
+    public TopBar(final FolderContextListener listener) {
 	FolderContextImages Img = FolderContextImages.App.getInstance();
 
 	HorizontalPanel firstRow = new HorizontalPanel();
 	HorizontalPanel secondRow = new HorizontalPanel();
 	HorizontalPanel iconBarHP = new HorizontalPanel();
 	HorizontalPanel currentFolderHP = new HorizontalPanel();
-	final PushButton upIcon = new PushButton(Img.goUp().createImage(), Img.goUpLight().createImage());
+	btnGoParent = new PushButton(Img.goUp().createImage(), Img.goUpLight().createImage());
+	btnGoParent.addClickListener(new ClickListener() {
+	    public void onClick(final Widget sender) {
+		listener.onGoParent();
+	    }
+	});
 	MenuBar pathMenu = new MenuBar();
 	MenuBar pathSubmenu = new MenuBar(true);
 
@@ -31,7 +39,7 @@ class TopBar extends VerticalPanel {
 	add(secondRow);
 	firstRow.add(iconBarHP);
 	secondRow.add(currentFolderHP);
-	iconBarHP.add(upIcon);
+	iconBarHP.add(btnGoParent);
 	BorderDecorator buttonRounded = new BorderDecorator(pathMenu, BorderDecorator.ALL, BorderDecorator.SIMPLE);
 	iconBarHP.add(buttonRounded);
 	pathMenu.addItem(Img.folderpathmenu().getHTML(), true, pathSubmenu);
@@ -48,7 +56,7 @@ class TopBar extends VerticalPanel {
 	    }
 	});
 	currentFolderHP.add(Img.bulletArrowRight().createImage());
-	Label currentFolder = new Label("Current Folder");
+	currentFolder = new Label("Current Folder");
 	currentFolderHP.add(currentFolder);
 
 	// Set properties
@@ -60,11 +68,11 @@ class TopBar extends VerticalPanel {
 	setCellWidth(firstRow, "100%");
 	setCellWidth(secondRow, "100%");
 	firstRow.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
-	iconBarHP.setCellVerticalAlignment(upIcon, VerticalPanel.ALIGN_MIDDLE);
+	iconBarHP.setCellVerticalAlignment(btnGoParent, VerticalPanel.ALIGN_MIDDLE);
 	iconBarHP.setCellVerticalAlignment(buttonRounded, VerticalPanel.ALIGN_MIDDLE);
 	pathMenu.setStyleName("pathMenu");
 	buttonRounded.setColor("AAA");
-	upIcon.addClickListener(new ClickListener() {
+	btnGoParent.addClickListener(new ClickListener() {
 	    public void onClick(final Widget sender) {
 		// TODO
 		Site.info("Test");
@@ -77,5 +85,13 @@ class TopBar extends VerticalPanel {
 		Site.error("Test 2");
 	    }
 	});
+    }
+
+    public void setCurrentName(final String name) {
+	currentFolder.setText(name);
+    }
+
+    public void setParentButtonVisible(final boolean isVisible) {
+	btnGoParent.setVisible(isVisible);
     }
 }

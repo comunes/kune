@@ -11,4 +11,8 @@ public interface FolderContentView extends View {
 
     void setAddControlsVisibles(boolean b, boolean c);
 
+    void setCurrentName(String name);
+
+    void setParentButtonVisible(boolean b);
+
 }

@@ -31,7 +31,7 @@ public class ActionTestHelper {
     }
 
     public void execute(final Object value) {
-	action.execute(value);
+	action.execute(value, null);
     }
 
 }

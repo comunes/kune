@@ -56,7 +56,7 @@ public class ContentServiceAddTest {
 	assertEquals(cntRights, added.getContentRights());
 	assertEquals(ctxRight, added.getFolderRights());
 
-	StateToken newState = added.encodeState();
+	StateToken newState = added.getState();
 	ContentDTO sameAgain = contentService.getContent(session.getHash(), newState);
 	assertNotNull(sameAgain);
 	assertEquals(2, sameAgain.getFolder().getContents().size());
@@ -67,5 +67,8 @@ public class ContentServiceAddTest {
 	String title = "folder name";
 	ContentDTO newState = contentService.addFolder(session.getHash(), groupName, folder.getId(), title);
 	assertNotNull(newState);
+	FolderDTO child = newState.getFolder();
+	assertEquals(folder.getAbsolutePath() + FolderDTO.SEP + title, child.getAbsolutePath());
+	assertEquals(1, folder.getChilds().size());
     }
 }

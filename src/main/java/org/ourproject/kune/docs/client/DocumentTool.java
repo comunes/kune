@@ -36,7 +36,7 @@ public class DocumentTool implements Tool {
 	DocumentContext context = components.getContext();
 	context.setContent(content);
 	// TODO: revistar el interface de trigger (setState)
-	trigger.setState(content.encodeState().toString());
+	trigger.setState(content.getState().toString());
     }
 
     public ToolTrigger getTrigger() {

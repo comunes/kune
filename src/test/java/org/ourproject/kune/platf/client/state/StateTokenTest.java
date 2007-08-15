@@ -10,9 +10,9 @@ public class StateTokenTest {
     @Test
     public void checkAllEmpty() {
 	StateToken token = new StateToken("");
-	assertNull(token.group);
-	assertNull(token.tool);
-	assertNull(token.folder);
-	assertNull(token.document);
+	assertNull(token.getGroup());
+	assertNull(token.getTool());
+	assertNull(token.getFolder());
+	assertNull(token.getDocument());
     }
 }

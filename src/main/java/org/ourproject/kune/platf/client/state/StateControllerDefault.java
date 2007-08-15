@@ -2,8 +2,6 @@ package org.ourproject.kune.platf.client.state;
 
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.rpc.ContentService;
-import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.tool.Tool;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.workspace.client.Workspace;
@@ -16,12 +14,12 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public class StateControllerDefault implements StateController {
     private final Application app;
     private final State state;
-    private final ContentServiceAsync server;
+    private final ContentProvider provider;
 
-    public StateControllerDefault(final Application app, final State state) {
+    public StateControllerDefault(final ContentProvider provider, final Application app, final State state) {
+	this.provider = provider;
 	this.app = app;
 	this.state = state;
-	this.server = ContentService.App.getInstance();
     }
 
     public void reload() {
@@ -35,20 +33,30 @@ public class StateControllerDefault implements StateController {
 
     private void onHistoryChanged(final StateToken newState) {
 	Site.showProgress("cargando...");
-	server.getContent(state.user, newState, new AsyncCallback() {
+	provider.getContent(state.user, newState, new AsyncCallback() {
 	    public void onFailure(final Throwable caught) {
 		Site.hideProgress();
 	    }
 
 	    public void onSuccess(final Object result) {
 		GWT.log("State response: " + result, null);
-		setState((ContentDTO) result);
+		loadContent((ContentDTO) result);
 	    }
 
 	});
     }
 
     public void setState(final ContentDTO content) {
+	StateToken state = content.getState();
+	provider.cache(state, content);
+	setState(state);
+    }
+
+    public void setState(final StateToken state) {
+	History.newItem(state.getEncoded());
+    }
+
+    private void loadContent(final ContentDTO content) {
 	Workspace workspace = app.getWorkspace();
 	workspace.showGroup(content.getGroup());
 	String toolName = content.getToolName();

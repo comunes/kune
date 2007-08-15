@@ -42,8 +42,11 @@ public class Folder implements HasId {
 
     private String toolName;
 
-    public Folder(final String absolutePath, final Group group, final String toolName) {
-	this.absolutePath = absolutePath;
+    private String name;
+
+    public Folder(final String parentPath, final String title, final Group group, final String toolName) {
+	this.name = title;
+	this.absolutePath = parentPath + SEP + title;
 	owner = group;
 	this.toolName = toolName;
 	this.contents = new ArrayList<ContentDescriptor>();
@@ -51,7 +54,19 @@ public class Folder implements HasId {
     }
 
     public Folder() {
-	this(null, null, null);
+	this(null, null, null, null);
+    }
+
+    public String getName() {
+	return name;
+    }
+
+    public void setName(final String name) {
+	this.name = name;
+    }
+
+    public Long getParentFolderId() {
+	return parent != null ? parent.getId() : null;
     }
 
     public Folder getParent() {

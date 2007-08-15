@@ -20,9 +20,9 @@ public class DispatcherTest {
 	Action action2 = dispatcher.subscribe(eventName, EasyMock.createStrictMock(Action.class));
 	Action action3 = dispatcher.subscribe(eventName, EasyMock.createStrictMock(Action.class));
 
-	action1.execute(value);
-	action2.execute(value);
-	action3.execute(value);
+	action1.execute(value, null);
+	action2.execute(value, null);
+	action3.execute(value, null);
 	EasyMock.replay(action1, action2, action3);
 
 	dispatcher.fire(eventName, value);

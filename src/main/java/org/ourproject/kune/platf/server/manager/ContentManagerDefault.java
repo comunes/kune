@@ -27,17 +27,17 @@ public class ContentManagerDefault implements ContentManager {
     }
 
     public ContentDescriptor getContent(final Group group, final StateToken token) throws ContentNotFoundException {
-	Long contentId = checkAndParse(token.document);
-	Long folderId = checkAndParse(token.folder);
+	Long contentId = checkAndParse(token.getDocument());
+	Long folderId = checkAndParse(token.getFolder());
 
 	if (token.hasAll()) {
-	    return findByContentReference(token.group, token.tool, folderId, contentId);
+	    return findByContentReference(token.getGroup(), token.getTool(), folderId, contentId);
 	} else if (token.hasGroupToolAndFolder()) {
-	    return findByFolderReference(token.group, token.tool, folderId);
+	    return findByFolderReference(token.getGroup(), token.getTool(), folderId);
 	} else if (token.hasGroupAndTool()) {
-	    return findByRootOnGroup(token.group, token.tool);
+	    return findByRootOnGroup(token.getGroup(), token.getTool());
 	} else if (token.hasGroup()) {
-	    return findDefaultOfGroup(token.group);
+	    return findDefaultOfGroup(token.getGroup());
 	} else if (token.hasNothing()) {
 	    return findDefaultOfGroup(group);
 	} else {

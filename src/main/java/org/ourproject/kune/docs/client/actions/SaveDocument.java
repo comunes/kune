@@ -11,7 +11,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public class SaveDocument extends WorkspaceAction {
     public static final String KEY = "docs.save";
 
-    public void execute(final Object value) {
+    public void execute(final Object value, Object extra) {
 	ContentServiceAsync server = ContentService.App.getInstance();
 	ContentDTO content = (ContentDTO) value;
 	Window.alert("epa!");

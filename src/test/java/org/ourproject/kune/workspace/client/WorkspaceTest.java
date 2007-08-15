@@ -4,7 +4,6 @@ import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.workspace.client.WorkspaceView;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 import org.ourproject.kune.workspace.client.workspace.WorkspacePresenter;
 

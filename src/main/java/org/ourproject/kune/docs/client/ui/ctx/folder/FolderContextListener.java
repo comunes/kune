@@ -4,4 +4,6 @@ public interface FolderContextListener {
     void onAddDocument();
 
     void onAddFolder();
+
+    void onGoParent();
 }

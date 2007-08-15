@@ -5,9 +5,11 @@ import com.google.gwt.user.client.ui.DockPanel;
 public class FolderContextPanel extends DockPanel implements FolderContentView {
     private final ControlsPanel controls;
     private final ItemsPanel items;
+    private final TopBar topBar;
 
     public FolderContextPanel(final FolderContextListener listener) {
-	add(new TopBar(), DockPanel.NORTH);
+	topBar = new TopBar(listener);
+	add(topBar, DockPanel.NORTH);
 	items = new ItemsPanel();
 	add(items, DockPanel.CENTER);
 
@@ -30,4 +32,11 @@ public class FolderContextPanel extends DockPanel implements FolderContentView {
 	controls.setVisibleControls(isAddDocumentVisible, isAddFolderVisible);
     }
 
+    public void setCurrentName(final String name) {
+	topBar.setCurrentName(name);
+    }
+
+    public void setParentButtonVisible(final boolean isVisible) {
+	topBar.setParentButtonVisible(isVisible);
+    }
 }

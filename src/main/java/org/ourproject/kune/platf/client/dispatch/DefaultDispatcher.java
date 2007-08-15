@@ -30,15 +30,19 @@ public class DefaultDispatcher implements Dispatcher {
     }
 
     public void fire(final String eventName, final Object value) {
+	fire(eventName, value, null);
+    }
+
+    public void fire(final String eventName, final Object value, final Object extra) {
 	GWT.log("DISPATCH: " + eventName + " (" + value + ")", null);
 	List list = getSubscriptorsList(eventName);
 	for (int index = 0; index < list.size(); index++) {
-	    fire((Action) list.get(index), value);
+	    fire((Action) list.get(index), value, extra);
 	}
     }
 
-    private void fire(final Action action, final Object value) {
-	action.execute(value);
+    private void fire(final Action action, final Object value, final Object extra) {
+	action.execute(value, extra);
     }
 
     public void fireState(final String encodedEvent) {
