@@ -28,7 +28,7 @@ public class Folder implements HasId {
     @OneToOne(fetch = FetchType.LAZY)
     private Folder parent;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
     private List<Folder> childs;
 
     @OneToMany(mappedBy = "folder")

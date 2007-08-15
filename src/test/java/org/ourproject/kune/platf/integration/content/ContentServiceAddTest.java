@@ -63,12 +63,16 @@ public class ContentServiceAddTest {
     }
 
     public void testAddFolder() throws SerializableException {
-	FolderDTO folder = defaultContent.getFolder();
+	FolderDTO parent = defaultContent.getFolder();
 	String title = "folder name";
-	ContentDTO newState = contentService.addFolder(session.getHash(), groupName, folder.getId(), title);
+	ContentDTO newState = contentService.addFolder(session.getHash(), groupName, parent.getId(), title);
 	assertNotNull(newState);
 	FolderDTO child = newState.getFolder();
-	assertEquals(folder.getAbsolutePath() + FolderDTO.SEP + title, child.getAbsolutePath());
-	assertEquals(1, folder.getChilds().size());
+	assertEquals(parent.getAbsolutePath() + FolderDTO.SEP + title, child.getAbsolutePath());
+	assertEquals(1, parent.getChilds().size());
+	assertEquals(parent.getId(), child.getParentFolderId());
+	ContentDTO defaultAgain = contentService.getContent(session.getHash(), new StateToken());
+	FolderDTO parentAgain = defaultAgain.getFolder();
+	assertEquals(1, parentAgain.getChilds().size());
     }
 }

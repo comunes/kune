@@ -27,6 +27,8 @@ public class FolderManagerDefault extends DefaultManager<Folder, Long> implement
 	String relativePath = parent.getAbsolutePath() + Folder.SEP;
 	Folder folder = new Folder(relativePath, name, group, parent.getToolName());
 	folder.setParent(parent);
+	parent.addFolder(folder);
+	persist(parent);
 	return persist(folder);
     }
 }

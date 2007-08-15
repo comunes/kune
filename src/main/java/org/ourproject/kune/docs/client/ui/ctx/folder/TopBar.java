@@ -72,12 +72,6 @@ class TopBar extends VerticalPanel {
 	iconBarHP.setCellVerticalAlignment(buttonRounded, VerticalPanel.ALIGN_MIDDLE);
 	pathMenu.setStyleName("pathMenu");
 	buttonRounded.setColor("AAA");
-	btnGoParent.addClickListener(new ClickListener() {
-	    public void onClick(final Widget sender) {
-		// TODO
-		Site.info("Test");
-	    }
-	});
 	currentFolder.addClickListener(new ClickListener() {
 
 	    public void onClick(final Widget sender) {
