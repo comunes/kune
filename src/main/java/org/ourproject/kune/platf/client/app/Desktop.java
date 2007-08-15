@@ -8,9 +8,6 @@ import org.ourproject.kune.sitebar.client.bar.SiteBarListener;
 import org.ourproject.kune.sitebar.client.msg.SiteMessage;
 import org.ourproject.kune.workspace.client.Workspace;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.Widget;
@@ -38,14 +35,5 @@ public class Desktop extends DefaultGDesktopPane {
 	    }
 	});
 	Window.enableScrolling(false);
-
-	DeferredCommand.addCommand(new Command() {
-	    public void execute() {
-		GWT.log("Adjusting workspace width", null);
-		int windowWidth = Window.getClientWidth();
-		workspace.adjustSize(windowWidth, Window.getClientHeight());
-		siteMessage.adjustWidth(windowWidth);
-	    }
-	});
     }
 }
