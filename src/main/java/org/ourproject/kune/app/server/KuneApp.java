@@ -12,10 +12,12 @@ import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.KuneService;
 import org.ourproject.kune.platf.server.KunePlatformModule;
 import org.ourproject.kune.platf.server.LoggerMethodInterceptor;
+import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.properties.PropertiesFileName;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Inject;
 import com.google.inject.Scope;
 import com.google.inject.matcher.Matchers;
 import com.google.inject.servlet.SessionScoped;
@@ -49,14 +51,18 @@ public class KuneApp {
 	app.useService("KuneService", KuneService.class);
 	app.useService("ContentService", ContentService.class);
 	app.useService("SiteBarService", SiteBarService.class);
-	app.with(new ApplicationListener() {
-	    public void onApplicationStart(final HttpServletRequest request, final HttpServletResponse response) {
-		String userHash = request.getSession().getId();
-		response.addCookie(new Cookie("userHash", userHash));
-	    }
-	});
+	app.with(KuneApplicationListener.class);
 	app.add(new KuneLifeCycleListener());
-
     }
 
+    public static class KuneApplicationListener implements ApplicationListener {
+	@Inject
+	UserSession userSession;
+
+	public void onApplicationStart(final HttpServletRequest request, final HttpServletResponse response) {
+	    String userHash = request.getSession().getId();
+	    userSession.setHash(userHash);
+	    response.addCookie(new Cookie("userHash", userHash));
+	}
+    }
 }

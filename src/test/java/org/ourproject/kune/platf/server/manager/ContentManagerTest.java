@@ -9,6 +9,7 @@ import static org.junit.Assert.assertSame;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.server.TestDomainHelper;
 import org.ourproject.kune.platf.server.domain.ContentDescriptor;
@@ -38,7 +39,7 @@ public class ContentManagerTest {
 	ContentDescriptor descriptor = TestDomainHelper.createDescriptor(1l, "title", "content");
 	userGroup.setDefaultContent(descriptor);
 
-	ContentDescriptor content = contentManager.getContent(userGroup, null, null, null, null);
+	ContentDescriptor content = contentManager.getContent(userGroup, new StateToken());
 	assertSame(descriptor, content);
     }
 
@@ -52,7 +53,8 @@ public class ContentManagerTest {
 	expect(contentDescriptorManager.get(2l)).andReturn(descriptor);
 	replay(contentDescriptorManager);
 
-	ContentDescriptor content = contentManager.getContent(null, "groupShortName", "toolName", "1", "2");
+	ContentDescriptor content = contentManager.getContent(null, new StateToken("groupShortName", "toolName", "1",
+		"2"));
 	assertSame(descriptor, content);
 	verify(contentDescriptorManager);
     }
@@ -65,7 +67,7 @@ public class ContentManagerTest {
 	expect(contentDescriptorManager.get(1l)).andReturn(descriptor);
 	replay(contentDescriptorManager);
 
-	contentManager.getContent(null, "groupShortName", "toolName", "5", "1");
+	contentManager.getContent(null, new StateToken("groupShortName", "toolName", "5", "1"));
 	verify(contentDescriptorManager);
     }
 
@@ -77,7 +79,7 @@ public class ContentManagerTest {
 	expect(contentDescriptorManager.get(1l)).andReturn(descriptor);
 	replay(contentDescriptorManager);
 
-	contentManager.getContent(null, "groupShortName", "toolName", "5", "1");
+	contentManager.getContent(null, new StateToken("groupShortName", "toolName", "5", "1"));
 	verify(contentDescriptorManager);
     }
 
@@ -89,13 +91,13 @@ public class ContentManagerTest {
 	expect(contentDescriptorManager.get(1l)).andReturn(descriptor);
 	replay(contentDescriptorManager);
 
-	contentManager.getContent(null, "groupShortName", "toolName", "5", "1");
+	contentManager.getContent(null, new StateToken("groupShortName", "toolName", "5", "1"));
 	verify(contentDescriptorManager);
     }
 
     @Test(expected = ContentNotFoundException.class)
     public void voyAJoder() throws ContentNotFoundException {
-	contentManager.getContent(null, null, "toolName", "1", "2");
+	contentManager.getContent(null, new StateToken(null, "toolName", "1", "2"));
     }
 
     @Test
@@ -104,7 +106,8 @@ public class ContentManagerTest {
 	expect(folderManager.find(1l)).andReturn(folder);
 
 	replay(folderManager);
-	ContentDescriptor content = contentManager.getContent(null, "groupShortName", "toolName", "1", null);
+	ContentDescriptor content = contentManager.getContent(null, new StateToken("groupShortName", "toolName", "1",
+		null));
 	assertNotNull(content);
 	assertSame(folder, content.getFolder());
 	verify(folderManager);
@@ -118,7 +121,8 @@ public class ContentManagerTest {
 	expect(groupManager.findByShortName("groupShortName")).andReturn(group);
 	replay(groupManager);
 
-	ContentDescriptor content = contentManager.getContent(null, "groupShortName", "toolName", null, null);
+	StateToken token = new StateToken("groupShortName", "toolName", null, null);
+	ContentDescriptor content = contentManager.getContent(null, token);
 	assertSame(folder, content.getFolder());
 	verify(groupManager);
     }
@@ -131,7 +135,7 @@ public class ContentManagerTest {
 	expect(groupManager.findByShortName("groupShortName")).andReturn(group);
 	replay(groupManager);
 
-	ContentDescriptor content = contentManager.getContent(null, "groupShortName", null, null, null);
+	ContentDescriptor content = contentManager.getContent(null, new StateToken("groupShortName", null, null, null));
 	assertSame(descriptor, content);
 	verify(groupManager);
     }
@@ -141,7 +145,7 @@ public class ContentManagerTest {
 	ContentDescriptor contentDescriptor = new ContentDescriptor();
 	Group group = new Group();
 	group.setDefaultContent(contentDescriptor);
-	ContentDescriptor content = contentManager.getContent(group, null, null, null, null);
+	ContentDescriptor content = contentManager.getContent(group, new StateToken());
 	assertSame(contentDescriptor, content);
     }
 
@@ -153,7 +157,7 @@ public class ContentManagerTest {
 	expect(contentDescriptorManager.get(1l)).andReturn(descriptor);
 	replay(contentDescriptorManager);
 
-	contentManager.getContent(null, "groupShortName", "toolName", "5", "1a");
+	contentManager.getContent(null, new StateToken("groupShortName", "toolName", "5", "1a"));
 	verify(contentDescriptorManager);
     }
 

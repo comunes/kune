@@ -1,5 +1,6 @@
 package org.ourproject.kune.platf.server.manager;
 
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.ContentDescriptor;
@@ -25,20 +26,19 @@ public class ContentManagerDefault implements ContentManager {
 	this.contentDescriptorManager = contentDescriptorManager;
     }
 
-    public ContentDescriptor getContent(final Group group, final String groupName, final String toolName,
-	    final String folderRef, final String contentRef) throws ContentNotFoundException {
-	Long contentId = checkAndParse(contentRef);
-	Long folderId = checkAndParse(folderRef);
+    public ContentDescriptor getContent(final Group group, final StateToken token) throws ContentNotFoundException {
+	Long contentId = checkAndParse(token.document);
+	Long folderId = checkAndParse(token.folder);
 
-	if (noneNull(groupName, toolName, folderRef, contentRef)) {
-	    return findByContentReference(groupName, toolName, folderId, contentId);
-	} else if (noneNull(groupName, toolName, folderRef)) {
-	    return findByFolderReference(groupName, toolName, folderId);
-	} else if (noneNull(groupName, toolName)) {
-	    return findByRootOnGroup(groupName, toolName);
-	} else if (noneNull(groupName)) {
-	    return findDefaultOfGroup(groupName);
-	} else if (allNull(groupName, toolName, folderRef, contentRef)) {
+	if (token.hasAll()) {
+	    return findByContentReference(token.group, token.tool, folderId, contentId);
+	} else if (token.hasGroupToolAndFolder()) {
+	    return findByFolderReference(token.group, token.tool, folderId);
+	} else if (token.hasGroupAndTool()) {
+	    return findByRootOnGroup(token.group, token.tool);
+	} else if (token.hasGroup()) {
+	    return findDefaultOfGroup(token.group);
+	} else if (token.hasNothing()) {
 	    return findDefaultOfGroup(group);
 	} else {
 	    throw new ContentNotFoundException();
@@ -100,24 +100,6 @@ public class ContentManagerDefault implements ContentManager {
     private ContentDescriptor findDefaultOfGroup(final Group group) {
 	ContentDescriptor defaultContent = group.getDefaultContent();
 	return defaultContent;
-    }
-
-    private boolean allNull(final String... args) {
-	for (String value : args) {
-	    if (value != null) {
-		return false;
-	    }
-	}
-	return true;
-    }
-
-    private boolean noneNull(final String... args) {
-	for (String value : args) {
-	    if (value == null) {
-		return false;
-	    }
-	}
-	return true;
     }
 
     public void save(final Content content, final User user, final String content2) {

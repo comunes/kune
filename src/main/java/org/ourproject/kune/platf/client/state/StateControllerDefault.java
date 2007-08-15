@@ -1,6 +1,7 @@
 package org.ourproject.kune.platf.client.state;
 
 import org.ourproject.kune.platf.client.app.Application;
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.tool.Tool;
@@ -34,26 +35,20 @@ public class StateControllerDefault implements StateController {
 
     private void onHistoryChanged(final StateToken newState) {
 	Site.showProgress("cargando...");
-	server.getContent(state.user, newState.group, newState.tool, newState.folder, newState.document,
-		new AsyncCallback() {
-		    public void onFailure(final Throwable caught) {
-			Site.hideProgress();
-		    }
+	server.getContent(state.user, newState, new AsyncCallback() {
+	    public void onFailure(final Throwable caught) {
+		Site.hideProgress();
+	    }
 
-		    public void onSuccess(final Object result) {
-			GWT.log("State response: " + result, null);
-			loadContent((ContentDTO) result);
-			Site.hideProgress();
-		    }
+	    public void onSuccess(final Object result) {
+		GWT.log("State response: " + result, null);
+		setState((ContentDTO) result);
+	    }
 
-		});
+	});
     }
 
-    public String getUser() {
-	return state.user;
-    }
-
-    private void loadContent(final ContentDTO content) {
+    public void setState(final ContentDTO content) {
 	Workspace workspace = app.getWorkspace();
 	workspace.showGroup(content.getGroup());
 	String toolName = content.getToolName();
@@ -63,6 +58,11 @@ public class StateControllerDefault implements StateController {
 	tool.setContent(content);
 	workspace.setContent(tool.getContent());
 	workspace.setContext(tool.getContext());
+	Site.hideProgress();
+    }
+
+    public String getUser() {
+	return state.user;
     }
 
 }

@@ -1,5 +1,8 @@
 package org.ourproject.kune.platf.server.services;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.rpc.ContentService;
@@ -58,8 +61,8 @@ public class ContentServerService implements ContentService {
     }
 
     @Transactional(type = TransactionType.READ_ONLY)
-    public ContentDTO getContent(final String userHash, final String groupName, final String toolName,
-	    final String folderRef, final String contentRef) throws ContentNotFoundException {
+    public ContentDTO getContent(final String userHash, final StateToken token) throws ContentNotFoundException {
+	// TODO Auto-generated method stub
 
 	// siempre tenenemos un grupo (aunque sea por defecto)
 	// pero no siempre tenemos un usuario loggeado!
@@ -72,7 +75,7 @@ public class ContentServerService implements ContentService {
 	    group = user.getUserGroup();
 	}
 
-	ContentDescriptor descriptor = contentManager.getContent(group, groupName, toolName, folderRef, contentRef);
+	ContentDescriptor descriptor = contentManager.getContent(group, token);
 	return buildResponse(user, descriptor);
     }
 
@@ -96,7 +99,6 @@ public class ContentServerService implements ContentService {
 
     @Authenticated
     public void save(final String userHash, final ContentDTO dto) throws AccessViolationException {
-
     }
 
     private AccessLists getContentAccessList(final ContentDescriptor descriptor) {
@@ -113,9 +115,11 @@ public class ContentServerService implements ContentService {
     }
 
     @Authenticated
+    @Transactional(type = TransactionType.READ_WRITE)
     public ContentDTO addContent(final String userHash, final Long parentFolderId, final String name) {
 	User user = session.getUser();
 	Folder folder = folderManager.find(parentFolderId);
+	Log log = LogFactory.getLog(ContentServerService.class);
 	ContentDescriptor descriptor = contentDescriptorManager.createContent(user, folder);
 	return buildResponse(user, descriptor);
     }

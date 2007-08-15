@@ -1,6 +1,8 @@
-package org.ourproject.kune.platf.client.state;
+package org.ourproject.kune.platf.client.dto;
 
-public class StateToken {
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+public class StateToken implements IsSerializable {
     private static final String[] EMPTY = new String[0];
     private static final String DOT = ".";
     public final String group;
@@ -13,6 +15,10 @@ public class StateToken {
 	this.tool = tool;
 	this.folder = folder;
 	this.document = document;
+    }
+
+    public StateToken() {
+	this(null, null, null, null);
     }
 
     public StateToken(final String encoded) {
@@ -57,4 +63,23 @@ public class StateToken {
 	return document != null;
     }
 
+    public boolean hasAll() {
+	return group != null && tool != null && folder != null && document != null;
+    }
+
+    public boolean hasGroupToolAndFolder() {
+	return group != null && tool != null && folder != null;
+    }
+
+    public boolean hasGroupAndTool() {
+	return group != null && tool != null;
+    }
+
+    public boolean hasGroup() {
+	return group != null;
+    }
+
+    public boolean hasNothing() {
+	return group == null && tool == null && folder == null && document == null;
+    }
 }

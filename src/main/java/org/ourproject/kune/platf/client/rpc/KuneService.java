@@ -9,6 +9,7 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
+//TODO: cambiar nombre a UserService
 public interface KuneService extends RemoteService {
 
     void createNewGroup(GroupDTO group) throws SerializableException;

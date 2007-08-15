@@ -3,6 +3,7 @@ package org.ourproject.kune.platf.client.state;
 import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
+import org.ourproject.kune.platf.client.dto.StateToken;
 
 public class StateTokenTest {
 

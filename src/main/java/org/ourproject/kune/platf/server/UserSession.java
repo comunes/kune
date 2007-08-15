@@ -7,6 +7,7 @@ import com.google.inject.servlet.SessionScoped;
 @SessionScoped
 public class UserSession {
     private User user;
+    private String hash;
 
     public UserSession() {
     }
@@ -18,6 +19,14 @@ public class UserSession {
     public User setUser(final User user) {
 	this.user = user;
 	return user;
+    }
+
+    public String getHash() {
+	return hash;
+    }
+
+    public void setHash(final String hash) {
+	this.hash = hash;
     }
 
 }

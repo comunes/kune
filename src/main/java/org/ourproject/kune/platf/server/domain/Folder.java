@@ -109,6 +109,8 @@ public class Folder implements HasId {
     }
 
     public void addContent(final ContentDescriptor descriptor) {
+	// FIXME: algo de lazy initialization (con size() se arregla...)
+	contents.size();
 	contents.add(descriptor);
     }
 

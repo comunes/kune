@@ -35,8 +35,8 @@ public class Application {
 	return cycleListeners.toArray(new LifeCycleListener[cycleListeners.size()]);
     }
 
-    public void with(final ApplicationListener appListener) {
-	currentApp.setListener(appListener);
+    public void with(final Class<? extends ApplicationListener> appListenerType) {
+	currentApp.setListener(appListenerType);
     }
 
 }

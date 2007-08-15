@@ -14,7 +14,7 @@ public class ApplicationFilter extends AbstractProcessor {
     private final String applicationName;
     private final String appHome;
     private final String defaultFile;
-    private ApplicationListener appListener;
+    private Class<? extends ApplicationListener> appListenerType;
 
     public ApplicationFilter(final String applicationName, final String defaultFile, final String appHome) {
 	super(SimpleFilter.GET);
@@ -61,8 +61,8 @@ public class ApplicationFilter extends AbstractProcessor {
     }
 
     private void callAppLifecycleListeners(final HttpServletRequest request, final HttpServletResponse response) {
-	injector.injectMembers(appListener);
-	if (appListener != null) {
+	ApplicationListener appListener = injector.getInstance(appListenerType);
+	if (appListenerType != null) {
 	    appListener.onApplicationStart(request, response);
 	}
     }
@@ -71,8 +71,8 @@ public class ApplicationFilter extends AbstractProcessor {
 	return relativeURL.length() == 1 && relativeURL.charAt(0) == '/';
     }
 
-    public void setListener(final ApplicationListener appListener) {
-	this.appListener = appListener;
+    public void setListener(final Class<? extends ApplicationListener> appListenerType) {
+	this.appListenerType = appListenerType;
     }
 
 }

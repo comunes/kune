@@ -8,6 +8,7 @@ import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.ContentDescriptorManager;
 import org.ourproject.kune.platf.server.manager.ToolConfigurationManager;
 import org.ourproject.kune.platf.server.tool.ServerTool;
+import org.ourproject.kune.platf.server.tool.ToolRegistry;
 
 import com.google.inject.Inject;
 
@@ -21,6 +22,11 @@ public class DocumentServerTool implements ServerTool {
 	    final ToolConfigurationManager configurationManager) {
 	this.contentDescriptorManager = contentDescriptorManager;
 	this.configurationManager = configurationManager;
+    }
+
+    @Inject
+    public void register(final ToolRegistry registry) {
+	registry.register(this);
     }
 
     public String getName() {

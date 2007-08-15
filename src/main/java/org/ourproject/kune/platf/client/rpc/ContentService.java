@@ -1,5 +1,6 @@
 package org.ourproject.kune.platf.client.rpc;
 
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.workspace.client.dto.ContentDTO;
@@ -10,8 +11,7 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 public interface ContentService extends RemoteService {
 
-    ContentDTO getContent(String userHash, String groupName, String toolName, String folderRef, String contentRef)
-	    throws ContentNotFoundException;
+    ContentDTO getContent(String userHash, StateToken token) throws ContentNotFoundException;
 
     void save(String userHash, ContentDTO dto) throws AccessViolationException;
 
