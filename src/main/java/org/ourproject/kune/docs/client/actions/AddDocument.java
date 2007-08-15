@@ -1,7 +1,7 @@
 package org.ourproject.kune.docs.client.actions;
 
 import org.ourproject.kune.docs.client.ui.DocumentFactory;
-import org.ourproject.kune.docs.client.ui.forms.newitem.NewDocumentForm;
+import org.ourproject.kune.docs.client.ui.forms.newdoc.NewDocumentForm;
 import org.ourproject.kune.platf.client.dto.FolderDTO;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
