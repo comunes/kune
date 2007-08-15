@@ -98,7 +98,7 @@ public class TestKuneInitialization {
 	assertNotNull(content.getFolder());
 	assertNotNull(content.getFolder().getId());
 	assertNotNull(content.getToolName());
-	assertNotNull(content.getDocRef());
+	assertNotNull(content.getDocumentId());
     }
 
     private <T extends RemoteService> T getService(final Class<T> type) {

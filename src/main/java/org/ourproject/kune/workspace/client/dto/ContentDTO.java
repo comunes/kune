@@ -9,7 +9,7 @@ import org.ourproject.kune.platf.client.state.StateToken;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class ContentDTO implements IsSerializable {
-    private String docRef;
+    private String documentId;
     private String content;
     private String title;
     private String toolName;
@@ -25,21 +25,21 @@ public class ContentDTO implements IsSerializable {
     }
 
     public ContentDTO(final String docRef, final String title, final String content) {
-	this.docRef = docRef;
+	this.documentId = docRef;
 	this.title = title;
 	this.content = content;
     }
 
-    public void setDocRef(final String docRef) {
-	this.docRef = docRef;
+    public void setDocumentId(final String docRef) {
+	this.documentId = docRef;
     }
 
     public void setContent(final String content) {
 	this.content = content;
     }
 
-    public String getDocRef() {
-	return docRef;
+    public String getDocumentId() {
+	return documentId;
     }
 
     public String getContent() {
@@ -87,11 +87,11 @@ public class ContentDTO implements IsSerializable {
     }
 
     public String encodeState() {
-	return StateToken.encode(group.getShortName(), toolName, folder.getId().toString(), getDocRef());
+	return StateToken.encode(group.getShortName(), toolName, folder.getId().toString(), getDocumentId());
     }
 
     public boolean hasDocument() {
-	return docRef != null;
+	return documentId != null;
     }
 
     public AccessListsDTO getAccessLists() {
