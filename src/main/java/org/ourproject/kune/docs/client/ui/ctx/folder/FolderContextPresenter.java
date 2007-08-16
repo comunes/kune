@@ -7,6 +7,7 @@ import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContentDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.workspace.client.ui.ctx.items.FolderContentView;
 
 import com.google.gwt.core.client.GWT;
 

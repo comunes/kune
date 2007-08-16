@@ -1,4 +1,4 @@
-package org.ourproject.kune.docs.client.ui.ctx.folder;
+package org.ourproject.kune.workspace.client.ui.ctx.items;
 
 import java.util.HashMap;
 

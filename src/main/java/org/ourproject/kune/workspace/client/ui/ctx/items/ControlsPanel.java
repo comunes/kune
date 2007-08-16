@@ -1,4 +1,4 @@
-package org.ourproject.kune.docs.client.ui.ctx.folder;
+package org.ourproject.kune.workspace.client.ui.ctx.items;
 
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;

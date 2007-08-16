@@ -5,12 +5,12 @@ import org.ourproject.kune.docs.client.actions.AddFolder;
 import org.ourproject.kune.docs.client.actions.GoParentFolder;
 import org.ourproject.kune.docs.client.ui.ctx.admin.AdminContext;
 import org.ourproject.kune.docs.client.ui.ctx.folder.FolderContext;
-import org.ourproject.kune.docs.client.ui.ctx.folder.FolderContextListener;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
+import org.ourproject.kune.workspace.client.ui.ctx.items.FolderContextListener;
 
 public class DocumentContextPresenter implements DocumentContext, FolderContextListener {
     private final WorkspaceDeckView view;
