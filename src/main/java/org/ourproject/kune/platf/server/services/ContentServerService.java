@@ -106,11 +106,11 @@ public class ContentServerService implements ContentService {
 	ContentDescriptor descriptor = contentDescriptorManager.find(id);
 	AccessRights accessRights = accessRightsManager.get(userGroup, getContentAccessList(descriptor));
 	if (accessRights.isEditable()) {
-	    contentDescriptorManager.save(userGroup, descriptor, content);
+	    descriptor = contentDescriptorManager.save(userGroup, descriptor, content);
+	    return descriptor.getVersion();
 	} else {
 	    throw new AccessViolationException();
 	}
-	return 0;
     }
 
     private AccessLists getContentAccessList(final ContentDescriptor descriptor) {

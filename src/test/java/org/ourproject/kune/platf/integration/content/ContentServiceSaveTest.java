@@ -1,17 +1,30 @@
 package org.ourproject.kune.platf.integration.content;
 
-import org.junit.Before;
-import org.ourproject.kune.platf.client.rpc.ContentService;
-import org.ourproject.kune.platf.integration.IntegrationTestHelper;
-import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
+import static org.junit.Assert.assertEquals;
 
-public class ContentServiceSaveTest {
-    ContentService service;
-    SiteBarService loginService;
+import org.junit.Before;
+import org.junit.Test;
+import org.ourproject.kune.platf.integration.IntegrationTestHelper;
+import org.ourproject.kune.workspace.client.dto.ContentDTO;
+
+import com.google.gwt.user.client.rpc.SerializableException;
+
+public class ContentServiceSaveTest extends ContentServiceIntegrationTest {
 
     @Before
-    public void init() {
+    public void init() throws SerializableException {
 	new IntegrationTestHelper(this);
+	doLogin();
     }
 
+    @Test
+    public void testSaveAndRetrieve() throws SerializableException {
+	String text = "epa";
+	ContentDTO defaultContent = getDefaultContent();
+	int version = defaultContent.getVersion();
+	int currentVersion = contentService.save(getHash(), defaultContent.getDocumentId(), text);
+	assertEquals(version + 1, currentVersion);
+	ContentDTO again = contentService.getContent(getHash(), defaultContent.getState());
+	assertEquals(text, again.getContent());
+    }
 }

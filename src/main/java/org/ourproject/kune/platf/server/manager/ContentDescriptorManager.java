@@ -9,6 +9,6 @@ public interface ContentDescriptorManager extends Manager<ContentDescriptor, Lon
 
     public ContentDescriptor createContent(String title, User user, Folder folder);
 
-    public void save(Group userGroup, ContentDescriptor descriptor, String content);
+    public ContentDescriptor save(Group userGroup, ContentDescriptor descriptor, String content);
 
 }

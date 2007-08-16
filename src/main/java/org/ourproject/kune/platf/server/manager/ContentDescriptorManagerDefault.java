@@ -32,11 +32,11 @@ public class ContentDescriptorManagerDefault extends DefaultManager<ContentDescr
 	return persist(descriptor);
     }
 
-    public void save(final Group userGroup, final ContentDescriptor descriptor, final String content) {
+    public ContentDescriptor save(final Group userGroup, final ContentDescriptor descriptor, final String content) {
 	Revision revision = new Revision();
 	revision.setTitle(descriptor.getTitle());
 	revision.setDataContent(content);
 	descriptor.addRevision(revision);
-	persist(descriptor);
+	return persist(descriptor);
     }
 }

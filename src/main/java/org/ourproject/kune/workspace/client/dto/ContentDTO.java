@@ -10,6 +10,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class ContentDTO implements IsSerializable {
     private String documentId;
+    private int version;
     private String content;
     private String title;
     private String toolName;
@@ -29,6 +30,14 @@ public class ContentDTO implements IsSerializable {
 	this.documentId = docRef;
 	this.title = title;
 	this.content = content;
+    }
+
+    public int getVersion() {
+	return version;
+    }
+
+    public void setVersion(final int version) {
+	this.version = version;
     }
 
     public void setDocumentId(final String docRef) {

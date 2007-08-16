@@ -8,35 +8,22 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
-import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
-import org.ourproject.kune.platf.server.UserSession;
-import org.ourproject.kune.platf.server.properties.DatabaseProperties;
-import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
 import org.ourproject.kune.workspace.client.dto.ContentDTO;
 
 import com.google.gwt.user.client.rpc.SerializableException;
-import com.google.inject.Inject;
 
-public class GetContentTest {
-    @Inject
-    UserSession session;
-    private IntegrationTestHelper helper;
-    @Inject
-    DatabaseProperties properties;
-    @Inject
-    ContentService service;
+public class GetContentTest extends ContentServiceIntegrationTest {
 
     @Before
     public void create() {
-	this.helper = new IntegrationTestHelper(this);
+	new IntegrationTestHelper(this);
     }
 
     @Test
     public void contentWithLoggedUserIsEditable() throws SerializableException {
-	SiteBarService loginService = helper.getService(SiteBarService.class);
-	loginService.login(properties.getDefaultSiteShortName(), properties.getDefaultSiteAdminPassword());
-	ContentDTO response = service.getContent(null, new StateToken());
+	doLogin();
+	ContentDTO response = contentService.getContent(null, new StateToken());
 	assertNotNull(response.getContentRights());
 	assertTrue(response.getContentRights().isEditable);
 	// assertTrue(response.getAccessLists().getAdmin().size() == 1);
@@ -44,7 +31,7 @@ public class GetContentTest {
 
     @Test
     public void notLoggedUserShouldNotEditDefaultDoc() throws ContentNotFoundException {
-	ContentDTO content = service.getContent(null, new StateToken());
+	ContentDTO content = contentService.getContent(null, new StateToken());
 	assertFalse(content.getContentRights().isAdministrable);
 	assertFalse(content.getContentRights().isEditable);
 	assertTrue(content.getContentRights().isVisible);
@@ -55,7 +42,7 @@ public class GetContentTest {
 
     @Test
     public void defaultCountentShouldExist() throws ContentNotFoundException {
-	ContentDTO content = service.getContent(null, new StateToken());
+	ContentDTO content = contentService.getContent(null, new StateToken());
 	assertNotNull(content);
 	assertNotNull(content.getGroup());
 	assertNotNull(content.getFolder());

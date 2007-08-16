@@ -24,6 +24,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     public void init() throws SerializableException {
 	new IntegrationTestHelper(this);
 	groupName = getDefGroupName();
+	doLogin();
 	defaultContent = getDefaultContent();
     }
 

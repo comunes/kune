@@ -11,7 +11,7 @@ import org.ourproject.kune.workspace.client.dto.ContentDTO;
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
 
-public class ContentServiceIntegrationTest {
+public abstract class ContentServiceIntegrationTest {
     @Inject
     UserSession session;
     @Inject
@@ -22,13 +22,20 @@ public class ContentServiceIntegrationTest {
     DatabaseProperties properties;
 
     protected ContentDTO getDefaultContent() throws SerializableException, ContentNotFoundException {
-	loginService.login(getDefGroupName(), properties.getDefaultSiteAdminPassword());
 	ContentDTO content = contentService.getContent(session.getHash(), new StateToken());
 	return content;
     }
 
+    protected void doLogin() throws SerializableException {
+	loginService.login(getDefGroupName(), properties.getDefaultSiteAdminPassword());
+    }
+
     protected String getDefGroupName() {
 	return properties.getDefaultSiteShortName();
+    }
+
+    public String getHash() {
+	return session.getHash();
     }
 
 }
