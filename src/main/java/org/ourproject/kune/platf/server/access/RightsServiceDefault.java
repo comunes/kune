@@ -1,4 +1,4 @@
-package org.ourproject.kune.platf.server.manager;
+package org.ourproject.kune.platf.server.access;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -7,12 +7,8 @@ import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.GroupList;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
-import org.ourproject.kune.platf.server.model.AccessRights;
 
-import com.google.inject.Singleton;
-
-@Singleton
-public class AccessRightsManagerDefault implements AccessRightsManager {
+class RightsServiceDefault implements RightsService {
     // TODO: mirar rendimiento
     HashSet<Group> visited;
 

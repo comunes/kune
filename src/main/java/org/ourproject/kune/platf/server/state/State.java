@@ -1,10 +1,11 @@
-package org.ourproject.kune.platf.server.model;
+package org.ourproject.kune.platf.server.state;
 
+import org.ourproject.kune.platf.server.access.AccessRights;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Folder;
 import org.ourproject.kune.platf.server.domain.Group;
 
-public class Content {
+public class State {
     private String documentId;
     private String content;
     private String title;
@@ -17,7 +18,7 @@ public class Content {
     private Double rate;
     private Integer rateByUsers;
 
-    public Content() {
+    public State() {
     }
 
     public AccessLists getAccessLists() {

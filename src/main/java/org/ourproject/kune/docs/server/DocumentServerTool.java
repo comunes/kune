@@ -1,6 +1,6 @@
 package org.ourproject.kune.docs.server;
 
-import org.ourproject.kune.platf.server.domain.ContentDescriptor;
+import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Folder;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.ToolConfiguration;
@@ -45,7 +45,7 @@ public class DocumentServerTool implements ServerTool {
 	    config.setRoot(folder);
 	    group.setToolConfig(NAME, config);
 	    configurationManager.persist(config);
-	    ContentDescriptor descriptor = contentDescriptorManager.createContent("Kune docs!", user, folder);
+	    Content descriptor = contentDescriptorManager.createContent("Kune docs!", user, folder);
 	    group.setDefaultContent(descriptor);
 	}
 	return group;

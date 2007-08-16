@@ -1,9 +1,8 @@
-package org.ourproject.kune.platf.server.manager;
+package org.ourproject.kune.platf.server.access;
 
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.model.AccessRights;
 
-public interface AccessRightsManager {
+interface RightsService {
     public AccessRights get(final Group userGroup, final AccessLists accessList);
 }

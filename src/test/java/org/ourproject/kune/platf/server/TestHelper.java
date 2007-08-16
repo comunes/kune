@@ -10,14 +10,14 @@ import com.wideplay.warp.jpa.JpaUnit;
 
 public class TestHelper {
     public static void inject(final Object target) {
-	TestHelper.create(new KunePlatformModule(), "test").injectMembers(target);
+	TestHelper.create(new KunePlatformModule(), "test", "kune.properties").injectMembers(target);
     }
 
-    public static Injector create(final Module module, final String persistenceUnit) {
+    public static Injector create(final Module module, final String persistenceUnit, final String propetiesFileName) {
 	Injector injector = Guice.createInjector(module, new Module() {
 	    public void configure(Binder binder) {
 		binder.bindConstant().annotatedWith(JpaUnit.class).to(persistenceUnit);
-		binder.bindConstant().annotatedWith(PropertiesFileName.class).to("kune.test.properties");
+		binder.bindConstant().annotatedWith(PropertiesFileName.class).to(propetiesFileName);
 	    }
 	});
 	return injector;

@@ -6,19 +6,19 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.dto.ContentDescriptorDTO;
+import org.ourproject.kune.platf.client.dto.ContentDTO;
 import org.ourproject.kune.platf.client.dto.FolderDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.server.TestHelper;
-import org.ourproject.kune.platf.server.domain.ContentDescriptor;
+import org.ourproject.kune.platf.server.access.AccessRights;
+import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Folder;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.Revision;
-import org.ourproject.kune.platf.server.model.AccessRights;
-import org.ourproject.kune.platf.server.model.Content;
-import org.ourproject.kune.workspace.client.dto.ContentDTO;
+import org.ourproject.kune.platf.server.state.State;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.inject.Inject;
 
@@ -33,10 +33,10 @@ public class MapperTest {
 
     @Test
     public void testContentMapping() {
-	Content c = new Content();
+	State c = new State();
 	c.setContentRights(new AccessRights(true, true, true));
 
-	ContentDTO dto = mapper.map(c, ContentDTO.class);
+	StateDTO dto = mapper.map(c, StateDTO.class);
 	assertEquals(c.getContentRights().isAdministrable(), dto.getContentRights().isAdministrable);
     }
 
@@ -50,13 +50,13 @@ public class MapperTest {
 
     @Test
     public void testContentDescriptorMapping() {
-	ContentDescriptor d = new ContentDescriptor();
+	Content d = new Content();
 	d.setId(1l);
 	Revision revision = new Revision();
 	revision.getData().setTitle("title");
 	d.addRevision(revision);
 
-	ContentDescriptorDTO dto = mapper.map(d, ContentDescriptorDTO.class);
+	ContentDTO dto = mapper.map(d, ContentDTO.class);
 	assertEquals(1l, dto.getId());
 	assertEquals("title", dto.getTitle());
     }
@@ -66,14 +66,14 @@ public class MapperTest {
 	Folder folder = new Folder();
 	folder.addFolder(new Folder());
 	folder.addFolder(new Folder());
-	folder.addContent(new ContentDescriptor());
-	folder.addContent(new ContentDescriptor());
-	folder.addContent(new ContentDescriptor());
+	folder.addContent(new Content());
+	folder.addContent(new Content());
+	folder.addContent(new Content());
 
 	FolderDTO dto = mapper.map(folder, FolderDTO.class);
 	assertEquals(2, dto.getChilds().size());
 	assertEquals(3, dto.getContents().size());
-	assertTrue(dto.getContents().get(0) instanceof ContentDescriptorDTO);
+	assertTrue(dto.getContents().get(0) instanceof ContentDTO);
 	assertTrue(dto.getChilds().get(0) instanceof FolderDTO);
     }
 

@@ -14,15 +14,15 @@ public class Rate {
     Long id;
 
     @ManyToOne
-    ContentDescriptor contentDescriptor;
+    Content content;
     @ManyToOne
     User rater;
 
     Double value;
 
-    public Rate(final User rater, final ContentDescriptor contentDescriptor, final Double value) {
+    public Rate(final User rater, final Content content, final Double value) {
 	this.rater = rater;
-	this.contentDescriptor = contentDescriptor;
+	this.content = content;
 	this.value = value;
     }
 
@@ -38,12 +38,12 @@ public class Rate {
 	this.id = id;
     }
 
-    public ContentDescriptor getContentDescriptor() {
-	return contentDescriptor;
+    public Content getContent() {
+	return content;
     }
 
-    public void setContentDescriptor(final ContentDescriptor contentDescriptor) {
-	this.contentDescriptor = contentDescriptor;
+    public void setContent(final Content content) {
+	this.content = content;
     }
 
     public User getRater() {

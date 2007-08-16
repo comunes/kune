@@ -35,7 +35,7 @@ public class Group implements HasId {
     AdmissionType admissionType;
 
     @OneToOne
-    private ContentDescriptor defaultContent;
+    private Content defaultContent;
 
     private SocialNetwork socialNetwork;
 
@@ -96,11 +96,11 @@ public class Group implements HasId {
 	this.longName = longName;
     }
 
-    public ContentDescriptor getDefaultContent() {
+    public Content getDefaultContent() {
 	return defaultContent;
     }
 
-    public void setDefaultContent(final ContentDescriptor defaultContent) {
+    public void setDefaultContent(final Content defaultContent) {
 	this.defaultContent = defaultContent;
     }
 

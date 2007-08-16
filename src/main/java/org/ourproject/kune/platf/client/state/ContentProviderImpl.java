@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
-import org.ourproject.kune.workspace.client.dto.ContentDTO;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -19,7 +19,7 @@ public class ContentProviderImpl implements ContentProvider {
     }
 
     public void getContent(final String user, final StateToken newState, final AsyncCallback callback) {
-	ContentDTO catched = getCached(newState);
+	StateDTO catched = getCached(newState);
 	if (catched != null) {
 	    callback.onSuccess(catched);
 	} else {
@@ -27,11 +27,11 @@ public class ContentProviderImpl implements ContentProvider {
 	}
     }
 
-    private ContentDTO getCached(final StateToken newState) {
-	return (ContentDTO) cache.remove(newState);
+    private StateDTO getCached(final StateToken newState) {
+	return (StateDTO) cache.remove(newState);
     }
 
-    public void cache(final StateToken encodeState, final ContentDTO content) {
+    public void cache(final StateToken encodeState, final StateDTO content) {
 	cache.put(encodeState, content);
     }
 

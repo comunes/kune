@@ -1,7 +1,7 @@
 package org.ourproject.kune.platf.server;
 
 import org.ourproject.kune.platf.server.domain.AccessLists;
-import org.ourproject.kune.platf.server.domain.ContentDescriptor;
+import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Data;
 import org.ourproject.kune.platf.server.domain.Folder;
 import org.ourproject.kune.platf.server.domain.Group;
@@ -64,8 +64,8 @@ public class TestDomainHelper {
 	return lists;
     }
 
-    public static ContentDescriptor createDescriptor(final long id, final String title, final String content) {
-	ContentDescriptor descriptor = new ContentDescriptor();
+    public static Content createDescriptor(final long id, final String title, final String content) {
+	Content descriptor = new Content();
 	descriptor.setId(id);
 	Revision rev = new Revision();
 	descriptor.addRevision(rev);

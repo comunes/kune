@@ -16,9 +16,6 @@ import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
 
 public class GroupManagerTest extends PersistenceTest {
-
-    @Inject
-    UserManager userManager;
     @Inject
     User userFinder;
     @Inject
@@ -34,7 +31,7 @@ public class GroupManagerTest extends PersistenceTest {
 	assertEquals(0, userFinder.getAll().size());
 	assertEquals(0, groupFinder.getAll().size());
 	user = new User("the user name", "userName", "email", "userPassword");
-	userManager.createUser(user);
+	groupManager.createUserGroup(user);
     }
 
     @Test

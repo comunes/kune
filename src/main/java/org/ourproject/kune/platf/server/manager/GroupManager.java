@@ -15,4 +15,8 @@ public interface GroupManager extends Manager<Group, Long> {
 
     Group createUserGroup(User user);
 
+    Group getDefaultGroup();
+
+    // User createUser(User user) throws SerializableException;
+
 }

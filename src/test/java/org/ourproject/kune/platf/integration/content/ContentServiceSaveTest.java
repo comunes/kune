@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
-import org.ourproject.kune.workspace.client.dto.ContentDTO;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 
@@ -20,11 +20,11 @@ public class ContentServiceSaveTest extends ContentServiceIntegrationTest {
     @Test
     public void testSaveAndRetrieve() throws SerializableException {
 	String text = "epa";
-	ContentDTO defaultContent = getDefaultContent();
+	StateDTO defaultContent = getDefaultContent();
 	int version = defaultContent.getVersion();
 	int currentVersion = contentService.save(getHash(), defaultContent.getDocumentId(), text);
 	assertEquals(version + 1, currentVersion);
-	ContentDTO again = contentService.getContent(getHash(), defaultContent.getState());
+	StateDTO again = contentService.getContent(getHash(), defaultContent.getState());
 	assertEquals(text, again.getContent());
     }
 }

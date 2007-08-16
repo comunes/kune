@@ -7,9 +7,10 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
-import org.ourproject.kune.workspace.client.dto.ContentDTO;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 
@@ -23,15 +24,15 @@ public class GetContentTest extends ContentServiceIntegrationTest {
     @Test
     public void contentWithLoggedUserIsEditable() throws SerializableException {
 	doLogin();
-	ContentDTO response = contentService.getContent(null, new StateToken());
+	StateDTO response = contentService.getContent(null, new StateToken());
 	assertNotNull(response.getContentRights());
 	assertTrue(response.getContentRights().isEditable);
 	// assertTrue(response.getAccessLists().getAdmin().size() == 1);
     }
 
     @Test
-    public void notLoggedUserShouldNotEditDefaultDoc() throws ContentNotFoundException {
-	ContentDTO content = contentService.getContent(null, new StateToken());
+    public void notLoggedUserShouldNotEditDefaultDoc() throws ContentNotFoundException, AccessViolationException {
+	StateDTO content = contentService.getContent(null, new StateToken());
 	assertFalse(content.getContentRights().isAdministrable);
 	assertFalse(content.getContentRights().isEditable);
 	assertTrue(content.getContentRights().isVisible);
@@ -41,8 +42,8 @@ public class GetContentTest extends ContentServiceIntegrationTest {
     }
 
     @Test
-    public void defaultCountentShouldExist() throws ContentNotFoundException {
-	ContentDTO content = contentService.getContent(null, new StateToken());
+    public void defaultCountentShouldExist() throws ContentNotFoundException, AccessViolationException {
+	StateDTO content = contentService.getContent(null, new StateToken());
 	assertNotNull(content);
 	assertNotNull(content.getGroup());
 	assertNotNull(content.getFolder());

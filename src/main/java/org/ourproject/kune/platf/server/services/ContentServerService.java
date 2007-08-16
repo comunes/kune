@@ -5,25 +5,21 @@ import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.server.UserSession;
+import org.ourproject.kune.platf.server.access.Access;
+import org.ourproject.kune.platf.server.access.AccessType;
+import org.ourproject.kune.platf.server.access.Accessor;
 import org.ourproject.kune.platf.server.auth.Authenticated;
-import org.ourproject.kune.platf.server.domain.AccessLists;
-import org.ourproject.kune.platf.server.domain.ContentDescriptor;
+import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Folder;
 import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.manager.AccessRightsManager;
 import org.ourproject.kune.platf.server.manager.ContentDescriptorManager;
-import org.ourproject.kune.platf.server.manager.ContentManager;
 import org.ourproject.kune.platf.server.manager.FolderManager;
 import org.ourproject.kune.platf.server.manager.GroupManager;
-import org.ourproject.kune.platf.server.manager.MetadataManager;
-import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
-import org.ourproject.kune.platf.server.model.AccessRights;
-import org.ourproject.kune.platf.server.model.Content;
-import org.ourproject.kune.platf.server.properties.KuneProperties;
-import org.ourproject.kune.workspace.client.dto.ContentDTO;
+import org.ourproject.kune.platf.server.state.StateService;
+import org.ourproject.kune.platf.server.state.State;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -32,118 +28,84 @@ import com.wideplay.warp.persist.Transactional;
 
 @Singleton
 public class ContentServerService implements ContentService {
-    private final ContentManager contentManager;
-    private final AccessRightsManager accessRightsManager;
-    private final MetadataManager metadataManager;
+    private final StateService stateService;
     private final UserSession session;
-    private final KuneProperties properties;
-    private final UserManager userManager;
     private final Mapper mapper;
     private final FolderManager folderManager;
     private final ContentDescriptorManager contentDescriptorManager;
     private final GroupManager groupManager;
+    private final Accessor accessor;
 
     @Inject
-    public ContentServerService(final UserSession session, final ContentManager contentManager,
-	    final AccessRightsManager accessRightManager, final MetadataManager metadaManager,
-	    final UserManager userManager, final FolderManager folderManager, final GroupManager groupManager,
-	    final ContentDescriptorManager contentDescriptorManager, final KuneProperties properties,
-	    final Mapper mapper) {
+    public ContentServerService(final UserSession session, final Accessor contentAccess,
+	    final StateService metadaManager, final FolderManager folderManager, final GroupManager groupManager,
+	    final ContentDescriptorManager contentDescriptorManager, final Mapper mapper) {
 	this.session = session;
-	this.contentManager = contentManager;
-	this.accessRightsManager = accessRightManager;
-	this.metadataManager = metadaManager;
-	this.userManager = userManager;
+	this.accessor = contentAccess;
+	this.stateService = metadaManager;
 	this.folderManager = folderManager;
 	this.groupManager = groupManager;
 	this.contentDescriptorManager = contentDescriptorManager;
-	this.properties = properties;
 	this.mapper = mapper;
     }
 
     @Transactional(type = TransactionType.READ_ONLY)
-    public ContentDTO getContent(final String userHash, final StateToken token) throws ContentNotFoundException {
-	// TODO Auto-generated method stub
-
-	// siempre tenenemos un grupo (aunque sea por defecto)
-	// pero no siempre tenemos un usuario loggeado!
-	Group group;
+    public StateDTO getContent(final String userHash, final StateToken token) throws ContentNotFoundException,
+	    AccessViolationException {
 	User user = session.getUser();
-	if (user == null) {
-	    String shortName = properties.get(KuneProperties.DEFAULT_SITE_SHORT_NAME);
-	    group = userManager.getByShortName(shortName).getUserGroup();
-	} else {
-	    group = user.getUserGroup();
-	}
+	Group contentGroup = user != null ? user.getUserGroup() : groupManager.getDefaultGroup();
+	Group loggedGroup = user != null ? user.getUserGroup() : null;
 
-	ContentDescriptor descriptor = contentManager.getContent(group, token);
-	return buildResponse(user, descriptor);
-    }
-
-    private ContentDTO buildResponse(final User user, final ContentDescriptor descriptor) {
-	Group group = user != null ? user.getUserGroup() : null;
-	AccessLists contentAccessLists = getContentAccessList(descriptor);
-	AccessLists folderAccessLists = getFolderAccessLists(descriptor.getFolder());
-
-	AccessRights contentRights = accessRightsManager.get(group, contentAccessLists);
-	AccessRights folderRights;
-	if (contentAccessLists != folderAccessLists) {
-	    folderRights = accessRightsManager.get(group, folderAccessLists);
-	} else {
-	    folderRights = contentRights;
-	}
-	// FIXME: si accRights.isVisible == false > throw Exception!!
-
-	Content content = metadataManager.fill(descriptor, contentAccessLists, contentRights, folderRights);
-	return mapper.map(content, ContentDTO.class);
+	Access access = accessor.getAccess(token, contentGroup, loggedGroup, AccessType.READ);
+	State state = stateService.create(access);
+	return mapper.map(state, StateDTO.class);
     }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
-    public int save(final String user, final String documentId, final String content) throws AccessViolationException {
-	Long id = new Long(documentId);
+    public int save(final String user, final String documentId, final String content) throws AccessViolationException,
+	    ContentNotFoundException {
+
+	Long contentId = parseId(documentId);
 	Group userGroup = session.getUser().getUserGroup();
-	ContentDescriptor descriptor = contentDescriptorManager.find(id);
-	AccessRights accessRights = accessRightsManager.get(userGroup, getContentAccessList(descriptor));
-	if (accessRights.isEditable()) {
-	    descriptor = contentDescriptorManager.save(userGroup, descriptor, content);
-	    return descriptor.getVersion();
-	} else {
-	    throw new AccessViolationException();
-	}
-    }
-
-    private AccessLists getContentAccessList(final ContentDescriptor descriptor) {
-	AccessLists accessLists = descriptor.getAccessLists();
-	if (accessLists == null) {
-	    SocialNetwork socialNetwork = descriptor.getFolder().getOwner().getSocialNetwork();
-	    accessLists = socialNetwork.getAccessList();
-	}
-	return accessLists;
-    }
-
-    private AccessLists getFolderAccessLists(final Folder folder) {
-	return folder.getOwner().getSocialNetwork().getAccessList();
+	Access access = accessor.getContentAccess(contentId, userGroup, AccessType.EDIT);
+	Content descriptor = contentDescriptorManager.save(userGroup, access.getDescriptor(), content);
+	return descriptor.getVersion();
     }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
-    public ContentDTO addContent(final String userHash, final Long parentFolderId, final String title) {
+    public StateDTO addContent(final String userHash, final Long parentFolderId, final String title)
+	    throws AccessViolationException, ContentNotFoundException {
+
 	User user = session.getUser();
-	Folder folder = folderManager.find(parentFolderId);
-	ContentDescriptor descriptor = contentDescriptorManager.createContent(title, user, folder);
-	return buildResponse(user, descriptor);
+	Access access = accessor.getFolderAccess(parentFolderId, user.getUserGroup(), AccessType.EDIT);
+	access.setDescriptorWidthFolderRights(contentDescriptorManager.createContent(title, user, access.getFolder()));
+	State state = stateService.create(access);
+	return mapper.map(state, StateDTO.class);
     }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
-    public ContentDTO addFolder(final String hash, final String groupShotName, final Long parentFolderId,
-	    final String title) throws ContentNotFoundException {
+    public StateDTO addFolder(final String hash, final String groupShotName, final Long parentFolderId,
+	    final String title) throws ContentNotFoundException, AccessViolationException {
 	Group group = groupManager.findByShortName(groupShotName);
+
+	Access access = accessor.getFolderAccess(parentFolderId, group, AccessType.EDIT);
 	Folder folder = folderManager.createFolder(group, parentFolderId, title);
 	String toolName = folder.getToolName();
 	StateToken token = new StateToken(group.getShortName(), toolName, folder.getId().toString(), null);
-	ContentDescriptor descriptor = contentManager.getContent(group, token);
-	return buildResponse(session.getUser(), descriptor);
+	access = accessor.getAccess(token, group, group, AccessType.READ);
+	State state = stateService.create(access);
+	return mapper.map(state, StateDTO.class);
     }
+
+    private Long parseId(final String documentId) throws ContentNotFoundException {
+	try {
+	    return new Long(documentId);
+	} catch (NumberFormatException e) {
+	    throw new ContentNotFoundException();
+	}
+    }
+
 }

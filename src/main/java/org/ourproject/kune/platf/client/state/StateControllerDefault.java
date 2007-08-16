@@ -5,7 +5,7 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.tool.Tool;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.workspace.client.Workspace;
-import org.ourproject.kune.workspace.client.dto.ContentDTO;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.History;
@@ -40,13 +40,13 @@ public class StateControllerDefault implements StateController {
 
 	    public void onSuccess(final Object result) {
 		GWT.log("State response: " + result, null);
-		loadContent((ContentDTO) result);
+		loadContent((StateDTO) result);
 	    }
 
 	});
     }
 
-    public void setState(final ContentDTO content) {
+    public void setState(final StateDTO content) {
 	StateToken state = content.getState();
 	provider.cache(state, content);
 	setState(state);
@@ -56,7 +56,7 @@ public class StateControllerDefault implements StateController {
 	History.newItem(state.getEncoded());
     }
 
-    private void loadContent(final ContentDTO content) {
+    private void loadContent(final StateDTO content) {
 	Workspace workspace = app.getWorkspace();
 	workspace.showGroup(content.getGroup());
 	String toolName = content.getToolName();

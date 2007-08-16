@@ -1,9 +1,11 @@
 package org.ourproject.kune.platf.server.init;
 
+import javax.persistence.NoResultException;
+
 import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
-import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.properties.DatabaseProperties;
 
 import com.google.gwt.user.client.rpc.SerializableException;
@@ -13,21 +15,21 @@ import com.wideplay.warp.persist.Transactional;
 
 public class DatabaseInitializer {
     private final LicenseManager licenseManager;
-    private final UserManager userManager;
     private final DatabaseProperties properties;
+    private final GroupManager groupManager;
 
     @Inject
-    public DatabaseInitializer(final DatabaseProperties properties, final UserManager userManager,
+    public DatabaseInitializer(final DatabaseProperties properties, final GroupManager groupManager,
 	    final LicenseManager licenseManager) {
 	this.properties = properties;
-	this.userManager = userManager;
+	this.groupManager = groupManager;
 	this.licenseManager = licenseManager;
     }
 
     public void initConditional() throws SerializableException {
-	String shortName = properties.getDefaultSiteShortName();
-	User user = userManager.getByShortName(shortName);
-	if (user == null) {
+	try {
+	    groupManager.getDefaultGroup();
+	} catch (NoResultException e) {
 	    initDatabase();
 	}
     }
@@ -44,14 +46,14 @@ public class DatabaseInitializer {
 	String adminEmail = properties.getAdminEmail();
 	String adminPassword = properties.getAdminPassword();
 	User user = new User(adminName, adminShortName, adminEmail, adminPassword);
-	userManager.createUser(user);
+	groupManager.createUserGroup(user);
 
 	String siteName = properties.getDefaultSiteName();
 	String siteShortName = properties.getDefaultSiteShortName();
 	String siteEmail = properties.getDefaultSiteAdminEmail();
 	String sitePassword = properties.getDefaultSiteAdminPassword();
 	user = new User(siteName, siteShortName, siteEmail, sitePassword);
-	userManager.createUser(user);
+	groupManager.createUserGroup(user);
     }
 
     private void createLicenses() {

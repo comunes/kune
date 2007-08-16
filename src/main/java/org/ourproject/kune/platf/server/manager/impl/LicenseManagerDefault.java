@@ -1,10 +1,11 @@
-package org.ourproject.kune.platf.server.manager;
+package org.ourproject.kune.platf.server.manager.impl;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
 import org.ourproject.kune.platf.server.domain.License;
+import org.ourproject.kune.platf.server.manager.LicenseManager;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

@@ -5,14 +5,14 @@ import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.FolderDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.workspace.client.dto.ContentDTO;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class ContentServiceMocked extends MockedService implements ContentServiceAsync {
 
     public void getContent(final String user, final StateToken newState, final AsyncCallback callback) {
-	ContentDTO content = new ContentDTO();
+	StateDTO content = new StateDTO();
 	FolderDTO folder = new FolderDTO();
 	folder.setId(new Long(1));
 	content.setFolder(folder);

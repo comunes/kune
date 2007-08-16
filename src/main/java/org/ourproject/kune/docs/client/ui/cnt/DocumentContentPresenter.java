@@ -8,14 +8,14 @@ import org.ourproject.kune.docs.client.ui.cnt.reader.DocumentReaderListener;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
-import org.ourproject.kune.workspace.client.dto.ContentDTO;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.editor.TextEditorListener;
 
 public class DocumentContentPresenter implements DocumentContent, DocumentReaderListener, TextEditorListener {
     private final WorkspaceDeckView view;
     private final DocumentComponents components;
-    private ContentDTO content;
+    private StateDTO content;
     private final DocumentContentListener listener;
 
     public DocumentContentPresenter(final DocumentContentListener listener, final WorkspaceDeckView view) {
@@ -24,7 +24,7 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
 	this.components = new DocumentComponents(this);
     }
 
-    public void setContent(final ContentDTO content) {
+    public void setContent(final StateDTO content) {
 	this.content = content;
 	showContent();
     }

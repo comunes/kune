@@ -11,13 +11,13 @@ import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.FolderDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
-import org.ourproject.kune.workspace.client.dto.ContentDTO;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 
 public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 
-    private ContentDTO defaultContent;
+    private StateDTO defaultContent;
     String groupName;
 
     @Before
@@ -35,7 +35,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 	AccessRightsDTO ctxRight = defaultContent.getFolderRights();
 
 	String title = "New Content Title";
-	ContentDTO added = contentService.addContent(session.getHash(), defaultContent.getFolder().getId(), title);
+	StateDTO added = contentService.addContent(session.getHash(), defaultContent.getFolder().getId(), title);
 	assertNotNull(added);
 	List contents = added.getFolder().getContents();
 	assertEquals(title, added.getTitle());
@@ -44,7 +44,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 	assertEquals(ctxRight, added.getFolderRights());
 
 	StateToken newState = added.getState();
-	ContentDTO sameAgain = contentService.getContent(session.getHash(), newState);
+	StateDTO sameAgain = contentService.getContent(session.getHash(), newState);
 	assertNotNull(sameAgain);
 	assertEquals(2, sameAgain.getFolder().getContents().size());
     }
@@ -52,13 +52,13 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     public void testAddFolder() throws SerializableException {
 	FolderDTO parent = defaultContent.getFolder();
 	String title = "folder name";
-	ContentDTO newState = contentService.addFolder(session.getHash(), groupName, parent.getId(), title);
+	StateDTO newState = contentService.addFolder(session.getHash(), groupName, parent.getId(), title);
 	assertNotNull(newState);
 	FolderDTO child = newState.getFolder();
 	assertEquals(parent.getAbsolutePath() + FolderDTO.SEP + title, child.getAbsolutePath());
 	assertEquals(1, parent.getChilds().size());
 	assertEquals(parent.getId(), child.getParentFolderId());
-	ContentDTO defaultAgain = contentService.getContent(session.getHash(), new StateToken());
+	StateDTO defaultAgain = contentService.getContent(session.getHash(), new StateToken());
 	FolderDTO parentAgain = defaultAgain.getFolder();
 	assertEquals(1, parentAgain.getChilds().size());
     }

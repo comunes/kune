@@ -1,4 +1,4 @@
-package org.ourproject.kune.platf.server.model;
+package org.ourproject.kune.platf.server.access;
 
 public class AccessRights {
 

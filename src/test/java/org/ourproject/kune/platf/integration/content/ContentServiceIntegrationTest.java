@@ -6,7 +6,7 @@ import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.properties.DatabaseProperties;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
-import org.ourproject.kune.workspace.client.dto.ContentDTO;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
@@ -21,8 +21,8 @@ public abstract class ContentServiceIntegrationTest {
     @Inject
     DatabaseProperties properties;
 
-    protected ContentDTO getDefaultContent() throws SerializableException, ContentNotFoundException {
-	ContentDTO content = contentService.getContent(session.getHash(), new StateToken());
+    protected StateDTO getDefaultContent() throws SerializableException, ContentNotFoundException {
+	StateDTO content = contentService.getContent(session.getHash(), new StateToken());
 	return content;
     }
 

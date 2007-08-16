@@ -23,7 +23,7 @@ import com.wideplay.warp.persist.dao.Finder;
 @Entity
 @Table(name = "contents")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class ContentDescriptor implements HasContent {
+public class Content implements HasContent {
     @Id
     @GeneratedValue
     private Long id;
@@ -56,22 +56,22 @@ public class ContentDescriptor implements HasContent {
 
     private AccessLists accessLists;
 
-    public ContentDescriptor() {
+    public Content() {
 	translations = new ArrayList<Translation>();
 	tags = new ArrayList<Tag>();
 	this.createdOn = System.currentTimeMillis();
 	this.lastRevision = new Revision();
     }
 
-    @Finder(query = "select AVG(r.value) from Rate r where r.contentDescriptor = :descriptor")
+    @Finder(query = "select AVG(r.value) from Rate r where r.content = :descriptor")
     public Double calculateRate(@Named("descriptor")
-    final ContentDescriptor descriptor) {
+    final Content descriptor) {
 	return null;
     }
 
-    @Finder(query = "select count(*) from Rate r where r.contentDescriptor = :descriptor")
+    @Finder(query = "select count(*) from Rate r where r.content = :descriptor")
     public Integer calculateRateNumberOfUsers(@Named("descriptor")
-    final ContentDescriptor descriptor) {
+    final Content descriptor) {
 	return null;
     }
 

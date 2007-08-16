@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
-import org.ourproject.kune.platf.client.dto.ContentDescriptorDTO;
+import org.ourproject.kune.platf.client.dto.ContentDTO;
 import org.ourproject.kune.platf.client.dto.FolderDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
@@ -37,7 +37,7 @@ public class FolderContextPresenter implements FolderContext {
 	state.setFolder(folder.getId().toString());
 	List contents = folder.getContents();
 	for (int index = 0; index < contents.size(); index++) {
-	    ContentDescriptorDTO dto = (ContentDescriptorDTO) contents.get(index);
+	    ContentDTO dto = (ContentDTO) contents.get(index);
 	    state.setDocument(dto.getId().toString());
 	    view.add(dto.getTitle(), "file", state.getEncoded());
 	}

@@ -1,28 +1,29 @@
-package org.ourproject.kune.platf.server.manager;
+package org.ourproject.kune.platf.server.manager.impl;
 
 import javax.persistence.EntityManager;
 
-import org.ourproject.kune.platf.server.domain.ContentDescriptor;
+import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Folder;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.Revision;
 import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.manager.ContentDescriptorManager;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 @Singleton
-public class ContentDescriptorManagerDefault extends DefaultManager<ContentDescriptor, Long> implements
+public class ContentDescriptorManagerDefault extends DefaultManager<Content, Long> implements
 	ContentDescriptorManager {
 
     @Inject
     public ContentDescriptorManagerDefault(final Provider<EntityManager> provider) {
-	super(provider, ContentDescriptor.class);
+	super(provider, Content.class);
     }
 
-    public ContentDescriptor createContent(final String title, final User user, final Folder folder) {
-	ContentDescriptor descriptor = new ContentDescriptor();
+    public Content createContent(final String title, final User user, final Folder folder) {
+	Content descriptor = new Content();
 	descriptor.setCreator(user);
 	descriptor.setFolder(folder);
 	folder.addContent(descriptor);
@@ -32,7 +33,7 @@ public class ContentDescriptorManagerDefault extends DefaultManager<ContentDescr
 	return persist(descriptor);
     }
 
-    public ContentDescriptor save(final Group userGroup, final ContentDescriptor descriptor, final String content) {
+    public Content save(final Group userGroup, final Content descriptor, final String content) {
 	Revision revision = new Revision();
 	revision.setTitle(descriptor.getTitle());
 	revision.setDataContent(content);

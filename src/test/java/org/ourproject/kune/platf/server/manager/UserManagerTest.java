@@ -19,6 +19,7 @@ public class UserManagerTest extends PersistenceTest {
     private static final String USER_LONG_NAME = "the user long name";
     private static final String USER_PASSWORD = "userPassword";
     private static final String USER_EMAIL = "useremail@example.com";
+
     @Inject
     UserManager userManager;
     @Inject
@@ -33,17 +34,7 @@ public class UserManagerTest extends PersistenceTest {
 	assertEquals(0, userFinder.getAll().size());
 	assertEquals(0, groupFinder.getAll().size());
 	user = new User(USER_LONG_NAME, USER_SHORT_NAME, USER_EMAIL, USER_PASSWORD);
-	userManager.createUser(user);
-    }
-
-    @Test
-    public void testUserCreation() {
-	assertNotNull(user.getId());
-	assertNotNull(user.getUserGroup());
-	assertNotNull(user.getUserGroup().getId());
-	assertEquals(user.getShortName(), user.getUserGroup().getShortName());
-	assertEquals(1, userFinder.getAll().size());
-	assertEquals(1, groupFinder.getAll().size());
+	persist(user);
     }
 
     @Test

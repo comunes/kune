@@ -7,7 +7,7 @@ import org.ourproject.kune.platf.client.tool.Tool;
 import org.ourproject.kune.platf.client.tool.ToolTrigger;
 import org.ourproject.kune.platf.client.tool.ToolTriggerDefault;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
-import org.ourproject.kune.workspace.client.dto.ContentDTO;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public class DocumentTool implements Tool, DocumentContentListener {
     public static final String NAME = "docs";
@@ -31,7 +31,7 @@ public class DocumentTool implements Tool, DocumentContentListener {
 	return NAME;
     }
 
-    public void setContent(final ContentDTO content) {
+    public void setContent(final StateDTO content) {
 	DocumentContent docContent = components.getContent();
 	docContent.setContent(content);
 	DocumentContext context = components.getContext();

@@ -1,4 +1,4 @@
-package org.ourproject.kune.platf.server.manager;
+package org.ourproject.kune.platf.server.manager.impl;
 
 import javax.persistence.EntityManager;
 
@@ -18,12 +18,16 @@ public abstract class DefaultManager<T, K> {
     }
 
     public T persist(final T entity) {
-	getEntityManager().persist(entity);
-	return entity;
+	return persist(entity, entityClass);
     }
 
     public T find(final Long primaryKey) {
 	return getEntityManager().find(entityClass, primaryKey);
+    }
+
+    public <E> E persist(final E entity, final Class<E> entityClass) {
+	getEntityManager().persist(entity);
+	return entity;
     }
 
 }

@@ -2,7 +2,7 @@ package org.ourproject.kune.platf.client.dto;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-public class ContentDescriptorDTO implements IsSerializable {
+public class ContentDTO implements IsSerializable {
 
     private Long id;
     private String title;

@@ -32,7 +32,7 @@ public class Folder implements HasId {
     private List<Folder> childs;
 
     @OneToMany(mappedBy = "folder")
-    private final List<ContentDescriptor> contents;
+    private final List<Content> contents;
 
     @Basic(optional = false)
     private String absolutePath;
@@ -49,7 +49,7 @@ public class Folder implements HasId {
 	this.absolutePath = parentPath + SEP + title;
 	owner = group;
 	this.toolName = toolName;
-	this.contents = new ArrayList<ContentDescriptor>();
+	this.contents = new ArrayList<Content>();
 	this.childs = new ArrayList<Folder>();
     }
 
@@ -125,13 +125,13 @@ public class Folder implements HasId {
 	this.toolName = toolName;
     }
 
-    public void addContent(final ContentDescriptor descriptor) {
+    public void addContent(final Content descriptor) {
 	// FIXME: algo de lazy initialization (con size() se arregla...)
 	contents.size();
 	contents.add(descriptor);
     }
 
-    public List<ContentDescriptor> getContents() {
+    public List<Content> getContents() {
 	return contents;
     }
 

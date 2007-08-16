@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import org.junit.Test;
 import org.ourproject.kune.platf.server.PersistenceTest;
 import org.ourproject.kune.platf.server.TestDomainHelper;
-import org.ourproject.kune.platf.server.domain.ContentDescriptor;
+import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Rate;
 import org.ourproject.kune.platf.server.domain.User;
 
@@ -15,7 +15,7 @@ import com.google.inject.Inject;
 
 public class ContentDescriptorFinderTest extends PersistenceTest {
     @Inject
-    ContentDescriptor finder;
+    Content finder;
 
     @Test
     public void testAverage() {
@@ -26,7 +26,7 @@ public class ContentDescriptorFinderTest extends PersistenceTest {
 	manager.persist(user1);
 	manager.persist(user2);
 
-	ContentDescriptor cd = new ContentDescriptor();
+	Content cd = new Content();
 	manager.persist(cd);
 
 	manager.persist(new Rate(user1, cd, 1.3));

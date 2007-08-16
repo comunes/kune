@@ -8,7 +8,7 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-public class ContentDTO implements IsSerializable {
+public class StateDTO implements IsSerializable {
     private String documentId;
     private int version;
     private String content;
@@ -22,11 +22,11 @@ public class ContentDTO implements IsSerializable {
     private Double rate;
     private Integer rateByUsers;
 
-    public ContentDTO() {
+    public StateDTO() {
 	this(null, null, null);
     }
 
-    public ContentDTO(final String docRef, final String title, final String content) {
+    public StateDTO(final String docRef, final String title, final String content) {
 	this.documentId = docRef;
 	this.title = title;
 	this.content = content;

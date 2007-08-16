@@ -14,18 +14,20 @@ public abstract class PersistenceTest {
     @Inject
     Provider<EntityManager> provider;
     private final String persistenceUnit;
+    private final String propetiesFileName;
 
-    public PersistenceTest(final String persistenceUnit) {
+    public PersistenceTest(final String persistenceUnit, final String propetiesFileName) {
 	this.persistenceUnit = persistenceUnit;
+	this.propetiesFileName = propetiesFileName;
     }
 
     public PersistenceTest() {
-	this("test");
+	this("test", "kune.properties");
     }
 
     @Before
     public void prepare() {
-	Injector injector = TestHelper.create(new KunePlatformModule(), persistenceUnit);
+	Injector injector = TestHelper.create(new KunePlatformModule(), persistenceUnit, propetiesFileName);
 	PersistenceService persistence = injector.getInstance(PersistenceService.class);
 	// To Debug insert breakpoint here
 	persistence.start();

@@ -1,4 +1,4 @@
-package org.ourproject.kune.platf.server.manager;
+package org.ourproject.kune.platf.server.access;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -6,20 +6,21 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.server.TestDomainHelper;
+import org.ourproject.kune.platf.server.access.AccessRights;
+import org.ourproject.kune.platf.server.access.RightsServiceDefault;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
-import org.ourproject.kune.platf.server.model.AccessRights;
 
 public class AccessRightsManagerTest {
-    private AccessRightsManagerDefault accessRightsManager;
+    private RightsServiceDefault accessRightsManager;
     private Group group1;
     private Group group2;
     private Group userGroup;
 
     @Before
     public void init() {
-	accessRightsManager = new AccessRightsManagerDefault();
+	accessRightsManager = new RightsServiceDefault();
 	userGroup = TestDomainHelper.createGroup(3);
 	group1 = TestDomainHelper.createGroup(1);
 	group2 = TestDomainHelper.createGroup(2);

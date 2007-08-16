@@ -1,9 +1,10 @@
-package org.ourproject.kune.platf.server.manager;
+package org.ourproject.kune.platf.server.manager.impl;
 
 import javax.persistence.EntityManager;
 
 import org.ourproject.kune.platf.server.domain.Folder;
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.manager.FolderManager;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

@@ -27,16 +27,16 @@
 			org.ourproject.kune.platf.client.dto.AccessRightsDTO
 		</class-a>
 		<class-b>
-			org.ourproject.kune.platf.server.model.AccessRights
+			org.ourproject.kune.platf.server.access.AccessRights
 		</class-b>
 	</mapping>
 
 	<mapping>
 		<class-a>
-			org.ourproject.kune.workspace.client.dto.ContentDTO
+			org.ourproject.kune.workspace.client.dto.StateDTO
 		</class-a>
 		<class-b>
-			org.ourproject.kune.platf.server.model.Content
+			org.ourproject.kune.platf.server.state.State
 		</class-b>
 	</mapping>
 
@@ -51,10 +51,10 @@
 
 	<mapping>
 		<class-a>
-			org.ourproject.kune.platf.client.dto.ContentDescriptorDTO
+			org.ourproject.kune.platf.client.dto.ContentDTO
 		</class-a>
 		<class-b>
-			org.ourproject.kune.platf.server.domain.ContentDescriptor
+			org.ourproject.kune.platf.server.domain.Content
 		</class-b>
 		<field>
 			<a>title</a>
@@ -74,10 +74,10 @@
 			<a>contents</a>
 			<b>contents</b>
 			<a-hint>
-				org.ourproject.kune.platf.client.dto.ContentDescriptorDTO
+				org.ourproject.kune.platf.client.dto.ContentDTO
 			</a-hint>
 			<b-hint>
-				org.ourproject.kune.platf.server.domain.ContentDescriptor
+				org.ourproject.kune.platf.server.domain.Content
 			</b-hint>
 		</field>
 		<field>

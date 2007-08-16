@@ -1,7 +1,7 @@
 package org.ourproject.kune.platf.client.tool;
 
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
-import org.ourproject.kune.workspace.client.dto.ContentDTO;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public interface Tool {
     String getName();
@@ -12,6 +12,6 @@ public interface Tool {
 
     WorkspaceComponent getContent();
 
-    void setContent(ContentDTO content);
+    void setContent(StateDTO content);
 
 }

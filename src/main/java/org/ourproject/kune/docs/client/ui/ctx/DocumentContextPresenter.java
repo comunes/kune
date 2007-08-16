@@ -10,12 +10,12 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
-import org.ourproject.kune.workspace.client.dto.ContentDTO;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public class DocumentContextPresenter implements DocumentContext, FolderContextListener {
     private final WorkspaceDeckView view;
     private final Components components;
-    private ContentDTO content;
+    private StateDTO content;
 
     public DocumentContextPresenter(final WorkspaceDeckView view) {
 	this.view = view;
@@ -32,7 +32,7 @@ public class DocumentContextPresenter implements DocumentContext, FolderContextL
 	return view;
     }
 
-    public void setContent(final ContentDTO content) {
+    public void setContent(final StateDTO content) {
 	this.content = content;
 	StateToken state = content.getState();
 	FolderContext folderContext = components.getFolderContext();
