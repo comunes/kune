@@ -11,7 +11,8 @@ class ItemsPanel extends VerticalPanel {
     private final HashMap fileIcons;
 
     public ItemsPanel() {
-	addStyleName("itemsVP");
+	addStyleName("kune-NavigationBar");
+	addStyleName("Items");
 	fileIcons = new HashMap();
 	initFileIcons();
     }

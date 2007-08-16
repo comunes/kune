@@ -1,7 +1,6 @@
 package org.ourproject.kune.docs.client.ui.ctx.folder;
 
 import org.ourproject.kune.platf.client.ui.BorderDecorator;
-import org.ourproject.kune.sitebar.client.Site;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Window;
@@ -72,13 +71,6 @@ class TopBar extends VerticalPanel {
 	iconBarHP.setCellVerticalAlignment(buttonRounded, VerticalPanel.ALIGN_MIDDLE);
 	pathMenu.setStyleName("pathMenu");
 	buttonRounded.setColor("AAA");
-	currentFolder.addClickListener(new ClickListener() {
-
-	    public void onClick(final Widget sender) {
-		// TODO
-		Site.error("Test 2");
-	    }
-	});
     }
 
     public void setCurrentName(final String name) {

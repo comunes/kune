@@ -1,6 +1,7 @@
 package org.ourproject.kune.docs.client.ui.ctx.folder;
 
 import com.google.gwt.user.client.ui.DockPanel;
+import com.google.gwt.user.client.ui.HTML;
 
 public class FolderContextPanel extends DockPanel implements FolderContentView {
     private final ControlsPanel controls;
@@ -10,11 +11,24 @@ public class FolderContextPanel extends DockPanel implements FolderContentView {
     public FolderContextPanel(final FolderContextListener listener) {
 	topBar = new TopBar(listener);
 	add(topBar, DockPanel.NORTH);
-	items = new ItemsPanel();
-	add(items, DockPanel.CENTER);
 
+	items = new ItemsPanel();
+	add(items, DockPanel.NORTH);
+	HTML expand = new HTML("<b></b>");
+	add(expand, DockPanel.CENTER);
 	controls = new ControlsPanel(listener);
 	add(controls, DockPanel.SOUTH);
+
+	// FIXME: Test of width
+	setWidth("100%");
+	setHeight("100%");
+	setCellWidth(topBar, "100%");
+	expand.setWidth("100%");
+	expand.setHeight("100%");
+	setCellWidth(expand, "100%");
+	setCellHeight(expand, "100%");
+	addStyleName("kune-NavigationBar");
+
     }
 
     public void add(final String name, final String type, final String event) {

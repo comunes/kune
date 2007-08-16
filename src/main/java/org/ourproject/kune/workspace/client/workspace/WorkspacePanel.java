@@ -85,7 +85,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	    contextHSP.remove(left);
 	}
 	contextHSP.setLeftWidget((Widget) content);
-	((Widget) content).setWidth("99%");
+	((Widget) content).setWidth("100%");
     }
 
     public void setContext(final View contextMenu) {
