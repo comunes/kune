@@ -40,6 +40,7 @@ public class TestDomainHelper {
 
     public static Group createGroup(final int number) {
 	Group group = new Group("ysei" + number, "Yellow Submarine Environmental Initiative" + number);
+	group.setId(new Long(number));
 	return group;
     }
 

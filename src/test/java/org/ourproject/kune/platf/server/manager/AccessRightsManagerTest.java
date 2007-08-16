@@ -20,7 +20,7 @@ public class AccessRightsManagerTest {
     @Before
     public void init() {
 	accessRightsManager = new AccessRightsManagerDefault();
-	userGroup = new Group();
+	userGroup = TestDomainHelper.createGroup(3);
 	group1 = TestDomainHelper.createGroup(1);
 	group2 = TestDomainHelper.createGroup(2);
     }
