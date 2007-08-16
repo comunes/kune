@@ -7,29 +7,29 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.license.LicenseChangeListener;
-import org.ourproject.kune.platf.client.license.LicenseChoosePanel;
-import org.ourproject.kune.platf.client.license.LicenseChoosePresenter;
+import org.ourproject.kune.platf.client.license.LicenseChooseFormPanel;
+import org.ourproject.kune.platf.client.license.LicenseChooseFormPresenter;
 import org.ourproject.kune.platf.client.rpc.KuneService;
 import org.ourproject.kune.platf.client.rpc.KuneServiceAsync;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.DialogBox;
 
-public class NewGroupPresenter implements NewGroupForm {
+public class NewGroupFormPresenter implements NewGroupForm {
 
     private final NewGroupListener listener;
-    private NewGroupView view;
+    private NewGroupFormView view;
     private int groupType;
-    private LicenseChoosePanel licensePanel;
+    private LicenseChooseFormPanel licensePanel;
     private DialogBox licenseDialog;
     private LicenseDTO license;
 
-    public NewGroupPresenter(final NewGroupListener listener) {
+    public NewGroupFormPresenter(final NewGroupListener listener) {
 	this.listener = listener;
 	groupType = GroupDTO.TYPE_ORGANIZATION;
     }
 
-    public void init(final NewGroupView view) {
+    public void init(final NewGroupFormView view) {
 	this.view = view;
 	reset();
     }
@@ -84,8 +84,8 @@ public class NewGroupPresenter implements NewGroupForm {
 		    "http://creativecommons.org/licenses/by-nc-nd/3.0/", true, false, false, "", ""));
 	    licensesList.add(new LicenseDTO("gfdl", "GNU Free Documentation License", "",
 		    "http://www.gnu.org/copyleft/fdl.html", false, true, false, "", ""));
-	    LicenseChoosePresenter licensePresenter = new LicenseChoosePresenter();
-	    licensePanel = new LicenseChoosePanel(licensePresenter, licensesNotCCList);
+	    LicenseChooseFormPresenter licensePresenter = new LicenseChooseFormPresenter();
+	    licensePanel = new LicenseChooseFormPanel(licensePresenter, licensesNotCCList);
 	    licensePresenter.init(licensePanel, licensesList, licensesNotCCList, new LicenseChangeListener() {
 		public void onCancel() {
 		    licenseDialog.hide();

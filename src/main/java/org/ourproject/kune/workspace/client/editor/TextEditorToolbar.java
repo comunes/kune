@@ -1,5 +1,6 @@
 package org.ourproject.kune.workspace.client.editor;
 
+import org.ourproject.kune.platf.client.ui.CustomButton;
 import org.ourproject.kune.platf.client.ui.palette.ColorSelectListener;
 import org.ourproject.kune.platf.client.ui.palette.WebSafePalettePanel;
 import org.ourproject.kune.platf.client.ui.palette.WebSafePalettePresenter;
@@ -372,8 +373,8 @@ public class TextEditorToolbar extends Composite {
     private PushButton fontColor;
     private MenuBar fonts;
     private MenuBar fontSizes;
-    private final PushButton save;
-    private final PushButton cancel;
+    private final CustomButton save;
+    private final CustomButton cancel;
     private ToggleButton editHtml;
     private WebSafePalettePanel palettePanel;
     private final TextEditorPresenter panelListener;
@@ -451,16 +452,16 @@ public class TextEditorToolbar extends Composite {
 	topPanel.add(expand);
 	topPanel.setCellWidth(expand, "100%");
 
-	save = new PushButton("Save", new ClickListener() {
+	save = new CustomButton("Save", new ClickListener() {
 	    public void onClick(final Widget sender) {
-		if (sender == save & save.isEnabled()) {
+		if (save.isEnabled()) {
 		    fireSave();
 		}
 	    }
 	});
-	cancel = new PushButton("Cancel", new ClickListener() {
+	cancel = new CustomButton("Cancel", new ClickListener() {
 	    public void onClick(final Widget sender) {
-		if (sender == cancel & cancel.isEnabled()) {
+		if (cancel.isEnabled()) {
 		    fireCancel();
 		}
 	    }
@@ -469,8 +470,8 @@ public class TextEditorToolbar extends Composite {
 	    topPanel.add(editHtml = createToggleButton(images.editHtml(), strings.EditHTML()));
 	}
 
-	topPanel.add(save);
-	topPanel.add(cancel);
+	topPanel.add(save.getButton());
+	topPanel.add(cancel.getButton());
 	// topPanel.add(new BorderPanel(cancel, 0, 0, 0,
 	// CustomPushButton.HORSPACESMALL)); // ,
 	// ClickListener

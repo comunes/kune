@@ -2,8 +2,8 @@ package org.ourproject.kune.sitebar.client;
 
 import org.ourproject.kune.platf.client.group.NewGroupForm;
 import org.ourproject.kune.platf.client.group.NewGroupListener;
-import org.ourproject.kune.platf.client.group.NewGroupPanel;
-import org.ourproject.kune.platf.client.group.NewGroupPresenter;
+import org.ourproject.kune.platf.client.group.NewGroupFormPanel;
+import org.ourproject.kune.platf.client.group.NewGroupFormPresenter;
 import org.ourproject.kune.sitebar.client.bar.SiteBar;
 import org.ourproject.kune.sitebar.client.bar.SiteBarListener;
 import org.ourproject.kune.sitebar.client.bar.SiteBarPanel;
@@ -47,8 +47,8 @@ public class SiteBarFactory {
     }
 
     public static NewGroupForm createNewGroup(final NewGroupListener listener) {
-	NewGroupPresenter presenter = new NewGroupPresenter(listener);
-	NewGroupPanel view = new NewGroupPanel(presenter);
+	NewGroupFormPresenter presenter = new NewGroupFormPresenter(listener);
+	NewGroupFormPanel view = new NewGroupFormPanel(presenter);
 	presenter.init(view);
 	return presenter;
     }

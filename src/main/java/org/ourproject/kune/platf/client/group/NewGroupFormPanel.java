@@ -16,8 +16,8 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class NewGroupPanel extends Composite implements NewGroupView {
-    final private NewGroupPresenter presenter;
+public class NewGroupFormPanel extends Composite implements NewGroupFormView {
+    final private NewGroupFormPresenter presenter;
     private final TextBox shortNameGroup;
     private final TextBox longNameGroup;
     private final TextArea publicDesc;
@@ -26,7 +26,7 @@ public class NewGroupPanel extends Composite implements NewGroupView {
     private final RadioButton typeProject;
     private final Label licenseLabel;
 
-    public NewGroupPanel(final NewGroupPresenter newGroupPresenter) {
+    public NewGroupFormPanel(final NewGroupFormPresenter newGroupPresenter) {
 	// Intialize
 	VerticalPanel generalVP = new VerticalPanel();
 	initWidget(generalVP);

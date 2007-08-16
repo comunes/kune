@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 
-public class LicenseChoosePresenter {
+public class LicenseChooseFormPresenter {
 
-    private LicenseChooseView view;
+    private LicenseChooseFormView view;
 
     private LicenseChangeListener listener;
 
@@ -14,7 +14,7 @@ public class LicenseChoosePresenter {
 
     private List allLicenses;
 
-    public void init(final LicenseChooseView view, final List allLicenses, final List nonCCLicenses,
+    public void init(final LicenseChooseFormView view, final List allLicenses, final List nonCCLicenses,
 	    final LicenseChangeListener listener) {
 	this.view = view;
 	this.listener = listener;

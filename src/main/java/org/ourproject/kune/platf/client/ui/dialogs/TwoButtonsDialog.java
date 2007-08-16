@@ -1,14 +1,12 @@
 package org.ourproject.kune.platf.client.ui.dialogs;
 
+import org.ourproject.kune.platf.client.ui.CustomButton;
 import org.ourproject.kune.workspace.client.ui.form.FormListener;
 
+import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Widget;
-import com.gwtext.client.core.EventObject;
-import com.gwtext.client.widgets.Button;
-import com.gwtext.client.widgets.ButtonConfig;
 import com.gwtext.client.widgets.LayoutDialog;
 import com.gwtext.client.widgets.LayoutDialogConfig;
-import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.layout.BorderLayout;
 import com.gwtext.client.widgets.layout.ContentPanel;
 import com.gwtext.client.widgets.layout.LayoutRegionConfig;
@@ -37,27 +35,18 @@ public class TwoButtonsDialog {
 	    }
 	}, new LayoutRegionConfig());
 
-	dialog.addButton(new Button(firstButton, new ButtonConfig() {
-	    {
-		setText(firstButton);
-		setButtonListener(new ButtonListenerAdapter() {
-		    public void onClick(final Button button, final EventObject e) {
-			listener.onAccept();
-		    }
-		});
+	dialog.addButton(new CustomButton(firstButton, new ClickListener() {
+	    public void onClick(final Widget sender) {
+		listener.onAccept();
 	    }
-	}));
+	}).getButton());
 
-	dialog.addButton(new Button(secondButton, new ButtonConfig() {
-	    {
-		setText(secondButton);
-		setButtonListener(new ButtonListenerAdapter() {
-		    public void onClick(final Button button, final EventObject e) {
-			listener.onCancel();
-		    }
-		});
+	dialog.addButton(new CustomButton(secondButton, new ClickListener() {
+	    public void onClick(final Widget sender) {
+		listener.onCancel();
 	    }
-	}));
+	}).getButton());
+
     }
 
     public void add(final Widget widget) {

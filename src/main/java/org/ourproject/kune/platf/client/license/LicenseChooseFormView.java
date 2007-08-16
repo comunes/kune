@@ -2,7 +2,7 @@ package org.ourproject.kune.platf.client.license;
 
 import org.ourproject.kune.platf.client.View;
 
-public interface LicenseChooseView extends View {
+public interface LicenseChooseFormView extends View {
 
     boolean isCCselected();
 

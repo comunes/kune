@@ -19,9 +19,9 @@ import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class LicenseChoosePanel extends Composite implements LicenseChooseView {
+public class LicenseChooseFormPanel extends Composite implements LicenseChooseFormView {
 
-    private final LicenseChoosePresenter presenter;
+    private final LicenseChooseFormPresenter presenter;
     private final RadioButton ccRB;
     private final RadioButton allowModifRB;
     private final RadioButton commercialRB;
@@ -29,7 +29,7 @@ public class LicenseChoosePanel extends Composite implements LicenseChooseView {
     private final ListBox otherLicenses;
     private final DeckPanel options;
 
-    public LicenseChoosePanel(final LicenseChoosePresenter initPresenter, final List nonCCLicenses) {
+    public LicenseChooseFormPanel(final LicenseChooseFormPresenter initPresenter, final List nonCCLicenses) {
 	this.presenter = initPresenter;
 	VerticalPanel generalVP = new VerticalPanel();
 	initWidget(generalVP);

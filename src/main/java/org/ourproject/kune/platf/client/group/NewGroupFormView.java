@@ -2,7 +2,7 @@ package org.ourproject.kune.platf.client.group;
 
 import org.ourproject.kune.platf.client.View;
 
-public interface NewGroupView extends View {
+public interface NewGroupFormView extends View {
     void clearData();
 
     void setLicense(String longName);
