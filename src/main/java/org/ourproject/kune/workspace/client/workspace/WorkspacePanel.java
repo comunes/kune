@@ -99,7 +99,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 
     public void adjustSize(final int windowWidth, final int windowHeight) {
 	int contextWidth = windowWidth - 163;
-	int contextHeight = windowHeight - 170;
+	int contextHeight = windowHeight - 175;
 
 	contextHSP.setSize("" + contextWidth + "px", "" + contextHeight + "px");
 	contextHSP.setSplitPosition("" + (contextWidth - 125) + "px");

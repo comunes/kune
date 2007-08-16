@@ -108,6 +108,7 @@ public class NewGroupFormPanel extends Composite implements NewGroupFormView {
 	    {
 		setWidth(300);
 		setLabelWidth(90);
+		setLabelAlign("right");
 	    }
 	});
 
@@ -146,8 +147,7 @@ public class NewGroupFormPanel extends Composite implements NewGroupFormView {
 	form.fieldset(new FieldSetConfig() {
 	    {
 		setLegend(t.TypeOfGroup());
-		// setHideLabels(true);
-		setLabelSeparator("");
+		setHideLabels(true);
 	    }
 	});
 
