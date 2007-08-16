@@ -30,4 +30,8 @@ public abstract class DefaultManager<T, K> {
 	return entity;
     }
 
+    public T merge(final T entity) {
+	return getEntityManager().merge(entity);
+    }
+
 }

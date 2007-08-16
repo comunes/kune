@@ -18,10 +18,10 @@ public class AddFolder extends WorkspaceAction {
 	String name = (String) value;
 	GroupDTO group = getState().getGroup();
 	ContainerDTO container = getState().getFolder();
-	addDocument(name, group, container);
+	addFolder(name, group, container);
     }
 
-    private void addDocument(final String name, final GroupDTO group, final ContainerDTO container) {
+    private void addFolder(final String name, final GroupDTO group, final ContainerDTO container) {
 	Site.showProgress("adding document");
 	ContentServiceAsync server = ContentService.App.getInstance();
 	server.addFolder(user, group.getShortName(), container.getId(), name, new AsyncCallback() {

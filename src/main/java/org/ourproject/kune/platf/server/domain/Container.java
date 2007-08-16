@@ -29,7 +29,8 @@ public class Container implements HasId {
     @ManyToOne(fetch = FetchType.LAZY)
     private Container parent;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
+    @OneToMany(fetch = FetchType.LAZY)
+    // , mappedBy = "parent")
     private List<Container> childs;
 
     @OneToMany(mappedBy = "container")
@@ -146,7 +147,8 @@ public class Container implements HasId {
 	return contents;
     }
 
-    public void addFolder(final Container container) {
+    public void addChild(final Container container) {
+	childs.size();
 	childs.add(container);
     }
 

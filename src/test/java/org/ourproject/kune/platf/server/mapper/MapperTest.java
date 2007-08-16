@@ -64,8 +64,8 @@ public class MapperTest {
     @Test
     public void testFolderMapping() {
 	Container container = new Container();
-	container.addFolder(new Container());
-	container.addFolder(new Container());
+	container.addChild(new Container());
+	container.addChild(new Container());
 	container.addContent(new Content());
 	container.addContent(new Content());
 	container.addContent(new Content());

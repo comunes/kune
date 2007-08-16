@@ -65,6 +65,7 @@ public class Content {
 	tags = new ArrayList<Tag>();
 	this.createdOn = System.currentTimeMillis();
 	this.lastRevision = new Revision();
+	accessLists = null;
     }
 
     @Finder(query = "select AVG(r.value) from Rate r where r.content = :descriptor")
@@ -186,6 +187,10 @@ public class Content {
 
     public void setTypeId(final String typeId) {
 	this.typeId = typeId;
+    }
+
+    public boolean hasAccessList() {
+	return accessLists != null;
     }
 
 }

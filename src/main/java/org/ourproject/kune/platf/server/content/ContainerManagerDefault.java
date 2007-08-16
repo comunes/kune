@@ -19,18 +19,18 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
     }
 
     public Container createRootFolder(final Group group, final String toolName, final String name, final String type) {
-	Container container = new Container(Container.SEP, name, group, toolName);
+	Container container = new Container("", name, group, toolName);
 	container.setTypeId(type);
 	return persist(container);
     }
 
     public Container createFolder(final Group group, final Long parentFolderId, final String name) {
 	Container parent = find(parentFolderId);
-	String relativePath = parent.getAbsolutePath() + Container.SEP;
-	Container container = new Container(relativePath, name, group, parent.getToolName());
-	container.setParent(parent);
-	parent.addFolder(container);
+	Container child = new Container(parent.getAbsolutePath(), name, group, parent.getToolName());
+	parent.addChild(child);
+	child.setParent(parent);
 	persist(parent);
-	return persist(container);
+	persist(child);
+	return child;
     }
 }

@@ -4,11 +4,10 @@ import javax.persistence.PersistenceException;
 
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
-import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.content.ContainerManager;
-import org.ourproject.kune.platf.server.domain.AccessLists;
-import org.ourproject.kune.platf.server.domain.Content;
+import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.domain.Container;
+import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 
@@ -76,8 +75,8 @@ public class FinderDefault implements Finder {
 	return null;
     }
 
-    private Content findByContentReference(final String groupName, final String toolName,
-	    final Long folderId, final Long contentId) throws ContentNotFoundException {
+    private Content findByContentReference(final String groupName, final String toolName, final Long folderId,
+	    final Long contentId) throws ContentNotFoundException {
 	Content descriptor = contentManager.find(contentId);
 	Container container = descriptor.getFolder();
 
@@ -107,8 +106,6 @@ public class FinderDefault implements Finder {
     private Content generateFolderFakeContent(final Container container) {
 	Content descriptor = new Content();
 	descriptor.setFolder(container);
-	AccessLists emptyAccessList = new AccessLists();
-	descriptor.setAccessLists(emptyAccessList);
 	return descriptor;
     }
 

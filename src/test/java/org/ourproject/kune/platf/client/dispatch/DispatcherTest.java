@@ -16,17 +16,27 @@ public class DispatcherTest {
     public void testSubscribe() {
 	Object value = new Object();
 	String eventName = "eventName";
-	Action action1 = dispatcher.subscribe(EasyMock.createNiceMock(Action.class));
-	Action action2 = dispatcher.subscribe(EasyMock.createNiceMock(Action.class));
-	Action action3 = dispatcher.subscribe(EasyMock.createNiceMock(Action.class));
-
-	action1.execute(value, null);
-	action2.execute(value, null);
-	action3.execute(value, null);
-	EasyMock.replay(action1, action2, action3);
+	Action[] actions = new Action[3];
+	for (int index = 0; index < actions.length; index++) {
+	    Action action = EasyMock.createNiceMock(Action.class);
+	    EasyMock.expect(action.getEventName()).andReturn(eventName);
+	    EasyMock.expect(action.getActionName()).andReturn("" + index);
+	    action.execute(value, null);
+	    EasyMock.expectLastCall();
+	    actions[index] = action;
+	}
+	for (int index = 0; index < actions.length; index++) {
+	    EasyMock.replay(actions[index]);
+	}
+	for (int index = 0; index < actions.length; index++) {
+	    dispatcher.subscribe(actions[index]);
+	}
 
 	dispatcher.fire(eventName, value);
-	EasyMock.verify(action1, action2, action3);
+
+	for (int index = 0; index < actions.length; index++) {
+	    EasyMock.verify(actions[index]);
+	}
     }
 
 }
