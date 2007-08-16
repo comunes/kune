@@ -19,7 +19,7 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
 
     public ContextItemsPanel(final ContextItemsPresenter presenter) {
 	this.presenter = presenter;
-	topBar = new TopBar();
+	topBar = new TopBar(presenter);
 	addTopBar(topBar);
 
 	items = new ItemsPanel();

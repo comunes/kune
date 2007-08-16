@@ -4,11 +4,13 @@ import org.ourproject.kune.platf.client.ui.BorderDecorator;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 class TopBar extends VerticalPanel {
 
@@ -16,7 +18,7 @@ class TopBar extends VerticalPanel {
     public final PushButton btnGoParent;
     public final HorizontalPanel firstRow;
 
-    public TopBar() {
+    public TopBar(final ContextItemsPresenter presenter) {
 	ContextItemsImages Img = ContextItemsImages.App.getInstance();
 
 	firstRow = new HorizontalPanel();
@@ -24,6 +26,11 @@ class TopBar extends VerticalPanel {
 	HorizontalPanel iconBarHP = new HorizontalPanel();
 	HorizontalPanel currentFolderHP = new HorizontalPanel();
 	btnGoParent = new PushButton(Img.goUp().createImage(), Img.goUpLight().createImage());
+	btnGoParent.addClickListener(new ClickListener() {
+	    public void onClick(final Widget sender) {
+		presenter.onGoUp();
+	    }
+	});
 	MenuBar pathMenu = new MenuBar();
 	MenuBar pathSubmenu = new MenuBar(true);
 
