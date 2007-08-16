@@ -15,7 +15,6 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class DefaultApplication implements Application {
     private final Workspace workspace;
@@ -32,10 +31,7 @@ public class DefaultApplication implements Application {
 		stateManager.reload();
 	    }
 	});
-	VerticalPanel generalVP = new VerticalPanel();
-	generalVP.add(desktop);
-	generalVP.addStyleName("kunebody");
-	RootPanel.get().add(generalVP);
+	RootPanel.get().add(desktop);
 	DeferredCommand.addCommand(new Command() {
 	    public void execute() {
 		int windowWidth = Window.getClientWidth();
