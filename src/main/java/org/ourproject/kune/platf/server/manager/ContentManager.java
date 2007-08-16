@@ -5,7 +5,7 @@ import org.ourproject.kune.platf.server.domain.Folder;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 
-public interface ContentDescriptorManager extends Manager<Content, Long> {
+public interface ContentManager extends Manager<Content, Long> {
 
     public Content createContent(String title, User user, Folder folder);
 

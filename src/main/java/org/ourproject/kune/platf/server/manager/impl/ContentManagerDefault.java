@@ -7,18 +7,18 @@ import org.ourproject.kune.platf.server.domain.Folder;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.Revision;
 import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.manager.ContentDescriptorManager;
+import org.ourproject.kune.platf.server.manager.ContentManager;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 @Singleton
-public class ContentDescriptorManagerDefault extends DefaultManager<Content, Long> implements
-	ContentDescriptorManager {
+public class ContentManagerDefault extends DefaultManager<Content, Long> implements
+	ContentManager {
 
     @Inject
-    public ContentDescriptorManagerDefault(final Provider<EntityManager> provider) {
+    public ContentManagerDefault(final Provider<EntityManager> provider) {
 	super(provider, Content.class);
     }
 

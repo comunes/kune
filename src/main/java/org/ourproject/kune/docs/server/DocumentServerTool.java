@@ -5,7 +5,7 @@ import org.ourproject.kune.platf.server.domain.Folder;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.ToolConfiguration;
 import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.manager.ContentDescriptorManager;
+import org.ourproject.kune.platf.server.manager.ContentManager;
 import org.ourproject.kune.platf.server.manager.FolderManager;
 import org.ourproject.kune.platf.server.manager.ToolConfigurationManager;
 import org.ourproject.kune.platf.server.tool.ServerTool;
@@ -15,14 +15,14 @@ import com.google.inject.Inject;
 
 public class DocumentServerTool implements ServerTool {
     public static final String NAME = "docs";
-    private final ContentDescriptorManager contentDescriptorManager;
+    private final ContentManager contentManager;
     private final ToolConfigurationManager configurationManager;
     private final FolderManager folderManager;
 
     @Inject
-    public DocumentServerTool(final ContentDescriptorManager contentDescriptorManager,
+    public DocumentServerTool(final ContentManager contentManager,
 	    final FolderManager folderManager, final ToolConfigurationManager configurationManager) {
-	this.contentDescriptorManager = contentDescriptorManager;
+	this.contentManager = contentManager;
 	this.folderManager = folderManager;
 	this.configurationManager = configurationManager;
     }
@@ -45,7 +45,7 @@ public class DocumentServerTool implements ServerTool {
 	    config.setRoot(folder);
 	    group.setToolConfig(NAME, config);
 	    configurationManager.persist(config);
-	    Content descriptor = contentDescriptorManager.createContent("Kune docs!", user, folder);
+	    Content descriptor = contentManager.createContent("Kune docs!", user, folder);
 	    group.setDefaultContent(descriptor);
 	}
 	return group;

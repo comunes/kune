@@ -8,7 +8,7 @@ import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Folder;
 import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.manager.ContentDescriptorManager;
+import org.ourproject.kune.platf.server.manager.ContentManager;
 import org.ourproject.kune.platf.server.manager.FolderManager;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 
@@ -18,20 +18,20 @@ import com.google.inject.Singleton;
 @Singleton
 public class FinderDefault implements Finder {
     private final GroupManager groupManager;
-    private final ContentDescriptorManager contentDescriptorManager;
+    private final ContentManager contentManager;
     private final FolderManager folderManager;
 
     @Inject
     public FinderDefault(final GroupManager groupManager, final FolderManager folderManager,
-	    final ContentDescriptorManager contentDescriptorManager) {
+	    final ContentManager contentManager) {
 	this.groupManager = groupManager;
 	this.folderManager = folderManager;
-	this.contentDescriptorManager = contentDescriptorManager;
+	this.contentManager = contentManager;
     }
 
     public Content getContent(final Long contentId) throws ContentNotFoundException {
 	try {
-	    return contentDescriptorManager.find(contentId);
+	    return contentManager.find(contentId);
 	} catch (PersistenceException e) {
 	    throw new ContentNotFoundException();
 	}
@@ -78,7 +78,7 @@ public class FinderDefault implements Finder {
 
     private Content findByContentReference(final String groupName, final String toolName,
 	    final Long folderId, final Long contentId) throws ContentNotFoundException {
-	Content descriptor = contentDescriptorManager.find(contentId);
+	Content descriptor = contentManager.find(contentId);
 	Folder folder = descriptor.getFolder();
 
 	if (!folder.getId().equals(folderId)) {

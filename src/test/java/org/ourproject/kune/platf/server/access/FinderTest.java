@@ -16,7 +16,7 @@ import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Folder;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.ToolConfiguration;
-import org.ourproject.kune.platf.server.manager.ContentDescriptorManager;
+import org.ourproject.kune.platf.server.manager.ContentManager;
 import org.ourproject.kune.platf.server.manager.FolderManager;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 
@@ -24,15 +24,15 @@ public class FinderTest {
 
     private GroupManager groupManager;
     private FolderManager folderManager;
-    private ContentDescriptorManager contentDescriptorManager;
-    private FinderDefault contentManager;
+    private ContentManager contentManager;
+    private FinderDefault finder;
 
     @Before
     public void createSession() {
 	this.groupManager = createStrictMock(GroupManager.class);
 	this.folderManager = createStrictMock(FolderManager.class);
-	this.contentDescriptorManager = createStrictMock(ContentDescriptorManager.class);
-	this.contentManager = new FinderDefault(groupManager, folderManager, contentDescriptorManager);
+	this.contentManager = createStrictMock(ContentManager.class);
+	this.finder = new FinderDefault(groupManager, folderManager, contentManager);
     }
 
     @Test
@@ -42,7 +42,7 @@ public class FinderTest {
 	Content descriptor = TestDomainHelper.createDescriptor(1l, "title", "content");
 	userGroup.setDefaultContent(descriptor);
 
-	Content content = contentManager.getContent(userGroup, new StateToken());
+	Content content = finder.getContent(userGroup, new StateToken());
 	assertSame(descriptor, content);
     }
 
@@ -53,12 +53,12 @@ public class FinderTest {
 	descriptor.setId(1l);
 	descriptor.setFolder(folder);
 
-	expect(contentDescriptorManager.find(2l)).andReturn(descriptor);
-	replay(contentDescriptorManager);
+	expect(contentManager.find(2l)).andReturn(descriptor);
+	replay(contentManager);
 
-	Content content = contentManager.getContent(null, new StateToken("groupShortName", "toolName", "1", "2"));
+	Content content = finder.getContent(null, new StateToken("groupShortName", "toolName", "1", "2"));
 	assertSame(descriptor, content);
-	verify(contentDescriptorManager);
+	verify(contentManager);
     }
 
     @Test(expected = ContentNotFoundException.class)
@@ -66,11 +66,11 @@ public class FinderTest {
 	Content descriptor = new Content();
 	Folder folder = TestDomainHelper.createFolderWithIdAndToolName(5, "toolName2");
 	descriptor.setFolder(folder);
-	expect(contentDescriptorManager.find(1l)).andReturn(descriptor);
-	replay(contentDescriptorManager);
+	expect(contentManager.find(1l)).andReturn(descriptor);
+	replay(contentManager);
 
-	contentManager.getContent(null, new StateToken("groupShortName", "toolName", "5", "1"));
-	verify(contentDescriptorManager);
+	finder.getContent(null, new StateToken("groupShortName", "toolName", "5", "1"));
+	verify(contentManager);
     }
 
     @Test(expected = ContentNotFoundException.class)
@@ -78,11 +78,11 @@ public class FinderTest {
 	Content descriptor = new Content();
 	Folder folder = TestDomainHelper.createFolderWithId(1);
 	descriptor.setFolder(folder);
-	expect(contentDescriptorManager.find(1l)).andReturn(descriptor);
-	replay(contentDescriptorManager);
+	expect(contentManager.find(1l)).andReturn(descriptor);
+	replay(contentManager);
 
-	contentManager.getContent(null, new StateToken("groupShortName", "toolName", "5", "1"));
-	verify(contentDescriptorManager);
+	finder.getContent(null, new StateToken("groupShortName", "toolName", "5", "1"));
+	verify(contentManager);
     }
 
     @Test(expected = ContentNotFoundException.class)
@@ -90,16 +90,16 @@ public class FinderTest {
 	Content descriptor = new Content();
 	Folder folder = TestDomainHelper.createFolderWithIdAndGroupAndTool(5, "groupOther", "toolName");
 	descriptor.setFolder(folder);
-	expect(contentDescriptorManager.find(1l)).andReturn(descriptor);
-	replay(contentDescriptorManager);
+	expect(contentManager.find(1l)).andReturn(descriptor);
+	replay(contentManager);
 
-	contentManager.getContent(null, new StateToken("groupShortName", "toolName", "5", "1"));
-	verify(contentDescriptorManager);
+	finder.getContent(null, new StateToken("groupShortName", "toolName", "5", "1"));
+	verify(contentManager);
     }
 
     @Test(expected = ContentNotFoundException.class)
     public void voyAJoder() throws ContentNotFoundException {
-	contentManager.getContent(null, new StateToken(null, "toolName", "1", "2"));
+	finder.getContent(null, new StateToken(null, "toolName", "1", "2"));
     }
 
     @Test
@@ -108,7 +108,7 @@ public class FinderTest {
 	expect(folderManager.find(1l)).andReturn(folder);
 
 	replay(folderManager);
-	Content content = contentManager.getContent(null, new StateToken("groupShortName", "toolName", "1", null));
+	Content content = finder.getContent(null, new StateToken("groupShortName", "toolName", "1", null));
 	assertNotNull(content);
 	assertSame(folder, content.getFolder());
 	verify(folderManager);
@@ -123,7 +123,7 @@ public class FinderTest {
 	replay(groupManager);
 
 	StateToken token = new StateToken("groupShortName", "toolName", null, null);
-	Content content = contentManager.getContent(null, token);
+	Content content = finder.getContent(null, token);
 	assertSame(folder, content.getFolder());
 	verify(groupManager);
     }
@@ -136,7 +136,7 @@ public class FinderTest {
 	expect(groupManager.findByShortName("groupShortName")).andReturn(group);
 	replay(groupManager);
 
-	Content content = contentManager.getContent(null, new StateToken("groupShortName", null, null, null));
+	Content content = finder.getContent(null, new StateToken("groupShortName", null, null, null));
 	assertSame(descriptor, content);
 	verify(groupManager);
     }
@@ -146,7 +146,7 @@ public class FinderTest {
 	Content content = new Content();
 	Group group = new Group();
 	group.setDefaultContent(content);
-	Content response = contentManager.getContent(group, new StateToken());
+	Content response = finder.getContent(group, new StateToken());
 	assertSame(content, response);
     }
 
@@ -155,11 +155,11 @@ public class FinderTest {
 	Content descriptor = new Content();
 	Folder folder = TestDomainHelper.createFolderWithIdAndToolName(5, "toolName");
 	descriptor.setFolder(folder);
-	expect(contentDescriptorManager.find(1l)).andReturn(descriptor);
-	replay(contentDescriptorManager);
+	expect(contentManager.find(1l)).andReturn(descriptor);
+	replay(contentManager);
 
-	contentManager.getContent(null, new StateToken("groupShortName", "toolName", "5", "1a"));
-	verify(contentDescriptorManager);
+	finder.getContent(null, new StateToken("groupShortName", "toolName", "5", "1a"));
+	verify(contentManager);
     }
 
 }

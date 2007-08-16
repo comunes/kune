@@ -13,7 +13,7 @@ import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Folder;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.manager.ContentDescriptorManager;
+import org.ourproject.kune.platf.server.manager.ContentManager;
 import org.ourproject.kune.platf.server.manager.FolderManager;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
@@ -32,20 +32,20 @@ public class ContentServerService implements ContentService {
     private final UserSession session;
     private final Mapper mapper;
     private final FolderManager folderManager;
-    private final ContentDescriptorManager contentDescriptorManager;
+    private final ContentManager contentManager;
     private final GroupManager groupManager;
     private final Accessor accessor;
 
     @Inject
     public ContentServerService(final UserSession session, final Accessor contentAccess,
 	    final StateService metadaManager, final FolderManager folderManager, final GroupManager groupManager,
-	    final ContentDescriptorManager contentDescriptorManager, final Mapper mapper) {
+	    final ContentManager contentManager, final Mapper mapper) {
 	this.session = session;
 	this.accessor = contentAccess;
 	this.stateService = metadaManager;
 	this.folderManager = folderManager;
 	this.groupManager = groupManager;
-	this.contentDescriptorManager = contentDescriptorManager;
+	this.contentManager = contentManager;
 	this.mapper = mapper;
     }
 
@@ -69,7 +69,7 @@ public class ContentServerService implements ContentService {
 	Long contentId = parseId(documentId);
 	Group userGroup = session.getUser().getUserGroup();
 	Access access = accessor.getContentAccess(contentId, userGroup, AccessType.EDIT);
-	Content descriptor = contentDescriptorManager.save(userGroup, access.getDescriptor(), content);
+	Content descriptor = contentManager.save(userGroup, access.getDescriptor(), content);
 	return descriptor.getVersion();
     }
 
@@ -80,7 +80,7 @@ public class ContentServerService implements ContentService {
 
 	User user = session.getUser();
 	Access access = accessor.getFolderAccess(parentFolderId, user.getUserGroup(), AccessType.EDIT);
-	access.setDescriptorWidthFolderRights(contentDescriptorManager.createContent(title, user, access.getFolder()));
+	access.setDescriptorWidthFolderRights(contentManager.createContent(title, user, access.getFolder()));
 	State state = stateService.create(access);
 	return mapper.map(state, StateDTO.class);
     }
