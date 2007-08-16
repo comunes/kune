@@ -38,6 +38,8 @@ public class Container implements HasId {
     @Basic(optional = false)
     private String absolutePath;
 
+    private String typeId;
+
     @OneToMany(cascade = CascadeType.ALL)
     private List<Alias> aliases;
 
@@ -130,6 +132,14 @@ public class Container implements HasId {
 	// FIXME: algo de lazy initialization (con size() se arregla...)
 	contents.size();
 	contents.add(descriptor);
+    }
+
+    public String getTypeId() {
+	return typeId;
+    }
+
+    public void setTypeId(final String typeId) {
+	this.typeId = typeId;
     }
 
     public List<Content> getContents() {

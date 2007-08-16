@@ -2,7 +2,7 @@ package org.ourproject.kune.platf.client.state;
 
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.tool.Tool;
+import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.workspace.client.Workspace;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
@@ -62,10 +62,10 @@ public class StateControllerDefault implements StateController {
 	String toolName = content.getToolName();
 	workspace.setTool(toolName);
 
-	Tool tool = app.getTool(toolName);
-	tool.setContent(content);
-	workspace.setContent(tool.getContent());
-	workspace.setContext(tool.getContext());
+	ClientTool clientTool = app.getTool(toolName);
+	clientTool.setContent(content);
+	workspace.setContent(clientTool.getContent());
+	workspace.setContext(clientTool.getContext());
 	Site.hideProgress();
     }
 

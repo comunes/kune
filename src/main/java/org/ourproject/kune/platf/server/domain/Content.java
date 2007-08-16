@@ -45,6 +45,9 @@ public class Content {
     @Basic(optional = false)
     private Long createdOn;
 
+    // @Basic(optional = false)
+    private String typeId;
+
     @OneToMany(cascade = CascadeType.ALL)
     private List<Translation> translations;
 
@@ -176,4 +179,13 @@ public class Content {
     public String getTitle() {
 	return lastRevision.getData().getTitle();
     }
+
+    public String getTypeId() {
+	return typeId;
+    }
+
+    public void setTypeId(final String typeId) {
+	this.typeId = typeId;
+    }
+
 }

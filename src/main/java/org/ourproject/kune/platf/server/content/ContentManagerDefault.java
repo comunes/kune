@@ -1,4 +1,4 @@
-package org.ourproject.kune.platf.server.manager.impl;
+package org.ourproject.kune.platf.server.content;
 
 import javax.persistence.EntityManager;
 
@@ -7,7 +7,7 @@ import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.Revision;
 import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.manager.ContentManager;
+import org.ourproject.kune.platf.server.manager.impl.DefaultManager;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

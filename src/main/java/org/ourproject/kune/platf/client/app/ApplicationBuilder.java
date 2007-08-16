@@ -14,7 +14,7 @@ import org.ourproject.kune.platf.client.state.ContentProviderImpl;
 import org.ourproject.kune.platf.client.state.State;
 import org.ourproject.kune.platf.client.state.StateController;
 import org.ourproject.kune.platf.client.state.StateControllerDefault;
-import org.ourproject.kune.platf.client.tool.Tool;
+import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.platf.client.utils.PrefetchUtilites;
 import org.ourproject.kune.workspace.client.actions.WorkspaceAction;
 
@@ -79,8 +79,8 @@ public class ApplicationBuilder {
 	HashMap tools = new HashMap();
 	int total = toolList.size();
 	for (int index = 0; index < total; index++) {
-	    Tool tool = (Tool) toolList.get(index);
-	    tools.put(tool.getName(), tool);
+	    ClientTool clientTool = (ClientTool) toolList.get(index);
+	    tools.put(clientTool.getName(), clientTool);
 	}
 	return tools;
     }

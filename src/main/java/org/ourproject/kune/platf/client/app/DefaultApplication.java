@@ -5,7 +5,7 @@ import java.util.Map;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.state.StateController;
-import org.ourproject.kune.platf.client.tool.Tool;
+import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
 import org.ourproject.kune.sitebar.client.bar.SiteBarListener;
 import org.ourproject.kune.workspace.client.Workspace;
@@ -50,8 +50,8 @@ public class DefaultApplication implements Application {
 	return workspace;
     }
 
-    public Tool getTool(final String toolName) {
-	return (Tool) tools.get(toolName);
+    public ClientTool getTool(final String toolName) {
+	return (ClientTool) tools.get(toolName);
     }
 
     public void init(final DefaultDispatcher dispatcher, final StateController stateManager) {

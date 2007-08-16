@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.ourproject.kune.app.server.servlet.Application;
 import org.ourproject.kune.app.server.servlet.ApplicationBuilder;
 import org.ourproject.kune.app.server.servlet.ApplicationListener;
-import org.ourproject.kune.docs.server.KuneDocumentModule;
+import org.ourproject.kune.docs.server.DocumentServerModule;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.KuneService;
 import org.ourproject.kune.platf.server.KunePlatformModule;
@@ -36,7 +36,7 @@ public class KuneApp {
 
     public void configure(final ApplicationBuilder builder) {
 	builder.use(new KunePlatformModule());
-	builder.use(new KuneDocumentModule());
+	builder.use(new DocumentServerModule());
 
 	builder.use(new AbstractModule() {
 	    public void configure() {

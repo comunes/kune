@@ -9,7 +9,7 @@ import org.ourproject.kune.platf.client.extend.Register;
 
 public class DocumentModule implements ClientModule {
     public void configure(final Register register) {
-	register.addTool(new DocumentTool());
+	register.addTool(new DocumentClientTool());
 	register.addAction(SaveDocument.KEY, new SaveDocument());
 	register.addAction(AddDocument.KEY, new AddDocument());
 	register.addAction(AddFolder.KEY, new AddFolder());

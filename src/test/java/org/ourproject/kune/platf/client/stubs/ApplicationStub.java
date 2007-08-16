@@ -6,7 +6,7 @@ import org.easymock.EasyMock;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.state.StateController;
-import org.ourproject.kune.platf.client.tool.Tool;
+import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.workspace.client.Workspace;
 
 public class ApplicationStub implements Application {
@@ -15,7 +15,7 @@ public class ApplicationStub implements Application {
     public Dispatcher dispatcher;
     private final boolean useNiceMocks;
     private final Workspace workspace;
-    private final HashMap<String, Tool> tools;
+    private final HashMap<String, ClientTool> clientTools;
     private final StateController stateManager;
 
     public ApplicationStub(final boolean useNiceMocks) {
@@ -23,7 +23,7 @@ public class ApplicationStub implements Application {
 	dispatcher = mock(Dispatcher.class);
 	workspace = mock(Workspace.class);
 	stateManager = mock(StateController.class);
-	tools = new HashMap<String, Tool>();
+	clientTools = new HashMap<String, ClientTool>();
     }
 
     private <T> T mock(final Class<T> type) {
@@ -38,8 +38,8 @@ public class ApplicationStub implements Application {
 	return dispatcher;
     }
 
-    public Tool getTool(final String toolName) {
-	return tools.get(toolName);
+    public ClientTool getTool(final String toolName) {
+	return clientTools.get(toolName);
     }
 
     public Workspace getWorkspace() {

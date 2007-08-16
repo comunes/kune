@@ -1,6 +1,6 @@
 package org.ourproject.kune.platf.client.rpc;
 
-import org.ourproject.kune.docs.client.DocumentTool;
+import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
@@ -21,7 +21,7 @@ public class ContentServiceMocked extends MockedService implements ContentServic
 	group.setShortName("kune");
 	content.setGroup(group);
 
-	content.setToolName(DocumentTool.NAME);
+	content.setToolName(DocumentClientTool.NAME);
 	content.setContentRights(new AccessRightsDTO(false, true, true));
 
 	content.setContent("this is the content");

@@ -3,18 +3,18 @@ package org.ourproject.kune.docs.client;
 import org.ourproject.kune.docs.client.ui.cnt.DocumentContent;
 import org.ourproject.kune.docs.client.ui.cnt.DocumentContentListener;
 import org.ourproject.kune.docs.client.ui.ctx.DocumentContext;
-import org.ourproject.kune.platf.client.tool.Tool;
+import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.platf.client.tool.ToolTrigger;
 import org.ourproject.kune.platf.client.tool.ToolTriggerDefault;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
-public class DocumentTool implements Tool, DocumentContentListener {
+public class DocumentClientTool implements ClientTool, DocumentContentListener {
     public static final String NAME = "docs";
     private final ToolTriggerDefault trigger;
     private final DocToolComponents components;
 
-    public DocumentTool() {
+    public DocumentClientTool() {
 	trigger = new ToolTriggerDefault(NAME, "documentos");
 	components = new DocToolComponents(this);
     }

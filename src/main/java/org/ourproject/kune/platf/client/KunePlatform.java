@@ -8,7 +8,7 @@ import java.util.Map;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.extend.ClientModule;
 import org.ourproject.kune.platf.client.extend.Register;
-import org.ourproject.kune.platf.client.tool.Tool;
+import org.ourproject.kune.platf.client.tool.ClientTool;
 
 public class KunePlatform implements Register {
     private final List tools;
@@ -19,8 +19,8 @@ public class KunePlatform implements Register {
 	this.actions = new HashMap();
     }
 
-    public void addTool(final Tool tool) {
-	tools.add(tool);
+    public void addTool(final ClientTool clientTool) {
+	tools.add(clientTool);
     }
 
     public void addAction(final String eventName, final Action action) {

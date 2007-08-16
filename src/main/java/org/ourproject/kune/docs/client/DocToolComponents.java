@@ -7,15 +7,15 @@ import org.ourproject.kune.docs.client.ui.ctx.DocumentContext;
 class DocToolComponents {
     private DocumentContent content;
     private DocumentContext context;
-    private final DocumentTool documentTool;
+    private final DocumentClientTool documentClientTool;
 
-    public DocToolComponents(final DocumentTool documentTool) {
-	this.documentTool = documentTool;
+    public DocToolComponents(final DocumentClientTool documentClientTool) {
+	this.documentClientTool = documentClientTool;
     }
 
     public DocumentContent getContent() {
 	if (content == null) {
-	    content = DocumentFactory.createDocumentContent(documentTool);
+	    content = DocumentFactory.createDocumentContent(documentClientTool);
 	}
 	return content;
     }

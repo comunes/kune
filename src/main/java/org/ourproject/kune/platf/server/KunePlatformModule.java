@@ -6,15 +6,17 @@ import org.ourproject.kune.platf.server.access.Accessor;
 import org.ourproject.kune.platf.server.access.AccessorDefault;
 import org.ourproject.kune.platf.server.access.Finder;
 import org.ourproject.kune.platf.server.access.FinderDefault;
-import org.ourproject.kune.platf.server.manager.ContentManager;
-import org.ourproject.kune.platf.server.manager.FolderManager;
+import org.ourproject.kune.platf.server.content.ContentManager;
+import org.ourproject.kune.platf.server.content.ContentManagerDefault;
+import org.ourproject.kune.platf.server.content.ContainerManager;
+import org.ourproject.kune.platf.server.content.ContainerManagerDefault;
+import org.ourproject.kune.platf.server.content.CreationService;
+import org.ourproject.kune.platf.server.content.CreationServiceDefault;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 import org.ourproject.kune.platf.server.manager.ToolConfigurationManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
-import org.ourproject.kune.platf.server.manager.impl.ContentManagerDefault;
-import org.ourproject.kune.platf.server.manager.impl.FolderManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.GroupManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.LicenseManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.SocialNetworkManagerDefault;
@@ -55,6 +57,7 @@ public class KunePlatformModule extends AbstractModule {
     }
 
     private void bindManagers() {
+	bind(CreationService.class).to(CreationServiceDefault.class);
 	bind(Accessor.class).to(AccessorDefault.class);
 	bind(UserManager.class).to(UserManagerDefault.class);
 	bind(GroupManager.class).to(GroupManagerDefault.class);
@@ -62,7 +65,7 @@ public class KunePlatformModule extends AbstractModule {
 	bind(ToolConfigurationManager.class).to(ToolConfigurationManagerDefault.class);
 	bind(Finder.class).to(FinderDefault.class);
 	bind(StateService.class).to(StateServiceDefault.class);
-	bind(FolderManager.class).to(FolderManagerDefault.class);
+	bind(ContainerManager.class).to(ContainerManagerDefault.class);
 	bind(LicenseManager.class).to(LicenseManagerDefault.class);
 	bind(SocialNetworkManager.class).to(SocialNetworkManagerDefault.class);
     }

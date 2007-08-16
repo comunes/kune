@@ -1,12 +1,12 @@
 package org.ourproject.kune.docs.server;
 
+import org.ourproject.kune.platf.server.content.ContentManager;
+import org.ourproject.kune.platf.server.content.ContainerManager;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.ToolConfiguration;
 import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.manager.ContentManager;
-import org.ourproject.kune.platf.server.manager.FolderManager;
 import org.ourproject.kune.platf.server.manager.ToolConfigurationManager;
 import org.ourproject.kune.platf.server.tool.ServerTool;
 import org.ourproject.kune.platf.server.tool.ToolRegistry;
@@ -17,13 +17,13 @@ public class DocumentServerTool implements ServerTool {
     public static final String NAME = "docs";
     private final ContentManager contentManager;
     private final ToolConfigurationManager configurationManager;
-    private final FolderManager folderManager;
+    private final ContainerManager containerManager;
 
     @Inject
-    public DocumentServerTool(final ContentManager contentManager,
-	    final FolderManager folderManager, final ToolConfigurationManager configurationManager) {
+    public DocumentServerTool(final ContentManager contentManager, final ContainerManager containerManager,
+	    final ToolConfigurationManager configurationManager) {
 	this.contentManager = contentManager;
-	this.folderManager = folderManager;
+	this.containerManager = containerManager;
 	this.configurationManager = configurationManager;
     }
 
@@ -41,7 +41,7 @@ public class DocumentServerTool implements ServerTool {
 	if (config == null) {
 	    config = new ToolConfiguration();
 	    // i18n
-	    Container container = folderManager.createRootFolder(group, NAME, "docs");
+	    Container container = containerManager.createRootFolder(group, NAME, "docs", "docs.rootFolder");
 	    config.setRoot(container);
 	    group.setToolConfig(NAME, config);
 	    configurationManager.persist(config);

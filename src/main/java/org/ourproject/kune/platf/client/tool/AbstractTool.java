@@ -4,7 +4,7 @@ import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.state.State;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 
-public abstract class AbstractTool implements Tool {
+public abstract class AbstractTool implements ClientTool {
     public final String name;
     private WorkspaceComponent content;
     private WorkspaceComponent context;

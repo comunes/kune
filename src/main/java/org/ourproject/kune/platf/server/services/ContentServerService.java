@@ -9,16 +9,15 @@ import org.ourproject.kune.platf.server.access.Access;
 import org.ourproject.kune.platf.server.access.AccessType;
 import org.ourproject.kune.platf.server.access.Accessor;
 import org.ourproject.kune.platf.server.auth.Authenticated;
-import org.ourproject.kune.platf.server.domain.Content;
+import org.ourproject.kune.platf.server.content.CreationService;
 import org.ourproject.kune.platf.server.domain.Container;
+import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.manager.ContentManager;
-import org.ourproject.kune.platf.server.manager.FolderManager;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
-import org.ourproject.kune.platf.server.state.StateService;
 import org.ourproject.kune.platf.server.state.State;
+import org.ourproject.kune.platf.server.state.StateService;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.inject.Inject;
@@ -31,21 +30,19 @@ public class ContentServerService implements ContentService {
     private final StateService stateService;
     private final UserSession session;
     private final Mapper mapper;
-    private final FolderManager folderManager;
-    private final ContentManager contentManager;
     private final GroupManager groupManager;
     private final Accessor accessor;
+    private final CreationService creationService;
 
     @Inject
     public ContentServerService(final UserSession session, final Accessor contentAccess,
-	    final StateService metadaManager, final FolderManager folderManager, final GroupManager groupManager,
-	    final ContentManager contentManager, final Mapper mapper) {
+	    final StateService stateService, final CreationService creationService, final GroupManager groupManager,
+	    final Mapper mapper) {
 	this.session = session;
 	this.accessor = contentAccess;
-	this.stateService = metadaManager;
-	this.folderManager = folderManager;
+	this.stateService = stateService;
+	this.creationService = creationService;
 	this.groupManager = groupManager;
-	this.contentManager = contentManager;
 	this.mapper = mapper;
     }
 
@@ -69,7 +66,7 @@ public class ContentServerService implements ContentService {
 	Long contentId = parseId(documentId);
 	Group userGroup = session.getUser().getUserGroup();
 	Access access = accessor.getContentAccess(contentId, userGroup, AccessType.EDIT);
-	Content descriptor = contentManager.save(userGroup, access.getDescriptor(), content);
+	Content descriptor = creationService.saveContent(userGroup, access.getDescriptor(), content);
 	return descriptor.getVersion();
     }
 
@@ -80,7 +77,7 @@ public class ContentServerService implements ContentService {
 
 	User user = session.getUser();
 	Access access = accessor.getFolderAccess(parentFolderId, user.getUserGroup(), AccessType.EDIT);
-	access.setDescriptorWidthFolderRights(contentManager.createContent(title, user, access.getFolder()));
+	access.setDescriptorWidthFolderRights(creationService.createContent(title, user, access.getFolder()));
 	State state = stateService.create(access);
 	return mapper.map(state, StateDTO.class);
     }
@@ -92,7 +89,7 @@ public class ContentServerService implements ContentService {
 	Group group = groupManager.findByShortName(groupShotName);
 
 	Access access = accessor.getFolderAccess(parentFolderId, group, AccessType.EDIT);
-	Container container = folderManager.createFolder(group, parentFolderId, title);
+	Container container = creationService.createFolder(group, parentFolderId, title);
 	String toolName = container.getToolName();
 	StateToken token = new StateToken(group.getShortName(), toolName, container.getId().toString(), null);
 	access = accessor.getAccess(token, group, group, AccessType.READ);

@@ -4,12 +4,12 @@ import javax.persistence.PersistenceException;
 
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
+import org.ourproject.kune.platf.server.content.ContentManager;
+import org.ourproject.kune.platf.server.content.ContainerManager;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.manager.ContentManager;
-import org.ourproject.kune.platf.server.manager.FolderManager;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 
 import com.google.inject.Inject;
@@ -19,13 +19,13 @@ import com.google.inject.Singleton;
 public class FinderDefault implements Finder {
     private final GroupManager groupManager;
     private final ContentManager contentManager;
-    private final FolderManager folderManager;
+    private final ContainerManager containerManager;
 
     @Inject
-    public FinderDefault(final GroupManager groupManager, final FolderManager folderManager,
+    public FinderDefault(final GroupManager groupManager, final ContainerManager containerManager,
 	    final ContentManager contentManager) {
 	this.groupManager = groupManager;
-	this.folderManager = folderManager;
+	this.containerManager = containerManager;
 	this.contentManager = contentManager;
     }
 
@@ -39,7 +39,7 @@ public class FinderDefault implements Finder {
 
     public Container getFolder(final Long folderId) throws ContentNotFoundException {
 	try {
-	    return folderManager.find(folderId);
+	    return containerManager.find(folderId);
 	} catch (PersistenceException e) {
 	    throw new ContentNotFoundException();
 	}
@@ -94,7 +94,7 @@ public class FinderDefault implements Finder {
     }
 
     private Content findByFolderReference(final String groupName, final String toolName, final Long folderId) {
-	Container container = folderManager.find(folderId);
+	Container container = containerManager.find(folderId);
 	return generateFolderFakeContent(container);
     }
 

@@ -1,6 +1,6 @@
 package org.ourproject.kune.platf.integration;
 
-import org.ourproject.kune.docs.server.KuneDocumentModule;
+import org.ourproject.kune.docs.server.DocumentServerModule;
 import org.ourproject.kune.platf.server.KunePersistenceService;
 import org.ourproject.kune.platf.server.KunePlatformModule;
 import org.ourproject.kune.platf.server.properties.PropertiesFileName;
@@ -18,7 +18,7 @@ public class IntegrationTestHelper {
     private final Injector injector;
 
     public IntegrationTestHelper(final Object test) {
-	injector = Guice.createInjector(new KunePlatformModule(), new KuneDocumentModule(), new AbstractModule() {
+	injector = Guice.createInjector(new KunePlatformModule(), new DocumentServerModule(), new AbstractModule() {
 	    @Override
 	    protected void configure() {
 		bindScope(SessionScoped.class, Scopes.SINGLETON);

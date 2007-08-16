@@ -12,27 +12,27 @@ import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.server.TestDomainHelper;
+import org.ourproject.kune.platf.server.content.ContentManager;
+import org.ourproject.kune.platf.server.content.ContainerManager;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.ToolConfiguration;
-import org.ourproject.kune.platf.server.manager.ContentManager;
-import org.ourproject.kune.platf.server.manager.FolderManager;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 
 public class FinderTest {
 
     private GroupManager groupManager;
-    private FolderManager folderManager;
+    private ContainerManager containerManager;
     private ContentManager contentManager;
     private FinderDefault finder;
 
     @Before
     public void createSession() {
 	this.groupManager = createStrictMock(GroupManager.class);
-	this.folderManager = createStrictMock(FolderManager.class);
+	this.containerManager = createStrictMock(ContainerManager.class);
 	this.contentManager = createStrictMock(ContentManager.class);
-	this.finder = new FinderDefault(groupManager, folderManager, contentManager);
+	this.finder = new FinderDefault(groupManager, containerManager, contentManager);
     }
 
     @Test
@@ -105,13 +105,13 @@ public class FinderTest {
     @Test
     public void testDocMissing() throws ContentNotFoundException {
 	Container container = new Container();
-	expect(folderManager.find(1l)).andReturn(container);
+	expect(containerManager.find(1l)).andReturn(container);
 
-	replay(folderManager);
+	replay(containerManager);
 	Content content = finder.getContent(null, new StateToken("groupShortName", "toolName", "1", null));
 	assertNotNull(content);
 	assertSame(container, content.getFolder());
-	verify(folderManager);
+	verify(containerManager);
     }
 
     @Test
