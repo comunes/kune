@@ -50,4 +50,7 @@ public class ApplicationStub implements Application {
 	return stateManager;
     }
 
+    public void setGroupState(final String groupShortName) {
+
+    }
 }

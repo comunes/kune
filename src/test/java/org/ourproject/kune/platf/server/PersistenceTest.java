@@ -27,7 +27,7 @@ public abstract class PersistenceTest {
 
     @Before
     public void prepare() {
-	Injector injector = TestHelper.create(new KunePlatformModule(), persistenceUnit, propetiesFileName);
+	Injector injector = TestHelper.create(new PlatformServerModule(), persistenceUnit, propetiesFileName);
 	PersistenceService persistence = injector.getInstance(PersistenceService.class);
 	// To Debug insert breakpoint here
 	persistence.start();

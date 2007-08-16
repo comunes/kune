@@ -31,7 +31,7 @@ public class FolderContextPresenter implements FolderContext {
 	for (int index = 0; index < folders.size(); index++) {
 	    ContainerDTO child = (ContainerDTO) folders.get(index);
 	    state.setFolder(child.getId().toString());
-	    view.add(child.getName(), "folder", state.getEncoded());
+	    view.addItem(child.getName(), "folder", state.getEncoded());
 	}
 
 	state.setFolder(folder.getId().toString());
@@ -39,10 +39,10 @@ public class FolderContextPresenter implements FolderContext {
 	for (int index = 0; index < contents.size(); index++) {
 	    ContentDTO dto = (ContentDTO) contents.get(index);
 	    state.setDocument(dto.getId().toString());
-	    view.add(dto.getTitle(), "file", state.getEncoded());
+	    view.addItem(dto.getTitle(), "file", state.getEncoded());
 	}
 
-	view.setParentButtonVisible(folder.getParentFolderId() != null);
-	view.setAddControlsVisibles(rights.isEditable, rights.isEditable);
+	view.setParentButtonEnabled(folder.getParentFolderId() != null);
+	view.setControlsVisible(rights.isEditable);
     }
 }

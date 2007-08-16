@@ -14,4 +14,11 @@ public interface Application {
 
     StateController getStateManager();
 
+    /**
+     * informa a todas las herramientas del grupo actual
+     * 
+     * @param group
+     */
+    void setGroupState(String groupShortName);
+
 }

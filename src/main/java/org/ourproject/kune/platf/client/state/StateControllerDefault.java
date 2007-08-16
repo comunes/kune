@@ -1,6 +1,7 @@
 package org.ourproject.kune.platf.client.state;
 
 import org.ourproject.kune.platf.client.app.Application;
+import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.sitebar.client.Site;
@@ -57,8 +58,10 @@ public class StateControllerDefault implements StateController {
     }
 
     private void loadContent(final StateDTO content) {
+	GroupDTO group = content.getGroup();
+	app.setGroupState(group.getShortName());
 	Workspace workspace = app.getWorkspace();
-	workspace.showGroup(content.getGroup());
+	workspace.showGroup(group);
 	String toolName = content.getToolName();
 	workspace.setTool(toolName);
 

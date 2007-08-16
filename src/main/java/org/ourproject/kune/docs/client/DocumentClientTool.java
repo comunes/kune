@@ -3,19 +3,17 @@ package org.ourproject.kune.docs.client;
 import org.ourproject.kune.docs.client.ui.cnt.DocumentContent;
 import org.ourproject.kune.docs.client.ui.cnt.DocumentContentListener;
 import org.ourproject.kune.docs.client.ui.ctx.DocumentContext;
-import org.ourproject.kune.platf.client.tool.ClientTool;
-import org.ourproject.kune.platf.client.tool.ToolTrigger;
-import org.ourproject.kune.platf.client.tool.ToolTriggerDefault;
+import org.ourproject.kune.platf.client.tool.AbstractClientTool;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
-public class DocumentClientTool implements ClientTool, DocumentContentListener {
+public class DocumentClientTool extends AbstractClientTool implements DocumentContentListener {
     public static final String NAME = "docs";
-    private final ToolTriggerDefault trigger;
     private final DocToolComponents components;
 
     public DocumentClientTool() {
-	trigger = new ToolTriggerDefault(NAME, "documentos");
+	// i18n
+	super("documentos");
 	components = new DocToolComponents(this);
     }
 
@@ -38,10 +36,6 @@ public class DocumentClientTool implements ClientTool, DocumentContentListener {
 	context.setContent(content);
 	// TODO: revistar el interface de trigger (setState)
 	trigger.setState(content.getState().toString());
-    }
-
-    public ToolTrigger getTrigger() {
-	return trigger;
     }
 
     public void onEdit() {

@@ -7,10 +7,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.ourproject.kune.app.server.servlet.Application;
 import org.ourproject.kune.app.server.servlet.ApplicationBuilder;
 import org.ourproject.kune.app.server.servlet.ApplicationListener;
+import org.ourproject.kune.chat.server.ChatServerModule;
 import org.ourproject.kune.docs.server.DocumentServerModule;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.KuneService;
-import org.ourproject.kune.platf.server.KunePlatformModule;
+import org.ourproject.kune.platf.server.PlatformServerModule;
 import org.ourproject.kune.platf.server.LoggerMethodInterceptor;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.properties.PropertiesFileName;
@@ -35,9 +36,9 @@ public class KuneApp {
     }
 
     public void configure(final ApplicationBuilder builder) {
-	builder.use(new KunePlatformModule());
+	builder.use(new PlatformServerModule());
 	builder.use(new DocumentServerModule());
-
+	builder.use(new ChatServerModule());
 	builder.use(new AbstractModule() {
 	    public void configure() {
 		bindInterceptor(Matchers.any(), new NotInObject(), new LoggerMethodInterceptor());

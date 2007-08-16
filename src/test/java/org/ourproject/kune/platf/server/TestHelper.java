@@ -10,7 +10,7 @@ import com.wideplay.warp.jpa.JpaUnit;
 
 public class TestHelper {
     public static void inject(final Object target) {
-	TestHelper.create(new KunePlatformModule(), "test", "kune.properties").injectMembers(target);
+	TestHelper.create(new PlatformServerModule(), "test", "kune.properties").injectMembers(target);
     }
 
     public static Injector create(final Module module, final String persistenceUnit, final String propetiesFileName) {

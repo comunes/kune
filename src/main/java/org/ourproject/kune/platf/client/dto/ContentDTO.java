@@ -6,6 +6,7 @@ public class ContentDTO implements IsSerializable {
 
     private Long id;
     private String title;
+    private String typeId;
 
     public Long getId() {
 	return id;
@@ -21,6 +22,14 @@ public class ContentDTO implements IsSerializable {
 
     public void setTitle(final String title) {
 	this.title = title;
+    }
+
+    public String getTypeId() {
+	return typeId;
+    }
+
+    public void setTypeId(final String typeId) {
+	this.typeId = typeId;
     }
 
 }

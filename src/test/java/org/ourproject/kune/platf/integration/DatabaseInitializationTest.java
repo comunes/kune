@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.ourproject.kune.chat.server.ChatServerTool;
 import org.ourproject.kune.docs.server.DocumentServerTool;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.ToolConfiguration;
@@ -18,18 +19,25 @@ public class DatabaseInitializationTest {
     GroupManager manager;
     @Inject
     LicenseManager licenseManager;
+    private Group group;
 
     @Before
     public void init() {
 	new IntegrationTestHelper(this);
+	group = manager.getDefaultGroup();
     }
 
     @Test
-    public void testDatabase() {
-	Group group = manager.getDefaultGroup();
+    public void testToolConfiguration() {
 	assertNotNull(group);
-	ToolConfiguration toolConfiguration = group.getToolConfiguration(DocumentServerTool.NAME);
-	assertNotNull(toolConfiguration);
+	ToolConfiguration docToolConfig = group.getToolConfiguration(DocumentServerTool.NAME);
+	assertNotNull(docToolConfig);
+	ToolConfiguration chatToolConfig = group.getToolConfiguration(ChatServerTool.NAME);
+	assertNotNull(chatToolConfig);
+    }
+
+    @Test
+    public void testDefaultContentAndLicenses() {
 	assertNotNull(group.getDefaultContent());
 	assertTrue(licenseManager.getAll().size() > 0);
     }

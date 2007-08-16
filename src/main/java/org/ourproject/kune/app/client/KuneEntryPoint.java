@@ -1,7 +1,7 @@
 package org.ourproject.kune.app.client;
 
-import org.ourproject.kune.docs.client.DocumentModule;
-import org.ourproject.kune.platf.client.KuneModule;
+import org.ourproject.kune.docs.client.DocsClientModule;
+import org.ourproject.kune.platf.client.KuneClientModule;
 import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.ApplicationBuilder;
@@ -27,8 +27,9 @@ public class KuneEntryPoint implements EntryPoint {
 	    informUserAndStop();
 	}
 	KunePlatform platform = new KunePlatform();
-	platform.install(new KuneModule());
-	platform.install(new DocumentModule());
+	platform.install(new KuneClientModule());
+	platform.install(new DocsClientModule());
+	platform.install(new ChatClientModule());
 	Application app = new ApplicationBuilder(userHash, platform).build();
 
 	String token = History.getToken();

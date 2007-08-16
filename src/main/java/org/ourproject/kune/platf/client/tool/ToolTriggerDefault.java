@@ -1,5 +1,7 @@
 package org.ourproject.kune.platf.client.tool;
 
+import org.ourproject.kune.platf.client.dto.StateToken;
+
 public class ToolTriggerDefault implements ToolTrigger {
     private final String toolName;
     private final String label;
@@ -24,6 +26,10 @@ public class ToolTriggerDefault implements ToolTrigger {
 
     public void setState(final String encoded) {
 	listener.onStateChanged(encoded);
+    }
+
+    public void setState(final StateToken stateToken) {
+	setState(stateToken.getEncoded());
     }
 
 }

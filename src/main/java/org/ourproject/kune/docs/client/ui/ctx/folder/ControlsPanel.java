@@ -24,8 +24,4 @@ class ControlsPanel extends VerticalPanel {
 	add(btnAddFolder);
     }
 
-    public void setVisibleControls(final boolean isAddDocumentVisible, final boolean isAddFolderVisible) {
-	btnAddDocument.setVisible(isAddDocumentVisible);
-	btnAddFolder.setVisible(isAddFolderVisible);
-    }
 }

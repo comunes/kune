@@ -10,6 +10,7 @@ public class ContainerDTO implements IsSerializable {
     private Long id;
     private String name;
     private String absolutePath;
+    private String typeId;
 
     /**
      * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.ContainerDTO>
@@ -70,6 +71,14 @@ public class ContainerDTO implements IsSerializable {
 
     public void setContents(final List contents) {
 	this.contents = contents;
+    }
+
+    public String getTypeId() {
+	return typeId;
+    }
+
+    public void setTypeId(final String typeId) {
+	this.typeId = typeId;
     }
 
 }

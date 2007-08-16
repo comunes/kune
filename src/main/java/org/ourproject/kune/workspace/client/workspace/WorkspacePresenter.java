@@ -41,11 +41,10 @@ public class WorkspacePresenter implements Workspace {
     public void setContext(final WorkspaceComponent contextComponent) {
 	if (context != null) {
 	    context.detach();
-	} else if (context != contextComponent) {
-	    context = contextComponent;
-	    context.attach();
-	    view.setContext(context.getView());
 	}
+	context = contextComponent;
+	context.attach();
+	view.setContext(context.getView());
     }
 
     public void setContent(final WorkspaceComponent contentComponent) {

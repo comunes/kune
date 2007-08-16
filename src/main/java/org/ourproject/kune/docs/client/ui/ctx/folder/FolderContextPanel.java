@@ -1,7 +1,9 @@
 package org.ourproject.kune.docs.client.ui.ctx.folder;
 
+
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Widget;
 
 public class FolderContextPanel extends DockPanel implements FolderContentView {
     private final ControlsPanel controls;
@@ -10,7 +12,7 @@ public class FolderContextPanel extends DockPanel implements FolderContentView {
 
     public FolderContextPanel(final FolderContextListener listener) {
 	topBar = new TopBar(listener);
-	add(topBar, DockPanel.NORTH);
+	addTopBar(topBar);
 
 	items = new ItemsPanel();
 	add(items, DockPanel.NORTH);
@@ -31,7 +33,11 @@ public class FolderContextPanel extends DockPanel implements FolderContentView {
 
     }
 
-    public void add(final String name, final String type, final String event) {
+    private void addTopBar(Widget widget) {
+	add(topBar, DockPanel.NORTH);
+    }
+
+    public void addItem(final String name, final String type, final String event) {
 	items.add(name, type, event);
     }
 
@@ -42,15 +48,15 @@ public class FolderContextPanel extends DockPanel implements FolderContentView {
 	items.clear();
     }
 
-    public void setAddControlsVisibles(final boolean isAddDocumentVisible, final boolean isAddFolderVisible) {
-	controls.setVisibleControls(isAddDocumentVisible, isAddFolderVisible);
+    public void setControlsVisible(final boolean isVisible) {
+	controls.setVisible(isVisible);
     }
 
     public void setCurrentName(final String name) {
 	topBar.setCurrentName(name);
     }
 
-    public void setParentButtonVisible(final boolean isVisible) {
+    public void setParentButtonEnabled(final boolean isVisible) {
 	topBar.setParentButtonVisible(isVisible);
     }
 }

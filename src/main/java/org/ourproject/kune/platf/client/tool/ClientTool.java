@@ -12,6 +12,8 @@ public interface ClientTool {
 
     WorkspaceComponent getContent();
 
-    void setContent(StateDTO content);
+    void setContent(StateDTO state);
+
+    void setGroupState(String groupShortName);
 
 }

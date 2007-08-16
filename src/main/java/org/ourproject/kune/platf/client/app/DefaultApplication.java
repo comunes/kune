@@ -1,5 +1,6 @@
 package org.ourproject.kune.platf.client.app;
 
+import java.util.Iterator;
 import java.util.Map;
 
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
@@ -61,6 +62,14 @@ public class DefaultApplication implements Application {
 
     public StateController getStateManager() {
 	return stateManager;
+    }
+
+    public void setGroupState(final String groupShortName) {
+	Iterator iterator = tools.values().iterator();
+	while (iterator.hasNext()) {
+	    ClientTool tool = (ClientTool) iterator.next();
+	    tool.setGroupState(groupShortName);
+	}
     }
 
 }
