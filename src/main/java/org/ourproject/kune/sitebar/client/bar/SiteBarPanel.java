@@ -175,8 +175,8 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 
     public void showNewGroupDialog() {
 	final NewGroupForm newGroupForm = SiteBarFactory.createNewGroup(presenter);
-	newGroupDialog = new TwoButtonsDialog(t.RegisterANewGroup(), t.Register(), t.Cancel(), true, false, 350, 200,
-		350, 200, new FormListener() {
+	newGroupDialog = new TwoButtonsDialog(t.RegisterANewGroup(), t.Register(), t.Cancel(), true, false, 450, 300,
+		450, 300, new FormListener() {
 		    public void onAccept() {
 			newGroupForm.doCreateNewGroup();
 		    }

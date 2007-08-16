@@ -19,13 +19,13 @@ public class LoginFormPanel extends Composite implements LoginFormView, View {
 
     public LoginFormPanel(final LoginForm initialPresenter) {
 	final VerticalPanel generalVP = new VerticalPanel();
-
 	initWidget(generalVP);
 
 	signInForm = createSignInForm();
 	generalVP.add(signInForm);
+	generalVP.setSpacing(200);
+	generalVP.setWidth("100%");
 	generalVP.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-	generalVP.setSpacing(30);
     }
 
     public void clearData() {
@@ -55,6 +55,9 @@ public class LoginFormPanel extends Composite implements LoginFormView, View {
 		setName(NICKOREMAIL_FIELD);
 		setWidth(175);
 		setAllowBlank(false);
+		setMsgTarget("side");
+		// setRegex("\\d");
+		// setRegexText("Numbers only");
 	    }
 	}));
 
@@ -65,6 +68,7 @@ public class LoginFormPanel extends Composite implements LoginFormView, View {
 		setWidth(175);
 		setPassword(true);
 		setAllowBlank(false);
+		setMsgTarget("side");
 	    }
 	}));
 	form.end();

@@ -30,12 +30,13 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
 	add(controls, DockPanel.SOUTH);
 
 	// FIXME: Test of width
-	setWidth("100%");
-	setHeight("100%");
-	setCellWidth(topBar, "100%");
-	expand.setWidth("100%");
+	// setWidth("100%");
+	// setHeight("100%");
+	// setCellWidth(topBar, "100%");
+
+	// expand.setWidth("100%");
 	expand.setHeight("100%");
-	setCellWidth(expand, "100%");
+	// setCellWidth(expand, "100%");
 	setCellHeight(expand, "100%");
 	addStyleName("kune-NavigationBar");
     }

@@ -1,7 +1,6 @@
 <module>
     <inherits name="com.google.gwt.i18n.I18N" />
     <inherits name='com.google.gwt.user.User'/>
-    <inherits name="org.gwm.GwtWindowManager" />
     <inherits name='com.gwtext.GwtExt'/>
     <inherits name='org.ourproject.kune.platf.Kune-Platform'/>
     <inherits name='org.ourproject.kune.home.Kune-Home'/>

@@ -56,7 +56,7 @@ public class SiteBarFactory {
 
     public static NewGroupForm createNewGroup(final NewGroupListener listener) {
 	NewGroupFormPresenter presenter = new NewGroupFormPresenter(listener);
-	NewGroupFormPanel view = new NewGroupFormPanel(presenter);
+	NewGroupFormPanel view = new NewGroupFormPanel();
 	presenter.init(view);
 	return presenter;
     }
