@@ -5,31 +5,26 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.sitebar.client.Site;
+import org.ourproject.kune.workspace.client.actions.WorkspaceAction;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class AddFolder extends AbstractAddAction {
+public class AddFolder extends WorkspaceAction {
     public static final String EVENT = "docs.AddFolder";
     public static final String KEY = "docs.AddFolder";
-    GroupDTO group;
-
-    public AddFolder() {
-	group = null;
-    }
 
     public void execute(final Object value, final Object extra) {
-	group = (GroupDTO) extra;
-	// i18n
-	showNewDocDialog((ContainerDTO) value, "create new folder");
+	String name = (String) value;
+	GroupDTO group = getState().getGroup();
+	ContainerDTO container = getState().getFolder();
+	addDocument(name, group, container);
     }
 
-    protected void add() {
-	// i18n
+    private void addDocument(final String name, final GroupDTO group, final ContainerDTO container) {
 	Site.showProgress("adding document");
 	ContentServiceAsync server = ContentService.App.getInstance();
-	String name = form.getName();
-	server.addFolder(user, group.getShortName(), containerDTO.getId(), name, new AsyncCallback() {
+	server.addFolder(user, group.getShortName(), container.getId(), name, new AsyncCallback() {
 	    public void onFailure(final Throwable caught) {
 	    }
 

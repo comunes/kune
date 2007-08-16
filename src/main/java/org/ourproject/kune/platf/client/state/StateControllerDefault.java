@@ -14,14 +14,14 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class StateControllerDefault implements StateController {
     private final Application app;
-    private final ApplicationState applicationState;
+    private final Session session;
     private final ContentProvider provider;
 
     public StateControllerDefault(final ContentProvider provider, final Application app,
-	    final ApplicationState applicationState) {
+	    final Session session) {
 	this.provider = provider;
 	this.app = app;
-	this.applicationState = applicationState;
+	this.session = session;
     }
 
     public void reload() {
@@ -35,7 +35,7 @@ public class StateControllerDefault implements StateController {
 
     private void onHistoryChanged(final StateToken newState) {
 	Site.showProgress("cargando...");
-	provider.getContent(applicationState.user, newState, new AsyncCallback() {
+	provider.getContent(session.user, newState, new AsyncCallback() {
 	    public void onFailure(final Throwable caught) {
 		Site.hideProgress();
 	    }
@@ -59,7 +59,9 @@ public class StateControllerDefault implements StateController {
     }
 
     private void loadContent(final StateDTO state) {
-	applicationState.setCurrent(state);
+	GWT.log("content rights:" + state.getContentRights().toString(), null);
+	GWT.log("folder rights:" + state.getFolderRights().toString(), null);
+	session.setCurrent(state);
 	GroupDTO group = state.getGroup();
 	app.setGroupState(group.getShortName());
 	Workspace workspace = app.getWorkspace();
@@ -75,7 +77,7 @@ public class StateControllerDefault implements StateController {
     }
 
     public String getUser() {
-	return applicationState.user;
+	return session.user;
     }
 
 }

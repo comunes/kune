@@ -9,17 +9,17 @@ import com.google.gwt.user.client.ui.ImageBundle;
  * http://code.google.com/p/google-web-toolkit/wiki/ImageBundleDesign
  * 
  */
-interface ContextItemsImages extends ImageBundle {
+public interface ContextItemsImages extends ImageBundle {
 
     public static class App {
-        private static ContextItemsImages ourInstance = null;
+	private static ContextItemsImages ourInstance = null;
 
-        public static synchronized ContextItemsImages getInstance() {
-            if (ourInstance == null) {
-                ourInstance = (ContextItemsImages) GWT.create(ContextItemsImages.class);
-            }
-            return ourInstance;
-        }
+	public static synchronized ContextItemsImages getInstance() {
+	    if (ourInstance == null) {
+		ourInstance = (ContextItemsImages) GWT.create(ContextItemsImages.class);
+	    }
+	    return ourInstance;
+	}
     }
 
     /**

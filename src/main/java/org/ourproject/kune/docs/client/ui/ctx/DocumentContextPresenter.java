@@ -10,7 +10,6 @@ import org.ourproject.kune.workspace.client.dto.StateDTO;
 public class DocumentContextPresenter implements DocumentContext {
     private final WorkspaceDeckView view;
     private final Components components;
-    private StateDTO content;
 
     public DocumentContextPresenter(final WorkspaceDeckView view) {
 	this.view = view;
@@ -27,22 +26,7 @@ public class DocumentContextPresenter implements DocumentContext {
 	return view;
     }
 
-    // public void onAddDocument() {
-    // Dispatcher.App.instance.fire(AddDocument.KEY, content.getFolder());
-    // }
-    //
-    // public void onAddFolder() {
-    // Dispatcher.App.instance.fire(AddFolder.KEY, content.getFolder(),
-    // content.getGroup());
-    // }
-    //
-    // public void onGoParent() {
-    // Dispatcher.App.instance.fire(GoParentFolder.KEY, content.getFolder(),
-    // content);
-    // }
-
     public void setContent(final StateDTO content) {
-	this.content = content;
 	StateToken state = content.getState();
 	FolderContext folderContext = components.getFolderContext();
 	folderContext.setContainer(state, content.getFolder(), content.getFolderRights());

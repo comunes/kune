@@ -23,12 +23,9 @@ import org.ourproject.kune.docs.client.ui.ctx.admin.AdminContextPresenter;
 import org.ourproject.kune.docs.client.ui.ctx.admin.AdminContextView;
 import org.ourproject.kune.docs.client.ui.ctx.folder.FolderContext;
 import org.ourproject.kune.docs.client.ui.ctx.folder.FolderContextPresenter;
-import org.ourproject.kune.docs.client.ui.forms.create.NewDocumentForm;
-import org.ourproject.kune.docs.client.ui.forms.create.NewDocumentFormPanel;
-import org.ourproject.kune.docs.client.ui.forms.create.NewDocumentFormPresenter;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckPanel;
-import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPanel;
-import org.ourproject.kune.workspace.client.ui.form.FormListener;
+import org.ourproject.kune.workspace.client.ui.WorkspaceFactory;
+import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 
 public class DocumentFactory {
 
@@ -51,8 +48,8 @@ public class DocumentFactory {
     }
 
     public static FolderContext createFolderContext() {
-	ContextItemsPanel view = new ContextItemsPanel();
-	FolderContextPresenter presenter = new FolderContextPresenter(view);
+	ContextItems contextItems = WorkspaceFactory.createContextItems();
+	FolderContextPresenter presenter = new FolderContextPresenter(contextItems);
 	return presenter;
     }
 
@@ -65,12 +62,6 @@ public class DocumentFactory {
     public static FolderEditor createFolderEditor() {
 	FolderEditorPanel view = new FolderEditorPanel();
 	FolderEditorPresenter presenter = new FolderEditorPresenter(view);
-	return presenter;
-    }
-
-    public static NewDocumentForm createNewDocumentForm(final FormListener listener) {
-	NewDocumentFormPanel view = new NewDocumentFormPanel(listener);
-	NewDocumentFormPresenter presenter = new NewDocumentFormPresenter(view);
 	return presenter;
     }
 

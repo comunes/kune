@@ -1,18 +1,17 @@
 package org.ourproject.kune.chat.client.ui.ctx.rooms;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsView;
+import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 
 public class RoomsAdminPresenter implements RoomsAdmin {
-    private final ContextItemsView view;
+    private final ContextItems contextItems;
 
-    public RoomsAdminPresenter(final ContextItemsView view) {
-	this.view = view;
-	view.setParentTreeVisible(false);
+    public RoomsAdminPresenter(final ContextItems contextItems) {
+	this.contextItems = contextItems;
     }
 
     public View getView() {
-	return view;
+	return contextItems.getView();
     }
 
 }

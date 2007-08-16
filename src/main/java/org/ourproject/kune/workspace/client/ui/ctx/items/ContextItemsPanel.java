@@ -1,16 +1,24 @@
 package org.ourproject.kune.workspace.client.ui.ctx.items;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class ContextItemsPanel extends DockPanel implements ContextItemsView {
-    private final ControlsPanel controls;
+    private final VerticalPanel controls;
     private final ItemsPanel items;
     private final TopBar topBar;
+    private final ContextItemsPresenter presenter;
+    private String currentEventName;
 
-    public ContextItemsPanel() {
+    public ContextItemsPanel(final ContextItemsPresenter presenter) {
+	this.presenter = presenter;
 	topBar = new TopBar();
 	addTopBar(topBar);
 
@@ -18,7 +26,7 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
 	add(items, DockPanel.NORTH);
 	HTML expand = new HTML("<b></b>");
 	add(expand, DockPanel.CENTER);
-	controls = new ControlsPanel();
+	controls = new VerticalPanel();
 	add(controls, DockPanel.SOUTH);
 
 	// FIXME: Test of width
@@ -47,23 +55,40 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
 	items.clear();
     }
 
-    public void setControlsVisible(final boolean isVisible) {
-	controls.setVisible(isVisible);
-    }
-
     public void setCurrentName(final String name) {
-	topBar.setCurrentName(name);
+	topBar.currentFolder.setText(name);
     }
 
-    public void setParentButtonEnabled(final boolean isVisible) {
-	topBar.setParentButtonVisible(isVisible);
+    public void setParentButtonEnabled(final boolean isEnabled) {
+	topBar.btnGoParent.setEnabled(isEnabled);
     }
 
     public void setParentTreeVisible(final boolean visible) {
-	topBar.setParentTreeVisible(visible);
+	topBar.firstRow.setVisible(visible);
     }
 
-    public void addGoParentListener(final ClickListener clickListener) {
-	topBar.addGoParentListener(clickListener);
+    public void setControlsVisible(final boolean visible) {
+	GWT.log("controls visible : " + visible, null);
+	controls.setVisible(visible);
+    }
+
+    public void registerType(final String typeName, final AbstractImagePrototype image) {
+	items.registerType(typeName, image);
+    }
+
+    public void addCommand(final String typeName, final String label, final String eventName) {
+	final String type = typeName;
+	Button button = new Button(label, new ClickListener() {
+	    public void onClick(final Widget sender) {
+		currentEventName = eventName;
+		presenter.onNew(type);
+	    }
+	});
+	controls.add(button);
+    }
+
+    public void showCreationField(final String typeName) {
+	String value = Window.prompt("Crear " + typeName + "con nombre: ", "");
+	presenter.create(typeName, value, currentEventName);
     }
 }

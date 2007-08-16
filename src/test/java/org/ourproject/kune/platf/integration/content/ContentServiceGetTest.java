@@ -14,7 +14,7 @@ import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 
-public class GetContentTest extends ContentServiceIntegrationTest {
+public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 
     @Before
     public void create() {

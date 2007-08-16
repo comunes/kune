@@ -7,7 +7,8 @@ import org.ourproject.kune.chat.client.ui.ctx.ChatContextPresenter;
 import org.ourproject.kune.chat.client.ui.ctx.rooms.RoomsAdmin;
 import org.ourproject.kune.chat.client.ui.ctx.rooms.RoomsAdminPresenter;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckPanel;
-import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPanel;
+import org.ourproject.kune.workspace.client.ui.WorkspaceFactory;
+import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 
 public class ChatFactory {
 
@@ -24,8 +25,8 @@ public class ChatFactory {
     }
 
     public static RoomsAdmin createRoomsAdmin() {
-	ContextItemsPanel panel = new ContextItemsPanel();
-	RoomsAdminPresenter presenter = new RoomsAdminPresenter(panel);
+	ContextItems contextItems = WorkspaceFactory.createContextItems();
+	RoomsAdminPresenter presenter = new RoomsAdminPresenter(contextItems);
 	return presenter;
     }
 

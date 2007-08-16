@@ -12,7 +12,7 @@ import org.ourproject.kune.workspace.client.dto.StateDTO;
  * @author danigb
  * 
  */
-public class ApplicationState {
+public class Session {
     public final String user;
     private GroupDTO group;
     private String currentToolName;
@@ -20,7 +20,7 @@ public class ApplicationState {
     private List licensesNotCC;
     private StateDTO currentState;
 
-    public ApplicationState(final String userHash) {
+    public Session(final String userHash) {
 	user = userHash;
 	group = null;
 	currentToolName = null;

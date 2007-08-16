@@ -4,7 +4,6 @@ import org.ourproject.kune.platf.client.ui.BorderDecorator;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
@@ -13,9 +12,9 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 class TopBar extends VerticalPanel {
 
-    private final Label currentFolder;
-    private final PushButton btnGoParent;
-    private final HorizontalPanel firstRow;
+    public final Label currentFolder;
+    public final PushButton btnGoParent;
+    public final HorizontalPanel firstRow;
 
     public TopBar() {
 	ContextItemsImages Img = ContextItemsImages.App.getInstance();
@@ -68,19 +67,4 @@ class TopBar extends VerticalPanel {
 	buttonRounded.setColor("AAA");
     }
 
-    public void setCurrentName(final String name) {
-	currentFolder.setText(name);
-    }
-
-    public void setParentButtonVisible(final boolean visible) {
-	btnGoParent.setEnabled(visible);
-    }
-
-    public void setParentTreeVisible(final boolean visible) {
-	firstRow.setVisible(visible);
-    }
-
-    public void addGoParentListener(final ClickListener clickListener) {
-	btnGoParent.addClickListener(clickListener);
-    }
 }

@@ -9,7 +9,7 @@ import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.state.ContentProviderImpl;
-import org.ourproject.kune.platf.client.state.ApplicationState;
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateController;
 import org.ourproject.kune.platf.client.state.StateControllerDefault;
 import org.ourproject.kune.platf.client.tool.ClientTool;
@@ -36,14 +36,14 @@ public class ApplicationBuilder {
 	DefaultApplication application = new DefaultApplication(tools);
 	RootPanel.get("initialstatusbar").setVisible(false);
 
-	final ApplicationState applicationState = new ApplicationState(userHash);
+	final Session session = new Session(userHash);
 	ContentProviderImpl provider = new ContentProviderImpl(ContentService.App.getInstance());
-	final StateController stateManager = new StateControllerDefault(provider, application, applicationState);
+	final StateController stateManager = new StateControllerDefault(provider, application, session);
 	History.addHistoryListener(stateManager);
 
 	final DefaultDispatcher dispatcher = new DefaultDispatcher();
 	Dispatcher.App.instance = dispatcher;
-	prepareActions(dispatcher, platform.getActions(), application, applicationState, stateManager);
+	prepareActions(dispatcher, platform.getActions(), application, session, stateManager);
 
 	application.init(dispatcher, stateManager);
 
@@ -52,7 +52,7 @@ public class ApplicationBuilder {
 		GWT.log("Prefetching operation", null);
 		GWT.log("Locale: " + Kune.getInstance().t.Locale(), null);
 		PrefetchUtilites.preFetchImpImages();
-		PrefetchUtilites.preFetchLicenses(applicationState);
+		PrefetchUtilites.preFetchLicenses(session);
 	    }
 	});
 	GWT.log("application builded!", null);
@@ -60,13 +60,13 @@ public class ApplicationBuilder {
     }
 
     public void prepareActions(final DefaultDispatcher dispatcher, final List actions,
-	    final DefaultApplication application, final ApplicationState applicationState, final StateController stateManager) {
+	    final DefaultApplication application, final Session session, final StateController stateManager) {
 	WorkspaceAction action;
 
 	int total = actions.size();
 	for (int index = 0; index < total; index++) {
 	    action = (WorkspaceAction) actions.get(index);
-	    action.init(application, applicationState, stateManager);
+	    action.init(application, session, stateManager);
 	    dispatcher.subscribe(action);
 	}
     }

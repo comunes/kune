@@ -1,49 +1,34 @@
 package org.ourproject.kune.docs.client.ui.ctx.folder;
 
-import java.util.List;
-
-import org.ourproject.kune.docs.client.actions.GoParentFolder;
-import org.ourproject.kune.platf.client.dispatch.Dispatcher;
+import org.ourproject.kune.docs.client.actions.AddDocument;
+import org.ourproject.kune.docs.client.actions.AddFolder;
+import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
-import org.ourproject.kune.platf.client.dto.ContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPresenter;
-import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsView;
+import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
+import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsImages;
 
-import com.google.gwt.core.client.GWT;
+public class FolderContextPresenter implements FolderContext {
+    private final ContextItems contextItems;
 
-public class FolderContextPresenter extends ContextItemsPresenter implements FolderContext {
-
-    public FolderContextPresenter(final ContextItemsView view) {
-	super(view);
-	Dispatcher dispatcher = Dispatcher.App.instance;
-	super.addGoAction(dispatcher.getAction(GoParentFolder.KEY));
+    public FolderContextPresenter(final ContextItems contextItems) {
+	this.contextItems = contextItems;
+	ContextItemsImages contextImages = ContextItemsImages.App.getInstance();
+	contextItems.registerType("file", contextImages.pageWhite());
+	contextItems.registerType("folder", contextImages.folder());
+	// i18n
+	contextItems.canCreate("file", "Add new document", AddDocument.EVENT);
+	contextItems.canCreate("folder", "Add new folder", AddFolder.EVENT);
+	contextItems.setParentTreeVisible(true);
     }
 
-    public void setContainer(final StateToken state, final ContainerDTO folder, final AccessRightsDTO rights) {
-	GWT.log("current folder: " + folder.getId(), null);
-	GWT.log("parent: " + folder.getParentFolderId(), null);
-	state.setDocument(null);
-	view.setCurrentName(folder.getName());
-	view.clear();
-	List folders = folder.getChilds();
-	for (int index = 0; index < folders.size(); index++) {
-	    ContainerDTO child = (ContainerDTO) folders.get(index);
-	    state.setFolder(child.getId().toString());
-	    view.addItem(child.getName(), "folder", state.getEncoded());
-	}
+    public View getView() {
+	return contextItems.getView();
+    }
 
-	state.setFolder(folder.getId().toString());
-	List contents = folder.getContents();
-	for (int index = 0; index < contents.size(); index++) {
-	    ContentDTO dto = (ContentDTO) contents.get(index);
-	    state.setDocument(dto.getId().toString());
-	    view.addItem(dto.getTitle(), "file", state.getEncoded());
-	}
-
-	view.setParentButtonEnabled(folder.getParentFolderId() != null);
-	view.setControlsVisible(rights.isEditable);
+    public void setContainer(final StateToken state, final ContainerDTO container, final AccessRightsDTO rights) {
+	contextItems.setContainer(state, container, rights);
     }
 
 }
