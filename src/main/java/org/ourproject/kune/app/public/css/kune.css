@@ -244,13 +244,13 @@ body {
 }
 
 /* FIXME: test if works */
-.kune-NavigationBar .topBar .gwt-PushButton-up-disabled {
+.topBar .gwt-PushButton-up-disabled {
     filter:alpha(opacity=60);
     -moz-opacity: 	0.6;
     opacity: 0.6;
 }
 
-.kune-NavigationBar .topBar .gwt-PushButton-down-disabled {
+.topBar .gwt-PushButton-down-disabled {
     filter:alpha(opacity=60);
     -moz-opacity: 	0.6;
     opacity: 0.6;

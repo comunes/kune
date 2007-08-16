@@ -39,8 +39,7 @@ public class KuneServerService implements KuneService {
     }
 
     public List getNotCCLicenses() throws SerializableException {
-	// TODO: see if is necessary;
-	return null;
+	return mapper.map(licenseManager.getNotCC(), ArrayList.class);
     }
 
 }

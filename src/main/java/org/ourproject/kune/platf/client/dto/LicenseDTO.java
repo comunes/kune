@@ -10,7 +10,7 @@ public class LicenseDTO implements IsSerializable {
 
     private String description;
 
-    private String imageUrl;
+    private String url;
 
     private boolean isCC;
 
@@ -20,23 +20,24 @@ public class LicenseDTO implements IsSerializable {
 
     private String rdf;
 
-    private String url;
+    private String imageUrl;
 
     public LicenseDTO() {
 	this(null, null, null, null, false, false, false, null, null);
     }
 
-    public LicenseDTO(final String shortName, final String longName, final String description, final String imageUrl,
-	    final boolean isCC, final boolean isCopyleft, final boolean isDeprecated, final String rdf, final String url) {
+    public LicenseDTO(final String shortName, final String longName, final String description, final String url,
+	    final boolean isCC, final boolean isCopyleft, final boolean isDeprecated, final String rdf,
+	    final String imageUrl) {
 	this.shortName = shortName;
 	this.longName = longName;
 	this.description = description;
-	this.imageUrl = imageUrl;
+	this.url = url;
 	this.isCC = isCC;
 	this.isCopyleft = isCopyleft;
 	this.isDeprecated = isDeprecated;
 	this.rdf = rdf;
-	this.url = url;
+	this.imageUrl = imageUrl;
     }
 
     public String getShortName() {

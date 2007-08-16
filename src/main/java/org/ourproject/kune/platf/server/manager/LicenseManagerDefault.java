@@ -23,6 +23,14 @@ public class LicenseManagerDefault extends DefaultManager<License, Long> impleme
 	return licenseFinder.getAll();
     }
 
+    public List<License> getNotCC() {
+	return licenseFinder.getNotCC();
+    }
+
+    public List<License> getCC() {
+	return licenseFinder.getCC();
+    }
+
     public License createLicense(final License license) {
 	return persist(license);
     }

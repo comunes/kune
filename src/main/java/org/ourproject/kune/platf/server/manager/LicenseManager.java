@@ -12,4 +12,8 @@ public interface LicenseManager {
 
     void setLicenseFinder(final License licenseFinder);
 
+    List<License> getCC();
+
+    List<License> getNotCC();
+
 }
