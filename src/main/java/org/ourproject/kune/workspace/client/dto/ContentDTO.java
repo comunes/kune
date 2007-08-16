@@ -20,7 +20,6 @@ public class ContentDTO implements IsSerializable {
     private AccessRightsDTO folderRights;
     private Double rate;
     private Integer rateByUsers;
-    private StateToken state;
 
     public ContentDTO() {
 	this(null, null, null);
@@ -30,7 +29,6 @@ public class ContentDTO implements IsSerializable {
 	this.documentId = docRef;
 	this.title = title;
 	this.content = content;
-	this.state = null;
     }
 
     public void setDocumentId(final String docRef) {
@@ -90,12 +88,11 @@ public class ContentDTO implements IsSerializable {
     }
 
     public StateToken getState() {
-	if (state == null) {
-	    state = new StateToken(group.getShortName(), toolName, folder.getId().toString(), getDocumentId());
-	}
-	return state;
+	return new StateToken(group.getShortName(), toolName, folder.getId().toString(), getDocumentId());
     }
 
+    // FIXME: probablemente, un tag en el content indicando el tipo!!, darle una
+    // pensada a esto
     public boolean hasDocument() {
 	return documentId != null;
     }

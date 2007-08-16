@@ -13,7 +13,7 @@ public interface ContentService extends RemoteService {
 
     ContentDTO getContent(String userHash, StateToken token) throws ContentNotFoundException;
 
-    void save(String userHash, ContentDTO dto) throws AccessViolationException;
+    int save(String user, String documentId, String content) throws AccessViolationException;
 
     ContentDTO addContent(String user, Long parentFolderId, String name);
 

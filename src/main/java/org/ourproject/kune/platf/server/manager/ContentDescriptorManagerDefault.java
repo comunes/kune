@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 
 import org.ourproject.kune.platf.server.domain.ContentDescriptor;
 import org.ourproject.kune.platf.server.domain.Folder;
+import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.Revision;
 import org.ourproject.kune.platf.server.domain.User;
 
@@ -31,7 +32,11 @@ public class ContentDescriptorManagerDefault extends DefaultManager<ContentDescr
 	return persist(descriptor);
     }
 
-    public ContentDescriptor get(final Long id) {
-	return find(id);
+    public void save(final Group userGroup, final ContentDescriptor descriptor, final String content) {
+	Revision revision = new Revision();
+	revision.setTitle(descriptor.getTitle());
+	revision.setDataContent(content);
+	descriptor.addRevision(revision);
+	persist(descriptor);
     }
 }

@@ -3,6 +3,7 @@ package org.ourproject.kune.docs.client.ui.ctx;
 import org.ourproject.kune.docs.client.actions.AddDocument;
 import org.ourproject.kune.docs.client.actions.AddFolder;
 import org.ourproject.kune.docs.client.actions.GoParentFolder;
+import org.ourproject.kune.docs.client.ui.ctx.admin.AdminContext;
 import org.ourproject.kune.docs.client.ui.ctx.folder.FolderContext;
 import org.ourproject.kune.docs.client.ui.ctx.folder.FolderContextListener;
 import org.ourproject.kune.platf.client.View;
@@ -49,5 +50,15 @@ public class DocumentContextPresenter implements DocumentContext, FolderContextL
 
     public void onGoParent() {
 	Dispatcher.App.instance.fire(GoParentFolder.KEY, content.getFolder(), content);
+    }
+
+    public void showAdmin() {
+	AdminContext adminContext = components.getAdminContext();
+	view.show(adminContext.getView());
+    }
+
+    public void showFolders() {
+	FolderContext folderContext = components.getFolderContext();
+	view.show(folderContext.getView());
     }
 }

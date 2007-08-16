@@ -1,6 +1,7 @@
 package org.ourproject.kune.docs.client;
 
 import org.ourproject.kune.docs.client.ui.cnt.DocumentContent;
+import org.ourproject.kune.docs.client.ui.cnt.DocumentContentListener;
 import org.ourproject.kune.docs.client.ui.ctx.DocumentContext;
 import org.ourproject.kune.platf.client.tool.Tool;
 import org.ourproject.kune.platf.client.tool.ToolTrigger;
@@ -8,14 +9,14 @@ import org.ourproject.kune.platf.client.tool.ToolTriggerDefault;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 import org.ourproject.kune.workspace.client.dto.ContentDTO;
 
-public class DocumentTool implements Tool {
+public class DocumentTool implements Tool, DocumentContentListener {
     public static final String NAME = "docs";
     private final ToolTriggerDefault trigger;
     private final DocToolComponents components;
 
     public DocumentTool() {
 	trigger = new ToolTriggerDefault(NAME, "documentos");
-	components = new DocToolComponents();
+	components = new DocToolComponents(this);
     }
 
     public WorkspaceComponent getContent() {
@@ -41,6 +42,14 @@ public class DocumentTool implements Tool {
 
     public ToolTrigger getTrigger() {
 	return trigger;
+    }
+
+    public void onEdit() {
+	components.getContext().showAdmin();
+    }
+
+    public void onCancel() {
+	components.getContext().showFolders();
     }
 
 }

@@ -50,7 +50,7 @@ public class ContentManagerTest {
 	descriptor.setId(1l);
 	descriptor.setFolder(folder);
 
-	expect(contentDescriptorManager.get(2l)).andReturn(descriptor);
+	expect(contentDescriptorManager.find(2l)).andReturn(descriptor);
 	replay(contentDescriptorManager);
 
 	ContentDescriptor content = contentManager.getContent(null, new StateToken("groupShortName", "toolName", "1",
@@ -64,7 +64,7 @@ public class ContentManagerTest {
 	ContentDescriptor descriptor = new ContentDescriptor();
 	Folder folder = TestDomainHelper.createFolderWithIdAndToolName(5, "toolName2");
 	descriptor.setFolder(folder);
-	expect(contentDescriptorManager.get(1l)).andReturn(descriptor);
+	expect(contentDescriptorManager.find(1l)).andReturn(descriptor);
 	replay(contentDescriptorManager);
 
 	contentManager.getContent(null, new StateToken("groupShortName", "toolName", "5", "1"));
@@ -76,7 +76,7 @@ public class ContentManagerTest {
 	ContentDescriptor descriptor = new ContentDescriptor();
 	Folder folder = TestDomainHelper.createFolderWithId(1);
 	descriptor.setFolder(folder);
-	expect(contentDescriptorManager.get(1l)).andReturn(descriptor);
+	expect(contentDescriptorManager.find(1l)).andReturn(descriptor);
 	replay(contentDescriptorManager);
 
 	contentManager.getContent(null, new StateToken("groupShortName", "toolName", "5", "1"));
@@ -88,7 +88,7 @@ public class ContentManagerTest {
 	ContentDescriptor descriptor = new ContentDescriptor();
 	Folder folder = TestDomainHelper.createFolderWithIdAndGroupAndTool(5, "groupOther", "toolName");
 	descriptor.setFolder(folder);
-	expect(contentDescriptorManager.get(1l)).andReturn(descriptor);
+	expect(contentDescriptorManager.find(1l)).andReturn(descriptor);
 	replay(contentDescriptorManager);
 
 	contentManager.getContent(null, new StateToken("groupShortName", "toolName", "5", "1"));
@@ -154,7 +154,7 @@ public class ContentManagerTest {
 	ContentDescriptor descriptor = new ContentDescriptor();
 	Folder folder = TestDomainHelper.createFolderWithIdAndToolName(5, "toolName");
 	descriptor.setFolder(folder);
-	expect(contentDescriptorManager.get(1l)).andReturn(descriptor);
+	expect(contentDescriptorManager.find(1l)).andReturn(descriptor);
 	replay(contentDescriptorManager);
 
 	contentManager.getContent(null, new StateToken("groupShortName", "toolName", "5", "1a"));

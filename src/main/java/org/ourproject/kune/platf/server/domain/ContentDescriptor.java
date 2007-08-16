@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 import com.google.inject.name.Named;
 import com.wideplay.warp.persist.dao.Finder;
@@ -26,6 +27,9 @@ public class ContentDescriptor implements HasContent {
     @Id
     @GeneratedValue
     private Long id;
+
+    @Version
+    private int version;
 
     @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private List<Tag> tags;
@@ -77,6 +81,14 @@ public class ContentDescriptor implements HasContent {
 
     public void setId(final Long id) {
 	this.id = id;
+    }
+
+    public int getVersion() {
+	return version;
+    }
+
+    public void setVersion(final int version) {
+	this.version = version;
     }
 
     public String getLocale() {
@@ -158,5 +170,9 @@ public class ContentDescriptor implements HasContent {
 	    revision.setPrevious(lastRevision);
 	    lastRevision = revision;
 	}
+    }
+
+    public String getTitle() {
+	return lastRevision.getData().getTitle();
     }
 }

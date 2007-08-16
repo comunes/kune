@@ -86,6 +86,6 @@ class TopBar extends VerticalPanel {
     }
 
     public void setParentButtonVisible(final boolean isVisible) {
-	btnGoParent.setVisible(isVisible);
+	btnGoParent.setEnabled(isVisible);
     }
 }

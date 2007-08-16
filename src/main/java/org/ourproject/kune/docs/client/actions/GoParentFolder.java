@@ -14,6 +14,7 @@ public class GoParentFolder extends WorkspaceAction {
 
     private void goParent(final FolderDTO folder, final ContentDTO content) {
 	StateToken state = content.getState();
+	state.setDocument(null);
 	state.setFolder(folder.getParentFolderId().toString());
 	stateManager.setState(state);
     }

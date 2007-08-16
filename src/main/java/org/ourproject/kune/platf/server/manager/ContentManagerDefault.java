@@ -58,7 +58,7 @@ public class ContentManagerDefault implements ContentManager {
 
     private ContentDescriptor findByContentReference(final String groupName, final String toolName,
 	    final Long folderId, final Long contentId) throws ContentNotFoundException {
-	ContentDescriptor descriptor = contentDescriptorManager.get(contentId);
+	ContentDescriptor descriptor = contentDescriptorManager.find(contentId);
 	Folder folder = descriptor.getFolder();
 
 	if (!folder.getId().equals(folderId)) {

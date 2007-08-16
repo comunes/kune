@@ -29,7 +29,7 @@ public class ContentServiceMocked extends MockedService implements ContentServic
 	answer(content, callback);
     }
 
-    public void save(final String userHash, final ContentDTO content, final AsyncCallback asyncCallback) {
+    public void save(final String user, final String documentId, final String content, final AsyncCallback asyncCallback) {
 
     }
 

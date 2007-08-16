@@ -99,7 +99,18 @@ public class ContentServerService implements ContentService {
     }
 
     @Authenticated
-    public void save(final String userHash, final ContentDTO dto) throws AccessViolationException {
+    @Transactional(type = TransactionType.READ_WRITE)
+    public int save(final String user, final String documentId, final String content) throws AccessViolationException {
+	Long id = new Long(documentId);
+	Group userGroup = session.getUser().getUserGroup();
+	ContentDescriptor descriptor = contentDescriptorManager.find(id);
+	AccessRights accessRights = accessRightsManager.get(userGroup, getContentAccessList(descriptor));
+	if (accessRights.isEditable()) {
+	    contentDescriptorManager.save(userGroup, descriptor, content);
+	} else {
+	    throw new AccessViolationException();
+	}
+	return 0;
     }
 
     private AccessLists getContentAccessList(final ContentDescriptor descriptor) {

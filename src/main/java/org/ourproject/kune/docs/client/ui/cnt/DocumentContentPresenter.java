@@ -16,8 +16,10 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
     private final WorkspaceDeckView view;
     private final DocumentComponents components;
     private ContentDTO content;
+    private final DocumentContentListener listener;
 
-    public DocumentContentPresenter(final WorkspaceDeckView view) {
+    public DocumentContentPresenter(final DocumentContentListener listener, final WorkspaceDeckView view) {
+	this.listener = listener;
 	this.view = view;
 	this.components = new DocumentComponents(this);
     }
@@ -49,6 +51,7 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
 	    editor.setFolder(content.getFolder());
 	    view.show(editor.getView());
 	}
+	listener.onEdit();
     }
 
     public void onSave(final String text) {
@@ -58,6 +61,7 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
 
     public void onCancel() {
 	showContent();
+	listener.onCancel();
     }
 
     public void attach() {

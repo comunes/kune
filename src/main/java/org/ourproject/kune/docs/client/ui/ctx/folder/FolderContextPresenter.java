@@ -8,6 +8,8 @@ import org.ourproject.kune.platf.client.dto.ContentDescriptorDTO;
 import org.ourproject.kune.platf.client.dto.FolderDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
+import com.google.gwt.core.client.GWT;
+
 public class FolderContextPresenter implements FolderContext {
     private final FolderContentView view;
 
@@ -20,6 +22,8 @@ public class FolderContextPresenter implements FolderContext {
     }
 
     public void setFolder(final StateToken state, final FolderDTO folder, final AccessRightsDTO rights) {
+	GWT.log("current folder: " + folder.getId(), null);
+	GWT.log("parent: " + folder.getParentFolderId(), null);
 	state.setDocument(null);
 	view.setCurrentName(folder.getName());
 	view.clear();
