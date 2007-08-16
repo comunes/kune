@@ -1,9 +1,7 @@
 package org.ourproject.kune.platf.client;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.extend.ClientModule;
@@ -11,20 +9,20 @@ import org.ourproject.kune.platf.client.extend.Register;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 
 public class KunePlatform implements Register {
-    private final List tools;
-    private final HashMap actions;
+    private final ArrayList tools;
+    private final ArrayList actions;
 
     public KunePlatform() {
 	this.tools = new ArrayList();
-	this.actions = new HashMap();
+	this.actions = new ArrayList();
     }
 
     public void addTool(final ClientTool clientTool) {
 	tools.add(clientTool);
     }
 
-    public void addAction(final String eventName, final Action action) {
-	actions.put(eventName, action);
+    public void addAction(final Action action) {
+	actions.add(action);
     }
 
     public void install(final ClientModule module) {
@@ -35,7 +33,7 @@ public class KunePlatform implements Register {
 	return tools;
     }
 
-    public Map getActions() {
+    public ArrayList getActions() {
 	return actions;
     }
 

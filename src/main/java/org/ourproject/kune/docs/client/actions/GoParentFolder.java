@@ -6,7 +6,8 @@ import org.ourproject.kune.workspace.client.actions.WorkspaceAction;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public class GoParentFolder extends WorkspaceAction {
-    public static final String KEY = "docs.goParent";
+    public static final String KEY = "docs.GoParentFolder";
+    public static final String NAME = "docs.GoParentFolder";
 
     public void execute(final Object value, final Object extra) {
 	goParent((ContainerDTO) value, (StateDTO) extra);
@@ -17,6 +18,14 @@ public class GoParentFolder extends WorkspaceAction {
 	state.setDocument(null);
 	state.setFolder(folder.getParentFolderId().toString());
 	stateManager.setState(state);
+    }
+
+    public String getActionName() {
+	return KEY;
+    }
+
+    public String getEventName() {
+	return NAME;
     }
 
 }

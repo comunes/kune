@@ -14,13 +14,14 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class StateControllerDefault implements StateController {
     private final Application app;
-    private final State state;
+    private final ApplicationState applicationState;
     private final ContentProvider provider;
 
-    public StateControllerDefault(final ContentProvider provider, final Application app, final State state) {
+    public StateControllerDefault(final ContentProvider provider, final Application app,
+	    final ApplicationState applicationState) {
 	this.provider = provider;
 	this.app = app;
-	this.state = state;
+	this.applicationState = applicationState;
     }
 
     public void reload() {
@@ -34,7 +35,7 @@ public class StateControllerDefault implements StateController {
 
     private void onHistoryChanged(final StateToken newState) {
 	Site.showProgress("cargando...");
-	provider.getContent(state.user, newState, new AsyncCallback() {
+	provider.getContent(applicationState.user, newState, new AsyncCallback() {
 	    public void onFailure(final Throwable caught) {
 		Site.hideProgress();
 	    }
@@ -57,23 +58,24 @@ public class StateControllerDefault implements StateController {
 	History.newItem(state.getEncoded());
     }
 
-    private void loadContent(final StateDTO content) {
-	GroupDTO group = content.getGroup();
+    private void loadContent(final StateDTO state) {
+	applicationState.setCurrent(state);
+	GroupDTO group = state.getGroup();
 	app.setGroupState(group.getShortName());
 	Workspace workspace = app.getWorkspace();
 	workspace.showGroup(group);
-	String toolName = content.getToolName();
+	String toolName = state.getToolName();
 	workspace.setTool(toolName);
 
 	ClientTool clientTool = app.getTool(toolName);
-	clientTool.setContent(content);
+	clientTool.setContent(state);
 	workspace.setContent(clientTool.getContent());
 	workspace.setContext(clientTool.getContext());
 	Site.hideProgress();
     }
 
     public String getUser() {
-	return state.user;
+	return applicationState.user;
     }
 
 }

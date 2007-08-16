@@ -27,8 +27,7 @@ import org.ourproject.kune.docs.client.ui.forms.create.NewDocumentForm;
 import org.ourproject.kune.docs.client.ui.forms.create.NewDocumentFormPanel;
 import org.ourproject.kune.docs.client.ui.forms.create.NewDocumentFormPresenter;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckPanel;
-import org.ourproject.kune.workspace.client.ui.ctx.items.FolderContextListener;
-import org.ourproject.kune.workspace.client.ui.ctx.items.FolderContextPanel;
+import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPanel;
 import org.ourproject.kune.workspace.client.ui.form.FormListener;
 
 public class DocumentFactory {
@@ -51,8 +50,8 @@ public class DocumentFactory {
 	return presenter;
     }
 
-    public static FolderContext createFolderContext(final FolderContextListener listener) {
-	FolderContextPanel view = new FolderContextPanel(listener);
+    public static FolderContext createFolderContext() {
+	ContextItemsPanel view = new ContextItemsPanel();
 	FolderContextPresenter presenter = new FolderContextPresenter(view);
 	return presenter;
     }

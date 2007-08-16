@@ -1,5 +1,7 @@
 package org.ourproject.kune.chat.client.ui.ctx.rooms;
 
-public interface RoomsAdmin {
+import org.ourproject.kune.platf.client.View;
 
+public interface RoomsAdmin {
+    View getView();
 }

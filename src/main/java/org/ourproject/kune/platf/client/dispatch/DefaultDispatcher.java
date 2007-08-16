@@ -9,14 +9,17 @@ import com.google.gwt.user.client.History;
 
 public class DefaultDispatcher implements Dispatcher {
     private final HashMap subscriptors;
+    private final HashMap actions;
 
     public DefaultDispatcher() {
 	this.subscriptors = new HashMap();
+	this.actions = new HashMap();
     }
 
-    public Action subscribe(final String eventName, final Action action) {
-	List list = getSubscriptorsList(eventName);
+    public Action subscribe(final Action action) {
+	List list = getSubscriptorsList(action.getEventName());
 	list.add(action);
+	actions.put(action.getActionName(), action);
 	return action;
     }
 
@@ -47,6 +50,10 @@ public class DefaultDispatcher implements Dispatcher {
 
     public void fireState(final String encodedEvent) {
 	History.newItem(encodedEvent);
+    }
+
+    public Action getAction(final String key) {
+	return (Action) actions.get(key);
     }
 
 }

@@ -1,9 +1,9 @@
 package org.ourproject.kune.platf.client.stubs;
 
 import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.state.State;
+import org.ourproject.kune.platf.client.state.ApplicationState;
 
-public class NiceState extends State {
+public class NiceState extends ApplicationState {
 
     public NiceState() {
 	super("userHash");

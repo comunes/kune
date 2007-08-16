@@ -5,10 +5,12 @@ public interface Dispatcher {
 	public static Dispatcher instance;
     }
 
-    Action subscribe(String eventName, Action action);
+    Action subscribe(Action action);
 
     void fire(String eventName, Object value, Object extra);
 
     void fire(String eventName, Object value);
+
+    Action getAction(String key);
 
 }

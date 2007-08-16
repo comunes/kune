@@ -10,26 +10,21 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 class TopBar extends VerticalPanel {
 
     private final Label currentFolder;
     private final PushButton btnGoParent;
+    private final HorizontalPanel firstRow;
 
-    public TopBar(final FolderContextListener listener) {
-	FolderContextImages Img = FolderContextImages.App.getInstance();
+    public TopBar() {
+	ContextItemsImages Img = ContextItemsImages.App.getInstance();
 
-	HorizontalPanel firstRow = new HorizontalPanel();
+	firstRow = new HorizontalPanel();
 	HorizontalPanel secondRow = new HorizontalPanel();
 	HorizontalPanel iconBarHP = new HorizontalPanel();
 	HorizontalPanel currentFolderHP = new HorizontalPanel();
 	btnGoParent = new PushButton(Img.goUp().createImage(), Img.goUpLight().createImage());
-	btnGoParent.addClickListener(new ClickListener() {
-	    public void onClick(final Widget sender) {
-		listener.onGoParent();
-	    }
-	});
 	MenuBar pathMenu = new MenuBar();
 	MenuBar pathSubmenu = new MenuBar(true);
 
@@ -38,7 +33,7 @@ class TopBar extends VerticalPanel {
 	add(secondRow);
 	firstRow.add(iconBarHP);
 	secondRow.add(currentFolderHP);
-	iconBarHP.add(btnGoParent);
+	// iconBarHP.add(btnGoParent);
 	BorderDecorator buttonRounded = new BorderDecorator(pathMenu, BorderDecorator.ALL, BorderDecorator.SIMPLE);
 	iconBarHP.add(buttonRounded);
 	pathMenu.addItem(Img.folderpathmenu().getHTML(), true, pathSubmenu);
@@ -54,7 +49,7 @@ class TopBar extends VerticalPanel {
 		Window.alert("jump too!");
 	    }
 	});
-	currentFolderHP.add(Img.bulletArrowRight().createImage());
+	currentFolderHP.add(btnGoParent);
 	currentFolder = new Label("Current Container");
 	currentFolderHP.add(currentFolder);
 
@@ -77,7 +72,15 @@ class TopBar extends VerticalPanel {
 	currentFolder.setText(name);
     }
 
-    public void setParentButtonVisible(final boolean isVisible) {
-	btnGoParent.setEnabled(isVisible);
+    public void setParentButtonVisible(final boolean visible) {
+	btnGoParent.setEnabled(visible);
+    }
+
+    public void setParentTreeVisible(final boolean visible) {
+	firstRow.setVisible(visible);
+    }
+
+    public void addGoParentListener(final ClickListener clickListener) {
+	btnGoParent.addClickListener(clickListener);
     }
 }

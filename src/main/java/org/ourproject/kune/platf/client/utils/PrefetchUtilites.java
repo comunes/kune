@@ -3,7 +3,7 @@ package org.ourproject.kune.platf.client.utils;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.rpc.KuneService;
-import org.ourproject.kune.platf.client.state.State;
+import org.ourproject.kune.platf.client.state.ApplicationState;
 import org.ourproject.kune.sitebar.client.Site;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -47,7 +47,7 @@ public class PrefetchUtilites {
 	Image.prefetch("gwm/themes/alphacubecustom/tl-off.gif");
     }
 
-    public static void preFetchLicenses(final State state) {
+    public static void preFetchLicenses(final ApplicationState applicationState) {
 	org.ourproject.kune.platf.client.rpc.KuneServiceAsync kuneService = KuneService.App.getInstance();
 	kuneService.getAllLicenses(new AsyncCallback() {
 	    public void onFailure(final Throwable arg0) {
@@ -56,7 +56,7 @@ public class PrefetchUtilites {
 	    }
 
 	    public void onSuccess(final Object result) {
-		state.setLicenses((List) result);
+		applicationState.setLicenses((List) result);
 	    }
 	});
 
@@ -67,7 +67,7 @@ public class PrefetchUtilites {
 	    }
 
 	    public void onSuccess(final Object result) {
-		state.setLicensesNotCC((List) result);
+		applicationState.setLicensesNotCC((List) result);
 	    }
 	});
 

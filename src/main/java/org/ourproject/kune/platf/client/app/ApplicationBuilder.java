@@ -1,9 +1,7 @@
 package org.ourproject.kune.platf.client.app;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
@@ -11,7 +9,7 @@ import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.state.ContentProviderImpl;
-import org.ourproject.kune.platf.client.state.State;
+import org.ourproject.kune.platf.client.state.ApplicationState;
 import org.ourproject.kune.platf.client.state.StateController;
 import org.ourproject.kune.platf.client.state.StateControllerDefault;
 import org.ourproject.kune.platf.client.tool.ClientTool;
@@ -38,14 +36,14 @@ public class ApplicationBuilder {
 	DefaultApplication application = new DefaultApplication(tools);
 	RootPanel.get("initialstatusbar").setVisible(false);
 
-	final State state = new State(userHash);
+	final ApplicationState applicationState = new ApplicationState(userHash);
 	ContentProviderImpl provider = new ContentProviderImpl(ContentService.App.getInstance());
-	final StateController stateManager = new StateControllerDefault(provider, application, state);
+	final StateController stateManager = new StateControllerDefault(provider, application, applicationState);
 	History.addHistoryListener(stateManager);
 
 	final DefaultDispatcher dispatcher = new DefaultDispatcher();
 	Dispatcher.App.instance = dispatcher;
-	prepareActions(dispatcher, platform.getActions(), application, state, stateManager);
+	prepareActions(dispatcher, platform.getActions(), application, applicationState, stateManager);
 
 	application.init(dispatcher, stateManager);
 
@@ -54,24 +52,22 @@ public class ApplicationBuilder {
 		GWT.log("Prefetching operation", null);
 		GWT.log("Locale: " + Kune.getInstance().t.Locale(), null);
 		PrefetchUtilites.preFetchImpImages();
-		PrefetchUtilites.preFetchLicenses(state);
+		PrefetchUtilites.preFetchLicenses(applicationState);
 	    }
 	});
 	GWT.log("application builded!", null);
 	return application;
     }
 
-    public void prepareActions(final DefaultDispatcher dispatcher, final Map actions,
-	    final DefaultApplication application, final State state, final StateController stateManager) {
+    public void prepareActions(final DefaultDispatcher dispatcher, final List actions,
+	    final DefaultApplication application, final ApplicationState applicationState, final StateController stateManager) {
 	WorkspaceAction action;
-	String eventName;
 
-	Iterator iterator = actions.keySet().iterator();
-	while (iterator.hasNext()) {
-	    eventName = (String) iterator.next();
-	    action = (WorkspaceAction) actions.get(eventName);
-	    action.init(application, state, stateManager);
-	    dispatcher.subscribe(eventName, action);
+	int total = actions.size();
+	for (int index = 0; index < total; index++) {
+	    action = (WorkspaceAction) actions.get(index);
+	    action.init(application, applicationState, stateManager);
+	    dispatcher.subscribe(action);
 	}
     }
 

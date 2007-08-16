@@ -9,9 +9,10 @@ import org.ourproject.kune.workspace.client.dto.StateDTO;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class AddDocument extends AbstractAddAction {
-    public static final String KEY = "docs.addDocument";
+    public static final String EVENT = "docs.addDocument";
+    private static final String NAME = "docs.AddDocument";
 
-    public void execute(final Object value, Object extra) {
+    public void execute(final Object value, final Object extra) {
 	showNewDocDialog((ContainerDTO) value, "create new document");
     }
 
@@ -29,6 +30,14 @@ public class AddDocument extends AbstractAddAction {
 		stateManager.setState(content);
 	    }
 	});
+    }
+
+    public String getActionName() {
+	return NAME;
+    }
+
+    public String getEventName() {
+	return EVENT;
     }
 
 }

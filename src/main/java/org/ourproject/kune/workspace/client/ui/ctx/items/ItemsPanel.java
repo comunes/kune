@@ -18,7 +18,7 @@ class ItemsPanel extends VerticalPanel {
     }
 
     private void initFileIcons() {
-	FolderContextImages Img = FolderContextImages.App.getInstance();
+	ContextItemsImages Img = ContextItemsImages.App.getInstance();
 	// FIXME
 	fileIcons.put("folder", Img.folder());
 	fileIcons.put("file", Img.pageWhite());

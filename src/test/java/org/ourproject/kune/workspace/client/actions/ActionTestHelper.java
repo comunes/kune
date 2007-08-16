@@ -2,7 +2,7 @@ package org.ourproject.kune.workspace.client.actions;
 
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
-import org.ourproject.kune.platf.client.state.State;
+import org.ourproject.kune.platf.client.state.ApplicationState;
 import org.ourproject.kune.platf.client.stubs.ApplicationStub;
 import org.ourproject.kune.platf.client.stubs.NiceState;
 import org.ourproject.kune.workspace.client.Workspace;
@@ -13,7 +13,7 @@ public class ActionTestHelper {
 
     public Application app;
     public Dispatcher dispatcher;
-    public State state;
+    public ApplicationState applicationState;
     public String userHash;
     public Workspace workspace;
     private final WorkspaceAction action;
@@ -21,7 +21,7 @@ public class ActionTestHelper {
     public ActionTestHelper(final WorkspaceAction action, final boolean useNiceMocks) {
 	this.action = action;
 	app = new ApplicationStub(useNiceMocks);
-	state = new NiceState();
+	applicationState = new NiceState();
 	inject(action);
     }
 

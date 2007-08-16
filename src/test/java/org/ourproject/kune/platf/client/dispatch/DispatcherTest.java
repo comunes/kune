@@ -16,9 +16,9 @@ public class DispatcherTest {
     public void testSubscribe() {
 	Object value = new Object();
 	String eventName = "eventName";
-	Action action1 = dispatcher.subscribe(eventName, EasyMock.createStrictMock(Action.class));
-	Action action2 = dispatcher.subscribe(eventName, EasyMock.createStrictMock(Action.class));
-	Action action3 = dispatcher.subscribe(eventName, EasyMock.createStrictMock(Action.class));
+	Action action1 = dispatcher.subscribe(EasyMock.createNiceMock(Action.class));
+	Action action2 = dispatcher.subscribe(EasyMock.createNiceMock(Action.class));
+	Action action3 = dispatcher.subscribe(EasyMock.createNiceMock(Action.class));
 
 	action1.execute(value, null);
 	action2.execute(value, null);

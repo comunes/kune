@@ -9,14 +9,14 @@ import com.google.gwt.user.client.ui.ImageBundle;
  * http://code.google.com/p/google-web-toolkit/wiki/ImageBundleDesign
  * 
  */
-interface FolderContextImages extends ImageBundle {
+interface ContextItemsImages extends ImageBundle {
 
     public static class App {
-        private static FolderContextImages ourInstance = null;
+        private static ContextItemsImages ourInstance = null;
 
-        public static synchronized FolderContextImages getInstance() {
+        public static synchronized ContextItemsImages getInstance() {
             if (ourInstance == null) {
-                ourInstance = (FolderContextImages) GWT.create(FolderContextImages.class);
+                ourInstance = (ContextItemsImages) GWT.create(ContextItemsImages.class);
             }
             return ourInstance;
         }

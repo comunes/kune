@@ -6,6 +6,6 @@ import org.ourproject.kune.workspace.client.actions.InitAction;
 
 public class KuneClientModule implements ClientModule {
     public void configure(final Register register) {
-	register.addAction(InitAction.NAME, new InitAction());
+	register.addAction(new InitAction());
     }
 }

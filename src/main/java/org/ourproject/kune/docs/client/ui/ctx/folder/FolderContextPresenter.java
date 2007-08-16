@@ -2,27 +2,26 @@ package org.ourproject.kune.docs.client.ui.ctx.folder;
 
 import java.util.List;
 
-import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.docs.client.actions.GoParentFolder;
+import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
-import org.ourproject.kune.platf.client.dto.ContentDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
+import org.ourproject.kune.platf.client.dto.ContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.workspace.client.ui.ctx.items.FolderContentView;
+import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPresenter;
+import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsView;
 
 import com.google.gwt.core.client.GWT;
 
-public class FolderContextPresenter implements FolderContext {
-    private final FolderContentView view;
+public class FolderContextPresenter extends ContextItemsPresenter implements FolderContext {
 
-    public FolderContextPresenter(final FolderContentView view) {
-	this.view = view;
+    public FolderContextPresenter(final ContextItemsView view) {
+	super(view);
+	Dispatcher dispatcher = Dispatcher.App.instance;
+	super.addGoAction(dispatcher.getAction(GoParentFolder.KEY));
     }
 
-    public View getView() {
-	return view;
-    }
-
-    public void setFolder(final StateToken state, final ContainerDTO folder, final AccessRightsDTO rights) {
+    public void setContainer(final StateToken state, final ContainerDTO folder, final AccessRightsDTO rights) {
 	GWT.log("current folder: " + folder.getId(), null);
 	GWT.log("parent: " + folder.getParentFolderId(), null);
 	state.setDocument(null);
@@ -46,4 +45,5 @@ public class FolderContextPresenter implements FolderContext {
 	view.setParentButtonEnabled(folder.getParentFolderId() != null);
 	view.setControlsVisible(rights.isEditable);
     }
+
 }

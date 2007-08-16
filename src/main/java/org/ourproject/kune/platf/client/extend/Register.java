@@ -5,5 +5,6 @@ import org.ourproject.kune.platf.client.tool.ClientTool;
 
 public interface Register {
     public void addTool(ClientTool clientTool);
-    public void addAction(String eventName, Action action);
+
+    public void addAction(Action action);
 }

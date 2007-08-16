@@ -10,7 +10,8 @@ import org.ourproject.kune.workspace.client.dto.StateDTO;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class AddFolder extends AbstractAddAction {
-    public static final String KEY = "docs.addFolder";
+    public static final String EVENT = "docs.AddFolder";
+    public static final String KEY = "docs.AddFolder";
     GroupDTO group;
 
     public AddFolder() {
@@ -37,5 +38,13 @@ public class AddFolder extends AbstractAddAction {
 		stateManager.setState(content);
 	    }
 	});
+    }
+
+    public String getActionName() {
+	return KEY;
+    }
+
+    public String getEventName() {
+	return EVENT;
     }
 }

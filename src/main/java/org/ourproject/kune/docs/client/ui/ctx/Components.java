@@ -3,6 +3,7 @@ package org.ourproject.kune.docs.client.ui.ctx;
 import org.ourproject.kune.docs.client.ui.DocumentFactory;
 import org.ourproject.kune.docs.client.ui.ctx.admin.AdminContext;
 import org.ourproject.kune.docs.client.ui.ctx.folder.FolderContext;
+import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsView;
 
 class Components {
 
@@ -16,7 +17,8 @@ class Components {
 
     public FolderContext getFolderContext() {
 	if (folderContext == null) {
-	    folderContext = DocumentFactory.createFolderContext(listener);
+	    folderContext = DocumentFactory.createFolderContext();
+	    ContextItemsView view = (ContextItemsView) folderContext.getView();
 	}
 	return folderContext;
     }

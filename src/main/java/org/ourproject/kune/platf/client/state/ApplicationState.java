@@ -3,6 +3,7 @@ package org.ourproject.kune.platf.client.state;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 /**
  * RESPONSABILITIES: - Mantains the user's application state - Gererates
@@ -11,14 +12,15 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
  * @author danigb
  * 
  */
-public class State {
+public class ApplicationState {
     public final String user;
     private GroupDTO group;
     private String currentToolName;
     private List licenses;
     private List licensesNotCC;
+    private StateDTO currentState;
 
-    public State(final String userHash) {
+    public ApplicationState(final String userHash) {
 	user = userHash;
 	group = null;
 	currentToolName = null;
@@ -65,4 +67,17 @@ public class State {
     public boolean currentGroupIs(final String groupName) {
 	return group != null && group.getShortName().equals(groupName);
     }
+
+    public void setCurrent(final StateDTO currentState) {
+	this.currentState = currentState;
+    }
+
+    public StateDTO getCurrentState() {
+	return currentState;
+    }
+
+    public void setCurrentState(final StateDTO currentState) {
+	this.currentState = currentState;
+    }
+
 }
