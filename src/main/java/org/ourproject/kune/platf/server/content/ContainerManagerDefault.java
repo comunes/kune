@@ -24,12 +24,10 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
 	return persist(container);
     }
 
-    public Container createFolder(final Group group, final Long parentFolderId, final String name) {
-	Container parent = find(parentFolderId);
+    public Container createFolder(final Group group, final Container parent, final String name) {
 	Container child = new Container(parent.getAbsolutePath(), name, group, parent.getToolName());
 	parent.addChild(child);
 	child.setParent(parent);
-	persist(parent);
 	persist(child);
 	return child;
     }

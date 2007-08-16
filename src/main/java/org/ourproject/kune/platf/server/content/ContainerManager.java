@@ -8,5 +8,5 @@ public interface ContainerManager {
 
     Container createRootFolder(Group group, String toolName, String name, String type);
 
-    Container createFolder(Group group, Long parentFolderId, String name);
+    Container createFolder(Group group, Container parent, String name);
 }

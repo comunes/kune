@@ -8,6 +8,9 @@ import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public class DocumentClientTool extends AbstractClientTool implements DocumentContentListener {
+    public static final String TYPE_ROOT = "docs.root";
+    public static final String TYPE_FOLDER = "docs.folder";
+    public static final String TYPE_DOCUMENT = "docs.doc";
     public static final String NAME = "docs";
     private final DocToolComponents components;
 

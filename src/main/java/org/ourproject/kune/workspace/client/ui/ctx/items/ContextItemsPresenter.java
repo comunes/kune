@@ -28,7 +28,7 @@ public class ContextItemsPresenter implements ContextItems {
 	for (int index = 0; index < folders.size(); index++) {
 	    ContainerDTO child = (ContainerDTO) folders.get(index);
 	    state.setFolder(child.getId().toString());
-	    view.addItem(child.getName(), "folder", state.getEncoded());
+	    view.addItem(child.getName(), child.getTypeId(), state.getEncoded());
 	}
 
 	state.setFolder(container.getId().toString());
@@ -36,7 +36,7 @@ public class ContextItemsPresenter implements ContextItems {
 	for (int index = 0; index < contents.size(); index++) {
 	    ContentDTO dto = (ContentDTO) contents.get(index);
 	    state.setDocument(dto.getId().toString());
-	    view.addItem(dto.getTitle(), "file", state.getEncoded());
+	    view.addItem(dto.getTitle(), dto.getTypeId(), state.getEncoded());
 	}
 
 	view.setParentButtonEnabled(container.getParentFolderId() != null);

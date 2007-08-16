@@ -14,8 +14,12 @@ import org.ourproject.kune.platf.server.tool.ToolRegistry;
 import com.google.inject.Inject;
 
 public class DocumentServerTool implements ServerTool {
+    public static final String TYPE_ROOT = "docs.root";
+    public static final String TYPE_FOLDER = "docs.folder";
+    public static final String TYPE_DOCUMENT = "docs.doc";
+    public static final String NAME = "docs";
     public static final String ROOT_NAME = "docs";
-    public static final String NAME = ROOT_NAME;
+
     private final ContentManager contentManager;
     private final ToolConfigurationManager configurationManager;
     private final ContainerManager containerManager;
@@ -37,10 +41,18 @@ public class DocumentServerTool implements ServerTool {
 	return NAME;
     }
 
+    public void onCreateContainer(final Container container, final Container parent) {
+	container.setTypeId(TYPE_FOLDER);
+    }
+
+    public void onCreateContent(final Content content, final Container parent) {
+	content.setTypeId(TYPE_DOCUMENT);
+    }
+
     public Group initGroup(final User user, final Group group) {
 	ToolConfiguration config = new ToolConfiguration();
-	// i18n: docs
-	Container container = containerManager.createRootFolder(group, NAME, ROOT_NAME, "docs.rootFolder");
+	// i18n: docs (ROOT_NAME)
+	Container container = containerManager.createRootFolder(group, NAME, ROOT_NAME, TYPE_ROOT);
 	config.setRoot(container);
 	group.setToolConfig(NAME, config);
 	configurationManager.persist(config);

@@ -12,6 +12,7 @@ import com.google.inject.Singleton;
 public class ToolRegistry {
     static Log log = LogFactory.getLog(ToolRegistry.class);
 
+    // TODO: estamos seguros de esto?
     private final ConcurrentHashMap<String, ServerTool> tools;
 
     public ToolRegistry() {
@@ -25,6 +26,11 @@ public class ToolRegistry {
 
     public Collection<ServerTool> all() {
 	return tools.values();
+    }
+
+    public ServerTool get(final String toolName) {
+	return tools.get(toolName);
+
     }
 
 }

@@ -5,7 +5,11 @@ import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public class ChatClientTool extends AbstractClientTool {
-    private static final String NAME = "chats";
+    public static final String NAME = "chats";
+    public static final String TYPE_ROOT = "chat.root";
+    public static final String TYPE_ROOM = "chat.room";
+    public static final String TYPE_CHAT = "chat.chat";
+
     private final ChatToolComponents components;
 
     public ChatClientTool() {
