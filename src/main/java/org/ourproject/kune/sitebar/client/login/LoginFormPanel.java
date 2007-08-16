@@ -1,5 +1,6 @@
 package org.ourproject.kune.sitebar.client.login;
 
+import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.sitebar.client.bar.SiteBarTrans;
 import org.ourproject.kune.sitebar.client.services.Translate;
 
@@ -10,7 +11,7 @@ import com.gwtext.client.widgets.form.FormConfig;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.form.TextFieldConfig;
 
-public class LoginFormPanel extends Composite implements LoginFormView {
+public class LoginFormPanel extends Composite implements LoginFormView, View {
     private static final Translate t = SiteBarTrans.getInstance().t;
     private static final String NICKOREMAIL_FIELD = "nickOrEmail";
     private static final String PASSWORD_FIELD = "password";

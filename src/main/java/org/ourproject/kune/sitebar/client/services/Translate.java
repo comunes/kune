@@ -32,7 +32,9 @@ public interface Translate extends Constants {
 
     String Logout();
 
-    String CreateNewGroup();
+    String Register();
+
+    String RegisterANewGroup();
 
     String UserNameOrEmail();
 

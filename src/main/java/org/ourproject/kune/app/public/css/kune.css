@@ -5,6 +5,13 @@ body {
     margin: 5px 5px 0 5px;
 }
 
+.kunebody {
+    background-color: #FFF;
+    color: #000;
+    font-family: arial;
+    margin: 5px 5px 0 5px;
+}
+
 #initialstatusbar {
     position: absolute;
     top: 2px;

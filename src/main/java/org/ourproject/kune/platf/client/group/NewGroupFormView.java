@@ -6,4 +6,10 @@ public interface NewGroupFormView extends View {
     void clearData();
 
     void setLicense(String longName);
+
+    String getPublicDesc();
+
+    String getLongName();
+
+    String getShortName();
 }

@@ -11,10 +11,8 @@ import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -39,9 +37,7 @@ public class LicenseChooseFormPanel extends Composite implements LicenseChooseFo
 	RadioButton notCcRB = new RadioButton("ccOrNot", t.OtherLicenses());
 	options = new DeckPanel();
 	// ccIntro = new HTML("<p>" + t.CCExplainMessage() + "</p>", true);
-	PushButton selectBT = new PushButton(t.SelectThisLicense());
-	PushButton cancelBT = new PushButton(t.Cancel());
-	HorizontalPanel buttonsHP = new HorizontalPanel();
+
 	otherLicenses = new ListBox();
 	VerticalPanel ccOptionsVP = new VerticalPanel();
 
@@ -86,9 +82,6 @@ public class LicenseChooseFormPanel extends Composite implements LicenseChooseFo
 	options.showWidget(0);
 
 	generalVP.add(new HorizontalLine());
-	buttonsHP.add(selectBT);
-	buttonsHP.add(cancelBT);
-	generalVP.add(buttonsHP);
 
 	// optionsGroupBox.setTitle(t.Options());
 
@@ -104,18 +97,6 @@ public class LicenseChooseFormPanel extends Composite implements LicenseChooseFo
 	    }
 	});
 
-	selectBT.addClickListener(new ClickListener() {
-	    public void onClick(final Widget arg0) {
-		presenter.onSelect();
-	    }
-	});
-
-	cancelBT.addClickListener(new ClickListener() {
-	    public void onClick(final Widget arg0) {
-		presenter.onCancel();
-	    }
-	});
-
 	for (int i = 0; i < nonCCLicenses.size(); i++) {
 	    String licenseDescrip = ((LicenseDTO) nonCCLicenses.get(i)).getLongName();
 	    otherLicenses.addItem(licenseDescrip);
@@ -124,9 +105,7 @@ public class LicenseChooseFormPanel extends Composite implements LicenseChooseFo
 	    otherLicenses.setItemSelected(0, true);
 	    otherLicenses.setVisibleItemCount(1);
 	}
-	// cancelBT.setWidth("" + selectBT.getOffsetWidth());
 
-	// setText(t.ChooseLicense());
     }
 
     public int getSelectedNonCCLicenseIndex() {

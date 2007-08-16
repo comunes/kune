@@ -38,6 +38,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     private final Hyperlink logoutHyperlink;
     private final HTML pipeSeparatorHtml2;
     private TwoButtonsDialog loginDialog;
+    private TwoButtonsDialog newGroupDialog;
 
     public SiteBarPanel(final SiteBarPresenter presenter) {
 
@@ -173,12 +174,20 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     public void showNewGroupDialog() {
-	NewGroupForm newGroupForm = SiteBarFactory.createNewGroup(presenter);
-	currentDialog = new DialogBox();
-	currentDialog.setWidget((Widget) newGroupForm.getView());
-	currentDialog.setText(t.CreateNewGroup()); // TODO: Better description
-	currentDialog.show();
-	currentDialog.center();
+	final NewGroupForm newGroupForm = SiteBarFactory.createNewGroup(presenter);
+	newGroupDialog = new TwoButtonsDialog(t.RegisterANewGroup(), t.Register(), t.Cancel(), true, false, 350, 200,
+		350, 200, new FormListener() {
+		    public void onAccept() {
+			newGroupForm.doCreateNewGroup();
+		    }
+
+		    public void onCancel() {
+			newGroupForm.doCancel();
+		    }
+		});
+	newGroupDialog.add((Widget) newGroupForm.getView());
+	newGroupDialog.hide();
+	newGroupDialog.center();
     }
 
     public void hideNewGroupDialog() {

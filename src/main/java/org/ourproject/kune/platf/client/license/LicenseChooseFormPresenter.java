@@ -1,25 +1,42 @@
 package org.ourproject.kune.platf.client.license;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 
-public class LicenseChooseFormPresenter {
+public class LicenseChooseFormPresenter implements LicenseChooseForm {
 
     private LicenseChooseFormView view;
 
-    private LicenseChangeListener listener;
-
-    private List nonCCLicenses;
+    private final LicenseChangeListener listener;
 
     private List allLicenses;
 
-    public void init(final LicenseChooseFormView view, final List allLicenses, final List nonCCLicenses,
-	    final LicenseChangeListener listener) {
-	this.view = view;
+    private List nonCCLicenses;
+
+    private List CClicenses;
+
+    public LicenseChooseFormPresenter(final LicenseChangeListener listener) {
 	this.listener = listener;
+    }
+
+    public void init(final LicenseChooseFormView view, final List allLicenses) {
+	this.view = view;
 	this.allLicenses = allLicenses;
-	this.nonCCLicenses = nonCCLicenses;
+
+	CClicenses = new ArrayList();
+	nonCCLicenses = new ArrayList();
+	for (int i = 0; i < allLicenses.size(); i++) {
+	    LicenseDTO licenseDTO = ((LicenseDTO) allLicenses.get(i));
+	    if (licenseDTO.isCC()) {
+		CClicenses.add(licenseDTO);
+	    } else {
+		nonCCLicenses.add(licenseDTO);
+	    }
+	}
+
 	this.view.reset();
     }
 
@@ -59,6 +76,10 @@ public class LicenseChooseFormPresenter {
 
     public void onNotCCselected() {
 	view.showNotCCoptiones();
+    }
+
+    public View getView() {
+	return view;
     }
 
 }
