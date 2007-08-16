@@ -31,8 +31,8 @@ public class LicenseManagerDefault extends DefaultManager<License, Long> impleme
 	return licenseFinder.getCC();
     }
 
-    public License createLicense(final License license) {
-	return persist(license);
+    public License persist(final License license) {
+	return super.persist(license);
     }
 
     @Inject

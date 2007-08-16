@@ -13,6 +13,10 @@ public class AddFolder extends AbstractAddAction {
     public static final String KEY = "docs.addFolder";
     GroupDTO group;
 
+    public AddFolder() {
+	group = null;
+    }
+
     public void execute(final Object value, final Object extra) {
 	group = (GroupDTO) extra;
 	// i18n

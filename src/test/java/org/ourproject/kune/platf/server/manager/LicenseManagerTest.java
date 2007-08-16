@@ -24,7 +24,7 @@ public class LicenseManagerTest extends PersistenceTest {
 	assertEquals(0, licenseFinder.getAll().size());
 	license = new License("by", "Creative Commons Attribution", "", "http://creativecommons.org/licenses/by/3.0/",
 		true, false, false, "", "");
-	licenseManager.createLicense(license);
+	licenseManager.persist(license);
     }
 
     @Test

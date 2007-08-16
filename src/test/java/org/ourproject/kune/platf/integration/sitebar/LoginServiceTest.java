@@ -35,4 +35,5 @@ public class LoginServiceTest {
 	// service.login(properties.getDefaultSiteAdminEmail(),
 	// properties.getAdminPassword());
     }
+
 }

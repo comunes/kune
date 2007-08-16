@@ -8,7 +8,7 @@ public interface LicenseManager {
 
     List<License> getAll();
 
-    License createLicense(final License license);
+    License persist(final License license);
 
     void setLicenseFinder(final License licenseFinder);
 

@@ -1,9 +1,9 @@
 package org.ourproject.kune.platf.server;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.rpc.KuneService;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.manager.GroupManager;
@@ -35,11 +35,11 @@ public class KuneServerService implements KuneService {
     }
 
     public List getAllLicenses() throws SerializableException {
-	return mapper.map(licenseManager.getAll(), ArrayList.class);
+	return mapper.mapList(licenseManager.getAll(), LicenseDTO.class);
     }
 
     public List getNotCCLicenses() throws SerializableException {
-	return mapper.map(licenseManager.getNotCC(), ArrayList.class);
+	return mapper.mapList(licenseManager.getNotCC(), LicenseDTO.class);
     }
 
 }
