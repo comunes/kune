@@ -2,7 +2,7 @@ package org.ourproject.kune.platf.server.state;
 
 import org.ourproject.kune.platf.server.access.AccessRights;
 import org.ourproject.kune.platf.server.domain.AccessLists;
-import org.ourproject.kune.platf.server.domain.Folder;
+import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Group;
 
 public class State {
@@ -11,7 +11,7 @@ public class State {
     private String title;
     private String toolName;
     private Group group;
-    private Folder folder;
+    private Container container;
     private AccessLists accessLists;
     private AccessRights contentRights;
     private AccessRights folderRights;
@@ -85,12 +85,12 @@ public class State {
 	this.contentRights = accessRights;
     }
 
-    public Folder getFolder() {
-	return folder;
+    public Container getFolder() {
+	return container;
     }
 
-    public void setFolder(final Folder folder) {
-	this.folder = folder;
+    public void setFolder(final Container container) {
+	this.container = container;
     }
 
     public Double getRate() {

@@ -10,7 +10,7 @@ import org.ourproject.kune.platf.server.access.AccessType;
 import org.ourproject.kune.platf.server.access.Accessor;
 import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.Folder;
+import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.ContentManager;
@@ -92,9 +92,9 @@ public class ContentServerService implements ContentService {
 	Group group = groupManager.findByShortName(groupShotName);
 
 	Access access = accessor.getFolderAccess(parentFolderId, group, AccessType.EDIT);
-	Folder folder = folderManager.createFolder(group, parentFolderId, title);
-	String toolName = folder.getToolName();
-	StateToken token = new StateToken(group.getShortName(), toolName, folder.getId().toString(), null);
+	Container container = folderManager.createFolder(group, parentFolderId, title);
+	String toolName = container.getToolName();
+	StateToken token = new StateToken(group.getShortName(), toolName, container.getId().toString(), null);
 	access = accessor.getAccess(token, group, group, AccessType.READ);
 	State state = stateService.create(access);
 	return mapper.map(state, StateDTO.class);

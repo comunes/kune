@@ -1,7 +1,7 @@
 package org.ourproject.kune.docs.server;
 
 import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.Folder;
+import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.ToolConfiguration;
 import org.ourproject.kune.platf.server.domain.User;
@@ -41,11 +41,11 @@ public class DocumentServerTool implements ServerTool {
 	if (config == null) {
 	    config = new ToolConfiguration();
 	    // i18n
-	    Folder folder = folderManager.createRootFolder(group, NAME, "docs");
-	    config.setRoot(folder);
+	    Container container = folderManager.createRootFolder(group, NAME, "docs");
+	    config.setRoot(container);
 	    group.setToolConfig(NAME, config);
 	    configurationManager.persist(config);
-	    Content descriptor = contentManager.createContent("Kune docs!", user, folder);
+	    Content descriptor = contentManager.createContent("Kune docs!", user, container);
 	    group.setDefaultContent(descriptor);
 	}
 	return group;

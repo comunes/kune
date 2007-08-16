@@ -6,7 +6,7 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.Folder;
+import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.manager.ContentManager;
 import org.ourproject.kune.platf.server.manager.FolderManager;
@@ -37,7 +37,7 @@ public class FinderDefault implements Finder {
 	}
     }
 
-    public Folder getFolder(final Long folderId) throws ContentNotFoundException {
+    public Container getFolder(final Long folderId) throws ContentNotFoundException {
 	try {
 	    return folderManager.find(folderId);
 	} catch (PersistenceException e) {
@@ -79,34 +79,34 @@ public class FinderDefault implements Finder {
     private Content findByContentReference(final String groupName, final String toolName,
 	    final Long folderId, final Long contentId) throws ContentNotFoundException {
 	Content descriptor = contentManager.find(contentId);
-	Folder folder = descriptor.getFolder();
+	Container container = descriptor.getFolder();
 
-	if (!folder.getId().equals(folderId)) {
+	if (!container.getId().equals(folderId)) {
 	    throw new ContentNotFoundException();
 	}
-	if (!folder.getToolName().equals(toolName)) {
+	if (!container.getToolName().equals(toolName)) {
 	    throw new ContentNotFoundException();
 	}
-	if (!folder.getOwner().getShortName().equals(groupName)) {
+	if (!container.getOwner().getShortName().equals(groupName)) {
 	    throw new ContentNotFoundException();
 	}
 	return descriptor;
     }
 
     private Content findByFolderReference(final String groupName, final String toolName, final Long folderId) {
-	Folder folder = folderManager.find(folderId);
-	return generateFolderFakeContent(folder);
+	Container container = folderManager.find(folderId);
+	return generateFolderFakeContent(container);
     }
 
     private Content findByRootOnGroup(final String groupName, final String toolName) {
 	Group group = groupManager.findByShortName(groupName);
-	Folder folder = group.getRoot(toolName);
-	return generateFolderFakeContent(folder);
+	Container container = group.getRoot(toolName);
+	return generateFolderFakeContent(container);
     }
 
-    private Content generateFolderFakeContent(final Folder folder) {
+    private Content generateFolderFakeContent(final Container container) {
 	Content descriptor = new Content();
-	descriptor.setFolder(folder);
+	descriptor.setFolder(container);
 	AccessLists emptyAccessList = new AccessLists();
 	descriptor.setAccessLists(emptyAccessList);
 	return descriptor;

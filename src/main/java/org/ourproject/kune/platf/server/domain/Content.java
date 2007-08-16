@@ -23,7 +23,7 @@ import com.wideplay.warp.persist.dao.Finder;
 @Entity
 @Table(name = "contents")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Content implements HasContent {
+public class Content {
     @Id
     @GeneratedValue
     private Long id;
@@ -40,7 +40,7 @@ public class Content implements HasContent {
     private Revision lastRevision;
 
     @OneToOne
-    private User creator;
+    private Group creator;
 
     @Basic(optional = false)
     private Long createdOn;
@@ -49,7 +49,7 @@ public class Content implements HasContent {
     private List<Translation> translations;
 
     @ManyToOne
-    private Folder folder;
+    private Container container;
 
     // TODO: lang, languages, etc
     private String locale;
@@ -140,11 +140,11 @@ public class Content implements HasContent {
 	this.translations = translations;
     }
 
-    public User getCreator() {
+    public Group getCreator() {
 	return creator;
     }
 
-    public void setCreator(final User creator) {
+    public void setCreator(final Group creator) {
 	this.creator = creator;
     }
 
@@ -156,12 +156,12 @@ public class Content implements HasContent {
 	this.createdOn = createdOn;
     }
 
-    public Folder getFolder() {
-	return folder;
+    public Container getFolder() {
+	return container;
     }
 
-    public void setFolder(final Folder folder) {
-	this.folder = folder;
+    public void setFolder(final Container container) {
+	this.container = container;
     }
 
     public void addRevision(final Revision revision) {

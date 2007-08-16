@@ -7,13 +7,13 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.ContentDTO;
-import org.ourproject.kune.platf.client.dto.FolderDTO;
+import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.server.TestHelper;
 import org.ourproject.kune.platf.server.access.AccessRights;
 import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.Folder;
+import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.Revision;
@@ -63,18 +63,18 @@ public class MapperTest {
 
     @Test
     public void testFolderMapping() {
-	Folder folder = new Folder();
-	folder.addFolder(new Folder());
-	folder.addFolder(new Folder());
-	folder.addContent(new Content());
-	folder.addContent(new Content());
-	folder.addContent(new Content());
+	Container container = new Container();
+	container.addFolder(new Container());
+	container.addFolder(new Container());
+	container.addContent(new Content());
+	container.addContent(new Content());
+	container.addContent(new Content());
 
-	FolderDTO dto = mapper.map(folder, FolderDTO.class);
+	ContainerDTO dto = mapper.map(container, ContainerDTO.class);
 	assertEquals(2, dto.getChilds().size());
 	assertEquals(3, dto.getContents().size());
 	assertTrue(dto.getContents().get(0) instanceof ContentDTO);
-	assertTrue(dto.getChilds().get(0) instanceof FolderDTO);
+	assertTrue(dto.getChilds().get(0) instanceof ContainerDTO);
     }
 
     @Test

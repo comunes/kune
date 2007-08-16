@@ -3,7 +3,7 @@ package org.ourproject.kune.platf.server;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Data;
-import org.ourproject.kune.platf.server.domain.Folder;
+import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.Revision;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
@@ -16,25 +16,25 @@ public class TestDomainHelper {
 	return user;
     }
 
-    public static Folder createFolderWithId(final long id) {
-	Folder folder = new Folder();
-	folder.setId(id);
-	return folder;
+    public static Container createFolderWithId(final long id) {
+	Container container = new Container();
+	container.setId(id);
+	return container;
     }
 
-    public static Folder createFolderWithIdAndToolName(final int i, final String toolName) {
-	Folder folder = createFolderWithId(i);
-	folder.setToolName(toolName);
-	return folder;
+    public static Container createFolderWithIdAndToolName(final int i, final String toolName) {
+	Container container = createFolderWithId(i);
+	container.setToolName(toolName);
+	return container;
     }
 
-    public static Folder createFolderWithIdAndGroupAndTool(final int i, final String groupShortName,
+    public static Container createFolderWithIdAndGroupAndTool(final int i, final String groupShortName,
 	    final String toolName) {
-	Folder folder = createFolderWithIdAndToolName(i, toolName);
+	Container container = createFolderWithIdAndToolName(i, toolName);
 	Group owner = new Group();
 	owner.setShortName(groupShortName);
-	folder.setOwner(owner);
-	return folder;
+	container.setOwner(owner);
+	return container;
 
     }
 

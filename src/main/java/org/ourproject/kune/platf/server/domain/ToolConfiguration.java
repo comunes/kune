@@ -16,9 +16,9 @@ public class ToolConfiguration {
     private Long id;
 
     @OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
-    private Folder root;
+    private Container root;
 
-    public Folder setRoot(final Folder root) {
+    public Container setRoot(final Container root) {
 	this.root = root;
 	return root;
     }
@@ -31,7 +31,7 @@ public class ToolConfiguration {
 	this.id = id;
     }
 
-    public Folder getRoot() {
+    public Container getRoot() {
 	return root;
     }
 

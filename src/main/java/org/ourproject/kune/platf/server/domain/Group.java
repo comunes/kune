@@ -4,10 +4,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.google.inject.name.Named;
 import com.wideplay.warp.persist.dao.Finder;
+
+// FIXME: meter licencia
 
 @Entity
 @Table(name = "groups")
@@ -105,7 +116,7 @@ public class Group implements HasId {
 	this.socialNetwork = socialNetwork;
     }
 
-    public Folder getRoot(final String toolName) {
+    public Container getRoot(final String toolName) {
 	return toolsConfig.get(toolName).getRoot();
     }
 

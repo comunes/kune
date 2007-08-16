@@ -13,7 +13,7 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.server.TestDomainHelper;
 import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.Folder;
+import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.ToolConfiguration;
 import org.ourproject.kune.platf.server.manager.ContentManager;
@@ -48,10 +48,10 @@ public class FinderTest {
 
     @Test
     public void testCompleteToken() throws ContentNotFoundException {
-	Folder folder = TestDomainHelper.createFolderWithIdAndGroupAndTool(1, "groupShortName", "toolName");
+	Container container = TestDomainHelper.createFolderWithIdAndGroupAndTool(1, "groupShortName", "toolName");
 	Content descriptor = new Content();
 	descriptor.setId(1l);
-	descriptor.setFolder(folder);
+	descriptor.setFolder(container);
 
 	expect(contentManager.find(2l)).andReturn(descriptor);
 	replay(contentManager);
@@ -64,8 +64,8 @@ public class FinderTest {
     @Test(expected = ContentNotFoundException.class)
     public void contentAndFolderMatch() throws ContentNotFoundException {
 	Content descriptor = new Content();
-	Folder folder = TestDomainHelper.createFolderWithIdAndToolName(5, "toolName2");
-	descriptor.setFolder(folder);
+	Container container = TestDomainHelper.createFolderWithIdAndToolName(5, "toolName2");
+	descriptor.setFolder(container);
 	expect(contentManager.find(1l)).andReturn(descriptor);
 	replay(contentManager);
 
@@ -76,8 +76,8 @@ public class FinderTest {
     @Test(expected = ContentNotFoundException.class)
     public void contentAndToolMatch() throws ContentNotFoundException {
 	Content descriptor = new Content();
-	Folder folder = TestDomainHelper.createFolderWithId(1);
-	descriptor.setFolder(folder);
+	Container container = TestDomainHelper.createFolderWithId(1);
+	descriptor.setFolder(container);
 	expect(contentManager.find(1l)).andReturn(descriptor);
 	replay(contentManager);
 
@@ -88,8 +88,8 @@ public class FinderTest {
     @Test(expected = ContentNotFoundException.class)
     public void contentAndGrouplMatch() throws ContentNotFoundException {
 	Content descriptor = new Content();
-	Folder folder = TestDomainHelper.createFolderWithIdAndGroupAndTool(5, "groupOther", "toolName");
-	descriptor.setFolder(folder);
+	Container container = TestDomainHelper.createFolderWithIdAndGroupAndTool(5, "groupOther", "toolName");
+	descriptor.setFolder(container);
 	expect(contentManager.find(1l)).andReturn(descriptor);
 	replay(contentManager);
 
@@ -104,13 +104,13 @@ public class FinderTest {
 
     @Test
     public void testDocMissing() throws ContentNotFoundException {
-	Folder folder = new Folder();
-	expect(folderManager.find(1l)).andReturn(folder);
+	Container container = new Container();
+	expect(folderManager.find(1l)).andReturn(container);
 
 	replay(folderManager);
 	Content content = finder.getContent(null, new StateToken("groupShortName", "toolName", "1", null));
 	assertNotNull(content);
-	assertSame(folder, content.getFolder());
+	assertSame(container, content.getFolder());
 	verify(folderManager);
     }
 
@@ -118,13 +118,13 @@ public class FinderTest {
     public void testFolderMissing() throws ContentNotFoundException {
 	Group group = new Group();
 	ToolConfiguration config = group.setToolConfig("toolName", new ToolConfiguration());
-	Folder folder = config.setRoot(new Folder());
+	Container container = config.setRoot(new Container());
 	expect(groupManager.findByShortName("groupShortName")).andReturn(group);
 	replay(groupManager);
 
 	StateToken token = new StateToken("groupShortName", "toolName", null, null);
 	Content content = finder.getContent(null, token);
-	assertSame(folder, content.getFolder());
+	assertSame(container, content.getFolder());
 	verify(groupManager);
     }
 
@@ -153,8 +153,8 @@ public class FinderTest {
     @Test(expected = ContentNotFoundException.class)
     public void testIds() throws ContentNotFoundException {
 	Content descriptor = new Content();
-	Folder folder = TestDomainHelper.createFolderWithIdAndToolName(5, "toolName");
-	descriptor.setFolder(folder);
+	Container container = TestDomainHelper.createFolderWithIdAndToolName(5, "toolName");
+	descriptor.setFolder(container);
 	expect(contentManager.find(1l)).andReturn(descriptor);
 	replay(contentManager);
 

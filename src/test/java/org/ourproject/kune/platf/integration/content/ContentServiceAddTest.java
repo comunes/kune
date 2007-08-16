@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
-import org.ourproject.kune.platf.client.dto.FolderDTO;
+import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
@@ -50,16 +50,16 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     }
 
     public void testAddFolder() throws SerializableException {
-	FolderDTO parent = defaultContent.getFolder();
+	ContainerDTO parent = defaultContent.getFolder();
 	String title = "folder name";
 	StateDTO newState = contentService.addFolder(session.getHash(), groupName, parent.getId(), title);
 	assertNotNull(newState);
-	FolderDTO child = newState.getFolder();
-	assertEquals(parent.getAbsolutePath() + FolderDTO.SEP + title, child.getAbsolutePath());
+	ContainerDTO child = newState.getFolder();
+	assertEquals(parent.getAbsolutePath() + ContainerDTO.SEP + title, child.getAbsolutePath());
 	assertEquals(1, parent.getChilds().size());
 	assertEquals(parent.getId(), child.getParentFolderId());
 	StateDTO defaultAgain = contentService.getContent(session.getHash(), new StateToken());
-	FolderDTO parentAgain = defaultAgain.getFolder();
+	ContainerDTO parentAgain = defaultAgain.getFolder();
 	assertEquals(1, parentAgain.getChilds().size());
     }
 }

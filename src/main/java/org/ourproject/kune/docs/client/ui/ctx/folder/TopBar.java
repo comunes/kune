@@ -42,20 +42,20 @@ class TopBar extends VerticalPanel {
 	BorderDecorator buttonRounded = new BorderDecorator(pathMenu, BorderDecorator.ALL, BorderDecorator.SIMPLE);
 	iconBarHP.add(buttonRounded);
 	pathMenu.addItem(Img.folderpathmenu().getHTML(), true, pathSubmenu);
-	pathSubmenu.addItem(Img.folder().getHTML() + "&nbsp;Folder", true, new Command() {
+	pathSubmenu.addItem(Img.folder().getHTML() + "&nbsp;Container", true, new Command() {
 	    public void execute() {
 		// FIXME
 		Window.alert("jump!");
 	    }
 	});
-	pathSubmenu.addItem(Img.folder().getHTML() + "&nbsp;Folder 2", true, new Command() {
+	pathSubmenu.addItem(Img.folder().getHTML() + "&nbsp;Container 2", true, new Command() {
 	    public void execute() {
 		// FIXME
 		Window.alert("jump too!");
 	    }
 	});
 	currentFolderHP.add(Img.bulletArrowRight().createImage());
-	currentFolder = new Label("Current Folder");
+	currentFolder = new Label("Current Container");
 	currentFolderHP.add(currentFolder);
 
 	// Set properties

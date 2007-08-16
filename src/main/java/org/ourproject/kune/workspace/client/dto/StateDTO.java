@@ -2,7 +2,7 @@ package org.ourproject.kune.workspace.client.dto;
 
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
-import org.ourproject.kune.platf.client.dto.FolderDTO;
+import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
@@ -15,7 +15,7 @@ public class StateDTO implements IsSerializable {
     private String title;
     private String toolName;
     private GroupDTO group;
-    private FolderDTO folder;
+    private ContainerDTO folder;
     private AccessListsDTO accessLists;
     private AccessRightsDTO contentRights;
     private AccessRightsDTO folderRights;
@@ -88,11 +88,11 @@ public class StateDTO implements IsSerializable {
 	this.contentRights = accessRights;
     }
 
-    public FolderDTO getFolder() {
+    public ContainerDTO getFolder() {
 	return folder;
     }
 
-    public void setFolder(final FolderDTO folder) {
+    public void setFolder(final ContainerDTO folder) {
 	this.folder = folder;
     }
 

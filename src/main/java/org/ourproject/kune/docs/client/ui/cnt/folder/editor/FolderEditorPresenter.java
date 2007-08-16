@@ -1,7 +1,7 @@
 package org.ourproject.kune.docs.client.ui.cnt.folder.editor;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.FolderDTO;
+import org.ourproject.kune.platf.client.dto.ContainerDTO;
 
 public class FolderEditorPresenter implements FolderEditor {
 
@@ -15,7 +15,7 @@ public class FolderEditorPresenter implements FolderEditor {
 	return view;
     }
 
-    public void setFolder(final FolderDTO folder) {
+    public void setFolder(final ContainerDTO folder) {
 
     }
 }

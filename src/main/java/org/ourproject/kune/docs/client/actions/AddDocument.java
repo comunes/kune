@@ -1,6 +1,6 @@
 package org.ourproject.kune.docs.client.actions;
 
-import org.ourproject.kune.platf.client.dto.FolderDTO;
+import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.sitebar.client.Site;
@@ -12,7 +12,7 @@ public class AddDocument extends AbstractAddAction {
     public static final String KEY = "docs.addDocument";
 
     public void execute(final Object value, Object extra) {
-	showNewDocDialog((FolderDTO) value, "create new document");
+	showNewDocDialog((ContainerDTO) value, "create new document");
     }
 
     protected void add() {
@@ -20,7 +20,7 @@ public class AddDocument extends AbstractAddAction {
 	Site.showProgress("adding document");
 	ContentServiceAsync server = ContentService.App.getInstance();
 	String name = form.getName();
-	server.addContent(user, folderDTO.getId(), name, new AsyncCallback() {
+	server.addContent(user, containerDTO.getId(), name, new AsyncCallback() {
 	    public void onFailure(final Throwable caught) {
 	    }
 

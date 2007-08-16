@@ -2,7 +2,7 @@ package org.ourproject.kune.docs.client.actions;
 
 import org.ourproject.kune.docs.client.ui.DocumentFactory;
 import org.ourproject.kune.docs.client.ui.forms.create.NewDocumentForm;
-import org.ourproject.kune.platf.client.dto.FolderDTO;
+import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.workspace.client.actions.WorkspaceAction;
 import org.ourproject.kune.workspace.client.ui.form.FormListener;
 
@@ -11,11 +11,11 @@ import com.google.gwt.user.client.ui.Widget;
 
 public abstract class AbstractAddAction extends WorkspaceAction {
     private DialogBox dialog;
-    protected FolderDTO folderDTO;
+    protected ContainerDTO containerDTO;
     protected NewDocumentForm form;
 
-    protected void showNewDocDialog(final FolderDTO folderDTO, final String title) {
-	this.folderDTO = folderDTO;
+    protected void showNewDocDialog(final ContainerDTO containerDTO, final String title) {
+	this.containerDTO = containerDTO;
 	if (dialog == null) {
 	    createDialog();
 	}

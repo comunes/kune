@@ -65,10 +65,10 @@
 
 	<mapping>
 		<class-a>
-			org.ourproject.kune.platf.client.dto.FolderDTO
+			org.ourproject.kune.platf.client.dto.ContainerDTO
 		</class-a>
 		<class-b>
-			org.ourproject.kune.platf.server.domain.Folder
+			org.ourproject.kune.platf.server.domain.Container
 		</class-b>
 		<field>
 			<a>contents</a>
@@ -84,10 +84,10 @@
 			<a>childs</a>
 			<b>childs</b>
 			<a-hint>
-				org.ourproject.kune.platf.client.dto.FolderDTO
+				org.ourproject.kune.platf.client.dto.ContainerDTO
 			</a-hint>
 			<b-hint>
-				org.ourproject.kune.platf.server.domain.Folder
+				org.ourproject.kune.platf.server.domain.Container
 			</b-hint>
 		</field>
 	</mapping>

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-public class FolderDTO implements IsSerializable {
+public class ContainerDTO implements IsSerializable {
     public static final String SEP = "/";
     private Long parentFolderId;
     private Long id;
@@ -12,7 +12,7 @@ public class FolderDTO implements IsSerializable {
     private String absolutePath;
 
     /**
-     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.FolderDTO>
+     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.ContainerDTO>
      */
     private List childs;
 
@@ -21,7 +21,7 @@ public class FolderDTO implements IsSerializable {
      */
     private List contents;
 
-    public FolderDTO() {
+    public ContainerDTO() {
     }
 
     public Long getParentFolderId() {

@@ -1,12 +1,22 @@
 package org.ourproject.kune.platf.server.domain;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 @Entity
-@Table(name = "folders")
-public class Folder implements HasId {
+@Table(name = "containers")
+public class Container implements HasId {
     public static final String SEP = "/";
 
     @Id
@@ -17,12 +27,12 @@ public class Folder implements HasId {
     private Group owner;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Folder parent;
+    private Container parent;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
-    private List<Folder> childs;
+    private List<Container> childs;
 
-    @OneToMany(mappedBy = "folder")
+    @OneToMany(mappedBy = "container")
     private final List<Content> contents;
 
     @Basic(optional = false)
@@ -35,16 +45,16 @@ public class Folder implements HasId {
 
     private String name;
 
-    public Folder(final String parentPath, final String title, final Group group, final String toolName) {
+    public Container(final String parentPath, final String title, final Group group, final String toolName) {
 	this.name = title;
 	this.absolutePath = parentPath + SEP + title;
 	owner = group;
 	this.toolName = toolName;
 	this.contents = new ArrayList<Content>();
-	this.childs = new ArrayList<Folder>();
+	this.childs = new ArrayList<Container>();
     }
 
-    public Folder() {
+    public Container() {
 	this(null, null, null, null);
     }
 
@@ -60,7 +70,7 @@ public class Folder implements HasId {
 	return parent != null ? parent.getId() : null;
     }
 
-    public Folder getParent() {
+    public Container getParent() {
 	return parent;
     }
 
@@ -72,15 +82,15 @@ public class Folder implements HasId {
 	this.id = id;
     }
 
-    public void setParent(final Folder parent) {
+    public void setParent(final Container parent) {
 	this.parent = parent;
     }
 
-    public List<Folder> getChilds() {
+    public List<Container> getChilds() {
 	return childs;
     }
 
-    public void setChilds(final List<Folder> childs) {
+    public void setChilds(final List<Container> childs) {
 	this.childs = childs;
     }
 
@@ -126,8 +136,8 @@ public class Folder implements HasId {
 	return contents;
     }
 
-    public void addFolder(final Folder folder) {
-	childs.add(folder);
+    public void addFolder(final Container container) {
+	childs.add(container);
     }
 
 }

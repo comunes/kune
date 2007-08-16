@@ -2,7 +2,7 @@ package org.ourproject.kune.platf.server.access;
 
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.Folder;
+import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 
 public class Access {
@@ -11,22 +11,22 @@ public class Access {
     private AccessLists folderAccessLists;
     private AccessRights contentRights;
     private AccessRights folderRights;
-    private Folder folder;
+    private Container container;
 
-    public Access(final Content descriptor, final Folder folder) {
+    public Access(final Content descriptor, final Container container) {
 	this.descriptor = descriptor;
 	contentAccessLists = descriptor != null ? getContentAccessList(descriptor) : null;
-	this.folder = folder;
-	folderAccessLists = folder != null ? getFolderAccessLists(folder) : null;
+	this.container = container;
+	folderAccessLists = container != null ? getFolderAccessLists(container) : null;
     }
 
-    public Folder getFolder() {
-	return folder;
+    public Container getFolder() {
+	return container;
     }
 
-    public void setFolder(final Folder folder) {
-	this.folder = folder;
-	folderAccessLists = folder != null ? getFolderAccessLists(folder) : null;
+    public void setFolder(final Container container) {
+	this.container = container;
+	folderAccessLists = container != null ? getFolderAccessLists(container) : null;
     }
 
     public void setDescriptor(final Content descriptor) {
@@ -95,8 +95,8 @@ public class Access {
 	return accessLists;
     }
 
-    private AccessLists getFolderAccessLists(final Folder folder) {
-	return folder.getOwner().getSocialNetwork().getAccessList();
+    private AccessLists getFolderAccessLists(final Container container) {
+	return container.getOwner().getSocialNetwork().getAccessList();
     }
 
     public void setDescriptorWidthFolderRights(final Content content) {
