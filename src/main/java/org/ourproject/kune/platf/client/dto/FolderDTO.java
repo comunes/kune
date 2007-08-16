@@ -17,7 +17,7 @@ public class FolderDTO implements IsSerializable {
     private List childs;
 
     /**
-     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.ContentDescriptorDTO>
+     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.ContentDTO>
      */
     private List contents;
 

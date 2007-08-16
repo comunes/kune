@@ -54,6 +54,7 @@ public class Content implements HasContent {
     // TODO: lang, languages, etc
     private String locale;
 
+    @OneToOne(cascade = CascadeType.ALL)
     private AccessLists accessLists;
 
     public Content() {

@@ -1,11 +1,13 @@
 package org.ourproject.kune.platf.server.domain;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Embeddable;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
-@Embeddable
+@Entity
+@Table(name = "access_lists")
 public class AccessLists {
+    @Id @GeneratedValue
+    private Long id;
+
     @OneToOne(cascade = CascadeType.ALL)
     protected GroupList admins;
     @OneToOne(cascade = CascadeType.ALL)
@@ -17,6 +19,14 @@ public class AccessLists {
 	this.admins = new GroupList();
 	this.editors = new GroupList();
 	this.viewers = new GroupList();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void addAdmin(final Group group) {

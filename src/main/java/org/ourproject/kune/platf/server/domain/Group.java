@@ -4,15 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.google.inject.name.Named;
 import com.wideplay.warp.persist.dao.Finder;
@@ -37,6 +29,7 @@ public class Group implements HasId {
     @OneToOne
     private Content defaultContent;
 
+    @OneToOne(cascade = CascadeType.ALL)
     private SocialNetwork socialNetwork;
 
     @OneToMany
