@@ -35,4 +35,14 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+     <servlet>
+        <servlet-name>Jabber HTTP Binding Servlet</servlet-name>
+        <servlet-class>org.jabber.JabberHTTPBind.JHBServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Jabber HTTP Binding Servlet</servlet-name>
+        <url-pattern>/openfire/</url-pattern>
+    </servlet-mapping>
+
 </web-app>

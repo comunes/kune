@@ -1,0 +1,14 @@
+;; Object semantic.cache
+;; SEMANTICDB Tags save file
+(semanticdb-project-database "semantic.cache"
+  :file "semantic.cache"
+  :tables (list 
+   (semanticdb-table "JSJaCHttpBindingConnection.js"
+    :file "JSJaCHttpBindingConnection.js"
+    :pointmax 10327
+    :major-mode 'c-mode
+    :tokens '((";" nil [26 27]) (";" nil [55 56]))
+    :unmatched-syntax 'nil
+    )
+   )
+  )

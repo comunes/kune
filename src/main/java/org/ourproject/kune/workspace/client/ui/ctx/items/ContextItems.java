@@ -14,7 +14,9 @@ public interface ContextItems {
 
     public void canCreate(String typeName, String label, String eventName);
 
-    public void setParentTreeVisible(boolean b);
+    public void setParentTreeVisible(boolean visible);
 
     public void showContainer(StateToken state, ContainerDTO container, AccessRightsDTO rights);
+
+    public void setControlsVisible(boolean visible);
 }

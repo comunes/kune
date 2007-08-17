@@ -15,13 +15,21 @@ public class RoomsAdminPresenter implements RoomsAdmin {
     public RoomsAdminPresenter(final ContextItems contextItems) {
 	this.contextItems = contextItems;
 	ContextItemsImages images = ContextItemsImages.App.getInstance();
+	contextItems.setParentTreeVisible(false);
 	contextItems.registerType(ChatClientTool.TYPE_CHAT, images.page());
 	contextItems.registerType(ChatClientTool.TYPE_ROOM, images.bulletArrowRight());
 	contextItems.canCreate(ChatClientTool.TYPE_ROOM, "Add room", AddFolder.EVENT);
     }
 
+    // FIXME: cierta lógica de negocio en el cliente
+    // ¿debemos quitarla? es decir, enviar desde el servidor si se puede añadir
+    // hijos al contenedor
     public void showRoom(final StateToken token, final ContainerDTO container, final AccessRightsDTO rights) {
 	contextItems.showContainer(token, container, rights);
+	String type = container.getTypeId();
+	if (type.equals(ChatClientTool.TYPE_ROOM)) {
+	    contextItems.setControlsVisible(false);
+	}
     }
 
     public View getView() {

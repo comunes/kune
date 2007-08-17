@@ -77,4 +77,8 @@ public class ContextItemsPresenter implements ContextItems {
 	Dispatcher.App.instance.fire(GoParentFolder.KEY, null);
     }
 
+    public void setControlsVisible(final boolean visible) {
+	view.setControlsVisible(visible);
+    }
+
 }

@@ -59,7 +59,6 @@
         </dependency>
 
         <!--  smack -->
-        <!--
             <dependency>
             <groupId>org.jivesoftware.smack</groupId>
             <artifactId>smack</artifactId>
@@ -75,7 +74,6 @@
             <artifactId>smackx-debugger</artifactId>
             <version>3.0.4</version>
             </dependency>
-        -->
 
         <!--  mysql -->
         <dependency>
