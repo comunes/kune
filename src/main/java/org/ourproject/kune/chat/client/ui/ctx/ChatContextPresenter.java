@@ -27,6 +27,7 @@ public class ChatContextPresenter implements ChatContext {
 
     public void setState(final StateDTO state) {
 	RoomsAdmin rooms = components.getRoomsAdmin();
+	rooms.showRoom(state.getState(), state.getFolder(), state.getFolderRights());
 	view.show(rooms.getView());
     }
 

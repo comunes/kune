@@ -29,7 +29,7 @@ public class FolderContextPresenter implements FolderContext {
     }
 
     public void setContainer(final StateToken state, final ContainerDTO container, final AccessRightsDTO rights) {
-	contextItems.setContainer(state, container, rights);
+	contextItems.showContainer(state, container, rights);
     }
 
 }

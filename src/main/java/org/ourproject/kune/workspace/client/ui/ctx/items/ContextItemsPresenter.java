@@ -19,7 +19,7 @@ public class ContextItemsPresenter implements ContextItems {
     public ContextItemsPresenter() {
     }
 
-    public void setContainer(final StateToken state, final ContainerDTO container, final AccessRightsDTO rights) {
+    public void showContainer(final StateToken state, final ContainerDTO container, final AccessRightsDTO rights) {
 	GWT.log("current folder: " + container.getId(), null);
 	GWT.log("parent: " + container.getParentFolderId(), null);
 	state.setDocument(null);

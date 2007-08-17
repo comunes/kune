@@ -16,5 +16,5 @@ public interface ContextItems {
 
     public void setParentTreeVisible(boolean b);
 
-    public void setContainer(StateToken state, ContainerDTO container, AccessRightsDTO rights);
+    public void showContainer(StateToken state, ContainerDTO container, AccessRightsDTO rights);
 }

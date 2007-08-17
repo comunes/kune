@@ -1,5 +1,6 @@
 package org.ourproject.kune.platf.server;
 
+import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 
 import com.google.inject.servlet.SessionScoped;
@@ -27,6 +28,10 @@ public class UserSession {
 
     public void setHash(final String hash) {
 	this.hash = hash;
+    }
+
+    public Group getGroup() {
+	return user != null ? user.getUserGroup() : null;
     }
 
 }

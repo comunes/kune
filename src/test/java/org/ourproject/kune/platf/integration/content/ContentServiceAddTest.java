@@ -10,6 +10,8 @@ import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.errors.AccessViolationException;
+import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
@@ -24,6 +26,13 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     public void init() throws SerializableException {
 	new IntegrationTestHelper(this);
 	groupName = getDefGroupName();
+    }
+
+    @Test(expected = AccessViolationException.class)
+    public void noLoggedInShouldThrowIllegalAccess() throws ContentNotFoundException, SerializableException {
+	defaultContent = getDefaultContent();
+	Long folderId = defaultContent.getFolder().getId();
+	contentService.addContent(session.getHash(), folderId, "a name");
     }
 
     @Test

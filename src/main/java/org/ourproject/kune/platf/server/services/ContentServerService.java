@@ -76,7 +76,8 @@ public class ContentServerService implements ContentService {
 	    throws AccessViolationException, ContentNotFoundException {
 
 	User user = session.getUser();
-	Access access = accessor.getFolderAccess(parentFolderId, user.getUserGroup(), AccessType.EDIT);
+	Group group = session.getGroup();
+	Access access = accessor.getFolderAccess(parentFolderId, group, AccessType.EDIT);
 	access.setDescriptorWidthFolderRights(creationService.createContent(title, user, access.getFolder()));
 	State state = stateService.create(access);
 	return mapper.map(state, StateDTO.class);
