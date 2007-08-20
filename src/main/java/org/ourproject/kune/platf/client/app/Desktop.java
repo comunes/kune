@@ -9,24 +9,21 @@ import org.ourproject.kune.workspace.client.Workspace;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.AbsolutePanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.QuickTips;
 
 public class Desktop extends AbsolutePanel {
 
     public Desktop(final Workspace workspace, final SiteBarListener listener) {
+	QuickTips.init(); // extgwt tips
 	SiteBar siteBar = SiteBarFactory.createSiteBar(listener);
 	SiteMessage siteMessage = SiteBarFactory.getSiteMessage();
-	VerticalPanel generalVP = new VerticalPanel();
-	this.add(generalVP);
 	this.add((Widget) siteMessage.getView(), Window.getClientWidth() * 40 / 100 - 10, 2);
 	this.setSize("100%", "100%");
-	generalVP.add((Widget) siteBar.getView());
-	generalVP.add((Widget) workspace.getView());
-	generalVP.addStyleName("kuneybody");
+	this.add((Widget) siteBar.getView(), 0, 0);
+	this.add((Widget) workspace.getView(), 0, 20);
+	this.addStyleName("kuneybody");
 	initResizeListener(this, workspace, siteMessage);
-	QuickTips.init(); // extgwt tips
     }
 
     private void initResizeListener(final AbsolutePanel desktop, final Workspace workspace,

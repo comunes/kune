@@ -112,9 +112,9 @@ public interface Translate extends Constants {
 
     String Send();
 
-    String ShortNameGroup();
+    String ShortName();
 
-    String LongNameGroup();
+    String LongName();
 
     String PublicDescription();
 

@@ -1,5 +1,7 @@
 package org.ourproject.kune.sitebar.client.bar;
 
+import org.ourproject.kune.chat.client.ui.rooms.ChatRoomsDialog;
+import org.ourproject.kune.chat.client.ui.rooms.ChatRoomsPresenter;
 import org.ourproject.kune.platf.client.group.NewGroupForm;
 import org.ourproject.kune.platf.client.ui.dialogs.TwoButtonsDialog;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
@@ -100,7 +102,14 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	logoutHyperlink.setText(t.Logout());
 	searchButton.addClickListener(new ClickListener() {
 	    public void onClick(final Widget arg0) {
-		presenter.doSearch(searchTextBox.getText());
+		ChatRoomsPresenter presenter = new ChatRoomsPresenter();
+		ChatRoomsDialog view = new ChatRoomsDialog(presenter);
+		presenter.init(view);
+		view.show();
+		view.createRoom("test", "test@talks.localhost");
+		view.createRoom("test1", "test2@talks.localhost");
+		view.addMessage("test", "lala", "lalal");
+		// presenter.doSearch(searchTextBox.getText());
 	    }
 	});
 	logoutHyperlink.addClickListener(new ClickListener() {
@@ -154,16 +163,15 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 
     public void showLoginDialog() {
 	final LoginForm login = SiteBarFactory.createLogin(presenter);
-	loginDialog = new TwoButtonsDialog(t.Login(), t.Login(), t.Cancel(), true, false, 350, 200, 350, 200,
-		new FormListener() {
-		    public void onAccept() {
-			login.doLogin();
-		    }
+	loginDialog = new TwoButtonsDialog(t.Login(), t.Login(), t.Cancel(), true, false, 300, 300, new FormListener() {
+	    public void onAccept() {
+		login.doLogin();
+	    }
 
-		    public void onCancel() {
-			login.doCancel();
-		    }
-		});
+	    public void onCancel() {
+		login.doCancel();
+	    }
+	});
 	loginDialog.add((Widget) login.getView());
 	loginDialog.hide();
 	loginDialog.center();
@@ -175,8 +183,8 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 
     public void showNewGroupDialog() {
 	final NewGroupForm newGroupForm = SiteBarFactory.createNewGroup(presenter);
-	newGroupDialog = new TwoButtonsDialog(t.RegisterANewGroup(), t.Register(), t.Cancel(), true, false, 450, 300,
-		450, 300, new FormListener() {
+	newGroupDialog = new TwoButtonsDialog(t.RegisterANewGroup(), t.Register(), t.Cancel(), true, false, 450, 335,
+		new FormListener() {
 		    public void onAccept() {
 			newGroupForm.doCreateNewGroup();
 		    }

@@ -49,6 +49,13 @@ public class TwoButtonsDialog {
 
     }
 
+    public TwoButtonsDialog(final String caption, final String firstButton, final String secondButton,
+	    final boolean modal, final boolean minimizable, final int width, final int height,
+	    final FormListener listener) {
+	this(caption, firstButton, secondButton, modal, minimizable, width, height, width, height, listener);
+
+    }
+
     public void add(final Widget widget) {
 	BorderLayout layout = dialog.getLayout();
 	ContentPanel contentPanel = new ContentPanel();

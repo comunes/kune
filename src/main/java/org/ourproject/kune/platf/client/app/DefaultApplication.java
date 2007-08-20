@@ -27,7 +27,7 @@ public class DefaultApplication implements Application {
 	this.tools = tools;
 	workspace = WorkspaceFactory.getWorkspace();
 	workspace.attachTools(tools.values().iterator());
-	Desktop desktop = new Desktop(workspace, new SiteBarListener() {
+	final Desktop desktop = new Desktop(workspace, new SiteBarListener() {
 	    public void onUserLoggedIn() {
 		stateManager.reload();
 	    }

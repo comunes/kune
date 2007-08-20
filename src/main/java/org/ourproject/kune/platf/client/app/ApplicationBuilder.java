@@ -49,13 +49,11 @@ public class ApplicationBuilder {
 
 	DeferredCommand.addCommand(new Command() {
 	    public void execute() {
-		GWT.log("Prefetching operation", null);
 		GWT.log("Locale: " + Kune.getInstance().t.Locale(), null);
 		PrefetchUtilites.preFetchImpImages();
 		PrefetchUtilites.preFetchLicenses(session);
 	    }
 	});
-	GWT.log("application builded!", null);
 	return application;
     }
 

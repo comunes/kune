@@ -31,7 +31,7 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
 
 	// FIXME: Test of width
 	// setWidth("100%");
-	// setHeight("100%");
+	setHeight("100%");
 	// setCellWidth(topBar, "100%");
 
 	// expand.setWidth("100%");

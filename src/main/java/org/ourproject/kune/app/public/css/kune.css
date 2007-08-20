@@ -2,7 +2,7 @@
     background-color: #FFF;
     color: #000;
     font-family: arial;
-    /* margin: 5px; */
+    margin: 5px;
 }
 
 #initialstatusbar {
@@ -59,6 +59,11 @@
 
 .kune-expandHoriz {
     width: 100%;
+}
+
+.kune-Default-Form {
+    background-color: red;
+    margin: 20px;
 }
 
 /* Sitebar */
@@ -245,15 +250,15 @@
 
 /* FIXME: test if works */
 .topBar .gwt-PushButton-up-disabled {
-    filter:alpha(opacity=60);
-    -moz-opacity: 	0.6;
-    opacity: 0.6;
+    filter:alpha(opacity=30);
+    -moz-opacity: 0.3;
+    opacity: 0.3;
 }
 
 .topBar .gwt-PushButton-down-disabled {
-    filter:alpha(opacity=60);
-    -moz-opacity: 	0.6;
-    opacity: 0.6;
+    filter:alpha(opacity=30);
+    -moz-opacity: 0.3;
+    opacity: 0.3;
 }
 
 .kune-NavigationBar .topBar .gwt-Image {

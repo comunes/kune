@@ -5,11 +5,11 @@ import org.ourproject.kune.platf.client.license.LicenseChangeListener;
 import org.ourproject.kune.platf.client.license.LicenseChooseForm;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.services.Translate;
+import org.ourproject.kune.platf.client.ui.CustomButton;
 import org.ourproject.kune.platf.client.ui.dialogs.TwoButtonsDialog;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
 import org.ourproject.kune.workspace.client.ui.form.FormListener;
 
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -34,28 +34,20 @@ public class NewGroupFormPanel extends Composite implements NewGroupFormView {
 
     private TwoButtonsDialog licenseDialog;
     private final Form newGroupForm;
+    private Radio projectRadio;
+    private Radio orgRadio;
+    private Radio communityRadio;
+    private TextField licenseField;
 
     public NewGroupFormPanel() {
-
-	// Intialize
 	VerticalPanel generalVP = new VerticalPanel();
 	initWidget(generalVP);
 
-	Translate t = Kune.getInstance().t;
-
-	Button chooseLicense = new Button(t.ChooseLicense());
-
 	newGroupForm = createNewGroupForm();
 	generalVP.add(newGroupForm);
+	generalVP.addStyleName("kune-Default-Form");
 
-	// Set Properties
-	chooseLicense.addClickListener(new ClickListener() {
-	    public void onClick(final Widget arg0) {
-		showlicenseDialog();
-	    }
-	});
 	clearData();
-
     }
 
     public void setLicense(final String longName) {
@@ -64,6 +56,7 @@ public class NewGroupFormPanel extends Composite implements NewGroupFormView {
 
     public void clearData() {
 	// TODO
+	licenseField.reset();
     }
 
     public String getShortName() {
@@ -78,18 +71,30 @@ public class NewGroupFormPanel extends Composite implements NewGroupFormView {
 	return newGroupForm.findField(PUBLICDESC_FIELD).getRawValue();
     }
 
+    public boolean isProject() {
+	return projectRadio.getValue();
+    }
+
+    public boolean isOrganization() {
+	return orgRadio.getValue();
+    }
+
+    public boolean isCommunity() {
+	return communityRadio.getValue();
+    }
+
     private void showlicenseDialog() {
 	final LicenseChooseForm license = SiteBarFactory.createLicenseChoose(new LicenseChangeListener() {
 	    public void onCancel() {
-		// FIXME
+		// Do nothing
 	    }
 
 	    public void onLicenseChange(LicenseDTO licenseDTO) {
-		// FIXME
+		licenseField.setValue(licenseDTO.getLongName());
 	    }
 	});
 	licenseDialog = new TwoButtonsDialog(t.SelectLicense(), t.ChooseLicense(), t.Cancel(), true, false, 350, 200,
-		350, 200, new FormListener() {
+		new FormListener() {
 		    public void onAccept() {
 			license.onSelect();
 		    }
@@ -106,17 +111,16 @@ public class NewGroupFormPanel extends Composite implements NewGroupFormView {
     private Form createNewGroupForm() {
 	Form form = new Form(new FormConfig() {
 	    {
-		setWidth(300);
-		setLabelWidth(90);
+		setWidth(400);
+		setLabelWidth(100);
 		setLabelAlign("right");
+		setButtonAlign("left");
 	    }
 	});
 
-	// form.fieldset(t.SignIn());
-
 	form.add(new TextField(new TextFieldConfig() {
 	    {
-		setFieldLabel(t.ShortNameGroup());
+		setFieldLabel(t.ShortName());
 		setName(SHORTNAME_FIELD);
 		setWidth(175);
 		setAllowBlank(false);
@@ -126,7 +130,7 @@ public class NewGroupFormPanel extends Composite implements NewGroupFormView {
 
 	form.add(new TextField(new TextFieldConfig() {
 	    {
-		setFieldLabel(t.LongNameGroup());
+		setFieldLabel(t.LongName());
 		setName(LONGNAME_FIELD);
 		setWidth(300);
 		setAllowBlank(false);
@@ -148,43 +152,56 @@ public class NewGroupFormPanel extends Composite implements NewGroupFormView {
 	    {
 		setLegend(t.TypeOfGroup());
 		setHideLabels(true);
+		setStyle("margin-left: 105px");
 	    }
 	});
 
-	form.add(new Radio(new CheckboxConfig() {
+	projectRadio = new Radio(new CheckboxConfig() {
 	    {
 		setName(TYPEOFGROUP_FIELD);
-		// setFieldLabel(t.TypeOfGroup());
+		setBoxLabel(t.Project());
+		setAutoCreate(true);
+		setChecked(true);
+	    }
+	});
+	form.add(projectRadio);
 
+	orgRadio = new Radio(new CheckboxConfig() {
+	    {
+		setName(TYPEOFGROUP_FIELD);
 		setBoxLabel(t.Organization());
 		setAutoCreate(true);
 	    }
-	}));
+	});
+	form.add(orgRadio);
 
-	form.add(new Radio(new CheckboxConfig() {
+	communityRadio = new Radio(new CheckboxConfig() {
 	    {
 		setName(TYPEOFGROUP_FIELD);
 		setBoxLabel(t.Community());
 		setAutoCreate(true);
 	    }
-	}));
-
-	form.add(new Radio(new CheckboxConfig() {
-	    {
-		setName(TYPEOFGROUP_FIELD);
-		setBoxLabel(t.Project());
-		setAutoCreate(true);
-	    }
-	}));
+	});
+	form.add(communityRadio);
 
 	form.end();
 
-	// form.add(new Field(new FieldConfig() {
-	// {
-	// setName(LICENSE_FIELD);
-	// setFieldLabel(t.DefaultLicense());
-	// }
-	// }));
+	licenseField = new TextField(new TextFieldConfig() {
+	    {
+		setFieldLabel(t.DefaultLicense());
+		setName(LICENSE_FIELD);
+		setWidth(175);
+		setReadOnly(true);
+		setMsgTarget("side");
+	    }
+	});
+	form.add(licenseField);
+
+	form.addButton(new CustomButton(t.ChooseLicense(), new ClickListener() {
+	    public void onClick(final Widget arg0) {
+		showlicenseDialog();
+	    }
+	}).getButton());
 
 	form.end();
 	form.render();

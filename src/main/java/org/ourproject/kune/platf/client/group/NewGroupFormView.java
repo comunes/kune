@@ -12,4 +12,11 @@ public interface NewGroupFormView extends View {
     String getLongName();
 
     String getShortName();
+
+    boolean isProject();
+
+    boolean isOrganization();
+
+    boolean isCommunity();
+
 }
