@@ -73,4 +73,8 @@ public class CustomButton implements SourcesClickEvents {
 	button.setText(text);
     }
 
+    public void setVisible(final boolean b) {
+	button.setVisible(b);
+    }
+
 }

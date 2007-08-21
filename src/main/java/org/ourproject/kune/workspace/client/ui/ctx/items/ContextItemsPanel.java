@@ -1,14 +1,16 @@
 package org.ourproject.kune.workspace.client.ui.ctx.items;
 
+import org.ourproject.kune.platf.client.ui.CustomButton;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtext.client.widgets.Button;
 
 public class ContextItemsPanel extends DockPanel implements ContextItemsView {
     private final VerticalPanel controls;
@@ -79,12 +81,12 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
 
     public void addCommand(final String typeName, final String label, final String eventName) {
 	final String type = typeName;
-	Button button = new Button(label, new ClickListener() {
+	Button button = new CustomButton(label, new ClickListener() {
 	    public void onClick(final Widget sender) {
 		currentEventName = eventName;
 		presenter.onNew(type);
 	    }
-	});
+	}).getButton();
 	controls.add(button);
     }
 

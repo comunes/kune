@@ -23,8 +23,7 @@ public class LoginFormPanel extends Composite implements LoginFormView, View {
 
 	signInForm = createSignInForm();
 	generalVP.add(signInForm);
-	generalVP.setSpacing(200);
-	generalVP.setWidth("100%");
+	generalVP.addStyleName("kune-Default-Form");
 	generalVP.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
     }
 

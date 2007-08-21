@@ -9,9 +9,11 @@ import com.google.gwt.user.client.ui.KeyboardListener;
 public class ChatRoomsPresenter {
 
     private ChatRoomsDialog view;
+
     private String currentRoom;
 
     private Map userAlias;
+
     private String currentUserAlias;
 
     public void init(final ChatRoomsDialog view) {
@@ -48,6 +50,10 @@ public class ChatRoomsPresenter {
     public void onRoomSelected(final String room) {
 	GWT.log("Current room: " + room, null);
 	currentRoom = room;
+    }
+
+    public void onNoRooms() {
+	// TODO
     }
 
 }

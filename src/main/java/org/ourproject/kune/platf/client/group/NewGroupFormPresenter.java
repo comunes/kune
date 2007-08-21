@@ -38,7 +38,8 @@ public class NewGroupFormPresenter implements NewGroupForm {
 	String publicDesc = view.getPublicDesc();
 
 	// TODO: without license you can't create a group
-	GroupDTO group = new GroupDTO(shortName, longName, publicDesc, null, getTypeOfGroup());
+
+	GroupDTO group = new GroupDTO(shortName, longName, publicDesc, "by-cc", getTypeOfGroup());
 	kuneService.createNewGroup(group, new AsyncCallback() {
 	    public void onFailure(final Throwable arg0) {
 		// TODO

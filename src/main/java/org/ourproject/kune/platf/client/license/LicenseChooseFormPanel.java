@@ -16,29 +16,43 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtext.client.widgets.form.Checkbox;
+import com.gwtext.client.widgets.form.CheckboxConfig;
+import com.gwtext.client.widgets.form.FieldSetConfig;
+import com.gwtext.client.widgets.form.Form;
+import com.gwtext.client.widgets.form.FormConfig;
+import com.gwtext.client.widgets.form.Radio;
+import com.gwtext.client.widgets.form.event.CheckboxListener;
 
 public class LicenseChooseFormPanel extends Composite implements LicenseChooseFormView {
 
+    protected static final String TYPEOFGROUP_FIELD = null;
+    protected static final String OTHER_LIC_FIELD = null;
     private final LicenseChooseFormPresenter presenter;
     private final RadioButton ccRB;
     private final RadioButton allowModifRB;
     private final RadioButton commercialRB;
     private final RadioButton allowModifShareAlikeRB;
-    private final ListBox otherLicenses;
     private final DeckPanel options;
+    private final Translate t;
+    private Radio ccLicenses;
+    private Radio otherLicenses;
 
     public LicenseChooseFormPanel(final LicenseChooseFormPresenter initPresenter, final List nonCCLicenses) {
 	this.presenter = initPresenter;
+
 	VerticalPanel generalVP = new VerticalPanel();
 	initWidget(generalVP);
+	generalVP.addStyleName("kune-Default-Form");
+
 	VerticalPanel licenseTypesVP = new VerticalPanel();
-	Translate t = Kune.getInstance().t;
+	t = Kune.getInstance().t;
 	ccRB = new RadioButton("ccOrNot", t.CreativeCommons());
 	RadioButton notCcRB = new RadioButton("ccOrNot", t.OtherLicenses());
 	options = new DeckPanel();
 	// ccIntro = new HTML("<p>" + t.CCExplainMessage() + "</p>", true);
 
-	otherLicenses = new ListBox();
+	ListBox otherLicenses = new ListBox();
 	VerticalPanel ccOptionsVP = new VerticalPanel();
 
 	Label comercialLabel = new Label(t.CCAllowComercial());
@@ -108,8 +122,76 @@ public class LicenseChooseFormPanel extends Composite implements LicenseChooseFo
 
     }
 
+    private Form chooseLicenseForm() {
+	Form form = new Form(new FormConfig() {
+	    {
+		setWidth(350);
+		setLabelWidth(300);
+		setLabelAlign("right");
+		setButtonAlign("left");
+	    }
+	});
+
+	form.fieldset(new FieldSetConfig() {
+	    {
+		// setLegend(t.TypeOfGroup());
+		setHideLabels(true);
+		// setStyle("margin-left: 105px");
+	    }
+	});
+
+	ccLicenses = new Radio(new CheckboxConfig() {
+	    {
+		setName(TYPEOFGROUP_FIELD);
+		setBoxLabel(t.CreativeCommons());
+		setAutoCreate(true);
+		setChecked(true);
+	    }
+	});
+	form.add(ccLicenses);
+
+	otherLicenses = new Radio(new CheckboxConfig() {
+	    {
+		setName(OTHER_LIC_FIELD);
+		setBoxLabel(t.OtherLicenses());
+		setAutoCreate(true);
+	    }
+	});
+	form.add(otherLicenses);
+
+	ccLicenses.addCheckboxListener(new CheckboxListener() {
+	    public void onCheck(final Checkbox field, final boolean checked) {
+		presenter.onCCselected();
+	    }
+	});
+
+	otherLicenses.addCheckboxListener(new CheckboxListener() {
+	    public void onCheck(final Checkbox field, final boolean checked) {
+		presenter.onNotCCselected();
+	    }
+	});
+
+	form.end();
+
+	form.fieldset(new FieldSetConfig() {
+	    {
+		setLegend(t.Options());
+		// setHideLabels(true);
+		// setStyle("margin-left: 105px");
+	    }
+	});
+
+	// TODO: Continue this
+
+	form.end();
+
+	form.end();
+	form.render();
+	return form;
+    }
+
     public int getSelectedNonCCLicenseIndex() {
-	return otherLicenses.getSelectedIndex();
+	return 0; // otherLicenses.getSelectedIndex();
     }
 
     public boolean isAllowModif() {

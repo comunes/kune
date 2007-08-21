@@ -15,9 +15,11 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class WorkspacePanel extends Composite implements WorkspaceView {
     private final LogoPanel logoPanel;
-    private final ContextTitleBar contextTitleBar;
-    private final GroupToolsBar groupNavBar;
-    private final HorizontalSplitPanel contextHSP;
+    private final ContentTitleBar contentTitleBar;
+    private final GroupToolsBar groupToolsBar;
+    private final HorizontalSplitPanel cntcxtHSP;
+    private final VerticalPanel contextVP;
+    private final VerticalPanel contentVP;
 
     public WorkspacePanel() {
 	VerticalPanel generalVP = new VerticalPanel();
@@ -29,38 +31,46 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	generalVP.add(logoPanel);
 	generalVP.add(generalHP);
 
-	VerticalPanel contextVP = new VerticalPanel();
-	VerticalPanel localNavVP = new VerticalPanel();
-	generalHP.add(contextVP);
-	generalHP.add(localNavVP);
+	VerticalPanel groupAreaVP = new VerticalPanel();
+	VerticalPanel groupNavBarVP = new VerticalPanel();
+	generalHP.add(groupAreaVP);
+	generalHP.add(groupNavBarVP);
 
-	groupNavBar = new GroupToolsBar();
+	groupToolsBar = new GroupToolsBar();
 	SummaryPanel summaryPanel = new SummaryPanel();
-	localNavVP.add(groupNavBar);
-	localNavVP.add(summaryPanel);
+	groupNavBarVP.add(groupToolsBar);
+	groupNavBarVP.add(summaryPanel);
 
-	ContextToolBar contextToolBar = new ContextToolBar();
-	contextTitleBar = new ContextTitleBar();
-	contextHSP = new HorizontalSplitPanel();
+	ContentToolBar contextToolBar = new ContentToolBar();
+	contentTitleBar = new ContentTitleBar();
+	cntcxtHSP = new HorizontalSplitPanel();
+	contentVP = new VerticalPanel();
+	contextVP = new VerticalPanel();
+	cntcxtHSP.setLeftWidget(contentVP);
+	cntcxtHSP.setRightWidget(contextVP);
 	String mainBorderColor = Kune.getInstance().c.getMainBorder();
-	ContextBottomBar contextBottomBar = new ContextBottomBar();
+	ContentBottomBar contextBottomBar = new ContentBottomBar();
 	BorderDecorator contextToolBarBorderDec = new BorderDecorator(contextToolBar, BorderDecorator.TOPLEFT);
-	contextVP.add(contextToolBarBorderDec);
+	groupAreaVP.add(contextToolBarBorderDec);
 	contextToolBarBorderDec.setColor(mainBorderColor);
-	contextVP.add(contextTitleBar);
-	contextVP.add(contextHSP);
+	groupAreaVP.add(contentTitleBar);
+	groupAreaVP.add(cntcxtHSP);
 	BorderDecorator borderDecorator = new BorderDecorator(contextBottomBar, BorderDecorator.BOTTOMLEFT);
-	contextVP.add(borderDecorator);
+	groupAreaVP.add(borderDecorator);
 	borderDecorator.setColor(mainBorderColor);
+	contentVP.addStyleName("kune-WorkspacePanel-Content");
+	contextVP.addStyleName("kune-WorkspacePanel-Context");
+	contextVP.setWidth("100%");
+	contextVP.setHeight("100%");
 
 	// Set properties
 	addStyleName("kune-WorkspacePanel");
-	contextVP.addStyleName("ContextPanel");
+	groupAreaVP.addStyleName("ContextPanel");
 	generalHP.addStyleName("GeneralHP");
     }
 
     public void addTab(final ToolTrigger trigger) {
-	groupNavBar.addItem(trigger);
+	groupToolsBar.addItem(trigger);
     }
 
     public void setLogo(final String groupName) {
@@ -72,37 +82,35 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     }
 
     public void setContextTitle(final String title) {
-	contextTitleBar.setTitle(title);
+	contentTitleBar.setTitle(title);
     }
 
     public void setTool(final String toolName) {
-	groupNavBar.selectItem(toolName);
+	groupToolsBar.selectItem(toolName);
     }
 
     public void setContent(final View content) {
-	Widget left = contextHSP.getLeftWidget();
-	if (left != null) {
-	    contextHSP.remove(left);
-	}
-	contextHSP.setLeftWidget((Widget) content);
-	((Widget) content).setWidth("99%");
+	contentVP.clear();
+	Widget widget = (Widget) content;
+	contentVP.add(widget);
     }
 
     public void setContext(final View contextMenu) {
-	Widget right = contextHSP.getRightWidget();
-	if (right != null) {
-	    contextHSP.remove(right);
-	}
+	contextVP.clear();
 	Widget widget = (Widget) contextMenu;
-	contextHSP.setRightWidget(widget);
+	contextVP.add(widget);
+	widget.setHeight("100%");
+	widget.setWidth("100%");
+	contextVP.setCellWidth(widget, "100%");
+	contextVP.setCellHeight(widget, "100%");
     }
 
     public void adjustSize(final int windowWidth, final int windowHeight) {
-	int contextWidth = windowWidth - 163;
+	int contextWidth = windowWidth - 163; // 150
 	int contextHeight = windowHeight - 175;
 
-	contextHSP.setSize("" + contextWidth + "px", "" + contextHeight + "px");
-	contextHSP.setSplitPosition("" + (contextWidth - 125) + "px");
+	cntcxtHSP.setSize("" + contextWidth + "px", "" + contextHeight + "px");
+	cntcxtHSP.setSplitPosition("" + (contextWidth - 175) + "px");
     }
 
 }

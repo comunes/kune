@@ -3,9 +3,9 @@ package org.ourproject.kune.workspace.client.workspace;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-class ContextBottomBar extends HorizontalPanel {
+class ContentBottomBar extends HorizontalPanel {
 
-    public ContextBottomBar() {
+    public ContentBottomBar() {
 	addStyleName("kune-ContextBottomBar");
     }
 

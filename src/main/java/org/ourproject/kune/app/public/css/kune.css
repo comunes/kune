@@ -2,7 +2,7 @@
     background-color: #FFF;
     color: #000;
     font-family: arial;
-    margin: 5px;
+    margin: 5px 5px 5px 5px;
 }
 
 #initialstatusbar {
@@ -14,7 +14,7 @@
 }
 
 /* Global styles */
-.gwt-HorizontalSplitPanel .splitter {
+.gwt-HorizontalSplitPanel .hsplitter {
     width: 5px;
     cursor: e-resize;
     background: #CDDE87 url(img/splitter-vert-bar.gif) no-repeat;
@@ -62,7 +62,6 @@
 }
 
 .kune-Default-Form {
-    background-color: red;
     margin: 20px;
 }
 
@@ -113,7 +112,6 @@
 }
 
 .kune-WorkspacePanel .GeneralHP {
-    width: 100%;
 }
 
 .kune-WorkspacePanel .ContextPanel {
@@ -155,8 +153,7 @@
 }
 
 .kune-GroupToolsBar-itemSelected {
-    /* font-size: 85%;
-    font-weight: 700; */
+    margin-bottom: 5px;
 }
 
 .kune-GroupToolsBar-itemSelected .gwt-Hyperlink a {
@@ -166,10 +163,11 @@
 }
 
 .kune-GroupToolsBar-itemSelected .gwt-Hyperlink a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 .kune-GroupToolsBar-itemNotSelected {
+    margin-bottom: 5px;
 }
 
 .kune-GroupToolsBar-itemNotSelected  .gwt-Hyperlink a {
@@ -179,7 +177,7 @@
 }
 
 .kune-GroupToolsBar-itemNotSelected  .gwt-Hyperlink a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 .kune-ContextTitleBar {
@@ -220,13 +218,13 @@
 }
 
 /* Main Content & Context */
-.gwt-HorizontalSplitPanel .left {
+.kune-WorkspacePanel-Content {
     background-color: #FFF;
-    width: 100%;
-    height: 95%;
+    margin: 0 5px 5px 0;
+    width: 99%;
 }
 
-.gwt-HorizontalSplitPanel .right {
+.kune-WorkspacePanel-Context {
     background-color: #CFA;
     width: 100%;
     height: 100%;
@@ -240,8 +238,9 @@
     background-color: #ececec;
     background: #ececec;
     border-bottom: 1px solid #e3dbdb;
-    padding: 0 5px;
+    padding: 5px;
     vertical-align: middle;
+    width: 16px;
 }
 
 .kune-NavigationBar .topBar .gwt-PushButton {
@@ -250,15 +249,15 @@
 
 /* FIXME: test if works */
 .topBar .gwt-PushButton-up-disabled {
-    filter:alpha(opacity=30);
-    -moz-opacity: 0.3;
-    opacity: 0.3;
+    filter:alpha(opacity=20);
+    -moz-opacity: 0.2;
+    opacity: 0.2;
 }
 
 .topBar .gwt-PushButton-down-disabled {
-    filter:alpha(opacity=30);
-    -moz-opacity: 0.3;
-    opacity: 0.3;
+    filter:alpha(opacity=20);
+    -moz-opacity: 0.2;
+    opacity: 0.2;
 }
 
 .kune-NavigationBar .topBar .gwt-Image {

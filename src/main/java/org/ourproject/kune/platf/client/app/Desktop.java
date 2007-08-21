@@ -22,7 +22,7 @@ public class Desktop extends AbsolutePanel {
 	this.setSize("100%", "100%");
 	this.add((Widget) siteBar.getView(), 0, 0);
 	this.add((Widget) workspace.getView(), 0, 20);
-	this.addStyleName("kuneybody");
+	this.addStyleName("kunebody");
 	initResizeListener(this, workspace, siteMessage);
     }
 

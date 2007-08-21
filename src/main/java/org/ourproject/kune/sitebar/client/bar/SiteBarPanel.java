@@ -106,9 +106,10 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 		ChatRoomsDialog view = new ChatRoomsDialog(presenter);
 		presenter.init(view);
 		view.show();
-		view.createRoom("test", "test@talks.localhost");
-		view.createRoom("test1", "test2@talks.localhost");
-		view.addMessage("test", "lala", "lalal");
+		view.createRoom("test1", "test@talks.localhost");
+		view.createRoom("test2", "test2@talks.localhost");
+		view.addMessage("test1", "lala", "Message to test1");
+		view.addMessage("test2", "lala", "Message to test2");
 		// presenter.doSearch(searchTextBox.getText());
 	    }
 	});
@@ -163,7 +164,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 
     public void showLoginDialog() {
 	final LoginForm login = SiteBarFactory.createLogin(presenter);
-	loginDialog = new TwoButtonsDialog(t.Login(), t.Login(), t.Cancel(), true, false, 300, 300, new FormListener() {
+	loginDialog = new TwoButtonsDialog(t.Login(), t.Login(), t.Cancel(), true, false, 350, 200, new FormListener() {
 	    public void onAccept() {
 		login.doLogin();
 	    }
@@ -183,14 +184,16 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 
     public void showNewGroupDialog() {
 	final NewGroupForm newGroupForm = SiteBarFactory.createNewGroup(presenter);
-	newGroupDialog = new TwoButtonsDialog(t.RegisterANewGroup(), t.Register(), t.Cancel(), true, false, 450, 335,
+	newGroupDialog = new TwoButtonsDialog(t.RegisterANewGroup(), t.Register(), t.Cancel(), true, false, 500, 365,
 		new FormListener() {
 		    public void onAccept() {
 			newGroupForm.doCreateNewGroup();
+			newGroupDialog.hide();
 		    }
 
 		    public void onCancel() {
 			newGroupForm.doCancel();
+			newGroupDialog.hide();
 		    }
 		});
 	newGroupDialog.add((Widget) newGroupForm.getView());

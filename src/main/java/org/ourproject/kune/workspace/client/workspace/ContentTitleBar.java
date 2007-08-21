@@ -3,10 +3,10 @@ package org.ourproject.kune.workspace.client.workspace;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 
-class ContextTitleBar extends HorizontalPanel {
+class ContentTitleBar extends HorizontalPanel {
     private Label titleLabel = null;
 
-    public ContextTitleBar() {
+    public ContentTitleBar() {
         titleLabel = new Label();
         add(titleLabel);
         addStyleName("kune-ContextTitleBar");

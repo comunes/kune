@@ -1,12 +1,14 @@
 package org.ourproject.kune.docs.client.ui.cnt.reader;
 
-import com.google.gwt.user.client.ui.Button;
+import org.ourproject.kune.platf.client.ui.CustomButton;
+
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtext.client.widgets.Button;
 
 public class DocumentReaderPanel extends VerticalPanel implements DocumentReaderView {
     private Button btnEdit;
@@ -21,18 +23,19 @@ public class DocumentReaderPanel extends VerticalPanel implements DocumentReader
 
     private Widget createToolBar(final DocumentReaderListener listener) {
 	FlowPanel panel = new FlowPanel();
-	btnEdit = new Button("editar", new ClickListener() {
+	btnEdit = new CustomButton("editar", new ClickListener() {
 	    public void onClick(final Widget sender) {
 		listener.onEdit();
 	    }
-	});
+	}).getButton();
+	// TODO: Vicente
 	panel.add(btnEdit);
 	panel.add(new Label("this is the toolBar"));
 	return panel;
     }
 
     public void setContent(final String text) {
-	content.setHTML(text + "(content)");
+	content.setHTML(text);
     }
 
     public void setEditEnabled(final boolean isEnabled) {

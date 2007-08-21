@@ -86,14 +86,15 @@ public class NewGroupFormPanel extends Composite implements NewGroupFormView {
     private void showlicenseDialog() {
 	final LicenseChooseForm license = SiteBarFactory.createLicenseChoose(new LicenseChangeListener() {
 	    public void onCancel() {
-		// Do nothing
+		licenseDialog.hide();
 	    }
 
 	    public void onLicenseChange(LicenseDTO licenseDTO) {
 		licenseField.setValue(licenseDTO.getLongName());
+		licenseDialog.hide();
 	    }
 	});
-	licenseDialog = new TwoButtonsDialog(t.SelectLicense(), t.ChooseLicense(), t.Cancel(), true, false, 350, 200,
+	licenseDialog = new TwoButtonsDialog(t.SelectLicense(), t.ChooseLicense(), t.Cancel(), true, false, 350, 300,
 		new FormListener() {
 		    public void onAccept() {
 			license.onSelect();
@@ -193,8 +194,10 @@ public class NewGroupFormPanel extends Composite implements NewGroupFormView {
 		setWidth(175);
 		setReadOnly(true);
 		setMsgTarget("side");
+		setSelectOnFocus(false);
 	    }
 	});
+
 	form.add(licenseField);
 
 	form.addButton(new CustomButton(t.ChooseLicense(), new ClickListener() {

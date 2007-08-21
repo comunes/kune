@@ -3,6 +3,7 @@ package org.ourproject.kune.chat.client.ui.rooms;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Window;
@@ -17,6 +18,10 @@ import com.gwtext.client.widgets.LayoutDialog;
 import com.gwtext.client.widgets.LayoutDialogConfig;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.event.DialogListener;
+import com.gwtext.client.widgets.event.KeyListener;
+import com.gwtext.client.widgets.form.Form;
+import com.gwtext.client.widgets.form.FormConfig;
+import com.gwtext.client.widgets.form.TextAreaConfig;
 import com.gwtext.client.widgets.layout.BorderLayout;
 import com.gwtext.client.widgets.layout.ContentPanel;
 import com.gwtext.client.widgets.layout.ContentPanelConfig;
@@ -30,8 +35,6 @@ public class ChatRoomsDialog implements ChatRoomsDialogView {
 
     private final Map rooms;
 
-    private final Map contentPanelsToRooms;
-
     private Button sendBtn;
 
     private final ChatRoomsPresenter presenter;
@@ -42,7 +45,6 @@ public class ChatRoomsDialog implements ChatRoomsDialogView {
 	this.presenter = presenter;
 	createLayout();
 	rooms = new HashMap();
-	contentPanelsToRooms = new HashMap();
     }
 
     private void createLayout() {
@@ -95,38 +97,26 @@ public class ChatRoomsDialog implements ChatRoomsDialogView {
 	dialog.addDialogListener(new DialogListener() {
 
 	    public boolean doBeforeHide(final LayoutDialog dialog) {
-		// TODO Auto-generated method stub
 		return Window.confirm("Sure?");
 	    }
 
 	    public boolean doBeforeShow(final LayoutDialog dialog) {
-		// TODO Auto-generated method stub
 		return true;
 	    }
 
 	    public void onHide(final LayoutDialog dialog) {
-		// TODO Auto-generated method stub
-
 	    }
 
 	    public void onKeyDown(final LayoutDialog dialog, final EventObject e) {
-		// TODO Auto-generated method stub
-
 	    }
 
 	    public void onMove(final LayoutDialog dialog, final int x, final int y) {
-		// TODO Auto-generated method stub
-
 	    }
 
 	    public void onResize(final LayoutDialog dialog, final int width, final int height) {
-		// TODO Auto-generated method stub
-
 	    }
 
 	    public void onShow(final LayoutDialog dialog) {
-		// TODO Auto-generated method stub
-
 	    }
 	});
 
@@ -162,6 +152,7 @@ public class ChatRoomsDialog implements ChatRoomsDialogView {
 	    }
 
 	    public void onKeyUp(final Widget widget, final char key, final int mod) {
+		GWT.log("key: " + key, null);
 		presenter.onInput(key, mod);
 	    }
 
@@ -170,6 +161,13 @@ public class ChatRoomsDialog implements ChatRoomsDialogView {
 	layout.add(LayoutRegionConfig.SOUTH, southPanel);
 
 	layout.endUpdate();
+
+	dialog.addKeyListener(13, new KeyListener() {
+
+	    public void onKey(final int key, final EventObject e) {
+		GWT.log("key2: " + key, null);
+	    }
+	});
 
     }
 
@@ -232,8 +230,6 @@ public class ChatRoomsDialog implements ChatRoomsDialogView {
     }
 
     public void createRoom(final String roomId, final String longName) {
-	// adding multiple Content Panels to the same region resutls in tabs
-
 	final BorderLayout layout = dialog.getLayout();
 	layout.beginUpdate();
 
@@ -249,38 +245,29 @@ public class ChatRoomsDialog implements ChatRoomsDialogView {
 	layout.getRegion(LayoutRegionConfig.CENTER).addLayoutRegionListener(new LayoutRegionListener() {
 
 	    public boolean doBeforeRemove(final LayoutRegion region, final ContentPanel panel) {
-		// TODO Auto-generated method stub
-		return false;
+		return Window.confirm("Are you sure?");
 	    }
 
 	    public void onCollapsed(final LayoutRegion region) {
-		// TODO Auto-generated method stub
-
 	    }
 
 	    public void onExpanded(final LayoutRegion region) {
-		// TODO Auto-generated method stub
-
 	    }
 
 	    public void onInvalidated(final LayoutRegion region) {
-		// TODO Auto-generated method stub
-
 	    }
 
 	    public void onPanelActivated(final LayoutRegion region, final ContentPanel panel) {
-		String room = (String) contentPanelsToRooms.get(panel);
-		presenter.onRoomSelected(room);
+		presenter.onRoomSelected(roomId);
 	    }
 
 	    public void onPanelAdded(final LayoutRegion region, final ContentPanel panel) {
-		// TODO Auto-generated method stub
-
 	    }
 
 	    public void onPanelRemoved(final LayoutRegion region, final ContentPanel panel) {
-		// TODO Auto-generated method stub
-
+		if (dialog.getLayout().getRegion(LayoutRegionConfig.CENTER).getNumPanels() == 0) {
+		    presenter.onNoRooms();
+		}
 	    }
 
 	    public void onResized(final LayoutRegion region, final int newSize) {
@@ -305,7 +292,7 @@ public class ChatRoomsDialog implements ChatRoomsDialogView {
 	});
 
 	rooms.put(roomId, new RoomDescriptor(roomId, longName, contentPanel.getElement()));
-	contentPanelsToRooms.put(contentPanelId, roomId);
+	GWT.log("contentPanelId: " + contentPanelId + "room: " + roomId, null);
 	layout.showPanel(contentPanelId);
 	layout.endUpdate();
     }
@@ -313,6 +300,25 @@ public class ChatRoomsDialog implements ChatRoomsDialogView {
     public void removeUser(final String roomId, final String userAlias) {
 	// TODO Auto-generated method stub
 
+    }
+
+    private Form createFormImput() {
+	Form form = new Form(new FormConfig() {
+	    {
+		setWidth(300);
+		setHideLabels(true);
+	    }
+	});
+
+	form.add(new com.gwtext.client.widgets.form.TextArea(new TextAreaConfig() {
+	    {
+		setName("input");
+		setWidth(175);
+	    }
+	}));
+
+	form.render();
+	return form;
     }
 
     class RoomDescriptor {
