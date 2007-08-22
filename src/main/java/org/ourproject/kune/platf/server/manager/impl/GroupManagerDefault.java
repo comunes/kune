@@ -77,10 +77,15 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
     public Group createGroup(final Group group, final User user) throws SerializableException {
 	try {
+	    if (user == null) {
+		// i18n
+		throw new SerializableException("Must be logged");
+	    }
 	    initSocialNetwork(group, user.getUserGroup());
 	    initGroup(user, group);
 	    return group;
 	} catch (EntityExistsException e) {
+	    // i18n
 	    throw new SerializableException("Already exist a group with this name");
 	}
     }

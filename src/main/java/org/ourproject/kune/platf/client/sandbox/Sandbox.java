@@ -20,10 +20,19 @@
 
 package org.ourproject.kune.platf.client.sandbox;
 
-public class ExtGwtSanbox {
+import org.ourproject.kune.platf.client.services.Images;
+import org.ourproject.kune.platf.client.ui.IconHyperlink;
 
-    public ExtGwtSanbox() {
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
+public class Sandbox extends Composite {
+
+    public Sandbox() {
+	VerticalPanel vp = new VerticalPanel();
+	initWidget(vp);
+	IconHyperlink hl = new IconHyperlink(Images.App.getInstance().bulletStar(), "hello", "hello");
+	vp.add(hl);
     }
 
 }

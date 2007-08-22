@@ -75,6 +75,7 @@ public class SiteBarFactory {
     }
 
     public static NewGroupForm createNewGroup(final NewGroupListener listener) {
+	// i18n Processing
 	NewGroupFormPresenter presenter = new NewGroupFormPresenter(listener);
 	NewGroupFormPanel view = new NewGroupFormPanel();
 	presenter.init(view);

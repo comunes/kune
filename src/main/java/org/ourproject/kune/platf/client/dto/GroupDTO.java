@@ -43,10 +43,10 @@ public class GroupDTO implements IsSerializable {
 	this(null, null, null, null, TYPE_ORGANIZATION);
     }
 
-    public GroupDTO(final String name, final String shortName, final String publicDesc,
+    public GroupDTO(final String shortName, final String longName, final String publicDesc,
 	    final String defaultLicenseShortName, final int type) {
-	this.longName = name;
 	this.shortName = shortName;
+	this.longName = longName;
 	this.publicDesc = publicDesc;
 	this.defaultLicenseShortName = defaultLicenseShortName;
 	this.type = type;

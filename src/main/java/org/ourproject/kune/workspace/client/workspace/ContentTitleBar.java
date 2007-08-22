@@ -27,14 +27,14 @@ class ContentTitleBar extends HorizontalPanel {
     private Label titleLabel = null;
 
     public ContentTitleBar() {
-        titleLabel = new Label();
-        add(titleLabel);
-        addStyleName("kune-ContextTitleBar");
-        //FIXME: Borrar esto
-        setTitleLabel("Title");
+	titleLabel = new Label();
+	add(titleLabel);
+	addStyleName("kune-ContentTitleBar");
+	// FIXME: Borrar esto
+	setTitleLabel("ContentTitleBar");
     }
 
-    public void setTitleLabel(String title) {
-        titleLabel.setText(title);
+    public void setTitleLabel(final String title) {
+	titleLabel.setText(title);
     }
 }

@@ -26,7 +26,7 @@ import com.google.gwt.user.client.ui.Widget;
 class ContentBottomBar extends HorizontalPanel {
 
     public ContentBottomBar() {
-	addStyleName("kune-ContextBottomBar");
+	addStyleName("kune-ContentBottomBar");
     }
 
     public void addWidget(final Widget widget) {

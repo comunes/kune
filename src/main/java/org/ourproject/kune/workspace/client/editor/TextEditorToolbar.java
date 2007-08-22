@@ -26,7 +26,6 @@ import org.ourproject.kune.platf.client.ui.palette.WebSafePalettePanel;
 import org.ourproject.kune.platf.client.ui.palette.WebSafePalettePresenter;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.i18n.client.Constants;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
@@ -34,7 +33,6 @@ import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.ImageBundle;
 import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
@@ -51,202 +49,6 @@ import com.google.gwt.user.client.ui.Widget;
  * functionality.
  */
 public class TextEditorToolbar extends Composite {
-
-    /**
-     * This {@link ImageBundle} is used for all the button icons. Using an image
-     * bundle allows all of these images to be packed into a single image, which
-     * saves a lot of HTTP requests, drastically improving startup time.
-     */
-    public interface Images extends ImageBundle {
-
-	/**
-	 * @gwt.resource bold.png
-	 */
-	AbstractImagePrototype bold();
-
-	/**
-	 * @gwt.resource link.png
-	 */
-	AbstractImagePrototype createLink();
-
-	/**
-	 * @gwt.resource edithtml.png
-	 */
-	AbstractImagePrototype editHtml();
-
-	/**
-	 * @gwt.resource hfixedline.png
-	 */
-	AbstractImagePrototype hr();
-
-	/**
-	 * @gwt.resource incrementindent.png
-	 */
-	AbstractImagePrototype indent();
-
-	/**
-	 * @gwt.resource images.png
-	 */
-	AbstractImagePrototype insertImage();
-
-	/**
-	 * @gwt.resource italic.png
-	 */
-	AbstractImagePrototype italic();
-
-	/**
-	 * @gwt.resource centerpara.png
-	 */
-	AbstractImagePrototype justifyCenter();
-
-	/**
-	 * @gwt.resource alignleft.png
-	 */
-	AbstractImagePrototype justifyLeft();
-
-	/**
-	 * @gwt.resource alignright.png
-	 */
-	AbstractImagePrototype justifyRight();
-
-	/**
-	 * @gwt.resource defaultnumbering.png
-	 */
-	AbstractImagePrototype ol();
-
-	/**
-	 * @gwt.resource decrementindent.png
-	 */
-	AbstractImagePrototype outdent();
-
-	/**
-	 * @gwt.resource removeFormat.png
-	 */
-	AbstractImagePrototype removeFormat();
-
-	/**
-	 * @gwt.resource link_break.png
-	 */
-	AbstractImagePrototype removeLink();
-
-	/**
-	 * @gwt.resource strikeout.png
-	 */
-	AbstractImagePrototype strikeThrough();
-
-	/**
-	 * @gwt.resource subscript.png
-	 */
-	AbstractImagePrototype subscript();
-
-	/**
-	 * @gwt.resource superscript.png
-	 */
-	AbstractImagePrototype superscript();
-
-	/**
-	 * @gwt.resource defaultbullet.png
-	 */
-	AbstractImagePrototype ul();
-
-	/**
-	 * @gwt.resource underline.png
-	 */
-	AbstractImagePrototype underline();
-
-	/**
-	 * @gwt.resource backcolor.png
-	 */
-	AbstractImagePrototype backcolor();
-
-	/**
-	 * @gwt.resource fontcolor.png
-	 */
-	AbstractImagePrototype fontcolor();
-
-	/**
-	 * @gwt.resource charfontname.png
-	 */
-	AbstractImagePrototype charfontname();
-
-	/**
-	 * @gwt.resource fontheight.png
-	 */
-	AbstractImagePrototype fontheight();
-
-    }
-
-    /**
-     * This {@link Constants} interface is used to make the toolbar's strings
-     * internationalizable.
-     */
-    public interface Strings extends Constants {
-
-	String backcolor();
-
-	String bold();
-
-	String createLink();
-
-	String fontcolor();
-
-	String hr();
-
-	String indent();
-
-	String insertImage();
-
-	String italic();
-
-	String justifyCenter();
-
-	String justifyLeft();
-
-	String justifyRight();
-
-	String ol();
-
-	String outdent();
-
-	String removeFormat();
-
-	String removeLink();
-
-	String fontSize();
-
-	String fontType();
-
-	String strikeThrough();
-
-	String subscript();
-
-	String superscript();
-
-	String ul();
-
-	String underline();
-
-	String ExtraSmall();
-
-	String VerySmall();
-
-	String Small();
-
-	String Medium();
-
-	String Large();
-
-	String VeryLarge();
-
-	String ExtraLarge();
-
-	String Save();
-
-	String Cancel();
-
-	String EditHTML();
-
-    }
 
     /**
      * We use an inner EventListener class to avoid exposing event methods on
@@ -361,8 +163,8 @@ public class TextEditorToolbar extends Composite {
 	    RichTextArea.FontSize.MEDIUM, RichTextArea.FontSize.LARGE, RichTextArea.FontSize.X_LARGE,
 	    RichTextArea.FontSize.XX_LARGE };
 
-    private final Images images = (Images) GWT.create(Images.class);
-    private final Strings strings = (Strings) GWT.create(Strings.class);
+    private final TextEditorImages images = (TextEditorImages) GWT.create(TextEditorImages.class);
+    private final TextEditorStrings strings = (TextEditorStrings) GWT.create(TextEditorStrings.class);
     private final EventListener listener = new EventListener();
 
     private final RichTextArea richText;
@@ -492,10 +294,6 @@ public class TextEditorToolbar extends Composite {
 
 	topPanel.add(save.getButton());
 	topPanel.add(cancel.getButton());
-	// topPanel.add(new BorderPanel(cancel, 0, 0, 0,
-	// CustomPushButton.HORSPACESMALL)); // ,
-	// ClickListener
-	// listener))
     }
 
     private void fireEdit() {

@@ -54,6 +54,8 @@ public class Group implements HasId {
     @Column(unique = true)
     private String longName;
 
+    private String publicDesc;
+
     @Enumerated(EnumType.STRING)
     AdmissionType admissionType;
 
@@ -71,8 +73,8 @@ public class Group implements HasId {
     }
 
     public Group(final String shortName, final String longName) {
-	this.longName = longName;
 	this.shortName = shortName;
+	this.longName = longName;
 	toolsConfig = new HashMap<String, ToolConfiguration>();
 	socialNetwork = new SocialNetwork();
     }
@@ -181,6 +183,14 @@ public class Group implements HasId {
 	    return false;
 	}
 	return true;
+    }
+
+    public String getPublicDesc() {
+	return publicDesc;
+    }
+
+    public void setPublicDesc(final String publicDesc) {
+	this.publicDesc = publicDesc;
     }
 
 }

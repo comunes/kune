@@ -22,6 +22,8 @@ package org.ourproject.kune.platf.server;
 
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.rpc.KuneService;
@@ -33,6 +35,8 @@ import org.ourproject.kune.platf.server.mapper.Mapper;
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.wideplay.warp.persist.TransactionType;
+import com.wideplay.warp.persist.Transactional;
 
 @Singleton
 public class KuneServerService implements KuneService {
@@ -40,6 +44,7 @@ public class KuneServerService implements KuneService {
     private final GroupManager groupManager;
     private final UserSession session;
     private final LicenseManager licenseManager;
+    private static final Log log = LogFactory.getLog(KuneServerService.class);
 
     @Inject
     public KuneServerService(final UserSession session, final GroupManager groupManager,
@@ -50,14 +55,19 @@ public class KuneServerService implements KuneService {
 	this.mapper = mapper;
     }
 
+    @Transactional(type = TransactionType.READ_WRITE)
     public void createNewGroup(final GroupDTO group) throws SerializableException {
+	log.debug(group.getShortName() + group.getLongName() + group.getPublicDesc() + group.getDefaultLicense()
+		+ group.getType());
 	groupManager.createGroup(mapper.map(group, Group.class), session.getUser());
     }
 
+    @Transactional(type = TransactionType.READ_ONLY)
     public List getAllLicenses() throws SerializableException {
 	return mapper.mapList(licenseManager.getAll(), LicenseDTO.class);
     }
 
+    @Transactional(type = TransactionType.READ_ONLY)
     public List getNotCCLicenses() throws SerializableException {
 	return mapper.mapList(licenseManager.getNotCC(), LicenseDTO.class);
     }

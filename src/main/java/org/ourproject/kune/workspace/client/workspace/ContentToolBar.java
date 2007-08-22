@@ -26,9 +26,8 @@ import com.google.gwt.user.client.ui.Label;
 class ContentToolBar extends HorizontalPanel {
 
     public ContentToolBar() {
-        addStyleName("kune-ContextToolBar");
-        add(new Label("A fuego en ContextToolBar"));
+	addStyleName("kune-ContentToolBar");
+	add(new Label(""));
     }
 
 }
-

@@ -20,7 +20,8 @@
 
 package org.ourproject.kune.workspace.client.ui.ctx.items;
 
-import org.ourproject.kune.platf.client.ui.CustomButton;
+import org.ourproject.kune.platf.client.services.Images;
+import org.ourproject.kune.platf.client.ui.IconHyperlink;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
@@ -30,7 +31,6 @@ import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.gwtext.client.widgets.Button;
 
 public class ContextItemsPanel extends DockPanel implements ContextItemsView {
     private final VerticalPanel controls;
@@ -50,15 +50,10 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
 	add(expand, DockPanel.CENTER);
 	controls = new VerticalPanel();
 	add(controls, DockPanel.SOUTH);
+	controls.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
 
-	// FIXME: Test of width
-	// setWidth("100%");
 	setHeight("100%");
-	// setCellWidth(topBar, "100%");
-
-	// expand.setWidth("100%");
 	expand.setHeight("100%");
-	// setCellWidth(expand, "100%");
 	setCellHeight(expand, "100%");
 	addStyleName("kune-NavigationBar");
     }
@@ -101,13 +96,14 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
 
     public void addCommand(final String typeName, final String label, final String eventName) {
 	final String type = typeName;
-	Button button = new CustomButton(label, new ClickListener() {
+	IconHyperlink hl = new IconHyperlink(Images.App.getInstance().add(), label, "");
+	hl.addClickListener(new ClickListener() {
 	    public void onClick(final Widget sender) {
 		currentEventName = eventName;
 		presenter.onNew(type);
 	    }
-	}).getButton();
-	controls.add(button);
+	});
+	controls.add(hl);
     }
 
     public void showCreationField(final String typeName) {

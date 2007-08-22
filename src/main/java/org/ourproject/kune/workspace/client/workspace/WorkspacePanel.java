@@ -113,6 +113,8 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	contentVP.clear();
 	Widget widget = (Widget) content;
 	contentVP.add(widget);
+	widget.setWidth("100%");
+	contentVP.setCellWidth(widget, "100%");
     }
 
     public void setContext(final View contextMenu) {

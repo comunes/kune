@@ -24,6 +24,7 @@ import org.ourproject.kune.chat.client.ui.rooms.ChatRoomsDialog;
 import org.ourproject.kune.chat.client.ui.rooms.ChatRoomsPresenter;
 import org.ourproject.kune.platf.client.group.NewGroupForm;
 import org.ourproject.kune.platf.client.ui.dialogs.TwoButtonsDialog;
+import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
 import org.ourproject.kune.sitebar.client.login.LoginForm;
 import org.ourproject.kune.sitebar.client.services.Images;
@@ -116,6 +117,8 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	loginHyperlink.setText(t.Login());
 	loginHyperlink.addClickListener(new ClickListener() {
 	    public void onClick(final Widget arg0) {
+		// i18n:
+		Site.showProgress("Processing...");
 		presenter.doLogin();
 	    }
 	});
@@ -196,6 +199,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	loginDialog.add((Widget) login.getView());
 	loginDialog.hide();
 	loginDialog.center();
+	Site.hideProgress();
     }
 
     public void hideLoginDialog() {
@@ -219,6 +223,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	newGroupDialog.add((Widget) newGroupForm.getView());
 	newGroupDialog.hide();
 	newGroupDialog.center();
+	Site.hideProgress();
     }
 
     public void hideNewGroupDialog() {

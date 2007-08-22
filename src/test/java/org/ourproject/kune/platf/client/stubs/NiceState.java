@@ -7,7 +7,7 @@ public class NiceState extends Session {
 
     public NiceState() {
 	super("userHash");
-	setGroup(new GroupDTO("group name", "groupShortName", "group description", null, GroupDTO.TYPE_ORGANIZATION));
+	setGroup(new GroupDTO("groupShortName", "group name", "group description", null, GroupDTO.TYPE_ORGANIZATION));
     }
 
 }

@@ -82,6 +82,7 @@ class TopBar extends VerticalPanel {
 	// Set properties
 	addStyleName("kune-NavigationBar");
 	firstRow.addStyleName("topBar");
+	firstRow.addStyleName("topBar-margin");
 	secondRow.addStyleName("topBar");
 	firstRow.setWidth("100%");
 	secondRow.setWidth("100%");

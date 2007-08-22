@@ -27,7 +27,7 @@ public class IntegrationTestHelper {
 		    @Override
 		    protected void configure() {
 			bindScope(SessionScoped.class, Scopes.SINGLETON);
-			bindConstant().annotatedWith(JpaUnit.class).to("test");
+			bindConstant().annotatedWith(JpaUnit.class).to("test_db");
 			bindConstant().annotatedWith(PropertiesFileName.class).to("kune.properties");
 		    }
 		});

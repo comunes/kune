@@ -15,12 +15,11 @@
 
 /* Global styles */
 .gwt-HorizontalSplitPanel .hsplitter {
-    width: 5px;
     cursor: e-resize;
-    background: #CDDE87 url(img/splitter-vert-bar.gif) no-repeat;
+    background: #CDDE87 /* url(img/splitter-vert-bar.gif) no-repeat;
     background-position: center center;
     border-right: 1px solid #BCD35F;
-    border-left: 1px solid #BCD35F;
+    border-left: 1px solid #BCD35F; */
 }
 
 .gwt-DialogBox {
@@ -147,7 +146,6 @@
     width: 100%;
 }
 
-/* TODO: Split and remove repeted */
 .kune-GroupToolsBar {
     width: 150px;
 }
@@ -180,21 +178,21 @@
     text-decoration: none;
 }
 
-.kune-ContextTitleBar {
+.kune-ContentTitleBar {
     background-color: #5FD35F;
     color: #250;
     font-weight: 700;
     width: 100%;
 }
 
-.kune-ContextTitleBar .gwt-Label {
+.kune-ContentTitleBar .gwt-Label {
     width: 100%;
     height: 23px;
     vertical-align: middle;
     margin: 0 9px;
 }
 
-.kune-ContextToolBar {
+.kune-ContentToolBar {
     border-left: 2px solid #5FD35F;
     background-color: #AFA;
     color: #250;
@@ -202,11 +200,11 @@
     height: 25px;
 }
 
-.kune-ContextToolBar .gwt-Label {
+.kune-ContentToolBar .gwt-Label {
     margin: 0 9px;
 }
 
-.kune-ContextBottomBar {
+.kune-ContentBottomBar {
     background: #5FD35F;
     color: #FFF;
     font-weight: 700;
@@ -238,16 +236,17 @@
     background-color: #ececec;
     background: #ececec;
     border-bottom: 1px solid #e3dbdb;
-    padding: 5px;
     vertical-align: middle;
-    width: 16px;
 }
 
 .kune-NavigationBar .topBar .gwt-PushButton {
     margin: 1px 5px;
 }
 
-/* FIXME: test if works */
+.kune-NavigationBar .topBar .gwt-Label {
+    vertical-align: middle;
+}
+
 .topBar .gwt-PushButton-up-disabled {
     filter:alpha(opacity=20);
     -moz-opacity: 0.2;
@@ -261,7 +260,7 @@
 }
 
 .kune-NavigationBar .topBar .gwt-Image {
-    margin: 0 2px;
+    margin: 0 2px 0 5px;
 }
 
 .kune-NavigationBar .Items {
@@ -275,6 +274,10 @@
 
 .kune-NavigationBar .Items .gwt-Hyperlink a {
     color: green; /* FIXME: other color */
+}
+
+.kune-NavigationBar .topBar .topBar-margin {
+    margin-left: 5px;
 }
 
 .kune-NavigationBar .pathMenu {
@@ -295,6 +298,19 @@
 .kune-NavigationBar .pathMenu .gwt-MenuItem-selected {
     background: transparent url(img/button-bg-soft.gif) repeat-x 0 0;
     color: #000;
+}
+
+.kune-NavigationBar .kune-IconHyperlink {
+    vertical-align: middle;
+}
+
+.kune-NavigationBar .kune-IconHyperlink a {
+    color: green;
+    text-decoration: none;
+}
+
+.kune-NavigationBar .kune-IconHyperlink .gwt-Image {
+    margin-right: 3px;
 }
 
 .kune-SiteMessagePanel {
@@ -327,6 +343,13 @@
 
 .kune-SiteMessagePanel .info {
     background-color: #E5FF80;
+}
+
+/* Document Reader */
+
+.kune-DocumentReaderPanel {
+    background-color: #F2F2F2;
+    padding: 2px;
 }
 
 /* RTE Text editor */
@@ -434,3 +457,4 @@
     width: 12px;
     height: 10px;
 }
+
