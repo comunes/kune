@@ -6,7 +6,7 @@
     <inherits name='org.ourproject.kune.home.Kune-Home'/>
     <inherits name='org.ourproject.kune.docs.Kune-Docs'/>
     <inherits name='org.ourproject.kune.chat.Kune-Chat'/>
-    <inherits name='to.tipit.gwtlib'/>
+    <inherits name='to.tipit.GWTlib'/>
 
     <extend-property name="locale" values="es" />
     <extend-property name="locale" values="ar" />
