@@ -48,14 +48,14 @@ public class DocumentReaderPanel extends VerticalPanel implements DocumentReader
 		listener.onEdit();
 	    }
 	}).getButton();
-	// TODO: Vicente
+	// TODO Vicente
 	panel.add(btnEdit);
 	panel.add(new Label("this is the toolBar"));
 	return panel;
     }
 
     public void setContent(final String text) {
-	content.setHTML(text);
+	content.setHTML(text + "<br><br>(content)");
     }
 
     public void setEditEnabled(final boolean isEnabled) {
