@@ -29,11 +29,16 @@ import com.google.gwt.user.client.ui.HTML;
 
 public class MultiRoomPresenter implements MultiRoom {
 
+    private final static String[] USERCOLORS = { "green", "navy", "black", "grey", "olive", "teal", "blue", "lime",
+	    "purple", "fuchsia", "maroon", "red" };
+
     private MultiRoomPanel view;
 
     private RoomPresenter currentRoom;
 
     private Map roomPanels;
+
+    private int currentColor;
 
     public void init(final MultiRoomPanel view) {
 	this.view = view;
@@ -44,7 +49,7 @@ public class MultiRoomPresenter implements MultiRoom {
 	return view;
     }
 
-    public void createRoom(final RoomDTO room, final String userAlias) {
+    public RoomPresenter createRoom(final RoomDTO room, final String userAlias) {
 	RoomPresenter presenter = new RoomPresenter(room, userAlias);
 	String panelId = view.createRoom(presenter);
 
@@ -52,6 +57,8 @@ public class MultiRoomPresenter implements MultiRoom {
 
 	roomPanels.put(panelId, presenter);
 	currentRoom = presenter;
+	view.setSubject(room.getSubject());
+	return currentRoom;
     }
 
     protected void onSend(final String message) {
@@ -59,7 +66,7 @@ public class MultiRoomPresenter implements MultiRoom {
 	String userAlias = currentRoom.getSessionUserAlias();
 
 	currentRoom.addMessage(userAlias, formatter(message));
-	currentRoom.crearSavedInput();
+	currentRoom.clearSavedInput();
 	view.clearTextArea();
 	view.sendBtnEnable(false);
 
@@ -97,6 +104,7 @@ public class MultiRoomPresenter implements MultiRoom {
 	currentRoom.saveInput(view.getInputText());
 	currentRoom = nextRoom;
 	view.setInputText(currentRoom.getSavedInput());
+	view.setSubject(currentRoom.getSubject());
     }
 
     private RoomPresenter getRoomFromPanelId(final String panelId) {
@@ -104,4 +112,11 @@ public class MultiRoomPresenter implements MultiRoom {
 	return nextRoom;
     }
 
+    private String getNextColor() {
+	String color = USERCOLORS[currentColor++];
+	if (currentColor >= USERCOLORS.length) {
+	    currentColor = 0;
+	}
+	return color;
+    }
 }

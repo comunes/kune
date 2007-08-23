@@ -131,10 +131,12 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 		MultiRoomPanel view = rooms.getView();
 		view.show();
 
-		RoomDTO room = new RoomDTO("chat1@talks.localhost");
-		rooms.createRoom(room, "luther.b");
+		RoomDTO room1 = new RoomDTO("chat1@talks.localhost");
+		room1.setSubject("Welcome to this room1");
+		rooms.createRoom(room1, "luther.b");
 
-		RoomDTO room2 = new RoomDTO("chat1@talks.localhost");
+		RoomDTO room2 = new RoomDTO("chat2@talks.localhost");
+		room2.setSubject("Welcome to this room2");
 		rooms.createRoom(room2, "luther");
 
 		// presenter.doSearch(searchTextBox.getText());

@@ -21,10 +21,13 @@ public class RoomPresenter {
     }
 
     public void addMessage(final String userAlias, final HTML message) {
+	// userChat.add(new HTML("<span style=\"color: " + user.getColor() + ";
+	// font-weight: bold;\">" + user.getNickName() + "</span>:&nbsp;"));
+
 	roomView.addMessage(new HTML("<b>" + userAlias + "</b>: " + message.getHTML()));
     }
 
-    public void crearSavedInput() {
+    public void clearSavedInput() {
 	input = null;
     }
 
@@ -47,6 +50,10 @@ public class RoomPresenter {
     public void setRoomName() {
 	roomView.setRoomName(room.getName());
 
+    }
+
+    public String getSubject() {
+	return room.getSubject();
     }
 
 }

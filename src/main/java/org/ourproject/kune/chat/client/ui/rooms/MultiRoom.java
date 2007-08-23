@@ -6,6 +6,6 @@ public interface MultiRoom {
 
     public MultiRoomPanel getView();
 
-    void createRoom(RoomDTO room, String userAlias);
+    RoomPresenter createRoom(RoomDTO room, String userAlias);
 
 }

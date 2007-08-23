@@ -20,13 +20,8 @@
 
 package org.ourproject.kune.chat.client.ui.rooms;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import to.tipit.gwtlib.FireLog;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.TextArea;
@@ -51,18 +46,17 @@ public class MultiRoomPanel implements MultiRoomView {
 
     private LayoutDialog dialog;
 
-    private final Map rooms;
-
     private Button sendBtn;
 
     private final MultiRoomPresenter presenter;
 
     private TextArea input;
 
+    private LayoutRegion centralLayout;
+
     public MultiRoomPanel(final MultiRoomPresenter presenter) {
 	this.presenter = presenter;
 	createLayout();
-	rooms = new HashMap();
     }
 
     public String createRoom(final RoomPresenter roomPresenter) {
@@ -74,8 +68,9 @@ public class MultiRoomPanel implements MultiRoomView {
 	layout.add(LayoutRegionConfig.CENTER, chatRoomPanel.getContentPanel());
 
 	String contentId = chatRoomPanel.getContentPanel().getId();
-	GWT.log("Panel chat: " + contentId, null);
-	layout.showPanel(contentId);
+	// GWT.log("Panel chat: " + contentId, null);
+	// layout.showPanel(contentId); > null
+
 	layout.endUpdate();
 	return contentId;
     }
@@ -139,10 +134,9 @@ public class MultiRoomPanel implements MultiRoomView {
 
 	LayoutRegionConfig center = new LayoutRegionConfig() {
 	    {
-		setTitle("Subject");
 		setTitlebar(true);
 		setAutoScroll(true);
-		setTabPosition("top");
+		setTabPosition("bottom");
 		setCloseOnTab(true);
 		setAlwaysShowTabs(true);
 		setMargins(5, 5, 5, 5);
@@ -166,7 +160,10 @@ public class MultiRoomPanel implements MultiRoomView {
 	dialog.addDialogListener(new DialogListener() {
 
 	    public boolean doBeforeHide(final LayoutDialog dialog) {
-		return Window.confirm("Sure?");
+		if (centralLayout.getNumPanels() > 0) {
+		    return Window.confirm("Sure?");
+		}
+		return true;
 	    }
 
 	    public boolean doBeforeShow(final LayoutDialog dialog) {
@@ -247,7 +244,9 @@ public class MultiRoomPanel implements MultiRoomView {
 
 	layout.endUpdate();
 
-	layout.getRegion(LayoutRegionConfig.CENTER).addLayoutRegionListener(new LayoutRegionListener() {
+	centralLayout = dialog.getLayout().getRegion(LayoutRegionConfig.CENTER);
+
+	centralLayout.addLayoutRegionListener(new LayoutRegionListener() {
 
 	    public boolean doBeforeRemove(final LayoutRegion region, final ContentPanel panel) {
 		if (Window.confirm("Are you sure?")) {
@@ -274,7 +273,7 @@ public class MultiRoomPanel implements MultiRoomView {
 	    }
 
 	    public void onPanelRemoved(final LayoutRegion region, final ContentPanel panel) {
-		if (dialog.getLayout().getRegion(LayoutRegionConfig.CENTER).getNumPanels() == 0) {
+		if (centralLayout.getNumPanels() == 0) {
 		    presenter.onNoRooms();
 		}
 	    }
@@ -313,118 +312,15 @@ public class MultiRoomPanel implements MultiRoomView {
     // return form;
     // }
 
-    class RoomDescriptor {
-	private String roomId;
-	private String roomLongName;
-	private String input;
-	private String contentPanelId;
-	private Element elementId;
-	private Map users;
-
-	public RoomDescriptor(final String roomId, final String roomLongName, final String contentPanelId,
-		final Element elementId) {
-	    this.roomId = roomId;
-	    this.roomLongName = roomLongName;
-	    this.contentPanelId = contentPanelId;
-	    this.elementId = elementId;
-	    this.users = new HashMap();
-	    this.input = "";
-	}
-
-	public Element getElementId() {
-	    return elementId;
-	}
-
-	public void setElementId(final Element elementId) {
-	    this.elementId = elementId;
-	}
-
-	public String getRoomId() {
-	    return roomId;
-	}
-
-	public void setRoomId(final String roomId) {
-	    this.roomId = roomId;
-	}
-
-	public String getRoomLongName() {
-	    return roomLongName;
-	}
-
-	public void setRoomLongName(final String roomLongName) {
-	    this.roomLongName = roomLongName;
-	}
-
-	public String getContentPanelId() {
-	    return contentPanelId;
-	}
-
-	public void setContentPanelId(final String contentPanelId) {
-	    this.contentPanelId = contentPanelId;
-	}
-
-	public Map getUsers() {
-	    return users;
-	}
-
-	public void setUsers(final Map users) {
-	    this.users = users;
-	}
-
-	public String getInput() {
-	    return input;
-	}
-
-	public void setInput(final String input) {
-	    this.input = input;
-	}
-
-    }
-
-    class ChatUserDescriptor {
-	String alias;
-	String color;
-
-	public ChatUserDescriptor(final String alias, final String color) {
-	    this.alias = alias;
-	    this.color = color;
-	}
-
-	public String getAlias() {
-	    return alias;
-	}
-
-	public void setAlias(final String alias) {
-	    this.alias = alias;
-	}
-
-	public String getColor() {
-	    return color;
-	}
-
-	public void setColor(final String color) {
-	    this.color = color;
-	}
-
-    }
-
     protected String getInputText() {
 	return input.getText();
     }
 
-    protected void restoreInput(final String roomId) {
-	input.setText(((RoomDescriptor) rooms.get(roomId)).getInput());
-    }
-
-    protected void saveInput(final String roomId) {
-	((RoomDescriptor) rooms.get(roomId)).setInput(input.getText());
-    }
-
-    protected void clearSavedInput(final String roomId) {
-	((RoomDescriptor) rooms.get(roomId)).setInput("");
-    }
-
     protected void setInputText(final String text) {
 	input.setText(text);
+    }
+
+    public void setSubject(final String subject) {
+	dialog.getLayout().setTitle(subject);
     }
 }
