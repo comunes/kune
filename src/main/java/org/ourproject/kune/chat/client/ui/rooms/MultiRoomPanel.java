@@ -25,6 +25,7 @@ import java.util.Map;
 
 import to.tipit.gwtlib.FireLog;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.KeyboardListener;
@@ -64,7 +65,7 @@ public class MultiRoomPanel implements MultiRoomView {
 	rooms = new HashMap();
     }
 
-    public RoomPanel createRoom(final String name, final RoomPresenter roomPresenter) {
+    public String createRoom(final RoomPresenter roomPresenter) {
 	final BorderLayout layout = dialog.getLayout();
 	layout.beginUpdate();
 
@@ -72,9 +73,11 @@ public class MultiRoomPanel implements MultiRoomView {
 	roomPresenter.init(chatRoomPanel);
 	layout.add(LayoutRegionConfig.CENTER, chatRoomPanel.getContentPanel());
 
-	layout.showPanel(chatRoomPanel.getContentPanel().getId());
+	String contentId = chatRoomPanel.getContentPanel().getId();
+	GWT.log("Panel chat: " + contentId, null);
+	layout.showPanel(contentId);
 	layout.endUpdate();
-	return chatRoomPanel;
+	return contentId;
     }
 
     public void show() {
@@ -264,6 +267,7 @@ public class MultiRoomPanel implements MultiRoomView {
 	    }
 
 	    public void onPanelActivated(final LayoutRegion region, final ContentPanel panel) {
+		presenter.activateRoom(panel.getId());
 	    }
 
 	    public void onPanelAdded(final LayoutRegion region, final ContentPanel panel) {

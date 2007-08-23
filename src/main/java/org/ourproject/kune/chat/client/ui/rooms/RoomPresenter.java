@@ -32,4 +32,21 @@ public class RoomPresenter {
 	return sessionUserAlias;
     }
 
+    protected void saveInput(final String inputText) {
+	input = inputText;
+    }
+
+    public String getSavedInput() {
+	return input;
+    }
+
+    protected void doClose() {
+	// TODO: xmpp: send bye in room
+    }
+
+    public void setRoomName() {
+	roomView.setRoomName(room.getName());
+
+    }
+
 }

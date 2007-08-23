@@ -21,7 +21,9 @@
 package org.ourproject.kune.sitebar.client.bar;
 
 import org.ourproject.kune.chat.client.ui.ChatFactory;
+import org.ourproject.kune.chat.client.ui.rooms.MultiRoom;
 import org.ourproject.kune.chat.client.ui.rooms.MultiRoomPanel;
+import org.ourproject.kune.platf.client.dto.RoomDTO;
 import org.ourproject.kune.platf.client.group.NewGroupForm;
 import org.ourproject.kune.platf.client.ui.dialogs.TwoButtonsDialog;
 import org.ourproject.kune.sitebar.client.Site;
@@ -125,8 +127,16 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	logoutHyperlink.setText(t.Logout());
 	searchButton.addClickListener(new ClickListener() {
 	    public void onClick(final Widget arg0) {
-		MultiRoomPanel view = (MultiRoomPanel) ChatFactory.createRoomsAdmin().getView();
+		MultiRoom rooms = ChatFactory.createChatMultiRoom();
+		MultiRoomPanel view = rooms.getView();
 		view.show();
+
+		RoomDTO room = new RoomDTO("chat1@talks.localhost");
+		rooms.createRoom(room, "luther.b");
+
+		RoomDTO room2 = new RoomDTO("chat1@talks.localhost");
+		rooms.createRoom(room2, "luther");
+
 		// presenter.doSearch(searchTextBox.getText());
 	    }
 	});

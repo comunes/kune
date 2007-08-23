@@ -19,8 +19,8 @@ public class RoomPanel implements RoomView {
 	});
     }
 
-    public void setTitle(final String title) {
-	contentPanel.setTitle(title);
+    public void setRoomName(final String name) {
+	contentPanel.setTitle(name);
     }
 
     public void addMessage(final HTML message) {

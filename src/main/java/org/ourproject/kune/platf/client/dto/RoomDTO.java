@@ -7,10 +7,9 @@ public class RoomDTO {
     private String subject;
 
     public RoomDTO() {
-
     }
 
-    RoomDTO(final String name) {
+    public RoomDTO(final String name) {
 	this();
 	this.name = name;
     }

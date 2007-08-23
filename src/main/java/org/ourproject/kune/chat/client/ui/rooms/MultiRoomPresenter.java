@@ -33,13 +33,10 @@ public class MultiRoomPresenter implements MultiRoom {
 
     private RoomPresenter currentRoom;
 
-    private Map roomPresenters;
-
     private Map roomPanels;
 
     public void init(final MultiRoomPanel view) {
 	this.view = view;
-	roomPresenters = new HashMap();
 	roomPanels = new HashMap();
     }
 
@@ -49,11 +46,11 @@ public class MultiRoomPresenter implements MultiRoom {
 
     public void createRoom(final RoomDTO room, final String userAlias) {
 	RoomPresenter presenter = new RoomPresenter(room, userAlias);
-	String roomName = room.getName();
-	RoomPanel panel = view.createRoom(roomName, presenter);
-	presenter.init(panel);
-	roomPresenters.put(roomName, presenter);
-	roomPanels.put(panel.getContentPanel().getId(), presenter);
+	String panelId = view.createRoom(presenter);
+
+	presenter.setRoomName();
+
+	roomPanels.put(panelId, presenter);
 	currentRoom = presenter;
     }
 
@@ -65,6 +62,7 @@ public class MultiRoomPresenter implements MultiRoom {
 	currentRoom.crearSavedInput();
 	view.clearTextArea();
 	view.sendBtnEnable(false);
+
 	// if (key == KeyboardListener.KEY_ENTER) {
 	// if (mod == KeyboardListener.MODIFIER_CTRL) {
 	// view.insertReturnInInput();
@@ -90,7 +88,20 @@ public class MultiRoomPresenter implements MultiRoom {
     }
 
     protected void closeRoom(final String panelId) {
-	// ((ChatRoomPresenter) roomPanels.get(panelId));
+	RoomPresenter room = getRoomFromPanelId(panelId);
+	room.doClose();
+    }
+
+    protected void activateRoom(final String panelId) {
+	RoomPresenter nextRoom = getRoomFromPanelId(panelId);
+	currentRoom.saveInput(view.getInputText());
+	currentRoom = nextRoom;
+	view.setInputText(currentRoom.getSavedInput());
+    }
+
+    private RoomPresenter getRoomFromPanelId(final String panelId) {
+	RoomPresenter nextRoom = ((RoomPresenter) roomPanels.get(panelId));
+	return nextRoom;
     }
 
 }
