@@ -26,6 +26,9 @@ import org.ourproject.kune.chat.client.ui.ctx.ChatContext;
 import org.ourproject.kune.chat.client.ui.ctx.ChatContextPresenter;
 import org.ourproject.kune.chat.client.ui.ctx.rooms.RoomsAdmin;
 import org.ourproject.kune.chat.client.ui.ctx.rooms.RoomsAdminPresenter;
+import org.ourproject.kune.chat.client.ui.rooms.MultiRoom;
+import org.ourproject.kune.chat.client.ui.rooms.MultiRoomPanel;
+import org.ourproject.kune.chat.client.ui.rooms.MultiRoomPresenter;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckPanel;
 import org.ourproject.kune.workspace.client.ui.WorkspaceFactory;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
@@ -47,6 +50,13 @@ public class ChatFactory {
     public static RoomsAdmin createRoomsAdmin() {
 	ContextItems contextItems = WorkspaceFactory.createContextItems();
 	RoomsAdminPresenter presenter = new RoomsAdminPresenter(contextItems);
+	return presenter;
+    }
+
+    public static MultiRoom createChatMultiRoom() {
+	MultiRoomPresenter presenter = new MultiRoomPresenter();
+	MultiRoomPanel panel = new MultiRoomPanel(presenter);
+	presenter.init(panel);
 	return presenter;
     }
 

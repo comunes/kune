@@ -80,6 +80,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	borderDecorator.setColor(mainBorderColor);
 	contentVP.addStyleName("kune-WorkspacePanel-Content");
 	contextVP.addStyleName("kune-WorkspacePanel-Context");
+	contentVP.setWidth("100%");
 	contextVP.setWidth("100%");
 	contextVP.setHeight("100%");
 

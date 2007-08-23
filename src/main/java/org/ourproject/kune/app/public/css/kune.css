@@ -218,6 +218,7 @@
 /* Main Content & Context */
 .kune-WorkspacePanel-Content {
     background-color: #FFF;
+    width: 100%;
 }
 
 .kune-WorkspacePanel-Context {

@@ -23,25 +23,22 @@ package org.ourproject.kune.chat.client.ui.rooms;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.DOM;
+import to.tipit.gwtlib.FireLog;
+
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Ext;
+import com.gwtext.client.util.KeyMapConfig;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.LayoutDialog;
 import com.gwtext.client.widgets.LayoutDialogConfig;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.event.DialogListener;
 import com.gwtext.client.widgets.event.KeyListener;
-import com.gwtext.client.widgets.form.Form;
-import com.gwtext.client.widgets.form.FormConfig;
-import com.gwtext.client.widgets.form.TextAreaConfig;
 import com.gwtext.client.widgets.layout.BorderLayout;
 import com.gwtext.client.widgets.layout.ContentPanel;
 import com.gwtext.client.widgets.layout.ContentPanelConfig;
@@ -49,7 +46,7 @@ import com.gwtext.client.widgets.layout.LayoutRegion;
 import com.gwtext.client.widgets.layout.LayoutRegionConfig;
 import com.gwtext.client.widgets.layout.event.LayoutRegionListener;
 
-public class ChatRoomsDialog implements ChatRoomsDialogView {
+public class MultiRoomPanel implements MultiRoomView {
 
     private LayoutDialog dialog;
 
@@ -57,14 +54,61 @@ public class ChatRoomsDialog implements ChatRoomsDialogView {
 
     private Button sendBtn;
 
-    private final ChatRoomsPresenter presenter;
+    private final MultiRoomPresenter presenter;
 
     private TextArea input;
 
-    public ChatRoomsDialog(final ChatRoomsPresenter presenter) {
+    public MultiRoomPanel(final MultiRoomPresenter presenter) {
 	this.presenter = presenter;
 	createLayout();
 	rooms = new HashMap();
+    }
+
+    public RoomPanel createRoom(final String name, final RoomPresenter roomPresenter) {
+	final BorderLayout layout = dialog.getLayout();
+	layout.beginUpdate();
+
+	RoomPanel chatRoomPanel = new RoomPanel(roomPresenter);
+	roomPresenter.init(chatRoomPanel);
+	layout.add(LayoutRegionConfig.CENTER, chatRoomPanel.getContentPanel());
+
+	layout.showPanel(chatRoomPanel.getContentPanel().getId());
+	layout.endUpdate();
+	return chatRoomPanel;
+    }
+
+    public void show() {
+	dialog.show();
+    }
+
+    public void hide() {
+	dialog.hide();
+    }
+
+    public void addUser(final String roomId, final String userAlias, final String color) {
+	// TODO Auto-generated method stub
+
+    }
+
+    public void clearTextArea() {
+	input.setText("");
+    }
+
+    public void sendBtnEnable(final boolean enabled) {
+	if (enabled) {
+	    sendBtn.enable();
+	} else {
+	    sendBtn.disable();
+	}
+    }
+
+    public boolean sendBtnIsDisabled() {
+	FireLog.debug("Is btn disabled: " + sendBtn.isDisabled());
+	return sendBtn.isDisabled();
+    }
+
+    protected void insertReturnInInput() {
+	input.setText(input.getText() + "\n");
     }
 
     private void createLayout() {
@@ -92,6 +136,8 @@ public class ChatRoomsDialog implements ChatRoomsDialogView {
 
 	LayoutRegionConfig center = new LayoutRegionConfig() {
 	    {
+		setTitle("Subject");
+		setTitlebar(true);
 		setAutoScroll(true);
 		setTabPosition("top");
 		setCloseOnTab(true);
@@ -171,101 +217,41 @@ public class ChatRoomsDialog implements ChatRoomsDialogView {
 	    public void onKeyPress(final Widget arg0, final char arg1, final int arg2) {
 	    }
 
-	    public void onKeyUp(final Widget widget, final char key, final int mod) {
-		GWT.log("key: " + key, null);
-		presenter.onInput(key, mod);
+	    public void onKeyUp(final Widget arg0, final char arg1, final int arg2) {
+		FireLog.debug("keylist1, key: " + arg1);
 	    }
+	});
 
+	dialog.addKeyListener(13, new KeyListener() {
+	    public void onKey(final int key, final EventObject e) {
+		FireLog.debug("Enter pressed");
+		presenter.onSend(input.getText());
+	    }
+	});
+
+	dialog.addKeyListener(new KeyMapConfig() {
+	    {
+		// setCtrl(true);
+	    }
+	}, new KeyListener() {
+
+	    public void onKey(final int key, final EventObject e) {
+		FireLog.debug("Key " + key + " pressed");
+	    }
 	});
 
 	layout.add(LayoutRegionConfig.SOUTH, southPanel);
 
 	layout.endUpdate();
 
-	dialog.addKeyListener(13, new KeyListener() {
-
-	    public void onKey(final int key, final EventObject e) {
-		GWT.log("key2: " + key, null);
-	    }
-	});
-
-    }
-
-    public void insertReturnInInput() {
-	input.setText(input.getText() + "\n");
-    }
-
-    public void show() {
-	dialog.show();
-    }
-
-    public void hide() {
-	dialog.hide();
-    }
-
-    public void addMessage(final String roomId, final String userAlias, final String message) {
-	Element contentPanelId = ((RoomDescriptor) rooms.get(roomId)).getContentPanelId();
-	DOM.appendChild(contentPanelId, (formatter(message)).getElement());
-	// conversation.setScrollPosition(conversationVP.getOffsetHeight());
-    }
-
-    private HTML formatter(String message) {
-	message = message.replaceAll("&", "&amp;");
-	message = message.replaceAll("\"", "&quot;");
-	message = message.replaceAll("<", "&lt;");
-	message = message.replaceAll(">", "&gt;");
-	message = message.replaceAll("\n", "<br>\n");
-	return new HTML(message);
-    }
-
-    public void addUser(final String roomId, final String userAlias, final String color) {
-	// TODO Auto-generated method stub
-
-    }
-
-    public void clearMessages(final String roomId) {
-	// TODO Auto-generated method stub
-
-    }
-
-    public void clearTextArea() {
-	input.setText("");
-    }
-
-    public void closeRoom(final String roomId) {
-	// TODO Auto-generated method stub
-
-    }
-
-    public void sendBtnEnable(final boolean enabled) {
-	if (enabled) {
-	    sendBtn.enable();
-	} else {
-	    sendBtn.disable();
-	}
-    }
-
-    public boolean sendBtnIsDisabled() {
-	return sendBtn.isDisabled();
-    }
-
-    public void createRoom(final String roomId, final String longName) {
-	final BorderLayout layout = dialog.getLayout();
-	layout.beginUpdate();
-
-	String contentPanelId = Ext.generateId();
-	ContentPanel contentPanel = new ContentPanel(contentPanelId, new ContentPanelConfig() {
-	    {
-		setTitle(longName);
-		setClosable(true);
-		setBackground(true);
-	    }
-	});
-	layout.add(LayoutRegionConfig.CENTER, contentPanel);
 	layout.getRegion(LayoutRegionConfig.CENTER).addLayoutRegionListener(new LayoutRegionListener() {
 
 	    public boolean doBeforeRemove(final LayoutRegion region, final ContentPanel panel) {
-		return Window.confirm("Are you sure?");
+		if (Window.confirm("Are you sure?")) {
+		    presenter.closeRoom(panel.getId());
+		    return true;
+		}
+		return false;
 	    }
 
 	    public void onCollapsed(final LayoutRegion region) {
@@ -278,7 +264,6 @@ public class ChatRoomsDialog implements ChatRoomsDialogView {
 	    }
 
 	    public void onPanelActivated(final LayoutRegion region, final ContentPanel panel) {
-		presenter.onRoomSelected(roomId);
 	    }
 
 	    public void onPanelAdded(final LayoutRegion region, final ContentPanel panel) {
@@ -291,67 +276,63 @@ public class ChatRoomsDialog implements ChatRoomsDialogView {
 	    }
 
 	    public void onResized(final LayoutRegion region, final int newSize) {
-		// TODO Auto-generated method stub
-
 	    }
 
 	    public void onSlideHide(final LayoutRegion region) {
-		// TODO Auto-generated method stub
-
 	    }
 
 	    public void onSlideShow(final LayoutRegion region) {
-		// TODO Auto-generated method stub
-
 	    }
 
 	    public void onVisibilityChange(final LayoutRegion region, final boolean visibility) {
-		// TODO Auto-generated method stub
-
 	    }
 	});
 
-	rooms.put(roomId, new RoomDescriptor(roomId, longName, contentPanel.getElement()));
-	GWT.log("contentPanelId: " + contentPanelId + "room: " + roomId, null);
-	layout.showPanel(contentPanelId);
-	layout.endUpdate();
     }
 
-    public void removeUser(final String roomId, final String userAlias) {
-	// TODO Auto-generated method stub
-
-    }
-
-    private Form createFormImput() {
-	Form form = new Form(new FormConfig() {
-	    {
-		setWidth(300);
-		setHideLabels(true);
-	    }
-	});
-
-	form.add(new com.gwtext.client.widgets.form.TextArea(new TextAreaConfig() {
-	    {
-		setName("input");
-		setWidth(175);
-	    }
-	}));
-
-	form.render();
-	return form;
-    }
+    // private Form createFormImput() {
+    // Form form = new Form(new FormConfig() {
+    // {
+    // setWidth("100%");
+    // setHideLabels(true);
+    // }
+    // });
+    //
+    // form.add(new com.gwtext.client.widgets.form.TextArea(new TextAreaConfig()
+    // {
+    // {
+    // setName("input");
+    // }
+    // }));
+    //
+    // form.render();
+    // return form;
+    // }
 
     class RoomDescriptor {
 	private String roomId;
 	private String roomLongName;
-	private Element contentPanelId;
+	private String input;
+	private String contentPanelId;
+	private Element elementId;
 	private Map users;
 
-	public RoomDescriptor(final String roomId, final String roomLongName, final Element element) {
+	public RoomDescriptor(final String roomId, final String roomLongName, final String contentPanelId,
+		final Element elementId) {
 	    this.roomId = roomId;
 	    this.roomLongName = roomLongName;
-	    this.contentPanelId = element;
+	    this.contentPanelId = contentPanelId;
+	    this.elementId = elementId;
 	    this.users = new HashMap();
+	    this.input = "";
+	}
+
+	public Element getElementId() {
+	    return elementId;
+	}
+
+	public void setElementId(final Element elementId) {
+	    this.elementId = elementId;
 	}
 
 	public String getRoomId() {
@@ -370,11 +351,11 @@ public class ChatRoomsDialog implements ChatRoomsDialogView {
 	    this.roomLongName = roomLongName;
 	}
 
-	public Element getContentPanelId() {
+	public String getContentPanelId() {
 	    return contentPanelId;
 	}
 
-	public void setContentPanelId(final Element contentPanelId) {
+	public void setContentPanelId(final String contentPanelId) {
 	    this.contentPanelId = contentPanelId;
 	}
 
@@ -384,6 +365,14 @@ public class ChatRoomsDialog implements ChatRoomsDialogView {
 
 	public void setUsers(final Map users) {
 	    this.users = users;
+	}
+
+	public String getInput() {
+	    return input;
+	}
+
+	public void setInput(final String input) {
+	    this.input = input;
 	}
 
     }
@@ -415,7 +404,23 @@ public class ChatRoomsDialog implements ChatRoomsDialogView {
 
     }
 
-    public String getInputText() {
+    protected String getInputText() {
 	return input.getText();
+    }
+
+    protected void restoreInput(final String roomId) {
+	input.setText(((RoomDescriptor) rooms.get(roomId)).getInput());
+    }
+
+    protected void saveInput(final String roomId) {
+	((RoomDescriptor) rooms.get(roomId)).setInput(input.getText());
+    }
+
+    protected void clearSavedInput(final String roomId) {
+	((RoomDescriptor) rooms.get(roomId)).setInput("");
+    }
+
+    protected void setInputText(final String text) {
+	input.setText(text);
     }
 }
