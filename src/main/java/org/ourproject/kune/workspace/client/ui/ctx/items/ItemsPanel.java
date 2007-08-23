@@ -22,10 +22,10 @@ package org.ourproject.kune.workspace.client.ui.ctx.items;
 
 import java.util.HashMap;
 
+import org.ourproject.kune.platf.client.ui.IconHyperlink;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 class ItemsPanel extends VerticalPanel {
@@ -39,10 +39,7 @@ class ItemsPanel extends VerticalPanel {
 
     public void add(final String name, final String type, final String event) {
 	GWT.log("Item: " + name + " type: " + type, null);
-	HorizontalPanel itemHP = new HorizontalPanel();
-	add(itemHP);
-	itemHP.add(((AbstractImagePrototype) fileIcons.get(type)).createImage());
-	itemHP.add(new Hyperlink(name, event));
+	add(new IconHyperlink(((AbstractImagePrototype) fileIcons.get(type)), name, event));
     }
 
     public void registerType(final String typeName, final AbstractImagePrototype image) {

@@ -106,7 +106,7 @@
     background-color: #FFF;
 }
 
-.kuen-WokspacePane .Tab {
+.kune-WokspacePanel .Tab {
 
 }
 
@@ -218,8 +218,6 @@
 /* Main Content & Context */
 .kune-WorkspacePanel-Content {
     background-color: #FFF;
-    margin: 0 5px 5px 0;
-    width: 99%;
 }
 
 .kune-WorkspacePanel-Context {
@@ -270,6 +268,7 @@
 .kune-NavigationBar .Items .gwt-Image {
     /* space between navbar items (images) */
     margin: 1px 3px;
+    vertical-align: middle;
 }
 
 .kune-NavigationBar .Items .gwt-Hyperlink a {
