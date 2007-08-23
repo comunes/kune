@@ -310,6 +310,7 @@
 
 .kune-NavigationBar .kune-IconHyperlink .gwt-Image {
     margin-right: 3px;
+    vertical-align: middle;
 }
 
 .kune-SiteMessagePanel {
