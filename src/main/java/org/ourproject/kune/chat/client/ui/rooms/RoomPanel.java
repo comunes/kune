@@ -64,7 +64,8 @@ public class RoomPanel implements RoomView {
     private void addWidget(final Widget widget) {
 	contentPanel.add(widget);
 	FireLog.debug("ContentPanel id: " + contentPanel.getId() + " Scroll pos: " + contentPanel.getOffsetHeight());
-	DOM.setElementPropertyInt(contentPanel.getElement(), "scrollTop", contentPanel.getOffsetHeight());
+
+	DOM.setElementPropertyInt(contentPanel.getParent().getElement(), "scrollTop", contentPanel.getOffsetHeight());
 	// conversationSP.setScrollPosition(conversationVP.getOffsetHeight());
     }
 }

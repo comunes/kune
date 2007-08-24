@@ -75,12 +75,12 @@ public class MultiRoomPanel implements MultiRoomView {
 	layout.add(LayoutRegionConfig.CENTER, chatRoomPanel.getContentPanel());
 
 	String contentId = chatRoomPanel.getContentPanel().getId();
-	// GWT.log("Panel chat: " + contentId, null);
-	// layout.showPanel(contentId); > null
 
 	layout.endUpdate();
 
-	// usersDeckPanel.add(w);
+	// FIXME: Returns Exception, affected maybe by:
+	// http://code.google.com/p/gwt-ext/issues/detail?id=81
+	// layout.showPanel(contentId);
 
 	return contentId;
     }
