@@ -122,7 +122,6 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	loginHyperlink.addClickListener(new ClickListener() {
 	    public void onClick(final Widget arg0) {
 		// i18n:
-		Site.showProgress("Processing...");
 		presenter.doLogin();
 	    }
 	});
@@ -213,7 +212,6 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	loginDialog.add((Widget) login.getView());
 	loginDialog.hide();
 	loginDialog.center();
-	Site.hideProgress();
     }
 
     public void hideLoginDialog() {

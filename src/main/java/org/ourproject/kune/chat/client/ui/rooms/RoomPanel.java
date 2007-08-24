@@ -5,7 +5,6 @@ import org.ourproject.kune.platf.client.ui.HorizontalLine;
 
 import to.tipit.gwtlib.FireLog;
 
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -64,8 +63,8 @@ public class RoomPanel implements RoomView {
     private void addWidget(final Widget widget) {
 	contentPanel.add(widget);
 	FireLog.debug("ContentPanel id: " + contentPanel.getId() + " Scroll pos: " + contentPanel.getOffsetHeight());
-
-	DOM.setElementPropertyInt(contentPanel.getParent().getElement(), "scrollTop", contentPanel.getOffsetHeight());
+	// DOM.setElementPropertyInt(contentPanel.getParent().getElement(),
+	// "scrollTop", contentPanel.getOffsetHeight());
 	// conversationSP.setScrollPosition(conversationVP.getOffsetHeight());
     }
 }

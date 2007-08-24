@@ -39,12 +39,21 @@ public class SiteBarServiceMocked implements SiteBarServiceAsync {
     }
 
     public void logout(final AsyncCallback callback) {
+	timerAndSuccess(callback);
+    }
+
+    private void timerAndSuccess(final AsyncCallback callback) {
 	Timer timer = new Timer() {
 	    public void run() {
 		callback.onSuccess(null);
 	    }
 	};
 	timer.schedule(1000);
+    }
+
+    public void createUser(final String shortName, final String name, final String email, final String passwd,
+	    final AsyncCallback callback) {
+	timerAndSuccess(callback);
     }
 
 }

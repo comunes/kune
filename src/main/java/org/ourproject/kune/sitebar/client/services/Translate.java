@@ -48,6 +48,10 @@ public interface Translate extends Constants {
 
     String NickName();
 
+    String FullName();
+
+    String Email();
+
     String Password();
 
     String Logout();
@@ -59,4 +63,5 @@ public interface Translate extends Constants {
     String UserNameOrEmail();
 
     String SignIn();
+
 }
