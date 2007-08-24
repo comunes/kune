@@ -1,5 +1,4 @@
 /*
- *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
