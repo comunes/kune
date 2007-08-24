@@ -47,3 +47,23 @@ Example of .m2/settings.xml:
 
 
 The rest of dependencies must be downloaded automatically.
+
+Integration with Openfire xmpp server
+--------------------------------------------------------------------------------
+Add this lines to conf/openfire.xml:
+
+<jive>
+  ...
+  <provider>
+    <auth>
+      <className>org.jivesoftware.openfire.auth.JDBCAuthProvider</className>
+    </auth>
+  </provider>
+  <jdbcAuthProvider>
+     <passwordSQL>SELECT password FROM kusers WHERE shortName=?</passwordSQL>
+     <passwordType>plain</passwordType>
+   </jdbcAuthProvider>
+  <setup>true</setup>
+  ...
+</jive>
+
