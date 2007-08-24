@@ -5,10 +5,6 @@ import java.util.Map;
 
 import org.ourproject.kune.platf.client.dto.RoomDTO;
 
-import to.tipit.gwtlib.FireLog;
-
-import com.google.gwt.user.client.ui.HTML;
-
 public class RoomPresenter {
 
     private final static String[] USERCOLORS = { "green", "navy", "black", "grey", "olive", "teal", "blue", "lime",
@@ -21,7 +17,7 @@ public class RoomPresenter {
     private String input;
     private final String sessionUserAlias;
 
-    private Map users;
+    private final Map users;
 
     public RoomPresenter(final RoomDTO room, final String sessionUserAlias) {
 	this.room = room;
@@ -35,24 +31,25 @@ public class RoomPresenter {
 	this.view = view;
     }
 
-    public void addMessage(final String userAlias, final HTML message) {
+    public void addMessage(final String userAlias, final String message) {
 	RoomUser user = (RoomUser) users.get(userAlias);
-	FireLog.debug("From: " + userAlias + ", message: " + message);
 	if (user == null) {
 	    throw new RuntimeException("Trying to send a chat message with a user not in this room");
 	}
-	String userHtml = "<span style=\"color: " + user.getColor() + "; font-weight: bold;\">" + user.getAlias()
-		+ "</span>:&nbsp;";
-	view.addMessage(new HTML(userHtml + message.getHTML()));
+	view.addMessage(user.getAlias(), user.getColor(), message);
     }
 
-    public RoomUser addUser(String alias, int type) {
+    public void addEventMessage(final String message) {
+	view.addEventMessage(message);
+    }
+
+    public RoomUser addUser(final String alias, final int type) {
 	RoomUser user = new RoomUser(alias, getNextColor(), type);
 	users.put(alias, user);
 	return user;
     }
 
-    public void addDelimiter(String datetime) {
+    public void addDelimiter(final String datetime) {
 	view.addTimeDelimiter(datetime);
     }
 

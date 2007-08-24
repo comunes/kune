@@ -22,6 +22,7 @@ package org.ourproject.kune.chat.client.ui.rooms;
 
 import to.tipit.gwtlib.FireLog;
 
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.KeyboardListener;
@@ -92,10 +93,6 @@ public class MultiRoomPanel implements MultiRoomView {
 	dialog.hide();
     }
 
-    public void clearTextArea() {
-	input.setText("");
-    }
-
     public void sendBtnEnable(final boolean enabled) {
 	if (enabled) {
 	    sendBtn.enable();
@@ -121,7 +118,7 @@ public class MultiRoomPanel implements MultiRoomView {
 	return usersPresenter;
     }
 
-    protected int addRoomUsersPanel(RoomUsersPresenter presenter) {
+    protected int addRoomUsersPanel(final RoomUsersPresenter presenter) {
 	RoomUsersPanel view = presenter.getView();
 	usersDeckPanel.add(view);
 	return usersDeckPanel.getWidgetIndex(view);
@@ -129,6 +126,12 @@ public class MultiRoomPanel implements MultiRoomView {
 
     protected void insertReturnInInput() {
 	input.setText(input.getText() + "\n");
+    }
+
+    protected void clearInputText() {
+	input.setText("");
+	// FIXME: Trying to fix bug:
+	DOM.setInnerText(input.getElement(), "");
     }
 
     protected void setInputText(final String text) {
@@ -306,6 +309,7 @@ public class MultiRoomPanel implements MultiRoomView {
 	// i18n
 	ContentPanel eastPanel = new ContentPanel(Ext.generateId(), "Users");
 	usersDeckPanel = new DeckPanel();
+	usersDeckPanel.addStyleName("kune-MultiRoomPanel-User");
 	eastPanel.add(usersDeckPanel);
 	return eastPanel;
     }
@@ -317,6 +321,7 @@ public class MultiRoomPanel implements MultiRoomView {
 		setBackground(false);
 	    }
 	});
+	northPanel.addStyleName("kune-MultiRoomPanel-Subject");
 	return northPanel;
     }
 
@@ -362,7 +367,7 @@ public class MultiRoomPanel implements MultiRoomView {
 	return southPanel;
     }
 
-    public void activeUsersPanel(int index) {
+    public void activeUsersPanel(final int index) {
 	usersDeckPanel.showWidget(index);
     }
 

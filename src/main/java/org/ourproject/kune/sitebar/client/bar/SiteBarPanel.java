@@ -23,6 +23,7 @@ package org.ourproject.kune.sitebar.client.bar;
 import org.ourproject.kune.chat.client.ui.ChatFactory;
 import org.ourproject.kune.chat.client.ui.rooms.MultiRoom;
 import org.ourproject.kune.chat.client.ui.rooms.MultiRoomPanel;
+import org.ourproject.kune.chat.client.ui.rooms.RoomPresenter;
 import org.ourproject.kune.chat.client.ui.rooms.RoomUser;
 import org.ourproject.kune.platf.client.dto.RoomDTO;
 import org.ourproject.kune.platf.client.group.NewGroupForm;
@@ -133,14 +134,18 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 		view.show();
 
 		RoomDTO room1 = new RoomDTO("chat1@talks.localhost");
-		room1.setSubject("Welcome to this room1");
-		rooms.createRoom(room1, "luther.b");
+		room1.setSubject("Welcome to chat1, today topic: Cultural issues in Brazil");
+		RoomPresenter room1Presenter = rooms.createRoom(room1, "luther.b");
 		rooms.join(room1, "luther.b", RoomUser.MODERADOR);
+		room1Presenter.addMessage("luther.b", "Mensaje de test en room1");
 
 		RoomDTO room2 = new RoomDTO("chat2@talks.localhost");
-		room2.setSubject("Welcome to this room2");
-		rooms.createRoom(room2, "luther");
+		room2.setSubject("Welcome to this room: we are talking today about 2009 meeting");
+		RoomPresenter room2Presenter = rooms.createRoom(room2, "luther");
 		rooms.join(room2, "luther", RoomUser.MODERADOR);
+		room2Presenter.addMessage("luther", "Mensaje de test en room2");
+		room2Presenter.addEventMessage("Mensaje de evento en room2");
+		room2Presenter.addDelimiter("17:35");
 
 		// presenter.doSearch(searchTextBox.getText());
 	    }

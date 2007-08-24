@@ -1,5 +1,6 @@
 package org.ourproject.kune.chat.client.ui.rooms;
 
+import org.ourproject.kune.chat.client.ui.ChatFactory;
 import org.ourproject.kune.platf.client.ui.HorizontalLine;
 
 import to.tipit.gwtlib.FireLog;
@@ -8,6 +9,7 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.Ext;
 import com.gwtext.client.widgets.layout.ContentPanel;
 import com.gwtext.client.widgets.layout.ContentPanelConfig;
@@ -25,21 +27,23 @@ public class RoomPanel implements RoomView {
 		setAutoScroll(true);
 	    }
 	});
+	contentPanel.addStyleName("kune-RoomPanel-Conversation");
     }
 
     public void setRoomName(final String name) {
 	contentPanel.setTitle(name);
     }
 
-    public void addMessage(final HTML message) {
-	contentPanel.add(message);
-	FireLog.debug("Scroll pos: " + contentPanel.getOffsetHeight());
-	DOM.setElementPropertyInt(contentPanel.getElement(), "scrollTop", contentPanel.getOffsetHeight());
-	// conversationSP.setScrollPosition(conversationVP.getOffsetHeight());
+    public void addEventMessage(final String message) {
+	HTML messageHtml = new HTML(message);
+	addWidget(messageHtml);
+	messageHtml.addStyleName("kune-RoomPanel-EventMessage");
     }
 
-    public ContentPanel getContentPanel() {
-	return contentPanel;
+    public void addMessage(final String userAlias, final String color, final String message) {
+	String userHtml = "<span style=\"color: " + color + "; font-weight: bold;\">" + userAlias + "</span>:&nbsp;";
+	HTML messageHtml = new HTML(userHtml + ChatFactory.formatter(message).getHTML());
+	addWidget(messageHtml);
     }
 
     public void addTimeDelimiter(final String datetime) {
@@ -49,7 +53,18 @@ public class RoomPanel implements RoomView {
 	hp.add(hr);
 	hp.setWidth("100%");
 	hp.setCellWidth(hr, "100%");
-	contentPanel.add(hp);
+	addWidget(hp);
 	hp.setStyleName("kune-RoomPanel-HorizDelimiter");
+    }
+
+    public ContentPanel getContentPanel() {
+	return contentPanel;
+    }
+
+    private void addWidget(final Widget widget) {
+	contentPanel.add(widget);
+	FireLog.debug("ContentPanel id: " + contentPanel.getId() + " Scroll pos: " + contentPanel.getOffsetHeight());
+	DOM.setElementPropertyInt(contentPanel.getElement(), "scrollTop", contentPanel.getOffsetHeight());
+	// conversationSP.setScrollPosition(conversationVP.getOffsetHeight());
     }
 }

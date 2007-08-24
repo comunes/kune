@@ -2,3 +2,22 @@
     white-space: nowrap;
     color: #B3B3B3;
 }
+
+.kune-MultiRoomPanel-Subject {
+    margin: 5px;
+    font-size: 108%;
+    color: #2E5492;
+}
+
+.kune-MultiRoomPanel-User {
+    margin: 5px;
+}
+
+.kune-RoomPanel-Conversation {
+    margin: 5px;
+}
+
+.kune-RoomPanel-EventMessage {
+    font-style: italic;
+    color: rgb(102, 153, 204);
+}

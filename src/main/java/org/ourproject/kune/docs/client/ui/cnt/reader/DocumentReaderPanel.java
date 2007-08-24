@@ -39,6 +39,9 @@ public class DocumentReaderPanel extends VerticalPanel implements DocumentReader
 	btnEdit.setVisible(false);
 	content = new HTML("this is the content");
 	add(content);
+	// FIXME: Vicente, a ver si esto vale:
+	this.setWidth("100%");
+	this.setCellWidth(content, "100%");
     }
 
     private Widget createToolBar(final DocumentReaderListener listener) {

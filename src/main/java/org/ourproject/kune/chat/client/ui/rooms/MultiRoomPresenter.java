@@ -25,8 +25,6 @@ import java.util.Map;
 
 import org.ourproject.kune.platf.client.dto.RoomDTO;
 
-import com.google.gwt.user.client.ui.HTML;
-
 public class MultiRoomPresenter implements MultiRoom {
 
     private MultiRoomPanel view;
@@ -60,25 +58,29 @@ public class MultiRoomPresenter implements MultiRoom {
 	String panelId = view.createRoom(presenter);
 
 	presenter.setRoomName();
+
 	roomPresenters.put(roomName, presenter);
 	roomPanels.put(panelId, presenter);
-	currentRoom = presenter;
 
-	view.setSubject(room.getSubject());
+	currentRoom = presenter;
 
 	RoomUsers roomUsers = view.createRoomUsersPanel();
 	roomUsersPresenters.put(roomName, roomUsers);
+
 	int roomUsersIndex = view.addRoomUsersPanel((RoomUsersPresenter) roomUsers);
 	roomUsersPanels.put(currentRoom, new Integer(roomUsersIndex));
+
+	activateRoom(currentRoom);
+
 	return currentRoom;
     }
 
-    public void join(RoomDTO room, String alias, int roomUserType) {
+    public void join(final RoomDTO room, final String alias, final int roomUserType) {
 	RoomUser user = getPresenter(room).addUser(alias, roomUserType);
 	getUsersPresenter(room).add(user);
     }
 
-    public void addTimeDelimiter(RoomDTO room, String datetime) {
+    public void addTimeDelimiter(final RoomDTO room, final String datetime) {
 	getPresenter(room).addDelimiter(datetime);
     }
 
@@ -86,9 +88,9 @@ public class MultiRoomPresenter implements MultiRoom {
 	// TODO: Call to xmpp, meawhile:
 	String userAlias = currentRoom.getSessionUserAlias();
 
-	currentRoom.addMessage(userAlias, formatter(view.getInputText()));
+	currentRoom.addMessage(userAlias, view.getInputText());
 	currentRoom.clearSavedInput();
-	view.clearTextArea();
+	view.clearInputText();
 	// view.sendBtnEnable(false);
 
 	// if (key == KeyboardListener.KEY_ENTER) {
@@ -103,9 +105,16 @@ public class MultiRoomPresenter implements MultiRoom {
 
     protected void activateRoom(final String panelId) {
 	RoomPresenter nextRoom = getRoomFromPanelId(panelId);
+	activateRoom(nextRoom);
+    }
+
+    private void activateRoom(final RoomPresenter nextRoom) {
 	currentRoom.saveInput(view.getInputText());
 	currentRoom = nextRoom;
-	view.setInputText(currentRoom.getSavedInput());
+	String savedInput = currentRoom.getSavedInput();
+	if (!savedInput.equals("")) {
+	    view.setInputText(savedInput);
+	}
 	view.setSubject(currentRoom.getSubject());
 	Integer index = (Integer) roomUsersPanels.get(currentRoom);
 	view.activeUsersPanel(index.intValue());
@@ -121,33 +130,17 @@ public class MultiRoomPresenter implements MultiRoom {
 	room.doClose();
     }
 
-    private RoomPresenter getPresenter(RoomDTO room) {
+    private RoomPresenter getPresenter(final RoomDTO room) {
 	return (RoomPresenter) roomPresenters.get(room.getName());
     }
 
-    private RoomUsersPresenter getUsersPresenter(RoomDTO room) {
+    private RoomUsersPresenter getUsersPresenter(final RoomDTO room) {
 	return (RoomUsersPresenter) roomUsersPresenters.get(room.getName());
     }
 
     private RoomPresenter getRoomFromPanelId(final String panelId) {
 	RoomPresenter nextRoom = ((RoomPresenter) roomPanels.get(panelId));
 	return nextRoom;
-    }
-
-    private HTML formatter(String message) {
-	message = message.replaceAll("&", "&amp;");
-	message = message.replaceAll("\"", "&quot;");
-	message = message.replaceAll("<", "&lt;");
-	message = message.replaceAll(">", "&gt;");
-	message = message.replaceAll("\n", "<br>\n");
-	// FIXME:
-	// message = message.replaceAll(":)",
-	// RoomImages.App.getInstance().smile().getHTML());
-	message = message.replaceAll(":D", RoomImages.App.getInstance().grin().getHTML());
-	// message = message.replaceAll(":(",
-	// RoomImages.App.getInstance().sad().getHTML());
-	message = message.replaceAll(":P", RoomImages.App.getInstance().tongue().getHTML());
-	return new HTML(message);
     }
 
 }
