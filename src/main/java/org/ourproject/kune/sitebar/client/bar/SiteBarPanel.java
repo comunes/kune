@@ -23,6 +23,7 @@ package org.ourproject.kune.sitebar.client.bar;
 import org.ourproject.kune.chat.client.ui.ChatFactory;
 import org.ourproject.kune.chat.client.ui.rooms.MultiRoom;
 import org.ourproject.kune.chat.client.ui.rooms.MultiRoomPanel;
+import org.ourproject.kune.chat.client.ui.rooms.RoomUser;
 import org.ourproject.kune.platf.client.dto.RoomDTO;
 import org.ourproject.kune.platf.client.group.NewGroupForm;
 import org.ourproject.kune.platf.client.ui.dialogs.TwoButtonsDialog;
@@ -134,10 +135,12 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 		RoomDTO room1 = new RoomDTO("chat1@talks.localhost");
 		room1.setSubject("Welcome to this room1");
 		rooms.createRoom(room1, "luther.b");
+		rooms.join(room1, "luther.b", RoomUser.MODERADOR);
 
 		RoomDTO room2 = new RoomDTO("chat2@talks.localhost");
 		room2.setSubject("Welcome to this room2");
 		rooms.createRoom(room2, "luther");
+		rooms.join(room2, "luther", RoomUser.MODERADOR);
 
 		// presenter.doSearch(searchTextBox.getText());
 	    }

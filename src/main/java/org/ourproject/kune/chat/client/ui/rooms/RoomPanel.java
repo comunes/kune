@@ -2,6 +2,9 @@ package org.ourproject.kune.chat.client.ui.rooms;
 
 import org.ourproject.kune.platf.client.ui.HorizontalLine;
 
+import to.tipit.gwtlib.FireLog;
+
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -19,6 +22,7 @@ public class RoomPanel implements RoomView {
 	    {
 		setClosable(true);
 		setBackground(true);
+		setAutoScroll(true);
 	    }
 	});
     }
@@ -29,6 +33,9 @@ public class RoomPanel implements RoomView {
 
     public void addMessage(final HTML message) {
 	contentPanel.add(message);
+	FireLog.debug("Scroll pos: " + contentPanel.getOffsetHeight());
+	DOM.setElementPropertyInt(contentPanel.getElement(), "scrollTop", contentPanel.getOffsetHeight());
+	// conversationSP.setScrollPosition(conversationVP.getOffsetHeight());
     }
 
     public ContentPanel getContentPanel() {

@@ -8,4 +8,8 @@ public interface MultiRoom {
 
     RoomPresenter createRoom(RoomDTO room, String userAlias);
 
+    public void join(RoomDTO room, String alias, int roomUserType);
+
+    void addTimeDelimiter(RoomDTO room, String datetime);
+
 }

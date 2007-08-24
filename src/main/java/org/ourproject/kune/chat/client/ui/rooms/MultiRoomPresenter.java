@@ -29,20 +29,24 @@ import com.google.gwt.user.client.ui.HTML;
 
 public class MultiRoomPresenter implements MultiRoom {
 
-    private final static String[] USERCOLORS = { "green", "navy", "black", "grey", "olive", "teal", "blue", "lime",
-	    "purple", "fuchsia", "maroon", "red" };
-
     private MultiRoomPanel view;
 
     private RoomPresenter currentRoom;
 
     private Map roomPanels;
 
-    private int currentColor;
+    private Map roomPresenters;
+
+    private Map roomUsersPresenters;
+
+    private Map roomUsersPanels;
 
     public void init(final MultiRoomPanel view) {
 	this.view = view;
+	roomPresenters = new HashMap();
+	roomUsersPresenters = new HashMap();
 	roomPanels = new HashMap();
+	roomUsersPanels = new HashMap();
     }
 
     public MultiRoomPanel getView() {
@@ -50,25 +54,42 @@ public class MultiRoomPresenter implements MultiRoom {
     }
 
     public RoomPresenter createRoom(final RoomDTO room, final String userAlias) {
+	String roomName = room.getName();
+
 	RoomPresenter presenter = new RoomPresenter(room, userAlias);
 	String panelId = view.createRoom(presenter);
 
 	presenter.setRoomName();
-
+	roomPresenters.put(roomName, presenter);
 	roomPanels.put(panelId, presenter);
 	currentRoom = presenter;
+
 	view.setSubject(room.getSubject());
+
+	RoomUsers roomUsers = view.createRoomUsersPanel();
+	roomUsersPresenters.put(roomName, roomUsers);
+	int roomUsersIndex = view.addRoomUsersPanel((RoomUsersPresenter) roomUsers);
+	roomUsersPanels.put(currentRoom, new Integer(roomUsersIndex));
 	return currentRoom;
     }
 
-    protected void onSend(final String message) {
+    public void join(RoomDTO room, String alias, int roomUserType) {
+	RoomUser user = getPresenter(room).addUser(alias, roomUserType);
+	getUsersPresenter(room).add(user);
+    }
+
+    public void addTimeDelimiter(RoomDTO room, String datetime) {
+	getPresenter(room).addDelimiter(datetime);
+    }
+
+    protected void onSend() {
 	// TODO: Call to xmpp, meawhile:
 	String userAlias = currentRoom.getSessionUserAlias();
 
-	currentRoom.addMessage(userAlias, formatter(message));
+	currentRoom.addMessage(userAlias, formatter(view.getInputText()));
 	currentRoom.clearSavedInput();
 	view.clearTextArea();
-	view.sendBtnEnable(false);
+	// view.sendBtnEnable(false);
 
 	// if (key == KeyboardListener.KEY_ENTER) {
 	// if (mod == KeyboardListener.MODIFIER_CTRL) {
@@ -80,9 +101,37 @@ public class MultiRoomPresenter implements MultiRoom {
 	// }
     }
 
+    protected void activateRoom(final String panelId) {
+	RoomPresenter nextRoom = getRoomFromPanelId(panelId);
+	currentRoom.saveInput(view.getInputText());
+	currentRoom = nextRoom;
+	view.setInputText(currentRoom.getSavedInput());
+	view.setSubject(currentRoom.getSubject());
+	Integer index = (Integer) roomUsersPanels.get(currentRoom);
+	view.activeUsersPanel(index.intValue());
+    }
+
     protected void onNoRooms() {
 	// TODO
 	view.hide();
+    }
+
+    protected void closeRoom(final String panelId) {
+	RoomPresenter room = getRoomFromPanelId(panelId);
+	room.doClose();
+    }
+
+    private RoomPresenter getPresenter(RoomDTO room) {
+	return (RoomPresenter) roomPresenters.get(room.getName());
+    }
+
+    private RoomUsersPresenter getUsersPresenter(RoomDTO room) {
+	return (RoomUsersPresenter) roomUsersPresenters.get(room.getName());
+    }
+
+    private RoomPresenter getRoomFromPanelId(final String panelId) {
+	RoomPresenter nextRoom = ((RoomPresenter) roomPanels.get(panelId));
+	return nextRoom;
     }
 
     private HTML formatter(String message) {
@@ -91,32 +140,14 @@ public class MultiRoomPresenter implements MultiRoom {
 	message = message.replaceAll("<", "&lt;");
 	message = message.replaceAll(">", "&gt;");
 	message = message.replaceAll("\n", "<br>\n");
+	// FIXME:
+	// message = message.replaceAll(":)",
+	// RoomImages.App.getInstance().smile().getHTML());
+	message = message.replaceAll(":D", RoomImages.App.getInstance().grin().getHTML());
+	// message = message.replaceAll(":(",
+	// RoomImages.App.getInstance().sad().getHTML());
+	message = message.replaceAll(":P", RoomImages.App.getInstance().tongue().getHTML());
 	return new HTML(message);
     }
 
-    protected void closeRoom(final String panelId) {
-	RoomPresenter room = getRoomFromPanelId(panelId);
-	room.doClose();
-    }
-
-    protected void activateRoom(final String panelId) {
-	RoomPresenter nextRoom = getRoomFromPanelId(panelId);
-	currentRoom.saveInput(view.getInputText());
-	currentRoom = nextRoom;
-	view.setInputText(currentRoom.getSavedInput());
-	view.setSubject(currentRoom.getSubject());
-    }
-
-    private RoomPresenter getRoomFromPanelId(final String panelId) {
-	RoomPresenter nextRoom = ((RoomPresenter) roomPanels.get(panelId));
-	return nextRoom;
-    }
-
-    private String getNextColor() {
-	String color = USERCOLORS[currentColor++];
-	if (currentColor >= USERCOLORS.length) {
-	    currentColor = 0;
-	}
-	return color;
-    }
 }

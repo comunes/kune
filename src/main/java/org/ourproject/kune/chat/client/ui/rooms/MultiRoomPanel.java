@@ -23,7 +23,9 @@ package org.ourproject.kune.chat.client.ui.rooms;
 import to.tipit.gwtlib.FireLog;
 
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.KeyboardListener;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.EventObject;
@@ -54,6 +56,10 @@ public class MultiRoomPanel implements MultiRoomView {
 
     private LayoutRegion centralLayout;
 
+    private Label subject;
+
+    private DeckPanel usersDeckPanel;
+
     public MultiRoomPanel(final MultiRoomPresenter presenter) {
 	this.presenter = presenter;
 	createLayout();
@@ -72,6 +78,9 @@ public class MultiRoomPanel implements MultiRoomView {
 	// layout.showPanel(contentId); > null
 
 	layout.endUpdate();
+
+	// usersDeckPanel.add(w);
+
 	return contentId;
     }
 
@@ -81,11 +90,6 @@ public class MultiRoomPanel implements MultiRoomView {
 
     public void hide() {
 	dialog.hide();
-    }
-
-    public void addUser(final String roomId, final String userAlias, final String color) {
-	// TODO Auto-generated method stub
-
     }
 
     public void clearTextArea() {
@@ -100,17 +104,51 @@ public class MultiRoomPanel implements MultiRoomView {
 	}
     }
 
+    public void setSubject(final String text) {
+	subject.setText(text);
+    }
+
     public boolean sendBtnIsDisabled() {
 	FireLog.debug("Is btn disabled: " + sendBtn.isDisabled());
 	return sendBtn.isDisabled();
+    }
+
+    protected RoomUsers createRoomUsersPanel() {
+	RoomUsersPresenter usersPresenter = new RoomUsersPresenter();
+	RoomUsersPanel panel = new RoomUsersPanel();
+	usersPresenter.init(panel);
+
+	return usersPresenter;
+    }
+
+    protected int addRoomUsersPanel(RoomUsersPresenter presenter) {
+	RoomUsersPanel view = presenter.getView();
+	usersDeckPanel.add(view);
+	return usersDeckPanel.getWidgetIndex(view);
     }
 
     protected void insertReturnInInput() {
 	input.setText(input.getText() + "\n");
     }
 
+    protected void setInputText(final String text) {
+	input.setText(text);
+    }
+
+    protected String getInputText() {
+	return input.getText();
+    }
+
     private void createLayout() {
 	// create layout regions for layout dialog
+
+	LayoutRegionConfig north = new LayoutRegionConfig() {
+	    {
+		setTitlebar(false);
+		setInitialSize(30);
+	    }
+	};
+
 	LayoutRegionConfig east = new LayoutRegionConfig() {
 	    {
 		setSplit(true);
@@ -120,6 +158,18 @@ public class MultiRoomPanel implements MultiRoomView {
 		setCollapsible(true);
 		setAnimate(true);
 		setTitlebar(true);
+		setAlwaysShowTabs(false);
+	    }
+	};
+
+	LayoutRegionConfig center = new LayoutRegionConfig() {
+	    {
+		setTitlebar(false);
+		setAutoScroll(true);
+		setTabPosition("top");
+		setCloseOnTab(true);
+		setAlwaysShowTabs(true);
+		setMargins(5, 5, 5, 5);
 	    }
 	};
 
@@ -129,17 +179,6 @@ public class MultiRoomPanel implements MultiRoomView {
 		// setInitialSize(600);
 		setHideWhenEmpty(false);
 		setInitialSize(50);
-	    }
-	};
-
-	LayoutRegionConfig center = new LayoutRegionConfig() {
-	    {
-		setTitlebar(true);
-		setAutoScroll(true);
-		setTabPosition("bottom");
-		setCloseOnTab(true);
-		setAlwaysShowTabs(true);
-		setMargins(5, 5, 5, 5);
 	    }
 	};
 
@@ -155,10 +194,39 @@ public class MultiRoomPanel implements MultiRoomView {
 		// i18n
 		setTitle("Chat rooms");
 	    }
-	}, null, south, null, east, center);
+	}, north, south, null, east, center);
 
+	sendBtn = dialog.addButton("Send");
+	sendBtn.addButtonListener(new ButtonListenerAdapter() {
+	    public void onClick(final Button button, final EventObject e) {
+		presenter.onSend();
+	    }
+	});
+
+	final BorderLayout layout = dialog.getLayout();
+
+	layout.beginUpdate();
+
+	ContentPanel eastPanel = createUsersPanel();
+
+	ContentPanel southPanel = createInputPanel();
+
+	ContentPanel northPanel = createSubjectPanel();
+
+	layout.add(LayoutRegionConfig.NORTH, northPanel);
+
+	layout.add(LayoutRegionConfig.EAST, eastPanel);
+
+	layout.add(LayoutRegionConfig.SOUTH, southPanel);
+
+	layout.endUpdate();
+
+	createListeners();
+
+    }
+
+    private void createListeners() {
 	dialog.addDialogListener(new DialogListener() {
-
 	    public boolean doBeforeHide(final LayoutDialog dialog) {
 		if (centralLayout.getNumPanels() > 0) {
 		    return Window.confirm("Sure?");
@@ -185,64 +253,6 @@ public class MultiRoomPanel implements MultiRoomView {
 	    public void onShow(final LayoutDialog dialog) {
 	    }
 	});
-
-	sendBtn = dialog.addButton("Send");
-	sendBtn.addButtonListener(new ButtonListenerAdapter() {
-	    public void onClick(final Button button, final EventObject e) {
-		presenter.onSend(input.getText());
-	    }
-	});
-
-	// add content to various regions
-	final BorderLayout layout = dialog.getLayout();
-
-	layout.beginUpdate();
-
-	// i18n
-	layout.add(LayoutRegionConfig.EAST, new ContentPanel(Ext.generateId(), "Users"));
-
-	input = new TextArea();
-	ContentPanel southPanel = new ContentPanel(input, "", new ContentPanelConfig() {
-	    {
-		setBackground(true);
-	    }
-	});
-	input.setWidth("100%");
-	input.setHeight("100%");
-
-	input.addKeyboardListener(new KeyboardListener() {
-	    public void onKeyDown(final Widget arg0, final char arg1, final int arg2) {
-	    }
-
-	    public void onKeyPress(final Widget arg0, final char arg1, final int arg2) {
-	    }
-
-	    public void onKeyUp(final Widget arg0, final char arg1, final int arg2) {
-		FireLog.debug("keylist1, key: " + arg1);
-	    }
-	});
-
-	dialog.addKeyListener(13, new KeyListener() {
-	    public void onKey(final int key, final EventObject e) {
-		FireLog.debug("Enter pressed");
-		presenter.onSend(input.getText());
-	    }
-	});
-
-	dialog.addKeyListener(new KeyMapConfig() {
-	    {
-		// setCtrl(true);
-	    }
-	}, new KeyListener() {
-
-	    public void onKey(final int key, final EventObject e) {
-		FireLog.debug("Key " + key + " pressed");
-	    }
-	});
-
-	layout.add(LayoutRegionConfig.SOUTH, southPanel);
-
-	layout.endUpdate();
 
 	centralLayout = dialog.getLayout().getRegion(LayoutRegionConfig.CENTER);
 
@@ -290,37 +300,70 @@ public class MultiRoomPanel implements MultiRoomView {
 	    public void onVisibilityChange(final LayoutRegion region, final boolean visibility) {
 	    }
 	});
-
     }
 
-    // private Form createFormImput() {
-    // Form form = new Form(new FormConfig() {
-    // {
-    // setWidth("100%");
-    // setHideLabels(true);
-    // }
-    // });
-    //
-    // form.add(new com.gwtext.client.widgets.form.TextArea(new TextAreaConfig()
-    // {
-    // {
-    // setName("input");
-    // }
-    // }));
-    //
-    // form.render();
-    // return form;
-    // }
-
-    protected String getInputText() {
-	return input.getText();
+    private ContentPanel createUsersPanel() {
+	// i18n
+	ContentPanel eastPanel = new ContentPanel(Ext.generateId(), "Users");
+	usersDeckPanel = new DeckPanel();
+	eastPanel.add(usersDeckPanel);
+	return eastPanel;
     }
 
-    protected void setInputText(final String text) {
-	input.setText(text);
+    private ContentPanel createSubjectPanel() {
+	subject = new Label();
+	ContentPanel northPanel = new ContentPanel(subject, "", new ContentPanelConfig() {
+	    {
+		setBackground(false);
+	    }
+	});
+	return northPanel;
     }
 
-    public void setSubject(final String subject) {
-	dialog.getLayout().setTitle(subject);
+    private ContentPanel createInputPanel() {
+	input = new TextArea();
+	ContentPanel southPanel = new ContentPanel(input, "", new ContentPanelConfig() {
+	    {
+		setBackground(true);
+	    }
+	});
+	input.setWidth("100%");
+	input.setHeight("100%");
+
+	input.addKeyboardListener(new KeyboardListener() {
+	    public void onKeyDown(final Widget arg0, final char arg1, final int arg2) {
+	    }
+
+	    public void onKeyPress(final Widget arg0, final char arg1, final int arg2) {
+	    }
+
+	    public void onKeyUp(final Widget arg0, final char arg1, final int arg2) {
+		FireLog.debug("keylist1, key: " + arg1);
+	    }
+	});
+
+	dialog.addKeyListener(13, new KeyListener() {
+	    public void onKey(final int key, final EventObject e) {
+		FireLog.debug("Enter pressed");
+		presenter.onSend();
+	    }
+	});
+
+	dialog.addKeyListener(new KeyMapConfig() {
+	    {
+		// setCtrl(true);
+	    }
+	}, new KeyListener() {
+
+	    public void onKey(final int key, final EventObject e) {
+		FireLog.debug("Key " + key + " pressed");
+	    }
+	});
+	return southPanel;
     }
+
+    public void activeUsersPanel(int index) {
+	usersDeckPanel.showWidget(index);
+    }
+
 }
