@@ -56,7 +56,7 @@ public class SiteBarServerService implements SiteBarService {
 	session.setUser(null);
     }
 
-    public void createUser(final String shortName, final String name, final String email, final String passwd) {
+    public void createUser(final String shortName, final String longName, final String passwd, final String email) {
 	// TODO
     }
 }

@@ -22,7 +22,7 @@ public class LoginPresenterTest {
     @Test
     public void testViewInitialization() {
 	// view.setEnabledLoginButton(false);
-	view.clearData();
+	view.reset();
 	EasyMock.replay(view);
 	presenter.init(view);
 	EasyMock.verify(view);
@@ -31,7 +31,7 @@ public class LoginPresenterTest {
     @Test
     public void noUserInput() {
 	// view.setEnabledLoginButton(false);
-	view.clearData();
+	view.reset();
 	EasyMock.replay(view);
 
 	presenter.init(view);
@@ -42,7 +42,7 @@ public class LoginPresenterTest {
     @Test
     public void nickPassTyped() {
 	// view.setEnabledLoginButton(false);
-	view.clearData();
+	view.reset();
 	// view.setEnabledLoginButton(true);
 	EasyMock.replay(view);
 

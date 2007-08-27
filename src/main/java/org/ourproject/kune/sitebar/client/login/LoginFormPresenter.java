@@ -50,7 +50,7 @@ public class LoginFormPresenter implements LoginForm {
 
     public void doLogin() {
 	final String nickOrEmail = view.getNickOrEmail();
-	final String passwd = view.getPassword();
+	final String passwd = view.getLoginPassword();
 
 	SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
 	siteBarService.login(nickOrEmail, passwd, new AsyncCallback() {
@@ -68,12 +68,34 @@ public class LoginFormPresenter implements LoginForm {
 	});
     }
 
+    public void doRegister() {
+	final String shortName = view.getShortName();
+	final String passwd = view.getRegisterPassword();
+	final String longName = view.getLongName();
+	final String email = view.getEmail();
+
+	SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
+	siteBarService.createUser(shortName, longName, passwd, email, new AsyncCallback() {
+
+	    public void onFailure(final Throwable arg0) {
+		// i18n: Error creating user
+		Site.important("Error creating user");
+	    }
+
+	    public void onSuccess(final Object response) {
+		String hash = (String) response;
+		listener.userLoggedIn(shortName, hash);
+		// TODO: Establecer sesión de este usuario
+	    }
+	});
+    }
+
     public View getView() {
 	return view;
     }
 
     private void reset() {
-	view.clearData();
+	view.reset();
     }
 
 }

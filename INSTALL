@@ -67,3 +67,15 @@ Add this lines to conf/openfire.xml:
   ...
 </jive>
 
+You'll most likely want to change which usernames are authorized to login to the admin console.
+<jive>
+...
+<admin>
+    <authorizedUsernames>site, admin</authorizedUsernames>
+</admins>
+...
+</jive>
+
+For more details:
+http://www.igniterealtime.org/builds/openfire/docs/latest/documentation/db-integration-guide.html
+

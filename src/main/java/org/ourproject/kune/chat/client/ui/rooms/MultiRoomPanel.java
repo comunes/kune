@@ -20,24 +20,27 @@
 
 package org.ourproject.kune.chat.client.ui.rooms;
 
+import org.ourproject.kune.platf.client.View;
+
 import to.tipit.gwtlib.FireLog;
 
-import com.google.gwt.user.client.DOM;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DeckPanel;
-import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.TextArea;
-import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Ext;
-import com.gwtext.client.util.KeyMapConfig;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.LayoutDialog;
 import com.gwtext.client.widgets.LayoutDialogConfig;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.event.DialogListener;
-import com.gwtext.client.widgets.event.KeyListener;
+import com.gwtext.client.widgets.form.Field;
+import com.gwtext.client.widgets.form.Form;
+import com.gwtext.client.widgets.form.FormConfig;
+import com.gwtext.client.widgets.form.TextArea;
+import com.gwtext.client.widgets.form.TextAreaConfig;
+import com.gwtext.client.widgets.form.event.FieldListener;
 import com.gwtext.client.widgets.layout.BorderLayout;
 import com.gwtext.client.widgets.layout.ContentPanel;
 import com.gwtext.client.widgets.layout.ContentPanelConfig;
@@ -45,7 +48,9 @@ import com.gwtext.client.widgets.layout.LayoutRegion;
 import com.gwtext.client.widgets.layout.LayoutRegionConfig;
 import com.gwtext.client.widgets.layout.event.LayoutRegionListener;
 
-public class MultiRoomPanel implements MultiRoomView {
+public class MultiRoomPanel implements MultiRoomView, View {
+
+    protected static final String INPUT_FIELD = "input-area";
 
     private LayoutDialog dialog;
 
@@ -53,13 +58,15 @@ public class MultiRoomPanel implements MultiRoomView {
 
     private final MultiRoomPresenter presenter;
 
-    private TextArea input;
-
     private LayoutRegion centralLayout;
 
     private Label subject;
 
     private DeckPanel usersDeckPanel;
+
+    private TextArea input;
+
+    private Form inputForm;
 
     public MultiRoomPanel(final MultiRoomPresenter presenter) {
 	this.presenter = presenter;
@@ -105,6 +112,10 @@ public class MultiRoomPanel implements MultiRoomView {
 	subject.setText(text);
     }
 
+    public void activeUsersPanel(final int index) {
+	usersDeckPanel.showWidget(index);
+    }
+
     public boolean sendBtnIsDisabled() {
 	FireLog.debug("Is btn disabled: " + sendBtn.isDisabled());
 	return sendBtn.isDisabled();
@@ -125,21 +136,20 @@ public class MultiRoomPanel implements MultiRoomView {
     }
 
     protected void insertReturnInInput() {
-	input.setText(input.getText() + "\n");
+	setInputText(getInputText() + "\n");
     }
 
     protected void clearInputText() {
-	input.setText("");
-	// FIXME: Trying to fix bug:
-	DOM.setInnerText(input.getElement(), "");
+	input.reset();
+	inputForm.reset();
     }
 
     protected void setInputText(final String text) {
-	input.setText(text);
+	input.setRawValue(text);
     }
 
     protected String getInputText() {
-	return input.getText();
+	return input.getValueAsString();
     }
 
     private void createLayout() {
@@ -179,7 +189,6 @@ public class MultiRoomPanel implements MultiRoomView {
 	LayoutRegionConfig south = new LayoutRegionConfig() {
 	    {
 		setSplit(true);
-		// setInitialSize(600);
 		setHideWhenEmpty(false);
 		setInitialSize(50);
 	    }
@@ -209,6 +218,8 @@ public class MultiRoomPanel implements MultiRoomView {
 	final BorderLayout layout = dialog.getLayout();
 
 	layout.beginUpdate();
+
+	layout.setMonitorWindowResize(true);
 
 	ContentPanel eastPanel = createUsersPanel();
 
@@ -326,49 +337,56 @@ public class MultiRoomPanel implements MultiRoomView {
     }
 
     private ContentPanel createInputPanel() {
-	input = new TextArea();
+
+	inputForm = new Form(new FormConfig() {
+	    {
+		setHideLabels(true);
+		setWidth("100%");
+	    }
+	});
+	input = new TextArea(new TextAreaConfig() {
+	    {
+		setFieldListener(new FieldListener() {
+		    public void onBlur(final Field field) {
+		    }
+
+		    public void onChange(final Field field, final Object newVal, final Object oldVal) {
+			GWT.log("Change", null);
+		    }
+
+		    public void onFocus(final Field field) {
+			GWT.log("OnFocus", null);
+		    }
+
+		    public void onInvalid(final Field field, final String msg) {
+		    }
+
+		    public void onSpecialKey(final Field field, final EventObject e) {
+			presenter.onSend(e.getKey(), e.isCtrlKey());
+
+		    }
+
+		    public void onValid(final Field field) {
+		    }
+		});
+	    }
+	});
+	inputForm.add(input);
+
+	inputForm.end();
+	inputForm.render();
+
 	ContentPanel southPanel = new ContentPanel(input, "", new ContentPanelConfig() {
 	    {
 		setBackground(true);
+		setFitToFrame(true);
 	    }
 	});
+
 	input.setWidth("100%");
 	input.setHeight("100%");
 
-	input.addKeyboardListener(new KeyboardListener() {
-	    public void onKeyDown(final Widget arg0, final char arg1, final int arg2) {
-	    }
-
-	    public void onKeyPress(final Widget arg0, final char arg1, final int arg2) {
-	    }
-
-	    public void onKeyUp(final Widget arg0, final char arg1, final int arg2) {
-		FireLog.debug("keylist1, key: " + arg1);
-	    }
-	});
-
-	dialog.addKeyListener(13, new KeyListener() {
-	    public void onKey(final int key, final EventObject e) {
-		FireLog.debug("Enter pressed");
-		presenter.onSend();
-	    }
-	});
-
-	dialog.addKeyListener(new KeyMapConfig() {
-	    {
-		// setCtrl(true);
-	    }
-	}, new KeyListener() {
-
-	    public void onKey(final int key, final EventObject e) {
-		FireLog.debug("Key " + key + " pressed");
-	    }
-	});
 	return southPanel;
-    }
-
-    public void activeUsersPanel(final int index) {
-	usersDeckPanel.showWidget(index);
     }
 
 }

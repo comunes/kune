@@ -8,14 +8,19 @@ import to.tipit.gwtlib.FireLog;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.Ext;
 import com.gwtext.client.widgets.layout.ContentPanel;
 import com.gwtext.client.widgets.layout.ContentPanelConfig;
+import com.gwtext.client.widgets.layout.event.ContentPanelListener;
 
 public class RoomPanel implements RoomView {
 
     private final ContentPanel contentPanel;
+    private final ScrollPanel scroll;
+    private final VerticalPanel vp;
 
     public RoomPanel(final RoomPresenter presenter) {
 	String contentPanelId = Ext.generateId();
@@ -26,7 +31,30 @@ public class RoomPanel implements RoomView {
 		setAutoScroll(true);
 	    }
 	});
-	contentPanel.addStyleName("kune-RoomPanel-Conversation");
+	contentPanel.addContentPanelListener(new ContentPanelListener() {
+	    public void onActivate(final ContentPanel cp) {
+	    }
+
+	    public void onDeactivate(final ContentPanel cp) {
+	    }
+
+	    public void onResize(final ContentPanel cp, final int width, final int height) {
+		adjustScrolSize(width, height);
+	    }
+	});
+	scroll = new ScrollPanel();
+	contentPanel.add(scroll);
+	vp = new VerticalPanel();
+	vp.setWidth("99%");
+	scroll.add(vp);
+	vp.addStyleName("kune-RoomPanel-Conversation");
+	adjustScrolSize(412, 200);
+    }
+
+    private void adjustScrolSize(final int width, final int height) {
+	FireLog.debug("width: " + width + ", height: " + height);
+	scroll.setWidth("" + (width - 1));
+	scroll.setHeight("" + (height - 1));
     }
 
     public void setRoomName(final String name) {
@@ -61,10 +89,7 @@ public class RoomPanel implements RoomView {
     }
 
     private void addWidget(final Widget widget) {
-	contentPanel.add(widget);
-	FireLog.debug("ContentPanel id: " + contentPanel.getId() + " Scroll pos: " + contentPanel.getOffsetHeight());
-	// DOM.setElementPropertyInt(contentPanel.getParent().getElement(),
-	// "scrollTop", contentPanel.getOffsetHeight());
-	// conversationSP.setScrollPosition(conversationVP.getOffsetHeight());
+	vp.add(widget);
+	scroll.setScrollPosition(vp.getOffsetHeight());
     }
 }

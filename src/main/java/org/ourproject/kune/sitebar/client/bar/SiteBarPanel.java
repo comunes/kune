@@ -31,6 +31,7 @@ import org.ourproject.kune.platf.client.ui.dialogs.TwoButtonsDialog;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
 import org.ourproject.kune.sitebar.client.login.LoginForm;
+import org.ourproject.kune.sitebar.client.login.LoginFormPanel;
 import org.ourproject.kune.sitebar.client.services.Images;
 import org.ourproject.kune.sitebar.client.services.Translate;
 import org.ourproject.kune.workspace.client.ui.form.FormListener;
@@ -64,7 +65,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     private DialogBox currentDialog;
     private final Hyperlink logoutHyperlink;
     private final HTML pipeSeparatorHtml2;
-    private TwoButtonsDialog loginDialog;
+    private LoginFormPanel loginPanel;
     private TwoButtonsDialog newGroupDialog;
 
     public SiteBarPanel(final SiteBarPresenter presenter) {
@@ -129,7 +130,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	searchButton.addClickListener(new ClickListener() {
 	    public void onClick(final Widget arg0) {
 		MultiRoom rooms = ChatFactory.createChatMultiRoom();
-		MultiRoomPanel view = rooms.getView();
+		MultiRoomPanel view = (MultiRoomPanel) rooms.getView();
 		view.show();
 
 		RoomDTO room1 = new RoomDTO("chat1@talks.localhost");
@@ -200,22 +201,12 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 
     public void showLoginDialog() {
 	final LoginForm login = SiteBarFactory.createLogin(presenter);
-	loginDialog = new TwoButtonsDialog(t.Login(), t.Login(), t.Cancel(), true, false, 350, 200, new FormListener() {
-	    public void onAccept() {
-		login.doLogin();
-	    }
-
-	    public void onCancel() {
-		login.doCancel();
-	    }
-	});
-	loginDialog.add((Widget) login.getView());
-	loginDialog.hide();
-	loginDialog.center();
+	loginPanel = (LoginFormPanel) login.getView();
+	loginPanel.show();
     }
 
     public void hideLoginDialog() {
-	loginDialog.hide();
+	loginPanel.hide();
     }
 
     public void showNewGroupDialog() {

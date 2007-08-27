@@ -23,6 +23,7 @@ package org.ourproject.kune.chat.client.ui.rooms;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.RoomDTO;
 
 public class MultiRoomPresenter implements MultiRoom {
@@ -45,10 +46,6 @@ public class MultiRoomPresenter implements MultiRoom {
 	roomUsersPresenters = new HashMap();
 	roomPanels = new HashMap();
 	roomUsersPanels = new HashMap();
-    }
-
-    public MultiRoomPanel getView() {
-	return view;
     }
 
     public RoomPresenter createRoom(final RoomDTO room, final String userAlias) {
@@ -84,6 +81,16 @@ public class MultiRoomPresenter implements MultiRoom {
 	getPresenter(room).addDelimiter(datetime);
     }
 
+    public View getView() {
+	return view;
+    }
+
+    protected void onSend(final int key, final boolean isCtrl) {
+	if (key == 13 && !isCtrl) {
+	    onSend();
+	}
+    }
+
     protected void onSend() {
 	// TODO: Call to xmpp, meawhile:
 	String userAlias = currentRoom.getSessionUserAlias();
@@ -108,6 +115,16 @@ public class MultiRoomPresenter implements MultiRoom {
 	activateRoom(nextRoom);
     }
 
+    protected void onNoRooms() {
+	// TODO
+	view.hide();
+    }
+
+    protected void closeRoom(final String panelId) {
+	RoomPresenter room = getRoomFromPanelId(panelId);
+	room.doClose();
+    }
+
     private void activateRoom(final RoomPresenter nextRoom) {
 	currentRoom.saveInput(view.getInputText());
 	currentRoom = nextRoom;
@@ -118,16 +135,6 @@ public class MultiRoomPresenter implements MultiRoom {
 	view.setSubject(currentRoom.getSubject());
 	Integer index = (Integer) roomUsersPanels.get(currentRoom);
 	view.activeUsersPanel(index.intValue());
-    }
-
-    protected void onNoRooms() {
-	// TODO
-	view.hide();
-    }
-
-    protected void closeRoom(final String panelId) {
-	RoomPresenter room = getRoomFromPanelId(panelId);
-	room.doClose();
     }
 
     private RoomPresenter getPresenter(final RoomDTO room) {

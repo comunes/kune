@@ -28,6 +28,6 @@ public interface SiteBarServiceAsync {
 
     void logout(AsyncCallback callback);
 
-    void createUser(String shortName, String name, String email, String passwd, AsyncCallback asyncCallback);
+    void createUser(String shortName, String longName, String paswd, String email, AsyncCallback asyncCallback);
 
 }

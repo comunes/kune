@@ -29,4 +29,6 @@ public interface LoginForm {
     public void doLogin();
 
     public View getView();
+
+    public void doRegister();
 }

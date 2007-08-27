@@ -51,7 +51,7 @@ public class SiteBarServiceMocked implements SiteBarServiceAsync {
 	timer.schedule(1000);
     }
 
-    public void createUser(final String shortName, final String name, final String email, final String passwd,
+    public void createUser(final String shortName, final String longName, final String passwd, final String email,
 	    final AsyncCallback callback) {
 	timerAndSuccess(callback);
     }

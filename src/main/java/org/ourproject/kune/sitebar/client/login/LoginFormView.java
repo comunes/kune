@@ -24,10 +24,18 @@ import org.ourproject.kune.platf.client.View;
 
 public interface LoginFormView extends View {
 
-    public void clearData();
+    public void reset();
 
     public String getNickOrEmail();
 
-    public String getPassword();
+    public String getLoginPassword();
+
+    public String getShortName();
+
+    public String getLongName();
+
+    public String getEmail();
+
+    public String getRegisterPassword();
 
 }
