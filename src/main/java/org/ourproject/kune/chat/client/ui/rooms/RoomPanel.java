@@ -45,16 +45,15 @@ public class RoomPanel implements RoomView {
 	scroll = new ScrollPanel();
 	contentPanel.add(scroll);
 	vp = new VerticalPanel();
-	vp.setWidth("99%");
 	scroll.add(vp);
 	contentPanel.addStyleName("kune-RoomPanel-Conversation");
-	adjustScrolSize(412, 200);
+	adjustScrolSize(408, 200);
     }
 
     private void adjustScrolSize(final int width, final int height) {
 	FireLog.debug("width: " + width + ", height: " + height);
-	scroll.setWidth("" + (width - 1));
-	scroll.setHeight("" + (height - 1));
+	scroll.setWidth("" + (width - 2));
+	scroll.setHeight("" + (height - 2));
     }
 
     public void setRoomName(final String name) {

@@ -97,4 +97,15 @@ public class CustomButton implements SourcesClickEvents {
 	button.setVisible(b);
     }
 
+    public void setHeight(final String height) {
+	button.setHeight(height);
+    }
+
+    public void setWidth(final String width) {
+	button.setWidth(width);
+    }
+
+    public void addStyleName(final String style) {
+	button.addStyleName(style);
+    }
 }

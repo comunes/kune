@@ -218,12 +218,14 @@ public class TextEditorToolbar extends Composite {
 
 	this.panelListener = panelListener;
 
+	initWidget(outer);
+
 	outer.add(topPanel);
 	outer.setWidth("100%");
 	topPanel.setWidth("100%");
 	outer.setCellWidth(topPanel, "100%");
-
-	initWidget(outer);
+	topPanel.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
+	outer.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
 	setStyleName("gwt-RichTextToolbar");
 
 	if (basic != null) {
@@ -274,20 +276,25 @@ public class TextEditorToolbar extends Composite {
 	topPanel.add(expand);
 	topPanel.setCellWidth(expand, "100%");
 
-	save = new CustomButton("Save", new ClickListener() {
+	save = new CustomButton(strings.Save(), new ClickListener() {
 	    public void onClick(final Widget sender) {
 		if (save.isEnabled()) {
 		    fireSave();
 		}
 	    }
 	});
-	cancel = new CustomButton("Cancel", new ClickListener() {
+	save.addStyleName("kune-Button-Large-lSpace");
+
+	cancel = new CustomButton(strings.Cancel(), new ClickListener() {
 	    public void onClick(final Widget sender) {
 		if (cancel.isEnabled()) {
 		    fireCancel();
 		}
 	    }
 	});
+
+	cancel.addStyleName("kune-Button-Large-lrSpace");
+
 	if (basic != null) {
 	    topPanel.add(editHtml = createToggleButton(images.editHtml(), strings.EditHTML()));
 	}

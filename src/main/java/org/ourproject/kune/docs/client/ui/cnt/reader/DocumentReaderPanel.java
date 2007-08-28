@@ -39,7 +39,6 @@ public class DocumentReaderPanel extends VerticalPanel implements DocumentReader
 	btnEdit.setVisible(false);
 	content = new HTML("this is the content");
 	add(content);
-	// FIXME: Vicente, a ver si esto vale:
 	this.setWidth("100%");
 	this.setCellWidth(content, "100%");
     }
@@ -59,11 +58,14 @@ public class DocumentReaderPanel extends VerticalPanel implements DocumentReader
 	    }
 	}).getButton();
 	panel.add(btnEdit);
+	btnEdit.addStyleName("kune-Button-Large-lrSpace");
 	return panel;
     }
 
     public void setContent(final String text) {
-	content.setHTML(text + "<br><br>(content)");
+	if (text != null) {
+	    content.setHTML(text);
+	}
     }
 
     public void setEditEnabled(final boolean isEnabled) {

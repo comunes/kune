@@ -279,7 +279,7 @@ public class LoginFormPanel implements LoginFormView, View {
     }
 
     public Form createRegistrationForm() {
-	Form form = new Form("form-ct3", new FormConfig() {
+	Form form = new Form(new FormConfig() {
 	    {
 		setWidth(300);
 		setLabelWidth(75);
@@ -298,6 +298,12 @@ public class LoginFormPanel implements LoginFormView, View {
 		setName(NICK_FIELD);
 		setWidth(200);
 		setAllowBlank(false);
+		setMsgTarget("side");
+		setMinLength(3);
+		setMaxLength(15);
+		setMinLengthText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
+		// TODO: exclude spaces in nickname
+		setMaskRe("/^[a-zA-Z0-9_]+$/");
 	    }
 	});
 	form.add(shortNameRegField);
@@ -308,6 +314,7 @@ public class LoginFormPanel implements LoginFormView, View {
 		setName(LONGNAME_FIELD);
 		setWidth(200);
 		setAllowBlank(false);
+		setMsgTarget("side");
 	    }
 	});
 	form.add(longNameRegField);
@@ -319,6 +326,7 @@ public class LoginFormPanel implements LoginFormView, View {
 		setPassword(true);
 		setAllowBlank(false);
 		setWidth(200);
+		setMsgTarget("side");
 	    }
 	});
 	form.add(passwdRegField);
@@ -329,6 +337,7 @@ public class LoginFormPanel implements LoginFormView, View {
 		setName(EMAIL_FIELD);
 		setVtype(VType.EMAIL);
 		setWidth(200);
+		setMsgTarget("side");
 	    }
 	});
 	form.add(emailRegField);

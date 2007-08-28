@@ -66,6 +66,8 @@ public interface TextEditorStrings extends Constants {
 
     String Cancel();
 
+    String Close();
+
     String EditHTML();
 
 }
