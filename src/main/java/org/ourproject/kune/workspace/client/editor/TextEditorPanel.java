@@ -84,7 +84,7 @@ public class TextEditorPanel extends Composite implements TextEditorView {
     }
 
     public void setEnabledCancelButton(final boolean enabled) {
-	textEditorToolbar.setEnabledCancelButton(enabled);
+	textEditorToolbar.setEnabledCloseButton(enabled);
     }
 
     public void setTextSaveButton(final String text) {

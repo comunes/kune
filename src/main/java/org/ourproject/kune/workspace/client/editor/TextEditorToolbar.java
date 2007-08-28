@@ -196,7 +196,7 @@ public class TextEditorToolbar extends Composite {
     private MenuBar fonts;
     private MenuBar fontSizes;
     private final CustomButton save;
-    private final CustomButton cancel;
+    private final CustomButton close;
     private ToggleButton editHtml;
     private WebSafePalettePanel palettePanel;
     private final TextEditorPresenter panelListener;
@@ -285,22 +285,22 @@ public class TextEditorToolbar extends Composite {
 	});
 	save.addStyleName("kune-Button-Large-lSpace");
 
-	cancel = new CustomButton(strings.Cancel(), new ClickListener() {
+	close = new CustomButton(strings.Close(), new ClickListener() {
 	    public void onClick(final Widget sender) {
-		if (cancel.isEnabled()) {
+		if (close.isEnabled()) {
 		    fireCancel();
 		}
 	    }
 	});
 
-	cancel.addStyleName("kune-Button-Large-lrSpace");
+	close.addStyleName("kune-Button-Large-lrSpace");
 
 	if (basic != null) {
 	    topPanel.add(editHtml = createToggleButton(images.editHtml(), strings.EditHTML()));
 	}
 
 	topPanel.add(save.getButton());
-	topPanel.add(cancel.getButton());
+	topPanel.add(close.getButton());
     }
 
     private void fireEdit() {
@@ -422,8 +422,8 @@ public class TextEditorToolbar extends Composite {
 	save.setEnabled(enabled);
     }
 
-    public void setEnabledCancelButton(final boolean enabled) {
-	cancel.setEnabled(enabled);
+    public void setEnabledCloseButton(final boolean enabled) {
+	close.setEnabled(enabled);
     }
 
     public void setTextSaveButton(final String text) {

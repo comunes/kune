@@ -23,6 +23,7 @@ package org.ourproject.kune.platf.server.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
@@ -33,6 +34,9 @@ public class Data implements HasId {
     Long id;
 
     String title;
+
+    // http://openjpa.apache.org/docs/latest/manual/manual.html#jpa_overview_mapping_lob
+    @Lob
     char[] content;
 
     public String getTitle() {

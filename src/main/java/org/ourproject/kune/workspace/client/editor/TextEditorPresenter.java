@@ -64,15 +64,15 @@ public class TextEditorPresenter implements TextEditor {
 	}
     }
 
-    public void onSave() {
+    protected void onSave() {
 	listener.onSave(view.getHTML());
     }
 
-    public void onCancel() {
+    protected void onCancel() {
 	listener.onCancel();
     }
 
-    public void onEditHTML() {
+    protected void onEditHTML() {
 	if (editingHtml) {
 	    // normal editor
 	    String html = view.getText();
@@ -88,13 +88,13 @@ public class TextEditorPresenter implements TextEditor {
 	}
     }
 
-    public void afterSaved() {
+    public void onSaved() {
 	saveTimer.cancel();
 	savePending = false;
 	view.setEnabledSaveButton(false);
     }
 
-    public void afterFailedSave() {
+    public void onSaveFailed() {
 	saveTimer.schedule(20000);
     }
 

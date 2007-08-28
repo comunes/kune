@@ -3,6 +3,8 @@
 .kune-DocumentReaderPanel {
     background-color: #F2F2F2;
     padding: 2px;
+    height: 24px;
+    vertical-align: middle;
 }
 
 /* RTE Text editor */
@@ -20,6 +22,10 @@
     background-color: #F2F2F2;
     padding: 2px;
     height: 24px;
+    vertical-align: middle;
+}
+
+.gwt-RichTextToolbar table {
     vertical-align: middle;
 }
 

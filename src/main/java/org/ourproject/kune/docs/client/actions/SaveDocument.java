@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.docs.client.actions;
 
+import org.ourproject.kune.docs.client.ui.cnt.DocumentContent;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.sitebar.client.Site;
@@ -33,10 +34,10 @@ public class SaveDocument extends WorkspaceAction {
     public static final String EVENT = "docs.SaveDocument";
 
     public void execute(final Object value, final Object extra) {
-	save((StateDTO) value);
+	save((StateDTO) value, (DocumentContent) extra);
     }
 
-    private void save(final StateDTO content) {
+    private void save(final StateDTO content, final DocumentContent documentContent) {
 	// i18n: Saving
 	Site.showProgress("Saving");
 	ContentServiceAsync server = ContentService.App.getInstance();
@@ -45,12 +46,14 @@ public class SaveDocument extends WorkspaceAction {
 		// i18n: Error saving
 		Site.hideProgress();
 		Site.error("Error saving document");
+		documentContent.onSaveFailed();
 	    }
 
 	    public void onSuccess(final Object result) {
 		// i18n: Saved
 		Site.hideProgress();
 		Site.info("Document Saved");
+		documentContent.onSaved();
 	    }
 
 	});

@@ -28,4 +28,8 @@ public interface TextEditor {
     public void setContent(String content);
 
     public String getContent();
+
+    public void onSaved();
+
+    public void onSaveFailed();
 }

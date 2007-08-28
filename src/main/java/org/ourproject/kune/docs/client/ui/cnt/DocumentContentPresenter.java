@@ -49,16 +49,12 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
 	showContent();
     }
 
-    private void showContent() {
-	if (content.hasDocument()) {
-	    DocumentReader reader = components.getDocumentReader();
-	    reader.showDocument(content.getContent(), content.getContentRights());
-	    view.show(reader.getView());
-	} else {
-	    FolderViewer viewer = components.getFolderViewer();
-	    viewer.setFolder(content.getFolder());
-	    view.show(viewer.getView());
-	}
+    public void onSaved() {
+	components.getDocumentEditor().onSaved();
+    }
+
+    public void onSaveFailed() {
+	components.getDocumentEditor().onSaveFailed();
     }
 
     public void onEdit() {
@@ -76,7 +72,7 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
 
     public void onSave(final String text) {
 	content.setContent(text);
-	Dispatcher.App.instance.fire(SaveDocument.KEY, content);
+	Dispatcher.App.instance.fire(SaveDocument.KEY, content, this);
     }
 
     public void onCancel() {
@@ -88,11 +84,22 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
     }
 
     public void detach() {
-
     }
 
     public View getView() {
 	return view;
+    }
+
+    private void showContent() {
+	if (content.hasDocument()) {
+	    DocumentReader reader = components.getDocumentReader();
+	    reader.showDocument(content.getContent(), content.getContentRights());
+	    view.show(reader.getView());
+	} else {
+	    FolderViewer viewer = components.getFolderViewer();
+	    viewer.setFolder(content.getFolder());
+	    view.show(viewer.getView());
+	}
     }
 
 }
