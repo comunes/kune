@@ -1,5 +1,7 @@
 package org.ourproject.kune.platf.client.ui;
 
+import to.tipit.gwtlib.FireLog;
+
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
@@ -21,7 +23,7 @@ public class IconHyperlink extends Widget implements SourcesClickEvents {
     public IconHyperlink(final AbstractImagePrototype image) {
 	setElement(DOM.createDiv());
 	DOM.appendChild(getElement(), anchorElem = DOM.createAnchor());
-	sinkEvents(Event.ONCLICK);
+	sinkEvents(Event.ONCLICK | Event.ONDBLCLICK);
 	setStyleName("kune-IconHyperlink");
 	icon = image.createImage().getElement();
 	link = DOM.createSpan();
@@ -64,6 +66,8 @@ public class IconHyperlink extends Widget implements SourcesClickEvents {
 	    }
 	    History.newItem(targetHistoryToken);
 	    DOM.eventPreventDefault(event);
+	} else if (DOM.eventGetType(event) == Event.ONDBLCLICK) {
+	    FireLog.debug("Double click");
 	}
     }
 

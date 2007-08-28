@@ -68,6 +68,7 @@ public class UserManagerDefault implements UserManager {
 
     public User createUser(String shortName, String longName, String passwd, String email) {
 	User user = new User(shortName, longName, email, passwd);
+	persist(user);
 	return user;
     }
 

@@ -46,8 +46,9 @@ import com.gwtext.client.widgets.form.event.CheckboxListener;
 
 public class LicenseChooseFormPanel extends Composite implements LicenseChooseFormView {
 
-    protected static final String TYPEOFGROUP_FIELD = null;
-    protected static final String OTHER_LIC_FIELD = null;
+    protected static final String CC_LIC_FIELD = "cc-lic";
+    protected static final String OTHER_LIC_FIELD = "other-lic";
+
     private final LicenseChooseFormPresenter presenter;
     private final RadioButton ccRB;
     private final RadioButton allowModifRB;
@@ -154,7 +155,8 @@ public class LicenseChooseFormPanel extends Composite implements LicenseChooseFo
 
 	form.fieldset(new FieldSetConfig() {
 	    {
-		// setLegend(t.TypeOfGroup());
+		// i18n: type of license
+		setLegend("Type");
 		setHideLabels(true);
 		// setStyle("margin-left: 105px");
 	    }
@@ -162,7 +164,7 @@ public class LicenseChooseFormPanel extends Composite implements LicenseChooseFo
 
 	ccLicenses = new Radio(new CheckboxConfig() {
 	    {
-		setName(TYPEOFGROUP_FIELD);
+		setName(CC_LIC_FIELD);
 		setBoxLabel(t.CreativeCommons());
 		setAutoCreate(true);
 		setChecked(true);
