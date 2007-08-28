@@ -63,9 +63,7 @@ public class DocumentReaderPanel extends VerticalPanel implements DocumentReader
     }
 
     public void setContent(final String text) {
-	if (text != null) {
-	    content.setHTML(text);
-	}
+	content.setHTML(text);
     }
 
     public void setEditEnabled(final boolean isEnabled) {

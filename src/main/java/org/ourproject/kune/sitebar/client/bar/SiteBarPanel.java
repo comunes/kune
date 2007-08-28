@@ -27,6 +27,7 @@ import org.ourproject.kune.chat.client.ui.rooms.RoomPresenter;
 import org.ourproject.kune.chat.client.ui.rooms.RoomUser;
 import org.ourproject.kune.platf.client.dto.RoomDTO;
 import org.ourproject.kune.platf.client.group.NewGroupForm;
+import org.ourproject.kune.platf.client.ui.BorderDecorator;
 import org.ourproject.kune.platf.client.ui.dialogs.TwoButtonsDialog;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
@@ -36,6 +37,8 @@ import org.ourproject.kune.sitebar.client.services.Images;
 import org.ourproject.kune.sitebar.client.services.Translate;
 import org.ourproject.kune.workspace.client.ui.form.FormListener;
 
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -45,6 +48,7 @@ import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
@@ -85,6 +89,13 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	pipeSeparatorHtml2 = new HTML();
 	loginHyperlink = new Hyperlink();
 	logoutHyperlink = new Hyperlink();
+
+	HTML spaceSeparator1 = new HTML("<b></b>");
+	HTML spaceSeparator2 = new HTML("<b></b>");
+	MenuBar options = new MenuBar();
+	MenuBar optionsSubmenu = new MenuBar(true);
+	BorderDecorator optionsButton = new BorderDecorator(options, BorderDecorator.ALL, BorderDecorator.SIMPLE);
+
 	searchButton = new PushButton(img.kuneSearchIco().createImage(), img.kuneSearchIcoPush().createImage());
 	searchTextBox = new TextBox();
 	logoImage = new Image();
@@ -98,6 +109,9 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	siteBarHP.add(logoutHyperlink);
 	siteBarHP.add(pipeSeparatorHtml2);
 	siteBarHP.add(newGroupHyperlink);
+	siteBarHP.add(spaceSeparator1);
+	siteBarHP.add(optionsButton);
+	siteBarHP.add(spaceSeparator2);
 	siteBarHP.add(searchButton);
 	siteBarHP.add(searchTextBox);
 	siteBarHP.add(logoImage);
@@ -120,56 +134,35 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	pipeSeparatorHtml2.setHTML("|");
 	pipeSeparatorHtml2.setStyleName("kune-SiteBarPanel-Separator");
 	loginHyperlink.setText(t.Login());
-	loginHyperlink.addClickListener(new ClickListener() {
-	    public void onClick(final Widget arg0) {
-		// i18n:
-		presenter.doLogin();
+
+	options.addItem(t.Options(), true, optionsSubmenu);
+
+	optionsSubmenu.addItem("t.MyGroups()", true, new Command() {
+	    public void execute() {
+		// FIXME
+		Window.alert("In development!");
 	    }
 	});
-	logoutHyperlink.setText(t.Logout());
-	searchButton.addClickListener(new ClickListener() {
-	    public void onClick(final Widget arg0) {
-		MultiRoom rooms = ChatFactory.createChatMultiRoom();
-		MultiRoomPanel view = (MultiRoomPanel) rooms.getView();
-		view.show();
-
-		RoomDTO room1 = new RoomDTO("chat1@talks.localhost");
-		room1.setSubject("Welcome to chat1, today topic: Cultural issues in Brazil");
-		RoomPresenter room1Presenter = rooms.createRoom(room1, "luther.b");
-		rooms.join(room1, "luther.b", RoomUser.MODERADOR);
-		room1Presenter.addMessage("luther.b", "Mensaje de test en room1");
-
-		RoomDTO room2 = new RoomDTO("chat2@talks.localhost");
-		room2.setSubject("Welcome to this room: we are talking today about 2009 meeting");
-		RoomPresenter room2Presenter = rooms.createRoom(room2, "luther");
-		rooms.join(room2, "luther", RoomUser.MODERADOR);
-		room2Presenter.addMessage("luther", "Mensaje de test en room2");
-		room2Presenter.addEventMessage("Mensaje de evento en room2");
-		room2Presenter.addDelimiter("17:35");
-
-		// presenter.doSearch(searchTextBox.getText());
+	optionsSubmenu.addItem(t.HelpWithTranslation(), true, new Command() {
+	    public void execute() {
+		// FIXME
+		Window.alert("In development!");
 	    }
 	});
-	logoutHyperlink.addClickListener(new ClickListener() {
-	    public void onClick(final Widget arg0) {
-		presenter.doLogout();
+	optionsSubmenu.addItem(t.Help(), true, new Command() {
+	    public void execute() {
+		// FIXME
+		Window.alert("In develoopment!");
 	    }
 	});
-	searchTextBox.addKeyboardListener(new KeyboardListener() {
-	    public void onKeyDown(final Widget arg0, final char arg1, final int arg2) {
-	    }
+	options.setStyleName("kune-MenuBar");
+	optionsButton.setColor("AAA");
+	optionsButton.setHeight("16px");
+	spaceSeparator1.setStyleName("kune-SiteBarPanel-SpaceSeparator");
+	spaceSeparator2.setStyleName("kune-SiteBarPanel-SpaceSeparator");
 
-	    public void onKeyPress(final Widget arg0, final char arg1, final int arg2) {
-	    }
+	createListeners(presenter);
 
-	    public void onKeyUp(final Widget widget, final char key, final int mod) {
-		if (key == KEY_ENTER) {
-		    if (searchTextBox.getText().length() > 0) {
-			presenter.doSearch(searchTextBox.getText());
-		    }
-		}
-	    }
-	});
 	searchTextBox.setWidth("180");
 	searchTextBox.setText(t.Search());
 
@@ -252,6 +245,59 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     public void hideProgress() {
 	spinProcessing.setVisible(false);
 	textProcessingLabel.setVisible(false);
+    }
+
+    private void createListeners(final SiteBarPresenter presenter) {
+	loginHyperlink.addClickListener(new ClickListener() {
+	    public void onClick(final Widget arg0) {
+		// i18n:
+		presenter.doLogin();
+	    }
+	});
+	logoutHyperlink.setText(t.Logout());
+	searchButton.addClickListener(new ClickListener() {
+	    public void onClick(final Widget arg0) {
+		MultiRoom rooms = ChatFactory.createChatMultiRoom();
+		MultiRoomPanel view = (MultiRoomPanel) rooms.getView();
+		view.show();
+
+		RoomDTO room1 = new RoomDTO("chat1@talks.localhost");
+		room1.setSubject("Welcome to chat1, today topic: Cultural issues in Brazil");
+		RoomPresenter room1Presenter = rooms.createRoom(room1, "luther.b");
+		rooms.join(room1, "luther.b", RoomUser.MODERADOR);
+		room1Presenter.addMessage("luther.b", "Mensaje de test en room1");
+
+		RoomDTO room2 = new RoomDTO("chat2@talks.localhost");
+		room2.setSubject("Welcome to this room: we are talking today about 2009 meeting");
+		RoomPresenter room2Presenter = rooms.createRoom(room2, "luther");
+		rooms.join(room2, "luther", RoomUser.MODERADOR);
+		room2Presenter.addMessage("luther", "Mensaje de test en room2");
+		room2Presenter.addEventMessage("Mensaje de evento en room2");
+		room2Presenter.addDelimiter("17:35");
+
+		// presenter.doSearch(searchTextBox.getText());
+	    }
+	});
+	logoutHyperlink.addClickListener(new ClickListener() {
+	    public void onClick(final Widget arg0) {
+		presenter.doLogout();
+	    }
+	});
+	searchTextBox.addKeyboardListener(new KeyboardListener() {
+	    public void onKeyDown(final Widget arg0, final char arg1, final int arg2) {
+	    }
+
+	    public void onKeyPress(final Widget arg0, final char arg1, final int arg2) {
+	    }
+
+	    public void onKeyUp(final Widget widget, final char key, final int mod) {
+		if (key == KEY_ENTER) {
+		    if (searchTextBox.getText().length() > 0) {
+			presenter.doSearch(searchTextBox.getText());
+		    }
+		}
+	    }
+	});
     }
 
 }

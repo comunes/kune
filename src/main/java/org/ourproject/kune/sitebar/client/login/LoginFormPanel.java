@@ -301,7 +301,9 @@ public class LoginFormPanel implements LoginFormView, View {
 		setMsgTarget("side");
 		setMinLength(3);
 		setMaxLength(15);
+		// i18n
 		setMinLengthText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
+		setMaxLengthText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
 		// TODO: exclude spaces in nickname
 		setMaskRe("/^[a-zA-Z0-9_]+$/");
 	    }
@@ -325,6 +327,7 @@ public class LoginFormPanel implements LoginFormView, View {
 		setName(PASSWORD_FIELD);
 		setPassword(true);
 		setAllowBlank(false);
+		setMinLength(6);
 		setWidth(200);
 		setMsgTarget("side");
 	    }

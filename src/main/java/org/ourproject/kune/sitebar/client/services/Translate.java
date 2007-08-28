@@ -40,6 +40,8 @@ public interface Translate extends Constants {
 
     String Help();
 
+    String Options();
+
     String GlobalSiteOptions();
 
     String ContactUs();
@@ -63,5 +65,7 @@ public interface Translate extends Constants {
     String UserNameOrEmail();
 
     String SignIn();
+
+    String MyGroups();
 
 }
