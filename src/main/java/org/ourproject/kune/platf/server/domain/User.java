@@ -55,9 +55,9 @@ public class User implements HasId {
     @Column(unique = true)
     private String shortName;
 
-    public User(final String name, final String shortName, final String email, final String password) {
-	this.name = name;
+    public User(final String shortName, final String name, final String email, final String password) {
 	this.shortName = shortName;
+	this.name = name;
 	this.email = email;
 	this.password = password;
 	this.userGroup = null;

@@ -135,11 +135,16 @@ public class LoginFormPanel implements LoginFormView, View {
 		setTitle(t.SignIn());
 	    }
 	}, center);
+
 	final BorderLayout layout = dialog.getLayout();
 	layout.beginUpdate();
 
 	ContentPanel signInPanel = new ContentPanel(Ext.generateId(), t.SignIn());
+
 	signInForm = createSignInForm();
+
+	signInForm.addStyleName("kune-Default-Form");
+
 	VerticalPanel signInWrapper = new VerticalPanel() {
 	    {
 		setSpacing(30);
@@ -160,6 +165,9 @@ public class LoginFormPanel implements LoginFormView, View {
 	});
 
 	registerForm = createRegistrationForm();
+
+	registerForm.addStyleName("kune-Default-Form");
+
 	VerticalPanel registerWrapper = new VerticalPanel() {
 	    {
 		setSpacing(30);

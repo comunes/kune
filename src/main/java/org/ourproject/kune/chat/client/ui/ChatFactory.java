@@ -93,8 +93,7 @@ public class ChatFactory {
 	message = message.replaceAll(":-\\*", RoomImages.App.getInstance().kissing().getHTML());
 	message = message.replaceAll(":\\*", RoomImages.App.getInstance().kissing().getHTML());
 
-	message = message.replaceAll(":-\\/", RoomImages.App.getInstance().uncertain().getHTML());
-	message = message.replaceAll(":\\/", RoomImages.App.getInstance().uncertain().getHTML());
+	message = message.replaceAll(":-/", RoomImages.App.getInstance().uncertain().getHTML());
 
 	message = message.replaceAll(";\\)", RoomImages.App.getInstance().wink().getHTML());
 	message = message.replaceAll(";-\\)", RoomImages.App.getInstance().wink().getHTML());

@@ -33,7 +33,7 @@ public class UserManagerTest extends PersistenceTest {
 	openTransaction();
 	assertEquals(0, userFinder.getAll().size());
 	assertEquals(0, groupFinder.getAll().size());
-	user = new User(USER_LONG_NAME, USER_SHORT_NAME, USER_EMAIL, USER_PASSWORD);
+	user = new User(USER_SHORT_NAME, USER_LONG_NAME, USER_EMAIL, USER_PASSWORD);
 	persist(user);
     }
 

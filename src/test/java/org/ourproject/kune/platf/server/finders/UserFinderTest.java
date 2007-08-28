@@ -20,8 +20,8 @@ public class UserFinderTest extends PersistenceTest {
     @Before
     public void addData() {
 	openTransaction();
-	persist(new User("the name1", "shortName1", "one@here.com", "password1"));
-	persist(new User("the name2", "shortName2", "two@here.com", "password1"));
+	persist(new User("shortName1", "the name1", "one@here.com", "password1"));
+	persist(new User("shortName2", "the name2", "two@here.com", "password1"));
     }
 
     @Test

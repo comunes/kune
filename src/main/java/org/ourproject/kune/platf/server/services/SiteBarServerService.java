@@ -23,25 +23,32 @@ package org.ourproject.kune.platf.server.services;
 import org.ourproject.kune.platf.client.errors.UserAuthException;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.wideplay.warp.persist.TransactionType;
+import com.wideplay.warp.persist.Transactional;
 
 @Singleton
 public class SiteBarServerService implements SiteBarService {
 
     private final UserManager userManager;
     private final UserSession session;
+    private final GroupManager groupManager;
 
     @Inject
-    public SiteBarServerService(final UserSession session, final UserManager userManager) {
+    public SiteBarServerService(final UserSession session, final UserManager userManager,
+	    final GroupManager groupManager) {
 	this.session = session;
 	this.userManager = userManager;
+	this.groupManager = groupManager;
     }
 
+    @Transactional(type = TransactionType.READ_ONLY)
     public void login(final String nickOrEmail, final String passwd) throws SerializableException {
 	User user = userManager.login(nickOrEmail, passwd);
 	if (user != null) {
@@ -51,12 +58,21 @@ public class SiteBarServerService implements SiteBarService {
 	}
     }
 
+    @Transactional(type = TransactionType.READ_ONLY)
     public void logout() throws SerializableException {
 	// TODO: clear cookie
 	session.setUser(null);
     }
 
-    public void createUser(final String shortName, final String longName, final String passwd, final String email) {
-	// TODO
+    @Transactional(type = TransactionType.READ_WRITE)
+    public void createUser(final String shortName, final String longName, final String passwd, final String email)
+	    throws SerializableException {
+	User user = userManager.createUser(shortName, longName, passwd, email);
+	groupManager.createUserGroup(user);
+	if (user != null) {
+	    session.setUser(user);
+	} else {
+	    throw new SerializableException();
+	}
     }
 }

@@ -30,7 +30,7 @@ public class GroupManagerTest extends PersistenceTest {
 	openTransaction();
 	assertEquals(0, userFinder.getAll().size());
 	assertEquals(0, groupFinder.getAll().size());
-	user = new User("the user name", "userName", "email", "userPassword");
+	user = new User("userName", "the user name", "email", "userPassword");
 	groupManager.createUserGroup(user);
     }
 

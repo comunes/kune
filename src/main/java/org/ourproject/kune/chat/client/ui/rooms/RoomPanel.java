@@ -47,7 +47,7 @@ public class RoomPanel implements RoomView {
 	vp = new VerticalPanel();
 	vp.setWidth("99%");
 	scroll.add(vp);
-	vp.addStyleName("kune-RoomPanel-Conversation");
+	contentPanel.addStyleName("kune-RoomPanel-Conversation");
 	adjustScrolSize(412, 200);
     }
 

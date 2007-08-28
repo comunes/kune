@@ -65,14 +65,14 @@ public class DatabaseInitializer {
 	String adminShortName = properties.getAdminShortName();
 	String adminEmail = properties.getAdminEmail();
 	String adminPassword = properties.getAdminPassword();
-	User user = new User(adminName, adminShortName, adminEmail, adminPassword);
+	User user = new User(adminShortName, adminName, adminEmail, adminPassword);
 	groupManager.createUserGroup(user);
 
 	String siteName = properties.getDefaultSiteName();
 	String siteShortName = properties.getDefaultSiteShortName();
 	String siteEmail = properties.getDefaultSiteAdminEmail();
 	String sitePassword = properties.getDefaultSiteAdminPassword();
-	user = new User(siteName, siteShortName, siteEmail, sitePassword);
+	user = new User(siteShortName, siteName, siteEmail, sitePassword);
 	groupManager.createUserGroup(user);
     }
 
