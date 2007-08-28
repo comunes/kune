@@ -75,7 +75,7 @@ public class LoginFormPresenter implements LoginForm {
 	final String email = view.getEmail();
 
 	SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
-	siteBarService.createUser(shortName, longName, passwd, email, new AsyncCallback() {
+	siteBarService.createUser(shortName, longName, email, passwd, new AsyncCallback() {
 
 	    public void onFailure(final Throwable arg0) {
 		// i18n: Error creating user

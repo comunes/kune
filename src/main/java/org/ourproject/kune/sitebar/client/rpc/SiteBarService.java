@@ -30,7 +30,7 @@ public interface SiteBarService extends RemoteService {
 
     void login(String nickOrEmail, String passwd) throws SerializableException;
 
-    void createUser(String shortName, String longName, String passwd, String email) throws SerializableException;
+    void createUser(String shortName, String longName, String email, String passwd) throws SerializableException;
 
     void logout() throws SerializableException;
 

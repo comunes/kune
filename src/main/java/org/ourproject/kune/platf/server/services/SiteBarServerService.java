@@ -65,9 +65,9 @@ public class SiteBarServerService implements SiteBarService {
     }
 
     @Transactional(type = TransactionType.READ_WRITE)
-    public void createUser(final String shortName, final String longName, final String passwd, final String email)
+    public void createUser(final String shortName, final String longName, final String email, final String passwd)
 	    throws SerializableException {
-	User user = userManager.createUser(shortName, longName, passwd, email);
+	User user = userManager.createUser(shortName, longName, email, passwd);
 	groupManager.createUserGroup(user);
 	if (user != null) {
 	    session.setUser(user);

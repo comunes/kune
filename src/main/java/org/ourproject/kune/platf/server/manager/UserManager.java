@@ -25,5 +25,5 @@ import org.ourproject.kune.platf.server.domain.User;
 public interface UserManager {
     User login(String nickOrEmail, String passwd);
 
-    User createUser(String shortName, String longName, String passwd, String email);
+    User createUser(String shortName, String longName, String email, String passwd);
 }
