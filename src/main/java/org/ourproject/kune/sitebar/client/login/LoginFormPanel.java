@@ -127,9 +127,9 @@ public class LoginFormPanel implements LoginFormView, View {
 	    {
 		setModal(true);
 		setWidth(400);
-		setHeight(270);
+		setHeight(300);
 		setShadow(true);
-		setResizable(false);
+		setResizable(true);
 		setClosable(false);
 		setProxyDrag(true);
 		setTitle(t.SignIn());
