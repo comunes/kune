@@ -137,7 +137,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 
 	options.addItem(t.Options(), true, optionsSubmenu);
 
-	optionsSubmenu.addItem("t.MyGroups()", true, new Command() {
+	optionsSubmenu.addItem(t.MyGroups(), true, new Command() {
 	    public void execute() {
 		// FIXME
 		Window.alert("In development!");
