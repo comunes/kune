@@ -14,7 +14,7 @@ import com.google.inject.Inject;
 public class Xmpp2ManagerTest {
 
     @Inject
-    Xmpp2Manager manager;
+    XmppManager manager;
 
     @Before
     public void init() {

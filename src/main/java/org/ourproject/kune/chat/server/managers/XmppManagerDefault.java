@@ -35,9 +35,9 @@ import org.jivesoftware.smackx.muc.MultiUserChat;
 import com.google.inject.Singleton;
 
 @Singleton
-public class Xmpp2ManagerDefault implements Xmpp2Manager {
+public class XmppManagerDefault implements XmppManager {
 
-    public Xmpp2ManagerDefault() {
+    public XmppManagerDefault() {
     }
 
     public ChatConnection login(final String userName, final String password) {
@@ -131,5 +131,11 @@ public class Xmpp2ManagerDefault implements Xmpp2Manager {
     private boolean isNotList(final String type) {
 	return !FormField.TYPE_JID_MULTI.equals(type) && !FormField.TYPE_LIST_MULTI.equals(type)
 		&& !FormField.TYPE_LIST_SINGLE.equals(type) && !isVisible(type);
+    }
+
+    public void disconnect(final ChatConnection connection) {
+	XmppConnection xConn = (XmppConnection) connection;
+	xConn.getConn().disconnect();
+
     }
 }

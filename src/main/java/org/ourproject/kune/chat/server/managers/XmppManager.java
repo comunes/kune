@@ -20,8 +20,11 @@
 
 package org.ourproject.kune.chat.server.managers;
 
-public interface Xmpp2Manager {
+public interface XmppManager {
+
     ChatConnection login(String userName, String password);
+
+    void disconnect(ChatConnection connection);
 
     Room createRoom(ChatConnection connection, String roomName, String ownerAlias);
 
