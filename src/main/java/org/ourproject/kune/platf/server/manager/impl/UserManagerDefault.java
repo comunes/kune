@@ -22,20 +22,23 @@ package org.ourproject.kune.platf.server.manager.impl;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.UserManager;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 @Singleton
-public class UserManagerDefault implements UserManager {
+public class UserManagerDefault extends DefaultManager<User, Long> implements UserManager {
     private final User finder;
 
     @Inject
-    public UserManagerDefault(final User finder) {
+    public UserManagerDefault(final Provider<EntityManager> provider, final User finder) {
+	super(provider, User.class);
 	this.finder = finder;
     }
 
@@ -69,6 +72,10 @@ public class UserManagerDefault implements UserManager {
     public User createUser(final String shortName, final String longName, final String email, final String passwd) {
 	User user = new User(shortName, longName, email, passwd);
 	return user;
+    }
+
+    public User find(final Long userId) {
+	return userId != null ? super.find(userId) : null;
     }
 
 }

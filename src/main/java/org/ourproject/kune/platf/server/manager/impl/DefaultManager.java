@@ -54,4 +54,11 @@ public abstract class DefaultManager<T, K> {
 	return getEntityManager().merge(entity);
     }
 
+    /**
+     * use carefully!!!
+     */
+    protected <X> X find(final Class<X> entityClass, final Long primaryKey) {
+	return getEntityManager().find(entityClass, primaryKey);
+    }
+
 }

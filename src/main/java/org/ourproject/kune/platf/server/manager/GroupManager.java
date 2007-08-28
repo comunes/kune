@@ -29,6 +29,8 @@ public interface GroupManager extends Manager<Group, Long> {
 
     Group findByShortName(String groupName);
 
+    // FIXME: (dani) no entiendo por qué estos dos métodos (los he hecho yo ;)
+    // seguro que tiene razón de ser, pero el nombre no lo refleja!!!
     Group createGroup(String shortName, String longName, User user) throws SerializableException;
 
     Group createGroup(Group group, User user) throws SerializableException;
@@ -37,6 +39,12 @@ public interface GroupManager extends Manager<Group, Long> {
 
     Group getDefaultGroup();
 
-    // User createUser(User user) throws SerializableException;
+    /**
+     * IMPORTANT: returns null if userId is null
+     * 
+     * @param userId
+     * @return
+     */
+    Group getGroupOfUserWithId(Long userId);
 
 }

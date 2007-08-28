@@ -55,11 +55,12 @@ import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
 
 import com.google.inject.AbstractModule;
 import com.wideplay.warp.persist.PersistenceService;
+import com.wideplay.warp.persist.UnitOfWork;
 
 public class PlatformServerModule extends AbstractModule {
     @Override
     protected void configure() {
-	install(PersistenceService.usingJpa().buildModule());
+	install(PersistenceService.usingJpa().across(UnitOfWork.TRANSACTION).buildModule());
 	bind(KunePersistenceService.class);
 
 	bindManagers();

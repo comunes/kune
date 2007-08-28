@@ -20,25 +20,28 @@
 
 package org.ourproject.kune.platf.server;
 
-import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 
 import com.google.inject.servlet.SessionScoped;
 
 @SessionScoped
 public class UserSession {
-    private User user;
     private String hash;
+    private Long userId;
 
     public UserSession() {
     }
 
-    public User getUser() {
-	return user;
+    public Long getUserId() {
+	return userId;
+    }
+
+    public void setUserId(final Long userId) {
+	this.userId = userId;
     }
 
     public User setUser(final User user) {
-	this.user = user;
+	this.userId = user.getId();
 	return user;
     }
 
@@ -48,10 +51,6 @@ public class UserSession {
 
     public void setHash(final String hash) {
 	this.hash = hash;
-    }
-
-    public Group getGroup() {
-	return user != null ? user.getUserGroup() : null;
     }
 
 }

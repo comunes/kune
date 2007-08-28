@@ -26,4 +26,12 @@ public interface UserManager {
     User login(String nickOrEmail, String passwd);
 
     User createUser(String shortName, String longName, String email, String passwd);
+
+    /**
+     * IMPORTANT: if userId == null, it returns null
+     * 
+     * @param userId
+     * @return
+     */
+    User find(Long userId);
 }

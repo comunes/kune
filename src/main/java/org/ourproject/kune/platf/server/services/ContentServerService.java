@@ -35,6 +35,7 @@ import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
+import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.platf.server.state.State;
 import org.ourproject.kune.platf.server.state.StateService;
@@ -53,15 +54,17 @@ public class ContentServerService implements ContentService {
     private final GroupManager groupManager;
     private final Accessor accessor;
     private final CreationService creationService;
+    private final UserManager userManager;
 
     @Inject
     public ContentServerService(final UserSession session, final Accessor contentAccess,
-	    final StateService stateService, final CreationService creationService, final GroupManager groupManager,
-	    final Mapper mapper) {
+	    final StateService stateService, final CreationService creationService, final UserManager userManager,
+	    final GroupManager groupManager, final Mapper mapper) {
 	this.session = session;
 	this.accessor = contentAccess;
 	this.stateService = stateService;
 	this.creationService = creationService;
+	this.userManager = userManager;
 	this.groupManager = groupManager;
 	this.mapper = mapper;
     }
@@ -69,9 +72,17 @@ public class ContentServerService implements ContentService {
     @Transactional(type = TransactionType.READ_ONLY)
     public StateDTO getContent(final String userHash, final StateToken token) throws ContentNotFoundException,
 	    AccessViolationException {
-	User user = session.getUser();
-	Group contentGroup = user != null ? user.getUserGroup() : groupManager.getDefaultGroup();
-	Group loggedGroup = user != null ? user.getUserGroup() : null;
+	Group contentGroup;
+	Group loggedGroup;
+
+	Long userId = session.getUserId();
+	if (userId == null) {
+	    contentGroup = groupManager.getDefaultGroup();
+	    loggedGroup = null;
+	} else {
+	    contentGroup = groupManager.getGroupOfUserWithId(userId);
+	    loggedGroup = contentGroup;
+	}
 
 	Access access = accessor.getAccess(token, contentGroup, loggedGroup, AccessType.READ);
 	State state = stateService.create(access);
@@ -84,7 +95,7 @@ public class ContentServerService implements ContentService {
 	    ContentNotFoundException {
 
 	Long contentId = parseId(documentId);
-	Group userGroup = session.getUser().getUserGroup();
+	Group userGroup = groupManager.getGroupOfUserWithId(session.getUserId());
 	Access access = accessor.getContentAccess(contentId, userGroup, AccessType.EDIT);
 	Content descriptor = creationService.saveContent(userGroup, access.getDescriptor(), content);
 	return descriptor.getVersion();
@@ -95,8 +106,8 @@ public class ContentServerService implements ContentService {
     public StateDTO addContent(final String userHash, final Long parentFolderId, final String title)
 	    throws AccessViolationException, ContentNotFoundException {
 
-	User user = session.getUser();
-	Group group = session.getGroup();
+	User user = userManager.find(session.getUserId());
+	Group group = groupManager.getGroupOfUserWithId(session.getUserId());
 	Access access = accessor.getFolderAccess(parentFolderId, group, AccessType.EDIT);
 	access.setDescriptorWidthFolderRights(creationService.createContent(title, user, access.getFolder()));
 	State state = stateService.create(access);

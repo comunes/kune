@@ -22,7 +22,10 @@ public class GroupManagerTest extends PersistenceTest {
     Group groupFinder;
     @Inject
     GroupManager groupManager;
+    @Inject
+    UserManager userManager;
 
+    private Long userId;
     private User user;
 
     @Before
@@ -30,7 +33,8 @@ public class GroupManagerTest extends PersistenceTest {
 	openTransaction();
 	assertEquals(0, userFinder.getAll().size());
 	assertEquals(0, groupFinder.getAll().size());
-	user = new User("userName", "the user name", "email", "userPassword");
+	user = userManager.createUser("userName", "the user name", "email", "userPassword");
+	userId = user.getId();
 	groupManager.createUserGroup(user);
     }
 

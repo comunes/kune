@@ -5,34 +5,30 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.junit.Before;
-import org.junit.Test;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
-
-import com.google.inject.Inject;
 
 public class Xmpp2ManagerTest {
 
-    @Inject
+    // @Inject
     XmppManager manager;
 
-    @Before
+    // @Before
     public void init() {
 	IntegrationTestHelper.createInjector().injectMembers(this);
     }
 
-    @Test
+    // @Test
     public void testConnection() {
 	ChatConnection handler1 = manager.login("testUser1", "easy1");
 	assertNotNull(handler1);
     }
 
-    @Test(expected = ChatException.class)
+    // @Test(expected = ChatException.class)
     public void testUserDontExist() {
 	manager.login("user", "passowrd");
     }
 
-    @Test
+    // @Test
     public void testBroadcast() {
 	String roomName = "roomName";
 	ChatConnection conn1 = manager.login("testUser1", "easy1");

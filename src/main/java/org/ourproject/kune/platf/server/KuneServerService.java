@@ -28,8 +28,10 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.rpc.KuneService;
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
+import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 
 import com.google.gwt.user.client.rpc.SerializableException;
@@ -45,11 +47,13 @@ public class KuneServerService implements KuneService {
     private final UserSession session;
     private final LicenseManager licenseManager;
     private static final Log log = LogFactory.getLog(KuneServerService.class);
+    private final UserManager userManager;
 
     @Inject
-    public KuneServerService(final UserSession session, final GroupManager groupManager,
+    public KuneServerService(final UserSession session, final UserManager userManager, final GroupManager groupManager,
 	    final LicenseManager licenseManager, final Mapper mapper) {
 	this.session = session;
+	this.userManager = userManager;
 	this.groupManager = groupManager;
 	this.licenseManager = licenseManager;
 	this.mapper = mapper;
@@ -59,7 +63,8 @@ public class KuneServerService implements KuneService {
     public void createNewGroup(final GroupDTO group) throws SerializableException {
 	log.debug(group.getShortName() + group.getLongName() + group.getPublicDesc() + group.getDefaultLicense()
 		+ group.getType());
-	groupManager.createGroup(mapper.map(group, Group.class), session.getUser());
+	User user = userManager.find(session.getUserId());
+	groupManager.createGroup(mapper.map(group, Group.class), user);
     }
 
     @Transactional(type = TransactionType.READ_ONLY)

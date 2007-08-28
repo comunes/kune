@@ -100,4 +100,8 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 	}
 	persist(group);
     }
+
+    public Group getGroupOfUserWithId(final Long userId) {
+	return userId != null ? find(User.class, userId).getUserGroup() : null;
+    }
 }
