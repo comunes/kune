@@ -298,9 +298,14 @@
 }
 
 /* Main Content & Context */
+
 .kune-WorkspacePanel-Content {
     background-color: #FFF;
     width: 100%;
+}
+
+.kune-WorkspacePanel-Content .main-content {
+    margin: 0 5px 5px 5px;
 }
 
 .kune-WorkspacePanel-Context {
