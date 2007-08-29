@@ -116,7 +116,6 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	contentVP.add(widget);
 	widget.setWidth("100%");
 	contentVP.setCellWidth(widget, "100%");
-	widget.addStyleName("main-content");
     }
 
     public void setContext(final View contextMenu) {
@@ -130,11 +129,11 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     }
 
     public void adjustSize(final int windowWidth, final int windowHeight) {
-	int contextWidth = windowWidth - 163; // 150
-	int contextHeight = windowHeight - 175;
+	int contentWidth = windowWidth - 163; // 150
+	int contentHeight = windowHeight - 175;
 
-	cntcxtHSP.setSize("" + contextWidth + "px", "" + contextHeight + "px");
-	cntcxtHSP.setSplitPosition("" + (contextWidth - 175) + "px");
+	cntcxtHSP.setSize("" + contentWidth + "px", "" + contentHeight + "px");
+	cntcxtHSP.setSplitPosition("" + (contentWidth - 175) + "px");
     }
 
 }

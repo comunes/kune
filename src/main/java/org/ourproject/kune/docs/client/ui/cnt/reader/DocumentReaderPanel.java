@@ -41,6 +41,7 @@ public class DocumentReaderPanel extends VerticalPanel implements DocumentReader
 	add(content);
 	this.setWidth("100%");
 	this.setCellWidth(content, "100%");
+	content.addStyleName("main-content");
     }
 
     private Widget createToolBar(final DocumentReaderListener listener) {

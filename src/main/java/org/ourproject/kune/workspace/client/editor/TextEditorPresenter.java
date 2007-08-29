@@ -69,6 +69,7 @@ public class TextEditorPresenter implements TextEditor {
     }
 
     protected void onCancel() {
+	reset();
 	listener.onCancel();
     }
 
@@ -89,6 +90,10 @@ public class TextEditorPresenter implements TextEditor {
     }
 
     public void onSaved() {
+	reset();
+    }
+
+    private void reset() {
 	saveTimer.cancel();
 	savePending = false;
 	view.setEnabledSaveButton(false);
