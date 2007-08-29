@@ -75,6 +75,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	final BorderLayout layout = dialog.getLayout();
 	layout.beginUpdate();
 
+	// FIXME: esto debería ir en el factory
 	RoomPanel chatRoomPanel = new RoomPanel(roomPresenter);
 	roomPresenter.init(chatRoomPanel);
 	layout.add(LayoutRegionConfig.CENTER, chatRoomPanel.getContentPanel());

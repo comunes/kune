@@ -6,7 +6,7 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-class RoomUserListPanel extends VerticalPanel implements RoomUserListView {
+public class RoomUserListPanel extends VerticalPanel implements RoomUserListView {
     public RoomUserListPanel() {
     }
 

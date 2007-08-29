@@ -22,13 +22,17 @@ package org.ourproject.kune.chat.client.ui;
 
 import org.ourproject.kune.chat.client.ChatEngine;
 import org.ourproject.kune.chat.client.rooms.MultiRoom;
+import org.ourproject.kune.chat.client.rooms.ui.MultiRoomListener;
 import org.ourproject.kune.chat.client.rooms.ui.MultiRoomPanel;
 import org.ourproject.kune.chat.client.rooms.ui.MultiRoomPresenter;
+import org.ourproject.kune.chat.client.rooms.ui.RoomUserList;
+import org.ourproject.kune.chat.client.rooms.ui.RoomUserListPanel;
+import org.ourproject.kune.chat.client.rooms.ui.RoomUserListPresenter;
 import org.ourproject.kune.chat.client.ui.cnt.ChatContent;
 import org.ourproject.kune.chat.client.ui.cnt.ChatContentPresenter;
-import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomViewer;
-import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomViewerListener;
-import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomViewerPanel;
+import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoom;
+import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomListener;
+import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomPanel;
 import org.ourproject.kune.chat.client.ui.ctx.ChatContext;
 import org.ourproject.kune.chat.client.ui.ctx.ChatContextPresenter;
 import org.ourproject.kune.chat.client.ui.ctx.rooms.RoomsAdmin;
@@ -36,7 +40,6 @@ import org.ourproject.kune.chat.client.ui.ctx.rooms.RoomsAdminPresenter;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckPanel;
 import org.ourproject.kune.workspace.client.ui.WorkspaceFactory;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
-
 
 public class ChatFactory {
 
@@ -58,16 +61,23 @@ public class ChatFactory {
 	return presenter;
     }
 
-    public static MultiRoom createChatMultiRoom() {
-	MultiRoomPresenter presenter = new MultiRoomPresenter();
+    public static MultiRoom createChatMultiRoom(final MultiRoomListener listener) {
+	MultiRoomPresenter presenter = new MultiRoomPresenter(listener);
 	MultiRoomPanel panel = new MultiRoomPanel(presenter);
 	presenter.init(panel);
 	return presenter;
     }
 
-    public static ChatRoomViewer createChatRoomViewer(final ChatRoomViewerListener listener) {
-	ChatRoomViewerPanel panel = new ChatRoomViewerPanel(listener);
+    public static ChatRoom createChatRoomViewer(final ChatRoomListener listener) {
+	ChatRoomPanel panel = new ChatRoomPanel(listener);
 	return panel;
+    }
+
+    public static RoomUserList createUserList() {
+	RoomUserListPresenter userListPresenter = new RoomUserListPresenter();
+	RoomUserListPanel panel = new RoomUserListPanel();
+	userListPresenter.init(panel);
+	return userListPresenter;
     }
 
 }

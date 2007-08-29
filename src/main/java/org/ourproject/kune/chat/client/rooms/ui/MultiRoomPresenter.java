@@ -23,28 +23,38 @@ package org.ourproject.kune.chat.client.rooms.ui;
 import org.ourproject.kune.chat.client.rooms.MultiRoom;
 import org.ourproject.kune.chat.client.rooms.Room;
 import org.ourproject.kune.chat.client.rooms.ui.RoomUser.UserType;
+import org.ourproject.kune.chat.client.ui.ChatFactory;
 
 public class MultiRoomPresenter implements MultiRoom {
     private MultiRoomPanel view;
-    private RoomPresenter currentRoom;
+    private Room currentRoom;
+    private final MultiRoomListener listener;
+
+    public MultiRoomPresenter(final MultiRoomListener listener) {
+	this.listener = listener;
+    }
 
     public void init(final MultiRoomPanel view) {
 	this.view = view;
     }
 
     public Room createRoom(final String roomName, final String userAlias, final UserType type) {
-	RoomPresenter room = new RoomPresenter(roomName, userAlias, type);
+	RoomUserList userList = ChatFactory.createUserList();
+	RoomPresenter room = new RoomPresenter(roomName, userAlias, type, userList);
 	room.addUser(userAlias, type);
 	view.createRoom(room);
 	currentRoom = room;
 	RoomUserList roomUserList = room.getUsersList();
 	view.addRoomUsersPanel(roomUserList.getView());
-	activateRoom(currentRoom);
 	return currentRoom;
     }
 
     public void show() {
 	view.show();
+    }
+
+    public void onSend() {
+	listener.onSendMessage(currentRoom, view.getInputText());
     }
 
     protected void onSend(final int key, final boolean isCtrl) {
@@ -53,7 +63,8 @@ public class MultiRoomPresenter implements MultiRoom {
 	}
     }
 
-    protected void onSend() {
+    // TODO: vicente, mira esto
+    protected void onOLDSend() {
 	// TODO: Call to xmpp, meawhile:
 	String userAlias = currentRoom.getSessionUserAlias();
 
@@ -82,7 +93,7 @@ public class MultiRoomPresenter implements MultiRoom {
 	room.doClose();
     }
 
-    protected void activateRoom(final RoomPresenter nextRoom) {
+    public void activateRoom(final Room nextRoom) {
 	currentRoom.saveInput(view.getInputText());
 	currentRoom = nextRoom;
 	String savedInput = currentRoom.getSavedInput();
@@ -90,7 +101,7 @@ public class MultiRoomPresenter implements MultiRoom {
 	    view.setInputText(savedInput);
 	}
 	view.setSubject(currentRoom.getSubject());
-	view.showUserList(currentRoom.getUsersList().getView());
+	view.showUserList(currentRoom.getUsersListView());
     }
 
 }

@@ -34,10 +34,10 @@ import com.google.gwt.user.client.ui.Widget;
  * para simplificar, de momento, no hay presenter!!
  * 
  */
-public class ChatRoomViewerPanel extends VerticalPanel implements ChatRoomViewer, View {
+public class ChatRoomPanel extends VerticalPanel implements ChatRoom, View {
     private final VerticalPanel stateArea;
 
-    public ChatRoomViewerPanel(final ChatRoomViewerListener listener) {
+    public ChatRoomPanel(final ChatRoomListener listener) {
 	FlowPanel flow = new FlowPanel();
 	// i18n
 	flow.add(new Button("enter room", new ClickListener() {

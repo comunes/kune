@@ -6,6 +6,8 @@ import java.util.Map;
 import org.ourproject.kune.chat.client.rooms.Room;
 import org.ourproject.kune.chat.client.rooms.ui.RoomUser.UserType;
 
+import com.calclab.gwtjsjac.client.mandioca.XmppRoom;
+
 public class RoomPresenter implements Room {
 
     private final static String[] USERCOLORS = { "green", "navy", "black", "grey", "olive", "teal", "blue", "lime",
@@ -20,11 +22,15 @@ public class RoomPresenter implements Room {
     private final Map users;
     private final String roomName;
 
-    private RoomUserListPresenter userListPresenter;
+    private final RoomUserList userList;
 
-    public RoomPresenter(final String roomName, final String userAlias, final UserType userType) {
+    private XmppRoom handler;
+
+    public RoomPresenter(final String roomName, final String userAlias, final UserType userType,
+	    final RoomUserList userList) {
 	this.roomName = roomName;
 	this.sessionUserAlias = userAlias;
+	this.userList = userList;
 	this.input = "";
 	this.currentColor = 0;
 	users = new HashMap();
@@ -57,6 +63,7 @@ public class RoomPresenter implements Room {
 	view.addTimeDelimiter(datetime);
     }
 
+    // TODO: ¿no bastaría con saveInput(null)?
     public void clearSavedInput() {
 	input = null;
     }
@@ -65,7 +72,7 @@ public class RoomPresenter implements Room {
 	return sessionUserAlias;
     }
 
-    protected void saveInput(final String inputText) {
+    public void saveInput(final String inputText) {
 	input = inputText;
     }
 
@@ -98,11 +105,19 @@ public class RoomPresenter implements Room {
     }
 
     public RoomUserList getUsersList() {
-	if (userListPresenter == null) {
-	    userListPresenter = new RoomUserListPresenter();
-	    RoomUserListPanel panel = new RoomUserListPanel();
-	    userListPresenter.init(panel);
-	}
-	return userListPresenter;
+	return userList;
     }
+
+    public RoomUserListView getUsersListView() {
+	return userList.getView();
+    }
+
+    public void setHandler(final XmppRoom handler) {
+	this.handler = handler;
+    }
+
+    public XmppRoom getHandler() {
+	return handler;
+    }
+
 }

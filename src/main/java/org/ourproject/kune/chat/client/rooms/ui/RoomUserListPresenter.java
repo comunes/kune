@@ -2,7 +2,7 @@ package org.ourproject.kune.chat.client.rooms.ui;
 
 import java.util.ArrayList;
 
-class RoomUserListPresenter implements RoomUserList {
+public class RoomUserListPresenter implements RoomUserList {
     private RoomUserListPanel view;
     private final ArrayList users;
 

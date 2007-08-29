@@ -7,4 +7,5 @@ public class ChatState {
     public boolean isConnected = false;
     public String domain;
     public XmppUser user;
+    public String roomHost;
 }

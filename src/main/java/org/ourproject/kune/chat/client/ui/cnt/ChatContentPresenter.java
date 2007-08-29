@@ -20,25 +20,36 @@
 
 package org.ourproject.kune.chat.client.ui.cnt;
 
+import java.util.HashMap;
+
 import org.ourproject.kune.chat.client.ChatEngine;
 import org.ourproject.kune.chat.client.rooms.MultiRoom;
+import org.ourproject.kune.chat.client.rooms.Room;
+import org.ourproject.kune.chat.client.rooms.ui.MultiRoomListener;
 import org.ourproject.kune.chat.client.rooms.ui.RoomUser;
-import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomViewer;
-import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomViewerListener;
+import org.ourproject.kune.chat.client.rooms.ui.RoomUser.UserType;
+import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoom;
+import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomListener;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
-public class ChatContentPresenter implements ChatContent, ChatRoomViewerListener {
+import com.calclab.gwtjsjac.client.XmppMessage;
+import com.calclab.gwtjsjac.client.XmppMessageListener;
+import com.calclab.gwtjsjac.client.mandioca.XmppRoom;
+
+public class ChatContentPresenter implements ChatContent, ChatRoomListener, MultiRoomListener {
 
     private final WorkspaceDeckView view;
     private final Components components;
     private final ChatEngine engine;
+    private final HashMap roomNamesToTooms;
 
     public ChatContentPresenter(final ChatEngine engine, final WorkspaceDeckView view) {
 	this.engine = engine;
 	this.view = view;
 	this.components = new Components(this);
+	this.roomNamesToTooms = new HashMap();
     }
 
     public void attach() {
@@ -52,7 +63,7 @@ public class ChatContentPresenter implements ChatContent, ChatRoomViewerListener
     }
 
     public void setState(final StateDTO state) {
-	ChatRoomViewer viewer = components.getChatRoomViewer();
+	ChatRoom viewer = components.getChatRoom();
 	viewer.setState(engine.getState());
 	view.show(viewer.getView());
     }
@@ -63,7 +74,39 @@ public class ChatContentPresenter implements ChatContent, ChatRoomViewerListener
 
     public void onEnterRoom() {
 	MultiRoom rooms = components.getRooms();
-	rooms.createRoom("room name", "user alias", RoomUser.VISITOR);
+	Room room = getRoom("room name", "user alias", RoomUser.VISITOR);
+	rooms.activateRoom(room);
 	rooms.show();
+    }
+
+    private Room getRoom(final String roomName, final String userAlias, final UserType userType) {
+	Room room = (Room) roomNamesToTooms.get(roomName);
+	if (room == null) {
+	    room = createRoom(roomName, userAlias, userType);
+	    roomNamesToTooms.put(roomName, room);
+	}
+	return room;
+    }
+
+    private Room createRoom(final String roomName, final String userAlias, final UserType userType) {
+	MultiRoom rooms = components.getRooms();
+	final Room room = rooms.createRoom(roomName, userAlias, userType);
+	XmppRoom handler = engine.joinRoom("room name", "user alias");
+	handler.addMessageListener(new XmppMessageListener() {
+	    public void onMessageReceived(final XmppMessage message) {
+		room.addMessage(message.getFrom(), message.getBody());
+	    }
+
+	    public void onMessageSent(final XmppMessage message) {
+		room.addMessage(userAlias, message.getBody());
+	    }
+	});
+	room.setHandler(handler);
+	return room;
+    }
+
+    public void onSendMessage(final Room room, final String message) {
+	XmppRoom handler = room.getHandler();
+	handler.sendMessage(message);
     }
 }

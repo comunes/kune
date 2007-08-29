@@ -22,28 +22,28 @@ package org.ourproject.kune.chat.client.ui.cnt;
 
 import org.ourproject.kune.chat.client.rooms.MultiRoom;
 import org.ourproject.kune.chat.client.ui.ChatFactory;
-import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomViewer;
+import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoom;
 
 class Components {
 
     private final ChatContentPresenter presenter;
     private MultiRoom multiRoom;
-    private ChatRoomViewer chatRoomViewer;
+    private ChatRoom chatRoom;
 
     public Components(final ChatContentPresenter presenter) {
 	this.presenter = presenter;
     }
 
-    public ChatRoomViewer getChatRoomViewer() {
-	if (chatRoomViewer == null) {
-	    chatRoomViewer = ChatFactory.createChatRoomViewer(presenter);
+    public ChatRoom getChatRoom() {
+	if (chatRoom == null) {
+	    chatRoom = ChatFactory.createChatRoomViewer(presenter);
 	}
-	return chatRoomViewer;
+	return chatRoom;
     }
 
     public MultiRoom getRooms() {
 	if (multiRoom == null) {
-	    multiRoom = ChatFactory.createChatMultiRoom();
+	    multiRoom = ChatFactory.createChatMultiRoom(presenter);
 	}
 	return multiRoom;
     }

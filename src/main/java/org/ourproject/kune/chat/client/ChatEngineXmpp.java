@@ -4,6 +4,7 @@ import com.calclab.gwtjsjac.client.Debugger;
 import com.calclab.gwtjsjac.client.XmppHttpBindingConnection;
 import com.calclab.gwtjsjac.client.XmppUser;
 import com.calclab.gwtjsjac.client.log.GWTLoggerOutput;
+import com.calclab.gwtjsjac.client.mandioca.XmppRoom;
 import com.calclab.gwtjsjac.client.mandioca.XmppSession;
 
 class ChatEngineXmpp implements ChatEngine {
@@ -16,6 +17,7 @@ class ChatEngineXmpp implements ChatEngine {
 	// FIXME
 	state.httpBase = "/http-bind/";
 	state.domain = "localhost";
+	state.roomHost = "conference.localhost";
 	connection = new XmppHttpBindingConnection(state.httpBase, 2000);
 	Debugger.debug(connection, new GWTLoggerOutput());
     }
@@ -36,6 +38,10 @@ class ChatEngineXmpp implements ChatEngine {
 	    session.login();
 	    state.isConnected = connection.isConnected();
 	}
+    }
+
+    public XmppRoom joinRoom(final String roomName, final String userAlias) {
+	return session.joinRoom(state.roomHost, roomName, userAlias);
     }
 
 }
