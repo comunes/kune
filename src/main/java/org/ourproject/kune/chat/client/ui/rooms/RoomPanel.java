@@ -1,6 +1,6 @@
 package org.ourproject.kune.chat.client.ui.rooms;
 
-import org.ourproject.kune.chat.client.ui.ChatFactory;
+import org.ourproject.kune.chat.client.ui.ChatTextFormatter;
 import org.ourproject.kune.platf.client.ui.HorizontalLine;
 
 import to.tipit.gwtlib.FireLog;
@@ -68,7 +68,7 @@ public class RoomPanel implements RoomView {
 
     public void addMessage(final String userAlias, final String color, final String message) {
 	String userHtml = "<span style=\"color: " + color + "; font-weight: bold;\">" + userAlias + "</span>:&nbsp;";
-	HTML messageHtml = new HTML(userHtml + ChatFactory.formatter(message).getHTML());
+	HTML messageHtml = new HTML(userHtml + ChatTextFormatter.format(message).getHTML());
 	addWidget(messageHtml);
     }
 

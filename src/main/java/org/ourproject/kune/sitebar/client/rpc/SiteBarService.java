@@ -20,6 +20,8 @@
 
 package org.ourproject.kune.sitebar.client.rpc;
 
+import org.ourproject.kune.platf.client.dto.UserDTO;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.SerializableException;
@@ -28,9 +30,9 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 // TODO: cambiar nombre a UserService
 public interface SiteBarService extends RemoteService {
 
-    void login(String nickOrEmail, String passwd) throws SerializableException;
+    UserDTO login(String nickOrEmail, String passwd) throws SerializableException;
 
-    void createUser(String shortName, String longName, String email, String passwd) throws SerializableException;
+    UserDTO createUser(String shortName, String longName, String email, String passwd) throws SerializableException;
 
     void logout() throws SerializableException;
 

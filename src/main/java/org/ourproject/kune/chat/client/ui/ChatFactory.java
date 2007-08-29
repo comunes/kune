@@ -20,8 +20,12 @@
 
 package org.ourproject.kune.chat.client.ui;
 
+import org.ourproject.kune.chat.client.ChatEngine;
 import org.ourproject.kune.chat.client.ui.cnt.ChatContent;
 import org.ourproject.kune.chat.client.ui.cnt.ChatContentPresenter;
+import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomViewer;
+import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomViewerListener;
+import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomViewerPanel;
 import org.ourproject.kune.chat.client.ui.ctx.ChatContext;
 import org.ourproject.kune.chat.client.ui.ctx.ChatContextPresenter;
 import org.ourproject.kune.chat.client.ui.ctx.rooms.RoomsAdmin;
@@ -29,18 +33,16 @@ import org.ourproject.kune.chat.client.ui.ctx.rooms.RoomsAdminPresenter;
 import org.ourproject.kune.chat.client.ui.rooms.MultiRoom;
 import org.ourproject.kune.chat.client.ui.rooms.MultiRoomPanel;
 import org.ourproject.kune.chat.client.ui.rooms.MultiRoomPresenter;
-import org.ourproject.kune.chat.client.ui.rooms.RoomImages;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckPanel;
 import org.ourproject.kune.workspace.client.ui.WorkspaceFactory;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 
-import com.google.gwt.user.client.ui.HTML;
 
 public class ChatFactory {
 
-    public static ChatContent createChatContent() {
+    public static ChatContent createChatContent(final ChatEngine engine) {
 	WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
-	ChatContentPresenter presenter = new ChatContentPresenter(panel);
+	ChatContentPresenter presenter = new ChatContentPresenter(engine, panel);
 	return presenter;
     }
 
@@ -63,46 +65,9 @@ public class ChatFactory {
 	return presenter;
     }
 
-    public static HTML formatter(String message) {
-	message = message.replaceAll("&", "&amp;");
-	message = message.replaceAll("\"", "&quot;");
-	message = message.replaceAll("<", "&lt;");
-	message = message.replaceAll(">", "&gt;");
-	message = message.replaceAll("\n", "<br>\n");
-
-	// TODO: see emoticons.xml for more
-	message = message.replaceAll(":\\)", RoomImages.App.getInstance().smile().getHTML());
-	message = message.replaceAll(":-\\)", RoomImages.App.getInstance().smile().getHTML());
-
-	message = message.replaceAll("X-\\(", RoomImages.App.getInstance().angry().getHTML());
-	message = message.replaceAll("X\\(", RoomImages.App.getInstance().angry().getHTML());
-
-	message = message.replaceAll(":-D", RoomImages.App.getInstance().grin().getHTML());
-	message = message.replaceAll(":D", RoomImages.App.getInstance().grin().getHTML());
-
-	message = message.replaceAll(":\\(", RoomImages.App.getInstance().sad().getHTML());
-	message = message.replaceAll(":-\\(", RoomImages.App.getInstance().sad().getHTML());
-
-	message = message.replaceAll(":P", RoomImages.App.getInstance().tongue().getHTML());
-
-	message = message.replaceAll(":\'\\(", RoomImages.App.getInstance().crying().getHTML());
-
-	message = message.replaceAll(":-O", RoomImages.App.getInstance().surprised().getHTML());
-	message = message.replaceAll(":O", RoomImages.App.getInstance().surprised().getHTML());
-
-	message = message.replaceAll(":-\\*", RoomImages.App.getInstance().kissing().getHTML());
-	message = message.replaceAll(":\\*", RoomImages.App.getInstance().kissing().getHTML());
-
-	message = message.replaceAll(":-/", RoomImages.App.getInstance().uncertain().getHTML());
-
-	message = message.replaceAll(";\\)", RoomImages.App.getInstance().wink().getHTML());
-	message = message.replaceAll(";-\\)", RoomImages.App.getInstance().wink().getHTML());
-
-	message = message.replaceAll(":\\?", RoomImages.App.getInstance().wondering().getHTML());
-
-	message = message.replaceAll(":-xX", RoomImages.App.getInstance().love().getHTML());
-	message = message.replaceAll(":-X", RoomImages.App.getInstance().love().getHTML());
-
-	return new HTML(message);
+    public static ChatRoomViewer createChatRoomViewer(final ChatRoomViewerListener listener) {
+	ChatRoomViewerPanel panel = new ChatRoomViewerPanel(listener);
+	return panel;
     }
+
 }

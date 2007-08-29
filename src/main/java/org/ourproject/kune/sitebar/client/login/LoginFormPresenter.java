@@ -21,6 +21,7 @@
 package org.ourproject.kune.sitebar.client.login;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarServiceAsync;
@@ -61,8 +62,7 @@ public class LoginFormPresenter implements LoginForm {
 	    }
 
 	    public void onSuccess(final Object response) {
-		String hash = (String) response;
-		listener.userLoggedIn(nickOrEmail, hash);
+		listener.userLoggedIn((UserDTO) response);
 		// TODO: Establecer sesión de este usuario
 	    }
 	});
@@ -83,8 +83,7 @@ public class LoginFormPresenter implements LoginForm {
 	    }
 
 	    public void onSuccess(final Object response) {
-		String hash = (String) response;
-		listener.userLoggedIn(shortName, hash);
+		listener.userLoggedIn((UserDTO) response);
 		// TODO: Establecer sesión de este usuario
 	    }
 	});

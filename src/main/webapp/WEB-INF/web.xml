@@ -42,7 +42,7 @@
 
     <servlet-mapping>
         <servlet-name>Jabber HTTP Binding Servlet</servlet-name>
-        <url-pattern>/openfire/</url-pattern>
+        <url-pattern>gwt/org.ourproject.kune.app.Kune/http-bind</url-pattern>
     </servlet-mapping>
 
 </web-app>

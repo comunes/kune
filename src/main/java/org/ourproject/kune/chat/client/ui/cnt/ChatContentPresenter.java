@@ -20,18 +20,23 @@
 
 package org.ourproject.kune.chat.client.ui.cnt;
 
+import org.ourproject.kune.chat.client.ChatEngine;
+import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomViewerListener;
+import org.ourproject.kune.chat.client.ui.rooms.MultiRoom;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
-public class ChatContentPresenter implements ChatContent {
+public class ChatContentPresenter implements ChatContent, ChatRoomViewerListener {
 
     private final WorkspaceDeckView view;
-    private final ChatContentPanel content;
+    private final Components components;
+    private final ChatEngine engine;
 
-    public ChatContentPresenter(final WorkspaceDeckView view) {
+    public ChatContentPresenter(final ChatEngine engine, final WorkspaceDeckView view) {
+	this.engine = engine;
 	this.view = view;
-	content = new ChatContentPanel();
+	this.components = new Components(this);
     }
 
     public void attach() {
@@ -45,7 +50,12 @@ public class ChatContentPresenter implements ChatContent {
     }
 
     public void setState(final StateDTO state) {
-	view.show(content);
+	view.show(components.getChatRoomViewer().getView());
+    }
+
+    public void onEnterRoom() {
+	MultiRoom rooms = components.getRooms();
+
     }
 
 }

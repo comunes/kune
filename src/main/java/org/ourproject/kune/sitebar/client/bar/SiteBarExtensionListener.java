@@ -18,12 +18,12 @@
  *
  */
 
-package org.ourproject.kune.sitebar.client.login;
+package org.ourproject.kune.sitebar.client.bar;
 
 import org.ourproject.kune.platf.client.dto.UserDTO;
 
-public interface LoginListener {
-    void userLoggedIn(UserDTO user);
+public interface SiteBarExtensionListener {
+    public void onUserLoggedIn(UserDTO user);
 
-    void onLoginCancelled();
+    public void onUserLoggedOut();
 }

@@ -31,10 +31,12 @@ public class ChatClientTool extends AbstractClientTool {
     public static final String TYPE_CHAT = "chat.chat";
 
     private final ChatToolComponents components;
+    public final ChatEngineXmpp engine;
 
     public ChatClientTool() {
 	// i18n
 	super("salas de chat");
+	engine = new ChatEngineXmpp();
 	components = new ChatToolComponents(this);
     }
 

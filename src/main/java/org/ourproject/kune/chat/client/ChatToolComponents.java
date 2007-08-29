@@ -23,18 +23,19 @@ package org.ourproject.kune.chat.client;
 import org.ourproject.kune.chat.client.ui.ChatFactory;
 import org.ourproject.kune.chat.client.ui.cnt.ChatContent;
 import org.ourproject.kune.chat.client.ui.ctx.ChatContext;
-import org.ourproject.kune.platf.client.tool.AbstractClientTool;
 
 class ChatToolComponents {
     private ChatContent content;
     private ChatContext context;
+    private final ChatEngine engine;
 
-    public ChatToolComponents(final AbstractClientTool chatClientTool) {
+    public ChatToolComponents(final ChatClientTool chatClientTool) {
+	this.engine = chatClientTool.engine;
     }
 
     public ChatContent getContent() {
 	if (content == null) {
-	    content = ChatFactory.createChatContent();
+	    content = ChatFactory.createChatContent(engine);
 	}
 	return content;
     }

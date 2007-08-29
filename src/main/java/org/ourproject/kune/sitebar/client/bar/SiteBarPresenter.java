@@ -21,6 +21,7 @@
 package org.ourproject.kune.sitebar.client.bar;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.platf.client.group.NewGroupListener;
 import org.ourproject.kune.sitebar.client.login.LoginListener;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
@@ -62,23 +63,22 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
     public void doLogout() {
 	SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
 	siteBarService.logout(new AsyncCallback() {
-
 	    public void onFailure(final Throwable arg0) {
-		// TODO Auto-generated method stub
 	    }
 
 	    public void onSuccess(final Object arg0) {
 		view.setLogoutLinkVisible(false);
 		view.restoreLoginLink();
+		listener.onUserLoggedOut();
 	    }
 	});
     }
 
-    public void userLoggedIn(final String userOrEmail, final String hash) {
-	view.showLoggedUserName(userOrEmail);
+    public void userLoggedIn(final UserDTO user) {
+	view.showLoggedUserName(user.getName());
 	view.hideLoginDialog();
 	view.setLogoutLinkVisible(true);
-	listener.onUserLoggedIn();
+	listener.onUserLoggedIn(user);
     }
 
     public void onLoginCancelled() {

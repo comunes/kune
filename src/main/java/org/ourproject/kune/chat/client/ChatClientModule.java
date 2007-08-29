@@ -18,15 +18,17 @@
  *
  */
 
-package org.ourproject.kune.chat.client.ui.cnt;
+package org.ourproject.kune.chat.client;
 
-import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.chat.client.actions.ChatLoginAction;
+import org.ourproject.kune.platf.client.extend.ClientModule;
+import org.ourproject.kune.platf.client.extend.Register;
 
-import com.google.gwt.user.client.ui.Label;
+public class ChatClientModule implements ClientModule {
 
-public class ChatContentPanel extends Label implements View {
-
-    public ChatContentPanel() {
-	super("panel del chat: contenido por defecto");
+    public void configure(final Register register) {
+	ChatClientTool chatTool = new ChatClientTool();
+	register.addTool(chatTool);
+	register.addAction(new ChatLoginAction(chatTool.engine));
     }
 }

@@ -1,6 +1,7 @@
 <module>
 	<inherits name='org.ourproject.kune.platf.Kune-Platform' />
 	<inherits name='org.ourproject.kune.workspace.Kune-Workspace' />
+	<inherits name="com.calclab.gwtjsjac.Xmpp"/>
 
 <!--
 	<entry-point class='org.ourproject.kune.app.client.editor.EditorSample'/>

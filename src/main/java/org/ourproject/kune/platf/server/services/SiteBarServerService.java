@@ -20,11 +20,13 @@
 
 package org.ourproject.kune.platf.server.services;
 
+import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.platf.client.errors.UserAuthException;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
+import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
 
 import com.google.gwt.user.client.rpc.SerializableException;
@@ -39,23 +41,32 @@ public class SiteBarServerService implements SiteBarService {
     private final UserManager userManager;
     private final UserSession session;
     private final GroupManager groupManager;
+    private final Mapper mapper;
 
     @Inject
     public SiteBarServerService(final UserSession session, final UserManager userManager,
-	    final GroupManager groupManager) {
+	    final GroupManager groupManager, final Mapper mapper) {
 	this.session = session;
 	this.userManager = userManager;
 	this.groupManager = groupManager;
+	this.mapper = mapper;
     }
 
     @Transactional(type = TransactionType.READ_ONLY)
-    public void login(final String nickOrEmail, final String passwd) throws SerializableException {
+    public UserDTO login(final String nickOrEmail, final String passwd) throws SerializableException {
 	User user = userManager.login(nickOrEmail, passwd);
+	return loginUser(user);
+    }
+
+    private UserDTO loginUser(final User user) throws UserAuthException {
 	if (user != null) {
 	    session.setUser(user);
+	    UserDTO dto = mapper.map(user, UserDTO.class);
+	    return dto;
 	} else {
 	    throw new UserAuthException();
 	}
+
     }
 
     @Transactional(type = TransactionType.READ_ONLY)
@@ -65,14 +76,10 @@ public class SiteBarServerService implements SiteBarService {
     }
 
     @Transactional(type = TransactionType.READ_WRITE)
-    public void createUser(final String shortName, final String longName, final String email, final String passwd)
+    public UserDTO createUser(final String shortName, final String longName, final String email, final String passwd)
 	    throws SerializableException {
 	User user = userManager.createUser(shortName, longName, email, passwd);
 	groupManager.createUserGroup(user);
-	if (user != null) {
-	    session.setUser(user);
-	} else {
-	    throw new SerializableException();
-	}
+	return loginUser(user);
     }
 }

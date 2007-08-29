@@ -25,12 +25,14 @@ import java.util.Map;
 
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
+import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.platf.client.state.StateController;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
 import org.ourproject.kune.sitebar.client.bar.SiteBarListener;
 import org.ourproject.kune.workspace.client.Workspace;
 import org.ourproject.kune.workspace.client.WorkspaceFactory;
+import org.ourproject.kune.workspace.client.actions.LoginAction;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
@@ -47,11 +49,17 @@ public class DefaultApplication implements Application {
 	this.tools = tools;
 	workspace = WorkspaceFactory.getWorkspace();
 	workspace.attachTools(tools.values().iterator());
-	final Desktop desktop = new Desktop(workspace, new SiteBarListener() {
-	    public void onUserLoggedIn() {
-		stateManager.reload();
+
+	SiteBarListener listener = new SiteBarListener() {
+	    public void onUserLoggedIn(final UserDTO user) {
+		dispatcher.fire(LoginAction.EVENT, user);
 	    }
-	});
+
+	    public void onUserLoggedOut() {
+	    }
+	};
+
+	final Desktop desktop = new Desktop(workspace, listener);
 	RootPanel.get().add(desktop);
 	DeferredCommand.addCommand(new Command() {
 	    public void execute() {
