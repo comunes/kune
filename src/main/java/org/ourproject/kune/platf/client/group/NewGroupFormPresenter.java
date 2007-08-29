@@ -40,7 +40,6 @@ public class NewGroupFormPresenter implements NewGroupForm {
 
     public void init(final NewGroupFormView view) {
 	this.view = view;
-	reset();
     }
 
     public void doCreateNewGroup() {

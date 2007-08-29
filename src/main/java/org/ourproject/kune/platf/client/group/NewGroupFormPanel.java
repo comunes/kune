@@ -58,6 +58,9 @@ public class NewGroupFormPanel extends Composite implements NewGroupFormView {
     private Radio orgRadio;
     private Radio communityRadio;
     private TextField licenseField;
+    private TextField shortNameField;
+    private TextField longNameField;
+    private TextArea publicDescField;
 
     public NewGroupFormPanel() {
 	VerticalPanel generalVP = new VerticalPanel();
@@ -66,8 +69,6 @@ public class NewGroupFormPanel extends Composite implements NewGroupFormView {
 	newGroupForm = createNewGroupForm();
 	generalVP.add(newGroupForm);
 	generalVP.addStyleName("kune-Default-Form");
-
-	clearData();
     }
 
     public void setLicense(final String longName) {
@@ -75,21 +76,24 @@ public class NewGroupFormPanel extends Composite implements NewGroupFormView {
     }
 
     public void clearData() {
-	newGroupForm.reset();
 	licenseField.reset();
+	shortNameField.setValue("");
+	longNameField.setValue("");
+	publicDescField.setValue("");
+	projectRadio.setValue(true);
 	// TODO: licenseDialog reset
     }
 
     public String getShortName() {
-	return newGroupForm.findField(SHORTNAME_FIELD).getRawValue();
+	return shortNameField.getValueAsString();
     }
 
     public String getLongName() {
-	return newGroupForm.findField(LONGNAME_FIELD).getRawValue();
+	return longNameField.getValueAsString();
     }
 
     public String getPublicDesc() {
-	return newGroupForm.findField(PUBLICDESC_FIELD).getRawValue();
+	return publicDescField.getValueAsString();
     }
 
     public boolean isProject() {
@@ -140,7 +144,7 @@ public class NewGroupFormPanel extends Composite implements NewGroupFormView {
 	    }
 	});
 
-	form.add(new TextField(new TextFieldConfig() {
+	shortNameField = new TextField(new TextFieldConfig() {
 	    {
 		setFieldLabel(t.ShortName());
 		setName(SHORTNAME_FIELD);
@@ -148,9 +152,10 @@ public class NewGroupFormPanel extends Composite implements NewGroupFormView {
 		setAllowBlank(false);
 		setMsgTarget("side");
 	    }
-	}));
+	});
+	form.add(shortNameField);
 
-	form.add(new TextField(new TextFieldConfig() {
+	longNameField = new TextField(new TextFieldConfig() {
 	    {
 		setFieldLabel(t.LongName());
 		setName(LONGNAME_FIELD);
@@ -158,9 +163,10 @@ public class NewGroupFormPanel extends Composite implements NewGroupFormView {
 		setAllowBlank(false);
 		setMsgTarget("side");
 	    }
-	}));
+	});
+	form.add(longNameField);
 
-	form.add(new TextArea(new TextAreaConfig() {
+	publicDescField = new TextArea(new TextAreaConfig() {
 	    {
 		setFieldLabel(t.PublicDescription());
 		setName(PUBLICDESC_FIELD);
@@ -168,7 +174,8 @@ public class NewGroupFormPanel extends Composite implements NewGroupFormView {
 		setAllowBlank(false);
 		setMsgTarget("side");
 	    }
-	}));
+	});
+	form.add(publicDescField);
 
 	form.fieldset(new FieldSetConfig() {
 	    {
