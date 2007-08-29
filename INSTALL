@@ -30,9 +30,9 @@ Example of .m2/settings.xml:
       </properties>
      </profile>
      <profile>
-       <id>gwt-1.4.10</id>
+       <id>gwt-1.4.60</id>
        <properties>
-         <google.webtoolkit.home>/usr/local/lib/gwt/gwt-linux-1.4.10</google.webtoolkit.home>
+         <google.webtoolkit.home>/usr/local/lib/gwt/gwt-linux-1.4.60</google.webtoolkit.home>
         <!-- you only need this is you are on a mac -->
         <!-- <google.webtoolkit.extrajvmargs>-XstartOnFirstThread</google.webtoolkit.extrajvmargs> -->
         <!-- If you experiment java.lang.OutOfMemoryError compiling -->
@@ -41,7 +41,7 @@ Example of .m2/settings.xml:
      </profile>
    </profiles>
    <activeProfiles>
-     <activeProfile>gwt-1.4.10</activeProfile>
+     <activeProfile>gwt-1.4.60</activeProfile>
    </activeProfiles>
 </settings>
 
