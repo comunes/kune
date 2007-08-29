@@ -20,6 +20,8 @@
 
 package org.ourproject.kune.chat.client.ui.rooms;
 
+import java.util.HashMap;
+
 import org.ourproject.kune.platf.client.View;
 
 import to.tipit.gwtlib.FireLog;
@@ -28,6 +30,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Ext;
 import com.gwtext.client.widgets.Button;
@@ -49,31 +52,26 @@ import com.gwtext.client.widgets.layout.LayoutRegionConfig;
 import com.gwtext.client.widgets.layout.event.LayoutRegionListener;
 
 public class MultiRoomPanel implements MultiRoomView, View {
-
     protected static final String INPUT_FIELD = "input-area";
-
     private LayoutDialog dialog;
-
     private Button sendBtn;
-
     private final MultiRoomPresenter presenter;
-
     private LayoutRegion centralLayout;
-
     private Label subject;
-
     private DeckPanel usersDeckPanel;
-
     private TextArea input;
-
     private Form inputForm;
+    private final HashMap userListToIndex;
+    private final HashMap panelIdToRoomPresenter;
 
     public MultiRoomPanel(final MultiRoomPresenter presenter) {
 	this.presenter = presenter;
+	this.userListToIndex = new HashMap();
+	panelIdToRoomPresenter = new HashMap();
 	createLayout();
     }
 
-    public String createRoom(final RoomPresenter roomPresenter) {
+    public void createRoom(final RoomPresenter roomPresenter) {
 	final BorderLayout layout = dialog.getLayout();
 	layout.beginUpdate();
 
@@ -81,15 +79,13 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	roomPresenter.init(chatRoomPanel);
 	layout.add(LayoutRegionConfig.CENTER, chatRoomPanel.getContentPanel());
 
-	String contentId = chatRoomPanel.getContentPanel().getId();
-
+	String panelId = chatRoomPanel.getContentPanel().getId();
+	panelIdToRoomPresenter.put(panelId, roomPresenter);
 	layout.endUpdate();
 
 	// FIXME: Returns Exception, affected maybe by:
 	// http://code.google.com/p/gwt-ext/issues/detail?id=81
 	// layout.showPanel(contentId);
-
-	return contentId;
     }
 
     public void show() {
@@ -112,8 +108,9 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	subject.setText(text);
     }
 
-    public void activeUsersPanel(final int index) {
-	usersDeckPanel.showWidget(index);
+    public void showUserList(final RoomUserListView view) {
+	Integer index = (Integer) userListToIndex.get(view);
+	usersDeckPanel.showWidget(index.intValue());
     }
 
     public boolean sendBtnIsDisabled() {
@@ -121,18 +118,9 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	return sendBtn.isDisabled();
     }
 
-    protected RoomUsers createRoomUsersPanel() {
-	RoomUsersPresenter usersPresenter = new RoomUsersPresenter();
-	RoomUsersPanel panel = new RoomUsersPanel();
-	usersPresenter.init(panel);
-
-	return usersPresenter;
-    }
-
-    protected int addRoomUsersPanel(final RoomUsersPresenter presenter) {
-	RoomUsersPanel view = presenter.getView();
-	usersDeckPanel.add(view);
-	return usersDeckPanel.getWidgetIndex(view);
+    public void addRoomUsersPanel(final RoomUserListView view) {
+	usersDeckPanel.add((Widget) view);
+	userListToIndex.put(view, new Integer(usersDeckPanel.getWidgetIndex((Widget) view)));
     }
 
     protected void insertReturnInInput() {
@@ -274,7 +262,8 @@ public class MultiRoomPanel implements MultiRoomView, View {
 
 	    public boolean doBeforeRemove(final LayoutRegion region, final ContentPanel panel) {
 		if (Window.confirm("Are you sure?")) {
-		    presenter.closeRoom(panel.getId());
+		    RoomPresenter roomPresenter = (RoomPresenter) panelIdToRoomPresenter.get(panel.getId());
+		    presenter.closeRoom(roomPresenter);
 		    return true;
 		}
 		return false;
@@ -290,7 +279,8 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	    }
 
 	    public void onPanelActivated(final LayoutRegion region, final ContentPanel panel) {
-		presenter.activateRoom(panel.getId());
+		RoomPresenter roomPresenter = (RoomPresenter) panelIdToRoomPresenter.get(panel.getId());
+		presenter.activateRoom(roomPresenter);
 	    }
 
 	    public void onPanelAdded(final LayoutRegion region, final ContentPanel panel) {

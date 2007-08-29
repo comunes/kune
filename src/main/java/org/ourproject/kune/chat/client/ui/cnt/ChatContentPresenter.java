@@ -24,6 +24,7 @@ import org.ourproject.kune.chat.client.ChatEngine;
 import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomViewer;
 import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomViewerListener;
 import org.ourproject.kune.chat.client.ui.rooms.MultiRoom;
+import org.ourproject.kune.chat.client.ui.rooms.RoomUser;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
@@ -62,7 +63,7 @@ public class ChatContentPresenter implements ChatContent, ChatRoomViewerListener
 
     public void onEnterRoom() {
 	MultiRoom rooms = components.getRooms();
+	rooms.createRoom("room name", "user alias", RoomUser.VISITOR);
 	rooms.show();
     }
-
 }

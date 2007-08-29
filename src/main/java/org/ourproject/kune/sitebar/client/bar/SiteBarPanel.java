@@ -20,11 +20,10 @@
 
 package org.ourproject.kune.sitebar.client.bar;
 
+import org.ourproject.kune.chat.client.rooms.Room;
 import org.ourproject.kune.chat.client.ui.ChatFactory;
 import org.ourproject.kune.chat.client.ui.rooms.MultiRoom;
-import org.ourproject.kune.chat.client.ui.rooms.RoomPresenter;
 import org.ourproject.kune.chat.client.ui.rooms.RoomUser;
-import org.ourproject.kune.platf.client.dto.RoomDTO;
 import org.ourproject.kune.platf.client.group.NewGroupForm;
 import org.ourproject.kune.platf.client.ui.BorderDecorator;
 import org.ourproject.kune.platf.client.ui.dialogs.TwoButtonsDialog;
@@ -277,19 +276,17 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 		MultiRoom rooms = ChatFactory.createChatMultiRoom();
 		rooms.show();
 
-		RoomDTO room1 = new RoomDTO("chat1@talks.localhost");
+		Room room1 = rooms.createRoom("chat1@talks.localhost", "luther.b", RoomUser.PARTICIPANT);
 		room1.setSubject("Welcome to chat1, today topic: Cultural issues in Brazil");
-		RoomPresenter room1Presenter = rooms.createRoom(room1, "luther.b");
-		rooms.join(room1, "luther.b", RoomUser.MODERADOR);
-		room1Presenter.addMessage("luther.b", "Mensaje de test en room1");
+		room1.addUser("otro usuario", RoomUser.MODERADOR);
+		room1.addMessage("luther.b", "Mensaje de test en room1");
 
-		RoomDTO room2 = new RoomDTO("chat2@talks.localhost");
+		Room room2 = rooms.createRoom("chat2@talks.localhost", "luther", RoomUser.PARTICIPANT);
 		room2.setSubject("Welcome to this room: we are talking today about 2009 meeting");
-		RoomPresenter room2Presenter = rooms.createRoom(room2, "luther");
-		rooms.join(room2, "luther", RoomUser.MODERADOR);
-		room2Presenter.addMessage("luther", "Mensaje de test en room2");
-		room2Presenter.addEventMessage("Mensaje de evento en room2");
-		room2Presenter.addDelimiter("17:35");
+		room2.addUser("luther", RoomUser.MODERADOR);
+		room2.addMessage("luther", "Mensaje de test en room2");
+		room2.addInfoMessage("Mensaje de evento en room2");
+		room2.addDelimiter("17:35");
 
 		// presenter.doSearch(searchTextBox.getText());
 	    }
@@ -315,5 +312,4 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	    }
 	});
     }
-
 }

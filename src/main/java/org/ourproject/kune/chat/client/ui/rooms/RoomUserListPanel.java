@@ -6,11 +6,11 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-class RoomUsersPanel extends VerticalPanel {
-    public RoomUsersPanel() {
+class RoomUserListPanel extends VerticalPanel implements RoomUserListView {
+    public RoomUserListPanel() {
     }
 
-    public int addUser(RoomUser user) {
+    public int addUser(final RoomUser user) {
 	HorizontalPanel userPanel = new HorizontalPanel();
 	Image userIcon = new Image();
 	Label userAliasLabel = new HTML("<span style=\"color: " + user.getColor() + "\">" + user.getAlias() + "</span>");
@@ -25,7 +25,7 @@ class RoomUsersPanel extends VerticalPanel {
 	return this.getWidgetIndex(userPanel);
     }
 
-    public void delUser(int index) {
-	this.getWidget(index).setVisible(false);
+    public void delUser(final int index) {
+	this.remove(index);
     }
 }

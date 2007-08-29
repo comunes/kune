@@ -3,9 +3,10 @@ package org.ourproject.kune.chat.client.ui.rooms;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.ourproject.kune.platf.client.dto.RoomDTO;
+import org.ourproject.kune.chat.client.rooms.Room;
+import org.ourproject.kune.chat.client.ui.rooms.RoomUser.UserType;
 
-public class RoomPresenter {
+public class RoomPresenter implements Room {
 
     private final static String[] USERCOLORS = { "green", "navy", "black", "grey", "olive", "teal", "blue", "lime",
 	    "purple", "fuchsia", "maroon", "red" };
@@ -13,15 +14,17 @@ public class RoomPresenter {
     private int currentColor;
 
     private RoomPanel view;
-    private final RoomDTO room;
     private String input;
+    private String subject;
     private final String sessionUserAlias;
-
     private final Map users;
+    private final String roomName;
 
-    public RoomPresenter(final RoomDTO room, final String sessionUserAlias) {
-	this.room = room;
-	this.sessionUserAlias = sessionUserAlias;
+    private RoomUserListPresenter userListPresenter;
+
+    public RoomPresenter(final String roomName, final String userAlias, final UserType userType) {
+	this.roomName = roomName;
+	this.sessionUserAlias = userAlias;
 	this.input = "";
 	this.currentColor = 0;
 	users = new HashMap();
@@ -29,6 +32,7 @@ public class RoomPresenter {
 
     public void init(final RoomPanel view) {
 	this.view = view;
+	view.showRoomName(roomName);
     }
 
     public void addMessage(final String userAlias, final String message) {
@@ -39,14 +43,14 @@ public class RoomPresenter {
 	view.addMessage(user.getAlias(), user.getColor(), message);
     }
 
-    public void addEventMessage(final String message) {
+    public void addInfoMessage(final String message) {
 	view.addEventMessage(message);
     }
 
-    public RoomUser addUser(final String alias, final int type) {
+    public void addUser(final String alias, final UserType type) {
 	RoomUser user = new RoomUser(alias, getNextColor(), type);
+	getUsersList().add(user);
 	users.put(alias, user);
-	return user;
     }
 
     public void addDelimiter(final String datetime) {
@@ -73,13 +77,16 @@ public class RoomPresenter {
 	// TODO: xmpp: send bye in room
     }
 
-    public void setRoomName() {
-	view.setRoomName(room.getName());
-
+    public String getSubject() {
+	return subject;
     }
 
-    public String getSubject() {
-	return room.getSubject();
+    public void setSubject(final String subject) {
+	this.subject = subject;
+    }
+
+    public String getRoomName() {
+	return roomName;
     }
 
     private String getNextColor() {
@@ -88,5 +95,14 @@ public class RoomPresenter {
 	    currentColor = 0;
 	}
 	return color;
+    }
+
+    public RoomUserList getUsersList() {
+	if (userListPresenter == null) {
+	    userListPresenter = new RoomUserListPresenter();
+	    RoomUserListPanel panel = new RoomUserListPanel();
+	    userListPresenter.init(panel);
+	}
+	return userListPresenter;
     }
 }

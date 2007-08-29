@@ -20,64 +20,26 @@
 
 package org.ourproject.kune.chat.client.ui.rooms;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.ourproject.kune.platf.client.dto.RoomDTO;
+import org.ourproject.kune.chat.client.rooms.Room;
+import org.ourproject.kune.chat.client.ui.rooms.RoomUser.UserType;
 
 public class MultiRoomPresenter implements MultiRoom {
-
     private MultiRoomPanel view;
-
     private RoomPresenter currentRoom;
-
-    private Map roomPanels;
-
-    private Map roomPresenters;
-
-    private Map roomUsersPresenters;
-
-    private Map roomUsersPanels;
 
     public void init(final MultiRoomPanel view) {
 	this.view = view;
-	roomPresenters = new HashMap();
-	roomUsersPresenters = new HashMap();
-	roomPanels = new HashMap();
-	roomUsersPanels = new HashMap();
     }
 
-    public RoomPresenter createRoom(final RoomDTO room, final String userAlias) {
-	String roomName = room.getName();
-
-	RoomPresenter presenter = new RoomPresenter(room, userAlias);
-	String panelId = view.createRoom(presenter);
-
-	presenter.setRoomName();
-
-	roomPresenters.put(roomName, presenter);
-	roomPanels.put(panelId, presenter);
-
-	currentRoom = presenter;
-
-	RoomUsers roomUsers = view.createRoomUsersPanel();
-	roomUsersPresenters.put(roomName, roomUsers);
-
-	int roomUsersIndex = view.addRoomUsersPanel((RoomUsersPresenter) roomUsers);
-	roomUsersPanels.put(currentRoom, new Integer(roomUsersIndex));
-
+    public Room createRoom(final String roomName, final String userAlias, final UserType type) {
+	RoomPresenter room = new RoomPresenter(roomName, userAlias, type);
+	room.addUser(userAlias, type);
+	view.createRoom(room);
+	currentRoom = room;
+	RoomUserList roomUserList = room.getUsersList();
+	view.addRoomUsersPanel(roomUserList.getView());
 	activateRoom(currentRoom);
-
 	return currentRoom;
-    }
-
-    public void join(final RoomDTO room, final String alias, final int roomUserType) {
-	RoomUser user = getPresenter(room).addUser(alias, roomUserType);
-	getUsersPresenter(room).add(user);
-    }
-
-    public void addTimeDelimiter(final RoomDTO room, final String datetime) {
-	getPresenter(room).addDelimiter(datetime);
     }
 
     public void show() {
@@ -99,6 +61,7 @@ public class MultiRoomPresenter implements MultiRoom {
 	view.clearInputText();
 	// view.sendBtnEnable(false);
 
+	// CUIDADO: DETALLE DE VISTA
 	// if (key == KeyboardListener.KEY_ENTER) {
 	// if (mod == KeyboardListener.MODIFIER_CTRL) {
 	// view.insertReturnInInput();
@@ -109,22 +72,16 @@ public class MultiRoomPresenter implements MultiRoom {
 	// }
     }
 
-    protected void activateRoom(final String panelId) {
-	RoomPresenter nextRoom = getRoomFromPanelId(panelId);
-	activateRoom(nextRoom);
-    }
-
     protected void onNoRooms() {
 	// TODO
 	view.hide();
     }
 
-    protected void closeRoom(final String panelId) {
-	RoomPresenter room = getRoomFromPanelId(panelId);
+    public void closeRoom(final RoomPresenter room) {
 	room.doClose();
     }
 
-    private void activateRoom(final RoomPresenter nextRoom) {
+    protected void activateRoom(final RoomPresenter nextRoom) {
 	currentRoom.saveInput(view.getInputText());
 	currentRoom = nextRoom;
 	String savedInput = currentRoom.getSavedInput();
@@ -132,21 +89,7 @@ public class MultiRoomPresenter implements MultiRoom {
 	    view.setInputText(savedInput);
 	}
 	view.setSubject(currentRoom.getSubject());
-	Integer index = (Integer) roomUsersPanels.get(currentRoom);
-	view.activeUsersPanel(index.intValue());
-    }
-
-    private RoomPresenter getPresenter(final RoomDTO room) {
-	return (RoomPresenter) roomPresenters.get(room.getName());
-    }
-
-    private RoomUsersPresenter getUsersPresenter(final RoomDTO room) {
-	return (RoomUsersPresenter) roomUsersPresenters.get(room.getName());
-    }
-
-    private RoomPresenter getRoomFromPanelId(final String panelId) {
-	RoomPresenter nextRoom = ((RoomPresenter) roomPanels.get(panelId));
-	return nextRoom;
+	view.showUserList(currentRoom.getUsersList().getView());
     }
 
 }

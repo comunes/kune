@@ -56,7 +56,7 @@ public class RoomPanel implements RoomView {
 	scroll.setHeight("" + (height - 2));
     }
 
-    public void setRoomName(final String name) {
+    public void showRoomName(final String name) {
 	contentPanel.setTitle(name);
     }
 
