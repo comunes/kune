@@ -32,6 +32,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.Label;
@@ -172,7 +173,7 @@ public class TextEditorToolbar extends Composite {
     private final RichTextArea.ExtendedFormatter extended;
 
     private final VerticalPanel outer = new VerticalPanel();
-    private final HorizontalPanel topPanel = new HorizontalPanel();
+    private final FlowPanel topPanel = new FlowPanel();
     private ToggleButton bold;
     private ToggleButton italic;
     private ToggleButton underline;
@@ -224,7 +225,7 @@ public class TextEditorToolbar extends Composite {
 	outer.setWidth("100%");
 	topPanel.setWidth("100%");
 	outer.setCellWidth(topPanel, "100%");
-	topPanel.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
+	// topPanel.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
 	outer.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
 	setStyleName("gwt-RichTextToolbar");
 
@@ -271,10 +272,13 @@ public class TextEditorToolbar extends Composite {
 	    richText.addClickListener(listener);
 	}
 
+	HorizontalPanel expandPanel = new HorizontalPanel();
 	Label expand = new Label("");
+	topPanel.add(expandPanel);
+	expandPanel.add(expand);
+	expandPanel.setWidth("100%");
 	expand.setWidth("100%");
-	topPanel.add(expand);
-	topPanel.setCellWidth(expand, "100%");
+	expandPanel.setCellWidth(expand, "100%");
 
 	save = new CustomButton(strings.Save(), new ClickListener() {
 	    public void onClick(final Widget sender) {
@@ -354,7 +358,7 @@ public class TextEditorToolbar extends Composite {
 	MenuBar submenu = new MenuBar(true);
 	String fontName[] = { "Times New Roman", "Arial", "Courier New", "Georgia", "Trebuchet", "Verdana" };
 
-	// strings.fontType()
+	menu.setTitle(strings.fontType());
 	menu.addItem(images.charfontname().getHTML(), true, submenu);
 	for (int i = 0; i < fontName.length; i++) {
 	    final String f = fontName[i];
@@ -376,7 +380,7 @@ public class TextEditorToolbar extends Composite {
 	String fontSizes[] = { strings.ExtraSmall(), strings.VerySmall(), strings.Small(), strings.Medium(),
 		strings.Large(), strings.VeryLarge(), strings.ExtraLarge() };
 
-	// strings.fontSize()
+	menu.setTitle(strings.fontSize());
 	menu.addItem(images.fontheight().getHTML(), true, submenu);
 	for (int i = 0; i < fontSizes.length; i++) {
 	    final String f = fontSizes[i];
@@ -413,9 +417,11 @@ public class TextEditorToolbar extends Composite {
 	    palettePanel = new WebSafePalettePanel(palettePresenter);
 	}
 	popupPalette = new PopupPanel(true, true);
-	popupPalette.setWidget(palettePanel);
+	popupPalette.setVisible(false);
 	popupPalette.show();
 	popupPalette.setPopupPosition(left, top);
+	popupPalette.setWidget(palettePanel);
+	popupPalette.setVisible(true);
     }
 
     public void setEnabledSaveButton(final boolean enabled) {

@@ -54,7 +54,7 @@ public class ApplicationBuilder {
     public Application build() {
 	HashMap tools = indexTools(platform.getTools());
 	DefaultApplication application = new DefaultApplication(tools);
-	RootPanel.get("initialstatusbar").setVisible(false);
+	RootPanel.get("kuneinitialstatusbar").setVisible(false);
 
 	final Session session = new Session(userHash);
 	ContentProviderImpl provider = new ContentProviderImpl(ContentService.App.getInstance());
@@ -72,6 +72,7 @@ public class ApplicationBuilder {
 		GWT.log("Locale: " + Kune.getInstance().t.Locale(), null);
 		PrefetchUtilites.preFetchImpImages();
 		PrefetchUtilites.preFetchLicenses(session);
+		RootPanel.get("kuneinitialcurtain").setVisible(false);
 	    }
 	});
 	return application;

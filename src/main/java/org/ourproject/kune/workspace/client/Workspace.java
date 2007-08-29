@@ -27,6 +27,7 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 
 public interface Workspace {
+
     public void showError(Throwable caught);
 
     public void showGroup(GroupDTO group);
@@ -36,6 +37,8 @@ public interface Workspace {
     public void setContext(WorkspaceComponent contextComponent);
 
     public void setContent(WorkspaceComponent contentComponent);
+
+    public void setContentTitle(String title);
 
     public void attachTools(Iterator iterator);
 

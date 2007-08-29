@@ -29,6 +29,15 @@
     vertical-align: middle;
 }
 
+.gwt-RichTextToolbar .gwt-ToggleButton {
+    float: left;
+}
+
+
+.gwt-RichTextToolbar .gwt-PushButton {
+    float: left;
+}
+
 .gwt-RichTextToolbar .gwt-PushButton-up {
     margin-right: 2px;
     border: 1px solid #F2F2F2;
@@ -75,6 +84,22 @@
     background-color: #E8F1FF;
     border: 1px solid #C3D9FF;
     border-color: #9DAECD #e8f1ff #e8f1ff #9daecd;
+}
+
+.gwt-RichTextToolbar .x-btn {
+    float: left;
+}
+
+.gwt-RichTextToolbar .kune-Button-Large-lSpace {
+    float: left;
+}
+
+.gwt-RichTextToolbar .kune-Button-Large-lrSpace {
+    float: left;
+}
+
+.RichTextToolbar-menu {
+    float: left;
 }
 
 .RichTextToolbar-menu table {

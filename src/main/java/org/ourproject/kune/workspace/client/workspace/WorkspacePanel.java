@@ -102,8 +102,8 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	logoPanel.setLogo(image);
     }
 
-    public void setContextTitle(final String title) {
-	contentTitleBar.setTitle(title);
+    public void setContentTitle(final String title) {
+	contentTitleBar.setTitleLabel(title);
     }
 
     public void setTool(final String toolName) {

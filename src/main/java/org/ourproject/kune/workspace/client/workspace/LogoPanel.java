@@ -20,6 +20,8 @@
 
 package org.ourproject.kune.workspace.client.workspace;
 
+import org.ourproject.kune.platf.client.services.Kune;
+
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
@@ -66,8 +68,8 @@ class LogoPanel extends SimplePanel {
 	    add(defTextPutYourLogoHL);
 
 	    // Set properties
-	    // defTextPutYourLogoHL.setText(Kune.getInstance().t.PutYourLogoHere());
-	    defTextPutYourLogoHL.setText("mirar LogoPanel.java");
+	    // TODO: Put your logo here functionality
+	    defTextPutYourLogoHL.setText(Kune.getInstance().t.PutYourLogoHere());
 
 	    // TODO: link to configure the logo
 	    addStyleName("kune-EntityTextLogo");

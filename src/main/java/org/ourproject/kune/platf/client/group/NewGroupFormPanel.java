@@ -77,10 +77,7 @@ public class NewGroupFormPanel extends Composite implements NewGroupFormView {
 
     public void clearData() {
 	licenseField.reset();
-	shortNameField.setValue("");
-	longNameField.setValue("");
-	publicDescField.setValue("");
-	projectRadio.setValue(true);
+	newGroupForm.reset();
 	// TODO: licenseDialog reset
     }
 

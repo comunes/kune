@@ -30,7 +30,7 @@ public interface WorkspaceView extends View {
 
     void setLogo(Image image);
 
-    void setContextTitle(String title);
+    void setContentTitle(String title);
 
     void setContent(View contentView);
 

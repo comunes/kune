@@ -149,4 +149,6 @@ public interface Translate extends Constants {
     String Project();
 
     String Create();
+
+    String Loading();
 }

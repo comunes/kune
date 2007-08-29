@@ -43,7 +43,7 @@ public class WorkspacePresenter implements Workspace {
     }
 
     public void showGroup(final GroupDTO group) {
-	view.setLogo("group name here");
+	view.setLogo(group.getLongName());
     }
 
     public void attachTools(final Iterator iterator) {
@@ -74,6 +74,10 @@ public class WorkspacePresenter implements Workspace {
 	content = contentComponent;
 	content.attach();
 	view.setContent(content.getView());
+    }
+
+    public void setContentTitle(final String title) {
+	view.setContentTitle(title);
     }
 
     public void adjustSize(final int windowWidth, final int clientHeight) {

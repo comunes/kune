@@ -5,12 +5,22 @@
     margin: 5px 5px 5px 5px;
 }
 
-#initialstatusbar {
+#kuneinitialstatusbar {
     position: absolute;
     top: 2px;
     left: 2px;
     width: 1px;
     z-index: 1000;
+}
+
+#kuneinitialcurtain {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: #FFF;
+    z-index: 999;
 }
 
 /* Global styles */
@@ -81,15 +91,15 @@
 }
 
 .kune-Button-Large-lrSpace {
-    margin: 0 12px 0 12px ;
+    margin: 0 12px 0 12px;
 }
 
 .kune-Button-Small-lrSpace {
-    margin: 0 10px 0 10px ;
+    margin: 0 10px 0 10px;
 }
 
 .kune-Button-Mini-lrSpace {
-    margin: 0 8px 0 8px ;
+    margin: 0 8px 0 8px;
 }
 
 .kune-Button-Large-rSpace {
@@ -127,7 +137,6 @@
 .kune-Button-Mini-tbSpace {
     margin: 8px 0 8px 0;
 }
-
 
 /* Sitebar */
 .kune-SiteBarPanel {
@@ -181,6 +190,7 @@
 }
 
 .kune-WorkspacePanel .GeneralHP {
+
 }
 
 .kune-WorkspacePanel .ContextPanel {
@@ -197,15 +207,17 @@
 }
 
 .kune-EntityTextLogo .gwt-Label {
-    font-size: 122%;
+    font-size: 167%;
+    overflow: hidden;
     font-weight: 700;
     color: navy;
     margin: 5px;
+    font-weight: 700;
 }
 
 .kune-EntityTextLogo .gwt-Hyperlink {
     color: #CCC;
-    font-size: 77%;
+    font-size: 85%;
     text-decoration: underline;
     text-align: right;
     margin: 5px;
@@ -317,13 +329,13 @@
 }
 
 .topBar .gwt-PushButton-up-disabled {
-    filter:alpha(opacity=20);
+    filter: alpha(opacity =   20);
     -moz-opacity: 0.2;
     opacity: 0.2;
 }
 
 .topBar .gwt-PushButton-down-disabled {
-    filter:alpha(opacity=20);
+    filter: alpha(opacity =   20);
     -moz-opacity: 0.2;
     opacity: 0.2;
 }
@@ -415,6 +427,3 @@
 .kune-SiteMessagePanel .info {
     background-color: #E5FF80;
 }
-
-
-

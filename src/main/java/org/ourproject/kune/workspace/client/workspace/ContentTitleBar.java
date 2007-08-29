@@ -22,6 +22,7 @@ package org.ourproject.kune.workspace.client.workspace;
 
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 class ContentTitleBar extends HorizontalPanel {
     private Label titleLabel = null;
@@ -30,8 +31,7 @@ class ContentTitleBar extends HorizontalPanel {
 	titleLabel = new Label();
 	add(titleLabel);
 	addStyleName("kune-ContentTitleBar");
-	// FIXME: Borrar esto
-	setTitleLabel("ContentTitleBar");
+	setCellVerticalAlignment(titleLabel, VerticalPanel.ALIGN_MIDDLE);
     }
 
     public void setTitleLabel(final String title) {

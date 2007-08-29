@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.platf.server.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -37,6 +38,8 @@ public class Data implements HasId {
 
     // http://openjpa.apache.org/docs/latest/manual/manual.html#jpa_overview_mapping_lob
     @Lob
+    // http://www.hibernate.org/112.html
+    @Column(length = 2147483647)
     char[] content;
 
     public String getTitle() {

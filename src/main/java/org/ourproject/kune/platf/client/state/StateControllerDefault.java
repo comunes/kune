@@ -23,6 +23,7 @@ package org.ourproject.kune.platf.client.state;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.workspace.client.Workspace;
@@ -37,8 +38,7 @@ public class StateControllerDefault implements StateController {
     private final Session session;
     private final ContentProvider provider;
 
-    public StateControllerDefault(final ContentProvider provider, final Application app,
-	    final Session session) {
+    public StateControllerDefault(final ContentProvider provider, final Application app, final Session session) {
 	this.provider = provider;
 	this.app = app;
 	this.session = session;
@@ -54,7 +54,7 @@ public class StateControllerDefault implements StateController {
     }
 
     private void onHistoryChanged(final StateToken newState) {
-	Site.showProgress("cargando...");
+	Site.showProgress(Kune.getInstance().t.Loading());
 	provider.getContent(session.user, newState, new AsyncCallback() {
 	    public void onFailure(final Throwable caught) {
 		Site.hideProgress();
@@ -91,6 +91,7 @@ public class StateControllerDefault implements StateController {
 
 	ClientTool clientTool = app.getTool(toolName);
 	clientTool.setContent(state);
+	workspace.setContentTitle(state.getTitle());
 	workspace.setContent(clientTool.getContent());
 	workspace.setContext(clientTool.getContext());
 	Site.hideProgress();
