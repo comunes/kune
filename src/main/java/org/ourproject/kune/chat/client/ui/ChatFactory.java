@@ -21,6 +21,9 @@
 package org.ourproject.kune.chat.client.ui;
 
 import org.ourproject.kune.chat.client.ChatEngine;
+import org.ourproject.kune.chat.client.rooms.MultiRoom;
+import org.ourproject.kune.chat.client.rooms.ui.MultiRoomPanel;
+import org.ourproject.kune.chat.client.rooms.ui.MultiRoomPresenter;
 import org.ourproject.kune.chat.client.ui.cnt.ChatContent;
 import org.ourproject.kune.chat.client.ui.cnt.ChatContentPresenter;
 import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomViewer;
@@ -30,9 +33,6 @@ import org.ourproject.kune.chat.client.ui.ctx.ChatContext;
 import org.ourproject.kune.chat.client.ui.ctx.ChatContextPresenter;
 import org.ourproject.kune.chat.client.ui.ctx.rooms.RoomsAdmin;
 import org.ourproject.kune.chat.client.ui.ctx.rooms.RoomsAdminPresenter;
-import org.ourproject.kune.chat.client.ui.rooms.MultiRoom;
-import org.ourproject.kune.chat.client.ui.rooms.MultiRoomPanel;
-import org.ourproject.kune.chat.client.ui.rooms.MultiRoomPresenter;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckPanel;
 import org.ourproject.kune.workspace.client.ui.WorkspaceFactory;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;

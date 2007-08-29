@@ -20,9 +20,9 @@
 
 package org.ourproject.kune.chat.client.ui.cnt;
 
+import org.ourproject.kune.chat.client.rooms.MultiRoom;
 import org.ourproject.kune.chat.client.ui.ChatFactory;
 import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomViewer;
-import org.ourproject.kune.chat.client.ui.rooms.MultiRoom;
 
 class Components {
 

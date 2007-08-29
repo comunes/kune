@@ -20,10 +20,10 @@
 
 package org.ourproject.kune.sitebar.client.bar;
 
+import org.ourproject.kune.chat.client.rooms.MultiRoom;
 import org.ourproject.kune.chat.client.rooms.Room;
+import org.ourproject.kune.chat.client.rooms.ui.RoomUser;
 import org.ourproject.kune.chat.client.ui.ChatFactory;
-import org.ourproject.kune.chat.client.ui.rooms.MultiRoom;
-import org.ourproject.kune.chat.client.ui.rooms.RoomUser;
 import org.ourproject.kune.platf.client.group.NewGroupForm;
 import org.ourproject.kune.platf.client.ui.BorderDecorator;
 import org.ourproject.kune.platf.client.ui.dialogs.TwoButtonsDialog;

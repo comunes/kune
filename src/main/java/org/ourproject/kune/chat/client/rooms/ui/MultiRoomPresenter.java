@@ -18,10 +18,11 @@
  *
  */
 
-package org.ourproject.kune.chat.client.ui.rooms;
+package org.ourproject.kune.chat.client.rooms.ui;
 
+import org.ourproject.kune.chat.client.rooms.MultiRoom;
 import org.ourproject.kune.chat.client.rooms.Room;
-import org.ourproject.kune.chat.client.ui.rooms.RoomUser.UserType;
+import org.ourproject.kune.chat.client.rooms.ui.RoomUser.UserType;
 
 public class MultiRoomPresenter implements MultiRoom {
     private MultiRoomPanel view;

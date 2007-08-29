@@ -1,6 +1,6 @@
 package org.ourproject.kune.chat.client.rooms;
 
-import org.ourproject.kune.chat.client.ui.rooms.RoomUser.UserType;
+import org.ourproject.kune.chat.client.rooms.ui.RoomUser.UserType;
 
 public interface Room {
     void setSubject(String subject);

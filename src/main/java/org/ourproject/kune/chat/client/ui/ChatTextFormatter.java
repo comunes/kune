@@ -1,7 +1,7 @@
 package org.ourproject.kune.chat.client.ui;
 
-import org.ourproject.kune.chat.client.ui.rooms.RoomImages;
-import org.ourproject.kune.chat.client.ui.rooms.RoomImages.App;
+import org.ourproject.kune.chat.client.rooms.ui.RoomImages;
+import org.ourproject.kune.chat.client.rooms.ui.RoomImages.App;
 
 import com.google.gwt.user.client.ui.HTML;
 

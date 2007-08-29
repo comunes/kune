@@ -1,4 +1,4 @@
-package org.ourproject.kune.chat.client.ui.rooms;
+package org.ourproject.kune.chat.client.rooms.ui;
 
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;

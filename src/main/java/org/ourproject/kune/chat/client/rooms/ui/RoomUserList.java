@@ -1,4 +1,4 @@
-package org.ourproject.kune.chat.client.ui.rooms;
+package org.ourproject.kune.chat.client.rooms.ui;
 
 interface RoomUserList {
     public RoomUserListView getView();

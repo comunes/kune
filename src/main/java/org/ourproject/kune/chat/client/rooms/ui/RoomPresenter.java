@@ -1,10 +1,10 @@
-package org.ourproject.kune.chat.client.ui.rooms;
+package org.ourproject.kune.chat.client.rooms.ui;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.ourproject.kune.chat.client.rooms.Room;
-import org.ourproject.kune.chat.client.ui.rooms.RoomUser.UserType;
+import org.ourproject.kune.chat.client.rooms.ui.RoomUser.UserType;
 
 public class RoomPresenter implements Room {
 
