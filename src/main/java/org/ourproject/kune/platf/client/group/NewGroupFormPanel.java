@@ -75,8 +75,9 @@ public class NewGroupFormPanel extends Composite implements NewGroupFormView {
     }
 
     public void clearData() {
-	// TODO
+	newGroupForm.reset();
 	licenseField.reset();
+	// TODO: licenseDialog reset
     }
 
     public String getShortName() {

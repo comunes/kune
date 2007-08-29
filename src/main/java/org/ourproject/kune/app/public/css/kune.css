@@ -138,23 +138,24 @@
 .kune-SiteBarPanel .gwt-TextBox {
     border: 1px solid #E4A374;
     margin: 0 15px 0 3px;
+    padding-left: 3px;
+    color: #B3B3B3;
 }
 
 .kune-SiteBarPanel .gwt-Hyperlink {
     white-space: nowrap;
     color: #B3B3B3;
     text-decoration: underline;
-    margin: 0 3px;
     cursor: pointer;
 }
 
-.kune-SiteBarPanel .gwt-Button { /* FIXME: test this */
+.kune-SiteBarPanel .gwt-PushButton { /* FIXME: test this */
     cursor: pointer;
 }
 
 .kune-SiteBarPanel-Separator {
     color: #E4A374;
-    margin: 0 3px;
+    margin: 0 5px;
 }
 
 .kune-SiteBarPanel-SpaceSeparator {

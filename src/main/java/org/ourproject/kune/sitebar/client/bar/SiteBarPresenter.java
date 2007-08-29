@@ -105,4 +105,14 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 	return view;
     }
 
+    protected void onSearchLostFocus(final String search) {
+	if (search.length() == 0) {
+	    view.setDefaultTextSearch();
+	}
+    }
+
+    protected void onSearchFocus() {
+	view.clearSearchText();
+    }
+
 }

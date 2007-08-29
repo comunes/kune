@@ -41,7 +41,7 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.FocusListener;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Hyperlink;
@@ -56,29 +56,33 @@ import com.google.gwt.user.client.ui.Widget;
 public class SiteBarPanel extends Composite implements SiteBarView {
 
     private static final String IMAGE_SPIN = "images/spin-kune-thund-green.gif";
+    private final SiteBarPresenter presenter;
+    private final Translate t;
+    private final Image logoImage;
+
     private final HorizontalPanel siteBarHP;
+
     private final Image spinProcessing;
     private final Label textProcessingLabel;
     private final Hyperlink loginHyperlink;
-    private final Translate t;
-    private final TextBox searchTextBox;
-    private final Image logoImage;
     private final Hyperlink newGroupHyperlink;
-    private final SiteBarPresenter presenter;
-    private final PushButton searchButton;
-    private DialogBox currentDialog;
-    private final Hyperlink logoutHyperlink;
     private final HTML pipeSeparatorHtml2;
+    private PushButton searchButton;
+    private TextBox searchTextBox;
+
+    private final Hyperlink logoutHyperlink;
     private LoginFormPanel loginPanel;
     private TwoButtonsDialog newGroupDialog;
+    private final Images img;
 
-    public SiteBarPanel(final SiteBarPresenter presenter) {
+    public SiteBarPanel(final SiteBarPresenter initPresenter) {
+	t = SiteBarTrans.getInstance().t;
+	img = Images.App.getInstance();
 
 	// Initialize
 	siteBarHP = new HorizontalPanel();
 	initWidget(siteBarHP);
-	this.presenter = presenter;
-	final Images img = Images.App.getInstance();
+	this.presenter = initPresenter;
 	spinProcessing = new Image();
 	img.spinKuneThundGreen().applyTo(spinProcessing);
 	spinProcessing.setUrl(IMAGE_SPIN);
@@ -89,15 +93,11 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	pipeSeparatorHtml2 = new HTML();
 	loginHyperlink = new Hyperlink();
 	logoutHyperlink = new Hyperlink();
-
 	HTML spaceSeparator1 = new HTML("<b></b>");
-	HTML spaceSeparator2 = new HTML("<b></b>");
 	MenuBar options = new MenuBar();
 	MenuBar optionsSubmenu = new MenuBar(true);
 	BorderDecorator optionsButton = new BorderDecorator(options, BorderDecorator.ALL, BorderDecorator.SIMPLE);
-
-	searchButton = new PushButton(img.kuneSearchIco().createImage(), img.kuneSearchIcoPush().createImage());
-	searchTextBox = new TextBox();
+	HTML spaceSeparator2 = new HTML("<b></b>");
 	logoImage = new Image();
 
 	// Layout
@@ -112,15 +112,13 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	siteBarHP.add(spaceSeparator1);
 	siteBarHP.add(optionsButton);
 	siteBarHP.add(spaceSeparator2);
-	siteBarHP.add(searchButton);
-	siteBarHP.add(searchTextBox);
+	createSearchBox();
 	siteBarHP.add(logoImage);
 
 	// Set properties
 	siteBarHP.addStyleName("kune-SiteBarPanel");
 	siteBarHP.setCellWidth(expandLabel, "100%");
 	spinProcessing.addStyleName("kune-Progress");
-	t = SiteBarTrans.getInstance().t;
 	textProcessingLabel.setText(t.Processing());
 	textProcessingLabel.addStyleName("kune-Progress");
 	newGroupHyperlink.setText(t.NewGroup());
@@ -161,15 +159,37 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	spaceSeparator1.setStyleName("kune-SiteBarPanel-SpaceSeparator");
 	spaceSeparator2.setStyleName("kune-SiteBarPanel-SpaceSeparator");
 
-	createListeners(presenter);
-
-	searchTextBox.setWidth("180");
-	searchTextBox.setText(t.Search());
+	createListeners();
 
 	// TODO: externalize this
 	img.kuneLogo16px().applyTo(logoImage);
 
 	this.hideProgress();
+    }
+
+    private void createSearchBox() {
+	searchButton = new PushButton(img.kuneSearchIco().createImage(), img.kuneSearchIcoPush().createImage());
+	searchTextBox = new TextBox();
+
+	siteBarHP.add(searchButton);
+	siteBarHP.add(searchTextBox);
+
+	searchTextBox.setWidth("180");
+	setDefaultTextSearch();
+	searchTextBox.addFocusListener(new FocusListener() {
+
+	    public void onFocus(final Widget arg0) {
+		presenter.onSearchFocus();
+	    }
+
+	    public void onLostFocus(final Widget arg0) {
+		presenter.onSearchLostFocus(searchTextBox.getText());
+	    }
+	});
+    }
+
+    public void setDefaultTextSearch() {
+	searchTextBox.setText(t.Search());
     }
 
     public void clearSearchText() {
@@ -223,8 +243,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     public void hideNewGroupDialog() {
-	currentDialog.hide();
-
+	newGroupDialog.hide();
     }
 
     public void setLogoutLinkVisible(final boolean visible) {
@@ -247,10 +266,9 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	textProcessingLabel.setVisible(false);
     }
 
-    private void createListeners(final SiteBarPresenter presenter) {
+    private void createListeners() {
 	loginHyperlink.addClickListener(new ClickListener() {
 	    public void onClick(final Widget arg0) {
-		// i18n:
 		presenter.doLogin();
 	    }
 	});

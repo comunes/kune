@@ -52,4 +52,6 @@ public interface SiteBarView extends View {
 
     void hideNewGroupDialog();
 
+    void setDefaultTextSearch();
+
 }
