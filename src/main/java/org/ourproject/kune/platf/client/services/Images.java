@@ -32,20 +32,25 @@ import com.google.gwt.user.client.ui.ImageBundle;
 public interface Images extends ImageBundle {
 
     public static class App {
-        private static Images ourInstance = null;
+	private static Images ourInstance = null;
 
-        public static synchronized Images getInstance() {
-            if (ourInstance == null) {
-                ourInstance = (Images) GWT.create(Images.class);
-            }
-            return ourInstance;
-        }
+	public static synchronized Images getInstance() {
+	    if (ourInstance == null) {
+		ourInstance = (Images) GWT.create(Images.class);
+	    }
+	    return ourInstance;
+	}
     }
 
     /**
      * @gwt.resource org/ourproject/kune/platf/public/images/add.png
      */
     AbstractImagePrototype add();
+
+    /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/add-green.png
+     */
+    AbstractImagePrototype addGreen();
 
     /**
      * @gwt.resource org/ourproject/kune/platf/public/images/arrow-down-black.gif
