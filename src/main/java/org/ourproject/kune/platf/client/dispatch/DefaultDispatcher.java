@@ -37,6 +37,7 @@ public class DefaultDispatcher implements Dispatcher {
     }
 
     public Action subscribe(final Action action) {
+	GWT.log("Registering action: " + action.getActionName() + "[" + action.getEventName() + "]", null);
 	List list = getSubscriptorsList(action.getEventName());
 	list.add(action);
 	actions.put(action.getActionName(), action);
@@ -65,6 +66,7 @@ public class DefaultDispatcher implements Dispatcher {
     }
 
     private void fire(final Action action, final Object value, final Object extra) {
+	GWT.log("Executing: " + action.getActionName(), null);
 	action.execute(value, extra);
     }
 

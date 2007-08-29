@@ -17,4 +17,5 @@
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.google.gwt.dev.GWTShell"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-noserver -port 8080 /kune"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.ourproject.kune"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xmx256M"/>
 </launchConfiguration>

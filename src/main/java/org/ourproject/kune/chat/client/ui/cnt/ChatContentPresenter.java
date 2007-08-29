@@ -21,6 +21,7 @@
 package org.ourproject.kune.chat.client.ui.cnt;
 
 import org.ourproject.kune.chat.client.ChatEngine;
+import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomViewer;
 import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomViewerListener;
 import org.ourproject.kune.chat.client.ui.rooms.MultiRoom;
 import org.ourproject.kune.platf.client.View;
@@ -50,12 +51,18 @@ public class ChatContentPresenter implements ChatContent, ChatRoomViewerListener
     }
 
     public void setState(final StateDTO state) {
-	view.show(components.getChatRoomViewer().getView());
+	ChatRoomViewer viewer = components.getChatRoomViewer();
+	viewer.setState(engine.getState());
+	view.show(viewer.getView());
+    }
+
+    public void onReconnect() {
+	engine.reconnect();
     }
 
     public void onEnterRoom() {
 	MultiRoom rooms = components.getRooms();
-
+	rooms.show();
     }
 
 }

@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.app.client;
 
+import org.ourproject.kune.chat.client.ChatClientModule;
 import org.ourproject.kune.docs.client.DocsClientModule;
 import org.ourproject.kune.platf.client.KuneClientModule;
 import org.ourproject.kune.platf.client.KunePlatform;

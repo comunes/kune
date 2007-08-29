@@ -23,7 +23,6 @@ package org.ourproject.kune.chat.client.ui.rooms;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.RoomDTO;
 
 public class MultiRoomPresenter implements MultiRoom {
@@ -81,8 +80,8 @@ public class MultiRoomPresenter implements MultiRoom {
 	getPresenter(room).addDelimiter(datetime);
     }
 
-    public View getView() {
-	return view;
+    public void show() {
+	view.show();
     }
 
     protected void onSend(final int key, final boolean isCtrl) {

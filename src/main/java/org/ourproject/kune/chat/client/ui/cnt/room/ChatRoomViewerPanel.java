@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.chat.client.ui.cnt.room;
 
+import org.ourproject.kune.chat.client.ChatState;
 import org.ourproject.kune.platf.client.View;
 
 import com.google.gwt.user.client.ui.Button;
@@ -34,6 +35,7 @@ import com.google.gwt.user.client.ui.Widget;
  * 
  */
 public class ChatRoomViewerPanel extends VerticalPanel implements ChatRoomViewer, View {
+    private final VerticalPanel stateArea;
 
     public ChatRoomViewerPanel(final ChatRoomViewerListener listener) {
 	FlowPanel flow = new FlowPanel();
@@ -43,7 +45,26 @@ public class ChatRoomViewerPanel extends VerticalPanel implements ChatRoomViewer
 		listener.onEnterRoom();
 	    }
 	}));
-	add(new Label("panel del chat: contenido por defecto"));
+	flow.add(new Button("reconnect", new ClickListener() {
+	    public void onClick(final Widget arg0) {
+		listener.onReconnect();
+	    }
+	}));
+	add(flow);
+	stateArea = new VerticalPanel();
+	add(stateArea);
+    }
+
+    public void setState(final ChatState state) {
+	stateArea.clear();
+	stateArea.add(new Label("base: " + state.httpBase));
+	stateArea.add(new Label("domain: " + state.domain));
+	stateArea.add(new Label("connected: " + state.isConnected));
+	if (state.user != null) {
+	    stateArea.add(new Label("user: " + state.user.userName));
+	    stateArea.add(new Label("password: " + state.user.password));
+	    stateArea.add(new Label("resource: " + state.user.resource));
+	}
     }
 
     public View getView() {
