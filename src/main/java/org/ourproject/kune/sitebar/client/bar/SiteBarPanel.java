@@ -49,6 +49,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class SiteBarPanel extends Composite implements SiteBarView {
 
+    private static final String IGNORE_TOKEN = "fixme";
     private static final String IMAGE_SPIN = "images/spin-kune-thund-green.gif";
     private final SiteBarPresenter presenter;
     private final Translate t;
@@ -116,6 +117,8 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	textProcessingLabel.setText(t.Processing());
 	textProcessingLabel.addStyleName("kune-Progress");
 	newGroupHyperlink.setText(t.NewGroup());
+	newGroupHyperlink.setTargetHistoryToken(IGNORE_TOKEN);
+
 	newGroupHyperlink.addClickListener(new ClickListener() {
 	    public void onClick(final Widget arg0) {
 		presenter.doNewGroup();
@@ -126,6 +129,9 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	pipeSeparatorHtml2.setHTML("|");
 	pipeSeparatorHtml2.setStyleName("kune-SiteBarPanel-Separator");
 	loginHyperlink.setText(t.Login());
+	loginHyperlink.setTargetHistoryToken(IGNORE_TOKEN);
+	logoutHyperlink.setText(t.Logout());
+	logoutHyperlink.setTargetHistoryToken(IGNORE_TOKEN);
 
 	options.addItem(t.Options(), true, optionsSubmenu);
 
@@ -266,7 +272,6 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 		presenter.doLogin();
 	    }
 	});
-	logoutHyperlink.setText(t.Logout());
 	searchButton.addClickListener(new ClickListener() {
 	    public void onClick(final Widget arg0) {
 		MultiChatExample.show();
