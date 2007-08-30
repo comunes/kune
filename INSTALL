@@ -54,6 +54,10 @@ Add this lines to conf/openfire.xml:
 
 <jive>
   ...
+  <jdbcProvider>
+    <driver>com.mysql.jdbc.Driver</driver>
+    <connectionString>jdbc:mysql://localhost/kune_dev?user=kune&amp;password=db4kune&amp;useUnicode=true&amp;characterEncoding=utf-8</connectionString>
+  </jdbcProvider>
   <provider>
     <auth>
       <className>org.jivesoftware.openfire.auth.JDBCAuthProvider</className>
