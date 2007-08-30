@@ -53,4 +53,7 @@ public class ApplicationStub implements Application {
     public void setGroupState(final String groupShortName) {
 
     }
+
+    public void start() {
+    }
 }

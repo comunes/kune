@@ -28,16 +28,10 @@ import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.platf.client.state.StateController;
 import org.ourproject.kune.platf.client.tool.ClientTool;
-import org.ourproject.kune.sitebar.client.SiteBarFactory;
 import org.ourproject.kune.sitebar.client.bar.SiteBarListener;
 import org.ourproject.kune.workspace.client.Workspace;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.WorkspaceFactory;
-
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.RootPanel;
 
 public class DefaultApplication implements Application {
     private final Workspace workspace;
@@ -47,27 +41,18 @@ public class DefaultApplication implements Application {
 
     public DefaultApplication(final Map tools) {
 	this.tools = tools;
-	workspace = WorkspaceFactory.getWorkspace();
+	workspace = WorkspaceFactory.createWorkspace();
 	workspace.attachTools(tools.values().iterator());
 
-	SiteBarListener listener = new SiteBarListener() {
+	DesktopView desktop = WorkspaceFactory.createDesktop(workspace, new SiteBarListener() {
 	    public void onUserLoggedIn(final UserDTO user) {
 		dispatcher.fire(WorkspaceEvents.LOGIN, user, null);
 	    }
 
 	    public void onUserLoggedOut() {
 	    }
-	};
-
-	final Desktop desktop = new Desktop(workspace, listener);
-	RootPanel.get().add(desktop);
-	DeferredCommand.addCommand(new Command() {
-	    public void execute() {
-		int windowWidth = Window.getClientWidth();
-		workspace.adjustSize(windowWidth, Window.getClientHeight());
-		SiteBarFactory.getSiteMessage().adjustWidth(windowWidth);
-	    }
 	});
+	desktop.attach();
 
     }
 
@@ -98,6 +83,10 @@ public class DefaultApplication implements Application {
 	    ClientTool tool = (ClientTool) iterator.next();
 	    tool.setGroupState(groupShortName);
 	}
+    }
+
+    public void start() {
+	dispatcher.fireDeferred(WorkspaceEvents.INIT, null, null);
     }
 
 }

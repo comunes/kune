@@ -28,18 +28,14 @@ import org.ourproject.kune.platf.client.dispatch.ActionEvent;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.rpc.ContentService;
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.state.ContentProvider;
 import org.ourproject.kune.platf.client.state.ContentProviderImpl;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateController;
 import org.ourproject.kune.platf.client.state.StateControllerDefault;
 import org.ourproject.kune.platf.client.tool.ClientTool;
-import org.ourproject.kune.platf.client.utils.PrefetchUtilites;
 import org.ourproject.kune.workspace.client.actions.WorkspaceAction;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.RootPanel;
 
@@ -58,7 +54,7 @@ public class ApplicationBuilder {
 	RootPanel.get("kuneinitialstatusbar").setVisible(false);
 
 	final Session session = new Session(userHash);
-	ContentProviderImpl provider = new ContentProviderImpl(ContentService.App.getInstance());
+	ContentProvider provider = new ContentProviderImpl(ContentService.App.getInstance());
 	final StateController stateManager = new StateControllerDefault(provider, application, session);
 	History.addHistoryListener(stateManager);
 
@@ -68,14 +64,6 @@ public class ApplicationBuilder {
 
 	application.init(dispatcher, stateManager);
 
-	DeferredCommand.addCommand(new Command() {
-	    public void execute() {
-		GWT.log("Locale: " + Kune.getInstance().t.Locale(), null);
-		PrefetchUtilites.preFetchImpImages();
-		PrefetchUtilites.preFetchLicenses(session);
-		RootPanel.get("kuneinitialcurtain").setVisible(false);
-	    }
-	});
 	return application;
     }
 
@@ -102,4 +90,5 @@ public class ApplicationBuilder {
 	}
 	return tools;
     }
+
 }

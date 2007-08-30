@@ -30,7 +30,6 @@ import org.ourproject.kune.platf.client.app.ApplicationBuilder;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Cookies;
-import com.google.gwt.user.client.History;
 
 public class KuneEntryPoint implements EntryPoint {
 
@@ -52,9 +51,8 @@ public class KuneEntryPoint implements EntryPoint {
 	platform.install(new DocsClientModule());
 	platform.install(new ChatClientModule());
 	Application app = new ApplicationBuilder(userHash, platform).build();
+	app.start();
 
-	String token = History.getToken();
-	app.getStateManager().onHistoryChanged(token);
     }
 
     private boolean isNotValid(final String userHash) {

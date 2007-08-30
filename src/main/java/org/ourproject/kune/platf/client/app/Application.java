@@ -41,4 +41,6 @@ public interface Application {
      */
     void setGroupState(String groupShortName);
 
+    void start();
+
 }

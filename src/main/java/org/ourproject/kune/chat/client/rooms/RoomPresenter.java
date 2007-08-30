@@ -45,8 +45,11 @@ public class RoomPresenter implements Room {
 
     private XmppRoom handler;
 
-    public RoomPresenter(final String roomName, final String userAlias, final UserType userType,
-	    final RoomUserList userList) {
+    private final RoomListener listener;
+
+    public RoomPresenter(final RoomListener listener, final String roomName, final String userAlias,
+	    final UserType userType, final RoomUserList userList) {
+	this.listener = listener;
 	this.roomName = roomName;
 	this.sessionUserAlias = userAlias;
 	this.userList = userList;
@@ -70,6 +73,7 @@ public class RoomPresenter implements Room {
 	    throw new RuntimeException("Trying to send a chat message with a user not in this room");
 	}
 	view.showMessage(user.getAlias(), user.getColor(), message);
+	listener.onMessageReceived(this);
     }
 
     public void addInfoMessage(final String message) {
@@ -137,6 +141,7 @@ public class RoomPresenter implements Room {
 
     public void setHandler(final XmppRoom handler) {
 	this.handler = handler;
+	listener.onRoomReady(this);
     }
 
     public boolean isReady() {

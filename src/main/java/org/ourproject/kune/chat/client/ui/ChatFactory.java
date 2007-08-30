@@ -25,6 +25,7 @@ import org.ourproject.kune.chat.client.rooms.MultiRoom;
 import org.ourproject.kune.chat.client.rooms.MultiRoomListener;
 import org.ourproject.kune.chat.client.rooms.MultiRoomPresenter;
 import org.ourproject.kune.chat.client.rooms.Room;
+import org.ourproject.kune.chat.client.rooms.RoomListener;
 import org.ourproject.kune.chat.client.rooms.RoomPresenter;
 import org.ourproject.kune.chat.client.rooms.RoomUserList;
 import org.ourproject.kune.chat.client.rooms.RoomUserListPresenter;
@@ -84,9 +85,10 @@ public class ChatFactory {
 	return userListPresenter;
     }
 
-    public static Room createRoom(final String roomName, final String userAlias, final UserType type) {
+    public static Room createRoom(final RoomListener listener, final String roomName, final String userAlias,
+	    final UserType type) {
 	RoomUserList userList = ChatFactory.createUserList();
-	RoomPresenter presenter = new RoomPresenter(roomName, userAlias, type, userList);
+	RoomPresenter presenter = new RoomPresenter(listener, roomName, userAlias, type, userList);
 	RoomPanel panel = new RoomPanel(presenter);
 	presenter.init(panel);
 	return presenter;

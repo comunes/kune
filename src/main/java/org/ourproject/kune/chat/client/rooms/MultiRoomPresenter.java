@@ -23,7 +23,7 @@ package org.ourproject.kune.chat.client.rooms;
 import org.ourproject.kune.chat.client.rooms.RoomUser.UserType;
 import org.ourproject.kune.chat.client.ui.ChatFactory;
 
-public class MultiRoomPresenter implements MultiRoom {
+public class MultiRoomPresenter implements MultiRoom, RoomListener {
     private MultiRoomView view;
     private Room currentRoom;
     private final MultiRoomListener listener;
@@ -37,7 +37,7 @@ public class MultiRoomPresenter implements MultiRoom {
     }
 
     public Room createRoom(final String roomName, final String userAlias, final UserType type) {
-	Room room = ChatFactory.createRoom(roomName, userAlias, type);
+	Room room = ChatFactory.createRoom(this, roomName, userAlias, type);
 	view.createRoom(room);
 	room.addUser(userAlias, type);
 	view.addRoomUsersPanel(room.getUsersListView());
@@ -96,5 +96,15 @@ public class MultiRoomPresenter implements MultiRoom {
 	view.setSubject(nextRoom.getSubject());
 	view.showUserList(nextRoom.getUsersListView());
 	currentRoom = nextRoom;
+    }
+
+    public void onRoomReady(final Room room) {
+	if (currentRoom == room) {
+	    view.setSendEnabled(true);
+	}
+    }
+
+    public void onMessageReceived(final Room room) {
+	// TODO: hacer algo!! mostrar un mensaje, abrir la room... lo que sea!!
     }
 }

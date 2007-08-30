@@ -33,7 +33,7 @@ class ChatEngineXmpp implements ChatEngine {
 
     public ChatEngineXmpp() {
 	state = new ChatState();
-	// FIXME
+	// FIXME: hardcoded
 	state.httpBase = "/http-bind/";
 	state.domain = "localhost";
 	state.roomHost = "conference.localhost";

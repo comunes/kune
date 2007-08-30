@@ -20,7 +20,27 @@
 
 package org.ourproject.kune.workspace.client.actions;
 
+import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.utils.PrefetchUtilites;
+import org.ourproject.kune.sitebar.client.SiteBarFactory;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.RootPanel;
+
 public class InitAction extends WorkspaceAction {
     public void execute(final Object value, final Object extra) {
+	GWT.log("Locale: " + Kune.getInstance().t.Locale(), null);
+	PrefetchUtilites.preFetchImpImages();
+	PrefetchUtilites.preFetchLicenses(session);
+
+	String token = History.getToken();
+	stateManager.onHistoryChanged(token);
+	int windowWidth = Window.getClientWidth();
+	workspace.adjustSize(windowWidth, Window.getClientHeight());
+	SiteBarFactory.getSiteMessage().adjustWidth(windowWidth);
+
+	RootPanel.get("kuneinitialcurtain").setVisible(false);
     }
 }
