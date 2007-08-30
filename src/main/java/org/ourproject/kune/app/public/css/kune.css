@@ -155,7 +155,7 @@
     color: #B3B3B3;
 }
 
-.kune-SiteBarPanel .gwt-Hyperlink {
+.kune-SiteBarPanel .gwt-Hyperlink a {
     white-space: nowrap;
     color: #B3B3B3;
     text-decoration: underline;

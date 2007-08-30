@@ -50,7 +50,9 @@ public class StateControllerDefault implements StateController {
 
     public void onHistoryChanged(final String historyToken) {
 	GWT.log("State: " + historyToken, null);
-	onHistoryChanged(new StateToken(historyToken));
+	if (!historyToken.equals("fixme")) {
+	    onHistoryChanged(new StateToken(historyToken));
+	}
     }
 
     private void onHistoryChanged(final StateToken newState) {

@@ -24,13 +24,13 @@ import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.IconHyperlink;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtext.client.widgets.MessageBox;
 
 public class ContextItemsPanel extends DockPanel implements ContextItemsView {
     private final VerticalPanel controls;
@@ -38,6 +38,7 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
     private final TopBar topBar;
     private final ContextItemsPresenter presenter;
     private String currentEventName;
+    private String workaroundTypeName;
 
     public ContextItemsPanel(final ContextItemsPresenter presenter) {
 	this.presenter = presenter;
@@ -96,7 +97,7 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
 
     public void addCommand(final String typeName, final String label, final String eventName) {
 	final String type = typeName;
-	IconHyperlink hl = new IconHyperlink(Images.App.getInstance().addGreen(), label, "ignore");
+	IconHyperlink hl = new IconHyperlink(Images.App.getInstance().addGreen(), label, "fixme");
 	hl.addClickListener(new ClickListener() {
 	    public void onClick(final Widget sender) {
 		currentEventName = eventName;
@@ -107,7 +108,13 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
     }
 
     public void showCreationField(final String typeName) {
-	String value = Window.prompt("Crear " + typeName + "con nombre: ", "");
-	presenter.create(typeName, value, currentEventName);
+	// Workaround: gwt-ext bug, I cannot use typeName directly
+	workaroundTypeName = typeName;
+	// i18n
+	MessageBox.prompt("Add a new " + typeName, "Please enter name:", new MessageBox.PromptCallback() {
+	    public void execute(final String btnID, final String text) {
+		presenter.create(workaroundTypeName, text, currentEventName);
+	    }
+	});
     }
 }

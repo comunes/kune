@@ -81,8 +81,10 @@ public class ContextItemsPresenter implements ContextItems {
     }
 
     public void create(final String typeName, final String value, final String eventName) {
-	Dispatcher dispatcher = Dispatcher.App.instance;
-	dispatcher.fire(eventName, value, null);
+	if (value != null) {
+	    Dispatcher dispatcher = Dispatcher.App.instance;
+	    dispatcher.fire(eventName, value, null);
+	}
     }
 
     public void setParentTreeVisible(final boolean visible) {
