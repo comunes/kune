@@ -22,9 +22,17 @@ package org.ourproject.kune.chat.client;
 import com.calclab.gwtjsjac.client.XmppUser;
 
 public class ChatState {
-    public String httpBase;
     public boolean isConnected = false;
-    public String domain;
     public XmppUser user;
-    public String roomHost;
+    public final String httpBase;
+    public final String domain;
+    public final String roomHost;
+
+    public ChatState(final String httpBase, final String domain, final String roomHost) {
+	this.httpBase = httpBase;
+	this.domain = domain;
+	this.roomHost = roomHost;
+	user = null;
+	isConnected = false;
+    }
 }

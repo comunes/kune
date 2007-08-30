@@ -32,12 +32,8 @@ class ChatEngineXmpp implements ChatEngine {
     private XmppSession session;
     private final ChatState state;
 
-    public ChatEngineXmpp() {
-	state = new ChatState();
-	// FIXME: hardcoded
-	state.httpBase = "/http-bind/";
-	state.domain = "localhost";
-	state.roomHost = "conference.localhost";
+    public ChatEngineXmpp(final ChatState state) {
+	this.state = state;
 	connection = new XmppHttpBindingConnection(state.httpBase, 2000);
 	Debugger.debug(connection, new GWTLoggerOutput());
     }

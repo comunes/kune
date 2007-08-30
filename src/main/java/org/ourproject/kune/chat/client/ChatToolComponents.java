@@ -27,15 +27,15 @@ import org.ourproject.kune.chat.client.ui.ctx.ChatContext;
 class ChatToolComponents {
     private ChatContent content;
     private ChatContext context;
-    private final ChatEngine engine;
+    private final ChatProvider provider;
 
-    public ChatToolComponents(final ChatClientTool chatClientTool) {
-	this.engine = chatClientTool.engine;
+    public ChatToolComponents(final ChatProvider provider) {
+	this.provider = provider;
     }
 
     public ChatContent getContent() {
 	if (content == null) {
-	    content = ChatFactory.createChatContent(engine);
+	    content = ChatFactory.createChatContent(provider);
 	}
 	return content;
     }

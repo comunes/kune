@@ -24,20 +24,27 @@ import org.ourproject.kune.platf.client.tool.AbstractClientTool;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
-public class ChatClientTool extends AbstractClientTool {
+public class ChatClientTool extends AbstractClientTool implements ChatProvider {
     public static final String NAME = "chats";
     public static final String TYPE_ROOT = "chat.root";
     public static final String TYPE_ROOM = "chat.room";
     public static final String TYPE_CHAT = "chat.chat";
 
     private final ChatToolComponents components;
-    public final ChatEngine engine;
+    private ChatEngine chat;
 
     public ChatClientTool() {
 	// i18n
 	super("salas de chat");
-	engine = new ChatEngineXmpp();
 	components = new ChatToolComponents(this);
+    }
+
+    public ChatEngine getChat() {
+	return chat;
+    }
+
+    public void setChat(final ChatEngine chat) {
+	this.chat = chat;
     }
 
     public WorkspaceComponent getContent() {

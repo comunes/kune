@@ -19,15 +19,15 @@
 
 package org.ourproject.kune.chat.client.actions;
 
-import org.ourproject.kune.chat.client.ChatEngine;
+import org.ourproject.kune.chat.client.ChatProvider;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.UserDTO;
 
 public class ChatLoginAction implements Action {
-    private final ChatEngine engine;
+    private final ChatProvider provider;
 
-    public ChatLoginAction(final ChatEngine engine) {
-	this.engine = engine;
+    public ChatLoginAction(final ChatProvider provider) {
+	this.provider = provider;
     }
 
     public void execute(final Object value, final Object extra) {
@@ -35,6 +35,6 @@ public class ChatLoginAction implements Action {
     }
 
     private void login(final UserDTO user) {
-	engine.login(user.getChatName(), user.getChatPassword());
+	provider.getChat().login(user.getChatName(), user.getChatPassword());
     }
 }

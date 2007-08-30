@@ -1,6 +1,6 @@
 package org.ourproject.kune.chat.client.actions;
 
-import org.ourproject.kune.chat.client.ChatEngine;
+import org.ourproject.kune.chat.client.ChatProvider;
 import org.ourproject.kune.chat.client.rooms.Room;
 import org.ourproject.kune.platf.client.dispatch.Action;
 
@@ -10,10 +10,10 @@ import com.calclab.gwtjsjac.client.mandioca.XmppRoom;
 import com.google.gwt.core.client.GWT;
 
 public class JoinRoomAction implements Action {
-    private final ChatEngine engine;
+    private final ChatProvider provider;
 
-    public JoinRoomAction(final ChatEngine chatEngine) {
-	this.engine = chatEngine;
+    public JoinRoomAction(final ChatProvider provider) {
+	this.provider = provider;
     }
 
     private void joinRoom(final Room room) {
@@ -21,7 +21,7 @@ public class JoinRoomAction implements Action {
 	room.addInfoMessage("connecting to the room...");
 	GWT.log("a ver!!!", null);
 	// FIXME: hardcoded
-	XmppRoom handler = engine.joinRoom("kune", "kuneClientAlias");
+	XmppRoom handler = provider.getChat().joinRoom("kune", "kuneClientAlias");
 	handler.addMessageListener(new XmppMessageListener() {
 	    public void onMessageReceived(final XmppMessage message) {
 		room.addMessage(message.getFrom(), message.getBody());

@@ -22,8 +22,8 @@ package org.ourproject.kune.chat.client.ui.cnt;
 
 import java.util.HashMap;
 
-import org.ourproject.kune.chat.client.ChatEngine;
 import org.ourproject.kune.chat.client.ChatEvents;
+import org.ourproject.kune.chat.client.ChatProvider;
 import org.ourproject.kune.chat.client.rooms.MultiRoom;
 import org.ourproject.kune.chat.client.rooms.MultiRoomListener;
 import org.ourproject.kune.chat.client.rooms.Room;
@@ -42,11 +42,11 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener, Mult
 
     private final WorkspaceDeckView view;
     private final Components components;
-    private final ChatEngine engine;
     private final HashMap roomNamesToTooms;
+    private final ChatProvider provider;
 
-    public ChatContentPresenter(final ChatEngine engine, final WorkspaceDeckView view) {
-	this.engine = engine;
+    public ChatContentPresenter(final ChatProvider provider, final WorkspaceDeckView view) {
+	this.provider = provider;
 	this.view = view;
 	this.components = new Components(this);
 	this.roomNamesToTooms = new HashMap();
@@ -64,12 +64,12 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener, Mult
 
     public void setState(final StateDTO state) {
 	ChatRoom viewer = components.getChatRoom();
-	viewer.setState(engine.getState());
+	viewer.setState(provider.getChat().getState());
 	view.show(viewer.getView());
     }
 
     public void onReconnect() {
-	engine.reconnect();
+	provider.getChat().reconnect();
     }
 
     public void onEnterRoom() {

@@ -20,7 +20,7 @@
 
 package org.ourproject.kune.chat.client.ui;
 
-import org.ourproject.kune.chat.client.ChatEngine;
+import org.ourproject.kune.chat.client.ChatProvider;
 import org.ourproject.kune.chat.client.rooms.MultiRoom;
 import org.ourproject.kune.chat.client.rooms.MultiRoomListener;
 import org.ourproject.kune.chat.client.rooms.MultiRoomPresenter;
@@ -48,9 +48,9 @@ import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 
 public class ChatFactory {
 
-    public static ChatContent createChatContent(final ChatEngine engine) {
+    public static ChatContent createChatContent(final ChatProvider provider) {
 	WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
-	ChatContentPresenter presenter = new ChatContentPresenter(engine, panel);
+	ChatContentPresenter presenter = new ChatContentPresenter(provider, panel);
 	return presenter;
     }
 
