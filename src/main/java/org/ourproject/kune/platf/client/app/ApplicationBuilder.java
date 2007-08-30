@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.KunePlatform;
+import org.ourproject.kune.platf.client.dispatch.ActionEvent;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.rpc.ContentService;
@@ -80,13 +81,15 @@ public class ApplicationBuilder {
 
     public void prepareActions(final DefaultDispatcher dispatcher, final List actions,
 	    final DefaultApplication application, final Session session, final StateController stateManager) {
+	ActionEvent actionEvent;
 	WorkspaceAction action;
 
 	int total = actions.size();
 	for (int index = 0; index < total; index++) {
-	    action = (WorkspaceAction) actions.get(index);
+	    actionEvent = (ActionEvent) actions.get(index);
+	    action = (WorkspaceAction) actionEvent.action;
 	    action.init(application, session, stateManager);
-	    dispatcher.subscribe(action);
+	    dispatcher.subscribe(actionEvent.event, action);
 	}
     }
 

@@ -25,12 +25,6 @@ import org.ourproject.kune.workspace.client.actions.WorkspaceAction;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public class GoParentFolder extends WorkspaceAction {
-    private static final String NAME = "platf.GoParentFolder";
-
-    public GoParentFolder() {
-	super(NAME, DocsEvents.GO_PARENT_FOLDER);
-    }
-
     public void execute(final Object value, final Object extra) {
 	goParent(getState());
     }

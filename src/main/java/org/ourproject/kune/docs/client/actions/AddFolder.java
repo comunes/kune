@@ -31,12 +31,6 @@ import org.ourproject.kune.workspace.client.dto.StateDTO;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class AddFolder extends WorkspaceAction {
-    private static final String KEY = "docs.AddFolder";
-
-    public AddFolder() {
-	super(KEY, DocsEvents.ADD_FOLDER);
-    }
-
     public void execute(final Object value, final Object extra) {
 	String name = (String) value;
 	GroupDTO group = getState().getGroup();

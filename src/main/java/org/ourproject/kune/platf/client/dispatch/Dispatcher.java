@@ -25,12 +25,9 @@ public interface Dispatcher {
 	public static Dispatcher instance;
     }
 
-    Action subscribe(Action action);
+    Action subscribe(String eventName, Action action);
 
     void fire(String eventName, Object value, Object extra);
 
     void fireDeferred(String eventName, Object value, Object extra);
-
-    Action getAction(String key);
-
 }

@@ -31,18 +31,14 @@ import com.google.gwt.user.client.History;
 
 public class DefaultDispatcher implements Dispatcher {
     private final HashMap subscriptors;
-    private final HashMap actions;
 
     public DefaultDispatcher() {
 	this.subscriptors = new HashMap();
-	this.actions = new HashMap();
     }
 
-    public Action subscribe(final Action action) {
-	GWT.log("Registering action: " + action.getActionName() + "[" + action.getEventName() + "]", null);
-	List list = getSubscriptorsList(action.getEventName());
+    public Action subscribe(final String eventName, final Action action) {
+	List list = getSubscriptorsList(eventName);
 	list.add(action);
-	actions.put(action.getActionName(), action);
 	return action;
     }
 
@@ -72,16 +68,11 @@ public class DefaultDispatcher implements Dispatcher {
     }
 
     private void fire(final Action action, final Object value, final Object extra) {
-	GWT.log("Executing: " + action.getActionName(), null);
 	action.execute(value, extra);
     }
 
     public void fireState(final String encodedEvent) {
 	History.newItem(encodedEvent);
-    }
-
-    public Action getAction(final String key) {
-	return (Action) actions.get(key);
     }
 
 }

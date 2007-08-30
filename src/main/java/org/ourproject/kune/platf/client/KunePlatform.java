@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.dispatch.ActionEvent;
 import org.ourproject.kune.platf.client.extend.ClientModule;
 import org.ourproject.kune.platf.client.extend.Register;
 import org.ourproject.kune.platf.client.tool.ClientTool;
@@ -41,8 +42,8 @@ public class KunePlatform implements Register {
 	tools.add(clientTool);
     }
 
-    public void addAction(final Action action) {
-	actions.add(action);
+    public void addAction(final String eventName, final Action action) {
+	actions.add(new ActionEvent(eventName, action));
     }
 
     public void install(final ClientModule module) {

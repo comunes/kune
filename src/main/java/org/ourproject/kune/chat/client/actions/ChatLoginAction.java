@@ -21,15 +21,12 @@ package org.ourproject.kune.chat.client.actions;
 
 import org.ourproject.kune.chat.client.ChatEngine;
 import org.ourproject.kune.platf.client.dto.UserDTO;
-import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.actions.WorkspaceAction;
 
 public class ChatLoginAction extends WorkspaceAction {
-    private static final String NAME = "chat.Login";
     private final ChatEngine engine;
 
     public ChatLoginAction(final ChatEngine engine) {
-	super(NAME, WorkspaceEvents.LOGIN);
 	this.engine = engine;
     }
 

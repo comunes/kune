@@ -22,6 +22,7 @@ package org.ourproject.kune.docs.client;
 
 import org.ourproject.kune.docs.client.actions.AddDocument;
 import org.ourproject.kune.docs.client.actions.AddFolder;
+import org.ourproject.kune.docs.client.actions.DocsEvents;
 import org.ourproject.kune.docs.client.actions.GoParentFolder;
 import org.ourproject.kune.docs.client.actions.SaveDocument;
 import org.ourproject.kune.platf.client.extend.ClientModule;
@@ -30,9 +31,9 @@ import org.ourproject.kune.platf.client.extend.Register;
 public class DocsClientModule implements ClientModule {
     public void configure(final Register register) {
 	register.addTool(new DocumentClientTool());
-	register.addAction(new SaveDocument());
-	register.addAction(new AddDocument());
-	register.addAction(new AddFolder());
-	register.addAction(new GoParentFolder());
+	register.addAction(DocsEvents.SAVE_DOCUMENT, new SaveDocument());
+	register.addAction(DocsEvents.ADD_DOCUMENT, new AddDocument());
+	register.addAction(DocsEvents.ADD_FOLDER, new AddFolder());
+	register.addAction(DocsEvents.GO_PARENT_FOLDER, new GoParentFolder());
     }
 }

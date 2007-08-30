@@ -24,13 +24,14 @@ import org.ourproject.kune.chat.client.actions.ChatLoginAction;
 import org.ourproject.kune.chat.client.actions.JoinRoomAction;
 import org.ourproject.kune.platf.client.extend.ClientModule;
 import org.ourproject.kune.platf.client.extend.Register;
+import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
 public class ChatClientModule implements ClientModule {
 
     public void configure(final Register register) {
 	ChatClientTool chatTool = new ChatClientTool();
 	register.addTool(chatTool);
-	register.addAction(new ChatLoginAction(chatTool.engine));
-	register.addAction(new JoinRoomAction(chatTool.engine));
+	register.addAction(WorkspaceEvents.LOGIN, new ChatLoginAction(chatTool.engine));
+	register.addAction(ChatEvents.JOIN_ROOM, new JoinRoomAction(chatTool.engine));
     }
 }

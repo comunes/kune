@@ -19,8 +19,6 @@ public class DispatcherTest {
 	Action[] actions = new Action[3];
 	for (int index = 0; index < actions.length; index++) {
 	    Action action = EasyMock.createNiceMock(Action.class);
-	    EasyMock.expect(action.getEventName()).andReturn(eventName);
-	    EasyMock.expect(action.getActionName()).andReturn("" + index);
 	    action.execute(value, null);
 	    EasyMock.expectLastCall();
 	    actions[index] = action;
@@ -29,7 +27,7 @@ public class DispatcherTest {
 	    EasyMock.replay(actions[index]);
 	}
 	for (int index = 0; index < actions.length; index++) {
-	    dispatcher.subscribe(actions[index]);
+	    dispatcher.subscribe(eventName, actions[index]);
 	}
 
 	dispatcher.fire(eventName, value, null);

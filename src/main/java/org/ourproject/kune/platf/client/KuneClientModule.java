@@ -22,12 +22,13 @@ package org.ourproject.kune.platf.client;
 
 import org.ourproject.kune.platf.client.extend.ClientModule;
 import org.ourproject.kune.platf.client.extend.Register;
+import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.actions.InitAction;
 import org.ourproject.kune.workspace.client.actions.LoginAction;
 
 public class KuneClientModule implements ClientModule {
     public void configure(final Register register) {
-	register.addAction(new InitAction());
-	register.addAction(new LoginAction());
+	register.addAction(WorkspaceEvents.INIT, new InitAction());
+	register.addAction(WorkspaceEvents.LOGIN, new LoginAction());
     }
 }
