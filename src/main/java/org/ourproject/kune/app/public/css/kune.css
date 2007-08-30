@@ -86,6 +86,10 @@
     width: 100%;
 }
 
+.kune-expandVert {
+    height: 100%;
+}
+
 .kune-Default-Form {
     margin: 20px;
 }

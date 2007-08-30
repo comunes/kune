@@ -27,6 +27,10 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class RoomUserListPanel extends VerticalPanel implements RoomUserListView {
     public RoomUserListPanel() {
+	Label expand = new Label();
+	this.add(expand);
+	expand.setStyleName("kune-expandVert");
+	this.setCellHeight(expand, "100%");
     }
 
     public int addUser(final RoomUser user) {
@@ -40,7 +44,7 @@ public class RoomUserListPanel extends VerticalPanel implements RoomUserListView
 	}
 	userPanel.add(userIcon);
 	userPanel.add(userAliasLabel);
-	this.add(userPanel);
+	this.insert(userPanel, this.getWidgetCount() - 1);
 	return this.getWidgetIndex(userPanel);
     }
 
