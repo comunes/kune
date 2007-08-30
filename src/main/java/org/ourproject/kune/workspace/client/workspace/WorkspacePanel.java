@@ -88,6 +88,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	addStyleName("kune-WorkspacePanel");
 	groupAreaVP.addStyleName("ContextPanel");
 	generalHP.addStyleName("GeneralHP");
+	setLogo("");
     }
 
     public void addTab(final ToolTrigger trigger) {

@@ -96,7 +96,7 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
 
     public void addCommand(final String typeName, final String label, final String eventName) {
 	final String type = typeName;
-	IconHyperlink hl = new IconHyperlink(Images.App.getInstance().addGreen(), label, "");
+	IconHyperlink hl = new IconHyperlink(Images.App.getInstance().addGreen(), label, "ignore");
 	hl.addClickListener(new ClickListener() {
 	    public void onClick(final Widget sender) {
 		currentEventName = eventName;
