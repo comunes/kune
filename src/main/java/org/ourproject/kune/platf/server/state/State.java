@@ -37,6 +37,7 @@ public class State {
     private AccessRights folderRights;
     private Double rate;
     private Integer rateByUsers;
+    private String typeId;
 
     public State() {
     }
@@ -127,6 +128,14 @@ public class State {
 
     public void setRateByUsers(final Integer rateByUsers) {
 	this.rateByUsers = rateByUsers;
+    }
+
+    public void setTypeId(final String typeId) {
+	this.typeId = typeId;
+    }
+
+    public String getTypeId() {
+	return typeId;
     }
 
 }

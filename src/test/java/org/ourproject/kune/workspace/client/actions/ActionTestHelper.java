@@ -19,16 +19,17 @@ public class ActionTestHelper {
     public String userHash;
     public Workspace workspace;
     private final Action action;
+    private final Services services;
 
     public ActionTestHelper(final Action action, final boolean useNiceMocks) {
 	this.action = action;
 	app = new ApplicationStub(useNiceMocks);
 	session = new NiceState();
-	Services.init("userHash", app, session, app.getStateManager(), app.getDispatcher());
+	services = Services.init("userHash", app, session, app.getStateManager(), app.getDispatcher());
     }
 
     public void execute(final Object value) {
-	action.execute(value, null);
+	action.execute(value, null, services);
     }
 
 }

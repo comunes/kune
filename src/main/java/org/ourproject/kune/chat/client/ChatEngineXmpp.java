@@ -19,6 +19,8 @@
 
 package org.ourproject.kune.chat.client;
 
+import java.util.Date;
+
 import com.calclab.gwtjsjac.client.Debugger;
 import com.calclab.gwtjsjac.client.XmppHttpBindingConnection;
 import com.calclab.gwtjsjac.client.XmppPresence;
@@ -44,6 +46,7 @@ class ChatEngineXmpp implements ChatEngine {
 
     public void login(final String chatName, final String chatPassword) {
 	state.user = new XmppUser(state.domain, chatName, chatPassword);
+	state.user.resource = "kuneClient" + new Date().getTime();
 	state.isConnected = false;
 	reconnect();
     }

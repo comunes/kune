@@ -27,7 +27,7 @@ public interface MultiRoomView {
 
     String getInputText();
 
-    void createRoom(Room room);
+    void addRoom(Room room);
 
     void setInputText(String savedInput);
 

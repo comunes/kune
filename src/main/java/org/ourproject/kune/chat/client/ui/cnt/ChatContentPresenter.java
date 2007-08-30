@@ -22,8 +22,10 @@ package org.ourproject.kune.chat.client.ui.cnt;
 
 import java.util.HashMap;
 
+import org.ourproject.kune.chat.client.ChatClientTool;
 import org.ourproject.kune.chat.client.ChatEvents;
 import org.ourproject.kune.chat.client.ChatProvider;
+import org.ourproject.kune.chat.client.cnt.info.ChatInfo;
 import org.ourproject.kune.chat.client.rooms.MultiRoom;
 import org.ourproject.kune.chat.client.rooms.MultiRoomListener;
 import org.ourproject.kune.chat.client.rooms.Room;
@@ -33,6 +35,7 @@ import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoom;
 import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomListener;
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.ui.UnknowComponent;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
@@ -45,6 +48,7 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener, Mult
     private final HashMap roomNamesToTooms;
     private final ChatProvider provider;
 
+    // FIXME: do not depend on provider. use actions!
     public ChatContentPresenter(final ChatProvider provider, final WorkspaceDeckView view) {
 	this.provider = provider;
 	this.view = view;
@@ -63,18 +67,23 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener, Mult
     }
 
     public void setState(final StateDTO state) {
-	ChatRoom viewer = components.getChatRoom();
-	viewer.setState(provider.getChat().getState());
-	view.show(viewer.getView());
-    }
-
-    public void onReconnect() {
-	provider.getChat().reconnect();
+	String typeId = state.getTypeId();
+	if (typeId.equals(ChatClientTool.TYPE_ROOT)) {
+	    ChatInfo info = components.getChatInfo();
+	    info.setChatState(provider.getChat().getState());
+	    view.show(info.getView());
+	} else if (typeId.equals(ChatClientTool.TYPE_ROOM)) {
+	    ChatRoom viewer = components.getChatRoom();
+	    view.show(viewer.getView());
+	} else {
+	    view.show(UnknowComponent.instance.getView());
+	}
     }
 
     public void onEnterRoom() {
 	MultiRoom rooms = components.getRooms();
-	Room room = getRoom("room name", "user alias", RoomUser.VISITOR);
+	// FIXME: hardcoded
+	Room room = getRoom("kune", "alias", RoomUser.VISITOR);
 	rooms.activateRoom(room);
 	rooms.show();
     }

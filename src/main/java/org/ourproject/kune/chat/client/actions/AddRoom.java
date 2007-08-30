@@ -20,9 +20,10 @@
 
 package org.ourproject.kune.chat.client.actions;
 
+import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 
 public class AddRoom implements Action {
-    public void execute(final Object value, final Object extra) {
+    public void execute(final Object value, final Object extra, Services services) {
     }
 }

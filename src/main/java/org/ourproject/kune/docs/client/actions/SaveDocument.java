@@ -31,7 +31,7 @@ import org.ourproject.kune.workspace.client.dto.StateDTO;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class SaveDocument implements Action {
-    public void execute(final Object value, final Object extra) {
+    public void execute(final Object value, final Object extra, Services services) {
 	save((StateDTO) value, (DocumentContent) extra);
     }
 

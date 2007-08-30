@@ -19,11 +19,7 @@
 
 package org.ourproject.kune.chat.client.ui.cnt.room;
 
-import org.ourproject.kune.chat.client.ChatState;
-import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.Component;
 
-public interface ChatRoom {
-    public View getView();
-
-    public void setState(ChatState state);
+public interface ChatRoom extends Component {
 }

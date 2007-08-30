@@ -20,32 +20,41 @@
 
 package org.ourproject.kune.chat.client.ui.cnt;
 
+import org.ourproject.kune.chat.client.cnt.info.ChatInfo;
 import org.ourproject.kune.chat.client.rooms.MultiRoom;
 import org.ourproject.kune.chat.client.ui.ChatFactory;
 import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoom;
 
 class Components {
 
-    private final ChatContentPresenter presenter;
+    private final ChatContentPresenter owner;
     private MultiRoom multiRoom;
     private ChatRoom chatRoom;
+    private ChatInfo chatInfo;
 
-    public Components(final ChatContentPresenter presenter) {
-	this.presenter = presenter;
+    public Components(final ChatContentPresenter owner) {
+	this.owner = owner;
     }
 
     public ChatRoom getChatRoom() {
 	if (chatRoom == null) {
-	    chatRoom = ChatFactory.createChatRoomViewer(presenter);
+	    chatRoom = ChatFactory.createChatRoomViewer(owner);
 	}
 	return chatRoom;
     }
 
     public MultiRoom getRooms() {
 	if (multiRoom == null) {
-	    multiRoom = ChatFactory.createChatMultiRoom(presenter);
+	    multiRoom = ChatFactory.createChatMultiRoom(owner);
 	}
 	return multiRoom;
+    }
+
+    public ChatInfo getChatInfo() {
+	if (chatInfo == null) {
+	    chatInfo = ChatFactory.createChatInfo(owner);
+	}
+	return chatInfo;
     }
 
 }

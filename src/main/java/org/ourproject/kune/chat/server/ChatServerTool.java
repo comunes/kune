@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.chat.server;
 
+import org.ourproject.kune.chat.client.ChatClientTool;
 import org.ourproject.kune.platf.server.content.ContainerManager;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
@@ -33,9 +34,9 @@ import org.ourproject.kune.platf.server.tool.ToolRegistry;
 import com.google.inject.Inject;
 
 public class ChatServerTool implements ServerTool {
-    public static final String TYPE_ROOT = "chat.root";
-    public static final String TYPE_ROOM = "chat.room";
-    public static final String TYPE_CHAT = "chat.chat";
+    public static final String TYPE_ROOT = ChatClientTool.TYPE_ROOT;
+    public static final String TYPE_ROOM = ChatClientTool.TYPE_ROOM;
+    public static final String TYPE_CHAT = ChatClientTool.TYPE_CHAT;
     public static final String NAME = "chats";
     private final ToolConfigurationManager configurationManager;
     private final ContainerManager containerManager;

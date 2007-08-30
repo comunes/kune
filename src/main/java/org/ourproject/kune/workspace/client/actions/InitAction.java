@@ -40,7 +40,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 
 public class InitAction implements Action {
-    public void execute(final Object value, final Object extra) {
+    public void execute(final Object value, final Object extra, Services services) {
 	GWT.log("Locale: " + Kune.getInstance().t.Locale(), null);
 	PrefetchUtilites.preFetchImpImages();
 	getInitData();

@@ -20,6 +20,7 @@
 package org.ourproject.kune.chat.client.actions;
 
 import org.ourproject.kune.chat.client.ChatProvider;
+import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.UserDTO;
 
@@ -30,7 +31,7 @@ public class ChatLoginAction implements Action {
 	this.provider = provider;
     }
 
-    public void execute(final Object value, final Object extra) {
+    public void execute(final Object value, final Object extra, Services services) {
 	login((UserDTO) value);
     }
 

@@ -76,7 +76,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	createLayout();
     }
 
-    public void createRoom(final Room room) {
+    public void addRoom(final Room room) {
 	final BorderLayout layout = dialog.getLayout();
 	layout.beginUpdate();
 

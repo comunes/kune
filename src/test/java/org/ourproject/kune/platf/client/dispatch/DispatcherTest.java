@@ -19,7 +19,7 @@ public class DispatcherTest {
 	Action[] actions = new Action[3];
 	for (int index = 0; index < actions.length; index++) {
 	    Action action = EasyMock.createNiceMock(Action.class);
-	    action.execute(value, null);
+	    action.execute(value, null, null);
 	    EasyMock.expectLastCall();
 	    actions[index] = action;
 	}

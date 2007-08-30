@@ -25,6 +25,8 @@ import org.ourproject.kune.platf.client.View;
 import com.calclab.gwtjsjac.client.mandioca.XmppRoom;
 
 public interface Room {
+    String getName();
+
     void setSubject(String subject);
 
     void addUser(String userAlias, UserType moderador);
@@ -39,7 +41,7 @@ public interface Room {
 
     XmppRoom getHandler();
 
-    String getSessionUserAlias();
+    String getSessionAlias();
 
     void clearSavedInput();
 

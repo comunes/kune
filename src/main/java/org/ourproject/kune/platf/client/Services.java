@@ -6,10 +6,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateController;
 
 /**
- * I hope this is the only singleton in the app!!
- * 
- * it could be done by injecting inside the actions, but i want to save memory
- * (Initialized in ApplicationBuilder)
+ * no puede ser singleton
  * 
  */
 public class Services {
@@ -20,7 +17,7 @@ public class Services {
     public final Dispatcher dispatcher;
     public final String user;
 
-    private Services(final String userHash, final Application application, final Session session,
+    public Services(final String userHash, final Application application, final Session session,
 	    final StateController stateManager, final Dispatcher dispatcher) {
 	this.user = userHash;
 	this.app = application;
@@ -29,9 +26,10 @@ public class Services {
 	this.dispatcher = dispatcher;
     }
 
-    public static void init(final String userHash, final Application application, final Session session,
+    public static Services init(final String userHash, final Application application, final Session session,
 	    final StateController stateManager, final Dispatcher dispatcher) {
 	instance = new Services(userHash, application, session, stateManager, dispatcher);
+	return instance;
     }
 
     public final static Services get() {

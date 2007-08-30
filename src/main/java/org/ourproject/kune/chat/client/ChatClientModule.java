@@ -23,6 +23,7 @@ package org.ourproject.kune.chat.client;
 import org.ourproject.kune.chat.client.actions.ChatLoginAction;
 import org.ourproject.kune.chat.client.actions.ChatLogoutAction;
 import org.ourproject.kune.chat.client.actions.JoinRoomAction;
+import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.extend.ClientModule;
@@ -36,7 +37,7 @@ public class ChatClientModule implements ClientModule {
 	register.addTool(chatTool);
 
 	register.addAction(WorkspaceEvents.INIT_DATA_RECEIVED, new Action() {
-	    public void execute(final Object value, final Object extra) {
+	    public void execute(final Object value, final Object extra, Services services) {
 		InitDataDTO initData = (InitDataDTO) value;
 		ChatState state = new ChatState(initData.getChatHttpBase(), initData.getChatDomain(), initData
 			.getChatRoomHost());

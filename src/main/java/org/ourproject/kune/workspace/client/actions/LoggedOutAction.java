@@ -8,7 +8,7 @@ import com.google.gwt.user.client.History;
 
 public class LoggedOutAction implements Action {
 
-    public void execute(final Object value, final Object extra) {
+    public void execute(final Object value, final Object extra, Services services) {
 	Site.sitebar.showLoggedUser(null);
 	String token = History.getToken();
 	Services.get().stateManager.onHistoryChanged(token);

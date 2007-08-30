@@ -41,6 +41,7 @@ public class StateDTO implements IsSerializable {
     private AccessRightsDTO folderRights;
     private Double rate;
     private Integer rateByUsers;
+    private String typeId;
 
     public StateDTO() {
 	this(null, null, null);
@@ -156,6 +157,14 @@ public class StateDTO implements IsSerializable {
 
     public void setFolderRights(final AccessRightsDTO folderRights) {
 	this.folderRights = folderRights;
+    }
+
+    public String getTypeId() {
+	return typeId;
+    }
+
+    public void setTypeId(final String typeId) {
+	this.typeId = typeId;
     }
 
 }

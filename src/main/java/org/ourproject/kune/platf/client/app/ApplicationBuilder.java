@@ -20,11 +20,14 @@
 
 package org.ourproject.kune.platf.client.app;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.Services;
+import org.ourproject.kune.platf.client.dispatch.ActionEvent;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.state.ContentProvider;
@@ -58,9 +61,20 @@ public class ApplicationBuilder {
 
 	final DefaultDispatcher dispatcher = new DefaultDispatcher();
 	application.init(dispatcher, stateManager);
+	subscribeActions(dispatcher, platform.getActions());
 
-	Services.init(userHash, application, session, stateManager, dispatcher);
+	Services services = Services.init(userHash, application, session, stateManager, dispatcher);
+	dispatcher.setServices(services);
 	return application;
+    }
+
+    private void subscribeActions(final DefaultDispatcher dispatcher, final ArrayList actions) {
+	ActionEvent actionEvent;
+
+	for (Iterator it = actions.iterator(); it.hasNext();) {
+	    actionEvent = (ActionEvent) it.next();
+	    dispatcher.subscribe(actionEvent.event, actionEvent.action);
+	}
     }
 
     private HashMap indexTools(final List toolList) {

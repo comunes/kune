@@ -21,6 +21,8 @@
 package org.ourproject.kune.chat.client.ui;
 
 import org.ourproject.kune.chat.client.ChatProvider;
+import org.ourproject.kune.chat.client.cnt.info.ChatInfo;
+import org.ourproject.kune.chat.client.cnt.info.ui.ChatInfoPanel;
 import org.ourproject.kune.chat.client.rooms.MultiRoom;
 import org.ourproject.kune.chat.client.rooms.MultiRoomListener;
 import org.ourproject.kune.chat.client.rooms.MultiRoomPresenter;
@@ -92,5 +94,10 @@ public class ChatFactory {
 	RoomPanel panel = new RoomPanel(presenter);
 	presenter.init(panel);
 	return presenter;
+    }
+
+    public static ChatInfo createChatInfo(final ChatRoomListener listener) {
+	ChatInfoPanel panel = new ChatInfoPanel(listener);
+	return panel;
     }
 }

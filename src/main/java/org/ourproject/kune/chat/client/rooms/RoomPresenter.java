@@ -95,7 +95,7 @@ public class RoomPresenter implements Room {
 	input = null;
     }
 
-    public String getSessionUserAlias() {
+    public String getSessionAlias() {
 	return sessionUserAlias;
     }
 
@@ -119,7 +119,7 @@ public class RoomPresenter implements Room {
 	this.subject = subject;
     }
 
-    public String getRoomName() {
+    public String getName() {
 	return roomName;
     }
 

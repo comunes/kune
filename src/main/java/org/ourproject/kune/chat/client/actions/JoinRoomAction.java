@@ -2,12 +2,12 @@ package org.ourproject.kune.chat.client.actions;
 
 import org.ourproject.kune.chat.client.ChatProvider;
 import org.ourproject.kune.chat.client.rooms.Room;
+import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 
 import com.calclab.gwtjsjac.client.XmppMessage;
 import com.calclab.gwtjsjac.client.XmppMessageListener;
 import com.calclab.gwtjsjac.client.mandioca.XmppRoom;
-import com.google.gwt.core.client.GWT;
 
 public class JoinRoomAction implements Action {
     private final ChatProvider provider;
@@ -19,9 +19,7 @@ public class JoinRoomAction implements Action {
     private void joinRoom(final Room room) {
 	// i18n
 	room.addInfoMessage("connecting to the room...");
-	GWT.log("a ver!!!", null);
-	// FIXME: hardcoded
-	XmppRoom handler = provider.getChat().joinRoom("kune", "kuneClientAlias");
+	XmppRoom handler = provider.getChat().joinRoom(room.getName(), room.getSessionAlias());
 	handler.addMessageListener(new XmppMessageListener() {
 	    public void onMessageReceived(final XmppMessage message) {
 		room.addMessage(message.getFrom(), message.getBody());
@@ -34,10 +32,10 @@ public class JoinRoomAction implements Action {
 	room.setHandler(handler);
 
 	// i18n
-	room.addInfoMessage("you have entered!");
+	room.addInfoMessage("you have entered the room!");
     }
 
-    public void execute(final Object value, final Object extra) {
+    public void execute(final Object value, final Object extra, Services services) {
 	joinRoom((Room) value);
     }
 

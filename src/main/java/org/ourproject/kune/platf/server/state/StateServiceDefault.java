@@ -30,17 +30,19 @@ import com.google.inject.Singleton;
 @Singleton
 public class StateServiceDefault implements StateService {
     public State create(final Access access) {
-	Content descriptor = access.getDescriptor();
-	Container container = descriptor.getFolder();
+	Content content = access.getDescriptor();
+	Container container = content.getFolder();
 	State state = new State();
 
-	Long documentId = descriptor.getId();
+	Long documentId = content.getId();
 	if (documentId != null) {
+	    state.setTypeId(content.getTypeId());
 	    state.setDocumentId(documentId.toString());
 	} else {
+	    state.setTypeId(container.getTypeId());
 	    state.setDocumentId(null);
 	}
-	Data data = descriptor.getLastRevision().getData();
+	Data data = content.getLastRevision().getData();
 	char[] text = data.getContent();
 	state.setContent(text == null ? null : new String(text));
 	state.setTitle(data.getTitle());
@@ -50,8 +52,8 @@ public class StateServiceDefault implements StateService {
 	state.setAccessLists(access.getContentAccessLists());
 	state.setContentRights(access.getContentRights());
 	state.setFolderRights(access.getFolderRights());
-	state.setRate(descriptor.calculateRate(descriptor));
-	state.setRateByUsers(descriptor.calculateRateNumberOfUsers(descriptor));
+	state.setRate(content.calculateRate(content));
+	state.setRateByUsers(content.calculateRateNumberOfUsers(content));
 	return state;
     }
 }

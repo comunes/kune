@@ -25,7 +25,7 @@ import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.sitebar.client.Site;
 
 public class LoggedInAction implements Action {
-    public void execute(final Object value, final Object extra) {
+    public void execute(final Object value, final Object extra, Services services) {
 	onLoggedIn((UserDTO) value);
     }
 

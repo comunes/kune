@@ -30,7 +30,7 @@ public class MultiChatExample {
     public static void show() {
 	final MultiRoom rooms = ChatFactory.createChatMultiRoom(new MultiRoomListener() {
 	    public void onSendMessage(Room room, String message) {
-		room.addMessage(room.getSessionUserAlias(), message);
+		room.addMessage(room.getSessionAlias(), message);
 	    }
 	});
 	rooms.show();

@@ -32,7 +32,7 @@ import org.ourproject.kune.workspace.client.dto.StateDTO;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class AddFolder implements Action {
-    public void execute(final Object value, final Object extra) {
+    public void execute(final Object value, final Object extra, Services services) {
 	String name = (String) value;
 	GroupDTO group = Services.get().session.getCurrentState().getGroup();
 	ContainerDTO container = Services.get().session.getCurrentState().getFolder();
