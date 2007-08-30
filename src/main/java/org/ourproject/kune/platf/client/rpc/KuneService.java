@@ -23,23 +23,29 @@ package org.ourproject.kune.platf.client.rpc;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.dto.InitDataDTO;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
-//TODO: cambiar nombre a UserService
+// TODO: cambiar nombre a UserService
 public interface KuneService extends RemoteService {
 
+    // FIXME: falta el userHash!
     void createNewGroup(GroupDTO group) throws SerializableException;
 
+    InitDataDTO getInitData(String userHash);
+
     /**
+     * @deprecated
      * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.LicenseDTO>
      */
     List getAllLicenses() throws SerializableException;
 
     /**
+     * @deprecated
      * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.LicenseDTO>
      */
     List getNotCCLicenses() throws SerializableException;

@@ -30,4 +30,6 @@ public interface SiteBar {
 
     View getView();
 
+    void showLoggedUser(String userName);
+
 }

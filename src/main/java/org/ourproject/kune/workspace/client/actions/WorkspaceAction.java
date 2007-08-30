@@ -30,8 +30,6 @@ import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public abstract class WorkspaceAction implements Action {
     protected Application app;
-    protected Workspace workspace;
-    protected Dispatcher dispatcher;
     protected StateController stateManager;
     protected String user;
     protected Session session;
@@ -40,8 +38,6 @@ public abstract class WorkspaceAction implements Action {
 	this.app = app;
 	this.session = session;
 	this.stateManager = stateManager;
-	this.workspace = app.getWorkspace();
-	this.dispatcher = app.getDispatcher();
 	this.user = stateManager.getUser();
     }
 
@@ -51,5 +47,13 @@ public abstract class WorkspaceAction implements Action {
 
     protected StateDTO getState() {
 	return session.getCurrentState();
+    }
+
+    protected Workspace getWorkspace() {
+	return app.getWorkspace();
+    }
+
+    protected Dispatcher getDispatcher() {
+	return app.getDispatcher();
     }
 }

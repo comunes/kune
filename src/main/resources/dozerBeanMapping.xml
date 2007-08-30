@@ -9,6 +9,34 @@
 	</configuration>
 
 	<mapping>
+		<class-a>
+			org.ourproject.kune.platf.client.dto.InitDataDTO
+		</class-a>
+		<class-b>org.ourproject.kune.platf.server.InitData</class-b>
+		<field>
+			<a>CCLicenses</a>
+			<b>CCLicenses</b>
+			<a-hint>
+				org.ourproject.kune.platf.client.dto.LicenseDTO
+			</a-hint>
+			<b-hint>
+				org.ourproject.kune.platf.server.domain.License
+			</b-hint>
+		</field>
+		<field>
+			<a>notCCLicenses</a>
+			<b>notCCLicenses</b>
+			<a-hint>
+				org.ourproject.kune.platf.client.dto.LicenseDTO
+			</a-hint>
+			<b-hint>
+				org.ourproject.kune.platf.server.domain.License
+			</b-hint>
+		</field>
+
+	</mapping>
+
+	<mapping>
 		<class-a>org.ourproject.kune.platf.client.dto.GroupDTO</class-a>
 		<class-b>org.ourproject.kune.platf.server.domain.Group</class-b>
 	</mapping>
@@ -35,9 +63,7 @@
 		<class-a>
 			org.ourproject.kune.workspace.client.dto.StateDTO
 		</class-a>
-		<class-b>
-			org.ourproject.kune.platf.server.state.State
-		</class-b>
+		<class-b>org.ourproject.kune.platf.server.state.State</class-b>
 	</mapping>
 
 	<mapping>

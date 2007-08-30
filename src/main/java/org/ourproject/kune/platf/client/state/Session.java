@@ -36,16 +36,22 @@ public class Session {
     public final String user;
     private GroupDTO group;
     private String currentToolName;
-    private List licenses;
-    private List licensesNotCC;
+    /**
+     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.LicenseDTO>
+     */
+    private List ccLicenses;
+    /**
+     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.LicenseDTO>
+     */
+    private List notCCLicenses;
     private StateDTO currentState;
 
     public Session(final String userHash) {
 	user = userHash;
 	group = null;
 	currentToolName = null;
-	licenses = null;
-	licensesNotCC = null;
+	ccLicenses = null;
+	notCCLicenses = null;
     }
 
     public void setGroup(final GroupDTO group) {
@@ -68,20 +74,20 @@ public class Session {
 	return group.getShortName().equals(groupName);
     }
 
-    public List getLicenses() {
-	return licenses;
+    public List getCCLicenses() {
+	return ccLicenses;
     }
 
-    public void setLicenses(final List licenses) {
-	this.licenses = licenses;
+    public void setCCLicenses(final List licenses) {
+	this.ccLicenses = licenses;
     }
 
-    public List getLicensesNotCC() {
-	return licensesNotCC;
+    public List getNotCCLicenses() {
+	return notCCLicenses;
     }
 
-    public void setLicensesNotCC(final List licensesNotCC) {
-	this.licensesNotCC = licensesNotCC;
+    public void setNotCCLicenses(final List licensesNotCC) {
+	this.notCCLicenses = licensesNotCC;
     }
 
     public boolean currentGroupIs(final String groupName) {

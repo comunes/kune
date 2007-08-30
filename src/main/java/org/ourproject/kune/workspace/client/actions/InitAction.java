@@ -20,27 +20,52 @@
 
 package org.ourproject.kune.workspace.client.actions;
 
+import org.ourproject.kune.platf.client.dto.InitDataDTO;
+import org.ourproject.kune.platf.client.dto.UserDTO;
+import org.ourproject.kune.platf.client.rpc.KuneService;
+import org.ourproject.kune.platf.client.rpc.KuneServiceAsync;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.utils.PrefetchUtilites;
+import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
+import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 
 public class InitAction extends WorkspaceAction {
     public void execute(final Object value, final Object extra) {
 	GWT.log("Locale: " + Kune.getInstance().t.Locale(), null);
 	PrefetchUtilites.preFetchImpImages();
-	PrefetchUtilites.preFetchLicenses(session);
+	getInitData();
 
-	String token = History.getToken();
-	stateManager.onHistoryChanged(token);
+	// String token = History.getToken();
+	// stateManager.onHistoryChanged(token);
 	int windowWidth = Window.getClientWidth();
-	workspace.adjustSize(windowWidth, Window.getClientHeight());
+	getWorkspace().adjustSize(windowWidth, Window.getClientHeight());
 	SiteBarFactory.getSiteMessage().adjustWidth(windowWidth);
 
 	RootPanel.get("kuneinitialcurtain").setVisible(false);
+    }
+
+    private void getInitData() {
+	// PrefetchUtilites.preFetchLicenses(session);
+
+	KuneServiceAsync server = KuneService.App.getInstance();
+	server.getInitData(user, new AsyncCallback() {
+	    public void onFailure(final Throwable error) {
+		Site.error("Error fetching initial data");
+	    }
+
+	    public void onSuccess(final Object response) {
+		InitDataDTO initData = (InitDataDTO) response;
+		session.setCCLicenses(initData.getCCLicenses());
+		session.setNotCCLicenses(initData.getNotCCLicenses());
+		UserDTO currentUser = initData.getCurrentUser();
+		getDispatcher().fire(WorkspaceEvents.USER_CHANGED, currentUser, null);
+	    }
+	});
     }
 }

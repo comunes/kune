@@ -28,8 +28,18 @@ public interface KuneServiceAsync {
 
     void createNewGroup(GroupDTO group, AsyncCallback callback);
 
+    /**
+     * @deprecated
+     * @param callback
+     */
     void getAllLicenses(AsyncCallback callback);
 
+    /**
+     * @deprecated
+     * @param callback
+     */
     void getNotCCLicenses(AsyncCallback callback);
+
+    void getInitData(String userHash, AsyncCallback callback);
 
 }

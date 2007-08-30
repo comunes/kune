@@ -23,6 +23,7 @@ package org.ourproject.kune.platf.client.utils;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.rpc.KuneService;
+import org.ourproject.kune.platf.client.rpc.KuneServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.sitebar.client.Site;
 
@@ -39,7 +40,7 @@ public class PrefetchUtilites {
     }
 
     public static void preFetchLicenses(final Session session) {
-	org.ourproject.kune.platf.client.rpc.KuneServiceAsync kuneService = KuneService.App.getInstance();
+	KuneServiceAsync kuneService = KuneService.App.getInstance();
 	kuneService.getAllLicenses(new AsyncCallback() {
 	    public void onFailure(final Throwable arg0) {
 		// TODO
@@ -47,7 +48,7 @@ public class PrefetchUtilites {
 	    }
 
 	    public void onSuccess(final Object result) {
-		session.setLicenses((List) result);
+		session.setCCLicenses((List) result);
 	    }
 	});
 
@@ -58,7 +59,7 @@ public class PrefetchUtilites {
 	    }
 
 	    public void onSuccess(final Object result) {
-		session.setLicensesNotCC((List) result);
+		session.setNotCCLicenses((List) result);
 	    }
 	});
 

@@ -31,7 +31,7 @@ public class ChatClientModule implements ClientModule {
     public void configure(final Register register) {
 	ChatClientTool chatTool = new ChatClientTool();
 	register.addTool(chatTool);
-	register.addAction(WorkspaceEvents.LOGIN, new ChatLoginAction(chatTool.engine));
+	register.addAction(WorkspaceEvents.USER_CHANGED, new ChatLoginAction(chatTool.engine));
 	register.addAction(ChatEvents.JOIN_ROOM, new JoinRoomAction(chatTool.engine));
     }
 }

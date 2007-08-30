@@ -24,11 +24,11 @@ import org.ourproject.kune.platf.client.extend.ClientModule;
 import org.ourproject.kune.platf.client.extend.Register;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.actions.InitAction;
-import org.ourproject.kune.workspace.client.actions.LoginAction;
+import org.ourproject.kune.workspace.client.actions.UserChangedAction;
 
 public class KuneClientModule implements ClientModule {
     public void configure(final Register register) {
 	register.addAction(WorkspaceEvents.INIT, new InitAction());
-	register.addAction(WorkspaceEvents.LOGIN, new LoginAction());
+	register.addAction(WorkspaceEvents.USER_CHANGED, new UserChangedAction());
     }
 }

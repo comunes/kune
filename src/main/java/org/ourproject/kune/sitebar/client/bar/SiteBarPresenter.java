@@ -75,10 +75,18 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
     }
 
     public void userLoggedIn(final UserDTO user) {
-	view.showLoggedUserName(user.getName());
 	view.hideLoginDialog();
-	view.setLogoutLinkVisible(true);
 	listener.onUserLoggedIn(user);
+    }
+
+    public void showLoggedUser(final String userName) {
+	if (userName == null) {
+	    view.restoreLoginLink();
+	    view.setLogoutLinkVisible(false);
+	} else {
+	    view.showLoggedUserName(userName);
+	    view.setLogoutLinkVisible(true);
+	}
     }
 
     public void onLoginCancelled() {

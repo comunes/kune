@@ -68,4 +68,8 @@ public class KuneServiceMocked extends MockedService implements KuneServiceAsync
     public void getGroup(final String userHash, final String shortName, final AsyncCallback asyncCallback) {
 
     }
+
+    public void getInitData(final String userHash, final AsyncCallback callback) {
+
+    }
 }

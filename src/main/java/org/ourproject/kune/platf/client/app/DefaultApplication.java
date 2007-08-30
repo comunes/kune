@@ -46,7 +46,7 @@ public class DefaultApplication implements Application {
 
 	DesktopView desktop = WorkspaceFactory.createDesktop(workspace, new SiteBarListener() {
 	    public void onUserLoggedIn(final UserDTO user) {
-		dispatcher.fire(WorkspaceEvents.LOGIN, user, null);
+		dispatcher.fire(WorkspaceEvents.USER_CHANGED, user, null);
 	    }
 
 	    public void onUserLoggedOut() {

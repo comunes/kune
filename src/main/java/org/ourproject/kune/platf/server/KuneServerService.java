@@ -25,6 +25,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.rpc.KuneService;
 import org.ourproject.kune.platf.server.domain.Group;
@@ -65,6 +66,16 @@ public class KuneServerService implements KuneService {
 		+ group.getType());
 	User user = userManager.find(session.getUserId());
 	groupManager.createGroup(mapper.map(group, Group.class), user);
+    }
+
+    @Transactional(type = TransactionType.READ_ONLY)
+    public InitDataDTO getInitData(final String userHash) {
+	InitData data = new InitData();
+
+	data.setCCLicenses(licenseManager.getCC());
+	data.setNotCCLicenses(licenseManager.getNotCC());
+	data.setCurrentUser(userManager.find(session.getUserId()));
+	return mapper.map(data, InitDataDTO.class);
     }
 
     @Transactional(type = TransactionType.READ_ONLY)
