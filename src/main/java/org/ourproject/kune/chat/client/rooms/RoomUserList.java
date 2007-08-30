@@ -17,10 +17,12 @@
  *
  */
 
-package org.ourproject.kune.chat.client.rooms.ui;
+package org.ourproject.kune.chat.client.rooms;
 
-import org.ourproject.kune.platf.client.View;
+public interface RoomUserList {
+    public RoomUserListView getView();
 
-public interface RoomUserListView extends View {
+    void add(RoomUser user);
 
+    void del(RoomUser user);
 }

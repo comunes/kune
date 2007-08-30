@@ -18,8 +18,22 @@
  *
  */
 
-package org.ourproject.kune.chat.client.rooms.ui;
+package org.ourproject.kune.chat.client.rooms;
 
 public interface MultiRoomView {
+    void addRoomUsersPanel(RoomUserListView view);
 
+    void show();
+
+    String getInputText();
+
+    void createRoom(Room room);
+
+    void setInputText(String savedInput);
+
+    void setSubject(String subject);
+
+    void showUserList(RoomUserListView usersListView);
+
+    void hideRooms();
 }

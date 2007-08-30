@@ -22,12 +22,16 @@ package org.ourproject.kune.chat.client.ui;
 
 import org.ourproject.kune.chat.client.ChatEngine;
 import org.ourproject.kune.chat.client.rooms.MultiRoom;
-import org.ourproject.kune.chat.client.rooms.ui.MultiRoomListener;
+import org.ourproject.kune.chat.client.rooms.MultiRoomListener;
+import org.ourproject.kune.chat.client.rooms.MultiRoomPresenter;
+import org.ourproject.kune.chat.client.rooms.Room;
+import org.ourproject.kune.chat.client.rooms.RoomPresenter;
+import org.ourproject.kune.chat.client.rooms.RoomUserList;
+import org.ourproject.kune.chat.client.rooms.RoomUserListPresenter;
+import org.ourproject.kune.chat.client.rooms.RoomUser.UserType;
 import org.ourproject.kune.chat.client.rooms.ui.MultiRoomPanel;
-import org.ourproject.kune.chat.client.rooms.ui.MultiRoomPresenter;
-import org.ourproject.kune.chat.client.rooms.ui.RoomUserList;
+import org.ourproject.kune.chat.client.rooms.ui.RoomPanel;
 import org.ourproject.kune.chat.client.rooms.ui.RoomUserListPanel;
-import org.ourproject.kune.chat.client.rooms.ui.RoomUserListPresenter;
 import org.ourproject.kune.chat.client.ui.cnt.ChatContent;
 import org.ourproject.kune.chat.client.ui.cnt.ChatContentPresenter;
 import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoom;
@@ -80,4 +84,11 @@ public class ChatFactory {
 	return userListPresenter;
     }
 
+    public static Room createRoom(final String roomName, final String userAlias, final UserType type) {
+	RoomUserList userList = ChatFactory.createUserList();
+	RoomPresenter presenter = new RoomPresenter(roomName, userAlias, type, userList);
+	RoomPanel panel = new RoomPanel(presenter);
+	presenter.init(panel);
+	return presenter;
+    }
 }

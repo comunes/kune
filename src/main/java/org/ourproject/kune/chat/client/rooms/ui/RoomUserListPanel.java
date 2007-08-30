@@ -19,6 +19,9 @@
 
 package org.ourproject.kune.chat.client.rooms.ui;
 
+import org.ourproject.kune.chat.client.rooms.RoomUser;
+import org.ourproject.kune.chat.client.rooms.RoomUserListView;
+
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;

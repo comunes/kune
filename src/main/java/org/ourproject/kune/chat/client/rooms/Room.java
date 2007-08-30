@@ -19,8 +19,8 @@
 
 package org.ourproject.kune.chat.client.rooms;
 
-import org.ourproject.kune.chat.client.rooms.ui.RoomUserListView;
-import org.ourproject.kune.chat.client.rooms.ui.RoomUser.UserType;
+import org.ourproject.kune.chat.client.rooms.RoomUser.UserType;
+import org.ourproject.kune.platf.client.View;
 
 import com.calclab.gwtjsjac.client.mandioca.XmppRoom;
 
@@ -50,5 +50,7 @@ public interface Room {
     String getSubject();
 
     RoomUserListView getUsersListView();
+
+    View getView();
 
 }

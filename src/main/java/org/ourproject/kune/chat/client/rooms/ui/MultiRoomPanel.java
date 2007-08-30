@@ -22,6 +22,11 @@ package org.ourproject.kune.chat.client.rooms.ui;
 
 import java.util.HashMap;
 
+import org.ourproject.kune.chat.client.rooms.MultiRoomPresenter;
+import org.ourproject.kune.chat.client.rooms.MultiRoomView;
+import org.ourproject.kune.chat.client.rooms.Room;
+import org.ourproject.kune.chat.client.rooms.RoomPresenter;
+import org.ourproject.kune.chat.client.rooms.RoomUserListView;
 import org.ourproject.kune.platf.client.View;
 
 import to.tipit.gwtlib.FireLog;
@@ -62,26 +67,24 @@ public class MultiRoomPanel implements MultiRoomView, View {
     private TextArea input;
     private Form inputForm;
     private final HashMap userListToIndex;
-    private final HashMap panelIdToRoomPresenter;
+    private final HashMap panelIdToRoom;
 
     public MultiRoomPanel(final MultiRoomPresenter presenter) {
 	this.presenter = presenter;
 	this.userListToIndex = new HashMap();
-	panelIdToRoomPresenter = new HashMap();
+	panelIdToRoom = new HashMap();
 	createLayout();
     }
 
-    public void createRoom(final RoomPresenter roomPresenter) {
+    public void createRoom(final Room room) {
 	final BorderLayout layout = dialog.getLayout();
 	layout.beginUpdate();
 
-	// FIXME: esto debería ir en el factory
-	RoomPanel chatRoomPanel = new RoomPanel(roomPresenter);
-	roomPresenter.init(chatRoomPanel);
-	layout.add(LayoutRegionConfig.CENTER, chatRoomPanel.getContentPanel());
+	ContentPanel chatRoomPanel = (ContentPanel) room.getView();
+	layout.add(LayoutRegionConfig.CENTER, chatRoomPanel);
 
-	String panelId = chatRoomPanel.getContentPanel().getId();
-	panelIdToRoomPresenter.put(panelId, roomPresenter);
+	String panelId = chatRoomPanel.getId();
+	panelIdToRoom.put(panelId, room);
 	layout.endUpdate();
 
 	// FIXME: Returns Exception, affected maybe by:
@@ -93,7 +96,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	dialog.show();
     }
 
-    public void hide() {
+    public void hideRooms() {
 	dialog.hide();
     }
 
@@ -133,11 +136,11 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	inputForm.reset();
     }
 
-    protected void setInputText(final String text) {
+    public void setInputText(final String text) {
 	input.setRawValue(text);
     }
 
-    protected String getInputText() {
+    public String getInputText() {
 	return input.getValueAsString();
     }
 
@@ -263,7 +266,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
 
 	    public boolean doBeforeRemove(final LayoutRegion region, final ContentPanel panel) {
 		if (Window.confirm("Are you sure?")) {
-		    RoomPresenter roomPresenter = (RoomPresenter) panelIdToRoomPresenter.get(panel.getId());
+		    RoomPresenter roomPresenter = (RoomPresenter) panelIdToRoom.get(panel.getId());
 		    presenter.closeRoom(roomPresenter);
 		    return true;
 		}
@@ -280,7 +283,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	    }
 
 	    public void onPanelActivated(final LayoutRegion region, final ContentPanel panel) {
-		RoomPresenter roomPresenter = (RoomPresenter) panelIdToRoomPresenter.get(panel.getId());
+		RoomPresenter roomPresenter = (RoomPresenter) panelIdToRoom.get(panel.getId());
 		presenter.activateRoom(roomPresenter);
 	    }
 

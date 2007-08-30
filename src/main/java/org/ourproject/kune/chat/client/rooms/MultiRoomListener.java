@@ -17,9 +17,9 @@
  *
  */
 
-package org.ourproject.kune.chat.client.rooms.ui;
+package org.ourproject.kune.chat.client.rooms;
 
 
-public interface RoomView {
-
+public interface MultiRoomListener {
+    void onSendMessage(Room room, String message);
 }

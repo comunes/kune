@@ -19,6 +19,8 @@
 
 package org.ourproject.kune.chat.client.rooms.ui;
 
+import org.ourproject.kune.chat.client.rooms.RoomPresenter;
+import org.ourproject.kune.chat.client.rooms.RoomView;
 import org.ourproject.kune.chat.client.ui.ChatTextFormatter;
 import org.ourproject.kune.platf.client.ui.HorizontalLine;
 
@@ -35,22 +37,19 @@ import com.gwtext.client.widgets.layout.ContentPanel;
 import com.gwtext.client.widgets.layout.ContentPanelConfig;
 import com.gwtext.client.widgets.layout.event.ContentPanelListener;
 
-public class RoomPanel implements RoomView {
-
-    private final ContentPanel contentPanel;
+public class RoomPanel extends ContentPanel implements RoomView {
     private final ScrollPanel scroll;
     private final VerticalPanel vp;
 
     public RoomPanel(final RoomPresenter presenter) {
-	String contentPanelId = Ext.generateId();
-	contentPanel = new ContentPanel(contentPanelId, new ContentPanelConfig() {
+	super(Ext.generateId(), new ContentPanelConfig() {
 	    {
 		setClosable(true);
 		setBackground(true);
 		setAutoScroll(true);
 	    }
 	});
-	contentPanel.addContentPanelListener(new ContentPanelListener() {
+	addContentPanelListener(new ContentPanelListener() {
 	    public void onActivate(final ContentPanel cp) {
 	    }
 
@@ -62,10 +61,10 @@ public class RoomPanel implements RoomView {
 	    }
 	});
 	scroll = new ScrollPanel();
-	contentPanel.add(scroll);
+	add(scroll);
 	vp = new VerticalPanel();
 	scroll.add(vp);
-	contentPanel.addStyleName("kune-RoomPanel-Conversation");
+	addStyleName("kune-RoomPanel-Conversation");
 	adjustScrolSize(408, 200);
     }
 
@@ -76,22 +75,22 @@ public class RoomPanel implements RoomView {
     }
 
     public void showRoomName(final String name) {
-	contentPanel.setTitle(name);
+	setTitle(name);
     }
 
-    public void addEventMessage(final String message) {
+    public void showInfoMessage(final String message) {
 	HTML messageHtml = new HTML(message);
 	addWidget(messageHtml);
 	messageHtml.addStyleName("kune-RoomPanel-EventMessage");
     }
 
-    public void addMessage(final String userAlias, final String color, final String message) {
+    public void showMessage(final String userAlias, final String color, final String message) {
 	String userHtml = "<span style=\"color: " + color + "; font-weight: bold;\">" + userAlias + "</span>:&nbsp;";
 	HTML messageHtml = new HTML(userHtml + ChatTextFormatter.format(message).getHTML());
 	addWidget(messageHtml);
     }
 
-    public void addTimeDelimiter(final String datetime) {
+    public void showDelimiter(final String datetime) {
 	HorizontalPanel hp = new HorizontalPanel();
 	HorizontalLine hr = new HorizontalLine();
 	hp.add(new Label(datetime));
@@ -100,10 +99,6 @@ public class RoomPanel implements RoomView {
 	hp.setCellWidth(hr, "100%");
 	addWidget(hp);
 	hp.setStyleName("kune-RoomPanel-HorizDelimiter");
-    }
-
-    public ContentPanel getContentPanel() {
-	return contentPanel;
     }
 
     private void addWidget(final Widget widget) {

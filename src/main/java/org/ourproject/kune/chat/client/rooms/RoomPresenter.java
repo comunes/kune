@@ -17,13 +17,13 @@
  *
  */
 
-package org.ourproject.kune.chat.client.rooms.ui;
+package org.ourproject.kune.chat.client.rooms;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.ourproject.kune.chat.client.rooms.Room;
-import org.ourproject.kune.chat.client.rooms.ui.RoomUser.UserType;
+import org.ourproject.kune.chat.client.rooms.RoomUser.UserType;
+import org.ourproject.kune.platf.client.View;
 
 import com.calclab.gwtjsjac.client.mandioca.XmppRoom;
 
@@ -34,7 +34,7 @@ public class RoomPresenter implements Room {
 
     private int currentColor;
 
-    private RoomPanel view;
+    private RoomView view;
     private String input;
     private String subject;
     private final String sessionUserAlias;
@@ -55,9 +55,13 @@ public class RoomPresenter implements Room {
 	users = new HashMap();
     }
 
-    public void init(final RoomPanel view) {
+    public void init(final RoomView view) {
 	this.view = view;
 	view.showRoomName(roomName);
+    }
+
+    public View getView() {
+	return view;
     }
 
     public void addMessage(final String userAlias, final String message) {
@@ -65,11 +69,11 @@ public class RoomPresenter implements Room {
 	if (user == null) {
 	    throw new RuntimeException("Trying to send a chat message with a user not in this room");
 	}
-	view.addMessage(user.getAlias(), user.getColor(), message);
+	view.showMessage(user.getAlias(), user.getColor(), message);
     }
 
     public void addInfoMessage(final String message) {
-	view.addEventMessage(message);
+	view.showInfoMessage(message);
     }
 
     public void addUser(final String alias, final UserType type) {
@@ -79,7 +83,7 @@ public class RoomPresenter implements Room {
     }
 
     public void addDelimiter(final String datetime) {
-	view.addTimeDelimiter(datetime);
+	view.showDelimiter(datetime);
     }
 
     // TODO: ¿no bastaría con saveInput(null)?

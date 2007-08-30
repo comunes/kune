@@ -24,10 +24,10 @@ import java.util.HashMap;
 
 import org.ourproject.kune.chat.client.ChatEngine;
 import org.ourproject.kune.chat.client.rooms.MultiRoom;
+import org.ourproject.kune.chat.client.rooms.MultiRoomListener;
 import org.ourproject.kune.chat.client.rooms.Room;
-import org.ourproject.kune.chat.client.rooms.ui.MultiRoomListener;
-import org.ourproject.kune.chat.client.rooms.ui.RoomUser;
-import org.ourproject.kune.chat.client.rooms.ui.RoomUser.UserType;
+import org.ourproject.kune.chat.client.rooms.RoomUser;
+import org.ourproject.kune.chat.client.rooms.RoomUser.UserType;
 import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoom;
 import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomListener;
 import org.ourproject.kune.platf.client.View;

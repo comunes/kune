@@ -18,15 +18,13 @@
  *
  */
 
-package org.ourproject.kune.chat.client.rooms.ui;
+package org.ourproject.kune.chat.client.rooms;
 
-import org.ourproject.kune.chat.client.rooms.MultiRoom;
-import org.ourproject.kune.chat.client.rooms.Room;
-import org.ourproject.kune.chat.client.rooms.ui.RoomUser.UserType;
+import org.ourproject.kune.chat.client.rooms.RoomUser.UserType;
 import org.ourproject.kune.chat.client.ui.ChatFactory;
 
 public class MultiRoomPresenter implements MultiRoom {
-    private MultiRoomPanel view;
+    private MultiRoomView view;
     private Room currentRoom;
     private final MultiRoomListener listener;
 
@@ -34,18 +32,16 @@ public class MultiRoomPresenter implements MultiRoom {
 	this.listener = listener;
     }
 
-    public void init(final MultiRoomPanel view) {
+    public void init(final MultiRoomView view) {
 	this.view = view;
     }
 
     public Room createRoom(final String roomName, final String userAlias, final UserType type) {
-	RoomUserList userList = ChatFactory.createUserList();
-	RoomPresenter room = new RoomPresenter(roomName, userAlias, type, userList);
-	room.addUser(userAlias, type);
+	Room room = ChatFactory.createRoom(roomName, userAlias, type);
 	view.createRoom(room);
+	room.addUser(userAlias, type);
+	view.addRoomUsersPanel(room.getUsersListView());
 	currentRoom = room;
-	RoomUserList roomUserList = room.getUsersList();
-	view.addRoomUsersPanel(roomUserList.getView());
 	return currentRoom;
     }
 
@@ -57,36 +53,36 @@ public class MultiRoomPresenter implements MultiRoom {
 	listener.onSendMessage(currentRoom, view.getInputText());
     }
 
-    protected void onSend(final int key, final boolean isCtrl) {
+    public void onSend(final int key, final boolean isCtrl) {
 	if (key == 13 && !isCtrl) {
 	    onSend();
 	}
     }
 
     // TODO: vicente, mira esto
-    protected void onOLDSend() {
-	// TODO: Call to xmpp, meawhile:
-	String userAlias = currentRoom.getSessionUserAlias();
+    // protected void onOLDSend() {
+    // // TODO: Call to xmpp, meawhile:
+    // String userAlias = currentRoom.getSessionUserAlias();
+    //
+    // currentRoom.addMessage(userAlias, view.getInputText());
+    // currentRoom.clearSavedInput();
+    // view.clearInputText();
+    // // view.sendBtnEnable(false);
+    //
+    // // CUIDADO: DETALLE DE VISTA
+    // // if (key == KeyboardListener.KEY_ENTER) {
+    // // if (mod == KeyboardListener.MODIFIER_CTRL) {
+    // // view.insertReturnInInput();
+    // // } else {
+    // // view.addMessage(currentRoom, currentUserAlias, view.getInputText());
+    // // view.clearTextArea();
+    // // }
+    // // }
+    // }
 
-	currentRoom.addMessage(userAlias, view.getInputText());
-	currentRoom.clearSavedInput();
-	view.clearInputText();
-	// view.sendBtnEnable(false);
-
-	// CUIDADO: DETALLE DE VISTA
-	// if (key == KeyboardListener.KEY_ENTER) {
-	// if (mod == KeyboardListener.MODIFIER_CTRL) {
-	// view.insertReturnInInput();
-	// } else {
-	// view.addMessage(currentRoom, currentUserAlias, view.getInputText());
-	// view.clearTextArea();
-	// }
-	// }
-    }
-
-    protected void onNoRooms() {
+    public void onNoRooms() {
 	// TODO
-	view.hide();
+	view.hideRooms();
     }
 
     public void closeRoom(final RoomPresenter room) {

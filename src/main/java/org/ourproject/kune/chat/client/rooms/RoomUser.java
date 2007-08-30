@@ -17,7 +17,7 @@
  *
  */
 
-package org.ourproject.kune.chat.client.rooms.ui;
+package org.ourproject.kune.chat.client.rooms;
 
 public class RoomUser {
     public static final UserType MODERADOR = new UserType();
