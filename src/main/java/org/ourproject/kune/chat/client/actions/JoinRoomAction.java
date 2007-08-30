@@ -2,14 +2,14 @@ package org.ourproject.kune.chat.client.actions;
 
 import org.ourproject.kune.chat.client.ChatEngine;
 import org.ourproject.kune.chat.client.rooms.Room;
-import org.ourproject.kune.workspace.client.actions.WorkspaceAction;
+import org.ourproject.kune.platf.client.dispatch.Action;
 
 import com.calclab.gwtjsjac.client.XmppMessage;
 import com.calclab.gwtjsjac.client.XmppMessageListener;
 import com.calclab.gwtjsjac.client.mandioca.XmppRoom;
 import com.google.gwt.core.client.GWT;
 
-public class JoinRoomAction extends WorkspaceAction {
+public class JoinRoomAction implements Action {
     private final ChatEngine engine;
 
     public JoinRoomAction(final ChatEngine chatEngine) {

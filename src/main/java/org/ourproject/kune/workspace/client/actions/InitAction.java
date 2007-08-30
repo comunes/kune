@@ -21,6 +21,7 @@
 package org.ourproject.kune.workspace.client.actions;
 
 import org.ourproject.kune.platf.client.Services;
+import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.UserDTO;
@@ -38,7 +39,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 
-public class InitAction extends WorkspaceAction {
+public class InitAction implements Action {
     public void execute(final Object value, final Object extra) {
 	GWT.log("Locale: " + Kune.getInstance().t.Locale(), null);
 	PrefetchUtilites.preFetchImpImages();

@@ -20,10 +20,10 @@
 package org.ourproject.kune.chat.client.actions;
 
 import org.ourproject.kune.chat.client.ChatEngine;
+import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.UserDTO;
-import org.ourproject.kune.workspace.client.actions.WorkspaceAction;
 
-public class ChatLoginAction extends WorkspaceAction {
+public class ChatLoginAction implements Action {
     private final ChatEngine engine;
 
     public ChatLoginAction(final ChatEngine engine) {

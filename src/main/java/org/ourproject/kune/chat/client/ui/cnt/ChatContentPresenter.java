@@ -33,7 +33,6 @@ import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoom;
 import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomListener;
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 

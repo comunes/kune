@@ -20,9 +20,9 @@
 
 package org.ourproject.kune.chat.client.actions;
 
-import org.ourproject.kune.workspace.client.actions.WorkspaceAction;
+import org.ourproject.kune.platf.client.dispatch.Action;
 
-public class AddRoom extends WorkspaceAction {
+public class AddRoom implements Action {
     public void execute(final Object value, final Object extra) {
     }
 }

@@ -1,9 +1,9 @@
 package org.ourproject.kune.chat.client.actions;
 
 import org.ourproject.kune.chat.client.ChatEngine;
-import org.ourproject.kune.workspace.client.actions.WorkspaceAction;
+import org.ourproject.kune.platf.client.dispatch.Action;
 
-public class ChatLogoutAction extends WorkspaceAction {
+public class ChatLogoutAction implements Action {
     private final ChatEngine engine;
 
     public ChatLogoutAction(final ChatEngine engine) {

@@ -27,7 +27,6 @@ import org.ourproject.kune.docs.client.ui.cnt.reader.DocumentReader;
 import org.ourproject.kune.docs.client.ui.cnt.reader.DocumentReaderListener;
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
