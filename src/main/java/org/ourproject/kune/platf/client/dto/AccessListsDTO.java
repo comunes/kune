@@ -20,59 +20,57 @@
 
 package org.ourproject.kune.platf.client.dto;
 
-import java.util.List;
-
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class AccessListsDTO implements IsSerializable {
 
     /**
-     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.GroupDTO>
+     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.GroupListDTO>
      */
-    private List admin;
+    private GroupListDTO admins;
 
     /**
-     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.GroupDTO>
+     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.GroupListDTO>
      */
-    private List edit;
+    private GroupListDTO editors;
 
     /**
-     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.GroupDTO>
+     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.GroupListDTO>
      */
-    private List view;
+    private GroupListDTO viewers;
 
     public AccessListsDTO() {
 	this(null, null, null);
     }
 
-    public AccessListsDTO(final List admin, final List edit, final List view) {
-	this.admin = admin;
-	this.edit = edit;
-	this.view = view;
+    public AccessListsDTO(final GroupListDTO admins, final GroupListDTO editors, final GroupListDTO viewers) {
+	this.admins = admins;
+	this.editors = editors;
+	this.viewers = viewers;
     }
 
-    public List getAdmin() {
-	return admin;
+    public GroupListDTO getAdmins() {
+	return admins;
     }
 
-    public void setAdmin(final List admin) {
-	this.admin = admin;
+    public void setAdmins(final GroupListDTO admins) {
+	this.admins = admins;
     }
 
-    public List getEdit() {
-	return edit;
+    public GroupListDTO getEditors() {
+	return editors;
     }
 
-    public void setEdit(final List edit) {
-	this.edit = edit;
+    public void setEditors(final GroupListDTO editors) {
+	this.editors = editors;
     }
 
-    public List getView() {
-	return view;
+    public GroupListDTO getViewers() {
+	return viewers;
     }
 
-    public void setView(final List view) {
-	this.view = view;
+    public void setViewers(final GroupListDTO viewers) {
+	this.viewers = viewers;
     }
 
 }

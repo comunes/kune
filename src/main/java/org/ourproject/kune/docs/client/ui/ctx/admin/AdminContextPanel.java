@@ -20,11 +20,20 @@
 
 package org.ourproject.kune.docs.client.ui.ctx.admin;
 
-import com.google.gwt.user.client.ui.Label;
+import org.ourproject.kune.platf.client.dto.AccessListsDTO;
+import org.ourproject.kune.workspace.client.ui.ctx.admin.AccessListsPanel;
+
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class AdminContextPanel extends VerticalPanel implements AdminContextView {
+    private final AccessListsPanel accessListsPanel;
+
     public AdminContextPanel() {
-	add(new Label("esto es la administración del documento"));
+	accessListsPanel = new AccessListsPanel();
+	add(accessListsPanel);
+    }
+
+    public void setAccessLists(final AccessListsDTO accessLists) {
+	accessListsPanel.setAccessList(accessLists);
     }
 }

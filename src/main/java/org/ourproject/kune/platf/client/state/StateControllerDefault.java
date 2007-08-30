@@ -83,6 +83,9 @@ public class StateControllerDefault implements StateController {
     private void loadContent(final StateDTO state) {
 	GWT.log("content rights:" + state.getContentRights().toString(), null);
 	GWT.log("folder rights:" + state.getFolderRights().toString(), null);
+	GWT.log("content accesslists admins: " + state.getAccessLists().getAdmins().toString(), null);
+	GWT.log("content accesslists edit: " + state.getAccessLists().getEditors().toString(), null);
+	GWT.log("content accesslists view: " + state.getAccessLists().getViewers().toString(), null);
 	session.setCurrent(state);
 	GroupDTO group = state.getGroup();
 	app.setGroupState(group.getShortName());

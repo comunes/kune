@@ -89,6 +89,7 @@ class TopBar extends VerticalPanel {
 	setCellWidth(firstRow, "100%");
 	setCellWidth(secondRow, "100%");
 	firstRow.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
+	iconBarHP.addStyleName("kune-topBar-iconBar");
 	iconBarHP.setCellVerticalAlignment(btnGoParent, VerticalPanel.ALIGN_MIDDLE);
 	iconBarHP.setCellVerticalAlignment(buttonRounded, VerticalPanel.ALIGN_MIDDLE);
 	pathMenu.setStyleName("pathMenu");

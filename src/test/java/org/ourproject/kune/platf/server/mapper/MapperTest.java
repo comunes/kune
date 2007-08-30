@@ -2,19 +2,25 @@ package org.ourproject.kune.platf.server.mapper;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.dto.ContentDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
+import org.ourproject.kune.platf.client.dto.ContentDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.dto.GroupListDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
+import org.ourproject.kune.platf.server.TestDomainHelper;
 import org.ourproject.kune.platf.server.TestHelper;
 import org.ourproject.kune.platf.server.access.AccessRights;
-import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Container;
+import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.GroupList;
 import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.Revision;
 import org.ourproject.kune.platf.server.state.State;
@@ -35,9 +41,33 @@ public class MapperTest {
     public void testContentMapping() {
 	State c = new State();
 	c.setContentRights(new AccessRights(true, true, true));
+	Group groupAdmins = TestDomainHelper.createGroup(1);
+	Group groupEdit = TestDomainHelper.createGroup(2);
+	Group groupView = TestDomainHelper.createGroup(3);
+	c.setAccessLists(TestDomainHelper.createAccessLists(groupAdmins, groupEdit, groupView));
 
 	StateDTO dto = mapper.map(c, StateDTO.class);
 	assertEquals(c.getContentRights().isAdministrable(), dto.getContentRights().isAdministrable);
+
+	assertValidAccessListsMapping(c.getAccessLists().getAdmins(), dto.getAccessLists().getAdmins());
+	assertValidAccessListsMapping(c.getAccessLists().getEditors(), dto.getAccessLists().getEditors());
+	assertValidAccessListsMapping(c.getAccessLists().getViewers(), dto.getAccessLists().getViewers());
+    }
+
+    private void assertValidAccessListsMapping(final GroupList groupList, final GroupListDTO groupListDTO) {
+	List listOrig = groupList.getList();
+	List listDto = groupListDTO.getList();
+	assertEquals(listDto.size(), listOrig.size());
+	for (int i = 0; i < listDto.size(); i++) {
+	    Object object = listDto.get(i);
+	    assertEquals(GroupDTO.class, object.getClass());
+	    GroupDTO d = (GroupDTO) object;
+	    Group g = (Group) listOrig.get(i);
+	    assertNotNull(d);
+	    assertNotNull(g);
+	    GroupDTO map = mapper.map(g, GroupDTO.class);
+	    assertEquals(map, d);
+	}
     }
 
     @Test

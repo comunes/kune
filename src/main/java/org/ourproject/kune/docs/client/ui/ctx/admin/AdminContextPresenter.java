@@ -21,6 +21,7 @@
 package org.ourproject.kune.docs.client.ui.ctx.admin;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 
 public class AdminContextPresenter implements AdminContext {
 
@@ -28,6 +29,10 @@ public class AdminContextPresenter implements AdminContext {
 
     public AdminContextPresenter(final AdminContextView view) {
 	this.view = view;
+    }
+
+    public void setAccessLists(final AccessListsDTO accessLists) {
+	view.setAccessLists(accessLists);
     }
 
     public View getView() {

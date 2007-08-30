@@ -131,4 +131,89 @@ public class GroupDTO implements IsSerializable {
     public void setDefaultToolName(final String defaultToolName) {
 	this.defaultToolName = defaultToolName;
     }
+
+    public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + ((defaultContentId == null) ? 0 : defaultContentId.hashCode());
+	result = prime * result + ((defaultFolderId == null) ? 0 : defaultFolderId.hashCode());
+	result = prime * result + ((defaultLicenseShortName == null) ? 0 : defaultLicenseShortName.hashCode());
+	result = prime * result + ((defaultToolName == null) ? 0 : defaultToolName.hashCode());
+	result = prime * result + ((id == null) ? 0 : id.hashCode());
+	result = prime * result + ((longName == null) ? 0 : longName.hashCode());
+	result = prime * result + ((publicDesc == null) ? 0 : publicDesc.hashCode());
+	result = prime * result + ((shortName == null) ? 0 : shortName.hashCode());
+	result = prime * result + type;
+	return result;
+    }
+
+    public boolean equals(final Object obj) {
+	if (this == obj) {
+	    return true;
+	}
+	if (obj == null) {
+	    return false;
+	}
+	final GroupDTO other = (GroupDTO) obj;
+	if (defaultContentId == null) {
+	    if (other.defaultContentId != null) {
+		return false;
+	    }
+	} else if (!defaultContentId.equals(other.defaultContentId)) {
+	    return false;
+	}
+	if (defaultFolderId == null) {
+	    if (other.defaultFolderId != null) {
+		return false;
+	    }
+	} else if (!defaultFolderId.equals(other.defaultFolderId)) {
+	    return false;
+	}
+	if (defaultLicenseShortName == null) {
+	    if (other.defaultLicenseShortName != null) {
+		return false;
+	    }
+	} else if (!defaultLicenseShortName.equals(other.defaultLicenseShortName)) {
+	    return false;
+	}
+	if (defaultToolName == null) {
+	    if (other.defaultToolName != null) {
+		return false;
+	    }
+	} else if (!defaultToolName.equals(other.defaultToolName)) {
+	    return false;
+	}
+	if (id == null) {
+	    if (other.id != null) {
+		return false;
+	    }
+	} else if (!id.equals(other.id)) {
+	    return false;
+	}
+	if (longName == null) {
+	    if (other.longName != null) {
+		return false;
+	    }
+	} else if (!longName.equals(other.longName)) {
+	    return false;
+	}
+	if (publicDesc == null) {
+	    if (other.publicDesc != null) {
+		return false;
+	    }
+	} else if (!publicDesc.equals(other.publicDesc)) {
+	    return false;
+	}
+	if (shortName == null) {
+	    if (other.shortName != null) {
+		return false;
+	    }
+	} else if (!shortName.equals(other.shortName)) {
+	    return false;
+	}
+	if (type != other.type) {
+	    return false;
+	}
+	return true;
+    }
 }

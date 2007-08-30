@@ -50,7 +50,7 @@ The rest of dependencies must be downloaded automatically.
 
 Integration with Openfire xmpp server
 --------------------------------------------------------------------------------
-Add this lines to conf/openfire.xml:
+Add this lines to conf/openfire.xml and check that the user/passwd of the db is the same here and in the persistence.xml:
 
 <jive>
   ...

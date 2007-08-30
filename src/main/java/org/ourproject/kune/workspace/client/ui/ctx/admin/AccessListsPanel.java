@@ -24,6 +24,7 @@ import java.util.Iterator;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.dto.GroupListDTO;
 import org.ourproject.kune.platf.client.services.Images;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
@@ -33,46 +34,55 @@ import com.google.gwt.user.client.ui.DisclosurePanelImages;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class AccessListPanel extends Composite implements View {
+public class AccessListsPanel extends Composite implements View {
 
-    public AccessListPanel(final AccessListsDTO accessLists) {
+    private final DisclosurePanel adminDisclosure;
+    private final DisclosurePanel editDisclosure;
+    private final DisclosurePanel viewDisclosure;
+
+    public AccessListsPanel() {
 	VerticalPanel vp = new VerticalPanel();
 	initWidget(vp);
 
-	DisclosurePanel adminDisclosure = createDisclosurePanel("Admins", false);
-	DisclosurePanel editDisclosure = createDisclosurePanel("Edit", false);
-	DisclosurePanel viewDisclosure = createDisclosurePanel("View", false);
+	adminDisclosure = createDisclosurePanel("Admins", false);
+	editDisclosure = createDisclosurePanel("Edit", false);
+	viewDisclosure = createDisclosurePanel("View", false);
 	vp.add(adminDisclosure);
 	vp.add(editDisclosure);
 	vp.add(viewDisclosure);
+    }
+
+    public void setAccessList(final AccessListsDTO accessLists) {
 	setAccessLists(accessLists, adminDisclosure, editDisclosure, viewDisclosure);
     }
 
     private DisclosurePanel createDisclosurePanel(final String headerText, final boolean isOpen) {
 	return new DisclosurePanel(new DisclosurePanelImages() {
 	    public AbstractImagePrototype disclosurePanelClosed() {
-		return Images.App.getInstance().arrowRightWhite();
+		return Images.App.getInstance().arrowRightBlack();
 	    }
 
 	    public AbstractImagePrototype disclosurePanelOpen() {
-		return Images.App.getInstance().arrowDownWhite();
+		return Images.App.getInstance().arrowDownBlack();
 	    }
 	}, headerText, isOpen);
     }
 
-    public void setAccessLists(final AccessListsDTO accessLists, final DisclosurePanel adminDisclosure,
+    private void setAccessLists(final AccessListsDTO accessLists, final DisclosurePanel adminDisclosure,
 	    final DisclosurePanel editDisclosure, final DisclosurePanel viewDisclosure) {
-	setAccessListsInDiclosure(accessLists, adminDisclosure);
-	setAccessListsInDiclosure(accessLists, editDisclosure);
-	setAccessListsInDiclosure(accessLists, viewDisclosure);
+	setAccessListsInDiclosure(accessLists.getAdmins(), adminDisclosure);
+	setAccessListsInDiclosure(accessLists.getEditors(), editDisclosure);
+	setAccessListsInDiclosure(accessLists.getViewers(), viewDisclosure);
     }
 
-    private void setAccessListsInDiclosure(final AccessListsDTO accessList, final DisclosurePanel disclosure) {
+    private void setAccessListsInDiclosure(final GroupListDTO groupList, final DisclosurePanel disclosure) {
 	disclosure.clear();
-	Iterator iter = accessList.getAdmin().iterator();
-	while (iter.hasNext()) {
-	    GroupDTO nextAdmin = (GroupDTO) iter.next();
-	    disclosure.add(new Label(nextAdmin.getLongName()));
+	if (groupList != null) {
+	    Iterator iter = groupList.getList().iterator();
+	    while (iter.hasNext()) {
+		GroupDTO next = (GroupDTO) iter.next();
+		disclosure.add(new Label(next.getLongName()));
+	    }
 	}
     }
 

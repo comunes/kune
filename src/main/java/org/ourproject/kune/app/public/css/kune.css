@@ -9,7 +9,6 @@
     position: absolute;
     top: 2px;
     left: 2px;
-    width: 1px;
     z-index: 1000;
 }
 
@@ -335,6 +334,10 @@
 
 .kune-NavigationBar .topBar .gwt-Label {
     vertical-align: middle;
+}
+
+.kune-NavigationBar .kune-topBar-iconBar {
+    margin: 2px 0 0 5px;
 }
 
 .topBar .gwt-PushButton-up-disabled {
