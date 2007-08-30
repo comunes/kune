@@ -18,17 +18,18 @@
  *
  */
 
-package org.ourproject.kune.platf.client;
+package org.ourproject.kune.workspace.client;
 
 import org.ourproject.kune.platf.client.extend.ClientModule;
 import org.ourproject.kune.platf.client.extend.Register;
-import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.actions.InitAction;
-import org.ourproject.kune.workspace.client.actions.UserChangedAction;
+import org.ourproject.kune.workspace.client.actions.LoggedInAction;
+import org.ourproject.kune.workspace.client.actions.LoggedOutAction;
 
-public class KuneClientModule implements ClientModule {
+public class WorkspaceClientModule implements ClientModule {
     public void configure(final Register register) {
-	register.addAction(WorkspaceEvents.INIT, new InitAction());
-	register.addAction(WorkspaceEvents.USER_CHANGED, new UserChangedAction());
+	register.addAction(WorkspaceEvents.START_APP, new InitAction());
+	register.addAction(WorkspaceEvents.USER_LOGGED_IN, new LoggedInAction());
+	register.addAction(WorkspaceEvents.USER_LOGGED_OUT, new LoggedOutAction());
     }
 }

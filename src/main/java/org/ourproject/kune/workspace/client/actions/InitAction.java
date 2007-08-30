@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.workspace.client.actions;
 
+import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.platf.client.rpc.KuneService;
@@ -41,8 +42,6 @@ public class InitAction extends WorkspaceAction {
 	PrefetchUtilites.preFetchImpImages();
 	getInitData();
 
-	// String token = History.getToken();
-	// stateManager.onHistoryChanged(token);
 	int windowWidth = Window.getClientWidth();
 	getWorkspace().adjustSize(windowWidth, Window.getClientHeight());
 	SiteBarFactory.getSiteMessage().adjustWidth(windowWidth);
@@ -51,11 +50,10 @@ public class InitAction extends WorkspaceAction {
     }
 
     private void getInitData() {
-	// PrefetchUtilites.preFetchLicenses(session);
-
 	KuneServiceAsync server = KuneService.App.getInstance();
 	server.getInitData(user, new AsyncCallback() {
 	    public void onFailure(final Throwable error) {
+		// i18n
 		Site.error("Error fetching initial data");
 	    }
 
@@ -64,7 +62,12 @@ public class InitAction extends WorkspaceAction {
 		session.setCCLicenses(initData.getCCLicenses());
 		session.setNotCCLicenses(initData.getNotCCLicenses());
 		UserDTO currentUser = initData.getCurrentUser();
-		getDispatcher().fire(WorkspaceEvents.USER_CHANGED, currentUser, null);
+		Dispatcher dispatcher = getDispatcher();
+		if (currentUser == null) {
+		    dispatcher.fire(WorkspaceEvents.USER_LOGGED_OUT, null, null);
+		} else {
+		    dispatcher.fire(WorkspaceEvents.USER_LOGGED_IN, currentUser, null);
+		}
 	    }
 	});
     }

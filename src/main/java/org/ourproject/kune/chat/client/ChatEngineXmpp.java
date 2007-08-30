@@ -21,6 +21,7 @@ package org.ourproject.kune.chat.client;
 
 import com.calclab.gwtjsjac.client.Debugger;
 import com.calclab.gwtjsjac.client.XmppHttpBindingConnection;
+import com.calclab.gwtjsjac.client.XmppPresence;
 import com.calclab.gwtjsjac.client.XmppUser;
 import com.calclab.gwtjsjac.client.log.GWTLoggerOutput;
 import com.calclab.gwtjsjac.client.mandioca.XmppRoom;
@@ -51,10 +52,18 @@ class ChatEngineXmpp implements ChatEngine {
 	reconnect();
     }
 
+    public void logout() {
+	if (session != null) {
+	    session.logout();
+	}
+    }
+
     public void reconnect() {
 	if (!state.isConnected) {
 	    session = new XmppSession(connection, state.user);
 	    session.login();
+	    // FIXME
+	    session.sendPresence(XmppPresence.CHAT, ":: ready ::");
 	    state.isConnected = connection.isConnected();
 	}
     }

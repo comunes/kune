@@ -20,7 +20,8 @@ public class JoinRoomAction extends WorkspaceAction {
 	// i18n
 	room.addInfoMessage("connecting to the room...");
 	GWT.log("a ver!!!", null);
-	XmppRoom handler = engine.joinRoom("room name", "user alias");
+	// FIXME: hardcoded
+	XmppRoom handler = engine.joinRoom("kune", "kuneClientAlias");
 	handler.addMessageListener(new XmppMessageListener() {
 	    public void onMessageReceived(final XmppMessage message) {
 		room.addMessage(message.getFrom(), message.getBody());

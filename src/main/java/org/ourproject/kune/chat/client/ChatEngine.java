@@ -29,4 +29,6 @@ public interface ChatEngine {
     void reconnect();
 
     XmppRoom joinRoom(String roomName, String userAlias);
+
+    void logout();
 }

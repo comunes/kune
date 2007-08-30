@@ -46,10 +46,11 @@ public class DefaultApplication implements Application {
 
 	DesktopView desktop = WorkspaceFactory.createDesktop(workspace, new SiteBarListener() {
 	    public void onUserLoggedIn(final UserDTO user) {
-		dispatcher.fire(WorkspaceEvents.USER_CHANGED, user, null);
+		dispatcher.fire(WorkspaceEvents.USER_LOGGED_IN, user, null);
 	    }
 
 	    public void onUserLoggedOut() {
+		dispatcher.fire(WorkspaceEvents.USER_LOGGED_IN, null, null);
 	    }
 	});
 	desktop.attach();
@@ -86,7 +87,10 @@ public class DefaultApplication implements Application {
     }
 
     public void start() {
-	dispatcher.fireDeferred(WorkspaceEvents.INIT, null, null);
+	dispatcher.fireDeferred(WorkspaceEvents.START_APP, null, null);
     }
 
+    public void stop() {
+	dispatcher.fire(WorkspaceEvents.STOP_APP, null, null);
+    }
 }

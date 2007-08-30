@@ -43,4 +43,6 @@ public interface Application {
 
     void start();
 
+    void stop();
+
 }

@@ -22,21 +22,13 @@ package org.ourproject.kune.workspace.client.actions;
 import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.sitebar.client.Site;
 
-import com.google.gwt.user.client.History;
-
-public class UserChangedAction extends WorkspaceAction {
+public class LoggedInAction extends WorkspaceAction {
     public void execute(final Object value, final Object extra) {
 	onLoggedIn((UserDTO) value);
     }
 
     private void onLoggedIn(final UserDTO user) {
-	if (user == null) {
-	    Site.sitebar.showLoggedUser(null);
-	    String token = History.getToken();
-	    stateManager.onHistoryChanged(token);
-	} else {
-	    Site.sitebar.showLoggedUser(user.getName());
-	    stateManager.reload();
-	}
+	Site.sitebar.showLoggedUser(user.getName());
+	stateManager.reload();
     }
 }

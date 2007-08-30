@@ -56,4 +56,9 @@ public class ApplicationStub implements Application {
 
     public void start() {
     }
+
+    public void stop() {
+	// TODO Auto-generated method stub
+
+    }
 }

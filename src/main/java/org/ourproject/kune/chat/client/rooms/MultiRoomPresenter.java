@@ -54,9 +54,9 @@ public class MultiRoomPresenter implements MultiRoom, RoomListener {
     }
 
     public void onSend(final int key, final boolean isCtrl) {
-	if (key == 13 && !isCtrl) {
-	    onSend();
-	}
+	// if (key == 13 && !isCtrl) {
+	onSend();
+	// }
     }
 
     // TODO: vicente, mira esto

@@ -20,14 +20,6 @@
 
 package org.ourproject.kune.platf.client.utils;
 
-import java.util.List;
-
-import org.ourproject.kune.platf.client.rpc.KuneService;
-import org.ourproject.kune.platf.client.rpc.KuneServiceAsync;
-import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.sitebar.client.Site;
-
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Image;
 
 public class PrefetchUtilites {
@@ -36,32 +28,5 @@ public class PrefetchUtilites {
 	Image.prefetch("images/spin-kune-thund-green.gif");
 	Image.prefetch("css/img/button-bg-hard.gif");
 	Image.prefetch("css/img/button-bg-soft.gif");
-
-    }
-
-    public static void preFetchLicenses(final Session session) {
-	KuneServiceAsync kuneService = KuneService.App.getInstance();
-	kuneService.getAllLicenses(new AsyncCallback() {
-	    public void onFailure(final Throwable arg0) {
-		// TODO
-		Site.error("Error fetching initial data");
-	    }
-
-	    public void onSuccess(final Object result) {
-		session.setCCLicenses((List) result);
-	    }
-	});
-
-	kuneService.getNotCCLicenses(new AsyncCallback() {
-	    public void onFailure(final Throwable arg0) {
-		// TODO
-		Site.error("Error fetching initial data");
-	    }
-
-	    public void onSuccess(final Object result) {
-		session.setNotCCLicenses((List) result);
-	    }
-	});
-
     }
 }

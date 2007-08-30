@@ -22,14 +22,16 @@ package org.ourproject.kune.app.client;
 
 import org.ourproject.kune.chat.client.ChatClientModule;
 import org.ourproject.kune.docs.client.DocsClientModule;
-import org.ourproject.kune.platf.client.KuneClientModule;
 import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.ApplicationBuilder;
+import org.ourproject.kune.workspace.client.WorkspaceClientModule;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.WindowCloseListener;
 
 public class KuneEntryPoint implements EntryPoint {
 
@@ -47,10 +49,19 @@ public class KuneEntryPoint implements EntryPoint {
 	    informUserAndStop();
 	}
 	KunePlatform platform = new KunePlatform();
-	platform.install(new KuneClientModule());
+	platform.install(new WorkspaceClientModule());
 	platform.install(new DocsClientModule());
 	platform.install(new ChatClientModule());
-	Application app = new ApplicationBuilder(userHash, platform).build();
+	final Application app = new ApplicationBuilder(userHash, platform).build();
+	Window.addWindowCloseListener(new WindowCloseListener() {
+	    public void onWindowClosed() {
+		app.stop();
+	    }
+
+	    public String onWindowClosing() {
+		return null;
+	    }
+	});
 	app.start();
 
     }
