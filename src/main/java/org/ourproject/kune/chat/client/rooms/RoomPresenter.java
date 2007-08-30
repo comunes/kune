@@ -139,6 +139,10 @@ public class RoomPresenter implements Room {
 	this.handler = handler;
     }
 
+    public boolean isReady() {
+	return handler != null;
+    }
+
     public XmppRoom getHandler() {
 	return handler;
     }

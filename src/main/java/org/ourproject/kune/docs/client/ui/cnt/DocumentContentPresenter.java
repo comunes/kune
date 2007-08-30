@@ -20,7 +20,7 @@
 
 package org.ourproject.kune.docs.client.ui.cnt;
 
-import org.ourproject.kune.docs.client.actions.SaveDocument;
+import org.ourproject.kune.docs.client.actions.DocsEvents;
 import org.ourproject.kune.docs.client.ui.cnt.folder.editor.FolderEditor;
 import org.ourproject.kune.docs.client.ui.cnt.folder.viewer.FolderViewer;
 import org.ourproject.kune.docs.client.ui.cnt.reader.DocumentReader;
@@ -72,7 +72,7 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
 
     public void onSave(final String text) {
 	content.setContent(text);
-	Dispatcher.App.instance.fire(SaveDocument.KEY, content, this);
+	Dispatcher.App.instance.fire(DocsEvents.SAVE_DOCUMENT, content, this);
     }
 
     public void onCancel() {

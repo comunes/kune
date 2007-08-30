@@ -30,8 +30,11 @@ import org.ourproject.kune.workspace.client.dto.StateDTO;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class SaveDocument extends WorkspaceAction {
-    public static final String KEY = "docs.SaveDocument";
-    public static final String EVENT = "docs.SaveDocument";
+    private static final String NAME = "docs.SaveDocument";
+
+    public SaveDocument() {
+	super(NAME, DocsEvents.SAVE_DOCUMENT);
+    }
 
     public void execute(final Object value, final Object extra) {
 	save((StateDTO) value, (DocumentContent) extra);
@@ -57,14 +60,6 @@ public class SaveDocument extends WorkspaceAction {
 	    }
 
 	});
-    }
-
-    public String getActionName() {
-	return KEY;
-    }
-
-    public String getEventName() {
-	return EVENT;
     }
 
 }

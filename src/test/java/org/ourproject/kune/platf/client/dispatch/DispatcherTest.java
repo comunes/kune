@@ -32,7 +32,7 @@ public class DispatcherTest {
 	    dispatcher.subscribe(actions[index]);
 	}
 
-	dispatcher.fire(eventName, value);
+	dispatcher.fire(eventName, value, null);
 
 	for (int index = 0; index < actions.length; index++) {
 	    EasyMock.verify(actions[index]);

@@ -100,7 +100,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	dialog.hide();
     }
 
-    public void sendBtnEnable(final boolean enabled) {
+    public void setSendEnabled(final boolean enabled) {
 	if (enabled) {
 	    sendBtn.enable();
 	} else {

@@ -31,8 +31,11 @@ import org.ourproject.kune.workspace.client.dto.StateDTO;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class AddFolder extends WorkspaceAction {
-    public static final String EVENT = "docs.AddFolder";
-    public static final String KEY = "docs.AddFolder";
+    private static final String KEY = "docs.AddFolder";
+
+    public AddFolder() {
+	super(KEY, DocsEvents.ADD_FOLDER);
+    }
 
     public void execute(final Object value, final Object extra) {
 	String name = (String) value;
@@ -53,13 +56,5 @@ public class AddFolder extends WorkspaceAction {
 		stateManager.setState(content);
 	    }
 	});
-    }
-
-    public String getActionName() {
-	return KEY;
-    }
-
-    public String getEventName() {
-	return EVENT;
     }
 }

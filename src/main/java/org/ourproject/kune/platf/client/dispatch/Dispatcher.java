@@ -29,7 +29,7 @@ public interface Dispatcher {
 
     void fire(String eventName, Object value, Object extra);
 
-    void fire(String eventName, Object value);
+    void fireDeferred(String eventName, Object value, Object extra);
 
     Action getAction(String key);
 

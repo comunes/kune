@@ -25,6 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.History;
 
 public class DefaultDispatcher implements Dispatcher {
@@ -53,8 +55,12 @@ public class DefaultDispatcher implements Dispatcher {
 	return (List) list;
     }
 
-    public void fire(final String eventName, final Object value) {
-	fire(eventName, value, null);
+    public void fireDeferred(final String eventName, final Object value, final Object extra) {
+	DeferredCommand.addCommand(new Command() {
+	    public void execute() {
+		fire(eventName, value, extra);
+	    }
+	});
     }
 
     public void fire(final String eventName, final Object value, final Object extra) {

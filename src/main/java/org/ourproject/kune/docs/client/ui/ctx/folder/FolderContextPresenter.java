@@ -21,8 +21,7 @@
 package org.ourproject.kune.docs.client.ui.ctx.folder;
 
 import org.ourproject.kune.docs.client.DocumentClientTool;
-import org.ourproject.kune.docs.client.actions.AddDocument;
-import org.ourproject.kune.docs.client.actions.AddFolder;
+import org.ourproject.kune.docs.client.actions.DocsEvents;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
@@ -39,8 +38,8 @@ public class FolderContextPresenter implements FolderContext {
 	contextItems.registerType(DocumentClientTool.TYPE_DOCUMENT, contextImages.pageWhite());
 	contextItems.registerType(DocumentClientTool.TYPE_FOLDER, contextImages.folder());
 	// i18n
-	contextItems.canCreate(DocumentClientTool.TYPE_DOCUMENT, "Add new document", AddDocument.EVENT);
-	contextItems.canCreate(DocumentClientTool.TYPE_FOLDER, "Add new folder", AddFolder.EVENT);
+	contextItems.canCreate(DocumentClientTool.TYPE_DOCUMENT, "Add new document", DocsEvents.ADD_DOCUMENT);
+	contextItems.canCreate(DocumentClientTool.TYPE_FOLDER, "Add new folder", DocsEvents.ADD_FOLDER);
 	contextItems.setParentTreeVisible(true);
     }
 

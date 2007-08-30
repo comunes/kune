@@ -53,4 +53,6 @@ public interface Room {
 
     View getView();
 
+    boolean isReady();
+
 }

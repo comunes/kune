@@ -35,6 +35,13 @@ public abstract class WorkspaceAction implements Action {
     protected StateController stateManager;
     protected String user;
     protected Session session;
+    private final String name;
+    private final String event;
+
+    public WorkspaceAction(final String name, final String event) {
+	this.name = name;
+	this.event = event;
+    }
 
     public void init(final Application app, final Session session, final StateController stateManager) {
 	this.app = app;
@@ -51,5 +58,13 @@ public abstract class WorkspaceAction implements Action {
 
     protected StateDTO getState() {
 	return session.getCurrentState();
+    }
+
+    public final String getActionName() {
+	return name;
+    }
+
+    public final String getEventName() {
+	return event;
     }
 }

@@ -31,8 +31,8 @@ import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
 import org.ourproject.kune.sitebar.client.bar.SiteBarListener;
 import org.ourproject.kune.workspace.client.Workspace;
+import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.WorkspaceFactory;
-import org.ourproject.kune.workspace.client.actions.LoginAction;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
@@ -52,7 +52,7 @@ public class DefaultApplication implements Application {
 
 	SiteBarListener listener = new SiteBarListener() {
 	    public void onUserLoggedIn(final UserDTO user) {
-		dispatcher.fire(LoginAction.EVENT, user);
+		dispatcher.fire(WorkspaceEvents.LOGIN, user, null);
 	    }
 
 	    public void onUserLoggedOut() {

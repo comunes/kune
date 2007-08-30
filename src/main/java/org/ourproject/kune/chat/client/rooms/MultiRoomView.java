@@ -36,4 +36,6 @@ public interface MultiRoomView {
     void showUserList(RoomUserListView usersListView);
 
     void hideRooms();
+
+    void setSendEnabled(boolean enabled);
 }

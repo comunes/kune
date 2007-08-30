@@ -20,18 +20,15 @@
 
 package org.ourproject.kune.workspace.client.actions;
 
+import org.ourproject.kune.workspace.client.WorkspaceEvents;
+
 public class InitAction extends WorkspaceAction {
-    public static final String KEY = "platf.InitAction";
-    public static final String EVENT = "platf.InitAction";
+    private static final String NAME = "platf.InitAction";
+
+    public InitAction() {
+	super(NAME, WorkspaceEvents.INIT);
+    }
 
     public void execute(final Object value, final Object extra) {
-    }
-
-    public String getActionName() {
-	return KEY;
-    }
-
-    public String getEventName() {
-	return EVENT;
     }
 }

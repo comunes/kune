@@ -21,6 +21,7 @@
 package org.ourproject.kune.chat.client;
 
 import org.ourproject.kune.chat.client.actions.ChatLoginAction;
+import org.ourproject.kune.chat.client.actions.JoinRoomAction;
 import org.ourproject.kune.platf.client.extend.ClientModule;
 import org.ourproject.kune.platf.client.extend.Register;
 
@@ -30,5 +31,6 @@ public class ChatClientModule implements ClientModule {
 	ChatClientTool chatTool = new ChatClientTool();
 	register.addTool(chatTool);
 	register.addAction(new ChatLoginAction(chatTool.engine));
+	register.addAction(new JoinRoomAction(chatTool.engine));
     }
 }
