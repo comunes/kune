@@ -48,6 +48,16 @@ public interface ContextItemsImages extends ImageBundle {
     AbstractImagePrototype bulletArrowRight();
 
     /**
+     * @gwt.resource chat-green.png
+     */
+    AbstractImagePrototype chatGreen();
+
+    /**
+     * @gwt.resource chat-blue.png
+     */
+    AbstractImagePrototype chatBlue();
+
+    /**
      * @gwt.resource folder.png
      */
     AbstractImagePrototype folder();

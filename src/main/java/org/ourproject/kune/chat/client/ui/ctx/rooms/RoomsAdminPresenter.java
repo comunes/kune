@@ -37,7 +37,7 @@ public class RoomsAdminPresenter implements RoomsAdmin {
 	ContextItemsImages images = ContextItemsImages.App.getInstance();
 	contextItems.setParentTreeVisible(false);
 	contextItems.registerType(ChatClientTool.TYPE_CHAT, images.page());
-	contextItems.registerType(ChatClientTool.TYPE_ROOM, images.bulletArrowRight());
+	contextItems.registerType(ChatClientTool.TYPE_ROOM, images.chatGreen());
 	contextItems.canCreate(ChatClientTool.TYPE_ROOM, "Add room", DocsEvents.ADD_FOLDER);
     }
 
