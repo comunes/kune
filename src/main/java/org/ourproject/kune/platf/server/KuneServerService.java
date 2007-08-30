@@ -34,6 +34,7 @@ import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
+import org.ourproject.kune.platf.server.properties.ChatProperties;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
@@ -49,15 +50,17 @@ public class KuneServerService implements KuneService {
     private final LicenseManager licenseManager;
     private static final Log log = LogFactory.getLog(KuneServerService.class);
     private final UserManager userManager;
+    private final ChatProperties chatProperties;
 
     @Inject
     public KuneServerService(final UserSession session, final UserManager userManager, final GroupManager groupManager,
-	    final LicenseManager licenseManager, final Mapper mapper) {
+	    final LicenseManager licenseManager, final Mapper mapper, final ChatProperties chatProperties) {
 	this.session = session;
 	this.userManager = userManager;
 	this.groupManager = groupManager;
 	this.licenseManager = licenseManager;
 	this.mapper = mapper;
+	this.chatProperties = chatProperties;
     }
 
     @Transactional(type = TransactionType.READ_WRITE)
@@ -75,6 +78,9 @@ public class KuneServerService implements KuneService {
 	data.setCCLicenses(licenseManager.getCC());
 	data.setNotCCLicenses(licenseManager.getNotCC());
 	data.setCurrentUser(userManager.find(session.getUserId()));
+	data.setChatHttpBase(chatProperties.getHttpBase());
+	data.setChatDomain(chatProperties.getDomain());
+	data.setChatRoomHost(chatProperties.getRoomHost());
 	return mapper.map(data, InitDataDTO.class);
     }
 

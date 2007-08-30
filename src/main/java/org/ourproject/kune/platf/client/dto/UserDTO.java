@@ -23,6 +23,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class UserDTO implements IsSerializable {
     private String name;
+    private String chatPassword;
 
     public String getName() {
 	return name;
@@ -33,11 +34,16 @@ public class UserDTO implements IsSerializable {
     }
 
     public String getChatName() {
-	return "testUser1";
+	return getName();
     }
 
     public String getChatPassword() {
-	return "easy1";
+	return chatPassword;
+    }
+
+    public void setChatPassword(final String password) {
+	this.chatPassword = password;
+
     }
 
 }

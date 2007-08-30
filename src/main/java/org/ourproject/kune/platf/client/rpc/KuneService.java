@@ -20,8 +20,6 @@
 
 package org.ourproject.kune.platf.client.rpc;
 
-import java.util.List;
-
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 
@@ -37,18 +35,6 @@ public interface KuneService extends RemoteService {
     void createNewGroup(GroupDTO group) throws SerializableException;
 
     InitDataDTO getInitData(String userHash);
-
-    /**
-     * @deprecated
-     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.LicenseDTO>
-     */
-    List getAllLicenses() throws SerializableException;
-
-    /**
-     * @deprecated
-     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.LicenseDTO>
-     */
-    List getNotCCLicenses() throws SerializableException;
 
     public class App {
 	private static KuneServiceAsync ourInstance = null;

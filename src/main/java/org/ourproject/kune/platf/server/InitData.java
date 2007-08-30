@@ -9,6 +9,9 @@ public class InitData {
     private List<License> ccLicenses;
     private List<License> notCCLicenses;
     private User currentUser;
+    private String chatHttpBase;
+    private String chatDomain;
+    private String chatRoomHost;
 
     public void setCCLicenses(final List<License> ccLicenses) {
 	this.ccLicenses = ccLicenses;
@@ -32,6 +35,30 @@ public class InitData {
 
     public User getCurrentUser() {
 	return currentUser;
+    }
+
+    public void setChatHttpBase(String chatHttpBase) {
+	this.chatHttpBase = chatHttpBase;
+    }
+
+    public String getChatHttpBase() {
+	return chatHttpBase;
+    }
+
+    public void setChatDomain(String chatDomain) {
+	this.chatDomain = chatDomain;
+    }
+
+    public String getChatDomain() {
+	return chatDomain;
+    }
+
+    public void setChatRoomHost(String chatRoomHost) {
+	this.chatRoomHost = chatRoomHost;
+    }
+
+    public String getChatRoomHost() {
+	return chatRoomHost;
     }
 
 }

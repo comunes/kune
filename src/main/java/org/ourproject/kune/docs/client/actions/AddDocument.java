@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.docs.client.actions;
 
+import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
@@ -30,18 +31,18 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class AddDocument extends WorkspaceAction {
     public void execute(final Object value, final Object extra) {
-	addDocument((String) value, getState().getFolder());
+	addDocument((String) value, Services.get().session.getCurrentState().getFolder());
     }
 
     private void addDocument(final String name, final ContainerDTO containerDTO) {
 	ContentServiceAsync server = ContentService.App.getInstance();
-	server.addContent(user, containerDTO.getId(), name, new AsyncCallback() {
+	server.addContent(Services.get().user, containerDTO.getId(), name, new AsyncCallback() {
 	    public void onFailure(final Throwable caught) {
 	    }
 
 	    public void onSuccess(final Object result) {
 		StateDTO content = (StateDTO) result;
-		stateManager.setState(content);
+		Services.get().stateManager.setState(content);
 	    }
 	});
     }

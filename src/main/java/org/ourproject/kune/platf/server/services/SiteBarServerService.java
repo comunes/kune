@@ -61,12 +61,10 @@ public class SiteBarServerService implements SiteBarService {
     private UserDTO loginUser(final User user) throws UserAuthException {
 	if (user != null) {
 	    session.setUser(user);
-	    UserDTO dto = mapper.map(user, UserDTO.class);
-	    return dto;
+	    return mapper.map(user, UserDTO.class);
 	} else {
 	    throw new UserAuthException();
 	}
-
     }
 
     @Transactional(type = TransactionType.READ_ONLY)
@@ -82,4 +80,5 @@ public class SiteBarServerService implements SiteBarService {
 	groupManager.createUserGroup(user);
 	return loginUser(user);
     }
+
 }

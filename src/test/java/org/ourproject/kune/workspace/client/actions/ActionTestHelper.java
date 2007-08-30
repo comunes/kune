@@ -1,5 +1,6 @@
 package org.ourproject.kune.workspace.client.actions;
 
+import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.state.Session;
@@ -22,12 +23,7 @@ public class ActionTestHelper {
 	this.action = action;
 	app = new ApplicationStub(useNiceMocks);
 	session = new NiceState();
-	inject(action);
-    }
-
-    public void inject(final Object object) {
-	WorkspaceAction action = (WorkspaceAction) object;
-	action.init(app, null, null);
+	Services.init("userHash", app, session, app.getStateManager(), app.getDispatcher());
     }
 
     public void execute(final Object value) {

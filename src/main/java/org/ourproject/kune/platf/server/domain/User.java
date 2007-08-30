@@ -108,6 +108,11 @@ public class User implements HasId {
 	this.password = password;
     }
 
+    // mapping to DTO
+    public String getChatPassword() {
+	return password;
+    }
+
     public Group getUserGroup() {
 	return userGroup;
     }

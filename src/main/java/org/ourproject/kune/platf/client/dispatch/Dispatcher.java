@@ -20,10 +20,8 @@
 
 package org.ourproject.kune.platf.client.dispatch;
 
+
 public interface Dispatcher {
-    public static class App {
-	public static Dispatcher instance;
-    }
 
     Action subscribe(String eventName, Action action);
 

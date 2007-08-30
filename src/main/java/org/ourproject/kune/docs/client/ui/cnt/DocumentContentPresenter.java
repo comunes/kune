@@ -25,6 +25,7 @@ import org.ourproject.kune.docs.client.ui.cnt.folder.editor.FolderEditor;
 import org.ourproject.kune.docs.client.ui.cnt.folder.viewer.FolderViewer;
 import org.ourproject.kune.docs.client.ui.cnt.reader.DocumentReader;
 import org.ourproject.kune.docs.client.ui.cnt.reader.DocumentReaderListener;
+import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
@@ -72,7 +73,7 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
 
     public void onSave(final String text) {
 	content.setContent(text);
-	Dispatcher.App.instance.fire(DocsEvents.SAVE_DOCUMENT, content, this);
+	Services.get().dispatcher.fire(DocsEvents.SAVE_DOCUMENT, content, this);
     }
 
     public void onCancel() {

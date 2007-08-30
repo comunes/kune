@@ -31,6 +31,7 @@ import org.ourproject.kune.chat.client.rooms.RoomUser;
 import org.ourproject.kune.chat.client.rooms.RoomUser.UserType;
 import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoom;
 import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomListener;
+import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
@@ -91,7 +92,7 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener, Mult
     private Room createRoom(final String roomName, final String userAlias, final UserType userType) {
 	MultiRoom rooms = components.getRooms();
 	final Room room = rooms.createRoom(roomName, userAlias, userType);
-	Dispatcher.App.instance.fireDeferred(ChatEvents.JOIN_ROOM, room, null);
+	Services.get().dispatcher.fireDeferred(ChatEvents.JOIN_ROOM, room, null);
 	return room;
     }
 

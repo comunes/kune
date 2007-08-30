@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.docs.client.actions;
 
+import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.rpc.ContentService;
@@ -33,21 +34,21 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public class AddFolder extends WorkspaceAction {
     public void execute(final Object value, final Object extra) {
 	String name = (String) value;
-	GroupDTO group = getState().getGroup();
-	ContainerDTO container = getState().getFolder();
+	GroupDTO group = Services.get().session.getCurrentState().getGroup();
+	ContainerDTO container = Services.get().session.getCurrentState().getFolder();
 	addFolder(name, group, container);
     }
 
     private void addFolder(final String name, final GroupDTO group, final ContainerDTO container) {
 	Site.showProgress("adding document");
 	ContentServiceAsync server = ContentService.App.getInstance();
-	server.addFolder(user, group.getShortName(), container.getId(), name, new AsyncCallback() {
+	server.addFolder(Services.get().user, group.getShortName(), container.getId(), name, new AsyncCallback() {
 	    public void onFailure(final Throwable caught) {
 	    }
 
 	    public void onSuccess(final Object result) {
 		StateDTO content = (StateDTO) result;
-		stateManager.setState(content);
+		Services.get().stateManager.setState(content);
 	    }
 	});
     }

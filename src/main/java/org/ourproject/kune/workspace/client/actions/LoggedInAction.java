@@ -19,6 +19,7 @@
 
 package org.ourproject.kune.workspace.client.actions;
 
+import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.sitebar.client.Site;
 
@@ -29,6 +30,6 @@ public class LoggedInAction extends WorkspaceAction {
 
     private void onLoggedIn(final UserDTO user) {
 	Site.sitebar.showLoggedUser(user.getName());
-	stateManager.reload();
+	Services.get().stateManager.reload();
     }
 }

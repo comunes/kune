@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.workspace.client.actions;
 
+import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.UserDTO;
@@ -29,6 +30,7 @@ import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.utils.PrefetchUtilites;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
+import org.ourproject.kune.workspace.client.Workspace;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
 import com.google.gwt.core.client.GWT;
@@ -43,7 +45,8 @@ public class InitAction extends WorkspaceAction {
 	getInitData();
 
 	int windowWidth = Window.getClientWidth();
-	getWorkspace().adjustSize(windowWidth, Window.getClientHeight());
+	Workspace workspace = Services.get().app.getWorkspace();
+	workspace.adjustSize(windowWidth, Window.getClientHeight());
 	SiteBarFactory.getSiteMessage().adjustWidth(windowWidth);
 
 	RootPanel.get("kuneinitialcurtain").setVisible(false);
@@ -51,18 +54,19 @@ public class InitAction extends WorkspaceAction {
 
     private void getInitData() {
 	KuneServiceAsync server = KuneService.App.getInstance();
-	server.getInitData(user, new AsyncCallback() {
+	server.getInitData(Services.get().user, new AsyncCallback() {
 	    public void onFailure(final Throwable error) {
 		// i18n
 		Site.error("Error fetching initial data");
 	    }
 
 	    public void onSuccess(final Object response) {
+		Dispatcher dispatcher = Services.get().dispatcher;
 		InitDataDTO initData = (InitDataDTO) response;
-		session.setCCLicenses(initData.getCCLicenses());
-		session.setNotCCLicenses(initData.getNotCCLicenses());
+		Services.get().session.setCCLicenses(initData.getCCLicenses());
+		Services.get().session.setNotCCLicenses(initData.getNotCCLicenses());
 		UserDTO currentUser = initData.getCurrentUser();
-		Dispatcher dispatcher = getDispatcher();
+		dispatcher.fire(WorkspaceEvents.INIT_DATA_RECEIVED, response, null);
 		if (currentUser == null) {
 		    dispatcher.fire(WorkspaceEvents.USER_LOGGED_OUT, null, null);
 		} else {

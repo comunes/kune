@@ -24,9 +24,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.KunePlatform;
-import org.ourproject.kune.platf.client.dispatch.ActionEvent;
+import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
-import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.state.ContentProvider;
 import org.ourproject.kune.platf.client.state.ContentProviderImpl;
@@ -34,7 +33,6 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateController;
 import org.ourproject.kune.platf.client.state.StateControllerDefault;
 import org.ourproject.kune.platf.client.tool.ClientTool;
-import org.ourproject.kune.workspace.client.actions.WorkspaceAction;
 
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -59,26 +57,10 @@ public class ApplicationBuilder {
 	History.addHistoryListener(stateManager);
 
 	final DefaultDispatcher dispatcher = new DefaultDispatcher();
-	Dispatcher.App.instance = dispatcher;
-	prepareActions(dispatcher, platform.getActions(), application, session, stateManager);
-
 	application.init(dispatcher, stateManager);
 
+	Services.init(userHash, application, session, stateManager, dispatcher);
 	return application;
-    }
-
-    public void prepareActions(final DefaultDispatcher dispatcher, final List actions,
-	    final DefaultApplication application, final Session session, final StateController stateManager) {
-	ActionEvent actionEvent;
-	WorkspaceAction action;
-
-	int total = actions.size();
-	for (int index = 0; index < total; index++) {
-	    actionEvent = (ActionEvent) actions.get(index);
-	    action = (WorkspaceAction) actionEvent.action;
-	    action.init(application, session, stateManager);
-	    dispatcher.subscribe(actionEvent.event, action);
-	}
     }
 
     private HashMap indexTools(final List toolList) {

@@ -21,6 +21,7 @@
 package org.ourproject.kune.docs.client.actions;
 
 import org.ourproject.kune.docs.client.ui.cnt.DocumentContent;
+import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.sitebar.client.Site;
@@ -38,7 +39,7 @@ public class SaveDocument extends WorkspaceAction {
 	// i18n: Saving
 	Site.showProgress("Saving");
 	ContentServiceAsync server = ContentService.App.getInstance();
-	server.save(user, content.getDocumentId(), content.getContent(), new AsyncCallback() {
+	server.save(Services.get().user, content.getDocumentId(), content.getContent(), new AsyncCallback() {
 	    public void onFailure(final Throwable caught) {
 		// i18n: Error saving
 		Site.hideProgress();
