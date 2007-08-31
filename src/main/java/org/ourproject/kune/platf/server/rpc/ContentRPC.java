@@ -18,7 +18,7 @@
  *
  */
 
-package org.ourproject.kune.platf.server.services;
+package org.ourproject.kune.platf.server.rpc;
 
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
@@ -35,10 +35,10 @@ import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
-import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.platf.server.state.State;
 import org.ourproject.kune.platf.server.state.StateService;
+import org.ourproject.kune.platf.server.users.UserManager;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.inject.Inject;
@@ -47,7 +47,7 @@ import com.wideplay.warp.persist.TransactionType;
 import com.wideplay.warp.persist.Transactional;
 
 @Singleton
-public class ContentServerService implements ContentService {
+public class ContentRPC implements ContentService {
     private final StateService stateService;
     private final UserSession session;
     private final Mapper mapper;
@@ -57,7 +57,7 @@ public class ContentServerService implements ContentService {
     private final UserManager userManager;
 
     @Inject
-    public ContentServerService(final UserSession session, final Accessor contentAccess,
+    public ContentRPC(final UserSession session, final Accessor contentAccess,
 	    final StateService stateService, final CreationService creationService, final UserManager userManager,
 	    final GroupManager groupManager, final Mapper mapper) {
 	this.session = session;

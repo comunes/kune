@@ -25,7 +25,7 @@ import java.util.Map;
 
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
-import org.ourproject.kune.platf.client.dto.UserDTO;
+import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.state.StateController;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.sitebar.client.bar.SiteBarListener;
@@ -45,7 +45,7 @@ public class DefaultApplication implements Application {
 	workspace.attachTools(tools.values().iterator());
 
 	DesktopView desktop = WorkspaceFactory.createDesktop(workspace, new SiteBarListener() {
-	    public void onUserLoggedIn(final UserDTO user) {
+	    public void onUserLoggedIn(final UserInfoDTO user) {
 		dispatcher.fire(WorkspaceEvents.USER_LOGGED_IN, user, null);
 	    }
 

@@ -21,8 +21,9 @@ package org.ourproject.kune.platf.client.dto;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-public class UserDTO implements IsSerializable {
+public class UserInfoDTO implements IsSerializable {
     private String name;
+    private String chatName;
     private String chatPassword;
 
     public String getName() {
@@ -34,7 +35,7 @@ public class UserDTO implements IsSerializable {
     }
 
     public String getChatName() {
-	return getName();
+	return chatName;
     }
 
     public String getChatPassword() {
@@ -44,6 +45,10 @@ public class UserDTO implements IsSerializable {
     public void setChatPassword(final String password) {
 	this.chatPassword = password;
 
+    }
+
+    public void setChatName(final String chatName) {
+	this.chatName = chatName;
     }
 
 }

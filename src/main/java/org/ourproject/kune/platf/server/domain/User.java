@@ -55,6 +55,8 @@ public class User implements HasId {
     @Column(unique = true)
     private String shortName;
 
+    public static final User NONE = new User();
+
     public User(final String shortName, final String name, final String email, final String password) {
 	this.shortName = shortName;
 	this.name = name;
@@ -106,11 +108,6 @@ public class User implements HasId {
 
     public void setPassword(final String password) {
 	this.password = password;
-    }
-
-    // mapping to DTO
-    public String getChatPassword() {
-	return password;
     }
 
     public Group getUserGroup() {

@@ -24,7 +24,7 @@ import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
-import org.ourproject.kune.platf.client.dto.UserDTO;
+import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.rpc.KuneService;
 import org.ourproject.kune.platf.client.rpc.KuneServiceAsync;
 import org.ourproject.kune.platf.client.services.Kune;
@@ -66,7 +66,7 @@ public class InitAction implements Action {
 		InitDataDTO initData = (InitDataDTO) response;
 		Services.get().session.setCCLicenses(initData.getCCLicenses());
 		Services.get().session.setNotCCLicenses(initData.getNotCCLicenses());
-		UserDTO currentUser = initData.getCurrentUser();
+		UserInfoDTO currentUser = initData.getUserInfo();
 		dispatcher.fire(WorkspaceEvents.INIT_DATA_RECEIVED, response, null);
 		if (currentUser == null) {
 		    dispatcher.fire(WorkspaceEvents.USER_LOGGED_OUT, null, null);

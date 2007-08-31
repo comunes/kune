@@ -3,15 +3,23 @@ package org.ourproject.kune.platf.server;
 import java.util.List;
 
 import org.ourproject.kune.platf.server.domain.License;
-import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.users.UserInfo;
 
 public class InitData {
     private List<License> ccLicenses;
     private List<License> notCCLicenses;
-    private User currentUser;
+    private UserInfo userInfo;
     private String chatHttpBase;
     private String chatDomain;
     private String chatRoomHost;
+
+    public UserInfo getUserInfo() {
+	return userInfo;
+    }
+
+    public void setUserInfo(final UserInfo currentUserInfo) {
+	this.userInfo = currentUserInfo;
+    }
 
     public void setCCLicenses(final List<License> ccLicenses) {
 	this.ccLicenses = ccLicenses;
@@ -29,15 +37,7 @@ public class InitData {
 	return notCCLicenses;
     }
 
-    public void setCurrentUser(final User currentUser) {
-	this.currentUser = currentUser;
-    }
-
-    public User getCurrentUser() {
-	return currentUser;
-    }
-
-    public void setChatHttpBase(String chatHttpBase) {
+    public void setChatHttpBase(final String chatHttpBase) {
 	this.chatHttpBase = chatHttpBase;
     }
 
@@ -45,7 +45,7 @@ public class InitData {
 	return chatHttpBase;
     }
 
-    public void setChatDomain(String chatDomain) {
+    public void setChatDomain(final String chatDomain) {
 	this.chatDomain = chatDomain;
     }
 
@@ -53,7 +53,7 @@ public class InitData {
 	return chatDomain;
     }
 
-    public void setChatRoomHost(String chatRoomHost) {
+    public void setChatRoomHost(final String chatRoomHost) {
 	this.chatRoomHost = chatRoomHost;
     }
 

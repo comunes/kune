@@ -21,7 +21,7 @@
 package org.ourproject.kune.sitebar.client.bar;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.UserDTO;
+import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.group.NewGroupListener;
 import org.ourproject.kune.sitebar.client.login.LoginListener;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
@@ -74,7 +74,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 	});
     }
 
-    public void userLoggedIn(final UserDTO user) {
+    public void userLoggedIn(final UserInfoDTO user) {
 	view.hideLoginDialog();
 	listener.onUserLoggedIn(user);
     }

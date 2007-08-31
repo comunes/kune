@@ -11,6 +11,7 @@ import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.users.UserManager;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;

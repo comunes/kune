@@ -1,3 +1,14 @@
+
+DESORDENADO
+
+* 	el GWT filter es un caos: hay muchas maneras de aumentar el perfomance y es bastante clave!
+* 	deberíamos encontrar una manera de que dozer mapease directamente los
+	fields sin utilizar los getters y setters => menos código js y mayor performance
+
+
+
+
+
 TODO-list for kune
 --------------------------------------------------------------------------------
 <nick>  == reported by
@@ -19,14 +30,14 @@ MIND-TERM:
 <danigb> README is empty
 --> vjrj
 <vjrj> apply csstidy to css, again
---> vjrj 
+--> vjrj
 <vjrj> layout problems (specially resizing) with old Mozilla (wait gwt 1.4)
 <vjrj> RTE right to left writing
 <vjrj> Change to GPLv3 http://www.gnu.org/licenses/rms-why-gplv3.html
 
 LONG-TERM:
 --------------------------------------------------------------------------------
-<vjrj> Richtext toolbar, don't show fonts, sizes and color current value (like 
+<vjrj> Richtext toolbar, don't show fonts, sizes and color current value (like
 toggle buttons)
 
 IDEAS:

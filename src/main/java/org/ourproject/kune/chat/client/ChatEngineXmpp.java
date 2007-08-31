@@ -21,11 +21,12 @@ package org.ourproject.kune.chat.client;
 
 import java.util.Date;
 
+import to.tipit.gwtlib.FireLog;
+
 import com.calclab.gwtjsjac.client.Debugger;
 import com.calclab.gwtjsjac.client.XmppHttpBindingConnection;
 import com.calclab.gwtjsjac.client.XmppPresence;
 import com.calclab.gwtjsjac.client.XmppUser;
-import com.calclab.gwtjsjac.client.log.GWTLoggerOutput;
 import com.calclab.gwtjsjac.client.mandioca.XmppRoom;
 import com.calclab.gwtjsjac.client.mandioca.XmppSession;
 
@@ -37,7 +38,7 @@ class ChatEngineXmpp implements ChatEngine {
     public ChatEngineXmpp(final ChatState state) {
 	this.state = state;
 	connection = new XmppHttpBindingConnection(state.httpBase, 2000);
-	Debugger.debug(connection, new GWTLoggerOutput());
+	Debugger.debug(connection, new FirebugLoggerOutput());
     }
 
     public ChatState getState() {
@@ -45,25 +46,18 @@ class ChatEngineXmpp implements ChatEngine {
     }
 
     public void login(final String chatName, final String chatPassword) {
+	FireLog.debug("LOGIN CHAT: " + chatName + "[" + chatPassword + "]");
 	state.user = new XmppUser(state.domain, chatName, chatPassword);
 	state.user.resource = "kuneClient" + new Date().getTime();
-	state.isConnected = false;
-	reconnect();
+	session = new XmppSession(connection, state.user);
+	session.login();
+	// FIXME: hardcoded
+	session.sendPresence(XmppPresence.CHAT, ":: ready ::");
     }
 
     public void logout() {
 	if (session != null) {
 	    session.logout();
-	}
-    }
-
-    public void reconnect() {
-	if (!state.isConnected) {
-	    session = new XmppSession(connection, state.user);
-	    session.login();
-	    // FIXME
-	    session.sendPresence(XmppPresence.CHAT, ":: ready ::");
-	    state.isConnected = connection.isConnected();
 	}
     }
 

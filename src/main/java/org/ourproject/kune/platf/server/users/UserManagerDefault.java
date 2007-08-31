@@ -18,7 +18,7 @@
  *
  */
 
-package org.ourproject.kune.platf.server.manager.impl;
+package org.ourproject.kune.platf.server.users;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
 import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.manager.UserManager;
+import org.ourproject.kune.platf.server.manager.impl.DefaultManager;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -75,7 +75,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     }
 
     public User find(final Long userId) {
-	return userId != null ? super.find(userId) : null;
+	return userId != null ? super.find(userId) : User.NONE;
     }
 
 }

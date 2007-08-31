@@ -22,7 +22,7 @@ package org.ourproject.kune.chat.client.actions;
 import org.ourproject.kune.chat.client.ChatProvider;
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
-import org.ourproject.kune.platf.client.dto.UserDTO;
+import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 
 public class ChatLoginAction implements Action {
     private final ChatProvider provider;
@@ -32,10 +32,10 @@ public class ChatLoginAction implements Action {
     }
 
     public void execute(final Object value, final Object extra, Services services) {
-	login((UserDTO) value);
+	login((UserInfoDTO) value);
     }
 
-    private void login(final UserDTO user) {
+    private void login(final UserInfoDTO user) {
 	provider.getChat().login(user.getChatName(), user.getChatPassword());
     }
 }

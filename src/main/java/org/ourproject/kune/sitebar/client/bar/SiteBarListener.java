@@ -20,10 +20,10 @@
 
 package org.ourproject.kune.sitebar.client.bar;
 
-import org.ourproject.kune.platf.client.dto.UserDTO;
+import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 
 public interface SiteBarListener {
-    public void onUserLoggedIn(UserDTO dto);
+    public void onUserLoggedIn(UserInfoDTO dto);
 
     public void onUserLoggedOut();
 }

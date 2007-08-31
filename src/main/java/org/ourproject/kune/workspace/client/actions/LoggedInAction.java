@@ -21,15 +21,15 @@ package org.ourproject.kune.workspace.client.actions;
 
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
-import org.ourproject.kune.platf.client.dto.UserDTO;
+import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.sitebar.client.Site;
 
 public class LoggedInAction implements Action {
     public void execute(final Object value, final Object extra, Services services) {
-	onLoggedIn((UserDTO) value);
+	onLoggedIn((UserInfoDTO) value);
     }
 
-    private void onLoggedIn(final UserDTO user) {
+    private void onLoggedIn(final UserInfoDTO user) {
 	Site.sitebar.showLoggedUser(user.getName());
 	Services.get().stateManager.reload();
     }

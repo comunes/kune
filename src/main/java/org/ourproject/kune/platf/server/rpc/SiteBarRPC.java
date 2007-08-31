@@ -18,15 +18,17 @@
  *
  */
 
-package org.ourproject.kune.platf.server.services;
+package org.ourproject.kune.platf.server.rpc;
 
-import org.ourproject.kune.platf.client.dto.UserDTO;
+import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.UserAuthException;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
-import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
+import org.ourproject.kune.platf.server.users.UserInfo;
+import org.ourproject.kune.platf.server.users.UserInfoService;
+import org.ourproject.kune.platf.server.users.UserManager;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
 
 import com.google.gwt.user.client.rpc.SerializableException;
@@ -36,32 +38,35 @@ import com.wideplay.warp.persist.TransactionType;
 import com.wideplay.warp.persist.Transactional;
 
 @Singleton
-public class SiteBarServerService implements SiteBarService {
+public class SiteBarRPC implements RPC, SiteBarService {
 
     private final UserManager userManager;
     private final UserSession session;
     private final GroupManager groupManager;
     private final Mapper mapper;
+    private final UserInfoService userInfoService;
 
     @Inject
-    public SiteBarServerService(final UserSession session, final UserManager userManager,
-	    final GroupManager groupManager, final Mapper mapper) {
+    public SiteBarRPC(final UserSession session, final UserManager userManager, final GroupManager groupManager,
+	    final UserInfoService userInfoService, final Mapper mapper) {
 	this.session = session;
 	this.userManager = userManager;
 	this.groupManager = groupManager;
+	this.userInfoService = userInfoService;
 	this.mapper = mapper;
     }
 
     @Transactional(type = TransactionType.READ_ONLY)
-    public UserDTO login(final String nickOrEmail, final String passwd) throws SerializableException {
+    public UserInfoDTO login(final String nickOrEmail, final String passwd) throws SerializableException {
 	User user = userManager.login(nickOrEmail, passwd);
 	return loginUser(user);
     }
 
-    private UserDTO loginUser(final User user) throws UserAuthException {
+    private UserInfoDTO loginUser(final User user) throws UserAuthException {
 	if (user != null) {
-	    session.setUser(user);
-	    return mapper.map(user, UserDTO.class);
+	    session.setUserId(user.getId());
+	    UserInfo userInfo = userInfoService.buildInfo(user);
+	    return mapper.map(userInfo, UserInfoDTO.class);
 	} else {
 	    throw new UserAuthException();
 	}
@@ -69,12 +74,11 @@ public class SiteBarServerService implements SiteBarService {
 
     @Transactional(type = TransactionType.READ_ONLY)
     public void logout() throws SerializableException {
-	// TODO: clear cookie
-	session.setUser(null);
+	session.clearUserId();
     }
 
     @Transactional(type = TransactionType.READ_WRITE)
-    public UserDTO createUser(final String shortName, final String longName, final String email, final String passwd)
+    public UserInfoDTO createUser(final String shortName, final String longName, final String email, final String passwd)
 	    throws SerializableException {
 	User user = userManager.createUser(shortName, longName, email, passwd);
 	groupManager.createUserGroup(user);

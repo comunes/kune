@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.ourproject.kune.platf.server.PersistenceTest;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.users.UserManager;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;

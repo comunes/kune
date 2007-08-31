@@ -23,7 +23,6 @@ public class ChatInfoPanel extends VerticalPanel implements ChatInfo, View {
 	stateArea.clear();
 	stateArea.add(new Label("base: " + state.httpBase));
 	stateArea.add(new Label("domain: " + state.domain));
-	stateArea.add(new Label("connected: " + state.isConnected));
 	if (state.user != null) {
 	    stateArea.add(new Label("user: " + state.user.userName));
 	    stateArea.add(new Label("password: " + state.user.password));

@@ -20,10 +20,10 @@
 
 package org.ourproject.kune.sitebar.client.login;
 
-import org.ourproject.kune.platf.client.dto.UserDTO;
+import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 
 public interface LoginListener {
-    void userLoggedIn(UserDTO user);
+    void userLoggedIn(UserInfoDTO user);
 
     void onLoginCancelled();
 }

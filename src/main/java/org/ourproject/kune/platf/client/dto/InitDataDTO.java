@@ -14,7 +14,7 @@ public class InitDataDTO implements IsSerializable {
      */
     ArrayList notCCLicenses;
 
-    UserDTO currentUser;
+    UserInfoDTO userInfo;
     private String chatHttpBase;
     private String chatDomain;
     private String chatRoomHost;
@@ -35,12 +35,12 @@ public class InitDataDTO implements IsSerializable {
 	this.notCCLicenses = notLicenses;
     }
 
-    public UserDTO getCurrentUser() {
-	return currentUser;
+    public UserInfoDTO getUserInfo() {
+	return userInfo;
     }
 
-    public void setCurrentUser(final UserDTO currentUser) {
-	this.currentUser = currentUser;
+    public void setUserInfo(final UserInfoDTO currentUser) {
+	this.userInfo = currentUser;
     }
 
     public String getChatHttpBase() {

@@ -18,7 +18,7 @@
  *
  */
 
-package org.ourproject.kune.platf.server.manager;
+package org.ourproject.kune.platf.server.users;
 
 import org.ourproject.kune.platf.server.domain.User;
 
@@ -28,7 +28,7 @@ public interface UserManager {
     User createUser(String shortName, String longName, String email, String passwd);
 
     /**
-     * IMPORTANT: if userId == null, it returns null
+     * IMPORTANT: if userId == null, it returns User.NONE
      * 
      * @param userId
      * @return

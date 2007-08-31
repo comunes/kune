@@ -41,10 +41,6 @@ public class KuneEntryPoint implements EntryPoint {
     public void onModuleLoad() {
 	String userHash = obtainUserHash();
 
-	// if (userHash == null) {
-	// MockServer.start(MockServer.GWT);
-	// }
-
 	if (isNotValid(userHash)) {
 	    informUserAndStop();
 	}

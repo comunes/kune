@@ -20,8 +20,6 @@
 
 package org.ourproject.kune.platf.server;
 
-import org.ourproject.kune.platf.server.domain.User;
-
 import com.google.inject.servlet.SessionScoped;
 
 @SessionScoped
@@ -40,9 +38,8 @@ public class UserSession {
 	this.userId = userId;
     }
 
-    public User setUser(final User user) {
-	this.userId = user.getId();
-	return user;
+    public void clearUserId() {
+	setUserId(null);
     }
 
     public String getHash() {

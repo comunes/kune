@@ -77,7 +77,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
     public Group createGroup(final Group group, final User user) throws SerializableException {
 	try {
-	    if (user == null) {
+	    if (user == User.NONE) {
 		// i18n
 		throw new SerializableException("Must be logged");
 	    }

@@ -18,7 +18,7 @@
  *
  */
 
-package org.ourproject.kune.platf.server;
+package org.ourproject.kune.platf.server.rpc;
 
 import java.util.List;
 
@@ -28,13 +28,16 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.rpc.KuneService;
+import org.ourproject.kune.platf.server.InitData;
+import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
-import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.platf.server.properties.ChatProperties;
+import org.ourproject.kune.platf.server.users.UserInfoService;
+import org.ourproject.kune.platf.server.users.UserManager;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
@@ -43,20 +46,24 @@ import com.wideplay.warp.persist.TransactionType;
 import com.wideplay.warp.persist.Transactional;
 
 @Singleton
-public class KuneServerService implements KuneService {
+public class KuneRPC implements RPC, KuneService {
     private final Mapper mapper;
     private final GroupManager groupManager;
     private final UserSession session;
     private final LicenseManager licenseManager;
-    private static final Log log = LogFactory.getLog(KuneServerService.class);
+    private static final Log log = LogFactory.getLog(KuneRPC.class);
     private final UserManager userManager;
     private final ChatProperties chatProperties;
+    private final UserInfoService userInfoService;
 
+    // TODO: refactor: too many parameters! refactor to Facade Pattern
     @Inject
-    public KuneServerService(final UserSession session, final UserManager userManager, final GroupManager groupManager,
-	    final LicenseManager licenseManager, final Mapper mapper, final ChatProperties chatProperties) {
+    public KuneRPC(final UserSession session, final UserManager userManager, final UserInfoService userInfoService,
+	    final GroupManager groupManager, final LicenseManager licenseManager, final Mapper mapper,
+	    final ChatProperties chatProperties) {
 	this.session = session;
 	this.userManager = userManager;
+	this.userInfoService = userInfoService;
 	this.groupManager = groupManager;
 	this.licenseManager = licenseManager;
 	this.mapper = mapper;
@@ -77,7 +84,7 @@ public class KuneServerService implements KuneService {
 
 	data.setCCLicenses(licenseManager.getCC());
 	data.setNotCCLicenses(licenseManager.getNotCC());
-	data.setCurrentUser(userManager.find(session.getUserId()));
+	data.setUserInfo(userInfoService.buildInfo(userManager.find(session.getUserId())));
 	data.setChatHttpBase(chatProperties.getHttpBase());
 	data.setChatDomain(chatProperties.getDomain());
 	data.setChatRoomHost(chatProperties.getRoomHost());
