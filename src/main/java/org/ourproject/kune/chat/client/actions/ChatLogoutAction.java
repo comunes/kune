@@ -11,7 +11,7 @@ public class ChatLogoutAction implements Action {
 	this.provider = provider;
     }
 
-    public void execute(final Object value, final Object extra, Services services) {
+    public void execute(final Object value, final Object extra, final Services services) {
 	provider.getChat().logout();
     }
 

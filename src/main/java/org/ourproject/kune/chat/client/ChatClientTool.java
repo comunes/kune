@@ -43,8 +43,8 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
 	return chat;
     }
 
-    public void setChat(final ChatEngine chat) {
-	this.chat = chat;
+    public void initEngine(final ChatState state) {
+	this.chat = new ChatEngineXmpp(state);
     }
 
     public WorkspaceComponent getContent() {

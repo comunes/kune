@@ -55,6 +55,8 @@ public class User implements HasId {
     @Column(unique = true)
     private String shortName;
 
+    // see: http://docs.codehaus.org/display/PICO/Good+Citizen:
+    // Never expect or return null
     public static final User NONE = new User();
 
     public User(final String shortName, final String name, final String email, final String password) {
@@ -132,6 +134,10 @@ public class User implements HasId {
 
     public void setShortName(final String shortName) {
 	this.shortName = shortName;
+    }
+
+    public static boolean isAUser(final User user) {
+	return user != NONE;
     }
 
 }

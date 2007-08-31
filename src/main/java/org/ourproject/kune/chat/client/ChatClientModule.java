@@ -22,10 +22,8 @@ package org.ourproject.kune.chat.client;
 
 import org.ourproject.kune.chat.client.actions.ChatLoginAction;
 import org.ourproject.kune.chat.client.actions.ChatLogoutAction;
+import org.ourproject.kune.chat.client.actions.InitChatEngineAction;
 import org.ourproject.kune.chat.client.actions.JoinRoomAction;
-import org.ourproject.kune.platf.client.Services;
-import org.ourproject.kune.platf.client.dispatch.Action;
-import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.extend.ClientModule;
 import org.ourproject.kune.platf.client.extend.Register;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
@@ -36,21 +34,11 @@ public class ChatClientModule implements ClientModule {
 	final ChatClientTool chatTool = new ChatClientTool();
 	register.addTool(chatTool);
 
-	register.addAction(WorkspaceEvents.INIT_DATA_RECEIVED, new Action() {
-	    public void execute(final Object value, final Object extra, Services services) {
-		InitDataDTO initData = (InitDataDTO) value;
-		ChatState state = new ChatState(initData.getChatHttpBase(), initData.getChatDomain(), initData
-			.getChatRoomHost());
-		chatTool.setChat(new ChatEngineXmpp(state));
-	    }
-	});
-
+	register.addAction(WorkspaceEvents.INIT_DATA_RECEIVED, new InitChatEngineAction(chatTool));
 	register.addAction(WorkspaceEvents.USER_LOGGED_IN, new ChatLoginAction(chatTool));
-
 	ChatLogoutAction logoutAction = new ChatLogoutAction(chatTool);
 	register.addAction(WorkspaceEvents.USER_LOGGED_OUT, logoutAction);
 	register.addAction(WorkspaceEvents.STOP_APP, logoutAction);
-
 	register.addAction(ChatEvents.JOIN_ROOM, new JoinRoomAction(chatTool));
     }
 }

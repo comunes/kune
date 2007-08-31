@@ -66,4 +66,8 @@ public class InitDataDTO implements IsSerializable {
     public void setChatRoomHost(final String chatRoomHost) {
 	this.chatRoomHost = chatRoomHost;
     }
+
+    public boolean hasUser() {
+	return getUserInfo() != null;
+    }
 }
