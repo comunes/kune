@@ -39,14 +39,17 @@ public class AccessListsPanel extends Composite implements View {
     private final DisclosurePanel adminDisclosure;
     private final DisclosurePanel editDisclosure;
     private final DisclosurePanel viewDisclosure;
+    private Label mainTitle;
 
     public AccessListsPanel() {
 	VerticalPanel vp = new VerticalPanel();
 	initWidget(vp);
 
+	mainTitle = new Label();
 	adminDisclosure = createDisclosurePanel("Admins", false);
 	editDisclosure = createDisclosurePanel("Edit", false);
 	viewDisclosure = createDisclosurePanel("View", false);
+	vp.add(mainTitle);
 	vp.add(adminDisclosure);
 	vp.add(editDisclosure);
 	vp.add(viewDisclosure);
@@ -84,6 +87,14 @@ public class AccessListsPanel extends Composite implements View {
 		disclosure.add(new Label(next.getLongName()));
 	    }
 	}
+    }
+
+    public Label getMainTitle() {
+	return mainTitle;
+    }
+
+    public void setMainTitle(Label mainTitle) {
+	this.mainTitle = mainTitle;
     }
 
 }

@@ -51,34 +51,9 @@ public class MultiRoomPresenter implements MultiRoom, RoomListener {
 
     public void onSend() {
 	listener.onSendMessage(currentRoom, view.getInputText());
+	// view.setSendEnabled(false);
+	view.clearInputText();
     }
-
-    public void onSend(final int key, final boolean isCtrl) {
-	// if (key == 13 && !isCtrl) {
-	onSend();
-	// }
-    }
-
-    // TODO: vicente, mira esto
-    // protected void onOLDSend() {
-    // // TODO: Call to xmpp, meawhile:
-    // String userAlias = currentRoom.getSessionUserAlias();
-    //
-    // currentRoom.addMessage(userAlias, view.getInputText());
-    // currentRoom.clearSavedInput();
-    // view.clearInputText();
-    // // view.sendBtnEnable(false);
-    //
-    // // CUIDADO: DETALLE DE VISTA
-    // // if (key == KeyboardListener.KEY_ENTER) {
-    // // if (mod == KeyboardListener.MODIFIER_CTRL) {
-    // // view.insertReturnInInput();
-    // // } else {
-    // // view.addMessage(currentRoom, currentUserAlias, view.getInputText());
-    // // view.clearTextArea();
-    // // }
-    // // }
-    // }
 
     public void onNoRooms() {
 	// TODO

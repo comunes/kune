@@ -29,8 +29,6 @@ import org.ourproject.kune.chat.client.rooms.RoomPresenter;
 import org.ourproject.kune.chat.client.rooms.RoomUserListView;
 import org.ourproject.kune.platf.client.View;
 
-import to.tipit.gwtlib.FireLog;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DeckPanel;
@@ -117,23 +115,13 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	usersDeckPanel.showWidget(index.intValue());
     }
 
-    public boolean sendBtnIsDisabled() {
-	FireLog.debug("Is btn disabled: " + sendBtn.isDisabled());
-	return sendBtn.isDisabled();
-    }
-
     public void addRoomUsersPanel(final RoomUserListView view) {
 	usersDeckPanel.add((Widget) view);
 	userListToIndex.put(view, new Integer(usersDeckPanel.getWidgetIndex((Widget) view)));
     }
 
-    protected void insertReturnInInput() {
-	setInputText(getInputText() + "\n");
-    }
-
-    protected void clearInputText() {
+    public void clearInputText() {
 	input.reset();
-	inputForm.reset();
     }
 
     public void setInputText(final String text) {
@@ -308,6 +296,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	    public void onVisibilityChange(final LayoutRegion region, final boolean visibility) {
 	    }
 	});
+
     }
 
     private ContentPanel createUsersPanel() {
@@ -345,19 +334,25 @@ public class MultiRoomPanel implements MultiRoomView, View {
 		    }
 
 		    public void onChange(final Field field, final Object newVal, final Object oldVal) {
-			GWT.log("Change", null);
+			GWT.log("Change MRP", null);
 		    }
 
 		    public void onFocus(final Field field) {
-			GWT.log("OnFocus", null);
+			GWT.log("OnFocus MRP", null);
 		    }
 
 		    public void onInvalid(final Field field, final String msg) {
 		    }
 
 		    public void onSpecialKey(final Field field, final EventObject e) {
-			presenter.onSend(e.getKey(), e.isCtrlKey());
-
+			if (e.getKey() == 13) {
+			    if (e.isCtrlKey()) {
+				// Do nothing, ctrl+enter = enter
+			    } else {
+				presenter.onSend();
+				e.stopEvent();
+			    }
+			}
 		    }
 
 		    public void onValid(final Field field) {
@@ -382,5 +377,4 @@ public class MultiRoomPanel implements MultiRoomView, View {
 
 	return southPanel;
     }
-
 }

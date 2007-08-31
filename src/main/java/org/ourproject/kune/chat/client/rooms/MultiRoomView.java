@@ -38,4 +38,6 @@ public interface MultiRoomView {
     void hideRooms();
 
     void setSendEnabled(boolean enabled);
+
+    void clearInputText();
 }

@@ -21,6 +21,7 @@
 package org.ourproject.kune.workspace.client.ui.ctx.items;
 
 import org.ourproject.kune.platf.client.services.Images;
+import org.ourproject.kune.platf.client.ui.HorizontalLine;
 import org.ourproject.kune.platf.client.ui.IconHyperlink;
 
 import com.google.gwt.core.client.GWT;
@@ -52,10 +53,11 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
 	controls = new VerticalPanel();
 	add(controls, DockPanel.SOUTH);
 	controls.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
+	controls.add(new HorizontalLine());
 
-	setHeight("100%");
-	expand.setHeight("100%");
-	setCellHeight(expand, "100%");
+	// setHeight("100%");
+	expand.setHeight("15px");
+	setCellHeight(expand, "15px");
 	addStyleName("kune-NavigationBar");
     }
 

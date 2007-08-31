@@ -329,7 +329,7 @@
 }
 
 .kune-NavigationBar .topBar .gwt-PushButton {
-    margin: 1px 5px;
+    margin: 1px 3px 1px 0;
 }
 
 .kune-NavigationBar .topBar .gwt-Label {
@@ -357,12 +357,11 @@
 }
 
 .kune-NavigationBar .Items {
-    margin: 2px;
+    margin: 3px 0;
 }
 
 .kune-NavigationBar .Items .gwt-Image {
-    /* space between navbar items (images) */
-    margin: 1px 3px;
+	margin: 2px 0;
     vertical-align: middle;
 }
 
@@ -396,6 +395,7 @@
 
 .kune-NavigationBar .kune-IconHyperlink {
     vertical-align: middle;
+    margin-left: 5px;
 }
 
 .kune-NavigationBar .kune-IconHyperlink a {
