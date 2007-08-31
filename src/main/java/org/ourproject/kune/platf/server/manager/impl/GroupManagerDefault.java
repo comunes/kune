@@ -70,6 +70,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 	Group group = new Group(user.getShortName(), user.getName());
 	user.setUserGroup(group);
 	initSocialNetwork(group, group);
+	user.getAdminInGroups().add(group);
 	initGroup(user, group);
 	super.persist(user, User.class);
 	return group;
@@ -82,6 +83,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 		throw new SerializableException("Must be logged");
 	    }
 	    initSocialNetwork(group, user.getUserGroup());
+	    user.getAdminInGroups().add(group);
 	    initGroup(user, group);
 	    return group;
 	} catch (EntityExistsException e) {

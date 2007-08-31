@@ -30,13 +30,13 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 // TODO: cambiar nombre a UserService
 public interface SiteBarService extends RemoteService {
 
-    // FIXME: userHash
+    // FIXME: Vicente, userHash
     UserInfoDTO login(String nickOrEmail, String passwd) throws SerializableException;
 
-    // FIXME: userHash
+    // FIXME: Vicente, userHash
     UserInfoDTO createUser(String shortName, String longName, String email, String passwd) throws SerializableException;
 
-    // FIXME: userHash
+    // FIXME: Vicente, userHash
     void logout() throws SerializableException;
 
     public class App {

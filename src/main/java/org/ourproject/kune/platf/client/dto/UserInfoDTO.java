@@ -19,12 +19,24 @@
 
 package org.ourproject.kune.platf.client.dto;
 
+import java.util.List;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class UserInfoDTO implements IsSerializable {
     private String name;
     private String chatName;
     private String chatPassword;
+
+    /**
+     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.LinkDTO>
+     */
+    private List groupsIsAdmin;
+
+    /**
+     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.LinkDTO>
+     */
+    private List groupsIsEditor;
 
     public String getName() {
 	return name;
@@ -49,6 +61,22 @@ public class UserInfoDTO implements IsSerializable {
 
     public void setChatName(final String chatName) {
 	this.chatName = chatName;
+    }
+
+    public List getGroupsIsAdmin() {
+	return groupsIsAdmin;
+    }
+
+    public void setGroupsIsAdmin(final List groupsIsAdmin) {
+	this.groupsIsAdmin = groupsIsAdmin;
+    }
+
+    public List getGroupsIsEditor() {
+	return groupsIsEditor;
+    }
+
+    public void setGroupsIsEditor(final List groupsIsEditor) {
+	this.groupsIsEditor = groupsIsEditor;
     }
 
 }

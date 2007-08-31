@@ -43,7 +43,9 @@ import com.wideplay.warp.persist.dao.Finder;
 @Entity
 @Table(name = "contents")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Content {
+public class Content implements HasStakeToken {
+    private static final String TOKEN_SEPARATOR = ".";
+
     @Id
     @GeneratedValue
     private Long id;
@@ -211,6 +213,11 @@ public class Content {
 
     public boolean hasAccessList() {
 	return accessLists != null;
+    }
+
+    public String getStateToken() {
+	return getFolder().getOwner().getShortName() + TOKEN_SEPARATOR + getFolder().getToolName() + TOKEN_SEPARATOR
+		+ getId();
     }
 
 }

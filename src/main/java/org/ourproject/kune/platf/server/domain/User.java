@@ -55,6 +55,12 @@ public class User implements HasId {
     @Column(unique = true)
     private String shortName;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    protected GroupList adminInGroups;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    protected GroupList editorInGroups;
+
     // see: http://docs.codehaus.org/display/PICO/Good+Citizen:
     // Never expect or return null
     public static final User NONE = new User();
@@ -65,6 +71,8 @@ public class User implements HasId {
 	this.email = email;
 	this.password = password;
 	this.userGroup = null;
+	this.adminInGroups = new GroupList();
+	this.editorInGroups = new GroupList();
     }
 
     public User() {
@@ -138,6 +146,22 @@ public class User implements HasId {
 
     public static boolean isAUser(final User user) {
 	return user != NONE;
+    }
+
+    public GroupList getAdminInGroups() {
+	return adminInGroups;
+    }
+
+    public void setAdminInGroups(final GroupList adminInGroups) {
+	this.adminInGroups = adminInGroups;
+    }
+
+    public GroupList getEditorInGroups() {
+	return editorInGroups;
+    }
+
+    public void setEditorInGroups(final GroupList editorInGroups) {
+	this.editorInGroups = editorInGroups;
     }
 
 }

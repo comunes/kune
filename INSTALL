@@ -50,6 +50,8 @@ The rest of dependencies must be downloaded automatically.
 
 Integration with Openfire xmpp server
 --------------------------------------------------------------------------------
+Enable "HTTP Bind Settings" in OpenFire, and check the port is not used by other service in your machine.
+
 Add this lines to conf/openfire.xml and check that the user/passwd of the db is the same here and in the persistence.xml:
 
 <jive>
@@ -67,7 +69,6 @@ Add this lines to conf/openfire.xml and check that the user/passwd of the db is 
      <passwordSQL>SELECT password FROM kusers WHERE shortName=?</passwordSQL>
      <passwordType>plain</passwordType>
    </jdbcAuthProvider>
-  <setup>true</setup>
   ...
 </jive>
 
