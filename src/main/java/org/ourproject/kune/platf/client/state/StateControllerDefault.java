@@ -23,6 +23,7 @@ package org.ourproject.kune.platf.client.state;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.sitebar.client.Site;
@@ -37,6 +38,7 @@ public class StateControllerDefault implements StateController {
     private final Application app;
     private final Session session;
     private final ContentProvider provider;
+    private String oldState;
 
     public StateControllerDefault(final ContentProvider provider, final Application app, final Session session) {
 	this.provider = provider;
@@ -50,9 +52,16 @@ public class StateControllerDefault implements StateController {
 
     public void onHistoryChanged(final String historyToken) {
 	GWT.log("State: " + historyToken, null);
-	if (!historyToken.equals("fixme")) {
+	if (isNotIgnore(historyToken)) {
 	    onHistoryChanged(new StateToken(historyToken));
+	    oldState = historyToken;
+	} else {
+	    onHistoryChanged(oldState);
 	}
+    }
+
+    private boolean isNotIgnore(final String historyToken) {
+	return !historyToken.equals("fixme");
     }
 
     private void onHistoryChanged(final StateToken newState) {
@@ -60,6 +69,9 @@ public class StateControllerDefault implements StateController {
 	provider.getContent(session.user, newState, new AsyncCallback() {
 	    public void onFailure(final Throwable caught) {
 		Site.hideProgress();
+		if (caught.equals(AccessViolationException.class))
+		    // i18n
+		    Site.error("You cant access this content");
 	    }
 
 	    public void onSuccess(final Object result) {
@@ -96,6 +108,7 @@ public class StateControllerDefault implements StateController {
 
 	ClientTool clientTool = app.getTool(toolName);
 	clientTool.setContent(state);
+	// FIXME: a better way to setTitle (and other things)
 	workspace.setContentTitle(state.getTitle());
 	workspace.setContent(clientTool.getContent());
 	workspace.setContext(clientTool.getContext());

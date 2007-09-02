@@ -22,6 +22,7 @@ package org.ourproject.kune.platf.client.group;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.KuneService;
 import org.ourproject.kune.platf.client.rpc.KuneServiceAsync;
 import org.ourproject.kune.sitebar.client.Site;
@@ -58,7 +59,7 @@ public class NewGroupFormPresenter implements NewGroupForm {
 	    }
 
 	    public void onSuccess(final Object arg0) {
-		listener.onNewGroupCreated();
+		listener.onNewGroupCreated((StateToken) arg0);
 		reset();
 	    }
 	});

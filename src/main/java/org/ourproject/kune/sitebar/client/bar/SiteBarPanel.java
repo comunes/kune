@@ -20,6 +20,10 @@
 
 package org.ourproject.kune.sitebar.client.bar;
 
+import java.util.List;
+
+import org.ourproject.kune.platf.client.dto.LinkDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.group.NewGroupForm;
 import org.ourproject.kune.platf.client.ui.BorderDecorator;
 import org.ourproject.kune.platf.client.ui.dialogs.TwoButtonsDialog;
@@ -43,6 +47,7 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
+import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
@@ -60,6 +65,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     private final Image spinProcessing;
     private final Label textProcessingLabel;
     private final Hyperlink loginHyperlink;
+    private final Hyperlink loggedUserHyperlink;
     private final Hyperlink newGroupHyperlink;
     private final HTML pipeSeparatorHtml2;
     private PushButton searchButton;
@@ -69,6 +75,9 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     private LoginFormPanel loginPanel;
     private TwoButtonsDialog newGroupDialog;
     private final Images img;
+    private MenuBar optionsSubmenu;
+    private MenuItem linkHelpInTrans;
+    private MenuItem linkHelp;
 
     public SiteBarPanel(final SiteBarPresenter initPresenter) {
 	t = SiteBarTrans.getInstance().t;
@@ -87,10 +96,11 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	final HTML pipeSeparatorHtml = new HTML();
 	pipeSeparatorHtml2 = new HTML();
 	loginHyperlink = new Hyperlink();
+	loggedUserHyperlink = new Hyperlink();
 	logoutHyperlink = new Hyperlink();
 	HTML spaceSeparator1 = new HTML("<b></b>");
 	MenuBar options = new MenuBar();
-	MenuBar optionsSubmenu = new MenuBar(true);
+	optionsSubmenu = new MenuBar(true);
 	BorderDecorator optionsButton = new BorderDecorator(options, BorderDecorator.ALL, BorderDecorator.SIMPLE);
 	HTML spaceSeparator2 = new HTML("<b></b>");
 	logoImage = new Image();
@@ -100,6 +110,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	siteBarHP.add(textProcessingLabel);
 	siteBarHP.add(expandLabel);
 	siteBarHP.add(loginHyperlink);
+	siteBarHP.add(loggedUserHyperlink);
 	siteBarHP.add(pipeSeparatorHtml);
 	siteBarHP.add(logoutHyperlink);
 	siteBarHP.add(pipeSeparatorHtml2);
@@ -118,6 +129,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	textProcessingLabel.addStyleName("kune-Progress");
 	newGroupHyperlink.setText(t.NewGroup());
 	newGroupHyperlink.setTargetHistoryToken(IGNORE_TOKEN);
+	loggedUserHyperlink.setVisible(false);
 
 	newGroupHyperlink.addClickListener(new ClickListener() {
 	    public void onClick(final Widget arg0) {
@@ -134,28 +146,11 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	logoutHyperlink.setTargetHistoryToken(IGNORE_TOKEN);
 
 	options.addItem(t.Options(), true, optionsSubmenu);
-
-	optionsSubmenu.addItem(t.MyGroups(), true, new Command() {
-	    public void execute() {
-		// FIXME
-		Window.alert("In development!");
-	    }
-	});
-	optionsSubmenu.addItem(t.HelpWithTranslation(), true, new Command() {
-	    public void execute() {
-		// FIXME
-		Window.alert("In development!");
-	    }
-	});
-	optionsSubmenu.addItem(t.Help(), true, new Command() {
-	    public void execute() {
-		// FIXME
-		Window.alert("In develoopment!");
-	    }
-	});
 	options.setStyleName("kune-MenuBar");
 	optionsButton.setColor("AAA");
 	optionsButton.setHeight("16px");
+	createOptionsSubmenu();
+
 	spaceSeparator1.setStyleName("kune-SiteBarPanel-SpaceSeparator");
 	spaceSeparator2.setStyleName("kune-SiteBarPanel-SpaceSeparator");
 
@@ -165,6 +160,20 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	img.kuneLogo16px().applyTo(logoImage);
 
 	this.hideProgress();
+    }
+
+    private void createOptionsSubmenu() {
+	linkHelpInTrans = new MenuItem(t.HelpWithTranslation(), true, new Command() {
+	    public void execute() {
+		Window.open("http://translate-kune.ourproject.org", "_blank", "");
+	    }
+	});
+	linkHelp = new MenuItem(t.Help(), true, new Command() {
+	    public void execute() {
+		// FIXME: Url to doc
+		presenter.changeState(new StateToken("kune.docs"));
+	    }
+	});
     }
 
     private void createSearchBox() {
@@ -208,8 +217,10 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	searchTextBox.setText(text);
     }
 
-    public void showLoggedUserName(final String user) {
-	loginHyperlink.setText(user);
+    public void showLoggedUserName(final String name, final String homePage) {
+	loginHyperlink.setVisible(false);
+	loggedUserHyperlink.setText(name);
+	loggedUserHyperlink.setTargetHistoryToken(homePage);
     }
 
     public void showLoginDialog() {
@@ -252,7 +263,8 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     public void restoreLoginLink() {
-	loginHyperlink.setText(t.Login());
+	loginHyperlink.setVisible(true);
+	loginHyperlink.setTargetHistoryToken(IGNORE_TOKEN);
     }
 
     public void showProgress(final String text) {
@@ -299,4 +311,36 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	    }
 	});
     }
+
+    public void setGroupsIsMember(List groupsIsAdmin, List groupsIsEditor) {
+	optionsSubmenu.clearItems();
+	for (int i = 0; i < groupsIsAdmin.size(); i++) {
+	    final LinkDTO link = (LinkDTO) groupsIsAdmin.get(i);
+	    addItemToOptSubmenu(link);
+	}
+	for (int i = 0; i < groupsIsEditor.size(); i++) {
+	    final LinkDTO link = (LinkDTO) groupsIsEditor.get(i);
+	    addItemToOptSubmenu(link);
+	}
+	addDefaultItemsToOptions();
+    }
+
+    private void addDefaultItemsToOptions() {
+	optionsSubmenu.addItem(linkHelpInTrans);
+	optionsSubmenu.addItem(linkHelp);
+    }
+
+    private void addItemToOptSubmenu(final LinkDTO link) {
+	optionsSubmenu.addItem(link.getName(), true, new Command() {
+	    public void execute() {
+		presenter.changeState(new StateToken(link.getLink()));
+	    }
+	});
+    }
+
+    public void resetOptionsMenu() {
+	optionsSubmenu.clearItems();
+	addDefaultItemsToOptions();
+    }
+
 }

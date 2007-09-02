@@ -20,13 +20,15 @@
 
 package org.ourproject.kune.sitebar.client.bar;
 
+import java.util.List;
+
 import org.ourproject.kune.platf.client.View;
 
 import com.google.gwt.user.client.ui.Image;
 
 public interface SiteBarView extends View {
 
-    void showLoggedUserName(String user);
+    void showLoggedUserName(String name, String homePage);
 
     void clearUserName();
 
@@ -53,5 +55,9 @@ public interface SiteBarView extends View {
     void hideNewGroupDialog();
 
     void setDefaultTextSearch();
+
+    void setGroupsIsMember(List groupsIsAdmin, List groupsIsEditor);
+
+    void resetOptionsMenu();
 
 }

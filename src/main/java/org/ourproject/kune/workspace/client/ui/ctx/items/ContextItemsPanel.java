@@ -53,12 +53,15 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
 	controls = new VerticalPanel();
 	add(controls, DockPanel.SOUTH);
 	controls.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
-	controls.add(new HorizontalLine());
+	HorizontalLine horizontalLine = new HorizontalLine();
+	controls.add(horizontalLine);
 
 	// setHeight("100%");
 	expand.setHeight("15px");
 	setCellHeight(expand, "15px");
 	addStyleName("kune-NavigationBar");
+	setCellWidth(horizontalLine, "100%");
+	horizontalLine.setWidth("100%");
     }
 
     private void addTopBar(final Widget widget) {

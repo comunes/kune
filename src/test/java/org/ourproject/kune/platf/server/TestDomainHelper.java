@@ -1,18 +1,22 @@
 package org.ourproject.kune.platf.server;
 
 import org.ourproject.kune.platf.server.domain.AccessLists;
+import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Data;
-import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.Revision;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
 
-public class TestDomainHelper {
+public abstract class TestDomainHelper {
 
     public static User createUser(final int number) {
-	User user = new User("shortName" + number, "name" + number, "email" + number, "password" + number);
+	String shortName = "shortName" + number;
+	String longName = "name" + number;
+	User user = new User(shortName, longName, "email" + number, "password" + number);
+	Group userGroup = new Group(shortName, longName);
+	user.setUserGroup(userGroup);
 	return user;
     }
 
@@ -55,12 +59,15 @@ public class TestDomainHelper {
 	return socialNetwork;
     }
 
-    public static AccessLists createAccessLists(final Group groupAdmins, final Group groupEdit, final Group groupView) {
+    public static AccessLists createAccessLists(final Group groupAdmin, final Group groupEditor, final Group groupViewer) {
 
 	AccessLists lists = new AccessLists();
-	lists.addAdmin(groupAdmins);
-	lists.addEditor(groupEdit);
-	lists.addViewer(groupView);
+	if (groupAdmin != null)
+	    lists.addAdmin(groupAdmin);
+	if (groupEditor != null)
+	    lists.addEditor(groupEditor);
+	if (groupViewer != null)
+	    lists.addViewer(groupViewer);
 	return lists;
     }
 

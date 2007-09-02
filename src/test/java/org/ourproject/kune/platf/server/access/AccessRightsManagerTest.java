@@ -6,8 +6,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.server.TestDomainHelper;
-import org.ourproject.kune.platf.server.access.AccessRights;
-import org.ourproject.kune.platf.server.access.RightsServiceDefault;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
@@ -24,6 +22,14 @@ public class AccessRightsManagerTest {
 	userGroup = TestDomainHelper.createGroup(3);
 	group1 = TestDomainHelper.createGroup(1);
 	group2 = TestDomainHelper.createGroup(2);
+    }
+
+    @Test
+    public void checkUserAccesRightsViewNullEqualToTrue() {
+	AccessLists accessLists = TestDomainHelper.createAccessLists(group1, group1, null);
+
+	AccessRights response = accessRightsManager.get(userGroup, accessLists);
+	assertTrue(response.isVisible());
     }
 
     @Test
@@ -90,4 +96,5 @@ public class AccessRightsManagerTest {
 	assertFalse(response.isEditable());
 	assertFalse(response.isVisible());
     }
+
 }

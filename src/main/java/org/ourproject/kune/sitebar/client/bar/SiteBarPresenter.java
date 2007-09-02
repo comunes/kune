@@ -21,6 +21,7 @@
 package org.ourproject.kune.sitebar.client.bar;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.group.NewGroupListener;
 import org.ourproject.kune.sitebar.client.login.LoginListener;
@@ -70,6 +71,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 		view.setLogoutLinkVisible(false);
 		view.restoreLoginLink();
 		listener.onUserLoggedOut();
+		view.resetOptionsMenu();
 	    }
 	});
     }
@@ -79,13 +81,15 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 	listener.onUserLoggedIn(user);
     }
 
-    public void showLoggedUser(final String userName) {
+    public void showLoggedUser(final UserInfoDTO user) {
+	String userName = user.getName();
 	if (userName == null) {
 	    view.restoreLoginLink();
 	    view.setLogoutLinkVisible(false);
 	} else {
-	    view.showLoggedUserName(userName);
+	    view.showLoggedUserName(userName, user.getHomePage());
 	    view.setLogoutLinkVisible(true);
+	    view.setGroupsIsMember(user.getGroupsIsAdmin(), user.getGroupsIsEditor());
 	}
     }
 
@@ -93,8 +97,9 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 	view.hideLoginDialog();
     }
 
-    public void onNewGroupCreated() {
+    public void onNewGroupCreated(StateToken homePage) {
 	view.hideNewGroupDialog();
+	changeState(homePage);
     }
 
     public void onNewGroupCancel() {
@@ -121,6 +126,11 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 
     protected void onSearchFocus() {
 	view.clearSearchText();
+    }
+
+    public void changeState(StateToken token) {
+	listener.onChangeState(token);
+
     }
 
 }

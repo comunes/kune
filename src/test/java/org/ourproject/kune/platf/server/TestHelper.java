@@ -8,7 +8,7 @@ import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.wideplay.warp.jpa.JpaUnit;
 
-public class TestHelper {
+public abstract class TestHelper {
     public static void inject(final Object target) {
 	TestHelper.create(new PlatformServerModule(), "test", "kune.properties").injectMembers(target);
     }

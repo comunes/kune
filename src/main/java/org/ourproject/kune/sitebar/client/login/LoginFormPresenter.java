@@ -26,6 +26,8 @@ import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarServiceAsync;
 
+import to.tipit.gwtlib.FireLog;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class LoginFormPresenter implements LoginForm {
@@ -59,6 +61,7 @@ public class LoginFormPresenter implements LoginForm {
 	    public void onFailure(final Throwable arg0) {
 		// i18n: Error in authentication
 		Site.important("Error in authentication");
+		FireLog.debug(arg0.getStackTrace().toString());
 	    }
 
 	    public void onSuccess(final Object response) {

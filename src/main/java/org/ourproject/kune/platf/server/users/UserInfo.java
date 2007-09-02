@@ -6,8 +6,17 @@ public class UserInfo {
     private String name;
     private String chatName;
     private String chatPassword;
+    private String homePage;
     private List<Link> groupsIsAdmin;
     private List<Link> groupsIsEditor;
+
+    public String getHomePage() {
+	return homePage;
+    }
+
+    public void setHomePage(String homePage) {
+	this.homePage = homePage;
+    }
 
     public String getName() {
 	return name;

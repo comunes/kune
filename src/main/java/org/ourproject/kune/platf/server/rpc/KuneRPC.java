@@ -27,6 +27,7 @@ import org.apache.commons.logging.LogFactory;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.KuneService;
 import org.ourproject.kune.platf.server.InitData;
 import org.ourproject.kune.platf.server.UserSession;
@@ -71,11 +72,12 @@ public class KuneRPC implements RPC, KuneService {
     }
 
     @Transactional(type = TransactionType.READ_WRITE)
-    public void createNewGroup(final GroupDTO group) throws SerializableException {
+    public StateToken createNewGroup(final GroupDTO group) throws SerializableException {
 	log.debug(group.getShortName() + group.getLongName() + group.getPublicDesc() + group.getDefaultLicense()
 		+ group.getType());
 	User user = userManager.find(session.getUserId());
-	groupManager.createGroup(mapper.map(group, Group.class), user);
+	Group newGroup = groupManager.createGroup(mapper.map(group, Group.class), user);
+	return new StateToken(newGroup.getDefaultContent().getStateToken());
     }
 
     @Transactional(type = TransactionType.READ_ONLY)

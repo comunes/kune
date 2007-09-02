@@ -22,6 +22,7 @@ package org.ourproject.kune.platf.client.rpc;
 
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -32,7 +33,7 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 public interface KuneService extends RemoteService {
 
     // FIXME: falta el userHash!
-    void createNewGroup(GroupDTO group) throws SerializableException;
+    StateToken createNewGroup(GroupDTO group) throws SerializableException;
 
     InitDataDTO getInitData(String userHash);
 

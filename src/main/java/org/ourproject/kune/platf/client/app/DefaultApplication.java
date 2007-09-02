@@ -25,6 +25,7 @@ import java.util.Map;
 
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.state.StateController;
 import org.ourproject.kune.platf.client.tool.ClientTool;
@@ -51,6 +52,10 @@ public class DefaultApplication implements Application {
 
 	    public void onUserLoggedOut() {
 		dispatcher.fire(WorkspaceEvents.USER_LOGGED_IN, null, null);
+	    }
+
+	    public void onChangeState(StateToken token) {
+		stateManager.setState(token);
 	    }
 	});
 	desktop.attach();

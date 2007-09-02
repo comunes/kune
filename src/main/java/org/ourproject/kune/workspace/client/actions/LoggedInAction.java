@@ -30,7 +30,7 @@ public class LoggedInAction implements Action {
     }
 
     private void onLoggedIn(final UserInfoDTO user) {
-	Site.sitebar.showLoggedUser(user.getName());
+	Site.sitebar.showLoggedUser(user);
 	Services.get().stateManager.reload();
     }
 }

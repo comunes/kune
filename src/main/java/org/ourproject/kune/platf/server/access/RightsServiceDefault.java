@@ -29,7 +29,7 @@ import org.ourproject.kune.platf.server.domain.GroupList;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 
 class RightsServiceDefault implements RightsService {
-    // TODO: mirar rendimiento
+    // TODO: check performance
     HashSet<Group> visited;
 
     public AccessRights get(final Group userGroup, final AccessLists accessList) {
@@ -45,13 +45,21 @@ class RightsServiceDefault implements RightsService {
 	    return new AccessRights(false, false, true);
 	}
 
+	// FIXME, future: site and admin users can admin, edit, view everything
+	// (not now while we are doing tests)
+
 	isAdministrable = depthFirstSearch(userGroup, accessList.getAdmins(), AccessRights.ADMIN);
 	if (!isAdministrable) {
 	    visited.clear();
 	    isEditable = depthFirstSearch(userGroup, accessList.getEditors(), AccessRights.EDIT);
 	    if (!isEditable) {
 		visited.clear();
-		isVisible = depthFirstSearch(userGroup, accessList.getViewers(), AccessRights.VIEW);
+		if (accessList.getViewers().isEmpty())
+		    // If nobody in viewers then is visible for everybody
+		    // FIXME: the same with edit? wiki mode?
+		    isVisible = true;
+		else
+		    isVisible = depthFirstSearch(userGroup, accessList.getViewers(), AccessRights.VIEW);
 	    } else {
 		isVisible = true;
 	    }

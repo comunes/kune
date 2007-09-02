@@ -35,7 +35,6 @@ import com.gwtext.client.widgets.TabPanel;
 import com.gwtext.client.widgets.TabPanelItem;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.event.TabPanelItemListenerAdapter;
-import com.gwtext.client.widgets.form.FieldSetConfig;
 import com.gwtext.client.widgets.form.Form;
 import com.gwtext.client.widgets.form.FormConfig;
 import com.gwtext.client.widgets.form.TextField;
@@ -287,11 +286,8 @@ public class LoginFormPanel implements LoginFormView, View {
 	    }
 	});
 
-	form.fieldset(new FieldSetConfig() {
-	    {
-		setLegend("Register");
-	    }
-	});
+	form.fieldset(t.Register());
+
 	shortNameRegField = new TextField(new TextFieldConfig() {
 	    {
 		setFieldLabel(t.NickName());

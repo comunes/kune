@@ -20,8 +20,10 @@
 
 package org.ourproject.kune.platf.client.group;
 
+import org.ourproject.kune.platf.client.dto.StateToken;
+
 public interface NewGroupListener {
     void onNewGroupCancel();
 
-    void onNewGroupCreated();
+    void onNewGroupCreated(StateToken homePage);
 }

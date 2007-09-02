@@ -76,7 +76,8 @@ public class DocumentServerTool implements ServerTool {
 	config.setRoot(container);
 	group.setToolConfig(NAME, config);
 	configurationManager.persist(config);
-	Content descriptor = contentManager.createContent("Kune docs!", user, container);
+	// i18n
+	Content descriptor = contentManager.createContent("Home", user, container);
 	descriptor.setTypeId(TYPE_DOCUMENT);
 	group.setDefaultContent(descriptor);
 	return group;

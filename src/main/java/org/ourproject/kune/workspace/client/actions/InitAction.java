@@ -34,6 +34,8 @@ import org.ourproject.kune.sitebar.client.SiteBarFactory;
 import org.ourproject.kune.workspace.client.Workspace;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
+import to.tipit.gwtlib.FireLog;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -59,6 +61,8 @@ public class InitAction implements Action {
 	    public void onFailure(final Throwable error) {
 		// i18n
 		Site.error("Error fetching initial data");
+		FireLog.debug(error.getMessage());
+		FireLog.debug(error.getCause().toString());
 	    }
 
 	    public void onSuccess(final Object response) {

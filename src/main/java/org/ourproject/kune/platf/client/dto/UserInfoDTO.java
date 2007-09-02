@@ -27,6 +27,7 @@ public class UserInfoDTO implements IsSerializable {
     private String name;
     private String chatName;
     private String chatPassword;
+    private String homePage;
 
     /**
      * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.LinkDTO>
@@ -77,6 +78,14 @@ public class UserInfoDTO implements IsSerializable {
 
     public void setGroupsIsEditor(final List groupsIsEditor) {
 	this.groupsIsEditor = groupsIsEditor;
+    }
+
+    public String getHomePage() {
+	return homePage;
+    }
+
+    public void setHomePage(String homePage) {
+	this.homePage = homePage;
     }
 
 }

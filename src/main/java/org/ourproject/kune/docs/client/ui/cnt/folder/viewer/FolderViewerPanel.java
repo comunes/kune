@@ -25,6 +25,6 @@ import com.google.gwt.user.client.ui.Label;
 public class FolderViewerPanel extends Label implements FolderViewerView {
 
     public FolderViewerPanel() {
-	setText("este es el visor de folders");
+	setText("Here folder properties (translation, etcetera)");
     }
 }
