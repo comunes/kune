@@ -19,7 +19,7 @@
 
 package org.ourproject.kune.chat.client;
 
-import com.calclab.gwtjsjac.client.mandioca.XmppRoom;
+import com.calclab.gwtjsjac.client.mandioca.rooms.XmppRoom;
 
 public interface ChatEngine {
     void login(String chatName, String chatPassword);

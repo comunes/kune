@@ -22,13 +22,14 @@ package org.ourproject.kune.chat.client.rooms;
 import org.ourproject.kune.chat.client.rooms.RoomUser.UserType;
 import org.ourproject.kune.platf.client.View;
 
-import com.calclab.gwtjsjac.client.mandioca.XmppRoom;
+import com.calclab.gwtjsjac.client.mandioca.rooms.XmppRoom;
 
 public interface Room {
     String getName();
 
     void setSubject(String subject);
 
+    // FIXME: creo que sería más logico cambiarlo por addUser(RoomUser user);
     void addUser(String userAlias, UserType moderador);
 
     void addMessage(String userAlias, String body);
@@ -56,5 +57,7 @@ public interface Room {
     View getView();
 
     boolean isReady();
+
+    void removeUser(String alias);
 
 }

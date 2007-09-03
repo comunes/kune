@@ -29,8 +29,8 @@ import com.calclab.gwtjsjac.client.XmppConnection;
 import com.calclab.gwtjsjac.client.XmppFactory;
 import com.calclab.gwtjsjac.client.XmppUserSettings;
 import com.calclab.gwtjsjac.client.impl.JsJacFactory;
-import com.calclab.gwtjsjac.client.mandioca.XmppRoom;
 import com.calclab.gwtjsjac.client.mandioca.XmppSession;
+import com.calclab.gwtjsjac.client.mandioca.rooms.XmppRoom;
 
 class ChatEngineXmpp implements ChatEngine {
     private XmppSession session;
@@ -52,8 +52,8 @@ class ChatEngineXmpp implements ChatEngine {
 	FireLog.debug("LOGIN CHAT: " + chatName + "[" + chatPassword + "]");
 	state.user = new XmppUserSettings(state.domain, chatName, chatPassword);
 	state.user.resource = "kuneClient" + new Date().getTime();
-	session = new XmppSession(connection, state.user);
-	session.login();
+	session = new XmppSession(connection);
+	session.login(state.user);
 	// FIXME: hardcoded
 	session.getUser().sendPresence(PresenceShow.CHAT, ":: ready ::");
     }

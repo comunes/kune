@@ -39,7 +39,6 @@ public class MultiRoomPresenter implements MultiRoom, RoomListener {
     public Room createRoom(final String roomName, final String userAlias, final UserType type) {
 	Room room = ChatFactory.createRoom(this, roomName, userAlias, type);
 	view.addRoom(room);
-	room.addUser(userAlias, type);
 	view.addRoomUsersPanel(room.getUsersListView());
 	currentRoom = room;
 	return currentRoom;

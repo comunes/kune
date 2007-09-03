@@ -25,7 +25,7 @@ import java.util.Map;
 import org.ourproject.kune.chat.client.rooms.RoomUser.UserType;
 import org.ourproject.kune.platf.client.View;
 
-import com.calclab.gwtjsjac.client.mandioca.XmppRoom;
+import com.calclab.gwtjsjac.client.mandioca.rooms.XmppRoom;
 
 public class RoomPresenter implements Room {
 
@@ -38,6 +38,7 @@ public class RoomPresenter implements Room {
     private String input;
     private String subject;
     private final String sessionUserAlias;
+    // FIXME: probablemente este mapa tiene más sentido en RoomUserList
     private final Map users;
     private final String roomName;
 
@@ -84,6 +85,10 @@ public class RoomPresenter implements Room {
 	RoomUser user = new RoomUser(alias, getNextColor(), type);
 	getUsersList().add(user);
 	users.put(alias, user);
+    }
+
+    public void removeUser(final String alias) {
+	getUsersList().remove((RoomUser) users.get(alias));
     }
 
     public void addDelimiter(final String datetime) {

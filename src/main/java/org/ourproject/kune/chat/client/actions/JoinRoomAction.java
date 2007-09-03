@@ -2,12 +2,14 @@ package org.ourproject.kune.chat.client.actions;
 
 import org.ourproject.kune.chat.client.ChatProvider;
 import org.ourproject.kune.chat.client.rooms.Room;
+import org.ourproject.kune.chat.client.rooms.RoomUser;
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 
 import com.calclab.gwtjsjac.client.XmppMessage;
 import com.calclab.gwtjsjac.client.XmppMessageListener;
-import com.calclab.gwtjsjac.client.mandioca.XmppRoom;
+import com.calclab.gwtjsjac.client.mandioca.rooms.RoomPresenceListener;
+import com.calclab.gwtjsjac.client.mandioca.rooms.XmppRoom;
 
 public class JoinRoomAction implements Action {
     private final ChatProvider provider;
@@ -26,7 +28,15 @@ public class JoinRoomAction implements Action {
 	    }
 
 	    public void onMessageSent(final XmppMessage message) {
-		room.addMessage(userAlias, message.getBody());
+	    }
+	});
+	handler.addRoomPresenceListener(new RoomPresenceListener() {
+	    public void onUserEntered(final String alias, final String status) {
+		room.addUser(alias, RoomUser.MODERADOR);
+	    }
+
+	    public void onUserLeft(final String alias) {
+		room.removeUser(alias);
 	    }
 	});
 	room.setHandler(handler);

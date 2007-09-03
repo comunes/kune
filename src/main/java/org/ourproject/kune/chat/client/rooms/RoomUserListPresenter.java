@@ -40,7 +40,7 @@ public class RoomUserListPresenter implements RoomUserList {
 	view.addUser(user);
     }
 
-    public void del(final RoomUser user) {
+    public void remove(final RoomUser user) {
 	view.delUser(users.indexOf(user));
     }
 

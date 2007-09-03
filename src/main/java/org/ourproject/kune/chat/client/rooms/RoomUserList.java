@@ -24,5 +24,6 @@ public interface RoomUserList {
 
     void add(RoomUser user);
 
-    void del(RoomUser user);
+    void remove(RoomUser user);
+
 }

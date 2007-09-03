@@ -39,7 +39,7 @@ import org.ourproject.kune.platf.client.ui.UnknowComponent;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
-import com.calclab.gwtjsjac.client.mandioca.XmppRoom;
+import com.calclab.gwtjsjac.client.mandioca.rooms.XmppRoom;
 
 public class ChatContentPresenter implements ChatContent, ChatRoomListener, MultiRoomListener {
 

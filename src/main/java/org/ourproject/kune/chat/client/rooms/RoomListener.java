@@ -4,4 +4,5 @@ public interface RoomListener {
     void onRoomReady(Room room);
 
     void onMessageReceived(Room room);
+
 }
