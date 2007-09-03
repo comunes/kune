@@ -361,7 +361,7 @@
 }
 
 .kune-NavigationBar .Items .gwt-Image {
-	margin: 2px 0;
+    margin: 2px 0;
     vertical-align: middle;
 }
 
@@ -438,4 +438,23 @@
 
 .kune-SiteMessagePanel .info {
     background-color: #E5FF80;
+}
+
+.kune-DropDownOuter {
+    background-color:green;
+}
+
+.kune-DropDownInner {
+    margin-left:3px;
+    margin-right:3px;
+    margin-bottom:1px;
+    background:green;
+    background-color:#FFF;
+    padding:3px;
+}
+
+.kune-DropDownLabel {
+    color:#FFF;
+    font-weight:700;
+    cursor:pointer;
 }

@@ -81,4 +81,9 @@ public class MultiRoomPresenter implements MultiRoom, RoomListener {
     public void onMessageReceived(final Room room) {
 	// TODO: hacer algo!! mostrar un mensaje, abrir la room... lo que sea!!
     }
+
+    public void closeAllRooms() {
+	// TODO xmpp: Close all the rooms;
+	view.hideRooms();
+    }
 }

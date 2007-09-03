@@ -30,6 +30,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.HorizontalSplitPanel;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -61,6 +62,8 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	groupNavBarVP.add(groupToolsBar);
 	groupNavBarVP.add(summaryPanel);
 
+	summaryExample(summaryPanel);
+
 	ContentToolBar contextToolBar = new ContentToolBar();
 	contentTitleBar = new ContentTitleBar();
 	cntcxtHSP = new HorizontalSplitPanel();
@@ -89,6 +92,16 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	groupAreaVP.addStyleName("ContextPanel");
 	generalHP.addStyleName("GeneralHP");
 	setLogo("");
+    }
+
+    private void summaryExample(final SummaryPanel summaryPanel) {
+	DropDownPanel presencePanel = new DropDownPanel();
+	summaryPanel.add(presencePanel);
+	presencePanel.setWidth("100%");
+	presencePanel.setContent(new Label(""));
+	presencePanel.setContentVisible(true);
+	presencePanel.setTitle("Buddies");
+	presencePanel.setColor("green");
     }
 
     public void addTab(final ToolTrigger trigger) {

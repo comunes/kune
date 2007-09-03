@@ -57,7 +57,9 @@ public class StateControllerDefault implements StateController {
 	    onHistoryChanged(new StateToken(historyToken));
 	    oldState = historyToken;
 	} else {
-	    onHistoryChanged(oldState);
+	    if (oldState != null) {
+		onHistoryChanged(oldState);
+	    }
 	}
     }
 
@@ -73,7 +75,7 @@ public class StateControllerDefault implements StateController {
 		try {
 		    throw caught;
 		} catch (AccessViolationException e) {
-		    Site.error("You cant access this content");
+		    Site.error("You can't access this content");
 		} catch (GroupNotFoundException e) {
 		    Site.error("Group not found");
 		} catch (Throwable e) {

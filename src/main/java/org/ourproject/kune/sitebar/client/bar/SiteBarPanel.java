@@ -174,7 +174,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	linkHelp = new MenuItem(t.Help(), true, new Command() {
 	    public void execute() {
 		// FIXME: Url to doc
-		presenter.changeState(new StateToken("kune.docs"));
+		presenter.changeState(new StateToken("site.docs"));
 	    }
 	});
     }
@@ -291,8 +291,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	});
 	searchButton.addClickListener(new ClickListener() {
 	    public void onClick(final Widget arg0) {
-		MultiChatExample.show();
-		// presenter.doSearch(searchTextBox.getText());
+		presenter.doSearch(searchTextBox.getText());
 	    }
 	});
 	logoutHyperlink.addClickListener(new ClickListener() {
@@ -320,7 +319,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     public void setGroupsIsMember(final List groupsIsAdmin, final List groupsIsEditor) {
 	optionsSubmenu.clearItems();
 	yourGroupsSubmenu.clearItems();
-	optionsSubmenu.addItem("Your Groups", yourGroupsSubmenu);
+	optionsSubmenu.addItem(t.MyGroups() + " »", yourGroupsSubmenu);
 	for (int i = 0; i < groupsIsAdmin.size(); i++) {
 	    final LinkDTO link = (LinkDTO) groupsIsAdmin.get(i);
 	    addItemToYourGroupSubmenu(link);

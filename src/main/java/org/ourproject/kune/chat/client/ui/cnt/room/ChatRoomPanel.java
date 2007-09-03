@@ -21,10 +21,12 @@
 package org.ourproject.kune.chat.client.ui.cnt.room;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.ui.CustomButton;
 
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -34,15 +36,39 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class ChatRoomPanel extends VerticalPanel implements ChatRoom, View {
 
+    private com.gwtext.client.widgets.Button btnEnter;
+    private final HTML content;
+
     public ChatRoomPanel(final ChatRoomListener listener) {
-	FlowPanel flow = new FlowPanel();
+	add(createToolBar(listener));
+	// FIXME: control perms
+	btnEnter.setVisible(true);
+	content = new HTML("");
+	add(content);
+	this.setWidth("100%");
+	this.setCellWidth(content, "100%");
+	content.addStyleName("main-content");
+    }
+
+    private Widget createToolBar(final ChatRoomListener listener) {
+
+	// FIXME Abstract and DocumentReaderPanel
+	HorizontalPanel panel = new HorizontalPanel();
+	Label expand = new Label("");
+	panel.add(expand);
+	panel.setWidth("100%");
+	expand.setWidth("100%");
+	panel.setCellWidth(expand, "100%");
+	panel.addStyleName("kune-DocumentReaderPanel");
 	// i18n
-	flow.add(new Button("enter room", new ClickListener() {
-	    public void onClick(final Widget arg0) {
+	btnEnter = new CustomButton("Enter room", new ClickListener() {
+	    public void onClick(final Widget sender) {
 		listener.onEnterRoom();
 	    }
-	}));
-	add(flow);
+	}).getButton();
+	panel.add(btnEnter);
+	btnEnter.addStyleName("kune-Button-Large-lrSpace");
+	return panel;
     }
 
     public View getView() {

@@ -30,7 +30,6 @@ import org.ourproject.kune.chat.client.rooms.RoomUserListView;
 import org.ourproject.kune.platf.client.View;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
@@ -39,6 +38,7 @@ import com.gwtext.client.core.Ext;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.LayoutDialog;
 import com.gwtext.client.widgets.LayoutDialogConfig;
+import com.gwtext.client.widgets.MessageBox;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.event.DialogListener;
 import com.gwtext.client.widgets.form.Field;
@@ -66,11 +66,13 @@ public class MultiRoomPanel implements MultiRoomView, View {
     private Form inputForm;
     private final HashMap userListToIndex;
     private final HashMap panelIdToRoom;
+    private boolean dialogHideConfirmed;
 
     public MultiRoomPanel(final MultiRoomPresenter presenter) {
 	this.presenter = presenter;
 	this.userListToIndex = new HashMap();
 	panelIdToRoom = new HashMap();
+	dialogHideConfirmed = false;
 	createLayout();
     }
 
@@ -221,9 +223,24 @@ public class MultiRoomPanel implements MultiRoomView, View {
 
     private void createListeners() {
 	dialog.addDialogListener(new DialogListener() {
+
 	    public boolean doBeforeHide(final LayoutDialog dialog) {
 		if (centralLayout.getNumPanels() > 0) {
-		    return Window.confirm("Sure?");
+		    if (dialogHideConfirmed) {
+			return true;
+		    } else {
+			MessageBox.confirm("Confirm", "Are you sure you want to exit all the rooms?",
+				new MessageBox.ConfirmCallback() {
+				    public void execute(final String btnID) {
+					GWT.log(btnID, null);
+					if (btnID.equals("yes")) {
+					    dialogHideConfirmed = true;
+					    presenter.closeAllRooms();
+					}
+				    }
+				});
+			return false;
+		    }
 		}
 		return true;
 	    }
@@ -253,11 +270,16 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	centralLayout.addLayoutRegionListener(new LayoutRegionListener() {
 
 	    public boolean doBeforeRemove(final LayoutRegion region, final ContentPanel panel) {
-		if (Window.confirm("Are you sure?")) {
-		    RoomPresenter roomPresenter = (RoomPresenter) panelIdToRoom.get(panel.getId());
-		    presenter.closeRoom(roomPresenter);
-		    return true;
-		}
+
+		MessageBox.confirm("Confirm", "Are you sure you want to exit this room?",
+			new MessageBox.ConfirmCallback() {
+			    public void execute(final String btnID) {
+				if (btnID.equals("yes")) {
+				    RoomPresenter roomPresenter = (RoomPresenter) panelIdToRoom.get(panel.getId());
+				    presenter.closeRoom(roomPresenter);
+				}
+			    }
+			});
 		return false;
 	    }
 
@@ -346,12 +368,8 @@ public class MultiRoomPanel implements MultiRoomView, View {
 
 		    public void onSpecialKey(final Field field, final EventObject e) {
 			if (e.getKey() == 13) {
-			    if (e.isCtrlKey()) {
-				// Do nothing, ctrl+enter = enter
-			    } else {
-				presenter.onSend();
-				e.stopEvent();
-			    }
+			    presenter.onSend();
+			    e.stopEvent();
 			}
 		    }
 
