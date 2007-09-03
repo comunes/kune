@@ -23,18 +23,19 @@ package org.ourproject.kune.docs.client.actions;
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.state.StateController;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public class GoParentFolder implements Action {
-    public void execute(final Object value, final Object extra, Services services) {
-	goParent(Services.get().session.getCurrentState());
+    public void execute(final Object value, final Object extra, final Services services) {
+	goParent(services.session.getCurrentState(), services.stateManager);
     }
 
-    private void goParent(final StateDTO state) {
+    private void goParent(final StateDTO state, final StateController stateController) {
 	StateToken token = state.getState();
 	token.setDocument(null);
 	token.setFolder(state.getFolder().getParentFolderId().toString());
-	Services.get().stateManager.setState(token);
+	stateController.setState(token);
     }
 
 }

@@ -30,19 +30,19 @@ import org.ourproject.kune.workspace.client.dto.StateDTO;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class AddDocument implements Action {
-    public void execute(final Object value, final Object extra, Services services) {
-	addDocument((String) value, Services.get().session.getCurrentState().getFolder());
+    public void execute(final Object value, final Object extra, final Services services) {
+	addDocument(services, (String) value, services.session.getCurrentState().getFolder());
     }
 
-    private void addDocument(final String name, final ContainerDTO containerDTO) {
+    private void addDocument(final Services services, final String name, final ContainerDTO containerDTO) {
 	ContentServiceAsync server = ContentService.App.getInstance();
-	server.addContent(Services.get().user, containerDTO.getId(), name, new AsyncCallback() {
+	server.addContent(services.user, containerDTO.getId(), name, new AsyncCallback() {
 	    public void onFailure(final Throwable caught) {
 	    }
 
 	    public void onSuccess(final Object result) {
 		StateDTO content = (StateDTO) result;
-		Services.get().stateManager.setState(content);
+		services.stateManager.setState(content);
 	    }
 	});
     }

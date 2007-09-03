@@ -42,22 +42,22 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 
 public class InitAction implements Action {
-    public void execute(final Object value, final Object extra, Services services) {
+    public void execute(final Object value, final Object extra, final Services services) {
 	GWT.log("Locale: " + Kune.getInstance().t.Locale(), null);
 	PrefetchUtilites.preFetchImpImages();
-	getInitData();
+	getInitData(services);
 
 	int windowWidth = Window.getClientWidth();
-	Workspace workspace = Services.get().app.getWorkspace();
+	Workspace workspace = services.app.getWorkspace();
 	workspace.adjustSize(windowWidth, Window.getClientHeight());
 	SiteBarFactory.getSiteMessage().adjustWidth(windowWidth);
 
 	RootPanel.get("kuneinitialcurtain").setVisible(false);
     }
 
-    private void getInitData() {
+    private void getInitData(final Services services) {
 	KuneServiceAsync server = KuneService.App.getInstance();
-	server.getInitData(Services.get().user, new AsyncCallback() {
+	server.getInitData(services.user, new AsyncCallback() {
 	    public void onFailure(final Throwable error) {
 		// i18n
 		Site.error("Error fetching initial data");
@@ -66,10 +66,10 @@ public class InitAction implements Action {
 	    }
 
 	    public void onSuccess(final Object response) {
-		Dispatcher dispatcher = Services.get().dispatcher;
+		Dispatcher dispatcher = services.dispatcher;
 		InitDataDTO initData = (InitDataDTO) response;
-		Services.get().session.setCCLicenses(initData.getCCLicenses());
-		Services.get().session.setNotCCLicenses(initData.getNotCCLicenses());
+		services.session.setCCLicenses(initData.getCCLicenses());
+		services.session.setNotCCLicenses(initData.getNotCCLicenses());
 		UserInfoDTO currentUser = initData.getUserInfo();
 		dispatcher.fire(WorkspaceEvents.INIT_DATA_RECEIVED, response, null);
 		if (currentUser == null) {

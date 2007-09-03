@@ -19,10 +19,10 @@
 
 package org.ourproject.kune.chat.client;
 
-import com.calclab.gwtjsjac.client.XmppUser;
+import com.calclab.gwtjsjac.client.XmppUserSettings;
 
 public class ChatState {
-    public XmppUser user;
+    public XmppUserSettings user;
     public final String httpBase;
     public final String domain;
     public final String roomHost;

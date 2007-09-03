@@ -23,8 +23,8 @@ package org.ourproject.kune.workspace.client.ui.ctx.items;
 import java.util.List;
 
 import org.ourproject.kune.docs.client.actions.DocsEvents;
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
@@ -83,7 +83,7 @@ public class ContextItemsPresenter implements ContextItems {
 
     public void create(final String typeName, final String value, final String eventName) {
 	if (value != null) {
-	    Dispatcher dispatcher = Services.get().dispatcher;
+	    Dispatcher dispatcher = DefaultDispatcher.getInstance();
 	    dispatcher.fire(eventName, value, null);
 	}
     }
@@ -97,7 +97,7 @@ public class ContextItemsPresenter implements ContextItems {
     }
 
     public void onGoUp() {
-	Services.get().dispatcher.fire(DocsEvents.GO_PARENT_FOLDER, null, null);
+	DefaultDispatcher.getInstance().fire(DocsEvents.GO_PARENT_FOLDER, null, null);
     }
 
     public void setControlsVisible(final boolean visible) {

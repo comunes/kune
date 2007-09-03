@@ -32,10 +32,11 @@ import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.History;
 
 public class DefaultDispatcher implements Dispatcher {
+    private static DefaultDispatcher instance;
     private final HashMap subscriptors;
     private Services services;
 
-    public DefaultDispatcher() {
+    DefaultDispatcher() {
 	this.subscriptors = new HashMap();
     }
 
@@ -82,6 +83,13 @@ public class DefaultDispatcher implements Dispatcher {
 
     public void setServices(final Services services) {
 	this.services = services;
+    }
+
+    public static DefaultDispatcher getInstance() {
+	if (instance == null) {
+	    instance = new DefaultDispatcher();
+	}
+	return instance;
     }
 
 }

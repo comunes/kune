@@ -36,13 +36,7 @@ public class Session {
     public final String user;
     private GroupDTO group;
     private String currentToolName;
-    /**
-     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.LicenseDTO>
-     */
     private List ccLicenses;
-    /**
-     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.LicenseDTO>
-     */
     private List notCCLicenses;
     private StateDTO currentState;
 

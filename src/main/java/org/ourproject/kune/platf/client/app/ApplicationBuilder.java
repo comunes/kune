@@ -59,11 +59,11 @@ public class ApplicationBuilder {
 	final StateController stateManager = new StateControllerDefault(provider, application, session);
 	History.addHistoryListener(stateManager);
 
-	final DefaultDispatcher dispatcher = new DefaultDispatcher();
+	final DefaultDispatcher dispatcher = DefaultDispatcher.getInstance();
 	application.init(dispatcher, stateManager);
 	subscribeActions(dispatcher, platform.getActions());
 
-	Services services = Services.init(userHash, application, session, stateManager, dispatcher);
+	Services services = new Services(userHash, application, session, stateManager, dispatcher);
 	dispatcher.setServices(services);
 	return application;
     }
