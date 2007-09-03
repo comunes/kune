@@ -27,18 +27,19 @@ public class UserInfoServiceDefault implements UserInfoService {
 	    List<Link> groupsIsAdmin = new ArrayList();
 	    List<Link> groupsIsEditor = new ArrayList();
 	    for (Group g : listAdmin.getList()) {
-		groupsIsAdmin.add(new Link(g.getShortName(), g.getDefaultContent().getStateToken()));
+		groupsIsAdmin.add(new Link(g.getLongName(), g.getDefaultContent().getStateToken()));
 	    }
 	    for (Group g : listEditor.getList()) {
-		groupsIsEditor.add(new Link(g.getShortName(), g.getDefaultContent().getStateToken()));
+		groupsIsEditor.add(new Link(g.getLongName(), g.getDefaultContent().getStateToken()));
 	    }
 	    info.setGroupsIsAdmin(groupsIsAdmin);
 	    info.setGroupsIsEditor(groupsIsEditor);
 
 	    Group userGroup = user.getUserGroup();
 	    Content defaultContent = userGroup.getDefaultContent();
-	    if (defaultContent != null)
+	    if (defaultContent != null) {
 		info.setHomePage(defaultContent.getStateToken());
+	    }
 	}
 	return info;
     }

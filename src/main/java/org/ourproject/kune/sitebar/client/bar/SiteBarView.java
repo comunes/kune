@@ -58,6 +58,6 @@ public interface SiteBarView extends View {
 
     void setGroupsIsMember(List groupsIsAdmin, List groupsIsEditor);
 
-    void resetOptionsMenu();
+    void resetOptionsSubmenu();
 
 }

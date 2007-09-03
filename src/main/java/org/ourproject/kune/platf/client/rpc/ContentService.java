@@ -23,6 +23,7 @@ package org.ourproject.kune.platf.client.rpc;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
+import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.core.client.GWT;
@@ -31,7 +32,8 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 public interface ContentService extends RemoteService {
 
-    StateDTO getContent(String userHash, StateToken token) throws ContentNotFoundException, AccessViolationException;
+    StateDTO getContent(String userHash, StateToken token) throws ContentNotFoundException, AccessViolationException,
+	    GroupNotFoundException;
 
     int save(String user, String documentId, String content) throws AccessViolationException, ContentNotFoundException;
 
@@ -39,7 +41,7 @@ public interface ContentService extends RemoteService {
 	    ContentNotFoundException;
 
     StateDTO addFolder(String hash, String groupShortName, Long parentFolderId, String title)
-	    throws ContentNotFoundException, AccessViolationException;
+	    throws ContentNotFoundException, AccessViolationException, GroupNotFoundException;
 
     public static class App {
 	private static ContentServiceAsync instance;

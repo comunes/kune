@@ -24,6 +24,7 @@ import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
+import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.sitebar.client.Site;
@@ -69,9 +70,16 @@ public class StateControllerDefault implements StateController {
 	provider.getContent(session.user, newState, new AsyncCallback() {
 	    public void onFailure(final Throwable caught) {
 		Site.hideProgress();
-		if (caught.equals(AccessViolationException.class))
-		    // i18n
+		try {
+		    throw caught;
+		} catch (AccessViolationException e) {
 		    Site.error("You cant access this content");
+		} catch (GroupNotFoundException e) {
+		    Site.error("Group not found");
+		} catch (Throwable e) {
+		    throw new RuntimeException();
+		}
+
 	    }
 
 	    public void onSuccess(final Object result) {

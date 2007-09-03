@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
+import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
@@ -21,9 +22,8 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 	new IntegrationTestHelper(this);
     }
 
-    @Test
-    // (expected = RuntimeException.class)
-    public void unknownContent() throws ContentNotFoundException, AccessViolationException {
+    @Test(expected = GroupNotFoundException.class)
+    public void unknownContent() throws ContentNotFoundException, AccessViolationException, GroupNotFoundException {
 	StateDTO content = contentService.getContent(null, new StateToken("kune.docs"));
 	assertNotNull(content);
 	assertNotNull(content.getGroup());
@@ -43,7 +43,8 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
     }
 
     @Test
-    public void notLoggedUserShouldNotEditDefaultDoc() throws ContentNotFoundException, AccessViolationException {
+    public void notLoggedUserShouldNotEditDefaultDoc() throws ContentNotFoundException, AccessViolationException,
+	    GroupNotFoundException {
 	StateDTO content = contentService.getContent(null, new StateToken());
 	assertFalse(content.getContentRights().isAdministrable);
 	assertFalse(content.getContentRights().isEditable);
@@ -54,7 +55,8 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
     }
 
     @Test
-    public void defaultCountentShouldExist() throws ContentNotFoundException, AccessViolationException {
+    public void defaultCountentShouldExist() throws ContentNotFoundException, AccessViolationException,
+	    GroupNotFoundException {
 	StateDTO content = contentService.getContent(null, new StateToken());
 	assertNotNull(content);
 	assertNotNull(content.getGroup());

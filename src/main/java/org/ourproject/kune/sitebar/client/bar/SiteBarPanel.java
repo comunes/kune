@@ -78,6 +78,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     private final MenuBar optionsSubmenu;
     private MenuItem linkHelpInTrans;
     private MenuItem linkHelp;
+    private final MenuBar yourGroupsSubmenu;
 
     public SiteBarPanel(final SiteBarPresenter initPresenter) {
 	t = SiteBarTrans.getInstance().t;
@@ -101,6 +102,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	HTML spaceSeparator1 = new HTML("<b></b>");
 	MenuBar options = new MenuBar();
 	optionsSubmenu = new MenuBar(true);
+	yourGroupsSubmenu = new MenuBar(true);
 	BorderDecorator optionsButton = new BorderDecorator(options, BorderDecorator.ALL, BorderDecorator.SIMPLE);
 	HTML spaceSeparator2 = new HTML("<b></b>");
 	logoImage = new Image();
@@ -150,6 +152,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	optionsButton.setColor("AAA");
 	optionsButton.setHeight("16px");
 	createOptionsSubmenu();
+	addDefaultItemsToOptions();
 
 	spaceSeparator1.setStyleName("kune-SiteBarPanel-SpaceSeparator");
 	spaceSeparator2.setStyleName("kune-SiteBarPanel-SpaceSeparator");
@@ -218,7 +221,8 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     public void showLoggedUserName(final String name, final String homePage) {
-	loginHyperlink.setVisible(true);
+	loginHyperlink.setVisible(false);
+	loggedUserHyperlink.setVisible(true);
 	loggedUserHyperlink.setText(name);
 	loggedUserHyperlink.setTargetHistoryToken(homePage);
     }
@@ -264,6 +268,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 
     public void restoreLoginLink() {
 	loginHyperlink.setVisible(true);
+	loggedUserHyperlink.setVisible(false);
 	loginHyperlink.setTargetHistoryToken(IGNORE_TOKEN);
     }
 
@@ -314,14 +319,17 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 
     public void setGroupsIsMember(final List groupsIsAdmin, final List groupsIsEditor) {
 	optionsSubmenu.clearItems();
+	yourGroupsSubmenu.clearItems();
+	optionsSubmenu.addItem("Your Groups", yourGroupsSubmenu);
 	for (int i = 0; i < groupsIsAdmin.size(); i++) {
 	    final LinkDTO link = (LinkDTO) groupsIsAdmin.get(i);
-	    addItemToOptSubmenu(link);
+	    addItemToYourGroupSubmenu(link);
 	}
 	for (int i = 0; i < groupsIsEditor.size(); i++) {
 	    final LinkDTO link = (LinkDTO) groupsIsEditor.get(i);
-	    addItemToOptSubmenu(link);
+	    addItemToYourGroupSubmenu(link);
 	}
+	// i18n
 	addDefaultItemsToOptions();
     }
 
@@ -330,15 +338,15 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	optionsSubmenu.addItem(linkHelp);
     }
 
-    private void addItemToOptSubmenu(final LinkDTO link) {
-	optionsSubmenu.addItem(link.getName(), true, new Command() {
+    private void addItemToYourGroupSubmenu(final LinkDTO link) {
+	yourGroupsSubmenu.addItem(link.getName(), true, new Command() {
 	    public void execute() {
 		presenter.changeState(new StateToken(link.getLink()));
 	    }
 	});
     }
 
-    public void resetOptionsMenu() {
+    public void resetOptionsSubmenu() {
 	optionsSubmenu.clearItems();
 	addDefaultItemsToOptions();
     }

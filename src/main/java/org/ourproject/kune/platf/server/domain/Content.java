@@ -217,7 +217,7 @@ public class Content implements HasStakeToken {
 
     public String getStateToken() {
 	return getFolder().getOwner().getShortName() + TOKEN_SEPARATOR + getFolder().getToolName() + TOKEN_SEPARATOR
-		+ getId();
+		+ getFolder().getId() + TOKEN_SEPARATOR + getId();
     }
 
 }

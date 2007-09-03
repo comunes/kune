@@ -297,11 +297,14 @@ public class LoginFormPanel implements LoginFormView, View {
 		setMsgTarget("side");
 		setMinLength(3);
 		setMaxLength(15);
+		// TODO: exclude spaces in nickname
+		// //setRegex("/^[a-zA-Z0-9_]+$/");
 		// i18n
 		setMinLengthText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
 		setMaxLengthText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
-		// TODO: exclude spaces in nickname
-		setMaskRe("/^[a-zA-Z0-9_]+$/");
+		// //setRegexText("Must be between 3 and 15 lowercase
+		// characters. Can only contain characters, numbers, and
+		// dashes");
 	    }
 	});
 	form.add(shortNameRegField);

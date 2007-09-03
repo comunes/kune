@@ -23,6 +23,7 @@ package org.ourproject.kune.platf.server.rpc;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
+import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.access.Access;
@@ -57,9 +58,9 @@ public class ContentRPC implements ContentService {
     private final UserManager userManager;
 
     @Inject
-    public ContentRPC(final UserSession session, final Accessor contentAccess,
-	    final StateService stateService, final CreationService creationService, final UserManager userManager,
-	    final GroupManager groupManager, final Mapper mapper) {
+    public ContentRPC(final UserSession session, final Accessor contentAccess, final StateService stateService,
+	    final CreationService creationService, final UserManager userManager, final GroupManager groupManager,
+	    final Mapper mapper) {
 	this.session = session;
 	this.accessor = contentAccess;
 	this.stateService = stateService;
@@ -71,7 +72,7 @@ public class ContentRPC implements ContentService {
 
     @Transactional(type = TransactionType.READ_ONLY)
     public StateDTO getContent(final String userHash, final StateToken token) throws ContentNotFoundException,
-	    AccessViolationException {
+	    AccessViolationException, GroupNotFoundException {
 	Group contentGroup;
 	Group loggedGroup;
 
@@ -117,7 +118,7 @@ public class ContentRPC implements ContentService {
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
     public StateDTO addFolder(final String hash, final String groupShotName, final Long parentFolderId,
-	    final String title) throws ContentNotFoundException, AccessViolationException {
+	    final String title) throws ContentNotFoundException, AccessViolationException, GroupNotFoundException {
 	Group group = groupManager.findByShortName(groupShotName);
 
 	Access access = accessor.getFolderAccess(parentFolderId, group, AccessType.EDIT);

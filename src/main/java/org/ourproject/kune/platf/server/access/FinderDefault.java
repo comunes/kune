@@ -20,10 +20,12 @@
 
 package org.ourproject.kune.platf.server.access;
 
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
+import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
 import org.ourproject.kune.platf.server.content.ContainerManager;
 import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.domain.Container;
@@ -65,7 +67,8 @@ public class FinderDefault implements Finder {
 
     }
 
-    public Content getContent(final Group group, final StateToken token) throws ContentNotFoundException {
+    public Content getContent(final Group group, final StateToken token) throws ContentNotFoundException,
+	    GroupNotFoundException {
 	Long contentId = checkAndParse(token.getDocument());
 	Long folderId = checkAndParse(token.getFolder());
 
@@ -117,10 +120,14 @@ public class FinderDefault implements Finder {
 	return generateFolderFakeContent(container);
     }
 
-    private Content findByRootOnGroup(final String groupName, final String toolName) {
-	Group group = groupManager.findByShortName(groupName);
-	Container container = group.getRoot(toolName);
-	return generateFolderFakeContent(container);
+    private Content findByRootOnGroup(final String groupName, final String toolName) throws GroupNotFoundException {
+	try {
+	    Group group = groupManager.findByShortName(groupName);
+	    Container container = group.getRoot(toolName);
+	    return generateFolderFakeContent(container);
+	} catch (NoResultException e) {
+	    throw new GroupNotFoundException();
+	}
     }
 
     private Content generateFolderFakeContent(final Container container) {
@@ -129,7 +136,7 @@ public class FinderDefault implements Finder {
 	return descriptor;
     }
 
-    private Content findDefaultOfGroup(final String groupName) {
+    private Content findDefaultOfGroup(final String groupName) throws GroupNotFoundException {
 	Group group = groupManager.findByShortName(groupName);
 	return findDefaultOfGroup(group);
     }

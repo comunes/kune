@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
+import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
 import org.ourproject.kune.platf.server.TestDomainHelper;
 import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.content.ContainerManager;
@@ -36,7 +37,7 @@ public class FinderTest {
     }
 
     @Test
-    public void testDefaultGroupContent() throws ContentNotFoundException {
+    public void testDefaultGroupContent() throws ContentNotFoundException, GroupNotFoundException {
 
 	Group userGroup = new Group();
 	Content descriptor = TestDomainHelper.createDescriptor(1l, "title", "content");
@@ -47,7 +48,7 @@ public class FinderTest {
     }
 
     @Test
-    public void testCompleteToken() throws ContentNotFoundException {
+    public void testCompleteToken() throws ContentNotFoundException, GroupNotFoundException {
 	Container container = TestDomainHelper.createFolderWithIdAndGroupAndTool(1, "groupShortName", "toolName");
 	Content descriptor = new Content();
 	descriptor.setId(1l);
@@ -62,7 +63,7 @@ public class FinderTest {
     }
 
     @Test(expected = ContentNotFoundException.class)
-    public void contentAndFolderMatch() throws ContentNotFoundException {
+    public void contentAndFolderMatch() throws ContentNotFoundException, GroupNotFoundException {
 	Content descriptor = new Content();
 	Container container = TestDomainHelper.createFolderWithIdAndToolName(5, "toolName2");
 	descriptor.setFolder(container);
@@ -74,7 +75,7 @@ public class FinderTest {
     }
 
     @Test(expected = ContentNotFoundException.class)
-    public void contentAndToolMatch() throws ContentNotFoundException {
+    public void contentAndToolMatch() throws ContentNotFoundException, GroupNotFoundException {
 	Content descriptor = new Content();
 	Container container = TestDomainHelper.createFolderWithId(1);
 	descriptor.setFolder(container);
@@ -86,7 +87,7 @@ public class FinderTest {
     }
 
     @Test(expected = ContentNotFoundException.class)
-    public void contentAndGrouplMatch() throws ContentNotFoundException {
+    public void contentAndGrouplMatch() throws ContentNotFoundException, GroupNotFoundException {
 	Content descriptor = new Content();
 	Container container = TestDomainHelper.createFolderWithIdAndGroupAndTool(5, "groupOther", "toolName");
 	descriptor.setFolder(container);
@@ -98,12 +99,12 @@ public class FinderTest {
     }
 
     @Test(expected = ContentNotFoundException.class)
-    public void voyAJoder() throws ContentNotFoundException {
+    public void voyAJoder() throws ContentNotFoundException, GroupNotFoundException {
 	finder.getContent(null, new StateToken(null, "toolName", "1", "2"));
     }
 
     @Test
-    public void testDocMissing() throws ContentNotFoundException {
+    public void testDocMissing() throws ContentNotFoundException, GroupNotFoundException {
 	Container container = new Container();
 	expect(containerManager.find(1l)).andReturn(container);
 
@@ -115,7 +116,7 @@ public class FinderTest {
     }
 
     @Test
-    public void testFolderMissing() throws ContentNotFoundException {
+    public void testFolderMissing() throws ContentNotFoundException, GroupNotFoundException {
 	Group group = new Group();
 	ToolConfiguration config = group.setToolConfig("toolName", new ToolConfiguration());
 	Container container = config.setRoot(new Container());
@@ -129,7 +130,7 @@ public class FinderTest {
     }
 
     @Test
-    public void getGroupDefaultContent() throws ContentNotFoundException {
+    public void getGroupDefaultContent() throws ContentNotFoundException, GroupNotFoundException {
 	Group group = new Group();
 	Content descriptor = new Content();
 	group.setDefaultContent(descriptor);
@@ -142,7 +143,7 @@ public class FinderTest {
     }
 
     @Test
-    public void testDefaultUserContent() throws ContentNotFoundException {
+    public void testDefaultUserContent() throws ContentNotFoundException, GroupNotFoundException {
 	Content content = new Content();
 	Group group = new Group();
 	group.setDefaultContent(content);
@@ -151,7 +152,7 @@ public class FinderTest {
     }
 
     @Test(expected = ContentNotFoundException.class)
-    public void testIds() throws ContentNotFoundException {
+    public void testIds() throws ContentNotFoundException, GroupNotFoundException {
 	Content descriptor = new Content();
 	Container container = TestDomainHelper.createFolderWithIdAndToolName(5, "toolName");
 	descriptor.setFolder(container);

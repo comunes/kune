@@ -23,6 +23,7 @@ package org.ourproject.kune.platf.server.access;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
+import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
 
@@ -46,7 +47,8 @@ public class AccessorDefault implements Accessor {
     }
 
     public Access getAccess(final StateToken token, final Group defaultGroup, final Group loggedGroup,
-	    final AccessType accessType) throws ContentNotFoundException, AccessViolationException {
+	    final AccessType accessType) throws ContentNotFoundException, AccessViolationException,
+	    GroupNotFoundException {
 	Content descriptor = finder.getContent(defaultGroup, token);
 	Access access = new Access(descriptor, descriptor.getFolder());
 	addContentRights(access, loggedGroup);

@@ -24,6 +24,7 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.group.NewGroupListener;
+import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.login.LoginListener;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarServiceAsync;
@@ -35,6 +36,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 
     private SiteBarView view;
     private final SiteBarListener listener;
+    private boolean isLogged;
 
     public SiteBarPresenter(final SiteBarListener listener) {
 	this.listener = listener;
@@ -50,7 +52,11 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
     }
 
     public void doNewGroup() {
-	view.showNewGroupDialog();
+	if (isLogged) {
+	    view.showNewGroupDialog();
+	} else {
+	    Site.info("You must be logged to create group");
+	}
     }
 
     public void doSearch(final String string) {
@@ -68,10 +74,11 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 	    }
 
 	    public void onSuccess(final Object arg0) {
-		view.setLogoutLinkVisible(false);
+		isLogged = false;
 		view.restoreLoginLink();
+		view.resetOptionsSubmenu();
+		view.setLogoutLinkVisible(false);
 		listener.onUserLoggedOut();
-		view.resetOptionsMenu();
 	    }
 	});
     }
@@ -79,6 +86,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
     public void userLoggedIn(final UserInfoDTO user) {
 	view.hideLoginDialog();
 	listener.onUserLoggedIn(user);
+	isLogged = true;
     }
 
     public void showLoggedUser(final UserInfoDTO user) {
