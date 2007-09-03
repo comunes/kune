@@ -51,7 +51,7 @@ public class DefaultApplication implements Application {
 	    }
 
 	    public void onUserLoggedOut() {
-		dispatcher.fire(WorkspaceEvents.USER_LOGGED_IN, null, null);
+		dispatcher.fire(WorkspaceEvents.USER_LOGGED_OUT, null, null);
 	    }
 
 	    public void onChangeState(StateToken token) {

@@ -8,6 +8,7 @@ import org.ourproject.kune.platf.client.dispatch.Action;
 import com.calclab.gwtjsjac.client.XmppMessage;
 import com.calclab.gwtjsjac.client.XmppMessageListener;
 import com.calclab.gwtjsjac.client.mandioca.XmppRoom;
+import com.google.gwt.user.client.Window;
 
 public class JoinRoomAction implements Action {
     private final ChatProvider provider;
@@ -22,10 +23,12 @@ public class JoinRoomAction implements Action {
 	XmppRoom handler = provider.getChat().joinRoom(room.getName(), room.getSessionAlias());
 	handler.addMessageListener(new XmppMessageListener() {
 	    public void onMessageReceived(final XmppMessage message) {
+		Window.alert("message received: " + message.getBody());
 		room.addMessage(message.getFrom(), message.getBody());
 	    }
 
 	    public void onMessageSent(final XmppMessage message) {
+		Window.alert("message sent: " + message.getBody());
 		room.addMessage(message.getFrom(), message.getBody());
 	    }
 	});
@@ -35,7 +38,7 @@ public class JoinRoomAction implements Action {
 	room.addInfoMessage("you have entered the room!");
     }
 
-    public void execute(final Object value, final Object extra, Services services) {
+    public void execute(final Object value, final Object extra, final Services services) {
 	joinRoom((Room) value);
     }
 

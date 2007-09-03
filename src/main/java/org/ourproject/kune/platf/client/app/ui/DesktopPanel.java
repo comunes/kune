@@ -55,9 +55,10 @@ public class DesktopPanel extends AbsolutePanel implements DesktopView {
 	    final SiteMessage siteMessage) {
 	Window.addWindowResizeListener(new WindowResizeListener() {
 	    public void onWindowResized(final int width, final int height) {
-		workspace.adjustSize(width, height);
-		siteMessage.adjustWidth(width);
-		desktop.setWidgetPosition((Widget) siteMessage.getView(), Window.getClientWidth() * 40 / 100 - 10, 2);
+		// workspace.adjustSize(width, height);
+		// siteMessage.adjustWidth(width);
+		// desktop.setWidgetPosition((Widget) siteMessage.getView(),
+		// Window.getClientWidth() * 40 / 100 - 10, 2);
 	    }
 	});
 	Window.enableScrolling(false);
