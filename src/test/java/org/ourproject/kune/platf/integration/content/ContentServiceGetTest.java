@@ -22,6 +22,18 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
     }
 
     @Test
+    // (expected = RuntimeException.class)
+    public void unknownContent() throws ContentNotFoundException, AccessViolationException {
+	StateDTO content = contentService.getContent(null, new StateToken("kune.docs"));
+	assertNotNull(content);
+	assertNotNull(content.getGroup());
+	assertNotNull(content.getFolder());
+	assertNotNull(content.getFolder().getId());
+	assertNotNull(content.getToolName());
+	assertNotNull(content.getDocumentId());
+    }
+
+    @Test
     public void contentWithLoggedUserIsEditable() throws SerializableException {
 	doLogin();
 	StateDTO response = contentService.getContent(null, new StateToken());

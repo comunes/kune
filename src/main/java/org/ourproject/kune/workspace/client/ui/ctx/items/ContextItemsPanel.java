@@ -60,7 +60,7 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
 	expand.setHeight("15px");
 	setCellHeight(expand, "15px");
 	addStyleName("kune-NavigationBar");
-	setCellWidth(horizontalLine, "100%");
+	controls.setCellWidth(horizontalLine, "100%");
 	horizontalLine.setWidth("100%");
     }
 

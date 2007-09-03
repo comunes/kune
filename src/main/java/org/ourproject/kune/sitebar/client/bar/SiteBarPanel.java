@@ -75,7 +75,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     private LoginFormPanel loginPanel;
     private TwoButtonsDialog newGroupDialog;
     private final Images img;
-    private MenuBar optionsSubmenu;
+    private final MenuBar optionsSubmenu;
     private MenuItem linkHelpInTrans;
     private MenuItem linkHelp;
 
@@ -218,7 +218,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     public void showLoggedUserName(final String name, final String homePage) {
-	loginHyperlink.setVisible(false);
+	loginHyperlink.setVisible(true);
 	loggedUserHyperlink.setText(name);
 	loggedUserHyperlink.setTargetHistoryToken(homePage);
     }
@@ -312,7 +312,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	});
     }
 
-    public void setGroupsIsMember(List groupsIsAdmin, List groupsIsEditor) {
+    public void setGroupsIsMember(final List groupsIsAdmin, final List groupsIsEditor) {
 	optionsSubmenu.clearItems();
 	for (int i = 0; i < groupsIsAdmin.size(); i++) {
 	    final LinkDTO link = (LinkDTO) groupsIsAdmin.get(i);

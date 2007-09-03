@@ -82,12 +82,11 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
     }
 
     public void showLoggedUser(final UserInfoDTO user) {
-	String userName = user.getName();
-	if (userName == null) {
+	if (user == null) {
 	    view.restoreLoginLink();
 	    view.setLogoutLinkVisible(false);
 	} else {
-	    view.showLoggedUserName(userName, user.getHomePage());
+	    view.showLoggedUserName(user.getName(), user.getHomePage());
 	    view.setLogoutLinkVisible(true);
 	    view.setGroupsIsMember(user.getGroupsIsAdmin(), user.getGroupsIsEditor());
 	}
@@ -97,7 +96,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 	view.hideLoginDialog();
     }
 
-    public void onNewGroupCreated(StateToken homePage) {
+    public void onNewGroupCreated(final StateToken homePage) {
 	view.hideNewGroupDialog();
 	changeState(homePage);
     }
@@ -128,7 +127,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 	view.clearSearchText();
     }
 
-    public void changeState(StateToken token) {
+    public void changeState(final StateToken token) {
 	listener.onChangeState(token);
 
     }
