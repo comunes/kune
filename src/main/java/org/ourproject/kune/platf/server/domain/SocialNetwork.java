@@ -27,8 +27,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.ourproject.kune.platf.server.access.AccessRol;
-
 @Entity
 @Table(name = "social_networks")
 public class SocialNetwork {
@@ -87,15 +85,4 @@ public class SocialNetwork {
 	return accessLists;
     }
 
-    public GroupList getGroupList(final AccessRol type) {
-	if (type == AccessRol.Administrator) {
-	    return accessLists.getAdmins();
-	} else if (type == AccessRol.Editor) {
-	    return accessLists.getEditors();
-	} else if (type == AccessRol.Viewer) {
-	    return accessLists.getViewers();
-	} else {
-	    throw new RuntimeException();
-	}
-    }
 }

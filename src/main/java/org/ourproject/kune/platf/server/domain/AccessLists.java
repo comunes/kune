@@ -27,6 +27,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.ourproject.kune.platf.server.access.AccessRol;
+
 @Entity
 @Table(name = "access_lists")
 public class AccessLists {
@@ -65,6 +67,16 @@ public class AccessLists {
 
     public void addViewer(final Group group) {
 	viewers.add(group);
+    }
+
+    public GroupList getList(final AccessRol rol) {
+	if (rol == AccessRol.Administrator) {
+	    return getAdmins();
+	} else if (rol == AccessRol.Editor) {
+	    return getEditors();
+	} else {
+	    return getViewers();
+	}
     }
 
     public GroupList getAdmins() {

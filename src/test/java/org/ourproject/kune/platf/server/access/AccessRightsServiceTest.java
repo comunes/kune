@@ -11,14 +11,14 @@ import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 
 public class AccessRightsServiceTest {
-    private RightsServiceDefault accessRightsManager;
+    private AccessRightsServiceDefault accessRightsManager;
     private Group group1;
     private Group group2;
     private Group group3;
 
     @Before
     public void init() {
-	accessRightsManager = new RightsServiceDefault();
+	accessRightsManager = new AccessRightsServiceDefault();
 	group1 = TestDomainHelper.createGroup(1);
 	group2 = TestDomainHelper.createGroup(2);
 	group3 = TestDomainHelper.createGroup(3);

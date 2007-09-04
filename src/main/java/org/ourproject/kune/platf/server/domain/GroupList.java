@@ -27,11 +27,14 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "group_list")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class GroupList {
     @Id
     @GeneratedValue

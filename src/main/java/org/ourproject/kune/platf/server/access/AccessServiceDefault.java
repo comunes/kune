@@ -35,16 +35,16 @@ import com.google.inject.Singleton;
 public class AccessServiceDefault implements AccessService {
 
     private final FinderService finder;
-    private final RightsService rightsService;
+    private final AccessRightsService accessRightsService;
 
     @Inject
     public AccessServiceDefault(final FinderService finder) {
-	this(finder, new RightsServiceDefault());
+	this(finder, new AccessRightsServiceDefault());
     }
 
-    public AccessServiceDefault(final FinderService finder, final RightsService rightsService) {
+    public AccessServiceDefault(final FinderService finder, final AccessRightsService accessRightsService) {
 	this.finder = finder;
-	this.rightsService = rightsService;
+	this.accessRightsService = accessRightsService;
     }
 
     public Access getAccess(final StateToken token, final Group defaultGroup, final Group loggedGroup,
@@ -98,13 +98,13 @@ public class AccessServiceDefault implements AccessService {
 
     private void addFolderRights(final Access access, final Group group) {
 	if (!access.hasFolderRights()) {
-	    access.setFolderRights(rightsService.get(group, access.getFolderAccessLists()));
+	    access.setFolderRights(accessRightsService.get(group, access.getFolderAccessLists()));
 	}
     }
 
     private void addContentRights(final Access access, final Group group) {
 	if (!access.hasContentRights()) {
-	    access.setContentRights(rightsService.get(group, access.getContentAccessLists()));
+	    access.setContentRights(accessRightsService.get(group, access.getContentAccessLists()));
 	}
     }
 
