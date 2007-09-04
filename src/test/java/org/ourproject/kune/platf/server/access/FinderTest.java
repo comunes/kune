@@ -26,14 +26,14 @@ public class FinderTest {
     private GroupManager groupManager;
     private ContainerManager containerManager;
     private ContentManager contentManager;
-    private FinderDefault finder;
+    private FinderServiceDefault finder;
 
     @Before
     public void createSession() {
 	this.groupManager = createStrictMock(GroupManager.class);
 	this.containerManager = createStrictMock(ContainerManager.class);
 	this.contentManager = createStrictMock(ContentManager.class);
-	this.finder = new FinderDefault(groupManager, containerManager, contentManager);
+	this.finder = new FinderServiceDefault(groupManager, containerManager, contentManager);
     }
 
     @Test

@@ -43,7 +43,7 @@ import com.wideplay.warp.persist.dao.Finder;
 @Entity
 @Table(name = "contents")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Content implements HasStakeToken {
+public class Content implements HasStateToken {
     private static final String TOKEN_SEPARATOR = ".";
 
     @Id

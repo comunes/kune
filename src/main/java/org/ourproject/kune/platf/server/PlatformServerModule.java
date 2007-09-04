@@ -22,10 +22,10 @@ package org.ourproject.kune.platf.server;
 
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.KuneService;
-import org.ourproject.kune.platf.server.access.Accessor;
-import org.ourproject.kune.platf.server.access.AccessorDefault;
-import org.ourproject.kune.platf.server.access.Finder;
-import org.ourproject.kune.platf.server.access.FinderDefault;
+import org.ourproject.kune.platf.server.access.AccessService;
+import org.ourproject.kune.platf.server.access.AccessServiceDefault;
+import org.ourproject.kune.platf.server.access.FinderService;
+import org.ourproject.kune.platf.server.access.FinderServiceDefault;
 import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.content.ContentManagerDefault;
 import org.ourproject.kune.platf.server.content.ContainerManager;
@@ -77,8 +77,8 @@ public class PlatformServerModule extends AbstractModule {
     private void bindServices() {
 	bind(UserInfoService.class).to(UserInfoServiceDefault.class);
 	bind(CreationService.class).to(CreationServiceDefault.class);
-	bind(Accessor.class).to(AccessorDefault.class);
-	bind(Finder.class).to(FinderDefault.class);
+	bind(AccessService.class).to(AccessServiceDefault.class);
+	bind(FinderService.class).to(FinderServiceDefault.class);
 	bind(StateService.class).to(StateServiceDefault.class);
     }
 

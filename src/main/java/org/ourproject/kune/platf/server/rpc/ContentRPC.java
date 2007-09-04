@@ -28,7 +28,7 @@ import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.access.Access;
 import org.ourproject.kune.platf.server.access.AccessType;
-import org.ourproject.kune.platf.server.access.Accessor;
+import org.ourproject.kune.platf.server.access.AccessService;
 import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.content.CreationService;
 import org.ourproject.kune.platf.server.domain.Container;
@@ -48,17 +48,17 @@ import com.wideplay.warp.persist.TransactionType;
 import com.wideplay.warp.persist.Transactional;
 
 @Singleton
-public class ContentRPC implements ContentService {
+public class ContentRPC implements ContentService, RPC {
     private final StateService stateService;
     private final UserSession session;
     private final Mapper mapper;
     private final GroupManager groupManager;
-    private final Accessor accessor;
+    private final AccessService accessor;
     private final CreationService creationService;
     private final UserManager userManager;
 
     @Inject
-    public ContentRPC(final UserSession session, final Accessor contentAccess, final StateService stateService,
+    public ContentRPC(final UserSession session, final AccessService contentAccess, final StateService stateService,
 	    final CreationService creationService, final UserManager userManager, final GroupManager groupManager,
 	    final Mapper mapper) {
 	this.session = session;

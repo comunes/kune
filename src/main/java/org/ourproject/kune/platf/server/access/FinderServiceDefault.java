@@ -37,13 +37,13 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
-public class FinderDefault implements Finder {
+public class FinderServiceDefault implements FinderService {
     private final GroupManager groupManager;
     private final ContentManager contentManager;
     private final ContainerManager containerManager;
 
     @Inject
-    public FinderDefault(final GroupManager groupManager, final ContainerManager containerManager,
+    public FinderServiceDefault(final GroupManager groupManager, final ContainerManager containerManager,
 	    final ContentManager contentManager) {
 	this.groupManager = groupManager;
 	this.containerManager = containerManager;

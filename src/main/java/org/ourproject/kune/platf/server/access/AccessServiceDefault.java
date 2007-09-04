@@ -31,17 +31,17 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
-public class AccessorDefault implements Accessor {
+public class AccessServiceDefault implements AccessService {
 
-    private final Finder finder;
+    private final FinderService finder;
     private final RightsService rightsService;
 
     @Inject
-    public AccessorDefault(final Finder finder) {
+    public AccessServiceDefault(final FinderService finder) {
 	this(finder, new RightsServiceDefault());
     }
 
-    public AccessorDefault(final Finder finder, final RightsService rightsService) {
+    public AccessServiceDefault(final FinderService finder, final RightsService rightsService) {
 	this.finder = finder;
 	this.rightsService = rightsService;
     }

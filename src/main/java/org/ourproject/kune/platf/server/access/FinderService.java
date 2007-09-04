@@ -21,20 +21,18 @@
 package org.ourproject.kune.platf.server.access;
 
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
+import org.ourproject.kune.platf.server.domain.Content;
+import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Group;
 
-public interface Accessor {
+public interface FinderService {
 
-    Access getAccess(StateToken token, Group defaultGroup, Group loggedGroup, AccessType accessType)
-	    throws ContentNotFoundException, AccessViolationException, GroupNotFoundException;
+    Content getContent(Group group, StateToken token) throws ContentNotFoundException, GroupNotFoundException;
 
-    Access getContentAccess(Long contentId, Group group, AccessType accessType) throws ContentNotFoundException,
-	    AccessViolationException;
+    Content getContent(Long contentId) throws ContentNotFoundException;
 
-    Access getFolderAccess(Long folderId, Group group, AccessType accessType) throws AccessViolationException,
-	    ContentNotFoundException;
+    Container getFolder(Long folderId) throws ContentNotFoundException;
 
 }
