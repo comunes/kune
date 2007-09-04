@@ -39,11 +39,12 @@ public interface Workspace extends Component {
 
     public void setContent(WorkspaceComponent contentComponent);
 
-    public void setContentTitle(String title);
-
     public void attachTools(Iterator iterator);
 
     public void adjustSize(int windowWidth, int clientHeight);
 
     public LicenseComponent getLicenseComponent();
+
+    public ContentTitleComponent getContentTitleComponent();
+
 }

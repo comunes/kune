@@ -6,6 +6,6 @@ public interface LicenseView extends View {
 
     void showImage(String imageUrl);
 
-    void showName(String longName);
+    void showName(String groupName, String licenseName);
 
 }

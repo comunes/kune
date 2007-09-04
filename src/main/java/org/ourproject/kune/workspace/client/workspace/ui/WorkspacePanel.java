@@ -36,12 +36,12 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class WorkspacePanel extends Composite implements WorkspaceView {
     private final LogoPanel logoPanel;
-    private final ContentTitleBar contentTitleBar;
+    private final HorizontalPanel contentTitleBar;
     private final GroupToolsBar groupToolsBar;
     private final HorizontalSplitPanel cntcxtHSP;
     private final VerticalPanel contextVP;
     private final VerticalPanel contentVP;
-    private ContentBottomBar contentBottomBar;
+    private final ContentBottomBar contentBottomBar;
 
     public WorkspacePanel() {
 	VerticalPanel generalVP = new VerticalPanel();
@@ -66,7 +66,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	summaryExample(summaryPanel);
 
 	ContentToolBar contentToolBar = new ContentToolBar();
-	contentTitleBar = new ContentTitleBar();
+	contentTitleBar = new HorizontalPanel();
 	cntcxtHSP = new HorizontalSplitPanel();
 	contentVP = new VerticalPanel();
 	contextVP = new VerticalPanel();
@@ -92,18 +92,20 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	addStyleName("kune-WorkspacePanel");
 	groupAreaVP.addStyleName("ContextPanel");
 	generalHP.addStyleName("GeneralHP");
+	contentTitleBar.setWidth("100%");
+	contentTitleBar.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
+
 	setLogo("");
     }
 
     private void summaryExample(final SummaryPanel summaryPanel) {
 	DropDownPanel presencePanel = new DropDownPanel();
 	summaryPanel.add(presencePanel);
-	presencePanel.setWidth("100%");
-	presencePanel.setContent(new Label(""));
+	presencePanel.setWidth("145px");
 	presencePanel.setContentVisible(true);
 	presencePanel.setTitle("Buddies");
-	presencePanel.setColor("green");
-	presencePanel.setContent(new Label(""));
+	presencePanel.setColor("87DECD");
+	presencePanel.setContent(new Label("Here the presence of Buddies"));
     }
 
     public void addTab(final ToolTrigger trigger) {
@@ -116,10 +118,6 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 
     public void setLogo(final Image image) {
 	logoPanel.setLogo(image);
-    }
-
-    public void setContentTitle(final String title) {
-	contentTitleBar.setTitleLabel(title);
     }
 
     public void setTool(final String toolName) {
@@ -145,15 +143,23 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     }
 
     public void adjustSize(final int windowWidth, final int windowHeight) {
-	int contentWidth = windowWidth - 163; // 150
+	int contentWidth = windowWidth - 163;
 	int contentHeight = windowHeight - 175;
 
 	cntcxtHSP.setSize("" + contentWidth + "px", "" + contentHeight + "px");
 	cntcxtHSP.setSplitPosition("" + (contentWidth - 175) + "px");
     }
 
-    public void setBottom(View view) {
-	contentBottomBar.add((Widget) view);
+    public void setContentTitle(final View view) {
+	Widget widget = (Widget) view;
+	contentTitleBar.add((Widget) view);
+	contentTitleBar.setCellVerticalAlignment(widget, VerticalPanel.ALIGN_MIDDLE);
+    }
+
+    public void setBottom(final View view) {
+	Widget widget = (Widget) view;
+	contentBottomBar.add(widget);
+	contentBottomBar.setCellVerticalAlignment(widget, VerticalPanel.ALIGN_MIDDLE);
     }
 
 }

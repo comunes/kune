@@ -20,21 +20,25 @@
 
 package org.ourproject.kune.workspace.client.workspace.ui;
 
+import org.ourproject.kune.workspace.client.workspace.ContentTitlePresenter;
+import org.ourproject.kune.workspace.client.workspace.ContentTitleView;
+
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-class ContentTitleBar extends HorizontalPanel {
-    private Label titleLabel = null;
+public class ContentTitlePanel extends HorizontalPanel implements ContentTitleView {
+    private final Label titleLabel;
 
-    public ContentTitleBar() {
+    public ContentTitlePanel(final ContentTitlePresenter presenter) {
 	titleLabel = new Label();
 	add(titleLabel);
+	setWidth("100%");
 	addStyleName("kune-ContentTitleBar");
 	setCellVerticalAlignment(titleLabel, VerticalPanel.ALIGN_MIDDLE);
     }
 
-    public void setTitleLabel(final String title) {
+    public void setContentTitle(final String title) {
 	titleLabel.setText(title);
     }
 }

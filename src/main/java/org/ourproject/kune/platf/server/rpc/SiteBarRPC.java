@@ -24,10 +24,8 @@ import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.UserAuthException;
 import org.ourproject.kune.platf.server.UserSession;
-import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
-import org.ourproject.kune.platf.server.manager.LicenseManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.platf.server.users.UserInfo;
 import org.ourproject.kune.platf.server.users.UserInfoService;
@@ -46,18 +44,16 @@ public class SiteBarRPC implements RPC, SiteBarService {
     private final UserManager userManager;
     private final UserSession session;
     private final GroupManager groupManager;
-    private final LicenseManager licenseFinder;
     private final Mapper mapper;
     private final UserInfoService userInfoService;
 
     @Inject
     public SiteBarRPC(final UserSession session, final UserManager userManager, final GroupManager groupManager,
-	    final UserInfoService userInfoService, final LicenseManager licenseFinder, final Mapper mapper) {
+	    final UserInfoService userInfoService, final Mapper mapper) {
 	this.session = session;
 	this.userManager = userManager;
 	this.groupManager = groupManager;
 	this.userInfoService = userInfoService;
-	this.licenseFinder = licenseFinder;
 	this.mapper = mapper;
     }
 
@@ -86,8 +82,7 @@ public class SiteBarRPC implements RPC, SiteBarService {
     public UserInfoDTO createUser(final String shortName, final String longName, final String email,
 	    final String passwd, final LicenseDTO license) throws SerializableException {
 	User user = userManager.createUser(shortName, longName, email, passwd);
-	License licenseFinded = licenseFinder.findByShortname(license.getShortName());
-	groupManager.createUserGroup(user, licenseFinded);
+	groupManager.createUserGroup(user);
 	return loginUser(user);
     }
 

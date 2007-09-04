@@ -31,9 +31,13 @@ import org.ourproject.kune.workspace.client.license.LicenseComponent;
 import org.ourproject.kune.workspace.client.license.LicensePresenter;
 import org.ourproject.kune.workspace.client.license.LicenseView;
 import org.ourproject.kune.workspace.client.license.ui.LicensePanel;
+import org.ourproject.kune.workspace.client.workspace.ContentTitleComponent;
+import org.ourproject.kune.workspace.client.workspace.ContentTitlePresenter;
+import org.ourproject.kune.workspace.client.workspace.ContentTitleView;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 import org.ourproject.kune.workspace.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.workspace.client.workspace.WorkspaceView;
+import org.ourproject.kune.workspace.client.workspace.ui.ContentTitlePanel;
 import org.ourproject.kune.workspace.client.workspace.ui.WorkspacePanel;
 
 public class WorkspaceFactory {
@@ -58,6 +62,13 @@ public class WorkspaceFactory {
     public static LicenseComponent createLicenseComponent() {
 	LicensePresenter presenter = new LicensePresenter();
 	LicenseView view = new LicensePanel(presenter);
+	presenter.init(view);
+	return presenter;
+    }
+
+    public static ContentTitleComponent createContentTitleComponent() {
+	ContentTitlePresenter presenter = new ContentTitlePresenter();
+	ContentTitleView view = new ContentTitlePanel(presenter);
 	presenter.init(view);
 	return presenter;
     }

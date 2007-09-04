@@ -8,6 +8,8 @@ import com.google.gwt.user.client.ui.Label;
 import com.gwtext.client.widgets.Button;
 
 public class ToolBarPanel extends HorizontalPanel {
+    private Button btnEnter;
+
     public ToolBarPanel() {
 	Label expand = new Label("");
 	this.add(expand);
@@ -17,10 +19,14 @@ public class ToolBarPanel extends HorizontalPanel {
 	this.addStyleName("kune-DocumentReaderPanel");
     }
 
-    public void addButton(String caption, ClickListener listener) {
-	Button btnEnter = new CustomButton(caption, listener).getButton();
+    public void addButton(final String caption, final ClickListener listener) {
+	btnEnter = new CustomButton(caption, listener).getButton();
 	this.add(btnEnter);
 	btnEnter.addStyleName("kune-Button-Large-lrSpace");
+    }
+
+    public void setButtonVisible(final boolean isEnabled) {
+	btnEnter.setVisible(isEnabled);
     }
 
 }

@@ -35,7 +35,7 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
 
     public ChatClientTool() {
 	// i18n
-	super("salas de chat");
+	super("chat rooms");
 	components = new Components(this);
     }
 

@@ -46,7 +46,11 @@ public class StateServiceDefault implements StateService {
 	Data data = content.getLastRevision().getData();
 	char[] text = data.getContent();
 	state.setContent(text == null ? null : new String(text));
-	state.setTitle(data.getTitle());
+	if (documentId != null) {
+	    state.setTitle(data.getTitle());
+	} else {
+	    state.setTitle(container.getName());
+	}
 	state.setToolName(container.getToolName());
 	state.setGroup(container.getOwner());
 	state.setFolder(container);

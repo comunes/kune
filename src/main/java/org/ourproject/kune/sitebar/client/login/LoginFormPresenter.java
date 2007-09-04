@@ -56,17 +56,20 @@ public class LoginFormPresenter implements LoginForm {
 	final String nickOrEmail = view.getNickOrEmail();
 	final String passwd = view.getLoginPassword();
 
+	Site.showProgress("Processing");
 	SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
 	siteBarService.login(nickOrEmail, passwd, new AsyncCallback() {
 
 	    public void onFailure(final Throwable arg0) {
 		// i18n: Error in authentication
+		Site.hideProgress();
 		Site.important("Error in authentication");
 		FireLog.debug(arg0.getStackTrace().toString());
 	    }
 
 	    public void onSuccess(final Object response) {
 		listener.userLoggedIn((UserInfoDTO) response);
+		Site.hideProgress();
 		// TODO: Establecer sesión de este usuario
 	    }
 	});
@@ -78,6 +81,7 @@ public class LoginFormPresenter implements LoginForm {
 	final String longName = view.getLongName();
 	final String email = view.getEmail();
 
+	Site.showProgress("Processing");
 	SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
 	// TODO: Form of register, license menu;
 	LicenseDTO defaultLicense = new LicenseDTO("by-sa", "Creative Commons Attribution-ShareAlike", "",
@@ -86,11 +90,13 @@ public class LoginFormPresenter implements LoginForm {
 
 	    public void onFailure(final Throwable arg0) {
 		// i18n: Error creating user
+		Site.hideProgress();
 		Site.important("Error creating user");
 	    }
 
 	    public void onSuccess(final Object response) {
 		listener.userLoggedIn((UserInfoDTO) response);
+		Site.hideProgress();
 		// TODO: Establecer sesión de este usuario
 	    }
 	});

@@ -32,7 +32,6 @@ public class GroupDTO implements IsSerializable {
     private String shortName;
     private String longName;
     private String publicDesc;
-    private String defaultLicenseShortName;
     private int type;
 
     private String defaultToolName;
@@ -50,12 +49,7 @@ public class GroupDTO implements IsSerializable {
 	this.shortName = shortName;
 	this.longName = longName;
 	this.publicDesc = publicDesc;
-	this.defaultLicenseShortName = defaultLicenseShortName;
 	this.type = type;
-    }
-
-    public String getDefaultLicense() {
-	return defaultLicenseShortName;
     }
 
     public Long getId() {
@@ -78,10 +72,6 @@ public class GroupDTO implements IsSerializable {
 	return type;
     }
 
-    public void setDefaultLicense(final String defaultLicense) {
-	this.defaultLicenseShortName = defaultLicense;
-    }
-
     public void setId(final Long id) {
 	this.id = id;
     }
@@ -100,14 +90,6 @@ public class GroupDTO implements IsSerializable {
 
     public void setType(final int type) {
 	this.type = type;
-    }
-
-    public String getDefaultLicenseShortName() {
-	return defaultLicenseShortName;
-    }
-
-    public void setDefaultLicenseShortName(final String defaultLicenseShortName) {
-	this.defaultLicenseShortName = defaultLicenseShortName;
     }
 
     public Long getDefaultFolderId() {
@@ -134,12 +116,20 @@ public class GroupDTO implements IsSerializable {
 	this.defaultToolName = defaultToolName;
     }
 
+    public LicenseDTO getDefaultLicense() {
+	return defaultLicense;
+    }
+
+    public void setDefaultLicense(final LicenseDTO defaultLicense) {
+	this.defaultLicense = defaultLicense;
+    }
+
     public int hashCode() {
 	final int prime = 31;
 	int result = 1;
 	result = prime * result + ((defaultContentId == null) ? 0 : defaultContentId.hashCode());
 	result = prime * result + ((defaultFolderId == null) ? 0 : defaultFolderId.hashCode());
-	result = prime * result + ((defaultLicenseShortName == null) ? 0 : defaultLicenseShortName.hashCode());
+	result = prime * result + ((defaultLicense == null) ? 0 : defaultLicense.hashCode());
 	result = prime * result + ((defaultToolName == null) ? 0 : defaultToolName.hashCode());
 	result = prime * result + ((id == null) ? 0 : id.hashCode());
 	result = prime * result + ((longName == null) ? 0 : longName.hashCode());
@@ -171,11 +161,11 @@ public class GroupDTO implements IsSerializable {
 	} else if (!defaultFolderId.equals(other.defaultFolderId)) {
 	    return false;
 	}
-	if (defaultLicenseShortName == null) {
-	    if (other.defaultLicenseShortName != null) {
+	if (defaultLicense == null) {
+	    if (other.defaultLicense != null) {
 		return false;
 	    }
-	} else if (!defaultLicenseShortName.equals(other.defaultLicenseShortName)) {
+	} else if (!defaultLicense.equals(other.defaultLicense)) {
 	    return false;
 	}
 	if (defaultToolName == null) {
@@ -219,7 +209,4 @@ public class GroupDTO implements IsSerializable {
 	return true;
     }
 
-    public void setDefaultLicense(LicenseDTO defaultLicense) {
-	this.defaultLicense = defaultLicense;
-    }
 }

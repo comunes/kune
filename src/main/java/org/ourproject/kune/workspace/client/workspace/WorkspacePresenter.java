@@ -32,11 +32,12 @@ public class WorkspacePresenter implements Workspace {
     private final WorkspaceView view;
     private WorkspaceComponent context;
     private WorkspaceComponent content;
-    private Components components;
+    private final Components components;
 
     public WorkspacePresenter(final WorkspaceView view) {
 	this.view = view;
 	this.components = new Components(this);
+	view.setContentTitle(components.getContentTitleComponent().getView());
 	view.setBottom(components.getLicenseComponent().getView());
     }
 
@@ -78,10 +79,6 @@ public class WorkspacePresenter implements Workspace {
 	view.setContent(content.getView());
     }
 
-    public void setContentTitle(final String title) {
-	view.setContentTitle(title);
-    }
-
     public void adjustSize(final int windowWidth, final int clientHeight) {
 	view.adjustSize(windowWidth, clientHeight);
     }
@@ -92,6 +89,10 @@ public class WorkspacePresenter implements Workspace {
 
     public LicenseComponent getLicenseComponent() {
 	return components.getLicenseComponent();
+    }
+
+    public ContentTitleComponent getContentTitleComponent() {
+	return components.getContentTitleComponent();
     }
 
 }

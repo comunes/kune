@@ -68,7 +68,7 @@ public class ChatServerTool implements ServerTool {
     public Group initGroup(final User user, final Group group) {
 	ToolConfiguration config = new ToolConfiguration();
 	// i18n: salas
-	Container container = containerManager.createRootFolder(group, NAME, "salas", TYPE_ROOT);
+	Container container = containerManager.createRootFolder(group, NAME, "rooms", TYPE_ROOT);
 	config.setRoot(container);
 	group.setToolConfig(NAME, config);
 	configurationManager.persist(config);

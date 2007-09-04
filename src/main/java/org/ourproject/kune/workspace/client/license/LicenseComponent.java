@@ -5,6 +5,6 @@ import org.ourproject.kune.platf.client.dto.LicenseDTO;
 
 public interface LicenseComponent extends Component {
 
-    void setLicense(LicenseDTO licenseDTO);
+    void setLicense(String groupName, LicenseDTO licenseDTO);
 
 }

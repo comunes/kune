@@ -30,8 +30,6 @@ public interface WorkspaceView extends View {
 
     void setLogo(Image image);
 
-    void setContentTitle(String title);
-
     void setContent(View contentView);
 
     void setContext(View contextView);
@@ -42,5 +40,8 @@ public interface WorkspaceView extends View {
 
     void addTab(ToolTrigger trigger);
 
+    void setContentTitle(View view);
+
     void setBottom(View view);
+
 }

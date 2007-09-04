@@ -62,8 +62,8 @@ public class DropDownPanel extends Composite implements ClickListener {
 	initWidget(outerBorder);
 	dropDownPanelVP.add(titleHP);
 	dropDownPanelVP.add(contentDeckP);
-	titleHP.add(arrowImage); // FIXME: , 0, 0, 0, 3));
-	titleHP.add(titleLabel); // FIXME: 0, 0, 0, 3));
+	titleHP.add(arrowImage);
+	titleHP.add(titleLabel);
 	contentDeckP.add(cleanPanel);
     }
 
@@ -79,15 +79,12 @@ public class DropDownPanel extends Composite implements ClickListener {
 	titleHP.addStyleName("kune-DropDownLabel");
 
 	img = Images.App.getInstance();
-	img.arrowDownBlack().applyTo(arrowImage);
-	// arrowImage.setHeight("16");
-	// arrowImage.setWidth("16");
+	img.arrowDownWhite().applyTo(arrowImage);
 
 	titleLabel.setText(Kune.getInstance().t.Text());
 	titleLabel.setWidth("100%");
 
 	contentDeckP.addStyleName("kune-DropDownInner");
-	// contentDeckP.setWidth("100%");
     }
 
     public boolean contentEmpty() {
@@ -104,12 +101,12 @@ public class DropDownPanel extends Composite implements ClickListener {
     public void setContentVisible(final boolean visible) {
 	if (visible) {
 	    if (!contentEmpty()) {
-		img.arrowDownBlack().applyTo(arrowImage);
+		img.arrowDownWhite().applyTo(arrowImage);
 		contentDeckP.showWidget(1);
 		contentDeckP.setVisible(true);
 	    }
 	} else {
-	    img.arrowRightBlack().applyTo(arrowImage);
+	    img.arrowRightWhite().applyTo(arrowImage);
 	    contentDeckP.showWidget(0);
 	    contentDeckP.setVisible(false);
 	}

@@ -36,7 +36,7 @@ public class DocumentClientTool extends AbstractClientTool implements DocumentCo
 
     public DocumentClientTool() {
 	// i18n
-	super("documentos");
+	super("documents");
 	components = new DocToolComponents(this);
     }
 

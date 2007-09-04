@@ -10,28 +10,28 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
 public class LicensePanel extends HorizontalPanel implements LicenseView {
-    private Label name;
-    private Image image;
+    private final Label copyright;
+    private final Image image;
 
     public LicensePanel(final LicensePresenter presenter) {
-	name = new Label();
+	copyright = new Label();
 	image = new Image();
-	this.add(name);
+	this.add(copyright);
 	this.add(image);
 	ClickListener clickListener = new ClickListener() {
 	    public void onClick(Widget arg0) {
 		presenter.onLicenseClick();
 	    }
 	};
-	name.addClickListener(clickListener);
+	copyright.addClickListener(clickListener);
 	image.addClickListener(clickListener);
     }
 
-    public void showImage(String imageUrl) {
+    public void showImage(final String imageUrl) {
 	image.setUrl(imageUrl);
     }
 
-    public void showName(String longName) {
-	name.setText(longName);
+    public void showName(final String groupName, final String licenseName) {
+	copyright.setText("© " + groupName + ", under license " + licenseName);
     }
 }

@@ -10,7 +10,7 @@ public class LicensePresenter implements LicenseComponent {
     public LicensePresenter() {
     }
 
-    public void init(LicenseView view) {
+    public void init(final LicenseView view) {
 	this.view = view;
     }
 
@@ -18,8 +18,8 @@ public class LicensePresenter implements LicenseComponent {
 	return view;
     }
 
-    public void setLicense(LicenseDTO licenseDTO) {
-	view.showName(licenseDTO.getLongName());
+    public void setLicense(final String groupName, final LicenseDTO licenseDTO) {
+	view.showName(groupName, licenseDTO.getLongName());
 	view.showImage(licenseDTO.getImageUrl());
     }
 

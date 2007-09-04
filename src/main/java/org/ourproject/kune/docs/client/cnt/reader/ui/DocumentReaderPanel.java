@@ -28,15 +28,14 @@ import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.gwtext.client.widgets.Button;
 
 public class DocumentReaderPanel extends VerticalPanel implements DocumentReaderView {
-    private Button btnEdit;
     private final HTML content;
+    private ToolBarPanel toolbar;
 
     public DocumentReaderPanel(final DocumentReaderListener listener) {
 	add(createToolBar(listener));
-	btnEdit.setVisible(false);
+	setEditEnabled(false);
 	content = new HTML("this is the content");
 	add(content);
 	this.setWidth("100%");
@@ -45,7 +44,7 @@ public class DocumentReaderPanel extends VerticalPanel implements DocumentReader
     }
 
     private Widget createToolBar(final DocumentReaderListener listener) {
-	ToolBarPanel toolbar = new ToolBarPanel();
+	toolbar = new ToolBarPanel();
 	// i18n
 	toolbar.addButton("Editor", new ClickListener() {
 	    public void onClick(final Widget sender) {
@@ -60,7 +59,7 @@ public class DocumentReaderPanel extends VerticalPanel implements DocumentReader
     }
 
     public void setEditEnabled(final boolean isEnabled) {
-	btnEdit.setVisible(isEnabled);
+	toolbar.setButtonVisible(isEnabled);
     }
 
     public String getContent() {

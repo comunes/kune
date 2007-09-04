@@ -69,9 +69,11 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 	return createGroup(group, user);
     }
 
-    public Group createUserGroup(final User user, final License defaultLicense) {
+    public Group createUserGroup(final User user) {
 	Group group = new Group(user.getShortName(), user.getName());
-	group.setDefaultLicense(defaultLicense);
+	String licenseDefId = properties.getDefaultLicense();
+	License licenseDef = licenseFinder.findByShortName(licenseDefId);
+	group.setDefaultLicense(licenseDef);
 	user.setUserGroup(group);
 	initSocialNetwork(group, group);
 	user.getAdminInGroups().add(group);

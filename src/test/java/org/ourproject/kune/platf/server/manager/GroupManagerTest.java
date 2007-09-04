@@ -28,6 +28,8 @@ public class GroupManagerTest extends PersistenceTest {
     GroupManager groupManager;
     @Inject
     UserManager userManager;
+    @Inject
+    LicenseManager licenseManager;
 
     private User user;
 
@@ -36,10 +38,12 @@ public class GroupManagerTest extends PersistenceTest {
 	openTransaction();
 	assertEquals(0, userFinder.getAll().size());
 	assertEquals(0, groupFinder.getAll().size());
+	assertEquals(0, licenseFinder.getAll().size());
 	user = userManager.createUser("userName", "the user name", "email", "userPassword");
-	License license = new License("by-sa", "Creative Commons Attribution-ShareAlike", "",
+	License licenseDef = new License("by-sa", "Creative Commons Attribution-ShareAlike", "",
 		"http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
-	groupManager.createUserGroup(user, license);
+	licenseManager.persist(licenseDef);
+	groupManager.createUserGroup(user);
     }
 
     @Test

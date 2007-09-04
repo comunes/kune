@@ -66,16 +66,14 @@ public class DatabaseInitializer {
 	String adminEmail = properties.getAdminEmail();
 	String adminPassword = properties.getAdminPassword();
 	User user = new User(adminShortName, adminName, adminEmail, adminPassword);
-	String licenseDef = properties.getDefaultLicense();
-	License license = licenseManager.findByShortname(licenseDef);
-	groupManager.createUserGroup(user, license);
+	groupManager.createUserGroup(user);
 
 	String siteName = properties.getDefaultSiteName();
 	String siteShortName = properties.getDefaultSiteShortName();
 	String siteEmail = properties.getDefaultSiteAdminEmail();
 	String sitePassword = properties.getDefaultSiteAdminPassword();
 	user = new User(siteShortName, siteName, siteEmail, sitePassword);
-	groupManager.createUserGroup(user, license);
+	groupManager.createUserGroup(user);
     }
 
     private void createLicenses() {

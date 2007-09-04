@@ -22,7 +22,6 @@ package org.ourproject.kune.platf.client.state;
 
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
@@ -80,6 +79,7 @@ public class StateManagerDefault implements StateManager {
 		} catch (GroupNotFoundException e) {
 		    Site.error("Group not found");
 		} catch (Throwable e) {
+		    GWT.log("Error getting content", null);
 		    throw new RuntimeException();
 		}
 
@@ -106,9 +106,8 @@ public class StateManagerDefault implements StateManager {
     private void loadContent(final StateDTO state) {
 	GWT.log("content rights:" + state.getContentRights().toString(), null);
 	GWT.log("folder rights:" + state.getFolderRights().toString(), null);
-	GWT.log("content accesslists admins: " + state.getAccessLists().getAdmins().toString(), null);
-	GWT.log("content accesslists edit: " + state.getAccessLists().getEditors().toString(), null);
-	GWT.log("content accesslists view: " + state.getAccessLists().getViewers().toString(), null);
+	GWT.log("license: " + state.getLicense().toString(), null);
+	GWT.log("title: " + state.getTitle(), null);
 	session.setCurrent(state);
 	GroupDTO group = state.getGroup();
 	app.setGroupState(group.getShortName());
@@ -119,11 +118,10 @@ public class StateManagerDefault implements StateManager {
 
 	ClientTool clientTool = app.getTool(toolName);
 	clientTool.setContent(state);
-	// FIXME: a better way to setTitle (and other things)
-	workspace.setContentTitle(state.getTitle());
 	workspace.setContent(clientTool.getContent());
 	workspace.setContext(clientTool.getContext());
-	workspace.getLicenseComponent().setLicense(new LicenseDTO());
+	workspace.getContentTitleComponent().setContentTitle(state.getTitle());
+	workspace.getLicenseComponent().setLicense(state.getGroup().getLongName(), state.getLicense());
 
 	Site.hideProgress();
     }
