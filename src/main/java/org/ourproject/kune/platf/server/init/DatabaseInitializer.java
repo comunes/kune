@@ -78,25 +78,27 @@ public class DatabaseInitializer {
 
     private void createLicenses() {
 	License license = new License("by", "Creative Commons Attribution", "",
-		"http://creativecommons.org/licenses/by/3.0/", true, false, false, "", "");
+		"http://creativecommons.org/licenses/by/3.0/", true, false, false, "", "images/lic/by80x15.png");
 	licenseManager.persist(license);
 	license = new License("by-sa", "Creative Commons Attribution-ShareAlike", "",
-		"http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
+		"http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "images/lic/bysa80x15.png");
 	licenseManager.persist(license);
 	license = new License("by-nd", "Creative Commons Attribution-NoDerivs", "",
-		"http://creativecommons.org/licenses/by-nd/3.0/", true, false, false, "", "");
+		"http://creativecommons.org/licenses/by-nd/3.0/", true, false, false, "", "images/lic/bynd80x15.png");
 	licenseManager.persist(license);
 	license = new License("by-nc", "Creative Commons Attribution-NonCommercial", "",
-		"http://creativecommons.org/licenses/by-nc/3.0/", true, false, false, "", "");
+		"http://creativecommons.org/licenses/by-nc/3.0/", true, false, false, "", "images/lic/bync80x15.png");
 	licenseManager.persist(license);
 	license = new License("by-nc-sa", "Creative Commons Attribution-NonCommercial-ShareAlike", "",
-		"http://creativecommons.org/licenses/by-nc-sa/3.0/", true, false, false, "", "");
+		"http://creativecommons.org/licenses/by-nc-sa/3.0/", true, false, false, "",
+		"images/lic/byncsa80x15.png");
 	licenseManager.persist(license);
 	license = new License("by-nc-nd", "Creative Commons Attribution-NonCommercial-NoDerivs", "",
-		"http://creativecommons.org/licenses/by-nc-nd/3.0/", true, false, false, "", "");
+		"http://creativecommons.org/licenses/by-nc-nd/3.0/", true, false, false, "",
+		"images/lic/byncnd80x15.png");
 	licenseManager.persist(license);
 	license = new License("gfdl", "GNU Free Documentation License", "", "http://www.gnu.org/copyleft/fdl.html",
-		false, true, false, "", "");
+		false, true, false, "", "images/lic/gnu-fdl.gif");
 	licenseManager.persist(license);
     }
 

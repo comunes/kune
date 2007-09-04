@@ -28,6 +28,14 @@ public class PrefetchUtilites {
 	Image.prefetch("images/spin-kune-thund-green.gif");
 	Image.prefetch("css/img/button-bg-hard.gif");
 	Image.prefetch("css/img/button-bg-soft.gif");
-	// TODO: Vicente, prefetch License images
+
+	Image.prefetch("images/lic/gnu-fdl.gif");
+	Image.prefetch("images/lic/bysa80x15.png");
+	Image.prefetch("images/lic/bynd80x15.png");
+	Image.prefetch("images/lic/byncsa80x15.png");
+	Image.prefetch("images/lic/byncnd80x15.png");
+	Image.prefetch("images/lic/bync80x15.png");
+	Image.prefetch("images/lic/by80x15.png");
+
     }
 }
