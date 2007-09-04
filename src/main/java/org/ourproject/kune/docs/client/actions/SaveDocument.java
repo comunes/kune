@@ -20,7 +20,7 @@
 
 package org.ourproject.kune.docs.client.actions;
 
-import org.ourproject.kune.docs.client.ui.cnt.DocumentContent;
+import org.ourproject.kune.docs.client.cnt.DocumentContent;
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.rpc.ContentService;

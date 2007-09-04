@@ -20,9 +20,9 @@
 
 package org.ourproject.kune.docs.client;
 
-import org.ourproject.kune.docs.client.ui.cnt.DocumentContent;
-import org.ourproject.kune.docs.client.ui.cnt.DocumentContentListener;
-import org.ourproject.kune.docs.client.ui.ctx.DocumentContext;
+import org.ourproject.kune.docs.client.cnt.DocumentContent;
+import org.ourproject.kune.docs.client.cnt.DocumentContentListener;
+import org.ourproject.kune.docs.client.ctx.DocumentContext;
 import org.ourproject.kune.platf.client.tool.AbstractClientTool;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 import org.ourproject.kune.workspace.client.dto.StateDTO;

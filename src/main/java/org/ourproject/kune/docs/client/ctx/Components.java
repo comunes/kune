@@ -18,33 +18,32 @@
  *
  */
 
-package org.ourproject.kune.docs.client;
+package org.ourproject.kune.docs.client.ctx;
 
-import org.ourproject.kune.docs.client.cnt.DocumentContent;
-import org.ourproject.kune.docs.client.ctx.DocumentContext;
+import org.ourproject.kune.docs.client.ctx.admin.AdminContext;
+import org.ourproject.kune.docs.client.ctx.folder.FolderContext;
 import org.ourproject.kune.docs.client.ui.DocumentFactory;
 
-class DocToolComponents {
-    private DocumentContent content;
-    private DocumentContext context;
-    private final DocumentClientTool documentClientTool;
+class Components {
 
-    public DocToolComponents(final DocumentClientTool documentClientTool) {
-	this.documentClientTool = documentClientTool;
+    private FolderContext folderContext;
+    private AdminContext adminContext;
+
+    public Components(final DocumentContextPresenter listener) {
     }
 
-    public DocumentContent getContent() {
-	if (content == null) {
-	    content = DocumentFactory.createDocumentContent(documentClientTool);
+    public FolderContext getFolderContext() {
+	if (folderContext == null) {
+	    folderContext = DocumentFactory.createFolderContext();
 	}
-	return content;
+	return folderContext;
     }
 
-    public DocumentContext getContext() {
-	if (context == null) {
-	    context = DocumentFactory.createDocumentContext();
+    public AdminContext getAdminContext() {
+	if (adminContext == null) {
+	    adminContext = DocumentFactory.createAdminContext();
 	}
-	return context;
+	return adminContext;
     }
 
 }
