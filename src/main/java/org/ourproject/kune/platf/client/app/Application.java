@@ -23,7 +23,7 @@ package org.ourproject.kune.platf.client.app;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.state.StateController;
 import org.ourproject.kune.platf.client.tool.ClientTool;
-import org.ourproject.kune.workspace.client.Workspace;
+import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 public interface Application {
     ClientTool getTool(String toolName);

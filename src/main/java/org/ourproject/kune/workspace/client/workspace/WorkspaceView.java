@@ -20,21 +20,25 @@
 
 package org.ourproject.kune.workspace.client.workspace;
 
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.VerticalPanel;
+import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.tool.ToolTrigger;
 
-class ContentTitleBar extends HorizontalPanel {
-    private Label titleLabel = null;
+import com.google.gwt.user.client.ui.Image;
 
-    public ContentTitleBar() {
-	titleLabel = new Label();
-	add(titleLabel);
-	addStyleName("kune-ContentTitleBar");
-	setCellVerticalAlignment(titleLabel, VerticalPanel.ALIGN_MIDDLE);
-    }
+public interface WorkspaceView extends View {
+    void setLogo(String groupName);
 
-    public void setTitleLabel(final String title) {
-	titleLabel.setText(title);
-    }
+    void setLogo(Image image);
+
+    void setContentTitle(String title);
+
+    void setContent(View contentView);
+
+    void setContext(View contextView);
+
+    void setTool(String toolName);
+
+    void adjustSize(int windowWidth, int clientHeight);
+
+    void addTab(ToolTrigger trigger);
 }

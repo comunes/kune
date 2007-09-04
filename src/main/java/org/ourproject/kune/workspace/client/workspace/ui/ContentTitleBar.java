@@ -18,24 +18,23 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.workspace;
+package org.ourproject.kune.workspace.client.workspace.ui;
 
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-class SummaryPanel extends VerticalPanel {
-    public SummaryPanel() {
-	super();
-	addStyleName("kune-SummaryPanel");
+class ContentTitleBar extends HorizontalPanel {
+    private Label titleLabel = null;
+
+    public ContentTitleBar() {
+	titleLabel = new Label();
+	add(titleLabel);
+	addStyleName("kune-ContentTitleBar");
+	setCellVerticalAlignment(titleLabel, VerticalPanel.ALIGN_MIDDLE);
     }
 
-    // public void addDropDown(String title, Widget widget, boolean visible,
-    // String color) {
-    // DropDownPanel d = new DropDownPanel();
-    // d.setWidth("100%");
-    // d.setContent(widget);
-    // d.setContentVisible(visible);
-    // d.setTitle(title);
-    // d.setColor(color);
-    // this.add(d);
-    // }
+    public void setTitleLabel(final String title) {
+	titleLabel.setText(title);
+    }
 }

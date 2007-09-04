@@ -15,7 +15,7 @@
  * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  *
  */
-package org.ourproject.kune.workspace.client.workspace;
+package org.ourproject.kune.workspace.client.workspace.ui;
 
 import java.util.HashMap;
 

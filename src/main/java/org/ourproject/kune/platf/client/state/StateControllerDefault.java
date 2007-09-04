@@ -28,8 +28,8 @@ import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.sitebar.client.Site;
-import org.ourproject.kune.workspace.client.Workspace;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
+import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.History;

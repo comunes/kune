@@ -27,8 +27,10 @@ import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.editor.TextEditorListener;
 import org.ourproject.kune.workspace.client.editor.TextEditorPanel;
 import org.ourproject.kune.workspace.client.editor.TextEditorPresenter;
-import org.ourproject.kune.workspace.client.workspace.WorkspacePanel;
+import org.ourproject.kune.workspace.client.workspace.Workspace;
 import org.ourproject.kune.workspace.client.workspace.WorkspacePresenter;
+import org.ourproject.kune.workspace.client.workspace.WorkspaceView;
+import org.ourproject.kune.workspace.client.workspace.ui.WorkspacePanel;
 
 public class WorkspaceFactory {
 

@@ -18,13 +18,13 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.workspace;
+package org.ourproject.kune.workspace.client.workspace.ui;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.tool.ToolTrigger;
 import org.ourproject.kune.platf.client.ui.BorderDecorator;
-import org.ourproject.kune.workspace.client.WorkspaceView;
+import org.ourproject.kune.workspace.client.workspace.WorkspaceView;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -102,6 +102,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	presencePanel.setContentVisible(true);
 	presencePanel.setTitle("Buddies");
 	presencePanel.setColor("green");
+	presencePanel.setContent(new Label(""));
     }
 
     public void addTab(final ToolTrigger trigger) {

@@ -1,4 +1,4 @@
-package org.ourproject.kune.workspace.client.workspace;
+package org.ourproject.kune.workspace.client.workspace.ui;
 
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.services.Kune;

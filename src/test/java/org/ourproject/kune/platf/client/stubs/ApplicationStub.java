@@ -7,7 +7,7 @@ import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.state.StateController;
 import org.ourproject.kune.platf.client.tool.ClientTool;
-import org.ourproject.kune.workspace.client.Workspace;
+import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 public class ApplicationStub implements Application {
 

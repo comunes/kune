@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 import org.ourproject.kune.workspace.client.workspace.WorkspacePresenter;
+import org.ourproject.kune.workspace.client.workspace.WorkspaceView;
 
 public class WorkspaceTest {
     private WorkspaceView view;

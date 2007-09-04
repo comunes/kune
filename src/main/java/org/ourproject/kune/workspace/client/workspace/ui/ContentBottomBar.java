@@ -18,27 +18,18 @@
  *
  */
 
-package org.ourproject.kune.workspace.client;
+package org.ourproject.kune.workspace.client.workspace.ui;
 
-import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.tool.ToolTrigger;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Widget;
 
-import com.google.gwt.user.client.ui.Image;
+class ContentBottomBar extends HorizontalPanel {
 
-public interface WorkspaceView extends View {
-    void setLogo(String groupName);
+    public ContentBottomBar() {
+	addStyleName("kune-ContentBottomBar");
+    }
 
-    void setLogo(Image image);
-
-    void setContentTitle(String title);
-
-    void setContent(View contentView);
-
-    void setContext(View contextView);
-
-    void setTool(String toolName);
-
-    void adjustSize(int windowWidth, int clientHeight);
-
-    void addTab(ToolTrigger trigger);
+    public void addWidget(final Widget widget) {
+	insert(widget, getWidgetCount() - 1);
+    }
 }

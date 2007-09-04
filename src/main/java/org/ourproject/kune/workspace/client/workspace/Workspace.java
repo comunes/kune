@@ -20,16 +20,30 @@
 
 package org.ourproject.kune.workspace.client.workspace;
 
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Widget;
+import java.util.Iterator;
 
-class ContentBottomBar extends HorizontalPanel {
+import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 
-    public ContentBottomBar() {
-	addStyleName("kune-ContentBottomBar");
-    }
+public interface Workspace {
 
-    public void addWidget(final Widget widget) {
-	insert(widget, getWidgetCount() - 1);
-    }
+    public void showError(Throwable caught);
+
+    public void showGroup(GroupDTO group);
+
+    public void setTool(String toolName);
+
+    public void setContext(WorkspaceComponent contextComponent);
+
+    public void setContent(WorkspaceComponent contentComponent);
+
+    public void setContentTitle(String title);
+
+    public void attachTools(Iterator iterator);
+
+    public View getView();
+
+    public void adjustSize(int windowWidth, int clientHeight);
+
 }

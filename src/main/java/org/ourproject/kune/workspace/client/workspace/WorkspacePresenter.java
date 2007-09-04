@@ -25,8 +25,6 @@ import java.util.Iterator;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.tool.ClientTool;
-import org.ourproject.kune.workspace.client.Workspace;
-import org.ourproject.kune.workspace.client.WorkspaceView;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 
 public class WorkspacePresenter implements Workspace {

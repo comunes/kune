@@ -31,8 +31,8 @@ import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.utils.PrefetchUtilites;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
-import org.ourproject.kune.workspace.client.Workspace;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
+import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 import to.tipit.gwtlib.FireLog;
 
