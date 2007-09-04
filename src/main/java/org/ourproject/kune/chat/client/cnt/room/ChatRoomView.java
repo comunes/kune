@@ -1,4 +1,4 @@
-package org.ourproject.kune.chat.client.ui.cnt.room;
+package org.ourproject.kune.chat.client.cnt.room;
 
 import org.ourproject.kune.platf.client.View;
 

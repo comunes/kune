@@ -1,4 +1,5 @@
 /*
+ *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -17,9 +18,32 @@
  *
  */
 
-package org.ourproject.kune.chat.client.ui.cnt.room;
+package org.ourproject.kune.chat.client;
 
-import org.ourproject.kune.platf.client.Component;
+import org.ourproject.kune.chat.client.cnt.ChatContent;
+import org.ourproject.kune.chat.client.ctx.ChatContext;
 
-public interface ChatRoom extends Component {
+class Components {
+    private ChatContent content;
+    private ChatContext context;
+    private final ChatProvider provider;
+
+    public Components(final ChatProvider provider) {
+	this.provider = provider;
+    }
+
+    public ChatContent getContent() {
+	if (content == null) {
+	    content = ChatFactory.createChatContent();
+	}
+	return content;
+    }
+
+    public ChatContext getContext() {
+	if (context == null) {
+	    context = ChatFactory.createChatContext();
+	}
+	return context;
+    }
+
 }

@@ -18,16 +18,13 @@
  *
  */
 
-package org.ourproject.kune.chat.client.ui.ctx;
+package org.ourproject.kune.chat.client.ctx;
 
-import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
-import com.google.gwt.user.client.ui.Label;
+public interface ChatContext extends WorkspaceComponent {
 
-public class TempPanel extends Label implements View {
-
-    public TempPanel() {
-	super("chat context: por defexto");
-    }
+    void setState(StateDTO state);
 
 }

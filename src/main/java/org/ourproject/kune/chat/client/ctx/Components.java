@@ -1,4 +1,5 @@
 /*
+ *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -17,8 +18,23 @@
  *
  */
 
-package org.ourproject.kune.chat.client.ui.cnt.room;
+package org.ourproject.kune.chat.client.ctx;
 
-public interface ChatRoomListener {
-    void onEnterRoom();
+import org.ourproject.kune.chat.client.ChatFactory;
+import org.ourproject.kune.chat.client.ctx.rooms.RoomsAdmin;
+
+class Components {
+
+    private RoomsAdmin roomsAdmin;
+
+    public Components(final ChatContextPresenter chatContextPresenter) {
+    }
+
+    public RoomsAdmin getRoomsAdmin() {
+	if (roomsAdmin == null) {
+	    roomsAdmin = ChatFactory.createRoomsAdmin();
+	}
+	return roomsAdmin;
+    }
+
 }

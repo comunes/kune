@@ -18,8 +18,10 @@
  *
  */
 
-package org.ourproject.kune.chat.client.ui.cnt.room;
+package org.ourproject.kune.chat.client.cnt.room.ui;
 
+import org.ourproject.kune.chat.client.cnt.room.ChatRoomListener;
+import org.ourproject.kune.chat.client.cnt.room.ChatRoomView;
 import org.ourproject.kune.workspace.client.ui.ToolBarPanel;
 
 import com.google.gwt.user.client.ui.ClickListener;

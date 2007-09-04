@@ -20,10 +20,10 @@
 
 package org.ourproject.kune.chat.client.cnt;
 
+import org.ourproject.kune.chat.client.ChatFactory;
 import org.ourproject.kune.chat.client.cnt.info.ChatInfo;
+import org.ourproject.kune.chat.client.cnt.room.ChatRoom;
 import org.ourproject.kune.chat.client.rooms.MultiRoom;
-import org.ourproject.kune.chat.client.ui.ChatFactory;
-import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoom;
 
 class Components {
 

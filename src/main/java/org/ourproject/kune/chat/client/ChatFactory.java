@@ -18,13 +18,20 @@
  *
  */
 
-package org.ourproject.kune.chat.client.ui;
+package org.ourproject.kune.chat.client;
 
-import org.ourproject.kune.chat.client.ChatProvider;
 import org.ourproject.kune.chat.client.cnt.ChatContent;
 import org.ourproject.kune.chat.client.cnt.ChatContentPresenter;
 import org.ourproject.kune.chat.client.cnt.info.ChatInfo;
 import org.ourproject.kune.chat.client.cnt.info.ui.ChatInfoPanel;
+import org.ourproject.kune.chat.client.cnt.room.ChatRoom;
+import org.ourproject.kune.chat.client.cnt.room.ChatRoomListener;
+import org.ourproject.kune.chat.client.cnt.room.ChatRoomPresenter;
+import org.ourproject.kune.chat.client.cnt.room.ui.ChatRoomPanel;
+import org.ourproject.kune.chat.client.ctx.ChatContext;
+import org.ourproject.kune.chat.client.ctx.ChatContextPresenter;
+import org.ourproject.kune.chat.client.ctx.rooms.RoomsAdmin;
+import org.ourproject.kune.chat.client.ctx.rooms.RoomsAdminPresenter;
 import org.ourproject.kune.chat.client.rooms.MultiRoom;
 import org.ourproject.kune.chat.client.rooms.MultiRoomListener;
 import org.ourproject.kune.chat.client.rooms.MultiRoomPresenter;
@@ -37,23 +44,15 @@ import org.ourproject.kune.chat.client.rooms.RoomUser.UserType;
 import org.ourproject.kune.chat.client.rooms.ui.MultiRoomPanel;
 import org.ourproject.kune.chat.client.rooms.ui.RoomPanel;
 import org.ourproject.kune.chat.client.rooms.ui.RoomUserListPanel;
-import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoom;
-import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomListener;
-import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomPanel;
-import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomPresenter;
-import org.ourproject.kune.chat.client.ui.ctx.ChatContext;
-import org.ourproject.kune.chat.client.ui.ctx.ChatContextPresenter;
-import org.ourproject.kune.chat.client.ui.ctx.rooms.RoomsAdmin;
-import org.ourproject.kune.chat.client.ui.ctx.rooms.RoomsAdminPresenter;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckPanel;
 import org.ourproject.kune.workspace.client.ui.WorkspaceFactory;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 
 public class ChatFactory {
 
-    public static ChatContent createChatContent(final ChatProvider provider) {
+    public static ChatContent createChatContent() {
 	WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
-	ChatContentPresenter presenter = new ChatContentPresenter(provider, panel);
+	ChatContentPresenter presenter = new ChatContentPresenter(panel);
 	return presenter;
     }
 

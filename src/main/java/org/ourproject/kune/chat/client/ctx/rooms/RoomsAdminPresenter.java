@@ -18,7 +18,7 @@
  *
  */
 
-package org.ourproject.kune.chat.client.ui.ctx.rooms;
+package org.ourproject.kune.chat.client.ctx.rooms;
 
 import org.ourproject.kune.chat.client.ChatClientTool;
 import org.ourproject.kune.docs.client.actions.DocsEvents;

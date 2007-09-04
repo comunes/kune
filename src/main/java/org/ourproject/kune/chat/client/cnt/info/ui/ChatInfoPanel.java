@@ -1,12 +1,10 @@
 package org.ourproject.kune.chat.client.cnt.info.ui;
 
-import org.ourproject.kune.chat.client.ChatState;
 import org.ourproject.kune.chat.client.cnt.info.ChatInfo;
-import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomListener;
+import org.ourproject.kune.chat.client.cnt.room.ChatRoomListener;
 import org.ourproject.kune.platf.client.View;
 
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class ChatInfoPanel extends VerticalPanel implements ChatInfo, View {
@@ -17,17 +15,6 @@ public class ChatInfoPanel extends VerticalPanel implements ChatInfo, View {
 	add(flow);
 	stateArea = new VerticalPanel();
 	add(stateArea);
-    }
-
-    public void setChatState(final ChatState state) {
-	stateArea.clear();
-	stateArea.add(new Label("base: " + state.httpBase));
-	stateArea.add(new Label("domain: " + state.domain));
-	if (state.user != null) {
-	    stateArea.add(new Label("user: " + state.user.userName));
-	    stateArea.add(new Label("password: " + state.user.password));
-	    stateArea.add(new Label("resource: " + state.user.resource));
-	}
     }
 
     public View getView() {

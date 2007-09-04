@@ -18,9 +18,9 @@
  *
  */
 
-package org.ourproject.kune.chat.client.ui.ctx;
+package org.ourproject.kune.chat.client.ctx;
 
-import org.ourproject.kune.chat.client.ui.ctx.rooms.RoomsAdmin;
+import org.ourproject.kune.chat.client.ctx.rooms.RoomsAdmin;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
 import org.ourproject.kune.workspace.client.dto.StateDTO;

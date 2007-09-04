@@ -19,11 +19,11 @@
 
 package org.ourproject.kune.sitebar.client.bar;
 
+import org.ourproject.kune.chat.client.ChatFactory;
 import org.ourproject.kune.chat.client.rooms.MultiRoom;
 import org.ourproject.kune.chat.client.rooms.MultiRoomListener;
 import org.ourproject.kune.chat.client.rooms.Room;
 import org.ourproject.kune.chat.client.rooms.RoomUser;
-import org.ourproject.kune.chat.client.ui.ChatFactory;
 
 public class MultiChatExample {
 

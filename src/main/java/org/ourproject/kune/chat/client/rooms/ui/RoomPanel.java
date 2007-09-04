@@ -19,9 +19,9 @@
 
 package org.ourproject.kune.chat.client.rooms.ui;
 
+import org.ourproject.kune.chat.client.ChatTextFormatter;
 import org.ourproject.kune.chat.client.rooms.RoomPresenter;
 import org.ourproject.kune.chat.client.rooms.RoomView;
-import org.ourproject.kune.chat.client.ui.ChatTextFormatter;
 import org.ourproject.kune.platf.client.ui.HorizontalLine;
 
 import to.tipit.gwtlib.FireLog;

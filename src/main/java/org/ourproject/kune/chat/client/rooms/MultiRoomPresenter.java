@@ -20,8 +20,8 @@
 
 package org.ourproject.kune.chat.client.rooms;
 
+import org.ourproject.kune.chat.client.ChatFactory;
 import org.ourproject.kune.chat.client.rooms.RoomUser.UserType;
-import org.ourproject.kune.chat.client.ui.ChatFactory;
 
 public class MultiRoomPresenter implements MultiRoom, RoomListener {
     private MultiRoomView view;

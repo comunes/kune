@@ -18,23 +18,15 @@
  *
  */
 
-package org.ourproject.kune.chat.client.ui.ctx;
+package org.ourproject.kune.chat.client.ctx.rooms;
 
-import org.ourproject.kune.chat.client.ui.ChatFactory;
-import org.ourproject.kune.chat.client.ui.ctx.rooms.RoomsAdmin;
+import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
+import org.ourproject.kune.platf.client.dto.ContainerDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
 
-class Components {
+public interface RoomsAdmin {
+    View getView();
 
-    private RoomsAdmin roomsAdmin;
-
-    public Components(final ChatContextPresenter chatContextPresenter) {
-    }
-
-    public RoomsAdmin getRoomsAdmin() {
-	if (roomsAdmin == null) {
-	    roomsAdmin = ChatFactory.createRoomsAdmin();
-	}
-	return roomsAdmin;
-    }
-
+    public void showRoom(final StateToken token, final ContainerDTO container, final AccessRightsDTO rights);
 }

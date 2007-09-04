@@ -24,15 +24,14 @@ import java.util.HashMap;
 
 import org.ourproject.kune.chat.client.ChatClientTool;
 import org.ourproject.kune.chat.client.ChatEvents;
-import org.ourproject.kune.chat.client.ChatProvider;
 import org.ourproject.kune.chat.client.cnt.info.ChatInfo;
+import org.ourproject.kune.chat.client.cnt.room.ChatRoom;
+import org.ourproject.kune.chat.client.cnt.room.ChatRoomListener;
 import org.ourproject.kune.chat.client.rooms.MultiRoom;
 import org.ourproject.kune.chat.client.rooms.MultiRoomListener;
 import org.ourproject.kune.chat.client.rooms.Room;
 import org.ourproject.kune.chat.client.rooms.RoomUser;
 import org.ourproject.kune.chat.client.rooms.RoomUser.UserType;
-import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoom;
-import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomListener;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.ui.UnknowComponent;
@@ -46,11 +45,8 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener, Mult
     private final WorkspaceDeckView view;
     private final Components components;
     private final HashMap roomNamesToTooms;
-    private final ChatProvider provider;
 
-    // FIXME: do not depend on provider. use actions!
-    public ChatContentPresenter(final ChatProvider provider, final WorkspaceDeckView view) {
-	this.provider = provider;
+    public ChatContentPresenter(final WorkspaceDeckView view) {
 	this.view = view;
 	this.components = new Components(this);
 	this.roomNamesToTooms = new HashMap();
@@ -70,7 +66,6 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener, Mult
 	String typeId = state.getTypeId();
 	if (typeId.equals(ChatClientTool.TYPE_ROOT)) {
 	    ChatInfo info = components.getChatInfo();
-	    info.setChatState(provider.getChat().getState());
 	    view.show(info.getView());
 	} else if (typeId.equals(ChatClientTool.TYPE_ROOM)) {
 	    ChatRoom viewer = components.getChatRoom();

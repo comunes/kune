@@ -17,7 +17,7 @@
  *
  */
 
-package org.ourproject.kune.chat.client.ui;
+package org.ourproject.kune.chat.client;
 
 import java.util.HashMap;
 
