@@ -37,6 +37,7 @@ public class WorkspacePresenter implements Workspace {
     public WorkspacePresenter(final WorkspaceView view) {
 	this.view = view;
 	this.components = new Components(this);
+	view.setBottom(components.getLicenseComponent().getView());
     }
 
     public void showError(final Throwable caught) {

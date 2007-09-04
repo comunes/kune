@@ -41,4 +41,6 @@ public interface WorkspaceView extends View {
     void adjustSize(int windowWidth, int clientHeight);
 
     void addTab(ToolTrigger trigger);
+
+    void setBottom(View view);
 }

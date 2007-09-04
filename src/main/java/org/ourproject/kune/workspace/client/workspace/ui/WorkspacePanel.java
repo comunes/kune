@@ -41,6 +41,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     private final HorizontalSplitPanel cntcxtHSP;
     private final VerticalPanel contextVP;
     private final VerticalPanel contentVP;
+    private ContentBottomBar contentBottomBar;
 
     public WorkspacePanel() {
 	VerticalPanel generalVP = new VerticalPanel();
@@ -64,7 +65,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 
 	summaryExample(summaryPanel);
 
-	ContentToolBar contextToolBar = new ContentToolBar();
+	ContentToolBar contentToolBar = new ContentToolBar();
 	contentTitleBar = new ContentTitleBar();
 	cntcxtHSP = new HorizontalSplitPanel();
 	contentVP = new VerticalPanel();
@@ -72,13 +73,13 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	cntcxtHSP.setLeftWidget(contentVP);
 	cntcxtHSP.setRightWidget(contextVP);
 	String mainBorderColor = Kune.getInstance().c.getMainBorder();
-	ContentBottomBar contextBottomBar = new ContentBottomBar();
-	BorderDecorator contextToolBarBorderDec = new BorderDecorator(contextToolBar, BorderDecorator.TOPLEFT);
-	groupAreaVP.add(contextToolBarBorderDec);
-	contextToolBarBorderDec.setColor(mainBorderColor);
+	contentBottomBar = new ContentBottomBar();
+	BorderDecorator contentToolBarBorderDec = new BorderDecorator(contentToolBar, BorderDecorator.TOPLEFT);
+	groupAreaVP.add(contentToolBarBorderDec);
+	contentToolBarBorderDec.setColor(mainBorderColor);
 	groupAreaVP.add(contentTitleBar);
 	groupAreaVP.add(cntcxtHSP);
-	BorderDecorator borderDecorator = new BorderDecorator(contextBottomBar, BorderDecorator.BOTTOMLEFT);
+	BorderDecorator borderDecorator = new BorderDecorator(contentBottomBar, BorderDecorator.BOTTOMLEFT);
 	groupAreaVP.add(borderDecorator);
 	borderDecorator.setColor(mainBorderColor);
 	contentVP.addStyleName("kune-WorkspacePanel-Content");
@@ -149,6 +150,10 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 
 	cntcxtHSP.setSize("" + contentWidth + "px", "" + contentHeight + "px");
 	cntcxtHSP.setSplitPosition("" + (contentWidth - 175) + "px");
+    }
+
+    public void setBottom(View view) {
+	contentBottomBar.add((Widget) view);
     }
 
 }

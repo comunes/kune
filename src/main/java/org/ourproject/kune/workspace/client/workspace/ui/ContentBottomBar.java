@@ -21,15 +21,11 @@
 package org.ourproject.kune.workspace.client.workspace.ui;
 
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 class ContentBottomBar extends HorizontalPanel {
 
     public ContentBottomBar() {
+	// TODO DELETE THIS only HP
 	addStyleName("kune-ContentBottomBar");
-    }
-
-    public void addWidget(final Widget widget) {
-	insert(widget, getWidgetCount() - 1);
     }
 }
