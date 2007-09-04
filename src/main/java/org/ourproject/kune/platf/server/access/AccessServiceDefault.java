@@ -26,6 +26,7 @@ import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.User;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -59,12 +60,12 @@ public class AccessServiceDefault implements AccessService {
 	return access;
     }
 
-    public Access getContentAccess(final Long contentId, final Group group, final AccessType accessType)
+    public Content accessToContent(final Long contentId, final User user, final AccessType accessType)
 	    throws AccessViolationException, ContentNotFoundException {
 	Content descriptor = finder.getContent(contentId);
 	Access access = new Access(descriptor, null);
-	addContentRights(access, group);
-	return check(access, access.getContentRights(), accessType);
+	addContentRights(access, user.getUserGroup());
+	return check(access, access.getContentRights(), accessType).getContent();
     }
 
     public Access getFolderAccess(final Long folderId, final Group group, final AccessType accessType)

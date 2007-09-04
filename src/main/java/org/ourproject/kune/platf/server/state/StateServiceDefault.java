@@ -31,7 +31,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class StateServiceDefault implements StateService {
     public State create(final Access access) {
-	Content content = access.getDescriptor();
+	Content content = access.getContent();
 	Container container = content.getFolder();
 	State state = new State();
 

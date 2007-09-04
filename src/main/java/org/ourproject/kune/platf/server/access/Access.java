@@ -26,15 +26,15 @@ import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 
 public class Access {
-    private Content descriptor;
+    private Content content;
+    private Container container;
     private AccessLists contentAccessLists;
     private AccessLists folderAccessLists;
     private AccessRights contentRights;
     private AccessRights folderRights;
-    private Container container;
 
     public Access(final Content descriptor, final Container container) {
-	this.descriptor = descriptor;
+	this.content = descriptor;
 	contentAccessLists = descriptor != null ? getContentAccessList(descriptor) : null;
 	this.container = container;
 	folderAccessLists = container != null ? getFolderAccessLists(container) : null;
@@ -49,13 +49,13 @@ public class Access {
 	folderAccessLists = container != null ? getFolderAccessLists(container) : null;
     }
 
-    public void setDescriptor(final Content descriptor) {
-	this.descriptor = descriptor;
+    public void setContent(final Content descriptor) {
+	this.content = descriptor;
 	contentAccessLists = descriptor != null ? getContentAccessList(descriptor) : null;
     }
 
-    public Content getDescriptor() {
-	return descriptor;
+    public Content getContent() {
+	return content;
     }
 
     public AccessLists getContentAccessLists() {
@@ -112,17 +112,17 @@ public class Access {
 	    accessLists = descriptor.getAccessLists();
 	} else {
 	    SocialNetwork socialNetwork = descriptor.getFolder().getOwner().getSocialNetwork();
-	    accessLists = socialNetwork.getAccessList();
+	    accessLists = socialNetwork.getAccessLists();
 	}
 	return accessLists;
     }
 
     private AccessLists getFolderAccessLists(final Container container) {
-	return container.getOwner().getSocialNetwork().getAccessList();
+	return container.getOwner().getSocialNetwork().getAccessLists();
     }
 
     public void setDescriptorWidthFolderRights(final Content content) {
-	this.descriptor = content;
+	this.content = content;
 	this.contentRights = folderRights;
     }
 

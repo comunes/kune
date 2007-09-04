@@ -26,7 +26,7 @@ import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 
 public interface CreationService {
-    Content saveContent(Group userGroup, Content descriptor, String content);
+    Content saveContent(User editor, Content descriptor, String content);
 
     Content createContent(String title, User user, Container container);
 

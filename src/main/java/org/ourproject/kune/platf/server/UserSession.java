@@ -20,20 +20,37 @@
 
 package org.ourproject.kune.platf.server;
 
+import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.users.UserManager;
+
+import com.google.inject.Inject;
 import com.google.inject.servlet.SessionScoped;
 
 @SessionScoped
 public class UserSession {
     private String hash;
     private Long userId;
+    private final UserManager manager;
 
-    public UserSession() {
+    @Inject
+    public UserSession(final UserManager manager) {
+	this.manager = manager;
     }
 
+    public User getUser() {
+	return manager.find(userId);
+    }
+
+    public void setUser(final User user) {
+	userId = user.getId();
+    }
+
+    @Deprecated
     public Long getUserId() {
 	return userId;
     }
 
+    @Deprecated
     public void setUserId(final Long userId) {
 	this.userId = userId;
     }
@@ -48,6 +65,10 @@ public class UserSession {
 
     public void setHash(final String hash) {
 	this.hash = hash;
+    }
+
+    public boolean isUserLoggedIn() {
+	return userId != null;
     }
 
 }

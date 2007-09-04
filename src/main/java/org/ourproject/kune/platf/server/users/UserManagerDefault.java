@@ -75,7 +75,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     }
 
     public User find(final Long userId) {
-	return userId != null ? super.find(userId) : User.NONE;
+	return userId != null ? super.find(userId) : User.UNKNOWN_USER;
     }
 
 }

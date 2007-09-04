@@ -63,14 +63,14 @@ public class User implements HasId {
 
     // see: http://docs.codehaus.org/display/PICO/Good+Citizen:
     // Never expect or return null
-    public static final User NONE = new User();
+    public static final User UNKNOWN_USER = new User();
 
     public User(final String shortName, final String name, final String email, final String password) {
 	this.shortName = shortName;
 	this.name = name;
 	this.email = email;
 	this.password = password;
-	this.userGroup = null;
+	this.userGroup = Group.NO_GROUP;
 	this.adminInGroups = new GroupList();
 	this.editorInGroups = new GroupList();
     }
@@ -144,8 +144,8 @@ public class User implements HasId {
 	this.shortName = shortName;
     }
 
-    public static boolean isAUser(final User user) {
-	return user != NONE;
+    public static boolean isKownUser(final User user) {
+	return user != UNKNOWN_USER;
     }
 
     public GroupList getAdminInGroups() {

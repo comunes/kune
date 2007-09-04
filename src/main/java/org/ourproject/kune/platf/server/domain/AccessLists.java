@@ -30,7 +30,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "access_lists")
 public class AccessLists {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -47,11 +48,11 @@ public class AccessLists {
     }
 
     public Long getId() {
-        return id;
+	return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(final Long id) {
+	this.id = id;
     }
 
     public void addAdmin(final Group group) {
@@ -77,5 +78,4 @@ public class AccessLists {
     public GroupList getViewers() {
 	return viewers;
     }
-
 }

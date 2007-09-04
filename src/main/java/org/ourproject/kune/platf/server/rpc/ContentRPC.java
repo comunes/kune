@@ -76,13 +76,12 @@ public class ContentRPC implements ContentService, RPC {
 	Group contentGroup;
 	Group loggedGroup;
 
-	Long userId = session.getUserId();
-	if (userId == null) {
-	    contentGroup = groupManager.getDefaultGroup();
-	    loggedGroup = null;
-	} else {
-	    contentGroup = groupManager.getGroupOfUserWithId(userId);
+	if (session.isUserLoggedIn()) {
+	    contentGroup = groupManager.getGroupOfUserWithId(session.getUserId());
 	    loggedGroup = contentGroup;
+	} else {
+	    contentGroup = groupManager.getDefaultGroup();
+	    loggedGroup = Group.NO_GROUP;
 	}
 
 	Access access = accessManager.getAccess(token, contentGroup, loggedGroup, AccessType.READ);
@@ -92,13 +91,13 @@ public class ContentRPC implements ContentService, RPC {
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
-    public int save(final String user, final String documentId, final String content) throws AccessViolationException,
-	    ContentNotFoundException {
+    public int save(final String userHash, final String documentId, final String textContent)
+	    throws AccessViolationException, ContentNotFoundException {
 
 	Long contentId = parseId(documentId);
-	Group userGroup = groupManager.getGroupOfUserWithId(session.getUserId());
-	Access access = accessManager.getContentAccess(contentId, userGroup, AccessType.EDIT);
-	Content descriptor = creationService.saveContent(userGroup, access.getDescriptor(), content);
+	User user = session.getUser();
+	Content content = accessManager.accessToContent(contentId, user, AccessType.EDIT);
+	Content descriptor = creationService.saveContent(user, content, textContent);
 	return descriptor.getVersion();
     }
 
@@ -107,7 +106,7 @@ public class ContentRPC implements ContentService, RPC {
     public StateDTO addContent(final String userHash, final Long parentFolderId, final String title)
 	    throws AccessViolationException, ContentNotFoundException {
 
-	User user = userManager.find(session.getUserId());
+	User user = session.getUser();
 	Group group = groupManager.getGroupOfUserWithId(session.getUserId());
 	Access access = accessManager.getFolderAccess(parentFolderId, group, AccessType.EDIT);
 	access.setDescriptorWidthFolderRights(creationService.createContent(title, user, access.getFolder()));
@@ -119,6 +118,7 @@ public class ContentRPC implements ContentService, RPC {
     @Transactional(type = TransactionType.READ_WRITE)
     public StateDTO addFolder(final String hash, final String groupShotName, final Long parentFolderId,
 	    final String title) throws ContentNotFoundException, AccessViolationException, GroupNotFoundException {
+	User user = userManager.find(session.getUserId());
 	Group group = groupManager.findByShortName(groupShotName);
 
 	Access access = accessManager.getFolderAccess(parentFolderId, group, AccessType.EDIT);

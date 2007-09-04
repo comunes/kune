@@ -22,9 +22,8 @@ package org.ourproject.kune.platf.server.content;
 
 import javax.persistence.EntityManager;
 
-import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Container;
-import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Revision;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.impl.DefaultManager;
@@ -52,8 +51,9 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
 	return persist(descriptor);
     }
 
-    public Content save(final Group userGroup, final Content descriptor, final String content) {
+    public Content save(final User editor, final Content descriptor, final String content) {
 	Revision revision = new Revision();
+	revision.setEditor(editor);
 	revision.setTitle(descriptor.getTitle());
 	revision.setDataContent(content);
 	descriptor.addRevision(revision);

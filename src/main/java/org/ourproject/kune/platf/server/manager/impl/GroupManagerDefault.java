@@ -83,19 +83,21 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     }
 
     public Group createGroup(final Group group, final User user) throws SerializableException {
-	try {
-	    if (user == User.NONE) {
+	if (User.isKownUser(user)) {
+	    try {
+		initSocialNetwork(group, user.getUserGroup());
+		user.getAdminInGroups().add(group);
+		initGroup(user, group);
+		return group;
+	    } catch (EntityExistsException e) {
 		// i18n
-		throw new SerializableException("Must be logged");
+		throw new SerializableException("Already exist a group with this name");
 	    }
-	    initSocialNetwork(group, user.getUserGroup());
-	    user.getAdminInGroups().add(group);
-	    initGroup(user, group);
-	    return group;
-	} catch (EntityExistsException e) {
+	} else {
 	    // i18n
-	    throw new SerializableException("Already exist a group with this name");
+	    throw new SerializableException("Must be logged");
 	}
+
     }
 
     private void initSocialNetwork(final Group group, final Group userGroup) {

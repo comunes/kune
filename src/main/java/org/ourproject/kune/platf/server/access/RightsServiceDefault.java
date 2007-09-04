@@ -30,53 +30,42 @@ import org.ourproject.kune.platf.server.domain.SocialNetwork;
 
 class RightsServiceDefault implements RightsService {
     // TODO: check performance
-    HashSet<Group> visited;
 
     public AccessRights get(final Group userGroup, final AccessLists accessList) {
-	visited = new HashSet<Group>();
-	AccessRights accessRights = new AccessRights();
 	boolean isAdministrable = false;
 	boolean isEditable = false;
 	boolean isVisible = false;
 
 	// FIXME: para salir del paso
 	// hay que pensar: "por todo el mundo" y "por nadie" en las access list
-	if (userGroup == null) {
+	if (userGroup == Group.NO_GROUP) {
 	    return new AccessRights(false, false, true);
 	}
 
 	// FIXME, future: site and admin users can admin, edit, view everything
 	// (not now while we are doing tests)
-
-	isAdministrable = depthFirstSearch(userGroup, accessList.getAdmins(), AccessRights.ADMIN);
-	if (!isAdministrable) {
-	    visited.clear();
-	    isEditable = depthFirstSearch(userGroup, accessList.getEditors(), AccessRights.EDIT);
-	    if (!isEditable) {
-		visited.clear();
-		if (accessList.getViewers().isEmpty())
-		    // If nobody in viewers then is visible for everybody
-		    // FIXME: the same with edit? wiki mode?
-		    isVisible = true;
-		else
-		    isVisible = depthFirstSearch(userGroup, accessList.getViewers(), AccessRights.VIEW);
-	    } else {
-		isVisible = true;
-	    }
-	} else {
-	    isEditable = true;
-	    isVisible = true;
+	isVisible = isEditable = isAdministrable = depthFirstSearch(userGroup, accessList.getAdmins(),
+		AccessRights.ADMIN);
+	if (!isEditable) {
+	    isVisible = isEditable = depthFirstSearch(userGroup, accessList.getEditors(), AccessRights.EDIT);
 	}
-	accessRights.setAdministrable(isAdministrable);
-	accessRights.setEditable(isEditable);
-	accessRights.setVisible(isVisible);
-	return accessRights;
+	if (!isVisible) {
+	    isVisible = accessList.getViewers().isEmpty()
+		    || depthFirstSearch(userGroup, accessList.getViewers(), AccessRights.VIEW);
+	}
+
+	return new AccessRights(isAdministrable, isEditable, isVisible);
+    }
+
+    private boolean depthFirstSearch(final Group searchedGroup, final GroupList list, final int type) {
+	return depthFirstSearch(new HashSet<Group>(), searchedGroup, list, type);
     }
 
     /*
      * http://en.wikipedia.org/wiki/Depth-first_search
      */
-    private boolean depthFirstSearch(final Group searchedGroup, final GroupList list, final int type) {
+    private boolean depthFirstSearch(final HashSet<Group> visited, final Group searchedGroup, final GroupList list,
+	    final int type) {
 	if (list.contains(searchedGroup)) {
 	    return true;
 	}
@@ -85,14 +74,8 @@ class RightsServiceDefault implements RightsService {
 	for (Group group : noVisitedYet) {
 	    visited.add(group);
 	    SocialNetwork socialNetwork = group.getSocialNetwork();
-	    AccessLists accessLists = socialNetwork.getAccessList();
-	    if (type == AccessRights.ADMIN) {
-		return depthFirstSearch(searchedGroup, accessLists.getAdmins(), type);
-	    } else if (type == AccessRights.EDIT) {
-		return depthFirstSearch(searchedGroup, accessLists.getEditors(), type);
-	    } else if (type == AccessRights.VIEW) {
-		return depthFirstSearch(searchedGroup, accessLists.getViewers(), type);
-	    }
+	    GroupList groupList = socialNetwork.getGroupList(type);
+	    return depthFirstSearch(visited, searchedGroup, groupList, type);
 	}
 	return false;
     }

@@ -44,6 +44,10 @@ import com.wideplay.warp.persist.dao.Finder;
 @Table(name = "groups")
 public class Group implements HasId {
 
+    // see: http://docs.codehaus.org/display/PICO/Good+Citizen:
+    // Never expect or return null
+    public static Group NO_GROUP = null;
+
     @Id
     @GeneratedValue
     private Long id;
@@ -200,7 +204,7 @@ public class Group implements HasId {
 	return defaultLicense;
     }
 
-    public void setDefaultLicense(License defaultLicense) {
+    public void setDefaultLicense(final License defaultLicense) {
 	this.defaultLicense = defaultLicense;
     }
 

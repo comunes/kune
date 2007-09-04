@@ -19,29 +19,30 @@ import com.google.inject.Inject;
 
 public class DatabaseInitializationTest {
     @Inject
-    GroupManager manager;
+    GroupManager groupManager;
     @Inject
     LicenseManager licenseManager;
-    private Group group;
+
+    private Group defaultGroup;
 
     @Before
     public void init() {
 	new IntegrationTestHelper(this);
-	group = manager.getDefaultGroup();
+	defaultGroup = groupManager.getDefaultGroup();
     }
 
     @Test
     public void testToolConfiguration() {
-	assertNotNull(group);
-	ToolConfiguration docToolConfig = group.getToolConfiguration(DocumentServerTool.NAME);
+	assertNotNull(defaultGroup);
+	ToolConfiguration docToolConfig = defaultGroup.getToolConfiguration(DocumentServerTool.NAME);
 	assertNotNull(docToolConfig);
-	ToolConfiguration chatToolConfig = group.getToolConfiguration(ChatServerTool.NAME);
+	ToolConfiguration chatToolConfig = defaultGroup.getToolConfiguration(ChatServerTool.NAME);
 	assertNotNull(chatToolConfig);
     }
 
     @Test
     public void testDefaultDocumentContent() {
-	Content content = group.getDefaultContent();
+	Content content = defaultGroup.getDefaultContent();
 	assertEquals(DocumentServerTool.TYPE_DOCUMENT, content.getTypeId());
 	Container rootDocFolder = content.getFolder();
 	assertEquals("/" + DocumentServerTool.ROOT_NAME, rootDocFolder.getAbsolutePath());
@@ -49,9 +50,9 @@ public class DatabaseInitializationTest {
 
     @Test
     public void testDefaultContentAndLicenses() {
-	assertNotNull(group.getDefaultContent());
+	assertNotNull(defaultGroup.getDefaultContent());
 	assertTrue(licenseManager.getAll().size() > 0);
-	assertNotNull(group.getDefaultLicense());
+	assertNotNull(defaultGroup.getDefaultLicense());
     }
 
 }

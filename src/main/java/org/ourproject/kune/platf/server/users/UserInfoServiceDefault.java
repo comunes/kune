@@ -15,7 +15,7 @@ public class UserInfoServiceDefault implements UserInfoService {
 
     public UserInfo buildInfo(final User user) {
 	UserInfo info = null;
-	if (User.isAUser(user)) {
+	if (User.isKownUser(user)) {
 	    info = new UserInfo();
 
 	    info.setName(user.getName());

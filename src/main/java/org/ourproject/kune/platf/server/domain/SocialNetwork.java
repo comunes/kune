@@ -27,6 +27,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.ourproject.kune.platf.server.access.AccessRights;
+
 @Entity
 @Table(name = "social_networks")
 public class SocialNetwork {
@@ -35,13 +37,13 @@ public class SocialNetwork {
     Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    AccessLists accessList;
+    AccessLists accessLists;
 
     @OneToOne(cascade = CascadeType.ALL)
     GroupList pendingCollaborators;
 
     public SocialNetwork() {
-	accessList = new AccessLists();
+	accessLists = new AccessLists();
 	pendingCollaborators = new GroupList();
     }
 
@@ -57,8 +59,8 @@ public class SocialNetwork {
 	this.pendingCollaborators = pendingCollaborators;
     }
 
-    public void setAccessList(final AccessLists accessList) {
-	this.accessList = accessList;
+    public void setAccessLists(final AccessLists accessList) {
+	this.accessLists = accessList;
     }
 
     public void setId(final Long id) {
@@ -66,23 +68,34 @@ public class SocialNetwork {
     }
 
     public void addAdmin(final Group group) {
-	accessList.addAdmin(group);
+	accessLists.addAdmin(group);
     }
 
     public void addCollaborator(final Group group) {
-	accessList.addEditor(group);
+	accessLists.addEditor(group);
     }
 
     public void addViewer(final Group group) {
-	accessList.addViewer(group);
+	accessLists.addViewer(group);
     }
 
     public void addPendingCollaborator(final Group group) {
 	pendingCollaborators.add(group);
     }
 
-    public AccessLists getAccessList() {
-	return accessList;
+    public AccessLists getAccessLists() {
+	return accessLists;
     }
 
+    public GroupList getGroupList(final int type) {
+	if (type == AccessRights.ADMIN) {
+	    return accessLists.getAdmins();
+	} else if (type == AccessRights.EDIT) {
+	    return accessLists.getEditors();
+	} else if (type == AccessRights.VIEW) {
+	    return accessLists.getViewers();
+	} else {
+	    throw new RuntimeException();
+	}
+    }
 }

@@ -24,17 +24,19 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
+import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.User;
 
 public interface AccessService {
 
     Access getAccess(StateToken token, Group defaultGroup, Group loggedGroup, AccessType accessType)
 	    throws ContentNotFoundException, AccessViolationException, GroupNotFoundException;
 
-    Access getContentAccess(Long contentId, Group group, AccessType accessType) throws ContentNotFoundException,
-	    AccessViolationException;
-
     Access getFolderAccess(Long folderId, Group group, AccessType accessType) throws AccessViolationException,
 	    ContentNotFoundException;
+
+    Content accessToContent(Long contentId, User user, AccessType edit) throws ContentNotFoundException,
+	    AccessViolationException;
 
 }
