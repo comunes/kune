@@ -16,8 +16,8 @@ public class LicensePanel extends HorizontalPanel implements LicenseView {
     public LicensePanel(final LicensePresenter presenter) {
 	name = new Label();
 	image = new Image();
-	add(name);
-	add(image);
+	this.add(name);
+	this.add(image);
 	ClickListener clickListener = new ClickListener() {
 	    public void onClick(Widget arg0) {
 		presenter.onLicenseClick();

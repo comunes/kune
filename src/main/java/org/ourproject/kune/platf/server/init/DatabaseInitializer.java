@@ -56,8 +56,8 @@ public class DatabaseInitializer {
 
     @Transactional(type = TransactionType.READ_WRITE)
     public void initDatabase() throws SerializableException {
-	createUsers();
 	createLicenses();
+	createUsers();
     }
 
     private void createUsers() throws SerializableException {
@@ -66,14 +66,16 @@ public class DatabaseInitializer {
 	String adminEmail = properties.getAdminEmail();
 	String adminPassword = properties.getAdminPassword();
 	User user = new User(adminShortName, adminName, adminEmail, adminPassword);
-	groupManager.createUserGroup(user);
+	String licenseDef = properties.getDefaultLicense();
+	License license = licenseManager.findByShortname(licenseDef);
+	groupManager.createUserGroup(user, license);
 
 	String siteName = properties.getDefaultSiteName();
 	String siteShortName = properties.getDefaultSiteShortName();
 	String siteEmail = properties.getDefaultSiteAdminEmail();
 	String sitePassword = properties.getDefaultSiteAdminPassword();
 	user = new User(siteShortName, siteName, siteEmail, sitePassword);
-	groupManager.createUserGroup(user);
+	groupManager.createUserGroup(user, license);
     }
 
     private void createLicenses() {

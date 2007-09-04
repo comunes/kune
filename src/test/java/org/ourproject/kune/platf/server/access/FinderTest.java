@@ -38,13 +38,22 @@ public class FinderTest {
 
     @Test
     public void testDefaultGroupContent() throws ContentNotFoundException, GroupNotFoundException {
-
 	Group userGroup = new Group();
 	Content descriptor = TestDomainHelper.createDescriptor(1l, "title", "content");
 	userGroup.setDefaultContent(descriptor);
 
 	Content content = finder.getContent(userGroup, new StateToken());
 	assertSame(descriptor, content);
+    }
+
+    @Test
+    public void testDefaultGroupContentHasDefLicense() throws ContentNotFoundException, GroupNotFoundException {
+	Group userGroup = new Group();
+	Content descriptor = TestDomainHelper.createDescriptor(1l, "title", "content");
+	userGroup.setDefaultContent(descriptor);
+
+	Content content = finder.getContent(userGroup, new StateToken());
+	assertSame(userGroup.getDefaultLicense(), content.getLicense());
     }
 
     @Test

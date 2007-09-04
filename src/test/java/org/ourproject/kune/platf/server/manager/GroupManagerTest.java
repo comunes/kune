@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.ourproject.kune.platf.server.PersistenceTest;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.users.UserManager;
@@ -22,11 +23,12 @@ public class GroupManagerTest extends PersistenceTest {
     @Inject
     Group groupFinder;
     @Inject
+    License licenseFinder;
+    @Inject
     GroupManager groupManager;
     @Inject
     UserManager userManager;
 
-    private Long userId;
     private User user;
 
     @Before
@@ -35,8 +37,9 @@ public class GroupManagerTest extends PersistenceTest {
 	assertEquals(0, userFinder.getAll().size());
 	assertEquals(0, groupFinder.getAll().size());
 	user = userManager.createUser("userName", "the user name", "email", "userPassword");
-	userId = user.getId();
-	groupManager.createUserGroup(user);
+	License license = new License("by-sa", "Creative Commons Attribution-ShareAlike", "",
+		"http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
+	groupManager.createUserGroup(user, license);
     }
 
     @Test

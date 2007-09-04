@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.sitebar.client.rpc;
 
+import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 
 import com.google.gwt.core.client.GWT;
@@ -34,7 +35,8 @@ public interface SiteBarService extends RemoteService {
     UserInfoDTO login(String nickOrEmail, String passwd) throws SerializableException;
 
     // FIXME: Vicente, userHash
-    UserInfoDTO createUser(String shortName, String longName, String email, String passwd) throws SerializableException;
+    UserInfoDTO createUser(String shortName, String longName, String email, String passwd, LicenseDTO license)
+	    throws SerializableException;
 
     // FIXME: Vicente, userHash
     void logout() throws SerializableException;

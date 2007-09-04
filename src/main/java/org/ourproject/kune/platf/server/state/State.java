@@ -24,6 +24,7 @@ import org.ourproject.kune.platf.server.access.AccessRights;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.License;
 
 public class State {
     private String documentId;
@@ -38,6 +39,7 @@ public class State {
     private Double rate;
     private Integer rateByUsers;
     private String typeId;
+    private License license;
 
     public State() {
     }
@@ -136,6 +138,14 @@ public class State {
 
     public String getTypeId() {
 	return typeId;
+    }
+
+    public License getLicense() {
+	return license;
+    }
+
+    public void setLicense(License license) {
+	this.license = license;
     }
 
 }

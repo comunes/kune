@@ -24,6 +24,7 @@ import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.properties.DatabaseProperties;
@@ -41,14 +42,16 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     private final Group finder;
     private final ToolRegistry registry;
     private final DatabaseProperties properties;
+    private final License licenseFinder;
 
     @Inject
     public GroupManagerDefault(final Provider<EntityManager> provider, final Group finder,
-	    final DatabaseProperties properties, final ToolRegistry registry) {
+	    final DatabaseProperties properties, final ToolRegistry registry, final License licenseFinder) {
 	super(provider, Group.class);
 	this.finder = finder;
 	this.properties = properties;
 	this.registry = registry;
+	this.licenseFinder = licenseFinder;
     }
 
     public Group getDefaultGroup() {
@@ -66,8 +69,9 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 	return createGroup(group, user);
     }
 
-    public Group createUserGroup(final User user) {
+    public Group createUserGroup(final User user, final License defaultLicense) {
 	Group group = new Group(user.getShortName(), user.getName());
+	group.setDefaultLicense(defaultLicense);
 	user.setUserGroup(group);
 	initSocialNetwork(group, group);
 	user.getAdminInGroups().add(group);

@@ -65,6 +65,9 @@ public class Group implements HasId {
     @OneToOne(cascade = CascadeType.ALL)
     private SocialNetwork socialNetwork;
 
+    @OneToOne
+    private License defaultLicense;
+
     @OneToMany
     private final Map<String, ToolConfiguration> toolsConfig;
 
@@ -191,6 +194,14 @@ public class Group implements HasId {
 
     public void setPublicDesc(final String publicDesc) {
 	this.publicDesc = publicDesc;
+    }
+
+    public License getDefaultLicense() {
+	return defaultLicense;
+    }
+
+    public void setDefaultLicense(License defaultLicense) {
+	this.defaultLicense = defaultLicense;
     }
 
 }

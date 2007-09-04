@@ -39,6 +39,8 @@ public class GroupDTO implements IsSerializable {
     private Long defaultFolderId;
     private Long defaultContentId;
 
+    private LicenseDTO defaultLicense;
+
     public GroupDTO() {
 	this(null, null, null, null, TYPE_ORGANIZATION);
     }
@@ -215,5 +217,9 @@ public class GroupDTO implements IsSerializable {
 	    return false;
 	}
 	return true;
+    }
+
+    public void setDefaultLicense(LicenseDTO defaultLicense) {
+	this.defaultLicense = defaultLicense;
     }
 }

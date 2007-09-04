@@ -36,4 +36,6 @@ public interface LicenseManager {
 
     List<License> getNotCC();
 
+    License findByShortname(String licenseDef);
+
 }

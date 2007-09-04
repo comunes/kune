@@ -24,6 +24,7 @@ import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
@@ -42,6 +43,7 @@ public class StateDTO implements IsSerializable {
     private Double rate;
     private Integer rateByUsers;
     private String typeId;
+    private LicenseDTO license;
 
     public StateDTO() {
 	this(null, null, null);
@@ -165,6 +167,14 @@ public class StateDTO implements IsSerializable {
 
     public void setTypeId(final String typeId) {
 	this.typeId = typeId;
+    }
+
+    public LicenseDTO getLicense() {
+	return license;
+    }
+
+    public void setLicense(LicenseDTO license) {
+	this.license = license;
     }
 
 }

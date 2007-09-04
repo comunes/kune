@@ -21,6 +21,7 @@
 package org.ourproject.kune.sitebar.client.login;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
@@ -78,7 +79,10 @@ public class LoginFormPresenter implements LoginForm {
 	final String email = view.getEmail();
 
 	SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
-	siteBarService.createUser(shortName, longName, email, passwd, new AsyncCallback() {
+	// TODO: Form of register, license menu;
+	LicenseDTO defaultLicense = new LicenseDTO("by-sa", "Creative Commons Attribution-ShareAlike", "",
+		"http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
+	siteBarService.createUser(shortName, longName, email, passwd, defaultLicense, new AsyncCallback() {
 
 	    public void onFailure(final Throwable arg0) {
 		// i18n: Error creating user

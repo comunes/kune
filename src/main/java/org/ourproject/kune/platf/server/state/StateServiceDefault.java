@@ -24,6 +24,7 @@ import org.ourproject.kune.platf.server.access.Access;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Data;
 import org.ourproject.kune.platf.server.domain.Container;
+import org.ourproject.kune.platf.server.domain.License;
 
 import com.google.inject.Singleton;
 
@@ -54,6 +55,11 @@ public class StateServiceDefault implements StateService {
 	state.setFolderRights(access.getFolderRights());
 	state.setRate(content.calculateRate(content));
 	state.setRateByUsers(content.calculateRateNumberOfUsers(content));
+	License contentLicense = content.getLicense();
+	if (contentLicense == null) {
+	    contentLicense = container.getOwner().getDefaultLicense();
+	}
+	state.setLicense(contentLicense);
 	return state;
     }
 }

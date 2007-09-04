@@ -28,6 +28,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.google.inject.name.Named;
 import com.wideplay.warp.persist.dao.Finder;
 
 @Entity
@@ -147,6 +148,12 @@ public class License implements HasId {
 
     public void setDeprecated(final boolean isDeprecated) {
 	this.isDeprecated = isDeprecated;
+    }
+
+    @Finder(query = "from License l where l.shortName = :shortName")
+    public License findByShortName(@Named("shortName")
+    final String shortName) {
+	return null;
     }
 
     @Finder(query = "from License")

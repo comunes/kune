@@ -20,6 +20,8 @@
 
 package org.ourproject.kune.sitebar.client.rpc;
 
+import org.ourproject.kune.platf.client.dto.LicenseDTO;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface SiteBarServiceAsync {
@@ -28,6 +30,7 @@ public interface SiteBarServiceAsync {
 
     void logout(AsyncCallback callback);
 
-    void createUser(String shortName, String longName, String email, String paswd, AsyncCallback asyncCallback);
+    void createUser(String shortName, String longName, String email, String paswd, LicenseDTO license,
+	    AsyncCallback asyncCallback);
 
 }

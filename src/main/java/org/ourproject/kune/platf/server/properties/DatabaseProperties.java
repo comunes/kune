@@ -67,4 +67,7 @@ public class DatabaseProperties {
 	return properties.get("kune.admin.password");
     }
 
+    public String getDefaultLicense() {
+	return properties.get("kune.default.license");
+    }
 }

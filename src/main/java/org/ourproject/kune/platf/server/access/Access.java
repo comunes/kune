@@ -21,8 +21,8 @@
 package org.ourproject.kune.platf.server.access;
 
 import org.ourproject.kune.platf.server.domain.AccessLists;
-import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Container;
+import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 
 public class Access {

@@ -51,5 +51,7 @@ public class DatabaseInitializationTest {
     public void testDefaultContentAndLicenses() {
 	assertNotNull(group.getDefaultContent());
 	assertTrue(licenseManager.getAll().size() > 0);
+	assertNotNull(group.getDefaultLicense());
     }
+
 }
