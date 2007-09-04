@@ -27,7 +27,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.ourproject.kune.platf.server.access.AccessRights;
+import org.ourproject.kune.platf.server.access.AccessRol;
 
 @Entity
 @Table(name = "social_networks")
@@ -87,12 +87,12 @@ public class SocialNetwork {
 	return accessLists;
     }
 
-    public GroupList getGroupList(final int type) {
-	if (type == AccessRights.ADMIN) {
+    public GroupList getGroupList(final AccessRol type) {
+	if (type == AccessRol.Administrator) {
 	    return accessLists.getAdmins();
-	} else if (type == AccessRights.EDIT) {
+	} else if (type == AccessRol.Editor) {
 	    return accessLists.getEditors();
-	} else if (type == AccessRights.VIEW) {
+	} else if (type == AccessRol.Viewer) {
 	    return accessLists.getViewers();
 	} else {
 	    throw new RuntimeException();

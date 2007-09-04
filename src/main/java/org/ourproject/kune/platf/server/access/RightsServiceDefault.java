@@ -44,20 +44,19 @@ class RightsServiceDefault implements RightsService {
 
 	// FIXME, future: site and admin users can admin, edit, view everything
 	// (not now while we are doing tests)
-	isVisible = isEditable = isAdministrable = depthFirstSearch(userGroup, accessList.getAdmins(),
-		AccessRights.ADMIN);
+	isVisible = isEditable = isAdministrable = canAccess(userGroup, accessList.getAdmins(), AccessRol.Administrator);
 	if (!isEditable) {
-	    isVisible = isEditable = depthFirstSearch(userGroup, accessList.getEditors(), AccessRights.EDIT);
+	    isVisible = isEditable = canAccess(userGroup, accessList.getEditors(), AccessRol.Editor);
 	}
 	if (!isVisible) {
 	    isVisible = accessList.getViewers().isEmpty()
-		    || depthFirstSearch(userGroup, accessList.getViewers(), AccessRights.VIEW);
+		    || canAccess(userGroup, accessList.getViewers(), AccessRol.Viewer);
 	}
 
 	return new AccessRights(isAdministrable, isEditable, isVisible);
     }
 
-    private boolean depthFirstSearch(final Group searchedGroup, final GroupList list, final int type) {
+    private boolean canAccess(final Group searchedGroup, final GroupList list, final AccessRol type) {
 	return depthFirstSearch(new HashSet<Group>(), searchedGroup, list, type);
     }
 
@@ -65,7 +64,7 @@ class RightsServiceDefault implements RightsService {
      * http://en.wikipedia.org/wiki/Depth-first_search
      */
     private boolean depthFirstSearch(final HashSet<Group> visited, final Group searchedGroup, final GroupList list,
-	    final int type) {
+	    final AccessRol type) {
 	if (list.contains(searchedGroup)) {
 	    return true;
 	}

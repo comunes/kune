@@ -25,5 +25,6 @@ import org.ourproject.kune.platf.server.domain.Group;
 
 interface RightsService {
 
+    // FIXME: es un USER no un USER_GROUP
     public AccessRights get(final Group userGroup, final AccessLists accessList);
 }
