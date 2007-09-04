@@ -27,9 +27,14 @@ import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.GroupList;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
+import org.ourproject.kune.platf.server.domain.User;
 
 public class AccessRightsServiceDefault implements AccessRightsService {
     // TODO: check performance
+
+    public AccessRights get(final User user, final AccessLists lists) {
+	return get(user.getUserGroup(), lists);
+    }
 
     public AccessRights get(final Group userGroup, final AccessLists accessList) {
 	boolean isAdministrable = false;
