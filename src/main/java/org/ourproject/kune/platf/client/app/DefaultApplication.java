@@ -27,7 +27,7 @@ import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
-import org.ourproject.kune.platf.client.state.StateController;
+import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.sitebar.client.bar.SiteBarListener;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
@@ -38,7 +38,7 @@ public class DefaultApplication implements Application {
     private final Workspace workspace;
     private final Map tools;
     private Dispatcher dispatcher;
-    private StateController stateManager;
+    private StateManager stateManager;
 
     public DefaultApplication(final Map tools) {
 	this.tools = tools;
@@ -74,12 +74,12 @@ public class DefaultApplication implements Application {
 	return (ClientTool) tools.get(toolName);
     }
 
-    public void init(final DefaultDispatcher dispatcher, final StateController stateManager) {
+    public void init(final DefaultDispatcher dispatcher, final StateManager stateManager) {
 	this.dispatcher = dispatcher;
 	this.stateManager = stateManager;
     }
 
-    public StateController getStateManager() {
+    public StateManager getStateManager() {
 	return stateManager;
     }
 

@@ -28,5 +28,6 @@ public class PrefetchUtilites {
 	Image.prefetch("images/spin-kune-thund-green.gif");
 	Image.prefetch("css/img/button-bg-hard.gif");
 	Image.prefetch("css/img/button-bg-soft.gif");
+	// TODO: Vicente, prefetch License images
     }
 }

@@ -28,9 +28,9 @@ import org.ourproject.kune.workspace.client.editor.TextEditorListener;
 import org.ourproject.kune.workspace.client.editor.TextEditorPanel;
 import org.ourproject.kune.workspace.client.editor.TextEditorPresenter;
 import org.ourproject.kune.workspace.client.license.LicenseComponent;
-import org.ourproject.kune.workspace.client.license.LicensePanel;
 import org.ourproject.kune.workspace.client.license.LicensePresenter;
 import org.ourproject.kune.workspace.client.license.LicenseView;
+import org.ourproject.kune.workspace.client.license.ui.LicensePanel;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 import org.ourproject.kune.workspace.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.workspace.client.workspace.WorkspaceView;
@@ -56,8 +56,9 @@ public class WorkspaceFactory {
     }
 
     public static LicenseComponent createLicenseComponent() {
-	LicenseView view = new LicensePanel();
-	LicensePresenter presenter = new LicensePresenter(view);
+	LicensePresenter presenter = new LicensePresenter();
+	LicenseView view = new LicensePanel(presenter);
+	presenter.init(view);
 	return presenter;
     }
 }

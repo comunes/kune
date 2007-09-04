@@ -23,7 +23,7 @@ package org.ourproject.kune.docs.client.actions;
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.state.StateController;
+import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public class GoParentFolder implements Action {
@@ -31,11 +31,11 @@ public class GoParentFolder implements Action {
 	goParent(services.session.getCurrentState(), services.stateManager);
     }
 
-    private void goParent(final StateDTO state, final StateController stateController) {
+    private void goParent(final StateDTO state, final StateManager stateManager) {
 	StateToken token = state.getState();
 	token.setDocument(null);
 	token.setFolder(state.getFolder().getParentFolderId().toString());
-	stateController.setState(token);
+	stateManager.setState(token);
     }
 
 }

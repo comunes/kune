@@ -1,12 +1,16 @@
 package org.ourproject.kune.workspace.client.license;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.LicenseDTO;
 
 public class LicensePresenter implements LicenseComponent {
 
-    private final LicenseView view;
+    private LicenseView view;
 
-    public LicensePresenter(LicenseView view) {
+    public LicensePresenter() {
+    }
+
+    public void init(LicenseView view) {
 	this.view = view;
     }
 
@@ -14,4 +18,12 @@ public class LicensePresenter implements LicenseComponent {
 	return view;
     }
 
+    public void setLicense(LicenseDTO licenseDTO) {
+	view.showName(licenseDTO.getLongName());
+	view.showImage(licenseDTO.getImageUrl());
+    }
+
+    public void onLicenseClick() {
+	// TODO:
+    }
 }

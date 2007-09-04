@@ -4,4 +4,8 @@ import org.ourproject.kune.platf.client.View;
 
 public interface LicenseView extends View {
 
+    void showImage(String imageUrl);
+
+    void showName(String longName);
+
 }

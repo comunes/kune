@@ -22,6 +22,7 @@ package org.ourproject.kune.platf.client.state;
 
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
@@ -35,13 +36,13 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class StateControllerDefault implements StateController {
+public class StateManagerDefault implements StateManager {
     private final Application app;
     private final Session session;
     private final ContentProvider provider;
     private String oldState;
 
-    public StateControllerDefault(final ContentProvider provider, final Application app, final Session session) {
+    public StateManagerDefault(final ContentProvider provider, final Application app, final Session session) {
 	this.provider = provider;
 	this.app = app;
 	this.session = session;
@@ -122,7 +123,7 @@ public class StateControllerDefault implements StateController {
 	workspace.setContentTitle(state.getTitle());
 	workspace.setContent(clientTool.getContent());
 	workspace.setContext(clientTool.getContext());
-	// workspace.getLicenseComponent()
+	workspace.getLicenseComponent().setLicense(new LicenseDTO());
 
 	Site.hideProgress();
     }

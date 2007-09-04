@@ -33,8 +33,8 @@ import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.state.ContentProvider;
 import org.ourproject.kune.platf.client.state.ContentProviderImpl;
 import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.StateController;
-import org.ourproject.kune.platf.client.state.StateControllerDefault;
+import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.platf.client.state.StateManagerDefault;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 
 import com.google.gwt.user.client.History;
@@ -56,7 +56,7 @@ public class ApplicationBuilder {
 
 	final Session session = new Session(userHash);
 	ContentProvider provider = new ContentProviderImpl(ContentService.App.getInstance());
-	final StateController stateManager = new StateControllerDefault(provider, application, session);
+	final StateManager stateManager = new StateManagerDefault(provider, application, session);
 	History.addHistoryListener(stateManager);
 
 	final DefaultDispatcher dispatcher = DefaultDispatcher.getInstance();
