@@ -53,7 +53,7 @@ public class ContentRPC implements ContentService, RPC {
     private final UserSession session;
     private final Mapper mapper;
     private final GroupManager groupManager;
-    private final AccessService accessor;
+    private final AccessService accessManager;
     private final CreationService creationService;
     private final UserManager userManager;
 
@@ -62,7 +62,7 @@ public class ContentRPC implements ContentService, RPC {
 	    final CreationService creationService, final UserManager userManager, final GroupManager groupManager,
 	    final Mapper mapper) {
 	this.session = session;
-	this.accessor = contentAccess;
+	this.accessManager = contentAccess;
 	this.stateService = stateService;
 	this.creationService = creationService;
 	this.userManager = userManager;
@@ -85,7 +85,7 @@ public class ContentRPC implements ContentService, RPC {
 	    loggedGroup = contentGroup;
 	}
 
-	Access access = accessor.getAccess(token, contentGroup, loggedGroup, AccessType.READ);
+	Access access = accessManager.getAccess(token, contentGroup, loggedGroup, AccessType.READ);
 	State state = stateService.create(access);
 	return mapper.map(state, StateDTO.class);
     }
@@ -97,7 +97,7 @@ public class ContentRPC implements ContentService, RPC {
 
 	Long contentId = parseId(documentId);
 	Group userGroup = groupManager.getGroupOfUserWithId(session.getUserId());
-	Access access = accessor.getContentAccess(contentId, userGroup, AccessType.EDIT);
+	Access access = accessManager.getContentAccess(contentId, userGroup, AccessType.EDIT);
 	Content descriptor = creationService.saveContent(userGroup, access.getDescriptor(), content);
 	return descriptor.getVersion();
     }
@@ -109,7 +109,7 @@ public class ContentRPC implements ContentService, RPC {
 
 	User user = userManager.find(session.getUserId());
 	Group group = groupManager.getGroupOfUserWithId(session.getUserId());
-	Access access = accessor.getFolderAccess(parentFolderId, group, AccessType.EDIT);
+	Access access = accessManager.getFolderAccess(parentFolderId, group, AccessType.EDIT);
 	access.setDescriptorWidthFolderRights(creationService.createContent(title, user, access.getFolder()));
 	State state = stateService.create(access);
 	return mapper.map(state, StateDTO.class);
@@ -121,11 +121,11 @@ public class ContentRPC implements ContentService, RPC {
 	    final String title) throws ContentNotFoundException, AccessViolationException, GroupNotFoundException {
 	Group group = groupManager.findByShortName(groupShotName);
 
-	Access access = accessor.getFolderAccess(parentFolderId, group, AccessType.EDIT);
+	Access access = accessManager.getFolderAccess(parentFolderId, group, AccessType.EDIT);
 	Container container = creationService.createFolder(group, parentFolderId, title);
 	String toolName = container.getToolName();
 	StateToken token = new StateToken(group.getShortName(), toolName, container.getId().toString(), null);
-	access = accessor.getAccess(token, group, group, AccessType.READ);
+	access = accessManager.getAccess(token, group, group, AccessType.READ);
 	State state = stateService.create(access);
 	return mapper.map(state, StateDTO.class);
     }
