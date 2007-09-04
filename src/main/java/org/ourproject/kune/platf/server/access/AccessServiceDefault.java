@@ -47,6 +47,12 @@ public class AccessServiceDefault implements AccessService {
 	this.accessRightsService = accessRightsService;
     }
 
+    public Access getAccess(final User user, final StateToken token, final Group defaultGroup,
+	    final AccessType accessType) throws ContentNotFoundException, AccessViolationException,
+	    GroupNotFoundException {
+	return getAccess(token, defaultGroup, user.getUserGroup(), accessType);
+    }
+
     public Access getAccess(final StateToken token, final Group defaultGroup, final Group loggedGroup,
 	    final AccessType accessType) throws ContentNotFoundException, AccessViolationException,
 	    GroupNotFoundException {

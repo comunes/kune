@@ -30,6 +30,10 @@ import org.ourproject.kune.platf.server.domain.User;
 
 public interface AccessService {
 
+    Access getAccess(User user, StateToken token, Group defaultGroup, AccessType accessType)
+	    throws ContentNotFoundException, AccessViolationException, GroupNotFoundException;
+
+    @Deprecated
     Access getAccess(StateToken token, Group defaultGroup, Group loggedGroup, AccessType accessType)
 	    throws ContentNotFoundException, AccessViolationException, GroupNotFoundException;
 
