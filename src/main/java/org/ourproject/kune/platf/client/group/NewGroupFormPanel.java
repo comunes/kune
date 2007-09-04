@@ -137,7 +137,7 @@ public class NewGroupFormPanel extends Composite implements NewGroupFormView {
 		setWidth(400);
 		setLabelWidth(100);
 		setLabelAlign("right");
-		setButtonAlign("left");
+		setButtonAlign("right");
 	    }
 	});
 

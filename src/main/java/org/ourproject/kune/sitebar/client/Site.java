@@ -51,4 +51,15 @@ public class Site {
     public static void hideProgress() {
 	sitebar.hideProgress();
     }
+
+    public static void showProgressProcessing() {
+	// i18n
+	sitebar.showProgress("Processing");
+    }
+
+    public static void showProgressLoading() {
+	// i18n
+	sitebar.showProgress("Loading");
+    }
+
 }

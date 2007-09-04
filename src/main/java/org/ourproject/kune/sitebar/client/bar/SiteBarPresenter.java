@@ -48,12 +48,16 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
     }
 
     public void doLogin() {
+	Site.showProgressProcessing();
 	view.showLoginDialog();
+	Site.hideProgress();
     }
 
     public void doNewGroup() {
 	if (isLogged) {
+	    Site.showProgressProcessing();
 	    view.showNewGroupDialog();
+	    Site.hideProgress();
 	} else {
 	    Site.info("You must be logged to create group");
 	}
@@ -68,12 +72,15 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
     }
 
     public void doLogout() {
+	Site.showProgressProcessing();
 	SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
 	siteBarService.logout(new AsyncCallback() {
 	    public void onFailure(final Throwable arg0) {
+		Site.hideProgress();
 	    }
 
 	    public void onSuccess(final Object arg0) {
+		Site.hideProgress();
 		isLogged = false;
 		view.restoreLoginLink();
 		view.resetOptionsSubmenu();

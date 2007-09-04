@@ -300,8 +300,8 @@
 .kune-ContentBottomBar .gwt-Label {
     color: #FFF;
     white-space: nowrap;
-    /* font-weight: 700; */
-    font-size: 85%;
+    /* font-weight: 700;
+    font-size: 85%; */
     margin: 0 9px;
 }
 
