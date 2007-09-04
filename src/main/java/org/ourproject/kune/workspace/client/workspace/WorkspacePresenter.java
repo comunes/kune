@@ -26,14 +26,17 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
+import org.ourproject.kune.workspace.client.license.LicenseComponent;
 
 public class WorkspacePresenter implements Workspace {
     private final WorkspaceView view;
     private WorkspaceComponent context;
     private WorkspaceComponent content;
+    private Components components;
 
     public WorkspacePresenter(final WorkspaceView view) {
 	this.view = view;
+	this.components = new Components(this);
     }
 
     public void showError(final Throwable caught) {
@@ -84,6 +87,10 @@ public class WorkspacePresenter implements Workspace {
 
     public View getView() {
 	return view;
+    }
+
+    public LicenseComponent getLicenseComponent() {
+	return components.getLicenseComponent();
     }
 
 }

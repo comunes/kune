@@ -18,7 +18,7 @@
  *
  */
 
-package org.ourproject.kune.chat.client.ui.cnt;
+package org.ourproject.kune.chat.client.cnt;
 
 import org.ourproject.kune.chat.client.cnt.info.ChatInfo;
 import org.ourproject.kune.chat.client.rooms.MultiRoom;

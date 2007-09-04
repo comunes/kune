@@ -22,11 +22,12 @@ package org.ourproject.kune.workspace.client.workspace;
 
 import java.util.Iterator;
 
-import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.Component;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
+import org.ourproject.kune.workspace.client.license.LicenseComponent;
 
-public interface Workspace {
+public interface Workspace extends Component {
 
     public void showError(Throwable caught);
 
@@ -42,8 +43,7 @@ public interface Workspace {
 
     public void attachTools(Iterator iterator);
 
-    public View getView();
-
     public void adjustSize(int windowWidth, int clientHeight);
 
+    public LicenseComponent getLicenseComponent();
 }

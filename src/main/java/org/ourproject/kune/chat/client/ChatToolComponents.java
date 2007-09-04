@@ -20,8 +20,8 @@
 
 package org.ourproject.kune.chat.client;
 
+import org.ourproject.kune.chat.client.cnt.ChatContent;
 import org.ourproject.kune.chat.client.ui.ChatFactory;
-import org.ourproject.kune.chat.client.ui.cnt.ChatContent;
 import org.ourproject.kune.chat.client.ui.ctx.ChatContext;
 
 class ChatToolComponents {

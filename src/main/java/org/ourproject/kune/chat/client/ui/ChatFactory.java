@@ -21,6 +21,8 @@
 package org.ourproject.kune.chat.client.ui;
 
 import org.ourproject.kune.chat.client.ChatProvider;
+import org.ourproject.kune.chat.client.cnt.ChatContent;
+import org.ourproject.kune.chat.client.cnt.ChatContentPresenter;
 import org.ourproject.kune.chat.client.cnt.info.ChatInfo;
 import org.ourproject.kune.chat.client.cnt.info.ui.ChatInfoPanel;
 import org.ourproject.kune.chat.client.rooms.MultiRoom;
@@ -35,11 +37,10 @@ import org.ourproject.kune.chat.client.rooms.RoomUser.UserType;
 import org.ourproject.kune.chat.client.rooms.ui.MultiRoomPanel;
 import org.ourproject.kune.chat.client.rooms.ui.RoomPanel;
 import org.ourproject.kune.chat.client.rooms.ui.RoomUserListPanel;
-import org.ourproject.kune.chat.client.ui.cnt.ChatContent;
-import org.ourproject.kune.chat.client.ui.cnt.ChatContentPresenter;
 import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoom;
 import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomListener;
 import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomPanel;
+import org.ourproject.kune.chat.client.ui.cnt.room.ChatRoomPresenter;
 import org.ourproject.kune.chat.client.ui.ctx.ChatContext;
 import org.ourproject.kune.chat.client.ui.ctx.ChatContextPresenter;
 import org.ourproject.kune.chat.client.ui.ctx.rooms.RoomsAdmin;
@@ -77,7 +78,8 @@ public class ChatFactory {
 
     public static ChatRoom createChatRoomViewer(final ChatRoomListener listener) {
 	ChatRoomPanel panel = new ChatRoomPanel(listener);
-	return panel;
+	ChatRoomPresenter presenter = new ChatRoomPresenter(panel);
+	return presenter;
     }
 
     public static RoomUserList createUserList() {

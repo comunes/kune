@@ -122,6 +122,8 @@ public class StateControllerDefault implements StateController {
 	workspace.setContentTitle(state.getTitle());
 	workspace.setContent(clientTool.getContent());
 	workspace.setContext(clientTool.getContext());
+	// workspace.getLicenseComponent()
+
 	Site.hideProgress();
     }
 

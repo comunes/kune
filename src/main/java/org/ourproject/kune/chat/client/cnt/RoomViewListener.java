@@ -17,7 +17,7 @@
  *
  */
 
-package org.ourproject.kune.chat.client.ui.cnt;
+package org.ourproject.kune.chat.client.cnt;
 
 public interface RoomViewListener {
 

@@ -22,12 +22,10 @@ package org.ourproject.kune.docs.client.cnt.reader.ui;
 
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderListener;
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderView;
-import org.ourproject.kune.platf.client.ui.CustomButton;
+import org.ourproject.kune.workspace.client.ui.ToolBarPanel;
 
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.Button;
@@ -47,22 +45,14 @@ public class DocumentReaderPanel extends VerticalPanel implements DocumentReader
     }
 
     private Widget createToolBar(final DocumentReaderListener listener) {
-	HorizontalPanel panel = new HorizontalPanel();
-	Label expand = new Label("");
-	panel.add(expand);
-	panel.setWidth("100%");
-	expand.setWidth("100%");
-	panel.setCellWidth(expand, "100%");
-	panel.addStyleName("kune-DocumentReaderPanel");
+	ToolBarPanel toolbar = new ToolBarPanel();
 	// i18n
-	btnEdit = new CustomButton("Edit", new ClickListener() {
+	toolbar.addButton("Editor", new ClickListener() {
 	    public void onClick(final Widget sender) {
 		listener.onEdit();
 	    }
-	}).getButton();
-	panel.add(btnEdit);
-	btnEdit.addStyleName("kune-Button-Large-lrSpace");
-	return panel;
+	});
+	return toolbar;
     }
 
     public void setContent(final String text) {
