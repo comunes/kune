@@ -48,6 +48,10 @@ public class RoomPresenter implements Room {
 
     private final RoomListener listener;
 
+    // TODO: la información del usuario no está disponible (ni debe estar ;)
+    // cuando se crea
+    // el room presenter => solución: usar setAlias, setRoomName,
+    // setUserType... etc...
     public RoomPresenter(final RoomListener listener, final String roomName, final String userAlias,
 	    final UserType userType, final RoomUserList userList) {
 	this.listener = listener;

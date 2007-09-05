@@ -78,7 +78,7 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener, Mult
     public void onEnterRoom() {
 	MultiRoom rooms = components.getRooms();
 	// FIXME: hardcoded
-	Room room = getRoom("kune", "alias", RoomUser.VISITOR);
+	Room room = getRoom("kune", "me", RoomUser.VISITOR);
 	rooms.activateRoom(room);
 	rooms.show();
     }
