@@ -108,7 +108,7 @@ public class LoginFormPanel implements LoginFormView, View {
     }
 
     public String getRegisterPassword() {
-	return loginPassField.getValueAsString();
+	return passwdRegField.getValueAsString();
     }
 
     private void createPanel() {

@@ -38,7 +38,7 @@ public class ChatRoomPanel extends VerticalPanel implements ChatRoomView {
 	add(createToolBar(listener));
 	// FIXME: control perms
 	setEditEnabled(true);
-	content = new HTML("");
+	content = new HTML("Here the History of room conversations.");
 	add(content);
 	this.setWidth("100%");
 	this.setCellWidth(content, "100%");
