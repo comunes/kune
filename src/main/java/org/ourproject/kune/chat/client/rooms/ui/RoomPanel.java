@@ -103,6 +103,7 @@ public class RoomPanel extends ContentPanel implements RoomView {
 
     private void addWidget(final Widget widget) {
 	vp.add(widget);
+	widget.addStyleName("kune-RoomPanel-Message");
 	scroll.setScrollPosition(vp.getOffsetHeight());
     }
 }

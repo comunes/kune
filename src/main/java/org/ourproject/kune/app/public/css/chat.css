@@ -14,10 +14,16 @@
 }
 
 .kune-RoomPanel-Conversation {
-    margin: 5px;
+    /* margin: 5px; */
+}
+
+
+.kune-RoomPanel-Message {
+    margin: 0 5px;
 }
 
 .kune-RoomPanel-EventMessage {
     font-style: italic;
     color: rgb(102, 153, 204);
+    margin: 0 5px;
 }
