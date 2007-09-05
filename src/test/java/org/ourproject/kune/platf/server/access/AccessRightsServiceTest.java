@@ -9,6 +9,7 @@ import org.ourproject.kune.platf.server.TestDomainHelper;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
+import org.ourproject.kune.testhelper.ctx.DomainContext;
 
 public class AccessRightsServiceTest {
     private AccessRightsServiceDefault accessRightsManager;
@@ -33,16 +34,28 @@ public class AccessRightsServiceTest {
     }
 
     @Test
-    public void userCanBeLoggedOut() {
-	AccessLists accessLists = TestDomainHelper.createAccessLists(group3, group1, group2);
-	AccessRights response = accessRightsManager.get((Group) null, accessLists);
-	assertTrue(response.isVisible());
-	assertFalse(response.isEditable());
-	assertFalse(response.isAdministrable());
+    public void accessRightsShouldBeTransitive() {
+	DomainContext ctx = new DomainContext();
+	ctx.createUsers("user1", "user2", "user3");
+	ctx.inSocialNetworkOf("user1").addAsCollaborator("user2");
+	ctx.inSocialNetworkOf("user2").addAsCollaborator("user3");
+	AccessRights rights = accessRightsManager.get(ctx.getUser("user3"), ctx.getDefaultAccesListOf("user1"));
+	assertTrue(rights.isEditable());
     }
 
     @Test
-    public void checkUserAccessRightsTrue() {
+    public void adminRightsGivesEditAndViewRights() {
+	DomainContext ctx = new DomainContext();
+	ctx.createUsers("user1", "user2");
+	ctx.inSocialNetworkOf("user1").addAsAdministrator("user2");
+	AccessRights rights = accessRightsManager.get(ctx.getUser("user2"), ctx.getDefaultAccesListOf("user1"));
+	assertTrue(rights.isAdministrable());
+	assertTrue(rights.isEditable());
+	assertTrue(rights.isVisible());
+    }
+
+    @Test
+    public void checkUserAccessRightsTrueOld() {
 	SocialNetwork socialNetwork = TestDomainHelper.createSocialNetwork(group2, group2, group2, group3);
 	SocialNetwork socialNetwork2 = TestDomainHelper.createSocialNetwork(group3, group3, group3, group1);
 	group1.setSocialNetwork(socialNetwork);
