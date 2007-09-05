@@ -60,6 +60,10 @@
                 org.ourproject.kune.platf.server.domain.Group
             </b-hint>
         </field>
+        <field custom-converter="org.ourproject.kune.platf.server.mapper.GroupListModeConverter">
+            <a>mode</a>
+            <b>mode</b>
+        </field>
     </mapping>
 
     <mapping>

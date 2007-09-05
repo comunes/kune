@@ -40,6 +40,9 @@ public interface AccessService {
     Access getFolderAccess(Long folderId, Group group, AccessType accessType) throws AccessViolationException,
 	    ContentNotFoundException;
 
+    Access getFolderAccess(Long folderId, User user, AccessType accessType) throws AccessViolationException,
+	    ContentNotFoundException;
+
     Content accessToContent(Long contentId, User user, AccessType edit) throws ContentNotFoundException,
 	    AccessViolationException;
 

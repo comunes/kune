@@ -23,8 +23,11 @@ package org.ourproject.kune.platf.server.manager.impl;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 
+import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.GroupListMode;
 import org.ourproject.kune.platf.server.domain.License;
+import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.properties.DatabaseProperties;
@@ -101,7 +104,11 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     }
 
     private void initSocialNetwork(final Group group, final Group userGroup) {
-	group.getSocialNetwork().addAdmin(userGroup);
+	SocialNetwork network = group.getSocialNetwork();
+	AccessLists lists = network.getAccessLists();
+	lists.getEditors().setMode(GroupListMode.NOBODY);
+	lists.getViewers().setMode(GroupListMode.EVERYONE);
+	network.addAdmin(userGroup);
     }
 
     private void initGroup(final User user, final Group group) {

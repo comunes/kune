@@ -121,7 +121,7 @@ public class Access {
 	return container.getOwner().getSocialNetwork().getAccessLists();
     }
 
-    public void setDescriptorWidthFolderRights(final Content content) {
+    public void setContentWidthFolderRights(final Content content) {
 	this.content = content;
 	this.contentRights = folderRights;
     }

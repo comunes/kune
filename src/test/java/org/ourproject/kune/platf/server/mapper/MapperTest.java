@@ -23,6 +23,7 @@ import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.GroupList;
+import org.ourproject.kune.platf.server.domain.GroupListMode;
 import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.Revision;
 import org.ourproject.kune.platf.server.domain.User;
@@ -105,6 +106,22 @@ public class MapperTest {
 	    GroupDTO map = mapper.map(g, GroupDTO.class);
 	    assertEquals(map, d);
 	}
+    }
+
+    @Test
+    public void testGroupListMapping() {
+	assertMapping(GroupListMode.EVERYONE, GroupListDTO.EVERYONE);
+	assertMapping(GroupListMode.NOBODY, GroupListDTO.NOBODY);
+	assertMapping(GroupListMode.NORMAL, GroupListDTO.NORMAL);
+    }
+
+    private void assertMapping(GroupListMode mode, String modeName) {
+	GroupList list = new GroupList();
+	list.setMode(mode);
+	GroupListDTO dto = mapper.map(list, GroupListDTO.class);
+	assertEquals(modeName, dto.getMode());
+	GroupList listBack = mapper.map(dto, GroupList.class);
+	assertEquals(mode, listBack.getMode());
     }
 
     @Test

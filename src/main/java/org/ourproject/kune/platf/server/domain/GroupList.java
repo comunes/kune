@@ -23,8 +23,11 @@ package org.ourproject.kune.platf.server.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -43,8 +46,13 @@ public class GroupList {
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     List<Group> list;
 
+    @Enumerated(EnumType.ORDINAL)
+    @Basic
+    private GroupListMode mode;
+
     public GroupList() {
 	this(new ArrayList<Group>());
+	this.mode = GroupListMode.NORMAL;
     }
 
     public GroupList(final List<Group> list) {
@@ -71,8 +79,8 @@ public class GroupList {
 	list.add(group);
     }
 
-    public boolean contains(final Group group) {
-	return list.contains(group);
+    public boolean includes(final Group group) {
+	return mode.checkIfIncludes(group, this.list);
     }
 
     public ArrayList<Group> duplicate() {
@@ -83,4 +91,11 @@ public class GroupList {
 	return list.size() == 0;
     }
 
+    public GroupListMode getMode() {
+	return mode;
+    }
+
+    public void setMode(GroupListMode mode) {
+	this.mode = mode;
+    }
 }

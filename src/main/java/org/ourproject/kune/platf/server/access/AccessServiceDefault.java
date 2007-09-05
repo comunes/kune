@@ -74,6 +74,11 @@ public class AccessServiceDefault implements AccessService {
 	return check(access, access.getContentRights(), accessType).getContent();
     }
 
+    public Access getFolderAccess(final Long folderId, User user, final AccessType accessType)
+	    throws AccessViolationException, ContentNotFoundException {
+	return getFolderAccess(folderId, user.getUserGroup(), accessType);
+    }
+
     public Access getFolderAccess(final Long folderId, final Group group, final AccessType accessType)
 	    throws AccessViolationException, ContentNotFoundException {
 	Access access = new Access(null, finder.getFolder(folderId));

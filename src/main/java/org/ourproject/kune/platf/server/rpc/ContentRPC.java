@@ -109,7 +109,7 @@ public class ContentRPC implements ContentService, RPC {
 	User user = session.getUser();
 	Group group = groupManager.getGroupOfUserWithId(session.getUserId());
 	Access access = accessManager.getFolderAccess(parentFolderId, group, AccessType.EDIT);
-	access.setDescriptorWidthFolderRights(creationService.createContent(title, user, access.getFolder()));
+	access.setContentWidthFolderRights(creationService.createContent(title, user, access.getFolder()));
 	State state = stateService.create(access);
 	return mapper.map(state, StateDTO.class);
     }

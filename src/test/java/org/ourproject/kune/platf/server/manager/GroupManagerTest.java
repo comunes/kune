@@ -52,7 +52,7 @@ public class GroupManagerTest extends PersistenceTest {
 	groupManager.createGroup(group, user);
 	SocialNetwork socialNetwork = group.getSocialNetwork();
 	AccessLists lists = socialNetwork.getAccessLists();
-	assertTrue(lists.getAdmins().contains(user.getUserGroup()));
+	assertTrue(lists.getAdmins().includes(user.getUserGroup()));
 	assertTrue(lists.getEditors().isEmpty());
 	assertTrue(lists.getViewers().isEmpty());
 	closeTransaction();

@@ -41,12 +41,6 @@ public class AccessRightsServiceDefault implements AccessRightsService {
 	boolean isEditable = false;
 	boolean isVisible = false;
 
-	// FIXME: para salir del paso
-	// hay que pensar: "por todo el mundo" y "por nadie" en las access list
-	if (userGroup == Group.NO_GROUP) {
-	    return new AccessRights(false, false, true);
-	}
-
 	// FIXME, future: site and admin users can admin, edit, view everything
 	// (not now while we are doing tests)
 	isVisible = isEditable = isAdministrable = canAccess(userGroup, accessList, AccessRol.Administrator);
@@ -70,7 +64,7 @@ public class AccessRightsServiceDefault implements AccessRightsService {
      */
     private boolean depthFirstSearch(final HashSet<Group> visited, final Group searchedGroup, final GroupList list,
 	    final AccessRol rol) {
-	if (list.contains(searchedGroup)) {
+	if (list.includes(searchedGroup)) {
 	    return true;
 	}
 	ArrayList<Group> noVisitedYet = list.duplicate();
