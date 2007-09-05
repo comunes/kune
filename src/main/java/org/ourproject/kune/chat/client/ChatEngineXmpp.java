@@ -50,9 +50,9 @@ class ChatEngineXmpp implements ChatEngine {
 
     public void login(final String chatName, final String chatPassword) {
 	FireLog.debug("LOGIN CHAT: " + chatName + "[" + chatPassword + "]");
-	state.user = new XmppUserSettings(state.domain, chatName, chatPassword);
+	state.user = new XmppUserSettings(state.domain, chatName, chatPassword, XmppUserSettings.NON_SASL);
 	state.user.resource = "kuneClient" + new Date().getTime();
-	session = new XmppSession(connection);
+	session = new XmppSession(connection, true);
 	session.login(state.user);
 	// FIXME: hardcoded
 	session.getUser().sendPresence(PresenceShow.CHAT, ":: ready ::");
