@@ -31,13 +31,13 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class ChatRoomPanel extends VerticalPanel implements ChatRoomView {
 
-    private com.gwtext.client.widgets.Button btnEnter;
     private final HTML content;
+    private ToolBarPanel toolbar;
 
     public ChatRoomPanel(final ChatRoomListener listener) {
 	add(createToolBar(listener));
 	// FIXME: control perms
-	btnEnter.setVisible(true);
+	setEditEnabled(true);
 	content = new HTML("");
 	add(content);
 	this.setWidth("100%");
@@ -46,7 +46,7 @@ public class ChatRoomPanel extends VerticalPanel implements ChatRoomView {
     }
 
     private Widget createToolBar(final ChatRoomListener listener) {
-	ToolBarPanel toolbar = new ToolBarPanel();
+	toolbar = new ToolBarPanel();
 	// i18n
 	toolbar.addButton("Enter room", new ClickListener() {
 	    public void onClick(final Widget sender) {
@@ -54,6 +54,10 @@ public class ChatRoomPanel extends VerticalPanel implements ChatRoomView {
 	    }
 	});
 	return toolbar;
+    }
+
+    public void setEditEnabled(final boolean isEnabled) {
+	toolbar.setButtonVisible(isEnabled);
     }
 
 }

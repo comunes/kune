@@ -224,9 +224,18 @@ public class MultiRoomPanel implements MultiRoomView, View {
     private void createListeners() {
 	dialog.addDialogListener(new DialogListener() {
 
+	    // public boolean doBeforeHide(final LayoutDialog dialog) {
+	    // if (centralLayout.getNumPanels() > 0) {
+	    // return Window.confirm("Sure?");
+	    // }
+	    // return true;
+	    // }
+
 	    public boolean doBeforeHide(final LayoutDialog dialog) {
 		if (centralLayout.getNumPanels() > 0) {
 		    if (dialogHideConfirmed) {
+			dialogHideConfirmed = false; // FIXME: Status in
+							// Panel, remove this!!
 			return true;
 		    } else {
 			MessageBox.confirm("Confirm", "Are you sure you want to exit all the rooms?",
@@ -268,6 +277,17 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	centralLayout = dialog.getLayout().getRegion(LayoutRegionConfig.CENTER);
 
 	centralLayout.addLayoutRegionListener(new LayoutRegionListener() {
+
+	    // public boolean doBeforeRemove(final LayoutRegion region, final
+	    // ContentPanel panel) {
+	    // if (Window.confirm("Are you sure?")) {
+	    // RoomPresenter roomPresenter = (RoomPresenter)
+	    // panelIdToRoom.get(panel.getId());
+	    // presenter.closeRoom(roomPresenter);
+	    // return true;
+	    // }
+	    // return false;
+	    // }
 
 	    public boolean doBeforeRemove(final LayoutRegion region, final ContentPanel panel) {
 
