@@ -44,4 +44,8 @@ public interface WorkspaceView extends View {
 
     void setBottom(View view);
 
+    void setSocialNetwork(View view);
+
+    void setBuddiesPresence(View view);
+
 }

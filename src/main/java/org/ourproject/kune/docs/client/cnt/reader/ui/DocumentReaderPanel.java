@@ -22,7 +22,7 @@ package org.ourproject.kune.docs.client.cnt.reader.ui;
 
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderListener;
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderView;
-import org.ourproject.kune.workspace.client.ui.ToolBarPanel;
+import org.ourproject.kune.workspace.client.workspace.ui.ContentToolBarPanel;
 
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
@@ -31,7 +31,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class DocumentReaderPanel extends VerticalPanel implements DocumentReaderView {
     private final HTML content;
-    private ToolBarPanel toolbar;
+    private ContentToolBarPanel toolbar;
 
     public DocumentReaderPanel(final DocumentReaderListener listener) {
 	add(createToolBar(listener));
@@ -44,7 +44,7 @@ public class DocumentReaderPanel extends VerticalPanel implements DocumentReader
     }
 
     private Widget createToolBar(final DocumentReaderListener listener) {
-	toolbar = new ToolBarPanel();
+	toolbar = new ContentToolBarPanel();
 	// i18n
 	toolbar.addButton("Editor", new ClickListener() {
 	    public void onClick(final Widget sender) {

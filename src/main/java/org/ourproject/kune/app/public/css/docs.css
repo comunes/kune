@@ -1,12 +1,3 @@
-/* Document Reader */
-
-.kune-DocumentReaderPanel {
-    background-color: #F2F2F2;
-    padding: 2px;
-    height: 24px;
-    vertical-align: middle;
-}
-
 /* RTE Text editor */
 
 .kune-TexEditorPanel-TextArea {

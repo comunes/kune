@@ -39,6 +39,8 @@ public class WorkspacePresenter implements Workspace {
 	this.components = new Components(this);
 	view.setContentTitle(components.getContentTitleComponent().getView());
 	view.setBottom(components.getLicenseComponent().getView());
+	view.setSocialNetwork(components.getSocialNetworkComponent().getView());
+	view.setBuddiesPresence(components.getBuddiesPresenceComponent().getView());
     }
 
     public void showError(final Throwable caught) {
@@ -95,4 +97,11 @@ public class WorkspacePresenter implements Workspace {
 	return components.getContentTitleComponent();
     }
 
+    public SocialNetworkComponent getSocialNetworkComponent() {
+	return components.getSocialNetworkComponent();
+    }
+
+    public BuddiesPresenceComponent getBuddiesPresenceComponent() {
+	return components.getBuddiesPresenceComponent();
+    }
 }

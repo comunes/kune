@@ -25,6 +25,7 @@ import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.License;
+import org.ourproject.kune.platf.server.domain.SocialNetwork;
 
 public class State {
     private String documentId;
@@ -33,6 +34,7 @@ public class State {
     private String toolName;
     private Group group;
     private Container container;
+    private SocialNetwork socialNetwork;
     private AccessLists accessLists;
     private AccessRights contentRights;
     private AccessRights folderRights;
@@ -144,8 +146,16 @@ public class State {
 	return license;
     }
 
-    public void setLicense(License license) {
+    public void setLicense(final License license) {
 	this.license = license;
+    }
+
+    public SocialNetwork getSocialNetwork() {
+	return socialNetwork;
+    }
+
+    public void setSocialNetwork(final SocialNetwork socialNetwork) {
+	this.socialNetwork = socialNetwork;
     }
 
 }

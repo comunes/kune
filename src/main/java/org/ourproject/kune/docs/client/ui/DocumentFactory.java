@@ -44,7 +44,7 @@ import org.ourproject.kune.docs.client.ctx.admin.ui.AdminContextPanel;
 import org.ourproject.kune.docs.client.ctx.folder.FolderContext;
 import org.ourproject.kune.docs.client.ctx.folder.FolderContextPresenter;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckPanel;
-import org.ourproject.kune.workspace.client.ui.WorkspaceFactory;
+import org.ourproject.kune.workspace.client.WorkspaceFactory;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 
 public class DocumentFactory {

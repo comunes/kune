@@ -82,7 +82,9 @@ public class MapperTest {
 	Group groupAdmins = TestDomainHelper.createGroup(1);
 	Group groupEdit = TestDomainHelper.createGroup(2);
 	Group groupView = TestDomainHelper.createGroup(3);
+	Group groupPending = TestDomainHelper.createGroup(4);
 	c.setAccessLists(TestDomainHelper.createAccessLists(groupAdmins, groupEdit, groupView));
+	c.setSocialNetwork(TestDomainHelper.createSocialNetwork(groupAdmins, groupEdit, groupView, groupPending));
 
 	StateDTO dto = mapper.map(c, StateDTO.class);
 	assertEquals(c.getContentRights().isAdministrable(), dto.getContentRights().isAdministrable);
@@ -90,6 +92,15 @@ public class MapperTest {
 	assertValidAccessListsMapping(c.getAccessLists().getAdmins(), dto.getAccessLists().getAdmins());
 	assertValidAccessListsMapping(c.getAccessLists().getEditors(), dto.getAccessLists().getEditors());
 	assertValidAccessListsMapping(c.getAccessLists().getViewers(), dto.getAccessLists().getViewers());
+
+	assertValidAccessListsMapping(c.getSocialNetwork().getAccessLists().getAdmins(), dto.getSocialNetwork()
+		.getAccessLists().getAdmins());
+	assertValidAccessListsMapping(c.getSocialNetwork().getAccessLists().getEditors(), dto.getSocialNetwork()
+		.getAccessLists().getEditors());
+	assertValidAccessListsMapping(c.getSocialNetwork().getAccessLists().getViewers(), dto.getSocialNetwork()
+		.getAccessLists().getViewers());
+	assertValidAccessListsMapping(c.getSocialNetwork().getPendingCollaborators(), dto.getSocialNetwork()
+		.getPendingCollaborators());
     }
 
     private void assertValidAccessListsMapping(final GroupList groupList, final GroupListDTO groupListDTO) {
@@ -115,7 +126,7 @@ public class MapperTest {
 	assertMapping(GroupListMode.NORMAL, GroupListDTO.NORMAL);
     }
 
-    private void assertMapping(GroupListMode mode, String modeName) {
+    private void assertMapping(final GroupListMode mode, final String modeName) {
 	GroupList list = new GroupList();
 	list.setMode(mode);
 	GroupListDTO dto = mapper.map(list, GroupListDTO.class);

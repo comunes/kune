@@ -1,4 +1,4 @@
-package org.ourproject.kune.workspace.client.ui;
+package org.ourproject.kune.workspace.client.workspace.ui;
 
 import org.ourproject.kune.platf.client.ui.CustomButton;
 
@@ -7,16 +7,16 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.gwtext.client.widgets.Button;
 
-public class ToolBarPanel extends HorizontalPanel {
+public class ContentToolBarPanel extends HorizontalPanel {
     private Button btnEnter;
 
-    public ToolBarPanel() {
+    public ContentToolBarPanel() {
 	Label expand = new Label("");
 	this.add(expand);
 	this.setWidth("100%");
 	expand.setWidth("100%");
 	this.setCellWidth(expand, "100%");
-	this.addStyleName("kune-DocumentReaderPanel");
+	this.addStyleName("kune-ContentToolBarPanel");
     }
 
     public void addButton(final String caption, final ClickListener listener) {

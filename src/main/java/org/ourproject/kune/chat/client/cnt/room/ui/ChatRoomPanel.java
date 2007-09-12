@@ -22,7 +22,7 @@ package org.ourproject.kune.chat.client.cnt.room.ui;
 
 import org.ourproject.kune.chat.client.cnt.room.ChatRoomListener;
 import org.ourproject.kune.chat.client.cnt.room.ChatRoomView;
-import org.ourproject.kune.workspace.client.ui.ToolBarPanel;
+import org.ourproject.kune.workspace.client.workspace.ui.ContentToolBarPanel;
 
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
@@ -32,7 +32,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class ChatRoomPanel extends VerticalPanel implements ChatRoomView {
 
     private final HTML content;
-    private ToolBarPanel toolbar;
+    private ContentToolBarPanel toolbar;
 
     public ChatRoomPanel(final ChatRoomListener listener) {
 	add(createToolBar(listener));
@@ -46,7 +46,7 @@ public class ChatRoomPanel extends VerticalPanel implements ChatRoomView {
     }
 
     private Widget createToolBar(final ChatRoomListener listener) {
-	toolbar = new ToolBarPanel();
+	toolbar = new ContentToolBarPanel();
 	// i18n
 	toolbar.addButton("Enter room", new ClickListener() {
 	    public void onClick(final Widget sender) {

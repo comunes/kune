@@ -25,6 +25,7 @@ import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
+import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
@@ -37,6 +38,7 @@ public class StateDTO implements IsSerializable {
     private String toolName;
     private GroupDTO group;
     private ContainerDTO folder;
+    private SocialNetworkDTO socialNetwork;
     private AccessListsDTO accessLists;
     private AccessRightsDTO contentRights;
     private AccessRightsDTO folderRights;
@@ -173,8 +175,16 @@ public class StateDTO implements IsSerializable {
 	return license;
     }
 
-    public void setLicense(LicenseDTO license) {
+    public void setLicense(final LicenseDTO license) {
 	this.license = license;
+    }
+
+    public SocialNetworkDTO getSocialNetwork() {
+	return socialNetwork;
+    }
+
+    public void setSocialNetwork(final SocialNetworkDTO socialNetwork) {
+	this.socialNetwork = socialNetwork;
     }
 
 }

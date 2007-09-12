@@ -122,7 +122,8 @@ public class StateManagerDefault implements StateManager {
 	workspace.setContext(clientTool.getContext());
 	workspace.getContentTitleComponent().setContentTitle(state.getTitle());
 	workspace.getLicenseComponent().setLicense(state.getGroup().getLongName(), state.getLicense());
-
+	workspace.getSocialNetworkComponent().setSocialNetwork(state.getSocialNetwork());
+	workspace.getBuddiesPresenceComponent().setBuddiesPresence();
 	Site.hideProgress();
     }
 

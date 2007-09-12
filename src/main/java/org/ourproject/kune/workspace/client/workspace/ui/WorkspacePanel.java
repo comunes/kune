@@ -24,13 +24,13 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.tool.ToolTrigger;
 import org.ourproject.kune.platf.client.ui.BorderDecorator;
+import org.ourproject.kune.platf.client.ui.DropDownPanel;
 import org.ourproject.kune.workspace.client.workspace.WorkspaceView;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.HorizontalSplitPanel;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -42,6 +42,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     private final VerticalPanel contextVP;
     private final VerticalPanel contentVP;
     private final ContentBottomBar contentBottomBar;
+    private final SummaryPanel generalDropDownsPanel;
 
     public WorkspacePanel() {
 	VerticalPanel generalVP = new VerticalPanel();
@@ -59,11 +60,9 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	generalHP.add(groupNavBarVP);
 
 	groupToolsBar = new GroupToolsBar();
-	SummaryPanel summaryPanel = new SummaryPanel();
+	generalDropDownsPanel = new SummaryPanel();
 	groupNavBarVP.add(groupToolsBar);
-	groupNavBarVP.add(summaryPanel);
-
-	summaryExample(summaryPanel);
+	groupNavBarVP.add(generalDropDownsPanel);
 
 	ContentToolBar contentToolBar = new ContentToolBar();
 	contentTitleBar = new HorizontalPanel();
@@ -96,16 +95,6 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	contentTitleBar.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
 
 	setLogo("");
-    }
-
-    private void summaryExample(final SummaryPanel summaryPanel) {
-	DropDownPanel presencePanel = new DropDownPanel();
-	summaryPanel.add(presencePanel);
-	presencePanel.setWidth("145px");
-	presencePanel.setContentVisible(true);
-	presencePanel.setTitle("Buddies");
-	presencePanel.setColor("87DECD");
-	presencePanel.setContent(new Label("Here the presence of Buddies"));
     }
 
     public void addTab(final ToolTrigger trigger) {
@@ -160,6 +149,22 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	Widget widget = (Widget) view;
 	contentBottomBar.add(widget);
 	contentBottomBar.setCellVerticalAlignment(widget, VerticalPanel.ALIGN_MIDDLE);
+    }
+
+    public void setSocialNetwork(final View view) {
+	AddDropDown(view, "00D4AA");
+    }
+
+    public void setBuddiesPresence(final View view) {
+	AddDropDown(view, "87DECD");
+    }
+
+    private void AddDropDown(final View view, final String color) {
+	DropDownPanel panel = (DropDownPanel) view;
+	generalDropDownsPanel.add(panel);
+	panel.setWidth("145px");
+	panel.setVisible(true);
+	panel.setBorderColor(color);
     }
 
 }

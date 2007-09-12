@@ -25,76 +25,76 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.GroupListDTO;
-import org.ourproject.kune.platf.client.services.Images;
+import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.ui.DropDownPanel;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DisclosurePanel;
-import com.google.gwt.user.client.ui.DisclosurePanelImages;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class AccessListsPanel extends Composite implements View {
 
-    private final DisclosurePanel adminDisclosure;
-    private final DisclosurePanel editDisclosure;
-    private final DisclosurePanel viewDisclosure;
-    private Label mainTitle;
+    private final DropDownPanel adminsPanel;
+    private final DropDownPanel editorsPanel;
+    private final DropDownPanel viewersPanel;
+    private Label headerText;
+    private final VerticalPanel adminsVP;
+    private final VerticalPanel editorsVP;
+    private final VerticalPanel viewersVP;
 
     public AccessListsPanel() {
 	VerticalPanel vp = new VerticalPanel();
 	initWidget(vp);
 
-	mainTitle = new Label();
-	adminDisclosure = createDisclosurePanel("Admins", false);
-	editDisclosure = createDisclosurePanel("Edit", false);
-	viewDisclosure = createDisclosurePanel("View", false);
-	vp.add(mainTitle);
-	vp.add(adminDisclosure);
-	vp.add(editDisclosure);
-	vp.add(viewDisclosure);
+	headerText = new Label();
+	// i18n
+	adminsPanel = new DropDownPanel("Who can admin this", true);
+	editorsPanel = new DropDownPanel("Who can edit this", true);
+	viewersPanel = new DropDownPanel("Who can view this", true);
+	vp.add(headerText);
+	vp.add(adminsPanel);
+	vp.add(editorsPanel);
+	vp.add(viewersPanel);
+	adminsVP = new VerticalPanel();
+	editorsVP = new VerticalPanel();
+	viewersVP = new VerticalPanel();
+	adminsPanel.setContent(adminsVP);
+	editorsPanel.setContent(editorsVP);
+	viewersPanel.setContent(viewersVP);
+	adminsPanel.setBorderColor(Kune.getInstance().c.getAdminsDropDown());
+	editorsPanel.setBorderColor(Kune.getInstance().c.getEditorsDropDown());
+	viewersPanel.setBorderColor(Kune.getInstance().c.getViewersDropDown());
     }
 
-    public void setAccessList(final AccessListsDTO accessLists) {
-	setAccessLists(accessLists, adminDisclosure, editDisclosure, viewDisclosure);
+    public Label getHeaderText() {
+	return headerText;
     }
 
-    private DisclosurePanel createDisclosurePanel(final String headerText, final boolean isOpen) {
-	return new DisclosurePanel(new DisclosurePanelImages() {
-	    public AbstractImagePrototype disclosurePanelClosed() {
-		return Images.App.getInstance().arrowRightBlack();
-	    }
-
-	    public AbstractImagePrototype disclosurePanelOpen() {
-		return Images.App.getInstance().arrowDownBlack();
-	    }
-	}, headerText, isOpen);
+    public void setHeaderText(final Label text) {
+	this.headerText = text;
     }
 
-    private void setAccessLists(final AccessListsDTO accessLists, final DisclosurePanel adminDisclosure,
-	    final DisclosurePanel editDisclosure, final DisclosurePanel viewDisclosure) {
-	setAccessListsInDiclosure(accessLists.getAdmins(), adminDisclosure);
-	setAccessListsInDiclosure(accessLists.getEditors(), editDisclosure);
-	setAccessListsInDiclosure(accessLists.getViewers(), viewDisclosure);
+    public void setAccessLists(final AccessListsDTO accessLists) {
+	setGroupList(accessLists.getAdmins(), adminsVP);
+	setGroupList(accessLists.getEditors(), editorsVP);
+	setGroupList(accessLists.getViewers(), viewersVP);
     }
 
-    private void setAccessListsInDiclosure(final GroupListDTO groupList, final DisclosurePanel disclosure) {
-	disclosure.clear();
-	if (groupList != null) {
+    private void setGroupList(final GroupListDTO groupList, final VerticalPanel groupVP) {
+	groupVP.clear();
+	if (groupList.getMode() == GroupListDTO.EVERYONE) {
+	    // i18n
+	    groupVP.add(new Label("Everybody"));
+	} else if (groupList.getMode() == GroupListDTO.NOBODY) {
+	    // i18n
+	    groupVP.add(new Label("Nobody"));
+	} else {
 	    Iterator iter = groupList.getList().iterator();
 	    while (iter.hasNext()) {
 		GroupDTO next = (GroupDTO) iter.next();
-		disclosure.add(new Label(next.getLongName()));
+		groupVP.add(new Label(next.getLongName()));
 	    }
 	}
-    }
-
-    public Label getMainTitle() {
-	return mainTitle;
-    }
-
-    public void setMainTitle(Label mainTitle) {
-	this.mainTitle = mainTitle;
     }
 
 }

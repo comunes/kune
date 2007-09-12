@@ -35,6 +35,6 @@ public class AdminContextPanel extends VerticalPanel implements AdminContextView
     }
 
     public void setAccessLists(final AccessListsDTO accessLists) {
-	accessListsPanel.setAccessList(accessLists);
+	accessListsPanel.setAccessLists(accessLists);
     }
 }

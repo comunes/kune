@@ -1,8 +1,7 @@
-package org.ourproject.kune.workspace.client.workspace.ui;
+package org.ourproject.kune.platf.client.ui;
 
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.services.Kune;
-import org.ourproject.kune.platf.client.ui.BorderDecorator;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.ClickListener;
@@ -24,17 +23,16 @@ import com.google.gwt.user.client.ui.Widget;
  * 
  */
 public class DropDownPanel extends Composite implements ClickListener {
-    private VerticalPanel dropDownPanelVP = null;
-    private HorizontalPanel titleHP = null;
-    private Label titleLabel = null;
-    private DeckPanel contentDeckP = null;
-    private SimplePanel cleanPanel = null;
+    private VerticalPanel dropDownPanelVP;
+    private HorizontalPanel titleHP;
+    private Label titleLabel;
+    private DeckPanel contentDeckP;
+    private SimplePanel cleanPanel;
     private Images img;
     private Image arrowImage;
     private BorderDecorator outerBorder;
 
     public DropDownPanel() {
-	super();
 	initialize();
 	layout();
 	setProperties();
@@ -48,43 +46,10 @@ public class DropDownPanel extends Composite implements ClickListener {
 	this.setContentVisible(visible);
     }
 
-    protected void initialize() {
-	dropDownPanelVP = new VerticalPanel();
-	outerBorder = new BorderDecorator(dropDownPanelVP, BorderDecorator.ALL);
-	titleHP = new HorizontalPanel();
-	arrowImage = new Image();
-	titleLabel = new Label();
-	contentDeckP = new DeckPanel();
-	cleanPanel = new SimplePanel();
-    }
-
-    protected void layout() {
-	initWidget(outerBorder);
-	dropDownPanelVP.add(titleHP);
-	dropDownPanelVP.add(contentDeckP);
-	titleHP.add(arrowImage);
-	titleHP.add(titleLabel);
-	contentDeckP.add(cleanPanel);
-    }
-
-    protected void setProperties() {
-	outerBorder.setCornerStyleName("kune-DropDownOuter");
-
-	dropDownPanelVP.setBorderWidth(0);
-	dropDownPanelVP.setSpacing(0);
-	dropDownPanelVP.addStyleName("kune-DropDownOuter");
-
-	titleHP.setBorderWidth(0);
-	titleHP.setSpacing(0);
-	titleHP.addStyleName("kune-DropDownLabel");
-
-	img = Images.App.getInstance();
-	img.arrowDownWhite().applyTo(arrowImage);
-
-	titleLabel.setText(Kune.getInstance().t.Text());
-	titleLabel.setWidth("100%");
-
-	contentDeckP.addStyleName("kune-DropDownInner");
+    public DropDownPanel(final String headerText, final boolean visible) {
+	this();
+	this.setContentVisible(visible);
+	this.setHeaderText(headerText);
     }
 
     public boolean contentEmpty() {
@@ -96,28 +61,36 @@ public class DropDownPanel extends Composite implements ClickListener {
 	    contentDeckP.remove(1);
 	}
 	contentDeckP.add(widget);
+	widget.setWidth("100%");
+	// refresh panel
+	setContentVisible(isContentVisible());
     }
 
     public void setContentVisible(final boolean visible) {
 	if (visible) {
+	    img.arrowDownWhite().applyTo(arrowImage);
+	    contentDeckP.setVisible(true);
 	    if (!contentEmpty()) {
-		img.arrowDownWhite().applyTo(arrowImage);
 		contentDeckP.showWidget(1);
-		contentDeckP.setVisible(true);
 	    }
 	} else {
 	    img.arrowRightWhite().applyTo(arrowImage);
-	    contentDeckP.showWidget(0);
 	    contentDeckP.setVisible(false);
+	    contentDeckP.showWidget(0);
 	}
     }
 
-    public boolean isVisible() {
-	return (contentDeckP.getVisibleWidget() == 1);
+    public boolean isContentVisible() {
+	return (contentDeckP.isVisible());
     }
 
-    public void setTitle(final String title) {
-	titleLabel.setText(title);
+    public void setHeaderText(final String text) {
+	titleLabel.setText(text);
+    }
+
+    public void setHeaderTitle(final String title) {
+	titleLabel.setTitle(title);
+	arrowImage.setTitle(title);
     }
 
     public void onClick(final Widget sender) {
@@ -126,10 +99,52 @@ public class DropDownPanel extends Composite implements ClickListener {
 	}
     }
 
-    public void setColor(final String color) {
+    public void setBorderColor(final String color) {
 	outerBorder.setColor(color);
 	DOM.setStyleAttribute(arrowImage.getElement(), "backgroundColor", color);
 	DOM.setStyleAttribute(dropDownPanelVP.getElement(), "backgroundColor", color);
 	DOM.setStyleAttribute(titleLabel.getElement(), "backgroundColor", color);
+    }
+
+    public void setBackgroundColor(final String color) {
+	DOM.setStyleAttribute(contentDeckP.getElement(), "backgroundColor", color);
+    }
+
+    private void initialize() {
+	dropDownPanelVP = new VerticalPanel();
+	outerBorder = new BorderDecorator(dropDownPanelVP, BorderDecorator.ALL);
+	titleHP = new HorizontalPanel();
+	arrowImage = new Image();
+	titleLabel = new Label();
+	contentDeckP = new DeckPanel();
+	cleanPanel = new SimplePanel();
+    }
+
+    private void layout() {
+	initWidget(outerBorder);
+	dropDownPanelVP.add(titleHP);
+	dropDownPanelVP.add(contentDeckP);
+	titleHP.add(arrowImage);
+	titleHP.add(titleLabel);
+	contentDeckP.add(cleanPanel);
+    }
+
+    private void setProperties() {
+	outerBorder.setCornerStyleName("kune-DropDownOuter");
+
+	dropDownPanelVP.addStyleName("kune-DropDownOuter");
+	dropDownPanelVP.setWidth("100%");
+	dropDownPanelVP.setCellWidth(contentDeckP, "100%");
+	dropDownPanelVP.setCellWidth(titleHP, "100%");
+	cleanPanel.setWidth("100%");
+
+	titleHP.addStyleName("kune-DropDownLabel");
+
+	img = Images.App.getInstance();
+	img.arrowDownWhite().applyTo(arrowImage);
+
+	titleLabel.setText(Kune.getInstance().t.Text());
+
+	contentDeckP.addStyleName("kune-DropDownInner");
     }
 }

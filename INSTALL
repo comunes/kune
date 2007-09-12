@@ -66,9 +66,18 @@ Add this lines to conf/openfire.xml and check that the user/passwd of the db is 
     </auth>
   </provider>
   <jdbcAuthProvider>
-     <passwordSQL>SELECT password FROM kusers WHERE shortName=?</passwordSQL>
-     <passwordType>plain</passwordType>
-   </jdbcAuthProvider>
+    <passwordSQL>SELECT password FROM kune_dev.kusers WHERE shortName=?</passwordSQL>
+    <passwordType>plain</passwordType>
+  </jdbcAuthProvider>
+  <jdbcUserProvider>
+    <loadUserSQL>SELECT shortName,email FROM kune_dev.kusers WHERE shortName=?</loadUserSQL>
+    <userCountSQL>SELECT COUNT(*) FROM kune_dev.kusers</userCountSQL>
+    <allUsersSQL>SELECT shortName FROM kune_dev.kusers</allUsersSQL>
+    <searchSQL>SELECT shortName FROM kusers WHERE</searchSQL>
+    <usernameField>shortName</usernameField>
+    <nameField>name</nameField>
+    <emailField>email</emailField>
+  </jdbcUserProvider>
   ...
 </jive>
 

@@ -31,9 +31,20 @@ import org.ourproject.kune.workspace.client.license.LicenseComponent;
 import org.ourproject.kune.workspace.client.license.LicensePresenter;
 import org.ourproject.kune.workspace.client.license.LicenseView;
 import org.ourproject.kune.workspace.client.license.ui.LicensePanel;
+import org.ourproject.kune.workspace.client.presence.BuddiesPresencePresenter;
+import org.ourproject.kune.workspace.client.presence.BuddiesPresenceView;
+import org.ourproject.kune.workspace.client.presence.ui.BuddiesPresencePanel;
+import org.ourproject.kune.workspace.client.socialnet.SocialNetworkPresenter;
+import org.ourproject.kune.workspace.client.socialnet.SocialNetworkView;
+import org.ourproject.kune.workspace.client.socialnet.ui.SocialNetworkPanel;
+import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
+import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPanel;
+import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPresenter;
+import org.ourproject.kune.workspace.client.workspace.BuddiesPresenceComponent;
 import org.ourproject.kune.workspace.client.workspace.ContentTitleComponent;
 import org.ourproject.kune.workspace.client.workspace.ContentTitlePresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentTitleView;
+import org.ourproject.kune.workspace.client.workspace.SocialNetworkComponent;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 import org.ourproject.kune.workspace.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.workspace.client.workspace.WorkspaceView;
@@ -69,6 +80,27 @@ public class WorkspaceFactory {
     public static ContentTitleComponent createContentTitleComponent() {
 	ContentTitlePresenter presenter = new ContentTitlePresenter();
 	ContentTitleView view = new ContentTitlePanel(presenter);
+	presenter.init(view);
+	return presenter;
+    }
+
+    public static ContextItems createContextItems() {
+	ContextItemsPresenter presenter = new ContextItemsPresenter();
+	ContextItemsPanel panel = new ContextItemsPanel(presenter);
+	presenter.init(panel);
+	return presenter;
+    }
+
+    public static SocialNetworkComponent createSocialNetworkComponent() {
+	SocialNetworkPresenter presenter = new SocialNetworkPresenter();
+	SocialNetworkView view = new SocialNetworkPanel(presenter);
+	presenter.init(view);
+	return presenter;
+    }
+
+    public static BuddiesPresenceComponent createBuddiesPresenceComponent() {
+	BuddiesPresencePresenter presenter = new BuddiesPresencePresenter();
+	BuddiesPresenceView view = new BuddiesPresencePanel(presenter);
 	presenter.init(view);
 	return presenter;
     }

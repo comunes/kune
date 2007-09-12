@@ -45,7 +45,7 @@ import org.ourproject.kune.chat.client.rooms.ui.MultiRoomPanel;
 import org.ourproject.kune.chat.client.rooms.ui.RoomPanel;
 import org.ourproject.kune.chat.client.rooms.ui.RoomUserListPanel;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckPanel;
-import org.ourproject.kune.workspace.client.ui.WorkspaceFactory;
+import org.ourproject.kune.workspace.client.WorkspaceFactory;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 
 public class ChatFactory {
