@@ -450,19 +450,31 @@
 }
 
 .kune-DropDownInner {
-    margin-left:3px;
-    margin-right:3px;
-    margin-bottom:1px;
-    background:green;
-    background-color:#FFF;
-    padding:3px;
+    margin: 0 3px 1px 3px;
+    background: green;
+    background-color: #FFF;
+    padding: 3px;
 }
 
 .kune-DropDownLabel {
-    color:#FFF;
+    color: #FFF;
     cursor:pointer;
 }
 
-.kune-DropDownLabel .gwt-Image {
-    margin: 0 3px;
+.kune-DropDownLabel .gwt-Label {
+    margin: 0 5px 0 0;
+    width: 100%;
+}
+
+.kune-DropDownLabel img {
+    margin: 0 3px 0 1px;
+}
+
+/* Content ToolBar Panel */
+
+.kune-ContentToolBarPanel {
+    background-color: #F2F2F2;
+    padding: 2px;
+    height: 24px;
+    vertical-align: middle;
 }
