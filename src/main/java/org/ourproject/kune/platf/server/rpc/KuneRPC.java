@@ -72,10 +72,10 @@ public class KuneRPC implements RPC, KuneService {
     }
 
     @Transactional(type = TransactionType.READ_WRITE)
-    public StateToken createNewGroup(final GroupDTO group) throws SerializableException {
+    public StateToken createNewGroup(final String userHash, final GroupDTO group) throws SerializableException {
 	log.debug(group.getShortName() + group.getLongName() + group.getPublicDesc() + group.getDefaultLicense()
 		+ group.getType());
-	User user = userManager.find(session.getUserId());
+	User user = session.getUser();
 	Group newGroup = groupManager.createGroup(mapper.map(group, Group.class), user);
 	return new StateToken(newGroup.getDefaultContent().getStateToken());
     }
@@ -86,7 +86,7 @@ public class KuneRPC implements RPC, KuneService {
 
 	data.setCCLicenses(licenseManager.getCC());
 	data.setNotCCLicenses(licenseManager.getNotCC());
-	data.setUserInfo(userInfoService.buildInfo(userManager.find(session.getUserId())));
+	data.setUserInfo(userInfoService.buildInfo(userManager.find(session.getUser().getId())));
 	data.setChatHttpBase(chatProperties.getHttpBase());
 	data.setChatDomain(chatProperties.getDomain());
 	data.setChatRoomHost(chatProperties.getRoomHost());

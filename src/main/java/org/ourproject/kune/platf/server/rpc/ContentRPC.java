@@ -20,6 +20,8 @@
 
 package org.ourproject.kune.platf.server.rpc;
 
+import org.ourproject.kune.chat.server.managers.ChatConnection;
+import org.ourproject.kune.chat.server.managers.XmppManager;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
@@ -27,8 +29,8 @@ import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.access.Access;
-import org.ourproject.kune.platf.server.access.AccessType;
 import org.ourproject.kune.platf.server.access.AccessService;
+import org.ourproject.kune.platf.server.access.AccessType;
 import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.content.CreationService;
 import org.ourproject.kune.platf.server.domain.Container;
@@ -39,7 +41,6 @@ import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.platf.server.state.State;
 import org.ourproject.kune.platf.server.state.StateService;
-import org.ourproject.kune.platf.server.users.UserManager;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.inject.Inject;
@@ -55,18 +56,18 @@ public class ContentRPC implements ContentService, RPC {
     private final GroupManager groupManager;
     private final AccessService accessManager;
     private final CreationService creationService;
-    private final UserManager userManager;
+    private final XmppManager xmppManager;
 
     @Inject
     public ContentRPC(final UserSession session, final AccessService contentAccess, final StateService stateService,
-	    final CreationService creationService, final UserManager userManager, final GroupManager groupManager,
+	    final CreationService creationService, final GroupManager groupManager, final XmppManager xmppManager,
 	    final Mapper mapper) {
 	this.session = session;
 	this.accessManager = contentAccess;
 	this.stateService = stateService;
 	this.creationService = creationService;
-	this.userManager = userManager;
 	this.groupManager = groupManager;
+	this.xmppManager = xmppManager;
 	this.mapper = mapper;
     }
 
@@ -107,7 +108,7 @@ public class ContentRPC implements ContentService, RPC {
 	    throws AccessViolationException, ContentNotFoundException {
 
 	User user = session.getUser();
-	Group group = groupManager.getGroupOfUserWithId(session.getUserId());
+	Group group = groupManager.getGroupOfUserWithId(session.getUser().getId());
 	Access access = accessManager.getFolderAccess(parentFolderId, group, AccessType.EDIT);
 	access.setContentWidthFolderRights(creationService.createContent(title, user, access.getFolder()));
 	State state = stateService.create(access);
@@ -116,9 +117,13 @@ public class ContentRPC implements ContentService, RPC {
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
-    public StateDTO addFolder(final String hash, final String groupShotName, final Long parentFolderId,
+    public StateDTO addFolder(final String userHash, final String groupShotName, final Long parentFolderId,
 	    final String title) throws ContentNotFoundException, AccessViolationException, GroupNotFoundException {
-	User user = userManager.find(session.getUserId());
+	return createFolder(groupShotName, parentFolderId, title);
+    }
+
+    private StateDTO createFolder(final String groupShotName, final Long parentFolderId, final String title)
+	    throws AccessViolationException, ContentNotFoundException, GroupNotFoundException {
 	Group group = groupManager.findByShortName(groupShotName);
 
 	Access access = accessManager.getFolderAccess(parentFolderId, group, AccessType.EDIT);
@@ -128,6 +133,17 @@ public class ContentRPC implements ContentService, RPC {
 	access = accessManager.getAccess(token, group, group, AccessType.READ);
 	State state = stateService.create(access);
 	return mapper.map(state, StateDTO.class);
+    }
+
+    @Authenticated
+    @Transactional(type = TransactionType.READ_WRITE)
+    public StateDTO addRoom(final String userHash, final String groupShotName, final Long parentFolderId,
+	    final String roomName) throws ContentNotFoundException, AccessViolationException, GroupNotFoundException {
+	String userShortName = session.getUser().getShortName();
+	ChatConnection connection = xmppManager.login(userShortName, session.getUser().getPassword(), userHash);
+	xmppManager.createRoom(connection, roomName, userShortName + userHash);
+	xmppManager.disconnect(connection);
+	return createFolder(groupShotName, parentFolderId, roomName);
     }
 
     private Long parseId(final String documentId) throws ContentNotFoundException {

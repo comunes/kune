@@ -43,6 +43,9 @@ public interface ContentService extends RemoteService {
     StateDTO addFolder(String hash, String groupShortName, Long parentFolderId, String title)
 	    throws ContentNotFoundException, AccessViolationException, GroupNotFoundException;
 
+    StateDTO addRoom(String user, String groupShortName, Long parentFolderId, String name)
+	    throws AccessViolationException, ContentNotFoundException, GroupNotFoundException;
+
     public static class App {
 	private static ContentServiceAsync instance;
 

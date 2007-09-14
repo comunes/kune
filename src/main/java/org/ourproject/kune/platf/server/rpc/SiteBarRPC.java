@@ -65,7 +65,7 @@ public class SiteBarRPC implements RPC, SiteBarService {
 
     private UserInfoDTO loginUser(final User user) throws UserAuthException {
 	if (user != null) {
-	    session.setUserId(user.getId());
+	    session.setUser(user);
 	    UserInfo userInfo = userInfoService.buildInfo(user);
 	    return mapper.map(userInfo, UserInfoDTO.class);
 	} else {

@@ -32,8 +32,7 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 // TODO: cambiar nombre a UserService
 public interface KuneService extends RemoteService {
 
-    // FIXME: falta el userHash!
-    StateToken createNewGroup(GroupDTO group) throws SerializableException;
+    StateToken createNewGroup(String userHash, GroupDTO group) throws SerializableException;
 
     InitDataDTO getInitData(String userHash);
 

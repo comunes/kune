@@ -95,7 +95,7 @@ public class DropDownPanel extends Composite implements ClickListener {
 
     public void onClick(final Widget sender) {
 	if ((sender == titleHP) | (sender == arrowImage) | (sender == titleLabel)) {
-	    setContentVisible(!isVisible());
+	    setContentVisible(!isContentVisible());
 	}
     }
 

@@ -50,16 +50,18 @@ public class ContentServiceMocked extends MockedService implements ContentServic
     }
 
     public void save(final String user, final String documentId, final String content, final AsyncCallback asyncCallback) {
-
     }
 
     public void addContent(final String user, final Long parentFolderId, final String name,
 	    final AsyncCallback asyncCallback) {
-
     }
 
     public void addFolder(final String hash, final String groupShortName, final Long parentFolderId,
 	    final String title, final AsyncCallback callback) {
+    }
+
+    public void addRoom(final String user, final String groupShortName, final Long parentFolderId, final String name,
+	    final AsyncCallback callback) {
     }
 
 }

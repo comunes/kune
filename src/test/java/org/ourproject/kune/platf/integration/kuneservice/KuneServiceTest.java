@@ -56,7 +56,7 @@ public class KuneServiceTest extends IntegrationTest {
     public void createGroupNotLogged() throws SerializableException {
 	GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative", "Public Desc", "by-sa",
 		GroupDTO.TYPE_PROJECT);
-	service.createNewGroup(group);
+	service.createNewGroup(session.getHash(), group);
     }
 
     @Test
@@ -65,7 +65,7 @@ public class KuneServiceTest extends IntegrationTest {
 
 	GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative", "Public Desc", "by-sa",
 		GroupDTO.TYPE_PROJECT);
-	service.createNewGroup(group);
+	service.createNewGroup(session.getHash(), group);
 
 	Group groupCreated = groupFinder.findByShortName("ysei");
 	assertEquals(groupCreated.getShortName(), group.getShortName());

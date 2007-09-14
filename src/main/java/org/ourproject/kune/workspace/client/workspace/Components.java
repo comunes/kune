@@ -8,6 +8,7 @@ class Components {
     private ContentTitleComponent contentTitle;
     private SocialNetworkComponent socialNetwork;
     private BuddiesPresenceComponent buddiesPresence;
+    private ContentSubTitleComponent contentSubTitle;
 
     public Components(final WorkspacePresenter presenter) {
     }
@@ -26,6 +27,13 @@ class Components {
 	return contentTitle;
     }
 
+    public ContentSubTitleComponent getContentSubTitleComponent() {
+	if (contentSubTitle == null) {
+	    contentSubTitle = WorkspaceFactory.createContentSubTitleComponent();
+	}
+	return contentSubTitle;
+    }
+
     public SocialNetworkComponent getSocialNetworkComponent() {
 	if (socialNetwork == null) {
 	    socialNetwork = WorkspaceFactory.createSocialNetworkComponent();
@@ -39,5 +47,4 @@ class Components {
 	}
 	return buddiesPresence;
     }
-
 }

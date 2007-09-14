@@ -64,6 +64,12 @@ public class AccessListsPanel extends Composite implements View {
 	adminsPanel.setBorderColor(Kune.getInstance().c.getAdminsDropDown());
 	editorsPanel.setBorderColor(Kune.getInstance().c.getEditorsDropDown());
 	viewersPanel.setBorderColor(Kune.getInstance().c.getViewersDropDown());
+	adminsPanel.setBackgroundColor("CCFFAA");
+	editorsPanel.setBackgroundColor("CCFFAA");
+	viewersPanel.setBackgroundColor("CCFFAA");
+	adminsPanel.addStyleName("kune-Margin-Medium-tl");
+	editorsPanel.addStyleName("kune-Margin-Medium-tl");
+	viewersPanel.addStyleName("kune-Margin-Medium-tl");
     }
 
     public Label getHeaderText() {

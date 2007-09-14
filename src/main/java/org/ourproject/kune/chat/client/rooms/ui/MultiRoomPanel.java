@@ -30,6 +30,7 @@ import org.ourproject.kune.chat.client.rooms.RoomUserListView;
 import org.ourproject.kune.platf.client.View;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
@@ -66,13 +67,11 @@ public class MultiRoomPanel implements MultiRoomView, View {
     private Form inputForm;
     private final HashMap userListToIndex;
     private final HashMap panelIdToRoom;
-    private boolean dialogHideConfirmed;
 
     public MultiRoomPanel(final MultiRoomPresenter presenter) {
 	this.presenter = presenter;
 	this.userListToIndex = new HashMap();
 	panelIdToRoom = new HashMap();
-	dialogHideConfirmed = false;
 	createLayout();
     }
 
@@ -81,15 +80,18 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	layout.beginUpdate();
 
 	ContentPanel chatRoomPanel = (ContentPanel) room.getView();
-	layout.add(LayoutRegionConfig.CENTER, chatRoomPanel);
+	// layout.add(LayoutRegionConfig.CENTER, chatRoomPanel);
+	layout.getRegion(LayoutRegionConfig.CENTER).add(chatRoomPanel);
 
 	String panelId = chatRoomPanel.getId();
 	panelIdToRoom.put(panelId, room);
+	GWT.log("tabs2: " + layout.getRegion(LayoutRegionConfig.CENTER).getTabs().getCount(), null);
 	layout.endUpdate();
+	layout.getRegion(LayoutRegionConfig.CENTER).getTabs().activate(1);
+	GWT.log("tab id: " + layout.getRegion(LayoutRegionConfig.CENTER).getTabs().getTab(0).toString(), null);
+	chatRoomPanel.refresh();
+	chatRoomPanel.setVisible(true);
 
-	// FIXME: Returns Exception, affected maybe by:
-	// http://code.google.com/p/gwt-ext/issues/detail?id=81
-	// layout.showPanel(contentId);
     }
 
     public void show() {
@@ -224,27 +226,18 @@ public class MultiRoomPanel implements MultiRoomView, View {
     private void createListeners() {
 	dialog.addDialogListener(new DialogListener() {
 
-	    // public boolean doBeforeHide(final LayoutDialog dialog) {
-	    // if (centralLayout.getNumPanels() > 0) {
-	    // return Window.confirm("Sure?");
-	    // }
-	    // return true;
-	    // }
-
 	    public boolean doBeforeHide(final LayoutDialog dialog) {
 		if (centralLayout.getNumPanels() > 0) {
-		    if (dialogHideConfirmed) {
-			dialogHideConfirmed = false; // FIXME: Status in
-							// Panel, remove this!!
+		    if (presenter.isCloseAllConfirmed()) {
 			return true;
 		    } else {
 			MessageBox.confirm("Confirm", "Are you sure you want to exit all the rooms?",
 				new MessageBox.ConfirmCallback() {
 				    public void execute(final String btnID) {
-					GWT.log(btnID, null);
 					if (btnID.equals("yes")) {
-					    dialogHideConfirmed = true;
 					    presenter.closeAllRooms();
+					} else {
+					    presenter.onCloseAllNotConfirmed();
 					}
 				    }
 				});
@@ -259,6 +252,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	    }
 
 	    public void onHide(final LayoutDialog dialog) {
+		GWT.log("Chat: hide event", null);
 	    }
 
 	    public void onKeyDown(final LayoutDialog dialog, final EventObject e) {
@@ -268,6 +262,12 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	    }
 
 	    public void onResize(final LayoutDialog dialog, final int width, final int height) {
+		if (height == 26) {
+		    // There is no a minimize event, then when resize has this
+		    // height, is equivalent to a minimize, and we put the
+		    // dialog in the bottom of the screen
+		    dialog.moveTo(dialog.getAbsoluteLeft(), Window.getClientHeight() - height - 1);
+		}
 	    }
 
 	    public void onShow(final LayoutDialog dialog) {
@@ -278,28 +278,25 @@ public class MultiRoomPanel implements MultiRoomView, View {
 
 	centralLayout.addLayoutRegionListener(new LayoutRegionListener() {
 
-	    // public boolean doBeforeRemove(final LayoutRegion region, final
-	    // ContentPanel panel) {
-	    // if (Window.confirm("Are you sure?")) {
-	    // RoomPresenter roomPresenter = (RoomPresenter)
-	    // panelIdToRoom.get(panel.getId());
-	    // presenter.closeRoom(roomPresenter);
-	    // return true;
-	    // }
-	    // return false;
-	    // }
-
 	    public boolean doBeforeRemove(final LayoutRegion region, final ContentPanel panel) {
-
-		MessageBox.confirm("Confirm", "Are you sure you want to exit this room?",
-			new MessageBox.ConfirmCallback() {
-			    public void execute(final String btnID) {
-				if (btnID.equals("yes")) {
-				    RoomPresenter roomPresenter = (RoomPresenter) panelIdToRoom.get(panel.getId());
-				    presenter.closeRoom(roomPresenter);
+		final RoomPresenter roomPresenter = (RoomPresenter) panelIdToRoom.get(panel.getId());
+		if (presenter.isCloseAllConfirmed() || roomPresenter.isCloseConfirmed()) {
+		    return true;
+		} else {
+		    MessageBox.confirm("Confirm", "Are you sure you want to exit from this room?",
+			    new MessageBox.ConfirmCallback() {
+				public void execute(final String btnID) {
+				    if (btnID.equals("yes")) {
+					presenter.closeRoom(roomPresenter);
+					panel.destroy();
+					// region.getActivePanel().destroy();
+					region.getTabs().getActiveTab().removeFromParent();
+				    } else {
+					roomPresenter.onCloseNotConfirmed();
+				    }
 				}
-			    }
-			});
+			    });
+		}
 		return false;
 	    }
 
@@ -376,11 +373,9 @@ public class MultiRoomPanel implements MultiRoomView, View {
 		    }
 
 		    public void onChange(final Field field, final Object newVal, final Object oldVal) {
-			GWT.log("Change MRP", null);
 		    }
 
 		    public void onFocus(final Field field) {
-			GWT.log("OnFocus MRP", null);
 		    }
 
 		    public void onInvalid(final Field field, final String msg) {

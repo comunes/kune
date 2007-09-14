@@ -45,6 +45,7 @@ public class AddFolder implements Action {
 	ContentServiceAsync server = ContentService.App.getInstance();
 	server.addFolder(services.user, group.getShortName(), container.getId(), name, new AsyncCallback() {
 	    public void onFailure(final Throwable caught) {
+		Site.hideProgress();
 	    }
 
 	    public void onSuccess(final Object result) {

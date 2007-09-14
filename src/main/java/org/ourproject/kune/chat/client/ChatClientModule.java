@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.chat.client;
 
+import org.ourproject.kune.chat.client.actions.AddRoomAction;
 import org.ourproject.kune.chat.client.actions.ChatLoginAction;
 import org.ourproject.kune.chat.client.actions.ChatLogoutAction;
 import org.ourproject.kune.chat.client.actions.InitChatEngineAction;
@@ -39,6 +40,7 @@ public class ChatClientModule implements ClientModule {
 	ChatLogoutAction logoutAction = new ChatLogoutAction(chatTool);
 	register.addAction(WorkspaceEvents.USER_LOGGED_OUT, logoutAction);
 	register.addAction(WorkspaceEvents.STOP_APP, logoutAction);
+	register.addAction(ChatEvents.ADD_ROOM, new AddRoomAction());
 	register.addAction(ChatEvents.JOIN_ROOM, new JoinRoomAction(chatTool));
     }
 }

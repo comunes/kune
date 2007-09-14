@@ -18,11 +18,12 @@
  *
  */
 
-package org.ourproject.kune.docs.client.actions;
+package org.ourproject.kune.chat.client.actions;
 
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
+import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.sitebar.client.Site;
@@ -30,15 +31,19 @@ import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class AddDocument implements Action {
+public class AddRoomAction implements Action {
+
     public void execute(final Object value, final Object extra, final Services services) {
-	addDocument(services, (String) value, services.session.getCurrentState().getFolder());
+	String name = (String) value;
+	GroupDTO group = services.session.getCurrentState().getGroup();
+	ContainerDTO container = services.session.getCurrentState().getFolder();
+	addRoom(services, name, group, container);
     }
 
-    private void addDocument(final Services services, final String name, final ContainerDTO containerDTO) {
+    private void addRoom(final Services services, final String name, final GroupDTO group, final ContainerDTO container) {
 	Site.showProgressProcessing();
 	ContentServiceAsync server = ContentService.App.getInstance();
-	server.addContent(services.user, containerDTO.getId(), name, new AsyncCallback() {
+	server.addRoom(services.user, group.getShortName(), container.getId(), name, new AsyncCallback() {
 	    public void onFailure(final Throwable caught) {
 		Site.hideProgress();
 	    }

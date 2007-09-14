@@ -31,5 +31,7 @@ public interface ContentServiceAsync {
 
     void addFolder(String hash, String groupShortName, Long parentFolderId, String title, AsyncCallback callback);
 
+    void addRoom(String user, String groupShortName, Long parentFolderId, String name, AsyncCallback callback);
+
     void save(String user, String documentId, String content, AsyncCallback asyncCallback);
 }

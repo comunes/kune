@@ -20,4 +20,8 @@ public class SocialNetworkPresenter implements SocialNetworkComponent {
 	return view;
     }
 
+    public void onJoin() {
+	// TODO Auto-generated method stub
+    }
+
 }

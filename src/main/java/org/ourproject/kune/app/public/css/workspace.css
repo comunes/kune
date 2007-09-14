@@ -1,0 +1,331 @@
+
+/* Workspace styles */
+
+.kune-WorkspacePanel {
+    width: 100%;
+    background-color: #FFF;
+}
+
+.kune-WokspacePanel .Tab {
+
+}
+
+.kune-WorkspacePanel .GeneralHP {
+
+}
+
+.kune-WorkspacePanel .ContextPanel {
+    width: 100%;
+    border-right: 3px solid #5FD35F;
+}
+
+.kune-EntityTextLogo {
+    border: 2px solid #F2F2F2;
+    overflow: hidden;
+    width: 468px;
+    height: 60px;
+    margin-bottom: 4px;
+}
+
+.kune-EntityTextLogo .gwt-Label {
+    font-size: 167%;
+    overflow: hidden;
+    font-weight: 700;
+    color: navy;
+    margin: 5px;
+    font-weight: 700;
+}
+
+.kune-EntityTextLogo .gwt-Hyperlink {
+    color: #CCC;
+    font-size: 85%;
+    text-decoration: underline;
+    text-align: right;
+    margin: 5px;
+}
+
+.kune-GroupSummaryPanel {
+    margin: 15px 0 0 5px;
+    width: 100%;
+}
+
+.kune-GroupToolsBar {
+    width: 150px;
+}
+
+.kune-GroupToolsBar-itemSelected {
+    margin-bottom: 5px;
+}
+
+.kune-GroupToolsBar-itemSelected .gwt-Hyperlink a {
+    color: #FFF;
+    padding: 0 9px;
+    text-decoration: none;
+}
+
+.kune-GroupToolsBar-itemSelected .gwt-Hyperlink a:hover {
+    text-decoration: none;
+}
+
+.kune-GroupToolsBar-itemNotSelected {
+    margin-bottom: 5px;
+}
+
+.kune-GroupToolsBar-itemNotSelected  .gwt-Hyperlink a {
+    color: green;
+    padding: 0 9px;
+    text-decoration: none;
+}
+
+.kune-GroupToolsBar-itemNotSelected  .gwt-Hyperlink a:hover {
+    text-decoration: none;
+}
+
+/* Content titles */
+
+.kune-ContentTitleBar {
+    border-left: 2px solid #5FD35F;
+    background-color: #AFA;
+    color: #250;
+    width: 100%;
+    height: 25px;
+    vertical-align: middle;
+}
+
+.kune-ContentTitleBar .gwt-Label {
+    width: 100%;
+    height: 23px;
+    vertical-align: middle;
+    margin: 0 9px;
+}
+
+.kune-ContentSubTitleBar {
+    background-color: #5FD35F;
+    color: #FFF;
+    font-weight: 700;
+    font-size: 85%;
+    width: 100%;
+    vertical-align: middle;
+}
+
+.kune-ContentSubTitleBar .gwt-Label {
+    width: 100%;
+    height: 23px;
+    vertical-align: middle;
+    margin: 0 9px;
+}
+
+.kune-ContentToolBarPanel {
+    background-color: #F2F2F2;
+    padding: 2px;
+    height: 24px;
+    vertical-align: middle;
+}
+
+.kune-ContentBottomBar {
+    background: #5FD35F;
+    vertical-align: middle;
+    width: 100%;
+    height: 24px;
+}
+
+.kune-ContentBottomBar .gwt-Label {
+    color: #FFF;
+    white-space: nowrap;
+    font-weight: 700;
+    font-size: 85%;
+    margin: 0 9px;
+}
+
+/* Main Content & Context */
+
+.kune-WorkspacePanel-Content {
+    background-color: #FFF;
+    width: 100%;
+}
+
+.kune-WorkspacePanel-Content .main-content {
+    margin: 5px;
+}
+
+.kune-WorkspacePanel-Context {
+    background-color: #CFA;
+    width: 100%;
+    height: 100%;
+}
+
+.kune-NavigationBar {
+    width: 100%;
+}
+
+.kune-NavigationBar .topBar {
+    background-color: #ececec;
+    background: #ececec;
+    border-bottom: 1px solid #e3dbdb;
+    vertical-align: middle;
+}
+
+.kune-NavigationBar .topBar .gwt-PushButton {
+    margin: 1px 3px 1px 0;
+}
+
+.kune-NavigationBar .topBar .gwt-Label {
+    vertical-align: middle;
+}
+
+.kune-NavigationBar .kune-topBar-iconBar {
+    margin: 2px 0 2px 5px;
+}
+
+.topBar .gwt-PushButton-up-disabled {
+    filter: alpha(opacity =   20);
+    -moz-opacity: 0.2;
+    opacity: 0.2;
+}
+
+.topBar .gwt-PushButton-down-disabled {
+    filter: alpha(opacity =   20);
+    -moz-opacity: 0.2;
+    opacity: 0.2;
+}
+
+.kune-NavigationBar .topBar .gwt-Image {
+    margin: 0 2px 0 5px;
+}
+
+.kune-NavigationBar .Items {
+    margin: 3px 0;
+}
+
+.kune-NavigationBar .Items .gwt-Image {
+    margin: 2px 0;
+    vertical-align: middle;
+}
+
+.kune-NavigationBar .Items .gwt-Hyperlink a {
+    color: green; /* FIXME: other color */
+}
+
+.kune-NavigationBar .topBar .topBar-margin {
+    margin-left: 5px;
+}
+
+.kune-NavigationBar .pathMenu {
+    vertical-align: middle;
+}
+
+.kune-NavigationBar .pathMenu .gwt-MenuItem {
+    background: transparent url(img/button-bg-hard.gif) repeat-x 0 0;
+    border-left: 1px solid #AAA;
+    border-right: 1px solid #AAA;
+    color: #999;
+    cursor: pointer;
+    cursor: hand;
+    white-space: nowrap;
+    padding: 3px 6px;
+}
+
+.kune-NavigationBar .pathMenu .gwt-MenuItem-selected {
+    background: transparent url(img/button-bg-soft.gif) repeat-x 0 0;
+    color: #000;
+}
+
+.kune-NavigationBar .kune-IconHyperlink {
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+.kune-NavigationBar .kune-IconHyperlink a {
+    color: green;
+    text-decoration: none;
+}
+
+.kune-NavigationBar .kune-IconHyperlink .gwt-Image {
+    margin-right: 3px;
+    vertical-align: middle;
+}
+
+/* Sitebar */
+.kune-SiteBarPanel {
+    margin-right: 10px;
+    height: 16px;
+}
+
+.kune-SiteBarPanel .gwt-TextBox {
+    border: 1px solid #E4A374;
+    margin: 0 15px 0 3px;
+    padding-left: 3px;
+    color: #B3B3B3;
+}
+
+.kune-SiteBarPanel .gwt-Hyperlink a {
+    white-space: nowrap;
+    color: #B3B3B3;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.kune-SiteBarPanel .gwt-PushButton { /* FIXME: test this */
+    cursor: pointer;
+}
+
+.kune-SiteBarPanel-Separator {
+    color: #E4A374;
+    margin: 0 5px;
+}
+
+.kune-SiteBarPanel-SpaceSeparator {
+    width: 10px;
+}
+
+.kune-Progress {
+    background: #E5FF80;
+    border: 1px solid #E5FF80;
+    white-space: nowrap;
+    height: 16px;
+    padding: 0 3px;
+}
+
+.kune-SiteMessagePanel {
+    background-color: #E5FF80;
+    border: 1px solid #CF0;
+    color: #250;
+    z-index: 1000;
+    vertical-align: middle;
+}
+
+.kune-SiteMessagePanel .gwt-HTML {
+    margin: 10px 5px 10px 2px;
+}
+
+.kune-SiteMessagePanel .gwt-Image {
+    margin: 3px;
+}
+
+.kune-SiteMessagePanel .error {
+    background-color: #FFB380;
+}
+
+.kune-SiteMessagePanel .veryimp {
+    background-color: #FFD4AA;
+}
+
+.kune-SiteMessagePanel .imp {
+    background-color: #FFE6D5;
+}
+
+.kune-SiteMessagePanel .info {
+    background-color: #E5FF80;
+}
+
+/* Social Network */
+
+.kune-SocialNetSubLabel {
+    background-color: #ECECEC;
+    padding: 0 3px;
+}
+
+.kune-SocialNet .gwt-Hyperlink a {
+    color: green;
+}
+

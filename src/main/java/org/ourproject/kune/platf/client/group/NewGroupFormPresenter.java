@@ -52,7 +52,8 @@ public class NewGroupFormPresenter implements NewGroupForm {
 	// TODO: without license you can't create a group
 
 	GroupDTO group = new GroupDTO(shortName, longName, publicDesc, "by-cc", getTypeOfGroup());
-	kuneService.createNewGroup(group, new AsyncCallback() {
+	// FIXME: get User hash
+	kuneService.createNewGroup("FIXMEFIXME", group, new AsyncCallback() {
 	    public void onFailure(final Throwable arg0) {
 		// TODO
 		Site.error("Error creating group");

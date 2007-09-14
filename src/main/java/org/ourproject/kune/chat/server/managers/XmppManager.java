@@ -22,7 +22,7 @@ package org.ourproject.kune.chat.server.managers;
 
 public interface XmppManager {
 
-    ChatConnection login(String userName, String password);
+    ChatConnection login(String userName, String password, String resource);
 
     void disconnect(ChatConnection connection);
 

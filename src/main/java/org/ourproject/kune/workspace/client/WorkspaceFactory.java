@@ -41,6 +41,9 @@ import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPanel;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPresenter;
 import org.ourproject.kune.workspace.client.workspace.BuddiesPresenceComponent;
+import org.ourproject.kune.workspace.client.workspace.ContentSubTitleComponent;
+import org.ourproject.kune.workspace.client.workspace.ContentSubTitlePresenter;
+import org.ourproject.kune.workspace.client.workspace.ContentSubTitleView;
 import org.ourproject.kune.workspace.client.workspace.ContentTitleComponent;
 import org.ourproject.kune.workspace.client.workspace.ContentTitlePresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentTitleView;
@@ -48,6 +51,7 @@ import org.ourproject.kune.workspace.client.workspace.SocialNetworkComponent;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 import org.ourproject.kune.workspace.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.workspace.client.workspace.WorkspaceView;
+import org.ourproject.kune.workspace.client.workspace.ui.ContentSubTitlePanel;
 import org.ourproject.kune.workspace.client.workspace.ui.ContentTitlePanel;
 import org.ourproject.kune.workspace.client.workspace.ui.WorkspacePanel;
 
@@ -84,6 +88,13 @@ public class WorkspaceFactory {
 	return presenter;
     }
 
+    public static ContentSubTitleComponent createContentSubTitleComponent() {
+	ContentSubTitlePresenter presenter = new ContentSubTitlePresenter();
+	ContentSubTitleView view = new ContentSubTitlePanel(presenter);
+	presenter.init(view);
+	return presenter;
+    }
+
     public static ContextItems createContextItems() {
 	ContextItemsPresenter presenter = new ContextItemsPresenter();
 	ContextItemsPanel panel = new ContextItemsPanel(presenter);
@@ -104,4 +115,5 @@ public class WorkspaceFactory {
 	presenter.init(view);
 	return presenter;
     }
+
 }

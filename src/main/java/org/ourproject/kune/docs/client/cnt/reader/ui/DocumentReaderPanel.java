@@ -46,7 +46,7 @@ public class DocumentReaderPanel extends VerticalPanel implements DocumentReader
     private Widget createToolBar(final DocumentReaderListener listener) {
 	toolbar = new ContentToolBarPanel();
 	// i18n
-	toolbar.addButton("Editor", new ClickListener() {
+	toolbar.addButton("Edit", new ClickListener() {
 	    public void onClick(final Widget sender) {
 		listener.onEdit();
 	    }

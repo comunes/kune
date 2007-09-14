@@ -21,7 +21,7 @@
 package org.ourproject.kune.chat.client.ctx.rooms;
 
 import org.ourproject.kune.chat.client.ChatClientTool;
-import org.ourproject.kune.docs.client.actions.DocsEvents;
+import org.ourproject.kune.chat.client.ChatEvents;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
@@ -38,7 +38,7 @@ public class RoomsAdminPresenter implements RoomsAdmin {
 	contextItems.setParentTreeVisible(false);
 	contextItems.registerType(ChatClientTool.TYPE_CHAT, images.page());
 	contextItems.registerType(ChatClientTool.TYPE_ROOM, images.chatGreen());
-	contextItems.canCreate(ChatClientTool.TYPE_ROOM, "Add room", DocsEvents.ADD_FOLDER);
+	contextItems.canCreate(ChatClientTool.TYPE_ROOM, "Add room", ChatEvents.ADD_ROOM);
     }
 
     // FIXME: cierta lógica de negocio en el cliente

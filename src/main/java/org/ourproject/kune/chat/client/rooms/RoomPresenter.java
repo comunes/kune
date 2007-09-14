@@ -48,6 +48,8 @@ public class RoomPresenter implements Room {
 
     private final RoomListener listener;
 
+    private boolean closeConfirmed;
+
     // TODO: la información del usuario no está disponible (ni debe estar ;)
     // cuando se crea
     // el room presenter => solución: usar setAlias, setRoomName,
@@ -66,6 +68,7 @@ public class RoomPresenter implements Room {
     public void init(final RoomView view) {
 	this.view = view;
 	view.showRoomName(roomName);
+	closeConfirmed = false;
     }
 
     public View getView() {
@@ -117,7 +120,8 @@ public class RoomPresenter implements Room {
     }
 
     protected void doClose() {
-	// TODO: xmpp: send bye in room
+	handler.logout();
+	closeConfirmed = true;
     }
 
     public String getSubject() {
@@ -159,6 +163,15 @@ public class RoomPresenter implements Room {
 
     public XmppRoom getHandler() {
 	return handler;
+    }
+
+    public void onCloseNotConfirmed() {
+	closeConfirmed = false;
+
+    }
+
+    public boolean isCloseConfirmed() {
+	return closeConfirmed;
     }
 
 }

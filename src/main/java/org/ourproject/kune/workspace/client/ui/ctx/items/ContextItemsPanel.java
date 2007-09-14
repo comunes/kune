@@ -24,7 +24,6 @@ import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.HorizontalLine;
 import org.ourproject.kune.platf.client.ui.IconHyperlink;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.DockPanel;
@@ -93,7 +92,6 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
     }
 
     public void setControlsVisible(final boolean visible) {
-	GWT.log("controls visible : " + visible, null);
 	controls.setVisible(visible);
     }
 

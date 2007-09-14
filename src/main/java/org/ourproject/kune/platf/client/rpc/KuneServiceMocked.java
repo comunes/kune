@@ -35,7 +35,7 @@ public class KuneServiceMocked extends MockedService implements KuneServiceAsync
 	answer(group, callback);
     }
 
-    public void createNewGroup(final GroupDTO group, final AsyncCallback callback) {
+    public void createNewGroup(final String userHash, final GroupDTO group, final AsyncCallback callback) {
 	answer(null, callback);
     }
 

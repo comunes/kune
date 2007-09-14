@@ -118,9 +118,10 @@ public class StateManagerDefault implements StateManager {
 
 	ClientTool clientTool = app.getTool(toolName);
 	clientTool.setContent(state);
+	workspace.getContentTitleComponent().setContentTitle(state.getTitle());
+	workspace.getContentSubTitleComponent().setContentSubTitle("11/06/07 by fulano");
 	workspace.setContent(clientTool.getContent());
 	workspace.setContext(clientTool.getContext());
-	workspace.getContentTitleComponent().setContentTitle(state.getTitle());
 	workspace.getLicenseComponent().setLicense(state.getGroup().getLongName(), state.getLicense());
 	workspace.getSocialNetworkComponent().setSocialNetwork(state.getSocialNetwork());
 	workspace.getBuddiesPresenceComponent().setBuddiesPresence();

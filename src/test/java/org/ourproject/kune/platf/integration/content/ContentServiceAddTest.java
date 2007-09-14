@@ -28,6 +28,27 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 	groupName = getDefGroupName();
     }
 
+    @Test
+    public void testAddRoom() throws SerializableException {
+	doLogin();
+	defaultContent = getDefaultContent();
+	ContainerDTO parent = defaultContent.getFolder();
+	String roomName = "testroom";
+	StateDTO newState = contentService.addRoom(session.getHash(), groupName, parent.getId(), roomName);
+	assertNotNull(newState);
+    }
+
+    @Test
+    public void testAddExistingRoom() throws SerializableException {
+	doLogin();
+	defaultContent = getDefaultContent();
+	ContainerDTO parent = defaultContent.getFolder();
+	String roomName = "testroom";
+	StateDTO newState = contentService.addRoom(session.getHash(), groupName, parent.getId(), roomName);
+	StateDTO newState2 = contentService.addRoom(session.getHash(), groupName, parent.getId(), roomName);
+	assertNotNull(newState);
+    }
+
     @Test(expected = AccessViolationException.class)
     public void noLoggedInShouldThrowIllegalAccess() throws ContentNotFoundException, SerializableException {
 	defaultContent = getDefaultContent();
@@ -72,8 +93,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 
 	ContainerDTO parentAgain = getDefaultContent().getFolder();
 	assertEquals(parent.getId(), parentAgain.getId());
-	// FIXME: aaaaarrggggggggg!!!
-	// assertEquals(1, parentAgain.getChilds().size());
-
+	assertEquals(1, parentAgain.getChilds().size());
     }
+
 }

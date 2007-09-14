@@ -44,12 +44,12 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener, Mult
 
     private final WorkspaceDeckView view;
     private final Components components;
-    private final HashMap roomNamesToTooms;
+    private final HashMap roomNamesToRooms;
 
     public ChatContentPresenter(final WorkspaceDeckView view) {
 	this.view = view;
 	this.components = new Components(this);
-	this.roomNamesToTooms = new HashMap();
+	this.roomNamesToRooms = new HashMap();
     }
 
     public void attach() {
@@ -84,10 +84,10 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener, Mult
     }
 
     private Room getRoom(final String roomName, final String userAlias, final UserType userType) {
-	Room room = (Room) roomNamesToTooms.get(roomName);
+	Room room = (Room) roomNamesToRooms.get(roomName);
 	if (room == null) {
 	    room = createRoom(roomName, userAlias, userType);
-	    roomNamesToTooms.put(roomName, room);
+	    roomNamesToRooms.put(roomName, room);
 	}
 	return room;
     }

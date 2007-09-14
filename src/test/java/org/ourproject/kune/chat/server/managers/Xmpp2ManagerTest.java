@@ -20,20 +20,20 @@ public abstract class Xmpp2ManagerTest {
 
     // @Test
     public void testConnection() {
-	ChatConnection handler1 = manager.login("testUser1", "easy1");
+	ChatConnection handler1 = manager.login("testUser1", "easy1", "test");
 	assertNotNull(handler1);
     }
 
     // @Test(expected = ChatException.class)
     public void testUserDontExist() {
-	manager.login("user", "passowrd");
+	manager.login("user", "passowrd", "test");
     }
 
     // @Test
     public void testBroadcast() {
 	String roomName = "roomName";
-	ChatConnection conn1 = manager.login("testUser1", "easy1");
-	ChatConnection conn2 = manager.login("testUser2", "easy2");
+	ChatConnection conn1 = manager.login("testUser1", "easy1", "test");
+	ChatConnection conn2 = manager.login("testUser2", "easy2", "test");
 	Room room1 = manager.createRoom(conn1, roomName, "user1Alias");
 	OutputListener listener1 = new OutputListener("1");
 	room1.setListener(listener1);

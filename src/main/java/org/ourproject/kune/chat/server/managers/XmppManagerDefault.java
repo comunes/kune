@@ -31,22 +31,27 @@ import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smackx.Form;
 import org.jivesoftware.smackx.FormField;
 import org.jivesoftware.smackx.muc.MultiUserChat;
+import org.ourproject.kune.platf.server.properties.ChatProperties;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
 public class XmppManagerDefault implements XmppManager {
 
-    public XmppManagerDefault() {
+    private final ChatProperties chatProperties;
+
+    @Inject
+    public XmppManagerDefault(final ChatProperties chatProperties) {
+	this.chatProperties = chatProperties;
     }
 
-    public ChatConnection login(final String userName, final String password) {
-	// FIXME: externalizar
+    public ChatConnection login(final String userName, final String password, final String resource) {
 	ConnectionConfiguration config = new ConnectionConfiguration(getServerName(), 5222);
 	XMPPConnection conn = new XMPPConnection(config);
 	try {
 	    conn.connect();
-	    conn.login(userName, password, "nose", true);
+	    conn.login(userName, password, resource, true);
 	    return new XmppConnection(userName, conn);
 	} catch (XMPPException e) {
 	    throw new ChatException(e);
@@ -54,11 +59,11 @@ public class XmppManagerDefault implements XmppManager {
     }
 
     private String getServerName() {
-	return "localhost";
+	return chatProperties.getDomain();
     }
 
     private String getRoomName(final String room) {
-	return room + "@conference." + getServerName();
+	return room + "@" + chatProperties.getRoomHost();
     }
 
     public Room createRoom(final ChatConnection conn, final String roomName, final String alias) {

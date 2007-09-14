@@ -38,6 +38,7 @@ public class WorkspacePresenter implements Workspace {
 	this.view = view;
 	this.components = new Components(this);
 	view.setContentTitle(components.getContentTitleComponent().getView());
+	view.setContentSubTitle(components.getContentSubTitleComponent().getView());
 	view.setBottom(components.getLicenseComponent().getView());
 	view.setSocialNetwork(components.getSocialNetworkComponent().getView());
 	view.setBuddiesPresence(components.getBuddiesPresenceComponent().getView());
@@ -95,6 +96,10 @@ public class WorkspacePresenter implements Workspace {
 
     public ContentTitleComponent getContentTitleComponent() {
 	return components.getContentTitleComponent();
+    }
+
+    public ContentSubTitleComponent getContentSubTitleComponent() {
+	return components.getContentSubTitleComponent();
     }
 
     public SocialNetworkComponent getSocialNetworkComponent() {

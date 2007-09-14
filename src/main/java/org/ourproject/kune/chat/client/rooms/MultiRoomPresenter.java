@@ -27,6 +27,7 @@ public class MultiRoomPresenter implements MultiRoom, RoomListener {
     private MultiRoomView view;
     private Room currentRoom;
     private final MultiRoomListener listener;
+    private boolean closeAllConfirmed;
 
     public MultiRoomPresenter(final MultiRoomListener listener) {
 	this.listener = listener;
@@ -34,6 +35,7 @@ public class MultiRoomPresenter implements MultiRoom, RoomListener {
 
     public void init(final MultiRoomView view) {
 	this.view = view;
+	closeAllConfirmed = false;
     }
 
     public Room createRoom(final String roomName, final String userAlias, final UserType type) {
@@ -46,6 +48,7 @@ public class MultiRoomPresenter implements MultiRoom, RoomListener {
 
     public void show() {
 	view.show();
+	closeAllConfirmed = false;
     }
 
     public void onSend() {
@@ -84,6 +87,15 @@ public class MultiRoomPresenter implements MultiRoom, RoomListener {
 
     public void closeAllRooms() {
 	// TODO xmpp: Close all the rooms;
+	closeAllConfirmed = true;
 	view.hideRooms();
+    }
+
+    public void onCloseAllNotConfirmed() {
+	closeAllConfirmed = false;
+    }
+
+    public boolean isCloseAllConfirmed() {
+	return closeAllConfirmed;
     }
 }

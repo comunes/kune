@@ -20,7 +20,6 @@
 
 package org.ourproject.kune.chat.server;
 
-import org.jivesoftware.smack.XMPPConnection;
 import org.ourproject.kune.chat.server.managers.XmppManager;
 import org.ourproject.kune.chat.server.managers.XmppManagerDefault;
 
@@ -29,7 +28,8 @@ import com.google.inject.AbstractModule;
 public class ChatServerModule extends AbstractModule {
 
     public void configure() {
-	XMPPConnection.DEBUG_ENABLED = true;
+	// To debug Smack, descomment this
+	// XMPPConnection.DEBUG_ENABLED = true;
 	bind(ChatServerTool.class).asEagerSingleton();
 	bind(XmppManager.class).to(XmppManagerDefault.class);
     }

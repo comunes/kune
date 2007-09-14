@@ -1,3 +1,9 @@
+2007-09-13 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+    * New subtitle component to workspace
+    * Some css fixes, new workspace.css
+    * workspace refactor
+    * SocialNetwork dropdown improved
+
 2007-09-12 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
     * new SocialNetworkDTO
     * SocialNetwork included in State

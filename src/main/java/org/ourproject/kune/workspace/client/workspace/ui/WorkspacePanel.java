@@ -37,12 +37,13 @@ import com.google.gwt.user.client.ui.Widget;
 public class WorkspacePanel extends Composite implements WorkspaceView {
     private final LogoPanel logoPanel;
     private final HorizontalPanel contentTitleBar;
+    private final HorizontalPanel contentSubTitleBar;
     private final GroupToolsBar groupToolsBar;
     private final HorizontalSplitPanel cntcxtHSP;
     private final VerticalPanel contextVP;
     private final VerticalPanel contentVP;
     private final ContentBottomBar contentBottomBar;
-    private final SummaryPanel generalDropDownsPanel;
+    private final VerticalPanel generalDropDownsPanel;
 
     public WorkspacePanel() {
 	VerticalPanel generalVP = new VerticalPanel();
@@ -60,12 +61,12 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	generalHP.add(groupNavBarVP);
 
 	groupToolsBar = new GroupToolsBar();
-	generalDropDownsPanel = new SummaryPanel();
+	generalDropDownsPanel = new VerticalPanel();
 	groupNavBarVP.add(groupToolsBar);
 	groupNavBarVP.add(generalDropDownsPanel);
 
-	ContentToolBar contentToolBar = new ContentToolBar();
 	contentTitleBar = new HorizontalPanel();
+	contentSubTitleBar = new HorizontalPanel();
 	cntcxtHSP = new HorizontalSplitPanel();
 	contentVP = new VerticalPanel();
 	contextVP = new VerticalPanel();
@@ -73,10 +74,10 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	cntcxtHSP.setRightWidget(contextVP);
 	String mainBorderColor = Kune.getInstance().c.getMainBorder();
 	contentBottomBar = new ContentBottomBar();
-	BorderDecorator contentToolBarBorderDec = new BorderDecorator(contentToolBar, BorderDecorator.TOPLEFT);
+	BorderDecorator contentToolBarBorderDec = new BorderDecorator(contentTitleBar, BorderDecorator.TOPLEFT);
 	groupAreaVP.add(contentToolBarBorderDec);
 	contentToolBarBorderDec.setColor(mainBorderColor);
-	groupAreaVP.add(contentTitleBar);
+	groupAreaVP.add(contentSubTitleBar);
 	groupAreaVP.add(cntcxtHSP);
 	BorderDecorator borderDecorator = new BorderDecorator(contentBottomBar, BorderDecorator.BOTTOMLEFT);
 	groupAreaVP.add(borderDecorator);
@@ -92,8 +93,10 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	groupAreaVP.addStyleName("ContextPanel");
 	generalHP.addStyleName("GeneralHP");
 	contentTitleBar.setWidth("100%");
+	contentSubTitleBar.setWidth("100%");
 	contentTitleBar.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
-
+	contentSubTitleBar.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
+	generalDropDownsPanel.addStyleName("kune-GroupSummaryPanel");
 	setLogo("");
     }
 
@@ -143,6 +146,12 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	Widget widget = (Widget) view;
 	contentTitleBar.add((Widget) view);
 	contentTitleBar.setCellVerticalAlignment(widget, VerticalPanel.ALIGN_MIDDLE);
+    }
+
+    public void setContentSubTitle(final View view) {
+	Widget widget = (Widget) view;
+	contentSubTitleBar.add((Widget) view);
+	contentSubTitleBar.setCellVerticalAlignment(widget, VerticalPanel.ALIGN_MIDDLE);
     }
 
     public void setBottom(final View view) {
