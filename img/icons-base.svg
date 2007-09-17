@@ -1367,15 +1367,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="430"
-     inkscape:cy="693.7165"
+     inkscape:cx="-62.295317"
+     inkscape:cy="790.33458"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      inkscape:window-width="1379"
      inkscape:window-height="936"
      inkscape:window-x="61"
      inkscape:window-y="0"
-     showgrid="true"
+     showgrid="false"
      showguides="true"
      inkscape:guide-bbox="true"
      inkscape:grid-points="true"
@@ -2652,6 +2652,36 @@
          transform="translate(0,75)"
          width="744.09448"
          height="1052.3622" />
+    </g>
+    <g
+       id="g14270"
+       transform="translate(487,-9)">
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         sodipodi:type="arc"
+         style="opacity:1;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:1.63299322;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path12582"
+         sodipodi:cx="-55.5"
+         sodipodi:cy="242.36218"
+         sodipodi:rx="12.5"
+         sodipodi:ry="12"
+         d="M -43 242.36218 A 12.5 12 0 1 1  -68,242.36218 A 12.5 12 0 1 1  -43 242.36218 z"
+         transform="matrix(0.6,0,0,0.6249999,-25.304096,101.58627)" />
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         transform="matrix(0.28,0,0,0.2916666,-44.46,180.67323)"
+         d="M -43 242.36218 A 12.5 12 0 1 1  -68,242.36218 A 12.5 12 0 1 1  -43 242.36218 z"
+         sodipodi:ry="12"
+         sodipodi:rx="12.5"
+         sodipodi:cy="242.36218"
+         sodipodi:cx="-55.5"
+         id="path12584"
+         style="opacity:1;color:#000000;fill:#f46f36;fill-opacity:1;fill-rule:nonzero;stroke:#784421;stroke-width:3.49927115;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
     </g>
   </g>
 </svg>

@@ -32,7 +32,7 @@ import com.google.inject.Singleton;
 public class ToolRegistry {
     static Log log = LogFactory.getLog(ToolRegistry.class);
 
-    // TODO: estamos seguros de esto?
+    // TODO: ConcurrentHashMap, sure?
     private final ConcurrentHashMap<String, ServerTool> tools;
 
     public ToolRegistry() {
@@ -40,7 +40,6 @@ public class ToolRegistry {
     }
 
     public void register(final ServerTool tool) {
-	log.debug("Registering tool: " + tool.getName());
 	tools.put(tool.getName(), tool);
     }
 

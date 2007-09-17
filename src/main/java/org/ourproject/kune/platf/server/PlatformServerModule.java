@@ -20,6 +20,8 @@
 
 package org.ourproject.kune.platf.server;
 
+import org.ourproject.kune.chat.server.managers.XmppManager;
+import org.ourproject.kune.chat.server.managers.XmppManagerDefault;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.KuneService;
 import org.ourproject.kune.platf.server.access.AccessService;
@@ -96,5 +98,6 @@ public class PlatformServerModule extends AbstractModule {
 	bind(ContainerManager.class).to(ContainerManagerDefault.class);
 	bind(LicenseManager.class).to(LicenseManagerDefault.class);
 	bind(SocialNetworkManager.class).to(SocialNetworkManagerDefault.class);
+	bind(XmppManager.class).to(XmppManagerDefault.class);
     }
 }

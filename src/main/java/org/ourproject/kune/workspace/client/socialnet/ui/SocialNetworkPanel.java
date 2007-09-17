@@ -72,7 +72,8 @@ public class SocialNetworkPanel extends DropDownPanel implements SocialNetworkVi
 	Iterator iter = groupList.getList().iterator();
 	while (iter.hasNext()) {
 	    GroupDTO next = (GroupDTO) iter.next();
-	    groupVP.add(new Label(next.getLongName()));
+	    groupVP.add(new IconHyperlink(Images.App.getInstance().groupDefIcon(), next.getLongName(),
+		    "linkToGroupDefContent"));
 	}
     }
 }

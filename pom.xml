@@ -92,17 +92,17 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate</artifactId>
-            <version>3.2.2.ga</version>
+            <version>3.2.5.ga</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-annotations</artifactId>
-            <version>3.2.1.ga</version>
+            <version>3.3.0.ga</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>3.2.1.ga</version>
+            <version>3.3.1.ga</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -112,7 +112,7 @@
         <dependency>
             <groupId>c3p0</groupId>
             <artifactId>c3p0</artifactId>
-            <version>0.9.1.1</version>
+            <version>0.9.1.2</version>
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
@@ -180,6 +180,14 @@
         <repository>
             <id>kune-maven</id>
             <url>http://kune.ourproject.org/mavenrepo/</url>
+        </repository>
+        <repository>
+            <id>jboss</id>
+            <url>http://repository.jboss.org/maven2/</url>
+        </repository>
+        <repository>
+            <id>dyndns-repo</id>
+            <url>http://maven.dyndns.org/2</url>
         </repository>
     </repositories>
     <pluginRepositories>

@@ -25,8 +25,10 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.GroupListDTO;
+import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.DropDownPanel;
+import org.ourproject.kune.platf.client.ui.IconHyperlink;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
@@ -89,8 +91,9 @@ public class AccessListsPanel extends Composite implements View {
     private void setGroupList(final GroupListDTO groupList, final VerticalPanel groupVP) {
 	groupVP.clear();
 	if (groupList.getMode() == GroupListDTO.EVERYONE) {
+	    // FIXME make IconLabel()
 	    // i18n
-	    groupVP.add(new Label("Everybody"));
+	    groupVP.add(new IconHyperlink(Images.App.getInstance().everybody(), "Everybody", "fixme"));
 	} else if (groupList.getMode() == GroupListDTO.NOBODY) {
 	    // i18n
 	    groupVP.add(new Label("Nobody"));
@@ -98,9 +101,9 @@ public class AccessListsPanel extends Composite implements View {
 	    Iterator iter = groupList.getList().iterator();
 	    while (iter.hasNext()) {
 		GroupDTO next = (GroupDTO) iter.next();
-		groupVP.add(new Label(next.getLongName()));
+		groupVP.add(new IconHyperlink(Images.App.getInstance().groupDefIcon(), next.getLongName(),
+			"linkToGroupDefContent"));
 	    }
 	}
     }
-
 }

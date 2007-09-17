@@ -378,6 +378,11 @@ public interface Images extends ImageBundle {
     AbstractImagePrototype clear();
 
     /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/everybody.png
+     */
+    AbstractImagePrototype everybody();
+
+    /**
      * @gwt.resource org/ourproject/kune/platf/public/images/fullscreen.png
      */
     AbstractImagePrototype fullscreen();
@@ -386,6 +391,11 @@ public interface Images extends ImageBundle {
      * @gwt.resource org/ourproject/kune/platf/public/images/gnu-fdl.gif
      */
     AbstractImagePrototype gnuFdl();
+
+    /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/group-def-icon.png
+     */
+    AbstractImagePrototype groupDefIcon();
 
     /**
      * @gwt.resource org/ourproject/kune/platf/public/images/kune-close.png

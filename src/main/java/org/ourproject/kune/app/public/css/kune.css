@@ -145,8 +145,26 @@
 }
 
 .kune-IconHyperlink {
-    vertical-align: middle;
 }
+
+.kune-IconHyperlink a:link {
+	text-decoration: underline;
+	color:green;
+}
+
+.kune-IconHyperlink a:hover {
+	text-decoration: underline;
+}
+
+.kune-IconHyperlink a:visited {
+       color:#808000;
+}
+
+.kune-IconHyperlink img {
+	margin-right: 4px;
+	vertical-align: middle;
+}
+
 
 /* DropDowns */
 
@@ -173,6 +191,15 @@
 
 .kune-DropDownLabel img {
     margin: 0 3px 0 1px;
+}
+
+.kune-IconLabel {
+	color:green;
+}
+
+.kune-IconLabel img {
+	margin-right: 4px;
+	vertical-align: middle;
 }
 
 /* Margins */

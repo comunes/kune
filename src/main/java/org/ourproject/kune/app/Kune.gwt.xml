@@ -15,8 +15,8 @@
     <entry-point class='org.ourproject.kune.app.client.KuneEntryPoint'/>
 
     <!--http://code.google.com/p/google-web-toolkit/issues/detail?id=42 -->
-    <!--
     <set-property name="user.agent" value="gecko" />
+    <!--
     <set-property name="user.agent" value="gecko" />
     -->
 </module>

@@ -45,12 +45,19 @@ public class License implements HasId {
     private String longName;
 
     private String description;
+
+    @Column(nullable = false)
     private String url;
     private boolean isCC;
     private boolean isCopyleft;
     private boolean isDeprecated;
     private String rdf;
+    @Column(nullable = false)
     private String imageUrl;
+
+    public License() {
+	this(null, null, null, null, false, false, false, null, null);
+    }
 
     public License(final String shortName, final String longName, final String description, final String url,
 	    final boolean isCC, final boolean isCopyleft, final boolean isDeprecated, final String rdf,
@@ -64,10 +71,6 @@ public class License implements HasId {
 	this.isDeprecated = isDeprecated;
 	this.rdf = rdf;
 	this.imageUrl = imageUrl;
-    }
-
-    public License() {
-	this(null, null, null, null, false, false, false, null, null);
     }
 
     public Long getId() {

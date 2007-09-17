@@ -20,9 +20,6 @@
 
 package org.ourproject.kune.chat.server;
 
-import org.ourproject.kune.chat.server.managers.XmppManager;
-import org.ourproject.kune.chat.server.managers.XmppManagerDefault;
-
 import com.google.inject.AbstractModule;
 
 public class ChatServerModule extends AbstractModule {
@@ -30,8 +27,9 @@ public class ChatServerModule extends AbstractModule {
     public void configure() {
 	// To debug Smack, descomment this
 	// XMPPConnection.DEBUG_ENABLED = true;
+
+	// FIXME: Dani: check this please
 	bind(ChatServerTool.class).asEagerSingleton();
-	bind(XmppManager.class).to(XmppManagerDefault.class);
     }
 
 }

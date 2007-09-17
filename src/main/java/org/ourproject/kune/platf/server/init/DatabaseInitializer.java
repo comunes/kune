@@ -77,27 +77,27 @@ public class DatabaseInitializer {
     }
 
     private void createLicenses() {
-	License license = new License("by", "Creative Commons Attribution", "",
-		"http://creativecommons.org/licenses/by/3.0/", true, false, false, "", "images/lic/by80x15.png");
+	License license = new License("by", "Creative Commons Attribution", "None",
+		"http://creativecommons.org/licenses/by/3.0/", true, false, false, "FIXME: Here CC RDF", "images/lic/by80x15.png");
 	licenseManager.persist(license);
-	license = new License("by-sa", "Creative Commons Attribution-ShareAlike", "",
-		"http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "images/lic/bysa80x15.png");
+	license = new License("by-sa", "Creative Commons Attribution-ShareAlike", "None",
+		"http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "FIXME: Here CC RDF", "images/lic/bysa80x15.png");
 	licenseManager.persist(license);
-	license = new License("by-nd", "Creative Commons Attribution-NoDerivs", "",
-		"http://creativecommons.org/licenses/by-nd/3.0/", true, false, false, "", "images/lic/bynd80x15.png");
+	license = new License("by-nd", "Creative Commons Attribution-NoDerivs", "None",
+		"http://creativecommons.org/licenses/by-nd/3.0/", true, false, false, "FIXME: Here CC RDF", "images/lic/bynd80x15.png");
 	licenseManager.persist(license);
-	license = new License("by-nc", "Creative Commons Attribution-NonCommercial", "",
-		"http://creativecommons.org/licenses/by-nc/3.0/", true, false, false, "", "images/lic/bync80x15.png");
+	license = new License("by-nc", "Creative Commons Attribution-NonCommercial", "None",
+		"http://creativecommons.org/licenses/by-nc/3.0/", true, false, false, "FIXME: Here CC RDF", "images/lic/bync80x15.png");
 	licenseManager.persist(license);
-	license = new License("by-nc-sa", "Creative Commons Attribution-NonCommercial-ShareAlike", "",
-		"http://creativecommons.org/licenses/by-nc-sa/3.0/", true, false, false, "",
+	license = new License("by-nc-sa", "Creative Commons Attribution-NonCommercial-ShareAlike", "None",
+		"http://creativecommons.org/licenses/by-nc-sa/3.0/", true, false, false, "FIXME: Here CC RDF",
 		"images/lic/byncsa80x15.png");
 	licenseManager.persist(license);
-	license = new License("by-nc-nd", "Creative Commons Attribution-NonCommercial-NoDerivs", "",
-		"http://creativecommons.org/licenses/by-nc-nd/3.0/", true, false, false, "",
+	license = new License("by-nc-nd", "Creative Commons Attribution-NonCommercial-NoDerivs", "None",
+		"http://creativecommons.org/licenses/by-nc-nd/3.0/", true, false, false, "FIXME: Here CC RDF",
 		"images/lic/byncnd80x15.png");
 	licenseManager.persist(license);
-	license = new License("gfdl", "GNU Free Documentation License", "", "http://www.gnu.org/copyleft/fdl.html",
+	license = new License("gfdl", "GNU Free Documentation License", "None", "http://www.gnu.org/copyleft/fdl.html",
 		false, true, false, "", "images/lic/gnu-fdl.gif");
 	licenseManager.persist(license);
     }

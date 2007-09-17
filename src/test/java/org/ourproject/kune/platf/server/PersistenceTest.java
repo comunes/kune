@@ -22,8 +22,8 @@ public abstract class PersistenceTest {
     }
 
     public PersistenceTest() {
-	// test, db in memory
-	// test_db, db in mysql
+	// test: use memory
+	// test_db: use mysql
 	this("test", "kune.properties");
     }
 

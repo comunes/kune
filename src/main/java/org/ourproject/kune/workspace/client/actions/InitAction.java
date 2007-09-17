@@ -28,7 +28,7 @@ import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.rpc.KuneService;
 import org.ourproject.kune.platf.client.rpc.KuneServiceAsync;
 import org.ourproject.kune.platf.client.services.Kune;
-import org.ourproject.kune.platf.client.utils.PrefetchUtilites;
+import org.ourproject.kune.platf.client.utils.PrefetchUtilities;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
@@ -44,7 +44,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 public class InitAction implements Action {
     public void execute(final Object value, final Object extra, final Services services) {
 	GWT.log("Locale: " + Kune.getInstance().t.Locale(), null);
-	PrefetchUtilites.preFetchImpImages();
+	PrefetchUtilities.preFetchImpImages();
 	getInitData(services);
 
 	int windowWidth = Window.getClientWidth();

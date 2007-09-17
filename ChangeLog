@@ -1,3 +1,11 @@
+2007-09-17 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* IconHyperlink fixes
+	* new IconLabel widget
+	* add gwt-ext images to PrefetchUtilities
+	
+2007-09-15 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+    * New hibernate version
+
 2007-09-13 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
     * New subtitle component to workspace
     * Some css fixes, new workspace.css
