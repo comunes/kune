@@ -31,6 +31,7 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.KuneService;
 import org.ourproject.kune.platf.server.InitData;
 import org.ourproject.kune.platf.server.UserSession;
+import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
@@ -75,14 +76,23 @@ public class KuneRPC implements RPC, KuneService {
     public StateToken createNewGroup(final String userHash, final GroupDTO group) throws SerializableException {
 	log.debug(group.getShortName() + group.getLongName() + group.getPublicDesc() + group.getDefaultLicense()
 		+ group.getType());
-	User user = session.getUser();
-	Group newGroup = groupManager.createGroup(mapper.map(group, Group.class), user);
+	final User user = session.getUser();
+	final Group newGroup = groupManager.createGroup(mapper.map(group, Group.class), user);
+	if (group.getType() == GroupDTO.TYPE_COMNUNITY) {
+	    newGroup.setAdmissionType(AdmissionType.Open);
+	}
+	if (group.getType() == GroupDTO.TYPE_ORGANIZATION) {
+	    newGroup.setAdmissionType(AdmissionType.Moderated);
+	}
+	if (group.getType() == GroupDTO.TYPE_PROJECT) {
+	    newGroup.setAdmissionType(AdmissionType.Moderated);
+	}
 	return new StateToken(newGroup.getDefaultContent().getStateToken());
     }
 
     @Transactional(type = TransactionType.READ_ONLY)
     public InitDataDTO getInitData(final String userHash) {
-	InitData data = new InitData();
+	final InitData data = new InitData();
 
 	data.setCCLicenses(licenseManager.getCC());
 	data.setNotCCLicenses(licenseManager.getNotCC());

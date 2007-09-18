@@ -35,14 +35,14 @@ import com.gwtext.client.widgets.MessageBox;
 public class ContextItemsPanel extends DockPanel implements ContextItemsView {
     private final VerticalPanel controls;
     private final ItemsPanel items;
-    private final TopBar topBar;
+    private final ContextTopBar topBar;
     private final ContextItemsPresenter presenter;
     private String currentEventName;
     private String workaroundTypeName;
 
     public ContextItemsPanel(final ContextItemsPresenter presenter) {
 	this.presenter = presenter;
-	topBar = new TopBar(presenter);
+	topBar = new ContextTopBar(presenter);
 	addTopBar(topBar);
 
 	items = new ItemsPanel();

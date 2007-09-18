@@ -26,60 +26,69 @@ import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.GroupListDTO;
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.platf.client.services.Kune;
-import org.ourproject.kune.platf.client.ui.DropDownPanel;
 import org.ourproject.kune.platf.client.ui.IconHyperlink;
 
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DisclosurePanel;
+import com.google.gwt.user.client.ui.DisclosurePanelImages;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class AccessListsPanel extends Composite implements View {
 
-    private final DropDownPanel adminsPanel;
-    private final DropDownPanel editorsPanel;
-    private final DropDownPanel viewersPanel;
-    private Label headerText;
+    private static final Images img = Images.App.getInstance();
     private final VerticalPanel adminsVP;
     private final VerticalPanel editorsVP;
     private final VerticalPanel viewersVP;
 
     public AccessListsPanel() {
-	VerticalPanel vp = new VerticalPanel();
-	initWidget(vp);
-
-	headerText = new Label();
 	// i18n
-	adminsPanel = new DropDownPanel("Who can admin this", true);
-	editorsPanel = new DropDownPanel("Who can edit this", true);
-	viewersPanel = new DropDownPanel("Who can view this", true);
-	vp.add(headerText);
-	vp.add(adminsPanel);
-	vp.add(editorsPanel);
-	vp.add(viewersPanel);
+	final DisclosurePanel disclosure = new DisclosurePanel(new DisclosurePanelImages() {
+	    public AbstractImagePrototype disclosurePanelClosed() {
+		return img.arrowRightWhite();
+	    }
+
+	    public AbstractImagePrototype disclosurePanelOpen() {
+		return img.arrowDownWhite();
+	    }
+	}, "Permissions", true);
+
+	final VerticalPanel vp = new VerticalPanel();
+	// i18n
+	final Label adminsLabel = new Label("Who can admin this:");
 	adminsVP = new VerticalPanel();
+	final Label editorsLabel = new Label("Who more can edit:");
 	editorsVP = new VerticalPanel();
+	final Label viewersLabel = new Label("Who more can view:");
 	viewersVP = new VerticalPanel();
-	adminsPanel.setContent(adminsVP);
-	editorsPanel.setContent(editorsVP);
-	viewersPanel.setContent(viewersVP);
-	adminsPanel.setBorderColor(Kune.getInstance().c.getAdminsDropDown());
-	editorsPanel.setBorderColor(Kune.getInstance().c.getEditorsDropDown());
-	viewersPanel.setBorderColor(Kune.getInstance().c.getViewersDropDown());
-	adminsPanel.setBackgroundColor("CCFFAA");
-	editorsPanel.setBackgroundColor("CCFFAA");
-	viewersPanel.setBackgroundColor("CCFFAA");
-	adminsPanel.addStyleName("kune-Margin-Medium-tl");
-	editorsPanel.addStyleName("kune-Margin-Medium-tl");
-	viewersPanel.addStyleName("kune-Margin-Medium-tl");
-    }
 
-    public Label getHeaderText() {
-	return headerText;
-    }
+	// Layout
+	initWidget(disclosure);
+	disclosure.add(vp);
+	vp.add(adminsLabel);
+	vp.add(adminsVP);
+	vp.add(editorsLabel);
+	vp.add(editorsVP);
+	vp.add(viewersLabel);
+	vp.add(viewersVP);
 
-    public void setHeaderText(final Label text) {
-	this.headerText = text;
+	// Set properties
+	disclosure.setTitle("Who can admin, edit or view this content");
+	addStyleName("kune-AccessList");
+	setWidth("100%");
+	vp.setWidth("100%");
+	vp.setCellWidth(adminsLabel, "100%");
+	vp.setCellWidth(editorsLabel, "100%");
+	vp.setCellWidth(viewersLabel, "100%");
+	vp.setCellWidth(adminsVP, "100%");
+	vp.setCellWidth(editorsVP, "100%");
+	vp.setCellWidth(viewersVP, "100%");
+
+	adminsLabel.addStyleName("kune-AccessListSubLabel");
+	editorsLabel.addStyleName("kune-AccessListSubLabel");
+	viewersLabel.addStyleName("kune-AccessListSubLabel");
+
     }
 
     public void setAccessLists(final AccessListsDTO accessLists) {
@@ -91,18 +100,16 @@ public class AccessListsPanel extends Composite implements View {
     private void setGroupList(final GroupListDTO groupList, final VerticalPanel groupVP) {
 	groupVP.clear();
 	if (groupList.getMode() == GroupListDTO.EVERYONE) {
-	    // FIXME make IconLabel()
 	    // i18n
-	    groupVP.add(new IconHyperlink(Images.App.getInstance().everybody(), "Everybody", "fixme"));
+	    groupVP.add(new IconHyperlink(img.everybody(), "Everybody", "fixme"));
 	} else if (groupList.getMode() == GroupListDTO.NOBODY) {
 	    // i18n
-	    groupVP.add(new Label("Nobody"));
+	    groupVP.add(new IconHyperlink(img.nobody(), "Nobody", "fixme"));
 	} else {
-	    Iterator iter = groupList.getList().iterator();
+	    final Iterator iter = groupList.getList().iterator();
 	    while (iter.hasNext()) {
-		GroupDTO next = (GroupDTO) iter.next();
-		groupVP.add(new IconHyperlink(Images.App.getInstance().groupDefIcon(), next.getLongName(),
-			"linkToGroupDefContent"));
+		final GroupDTO next = (GroupDTO) iter.next();
+		groupVP.add(new IconHyperlink(img.groupDefIcon(), next.getLongName(), "linkToGroupDefContent"));
 	    }
 	}
     }

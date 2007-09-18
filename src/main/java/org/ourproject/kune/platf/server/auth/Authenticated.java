@@ -20,7 +20,7 @@
 
 package org.ourproject.kune.platf.server.auth;
 
-/** de momento, sólo para recordar */
+/* FIXME: Only to remember */
 
 public @interface Authenticated {
 

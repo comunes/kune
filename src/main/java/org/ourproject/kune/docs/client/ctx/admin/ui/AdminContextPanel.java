@@ -32,6 +32,7 @@ public class AdminContextPanel extends VerticalPanel implements AdminContextView
     public AdminContextPanel() {
 	accessListsPanel = new AccessListsPanel();
 	add(accessListsPanel);
+	setCellWidth(accessListsPanel, "100%");
     }
 
     public void setAccessLists(final AccessListsDTO accessLists) {

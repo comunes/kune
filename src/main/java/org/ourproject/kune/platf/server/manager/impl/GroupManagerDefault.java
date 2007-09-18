@@ -24,6 +24,7 @@ import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 
 import org.ourproject.kune.platf.server.domain.AccessLists;
+import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.GroupListMode;
 import org.ourproject.kune.platf.server.domain.License;
@@ -58,7 +59,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     }
 
     public Group getDefaultGroup() {
-	String shortName = properties.getDefaultSiteShortName();
+	final String shortName = properties.getDefaultSiteShortName();
 	return findByShortName(shortName);
     }
 
@@ -68,15 +69,16 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
     public Group createGroup(final String shortName, final String longName, final User user)
 	    throws SerializableException {
-	Group group = new Group(shortName, longName);
+	final Group group = new Group(shortName, longName);
 	return createGroup(group, user);
     }
 
     public Group createUserGroup(final User user) {
-	Group group = new Group(user.getShortName(), user.getName());
-	String licenseDefId = properties.getDefaultLicense();
-	License licenseDef = licenseFinder.findByShortName(licenseDefId);
+	final Group group = new Group(user.getShortName(), user.getName());
+	final String licenseDefId = properties.getDefaultLicense();
+	final License licenseDef = licenseFinder.findByShortName(licenseDefId);
 	group.setDefaultLicense(licenseDef);
+	group.setAdmissionType(AdmissionType.Personal);
 	user.setUserGroup(group);
 	initSocialNetwork(group, group);
 	user.getAdminInGroups().add(group);
@@ -92,7 +94,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 		user.getAdminInGroups().add(group);
 		initGroup(user, group);
 		return group;
-	    } catch (EntityExistsException e) {
+	    } catch (final EntityExistsException e) {
 		// i18n
 		throw new SerializableException("Already exist a group with this name");
 	    }
@@ -104,15 +106,18 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     }
 
     private void initSocialNetwork(final Group group, final Group userGroup) {
-	SocialNetwork network = group.getSocialNetwork();
-	AccessLists lists = network.getAccessLists();
+	final SocialNetwork network = group.getSocialNetwork();
+	final AccessLists lists = network.getAccessLists();
 	lists.getEditors().setMode(GroupListMode.NOBODY);
 	lists.getViewers().setMode(GroupListMode.EVERYONE);
+	if (group.getAdmissionType() == null) {
+	    group.setAdmissionType(AdmissionType.Moderated);
+	}
 	network.addAdmin(userGroup);
     }
 
     private void initGroup(final User user, final Group group) {
-	for (ServerTool tool : registry.all()) {
+	for (final ServerTool tool : registry.all()) {
 	    tool.initGroup(user, group);
 	}
 	persist(group);

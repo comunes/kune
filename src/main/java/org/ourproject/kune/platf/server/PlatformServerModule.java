@@ -24,6 +24,7 @@ import org.ourproject.kune.chat.server.managers.XmppManager;
 import org.ourproject.kune.chat.server.managers.XmppManagerDefault;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.KuneService;
+import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.server.access.AccessService;
 import org.ourproject.kune.platf.server.access.AccessServiceDefault;
 import org.ourproject.kune.platf.server.access.FinderService;
@@ -49,6 +50,7 @@ import org.ourproject.kune.platf.server.properties.KunePropertiesDefault;
 import org.ourproject.kune.platf.server.rpc.ContentRPC;
 import org.ourproject.kune.platf.server.rpc.KuneRPC;
 import org.ourproject.kune.platf.server.rpc.SiteBarRPC;
+import org.ourproject.kune.platf.server.rpc.SocialNetworkRPC;
 import org.ourproject.kune.platf.server.state.StateService;
 import org.ourproject.kune.platf.server.state.StateServiceDefault;
 import org.ourproject.kune.platf.server.tool.ToolRegistry;
@@ -88,6 +90,7 @@ public class PlatformServerModule extends AbstractModule {
 	bind(KuneService.class).to(KuneRPC.class);
 	bind(ContentService.class).to(ContentRPC.class);
 	bind(SiteBarService.class).to(SiteBarRPC.class);
+	bind(SocialNetworkService.class).to(SocialNetworkRPC.class);
     }
 
     private void bindManagers() {

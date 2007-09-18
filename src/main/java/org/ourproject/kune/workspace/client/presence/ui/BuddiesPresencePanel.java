@@ -3,12 +3,12 @@ package org.ourproject.kune.workspace.client.presence.ui;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.DropDownPanel;
 import org.ourproject.kune.platf.client.ui.IconHyperlink;
+import org.ourproject.kune.platf.client.ui.IconLabel;
 import org.ourproject.kune.workspace.client.presence.BuddiesPresencePresenter;
 import org.ourproject.kune.workspace.client.presence.BuddiesPresenceView;
 
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -38,7 +38,7 @@ public class BuddiesPresencePanel extends DropDownPanel implements BuddiesPresen
 
     public void setBuddiesPresence() {
 	buddiesPanel.clear();
-	buddiesPanel.add(new Label("Here the presence of Buddies"));
+	buddiesPanel.add(new IconLabel(Images.App.getInstance().personDef(), "luther.b"));
     }
 
 }

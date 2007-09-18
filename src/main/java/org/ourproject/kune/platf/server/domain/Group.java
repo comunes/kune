@@ -61,6 +61,7 @@ public class Group implements HasId {
     private String publicDesc;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     AdmissionType admissionType;
 
     @OneToOne

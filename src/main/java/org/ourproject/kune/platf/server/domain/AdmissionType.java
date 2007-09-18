@@ -21,6 +21,5 @@
 package org.ourproject.kune.platf.server.domain;
 
 public enum AdmissionType {
-    Moderated, Open, Closed
-    // Personal Groups
+    Moderated, Open, Closed, Personal
 }

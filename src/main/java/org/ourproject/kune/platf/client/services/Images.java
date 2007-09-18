@@ -378,6 +378,11 @@ public interface Images extends ImageBundle {
     AbstractImagePrototype clear();
 
     /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/del.png
+     */
+    AbstractImagePrototype del();
+
+    /**
      * @gwt.resource org/ourproject/kune/platf/public/images/everybody.png
      */
     AbstractImagePrototype everybody();
@@ -433,9 +438,19 @@ public interface Images extends ImageBundle {
     AbstractImagePrototype kuneSearchIcoPush();
 
     /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/nobody.png
+     */
+    AbstractImagePrototype nobody();
+
+    /**
      * @gwt.resource org/ourproject/kune/platf/public/images/opentriangle.gif
      */
     AbstractImagePrototype opentriangle();
+
+    /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/person-def.png
+     */
+    AbstractImagePrototype personDef();
 
     /**
      * @gwt.resource org/ourproject/kune/platf/public/images/remove.png

@@ -46,17 +46,17 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     private final VerticalPanel generalDropDownsPanel;
 
     public WorkspacePanel() {
-	VerticalPanel generalVP = new VerticalPanel();
+	final VerticalPanel generalVP = new VerticalPanel();
 	initWidget(generalVP);
 
 	logoPanel = new LogoPanel();
-	HorizontalPanel generalHP = new HorizontalPanel();
+	final HorizontalPanel generalHP = new HorizontalPanel();
 
 	generalVP.add(logoPanel);
 	generalVP.add(generalHP);
 
-	VerticalPanel groupAreaVP = new VerticalPanel();
-	VerticalPanel groupNavBarVP = new VerticalPanel();
+	final VerticalPanel groupAreaVP = new VerticalPanel();
+	final VerticalPanel groupNavBarVP = new VerticalPanel();
 	generalHP.add(groupAreaVP);
 	generalHP.add(groupNavBarVP);
 
@@ -72,16 +72,16 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	contextVP = new VerticalPanel();
 	cntcxtHSP.setLeftWidget(contentVP);
 	cntcxtHSP.setRightWidget(contextVP);
-	String mainBorderColor = Kune.getInstance().c.getMainBorder();
+	final String mainBorderColor = Kune.getInstance().c.getMainBorder();
 	contentBottomBar = new ContentBottomBar();
-	BorderDecorator contentToolBarBorderDec = new BorderDecorator(contentTitleBar, BorderDecorator.TOPLEFT);
+	final BorderDecorator contentToolBarBorderDec = new BorderDecorator(contentTitleBar, BorderDecorator.TOPLEFT);
 	groupAreaVP.add(contentToolBarBorderDec);
 	contentToolBarBorderDec.setColor(mainBorderColor);
 	groupAreaVP.add(contentSubTitleBar);
 	groupAreaVP.add(cntcxtHSP);
-	BorderDecorator borderDecorator = new BorderDecorator(contentBottomBar, BorderDecorator.BOTTOMLEFT);
-	groupAreaVP.add(borderDecorator);
-	borderDecorator.setColor(mainBorderColor);
+	final BorderDecorator bottomBorderDecorator = new BorderDecorator(contentBottomBar, BorderDecorator.BOTTOMLEFT);
+	groupAreaVP.add(bottomBorderDecorator);
+	bottomBorderDecorator.setColor(mainBorderColor);
 	contentVP.addStyleName("kune-WorkspacePanel-Content");
 	contextVP.addStyleName("kune-WorkspacePanel-Context");
 	contentVP.setWidth("100%");
@@ -94,6 +94,9 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	generalHP.addStyleName("GeneralHP");
 	contentTitleBar.setWidth("100%");
 	contentSubTitleBar.setWidth("100%");
+	groupAreaVP.setCellVerticalAlignment(contentTitleBar, VerticalPanel.ALIGN_MIDDLE);
+	groupAreaVP.setCellVerticalAlignment(contentSubTitleBar, VerticalPanel.ALIGN_MIDDLE);
+	groupAreaVP.setCellVerticalAlignment(bottomBorderDecorator, VerticalPanel.ALIGN_MIDDLE);
 	contentTitleBar.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
 	contentSubTitleBar.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
 	generalDropDownsPanel.addStyleName("kune-GroupSummaryPanel");
@@ -118,7 +121,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 
     public void setContent(final View content) {
 	contentVP.clear();
-	Widget widget = (Widget) content;
+	final Widget widget = (Widget) content;
 	contentVP.add(widget);
 	widget.setWidth("100%");
 	contentVP.setCellWidth(widget, "100%");
@@ -126,7 +129,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 
     public void setContext(final View contextMenu) {
 	contextVP.clear();
-	Widget widget = (Widget) contextMenu;
+	final Widget widget = (Widget) contextMenu;
 	contextVP.add(widget);
 	widget.setHeight("100%");
 	widget.setWidth("100%");
@@ -135,27 +138,27 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     }
 
     public void adjustSize(final int windowWidth, final int windowHeight) {
-	int contentWidth = windowWidth - 163;
-	int contentHeight = windowHeight - 175;
+	final int contentWidth = windowWidth - 163;
+	final int contentHeight = windowHeight - 175;
 
 	cntcxtHSP.setSize("" + contentWidth + "px", "" + contentHeight + "px");
 	cntcxtHSP.setSplitPosition("" + (contentWidth - 175) + "px");
     }
 
     public void setContentTitle(final View view) {
-	Widget widget = (Widget) view;
+	final Widget widget = (Widget) view;
 	contentTitleBar.add((Widget) view);
 	contentTitleBar.setCellVerticalAlignment(widget, VerticalPanel.ALIGN_MIDDLE);
     }
 
     public void setContentSubTitle(final View view) {
-	Widget widget = (Widget) view;
+	final Widget widget = (Widget) view;
 	contentSubTitleBar.add((Widget) view);
 	contentSubTitleBar.setCellVerticalAlignment(widget, VerticalPanel.ALIGN_MIDDLE);
     }
 
     public void setBottom(final View view) {
-	Widget widget = (Widget) view;
+	final Widget widget = (Widget) view;
 	contentBottomBar.add(widget);
 	contentBottomBar.setCellVerticalAlignment(widget, VerticalPanel.ALIGN_MIDDLE);
     }
@@ -169,7 +172,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     }
 
     private void AddDropDown(final View view, final String color) {
-	DropDownPanel panel = (DropDownPanel) view;
+	final DropDownPanel panel = (DropDownPanel) view;
 	generalDropDownsPanel.add(panel);
 	panel.setWidth("145px");
 	panel.setVisible(true);

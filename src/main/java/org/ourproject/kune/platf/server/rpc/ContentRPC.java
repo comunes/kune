@@ -122,9 +122,9 @@ public class ContentRPC implements ContentService, RPC {
 	return createFolder(groupShotName, parentFolderId, title);
     }
 
-    private StateDTO createFolder(final String groupShotName, final Long parentFolderId, final String title)
+    private StateDTO createFolder(final String groupShortName, final Long parentFolderId, final String title)
 	    throws AccessViolationException, ContentNotFoundException, GroupNotFoundException {
-	Group group = groupManager.findByShortName(groupShotName);
+	Group group = groupManager.findByShortName(groupShortName);
 
 	Access access = accessManager.getFolderAccess(parentFolderId, group, AccessType.EDIT);
 	Container container = creationService.createFolder(group, parentFolderId, title);

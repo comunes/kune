@@ -32,27 +32,27 @@ import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-class TopBar extends VerticalPanel {
+class ContextTopBar extends VerticalPanel {
 
     public final Label currentFolder;
     public final PushButton btnGoParent;
     public final HorizontalPanel firstRow;
 
-    public TopBar(final ContextItemsPresenter presenter) {
-	ContextItemsImages Img = ContextItemsImages.App.getInstance();
+    public ContextTopBar(final ContextItemsPresenter presenter) {
+	final ContextItemsImages Img = ContextItemsImages.App.getInstance();
 
 	firstRow = new HorizontalPanel();
-	HorizontalPanel secondRow = new HorizontalPanel();
-	HorizontalPanel iconBarHP = new HorizontalPanel();
-	HorizontalPanel currentFolderHP = new HorizontalPanel();
-	btnGoParent = new PushButton(Img.goUp().createImage(), Img.goUpLight().createImage());
+	final HorizontalPanel secondRow = new HorizontalPanel();
+	final HorizontalPanel iconBarHP = new HorizontalPanel();
+	final HorizontalPanel currentFolderHP = new HorizontalPanel();
+	btnGoParent = new PushButton(Img.folderGoUp().createImage(), Img.folderGoUpLight().createImage());
 	btnGoParent.addClickListener(new ClickListener() {
 	    public void onClick(final Widget sender) {
 		presenter.onGoUp();
 	    }
 	});
-	MenuBar pathMenu = new MenuBar();
-	MenuBar pathSubmenu = new MenuBar(true);
+	final MenuBar pathMenu = new MenuBar();
+	final MenuBar pathSubmenu = new MenuBar(true);
 
 	// Layout
 	add(firstRow);
@@ -60,7 +60,7 @@ class TopBar extends VerticalPanel {
 	firstRow.add(iconBarHP);
 	secondRow.add(currentFolderHP);
 	// iconBarHP.add(btnGoParent);
-	BorderDecorator buttonRounded = new BorderDecorator(pathMenu, BorderDecorator.ALL, BorderDecorator.SIMPLE);
+	final BorderDecorator buttonRounded = new BorderDecorator(pathMenu, BorderDecorator.ALL, BorderDecorator.SIMPLE);
 	iconBarHP.add(buttonRounded);
 	pathMenu.addItem(Img.folderpathmenu().getHTML(), true, pathSubmenu);
 	pathSubmenu.addItem(Img.folder().getHTML() + "&nbsp;Container", true, new Command() {

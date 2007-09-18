@@ -22,6 +22,8 @@ package org.ourproject.kune.platf.server.manager.impl;
 
 import javax.persistence.EntityManager;
 
+import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
+import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
@@ -44,4 +46,39 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 	sn.addAdmin(user.getUserGroup());
     }
 
+    public String requestToJoin(Group group, User user) {
+	SocialNetwork sn = group.getSocialNetwork();
+	AdmissionType admissionType = group.getAdmissionType();
+	if (admissionType == null)
+	    throw new RuntimeException();
+	if (isModerated(admissionType)) {
+	    sn.addPendingCollaborator(user.getUserGroup());
+	    return SocialNetworkDTO.REQ_JOIN_WAITING_MODERATION;
+	} else if (isOpen(admissionType)) {
+	    sn.addCollaborator(user.getUserGroup());
+	    return SocialNetworkDTO.REQ_JOIN_ACEPTED;
+	} else if (isClosed(admissionType)) {
+	    return SocialNetworkDTO.REQ_JOIN_DENIED;
+	} else if (isPersonal(admissionType)) {
+	    return SocialNetworkDTO.REQ_JOIN_DENIED;
+	} else {
+	    throw new RuntimeException();
+	}
+    }
+
+    private boolean isPersonal(AdmissionType admissionType) {
+	return admissionType.equals(AdmissionType.Personal);
+    }
+
+    private boolean isClosed(AdmissionType admissionType) {
+	return admissionType.equals(AdmissionType.Closed);
+    }
+
+    private boolean isOpen(AdmissionType admissionType) {
+	return admissionType.equals(AdmissionType.Open);
+    }
+
+    private boolean isModerated(AdmissionType admissionType) {
+	return admissionType.equals(AdmissionType.Moderated);
+    }
 }

@@ -161,10 +161,17 @@
 }
 
 .kune-IconHyperlink img {
-	margin-right: 4px;
+	margin-right: 3px;
 	vertical-align: middle;
 }
 
+.kune-IconLabel {
+}
+
+.kune-IconLabel img {
+	margin-right: 4px;
+	vertical-align: middle;
+}
 
 /* DropDowns */
 
@@ -213,7 +220,7 @@
 }
 
 .kune-Margin-Large-tl {
-    margin: 10px 10px 0 0;
+    margin: 10px 0 0 10px;
 }
 
 .kune-Margin-Large-tb {
@@ -224,7 +231,7 @@
     margin: 10px 0 0 0;
 }
 
-.kune-Margin-Medium-tlbr {
+.kune-Margin-Medium-trbl {
     margin: 5px;
 }
 
@@ -233,7 +240,7 @@
 }
 
 .kune-Margin-Medium-tl {
-    margin: 5px 0 5px 0;
+    margin: 5px 0 0 5px;
 }
 
 .kune-Margin-Medium-tb {
@@ -244,7 +251,7 @@
     margin: 5px 0 0 0;
 }
 
-.kune-Margin-Small-tlbr {
+.kune-Margin-Small-trbl {
     margin: 3px;
 }
 
@@ -253,7 +260,7 @@
 }
 
 .kune-Margin-Small-tl {
-    margin: 3px 0 3px 0;
+    margin: 3px 0 0 3px;
 }
 
 .kune-Margin-Small-tb {
@@ -264,7 +271,7 @@
     margin: 3px 0 0 0;
 }
 
-.kune-Margin-Mini-tlbr {
+.kune-Margin-Mini-trbl {
     margin: 1px;
 }
 

@@ -25,11 +25,13 @@ import org.ourproject.kune.platf.client.extend.Register;
 import org.ourproject.kune.workspace.client.actions.InitAction;
 import org.ourproject.kune.workspace.client.actions.LoggedInAction;
 import org.ourproject.kune.workspace.client.actions.LoggedOutAction;
+import org.ourproject.kune.workspace.client.actions.RequestJoinGroupAction;
 
 public class WorkspaceClientModule implements ClientModule {
     public void configure(final Register register) {
 	register.addAction(WorkspaceEvents.START_APP, new InitAction());
 	register.addAction(WorkspaceEvents.USER_LOGGED_IN, new LoggedInAction());
 	register.addAction(WorkspaceEvents.USER_LOGGED_OUT, new LoggedOutAction());
+	register.addAction(WorkspaceEvents.REQ_JOIN_GROUP, new RequestJoinGroupAction());
     }
 }

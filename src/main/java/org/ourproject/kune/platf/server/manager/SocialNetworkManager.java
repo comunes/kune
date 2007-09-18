@@ -21,8 +21,13 @@
 package org.ourproject.kune.platf.server.manager;
 
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
 
-public interface SocialNetworkManager {
-    void addAdmin(Group userGroup, User user);
+public interface SocialNetworkManager extends Manager<SocialNetwork, Long> {
+
+    void addAdmin(Group group, User user);
+
+    String requestToJoin(Group group, User user);
+
 }

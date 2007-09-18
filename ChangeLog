@@ -2,6 +2,8 @@
 	* IconHyperlink fixes
 	* new IconLabel widget
 	* added gwt-ext images to PrefetchUtilities
+	* new SocialNewtworkSevice/Rpc implements requestJoinGroup action
+	* remove group and currentTool from session, because now is not used (we get the current group from state)
 	
 2007-09-15 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
     * New hibernate version

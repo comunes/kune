@@ -22,11 +22,13 @@
 
 .gwt-RichTextToolbar .gwt-ToggleButton {
     float: left;
+    margin-top: 2px;
 }
 
 
 .gwt-RichTextToolbar .gwt-PushButton {
     float: left;
+    margin-top: 2px;
 }
 
 .gwt-RichTextToolbar .gwt-PushButton-up {
@@ -91,6 +93,7 @@
 
 .RichTextToolbar-menu {
     float: left;
+    margin-top: 2px;
 }
 
 .RichTextToolbar-menu table {

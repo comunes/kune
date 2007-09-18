@@ -40,7 +40,7 @@ public class GroupManagerTest extends PersistenceTest {
 	assertEquals(0, groupFinder.getAll().size());
 	assertEquals(0, licenseFinder.getAll().size());
 	user = userManager.createUser("userName", "the user name", "email", "userPassword");
-	License licenseDef = new License("by-sa", "Creative Commons Attribution-ShareAlike", "",
+	final License licenseDef = new License("by-sa", "Creative Commons Attribution-ShareAlike", "",
 		"http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
 	licenseManager.persist(licenseDef);
 	groupManager.createUserGroup(user);
@@ -48,10 +48,10 @@ public class GroupManagerTest extends PersistenceTest {
 
     @Test
     public void createdGroupShoudHaveValidSocialNetwork() throws SerializableException {
-	Group group = new Group("short", "longName");
+	final Group group = new Group("short", "longName");
 	groupManager.createGroup(group, user);
-	SocialNetwork socialNetwork = group.getSocialNetwork();
-	AccessLists lists = socialNetwork.getAccessLists();
+	final SocialNetwork socialNetwork = group.getSocialNetwork();
+	final AccessLists lists = socialNetwork.getAccessLists();
 	assertTrue(lists.getAdmins().includes(user.getUserGroup()));
 	assertTrue(lists.getEditors().isEmpty());
 	assertTrue(lists.getViewers().isEmpty());
@@ -60,8 +60,8 @@ public class GroupManagerTest extends PersistenceTest {
 
     @Test
     public void createGroup() throws SerializableException {
-	Group group = groupManager.createGroup("ysei", "Yellow Submarine Environmental Initiative", user);
-	Group otherGroup = groupManager.findByShortName("ysei");
+	final Group group = groupManager.createGroup("ysei", "Yellow Submarine Environmental Initiative", user);
+	final Group otherGroup = groupManager.findByShortName("ysei");
 
 	assertEquals(group.getLongName(), otherGroup.getLongName());
 	assertEquals(group.getShortName(), otherGroup.getShortName());

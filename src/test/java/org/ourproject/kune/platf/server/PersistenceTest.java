@@ -29,16 +29,16 @@ public abstract class PersistenceTest {
 
     @Before
     public void prepare() {
-	Injector injector = TestHelper.create(new PlatformServerModule(), persistenceUnit, propetiesFileName);
-	PersistenceService persistence = injector.getInstance(PersistenceService.class);
+	final Injector injector = TestHelper.create(new PlatformServerModule(), persistenceUnit, propetiesFileName);
+	final PersistenceService persistence = injector.getInstance(PersistenceService.class);
 	// To Debug insert breakpoint here
 	persistence.start();
 	injector.injectMembers(this);
     }
 
     public EntityManager openTransaction() {
-	EntityManager manager = getManager();
-	EntityTransaction transaction = manager.getTransaction();
+	final EntityManager manager = getManager();
+	final EntityTransaction transaction = manager.getTransaction();
 	transaction.begin();
 	return manager;
     }
@@ -52,7 +52,7 @@ public abstract class PersistenceTest {
     }
 
     public void persist(final Object... entities) {
-	for (Object entity : entities) {
+	for (final Object entity : entities) {
 	    getManager().persist(entity);
 	}
     }

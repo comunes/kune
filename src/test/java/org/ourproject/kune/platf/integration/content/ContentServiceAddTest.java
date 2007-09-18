@@ -38,17 +38,6 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 	assertNotNull(newState);
     }
 
-    @Test
-    public void testAddExistingRoom() throws SerializableException {
-	doLogin();
-	defaultContent = getDefaultContent();
-	ContainerDTO parent = defaultContent.getFolder();
-	String roomName = "testroom";
-	StateDTO newState = contentService.addRoom(session.getHash(), groupName, parent.getId(), roomName);
-	StateDTO newState2 = contentService.addRoom(session.getHash(), groupName, parent.getId(), roomName);
-	assertNotNull(newState);
-    }
-
     @Test(expected = AccessViolationException.class)
     public void noLoggedInShouldThrowIllegalAccess() throws ContentNotFoundException, SerializableException {
 	defaultContent = getDefaultContent();

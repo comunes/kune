@@ -22,7 +22,6 @@ package org.ourproject.kune.platf.client.state;
 
 import java.util.List;
 
-import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 /**
@@ -34,38 +33,14 @@ import org.ourproject.kune.workspace.client.dto.StateDTO;
  */
 public class Session {
     public final String user;
-    private GroupDTO group;
-    private String currentToolName;
     private List ccLicenses;
     private List notCCLicenses;
     private StateDTO currentState;
 
     public Session(final String userHash) {
 	user = userHash;
-	group = null;
-	currentToolName = null;
 	ccLicenses = null;
 	notCCLicenses = null;
-    }
-
-    public void setGroup(final GroupDTO group) {
-	this.group = group;
-    }
-
-    public GroupDTO getGroup() {
-	return group;
-    }
-
-    public boolean isCurrentTool(final String toolName) {
-	return currentToolName != null && currentToolName.equals(toolName);
-    }
-
-    public void setCurrentToolName(final String toolName) {
-	this.currentToolName = toolName;
-    }
-
-    public boolean isCurrentGroup(final String groupName) {
-	return group.getShortName().equals(groupName);
     }
 
     public List getCCLicenses() {
@@ -82,10 +57,6 @@ public class Session {
 
     public void setNotCCLicenses(final List licensesNotCC) {
 	this.notCCLicenses = licensesNotCC;
-    }
-
-    public boolean currentGroupIs(final String groupName) {
-	return group != null && group.getShortName().equals(groupName);
     }
 
     public void setCurrent(final StateDTO currentState) {

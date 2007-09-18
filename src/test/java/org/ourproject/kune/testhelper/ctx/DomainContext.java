@@ -9,9 +9,11 @@ import org.ourproject.kune.platf.server.domain.User;
 
 public class DomainContext {
     private final HashMap<String, User> users;
+    private final HashMap<String, Group> groups;
 
     public DomainContext() {
 	this.users = new HashMap<String, User>();
+	this.groups = new HashMap<String, Group>();
     }
 
     public void createUsers(final String... userNames) {
@@ -20,6 +22,14 @@ public class DomainContext {
 	    user = new User(name, "long" + name, name + "@email.com", "password" + name);
 	    user.setUserGroup(new Group(name, "groupLong" + name));
 	    users.put(name, user);
+	}
+    }
+
+    public void createGroups(final String... groupNames) {
+	Group group;
+	for (String name : groupNames) {
+	    group = new Group("name", "Some group: " + name);
+	    groups.put(name, group);
 	}
     }
 
@@ -49,6 +59,10 @@ public class DomainContext {
 	User user = getUser(userName);
 	Group userGroup = user.getUserGroup();
 	return userGroup;
+    }
+
+    public Group getGroup(String groupName) {
+	return groups.get(groupName);
     }
 
 }

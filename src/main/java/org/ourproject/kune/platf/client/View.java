@@ -21,11 +21,7 @@
 package org.ourproject.kune.platf.client;
 
 /**
- * sirve para marcar las vistas permiten hacer pruebas sin tener que utilzar,
- * por ejemplo, widget (que no funcionarían sin iniciar el gwt...)
- * 
- * luego se debe hacer casting del objeto a widget
- * 
+ * For make tests without dependencies to gwt. Use casting to use the widget.
  */
 public interface View {
 

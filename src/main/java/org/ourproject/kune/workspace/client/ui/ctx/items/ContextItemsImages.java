@@ -68,6 +68,16 @@ public interface ContextItemsImages extends ImageBundle {
     AbstractImagePrototype folderAdd();
 
     /**
+     * @gwt.resource folder-go-up.png
+     */
+    AbstractImagePrototype folderGoUp();
+
+    /**
+     * @gwt.resource folder-go-up-light.png
+     */
+    AbstractImagePrototype folderGoUpLight();
+
+    /**
      * @gwt.resource folderpathmenu.png
      */
     AbstractImagePrototype folderpathmenu();
