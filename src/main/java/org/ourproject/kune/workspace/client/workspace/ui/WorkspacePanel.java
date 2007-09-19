@@ -23,7 +23,7 @@ package org.ourproject.kune.workspace.client.workspace.ui;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.tool.ToolTrigger;
-import org.ourproject.kune.platf.client.ui.BorderDecorator;
+import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
 import org.ourproject.kune.platf.client.ui.DropDownPanel;
 import org.ourproject.kune.workspace.client.workspace.WorkspaceView;
 
@@ -74,12 +74,12 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	cntcxtHSP.setRightWidget(contextVP);
 	final String mainBorderColor = Kune.getInstance().c.getMainBorder();
 	contentBottomBar = new ContentBottomBar();
-	final BorderDecorator contentToolBarBorderDec = new BorderDecorator(contentTitleBar, BorderDecorator.TOPLEFT);
+	final RoundedBorderDecorator contentToolBarBorderDec = new RoundedBorderDecorator(contentTitleBar, RoundedBorderDecorator.TOPLEFT);
 	groupAreaVP.add(contentToolBarBorderDec);
 	contentToolBarBorderDec.setColor(mainBorderColor);
 	groupAreaVP.add(contentSubTitleBar);
 	groupAreaVP.add(cntcxtHSP);
-	final BorderDecorator bottomBorderDecorator = new BorderDecorator(contentBottomBar, BorderDecorator.BOTTOMLEFT);
+	final RoundedBorderDecorator bottomBorderDecorator = new RoundedBorderDecorator(contentBottomBar, RoundedBorderDecorator.BOTTOMLEFT);
 	groupAreaVP.add(bottomBorderDecorator);
 	bottomBorderDecorator.setColor(mainBorderColor);
 	contentVP.addStyleName("kune-WorkspacePanel-Content");
@@ -176,7 +176,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	generalDropDownsPanel.add(panel);
 	panel.setWidth("145px");
 	panel.setVisible(true);
-	panel.setBorderColor(color);
+	panel.setColor(color);
     }
 
 }

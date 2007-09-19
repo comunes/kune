@@ -31,7 +31,7 @@
     font-size: 167%;
     overflow: hidden;
     font-weight: 700;
-    color: navy;
+    color: #AA4400;
     margin: 5px;
     font-weight: 700;
 }
@@ -140,8 +140,9 @@
 /* Main Content & Context */
 
 .kune-WorkspacePanel-Content {
-    background-color: #FFF;
+    background-color: #FCFCFC;
     width: 100%;
+    height: 100%;
 }
 
 .kune-WorkspacePanel-Content .main-content {
@@ -359,7 +360,5 @@
 .kune-AccessList .header { margin: 0 0 3px 0; text-decoration: none; width: 100%; background-color: #8DD35F; }
 .kune-AccessList .header table { margin: 0 5px 0 0; width: 100%; color: #FFF; }
 .kune-AccessList .header img {margin: 0 3px 0 0; }
-.kune-AccessList .content { margin: 0 0 0 7px; width: 100%; border: 1px solid red; }
+.kune-AccessList .content { margin: 0 0 0 7px; width: 100%; }
 .kune-AccessList .content table { margin-bottom: 5px; width: 100%; }
-
-

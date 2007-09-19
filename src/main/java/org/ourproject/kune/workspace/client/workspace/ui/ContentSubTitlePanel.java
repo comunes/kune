@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.workspace.client.workspace.ui;
 
+import org.ourproject.kune.platf.client.ui.rate.RatePanel;
 import org.ourproject.kune.workspace.client.workspace.ContentSubTitlePresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentSubTitleView;
 
@@ -29,16 +30,21 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class ContentSubTitlePanel extends HorizontalPanel implements ContentSubTitleView {
     private final Label titleLabel;
+    private final RatePanel ratePanel;
 
     public ContentSubTitlePanel(final ContentSubTitlePresenter presenter) {
 	titleLabel = new Label();
+	ratePanel = new RatePanel(null, null);
 	add(titleLabel);
+	add(ratePanel);
 	setWidth("100%");
 	addStyleName("kune-ContentSubTitleBar");
 	setCellVerticalAlignment(titleLabel, VerticalPanel.ALIGN_MIDDLE);
     }
 
-    public void setContentSubTitle(final String title) {
+    public void setContentSubTitle(final String title, final Double rate, final Integer rateByUsers) {
 	titleLabel.setText(title);
+	ratePanel.setRate(rate);
+	ratePanel.setByUsers(rateByUsers);
     }
 }

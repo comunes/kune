@@ -1,12 +1,10 @@
 package org.ourproject.kune.platf.client.ui;
 
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.platf.client.services.Kune;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
@@ -22,46 +20,37 @@ import com.google.gwt.user.client.ui.Widget;
  * TODO: pagination (using DeckPanel)
  * 
  */
-public class DropDownPanel extends Composite implements ClickListener {
-    private VerticalPanel dropDownPanelVP;
+public class DropDownPanel extends Composite implements ClickListener, HasColor {
+    private VerticalPanel vp;
     private HorizontalPanel titleHP;
     private Label titleLabel;
-    private DeckPanel contentDeckP;
-    private SimplePanel cleanPanel;
+    private SimplePanel contentPanel;
     private Images img;
     private Image arrowImage;
-    private BorderDecorator outerBorder;
+    private RoundedBorderDecorator outerBorder;
 
     public DropDownPanel() {
 	initialize();
 	layout();
 	setProperties();
-	this.setContentVisible(false);
+	setContentVisible(false);
 	arrowImage.addClickListener(this);
 	titleLabel.addClickListener(this);
     }
 
     public DropDownPanel(final boolean visible) {
 	this();
-	this.setContentVisible(visible);
+	setContentVisible(visible);
     }
 
     public DropDownPanel(final String headerText, final boolean visible) {
 	this();
-	this.setContentVisible(visible);
-	this.setHeaderText(headerText);
-    }
-
-    public boolean contentEmpty() {
-	return (contentDeckP.getWidgetCount() == 1);
+	setContentVisible(visible);
+	setHeaderText(headerText);
     }
 
     public void setContent(final Widget widget) {
-	if (!contentEmpty()) {
-	    contentDeckP.remove(1);
-	}
-	contentDeckP.add(widget);
-	widget.setWidth("100%");
+	contentPanel.setWidget(widget);
 	// refresh panel
 	setContentVisible(isContentVisible());
     }
@@ -69,19 +58,16 @@ public class DropDownPanel extends Composite implements ClickListener {
     public void setContentVisible(final boolean visible) {
 	if (visible) {
 	    img.arrowDownWhite().applyTo(arrowImage);
-	    contentDeckP.setVisible(true);
-	    if (!contentEmpty()) {
-		contentDeckP.showWidget(1);
-	    }
+	    contentPanel.setVisible(true);
+
 	} else {
 	    img.arrowRightWhite().applyTo(arrowImage);
-	    contentDeckP.setVisible(false);
-	    contentDeckP.showWidget(0);
+	    contentPanel.setVisible(false);
 	}
     }
 
     public boolean isContentVisible() {
-	return (contentDeckP.isVisible());
+	return contentPanel.isVisible();
     }
 
     public void setHeaderText(final String text) {
@@ -94,57 +80,68 @@ public class DropDownPanel extends Composite implements ClickListener {
     }
 
     public void onClick(final Widget sender) {
-	if ((sender == titleHP) | (sender == arrowImage) | (sender == titleLabel)) {
+	if (sender == titleHP | sender == arrowImage | sender == titleLabel) {
 	    setContentVisible(!isContentVisible());
 	}
     }
 
-    public void setBorderColor(final String color) {
+    public void setColor(final String color) {
 	outerBorder.setColor(color);
 	DOM.setStyleAttribute(arrowImage.getElement(), "backgroundColor", color);
-	DOM.setStyleAttribute(dropDownPanelVP.getElement(), "backgroundColor", color);
+	DOM.setStyleAttribute(vp.getElement(), "backgroundColor", color);
 	DOM.setStyleAttribute(titleLabel.getElement(), "backgroundColor", color);
     }
 
     public void setBackgroundColor(final String color) {
-	DOM.setStyleAttribute(contentDeckP.getElement(), "backgroundColor", color);
+	DOM.setStyleAttribute(contentPanel.getElement(), "backgroundColor", color);
+    }
+
+    public String getColor() {
+	return outerBorder.getColor();
+    }
+
+    public void setWidth(final String width) {
+	super.setWidth(width);
+	outerBorder.setWidth(width);
+    }
+
+    public void setHeight(final String height) {
+	super.setHeight(height);
+	outerBorder.setHeight(height);
     }
 
     private void initialize() {
-	dropDownPanelVP = new VerticalPanel();
-	outerBorder = new BorderDecorator(dropDownPanelVP, BorderDecorator.ALL);
+	vp = new VerticalPanel();
+	outerBorder = new RoundedBorderDecorator(vp, RoundedBorderDecorator.ALL);
 	titleHP = new HorizontalPanel();
 	arrowImage = new Image();
 	titleLabel = new Label();
-	contentDeckP = new DeckPanel();
-	cleanPanel = new SimplePanel();
+	contentPanel = new SimplePanel();
     }
 
     private void layout() {
 	initWidget(outerBorder);
-	dropDownPanelVP.add(titleHP);
-	dropDownPanelVP.add(contentDeckP);
+	vp.add(titleHP);
+	vp.add(contentPanel);
 	titleHP.add(arrowImage);
 	titleHP.add(titleLabel);
-	contentDeckP.add(cleanPanel);
     }
 
     private void setProperties() {
 	outerBorder.setCornerStyleName("kune-DropDownOuter");
 
-	dropDownPanelVP.addStyleName("kune-DropDownOuter");
-	dropDownPanelVP.setWidth("100%");
-	dropDownPanelVP.setCellWidth(contentDeckP, "100%");
-	dropDownPanelVP.setCellWidth(titleHP, "100%");
-	cleanPanel.setWidth("100%");
+	vp.addStyleName("kune-DropDownOuter");
+	vp.setWidth("100%");
+	vp.setCellWidth(contentPanel, "100%");
+	vp.setCellWidth(titleHP, "100%");
 
 	titleHP.addStyleName("kune-DropDownLabel");
 
 	img = Images.App.getInstance();
 	img.arrowDownWhite().applyTo(arrowImage);
 
-	titleLabel.setText(Kune.getInstance().t.Text());
+	titleLabel.setText("");
 
-	contentDeckP.addStyleName("kune-DropDownInner");
+	contentPanel.addStyleName("kune-DropDownInner");
     }
 }

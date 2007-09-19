@@ -368,6 +368,11 @@ public interface Images extends ImageBundle {
     AbstractImagePrototype bysa80x15();
 
     /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/cancel.png
+     */
+    AbstractImagePrototype cancel();
+
+    /**
      * @gwt.resource org/ourproject/kune/platf/public/images/chat.png
      */
     AbstractImagePrototype chat();

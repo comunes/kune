@@ -20,7 +20,7 @@
 
 package org.ourproject.kune.workspace.client.ui.ctx.items;
 
-import org.ourproject.kune.platf.client.ui.BorderDecorator;
+import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Window;
@@ -60,7 +60,7 @@ class ContextTopBar extends VerticalPanel {
 	firstRow.add(iconBarHP);
 	secondRow.add(currentFolderHP);
 	// iconBarHP.add(btnGoParent);
-	final BorderDecorator buttonRounded = new BorderDecorator(pathMenu, BorderDecorator.ALL, BorderDecorator.SIMPLE);
+	final RoundedBorderDecorator buttonRounded = new RoundedBorderDecorator(pathMenu, RoundedBorderDecorator.ALL, RoundedBorderDecorator.SIMPLE);
 	iconBarHP.add(buttonRounded);
 	pathMenu.addItem(Img.folderpathmenu().getHTML(), true, pathSubmenu);
 	pathSubmenu.addItem(Img.folder().getHTML() + "&nbsp;Container", true, new Command() {

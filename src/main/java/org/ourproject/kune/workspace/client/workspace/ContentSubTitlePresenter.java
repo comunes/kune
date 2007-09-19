@@ -10,8 +10,8 @@ public class ContentSubTitlePresenter implements ContentSubTitleComponent {
 	this.view = view;
     }
 
-    public void setContentSubTitle(final String title) {
-	view.setContentSubTitle(title);
+    public void setContentSubTitle(final String title, final Double rate, final Integer rateByUsers) {
+	view.setContentSubTitle(title, rate, rateByUsers);
     }
 
     public View getView() {

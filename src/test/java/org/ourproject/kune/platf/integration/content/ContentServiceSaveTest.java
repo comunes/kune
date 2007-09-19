@@ -20,23 +20,25 @@ public class ContentServiceSaveTest extends ContentServiceIntegrationTest {
 
     @Test
     public void testSaveAndRetrieve() throws SerializableException {
-	String text = "Lorem ipsum dolor sit amet";
-	StateDTO defaultContent = getDefaultContent();
-	int version = defaultContent.getVersion();
-	int currentVersion = contentService.save(getHash(), defaultContent.getDocumentId(), text);
+	final String text = "Lorem ipsum dolor sit amet";
+	final StateDTO defaultContent = getDefaultContent();
+	final int version = defaultContent.getVersion();
+	final int currentVersion = contentService.save(getHash(), defaultContent.getDocumentId(), text);
 	assertEquals(version + 1, currentVersion);
-	StateDTO again = contentService.getContent(getHash(), defaultContent.getState());
+	final StateDTO again = contentService.getContent(getHash(), defaultContent.getState());
 	assertEquals(text, again.getContent());
+	assertEquals(0, again.getRateByUsers());
+	assertEquals(0, again.getRate());
     }
 
     @Test
     public void testSaveAndRetrieveBig() throws SerializableException {
-	String text = TestDomainHelper.createBigText();
-	StateDTO defaultContent = getDefaultContent();
-	int version = defaultContent.getVersion();
-	int currentVersion = contentService.save(getHash(), defaultContent.getDocumentId(), text);
+	final String text = TestDomainHelper.createBigText();
+	final StateDTO defaultContent = getDefaultContent();
+	final int version = defaultContent.getVersion();
+	final int currentVersion = contentService.save(getHash(), defaultContent.getDocumentId(), text);
 	assertEquals(version + 1, currentVersion);
-	StateDTO again = contentService.getContent(getHash(), defaultContent.getState());
+	final StateDTO again = contentService.getContent(getHash(), defaultContent.getState());
 	assertEquals(text, again.getContent());
     }
 

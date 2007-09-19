@@ -5,13 +5,16 @@
 }
 
 .gwt-RichTextArea {
-    border: 1px solid #000;
+    /* border: 1px solid #000;
+    background-color: #FFF; */
+    border: 1px solid #4D4D4D;
     background-color: #FFF;
+    margin: 5px 0px 5px 15px;
 }
 
 .gwt-RichTextToolbar {
     background-color: #F2F2F2;
-    padding: 2px;
+    padding: 5px;
     height: 24px;
     vertical-align: middle;
 }

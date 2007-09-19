@@ -48,28 +48,28 @@ public class MapperTest {
 
     @Test
     public void testUserInfo() {
-	User user = TestDomainHelper.createUser(1);
-	UserInfo userInfo = userInfoService.buildInfo(user);
+	final User user = TestDomainHelper.createUser(1);
+	final UserInfo userInfo = userInfoService.buildInfo(user);
 
-	UserInfoDTO userInfoDTO = mapper.map(userInfo, UserInfoDTO.class);
+	final UserInfoDTO userInfoDTO = mapper.map(userInfo, UserInfoDTO.class);
 	assertEquals(userInfo.getName(), userInfoDTO.getName());
 	assertEquals(userInfo.getChatName(), userInfoDTO.getChatName());
 	assertEquals(userInfo.getChatPassword(), userInfoDTO.getChatPassword());
-	List<Link> adminsGroup = userInfo.getGroupsIsAdmin();
-	List<Link> adminsGroupDTO = userInfoDTO.getGroupsIsAdmin();
+	final List<Link> adminsGroup = userInfo.getGroupsIsAdmin();
+	final List<Link> adminsGroupDTO = userInfoDTO.getGroupsIsAdmin();
 	assertEqualListsLink(adminsGroupDTO, adminsGroup);
     }
 
     private void assertEqualListsLink(final List<Link> listDTO, final List<Link> list) {
 	assertEquals(listDTO.size(), list.size());
 	for (int i = 0; i < listDTO.size(); i++) {
-	    Object object = listDTO.get(i);
+	    final Object object = listDTO.get(i);
 	    assertEquals(LinkDTO.class, object.getClass());
-	    LinkDTO d = (LinkDTO) object;
-	    Link l = list.get(i);
+	    final LinkDTO d = (LinkDTO) object;
+	    final Link l = list.get(i);
 	    assertNotNull(d);
 	    assertNotNull(l);
-	    LinkDTO map = mapper.map(l, LinkDTO.class);
+	    final LinkDTO map = mapper.map(l, LinkDTO.class);
 	    assertEquals(map.getName(), d.getName());
 	    assertEquals(map.getLink(), d.getLink());
 	}
@@ -77,16 +77,18 @@ public class MapperTest {
 
     @Test
     public void testContentMapping() {
-	State c = new State();
+	final State c = new State();
 	c.setContentRights(new AccessRights(true, true, true));
-	Group groupAdmins = TestDomainHelper.createGroup(1);
-	Group groupEdit = TestDomainHelper.createGroup(2);
-	Group groupView = TestDomainHelper.createGroup(3);
-	Group groupPending = TestDomainHelper.createGroup(4);
+	final Group groupAdmins = TestDomainHelper.createGroup(1);
+	final Group groupEdit = TestDomainHelper.createGroup(2);
+	final Group groupView = TestDomainHelper.createGroup(3);
+	final Group groupPending = TestDomainHelper.createGroup(4);
 	c.setAccessLists(TestDomainHelper.createAccessLists(groupAdmins, groupEdit, groupView));
 	c.setSocialNetwork(TestDomainHelper.createSocialNetwork(groupAdmins, groupEdit, groupView, groupPending));
+	c.setRate(10.2d);
+	c.setRateByUsers(3l);
 
-	StateDTO dto = mapper.map(c, StateDTO.class);
+	final StateDTO dto = mapper.map(c, StateDTO.class);
 	assertEquals(c.getContentRights().isAdministrable(), dto.getContentRights().isAdministrable);
 
 	assertValidAccessListsMapping(c.getAccessLists().getAdmins(), dto.getAccessLists().getAdmins());
@@ -101,20 +103,22 @@ public class MapperTest {
 		.getAccessLists().getViewers());
 	assertValidAccessListsMapping(c.getSocialNetwork().getPendingCollaborators(), dto.getSocialNetwork()
 		.getPendingCollaborators());
+	assertEquals(c.getRate(), dto.getRate());
+	assertEquals(c.getRateByUsers(), dto.getRateByUsers());
     }
 
     private void assertValidAccessListsMapping(final GroupList groupList, final GroupListDTO groupListDTO) {
-	List listOrig = groupList.getList();
-	List listDto = groupListDTO.getList();
+	final List listOrig = groupList.getList();
+	final List listDto = groupListDTO.getList();
 	assertEquals(listDto.size(), listOrig.size());
 	for (int i = 0; i < listDto.size(); i++) {
-	    Object object = listDto.get(i);
+	    final Object object = listDto.get(i);
 	    assertEquals(GroupDTO.class, object.getClass());
-	    GroupDTO d = (GroupDTO) object;
-	    Group g = (Group) listOrig.get(i);
+	    final GroupDTO d = (GroupDTO) object;
+	    final Group g = (Group) listOrig.get(i);
 	    assertNotNull(d);
 	    assertNotNull(g);
-	    GroupDTO map = mapper.map(g, GroupDTO.class);
+	    final GroupDTO map = mapper.map(g, GroupDTO.class);
 	    assertEquals(map, d);
 	}
     }
@@ -127,45 +131,45 @@ public class MapperTest {
     }
 
     private void assertMapping(final GroupListMode mode, final String modeName) {
-	GroupList list = new GroupList();
+	final GroupList list = new GroupList();
 	list.setMode(mode);
-	GroupListDTO dto = mapper.map(list, GroupListDTO.class);
+	final GroupListDTO dto = mapper.map(list, GroupListDTO.class);
 	assertEquals(modeName, dto.getMode());
-	GroupList listBack = mapper.map(dto, GroupList.class);
+	final GroupList listBack = mapper.map(dto, GroupList.class);
 	assertEquals(mode, listBack.getMode());
     }
 
     @Test
     public void testGroupMapping() {
-	Group group = new Group("shortName", "name");
-	GroupDTO dto = mapper.map(group, GroupDTO.class);
+	final Group group = new Group("shortName", "name");
+	final GroupDTO dto = mapper.map(group, GroupDTO.class);
 	assertEquals(group.getLongName(), dto.getLongName());
 	assertEquals(group.getShortName(), dto.getShortName());
     }
 
     @Test
     public void testContentDescriptorMapping() {
-	Content d = new Content();
+	final Content d = new Content();
 	d.setId(1l);
-	Revision revision = new Revision();
+	final Revision revision = new Revision();
 	revision.getData().setTitle("title");
 	d.addRevision(revision);
 
-	ContentDTO dto = mapper.map(d, ContentDTO.class);
+	final ContentDTO dto = mapper.map(d, ContentDTO.class);
 	assertEquals(1l, dto.getId());
 	assertEquals("title", dto.getTitle());
     }
 
     @Test
     public void testFolderMapping() {
-	Container container = new Container();
+	final Container container = new Container();
 	container.addChild(new Container());
 	container.addChild(new Container());
 	container.addContent(new Content());
 	container.addContent(new Content());
 	container.addContent(new Content());
 
-	ContainerDTO dto = mapper.map(container, ContainerDTO.class);
+	final ContainerDTO dto = mapper.map(container, ContainerDTO.class);
 	assertEquals(2, dto.getChilds().size());
 	assertEquals(3, dto.getContents().size());
 	assertTrue(dto.getContents().get(0) instanceof ContentDTO);
@@ -174,14 +178,14 @@ public class MapperTest {
 
     @Test
     public void testLicenseMapping() {
-	License licenseCC = new License("by-nc-nd", "Creative Commons Attribution-NonCommercial-NoDerivs", "cc1",
+	final License licenseCC = new License("by-nc-nd", "Creative Commons Attribution-NonCommercial-NoDerivs", "cc1",
 		"http://creativecommons.org/licenses/by-nc-nd/3.0/", true, false, false, "cc2", "cc3");
 
-	License licenseNotCC = new License("gfdl", "GNU Free Documentation License", "nocc1",
+	final License licenseNotCC = new License("gfdl", "GNU Free Documentation License", "nocc1",
 		"http://www.gnu.org/copyleft/fdl.html", false, true, false, "nocc2", "nocc3");
 
-	LicenseDTO dtoCC = mapper.map(licenseCC, LicenseDTO.class);
-	LicenseDTO dtoNotCC = mapper.map(licenseNotCC, LicenseDTO.class);
+	final LicenseDTO dtoCC = mapper.map(licenseCC, LicenseDTO.class);
+	final LicenseDTO dtoNotCC = mapper.map(licenseNotCC, LicenseDTO.class);
 
 	assertEquals("by-nc-nd", dtoCC.getShortName());
 	assertEquals("gfdl", dtoNotCC.getShortName());

@@ -31,11 +31,11 @@ import com.google.inject.Singleton;
 @Singleton
 public class StateServiceDefault implements StateService {
     public State create(final Access access) {
-	Content content = access.getContent();
-	Container container = content.getFolder();
-	State state = new State();
+	final Content content = access.getContent();
+	final Container container = content.getFolder();
+	final State state = new State();
 
-	Long documentId = content.getId();
+	final Long documentId = content.getId();
 	if (documentId != null) {
 	    state.setTypeId(content.getTypeId());
 	    state.setDocumentId(documentId.toString());
@@ -43,8 +43,8 @@ public class StateServiceDefault implements StateService {
 	    state.setTypeId(container.getTypeId());
 	    state.setDocumentId(null);
 	}
-	Data data = content.getLastRevision().getData();
-	char[] text = data.getContent();
+	final Data data = content.getLastRevision().getData();
+	final char[] text = data.getContent();
 	state.setContent(text == null ? null : new String(text));
 	if (documentId != null) {
 	    state.setTitle(data.getTitle());
@@ -54,6 +54,7 @@ public class StateServiceDefault implements StateService {
 	state.setToolName(container.getToolName());
 	state.setGroup(container.getOwner());
 	state.setFolder(container);
+	// TODO: socialNetwork outside of state
 	state.setSocialNetwork(container.getOwner().getSocialNetwork());
 	state.setAccessLists(access.getContentAccessLists());
 	state.setContentRights(access.getContentRights());

@@ -130,8 +130,8 @@ public class State {
 	return rateByUsers;
     }
 
-    public void setRateByUsers(final Integer rateByUsers) {
-	this.rateByUsers = rateByUsers;
+    public void setRateByUsers(final Long rateByUsers) {
+	this.rateByUsers = rateByUsers.intValue();
     }
 
     public void setTypeId(final String typeId) {

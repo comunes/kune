@@ -78,15 +78,15 @@ public class ContentRPC implements ContentService, RPC {
 	Group loggedGroup;
 
 	if (session.isUserLoggedIn()) {
-	    contentGroup = groupManager.getGroupOfUserWithId(session.getUserId());
+	    contentGroup = groupManager.getGroupOfUserWithId(session.getUser().getId());
 	    loggedGroup = contentGroup;
 	} else {
 	    contentGroup = groupManager.getDefaultGroup();
 	    loggedGroup = Group.NO_GROUP;
 	}
 
-	Access access = accessManager.getAccess(token, contentGroup, loggedGroup, AccessType.READ);
-	State state = stateService.create(access);
+	final Access access = accessManager.getAccess(token, contentGroup, loggedGroup, AccessType.READ);
+	final State state = stateService.create(access);
 	return mapper.map(state, StateDTO.class);
     }
 
@@ -95,10 +95,10 @@ public class ContentRPC implements ContentService, RPC {
     public int save(final String userHash, final String documentId, final String textContent)
 	    throws AccessViolationException, ContentNotFoundException {
 
-	Long contentId = parseId(documentId);
-	User user = session.getUser();
-	Content content = accessManager.accessToContent(contentId, user, AccessType.EDIT);
-	Content descriptor = creationService.saveContent(user, content, textContent);
+	final Long contentId = parseId(documentId);
+	final User user = session.getUser();
+	final Content content = accessManager.accessToContent(contentId, user, AccessType.EDIT);
+	final Content descriptor = creationService.saveContent(user, content, textContent);
 	return descriptor.getVersion();
     }
 
@@ -107,11 +107,11 @@ public class ContentRPC implements ContentService, RPC {
     public StateDTO addContent(final String userHash, final Long parentFolderId, final String title)
 	    throws AccessViolationException, ContentNotFoundException {
 
-	User user = session.getUser();
-	Group group = groupManager.getGroupOfUserWithId(session.getUser().getId());
-	Access access = accessManager.getFolderAccess(parentFolderId, group, AccessType.EDIT);
+	final User user = session.getUser();
+	final Group group = groupManager.getGroupOfUserWithId(session.getUser().getId());
+	final Access access = accessManager.getFolderAccess(parentFolderId, group, AccessType.EDIT);
 	access.setContentWidthFolderRights(creationService.createContent(title, user, access.getFolder()));
-	State state = stateService.create(access);
+	final State state = stateService.create(access);
 	return mapper.map(state, StateDTO.class);
     }
 
@@ -124,14 +124,14 @@ public class ContentRPC implements ContentService, RPC {
 
     private StateDTO createFolder(final String groupShortName, final Long parentFolderId, final String title)
 	    throws AccessViolationException, ContentNotFoundException, GroupNotFoundException {
-	Group group = groupManager.findByShortName(groupShortName);
+	final Group group = groupManager.findByShortName(groupShortName);
 
 	Access access = accessManager.getFolderAccess(parentFolderId, group, AccessType.EDIT);
-	Container container = creationService.createFolder(group, parentFolderId, title);
-	String toolName = container.getToolName();
-	StateToken token = new StateToken(group.getShortName(), toolName, container.getId().toString(), null);
+	final Container container = creationService.createFolder(group, parentFolderId, title);
+	final String toolName = container.getToolName();
+	final StateToken token = new StateToken(group.getShortName(), toolName, container.getId().toString(), null);
 	access = accessManager.getAccess(token, group, group, AccessType.READ);
-	State state = stateService.create(access);
+	final State state = stateService.create(access);
 	return mapper.map(state, StateDTO.class);
     }
 
@@ -139,8 +139,8 @@ public class ContentRPC implements ContentService, RPC {
     @Transactional(type = TransactionType.READ_WRITE)
     public StateDTO addRoom(final String userHash, final String groupShotName, final Long parentFolderId,
 	    final String roomName) throws ContentNotFoundException, AccessViolationException, GroupNotFoundException {
-	String userShortName = session.getUser().getShortName();
-	ChatConnection connection = xmppManager.login(userShortName, session.getUser().getPassword(), userHash);
+	final String userShortName = session.getUser().getShortName();
+	final ChatConnection connection = xmppManager.login(userShortName, session.getUser().getPassword(), userHash);
 	xmppManager.createRoom(connection, roomName, userShortName + userHash);
 	xmppManager.disconnect(connection);
 	return createFolder(groupShotName, parentFolderId, roomName);
@@ -149,7 +149,7 @@ public class ContentRPC implements ContentService, RPC {
     private Long parseId(final String documentId) throws ContentNotFoundException {
 	try {
 	    return new Long(documentId);
-	} catch (NumberFormatException e) {
+	} catch (final NumberFormatException e) {
 	    throw new ContentNotFoundException();
 	}
     }

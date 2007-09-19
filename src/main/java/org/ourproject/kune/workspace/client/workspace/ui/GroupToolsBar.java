@@ -23,7 +23,7 @@ import org.ourproject.kune.platf.client.services.ColorScheme;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.tool.ToolTrigger;
 import org.ourproject.kune.platf.client.tool.ToolTrigger.TriggerListener;
-import org.ourproject.kune.platf.client.ui.BorderDecorator;
+import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
 import org.ourproject.kune.platf.client.ui.HasColor;
 
 import com.google.gwt.user.client.ui.Hyperlink;
@@ -61,7 +61,7 @@ class GroupToolsBar extends VerticalPanel {
 	    }
 	});
 	menuItem.add(hl);
-	return new BorderDecorator(menuItem, BorderDecorator.RIGHT);
+	return new RoundedBorderDecorator(menuItem, RoundedBorderDecorator.RIGHT);
     }
 
     public void selectItem(final String toolName) {

@@ -30,7 +30,7 @@ public class WorkspaceDeckPanel extends SimplePanel implements WorkspaceDeckView
     Widget current;
 
     public WorkspaceDeckPanel() {
-	current = new Label("no hay nada!");
+	current = new Label("Nothing");
 	add(current);
     }
 

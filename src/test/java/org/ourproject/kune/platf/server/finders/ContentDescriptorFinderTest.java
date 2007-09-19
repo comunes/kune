@@ -31,9 +31,27 @@ public class ContentDescriptorFinderTest extends PersistenceTest {
 
 	manager.persist(new Rate(user1, cd, 1.3));
 	manager.persist(new Rate(user2, cd, 5.3));
+	closeTransaction();
 	Double rate = finder.calculateRate(cd);
+	Long rateByUsers = finder.calculateRateNumberOfUsers(cd);
 	Double average = (1.3 + 5.3) / 2;
 	assertEquals(average, rate);
+	assertEquals(2, rateByUsers);
+    }
+
+    @Test
+    public void testNotRated() {
+	EntityManager manager = openTransaction();
+
+	Content cd = new Content();
+	manager.persist(cd);
+
 	closeTransaction();
+	Double rate = finder.calculateRate(cd);
+	Long rateByUsers = finder.calculateRateNumberOfUsers(cd);
+	assertEquals(0, rateByUsers);
+
+	// FIXME: Why null? in other test return zero
+	assertEquals(0, rate);
     }
 }

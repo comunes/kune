@@ -37,24 +37,24 @@ public class TextEditorPanel extends Composite implements TextEditorView {
 
 	gwtRTarea = new RichTextArea();
 	textEditorToolbar = new TextEditorToolbar(gwtRTarea, panelListener);
-	VerticalPanel areaVP = new VerticalPanel();
+	final VerticalPanel areaVP = new VerticalPanel();
 	areaVP.add(textEditorToolbar);
 	areaVP.add(gwtRTarea);
 	initWidget(areaVP);
 
-	gwtRTarea.setWidth("98%");
+	gwtRTarea.setWidth("97%");
 	gwtRTarea.addStyleName("kune-TexEditorPanel-TextArea");
 	areaVP.setWidth("100%");
-	adjustSize("" + (Window.getClientHeight() - 220));
+	adjustSize("" + (Window.getClientHeight() - 212));
 	Window.addWindowResizeListener(new WindowResizeListener() {
 	    public void onWindowResized(final int arg0, final int arg1) {
-		adjustSize("" + (Window.getClientHeight() - 220));
+		adjustSize("" + (Window.getClientHeight() - 212));
 	    }
 	});
     }
 
     public void setEnabled(final boolean enabled) {
-	String bgColor = enabled ? BACKCOLOR_ENABLED : BACKCOLOR_DISABLED;
+	final String bgColor = enabled ? BACKCOLOR_ENABLED : BACKCOLOR_DISABLED;
 	DOM.setStyleAttribute(gwtRTarea.getElement(), "backgroundColor", bgColor);
 	gwtRTarea.setEnabled(enabled);
     }

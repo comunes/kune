@@ -1,3 +1,16 @@
+
+2007-09-19 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* New SocialNetworkPanel and BuddiesPanel svg drafts
+	* DropDown refactor
+	* TextEditor style changes
+	* new RatePanel
+	
+2007-09-18 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* AccessList refactor
+	* SocialNetwork refactor
+	* SocialNetwork new tests and Manager methods
+	* New icons (folder, add, del, cancel)
+	
 2007-09-17 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* IconHyperlink fixes
 	* new IconLabel widget

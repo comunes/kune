@@ -4,5 +4,5 @@ import org.ourproject.kune.platf.client.Component;
 
 public interface ContentSubTitleComponent extends Component {
 
-    void setContentSubTitle(String subTitle);
+    void setContentSubTitle(String subTitle, Double rate, Integer rateByUsers);
 }

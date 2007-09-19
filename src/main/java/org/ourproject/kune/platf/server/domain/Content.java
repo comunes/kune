@@ -93,13 +93,13 @@ public class Content implements HasStateToken {
     @Finder(query = "select AVG(r.value) from Rate r where r.content = :descriptor")
     public Double calculateRate(@Named("descriptor")
     final Content descriptor) {
-	return null;
+	return 0d;
     }
 
     @Finder(query = "select count(*) from Rate r where r.content = :descriptor")
-    public Integer calculateRateNumberOfUsers(@Named("descriptor")
+    public Long calculateRateNumberOfUsers(@Named("descriptor")
     final Content descriptor) {
-	return null;
+	return 0l;
     }
 
     public Long getId() {

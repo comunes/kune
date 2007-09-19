@@ -25,7 +25,7 @@ import java.util.List;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.group.NewGroupForm;
-import org.ourproject.kune.platf.client.ui.BorderDecorator;
+import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
 import org.ourproject.kune.platf.client.ui.dialogs.TwoButtonsDialog;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
@@ -103,7 +103,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	MenuBar options = new MenuBar();
 	optionsSubmenu = new MenuBar(true);
 	yourGroupsSubmenu = new MenuBar(true);
-	BorderDecorator optionsButton = new BorderDecorator(options, BorderDecorator.ALL, BorderDecorator.SIMPLE);
+	RoundedBorderDecorator optionsButton = new RoundedBorderDecorator(options, RoundedBorderDecorator.ALL, RoundedBorderDecorator.SIMPLE);
 	HTML spaceSeparator2 = new HTML("<b></b>");
 	logoImage = new Image();
 

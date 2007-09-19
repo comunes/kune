@@ -24,19 +24,20 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 
     @Test(expected = GroupNotFoundException.class)
     public void unknownContent() throws ContentNotFoundException, AccessViolationException, GroupNotFoundException {
-	StateDTO content = contentService.getContent(null, new StateToken("kune.docs"));
+	final StateDTO content = contentService.getContent(null, new StateToken("kune.docs"));
 	assertNotNull(content);
 	assertNotNull(content.getGroup());
 	assertNotNull(content.getFolder());
 	assertNotNull(content.getFolder().getId());
 	assertNotNull(content.getToolName());
 	assertNotNull(content.getDocumentId());
+	assertNotNull(content.getRateByUsers());
     }
 
     @Test
     public void contentWithLoggedUserIsEditable() throws SerializableException {
 	doLogin();
-	StateDTO response = contentService.getContent(null, new StateToken());
+	final StateDTO response = contentService.getContent(null, new StateToken());
 	assertNotNull(response.getContentRights());
 	assertTrue(response.getContentRights().isEditable);
 	// assertTrue(response.getAccessLists().getAdmin().size() == 1);
@@ -45,7 +46,7 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
     @Test
     public void notLoggedUserShouldNotEditDefaultDoc() throws ContentNotFoundException, AccessViolationException,
 	    GroupNotFoundException {
-	StateDTO content = contentService.getContent(null, new StateToken());
+	final StateDTO content = contentService.getContent(null, new StateToken());
 	assertFalse(content.getContentRights().isAdministrable);
 	assertFalse(content.getContentRights().isEditable);
 	assertTrue(content.getContentRights().isVisible);
@@ -57,13 +58,15 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
     @Test
     public void defaultCountentShouldExist() throws ContentNotFoundException, AccessViolationException,
 	    GroupNotFoundException {
-	StateDTO content = contentService.getContent(null, new StateToken());
+	final StateDTO content = contentService.getContent(null, new StateToken());
 	assertNotNull(content);
 	assertNotNull(content.getGroup());
 	assertNotNull(content.getFolder());
 	assertNotNull(content.getFolder().getId());
 	assertNotNull(content.getToolName());
 	assertNotNull(content.getDocumentId());
+	assertNotNull(content.getRateByUsers());
+	assertNotNull(content.getRate());
     }
 
 }

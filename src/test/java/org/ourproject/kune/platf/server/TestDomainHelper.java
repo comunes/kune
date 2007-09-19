@@ -1,6 +1,7 @@
 package org.ourproject.kune.platf.server;
 
 import org.ourproject.kune.platf.server.domain.AccessLists;
+import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Data;
@@ -16,6 +17,7 @@ public abstract class TestDomainHelper {
 	String longName = "name" + number;
 	User user = new User(shortName, longName, "email" + number, "password" + number);
 	Group userGroup = new Group(shortName, longName);
+	userGroup.setAdmissionType(AdmissionType.Personal);
 	user.setUserGroup(userGroup);
 	return user;
     }
@@ -62,12 +64,15 @@ public abstract class TestDomainHelper {
     public static AccessLists createAccessLists(final Group groupAdmin, final Group groupEditor, final Group groupViewer) {
 
 	AccessLists lists = new AccessLists();
-	if (groupAdmin != null)
+	if (groupAdmin != null) {
 	    lists.addAdmin(groupAdmin);
-	if (groupEditor != null)
+	}
+	if (groupEditor != null) {
 	    lists.addEditor(groupEditor);
-	if (groupViewer != null)
+	}
+	if (groupViewer != null) {
 	    lists.addViewer(groupViewer);
+	}
 	return lists;
     }
 

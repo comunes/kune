@@ -74,11 +74,11 @@ public class StateManagerDefault implements StateManager {
 		Site.hideProgress();
 		try {
 		    throw caught;
-		} catch (AccessViolationException e) {
+		} catch (final AccessViolationException e) {
 		    Site.error("You can't access this content");
-		} catch (GroupNotFoundException e) {
+		} catch (final GroupNotFoundException e) {
 		    Site.error("Group not found");
-		} catch (Throwable e) {
+		} catch (final Throwable e) {
 		    GWT.log("Error getting content", null);
 		    throw new RuntimeException();
 		}
@@ -94,7 +94,7 @@ public class StateManagerDefault implements StateManager {
     }
 
     public void setState(final StateDTO content) {
-	StateToken state = content.getState();
+	final StateToken state = content.getState();
 	provider.cache(state, content);
 	setState(state);
     }
@@ -109,20 +109,22 @@ public class StateManagerDefault implements StateManager {
 	GWT.log("license: " + state.getLicense().toString(), null);
 	GWT.log("title: " + state.getTitle(), null);
 	session.setCurrent(state);
-	GroupDTO group = state.getGroup();
+	final GroupDTO group = state.getGroup();
 	app.setGroupState(group.getShortName());
-	Workspace workspace = app.getWorkspace();
+	final Workspace workspace = app.getWorkspace();
 	workspace.showGroup(group);
-	String toolName = state.getToolName();
+	final String toolName = state.getToolName();
 	workspace.setTool(toolName);
 
-	ClientTool clientTool = app.getTool(toolName);
+	final ClientTool clientTool = app.getTool(toolName);
 	clientTool.setContent(state);
 	workspace.getContentTitleComponent().setContentTitle(state.getTitle());
-	workspace.getContentSubTitleComponent().setContentSubTitle("11/06/07 by fulano");
+	workspace.getContentSubTitleComponent().setContentSubTitle("11/06/07 by fulano", state.getRate(),
+		state.getRateByUsers());
 	workspace.setContent(clientTool.getContent());
 	workspace.setContext(clientTool.getContext());
 	workspace.getLicenseComponent().setLicense(state.getGroup().getLongName(), state.getLicense());
+	// TODO: SocialNetwork out of state
 	workspace.getSocialNetworkComponent().setSocialNetwork(state.getSocialNetwork());
 	workspace.getBuddiesPresenceComponent().setBuddiesPresence();
 	Site.hideProgress();
