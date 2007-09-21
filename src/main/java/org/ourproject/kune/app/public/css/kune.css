@@ -48,22 +48,25 @@
 }
 
 .gwt-MenuBar {
-    background-color: #FFFCD5;
-    border: 1px solid #D38D5F;
-    cursor: default;
-    padding: 2px;
+    background-color: #F2F2F2;
+    border: 1px solid #999; 
+    vertical-align: middle;
+    padding: 5px 0;
 }
 
 .gwt-MenuBar .gwt-MenuItem {
-    padding: 1px 4px 1px 4px;
-    cursor: default;
+    cursor: pointer;
+    padding: 1px 10px;
     white-space: nowrap;
+}
+
+.gwt-MenuBar .gwt-MenuItem img {
     vertical-align: middle;
+    margin-right: 3px;
 }
 
 .gwt-MenuBar .gwt-MenuItem-selected {
     background-color: #FFB958;
-    vertical-align: middle;
 }
 
 .kune-MenuBar .gwt-MenuItem {

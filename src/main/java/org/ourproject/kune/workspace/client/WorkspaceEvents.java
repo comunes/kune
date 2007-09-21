@@ -11,4 +11,9 @@ public interface WorkspaceEvents {
     public static final String GOTO_GROUP = "ws.GotoGroup";
     public static final String DENY_JOIN_GROUP = "ws.DenyJoinGroup";
     public static final String ACCEPT_JOIN_GROUP = "ws.AcceptJoinGroup";
+    public static final String SET_COLLAB_AS_ADMIN = "ws.SetMemberAsAsmin";
+    public static final String SET_ADMIN_AS_COLLAB = "ws.SetMemberAsCollab";
+    public static final String ADD_ADMIN_MEMBER = "ws.AddAdminMember";
+    public static final String ADD_COLLAB_MEMBER = "ws.AddCollabMember";
+    public static final String ADD_VIEWER_MEMBER = "ws.AddViewerMember";
 }

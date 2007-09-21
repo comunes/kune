@@ -58,6 +58,7 @@ public class LicenseChooseFormPanel extends Composite implements LicenseChooseFo
     private final Translate t;
     private Radio ccLicenses;
     private Radio otherLicenses;
+    private final Form newGroupForm;
 
     public LicenseChooseFormPanel(final LicenseChooseFormPresenter initPresenter, final List nonCCLicenses) {
 	this.presenter = initPresenter;
@@ -140,6 +141,10 @@ public class LicenseChooseFormPanel extends Composite implements LicenseChooseFo
 	    otherLicenses.setItemSelected(0, true);
 	    otherLicenses.setVisibleItemCount(1);
 	}
+
+	newGroupForm = chooseLicenseForm();
+	generalVP.add(newGroupForm);
+	generalVP.addStyleName("kune-Default-Form");
 
     }
 

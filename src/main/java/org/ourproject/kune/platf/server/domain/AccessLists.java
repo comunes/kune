@@ -90,4 +90,16 @@ public class AccessLists {
     public GroupList getViewers() {
 	return viewers;
     }
+
+    public void removeAdmin(final Group group) {
+	admins.remove(group);
+    }
+
+    public void removeEditor(final Group group) {
+	editors.remove(group);
+    }
+
+    public void removeViewer(final Group group) {
+	viewers.remove(group);
+    }
 }

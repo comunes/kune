@@ -90,67 +90,118 @@ public class SocialNetworkPanel extends DropDownPanel implements SocialNetworkVi
 	addMemberLink.setVisible(visible);
     }
 
-    private VerticalPanel createGroupListVP(final List groupList, final boolean userIsAdmin, final boolean isPending) {
+    private VerticalPanel createAdminListVP(final List groupList, final boolean userIsAdmin) {
 	final Images img = Images.App.getInstance();
 	VerticalPanel groupVP = new VerticalPanel();
 	final Iterator iter = groupList.iterator();
 	while (iter.hasNext()) {
 	    final GroupDTO group = (GroupDTO) iter.next();
-	    // Until user upload icons/images ...
-	    AbstractImagePrototype icon;
+	    AbstractImagePrototype icon = setGroupIcon(img, group);
 
-	    if (group.getType() == GroupDTO.TYPE_PERSONAL) {
-		icon = img.personDef();
-	    } else {
-		icon = img.groupDefIcon();
-	    }
 	    GroupMemberMenu groupMenu = new GroupMemberMenu(icon, group.getShortName());
 	    if (userIsAdmin) {
-		if (isPending) {
-		    groupMenu.addCmd(img.accept(), "Accept this member", new Command() {
-			public void execute() {
-			    presenter.onAcceptMember(group);
-			}
-		    });
-		    groupMenu.addCmd(img.cancel(), "Don't accept this member", new Command() {
-			public void execute() {
-			    presenter.onDenyMember(group);
-			}
-		    });
-		} else {
-		    groupMenu.addCmd(img.del(), "Remove this member", new Command() {
-			public void execute() {
-			    presenter.onDelGroup(group);
-			}
-		    });
-		}
+		groupMenu.addCmd(img.del(), "Remove this member", new Command() {
+		    public void execute() {
+			presenter.onDelGroup(group);
+		    }
+		});
+		groupMenu.addCmd(img.arrowDownGreen(), "Change to collaborator", new Command() {
+		    public void execute() {
+			presenter.onSetAdminAsCollab(group);
+		    }
+		});
 	    }
-
-	    groupMenu.addCmd("Visit " + group.getShortName() + " homepage", new Command() {
-		public void execute() {
-		    presenter.onGoToGroup(group);
-		}
-	    });
+	    addGotoGroupLink(img, group, groupMenu);
 	    groupVP.add(groupMenu);
 	}
 	return groupVP;
     }
 
+    private VerticalPanel createCollabListVP(final List groupList, final boolean userIsAdmin) {
+	final Images img = Images.App.getInstance();
+	VerticalPanel groupVP = new VerticalPanel();
+	final Iterator iter = groupList.iterator();
+	while (iter.hasNext()) {
+	    final GroupDTO group = (GroupDTO) iter.next();
+	    AbstractImagePrototype icon = setGroupIcon(img, group);
+	    GroupMemberMenu groupMenu = new GroupMemberMenu(icon, group.getShortName());
+	    if (userIsAdmin) {
+		groupMenu.addCmd(img.del(), "Remove this member", new Command() {
+		    public void execute() {
+			presenter.onDelGroup(group);
+		    }
+		});
+		groupMenu.addCmd(img.arrowUpGreen(), "Change to admin", new Command() {
+		    public void execute() {
+			presenter.onSetCollabAsAdmin(group);
+		    }
+		});
+	    }
+	    addGotoGroupLink(img, group, groupMenu);
+	    groupVP.add(groupMenu);
+	}
+	return groupVP;
+    }
+
+    private VerticalPanel createPendingListVP(final List groupList, final boolean userIsAdmin) {
+	final Images img = Images.App.getInstance();
+	VerticalPanel groupVP = new VerticalPanel();
+	final Iterator iter = groupList.iterator();
+	while (iter.hasNext()) {
+	    final GroupDTO group = (GroupDTO) iter.next();
+	    AbstractImagePrototype icon = setGroupIcon(img, group);
+	    GroupMemberMenu groupMenu = new GroupMemberMenu(icon, group.getShortName());
+	    if (userIsAdmin) {
+		groupMenu.addCmd(img.accept(), "Accept this member", new Command() {
+		    public void execute() {
+			presenter.onAcceptMember(group);
+		    }
+		});
+		groupMenu.addCmd(img.cancel(), "Don't accept this member", new Command() {
+		    public void execute() {
+			presenter.onDenyMember(group);
+		    }
+		});
+	    }
+
+	    addGotoGroupLink(img, group, groupMenu);
+	    groupVP.add(groupMenu);
+	}
+	return groupVP;
+    }
+
+    private AbstractImagePrototype setGroupIcon(final Images img, final GroupDTO group) {
+	// Until user upload icons/images ...
+	AbstractImagePrototype icon;
+	if (group.getType() == GroupDTO.TYPE_PERSONAL) {
+	    icon = img.personDef();
+	} else {
+	    icon = img.groupDefIcon();
+	}
+	return icon;
+    }
+
+    private void addGotoGroupLink(final Images img, final GroupDTO group, final GroupMemberMenu groupMenu) {
+	groupMenu.addCmd(img.groupHome(), "Visit " + group.getShortName() + " homepage", new Command() {
+	    public void execute() {
+		presenter.onGoToGroup(group);
+	    }
+	});
+    }
+
     public void addAdminsItems(final int numAdmins, final List groupList, final boolean userIsAdmin) {
 	// i18n
-	stack.add(createGroupListVP(groupList, userIsAdmin, false), setLabelAndCount("Admins", numAdmins));
+	stack.add(createAdminListVP(groupList, userIsAdmin), setLabelAndCount("Admins", numAdmins));
     }
 
     public void addCollabItems(final int numCollaborators, final List groupList, final boolean userIsAdmin) {
 	// i18n
-	stack
-		.add(createGroupListVP(groupList, userIsAdmin, false), setLabelAndCount("Collaborators",
-			numCollaborators));
+	stack.add(createCollabListVP(groupList, userIsAdmin), setLabelAndCount("Collaborators", numCollaborators));
     }
 
     public void addPendingCollabsItems(final int numPendingCollabs, final List groupList, final boolean userIsAdmin) {
 	// i18n
-	stack.add(createGroupListVP(groupList, userIsAdmin, true), setLabelAndCount("Pending", numPendingCollabs)
+	stack.add(createPendingListVP(groupList, userIsAdmin), setLabelAndCount("Pending", numPendingCollabs)
 		+ Images.App.getInstance().alert().getHTML(), true);
     }
 

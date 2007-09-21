@@ -81,6 +81,22 @@ public class SocialNetwork {
 	pendingCollaborators.add(group);
     }
 
+    public void removeAdmin(final Group group) {
+	accessLists.removeAdmin(group);
+    }
+
+    public void removeCollaborator(final Group group) {
+	accessLists.removeEditor(group);
+    }
+
+    public void removeViewer(final Group group) {
+	accessLists.removeViewer(group);
+    }
+
+    public void removePendingCollaborator(final Group group) {
+	pendingCollaborators.getList().remove(group);
+    }
+
     public AccessLists getAccessLists() {
 	return accessLists;
     }
@@ -91,14 +107,6 @@ public class SocialNetwork {
 
     public boolean isCollab(final Group group) {
 	return accessLists.getEditors().getList().contains(group);
-    }
-
-    public void removeCollab(final Group group) {
-	accessLists.getEditors().getList().remove(group);
-    }
-
-    public void removeAdmin(final Group group) {
-	accessLists.getAdmins().getList().remove(group);
     }
 
 }

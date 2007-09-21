@@ -23,6 +23,9 @@ package org.ourproject.kune.workspace.client;
 import org.ourproject.kune.platf.client.extend.ClientModule;
 import org.ourproject.kune.platf.client.extend.Register;
 import org.ourproject.kune.workspace.client.actions.AcceptJoinGroupAction;
+import org.ourproject.kune.workspace.client.actions.AddAdminAction;
+import org.ourproject.kune.workspace.client.actions.AddCollabAction;
+import org.ourproject.kune.workspace.client.actions.AddViewerAction;
 import org.ourproject.kune.workspace.client.actions.DeleteMemberAction;
 import org.ourproject.kune.workspace.client.actions.DenyJoinGroupAction;
 import org.ourproject.kune.workspace.client.actions.GotoGroupAction;
@@ -30,6 +33,8 @@ import org.ourproject.kune.workspace.client.actions.InitAction;
 import org.ourproject.kune.workspace.client.actions.LoggedInAction;
 import org.ourproject.kune.workspace.client.actions.LoggedOutAction;
 import org.ourproject.kune.workspace.client.actions.RequestJoinGroupAction;
+import org.ourproject.kune.workspace.client.actions.SetCollabAsAdminAction;
+import org.ourproject.kune.workspace.client.actions.SetAdminAsCollabAction;
 
 public class WorkspaceClientModule implements ClientModule {
     public void configure(final Register register) {
@@ -41,6 +46,10 @@ public class WorkspaceClientModule implements ClientModule {
 	register.addAction(WorkspaceEvents.DENY_JOIN_GROUP, new DenyJoinGroupAction());
 	register.addAction(WorkspaceEvents.DEL_MEMBER, new DeleteMemberAction());
 	register.addAction(WorkspaceEvents.GOTO_GROUP, new GotoGroupAction());
-
+	register.addAction(WorkspaceEvents.SET_COLLAB_AS_ADMIN, new SetCollabAsAdminAction());
+	register.addAction(WorkspaceEvents.SET_ADMIN_AS_COLLAB, new SetAdminAsCollabAction());
+	register.addAction(WorkspaceEvents.ADD_ADMIN_MEMBER, new AddAdminAction());
+	register.addAction(WorkspaceEvents.ADD_COLLAB_MEMBER, new AddCollabAction());
+	register.addAction(WorkspaceEvents.ADD_VIEWER_MEMBER, new AddViewerAction());
     }
 }

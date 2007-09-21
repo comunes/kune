@@ -21,10 +21,9 @@
 package org.ourproject.kune.platf.server.state;
 
 import org.ourproject.kune.platf.server.access.Access;
-import org.ourproject.kune.platf.server.access.AccessRights;
+import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Data;
-import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.License;
 
 import com.google.inject.Singleton;
@@ -60,9 +59,7 @@ public class StateServiceDefault implements StateService {
 	state.setAccessLists(access.getContentAccessLists());
 	state.setContentRights(access.getContentRights());
 	state.setFolderRights(access.getFolderRights());
-	// FIXME: only for first tests/dev
-	AccessRights groupRights = new AccessRights(true, true, true);
-	state.setGroupRights(groupRights);
+	state.setGroupRights(access.getGroupRights());
 	state.setRate(content.calculateRate(content));
 	state.setRateByUsers(content.calculateRateNumberOfUsers(content));
 	License contentLicense = content.getLicense();

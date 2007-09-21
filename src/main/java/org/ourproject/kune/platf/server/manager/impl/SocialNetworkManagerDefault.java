@@ -31,6 +31,7 @@ import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 
+import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -43,14 +44,29 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 	super(provider, SocialNetwork.class);
     }
 
-    public void addAdmin(final Group group, final User user) {
+    public void addAdmin(final User user, final Group group) {
 	SocialNetwork sn = group.getSocialNetwork();
 	sn.addAdmin(user.getUserGroup());
     }
 
-    public String requestToJoin(final Group group, final User user) {
-	SocialNetwork sn = group.getSocialNetwork();
-	AdmissionType admissionType = group.getAdmissionType();
+    public void addGroupToAdmins(final Group group, final Group inGroup) {
+	SocialNetwork sn = inGroup.getSocialNetwork();
+	sn.addAdmin(group);
+    }
+
+    public void addGroupToCollabs(final Group group, final Group inGroup) {
+	SocialNetwork sn = inGroup.getSocialNetwork();
+	sn.addCollaborator(group);
+    }
+
+    public void addGroupToViewers(final Group group, final Group inGroup) {
+	SocialNetwork sn = inGroup.getSocialNetwork();
+	sn.addViewer(group);
+    }
+
+    public String requestToJoin(final User user, final Group inGroup) throws SerializableException {
+	SocialNetwork sn = inGroup.getSocialNetwork();
+	AdmissionType admissionType = inGroup.getAdmissionType();
 	if (admissionType == null) {
 	    throw new RuntimeException();
 	}
@@ -63,43 +79,60 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 	} else if (isClosed(admissionType)) {
 	    return SocialNetworkDTO.REQ_JOIN_DENIED;
 	} else {
-	    throw new RuntimeException();
+	    throw new SerializableException("State not expected in SocialNetworkManagerDefault class");
 	}
     }
 
-    public void acceptJoinGroup(final Group group, final User user) {
-	SocialNetwork sn = group.getSocialNetwork();
+    public void acceptJoinGroup(final Group group, final Group inGroup) throws SerializableException {
+	SocialNetwork sn = inGroup.getSocialNetwork();
 	List<Group> pendingCollabs = sn.getPendingCollaborators().getList();
-	Group userGroup = user.getUserGroup();
-	if (pendingCollabs.contains(userGroup)) {
-	    sn.addCollaborator(userGroup);
-	    pendingCollabs.remove(userGroup);
+	if (pendingCollabs.contains(group)) {
+	    sn.addCollaborator(group);
+	    sn.removePendingCollaborator(group);
 	} else {
-	    new RuntimeException("User is not a pending collaborator");
+	    throw new SerializableException("User is not a pending collaborator");
 	}
     }
 
-    public void deleteMember(final Group group, final User user) {
-	SocialNetwork sn = group.getSocialNetwork();
+    public void deleteMember(final Group group, final Group inGroup) throws SerializableException {
+	SocialNetwork sn = inGroup.getSocialNetwork();
 
-	Group userGroup = user.getUserGroup();
-	if (sn.isAdmin(userGroup)) {
-	    sn.removeAdmin(userGroup);
-	} else if (sn.isCollab(userGroup)) {
-	    sn.removeCollab(userGroup);
+	if (sn.isAdmin(group)) {
+	    sn.removeAdmin(group);
+	} else if (sn.isCollab(group)) {
+	    sn.removeCollaborator(group);
 	} else {
-	    new RuntimeException("User is not a collaborator");
+	    throw new SerializableException("Person/Group is not a collaborator");
 	}
     }
 
-    public void denyJoinGroup(final Group group, final User user) {
-	SocialNetwork sn = group.getSocialNetwork();
+    public void denyJoinGroup(final Group group, final Group inGroup) throws SerializableException {
+	SocialNetwork sn = inGroup.getSocialNetwork();
 	List<Group> pendingCollabs = sn.getPendingCollaborators().getList();
-	Group userGroup = user.getUserGroup();
-	if (pendingCollabs.contains(userGroup)) {
-	    pendingCollabs.remove(userGroup);
+	if (pendingCollabs.contains(group)) {
+	    sn.removePendingCollaborator(group);
 	} else {
-	    new RuntimeException("User is not a pending collaborator");
+	    throw new SerializableException("Person/Group is not a pending collaborator");
+	}
+    }
+
+    public void setCollabAsAdmin(final Group group, final Group inGroup) throws SerializableException {
+	SocialNetwork sn = inGroup.getSocialNetwork();
+	if (sn.isCollab(group)) {
+	    sn.removeCollaborator(group);
+	    sn.addAdmin(group);
+	} else {
+	    throw new SerializableException("Person/Group is not a collaborator");
+	}
+    }
+
+    public void setAdminAsCollab(final Group group, final Group inGroup) throws SerializableException {
+	SocialNetwork sn = inGroup.getSocialNetwork();
+	if (sn.isAdmin(group)) {
+	    sn.removeAdmin(group);
+	    sn.addCollaborator(group);
+	} else {
+	    throw new SerializableException("Person/Group is not an admin");
 	}
     }
 

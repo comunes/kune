@@ -30,14 +30,17 @@ public class Access {
     private Container container;
     private AccessLists contentAccessLists;
     private AccessLists folderAccessLists;
+    private final AccessLists groupAccessLists;
     private AccessRights contentRights;
     private AccessRights folderRights;
+    private AccessRights groupRights;
 
     public Access(final Content descriptor, final Container container) {
 	this.content = descriptor;
 	contentAccessLists = descriptor != null ? getContentAccessList(descriptor) : null;
 	this.container = container;
 	folderAccessLists = container != null ? getFolderAccessLists(container) : null;
+	groupAccessLists = folderAccessLists;
     }
 
     public Container getFolder() {
@@ -66,12 +69,20 @@ public class Access {
 	return folderAccessLists;
     }
 
+    public AccessLists getGroupAccessLists() {
+	return folderAccessLists;
+    }
+
     public AccessRights getContentRights() {
 	return contentRights;
     }
 
     public AccessRights getFolderRights() {
 	return folderRights;
+    }
+
+    public AccessRights getGroupRights() {
+	return groupRights;
     }
 
     public void setContentRights(final AccessRights accessRights) {
@@ -88,12 +99,20 @@ public class Access {
 	}
     }
 
-    public boolean hasFolderRights() {
-	return folderRights != null;
+    public void setGroupRights(final AccessRights accessRights) {
+	this.groupRights = accessRights;
     }
 
     public boolean hasContentRights() {
 	return contentRights != null;
+    }
+
+    public boolean hasFolderRights() {
+	return folderRights != null;
+    }
+
+    public boolean hasGroupRights() {
+	return groupRights != null;
     }
 
     private boolean equalsAccessLists() {

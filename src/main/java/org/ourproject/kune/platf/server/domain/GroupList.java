@@ -77,8 +77,9 @@ public class GroupList {
 
     public void add(final Group group) {
 	// No group duplicate
-	if (!list.contains(group))
+	if (!list.contains(group)) {
 	    list.add(group);
+	}
     }
 
     public boolean includes(final Group group) {
@@ -97,8 +98,12 @@ public class GroupList {
 	return mode;
     }
 
-    public void setMode(GroupListMode mode) {
+    public void setMode(final GroupListMode mode) {
 	this.mode = mode;
+    }
+
+    public void remove(final Group group) {
+	list.remove(group);
     }
 
 }

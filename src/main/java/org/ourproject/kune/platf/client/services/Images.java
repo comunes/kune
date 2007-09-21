@@ -63,9 +63,19 @@ public interface Images extends ImageBundle {
     AbstractImagePrototype arrowDownBlack();
 
     /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/arrow-down-green.png
+     */
+    AbstractImagePrototype arrowDownGreen();
+
+    /**
      * @gwt.resource org/ourproject/kune/platf/public/images/arrow-down-white.gif
      */
     AbstractImagePrototype arrowDownWhite();
+
+    /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/arrow-left-green.png
+     */
+    AbstractImagePrototype arrowLeftGreen();
 
     /**
      * @gwt.resource org/ourproject/kune/platf/public/images/arrow-right-black.gif
@@ -73,9 +83,19 @@ public interface Images extends ImageBundle {
     AbstractImagePrototype arrowRightBlack();
 
     /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/arrow-right-green.png
+     */
+    AbstractImagePrototype arrowRightGreen();
+
+    /**
      * @gwt.resource org/ourproject/kune/platf/public/images/arrow-right-white.gif
      */
     AbstractImagePrototype arrowRightWhite();
+
+    /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/arrow-up-green.png
+     */
+    AbstractImagePrototype arrowUpGreen();
 
     /**
      * @gwt.resource org/ourproject/kune/platf/public/images/bullet_add.png
@@ -418,6 +438,11 @@ public interface Images extends ImageBundle {
     AbstractImagePrototype groupDefIcon();
 
     /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/group-home.png
+     */
+    AbstractImagePrototype groupHome();
+
+    /**
      * @gwt.resource org/ourproject/kune/platf/public/images/important.png
      */
     AbstractImagePrototype important();
@@ -443,6 +468,11 @@ public interface Images extends ImageBundle {
     AbstractImagePrototype kuneHelpTranslationIcon();
 
     /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/kune-icon16.png
+     */
+    AbstractImagePrototype kuneIcon16();
+
+    /**
      * @gwt.resource org/ourproject/kune/platf/public/images/kune-logo-16px.png
      */
     AbstractImagePrototype kuneLogo16px();
@@ -461,6 +491,11 @@ public interface Images extends ImageBundle {
      * @gwt.resource org/ourproject/kune/platf/public/images/kune-search-ico-push.png
      */
     AbstractImagePrototype kuneSearchIcoPush();
+
+    /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/language.png
+     */
+    AbstractImagePrototype language();
 
     /**
      * @gwt.resource org/ourproject/kune/platf/public/images/nobody.png

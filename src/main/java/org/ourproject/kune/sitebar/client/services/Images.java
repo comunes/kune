@@ -32,14 +32,14 @@ import com.google.gwt.user.client.ui.ImageBundle;
 public interface Images extends ImageBundle {
 
     public static class App {
-        private static Images ourInstance = null;
+	private static Images ourInstance = null;
 
-        public static synchronized Images getInstance() {
-            if (ourInstance == null) {
-                ourInstance = (Images) GWT.create(Images.class);
-            }
-            return ourInstance;
-        }
+	public static synchronized Images getInstance() {
+	    if (ourInstance == null) {
+		ourInstance = (Images) GWT.create(Images.class);
+	    }
+	    return ourInstance;
+	}
     }
 
     /**
@@ -56,6 +56,11 @@ public interface Images extends ImageBundle {
      * @gwt.resource org/ourproject/kune/sitebar/public/images/spin-kune-thund-green.gif
      */
     AbstractImagePrototype spinKuneThundGreen();
+
+    /**
+     * @gwt.resource org/ourproject/kune/sitebar/public/images/kune-icon16.png
+     */
+    AbstractImagePrototype kuneIcon16();
 
     /**
      * @gwt.resource org/ourproject/kune/sitebar/public/images/kune-logo-16px.png
@@ -91,5 +96,10 @@ public interface Images extends ImageBundle {
      * @gwt.resource org/ourproject/kune/sitebar/public/images/info.png
      */
     AbstractImagePrototype info();
+
+    /**
+     * @gwt.resource org/ourproject/kune/sitebar/public/images/language.png
+     */
+    AbstractImagePrototype language();
 
 }

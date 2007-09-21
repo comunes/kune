@@ -24,16 +24,28 @@ import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
 
+import com.google.gwt.user.client.rpc.SerializableException;
+
 public interface SocialNetworkManager extends Manager<SocialNetwork, Long> {
 
-    void addAdmin(Group group, User user);
+    void addAdmin(User user, Group group);
 
-    String requestToJoin(Group group, User user);
+    void addGroupToAdmins(Group group, Group inGroup);
 
-    void acceptJoinGroup(Group group, User user);
+    void addGroupToCollabs(Group group, Group inGroup);
 
-    void deleteMember(Group group, User user);
+    void addGroupToViewers(Group group, Group inGroup);
 
-    void denyJoinGroup(Group group, User user);
+    String requestToJoin(User user, Group inGroup) throws SerializableException;
+
+    void acceptJoinGroup(Group group, Group inGroup) throws SerializableException;
+
+    void deleteMember(Group group, Group inGroup) throws SerializableException;
+
+    void denyJoinGroup(Group group, Group inGroup) throws SerializableException;
+
+    void setCollabAsAdmin(Group group, Group inGroup) throws SerializableException;
+
+    void setAdminAsCollab(Group group, Group inGroup) throws SerializableException;
 
 }

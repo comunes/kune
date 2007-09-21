@@ -59,6 +59,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 	    view.showNewGroupDialog();
 	    Site.hideProgress();
 	} else {
+	    // i18n
 	    Site.info("You must be logged to create group");
 	}
     }
@@ -93,7 +94,6 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
     public void userLoggedIn(final UserInfoDTO user) {
 	view.hideLoginDialog();
 	listener.onUserLoggedIn(user);
-	isLogged = true;
     }
 
     public void showLoggedUser(final UserInfoDTO user) {
@@ -101,6 +101,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 	    view.restoreLoginLink();
 	    view.setLogoutLinkVisible(false);
 	} else {
+	    isLogged = true;
 	    view.showLoggedUserName(user.getName(), user.getHomePage());
 	    view.setLogoutLinkVisible(true);
 	    view.setGroupsIsMember(user.getGroupsIsAdmin(), user.getGroupsIsEditor());
@@ -144,7 +145,6 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 
     public void changeState(final StateToken token) {
 	listener.onChangeState(token);
-
     }
 
 }

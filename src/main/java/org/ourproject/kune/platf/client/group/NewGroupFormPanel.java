@@ -30,11 +30,15 @@ import org.ourproject.kune.platf.client.ui.dialogs.TwoButtonsDialog;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
 import org.ourproject.kune.workspace.client.ui.form.FormListener;
 
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.form.CheckboxConfig;
+import com.gwtext.client.widgets.form.ContainerConfig;
 import com.gwtext.client.widgets.form.FieldSetConfig;
 import com.gwtext.client.widgets.form.Form;
 import com.gwtext.client.widgets.form.FormConfig;
@@ -57,10 +61,11 @@ public class NewGroupFormPanel extends Composite implements NewGroupFormView {
     private Radio projectRadio;
     private Radio orgRadio;
     private Radio communityRadio;
-    private TextField licenseField;
+
     private TextField shortNameField;
     private TextField longNameField;
     private TextArea publicDescField;
+    private Label licenseField;
 
     public NewGroupFormPanel() {
 	VerticalPanel generalVP = new VerticalPanel();
@@ -68,6 +73,8 @@ public class NewGroupFormPanel extends Composite implements NewGroupFormView {
 
 	newGroupForm = createNewGroupForm();
 	generalVP.add(newGroupForm);
+	createLicenseFields();
+
 	generalVP.addStyleName("kune-Default-Form");
     }
 
@@ -76,7 +83,6 @@ public class NewGroupFormPanel extends Composite implements NewGroupFormView {
     }
 
     public void clearData() {
-	licenseField.reset();
 	newGroupForm.reset();
 	// TODO: licenseDialog reset
     }
@@ -112,11 +118,11 @@ public class NewGroupFormPanel extends Composite implements NewGroupFormView {
 	    }
 
 	    public void onLicenseChange(LicenseDTO licenseDTO) {
-		licenseField.setValue(licenseDTO.getLongName());
+		licenseField.setText(licenseDTO.getLongName());
 		licenseDialog.hide();
 	    }
 	});
-	licenseDialog = new TwoButtonsDialog(t.SelectLicense(), t.ChooseLicense(), t.Cancel(), true, false, 350, 300,
+	licenseDialog = new TwoButtonsDialog(t.SelectLicense(), t.ChooseLicense(), t.Cancel(), true, false, 350, 600,
 		new FormListener() {
 		    public void onAccept() {
 			license.onSelect();
@@ -215,29 +221,35 @@ public class NewGroupFormPanel extends Composite implements NewGroupFormView {
 	});
 	form.add(communityRadio);
 
-	form.end();
-
-	licenseField = new TextField(new TextFieldConfig() {
+	// Workaround to insert gwt-widgets. See:
+	// http://groups.google.com/group/gwt-ext/browse_thread/thread/1065ed1c3d387276?hl=en
+	form.container(new ContainerConfig() {
 	    {
-		setFieldLabel(t.DefaultLicense());
-		setName(LICENSE_FIELD);
-		setWidth(175);
-		setReadOnly(true);
-		setMsgTarget("side");
-		setSelectOnFocus(false);
+		setId("kune-new-group-license-container");
 	    }
 	});
 
-	form.add(licenseField);
+	form.end();
+	form.render();
 
-	form.addButton(new CustomButton(t.ChooseLicense(), new ClickListener() {
+	return form;
+    }
+
+    private void createLicenseFields() {
+	HorizontalPanel licensePanel = new HorizontalPanel() {
+	    {
+		setElement(DOM.getElementById("kune-new-group-license-container"));
+		// onAttach();
+	    }
+	};
+
+	licenseField = new Label();
+	licensePanel.add(new Label(LICENSE_FIELD));
+	licensePanel.add(licenseField);
+	licensePanel.add(new CustomButton(t.ChooseLicense(), new ClickListener() {
 	    public void onClick(final Widget arg0) {
 		showlicenseDialog();
 	    }
 	}).getButton());
-
-	form.end();
-	form.render();
-	return form;
     }
 }

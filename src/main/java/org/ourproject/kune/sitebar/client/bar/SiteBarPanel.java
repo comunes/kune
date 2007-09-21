@@ -103,7 +103,8 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	MenuBar options = new MenuBar();
 	optionsSubmenu = new MenuBar(true);
 	yourGroupsSubmenu = new MenuBar(true);
-	RoundedBorderDecorator optionsButton = new RoundedBorderDecorator(options, RoundedBorderDecorator.ALL, RoundedBorderDecorator.SIMPLE);
+	RoundedBorderDecorator optionsButton = new RoundedBorderDecorator(options, RoundedBorderDecorator.ALL,
+		RoundedBorderDecorator.SIMPLE);
 	HTML spaceSeparator2 = new HTML("<b></b>");
 	logoImage = new Image();
 
@@ -166,12 +167,12 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     private void createOptionsSubmenu() {
-	linkHelpInTrans = new MenuItem(t.HelpWithTranslation(), true, new Command() {
+	linkHelpInTrans = new MenuItem(img.language().getHTML() + t.HelpWithTranslation(), true, new Command() {
 	    public void execute() {
 		Window.open("http://translate-kune.ourproject.org", "_blank", "");
 	    }
 	});
-	linkHelp = new MenuItem(t.Help(), true, new Command() {
+	linkHelp = new MenuItem(img.kuneIcon16().getHTML() + t.Help(), true, new Command() {
 	    public void execute() {
 		// FIXME: Url to doc
 		presenter.changeState(new StateToken("site.docs"));

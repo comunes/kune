@@ -18,27 +18,33 @@ public class RequestJoinGroupAction implements Action {
     private void onRequestJoinGroup(final Services services) {
 	Site.showProgressProcessing();
 	final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-	server.requestJoinGroup(services.user, services.session.getCurrentState().getGroup().getShortName(),
-		new AsyncCallback() {
-		    public void onFailure(final Throwable caught) {
-			Site.hideProgress();
-		    }
+	String user = services.session.user;
+	// FIXME Bug .... Check if user is logged!!!
+	if (user == null) {
+	    Site.important("You must be logged to request join a group");
+	} else {
+	    server.requestJoinGroup(user, services.session.getCurrentState().getGroup().getShortName(),
+		    new AsyncCallback() {
+			public void onFailure(final Throwable caught) {
+			    Site.hideProgress();
+			}
 
-		    public void onSuccess(final Object result) {
-			Site.hideProgress();
-			final String resultType = (String) result;
-			// i18n
-			if (resultType == SocialNetworkDTO.REQ_JOIN_ACEPTED) {
-			    Site.info("This is a open group, you are now member of this group");
+			public void onSuccess(final Object result) {
+			    Site.hideProgress();
+			    final String resultType = (String) result;
+			    // i18n
+			    if (resultType == SocialNetworkDTO.REQ_JOIN_ACEPTED) {
+				Site.info("This is a open group, you are now member of this group");
+			    }
+			    if (resultType == SocialNetworkDTO.REQ_JOIN_DENIED) {
+				Site.important("Sorry this is a closed group");
+			    }
+			    if (resultType == SocialNetworkDTO.REQ_JOIN_WAITING_MODERATION) {
+				Site.info("Requested. Waiting for admins");
+			    }
 			}
-			if (resultType == SocialNetworkDTO.REQ_JOIN_DENIED) {
-			    Site.important("Sorry this is a closed group");
-			}
-			if (resultType == SocialNetworkDTO.REQ_JOIN_WAITING_MODERATION) {
-			    Site.info("Requested. Waiting for admins");
-			}
-		    }
-		});
+		    });
+	}
 
     }
 }

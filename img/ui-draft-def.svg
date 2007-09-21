@@ -595,7 +595,7 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="5.5466102"
+     inkscape:zoom="1"
      inkscape:cx="2262.3942"
      inkscape:cy="1032.7399"
      inkscape:document-units="px"
@@ -609,10 +609,10 @@
      guidetolerance="3.9"
      showgrid="false"
      gridempspacing="0"
-     inkscape:window-width="1379"
-     inkscape:window-height="936"
-     inkscape:window-x="61"
-     inkscape:window-y="0"
+     inkscape:window-width="913"
+     inkscape:window-height="613"
+     inkscape:window-x="120"
+     inkscape:window-y="118"
      width="1488.189px"
      height="2104.7244px"
      inkscape:grid-bbox="false"
@@ -18856,7 +18856,7 @@
          y="476.66357">Collaborators (26)</tspan>
     </text>
     <rect
-       style="opacity:1;color:#000000;fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="opacity:1;color:#000000;fill:#ffe6d5;fill-opacity:1;fill-rule:nonzero;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect21986"
        width="103.84721"
        height="18.569901"

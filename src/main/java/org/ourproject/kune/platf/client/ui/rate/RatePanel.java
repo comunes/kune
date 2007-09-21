@@ -78,6 +78,7 @@ public class RatePanel extends Composite implements RateView {
 	rateGrid.setCellPadding(0);
 	rateGrid.setCellSpacing(0);
 	rateGrid.setBorderWidth(0);
+	rateGrid.addStyleName("kune-RatePanel-Stars");
 	rateDesc.addStyleName("kune-RatePanel-Label");
     }
 

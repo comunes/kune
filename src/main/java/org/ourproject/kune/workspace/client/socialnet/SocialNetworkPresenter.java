@@ -33,7 +33,8 @@ public class SocialNetworkPresenter implements SocialNetworkComponent {
 	view.clearGroups();
 
 	view.setVisibleAddMemberLink(userIsAdmin);
-	view.setVisibleJoinLink(!isMember(userIsAdmin, userIsCollab));
+	boolean isMember = isMember(userIsAdmin, userIsCollab);
+	view.setVisibleJoinLink(!isMember);
 
 	if (userCanView) {
 	    if (numAdmins > 0) {
@@ -42,8 +43,10 @@ public class SocialNetworkPresenter implements SocialNetworkComponent {
 	    if (numCollaborators > 0) {
 		view.addCollabItems(numCollaborators, collabList, userIsAdmin);
 	    }
-	    if (numPendingCollabs > 0) {
-		view.addPendingCollabsItems(numPendingCollabs, pendingCollabsList, userIsAdmin);
+	    if (isMember) {
+		if (numPendingCollabs > 0) {
+		    view.addPendingCollabsItems(numPendingCollabs, pendingCollabsList, userIsAdmin);
+		}
 	    }
 	}
 	view.setDropDownContentVisible(true);
@@ -79,6 +82,26 @@ public class SocialNetworkPresenter implements SocialNetworkComponent {
 
     public void onAcceptMember(final GroupDTO group) {
 	DefaultDispatcher.getInstance().fire(WorkspaceEvents.ACCEPT_JOIN_GROUP, group, this);
+    }
+
+    public void onSetCollabAsAdmin(final GroupDTO group) {
+	DefaultDispatcher.getInstance().fire(WorkspaceEvents.SET_COLLAB_AS_ADMIN, group, this);
+    }
+
+    public void onSetAdminAsCollab(final GroupDTO group) {
+	DefaultDispatcher.getInstance().fire(WorkspaceEvents.SET_ADMIN_AS_COLLAB, group, this);
+    }
+
+    public void onAddAdmin(final GroupDTO group) {
+	DefaultDispatcher.getInstance().fire(WorkspaceEvents.ADD_ADMIN_MEMBER, group, this);
+    }
+
+    public void onAddCollab(final GroupDTO group) {
+	DefaultDispatcher.getInstance().fire(WorkspaceEvents.ADD_COLLAB_MEMBER, group, this);
+    }
+
+    public void onAddViewer(final GroupDTO group) {
+	DefaultDispatcher.getInstance().fire(WorkspaceEvents.ADD_VIEWER_MEMBER, group, this);
     }
 
     public void onAddMember() {

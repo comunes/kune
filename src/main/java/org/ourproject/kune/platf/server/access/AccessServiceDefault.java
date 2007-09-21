@@ -60,6 +60,7 @@ public class AccessServiceDefault implements AccessService {
 	Access access = new Access(descriptor, descriptor.getFolder());
 	addContentRights(access, loggedGroup);
 	addFolderRights(access, loggedGroup);
+	addGroupRights(access, loggedGroup);
 	if (!isValid(accessType, access.getContentRights()) || !isValid(accessType, access.getFolderRights())) {
 	    throw new AccessViolationException();
 	}
@@ -74,7 +75,7 @@ public class AccessServiceDefault implements AccessService {
 	return check(access, access.getContentRights(), accessType).getContent();
     }
 
-    public Access getFolderAccess(final Long folderId, User user, final AccessType accessType)
+    public Access getFolderAccess(final Long folderId, final User user, final AccessType accessType)
 	    throws AccessViolationException, ContentNotFoundException {
 	return getFolderAccess(folderId, user.getUserGroup(), accessType);
     }
@@ -104,6 +105,12 @@ public class AccessServiceDefault implements AccessService {
 	    return rights.isAdministrable();
 	default:
 	    return false;
+	}
+    }
+
+    private void addGroupRights(final Access access, final Group group) {
+	if (!access.hasGroupRights()) {
+	    access.setGroupRights(accessRightsService.get(group, access.getGroupAccessLists()));
 	}
     }
 

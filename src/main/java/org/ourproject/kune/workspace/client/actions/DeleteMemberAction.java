@@ -18,7 +18,8 @@ public class DeleteMemberAction implements Action {
     private void onDeleteMember(final Services services, final GroupDTO group) {
 	Site.showProgressProcessing();
 	final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-	server.deleteMember(services.user, group.getShortName(), new AsyncCallback() {
+	server.deleteMember(services.user, group.getShortName(), services.session.getCurrentState().getGroup()
+		.getShortName(), new AsyncCallback() {
 	    public void onFailure(final Throwable caught) {
 		Site.hideProgress();
 	    }
@@ -26,7 +27,7 @@ public class DeleteMemberAction implements Action {
 	    public void onSuccess(final Object result) {
 		Site.hideProgress();
 		// i18n
-		Site.info("Group removed");
+		Site.info("Member removed");
 		// TODO: Reload SocialNetwork info only
 		services.stateManager.reload();
 	    }
