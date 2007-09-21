@@ -20,6 +20,8 @@
 
 package org.ourproject.kune.platf.server.manager.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
@@ -46,11 +48,12 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 	sn.addAdmin(user.getUserGroup());
     }
 
-    public String requestToJoin(Group group, User user) {
+    public String requestToJoin(final Group group, final User user) {
 	SocialNetwork sn = group.getSocialNetwork();
 	AdmissionType admissionType = group.getAdmissionType();
-	if (admissionType == null)
+	if (admissionType == null) {
 	    throw new RuntimeException();
+	}
 	if (isModerated(admissionType)) {
 	    sn.addPendingCollaborator(user.getUserGroup());
 	    return SocialNetworkDTO.REQ_JOIN_WAITING_MODERATION;
@@ -59,26 +62,57 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 	    return SocialNetworkDTO.REQ_JOIN_ACEPTED;
 	} else if (isClosed(admissionType)) {
 	    return SocialNetworkDTO.REQ_JOIN_DENIED;
-	} else if (isPersonal(admissionType)) {
-	    return SocialNetworkDTO.REQ_JOIN_DENIED;
 	} else {
 	    throw new RuntimeException();
 	}
     }
 
-    private boolean isPersonal(AdmissionType admissionType) {
-	return admissionType.equals(AdmissionType.Personal);
+    public void acceptJoinGroup(final Group group, final User user) {
+	SocialNetwork sn = group.getSocialNetwork();
+	List<Group> pendingCollabs = sn.getPendingCollaborators().getList();
+	Group userGroup = user.getUserGroup();
+	if (pendingCollabs.contains(userGroup)) {
+	    sn.addCollaborator(userGroup);
+	    pendingCollabs.remove(userGroup);
+	} else {
+	    new RuntimeException("User is not a pending collaborator");
+	}
     }
 
-    private boolean isClosed(AdmissionType admissionType) {
+    public void deleteMember(final Group group, final User user) {
+	SocialNetwork sn = group.getSocialNetwork();
+
+	Group userGroup = user.getUserGroup();
+	if (sn.isAdmin(userGroup)) {
+	    sn.removeAdmin(userGroup);
+	} else if (sn.isCollab(userGroup)) {
+	    sn.removeCollab(userGroup);
+	} else {
+	    new RuntimeException("User is not a collaborator");
+	}
+    }
+
+    public void denyJoinGroup(final Group group, final User user) {
+	SocialNetwork sn = group.getSocialNetwork();
+	List<Group> pendingCollabs = sn.getPendingCollaborators().getList();
+	Group userGroup = user.getUserGroup();
+	if (pendingCollabs.contains(userGroup)) {
+	    pendingCollabs.remove(userGroup);
+	} else {
+	    new RuntimeException("User is not a pending collaborator");
+	}
+    }
+
+    private boolean isClosed(final AdmissionType admissionType) {
 	return admissionType.equals(AdmissionType.Closed);
     }
 
-    private boolean isOpen(AdmissionType admissionType) {
+    private boolean isOpen(final AdmissionType admissionType) {
 	return admissionType.equals(AdmissionType.Open);
     }
 
-    private boolean isModerated(AdmissionType admissionType) {
+    private boolean isModerated(final AdmissionType admissionType) {
 	return admissionType.equals(AdmissionType.Moderated);
     }
+
 }

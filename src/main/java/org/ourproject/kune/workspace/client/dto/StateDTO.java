@@ -42,6 +42,7 @@ public class StateDTO implements IsSerializable {
     private AccessListsDTO accessLists;
     private AccessRightsDTO contentRights;
     private AccessRightsDTO folderRights;
+    private AccessRightsDTO groupRights;
     private Double rate;
     private Integer rateByUsers;
     private String typeId;
@@ -185,6 +186,14 @@ public class StateDTO implements IsSerializable {
 
     public void setSocialNetwork(final SocialNetworkDTO socialNetwork) {
 	this.socialNetwork = socialNetwork;
+    }
+
+    public AccessRightsDTO getGroupRights() {
+	return groupRights;
+    }
+
+    public void setGroupRights(final AccessRightsDTO groupRights) {
+	this.groupRights = groupRights;
     }
 
 }

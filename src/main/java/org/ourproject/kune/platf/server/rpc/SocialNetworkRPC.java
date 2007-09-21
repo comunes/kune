@@ -31,10 +31,34 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
-    public String requestJoinGroup(String hash, String groupShortName) {
+    public String requestJoinGroup(final String hash, final String groupShortName) {
 	User user = session.getUser();
 	Group group = groupManager.findByShortName(groupShortName);
-	return (socialNetworkManager.requestToJoin(group, user));
+	return socialNetworkManager.requestToJoin(group, user);
+    }
+
+    @Authenticated
+    @Transactional(type = TransactionType.READ_WRITE)
+    public void AcceptJoinGroup(final String hash, final String groupShortName) {
+	User user = session.getUser();
+	Group group = groupManager.findByShortName(groupShortName);
+	socialNetworkManager.acceptJoinGroup(group, user);
+    }
+
+    @Authenticated
+    @Transactional(type = TransactionType.READ_WRITE)
+    public void deleteMember(final String hash, final String groupShortName) {
+	User user = session.getUser();
+	Group group = groupManager.findByShortName(groupShortName);
+	socialNetworkManager.deleteMember(group, user);
+    }
+
+    @Authenticated
+    @Transactional(type = TransactionType.READ_WRITE)
+    public void denyJoinGroup(final String hash, final String groupShortName) {
+	User user = session.getUser();
+	Group group = groupManager.findByShortName(groupShortName);
+	socialNetworkManager.denyJoinGroup(group, user);
     }
 
 }

@@ -78,7 +78,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 	final String licenseDefId = properties.getDefaultLicense();
 	final License licenseDef = licenseFinder.findByShortName(licenseDefId);
 	group.setDefaultLicense(licenseDef);
-	group.setAdmissionType(AdmissionType.Personal);
+	group.setAdmissionType(AdmissionType.Closed);
 	user.setUserGroup(group);
 	initSocialNetwork(group, group);
 	user.getAdminInGroups().add(group);

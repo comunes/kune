@@ -8,6 +8,12 @@ public interface SocialNetworkService extends RemoteService {
 
     String requestJoinGroup(String hash, String groupShortName);
 
+    void AcceptJoinGroup(String hash, String groupShortName);
+
+    void deleteMember(String hash, String groupShortName);
+
+    void denyJoinGroup(String hash, String groupShortName);
+
     public static class App {
 	private static SocialNetworkServiceAsync instance;
 

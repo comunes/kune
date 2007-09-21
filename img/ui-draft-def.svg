@@ -595,9 +595,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="2268.1335"
-     inkscape:cy="1021.8795"
+     inkscape:zoom="5.5466102"
+     inkscape:cx="2262.3942"
+     inkscape:cy="1032.7399"
      inkscape:document-units="px"
      inkscape:current-layer="layer5"
      inkscape:object-points="false"
@@ -12577,7 +12577,7 @@
        style="fill:none;fill-opacity:1;stroke:#f2f2f2;stroke-opacity:1" />
     <text
        xml:space="preserve"
-       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#000080;fill-opacity:1;stroke:none;stroke-opacity:1;display:inline;font-family:Arial"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#aa4400;fill-opacity:1;stroke:none;stroke-opacity:1;display:inline;font-family:Arial"
        x="1075.2784"
        y="171.5159"
        id="text6296"><tspan
@@ -17252,7 +17252,7 @@
        inkscape:export-ydpi="90"
        inkscape:export-xdpi="90"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
-       transform="translate(-76,-1140)"
+       transform="translate(-107,-1022)"
        id="g5978">
       <g
          id="g5980"
@@ -18855,6 +18855,13 @@
          x="2210.4023"
          y="476.66357">Collaborators (26)</tspan>
     </text>
+    <rect
+       style="opacity:1;color:#000000;fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect21986"
+       width="103.84721"
+       height="18.569901"
+       x="2206.9336"
+       y="405.90631" />
     <text
        inkscape:export-ydpi="71.000000"
        inkscape:export-xdpi="71.000000"
@@ -19833,5 +19840,268 @@
        width="103"
        id="rect20855"
        style="opacity:1;color:#000000;fill:#f2f2f2;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <rect
+       transform="matrix(0,-1,1,0,0,0)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       y="2423.2314"
+       x="-599.43896"
+       height="1"
+       width="14"
+       id="rect20867"
+       style="color:#000000;fill:#cccccc;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/various/bgbuttonsidebar.png"
+       y="592.43896"
+       x="2424.2314"
+       height="8"
+       width="73"
+       id="rect20869"
+       style="opacity:0.35;color:#000000;fill:#ffba7f;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <rect
+       style="color:#000000;fill:#aaaaaa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect20871"
+       width="73"
+       height="1"
+       x="2424.2314"
+       y="583.43896"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="color:#000000;fill:#aaaaaa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect20873"
+       width="73"
+       height="1"
+       x="2424.2314"
+       y="600.43896"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="color:#000000;fill:#aaaaaa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect20875"
+       width="16"
+       height="1"
+       x="-600.43896"
+       y="2423.2314"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="matrix(0,-1,1,0,0,0)" />
+    <rect
+       transform="matrix(0,-1,1,0,0,0)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       y="2497.2314"
+       x="-600.43896"
+       height="1"
+       width="16"
+       id="rect20877"
+       style="color:#000000;fill:#aaaaaa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <rect
+       style="opacity:0.4;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect20879"
+       width="73"
+       height="8"
+       x="2424.2314"
+       y="584.43896"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/various/bgbuttonsidebar.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       sodipodi:linespacing="125%"
+       y="596.24762"
+       x="2433.9971"
+       font-size="11"
+       id="text20881"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#4d4d4d;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial">
+      <tspan
+         y="596.24762"
+         x="2433.9971"
+         id="tspan20883"
+         sodipodi:role="line">Options</tspan>
+    </text>
+    <g
+       transform="translate(787.26862,67.25)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/button-sitebar-arrow-down.png"
+       id="g20885">
+      <rect
+         style="opacity:0;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="rect20887"
+         width="15"
+         height="15"
+         x="1691.1884"
+         y="517.68896" />
+      <path
+         sodipodi:type="star"
+         style="color:#000000;fill:#666666;fill-opacity:1;fill-rule:evenodd;stroke:#2b0000;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path20889"
+         sodipodi:sides="3"
+         sodipodi:cx="1563"
+         sodipodi:cy="674.18896"
+         sodipodi:r1="3.7810335"
+         sodipodi:r2="0.90551758"
+         sodipodi:arg1="1.5657195"
+         sodipodi:arg2="2.6129171"
+         inkscape:flatsided="true"
+         inkscape:rounded="0"
+         inkscape:randomized="0"
+         d="M 1563.0192,677.96995 L 1559.716,672.3151 L 1566.2648,672.28185 L 1563.0192,677.96995 z "
+         transform="translate(135.69794,-149.78098)"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/menu-arrow-down.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+    </g>
+    <rect
+       y="603.43896"
+       x="2424.2686"
+       height="45.000004"
+       width="154"
+       id="rect20891"
+       style="fill:#fffcd5;fill-opacity:1;fill-rule:evenodd;stroke:#d38d5f;stroke-width:1.00000012px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <rect
+       y="609.93896"
+       x="2428.2686"
+       height="16.000002"
+       width="142"
+       id="rect20893"
+       style="fill:#ffb958;fill-opacity:1;fill-rule:evenodd;stroke:#c83737;stroke-width:1.00000012px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
+    <text
+       id="text20895"
+       y="621.43896"
+       x="2433.2686"
+       style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial"
+       xml:space="preserve"><tspan
+         y="621.43896"
+         x="2433.2686"
+         id="tspan20897"
+         sodipodi:role="line">Help with the Translation</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial"
+       x="2433.2686"
+       y="638.43896"
+       id="text20899"><tspan
+         sodipodi:role="line"
+         id="tspan20901"
+         x="2433.2686"
+         y="638.43896">Help</tspan></text>
+    <g
+       id="g21976">
+      <rect
+         y="496.74048"
+         x="2357.5"
+         height="48.948483"
+         width="147.94026"
+         id="rect20863"
+         style="color:#000000;fill:#f2f2f2;fill-opacity:1;fill-rule:nonzero;stroke:#999999;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <image
+         xlink:href="icons/accept.png"
+         sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/accept.png"
+         width="16"
+         height="16"
+         id="image20907"
+         x="2367.4709"
+         y="524.18896" />
+      <rect
+         y="500.11816"
+         x="2357.4709"
+         height="19.070801"
+         width="148"
+         id="rect20913"
+         style="color:#000000;fill:#ffb958;fill-opacity:1;fill-rule:nonzero;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <image
+         xlink:href="icons/cancel.png"
+         sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/cancel.png"
+         width="16"
+         height="16"
+         id="image20909"
+         x="2367.4709"
+         y="502.18896" />
+      <text
+         xml:space="preserve"
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline;font-family:Arial"
+         x="2387.4709"
+         y="513.18896"
+         id="text20934"><tspan
+           sodipodi:role="line"
+           id="tspan20936"
+           x="2387.4709"
+           y="513.18896">Deny this member</tspan></text>
+      <text
+         id="text20940"
+         y="537.18896"
+         x="2387.4709"
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline;font-family:Arial"
+         xml:space="preserve"><tspan
+           y="537.18896"
+           x="2387.4709"
+           id="tspan20942"
+           sodipodi:role="line">Accept this member</tspan></text>
+    </g>
+    <g
+       id="g20960"
+       transform="translate(-50.016251,-182.12136)">
+      <rect
+         style="opacity:1;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#00d4aa;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="rect20944"
+         width="135.47206"
+         height="49.071068"
+         x="2364.5442"
+         y="491.23926" />
+      <image
+         y="518.98822"
+         x="2369.0503"
+         id="image20946"
+         height="16"
+         width="16"
+         sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/accept.png"
+         xlink:href="icons/accept.png" />
+      <rect
+         style="opacity:1;color:#000000;fill:#d5fff6;fill-opacity:1;fill-rule:nonzero;stroke:#00d4aa;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="rect20948"
+         width="121.26882"
+         height="19.445435"
+         x="2368.8079"
+         y="496.11816" />
+      <image
+         y="497.18896"
+         x="2370"
+         id="image20950"
+         height="16"
+         width="16"
+         sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/cancel.png"
+         xlink:href="icons/cancel.png" />
+      <text
+         id="text20952"
+         y="508.18896"
+         x="2390"
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline;font-family:Arial"
+         xml:space="preserve"><tspan
+           y="508.18896"
+           x="2390"
+           id="tspan20954"
+           sodipodi:role="line">Deny this member</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline;font-family:Arial"
+         x="2390"
+         y="532.18896"
+         id="text20956"><tspan
+           sodipodi:role="line"
+           id="tspan20958"
+           x="2390"
+           y="532.18896">Accept this member</tspan></text>
+    </g>
   </g>
 </svg>

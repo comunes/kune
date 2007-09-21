@@ -125,7 +125,7 @@ public class StateManagerDefault implements StateManager {
 	workspace.setContext(clientTool.getContext());
 	workspace.getLicenseComponent().setLicense(state.getGroup().getLongName(), state.getLicense());
 	// TODO: SocialNetwork out of state
-	workspace.getSocialNetworkComponent().setSocialNetwork(state.getSocialNetwork());
+	workspace.getSocialNetworkComponent().setSocialNetwork(state.getSocialNetwork(), state.getGroupRights());
 	workspace.getBuddiesPresenceComponent().setBuddiesPresence();
 	Site.hideProgress();
     }

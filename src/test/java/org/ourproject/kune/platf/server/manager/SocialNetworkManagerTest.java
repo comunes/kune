@@ -54,14 +54,6 @@ public class SocialNetworkManagerTest {
 	assertEquals(result, SocialNetworkDTO.REQ_JOIN_DENIED);
     }
 
-    @Test
-    public void requestJoinAPersonalGroupDeny() {
-	group.setAdmissionType(AdmissionType.Personal);
-
-	final String result = socialNetworkManager.requestToJoin(group, user);
-	assertEquals(result, SocialNetworkDTO.REQ_JOIN_DENIED);
-    }
-
     @Test(expected = RuntimeException.class)
     public void ilegalAdmissionType() {
 	group.setAdmissionType(null);

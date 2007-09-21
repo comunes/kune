@@ -94,24 +94,25 @@
 
 .kune-ContentTitleBar .gwt-Label {
     width: 100%;
-    height: 23px;
-    vertical-align: middle;
     margin: 0 9px;
 }
 
 .kune-ContentSubTitleBar {
     background-color: #5FD35F;
     color: #FFF;
+    vertical-align: middle;
     font-weight: 700;
     font-size: 85%;
     width: 100%;
-    vertical-align: middle;
+    height: 23px;
+}
+
+.kune-ContentSubTitleBar tr {
+	float: left;
 }
 
 .kune-ContentSubTitleBar .gwt-Label {
     width: 100%;
-    height: 23px;
-    vertical-align: middle;
     margin: 0 9px;
 }
 
@@ -320,23 +321,89 @@
 }
 
 /* Social Network */
+ 
+.kune-SocialNet { }
 
-.kune-SocialNet {
-} 
-
-.kune-SocialNetSubLabel {
-    background-color: #ECECEC;
+.kune-SocialNet .gwt-StackPanelItem {
+    border-bottom: 1px solid #CCCCCC;
+    background-color: #EEFFAA;
+	cursor: pointer;
+	padding: 1px 3px 0 6px;
+	owerflow: hidden;
 }
 
-.kune-SocialNetSubLabel img {
-    margin: 0 2px 0 0;
+.kune-SocialNet .gwt-StackPanelItem img {
+    margin: 0 0 0 3px;
+	vertical-align: middle;
 }
 
-.kune-SocialNetMoreLink {
-    background-color: #F9F9F9;
+.kune-SocialNet table {
+    width: 100%;
 }
 
-.kune-SocialNetJoinLink {
+.kune-SocialNet .gwt-StackPanelItem-selected {
+}
+
+.kune-SocialNetJoinLink, .kune-SocialNetAddMemberLink  {
+    background-color: #E6E6E6;
+    border-top: 1px solid #CCCCCC;
+	white-space: nowrap;
+}
+
+.kune-SocialNet .kune-DropDownInner {
+    padding: 0px;
+}
+
+/* Socialnet Members */
+
+.kune-GroupMemberLabel {
+     overflow: hidden;
+}
+
+.kune-GroupMemberLabel .gwt-MenuItem {
+     white-space: nowrap;
+     cursor: pointer;
+     border-bottom: 1px solid #F2F2F2;
+}
+
+.kune-GroupMemberLabel table {
+     width: 100%;
+}
+
+.kune-GroupMemberLabel .gwt-MenuItem img {
+     vertical-align: middle;
+     margin-top: 1px;
+     margin-bottom: 1px;
+	margin-left: 5px;
+	margin-right: 3px;
+}
+
+.kune-GroupMemberLabel .gwt-MenuItem-selected  {
+     background-color: #FFE6D5;
+}
+
+.kune-GroupMemberCommands {
+    background-color: #F2F2F2;
+    border: 1px solid #999; 
+    vertical-align: middle;
+    padding: 5px 0;
+    margin-left:-120px;
+	margin-top:-2px;
+}
+
+.kune-GroupMemberCommands .gwt-MenuItem {
+    cursor: pointer;
+    padding: 1px 10px;
+    white-space: nowrap;
+}
+
+.kune-GroupMemberCommands .gwt-MenuItem img {
+    vertical-align: middle;
+    margin-right: 3px;
+}
+
+.kune-GroupMemberCommands .gwt-MenuItem-selected {
+    background-color: #FFB958;
 }
 
 /* AccessList */
@@ -362,3 +429,13 @@
 .kune-AccessList .header img {margin: 0 3px 0 0; }
 .kune-AccessList .content { margin: 0 0 0 7px; width: 100%; }
 .kune-AccessList .content table { margin-bottom: 5px; width: 100%; }
+
+/* Rate */
+
+.kune-RatePanel-Label {
+	white-space: nowrap;
+}
+
+.kune-RatePanel-Stars {
+	margin-left: 20px;
+}

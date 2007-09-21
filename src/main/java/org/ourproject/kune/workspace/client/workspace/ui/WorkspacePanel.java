@@ -42,7 +42,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     private final HorizontalSplitPanel cntcxtHSP;
     private final VerticalPanel contextVP;
     private final VerticalPanel contentVP;
-    private final ContentBottomBar contentBottomBar;
+    private final HorizontalPanel contentBottomBar;
     private final VerticalPanel generalDropDownsPanel;
 
     public WorkspacePanel() {
@@ -73,13 +73,15 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	cntcxtHSP.setLeftWidget(contentVP);
 	cntcxtHSP.setRightWidget(contextVP);
 	final String mainBorderColor = Kune.getInstance().c.getMainBorder();
-	contentBottomBar = new ContentBottomBar();
-	final RoundedBorderDecorator contentToolBarBorderDec = new RoundedBorderDecorator(contentTitleBar, RoundedBorderDecorator.TOPLEFT);
+	contentBottomBar = new HorizontalPanel();
+	final RoundedBorderDecorator contentToolBarBorderDec = new RoundedBorderDecorator(contentTitleBar,
+		RoundedBorderDecorator.TOPLEFT);
 	groupAreaVP.add(contentToolBarBorderDec);
 	contentToolBarBorderDec.setColor(mainBorderColor);
 	groupAreaVP.add(contentSubTitleBar);
 	groupAreaVP.add(cntcxtHSP);
-	final RoundedBorderDecorator bottomBorderDecorator = new RoundedBorderDecorator(contentBottomBar, RoundedBorderDecorator.BOTTOMLEFT);
+	final RoundedBorderDecorator bottomBorderDecorator = new RoundedBorderDecorator(contentBottomBar,
+		RoundedBorderDecorator.BOTTOMLEFT);
 	groupAreaVP.add(bottomBorderDecorator);
 	bottomBorderDecorator.setColor(mainBorderColor);
 	contentVP.addStyleName("kune-WorkspacePanel-Content");
@@ -94,6 +96,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	generalHP.addStyleName("GeneralHP");
 	contentTitleBar.setWidth("100%");
 	contentSubTitleBar.setWidth("100%");
+	contentBottomBar.addStyleName("kune-ContentBottomBar");
 	groupAreaVP.setCellVerticalAlignment(contentTitleBar, VerticalPanel.ALIGN_MIDDLE);
 	groupAreaVP.setCellVerticalAlignment(contentSubTitleBar, VerticalPanel.ALIGN_MIDDLE);
 	groupAreaVP.setCellVerticalAlignment(bottomBorderDecorator, VerticalPanel.ALIGN_MIDDLE);

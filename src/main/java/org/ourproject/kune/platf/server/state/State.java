@@ -38,6 +38,7 @@ public class State {
     private AccessLists accessLists;
     private AccessRights contentRights;
     private AccessRights folderRights;
+    private AccessRights groupRights;
     private Double rate;
     private Integer rateByUsers;
     private String typeId;
@@ -156,6 +157,14 @@ public class State {
 
     public void setSocialNetwork(final SocialNetwork socialNetwork) {
 	this.socialNetwork = socialNetwork;
+    }
+
+    public AccessRights getGroupRights() {
+	return groupRights;
+    }
+
+    public void setGroupRights(final AccessRights groupRights) {
+	this.groupRights = groupRights;
     }
 
 }

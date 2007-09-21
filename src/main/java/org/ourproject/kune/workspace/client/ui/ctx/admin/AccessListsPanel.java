@@ -27,11 +27,9 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.GroupListDTO;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.IconHyperlink;
+import org.ourproject.kune.platf.client.ui.TitledPanel;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DisclosurePanel;
-import com.google.gwt.user.client.ui.DisclosurePanelImages;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -44,15 +42,7 @@ public class AccessListsPanel extends Composite implements View {
 
     public AccessListsPanel() {
 	// i18n
-	final DisclosurePanel disclosure = new DisclosurePanel(new DisclosurePanelImages() {
-	    public AbstractImagePrototype disclosurePanelClosed() {
-		return img.arrowRightWhite();
-	    }
-
-	    public AbstractImagePrototype disclosurePanelOpen() {
-		return img.arrowDownWhite();
-	    }
-	}, "Permissions", true);
+	TitledPanel titledPanel = new TitledPanel("Permissions");
 
 	final VerticalPanel vp = new VerticalPanel();
 	// i18n
@@ -64,8 +54,8 @@ public class AccessListsPanel extends Composite implements View {
 	viewersVP = new VerticalPanel();
 
 	// Layout
-	initWidget(disclosure);
-	disclosure.add(vp);
+	initWidget(titledPanel);
+	titledPanel.add(vp);
 	vp.add(adminsLabel);
 	vp.add(adminsVP);
 	vp.add(editorsLabel);
@@ -74,8 +64,9 @@ public class AccessListsPanel extends Composite implements View {
 	vp.add(viewersVP);
 
 	// Set properties
-	disclosure.setTitle("Who can admin, edit or view this content");
-	addStyleName("kune-AccessList");
+	// FIXME: titledPanel.setTitle("Who can admin, edit or view this
+	// content");
+	// addStyleName("kune-AccessList");
 	setWidth("100%");
 	vp.setWidth("100%");
 	vp.setCellWidth(adminsLabel, "100%");

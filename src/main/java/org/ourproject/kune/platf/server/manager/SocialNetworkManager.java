@@ -30,4 +30,10 @@ public interface SocialNetworkManager extends Manager<SocialNetwork, Long> {
 
     String requestToJoin(Group group, User user);
 
+    void acceptJoinGroup(Group group, User user);
+
+    void deleteMember(Group group, User user);
+
+    void denyJoinGroup(Group group, User user);
+
 }

@@ -17,7 +17,7 @@ public abstract class TestDomainHelper {
 	String longName = "name" + number;
 	User user = new User(shortName, longName, "email" + number, "password" + number);
 	Group userGroup = new Group(shortName, longName);
-	userGroup.setAdmissionType(AdmissionType.Personal);
+	userGroup.setAdmissionType(AdmissionType.Closed);
 	user.setUserGroup(userGroup);
 	return user;
     }

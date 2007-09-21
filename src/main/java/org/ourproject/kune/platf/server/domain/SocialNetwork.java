@@ -85,4 +85,20 @@ public class SocialNetwork {
 	return accessLists;
     }
 
+    public boolean isAdmin(final Group group) {
+	return accessLists.getAdmins().getList().contains(group);
+    }
+
+    public boolean isCollab(final Group group) {
+	return accessLists.getEditors().getList().contains(group);
+    }
+
+    public void removeCollab(final Group group) {
+	accessLists.getEditors().getList().remove(group);
+    }
+
+    public void removeAdmin(final Group group) {
+	accessLists.getAdmins().getList().remove(group);
+    }
+
 }

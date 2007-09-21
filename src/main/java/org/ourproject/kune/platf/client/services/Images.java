@@ -24,11 +24,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ImageBundle;
 
-/**
- * 
- * http://code.google.com/p/google-web-toolkit/wiki/ImageBundleDesign
- * 
- */
 public interface Images extends ImageBundle {
 
     public static class App {
@@ -43,14 +38,24 @@ public interface Images extends ImageBundle {
     }
 
     /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/add.png
+     * @gwt.resource org/ourproject/kune/platf/public/images/accept.png
      */
-    AbstractImagePrototype add();
+    AbstractImagePrototype accept();
 
     /**
      * @gwt.resource org/ourproject/kune/platf/public/images/add-green.png
      */
     AbstractImagePrototype addGreen();
+
+    /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/add.png
+     */
+    AbstractImagePrototype add();
+
+    /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/alert.png
+     */
+    AbstractImagePrototype alert();
 
     /**
      * @gwt.resource org/ourproject/kune/platf/public/images/arrow-down-black.gif
@@ -388,6 +393,11 @@ public interface Images extends ImageBundle {
     AbstractImagePrototype del();
 
     /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/error.png
+     */
+    AbstractImagePrototype error();
+
+    /**
      * @gwt.resource org/ourproject/kune/platf/public/images/everybody.png
      */
     AbstractImagePrototype everybody();
@@ -406,6 +416,16 @@ public interface Images extends ImageBundle {
      * @gwt.resource org/ourproject/kune/platf/public/images/group-def-icon.png
      */
     AbstractImagePrototype groupDefIcon();
+
+    /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/important.png
+     */
+    AbstractImagePrototype important();
+
+    /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/info.png
+     */
+    AbstractImagePrototype info();
 
     /**
      * @gwt.resource org/ourproject/kune/platf/public/images/kune-close.png

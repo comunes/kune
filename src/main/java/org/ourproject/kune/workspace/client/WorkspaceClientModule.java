@@ -22,6 +22,10 @@ package org.ourproject.kune.workspace.client;
 
 import org.ourproject.kune.platf.client.extend.ClientModule;
 import org.ourproject.kune.platf.client.extend.Register;
+import org.ourproject.kune.workspace.client.actions.AcceptJoinGroupAction;
+import org.ourproject.kune.workspace.client.actions.DeleteMemberAction;
+import org.ourproject.kune.workspace.client.actions.DenyJoinGroupAction;
+import org.ourproject.kune.workspace.client.actions.GotoGroupAction;
 import org.ourproject.kune.workspace.client.actions.InitAction;
 import org.ourproject.kune.workspace.client.actions.LoggedInAction;
 import org.ourproject.kune.workspace.client.actions.LoggedOutAction;
@@ -33,5 +37,10 @@ public class WorkspaceClientModule implements ClientModule {
 	register.addAction(WorkspaceEvents.USER_LOGGED_IN, new LoggedInAction());
 	register.addAction(WorkspaceEvents.USER_LOGGED_OUT, new LoggedOutAction());
 	register.addAction(WorkspaceEvents.REQ_JOIN_GROUP, new RequestJoinGroupAction());
+	register.addAction(WorkspaceEvents.ACCEPT_JOIN_GROUP, new AcceptJoinGroupAction());
+	register.addAction(WorkspaceEvents.DENY_JOIN_GROUP, new DenyJoinGroupAction());
+	register.addAction(WorkspaceEvents.DEL_MEMBER, new DeleteMemberAction());
+	register.addAction(WorkspaceEvents.GOTO_GROUP, new GotoGroupAction());
+
     }
 }

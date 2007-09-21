@@ -62,7 +62,6 @@ public class InitAction implements Action {
 		// i18n
 		Site.error("Error fetching initial data");
 		FireLog.debug(error.getMessage());
-		FireLog.debug(error.getCause().toString());
 	    }
 
 	    public void onSuccess(final Object response) {

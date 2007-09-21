@@ -25,13 +25,17 @@ public class LicensePanel extends HorizontalPanel implements LicenseView {
 	};
 	copyright.addClickListener(clickListener);
 	image.addClickListener(clickListener);
+	copyright.setVisible(false);
+	image.setVisible(false);
     }
 
     public void showImage(final String imageUrl) {
 	image.setUrl(imageUrl);
+	image.setVisible(true);
     }
 
     public void showName(final String groupName, final String licenseName) {
 	copyright.setText("© " + groupName + ", under license " + licenseName);
+	copyright.setVisible(true);
     }
 }
