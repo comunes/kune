@@ -1,44 +1,24 @@
 package org.ourproject.kune.workspace.client.presence.ui;
 
+import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.platf.client.ui.DropDownPanel;
-import org.ourproject.kune.platf.client.ui.IconHyperlink;
-import org.ourproject.kune.platf.client.ui.IconLabel;
-import org.ourproject.kune.workspace.client.presence.BuddiesPresencePresenter;
 import org.ourproject.kune.workspace.client.presence.BuddiesPresenceView;
+import org.ourproject.kune.workspace.client.workspace.ui.StackedDropDownPanel;
+import org.ourproject.kune.workspace.client.workspace.ui.MemberAction;
 
-import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
+public class BuddiesPresencePanel extends StackedDropDownPanel implements BuddiesPresenceView {
 
-public class BuddiesPresencePanel extends DropDownPanel implements BuddiesPresenceView {
-
-    private final VerticalPanel buddiesPanel;
-
-    public BuddiesPresencePanel(final BuddiesPresencePresenter presenter) {
-	VerticalPanel vp = new VerticalPanel();
-	setContent(vp);
-	buddiesPanel = new VerticalPanel();
-	IconHyperlink addBuddieLink = new IconHyperlink(Images.App.getInstance().addGreen(), "Add a buddie", "fixme");
-	vp.add(buddiesPanel);
-	vp.add(addBuddieLink);
-	setHeaderText("My buddies");
-	setContentVisible(true);
-	addStyleName("kune-Margin-Medium-t");
-	vp.setCellHorizontalAlignment(addBuddieLink, HorizontalPanel.ALIGN_CENTER);
-	vp.setCellVerticalAlignment(addBuddieLink, VerticalPanel.ALIGN_MIDDLE);
-
-	addBuddieLink.addClickListener(new ClickListener() {
-	    public void onClick(final Widget sender) {
-		// TODO
-	    }
-	});
+    public BuddiesPresencePanel(final AbstractPresenter presenter) {
+	super(presenter, "#CD87DE", "My buddies", "Presence of my buddies", true);
+	super.addStackItem("Connected", "Buddies connected", true);
+	super.addStackItem("Not connected", "Buddies not connected", true);
+	super.addBottomLink(Images.App.getInstance().addGreen(), "Add new buddy", "addbuddy", "Test");
     }
 
     public void setBuddiesPresence() {
-	buddiesPanel.clear();
-	buddiesPanel.add(new IconLabel(Images.App.getInstance().personDef(), "luther.b"));
+	super.addStackSubItem("Connected", Images.App.getInstance().personDef(), "fulano", "Waiting...",
+		MemberAction.DEFAULT_VISIT_GROUP);
+	super.addStackSubItem("Not connected", Images.App.getInstance().personDef(), "fulano 2", "Away...",
+		MemberAction.DEFAULT_VISIT_GROUP);
     }
-
 }

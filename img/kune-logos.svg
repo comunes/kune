@@ -79,9 +79,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.4385426"
-     inkscape:cx="668.26642"
-     inkscape:cy="662.5"
+     inkscape:zoom="0.72123458"
+     inkscape:cx="372.04724"
+     inkscape:cy="526.18109"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      inkscape:window-width="1379"
@@ -707,6 +707,38 @@
            id="tspan2317"
            x="626.68304"
            y="393.87903">wiki</tspan></text>
+    </g>
+    <g
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-icon16.png"
+       transform="matrix(0.1111494,0,0,0.111008,278.24359,22.515968)"
+       id="g22118">
+      <path
+         transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+         id="path22120"
+         d="M 60.321717,411.99998 L 437.33633,411.99998"
+         style="color:#000000;fill:#69312f;fill-opacity:1;fill-rule:nonzero;stroke:#dd8a3d;stroke-width:109.23953247;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block" />
+      <path
+         transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+         id="path22122"
+         d="M 252.61203,788.60332 L 252.61203,411.59154"
+         style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffdb6b;stroke-width:109.23950958;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block" />
+      <path
+         transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+         id="path22124"
+         d="M 252.86937,597.15755 L 629.88177,597.15755"
+         style="color:#000000;fill:#69312f;fill-opacity:1;fill-rule:nonzero;stroke:#69312f;stroke-width:109.23951721;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block" />
+      <path
+         transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+         id="path22126"
+         d="M 437.45588,596.97447 L 437.45588,219.95956"
+         style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#cc6633;stroke-width:109.23950195;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block" />
+      <path
+         transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+         id="path22128"
+         d="M 372.87905,411.27704 L 437.81346,411.27704"
+         style="color:#000000;fill:#69312f;fill-opacity:1;fill-rule:nonzero;stroke:#dd8a3d;stroke-width:109.23947906;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block" />
     </g>
   </g>
 </svg>

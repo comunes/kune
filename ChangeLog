@@ -1,3 +1,7 @@
+2007-09-24 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* new StackedDropDown (Abstraction of SocialNetworkPanel)
+	* BuddiesPanel based in StackedDropDownPanel
+
 2007-09-21 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* SocialNetwork new methods, tests and options
 	* Menu styles improved

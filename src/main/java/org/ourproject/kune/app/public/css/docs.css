@@ -1,147 +1,144 @@
 /* RTE Text editor */
-
 .kune-TexEditorPanel-TextArea {
-    margin: 3px;
+  margin: 3px;
 }
 
-.gwt-RichTextArea {
-    /* border: 1px solid #000;
+.gwt-RichTextArea { /* border: 1px solid #000;
     background-color: #FFF; */
-    border: 1px solid #4D4D4D;
-    background-color: #FFF;
-    margin: 5px 0px 5px 15px;
+  border: 1px solid #4D4D4D;
+  background-color: #FFF;
+  margin: 5px 0px 5px 15px;
 }
 
 .gwt-RichTextToolbar {
-    background-color: #F2F2F2;
-    padding: 5px;
-    height: 24px;
-    vertical-align: middle;
+  background-color: #F2F2F2;
+  padding: 5px;
+  height: 24px;
+  vertical-align: middle;
 }
 
 .gwt-RichTextToolbar table {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
 .gwt-RichTextToolbar .gwt-ToggleButton {
-    float: left;
-    margin-top: 2px;
+  float: left;
+  margin-top: 2px;
 }
 
-
 .gwt-RichTextToolbar .gwt-PushButton {
-    float: left;
-    margin-top: 2px;
+  float: left;
+  margin-top: 2px;
 }
 
 .gwt-RichTextToolbar .gwt-PushButton-up {
-    margin-right: 2px;
-    border: 1px solid #F2F2F2;
+  margin-right: 2px;
+  border: 1px solid #F2F2F2;
 }
 
 .gwt-RichTextToolbar .gwt-PushButton-up-hovering {
-    margin-right: 2px;
-    border: 1px solid #C3D9FF;
-    border-color: #E8F1FF #9daecd #9daecd #e8f1ff;
+  margin-right: 2px;
+  border: 1px solid #C3D9FF;
+  border-color: #E8F1FF #9daecd #9daecd #e8f1ff;
 }
 
 .gwt-RichTextToolbar .gwt-PushButton-down {
-    margin-right: 2px;
-    border: 1px solid #C3D9FF;
-    border-color: #9DAECD #e8f1ff #e8f1ff #9daecd;
+  margin-right: 2px;
+  border: 1px solid #C3D9FF;
+  border-color: #9DAECD #e8f1ff #e8f1ff #9daecd;
 }
 
 .gwt-RichTextToolbar .gwt-PushButton-down-hovering {
-    margin-right: 2px;
-    border: 1px solid #C3D9FF;
-    border-color: #9DAECD #e8f1ff #e8f1ff #9daecd;
+  margin-right: 2px;
+  border: 1px solid #C3D9FF;
+  border-color: #9DAECD #e8f1ff #e8f1ff #9daecd;
 }
 
 .gwt-RichTextToolbar .gwt-ToggleButton-up {
-    margin-right: 2px;
-    border: 1px solid #F2F2F2;
+  margin-right: 2px;
+  border: 1px solid #F2F2F2;
 }
 
 .gwt-RichTextToolbar .gwt-ToggleButton-up-hovering {
-    margin-right: 2px;
-    border: 1px solid #C3D9FF;
-    border-color: #E8F1FF #9daecd #9daecd #e8f1ff;
+  margin-right: 2px;
+  border: 1px solid #C3D9FF;
+  border-color: #E8F1FF #9daecd #9daecd #e8f1ff;
 }
 
 .gwt-RichTextToolbar .gwt-ToggleButton-down {
-    margin-right: 2px;
-    background-color: #E8F1FF;
-    border: 1px solid #C3D9FF;
-    border-color: #9DAECD #e8f1ff #e8f1ff #9daecd;
+  margin-right: 2px;
+  background-color: #E8F1FF;
+  border: 1px solid #C3D9FF;
+  border-color: #9DAECD #e8f1ff #e8f1ff #9daecd;
 }
 
 .gwt-RichTextToolbar .gwt-ToggleButton-down-hovering {
-    margin-right: 2px;
-    background-color: #E8F1FF;
-    border: 1px solid #C3D9FF;
-    border-color: #9DAECD #e8f1ff #e8f1ff #9daecd;
+  margin-right: 2px;
+  background-color: #E8F1FF;
+  border: 1px solid #C3D9FF;
+  border-color: #9DAECD #e8f1ff #e8f1ff #9daecd;
 }
 
 .gwt-RichTextToolbar .x-btn {
-    float: left;
+  float: left;
 }
 
 .gwt-RichTextToolbar .kune-Button-Large-lSpace {
-    float: left;
+  float: left;
 }
 
 .gwt-RichTextToolbar .kune-Button-Large-lrSpace {
-    float: left;
+  float: left;
 }
 
 .RichTextToolbar-menu {
-    float: left;
-    margin-top: 2px;
+  float: left;
+  margin-top: 2px;
 }
 
 .RichTextToolbar-menu table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    margin: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 0;
 }
 
 .RichTextToolbar-menu .gwt-MenuItem {
-    margin-right: 2px;
-    border: 1px solid #F2F2F2;
+  margin-right: 2px;
+  border: 1px solid #F2F2F2;
 }
 
 .RichTextToolbar-menu .gwt-MenuItem-selected {
-    margin-right: 2px;
-    background-color: #E8F1FF;
-    border: 1px solid #C3D9FF;
-    border-color: #9DAECD #e8f1ff #e8f1ff #9daecd;
+  margin-right: 2px;
+  background-color: #E8F1FF;
+  border: 1px solid #C3D9FF;
+  border-color: #9DAECD #e8f1ff #e8f1ff #9daecd;
 }
 
 .RichTextToolbar-submenu {
-    background-color: #FFFCD5;
-    border: 1px solid #D38D5F;
-    cursor: default;
+  background-color: #FFFCD5;
+  border: 1px solid #D38D5F;
+  cursor: default;
 }
 
 .RichTextToolbar-submenu .gwt-MenuItem {
-    cursor: default;
-    white-space: nowrap;
-    border: 1px solid #FFFCD5;
-    padding: 0 4px;
+  cursor: default;
+  white-space: nowrap;
+  border: 1px solid #FFFCD5;
+  padding: 0 4px;
 }
 
 .RichTextToolbar-submenu .gwt-MenuItem-selected {
-    background-color: #FFB958;
-    border: 1px solid #C83737;
+  background-color: #FFB958;
+  border: 1px solid #C83737;
 }
 
 .kune-WebSafePalette {
-    background-color: #FFF;
-    border: 1px solid #AAA;
-    margin: 1px solid red;
+  background-color: #FFF;
+  border: 1px solid #AAA;
+  margin: 1px solid red;
 }
 
 .kune-WebSafePalette td {
-    width: 12px;
-    height: 10px;
+  width: 12px;
+  height: 10px;
 }
