@@ -322,7 +322,8 @@
 }
 
 .kune-SocialNet .gwt-StackPanelItem {
-  border-bottom: 1px solid #CCCCCC;
+  border-top: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
   background-color: #EEFFAA;
   cursor: pointer;
   padding: 1px 3px 0 6px;
@@ -344,7 +345,8 @@
 
 .kune-SocialNetJoinLink,.kune-SocialNetAddMemberLink {
   background-color: #E6E6E6;
-  /* border-top: 1px solid #CCCCCC; */
+  border-top: 1px solid #CCC;
+  border-bottom: 1px solid #F2F2F2;
   white-space: nowrap;
 }
 
@@ -360,7 +362,7 @@
 .kune-GroupMemberLabel .gwt-MenuItem {
   white-space: nowrap;
   cursor: pointer;
-  border-bottom: 1px solid #CCC;
+  border-bottom: 1px solid #F2F2F2;
 }
 
 .kune-GroupMemberLabel table {

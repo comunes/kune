@@ -141,7 +141,7 @@ public class StackedDropDownPanel extends DropDownPanel {
     /* Stack subItems */
 
     public void addStackSubItem(final String parentItemName, final AbstractImagePrototype icon, final String name,
-	    final String title, final MemberAction[] memberActions) {
+	    final String title, final StackSubItemAction[] memberActions) {
 	StackSubItem stackSubItem = new StackSubItem(icon, name, title, memberActions);
 	int indexOfStackItem = indexInArray(parentItemName);
 	ScrollPanel sp = (ScrollPanel) stack.getWidget(indexOfStackItem);
@@ -160,6 +160,9 @@ public class StackedDropDownPanel extends DropDownPanel {
 
 	ScrollPanel sp = (ScrollPanel) stack.getWidget(indexOfStackItem);
 	((VerticalPanel) sp.getWidget()).remove(indexOfStackSubItem);
+	StackItem stackItem = (StackItem) stackList.get(indexOfStackItem);
+	stackItem.removeSubItem(name);
+	stack.setStackText(indexOfStackItem, stackItem.getHtml(), true);
 	headerCount--;
 	updateHeaderText();
     }
@@ -179,6 +182,14 @@ public class StackedDropDownPanel extends DropDownPanel {
 	bottomLinksIndex.add(text);
     }
 
+    public void cleanBottomLinks() {
+	Iterator iter = bottomLinksIndex.iterator();
+	while (iter.hasNext()) {
+	    bottomLinksVP.remove(0);
+	}
+	bottomLinksIndex.clear();
+    }
+
     public void removeBottomLink(final String text) {
 	bottomLinksVP.remove(indexOfLink(text));
     }
@@ -186,43 +197,6 @@ public class StackedDropDownPanel extends DropDownPanel {
     public void setDropDownContentVisible(final boolean visible) {
 	setContentVisible(visible);
     }
-
-    // public void addCategory(final String name, final List groupList, final
-    // AccessRightsDTO rights,
-    // final MemberAction[] adminActions, final MemberAction[] editorActions,
-    // final MemberAction[] viewerActions) {
-    //
-    // ScrollPanel categorySP = new ScrollPanel();
-    // VerticalPanel categoryVP = new VerticalPanel();
-    // categorySP.add(categoryVP);
-    // stack.add(categorySP, name);
-    // stackIndex.add(name);
-    // stackSubItems.put(name, new ArrayList());
-    //
-    // final Iterator iter = groupList.iterator();
-    // while (iter.hasNext()) {
-    // final GroupDTO group = (GroupDTO) iter.next();
-    // AbstractImagePrototype icon = setGroupIcon(group);
-    // StackSubItem groupMenu = new StackSubItem(icon, group.getShortName());
-    // if (rights.isAdministrable() && adminActions != null) {
-    // for (int i = 0; i < adminActions.length; i++) {
-    // groupMenu.addAction(adminActions[i], group);
-    // }
-    // }
-    // if (rights.isEditable() && editorActions != null) {
-    // for (int i = 0; i < editorActions.length; i++) {
-    // groupMenu.addAction(editorActions[i], group);
-    // }
-    // }
-    // if (rights.isVisible() && viewerActions != null) {
-    // for (int i = 0; i < viewerActions.length; i++) {
-    // groupMenu.addAction(viewerActions[i], group);
-    // }
-    // }
-    // categoryVP.add(groupMenu);
-    // ((ArrayList) stackSubItems.get(name)).add(group.getShortName());
-    // }
-    // }
 
     private int indexOfLink(final String text) {
 	return bottomLinksIndex.indexOf(text);
@@ -257,6 +231,10 @@ public class StackedDropDownPanel extends DropDownPanel {
 
 	public void addSubItem(final String name) {
 	    subItems.add(name);
+	}
+
+	public void removeSubItem(final String name) {
+	    subItems.remove(name);
 	}
 
 	public String getName() {
@@ -316,7 +294,7 @@ public class StackedDropDownPanel extends DropDownPanel {
 	private String name;
 
 	public StackSubItem(final AbstractImagePrototype icon, final String name, final String title,
-		final MemberAction[] memberActions) {
+		final StackSubItemAction[] memberActions) {
 	    super(false);
 	    this.icon = icon;
 	    this.name = name;
@@ -343,7 +321,7 @@ public class StackedDropDownPanel extends DropDownPanel {
 	    setMenu();
 	}
 
-	public void addAction(final MemberAction memberAction, final String param) {
+	public void addAction(final StackSubItemAction memberAction, final String param) {
 	    String itemHtml = "";
 	    AbstractImagePrototype icon = memberAction.getIcon();
 	    if (icon != null) {
@@ -367,4 +345,12 @@ public class StackedDropDownPanel extends DropDownPanel {
 	}
     }
 
+    public void clear() {
+	stackList.clear();
+	stack.clear();
+	bottomLinksIndex.clear();
+	bottomLinksVP.clear();
+	headerCount = 0;
+	updateHeaderText();
+    }
 }

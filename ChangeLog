@@ -1,3 +1,8 @@
+2007-09-25 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* new gwtext library (bug fixes)
+	* Added icons of presence to BuddiePresence
+	* SocialNetwork refactorization using StackedDropDownPanel
+
 2007-09-24 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* new StackedDropDown (Abstraction of SocialNetworkPanel)
 	* BuddiesPanel based in StackedDropDownPanel

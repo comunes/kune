@@ -171,7 +171,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     }
 
     public void setBuddiesPresence(final View view) {
-	AddDropDown(view, "87DECD");
+	AddDropDown(view, "CD87DE");
     }
 
     private void AddDropDown(final View view, final String color) {

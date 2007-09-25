@@ -1,24 +1,20 @@
 package org.ourproject.kune.workspace.client.socialnet;
 
-import java.util.List;
-
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
+import org.ourproject.kune.workspace.client.socialnet.ui.MemberAction;
 
 public interface SocialNetworkView extends View {
 
-    void setVisibleJoinLink(boolean visible);
-
-    void setVisibleAddMemberLink(boolean visible);
-
-    void addAdminsItems(int numAdmins, List adminsList, AccessRightsDTO rights);
-
-    void addCollabItems(int numCollaborators, List collabList, AccessRightsDTO rights);
-
-    void addPendingCollabsItems(int numPendingCollabs, List groupList, AccessRightsDTO rights);
-
-    void clearGroups();
+    void clear();
 
     void setDropDownContentVisible(boolean visible);
+
+    void addCategory(String name, String title);
+
+    void addCategoryMember(String categoryName, String name, String title, MemberAction[] memberActions);
+
+    void addJoinLink();
+
+    void addAddMemberLink();
 
 }

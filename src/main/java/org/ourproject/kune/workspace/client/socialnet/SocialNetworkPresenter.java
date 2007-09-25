@@ -1,7 +1,9 @@
 package org.ourproject.kune.workspace.client.socialnet;
 
+import java.util.Iterator;
 import java.util.List;
 
+import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
@@ -9,11 +11,16 @@ import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
+import org.ourproject.kune.workspace.client.socialnet.ui.MemberAction;
 import org.ourproject.kune.workspace.client.workspace.SocialNetworkComponent;
 
-public class SocialNetworkPresenter implements SocialNetworkComponent {
+public class SocialNetworkPresenter implements SocialNetworkComponent, AbstractPresenter {
 
     private SocialNetworkView view;
+
+    public void init(final SocialNetworkView view) {
+	this.view = view;
+    }
 
     public void setSocialNetwork(final SocialNetworkDTO socialNetwork, final AccessRightsDTO rights) {
 	final AccessListsDTO accessLists = socialNetwork.getAccessLists();
@@ -29,39 +36,43 @@ public class SocialNetworkPresenter implements SocialNetworkComponent {
 	boolean userIsAdmin = rights.isAdministrable();
 	boolean userIsCollab = rights.isEditable();
 	boolean userCanView = rights.isVisible();
-	view.setDropDownContentVisible(false);
-	view.clearGroups();
-
-	view.setVisibleAddMemberLink(userIsAdmin);
 	boolean isMember = isMember(userIsAdmin, userIsCollab);
-	view.setVisibleJoinLink(!isMember);
+
+	view.setDropDownContentVisible(false);
+	view.clear();
+
+	if (userIsAdmin) {
+	    view.addAddMemberLink();
+	}
+
+	if (!isMember) {
+	    view.addJoinLink();
+	}
 
 	if (userCanView) {
-	    if (numAdmins > 0) {
-		view.addAdminsItems(numAdmins, adminsList, rights);
-	    }
-	    if (numCollaborators > 0) {
-		view.addCollabItems(numCollaborators, collabList, rights);
-	    }
-	    if (isMember) {
-		if (numPendingCollabs > 0) {
-		    view.addPendingCollabsItems(numPendingCollabs, pendingCollabsList, rights);
-		}
+	    if (rights.isAdministrable()) {
+		MemberAction[] adminsActions = { new MemberAction("Remove this member", WorkspaceEvents.DEL_MEMBER),
+			new MemberAction("Change to collaborator", WorkspaceEvents.SET_ADMIN_AS_COLLAB),
+			gotoGroupCommand() };
+		MemberAction[] collabActions = { new MemberAction("Remove this member", WorkspaceEvents.DEL_MEMBER),
+			new MemberAction("Change to admin", WorkspaceEvents.SET_COLLAB_AS_ADMIN), gotoGroupCommand() };
+		MemberAction[] pendingsActions = {
+			new MemberAction("Accept this member", WorkspaceEvents.ACCEPT_JOIN_GROUP),
+			new MemberAction("Don't accept this member", WorkspaceEvents.DENY_JOIN_GROUP),
+			gotoGroupCommand() };
+		MemberAction[] viewerActions = { gotoGroupCommand() };
+		addMembers(adminsList, collabList, pendingCollabsList, numAdmins, numCollaborators, numPendingCollabs,
+			isMember, adminsActions, collabActions, pendingsActions, viewerActions);
+	    } else if (rights.isEditable() || rights.isVisible) {
+		MemberAction[] adminsActions = { gotoGroupCommand() };
+		MemberAction[] collabActions = { gotoGroupCommand() };
+		MemberAction[] pendingsActions = { gotoGroupCommand() };
+		MemberAction[] viewerActions = { gotoGroupCommand() };
+		addMembers(adminsList, collabList, pendingCollabsList, numAdmins, numCollaborators, numPendingCollabs,
+			isMember, adminsActions, collabActions, pendingsActions, viewerActions);
 	    }
 	}
 	view.setDropDownContentVisible(true);
-    }
-
-    private boolean isMember(final boolean userIsAdmin, final boolean userIsCollab) {
-	return userIsAdmin || userIsCollab;
-    }
-
-    public void init(final SocialNetworkView view) {
-	this.view = view;
-    }
-
-    public View getView() {
-	return view;
     }
 
     public void onJoin() {
@@ -77,16 +88,57 @@ public class SocialNetworkPresenter implements SocialNetworkComponent {
     }
 
     public void onAddViewer(final GroupDTO group) {
-
     }
 
     public void onAddMember() {
 	// TODO Auto-generated method stub
     }
 
-    public void doAction(final GroupDTO group, final String action) {
+    public void doAction(final String action, final String group) {
 	DefaultDispatcher.getInstance().fire(action, group, this);
+    }
 
+    public View getView() {
+	return view;
+    }
+
+    private void addMembers(final List adminsList, final List collabList, final List pendingCollabsList,
+	    final int numAdmins, final int numCollaborators, final int numPendingCollabs, final boolean isMember,
+	    final MemberAction[] adminsActions, final MemberAction[] collabActions,
+	    final MemberAction[] pendingsActions, final MemberAction[] viewerActions) {
+	if (numAdmins > 0) {
+	    // i18n
+	    view.addCategory("Admins", "People that can admin this group");
+	    iteraList("Admins", adminsList, adminsActions);
+	}
+	if (numCollaborators > 0) {
+	    view.addCategory("Collaborators", "Other people that collaborate with this group");
+	    iteraList("Collaborators", collabList, collabActions);
+	}
+	if (isMember) {
+	    if (numPendingCollabs > 0) {
+		view.addCategory("Pending", "People pending to be accepted in this group by the admins");
+		iteraList("Pending", pendingCollabsList, pendingsActions);
+
+	    }
+	}
+
+    }
+
+    private void iteraList(final String categoryName, final List groupList, final MemberAction[] actions) {
+	final Iterator iter = groupList.iterator();
+	while (iter.hasNext()) {
+	    final GroupDTO group = (GroupDTO) iter.next();
+	    view.addCategoryMember(categoryName, group.getShortName(), group.getLongName(), actions);
+	}
+    }
+
+    private MemberAction gotoGroupCommand() {
+	return new MemberAction("Visit this member homepage", WorkspaceEvents.GOTO_GROUP);
+    }
+
+    private boolean isMember(final boolean userIsAdmin, final boolean userIsCollab) {
+	return userIsAdmin || userIsCollab;
     }
 
 }

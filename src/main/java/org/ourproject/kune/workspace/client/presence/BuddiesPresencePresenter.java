@@ -9,7 +9,11 @@ public class BuddiesPresencePresenter implements BuddiesPresenceComponent, Abstr
     private BuddiesPresenceView view;
 
     public void setBuddiesPresence() {
-	view.setBuddiesPresence();
+	// TODO
+    }
+
+    public void addRoster(final String name, final String category, final int status) {
+
     }
 
     public View getView() {

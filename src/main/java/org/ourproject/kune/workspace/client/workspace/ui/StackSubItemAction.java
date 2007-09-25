@@ -5,17 +5,17 @@ import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
-public class MemberAction {
+public class StackSubItemAction {
     private final static Images img = Images.App.getInstance();
     // i18n
-    public final static MemberAction[] DEFAULT_VISIT_GROUP = { new MemberAction(img.groupHome(),
-	    "Visit this member homepage", WorkspaceEvents.GOTO_GROUP) };
+    public final static StackSubItemAction DEFAULT_VISIT_GROUP = new StackSubItemAction(img.groupHome(),
+	    "Visit this member homepage", WorkspaceEvents.GOTO_GROUP);
 
     private final AbstractImagePrototype icon;
     private final String text;
     private final String action;
 
-    public MemberAction(final AbstractImagePrototype icon, final String text, final String action) {
+    public StackSubItemAction(final AbstractImagePrototype icon, final String text, final String action) {
 	this.icon = icon;
 	this.text = text;
 	this.action = action;
