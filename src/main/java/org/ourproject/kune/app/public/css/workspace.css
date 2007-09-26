@@ -317,11 +317,11 @@
 }
 
 /* Social Network */
-.kune-SocialNet {
+.kune-StackedDropDownPanel {
 
 }
 
-.kune-SocialNet .gwt-StackPanelItem {
+.kune-StackedDropDownPanel .gwt-StackPanelItem {
   border-top: 1px solid #CCC;
   border-bottom: 1px solid #CCC;
   background-color: #EEFFAA;
@@ -330,46 +330,47 @@
   owerflow: hidden;
 }
 
-.kune-SocialNet .gwt-StackPanelItem img {
+.kune-StackedDropDownPanel .gwt-StackPanelItem img {
   margin: 0 0 0 3px;
   vertical-align: middle;
 }
 
-.kune-SocialNet table {
+.kune-StackedDropDownPanel table {
   width: 100%;
 }
 
-.kune-SocialNet .gwt-StackPanelItem-selected {
+.kune-StackedDropDownPanel .gwt-StackPanelItem-selected {
 
 }
 
-.kune-SocialNetJoinLink,.kune-SocialNetAddMemberLink {
+.kune-StackedDropDownPanelLink {
   background-color: #E6E6E6;
   border-top: 1px solid #CCC;
   border-bottom: 1px solid #F2F2F2;
   white-space: nowrap;
 }
 
-.kune-SocialNet .kune-DropDownInner {
+.kune-StackedDropDownPanel .kune-DropDownInner {
   padding: 0px;
 }
 
-/* Socialnet Members */
-.kune-GroupMemberLabel {
+/* StackedDropDownPanel Members */
+
+.kune-StackSubItemLabel {
   overflow: hidden;
 }
 
-.kune-GroupMemberLabel .gwt-MenuItem {
+.kune-StackSubItemLabel .gwt-MenuItem {
   white-space: nowrap;
   cursor: pointer;
   border-bottom: 1px solid #F2F2F2;
 }
 
-.kune-GroupMemberLabel table {
+.kune-StackSubItemLabel table {
   width: 100%;
 }
 
-.kune-GroupMemberLabel .gwt-MenuItem img {
+.kune-StackSubItemLabel .gwt-MenuItem img {
   vertical-align: middle;
   margin-top: 1px;
   margin-bottom: 1px;
@@ -377,11 +378,11 @@
   margin-right: 3px;
 }
 
-.kune-GroupMemberLabel .gwt-MenuItem-selected {
+.kune-StackSubItemLabel .gwt-MenuItem-selected {
   background-color: #FFE6D5;
 }
 
-.kune-GroupMemberCommands {
+.kune-StackSubItemActions {
   background-color: #F2F2F2;
   border: 1px solid #999;
   vertical-align: middle;
@@ -390,18 +391,18 @@
   margin-top: -2px;
 }
 
-.kune-GroupMemberCommands .gwt-MenuItem {
+.kune-StackSubItemActions .gwt-MenuItem {
   cursor: pointer;
   padding: 1px 10px;
   white-space: nowrap;
 }
 
-.kune-GroupMemberCommands .gwt-MenuItem img {
+.kune-StackSubItemActions .gwt-MenuItem img {
   vertical-align: middle;
   margin-right: 3px;
 }
 
-.kune-GroupMemberCommands .gwt-MenuItem-selected {
+.kune-StackSubItemActions .gwt-MenuItem-selected {
   background-color: #FFB958;
 }
 

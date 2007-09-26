@@ -46,6 +46,8 @@ public class AddRoomAction implements Action {
 	server.addRoom(services.user, group.getShortName(), container.getId(), name, new AsyncCallback() {
 	    public void onFailure(final Throwable caught) {
 		Site.hideProgress();
+		// i18n
+		Site.error("Error creating room");
 	    }
 
 	    public void onSuccess(final Object result) {

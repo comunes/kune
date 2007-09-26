@@ -57,9 +57,9 @@ public class StackedDropDownPanel extends DropDownPanel {
 	setContentVisible(true); // DropDown
 	setHeaderText(headerText);
 	setHeaderTitle(headerTitle);
-	addStyleName("kune-SocialNet");
+	addStyleName("kune-StackedDropDownPanel");
 	addStyleName("kune-Margin-Medium-t");
-	stack.setStyleName("kune-SocialNet");
+	stack.setStyleName("kune-StackedDropDownPanel");
     }
 
     /* Header */
@@ -171,7 +171,7 @@ public class StackedDropDownPanel extends DropDownPanel {
 	    final String action) {
 	IconHyperlink link = new IconHyperlink(icon, text, targetHistoryToken);
 	bottomLinksVP.add(link);
-	link.addStyleName("kune-SocialNetJoinLink");
+	link.addStyleName("kune-StackedDropDownPanelLink");
 	link.addClickListener(new ClickListener() {
 	    public void onClick(final Widget arg0) {
 		presenter.doAction(action, null);
@@ -304,8 +304,8 @@ public class StackedDropDownPanel extends DropDownPanel {
 	    addItem(label, true, actions);
 	    setAutoOpen(false);
 	    actions.setAutoOpen(true);
-	    setStyleName("kune-GroupMemberLabel");
-	    actions.setStyleName("kune-GroupMemberCommands");
+	    setStyleName("kune-StackSubItemLabel");
+	    actions.setStyleName("kune-StackSubItemActions");
 	    for (int i = 0; i < memberActions.length; i++) {
 		addAction(memberActions[i], name);
 	    }

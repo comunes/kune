@@ -20,7 +20,7 @@ public class JoinRoomAction implements Action {
 
     private void joinRoom(final Room room, final String userAlias) {
 	// i18n
-	room.addInfoMessage("connecting to the room...");
+	room.addInfoMessage("Connecting to the room...");
 	XmppRoom handler = provider.getChat().joinRoom(room.getName(), room.getSessionAlias());
 	handler.addMessageListener(new XmppMessageListener() {
 	    public void onMessageReceived(final XmppMessage message) {
