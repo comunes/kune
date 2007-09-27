@@ -18,7 +18,7 @@
  *
  */
 
-package org.ourproject.kune.platf.client.group;
+package org.ourproject.kune.platf.client.newgroup;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
@@ -26,8 +26,6 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.KuneService;
 import org.ourproject.kune.platf.client.rpc.KuneServiceAsync;
 import org.ourproject.kune.sitebar.client.Site;
-
-import to.tipit.gwtlib.FireLog;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -43,7 +41,7 @@ public class NewGroupFormPresenter implements NewGroupForm {
 	this.view = view;
     }
 
-    public void doCreateNewGroup() {
+    public void onFinish() {
 	KuneServiceAsync kuneService = KuneService.App.getInstance();
 	String shortName = view.getShortName();
 	String longName = view.getLongName();
@@ -61,14 +59,10 @@ public class NewGroupFormPresenter implements NewGroupForm {
 
 	    public void onSuccess(final Object arg0) {
 		listener.onNewGroupCreated((StateToken) arg0);
+		view.hide();
 		reset();
 	    }
 	});
-    }
-
-    public void doCancel() {
-	reset();
-	listener.onNewGroupCancel();
     }
 
     public View getView() {
@@ -77,18 +71,56 @@ public class NewGroupFormPresenter implements NewGroupForm {
 
     private int getTypeOfGroup() {
 	if (view.isProject()) {
-	    FireLog.debug("Proyecto");
 	    return GroupDTO.TYPE_PROJECT;
 	} else if (view.isOrganization()) {
-	    FireLog.debug("Org");
 	    return GroupDTO.TYPE_ORGANIZATION;
 	} else {
-	    FireLog.debug("Comm");
 	    return GroupDTO.TYPE_COMNUNITY;
 	}
     }
 
     private void reset() {
 	view.clearData();
+    }
+
+    public void onBack() {
+	view.setEnabledBackButton(false);
+	view.setEnabledFinishButton(false);
+	view.setEnabledNextButton(true);
+	view.showNewGroupInitialDataForm();
+
+    }
+
+    public void onCancel() {
+	reset();
+	view.hide();
+	listener.onNewGroupCancel();
+    }
+
+    public void onNext() {
+	view.setEnabledBackButton(true);
+	view.setEnabledFinishButton(true);
+	view.setEnabledNextButton(false);
+	view.showLicenseForm();
+    }
+
+    public void onCClicenseSelected() {
+	// TODO Auto-generated method stub
+
+    }
+
+    public void onNotCClicenseSelected() {
+	// TODO Auto-generated method stub
+
+    }
+
+    public void onNotCCselected() {
+	view.setCCoptionsVisible(false);
+	view.setNonCCoptionsVisible(true);
+    }
+
+    public void onCCselected() {
+	view.setCCoptionsVisible(true);
+	view.setNonCCoptionsVisible(false);
     }
 }

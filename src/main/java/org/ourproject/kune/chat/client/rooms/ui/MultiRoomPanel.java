@@ -29,6 +29,8 @@ import org.ourproject.kune.chat.client.rooms.RoomPresenter;
 import org.ourproject.kune.chat.client.rooms.RoomUserListView;
 import org.ourproject.kune.platf.client.View;
 
+import to.tipit.gwtlib.FireLog;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DeckPanel;
@@ -79,19 +81,13 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	final BorderLayout layout = dialog.getLayout();
 	layout.beginUpdate();
 
-	ContentPanel chatRoomPanel = (ContentPanel) room.getView();
-	// layout.add(LayoutRegionConfig.CENTER, chatRoomPanel);
-	layout.getRegion(LayoutRegionConfig.CENTER).add(chatRoomPanel);
+	ContentPanel roomPanel = (ContentPanel) room.getView();
+	layout.getRegion(LayoutRegionConfig.CENTER).add(roomPanel);
 
-	String panelId = chatRoomPanel.getId();
+	String panelId = roomPanel.getId();
 	panelIdToRoom.put(panelId, room);
-	GWT.log("tabs2: " + layout.getRegion(LayoutRegionConfig.CENTER).getTabs().getCount(), null);
+	layout.getRegion(LayoutRegionConfig.CENTER).showPanel(panelId);
 	layout.endUpdate();
-	layout.getRegion(LayoutRegionConfig.CENTER).getTabs().activate(1);
-	GWT.log("tab id: " + layout.getRegion(LayoutRegionConfig.CENTER).getTabs().getTab(0).toString(), null);
-	chatRoomPanel.refresh();
-	chatRoomPanel.setVisible(true);
-
     }
 
     public void show() {
@@ -167,6 +163,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
 		setCloseOnTab(true);
 		setAlwaysShowTabs(true);
 		setMargins(5, 5, 5, 5);
+		setHideWhenEmpty(true);
 	    }
 	};
 
@@ -189,6 +186,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
 		setProxyDrag(true);
 		// i18n
 		setTitle("Chat rooms");
+		setCollapsible(true);
 	    }
 	}, north, south, null, east, center);
 
@@ -225,7 +223,6 @@ public class MultiRoomPanel implements MultiRoomView, View {
 
     private void createListeners() {
 	dialog.addDialogListener(new DialogListener() {
-
 	    public boolean doBeforeHide(final LayoutDialog dialog) {
 		if (centralLayout.getNumPanels() > 0) {
 		    if (presenter.isCloseAllConfirmed()) {
@@ -262,10 +259,10 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	    }
 
 	    public void onResize(final LayoutDialog dialog, final int width, final int height) {
-		if (height == 26) {
-		    // There is no a minimize event, then when resize has this
-		    // height, is equivalent to a minimize, and we put the
-		    // dialog in the bottom of the screen
+		if (height < 40) {
+		    // There is no a minimize event, then when resize has less
+		    // than this height, is equivalent to a minimize, and we put
+		    // the dialog in the bottom of the screen
 		    dialog.moveTo(dialog.getAbsoluteLeft(), Window.getClientHeight() - height - 1);
 		}
 	    }
@@ -273,6 +270,15 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	    public void onShow(final LayoutDialog dialog) {
 	    }
 	});
+
+	// Dont work:
+	// dialog.getEl().addListener("collapse", new Function() {
+	// public void execute() {
+	// FireLog.debug("Collapse event");
+	// dialog.moveTo(dialog.getAbsoluteLeft(), Window.getClientHeight() -
+	// dialog.getOffsetHeight() - 1);
+	// }
+	// });
 
 	centralLayout = dialog.getLayout().getRegion(LayoutRegionConfig.CENTER);
 
@@ -288,6 +294,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
 				public void execute(final String btnID) {
 				    if (btnID.equals("yes")) {
 					presenter.closeRoom(roomPresenter);
+					panel.removeFromParent();
 					panel.destroy();
 					// region.getActivePanel().destroy();
 					region.getTabs().getActiveTab().removeFromParent();
@@ -301,6 +308,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	    }
 
 	    public void onCollapsed(final LayoutRegion region) {
+		FireLog.debug("Collapse event");
 	    }
 
 	    public void onExpanded(final LayoutRegion region) {
@@ -310,6 +318,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	    }
 
 	    public void onPanelActivated(final LayoutRegion region, final ContentPanel panel) {
+		FireLog.debug("Panel activated");
 		RoomPresenter roomPresenter = (RoomPresenter) panelIdToRoom.get(panel.getId());
 		presenter.activateRoom(roomPresenter);
 	    }

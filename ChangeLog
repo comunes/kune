@@ -1,3 +1,13 @@
+2007-09-27 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* New wizard panel
+	* New forms for group creation
+	* Chat tool improved
+
+2007-09-26 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* Fixed RoomPanel scroll and resize problems
+	* Fixed addRoom activation
+	* Workaround to use the same alias in a room (new fix)
+
 2007-09-25 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* new gwtext library (bug fixes)
 	* Added icons of presence to BuddiePresence

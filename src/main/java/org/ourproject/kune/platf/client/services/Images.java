@@ -428,11 +428,6 @@ public interface Images extends ImageBundle {
     AbstractImagePrototype fullscreen();
 
     /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/gnu-fdl.gif
-     */
-    AbstractImagePrototype gnuFdl();
-
-    /**
      * @gwt.resource org/ourproject/kune/platf/public/images/group-def-icon.png
      */
     AbstractImagePrototype groupDefIcon();

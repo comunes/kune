@@ -23,9 +23,9 @@ package org.ourproject.kune.platf.client.license;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
-import org.ourproject.kune.platf.client.services.Kune;
-import org.ourproject.kune.platf.client.services.Translate;
 import org.ourproject.kune.platf.client.ui.HorizontalLine;
+import org.ourproject.kune.sitebar.client.bar.SiteBarTrans;
+import org.ourproject.kune.sitebar.client.services.Translate;
 
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
@@ -68,7 +68,7 @@ public class LicenseChooseFormPanel extends Composite implements LicenseChooseFo
 	generalVP.addStyleName("kune-Default-Form");
 
 	VerticalPanel licenseTypesVP = new VerticalPanel();
-	t = Kune.getInstance().t;
+	t = SiteBarTrans.getInstance().t;
 	ccRB = new RadioButton("ccOrNot", t.CreativeCommons());
 	RadioButton notCcRB = new RadioButton("ccOrNot", t.OtherLicenses());
 	options = new DeckPanel();

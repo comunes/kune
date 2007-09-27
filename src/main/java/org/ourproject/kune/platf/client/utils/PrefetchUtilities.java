@@ -36,6 +36,7 @@ public class PrefetchUtilities {
 	Image.prefetch("images/lic/byncnd80x15.png");
 	Image.prefetch("images/lic/bync80x15.png");
 	Image.prefetch("images/lic/by80x15.png");
+	Image.prefetch("images/lic/fal-license.gif");
 
 	// gwt-ext dialog images
 	Image.prefetch("js/ext/resources/images/aero/basic-dialog/bg-center.gif");

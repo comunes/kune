@@ -18,25 +18,16 @@
  *
  */
 
-package org.ourproject.kune.platf.client.group;
+package org.ourproject.kune.workspace.client.ui.form;
 
-import org.ourproject.kune.platf.client.View;
+public interface WizardListener {
 
-public interface NewGroupFormView extends View {
-    void clearData();
+    void onBack();
 
-    void setLicense(String longName);
+    void onNext();
 
-    String getPublicDesc();
+    void onFinish();
 
-    String getLongName();
-
-    String getShortName();
-
-    boolean isProject();
-
-    boolean isOrganization();
-
-    boolean isCommunity();
+    void onCancel();
 
 }

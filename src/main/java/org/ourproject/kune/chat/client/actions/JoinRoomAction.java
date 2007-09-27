@@ -24,7 +24,10 @@ public class JoinRoomAction implements Action {
 	XmppRoom handler = provider.getChat().joinRoom(room.getName(), room.getSessionAlias());
 	handler.addMessageListener(new XmppMessageListener() {
 	    public void onMessageReceived(final XmppMessage message) {
-		room.addMessage(userAlias, message.getBody());
+		String fromPrefix = room.getName() + "@" + provider.getChat().getState().roomHost.toString() + "/";
+		String fromAbrev = message.getFrom();
+		fromAbrev = fromAbrev.replaceAll(fromPrefix, "");
+		room.addMessage(fromAbrev, message.getBody());
 	    }
 
 	    public void onMessageSent(final XmppMessage message) {
@@ -33,16 +36,20 @@ public class JoinRoomAction implements Action {
 	handler.addRoomPresenceListener(new RoomPresenceListener() {
 	    public void onUserEntered(final String alias, final String status) {
 		room.addUser(alias, RoomUser.MODERADOR);
+		// i18n
+		room.addInfoMessage(alias + " came online");
 	    }
 
 	    public void onUserLeft(final String alias) {
 		room.removeUser(alias);
+		// i18n
+		room.addInfoMessage(alias + " went offline");
 	    }
 	});
 	room.setHandler(handler);
 
 	// i18n
-	room.addInfoMessage("you have entered the room!");
+	room.addInfoMessage("You have entered the room!");
     }
 
     public void execute(final Object value, final Object extra, final Services services) {

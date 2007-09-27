@@ -33,7 +33,7 @@ MIND-TERM:
 --> vjrj
 <vjrj> layout problems (specially resizing) with old Mozilla (wait gwt 1.4)
 <vjrj> RTE right to left writing
-<vjrj> Change to GPLv3 http://www.gnu.org/licenses/rms-why-gplv3.html
+<vjrj> Restarting server don't affect client session
 
 LONG-TERM:
 --------------------------------------------------------------------------------

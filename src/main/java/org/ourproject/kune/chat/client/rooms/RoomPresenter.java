@@ -78,7 +78,9 @@ public class RoomPresenter implements Room {
     public void addMessage(final String userAlias, final String message) {
 	RoomUser user = (RoomUser) users.get(userAlias);
 	if (user == null) {
-	    throw new RuntimeException("Trying to send a chat message with a user not in this room");
+	    String error = "Trying to send a chat message with a user not in this room";
+	    view.showInfoMessage(error);
+	    throw new RuntimeException(message);
 	}
 	view.showMessage(user.getAlias(), user.getColor(), message);
 	listener.onMessageReceived(this);

@@ -25,7 +25,7 @@ import java.util.List;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 /**
- * RESPONSABILITIES: - Mantains the user's application state - Gererates
+ * RESPONSABILITIES: - Mantains the user's application state - Generates
  * URLable's historyTokens
  * 
  * @author danigb

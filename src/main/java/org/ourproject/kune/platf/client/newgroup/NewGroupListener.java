@@ -18,14 +18,12 @@
  *
  */
 
-package org.ourproject.kune.platf.client.group;
+package org.ourproject.kune.platf.client.newgroup;
 
-import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.StateToken;
 
-public interface NewGroupForm {
-    public View getView();
+public interface NewGroupListener {
+    void onNewGroupCancel();
 
-    public void doCancel();
-
-    public void doCreateNewGroup();
+    void onNewGroupCreated(StateToken homePage);
 }

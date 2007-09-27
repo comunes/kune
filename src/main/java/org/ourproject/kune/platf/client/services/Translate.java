@@ -104,49 +104,7 @@ public interface Translate extends Constants {
 
     String Close();
 
-    String CCAllowComercial();
-
-    String CCAllowModifications();
-
-    String CCShareAlike();
-
-    String MoreInfo();
-
-    String SelectLicense();
-
-    String SelectThisLicense();
-
-    String Yes();
-
-    String No();
-
-    String ChooseLicense();
-
-    String OtherLicenses();
-
-    String CreativeCommons();
-
-    String CCExplainMessage();
-
-    String theseContentsUnderLicense();
-
     String Send();
-
-    String ShortName();
-
-    String LongName();
-
-    String PublicDescription();
-
-    String DefaultLicense();
-
-    String TypeOfGroup();
-
-    String Organization();
-
-    String Community();
-
-    String Project();
 
     String Create();
 

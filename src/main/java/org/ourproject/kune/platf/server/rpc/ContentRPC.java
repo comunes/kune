@@ -129,7 +129,10 @@ public class ContentRPC implements ContentService, RPC {
 	Access access = accessManager.getFolderAccess(parentFolderId, group, AccessType.EDIT);
 	final Container container = creationService.createFolder(group, parentFolderId, title);
 	final String toolName = container.getToolName();
-	final StateToken token = new StateToken(group.getShortName(), toolName, container.getId().toString(), null);
+	// Trying not to enter in new folder:
+	// final StateToken token = new StateToken(group.getShortName(),
+	// toolName, container.getId().toString(), null);
+	final StateToken token = new StateToken(group.getShortName(), toolName, parentFolderId.toString(), null);
 	access = accessManager.getAccess(token, group, group, AccessType.READ);
 	final State state = stateService.create(access);
 	return mapper.map(state, StateDTO.class);

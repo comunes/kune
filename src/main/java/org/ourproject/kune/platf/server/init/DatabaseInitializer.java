@@ -77,17 +77,22 @@ public class DatabaseInitializer {
     }
 
     private void createLicenses() {
+	// FIXME: add version to name
 	License license = new License("by", "Creative Commons Attribution", "None",
-		"http://creativecommons.org/licenses/by/3.0/", true, false, false, "FIXME: Here CC RDF", "images/lic/by80x15.png");
+		"http://creativecommons.org/licenses/by/3.0/", true, false, false, "FIXME: Here CC RDF",
+		"images/lic/by80x15.png");
 	licenseManager.persist(license);
 	license = new License("by-sa", "Creative Commons Attribution-ShareAlike", "None",
-		"http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "FIXME: Here CC RDF", "images/lic/bysa80x15.png");
+		"http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "FIXME: Here CC RDF",
+		"images/lic/bysa80x15.png");
 	licenseManager.persist(license);
 	license = new License("by-nd", "Creative Commons Attribution-NoDerivs", "None",
-		"http://creativecommons.org/licenses/by-nd/3.0/", true, false, false, "FIXME: Here CC RDF", "images/lic/bynd80x15.png");
+		"http://creativecommons.org/licenses/by-nd/3.0/", true, false, false, "FIXME: Here CC RDF",
+		"images/lic/bynd80x15.png");
 	licenseManager.persist(license);
 	license = new License("by-nc", "Creative Commons Attribution-NonCommercial", "None",
-		"http://creativecommons.org/licenses/by-nc/3.0/", true, false, false, "FIXME: Here CC RDF", "images/lic/bync80x15.png");
+		"http://creativecommons.org/licenses/by-nc/3.0/", true, false, false, "FIXME: Here CC RDF",
+		"images/lic/bync80x15.png");
 	licenseManager.persist(license);
 	license = new License("by-nc-sa", "Creative Commons Attribution-NonCommercial-ShareAlike", "None",
 		"http://creativecommons.org/licenses/by-nc-sa/3.0/", true, false, false, "FIXME: Here CC RDF",
@@ -99,6 +104,8 @@ public class DatabaseInitializer {
 	licenseManager.persist(license);
 	license = new License("gfdl", "GNU Free Documentation License", "None", "http://www.gnu.org/copyleft/fdl.html",
 		false, true, false, "", "images/lic/gnu-fdl.gif");
+	license = new License("fal", "Free Art License", "None", "http://artlibre.org/licence/lal/en/", false, true,
+		false, "", "images/lic/fal-license.gif");
 	licenseManager.persist(license);
     }
 

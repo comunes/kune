@@ -24,16 +24,15 @@ import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.group.NewGroupForm;
+import org.ourproject.kune.platf.client.newgroup.NewGroupForm;
+import org.ourproject.kune.platf.client.newgroup.ui.NewGroupFormPanel;
 import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
-import org.ourproject.kune.platf.client.ui.dialogs.TwoButtonsDialog;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
 import org.ourproject.kune.sitebar.client.login.LoginForm;
 import org.ourproject.kune.sitebar.client.login.LoginFormPanel;
 import org.ourproject.kune.sitebar.client.services.Images;
 import org.ourproject.kune.sitebar.client.services.Translate;
-import org.ourproject.kune.workspace.client.ui.form.FormListener;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Window;
@@ -73,12 +72,12 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 
     private final Hyperlink logoutHyperlink;
     private LoginFormPanel loginPanel;
-    private TwoButtonsDialog newGroupDialog;
     private final Images img;
     private final MenuBar optionsSubmenu;
     private MenuItem linkHelpInTrans;
     private MenuItem linkHelp;
     private final MenuBar yourGroupsSubmenu;
+    private NewGroupFormPanel newGroupPanel;
 
     public SiteBarPanel(final SiteBarPresenter initPresenter) {
 	t = SiteBarTrans.getInstance().t;
@@ -240,26 +239,13 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 
     public void showNewGroupDialog() {
 	final NewGroupForm newGroupForm = SiteBarFactory.createNewGroup(presenter);
-	newGroupDialog = new TwoButtonsDialog(t.RegisterANewGroup(), t.Register(), t.Cancel(), true, false, 500, 365,
-		new FormListener() {
-		    public void onAccept() {
-			newGroupForm.doCreateNewGroup();
-			newGroupDialog.hide();
-		    }
-
-		    public void onCancel() {
-			newGroupForm.doCancel();
-			newGroupDialog.hide();
-		    }
-		});
-	newGroupDialog.add((Widget) newGroupForm.getView());
-	newGroupDialog.hide();
-	newGroupDialog.center();
+	newGroupPanel = (NewGroupFormPanel) newGroupForm.getView();
+	newGroupPanel.show();
 	Site.hideProgress();
     }
 
     public void hideNewGroupDialog() {
-	newGroupDialog.hide();
+	newGroupPanel.hide();
     }
 
     public void setLogoutLinkVisible(final boolean visible) {

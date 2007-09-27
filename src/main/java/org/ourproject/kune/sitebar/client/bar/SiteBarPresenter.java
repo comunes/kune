@@ -23,7 +23,7 @@ package org.ourproject.kune.sitebar.client.bar;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
-import org.ourproject.kune.platf.client.group.NewGroupListener;
+import org.ourproject.kune.platf.client.newgroup.NewGroupListener;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.login.LoginListener;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
@@ -60,7 +60,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 	    Site.hideProgress();
 	} else {
 	    // i18n
-	    Site.info("You must be logged to create group");
+	    Site.info("You must be logged to create a group");
 	}
     }
 
