@@ -20,26 +20,23 @@
 
 package org.ourproject.kune.platf.client.newgroup.ui;
 
-import java.util.Iterator;
-import java.util.List;
-
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
+import org.ourproject.kune.platf.client.license.LicenseChooseForm;
+import org.ourproject.kune.platf.client.license.LicenseChooseFormPanel;
 import org.ourproject.kune.platf.client.newgroup.NewGroupFormPresenter;
 import org.ourproject.kune.platf.client.newgroup.NewGroupFormView;
 import org.ourproject.kune.platf.client.ui.dialogs.WizardDialog;
+import org.ourproject.kune.sitebar.client.SiteBarFactory;
 import org.ourproject.kune.sitebar.client.bar.SiteBarTrans;
 import org.ourproject.kune.sitebar.client.services.Translate;
 import org.ourproject.kune.workspace.client.ui.form.WizardListener;
 
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.DeckPanel;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.gwtext.client.data.SimpleStore;
-import com.gwtext.client.data.Store;
-import com.gwtext.client.widgets.form.Checkbox;
+import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.form.CheckboxConfig;
-import com.gwtext.client.widgets.form.ComboBox;
-import com.gwtext.client.widgets.form.ComboBoxConfig;
 import com.gwtext.client.widgets.form.FieldSetConfig;
 import com.gwtext.client.widgets.form.Form;
 import com.gwtext.client.widgets.form.FormConfig;
@@ -48,19 +45,14 @@ import com.gwtext.client.widgets.form.TextArea;
 import com.gwtext.client.widgets.form.TextAreaConfig;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.form.TextFieldConfig;
-import com.gwtext.client.widgets.form.event.CheckboxListener;
 
 public class NewGroupFormPanel extends WizardDialog implements NewGroupFormView {
     private static final Translate t = SiteBarTrans.getInstance().t;
-    private static final String CC_ALLOW_MODIF_FIELDST = "cc-allow-modif";
-    private static final String CC_COMERCIAL_FIELDSET = "cc-comercial";
+
     private static final String SHORTNAME_FIELD = "short_name";
     private static final String LONGNAME_FIELD = "long_name";
     private static final String PUBLICDESC_FIELD = "public_desc";
     private static final String TYPEOFGROUP_FIELD = "type_of_group";
-    private static final String TYPE_OF_LIC_FIELD = "type_of_lic";
-    private static final String TYPE_CC_COMER_FIELD = "type_cc_comer";
-    private static final String TYPE_ALLOW_M_FIELD = "type_allow_m";
     private final Form newGroupInitialDataForm;
     private Radio projectRadio;
     private Radio orgRadio;
@@ -69,53 +61,53 @@ public class NewGroupFormPanel extends WizardDialog implements NewGroupFormView 
     private TextField shortNameField;
     private TextField longNameField;
     private TextArea publicDescField;
-    private final Form chooseLicenseForm;
     private final DeckPanel deck;
-    private Checkbox ccLicenses;
-    private Checkbox otherLicenses;
-    private ComboBox nonCCoptionsCombo;
-    private final NewGroupFormPresenter presenter;
-    private final List licensesNonCC;
-    private Radio ccComercial;
-    private Radio ccNonComercial;
-    private Radio ccAllowModif;
-    private Radio ccNoAllowModif;
-    private Radio ccAllowModifShareAlike;
+    private LicenseChooseForm licenseChooseForm;
 
-    public NewGroupFormPanel(final NewGroupFormPresenter presenterOrig, final List licensesNonCC) {
-	super(t.NewGroup(), true, false, 470, 330, new WizardListener() {
+    public NewGroupFormPanel(final NewGroupFormPresenter presenter) {
+	// i18n
+	super("Register a new Group", true, false, 470, 440, new WizardListener() {
 	    public void onBack() {
-		presenterOrig.onBack();
+		presenter.onBack();
 	    }
 
 	    public void onCancel() {
-		presenterOrig.onCancel();
+		presenter.onCancel();
 	    }
 
 	    public void onFinish() {
-		presenterOrig.onFinish();
+		presenter.onFinish();
 	    }
 
 	    public void onNext() {
-		presenterOrig.onNext();
+		presenter.onNext();
 	    }
 	});
-	this.presenter = presenterOrig;
-	this.licensesNonCC = licensesNonCC;
 	deck = new DeckPanel();
 	newGroupInitialDataForm = createNewGroupInitialDataForm();
-	chooseLicenseForm = createChooseLicenseForm();
+	createChooseLicensePanel();
 	VerticalPanel newGroupInitialDataVP = new VerticalPanel();
 	VerticalPanel chooseLicenseVP = new VerticalPanel();
+	// i18n
+	newGroupInitialDataVP
+		.add(new Label("Please fill this form and follow the next steps to register a new group:"));
+	chooseLicenseVP.add(new HTML("Select a license to share your group contents with other people. "
+		+ "We recomend <a href='http://en.wikipedia.org/copyleft'>copyleft</a> licenses for practical works."));
+	Label liceseTypeLabel = new Label("Choose a license type:");
+	chooseLicenseVP.add(liceseTypeLabel);
 	newGroupInitialDataVP.add(newGroupInitialDataForm);
-	chooseLicenseVP.add(chooseLicenseForm);
+	chooseLicenseVP.add((Widget) licenseChooseForm.getView());
 	deck.add(newGroupInitialDataVP);
 	deck.add(chooseLicenseVP);
 	super.add(deck);
 	deck.showWidget(0);
 	initBottomButtons();
-	newGroupInitialDataVP.addStyleName("kune-Default-Form");
-	chooseLicenseVP.addStyleName("kune-Default-Form");
+	// newGroupInitialDataVP.addStyleName("kune-Default-Form");
+	deck.addStyleName("kune-Default-Form");
+	liceseTypeLabel.addStyleName("kune-License-CC-Header");
+	newGroupInitialDataVP.setHeight("360");
+	chooseLicenseVP.setHeight("360");
+	super.setFinishText(t.Register());
     }
 
     private void initBottomButtons() {
@@ -125,7 +117,7 @@ public class NewGroupFormPanel extends WizardDialog implements NewGroupFormView 
 
     public void clearData() {
 	newGroupInitialDataForm.reset();
-	chooseLicenseForm.reset();
+	((LicenseChooseFormPanel) licenseChooseForm.getView()).reset();
 	showNewGroupInitialDataForm();
 	initBottomButtons();
     }
@@ -214,8 +206,7 @@ public class NewGroupFormPanel extends WizardDialog implements NewGroupFormView 
 	    {
 		setLegend(t.TypeOfGroup());
 		setHideLabels(true);
-		// setStyle("margin-left: 105px");
-
+		setStyle("margin-left: 105px");
 	    }
 	});
 
@@ -254,188 +245,12 @@ public class NewGroupFormPanel extends WizardDialog implements NewGroupFormView 
 	return form;
     }
 
-    private Form createChooseLicenseForm() {
-
-	Form form = new Form(new FormConfig() {
-	    {
-
-		setLabelWidth(100);
-		setLabelAlign("right");
-		setButtonAlign("left");
-	    }
-	});
-
-	form.fieldset(new FieldSetConfig() {
-	    {
-		// i18n: type of license
-		setLegend("Type of License");
-		setHideLabels(true);
-	    }
-	});
-
-	ccLicenses = new Radio(new CheckboxConfig() {
-	    {
-		setName(TYPE_OF_LIC_FIELD);
-		setBoxLabel(t.CreativeCommons());
-		setAutoCreate(true);
-		setChecked(true);
-	    }
-	});
-	form.add(ccLicenses);
-
-	otherLicenses = new Radio(new CheckboxConfig() {
-	    {
-		setName(TYPE_OF_LIC_FIELD);
-		setBoxLabel(t.OtherLicenses());
-		setAutoCreate(true);
-	    }
-	});
-	form.add(otherLicenses);
-
-	form.fieldset(new FieldSetConfig() {
-	    {
-		setLegend(t.Options());
-	    }
-	});
-
-	/* CC options */
-
-	form.fieldset(new FieldSetConfig() {
-	    {
-		setId(CC_COMERCIAL_FIELDSET);
-		setLegend(t.CCAllowComercial());
-		setHideLabels(true);
-	    }
-	});
-
-	ccComercial = new Radio(new CheckboxConfig() {
-	    {
-		setName(TYPE_CC_COMER_FIELD);
-		setBoxLabel(t.Yes());
-		setAutoCreate(true);
-		setChecked(true);
-	    }
-	});
-	form.add(ccComercial);
-
-	ccNonComercial = new Radio(new CheckboxConfig() {
-	    {
-		setName(TYPE_CC_COMER_FIELD);
-		setBoxLabel(t.No());
-		setAutoCreate(true);
-	    }
-	});
-	form.add(ccNonComercial);
-	form.end();
-
-	form.fieldset(new FieldSetConfig() {
-	    {
-		setId(CC_ALLOW_MODIF_FIELDST);
-		setLegend(t.CCAllowModifications());
-		setHideLabels(true);
-	    }
-	});
-
-	ccAllowModif = new Radio(new CheckboxConfig() {
-	    {
-		setName(TYPE_ALLOW_M_FIELD);
-		setBoxLabel(t.Yes());
-		setAutoCreate(true);
-	    }
-	});
-	form.add(ccAllowModif);
-
-	ccAllowModifShareAlike = new Radio(new CheckboxConfig() {
-	    {
-		setName(TYPE_ALLOW_M_FIELD);
-		setBoxLabel(t.CCShareAlike());
-		setAutoCreate(true);
-		setChecked(true);
-	    }
-	});
-	form.add(ccAllowModifShareAlike);
-
-	ccNoAllowModif = new Radio(new CheckboxConfig() {
-	    {
-		setName(TYPE_ALLOW_M_FIELD);
-		setBoxLabel(t.No());
-		setAutoCreate(true);
-	    }
-	});
-	form.add(ccNoAllowModif);
-	form.end();
-
-	/* Non CC options */
-
-	final Store store = new SimpleStore(new String[] { "abbr", "licenses" }, getNonCCLicenses());
-
-	nonCCoptionsCombo = new ComboBox(new ComboBoxConfig() {
-	    {
-		setMinChars(1);
-		// i18n
-		setFieldLabel("Choose a license");
-		setStore(store);
-		setDisplayField("licenses");
-		setMode("local");
-		setTriggerAction("all");
-		setEmptyText("Choose a license");
-		setLoadingText("Searching...");
-		setTypeAhead(true);
-		setSelectOnFocus(true);
-		setWidth(220);
-		setForceSelection(true);
-	    }
-	});
-	form.add(nonCCoptionsCombo);
-
-	form.end();
-
-	form.end();
-
-	ccLicenses.addCheckboxListener(new CheckboxListener() {
-	    public void onCheck(final Checkbox field, final boolean checked) {
-		presenter.onCCselected();
-	    }
-	});
-
-	otherLicenses.addCheckboxListener(new CheckboxListener() {
-	    public void onCheck(final Checkbox field, final boolean checked) {
-		presenter.onNotCCselected();
-	    }
-	});
-
-	form.render();
-
-	form.end();
-
-	return form;
-    }
-
-    private Object[][] getNonCCLicenses() {
-	Object[][] result = new Object[licensesNonCC.size()][2];
-	final Iterator iter = licensesNonCC.iterator();
-	int i = 0;
-	while (iter.hasNext()) {
-	    final LicenseDTO license = (LicenseDTO) iter.next();
-	    result[i][0] = license.getShortName();
-	    result[i][1] = license.getLongName();
-	    i++;
-	}
-	return result;
-    }
-
-    public void setCCoptionsVisible(final boolean visible) {
-	DOM
-		.setStyleAttribute(DOM.getElementById(CC_COMERCIAL_FIELDSET), "visibility", (visible ? "visible"
-			: "hidden"));
-	DOM.setStyleAttribute(DOM.getElementById(CC_ALLOW_MODIF_FIELDST), "visibility",
-		(visible ? "visible" : "hidden"));
+    private void createChooseLicensePanel() {
+	licenseChooseForm = SiteBarFactory.createLicenseChoose();
 
     }
 
-    public void setNonCCoptionsVisible(final boolean visible) {
-
-	// nonCCoptionsCombo.setVisible(visible);
-
+    public LicenseDTO getLicense() {
+	return licenseChooseForm.getLicense();
     }
 }

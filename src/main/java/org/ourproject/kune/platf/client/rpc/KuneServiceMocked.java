@@ -30,8 +30,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class KuneServiceMocked extends MockedService implements KuneServiceAsync {
     public void getDefaultGroup(final String userHash, final AsyncCallback callback) {
-	final GroupDTO group = new GroupDTO("kune", "Kune dev", "This is the default group", null,
-		GroupDTO.TYPE_ORGANIZATION);
+	final GroupDTO group = new GroupDTO("kune", "Kune dev", "This is the default group", GroupDTO.TYPE_ORGANIZATION);
 	answer(group, callback);
     }
 

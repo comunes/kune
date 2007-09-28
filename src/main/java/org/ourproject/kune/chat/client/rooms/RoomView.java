@@ -29,4 +29,6 @@ public interface RoomView extends View {
     void showInfoMessage(String message);
 
     void showDelimiter(String datetime);
+
+    void scrollDown();
 }

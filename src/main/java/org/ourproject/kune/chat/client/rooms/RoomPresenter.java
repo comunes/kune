@@ -176,4 +176,8 @@ public class RoomPresenter implements Room {
 	return closeConfirmed;
     }
 
+    public void activate() {
+	view.scrollDown();
+    }
+
 }

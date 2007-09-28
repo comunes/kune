@@ -60,4 +60,6 @@ public interface Room {
 
     void removeUser(String alias);
 
+    void activate();
+
 }

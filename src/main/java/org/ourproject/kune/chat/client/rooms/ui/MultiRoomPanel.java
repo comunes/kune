@@ -264,6 +264,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
 		    // than this height, is equivalent to a minimize, and we put
 		    // the dialog in the bottom of the screen
 		    dialog.moveTo(dialog.getAbsoluteLeft(), Window.getClientHeight() - height - 1);
+		    dialog.collapse();
 		}
 	    }
 
@@ -349,7 +350,11 @@ public class MultiRoomPanel implements MultiRoomView, View {
 
     private ContentPanel createUsersPanel() {
 	// i18n
-	ContentPanel eastPanel = new ContentPanel(Ext.generateId(), "Users");
+	ContentPanel eastPanel = new ContentPanel(Ext.generateId(), "Users", new ContentPanelConfig() {
+	    {
+		setAutoScroll(true);
+	    }
+	});
 	usersDeckPanel = new DeckPanel();
 	usersDeckPanel.addStyleName("kune-MultiRoomPanel-User");
 	eastPanel.add(usersDeckPanel);

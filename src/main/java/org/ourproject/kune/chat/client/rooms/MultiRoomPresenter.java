@@ -72,6 +72,7 @@ public class MultiRoomPresenter implements MultiRoom, RoomListener {
 	view.setInputText(nextRoom.getSavedInput());
 	view.setSubject(nextRoom.getSubject());
 	view.showUserList(nextRoom.getUsersListView());
+	nextRoom.activate();
 	currentRoom = nextRoom;
     }
 

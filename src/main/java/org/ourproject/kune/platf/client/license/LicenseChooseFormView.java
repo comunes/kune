@@ -36,7 +36,7 @@ public interface LicenseChooseFormView extends View {
 
     void reset();
 
-    void showNotCCoptiones();
+    void showNotCCoptions();
 
     void showCCoptions();
 }

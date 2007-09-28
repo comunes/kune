@@ -98,14 +98,33 @@
 }
 
 .kune-Default-Form {
-  margin: 20px;
+  margin: 10px;
 }
 
 fieldset {
-  color: #000;
-  padding: 0 10px 5px 10px;
-  border: 1px solid #000;
-  margin: 6px;
+  border:1px solid #B5B8C8;
+  /* margin-bottom:10px; */
+  padding:10px 10px 5px;
+}
+
+legend {
+  color:#15428B;
+  font-size: 85%;
+  font-size-adjust:none;
+  font-style:normal;
+  font-variant:normal;
+  font-weight:bold;
+  line-height:normal;
+}
+
+.gwt-RadioButton input {
+  margin: 0 3px;
+  vertical-align:middle;
+}
+
+.gwt-RadioButton label {
+  margin: 0 3px;
+  vertical-align:middle;
 }
 
 /* Buttons */
@@ -189,6 +208,7 @@ fieldset {
 }
 
 /* DropDowns */
+
 .kune-DropDownOuter {
   background-color: green;
 }

@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
-import org.ourproject.kune.platf.client.license.LicenseChangeListener;
 import org.ourproject.kune.platf.client.license.LicenseChooseForm;
 import org.ourproject.kune.platf.client.license.LicenseChooseFormPanel;
 import org.ourproject.kune.platf.client.license.LicenseChooseFormPresenter;
@@ -75,35 +74,15 @@ public class SiteBarFactory {
     }
 
     public static NewGroupForm createNewGroup(final NewGroupListener listener) {
-
-	// TODO (Dani): get this from Session
-	List licensesCCList = new ArrayList();
-	licensesCCList.add(new LicenseDTO("by", "Creative Commons Attribution", "",
-		"http://creativecommons.org/licenses/by/3.0/", true, false, false, "", ""));
-	licensesCCList.add(new LicenseDTO("by-sa", "Creative Commons Attribution-ShareAlike", "",
-		"http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", ""));
-	licensesCCList.add(new LicenseDTO("by-nd", "Creative Commons Attribution-NoDerivs", "",
-		"http://creativecommons.org/licenses/by-nd/3.0/", true, false, false, "", ""));
-	licensesCCList.add(new LicenseDTO("by-nc", "Creative Commons Attribution-NonCommercial", "",
-		"http://creativecommons.org/licenses/by-nc/3.0/", true, false, false, "", ""));
-	licensesCCList.add(new LicenseDTO("by-nc-sa", "Creative Commons Attribution-NonCommercial-ShareAlike", "",
-		"http://creativecommons.org/licenses/by-nc-sa/3.0/", true, false, false, "", ""));
-	licensesCCList.add(new LicenseDTO("by-nc-nd", "Creative Commons Attribution-NonCommercial-NoDerivs", "",
-		"http://creativecommons.org/licenses/by-nc-nd/3.0/", true, false, false, "", ""));
-	List licensesNonCCList = new ArrayList();
-	licensesNonCCList.add(new LicenseDTO("gfdl", "GNU Free Documentation License", "",
-		"http://www.gnu.org/copyleft/fdl.html", false, true, false, "", ""));
-	licensesNonCCList.add(new LicenseDTO("fal", "Free Art License", "None", "http://artlibre.org/licence/lal/en/",
-		false, true, false, "", "images/lic/fal-license.gif"));
-
 	NewGroupFormPresenter presenter = new NewGroupFormPresenter(listener);
-	NewGroupFormPanel view = new NewGroupFormPanel(presenter, licensesNonCCList);
+	NewGroupFormPanel view = new NewGroupFormPanel(presenter);
 	presenter.init(view);
 	return presenter;
     }
 
-    public static LicenseChooseForm createLicenseChoose(final LicenseChangeListener listener) {
+    public static LicenseChooseForm createLicenseChoose() {
 
+	// TODO (Dani): get this from Session
 	List licensesList = new ArrayList();
 	licensesList.add(new LicenseDTO("by", "Creative Commons Attribution", "",
 		"http://creativecommons.org/licenses/by/3.0/", true, false, false, "", ""));
@@ -119,9 +98,13 @@ public class SiteBarFactory {
 		"http://creativecommons.org/licenses/by-nc-nd/3.0/", true, false, false, "", ""));
 	licensesList.add(new LicenseDTO("gfdl", "GNU Free Documentation License", "",
 		"http://www.gnu.org/copyleft/fdl.html", false, true, false, "", ""));
-
-	LicenseChooseFormPresenter presenter = new LicenseChooseFormPresenter(listener);
-	LicenseChooseFormPanel view = new LicenseChooseFormPanel(presenter, licensesList);
+	List licensesNonCCList = new ArrayList();
+	licensesNonCCList.add(new LicenseDTO("gfdl", "GNU Free Documentation License", "",
+		"http://www.gnu.org/copyleft/fdl.html", false, true, false, "", ""));
+	licensesNonCCList.add(new LicenseDTO("fal", "Free Art License", "None", "http://artlibre.org/licence/lal/en/",
+		false, true, false, "", "images/lic/fal-license.gif"));
+	LicenseChooseFormPresenter presenter = new LicenseChooseFormPresenter();
+	LicenseChooseFormPanel view = new LicenseChooseFormPanel(licensesNonCCList);
 	presenter.init(view, licensesList);
 	return presenter;
     }

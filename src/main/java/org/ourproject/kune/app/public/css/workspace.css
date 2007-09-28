@@ -464,3 +464,19 @@
 .kune-RatePanel-Stars {
   margin-left: 20px;
 }
+
+/* Licenses */
+
+.kune-License-CC-Header {
+  color: #15428B;
+  font-weight: bold;
+  font-size: 85%;
+  margin-top: 5px;
+}
+
+.kune-License-CC-Header .gwt-Label {
+  color: #15428B;
+  font-weight: bold;
+  font-size: 85%;
+  margin-top: 5px;
+}

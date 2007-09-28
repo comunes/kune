@@ -82,9 +82,13 @@ public class RoomPanel extends ContentPanel implements RoomView {
 	hp.setStyleName("kune-RoomPanel-HorizDelimiter");
     }
 
+    public void scrollDown() {
+	DOM.setElementPropertyInt(getElement(), "scrollTop", vp.getOffsetHeight());
+    }
+
     private void addWidget(final Widget widget) {
 	vp.add(widget);
 	widget.addStyleName("kune-RoomPanel-Message");
-	DOM.setElementPropertyInt(getElement(), "scrollTop", vp.getOffsetHeight());
+	scrollDown();
     }
 }

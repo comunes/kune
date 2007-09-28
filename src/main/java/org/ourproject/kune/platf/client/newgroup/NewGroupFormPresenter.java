@@ -22,6 +22,7 @@ package org.ourproject.kune.platf.client.newgroup;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.KuneService;
 import org.ourproject.kune.platf.client.rpc.KuneServiceAsync;
@@ -47,9 +48,9 @@ public class NewGroupFormPresenter implements NewGroupForm {
 	String longName = view.getLongName();
 	String publicDesc = view.getPublicDesc();
 
-	// TODO: without license you can't create a group
-
-	GroupDTO group = new GroupDTO(shortName, longName, publicDesc, "by-cc", getTypeOfGroup());
+	LicenseDTO license = view.getLicense();
+	GroupDTO group = new GroupDTO(shortName, longName, publicDesc, getTypeOfGroup());
+	group.setDefaultLicense(license);
 	// FIXME: get User hash
 	kuneService.createNewGroup("FIXMEFIXME", group, new AsyncCallback() {
 	    public void onFailure(final Throwable arg0) {
@@ -114,13 +115,4 @@ public class NewGroupFormPresenter implements NewGroupForm {
 
     }
 
-    public void onNotCCselected() {
-	view.setCCoptionsVisible(false);
-	view.setNonCCoptionsVisible(true);
-    }
-
-    public void onCCselected() {
-	view.setCCoptionsVisible(true);
-	view.setNonCCoptionsVisible(false);
-    }
 }

@@ -24,58 +24,49 @@ import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.ui.HorizontalLine;
+import org.ourproject.kune.platf.client.ui.TitledPanel;
 import org.ourproject.kune.sitebar.client.bar.SiteBarTrans;
 import org.ourproject.kune.sitebar.client.services.Translate;
 
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DeckPanel;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.gwtext.client.widgets.form.Checkbox;
-import com.gwtext.client.widgets.form.CheckboxConfig;
-import com.gwtext.client.widgets.form.FieldSetConfig;
-import com.gwtext.client.widgets.form.Form;
-import com.gwtext.client.widgets.form.FormConfig;
-import com.gwtext.client.widgets.form.Radio;
-import com.gwtext.client.widgets.form.event.CheckboxListener;
 
 public class LicenseChooseFormPanel extends Composite implements LicenseChooseFormView {
 
     protected static final String CC_LIC_FIELD = "cc-lic";
     protected static final String OTHER_LIC_FIELD = "other-lic";
 
-    private final LicenseChooseFormPresenter presenter;
     private final RadioButton ccRB;
     private final RadioButton allowModifRB;
     private final RadioButton commercialRB;
     private final RadioButton allowModifShareAlikeRB;
     private final DeckPanel options;
     private final Translate t;
-    private Radio ccLicenses;
-    private Radio otherLicenses;
-    private final Form newGroupForm;
+    private final Label ccIntro;
+    private final ListBox otherLicenses;
 
-    public LicenseChooseFormPanel(final LicenseChooseFormPresenter initPresenter, final List nonCCLicenses) {
-	this.presenter = initPresenter;
+    public LicenseChooseFormPanel(final List nonCCLicenses) {
+	t = SiteBarTrans.getInstance().t;
 
 	VerticalPanel generalVP = new VerticalPanel();
 	initWidget(generalVP);
 	generalVP.addStyleName("kune-Default-Form");
 
 	VerticalPanel licenseTypesVP = new VerticalPanel();
-	t = SiteBarTrans.getInstance().t;
 	ccRB = new RadioButton("ccOrNot", t.CreativeCommons());
 	RadioButton notCcRB = new RadioButton("ccOrNot", t.OtherLicenses());
 	options = new DeckPanel();
-	// ccIntro = new HTML("<p>" + t.CCExplainMessage() + "</p>", true);
+	ccIntro = new Label(t.CCExplainMessage());
 
-	ListBox otherLicenses = new ListBox();
+	otherLicenses = new ListBox();
 	VerticalPanel ccOptionsVP = new VerticalPanel();
+	VerticalPanel nonCcOptionsVP = new VerticalPanel();
 
 	Label comercialLabel = new Label(t.CCAllowComercial());
 	commercialRB = new RadioButton("comercial", t.Yes());
@@ -89,47 +80,50 @@ public class LicenseChooseFormPanel extends Composite implements LicenseChooseFo
 	generalVP.add(licenseTypesVP);
 	licenseTypesVP.add(ccRB);
 	licenseTypesVP.add(notCcRB);
-	generalVP.setCellHorizontalAlignment(licenseTypesVP, HasHorizontalAlignment.ALIGN_CENTER);
-	generalVP.add(new HorizontalLine());
-
-	// generalVP.add(ccIntro);
+	// generalVP.setCellHorizontalAlignment(licenseTypesVP,
+	// HasHorizontalAlignment.ALIGN_CENTER);
 
 	generalVP.add(options);
-	// generalVP.add(optionsGroupBox);
-	// optionsGroupBox.add(options);
 
 	// Options
+
+	generalVP.add(new TitledPanel(t.Options(), options));
+
+	ccOptionsVP.add(ccIntro);
 	ccOptionsVP.add(comercialLabel);
-	// ccOptionsVP.add(new BorderPanel(nonCommercialRB, 0, 0, 0, 18));
 	ccOptionsVP.add(commercialRB);
 	ccOptionsVP.add(nonCommercialRB);
 	ccOptionsVP.add(new HorizontalLine());
 	ccOptionsVP.add(allowModifLabel);
-	// ccOptionsVP.add(new BorderPanel(allowModifRB, 0, 0, 0, 18));
 	ccOptionsVP.add(allowModifRB);
-	// ccOptionsVP.add(new BorderPanel(allowModifShareAlikeRB, 0, 0, 0,
-	// 18));
 	ccOptionsVP.add(allowModifShareAlikeRB);
-	// ccOptionsVP.add(new BorderPanel(noModifRB, 0, 0, 0, 18));
 	ccOptionsVP.add(noModifRB);
 
+	// i18n
+	nonCcOptionsVP.add(new Label("Select one of these licenses:"));
+	nonCcOptionsVP.add(otherLicenses);
+
 	options.add(ccOptionsVP);
-	options.add(otherLicenses);
+	options.add(nonCcOptionsVP);
 	options.showWidget(0);
 
-	generalVP.add(new HorizontalLine());
-
-	// optionsGroupBox.setTitle(t.Options());
+	comercialLabel.addStyleName("kune-License-CC-Header");
+	allowModifLabel.addStyleName("kune-License-CC-Header");
+	nonCommercialRB.addStyleName("kune-Margin-Large-lr");
+	commercialRB.addStyleName("kune-Margin-Large-lr");
+	allowModifRB.addStyleName("kune-Margin-Large-lr");
+	allowModifShareAlikeRB.addStyleName("kune-Margin-Large-lr");
+	noModifRB.addStyleName("kune-Margin-Large-lr");
 
 	ccRB.addClickListener(new ClickListener() {
 	    public void onClick(final Widget arg0) {
-		presenter.onCCselected();
+		showCCoptions();
 	    }
 	});
 
 	notCcRB.addClickListener(new ClickListener() {
 	    public void onClick(final Widget arg0) {
-		presenter.onNotCCselected();
+		showNotCCoptions();
 	    }
 	});
 
@@ -142,83 +136,12 @@ public class LicenseChooseFormPanel extends Composite implements LicenseChooseFo
 	    otherLicenses.setVisibleItemCount(1);
 	}
 
-	newGroupForm = chooseLicenseForm();
-	generalVP.add(newGroupForm);
 	generalVP.addStyleName("kune-Default-Form");
 
     }
 
-    private Form chooseLicenseForm() {
-	Form form = new Form(new FormConfig() {
-	    {
-		setWidth(350);
-		setLabelWidth(300);
-		setLabelAlign("right");
-		setButtonAlign("left");
-	    }
-	});
-
-	form.fieldset(new FieldSetConfig() {
-	    {
-		// i18n: type of license
-		setLegend("Type");
-		setHideLabels(true);
-		// setStyle("margin-left: 105px");
-	    }
-	});
-
-	ccLicenses = new Radio(new CheckboxConfig() {
-	    {
-		setName(CC_LIC_FIELD);
-		setBoxLabel(t.CreativeCommons());
-		setAutoCreate(true);
-		setChecked(true);
-	    }
-	});
-	form.add(ccLicenses);
-
-	otherLicenses = new Radio(new CheckboxConfig() {
-	    {
-		setName(OTHER_LIC_FIELD);
-		setBoxLabel(t.OtherLicenses());
-		setAutoCreate(true);
-	    }
-	});
-	form.add(otherLicenses);
-
-	ccLicenses.addCheckboxListener(new CheckboxListener() {
-	    public void onCheck(final Checkbox field, final boolean checked) {
-		presenter.onCCselected();
-	    }
-	});
-
-	otherLicenses.addCheckboxListener(new CheckboxListener() {
-	    public void onCheck(final Checkbox field, final boolean checked) {
-		presenter.onNotCCselected();
-	    }
-	});
-
-	form.end();
-
-	form.fieldset(new FieldSetConfig() {
-	    {
-		setLegend(t.Options());
-		// setHideLabels(true);
-		// setStyle("margin-left: 105px");
-	    }
-	});
-
-	// TODO: Continue this
-
-	form.end();
-
-	form.end();
-	form.render();
-	return form;
-    }
-
     public int getSelectedNonCCLicenseIndex() {
-	return 0; // otherLicenses.getSelectedIndex();
+	return otherLicenses.getSelectedIndex();
     }
 
     public boolean isAllowModif() {
@@ -242,14 +165,13 @@ public class LicenseChooseFormPanel extends Composite implements LicenseChooseFo
 	ccRB.setChecked(true);
 	commercialRB.setChecked(true);
 	allowModifShareAlikeRB.setChecked(true);
-
     }
 
     public void showCCoptions() {
 	options.showWidget(0);
     }
 
-    public void showNotCCoptiones() {
+    public void showNotCCoptions() {
 	options.showWidget(1);
     }
 }

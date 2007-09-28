@@ -21,6 +21,7 @@
 package org.ourproject.kune.platf.client.newgroup;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.LicenseDTO;
 
 public interface NewGroupFormView extends View {
     void clearData();
@@ -49,8 +50,6 @@ public interface NewGroupFormView extends View {
 
     void showLicenseForm();
 
-    void setNonCCoptionsVisible(boolean visible);
-
-    void setCCoptionsVisible(boolean visible);
+    LicenseDTO getLicense();
 
 }

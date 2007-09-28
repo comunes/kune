@@ -21,13 +21,12 @@
 package org.ourproject.kune.platf.client.license;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.LicenseDTO;
 
 public interface LicenseChooseForm {
 
-    void onCancel();
-
-    void onSelect();
-
     View getView();
+
+    LicenseDTO getLicense();
 
 }
