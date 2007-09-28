@@ -24,6 +24,7 @@ import org.ourproject.kune.platf.client.ui.rate.RatePanel;
 import org.ourproject.kune.workspace.client.workspace.ContentSubTitlePresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentSubTitleView;
 
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -31,15 +32,21 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public class ContentSubTitlePanel extends HorizontalPanel implements ContentSubTitleView {
     private final Label titleLabel;
     private final RatePanel ratePanel;
+    private final HTML expandPanel;
 
     public ContentSubTitlePanel(final ContentSubTitlePresenter presenter) {
 	titleLabel = new Label();
 	ratePanel = new RatePanel(null, null);
+	expandPanel = new HTML("<b></b>");
 	add(titleLabel);
 	add(ratePanel);
+	add(expandPanel);
 	setWidth("100%");
+	setCellWidth(expandPanel, "100%");
 	addStyleName("kune-ContentSubTitleBar");
+	expandPanel.addStyleName("kune-expandHoriz");
 	setCellVerticalAlignment(titleLabel, VerticalPanel.ALIGN_MIDDLE);
+	setCellVerticalAlignment(ratePanel, VerticalPanel.ALIGN_MIDDLE);
     }
 
     public void setContentSubTitle(final String title, final Double rate, final Integer rateByUsers) {

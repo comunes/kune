@@ -98,6 +98,11 @@ public class SiteBarFactory {
 		"http://creativecommons.org/licenses/by-nc-nd/3.0/", true, false, false, "", ""));
 	licensesList.add(new LicenseDTO("gfdl", "GNU Free Documentation License", "",
 		"http://www.gnu.org/copyleft/fdl.html", false, true, false, "", ""));
+	licensesList.add(new LicenseDTO("gfdl", "GNU Free Documentation License", "",
+		"http://www.gnu.org/copyleft/fdl.html", false, true, false, "", ""));
+	licensesList.add(new LicenseDTO("fal", "Free Art License", "None", "http://artlibre.org/licence/lal/en/",
+		false, true, false, "", "images/lic/fal-license.gif"));
+
 	List licensesNonCCList = new ArrayList();
 	licensesNonCCList.add(new LicenseDTO("gfdl", "GNU Free Documentation License", "",
 		"http://www.gnu.org/copyleft/fdl.html", false, true, false, "", ""));

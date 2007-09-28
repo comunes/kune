@@ -12,7 +12,7 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
- * 
+ *
  * Adapted by Vicente J. Ruiz Jurado for kune
  */
 package org.ourproject.kune.platf.client.ui;
@@ -57,8 +57,8 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
     private HorizontalAlignmentConstant horzAlign;
     private MouseListenerCollection mouseListeners;
     private MouseWheelListenerCollection mouseWheelListeners;
-    private Element icon;
-    private Element textLabel;
+    private final Element icon;
+    private final Element textLabel;
 
     /**
      * Creates an empty label with a icon.
@@ -84,7 +84,7 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
      * @param text
      *                the new label's text
      */
-    public IconLabel(final AbstractImagePrototype image, String text) {
+    public IconLabel(final AbstractImagePrototype image, final String text) {
 	this(image);
 	setText(text);
     }
@@ -99,26 +99,26 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
      * @param wordWrap
      *                <code>false</code> to disable word wrapping
      */
-    public IconLabel(final AbstractImagePrototype image, String text, boolean wordWrap) {
+    public IconLabel(final AbstractImagePrototype image, final String text, final boolean wordWrap) {
 	this(image, text);
 	setWordWrap(wordWrap);
     }
 
-    public void addClickListener(ClickListener listener) {
+    public void addClickListener(final ClickListener listener) {
 	if (clickListeners == null) {
 	    clickListeners = new ClickListenerCollection();
 	}
 	clickListeners.add(listener);
     }
 
-    public void addMouseListener(MouseListener listener) {
+    public void addMouseListener(final MouseListener listener) {
 	if (mouseListeners == null) {
 	    mouseListeners = new MouseListenerCollection();
 	}
 	mouseListeners.add(listener);
     }
 
-    public void addMouseWheelListener(MouseWheelListener listener) {
+    public void addMouseWheelListener(final MouseWheelListener listener) {
 	if (mouseWheelListeners == null) {
 	    mouseWheelListeners = new MouseWheelListenerCollection();
 	}
@@ -137,7 +137,7 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
 	return !DOM.getStyleAttribute(textLabel, "whiteSpace").equals("nowrap");
     }
 
-    public void onBrowserEvent(Event event) {
+    public void onBrowserEvent(final Event event) {
 	switch (DOM.eventGetType(event)) {
 	case Event.ONCLICK:
 	    if (clickListeners != null) {
@@ -163,34 +163,38 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
 	}
     }
 
-    public void removeClickListener(ClickListener listener) {
+    public void removeClickListener(final ClickListener listener) {
 	if (clickListeners != null) {
 	    clickListeners.remove(listener);
 	}
     }
 
-    public void removeMouseListener(MouseListener listener) {
+    public void removeMouseListener(final MouseListener listener) {
 	if (mouseListeners != null) {
 	    mouseListeners.remove(listener);
 	}
     }
 
-    public void removeMouseWheelListener(MouseWheelListener listener) {
+    public void removeMouseWheelListener(final MouseWheelListener listener) {
 	if (mouseWheelListeners != null) {
 	    mouseWheelListeners.remove(listener);
 	}
     }
 
-    public void setHorizontalAlignment(HorizontalAlignmentConstant align) {
+    public void setHorizontalAlignment(final HorizontalAlignmentConstant align) {
 	horzAlign = align;
 	DOM.setStyleAttribute(textLabel, "textAlign", align.getTextAlignString());
     }
 
-    public void setText(String text) {
+    public void setText(final String text) {
 	DOM.setInnerText(textLabel, text);
     }
 
-    public void setWordWrap(boolean wrap) {
+    public void setWordWrap(final boolean wrap) {
 	DOM.setStyleAttribute(textLabel, "whiteSpace", wrap ? "normal" : "nowrap");
+    }
+
+    public void setColor(final String color) {
+	DOM.setStyleAttribute(textLabel, "color", color);
     }
 }

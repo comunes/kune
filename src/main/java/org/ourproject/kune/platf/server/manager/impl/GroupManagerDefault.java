@@ -90,6 +90,11 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     public Group createGroup(final Group group, final User user) throws SerializableException {
 	if (User.isKownUser(user)) {
 	    try {
+		// FIXME: A better way to do this license part?
+		String licName = group.getDefaultLicense().getShortName();
+		License license = licenseFinder.findByShortName(licName);
+		group.setDefaultLicense(license);
+
 		initSocialNetwork(group, user.getUserGroup());
 		user.getAdminInGroups().add(group);
 		initGroup(user, group);

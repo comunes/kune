@@ -31,6 +31,8 @@ import org.ourproject.kune.sitebar.client.bar.SiteBarTrans;
 import org.ourproject.kune.sitebar.client.services.Translate;
 import org.ourproject.kune.workspace.client.ui.form.WizardListener;
 
+import to.tipit.gwtlib.FireLog;
+
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
@@ -45,6 +47,7 @@ import com.gwtext.client.widgets.form.TextArea;
 import com.gwtext.client.widgets.form.TextAreaConfig;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.form.TextFieldConfig;
+import com.gwtext.client.widgets.form.event.FormListener;
 
 public class NewGroupFormPanel extends WizardDialog implements NewGroupFormView {
     private static final Translate t = SiteBarTrans.getInstance().t;
@@ -105,8 +108,7 @@ public class NewGroupFormPanel extends WizardDialog implements NewGroupFormView 
 	// newGroupInitialDataVP.addStyleName("kune-Default-Form");
 	deck.addStyleName("kune-Default-Form");
 	liceseTypeLabel.addStyleName("kune-License-CC-Header");
-	newGroupInitialDataVP.setHeight("360");
-	chooseLicenseVP.setHeight("360");
+	chooseLicenseVP.setHeight("10"); // Ext set this to 100% ...
 	super.setFinishText(t.Register());
     }
 
@@ -169,9 +171,11 @@ public class NewGroupFormPanel extends WizardDialog implements NewGroupFormView 
 		setFieldLabel(t.ShortName());
 		setName(SHORTNAME_FIELD);
 		setWidth(175);
+		setMinLength(3);
+		setMaxLength(15);
 		setAllowBlank(false);
 		setMsgTarget("side");
-		setRegex("^[a-zA-Z0-9_]+$");
+		setRegex("^[a-z0-9_]+$");
 		// i18n
 		setMinLengthText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
 		setMaxLengthText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
@@ -241,6 +245,27 @@ public class NewGroupFormPanel extends WizardDialog implements NewGroupFormView 
 
 	form.end();
 	form.render();
+
+	form.addFormListenerListener(new FormListener() {
+
+	    public boolean doBeforeAction(final Form form) {
+		return false;
+	    }
+
+	    public void onActionComplete(final Form form) {
+	    }
+
+	    public void onActionFailed(final Form form) {
+	    }
+
+	    public void onClientValidation(final Form form, final boolean valid) {
+		if (valid) {
+		    FireLog.debug("NewGroupFP valid");
+		} else {
+		    FireLog.debug("NewGroupFP invalid");
+		}
+	    }
+	});
 
 	return form;
     }

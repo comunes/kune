@@ -35,10 +35,12 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Ext;
 import com.gwtext.client.widgets.Button;
+import com.gwtext.client.widgets.ButtonConfig;
 import com.gwtext.client.widgets.LayoutDialog;
 import com.gwtext.client.widgets.LayoutDialogConfig;
 import com.gwtext.client.widgets.MessageBox;
@@ -189,6 +191,24 @@ public class MultiRoomPanel implements MultiRoomView, View {
 		setCollapsible(true);
 	    }
 	}, north, south, null, east, center);
+
+	Button emotiButton = new Button(new ButtonConfig() {
+	    {
+		setIcon("images/smile.png");
+		setCls("x-btn-icon");
+		// i18n
+		setTooltip("Insert a emoticon");
+
+	    }
+	});
+	dialog.addButton(emotiButton);
+	emotiButton.setSize("16", "16");
+	emotiButton.addButtonListener(new ButtonListenerAdapter() {
+	    public void onClick(final Button button, final EventObject e) {
+		PopupPanel emotiPalette = new PopupPanel(true, true);
+		emotiPalette.add(new Label("Test"));
+	    }
+	});
 
 	sendBtn = dialog.addButton("Send");
 	sendBtn.addButtonListener(new ButtonListenerAdapter() {
@@ -353,6 +373,8 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	ContentPanel eastPanel = new ContentPanel(Ext.generateId(), "Users", new ContentPanelConfig() {
 	    {
 		setAutoScroll(true);
+		setFitToContainer(true);
+		setFitToFrame(true);
 	    }
 	});
 	usersDeckPanel = new DeckPanel();

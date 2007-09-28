@@ -38,8 +38,6 @@ import javax.persistence.Table;
 import com.google.inject.name.Named;
 import com.wideplay.warp.persist.dao.Finder;
 
-// FIXME: meter licencia
-
 @Entity
 @Table(name = "groups")
 public class Group implements HasId {

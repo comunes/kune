@@ -21,10 +21,10 @@ package org.ourproject.kune.chat.client.rooms.ui;
 
 import org.ourproject.kune.chat.client.rooms.RoomUser;
 import org.ourproject.kune.chat.client.rooms.RoomUserListView;
+import org.ourproject.kune.platf.client.ui.IconLabel;
 
-import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -38,15 +38,16 @@ public class RoomUserListPanel extends VerticalPanel implements RoomUserListView
 
     public int addUser(final RoomUser user) {
 	HorizontalPanel userPanel = new HorizontalPanel();
-	Image userIcon = new Image();
-	Label userAliasLabel = new HTML("<span style=\"color: " + user.getColor() + "\">" + user.getAlias() + "</span>");
+	AbstractImagePrototype icon;
 	if (user.getUserType() == RoomUser.MODERADOR) {
-	    RoomImages.App.getInstance().bulletStar().applyTo(userIcon);
+	    icon = RoomImages.App.getInstance().bulletStar();
 	} else {
-	    RoomImages.App.getInstance().bulletBlack().applyTo(userIcon);
+	    icon = RoomImages.App.getInstance().bulletBlack();
 	}
-	userPanel.add(userIcon);
-	userPanel.add(userAliasLabel);
+	IconLabel userLabel = new IconLabel(icon, user.getAlias());
+	userLabel.setColor(user.getColor());
+	userPanel.add(userLabel);
+	userPanel.addStyleName("kune-Margin-Medium-lr");
 	this.insert(userPanel, this.getWidgetCount() - 1);
 	return this.getWidgetIndex(userPanel);
     }

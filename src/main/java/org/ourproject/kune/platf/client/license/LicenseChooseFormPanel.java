@@ -50,13 +50,13 @@ public class LicenseChooseFormPanel extends Composite implements LicenseChooseFo
     private final Translate t;
     private final Label ccIntro;
     private final ListBox otherLicenses;
+    private final TitledPanel optionsBox;
 
     public LicenseChooseFormPanel(final List nonCCLicenses) {
 	t = SiteBarTrans.getInstance().t;
 
 	VerticalPanel generalVP = new VerticalPanel();
 	initWidget(generalVP);
-	generalVP.addStyleName("kune-Default-Form");
 
 	VerticalPanel licenseTypesVP = new VerticalPanel();
 	ccRB = new RadioButton("ccOrNot", t.CreativeCommons());
@@ -80,14 +80,13 @@ public class LicenseChooseFormPanel extends Composite implements LicenseChooseFo
 	generalVP.add(licenseTypesVP);
 	licenseTypesVP.add(ccRB);
 	licenseTypesVP.add(notCcRB);
-	// generalVP.setCellHorizontalAlignment(licenseTypesVP,
-	// HasHorizontalAlignment.ALIGN_CENTER);
 
 	generalVP.add(options);
 
 	// Options
 
-	generalVP.add(new TitledPanel(t.Options(), options));
+	optionsBox = new TitledPanel(t.Options(), options);
+	generalVP.add(optionsBox);
 
 	ccOptionsVP.add(ccIntro);
 	ccOptionsVP.add(comercialLabel);
@@ -100,7 +99,6 @@ public class LicenseChooseFormPanel extends Composite implements LicenseChooseFo
 	ccOptionsVP.add(noModifRB);
 
 	// i18n
-	nonCcOptionsVP.add(new Label("Select one of these licenses:"));
 	nonCcOptionsVP.add(otherLicenses);
 
 	options.add(ccOptionsVP);
@@ -114,6 +112,9 @@ public class LicenseChooseFormPanel extends Composite implements LicenseChooseFo
 	allowModifRB.addStyleName("kune-Margin-Large-lr");
 	allowModifShareAlikeRB.addStyleName("kune-Margin-Large-lr");
 	noModifRB.addStyleName("kune-Margin-Large-lr");
+	optionsBox.addStyleName("kune-Margin-Medium-t");
+	otherLicenses.addStyleName("kune-Margin-Large-trbl");
+	generalVP.addStyleName("kune-Default-Form");
 
 	ccRB.addClickListener(new ClickListener() {
 	    public void onClick(final Widget arg0) {
@@ -135,8 +136,6 @@ public class LicenseChooseFormPanel extends Composite implements LicenseChooseFo
 	    otherLicenses.setItemSelected(0, true);
 	    otherLicenses.setVisibleItemCount(1);
 	}
-
-	generalVP.addStyleName("kune-Default-Form");
 
     }
 
@@ -169,9 +168,13 @@ public class LicenseChooseFormPanel extends Composite implements LicenseChooseFo
 
     public void showCCoptions() {
 	options.showWidget(0);
+	optionsBox.setTitle(t.Options());
+
     }
 
     public void showNotCCoptions() {
 	options.showWidget(1);
+	// i18n
+	optionsBox.setTitle("Select one of these licenses:");
     }
 }

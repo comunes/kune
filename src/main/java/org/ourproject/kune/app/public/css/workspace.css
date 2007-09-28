@@ -104,10 +104,6 @@
   height: 23px;
 }
 
-.kune-ContentSubTitleBar tr {
-  float: left;
-}
-
 .kune-ContentSubTitleBar .gwt-Label {
   width: 100%;
   margin: 0 9px;
@@ -462,7 +458,7 @@
 }
 
 .kune-RatePanel-Stars {
-  margin-left: 20px;
+  margin-left: 30px;
 }
 
 /* Licenses */
