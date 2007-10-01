@@ -20,6 +20,8 @@
 
 package org.ourproject.kune.platf.server.manager;
 
+import java.util.List;
+
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 
@@ -29,15 +31,17 @@ public interface GroupManager extends Manager<Group, Long> {
 
     Group findByShortName(String groupName);
 
-    // FIXME: (dani) no entiendo por qué estos dos métodos (los he hecho yo ;)
-    // seguro que tiene razón de ser, pero el nombre no lo refleja!!!
-    Group createGroup(String shortName, String longName, User user) throws SerializableException;
+    List<Group> findAdminInGroups(Long groupId);
+
+    List<Group> findCollabInGroups(Long groupId);
 
     Group createGroup(Group group, User user) throws SerializableException;
 
     Group createUserGroup(User user);
 
     Group getDefaultGroup();
+
+    void setSiteDefLicense(Group group);
 
     /**
      * IMPORTANT: returns null if userId is null

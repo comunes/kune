@@ -104,6 +104,7 @@ public class DatabaseInitializer {
 	licenseManager.persist(license);
 	license = new License("gfdl", "GNU Free Documentation License", "None", "http://www.gnu.org/copyleft/fdl.html",
 		false, true, false, "", "images/lic/gnu-fdl.gif");
+	licenseManager.persist(license);
 	license = new License("fal", "Free Art License", "None", "http://artlibre.org/licence/lal/en/", false, true,
 		false, "", "images/lic/fal-license.gif");
 	licenseManager.persist(license);

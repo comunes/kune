@@ -1,5 +1,5 @@
 /*
- * Ext JS Library 1.1 RC 1
+ * Ext JS Library 1.1.1
  * Copyright(c) 2006-2007, Ext JS, LLC.
  * licensing@extjs.com
  * 
@@ -398,4 +398,10 @@
     top:0;
     display:block;
     background:transparent url(../images/default/form/exclamation.gif) no-repeat 0 2px;
+}
+
+
+.ext-ie td .x-form-text {
+    position:relative;
+    top:-1px;
 }

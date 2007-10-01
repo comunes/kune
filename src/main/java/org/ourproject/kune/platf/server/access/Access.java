@@ -30,31 +30,29 @@ public class Access {
     private Container container;
     private AccessLists contentAccessLists;
     private AccessLists folderAccessLists;
-    private final AccessLists groupAccessLists;
+    private AccessLists groupAccessLists;
     private AccessRights contentRights;
     private AccessRights folderRights;
     private AccessRights groupRights;
 
     public Access(final Content descriptor, final Container container) {
-	this.content = descriptor;
-	contentAccessLists = descriptor != null ? getContentAccessList(descriptor) : null;
-	this.container = container;
-	folderAccessLists = container != null ? getFolderAccessLists(container) : null;
-	groupAccessLists = folderAccessLists;
+	setContent(descriptor);
+	setFolder(container);
     }
 
     public Container getFolder() {
 	return container;
     }
 
-    public void setFolder(final Container container) {
-	this.container = container;
-	folderAccessLists = container != null ? getFolderAccessLists(container) : null;
-    }
-
     public void setContent(final Content descriptor) {
 	this.content = descriptor;
 	contentAccessLists = descriptor != null ? getContentAccessList(descriptor) : null;
+    }
+
+    public void setFolder(final Container container) {
+	this.container = container;
+	folderAccessLists = container != null ? getFolderAccessLists(container) : null;
+	groupAccessLists = folderAccessLists;
     }
 
     public Content getContent() {
@@ -70,7 +68,7 @@ public class Access {
     }
 
     public AccessLists getGroupAccessLists() {
-	return folderAccessLists;
+	return groupAccessLists;
     }
 
     public AccessRights getContentRights() {

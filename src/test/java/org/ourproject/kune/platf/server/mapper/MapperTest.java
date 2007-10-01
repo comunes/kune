@@ -27,6 +27,7 @@ import org.ourproject.kune.platf.server.domain.GroupListMode;
 import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.Revision;
 import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.state.State;
 import org.ourproject.kune.platf.server.users.Link;
 import org.ourproject.kune.platf.server.users.UserInfo;
@@ -40,6 +41,8 @@ public class MapperTest {
     Mapper mapper;
     @Inject
     UserInfoService userInfoService;
+    @Inject
+    GroupManager groupManager;
 
     @Before
     public void inject() {

@@ -39,9 +39,12 @@ import com.google.inject.Singleton;
 @Singleton
 public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, Long> implements SocialNetworkManager {
 
+    private final Provider<EntityManager> provider;
+
     @Inject
     public SocialNetworkManagerDefault(final Provider<EntityManager> provider) {
 	super(provider, SocialNetwork.class);
+	this.provider = provider;
     }
 
     public void addAdmin(final User user, final Group group) {

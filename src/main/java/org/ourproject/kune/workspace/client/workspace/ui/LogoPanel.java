@@ -22,6 +22,9 @@ package org.ourproject.kune.workspace.client.workspace.ui;
 
 import org.ourproject.kune.platf.client.services.Kune;
 
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
@@ -54,6 +57,9 @@ class LogoPanel extends SimplePanel {
 
     class EntityTextLogo extends VerticalPanel {
 
+	private static final int GROUP_NAME_LIMIT_SIZE = 90;
+	private static final String LOGO_SMALL_FONT_SIZE = "108%";
+	private static final String LOGO_DEFAULT_FONT_SIZE = "167%";
 	private Label defTextLogoLabel = null;
 	private Hyperlink defTextPutYourLogoHL = null;
 
@@ -61,23 +67,34 @@ class LogoPanel extends SimplePanel {
 	    // Initialize
 	    super();
 	    defTextLogoLabel = new Label();
+	    HTML expandCell = new HTML("<b></b>");
+	    HorizontalPanel putYourLogoHP = new HorizontalPanel();
 	    defTextPutYourLogoHL = new Hyperlink();
 
 	    // Layout
 	    add(defTextLogoLabel);
-	    add(defTextPutYourLogoHL);
+	    add(putYourLogoHP);
+	    putYourLogoHP.add(expandCell);
+	    putYourLogoHP.add(defTextPutYourLogoHL);
 
 	    // Set properties
 	    // TODO: Put your logo here functionality
 	    defTextPutYourLogoHL.setText(Kune.getInstance().t.PutYourLogoHere());
-
+	    expandCell.setWidth("100%");
+	    putYourLogoHP.setCellWidth(expandCell, "100%");
 	    // TODO: link to configure the logo
 	    addStyleName("kune-EntityTextLogo");
 	    setDefaultText("");
 	}
 
-	public void setDefaultText(final String title) {
-	    defTextLogoLabel.setText(title);
+	public void setDefaultText(final String text) {
+	    if (text.length() > GROUP_NAME_LIMIT_SIZE) {
+		DOM.setStyleAttribute(defTextLogoLabel.getElement(), "fontSize", LOGO_SMALL_FONT_SIZE);
+	    } else {
+		DOM.setStyleAttribute(defTextLogoLabel.getElement(), "fontSize", LOGO_DEFAULT_FONT_SIZE);
+	    }
+	    defTextLogoLabel.setText(text);
+
 	}
     }
 

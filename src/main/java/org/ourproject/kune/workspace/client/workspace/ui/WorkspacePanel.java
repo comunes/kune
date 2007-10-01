@@ -21,15 +21,18 @@
 package org.ourproject.kune.workspace.client.workspace.ui;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.tool.ToolTrigger;
 import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
 import org.ourproject.kune.platf.client.ui.DropDownPanel;
 import org.ourproject.kune.workspace.client.workspace.WorkspaceView;
 
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.HorizontalSplitPanel;
+import com.google.gwt.user.client.ui.HorizontalSplitPanelImages;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -67,7 +70,11 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 
 	contentTitleBar = new HorizontalPanel();
 	contentSubTitleBar = new HorizontalPanel();
-	cntcxtHSP = new HorizontalSplitPanel();
+	cntcxtHSP = new HorizontalSplitPanel(new HorizontalSplitPanelImages() {
+	    public AbstractImagePrototype horizontalSplitPanelThumb() {
+		return Images.App.getInstance().splitterVertBar();
+	    }
+	});
 	contentVP = new VerticalPanel();
 	contextVP = new VerticalPanel();
 	cntcxtHSP.setLeftWidget(contentVP);

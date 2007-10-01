@@ -31,12 +31,15 @@ public class LicenseChooseFormPresenter implements LicenseChooseForm, View {
 
     private List licenses;
 
+    private List licensesNonCCList;
+
     public LicenseChooseFormPresenter() {
     }
 
-    public void init(final LicenseChooseFormView view, final List licenses) {
+    public void init(final LicenseChooseFormView view, final List licenses, final List licensesNonCCList) {
 	this.view = view;
 	this.licenses = licenses;
+	this.licensesNonCCList = licensesNonCCList;
 
 	this.view.reset();
     }
@@ -52,7 +55,7 @@ public class LicenseChooseFormPresenter implements LicenseChooseForm, View {
 			: "by-nc-nd";
 	    }
 	} else {
-	    licenseShortName = ((LicenseDTO) licenses.get(view.getSelectedNonCCLicenseIndex())).getShortName();
+	    licenseShortName = ((LicenseDTO) licensesNonCCList.get(view.getSelectedNonCCLicenseIndex())).getShortName();
 	}
 	return getLicenseFromShortName(licenseShortName);
     }

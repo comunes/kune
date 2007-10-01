@@ -97,6 +97,18 @@ public class Group implements HasId {
 	return null;
     }
 
+    @Finder(query = "FROM Group g WHERE g.id IN (SELECT g.id FROM g.socialNetwork.accessLists.admins.list adm WHERE adm.id = :groupid)")
+    public List<Group> findAdminInGroups(@Named("groupid")
+    final Long groupId) {
+	return null;
+    }
+
+    @Finder(query = "FROM Group g WHERE g.id IN (SELECT g.id FROM g.socialNetwork.accessLists.editors.list AS ed WHERE ed.id = :groupid)")
+    public List<Group> findCollabInGroups(@Named("groupid")
+    final Long groupId) {
+	return null;
+    }
+
     public String getShortName() {
 	return shortName;
     }

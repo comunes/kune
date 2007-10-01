@@ -523,6 +523,11 @@ public interface Images extends ImageBundle {
     AbstractImagePrototype searchIco();
 
     /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/splitter-vert-bar.gif
+     */
+    AbstractImagePrototype splitterVertBar();
+
+    /**
      * @gwt.resource org/ourproject/kune/platf/public/images/star-10.png
      */
     AbstractImagePrototype star10();

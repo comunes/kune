@@ -1,5 +1,18 @@
+2007-10-01 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* Custom splitter for Workspace HorizontalSplitPanel
+	* new finders in Group to search groups in which a User(or a Group) is
+	member. Now Users don't have a redundant list of groups
+	* Remove groupManager createGroup duplicate method (only used in a test)
+	* Chat user list, overflow with big alias fixed
+	* EmoticonPalette widget added to MultiRoomPanel
+
+2007-09-30 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* New gwtext-0.9.2
+
 2007-09-28 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* Added scroll to chat users
+	* Close room fixed
+	* group text logo overflow and small font for big group named added
 
 2007-09-27 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* New wizard panel
@@ -32,20 +45,20 @@
 	* DropDown refactor
 	* TextEditor style changes
 	* new RatePanel
-	
+
 2007-09-18 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* AccessList refactor
 	* SocialNetwork refactor
 	* SocialNetwork new tests and Manager methods
 	* New icons (folder, add, del, cancel)
-	
+
 2007-09-17 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* IconHyperlink fixes
 	* new IconLabel widget
 	* added gwt-ext images to PrefetchUtilities
 	* new SocialNewtworkSevice/Rpc implements requestJoinGroup action
 	* remove group and currentTool from session, because now is not used (we get the current group from state)
-	
+
 2007-09-15 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* New hibernate version
 
@@ -84,8 +97,7 @@
 
 2007-07-11  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* pom.xml: increase scanIntervalSeconds to 10
-	* INSTALL: google.webtoolkit.devjar variable to point to gwt-dev-*.jar
-	specific var (see pom.xml), necessary for "mnv test".
+	* INSTALL: google.webtoolkit.devjar variable to point to gwt-dev-*.jar specific var (see pom.xml), necessary for "mnv test".
 	* src/main/java/org/ourproject/kune/client/ui/desktop/SiteMessageDialog.java: added setBackgroundColor to get different colors for different types of messages. Control z-index to put siteMessages over all frames. Small font. And concatenate several messages.
 	* src/main/java/org/ourproject/kune/client/ui/desktop/SiteBar.java: added z-indez over all windows
 	* src/main/java/org/ourproject/kune/server/servlet/OpenRemoteServiceServlet.java: server push tests
@@ -113,8 +125,7 @@
 2007-06-15 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* fixed mvn download of pom in our mavenrepo
 	* Added Richarea with a first version of autosave functionality
-	* Change Kitchesink RichTextarea icons with Openoffice-human icons (and
-	others)
+	* Change Kitchesink RichTextarea icons with Openoffice-human icons (and others)
 	* initialstatusbar floating over the rest during loading
 	* richtext toolbar icons and style improved
 	* siteMessage and options button fonts size fixed
@@ -144,9 +155,9 @@
 
 2007-04-20  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	*	gwm-0.6 update:
-	    - theme alphacube improves
-	    - glass desactivation
-	    - desktop now includes the general dockpanel
+	- theme alphacube improves
+	- glass desactivation
+	- desktop now includes the general dockpanel
 	* initialstatusbar float
 	* model clases for user/group
 	* new KuneFrame class with default frame conf
@@ -160,8 +171,7 @@
 	* Desktop refactor
 	* new SiteMessageDialog class
 	* add ImageBundle gwt1.4 support
-	* generateMainImageBundle.sh generates MainImageBundle methods with
-	public/images/ files
+	* generateMainImageBundle.sh generates MainImageBundle methods with public/images/ files
 	* now Images use ImageBundle
 	* remove PNGImage use
 	* sitebar clean

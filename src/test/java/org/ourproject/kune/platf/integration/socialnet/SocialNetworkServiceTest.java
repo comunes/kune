@@ -9,7 +9,6 @@ import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.integration.IntegrationTest;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 import org.ourproject.kune.platf.server.UserSession;
-import org.ourproject.kune.platf.server.manager.GroupManager;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
@@ -17,8 +16,6 @@ import com.google.inject.Inject;
 public class SocialNetworkServiceTest extends IntegrationTest {
     @Inject
     UserSession session;
-    @Inject
-    GroupManager groupFinder;
     @Inject
     SocialNetworkService socialNetworkService;
 
@@ -36,5 +33,4 @@ public class SocialNetworkServiceTest extends IntegrationTest {
 	final String result = socialNetworkService.requestJoinGroup(session.getHash(), groupShortName);
 	assertEquals(SocialNetworkDTO.REQ_JOIN_DENIED, result);
     }
-
 }

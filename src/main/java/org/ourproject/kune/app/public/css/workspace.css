@@ -19,27 +19,27 @@
 
 .kune-EntityTextLogo {
   border: 2px solid #F2F2F2;
-  overflow: hidden;
-  width: 468px;
   height: 60px;
   margin-bottom: 4px;
+  overflow: hidden;
+  width: 468px;
 }
 
 .kune-EntityTextLogo .gwt-Label {
-  font-size: 167%;
-  overflow: hidden;
-  font-weight: 700;
   color: #AA4400;
-  margin: 5px;
+  font-size: 167%;
   font-weight: 700;
+  margin: 5px;
+  height: 27;
 }
 
 .kune-EntityTextLogo .gwt-Hyperlink {
   color: #CCC;
   font-size: 85%;
-  text-decoration: underline;
-  text-align: right;
   margin: 5px;
+  text-decoration: underline;
+  background-color: #FFF;
+  white-space: nowrap;
 }
 
 .kune-GroupSummaryPanel {
@@ -107,6 +107,7 @@
 .kune-ContentSubTitleBar .gwt-Label {
   width: 100%;
   margin: 0 9px;
+  white-space: nowrap;
 }
 
 .kune-ContentToolBarPanel {
@@ -172,13 +173,13 @@
 }
 
 .topBar .gwt-PushButton-up-disabled {
-  filter: alpha(opacity =     20);
+  filter: alpha(opacity =       20);
   -moz-opacity: 0.2;
   opacity: 0.2;
 }
 
 .topBar .gwt-PushButton-down-disabled {
-  filter: alpha(opacity =     20);
+  filter: alpha(opacity =       20);
   -moz-opacity: 0.2;
   opacity: 0.2;
 }
@@ -272,19 +273,12 @@
   width: 10px;
 }
 
-.kune-Progress {
-  background: #E5FF80;
-  border: 1px solid #E5FF80;
-  white-space: nowrap;
-  height: 16px;
-  padding: 0 3px;
-}
-
 .kune-SiteMessagePanel {
   background-color: #E5FF80;
   border: 1px solid #CF0;
   color: #250;
-  z-index: 1000;
+  position:absolute;
+  z-index: 10000;
   vertical-align: middle;
 }
 
@@ -351,7 +345,6 @@
 }
 
 /* StackedDropDownPanel Members */
-
 .kune-StackSubItemLabel {
   overflow: hidden;
 }
@@ -462,7 +455,6 @@
 }
 
 /* Licenses */
-
 .kune-License-CC-Header {
   color: #15428B;
   font-weight: bold;

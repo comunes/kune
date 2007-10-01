@@ -48,69 +48,69 @@ public class SiteBarFactory {
     private static SiteMessage siteMessage;
 
     public static SiteBar createSiteBar(final SiteBarListener listener) {
-	SiteBarPresenter siteBarPresenter = new SiteBarPresenter(listener);
-	SiteBarPanel siteBarView = new SiteBarPanel(siteBarPresenter);
-	siteBarPresenter.init(siteBarView);
-	Site.sitebar = siteBarPresenter;
-	return siteBarPresenter;
+        SiteBarPresenter siteBarPresenter = new SiteBarPresenter(listener);
+        SiteBarPanel siteBarView = new SiteBarPanel(siteBarPresenter);
+        siteBarPresenter.init(siteBarView);
+        Site.sitebar = siteBarPresenter;
+        return siteBarPresenter;
     }
 
     public static SiteMessage getSiteMessage() {
-	if (siteMessage == null) {
-	    SiteMessagePresenter siteMessagePresenter = new SiteMessagePresenter();
-	    SiteMessageView siteMessageView = new SiteMessagePanel(siteMessagePresenter);
-	    siteMessagePresenter.init(siteMessageView);
-	    siteMessage = siteMessagePresenter;
-	    Site.siteUserMessage = siteMessagePresenter;
-	}
-	return siteMessage;
+        if (siteMessage == null) {
+            SiteMessagePresenter siteMessagePresenter = new SiteMessagePresenter();
+            SiteMessageView siteMessageView = new SiteMessagePanel(siteMessagePresenter);
+            siteMessagePresenter.init(siteMessageView);
+            siteMessage = siteMessagePresenter;
+            Site.siteUserMessage = siteMessagePresenter;
+        }
+        return siteMessage;
     }
 
     public static LoginForm createLogin(final LoginListener listener) {
-	LoginFormPresenter presenter = new LoginFormPresenter(listener);
-	LoginFormPanel view = new LoginFormPanel(presenter);
-	presenter.init(view);
-	return presenter;
+        LoginFormPresenter presenter = new LoginFormPresenter(listener);
+        LoginFormPanel view = new LoginFormPanel(presenter);
+        presenter.init(view);
+        return presenter;
     }
 
     public static NewGroupForm createNewGroup(final NewGroupListener listener) {
-	NewGroupFormPresenter presenter = new NewGroupFormPresenter(listener);
-	NewGroupFormPanel view = new NewGroupFormPanel(presenter);
-	presenter.init(view);
-	return presenter;
+        NewGroupFormPresenter presenter = new NewGroupFormPresenter(listener);
+        NewGroupFormPanel view = new NewGroupFormPanel(presenter);
+        presenter.init(view);
+        return presenter;
     }
 
     public static LicenseChooseForm createLicenseChoose() {
 
-	// TODO (Dani): get this from Session
-	List licensesList = new ArrayList();
-	licensesList.add(new LicenseDTO("by", "Creative Commons Attribution", "",
-		"http://creativecommons.org/licenses/by/3.0/", true, false, false, "", ""));
-	licensesList.add(new LicenseDTO("by-sa", "Creative Commons Attribution-ShareAlike", "",
-		"http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", ""));
-	licensesList.add(new LicenseDTO("by-nd", "Creative Commons Attribution-NoDerivs", "",
-		"http://creativecommons.org/licenses/by-nd/3.0/", true, false, false, "", ""));
-	licensesList.add(new LicenseDTO("by-nc", "Creative Commons Attribution-NonCommercial", "",
-		"http://creativecommons.org/licenses/by-nc/3.0/", true, false, false, "", ""));
-	licensesList.add(new LicenseDTO("by-nc-sa", "Creative Commons Attribution-NonCommercial-ShareAlike", "",
-		"http://creativecommons.org/licenses/by-nc-sa/3.0/", true, false, false, "", ""));
-	licensesList.add(new LicenseDTO("by-nc-nd", "Creative Commons Attribution-NonCommercial-NoDerivs", "",
-		"http://creativecommons.org/licenses/by-nc-nd/3.0/", true, false, false, "", ""));
-	licensesList.add(new LicenseDTO("gfdl", "GNU Free Documentation License", "",
-		"http://www.gnu.org/copyleft/fdl.html", false, true, false, "", ""));
-	licensesList.add(new LicenseDTO("gfdl", "GNU Free Documentation License", "",
-		"http://www.gnu.org/copyleft/fdl.html", false, true, false, "", ""));
-	licensesList.add(new LicenseDTO("fal", "Free Art License", "None", "http://artlibre.org/licence/lal/en/",
-		false, true, false, "", "images/lic/fal-license.gif"));
+        // TODO (Dani): get this from Session
+        List licensesList = new ArrayList();
+        licensesList.add(new LicenseDTO("by", "Creative Commons Attribution", "",
+                "http://creativecommons.org/licenses/by/3.0/", true, false, false, "", ""));
+        licensesList.add(new LicenseDTO("by-sa", "Creative Commons Attribution-ShareAlike", "",
+                "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", ""));
+        licensesList.add(new LicenseDTO("by-nd", "Creative Commons Attribution-NoDerivs", "",
+                "http://creativecommons.org/licenses/by-nd/3.0/", true, false, false, "", ""));
+        licensesList.add(new LicenseDTO("by-nc", "Creative Commons Attribution-NonCommercial", "",
+                "http://creativecommons.org/licenses/by-nc/3.0/", true, false, false, "", ""));
+        licensesList.add(new LicenseDTO("by-nc-sa", "Creative Commons Attribution-NonCommercial-ShareAlike", "",
+                "http://creativecommons.org/licenses/by-nc-sa/3.0/", true, false, false, "", ""));
+        licensesList.add(new LicenseDTO("by-nc-nd", "Creative Commons Attribution-NonCommercial-NoDerivs", "",
+                "http://creativecommons.org/licenses/by-nc-nd/3.0/", true, false, false, "", ""));
+        licensesList.add(new LicenseDTO("gfdl", "GNU Free Documentation License", "",
+                "http://www.gnu.org/copyleft/fdl.html", false, true, false, "", ""));
+        licensesList.add(new LicenseDTO("gfdl", "GNU Free Documentation License", "",
+                "http://www.gnu.org/copyleft/fdl.html", false, true, false, "", ""));
+        licensesList.add(new LicenseDTO("fal", "Free Art License", "None", "http://artlibre.org/licence/lal/en/",
+                false, true, false, "", "images/lic/fal-license.gif"));
 
-	List licensesNonCCList = new ArrayList();
-	licensesNonCCList.add(new LicenseDTO("gfdl", "GNU Free Documentation License", "",
-		"http://www.gnu.org/copyleft/fdl.html", false, true, false, "", ""));
-	licensesNonCCList.add(new LicenseDTO("fal", "Free Art License", "None", "http://artlibre.org/licence/lal/en/",
-		false, true, false, "", "images/lic/fal-license.gif"));
-	LicenseChooseFormPresenter presenter = new LicenseChooseFormPresenter();
-	LicenseChooseFormPanel view = new LicenseChooseFormPanel(licensesNonCCList);
-	presenter.init(view, licensesList);
-	return presenter;
+        List licensesNonCCList = new ArrayList();
+        licensesNonCCList.add(new LicenseDTO("gfdl", "GNU Free Documentation License", "",
+                "http://www.gnu.org/copyleft/fdl.html", false, true, false, "", ""));
+        licensesNonCCList.add(new LicenseDTO("fal", "Free Art License", "None", "http://artlibre.org/licence/lal/en/",
+                false, true, false, "", "images/lic/fal-license.gif"));
+        LicenseChooseFormPresenter presenter = new LicenseChooseFormPresenter();
+        LicenseChooseFormPanel view = new LicenseChooseFormPanel(licensesNonCCList);
+        presenter.init(view, licensesList, licensesNonCCList);
+        return presenter;
     }
 }

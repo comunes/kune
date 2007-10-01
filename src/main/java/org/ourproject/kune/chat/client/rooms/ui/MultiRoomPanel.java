@@ -22,6 +22,7 @@ package org.ourproject.kune.chat.client.rooms.ui;
 
 import java.util.HashMap;
 
+import org.ourproject.kune.chat.client.rooms.EmoticonPaletteListener;
 import org.ourproject.kune.chat.client.rooms.MultiRoomPresenter;
 import org.ourproject.kune.chat.client.rooms.MultiRoomView;
 import org.ourproject.kune.chat.client.rooms.Room;
@@ -71,6 +72,8 @@ public class MultiRoomPanel implements MultiRoomView, View {
     private Form inputForm;
     private final HashMap userListToIndex;
     private final HashMap panelIdToRoom;
+    private EmoticonPalettePanel emoticonPalettePanel;
+    private PopupPanel emoticonPopup;
 
     public MultiRoomPanel(final MultiRoomPresenter presenter) {
 	this.presenter = presenter;
@@ -192,7 +195,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	    }
 	}, north, south, null, east, center);
 
-	Button emotiButton = new Button(new ButtonConfig() {
+	final Button emotiButton = new Button(new ButtonConfig() {
 	    {
 		setIcon("images/smile.png");
 		setCls("x-btn-icon");
@@ -201,12 +204,12 @@ public class MultiRoomPanel implements MultiRoomView, View {
 
 	    }
 	});
+
 	dialog.addButton(emotiButton);
-	emotiButton.setSize("16", "16");
+	emotiButton.setWidth("18px");
 	emotiButton.addButtonListener(new ButtonListenerAdapter() {
 	    public void onClick(final Button button, final EventObject e) {
-		PopupPanel emotiPalette = new PopupPanel(true, true);
-		emotiPalette.add(new Label("Test"));
+		showEmoticonPalette(e.getXY()[0], e.getXY()[1]);
 	    }
 	});
 
@@ -292,21 +295,13 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	    }
 	});
 
-	// Dont work:
-	// dialog.getEl().addListener("collapse", new Function() {
-	// public void execute() {
-	// FireLog.debug("Collapse event");
-	// dialog.moveTo(dialog.getAbsoluteLeft(), Window.getClientHeight() -
-	// dialog.getOffsetHeight() - 1);
-	// }
-	// });
-
 	centralLayout = dialog.getLayout().getRegion(LayoutRegionConfig.CENTER);
 
 	centralLayout.addLayoutRegionListener(new LayoutRegionListener() {
 
 	    public boolean doBeforeRemove(final LayoutRegion region, final ContentPanel panel) {
-		final RoomPresenter roomPresenter = (RoomPresenter) panelIdToRoom.get(panel.getId());
+		final String panelId = panel.getId();
+		final RoomPresenter roomPresenter = (RoomPresenter) panelIdToRoom.get(panelId);
 		if (presenter.isCloseAllConfirmed() || roomPresenter.isCloseConfirmed()) {
 		    return true;
 		} else {
@@ -314,11 +309,10 @@ public class MultiRoomPanel implements MultiRoomView, View {
 			    new MessageBox.ConfirmCallback() {
 				public void execute(final String btnID) {
 				    if (btnID.equals("yes")) {
+					panelIdToRoom.remove(panelId);
+					// TODO remove userList
 					presenter.closeRoom(roomPresenter);
-					panel.removeFromParent();
-					panel.destroy();
-					// region.getActivePanel().destroy();
-					region.getTabs().getActiveTab().removeFromParent();
+					region.remove(panelId);
 				    } else {
 					roomPresenter.onCloseNotConfirmed();
 				    }
@@ -339,7 +333,6 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	    }
 
 	    public void onPanelActivated(final LayoutRegion region, final ContentPanel panel) {
-		FireLog.debug("Panel activated");
 		RoomPresenter roomPresenter = (RoomPresenter) panelIdToRoom.get(panel.getId());
 		presenter.activateRoom(roomPresenter);
 	    }
@@ -445,5 +438,22 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	input.setHeight("100%");
 
 	return southPanel;
+    }
+
+    private void showEmoticonPalette(final int x, final int y) {
+	if (emoticonPalettePanel == null) {
+	    emoticonPalettePanel = new EmoticonPalettePanel(new EmoticonPaletteListener() {
+		public void onEmoticonSelected(final String emoticonText) {
+		    input.setRawValue(input.getText() + " " + emoticonText + " ");
+		    emoticonPopup.hide();
+		}
+	    });
+	}
+	emoticonPopup = new PopupPanel(true);
+	emoticonPopup.setVisible(false);
+	emoticonPopup.show();
+	emoticonPopup.setPopupPosition(x, y - 90);
+	emoticonPopup.setWidget(emoticonPalettePanel);
+	emoticonPopup.setVisible(true);
     }
 }

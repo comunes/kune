@@ -20,6 +20,8 @@
 
 package org.ourproject.kune.platf.server.manager.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 
@@ -67,24 +69,29 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 	return finder.findByShortName(shortName);
     }
 
-    public Group createGroup(final String shortName, final String longName, final User user)
-	    throws SerializableException {
-	final Group group = new Group(shortName, longName);
-	return createGroup(group, user);
+    public List<Group> findAdminInGroups(final Long groupId) {
+	return finder.findAdminInGroups(groupId);
+    }
+
+    public List<Group> findCollabInGroups(final Long groupId) {
+	return finder.findCollabInGroups(groupId);
     }
 
     public Group createUserGroup(final User user) {
 	final Group group = new Group(user.getShortName(), user.getName());
-	final String licenseDefId = properties.getDefaultLicense();
-	final License licenseDef = licenseFinder.findByShortName(licenseDefId);
-	group.setDefaultLicense(licenseDef);
+	setSiteDefLicense(group);
 	group.setAdmissionType(AdmissionType.Closed);
 	user.setUserGroup(group);
 	initSocialNetwork(group, group);
-	user.getAdminInGroups().add(group);
 	initGroup(user, group);
 	super.persist(user, User.class);
 	return group;
+    }
+
+    public void setSiteDefLicense(final Group group) {
+	final String licenseDefId = properties.getDefaultLicense();
+	final License licenseDef = licenseFinder.findByShortName(licenseDefId);
+	group.setDefaultLicense(licenseDef);
     }
 
     public Group createGroup(final Group group, final User user) throws SerializableException {
@@ -96,7 +103,6 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 		group.setDefaultLicense(license);
 
 		initSocialNetwork(group, user.getUserGroup());
-		user.getAdminInGroups().add(group);
 		initGroup(user, group);
 		return group;
 	    } catch (final EntityExistsException e) {

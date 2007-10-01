@@ -67,42 +67,42 @@ public class ChatTextFormatter {
 
     public ChatTextFormatter() {
 	replacements = new HashMap();
-	replacements.put(JOYFUL, new String[] { "^_^", "^-^", "^^", ":))", ":-))" });
-	replacements.put(ANGRY, new String[] { "&gt;:o", "&gt;:-o", "&gt;:O", "&gt;:-O", "X(", "X-(", "x(", "x-(",
-		":@", "&lt;_&lt;" });
-	replacements.put(BLUSHING, new String[] { ":\"&gt;", ":*&gt;", ":-$", ":$" });
-	replacements.put(CRYING, new String[] { ":'(", "='(" });
-	replacements.put(POUTY, new String[] { ":|", "=|", ":-|" });
-	replacements.put(SURPRISED, new String[] { ":-O", ":O", ":-o", ":o", ":-0", "=-O", "=-o", "=o", "=O" });
-	replacements.put(GRIN, new String[] { ":-d", ":d", ":-D", ":D", ":d", "=D", "=-D" });
-	replacements.put(ANGEL, new String[] { "O:)", "o:)", "o:-)", "O:-)", "0:)", "0:-)" });
-	replacements.put(KISSING, new String[] { ":-*", ":*" });
-	replacements.put(SMILE, new String[] { ":-)", ":)" });
-	replacements.put(TONGUE, new String[] { ":P", "=P", "=p", ":-P", ":p", ":-p", ":b" });
-	replacements.put(UNCERTAIN, new String[] { ":-\\", ":-/", ":/", ":\\" });
-	replacements.put(COOL, new String[] { "B)", "B-)", "8)" });
-	replacements.put(WINK, new String[] { ";)", ";-)", ";&gt;" });
-	replacements.put(HAPPY, new String[] { "=)", "=-)" });
 	replacements.put(ALIEN, new String[] { "=:)", "(alien)" });
 	replacements
 		.put(ANDY, new String[] { "o_O", "o_0", "O_O", "o_o", "O_o", "0_o", "o0", "0o", "oO", "Oo", "0_0" });
+	replacements.put(ANGEL, new String[] { "O:)", "o:)", "o:-)", "O:-)", "0:)", "0:-)" });
+	replacements.put(ANGRY, new String[] { "&gt;:o", "&gt;:-o", "&gt;:O", "&gt;:-O", "X(", "X-(", "x(", "x-(",
+		":@", "&lt;_&lt;" });
+	replacements.put(BANDIT, new String[] { "(bandit)", ":(&gt;" });
+	replacements.put(BLUSHING, new String[] { ":\"&gt;", ":*&gt;", ":-$", ":$" });
+	replacements.put(COOL, new String[] { "B)", "B-)", "8)" });
+	replacements.put(CRYING, new String[] { ":'(", "='(" });
 	replacements.put(DEVIL, new String[] { "&gt;:)" });
+	replacements.put(GRIN, new String[] { ":-d", ":d", ":-D", ":D", ":d", "=D", "=-D" });
+	replacements.put(HAPPY, new String[] { "=)", "=-)" });
+	replacements.put(HEART, new String[] { "(L)", "(h)", "(H)" });
+	replacements.put(JOYFUL, new String[] { "^_^", "^-^", "^^", ":))", ":-))" });
+	replacements.put(KISSING, new String[] { ":-*", ":*" });
 	replacements.put(LOL, new String[] { "(LOL)", "lol" });
+	replacements.put(LOVE, new String[] { ":-X", ":-xX", ":x", "(wubya)", "(wubyou)", "(wub)" });
 	replacements.put(NINJA, new String[] { "(:)", "(ph33r)", "(ph34r)" });
 	replacements.put(PINCHED, new String[] { "&gt;_&lt;" });
 	replacements.put(POLICEMAN, new String[] { "(police)", "(cop)", "{):)" });
+	replacements.put(POUTY, new String[] { ":|", "=|", ":-|" });
 	replacements.put(SAD, new String[] { ":(", "=(", "=-(", ":-(" });
 	replacements.put(SICK, new String[] { ":&amp;", ":-&amp;" });
 	replacements.put(SIDEWAYS, new String[] { "=]" });
 	replacements.put(SLEEPING, new String[] { "(-.-)", "|)", "|-)", "I-)", "I-|" });
+	replacements.put(SMILE, new String[] { ":-)", ":)" });
+	replacements.put(SURPRISED, new String[] { ":-O", ":O", ":-o", ":o", ":-0", "=-O", "=-o", "=o", "=O" });
+	replacements.put(TONGUE, new String[] { ":P", "=P", "=p", ":-P", ":p", ":-p", ":b" });
+	replacements.put(UNCERTAIN, new String[] { ":-\\", ":-/", ":/", ":\\" });
 	replacements.put(UNSURE, new String[] { ":s", ":-S", ":-s", ":S" });
 	replacements.put(W00T, new String[] { "(woot)", "(w00t)", "(wOOt)" });
 	replacements.put(WHISTLING, new String[] { ":-\"" });
+	replacements.put(WINK, new String[] { ";)", ";-)", ";&gt;" });
 	replacements.put(WIZARD, new String[] { "(wizard)" });
 	replacements.put(WONDERING, new String[] { ":?" });
-	replacements.put(LOVE, new String[] { ":-X", ":-xX", ":x", "(wubya)", "(wubyou)", "(wub)" });
-	replacements.put(BANDIT, new String[] { "(bandit)", ":(&gt;" });
-	replacements.put(HEART, new String[] { "(L)", "(h)", "(H)" });
 
 	replacementList = new String[] { JOYFUL, ANGRY, BLUSHING, CRYING, POUTY, SURPRISED, GRIN, ANGEL, KISSING,
 		SMILE, TONGUE, UNCERTAIN, COOL, WINK, HAPPY, ALIEN, ANDY, DEVIL, LOL, NINJA, SAD, SICK, SIDEWAYS,

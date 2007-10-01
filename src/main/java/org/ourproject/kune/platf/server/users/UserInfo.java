@@ -46,7 +46,7 @@ public class UserInfo {
 	return groupsIsEditor;
     }
 
-    public void setGroupsIsEditor(final List<Link> groupsIsEditor) {
+    public void setGroupsIsCollab(final List<Link> groupsIsEditor) {
 	this.groupsIsEditor = groupsIsEditor;
     }
 
