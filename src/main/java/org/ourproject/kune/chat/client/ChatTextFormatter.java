@@ -67,52 +67,55 @@ public class ChatTextFormatter {
 	message = message.replaceAll("&", "&amp;");
 	message = message.replaceAll("\"", "&quot;");
 	message = message.replaceAll("<", "&lt;");
-	message = message.replaceAll("&gt;", "&gt;");
+	message = message.replaceAll(">", "&gt;");
 	message = message.replaceAll("\n", "<br>\n");
 
-	formatEmoticons(message);
+	message = formatEmoticonsNew(message);
 
 	return new HTML(message);
     }
 
-    private static void formatEmoticonsNew(String message) {
+    private static String formatEmoticonsNew(String message) {
 	RoomImages img = RoomImages.App.getInstance();
 
-	replace(message, new String[] { "=:\\)", "\\(alien\\)" }, ALIEN);
-	replace(message, new String[] { "o_O", "o_0", "O_O", "o_o", "O_o", "0_o", "o0", "0o", "oO", "Oo", "0_0" }, ANDY);
-	replace(message, new String[] { "O:\\)", "o:\\)", "o:-\\)", "O:-\\)", "0:\\)", "0:-\\)" }, ANGEL);
-	replace(message, new String[] { "&gt;:o", "&gt;:-o", "&gt;:O", "&gt;:-O", "X\\(", "X-\\(", "x\\(", "x-\\(",
-		":@", "&lt;_&lt;" }, ANGRY);
-	replace(message, new String[] { "\\(bandit\\)", ":\\(&gt;" }, BANDIT);
-	replace(message, new String[] { ":&quot;&gt;", ":\\*&gt;", ":-$", ":$" }, BLUSHING);
-	replace(message, new String[] { "B\\)", "B-\\)", "8\\)" }, COOL);
-	replace(message, new String[] { ":\'\\(", "=\'\\(" }, CRYING);
-	replace(message, new String[] { "&gt;:\\)" }, DEVIL);
-	replace(message, new String[] { ":-d", ":d", ":-D", ":D", ":d", "=D", "=-D" }, GRIN);
-	replace(message, new String[] { "=\\)", "=-\\)" }, HAPPY);
-	replace(message, new String[] { "\\(L\\)", "\\(h\\)", "\\(H\\)" }, HEART);
-	replace(message, new String[] { "^_^", "^-^", "^^", ":\\)\\)", ":-\\)\\)" }, JOYFUL);
-	replace(message, new String[] { ":-\\*", ":\\*" }, KISSING);
-	replace(message, new String[] { "\\(LOL\\)", "lol" }, LOL);
-	replace(message, new String[] { ":-X", ":-xX", ":x", "\\(wubya\\)", "\\(wubyou\\)", "\\(wub\\)" }, LOVE);
-	replace(message, new String[] { "\\(:\\)", "\\(ph33r\\)", "\\(ph34r\\)" }, NINJA);
-	replace(message, new String[] { "&gt;_&lt;" }, PINCHED);
-	replace(message, new String[] { "\\(police\\)", "\\(cop\\)", "{\\):\\)" }, POLICEMAN);
-	replace(message, new String[] { ":|", "=|", ":-|" }, POUTY);
-	replace(message, new String[] { ":\\(", "=\\(", "=-\\(", ":-\\(" }, SAD);
-	replace(message, new String[] { ":&amp;", ":-&amp;" }, SICK);
-	replace(message, new String[] { "=]" }, SIDEWAYS);
-	replace(message, new String[] { "\\(-.-\\)", "|\\)", "|-\\)", "I-\\)", "I-|" }, SLEEPING);
-	replace(message, new String[] { ":-\\)", ":\\)" }, SMILE);
-	replace(message, new String[] { ":-O", ":O", ":-o", ":o", ":-0", "=-O", "=-o", "=o", "=O" }, SURPRISED);
-	replace(message, new String[] { ":P", "=P", "=p", ":-P", ":p", ":-p", ":b" }, TONGUE);
-	replace(message, new String[] { ":-\\", ":-/", ":/", ":\\" }, UNCERTAIN);
-	replace(message, new String[] { ":s", ":-S", ":-s", ":S" }, UNSURE);
-	replace(message, new String[] { "\\(woot\\)", "\\(w00t\\)", "\\(wOOt\\)" }, W00T);
-	replace(message, new String[] { ":-&quot;" }, WHISTLING);
-	replace(message, new String[] { ";\\)", ";-\\)", ";&gt;" }, WINK);
-	replace(message, new String[] { "\\(wizard\\)" }, WIZARD);
-	replace(message, new String[] { ":\\?" }, WONDERING);
+	message = replace(message, new String[] { "&gt;:\\)" }, DEVIL);
+	message = replace(message, new String[] { "O:\\)", "o:\\)", "o:-\\)", "O:-\\)", "0:\\)", "0:-\\)" }, ANGEL);
+	message = replace(message, new String[] { "\\^_\\^", "\\^-\\^", "\\^\\^", ":\\)\\)", ":-\\)\\)" }, JOYFUL);
+	message = replace(message, new String[] { "\\(police\\)", "\\(cop\\)", "\\{\\):\\)" }, POLICEMAN);
+	message = replace(message, new String[] { "=:\\)", "\\(alien\\)" }, ALIEN);
+	message = replace(message, new String[] { "o_O", "o_0", "O_O", "o_o", "O_o", "0_o", "o0", "0o", "oO", "Oo",
+		"0_0" }, ANDY);
+	message = replace(message, new String[] { "&gt;:o", "&gt;:-o", "&gt;:O", "&gt;:-O", "X\\(", "X-\\(", "x\\(",
+		"x-\\(", ":@", "&lt;_&lt;" }, ANGRY);
+	message = replace(message, new String[] { "\\(bandit\\)", ":\\(&gt;" }, BANDIT);
+	message = replace(message, new String[] { ":&quot;&gt;", ":\\*&gt;", ":-\\$", ":\\$" }, BLUSHING);
+	message = replace(message, new String[] { "B\\)", "B-\\)", "8\\)" }, COOL);
+	message = replace(message, new String[] { ":\'\\(", "=\'\\(" }, CRYING);
+	message = replace(message, new String[] { ":-d", ":d", ":-D", ":D", ":d", "=D", "=-D" }, GRIN);
+	message = replace(message, new String[] { "=\\)", "=-\\)" }, HAPPY);
+	message = replace(message, new String[] { "\\(L\\)", "\\(h\\)", "\\(H\\)" }, HEART);
+	message = replace(message, new String[] { ":-\\*", ":\\*" }, KISSING);
+	message = replace(message, new String[] { "\\(LOL\\)", "lol" }, LOL);
+	message = replace(message, new String[] { ":-X", ":-xX", ":x", "\\(wubya\\)", "\\(wubyou\\)", "\\(wub\\)" },
+		LOVE);
+	message = replace(message, new String[] { "\\(:\\)", "\\(ph33r\\)", "\\(ph34r\\)" }, NINJA);
+	message = replace(message, new String[] { "&gt;_&lt;" }, PINCHED);
+	message = replace(message, new String[] { ":\\|", "=\\|", ":-\\|" }, POUTY);
+	message = replace(message, new String[] { ":\\(", "=\\(", "=-\\(", ":-\\(" }, SAD);
+	message = replace(message, new String[] { ":&amp;", ":-&amp;" }, SICK);
+	message = replace(message, new String[] { "=]" }, SIDEWAYS);
+	message = replace(message, new String[] { "\\(-.-\\)", "\\|\\)", "\\|-\\)", "I-\\)", "I-\\|" }, SLEEPING);
+	message = replace(message, new String[] { ":-O", ":O", ":-o", ":o", ":-0", "=-O", "=-o", "=o", "=O" },
+		SURPRISED);
+	message = replace(message, new String[] { ":P", "=P", "=p", ":-P", ":p", ":-p", ":b" }, TONGUE);
+	message = replace(message, new String[] { ":-\\\\", ":-/", ":/", ":\\\\" }, UNCERTAIN);
+	message = replace(message, new String[] { ":s", ":-S", ":-s", ":S" }, UNSURE);
+	message = replace(message, new String[] { "\\(woot\\)", "\\(w00t\\)", "\\(wOOt\\)" }, W00T);
+	message = replace(message, new String[] { ":-&quot;" }, WHISTLING);
+	message = replace(message, new String[] { ";\\)", ";-\\)", ";&gt;" }, WINK);
+	message = replace(message, new String[] { "\\(wizard\\)" }, WIZARD);
+	message = replace(message, new String[] { ":\\?" }, WONDERING);
+	message = replace(message, new String[] { ":-\\)", ":\\)" }, SMILE);
 
 	message = message.replaceAll(SMILE, img.smile().getHTML());
 	message = message.replaceAll(CRYING, img.crying().getHTML());
@@ -148,15 +151,18 @@ public class ChatTextFormatter {
 	message = message.replaceAll(WONDERING, img.wondering().getHTML());
 	message = message.replaceAll(WHISTLING, img.whistling().getHTML());
 	message = message.replaceAll(WIZARD, img.wizard().getHTML());
+
+	return message;
     }
 
-    private static void replace(String message, final String[] from, final String to) {
+    private static String replace(String message, final String[] from, final String to) {
 	for (int j = 0; j < from.length; j++) {
 	    message = message.replaceAll(from[j], to);
 	}
+	return message;
     }
 
-    private static void formatEmoticons(String message) {
+    private static String formatEmoticons(String message) {
 	message = message.replaceAll(":\\)", SMILE);
 	message = message.replaceAll(":-\\)", SMILE);
 
@@ -204,5 +210,7 @@ public class ChatTextFormatter {
 	message = message.replaceAll(WINK, RoomImages.App.getInstance().wink().getHTML());
 	message = message.replaceAll(WONDERING, RoomImages.App.getInstance().wondering().getHTML());
 	message = message.replaceAll(LOVE, RoomImages.App.getInstance().love().getHTML());
+
+	return message;
     }
 }

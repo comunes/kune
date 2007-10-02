@@ -25,6 +25,8 @@ import java.util.Map;
 import org.ourproject.kune.chat.client.rooms.RoomUser.UserType;
 import org.ourproject.kune.platf.client.View;
 
+import to.tipit.gwtlib.FireLog;
+
 import com.calclab.gwtjsjac.client.mandioca.rooms.XmppRoom;
 
 public class RoomPresenter implements Room {
@@ -76,13 +78,16 @@ public class RoomPresenter implements Room {
     }
 
     public void addMessage(final String userAlias, final String message) {
+	String userColor;
+
 	RoomUser user = (RoomUser) users.get(userAlias);
-	if (user == null) {
-	    String error = "Trying to send a chat message with a user not in this room";
-	    view.showInfoMessage(error);
-	    throw new RuntimeException(message);
+	if (user != null) {
+	    userColor = user.getColor();
+	} else {
+	    FireLog.debug("User " + userAlias + " not in our users list");
+	    userColor = "black";
 	}
-	view.showMessage(user.getAlias(), user.getColor(), message);
+	view.showMessage(userAlias, userColor, message);
 	listener.onMessageReceived(this);
     }
 

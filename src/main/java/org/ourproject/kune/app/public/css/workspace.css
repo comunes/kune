@@ -38,8 +38,10 @@
   font-size: 85%;
   margin: 5px;
   text-decoration: underline;
-  background-color: #FFF;
   white-space: nowrap;
+  background: #FFF;
+  overflow: hidden;
+  background-color: #FFF;
 }
 
 .kune-GroupSummaryPanel {
