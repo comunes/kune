@@ -42,20 +42,24 @@ public class EmoticonPalettePanel extends Composite {
 	addNextIcon(createEmoticon(img.bandit(), "(bandit)", listener));
 	addNextIcon(createEmoticon(img.blushing(), ":-$", listener));
 	addNextIcon(createEmoticon(img.devil(), ">:)", listener));
+	addNextIcon(createEmoticon(img.whistling(), ":-\"", listener));
 	addNextIcon(createEmoticon(img.heart(), "(H)", listener));
 	addNextIcon(createEmoticon(img.lol(), "(LOL)", listener));
 	addNextIcon(createEmoticon(img.ninja(), "(:)", listener));
 	addNextIcon(createEmoticon(img.pinched(), ">_<", listener));
 	addNextIcon(createEmoticon(img.policeman(), "(police)", listener));
 	addNextIcon(createEmoticon(img.pouty(), ":|", listener));
-	addNextIcon(createEmoticon(img.sick(), ":-@", listener));
+	addNextIcon(createEmoticon(img.wizard(), "(wizard)", listener));
+	addNextIcon(createEmoticon(img.sick(), ":-&", listener));
 	addNextIcon(createEmoticon(img.sideways(), "=]", listener));
 	addNextIcon(createEmoticon(img.unsure(), ":-S", listener));
 	addNextIcon(createEmoticon(img.w00t(), "(woot)", listener));
 	addNextIcon(createEmoticon(img.wink(), ";-)", listener));
 	addNextIcon(createEmoticon(img.wondering(), ":?", listener));
-	addNextIcon(createEmoticon(img.whistling(), ":-\"", listener));
-	addNextIcon(createEmoticon(img.wizard(), "(wizard)", listener));
+	addNextIcon(createEmoticon(
+		img.bulletStar(),
+		":-) :\'( :-O 0:) =) :D :-)) :-/ x-( :P :-X |-) 8) :* :( =:) 0o (bandit) :-$ >:) (H) (LOL) (:) >_< (police) :| :-& =] :-S (woot) ;-) :? :-\\",
+		listener));
     }
 
     private void addNextIcon(final Image img) {

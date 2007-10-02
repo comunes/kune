@@ -1,3 +1,6 @@
+2007-10-02 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* New ChatTextFormatter more complete
+
 2007-10-01 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* Custom splitter for Workspace HorizontalSplitPanel
 	* new finders in Group to search groups in which a User(or a Group) is
