@@ -1,5 +1,10 @@
 2007-10-02 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* SocialNetwork request/join fixed
+	* Chat room creation now make persist room
+	
+2007-10-02 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* New ChatTextFormatter more complete
+	* Some fixes
 
 2007-10-01 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* Custom splitter for Workspace HorizontalSplitPanel

@@ -122,6 +122,7 @@ public class XmppManagerDefault implements XmppManager {
 		answer.setAnswer(field.getVariable(), values);
 	    }
 	}
+	answer.setAnswer("muc#roomconfig_persistentroom", true);
 	muc.sendConfigurationForm(answer);
     }
 

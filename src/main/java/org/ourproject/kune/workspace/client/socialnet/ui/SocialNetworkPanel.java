@@ -19,13 +19,13 @@ public class SocialNetworkPanel extends StackedDropDownPanel implements SocialNe
     public void addJoinLink() {
 	// FIXME: add new event
 	// i18n
-	super.addBottomLink(img.addGreen(), "Request to join", "fixme", WorkspaceEvents.GOTO_GROUP);
+	super.addBottomLink(img.addGreen(), "Request to join", "fixme", WorkspaceEvents.REQ_JOIN_GROUP);
     }
 
     public void addAddMemberLink() {
 	// FIXME: add new event
 	// i18n
-	super.addBottomLink(img.addGreen(), "Add member", "fixme", WorkspaceEvents.GOTO_GROUP);
+	super.addBottomLink(img.addGreen(), "Add member", "fixme", WorkspaceEvents.ADD_ADMIN_MEMBER);
     }
 
     public void clear() {
@@ -50,6 +50,9 @@ public class SocialNetworkPanel extends StackedDropDownPanel implements SocialNe
     private AbstractImagePrototype getIcon(final String event) {
 	if (event == WorkspaceEvents.ACCEPT_JOIN_GROUP) {
 	    return img.accept();
+	}
+	if (event == WorkspaceEvents.DENY_JOIN_GROUP) {
+	    return img.cancel();
 	}
 	if (event == WorkspaceEvents.DEL_MEMBER) {
 	    return img.del();
