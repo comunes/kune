@@ -46,6 +46,7 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener, Mult
     private final WorkspaceDeckView view;
     private final Components components;
     private final HashMap roomNamesToRooms;
+    private StateDTO state;
 
     public ChatContentPresenter(final WorkspaceDeckView view) {
 	this.view = view;
@@ -64,6 +65,7 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener, Mult
     }
 
     public void setState(final StateDTO state) {
+	this.state = state;
 	String typeId = state.getTypeId();
 	if (typeId.equals(ChatClientTool.TYPE_ROOT)) {
 	    ChatInfo info = components.getChatInfo();
@@ -78,8 +80,8 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener, Mult
 
     public void onEnterRoom() {
 	MultiRoom rooms = components.getRooms();
-	// FIXME: hardcoded
-	Room room = getRoom("kune", "me" + new Date().getTime(), RoomUser.VISITOR);
+	String roomName = state.getFolder().getName();
+	Room room = getRoom(roomName, "me" + new Date().getTime(), RoomUser.VISITOR);
 	rooms.activateRoom(room);
 	rooms.show();
     }

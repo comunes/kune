@@ -43,17 +43,19 @@ public class AddRoomAction implements Action {
     private void addRoom(final Services services, final String name, final GroupDTO group, final ContainerDTO container) {
 	Site.showProgressProcessing();
 	ContentServiceAsync server = ContentService.App.getInstance();
-	server.addRoom(services.user, group.getShortName(), container.getId(), name, new AsyncCallback() {
-	    public void onFailure(final Throwable caught) {
-		Site.hideProgress();
-		// i18n
-		Site.error("Error creating room");
-	    }
+	String groupShortName = group.getShortName();
+	server.addRoom(services.user, groupShortName, container.getId(), groupShortName + "-" + name,
+		new AsyncCallback() {
+		    public void onFailure(final Throwable caught) {
+			Site.hideProgress();
+			// i18n
+			Site.error("Error creating room");
+		    }
 
-	    public void onSuccess(final Object result) {
-		StateDTO content = (StateDTO) result;
-		services.stateManager.setState(content);
-	    }
-	});
+		    public void onSuccess(final Object result) {
+			StateDTO content = (StateDTO) result;
+			services.stateManager.setState(content);
+		    }
+		});
     }
 }

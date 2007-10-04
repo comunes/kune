@@ -1,7 +1,12 @@
-2007-10-02 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+2007-10-04 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* Room creation and join with real room names (not hardcoded)
+	* Overflow of bottom title panel fixed
+	* SocialNetwork pending collabs only show to admins
+
+2007-10-03 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* SocialNetwork request/join fixed
 	* Chat room creation now make persist room
-	
+
 2007-10-02 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* New ChatTextFormatter more complete
 	* Some fixes

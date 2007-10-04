@@ -36,7 +36,7 @@ public class SocialNetworkPresenter implements SocialNetworkComponent, AbstractP
 	boolean userIsAdmin = rights.isAdministrable();
 	boolean userIsCollab = rights.isEditable();
 	boolean userCanView = rights.isVisible();
-	boolean isMember = isMember(userIsAdmin, userIsCollab);
+	boolean userIsMember = isMember(userIsAdmin, userIsCollab);
 
 	view.setDropDownContentVisible(false);
 	view.clear();
@@ -45,7 +45,7 @@ public class SocialNetworkPresenter implements SocialNetworkComponent, AbstractP
 	    view.addAddMemberLink();
 	}
 
-	if (!isMember) {
+	if (!userIsMember) {
 	    view.addJoinLink();
 	}
 
@@ -62,14 +62,14 @@ public class SocialNetworkPresenter implements SocialNetworkComponent, AbstractP
 			gotoGroupCommand() };
 		MemberAction[] viewerActions = { gotoGroupCommand() };
 		addMembers(adminsList, collabList, pendingCollabsList, numAdmins, numCollaborators, numPendingCollabs,
-			isMember, adminsActions, collabActions, pendingsActions, viewerActions);
+			userIsAdmin, adminsActions, collabActions, pendingsActions, viewerActions);
 	    } else if (rights.isEditable() || rights.isVisible) {
 		MemberAction[] adminsActions = { gotoGroupCommand() };
 		MemberAction[] collabActions = { gotoGroupCommand() };
 		MemberAction[] pendingsActions = { gotoGroupCommand() };
 		MemberAction[] viewerActions = { gotoGroupCommand() };
 		addMembers(adminsList, collabList, pendingCollabsList, numAdmins, numCollaborators, numPendingCollabs,
-			isMember, adminsActions, collabActions, pendingsActions, viewerActions);
+			userIsAdmin, adminsActions, collabActions, pendingsActions, viewerActions);
 	    }
 	}
 	view.setDropDownContentVisible(true);
@@ -103,7 +103,7 @@ public class SocialNetworkPresenter implements SocialNetworkComponent, AbstractP
     }
 
     private void addMembers(final List adminsList, final List collabList, final List pendingCollabsList,
-	    final int numAdmins, final int numCollaborators, final int numPendingCollabs, final boolean isMember,
+	    final int numAdmins, final int numCollaborators, final int numPendingCollabs, final boolean isAdmin,
 	    final MemberAction[] adminsActions, final MemberAction[] collabActions,
 	    final MemberAction[] pendingsActions, final MemberAction[] viewerActions) {
 	if (numAdmins > 0) {
@@ -115,7 +115,7 @@ public class SocialNetworkPresenter implements SocialNetworkComponent, AbstractP
 	    view.addCategory("Collaborators", "Other people that collaborate with this group");
 	    iteraList("Collaborators", collabList, collabActions);
 	}
-	if (isMember) {
+	if (isAdmin) {
 	    if (numPendingCollabs > 0) {
 		view.addCategory("Pending", "People pending to be accepted in this group by the admins");
 		iteraList("Pending", pendingCollabsList, pendingsActions);
