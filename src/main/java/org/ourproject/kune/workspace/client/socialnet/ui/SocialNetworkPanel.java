@@ -10,6 +10,7 @@ import org.ourproject.kune.workspace.client.workspace.ui.StackedDropDownPanel;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 public class SocialNetworkPanel extends StackedDropDownPanel implements SocialNetworkView {
+
     private final Images img = Images.App.getInstance();
 
     public SocialNetworkPanel(final AbstractPresenter presenter) {
@@ -36,18 +37,29 @@ public class SocialNetworkPanel extends StackedDropDownPanel implements SocialNe
 	super.addStackItem(name, title, true);
     }
 
+    public void addCategory(final String name, final String title, final String iconType) {
+	super.addStackItem(name, title, getIcon(iconType), StackedDropDownPanel.ICON_HORIZ_ALIGN_RIGHT, true);
+    }
+
     public void addCategoryMember(final String categoryName, final String name, final String title,
 	    final MemberAction[] memberActions) {
 	StackSubItemAction[] subItems = new StackSubItemAction[memberActions.length];
 	for (int i = 0; i < memberActions.length; i++) {
-	    subItems[i] = new StackSubItemAction(getIcon(memberActions[i].getAction()), memberActions[i].getText(),
-		    memberActions[i].getAction());
+	    subItems[i] = new StackSubItemAction(getIconFronEvent(memberActions[i].getAction()), memberActions[i]
+		    .getText(), memberActions[i].getAction());
 	}
 
 	super.addStackSubItem(categoryName, img.groupDefIcon(), name, title, subItems);
     }
 
     private AbstractImagePrototype getIcon(final String event) {
+	if (event == SocialNetworkView.ICON_ALERT) {
+	    return img.alert();
+	}
+	throw new IndexOutOfBoundsException("Event unknown in Socialnetwork");
+    }
+
+    private AbstractImagePrototype getIconFronEvent(final String event) {
 	if (event == WorkspaceEvents.ACCEPT_JOIN_GROUP) {
 	    return img.accept();
 	}
@@ -67,6 +79,14 @@ public class SocialNetworkPanel extends StackedDropDownPanel implements SocialNe
 	    return img.arrowUpGreen();
 	}
 	throw new IndexOutOfBoundsException("Event unknown in Socialnetwork");
+    }
+
+    public void show() {
+	this.setVisible(true);
+    }
+
+    public void hide() {
+	this.setVisible(false);
     }
 
 }

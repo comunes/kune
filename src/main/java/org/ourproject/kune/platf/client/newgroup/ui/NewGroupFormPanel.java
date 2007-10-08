@@ -137,14 +137,17 @@ public class NewGroupFormPanel extends WizardDialog implements NewGroupFormView 
     }
 
     public boolean isProject() {
+	FireLog.debug("Is project: " + projectRadio.getValue());
 	return projectRadio.getValue();
     }
 
     public boolean isOrganization() {
+	FireLog.debug("Is org: " + orgRadio.getValue());
 	return orgRadio.getValue();
     }
 
     public boolean isCommunity() {
+	FireLog.debug("Is community: " + communityRadio.getValue());
 	return communityRadio.getValue();
     }
 

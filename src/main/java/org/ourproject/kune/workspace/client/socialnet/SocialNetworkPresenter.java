@@ -73,6 +73,11 @@ public class SocialNetworkPresenter implements SocialNetworkComponent, AbstractP
 	    }
 	}
 	view.setDropDownContentVisible(true);
+	view.show();
+    }
+
+    public void hide() {
+	view.hide();
     }
 
     public void onJoin() {
@@ -117,9 +122,9 @@ public class SocialNetworkPresenter implements SocialNetworkComponent, AbstractP
 	}
 	if (isAdmin) {
 	    if (numPendingCollabs > 0) {
-		view.addCategory("Pending", "People pending to be accepted in this group by the admins");
+		view.addCategory("Pending", "People pending to be accepted in this group by the admins",
+			SocialNetworkView.ICON_ALERT);
 		iteraList("Pending", pendingCollabsList, pendingsActions);
-
 	    }
 	}
 

@@ -23,16 +23,16 @@ package org.ourproject.kune.platf.client.dto;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class GroupDTO implements IsSerializable {
-    public static final int TYPE_ORGANIZATION = 0;
-    public static final int TYPE_COMNUNITY = 1;
-    public static final int TYPE_PROJECT = 2;
-    public static final int TYPE_PERSONAL = 3;
+    public static final String ORGANIZATION = "ORGANIZATION";
+    public static final String COMMUNITY = "COMMUNITY";
+    public static final String PROJECT = "PROJECT";
+    public static final String PERSONAL = "PERSONAL";
 
     private Long id;
     private String shortName;
     private String longName;
     private String publicDesc;
-    private int type;
+    private String type;
 
     private String defaultToolName;
     private Long defaultFolderId;
@@ -41,10 +41,10 @@ public class GroupDTO implements IsSerializable {
     private LicenseDTO defaultLicense;
 
     public GroupDTO() {
-	this(null, null, null, TYPE_ORGANIZATION);
+	this(null, null, null, ORGANIZATION);
     }
 
-    public GroupDTO(final String shortName, final String longName, final String publicDesc, final int type) {
+    public GroupDTO(final String shortName, final String longName, final String publicDesc, final String type) {
 	this.shortName = shortName;
 	this.longName = longName;
 	this.publicDesc = publicDesc;
@@ -67,7 +67,7 @@ public class GroupDTO implements IsSerializable {
 	return shortName;
     }
 
-    public int getType() {
+    public String getType() {
 	return type;
     }
 
@@ -87,7 +87,7 @@ public class GroupDTO implements IsSerializable {
 	this.shortName = shortName;
     }
 
-    public void setType(final int type) {
+    public void setType(final String type) {
 	this.type = type;
     }
 
@@ -134,7 +134,8 @@ public class GroupDTO implements IsSerializable {
 	result = prime * result + (longName == null ? 0 : longName.hashCode());
 	result = prime * result + (publicDesc == null ? 0 : publicDesc.hashCode());
 	result = prime * result + (shortName == null ? 0 : shortName.hashCode());
-	result = prime * result + type;
+	result = prime * result + (type == null ? 0 : type.hashCode());
+	;
 	return result;
     }
 

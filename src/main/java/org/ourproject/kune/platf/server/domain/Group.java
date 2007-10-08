@@ -62,6 +62,10 @@ public class Group implements HasId {
     @Column(nullable = false)
     AdmissionType admissionType;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    GroupType type;
+
     @OneToOne
     private Content defaultContent;
 
@@ -75,14 +79,20 @@ public class Group implements HasId {
     private final Map<String, ToolConfiguration> toolsConfig;
 
     public Group() {
-	this(null, null);
+	this(null, null, null, null);
     }
 
     public Group(final String shortName, final String longName) {
+	this(shortName, longName, null, GroupType.PROJECT);
+    }
+
+    public Group(final String shortName, final String longName, final License defaultLicense, final GroupType type) {
 	this.shortName = shortName;
 	this.longName = longName;
 	toolsConfig = new HashMap<String, ToolConfiguration>();
 	socialNetwork = new SocialNetwork();
+	this.defaultLicense = defaultLicense;
+	this.type = type;
 	admissionType = AdmissionType.Moderated;
     }
 
@@ -188,6 +198,14 @@ public class Group implements HasId {
 
     public void setDefaultLicense(final License defaultLicense) {
 	this.defaultLicense = defaultLicense;
+    }
+
+    public GroupType getType() {
+	return type;
+    }
+
+    public void setType(final GroupType type) {
+	this.type = type;
     }
 
     @Override

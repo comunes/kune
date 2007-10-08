@@ -43,7 +43,7 @@ public interface AccessService {
     Access getFolderAccess(Long folderId, User user, AccessType accessType) throws AccessViolationException,
 	    ContentNotFoundException;
 
-    Content accessToContent(Long contentId, User user, AccessType edit) throws ContentNotFoundException,
+    Content accessToContent(Long contentId, User user, AccessType accessType) throws ContentNotFoundException,
 	    AccessViolationException;
 
 }

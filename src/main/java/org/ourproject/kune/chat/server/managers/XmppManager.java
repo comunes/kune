@@ -32,4 +32,6 @@ public interface XmppManager {
 
     void sendMessage(Room room, String message);
 
+    void destroyRoom(ChatConnection conn, String roomName);
+
 }

@@ -78,13 +78,13 @@ public class KuneRPC implements RPC, KuneService {
 		+ group.getType());
 	final User user = session.getUser();
 	final Group newGroup = groupManager.createGroup(mapper.map(group, Group.class), user);
-	if (group.getType() == GroupDTO.TYPE_COMNUNITY) {
+	if (group.getType() == GroupDTO.COMMUNITY) {
 	    newGroup.setAdmissionType(AdmissionType.Open);
 	}
-	if (group.getType() == GroupDTO.TYPE_ORGANIZATION) {
+	if (group.getType() == GroupDTO.ORGANIZATION) {
 	    newGroup.setAdmissionType(AdmissionType.Moderated);
 	}
-	if (group.getType() == GroupDTO.TYPE_PROJECT) {
+	if (group.getType() == GroupDTO.PROJECT) {
 	    newGroup.setAdmissionType(AdmissionType.Moderated);
 	}
 	return new StateToken(newGroup.getDefaultContent().getStateToken());

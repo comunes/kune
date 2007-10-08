@@ -33,19 +33,17 @@
   height: 27;
 }
 
-.kune-EntityTextLogo .gwt-Hyperlink {
+.kune-EntityTextLogo .gwt-Hyperlink a {
   color: #CCC;
   font-size: 85%;
   margin: 5px;
   text-decoration: underline;
   white-space: nowrap;
-  background: #FFF;
-  overflow: hidden;
   background-color: #FFF;
 }
 
 .kune-GroupSummaryPanel {
-  margin: 15px 0 0 5px;
+  margin: 10px 0 0 5px;
   width: 100%;
 }
 
@@ -122,16 +120,20 @@
 .kune-ContentBottomBar {
   background: #5FD35F;
   vertical-align: middle;
-  width: 100%;
+  /* width: 100%; */
   height: 24px;
+  margin: 0 9px;
 }
 
 .kune-ContentBottomBar .gwt-Label {
   color: #FFF;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   font-weight: 700;
   font-size: 85%;
-  margin: 0 9px;
+}
+
+.kune-ContentBottomBar .gwt-Image {
+  margin-left: 5px;
 }
 
 /* Main Content & Context */
@@ -276,8 +278,8 @@
 }
 
 .kune-SiteMessagePanel {
-  background-color: #E5FF80;
-  border: 1px solid #CF0;
+  /* background-color: #E5FF80;
+  border: 1px solid #CF0; */
   color: #250;
   position:absolute;
   z-index: 10000;
@@ -289,23 +291,27 @@
 }
 
 .kune-SiteMessagePanel .gwt-Image {
-  margin: 3px;
+  margin: 5px;
 }
 
-.kune-SiteMessagePanel .error {
+.kune-SiteMessagePanel-error {
   background-color: #FFB380;
+  border: 1px solid #FF0066;
 }
 
-.kune-SiteMessagePanel .veryimp {
+.kune-SiteMessagePanel-veryimp {
   background-color: #FFD4AA;
+  border: 1px solid #FF5599;
 }
 
-.kune-SiteMessagePanel .imp {
+.kune-SiteMessagePanel-imp {
   background-color: #FFE6D5;
+  border: 1px solid #DE87AA;
 }
 
-.kune-SiteMessagePanel .info {
+.kune-SiteMessagePanel-info {
   background-color: #E5FF80;
+  border: 1px solid #87DE87;
 }
 
 /* Social Network */

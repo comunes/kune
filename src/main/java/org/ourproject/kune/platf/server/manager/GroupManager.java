@@ -41,8 +41,6 @@ public interface GroupManager extends Manager<Group, Long> {
 
     Group getDefaultGroup();
 
-    void setSiteDefLicense(Group group);
-
     /**
      * IMPORTANT: returns null if userId is null
      * 

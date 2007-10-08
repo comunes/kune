@@ -7,6 +7,7 @@ import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class EmoticonPalettePanel extends Composite {
@@ -17,8 +18,11 @@ public class EmoticonPalettePanel extends Composite {
 
     public EmoticonPalettePanel(final EmoticonPaletteListener listener) {
 	grid = new Grid(PALETTE_ROWS, PALETTE_COLUMNS);
+	SimplePanel sp = new SimplePanel();
+	sp.add(grid);
+	sp.setStyleName("kune-Margin-Medium-trbl");
 	currentWidget = 0;
-	initWidget(grid);
+	initWidget(sp);
 	grid.setCellSpacing(1);
 	grid.addStyleName("kune-MultiRoomPanel-EmoticonPalette");
 	RoomImages img = RoomImages.App.getInstance();

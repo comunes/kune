@@ -39,7 +39,7 @@ public class DesktopPanel extends AbsolutePanel implements DesktopView {
 	QuickTips.init(); // extgwt tips
 	SiteBar siteBar = SiteBarFactory.createSiteBar(listener);
 	SiteMessage siteMessage = SiteBarFactory.getSiteMessage();
-	this.add((Widget) siteMessage.getView(), Window.getClientWidth() * 40 / 100 - 10, 2);
+	this.add((Widget) siteMessage.getView(), Window.getClientWidth() * 20 / 100 - 10, 2);
 	this.setSize("100%", "100%");
 	this.add((Widget) siteBar.getView(), 0, 0);
 	this.add((Widget) workspace.getView(), 0, 20);
@@ -57,7 +57,7 @@ public class DesktopPanel extends AbsolutePanel implements DesktopView {
 	    public void onWindowResized(final int width, final int height) {
 		workspace.adjustSize(width, height);
 		siteMessage.adjustWidth(width);
-		desktop.setWidgetPosition((Widget) siteMessage.getView(), Window.getClientWidth() * 40 / 100 - 10, 2);
+		desktop.setWidgetPosition((Widget) siteMessage.getView(), Window.getClientWidth() * 20 / 100 - 10, 2);
 	    }
 	});
 	Window.enableScrolling(false);

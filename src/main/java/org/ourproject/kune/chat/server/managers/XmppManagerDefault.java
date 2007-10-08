@@ -80,6 +80,16 @@ public class XmppManagerDefault implements XmppManager {
 	}
     }
 
+    public void destroyRoom(final ChatConnection conn, final String roomName) {
+	XmppConnection xConn = (XmppConnection) conn;
+	MultiUserChat muc = new MultiUserChat(xConn.getConn(), getRoomName(roomName));
+	try {
+	    muc.destroy("Room removed by kune server", "");
+	} catch (XMPPException e) {
+	    throw new ChatException(e);
+	}
+    }
+
     public Room joinRoom(final ChatConnection connection, final String roomName, final String alias) {
 	XmppConnection xConn = (XmppConnection) connection;
 	MultiUserChat muc = new MultiUserChat(xConn.getConn(), getRoomName(roomName));

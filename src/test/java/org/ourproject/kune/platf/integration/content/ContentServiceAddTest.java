@@ -76,13 +76,12 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 	String title = "folder name";
 	StateDTO newState = contentService.addFolder(session.getHash(), groupName, parent.getId(), title);
 	assertNotNull(newState);
-	ContainerDTO child = newState.getFolder();
-	// assertEquals(parent.getAbsolutePath() + ContainerDTO.SEP + title,
-	// child.getAbsolutePath());
-	assertEquals(parent.getAbsolutePath(), child.getAbsolutePath());
-	assertEquals(parent.getId(), child.getParentFolderId());
 
 	ContainerDTO parentAgain = getDefaultContent().getFolder();
+	ContainerDTO child = (ContainerDTO) parentAgain.getChilds().get(0);
+	assertEquals(parent.getAbsolutePath() + ContainerDTO.SEP + title, child.getAbsolutePath());
+	assertEquals(parent.getId(), child.getParentFolderId());
+
 	assertEquals(parent.getId(), parentAgain.getId());
 	assertEquals(1, parentAgain.getChilds().size());
     }

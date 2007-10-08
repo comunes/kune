@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.ourproject.kune.platf.server.PersistenceTest;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.GroupType;
 import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
@@ -49,8 +50,7 @@ public class GroupManagerTest extends PersistenceTest {
 
     @Test
     public void createdGroupShoudHaveValidSocialNetwork() throws SerializableException {
-	final Group group = new Group("short", "longName");
-	group.setDefaultLicense(licenseDef);
+	final Group group = new Group("short", "longName", licenseDef, GroupType.PROJECT);
 	groupManager.createGroup(group, user);
 	final SocialNetwork socialNetwork = group.getSocialNetwork();
 	final AccessLists lists = socialNetwork.getAccessLists();
@@ -62,8 +62,8 @@ public class GroupManagerTest extends PersistenceTest {
 
     @Test
     public void createGroup() throws SerializableException {
-	final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative");
-	group.setDefaultLicense(licenseDef);
+	final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", licenseDef,
+		GroupType.PROJECT);
 	groupManager.createGroup(group, user);
 	final Group otherGroup = groupManager.findByShortName("ysei");
 
@@ -74,12 +74,12 @@ public class GroupManagerTest extends PersistenceTest {
 
     @Test(expected = SerializableException.class)
     public void createGroupWithExistingShortName() throws SerializableException {
-	final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative");
-	group.setDefaultLicense(licenseDef);
+	final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", licenseDef,
+		GroupType.PROJECT);
 	groupManager.createGroup(group, user);
 
-	final Group group2 = new Group("ysei", "Yellow Submarine Environmental Initiative 2");
-	group2.setDefaultLicense(licenseDef);
+	final Group group2 = new Group("ysei", "Yellow Submarine Environmental Initiative 2", licenseDef,
+		GroupType.PROJECT);
 	groupManager.createGroup(group2, user);
 
 	rollbackTransaction();
@@ -87,11 +87,12 @@ public class GroupManagerTest extends PersistenceTest {
 
     @Test(expected = SerializableException.class)
     public void createGroupWithExistingLongName() throws SerializableException {
-	final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative");
-	group.setDefaultLicense(licenseDef);
+	final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", licenseDef,
+		GroupType.PROJECT);
 	groupManager.createGroup(group, user);
 
-	final Group group2 = new Group("ysei2", "Yellow Submarine Environmental Initiative");
+	final Group group2 = new Group("ysei2", "Yellow Submarine Environmental Initiative", licenseDef,
+		GroupType.PROJECT);
 	group2.setDefaultLicense(licenseDef);
 	groupManager.createGroup(group2, user);
 

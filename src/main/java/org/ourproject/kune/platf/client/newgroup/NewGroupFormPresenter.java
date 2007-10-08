@@ -70,13 +70,13 @@ public class NewGroupFormPresenter implements NewGroupForm {
 	return view;
     }
 
-    private int getTypeOfGroup() {
+    private String getTypeOfGroup() {
 	if (view.isProject()) {
-	    return GroupDTO.TYPE_PROJECT;
+	    return GroupDTO.PROJECT;
 	} else if (view.isOrganization()) {
-	    return GroupDTO.TYPE_ORGANIZATION;
+	    return GroupDTO.ORGANIZATION;
 	} else {
-	    return GroupDTO.TYPE_COMNUNITY;
+	    return GroupDTO.COMMUNITY;
 	}
     }
 

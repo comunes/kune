@@ -117,9 +117,9 @@ public class ContentRPC implements ContentService, RPC {
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
-    public StateDTO addFolder(final String userHash, final String groupShotName, final Long parentFolderId,
+    public StateDTO addFolder(final String userHash, final String groupShortName, final Long parentFolderId,
 	    final String title) throws ContentNotFoundException, AccessViolationException, GroupNotFoundException {
-	return createFolder(groupShotName, parentFolderId, title);
+	return createFolder(groupShortName, parentFolderId, title);
     }
 
     private StateDTO createFolder(final String groupShortName, final Long parentFolderId, final String title)
@@ -140,13 +140,24 @@ public class ContentRPC implements ContentService, RPC {
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
-    public StateDTO addRoom(final String userHash, final String groupShotName, final Long parentFolderId,
+    public StateDTO addRoom(final String userHash, final String groupShortName, final Long parentFolderId,
 	    final String roomName) throws ContentNotFoundException, AccessViolationException, GroupNotFoundException {
 	final String userShortName = session.getUser().getShortName();
 	final ChatConnection connection = xmppManager.login(userShortName, session.getUser().getPassword(), userHash);
 	xmppManager.createRoom(connection, roomName, userShortName + userHash);
 	xmppManager.disconnect(connection);
-	return createFolder(groupShotName, parentFolderId, roomName);
+	try {
+	    return createFolder(groupShortName, parentFolderId, roomName);
+	} catch (ContentNotFoundException e) {
+	    xmppManager.destroyRoom(connection, roomName);
+	    throw new ContentNotFoundException();
+	} catch (AccessViolationException e) {
+	    xmppManager.destroyRoom(connection, roomName);
+	    throw new AccessViolationException();
+	} catch (GroupNotFoundException e) {
+	    xmppManager.destroyRoom(connection, roomName);
+	    throw new GroupNotFoundException();
+	}
     }
 
     private Long parseId(final String documentId) throws ContentNotFoundException {

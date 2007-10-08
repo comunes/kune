@@ -300,14 +300,15 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	centralLayout.addLayoutRegionListener(new LayoutRegionListener() {
 
 	    public boolean doBeforeRemove(final LayoutRegion region, final ContentPanel panel) {
-		final String panelId = panel.getId();
-		final RoomPresenter roomPresenter = (RoomPresenter) panelIdToRoom.get(panelId);
-		if (presenter.isCloseAllConfirmed() || roomPresenter.isCloseConfirmed()) {
+		if (presenter.isCloseAllConfirmed()
+			|| ((RoomPresenter) panelIdToRoom.get(panel.getId())).isCloseConfirmed()) {
 		    return true;
 		} else {
 		    MessageBox.confirm("Confirm", "Are you sure you want to exit from this room?",
 			    new MessageBox.ConfirmCallback() {
 				public void execute(final String btnID) {
+				    String panelId = panel.getId();
+				    RoomPresenter roomPresenter = (RoomPresenter) panelIdToRoom.get(panelId);
 				    if (btnID.equals("yes")) {
 					panelIdToRoom.remove(panelId);
 					// TODO remove userList
@@ -452,7 +453,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	emoticonPopup = new PopupPanel(true);
 	emoticonPopup.setVisible(false);
 	emoticonPopup.show();
-	emoticonPopup.setPopupPosition(x, y - 90);
+	emoticonPopup.setPopupPosition(x - 170, y - 170);
 	emoticonPopup.setWidget(emoticonPalettePanel);
 	emoticonPopup.setVisible(true);
     }

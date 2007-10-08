@@ -29,6 +29,7 @@ import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.GroupListMode;
+import org.ourproject.kune.platf.server.domain.GroupType;
 import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
@@ -78,20 +79,15 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     }
 
     public Group createUserGroup(final User user) {
-	final Group group = new Group(user.getShortName(), user.getName());
-	setSiteDefLicense(group);
+	final String licenseDefId = properties.getDefaultLicense();
+	final License licenseDef = licenseFinder.findByShortName(licenseDefId);
+	final Group group = new Group(user.getShortName(), user.getName(), licenseDef, GroupType.PERSONAL);
 	group.setAdmissionType(AdmissionType.Closed);
 	user.setUserGroup(group);
 	initSocialNetwork(group, group);
 	initGroup(user, group);
 	super.persist(user, User.class);
 	return group;
-    }
-
-    public void setSiteDefLicense(final Group group) {
-	final String licenseDefId = properties.getDefaultLicense();
-	final License licenseDef = licenseFinder.findByShortName(licenseDefId);
-	group.setDefaultLicense(licenseDef);
     }
 
     public Group createGroup(final Group group, final User user) throws SerializableException {

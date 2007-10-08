@@ -45,6 +45,10 @@
         <class-b>
             org.ourproject.kune.platf.server.domain.Group
         </class-b>
+        <field custom-converter="org.ourproject.kune.platf.server.mapper.GroupTypeConverter">
+            <a>type</a>
+            <b>type</b>
+        </field>
     </mapping>
 
     <mapping>

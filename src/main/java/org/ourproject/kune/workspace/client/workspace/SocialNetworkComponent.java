@@ -8,4 +8,6 @@ public interface SocialNetworkComponent extends Component {
 
     public void setSocialNetwork(SocialNetworkDTO socialNetwork, final AccessRightsDTO rights);
 
+    public void hide();
+
 }

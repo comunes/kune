@@ -29,18 +29,17 @@ public class SiteMessagePresenter implements SiteMessage {
     private int lastMessageType;
 
     public SiteMessagePresenter() {
-	lastMessageType = INFO;
-	isVisible = false;
-	message = "";
     }
 
     public void init(final SiteMessageView siteMessageView) {
 	this.view = siteMessageView;
+	reset();
     }
 
     public void reset() {
 	this.message = "";
 	this.isVisible = false;
+	lastMessageType = INFO;
 	view.hide();
 	view.reset();
     }
