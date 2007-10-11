@@ -2,6 +2,7 @@
 	* Participation component in workspace (shows person-groups and
 	groups-groups relations)
 	* SN, Link refactorization
+	* SiteMessagePanel fixed finally
 
 2007-10-07 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* SiteMessagePanel colors and position fixed

@@ -44,6 +44,13 @@ public class SiteMessagePresenter implements SiteMessage {
     }
 
     public void setValue(final String message, final int type) {
+	if (isVisible) {
+	    // Concatenate message
+	    this.message = this.message + "<br>" + message;
+	} else {
+	    // New message
+	    this.message = message;
+	}
 	if (lastMessageType != type) {
 	    if (isVisible) {
 		if (type < lastMessageType) {
@@ -56,18 +63,13 @@ public class SiteMessagePresenter implements SiteMessage {
 	    } else {
 		// Was closed, and different message level
 		view.setMessage(this.message, lastMessageType, type);
+		lastMessageType = type;
 	    }
 	} else {
 	    view.setMessage(this.message);
 	}
-	if (isVisible) {
-	    this.message = this.message + "<br>" + message;
-	} else {
-	    this.message = message;
-	    isVisible = true;
-	}
+	isVisible = true;
 	view.show();
-
     }
 
     public void onClose() {

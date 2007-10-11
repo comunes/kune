@@ -1,3 +1,22 @@
+/*
+ * Copyright (C) 2007 The kune development team (see CREDITS for details)
+ * This file is part of kune.
+ *
+ * Kune is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Kune is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+
 package org.ourproject.kune.workspace.client.socialnet;
 
 import java.util.Iterator;
@@ -19,6 +38,11 @@ import org.ourproject.kune.workspace.client.workspace.ParticipationComponent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class ParticipationPresenter implements ParticipationComponent, AbstractPresenter {
+    private static final String ADMIN_SUBTITLE = "admin in:";
+
+    // i18n
+    private final static MemberAction GOTO_GROUP_COMMAND = new MemberAction("Visit this group homepage",
+	    WorkspaceEvents.GOTO_GROUP);
 
     private ParticipationView view;
 
@@ -56,9 +80,9 @@ public class ParticipationPresenter implements ParticipationComponent, AbstractP
 	view.clear();
 	MemberAction[] adminsActions = {
 		new MemberAction("Don't participate more in this group", WorkspaceEvents.UNJOIN_GROUP),
-		MemberAction.GOTO_GROUP_COMMAND };
+		GOTO_GROUP_COMMAND };
 	MemberAction[] collabActions = adminsActions;
-	MemberAction[] viewerActions = { MemberAction.GOTO_GROUP_COMMAND };
+	MemberAction[] viewerActions = { GOTO_GROUP_COMMAND };
 	List groupsIsAdmin = participation.getGroupsIsAdmin();
 	List groupsIsCollab = participation.getGroupsIsCollab();
 	boolean userIsAdmin = rights.isAdministrable();
@@ -85,6 +109,8 @@ public class ParticipationPresenter implements ParticipationComponent, AbstractP
 	    final int numCollaborators, final boolean userIsAdmin, boolean userIsMember,
 	    final MemberAction[] adminsActions, final MemberAction[] collabActions, final MemberAction[] viewerActions) {
 	MemberAction[] actions;
+	String collabTitle;
+
 	if (!userIsMember) {
 	    actions = viewerActions;
 	} else {
@@ -96,12 +122,16 @@ public class ParticipationPresenter implements ParticipationComponent, AbstractP
 	}
 	if (numAdmins > 0) {
 	    // i18n
-	    view.addCategory("as admin in", "Admisnistrate these groups");
-	    iteraList("as admin in", groupsIsAdmin, actions);
+	    view.addCategory(ADMIN_SUBTITLE, "Admisnistrate these groups");
+	    iteraList(ADMIN_SUBTITLE, groupsIsAdmin, actions);
+	    collabTitle = "and as collaborator in:";
+	} else {
+	    collabTitle = "collaborator in:";
 	}
 	if (numCollaborators > 0) {
-	    view.addCategory("as collaborator in", "Collaborate with these groups");
-	    iteraList("as collaborator in", groupsIsCollab, actions);
+	    // i18n
+	    view.addCategory(collabTitle, "Collaborate in these groups");
+	    iteraList(collabTitle, groupsIsCollab, actions);
 	}
 
     }

@@ -1,3 +1,22 @@
+/*
+ * Copyright (C) 2007 The kune development team (see CREDITS for details)
+ * This file is part of kune.
+ *
+ * Kune is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Kune is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+
 package org.ourproject.kune.workspace.client.socialnet.ui;
 
 import org.ourproject.kune.platf.client.AbstractPresenter;
@@ -11,11 +30,11 @@ import org.ourproject.kune.workspace.client.workspace.ui.StackedDropDownPanel;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 public class GroupMembersPanel extends StackedDropDownPanel implements GroupMembersView {
-
+    private static final boolean COUNTS_VISIBLE = true;
     private final Images img = Images.App.getInstance();
 
     public GroupMembersPanel(final AbstractPresenter presenter) {
-	super(presenter, "#00D4AA", "Group members", "People and groups collaborating in this group", true);
+	super(presenter, "#00D4AA", "Group members", "People and groups collaborating in this group", COUNTS_VISIBLE);
     }
 
     public void addJoinLink() {
@@ -35,11 +54,11 @@ public class GroupMembersPanel extends StackedDropDownPanel implements GroupMemb
     }
 
     public void addCategory(final String name, final String title) {
-	super.addStackItem(name, title, true);
+	super.addStackItem(name, title, COUNTS_VISIBLE);
     }
 
     public void addCategory(final String name, final String title, final String iconType) {
-	super.addStackItem(name, title, getIcon(iconType), StackedDropDownPanel.ICON_HORIZ_ALIGN_RIGHT, true);
+	super.addStackItem(name, title, getIcon(iconType), StackedDropDownPanel.ICON_HORIZ_ALIGN_RIGHT, COUNTS_VISIBLE);
     }
 
     public void addCategoryMember(final String categoryName, final String name, final String title,
