@@ -41,13 +41,15 @@ public class UserInfoServiceDefault implements UserInfoService {
 	    Iterator iter = adminInGroups.iterator();
 	    while (iter.hasNext()) {
 		Group g = (Group) iter.next();
-		groupsIsAdmin.add(new Link(g.getLongName(), g.getDefaultContent().getStateToken()));
+		groupsIsAdmin
+			.add(new Link(g.getShortName(), g.getLongName(), "", g.getDefaultContent().getStateToken()));
 
 	    }
 	    iter = collabInGroups.iterator();
 	    while (iter.hasNext()) {
 		Group g = (Group) iter.next();
-		groupsIsCollab.add(new Link(g.getLongName(), g.getDefaultContent().getStateToken()));
+		groupsIsCollab.add(new Link(g.getShortName(), g.getLongName(), "", g.getDefaultContent()
+			.getStateToken()));
 	    }
 	    info.setGroupsIsAdmin(groupsIsAdmin);
 	    info.setGroupsIsCollab(groupsIsCollab);

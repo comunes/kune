@@ -34,6 +34,4 @@ public interface SiteMessageView extends View {
 
     public void hide();
 
-    public void reset();
-
 }

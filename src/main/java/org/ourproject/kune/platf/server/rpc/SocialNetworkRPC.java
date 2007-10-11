@@ -1,5 +1,8 @@
 package org.ourproject.kune.platf.server.rpc;
 
+import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
+import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
+import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.auth.Authenticated;
@@ -21,6 +24,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     private final UserSession session;
     private final GroupManager groupManager;
     private final SocialNetworkManager socialNetworkManager;
+    private final Mapper mapper;
 
     @Inject
     public SocialNetworkRPC(final UserSession session, final GroupManager groupManager,
@@ -28,6 +32,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
 	this.session = session;
 	this.groupManager = groupManager;
 	this.socialNetworkManager = socialNetworkManager;
+	this.mapper = mapper;
     }
 
     @Authenticated
@@ -36,6 +41,15 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
 	User user = session.getUser();
 	Group group = groupManager.findByShortName(groupShortName);
 	return socialNetworkManager.requestToJoin(user, group);
+    }
+
+    @Authenticated
+    @Transactional(type = TransactionType.READ_WRITE)
+    public void unJoinGroup(final String hash, final String groupToUnJoinShortName, final String groupShortName)
+	    throws SerializableException {
+	Group group = groupManager.findByShortName(groupShortName);
+	Group groupToUnJoin = groupManager.findByShortName(groupToUnJoinShortName);
+	socialNetworkManager.deleteMember(groupToUnJoin, group);
     }
 
     @Authenticated
@@ -109,4 +123,23 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
 	Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
 	socialNetworkManager.addGroupToViewers(groupToAdd, group);
     }
+
+    @Authenticated
+    @Transactional(type = TransactionType.READ_ONLY)
+    public SocialNetworkDTO getGroupMembers(final String hash, final String groupShortName)
+	    throws AccessViolationException {
+	User user = session.getUser();
+	Group group = groupManager.findByShortName(groupShortName);
+	return mapper.map(socialNetworkManager.find(user, group), SocialNetworkDTO.class);
+    }
+
+    @Authenticated
+    @Transactional(type = TransactionType.READ_ONLY)
+    public ParticipationDataDTO getParticipation(final String hash, final String groupShortName)
+	    throws AccessViolationException {
+	User user = session.getUser();
+	Group group = groupManager.findByShortName(groupShortName);
+	return mapper.map(socialNetworkManager.findParticipation(user, group), ParticipationDataDTO.class);
+    }
+
 }

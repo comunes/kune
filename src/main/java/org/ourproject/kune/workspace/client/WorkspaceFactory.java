@@ -34,9 +34,12 @@ import org.ourproject.kune.workspace.client.license.ui.LicensePanel;
 import org.ourproject.kune.workspace.client.presence.BuddiesPresencePresenter;
 import org.ourproject.kune.workspace.client.presence.BuddiesPresenceView;
 import org.ourproject.kune.workspace.client.presence.ui.BuddiesPresencePanel;
-import org.ourproject.kune.workspace.client.socialnet.SocialNetworkPresenter;
-import org.ourproject.kune.workspace.client.socialnet.SocialNetworkView;
-import org.ourproject.kune.workspace.client.socialnet.ui.SocialNetworkPanel;
+import org.ourproject.kune.workspace.client.socialnet.ParticipationPresenter;
+import org.ourproject.kune.workspace.client.socialnet.ParticipationView;
+import org.ourproject.kune.workspace.client.socialnet.GroupMembersPresenter;
+import org.ourproject.kune.workspace.client.socialnet.GroupMembersView;
+import org.ourproject.kune.workspace.client.socialnet.ui.ParticipationPanel;
+import org.ourproject.kune.workspace.client.socialnet.ui.GroupMembersPanel;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPanel;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPresenter;
@@ -47,7 +50,8 @@ import org.ourproject.kune.workspace.client.workspace.ContentSubTitleView;
 import org.ourproject.kune.workspace.client.workspace.ContentTitleComponent;
 import org.ourproject.kune.workspace.client.workspace.ContentTitlePresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentTitleView;
-import org.ourproject.kune.workspace.client.workspace.SocialNetworkComponent;
+import org.ourproject.kune.workspace.client.workspace.GroupMembersComponent;
+import org.ourproject.kune.workspace.client.workspace.ParticipationComponent;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 import org.ourproject.kune.workspace.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.workspace.client.workspace.WorkspaceView;
@@ -102,9 +106,16 @@ public class WorkspaceFactory {
 	return presenter;
     }
 
-    public static SocialNetworkComponent createSocialNetworkComponent() {
-	SocialNetworkPresenter presenter = new SocialNetworkPresenter();
-	SocialNetworkView view = new SocialNetworkPanel(presenter);
+    public static GroupMembersComponent createGroupMembersComponent() {
+	GroupMembersPresenter presenter = new GroupMembersPresenter();
+	GroupMembersView view = new GroupMembersPanel(presenter);
+	presenter.init(view);
+	return presenter;
+    }
+
+    public static ParticipationComponent createParticipationComponent() {
+	ParticipationPresenter presenter = new ParticipationPresenter();
+	ParticipationView view = new ParticipationPanel(presenter);
 	presenter.init(view);
 	return presenter;
     }

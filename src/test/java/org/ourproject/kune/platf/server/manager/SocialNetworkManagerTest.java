@@ -23,7 +23,7 @@ public class SocialNetworkManagerTest {
 
     @Before
     public void init() {
-	socialNetworkManager = new SocialNetworkManagerDefault(null);
+	socialNetworkManager = new SocialNetworkManagerDefault(null, null);
 	final DomainContext ctx = new DomainContext();
 	ctx.createUsers("user1");
 	ctx.createGroups("group1");

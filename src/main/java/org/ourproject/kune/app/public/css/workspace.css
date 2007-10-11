@@ -333,7 +333,7 @@
   vertical-align: middle;
 }
 
-.kune-StackedDropDownPanel table {
+.kune-StackedDropDownPanel .kune-DropDownInner table {
   width: 100%;
 }
 

@@ -10,19 +10,45 @@ import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
+import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
+import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
+import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
-import org.ourproject.kune.workspace.client.socialnet.ui.MemberAction;
-import org.ourproject.kune.workspace.client.workspace.SocialNetworkComponent;
+import org.ourproject.kune.workspace.client.workspace.GroupMembersComponent;
 
-public class SocialNetworkPresenter implements SocialNetworkComponent, AbstractPresenter {
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
-    private SocialNetworkView view;
+public class GroupMembersPresenter implements GroupMembersComponent, AbstractPresenter {
 
-    public void init(final SocialNetworkView view) {
+    private GroupMembersView view;
+
+    public void init(final GroupMembersView view) {
 	this.view = view;
     }
 
-    public void setSocialNetwork(final SocialNetworkDTO socialNetwork, final AccessRightsDTO rights) {
+    public void getGroupMembers(final String user, final GroupDTO group, final AccessRightsDTO accessRightsDTO) {
+	Site.showProgressProcessing();
+	final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
+
+	server.getGroupMembers(user, group.getShortName(), new AsyncCallback() {
+	    public void onFailure(final Throwable caught) {
+		Site.hideProgress();
+	    }
+
+	    public void onSuccess(final Object result) {
+		SocialNetworkDTO sn = (SocialNetworkDTO) result;
+		if (group.getType() != GroupDTO.PERSONAL) {
+		    setSocialNetworkOfGroup(sn, accessRightsDTO);
+
+		} else {
+		    hide();
+		}
+		Site.hideProgress();
+	    }
+	});
+    }
+
+    public void setSocialNetworkOfGroup(final SocialNetworkDTO socialNetwork, final AccessRightsDTO rights) {
 	final AccessListsDTO accessLists = socialNetwork.getAccessLists();
 
 	List adminsList = accessLists.getAdmins().getList();
@@ -53,21 +79,22 @@ public class SocialNetworkPresenter implements SocialNetworkComponent, AbstractP
 	    if (rights.isAdministrable()) {
 		MemberAction[] adminsActions = { new MemberAction("Remove this member", WorkspaceEvents.DEL_MEMBER),
 			new MemberAction("Change to collaborator", WorkspaceEvents.SET_ADMIN_AS_COLLAB),
-			gotoGroupCommand() };
+			MemberAction.GOTO_GROUP_COMMAND };
 		MemberAction[] collabActions = { new MemberAction("Remove this member", WorkspaceEvents.DEL_MEMBER),
-			new MemberAction("Change to admin", WorkspaceEvents.SET_COLLAB_AS_ADMIN), gotoGroupCommand() };
+			new MemberAction("Change to admin", WorkspaceEvents.SET_COLLAB_AS_ADMIN),
+			MemberAction.GOTO_GROUP_COMMAND };
 		MemberAction[] pendingsActions = {
 			new MemberAction("Accept this member", WorkspaceEvents.ACCEPT_JOIN_GROUP),
 			new MemberAction("Don't accept this member", WorkspaceEvents.DENY_JOIN_GROUP),
-			gotoGroupCommand() };
-		MemberAction[] viewerActions = { gotoGroupCommand() };
+			MemberAction.GOTO_GROUP_COMMAND };
+		MemberAction[] viewerActions = { MemberAction.GOTO_GROUP_COMMAND };
 		addMembers(adminsList, collabList, pendingCollabsList, numAdmins, numCollaborators, numPendingCollabs,
 			userIsAdmin, adminsActions, collabActions, pendingsActions, viewerActions);
 	    } else if (rights.isEditable() || rights.isVisible) {
-		MemberAction[] adminsActions = { gotoGroupCommand() };
-		MemberAction[] collabActions = { gotoGroupCommand() };
-		MemberAction[] pendingsActions = { gotoGroupCommand() };
-		MemberAction[] viewerActions = { gotoGroupCommand() };
+		MemberAction[] adminsActions = { MemberAction.GOTO_GROUP_COMMAND };
+		MemberAction[] collabActions = { MemberAction.GOTO_GROUP_COMMAND };
+		MemberAction[] pendingsActions = { MemberAction.GOTO_GROUP_COMMAND };
+		MemberAction[] viewerActions = { MemberAction.GOTO_GROUP_COMMAND };
 		addMembers(adminsList, collabList, pendingCollabsList, numAdmins, numCollaborators, numPendingCollabs,
 			userIsAdmin, adminsActions, collabActions, pendingsActions, viewerActions);
 	    }
@@ -123,7 +150,7 @@ public class SocialNetworkPresenter implements SocialNetworkComponent, AbstractP
 	if (isAdmin) {
 	    if (numPendingCollabs > 0) {
 		view.addCategory("Pending", "People pending to be accepted in this group by the admins",
-			SocialNetworkView.ICON_ALERT);
+			GroupMembersView.ICON_ALERT);
 		iteraList("Pending", pendingCollabsList, pendingsActions);
 	    }
 	}
@@ -136,10 +163,6 @@ public class SocialNetworkPresenter implements SocialNetworkComponent, AbstractP
 	    final GroupDTO group = (GroupDTO) iter.next();
 	    view.addCategoryMember(categoryName, group.getShortName(), group.getLongName(), actions);
 	}
-    }
-
-    private MemberAction gotoGroupCommand() {
-	return new MemberAction("Visit this member homepage", WorkspaceEvents.GOTO_GROUP);
     }
 
     private boolean isMember(final boolean userIsAdmin, final boolean userIsCollab) {

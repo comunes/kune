@@ -35,7 +35,7 @@ public interface Application {
     StateManager getStateManager();
 
     /**
-     * informa a todas las herramientas del grupo actual
+     * Commicates to every tool the current group
      * 
      * @param group
      */

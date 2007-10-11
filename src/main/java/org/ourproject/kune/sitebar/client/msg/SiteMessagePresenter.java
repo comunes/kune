@@ -33,34 +33,38 @@ public class SiteMessagePresenter implements SiteMessage {
 
     public void init(final SiteMessageView siteMessageView) {
 	this.view = siteMessageView;
+	this.lastMessageType = SiteMessage.INFO;
 	reset();
     }
 
     public void reset() {
 	this.message = "";
 	this.isVisible = false;
-	lastMessageType = INFO;
 	view.hide();
-	view.reset();
     }
 
     public void setValue(final String message, final int type) {
+	if (lastMessageType != type) {
+	    if (isVisible) {
+		if (type < lastMessageType) {
+		    // more severe message
+		    view.setMessage(this.message, lastMessageType, type);
+		    lastMessageType = type;
+		} else {
+		    view.setMessage(this.message);
+		}
+	    } else {
+		// Was closed, and different message level
+		view.setMessage(this.message, lastMessageType, type);
+	    }
+	} else {
+	    view.setMessage(this.message);
+	}
 	if (isVisible) {
 	    this.message = this.message + "<br>" + message;
 	} else {
 	    this.message = message;
 	    isVisible = true;
-	}
-	if (lastMessageType != type) {
-	    if (type < lastMessageType) {
-		// more severe message
-		view.setMessage(this.message, lastMessageType, type);
-		lastMessageType = type;
-	    } else {
-		view.setMessage(this.message);
-	    }
-	} else {
-	    view.setMessage(this.message);
 	}
 	view.show();
 

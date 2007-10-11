@@ -124,12 +124,10 @@ public class StateManagerDefault implements StateManager {
 	workspace.setContent(clientTool.getContent());
 	workspace.setContext(clientTool.getContext());
 	workspace.getLicenseComponent().setLicense(state.getGroup().getLongName(), state.getLicense());
-	// TODO: SocialNetwork out of state
-	if (state.getGroup().getType() != GroupDTO.PERSONAL) {
-	    workspace.getSocialNetworkComponent().setSocialNetwork(state.getSocialNetwork(), state.getGroupRights());
-	} else {
-	    workspace.getSocialNetworkComponent().hide();
-	}
+	// TODO: put GroupRights inside ParticipationDataDTO
+	workspace.getGroupMembersComponent().getGroupMembers(session.user, state.getGroup(), state.getGroupRights());
+	workspace.getParticipationComponent().getParticipation(session.user, state.getGroup(), state.getGroupRights());
+	// only for UI tests:
 	workspace.getBuddiesPresenceComponent().setBuddiesPresence();
 	Site.hideProgress();
     }

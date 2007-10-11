@@ -84,7 +84,6 @@ public class SiteMessagePanel extends HorizontalPanel implements SiteMessageView
     }
 
     public void setMessage(final String text, final int lastMessageType, final int type) {
-
 	messageIcons[type].applyTo(messageIcon);
 	removeStyleDependentName(messageStyle[lastMessageType]);
 	addStyleDependentName(messageStyle[type]);
@@ -101,17 +100,14 @@ public class SiteMessagePanel extends HorizontalPanel implements SiteMessageView
 	message.setWidth("" + (messageWidth - 16 - 40));
     }
 
-    public void hide() {
-	this.setVisible(false);
-	timer.cancel();
-    }
-
     public void show() {
 	this.setVisible(true);
 	timer.schedule(TIMEVISIBLE);
     }
 
-    public void reset() {
+    public void hide() {
 	message.setText("");
+	this.setVisible(false);
+	timer.cancel();
     }
 }

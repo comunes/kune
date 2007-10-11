@@ -33,8 +33,9 @@ import org.ourproject.kune.workspace.client.actions.InitAction;
 import org.ourproject.kune.workspace.client.actions.LoggedInAction;
 import org.ourproject.kune.workspace.client.actions.LoggedOutAction;
 import org.ourproject.kune.workspace.client.actions.RequestJoinGroupAction;
-import org.ourproject.kune.workspace.client.actions.SetCollabAsAdminAction;
 import org.ourproject.kune.workspace.client.actions.SetAdminAsCollabAction;
+import org.ourproject.kune.workspace.client.actions.SetCollabAsAdminAction;
+import org.ourproject.kune.workspace.client.actions.UnJoinGroupAction;
 
 public class WorkspaceClientModule implements ClientModule {
     public void configure(final Register register) {
@@ -51,5 +52,6 @@ public class WorkspaceClientModule implements ClientModule {
 	register.addAction(WorkspaceEvents.ADD_ADMIN_MEMBER, new AddAdminAction());
 	register.addAction(WorkspaceEvents.ADD_COLLAB_MEMBER, new AddCollabAction());
 	register.addAction(WorkspaceEvents.ADD_VIEWER_MEMBER, new AddViewerAction());
+	register.addAction(WorkspaceEvents.UNJOIN_GROUP, new UnJoinGroupAction());
     }
 }

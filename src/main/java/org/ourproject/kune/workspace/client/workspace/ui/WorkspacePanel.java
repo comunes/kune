@@ -173,8 +173,12 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	contentBottomBar.setCellVerticalAlignment(widget, VerticalPanel.ALIGN_MIDDLE);
     }
 
-    public void setSocialNetwork(final View view) {
+    public void setGroupMembers(final View view) {
 	AddDropDown(view, "00D4AA");
+    }
+
+    public void setParticipation(final View view) {
+	AddDropDown(view, "5599FF");
     }
 
     public void setBuddiesPresence(final View view) {
@@ -185,7 +189,6 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	final DropDownPanel panel = (DropDownPanel) view;
 	generalDropDownsPanel.add(panel);
 	panel.setWidth("145px");
-	panel.setVisible(true);
 	panel.setColor(color);
     }
 

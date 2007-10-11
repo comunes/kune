@@ -73,7 +73,7 @@ public class MapperTest {
 	    assertNotNull(d);
 	    assertNotNull(l);
 	    final LinkDTO map = mapper.map(l, LinkDTO.class);
-	    assertEquals(map.getName(), d.getName());
+	    assertEquals(map.getShortName(), d.getShortName());
 	    assertEquals(map.getLink(), d.getLink());
 	}
     }
@@ -85,9 +85,7 @@ public class MapperTest {
 	final Group groupAdmins = TestDomainHelper.createGroup(1);
 	final Group groupEdit = TestDomainHelper.createGroup(2);
 	final Group groupView = TestDomainHelper.createGroup(3);
-	final Group groupPending = TestDomainHelper.createGroup(4);
 	c.setAccessLists(TestDomainHelper.createAccessLists(groupAdmins, groupEdit, groupView));
-	c.setSocialNetwork(TestDomainHelper.createSocialNetwork(groupAdmins, groupEdit, groupView, groupPending));
 	c.setRate(10.2d);
 	c.setRateByUsers(3l);
 
@@ -98,14 +96,6 @@ public class MapperTest {
 	assertValidAccessListsMapping(c.getAccessLists().getEditors(), dto.getAccessLists().getEditors());
 	assertValidAccessListsMapping(c.getAccessLists().getViewers(), dto.getAccessLists().getViewers());
 
-	assertValidAccessListsMapping(c.getSocialNetwork().getAccessLists().getAdmins(), dto.getSocialNetwork()
-		.getAccessLists().getAdmins());
-	assertValidAccessListsMapping(c.getSocialNetwork().getAccessLists().getEditors(), dto.getSocialNetwork()
-		.getAccessLists().getEditors());
-	assertValidAccessListsMapping(c.getSocialNetwork().getAccessLists().getViewers(), dto.getSocialNetwork()
-		.getAccessLists().getViewers());
-	assertValidAccessListsMapping(c.getSocialNetwork().getPendingCollaborators(), dto.getSocialNetwork()
-		.getPendingCollaborators());
 	assertEquals(c.getRate(), dto.getRate());
 	assertEquals(c.getRateByUsers(), dto.getRateByUsers());
     }

@@ -20,6 +20,8 @@
 
 package org.ourproject.kune.platf.server.manager;
 
+import org.ourproject.kune.platf.client.errors.AccessViolationException;
+import org.ourproject.kune.platf.server.ParticipationData;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
@@ -40,12 +42,16 @@ public interface SocialNetworkManager extends Manager<SocialNetwork, Long> {
 
     void acceptJoinGroup(Group group, Group inGroup) throws SerializableException;
 
-    void deleteMember(Group group, Group inGroup) throws SerializableException;
-
     void denyJoinGroup(Group group, Group inGroup) throws SerializableException;
 
     void setCollabAsAdmin(Group group, Group inGroup) throws SerializableException;
 
     void setAdminAsCollab(Group group, Group inGroup) throws SerializableException;
+
+    void deleteMember(Group group, Group inGroup) throws SerializableException;
+
+    SocialNetwork find(User user, Group group) throws AccessViolationException;
+
+    ParticipationData findParticipation(User user, Group group) throws AccessViolationException;
 
 }

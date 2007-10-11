@@ -20,16 +20,21 @@
 
 package org.ourproject.kune.platf.server.manager.impl;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
+import org.ourproject.kune.platf.client.errors.AccessViolationException;
+import org.ourproject.kune.platf.server.ParticipationData;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
+import org.ourproject.kune.platf.server.users.Link;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
@@ -39,12 +44,12 @@ import com.google.inject.Singleton;
 @Singleton
 public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, Long> implements SocialNetworkManager {
 
-    private final Provider<EntityManager> provider;
+    private final Group finder;
 
     @Inject
-    public SocialNetworkManagerDefault(final Provider<EntityManager> provider) {
+    public SocialNetworkManagerDefault(final Provider<EntityManager> provider, final Group finder) {
 	super(provider, SocialNetwork.class);
-	this.provider = provider;
+	this.finder = finder;
     }
 
     public void addAdmin(final User user, final Group group) {
@@ -137,6 +142,42 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 	} else {
 	    throw new SerializableException("Person/Group is not an admin");
 	}
+    }
+
+    public SocialNetwork find(final User user, final Group group) throws AccessViolationException {
+	SocialNetwork sn = group.getSocialNetwork();
+	if (!sn.getAccessLists().getViewers().includes(user.getUserGroup())) {
+	    throw new AccessViolationException();
+	}
+	return sn;
+    }
+
+    public ParticipationData findParticipation(final User user, final Group group) throws AccessViolationException {
+	find(user, group); // check access
+	Long groupId = group.getId();
+	List<Group> adminInGroups = finder.findAdminInGroups(groupId);
+	List<Group> collabInGroups = finder.findCollabInGroups(groupId);
+	List<Link> groupsIsAdmin = new ArrayList();
+	List<Link> groupsIsCollab = new ArrayList();
+	Iterator iter = adminInGroups.iterator();
+	while (iter.hasNext()) {
+	    Group g = (Group) iter.next();
+	    if (group.getId() != g.getId()) {
+		groupsIsAdmin
+			.add(new Link(g.getShortName(), g.getLongName(), "", g.getDefaultContent().getStateToken()));
+	    }
+
+	}
+	iter = collabInGroups.iterator();
+	while (iter.hasNext()) {
+	    Group g = (Group) iter.next();
+	    if (group.getId() != g.getId()) {
+		groupsIsCollab.add(new Link(g.getShortName(), g.getLongName(), "", g.getDefaultContent()
+			.getStateToken()));
+	    }
+	}
+
+	return new ParticipationData(groupsIsAdmin, groupsIsCollab);
     }
 
     private boolean isClosed(final AdmissionType admissionType) {

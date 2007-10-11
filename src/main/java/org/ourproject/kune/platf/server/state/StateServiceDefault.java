@@ -54,8 +54,6 @@ public class StateServiceDefault implements StateService {
 	state.setToolName(container.getToolName());
 	state.setGroup(container.getOwner());
 	state.setFolder(container);
-	// TODO: socialNetwork outside of state
-	state.setSocialNetwork(container.getOwner().getSocialNetwork());
 	state.setAccessLists(access.getContentAccessLists());
 	state.setContentRights(access.getContentRights());
 	state.setFolderRights(access.getFolderRights());

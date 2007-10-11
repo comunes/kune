@@ -208,4 +208,33 @@
         </field>
     </mapping>
 
+    <mapping>
+        <class-a>
+            org.ourproject.kune.platf.client.dto.ParticipationDataDTO
+        </class-a>
+        <class-b>
+            org.ourproject.kune.platf.server.ParticipationData
+        </class-b>
+        <field>
+            <a>groupsIsAdmin</a>
+            <b>groupsIsAdmin</b>
+            <a-hint>
+                org.ourproject.kune.platf.client.dto.LinkDTO
+            </a-hint>
+            <b-hint>
+                org.ourproject.kune.platf.server.users.Link
+            </b-hint>
+        </field>
+        <field>
+            <a>groupsIsCollab</a>
+            <b>groupsIsCollab</b>
+            <a-hint>
+                org.ourproject.kune.platf.client.dto.LinkDTO
+            </a-hint>
+            <b-hint>
+                org.ourproject.kune.platf.server.users.Link
+            </b-hint>
+        </field>
+    </mapping>
+
 </mappings>

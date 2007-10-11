@@ -325,7 +325,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     private void addItemToYourGroupSubmenu(final LinkDTO link) {
-	yourGroupsSubmenu.addItem(link.getName(), true, new Command() {
+	yourGroupsSubmenu.addItem(link.getShortName(), true, new Command() {
 	    public void execute() {
 		presenter.changeState(new StateToken(link.getLink()));
 	    }

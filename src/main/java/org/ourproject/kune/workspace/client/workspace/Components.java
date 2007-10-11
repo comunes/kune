@@ -6,7 +6,8 @@ import org.ourproject.kune.workspace.client.license.LicenseComponent;
 class Components {
     private LicenseComponent license;
     private ContentTitleComponent contentTitle;
-    private SocialNetworkComponent socialNetwork;
+    private GroupMembersComponent groupMembers;
+    private ParticipationComponent participatesInGroups;
     private BuddiesPresenceComponent buddiesPresence;
     private ContentSubTitleComponent contentSubTitle;
 
@@ -34,11 +35,11 @@ class Components {
 	return contentSubTitle;
     }
 
-    public SocialNetworkComponent getSocialNetworkComponent() {
-	if (socialNetwork == null) {
-	    socialNetwork = WorkspaceFactory.createSocialNetworkComponent();
+    public GroupMembersComponent getGroupMembersComponent() {
+	if (groupMembers == null) {
+	    groupMembers = WorkspaceFactory.createGroupMembersComponent();
 	}
-	return socialNetwork;
+	return groupMembers;
     }
 
     public BuddiesPresenceComponent getBuddiesPresenceComponent() {
@@ -46,5 +47,12 @@ class Components {
 	    buddiesPresence = WorkspaceFactory.createBuddiesPresenceComponent();
 	}
 	return buddiesPresence;
+    }
+
+    public ParticipationComponent getParticipationComponent() {
+	if (participatesInGroups == null) {
+	    participatesInGroups = WorkspaceFactory.createParticipationComponent();
+	}
+	return participatesInGroups;
     }
 }

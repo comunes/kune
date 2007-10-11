@@ -40,7 +40,8 @@ public class WorkspacePresenter implements Workspace {
 	view.setContentTitle(components.getContentTitleComponent().getView());
 	view.setContentSubTitle(components.getContentSubTitleComponent().getView());
 	view.setBottom(components.getLicenseComponent().getView());
-	view.setSocialNetwork(components.getSocialNetworkComponent().getView());
+	view.setGroupMembers(components.getGroupMembersComponent().getView());
+	view.setParticipation(components.getParticipationComponent().getView());
 	view.setBuddiesPresence(components.getBuddiesPresenceComponent().getView());
     }
 
@@ -55,7 +56,7 @@ public class WorkspacePresenter implements Workspace {
     public void attachTools(final Iterator iterator) {
 	ClientTool clientTool;
 	while (iterator.hasNext()) {
-	    clientTool = ((ClientTool) iterator.next());
+	    clientTool = (ClientTool) iterator.next();
 	    view.addTab(clientTool.getTrigger());
 	}
     }
@@ -102,8 +103,12 @@ public class WorkspacePresenter implements Workspace {
 	return components.getContentSubTitleComponent();
     }
 
-    public SocialNetworkComponent getSocialNetworkComponent() {
-	return components.getSocialNetworkComponent();
+    public GroupMembersComponent getGroupMembersComponent() {
+	return components.getGroupMembersComponent();
+    }
+
+    public ParticipationComponent getParticipationComponent() {
+	return components.getParticipationComponent();
     }
 
     public BuddiesPresenceComponent getBuddiesPresenceComponent() {

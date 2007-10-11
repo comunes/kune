@@ -1,9 +1,8 @@
 package org.ourproject.kune.workspace.client.socialnet;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.workspace.client.socialnet.ui.MemberAction;
 
-public interface SocialNetworkView extends View {
+public interface GroupMembersView extends View {
 
     public static final String ICON_ALERT = "alert";
 

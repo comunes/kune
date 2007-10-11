@@ -49,7 +49,9 @@ public interface Workspace extends Component {
 
     public ContentSubTitleComponent getContentSubTitleComponent();
 
-    public SocialNetworkComponent getSocialNetworkComponent();
+    public GroupMembersComponent getGroupMembersComponent();
+
+    public ParticipationComponent getParticipationComponent();
 
     public BuddiesPresenceComponent getBuddiesPresenceComponent();
 

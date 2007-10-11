@@ -3,30 +3,20 @@ package org.ourproject.kune.workspace.client.socialnet.ui;
 import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
-import org.ourproject.kune.workspace.client.socialnet.SocialNetworkView;
+import org.ourproject.kune.workspace.client.socialnet.MemberAction;
+import org.ourproject.kune.workspace.client.socialnet.ParticipationView;
+import org.ourproject.kune.workspace.client.socialnet.GroupMembersView;
 import org.ourproject.kune.workspace.client.workspace.ui.StackSubItemAction;
 import org.ourproject.kune.workspace.client.workspace.ui.StackedDropDownPanel;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
-public class SocialNetworkPanel extends StackedDropDownPanel implements SocialNetworkView {
+public class ParticipationPanel extends StackedDropDownPanel implements ParticipationView {
 
     private final Images img = Images.App.getInstance();
 
-    public SocialNetworkPanel(final AbstractPresenter presenter) {
-	super(presenter, "#00D4AA", "Group members", "People and groups collaborating in this group", true);
-    }
-
-    public void addJoinLink() {
-	// FIXME: add new event
-	// i18n
-	super.addBottomLink(img.addGreen(), "Request to join", "fixme", WorkspaceEvents.REQ_JOIN_GROUP);
-    }
-
-    public void addAddMemberLink() {
-	// FIXME: add new event
-	// i18n
-	super.addBottomLink(img.addGreen(), "Add member", "fixme", WorkspaceEvents.ADD_ADMIN_MEMBER);
+    public ParticipationPanel(final AbstractPresenter presenter) {
+	super(presenter, "#00D4AA", "Participates", "Other groups in which participates", true);
     }
 
     public void clear() {
@@ -53,32 +43,20 @@ public class SocialNetworkPanel extends StackedDropDownPanel implements SocialNe
     }
 
     private AbstractImagePrototype getIcon(final String event) {
-	if (event == SocialNetworkView.ICON_ALERT) {
+	if (event == GroupMembersView.ICON_ALERT) {
 	    return img.alert();
 	}
-	throw new IndexOutOfBoundsException("Event unknown in Socialnetwork");
+	throw new IndexOutOfBoundsException("Icon unknown in ParticipationPanelk");
     }
 
     private AbstractImagePrototype getIconFronEvent(final String event) {
-	if (event == WorkspaceEvents.ACCEPT_JOIN_GROUP) {
-	    return img.accept();
-	}
-	if (event == WorkspaceEvents.DENY_JOIN_GROUP) {
-	    return img.cancel();
-	}
-	if (event == WorkspaceEvents.DEL_MEMBER) {
+	if (event == WorkspaceEvents.UNJOIN_GROUP) {
 	    return img.del();
 	}
 	if (event == WorkspaceEvents.GOTO_GROUP) {
 	    return img.groupHome();
 	}
-	if (event == WorkspaceEvents.SET_ADMIN_AS_COLLAB) {
-	    return img.arrowDownGreen();
-	}
-	if (event == WorkspaceEvents.SET_COLLAB_AS_ADMIN) {
-	    return img.arrowUpGreen();
-	}
-	throw new IndexOutOfBoundsException("Event unknown in Socialnetwork");
+	throw new IndexOutOfBoundsException("Event unknown in ParticipationPanel");
     }
 
     public void show() {

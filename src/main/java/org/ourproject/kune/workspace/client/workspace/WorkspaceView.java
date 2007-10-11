@@ -46,7 +46,9 @@ public interface WorkspaceView extends View {
 
     void setBottom(View view);
 
-    void setSocialNetwork(View view);
+    void setGroupMembers(View view);
+
+    void setParticipation(View view);
 
     void setBuddiesPresence(View view);
 
