@@ -114,4 +114,6 @@ public interface Translate extends Constants {
 
     String Project();
 
+    String RetypePassword();
+
 }

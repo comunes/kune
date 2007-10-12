@@ -47,7 +47,7 @@ public class AddAdminAction implements Action {
 		// i18n
 		Site.info("Member added as admin");
 		// TODO: Reload SocialNetwork info only
-		services.stateManager.reload();
+		services.stateManager.reloadSocialNetwork();
 	    }
 	});
 

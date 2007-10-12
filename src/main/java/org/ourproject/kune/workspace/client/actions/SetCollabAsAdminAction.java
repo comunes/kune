@@ -47,7 +47,7 @@ public class SetCollabAsAdminAction implements Action {
 		// i18n
 		Site.info("Type of member changed");
 		// TODO: Reload SocialNetwork info only
-		services.stateManager.reload();
+		services.stateManager.reloadSocialNetwork();
 	    }
 	});
 

@@ -1,13 +1,11 @@
-2007-10-11 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+2007-10-12 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* Added more validations to login/register/newGroup forms
+	* Added persistance validation
 	* Participation component in workspace (shows person-groups and
 	groups-groups relations)
 	* SN, Link refactorization
 	* SiteMessagePanel fixed finally
-
-2007-10-07 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* SiteMessagePanel colors and position fixed
-
-2007-10-04 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* Room creation and join with real room names (not hardcoded)
 	* Overflow of bottom title panel fixed
 	* SocialNetwork pending collabs only show to admins

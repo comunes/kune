@@ -59,7 +59,7 @@ public class RequestJoinGroupAction implements Action {
 				Site.important("Sorry this is a closed group");
 			    }
 			    if (resultType == SocialNetworkDTO.REQ_JOIN_WAITING_MODERATION) {
-				Site.info("Requested. Waiting for admins");
+				Site.info("Requested. Waiting for admins decision");
 			    }
 			}
 		    });

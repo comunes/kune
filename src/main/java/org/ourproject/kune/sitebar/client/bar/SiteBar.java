@@ -33,4 +33,6 @@ public interface SiteBar {
 
     void showLoggedUser(UserInfoDTO user);
 
+    void reloadUserInfo(String userHash);
+
 }

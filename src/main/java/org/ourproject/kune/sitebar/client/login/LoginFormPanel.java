@@ -40,6 +40,8 @@ import com.gwtext.client.widgets.form.FormConfig;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.form.TextFieldConfig;
 import com.gwtext.client.widgets.form.VType;
+import com.gwtext.client.widgets.form.ValidationException;
+import com.gwtext.client.widgets.form.Validator;
 import com.gwtext.client.widgets.layout.BorderLayout;
 import com.gwtext.client.widgets.layout.ContentPanel;
 import com.gwtext.client.widgets.layout.ContentPanelConfig;
@@ -53,6 +55,7 @@ public class LoginFormPanel implements LoginFormView, View {
     private static final String NICK_FIELD = "nick";
     private static final String EMAIL_FIELD = "email";
     private static final String LONGNAME_FIELD = "long_name";
+    private static final String PASSWORD_FIELD_DUP = "passwordDup";
 
     private TextField loginPassField;
 
@@ -74,12 +77,22 @@ public class LoginFormPanel implements LoginFormView, View {
 
     private Form registerForm;
 
+    private TextField passwdRegFieldDup;
+
     public LoginFormPanel(final LoginForm initialPresenter) {
 
 	this.presenter = initialPresenter;
 	createPanel();
 	// .addStyleName("kune-Default-Form");
 	// generalVP.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
+    }
+
+    public boolean isSignInFormValid() {
+	return signInForm.isValid();
+    }
+
+    public boolean isRegisterFormValid() {
+	return registerForm.isValid();
     }
 
     public void reset() {
@@ -111,6 +124,10 @@ public class LoginFormPanel implements LoginFormView, View {
 	return passwdRegField.getValueAsString();
     }
 
+    public String getRegisterPasswordDup() {
+	return passwdRegFieldDup.getValueAsString();
+    }
+
     private void createPanel() {
 
 	LayoutRegionConfig center = new LayoutRegionConfig() {
@@ -126,7 +143,7 @@ public class LoginFormPanel implements LoginFormView, View {
 	    {
 		setModal(true);
 		setWidth(400);
-		setHeight(300);
+		setHeight(310);
 		setShadow(true);
 		setResizable(true);
 		setClosable(false);
@@ -225,18 +242,6 @@ public class LoginFormPanel implements LoginFormView, View {
 		tab.getTextEl().highlight();
 	    }
 	});
-
-	// Button button = new Button(new ButtonConfig() {
-	// {
-	// // i18n
-	// setText("Login / Register");
-	// }
-	// });
-	// button.addButtonListener(new ButtonListenerAdapter() {
-	// public void onClick(final Button button, final EventObject e) {
-	// dialog.show(button.getEl());
-	// }
-	// });
     }
 
     private Form createSignInForm() {
@@ -265,6 +270,8 @@ public class LoginFormPanel implements LoginFormView, View {
 		setFieldLabel(t.Password());
 		setName(PASSWORD_FIELD);
 		setWidth(175);
+		setMinLength(6);
+		setMaxLength(40);
 		setPassword(true);
 		setAllowBlank(false);
 		setMsgTarget("side");
@@ -297,7 +304,7 @@ public class LoginFormPanel implements LoginFormView, View {
 		setMsgTarget("side");
 		setMinLength(3);
 		setMaxLength(15);
-		setRegex("^[a-z0-9_]+$");
+		setRegex("^[a-z0-9_\\-]+$");
 		// i18n
 		setMinLengthText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
 		setMaxLengthText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
@@ -313,6 +320,8 @@ public class LoginFormPanel implements LoginFormView, View {
 		setWidth(200);
 		setAllowBlank(false);
 		setMsgTarget("side");
+		setMinLength(3);
+		setMaxLength(50);
 	    }
 	});
 	form.add(longNameRegField);
@@ -324,11 +333,33 @@ public class LoginFormPanel implements LoginFormView, View {
 		setPassword(true);
 		setAllowBlank(false);
 		setMinLength(6);
+		setMaxLength(40);
 		setWidth(200);
 		setMsgTarget("side");
 	    }
 	});
 	form.add(passwdRegField);
+
+	passwdRegFieldDup = new TextField(new TextFieldConfig() {
+	    {
+		setFieldLabel(t.RetypePassword());
+		setName(PASSWORD_FIELD_DUP);
+		setPassword(true);
+		setAllowBlank(false);
+		setMinLength(6);
+		setMaxLength(40);
+		setWidth(200);
+		setMsgTarget("side");
+		// i18n
+		setInvalidText("Passwords do not match");
+		setValidator(new Validator() {
+		    public boolean validate(final String value) throws ValidationException {
+			return passwdRegField.getValueAsString().equals(passwdRegFieldDup.getValueAsString());
+		    }
+		});
+	    }
+	});
+	form.add(passwdRegFieldDup);
 
 	emailRegField = new TextField(new TextFieldConfig() {
 	    {

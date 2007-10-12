@@ -47,7 +47,7 @@ public class DeleteMemberAction implements Action {
 			// i18n
 			Site.info("Member removed");
 			// TODO: Reload SocialNetwork info only
-			services.stateManager.reload();
+			services.stateManager.reloadSocialNetwork();
 		    }
 		});
 

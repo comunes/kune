@@ -16,6 +16,7 @@ import org.ourproject.kune.platf.client.dto.GroupListDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
+import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.server.TestDomainHelper;
 import org.ourproject.kune.platf.server.TestHelper;
 import org.ourproject.kune.platf.server.access.AccessRights;
@@ -50,7 +51,7 @@ public class MapperTest {
     }
 
     @Test
-    public void testUserInfo() {
+    public void testUserInfo() throws AccessViolationException {
 	final User user = TestDomainHelper.createUser(1);
 	final UserInfo userInfo = userInfoService.buildInfo(user);
 

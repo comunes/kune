@@ -99,10 +99,12 @@ public class NewGroupFormPresenter implements NewGroupForm {
     }
 
     public void onNext() {
-	view.setEnabledBackButton(true);
-	view.setEnabledFinishButton(true);
-	view.setEnabledNextButton(false);
-	view.showLicenseForm();
+	if (view.isFormValid()) {
+	    view.setEnabledBackButton(true);
+	    view.setEnabledFinishButton(true);
+	    view.setEnabledNextButton(false);
+	    view.showLicenseForm();
+	}
     }
 
     public void onCClicenseSelected() {

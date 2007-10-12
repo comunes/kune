@@ -35,6 +35,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.Length;
+import org.hibernate.validator.Pattern;
+
 import com.google.inject.name.Named;
 import com.wideplay.warp.persist.dao.Finder;
 
@@ -51,11 +54,15 @@ public class Group implements HasId {
     private Long id;
 
     @Column(unique = true)
+    @Length(min = 3, max = 15, message = "Shortname between 3 and 15 chars of lenght")
+    @Pattern(regex = "^[a-z0-9_\\-]+$", message = "Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes")
     private String shortName;
 
     @Column(unique = true)
+    @Length(min = 3, max = 50, message = "longName between 3 and 50 chars of lenght")
     private String longName;
 
+    @Length(max = 255, message = "Public desc max 255 chars of lenght")
     private String publicDesc;
 
     @Enumerated(EnumType.STRING)

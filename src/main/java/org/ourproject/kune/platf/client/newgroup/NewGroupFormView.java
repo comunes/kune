@@ -24,6 +24,7 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 
 public interface NewGroupFormView extends View {
+
     void clearData();
 
     String getPublicDesc();
@@ -51,5 +52,7 @@ public interface NewGroupFormView extends View {
     void showLicenseForm();
 
     LicenseDTO getLicense();
+
+    boolean isFormValid();
 
 }

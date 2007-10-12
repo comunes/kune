@@ -45,7 +45,7 @@ public class DenyJoinGroupAction implements Action {
 	    public void onSuccess(final Object result) {
 		Site.info("Member rejected");
 		// TODO: Reload SocialNetwork info only
-		services.stateManager.reload();
+		services.stateManager.reloadSocialNetwork();
 	    }
 	});
 

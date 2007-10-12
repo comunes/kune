@@ -22,6 +22,7 @@ package org.ourproject.kune.sitebar.client.rpc;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
+import org.ourproject.kune.platf.client.errors.AccessViolationException;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -40,6 +41,8 @@ public interface SiteBarService extends RemoteService {
 
     // FIXME: Vicente, userHash
     void logout() throws SerializableException;
+
+    UserInfoDTO reloadUserInfo(String userHash) throws AccessViolationException;
 
     public class App {
 	private static SiteBarServiceAsync ourInstance = null;

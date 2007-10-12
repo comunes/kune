@@ -112,9 +112,8 @@ public class NewGroupFormPanel extends WizardDialog implements NewGroupFormView 
 	super.setFinishText(t.Register());
     }
 
-    private void initBottomButtons() {
-	super.setEnabledBackButton(false);
-	super.setEnabledFinishButton(false);
+    public boolean isFormValid() {
+	return newGroupInitialDataForm.isValid();
     }
 
     public void clearData() {
@@ -155,8 +154,17 @@ public class NewGroupFormPanel extends WizardDialog implements NewGroupFormView 
 	deck.showWidget(0);
     }
 
+    public LicenseDTO getLicense() {
+	return licenseChooseForm.getLicense();
+    }
+
     public void showLicenseForm() {
 	deck.showWidget(1);
+    }
+
+    private void initBottomButtons() {
+	super.setEnabledBackButton(false);
+	super.setEnabledFinishButton(false);
     }
 
     private Form createNewGroupInitialDataForm() {
@@ -178,7 +186,7 @@ public class NewGroupFormPanel extends WizardDialog implements NewGroupFormView 
 		setMaxLength(15);
 		setAllowBlank(false);
 		setMsgTarget("side");
-		setRegex("^[a-z0-9_]+$");
+		setRegex("^[a-z0-9_\\-]+$");
 		// i18n
 		setMinLengthText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
 		setMaxLengthText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
@@ -194,6 +202,8 @@ public class NewGroupFormPanel extends WizardDialog implements NewGroupFormView 
 		setWidth(300);
 		setAllowBlank(false);
 		setMsgTarget("side");
+		setMinLength(3);
+		setMaxLength(50);
 	    }
 	});
 	form.add(longNameField);
@@ -205,6 +215,8 @@ public class NewGroupFormPanel extends WizardDialog implements NewGroupFormView 
 		setWidth(300);
 		setAllowBlank(false);
 		setMsgTarget("side");
+		setMinLength(10);
+		setMaxLength(255);
 	    }
 	});
 	form.add(publicDescField);
@@ -276,9 +288,5 @@ public class NewGroupFormPanel extends WizardDialog implements NewGroupFormView 
     private void createChooseLicensePanel() {
 	licenseChooseForm = SiteBarFactory.createLicenseChoose();
 
-    }
-
-    public LicenseDTO getLicense() {
-	return licenseChooseForm.getLicense();
     }
 }

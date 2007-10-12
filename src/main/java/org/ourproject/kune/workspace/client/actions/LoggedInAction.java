@@ -32,5 +32,6 @@ public class LoggedInAction implements Action {
     private void onLoggedIn(final Services services, final UserInfoDTO user) {
 	Site.sitebar.showLoggedUser(user);
 	services.stateManager.reload();
+	services.stateManager.reloadSocialNetwork();
     }
 }

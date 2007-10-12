@@ -47,7 +47,7 @@ public class AcceptJoinGroupAction implements Action {
 		// i18n
 		Site.info("Member accepted");
 		// TODO: Reload SocialNetwork info only
-		services.stateManager.reload();
+		services.stateManager.reloadSocialNetwork();
 	    }
 	});
 

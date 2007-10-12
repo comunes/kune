@@ -30,6 +30,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.Email;
+import org.hibernate.validator.Length;
+import org.hibernate.validator.Pattern;
+
 import com.google.inject.name.Named;
 import com.wideplay.warp.persist.dao.Finder;
 
@@ -41,18 +45,24 @@ public class User implements HasId {
     private Long id;
 
     @Column(unique = true)
+    @Email
     private String email;
 
     @Column(nullable = false)
+    @Length(min = 6, max = 40)
     private String password;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Group userGroup;
 
     @Column(nullable = false)
+    @Length(min = 3, max = 50)
     private String name;
 
     @Column(unique = true)
+    // http://www.hibernate.org/hib_docs/validator/reference/en/html/validator-defineconstraints.html
+    @Length(min = 3, max = 15)
+    @Pattern(regex = "^[a-z0-9_\\-]+$", message = "Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes")
     private String shortName;
 
     // see: http://docs.codehaus.org/display/PICO/Good+Citizen:

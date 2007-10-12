@@ -39,12 +39,15 @@ public class StateManagerDefault implements StateManager {
     private final Application app;
     private final Session session;
     private final ContentProvider provider;
+    private final Workspace workspace;
     private String oldState;
 
     public StateManagerDefault(final ContentProvider provider, final Application app, final Session session) {
 	this.provider = provider;
 	this.app = app;
 	this.session = session;
+	this.oldState = "";
+	this.workspace = app.getWorkspace();
     }
 
     public void reload() {
@@ -55,11 +58,8 @@ public class StateManagerDefault implements StateManager {
 	GWT.log("State: " + historyToken, null);
 	if (isNotIgnore(historyToken)) {
 	    onHistoryChanged(new StateToken(historyToken));
-	    oldState = historyToken;
 	} else {
-	    if (oldState != null) {
-		onHistoryChanged(oldState);
-	    }
+	    onHistoryChanged(oldState);
 	}
     }
 
@@ -72,6 +72,7 @@ public class StateManagerDefault implements StateManager {
 	provider.getContent(session.user, newState, new AsyncCallback() {
 	    public void onFailure(final Throwable caught) {
 		Site.hideProgress();
+		oldState = newState.getEncoded();
 		try {
 		    throw caught;
 		} catch (final AccessViolationException e) {
@@ -82,12 +83,12 @@ public class StateManagerDefault implements StateManager {
 		    GWT.log("Error getting content", null);
 		    throw new RuntimeException();
 		}
-
 	    }
 
 	    public void onSuccess(final Object result) {
 		GWT.log("State response: " + result, null);
 		loadContent((StateDTO) result);
+		oldState = newState.getEncoded();
 	    }
 
 	});
@@ -104,14 +105,11 @@ public class StateManagerDefault implements StateManager {
     }
 
     private void loadContent(final StateDTO state) {
-	GWT.log("content rights:" + state.getContentRights().toString(), null);
-	GWT.log("folder rights:" + state.getFolderRights().toString(), null);
-	GWT.log("license: " + state.getLicense().toString(), null);
 	GWT.log("title: " + state.getTitle(), null);
+	StateToken oldStateToken = new StateToken(oldState);
 	session.setCurrent(state);
 	final GroupDTO group = state.getGroup();
 	app.setGroupState(group.getShortName());
-	final Workspace workspace = app.getWorkspace();
 	workspace.showGroup(group);
 	final String toolName = state.getToolName();
 	workspace.setTool(toolName);
@@ -125,8 +123,11 @@ public class StateManagerDefault implements StateManager {
 	workspace.setContext(clientTool.getContext());
 	workspace.getLicenseComponent().setLicense(state.getGroup().getLongName(), state.getLicense());
 	// TODO: put GroupRights inside ParticipationDataDTO
-	workspace.getGroupMembersComponent().getGroupMembers(session.user, state.getGroup(), state.getGroupRights());
-	workspace.getParticipationComponent().getParticipation(session.user, state.getGroup(), state.getGroupRights());
+	if (oldStateToken.hasGroup() && oldStateToken.getGroup().equals(state.getGroup().getShortName())) {
+	    // Same group, do nothing
+	} else {
+	    loadSocialNetwork();
+	}
 	// only for UI tests:
 	workspace.getBuddiesPresenceComponent().setBuddiesPresence();
 	Site.hideProgress();
@@ -134,6 +135,17 @@ public class StateManagerDefault implements StateManager {
 
     public String getUser() {
 	return session.user;
+    }
+
+    public void reloadSocialNetwork() {
+	loadSocialNetwork();
+	Site.sitebar.reloadUserInfo(session.user);
+    }
+
+    private void loadSocialNetwork() {
+	StateDTO state = session.getCurrentState();
+	workspace.getGroupMembersComponent().getGroupMembers(session.user, state.getGroup(), state.getGroupRights());
+	workspace.getParticipationComponent().getParticipation(session.user, state.getGroup(), state.getGroupRights());
     }
 
 }

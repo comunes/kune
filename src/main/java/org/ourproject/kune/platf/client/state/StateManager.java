@@ -30,7 +30,10 @@ public interface StateManager extends HistoryListener {
 
     void reload();
 
+    void reloadSocialNetwork();
+
     void setState(StateDTO content);
 
     void setState(StateToken state);
+
 }

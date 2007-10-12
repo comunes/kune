@@ -28,6 +28,7 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.rpc.KuneService;
 import org.ourproject.kune.platf.server.InitData;
 import org.ourproject.kune.platf.server.UserSession;
@@ -91,7 +92,7 @@ public class KuneRPC implements RPC, KuneService {
     }
 
     @Transactional(type = TransactionType.READ_ONLY)
-    public InitDataDTO getInitData(final String userHash) {
+    public InitDataDTO getInitData(final String userHash) throws AccessViolationException {
 	final InitData data = new InitData();
 
 	data.setCCLicenses(licenseManager.getCC());

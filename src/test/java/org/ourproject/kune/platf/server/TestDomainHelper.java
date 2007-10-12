@@ -13,9 +13,9 @@ import org.ourproject.kune.platf.server.domain.User;
 public abstract class TestDomainHelper {
 
     public static User createUser(final int number) {
-	String shortName = "shortName" + number;
+	String shortName = "shortname" + number;
 	String longName = "name" + number;
-	User user = new User(shortName, longName, "email" + number, "password" + number);
+	User user = new User(shortName, longName, "email@domain" + number, "password" + number);
 	Group userGroup = new Group(shortName, longName);
 	userGroup.setAdmissionType(AdmissionType.Closed);
 	user.setUserGroup(userGroup);

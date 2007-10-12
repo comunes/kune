@@ -33,4 +33,6 @@ public interface SiteBarServiceAsync {
     void createUser(String shortName, String longName, String email, String paswd, LicenseDTO license,
 	    AsyncCallback asyncCallback);
 
+    void reloadUserInfo(String userHash, AsyncCallback asyncCallback);
+
 }

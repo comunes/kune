@@ -91,6 +91,20 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 	});
     }
 
+    public void reloadUserInfo(final String userHash) {
+	SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
+	siteBarService.reloadUserInfo(userHash, new AsyncCallback() {
+	    public void onFailure(final Throwable arg0) {
+		Site.hideProgress();
+	    }
+
+	    public void onSuccess(final Object response) {
+		showLoggedUser((UserInfoDTO) response);
+		Site.hideProgress();
+	    }
+	});
+    }
+
     public void userLoggedIn(final UserInfoDTO user) {
 	view.hideLoginDialog();
 	listener.onUserLoggedIn(user);

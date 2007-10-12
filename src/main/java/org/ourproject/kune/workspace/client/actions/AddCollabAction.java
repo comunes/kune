@@ -47,7 +47,7 @@ public class AddCollabAction implements Action {
 		// i18n
 		Site.info("Member added as collaborator");
 		// TODO: Reload SocialNetwork info only
-		services.stateManager.reload();
+		services.stateManager.reloadSocialNetwork();
 	    }
 	});
 

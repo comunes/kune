@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import org.hibernate.validator.InvalidStateException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +17,7 @@ import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
 
 public class UserManagerTest extends PersistenceTest {
-    private static final String USER_SHORT_NAME = "userShortName";
+    private static final String USER_SHORT_NAME = "user-shortname";
     private static final String USER_LONG_NAME = "the user long name";
     private static final String USER_PASSWORD = "userPassword";
     private static final String USER_EMAIL = "useremail@example.com";
@@ -56,8 +57,40 @@ public class UserManagerTest extends PersistenceTest {
 	assertNull(result);
     }
 
+    @Test
+    public void emailCorrect() {
+	user = new User("test1", "test1 name", "test@example.com", "some passwd");
+	persist(user);
+    }
+
+    @Test(expected = InvalidStateException.class)
+    public void emailIncorrect() {
+	user = new User("test1", "test1 name", "falseEmail@", "some passwd");
+	persist(user);
+    }
+
+    @Test(expected = InvalidStateException.class)
+    public void userShortNameIncorrect() {
+	user = new User("test1A", "test1 name", "test@example.com", "some passwd");
+	persist(user);
+    }
+
+    @Test(expected = InvalidStateException.class)
+    public void userNameLengthIncorrect() {
+	user = new User("test1A", "te", "test@example.com", "some passwd");
+	persist(user);
+    }
+
+    @Test(expected = InvalidStateException.class)
+    public void passwdLengthIncorrect() {
+	user = new User("test1A", "te", "test@example.com", "pass");
+	persist(user);
+    }
+
     @After
     public void close() {
-	closeTransaction();
+	if (getTransaction().isActive()) {
+	    getTransaction().rollback();
+	}
     }
 }

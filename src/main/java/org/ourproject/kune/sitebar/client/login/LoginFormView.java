@@ -38,4 +38,10 @@ public interface LoginFormView extends View {
 
     public String getRegisterPassword();
 
+    public String getRegisterPasswordDup();
+
+    public boolean isSignInFormValid();
+
+    public boolean isRegisterFormValid();
+
 }

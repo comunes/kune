@@ -47,7 +47,7 @@ public class AddViewerAction implements Action {
 		// i18n
 		Site.info("Member can now view this group contents");
 		// TODO: Reload SocialNetwork info only
-		services.stateManager.reload();
+		services.stateManager.reloadSocialNetwork();
 	    }
 	});
 

@@ -19,14 +19,12 @@
 
 package org.ourproject.kune.platf.server.users;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
+import org.ourproject.kune.platf.client.errors.AccessViolationException;
+import org.ourproject.kune.platf.server.ParticipationData;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.manager.GroupManager;
+import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -34,14 +32,14 @@ import com.google.inject.Singleton;
 @Singleton
 public class UserInfoServiceDefault implements UserInfoService {
 
-    private final GroupManager groupFinder;
+    private final SocialNetworkManager socialNetworkManager;
 
     @Inject
-    public UserInfoServiceDefault(final GroupManager groupFinder) {
-	this.groupFinder = groupFinder;
+    public UserInfoServiceDefault(final SocialNetworkManager socialNetwork) {
+	this.socialNetworkManager = socialNetwork;
     }
 
-    public UserInfo buildInfo(final User user) {
+    public UserInfo buildInfo(final User user) throws AccessViolationException {
 	UserInfo info = null;
 	if (User.isKownUser(user)) {
 	    info = new UserInfo();
@@ -50,30 +48,12 @@ public class UserInfoServiceDefault implements UserInfoService {
 	    info.setChatName(user.getShortName());
 	    info.setChatPassword(user.getPassword());
 
-	    Long userGroupId = user.getUserGroup().getId();
-	    List<Group> adminInGroups = groupFinder.findAdminInGroups(userGroupId);
-	    List<Group> collabInGroups = groupFinder.findCollabInGroups(userGroupId);
-
-	    List<Link> groupsIsAdmin = new ArrayList();
-	    List<Link> groupsIsCollab = new ArrayList();
-	    ;
-	    Iterator iter = adminInGroups.iterator();
-	    while (iter.hasNext()) {
-		Group g = (Group) iter.next();
-		groupsIsAdmin
-			.add(new Link(g.getShortName(), g.getLongName(), "", g.getDefaultContent().getStateToken()));
-
-	    }
-	    iter = collabInGroups.iterator();
-	    while (iter.hasNext()) {
-		Group g = (Group) iter.next();
-		groupsIsCollab.add(new Link(g.getShortName(), g.getLongName(), "", g.getDefaultContent()
-			.getStateToken()));
-	    }
-	    info.setGroupsIsAdmin(groupsIsAdmin);
-	    info.setGroupsIsCollab(groupsIsCollab);
-
 	    Group userGroup = user.getUserGroup();
+
+	    ParticipationData participation = socialNetworkManager.findParticipation(user, userGroup);
+	    info.setGroupsIsAdmin(participation.getGroupsIsAdmin());
+	    info.setGroupsIsCollab(participation.getGroupsIsCollab());
+
 	    Content defaultContent = userGroup.getDefaultContent();
 	    if (defaultContent != null) {
 		info.setHomePage(defaultContent.getStateToken());
