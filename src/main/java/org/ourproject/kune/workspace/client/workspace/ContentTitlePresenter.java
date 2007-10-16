@@ -29,8 +29,13 @@ public class ContentTitlePresenter implements ContentTitleComponent {
 	this.view = view;
     }
 
-    public void setContentTitle(final String title) {
+    public void setContentTitle(final String title, final String date) {
 	view.setContentTitle(title);
+	if (date != null) {
+	    view.setContentDate(date);
+	} else {
+	    view.setContentDate("");
+	}
     }
 
     public View getView() {

@@ -27,7 +27,6 @@ import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.rpc.KuneService;
 import org.ourproject.kune.platf.client.rpc.KuneServiceAsync;
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.utils.PrefetchUtilities;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
@@ -36,14 +35,12 @@ import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 import to.tipit.gwtlib.FireLog;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 
 public class InitAction implements Action {
     public void execute(final Object value, final Object extra, final Services services) {
-	GWT.log("Locale: " + Kune.getInstance().t.Locale(), null);
 	PrefetchUtilities.preFetchImpImages();
 	getInitData(services);
 
@@ -51,7 +48,6 @@ public class InitAction implements Action {
 	Workspace workspace = services.app.getWorkspace();
 	workspace.adjustSize(windowWidth, Window.getClientHeight());
 	SiteBarFactory.getSiteMessage().adjustWidth(windowWidth);
-
 	RootPanel.get("kuneinitialcurtain").setVisible(false);
     }
 

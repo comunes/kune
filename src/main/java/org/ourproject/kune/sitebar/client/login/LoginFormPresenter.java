@@ -54,7 +54,7 @@ public class LoginFormPresenter implements LoginForm {
 
     public void doLogin() {
 	if (view.isSignInFormValid()) {
-	    Site.showProgress("Processing");
+	    Site.showProgressProcessing();
 	    final String nickOrEmail = view.getNickOrEmail();
 	    final String passwd = view.getLoginPassword();
 	    SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
@@ -76,7 +76,7 @@ public class LoginFormPresenter implements LoginForm {
 
     public void doRegister() {
 	if (view.isRegisterFormValid()) {
-	    Site.showProgress("Processing");
+	    Site.showProgressProcessing();
 	    final String shortName = view.getShortName();
 	    final String passwd = view.getRegisterPassword();
 	    final String longName = view.getLongName();

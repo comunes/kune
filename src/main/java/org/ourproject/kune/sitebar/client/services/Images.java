@@ -102,4 +102,14 @@ public interface Images extends ImageBundle {
      */
     AbstractImagePrototype language();
 
+    /**
+     * @gwt.resource org/ourproject/kune/sitebar/public/images/anybody.png
+     */
+    AbstractImagePrototype anybody();
+
+    /**
+     * @gwt.resource org/ourproject/kune/sitebar/public/images/nobody.png
+     */
+    AbstractImagePrototype nobody();
+
 }

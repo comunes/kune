@@ -116,9 +116,9 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 	    view.setLogoutLinkVisible(false);
 	} else {
 	    isLogged = true;
-	    view.showLoggedUserName(user.getName(), user.getHomePage());
+	    view.showLoggedUserName(user.getShortName(), user.getHomePage());
 	    view.setLogoutLinkVisible(true);
-	    view.setGroupsIsMember(user.getGroupsIsAdmin(), user.getGroupsIsEditor());
+	    view.setGroupsIsMember(user.getGroupsIsAdmin(), user.getGroupsIsCollab());
 	}
     }
 

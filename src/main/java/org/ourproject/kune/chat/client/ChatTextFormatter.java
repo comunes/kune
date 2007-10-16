@@ -70,12 +70,12 @@ public class ChatTextFormatter {
 	message = message.replaceAll(">", "&gt;");
 	message = message.replaceAll("\n", "<br>\n");
 
-	message = formatEmoticonsNew(message);
+	message = formatEmoticons(message);
 
 	return new HTML(message);
     }
 
-    private static String formatEmoticonsNew(String message) {
+    private static String formatEmoticons(String message) {
 	RoomImages img = RoomImages.App.getInstance();
 
 	message = replace(message, new String[] { "&gt;:\\)" }, DEVIL);
@@ -162,55 +162,4 @@ public class ChatTextFormatter {
 	return message;
     }
 
-    private static String formatEmoticons(String message) {
-	message = message.replaceAll(":\\)", SMILE);
-	message = message.replaceAll(":-\\)", SMILE);
-
-	message = message.replaceAll("X-\\(", ANGRY);
-	message = message.replaceAll("X\\(", ANGRY);
-
-	message = message.replaceAll(":-D", GRIN);
-	message = message.replaceAll(":D", GRIN);
-
-	message = message.replaceAll(":\\(", SAD);
-	message = message.replaceAll(":-\\(", SAD);
-
-	message = message.replaceAll(":P", TONGUE);
-
-	message = message.replaceAll(":\'\\(", CRYING);
-	message = message.replaceAll(":\'\\(", CRYING);
-
-	message = message.replaceAll(":-O", SURPRISED);
-	message = message.replaceAll(":O", SURPRISED);
-
-	message = message.replaceAll(":-\\*", KISSING);
-	message = message.replaceAll(":\\*", KISSING);
-
-	message = message.replaceAll(":-/", UNCERTAIN);
-	message = message.replaceAll(":-/", UNCERTAIN);
-
-	message = message.replaceAll(";\\)", WINK);
-	message = message.replaceAll(";-\\)", WINK);
-
-	message = message.replaceAll(":\\?", WONDERING);
-	message = message.replaceAll(":\\?", WONDERING);
-
-	message = message.replaceAll(":-X", LOVE);
-	message = message.replaceAll(":-xX", LOVE);
-
-	message = message.replaceAll(SMILE, RoomImages.App.getInstance().smile().getHTML());
-	message = message.replaceAll(ANGRY, RoomImages.App.getInstance().angry().getHTML());
-	message = message.replaceAll(GRIN, RoomImages.App.getInstance().grin().getHTML());
-	message = message.replaceAll(SAD, RoomImages.App.getInstance().sad().getHTML());
-	message = message.replaceAll(TONGUE, RoomImages.App.getInstance().tongue().getHTML());
-	message = message.replaceAll(CRYING, RoomImages.App.getInstance().crying().getHTML());
-	message = message.replaceAll(SURPRISED, RoomImages.App.getInstance().surprised().getHTML());
-	message = message.replaceAll(KISSING, RoomImages.App.getInstance().kissing().getHTML());
-	message = message.replaceAll(UNCERTAIN, RoomImages.App.getInstance().uncertain().getHTML());
-	message = message.replaceAll(WINK, RoomImages.App.getInstance().wink().getHTML());
-	message = message.replaceAll(WONDERING, RoomImages.App.getInstance().wondering().getHTML());
-	message = message.replaceAll(LOVE, RoomImages.App.getInstance().love().getHTML());
-
-	return message;
-    }
 }

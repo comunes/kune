@@ -26,10 +26,8 @@ import org.ourproject.kune.chat.client.ctx.ChatContext;
 class Components {
     private ChatContent content;
     private ChatContext context;
-    private final ChatProvider provider;
 
     public Components(final ChatProvider provider) {
-	this.provider = provider;
     }
 
     public ChatContent getContent() {

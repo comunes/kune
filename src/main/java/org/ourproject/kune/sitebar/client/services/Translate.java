@@ -32,9 +32,9 @@ public interface Translate extends Constants {
 
     String HelpWithTranslation();
 
-    String Login();
+    String SignIn();
 
-    String LoginToCollaborate();
+    String SignInToCollaborate();
 
     String Search();
 
@@ -56,15 +56,13 @@ public interface Translate extends Constants {
 
     String Password();
 
-    String Logout();
+    String SignOut();
 
     String Register();
 
     String RegisterANewGroup();
 
     String UserNameOrEmail();
-
-    String SignIn();
 
     String MyGroups();
 

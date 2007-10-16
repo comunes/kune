@@ -270,8 +270,6 @@ public class LoginFormPanel implements LoginFormView, View {
 		setFieldLabel(t.Password());
 		setName(PASSWORD_FIELD);
 		setWidth(175);
-		setMinLength(6);
-		setMaxLength(40);
 		setPassword(true);
 		setAllowBlank(false);
 		setMsgTarget("side");

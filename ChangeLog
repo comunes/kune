@@ -1,4 +1,10 @@
-2007-10-12 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+2007-10-15 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* Several workspace fixes and adjustments
+	* Added grey/blue/purple workspace themes
+	* Added new reset/fonts .css from yahoo
+	* Workspace reestructuration
+	* Added 1st workspace themes implementation via Dictionary
+	* Use of only one progress indicator (the one form Kune.html)
 	* Added more validations to login/register/newGroup forms
 	* Added persistance validation
 	* Participation component in workspace (shows person-groups and

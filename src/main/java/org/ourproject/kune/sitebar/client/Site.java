@@ -21,6 +21,7 @@
 package org.ourproject.kune.sitebar.client;
 
 import org.ourproject.kune.sitebar.client.bar.SiteBar;
+import org.ourproject.kune.sitebar.client.bar.SiteBarTrans;
 import org.ourproject.kune.sitebar.client.msg.SiteMessage;
 
 public class Site {
@@ -54,7 +55,7 @@ public class Site {
 
     public static void showProgressProcessing() {
 	// i18n
-	sitebar.showProgress("Processing");
+	sitebar.showProgress(SiteBarTrans.getInstance().t.Processing());
     }
 
     public static void showProgressLoading() {

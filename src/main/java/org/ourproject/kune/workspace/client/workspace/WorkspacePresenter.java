@@ -50,7 +50,7 @@ public class WorkspacePresenter implements Workspace {
     }
 
     public void showGroup(final GroupDTO group) {
-	view.setLogo(group.getLongName());
+	view.setGroupLogo(group.getLongName());
     }
 
     public void attachTools(final Iterator iterator) {
@@ -113,5 +113,9 @@ public class WorkspacePresenter implements Workspace {
 
     public BuddiesPresenceComponent getBuddiesPresenceComponent() {
 	return components.getBuddiesPresenceComponent();
+    }
+
+    public void setTheme(final String theme) {
+	view.setTheme(theme);
     }
 }

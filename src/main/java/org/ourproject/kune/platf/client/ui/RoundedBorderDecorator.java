@@ -173,8 +173,7 @@ public class RoundedBorderDecorator extends ComplexPanel implements HasColor {
 	}
 	setElement(body);
 	add(decorated, divElement);
-	// TODO: mejorar esto
-	setColor("red");
+	setColor("CCC");
     }
 
     public RoundedBorderDecorator(final Widget decorated, final int corners) {

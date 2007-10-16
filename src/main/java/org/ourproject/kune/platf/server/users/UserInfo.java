@@ -22,18 +22,19 @@ package org.ourproject.kune.platf.server.users;
 import java.util.List;
 
 public class UserInfo {
+    private String shortName;
     private String name;
     private String chatName;
     private String chatPassword;
     private String homePage;
     private List<Link> groupsIsAdmin;
-    private List<Link> groupsIsEditor;
+    private List<Link> groupsIsCollab;
 
     public String getHomePage() {
 	return homePage;
     }
 
-    public void setHomePage(String homePage) {
+    public void setHomePage(final String homePage) {
 	this.homePage = homePage;
     }
 
@@ -61,12 +62,12 @@ public class UserInfo {
 	this.chatPassword = chatPassword;
     }
 
-    public List<Link> getGroupsIsEditor() {
-	return groupsIsEditor;
+    public List<Link> getGroupsIsCollab() {
+	return groupsIsCollab;
     }
 
-    public void setGroupsIsCollab(final List<Link> groupsIsEditor) {
-	this.groupsIsEditor = groupsIsEditor;
+    public void setGroupsIsCollab(final List<Link> groupsIsCollab) {
+	this.groupsIsCollab = groupsIsCollab;
     }
 
     public List<Link> getGroupsIsAdmin() {
@@ -75,6 +76,14 @@ public class UserInfo {
 
     public void setGroupsIsAdmin(final List<Link> groupsIsAdmin) {
 	this.groupsIsAdmin = groupsIsAdmin;
+    }
+
+    public String getShortName() {
+	return shortName;
+    }
+
+    public void setShortName(final String shortName) {
+	this.shortName = shortName;
     }
 
 }

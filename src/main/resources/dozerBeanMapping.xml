@@ -197,8 +197,8 @@
             </b-hint>
         </field>
         <field>
-            <a>groupsIsEditor</a>
-            <b>groupsIsEditor</b>
+            <a>groupsIsCollab</a>
+            <b>groupsIsCollab</b>
             <a-hint>
                 org.ourproject.kune.platf.client.dto.LinkDTO
             </a-hint>

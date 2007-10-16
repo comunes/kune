@@ -44,6 +44,7 @@ public class UserInfoServiceDefault implements UserInfoService {
 	if (User.isKownUser(user)) {
 	    info = new UserInfo();
 
+	    info.setShortName(user.getShortName());
 	    info.setName(user.getName());
 	    info.setChatName(user.getShortName());
 	    info.setChatPassword(user.getPassword());

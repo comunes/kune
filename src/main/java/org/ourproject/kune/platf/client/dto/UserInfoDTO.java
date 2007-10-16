@@ -24,6 +24,7 @@ import java.util.List;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class UserInfoDTO implements IsSerializable {
+    private String shortName;
     private String name;
     private String chatName;
     private String chatPassword;
@@ -37,7 +38,7 @@ public class UserInfoDTO implements IsSerializable {
     /**
      * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.LinkDTO>
      */
-    private List groupsIsEditor;
+    private List groupsIsCollab;
 
     public String getName() {
 	return name;
@@ -72,20 +73,28 @@ public class UserInfoDTO implements IsSerializable {
 	this.groupsIsAdmin = groupsIsAdmin;
     }
 
-    public List getGroupsIsEditor() {
-	return groupsIsEditor;
+    public List getGroupsIsCollab() {
+	return groupsIsCollab;
     }
 
-    public void setGroupsIsEditor(final List groupsIsEditor) {
-	this.groupsIsEditor = groupsIsEditor;
+    public void setGroupsIsCollab(final List groupsIsCollab) {
+	this.groupsIsCollab = groupsIsCollab;
     }
 
     public String getHomePage() {
 	return homePage;
     }
 
-    public void setHomePage(String homePage) {
+    public void setHomePage(final String homePage) {
 	this.homePage = homePage;
+    }
+
+    public String getShortName() {
+	return shortName;
+    }
+
+    public void setShortName(final String shortName) {
+	this.shortName = shortName;
     }
 
 }

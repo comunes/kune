@@ -5,22 +5,6 @@
   margin: 5px 5px 5px 5px;
 }
 
-#kuneinitialstatusbar {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  z-index: 30000;
-}
-
-.kune-Progress {
-  background: #E5FF80;
-  border: 1px solid #E5FF80;
-  white-space: nowrap;
-  height: 16px;
-  padding: 0 3px;
-  z-index: 10000;
-}
-
 #kuneinitialcurtain {
   position: absolute;
   left: 0px;
@@ -32,12 +16,10 @@
 }
 
 /* Global styles */
+
 .gwt-HorizontalSplitPanel .hsplitter {
   cursor: e-resize;
-  background: #DCE8AB;
   width: 6px;
-  /* border-right: 1px solid #BCD35F;
-  border-left: 1px solid #BCD35F; */
 }
 
 .gwt-DialogBox {
@@ -272,6 +254,14 @@ legend {
   margin: 10px 0 0 0;
 }
 
+.kune-Margin-Large-r {
+  margin: 0 10px 0 0;
+}
+
+.kune-Margin-Large-l {
+  margin: 0 0 0 10px;
+}
+
 .kune-Margin-Medium-trbl {
   margin: 5px;
 }
@@ -291,6 +281,15 @@ legend {
 .kune-Margin-Medium-t {
   margin: 5px 0 0 0;
 }
+
+.kune-Margin-Medium-r {
+  margin: 0 5px 0 0;
+}
+
+.kune-Margin-Medium-l {
+  margin: 0 0 0 5px;
+}
+
 
 .kune-Margin-Small-trbl {
   margin: 3px;
@@ -332,3 +331,81 @@ legend {
   margin: 1px 0 0 0;
 }
 
+.kune-Margin-Mini-r {
+  margin: 0 1px 0 0;
+}
+
+.kune-Margin-Mini-l {
+  margin: 0 0 0 1px;
+}
+
+/* Fonts
+see: http://developer.yahoo.com/yui/fonts/ */
+
+.kune-ft10px {
+  font-size: 77%
+}
+
+.kune-ft11px {
+  font-size: 85%
+}
+
+.kune-ft12px {
+  font-size: 93%
+}
+
+.kune-ft13px {
+  font-size: 100%
+}
+
+.kune-ft14px {
+  font-size: 108%
+}
+
+.kune-ft15px {
+  font-size: 116%
+}
+
+.kune-ft16px {
+  font-size: 123.1%
+}
+
+.kune-ft17px {
+  font-size: 131%
+}
+
+.kune-ft18px {
+  font-size: 138.5%
+}
+
+.kune-ft19px {
+  font-size: 146.5%
+}
+
+.kune-ft20px {
+  font-size: 153.9%
+}
+
+.kune-ft21px {
+  font-size: 161.6%
+}
+
+.kune-ft22px {
+  font-size: 167%
+}
+
+.kune-ft23px {
+  font-size: 174%
+}
+
+.kune-ft24px {
+  font-size: 182%
+}
+
+.kune-ft25px {
+  font-size: 189%
+}
+
+.kune-ft26px {
+  font-size: 197 %
+}

@@ -87,11 +87,20 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	layout.beginUpdate();
 
 	ContentPanel roomPanel = (ContentPanel) room.getView();
-	layout.getRegion(LayoutRegionConfig.CENTER).add(roomPanel);
+	LayoutRegion centerRegion = layout.getRegion(LayoutRegionConfig.CENTER);
+	centerRegion.add(roomPanel);
 
 	String panelId = roomPanel.getId();
 	panelIdToRoom.put(panelId, room);
-	layout.getRegion(LayoutRegionConfig.CENTER).showPanel(panelId);
+	centerRegion.showPanel(panelId);
+
+	// bug test: http://code.google.com/p/gwt-ext/issues/detai3754,l?id=81
+	// ContentPanel panel = centerRegion.getPanel(panelId);
+	// FireLog.debug("My panel id: " + panelId);
+	// FireLog.debug("Region panel id: " + panel.getId());
+	// FireLog.debug("Panel element: " + panel.getElement());
+	// panel.add(new HTML("test"));
+
 	layout.endUpdate();
     }
 

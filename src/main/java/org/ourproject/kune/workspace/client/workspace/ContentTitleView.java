@@ -25,4 +25,6 @@ public interface ContentTitleView extends View {
 
     void setContentTitle(String title);
 
+    void setContentDate(String date);
+
 }

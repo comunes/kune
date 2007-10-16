@@ -26,6 +26,8 @@ import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.newgroup.NewGroupForm;
 import org.ourproject.kune.platf.client.newgroup.ui.NewGroupFormPanel;
+import org.ourproject.kune.platf.client.ui.IconHyperlink;
+import org.ourproject.kune.platf.client.ui.IconLabel;
 import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
@@ -35,6 +37,7 @@ import org.ourproject.kune.sitebar.client.services.Images;
 import org.ourproject.kune.sitebar.client.services.Translate;
 
 import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
@@ -48,21 +51,20 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.PushButton;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
 public class SiteBarPanel extends Composite implements SiteBarView {
 
     private static final String IGNORE_TOKEN = "fixme";
-    private static final String IMAGE_SPIN = "images/spin-kune-thund-green.gif";
     private final SiteBarPresenter presenter;
     private final Translate t;
     private final Image logoImage;
 
     private final HorizontalPanel siteBarHP;
 
-    private final Image spinProcessing;
-    private final Label textProcessingLabel;
+    private final IconHyperlink gotoPublic;
     private final Hyperlink loginHyperlink;
     private final Hyperlink loggedUserHyperlink;
     private final Hyperlink newGroupHyperlink;
@@ -78,6 +80,9 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     private MenuItem linkHelp;
     private final MenuBar yourGroupsSubmenu;
     private NewGroupFormPanel newGroupPanel;
+    private final IconLabel contentNoPublic;
+    private final Widget progressPanel;
+    private final Widget progressText;
 
     public SiteBarPanel(final SiteBarPresenter initPresenter) {
 	t = SiteBarTrans.getInstance().t;
@@ -85,12 +90,14 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 
 	// Initialize
 	siteBarHP = new HorizontalPanel();
+
 	initWidget(siteBarHP);
 	this.presenter = initPresenter;
-	spinProcessing = new Image();
-	img.spinKuneThundGreen().applyTo(spinProcessing);
-	spinProcessing.setUrl(IMAGE_SPIN);
-	textProcessingLabel = new Label();
+
+	progressPanel = RootPanel.get("kuneprogresspanel");
+	progressText = RootPanel.get("kuneprogresstext");
+	gotoPublic = new IconHyperlink(img.anybody(), "Goto Public Space", "fixme");
+	contentNoPublic = new IconLabel(img.anybody(), "This content is not public");
 	final Label expandLabel = new Label("");
 	newGroupHyperlink = new Hyperlink();
 	final HTML pipeSeparatorHtml = new HTML();
@@ -108,8 +115,8 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	logoImage = new Image();
 
 	// Layout
-	siteBarHP.add(spinProcessing);
-	siteBarHP.add(textProcessingLabel);
+	siteBarHP.add(gotoPublic);
+	siteBarHP.add(contentNoPublic);
 	siteBarHP.add(expandLabel);
 	siteBarHP.add(loginHyperlink);
 	siteBarHP.add(loggedUserHyperlink);
@@ -126,9 +133,10 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	// Set properties
 	siteBarHP.addStyleName("kune-SiteBarPanel");
 	siteBarHP.setCellWidth(expandLabel, "100%");
-	spinProcessing.addStyleName("kune-Progress");
-	textProcessingLabel.setText(t.Processing());
-	textProcessingLabel.addStyleName("kune-Progress");
+	showProgress(t.Processing());
+	gotoPublic.addStyleName("kune-Margin-Medium-r");
+	contentNoPublic.setVisible(false);
+	contentNoPublic.addStyleName("kune-Margin-Medium-r");
 	newGroupHyperlink.setText(t.NewGroup());
 	newGroupHyperlink.setTargetHistoryToken(IGNORE_TOKEN);
 	loggedUserHyperlink.setVisible(false);
@@ -142,9 +150,9 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	pipeSeparatorHtml.setStyleName("kune-SiteBarPanel-Separator");
 	pipeSeparatorHtml2.setHTML("|");
 	pipeSeparatorHtml2.setStyleName("kune-SiteBarPanel-Separator");
-	loginHyperlink.setText(t.Login());
+	loginHyperlink.setText(t.SignInToCollaborate());
 	loginHyperlink.setTargetHistoryToken(IGNORE_TOKEN);
-	logoutHyperlink.setText(t.Logout());
+	logoutHyperlink.setText(t.SignOut());
 	logoutHyperlink.setTargetHistoryToken(IGNORE_TOKEN);
 
 	options.addItem(t.Options(), true, optionsSubmenu);
@@ -186,7 +194,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	siteBarHP.add(searchButton);
 	siteBarHP.add(searchTextBox);
 
-	searchTextBox.setWidth("180");
+	searchTextBox.setWidth("120");
 	setDefaultTextSearch();
 	searchTextBox.addFocusListener(new FocusListener() {
 
@@ -209,7 +217,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     public void clearUserName() {
-	loginHyperlink.setText(t.Login());
+	loginHyperlink.setText(t.SignInToCollaborate());
     }
 
     public void setLogo(final Image logo) {
@@ -260,14 +268,12 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     public void showProgress(final String text) {
-	textProcessingLabel.setText(text);
-	spinProcessing.setVisible(true);
-	textProcessingLabel.setVisible(true);
+	progressPanel.setVisible(true);
+	DOM.setInnerText(progressText.getElement(), text);
     }
 
     public void hideProgress() {
-	spinProcessing.setVisible(false);
-	textProcessingLabel.setVisible(false);
+	progressPanel.setVisible(false);
     }
 
     private void createListeners() {

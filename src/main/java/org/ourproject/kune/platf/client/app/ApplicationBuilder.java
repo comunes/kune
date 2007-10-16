@@ -36,9 +36,9 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.state.StateManagerDefault;
 import org.ourproject.kune.platf.client.tool.ClientTool;
+import org.ourproject.kune.sitebar.client.Site;
 
 import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.ui.RootPanel;
 
 public class ApplicationBuilder {
     private final String userHash;
@@ -52,8 +52,7 @@ public class ApplicationBuilder {
     public Application build() {
 	HashMap tools = indexTools(platform.getTools());
 	DefaultApplication application = new DefaultApplication(tools);
-	RootPanel.get("kuneinitialstatusbar").setVisible(false);
-
+	Site.showProgressProcessing();
 	final Session session = new Session(userHash);
 	ContentProvider provider = new ContentProviderImpl(ContentService.App.getInstance());
 	final StateManager stateManager = new StateManagerDefault(provider, application, session);

@@ -29,8 +29,15 @@ public class ContentSubTitlePresenter implements ContentSubTitleComponent {
 	this.view = view;
     }
 
-    public void setContentSubTitle(final String title, final Double rate, final Integer rateByUsers) {
-	view.setContentSubTitle(title, rate, rateByUsers);
+    public void setContentSubTitle(final String title, final String lang) {
+	if (title != null) {
+	    view.setContentSubTitle(title);
+	}
+	if (lang != null) {
+	    view.setContentSubTitleLanguage(lang);
+	} else {
+	    view.setContentSubTitleLanguage("");
+	}
     }
 
     public View getView() {

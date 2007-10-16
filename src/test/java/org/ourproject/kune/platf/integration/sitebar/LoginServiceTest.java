@@ -28,30 +28,30 @@ public class LoginServiceTest {
 
     @Test
     public void testDefSiteNameLogin() throws SerializableException {
-	assertNull(session.getUserId());
+	assertNull(session.getUser().getId());
 	loginService.login(properties.getDefaultSiteShortName(), properties.getDefaultSiteAdminPassword());
-	assertNotNull(session.getUserId());
+	assertNotNull(session.getUser().getId());
     }
 
     @Test
     public void testDefSiteEmailLogin() throws SerializableException {
-	assertNull(session.getUserId());
+	assertNull(session.getUser().getId());
 	loginService.login(properties.getDefaultSiteAdminEmail(), properties.getDefaultSiteAdminPassword());
-	assertNotNull(session.getUserId());
+	assertNotNull(session.getUser().getId());
     }
 
     @Test
     public void testSiteNameLogin() throws SerializableException {
-	assertNull(session.getUserId());
+	assertNull(session.getUser().getId());
 	loginService.login(properties.getAdminShortName(), properties.getAdminPassword());
-	assertNotNull(session.getUserId());
+	assertNotNull(session.getUser().getId());
     }
 
     @Test
     public void testSiteEmailLogin() throws SerializableException {
-	assertNull(session.getUserId());
+	assertNull(session.getUser().getId());
 	loginService.login(properties.getAdminEmail(), properties.getAdminPassword());
-	assertNotNull(session.getUserId());
+	assertNotNull(session.getUser().getId());
 
     }
 

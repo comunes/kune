@@ -31,10 +31,10 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-class LogoPanel extends SimplePanel {
+class GroupLogoPanel extends SimplePanel {
     private EntityTextLogo entityTextLogo;
 
-    public LogoPanel() {
+    public GroupLogoPanel() {
     }
 
     private EntityTextLogo getEntityTextLogo() {

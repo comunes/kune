@@ -25,23 +25,22 @@ import com.google.gwt.core.client.GWT;
 public class Kune {
     private static Kune instance;
     public final Translate t;
-    public final ColorScheme c;
+    public ColorTheme theme;
 
     private Kune() {
-        t = (Translate) GWT.create(Translate.class);
-        c = (ColorScheme) GWT.create(ColorScheme.class);
+	t = (Translate) GWT.create(Translate.class);
+	theme = new ColorTheme();
     }
 
     public static Kune getInstance() {
-        if (instance == null) {
-            instance = new Kune();
-        }
-        return instance;
+	if (instance == null) {
+	    instance = new Kune();
+	}
+	return instance;
     }
 
     public String getUserHash() {
-        return "userHash";
+	return "userHash";
     }
-
 
 }

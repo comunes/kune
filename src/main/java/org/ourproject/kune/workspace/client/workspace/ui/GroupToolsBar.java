@@ -18,13 +18,14 @@
 package org.ourproject.kune.workspace.client.workspace.ui;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
-import org.ourproject.kune.platf.client.services.ColorScheme;
+import org.ourproject.kune.platf.client.services.ColorTheme;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.tool.ToolTrigger;
 import org.ourproject.kune.platf.client.tool.ToolTrigger.TriggerListener;
-import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
 import org.ourproject.kune.platf.client.ui.HasColor;
+import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
 
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -72,12 +73,24 @@ class GroupToolsBar extends VerticalPanel {
 	setTabSelected(currentTab, true);
     }
 
+    public void setTabsColors(final String selectedColor, final String unSelectedColor) {
+	final Iterator iter = tabs.values().iterator();
+	while (iter.hasNext()) {
+	    final Widget w = (Widget) iter.next();
+	    if (w == currentTab) {
+		((HasColor) w).setColor(selectedColor);
+	    } else {
+		((HasColor) w).setColor(unSelectedColor);
+	    }
+	}
+    }
+
     private Widget getWidget(final String toolName) {
 	return (Widget) tabs.get(toolName);
     }
 
     private void setTabSelected(final Widget tab, final boolean isSelected) {
-	ColorScheme scheme = Kune.getInstance().c;
+	ColorTheme theme = Kune.getInstance().theme;
 	if (isSelected) {
 	    tab.removeStyleName(ITEM_NOT_SELECTED);
 	    tab.addStyleName(ITEM_SELECTED);
@@ -85,7 +98,7 @@ class GroupToolsBar extends VerticalPanel {
 	    tab.removeStyleName(ITEM_SELECTED);
 	    tab.addStyleName(ITEM_NOT_SELECTED);
 	}
-	String color = isSelected ? scheme.getSelected() : scheme.getUnselected();
+	String color = isSelected ? theme.getToolSelected() : theme.getToolUnselected();
 	((HasColor) tab).setColor(color);
     }
 

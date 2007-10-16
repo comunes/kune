@@ -23,22 +23,38 @@ package org.ourproject.kune.workspace.client.workspace.ui;
 import org.ourproject.kune.workspace.client.workspace.ContentTitlePresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentTitleView;
 
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class ContentTitlePanel extends HorizontalPanel implements ContentTitleView {
     private final Label titleLabel;
+    private final Label dateLabel;
 
     public ContentTitlePanel(final ContentTitlePresenter presenter) {
 	titleLabel = new Label();
+	dateLabel = new Label();
+	HTML expandPanel = new HTML("<b></b>");
+
 	add(titleLabel);
-	setWidth("100%");
-	addStyleName("kune-ContentTitleBar");
-	setCellVerticalAlignment(titleLabel, VerticalPanel.ALIGN_MIDDLE);
+	add(expandPanel);
+	add(dateLabel);
+
+	// setCellWidth(expandPanel, "100%");
+	expandPanel.addStyleName("kune-expandHoriz");
+	setCellHorizontalAlignment(dateLabel, HorizontalPanel.ALIGN_RIGHT);
+	titleLabel.addStyleName("kune-Margin-Large-l");
+	titleLabel.addStyleName("kune-ft17px");
+	dateLabel.addStyleName("kune-Margin-Large-r");
+	dateLabel.addStyleName("kune-ft12px");
     }
 
     public void setContentTitle(final String title) {
 	titleLabel.setText(title);
     }
+
+    public void setContentDate(final String date) {
+	dateLabel.setText(date);
+    }
+
 }

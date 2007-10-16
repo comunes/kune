@@ -41,6 +41,7 @@ public class StateManagerDefault implements StateManager {
     private final ContentProvider provider;
     private final Workspace workspace;
     private String oldState;
+    private String lastTheme = "purpleKuneTheme";
 
     public StateManagerDefault(final ContentProvider provider, final Application app, final Session session) {
 	this.provider = provider;
@@ -110,15 +111,28 @@ public class StateManagerDefault implements StateManager {
 	session.setCurrent(state);
 	final GroupDTO group = state.getGroup();
 	app.setGroupState(group.getShortName());
+	// check def theme... (this is only for ui test)
+	if (lastTheme == "defaultKuneTheme") {
+	    lastTheme = "greenKuneTheme";
+	} else if (lastTheme == "greenKuneTheme") {
+	    lastTheme = "blueKuneTheme";
+	} else if (lastTheme == "blueKuneTheme") {
+	    lastTheme = "greyKuneTheme";
+	} else if (lastTheme == "greyKuneTheme") {
+	    lastTheme = "purpleKuneTheme";
+	} else if (lastTheme == "purpleKuneTheme") {
+	    lastTheme = "defaultKuneTheme";
+	}
+	workspace.setTheme(lastTheme);
 	workspace.showGroup(group);
 	final String toolName = state.getToolName();
 	workspace.setTool(toolName);
 
 	final ClientTool clientTool = app.getTool(toolName);
 	clientTool.setContent(state);
-	workspace.getContentTitleComponent().setContentTitle(state.getTitle());
-	workspace.getContentSubTitleComponent().setContentSubTitle("11/06/07 by fulano", state.getRate(),
-		state.getRateByUsers());
+	workspace.getContentTitleComponent().setContentTitle(state.getTitle(), "11/06/07");
+	workspace.getContentSubTitleComponent().setContentSubTitle("by Luther Blissett, Luther Blissett Jr", "English");
+	// , Double rate, Integer rateByUsers en Content...
 	workspace.setContent(clientTool.getContent());
 	workspace.setContext(clientTool.getContext());
 	workspace.getLicenseComponent().setLicense(state.getGroup().getLongName(), state.getLicense());
@@ -138,11 +152,13 @@ public class StateManagerDefault implements StateManager {
     }
 
     public void reloadSocialNetwork() {
-	loadSocialNetwork();
 	Site.sitebar.reloadUserInfo(session.user);
+	loadSocialNetwork();
     }
 
     private void loadSocialNetwork() {
+	// FIXME: bug: session.getCurrentState null in init, logged: onLoggedIn
+	// --> reloadSN --> loadSN --> bug
 	StateDTO state = session.getCurrentState();
 	workspace.getGroupMembersComponent().getGroupMembers(session.user, state.getGroup(), state.getGroupRights());
 	workspace.getParticipationComponent().getParticipation(session.user, state.getGroup(), state.getGroupRights());

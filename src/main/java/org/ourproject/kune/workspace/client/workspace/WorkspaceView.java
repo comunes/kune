@@ -26,9 +26,9 @@ import org.ourproject.kune.platf.client.tool.ToolTrigger;
 import com.google.gwt.user.client.ui.Image;
 
 public interface WorkspaceView extends View {
-    void setLogo(String groupName);
+    void setGroupLogo(String groupName);
 
-    void setLogo(Image image);
+    void setGroupLogo(Image image);
 
     void setContent(View contentView);
 
@@ -51,5 +51,7 @@ public interface WorkspaceView extends View {
     void setParticipation(View view);
 
     void setBuddiesPresence(View view);
+
+    void setTheme(String theme);
 
 }
