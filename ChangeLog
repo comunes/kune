@@ -1,4 +1,5 @@
 2007-10-18 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* Added custom extgwt theme
 	* Added Group/User indexing with hibernate-search and basic search/reindex functions
 	to DefaultManager
 	* Several workspace fixes and adjustments
