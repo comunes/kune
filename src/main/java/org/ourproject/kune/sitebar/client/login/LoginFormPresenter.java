@@ -51,6 +51,7 @@ public class LoginFormPresenter implements LoginForm, MessagePresenter {
     }
 
     public void doCancel() {
+	reset();
 	resetMessage();
 	listener.onLoginCancelled();
     }

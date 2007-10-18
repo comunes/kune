@@ -25,6 +25,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.queryParser.MultiFieldQueryParser;
+import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.search.Query;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.impl.DefaultManager;
 
@@ -76,6 +80,13 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
 
     public User find(final Long userId) {
 	return userId != null ? super.find(userId) : User.UNKNOWN_USER;
+    }
+
+    public List<User> search(final String search) throws ParseException {
+	MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "name", "shortName" },
+		new StandardAnalyzer());
+	Query query = parser.parse(search);
+	return super.search(query);
     }
 
 }

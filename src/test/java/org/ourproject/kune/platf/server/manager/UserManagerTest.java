@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.util.List;
+
+import org.apache.lucene.queryParser.ParseException;
 import org.hibernate.validator.InvalidStateException;
 import org.junit.After;
 import org.junit.Before;
@@ -85,6 +88,15 @@ public class UserManagerTest extends PersistenceTest {
     public void passwdLengthIncorrect() {
 	user = new User("test1A", "te", "test@example.com", "pass");
 	persist(user);
+    }
+
+    @Test
+    public void userSearch() throws SerializableException, ParseException {
+	userManager.reIndex();
+	List<User> result = userManager.search(USER_SHORT_NAME);
+	assertEquals(1, result.size());
+	assertEquals(USER_SHORT_NAME, result.get(0).getShortName());
+	rollbackTransaction();
     }
 
     @After

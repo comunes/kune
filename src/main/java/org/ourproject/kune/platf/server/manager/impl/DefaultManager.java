@@ -20,17 +20,25 @@
 
 package org.ourproject.kune.platf.server.manager.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
+
+import org.apache.lucene.search.Query;
+import org.hibernate.search.jpa.FullTextEntityManager;
+import org.hibernate.search.jpa.FullTextQuery;
 
 import com.google.inject.Provider;
 
 public abstract class DefaultManager<T, K> {
     private final Provider<EntityManager> provider;
     private final Class<T> entityClass;
+    private final FullTextEntityManager fullTextEm;
 
     public DefaultManager(final Provider<EntityManager> provider, final Class<T> entityClass) {
 	this.provider = provider;
 	this.entityClass = entityClass;
+	fullTextEm = org.hibernate.search.jpa.Search.createFullTextEntityManager(getEntityManager());
     }
 
     private EntityManager getEntityManager() {
@@ -52,6 +60,23 @@ public abstract class DefaultManager<T, K> {
 
     public T merge(final T entity) {
 	return getEntityManager().merge(entity);
+    }
+
+    public List<T> search(final Query query) {
+	FullTextQuery emQuery = fullTextEm.createFullTextQuery(query, entityClass);
+	return emQuery.getResultList();
+    }
+
+    public void reIndex() {
+	fullTextEm.purgeAll(entityClass);
+	fullTextEm.getTransaction().commit();
+	fullTextEm.getTransaction().begin();
+	List<T> entities = fullTextEm.createQuery("SELECT e FROM " + entityClass.getSimpleName() + " AS e")
+		.getResultList();
+	for (T e : entities) {
+	    fullTextEm.index(e);
+	}
+	fullTextEm.getSearchFactory().optimize(entityClass);
     }
 
     /**

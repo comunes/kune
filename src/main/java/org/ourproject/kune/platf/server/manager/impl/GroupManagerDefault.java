@@ -25,6 +25,10 @@ import java.util.List;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.queryParser.MultiFieldQueryParser;
+import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.search.Query;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
@@ -129,6 +133,17 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 	}
     }
 
+    public Group getGroupOfUserWithId(final Long userId) {
+	return userId != null ? find(User.class, userId).getUserGroup() : null;
+    }
+
+    public List<Group> search(final String search) throws ParseException {
+	MultiFieldQueryParser parser = new MultiFieldQueryParser(
+		new String[] { "longName", "shortName", "publicDesc" }, new StandardAnalyzer());
+	Query query = parser.parse(search);
+	return super.search(query);
+    }
+
     private void initSocialNetwork(final Group group, final Group userGroup) {
 	final SocialNetwork network = group.getSocialNetwork();
 	final AccessLists lists = network.getAccessLists();
@@ -147,7 +162,4 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 	persist(group);
     }
 
-    public Group getGroupOfUserWithId(final Long userId) {
-	return userId != null ? find(User.class, userId).getUserGroup() : null;
-    }
 }

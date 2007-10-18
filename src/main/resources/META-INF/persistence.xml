@@ -23,7 +23,7 @@
       <property name="hibernate.c3p0.max_statements" value="50"/>
       <property name="hibernate.c3p0.idle_test_period" value="3000"/>
       <property name="hibernate.search.default.directory_provider" value="org.hibernate.search.store.FSDirectoryProvider"/>
-      <property name="hibernate.search.default.indexBase" value="/var/lucene/kune_dev/indexes"/>
+      <property name="hibernate.search.default.indexBase" value="/var/lib/lucene/kune_dev/indexes"/>
     </properties>
   </persistence-unit>
 
@@ -48,7 +48,7 @@
       <property name="hibernate.c3p0.max_statements" value="50"/>
       <property name="hibernate.c3p0.idle_test_period" value="3000"/>
       <property name="hibernate.search.default.directory_provider" value="org.hibernate.search.store.FSDirectoryProvider"/>
-      <property name="hibernate.search.default.indexBase" value="/var/lucene/kune_test/indexes"/>
+      <property name="hibernate.search.default.indexBase" value="/var/lib/lucene/kune_test/indexes"/>
     </properties>
   </persistence-unit>
 
@@ -69,7 +69,7 @@
             <property name="hibernate.connection.url"
                 value="jdbc:h2:mem:testdb" />
             <property name="hibernate.search.default.directory_provider" value="org.hibernate.search.store.FSDirectoryProvider"/>
-            <property name="hibernate.search.default.indexBase" value="/var/lucene/kune_test/indexes"/>
+            <property name="hibernate.search.default.indexBase" value="/var/lib/lucene/kune_test/indexes"/>
         </properties>
     </persistence-unit>
 </persistence>

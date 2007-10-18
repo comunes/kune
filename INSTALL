@@ -8,10 +8,10 @@ mvn jetty:run
 etcetera
 
 for hibernate-search:
-sudo mkdir -p /var/lucene/kune_dev/indexes
-sudo mkdir -p /var/lucene/kune_test/indexes
-sudo chown yourUser:yourUser /var/lucene/kune_dev/indexes
-sudo chown yourUser:yourUser /var/lucene/kune_test/indexes
+sudo mkdir -p /var/lib/lucene/kune_dev/indexes
+sudo mkdir -p /var/lib/lucene/kune_test/indexes
+sudo chown yourUser:yourUser /var/lib/lucene/kune_dev/indexes
+sudo chown yourUser:yourUser /var/lib/lucene/kune_test/indexes
 
 
 Configuration of maven

@@ -20,6 +20,9 @@
 
 package org.ourproject.kune.platf.server.users;
 
+import java.util.List;
+
+import org.apache.lucene.queryParser.ParseException;
 import org.ourproject.kune.platf.server.domain.User;
 
 public interface UserManager {
@@ -34,4 +37,9 @@ public interface UserManager {
      * @return
      */
     User find(Long userId);
+
+    List<User> search(String search) throws ParseException;
+
+    void reIndex();
+
 }

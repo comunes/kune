@@ -3,6 +3,9 @@ package org.ourproject.kune.platf.server.manager;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
+import org.apache.lucene.queryParser.ParseException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -96,6 +99,18 @@ public class GroupManagerTest extends PersistenceTest {
 	group2.setDefaultLicense(licenseDef);
 	groupManager.createGroup(group2, user);
 
+	rollbackTransaction();
+    }
+
+    @Test
+    public void createGroupAndSearch() throws SerializableException, ParseException {
+	final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", licenseDef,
+		GroupType.PROJECT);
+	groupManager.createGroup(group, user);
+	groupManager.reIndex();
+	List<Group> result = groupManager.search("ysei");
+	assertEquals(1, result.size());
+	assertEquals("ysei", result.get(0).getShortName());
 	rollbackTransaction();
     }
 

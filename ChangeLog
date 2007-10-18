@@ -1,4 +1,6 @@
-2007-10-15 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+2007-10-18 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* Added Group/User indexing with hibernate-search and basic search/reindex functions
+	to DefaultManager
 	* Several workspace fixes and adjustments
 	* Added grey/blue/purple workspace themes
 	* Added new reset/fonts .css from yahoo
