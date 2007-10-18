@@ -20,25 +20,17 @@
 
 package org.ourproject.kune.platf.client.rpc;
 
-import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
-import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 // TODO: cambiar nombre a UserService
 public interface KuneService extends RemoteService {
 
-    StateToken createNewGroup(String userHash, GroupDTO group) throws SerializableException;
-
     InitDataDTO getInitData(String userHash) throws AccessViolationException;
-
-    // TODO: new GroupService:
-    void changeGroupWsTheme(String userHash, String groupShortName, String theme) throws AccessViolationException;
 
     public class App {
 	private static KuneServiceAsync ourInstance = null;

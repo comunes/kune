@@ -43,13 +43,10 @@ public class SiteMessagePanel extends HorizontalPanel implements SiteMessageView
     HTML message = null;
     Image messageIcon = null;
 
-    private final MessagePresenter presenter;
-
     private final Timer timer;
 
     public SiteMessagePanel(final MessagePresenter presenter, final boolean closable) {
 	// Initialize
-	this.presenter = presenter;
 	message = new HTML();
 	messageIcon = new Image();
 	final Images images = Images.App.getInstance();

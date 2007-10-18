@@ -22,20 +22,12 @@ package org.ourproject.kune.platf.server.rpc;
 
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.rpc.KuneService;
 import org.ourproject.kune.platf.server.InitData;
 import org.ourproject.kune.platf.server.UserSession;
-import org.ourproject.kune.platf.server.domain.AdmissionType;
-import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.platf.server.properties.ChatProperties;
@@ -52,10 +44,8 @@ import com.wideplay.warp.persist.Transactional;
 @Singleton
 public class KuneRPC implements RPC, KuneService {
     private final Mapper mapper;
-    private final GroupManager groupManager;
     private final UserSession session;
     private final LicenseManager licenseManager;
-    private static final Log log = LogFactory.getLog(KuneRPC.class);
     private final UserManager userManager;
     private final ChatProperties chatProperties;
     private final UserInfoService userInfoService;
@@ -64,43 +54,15 @@ public class KuneRPC implements RPC, KuneService {
     // TODO: refactor: too many parameters! refactor to Facade Pattern
     @Inject
     public KuneRPC(final UserSession session, final UserManager userManager, final UserInfoService userInfoService,
-	    final GroupManager groupManager, final LicenseManager licenseManager, final Mapper mapper,
-	    final KuneProperties kuneProperties, final ChatProperties chatProperties) {
+	    final LicenseManager licenseManager, final Mapper mapper, final KuneProperties kuneProperties,
+	    final ChatProperties chatProperties) {
 	this.session = session;
 	this.userManager = userManager;
 	this.userInfoService = userInfoService;
-	this.groupManager = groupManager;
 	this.licenseManager = licenseManager;
 	this.mapper = mapper;
 	this.kuneProperties = kuneProperties;
 	this.chatProperties = chatProperties;
-    }
-
-    @Transactional(type = TransactionType.READ_WRITE)
-    public StateToken createNewGroup(final String userHash, final GroupDTO group) throws SerializableException {
-	log.debug(group.getShortName() + group.getLongName() + group.getPublicDesc() + group.getDefaultLicense()
-		+ group.getType());
-	final User user = session.getUser();
-	final Group newGroup = groupManager.createGroup(mapper.map(group, Group.class), user);
-	if (group.getType() == GroupDTO.COMMUNITY) {
-	    newGroup.setAdmissionType(AdmissionType.Open);
-	}
-	if (group.getType() == GroupDTO.ORGANIZATION) {
-	    newGroup.setAdmissionType(AdmissionType.Moderated);
-	}
-	if (group.getType() == GroupDTO.PROJECT) {
-	    newGroup.setAdmissionType(AdmissionType.Moderated);
-	}
-	return new StateToken(newGroup.getDefaultContent().getStateToken());
-    }
-
-    @Transactional(type = TransactionType.READ_WRITE)
-    public void changeGroupWsTheme(final String userHash, final String groupShortName, final String theme)
-	    throws AccessViolationException {
-	// TODO Auto-generated method stub
-	final User user = session.getUser();
-	Group group = groupManager.findByShortName(groupShortName);
-	groupManager.changeWsTheme(user, group, theme);
     }
 
     @Transactional(type = TransactionType.READ_ONLY)

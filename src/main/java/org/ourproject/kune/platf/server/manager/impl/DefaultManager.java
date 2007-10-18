@@ -33,12 +33,10 @@ import com.google.inject.Provider;
 public abstract class DefaultManager<T, K> {
     private final Provider<EntityManager> provider;
     private final Class<T> entityClass;
-    private final FullTextEntityManager fullTextEm;
 
     public DefaultManager(final Provider<EntityManager> provider, final Class<T> entityClass) {
 	this.provider = provider;
 	this.entityClass = entityClass;
-	fullTextEm = org.hibernate.search.jpa.Search.createFullTextEntityManager(getEntityManager());
     }
 
     private EntityManager getEntityManager() {
@@ -63,11 +61,15 @@ public abstract class DefaultManager<T, K> {
     }
 
     public List<T> search(final Query query) {
+	FullTextEntityManager fullTextEm = org.hibernate.search.jpa.Search
+		.createFullTextEntityManager(getEntityManager());
 	FullTextQuery emQuery = fullTextEm.createFullTextQuery(query, entityClass);
 	return emQuery.getResultList();
     }
 
     public void reIndex() {
+	FullTextEntityManager fullTextEm = org.hibernate.search.jpa.Search
+		.createFullTextEntityManager(getEntityManager());
 	fullTextEm.purgeAll(entityClass);
 	fullTextEm.getTransaction().commit();
 	fullTextEm.getTransaction().begin();

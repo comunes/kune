@@ -47,7 +47,7 @@ public class LoginFormPresenter implements LoginForm, MessagePresenter {
 
     public void init(final LoginFormView loginview) {
 	this.view = loginview;
-	resetMessage();
+	reset();
     }
 
     public void doCancel() {

@@ -30,10 +30,11 @@ import org.ourproject.kune.app.server.servlet.ApplicationListener;
 import org.ourproject.kune.chat.server.ChatServerModule;
 import org.ourproject.kune.docs.server.DocumentServerModule;
 import org.ourproject.kune.platf.client.rpc.ContentService;
+import org.ourproject.kune.platf.client.rpc.GroupService;
 import org.ourproject.kune.platf.client.rpc.KuneService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
-import org.ourproject.kune.platf.server.PlatformServerModule;
 import org.ourproject.kune.platf.server.LoggerMethodInterceptor;
+import org.ourproject.kune.platf.server.PlatformServerModule;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.properties.PropertiesFileName;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
@@ -71,6 +72,7 @@ public class KuneApp {
 
 	Application app = builder.create("kune", "Kune.html", "gwt/org.ourproject.kune.app.Kune");
 	app.useService("KuneService", KuneService.class);
+	app.useService("GroupService", GroupService.class);
 	app.useService("ContentService", ContentService.class);
 	app.useService("SiteBarService", SiteBarService.class);
 	app.useService("SocialNetworkService", SocialNetworkService.class);

@@ -35,6 +35,7 @@ import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 import to.tipit.gwtlib.FireLog;
 
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -42,8 +43,13 @@ import com.google.gwt.user.client.ui.RootPanel;
 public class InitAction implements Action {
     public void execute(final Object value, final Object extra, final Services services) {
 	PrefetchUtilities.preFetchImpImages();
+	Timer prefetchTimer = new Timer() {
+	    public void run() {
+		PrefetchUtilities.preFetchLessImpImages();
+	    }
+	};
+	prefetchTimer.schedule(5000);
 	getInitData(services);
-
 	int windowWidth = Window.getClientWidth();
 	Workspace workspace = services.app.getWorkspace();
 	workspace.adjustSize(windowWidth, Window.getClientHeight());

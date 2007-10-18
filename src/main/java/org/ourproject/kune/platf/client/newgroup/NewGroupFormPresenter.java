@@ -24,8 +24,8 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.rpc.KuneService;
-import org.ourproject.kune.platf.client.rpc.KuneServiceAsync;
+import org.ourproject.kune.platf.client.rpc.GroupService;
+import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.sitebar.client.Site;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -43,7 +43,7 @@ public class NewGroupFormPresenter implements NewGroupForm {
     }
 
     public void onFinish() {
-	KuneServiceAsync kuneService = KuneService.App.getInstance();
+	GroupServiceAsync groupService = GroupService.App.getInstance();
 	String shortName = view.getShortName();
 	String longName = view.getLongName();
 	String publicDesc = view.getPublicDesc();
@@ -52,7 +52,7 @@ public class NewGroupFormPresenter implements NewGroupForm {
 	GroupDTO group = new GroupDTO(shortName, longName, publicDesc, getTypeOfGroup());
 	group.setDefaultLicense(license);
 	// FIXME: get User hash
-	kuneService.createNewGroup("FIXMEFIXME", group, new AsyncCallback() {
+	groupService.createNewGroup("FIXMEFIXME", group, new AsyncCallback() {
 	    public void onFailure(final Throwable arg0) {
 		// TODO
 		Site.error("Error creating group");

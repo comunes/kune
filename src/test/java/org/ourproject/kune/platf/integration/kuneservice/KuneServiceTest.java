@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.rpc.KuneService;
@@ -50,31 +49,6 @@ public class KuneServiceTest extends IntegrationTest {
 	    assertNotNull(o);
 	    assertEquals(LicenseDTO.class, o.getClass());
 	}
-    }
-
-    @Test(expected = SerializableException.class)
-    public void createGroupNotLogged() throws SerializableException {
-	GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative", "Public Desc",
-		GroupDTO.PROJECT);
-	service.createNewGroup(session.getHash(), group);
-    }
-
-    @Test
-    public void createGroupUserLogged() throws SerializableException {
-	doLogin();
-
-	GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative", "Public Desc",
-		GroupDTO.PROJECT);
-
-	LicenseDTO license = new LicenseDTO();
-	license.setShortName("by-sa");
-	group.setDefaultLicense(license);
-	service.createNewGroup(session.getHash(), group);
-
-	Group groupCreated = groupFinder.findByShortName("ysei");
-	assertEquals(groupCreated.getShortName(), group.getShortName());
-	assertEquals(groupCreated.getLongName(), group.getLongName());
-	assertEquals(groupCreated.getPublicDesc(), group.getPublicDesc());
     }
 
 }

@@ -18,6 +18,7 @@ public abstract class TestDomainHelper {
 	User user = new User(shortName, longName, "email@domain" + number, "password" + number);
 	Group userGroup = new Group(shortName, longName);
 	userGroup.setAdmissionType(AdmissionType.Closed);
+	userGroup.setSocialNetwork(createSocialNetwork(userGroup, userGroup, userGroup, null));
 	user.setUserGroup(userGroup);
 	return user;
     }
