@@ -36,4 +36,6 @@ public interface StateManager extends HistoryListener {
 
     void setState(StateToken state);
 
+    void processErrorException(Throwable caught);
+
 }

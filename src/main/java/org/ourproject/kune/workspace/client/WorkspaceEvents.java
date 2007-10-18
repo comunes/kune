@@ -36,4 +36,5 @@ public interface WorkspaceEvents {
     public static final String ADD_COLLAB_MEMBER = "ws.AddCollabMember";
     public static final String ADD_VIEWER_MEMBER = "ws.AddViewerMember";
     public static final String UNJOIN_GROUP = "ws.UnJoinGroup";
+    public static final String CHANGE_GROUP_WSTHEME = "ws.changeGroupWsTheme";
 }

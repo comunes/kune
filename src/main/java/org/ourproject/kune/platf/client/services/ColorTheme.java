@@ -18,6 +18,10 @@ public class ColorTheme {
 	this.theme = Dictionary.getDictionary(theme);
     }
 
+    public String getThemeName() {
+	return theme.get("themeName");
+    }
+
     public String getToolSelected() {
 	return theme.get("toolSelected");
     }

@@ -26,20 +26,25 @@ import org.ourproject.kune.workspace.client.actions.AcceptJoinGroupAction;
 import org.ourproject.kune.workspace.client.actions.AddAdminAction;
 import org.ourproject.kune.workspace.client.actions.AddCollabAction;
 import org.ourproject.kune.workspace.client.actions.AddViewerAction;
+import org.ourproject.kune.workspace.client.actions.ChangeGroupWsThemeAction;
 import org.ourproject.kune.workspace.client.actions.DeleteMemberAction;
 import org.ourproject.kune.workspace.client.actions.DenyJoinGroupAction;
 import org.ourproject.kune.workspace.client.actions.GotoGroupAction;
 import org.ourproject.kune.workspace.client.actions.InitAction;
+import org.ourproject.kune.workspace.client.actions.InitDataReceivedAction;
 import org.ourproject.kune.workspace.client.actions.LoggedInAction;
 import org.ourproject.kune.workspace.client.actions.LoggedOutAction;
 import org.ourproject.kune.workspace.client.actions.RequestJoinGroupAction;
 import org.ourproject.kune.workspace.client.actions.SetAdminAsCollabAction;
 import org.ourproject.kune.workspace.client.actions.SetCollabAsAdminAction;
+import org.ourproject.kune.workspace.client.actions.StopAction;
 import org.ourproject.kune.workspace.client.actions.UnJoinGroupAction;
 
 public class WorkspaceClientModule implements ClientModule {
     public void configure(final Register register) {
 	register.addAction(WorkspaceEvents.START_APP, new InitAction());
+	register.addAction(WorkspaceEvents.STOP_APP, new StopAction());
+	register.addAction(WorkspaceEvents.INIT_DATA_RECEIVED, new InitDataReceivedAction());
 	register.addAction(WorkspaceEvents.USER_LOGGED_IN, new LoggedInAction());
 	register.addAction(WorkspaceEvents.USER_LOGGED_OUT, new LoggedOutAction());
 	register.addAction(WorkspaceEvents.REQ_JOIN_GROUP, new RequestJoinGroupAction());
@@ -53,5 +58,6 @@ public class WorkspaceClientModule implements ClientModule {
 	register.addAction(WorkspaceEvents.ADD_COLLAB_MEMBER, new AddCollabAction());
 	register.addAction(WorkspaceEvents.ADD_VIEWER_MEMBER, new AddViewerAction());
 	register.addAction(WorkspaceEvents.UNJOIN_GROUP, new UnJoinGroupAction());
+	register.addAction(WorkspaceEvents.CHANGE_GROUP_WSTHEME, new ChangeGroupWsThemeAction());
     }
 }

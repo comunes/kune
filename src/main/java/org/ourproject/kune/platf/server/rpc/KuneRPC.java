@@ -39,6 +39,7 @@ import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.platf.server.properties.ChatProperties;
+import org.ourproject.kune.platf.server.properties.KuneProperties;
 import org.ourproject.kune.platf.server.users.UserInfoService;
 import org.ourproject.kune.platf.server.users.UserManager;
 
@@ -58,18 +59,20 @@ public class KuneRPC implements RPC, KuneService {
     private final UserManager userManager;
     private final ChatProperties chatProperties;
     private final UserInfoService userInfoService;
+    private final KuneProperties kuneProperties;
 
     // TODO: refactor: too many parameters! refactor to Facade Pattern
     @Inject
     public KuneRPC(final UserSession session, final UserManager userManager, final UserInfoService userInfoService,
 	    final GroupManager groupManager, final LicenseManager licenseManager, final Mapper mapper,
-	    final ChatProperties chatProperties) {
+	    final KuneProperties kuneProperties, final ChatProperties chatProperties) {
 	this.session = session;
 	this.userManager = userManager;
 	this.userInfoService = userInfoService;
 	this.groupManager = groupManager;
 	this.licenseManager = licenseManager;
 	this.mapper = mapper;
+	this.kuneProperties = kuneProperties;
 	this.chatProperties = chatProperties;
     }
 
@@ -91,6 +94,15 @@ public class KuneRPC implements RPC, KuneService {
 	return new StateToken(newGroup.getDefaultContent().getStateToken());
     }
 
+    @Transactional(type = TransactionType.READ_WRITE)
+    public void changeGroupWsTheme(final String userHash, final String groupShortName, final String theme)
+	    throws AccessViolationException {
+	// TODO Auto-generated method stub
+	final User user = session.getUser();
+	Group group = groupManager.findByShortName(groupShortName);
+	groupManager.changeWsTheme(user, group, theme);
+    }
+
     @Transactional(type = TransactionType.READ_ONLY)
     public InitDataDTO getInitData(final String userHash) throws AccessViolationException {
 	final InitData data = new InitData();
@@ -101,6 +113,8 @@ public class KuneRPC implements RPC, KuneService {
 	data.setChatHttpBase(chatProperties.getHttpBase());
 	data.setChatDomain(chatProperties.getDomain());
 	data.setChatRoomHost(chatProperties.getRoomHost());
+	data.setWsThemes(this.kuneProperties.get(KuneProperties.WS_THEMES).split(","));
+	data.setDefaultWsTheme(this.kuneProperties.get(KuneProperties.WS_THEMES_DEF));
 	return mapper.map(data, InitDataDTO.class);
     }
 

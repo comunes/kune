@@ -65,6 +65,8 @@ public class InitAction implements Action {
 		InitDataDTO initData = (InitDataDTO) response;
 		services.session.setCCLicenses(initData.getCCLicenses());
 		services.session.setNotCCLicenses(initData.getNotCCLicenses());
+		services.session.setWsThemes(initData.getWsThemes());
+		services.session.setDefaultWsTheme(initData.getDefaultWsTheme());
 		UserInfoDTO currentUser = initData.getUserInfo();
 		dispatcher.fire(WorkspaceEvents.INIT_DATA_RECEIVED, response, null);
 		if (currentUser == null) {

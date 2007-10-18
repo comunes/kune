@@ -40,6 +40,8 @@ public class GroupDTO implements IsSerializable {
 
     private LicenseDTO defaultLicense;
 
+    private String workspaceTheme;
+
     public GroupDTO() {
 	this(null, null, null, ORGANIZATION);
     }
@@ -207,6 +209,14 @@ public class GroupDTO implements IsSerializable {
 	    return false;
 	}
 	return true;
+    }
+
+    public String getWorkspaceTheme() {
+	return workspaceTheme;
+    }
+
+    public void setWorkspaceTheme(final String workspaceTheme) {
+	this.workspaceTheme = workspaceTheme;
     }
 
 }

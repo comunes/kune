@@ -30,19 +30,19 @@ public class Site {
     public static SiteBar sitebar;
 
     public static void info(final String value) {
-	siteUserMessage.setValue(value, SiteMessage.INFO);
+	siteUserMessage.setMessage(value, SiteMessage.INFO);
     }
 
     public static void important(final String value) {
-	siteUserMessage.setValue(value, SiteMessage.IMP);
+	siteUserMessage.setMessage(value, SiteMessage.IMP);
     }
 
     public static void veryImportant(final String value) {
-	siteUserMessage.setValue(value, SiteMessage.VERYIMP);
+	siteUserMessage.setMessage(value, SiteMessage.VERYIMP);
     }
 
     public static void error(final String value) {
-	siteUserMessage.setValue(value, SiteMessage.ERROR);
+	siteUserMessage.setMessage(value, SiteMessage.ERROR);
     }
 
     public static void showProgress(final String text) {

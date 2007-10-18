@@ -57,6 +57,8 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class SiteBarPanel extends Composite implements SiteBarView {
 
+    private static final String SEARCH_TEXT_WIDTH_SMALL = "120";
+    private static final String SEARCH_TEXT_WIDTH_BIG = "180";
     private static final String IGNORE_TOKEN = "fixme";
     private final SiteBarPresenter presenter;
     private final Translate t;
@@ -83,6 +85,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     private final IconLabel contentNoPublic;
     private final Widget progressPanel;
     private final Widget progressText;
+    private final HorizontalPanel publicHP;
 
     public SiteBarPanel(final SiteBarPresenter initPresenter) {
 	t = SiteBarTrans.getInstance().t;
@@ -96,7 +99,8 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 
 	progressPanel = RootPanel.get("kuneprogresspanel");
 	progressText = RootPanel.get("kuneprogresstext");
-	gotoPublic = new IconHyperlink(img.anybody(), "Goto Public Space", "fixme");
+	publicHP = new HorizontalPanel();
+	gotoPublic = new IconHyperlink(img.anybody(), "Go to Public Space", "fixme");
 	contentNoPublic = new IconLabel(img.anybody(), "This content is not public");
 	final Label expandLabel = new Label("");
 	newGroupHyperlink = new Hyperlink();
@@ -115,8 +119,9 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	logoImage = new Image();
 
 	// Layout
-	siteBarHP.add(gotoPublic);
-	siteBarHP.add(contentNoPublic);
+	siteBarHP.add(publicHP);
+	publicHP.add(gotoPublic);
+	publicHP.add(contentNoPublic);
 	siteBarHP.add(expandLabel);
 	siteBarHP.add(loginHyperlink);
 	siteBarHP.add(loggedUserHyperlink);
@@ -137,7 +142,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	gotoPublic.addStyleName("kune-Margin-Medium-r");
 	contentNoPublic.setVisible(false);
 	contentNoPublic.addStyleName("kune-Margin-Medium-r");
-	newGroupHyperlink.setText(t.NewGroup());
+	newGroupHyperlink.setText(t.CreateNewGroup());
 	newGroupHyperlink.setTargetHistoryToken(IGNORE_TOKEN);
 	loggedUserHyperlink.setVisible(false);
 
@@ -194,7 +199,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	siteBarHP.add(searchButton);
 	siteBarHP.add(searchTextBox);
 
-	searchTextBox.setWidth("120");
+	setTextSearchSmall();
 	setDefaultTextSearch();
 	searchTextBox.addFocusListener(new FocusListener() {
 
@@ -226,6 +231,14 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 
     public void setSearchText(final String text) {
 	searchTextBox.setText(text);
+    }
+
+    public void setTextSearchSmall() {
+	searchTextBox.setWidth(SEARCH_TEXT_WIDTH_SMALL);
+    }
+
+    public void setTextSearchBig() {
+	searchTextBox.setWidth(SEARCH_TEXT_WIDTH_BIG);
     }
 
     public void showLoggedUserName(final String name, final String homePage) {
@@ -268,12 +281,14 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     public void showProgress(final String text) {
+	publicHP.setVisible(false);
 	progressPanel.setVisible(true);
 	DOM.setInnerText(progressText.getElement(), text);
     }
 
     public void hideProgress() {
 	progressPanel.setVisible(false);
+	publicHP.setVisible(true);
     }
 
     private void createListeners() {

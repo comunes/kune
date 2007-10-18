@@ -59,6 +59,9 @@ class ChatEngineXmpp implements ChatEngine {
     }
 
     public void logout() {
+	// FIXME: bug
+	// this$static has no properties
+	// [Break on this error] if (this$static.session !== null) {
 	if (session != null) {
 	    session.logout();
 	}

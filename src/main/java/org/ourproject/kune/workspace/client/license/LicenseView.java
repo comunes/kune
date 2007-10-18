@@ -20,11 +20,10 @@
 package org.ourproject.kune.workspace.client.license;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.LicenseDTO;
 
 public interface LicenseView extends View {
 
-    void showImage(String imageUrl);
-
-    void showName(String groupName, String licenseName);
+    void showLicense(String groupName, LicenseDTO licenseDTO);
 
 }

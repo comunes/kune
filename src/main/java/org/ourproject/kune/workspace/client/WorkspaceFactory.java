@@ -40,6 +40,9 @@ import org.ourproject.kune.workspace.client.socialnet.GroupMembersPresenter;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersView;
 import org.ourproject.kune.workspace.client.socialnet.ui.ParticipationPanel;
 import org.ourproject.kune.workspace.client.socialnet.ui.GroupMembersPanel;
+import org.ourproject.kune.workspace.client.theme.ThemeMenuPresenter;
+import org.ourproject.kune.workspace.client.theme.ThemeMenuView;
+import org.ourproject.kune.workspace.client.theme.ui.ThemeMenuPanel;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPanel;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPresenter;
@@ -52,6 +55,7 @@ import org.ourproject.kune.workspace.client.workspace.ContentTitlePresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentTitleView;
 import org.ourproject.kune.workspace.client.workspace.GroupMembersComponent;
 import org.ourproject.kune.workspace.client.workspace.ParticipationComponent;
+import org.ourproject.kune.workspace.client.workspace.ThemeMenuComponent;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 import org.ourproject.kune.workspace.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.workspace.client.workspace.WorkspaceView;
@@ -123,6 +127,13 @@ public class WorkspaceFactory {
     public static BuddiesPresenceComponent createBuddiesPresenceComponent() {
 	BuddiesPresencePresenter presenter = new BuddiesPresencePresenter();
 	BuddiesPresenceView view = new BuddiesPresencePanel(presenter);
+	presenter.init(view);
+	return presenter;
+    }
+
+    public static ThemeMenuComponent createThemeMenuComponent() {
+	ThemeMenuPresenter presenter = new ThemeMenuPresenter();
+	ThemeMenuView view = new ThemeMenuPanel(presenter);
 	presenter.init(view);
 	return presenter;
     }

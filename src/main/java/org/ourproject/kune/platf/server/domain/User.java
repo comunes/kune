@@ -30,6 +30,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
 import org.hibernate.validator.Email;
 import org.hibernate.validator.Length;
 import org.hibernate.validator.Pattern;
@@ -38,9 +43,11 @@ import com.google.inject.name.Named;
 import com.wideplay.warp.persist.dao.Finder;
 
 @Entity
+@Indexed
 @Table(name = "kusers")
 public class User implements HasId {
     @Id
+    @DocumentId
     @GeneratedValue
     private Long id;
 
@@ -55,10 +62,12 @@ public class User implements HasId {
     @OneToOne(cascade = CascadeType.ALL)
     private Group userGroup;
 
+    @Field(index = Index.TOKENIZED, store = Store.NO)
     @Column(nullable = false)
     @Length(min = 3, max = 50)
     private String name;
 
+    @Field(index = Index.TOKENIZED, store = Store.NO)
     @Column(unique = true)
     // http://www.hibernate.org/hib_docs/validator/reference/en/html/validator-defineconstraints.html
     @Length(min = 3, max = 15)

@@ -37,6 +37,8 @@ public class InitDataDTO implements IsSerializable {
     private String chatHttpBase;
     private String chatDomain;
     private String chatRoomHost;
+    private String defaultWsTheme;
+    private String[] wsThemes;
 
     public ArrayList getCCLicenses() {
 	return ccLicenses;
@@ -89,4 +91,21 @@ public class InitDataDTO implements IsSerializable {
     public boolean hasUser() {
 	return getUserInfo() != null;
     }
+
+    public String getDefaultWsTheme() {
+	return defaultWsTheme;
+    }
+
+    public void setDefaultWsTheme(final String defaultWsTheme) {
+	this.defaultWsTheme = defaultWsTheme;
+    }
+
+    public String[] getWsThemes() {
+	return wsThemes;
+    }
+
+    public void setWsThemes(final String[] wsThemes) {
+	this.wsThemes = wsThemes;
+    }
+
 }

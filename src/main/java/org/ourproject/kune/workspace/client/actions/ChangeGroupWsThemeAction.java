@@ -1,5 +1,4 @@
 /*
- *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -18,35 +17,37 @@
  *
  */
 
-package org.ourproject.kune.docs.client.actions;
+package org.ourproject.kune.workspace.client.actions;
 
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
-import org.ourproject.kune.platf.client.dto.ContainerDTO;
-import org.ourproject.kune.platf.client.rpc.ContentService;
-import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
+import org.ourproject.kune.platf.client.rpc.KuneService;
+import org.ourproject.kune.platf.client.rpc.KuneServiceAsync;
 import org.ourproject.kune.sitebar.client.Site;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class AddDocument implements Action {
+public class ChangeGroupWsThemeAction implements Action {
+
     public void execute(final Object value, final Object extra, final Services services) {
-	addDocument(services, (String) value, services.session.getCurrentState().getFolder());
+	onChangeGroupWsTheme(services, (String) value);
     }
 
-    private void addDocument(final Services services, final String name, final ContainerDTO containerDTO) {
+    private void onChangeGroupWsTheme(final Services services, final String theme) {
 	Site.showProgressProcessing();
-	ContentServiceAsync server = ContentService.App.getInstance();
-	server.addContent(services.user, containerDTO.getId(), name, new AsyncCallback() {
-	    public void onFailure(final Throwable caught) {
-		services.stateManager.processErrorException(caught);
-	    }
+	final KuneServiceAsync server = KuneService.App.getInstance();
+	server.changeGroupWsTheme(services.user, services.session.getCurrentState().getGroup().getShortName(), theme,
+		new AsyncCallback() {
+		    public void onFailure(final Throwable caught) {
+			services.stateManager.processErrorException(caught);
+		    }
 
-	    public void onSuccess(final Object result) {
-		StateDTO content = (StateDTO) result;
-		services.stateManager.setState(content);
-	    }
-	});
+		    public void onSuccess(final Object result) {
+			Site.hideProgress();
+			services.stateManager.reload();
+		    }
+		});
+
     }
+
 }

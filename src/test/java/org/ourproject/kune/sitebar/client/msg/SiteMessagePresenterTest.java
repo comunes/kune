@@ -30,7 +30,7 @@ public class SiteMessagePresenterTest {
 	view.show();
 	EasyMock.replay(view);
 	presenter.init(view);
-	presenter.setValue("test 1", 0);
+	presenter.setMessage("test 1", 0);
 	EasyMock.verify(view);
     }
 
@@ -43,8 +43,8 @@ public class SiteMessagePresenterTest {
 	view.show();
 	EasyMock.replay(view);
 	presenter.init(view);
-	presenter.setValue("test 1", 0);
-	presenter.setValue("test 2", 0);
+	presenter.setMessage("test 1", 0);
+	presenter.setMessage("test 2", 0);
 	EasyMock.verify(view);
     }
 
@@ -57,8 +57,8 @@ public class SiteMessagePresenterTest {
 	view.show();
 	EasyMock.replay(view);
 	presenter.init(view);
-	presenter.setValue("test 1", 1);
-	presenter.setValue("test 2", 0);
+	presenter.setMessage("test 1", 1);
+	presenter.setMessage("test 2", 0);
 	EasyMock.verify(view);
     }
 

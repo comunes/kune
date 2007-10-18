@@ -28,7 +28,7 @@ public interface Translate extends Constants {
 
     String Processing();
 
-    String NewGroup();
+    String CreateNewGroup();
 
     String HelpWithTranslation();
 
@@ -113,5 +113,7 @@ public interface Translate extends Constants {
     String Project();
 
     String RetypePassword();
+
+    String Language();
 
 }

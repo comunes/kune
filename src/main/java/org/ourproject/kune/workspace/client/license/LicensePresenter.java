@@ -22,9 +22,12 @@ package org.ourproject.kune.workspace.client.license;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 
+import com.google.gwt.user.client.Window;
+
 public class LicensePresenter implements LicenseComponent {
 
     private LicenseView view;
+    private LicenseDTO license;
 
     public LicensePresenter() {
     }
@@ -37,12 +40,12 @@ public class LicensePresenter implements LicenseComponent {
 	return view;
     }
 
-    public void setLicense(final String groupName, final LicenseDTO licenseDTO) {
-	view.showName(groupName, licenseDTO.getLongName());
-	view.showImage(licenseDTO.getImageUrl());
+    public void setLicense(final String groupName, final LicenseDTO license) {
+	this.license = license;
+	view.showLicense(groupName, license);
     }
 
     public void onLicenseClick() {
-	// TODO:
+	Window.open(license.getUrl(), "_blank", "");
     }
 }

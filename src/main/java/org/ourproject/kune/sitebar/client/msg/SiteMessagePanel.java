@@ -42,38 +42,28 @@ public class SiteMessagePanel extends HorizontalPanel implements SiteMessageView
 
     HTML message = null;
     Image messageIcon = null;
-    private final PushButton closeIcon;
-    private final SiteMessagePresenter presenter;
+
+    private final MessagePresenter presenter;
 
     private final Timer timer;
 
-    public SiteMessagePanel(final SiteMessagePresenter sitePresenter) {
+    public SiteMessagePanel(final MessagePresenter presenter, final boolean closable) {
 	// Initialize
-	this.presenter = sitePresenter;
+	this.presenter = presenter;
 	message = new HTML();
 	messageIcon = new Image();
 	final Images images = Images.App.getInstance();
-	closeIcon = new PushButton(images.cross().createImage(), images.crossDark().createImage());
 
 	// Layout
 	add(messageIcon);
 	add(message);
-	add(closeIcon);
 
 	// Set properties
 	setCellVerticalAlignment(messageIcon, VerticalPanel.ALIGN_MIDDLE);
-	setCellVerticalAlignment(closeIcon, VerticalPanel.ALIGN_BOTTOM);
-	closeIcon.addClickListener(new ClickListener() {
-	    public void onClick(final Widget sender) {
-		if (sender == closeIcon) {
-		    setVisible(false);
-		    presenter.onClose();
-		}
-	    }
-	});
+
 	timer = new Timer() {
 	    public void run() {
-		presenter.reset();
+		presenter.resetMessage();
 	    }
 	};
 	setVisible(false);
@@ -81,6 +71,21 @@ public class SiteMessagePanel extends HorizontalPanel implements SiteMessageView
 	addStyleDependentName("info");
 	images.info().applyTo(messageIcon);
 	messageIcon.addStyleName("gwt-Image");
+
+	if (closable) {
+	    final PushButton closeIcon = new PushButton(images.cross().createImage(), images.crossDark().createImage());
+	    add(closeIcon);
+	    closeIcon.addClickListener(new ClickListener() {
+		public void onClick(final Widget sender) {
+		    if (sender == closeIcon) {
+			setVisible(false);
+			presenter.onClose();
+		    }
+		}
+	    });
+	    setCellVerticalAlignment(closeIcon, VerticalPanel.ALIGN_BOTTOM);
+	}
+
     }
 
     public void setMessage(final String text, final int lastMessageType, final int type) {

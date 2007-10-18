@@ -1,5 +1,4 @@
 /*
- *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -18,19 +17,23 @@
  *
  */
 
-package org.ourproject.kune.sitebar.client.msg;
+package org.ourproject.kune.workspace.client.actions;
 
-import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.Services;
+import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.workspace.client.workspace.Workspace;
 
-public interface SiteMessage extends View {
-    public static final int ERROR = 0;
-    public static final int VERYIMP = 1;
-    public static final int IMP = 2;
-    public static final int INFO = 3;
+public class InitDataReceivedAction implements Action {
 
-    void setMessage(String message, int level);
+    public void execute(final Object value, final Object extra, final Services services) {
+	onInitDataReceived(services);
+    }
 
-    void adjustWidth(int width);
-
-    View getView();
+    private void onInitDataReceived(final Services services) {
+	String themes[] = services.session.getWsThemes();
+	String defTheme = services.session.getDefaultWsTheme();
+	Workspace workspace = services.app.getWorkspace();
+	workspace.setTheme(defTheme);
+	workspace.getThemeMenuComponent().setThemes(themes);
+    }
 }

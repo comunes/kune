@@ -37,6 +37,7 @@ import com.gwtext.client.widgets.QuickTips;
 public class DesktopPanel extends AbsolutePanel implements DesktopView {
     public DesktopPanel(final Workspace workspace, final SiteBarListener listener) {
 	QuickTips.init(); // extgwt tips
+	// CSS.swapStyleSheet("theme", "js/ext/resources/css/xtheme-gray.css");
 	SiteBar siteBar = SiteBarFactory.createSiteBar(listener);
 	SiteMessage siteMessage = SiteBarFactory.getSiteMessage();
 	this.add((Widget) siteMessage.getView(), Window.getClientWidth() * 20 / 100 - 10, 2);

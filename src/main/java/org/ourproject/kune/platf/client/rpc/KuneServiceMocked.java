@@ -64,11 +64,16 @@ public class KuneServiceMocked extends MockedService implements KuneServiceAsync
 	answer(licenseList, callback);
     }
 
-    public void getGroup(final String userHash, final String shortName, final AsyncCallback asyncCallback) {
-
+    public void getGroup(final String userHash, final String shortName, final AsyncCallback callback) {
+	answer(null, callback);
     }
 
     public void getInitData(final String userHash, final AsyncCallback callback) {
+	answer(null, callback);
+    }
 
+    public void changeGroupWsTheme(final String userHash, final String group, final String theme,
+	    final AsyncCallback callback) {
+	answer(null, callback);
     }
 }

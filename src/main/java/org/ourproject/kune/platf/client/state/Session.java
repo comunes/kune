@@ -36,6 +36,8 @@ public class Session {
     private List ccLicenses;
     private List notCCLicenses;
     private StateDTO currentState;
+    private String[] wsThemes;
+    private String defaultWsTheme;
 
     public Session(final String userHash) {
 	user = userHash;
@@ -69,6 +71,23 @@ public class Session {
 
     public void setCurrentState(final StateDTO currentState) {
 	this.currentState = currentState;
+    }
+
+    public void setDefaultWsTheme(final String defaultWsTheme) {
+	this.defaultWsTheme = defaultWsTheme;
+
+    }
+
+    public void setWsThemes(final String[] wsThemes) {
+	this.wsThemes = wsThemes;
+    }
+
+    public String[] getWsThemes() {
+	return wsThemes;
+    }
+
+    public String getDefaultWsTheme() {
+	return defaultWsTheme;
     }
 
 }

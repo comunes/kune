@@ -1,5 +1,4 @@
 /*
- *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -18,18 +17,18 @@
  *
  */
 
-package org.ourproject.kune.platf.client.services;
+package org.ourproject.kune.workspace.client.actions;
 
-import com.google.gwt.i18n.client.Constants;
+import org.ourproject.kune.platf.client.Services;
+import org.ourproject.kune.platf.client.dispatch.Action;
 
-public interface ColorScheme extends Constants {
+public class StopAction implements Action {
 
-    public String getUnselected();
+    public void execute(final Object value, final Object extra, final Services services) {
+	onStop(services);
+    }
 
-    public String getSelected();
-
-    public String getMainBorder();
-
-    public String getAccessListDropDown();
-
+    private void onStop(final Services services) {
+	services.app.getWorkspace().setVisible(false);
+    }
 }

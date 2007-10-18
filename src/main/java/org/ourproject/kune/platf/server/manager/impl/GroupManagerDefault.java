@@ -25,6 +25,7 @@ import java.util.List;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 
+import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Group;
@@ -35,6 +36,7 @@ import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.properties.DatabaseProperties;
+import org.ourproject.kune.platf.server.properties.KuneProperties;
 import org.ourproject.kune.platf.server.tool.ServerTool;
 import org.ourproject.kune.platf.server.tool.ToolRegistry;
 
@@ -50,12 +52,15 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     private final ToolRegistry registry;
     private final DatabaseProperties properties;
     private final License licenseFinder;
+    private final KuneProperties kuneProperties;
 
     @Inject
     public GroupManagerDefault(final Provider<EntityManager> provider, final Group finder,
-	    final DatabaseProperties properties, final ToolRegistry registry, final License licenseFinder) {
+	    final KuneProperties kuneProperties, final DatabaseProperties properties, final ToolRegistry registry,
+	    final License licenseFinder) {
 	super(provider, Group.class);
 	this.finder = finder;
+	this.kuneProperties = kuneProperties;
 	this.properties = properties;
 	this.registry = registry;
 	this.licenseFinder = licenseFinder;
@@ -79,10 +84,12 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     }
 
     public Group createUserGroup(final User user) {
+	String defaultSiteWorkspaceTheme = kuneProperties.get(KuneProperties.WS_THEMES_DEF);
 	final String licenseDefId = properties.getDefaultLicense();
 	final License licenseDef = licenseFinder.findByShortName(licenseDefId);
 	final Group group = new Group(user.getShortName(), user.getName(), licenseDef, GroupType.PERSONAL);
 	group.setAdmissionType(AdmissionType.Closed);
+	group.setWorkspaceTheme(defaultSiteWorkspaceTheme);
 	user.setUserGroup(group);
 	initSocialNetwork(group, group);
 	initGroup(user, group);
@@ -91,13 +98,14 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     }
 
     public Group createGroup(final Group group, final User user) throws SerializableException {
+	String defaultSiteWorkspaceTheme = kuneProperties.get(KuneProperties.WS_THEMES_DEF);
 	if (User.isKownUser(user)) {
 	    try {
 		// FIXME: A better way to do this license part?
 		String licName = group.getDefaultLicense().getShortName();
 		License license = licenseFinder.findByShortName(licName);
 		group.setDefaultLicense(license);
-
+		group.setWorkspaceTheme(defaultSiteWorkspaceTheme);
 		initSocialNetwork(group, user.getUserGroup());
 		initGroup(user, group);
 		return group;
@@ -110,6 +118,15 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 	    throw new SerializableException("Must be logged");
 	}
 
+    }
+
+    public void changeWsTheme(final User user, final Group group, final String theme) throws AccessViolationException {
+	if (group.getSocialNetwork().isAdmin(user.getUserGroup())) {
+	    group.setWorkspaceTheme(theme);
+	    // Check themes...
+	} else {
+	    throw new AccessViolationException();
+	}
     }
 
     private void initSocialNetwork(final Group group, final Group userGroup) {

@@ -593,6 +593,11 @@ public interface Images extends ImageBundle {
     AbstractImagePrototype starYellow();
 
     /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/theme-choose.png
+     */
+    AbstractImagePrototype themeChoose();
+
+    /**
      * @gwt.resource org/ourproject/kune/platf/public/images/triangle.gif
      */
     AbstractImagePrototype triangle();

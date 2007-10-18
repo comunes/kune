@@ -1,14 +1,15 @@
 LICENSES
 --------------------------------------------------------------------------------
 
-All programs are either under the GPL, Artistic or BSD licenses, see 
+All programs are either under the GPL, LGPL, Artistic or BSD licenses, see 
 below for details.
 
 On Debian systems, the complete text of these licenses can be found in:
 
-/usr/share/common-licenses/GPL
+/usr/share/common-licenses/GPL-3
 /usr/share/common-licenses/Artistic
 /usr/share/common-licenses/BSD
+/usr/share/common-licenses/LGPL
 
 When in doubt, check the individual file, they should all have license
 headings and other identifying marks.
@@ -59,16 +60,16 @@ Copyright:
 some icons
 --------------------------------------------------------------------------------
 It was downloaded from http://tango-project.org/releases
-Copyright:
+   Copyright:
    Creative Commons Attribution-ShareAlike 2.5 License Agreement
    http://creativecommons.org/licenses/by-sa/2.5/
 
 other from: http://www.famfamfam.com/lab/icons/silk/
-Copyright:
+   Copyright:
    Creative Commons Attribution 2.5 License Agreement
    http://creativecommons.org/licenses/by/2.5/
 
-xmpp icons from pidgin
+some xmpp icons from pidgin
    Purple/Pidgin/Finch is the legal property of its developers.
    Copyright (C) 1998-2007 under the terms of the GNU General Public License as
    published by the Free Software Foundation; either version 2 of
@@ -84,3 +85,8 @@ fonts-min.css and reset.css
 emoticons from Adium and Kopete theme
    kopete adium theme by robotangel and original "Adiumicons" by Oscar Gruno
    under GNU GPL license
+
+ext-gwt library:
+   http://code.google.com/p/gwt-ext/
+   Copyright: under GNU Lesser General Public License
+   http://www.gnu.org/licenses/lgpl.html

@@ -55,6 +55,10 @@ class GroupLogoPanel extends SimplePanel {
 	add(image);
     }
 
+    public void setTextColor(final String color) {
+	this.entityTextLogo.setTextColor(color);
+    }
+
     class EntityTextLogo extends VerticalPanel {
 
 	private static final int GROUP_NAME_LIMIT_SIZE = 90;
@@ -95,6 +99,10 @@ class GroupLogoPanel extends SimplePanel {
 	    }
 	    defTextLogoLabel.setText(text);
 
+	}
+
+	public void setTextColor(final String color) {
+	    DOM.setStyleAttribute(defTextLogoLabel.getElement(), "color", color);
 	}
     }
 

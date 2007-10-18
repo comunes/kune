@@ -60,4 +60,8 @@ public interface SiteBarView extends View {
 
     void resetOptionsSubmenu();
 
+    void setTextSearchSmall();
+
+    void setTextSearchBig();
+
 }

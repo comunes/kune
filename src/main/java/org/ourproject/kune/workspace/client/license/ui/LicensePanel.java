@@ -19,6 +19,7 @@
 
 package org.ourproject.kune.workspace.client.license.ui;
 
+import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.workspace.client.license.LicensePresenter;
 import org.ourproject.kune.workspace.client.license.LicenseView;
 
@@ -31,30 +32,38 @@ import com.google.gwt.user.client.ui.Widget;
 public class LicensePanel extends HorizontalPanel implements LicenseView {
     private final Label copyright;
     private final Image image;
+    private final Label license;
 
     public LicensePanel(final LicensePresenter presenter) {
 	copyright = new Label();
 	image = new Image();
+	license = new Label();
 	this.add(copyright);
+	this.add(license);
 	this.add(image);
 	ClickListener clickListener = new ClickListener() {
 	    public void onClick(Widget arg0) {
 		presenter.onLicenseClick();
 	    }
 	};
-	copyright.addClickListener(clickListener);
+
+	license.addClickListener(clickListener);
 	image.addClickListener(clickListener);
 	copyright.setVisible(false);
+	license.setVisible(false);
 	image.setVisible(false);
+
+	copyright.addStyleName("kune-Margin-Large-l");
+	license.setStyleName("kune-LicensePanel-licensetext");
     }
 
-    public void showImage(final String imageUrl) {
-	image.setUrl(imageUrl);
-	image.setVisible(true);
-    }
-
-    public void showName(final String groupName, final String licenseName) {
-	copyright.setText("© " + groupName + ", under license " + licenseName);
+    public void showLicense(final String groupName, final LicenseDTO licenseDTO) {
+	// i18n
+	copyright.setText("© " + groupName + ", under license: ");
+	license.setText(licenseDTO.getLongName());
 	copyright.setVisible(true);
+	license.setVisible(true);
+	image.setVisible(true);
+	image.setUrl(licenseDTO.getImageUrl());
     }
 }

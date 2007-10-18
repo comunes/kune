@@ -22,6 +22,7 @@ package org.ourproject.kune.platf.server.manager;
 
 import java.util.List;
 
+import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 
@@ -40,6 +41,8 @@ public interface GroupManager extends Manager<Group, Long> {
     Group createUserGroup(User user);
 
     Group getDefaultGroup();
+
+    void changeWsTheme(User user, Group group, String theme) throws AccessViolationException;
 
     /**
      * IMPORTANT: returns null if userId is null

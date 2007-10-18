@@ -25,8 +25,11 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface KuneServiceAsync {
+
     void createNewGroup(String userHash, GroupDTO group, AsyncCallback callback);
 
     void getInitData(String userHash, AsyncCallback callback);
+
+    void changeGroupWsTheme(String userHash, String groupShortName, String theme, AsyncCallback callback);
 
 }

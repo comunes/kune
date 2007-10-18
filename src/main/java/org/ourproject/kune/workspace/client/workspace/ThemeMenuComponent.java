@@ -1,5 +1,4 @@
 /*
- *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -18,19 +17,14 @@
  *
  */
 
-package org.ourproject.kune.sitebar.client.msg;
+package org.ourproject.kune.workspace.client.workspace;
 
-import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.Component;
 
-public interface SiteMessage extends View {
-    public static final int ERROR = 0;
-    public static final int VERYIMP = 1;
-    public static final int IMP = 2;
-    public static final int INFO = 3;
+public interface ThemeMenuComponent extends Component {
 
-    void setMessage(String message, int level);
+    void setThemes(String themes[]);
 
-    void adjustWidth(int width);
+    void setVisible(boolean visible);
 
-    View getView();
 }

@@ -73,7 +73,7 @@
 }
 
 .kune-SiteMessagePanel .gwt-HTML {
-  margin: 10px 5px 10px 2px;
+  margin: 15px 5px 15px 2px;
 }
 
 .kune-SiteMessagePanel .gwt-Image {
@@ -151,7 +151,7 @@
 }
 
 .kune-GroupToolsBar {
-  width: 171px;
+  width: 150px;
 }
 
 .kune-GroupToolsBar-itemSelected {
@@ -195,6 +195,14 @@
   width: 100%;
 }
 
+.kune-ContentTitleBar-l {
+  float: left;
+}
+
+.kune-ContentTitleBar-r {
+  float: right;
+}
+
 .kune-ContentSubTitleBar {
   vertical-align: middle;
   font-weight: 700;
@@ -205,6 +213,14 @@
 .kune-ContentSubTitleBar .gwt-Label {
   width: 100%;
   white-space: nowrap;
+}
+
+.kune-ContentSubTitleBar-l {
+  float: left;
+}
+
+.kune-ContentSubTitleBar-r {
+  float: right;
 }
 
 .kune-ContentToolBarPanel {
@@ -219,11 +235,18 @@
   height: 24px;
 }
 
-.kune-ContentBottomBar .gwt-Label {
-  font-weight: 700;
+.kune-ContentBottomBar .gwt-Image {
+  margin-left: 5px;
+  cursor: pointer;
+  float: left;
 }
 
-.kune-ContentBottomBar .gwt-Image {
+.kune-ContentBottomBar .gwt-Label a {
+}
+
+
+.kune-LicensePanel-licensetext {
+  cursor: pointer;
   margin-left: 5px;
 }
 
@@ -311,7 +334,6 @@
   border-right: 1px solid #AAA;
   color: #999;
   cursor: pointer;
-  cursor: hand;
   white-space: nowrap;
   padding: 3px 6px;
 }
@@ -426,6 +448,7 @@
 }
 
 /* AccessList */
+
 .kune-AccessListSubLabel {
   font-style: italic;
 }
@@ -499,3 +522,16 @@
   font-size: 85%;
   margin-top: 5px;
 }
+
+/* Theme */
+
+.kune-ThemeMenuPanel .gwt-MenuItem {
+  cursor: pointer;
+  background-color: #FFF;
+  margin: 2px 2px 2px 5px;
+}
+
+.kune-ThemeMenuPanel .gwt-MenuItem-selected {
+  background-color: #F2F2F2;
+}
+

@@ -1,5 +1,6 @@
 
 var defaultKuneTheme = {
+  themeName: "Default",
   toolSelected: "#DD8A3D",
   toolUnselected: "#FFE9A5",
   contentMainBorder: "#DD8A3D",
@@ -15,6 +16,7 @@ var defaultKuneTheme = {
 };
 
 var greenKuneTheme = {
+  themeName: "Green",
   toolSelected: "#5FD35F",
   toolUnselected: "#D6F4D6",
   contentMainBorder: "#5FD35F",
@@ -30,6 +32,7 @@ var greenKuneTheme = {
 };
 
 var blueKuneTheme = {
+  themeName: "Blue",
   toolSelected: "#0066FF",
   toolUnselected: "#D7D7F4",
   contentMainBorder: "#0066FF",
@@ -45,6 +48,7 @@ var blueKuneTheme = {
 };
 
 var greyKuneTheme = {
+  themeName: "Grey",
   toolSelected: "#4D4D4D",
   toolUnselected: "#E6E6E6",
   contentMainBorder: "#4D4D4D",
@@ -60,6 +64,7 @@ var greyKuneTheme = {
 };
 
 var purpleKuneTheme = {
+  themeName: "Purple",
   toolSelected: "#660080",
   toolUnselected: "#EED7F4",
   contentMainBorder: "#660080",
@@ -72,5 +77,21 @@ var purpleKuneTheme = {
   groupMembersDD: "#672178",
   participationDD: "#892CA0",
   buddiesPresenceDD: "#AB37C8"
+};
+
+var redKuneTheme = {
+  themeName: "Red",
+  toolSelected: "#D40000",
+  toolUnselected: "#FFD5D5",
+  contentMainBorder: "#D40000",
+  contentTitle: "#FF8080",
+  contentTitleText: "#800000",
+  contentSubTitleText: "#FFF",
+  contentBottomText: "#FFF",
+  context: "#FFAAAA",
+  splitter: "#FF5555",
+  groupMembersDD: "#A02C2C",
+  participationDD: "#C83737",
+  buddiesPresenceDD: "#D35F5F"
 };
 

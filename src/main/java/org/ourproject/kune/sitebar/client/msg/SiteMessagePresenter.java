@@ -22,7 +22,7 @@ package org.ourproject.kune.sitebar.client.msg;
 
 import org.ourproject.kune.platf.client.View;
 
-public class SiteMessagePresenter implements SiteMessage {
+public class SiteMessagePresenter implements SiteMessage, MessagePresenter {
     private SiteMessageView view;
     private boolean isVisible;
     private String message;
@@ -34,16 +34,16 @@ public class SiteMessagePresenter implements SiteMessage {
     public void init(final SiteMessageView siteMessageView) {
 	this.view = siteMessageView;
 	this.lastMessageType = SiteMessage.INFO;
-	reset();
+	resetMessage();
     }
 
-    public void reset() {
+    public void resetMessage() {
 	this.message = "";
 	this.isVisible = false;
 	view.hide();
     }
 
-    public void setValue(final String message, final int type) {
+    public void setMessage(final String message, final int type) {
 	if (isVisible) {
 	    // Concatenate message
 	    this.message = this.message + "<br>" + message;
@@ -72,8 +72,13 @@ public class SiteMessagePresenter implements SiteMessage {
 	view.show();
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.ourproject.kune.sitebar.client.msg.MessagePresenter#onClose()
+     */
     public void onClose() {
-	reset();
+	resetMessage();
     }
 
     public void adjustWidth(final int windowWidth) {

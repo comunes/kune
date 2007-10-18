@@ -44,4 +44,8 @@ public interface LoginFormView extends View {
 
     public boolean isRegisterFormValid();
 
+    public void showErrorMessage(String message);
+
+    public void hideMessage();
+
 }

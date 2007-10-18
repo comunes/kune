@@ -24,6 +24,7 @@ import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
+import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.tool.ClientTool;
@@ -41,7 +42,7 @@ public class StateManagerDefault implements StateManager {
     private final ContentProvider provider;
     private final Workspace workspace;
     private String oldState;
-    private String lastTheme = "purpleKuneTheme";
+    private String lastTheme;
 
     public StateManagerDefault(final ContentProvider provider, final Application app, final Session session) {
 	this.provider = provider;
@@ -72,18 +73,8 @@ public class StateManagerDefault implements StateManager {
 	Site.showProgress(Kune.getInstance().t.Loading());
 	provider.getContent(session.user, newState, new AsyncCallback() {
 	    public void onFailure(final Throwable caught) {
-		Site.hideProgress();
 		oldState = newState.getEncoded();
-		try {
-		    throw caught;
-		} catch (final AccessViolationException e) {
-		    Site.error("You can't access this content");
-		} catch (final GroupNotFoundException e) {
-		    Site.error("Group not found");
-		} catch (final Throwable e) {
-		    GWT.log("Error getting content", null);
-		    throw new RuntimeException();
-		}
+		processErrorException(caught);
 	    }
 
 	    public void onSuccess(final Object result) {
@@ -91,7 +82,6 @@ public class StateManagerDefault implements StateManager {
 		loadContent((StateDTO) result);
 		oldState = newState.getEncoded();
 	    }
-
 	});
     }
 
@@ -111,19 +101,12 @@ public class StateManagerDefault implements StateManager {
 	session.setCurrent(state);
 	final GroupDTO group = state.getGroup();
 	app.setGroupState(group.getShortName());
-	// check def theme... (this is only for ui test)
-	if (lastTheme == "defaultKuneTheme") {
-	    lastTheme = "greenKuneTheme";
-	} else if (lastTheme == "greenKuneTheme") {
-	    lastTheme = "blueKuneTheme";
-	} else if (lastTheme == "blueKuneTheme") {
-	    lastTheme = "greyKuneTheme";
-	} else if (lastTheme == "greyKuneTheme") {
-	    lastTheme = "purpleKuneTheme";
-	} else if (lastTheme == "purpleKuneTheme") {
-	    lastTheme = "defaultKuneTheme";
+	if (state.getGroupRights().isAdministrable) {
+	    workspace.getThemeMenuComponent().setVisible(true);
+	} else {
+	    workspace.getThemeMenuComponent().setVisible(false);
 	}
-	workspace.setTheme(lastTheme);
+	setWsTheme(group);
 	workspace.showGroup(group);
 	final String toolName = state.getToolName();
 	workspace.setTool(toolName);
@@ -147,6 +130,14 @@ public class StateManagerDefault implements StateManager {
 	Site.hideProgress();
     }
 
+    private void setWsTheme(final GroupDTO group) {
+	String nextTheme = group.getWorkspaceTheme();
+	if (lastTheme == null || lastTheme != nextTheme) {
+	    workspace.setTheme(nextTheme);
+	}
+	lastTheme = nextTheme;
+    }
+
     public String getUser() {
 	return session.user;
     }
@@ -156,12 +147,35 @@ public class StateManagerDefault implements StateManager {
 	loadSocialNetwork();
     }
 
+    // TODO: Extract this to a utility class
+    public void processErrorException(final Throwable caught) {
+	Site.hideProgress();
+	try {
+	    throw caught;
+	} catch (final AccessViolationException e) {
+	    // i18n
+	    Site.error("You don't have rights to do that");
+	} catch (final GroupNotFoundException e) {
+	    Site.error("Group not found");
+	} catch (final ContentNotFoundException e) {
+	    Site.error("Content not found");
+	} catch (final Throwable e) {
+	    Site.error("Error performing operation");
+	    GWT.log("Other kind of exception in StateManagerDefault/processErrorException", null);
+	    throw new RuntimeException();
+	}
+    }
+
     private void loadSocialNetwork() {
 	// FIXME: bug: session.getCurrentState null in init, logged: onLoggedIn
 	// --> reloadSN --> loadSN --> bug
-	StateDTO state = session.getCurrentState();
-	workspace.getGroupMembersComponent().getGroupMembers(session.user, state.getGroup(), state.getGroupRights());
-	workspace.getParticipationComponent().getParticipation(session.user, state.getGroup(), state.getGroupRights());
+	StateDTO state;
+	if (session != null && (state = session.getCurrentState()) != null) {
+	    workspace.getGroupMembersComponent()
+		    .getGroupMembers(session.user, state.getGroup(), state.getGroupRights());
+	    workspace.getParticipationComponent().getParticipation(session.user, state.getGroup(),
+		    state.getGroupRights());
+	}
     }
 
 }

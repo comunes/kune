@@ -57,4 +57,8 @@ public interface Workspace extends Component {
 
     public void setTheme(String theme);
 
+    public ThemeMenuComponent getThemeMenuComponent();
+
+    public void setVisible(boolean visible);
+
 }

@@ -37,6 +37,9 @@ public interface KuneService extends RemoteService {
 
     InitDataDTO getInitData(String userHash) throws AccessViolationException;
 
+    // TODO: new GroupService:
+    void changeGroupWsTheme(String userHash, String groupShortName, String theme) throws AccessViolationException;
+
     public class App {
 	private static KuneServiceAsync ourInstance = null;
 

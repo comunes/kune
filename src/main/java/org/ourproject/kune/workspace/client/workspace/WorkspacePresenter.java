@@ -43,6 +43,7 @@ public class WorkspacePresenter implements Workspace {
 	view.setGroupMembers(components.getGroupMembersComponent().getView());
 	view.setParticipation(components.getParticipationComponent().getView());
 	view.setBuddiesPresence(components.getBuddiesPresenceComponent().getView());
+	view.setThemeMenuComponent(components.getThemeMenuComponent().getView());
     }
 
     public void showError(final Throwable caught) {
@@ -115,7 +116,15 @@ public class WorkspacePresenter implements Workspace {
 	return components.getBuddiesPresenceComponent();
     }
 
+    public ThemeMenuComponent getThemeMenuComponent() {
+	return components.getThemeMenuComponent();
+    }
+
     public void setTheme(final String theme) {
 	view.setTheme(theme);
+    }
+
+    public void setVisible(final boolean visible) {
+	view.setVisible(visible);
     }
 }

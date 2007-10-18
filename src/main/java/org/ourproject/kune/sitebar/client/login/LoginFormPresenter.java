@@ -23,16 +23,19 @@ package org.ourproject.kune.sitebar.client.login;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
+import org.ourproject.kune.platf.client.errors.UserAuthException;
 import org.ourproject.kune.sitebar.client.Site;
+import org.ourproject.kune.sitebar.client.msg.MessagePresenter;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarServiceAsync;
 
-import to.tipit.gwtlib.FireLog;
-
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class LoginFormPresenter implements LoginForm {
+public class LoginFormPresenter implements LoginForm, MessagePresenter {
+
     LoginFormView view;
+
     final LoginListener listener;
 
     // private boolean loginButtonEnabled;
@@ -44,11 +47,11 @@ public class LoginFormPresenter implements LoginForm {
 
     public void init(final LoginFormView loginview) {
 	this.view = loginview;
-	reset();
+	resetMessage();
     }
 
     public void doCancel() {
-	reset();
+	resetMessage();
 	listener.onLoginCancelled();
     }
 
@@ -59,11 +62,20 @@ public class LoginFormPresenter implements LoginForm {
 	    final String passwd = view.getLoginPassword();
 	    SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
 	    siteBarService.login(nickOrEmail, passwd, new AsyncCallback() {
-		public void onFailure(final Throwable arg0) {
-		    // i18n: Error in authentication
+		public void onFailure(final Throwable caught) {
 		    Site.hideProgress();
-		    Site.important("Error in authentication");
-		    FireLog.debug(arg0.getStackTrace().toString());
+		    try {
+			throw caught;
+		    } catch (final UserAuthException e) {
+			// i18n
+
+			view.showErrorMessage("Error in authentication");
+		    } catch (final Throwable e) {
+			view.showErrorMessage("Error in login");
+			GWT.log("Other kind of exception in LoginFormPresenter/doLogin", null);
+			throw new RuntimeException();
+		    }
+
 		}
 
 		public void onSuccess(final Object response) {
@@ -100,8 +112,21 @@ public class LoginFormPresenter implements LoginForm {
 	}
     }
 
+    public void onClose() {
+	// Do nothing
+    }
+
+    public void setMessage(final String message, final int type) {
+	// TODO Auto-generated method stub
+
+    }
+
     public View getView() {
 	return view;
+    }
+
+    public void resetMessage() {
+	view.hideMessage();
     }
 
     private void reset() {

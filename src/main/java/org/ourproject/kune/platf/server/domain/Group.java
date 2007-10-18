@@ -35,6 +35,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
 import org.hibernate.validator.Length;
 import org.hibernate.validator.Pattern;
 
@@ -42,6 +47,7 @@ import com.google.inject.name.Named;
 import com.wideplay.warp.persist.dao.Finder;
 
 @Entity
+@Indexed
 @Table(name = "groups")
 public class Group implements HasId {
 
@@ -50,18 +56,22 @@ public class Group implements HasId {
     public static Group NO_GROUP = null;
 
     @Id
+    @DocumentId
     @GeneratedValue
     private Long id;
 
+    @Field(index = Index.TOKENIZED, store = Store.NO)
     @Column(unique = true)
     @Length(min = 3, max = 15, message = "Shortname between 3 and 15 chars of lenght")
     @Pattern(regex = "^[a-z0-9_\\-]+$", message = "Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes")
     private String shortName;
 
+    @Field(index = Index.TOKENIZED, store = Store.NO)
     @Column(unique = true)
     @Length(min = 3, max = 50, message = "longName between 3 and 50 chars of lenght")
     private String longName;
 
+    @Field(index = Index.TOKENIZED, store = Store.NO)
     @Length(max = 255, message = "Public desc max 255 chars of lenght")
     private String publicDesc;
 
@@ -84,6 +94,8 @@ public class Group implements HasId {
 
     @OneToMany
     private final Map<String, ToolConfiguration> toolsConfig;
+
+    private String workspaceTheme;
 
     public Group() {
 	this(null, null, null, null);
@@ -243,6 +255,14 @@ public class Group implements HasId {
 	    return false;
 	}
 	return true;
+    }
+
+    public String getWorkspaceTheme() {
+	return workspaceTheme;
+    }
+
+    public void setWorkspaceTheme(final String workspaceTheme) {
+	this.workspaceTheme = workspaceTheme;
     }
 
 }

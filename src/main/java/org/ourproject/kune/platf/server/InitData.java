@@ -31,6 +31,8 @@ public class InitData {
     private String chatHttpBase;
     private String chatDomain;
     private String chatRoomHost;
+    private String defaultWsTheme;
+    private String[] wsThemes;
 
     public UserInfo getUserInfo() {
 	return userInfo;
@@ -78,6 +80,22 @@ public class InitData {
 
     public String getChatRoomHost() {
 	return chatRoomHost;
+    }
+
+    public String getDefaultWsTheme() {
+	return defaultWsTheme;
+    }
+
+    public void setDefaultWsTheme(final String defaultWsTheme) {
+	this.defaultWsTheme = defaultWsTheme;
+    }
+
+    public String[] getWsThemes() {
+	return wsThemes;
+    }
+
+    public void setWsThemes(final String[] wsThemes) {
+	this.wsThemes = wsThemes;
     }
 
 }

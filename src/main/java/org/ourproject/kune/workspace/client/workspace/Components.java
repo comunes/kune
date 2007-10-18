@@ -29,6 +29,7 @@ class Components {
     private ParticipationComponent participatesInGroups;
     private BuddiesPresenceComponent buddiesPresence;
     private ContentSubTitleComponent contentSubTitle;
+    private ThemeMenuComponent themeMenu;
 
     public Components(final WorkspacePresenter presenter) {
     }
@@ -73,5 +74,12 @@ class Components {
 	    participatesInGroups = WorkspaceFactory.createParticipationComponent();
 	}
 	return participatesInGroups;
+    }
+
+    public ThemeMenuComponent getThemeMenuComponent() {
+	if (themeMenu == null) {
+	    themeMenu = WorkspaceFactory.createThemeMenuComponent();
+	}
+	return themeMenu;
     }
 }

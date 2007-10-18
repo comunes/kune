@@ -22,8 +22,12 @@
       <property name="hibernate.c3p0.timeout" value="300"/>
       <property name="hibernate.c3p0.max_statements" value="50"/>
       <property name="hibernate.c3p0.idle_test_period" value="3000"/>
+      <property name="hibernate.search.default.directory_provider" value="org.hibernate.search.store.FSDirectoryProvider"/>
+      <property name="hibernate.search.default.indexBase" value="/var/lucene/kune_dev/indexes"/>
     </properties>
   </persistence-unit>
+
+
 
   <persistence-unit name="test_db" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
@@ -43,6 +47,8 @@
       <property name="hibernate.c3p0.timeout" value="300"/>
       <property name="hibernate.c3p0.max_statements" value="50"/>
       <property name="hibernate.c3p0.idle_test_period" value="3000"/>
+      <property name="hibernate.search.default.directory_provider" value="org.hibernate.search.store.FSDirectoryProvider"/>
+      <property name="hibernate.search.default.indexBase" value="/var/lucene/kune_test/indexes"/>
     </properties>
   </persistence-unit>
 
@@ -62,6 +68,8 @@
             <property name="hibernate.connection.password" value="" />
             <property name="hibernate.connection.url"
                 value="jdbc:h2:mem:testdb" />
+            <property name="hibernate.search.default.directory_provider" value="org.hibernate.search.store.FSDirectoryProvider"/>
+            <property name="hibernate.search.default.indexBase" value="/var/lucene/kune_test/indexes"/>
         </properties>
     </persistence-unit>
 </persistence>

@@ -23,9 +23,10 @@ package org.ourproject.kune.workspace.client.workspace.ui;
 import org.ourproject.kune.workspace.client.workspace.ContentTitlePresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentTitleView;
 
-import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class ContentTitlePanel extends HorizontalPanel implements ContentTitleView {
     private final Label titleLabel;
@@ -33,20 +34,23 @@ public class ContentTitlePanel extends HorizontalPanel implements ContentTitleVi
 
     public ContentTitlePanel(final ContentTitlePresenter presenter) {
 	titleLabel = new Label();
+	HorizontalPanel rigthHP = new HorizontalPanel();
 	dateLabel = new Label();
-	HTML expandPanel = new HTML("<b></b>");
 
 	add(titleLabel);
-	add(expandPanel);
-	add(dateLabel);
+	add(rigthHP);
+	rigthHP.add(dateLabel);
 
-	// setCellWidth(expandPanel, "100%");
-	expandPanel.addStyleName("kune-expandHoriz");
-	setCellHorizontalAlignment(dateLabel, HorizontalPanel.ALIGN_RIGHT);
+	setWidth("100%");
 	titleLabel.addStyleName("kune-Margin-Large-l");
 	titleLabel.addStyleName("kune-ft17px");
 	dateLabel.addStyleName("kune-Margin-Large-r");
 	dateLabel.addStyleName("kune-ft12px");
+	titleLabel.addStyleName("kune-ContentTitleBar-l");
+	rigthHP.addStyleName("kune-ContentTitleBar-r");
+	setCellVerticalAlignment(titleLabel, VerticalPanel.ALIGN_MIDDLE);
+	setCellVerticalAlignment(rigthHP, VerticalPanel.ALIGN_MIDDLE);
+	rigthHP.setCellVerticalAlignment(dateLabel, VerticalPanel.ALIGN_MIDDLE);
     }
 
     public void setContentTitle(final String title) {
@@ -55,6 +59,12 @@ public class ContentTitlePanel extends HorizontalPanel implements ContentTitleVi
 
     public void setContentDate(final String date) {
 	dateLabel.setText(date);
+    }
+
+    public void setColors(final String background, final String textColor) {
+	DOM.setStyleAttribute(this.getElement(), "backgroundColor", background);
+	DOM.setStyleAttribute(titleLabel.getElement(), "color", textColor);
+	DOM.setStyleAttribute(dateLabel.getElement(), "color", textColor);
     }
 
 }

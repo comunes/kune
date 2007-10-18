@@ -22,11 +22,15 @@ package org.ourproject.kune.sitebar.client.login;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.sitebar.client.bar.SiteBarTrans;
+import org.ourproject.kune.sitebar.client.msg.SiteMessage;
+import org.ourproject.kune.sitebar.client.msg.SiteMessagePanel;
 import org.ourproject.kune.sitebar.client.services.Translate;
 
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Ext;
+import com.gwtext.client.data.SimpleStore;
+import com.gwtext.client.data.Store;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.ButtonConfig;
 import com.gwtext.client.widgets.LayoutDialog;
@@ -35,6 +39,8 @@ import com.gwtext.client.widgets.TabPanel;
 import com.gwtext.client.widgets.TabPanelItem;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.event.TabPanelItemListenerAdapter;
+import com.gwtext.client.widgets.form.ComboBox;
+import com.gwtext.client.widgets.form.ComboBoxConfig;
 import com.gwtext.client.widgets.form.Form;
 import com.gwtext.client.widgets.form.FormConfig;
 import com.gwtext.client.widgets.form.TextField;
@@ -56,6 +62,7 @@ public class LoginFormPanel implements LoginFormView, View {
     private static final String EMAIL_FIELD = "email";
     private static final String LONGNAME_FIELD = "long_name";
     private static final String PASSWORD_FIELD_DUP = "passwordDup";
+    private static final String LANG_FIELD = "lang";
 
     private TextField loginPassField;
 
@@ -63,7 +70,7 @@ public class LoginFormPanel implements LoginFormView, View {
 
     private LayoutDialog dialog;
 
-    private final LoginForm presenter;
+    private final LoginFormPresenter presenter;
 
     private TextField shortNameRegField;
 
@@ -79,12 +86,12 @@ public class LoginFormPanel implements LoginFormView, View {
 
     private TextField passwdRegFieldDup;
 
-    public LoginFormPanel(final LoginForm initialPresenter) {
+    private SiteMessagePanel messagesPanel;
 
+    public LoginFormPanel(final LoginFormPresenter initialPresenter) {
 	this.presenter = initialPresenter;
 	createPanel();
-	// .addStyleName("kune-Default-Form");
-	// generalVP.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
+
     }
 
     public boolean isSignInFormValid() {
@@ -128,7 +135,35 @@ public class LoginFormPanel implements LoginFormView, View {
 	return passwdRegFieldDup.getValueAsString();
     }
 
+    public void showErrorMessage(final String message) {
+	messagesPanel.setMessage(message, SiteMessage.ERROR, SiteMessage.ERROR);
+	messagesPanel.show();
+    }
+
+    public void hideMessage() {
+	messagesPanel.hide();
+
+    }
+
+    public void show() {
+	dialog.show();
+    }
+
+    public void hide() {
+	dialog.hide();
+    }
+
     private void createPanel() {
+
+	LayoutRegionConfig south = new LayoutRegionConfig() {
+	    {
+		setSplit(false);
+		setInitialSize(49);
+		setHideWhenEmpty(true);
+		setFloatable(true);
+		setAutoHide(true);
+	    }
+	};
 
 	LayoutRegionConfig center = new LayoutRegionConfig() {
 	    {
@@ -143,14 +178,14 @@ public class LoginFormPanel implements LoginFormView, View {
 	    {
 		setModal(true);
 		setWidth(400);
-		setHeight(310);
+		setHeight(380);
 		setShadow(true);
 		setResizable(true);
 		setClosable(false);
 		setProxyDrag(true);
 		setTitle(t.SignIn());
 	    }
-	}, center);
+	}, null, south, null, null, center);
 
 	final BorderLayout layout = dialog.getLayout();
 	layout.beginUpdate();
@@ -195,6 +230,18 @@ public class LoginFormPanel implements LoginFormView, View {
 
 	registerPanel.add(registerWrapper);
 	layout.add(LayoutRegionConfig.CENTER, registerPanel);
+
+	messagesPanel = new SiteMessagePanel(presenter, false);
+	ContentPanel southPanel = new ContentPanel(messagesPanel, "", new ContentPanelConfig() {
+	    {
+		setBackground(true);
+		setFitToFrame(true);
+	    }
+	});
+	messagesPanel.setWidth("100%");
+	messagesPanel.setHeight("100%");
+	messagesPanel.setMessage("", SiteMessage.INFO, SiteMessage.ERROR);
+	layout.add(LayoutRegionConfig.SOUTH, southPanel);
 
 	layout.endUpdate();
 
@@ -282,7 +329,7 @@ public class LoginFormPanel implements LoginFormView, View {
 	return form;
     }
 
-    public Form createRegistrationForm() {
+    private Form createRegistrationForm() {
 	Form form = new Form(new FormConfig() {
 	    {
 		setWidth(300);
@@ -369,16 +416,39 @@ public class LoginFormPanel implements LoginFormView, View {
 	    }
 	});
 	form.add(emailRegField);
+
+	final Store store = new SimpleStore(new String[] { "abbr", "language" }, getLanguages());
+	store.load();
+
+	ComboBox languageCombo = new ComboBox(new ComboBoxConfig() {
+	    {
+		// i18n
+		setName(LANG_FIELD);
+		setMinChars(1);
+		setFieldLabel(t.Language());
+		setStore(store);
+		setDisplayField("language");
+		setMode("local");
+		setTriggerAction("all");
+		setEmptyText("Enter language");
+		setLoadingText("Searching...");
+		setTypeAhead(true);
+		setSelectOnFocus(true);
+		setWidth(200);
+		setMsgTarget("side");
+	    }
+	});
+
+	form.add(languageCombo);
+
 	form.end();
 	form.render();
 	return form;
     }
 
-    public void show() {
-	dialog.show();
-    }
-
-    public void hide() {
-	dialog.hide();
+    private Object[][] getLanguages() {
+	// FIXME: hardcoded...
+	return new Object[][] { new Object[] { "en", "English" }, new Object[] { "es", "Español" },
+		new Object[] { "pt", "Português do Brasil" } };
     }
 }
