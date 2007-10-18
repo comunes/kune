@@ -1,8 +1,0 @@
-<module>
-	<inherits name='org.ourproject.kune.platf.Kune-Platform' />
-
-<!--	
-	<entry-point class='org.ourproject.kune.app.client.editor.EditorSample'/>
--->
-  
-</module>
