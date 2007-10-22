@@ -1,20 +1,46 @@
 INSTALL
 --------------------------------------------------------------------------------
 
-Build with maven:
-mvn package
-mvn gwt:compile
-mvn jetty:run
-etcetera
+For development: 
 
-for hibernate-search:
-sudo mkdir -p /var/lib/lucene/kune_dev/indexes
-sudo mkdir -p /var/lib/lucene/kune_test/indexes
-sudo chown yourUser:yourUser /var/lib/lucene/kune_dev/indexes
-sudo chown yourUser:yourUser /var/lib/lucene/kune_test/indexes
+- Install java-jdk >= 1.5, maven2, mysql and for example eclipse
+- Install gwt 1.4.60 and follow Appendix A for maven+gwt configuration
+- Compile with maven:
+  # (in the trunk directory)
+  mvn compile
+  mvn gwt:compile
 
+- Copy the target to src directory (only for test):
+  mkdir -p src/main/webapp/gwt/org.ourproject.kune.app.Kune
+  unison -batch -auto -ui text target/org.ourproject.kune-0.0.1/org.ourproject.kune.app.Kune/ src/main/webapp/gwt/org.ourproject.kune.app.Kune
 
-Configuration of maven
+- Make two databases in your mysql:
+
+mysql> CREATE DATABASE kune_dev;
+mysql> GRANT ALL PRIVILEGES ON kune_dev.* TO kune@localhost IDENTIFIED BY 'db4kune';
+mysql> FLUSH PRIVILEGES;
+
+mysql> CREATE DATABASE kune_test;
+mysql> GRANT ALL PRIVILEGES ON kune_test.* TO kune@localhost IDENTIFIED BY 'db4kune';
+mysql> FLUSH PRIVILEGES;
+
+- Configurate hibernate-search (GNU/Linux instructions):
+	# yourUser is the user you are using to develop/run the application
+  sudo mkdir -p /var/lib/lucene/kune_dev/indexes
+  sudo mkdir -p /var/lib/lucene/kune_test/indexes
+  sudo chown yourUser:yourUser /var/lib/lucene/kune_dev/indexes
+  sudo chown yourUser:yourUser /var/lib/lucene/kune_test/indexes
+ 
+- Install a run openfire jabber server (see Appendix B for proper configuration of openfire)
+- Run jetty:
+  mvn jetty:run
+
+- And conect to http://yourIP:8080/kune
+
+- For development with eclipse:
+mvn eclipse:eclipse
+
+Appendix A: Configuration of maven
 --------------------------------------------------------------------------------
 Example of .m2/settings.xml:
 
@@ -53,9 +79,8 @@ Example of .m2/settings.xml:
 </settings>
 
 
-The rest of dependencies must be downloaded automatically.
 
-Integration with Openfire xmpp server
+Appendix B: Integration with Openfire xmpp server
 --------------------------------------------------------------------------------
 Enable "HTTP Bind Settings" in OpenFire, and check the port is not used by other service in your machine.
 
