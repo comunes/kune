@@ -26,11 +26,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.70603069"
-     inkscape:cx="372.04724"
-     inkscape:cy="526.18109"
+     inkscape:zoom="1"
+     inkscape:cx="493.5"
+     inkscape:cy="875"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      inkscape:window-width="1379"
      inkscape:window-height="936"
      inkscape:window-x="61"
@@ -57,25 +57,25 @@
        style="opacity:1;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffe6d5;stroke-width:2.30777311;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
        id="rect7207"
        width="602.44513"
-       height="414.10806"
+       height="376.10806"
        x="34.741199"
-       y="35.76841"
+       y="73.76841"
        rx="6.45259"
        ry="5.3122396"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <path
        style="font-size:58.13353348px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#a56941;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Emblem"
-       d="M 187.87675,61.398508 C 187.51258,61.398508 187.16255,61.399792 186.8113,61.422724 C 186.7785,61.429404 186.74742,61.44078 186.71444,61.446935 C 186.38746,61.508008 186.06486,61.560087 185.72163,61.568012 C 185.67408,61.574677 185.62363,61.560891 185.57634,61.568012 C 182.77485,61.989775 180.40788,63.206191 178.5056,65.224454 C 176.28408,67.570635 175.16395,70.381292 175.16395,73.651229 C 175.16395,76.957857 176.28408,79.787608 178.5056,82.126432 C 180.9104,84.648552 184.03491,85.90394 187.87675,85.90395 C 189.91496,85.90394 191.87447,85.397531 193.73674,84.378414 C 195.59899,83.388634 197.21821,81.987746 198.60393,80.213459 L 194.41476,77.888833 C 192.61114,80.29364 190.39509,81.496848 187.75568,81.496848 C 185.92273,81.496848 184.27929,80.902253 182.86427,79.729162 C 181.42724,78.556082 180.70913,77.127219 180.70915,75.418915 L 199.86311,75.418915 L 199.86311,74.450318 C 199.86309,70.307898 198.45997,66.990826 195.67393,64.49801 C 193.32776,62.423149 190.72878,61.398537 187.87675,61.398508 z M 98.814472,61.568012 L 98.814472,70.842303 L 95.569682,70.842303 L 95.569682,75.588419 L 98.814472,75.588419 L 98.814472,85.274367 L 103.75431,85.274367 L 103.75431,75.588419 L 106.73274,75.588419 L 112.81067,85.274367 L 118.67067,85.274367 L 110.51026,72.973213 L 118.30744,62.028092 L 112.32637,62.028092 L 106.29687,70.842303 L 103.75431,70.842303 L 103.75431,61.568012 L 98.814472,61.568012 z M 159.42428,61.568012 C 158.57393,61.719779 157.78158,61.966794 157.05122,62.342889 C 155.81948,63.002761 154.84706,63.873013 154.12123,64.958095 L 154.12123,62.028092 L 149.15718,62.028092 L 149.15718,85.274367 L 154.12123,85.274367 L 154.12123,72.246768 C 154.12122,70.384526 154.64674,68.955653 155.6952,67.936521 C 156.75095,66.917428 158.08941,66.410998 159.73907,66.410983 C 161.48402,66.410998 162.84668,66.879219 163.80717,67.839661 C 164.76761,68.800137 165.23582,70.305408 165.23585,72.343629 L 165.23585,85.274367 L 170.1999,85.274367 L 170.1999,71.25396 C 170.19987,68.401918 169.32963,66.045499 167.58469,64.183218 C 166.27596,62.78654 164.76167,61.917195 163.0323,61.568012 L 159.42428,61.568012 z M 121.79439,62.028092 L 121.79439,75.491559 C 121.79438,78.644218 122.8572,81.193211 124.99074,83.143457 C 126.97031,84.976395 129.42225,85.90394 132.30363,85.90395 C 135.21432,85.90394 137.65382,84.976395 139.64074,83.143457 C 141.77426,81.193211 142.83708,78.644218 142.8371,75.491559 L 142.8371,62.028092 L 137.87305,62.028092 L 137.87305,75.05569 C 137.87303,76.771326 137.34751,78.167102 136.29909,79.244861 C 135.21397,80.359295 133.89461,80.915687 132.30363,80.915687 C 130.77129,80.915696 129.4417,80.351968 128.35661,79.244861 C 127.27884,78.130447 126.75841,76.742008 126.75843,75.05569 L 126.75843,62.028092 L 121.79439,62.028092 z M 187.24716,65.854043 C 188.86746,65.854068 190.28233,66.308291 191.48476,67.210076 C 192.65049,68.133888 193.50898,69.479692 194.05154,71.25396 L 180.70915,71.25396 C 181.09772,69.545676 181.904,68.21898 183.10642,67.258504 C 184.27216,66.32739 185.64884,65.854068 187.24716,65.854043 z "
+       d="M 187.87675,94.398508 C 187.51258,94.398508 187.16255,94.399792 186.8113,94.422724 C 186.7785,94.429404 186.74742,94.44078 186.71444,94.446935 C 186.38746,94.508008 186.06486,94.560087 185.72163,94.568012 C 185.67408,94.574677 185.62363,94.560891 185.57634,94.568012 C 182.77485,94.989775 180.40788,96.206191 178.5056,98.224454 C 176.28408,100.57063 175.16395,103.38129 175.16395,106.65123 C 175.16395,109.95786 176.28408,112.78761 178.5056,115.12643 C 180.9104,117.64855 184.03491,118.90394 187.87675,118.90395 C 189.91496,118.90394 191.87447,118.39753 193.73674,117.37841 C 195.59899,116.38863 197.21821,114.98775 198.60393,113.21346 L 194.41476,110.88883 C 192.61114,113.29364 190.39509,114.49685 187.75568,114.49685 C 185.92273,114.49685 184.27929,113.90225 182.86427,112.72916 C 181.42724,111.55608 180.70913,110.12722 180.70915,108.41892 L 199.86311,108.41892 L 199.86311,107.45032 C 199.86309,103.3079 198.45997,99.990826 195.67393,97.49801 C 193.32776,95.423149 190.72878,94.398537 187.87675,94.398508 z M 98.814472,94.568012 L 98.814472,103.8423 L 95.569682,103.8423 L 95.569682,108.58842 L 98.814472,108.58842 L 98.814472,118.27437 L 103.75431,118.27437 L 103.75431,108.58842 L 106.73274,108.58842 L 112.81067,118.27437 L 118.67067,118.27437 L 110.51026,105.97321 L 118.30744,95.028092 L 112.32637,95.028092 L 106.29687,103.8423 L 103.75431,103.8423 L 103.75431,94.568012 L 98.814472,94.568012 z M 159.42428,94.568012 C 158.57393,94.719779 157.78158,94.966794 157.05122,95.342889 C 155.81948,96.002761 154.84706,96.873013 154.12123,97.958095 L 154.12123,95.028092 L 149.15718,95.028092 L 149.15718,118.27437 L 154.12123,118.27437 L 154.12123,105.24677 C 154.12122,103.38453 154.64674,101.95565 155.6952,100.93652 C 156.75095,99.917428 158.08941,99.410998 159.73907,99.410983 C 161.48402,99.410998 162.84668,99.879219 163.80717,100.83966 C 164.76761,101.80014 165.23582,103.30541 165.23585,105.34363 L 165.23585,118.27437 L 170.1999,118.27437 L 170.1999,104.25396 C 170.19987,101.40192 169.32963,99.045499 167.58469,97.183218 C 166.27596,95.78654 164.76167,94.917195 163.0323,94.568012 L 159.42428,94.568012 z M 121.79439,95.028092 L 121.79439,108.49156 C 121.79438,111.64422 122.8572,114.19321 124.99074,116.14346 C 126.97031,117.97639 129.42225,118.90394 132.30363,118.90395 C 135.21432,118.90394 137.65382,117.97639 139.64074,116.14346 C 141.77426,114.19321 142.83708,111.64422 142.8371,108.49156 L 142.8371,95.028092 L 137.87305,95.028092 L 137.87305,108.05569 C 137.87303,109.77133 137.34751,111.1671 136.29909,112.24486 C 135.21397,113.3593 133.89461,113.91569 132.30363,113.91569 C 130.77129,113.9157 129.4417,113.35197 128.35661,112.24486 C 127.27884,111.13045 126.75841,109.74201 126.75843,108.05569 L 126.75843,95.028092 L 121.79439,95.028092 z M 187.24716,98.854043 C 188.86746,98.854068 190.28233,99.308291 191.48476,100.21008 C 192.65049,101.13389 193.50898,102.47969 194.05154,104.25396 L 180.70915,104.25396 C 181.09772,102.54568 181.904,101.21898 183.10642,100.2585 C 184.27216,99.32739 185.64884,98.854068 187.24716,98.854043 z "
        id="path2585"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <g
        id="g6020"
-       transform="matrix(0.1702359,0,0,0.1700193,58.548992,-86.643728)"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       transform="matrix(0.1702359,0,0,0.1700193,58.548992,-53.643728)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126">
       <path
@@ -115,17 +115,17 @@
        style="color:#000000;fill:#ffe6d5;fill-opacity:1;fill-rule:nonzero;stroke:#dc5f01;stroke-width:1.96201754;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
        id="rect16307"
        width="411.655"
-       height="287.97803"
+       height="261.97803"
        x="61.798618"
-       y="109.56802"
-       ry="7.6983247"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       y="135.56802"
+       ry="7.6983237"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <g
        id="g4150"
        transform="translate(42,0)"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126">
       <rect
@@ -166,7 +166,7 @@
        width="155.86276"
        id="rect16321"
        style="color:#000000;fill:#ffaaaa;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.1601795;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <text
@@ -178,7 +178,7 @@
        xml:space="preserve"
        inkscape:transform-center-y="58"
        inkscape:transform-center-x="31"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126"><tspan
          y="374.72012"
@@ -188,17 +188,17 @@
     <text
        xml:space="preserve"
        style="font-size:17.87772942px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#e57601;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Emblem"
-       x="371.14474"
-       y="83.852554"
+       x="509.14478"
+       y="116.85255"
        id="text3418"
        sodipodi:linespacing="100%"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126"><tspan
          id="tspan3426"
          sodipodi:role="line"
-         x="371.14474"
-         y="83.852554">architecture</tspan></text>
+         x="509.14478"
+         y="116.85255">architecture</tspan></text>
     <text
        sodipodi:linespacing="100%"
        id="text3404"
@@ -208,7 +208,7 @@
        xml:space="preserve"
        inkscape:transform-center-y="58"
        inkscape:transform-center-x="31"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126"><tspan
          y="373.01645"
@@ -224,7 +224,7 @@
        y="361.57816"
        ry="5.0739045"
        rx="5.0739141"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <rect
@@ -236,7 +236,7 @@
        width="12.842643"
        id="rect3419"
        style="color:#000000;fill:#ffaaaa;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018105;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <rect
@@ -248,41 +248,41 @@
        y="361.57816"
        ry="5.0739045"
        rx="5.0739141"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <rect
        ry="5.0739045"
        y="313.57816"
-       x="94.619453"
+       x="86.619453"
        height="20.295618"
-       width="46.571476"
+       width="25.168568"
        id="rect3442"
        style="color:#000000;fill:#ac9d93;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018045;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
        rx="5.0739088"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <text
        sodipodi:linespacing="100%"
        id="text3444"
        y="326.72012"
-       x="98.60611"
+       x="90.60611"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        xml:space="preserve"
        inkscape:transform-center-y="58"
        inkscape:transform-center-x="31"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126"><tspan
          y="326.72012"
-         x="98.60611"
+         x="90.60611"
          sodipodi:role="line"
-         id="tspan3446">jpa api</tspan></text>
+         id="tspan3446">jpa</tspan></text>
     <g
        id="g4778"
        transform="translate(22.70524,42.508326)"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126">
       <rect
@@ -317,7 +317,7 @@
        id="rect3460"
        style="color:#000000;fill:#ffb380;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018057;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
        rx="5.0739093"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <text
@@ -329,7 +329,7 @@
        xml:space="preserve"
        inkscape:transform-center-y="58"
        inkscape:transform-center-x="31"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126"><tspan
          y="350.72012"
@@ -339,7 +339,7 @@
     <g
        id="g4783"
        transform="translate(23.21006,42.508326)"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126">
       <rect
@@ -368,7 +368,7 @@
     <g
        id="g4788"
        transform="translate(-157.38264,42.508326)"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126">
       <rect
@@ -397,7 +397,7 @@
     <g
        id="g4793"
        transform="translate(1.402387,42.508326)"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126">
       <rect
@@ -426,7 +426,7 @@
     <g
        id="g3051"
        transform="translate(90,42.508326)"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126">
       <rect
@@ -467,13 +467,13 @@
        width="12.842643"
        id="rect3524"
        style="color:#000000;fill:#ffaaaa;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018105;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <g
        id="g4798"
        transform="translate(1.769055,42.508326)"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126">
       <rect
@@ -500,65 +500,37 @@
            y="308.21179">backup</tspan></text>
     </g>
     <rect
-       rx="5.1163583"
-       style="color:#000000;fill:#bcd35f;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16488826;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
-       id="rect3544"
-       width="104.07242"
-       height="20.290911"
-       x="94.621933"
-       y="284.81528"
-       ry="5.0727277"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
-       inkscape:export-xdpi="89.910126"
-       inkscape:export-ydpi="89.910126" />
-    <text
-       inkscape:transform-center-x="31"
-       inkscape:transform-center-y="58"
-       xml:space="preserve"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
-       x="98.60611"
-       y="297.95486"
-       id="text3546"
-       sodipodi:linespacing="100%"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
-       inkscape:export-xdpi="89.910126"
-       inkscape:export-ydpi="89.910126"><tspan
-         id="tspan3548"
-         sodipodi:role="line"
-         x="98.60611"
-         y="297.95486">spring jpa module</tspan></text>
-    <rect
        ry="5.0739045"
-       y="231.06984"
-       x="94.619453"
+       y="255.06982"
+       x="86.619446"
        height="20.295618"
-       width="109.17057"
+       width="141.27493"
        id="rect3550"
        style="color:#000000;fill:#aaaaff;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16017962;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
        rx="5.0739031"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <text
        sodipodi:linespacing="100%"
        id="text3552"
-       y="244.21181"
-       x="98.60611"
+       y="268.21179"
+       x="90.60611"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        xml:space="preserve"
        inkscape:transform-center-y="58"
        inkscape:transform-center-x="31"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126"><tspan
-         y="244.21181"
-         x="98.60611"
+         y="268.21179"
+         x="90.60611"
          sodipodi:role="line"
-         id="tspan3554">gwt service servlets</tspan></text>
+         id="tspan3554">gwt rcp service servlets</tspan></text>
     <g
        id="g4803"
        transform="translate(1.179212,42.508326)"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126">
       <rect
@@ -587,7 +559,7 @@
     <g
        id="g4808"
        transform="translate(1.251698e-5,42.508326)"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126">
       <rect
@@ -620,9 +592,9 @@
        width="360.59171"
        height="20.295618"
        x="86.61953"
-       y="199.06984"
+       y="223.06984"
        ry="5.0739045"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <text
@@ -631,21 +603,21 @@
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        x="90.60611"
-       y="212.21181"
+       y="236.21181"
        id="text4858"
        sodipodi:linespacing="100%"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126"><tspan
          id="tspan4860"
          sodipodi:role="line"
          x="90.60611"
-         y="212.21181">firewalls</tspan></text>
+         y="236.21181">firewalls</tspan></text>
     <path
        style="color:#000000;fill:#ffe6d5;fill-opacity:1;fill-rule:nonzero;stroke:#dc5f01;stroke-width:1.55009091;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:1.55009084, 6.20036343;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
-       d="M 87.324667,185.3953 L 402.93905,185.3953"
+       d="M 87.324667,209.3953 L 402.93905,209.3953"
        id="path2742"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <text
@@ -654,26 +626,26 @@
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        x="406.74789"
-       y="188.17955"
+       y="212.17955"
        id="text4514"
        sodipodi:linespacing="100%"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126"><tspan
          id="tspan4516"
          sodipodi:role="line"
          x="406.74789"
-         y="188.17955">internet</tspan></text>
+         y="212.17955">internet</tspan></text>
     <rect
        rx="5.0739212"
        style="color:#000000;fill:#aaaaff;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018164;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
        id="rect4520"
-       width="138.42719"
+       width="208.30139"
        height="34.180908"
        x="86.619629"
-       y="133.06972"
+       y="157.06972"
        ry="5.073904"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <text
@@ -682,28 +654,28 @@
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        x="91.637383"
-       y="146.21181"
+       y="170.21181"
        id="text4522"
        sodipodi:linespacing="100%"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126"><tspan
          sodipodi:role="line"
          x="91.637383"
-         y="146.21181"
-         id="tspan4546">user gwt client</tspan></text>
+         y="170.21181"
+         id="tspan4546">user gwt workspace</tspan></text>
     <path
        style="color:#000000;fill:#445500;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.35315001;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block"
-       d="M 134.86979,182.13761 L 129.58854,175.66886 L 124.33854,182.13761 L 126.68229,182.13761 L 126.68229,183.66886 L 126.68229,187.07511 L 126.68229,188.60636 L 124.33854,188.60636 L 129.58854,195.07511 L 134.86979,188.60636 L 132.55729,188.60636 L 132.55729,187.07511 L 132.55729,183.66886 L 132.55729,182.13761 L 134.86979,182.13761 z "
+       d="M 134.86979,206.13761 L 129.58854,199.66886 L 124.33854,206.13761 L 126.68229,206.13761 L 126.68229,207.66886 L 126.68229,211.07511 L 126.68229,212.60636 L 124.33854,212.60636 L 129.58854,219.07511 L 134.86979,212.60636 L 132.55729,212.60636 L 132.55729,211.07511 L 132.55729,207.66886 L 132.55729,206.13761 L 134.86979,206.13761 z "
        id="path4526"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <path
        id="path4528"
-       d="M 202.86979,182.13761 L 197.58854,175.66886 L 192.33854,182.13761 L 194.68229,182.13761 L 194.68229,183.66886 L 194.68229,187.07511 L 194.68229,188.60636 L 192.33854,188.60636 L 197.58854,195.07511 L 202.86979,188.60636 L 200.55729,188.60636 L 200.55729,187.07511 L 200.55729,183.66886 L 200.55729,182.13761 L 202.86979,182.13761 z "
+       d="M 202.86979,206.13761 L 197.58854,199.66886 L 192.33854,206.13761 L 194.68229,206.13761 L 194.68229,207.66886 L 194.68229,211.07511 L 194.68229,212.60636 L 192.33854,212.60636 L 197.58854,219.07511 L 202.86979,212.60636 L 200.55729,212.60636 L 200.55729,211.07511 L 200.55729,207.66886 L 200.55729,206.13761 L 202.86979,206.13761 z "
        style="color:#000000;fill:#445500;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.35315001;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <text
@@ -712,32 +684,32 @@
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        x="105.83775"
-       y="179.37215"
+       y="203.37215"
        id="text4538"
        sodipodi:linespacing="100%"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126"><tspan
          id="tspan4540"
          sodipodi:role="line"
          x="105.83775"
-         y="179.37215">rpc</tspan></text>
+         y="203.37215">rpc</tspan></text>
     <text
        inkscape:transform-center-x="31"
        inkscape:transform-center-y="58"
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        x="204.67981"
-       y="179.95186"
+       y="203.95186"
        id="text4542"
        sodipodi:linespacing="100%"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126"><tspan
          id="tspan4544"
          sodipodi:role="line"
          x="204.67981"
-         y="179.95186">http/s</tspan></text>
+         y="203.95186">http/s</tspan></text>
     <rect
        rx="5.0739069"
        style="color:#000000;fill:#ffb380;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018021;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
@@ -747,7 +719,7 @@
        x="188.54747"
        y="337.57816"
        ry="5.0739045"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <text
@@ -759,7 +731,7 @@
        y="350.72012"
        id="text4837"
        sodipodi:linespacing="100%"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126"><tspan
          id="tspan4839"
@@ -768,15 +740,15 @@
          y="350.72012">cache</tspan></text>
     <path
        style="color:#000000;fill:#dd8a3d;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
-       d="M 44.509365,74.170751 L 44.509365,75.545751 L 45.759365,75.545751 L 45.759365,74.170751 L 44.509365,74.170751 z "
+       d="M 44.509365,107.17075 L 44.509365,108.54575 L 45.759365,108.54575 L 45.759365,107.17075 L 44.509365,107.17075 z "
        id="path3441"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <g
        id="g7338"
        transform="translate(338.8934,-49.66358)"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126">
       <g
@@ -869,7 +841,7 @@
            id="tspan7334"
            sodipodi:role="line"
            x="232.54576"
-           y="478.86331">version 0.3</tspan></text>
+           y="478.86331">version 0.4</tspan></text>
       <text
          xml:space="preserve"
          style="font-size:5.95772934px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
@@ -886,7 +858,7 @@
     <g
        id="g8333"
        transform="matrix(3.138983e-2,0,0,3.138983e-2,90.26093,365.39023)"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126">
       <g
@@ -950,7 +922,7 @@
     <g
        transform="matrix(3.138983e-2,0,0,3.138983e-2,389.0949,365.39023)"
        id="g8349"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126">
       <g
@@ -1014,7 +986,7 @@
     <g
        id="g8391"
        transform="matrix(3.138983e-2,0,0,3.138983e-2,404.6779,365.39023)"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126">
       <g
@@ -1078,7 +1050,7 @@
     <g
        transform="matrix(3.138983e-2,0,0,3.138983e-2,420.1219,365.39023)"
        id="g8421"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126">
       <g
@@ -1142,7 +1114,7 @@
     <g
        id="g8451"
        transform="matrix(3.138983e-2,0,0,3.138983e-2,435.6509,365.39023)"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126">
       <g
@@ -1205,68 +1177,68 @@
     </g>
     <rect
        ry="5.073904"
-       y="133.06972"
+       y="157.06972"
        x="300.18716"
        height="34.180908"
-       width="138.42719"
+       width="146.61066"
        id="rect2349"
        style="color:#000000;fill:#aaccff;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018164;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
        rx="5.0739212"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <text
        sodipodi:linespacing="100%"
        id="text2351"
-       y="146.21181"
+       y="170.21181"
        x="305.20493"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        xml:space="preserve"
        inkscape:transform-center-y="58"
        inkscape:transform-center-x="31"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126"><tspan
          id="tspan2355"
-         y="146.21181"
+         y="170.21181"
          x="305.20493"
-         sodipodi:role="line">user html</tspan></text>
+         sodipodi:role="line">user html public space</tspan></text>
     <path
        inkscape:export-ydpi="89.910126"
        inkscape:export-xdpi="89.910126"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        style="color:#000000;fill:#445500;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.35315001;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block"
-       d="M 324.86979,182.13761 L 319.58854,175.66886 L 314.33854,182.13761 L 316.68229,182.13761 L 316.68229,183.66886 L 316.68229,187.07511 L 316.68229,188.60636 L 314.33854,188.60636 L 319.58854,195.07511 L 324.86979,188.60636 L 322.55729,188.60636 L 322.55729,187.07511 L 322.55729,183.66886 L 322.55729,182.13761 L 324.86979,182.13761 z "
+       d="M 324.86979,206.13761 L 319.58854,199.66886 L 314.33854,206.13761 L 316.68229,206.13761 L 316.68229,207.66886 L 316.68229,211.07511 L 316.68229,212.60636 L 314.33854,212.60636 L 319.58854,219.07511 L 324.86979,212.60636 L 322.55729,212.60636 L 322.55729,211.07511 L 322.55729,207.66886 L 322.55729,206.13761 L 324.86979,206.13761 z "
        id="path2365" />
     <text
        inkscape:export-ydpi="89.910126"
        inkscape:export-xdpi="89.910126"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        sodipodi:linespacing="100%"
        id="text2367"
-       y="179.95186"
+       y="203.95186"
        x="328.67981"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        xml:space="preserve"
        inkscape:transform-center-y="58"
        inkscape:transform-center-x="31"><tspan
-         y="179.95186"
+         y="203.95186"
          x="328.67981"
          sodipodi:role="line"
          id="tspan2369">http/s</tspan></text>
     <text
        inkscape:export-ydpi="89.910126"
        inkscape:export-xdpi="89.910126"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        sodipodi:linespacing="100%"
        id="text2371"
-       y="154.17955"
+       y="178.17955"
        x="502.74789"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        xml:space="preserve"
        inkscape:transform-center-y="58"
        inkscape:transform-center-x="31"><tspan
-         y="154.17955"
+         y="178.17955"
          x="502.74789"
          sodipodi:role="line"
          id="tspan2373">browser</tspan></text>
@@ -1276,8 +1248,8 @@
        width="1.4396198"
        height="40.442886"
        x="489.65756"
-       y="130.10168"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       y="154.10168"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <path
@@ -1295,48 +1267,32 @@
        inkscape:rounded="0"
        inkscape:randomized="0"
        d="M -36.166659,17.712046 L -39.357835,19.554472 L -39.357835,15.869619 L -36.166659,17.712046 z "
-       transform="translate(529.9901,131.64704)"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       transform="translate(529.9901,155.64704)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <rect
        inkscape:export-ydpi="89.910126"
        inkscape:export-xdpi="89.910126"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
-       rx="5.0739093"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
+       rx="5.0739088"
        style="color:#000000;fill:#ac9d93;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018045;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
        id="rect3070"
-       width="40.313488"
+       width="62.345894"
        height="20.295618"
-       x="202.61945"
+       x="116.61945"
        y="313.57816"
        ry="5.0739045" />
-    <text
-       inkscape:export-ydpi="89.910126"
-       inkscape:export-xdpi="89.910126"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
-       inkscape:transform-center-x="31"
-       inkscape:transform-center-y="58"
-       xml:space="preserve"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
-       x="206.60611"
-       y="326.72012"
-       id="text3072"
-       sodipodi:linespacing="100%"><tspan
-         id="tspan3074"
-         sodipodi:role="line"
-         x="206.60611"
-         y="326.72012">jcr api</tspan></text>
     <rect
        ry="5.0739045"
        y="313.57816"
        x="260.61945"
        height="20.295618"
-       width="40.313488"
+       width="37.795498"
        id="rect3076"
        style="color:#000000;fill:#ac9d93;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018045;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
        rx="5.0739093"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <text
@@ -1348,7 +1304,7 @@
        xml:space="preserve"
        inkscape:transform-center-y="58"
        inkscape:transform-center-x="31"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126"><tspan
          y="326.72012"
@@ -1358,106 +1314,78 @@
     <rect
        inkscape:export-ydpi="89.910126"
        inkscape:export-xdpi="89.910126"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
-       ry="5.0727277"
-       y="284.81528"
-       x="202.62195"
-       height="20.290911"
-       width="54.008511"
-       id="rect3082"
-       style="color:#000000;fill:#bcd35f;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16488826;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
-       rx="5.1163578" />
-    <text
-       inkscape:export-ydpi="89.910126"
-       inkscape:export-xdpi="89.910126"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
-       sodipodi:linespacing="100%"
-       id="text3084"
-       y="297.95486"
-       x="206.60611"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
-       xml:space="preserve"
-       inkscape:transform-center-y="58"
-       inkscape:transform-center-x="31"><tspan
-         y="297.95486"
-         x="206.60611"
-         sodipodi:role="line"
-         id="tspan3086">spring jcr</tspan></text>
-    <rect
-       inkscape:export-ydpi="89.910126"
-       inkscape:export-xdpi="89.910126"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
-       rx="5.0739026"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
+       rx="5.0739031"
        style="color:#000000;fill:#aaccff;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16017962;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
        id="rect3088"
-       width="138.85445"
+       width="146.40842"
        height="20.295618"
        x="300.53464"
-       y="231.06984"
+       y="255.06982"
        ry="5.0739045" />
     <text
        inkscape:export-ydpi="89.910126"
        inkscape:export-xdpi="89.910126"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:transform-center-x="31"
        inkscape:transform-center-y="58"
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        x="305.90396"
-       y="244.21181"
+       y="268.21179"
        id="text3090"
        sodipodi:linespacing="100%"><tspan
          id="tspan3092"
          sodipodi:role="line"
          x="305.90396"
-         y="244.21181">publisher</tspan></text>
+         y="268.21179">publisher</tspan></text>
     <rect
        inkscape:export-ydpi="89.910126"
        inkscape:export-xdpi="89.910126"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        ry="5.0727277"
-       y="255.58054"
-       x="94.621933"
+       y="279.58054"
+       x="86.621941"
        height="20.290911"
-       width="78.013702"
+       width="142.22244"
        id="rect3101"
        style="color:#000000;fill:#bcd35f;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16488826;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
-       rx="5.1163578" />
+       rx="5.1163583" />
     <text
        inkscape:export-ydpi="89.910126"
        inkscape:export-xdpi="89.910126"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        sodipodi:linespacing="100%"
        id="text3103"
-       y="268.72012"
-       x="98.60611"
+       y="292.72012"
+       x="90.60611"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        xml:space="preserve"
        inkscape:transform-center-y="58"
        inkscape:transform-center-x="31"><tspan
-         y="268.72012"
-         x="98.60611"
+         y="292.72012"
+         x="90.60611"
          sodipodi:role="line"
-         id="tspan3105">kune services</tspan></text>
+         id="tspan3105">kune services/managers</tspan></text>
     <rect
        rx="5.1163573"
        style="color:#000000;fill:#bcd35f;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16488826;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
        id="rect3107"
        width="12.621064"
        height="20.290911"
-       x="220.62193"
-       y="255.58054"
+       x="401.62195"
+       y="279.58054"
        ry="5.0727277"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <rect
        inkscape:export-ydpi="89.910126"
        inkscape:export-xdpi="89.910126"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        ry="5.0727277"
-       y="255.58054"
-       x="236.62193"
+       y="279.58054"
+       x="417.62195"
        height="20.290911"
        width="12.621064"
        id="rect3109"
@@ -1469,136 +1397,60 @@
        id="rect3111"
        width="12.621064"
        height="20.290911"
-       x="252.62193"
-       y="255.58054"
+       x="433.62195"
+       y="279.58054"
        ry="5.0727277"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <text
        inkscape:export-ydpi="89.910126"
        inkscape:export-xdpi="89.910126"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:transform-center-x="31"
        inkscape:transform-center-y="58"
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
-       x="188.66574"
-       y="267.01645"
+       x="305.66574"
+       y="290.01645"
        id="text3113"
        sodipodi:linespacing="100%"><tspan
          id="tspan3115"
          sodipodi:role="line"
-         x="188.66574"
-         y="267.01645">. . . </tspan></text>
-    <rect
-       inkscape:export-ydpi="89.910126"
-       inkscape:export-xdpi="89.910126"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
-       rx="5.0739036"
-       style="color:#000000;fill:#aaaaff;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16017973;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
-       id="rect3117"
-       width="12.096267"
-       height="20.295618"
-       x="246.8575"
-       y="231.06984"
-       ry="5.0739045" />
-    <rect
-       ry="5.0739045"
-       y="231.06984"
-       x="262.46204"
-       height="20.295618"
-       width="12.096267"
-       id="rect3119"
-       style="color:#000000;fill:#aaaaff;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16017973;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
-       rx="5.0739036"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
-       inkscape:export-xdpi="89.910126"
-       inkscape:export-ydpi="89.910126" />
-    <rect
-       inkscape:export-ydpi="89.910126"
-       inkscape:export-xdpi="89.910126"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
-       rx="5.0739036"
-       style="color:#000000;fill:#aaaaff;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16017973;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
-       id="rect3121"
-       width="12.096267"
-       height="20.295618"
-       x="277.65976"
-       y="231.06984"
-       ry="5.0739045" />
-    <text
-       sodipodi:linespacing="100%"
-       id="text3123"
-       y="241.78174"
-       x="218.66574"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
-       xml:space="preserve"
-       inkscape:transform-center-y="58"
-       inkscape:transform-center-x="31"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
-       inkscape:export-xdpi="89.910126"
-       inkscape:export-ydpi="89.910126"><tspan
-         y="241.78174"
-         x="218.66574"
-         sodipodi:role="line"
-         id="tspan3125">. . . </tspan></text>
-    <rect
-       style="opacity:1;color:#000000;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#bcd35f;stroke-width:1.5999999;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:6.39999962,6.39999962;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="rect3131"
-       width="353.13086"
-       height="53.093102"
-       x="90.752159"
-       y="226.94968"
-       rx="8.0007296"
-       ry="7.6983252"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
-       inkscape:export-xdpi="89.910126"
-       inkscape:export-ydpi="89.910126" />
-    <rect
-       ry="7.6983247"
-       rx="8.0007296"
-       y="223.86285"
-       x="87.047989"
-       height="85.1959"
-       width="360.53918"
-       id="rect3133"
-       style="opacity:1;color:#000000;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#bcd35f;stroke-width:1.5999999;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
-       inkscape:export-xdpi="89.910126"
-       inkscape:export-ydpi="89.910126" />
+         x="305.66574"
+         y="290.01645">. . . </tspan></text>
     <text
        inkscape:transform-center-x="31"
        inkscape:transform-center-y="58"
        xml:space="preserve"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        x="502.74789"
-       y="238.17955"
+       y="272.17957"
        id="text4104"
        sodipodi:linespacing="100%"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126"><tspan
-         id="tspan4106"
          sodipodi:role="line"
          x="502.74789"
-         y="238.17955">spring's IoC</tspan><tspan
+         y="272.17957"
+         id="tspan4112">web container</tspan><tspan
          sodipodi:role="line"
          x="502.74789"
-         y="252.17955"
-         id="tspan4112">container</tspan></text>
+         y="286.17957"
+         id="tspan3697">with jpa and guice IoC</tspan></text>
     <rect
-       y="222.1017"
+       y="255.10168"
        x="489.65756"
-       height="60.19846"
+       height="47.608513"
        width="1.4396198"
        id="rect4108"
        style="opacity:1;color:#000000;fill:#bcd35f;fill-opacity:1;fill-rule:nonzero;stroke:#bcd35f;stroke-width:0.86952847;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <path
-       transform="translate(529.9901,223.64704)"
+       transform="translate(529.9901,258.64704)"
        d="M -36.166659,17.712046 L -39.357835,19.554472 L -39.357835,15.869619 L -36.166659,17.712046 z "
        inkscape:randomized="0"
        inkscape:rounded="0"
@@ -1613,101 +1465,7 @@
        id="path4110"
        style="opacity:1;color:#000000;fill:#bcd35f;fill-opacity:1;fill-rule:nonzero;stroke:#bcd35f;stroke-width:1.60000002;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        sodipodi:type="star"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
-       inkscape:export-xdpi="89.910126"
-       inkscape:export-ydpi="89.910126" />
-    <text
-       inkscape:export-ydpi="89.910126"
-       inkscape:export-xdpi="89.910126"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
-       sodipodi:linespacing="100%"
-       id="text4114"
-       y="292.17957"
-       x="502.74789"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
-       xml:space="preserve"
-       inkscape:transform-center-y="58"
-       inkscape:transform-center-x="31"><tspan
-         y="292.17957"
-         x="502.74789"
-         sodipodi:role="line"
-         id="tspan4116">spring's</tspan><tspan
-         id="tspan4118"
-         y="306.17957"
-         x="502.74789"
-         sodipodi:role="line">modules</tspan></text>
-    <rect
-       style="opacity:1;color:#000000;fill:#bcd35f;fill-opacity:1;fill-rule:nonzero;stroke:#bcd35f;stroke-width:0.86952841;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="rect4120"
-       width="1.4396198"
-       height="25.008844"
-       x="489.65756"
-       y="285.97946"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
-       inkscape:export-xdpi="89.910126"
-       inkscape:export-ydpi="89.910126" />
-    <path
-       sodipodi:type="star"
-       style="opacity:1;color:#000000;fill:#bcd35f;fill-opacity:1;fill-rule:nonzero;stroke:#bcd35f;stroke-width:1.60000002;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="path4122"
-       sodipodi:sides="3"
-       sodipodi:cx="-38.294109"
-       sodipodi:cy="17.712046"
-       sodipodi:r1="2.1274507"
-       sodipodi:r2="1.0637254"
-       sodipodi:arg1="0"
-       sodipodi:arg2="1.0471976"
-       inkscape:flatsided="true"
-       inkscape:rounded="0"
-       inkscape:randomized="0"
-       d="M -36.166659,17.712046 L -39.357835,19.554472 L -39.357835,15.869619 L -36.166659,17.712046 z "
-       transform="translate(529.9901,277.64704)"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
-       inkscape:export-xdpi="89.910126"
-       inkscape:export-ydpi="89.910126" />
-    <text
-       inkscape:export-ydpi="89.910126"
-       inkscape:export-xdpi="89.910126"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
-       sodipodi:linespacing="100%"
-       id="text4124"
-       y="238.17955"
-       x="582.74792"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
-       xml:space="preserve"
-       inkscape:transform-center-y="58"
-       inkscape:transform-center-x="31"><tspan
-         id="tspan4128"
-         y="238.17955"
-         x="582.74792"
-         sodipodi:role="line">spring</tspan></text>
-    <rect
-       style="opacity:1;color:#000000;fill:#bcd35f;fill-opacity:1;fill-rule:nonzero;stroke:#bcd35f;stroke-width:0.86952847;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="rect4130"
-       width="1.4396198"
-       height="89.214455"
-       x="569.65759"
-       y="222.1017"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
-       inkscape:export-xdpi="89.910126"
-       inkscape:export-ydpi="89.910126" />
-    <path
-       sodipodi:type="star"
-       style="opacity:1;color:#000000;fill:#bcd35f;fill-opacity:1;fill-rule:nonzero;stroke:#bcd35f;stroke-width:1.60000002;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="path4132"
-       sodipodi:sides="3"
-       sodipodi:cx="-38.294109"
-       sodipodi:cy="17.712046"
-       sodipodi:r1="2.1274507"
-       sodipodi:r2="1.0637254"
-       sodipodi:arg1="0"
-       sodipodi:arg2="1.0471976"
-       inkscape:flatsided="true"
-       inkscape:rounded="0"
-       inkscape:randomized="0"
-       d="M -36.166659,17.712046 L -39.357835,19.554472 L -39.357835,15.869619 L -36.166659,17.712046 z "
-       transform="translate(609.9901,223.64704)"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <text
@@ -1719,7 +1477,7 @@
        y="346.17957"
        id="text4155"
        sodipodi:linespacing="100%"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126"><tspan
          sodipodi:role="line"
@@ -1737,7 +1495,7 @@
        width="1.4396198"
        id="rect4161"
        style="opacity:1;color:#000000;fill:#ffb380;fill-opacity:1;fill-rule:nonzero;stroke:#ffb380;stroke-width:0.86952841;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <path
@@ -1756,7 +1514,7 @@
        id="path4163"
        style="opacity:1;color:#000000;fill:#ffb380;fill-opacity:1;fill-rule:nonzero;stroke:#ffb380;stroke-width:1.60000002;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        sodipodi:type="star"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-fsm-virtual-arch-0.3.png"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
        inkscape:export-xdpi="89.910126"
        inkscape:export-ydpi="89.910126" />
     <rect
@@ -1790,5 +1548,137 @@
        style="color:#000000;fill:#445500;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.35315001;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block"
        d="M 494.10027,783.95988 L 500.56902,778.67863 L 494.10027,773.42863 L 494.10027,775.77238 L 492.56902,775.77238 L 489.16277,775.77238 L 487.63152,775.77238 L 487.63152,773.42863 L 481.16277,778.67863 L 487.63152,783.95988 L 487.63152,781.64738 L 489.16277,781.64738 L 492.56902,781.64738 L 494.10027,781.64738 L 494.10027,783.95988 z "
        id="path2951" />
+    <rect
+       inkscape:export-ydpi="89.910126"
+       inkscape:export-xdpi="89.910126"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
+       rx="5.0739031"
+       style="color:#000000;fill:#aaaaff;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.1601795;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       id="rect2690"
+       width="54.404297"
+       height="20.295618"
+       x="242.04759"
+       y="255.06982"
+       ry="5.0739045" />
+    <text
+       inkscape:export-ydpi="89.910126"
+       inkscape:export-xdpi="89.910126"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
+       inkscape:transform-center-x="31"
+       inkscape:transform-center-y="58"
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       x="122.60611"
+       y="326.72012"
+       id="text2692"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         x="122.60611"
+         y="326.72012"
+         id="tspan2696">hibernate</tspan></text>
+    <rect
+       ry="5.0739045"
+       y="313.57816"
+       x="183.61945"
+       height="20.295618"
+       width="38.424995"
+       id="rect2700"
+       style="color:#000000;fill:#ac9d93;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018045;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       rx="5.0739088"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
+       inkscape:export-xdpi="89.910126"
+       inkscape:export-ydpi="89.910126" />
+    <text
+       sodipodi:linespacing="100%"
+       id="text2702"
+       y="326.72012"
+       x="189.60611"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       xml:space="preserve"
+       inkscape:transform-center-y="58"
+       inkscape:transform-center-x="31"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
+       inkscape:export-xdpi="89.910126"
+       inkscape:export-ydpi="89.910126"><tspan
+         id="tspan2704"
+         y="326.72012"
+         x="189.60611"
+         sodipodi:role="line">guice</tspan></text>
+    <text
+       inkscape:export-ydpi="89.910126"
+       inkscape:export-xdpi="89.910126"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
+       inkscape:transform-center-x="31"
+       inkscape:transform-center-y="58"
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       x="244.60611"
+       y="268.21179"
+       id="text2706"
+       sodipodi:linespacing="100%"><tspan
+         id="tspan2708"
+         sodipodi:role="line"
+         x="244.60611"
+         y="268.21179">http-bind</tspan><tspan
+         sodipodi:role="line"
+         x="244.60611"
+         y="282.21179"
+         id="tspan2710" /></text>
+    <rect
+       inkscape:export-ydpi="89.910126"
+       inkscape:export-xdpi="89.910126"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
+       ry="5.0739045"
+       y="170.43665"
+       x="242.62344"
+       height="17.813978"
+       width="50.297565"
+       id="rect2716"
+       style="color:#000000;fill:#aaaaff;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018164;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:2.32036328, 2.32036328;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       rx="5.0739217" />
+    <text
+       inkscape:export-ydpi="89.910126"
+       inkscape:export-xdpi="89.910126"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
+       sodipodi:linespacing="100%"
+       id="text2712"
+       y="182.31975"
+       x="245.5764"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       xml:space="preserve"
+       inkscape:transform-center-y="58"
+       inkscape:transform-center-x="31"><tspan
+         id="tspan2714"
+         y="182.31975"
+         x="245.5764"
+         sodipodi:role="line">gwt-jsjac</tspan></text>
+    <rect
+       rx="5.0739226"
+       style="color:#000000;fill:#aaaaff;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018164;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:2.32036335, 2.32036335;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       id="rect3687"
+       width="43.373096"
+       height="17.813978"
+       x="196.91843"
+       y="170.43665"
+       ry="5.0739045"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
+       inkscape:export-xdpi="89.910126"
+       inkscape:export-ydpi="89.910126" />
+    <text
+       inkscape:transform-center-x="31"
+       inkscape:transform-center-y="58"
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       x="199.5764"
+       y="182.31975"
+       id="text3689"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
+       inkscape:export-xdpi="89.910126"
+       inkscape:export-ydpi="89.910126"><tspan
+         sodipodi:role="line"
+         x="199.5764"
+         y="182.31975"
+         id="tspan3691">gwt-ext</tspan></text>
   </g>
 </svg>
