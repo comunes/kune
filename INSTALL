@@ -79,9 +79,13 @@ Example of .m2/settings.xml:
    </activeProfiles>
 </settings>
 
-Appendix B: Integration with Openfire xmpp server
+Appendix B: Configuration of Openfire xmpp server
 --------------------------------------------------------------------------------
-Enable "HTTP Bind Settings" in OpenFire, and check the port is not used by other service in your machine.
+- Install openfire in your system.
+  Remember: the openfire administration is in: http://localhost:9090/
+- Configure the 'Server Name' (during installation of openfire, or after editing 'Server Settings') with "localhost" initially (See kune.chat.roomHost in kune.properties if you want to use other values).
+- Configure the 'Group chat service' (in Group chat tab) with "rooms" instead of "conference".
+- Enable "HTTP Bind Settings" and check the port is not used by other service in your machine.
 
 Add this lines to conf/openfire.xml and check that the user/passwd of the db is the same here and in the persistence.xml:
 
@@ -123,7 +127,5 @@ You'll most likely want to change which usernames are authorized to login to the
 
 For more details:
 http://www.igniterealtime.org/builds/openfire/docs/latest/documentation/db-integration-guide.html
-
-Configure the MUC rooms with prefix "rooms" instead of "conference" and "localhost" for server domain initially (See kune.chat.roomHost in kune.properties if you want to use other values).
 
 
