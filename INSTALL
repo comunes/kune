@@ -3,7 +3,7 @@ INSTALL
 
 For development: 
 
-- Install java-jdk >= 1.5, maven2, mysql and for example eclipse
+- Install java-jdk (>= 1.5), maven2, mysql (>= 5.0) and for example eclipse
 - Install gwt 1.4.60 and follow Appendix A for maven+gwt configuration
 - Compile with maven:
   # (in the trunk directory)
@@ -24,7 +24,7 @@ mysql> CREATE DATABASE kune_test;
 mysql> GRANT ALL PRIVILEGES ON kune_test.* TO kune@localhost IDENTIFIED BY 'db4kune';
 mysql> FLUSH PRIVILEGES;
 
-- Configurate hibernate-search (GNU/Linux instructions):
+- Configurate hibernate-search (GNU/Linux instructions, look persistence.xml if you want to change indexes destination):
 	# yourUser is the user you are using to develop/run the application
   sudo mkdir -p /var/lib/lucene/kune_dev/indexes
   sudo mkdir -p /var/lib/lucene/kune_test/indexes
@@ -32,13 +32,14 @@ mysql> FLUSH PRIVILEGES;
   sudo chown yourUser:yourUser /var/lib/lucene/kune_test/indexes
  
 - Install a run openfire jabber server (see Appendix B for proper configuration of openfire)
+
 - Run jetty:
   mvn jetty:run
 
 - And conect to http://yourIP:8080/kune
 
 - For development with eclipse:
-mvn eclipse:eclipse
+  mvn eclipse:eclipse
 
 Appendix A: Configuration of maven
 --------------------------------------------------------------------------------
@@ -78,8 +79,6 @@ Example of .m2/settings.xml:
    </activeProfiles>
 </settings>
 
-
-
 Appendix B: Integration with Openfire xmpp server
 --------------------------------------------------------------------------------
 Enable "HTTP Bind Settings" in OpenFire, and check the port is not used by other service in your machine.
@@ -117,11 +116,14 @@ You'll most likely want to change which usernames are authorized to login to the
 <jive>
 ...
 <admin>
-    <authorizedUsernames>site, admin</authorizedUsernames>
+    <authorizedUsernames>admin</authorizedUsernames>
 </admins>
 ...
 </jive>
 
 For more details:
 http://www.igniterealtime.org/builds/openfire/docs/latest/documentation/db-integration-guide.html
+
+Configure the MUC rooms with prefix "rooms" instead of "conference" and "localhost" for server domain initially (See kune.chat.roomHost in kune.properties if you want to use other values).
+
 
