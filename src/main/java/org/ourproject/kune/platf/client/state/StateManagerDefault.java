@@ -26,7 +26,7 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
@@ -45,137 +45,140 @@ public class StateManagerDefault implements StateManager {
     private String lastTheme;
 
     public StateManagerDefault(final ContentProvider provider, final Application app, final Session session) {
-	this.provider = provider;
-	this.app = app;
-	this.session = session;
-	this.oldState = "";
-	this.workspace = app.getWorkspace();
+        this.provider = provider;
+        this.app = app;
+        this.session = session;
+        this.oldState = "";
+        this.workspace = app.getWorkspace();
     }
 
     public void reload() {
-	onHistoryChanged(History.getToken());
+        onHistoryChanged(History.getToken());
     }
 
     public void onHistoryChanged(final String historyToken) {
-	GWT.log("State: " + historyToken, null);
-	if (isNotIgnore(historyToken)) {
-	    onHistoryChanged(new StateToken(historyToken));
-	} else {
-	    onHistoryChanged(oldState);
-	}
+        GWT.log("State: " + historyToken, null);
+        if (isNotIgnore(historyToken)) {
+            onHistoryChanged(new StateToken(historyToken));
+        } else {
+            onHistoryChanged(oldState);
+        }
     }
 
     private boolean isNotIgnore(final String historyToken) {
-	return !historyToken.equals("fixme");
+        return !historyToken.equals("fixme");
     }
 
     private void onHistoryChanged(final StateToken newState) {
-	Site.showProgress(Kune.getInstance().t.Loading());
-	provider.getContent(session.user, newState, new AsyncCallback() {
-	    public void onFailure(final Throwable caught) {
-		oldState = newState.getEncoded();
-		processErrorException(caught);
-	    }
+        Site.showProgressProcessing();
+        provider.getContent(session.user, newState, new AsyncCallback() {
+            public void onFailure(final Throwable caught) {
+                oldState = newState.getEncoded();
+                processErrorException(caught);
+            }
 
-	    public void onSuccess(final Object result) {
-		GWT.log("State response: " + result, null);
-		loadContent((StateDTO) result);
-		oldState = newState.getEncoded();
-	    }
-	});
+            public void onSuccess(final Object result) {
+                GWT.log("State response: " + result, null);
+                loadContent((StateDTO) result);
+                oldState = newState.getEncoded();
+            }
+        });
     }
 
     public void setState(final StateDTO content) {
-	final StateToken state = content.getState();
-	provider.cache(state, content);
-	setState(state);
+        final StateToken state = content.getState();
+        provider.cache(state, content);
+        setState(state);
     }
 
     public void setState(final StateToken state) {
-	History.newItem(state.getEncoded());
+        History.newItem(state.getEncoded());
     }
 
     private void loadContent(final StateDTO state) {
-	GWT.log("title: " + state.getTitle(), null);
-	StateToken oldStateToken = new StateToken(oldState);
-	session.setCurrent(state);
-	final GroupDTO group = state.getGroup();
-	app.setGroupState(group.getShortName());
-	if (state.getGroupRights().isAdministrable) {
-	    workspace.getThemeMenuComponent().setVisible(true);
-	} else {
-	    workspace.getThemeMenuComponent().setVisible(false);
-	}
-	setWsTheme(group);
-	workspace.showGroup(group);
-	final String toolName = state.getToolName();
-	workspace.setTool(toolName);
+        GWT.log("title: " + state.getTitle(), null);
+        StateToken oldStateToken = new StateToken(oldState);
+        session.setCurrent(state);
+        final GroupDTO group = state.getGroup();
+        app.setGroupState(group.getShortName());
+        if (state.getGroupRights().isAdministrable) {
+            workspace.getThemeMenuComponent().setVisible(true);
+        } else {
+            workspace.getThemeMenuComponent().setVisible(false);
+        }
+        setWsTheme(group);
+        workspace.showGroup(group);
+        final String toolName = state.getToolName();
+        workspace.setTool(toolName);
 
-	final ClientTool clientTool = app.getTool(toolName);
-	clientTool.setContent(state);
-	workspace.getContentTitleComponent().setContentTitle(state.getTitle(), "11/06/07");
-	workspace.getContentSubTitleComponent().setContentSubTitle("by Luther Blissett, Luther Blissett Jr", "English");
-	// , Double rate, Integer rateByUsers en Content...
-	workspace.setContent(clientTool.getContent());
-	workspace.setContext(clientTool.getContext());
-	workspace.getLicenseComponent().setLicense(state.getGroup().getLongName(), state.getLicense());
-	// TODO: put GroupRights inside ParticipationDataDTO
-	if (oldStateToken.hasGroup() && oldStateToken.getGroup().equals(state.getGroup().getShortName())) {
-	    // Same group, do nothing
-	} else {
-	    loadSocialNetwork();
-	}
-	// only for UI tests:
-	workspace.getBuddiesPresenceComponent().setBuddiesPresence();
-	Site.hideProgress();
+        final ClientTool clientTool = app.getTool(toolName);
+        clientTool.setContent(state);
+        workspace.getContentTitleComponent().setContentTitle(state.getTitle(), "11/06/07");
+        workspace.getContentSubTitleComponent().setContentSubTitle("by Luther Blissett, Luther Blissett Jr", "English");
+        // , Double rate, Integer rateByUsers en Content...
+        workspace.setContent(clientTool.getContent());
+        workspace.setContext(clientTool.getContext());
+        workspace.getLicenseComponent().setLicense(state.getGroup().getLongName(), state.getLicense());
+        // TODO: put GroupRights inside ParticipationDataDTO
+        if (oldStateToken.hasGroup() && oldStateToken.getGroup().equals(state.getGroup().getShortName())) {
+            // Same group, do nothing
+        } else {
+            loadSocialNetwork();
+        }
+        // only for UI tests:
+        workspace.getBuddiesPresenceComponent().setBuddiesPresence();
+        Site.hideProgress();
     }
 
     private void setWsTheme(final GroupDTO group) {
-	String nextTheme = group.getWorkspaceTheme();
-	if (lastTheme == null || lastTheme != nextTheme) {
-	    workspace.setTheme(nextTheme);
-	}
-	lastTheme = nextTheme;
+        String nextTheme = group.getWorkspaceTheme();
+        if (lastTheme == null || lastTheme != nextTheme) {
+            workspace.setTheme(nextTheme);
+        }
+        lastTheme = nextTheme;
     }
 
     public String getUser() {
-	return session.user;
+        return session.user;
     }
 
     public void reloadSocialNetwork() {
-	Site.sitebar.reloadUserInfo(session.user);
-	loadSocialNetwork();
+        Site.sitebar.reloadUserInfo(session.user);
+        loadSocialNetwork();
     }
 
     // TODO: Extract this to a utility class
     public void processErrorException(final Throwable caught) {
-	Site.hideProgress();
-	try {
-	    throw caught;
-	} catch (final AccessViolationException e) {
-	    // i18n
-	    Site.error("You don't have rights to do that");
-	} catch (final GroupNotFoundException e) {
-	    Site.error("Group not found");
-	} catch (final ContentNotFoundException e) {
-	    Site.error("Content not found");
-	} catch (final Throwable e) {
-	    Site.error("Error performing operation");
-	    GWT.log("Other kind of exception in StateManagerDefault/processErrorException", null);
-	    throw new RuntimeException();
-	}
+        Site.hideProgress();
+        try {
+            throw caught;
+        } catch (final AccessViolationException e) {
+            // i18n
+            Site.error("You don't have rights to do that");
+        } catch (final UserMustBeLoggedException e) {
+            // i18n
+            Site.error("Please sign in or register");
+        } catch (final GroupNotFoundException e) {
+            Site.error("Group not found");
+        } catch (final ContentNotFoundException e) {
+            Site.error("Content not found");
+        } catch (final Throwable e) {
+            Site.error("Error performing operation");
+            GWT.log("Other kind of exception in StateManagerDefault/processErrorException", null);
+            throw new RuntimeException();
+        }
     }
 
     private void loadSocialNetwork() {
-	// FIXME: bug: session.getCurrentState null in init, logged: onLoggedIn
-	// --> reloadSN --> loadSN --> bug
-	StateDTO state;
-	if (session != null && (state = session.getCurrentState()) != null) {
-	    workspace.getGroupMembersComponent()
-		    .getGroupMembers(session.user, state.getGroup(), state.getGroupRights());
-	    workspace.getParticipationComponent().getParticipation(session.user, state.getGroup(),
-		    state.getGroupRights());
-	}
+        // FIXME: bug: session.getCurrentState null in init, logged: onLoggedIn
+        // --> reloadSN --> loadSN --> bug
+        StateDTO state;
+        if (session != null && (state = session.getCurrentState()) != null) {
+            workspace.getGroupMembersComponent()
+                    .getGroupMembers(session.user, state.getGroup(), state.getGroupRights());
+            workspace.getParticipationComponent().getParticipation(session.user, state.getGroup(),
+                    state.getGroupRights());
+        }
     }
 
 }

@@ -155,7 +155,7 @@ public class User implements HasId {
 	this.shortName = shortName;
     }
 
-    public static boolean isKownUser(final User user) {
+    public static boolean isKnownUser(final User user) {
 	return user != UNKNOWN_USER;
     }
 

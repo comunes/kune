@@ -31,6 +31,10 @@ import org.ourproject.kune.platf.client.newgroup.NewGroupForm;
 import org.ourproject.kune.platf.client.newgroup.NewGroupFormPresenter;
 import org.ourproject.kune.platf.client.newgroup.NewGroupListener;
 import org.ourproject.kune.platf.client.newgroup.ui.NewGroupFormPanel;
+import org.ourproject.kune.platf.client.search.SearchSite;
+import org.ourproject.kune.platf.client.search.SearchSitePresenter;
+import org.ourproject.kune.platf.client.search.SearchSiteView;
+import org.ourproject.kune.platf.client.search.ui.SearchSitePanel;
 import org.ourproject.kune.sitebar.client.bar.SiteBar;
 import org.ourproject.kune.sitebar.client.bar.SiteBarListener;
 import org.ourproject.kune.sitebar.client.bar.SiteBarPanel;
@@ -46,6 +50,9 @@ import org.ourproject.kune.sitebar.client.msg.SiteMessageView;
 
 public class SiteBarFactory {
     private static SiteMessage siteMessage;
+    private static LoginForm login;
+    private static NewGroupForm newGroup;
+    private static SearchSite search;
 
     public static SiteBar createSiteBar(final SiteBarListener listener) {
 	SiteBarPresenter siteBarPresenter = new SiteBarPresenter(listener);
@@ -66,18 +73,34 @@ public class SiteBarFactory {
 	return siteMessage;
     }
 
-    public static LoginForm createLogin(final LoginListener listener) {
-	LoginFormPresenter presenter = new LoginFormPresenter(listener);
-	LoginFormPanel view = new LoginFormPanel(presenter);
-	presenter.init(view);
-	return presenter;
+    public static LoginForm getLoginForm(final LoginListener listener) {
+	if (login == null) {
+	    LoginFormPresenter presenter = new LoginFormPresenter(listener);
+	    LoginFormPanel view = new LoginFormPanel(presenter);
+	    presenter.init(view);
+	    login = presenter;
+	}
+	return login;
     }
 
-    public static NewGroupForm createNewGroup(final NewGroupListener listener) {
-	NewGroupFormPresenter presenter = new NewGroupFormPresenter(listener);
-	NewGroupFormPanel view = new NewGroupFormPanel(presenter);
-	presenter.init(view);
-	return presenter;
+    public static NewGroupForm getNewGroupForm(final NewGroupListener listener) {
+	if (newGroup == null) {
+	    NewGroupFormPresenter presenter = new NewGroupFormPresenter(listener);
+	    NewGroupFormPanel view = new NewGroupFormPanel(presenter);
+	    presenter.init(view);
+	    newGroup = presenter;
+	}
+	return newGroup;
+    }
+
+    public static SearchSite getSearch() {
+	if (search == null) {
+	    SearchSitePresenter presenter = new SearchSitePresenter();
+	    SearchSiteView view = new SearchSitePanel(presenter);
+	    presenter.init(view);
+	    search = presenter;
+	}
+	return search;
     }
 
     public static LicenseChooseForm createLicenseChoose() {

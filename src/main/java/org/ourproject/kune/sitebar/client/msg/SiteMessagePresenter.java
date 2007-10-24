@@ -77,7 +77,7 @@ public class SiteMessagePresenter implements SiteMessage, MessagePresenter {
      * 
      * @see org.ourproject.kune.sitebar.client.msg.MessagePresenter#onClose()
      */
-    public void onClose() {
+    public void onMessageClose() {
 	resetMessage();
     }
 

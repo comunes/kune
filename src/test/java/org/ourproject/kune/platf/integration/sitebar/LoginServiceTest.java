@@ -23,35 +23,21 @@ public class LoginServiceTest {
 
     @Before
     public void init() {
-	new IntegrationTestHelper(this);
-    }
-
-    @Test
-    public void testDefSiteNameLogin() throws SerializableException {
-	assertNull(session.getUser().getId());
-	loginService.login(properties.getDefaultSiteShortName(), properties.getDefaultSiteAdminPassword());
-	assertNotNull(session.getUser().getId());
-    }
-
-    @Test
-    public void testDefSiteEmailLogin() throws SerializableException {
-	assertNull(session.getUser().getId());
-	loginService.login(properties.getDefaultSiteAdminEmail(), properties.getDefaultSiteAdminPassword());
-	assertNotNull(session.getUser().getId());
+        new IntegrationTestHelper(this);
     }
 
     @Test
     public void testSiteNameLogin() throws SerializableException {
-	assertNull(session.getUser().getId());
-	loginService.login(properties.getAdminShortName(), properties.getAdminPassword());
-	assertNotNull(session.getUser().getId());
+        assertNull(session.getUser().getId());
+        loginService.login(properties.getAdminShortName(), properties.getAdminPassword());
+        assertNotNull(session.getUser().getId());
     }
 
     @Test
     public void testSiteEmailLogin() throws SerializableException {
-	assertNull(session.getUser().getId());
-	loginService.login(properties.getAdminEmail(), properties.getAdminPassword());
-	assertNotNull(session.getUser().getId());
+        assertNull(session.getUser().getId());
+        loginService.login(properties.getAdminEmail(), properties.getAdminPassword());
+        assertNotNull(session.getUser().getId());
 
     }
 

@@ -39,91 +39,91 @@ public class AccessServiceDefault implements AccessService {
 
     @Inject
     public AccessServiceDefault(final FinderService finder) {
-	this(finder, new AccessRightsServiceDefault());
+        this(finder, new AccessRightsServiceDefault());
     }
 
     public AccessServiceDefault(final FinderService finder, final AccessRightsService accessRightsService) {
-	this.finder = finder;
-	this.accessRightsService = accessRightsService;
+        this.finder = finder;
+        this.accessRightsService = accessRightsService;
     }
 
     public Access getAccess(final User user, final StateToken token, final Group defaultGroup,
-	    final AccessType accessType) throws ContentNotFoundException, AccessViolationException,
-	    GroupNotFoundException {
-	return getAccess(token, defaultGroup, user.getUserGroup(), accessType);
+            final AccessType accessType) throws ContentNotFoundException, AccessViolationException,
+            GroupNotFoundException {
+        return getAccess(token, defaultGroup, user.getUserGroup(), accessType);
     }
 
     public Access getAccess(final StateToken token, final Group defaultGroup, final Group loggedGroup,
-	    final AccessType accessType) throws ContentNotFoundException, AccessViolationException,
-	    GroupNotFoundException {
-	Content descriptor = finder.getContent(defaultGroup, token);
-	Access access = new Access(descriptor, descriptor.getFolder());
-	addContentRights(access, loggedGroup);
-	addFolderRights(access, loggedGroup);
-	addGroupRights(access, loggedGroup);
-	if (!isValid(accessType, access.getContentRights()) || !isValid(accessType, access.getFolderRights())) {
-	    throw new AccessViolationException();
-	}
-	return access;
+            final AccessType accessType) throws ContentNotFoundException, AccessViolationException,
+            GroupNotFoundException {
+        Content descriptor = finder.getContent(defaultGroup, token);
+        Access access = new Access(descriptor, descriptor.getFolder());
+        addContentRights(access, loggedGroup);
+        addFolderRights(access, loggedGroup);
+        addGroupRights(access, loggedGroup);
+        if (!isValid(accessType, access.getContentRights()) || !isValid(accessType, access.getFolderRights())) {
+            throw new AccessViolationException();
+        }
+        return access;
     }
 
     public Content accessToContent(final Long contentId, final User user, final AccessType accessType)
-	    throws AccessViolationException, ContentNotFoundException {
-	Content descriptor = finder.getContent(contentId);
-	Access access = new Access(descriptor, null);
-	addContentRights(access, user.getUserGroup());
-	return check(access, access.getContentRights(), accessType).getContent();
+            throws AccessViolationException, ContentNotFoundException {
+        Content descriptor = finder.getContent(contentId);
+        Access access = new Access(descriptor, null);
+        addContentRights(access, user.getUserGroup());
+        return check(access, access.getContentRights(), accessType).getContent();
     }
 
     public Access getFolderAccess(final Long folderId, final User user, final AccessType accessType)
-	    throws AccessViolationException, ContentNotFoundException {
-	return getFolderAccess(folderId, user.getUserGroup(), accessType);
+            throws AccessViolationException, ContentNotFoundException {
+        return getFolderAccess(folderId, user.getUserGroup(), accessType);
     }
 
     public Access getFolderAccess(final Long folderId, final Group group, final AccessType accessType)
-	    throws AccessViolationException, ContentNotFoundException {
-	Access access = new Access(null, finder.getFolder(folderId));
-	addFolderRights(access, group);
-	return check(access, access.getFolderRights(), accessType);
+            throws AccessViolationException, ContentNotFoundException {
+        Access access = new Access(null, finder.getFolder(folderId));
+        addFolderRights(access, group);
+        return check(access, access.getFolderRights(), accessType);
     }
 
     private Access check(final Access access, final AccessRights rights, final AccessType accessType)
-	    throws AccessViolationException {
-	if (!isValid(accessType, rights)) {
-	    throw new AccessViolationException();
-	}
-	return access;
+            throws AccessViolationException {
+        if (!isValid(accessType, rights)) {
+            throw new AccessViolationException();
+        }
+        return access;
     }
 
     private boolean isValid(final AccessType accessType, final AccessRights rights) {
-	switch (accessType) {
-	case READ:
-	    return rights.isVisible();
-	case EDIT:
-	    return rights.isEditable();
-	case ADMIN:
-	    return rights.isAdministrable();
-	default:
-	    return false;
-	}
+        switch (accessType) {
+        case READ:
+            return rights.isVisible();
+        case EDIT:
+            return rights.isEditable();
+        case ADMIN:
+            return rights.isAdministrable();
+        default:
+            return false;
+        }
     }
 
     private void addGroupRights(final Access access, final Group group) {
-	if (!access.hasGroupRights()) {
-	    access.setGroupRights(accessRightsService.get(group, access.getGroupAccessLists()));
-	}
+        if (!access.hasGroupRights()) {
+            access.setGroupRights(accessRightsService.get(group, access.getGroupAccessLists()));
+        }
     }
 
     private void addFolderRights(final Access access, final Group group) {
-	if (!access.hasFolderRights()) {
-	    access.setFolderRights(accessRightsService.get(group, access.getFolderAccessLists()));
-	}
+        if (!access.hasFolderRights()) {
+            access.setFolderRights(accessRightsService.get(group, access.getFolderAccessLists()));
+        }
     }
 
     private void addContentRights(final Access access, final Group group) {
-	if (!access.hasContentRights()) {
-	    access.setContentRights(accessRightsService.get(group, access.getContentAccessLists()));
-	}
+        if (!access.hasContentRights()) {
+            access.setContentRights(accessRightsService.get(group, access.getContentAccessLists()));
+        }
     }
 
 }

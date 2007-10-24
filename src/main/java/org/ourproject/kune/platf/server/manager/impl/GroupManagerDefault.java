@@ -30,6 +30,7 @@ import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.Query;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
+import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Group;
@@ -60,106 +61,109 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
     @Inject
     public GroupManagerDefault(final Provider<EntityManager> provider, final Group finder,
-	    final KuneProperties kuneProperties, final DatabaseProperties properties, final ToolRegistry registry,
-	    final License licenseFinder) {
-	super(provider, Group.class);
-	this.finder = finder;
-	this.kuneProperties = kuneProperties;
-	this.properties = properties;
-	this.registry = registry;
-	this.licenseFinder = licenseFinder;
+            final KuneProperties kuneProperties, final DatabaseProperties properties, final ToolRegistry registry,
+            final License licenseFinder) {
+        super(provider, Group.class);
+        this.finder = finder;
+        this.kuneProperties = kuneProperties;
+        this.properties = properties;
+        this.registry = registry;
+        this.licenseFinder = licenseFinder;
     }
 
     public Group getDefaultGroup() {
-	final String shortName = properties.getDefaultSiteShortName();
-	return findByShortName(shortName);
+        final String shortName = properties.getDefaultSiteShortName();
+        return findByShortName(shortName);
     }
 
     public Group findByShortName(final String shortName) {
-	return finder.findByShortName(shortName);
+        return finder.findByShortName(shortName);
     }
 
     public List<Group> findAdminInGroups(final Long groupId) {
-	return finder.findAdminInGroups(groupId);
+        return finder.findAdminInGroups(groupId);
     }
 
     public List<Group> findCollabInGroups(final Long groupId) {
-	return finder.findCollabInGroups(groupId);
+        return finder.findCollabInGroups(groupId);
     }
 
     public Group createUserGroup(final User user) {
-	String defaultSiteWorkspaceTheme = kuneProperties.get(KuneProperties.WS_THEMES_DEF);
-	final String licenseDefId = properties.getDefaultLicense();
-	final License licenseDef = licenseFinder.findByShortName(licenseDefId);
-	final Group group = new Group(user.getShortName(), user.getName(), licenseDef, GroupType.PERSONAL);
-	group.setAdmissionType(AdmissionType.Closed);
-	group.setWorkspaceTheme(defaultSiteWorkspaceTheme);
-	user.setUserGroup(group);
-	initSocialNetwork(group, group);
-	initGroup(user, group);
-	super.persist(user, User.class);
-	return group;
+        String defaultSiteWorkspaceTheme = kuneProperties.get(KuneProperties.WS_THEMES_DEF);
+        final String licenseDefId = properties.getDefaultLicense();
+        final License licenseDef = licenseFinder.findByShortName(licenseDefId);
+        final Group group = new Group(user.getShortName(), user.getName(), licenseDef, GroupType.PERSONAL);
+        group.setAdmissionType(AdmissionType.Closed);
+        group.setWorkspaceTheme(defaultSiteWorkspaceTheme);
+        user.setUserGroup(group);
+        initSocialNetwork(group, group);
+        initGroup(user, group);
+        super.persist(user, User.class);
+        return group;
     }
 
-    public Group createGroup(final Group group, final User user) throws SerializableException {
-	String defaultSiteWorkspaceTheme = kuneProperties.get(KuneProperties.WS_THEMES_DEF);
-	if (User.isKownUser(user)) {
-	    try {
-		// FIXME: A better way to do this license part?
-		String licName = group.getDefaultLicense().getShortName();
-		License license = licenseFinder.findByShortName(licName);
-		group.setDefaultLicense(license);
-		group.setWorkspaceTheme(defaultSiteWorkspaceTheme);
-		initSocialNetwork(group, user.getUserGroup());
-		initGroup(user, group);
-		return group;
-	    } catch (final EntityExistsException e) {
-		// i18n
-		throw new SerializableException("Already exist a group with this name");
-	    }
-	} else {
-	    // i18n
-	    throw new SerializableException("Must be logged");
-	}
+    public Group createGroup(final Group group, final User user) throws SerializableException,
+            UserMustBeLoggedException {
+        String defaultSiteWorkspaceTheme = kuneProperties.get(KuneProperties.WS_THEMES_DEF);
+        if (User.isKnownUser(user)) {
+            try {
+                // FIXME: A better way to do this license part?
+                String licName = group.getDefaultLicense().getShortName();
+                License license = licenseFinder.findByShortName(licName);
+                group.setDefaultLicense(license);
+                group.setWorkspaceTheme(defaultSiteWorkspaceTheme);
+                initSocialNetwork(group, user.getUserGroup());
+                initGroup(user, group);
+                return group;
+            } catch (final EntityExistsException e) {
+                // i18n
+                throw new SerializableException("Already exist a group with this name");
+            }
+        } else {
+            // i18n
+            throw new UserMustBeLoggedException();
+        }
 
     }
 
     public void changeWsTheme(final User user, final Group group, final String theme) throws AccessViolationException {
-	if (group.getSocialNetwork().isAdmin(user.getUserGroup())) {
-	    group.setWorkspaceTheme(theme);
-	    // Check themes...
-	} else {
-	    throw new AccessViolationException();
-	}
+        if (group.getSocialNetwork().isAdmin(user.getUserGroup())) {
+            group.setWorkspaceTheme(theme);
+            // Check themes...
+        } else {
+            throw new AccessViolationException();
+        }
     }
 
     public Group getGroupOfUserWithId(final Long userId) {
-	return userId != null ? find(User.class, userId).getUserGroup() : null;
+        return userId != null ? find(User.class, userId).getUserGroup() : null;
     }
 
     public List<Group> search(final String search) throws ParseException {
-	MultiFieldQueryParser parser = new MultiFieldQueryParser(
-		new String[] { "longName", "shortName", "publicDesc" }, new StandardAnalyzer());
-	Query query = parser.parse(search);
-	return super.search(query);
+        return this.search(search, null, null);
+    }
+
+    public List<Group> search(final String search, final Integer firstResult, final Integer maxResults)
+            throws ParseException {
+        MultiFieldQueryParser parser = new MultiFieldQueryParser(
+                new String[] { "longName", "shortName", "publicDesc" }, new StandardAnalyzer());
+        Query query = parser.parse(search);
+        return super.search(query, firstResult, maxResults);
     }
 
     private void initSocialNetwork(final Group group, final Group userGroup) {
-	final SocialNetwork network = group.getSocialNetwork();
-	final AccessLists lists = network.getAccessLists();
-	lists.getEditors().setMode(GroupListMode.NOBODY);
-	lists.getViewers().setMode(GroupListMode.EVERYONE);
-	if (group.getAdmissionType() == null) {
-	    group.setAdmissionType(AdmissionType.Moderated);
-	}
-	network.addAdmin(userGroup);
+        final SocialNetwork network = group.getSocialNetwork();
+        final AccessLists lists = network.getAccessLists();
+        lists.getEditors().setMode(GroupListMode.NOBODY);
+        lists.getViewers().setMode(GroupListMode.EVERYONE);
+        network.addAdmin(userGroup);
     }
 
     private void initGroup(final User user, final Group group) {
-	for (final ServerTool tool : registry.all()) {
-	    tool.initGroup(user, group);
-	}
-	persist(group);
+        for (final ServerTool tool : registry.all()) {
+            tool.initGroup(user, group);
+        }
+        persist(group);
     }
 
 }

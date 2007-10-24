@@ -76,7 +76,7 @@ public class SiteMessagePanel extends HorizontalPanel implements SiteMessageView
 		public void onClick(final Widget sender) {
 		    if (sender == closeIcon) {
 			setVisible(false);
-			presenter.onClose();
+			presenter.onMessageClose();
 		    }
 		}
 	    });

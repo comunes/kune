@@ -60,112 +60,115 @@ public class ContentRPC implements ContentService, RPC {
 
     @Inject
     public ContentRPC(final UserSession session, final AccessService contentAccess, final StateService stateService,
-	    final CreationService creationService, final GroupManager groupManager, final XmppManager xmppManager,
-	    final Mapper mapper) {
-	this.session = session;
-	this.accessManager = contentAccess;
-	this.stateService = stateService;
-	this.creationService = creationService;
-	this.groupManager = groupManager;
-	this.xmppManager = xmppManager;
-	this.mapper = mapper;
+            final CreationService creationService, final GroupManager groupManager, final XmppManager xmppManager,
+            final Mapper mapper) {
+        this.session = session;
+        this.accessManager = contentAccess;
+        this.stateService = stateService;
+        this.creationService = creationService;
+        this.groupManager = groupManager;
+        this.xmppManager = xmppManager;
+        this.mapper = mapper;
     }
 
     @Transactional(type = TransactionType.READ_ONLY)
     public StateDTO getContent(final String userHash, final StateToken token) throws ContentNotFoundException,
-	    AccessViolationException, GroupNotFoundException {
-	Group contentGroup;
-	Group loggedGroup;
+            AccessViolationException, GroupNotFoundException {
+        Group contentGroup;
+        // Group loggedGroup;
 
-	if (session.isUserLoggedIn()) {
-	    contentGroup = groupManager.getGroupOfUserWithId(session.getUser().getId());
-	    loggedGroup = contentGroup;
-	} else {
-	    contentGroup = groupManager.getDefaultGroup();
-	    loggedGroup = Group.NO_GROUP;
-	}
-
-	final Access access = accessManager.getAccess(token, contentGroup, loggedGroup, AccessType.READ);
-	final State state = stateService.create(access);
-	return mapper.map(state, StateDTO.class);
+        User user = session.getUser();
+        if (session.isUserLoggedIn()) {
+            contentGroup = groupManager.getGroupOfUserWithId(user.getId());
+            // loggedGroup = contentGroup;
+        } else {
+            contentGroup = groupManager.getDefaultGroup();
+            // loggedGroup = Group.NO_GROUP;
+        }
+        final Access access = accessManager.getAccess(user, token, contentGroup, AccessType.READ);
+        // final Access access = accessManager.getAccess(token, contentGroup,
+        // loggedGroup, AccessType.READ);
+        final State state = stateService.create(access);
+        return mapper.map(state, StateDTO.class);
     }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
     public int save(final String userHash, final String documentId, final String textContent)
-	    throws AccessViolationException, ContentNotFoundException {
+            throws AccessViolationException, ContentNotFoundException {
 
-	final Long contentId = parseId(documentId);
-	final User user = session.getUser();
-	final Content content = accessManager.accessToContent(contentId, user, AccessType.EDIT);
-	final Content descriptor = creationService.saveContent(user, content, textContent);
-	return descriptor.getVersion();
+        final Long contentId = parseId(documentId);
+        final User user = session.getUser();
+        final Content content = accessManager.accessToContent(contentId, user, AccessType.EDIT);
+        final Content descriptor = creationService.saveContent(user, content, textContent);
+        return descriptor.getVersion();
     }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
     public StateDTO addContent(final String userHash, final Long parentFolderId, final String title)
-	    throws AccessViolationException, ContentNotFoundException {
+            throws AccessViolationException, ContentNotFoundException {
 
-	final User user = session.getUser();
-	final Group group = groupManager.getGroupOfUserWithId(session.getUser().getId());
-	final Access access = accessManager.getFolderAccess(parentFolderId, group, AccessType.EDIT);
-	access.setContentWidthFolderRights(creationService.createContent(title, user, access.getFolder()));
-	final State state = stateService.create(access);
-	return mapper.map(state, StateDTO.class);
+        final User user = session.getUser();
+        final Group group = groupManager.getGroupOfUserWithId(session.getUser().getId());
+        final Access access = accessManager.getFolderAccess(parentFolderId, group, AccessType.EDIT);
+        access.setContentWidthFolderRights(creationService.createContent(title, user, access.getFolder()));
+        final State state = stateService.create(access);
+        return mapper.map(state, StateDTO.class);
     }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
     public StateDTO addFolder(final String userHash, final String groupShortName, final Long parentFolderId,
-	    final String title) throws ContentNotFoundException, AccessViolationException, GroupNotFoundException {
-	return createFolder(groupShortName, parentFolderId, title);
+            final String title) throws ContentNotFoundException, AccessViolationException, GroupNotFoundException {
+        return createFolder(groupShortName, parentFolderId, title);
     }
 
     private StateDTO createFolder(final String groupShortName, final Long parentFolderId, final String title)
-	    throws AccessViolationException, ContentNotFoundException, GroupNotFoundException {
-	final Group group = groupManager.findByShortName(groupShortName);
+            throws AccessViolationException, ContentNotFoundException, GroupNotFoundException {
+        final User user = session.getUser();
+        final Group group = groupManager.findByShortName(groupShortName);
 
-	Access access = accessManager.getFolderAccess(parentFolderId, group, AccessType.EDIT);
-	final Container container = creationService.createFolder(group, parentFolderId, title);
-	final String toolName = container.getToolName();
-	// Trying not to enter in new folder:
-	// final StateToken token = new StateToken(group.getShortName(),
-	// toolName, container.getId().toString(), null);
-	final StateToken token = new StateToken(group.getShortName(), toolName, parentFolderId.toString(), null);
-	access = accessManager.getAccess(token, group, group, AccessType.READ);
-	final State state = stateService.create(access);
-	return mapper.map(state, StateDTO.class);
+        Access access = accessManager.getFolderAccess(parentFolderId, user, AccessType.EDIT);
+        final Container container = creationService.createFolder(group, parentFolderId, title);
+        final String toolName = container.getToolName();
+        // Trying not to enter in new folder:
+        // final StateToken token = new StateToken(group.getShortName(),
+        // toolName, container.getId().toString(), null);
+        final StateToken token = new StateToken(group.getShortName(), toolName, parentFolderId.toString(), null);
+        access = accessManager.getAccess(user, token, group, AccessType.READ);
+        final State state = stateService.create(access);
+        return mapper.map(state, StateDTO.class);
     }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
     public StateDTO addRoom(final String userHash, final String groupShortName, final Long parentFolderId,
-	    final String roomName) throws ContentNotFoundException, AccessViolationException, GroupNotFoundException {
-	final String userShortName = session.getUser().getShortName();
-	final ChatConnection connection = xmppManager.login(userShortName, session.getUser().getPassword(), userHash);
-	xmppManager.createRoom(connection, roomName, userShortName + userHash);
-	xmppManager.disconnect(connection);
-	try {
-	    return createFolder(groupShortName, parentFolderId, roomName);
-	} catch (ContentNotFoundException e) {
-	    xmppManager.destroyRoom(connection, roomName);
-	    throw new ContentNotFoundException();
-	} catch (AccessViolationException e) {
-	    xmppManager.destroyRoom(connection, roomName);
-	    throw new AccessViolationException();
-	} catch (GroupNotFoundException e) {
-	    xmppManager.destroyRoom(connection, roomName);
-	    throw new GroupNotFoundException();
-	}
+            final String roomName) throws ContentNotFoundException, AccessViolationException, GroupNotFoundException {
+        final String userShortName = session.getUser().getShortName();
+        final ChatConnection connection = xmppManager.login(userShortName, session.getUser().getPassword(), userHash);
+        xmppManager.createRoom(connection, roomName, userShortName + userHash);
+        xmppManager.disconnect(connection);
+        try {
+            return createFolder(groupShortName, parentFolderId, roomName);
+        } catch (ContentNotFoundException e) {
+            xmppManager.destroyRoom(connection, roomName);
+            throw new ContentNotFoundException();
+        } catch (AccessViolationException e) {
+            xmppManager.destroyRoom(connection, roomName);
+            throw new AccessViolationException();
+        } catch (GroupNotFoundException e) {
+            xmppManager.destroyRoom(connection, roomName);
+            throw new GroupNotFoundException();
+        }
     }
 
     private Long parseId(final String documentId) throws ContentNotFoundException {
-	try {
-	    return new Long(documentId);
-	} catch (final NumberFormatException e) {
-	    throw new ContentNotFoundException();
-	}
+        try {
+            return new Long(documentId);
+        } catch (final NumberFormatException e) {
+            throw new ContentNotFoundException();
+        }
     }
 
 }

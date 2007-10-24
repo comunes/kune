@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
+import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.integration.IntegrationTest;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
@@ -23,14 +24,20 @@ public class SocialNetworkServiceTest extends IntegrationTest {
 
     @Before
     public void init() {
-	new IntegrationTestHelper(this);
-	groupShortName = getDefGroupName();
+        new IntegrationTestHelper(this);
+        groupShortName = getDefSiteGroupName();
     }
 
     @Test
     public void testRequestJoinPersonalGroup() throws SerializableException {
-	doLogin();
-	final String result = socialNetworkService.requestJoinGroup(session.getHash(), groupShortName);
-	assertEquals(SocialNetworkDTO.REQ_JOIN_DENIED, result);
+        doLogin();
+        final String result = socialNetworkService.requestJoinGroup(session.getHash(), groupShortName);
+        assertEquals(SocialNetworkDTO.REQ_JOIN_WAITING_MODERATION, result);
+    }
+
+    @Test(expected = UserMustBeLoggedException.class)
+    public void testRequestJoinNoLogged() throws SerializableException {
+        final String result = socialNetworkService.requestJoinGroup(session.getHash(), groupShortName);
+        assertEquals(SocialNetworkDTO.REQ_JOIN_WAITING_MODERATION, result);
     }
 }

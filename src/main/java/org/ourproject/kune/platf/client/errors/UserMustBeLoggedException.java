@@ -18,24 +18,12 @@
  *
  */
 
-package org.ourproject.kune.platf.server.manager;
+package org.ourproject.kune.platf.client.errors;
 
-import java.util.List;
+import com.google.gwt.user.client.rpc.SerializableException;
 
-import org.ourproject.kune.platf.server.domain.License;
+public class UserMustBeLoggedException extends SerializableException {
 
-public interface LicenseManager {
-
-    List<License> getAll();
-
-    License persist(final License license);
-
-    void setLicenseFinder(final License licenseFinder);
-
-    List<License> getCC();
-
-    List<License> getNotCC();
-
-    License findByShortName(String licenseDef);
+    private static final long serialVersionUID = 1L;
 
 }

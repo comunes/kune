@@ -38,6 +38,7 @@ import com.gwtext.client.widgets.LayoutDialogConfig;
 import com.gwtext.client.widgets.TabPanel;
 import com.gwtext.client.widgets.TabPanelItem;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
+import com.gwtext.client.widgets.event.DialogListener;
 import com.gwtext.client.widgets.event.TabPanelItemListenerAdapter;
 import com.gwtext.client.widgets.form.ComboBox;
 import com.gwtext.client.widgets.form.ComboBoxConfig;
@@ -88,368 +89,395 @@ public class LoginFormPanel implements LoginFormView, View {
 
     private SiteMessagePanel messagesPanel;
 
-    public LoginFormPanel(final LoginFormPresenter initialPresenter) {
-	this.presenter = initialPresenter;
-	createPanel();
+    private TabPanel tabPanel;
 
+    public LoginFormPanel(final LoginFormPresenter initialPresenter) {
+        this.presenter = initialPresenter;
+        createPanel();
     }
 
     public boolean isSignInFormValid() {
-	return signInForm.isValid();
+        return signInForm.isValid();
     }
 
     public boolean isRegisterFormValid() {
-	return registerForm.isValid();
+        return registerForm.isValid();
     }
 
     public void reset() {
-	signInForm.reset();
-	registerForm.reset();
+        signInForm.reset();
+        registerForm.reset();
+        tabPanel.getTab(0).activate();
     }
 
     public String getNickOrEmail() {
-	return loginNickOrEmailField.getValueAsString();
+        return loginNickOrEmailField.getValueAsString();
     }
 
     public String getLoginPassword() {
-	return loginPassField.getValueAsString();
+        return loginPassField.getValueAsString();
     }
 
     public String getShortName() {
-	return shortNameRegField.getValueAsString();
+        return shortNameRegField.getValueAsString();
     }
 
     public String getEmail() {
-	return emailRegField.getValueAsString();
+        return emailRegField.getValueAsString();
     }
 
     public String getLongName() {
-	return longNameRegField.getValueAsString();
+        return longNameRegField.getValueAsString();
     }
 
     public String getRegisterPassword() {
-	return passwdRegField.getValueAsString();
+        return passwdRegField.getValueAsString();
     }
 
     public String getRegisterPasswordDup() {
-	return passwdRegFieldDup.getValueAsString();
+        return passwdRegFieldDup.getValueAsString();
     }
 
     public void showErrorMessage(final String message) {
-	messagesPanel.setMessage(message, SiteMessage.ERROR, SiteMessage.ERROR);
-	messagesPanel.show();
+        messagesPanel.setMessage(message, SiteMessage.ERROR, SiteMessage.ERROR);
+        messagesPanel.show();
     }
 
     public void hideMessage() {
-	messagesPanel.hide();
+        messagesPanel.hide();
 
     }
 
     public void show() {
-	dialog.show();
+        dialog.show();
     }
 
     public void hide() {
-	dialog.hide();
+        dialog.hide();
     }
 
     private void createPanel() {
 
-	LayoutRegionConfig south = new LayoutRegionConfig() {
-	    {
-		setSplit(false);
-		setInitialSize(49);
-		setHideWhenEmpty(true);
-		setFloatable(true);
-		setAutoHide(true);
-	    }
-	};
+        LayoutRegionConfig south = new LayoutRegionConfig() {
+            {
+                setSplit(false);
+                setInitialSize(49);
+                setHideWhenEmpty(true);
+                setFloatable(true);
+                setAutoHide(true);
+            }
+        };
 
-	LayoutRegionConfig center = new LayoutRegionConfig() {
-	    {
-		setAutoScroll(true);
-		setTabPosition("top");
-		setCloseOnTab(true);
-		setAlwaysShowTabs(true);
-	    }
-	};
+        LayoutRegionConfig center = new LayoutRegionConfig() {
+            {
+                setAutoScroll(true);
+                setTabPosition("top");
+                setCloseOnTab(true);
+                setAlwaysShowTabs(true);
+            }
+        };
 
-	dialog = new LayoutDialog(new LayoutDialogConfig() {
-	    {
-		setModal(true);
-		setWidth(400);
-		setHeight(380);
-		setShadow(true);
-		setResizable(true);
-		setClosable(true);
-		setProxyDrag(true);
-		setCollapsible(false);
-		setTitle(t.SignIn());
-	    }
-	}, null, south, null, null, center);
+        dialog = new LayoutDialog(new LayoutDialogConfig() {
+            {
+                setModal(true);
+                setWidth(400);
+                setHeight(380);
+                setShadow(true);
+                setResizable(true);
+                setClosable(true);
+                setProxyDrag(true);
+                setCollapsible(false);
+                setTitle(t.SignIn());
+            }
+        }, null, south, null, null, center);
 
-	final BorderLayout layout = dialog.getLayout();
-	layout.beginUpdate();
+        final BorderLayout layout = dialog.getLayout();
+        layout.beginUpdate();
 
-	ContentPanel signInPanel = new ContentPanel(Ext.generateId(), t.SignIn());
+        ContentPanel signInPanel = new ContentPanel(Ext.generateId(), t.SignIn());
 
-	signInForm = createSignInForm();
+        signInForm = createSignInForm();
 
-	signInForm.addStyleName("kune-Default-Form");
+        signInForm.addStyleName("kune-Default-Form");
 
-	VerticalPanel signInWrapper = new VerticalPanel() {
-	    {
-		setSpacing(30);
-		setWidth("100%");
-		setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-	    }
-	};
-	signInWrapper.add(signInForm);
+        VerticalPanel signInWrapper = new VerticalPanel() {
+            {
+                setSpacing(30);
+                setWidth("100%");
+                setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
+            }
+        };
+        signInWrapper.add(signInForm);
 
-	signInPanel.add(signInWrapper);
-	layout.add(LayoutRegionConfig.CENTER, signInPanel);
+        signInPanel.add(signInWrapper);
+        layout.add(LayoutRegionConfig.CENTER, signInPanel);
 
-	ContentPanel registerPanel = new ContentPanel(Ext.generateId(), new ContentPanelConfig() {
-	    {
-		setTitle(t.Register());
-		setBackground(true);
-	    }
-	});
+        ContentPanel registerPanel = new ContentPanel(Ext.generateId(), new ContentPanelConfig() {
+            {
+                setTitle(t.Register());
+                setBackground(true);
+            }
+        });
 
-	registerForm = createRegistrationForm();
+        registerForm = createRegistrationForm();
 
-	registerForm.addStyleName("kune-Default-Form");
+        registerForm.addStyleName("kune-Default-Form");
 
-	VerticalPanel registerWrapper = new VerticalPanel() {
-	    {
-		setSpacing(30);
-		setWidth("100%");
-		setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-	    }
-	};
-	registerWrapper.add(registerForm);
+        VerticalPanel registerWrapper = new VerticalPanel() {
+            {
+                setSpacing(30);
+                setWidth("100%");
+                setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
+            }
+        };
+        registerWrapper.add(registerForm);
 
-	registerPanel.add(registerWrapper);
-	layout.add(LayoutRegionConfig.CENTER, registerPanel);
+        registerPanel.add(registerWrapper);
+        layout.add(LayoutRegionConfig.CENTER, registerPanel);
 
-	messagesPanel = new SiteMessagePanel(presenter, false);
-	ContentPanel southPanel = new ContentPanel(messagesPanel, "", new ContentPanelConfig() {
-	    {
-		setBackground(true);
-		setFitToFrame(true);
-	    }
-	});
-	messagesPanel.setWidth("100%");
-	messagesPanel.setHeight("100%");
-	messagesPanel.setMessage("", SiteMessage.INFO, SiteMessage.ERROR);
-	layout.add(LayoutRegionConfig.SOUTH, southPanel);
+        messagesPanel = new SiteMessagePanel(presenter, false);
+        ContentPanel southPanel = new ContentPanel(messagesPanel, "", new ContentPanelConfig() {
+            {
+                setBackground(true);
+                setFitToFrame(true);
+            }
+        });
+        messagesPanel.setWidth("100%");
+        messagesPanel.setHeight("100%");
+        messagesPanel.setMessage("", SiteMessage.INFO, SiteMessage.ERROR);
+        layout.add(LayoutRegionConfig.SOUTH, southPanel);
 
-	layout.endUpdate();
+        layout.endUpdate();
 
-	final Button signInBtn = dialog.addButton(t.SignIn());
-	signInBtn.addButtonListener(new ButtonListenerAdapter() {
-	    public void onClick(final Button button, final EventObject e) {
-		presenter.doLogin();
-	    }
-	});
+        final Button signInBtn = dialog.addButton(t.SignIn());
+        signInBtn.addButtonListener(new ButtonListenerAdapter() {
+            public void onClick(final Button button, final EventObject e) {
+                presenter.doLogin();
+            }
+        });
 
-	final Button registerBtn = dialog.addButton(t.Register());
-	registerBtn.addButtonListener(new ButtonListenerAdapter() {
-	    public void onClick(final Button button, final EventObject e) {
-		presenter.doRegister();
-	    }
-	});
-	registerBtn.hide();
+        final Button registerBtn = dialog.addButton(t.Register());
+        registerBtn.addButtonListener(new ButtonListenerAdapter() {
+            public void onClick(final Button button, final EventObject e) {
+                presenter.doRegister();
+            }
+        });
+        registerBtn.hide();
 
-	dialog.addButton(new Button(new ButtonConfig() {
-	    {
-		setText(t.Cancel());
-		setButtonListener(new ButtonListenerAdapter() {
-		    public void onClick(final Button button, final EventObject e) {
-			presenter.doCancel();
-		    }
-		});
-	    }
-	}));
+        dialog.addButton(new Button(new ButtonConfig() {
+            {
+                setText(t.Cancel());
+                setButtonListener(new ButtonListenerAdapter() {
+                    public void onClick(final Button button, final EventObject e) {
+                        presenter.onCancel();
+                    }
+                });
+            }
+        }));
 
-	TabPanel tabPanel = layout.getRegion(LayoutRegionConfig.CENTER).getTabs();
+        tabPanel = layout.getRegion(LayoutRegionConfig.CENTER).getTabs();
+        tabPanel.getTab(0).addTabPanelItemListener(new TabPanelItemListenerAdapter() {
+            public void onActivate(final TabPanelItem tab) {
+                dialog.setTitle(t.SignIn());
+                registerBtn.hide();
+                signInBtn.show();
+            }
+        });
 
-	tabPanel.getTab(0).addTabPanelItemListener(new TabPanelItemListenerAdapter() {
-	    public void onActivate(final TabPanelItem tab) {
-		dialog.setTitle(t.SignIn());
-		registerBtn.hide();
-		signInBtn.show();
-	    }
-	});
+        tabPanel.getTab(1).addTabPanelItemListener(new TabPanelItemListenerAdapter() {
+            public void onActivate(final TabPanelItem tab) {
+                dialog.setTitle(t.Register());
+                signInBtn.hide();
+                registerBtn.show();
+                tab.getTextEl().highlight();
+            }
+        });
 
-	tabPanel.getTab(1).addTabPanelItemListener(new TabPanelItemListenerAdapter() {
-	    public void onActivate(final TabPanelItem tab) {
-		dialog.setTitle(t.Register());
-		signInBtn.hide();
-		registerBtn.show();
-		tab.getTextEl().highlight();
-	    }
-	});
+        dialog.addDialogListener(new DialogListener() {
+            public boolean doBeforeHide(final LayoutDialog dialog) {
+                presenter.onClose();
+                return true;
+            }
+
+            public boolean doBeforeShow(final LayoutDialog dialog) {
+                return true;
+            }
+
+            public void onHide(final LayoutDialog dialog) {
+            }
+
+            public void onKeyDown(final LayoutDialog dialog, final EventObject e) {
+            }
+
+            public void onMove(final LayoutDialog dialog, final int x, final int y) {
+            }
+
+            public void onResize(final LayoutDialog dialog, final int width, final int height) {
+            }
+
+            public void onShow(final LayoutDialog dialog) {
+            }
+        });
     }
 
     private Form createSignInForm() {
 
-	Form form = new Form(new FormConfig() {
-	    {
-		setWidth(300);
-		setLabelWidth(75);
-		setLabelAlign("right");
-	    }
-	});
-	form.fieldset(t.SignIn());
-	loginNickOrEmailField = new TextField(new TextFieldConfig() {
-	    {
-		setFieldLabel(t.UserNameOrEmail());
-		setName(NICKOREMAIL_FIELD);
-		setWidth(175);
-		setAllowBlank(false);
-		setMsgTarget("side");
-	    }
-	});
-	form.add(loginNickOrEmailField);
+        Form form = new Form(new FormConfig() {
+            {
+                setWidth(300);
+                setLabelWidth(75);
+                setLabelAlign("right");
+            }
+        });
+        form.fieldset(t.SignIn());
+        loginNickOrEmailField = new TextField(new TextFieldConfig() {
+            {
+                setFieldLabel(t.UserNameOrEmail());
+                setName(NICKOREMAIL_FIELD);
+                setWidth(175);
+                setAllowBlank(false);
+                setMsgTarget("side");
+            }
+        });
+        form.add(loginNickOrEmailField);
 
-	loginPassField = new TextField(new TextFieldConfig() {
-	    {
-		setFieldLabel(t.Password());
-		setName(PASSWORD_FIELD);
-		setWidth(175);
-		setPassword(true);
-		setAllowBlank(false);
-		setMsgTarget("side");
-	    }
-	});
-	form.add(loginPassField);
-	form.end();
-	form.render();
+        loginPassField = new TextField(new TextFieldConfig() {
+            {
+                setFieldLabel(t.Password());
+                setName(PASSWORD_FIELD);
+                setWidth(175);
+                setPassword(true);
+                setAllowBlank(false);
+                setMsgTarget("side");
+            }
+        });
+        form.add(loginPassField);
+        form.end();
+        form.render();
 
-	return form;
+        return form;
     }
 
     private Form createRegistrationForm() {
-	Form form = new Form(new FormConfig() {
-	    {
-		setWidth(300);
-		setLabelWidth(75);
-		setLabelAlign("right");
-	    }
-	});
+        Form form = new Form(new FormConfig() {
+            {
+                setWidth(300);
+                setLabelWidth(75);
+                setLabelAlign("right");
+            }
+        });
 
-	form.fieldset(t.Register());
+        form.fieldset(t.Register());
 
-	shortNameRegField = new TextField(new TextFieldConfig() {
-	    {
-		setFieldLabel(t.NickName());
-		setName(NICK_FIELD);
-		setWidth(200);
-		setAllowBlank(false);
-		setMsgTarget("side");
-		setMinLength(3);
-		setMaxLength(15);
-		setRegex("^[a-z0-9_\\-]+$");
-		// i18n
-		setMinLengthText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
-		setMaxLengthText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
-		setRegexText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
-	    }
-	});
-	form.add(shortNameRegField);
+        shortNameRegField = new TextField(new TextFieldConfig() {
+            {
+                setFieldLabel(t.NickName());
+                setName(NICK_FIELD);
+                setWidth(200);
+                setAllowBlank(false);
+                setMsgTarget("side");
+                setMinLength(3);
+                setMaxLength(15);
+                setRegex("^[a-z0-9_\\-]+$");
+                // i18n
+                setMinLengthText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
+                setMaxLengthText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
+                setRegexText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
+            }
+        });
+        form.add(shortNameRegField);
 
-	longNameRegField = new TextField(new TextFieldConfig() {
-	    {
-		setFieldLabel(t.FullName());
-		setName(LONGNAME_FIELD);
-		setWidth(200);
-		setAllowBlank(false);
-		setMsgTarget("side");
-		setMinLength(3);
-		setMaxLength(50);
-	    }
-	});
-	form.add(longNameRegField);
+        longNameRegField = new TextField(new TextFieldConfig() {
+            {
+                setFieldLabel(t.FullName());
+                setName(LONGNAME_FIELD);
+                setWidth(200);
+                setAllowBlank(false);
+                setMsgTarget("side");
+                setMinLength(3);
+                setMaxLength(50);
+            }
+        });
+        form.add(longNameRegField);
 
-	passwdRegField = new TextField(new TextFieldConfig() {
-	    {
-		setFieldLabel(t.Password());
-		setName(PASSWORD_FIELD);
-		setPassword(true);
-		setAllowBlank(false);
-		setMinLength(6);
-		setMaxLength(40);
-		setWidth(200);
-		setMsgTarget("side");
-	    }
-	});
-	form.add(passwdRegField);
+        passwdRegField = new TextField(new TextFieldConfig() {
+            {
+                setFieldLabel(t.Password());
+                setName(PASSWORD_FIELD);
+                setPassword(true);
+                setAllowBlank(false);
+                setMinLength(6);
+                setMaxLength(40);
+                setWidth(200);
+                setMsgTarget("side");
+            }
+        });
+        form.add(passwdRegField);
 
-	passwdRegFieldDup = new TextField(new TextFieldConfig() {
-	    {
-		setFieldLabel(t.RetypePassword());
-		setName(PASSWORD_FIELD_DUP);
-		setPassword(true);
-		setAllowBlank(false);
-		setMinLength(6);
-		setMaxLength(40);
-		setWidth(200);
-		setMsgTarget("side");
-		// i18n
-		setInvalidText("Passwords do not match");
-		setValidator(new Validator() {
-		    public boolean validate(final String value) throws ValidationException {
-			return passwdRegField.getValueAsString().equals(passwdRegFieldDup.getValueAsString());
-		    }
-		});
-	    }
-	});
-	form.add(passwdRegFieldDup);
+        passwdRegFieldDup = new TextField(new TextFieldConfig() {
+            {
+                setFieldLabel(t.RetypePassword());
+                setName(PASSWORD_FIELD_DUP);
+                setPassword(true);
+                setAllowBlank(false);
+                setMinLength(6);
+                setMaxLength(40);
+                setWidth(200);
+                setMsgTarget("side");
+                // i18n
+                setInvalidText("Passwords do not match");
+                setValidator(new Validator() {
+                    public boolean validate(final String value) throws ValidationException {
+                        return passwdRegField.getValueAsString().equals(passwdRegFieldDup.getValueAsString());
+                    }
+                });
+            }
+        });
+        form.add(passwdRegFieldDup);
 
-	emailRegField = new TextField(new TextFieldConfig() {
-	    {
-		setFieldLabel(t.Email());
-		setName(EMAIL_FIELD);
-		setVtype(VType.EMAIL);
-		setWidth(200);
-		setMsgTarget("side");
-	    }
-	});
-	form.add(emailRegField);
+        emailRegField = new TextField(new TextFieldConfig() {
+            {
+                setFieldLabel(t.Email());
+                setName(EMAIL_FIELD);
+                setVtype(VType.EMAIL);
+                setWidth(200);
+                setMsgTarget("side");
+            }
+        });
+        form.add(emailRegField);
 
-	final Store store = new SimpleStore(new String[] { "abbr", "language" }, getLanguages());
-	store.load();
+        final Store store = new SimpleStore(new String[] { "abbr", "language" }, getLanguages());
+        store.load();
 
-	ComboBox languageCombo = new ComboBox(new ComboBoxConfig() {
-	    {
-		// i18n
-		setName(LANG_FIELD);
-		setMinChars(1);
-		setFieldLabel(t.Language());
-		setStore(store);
-		setDisplayField("language");
-		setMode("local");
-		setTriggerAction("all");
-		setEmptyText("Enter language");
-		setLoadingText("Searching...");
-		setTypeAhead(true);
-		setSelectOnFocus(true);
-		setWidth(200);
-		setMsgTarget("side");
-	    }
-	});
+        ComboBox languageCombo = new ComboBox(new ComboBoxConfig() {
+            {
+                // i18n
+                setName(LANG_FIELD);
+                setMinChars(1);
+                setFieldLabel(t.Language());
+                setStore(store);
+                setDisplayField("language");
+                setMode("local");
+                setTriggerAction("all");
+                setEmptyText("Enter language");
+                setLoadingText("Searching...");
+                setTypeAhead(true);
+                setSelectOnFocus(true);
+                setWidth(200);
+                setMsgTarget("side");
+            }
+        });
 
-	form.add(languageCombo);
+        form.add(languageCombo);
 
-	form.end();
-	form.render();
-	return form;
+        form.end();
+        form.render();
+        return form;
     }
 
     private Object[][] getLanguages() {
-	// FIXME: hardcoded...
-	return new Object[][] { new Object[] { "en", "English" }, new Object[] { "es", "Español" },
-		new Object[] { "pt", "Português do Brasil" } };
+        // FIXME: hardcoded...
+        return new Object[][] { new Object[] { "en", "English" }, new Object[] { "es", "Español" },
+                new Object[] { "pt", "Português do Brasil" } };
     }
 }

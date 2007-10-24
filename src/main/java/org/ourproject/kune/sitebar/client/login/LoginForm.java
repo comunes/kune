@@ -24,7 +24,7 @@ import org.ourproject.kune.platf.client.View;
 
 public interface LoginForm {
 
-    public void doCancel();
+    public void onCancel();
 
     public void doLogin();
 

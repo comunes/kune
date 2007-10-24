@@ -36,31 +36,30 @@ import com.gwtext.client.widgets.QuickTips;
 
 public class DesktopPanel extends AbsolutePanel implements DesktopView {
     public DesktopPanel(final Workspace workspace, final SiteBarListener listener) {
-	QuickTips.init(); // extgwt tips
-	// CSS.swapStyleSheet("theme", "js/ext/resources/css/xtheme-gray.css");
-	SiteBar siteBar = SiteBarFactory.createSiteBar(listener);
-	SiteMessage siteMessage = SiteBarFactory.getSiteMessage();
-	this.add((Widget) siteMessage.getView(), Window.getClientWidth() * 20 / 100 - 10, 2);
-	this.setSize("100%", "100%");
-	this.add((Widget) siteBar.getView(), 0, 0);
-	this.add((Widget) workspace.getView(), 0, 20);
-	this.addStyleName("kunebody");
-	initResizeListener(this, workspace, siteMessage);
+        QuickTips.init(); // extgwt tips
+        SiteBar siteBar = SiteBarFactory.createSiteBar(listener);
+        SiteMessage siteMessage = SiteBarFactory.getSiteMessage();
+        this.add((Widget) siteMessage.getView(), Window.getClientWidth() * 20 / 100 - 10, 2);
+        this.setSize("100%", "100%");
+        this.add((Widget) siteBar.getView(), 0, 0);
+        this.add((Widget) workspace.getView(), 0, 20);
+        this.addStyleName("kunebody");
+        initResizeListener(this, workspace, siteMessage);
     }
 
     public void attach() {
-	RootPanel.get().add(this);
+        RootPanel.get().add(this);
     }
 
     private void initResizeListener(final AbsolutePanel desktop, final Workspace workspace,
-	    final SiteMessage siteMessage) {
-	Window.addWindowResizeListener(new WindowResizeListener() {
-	    public void onWindowResized(final int width, final int height) {
-		workspace.adjustSize(width, height);
-		siteMessage.adjustWidth(width);
-		desktop.setWidgetPosition((Widget) siteMessage.getView(), Window.getClientWidth() * 20 / 100 - 10, 2);
-	    }
-	});
-	Window.enableScrolling(false);
+            final SiteMessage siteMessage) {
+        Window.addWindowResizeListener(new WindowResizeListener() {
+            public void onWindowResized(final int width, final int height) {
+                workspace.adjustSize(width, height);
+                siteMessage.adjustWidth(width);
+                desktop.setWidgetPosition((Widget) siteMessage.getView(), Window.getClientWidth() * 20 / 100 - 10, 2);
+            }
+        });
+        Window.enableScrolling(false);
     }
 }

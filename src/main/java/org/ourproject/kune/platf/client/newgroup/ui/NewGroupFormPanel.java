@@ -31,13 +31,13 @@ import org.ourproject.kune.sitebar.client.bar.SiteBarTrans;
 import org.ourproject.kune.sitebar.client.services.Translate;
 import org.ourproject.kune.workspace.client.ui.form.WizardListener;
 
-import to.tipit.gwtlib.FireLog;
-
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtext.client.core.EventCallback;
+import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.form.CheckboxConfig;
 import com.gwtext.client.widgets.form.FieldSetConfig;
 import com.gwtext.client.widgets.form.Form;
@@ -47,7 +47,6 @@ import com.gwtext.client.widgets.form.TextArea;
 import com.gwtext.client.widgets.form.TextAreaConfig;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.form.TextFieldConfig;
-import com.gwtext.client.widgets.form.event.FormListener;
 
 public class NewGroupFormPanel extends WizardDialog implements NewGroupFormView {
     private static final Translate t = SiteBarTrans.getInstance().t;
@@ -68,225 +67,225 @@ public class NewGroupFormPanel extends WizardDialog implements NewGroupFormView 
     private LicenseChooseForm licenseChooseForm;
 
     public NewGroupFormPanel(final NewGroupFormPresenter presenter) {
-	// i18n
-	super("Register a new Group", true, false, 470, 440, new WizardListener() {
-	    public void onBack() {
-		presenter.onBack();
-	    }
+        // i18n
+        super("Register a new Group", true, false, 470, 440, new WizardListener() {
+            public void onBack() {
+                presenter.onBack();
+            }
 
-	    public void onCancel() {
-		presenter.onCancel();
-	    }
+            public void onCancel() {
+                presenter.onCancel();
+            }
 
-	    public void onFinish() {
-		presenter.onFinish();
-	    }
+            public void onFinish() {
+                presenter.onFinish();
+            }
 
-	    public void onNext() {
-		presenter.onNext();
-	    }
-	});
-	deck = new DeckPanel();
-	newGroupInitialDataForm = createNewGroupInitialDataForm();
-	createChooseLicensePanel();
-	VerticalPanel newGroupInitialDataVP = new VerticalPanel();
-	VerticalPanel chooseLicenseVP = new VerticalPanel();
-	// i18n
-	newGroupInitialDataVP
-		.add(new Label("Please fill this form and follow the next steps to register a new group:"));
-	chooseLicenseVP.add(new HTML("Select a license to share your group contents with other people. "
-		+ "We recomend <a href='http://en.wikipedia.org/copyleft'>copyleft</a> licenses for practical works."));
-	Label liceseTypeLabel = new Label("Choose a license type:");
-	chooseLicenseVP.add(liceseTypeLabel);
-	newGroupInitialDataVP.add(newGroupInitialDataForm);
-	chooseLicenseVP.add((Widget) licenseChooseForm.getView());
-	deck.add(newGroupInitialDataVP);
-	deck.add(chooseLicenseVP);
-	super.add(deck);
-	deck.showWidget(0);
-	initBottomButtons();
-	// newGroupInitialDataVP.addStyleName("kune-Default-Form");
-	deck.addStyleName("kune-Default-Form");
-	liceseTypeLabel.addStyleName("kune-License-CC-Header");
-	chooseLicenseVP.setHeight("10"); // Ext set this to 100% ...
-	super.setFinishText(t.Register());
+            public void onNext() {
+                presenter.onNext();
+            }
+
+            public void onClose() {
+                presenter.onClose();
+            }
+        });
+        deck = new DeckPanel();
+        newGroupInitialDataForm = createNewGroupInitialDataForm(presenter);
+        createChooseLicensePanel();
+        VerticalPanel newGroupInitialDataVP = new VerticalPanel();
+        VerticalPanel chooseLicenseVP = new VerticalPanel();
+        // i18n
+        newGroupInitialDataVP
+                .add(new Label("Please fill this form and follow the next steps to register a new group:"));
+        chooseLicenseVP.add(new HTML("Select a license to share your group contents with other people. "
+                + "We recomend <a href='http://en.wikipedia.org/copyleft'>copyleft</a> licenses for practical works."));
+        Label liceseTypeLabel = new Label("Choose a license type:");
+        chooseLicenseVP.add(liceseTypeLabel);
+        newGroupInitialDataVP.add(newGroupInitialDataForm);
+        chooseLicenseVP.add((Widget) licenseChooseForm.getView());
+        deck.add(newGroupInitialDataVP);
+        deck.add(chooseLicenseVP);
+        super.add(deck);
+        deck.showWidget(0);
+        initBottomButtons();
+        // newGroupInitialDataVP.addStyleName("kune-Default-Form");
+        deck.addStyleName("kune-Default-Form");
+        liceseTypeLabel.addStyleName("kune-License-CC-Header");
+        chooseLicenseVP.setHeight("10"); // Ext set this to 100% ...
+        super.setFinishText(t.Register());
     }
 
     public boolean isFormValid() {
-	return newGroupInitialDataForm.isValid();
+        return newGroupInitialDataForm.isValid();
     }
 
     public void clearData() {
-	newGroupInitialDataForm.reset();
-	((LicenseChooseFormPanel) licenseChooseForm.getView()).reset();
-	showNewGroupInitialDataForm();
-	initBottomButtons();
+        deck.showWidget(0);
+        newGroupInitialDataForm.reset();
+        ((LicenseChooseFormPanel) licenseChooseForm.getView()).reset();
+        showNewGroupInitialDataForm();
+        initBottomButtons();
     }
 
     public String getShortName() {
-	return shortNameField.getValueAsString();
+        return shortNameField.getValueAsString();
     }
 
     public String getLongName() {
-	return longNameField.getValueAsString();
+        return longNameField.getValueAsString();
     }
 
     public String getPublicDesc() {
-	return publicDescField.getValueAsString();
+        return publicDescField.getValueAsString();
     }
 
     public boolean isProject() {
-	FireLog.debug("Is project: " + projectRadio.getValue());
-	return projectRadio.getValue();
+        return projectRadio.getValue();
     }
 
     public boolean isOrganization() {
-	FireLog.debug("Is org: " + orgRadio.getValue());
-	return orgRadio.getValue();
+        return orgRadio.getValue();
     }
 
     public boolean isCommunity() {
-	FireLog.debug("Is community: " + communityRadio.getValue());
-	return communityRadio.getValue();
+        return communityRadio.getValue();
     }
 
     public void showNewGroupInitialDataForm() {
-	deck.showWidget(0);
+        deck.showWidget(0);
     }
 
     public LicenseDTO getLicense() {
-	return licenseChooseForm.getLicense();
+        return licenseChooseForm.getLicense();
     }
 
     public void showLicenseForm() {
-	deck.showWidget(1);
+        deck.showWidget(1);
     }
 
     private void initBottomButtons() {
-	super.setEnabledBackButton(false);
-	super.setEnabledFinishButton(false);
+        super.setEnabledBackButton(false);
+        super.setEnabledFinishButton(false);
+        super.setEnabledNextButton(true);
     }
 
-    private Form createNewGroupInitialDataForm() {
-	Form form = new Form(new FormConfig() {
-	    {
-		setWidth(400);
-		setLabelWidth(100);
-		setLabelAlign("right");
-		setButtonAlign("right");
-	    }
-	});
+    private Form createNewGroupInitialDataForm(final NewGroupFormPresenter presenter) {
+        Form form = new Form(new FormConfig() {
+            {
+                setWidth(400);
+                setLabelWidth(100);
+                setLabelAlign("right");
+                setButtonAlign("right");
+            }
+        });
 
-	shortNameField = new TextField(new TextFieldConfig() {
-	    {
-		setFieldLabel(t.ShortName());
-		setName(SHORTNAME_FIELD);
-		setWidth(175);
-		setMinLength(3);
-		setMaxLength(15);
-		setAllowBlank(false);
-		setMsgTarget("side");
-		setRegex("^[a-z0-9_\\-]+$");
-		// i18n
-		setMinLengthText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
-		setMaxLengthText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
-		setRegexText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
-	    }
-	});
-	form.add(shortNameField);
+        shortNameField = new TextField(new TextFieldConfig() {
+            {
+                setFieldLabel(t.ShortName());
+                setName(SHORTNAME_FIELD);
+                setWidth(175);
+                setMinLength(3);
+                setMaxLength(15);
+                setAllowBlank(false);
+                setMsgTarget("side");
+                setRegex("^[a-z0-9_\\-]+$");
+                // i18n
+                setMinLengthText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
+                setMaxLengthText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
+                setRegexText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
+            }
+        });
+        form.add(shortNameField);
 
-	longNameField = new TextField(new TextFieldConfig() {
-	    {
-		setFieldLabel(t.LongName());
-		setName(LONGNAME_FIELD);
-		setWidth(300);
-		setAllowBlank(false);
-		setMsgTarget("side");
-		setMinLength(3);
-		setMaxLength(50);
-	    }
-	});
-	form.add(longNameField);
+        longNameField = new TextField(new TextFieldConfig() {
+            {
+                setFieldLabel(t.LongName());
+                setName(LONGNAME_FIELD);
+                setWidth(300);
+                setAllowBlank(false);
+                setMsgTarget("side");
+                setMinLength(3);
+                setMaxLength(50);
+            }
+        });
+        form.add(longNameField);
 
-	publicDescField = new TextArea(new TextAreaConfig() {
-	    {
-		setFieldLabel(t.PublicDescription());
-		setName(PUBLICDESC_FIELD);
-		setWidth(300);
-		setAllowBlank(false);
-		setMsgTarget("side");
-		setMinLength(10);
-		setMaxLength(255);
-	    }
-	});
-	form.add(publicDescField);
+        publicDescField = new TextArea(new TextAreaConfig() {
+            {
+                setFieldLabel(t.PublicDescription());
+                setName(PUBLICDESC_FIELD);
+                setWidth(300);
+                setAllowBlank(false);
+                setMsgTarget("side");
+                setMinLength(10);
+                setMaxLength(255);
+            }
+        });
+        form.add(publicDescField);
 
-	form.fieldset(new FieldSetConfig() {
-	    {
-		setLegend(t.TypeOfGroup());
-		setHideLabels(true);
-		setStyle("margin-left: 105px");
-	    }
-	});
+        form.fieldset(new FieldSetConfig() {
+            {
+                setLegend(t.TypeOfGroup());
+                setHideLabels(true);
+                setStyle("margin-left: 105px");
+            }
+        });
 
-	projectRadio = new Radio(new CheckboxConfig() {
-	    {
-		setName(TYPEOFGROUP_FIELD);
-		setBoxLabel(t.Project());
-		setAutoCreate(true);
-		setChecked(true);
-	    }
-	});
-	form.add(projectRadio);
+        projectRadio = new Radio(new CheckboxConfig() {
+            {
+                setName(TYPEOFGROUP_FIELD);
+                setBoxLabel(t.Project());
+                setAutoCreate(true);
+                setChecked(true);
+            }
+        });
+        form.add(projectRadio);
 
-	orgRadio = new Radio(new CheckboxConfig() {
-	    {
-		setName(TYPEOFGROUP_FIELD);
-		setBoxLabel(t.Organization());
-		setAutoCreate(true);
-	    }
-	});
-	form.add(orgRadio);
+        orgRadio = new Radio(new CheckboxConfig() {
+            {
+                setName(TYPEOFGROUP_FIELD);
+                setBoxLabel(t.Organization());
+                setAutoCreate(true);
+            }
+        });
+        form.add(orgRadio);
 
-	communityRadio = new Radio(new CheckboxConfig() {
-	    {
-		setName(TYPEOFGROUP_FIELD);
-		setBoxLabel(t.Community());
-		setAutoCreate(true);
-	    }
-	});
-	form.add(communityRadio);
-	form.end();
+        communityRadio = new Radio(new CheckboxConfig() {
+            {
+                setName(TYPEOFGROUP_FIELD);
+                setBoxLabel(t.Community());
+                setAutoCreate(true);
+            }
+        });
+        form.add(communityRadio);
+        form.end();
 
-	form.end();
-	form.render();
+        form.end();
+        form.render();
 
-	form.addFormListenerListener(new FormListener() {
+        shortNameField.getEl().addListener("keypress", new EventCallback() {
+            public void execute(final EventObject e) {
+                presenter.onChange();
+            }
+        });
 
-	    public boolean doBeforeAction(final Form form) {
-		return false;
-	    }
+        longNameField.getEl().addListener("keypress", new EventCallback() {
+            public void execute(final EventObject e) {
+                presenter.onChange();
+            }
+        });
 
-	    public void onActionComplete(final Form form) {
-	    }
+        publicDescField.getEl().addListener("keypress", new EventCallback() {
+            public void execute(final EventObject e) {
+                presenter.onChange();
+            }
+        });
 
-	    public void onActionFailed(final Form form) {
-	    }
-
-	    public void onClientValidation(final Form form, final boolean valid) {
-		if (valid) {
-		    FireLog.debug("NewGroupFP valid");
-		} else {
-		    FireLog.debug("NewGroupFP invalid");
-		}
-	    }
-	});
-
-	return form;
+        return form;
     }
 
     private void createChooseLicensePanel() {
-	licenseChooseForm = SiteBarFactory.createLicenseChoose();
+        licenseChooseForm = SiteBarFactory.createLicenseChoose();
 
     }
 }

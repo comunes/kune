@@ -28,6 +28,7 @@ import javax.persistence.EntityManager;
 
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
+import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.server.ParticipationData;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Group;
@@ -48,148 +49,175 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 
     @Inject
     public SocialNetworkManagerDefault(final Provider<EntityManager> provider, final Group finder) {
-	super(provider, SocialNetwork.class);
-	this.finder = finder;
+        super(provider, SocialNetwork.class);
+        this.finder = finder;
     }
 
     public void addAdmin(final User user, final Group group) {
-	SocialNetwork sn = group.getSocialNetwork();
-	sn.addAdmin(user.getUserGroup());
+        SocialNetwork sn = group.getSocialNetwork();
+        sn.addAdmin(user.getUserGroup());
     }
 
     public void addGroupToAdmins(final Group group, final Group inGroup) {
-	SocialNetwork sn = inGroup.getSocialNetwork();
-	sn.addAdmin(group);
+        SocialNetwork sn = inGroup.getSocialNetwork();
+        sn.addAdmin(group);
     }
 
     public void addGroupToCollabs(final Group group, final Group inGroup) {
-	SocialNetwork sn = inGroup.getSocialNetwork();
-	sn.addCollaborator(group);
+        SocialNetwork sn = inGroup.getSocialNetwork();
+        sn.addCollaborator(group);
     }
 
     public void addGroupToViewers(final Group group, final Group inGroup) {
-	SocialNetwork sn = inGroup.getSocialNetwork();
-	sn.addViewer(group);
+        SocialNetwork sn = inGroup.getSocialNetwork();
+        sn.addViewer(group);
     }
 
-    public String requestToJoin(final User user, final Group inGroup) throws SerializableException {
-	SocialNetwork sn = inGroup.getSocialNetwork();
-	AdmissionType admissionType = inGroup.getAdmissionType();
-	if (admissionType == null) {
-	    throw new RuntimeException();
-	}
-	if (isModerated(admissionType)) {
-	    sn.addPendingCollaborator(user.getUserGroup());
-	    return SocialNetworkDTO.REQ_JOIN_WAITING_MODERATION;
-	} else if (isOpen(admissionType)) {
-	    sn.addCollaborator(user.getUserGroup());
-	    return SocialNetworkDTO.REQ_JOIN_ACEPTED;
-	} else if (isClosed(admissionType)) {
-	    return SocialNetworkDTO.REQ_JOIN_DENIED;
-	} else {
-	    throw new SerializableException("State not expected in SocialNetworkManagerDefault class");
-	}
+    public String requestToJoin(final User user, final Group inGroup) throws SerializableException,
+            UserMustBeLoggedException {
+        SocialNetwork sn = inGroup.getSocialNetwork();
+        if (!User.isKnownUser(user)) {
+            throw new UserMustBeLoggedException();
+        }
+        AdmissionType admissionType = inGroup.getAdmissionType();
+        if (admissionType == null) {
+            throw new RuntimeException();
+        }
+        if (isModerated(admissionType)) {
+            sn.addPendingCollaborator(user.getUserGroup());
+            return SocialNetworkDTO.REQ_JOIN_WAITING_MODERATION;
+        } else if (isOpen(admissionType)) {
+            sn.addCollaborator(user.getUserGroup());
+            return SocialNetworkDTO.REQ_JOIN_ACEPTED;
+        } else if (isClosed(admissionType)) {
+            return SocialNetworkDTO.REQ_JOIN_DENIED;
+        } else {
+            throw new SerializableException("State not expected in SocialNetworkManagerDefault class");
+        }
     }
 
-    public void acceptJoinGroup(final Group group, final Group inGroup) throws SerializableException {
-	SocialNetwork sn = inGroup.getSocialNetwork();
-	List<Group> pendingCollabs = sn.getPendingCollaborators().getList();
-	if (pendingCollabs.contains(group)) {
-	    sn.addCollaborator(group);
-	    sn.removePendingCollaborator(group);
-	} else {
-	    throw new SerializableException("User is not a pending collaborator");
-	}
+    public void acceptJoinGroup(final User userLogged, final Group group, final Group inGroup)
+            throws SerializableException, AccessViolationException {
+        SocialNetwork sn = inGroup.getSocialNetwork();
+        checkUserLoggedIsAdmin(userLogged, sn);
+        List<Group> pendingCollabs = sn.getPendingCollaborators().getList();
+        if (pendingCollabs.contains(group)) {
+            sn.addCollaborator(group);
+            sn.removePendingCollaborator(group);
+        } else {
+            throw new SerializableException("User is not a pending collaborator");
+        }
     }
 
-    public void deleteMember(final Group group, final Group inGroup) throws SerializableException {
-	SocialNetwork sn = inGroup.getSocialNetwork();
+    public void deleteMember(final User userLogged, final Group group, final Group inGroup)
+            throws SerializableException, AccessViolationException {
+        SocialNetwork sn = inGroup.getSocialNetwork();
 
-	if (sn.isAdmin(group)) {
-	    sn.removeAdmin(group);
-	} else if (sn.isCollab(group)) {
-	    sn.removeCollaborator(group);
-	} else {
-	    throw new SerializableException("Person/Group is not a collaborator");
-	}
+        checkUserLoggedIsAdmin(userLogged, sn);
+        unJoinGroup(group, inGroup);
     }
 
-    public void denyJoinGroup(final Group group, final Group inGroup) throws SerializableException {
-	SocialNetwork sn = inGroup.getSocialNetwork();
-	List<Group> pendingCollabs = sn.getPendingCollaborators().getList();
-	if (pendingCollabs.contains(group)) {
-	    sn.removePendingCollaborator(group);
-	} else {
-	    throw new SerializableException("Person/Group is not a pending collaborator");
-	}
+    public void unJoinGroup(final Group groupToUnJoin, final Group inGroup) throws SerializableException {
+        SocialNetwork sn = inGroup.getSocialNetwork();
+
+        if (sn.isAdmin(groupToUnJoin)) {
+            sn.removeAdmin(groupToUnJoin);
+        } else if (sn.isCollab(groupToUnJoin)) {
+            sn.removeCollaborator(groupToUnJoin);
+        } else {
+            throw new SerializableException("Person/Group is not a collaborator");
+        }
     }
 
-    public void setCollabAsAdmin(final Group group, final Group inGroup) throws SerializableException {
-	SocialNetwork sn = inGroup.getSocialNetwork();
-	if (sn.isCollab(group)) {
-	    sn.removeCollaborator(group);
-	    sn.addAdmin(group);
-	} else {
-	    throw new SerializableException("Person/Group is not a collaborator");
-	}
+    public void denyJoinGroup(final User userLogged, final Group group, final Group inGroup)
+            throws SerializableException {
+        SocialNetwork sn = inGroup.getSocialNetwork();
+        checkUserLoggedIsAdmin(userLogged, sn);
+        List<Group> pendingCollabs = sn.getPendingCollaborators().getList();
+        if (pendingCollabs.contains(group)) {
+            sn.removePendingCollaborator(group);
+        } else {
+            throw new SerializableException("Person/Group is not a pending collaborator");
+        }
     }
 
-    public void setAdminAsCollab(final Group group, final Group inGroup) throws SerializableException {
-	SocialNetwork sn = inGroup.getSocialNetwork();
-	if (sn.isAdmin(group)) {
-	    sn.removeAdmin(group);
-	    sn.addCollaborator(group);
-	} else {
-	    throw new SerializableException("Person/Group is not an admin");
-	}
+    public void setCollabAsAdmin(final User userLogged, final Group group, final Group inGroup)
+            throws SerializableException {
+        SocialNetwork sn = inGroup.getSocialNetwork();
+        checkUserLoggedIsAdmin(userLogged, sn);
+        if (sn.isCollab(group)) {
+            sn.removeCollaborator(group);
+            sn.addAdmin(group);
+        } else {
+            throw new SerializableException("Person/Group is not a collaborator");
+        }
+    }
+
+    public void setAdminAsCollab(final User userLogged, final Group group, final Group inGroup)
+            throws SerializableException {
+        SocialNetwork sn = inGroup.getSocialNetwork();
+        checkUserLoggedIsAdmin(userLogged, sn);
+        if (sn.isAdmin(group)) {
+            sn.removeAdmin(group);
+            sn.addCollaborator(group);
+        } else {
+            throw new SerializableException("Person/Group is not an admin");
+        }
     }
 
     public SocialNetwork find(final User user, final Group group) throws AccessViolationException {
-	SocialNetwork sn = group.getSocialNetwork();
-	if (!sn.getAccessLists().getViewers().includes(user.getUserGroup())) {
-	    throw new AccessViolationException();
-	}
-	return sn;
+        SocialNetwork sn = group.getSocialNetwork();
+        if (!sn.getAccessLists().getViewers().includes(user.getUserGroup())) {
+            throw new AccessViolationException();
+        }
+        return sn;
     }
 
     public ParticipationData findParticipation(final User user, final Group group) throws AccessViolationException {
-	find(user, group); // check access
-	Long groupId = group.getId();
-	List<Group> adminInGroups = finder.findAdminInGroups(groupId);
-	List<Group> collabInGroups = finder.findCollabInGroups(groupId);
-	List<Link> groupsIsAdmin = new ArrayList();
-	List<Link> groupsIsCollab = new ArrayList();
-	Iterator iter = adminInGroups.iterator();
-	while (iter.hasNext()) {
-	    Group g = (Group) iter.next();
-	    if (group.getId() != g.getId()) {
-		groupsIsAdmin
-			.add(new Link(g.getShortName(), g.getLongName(), "", g.getDefaultContent().getStateToken()));
-	    }
+        find(user, group); // check access
+        Long groupId = group.getId();
+        List<Group> adminInGroups = finder.findAdminInGroups(groupId);
+        List<Group> collabInGroups = finder.findCollabInGroups(groupId);
+        List<Link> groupsIsAdmin = new ArrayList();
+        List<Link> groupsIsCollab = new ArrayList();
+        Iterator iter = adminInGroups.iterator();
+        while (iter.hasNext()) {
+            Group g = (Group) iter.next();
+            if (group.getId() != g.getId()) {
+                // Don't self participation of group in same group
+                groupsIsAdmin
+                        .add(new Link(g.getShortName(), g.getLongName(), "", g.getDefaultContent().getStateToken()));
+            }
 
-	}
-	iter = collabInGroups.iterator();
-	while (iter.hasNext()) {
-	    Group g = (Group) iter.next();
-	    if (group.getId() != g.getId()) {
-		groupsIsCollab.add(new Link(g.getShortName(), g.getLongName(), "", g.getDefaultContent()
-			.getStateToken()));
-	    }
-	}
+        }
+        iter = collabInGroups.iterator();
+        while (iter.hasNext()) {
+            Group g = (Group) iter.next();
+            if (group.getId() != g.getId()) {
+                groupsIsCollab.add(new Link(g.getShortName(), g.getLongName(), "", g.getDefaultContent()
+                        .getStateToken()));
+            }
+        }
 
-	return new ParticipationData(groupsIsAdmin, groupsIsCollab);
+        return new ParticipationData(groupsIsAdmin, groupsIsCollab);
     }
 
     private boolean isClosed(final AdmissionType admissionType) {
-	return admissionType.equals(AdmissionType.Closed);
+        return admissionType.equals(AdmissionType.Closed);
     }
 
     private boolean isOpen(final AdmissionType admissionType) {
-	return admissionType.equals(AdmissionType.Open);
+        return admissionType.equals(AdmissionType.Open);
     }
 
     private boolean isModerated(final AdmissionType admissionType) {
-	return admissionType.equals(AdmissionType.Moderated);
+        return admissionType.equals(AdmissionType.Moderated);
+    }
+
+    private void checkUserLoggedIsAdmin(final User userLogged, final SocialNetwork sn) throws AccessViolationException {
+        if (!sn.isAdmin(userLogged.getUserGroup())) {
+            throw new AccessViolationException();
+        }
     }
 
 }

@@ -24,66 +24,66 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 
     @Before
     public void init() throws SerializableException {
-	new IntegrationTestHelper(this);
-	groupName = getDefGroupName();
+        new IntegrationTestHelper(this);
+        groupName = getDefSiteGroupName();
     }
 
     @Test
     public void testAddRoom() throws SerializableException {
-	doLogin();
-	defaultContent = getDefaultContent();
-	ContainerDTO parent = defaultContent.getFolder();
-	String roomName = "testroom";
-	StateDTO newState = contentService.addRoom(session.getHash(), groupName, parent.getId(), roomName);
-	assertNotNull(newState);
+        doLogin();
+        defaultContent = getDefaultContent();
+        ContainerDTO parent = defaultContent.getFolder();
+        String roomName = "testroom";
+        StateDTO newState = contentService.addRoom(session.getHash(), groupName, parent.getId(), roomName);
+        assertNotNull(newState);
     }
 
     @Test(expected = AccessViolationException.class)
     public void noLoggedInShouldThrowIllegalAccess() throws ContentNotFoundException, SerializableException {
-	defaultContent = getDefaultContent();
-	Long folderId = defaultContent.getFolder().getId();
-	contentService.addContent(session.getHash(), folderId, "a name");
+        defaultContent = getDefaultContent();
+        Long folderId = defaultContent.getFolder().getId();
+        contentService.addContent(session.getHash(), folderId, "a name");
     }
 
     @Test
     public void testAddContent() throws SerializableException {
-	doLogin();
-	defaultContent = getDefaultContent();
-	assertEquals(1, defaultContent.getFolder().getContents().size());
-	AccessRightsDTO cntRights = defaultContent.getContentRights();
-	AccessRightsDTO ctxRight = defaultContent.getFolderRights();
+        doLogin();
+        defaultContent = getDefaultContent();
+        assertEquals(1, defaultContent.getFolder().getContents().size());
+        AccessRightsDTO cntRights = defaultContent.getContentRights();
+        AccessRightsDTO ctxRight = defaultContent.getFolderRights();
 
-	String title = "New Content Title";
-	StateDTO added = contentService.addContent(session.getHash(), defaultContent.getFolder().getId(), title);
-	assertNotNull(added);
-	List contents = added.getFolder().getContents();
-	assertEquals(title, added.getTitle());
-	assertEquals(2, contents.size());
-	assertEquals(cntRights, added.getContentRights());
-	assertEquals(ctxRight, added.getFolderRights());
+        String title = "New Content Title";
+        StateDTO added = contentService.addContent(session.getHash(), defaultContent.getFolder().getId(), title);
+        assertNotNull(added);
+        List contents = added.getFolder().getContents();
+        assertEquals(title, added.getTitle());
+        assertEquals(2, contents.size());
+        assertEquals(cntRights, added.getContentRights());
+        assertEquals(ctxRight, added.getFolderRights());
 
-	StateToken newState = added.getState();
-	StateDTO sameAgain = contentService.getContent(session.getHash(), newState);
-	assertNotNull(sameAgain);
-	assertEquals(2, sameAgain.getFolder().getContents().size());
+        StateToken newState = added.getState();
+        StateDTO sameAgain = contentService.getContent(session.getHash(), newState);
+        assertNotNull(sameAgain);
+        assertEquals(2, sameAgain.getFolder().getContents().size());
     }
 
     @Test
     public void testAddFolder() throws SerializableException {
-	doLogin();
-	defaultContent = getDefaultContent();
-	ContainerDTO parent = defaultContent.getFolder();
-	String title = "folder name";
-	StateDTO newState = contentService.addFolder(session.getHash(), groupName, parent.getId(), title);
-	assertNotNull(newState);
+        doLogin();
+        defaultContent = getDefaultContent();
+        ContainerDTO parent = defaultContent.getFolder();
+        String title = "folder name";
+        StateDTO newState = contentService.addFolder(session.getHash(), groupName, parent.getId(), title);
+        assertNotNull(newState);
 
-	ContainerDTO parentAgain = getDefaultContent().getFolder();
-	ContainerDTO child = (ContainerDTO) parentAgain.getChilds().get(0);
-	assertEquals(parent.getAbsolutePath() + ContainerDTO.SEP + title, child.getAbsolutePath());
-	assertEquals(parent.getId(), child.getParentFolderId());
+        ContainerDTO parentAgain = getDefaultContent().getFolder();
+        ContainerDTO child = (ContainerDTO) parentAgain.getChilds().get(0);
+        assertEquals(parent.getAbsolutePath() + ContainerDTO.SEP + title, child.getAbsolutePath());
+        assertEquals(parent.getId(), child.getParentFolderId());
 
-	assertEquals(parent.getId(), parentAgain.getId());
-	assertEquals(1, parentAgain.getChilds().size());
+        assertEquals(parent.getId(), parentAgain.getId());
+        assertEquals(1, parentAgain.getChilds().size());
     }
 
 }

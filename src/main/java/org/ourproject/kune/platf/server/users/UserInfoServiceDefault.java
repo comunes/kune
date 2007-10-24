@@ -41,7 +41,7 @@ public class UserInfoServiceDefault implements UserInfoService {
 
     public UserInfo buildInfo(final User user) throws AccessViolationException {
 	UserInfo info = null;
-	if (User.isKownUser(user)) {
+	if (User.isKnownUser(user)) {
 	    info = new UserInfo();
 
 	    info.setShortName(user.getShortName());

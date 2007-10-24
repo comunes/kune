@@ -39,8 +39,4 @@ public class Kune {
 	return instance;
     }
 
-    public String getUserHash() {
-	return "userHash";
-    }
-
 }

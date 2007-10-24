@@ -47,118 +47,127 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
 
     @Inject
     public SocialNetworkRPC(final UserSession session, final GroupManager groupManager,
-	    final SocialNetworkManager socialNetworkManager, final Mapper mapper) {
-	this.session = session;
-	this.groupManager = groupManager;
-	this.socialNetworkManager = socialNetworkManager;
-	this.mapper = mapper;
+            final SocialNetworkManager socialNetworkManager, final Mapper mapper) {
+        this.session = session;
+        this.groupManager = groupManager;
+        this.socialNetworkManager = socialNetworkManager;
+        this.mapper = mapper;
     }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
     public String requestJoinGroup(final String hash, final String groupShortName) throws SerializableException {
-	User user = session.getUser();
-	Group group = groupManager.findByShortName(groupShortName);
-	return socialNetworkManager.requestToJoin(user, group);
+        User user = session.getUser();
+        Group group = groupManager.findByShortName(groupShortName);
+        return socialNetworkManager.requestToJoin(user, group);
     }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
     public void unJoinGroup(final String hash, final String groupToUnJoinShortName, final String groupShortName)
-	    throws SerializableException {
-	Group group = groupManager.findByShortName(groupShortName);
-	Group groupToUnJoin = groupManager.findByShortName(groupToUnJoinShortName);
-	socialNetworkManager.deleteMember(groupToUnJoin, group);
+            throws SerializableException, AccessViolationException {
+        User userLogged = session.getUser();
+        if (!userLogged.getUserGroup().getShortName().equals(groupToUnJoinShortName)) {
+            throw new AccessViolationException();
+        }
+        Group group = groupManager.findByShortName(groupShortName);
+        Group groupToUnJoin = groupManager.findByShortName(groupToUnJoinShortName);
+        socialNetworkManager.unJoinGroup(groupToUnJoin, group);
     }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
     public void AcceptJoinGroup(final String hash, final String groupToAcceptShortName, final String groupShortName)
-	    throws SerializableException {
-	Group group = groupManager.findByShortName(groupShortName);
-	Group groupToAccept = groupManager.findByShortName(groupToAcceptShortName);
-	socialNetworkManager.acceptJoinGroup(groupToAccept, group);
+            throws SerializableException {
+        User userLogged = session.getUser();
+        Group group = groupManager.findByShortName(groupShortName);
+        Group groupToAccept = groupManager.findByShortName(groupToAcceptShortName);
+        socialNetworkManager.acceptJoinGroup(userLogged, groupToAccept, group);
     }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
     public void deleteMember(final String hash, final String groupToDeleleShortName, final String groupShortName)
-	    throws SerializableException {
-	Group group = groupManager.findByShortName(groupShortName);
-	Group groupToDelete = groupManager.findByShortName(groupToDeleleShortName);
-	socialNetworkManager.deleteMember(groupToDelete, group);
+            throws SerializableException, AccessViolationException {
+        User userLogged = session.getUser();
+        Group group = groupManager.findByShortName(groupShortName);
+        Group groupToDelete = groupManager.findByShortName(groupToDeleleShortName);
+        socialNetworkManager.deleteMember(userLogged, groupToDelete, group);
     }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
     public void denyJoinGroup(final String hash, final String groupToDenyShortName, final String groupShortName)
-	    throws SerializableException {
-	Group group = groupManager.findByShortName(groupShortName);
-	Group groupToDenyJoin = groupManager.findByShortName(groupToDenyShortName);
-	socialNetworkManager.denyJoinGroup(groupToDenyJoin, group);
+            throws SerializableException {
+        User userLogged = session.getUser();
+        Group group = groupManager.findByShortName(groupShortName);
+        Group groupToDenyJoin = groupManager.findByShortName(groupToDenyShortName);
+        socialNetworkManager.denyJoinGroup(userLogged, groupToDenyJoin, group);
     }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
     public void setCollabAsAdmin(final String hash, final String groupToSetAdminShortName, final String groupShortName)
-	    throws SerializableException {
-	Group group = groupManager.findByShortName(groupShortName);
-	Group groupToSetAdmin = groupManager.findByShortName(groupToSetAdminShortName);
-	socialNetworkManager.setCollabAsAdmin(groupToSetAdmin, group);
+            throws SerializableException {
+        User userLogged = session.getUser();
+        Group group = groupManager.findByShortName(groupShortName);
+        Group groupToSetAdmin = groupManager.findByShortName(groupToSetAdminShortName);
+        socialNetworkManager.setCollabAsAdmin(userLogged, groupToSetAdmin, group);
     }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
     public void setAdminAsCollab(final String hash, final String groupToSetCollabShortName, final String groupShortName)
-	    throws SerializableException {
-	Group group = groupManager.findByShortName(groupShortName);
-	Group groupToSetCollab = groupManager.findByShortName(groupToSetCollabShortName);
-	socialNetworkManager.setAdminAsCollab(groupToSetCollab, group);
+            throws SerializableException {
+        User userLogged = session.getUser();
+        Group group = groupManager.findByShortName(groupShortName);
+        Group groupToSetCollab = groupManager.findByShortName(groupToSetCollabShortName);
+        socialNetworkManager.setAdminAsCollab(userLogged, groupToSetCollab, group);
     }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
     public void addAdminMember(final String hash, final String groupToAddShortName, final String groupShortName)
-	    throws SerializableException {
-	Group group = groupManager.findByShortName(groupShortName);
-	Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
-	socialNetworkManager.addGroupToAdmins(groupToAdd, group);
+            throws SerializableException {
+        Group group = groupManager.findByShortName(groupShortName);
+        Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
+        socialNetworkManager.addGroupToAdmins(groupToAdd, group);
     }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
     public void addCollabMember(final String hash, final String groupToAddShortName, final String groupShortName)
-	    throws SerializableException {
-	Group group = groupManager.findByShortName(groupShortName);
-	Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
-	socialNetworkManager.addGroupToCollabs(groupToAdd, group);
+            throws SerializableException {
+        Group group = groupManager.findByShortName(groupShortName);
+        Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
+        socialNetworkManager.addGroupToCollabs(groupToAdd, group);
     }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
     public void addViewerMember(final String hash, final String groupToAddShortName, final String groupShortName)
-	    throws SerializableException {
-	Group group = groupManager.findByShortName(groupShortName);
-	Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
-	socialNetworkManager.addGroupToViewers(groupToAdd, group);
+            throws SerializableException {
+        Group group = groupManager.findByShortName(groupShortName);
+        Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
+        socialNetworkManager.addGroupToViewers(groupToAdd, group);
     }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_ONLY)
     public SocialNetworkDTO getGroupMembers(final String hash, final String groupShortName)
-	    throws AccessViolationException {
-	User user = session.getUser();
-	Group group = groupManager.findByShortName(groupShortName);
-	return mapper.map(socialNetworkManager.find(user, group), SocialNetworkDTO.class);
+            throws AccessViolationException {
+        User user = session.getUser();
+        Group group = groupManager.findByShortName(groupShortName);
+        return mapper.map(socialNetworkManager.find(user, group), SocialNetworkDTO.class);
     }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_ONLY)
     public ParticipationDataDTO getParticipation(final String hash, final String groupShortName)
-	    throws AccessViolationException {
-	User user = session.getUser();
-	Group group = groupManager.findByShortName(groupShortName);
-	return mapper.map(socialNetworkManager.findParticipation(user, group), ParticipationDataDTO.class);
+            throws AccessViolationException {
+        User user = session.getUser();
+        Group group = groupManager.findByShortName(groupShortName);
+        return mapper.map(socialNetworkManager.findParticipation(user, group), ParticipationDataDTO.class);
     }
 
 }

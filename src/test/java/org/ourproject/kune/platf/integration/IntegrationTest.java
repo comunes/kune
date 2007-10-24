@@ -17,10 +17,14 @@ public abstract class IntegrationTest {
     DatabaseProperties properties;
 
     protected void doLogin() throws SerializableException {
-        loginService.login(getDefGroupName(), properties.getDefaultSiteAdminPassword());
+        loginService.login(getSiteAdminShortName(), properties.getAdminPassword());
     }
 
-    protected String getDefGroupName() {
+    protected String getSiteAdminShortName() {
+        return properties.getAdminShortName();
+    }
+
+    protected String getDefSiteGroupName() {
         return properties.getDefaultSiteShortName();
     }
 

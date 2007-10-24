@@ -30,4 +30,6 @@ public interface WizardListener {
 
     void onCancel();
 
+    void onClose();
+
 }

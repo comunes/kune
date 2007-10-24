@@ -61,7 +61,7 @@ public class LicenseManagerDefault extends DefaultManager<License, Long> impleme
 	this.licenseFinder = licenseFinder;
     }
 
-    public License findByShortname(String shortName) {
+    public License findByShortName(String shortName) {
 	return licenseFinder.findByShortName(shortName);
     }
 }

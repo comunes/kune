@@ -29,7 +29,6 @@ import org.ourproject.kune.sitebar.client.login.LoginListener;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarServiceAsync;
 
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListener {
@@ -39,129 +38,125 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
     private boolean isLogged;
 
     public SiteBarPresenter(final SiteBarListener listener) {
-	this.listener = listener;
+        this.listener = listener;
     }
 
     public void init(final SiteBarView view) {
-	this.view = view;
-	view.setLogoutLinkVisible(false);
+        this.view = view;
+        view.setLogoutLinkVisible(false);
     }
 
     public void doLogin() {
-	Site.showProgressProcessing();
-	view.showLoginDialog();
-	Site.hideProgress();
+        Site.showProgressProcessing();
+        view.showLoginDialog();
+        Site.hideProgress();
     }
 
     public void doNewGroup() {
-	if (isLogged) {
-	    Site.showProgressProcessing();
-	    view.showNewGroupDialog();
-	    Site.hideProgress();
-	} else {
-	    // i18n
-	    Site.info("You must be logged to create a group");
-	}
+        if (isLogged) {
+            Site.showProgressProcessing();
+            view.showNewGroupDialog();
+        } else {
+            // i18n
+            Site.info("Sign in or register to create a group");
+        }
     }
 
-    public void doSearch(final String string) {
-	if (string == null) {
-	    Window.alert("Type something to search!");
-	} else {
-	    Window.alert("In development!");
-	}
+    public void doSearch(final String termToSearch) {
+        Site.showProgressProcessing();
+        view.showSearchPanel(termToSearch);
     }
 
     public void doLogout() {
-	Site.showProgressProcessing();
-	SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
-	siteBarService.logout(new AsyncCallback() {
-	    public void onFailure(final Throwable arg0) {
-		Site.hideProgress();
-	    }
+        Site.showProgressProcessing();
+        SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
+        siteBarService.logout(new AsyncCallback() {
+            public void onFailure(final Throwable arg0) {
+                Site.hideProgress();
+            }
 
-	    public void onSuccess(final Object arg0) {
-		Site.hideProgress();
-		isLogged = false;
-		view.restoreLoginLink();
-		view.resetOptionsSubmenu();
-		view.setLogoutLinkVisible(false);
-		listener.onUserLoggedOut();
-	    }
-	});
+            public void onSuccess(final Object arg0) {
+                Site.hideProgress();
+                isLogged = false;
+                view.restoreLoginLink();
+                view.resetOptionsSubmenu();
+                view.setLogoutLinkVisible(false);
+                listener.onUserLoggedOut();
+            }
+        });
     }
 
     public void reloadUserInfo(final String userHash) {
-	SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
-	siteBarService.reloadUserInfo(userHash, new AsyncCallback() {
-	    public void onFailure(final Throwable arg0) {
-		Site.hideProgress();
-	    }
+        SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
+        siteBarService.reloadUserInfo(userHash, new AsyncCallback() {
+            public void onFailure(final Throwable arg0) {
+                Site.hideProgress();
+            }
 
-	    public void onSuccess(final Object response) {
-		showLoggedUser((UserInfoDTO) response);
-		Site.hideProgress();
-	    }
-	});
+            public void onSuccess(final Object response) {
+                showLoggedUser((UserInfoDTO) response);
+                Site.hideProgress();
+            }
+        });
     }
 
     public void userLoggedIn(final UserInfoDTO user) {
-	view.hideLoginDialog();
-	listener.onUserLoggedIn(user);
+        view.hideLoginDialog();
+        listener.onUserLoggedIn(user);
     }
 
     public void showLoggedUser(final UserInfoDTO user) {
-	if (user == null) {
-	    view.restoreLoginLink();
-	    view.setLogoutLinkVisible(false);
-	} else {
-	    isLogged = true;
-	    view.showLoggedUserName(user.getShortName(), user.getHomePage());
-	    view.setLogoutLinkVisible(true);
-	    view.setGroupsIsMember(user.getGroupsIsAdmin(), user.getGroupsIsCollab());
-	}
+        if (user == null) {
+            view.restoreLoginLink();
+            view.setLogoutLinkVisible(false);
+        } else {
+            isLogged = true;
+            view.showLoggedUserName(user.getShortName(), user.getHomePage());
+            view.setLogoutLinkVisible(true);
+            view.setGroupsIsMember(user.getGroupsIsAdmin(), user.getGroupsIsCollab());
+        }
     }
 
     public void onLoginCancelled() {
-	view.hideLoginDialog();
+        view.hideLoginDialog();
     }
 
     public void onNewGroupCreated(final StateToken homePage) {
-	view.hideNewGroupDialog();
-	changeState(homePage);
+        view.hideNewGroupDialog();
+        changeState(homePage);
     }
 
     public void onNewGroupCancel() {
-	view.hideNewGroupDialog();
+        view.hideNewGroupDialog();
     }
 
     public void hideProgress() {
-	view.hideProgress();
+        view.hideProgress();
     }
 
     public void showProgress(final String text) {
-	view.showProgress(text);
+        view.showProgress(text);
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     protected void onSearchLostFocus(final String search) {
-	if (search.length() == 0) {
-	    view.setDefaultTextSearch();
-	    view.setTextSearchSmall();
+        if (search.length() == 0) {
+            view.setDefaultTextSearch();
+            view.setTextSearchSmall();
 
-	}
+        }
     }
 
     protected void onSearchFocus() {
-	view.setTextSearchBig();
-	view.clearSearchText();
+        view.setTextSearchBig();
+        view.clearSearchText();
     }
 
     public void changeState(final StateToken token) {
-	listener.onChangeState(token);
+        listener.onChangeState(token);
     }
 
 }

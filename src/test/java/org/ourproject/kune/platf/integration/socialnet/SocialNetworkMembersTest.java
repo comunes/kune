@@ -24,28 +24,26 @@ public class SocialNetworkMembersTest extends IntegrationTest {
     @Inject
     GroupManager groupFinder;
 
-    private String groupShortName;
     private Group group;
 
     @Before
     public void init() {
-	new IntegrationTestHelper(this);
-	groupShortName = getDefGroupName();
-	group = groupFinder.findByShortName(groupShortName);
+        new IntegrationTestHelper(this);
+        group = groupFinder.findByShortName(getSiteAdminShortName());
     }
 
     @Test
     public void testAdminMembersOfGroupFinder() throws SerializableException {
-	doLogin();
-	List<Group> result = groupFinder.findAdminInGroups(group.getId());
-	assertEquals(1, result.size());
+        doLogin();
+        List<Group> result = groupFinder.findAdminInGroups(group.getId());
+        assertEquals(2, result.size());
     }
 
     @Test
     public void testCollabMembersOfGroupFinder() throws SerializableException {
-	doLogin();
-	List<Group> result = groupFinder.findCollabInGroups(group.getId());
-	assertEquals(0, result.size());
+        doLogin();
+        List<Group> result = groupFinder.findCollabInGroups(group.getId());
+        assertEquals(0, result.size());
     }
 
 }

@@ -35,86 +35,88 @@ public class NewGroupFormPresenter implements NewGroupForm {
     private NewGroupFormView view;
 
     public NewGroupFormPresenter(final NewGroupListener listener) {
-	this.listener = listener;
+        this.listener = listener;
     }
 
     public void init(final NewGroupFormView view) {
-	this.view = view;
+        this.view = view;
     }
 
     public void onFinish() {
-	GroupServiceAsync groupService = GroupService.App.getInstance();
-	String shortName = view.getShortName();
-	String longName = view.getLongName();
-	String publicDesc = view.getPublicDesc();
+        GroupServiceAsync groupService = GroupService.App.getInstance();
+        String shortName = view.getShortName();
+        String longName = view.getLongName();
+        String publicDesc = view.getPublicDesc();
 
-	LicenseDTO license = view.getLicense();
-	GroupDTO group = new GroupDTO(shortName, longName, publicDesc, getTypeOfGroup());
-	group.setDefaultLicense(license);
-	// FIXME: get User hash
-	groupService.createNewGroup("FIXMEFIXME", group, new AsyncCallback() {
-	    public void onFailure(final Throwable arg0) {
-		// TODO
-		Site.error("Error creating group");
-	    }
+        LicenseDTO license = view.getLicense();
+        GroupDTO group = new GroupDTO(shortName, longName, publicDesc, getTypeOfGroup());
+        group.setDefaultLicense(license);
+        // FIXME: get User hash
+        groupService.createNewGroup("FIXMEFIXME", group, new AsyncCallback() {
+            public void onFailure(final Throwable arg0) {
+                // TODO
+                Site.error("Error creating group");
+            }
 
-	    public void onSuccess(final Object arg0) {
-		listener.onNewGroupCreated((StateToken) arg0);
-		view.hide();
-		reset();
-	    }
-	});
+            public void onSuccess(final Object arg0) {
+                listener.onNewGroupCreated((StateToken) arg0);
+                view.hide();
+                reset();
+            }
+        });
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     private String getTypeOfGroup() {
-	if (view.isProject()) {
-	    return GroupDTO.PROJECT;
-	} else if (view.isOrganization()) {
-	    return GroupDTO.ORGANIZATION;
-	} else {
-	    return GroupDTO.COMMUNITY;
-	}
+        if (view.isProject()) {
+            return GroupDTO.PROJECT;
+        } else if (view.isOrganization()) {
+            return GroupDTO.ORGANIZATION;
+        } else {
+            return GroupDTO.COMMUNITY;
+        }
     }
 
     private void reset() {
-	view.clearData();
+        view.clearData();
     }
 
     public void onBack() {
-	view.setEnabledBackButton(false);
-	view.setEnabledFinishButton(false);
-	view.setEnabledNextButton(true);
-	view.showNewGroupInitialDataForm();
+        view.setEnabledBackButton(false);
+        view.setEnabledFinishButton(false);
+        view.setEnabledNextButton(true);
+        view.showNewGroupInitialDataForm();
 
     }
 
     public void onCancel() {
-	reset();
-	view.hide();
-	listener.onNewGroupCancel();
+        view.hide();
+        reset();
+        listener.onNewGroupCancel();
+    }
+
+    public void onClose() {
+        reset();
     }
 
     public void onNext() {
-	if (view.isFormValid()) {
-	    view.setEnabledBackButton(true);
-	    view.setEnabledFinishButton(true);
-	    view.setEnabledNextButton(false);
-	    view.showLicenseForm();
-	}
+        if (view.isFormValid()) {
+            view.setEnabledBackButton(true);
+            view.setEnabledFinishButton(true);
+            view.setEnabledNextButton(false);
+            view.showLicenseForm();
+        }
     }
 
-    public void onCClicenseSelected() {
-	// TODO Auto-generated method stub
-
+    public void onChange() {
+        // This doesn't work perfect (don't use now):
+        // if (view.isFormValid()) {
+        // view.setEnabledNextButton(true);
+        // } else {
+        // view.setEnabledNextButton(false);
+        // }
     }
-
-    public void onNotCClicenseSelected() {
-	// TODO Auto-generated method stub
-
-    }
-
 }

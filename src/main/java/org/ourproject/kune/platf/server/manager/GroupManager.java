@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.apache.lucene.queryParser.ParseException;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
+import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 
@@ -37,7 +38,7 @@ public interface GroupManager extends Manager<Group, Long> {
 
     List<Group> findCollabInGroups(Long groupId);
 
-    Group createGroup(Group group, User user) throws SerializableException;
+    Group createGroup(Group group, User user) throws SerializableException, UserMustBeLoggedException;
 
     Group createUserGroup(User user);
 
@@ -54,6 +55,8 @@ public interface GroupManager extends Manager<Group, Long> {
     Group getGroupOfUserWithId(Long userId);
 
     List<Group> search(String search) throws ParseException;
+
+    List<Group> search(String search, Integer firstResult, Integer maxResults) throws ParseException;
 
     void reIndex();
 

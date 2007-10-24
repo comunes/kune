@@ -6,6 +6,6 @@ public interface MessagePresenter {
 
     public abstract void setMessage(final String message, final int type);
 
-    public abstract void onClose();
+    public abstract void onMessageClose();
 
 }

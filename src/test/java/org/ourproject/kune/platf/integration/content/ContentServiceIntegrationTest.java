@@ -14,8 +14,8 @@ public abstract class ContentServiceIntegrationTest extends IntegrationTest {
     protected ContentService contentService;
 
     protected StateDTO getDefaultContent() throws SerializableException, ContentNotFoundException {
-	StateDTO content = contentService.getContent(session.getHash(), new StateToken());
-	return content;
+        StateDTO content = contentService.getContent(session.getHash(), new StateToken());
+        return content;
     }
 
 }

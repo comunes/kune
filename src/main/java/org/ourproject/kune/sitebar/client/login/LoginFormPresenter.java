@@ -38,100 +38,100 @@ public class LoginFormPresenter implements LoginForm, MessagePresenter {
 
     final LoginListener listener;
 
-    // private boolean loginButtonEnabled;
-
     public LoginFormPresenter(final LoginListener listener) {
-	this.listener = listener;
-	// //this.loginButtonEnabled = false;
+        this.listener = listener;
     }
 
     public void init(final LoginFormView loginview) {
-	this.view = loginview;
-	reset();
+        this.view = loginview;
+        reset();
     }
 
-    public void doCancel() {
-	reset();
-	resetMessage();
-	listener.onLoginCancelled();
+    public void onCancel() {
+        resetMessage();
+        reset();
+        listener.onLoginCancelled();
     }
 
     public void doLogin() {
-	if (view.isSignInFormValid()) {
-	    Site.showProgressProcessing();
-	    final String nickOrEmail = view.getNickOrEmail();
-	    final String passwd = view.getLoginPassword();
-	    SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
-	    siteBarService.login(nickOrEmail, passwd, new AsyncCallback() {
-		public void onFailure(final Throwable caught) {
-		    Site.hideProgress();
-		    try {
-			throw caught;
-		    } catch (final UserAuthException e) {
-			// i18n
+        if (view.isSignInFormValid()) {
+            Site.showProgressProcessing();
+            final String nickOrEmail = view.getNickOrEmail();
+            final String passwd = view.getLoginPassword();
+            SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
+            siteBarService.login(nickOrEmail, passwd, new AsyncCallback() {
+                public void onFailure(final Throwable caught) {
+                    Site.hideProgress();
+                    try {
+                        throw caught;
+                    } catch (final UserAuthException e) {
+                        // i18n
 
-			view.showErrorMessage("Error in authentication");
-		    } catch (final Throwable e) {
-			view.showErrorMessage("Error in login");
-			GWT.log("Other kind of exception in LoginFormPresenter/doLogin", null);
-			throw new RuntimeException();
-		    }
+                        view.showErrorMessage("Error in authentication");
+                    } catch (final Throwable e) {
+                        view.showErrorMessage("Error in login");
+                        GWT.log("Other kind of exception in LoginFormPresenter/doLogin", null);
+                        throw new RuntimeException();
+                    }
 
-		}
+                }
 
-		public void onSuccess(final Object response) {
-		    listener.userLoggedIn((UserInfoDTO) response);
-		    Site.hideProgress();
-		}
-	    });
-	}
+                public void onSuccess(final Object response) {
+                    listener.userLoggedIn((UserInfoDTO) response);
+                    Site.hideProgress();
+                }
+            });
+        }
     }
 
     public void doRegister() {
-	if (view.isRegisterFormValid()) {
-	    Site.showProgressProcessing();
-	    final String shortName = view.getShortName();
-	    final String passwd = view.getRegisterPassword();
-	    final String longName = view.getLongName();
-	    final String email = view.getEmail();
-	    SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
-	    // TODO: Form of register, license menu;
-	    LicenseDTO defaultLicense = new LicenseDTO("by-sa", "Creative Commons Attribution-ShareAlike", "",
-		    "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
-	    siteBarService.createUser(shortName, longName, email, passwd, defaultLicense, new AsyncCallback() {
-		public void onFailure(final Throwable arg0) {
-		    // i18n: Error creating user
-		    Site.hideProgress();
-		    Site.important("Error creating user");
-		}
+        if (view.isRegisterFormValid()) {
+            Site.showProgressProcessing();
+            final String shortName = view.getShortName();
+            final String passwd = view.getRegisterPassword();
+            final String longName = view.getLongName();
+            final String email = view.getEmail();
+            SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
+            // TODO: Form of register, license menu;
+            LicenseDTO defaultLicense = new LicenseDTO("by-sa", "Creative Commons Attribution-ShareAlike", "",
+                    "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
+            siteBarService.createUser(shortName, longName, email, passwd, defaultLicense, new AsyncCallback() {
+                public void onFailure(final Throwable arg0) {
+                    // i18n: Error creating user
+                    Site.hideProgress();
+                    Site.important("Error creating user");
+                }
 
-		public void onSuccess(final Object response) {
-		    listener.userLoggedIn((UserInfoDTO) response);
-		    Site.hideProgress();
-		}
-	    });
-	}
+                public void onSuccess(final Object response) {
+                    listener.userLoggedIn((UserInfoDTO) response);
+                    Site.hideProgress();
+                }
+            });
+        }
+    }
+
+    public void onMessageClose() {
+        // From MessagePresenter: do nothing
     }
 
     public void onClose() {
-	// Do nothing
+        resetMessage();
+        reset();
     }
 
     public void setMessage(final String message, final int type) {
-	// TODO Auto-generated method stub
-
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void resetMessage() {
-	view.hideMessage();
+        view.hideMessage();
     }
 
     private void reset() {
-	view.reset();
+        view.reset();
     }
 
 }

@@ -1,4 +1,8 @@
-2007-10-18 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+2007-10-24 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* Add folder in non personal group, fixed
+	* Communities/Org/Projects admission fixed
+	* SocialNetwork new tests and permissions check
+	* Fixed newGroup/LoginForm creation and close/cancel bugs
 	* Added custom extgwt theme
 	* Added Group/User indexing with hibernate-search and basic search/reindex functions
 	to DefaultManager

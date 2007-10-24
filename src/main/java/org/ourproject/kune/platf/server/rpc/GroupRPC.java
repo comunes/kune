@@ -25,6 +25,7 @@ import org.apache.commons.logging.LogFactory;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
+import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.rpc.GroupService;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
@@ -48,36 +49,36 @@ public class GroupRPC implements RPC, GroupService {
 
     @Inject
     public GroupRPC(final UserSession session, final GroupManager groupManager, final Mapper mapper) {
-	this.session = session;
-	this.groupManager = groupManager;
-	this.mapper = mapper;
+        this.session = session;
+        this.groupManager = groupManager;
+        this.mapper = mapper;
     }
 
     @Transactional(type = TransactionType.READ_WRITE)
-    public StateToken createNewGroup(final String userHash, final GroupDTO group) throws SerializableException {
-	log.debug(group.getShortName() + group.getLongName() + group.getPublicDesc() + group.getDefaultLicense()
-		+ group.getType());
-	final User user = session.getUser();
-	final Group newGroup = groupManager.createGroup(mapper.map(group, Group.class), user);
-	if (group.getType() == GroupDTO.COMMUNITY) {
-	    newGroup.setAdmissionType(AdmissionType.Open);
-	}
-	if (group.getType() == GroupDTO.ORGANIZATION) {
-	    newGroup.setAdmissionType(AdmissionType.Moderated);
-	}
-	if (group.getType() == GroupDTO.PROJECT) {
-	    newGroup.setAdmissionType(AdmissionType.Moderated);
-	}
-	return new StateToken(newGroup.getDefaultContent().getStateToken());
+    public StateToken createNewGroup(final String userHash, final GroupDTO groupDTO) throws SerializableException,
+            UserMustBeLoggedException {
+        log.debug(groupDTO.getShortName() + groupDTO.getLongName() + groupDTO.getPublicDesc()
+                + groupDTO.getDefaultLicense() + groupDTO.getType());
+        final User user = session.getUser();
+        Group group = mapper.map(groupDTO, Group.class);
+        if (groupDTO.getType().equals(GroupDTO.COMMUNITY)) {
+            group.setAdmissionType(AdmissionType.Open);
+        } else if (groupDTO.getType().equals(GroupDTO.ORGANIZATION)) {
+            group.setAdmissionType(AdmissionType.Moderated);
+        } else if (groupDTO.getType().equals(GroupDTO.PROJECT)) {
+            group.setAdmissionType(AdmissionType.Moderated);
+        }
+        final Group newGroup = groupManager.createGroup(group, user);
+        return new StateToken(newGroup.getDefaultContent().getStateToken());
     }
 
     @Transactional(type = TransactionType.READ_WRITE)
     public void changeGroupWsTheme(final String userHash, final String groupShortName, final String theme)
-	    throws AccessViolationException {
-	// TODO Auto-generated method stub
-	final User user = session.getUser();
-	Group group = groupManager.findByShortName(groupShortName);
-	groupManager.changeWsTheme(user, group, theme);
+            throws AccessViolationException {
+        // TODO Auto-generated method stub
+        final User user = session.getUser();
+        Group group = groupManager.findByShortName(groupShortName);
+        groupManager.changeWsTheme(user, group, theme);
     }
 
 }

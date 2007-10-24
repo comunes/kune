@@ -5,12 +5,11 @@
   <artifactId>org.ourproject.kune</artifactId>
   <version>0.0.1</version>
   <description>
-    kune fre/open/libre collaboration platform
+    kune free/open/libre collaboration platform
   </description>
   <name>Kune</name>
-  <url>http://maven.apache.org</url>
+  <url>http://kune.ourproject.org</url>
   <dependencies>
-
     <!-- guice -->
     <dependency>
       <groupId>com.google.code.guice</groupId>
@@ -177,6 +176,16 @@
   <!-- http://gwt-maven.googlecode.com/svn/docs/maven-googlewebtoolkit2-plugin/index.html -->
   <repositories>
     <repository>
+      <id>repository.jboss.org</id>
+      <name>JBoss Maven Repository</name>
+      <url>http://repository.jboss.org/maven2</url>
+      <layout>default</layout>
+    </repository>
+    <repository>
+      <id>dyndns-repo</id>
+      <url>http://maven.dyndns.org/2</url>
+    </repository>
+    <repository>
       <id>gwt-maven</id>
       <url>
         http://gwt-maven.googlecode.com/svn/trunk/mavenrepo/
@@ -185,20 +194,6 @@
     <repository>
       <id>kune-maven</id>
       <url>http://kune.ourproject.org/mavenrepo/</url>
-    </repository>
-    <repository>
-      <id>jboss</id>
-      <url>http://repository.jboss.org/maven2/</url>
-    </repository>
-    <repository>
-      <id>dyndns-repo</id>
-      <url>http://maven.dyndns.org/2</url>
-    </repository>
-    <repository>
-      <id>repository.jboss.org</id>
-      <name>JBoss Maven Repository</name>
-      <url>http://repository.jboss.org/maven2</url>
-      <layout>default</layout>
     </repository>
   </repositories>
   <pluginRepositories>

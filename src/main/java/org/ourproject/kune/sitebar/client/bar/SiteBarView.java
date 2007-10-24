@@ -56,12 +56,14 @@ public interface SiteBarView extends View {
 
     void setDefaultTextSearch();
 
-    void setGroupsIsMember(List groupsIsAdmin, List groupsIsEditor);
+    void setGroupsIsMember(List groupsIsAdmin, List groupsIsCollab);
 
     void resetOptionsSubmenu();
 
     void setTextSearchSmall();
 
     void setTextSearchBig();
+
+    void showSearchPanel(String termToSearch);
 
 }

@@ -9,6 +9,7 @@ import org.apache.lucene.queryParser.ParseException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.server.PersistenceTest;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Group;
@@ -36,89 +37,108 @@ public class GroupManagerTest extends PersistenceTest {
     LicenseManager licenseManager;
 
     private User user;
-    private License licenseDef;
+    private License defLicense;
 
     @Before
     public void insertData() throws SerializableException {
-	openTransaction();
-	assertEquals(0, userFinder.getAll().size());
-	assertEquals(0, groupFinder.getAll().size());
-	assertEquals(0, licenseFinder.getAll().size());
-	user = userManager.createUser("username", "the user name", "email@example.com", "userPassword");
-	licenseDef = new License("by-sa", "Creative Commons Attribution-ShareAlike", "",
-		"http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
-	licenseManager.persist(licenseDef);
-	groupManager.createUserGroup(user);
+        openTransaction();
+        assertEquals(0, userFinder.getAll().size());
+        assertEquals(0, groupFinder.getAll().size());
+        assertEquals(0, licenseFinder.getAll().size());
+        user = userManager.createUser("username", "the user name", "email@example.com", "userPassword");
+        defLicense = new License("by-sa", "Creative Commons Attribution-ShareAlike", "",
+                "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
+        licenseManager.persist(defLicense);
+        groupManager.createUserGroup(user);
     }
 
     @Test
-    public void createdGroupShoudHaveValidSocialNetwork() throws SerializableException {
-	final Group group = new Group("short", "longName", licenseDef, GroupType.PROJECT);
-	groupManager.createGroup(group, user);
-	final SocialNetwork socialNetwork = group.getSocialNetwork();
-	final AccessLists lists = socialNetwork.getAccessLists();
-	assertTrue(lists.getAdmins().includes(user.getUserGroup()));
-	assertTrue(lists.getEditors().isEmpty());
-	assertTrue(lists.getViewers().isEmpty());
-	closeTransaction();
+    public void createdGroupShoudHaveValidSocialNetwork() throws SerializableException, UserMustBeLoggedException {
+        final Group group = new Group("short", "longName", defLicense, GroupType.PROJECT);
+        groupManager.createGroup(group, user);
+        final SocialNetwork socialNetwork = group.getSocialNetwork();
+        final AccessLists lists = socialNetwork.getAccessLists();
+        assertTrue(lists.getAdmins().includes(user.getUserGroup()));
+        assertTrue(lists.getEditors().isEmpty());
+        assertTrue(lists.getViewers().isEmpty());
+        closeTransaction();
     }
 
     @Test
-    public void createGroup() throws SerializableException {
-	final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", licenseDef,
-		GroupType.PROJECT);
-	groupManager.createGroup(group, user);
-	final Group otherGroup = groupManager.findByShortName("ysei");
+    public void createGroup() throws SerializableException, UserMustBeLoggedException {
+        final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
+                GroupType.PROJECT);
+        groupManager.createGroup(group, user);
+        final Group otherGroup = groupManager.findByShortName("ysei");
 
-	assertEquals(group.getLongName(), otherGroup.getLongName());
-	assertEquals(group.getShortName(), otherGroup.getShortName());
-	closeTransaction();
+        assertEquals(group.getLongName(), otherGroup.getLongName());
+        assertEquals(group.getShortName(), otherGroup.getShortName());
+        closeTransaction();
     }
 
     @Test(expected = SerializableException.class)
-    public void createGroupWithExistingShortName() throws SerializableException {
-	final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", licenseDef,
-		GroupType.PROJECT);
-	groupManager.createGroup(group, user);
+    public void createGroupWithExistingShortName() throws SerializableException, UserMustBeLoggedException {
+        final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
+                GroupType.PROJECT);
+        groupManager.createGroup(group, user);
 
-	final Group group2 = new Group("ysei", "Yellow Submarine Environmental Initiative 2", licenseDef,
-		GroupType.PROJECT);
-	groupManager.createGroup(group2, user);
+        final Group group2 = new Group("ysei", "Yellow Submarine Environmental Initiative 2", defLicense,
+                GroupType.PROJECT);
+        groupManager.createGroup(group2, user);
 
-	rollbackTransaction();
+        rollbackTransaction();
     }
 
     @Test(expected = SerializableException.class)
-    public void createGroupWithExistingLongName() throws SerializableException {
-	final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", licenseDef,
-		GroupType.PROJECT);
-	groupManager.createGroup(group, user);
+    public void createGroupWithExistingLongName() throws SerializableException, UserMustBeLoggedException {
+        final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
+                GroupType.PROJECT);
+        groupManager.createGroup(group, user);
 
-	final Group group2 = new Group("ysei2", "Yellow Submarine Environmental Initiative", licenseDef,
-		GroupType.PROJECT);
-	group2.setDefaultLicense(licenseDef);
-	groupManager.createGroup(group2, user);
+        final Group group2 = new Group("ysei2", "Yellow Submarine Environmental Initiative", defLicense,
+                GroupType.PROJECT);
+        group2.setDefaultLicense(defLicense);
+        groupManager.createGroup(group2, user);
 
-	rollbackTransaction();
+        rollbackTransaction();
     }
 
     @Test
-    public void createGroupAndSearch() throws SerializableException, ParseException {
-	final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", licenseDef,
-		GroupType.PROJECT);
-	groupManager.createGroup(group, user);
-	groupManager.reIndex();
-	List<Group> result = groupManager.search("ysei");
-	assertEquals(1, result.size());
-	assertEquals("ysei", result.get(0).getShortName());
-	rollbackTransaction();
+    public void createGroupAndSearch() throws SerializableException, ParseException, UserMustBeLoggedException {
+        final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
+                GroupType.PROJECT);
+        groupManager.createGroup(group, user);
+        groupManager.reIndex();
+        List<Group> result = groupManager.search("ysei");
+        assertEquals(1, result.size());
+        assertEquals("ysei", result.get(0).getShortName());
+        rollbackTransaction();
+    }
+
+    @Test
+    public void groupSearchPagination() throws SerializableException, ParseException {
+        for (int i = 1; i < 10; i++) {
+            createTestGroup(i);
+        }
+        groupManager.reIndex();
+        List<Group> result = groupManager.search("Yellow", 0, 5);
+        assertEquals(5, result.size());
+        List<Group> result2 = groupManager.search("Yellow", 5, 5);
+        assertEquals(4, result2.size());
+        rollbackTransaction();
+    }
+
+    private void createTestGroup(final int number) throws SerializableException, UserMustBeLoggedException {
+        Group g = new Group("ysei" + number, "Yellow Submarine Environmental Initiative " + number, defLicense,
+                GroupType.PROJECT);
+        groupManager.createGroup(g, user);
     }
 
     @After
     public void close() {
-	if (getTransaction().isActive()) {
-	    getTransaction().rollback();
-	}
+        if (getTransaction().isActive()) {
+            getTransaction().rollback();
+        }
 
     }
 }
