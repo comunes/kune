@@ -9,7 +9,8 @@ import org.apache.lucene.queryParser.ParseException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
+import org.ourproject.kune.platf.client.errors.EmailAddressInUseException;
+import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
 import org.ourproject.kune.platf.server.PersistenceTest;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Group;
@@ -53,7 +54,7 @@ public class GroupManagerTest extends PersistenceTest {
     }
 
     @Test
-    public void createdGroupShoudHaveValidSocialNetwork() throws SerializableException, UserMustBeLoggedException {
+    public void createdGroupShoudHaveValidSocialNetwork() throws SerializableException {
         final Group group = new Group("short", "longName", defLicense, GroupType.PROJECT);
         groupManager.createGroup(group, user);
         final SocialNetwork socialNetwork = group.getSocialNetwork();
@@ -65,7 +66,7 @@ public class GroupManagerTest extends PersistenceTest {
     }
 
     @Test
-    public void createGroup() throws SerializableException, UserMustBeLoggedException {
+    public void createGroup() throws SerializableException {
         final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
                 GroupType.PROJECT);
         groupManager.createGroup(group, user);
@@ -76,8 +77,8 @@ public class GroupManagerTest extends PersistenceTest {
         closeTransaction();
     }
 
-    @Test(expected = SerializableException.class)
-    public void createGroupWithExistingShortName() throws SerializableException, UserMustBeLoggedException {
+    @Test(expected = GroupNameInUseException.class)
+    public void createGroupWithExistingShortName() throws SerializableException {
         final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
                 GroupType.PROJECT);
         groupManager.createGroup(group, user);
@@ -89,8 +90,8 @@ public class GroupManagerTest extends PersistenceTest {
         rollbackTransaction();
     }
 
-    @Test(expected = SerializableException.class)
-    public void createGroupWithExistingLongName() throws SerializableException, UserMustBeLoggedException {
+    @Test(expected = GroupNameInUseException.class)
+    public void createGroupWithExistingLongName() throws SerializableException {
         final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
                 GroupType.PROJECT);
         groupManager.createGroup(group, user);
@@ -103,8 +104,29 @@ public class GroupManagerTest extends PersistenceTest {
         rollbackTransaction();
     }
 
+    @Test(expected = GroupNameInUseException.class)
+    public void createUserWithExistingShortName() throws SerializableException {
+        User user2 = userManager.createUser("username", "the user name 2", "email2@example.com", "userPassword");
+        groupManager.createUserGroup(user2);
+        rollbackTransaction();
+    }
+
+    @Test(expected = GroupNameInUseException.class)
+    public void createUserWithExistingLongName() throws SerializableException {
+        User user2 = userManager.createUser("username2", "the user name", "email2@example.com", "userPassword");
+        groupManager.createUserGroup(user2);
+        rollbackTransaction();
+    }
+
+    @Test(expected = EmailAddressInUseException.class)
+    public void createUserWithExistingEmail() throws SerializableException {
+        User user2 = userManager.createUser("username2", "the user name 2", "email@example.com", "userPassword");
+        groupManager.createUserGroup(user2);
+        rollbackTransaction();
+    }
+
     @Test
-    public void createGroupAndSearch() throws SerializableException, ParseException, UserMustBeLoggedException {
+    public void createGroupAndSearch() throws SerializableException, ParseException {
         final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
                 GroupType.PROJECT);
         groupManager.createGroup(group, user);
@@ -128,7 +150,7 @@ public class GroupManagerTest extends PersistenceTest {
         rollbackTransaction();
     }
 
-    private void createTestGroup(final int number) throws SerializableException, UserMustBeLoggedException {
+    private void createTestGroup(final int number) throws SerializableException {
         Group g = new Group("ysei" + number, "Yellow Submarine Environmental Initiative " + number, defLicense,
                 GroupType.PROJECT);
         groupManager.createGroup(g, user);

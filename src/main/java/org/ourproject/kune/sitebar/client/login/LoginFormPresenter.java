@@ -23,6 +23,8 @@ package org.ourproject.kune.sitebar.client.login;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
+import org.ourproject.kune.platf.client.errors.EmailAddressInUseException;
+import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
 import org.ourproject.kune.platf.client.errors.UserAuthException;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.msg.MessagePresenter;
@@ -66,8 +68,7 @@ public class LoginFormPresenter implements LoginForm, MessagePresenter {
                         throw caught;
                     } catch (final UserAuthException e) {
                         // i18n
-
-                        view.showErrorMessage("Error in authentication");
+                        view.showErrorMessage("Incorrect username/email or password");
                     } catch (final Throwable e) {
                         view.showErrorMessage("Error in login");
                         GWT.log("Other kind of exception in LoginFormPresenter/doLogin", null);
@@ -96,10 +97,21 @@ public class LoginFormPresenter implements LoginForm, MessagePresenter {
             LicenseDTO defaultLicense = new LicenseDTO("by-sa", "Creative Commons Attribution-ShareAlike", "",
                     "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
             siteBarService.createUser(shortName, longName, email, passwd, defaultLicense, new AsyncCallback() {
-                public void onFailure(final Throwable arg0) {
+                public void onFailure(final Throwable caught) {
                     // i18n: Error creating user
                     Site.hideProgress();
-                    Site.important("Error creating user");
+                    try {
+                        throw caught;
+                    } catch (final EmailAddressInUseException e) {
+                        view.showErrorMessage("This email in in use by other person, try with another.");
+                    } catch (final GroupNameInUseException e) {
+                        // i18n
+                        view.showErrorMessage("This name in already in use, try with a different name");
+                    } catch (final Throwable e) {
+                        view.showErrorMessage("Error during registration");
+                        GWT.log("Other kind of exception in user registration", null);
+                        throw new RuntimeException();
+                    }
                 }
 
                 public void onSuccess(final Object response) {

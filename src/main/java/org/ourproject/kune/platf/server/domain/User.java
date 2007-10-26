@@ -51,7 +51,7 @@ public class User implements HasId {
     @GeneratedValue
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     @Email
     private String email;
 
@@ -79,84 +79,84 @@ public class User implements HasId {
     public static final User UNKNOWN_USER = new User();
 
     public User(final String shortName, final String name, final String email, final String password) {
-	this.shortName = shortName;
-	this.name = name;
-	this.email = email;
-	this.password = password;
-	this.userGroup = Group.NO_GROUP;
+        this.shortName = shortName;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.userGroup = Group.NO_GROUP;
     }
 
     public User() {
-	this(null, null, null, null);
+        this(null, null, null, null);
     }
 
     @Finder(query = "from User")
     public List<User> getAll() {
-	return null;
+        return null;
     }
 
     @Finder(query = "from User where email = :email")
     public User getByEmail(@Named("email")
     final String email) {
-	return null;
+        return null;
     }
 
     @Finder(query = "from User where shortName = :shortName")
     public User getByShortName(@Named("shortName")
     final String shortName) {
-	return null;
+        return null;
     }
 
     public Long getId() {
-	return id;
+        return id;
     }
 
     public void setId(final Long id) {
-	this.id = id;
+        this.id = id;
     }
 
     public String getEmail() {
-	return email;
+        return email;
     }
 
     public void setEmail(final String email) {
-	this.email = email;
+        this.email = email;
     }
 
     public String getPassword() {
-	return password;
+        return password;
     }
 
     public void setPassword(final String password) {
-	this.password = password;
+        this.password = password;
     }
 
     public Group getUserGroup() {
-	return userGroup;
+        return userGroup;
     }
 
     public void setUserGroup(final Group userGroup) {
-	this.userGroup = userGroup;
+        this.userGroup = userGroup;
     }
 
     public String getName() {
-	return name;
+        return name;
     }
 
     public void setName(final String name) {
-	this.name = name;
+        this.name = name;
     }
 
     public String getShortName() {
-	return shortName;
+        return shortName;
     }
 
     public void setShortName(final String shortName) {
-	this.shortName = shortName;
+        this.shortName = shortName;
     }
 
     public static boolean isKnownUser(final User user) {
-	return user != UNKNOWN_USER;
+        return user != UNKNOWN_USER;
     }
 
 }

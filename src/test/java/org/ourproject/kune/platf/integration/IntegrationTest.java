@@ -28,6 +28,10 @@ public abstract class IntegrationTest {
         return properties.getDefaultSiteShortName();
     }
 
+    protected String getDefLicense() {
+        return properties.getDefaultLicense();
+    }
+
     public String getHash() {
         return session.getHash();
     }

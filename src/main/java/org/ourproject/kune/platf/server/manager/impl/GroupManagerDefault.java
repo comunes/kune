@@ -30,6 +30,8 @@ import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.Query;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
+import org.ourproject.kune.platf.client.errors.EmailAddressInUseException;
+import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
@@ -45,7 +47,6 @@ import org.ourproject.kune.platf.server.properties.KuneProperties;
 import org.ourproject.kune.platf.server.tool.ServerTool;
 import org.ourproject.kune.platf.server.tool.ToolRegistry;
 
-import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -88,7 +89,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         return finder.findCollabInGroups(groupId);
     }
 
-    public Group createUserGroup(final User user) {
+    public Group createUserGroup(final User user) throws GroupNameInUseException, EmailAddressInUseException {
         String defaultSiteWorkspaceTheme = kuneProperties.get(KuneProperties.WS_THEMES_DEF);
         final String licenseDefId = properties.getDefaultLicense();
         final License licenseDef = licenseFinder.findByShortName(licenseDefId);
@@ -98,27 +99,26 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         user.setUserGroup(group);
         initSocialNetwork(group, group);
         initGroup(user, group);
-        super.persist(user, User.class);
+        try {
+            super.persist(user, User.class);
+        } catch (final EntityExistsException e) {
+            throw new EmailAddressInUseException();
+        }
         return group;
     }
 
-    public Group createGroup(final Group group, final User user) throws SerializableException,
+    public Group createGroup(final Group group, final User user) throws GroupNameInUseException,
             UserMustBeLoggedException {
         String defaultSiteWorkspaceTheme = kuneProperties.get(KuneProperties.WS_THEMES_DEF);
         if (User.isKnownUser(user)) {
-            try {
-                // FIXME: A better way to do this license part?
-                String licName = group.getDefaultLicense().getShortName();
-                License license = licenseFinder.findByShortName(licName);
-                group.setDefaultLicense(license);
-                group.setWorkspaceTheme(defaultSiteWorkspaceTheme);
-                initSocialNetwork(group, user.getUserGroup());
-                initGroup(user, group);
-                return group;
-            } catch (final EntityExistsException e) {
-                // i18n
-                throw new SerializableException("Already exist a group with this name");
-            }
+            // FIXME: A better way to do this license part?
+            String licName = group.getDefaultLicense().getShortName();
+            License license = licenseFinder.findByShortName(licName);
+            group.setDefaultLicense(license);
+            group.setWorkspaceTheme(defaultSiteWorkspaceTheme);
+            initSocialNetwork(group, user.getUserGroup());
+            initGroup(user, group);
+            return group;
         } else {
             // i18n
             throw new UserMustBeLoggedException();
@@ -159,11 +159,15 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         network.addAdmin(userGroup);
     }
 
-    private void initGroup(final User user, final Group group) {
+    private void initGroup(final User user, final Group group) throws GroupNameInUseException {
         for (final ServerTool tool : registry.all()) {
             tool.initGroup(user, group);
         }
-        persist(group);
+        try {
+            persist(group);
+        } catch (final EntityExistsException e) {
+            throw new GroupNameInUseException();
+        }
     }
 
 }

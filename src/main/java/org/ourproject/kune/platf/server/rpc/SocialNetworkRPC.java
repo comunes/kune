@@ -65,7 +65,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
     public void unJoinGroup(final String hash, final String groupToUnJoinShortName, final String groupShortName)
-            throws SerializableException, AccessViolationException {
+            throws SerializableException {
         User userLogged = session.getUser();
         if (!userLogged.getUserGroup().getShortName().equals(groupToUnJoinShortName)) {
             throw new AccessViolationException();
@@ -88,7 +88,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
     public void deleteMember(final String hash, final String groupToDeleleShortName, final String groupShortName)
-            throws SerializableException, AccessViolationException {
+            throws SerializableException {
         User userLogged = session.getUser();
         Group group = groupManager.findByShortName(groupShortName);
         Group groupToDelete = groupManager.findByShortName(groupToDeleleShortName);
@@ -129,33 +129,36 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     @Transactional(type = TransactionType.READ_WRITE)
     public void addAdminMember(final String hash, final String groupToAddShortName, final String groupShortName)
             throws SerializableException {
+        User userLogged = session.getUser();
         Group group = groupManager.findByShortName(groupShortName);
         Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
-        socialNetworkManager.addGroupToAdmins(groupToAdd, group);
+        socialNetworkManager.addGroupToAdmins(userLogged, groupToAdd, group);
     }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
     public void addCollabMember(final String hash, final String groupToAddShortName, final String groupShortName)
             throws SerializableException {
+        User userLogged = session.getUser();
         Group group = groupManager.findByShortName(groupShortName);
         Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
-        socialNetworkManager.addGroupToCollabs(groupToAdd, group);
+        socialNetworkManager.addGroupToCollabs(userLogged, groupToAdd, group);
     }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
     public void addViewerMember(final String hash, final String groupToAddShortName, final String groupShortName)
             throws SerializableException {
+        User userLogged = session.getUser();
         Group group = groupManager.findByShortName(groupShortName);
         Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
-        socialNetworkManager.addGroupToViewers(groupToAdd, group);
+        socialNetworkManager.addGroupToViewers(userLogged, groupToAdd, group);
     }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_ONLY)
     public SocialNetworkDTO getGroupMembers(final String hash, final String groupShortName)
-            throws AccessViolationException {
+            throws SerializableException {
         User user = session.getUser();
         Group group = groupManager.findByShortName(groupShortName);
         return mapper.map(socialNetworkManager.find(user, group), SocialNetworkDTO.class);
@@ -164,7 +167,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     @Authenticated
     @Transactional(type = TransactionType.READ_ONLY)
     public ParticipationDataDTO getParticipation(final String hash, final String groupShortName)
-            throws AccessViolationException {
+            throws SerializableException {
         User user = session.getUser();
         Group group = groupManager.findByShortName(groupShortName);
         return mapper.map(socialNetworkManager.findParticipation(user, group), ParticipationDataDTO.class);

@@ -24,11 +24,11 @@ import java.util.List;
 
 import org.apache.lucene.queryParser.ParseException;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
+import org.ourproject.kune.platf.client.errors.EmailAddressInUseException;
+import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
-
-import com.google.gwt.user.client.rpc.SerializableException;
 
 public interface GroupManager extends Manager<Group, Long> {
 
@@ -38,9 +38,9 @@ public interface GroupManager extends Manager<Group, Long> {
 
     List<Group> findCollabInGroups(Long groupId);
 
-    Group createGroup(Group group, User user) throws SerializableException, UserMustBeLoggedException;
+    Group createGroup(Group group, User user) throws GroupNameInUseException, UserMustBeLoggedException;
 
-    Group createUserGroup(User user);
+    Group createUserGroup(User user) throws GroupNameInUseException, EmailAddressInUseException;
 
     Group getDefaultGroup();
 

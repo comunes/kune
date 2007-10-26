@@ -1,4 +1,5 @@
 /*
+ *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -17,12 +18,12 @@
  *
  */
 
-package org.ourproject.kune.platf.server.users;
-
-import org.ourproject.kune.platf.server.domain.User;
+package org.ourproject.kune.platf.client.errors;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 
-public interface UserInfoService {
-    UserInfo buildInfo(User user) throws SerializableException;
+public class EmailAddressInUseException extends SerializableException {
+
+    private static final long serialVersionUID = 1L;
+
 }

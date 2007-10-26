@@ -68,6 +68,7 @@ public class NewGroupFormPanel extends WizardDialog implements NewGroupFormView 
 
     public NewGroupFormPanel(final NewGroupFormPresenter presenter) {
         // i18n
+        // 550, 460
         super("Register a new Group", true, false, 470, 440, new WizardListener() {
             public void onBack() {
                 presenter.onBack();

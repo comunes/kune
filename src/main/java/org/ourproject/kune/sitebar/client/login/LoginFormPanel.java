@@ -442,6 +442,7 @@ public class LoginFormPanel implements LoginFormView, View {
                 setVtype(VType.EMAIL);
                 setWidth(200);
                 setMsgTarget("side");
+                setAllowBlank(false);
             }
         });
         form.add(emailRegField);

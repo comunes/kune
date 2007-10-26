@@ -19,13 +19,13 @@
 
 package org.ourproject.kune.platf.server.users;
 
-import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.server.ParticipationData;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 
+import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -36,30 +36,30 @@ public class UserInfoServiceDefault implements UserInfoService {
 
     @Inject
     public UserInfoServiceDefault(final SocialNetworkManager socialNetwork) {
-	this.socialNetworkManager = socialNetwork;
+        this.socialNetworkManager = socialNetwork;
     }
 
-    public UserInfo buildInfo(final User user) throws AccessViolationException {
-	UserInfo info = null;
-	if (User.isKnownUser(user)) {
-	    info = new UserInfo();
+    public UserInfo buildInfo(final User user) throws SerializableException {
+        UserInfo info = null;
+        if (User.isKnownUser(user)) {
+            info = new UserInfo();
 
-	    info.setShortName(user.getShortName());
-	    info.setName(user.getName());
-	    info.setChatName(user.getShortName());
-	    info.setChatPassword(user.getPassword());
+            info.setShortName(user.getShortName());
+            info.setName(user.getName());
+            info.setChatName(user.getShortName());
+            info.setChatPassword(user.getPassword());
 
-	    Group userGroup = user.getUserGroup();
+            Group userGroup = user.getUserGroup();
 
-	    ParticipationData participation = socialNetworkManager.findParticipation(user, userGroup);
-	    info.setGroupsIsAdmin(participation.getGroupsIsAdmin());
-	    info.setGroupsIsCollab(participation.getGroupsIsCollab());
+            ParticipationData participation = socialNetworkManager.findParticipation(user, userGroup);
+            info.setGroupsIsAdmin(participation.getGroupsIsAdmin());
+            info.setGroupsIsCollab(participation.getGroupsIsCollab());
 
-	    Content defaultContent = userGroup.getDefaultContent();
-	    if (defaultContent != null) {
-		info.setHomePage(defaultContent.getStateToken());
-	    }
-	}
-	return info;
+            Content defaultContent = userGroup.getDefaultContent();
+            if (defaultContent != null) {
+                info.setHomePage(defaultContent.getStateToken());
+            }
+        }
+        return info;
     }
 }

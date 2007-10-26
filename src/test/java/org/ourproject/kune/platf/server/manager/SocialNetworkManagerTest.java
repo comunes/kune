@@ -133,7 +133,7 @@ public class SocialNetworkManagerTest {
     }
 
     @Test(expected = AccessViolationException.class)
-    public void notAdminTryDeleteMember() throws SerializableException, AccessViolationException {
+    public void notAdminTryDeleteMember() throws SerializableException {
         assertSocialNetworkIsEmpty();
         socialNetworkManager.requestToJoin(user, group);
         socialNetworkManager.addAdmin(admin, group);
@@ -227,6 +227,24 @@ public class SocialNetworkManagerTest {
         socialNetworkManager.addAdmin(admin, group);
         socialNetworkManager.requestToJoin(user, group);
         socialNetworkManager.setAdminAsCollab(admin, userGroup, group);
+    }
+
+    @Test(expected = SerializableException.class)
+    public void addAdminNotAdminFails() throws SerializableException {
+        assertSocialNetworkIsEmpty();
+        socialNetworkManager.addGroupToAdmins(otherUser, userGroup, group);
+    }
+
+    @Test(expected = SerializableException.class)
+    public void addCollabNotAdminFails() throws SerializableException {
+        assertSocialNetworkIsEmpty();
+        socialNetworkManager.addGroupToCollabs(otherUser, userGroup, group);
+    }
+
+    @Test(expected = SerializableException.class)
+    public void addViewerNotAdminFails() throws SerializableException {
+        assertSocialNetworkIsEmpty();
+        socialNetworkManager.addGroupToViewers(otherUser, userGroup, group);
     }
 
     private void assertSocialNetworkIsEmpty() {

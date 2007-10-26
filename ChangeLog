@@ -1,4 +1,5 @@
 2007-10-24 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* Name/email in use progressed to UI
 	* Add folder in non personal group, fixed
 	* Communities/Org/Projects admission fixed
 	* SocialNetwork new tests and permissions check

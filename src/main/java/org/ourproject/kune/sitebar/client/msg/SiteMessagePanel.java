@@ -37,7 +37,7 @@ public class SiteMessagePanel extends HorizontalPanel implements SiteMessageView
 
     final Images images = Images.App.getInstance();
     AbstractImagePrototype[] messageIcons = new AbstractImagePrototype[] { images.error(), images.important(),
-	    images.emblemImportant(), images.info() };
+            images.emblemImportant(), images.info() };
     String[] messageStyle = new String[] { "error", "veryimp", "imp", "info" };
 
     HTML message = null;
@@ -46,70 +46,72 @@ public class SiteMessagePanel extends HorizontalPanel implements SiteMessageView
     private final Timer timer;
 
     public SiteMessagePanel(final MessagePresenter presenter, final boolean closable) {
-	// Initialize
-	message = new HTML();
-	messageIcon = new Image();
-	final Images images = Images.App.getInstance();
+        // Initialize
+        message = new HTML();
+        messageIcon = new Image();
+        final Images images = Images.App.getInstance();
 
-	// Layout
-	add(messageIcon);
-	add(message);
+        // Layout
+        add(messageIcon);
+        add(message);
 
-	// Set properties
-	setCellVerticalAlignment(messageIcon, VerticalPanel.ALIGN_MIDDLE);
+        // Set properties
+        setCellVerticalAlignment(messageIcon, VerticalPanel.ALIGN_MIDDLE);
 
-	timer = new Timer() {
-	    public void run() {
-		presenter.resetMessage();
-	    }
-	};
-	setVisible(false);
-	setStyleName("kune-SiteMessagePanel");
-	addStyleDependentName("info");
-	images.info().applyTo(messageIcon);
-	messageIcon.addStyleName("gwt-Image");
+        timer = new Timer() {
+            public void run() {
+                presenter.resetMessage();
+            }
+        };
+        setVisible(false);
+        setStyleName("kune-SiteMessagePanel");
+        addStyleDependentName("info");
+        images.info().applyTo(messageIcon);
+        messageIcon.addStyleName("gwt-Image");
+        message.setWidth("100%");
+        this.setCellWidth(message, "100%");
 
-	if (closable) {
-	    final PushButton closeIcon = new PushButton(images.cross().createImage(), images.crossDark().createImage());
-	    add(closeIcon);
-	    closeIcon.addClickListener(new ClickListener() {
-		public void onClick(final Widget sender) {
-		    if (sender == closeIcon) {
-			setVisible(false);
-			presenter.onMessageClose();
-		    }
-		}
-	    });
-	    setCellVerticalAlignment(closeIcon, VerticalPanel.ALIGN_BOTTOM);
-	}
+        if (closable) {
+            final PushButton closeIcon = new PushButton(images.cross().createImage(), images.crossDark().createImage());
+            add(closeIcon);
+            closeIcon.addClickListener(new ClickListener() {
+                public void onClick(final Widget sender) {
+                    if (sender == closeIcon) {
+                        setVisible(false);
+                        presenter.onMessageClose();
+                    }
+                }
+            });
+            setCellVerticalAlignment(closeIcon, VerticalPanel.ALIGN_BOTTOM);
+        }
 
     }
 
     public void setMessage(final String text, final int lastMessageType, final int type) {
-	messageIcons[type].applyTo(messageIcon);
-	removeStyleDependentName(messageStyle[lastMessageType]);
-	addStyleDependentName(messageStyle[type]);
-	setMessage(text);
+        messageIcons[type].applyTo(messageIcon);
+        removeStyleDependentName(messageStyle[lastMessageType]);
+        addStyleDependentName(messageStyle[type]);
+        setMessage(text);
     }
 
     public void setMessage(final String text) {
-	this.message.setHTML(text);
+        this.message.setHTML(text);
     }
 
     public void adjustWidth(final int windowWidth) {
-	int messageWidth = windowWidth * 60 / 100 - 3;
-	this.setWidth("" + messageWidth);
-	message.setWidth("" + (messageWidth - 16 - 40));
+        int messageWidth = windowWidth * 60 / 100 - 3;
+        this.setWidth("" + messageWidth);
+        // message.setWidth("" + (messageWidth - 16 - 40));
     }
 
     public void show() {
-	this.setVisible(true);
-	timer.schedule(TIMEVISIBLE);
+        this.setVisible(true);
+        timer.schedule(TIMEVISIBLE);
     }
 
     public void hide() {
-	message.setText("");
-	this.setVisible(false);
-	timer.cancel();
+        message.setText("");
+        this.setVisible(false);
+        timer.cancel();
     }
 }

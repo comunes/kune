@@ -21,7 +21,6 @@
 package org.ourproject.kune.platf.server.manager;
 
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
-import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.server.ParticipationData;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
@@ -33,13 +32,13 @@ public interface SocialNetworkManager extends Manager<SocialNetwork, Long> {
 
     void addAdmin(User user, Group group);
 
-    void addGroupToAdmins(Group group, Group inGroup);
+    void addGroupToAdmins(User userLogged, Group group, Group inGroup) throws SerializableException;
 
-    void addGroupToCollabs(Group group, Group inGroup);
+    void addGroupToCollabs(User userLogged, Group group, Group inGroup) throws SerializableException;
 
-    void addGroupToViewers(Group group, Group inGroup);
+    void addGroupToViewers(User userLogged, Group group, Group inGroup) throws SerializableException;
 
-    String requestToJoin(User user, Group inGroup) throws SerializableException, UserMustBeLoggedException;
+    String requestToJoin(User user, Group inGroup) throws SerializableException;
 
     void acceptJoinGroup(User userLogged, Group group, Group inGroup) throws SerializableException;
 
@@ -54,8 +53,8 @@ public interface SocialNetworkManager extends Manager<SocialNetwork, Long> {
 
     void unJoinGroup(Group groupToUnJoin, Group inGroup) throws SerializableException;
 
-    SocialNetwork find(User user, Group group) throws AccessViolationException;
+    SocialNetwork find(User user, Group group) throws SerializableException;
 
-    ParticipationData findParticipation(User user, Group group) throws AccessViolationException;
+    ParticipationData findParticipation(User user, Group group) throws SerializableException;
 
 }

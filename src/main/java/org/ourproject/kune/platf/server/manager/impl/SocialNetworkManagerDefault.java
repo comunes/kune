@@ -58,18 +58,24 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
         sn.addAdmin(user.getUserGroup());
     }
 
-    public void addGroupToAdmins(final Group group, final Group inGroup) {
+    public void addGroupToAdmins(final User userLogged, final Group group, final Group inGroup)
+            throws SerializableException {
         SocialNetwork sn = inGroup.getSocialNetwork();
+        checkUserLoggedIsAdmin(userLogged, sn);
         sn.addAdmin(group);
     }
 
-    public void addGroupToCollabs(final Group group, final Group inGroup) {
+    public void addGroupToCollabs(final User userLogged, final Group group, final Group inGroup)
+            throws SerializableException {
         SocialNetwork sn = inGroup.getSocialNetwork();
+        checkUserLoggedIsAdmin(userLogged, sn);
         sn.addCollaborator(group);
     }
 
-    public void addGroupToViewers(final Group group, final Group inGroup) {
+    public void addGroupToViewers(final User userLogged, final Group group, final Group inGroup)
+            throws SerializableException {
         SocialNetwork sn = inGroup.getSocialNetwork();
+        checkUserLoggedIsAdmin(userLogged, sn);
         sn.addViewer(group);
     }
 

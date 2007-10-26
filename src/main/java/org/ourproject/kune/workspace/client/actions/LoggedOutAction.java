@@ -27,10 +27,11 @@ import com.google.gwt.user.client.History;
 
 public class LoggedOutAction implements Action {
 
-    public void execute(final Object value, final Object extra, Services services) {
-	Site.sitebar.showLoggedUser(null);
-	String token = History.getToken();
-	services.stateManager.onHistoryChanged(token);
+    public void execute(final Object value, final Object extra, final Services services) {
+        Site.sitebar.showLoggedUser(null);
+        String token = History.getToken();
+        services.stateManager.onHistoryChanged(token);
+        services.stateManager.reloadSocialNetwork();
     }
 
 }

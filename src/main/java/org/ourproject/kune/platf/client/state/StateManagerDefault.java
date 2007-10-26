@@ -170,8 +170,6 @@ public class StateManagerDefault implements StateManager {
     }
 
     private void loadSocialNetwork() {
-        // FIXME: bug: session.getCurrentState null in init, logged: onLoggedIn
-        // --> reloadSN --> loadSN --> bug
         StateDTO state;
         if (session != null && (state = session.getCurrentState()) != null) {
             workspace.getGroupMembersComponent()

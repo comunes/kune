@@ -21,8 +21,6 @@ package org.ourproject.kune.platf.client.rpc;
 
 import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
-import org.ourproject.kune.platf.client.errors.AccessViolationException;
-import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -31,18 +29,16 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 public interface SocialNetworkService extends RemoteService {
 
-    String requestJoinGroup(String hash, String groupShortName) throws SerializableException, UserMustBeLoggedException;
+    String requestJoinGroup(String hash, String groupShortName) throws SerializableException;
 
     void AcceptJoinGroup(String hash, String groupToAcceptShortName, String groupShortName)
             throws SerializableException;
 
-    void deleteMember(String hash, String groupToDeleteShortName, String groupShortName) throws SerializableException,
-            AccessViolationException;
+    void deleteMember(String hash, String groupToDeleteShortName, String groupShortName) throws SerializableException;
 
     void denyJoinGroup(String hash, String groupToDenyShortName, String groupShortName) throws SerializableException;
 
-    void unJoinGroup(String hash, String groupToUnJoinShortName, String groupShortName) throws SerializableException,
-            AccessViolationException;
+    void unJoinGroup(String hash, String groupToUnJoinShortName, String groupShortName) throws SerializableException;
 
     void setCollabAsAdmin(String hash, String groupToSetAdminShortName, String groupShortName)
             throws SerializableException;
@@ -56,9 +52,9 @@ public interface SocialNetworkService extends RemoteService {
 
     void addViewerMember(String hash, String groupToAddShortName, String groupShortName) throws SerializableException;
 
-    SocialNetworkDTO getGroupMembers(String hash, String groupShortName) throws AccessViolationException;
+    SocialNetworkDTO getGroupMembers(String hash, String groupShortName) throws SerializableException;
 
-    ParticipationDataDTO getParticipation(String hash, String groupShortName) throws AccessViolationException;
+    ParticipationDataDTO getParticipation(String hash, String groupShortName) throws SerializableException;
 
     public static class App {
         private static SocialNetworkServiceAsync instance;

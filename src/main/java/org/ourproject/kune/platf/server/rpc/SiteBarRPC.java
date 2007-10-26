@@ -22,7 +22,6 @@ package org.ourproject.kune.platf.server.rpc;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
-import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.UserAuthException;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.domain.User;
@@ -50,48 +49,50 @@ public class SiteBarRPC implements RPC, SiteBarService {
 
     @Inject
     public SiteBarRPC(final UserSession session, final UserManager userManager, final GroupManager groupManager,
-	    final UserInfoService userInfoService, final Mapper mapper) {
-	this.session = session;
-	this.userManager = userManager;
-	this.groupManager = groupManager;
-	this.userInfoService = userInfoService;
-	this.mapper = mapper;
+            final UserInfoService userInfoService, final Mapper mapper) {
+        this.session = session;
+        this.userManager = userManager;
+        this.groupManager = groupManager;
+        this.userInfoService = userInfoService;
+        this.mapper = mapper;
     }
 
     @Transactional(type = TransactionType.READ_ONLY)
     public UserInfoDTO login(final String nickOrEmail, final String passwd) throws SerializableException {
-	User user = userManager.login(nickOrEmail, passwd);
-	return loginUser(user);
+        User user = userManager.login(nickOrEmail, passwd);
+        return loginUser(user);
     }
 
-    private UserInfoDTO loginUser(final User user) throws UserAuthException, AccessViolationException {
-	if (user != null) {
-	    session.setUser(user);
-	    UserInfo userInfo = userInfoService.buildInfo(user);
-	    return mapper.map(userInfo, UserInfoDTO.class);
-	} else {
-	    throw new UserAuthException();
-	}
+    @Transactional(type = TransactionType.READ_ONLY)
+    private UserInfoDTO loginUser(final User user) throws SerializableException {
+        if (user != null) {
+            session.setUser(user);
+            UserInfo userInfo = userInfoService.buildInfo(user);
+            return mapper.map(userInfo, UserInfoDTO.class);
+        } else {
+            throw new UserAuthException();
+        }
     }
 
     @Transactional(type = TransactionType.READ_ONLY)
     public void logout() throws SerializableException {
-	session.clearUserId();
+        session.clearUserId();
     }
 
-    @Transactional(type = TransactionType.READ_WRITE)
+    @Transactional(type = TransactionType.READ_WRITE, rollbackOn = SerializableException.class)
     public UserInfoDTO createUser(final String shortName, final String longName, final String email,
-	    final String passwd, final LicenseDTO license) throws SerializableException {
-	User user = userManager.createUser(shortName, longName, email, passwd);
-	groupManager.createUserGroup(user);
-	return loginUser(user);
+            final String passwd, final LicenseDTO license) throws SerializableException {
+        User user;
+        user = userManager.createUser(shortName, longName, email, passwd);
+        groupManager.createUserGroup(user);
+        return loginUser(user);
     }
 
     @Transactional(type = TransactionType.READ_ONLY)
-    public UserInfoDTO reloadUserInfo(final String userHash) throws AccessViolationException {
-	User user = session.getUser();
-	UserInfo userInfo = userInfoService.buildInfo(user);
-	return mapper.map(userInfo, UserInfoDTO.class);
+    public UserInfoDTO reloadUserInfo(final String userHash) throws SerializableException {
+        User user = session.getUser();
+        UserInfo userInfo = userInfoService.buildInfo(user);
+        return mapper.map(userInfo, UserInfoDTO.class);
     }
 
 }

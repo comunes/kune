@@ -22,7 +22,6 @@ package org.ourproject.kune.sitebar.client.rpc;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
-import org.ourproject.kune.platf.client.errors.AccessViolationException;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -37,26 +36,26 @@ public interface SiteBarService extends RemoteService {
 
     // FIXME: Vicente, userHash
     UserInfoDTO createUser(String shortName, String longName, String email, String passwd, LicenseDTO license)
-	    throws SerializableException;
+            throws SerializableException;
 
     // FIXME: Vicente, userHash
     void logout() throws SerializableException;
 
-    UserInfoDTO reloadUserInfo(String userHash) throws AccessViolationException;
+    UserInfoDTO reloadUserInfo(String userHash) throws SerializableException;
 
     public class App {
-	private static SiteBarServiceAsync ourInstance = null;
+        private static SiteBarServiceAsync ourInstance = null;
 
-	public static synchronized SiteBarServiceAsync getInstance() {
-	    if (ourInstance == null) {
-		ourInstance = (SiteBarServiceAsync) GWT.create(SiteBarService.class);
-		((ServiceDefTarget) ourInstance).setServiceEntryPoint(GWT.getModuleBaseURL() + "SiteBarService");
-	    }
-	    return ourInstance;
-	}
+        public static synchronized SiteBarServiceAsync getInstance() {
+            if (ourInstance == null) {
+                ourInstance = (SiteBarServiceAsync) GWT.create(SiteBarService.class);
+                ((ServiceDefTarget) ourInstance).setServiceEntryPoint(GWT.getModuleBaseURL() + "SiteBarService");
+            }
+            return ourInstance;
+        }
 
-	public static void setMock(final SiteBarServiceAsync mock) {
-	    ourInstance = mock;
-	}
+        public static void setMock(final SiteBarServiceAsync mock) {
+            ourInstance = mock;
+        }
     }
 }

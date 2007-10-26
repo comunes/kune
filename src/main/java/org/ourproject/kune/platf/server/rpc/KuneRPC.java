@@ -24,7 +24,6 @@ import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
-import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.rpc.KuneService;
 import org.ourproject.kune.platf.server.InitData;
 import org.ourproject.kune.platf.server.UserSession;
@@ -54,40 +53,40 @@ public class KuneRPC implements RPC, KuneService {
     // TODO: refactor: too many parameters! refactor to Facade Pattern
     @Inject
     public KuneRPC(final UserSession session, final UserManager userManager, final UserInfoService userInfoService,
-	    final LicenseManager licenseManager, final Mapper mapper, final KuneProperties kuneProperties,
-	    final ChatProperties chatProperties) {
-	this.session = session;
-	this.userManager = userManager;
-	this.userInfoService = userInfoService;
-	this.licenseManager = licenseManager;
-	this.mapper = mapper;
-	this.kuneProperties = kuneProperties;
-	this.chatProperties = chatProperties;
+            final LicenseManager licenseManager, final Mapper mapper, final KuneProperties kuneProperties,
+            final ChatProperties chatProperties) {
+        this.session = session;
+        this.userManager = userManager;
+        this.userInfoService = userInfoService;
+        this.licenseManager = licenseManager;
+        this.mapper = mapper;
+        this.kuneProperties = kuneProperties;
+        this.chatProperties = chatProperties;
     }
 
     @Transactional(type = TransactionType.READ_ONLY)
-    public InitDataDTO getInitData(final String userHash) throws AccessViolationException {
-	final InitData data = new InitData();
+    public InitDataDTO getInitData(final String userHash) throws SerializableException {
+        final InitData data = new InitData();
 
-	data.setCCLicenses(licenseManager.getCC());
-	data.setNotCCLicenses(licenseManager.getNotCC());
-	data.setUserInfo(userInfoService.buildInfo(userManager.find(session.getUser().getId())));
-	data.setChatHttpBase(chatProperties.getHttpBase());
-	data.setChatDomain(chatProperties.getDomain());
-	data.setChatRoomHost(chatProperties.getRoomHost());
-	data.setWsThemes(this.kuneProperties.get(KuneProperties.WS_THEMES).split(","));
-	data.setDefaultWsTheme(this.kuneProperties.get(KuneProperties.WS_THEMES_DEF));
-	return mapper.map(data, InitDataDTO.class);
+        data.setCCLicenses(licenseManager.getCC());
+        data.setNotCCLicenses(licenseManager.getNotCC());
+        data.setUserInfo(userInfoService.buildInfo(userManager.find(session.getUser().getId())));
+        data.setChatHttpBase(chatProperties.getHttpBase());
+        data.setChatDomain(chatProperties.getDomain());
+        data.setChatRoomHost(chatProperties.getRoomHost());
+        data.setWsThemes(this.kuneProperties.get(KuneProperties.WS_THEMES).split(","));
+        data.setDefaultWsTheme(this.kuneProperties.get(KuneProperties.WS_THEMES_DEF));
+        return mapper.map(data, InitDataDTO.class);
     }
 
     @Transactional(type = TransactionType.READ_ONLY)
     public List getAllLicenses() throws SerializableException {
-	return mapper.mapList(licenseManager.getAll(), LicenseDTO.class);
+        return mapper.mapList(licenseManager.getAll(), LicenseDTO.class);
     }
 
     @Transactional(type = TransactionType.READ_ONLY)
     public List getNotCCLicenses() throws SerializableException {
-	return mapper.mapList(licenseManager.getNotCC(), LicenseDTO.class);
+        return mapper.mapList(licenseManager.getNotCC(), LicenseDTO.class);
     }
 
 }
