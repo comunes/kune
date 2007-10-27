@@ -22,7 +22,6 @@ package org.ourproject.kune.platf.server.manager;
 
 import java.util.List;
 
-import org.apache.lucene.queryParser.ParseException;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.EmailAddressInUseException;
 import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
@@ -54,9 +53,9 @@ public interface GroupManager extends Manager<Group, Long> {
      */
     Group getGroupOfUserWithId(Long userId);
 
-    List<Group> search(String search) throws ParseException;
+    List<Group> search(String search);
 
-    List<Group> search(String search, Integer firstResult, Integer maxResults) throws ParseException;
+    List<Group> search(String search, Integer firstResult, Integer maxResults);
 
     void reIndex();
 

@@ -21,91 +21,33 @@
 package org.ourproject.kune.platf.client.ui;
 
 import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.ClickListenerCollection;
-import com.google.gwt.user.client.ui.SourcesClickEvents;
-import com.gwtext.client.core.EventObject;
-import com.gwtext.client.widgets.Button;
-import com.gwtext.client.widgets.ButtonConfig;
-import com.gwtext.client.widgets.event.ButtonListenerAdapter;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.PushButton;
 
-public class CustomPushButton implements SourcesClickEvents {
+public class CustomPushButton extends Composite {
 
-    private ClickListenerCollection clickListeners;
-    private final Button button;
-
-    public CustomPushButton(final String text) {
-	this(text, null);
-    }
+    private final PushButton button;
 
     public CustomPushButton(final String text, final ClickListener listener) {
-	button = new Button(new ButtonConfig() {
-	    {
-		setText(text);
-		setButtonListener(new ButtonListenerAdapter() {
-		    public void onClick(final Button button, final EventObject e) {
-			fireClickListeners();
-		    }
-		});
-	    }
-	});
-	if (listener != null) {
-	    addClickListener(listener);
-	}
-    }
-
-    public void addClickListener(final ClickListener listener) {
-	if (clickListeners == null) {
-	    clickListeners = new ClickListenerCollection();
-	}
-	clickListeners.add(listener);
-    }
-
-    public void removeClickListener(final ClickListener listener) {
-	if (clickListeners != null) {
-	    clickListeners.remove(listener);
-	}
-
-    }
-
-    public Button getButton() {
-	return button;
+        button = new PushButton(text, listener);
+        RoundedBorderDecorator roundedButton = new RoundedBorderDecorator(button, RoundedBorderDecorator.ALL,
+                RoundedBorderDecorator.SIMPLE);
+        initWidget(roundedButton);
+        roundedButton.setColor("#AAA");
+        button.setStyleName("kune-CustomPushButton");
+        this.addStyleName("kune-CustomPushButton-space");
     }
 
     public boolean isEnabled() {
-	return !button.isDisabled();
-    }
-
-    private void fireClickListeners() {
-	if (clickListeners != null) {
-	    clickListeners.fireClick(button);
-	}
+        return button.isEnabled();
     }
 
     public void setEnabled(final boolean enabled) {
-	if (enabled) {
-	    button.enable();
-	} else {
-	    button.disable();
-	}
+        button.setEnabled(enabled);
     }
 
     public void setText(final String text) {
-	button.setText(text);
+        button.setText(text);
     }
 
-    public void setVisible(final boolean b) {
-	button.setVisible(b);
-    }
-
-    public void setHeight(final String height) {
-	button.setHeight(height);
-    }
-
-    public void setWidth(final String width) {
-	button.setWidth(width);
-    }
-
-    public void addStyleName(final String style) {
-	button.addStyleName(style);
-    }
 }

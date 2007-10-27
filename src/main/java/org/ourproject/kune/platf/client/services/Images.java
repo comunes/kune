@@ -27,14 +27,14 @@ import com.google.gwt.user.client.ui.ImageBundle;
 public interface Images extends ImageBundle {
 
     public static class App {
-	private static Images ourInstance = null;
+        private static Images ourInstance = null;
 
-	public static synchronized Images getInstance() {
-	    if (ourInstance == null) {
-		ourInstance = (Images) GWT.create(Images.class);
-	    }
-	    return ourInstance;
-	}
+        public static synchronized Images getInstance() {
+            if (ourInstance == null) {
+                ourInstance = (Images) GWT.create(Images.class);
+            }
+            return ourInstance;
+        }
     }
 
     /**
@@ -408,6 +408,11 @@ public interface Images extends ImageBundle {
     AbstractImagePrototype clear();
 
     /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/copyleft.png
+     */
+    AbstractImagePrototype copyleft();
+
+    /**
      * @gwt.resource org/ourproject/kune/platf/public/images/del.png
      */
     AbstractImagePrototype del();
@@ -496,6 +501,11 @@ public interface Images extends ImageBundle {
      * @gwt.resource org/ourproject/kune/platf/public/images/nobody.png
      */
     AbstractImagePrototype nobody();
+
+    /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/no-copyleft.png
+     */
+    AbstractImagePrototype noCopyleft();
 
     /**
      * @gwt.resource org/ourproject/kune/platf/public/images/opentriangle.gif
@@ -591,6 +601,31 @@ public interface Images extends ImageBundle {
      * @gwt.resource org/ourproject/kune/platf/public/images/star-yellow.png
      */
     AbstractImagePrototype starYellow();
+
+    /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/step1.png
+     */
+    AbstractImagePrototype step1();
+
+    /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/step2.png
+     */
+    AbstractImagePrototype step2();
+
+    /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/step3.png
+     */
+    AbstractImagePrototype step3();
+
+    /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/step4.png
+     */
+    AbstractImagePrototype step4();
+
+    /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/step5.png
+     */
+    AbstractImagePrototype step5();
 
     /**
      * @gwt.resource org/ourproject/kune/platf/public/images/theme-choose.png

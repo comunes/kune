@@ -18,34 +18,45 @@
  *
  */
 
-package org.ourproject.kune.sitebar.client.login;
+package org.ourproject.kune.platf.client.newgroup;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.LicenseDTO;
 
-public interface LoginFormView extends View {
+public interface NewGroupView extends View {
 
-    public void reset();
+    void clearData();
 
-    public String getNickOrEmail();
+    String getPublicDesc();
 
-    public String getLoginPassword();
+    String getLongName();
 
-    public String getShortName();
+    String getShortName();
 
-    public String getLongName();
+    boolean isProject();
 
-    public String getEmail();
+    boolean isOrganization();
 
-    public String getRegisterPassword();
+    boolean isCommunity();
 
-    public String getRegisterPasswordDup();
+    void hide();
 
-    public boolean isSignInFormValid();
+    void setEnabledNextButton(boolean enabled);
 
-    public boolean isRegisterFormValid();
+    void setEnabledFinishButton(boolean enabled);
 
-    public void showErrorMessage(String message);
+    void setEnabledBackButton(boolean enabled);
 
-    public void hideMessage();
+    void showNewGroupInitialDataForm();
+
+    void showLicenseForm();
+
+    LicenseDTO getLicense();
+
+    boolean isFormValid();
+
+    void hideMessage();
+
+    void setMessage(String message, int type);
 
 }

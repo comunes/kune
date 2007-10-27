@@ -21,18 +21,22 @@
 package org.ourproject.kune.platf.client.newgroup.ui;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
-import org.ourproject.kune.platf.client.license.LicenseChooseForm;
-import org.ourproject.kune.platf.client.license.LicenseChooseFormPanel;
-import org.ourproject.kune.platf.client.newgroup.NewGroupFormPresenter;
-import org.ourproject.kune.platf.client.newgroup.NewGroupFormView;
+import org.ourproject.kune.platf.client.license.LicenseChoose;
+import org.ourproject.kune.platf.client.license.LicenseChoosePanel;
+import org.ourproject.kune.platf.client.newgroup.NewGroupPresenter;
+import org.ourproject.kune.platf.client.newgroup.NewGroupView;
+import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.dialogs.WizardDialog;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
 import org.ourproject.kune.sitebar.client.bar.SiteBarTrans;
+import org.ourproject.kune.sitebar.client.msg.SiteMessage;
+import org.ourproject.kune.sitebar.client.msg.SiteMessagePanel;
 import org.ourproject.kune.sitebar.client.services.Translate;
 import org.ourproject.kune.workspace.client.ui.form.WizardListener;
 
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -48,7 +52,7 @@ import com.gwtext.client.widgets.form.TextAreaConfig;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.form.TextFieldConfig;
 
-public class NewGroupFormPanel extends WizardDialog implements NewGroupFormView {
+public class NewGroupPanel extends WizardDialog implements NewGroupView {
     private static final Translate t = SiteBarTrans.getInstance().t;
 
     private static final String SHORTNAME_FIELD = "short_name";
@@ -64,9 +68,11 @@ public class NewGroupFormPanel extends WizardDialog implements NewGroupFormView 
     private TextField longNameField;
     private TextArea publicDescField;
     private final DeckPanel deck;
-    private LicenseChooseForm licenseChooseForm;
+    private LicenseChoose licenseChoosePanel;
 
-    public NewGroupFormPanel(final NewGroupFormPresenter presenter) {
+    private final SiteMessagePanel messagesPanel;
+
+    public NewGroupPanel(final NewGroupPresenter presenter) {
         // i18n
         // 550, 460
         super("Register a new Group", true, false, 470, 440, new WizardListener() {
@@ -94,16 +100,36 @@ public class NewGroupFormPanel extends WizardDialog implements NewGroupFormView 
         newGroupInitialDataForm = createNewGroupInitialDataForm(presenter);
         createChooseLicensePanel();
         VerticalPanel newGroupInitialDataVP = new VerticalPanel();
+        HorizontalPanel newGroupInitialDataHP = new HorizontalPanel();
         VerticalPanel chooseLicenseVP = new VerticalPanel();
+        HorizontalPanel chooseLicenseHP = new HorizontalPanel();
         // i18n
-        newGroupInitialDataVP
-                .add(new Label("Please fill this form and follow the next steps to register a new group:"));
-        chooseLicenseVP.add(new HTML("Select a license to share your group contents with other people. "
-                + "We recomend <a href='http://en.wikipedia.org/copyleft'>copyleft</a> licenses for practical works."));
-        Label liceseTypeLabel = new Label("Choose a license type:");
-        chooseLicenseVP.add(liceseTypeLabel);
+        Images img = Images.App.getInstance();
+        newGroupInitialDataHP.add(img.step1().createImage());
+        Label step1Label = new Label("Please fill this form and follow the next steps to register a new group:");
+        newGroupInitialDataHP.add(step1Label);
+        newGroupInitialDataVP.add(newGroupInitialDataHP);
         newGroupInitialDataVP.add(newGroupInitialDataForm);
-        chooseLicenseVP.add((Widget) licenseChooseForm.getView());
+        chooseLicenseHP.add(img.step2().createImage());
+        HTML step2Label = new HTML(
+                "Select a license to share your group contents with other people. "
+                        + "We recomend <a href='http://en.wikipedia.org/copyleft' target='_blank'>copyleft</a> licenses for practical works.");
+        chooseLicenseHP.add(step2Label);
+        Label licenseTypeLabel = new Label("Choose a license type:");
+        chooseLicenseVP.add(chooseLicenseHP);
+        chooseLicenseVP.add(licenseTypeLabel);
+
+        newGroupInitialDataHP.addStyleName("kune-Margin-Medium-b");
+        newGroupInitialDataHP.addStyleName("kune-Margin-Medium-b");
+        step1Label.addStyleName("kune-Margin-Large-l");
+        step2Label.addStyleName("kune-Margin-Large-l");
+
+        messagesPanel = new SiteMessagePanel(presenter, false);
+        messagesPanel.setWidth("425");
+        messagesPanel.setMessage("", SiteMessage.INFO, SiteMessage.ERROR);
+        newGroupInitialDataVP.add(messagesPanel);
+
+        chooseLicenseVP.add((Widget) licenseChoosePanel.getView());
         deck.add(newGroupInitialDataVP);
         deck.add(chooseLicenseVP);
         super.add(deck);
@@ -111,8 +137,9 @@ public class NewGroupFormPanel extends WizardDialog implements NewGroupFormView 
         initBottomButtons();
         // newGroupInitialDataVP.addStyleName("kune-Default-Form");
         deck.addStyleName("kune-Default-Form");
-        liceseTypeLabel.addStyleName("kune-License-CC-Header");
-        chooseLicenseVP.setHeight("10"); // Ext set this to 100% ...
+        licenseTypeLabel.addStyleName("kune-License-CC-Header");
+        newGroupInitialDataVP.setHeight("10"); // Ext set this to 100% ...
+        chooseLicenseVP.setHeight("10"); // (same here)
         super.setFinishText(t.Register());
     }
 
@@ -123,7 +150,7 @@ public class NewGroupFormPanel extends WizardDialog implements NewGroupFormView 
     public void clearData() {
         deck.showWidget(0);
         newGroupInitialDataForm.reset();
-        ((LicenseChooseFormPanel) licenseChooseForm.getView()).reset();
+        ((LicenseChoosePanel) licenseChoosePanel.getView()).reset();
         showNewGroupInitialDataForm();
         initBottomButtons();
     }
@@ -157,11 +184,20 @@ public class NewGroupFormPanel extends WizardDialog implements NewGroupFormView 
     }
 
     public LicenseDTO getLicense() {
-        return licenseChooseForm.getLicense();
+        return licenseChoosePanel.getLicense();
     }
 
     public void showLicenseForm() {
         deck.showWidget(1);
+    }
+
+    public void hideMessage() {
+        messagesPanel.hide();
+    }
+
+    public void setMessage(final String message, final int type) {
+        messagesPanel.setMessage(message, type, type);
+        messagesPanel.show();
     }
 
     private void initBottomButtons() {
@@ -170,7 +206,7 @@ public class NewGroupFormPanel extends WizardDialog implements NewGroupFormView 
         super.setEnabledNextButton(true);
     }
 
-    private Form createNewGroupInitialDataForm(final NewGroupFormPresenter presenter) {
+    private Form createNewGroupInitialDataForm(final NewGroupPresenter presenter) {
         Form form = new Form(new FormConfig() {
             {
                 setWidth(400);
@@ -286,7 +322,7 @@ public class NewGroupFormPanel extends WizardDialog implements NewGroupFormView 
     }
 
     private void createChooseLicensePanel() {
-        licenseChooseForm = SiteBarFactory.createLicenseChoose();
+        licenseChoosePanel = SiteBarFactory.createLicenseChoose();
 
     }
 }

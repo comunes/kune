@@ -64,6 +64,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     private ContentTitlePanel contentTitlePanel;
     private ContentSubTitlePanel contentSubTitlePanel;
     private LicensePanel bottomPanel;
+    private DropDownPanel tagsPanel;
 
     public WorkspacePanel() {
         th = Kune.getInstance().theme;
@@ -213,6 +214,11 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         AddDropDown(buddiesPresencePanel, th.getBuddiesPresenceDD());
     }
 
+    public void setTags(final View view) {
+        tagsPanel = (DropDownPanel) view;
+        AddDropDown(tagsPanel, th.getTagsDD());
+    }
+
     public void setThemeMenuComponent(final View view) {
         temporalSpaceForGroupOptions.add((Widget) view);
     }
@@ -237,6 +243,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         groupMembersPanel.setColor(th.getGroupMembersDD());
         participationPanel.setColor(th.getParticipationDD());
         buddiesPresencePanel.setColor(th.getBuddiesPresenceDD());
+        tagsPanel.setColor(th.getTagsDD());
         groupToolsBar.setTabsColors(th.getToolSelected(), th.getToolUnselected());
     }
 

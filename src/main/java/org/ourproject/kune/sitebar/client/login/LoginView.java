@@ -22,13 +22,30 @@ package org.ourproject.kune.sitebar.client.login;
 
 import org.ourproject.kune.platf.client.View;
 
-public interface LoginForm {
+public interface LoginView extends View {
 
-    public void onCancel();
+    public void reset();
 
-    public void doLogin();
+    public String getNickOrEmail();
 
-    public View getView();
+    public String getLoginPassword();
 
-    public void doRegister();
+    public String getShortName();
+
+    public String getLongName();
+
+    public String getEmail();
+
+    public String getRegisterPassword();
+
+    public String getRegisterPasswordDup();
+
+    public boolean isSignInFormValid();
+
+    public boolean isRegisterFormValid();
+
+    public void hideMessage();
+
+    public void setMessage(String message, int type);
+
 }

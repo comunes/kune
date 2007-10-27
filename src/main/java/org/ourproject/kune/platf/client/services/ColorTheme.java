@@ -7,67 +7,71 @@ public class ColorTheme {
     private Dictionary theme;
 
     public ColorTheme() {
-	this("defaultKuneTheme");
+        this("defaultKuneTheme");
     }
 
     public ColorTheme(final String theme) {
-	this.theme = Dictionary.getDictionary(theme);
+        this.theme = Dictionary.getDictionary(theme);
     }
 
     public void setTheme(final String theme) {
-	this.theme = Dictionary.getDictionary(theme);
+        this.theme = Dictionary.getDictionary(theme);
     }
 
     public String getThemeName() {
-	return theme.get("themeName");
+        return theme.get("themeName");
     }
 
     public String getToolSelected() {
-	return theme.get("toolSelected");
+        return theme.get("toolSelected");
     }
 
     public String getToolUnselected() {
-	return theme.get("toolUnselected");
+        return theme.get("toolUnselected");
     }
 
     public String getContentMainBorder() {
-	return theme.get("contentMainBorder");
+        return theme.get("contentMainBorder");
     }
 
     public String getContentTitle() {
-	return theme.get("contentTitle");
+        return theme.get("contentTitle");
     }
 
     public String getContentTitleText() {
-	return theme.get("contentTitleText");
+        return theme.get("contentTitleText");
     }
 
     public String getContentSubTitleText() {
-	return theme.get("contentSubTitleText");
+        return theme.get("contentSubTitleText");
     }
 
     public String getContentBottomText() {
-	return theme.get("contentBottomText");
+        return theme.get("contentBottomText");
     }
 
     public String getContext() {
-	return theme.get("context");
+        return theme.get("context");
     }
 
     public String getSplitter() {
-	return theme.get("splitter");
+        return theme.get("splitter");
     }
 
     public String getGroupMembersDD() {
-	return theme.get("groupMembersDD");
+        return theme.get("groupMembersDD");
     }
 
     public String getParticipationDD() {
-	return theme.get("participationDD");
+        return theme.get("participationDD");
     }
 
     public String getBuddiesPresenceDD() {
-	return theme.get("buddiesPresenceDD");
+        return theme.get("buddiesPresenceDD");
+    }
+
+    public String getTagsDD() {
+        return theme.get("tagsDD");
     }
 
 }

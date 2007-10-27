@@ -62,7 +62,7 @@ public class SearchSitePanel implements SearchSiteView {
                 setResizable(true);
                 setClosable(true);
                 setProxyDrag(true);
-                setCollapsible(true);
+                setCollapsible(false);
                 // i18n
                 setTitle("Search results");
             }
@@ -105,6 +105,7 @@ public class SearchSitePanel implements SearchSiteView {
                 // i18n
                 dialog.setTitle("Search groups");
                 presenter.doSearchGroups();
+                tab.getTextEl().highlight();
             }
         });
 
@@ -112,8 +113,7 @@ public class SearchSitePanel implements SearchSiteView {
             public void onActivate(final TabPanelItem tab) { // i18n
                 dialog.setTitle("Search users");
                 presenter.doSearchUsers();
-                // tab.getTextEl().highlight();
-
+                tab.getTextEl().highlight();
             }
         });
     }
@@ -143,7 +143,7 @@ public class SearchSitePanel implements SearchSiteView {
                 setTypeAhead(false);
                 // i18n
                 setLoadingText("Searching...");
-                setWidth(570);
+                setWidth(300);
                 setPageSize(10);
                 setHideTrigger(true);
                 setMode("local");
@@ -166,6 +166,7 @@ public class SearchSitePanel implements SearchSiteView {
         hp.add(form);
         hp.add(searchBtn);
         hp.setSpacing(7);
+        hp.addStyleName("kune-Margin-Large-tlbr");
         searchPanel.add(hp);
         return searchPanel;
     }

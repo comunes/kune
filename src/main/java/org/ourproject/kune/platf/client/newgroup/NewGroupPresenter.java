@@ -24,21 +24,25 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
 import org.ourproject.kune.platf.client.rpc.GroupService;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.sitebar.client.Site;
+import org.ourproject.kune.sitebar.client.msg.MessagePresenter;
+import org.ourproject.kune.sitebar.client.msg.SiteMessage;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class NewGroupFormPresenter implements NewGroupForm {
+public class NewGroupPresenter implements NewGroup, MessagePresenter {
     private final NewGroupListener listener;
-    private NewGroupFormView view;
+    private NewGroupView view;
 
-    public NewGroupFormPresenter(final NewGroupListener listener) {
+    public NewGroupPresenter(final NewGroupListener listener) {
         this.listener = listener;
     }
 
-    public void init(final NewGroupFormView view) {
+    public void init(final NewGroupView view) {
         this.view = view;
     }
 
@@ -53,9 +57,20 @@ public class NewGroupFormPresenter implements NewGroupForm {
         group.setDefaultLicense(license);
         // FIXME: get User hash
         groupService.createNewGroup("FIXMEFIXME", group, new AsyncCallback() {
-            public void onFailure(final Throwable arg0) {
-                // TODO
-                Site.error("Error creating group");
+            public void onFailure(final Throwable caught) {
+                Site.hideProgress();
+                try {
+                    throw caught;
+                } catch (final GroupNameInUseException e) {
+                    onBack();
+                    // i18n
+                    setMessage("This name in already in use, try with a different name.", SiteMessage.ERROR);
+                } catch (final Throwable e) {
+                    onBack(); // The messageP is in first page of wizard :-/
+                    setMessage("Error creating group", SiteMessage.ERROR);
+                    GWT.log("Other kind of exception in group registration", null);
+                    throw new RuntimeException();
+                }
             }
 
             public void onSuccess(final Object arg0) {
@@ -118,5 +133,17 @@ public class NewGroupFormPresenter implements NewGroupForm {
         // } else {
         // view.setEnabledNextButton(false);
         // }
+    }
+
+    public void onMessageClose() {
+        // From MessagePresenter: do nothing
+    }
+
+    public void resetMessage() {
+        view.hideMessage();
+    }
+
+    public void setMessage(final String message, final int type) {
+        view.setMessage(message, type);
     }
 }

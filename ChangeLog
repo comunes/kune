@@ -1,4 +1,9 @@
-2007-10-24 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+2007-10-27 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* Empty user email now checked
+	* Better error handling in new group panel
+	* Copyleft information icon in LicenseChoose
+	* New custom push button instead of gwt-ext
+	* Some general css fixes
 	* Name/email in use progressed to UI
 	* Add folder in non personal group, fixed
 	* Communities/Org/Projects admission fixed

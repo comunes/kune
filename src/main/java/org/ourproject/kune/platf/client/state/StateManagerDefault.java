@@ -119,12 +119,16 @@ public class StateManagerDefault implements StateManager {
         workspace.setContent(clientTool.getContent());
         workspace.setContext(clientTool.getContext());
         workspace.getLicenseComponent().setLicense(state.getGroup().getLongName(), state.getLicense());
-        // TODO: put GroupRights inside ParticipationDataDTO
+        workspace.getTagsComponent().setTags("FIXME");
+
         if (oldStateToken.hasGroup() && oldStateToken.getGroup().equals(state.getGroup().getShortName())) {
             // Same group, do nothing
+            loadSocialNetwork(); // FIXME: only for test: signIn, signOut
+                                    // groupRights problems
         } else {
             loadSocialNetwork();
         }
+
         // only for UI tests:
         workspace.getBuddiesPresenceComponent().setBuddiesPresence();
         Site.hideProgress();

@@ -40,6 +40,9 @@ import org.ourproject.kune.workspace.client.socialnet.ParticipationPresenter;
 import org.ourproject.kune.workspace.client.socialnet.ParticipationView;
 import org.ourproject.kune.workspace.client.socialnet.ui.GroupMembersPanel;
 import org.ourproject.kune.workspace.client.socialnet.ui.ParticipationPanel;
+import org.ourproject.kune.workspace.client.tags.TagsPresenter;
+import org.ourproject.kune.workspace.client.tags.TagsView;
+import org.ourproject.kune.workspace.client.tags.ui.TagsPanel;
 import org.ourproject.kune.workspace.client.theme.ThemeMenuPresenter;
 import org.ourproject.kune.workspace.client.theme.ThemeMenuView;
 import org.ourproject.kune.workspace.client.theme.ui.ThemeMenuPanel;
@@ -55,6 +58,7 @@ import org.ourproject.kune.workspace.client.workspace.ContentTitlePresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentTitleView;
 import org.ourproject.kune.workspace.client.workspace.GroupMembersComponent;
 import org.ourproject.kune.workspace.client.workspace.ParticipationComponent;
+import org.ourproject.kune.workspace.client.workspace.TagsComponent;
 import org.ourproject.kune.workspace.client.workspace.ThemeMenuComponent;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 import org.ourproject.kune.workspace.client.workspace.WorkspacePresenter;
@@ -66,76 +70,83 @@ import org.ourproject.kune.workspace.client.workspace.ui.WorkspacePanel;
 public class WorkspaceFactory {
 
     public static Workspace createWorkspace() {
-	WorkspaceView view = new WorkspacePanel();
-	WorkspacePresenter workspace = new WorkspacePresenter(view);
-	return workspace;
+        WorkspaceView view = new WorkspacePanel();
+        WorkspacePresenter workspace = new WorkspacePresenter(view);
+        return workspace;
     }
 
     public static TextEditor createDocumentEditor(final TextEditorListener listener) {
-	TextEditorPresenter presenter = new TextEditorPresenter(listener, true);
-	TextEditorPanel panel = new TextEditorPanel(presenter);
-	presenter.init(panel);
-	return presenter;
+        TextEditorPresenter presenter = new TextEditorPresenter(listener, true);
+        TextEditorPanel panel = new TextEditorPanel(presenter);
+        presenter.init(panel);
+        return presenter;
     }
 
     public static DesktopView createDesktop(final Workspace workspace, final SiteBarListener listener) {
-	return new DesktopPanel(workspace, listener);
+        return new DesktopPanel(workspace, listener);
     }
 
     public static LicenseComponent createLicenseComponent() {
-	LicensePresenter presenter = new LicensePresenter();
-	LicenseView view = new LicensePanel(presenter);
-	presenter.init(view);
-	return presenter;
+        LicensePresenter presenter = new LicensePresenter();
+        LicenseView view = new LicensePanel(presenter);
+        presenter.init(view);
+        return presenter;
     }
 
     public static ContentTitleComponent createContentTitleComponent() {
-	ContentTitlePresenter presenter = new ContentTitlePresenter();
-	ContentTitleView view = new ContentTitlePanel(presenter);
-	presenter.init(view);
-	return presenter;
+        ContentTitlePresenter presenter = new ContentTitlePresenter();
+        ContentTitleView view = new ContentTitlePanel(presenter);
+        presenter.init(view);
+        return presenter;
     }
 
     public static ContentSubTitleComponent createContentSubTitleComponent() {
-	ContentSubTitlePresenter presenter = new ContentSubTitlePresenter();
-	ContentSubTitleView view = new ContentSubTitlePanel(presenter);
-	presenter.init(view);
-	return presenter;
+        ContentSubTitlePresenter presenter = new ContentSubTitlePresenter();
+        ContentSubTitleView view = new ContentSubTitlePanel(presenter);
+        presenter.init(view);
+        return presenter;
     }
 
     public static ContextItems createContextItems() {
-	ContextItemsPresenter presenter = new ContextItemsPresenter();
-	ContextItemsPanel panel = new ContextItemsPanel(presenter);
-	presenter.init(panel);
-	return presenter;
+        ContextItemsPresenter presenter = new ContextItemsPresenter();
+        ContextItemsPanel panel = new ContextItemsPanel(presenter);
+        presenter.init(panel);
+        return presenter;
     }
 
     public static GroupMembersComponent createGroupMembersComponent() {
-	GroupMembersPresenter presenter = new GroupMembersPresenter();
-	GroupMembersView view = new GroupMembersPanel(presenter);
-	presenter.init(view);
-	return presenter;
+        GroupMembersPresenter presenter = new GroupMembersPresenter();
+        GroupMembersView view = new GroupMembersPanel(presenter);
+        presenter.init(view);
+        return presenter;
     }
 
     public static ParticipationComponent createParticipationComponent() {
-	ParticipationPresenter presenter = new ParticipationPresenter();
-	ParticipationView view = new ParticipationPanel(presenter);
-	presenter.init(view);
-	return presenter;
+        ParticipationPresenter presenter = new ParticipationPresenter();
+        ParticipationView view = new ParticipationPanel(presenter);
+        presenter.init(view);
+        return presenter;
     }
 
     public static BuddiesPresenceComponent createBuddiesPresenceComponent() {
-	BuddiesPresencePresenter presenter = new BuddiesPresencePresenter();
-	BuddiesPresenceView view = new BuddiesPresencePanel(presenter);
-	presenter.init(view);
-	return presenter;
+        BuddiesPresencePresenter presenter = new BuddiesPresencePresenter();
+        BuddiesPresenceView view = new BuddiesPresencePanel(presenter);
+        presenter.init(view);
+        return presenter;
     }
 
     public static ThemeMenuComponent createThemeMenuComponent() {
-	ThemeMenuPresenter presenter = new ThemeMenuPresenter();
-	ThemeMenuView view = new ThemeMenuPanel(presenter);
-	presenter.init(view);
-	return presenter;
+        ThemeMenuPresenter presenter = new ThemeMenuPresenter();
+        ThemeMenuView view = new ThemeMenuPanel(presenter);
+        presenter.init(view);
+        return presenter;
+    }
+
+    public static TagsComponent createTagsComponent() {
+        TagsPresenter presenter = new TagsPresenter();
+        TagsView view = new TagsPanel(presenter);
+        presenter.init(view);
+        return presenter;
     }
 
 }

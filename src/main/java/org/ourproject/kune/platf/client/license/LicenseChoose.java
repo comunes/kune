@@ -18,41 +18,15 @@
  *
  */
 
-package org.ourproject.kune.platf.client.newgroup;
+package org.ourproject.kune.platf.client.license;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 
-public interface NewGroupFormView extends View {
+public interface LicenseChoose {
 
-    void clearData();
-
-    String getPublicDesc();
-
-    String getLongName();
-
-    String getShortName();
-
-    boolean isProject();
-
-    boolean isOrganization();
-
-    boolean isCommunity();
-
-    void hide();
-
-    void setEnabledNextButton(boolean enabled);
-
-    void setEnabledFinishButton(boolean enabled);
-
-    void setEnabledBackButton(boolean enabled);
-
-    void showNewGroupInitialDataForm();
-
-    void showLicenseForm();
+    View getView();
 
     LicenseDTO getLicense();
-
-    boolean isFormValid();
 
 }

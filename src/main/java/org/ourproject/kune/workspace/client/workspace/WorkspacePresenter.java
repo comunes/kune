@@ -35,15 +35,16 @@ public class WorkspacePresenter implements Workspace {
     private final Components components;
 
     public WorkspacePresenter(final WorkspaceView view) {
-	this.view = view;
-	this.components = new Components(this);
-	view.setContentTitle(components.getContentTitleComponent().getView());
-	view.setContentSubTitle(components.getContentSubTitleComponent().getView());
-	view.setBottom(components.getLicenseComponent().getView());
-	view.setGroupMembers(components.getGroupMembersComponent().getView());
-	view.setParticipation(components.getParticipationComponent().getView());
-	view.setBuddiesPresence(components.getBuddiesPresenceComponent().getView());
-	view.setThemeMenuComponent(components.getThemeMenuComponent().getView());
+        this.view = view;
+        this.components = new Components(this);
+        view.setContentTitle(components.getContentTitleComponent().getView());
+        view.setContentSubTitle(components.getContentSubTitleComponent().getView());
+        view.setBottom(components.getLicenseComponent().getView());
+        view.setGroupMembers(components.getGroupMembersComponent().getView());
+        view.setParticipation(components.getParticipationComponent().getView());
+        view.setBuddiesPresence(components.getBuddiesPresenceComponent().getView());
+        view.setTags(components.getTagsComponent().getView());
+        view.setThemeMenuComponent(components.getThemeMenuComponent().getView());
     }
 
     public void showError(final Throwable caught) {
@@ -51,80 +52,84 @@ public class WorkspacePresenter implements Workspace {
     }
 
     public void showGroup(final GroupDTO group) {
-	view.setGroupLogo(group.getLongName());
+        view.setGroupLogo(group.getLongName());
     }
 
     public void attachTools(final Iterator iterator) {
-	ClientTool clientTool;
-	while (iterator.hasNext()) {
-	    clientTool = (ClientTool) iterator.next();
-	    view.addTab(clientTool.getTrigger());
-	}
+        ClientTool clientTool;
+        while (iterator.hasNext()) {
+            clientTool = (ClientTool) iterator.next();
+            view.addTab(clientTool.getTrigger());
+        }
     }
 
     public void setTool(final String toolName) {
-	view.setTool(toolName);
+        view.setTool(toolName);
     }
 
     public void setContext(final WorkspaceComponent contextComponent) {
-	if (context != null) {
-	    context.detach();
-	}
-	context = contextComponent;
-	context.attach();
-	view.setContext(context.getView());
+        if (context != null) {
+            context.detach();
+        }
+        context = contextComponent;
+        context.attach();
+        view.setContext(context.getView());
     }
 
     public void setContent(final WorkspaceComponent contentComponent) {
-	if (content != null) {
-	    content.detach();
-	}
-	content = contentComponent;
-	content.attach();
-	view.setContent(content.getView());
+        if (content != null) {
+            content.detach();
+        }
+        content = contentComponent;
+        content.attach();
+        view.setContent(content.getView());
     }
 
     public void adjustSize(final int windowWidth, final int clientHeight) {
-	view.adjustSize(windowWidth, clientHeight);
+        view.adjustSize(windowWidth, clientHeight);
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public LicenseComponent getLicenseComponent() {
-	return components.getLicenseComponent();
+        return components.getLicenseComponent();
     }
 
     public ContentTitleComponent getContentTitleComponent() {
-	return components.getContentTitleComponent();
+        return components.getContentTitleComponent();
     }
 
     public ContentSubTitleComponent getContentSubTitleComponent() {
-	return components.getContentSubTitleComponent();
+        return components.getContentSubTitleComponent();
     }
 
     public GroupMembersComponent getGroupMembersComponent() {
-	return components.getGroupMembersComponent();
+        return components.getGroupMembersComponent();
     }
 
     public ParticipationComponent getParticipationComponent() {
-	return components.getParticipationComponent();
+        return components.getParticipationComponent();
     }
 
     public BuddiesPresenceComponent getBuddiesPresenceComponent() {
-	return components.getBuddiesPresenceComponent();
+        return components.getBuddiesPresenceComponent();
     }
 
     public ThemeMenuComponent getThemeMenuComponent() {
-	return components.getThemeMenuComponent();
+        return components.getThemeMenuComponent();
+    }
+
+    public TagsComponent getTagsComponent() {
+        return components.getTagsComponent();
     }
 
     public void setTheme(final String theme) {
-	view.setTheme(theme);
+        view.setTheme(theme);
     }
 
     public void setVisible(final boolean visible) {
-	view.setVisible(visible);
+        view.setVisible(visible);
     }
 }

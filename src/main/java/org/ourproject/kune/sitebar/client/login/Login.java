@@ -18,15 +18,17 @@
  *
  */
 
-package org.ourproject.kune.platf.client.license;
+package org.ourproject.kune.sitebar.client.login;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.LicenseDTO;
 
-public interface LicenseChooseForm {
+public interface Login {
 
-    View getView();
+    public void onCancel();
 
-    LicenseDTO getLicense();
+    public void doLogin();
 
+    public View getView();
+
+    public void doRegister();
 }

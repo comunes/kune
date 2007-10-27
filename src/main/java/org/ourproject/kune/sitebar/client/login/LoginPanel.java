@@ -26,7 +26,11 @@ import org.ourproject.kune.sitebar.client.msg.SiteMessage;
 import org.ourproject.kune.sitebar.client.msg.SiteMessagePanel;
 import org.ourproject.kune.sitebar.client.services.Translate;
 
+import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Ext;
 import com.gwtext.client.data.SimpleStore;
@@ -54,7 +58,7 @@ import com.gwtext.client.widgets.layout.ContentPanel;
 import com.gwtext.client.widgets.layout.ContentPanelConfig;
 import com.gwtext.client.widgets.layout.LayoutRegionConfig;
 
-public class LoginFormPanel implements LoginFormView, View {
+public class LoginPanel implements LoginView, View {
     private static final Translate t = SiteBarTrans.getInstance().t;
 
     private static final String NICKOREMAIL_FIELD = "nickOrEmail";
@@ -71,7 +75,7 @@ public class LoginFormPanel implements LoginFormView, View {
 
     private LayoutDialog dialog;
 
-    private final LoginFormPresenter presenter;
+    private final LoginPresenter presenter;
 
     private TextField shortNameRegField;
 
@@ -91,7 +95,7 @@ public class LoginFormPanel implements LoginFormView, View {
 
     private TabPanel tabPanel;
 
-    public LoginFormPanel(final LoginFormPresenter initialPresenter) {
+    public LoginPanel(final LoginPresenter initialPresenter) {
         this.presenter = initialPresenter;
         createPanel();
     }
@@ -143,9 +147,13 @@ public class LoginFormPanel implements LoginFormView, View {
         messagesPanel.show();
     }
 
+    public void setMessage(final String message, final int type) {
+        messagesPanel.setMessage(message, type, type);
+        messagesPanel.show();
+    }
+
     public void hideMessage() {
         messagesPanel.hide();
-
     }
 
     public void show() {
@@ -210,6 +218,7 @@ public class LoginFormPanel implements LoginFormView, View {
         signInWrapper.add(signInForm);
 
         signInPanel.add(signInWrapper);
+        signInPanel.add(createNoAccountRegister());
         layout.add(LayoutRegionConfig.CENTER, signInPanel);
 
         ContentPanel registerPanel = new ContentPanel(Ext.generateId(), new ContentPanelConfig() {
@@ -238,7 +247,7 @@ public class LoginFormPanel implements LoginFormView, View {
         messagesPanel = new SiteMessagePanel(presenter, false);
         ContentPanel southPanel = new ContentPanel(messagesPanel, "", new ContentPanelConfig() {
             {
-                setBackground(true);
+                setBackground(false);
                 setFitToFrame(true);
             }
         });
@@ -281,6 +290,7 @@ public class LoginFormPanel implements LoginFormView, View {
                 dialog.setTitle(t.SignIn());
                 registerBtn.hide();
                 signInBtn.show();
+                tab.getTextEl().highlight();
             }
         });
 
@@ -480,5 +490,23 @@ public class LoginFormPanel implements LoginFormView, View {
         // FIXME: hardcoded...
         return new Object[][] { new Object[] { "en", "English" }, new Object[] { "es", "Español" },
                 new Object[] { "pt", "Português do Brasil" } };
+    }
+
+    private HorizontalPanel createNoAccountRegister() {
+        HorizontalPanel registerHP = new HorizontalPanel();
+        // i18n
+        Label dontHaveAccountLabel = new Label("Don't have an account?");
+        Label registerLabel = new Label("Create one.");
+        registerLabel.addClickListener(new ClickListener() {
+            public void onClick(final Widget arg0) {
+                tabPanel.getTab(1).activate();
+            }
+        });
+        registerLabel.addStyleName("kune-Margin-Medium-l");
+        registerLabel.addStyleName("kune-link");
+        registerHP.addStyleName("kune-Margin-40-l");
+        registerHP.add(dontHaveAccountLabel);
+        registerHP.add(registerLabel);
+        return registerHP;
     }
 }

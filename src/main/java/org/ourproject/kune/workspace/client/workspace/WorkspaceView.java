@@ -59,4 +59,6 @@ public interface WorkspaceView extends View {
 
     void setVisible(boolean visible);
 
+    void setTags(View view);
+
 }

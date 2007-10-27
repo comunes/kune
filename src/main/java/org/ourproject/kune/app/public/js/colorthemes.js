@@ -12,7 +12,8 @@ var defaultKuneTheme = {
   splitter: "#DEAA87",
   groupMembersDD: "#DF5244",
   participationDD: "#CA5842",
-  buddiesPresenceDD: "#87501E"
+  buddiesPresenceDD: "#87501E",
+  tagsDD: "#87501E"
 };
 
 var greenKuneTheme = {
@@ -28,7 +29,8 @@ var greenKuneTheme = {
   splitter: "#DCE8AB",
   groupMembersDD: "#08000",
   participationDD: "#00AA00",
-  buddiesPresenceDD: "#00D400"
+  buddiesPresenceDD: "#00D400",
+  tagsDD: "#00D400"
 };
 
 var blueKuneTheme = {
@@ -44,7 +46,8 @@ var blueKuneTheme = {
   splitter: "#D5D5FF",
   groupMembersDD: "#5500D4",
   participationDD: "#6600FF",
-  buddiesPresenceDD: "#9955FF"
+  buddiesPresenceDD: "#9955FF",
+  tagsDD: "#9955FF"
 };
 
 var greyKuneTheme = {
@@ -60,7 +63,8 @@ var greyKuneTheme = {
   splitter: "#999999",
   groupMembersDD: "#4D4D4D",
   participationDD: "#666666",
-  buddiesPresenceDD: "#808080"
+  buddiesPresenceDD: "#808080",
+  tagsDD: "#808080"
 };
 
 var purpleKuneTheme = {
@@ -76,7 +80,8 @@ var purpleKuneTheme = {
   splitter: "#A793AC",
   groupMembersDD: "#672178",
   participationDD: "#892CA0",
-  buddiesPresenceDD: "#AB37C8"
+  buddiesPresenceDD: "#AB37C8",
+  tagsDD: "#AB37C8"
 };
 
 var redKuneTheme = {
@@ -92,6 +97,7 @@ var redKuneTheme = {
   splitter: "#FF5555",
   groupMembersDD: "#A02C2C",
   participationDD: "#C83737",
-  buddiesPresenceDD: "#D35F5F"
+  buddiesPresenceDD: "#D35F5F",
+  tagsDD: "#D35F5F"
 };
 

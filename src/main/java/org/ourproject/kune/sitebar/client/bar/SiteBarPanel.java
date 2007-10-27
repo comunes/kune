@@ -24,8 +24,8 @@ import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.newgroup.NewGroupForm;
-import org.ourproject.kune.platf.client.newgroup.ui.NewGroupFormPanel;
+import org.ourproject.kune.platf.client.newgroup.NewGroup;
+import org.ourproject.kune.platf.client.newgroup.ui.NewGroupPanel;
 import org.ourproject.kune.platf.client.search.SearchSite;
 import org.ourproject.kune.platf.client.search.ui.SearchSitePanel;
 import org.ourproject.kune.platf.client.ui.IconHyperlink;
@@ -33,8 +33,8 @@ import org.ourproject.kune.platf.client.ui.IconLabel;
 import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
-import org.ourproject.kune.sitebar.client.login.LoginForm;
-import org.ourproject.kune.sitebar.client.login.LoginFormPanel;
+import org.ourproject.kune.sitebar.client.login.Login;
+import org.ourproject.kune.sitebar.client.login.LoginPanel;
 import org.ourproject.kune.sitebar.client.services.Images;
 import org.ourproject.kune.sitebar.client.services.Translate;
 
@@ -77,13 +77,13 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     private TextBox searchTextBox;
 
     private final Hyperlink logoutHyperlink;
-    private LoginFormPanel loginPanel;
+    private LoginPanel loginPanel;
     private final Images img;
     private final MenuBar optionsSubmenu;
     private MenuItem linkHelpInTrans;
     private MenuItem linkHelp;
     private final MenuBar yourGroupsSubmenu;
-    private NewGroupFormPanel newGroupPanel;
+    private NewGroupPanel newGroupPanel;
     private final IconLabel contentNoPublic;
     private final Widget progressPanel;
     private final Widget progressText;
@@ -252,8 +252,8 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     public void showLoginDialog() {
-        final LoginForm login = SiteBarFactory.getLoginForm(presenter);
-        loginPanel = (LoginFormPanel) login.getView();
+        final Login login = SiteBarFactory.getLoginForm(presenter);
+        loginPanel = (LoginPanel) login.getView();
         loginPanel.show();
     }
 
@@ -262,8 +262,8 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     public void showNewGroupDialog() {
-        final NewGroupForm newGroupForm = SiteBarFactory.getNewGroupForm(presenter);
-        newGroupPanel = (NewGroupFormPanel) newGroupForm.getView();
+        final NewGroup newGroupForm = SiteBarFactory.getNewGroupForm(presenter);
+        newGroupPanel = (NewGroupPanel) newGroupForm.getView();
         newGroupPanel.show();
         Site.hideProgress();
     }

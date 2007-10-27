@@ -18,25 +18,12 @@
  *
  */
 
-package org.ourproject.kune.platf.client.license;
+package org.ourproject.kune.platf.client.newgroup;
 
 import org.ourproject.kune.platf.client.View;
 
-public interface LicenseChooseFormView extends View {
+public interface NewGroup {
 
-    boolean isCCselected();
+    public View getView();
 
-    boolean isAllowModif();
-
-    boolean isAllowModifShareAlike();
-
-    int getSelectedNonCCLicenseIndex();
-
-    boolean permitComercial();
-
-    void reset();
-
-    void showNotCCoptions();
-
-    void showCCoptions();
 }

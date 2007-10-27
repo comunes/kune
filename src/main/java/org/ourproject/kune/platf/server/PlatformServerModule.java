@@ -38,10 +38,12 @@ import org.ourproject.kune.platf.server.content.CreationService;
 import org.ourproject.kune.platf.server.content.CreationServiceDefault;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
+import org.ourproject.kune.platf.server.manager.SearchManager;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 import org.ourproject.kune.platf.server.manager.ToolConfigurationManager;
 import org.ourproject.kune.platf.server.manager.impl.GroupManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.LicenseManagerDefault;
+import org.ourproject.kune.platf.server.manager.impl.SearchManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.SocialNetworkManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.ToolConfigurationManagerDefault;
 import org.ourproject.kune.platf.server.mapper.DozerMapper;
@@ -69,41 +71,42 @@ import com.wideplay.warp.persist.UnitOfWork;
 public class PlatformServerModule extends AbstractModule {
     @Override
     protected void configure() {
-	install(PersistenceService.usingJpa().across(UnitOfWork.TRANSACTION).buildModule());
-	bind(KunePersistenceService.class);
+        install(PersistenceService.usingJpa().across(UnitOfWork.TRANSACTION).buildModule());
+        bind(KunePersistenceService.class);
 
-	bindManagers();
-	bindRPC();
-	bindServices();
-	bind(KuneProperties.class).to(KunePropertiesDefault.class);
-	bind(Mapper.class).to(DozerMapper.class);
-	bind(ToolRegistry.class);
+        bindManagers();
+        bindRPC();
+        bindServices();
+        bind(KuneProperties.class).to(KunePropertiesDefault.class);
+        bind(Mapper.class).to(DozerMapper.class);
+        bind(ToolRegistry.class);
     }
 
     private void bindServices() {
-	bind(UserInfoService.class).to(UserInfoServiceDefault.class);
-	bind(CreationService.class).to(CreationServiceDefault.class);
-	bind(AccessService.class).to(AccessServiceDefault.class);
-	bind(FinderService.class).to(FinderServiceDefault.class);
-	bind(StateService.class).to(StateServiceDefault.class);
+        bind(UserInfoService.class).to(UserInfoServiceDefault.class);
+        bind(CreationService.class).to(CreationServiceDefault.class);
+        bind(AccessService.class).to(AccessServiceDefault.class);
+        bind(FinderService.class).to(FinderServiceDefault.class);
+        bind(StateService.class).to(StateServiceDefault.class);
     }
 
     private void bindRPC() {
-	bind(KuneService.class).to(KuneRPC.class);
-	bind(GroupService.class).to(GroupRPC.class);
-	bind(ContentService.class).to(ContentRPC.class);
-	bind(SiteBarService.class).to(SiteBarRPC.class);
-	bind(SocialNetworkService.class).to(SocialNetworkRPC.class);
+        bind(KuneService.class).to(KuneRPC.class);
+        bind(GroupService.class).to(GroupRPC.class);
+        bind(ContentService.class).to(ContentRPC.class);
+        bind(SiteBarService.class).to(SiteBarRPC.class);
+        bind(SocialNetworkService.class).to(SocialNetworkRPC.class);
     }
 
     private void bindManagers() {
-	bind(UserManager.class).to(UserManagerDefault.class);
-	bind(GroupManager.class).to(GroupManagerDefault.class);
-	bind(ContentManager.class).to(ContentManagerDefault.class);
-	bind(ToolConfigurationManager.class).to(ToolConfigurationManagerDefault.class);
-	bind(ContainerManager.class).to(ContainerManagerDefault.class);
-	bind(LicenseManager.class).to(LicenseManagerDefault.class);
-	bind(SocialNetworkManager.class).to(SocialNetworkManagerDefault.class);
-	bind(XmppManager.class).to(XmppManagerDefault.class);
+        bind(UserManager.class).to(UserManagerDefault.class);
+        bind(GroupManager.class).to(GroupManagerDefault.class);
+        bind(ContentManager.class).to(ContentManagerDefault.class);
+        bind(ToolConfigurationManager.class).to(ToolConfigurationManagerDefault.class);
+        bind(ContainerManager.class).to(ContainerManagerDefault.class);
+        bind(LicenseManager.class).to(LicenseManagerDefault.class);
+        bind(SocialNetworkManager.class).to(SocialNetworkManagerDefault.class);
+        bind(XmppManager.class).to(XmppManagerDefault.class);
+        bind(SearchManager.class).to(SearchManagerDefault.class);
     }
 }

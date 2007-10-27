@@ -42,51 +42,60 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
 
     @Inject
     public UserManagerDefault(final Provider<EntityManager> provider, final User finder) {
-	super(provider, User.class);
-	this.finder = finder;
+        super(provider, User.class);
+        this.finder = finder;
     }
 
     public List<User> getAll() {
-	return finder.getAll();
+        return finder.getAll();
     }
 
     public User getByShortName(final String shortName) {
-	return finder.getByShortName(shortName);
+        return finder.getByShortName(shortName);
     }
 
     public User login(final String nickOrEmail, final String passwd) {
-	// TODO: integrate a existing Auth manager
-	User user;
-	try {
-	    user = finder.getByShortName(nickOrEmail);
-	} catch (NoResultException e) {
-	    try {
-		user = finder.getByEmail(nickOrEmail);
-	    } catch (NoResultException e2) {
-		return null;
-	    }
-	}
-	if (user.getPassword().equals(passwd)) {
-	    return user;
-	} else {
-	    return null;
-	}
+        // TODO: integrate a existing Auth manager
+        User user;
+        try {
+            user = finder.getByShortName(nickOrEmail);
+        } catch (NoResultException e) {
+            try {
+                user = finder.getByEmail(nickOrEmail);
+            } catch (NoResultException e2) {
+                return null;
+            }
+        }
+        if (user.getPassword().equals(passwd)) {
+            return user;
+        } else {
+            return null;
+        }
     }
 
     public User createUser(final String shortName, final String longName, final String email, final String passwd) {
-	User user = new User(shortName, longName, email, passwd);
-	return user;
+        User user = new User(shortName, longName, email, passwd);
+        return user;
     }
 
     public User find(final Long userId) {
-	return userId != null ? super.find(userId) : User.UNKNOWN_USER;
+        return userId != null ? super.find(userId) : User.UNKNOWN_USER;
     }
 
-    public List<User> search(final String search) throws ParseException {
-	MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "name", "shortName" },
-		new StandardAnalyzer());
-	Query query = parser.parse(search);
-	return super.search(query);
+    public List<User> search(final String search) {
+        return this.search(search, null, null);
+    }
+
+    public List<User> search(final String search, final Integer firstResult, final Integer maxResults) {
+        MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "name", "shortName" },
+                new StandardAnalyzer());
+        Query query;
+        try {
+            query = parser.parse(search);
+        } catch (ParseException e) {
+            throw new RuntimeException("Error parsing search");
+        }
+        return super.search(query, firstResult, maxResults);
     }
 
 }

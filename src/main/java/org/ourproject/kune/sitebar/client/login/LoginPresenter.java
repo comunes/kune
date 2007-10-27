@@ -28,23 +28,24 @@ import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
 import org.ourproject.kune.platf.client.errors.UserAuthException;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.msg.MessagePresenter;
+import org.ourproject.kune.sitebar.client.msg.SiteMessage;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarServiceAsync;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class LoginFormPresenter implements LoginForm, MessagePresenter {
+public class LoginPresenter implements Login, MessagePresenter {
 
-    LoginFormView view;
+    LoginView view;
 
     final LoginListener listener;
 
-    public LoginFormPresenter(final LoginListener listener) {
+    public LoginPresenter(final LoginListener listener) {
         this.listener = listener;
     }
 
-    public void init(final LoginFormView loginview) {
+    public void init(final LoginView loginview) {
         this.view = loginview;
         reset();
     }
@@ -68,9 +69,9 @@ public class LoginFormPresenter implements LoginForm, MessagePresenter {
                         throw caught;
                     } catch (final UserAuthException e) {
                         // i18n
-                        view.showErrorMessage("Incorrect username/email or password");
+                        setMessage("Incorrect username/email or password.", SiteMessage.ERROR);
                     } catch (final Throwable e) {
-                        view.showErrorMessage("Error in login");
+                        setMessage("Error in login", SiteMessage.ERROR);
                         GWT.log("Other kind of exception in LoginFormPresenter/doLogin", null);
                         throw new RuntimeException();
                     }
@@ -103,12 +104,12 @@ public class LoginFormPresenter implements LoginForm, MessagePresenter {
                     try {
                         throw caught;
                     } catch (final EmailAddressInUseException e) {
-                        view.showErrorMessage("This email in in use by other person, try with another.");
+                        setMessage("This email in in use by other person, try with another.", SiteMessage.ERROR);
                     } catch (final GroupNameInUseException e) {
                         // i18n
-                        view.showErrorMessage("This name in already in use, try with a different name");
+                        setMessage("This name in already in use, try with a different name.", SiteMessage.ERROR);
                     } catch (final Throwable e) {
-                        view.showErrorMessage("Error during registration");
+                        setMessage("Error during registration.", SiteMessage.ERROR);
                         GWT.log("Other kind of exception in user registration", null);
                         throw new RuntimeException();
                     }
@@ -132,6 +133,7 @@ public class LoginFormPresenter implements LoginForm, MessagePresenter {
     }
 
     public void setMessage(final String message, final int type) {
+        view.setMessage(message, type);
     }
 
     public View getView() {

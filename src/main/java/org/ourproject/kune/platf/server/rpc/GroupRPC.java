@@ -20,6 +20,8 @@
 
 package org.ourproject.kune.platf.server.rpc;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
@@ -54,7 +56,7 @@ public class GroupRPC implements RPC, GroupService {
         this.mapper = mapper;
     }
 
-    @Transactional(type = TransactionType.READ_WRITE)
+    @Transactional(type = TransactionType.READ_WRITE, rollbackOn = SerializableException.class)
     public StateToken createNewGroup(final String userHash, final GroupDTO groupDTO) throws SerializableException,
             UserMustBeLoggedException {
         log.debug(groupDTO.getShortName() + groupDTO.getLongName() + groupDTO.getPublicDesc()
@@ -72,13 +74,19 @@ public class GroupRPC implements RPC, GroupService {
         return new StateToken(newGroup.getDefaultContent().getStateToken());
     }
 
-    @Transactional(type = TransactionType.READ_WRITE)
+    @Transactional(type = TransactionType.READ_WRITE, rollbackOn = SerializableException.class)
     public void changeGroupWsTheme(final String userHash, final String groupShortName, final String theme)
             throws AccessViolationException {
         // TODO Auto-generated method stub
         final User user = session.getUser();
         Group group = groupManager.findByShortName(groupShortName);
         groupManager.changeWsTheme(user, group, theme);
+    }
+
+    @Transactional(type = TransactionType.READ_ONLY)
+    public void search(final String userHash, final String searchTerm, final int firstResult, final int maxResults) {
+        List<Group> search = groupManager.search(searchTerm, firstResult, maxResults);
+
     }
 
 }
