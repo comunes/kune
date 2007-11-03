@@ -29,6 +29,7 @@ public class UserInfoDTO implements IsSerializable {
     private String chatName;
     private String chatPassword;
     private String homePage;
+    private String userHash;
 
     /**
      * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.LinkDTO>
@@ -41,60 +42,68 @@ public class UserInfoDTO implements IsSerializable {
     private List groupsIsCollab;
 
     public String getName() {
-	return name;
+        return name;
     }
 
     public void setName(final String name) {
-	this.name = name;
+        this.name = name;
     }
 
     public String getChatName() {
-	return chatName;
+        return chatName;
     }
 
     public String getChatPassword() {
-	return chatPassword;
+        return chatPassword;
     }
 
     public void setChatPassword(final String password) {
-	this.chatPassword = password;
+        this.chatPassword = password;
 
     }
 
     public void setChatName(final String chatName) {
-	this.chatName = chatName;
+        this.chatName = chatName;
     }
 
     public List getGroupsIsAdmin() {
-	return groupsIsAdmin;
+        return groupsIsAdmin;
     }
 
     public void setGroupsIsAdmin(final List groupsIsAdmin) {
-	this.groupsIsAdmin = groupsIsAdmin;
+        this.groupsIsAdmin = groupsIsAdmin;
     }
 
     public List getGroupsIsCollab() {
-	return groupsIsCollab;
+        return groupsIsCollab;
     }
 
     public void setGroupsIsCollab(final List groupsIsCollab) {
-	this.groupsIsCollab = groupsIsCollab;
+        this.groupsIsCollab = groupsIsCollab;
     }
 
     public String getHomePage() {
-	return homePage;
+        return homePage;
     }
 
     public void setHomePage(final String homePage) {
-	this.homePage = homePage;
+        this.homePage = homePage;
     }
 
     public String getShortName() {
-	return shortName;
+        return shortName;
     }
 
     public void setShortName(final String shortName) {
-	this.shortName = shortName;
+        this.shortName = shortName;
+    }
+
+    public String getUserHash() {
+        return userHash;
+    }
+
+    public void setUserHash(final String userHash) {
+        this.userHash = userHash;
     }
 
 }

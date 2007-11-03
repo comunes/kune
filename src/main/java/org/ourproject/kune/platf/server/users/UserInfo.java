@@ -29,61 +29,70 @@ public class UserInfo {
     private String homePage;
     private List<Link> groupsIsAdmin;
     private List<Link> groupsIsCollab;
+    private String userHash;
 
     public String getHomePage() {
-	return homePage;
+        return homePage;
     }
 
     public void setHomePage(final String homePage) {
-	this.homePage = homePage;
+        this.homePage = homePage;
     }
 
     public String getName() {
-	return name;
+        return name;
     }
 
     public void setName(final String name) {
-	this.name = name;
+        this.name = name;
     }
 
     public String getChatName() {
-	return chatName;
+        return chatName;
     }
 
     public void setChatName(final String chatName) {
-	this.chatName = chatName;
+        this.chatName = chatName;
     }
 
     public String getChatPassword() {
-	return chatPassword;
+        return chatPassword;
     }
 
     public void setChatPassword(final String chatPassword) {
-	this.chatPassword = chatPassword;
+        this.chatPassword = chatPassword;
     }
 
     public List<Link> getGroupsIsCollab() {
-	return groupsIsCollab;
+        return groupsIsCollab;
     }
 
     public void setGroupsIsCollab(final List<Link> groupsIsCollab) {
-	this.groupsIsCollab = groupsIsCollab;
+        this.groupsIsCollab = groupsIsCollab;
     }
 
     public List<Link> getGroupsIsAdmin() {
-	return groupsIsAdmin;
+        return groupsIsAdmin;
     }
 
     public void setGroupsIsAdmin(final List<Link> groupsIsAdmin) {
-	this.groupsIsAdmin = groupsIsAdmin;
+        this.groupsIsAdmin = groupsIsAdmin;
     }
 
     public String getShortName() {
-	return shortName;
+        return shortName;
     }
 
     public void setShortName(final String shortName) {
-	this.shortName = shortName;
+        this.shortName = shortName;
+    }
+
+    public void setUserHash(final String userHash) {
+        this.userHash = userHash;
+    }
+
+    public String getUserHash() {
+        return userHash;
     }
 
 }

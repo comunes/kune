@@ -32,6 +32,8 @@ import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
+import to.tipit.gwtlib.FireLog;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -41,14 +43,13 @@ public class StateManagerDefault implements StateManager {
     private final Session session;
     private final ContentProvider provider;
     private final Workspace workspace;
-    private String oldState;
+    private StateDTO oldState;
     private String lastTheme;
 
     public StateManagerDefault(final ContentProvider provider, final Application app, final Session session) {
         this.provider = provider;
         this.app = app;
         this.session = session;
-        this.oldState = "";
         this.workspace = app.getWorkspace();
     }
 
@@ -56,31 +57,35 @@ public class StateManagerDefault implements StateManager {
         onHistoryChanged(History.getToken());
     }
 
-    public void onHistoryChanged(final String historyToken) {
-        GWT.log("State: " + historyToken, null);
-        if (isNotIgnore(historyToken)) {
-            onHistoryChanged(new StateToken(historyToken));
-        } else {
-            onHistoryChanged(oldState);
-        }
+    public Session getSession() {
+        return session;
     }
 
-    private boolean isNotIgnore(final String historyToken) {
-        return !historyToken.equals("fixme");
+    public void onHistoryChanged(final String historyToken) {
+        GWT.log("State: " + historyToken, null);
+        if (historyToken.equals(Site.NEWGROUP_TOKEN)) {
+            Site.doNewGroup(oldState.getState().getEncoded());
+        } else if (historyToken.equals(Site.LOGIN_TOKEN)) {
+            Site.doLogin(oldState.getState().getEncoded());
+        } else if (historyToken.equals(Site.FIXME_TOKEN)) {
+            loadContent(oldState);
+        } else {
+            onHistoryChanged(new StateToken(historyToken));
+        }
     }
 
     private void onHistoryChanged(final StateToken newState) {
         Site.showProgressProcessing();
-        provider.getContent(session.user, newState, new AsyncCallback() {
+        provider.getContent(session.userHash, newState, new AsyncCallback() {
             public void onFailure(final Throwable caught) {
-                oldState = newState.getEncoded();
                 processErrorException(caught);
             }
 
             public void onSuccess(final Object result) {
                 GWT.log("State response: " + result, null);
-                loadContent((StateDTO) result);
-                oldState = newState.getEncoded();
+                StateDTO newStateDTO = (StateDTO) result;
+                loadContent(newStateDTO);
+                oldState = newStateDTO;
             }
         });
     }
@@ -97,17 +102,17 @@ public class StateManagerDefault implements StateManager {
 
     private void loadContent(final StateDTO state) {
         GWT.log("title: " + state.getTitle(), null);
-        StateToken oldStateToken = new StateToken(oldState);
         session.setCurrent(state);
         final GroupDTO group = state.getGroup();
         app.setGroupState(group.getShortName());
-        if (state.getGroupRights().isAdministrable) {
+        boolean isAdmin = state.getGroupRights().isAdministrable();
+        if (isAdmin) {
             workspace.getThemeMenuComponent().setVisible(true);
         } else {
             workspace.getThemeMenuComponent().setVisible(false);
         }
         setWsTheme(group);
-        workspace.showGroup(group);
+        workspace.showGroup(group, isAdmin);
         final String toolName = state.getToolName();
         workspace.setTool(toolName);
 
@@ -115,16 +120,17 @@ public class StateManagerDefault implements StateManager {
         clientTool.setContent(state);
         workspace.getContentTitleComponent().setContentTitle(state.getTitle(), "11/06/07");
         workspace.getContentSubTitleComponent().setContentSubTitle("by Luther Blissett, Luther Blissett Jr", "English");
-        // , Double rate, Integer rateByUsers en Content...
+        workspace.getContentBottomToolBarComponent().setRate(state.isRateable(), session.isLogged(), state.getRate(),
+                state.getRateByUsers(), state.getCurrentUserRate());
         workspace.setContent(clientTool.getContent());
         workspace.setContext(clientTool.getContext());
         workspace.getLicenseComponent().setLicense(state.getGroup().getLongName(), state.getLicense());
         workspace.getTagsComponent().setTags("FIXME");
 
-        if (oldStateToken.hasGroup() && oldStateToken.getGroup().equals(state.getGroup().getShortName())) {
-            // Same group, do nothing
-            loadSocialNetwork(); // FIXME: only for test: signIn, signOut
-                                    // groupRights problems
+        if (oldState != null && oldState.getGroup().getShortName().equals(state.getGroup().getShortName())
+                && oldState.getGroupRights().equals(state.getGroupRights())) {
+            // Same group, same rights, do nothing
+            FireLog.debug("Same group, same rights, not reloading SN");
         } else {
             loadSocialNetwork();
         }
@@ -143,11 +149,11 @@ public class StateManagerDefault implements StateManager {
     }
 
     public String getUser() {
-        return session.user;
+        return session.userHash;
     }
 
     public void reloadSocialNetwork() {
-        Site.sitebar.reloadUserInfo(session.user);
+        Site.sitebar.reloadUserInfo(session.userHash);
         loadSocialNetwork();
     }
 
@@ -176,9 +182,9 @@ public class StateManagerDefault implements StateManager {
     private void loadSocialNetwork() {
         StateDTO state;
         if (session != null && (state = session.getCurrentState()) != null) {
-            workspace.getGroupMembersComponent()
-                    .getGroupMembers(session.user, state.getGroup(), state.getGroupRights());
-            workspace.getParticipationComponent().getParticipation(session.user, state.getGroup(),
+            workspace.getGroupMembersComponent().getGroupMembers(session.userHash, state.getGroup(),
+                    state.getGroupRights());
+            workspace.getParticipationComponent().getParticipation(session.userHash, state.getGroup(),
                     state.getGroupRights());
         }
     }

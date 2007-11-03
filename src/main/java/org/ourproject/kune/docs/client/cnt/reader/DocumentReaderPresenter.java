@@ -27,15 +27,15 @@ public class DocumentReaderPresenter implements DocumentReader {
     private final DocumentReaderView view;
 
     public DocumentReaderPresenter(final DocumentReaderView view) {
-	this.view = view;
+        this.view = view;
     }
 
     public void showDocument(final String text, final AccessRightsDTO accessRights) {
-	view.setContent(text);
-	view.setEditEnabled(accessRights.isEditable);
+        view.setContent(text);
+        view.setEditEnabled(accessRights.isEditable());
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 }

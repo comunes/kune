@@ -35,4 +35,8 @@ public interface SiteBar {
 
     void reloadUserInfo(String userHash);
 
+    void doNewGroup(String returnToken);
+
+    void doLogin(String returnToken);
+
 }

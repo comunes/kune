@@ -28,11 +28,11 @@ import org.ourproject.kune.workspace.client.dto.StateDTO;
 public class ChatContextPresenter implements ChatContext {
 
     private final WorkspaceDeckView view;
-    private final Components components;
+    private final ChatContextComponents components;
 
     public ChatContextPresenter(final WorkspaceDeckView view) {
 	this.view = view;
-	this.components = new Components(this);
+	this.components = new ChatContextComponents(this);
     }
 
     public void attach() {

@@ -30,24 +30,24 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public class UnJoinGroupAction implements Action {
 
     public void execute(final Object value, final Object extra, final Services services) {
-	onUnJoinGroup(services, (String) value);
+        onUnJoinGroup(services, (String) value);
     }
 
     private void onUnJoinGroup(final Services services, final String groupShortName) {
-	Site.showProgressProcessing();
-	final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-	server.unJoinGroup(services.user, services.session.getCurrentState().getGroup().getShortName(), groupShortName,
-		new AsyncCallback() {
-		    public void onFailure(final Throwable caught) {
-			Site.hideProgress();
-		    }
+        Site.showProgressProcessing();
+        final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
+        server.unJoinGroup(services.session.userHash, services.session.getCurrentState().getGroup().getShortName(),
+                groupShortName, new AsyncCallback() {
+                    public void onFailure(final Throwable caught) {
+                        Site.hideProgress();
+                    }
 
-		    public void onSuccess(final Object result) {
-			Site.hideProgress();
-			// i18n
-			Site.info("Removed as member");
-			services.stateManager.reloadSocialNetwork();
-		    }
-		});
+                    public void onSuccess(final Object result) {
+                        Site.hideProgress();
+                        // i18n
+                        Site.info("Removed as member");
+                        services.stateManager.reloadSocialNetwork();
+                    }
+                });
     }
 }

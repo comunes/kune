@@ -20,7 +20,6 @@
 
 package org.ourproject.kune.app.server;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -52,42 +51,41 @@ public class KuneApp {
     private final Scope sessionScope;
 
     public KuneApp(final String jpaUnit, final String propertiesFileName, final Scope sessionScope) {
-	this.jpaUnit = jpaUnit;
-	this.propertiesFileName = propertiesFileName;
-	this.sessionScope = sessionScope;
+        this.jpaUnit = jpaUnit;
+        this.propertiesFileName = propertiesFileName;
+        this.sessionScope = sessionScope;
     }
 
     public void configure(final ApplicationBuilder builder) {
-	builder.use(new PlatformServerModule());
-	builder.use(new DocumentServerModule());
-	builder.use(new ChatServerModule());
-	builder.use(new AbstractModule() {
-	    public void configure() {
-		bindInterceptor(Matchers.any(), new NotInObject(), new LoggerMethodInterceptor());
-		bindScope(SessionScoped.class, sessionScope);
-		bindConstant().annotatedWith(JpaUnit.class).to(jpaUnit);
-		bindConstant().annotatedWith(PropertiesFileName.class).to(propertiesFileName);
-	    }
-	});
+        builder.use(new PlatformServerModule());
+        builder.use(new DocumentServerModule());
+        builder.use(new ChatServerModule());
+        builder.use(new AbstractModule() {
+            public void configure() {
+                bindInterceptor(Matchers.any(), new NotInObject(), new LoggerMethodInterceptor());
+                bindScope(SessionScoped.class, sessionScope);
+                bindConstant().annotatedWith(JpaUnit.class).to(jpaUnit);
+                bindConstant().annotatedWith(PropertiesFileName.class).to(propertiesFileName);
+            }
+        });
 
-	Application app = builder.create("kune", "Kune.html", "gwt/org.ourproject.kune.app.Kune");
-	app.useService("KuneService", KuneService.class);
-	app.useService("GroupService", GroupService.class);
-	app.useService("ContentService", ContentService.class);
-	app.useService("SiteBarService", SiteBarService.class);
-	app.useService("SocialNetworkService", SocialNetworkService.class);
-	app.with(KuneApplicationListener.class);
-	app.add(new KuneLifeCycleListener());
+        Application app = builder.create("kune", "Kune.html", "gwt/org.ourproject.kune.app.Kune");
+        app.useService("KuneService", KuneService.class);
+        app.useService("GroupService", GroupService.class);
+        app.useService("ContentService", ContentService.class);
+        app.useService("SiteBarService", SiteBarService.class);
+        app.useService("SocialNetworkService", SocialNetworkService.class);
+        app.with(KuneApplicationListener.class);
+        app.add(new KuneLifeCycleListener());
     }
 
     public static class KuneApplicationListener implements ApplicationListener {
-	@Inject
-	UserSession userSession;
+        @Inject
+        UserSession userSession;
 
-	public void onApplicationStart(final HttpServletRequest request, final HttpServletResponse response) {
-	    String userHash = request.getSession().getId();
-	    userSession.setHash(userHash);
-	    response.addCookie(new Cookie("userHash", userHash));
-	}
+        public void onApplicationStart(final HttpServletRequest request, final HttpServletResponse response) {
+            String userSessionId = request.getSession().getId();
+            userSession.setHash(userSessionId);
+        }
     }
 }

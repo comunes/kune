@@ -22,7 +22,7 @@ package org.ourproject.kune.workspace.client.ui.ctx.items;
 
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.HorizontalLine;
-import org.ourproject.kune.platf.client.ui.IconHyperlink;
+import org.ourproject.kune.platf.client.ui.IconLabel;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ClickListener;
@@ -41,84 +41,85 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
     private String workaroundTypeName;
 
     public ContextItemsPanel(final ContextItemsPresenter presenter) {
-	this.presenter = presenter;
-	topBar = new ContextTopBar(presenter);
-	addTopBar(topBar);
+        this.presenter = presenter;
+        topBar = new ContextTopBar(presenter);
+        addTopBar(topBar);
 
-	items = new ItemsPanel();
-	add(items, DockPanel.NORTH);
-	HTML expand = new HTML("<b></b>");
-	add(expand, DockPanel.CENTER);
-	controls = new VerticalPanel();
-	add(controls, DockPanel.SOUTH);
-	controls.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
-	HorizontalLine horizontalLine = new HorizontalLine();
-	controls.add(horizontalLine);
+        items = new ItemsPanel();
+        add(items, DockPanel.NORTH);
+        HTML expand = new HTML("<b></b>");
+        add(expand, DockPanel.CENTER);
+        controls = new VerticalPanel();
+        add(controls, DockPanel.SOUTH);
+        controls.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
+        HorizontalLine horizontalLine = new HorizontalLine();
+        controls.add(horizontalLine);
 
-	// setHeight("100%");
-	expand.setHeight("15px");
-	setCellHeight(expand, "15px");
-	addStyleName("kune-NavigationBar");
-	controls.setWidth("100%");
-	controls.setCellWidth(horizontalLine, "100%");
-	horizontalLine.setWidth("100%");
+        // setHeight("100%");
+        expand.setHeight("15px");
+        setCellHeight(expand, "15px");
+        addStyleName("kune-NavigationBar");
+        controls.setWidth("100%");
+        controls.setCellWidth(horizontalLine, "100%");
+        horizontalLine.setWidth("100%");
     }
 
     private void addTopBar(final Widget widget) {
-	add(topBar, DockPanel.NORTH);
+        add(topBar, DockPanel.NORTH);
     }
 
     public void addItem(final String name, final String type, final String event) {
-	items.add(name, type, event);
+        items.add(name, type, event);
     }
 
     public void selectItem(final int index) {
     }
 
     public void clear() {
-	items.clear();
+        items.clear();
     }
 
     public void setCurrentName(final String name) {
-	topBar.currentFolder.setText(name);
+        topBar.currentFolder.setText(name);
     }
 
     public void setParentButtonEnabled(final boolean isEnabled) {
-	topBar.btnGoParent.setEnabled(isEnabled);
+        topBar.btnGoParent.setEnabled(isEnabled);
     }
 
     public void setParentTreeVisible(final boolean visible) {
-	topBar.firstRow.setVisible(visible);
+        topBar.firstRow.setVisible(visible);
     }
 
     public void setControlsVisible(final boolean visible) {
-	controls.setVisible(visible);
+        controls.setVisible(visible);
     }
 
     public void registerType(final String typeName, final AbstractImagePrototype image) {
-	items.registerType(typeName, image);
+        items.registerType(typeName, image);
     }
 
     public void addCommand(final String typeName, final String label, final String eventName) {
-	final String type = typeName;
-	IconHyperlink hl = new IconHyperlink(Images.App.getInstance().addGreen(), label, "fixme");
-	hl.addClickListener(new ClickListener() {
-	    public void onClick(final Widget sender) {
-		currentEventName = eventName;
-		presenter.onNew(type);
-	    }
-	});
-	controls.add(hl);
+        final String type = typeName;
+        IconLabel iconLabel = new IconLabel(Images.App.getInstance().addGreen(), label);
+        iconLabel.addClickListener(new ClickListener() {
+            public void onClick(final Widget sender) {
+                currentEventName = eventName;
+                presenter.onNew(type);
+            }
+        });
+        iconLabel.addStyleName("kune-ContextItemsPanel-LabelLink");
+        controls.add(iconLabel);
     }
 
     public void showCreationField(final String typeName) {
-	// Workaround: gwt-ext bug, I cannot use typeName directly
-	workaroundTypeName = typeName;
-	// i18n
-	MessageBox.prompt("Add a new " + typeName, "Please enter name:", new MessageBox.PromptCallback() {
-	    public void execute(final String btnID, final String text) {
-		presenter.create(workaroundTypeName, text, currentEventName);
-	    }
-	});
+        // Workaround: gwt-ext bug, I cannot use typeName directly
+        workaroundTypeName = typeName;
+        // i18n
+        MessageBox.prompt("Add a new " + typeName, "Please enter name:", new MessageBox.PromptCallback() {
+            public void execute(final String btnID, final String text) {
+                presenter.create(workaroundTypeName, text, currentEventName);
+            }
+        });
     }
 }

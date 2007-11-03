@@ -33,25 +33,25 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class AddFolder implements Action {
     public void execute(final Object value, final Object extra, final Services services) {
-	String name = (String) value;
-	GroupDTO group = services.session.getCurrentState().getGroup();
-	ContainerDTO container = services.session.getCurrentState().getFolder();
-	addFolder(services, name, group, container);
+        String name = (String) value;
+        GroupDTO group = services.session.getCurrentState().getGroup();
+        ContainerDTO container = services.session.getCurrentState().getFolder();
+        addFolder(services, name, group, container);
     }
 
     private void addFolder(final Services services, final String name, final GroupDTO group,
-	    final ContainerDTO container) {
-	Site.showProgress("adding document");
-	ContentServiceAsync server = ContentService.App.getInstance();
-	server.addFolder(services.user, group.getShortName(), container.getId(), name, new AsyncCallback() {
-	    public void onFailure(final Throwable caught) {
-		services.stateManager.processErrorException(caught);
-	    }
+            final ContainerDTO container) {
+        Site.showProgress("adding document");
+        ContentServiceAsync server = ContentService.App.getInstance();
+        server.addFolder(services.session.userHash, group.getShortName(), container.getId(), name, new AsyncCallback() {
+            public void onFailure(final Throwable caught) {
+                services.stateManager.processErrorException(caught);
+            }
 
-	    public void onSuccess(final Object result) {
-		StateDTO content = (StateDTO) result;
-		services.stateManager.setState(content);
-	    }
-	});
+            public void onSuccess(final Object result) {
+                StateDTO content = (StateDTO) result;
+                services.stateManager.setState(content);
+            }
+        });
     }
 }

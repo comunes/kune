@@ -32,6 +32,7 @@ import org.ourproject.kune.platf.server.access.Access;
 import org.ourproject.kune.platf.server.access.AccessService;
 import org.ourproject.kune.platf.server.access.AccessType;
 import org.ourproject.kune.platf.server.auth.Authenticated;
+import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.content.CreationService;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
@@ -57,17 +58,19 @@ public class ContentRPC implements ContentService, RPC {
     private final AccessService accessManager;
     private final CreationService creationService;
     private final XmppManager xmppManager;
+    private final ContentManager contentManager;
 
     @Inject
     public ContentRPC(final UserSession session, final AccessService contentAccess, final StateService stateService,
             final CreationService creationService, final GroupManager groupManager, final XmppManager xmppManager,
-            final Mapper mapper) {
+            final ContentManager contentManager, final Mapper mapper) {
         this.session = session;
         this.accessManager = contentAccess;
         this.stateService = stateService;
         this.creationService = creationService;
         this.groupManager = groupManager;
         this.xmppManager = xmppManager;
+        this.contentManager = contentManager;
         this.mapper = mapper;
     }
 
@@ -75,20 +78,26 @@ public class ContentRPC implements ContentService, RPC {
     public StateDTO getContent(final String userHash, final StateToken token) throws ContentNotFoundException,
             AccessViolationException, GroupNotFoundException {
         Group contentGroup;
-        // Group loggedGroup;
 
         User user = session.getUser();
-        if (session.isUserLoggedIn()) {
+        boolean userIsLoggedIn = session.isUserLoggedIn();
+        if (userIsLoggedIn) {
             contentGroup = groupManager.getGroupOfUserWithId(user.getId());
-            // loggedGroup = contentGroup;
         } else {
             contentGroup = groupManager.getDefaultGroup();
-            // loggedGroup = Group.NO_GROUP;
         }
         final Access access = accessManager.getAccess(user, token, contentGroup, AccessType.READ);
-        // final Access access = accessManager.getAccess(token, contentGroup,
-        // loggedGroup, AccessType.READ);
         final State state = stateService.create(access);
+        if (state.isRateable()) {
+            final Long contentId = parseId(state.getDocumentId());
+            Content content = contentManager.find(contentId);
+            if (userIsLoggedIn) {
+                state.setCurrentUserRate(contentManager.getRateContent(user, content));
+            }
+            state.setRate(contentManager.getRateAvg(content));
+            state.setRateByUsers(contentManager.getRateByUsers(content));
+        }
+
         return mapper.map(state, StateDTO.class);
     }
 
@@ -161,6 +170,21 @@ public class ContentRPC implements ContentService, RPC {
             xmppManager.destroyRoom(connection, roomName);
             throw new GroupNotFoundException();
         }
+    }
+
+    @Authenticated
+    @Transactional(type = TransactionType.READ_WRITE)
+    public void rateContent(final String userHash, final String documentId, final Double value)
+            throws ContentNotFoundException, AccessViolationException {
+        User rater = session.getUser();
+        final Long contentId = parseId(documentId);
+
+        if (session.isUserLoggedIn()) {
+            contentManager.rateContent(rater, contentId, value);
+        } else {
+            throw new AccessViolationException();
+        }
+
     }
 
     private Long parseId(final String documentId) throws ContentNotFoundException {

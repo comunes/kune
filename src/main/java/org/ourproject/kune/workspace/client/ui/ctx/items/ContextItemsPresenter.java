@@ -41,67 +41,67 @@ public class ContextItemsPresenter implements ContextItems {
     }
 
     public void showContainer(final StateToken state, final ContainerDTO container, final AccessRightsDTO rights) {
-	GWT.log("current folder: " + container.getId(), null);
-	GWT.log("parent: " + container.getParentFolderId(), null);
-	state.setDocument(null);
-	view.setCurrentName(container.getName());
-	view.clear();
-	List folders = container.getChilds();
-	for (int index = 0; index < folders.size(); index++) {
-	    ContainerDTO child = (ContainerDTO) folders.get(index);
-	    state.setFolder(child.getId().toString());
-	    view.addItem(child.getName(), child.getTypeId(), state.getEncoded());
-	}
+        GWT.log("current folder: " + container.getId(), null);
+        GWT.log("parent: " + container.getParentFolderId(), null);
+        state.setDocument(null);
+        view.setCurrentName(container.getName());
+        view.clear();
+        List folders = container.getChilds();
+        for (int index = 0; index < folders.size(); index++) {
+            ContainerDTO child = (ContainerDTO) folders.get(index);
+            state.setFolder(child.getId().toString());
+            view.addItem(child.getName(), child.getTypeId(), state.getEncoded());
+        }
 
-	state.setFolder(container.getId().toString());
-	List contents = container.getContents();
-	for (int index = 0; index < contents.size(); index++) {
-	    ContentDTO dto = (ContentDTO) contents.get(index);
-	    state.setDocument(dto.getId().toString());
-	    view.addItem(dto.getTitle(), dto.getTypeId(), state.getEncoded());
-	}
-	GWT.log(container.getAbsolutePath(), null);
-	view.setParentButtonEnabled(container.getParentFolderId() != null);
-	view.setControlsVisible(rights.isEditable);
+        state.setFolder(container.getId().toString());
+        List contents = container.getContents();
+        for (int index = 0; index < contents.size(); index++) {
+            ContentDTO dto = (ContentDTO) contents.get(index);
+            state.setDocument(dto.getId().toString());
+            view.addItem(dto.getTitle(), dto.getTypeId(), state.getEncoded());
+        }
+        GWT.log(container.getAbsolutePath(), null);
+        view.setParentButtonEnabled(container.getParentFolderId() != null);
+        view.setControlsVisible(rights.isEditable());
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void init(final ContextItemsView view) {
-	this.view = view;
+        this.view = view;
     }
 
     public void registerType(final String typeName, final AbstractImagePrototype image) {
-	view.registerType(typeName, image);
+        view.registerType(typeName, image);
     }
 
     public void canCreate(final String typeName, final String label, final String eventName) {
-	view.addCommand(typeName, label, eventName);
+        view.addCommand(typeName, label, eventName);
     }
 
     public void create(final String typeName, final String value, final String eventName) {
-	if (value != null) {
-	    Dispatcher dispatcher = DefaultDispatcher.getInstance();
-	    dispatcher.fire(eventName, value, null);
-	}
+        if (value != null) {
+            Dispatcher dispatcher = DefaultDispatcher.getInstance();
+            dispatcher.fire(eventName, value, null);
+        }
     }
 
     public void setParentTreeVisible(final boolean visible) {
-	view.setParentTreeVisible(visible);
+        view.setParentTreeVisible(visible);
     }
 
     public void onNew(final String typeName) {
-	view.showCreationField(typeName);
+        view.showCreationField(typeName);
     }
 
     public void onGoUp() {
-	DefaultDispatcher.getInstance().fire(DocsEvents.GO_PARENT_FOLDER, null, null);
+        DefaultDispatcher.getInstance().fire(DocsEvents.GO_PARENT_FOLDER, null, null);
     }
 
     public void setControlsVisible(final boolean visible) {
-	view.setControlsVisible(visible);
+        view.setControlsVisible(visible);
     }
 
 }

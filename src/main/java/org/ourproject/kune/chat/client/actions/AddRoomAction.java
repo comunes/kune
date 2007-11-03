@@ -34,28 +34,28 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public class AddRoomAction implements Action {
 
     public void execute(final Object value, final Object extra, final Services services) {
-	String name = (String) value;
-	GroupDTO group = services.session.getCurrentState().getGroup();
-	ContainerDTO container = services.session.getCurrentState().getFolder();
-	addRoom(services, name, group, container);
+        String name = (String) value;
+        GroupDTO group = services.session.getCurrentState().getGroup();
+        ContainerDTO container = services.session.getCurrentState().getFolder();
+        addRoom(services, name, group, container);
     }
 
     private void addRoom(final Services services, final String name, final GroupDTO group, final ContainerDTO container) {
-	Site.showProgressProcessing();
-	ContentServiceAsync server = ContentService.App.getInstance();
-	String groupShortName = group.getShortName();
-	server.addRoom(services.user, groupShortName, container.getId(), groupShortName + "-" + name,
-		new AsyncCallback() {
-		    public void onFailure(final Throwable caught) {
-			Site.hideProgress();
-			// i18n
-			Site.error("Error creating room");
-		    }
+        Site.showProgressProcessing();
+        ContentServiceAsync server = ContentService.App.getInstance();
+        String groupShortName = group.getShortName();
+        server.addRoom(services.session.userHash, groupShortName, container.getId(), groupShortName + "-" + name,
+                new AsyncCallback() {
+                    public void onFailure(final Throwable caught) {
+                        Site.hideProgress();
+                        // i18n
+                        Site.error("Error creating room");
+                    }
 
-		    public void onSuccess(final Object result) {
-			StateDTO content = (StateDTO) result;
-			services.stateManager.setState(content);
-		    }
-		});
+                    public void onSuccess(final Object result) {
+                        StateDTO content = (StateDTO) result;
+                        services.stateManager.setState(content);
+                    }
+                });
     }
 }

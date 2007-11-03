@@ -42,7 +42,7 @@ public class ParticipationPresenter implements ParticipationComponent, AbstractP
 
     // i18n
     private final static MemberAction GOTO_GROUP_COMMAND = new MemberAction("Visit this group homepage",
-	    WorkspaceEvents.GOTO_GROUP);
+	    WorkspaceEvents.GOTO);
 
     private ParticipationView view;
 

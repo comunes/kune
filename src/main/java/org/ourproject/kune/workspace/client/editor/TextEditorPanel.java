@@ -35,68 +35,68 @@ public class TextEditorPanel extends Composite implements TextEditorView {
 
     public TextEditorPanel(final TextEditorPresenter panelListener) {
 
-	gwtRTarea = new RichTextArea();
-	textEditorToolbar = new TextEditorToolbar(gwtRTarea, panelListener);
-	final VerticalPanel areaVP = new VerticalPanel();
-	areaVP.add(textEditorToolbar);
-	areaVP.add(gwtRTarea);
-	initWidget(areaVP);
+        gwtRTarea = new RichTextArea();
+        textEditorToolbar = new TextEditorToolbar(gwtRTarea, panelListener);
+        final VerticalPanel areaVP = new VerticalPanel();
+        areaVP.add(textEditorToolbar);
+        areaVP.add(gwtRTarea);
+        initWidget(areaVP);
 
-	gwtRTarea.setWidth("97%");
-	gwtRTarea.addStyleName("kune-TexEditorPanel-TextArea");
-	areaVP.setWidth("100%");
-	adjustSize("" + (Window.getClientHeight() - 212));
-	Window.addWindowResizeListener(new WindowResizeListener() {
-	    public void onWindowResized(final int arg0, final int arg1) {
-		adjustSize("" + (Window.getClientHeight() - 212));
-	    }
-	});
+        gwtRTarea.setWidth("97%");
+        gwtRTarea.addStyleName("kune-TexEditorPanel-TextArea");
+        areaVP.setWidth("100%");
+        adjustSize("" + (Window.getClientHeight() - 212 - 24));
+        Window.addWindowResizeListener(new WindowResizeListener() {
+            public void onWindowResized(final int arg0, final int arg1) {
+                adjustSize("" + (Window.getClientHeight() - 212 - 24));
+            }
+        });
     }
 
     public void setEnabled(final boolean enabled) {
-	final String bgColor = enabled ? BACKCOLOR_ENABLED : BACKCOLOR_DISABLED;
-	DOM.setStyleAttribute(gwtRTarea.getElement(), "backgroundColor", bgColor);
-	gwtRTarea.setEnabled(enabled);
+        final String bgColor = enabled ? BACKCOLOR_ENABLED : BACKCOLOR_DISABLED;
+        DOM.setStyleAttribute(gwtRTarea.getElement(), "backgroundColor", bgColor);
+        gwtRTarea.setEnabled(enabled);
     }
 
     public String getHTML() {
-	return gwtRTarea.getHTML();
+        return gwtRTarea.getHTML();
     }
 
     public String getText() {
-	return gwtRTarea.getText();
+        return gwtRTarea.getText();
     }
 
     public void setHTML(final String html) {
-	gwtRTarea.setHTML(html);
+        gwtRTarea.setHTML(html);
     }
 
     public void setText(final String text) {
-	gwtRTarea.setText(text);
+        gwtRTarea.setText(text);
     }
 
     public void setHeight(final String height) {
-	gwtRTarea.setHeight(height);
+        gwtRTarea.setHeight(height);
     }
 
     public void setEnabledSaveButton(final boolean enabled) {
-	textEditorToolbar.setEnabledSaveButton(enabled);
+        textEditorToolbar.setEnabledSaveButton(enabled);
     }
 
     public void setEnabledCancelButton(final boolean enabled) {
-	textEditorToolbar.setEnabledCloseButton(enabled);
+        textEditorToolbar.setEnabledCloseButton(enabled);
     }
 
     public void setTextSaveButton(final String text) {
-	textEditorToolbar.setTextSaveButton(text);
+        textEditorToolbar.setTextSaveButton(text);
     }
 
     public void editHTML(final boolean edit) {
-	textEditorToolbar.editHTML(edit);
+        textEditorToolbar.editHTML(edit);
     }
 
     private void adjustSize(final String height) {
-	gwtRTarea.setHeight(height);
+        gwtRTarea.setHeight(height);
     }
 
 }

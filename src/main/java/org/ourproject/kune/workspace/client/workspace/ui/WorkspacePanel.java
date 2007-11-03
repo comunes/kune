@@ -22,7 +22,6 @@ package org.ourproject.kune.workspace.client.workspace.ui;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.services.ColorTheme;
-import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.tool.ToolTrigger;
 import org.ourproject.kune.platf.client.ui.DropDownPanel;
@@ -30,24 +29,24 @@ import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
 import org.ourproject.kune.workspace.client.license.ui.LicensePanel;
 import org.ourproject.kune.workspace.client.workspace.WorkspaceView;
 
+import to.tipit.gwtlib.FireLog;
+
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.HorizontalSplitPanel;
-import com.google.gwt.user.client.ui.HorizontalSplitPanelImages;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class WorkspacePanel extends Composite implements WorkspaceView {
-    private static final Images img = Images.App.getInstance();
+    private static final int CONTEXT_WIDTH = 175;
     private final GroupLogoPanel groupLogoPanel;
     private final HorizontalPanel contentTitleBarHP;
     private final HorizontalPanel contentSubTitleBarHP;
     private final GroupToolsBar groupToolsBar;
-    private final HorizontalSplitPanel cntcxtHSP;
+    private final HorizontalPanel cntcxtHP;
     private final VerticalPanel contextVP;
     private final VerticalPanel contentVP;
     private final HorizontalPanel contentBottomBarHP;
@@ -63,8 +62,12 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     private final HorizontalPanel temporalSpaceForGroupOptions;
     private ContentTitlePanel contentTitlePanel;
     private ContentSubTitlePanel contentSubTitlePanel;
+    private final HorizontalPanel contentBottomToolBarBarHP;
     private LicensePanel bottomPanel;
     private DropDownPanel tagsPanel;
+    private ContentBottomToolBarPanel contentBottomToolBarPanel;
+    private final ScrollPanel contentSP;
+    private final HTML cntcxtSep;
 
     public WorkspacePanel() {
         th = Kune.getInstance().theme;
@@ -82,12 +85,17 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         contentTitleBarHP = new HorizontalPanel();
         contentTitleBarBorderDec = new RoundedBorderDecorator(contentTitleBarHP, RoundedBorderDecorator.TOPLEFT);
         contentSubTitleBarHP = new HorizontalPanel();
-        cntcxtHSP = new HorizontalSplitPanel(new HorizontalSplitPanelImages() {
-            public AbstractImagePrototype horizontalSplitPanelThumb() {
-                return img.splitterVertBar();
-            }
-        });
+        contentBottomToolBarBarHP = new HorizontalPanel();
+        contentSP = new ScrollPanel();
+        // cntcxtHSP = new HorizontalSplitPanel(new HorizontalSplitPanelImages()
+        // {
+        // public AbstractImagePrototype horizontalSplitPanelThumb() {
+        // return img.splitterVertBar();
+        // }
+        // });
+        cntcxtHP = new HorizontalPanel();
         contentVP = new VerticalPanel();
+        cntcxtSep = new HTML("<b></b>");
         contextVP = new VerticalPanel();
         contentBottomBarHP = new HorizontalPanel();
         bottomBorderDecorator = new RoundedBorderDecorator(contentBottomBarHP, RoundedBorderDecorator.BOTTOMLEFT);
@@ -103,16 +111,23 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         groupDropDownsSP.add(groupDropDownsVP);
         cntcxtVP.add(contentTitleBarBorderDec);
         cntcxtVP.add(contentSubTitleBarHP);
-        cntcxtVP.add(cntcxtHSP);
-        cntcxtHSP.setLeftWidget(contentVP);
-        cntcxtHSP.setRightWidget(contextVP);
+        cntcxtVP.add(cntcxtHP);
+        cntcxtHP.add(contentVP);
+        cntcxtHP.add(cntcxtSep);
+        cntcxtHP.add(contextVP);
         cntcxtVP.add(bottomBorderDecorator);
+        contentVP.add(contentSP);
+        contentVP.add(contentBottomToolBarBarHP);
 
         contentVP.addStyleName("kune-WorkspacePanel-Content");
         contextVP.addStyleName("kune-WorkspacePanel-Context");
         contentVP.setWidth("100%");
-        contextVP.setWidth("100%");
+        cntcxtSep.setHeight("100%");
+        contextVP.setWidth("" + CONTEXT_WIDTH);
         contextVP.setHeight("100%");
+        cntcxtHP.setCellHeight(cntcxtSep, "100%");
+        cntcxtHP.setCellHeight(contextVP, "100%");
+        cntcxtSep.setWidth("3px");
 
         // Set properties
         addStyleName("kune-WorkspacePanel");
@@ -121,6 +136,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         contentTitleBarBorderDec.setColor(th.getContentMainBorder());
         contentTitleBarHP.setWidth("100%");
         contentSubTitleBarHP.setWidth("100%");
+        contentBottomToolBarBarHP.setWidth("100%");
         contentTitleBarHP.addStyleName("kune-ContentTitleBar");
         contentSubTitleBarHP.addStyleName("kune-ContentSubTitleBar");
         contentBottomBarHP.addStyleName("kune-ContentBottomBar");
@@ -134,6 +150,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         groupDropDownsVP.addStyleName("kune-GroupSummaryPanel");
         bottomBorderDecorator.setColor(th.getContentMainBorder());
         temporalSpaceForGroupOptions.addStyleName("kune-Margin-Medium-l");
+        setContextColors();
     }
 
     public void addTab(final ToolTrigger trigger) {
@@ -142,6 +159,10 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 
     public void setGroupLogo(final String groupName) {
         groupLogoPanel.setLogo(groupName);
+    }
+
+    public void setPutYourLogoVisible(final boolean visible) {
+        groupLogoPanel.setPutYourLogoVisible(visible);
     }
 
     public void setGroupLogo(final Image image) {
@@ -153,11 +174,10 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     }
 
     public void setContent(final View content) {
-        contentVP.clear();
+        contentSP.clear();
         final Widget widget = (Widget) content;
-        contentVP.add(widget);
+        contentSP.add(widget);
         widget.setWidth("100%");
-        contentVP.setCellWidth(widget, "100%");
     }
 
     public void setContext(final View contextMenu) {
@@ -171,14 +191,13 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     }
 
     public void adjustSize(final int windowWidth, final int windowHeight) {
-        final int contentWidth = windowWidth - 163 - 21;
-        final int contentHeight = windowHeight - 175;
+        final int contentWidth = windowWidth - 163 - 21 - CONTEXT_WIDTH;
+        final int contentHeight = windowHeight - 175 - 24;
 
-        cntcxtHSP.setSize("" + contentWidth + "px", "" + contentHeight + "px");
-        cntcxtHSP.setSplitPosition("" + (contentWidth - 175) + "px");
+        contentSP.setSize("" + contentWidth + "px", "" + contentHeight + "px");
         groupDropDownsSP.setHeight("" + contentHeight + "px");
-        // FireLog.debug("wsp.adjustSize w:" + contentWidth + "h:" +
-        // contentHeight);
+
+        FireLog.debug("wsp.adjustSize w:" + contentWidth + "h:" + contentHeight);
     }
 
     public void setContentTitle(final View view) {
@@ -191,6 +210,12 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         contentSubTitlePanel = (ContentSubTitlePanel) view;
         contentSubTitleBarHP.add(contentSubTitlePanel);
         contentSubTitleBarHP.setCellVerticalAlignment(contentSubTitlePanel, VerticalPanel.ALIGN_MIDDLE);
+    }
+
+    public void setContentBottomToolBar(final View view) {
+        contentBottomToolBarPanel = (ContentBottomToolBarPanel) view;
+        contentBottomToolBarBarHP.add(contentBottomToolBarPanel);
+        contentBottomToolBarBarHP.setCellVerticalAlignment(contentBottomToolBarPanel, VerticalPanel.ALIGN_MIDDLE);
     }
 
     public void setBottom(final View view) {
@@ -236,15 +261,21 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         DOM.setStyleAttribute(contentTitleBarHP.getElement(), "backgroundColor", th.getContentTitle());
         DOM.setStyleAttribute(contentSubTitleBarHP.getElement(), "backgroundColor", mainColor);
         DOM.setStyleAttribute(contentBottomBarHP.getElement(), "backgroundColor", mainColor);
-        DOM.setStyleAttribute(cntcxtHSP.getRightWidget().getElement(), "backgroundColor", th.getContext());
-        DOM.setStyleAttribute(DOM.getChild(DOM.getChild(cntcxtHSP.getElement(), 0), 1), "backgroundColor", th
-                .getSplitter());
+        setContextColors();
+        // DOM.setStyleAttribute(DOM.getChild(DOM.getChild(cntcxtHSP.getElement(),
+        // 0), 1), "backgroundColor", th
+        // .getSplitter());
         DOM.setStyleAttribute(contentBottomBarHP.getWidget(0).getElement(), "color", th.getContentBottomText());
         groupMembersPanel.setColor(th.getGroupMembersDD());
         participationPanel.setColor(th.getParticipationDD());
         buddiesPresencePanel.setColor(th.getBuddiesPresenceDD());
         tagsPanel.setColor(th.getTagsDD());
         groupToolsBar.setTabsColors(th.getToolSelected(), th.getToolUnselected());
+    }
+
+    private void setContextColors() {
+        DOM.setStyleAttribute(cntcxtHP.getWidget(2).getElement(), "backgroundColor", th.getContext());
+        DOM.setStyleAttribute(cntcxtHP.getWidget(1).getElement(), "backgroundColor", th.getSplitter());
     }
 
     public void setVisible(final boolean visible) {

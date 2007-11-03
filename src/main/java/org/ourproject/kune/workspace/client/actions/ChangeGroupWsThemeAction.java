@@ -30,23 +30,23 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public class ChangeGroupWsThemeAction implements Action {
 
     public void execute(final Object value, final Object extra, final Services services) {
-	onChangeGroupWsTheme(services, (String) value);
+        onChangeGroupWsTheme(services, (String) value);
     }
 
     private void onChangeGroupWsTheme(final Services services, final String theme) {
-	Site.showProgressProcessing();
-	final GroupServiceAsync server = GroupService.App.getInstance();
-	server.changeGroupWsTheme(services.user, services.session.getCurrentState().getGroup().getShortName(), theme,
-		new AsyncCallback() {
-		    public void onFailure(final Throwable caught) {
-			services.stateManager.processErrorException(caught);
-		    }
+        Site.showProgressProcessing();
+        final GroupServiceAsync server = GroupService.App.getInstance();
+        server.changeGroupWsTheme(services.session.userHash, services.session.getCurrentState().getGroup()
+                .getShortName(), theme, new AsyncCallback() {
+            public void onFailure(final Throwable caught) {
+                services.stateManager.processErrorException(caught);
+            }
 
-		    public void onSuccess(final Object result) {
-			Site.hideProgress();
-			services.stateManager.reload();
-		    }
-		});
+            public void onSuccess(final Object result) {
+                Site.hideProgress();
+                services.stateManager.reload();
+            }
+        });
 
     }
 

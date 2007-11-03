@@ -37,8 +37,10 @@ public class State {
     private AccessRights contentRights;
     private AccessRights folderRights;
     private AccessRights groupRights;
+    private boolean isRateable;
     private Double rate;
     private Integer rateByUsers;
+    private Double currentUserRate;
     private String typeId;
     private License license;
 
@@ -46,115 +48,139 @@ public class State {
     }
 
     public AccessLists getAccessLists() {
-	return accessLists;
+        return accessLists;
     }
 
     public void setAccessLists(final AccessLists accessLists) {
-	this.accessLists = accessLists;
+        this.accessLists = accessLists;
     }
 
     public AccessRights getContentRights() {
-	return contentRights;
+        return contentRights;
     }
 
     public String getDocumentId() {
-	return documentId;
+        return documentId;
     }
 
     public void setDocumentId(final String docRef) {
-	this.documentId = docRef;
+        this.documentId = docRef;
     }
 
     public AccessRights getFolderRights() {
-	return folderRights;
+        return folderRights;
     }
 
     public void setFolderRights(final AccessRights folderRights) {
-	this.folderRights = folderRights;
+        this.folderRights = folderRights;
     }
 
     public String getContent() {
-	return content;
+        return content;
     }
 
     public void setContent(final String content) {
-	this.content = content;
+        this.content = content;
     }
 
     public String getTitle() {
-	return title;
+        return title;
     }
 
     public void setTitle(final String title) {
-	this.title = title;
+        this.title = title;
     }
 
     public String getToolName() {
-	return toolName;
+        return toolName;
     }
 
     public void setToolName(final String toolName) {
-	this.toolName = toolName;
+        this.toolName = toolName;
     }
 
     public Group getGroup() {
-	return group;
+        return group;
     }
 
     public void setGroup(final Group group) {
-	this.group = group;
+        this.group = group;
     }
 
     public void setContentRights(final AccessRights accessRights) {
-	this.contentRights = accessRights;
+        this.contentRights = accessRights;
     }
 
     public Container getFolder() {
-	return container;
+        return container;
     }
 
     public void setFolder(final Container container) {
-	this.container = container;
+        this.container = container;
     }
 
     public Double getRate() {
-	return rate;
+        return rate;
     }
 
     public void setRate(final Double rate) {
-	this.rate = rate;
+        if (rate != null) {
+            this.rate = rate;
+        } else {
+            this.rate = 0d;
+        }
     }
 
     public Integer getRateByUsers() {
-	return rateByUsers;
+        return rateByUsers;
     }
 
     public void setRateByUsers(final Long rateByUsers) {
-	this.rateByUsers = rateByUsers.intValue();
+        if (rateByUsers != null) {
+            this.rateByUsers = rateByUsers.intValue();
+        } else {
+            this.rateByUsers = 0;
+        }
     }
 
     public void setTypeId(final String typeId) {
-	this.typeId = typeId;
+        this.typeId = typeId;
     }
 
     public String getTypeId() {
-	return typeId;
+        return typeId;
     }
 
     public License getLicense() {
-	return license;
+        return license;
     }
 
     public void setLicense(final License license) {
-	this.license = license;
+        this.license = license;
     }
 
     public AccessRights getGroupRights() {
-	return groupRights;
+        return groupRights;
     }
 
     public void setGroupRights(final AccessRights groupRights) {
-	this.groupRights = groupRights;
+        this.groupRights = groupRights;
+    }
+
+    public Double getCurrentUserRate() {
+        return currentUserRate;
+    }
+
+    public void setCurrentUserRate(final Double currentUserRate) {
+        this.currentUserRate = currentUserRate;
+    }
+
+    public boolean isRateable() {
+        return isRateable;
+    }
+
+    public void setIsRateable(final boolean isRateable) {
+        this.isRateable = isRateable;
     }
 
 }

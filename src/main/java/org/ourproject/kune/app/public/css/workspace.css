@@ -65,6 +65,14 @@
   width: 10px;
 }
 
+.kune-SiteBarPanel-LabelLink {
+  white-space: nowrap;
+  color: #B3B3B3;
+  margin-left: 3px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 .kune-SiteMessagePanel {
   color: #250;
   position:absolute;
@@ -291,6 +299,13 @@
   margin: 2px 0 2px 5px;
 }
 
+.kune-NavigationBar .kune-ContextItemsPanel-LabelLink {
+  text-decoration: underline;
+  color: green;
+  cursor: pointer;
+  margin-left: 3px;
+}
+
 .topBar .gwt-PushButton-up-disabled {
   filter: alpha(opacity =       20);
   -moz-opacity: 0.2;
@@ -359,6 +374,7 @@
 }
 
 /* Social Network */
+
 .kune-StackedDropDownPanel {
 
 }
@@ -499,12 +515,19 @@
 }
 
 /* Rate */
+
 .kune-RatePanel-Label {
   white-space: nowrap;
+  vertical-align: middle;
 }
 
 .kune-RatePanel-Stars {
-  margin-left: 30px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+.kune-RatePanel-Stars-RateIt {
+  cursor: pointer;
 }
 
 /* Licenses */

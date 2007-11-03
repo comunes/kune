@@ -26,18 +26,20 @@ import org.ourproject.kune.platf.client.state.StateManager;
 
 public class Services {
     public final Application app;
-    public final Session session;
     public final StateManager stateManager;
     public final Dispatcher dispatcher;
-    public final String user;
+    public Session session;
 
-    public Services(final String userHash, final Application application, final Session session,
-	    final StateManager stateManager, final Dispatcher dispatcher) {
-	this.user = userHash;
-	this.app = application;
-	this.session = session;
-	this.stateManager = stateManager;
-	this.dispatcher = dispatcher;
+    public Services(final Application application, final StateManager stateManager, final Dispatcher dispatcher) {
+        this.app = application;
+        this.stateManager = stateManager;
+        this.dispatcher = dispatcher;
+        session = this.stateManager.getSession();
+    }
+
+    public void setUserHash(final String userHash) {
+        this.session.userHash = userHash;
+        this.stateManager.getSession().userHash = userHash;
     }
 
 }

@@ -26,7 +26,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 
 public class ContentToolBarPanel extends HorizontalPanel {
-    private CustomPushButton btnEnter;
+    private CustomPushButton btn;
 
     public ContentToolBarPanel() {
         Label expand = new Label("");
@@ -38,13 +38,13 @@ public class ContentToolBarPanel extends HorizontalPanel {
     }
 
     public void addButton(final String caption, final ClickListener listener) {
-        btnEnter = new CustomPushButton(caption, listener);
-        this.add(btnEnter);
-        btnEnter.addStyleName("kune-Button-Large-lrSpace");
+        btn = new CustomPushButton(caption, listener);
+        this.insert(btn, 0);
+        btn.addStyleName("kune-Button-Small-lrSpace");
     }
 
     public void setButtonVisible(final boolean isEnabled) {
-        btnEnter.setVisible(isEnabled);
+        btn.setVisible(isEnabled);
     }
 
 }

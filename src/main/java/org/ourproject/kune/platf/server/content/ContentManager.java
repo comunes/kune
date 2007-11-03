@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.platf.server.content;
 
+import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.User;
@@ -30,5 +31,13 @@ public interface ContentManager extends Manager<Content, Long> {
     public Content createContent(String title, User user, Container container);
 
     public Content save(User editor, Content descriptor, String content);
+
+    public void rateContent(User rater, Long contentId, Double value) throws ContentNotFoundException;
+
+    public Double getRateContent(User user, Content content);
+
+    public Long getRateByUsers(Content content);
+
+    public Double getRateAvg(Content content);
 
 }

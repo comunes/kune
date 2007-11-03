@@ -29,11 +29,12 @@ import org.ourproject.kune.workspace.client.actions.AddViewerAction;
 import org.ourproject.kune.workspace.client.actions.ChangeGroupWsThemeAction;
 import org.ourproject.kune.workspace.client.actions.DeleteMemberAction;
 import org.ourproject.kune.workspace.client.actions.DenyJoinGroupAction;
-import org.ourproject.kune.workspace.client.actions.GotoGroupAction;
+import org.ourproject.kune.workspace.client.actions.GotoAction;
 import org.ourproject.kune.workspace.client.actions.InitAction;
 import org.ourproject.kune.workspace.client.actions.InitDataReceivedAction;
 import org.ourproject.kune.workspace.client.actions.LoggedInAction;
 import org.ourproject.kune.workspace.client.actions.LoggedOutAction;
+import org.ourproject.kune.workspace.client.actions.RateContentAction;
 import org.ourproject.kune.workspace.client.actions.RequestJoinGroupAction;
 import org.ourproject.kune.workspace.client.actions.SetAdminAsCollabAction;
 import org.ourproject.kune.workspace.client.actions.SetCollabAsAdminAction;
@@ -42,22 +43,23 @@ import org.ourproject.kune.workspace.client.actions.UnJoinGroupAction;
 
 public class WorkspaceClientModule implements ClientModule {
     public void configure(final Register register) {
-	register.addAction(WorkspaceEvents.START_APP, new InitAction());
-	register.addAction(WorkspaceEvents.STOP_APP, new StopAction());
-	register.addAction(WorkspaceEvents.INIT_DATA_RECEIVED, new InitDataReceivedAction());
-	register.addAction(WorkspaceEvents.USER_LOGGED_IN, new LoggedInAction());
-	register.addAction(WorkspaceEvents.USER_LOGGED_OUT, new LoggedOutAction());
-	register.addAction(WorkspaceEvents.REQ_JOIN_GROUP, new RequestJoinGroupAction());
-	register.addAction(WorkspaceEvents.ACCEPT_JOIN_GROUP, new AcceptJoinGroupAction());
-	register.addAction(WorkspaceEvents.DENY_JOIN_GROUP, new DenyJoinGroupAction());
-	register.addAction(WorkspaceEvents.DEL_MEMBER, new DeleteMemberAction());
-	register.addAction(WorkspaceEvents.GOTO_GROUP, new GotoGroupAction());
-	register.addAction(WorkspaceEvents.SET_COLLAB_AS_ADMIN, new SetCollabAsAdminAction());
-	register.addAction(WorkspaceEvents.SET_ADMIN_AS_COLLAB, new SetAdminAsCollabAction());
-	register.addAction(WorkspaceEvents.ADD_ADMIN_MEMBER, new AddAdminAction());
-	register.addAction(WorkspaceEvents.ADD_COLLAB_MEMBER, new AddCollabAction());
-	register.addAction(WorkspaceEvents.ADD_VIEWER_MEMBER, new AddViewerAction());
-	register.addAction(WorkspaceEvents.UNJOIN_GROUP, new UnJoinGroupAction());
-	register.addAction(WorkspaceEvents.CHANGE_GROUP_WSTHEME, new ChangeGroupWsThemeAction());
+        register.addAction(WorkspaceEvents.START_APP, new InitAction());
+        register.addAction(WorkspaceEvents.STOP_APP, new StopAction());
+        register.addAction(WorkspaceEvents.INIT_DATA_RECEIVED, new InitDataReceivedAction());
+        register.addAction(WorkspaceEvents.USER_LOGGED_IN, new LoggedInAction());
+        register.addAction(WorkspaceEvents.USER_LOGGED_OUT, new LoggedOutAction());
+        register.addAction(WorkspaceEvents.REQ_JOIN_GROUP, new RequestJoinGroupAction());
+        register.addAction(WorkspaceEvents.ACCEPT_JOIN_GROUP, new AcceptJoinGroupAction());
+        register.addAction(WorkspaceEvents.DENY_JOIN_GROUP, new DenyJoinGroupAction());
+        register.addAction(WorkspaceEvents.DEL_MEMBER, new DeleteMemberAction());
+        register.addAction(WorkspaceEvents.GOTO, new GotoAction());
+        register.addAction(WorkspaceEvents.SET_COLLAB_AS_ADMIN, new SetCollabAsAdminAction());
+        register.addAction(WorkspaceEvents.SET_ADMIN_AS_COLLAB, new SetAdminAsCollabAction());
+        register.addAction(WorkspaceEvents.ADD_ADMIN_MEMBER, new AddAdminAction());
+        register.addAction(WorkspaceEvents.ADD_COLLAB_MEMBER, new AddCollabAction());
+        register.addAction(WorkspaceEvents.ADD_VIEWER_MEMBER, new AddViewerAction());
+        register.addAction(WorkspaceEvents.UNJOIN_GROUP, new UnJoinGroupAction());
+        register.addAction(WorkspaceEvents.CHANGE_GROUP_WSTHEME, new ChangeGroupWsThemeAction());
+        register.addAction(WorkspaceEvents.RATE_CONTENT, new RateContentAction());
     }
 }

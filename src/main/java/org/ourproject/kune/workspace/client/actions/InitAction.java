@@ -42,45 +42,45 @@ import com.google.gwt.user.client.ui.RootPanel;
 
 public class InitAction implements Action {
     public void execute(final Object value, final Object extra, final Services services) {
-	PrefetchUtilities.preFetchImpImages();
-	Timer prefetchTimer = new Timer() {
-	    public void run() {
-		PrefetchUtilities.preFetchLessImpImages();
-	    }
-	};
-	prefetchTimer.schedule(10000);
-	getInitData(services);
-	int windowWidth = Window.getClientWidth();
-	Workspace workspace = services.app.getWorkspace();
-	workspace.adjustSize(windowWidth, Window.getClientHeight());
-	SiteBarFactory.getSiteMessage().adjustWidth(windowWidth);
-	RootPanel.get("kuneinitialcurtain").setVisible(false);
+        PrefetchUtilities.preFetchImpImages();
+        Timer prefetchTimer = new Timer() {
+            public void run() {
+                PrefetchUtilities.preFetchLessImpImages();
+            }
+        };
+        prefetchTimer.schedule(10000);
+        getInitData(services);
+        int windowWidth = Window.getClientWidth();
+        Workspace workspace = services.app.getWorkspace();
+        workspace.adjustSize(windowWidth, Window.getClientHeight());
+        SiteBarFactory.getSiteMessage().adjustWidth(windowWidth);
+        RootPanel.get("kuneinitialcurtain").setVisible(false);
     }
 
     private void getInitData(final Services services) {
-	KuneServiceAsync server = KuneService.App.getInstance();
-	server.getInitData(services.user, new AsyncCallback() {
-	    public void onFailure(final Throwable error) {
-		// i18n
-		Site.error("Error fetching initial data");
-		FireLog.debug(error.getMessage());
-	    }
+        KuneServiceAsync server = KuneService.App.getInstance();
+        server.getInitData(services.session.userHash, new AsyncCallback() {
+            public void onFailure(final Throwable error) {
+                // i18n
+                Site.error("Error fetching initial data");
+                FireLog.debug(error.getMessage());
+            }
 
-	    public void onSuccess(final Object response) {
-		Dispatcher dispatcher = services.dispatcher;
-		InitDataDTO initData = (InitDataDTO) response;
-		services.session.setCCLicenses(initData.getCCLicenses());
-		services.session.setNotCCLicenses(initData.getNotCCLicenses());
-		services.session.setWsThemes(initData.getWsThemes());
-		services.session.setDefaultWsTheme(initData.getDefaultWsTheme());
-		UserInfoDTO currentUser = initData.getUserInfo();
-		dispatcher.fire(WorkspaceEvents.INIT_DATA_RECEIVED, response, null);
-		if (currentUser == null) {
-		    dispatcher.fire(WorkspaceEvents.USER_LOGGED_OUT, null, null);
-		} else {
-		    dispatcher.fire(WorkspaceEvents.USER_LOGGED_IN, currentUser, null);
-		}
-	    }
-	});
+            public void onSuccess(final Object response) {
+                Dispatcher dispatcher = services.dispatcher;
+                InitDataDTO initData = (InitDataDTO) response;
+                services.session.setCCLicenses(initData.getCCLicenses());
+                services.session.setNotCCLicenses(initData.getNotCCLicenses());
+                services.session.setWsThemes(initData.getWsThemes());
+                services.session.setDefaultWsTheme(initData.getDefaultWsTheme());
+                UserInfoDTO currentUser = initData.getUserInfo();
+                dispatcher.fire(WorkspaceEvents.INIT_DATA_RECEIVED, response, null);
+                if (currentUser == null) {
+                    dispatcher.fire(WorkspaceEvents.USER_LOGGED_OUT, null, null);
+                } else {
+                    dispatcher.fire(WorkspaceEvents.USER_LOGGED_IN, currentUser, null);
+                }
+            }
+        });
     }
 }

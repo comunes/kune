@@ -29,11 +29,11 @@ import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public class DocumentContextPresenter implements DocumentContext {
     private final WorkspaceDeckView view;
-    private final Components components;
+    private final DocumentContextComponents components;
 
     public DocumentContextPresenter(final WorkspaceDeckView view) {
 	this.view = view;
-	this.components = new Components(this);
+	this.components = new DocumentContextComponents(this);
     }
 
     public void attach() {

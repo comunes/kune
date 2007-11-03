@@ -56,6 +56,9 @@ import org.ourproject.kune.workspace.client.workspace.ContentSubTitleView;
 import org.ourproject.kune.workspace.client.workspace.ContentTitleComponent;
 import org.ourproject.kune.workspace.client.workspace.ContentTitlePresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentTitleView;
+import org.ourproject.kune.workspace.client.workspace.ContentBottomToolBarComponent;
+import org.ourproject.kune.workspace.client.workspace.ContentBottomToolBarPresenter;
+import org.ourproject.kune.workspace.client.workspace.ContentBottomToolBarView;
 import org.ourproject.kune.workspace.client.workspace.GroupMembersComponent;
 import org.ourproject.kune.workspace.client.workspace.ParticipationComponent;
 import org.ourproject.kune.workspace.client.workspace.TagsComponent;
@@ -65,6 +68,7 @@ import org.ourproject.kune.workspace.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.workspace.client.workspace.WorkspaceView;
 import org.ourproject.kune.workspace.client.workspace.ui.ContentSubTitlePanel;
 import org.ourproject.kune.workspace.client.workspace.ui.ContentTitlePanel;
+import org.ourproject.kune.workspace.client.workspace.ui.ContentBottomToolBarPanel;
 import org.ourproject.kune.workspace.client.workspace.ui.WorkspacePanel;
 
 public class WorkspaceFactory {
@@ -145,6 +149,13 @@ public class WorkspaceFactory {
     public static TagsComponent createTagsComponent() {
         TagsPresenter presenter = new TagsPresenter();
         TagsView view = new TagsPanel(presenter);
+        presenter.init(view);
+        return presenter;
+    }
+
+    public static ContentBottomToolBarComponent createContentBottomToolBarComponent() {
+        ContentBottomToolBarPresenter presenter = new ContentBottomToolBarPresenter();
+        ContentBottomToolBarView view = new ContentBottomToolBarPanel(presenter);
         presenter.init(view);
         return presenter;
     }

@@ -25,7 +25,7 @@ public class MemberAction {
 
     // i18n
     public final static MemberAction GOTO_GROUP_COMMAND = new MemberAction("Visit this member homepage",
-	    WorkspaceEvents.GOTO_GROUP);
+	    WorkspaceEvents.GOTO);
 
     private final String text;
     private final String action;

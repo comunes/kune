@@ -32,21 +32,21 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class AddDocument implements Action {
     public void execute(final Object value, final Object extra, final Services services) {
-	addDocument(services, (String) value, services.session.getCurrentState().getFolder());
+        addDocument(services, (String) value, services.session.getCurrentState().getFolder());
     }
 
     private void addDocument(final Services services, final String name, final ContainerDTO containerDTO) {
-	Site.showProgressProcessing();
-	ContentServiceAsync server = ContentService.App.getInstance();
-	server.addContent(services.user, containerDTO.getId(), name, new AsyncCallback() {
-	    public void onFailure(final Throwable caught) {
-		services.stateManager.processErrorException(caught);
-	    }
+        Site.showProgressProcessing();
+        ContentServiceAsync server = ContentService.App.getInstance();
+        server.addContent(services.session.userHash, containerDTO.getId(), name, new AsyncCallback() {
+            public void onFailure(final Throwable caught) {
+                services.stateManager.processErrorException(caught);
+            }
 
-	    public void onSuccess(final Object result) {
-		StateDTO content = (StateDTO) result;
-		services.stateManager.setState(content);
-	    }
-	});
+            public void onSuccess(final Object result) {
+                StateDTO content = (StateDTO) result;
+                services.stateManager.setState(content);
+            }
+        });
     }
 }

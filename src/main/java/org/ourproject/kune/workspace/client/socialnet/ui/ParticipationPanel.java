@@ -73,7 +73,7 @@ public class ParticipationPanel extends StackedDropDownPanel implements Particip
 	if (event == WorkspaceEvents.UNJOIN_GROUP) {
 	    return img.del();
 	}
-	if (event == WorkspaceEvents.GOTO_GROUP) {
+	if (event == WorkspaceEvents.GOTO) {
 	    return img.groupHome();
 	}
 	throw new IndexOutOfBoundsException("Event unknown in ParticipationPanel");

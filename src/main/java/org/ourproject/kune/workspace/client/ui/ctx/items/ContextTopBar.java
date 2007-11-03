@@ -39,61 +39,63 @@ class ContextTopBar extends VerticalPanel {
     public final HorizontalPanel firstRow;
 
     public ContextTopBar(final ContextItemsPresenter presenter) {
-	final ContextItemsImages Img = ContextItemsImages.App.getInstance();
+        final ContextItemsImages Img = ContextItemsImages.App.getInstance();
 
-	firstRow = new HorizontalPanel();
-	final HorizontalPanel secondRow = new HorizontalPanel();
-	final HorizontalPanel iconBarHP = new HorizontalPanel();
-	final HorizontalPanel currentFolderHP = new HorizontalPanel();
-	btnGoParent = new PushButton(Img.folderGoUp().createImage(), Img.folderGoUpLight().createImage());
-	btnGoParent.addClickListener(new ClickListener() {
-	    public void onClick(final Widget sender) {
-		presenter.onGoUp();
-	    }
-	});
-	final MenuBar pathMenu = new MenuBar();
-	final MenuBar pathSubmenu = new MenuBar(true);
+        firstRow = new HorizontalPanel();
+        final HorizontalPanel secondRow = new HorizontalPanel();
+        final HorizontalPanel iconBarHP = new HorizontalPanel();
+        final HorizontalPanel currentFolderHP = new HorizontalPanel();
+        btnGoParent = new PushButton(Img.folderGoUp().createImage(), Img.folderGoUpLight().createImage());
+        btnGoParent.addClickListener(new ClickListener() {
+            public void onClick(final Widget sender) {
+                presenter.onGoUp();
+            }
+        });
+        final MenuBar pathMenu = new MenuBar();
+        final MenuBar pathSubmenu = new MenuBar(true);
 
-	// Layout
-	add(firstRow);
-	add(secondRow);
-	firstRow.add(iconBarHP);
-	secondRow.add(currentFolderHP);
-	// iconBarHP.add(btnGoParent);
-	final RoundedBorderDecorator buttonRounded = new RoundedBorderDecorator(pathMenu, RoundedBorderDecorator.ALL, RoundedBorderDecorator.SIMPLE);
-	iconBarHP.add(buttonRounded);
-	pathMenu.addItem(Img.folderpathmenu().getHTML(), true, pathSubmenu);
-	pathSubmenu.addItem(Img.folder().getHTML() + "&nbsp;Container", true, new Command() {
-	    public void execute() {
-		// FIXME
-		Window.alert("jump!");
-	    }
-	});
-	pathSubmenu.addItem(Img.folder().getHTML() + "&nbsp;Container 2", true, new Command() {
-	    public void execute() {
-		// FIXME
-		Window.alert("jump too!");
-	    }
-	});
-	currentFolderHP.add(btnGoParent);
-	currentFolder = new Label("Current Container");
-	currentFolderHP.add(currentFolder);
+        // Layout
+        add(firstRow);
+        add(secondRow);
+        firstRow.add(iconBarHP);
+        secondRow.add(currentFolderHP);
+        // iconBarHP.add(btnGoParent);
+        final RoundedBorderDecorator buttonRounded = new RoundedBorderDecorator(pathMenu, RoundedBorderDecorator.ALL,
+                RoundedBorderDecorator.SIMPLE);
+        iconBarHP.add(buttonRounded);
+        pathMenu.addItem(Img.folderpathmenu().getHTML(), true, pathSubmenu);
+        pathSubmenu.addItem(Img.folder().getHTML() + "&nbsp;Container", true, new Command() {
+            public void execute() {
+                // FIXME
+                Window.alert("jump!");
+            }
+        });
+        pathSubmenu.addItem(Img.folder().getHTML() + "&nbsp;Container 2", true, new Command() {
+            public void execute() {
+                // FIXME
+                Window.alert("jump too!");
+            }
+        });
+        currentFolderHP.add(btnGoParent);
+        currentFolder = new Label("Current Container");
+        currentFolderHP.add(currentFolder);
 
-	// Set properties
-	addStyleName("kune-NavigationBar");
-	firstRow.addStyleName("topBar");
-	firstRow.addStyleName("topBar-margin");
-	secondRow.addStyleName("topBar");
-	firstRow.setWidth("100%");
-	secondRow.setWidth("100%");
-	setCellWidth(firstRow, "100%");
-	setCellWidth(secondRow, "100%");
-	firstRow.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
-	iconBarHP.addStyleName("kune-topBar-iconBar");
-	iconBarHP.setCellVerticalAlignment(btnGoParent, VerticalPanel.ALIGN_MIDDLE);
-	iconBarHP.setCellVerticalAlignment(buttonRounded, VerticalPanel.ALIGN_MIDDLE);
-	pathMenu.setStyleName("pathMenu");
-	buttonRounded.setColor("AAA");
+        // Set properties
+        addStyleName("kune-NavigationBar");
+        firstRow.addStyleName("topBar");
+        firstRow.addStyleName("topBar-margin");
+        secondRow.addStyleName("topBar");
+        firstRow.setWidth("100%");
+        secondRow.setWidth("100%");
+        setCellWidth(firstRow, "100%");
+        setCellWidth(secondRow, "100%");
+        firstRow.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
+        iconBarHP.addStyleName("kune-topBar-iconBar");
+        iconBarHP.setCellVerticalAlignment(btnGoParent, VerticalPanel.ALIGN_MIDDLE);
+        iconBarHP.setCellVerticalAlignment(buttonRounded, VerticalPanel.ALIGN_MIDDLE);
+        pathMenu.setStyleName("pathMenu");
+        buttonRounded.setColor("AAA");
+        btnGoParent.addStyleName("kune-pointer");
     }
 
 }

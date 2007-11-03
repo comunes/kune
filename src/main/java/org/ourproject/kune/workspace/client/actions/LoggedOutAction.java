@@ -23,6 +23,7 @@ import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.sitebar.client.Site;
 
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.History;
 
 public class LoggedOutAction implements Action {
@@ -32,6 +33,8 @@ public class LoggedOutAction implements Action {
         String token = History.getToken();
         services.stateManager.onHistoryChanged(token);
         services.stateManager.reloadSocialNetwork();
+        Cookies.removeCookie("userHash");
+        services.setUserHash(null);
     }
 
 }

@@ -41,6 +41,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class StackedDropDownPanel extends DropDownPanel {
 
+    private static final int MAX_ELEMENTS_PER_STACKITEM = 5;
     public final static String ICON_HORIZ_ALIGN_RIGHT = "right";
     public final static String ICON_HORIZ_ALIGN_LEFT = "left";
     private final AbstractPresenter presenter;
@@ -54,171 +55,182 @@ public class StackedDropDownPanel extends DropDownPanel {
     private boolean headerCountVisible;
 
     public StackedDropDownPanel(final AbstractPresenter presenter, final String borderColor, final String headerText,
-	    final String headerTitle, final boolean headerCountVisible) {
-	this.presenter = presenter;
-	this.headerText = headerText;
-	this.headerTitle = headerTitle;
-	this.headerCountVisible = headerCountVisible;
-	this.headerCount = 0;
-	VerticalPanel generalVP = new VerticalPanel();
-	stack = new StackPanel();
-	stackList = new ArrayList();
-	bottomLinksVP = new VerticalPanel();
-	bottomLinksIndex = new ArrayList();
+            final String headerTitle, final boolean headerCountVisible) {
+        this.presenter = presenter;
+        this.headerText = headerText;
+        this.headerTitle = headerTitle;
+        this.headerCountVisible = headerCountVisible;
+        this.headerCount = 0;
+        VerticalPanel generalVP = new VerticalPanel();
+        stack = new StackPanel();
+        stackList = new ArrayList();
+        bottomLinksVP = new VerticalPanel();
+        bottomLinksIndex = new ArrayList();
 
-	// Layout
-	generalVP.add(stack);
-	generalVP.add(bottomLinksVP);
-	setContent(generalVP);
+        // Layout
+        generalVP.add(stack);
+        generalVP.add(bottomLinksVP);
+        setContent(generalVP);
 
-	// Set properties
-	super.setColor(borderColor);
-	setContentVisible(true); // DropDown
-	setHeaderText(headerText);
-	setHeaderTitle(headerTitle);
-	addStyleName("kune-StackedDropDownPanel");
-	addStyleName("kune-Margin-Medium-t");
-	stack.setStyleName("kune-StackedDropDownPanel");
+        // Set properties
+        super.setColor(borderColor);
+        setContentVisible(false); // DropDown
+        setHeaderText(headerText);
+        setHeaderTitle(headerTitle);
+        addStyleName("kune-StackedDropDownPanel");
+        addStyleName("kune-Margin-Medium-t");
+        stack.setStyleName("kune-StackedDropDownPanel");
     }
 
     /* Header */
 
     public void setHeaderText(final String headerText) {
-	this.headerText = headerText;
+        this.headerText = headerText;
     }
 
     public void setHeaderTitle(final String headerTitle) {
-	this.headerTitle = headerTitle;
-	super.setTitle(headerTitle);
+        this.headerTitle = headerTitle;
+        super.setTitle(headerTitle);
     }
 
     public void setHeaderCountVisible(final boolean headerCountVisible) {
-	this.headerCountVisible = headerCountVisible;
+        this.headerCountVisible = headerCountVisible;
     }
 
     public void updateHeaderText() {
-	if (headerCountVisible) {
-	    super.setHeaderText(headerText + " (" + headerCount + ")");
-	} else {
-	    super.setHeaderText(headerText);
-	}
+        if (headerCountVisible) {
+            super.setHeaderText(headerText + " (" + headerCount + ")");
+        } else {
+            super.setHeaderText(headerText);
+        }
 
     }
 
     public String getHeaderText() {
-	return headerText;
+        return headerText;
     }
 
     public String getHeaderTitle() {
-	return headerTitle;
+        return headerTitle;
     }
 
     public int getHeaderCount() {
-	return headerCount;
+        return headerCount;
     }
 
     public boolean isHeaderCountVisible() {
-	return headerCountVisible;
+        return headerCountVisible;
     }
 
     /* Stack items */
 
     public void addStackItem(final String name, final String title, final boolean countVisible) {
-	addStackItem(name, title, null, null, countVisible);
+        addStackItem(name, title, null, null, countVisible);
     }
 
     public void addStackItem(final String name, final String title, final AbstractImagePrototype icon,
-	    final String iconAlign, final boolean countVisible) {
-	ScrollPanel siSP = new ScrollPanel();
-	VerticalPanel siVP = new VerticalPanel();
-	siSP.add(siVP);
-	StackItem stackItem = new StackItem(name, title, icon, iconAlign, countVisible);
-	stack.add(siSP, stackItem.getHtml(), true);
-	stackList.add(stackItem);
+            final String iconAlign, final boolean countVisible) {
+        ScrollPanel siSP = new ScrollPanel();
+        VerticalPanel siVP = new VerticalPanel();
+        siSP.add(siVP);
+        StackItem stackItem = new StackItem(name, title, icon, iconAlign, countVisible);
+        stack.add(siSP, stackItem.getHtml(), true);
+        stackList.add(stackItem);
     }
 
     public void removeStackItem(final String name) {
-	int idx = indexInArray(name);
-	stack.remove(idx);
-	stackList.remove(idx);
+        int idx = indexInArray(name);
+        stack.remove(idx);
+        stackList.remove(idx);
     }
 
     private int indexInArray(final String name) {
-	final Iterator iter = stackList.iterator();
-	int i = 0;
-	while (iter.hasNext()) {
-	    final StackItem stackItem = (StackItem) iter.next();
-	    if (stackItem.getName() == name) {
-		return i;
-	    } else {
-		i++;
-	    }
-	}
-	throw new IndexOutOfBoundsException();
+        final Iterator iter = stackList.iterator();
+        int i = 0;
+        while (iter.hasNext()) {
+            final StackItem stackItem = (StackItem) iter.next();
+            if (stackItem.getName() == name) {
+                return i;
+            } else {
+                i++;
+            }
+        }
+        throw new IndexOutOfBoundsException();
     }
 
     /* Stack subItems */
 
     public void addStackSubItem(final String parentItemName, final AbstractImagePrototype icon, final String name,
-	    final String title, final StackSubItemAction[] memberActions) {
-	StackSubItem stackSubItem = new StackSubItem(icon, name, title, memberActions);
-	int indexOfStackItem = indexInArray(parentItemName);
-	ScrollPanel sp = (ScrollPanel) stack.getWidget(indexOfStackItem);
-	VerticalPanel vp = (VerticalPanel) sp.getWidget();
-	vp.add(stackSubItem);
-	StackItem stackItem = (StackItem) stackList.get(indexOfStackItem);
-	stackItem.addSubItem(name);
-	stack.setStackText(indexOfStackItem, stackItem.getHtml(), true);
-	headerCount++;
-	updateHeaderText();
+            final String title, final StackSubItemAction[] memberActions) {
+        StackSubItem stackSubItem = new StackSubItem(icon, name, title, memberActions);
+        int indexOfStackItem = indexInArray(parentItemName);
+        ScrollPanel sp = (ScrollPanel) stack.getWidget(indexOfStackItem);
+        VerticalPanel vp = (VerticalPanel) sp.getWidget();
+        vp.add(stackSubItem);
+        StackItem stackItem = (StackItem) stackList.get(indexOfStackItem);
+        stackItem.addSubItem(name);
+        stack.setStackText(indexOfStackItem, stackItem.getHtml(), true);
+        headerCount++;
+        updateHeaderText();
+        updateScroll(indexOfStackItem, stackItem.getCount());
+    }
+
+    private void updateScroll(final int member, final int count) {
+        if (count > MAX_ELEMENTS_PER_STACKITEM) {
+            stack.getWidget(member).setHeight("6em");
+        } else {
+            stack.getWidget(member).setHeight("100%");
+        }
+
     }
 
     public void removeStackSubItem(final String parentItemName, final String name) {
-	int indexOfStackItem = indexInArray(parentItemName);
-	int indexOfStackSubItem = ((StackItem) stackList.get(indexOfStackItem)).indexOfSubItem(name);
+        int indexOfStackItem = indexInArray(parentItemName);
+        int indexOfStackSubItem = ((StackItem) stackList.get(indexOfStackItem)).indexOfSubItem(name);
 
-	ScrollPanel sp = (ScrollPanel) stack.getWidget(indexOfStackItem);
-	((VerticalPanel) sp.getWidget()).remove(indexOfStackSubItem);
-	StackItem stackItem = (StackItem) stackList.get(indexOfStackItem);
-	stackItem.removeSubItem(name);
-	stack.setStackText(indexOfStackItem, stackItem.getHtml(), true);
-	headerCount--;
-	updateHeaderText();
+        ScrollPanel sp = (ScrollPanel) stack.getWidget(indexOfStackItem);
+        ((VerticalPanel) sp.getWidget()).remove(indexOfStackSubItem);
+        StackItem stackItem = (StackItem) stackList.get(indexOfStackItem);
+        stackItem.removeSubItem(name);
+        stack.setStackText(indexOfStackItem, stackItem.getHtml(), true);
+        headerCount--;
+        updateHeaderText();
+        updateScroll(indexOfStackItem, stackItem.getCount());
     }
 
     public void addBottomLink(final AbstractImagePrototype icon, final String text, final String targetHistoryToken,
-	    final String action) {
-	IconHyperlink link = new IconHyperlink(icon, text, targetHistoryToken);
-	bottomLinksVP.add(link);
-	link.addStyleName("kune-StackedDropDownPanelLink");
-	link.addClickListener(new ClickListener() {
-	    public void onClick(final Widget arg0) {
-		presenter.doAction(action, null);
+            final String action) {
+        IconHyperlink link = new IconHyperlink(icon, text, targetHistoryToken);
+        bottomLinksVP.add(link);
+        link.addStyleName("kune-StackedDropDownPanelLink");
+        link.addClickListener(new ClickListener() {
+            public void onClick(final Widget arg0) {
+                presenter.doAction(action, null);
 
-	    }
-	});
-	bottomLinksVP.setCellHorizontalAlignment(link, HorizontalPanel.ALIGN_CENTER);
-	bottomLinksIndex.add(text);
+            }
+        });
+        bottomLinksVP.setCellHorizontalAlignment(link, HorizontalPanel.ALIGN_CENTER);
+        bottomLinksIndex.add(text);
     }
 
     public void cleanBottomLinks() {
-	Iterator iter = bottomLinksIndex.iterator();
-	while (iter.hasNext()) {
-	    bottomLinksVP.remove(0);
-	}
-	bottomLinksIndex.clear();
+        Iterator iter = bottomLinksIndex.iterator();
+        while (iter.hasNext()) {
+            bottomLinksVP.remove(0);
+        }
+        bottomLinksIndex.clear();
     }
 
     public void removeBottomLink(final String text) {
-	bottomLinksVP.remove(indexOfLink(text));
+        bottomLinksVP.remove(indexOfLink(text));
     }
 
     public void setDropDownContentVisible(final boolean visible) {
-	setContentVisible(visible);
+        setContentVisible(visible);
     }
 
     private int indexOfLink(final String text) {
-	return bottomLinksIndex.indexOf(text);
+        return bottomLinksIndex.indexOf(text);
     }
 
     /*
@@ -227,149 +239,153 @@ public class StackedDropDownPanel extends DropDownPanel {
      */
 
     class StackItem {
-	private String text;
-	private String title;
-	private AbstractImagePrototype icon;
-	private String iconAlign;
-	private boolean countVisible;
-	private final ArrayList subItems;
+        private String text;
+        private String title;
+        private AbstractImagePrototype icon;
+        private String iconAlign;
+        private boolean countVisible;
+        private final ArrayList subItems;
 
-	public StackItem(final String text, final String title, final AbstractImagePrototype icon,
-		final String iconAlign, final boolean countVisible) {
-	    this.text = text;
-	    this.title = title;
-	    this.icon = icon;
-	    this.iconAlign = iconAlign;
-	    this.countVisible = countVisible;
-	    subItems = new ArrayList();
-	}
+        public StackItem(final String text, final String title, final AbstractImagePrototype icon,
+                final String iconAlign, final boolean countVisible) {
+            this.text = text;
+            this.title = title;
+            this.icon = icon;
+            this.iconAlign = iconAlign;
+            this.countVisible = countVisible;
+            subItems = new ArrayList();
+        }
 
-	public int indexOfSubItem(final String name) {
-	    return subItems.indexOf(name);
-	}
+        public int getCount() {
+            return subItems.size();
+        }
 
-	public void addSubItem(final String name) {
-	    subItems.add(name);
-	}
+        public int indexOfSubItem(final String name) {
+            return subItems.indexOf(name);
+        }
 
-	public void removeSubItem(final String name) {
-	    subItems.remove(name);
-	}
+        public void addSubItem(final String name) {
+            subItems.add(name);
+        }
 
-	public String getName() {
-	    return text;
-	}
+        public void removeSubItem(final String name) {
+            subItems.remove(name);
+        }
 
-	public void setText(final String text) {
-	    this.text = text;
-	}
+        public String getName() {
+            return text;
+        }
 
-	public void setTitle(final String title) {
-	    this.title = title;
-	}
+        public void setText(final String text) {
+            this.text = text;
+        }
 
-	public void setIcon(final AbstractImagePrototype icon) {
-	    this.icon = icon;
-	}
+        public void setTitle(final String title) {
+            this.title = title;
+        }
 
-	public void setIconAlign(final String iconAlign) {
-	    this.iconAlign = iconAlign;
-	}
+        public void setIcon(final AbstractImagePrototype icon) {
+            this.icon = icon;
+        }
 
-	public boolean isCountVisible() {
-	    return countVisible;
-	}
+        public void setIconAlign(final String iconAlign) {
+            this.iconAlign = iconAlign;
+        }
 
-	public void setCountVisible(final boolean visible) {
-	    this.countVisible = visible;
-	}
+        public boolean isCountVisible() {
+            return countVisible;
+        }
 
-	public String getHtml() {
-	    Element div = DOM.createDiv();
-	    Element labelElem = DOM.createSpan();
-	    Element iconElement = null;
-	    DOM.setElementAttribute(div, "title", title);
-	    boolean insertIcon = icon != null && iconAlign != null;
-	    if (insertIcon) {
-		iconElement = icon.createImage().getElement();
-		if (iconAlign == StackedDropDownPanel.ICON_HORIZ_ALIGN_LEFT) {
-		    DOM.appendChild(div, iconElement);
-		}
-	    }
-	    DOM.setInnerText(labelElem, text + (countVisible ? " (" + subItems.size() + ")" : ""));
-	    DOM.appendChild(div, labelElem);
-	    if (insertIcon) {
-		if (iconAlign == StackedDropDownPanel.ICON_HORIZ_ALIGN_RIGHT) {
-		    DOM.appendChild(div, iconElement);
-		}
-	    }
-	    return div.toString();
-	}
+        public void setCountVisible(final boolean visible) {
+            this.countVisible = visible;
+        }
+
+        public String getHtml() {
+            Element div = DOM.createDiv();
+            Element labelElem = DOM.createSpan();
+            Element iconElement = null;
+            DOM.setElementAttribute(div, "title", title);
+            boolean insertIcon = icon != null && iconAlign != null;
+            if (insertIcon) {
+                iconElement = icon.createImage().getElement();
+                if (iconAlign == StackedDropDownPanel.ICON_HORIZ_ALIGN_LEFT) {
+                    DOM.appendChild(div, iconElement);
+                }
+            }
+            DOM.setInnerText(labelElem, text + (countVisible ? " (" + subItems.size() + ")" : ""));
+            DOM.appendChild(div, labelElem);
+            if (insertIcon) {
+                if (iconAlign == StackedDropDownPanel.ICON_HORIZ_ALIGN_RIGHT) {
+                    DOM.appendChild(div, iconElement);
+                }
+            }
+            return div.toString();
+        }
     }
 
     class StackSubItem extends MenuBar {
-	private final MenuBar actions;
-	private AbstractImagePrototype icon;
-	private String name;
+        private final MenuBar actions;
+        private AbstractImagePrototype icon;
+        private String name;
 
-	public StackSubItem(final AbstractImagePrototype icon, final String name, final String title,
-		final StackSubItemAction[] memberActions) {
-	    super(false);
-	    this.icon = icon;
-	    this.name = name;
-	    String label = icon.getHTML() + name;
-	    setTitle(title);
-	    actions = new MenuBar(true);
-	    addItem(label, true, actions);
-	    setAutoOpen(false);
-	    actions.setAutoOpen(true);
-	    setStyleName("kune-StackSubItemLabel");
-	    actions.setStyleName("kune-StackSubItemActions");
-	    for (int i = 0; i < memberActions.length; i++) {
-		addAction(memberActions[i], name);
-	    }
-	}
+        public StackSubItem(final AbstractImagePrototype icon, final String name, final String title,
+                final StackSubItemAction[] memberActions) {
+            super(false);
+            this.icon = icon;
+            this.name = name;
+            String label = icon.getHTML() + name;
+            setTitle(title);
+            actions = new MenuBar(true);
+            addItem(label, true, actions);
+            setAutoOpen(false);
+            actions.setAutoOpen(true);
+            setStyleName("kune-StackSubItemLabel");
+            actions.setStyleName("kune-StackSubItemActions");
+            for (int i = 0; i < memberActions.length; i++) {
+                addAction(memberActions[i], name);
+            }
+        }
 
-	public void setName(final String name) {
-	    this.name = name;
-	    setMenu();
-	}
+        public void setName(final String name) {
+            this.name = name;
+            setMenu();
+        }
 
-	public void setImage(final AbstractImagePrototype icon) {
-	    this.icon = icon;
-	    setMenu();
-	}
+        public void setImage(final AbstractImagePrototype icon) {
+            this.icon = icon;
+            setMenu();
+        }
 
-	public void addAction(final StackSubItemAction memberAction, final String param) {
-	    String itemHtml = "";
-	    AbstractImagePrototype icon = memberAction.getIcon();
-	    if (icon != null) {
-		itemHtml = icon.getHTML();
-	    }
-	    itemHtml += memberAction.getText();
-	    actions.addItem(itemHtml, true, createCommand(memberAction.getAction(), param));
-	}
+        public void addAction(final StackSubItemAction memberAction, final String param) {
+            String itemHtml = "";
+            AbstractImagePrototype icon = memberAction.getIcon();
+            if (icon != null) {
+                itemHtml = icon.getHTML();
+            }
+            itemHtml += memberAction.getText();
+            actions.addItem(itemHtml, true, createCommand(memberAction.getAction(), param));
+        }
 
-	private void setMenu() {
-	    String label = icon.getHTML() + name;
-	    ((MenuItem) getItems().get(0)).setText(label);
-	}
+        private void setMenu() {
+            String label = icon.getHTML() + name;
+            ((MenuItem) getItems().get(0)).setText(label);
+        }
 
-	private Command createCommand(final String action, final String param) {
-	    return new Command() {
-		public void execute() {
-		    presenter.doAction(action, param);
-		}
-	    };
-	}
+        private Command createCommand(final String action, final String param) {
+            return new Command() {
+                public void execute() {
+                    presenter.doAction(action, param);
+                }
+            };
+        }
     }
 
     public void clear() {
-	stackList.clear();
-	stack.clear();
-	bottomLinksIndex.clear();
-	bottomLinksVP.clear();
-	headerCount = 0;
-	updateHeaderText();
+        stackList.clear();
+        stack.clear();
+        bottomLinksIndex.clear();
+        bottomLinksVP.clear();
+        headerCount = 0;
+        updateHeaderText();
     }
 }

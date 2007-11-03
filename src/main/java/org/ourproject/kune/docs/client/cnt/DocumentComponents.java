@@ -35,35 +35,35 @@ class DocumentComponents {
     private FolderEditor folderEditor;
 
     public DocumentComponents(final DocumentContentPresenter documentContentPresenter) {
-	this.documentContentPresenter = documentContentPresenter;
+        this.documentContentPresenter = documentContentPresenter;
     }
 
     public DocumentReader getDocumentReader() {
-	if (reader == null) {
-	    reader = DocumentFactory.createDocumentReader(documentContentPresenter);
-	}
-	return reader;
+        if (reader == null) {
+            reader = DocumentFactory.createDocumentReader(documentContentPresenter);
+        }
+        return reader;
     }
 
     public TextEditor getDocumentEditor() {
-	if (editor == null) {
-	    editor = WorkspaceFactory.createDocumentEditor(documentContentPresenter);
-	}
-	return editor;
+        if (editor == null) {
+            editor = WorkspaceFactory.createDocumentEditor(documentContentPresenter);
+        }
+        return editor;
     }
 
     public FolderViewer getFolderViewer() {
-	if (folderViewer == null) {
-	    folderViewer = DocumentFactory.createFolderViewer();
-	}
-	return folderViewer;
+        if (folderViewer == null) {
+            folderViewer = DocumentFactory.createFolderViewer();
+        }
+        return folderViewer;
     }
 
     public FolderEditor getFolderEditor() {
-	if (folderEditor == null) {
-	    folderEditor = DocumentFactory.createFolderEditor();
-	}
-	return folderEditor;
+        if (folderEditor == null) {
+            folderEditor = DocumentFactory.createFolderEditor();
+        }
+        return folderEditor;
     }
 
 }

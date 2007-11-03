@@ -1,5 +1,4 @@
 /*
- *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -18,30 +17,18 @@
  *
  */
 
-package org.ourproject.kune.chat.client;
+package org.ourproject.kune.workspace.client.workspace;
 
-import org.ourproject.kune.chat.client.cnt.ChatContent;
-import org.ourproject.kune.chat.client.ctx.ChatContext;
+import org.ourproject.kune.platf.client.View;
 
-class Components {
-    private ChatContent content;
-    private ChatContext context;
+public interface ContentBottomToolBarView extends View {
 
-    public Components(final ChatProvider provider) {
-    }
+    void setRate(Double value, Integer rateByUsers);
 
-    public ChatContent getContent() {
-	if (content == null) {
-	    content = ChatFactory.createChatContent();
-	}
-	return content;
-    }
+    void setRateIt(Double currentUserRate);
 
-    public ChatContext getContext() {
-	if (context == null) {
-	    context = ChatFactory.createChatContext();
-	}
-	return context;
-    }
+    void setRateVisible(boolean b);
+
+    void setRateItVisible(boolean visible);
 
 }

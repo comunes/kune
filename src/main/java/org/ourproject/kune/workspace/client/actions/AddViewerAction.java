@@ -30,26 +30,26 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public class AddViewerAction implements Action {
 
     public void execute(final Object value, final Object extra, final Services services) {
-	onAddViewer(services, (String) value);
+        onAddViewer(services, (String) value);
     }
 
     private void onAddViewer(final Services services, final String groupShortName) {
-	Site.showProgressProcessing();
-	final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-	server.addViewerMember(services.user, groupShortName, services.session.getCurrentState().getGroup()
-		.getShortName(), new AsyncCallback() {
-	    public void onFailure(final Throwable caught) {
-		Site.hideProgress();
-	    }
+        Site.showProgressProcessing();
+        final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
+        server.addViewerMember(services.session.userHash, groupShortName, services.session.getCurrentState().getGroup()
+                .getShortName(), new AsyncCallback() {
+            public void onFailure(final Throwable caught) {
+                Site.hideProgress();
+            }
 
-	    public void onSuccess(final Object result) {
-		Site.hideProgress();
-		// i18n
-		Site.info("Member can now view this group contents");
-		// TODO: Reload SocialNetwork info only
-		services.stateManager.reloadSocialNetwork();
-	    }
-	});
+            public void onSuccess(final Object result) {
+                Site.hideProgress();
+                // i18n
+                Site.info("Member can now view this group contents");
+                // TODO: Reload SocialNetwork info only
+                services.stateManager.reloadSocialNetwork();
+            }
+        });
 
     }
 }

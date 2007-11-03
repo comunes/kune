@@ -32,29 +32,29 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class SaveDocument implements Action {
     public void execute(final Object value, final Object extra, final Services services) {
-	save(services, (StateDTO) value, (DocumentContent) extra);
+        save(services, (StateDTO) value, (DocumentContent) extra);
     }
 
     private void save(final Services services, final StateDTO content, final DocumentContent documentContent) {
-	// i18n: Saving
-	Site.showProgress("Saving");
-	ContentServiceAsync server = ContentService.App.getInstance();
-	server.save(services.user, content.getDocumentId(), content.getContent(), new AsyncCallback() {
-	    public void onFailure(final Throwable caught) {
-		// i18n: Error saving
-		Site.hideProgress();
-		Site.error("Error saving document");
-		documentContent.onSaveFailed();
-	    }
+        // i18n: Saving
+        Site.showProgress("Saving");
+        ContentServiceAsync server = ContentService.App.getInstance();
+        server.save(services.session.userHash, content.getDocumentId(), content.getContent(), new AsyncCallback() {
+            public void onFailure(final Throwable caught) {
+                // i18n: Error saving
+                Site.hideProgress();
+                Site.error("Error saving document");
+                documentContent.onSaveFailed();
+            }
 
-	    public void onSuccess(final Object result) {
-		// i18n: Saved
-		Site.hideProgress();
-		Site.info("Document Saved");
-		documentContent.onSaved();
-	    }
+            public void onSuccess(final Object result) {
+                // i18n: Saved
+                Site.hideProgress();
+                Site.info("Document Saved");
+                documentContent.onSaved();
+            }
 
-	});
+        });
     }
 
 }

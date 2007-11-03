@@ -38,11 +38,13 @@ import org.ourproject.kune.platf.server.content.CreationService;
 import org.ourproject.kune.platf.server.content.CreationServiceDefault;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
+import org.ourproject.kune.platf.server.manager.RateManager;
 import org.ourproject.kune.platf.server.manager.SearchManager;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 import org.ourproject.kune.platf.server.manager.ToolConfigurationManager;
 import org.ourproject.kune.platf.server.manager.impl.GroupManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.LicenseManagerDefault;
+import org.ourproject.kune.platf.server.manager.impl.RateManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.SearchManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.SocialNetworkManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.ToolConfigurationManagerDefault;
@@ -108,5 +110,6 @@ public class PlatformServerModule extends AbstractModule {
         bind(SocialNetworkManager.class).to(SocialNetworkManagerDefault.class);
         bind(XmppManager.class).to(XmppManagerDefault.class);
         bind(SearchManager.class).to(SearchManagerDefault.class);
+        bind(RateManager.class).to(RateManagerDefault.class);
     }
 }

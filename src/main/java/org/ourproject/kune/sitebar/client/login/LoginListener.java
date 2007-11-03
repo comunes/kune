@@ -26,4 +26,6 @@ public interface LoginListener {
     void userLoggedIn(UserInfoDTO user);
 
     void onLoginCancelled();
+
+    void onLoginClose();
 }

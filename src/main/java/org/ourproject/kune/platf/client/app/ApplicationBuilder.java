@@ -41,49 +41,47 @@ import org.ourproject.kune.sitebar.client.Site;
 import com.google.gwt.user.client.History;
 
 public class ApplicationBuilder {
-    private final String userHash;
     private final KunePlatform platform;
 
-    public ApplicationBuilder(final String userHash, final KunePlatform platform) {
-	this.userHash = userHash;
-	this.platform = platform;
+    public ApplicationBuilder(final KunePlatform platform) {
+        this.platform = platform;
     }
 
-    public Application build() {
-	HashMap tools = indexTools(platform.getTools());
-	DefaultApplication application = new DefaultApplication(tools);
-	Site.showProgressProcessing();
-	final Session session = new Session(userHash);
-	ContentProvider provider = new ContentProviderImpl(ContentService.App.getInstance());
-	final StateManager stateManager = new StateManagerDefault(provider, application, session);
-	History.addHistoryListener(stateManager);
+    public Application build(final String userHash) {
+        HashMap tools = indexTools(platform.getTools());
+        DefaultApplication application = new DefaultApplication(tools);
+        Site.showProgressProcessing();
+        final Session session = new Session(userHash);
+        ContentProvider provider = new ContentProviderImpl(ContentService.App.getInstance());
+        final StateManager stateManager = new StateManagerDefault(provider, application, session);
+        History.addHistoryListener(stateManager);
 
-	final DefaultDispatcher dispatcher = DefaultDispatcher.getInstance();
-	application.init(dispatcher, stateManager);
-	subscribeActions(dispatcher, platform.getActions());
+        final DefaultDispatcher dispatcher = DefaultDispatcher.getInstance();
+        application.init(dispatcher, stateManager);
+        subscribeActions(dispatcher, platform.getActions());
 
-	Services services = new Services(userHash, application, session, stateManager, dispatcher);
-	dispatcher.setServices(services);
-	return application;
+        Services services = new Services(application, stateManager, dispatcher);
+        dispatcher.setServices(services);
+        return application;
     }
 
     private void subscribeActions(final DefaultDispatcher dispatcher, final ArrayList actions) {
-	ActionEvent actionEvent;
+        ActionEvent actionEvent;
 
-	for (Iterator it = actions.iterator(); it.hasNext();) {
-	    actionEvent = (ActionEvent) it.next();
-	    dispatcher.subscribe(actionEvent.event, actionEvent.action);
-	}
+        for (Iterator it = actions.iterator(); it.hasNext();) {
+            actionEvent = (ActionEvent) it.next();
+            dispatcher.subscribe(actionEvent.event, actionEvent.action);
+        }
     }
 
     private HashMap indexTools(final List toolList) {
-	HashMap tools = new HashMap();
-	int total = toolList.size();
-	for (int index = 0; index < total; index++) {
-	    ClientTool clientTool = (ClientTool) toolList.get(index);
-	    tools.put(clientTool.getName(), clientTool);
-	}
-	return tools;
+        HashMap tools = new HashMap();
+        int total = toolList.size();
+        for (int index = 0; index < total; index++) {
+            ClientTool clientTool = (ClientTool) toolList.get(index);
+            tools.put(clientTool.getName(), clientTool);
+        }
+        return tools;
     }
 
 }

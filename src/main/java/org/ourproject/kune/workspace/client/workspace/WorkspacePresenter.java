@@ -32,13 +32,14 @@ public class WorkspacePresenter implements Workspace {
     private final WorkspaceView view;
     private WorkspaceComponent context;
     private WorkspaceComponent content;
-    private final Components components;
+    private final WorkspaceUIComponents components;
 
     public WorkspacePresenter(final WorkspaceView view) {
         this.view = view;
-        this.components = new Components(this);
+        this.components = new WorkspaceUIComponents(this);
         view.setContentTitle(components.getContentTitleComponent().getView());
         view.setContentSubTitle(components.getContentSubTitleComponent().getView());
+        view.setContentBottomToolBar(components.getContentBottomToolBarComponent().getView());
         view.setBottom(components.getLicenseComponent().getView());
         view.setGroupMembers(components.getGroupMembersComponent().getView());
         view.setParticipation(components.getParticipationComponent().getView());
@@ -51,8 +52,9 @@ public class WorkspacePresenter implements Workspace {
 
     }
 
-    public void showGroup(final GroupDTO group) {
+    public void showGroup(final GroupDTO group, final boolean isAdmin) {
         view.setGroupLogo(group.getLongName());
+        view.setPutYourLogoVisible(isAdmin);
     }
 
     public void attachTools(final Iterator iterator) {
@@ -119,6 +121,10 @@ public class WorkspacePresenter implements Workspace {
 
     public ThemeMenuComponent getThemeMenuComponent() {
         return components.getThemeMenuComponent();
+    }
+
+    public ContentBottomToolBarComponent getContentBottomToolBarComponent() {
+        return components.getContentBottomToolBarComponent();
     }
 
     public TagsComponent getTagsComponent() {

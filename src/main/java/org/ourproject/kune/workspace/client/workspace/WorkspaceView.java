@@ -61,4 +61,8 @@ public interface WorkspaceView extends View {
 
     void setTags(View view);
 
+    void setContentBottomToolBar(View view);
+
+    void setPutYourLogoVisible(boolean visible);
+
 }

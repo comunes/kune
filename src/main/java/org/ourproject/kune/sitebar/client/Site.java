@@ -29,38 +29,53 @@ public class Site {
 
     public static SiteBar sitebar;
 
+    public static final String LOGIN_TOKEN = "login";
+
+    public static final String NEWGROUP_TOKEN = "newgroup";
+
+    public static final String FIXME_TOKEN = "fixme";
+
     public static void info(final String value) {
-	siteUserMessage.setMessage(value, SiteMessage.INFO);
+        siteUserMessage.setMessage(value, SiteMessage.INFO);
     }
 
     public static void important(final String value) {
-	siteUserMessage.setMessage(value, SiteMessage.IMP);
+        siteUserMessage.setMessage(value, SiteMessage.IMP);
     }
 
     public static void veryImportant(final String value) {
-	siteUserMessage.setMessage(value, SiteMessage.VERYIMP);
+        siteUserMessage.setMessage(value, SiteMessage.VERYIMP);
     }
 
     public static void error(final String value) {
-	siteUserMessage.setMessage(value, SiteMessage.ERROR);
+        siteUserMessage.setMessage(value, SiteMessage.ERROR);
     }
 
     public static void showProgress(final String text) {
-	sitebar.showProgress(text);
+        sitebar.showProgress(text);
     }
 
     public static void hideProgress() {
-	sitebar.hideProgress();
+        sitebar.hideProgress();
     }
 
     public static void showProgressProcessing() {
-	// i18n
-	sitebar.showProgress(SiteBarTrans.getInstance().t.Processing());
+        // i18n
+        sitebar.showProgress(SiteBarTrans.getInstance().t.Processing());
     }
 
     public static void showProgressLoading() {
-	// i18n
-	sitebar.showProgress("Loading");
+        // i18n
+        sitebar.showProgress("Loading");
+    }
+
+    public static void doNewGroup(final String returnToken) {
+        sitebar.doNewGroup(returnToken);
+    }
+
+    public static void doLogin(final String returnToken) {
+        sitebar.doLogin(returnToken);
+
     }
 
 }

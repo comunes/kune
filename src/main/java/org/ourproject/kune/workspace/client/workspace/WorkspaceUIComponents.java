@@ -22,17 +22,18 @@ package org.ourproject.kune.workspace.client.workspace;
 import org.ourproject.kune.workspace.client.WorkspaceFactory;
 import org.ourproject.kune.workspace.client.license.LicenseComponent;
 
-class Components {
+class WorkspaceUIComponents {
     private LicenseComponent license;
     private ContentTitleComponent contentTitle;
     private GroupMembersComponent groupMembers;
     private ParticipationComponent participatesInGroups;
     private BuddiesPresenceComponent buddiesPresence;
     private ContentSubTitleComponent contentSubTitle;
+    private ContentBottomToolBarComponent contentBottomToolBar;
     private ThemeMenuComponent themeMenu;
     private TagsComponent tags;
 
-    public Components(final WorkspacePresenter presenter) {
+    public WorkspaceUIComponents(final WorkspacePresenter presenter) {
     }
 
     public LicenseComponent getLicenseComponent() {
@@ -89,6 +90,13 @@ class Components {
             tags = WorkspaceFactory.createTagsComponent();
         }
         return tags;
+    }
+
+    public ContentBottomToolBarComponent getContentBottomToolBarComponent() {
+        if (contentBottomToolBar == null) {
+            contentBottomToolBar = WorkspaceFactory.createContentBottomToolBarComponent();
+        }
+        return contentBottomToolBar;
     }
 
 }

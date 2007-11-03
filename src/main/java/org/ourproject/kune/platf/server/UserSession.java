@@ -34,41 +34,31 @@ public class UserSession {
 
     @Inject
     public UserSession(final UserManager manager) {
-	this.manager = manager;
+        this.manager = manager;
     }
 
     public User getUser() {
-	return manager.find(userId);
+        return manager.find(userId);
     }
 
     public void setUser(final User user) {
-	userId = user.getId();
-    }
-
-    @Deprecated
-    public Long getUserId() {
-	return userId;
-    }
-
-    @Deprecated
-    public void setUserId(final Long userId) {
-	this.userId = userId;
+        userId = user.getId();
     }
 
     public void clearUserId() {
-	setUserId(null);
+        userId = null;
     }
 
     public String getHash() {
-	return hash;
+        return hash;
     }
 
     public void setHash(final String hash) {
-	this.hash = hash;
+        this.hash = hash;
     }
 
     public boolean isUserLoggedIn() {
-	return userId != null;
+        return userId != null;
     }
 
 }

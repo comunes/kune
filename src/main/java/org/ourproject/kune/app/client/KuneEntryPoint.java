@@ -39,41 +39,29 @@ public class KuneEntryPoint implements EntryPoint {
     }
 
     public void onModuleLoad() {
-	String userHash = obtainUserHash();
+        String userHash = obtainUserHash();
+        KunePlatform platform = new KunePlatform();
+        platform.install(new WorkspaceClientModule());
+        platform.install(new DocsClientModule());
+        platform.install(new ChatClientModule());
+        final Application app = new ApplicationBuilder(platform).build(userHash);
+        Window.addWindowCloseListener(new WindowCloseListener() {
+            public void onWindowClosed() {
+                app.stop();
+            }
 
-	if (isNotValid(userHash)) {
-	    informUserAndStop();
-	}
-	KunePlatform platform = new KunePlatform();
-	platform.install(new WorkspaceClientModule());
-	platform.install(new DocsClientModule());
-	platform.install(new ChatClientModule());
-	final Application app = new ApplicationBuilder(userHash, platform).build();
-	Window.addWindowCloseListener(new WindowCloseListener() {
-	    public void onWindowClosed() {
-		app.stop();
-	    }
+            public String onWindowClosing() {
+                return null;
+            }
+        });
+        app.start();
 
-	    public String onWindowClosing() {
-		return null;
-	    }
-	});
-	app.start();
-
-    }
-
-    private boolean isNotValid(final String userHash) {
-	return false;
-    }
-
-    private void informUserAndStop() {
-	throw new RuntimeException("not logged in!");
     }
 
     private String obtainUserHash() {
-	String cookie = Cookies.getCookie("userHash");
-	GWT.log("USER HASH: " + cookie, null);
-	return cookie;
+        String userHash = Cookies.getCookie("userHash");
+        GWT.log("UserHash: " + userHash, null);
+        return userHash;
     }
 
 }

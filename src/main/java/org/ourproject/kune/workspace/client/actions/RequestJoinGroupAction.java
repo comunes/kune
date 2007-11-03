@@ -37,12 +37,11 @@ public class RequestJoinGroupAction implements Action {
     private void onRequestJoinGroup(final Services services) {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        String user = services.session.user;
-        // FIXME Bug .... Check if user is logged!!!
-        if (user == null) {
+        final String userHash = services.session.userHash;
+        if (userHash == null) {
             Site.important("You must be logged to request join a group");
         } else {
-            server.requestJoinGroup(user, services.session.getCurrentState().getGroup().getShortName(),
+            server.requestJoinGroup(userHash, services.session.getCurrentState().getGroup().getShortName(),
                     new AsyncCallback() {
                         public void onFailure(final Throwable caught) {
                             services.stateManager.processErrorException(caught);
@@ -54,7 +53,7 @@ public class RequestJoinGroupAction implements Action {
                             // i18n
                             if (resultType == SocialNetworkDTO.REQ_JOIN_ACEPTED) {
                                 Site.info("You are now member of this group");
-                                Site.sitebar.reloadUserInfo(services.user);
+                                Site.sitebar.reloadUserInfo(userHash);
                                 services.stateManager.reloadSocialNetwork();
                             }
                             if (resultType == SocialNetworkDTO.REQ_JOIN_DENIED) {

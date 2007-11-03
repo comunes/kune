@@ -33,34 +33,37 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 public interface ContentService extends RemoteService {
 
     StateDTO getContent(String userHash, StateToken token) throws ContentNotFoundException, AccessViolationException,
-	    GroupNotFoundException;
+            GroupNotFoundException;
 
     int save(String user, String documentId, String content) throws AccessViolationException, ContentNotFoundException;
 
     StateDTO addContent(String user, Long parentFolderId, String name) throws AccessViolationException,
-	    ContentNotFoundException;
+            ContentNotFoundException;
 
     StateDTO addFolder(String hash, String groupShortName, Long parentFolderId, String title)
-	    throws ContentNotFoundException, AccessViolationException, GroupNotFoundException;
+            throws ContentNotFoundException, AccessViolationException, GroupNotFoundException;
 
     StateDTO addRoom(String user, String groupShortName, Long parentFolderId, String name)
-	    throws AccessViolationException, ContentNotFoundException, GroupNotFoundException;
+            throws AccessViolationException, ContentNotFoundException, GroupNotFoundException;
+
+    void rateContent(String userHash, String documentId, Double value) throws ContentNotFoundException,
+            AccessViolationException;
 
     public static class App {
-	private static ContentServiceAsync instance;
+        private static ContentServiceAsync instance;
 
-	public static ContentServiceAsync getInstance() {
-	    if (instance == null) {
-		instance = (ContentServiceAsync) GWT.create(ContentService.class);
-		((ServiceDefTarget) instance).setServiceEntryPoint(GWT.getModuleBaseURL() + "ContentService");
+        public static ContentServiceAsync getInstance() {
+            if (instance == null) {
+                instance = (ContentServiceAsync) GWT.create(ContentService.class);
+                ((ServiceDefTarget) instance).setServiceEntryPoint(GWT.getModuleBaseURL() + "ContentService");
 
-	    }
-	    return instance;
-	}
+            }
+            return instance;
+        }
 
-	public static void setMock(final ContentServiceMocked mock) {
-	    instance = mock;
-	}
+        public static void setMock(final ContentServiceMocked mock) {
+            instance = mock;
+        }
     }
 
 }

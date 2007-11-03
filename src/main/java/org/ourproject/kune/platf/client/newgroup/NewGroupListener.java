@@ -23,7 +23,11 @@ package org.ourproject.kune.platf.client.newgroup;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
 public interface NewGroupListener {
+
     void onNewGroupCancel();
 
+    void onNewGroupClose();
+
     void onNewGroupCreated(StateToken homePage);
+
 }

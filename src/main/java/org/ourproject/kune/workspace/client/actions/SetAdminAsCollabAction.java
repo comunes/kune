@@ -30,26 +30,26 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public class SetAdminAsCollabAction implements Action {
 
     public void execute(final Object value, final Object extra, final Services services) {
-	onSetAdminAsCollab(services, (String) value);
+        onSetAdminAsCollab(services, (String) value);
     }
 
     private void onSetAdminAsCollab(final Services services, final String groupShortName) {
-	Site.showProgressProcessing();
-	final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-	server.setAdminAsCollab(services.user, groupShortName, services.session.getCurrentState().getGroup()
-		.getShortName(), new AsyncCallback() {
-	    public void onFailure(final Throwable caught) {
-		Site.hideProgress();
-	    }
+        Site.showProgressProcessing();
+        final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
+        server.setAdminAsCollab(services.session.userHash, groupShortName, services.session.getCurrentState()
+                .getGroup().getShortName(), new AsyncCallback() {
+            public void onFailure(final Throwable caught) {
+                Site.hideProgress();
+            }
 
-	    public void onSuccess(final Object result) {
-		Site.hideProgress();
-		// i18n
-		Site.info("Type of member changed");
-		// TODO: Reload SocialNetwork info only
-		services.stateManager.reloadSocialNetwork();
-	    }
-	});
+            public void onSuccess(final Object result) {
+                Site.hideProgress();
+                // i18n
+                Site.info("Type of member changed");
+                // TODO: Reload SocialNetwork info only
+                services.stateManager.reloadSocialNetwork();
+            }
+        });
 
     }
 }

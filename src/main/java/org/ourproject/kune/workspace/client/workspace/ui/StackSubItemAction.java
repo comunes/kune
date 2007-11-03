@@ -28,7 +28,7 @@ public class StackSubItemAction {
     private final static Images img = Images.App.getInstance();
     // i18n
     public final static StackSubItemAction DEFAULT_VISIT_GROUP = new StackSubItemAction(img.groupHome(),
-	    "Visit this member homepage", WorkspaceEvents.GOTO_GROUP);
+	    "Visit this member homepage", WorkspaceEvents.GOTO);
 
     private final AbstractImagePrototype icon;
     private final String text;

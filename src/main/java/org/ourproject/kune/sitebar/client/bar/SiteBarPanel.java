@@ -61,7 +61,6 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 
     private static final String SEARCH_TEXT_WIDTH_SMALL = "120";
     private static final String SEARCH_TEXT_WIDTH_BIG = "180";
-    private static final String IGNORE_TOKEN = "fixme";
     private final SiteBarPresenter presenter;
     private final Translate t;
     private final Image logoImage;
@@ -76,7 +75,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     private PushButton searchButton;
     private TextBox searchTextBox;
 
-    private final Hyperlink logoutHyperlink;
+    private final Label logoutLabel;
     private LoginPanel loginPanel;
     private final Images img;
     private final MenuBar optionsSubmenu;
@@ -103,7 +102,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         progressPanel = RootPanel.get("kuneprogresspanel");
         progressText = RootPanel.get("kuneprogresstext");
         publicHP = new HorizontalPanel();
-        gotoPublic = new IconHyperlink(img.anybody(), "Go to Public Space", "fixme");
+        gotoPublic = new IconHyperlink(img.anybody(), "Go to Public Space", Site.FIXME_TOKEN);
         contentNoPublic = new IconLabel(img.anybody(), "This content is not public");
         final Label expandLabel = new Label("");
         newGroupHyperlink = new Hyperlink();
@@ -111,7 +110,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         pipeSeparatorHtml2 = new HTML();
         loginHyperlink = new Hyperlink();
         loggedUserHyperlink = new Hyperlink();
-        logoutHyperlink = new Hyperlink();
+        logoutLabel = new Label();
         HTML spaceSeparator1 = new HTML("<b></b>");
         MenuBar options = new MenuBar();
         optionsSubmenu = new MenuBar(true);
@@ -129,7 +128,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         siteBarHP.add(loginHyperlink);
         siteBarHP.add(loggedUserHyperlink);
         siteBarHP.add(pipeSeparatorHtml);
-        siteBarHP.add(logoutHyperlink);
+        siteBarHP.add(logoutLabel);
         siteBarHP.add(pipeSeparatorHtml2);
         siteBarHP.add(newGroupHyperlink);
         siteBarHP.add(spaceSeparator1);
@@ -146,23 +145,16 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         contentNoPublic.setVisible(false);
         contentNoPublic.addStyleName("kune-Margin-Medium-r");
         newGroupHyperlink.setText(t.CreateNewGroup());
-        newGroupHyperlink.setTargetHistoryToken(IGNORE_TOKEN);
+        newGroupHyperlink.setTargetHistoryToken(Site.NEWGROUP_TOKEN);
         loggedUserHyperlink.setVisible(false);
-
-        newGroupHyperlink.addClickListener(new ClickListener() {
-            public void onClick(final Widget arg0) {
-                presenter.doNewGroup();
-            }
-        });
         pipeSeparatorHtml.setHTML("|");
         pipeSeparatorHtml.setStyleName("kune-SiteBarPanel-Separator");
         pipeSeparatorHtml2.setHTML("|");
         pipeSeparatorHtml2.setStyleName("kune-SiteBarPanel-Separator");
         loginHyperlink.setText(t.SignInToCollaborate());
-        loginHyperlink.setTargetHistoryToken(IGNORE_TOKEN);
-        logoutHyperlink.setText(t.SignOut());
-        logoutHyperlink.setTargetHistoryToken(IGNORE_TOKEN);
-
+        loginHyperlink.setTargetHistoryToken(Site.LOGIN_TOKEN);
+        logoutLabel.setText(t.SignOut());
+        logoutLabel.addStyleName("kune-SiteBarPanel-LabelLink");
         options.addItem(t.Options(), true, optionsSubmenu);
         options.setStyleName("kune-MenuBar");
         optionsButton.setColor("AAA");
@@ -281,14 +273,14 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     public void setLogoutLinkVisible(final boolean visible) {
-        logoutHyperlink.setVisible(visible);
+        logoutLabel.setVisible(visible);
         pipeSeparatorHtml2.setVisible(visible);
     }
 
     public void restoreLoginLink() {
         loginHyperlink.setVisible(true);
         loggedUserHyperlink.setVisible(false);
-        loginHyperlink.setTargetHistoryToken(IGNORE_TOKEN);
+        loginHyperlink.setTargetHistoryToken(Site.LOGIN_TOKEN);
     }
 
     public void showProgress(final String text) {
@@ -303,17 +295,12 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     private void createListeners() {
-        loginHyperlink.addClickListener(new ClickListener() {
-            public void onClick(final Widget arg0) {
-                presenter.doLogin();
-            }
-        });
         searchButton.addClickListener(new ClickListener() {
             public void onClick(final Widget arg0) {
                 presenter.doSearch(searchTextBox.getText());
             }
         });
-        logoutHyperlink.addClickListener(new ClickListener() {
+        logoutLabel.addClickListener(new ClickListener() {
             public void onClick(final Widget arg0) {
                 presenter.doLogout();
             }

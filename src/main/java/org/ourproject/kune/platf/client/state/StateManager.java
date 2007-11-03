@@ -38,4 +38,6 @@ public interface StateManager extends HistoryListener {
 
     void processErrorException(Throwable caught);
 
+    Session getSession();
+
 }

@@ -5,7 +5,7 @@ import org.ourproject.kune.platf.client.state.Session;
 public class NiceState extends Session {
 
     public NiceState() {
-	super("userHash");
+        super("KuneUserHash");
     }
 
 }

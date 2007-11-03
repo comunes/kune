@@ -223,11 +223,12 @@ public class TextEditorToolbar extends Composite {
 
         outer.add(topPanel);
         outer.setWidth("100%");
-        topPanel.setWidth("100%");
+        // topPanel.setWidth("100%");
         outer.setCellWidth(topPanel, "100%");
         // topPanel.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         outer.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         setStyleName("gwt-RichTextToolbar");
+        topPanel.addStyleName("kune-Margin-Large-l");
 
         if (basic != null) {
             topPanel.add(bold = createToggleButton(images.bold(), strings.bold()));

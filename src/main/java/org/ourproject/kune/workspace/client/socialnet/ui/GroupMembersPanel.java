@@ -89,7 +89,7 @@ public class GroupMembersPanel extends StackedDropDownPanel implements GroupMemb
 	if (event == WorkspaceEvents.DEL_MEMBER) {
 	    return img.del();
 	}
-	if (event == WorkspaceEvents.GOTO_GROUP) {
+	if (event == WorkspaceEvents.GOTO) {
 	    return img.groupHome();
 	}
 	if (event == WorkspaceEvents.SET_ADMIN_AS_COLLAB) {

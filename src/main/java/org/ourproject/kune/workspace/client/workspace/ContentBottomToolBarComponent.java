@@ -1,5 +1,4 @@
 /*
- *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -18,32 +17,12 @@
  *
  */
 
-package org.ourproject.kune.docs.client.ctx;
+package org.ourproject.kune.workspace.client.workspace;
 
-import org.ourproject.kune.docs.client.ctx.admin.AdminContext;
-import org.ourproject.kune.docs.client.ctx.folder.FolderContext;
-import org.ourproject.kune.docs.client.ui.DocumentFactory;
+import org.ourproject.kune.platf.client.Component;
 
-class Components {
+public interface ContentBottomToolBarComponent extends Component {
 
-    private FolderContext folderContext;
-    private AdminContext adminContext;
-
-    public Components(final DocumentContextPresenter listener) {
-    }
-
-    public FolderContext getFolderContext() {
-	if (folderContext == null) {
-	    folderContext = DocumentFactory.createFolderContext();
-	}
-	return folderContext;
-    }
-
-    public AdminContext getAdminContext() {
-	if (adminContext == null) {
-	    adminContext = DocumentFactory.createAdminContext();
-	}
-	return adminContext;
-    }
+    void setRate(boolean isRateable, boolean isLogged, Double value, Integer rateByUsers, Double currentUserRate);
 
 }

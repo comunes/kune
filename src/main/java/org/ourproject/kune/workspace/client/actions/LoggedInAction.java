@@ -19,19 +19,34 @@
 
 package org.ourproject.kune.workspace.client.actions;
 
+import java.util.Date;
+
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.sitebar.client.Site;
 
+import com.google.gwt.user.client.Cookies;
+
 public class LoggedInAction implements Action {
     public void execute(final Object value, final Object extra, final Services services) {
-	onLoggedIn(services, (UserInfoDTO) value);
+        onLoggedIn(services, (UserInfoDTO) value);
     }
 
-    private void onLoggedIn(final Services services, final UserInfoDTO user) {
-	Site.sitebar.showLoggedUser(user);
-	services.stateManager.reload();
-	services.stateManager.reloadSocialNetwork();
+    private void onLoggedIn(final Services services, final UserInfoDTO userInfoDTO) {
+        setCookie(userInfoDTO);
+        services.session.userHash = userInfoDTO.getUserHash();
+        Site.sitebar.showLoggedUser(userInfoDTO);
+        services.stateManager.reload();
+        services.stateManager.reloadSocialNetwork();
+    }
+
+    private void setCookie(final UserInfoDTO userInfoDTO) {
+        // http://code.google.com/p/google-web-toolkit-incubator/wiki/LoginSecurityFAQ
+        String sessionId = userInfoDTO.getUserHash();
+        // duration remembering login. 2 weeks
+        final long duration = 1000 * 60 * 60 * 24 * 14;
+        Date expires = new Date(System.currentTimeMillis() + duration);
+        Cookies.setCookie("userHash", sessionId, expires, null, "/", false);
     }
 }

@@ -36,6 +36,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
     private SiteBarView view;
     private final SiteBarListener listener;
     private boolean isLogged;
+    private String previousToken;
 
     public SiteBarPresenter(final SiteBarListener listener) {
         this.listener = listener;
@@ -46,17 +47,20 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
         view.setLogoutLinkVisible(false);
     }
 
-    public void doLogin() {
+    public void doLogin(final String previousToken) {
+        this.previousToken = previousToken;
         Site.showProgressProcessing();
         view.showLoginDialog();
         Site.hideProgress();
     }
 
-    public void doNewGroup() {
+    public void doNewGroup(final String previousToken) {
+        this.previousToken = previousToken;
         if (isLogged) {
             Site.showProgressProcessing();
             view.showNewGroupDialog();
         } else {
+            returnToPreviousState();
             // i18n
             Site.info("Sign in or register to create a group");
         }
@@ -100,9 +104,10 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
         });
     }
 
-    public void userLoggedIn(final UserInfoDTO user) {
+    public void userLoggedIn(final UserInfoDTO userInfoDTO) {
+        listener.onUserLoggedIn(userInfoDTO);
         view.hideLoginDialog();
-        listener.onUserLoggedIn(user);
+        returnToPreviousState();
     }
 
     public void showLoggedUser(final UserInfoDTO user) {
@@ -119,6 +124,13 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 
     public void onLoginCancelled() {
         view.hideLoginDialog();
+        returnToPreviousState();
+    }
+
+    public void onLoginClose() {
+        if (!isLogged) {
+            returnToPreviousState();
+        }
     }
 
     public void onNewGroupCreated(final StateToken homePage) {
@@ -128,6 +140,11 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 
     public void onNewGroupCancel() {
         view.hideNewGroupDialog();
+        returnToPreviousState();
+    }
+
+    public void onNewGroupClose() {
+        returnToPreviousState();
     }
 
     public void hideProgress() {
@@ -142,11 +159,14 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
         return view;
     }
 
+    public void changeState(final StateToken token) {
+        listener.onChangeState(token);
+    }
+
     protected void onSearchLostFocus(final String search) {
         if (search.length() == 0) {
             view.setDefaultTextSearch();
             view.setTextSearchSmall();
-
         }
     }
 
@@ -155,8 +175,11 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
         view.clearSearchText();
     }
 
-    public void changeState(final StateToken token) {
-        listener.onChangeState(token);
+    private void returnToPreviousState() {
+        if (this.previousToken != null) {
+            listener.onChangeState(new StateToken(this.previousToken));
+            this.previousToken = null;
+        }
     }
 
 }

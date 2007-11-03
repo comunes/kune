@@ -66,7 +66,7 @@ public class BuddiesPresencePanel extends StackedDropDownPanel implements Buddie
 
     public void addRoster(final String name, final String category, final int status) {
 	StackSubItemAction[] actions = {
-		new StackSubItemAction(img.chat(), "Start a chat with this person", WorkspaceEvents.GOTO_GROUP),
+		new StackSubItemAction(img.chat(), "Start a chat with this person", WorkspaceEvents.GOTO),
 		StackSubItemAction.DEFAULT_VISIT_GROUP };
 	super.addStackSubItem(category, getStatusIcon(status), name, getStatusText(status), actions);
     }

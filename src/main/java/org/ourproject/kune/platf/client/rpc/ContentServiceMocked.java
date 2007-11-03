@@ -32,36 +32,41 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public class ContentServiceMocked extends MockedService implements ContentServiceAsync {
 
     public void getContent(final String user, final StateToken newState, final AsyncCallback callback) {
-	StateDTO content = new StateDTO();
-	ContainerDTO folder = new ContainerDTO();
-	folder.setId(new Long(1));
-	content.setFolder(folder);
+        StateDTO content = new StateDTO();
+        ContainerDTO folder = new ContainerDTO();
+        folder.setId(new Long(1));
+        content.setFolder(folder);
 
-	GroupDTO group = new GroupDTO();
-	group.setShortName("kune");
-	content.setGroup(group);
+        GroupDTO group = new GroupDTO();
+        group.setShortName("kune");
+        content.setGroup(group);
 
-	content.setToolName(DocumentClientTool.NAME);
-	content.setContentRights(new AccessRightsDTO(false, true, true));
+        content.setToolName(DocumentClientTool.NAME);
+        content.setContentRights(new AccessRightsDTO(false, true, true));
 
-	content.setContent("this is the content");
+        content.setContent("this is the content");
 
-	answer(content, callback);
+        answer(content, callback);
     }
 
     public void save(final String user, final String documentId, final String content, final AsyncCallback asyncCallback) {
     }
 
     public void addContent(final String user, final Long parentFolderId, final String name,
-	    final AsyncCallback asyncCallback) {
+            final AsyncCallback asyncCallback) {
     }
 
     public void addFolder(final String hash, final String groupShortName, final Long parentFolderId,
-	    final String title, final AsyncCallback callback) {
+            final String title, final AsyncCallback callback) {
     }
 
     public void addRoom(final String user, final String groupShortName, final Long parentFolderId, final String name,
-	    final AsyncCallback callback) {
+            final AsyncCallback callback) {
+    }
+
+    public void rateContent(final String userHash, final String documentId, final Double value,
+            final AsyncCallback asyncCallback) {
+
     }
 
 }

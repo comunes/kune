@@ -125,6 +125,10 @@ legend {
   vertical-align:middle;
 }
 
+.kune-pointer {
+  cursor: pointer;
+}
+
 /* Buttons */
 
 .kune-CustomPushButton-space {
@@ -145,12 +149,10 @@ legend {
 .kune-CustomPushButton-up {}
 
 .kune-CustomPushButton-down {
-  background: transparent url(img/button-bg-soft.gif) repeat-x 0 0;
   color: black;
 }
 
 .kune-CustomPushButton-up-hovering {
-  background: transparent url(img/button-bg-soft.gif) repeat-x 0 0;
   color: #996633;
 }
 

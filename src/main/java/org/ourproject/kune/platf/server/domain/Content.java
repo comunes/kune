@@ -37,9 +37,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
-import com.google.inject.name.Named;
-import com.wideplay.warp.persist.dao.Finder;
-
 @Entity
 @Table(name = "contents")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -55,6 +52,7 @@ public class Content implements HasStateToken {
 
     @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private List<Tag> tags;
+
     @OneToOne
     private License license;
 
@@ -83,141 +81,129 @@ public class Content implements HasStateToken {
     private AccessLists accessLists;
 
     public Content() {
-	translations = new ArrayList<Translation>();
-	tags = new ArrayList<Tag>();
-	this.createdOn = System.currentTimeMillis();
-	this.lastRevision = new Revision();
-	accessLists = null;
-    }
-
-    @Finder(query = "select AVG(r.value) from Rate r where r.content = :descriptor")
-    public Double calculateRate(@Named("descriptor")
-    final Content descriptor) {
-	return 0d;
-    }
-
-    @Finder(query = "select count(*) from Rate r where r.content = :descriptor")
-    public Long calculateRateNumberOfUsers(@Named("descriptor")
-    final Content descriptor) {
-	return 0l;
+        translations = new ArrayList<Translation>();
+        tags = new ArrayList<Tag>();
+        this.createdOn = System.currentTimeMillis();
+        this.lastRevision = new Revision();
+        accessLists = null;
     }
 
     public Long getId() {
-	return id;
+        return id;
     }
 
     public void setId(final Long id) {
-	this.id = id;
+        this.id = id;
     }
 
     public int getVersion() {
-	return version;
+        return version;
     }
 
     public void setVersion(final int version) {
-	this.version = version;
+        this.version = version;
     }
 
     public String getLocale() {
-	return locale;
+        return locale;
     }
 
     public void setLocale(final String locale) {
-	this.locale = locale;
+        this.locale = locale;
     }
 
     public AccessLists getAccessLists() {
-	return accessLists;
+        return accessLists;
     }
 
     public void setAccessLists(final AccessLists accessLists) {
-	this.accessLists = accessLists;
+        this.accessLists = accessLists;
     }
 
     public List<Tag> getTags() {
-	return tags;
+        return tags;
     }
 
     public void setTags(final List<Tag> tags) {
-	this.tags = tags;
+        this.tags = tags;
     }
 
     public License getLicense() {
-	return license;
+        return license;
     }
 
     public void setLicense(final License license) {
-	this.license = license;
+        this.license = license;
     }
 
     public Revision getLastRevision() {
-	return lastRevision;
+        return lastRevision;
     }
 
     public void setLastRevision(final Revision revision) {
-	this.lastRevision = revision;
+        this.lastRevision = revision;
     }
 
     public List<Translation> getTranslations() {
-	return translations;
+        return translations;
     }
 
     public void setTranslations(final List<Translation> translations) {
-	this.translations = translations;
+        this.translations = translations;
     }
 
     public Group getCreator() {
-	return creator;
+        return creator;
     }
 
     public void setCreator(final Group creator) {
-	this.creator = creator;
+        this.creator = creator;
     }
 
     public Long getCreatedOn() {
-	return createdOn;
+        return createdOn;
     }
 
     public void setCreatedOn(final Long createdOn) {
-	this.createdOn = createdOn;
+        this.createdOn = createdOn;
     }
 
     public Container getFolder() {
-	return container;
+        return container;
     }
 
     public void setFolder(final Container container) {
-	this.container = container;
+        this.container = container;
     }
 
     public void addRevision(final Revision revision) {
-	if (lastRevision == null) {
-	    lastRevision = revision;
-	} else {
-	    revision.setPrevious(lastRevision);
-	    lastRevision = revision;
-	}
+        if (lastRevision == null) {
+            lastRevision = revision;
+        } else {
+            revision.setPrevious(lastRevision);
+            lastRevision = revision;
+        }
     }
 
     public String getTitle() {
-	return lastRevision.getData().getTitle();
+        return lastRevision.getData().getTitle();
     }
 
     public String getTypeId() {
-	return typeId;
+        return typeId;
     }
 
     public void setTypeId(final String typeId) {
-	this.typeId = typeId;
+        this.typeId = typeId;
     }
 
     public boolean hasAccessList() {
-	return accessLists != null;
+        return accessLists != null;
     }
 
     public String getStateToken() {
-	return getFolder().getOwner().getShortName() + TOKEN_SEPARATOR + getFolder().getToolName() + TOKEN_SEPARATOR
-		+ getFolder().getId() + TOKEN_SEPARATOR + getId();
+        return getFolder().getOwner().getShortName() + TOKEN_SEPARATOR + getFolder().getToolName() + TOKEN_SEPARATOR
+                + getFolder().getId() + TOKEN_SEPARATOR + getId();
     }
 
 }

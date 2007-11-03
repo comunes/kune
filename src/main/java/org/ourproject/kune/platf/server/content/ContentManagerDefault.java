@@ -22,8 +22,11 @@ package org.ourproject.kune.platf.server.content;
 
 import javax.persistence.EntityManager;
 
+import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
+import org.ourproject.kune.platf.server.access.FinderService;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
+import org.ourproject.kune.platf.server.domain.Rate;
 import org.ourproject.kune.platf.server.domain.Revision;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.impl.DefaultManager;
@@ -35,28 +38,61 @@ import com.google.inject.Singleton;
 @Singleton
 public class ContentManagerDefault extends DefaultManager<Content, Long> implements ContentManager {
 
+    private final FinderService finder;
+
     @Inject
-    public ContentManagerDefault(final Provider<EntityManager> provider) {
-	super(provider, Content.class);
+    public ContentManagerDefault(final Provider<EntityManager> provider, final FinderService finder) {
+        super(provider, Content.class);
+        this.finder = finder;
     }
 
     public Content createContent(final String title, final User user, final Container container) {
-	Content descriptor = new Content();
-	descriptor.setCreator(user.getUserGroup());
-	descriptor.setFolder(container);
-	container.addContent(descriptor);
-	Revision revision = new Revision();
-	revision.setTitle(title);
-	descriptor.addRevision(revision);
-	return persist(descriptor);
+        Content descriptor = new Content();
+        descriptor.setCreator(user.getUserGroup());
+        descriptor.setFolder(container);
+        container.addContent(descriptor);
+        Revision revision = new Revision();
+        revision.setTitle(title);
+        descriptor.addRevision(revision);
+        return persist(descriptor);
     }
 
     public Content save(final User editor, final Content descriptor, final String content) {
-	Revision revision = new Revision();
-	revision.setEditor(editor);
-	revision.setTitle(descriptor.getTitle());
-	revision.setDataContent(content);
-	descriptor.addRevision(revision);
-	return persist(descriptor);
+        Revision revision = new Revision();
+        revision.setEditor(editor);
+        revision.setTitle(descriptor.getTitle());
+        revision.setDataContent(content);
+        descriptor.addRevision(revision);
+        return persist(descriptor);
+    }
+
+    public Double getRateAvg(final Content content) {
+        return finder.getRateAvg(content);
+    }
+
+    public Long getRateByUsers(final Content content) {
+        return finder.getRateByUsers(content);
+    }
+
+    public void rateContent(final User rater, final Long contentId, final Double value) throws ContentNotFoundException {
+        Content content = finder.getContent(contentId);
+        Rate oldRate = finder.getRate(rater, content);
+        if (oldRate == null) {
+            Rate rate = new Rate(rater, content, value);
+            super.persist(rate, Rate.class);
+        } else {
+            oldRate.setValue(value);
+            super.persist(oldRate, Rate.class);
+        }
+
+    }
+
+    public Double getRateContent(final User rater, final Content content) {
+        Rate rate = finder.getRate(rater, content);
+        if (rate != null) {
+            return rate.getValue();
+        } else {
+            return null;
+        }
     }
 }

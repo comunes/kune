@@ -89,16 +89,18 @@ public class MapperTest {
         c.setAccessLists(TestDomainHelper.createAccessLists(groupAdmins, groupEdit, groupView));
         c.setRate(10.2d);
         c.setRateByUsers(3l);
+        c.setCurrentUserRate(null);
 
         final StateDTO dto = mapper.map(c, StateDTO.class);
-        assertEquals(c.getContentRights().isAdministrable(), dto.getContentRights().isAdministrable);
+        assertEquals(c.getContentRights().isAdministrable(), dto.getContentRights().isAdministrable());
 
         assertValidAccessListsMapping(c.getAccessLists().getAdmins(), dto.getAccessLists().getAdmins());
         assertValidAccessListsMapping(c.getAccessLists().getEditors(), dto.getAccessLists().getEditors());
         assertValidAccessListsMapping(c.getAccessLists().getViewers(), dto.getAccessLists().getViewers());
 
-        assertEquals(c.getRate(), dto.getRate());
-        assertEquals(c.getRateByUsers(), dto.getRateByUsers());
+        assertEquals(dto.getRate(), c.getRate());
+        assertEquals(dto.getRateByUsers(), c.getRateByUsers());
+        assertEquals(dto.getCurrentUserRate(), c.getCurrentUserRate());
     }
 
     private void assertValidAccessListsMapping(final GroupList groupList, final GroupListDTO groupListDTO) {

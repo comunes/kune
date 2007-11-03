@@ -1,5 +1,4 @@
 /*
- *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -18,23 +17,19 @@
  *
  */
 
-package org.ourproject.kune.chat.client.ctx;
+package org.ourproject.kune.workspace.client.actions;
 
-import org.ourproject.kune.chat.client.ChatFactory;
-import org.ourproject.kune.chat.client.ctx.rooms.RoomsAdmin;
+import org.ourproject.kune.platf.client.Services;
+import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.dto.StateToken;
 
-class Components {
+public class GotoAction implements Action {
 
-    private RoomsAdmin roomsAdmin;
-
-    public Components(final ChatContextPresenter chatContextPresenter) {
+    public void execute(final Object value, final Object extra, final Services services) {
+        onGoto(services, (String) value);
     }
 
-    public RoomsAdmin getRoomsAdmin() {
-	if (roomsAdmin == null) {
-	    roomsAdmin = ChatFactory.createRoomsAdmin();
-	}
-	return roomsAdmin;
+    private void onGoto(final Services services, final String token) {
+        services.stateManager.setState(new StateToken(token));
     }
-
 }

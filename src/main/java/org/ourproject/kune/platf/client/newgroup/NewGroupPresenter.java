@@ -73,8 +73,8 @@ public class NewGroupPresenter implements NewGroup, MessagePresenter {
                 }
             }
 
-            public void onSuccess(final Object arg0) {
-                listener.onNewGroupCreated((StateToken) arg0);
+            public void onSuccess(final Object token) {
+                listener.onNewGroupCreated((StateToken) token);
                 view.hide();
                 reset();
             }
@@ -104,7 +104,6 @@ public class NewGroupPresenter implements NewGroup, MessagePresenter {
         view.setEnabledFinishButton(false);
         view.setEnabledNextButton(true);
         view.showNewGroupInitialDataForm();
-
     }
 
     public void onCancel() {
@@ -115,6 +114,7 @@ public class NewGroupPresenter implements NewGroup, MessagePresenter {
 
     public void onClose() {
         reset();
+        listener.onNewGroupClose();
     }
 
     public void onNext() {

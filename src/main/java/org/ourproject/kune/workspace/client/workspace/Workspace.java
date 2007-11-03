@@ -31,7 +31,7 @@ public interface Workspace extends Component {
 
     public void showError(Throwable caught);
 
-    public void showGroup(GroupDTO group);
+    public void showGroup(GroupDTO group, boolean isAdmin);
 
     public void setTool(String toolName);
 
@@ -62,5 +62,7 @@ public interface Workspace extends Component {
     public ThemeMenuComponent getThemeMenuComponent();
 
     public void setVisible(boolean visible);
+
+    public ContentBottomToolBarComponent getContentBottomToolBarComponent();
 
 }

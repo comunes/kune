@@ -32,62 +32,66 @@ import org.ourproject.kune.workspace.client.dto.StateDTO;
  * 
  */
 public class Session {
-    public final String user;
+    public String userHash;
     private List ccLicenses;
     private List notCCLicenses;
     private StateDTO currentState;
     private String[] wsThemes;
     private String defaultWsTheme;
 
-    public Session(final String userHash) {
-	user = userHash;
-	ccLicenses = null;
-	notCCLicenses = null;
+    public Session(final String usersHash) {
+        this.userHash = usersHash;
+        ccLicenses = null;
+        notCCLicenses = null;
     }
 
     public List getCCLicenses() {
-	return ccLicenses;
+        return ccLicenses;
     }
 
     public void setCCLicenses(final List licenses) {
-	this.ccLicenses = licenses;
+        this.ccLicenses = licenses;
     }
 
     public List getNotCCLicenses() {
-	return notCCLicenses;
+        return notCCLicenses;
     }
 
     public void setNotCCLicenses(final List licensesNotCC) {
-	this.notCCLicenses = licensesNotCC;
+        this.notCCLicenses = licensesNotCC;
     }
 
     public void setCurrent(final StateDTO currentState) {
-	this.currentState = currentState;
+        this.currentState = currentState;
     }
 
     public StateDTO getCurrentState() {
-	return currentState;
+        return currentState;
     }
 
     public void setCurrentState(final StateDTO currentState) {
-	this.currentState = currentState;
+        this.currentState = currentState;
     }
 
     public void setDefaultWsTheme(final String defaultWsTheme) {
-	this.defaultWsTheme = defaultWsTheme;
+        this.defaultWsTheme = defaultWsTheme;
 
     }
 
     public void setWsThemes(final String[] wsThemes) {
-	this.wsThemes = wsThemes;
+        this.wsThemes = wsThemes;
     }
 
     public String[] getWsThemes() {
-	return wsThemes;
+        return wsThemes;
     }
 
     public String getDefaultWsTheme() {
-	return defaultWsTheme;
+        return defaultWsTheme;
+    }
+
+    public boolean isLogged() {
+        return userHash != null;
     }
 
 }

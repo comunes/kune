@@ -41,61 +41,61 @@ public class DefaultApplication implements Application {
     private StateManager stateManager;
 
     public DefaultApplication(final Map tools) {
-	this.tools = tools;
-	workspace = WorkspaceFactory.createWorkspace();
-	workspace.attachTools(tools.values().iterator());
+        this.tools = tools;
+        workspace = WorkspaceFactory.createWorkspace();
+        workspace.attachTools(tools.values().iterator());
 
-	DesktopView desktop = WorkspaceFactory.createDesktop(workspace, new SiteBarListener() {
-	    public void onUserLoggedIn(final UserInfoDTO user) {
-		dispatcher.fire(WorkspaceEvents.USER_LOGGED_IN, user, null);
-	    }
+        DesktopView desktop = WorkspaceFactory.createDesktop(workspace, new SiteBarListener() {
+            public void onUserLoggedIn(final UserInfoDTO user) {
+                dispatcher.fire(WorkspaceEvents.USER_LOGGED_IN, user, null);
+            }
 
-	    public void onUserLoggedOut() {
-		dispatcher.fire(WorkspaceEvents.USER_LOGGED_OUT, null, null);
-	    }
+            public void onUserLoggedOut() {
+                dispatcher.fire(WorkspaceEvents.USER_LOGGED_OUT, null, null);
+            }
 
-	    public void onChangeState(StateToken token) {
-		stateManager.setState(token);
-	    }
-	});
-	desktop.attach();
+            public void onChangeState(StateToken token) {
+                stateManager.setState(token);
+            }
+        });
+        desktop.attach();
 
     }
 
     public Dispatcher getDispatcher() {
-	return dispatcher;
+        return dispatcher;
     }
 
     public Workspace getWorkspace() {
-	return workspace;
+        return workspace;
     }
 
     public ClientTool getTool(final String toolName) {
-	return (ClientTool) tools.get(toolName);
+        return (ClientTool) tools.get(toolName);
     }
 
     public void init(final DefaultDispatcher dispatcher, final StateManager stateManager) {
-	this.dispatcher = dispatcher;
-	this.stateManager = stateManager;
+        this.dispatcher = dispatcher;
+        this.stateManager = stateManager;
     }
 
     public StateManager getStateManager() {
-	return stateManager;
+        return stateManager;
     }
 
     public void setGroupState(final String groupShortName) {
-	Iterator iterator = tools.values().iterator();
-	while (iterator.hasNext()) {
-	    ClientTool tool = (ClientTool) iterator.next();
-	    tool.setGroupState(groupShortName);
-	}
+        Iterator iterator = tools.values().iterator();
+        while (iterator.hasNext()) {
+            ClientTool tool = (ClientTool) iterator.next();
+            tool.setGroupState(groupShortName);
+        }
     }
 
     public void start() {
-	dispatcher.fireDeferred(WorkspaceEvents.START_APP, null, null);
+        dispatcher.fireDeferred(WorkspaceEvents.START_APP, null, null);
     }
 
     public void stop() {
-	dispatcher.fire(WorkspaceEvents.STOP_APP, null, null);
+        dispatcher.fire(WorkspaceEvents.STOP_APP, null, null);
     }
 }

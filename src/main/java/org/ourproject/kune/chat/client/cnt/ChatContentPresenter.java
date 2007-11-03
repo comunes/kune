@@ -44,13 +44,13 @@ import com.calclab.gwtjsjac.client.mandioca.rooms.XmppRoom;
 public class ChatContentPresenter implements ChatContent, ChatRoomListener, MultiRoomListener {
 
     private final WorkspaceDeckView view;
-    private final Components components;
+    private final ChatComponents components;
     private final HashMap roomNamesToRooms;
     private StateDTO state;
 
     public ChatContentPresenter(final WorkspaceDeckView view) {
 	this.view = view;
-	this.components = new Components(this);
+	this.components = new ChatComponents(this);
 	this.roomNamesToRooms = new HashMap();
     }
 

@@ -42,150 +42,150 @@ public class GroupMembersPresenter implements GroupMembersComponent, AbstractPre
     private GroupMembersView view;
 
     public void init(final GroupMembersView view) {
-	this.view = view;
+        this.view = view;
     }
 
     public void getGroupMembers(final String user, final GroupDTO group, final AccessRightsDTO accessRightsDTO) {
-	Site.showProgressProcessing();
-	final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
+        Site.showProgressProcessing();
+        final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
 
-	server.getGroupMembers(user, group.getShortName(), new AsyncCallback() {
-	    public void onFailure(final Throwable caught) {
-		Site.hideProgress();
-	    }
+        server.getGroupMembers(user, group.getShortName(), new AsyncCallback() {
+            public void onFailure(final Throwable caught) {
+                Site.hideProgress();
+            }
 
-	    public void onSuccess(final Object result) {
-		SocialNetworkDTO sn = (SocialNetworkDTO) result;
-		if (group.getType() != GroupDTO.PERSONAL) {
-		    setSocialNetworkOfGroup(sn, accessRightsDTO);
+            public void onSuccess(final Object result) {
+                SocialNetworkDTO sn = (SocialNetworkDTO) result;
+                if (group.getType() != GroupDTO.PERSONAL) {
+                    setSocialNetworkOfGroup(sn, accessRightsDTO);
 
-		} else {
-		    hide();
-		}
-		Site.hideProgress();
-	    }
-	});
+                } else {
+                    hide();
+                }
+                Site.hideProgress();
+            }
+        });
     }
 
     public void setSocialNetworkOfGroup(final SocialNetworkDTO socialNetwork, final AccessRightsDTO rights) {
-	final AccessListsDTO accessLists = socialNetwork.getAccessLists();
+        final AccessListsDTO accessLists = socialNetwork.getAccessLists();
 
-	List adminsList = accessLists.getAdmins().getList();
-	List collabList = accessLists.getEditors().getList();
-	List pendingCollabsList = socialNetwork.getPendingCollaborators().getList();
+        List adminsList = accessLists.getAdmins().getList();
+        List collabList = accessLists.getEditors().getList();
+        List pendingCollabsList = socialNetwork.getPendingCollaborators().getList();
 
-	int numAdmins = adminsList.size();
-	int numCollaborators = collabList.size();
-	int numPendingCollabs = pendingCollabsList.size();
+        int numAdmins = adminsList.size();
+        int numCollaborators = collabList.size();
+        int numPendingCollabs = pendingCollabsList.size();
 
-	boolean userIsAdmin = rights.isAdministrable();
-	boolean userIsCollab = rights.isEditable();
-	boolean userCanView = rights.isVisible();
-	boolean userIsMember = isMember(userIsAdmin, userIsCollab);
+        boolean userIsAdmin = rights.isAdministrable();
+        boolean userIsCollab = rights.isEditable();
+        boolean userCanView = rights.isVisible();
+        boolean userIsMember = isMember(userIsAdmin, userIsCollab);
 
-	view.setDropDownContentVisible(false);
-	view.clear();
+        view.setDropDownContentVisible(false);
+        view.clear();
 
-	if (userIsAdmin) {
-	    view.addAddMemberLink();
-	}
+        if (userIsAdmin) {
+            view.addAddMemberLink();
+        }
 
-	if (!userIsMember) {
-	    view.addJoinLink();
-	}
+        if (!userIsMember) {
+            view.addJoinLink();
+        }
 
-	if (userCanView) {
-	    if (rights.isAdministrable()) {
-		MemberAction[] adminsActions = { new MemberAction("Remove this member", WorkspaceEvents.DEL_MEMBER),
-			new MemberAction("Change to collaborator", WorkspaceEvents.SET_ADMIN_AS_COLLAB),
-			MemberAction.GOTO_GROUP_COMMAND };
-		MemberAction[] collabActions = { new MemberAction("Remove this member", WorkspaceEvents.DEL_MEMBER),
-			new MemberAction("Change to admin", WorkspaceEvents.SET_COLLAB_AS_ADMIN),
-			MemberAction.GOTO_GROUP_COMMAND };
-		MemberAction[] pendingsActions = {
-			new MemberAction("Accept this member", WorkspaceEvents.ACCEPT_JOIN_GROUP),
-			new MemberAction("Don't accept this member", WorkspaceEvents.DENY_JOIN_GROUP),
-			MemberAction.GOTO_GROUP_COMMAND };
-		MemberAction[] viewerActions = { MemberAction.GOTO_GROUP_COMMAND };
-		addMembers(adminsList, collabList, pendingCollabsList, numAdmins, numCollaborators, numPendingCollabs,
-			userIsAdmin, adminsActions, collabActions, pendingsActions, viewerActions);
-	    } else if (rights.isEditable() || rights.isVisible) {
-		MemberAction[] adminsActions = { MemberAction.GOTO_GROUP_COMMAND };
-		MemberAction[] collabActions = { MemberAction.GOTO_GROUP_COMMAND };
-		MemberAction[] pendingsActions = { MemberAction.GOTO_GROUP_COMMAND };
-		MemberAction[] viewerActions = { MemberAction.GOTO_GROUP_COMMAND };
-		addMembers(adminsList, collabList, pendingCollabsList, numAdmins, numCollaborators, numPendingCollabs,
-			userIsAdmin, adminsActions, collabActions, pendingsActions, viewerActions);
-	    }
-	}
-	view.setDropDownContentVisible(true);
-	view.show();
+        if (userCanView) {
+            if (rights.isAdministrable()) {
+                MemberAction[] adminsActions = { new MemberAction("Remove this member", WorkspaceEvents.DEL_MEMBER),
+                        new MemberAction("Change to collaborator", WorkspaceEvents.SET_ADMIN_AS_COLLAB),
+                        MemberAction.GOTO_GROUP_COMMAND };
+                MemberAction[] collabActions = { new MemberAction("Remove this member", WorkspaceEvents.DEL_MEMBER),
+                        new MemberAction("Change to admin", WorkspaceEvents.SET_COLLAB_AS_ADMIN),
+                        MemberAction.GOTO_GROUP_COMMAND };
+                MemberAction[] pendingsActions = {
+                        new MemberAction("Accept this member", WorkspaceEvents.ACCEPT_JOIN_GROUP),
+                        new MemberAction("Don't accept this member", WorkspaceEvents.DENY_JOIN_GROUP),
+                        MemberAction.GOTO_GROUP_COMMAND };
+                MemberAction[] viewerActions = { MemberAction.GOTO_GROUP_COMMAND };
+                addMembers(adminsList, collabList, pendingCollabsList, numAdmins, numCollaborators, numPendingCollabs,
+                        userIsAdmin, adminsActions, collabActions, pendingsActions, viewerActions);
+            } else if (rights.isEditable() || rights.isVisible()) {
+                MemberAction[] adminsActions = { MemberAction.GOTO_GROUP_COMMAND };
+                MemberAction[] collabActions = { MemberAction.GOTO_GROUP_COMMAND };
+                MemberAction[] pendingsActions = { MemberAction.GOTO_GROUP_COMMAND };
+                MemberAction[] viewerActions = { MemberAction.GOTO_GROUP_COMMAND };
+                addMembers(adminsList, collabList, pendingCollabsList, numAdmins, numCollaborators, numPendingCollabs,
+                        userIsAdmin, adminsActions, collabActions, pendingsActions, viewerActions);
+            }
+        }
+        view.setDropDownContentVisible(true);
+        view.show();
     }
 
     public void hide() {
-	view.hide();
+        view.hide();
     }
 
     public void onJoin() {
-	DefaultDispatcher.getInstance().fire(WorkspaceEvents.REQ_JOIN_GROUP, null, null);
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.REQ_JOIN_GROUP, null, null);
     }
 
     public void onAddAdmin(final GroupDTO group) {
-	DefaultDispatcher.getInstance().fire(WorkspaceEvents.ADD_ADMIN_MEMBER, group, this);
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ADD_ADMIN_MEMBER, group, this);
     }
 
     public void onAddCollab(final GroupDTO group) {
-	DefaultDispatcher.getInstance().fire(WorkspaceEvents.ADD_COLLAB_MEMBER, group, this);
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ADD_COLLAB_MEMBER, group, this);
     }
 
     public void onAddViewer(final GroupDTO group) {
     }
 
     public void onAddMember() {
-	// TODO Auto-generated method stub
+        // TODO Auto-generated method stub
     }
 
     public void doAction(final String action, final String group) {
-	DefaultDispatcher.getInstance().fire(action, group, this);
+        DefaultDispatcher.getInstance().fire(action, group, this);
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     private void addMembers(final List adminsList, final List collabList, final List pendingCollabsList,
-	    final int numAdmins, final int numCollaborators, final int numPendingCollabs, final boolean isAdmin,
-	    final MemberAction[] adminsActions, final MemberAction[] collabActions,
-	    final MemberAction[] pendingsActions, final MemberAction[] viewerActions) {
-	if (numAdmins > 0) {
-	    // i18n
-	    view.addCategory("Admins", "People that can admin this group");
-	    iteraList("Admins", adminsList, adminsActions);
-	}
-	if (numCollaborators > 0) {
-	    view.addCategory("Collaborators", "Other people that collaborate with this group");
-	    iteraList("Collaborators", collabList, collabActions);
-	}
-	if (isAdmin) {
-	    if (numPendingCollabs > 0) {
-		view.addCategory("Pending", "People pending to be accepted in this group by the admins",
-			GroupMembersView.ICON_ALERT);
-		iteraList("Pending", pendingCollabsList, pendingsActions);
-	    }
-	}
+            final int numAdmins, final int numCollaborators, final int numPendingCollabs, final boolean isAdmin,
+            final MemberAction[] adminsActions, final MemberAction[] collabActions,
+            final MemberAction[] pendingsActions, final MemberAction[] viewerActions) {
+        if (numAdmins > 0) {
+            // i18n
+            view.addCategory("Admins", "People that can admin this group");
+            iteraList("Admins", adminsList, adminsActions);
+        }
+        if (numCollaborators > 0) {
+            view.addCategory("Collaborators", "Other people that collaborate with this group");
+            iteraList("Collaborators", collabList, collabActions);
+        }
+        if (isAdmin) {
+            if (numPendingCollabs > 0) {
+                view.addCategory("Pending", "People pending to be accepted in this group by the admins",
+                        GroupMembersView.ICON_ALERT);
+                iteraList("Pending", pendingCollabsList, pendingsActions);
+            }
+        }
 
     }
 
     private void iteraList(final String categoryName, final List groupList, final MemberAction[] actions) {
-	final Iterator iter = groupList.iterator();
-	while (iter.hasNext()) {
-	    final GroupDTO group = (GroupDTO) iter.next();
-	    view.addCategoryMember(categoryName, group.getShortName(), group.getLongName(), actions);
-	}
+        final Iterator iter = groupList.iterator();
+        while (iter.hasNext()) {
+            final GroupDTO group = (GroupDTO) iter.next();
+            view.addCategoryMember(categoryName, group.getShortName(), group.getLongName(), actions);
+        }
     }
 
     private boolean isMember(final boolean userIsAdmin, final boolean userIsCollab) {
-	return userIsAdmin || userIsCollab;
+        return userIsAdmin || userIsCollab;
     }
 
 }

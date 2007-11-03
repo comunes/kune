@@ -60,6 +60,11 @@ public abstract class DefaultManager<T, K> {
         return getEntityManager().merge(entity);
     }
 
+    public <E> E merge(final E entity, final Class<E> entityClass) {
+        getEntityManager().merge(entity);
+        return entity;
+    }
+
     public List<T> search(final Query query) {
         return search(query, null, null);
     }

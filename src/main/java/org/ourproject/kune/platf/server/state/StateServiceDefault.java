@@ -31,40 +31,40 @@ import com.google.inject.Singleton;
 @Singleton
 public class StateServiceDefault implements StateService {
     public State create(final Access access) {
-	final Content content = access.getContent();
-	final Container container = content.getFolder();
-	final State state = new State();
+        final Content content = access.getContent();
+        final Container container = content.getFolder();
+        final State state = new State();
 
-	final Long documentId = content.getId();
-	if (documentId != null) {
-	    state.setTypeId(content.getTypeId());
-	    state.setDocumentId(documentId.toString());
-	} else {
-	    state.setTypeId(container.getTypeId());
-	    state.setDocumentId(null);
-	}
-	final Data data = content.getLastRevision().getData();
-	final char[] text = data.getContent();
-	state.setContent(text == null ? null : new String(text));
-	if (documentId != null) {
-	    state.setTitle(data.getTitle());
-	} else {
-	    state.setTitle(container.getName());
-	}
-	state.setToolName(container.getToolName());
-	state.setGroup(container.getOwner());
-	state.setFolder(container);
-	state.setAccessLists(access.getContentAccessLists());
-	state.setContentRights(access.getContentRights());
-	state.setFolderRights(access.getFolderRights());
-	state.setGroupRights(access.getGroupRights());
-	state.setRate(content.calculateRate(content));
-	state.setRateByUsers(content.calculateRateNumberOfUsers(content));
-	License contentLicense = content.getLicense();
-	if (contentLicense == null) {
-	    contentLicense = container.getOwner().getDefaultLicense();
-	}
-	state.setLicense(contentLicense);
-	return state;
+        final Long documentId = content.getId();
+        if (documentId != null) {
+            state.setTypeId(content.getTypeId());
+            state.setDocumentId(documentId.toString());
+            state.setIsRateable(true);
+        } else {
+            state.setTypeId(container.getTypeId());
+            state.setDocumentId(null);
+            state.setIsRateable(false);
+        }
+        final Data data = content.getLastRevision().getData();
+        final char[] text = data.getContent();
+        state.setContent(text == null ? null : new String(text));
+        if (documentId != null) {
+            state.setTitle(data.getTitle());
+        } else {
+            state.setTitle(container.getName());
+        }
+        state.setToolName(container.getToolName());
+        state.setGroup(container.getOwner());
+        state.setFolder(container);
+        state.setAccessLists(access.getContentAccessLists());
+        state.setContentRights(access.getContentRights());
+        state.setFolderRights(access.getFolderRights());
+        state.setGroupRights(access.getGroupRights());
+        License contentLicense = content.getLicense();
+        if (contentLicense == null) {
+            contentLicense = container.getOwner().getDefaultLicense();
+        }
+        state.setLicense(contentLicense);
+        return state;
     }
 }

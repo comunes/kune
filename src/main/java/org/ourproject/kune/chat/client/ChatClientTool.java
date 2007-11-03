@@ -30,13 +30,13 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
     public static final String TYPE_ROOM = "chat.room";
     public static final String TYPE_CHAT = "chat.chat";
 
-    private final Components components;
+    private final ChatToolComponents components;
     private ChatEngine chat;
 
     public ChatClientTool() {
 	// i18n
 	super("chat rooms");
-	components = new Components(this);
+	components = new ChatToolComponents(this);
     }
 
     public ChatEngine getChat() {

@@ -75,7 +75,6 @@ public class LoginPresenter implements Login, MessagePresenter {
                         GWT.log("Other kind of exception in LoginFormPresenter/doLogin", null);
                         throw new RuntimeException();
                     }
-
                 }
 
                 public void onSuccess(final Object response) {
@@ -130,6 +129,7 @@ public class LoginPresenter implements Login, MessagePresenter {
     public void onClose() {
         resetMessage();
         reset();
+        listener.onLoginClose();
     }
 
     public void setMessage(final String message, final int type) {

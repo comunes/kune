@@ -67,7 +67,9 @@ public class SiteBarRPC implements RPC, SiteBarService {
     private UserInfoDTO loginUser(final User user) throws SerializableException {
         if (user != null) {
             session.setUser(user);
+            // FIXME: Join this:
             UserInfo userInfo = userInfoService.buildInfo(user);
+            userInfo.setUserHash(session.getHash());
             return mapper.map(userInfo, UserInfoDTO.class);
         } else {
             throw new UserAuthException();
@@ -91,7 +93,9 @@ public class SiteBarRPC implements RPC, SiteBarService {
     @Transactional(type = TransactionType.READ_ONLY)
     public UserInfoDTO reloadUserInfo(final String userHash) throws SerializableException {
         User user = session.getUser();
+        // FIXME: Join this:
         UserInfo userInfo = userInfoService.buildInfo(user);
+        userInfo.setUserHash(session.getHash());
         return mapper.map(userInfo, UserInfoDTO.class);
     }
 
