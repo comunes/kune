@@ -1,4 +1,8 @@
 2007-10-27 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* #newgroup, and #login tokens instead of #fixme
+	* login, sessionId, and cookies refactor using gwt-incubator recommendations
+	* Rate content RPC calls
+	* Rate and RateIt widgets
 	* Empty user email now checked
 	* Better error handling in new group panel
 	* Copyleft information icon in LicenseChoose
