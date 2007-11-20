@@ -70,7 +70,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     private final HorizontalPanel temporalSpaceForGroupOptions;
     private ContentTitlePanel contentTitlePanel;
     private ContentSubTitlePanel contentSubTitlePanel;
-    private ContentNewToolBarPanel contentToolBarPanel;
+    private ContentToolBarPanel contentToolBarPanel;
     private final HorizontalPanel contentToolBarHP;
     private final ScrollPanel contentSP;
     private final HorizontalPanel contentBottomToolBarHP;
@@ -216,7 +216,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     }
 
     public void setContentToolBar(final View view) {
-        contentToolBarPanel = (ContentNewToolBarPanel) view;
+        contentToolBarPanel = (ContentToolBarPanel) view;
         contentToolBarHP.add(contentToolBarPanel);
         contentToolBarHP.setCellVerticalAlignment(contentToolBarPanel, VerticalPanel.ALIGN_MIDDLE);
     }
@@ -331,8 +331,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         } else {
             setDefaultSplitterPosition();
         }
-        contentSP.setSize("" + (cntcxtHSP.getLeftWidgetAvailableWidth() - 2) + "px", "" + (contentHeight - 50 - 3)
-                + "px");
+        contentSP.setSize("" + (cntcxtHSP.getLeftWidgetAvailableWidth() - 2) + "px", "" + (contentHeight - 53) + "px");
         groupDropDownsSP.setHeight("" + contentHeight + "px");
     }
 

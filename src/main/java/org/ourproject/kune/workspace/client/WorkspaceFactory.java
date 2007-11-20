@@ -70,7 +70,7 @@ import org.ourproject.kune.workspace.client.workspace.Workspace;
 import org.ourproject.kune.workspace.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.workspace.client.workspace.WorkspaceView;
 import org.ourproject.kune.workspace.client.workspace.ui.ContentBottomToolBarPanel;
-import org.ourproject.kune.workspace.client.workspace.ui.ContentNewToolBarPanel;
+import org.ourproject.kune.workspace.client.workspace.ui.ContentToolBarPanel;
 import org.ourproject.kune.workspace.client.workspace.ui.ContentSubTitlePanel;
 import org.ourproject.kune.workspace.client.workspace.ui.ContentTitlePanel;
 import org.ourproject.kune.workspace.client.workspace.ui.WorkspacePanel;
@@ -167,7 +167,7 @@ public class WorkspaceFactory {
 
     public static ContentToolBarComponent createContentToolBarComponent() {
         ContentToolBarPresenter presenter = new ContentToolBarPresenter();
-        ContentToolBarView view = new ContentNewToolBarPanel(presenter);
+        ContentToolBarView view = new ContentToolBarPanel(presenter);
         presenter.init(view);
         return presenter;
     }

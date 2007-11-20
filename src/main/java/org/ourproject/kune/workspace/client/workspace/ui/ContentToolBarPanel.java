@@ -28,11 +28,11 @@ import org.ourproject.kune.workspace.client.workspace.ContentToolBarView;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 
-public class ContentNewToolBarPanel extends HorizontalPanel implements ContentToolBarView {
+public class ContentToolBarPanel extends HorizontalPanel implements ContentToolBarView {
 
     private final HorizontalPanel leftHP;
 
-    public ContentNewToolBarPanel(final ContentToolBarPresenter presenter) {
+    public ContentToolBarPanel(final ContentToolBarPresenter presenter) {
         leftHP = new HorizontalPanel();
         add(leftHP);
         add(new Label(""));

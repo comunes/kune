@@ -52,10 +52,10 @@ public class TextEditorPanel extends Composite implements TextEditorView {
         gwtRTarea.setWidth("97%");
         gwtRTarea.addStyleName("kune-TexEditorPanel-TextArea");
         areaVP.setWidth("100%");
-        adjustSize("" + (Window.getClientHeight() - 238));
+        adjustSize("" + (Window.getClientHeight() - 240));
         Window.addWindowResizeListener(new WindowResizeListener() {
             public void onWindowResized(final int arg0, final int arg1) {
-                adjustSize("" + (Window.getClientHeight() - 238));
+                adjustSize("" + (Window.getClientHeight() - 240));
             }
         });
         saveTimer = new Timer() {
