@@ -27,8 +27,9 @@ import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.ApplicationBuilder;
 import org.ourproject.kune.workspace.client.WorkspaceClientModule;
 
+import to.tipit.gwtlib.FireLog;
+
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowCloseListener;
@@ -60,7 +61,7 @@ public class KuneEntryPoint implements EntryPoint {
 
     private String obtainUserHash() {
         String userHash = Cookies.getCookie("userHash");
-        GWT.log("UserHash: " + userHash, null);
+        FireLog.debug("UserHash: " + userHash);
         return userHash;
     }
 

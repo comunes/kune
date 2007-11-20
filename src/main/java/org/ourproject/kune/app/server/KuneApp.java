@@ -30,13 +30,13 @@ import org.ourproject.kune.chat.server.ChatServerModule;
 import org.ourproject.kune.docs.server.DocumentServerModule;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.GroupService;
-import org.ourproject.kune.platf.client.rpc.KuneService;
+import org.ourproject.kune.platf.client.rpc.SiteService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.server.LoggerMethodInterceptor;
 import org.ourproject.kune.platf.server.PlatformServerModule;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.properties.PropertiesFileName;
-import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
+import org.ourproject.kune.sitebar.client.rpc.UserService;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
@@ -70,10 +70,10 @@ public class KuneApp {
         });
 
         Application app = builder.create("kune", "Kune.html", "gwt/org.ourproject.kune.app.Kune");
-        app.useService("KuneService", KuneService.class);
+        app.useService("SiteService", SiteService.class);
         app.useService("GroupService", GroupService.class);
         app.useService("ContentService", ContentService.class);
-        app.useService("SiteBarService", SiteBarService.class);
+        app.useService("UserService", UserService.class);
         app.useService("SocialNetworkService", SocialNetworkService.class);
         app.with(KuneApplicationListener.class);
         app.add(new KuneLifeCycleListener());
@@ -84,6 +84,10 @@ public class KuneApp {
         UserSession userSession;
 
         public void onApplicationStart(final HttpServletRequest request, final HttpServletResponse response) {
+            // Comment this: (only setHash where user isLogged)
+            // Also we need the sessionId when the client application is already
+            // running (for instance if we restart the server)
+
             String userSessionId = request.getSession().getId();
             userSession.setHash(userSessionId);
         }

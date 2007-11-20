@@ -39,7 +39,7 @@ public class UserInfoServiceDefault implements UserInfoService {
         this.socialNetworkManager = socialNetwork;
     }
 
-    public UserInfo buildInfo(final User user) throws SerializableException {
+    public UserInfo buildInfo(final User user, final String userHash) throws SerializableException {
         UserInfo info = null;
         if (User.isKnownUser(user)) {
             info = new UserInfo();
@@ -48,6 +48,8 @@ public class UserInfoServiceDefault implements UserInfoService {
             info.setName(user.getName());
             info.setChatName(user.getShortName());
             info.setChatPassword(user.getPassword());
+
+            info.setUserHash(userHash);
 
             Group userGroup = user.getUserGroup();
 

@@ -20,50 +20,12 @@
 
 package org.ourproject.kune.docs.client.cnt.reader.ui;
 
-import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderListener;
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderView;
-import org.ourproject.kune.workspace.client.workspace.ui.ContentToolBarPanel;
+import org.ourproject.kune.workspace.client.workspace.ui.DefaultContentPanel;
 
-import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
+public class DocumentReaderPanel extends DefaultContentPanel implements DocumentReaderView {
 
-public class DocumentReaderPanel extends VerticalPanel implements DocumentReaderView {
-    private final HTML content;
-    private ContentToolBarPanel toolbar;
-
-    public DocumentReaderPanel(final DocumentReaderListener listener) {
-	add(createToolBar(listener));
-	setEditEnabled(false);
-	content = new HTML("this is the content");
-	add(content);
-	this.setWidth("100%");
-	this.setCellWidth(content, "100%");
-	content.addStyleName("main-content");
+    public DocumentReaderPanel() {
+        setContent("This is the content");
     }
-
-    private Widget createToolBar(final DocumentReaderListener listener) {
-	toolbar = new ContentToolBarPanel();
-	// i18n
-	toolbar.addButton("Edit", new ClickListener() {
-	    public void onClick(final Widget sender) {
-		listener.onEdit();
-	    }
-	});
-	return toolbar;
-    }
-
-    public void setContent(final String text) {
-	content.setHTML(text);
-    }
-
-    public void setEditEnabled(final boolean isEnabled) {
-	toolbar.setButtonVisible(isEnabled);
-    }
-
-    public String getContent() {
-	return content.getHTML();
-    }
-
 }

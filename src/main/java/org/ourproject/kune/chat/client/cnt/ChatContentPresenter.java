@@ -36,6 +36,8 @@ import org.ourproject.kune.chat.client.rooms.RoomUser.UserType;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.ui.UnknowComponent;
+import org.ourproject.kune.workspace.client.WorkspaceEvents;
+import org.ourproject.kune.workspace.client.WorkspaceUIExtensionPoint;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
@@ -49,9 +51,9 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener, Mult
     private StateDTO state;
 
     public ChatContentPresenter(final WorkspaceDeckView view) {
-	this.view = view;
-	this.components = new ChatComponents(this);
-	this.roomNamesToRooms = new HashMap();
+        this.view = view;
+        this.components = new ChatComponents(this);
+        this.roomNamesToRooms = new HashMap();
     }
 
     public void attach() {
@@ -61,51 +63,59 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener, Mult
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void setState(final StateDTO state) {
-	this.state = state;
-	String typeId = state.getTypeId();
-	if (typeId.equals(ChatClientTool.TYPE_ROOT)) {
-	    ChatInfo info = components.getChatInfo();
-	    view.show(info.getView());
-	} else if (typeId.equals(ChatClientTool.TYPE_ROOM)) {
-	    ChatRoom viewer = components.getChatRoom();
-	    view.show(viewer.getView());
-	} else {
-	    view.show(UnknowComponent.instance.getView());
-	}
+        this.state = state;
+        String typeId = state.getTypeId();
+        if (typeId.equals(ChatClientTool.TYPE_ROOT)) {
+            ChatInfo info = components.getChatInfo();
+            view.show(info.getView());
+            DefaultDispatcher.getInstance().fire(WorkspaceEvents.CLEAR_EXT_POINT,
+                    WorkspaceUIExtensionPoint.CONTENT_TOOLBAR_LEFT, null);
+        } else if (typeId.equals(ChatClientTool.TYPE_ROOM)) {
+            ChatRoom viewer = components.getChatRoom();
+            view.show(viewer.getView());
+            DefaultDispatcher.getInstance().fire(WorkspaceEvents.CLEAR_EXT_POINT,
+                    WorkspaceUIExtensionPoint.CONTENT_TOOLBAR_LEFT, null);
+            DefaultDispatcher.getInstance().fire(WorkspaceEvents.ATTACH_TO_EXT_POINT,
+                    WorkspaceUIExtensionPoint.CONTENT_TOOLBAR_LEFT, components.getChatRoomControl().getView());
+        } else {
+            view.show(UnknowComponent.instance.getView());
+            DefaultDispatcher.getInstance().fire(WorkspaceEvents.CLEAR_EXT_POINT,
+                    WorkspaceUIExtensionPoint.CONTENT_TOOLBAR_LEFT, null);
+        }
     }
 
     public void onEnterRoom() {
-	MultiRoom rooms = components.getRooms();
-	String roomName = state.getFolder().getName();
-	Room room = getRoom(roomName, "me" + new Date().getTime(), RoomUser.VISITOR);
-	rooms.activateRoom(room);
-	rooms.show();
+        MultiRoom rooms = components.getRooms();
+        String roomName = state.getFolder().getName();
+        Room room = getRoom(roomName, "me" + new Date().getTime(), RoomUser.VISITOR);
+        rooms.activateRoom(room);
+        rooms.show();
     }
 
     private Room getRoom(final String roomName, final String userAlias, final UserType userType) {
-	Room room = (Room) roomNamesToRooms.get(roomName);
-	if (room == null) {
-	    room = createRoom(roomName, userAlias, userType);
-	    roomNamesToRooms.put(roomName, room);
-	}
-	return room;
+        Room room = (Room) roomNamesToRooms.get(roomName);
+        if (room == null) {
+            room = createRoom(roomName, userAlias, userType);
+            roomNamesToRooms.put(roomName, room);
+        }
+        return room;
     }
 
     private Room createRoom(final String roomName, final String userAlias, final UserType userType) {
-	MultiRoom rooms = components.getRooms();
-	final Room room = rooms.createRoom(roomName, userAlias, userType);
-	DefaultDispatcher.getInstance().fireDeferred(ChatEvents.JOIN_ROOM, room, userAlias);
-	return room;
+        MultiRoom rooms = components.getRooms();
+        final Room room = rooms.createRoom(roomName, userAlias, userType);
+        DefaultDispatcher.getInstance().fireDeferred(ChatEvents.JOIN_ROOM, room, userAlias);
+        return room;
     }
 
     public void onSendMessage(final Room room, final String message) {
-	XmppRoom handler = room.getHandler();
-	if (handler != null) {
-	    handler.sendMessage(message);
-	}
+        XmppRoom handler = room.getHandler();
+        if (handler != null) {
+            handler.sendMessage(message);
+        }
     }
 }

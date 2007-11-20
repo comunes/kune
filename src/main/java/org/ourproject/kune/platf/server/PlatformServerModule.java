@@ -24,7 +24,7 @@ import org.ourproject.kune.chat.server.managers.XmppManager;
 import org.ourproject.kune.chat.server.managers.XmppManagerDefault;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.GroupService;
-import org.ourproject.kune.platf.client.rpc.KuneService;
+import org.ourproject.kune.platf.client.rpc.SiteService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.server.access.AccessService;
 import org.ourproject.kune.platf.server.access.AccessServiceDefault;
@@ -54,8 +54,8 @@ import org.ourproject.kune.platf.server.properties.KuneProperties;
 import org.ourproject.kune.platf.server.properties.KunePropertiesDefault;
 import org.ourproject.kune.platf.server.rpc.ContentRPC;
 import org.ourproject.kune.platf.server.rpc.GroupRPC;
-import org.ourproject.kune.platf.server.rpc.KuneRPC;
-import org.ourproject.kune.platf.server.rpc.SiteBarRPC;
+import org.ourproject.kune.platf.server.rpc.SiteRPC;
+import org.ourproject.kune.platf.server.rpc.UserRPC;
 import org.ourproject.kune.platf.server.rpc.SocialNetworkRPC;
 import org.ourproject.kune.platf.server.state.StateService;
 import org.ourproject.kune.platf.server.state.StateServiceDefault;
@@ -64,7 +64,7 @@ import org.ourproject.kune.platf.server.users.UserInfoService;
 import org.ourproject.kune.platf.server.users.UserInfoServiceDefault;
 import org.ourproject.kune.platf.server.users.UserManager;
 import org.ourproject.kune.platf.server.users.UserManagerDefault;
-import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
+import org.ourproject.kune.sitebar.client.rpc.UserService;
 
 import com.google.inject.AbstractModule;
 import com.wideplay.warp.persist.PersistenceService;
@@ -93,10 +93,10 @@ public class PlatformServerModule extends AbstractModule {
     }
 
     private void bindRPC() {
-        bind(KuneService.class).to(KuneRPC.class);
+        bind(SiteService.class).to(SiteRPC.class);
         bind(GroupService.class).to(GroupRPC.class);
         bind(ContentService.class).to(ContentRPC.class);
-        bind(SiteBarService.class).to(SiteBarRPC.class);
+        bind(UserService.class).to(UserRPC.class);
         bind(SocialNetworkService.class).to(SocialNetworkRPC.class);
     }
 

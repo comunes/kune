@@ -50,17 +50,11 @@ public class AccessServiceDefault implements AccessService {
     public Access getAccess(final User user, final StateToken token, final Group defaultGroup,
             final AccessType accessType) throws ContentNotFoundException, AccessViolationException,
             GroupNotFoundException {
-        return getAccess(token, defaultGroup, user.getUserGroup(), accessType);
-    }
-
-    public Access getAccess(final StateToken token, final Group defaultGroup, final Group loggedGroup,
-            final AccessType accessType) throws ContentNotFoundException, AccessViolationException,
-            GroupNotFoundException {
-        Content descriptor = finder.getContent(defaultGroup, token);
+        Content descriptor = finder.getContent(token, defaultGroup);
         Access access = new Access(descriptor, descriptor.getFolder());
-        addContentRights(access, loggedGroup);
-        addFolderRights(access, loggedGroup);
-        addGroupRights(access, loggedGroup);
+        addContentRights(access, user);
+        addFolderRights(access, user);
+        addGroupRights(access, user);
         if (!isValid(accessType, access.getContentRights()) || !isValid(accessType, access.getFolderRights())) {
             throw new AccessViolationException();
         }
@@ -71,19 +65,14 @@ public class AccessServiceDefault implements AccessService {
             throws AccessViolationException, ContentNotFoundException {
         Content descriptor = finder.getContent(contentId);
         Access access = new Access(descriptor, null);
-        addContentRights(access, user.getUserGroup());
+        addContentRights(access, user);
         return check(access, access.getContentRights(), accessType).getContent();
     }
 
     public Access getFolderAccess(final Long folderId, final User user, final AccessType accessType)
             throws AccessViolationException, ContentNotFoundException {
-        return getFolderAccess(folderId, user.getUserGroup(), accessType);
-    }
-
-    public Access getFolderAccess(final Long folderId, final Group group, final AccessType accessType)
-            throws AccessViolationException, ContentNotFoundException {
         Access access = new Access(null, finder.getFolder(folderId));
-        addFolderRights(access, group);
+        addFolderRights(access, user);
         return check(access, access.getFolderRights(), accessType);
     }
 
@@ -108,21 +97,21 @@ public class AccessServiceDefault implements AccessService {
         }
     }
 
-    private void addGroupRights(final Access access, final Group group) {
+    private void addGroupRights(final Access access, final User user) {
         if (!access.hasGroupRights()) {
-            access.setGroupRights(accessRightsService.get(group, access.getGroupAccessLists()));
+            access.setGroupRights(accessRightsService.get(user, access.getGroupAccessLists()));
         }
     }
 
-    private void addFolderRights(final Access access, final Group group) {
+    private void addFolderRights(final Access access, final User user) {
         if (!access.hasFolderRights()) {
-            access.setFolderRights(accessRightsService.get(group, access.getFolderAccessLists()));
+            access.setFolderRights(accessRightsService.get(user, access.getFolderAccessLists()));
         }
     }
 
-    private void addContentRights(final Access access, final Group group) {
+    private void addContentRights(final Access access, final User user) {
         if (!access.hasContentRights()) {
-            access.setContentRights(accessRightsService.get(group, access.getContentAccessLists()));
+            access.setContentRights(accessRightsService.get(user, access.getContentAccessLists()));
         }
     }
 

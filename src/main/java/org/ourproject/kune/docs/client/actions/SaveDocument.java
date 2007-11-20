@@ -43,7 +43,7 @@ public class SaveDocument implements Action {
             public void onFailure(final Throwable caught) {
                 // i18n: Error saving
                 Site.hideProgress();
-                Site.error("Error saving document");
+                Site.error("Error saving document. Retrying...");
                 documentContent.onSaveFailed();
             }
 

@@ -22,10 +22,10 @@ package org.ourproject.kune.app.client;
 
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceMocked;
-import org.ourproject.kune.platf.client.rpc.KuneService;
-import org.ourproject.kune.platf.client.rpc.KuneServiceMocked;
+import org.ourproject.kune.platf.client.rpc.SiteService;
+import org.ourproject.kune.platf.client.rpc.SiteServiceMocked;
 import org.ourproject.kune.platf.client.rpc.MockedService;
-import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
+import org.ourproject.kune.sitebar.client.rpc.UserService;
 import org.ourproject.kune.sitebar.client.rpc.SiteBarServiceMocked;
 
 public class MockServer {
@@ -34,9 +34,9 @@ public class MockServer {
 
     public static void start(final boolean isTest) {
 	MockedService.isTest = isTest;
-	KuneService.App.setMock(new KuneServiceMocked());
+	SiteService.App.setMock(new SiteServiceMocked());
 	ContentService.App.setMock(new ContentServiceMocked());
-	SiteBarService.App.setMock(new SiteBarServiceMocked());
+	UserService.App.setMock(new SiteBarServiceMocked());
     }
 
 }

@@ -25,4 +25,6 @@ public interface ContentBottomToolBarComponent extends Component {
 
     void setRate(boolean isRateable, boolean isLogged, Double value, Integer rateByUsers, Double currentUserRate);
 
+    void setEnabledRateIt(boolean enabled);
+
 }

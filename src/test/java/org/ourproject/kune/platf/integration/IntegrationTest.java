@@ -2,7 +2,7 @@ package org.ourproject.kune.platf.integration;
 
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.properties.DatabaseProperties;
-import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
+import org.ourproject.kune.sitebar.client.rpc.UserService;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
@@ -12,12 +12,12 @@ public abstract class IntegrationTest {
     @Inject
     protected UserSession session;
     @Inject
-    SiteBarService loginService;
+    UserService userService;
     @Inject
     DatabaseProperties properties;
 
     protected void doLogin() throws SerializableException {
-        loginService.login(getSiteAdminShortName(), properties.getAdminPassword());
+        userService.login(getSiteAdminShortName(), properties.getAdminPassword());
     }
 
     protected String getSiteAdminShortName() {

@@ -26,7 +26,7 @@ import org.ourproject.kune.sitebar.client.Site;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class SiteBarServiceMocked implements SiteBarServiceAsync {
+public class SiteBarServiceMocked implements UserServiceAsync {
 
     public void login(final String nick, final String pass, final AsyncCallback callback) {
 	Site.showProgress("Login");

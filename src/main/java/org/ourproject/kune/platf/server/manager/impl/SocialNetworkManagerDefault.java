@@ -28,6 +28,7 @@ import javax.persistence.EntityManager;
 
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
+import org.ourproject.kune.platf.client.errors.LastAdminInGroupException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.server.ParticipationData;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
@@ -127,6 +128,9 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
         SocialNetwork sn = inGroup.getSocialNetwork();
 
         if (sn.isAdmin(groupToUnJoin)) {
+            if (sn.getAccessLists().getAdmins().getList().size() == 1) {
+                throw new LastAdminInGroupException();
+            }
             sn.removeAdmin(groupToUnJoin);
         } else if (sn.isCollab(groupToUnJoin)) {
             sn.removeCollaborator(groupToUnJoin);
@@ -164,6 +168,9 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
         SocialNetwork sn = inGroup.getSocialNetwork();
         checkUserLoggedIsAdmin(userLogged, sn);
         if (sn.isAdmin(group)) {
+            if (sn.getAccessLists().getAdmins().getList().size() == 1) {
+                throw new LastAdminInGroupException();
+            }
             sn.removeAdmin(group);
             sn.addCollaborator(group);
         } else {

@@ -1,4 +1,5 @@
 /*
+ *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -17,34 +18,31 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.workspace.ui;
+package org.ourproject.kune.docs.client.cnt.reader.ui;
 
+import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderControlView;
+import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderListener;
 import org.ourproject.kune.platf.client.ui.CustomPushButton;
 
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Widget;
 
-public class ContentToolBarPanel extends HorizontalPanel {
-    private CustomPushButton btn;
+public class DocumentReaderControlPanel extends HorizontalPanel implements DocumentReaderControlView {
+    private final CustomPushButton editBtn;
 
-    public ContentToolBarPanel() {
-        Label expand = new Label("");
-        this.add(expand);
-        this.setWidth("100%");
-        expand.setWidth("100%");
-        this.setCellWidth(expand, "100%");
-        this.addStyleName("kune-ContentToolBarPanel");
+    public DocumentReaderControlPanel(final DocumentReaderListener listener) {
+        editBtn = new CustomPushButton("Edit", new ClickListener() {
+            public void onClick(final Widget sender) {
+                listener.onEdit();
+            }
+        });
+        add(editBtn);
+        setEditEnabled(false);
     }
 
-    public void addButton(final String caption, final ClickListener listener) {
-        btn = new CustomPushButton(caption, listener);
-        this.insert(btn, 0);
-        btn.addStyleName("kune-Button-Small-lrSpace");
-    }
-
-    public void setButtonVisible(final boolean isEnabled) {
-        btn.setVisible(isEnabled);
+    public void setEditEnabled(final boolean isEnabled) {
+        editBtn.setEnabled(isEnabled);
     }
 
 }

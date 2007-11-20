@@ -42,109 +42,109 @@ public class ParticipationPresenter implements ParticipationComponent, AbstractP
 
     // i18n
     private final static MemberAction GOTO_GROUP_COMMAND = new MemberAction("Visit this group homepage",
-	    WorkspaceEvents.GOTO);
+            WorkspaceEvents.GOTO);
 
     private ParticipationView view;
 
     public void init(final ParticipationView view) {
-	this.view = view;
+        this.view = view;
     }
 
     public void getParticipation(final String user, final GroupDTO group, final AccessRightsDTO accessRightsDTO) {
-	Site.showProgressProcessing();
-	final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
+        Site.showProgressProcessing();
+        final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
 
-	server.getParticipation(user, group.getShortName(), new AsyncCallback() {
-	    public void onFailure(final Throwable caught) {
-		Site.hideProgress();
-	    }
+        server.getParticipation(user, group.getShortName(), new AsyncCallback() {
+            public void onFailure(final Throwable caught) {
+                Site.hideProgress();
+            }
 
-	    public void onSuccess(final Object result) {
-		ParticipationDataDTO participation = (ParticipationDataDTO) result;
-		setParticipation(participation, accessRightsDTO);
-		Site.hideProgress();
-	    }
-	});
+            public void onSuccess(final Object result) {
+                ParticipationDataDTO participation = (ParticipationDataDTO) result;
+                setParticipation(participation, accessRightsDTO);
+                Site.hideProgress();
+            }
+        });
     }
 
     public void doAction(final String action, final String group) {
-	DefaultDispatcher.getInstance().fire(action, group, this);
+        DefaultDispatcher.getInstance().fire(action, group, this);
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     private void setParticipation(final ParticipationDataDTO participation, final AccessRightsDTO rights) {
-	view.setDropDownContentVisible(false);
-	view.clear();
-	MemberAction[] adminsActions = {
-		new MemberAction("Don't participate more in this group", WorkspaceEvents.UNJOIN_GROUP),
-		GOTO_GROUP_COMMAND };
-	MemberAction[] collabActions = adminsActions;
-	MemberAction[] viewerActions = { GOTO_GROUP_COMMAND };
-	List groupsIsAdmin = participation.getGroupsIsAdmin();
-	List groupsIsCollab = participation.getGroupsIsCollab();
-	boolean userIsAdmin = rights.isAdministrable();
-	boolean userIsCollab = rights.isEditable();
-	boolean userIsMember = isMember(userIsAdmin, userIsCollab);
-	int numAdmins = groupsIsAdmin.size();
-	int numCollaborators = groupsIsCollab.size();
-	if (numAdmins > 0 || numCollaborators > 0) {
-	    addParticipants(groupsIsAdmin, groupsIsCollab, numAdmins, numCollaborators, userIsAdmin, userIsMember,
-		    adminsActions, collabActions, viewerActions);
-	    view.setDropDownContentVisible(true);
-	    view.show();
-	} else {
-	    hide();
-	}
+        view.setDropDownContentVisible(false);
+        view.clear();
+        MemberAction[] adminsActions = {
+                new MemberAction("Don't participate more in this group", WorkspaceEvents.UNJOIN_GROUP),
+                GOTO_GROUP_COMMAND };
+        MemberAction[] collabActions = adminsActions;
+        MemberAction[] viewerActions = { GOTO_GROUP_COMMAND };
+        List groupsIsAdmin = participation.getGroupsIsAdmin();
+        List groupsIsCollab = participation.getGroupsIsCollab();
+        boolean userIsAdmin = rights.isAdministrable();
+        boolean userIsCollab = !userIsAdmin && rights.isEditable();
+        boolean userIsMember = isMember(userIsAdmin, userIsCollab);
+        int numAdmins = groupsIsAdmin.size();
+        int numCollaborators = groupsIsCollab.size();
+        if (numAdmins > 0 || numCollaborators > 0) {
+            addParticipants(groupsIsAdmin, groupsIsCollab, numAdmins, numCollaborators, userIsAdmin, userIsMember,
+                    adminsActions, collabActions, viewerActions);
+            view.setDropDownContentVisible(true);
+            view.show();
+        } else {
+            hide();
+        }
 
     }
 
     private void hide() {
-	view.hide();
+        view.hide();
     }
 
     private void addParticipants(final List groupsIsAdmin, final List groupsIsCollab, final int numAdmins,
-	    final int numCollaborators, final boolean userIsAdmin, boolean userIsMember,
-	    final MemberAction[] adminsActions, final MemberAction[] collabActions, final MemberAction[] viewerActions) {
-	MemberAction[] actions;
-	String collabTitle;
+            final int numCollaborators, final boolean userIsAdmin, boolean userIsMember,
+            final MemberAction[] adminsActions, final MemberAction[] collabActions, final MemberAction[] viewerActions) {
+        MemberAction[] actions;
+        String collabTitle;
 
-	if (!userIsMember) {
-	    actions = viewerActions;
-	} else {
-	    if (userIsAdmin) {
-		actions = adminsActions;
-	    } else {
-		actions = collabActions;
-	    }
-	}
-	if (numAdmins > 0) {
-	    // i18n
-	    view.addCategory(ADMIN_SUBTITLE, "Admisnistrate these groups");
-	    iteraList(ADMIN_SUBTITLE, groupsIsAdmin, actions);
-	    collabTitle = "and as collaborator in:";
-	} else {
-	    collabTitle = "collaborator in:";
-	}
-	if (numCollaborators > 0) {
-	    // i18n
-	    view.addCategory(collabTitle, "Collaborate in these groups");
-	    iteraList(collabTitle, groupsIsCollab, actions);
-	}
+        if (!userIsMember) {
+            actions = viewerActions;
+        } else {
+            if (userIsAdmin) {
+                actions = adminsActions;
+            } else {
+                actions = collabActions;
+            }
+        }
+        if (numAdmins > 0) {
+            // i18n
+            view.addCategory(ADMIN_SUBTITLE, "Admisnistrate these groups");
+            iteraList(ADMIN_SUBTITLE, groupsIsAdmin, actions);
+            collabTitle = "and as collaborator in:";
+        } else {
+            collabTitle = "collaborator in:";
+        }
+        if (numCollaborators > 0) {
+            // i18n
+            view.addCategory(collabTitle, "Collaborate in these groups");
+            iteraList(collabTitle, groupsIsCollab, actions);
+        }
 
     }
 
     private void iteraList(final String categoryName, final List groupList, final MemberAction[] actions) {
-	final Iterator iter = groupList.iterator();
-	while (iter.hasNext()) {
-	    final LinkDTO group = (LinkDTO) iter.next();
-	    view.addCategoryMember(categoryName, group.getShortName(), group.getLongName(), actions);
-	}
+        final Iterator iter = groupList.iterator();
+        while (iter.hasNext()) {
+            final LinkDTO group = (LinkDTO) iter.next();
+            view.addCategoryMember(categoryName, group.getShortName(), group.getLongName(), actions);
+        }
     }
 
     private boolean isMember(final boolean userIsAdmin, final boolean userIsCollab) {
-	return userIsAdmin || userIsCollab;
+        return userIsAdmin || userIsCollab;
     }
 }

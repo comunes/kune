@@ -26,9 +26,14 @@ import org.ourproject.kune.workspace.client.actions.AcceptJoinGroupAction;
 import org.ourproject.kune.workspace.client.actions.AddAdminAction;
 import org.ourproject.kune.workspace.client.actions.AddCollabAction;
 import org.ourproject.kune.workspace.client.actions.AddViewerAction;
+import org.ourproject.kune.workspace.client.actions.AttachToExtensionPointAction;
 import org.ourproject.kune.workspace.client.actions.ChangeGroupWsThemeAction;
+import org.ourproject.kune.workspace.client.actions.ClearExtensionPointAction;
 import org.ourproject.kune.workspace.client.actions.DeleteMemberAction;
 import org.ourproject.kune.workspace.client.actions.DenyJoinGroupAction;
+import org.ourproject.kune.workspace.client.actions.DetachFromExtensionPointAction;
+import org.ourproject.kune.workspace.client.actions.DisableRateItAction;
+import org.ourproject.kune.workspace.client.actions.EnableRateItAction;
 import org.ourproject.kune.workspace.client.actions.GotoAction;
 import org.ourproject.kune.workspace.client.actions.InitAction;
 import org.ourproject.kune.workspace.client.actions.InitDataReceivedAction;
@@ -61,5 +66,10 @@ public class WorkspaceClientModule implements ClientModule {
         register.addAction(WorkspaceEvents.UNJOIN_GROUP, new UnJoinGroupAction());
         register.addAction(WorkspaceEvents.CHANGE_GROUP_WSTHEME, new ChangeGroupWsThemeAction());
         register.addAction(WorkspaceEvents.RATE_CONTENT, new RateContentAction());
+        register.addAction(WorkspaceEvents.ENABLE_RATEIT, new EnableRateItAction());
+        register.addAction(WorkspaceEvents.DISABLE_RATEIT, new DisableRateItAction());
+        register.addAction(WorkspaceEvents.ATTACH_TO_EXT_POINT, new AttachToExtensionPointAction());
+        register.addAction(WorkspaceEvents.DETACH_FROM_EXT_POINT, new DetachFromExtensionPointAction());
+        register.addAction(WorkspaceEvents.CLEAR_EXT_POINT, new ClearExtensionPointAction());
     }
 }

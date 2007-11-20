@@ -43,4 +43,6 @@ public interface GroupMembersView extends View {
 
     void hide();
 
+    void addUnjoinLink();
+
 }

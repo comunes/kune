@@ -20,8 +20,8 @@
 package org.ourproject.kune.platf.client.search;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.rpc.KuneService;
-import org.ourproject.kune.platf.client.rpc.KuneServiceAsync;
+import org.ourproject.kune.platf.client.rpc.SiteService;
+import org.ourproject.kune.platf.client.rpc.SiteServiceAsync;
 
 public class SearchSitePresenter implements SearchSite {
 
@@ -51,6 +51,6 @@ public class SearchSitePresenter implements SearchSite {
     }
 
     public void doSearch(final String asString) {
-        KuneServiceAsync kuneService = KuneService.App.getInstance();
+        SiteServiceAsync siteService = SiteService.App.getInstance();
     }
 }

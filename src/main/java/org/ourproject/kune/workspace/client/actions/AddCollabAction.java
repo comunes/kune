@@ -40,6 +40,7 @@ public class AddCollabAction implements Action {
                 .getShortName(), new AsyncCallback() {
             public void onFailure(final Throwable caught) {
                 Site.hideProgress();
+                services.stateManager.processErrorException(caught);
             }
 
             public void onSuccess(final Object result) {

@@ -1,5 +1,4 @@
 /*
- *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -18,12 +17,18 @@
  *
  */
 
-package org.ourproject.kune.platf.client.rpc;
+package org.ourproject.kune.workspace.client.actions;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.ourproject.kune.platf.client.Services;
+import org.ourproject.kune.platf.client.dispatch.Action;
 
-public interface KuneServiceAsync {
+public class DisableRateItAction implements Action {
 
-    void getInitData(String userHash, AsyncCallback callback);
+    public void execute(final Object value, final Object extra, final Services services) {
+        onDisableRateItAction(services);
+    }
 
+    private void onDisableRateItAction(final Services services) {
+        services.app.getWorkspace().getContentBottomToolBarComponent().setEnabledRateIt(false);
+    }
 }

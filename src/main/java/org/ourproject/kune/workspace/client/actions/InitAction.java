@@ -25,8 +25,8 @@ import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
-import org.ourproject.kune.platf.client.rpc.KuneService;
-import org.ourproject.kune.platf.client.rpc.KuneServiceAsync;
+import org.ourproject.kune.platf.client.rpc.SiteService;
+import org.ourproject.kune.platf.client.rpc.SiteServiceAsync;
 import org.ourproject.kune.platf.client.utils.PrefetchUtilities;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
@@ -54,11 +54,10 @@ public class InitAction implements Action {
         Workspace workspace = services.app.getWorkspace();
         workspace.adjustSize(windowWidth, Window.getClientHeight());
         SiteBarFactory.getSiteMessage().adjustWidth(windowWidth);
-        RootPanel.get("kuneinitialcurtain").setVisible(false);
     }
 
     private void getInitData(final Services services) {
-        KuneServiceAsync server = KuneService.App.getInstance();
+        SiteServiceAsync server = SiteService.App.getInstance();
         server.getInitData(services.session.userHash, new AsyncCallback() {
             public void onFailure(final Throwable error) {
                 // i18n
@@ -80,6 +79,7 @@ public class InitAction implements Action {
                 } else {
                     dispatcher.fire(WorkspaceEvents.USER_LOGGED_IN, currentUser, null);
                 }
+                RootPanel.get("kuneinitialcurtain").setVisible(false);
             }
         });
     }

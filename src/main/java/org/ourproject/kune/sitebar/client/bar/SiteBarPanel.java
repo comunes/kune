@@ -56,6 +56,7 @@ import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtext.client.widgets.MessageBox;
 
 public class SiteBarPanel extends Composite implements SiteBarView {
 
@@ -294,6 +295,14 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         publicHP.setVisible(true);
     }
 
+    public void centerLoginDialog() {
+        loginPanel.center();
+    }
+
+    public void centerNewGroupDialog() {
+        newGroupPanel.center();
+    }
+
     private void createListeners() {
         searchButton.addClickListener(new ClickListener() {
             public void onClick(final Widget arg0) {
@@ -341,6 +350,14 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         }
         // i18n
         addDefaultItemsToOptions();
+    }
+
+    public void showAlertMessage(final String message) {
+        MessageBox.alert("Alert", message, new MessageBox.AlertCallback() {
+            public void execute() {
+                // Do nothing
+            }
+        });
     }
 
     private void addDefaultItemsToOptions() {

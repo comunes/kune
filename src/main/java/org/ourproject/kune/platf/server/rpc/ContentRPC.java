@@ -119,8 +119,7 @@ public class ContentRPC implements ContentService, RPC {
             throws AccessViolationException, ContentNotFoundException {
 
         final User user = session.getUser();
-        final Group group = groupManager.getGroupOfUserWithId(session.getUser().getId());
-        final Access access = accessManager.getFolderAccess(parentFolderId, group, AccessType.EDIT);
+        final Access access = accessManager.getFolderAccess(parentFolderId, user, AccessType.EDIT);
         access.setContentWidthFolderRights(creationService.createContent(title, user, access.getFolder()));
         final State state = stateService.create(access);
         return mapper.map(state, StateDTO.class);

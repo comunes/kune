@@ -21,17 +21,10 @@
 package org.ourproject.kune.platf.server.access;
 
 import org.ourproject.kune.platf.server.domain.AccessLists;
-import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 
 interface AccessRightsService {
 
     public AccessRights get(User user, AccessLists lists);
 
-    /**
-     * @deprecated
-     * @see get(user, lists);
-     */
-    @Deprecated
-    public AccessRights get(final Group userGroup, final AccessLists accessList);
 }

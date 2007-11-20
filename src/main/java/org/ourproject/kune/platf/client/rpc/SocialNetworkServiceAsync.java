@@ -31,7 +31,7 @@ public interface SocialNetworkServiceAsync {
 
     void denyJoinGroup(String hash, String groupToDenyShortName, String groupShortName, AsyncCallback callback);
 
-    void unJoinGroup(String hash, String groupToUnJoinShortName, String groupShortName, AsyncCallback callback);
+    void unJoinGroup(String hash, String groupShortName, AsyncCallback callback);
 
     void setCollabAsAdmin(String hash, String groupToSetAdminShortName, String groupShortName, AsyncCallback callback);
 

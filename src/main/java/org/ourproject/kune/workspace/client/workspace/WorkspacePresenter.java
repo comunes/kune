@@ -29,16 +29,20 @@ import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 import org.ourproject.kune.workspace.client.license.LicenseComponent;
 
 public class WorkspacePresenter implements Workspace {
-    private final WorkspaceView view;
+    private WorkspaceView view;
     private WorkspaceComponent context;
     private WorkspaceComponent content;
-    private final WorkspaceUIComponents components;
+    private WorkspaceUIComponents components;
 
-    public WorkspacePresenter(final WorkspaceView view) {
+    public WorkspacePresenter() {
+    }
+
+    public void init(final WorkspaceView view) {
         this.view = view;
         this.components = new WorkspaceUIComponents(this);
         view.setContentTitle(components.getContentTitleComponent().getView());
         view.setContentSubTitle(components.getContentSubTitleComponent().getView());
+        view.setContentToolBar(components.getContentToolBarComponent().getView());
         view.setContentBottomToolBar(components.getContentBottomToolBarComponent().getView());
         view.setBottom(components.getLicenseComponent().getView());
         view.setGroupMembers(components.getGroupMembersComponent().getView());
@@ -46,6 +50,7 @@ public class WorkspacePresenter implements Workspace {
         view.setBuddiesPresence(components.getBuddiesPresenceComponent().getView());
         view.setTags(components.getTagsComponent().getView());
         view.setThemeMenuComponent(components.getThemeMenuComponent().getView());
+        view.setUIExtensionPoints();
     }
 
     public void showError(final Throwable caught) {
@@ -137,5 +142,18 @@ public class WorkspacePresenter implements Workspace {
 
     public void setVisible(final boolean visible) {
         view.setVisible(visible);
+    }
+
+    public void attachToExtensionPoint(final String id, final View viewToAttach) {
+        view.attachToExtensionPoint(id, viewToAttach);
+    }
+
+    public void detachFromExtensionPoint(final String id, final View viewToDetach) {
+        view.detachFromExtensionPoint(id, viewToDetach);
+    }
+
+    public void clearExtensionPoint(final String id) {
+        view.clearExtensionPoint(id);
+
     }
 }

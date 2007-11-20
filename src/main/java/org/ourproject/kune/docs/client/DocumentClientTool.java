@@ -35,38 +35,38 @@ public class DocumentClientTool extends AbstractClientTool implements DocumentCo
     private final DocToolComponents components;
 
     public DocumentClientTool() {
-	// i18n
-	super("documents");
-	components = new DocToolComponents(this);
+        // i18n
+        super("documents");
+        components = new DocToolComponents(this);
     }
 
     public WorkspaceComponent getContent() {
-	return components.getContent();
+        return components.getContent();
     }
 
     public WorkspaceComponent getContext() {
-	return components.getContext();
+        return components.getContext();
     }
 
     public String getName() {
-	return NAME;
+        return NAME;
     }
 
     public void setContent(final StateDTO content) {
-	DocumentContent docContent = components.getContent();
-	docContent.setContent(content);
-	DocumentContext context = components.getContext();
-	context.setContent(content);
-	// TODO: revistar el interface de trigger (setState)
-	trigger.setState(content.getState().toString());
+        DocumentContent docContent = components.getContent();
+        docContent.setContent(content);
+        DocumentContext context = components.getContext();
+        context.setContent(content);
+        // TODO: revistar el interface de trigger (setState)
+        trigger.setState(content.getState().toString());
     }
 
     public void onEdit() {
-	components.getContext().showAdmin();
+        components.getContext().showAdmin();
     }
 
     public void onCancel() {
-	components.getContext().showFolders();
+        components.getContext().showFolders();
     }
 
 }

@@ -27,23 +27,22 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
-// TODO: cambiar nombre a UserService
-public interface KuneService extends RemoteService {
+public interface SiteService extends RemoteService {
 
     InitDataDTO getInitData(String userHash) throws SerializableException;
 
     public class App {
-        private static KuneServiceAsync ourInstance = null;
+        private static SiteServiceAsync ourInstance = null;
 
-        public static synchronized KuneServiceAsync getInstance() {
+        public static synchronized SiteServiceAsync getInstance() {
             if (ourInstance == null) {
-                ourInstance = (KuneServiceAsync) GWT.create(KuneService.class);
-                ((ServiceDefTarget) ourInstance).setServiceEntryPoint(GWT.getModuleBaseURL() + "KuneService");
+                ourInstance = (SiteServiceAsync) GWT.create(SiteService.class);
+                ((ServiceDefTarget) ourInstance).setServiceEntryPoint(GWT.getModuleBaseURL() + "SiteService");
             }
             return ourInstance;
         }
 
-        public static void setMock(final KuneServiceAsync mocked) {
+        public static void setMock(final SiteServiceAsync mocked) {
             ourInstance = mocked;
         }
     }

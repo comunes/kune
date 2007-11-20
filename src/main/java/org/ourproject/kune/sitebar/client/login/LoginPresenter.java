@@ -29,8 +29,8 @@ import org.ourproject.kune.platf.client.errors.UserAuthException;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.msg.MessagePresenter;
 import org.ourproject.kune.sitebar.client.msg.SiteMessage;
-import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
-import org.ourproject.kune.sitebar.client.rpc.SiteBarServiceAsync;
+import org.ourproject.kune.sitebar.client.rpc.UserService;
+import org.ourproject.kune.sitebar.client.rpc.UserServiceAsync;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -61,7 +61,7 @@ public class LoginPresenter implements Login, MessagePresenter {
             Site.showProgressProcessing();
             final String nickOrEmail = view.getNickOrEmail();
             final String passwd = view.getLoginPassword();
-            SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
+            UserServiceAsync siteBarService = UserService.App.getInstance();
             siteBarService.login(nickOrEmail, passwd, new AsyncCallback() {
                 public void onFailure(final Throwable caught) {
                     Site.hideProgress();
@@ -92,7 +92,7 @@ public class LoginPresenter implements Login, MessagePresenter {
             final String passwd = view.getRegisterPassword();
             final String longName = view.getLongName();
             final String email = view.getEmail();
-            SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
+            UserServiceAsync siteBarService = UserService.App.getInstance();
             // TODO: Form of register, license menu;
             LicenseDTO defaultLicense = new LicenseDTO("by-sa", "Creative Commons Attribution-ShareAlike", "",
                     "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");

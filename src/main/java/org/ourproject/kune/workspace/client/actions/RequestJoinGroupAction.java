@@ -37,34 +37,29 @@ public class RequestJoinGroupAction implements Action {
     private void onRequestJoinGroup(final Services services) {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        final String userHash = services.session.userHash;
-        if (userHash == null) {
-            Site.important("You must be logged to request join a group");
-        } else {
-            server.requestJoinGroup(userHash, services.session.getCurrentState().getGroup().getShortName(),
-                    new AsyncCallback() {
-                        public void onFailure(final Throwable caught) {
-                            services.stateManager.processErrorException(caught);
-                        }
+        server.requestJoinGroup(services.session.userHash,
+                services.session.getCurrentState().getGroup().getShortName(), new AsyncCallback() {
+                    public void onFailure(final Throwable caught) {
+                        Site.hideProgress();
+                        services.stateManager.processErrorException(caught);
+                    }
 
-                        public void onSuccess(final Object result) {
-                            Site.hideProgress();
-                            final String resultType = (String) result;
-                            // i18n
-                            if (resultType == SocialNetworkDTO.REQ_JOIN_ACEPTED) {
-                                Site.info("You are now member of this group");
-                                Site.sitebar.reloadUserInfo(userHash);
-                                services.stateManager.reloadSocialNetwork();
-                            }
-                            if (resultType == SocialNetworkDTO.REQ_JOIN_DENIED) {
-                                Site.important("Sorry this is a closed group");
-                            }
-                            if (resultType == SocialNetworkDTO.REQ_JOIN_WAITING_MODERATION) {
-                                Site.info("Requested. Waiting for admins decision");
-                            }
+                    public void onSuccess(final Object result) {
+                        Site.hideProgress();
+                        final String resultType = (String) result;
+                        // i18n
+                        if (resultType == SocialNetworkDTO.REQ_JOIN_ACEPTED) {
+                            Site.info("You are now member of this group");
+                            services.stateManager.reload();
                         }
-                    });
-        }
-
+                        if (resultType == SocialNetworkDTO.REQ_JOIN_DENIED) {
+                            Site.important("Sorry this is a closed group");
+                        }
+                        if (resultType == SocialNetworkDTO.REQ_JOIN_WAITING_MODERATION) {
+                            Site.info("Requested. Waiting for admins decision");
+                        }
+                    }
+                });
     }
+
 }

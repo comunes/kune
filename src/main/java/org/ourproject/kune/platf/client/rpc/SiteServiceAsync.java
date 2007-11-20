@@ -18,21 +18,12 @@
  *
  */
 
-package org.ourproject.kune.sitebar.client.rpc;
-
-import org.ourproject.kune.platf.client.dto.LicenseDTO;
+package org.ourproject.kune.platf.client.rpc;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public interface SiteBarServiceAsync {
+public interface SiteServiceAsync {
 
-    void login(String nickOrEmail, String passwd, AsyncCallback callback);
-
-    void logout(AsyncCallback callback);
-
-    void createUser(String shortName, String longName, String email, String paswd, LicenseDTO license,
-	    AsyncCallback asyncCallback);
-
-    void reloadUserInfo(String userHash, AsyncCallback asyncCallback);
+    void getInitData(String userHash, AsyncCallback callback);
 
 }

@@ -23,6 +23,7 @@ package org.ourproject.kune.platf.server.rpc;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.UserAuthException;
+import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
@@ -30,7 +31,7 @@ import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.platf.server.users.UserInfo;
 import org.ourproject.kune.platf.server.users.UserInfoService;
 import org.ourproject.kune.platf.server.users.UserManager;
-import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
+import org.ourproject.kune.sitebar.client.rpc.UserService;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
@@ -39,7 +40,7 @@ import com.wideplay.warp.persist.TransactionType;
 import com.wideplay.warp.persist.Transactional;
 
 @Singleton
-public class SiteBarRPC implements RPC, SiteBarService {
+public class UserRPC implements RPC, UserService {
 
     private final UserManager userManager;
     private final UserSession session;
@@ -48,7 +49,7 @@ public class SiteBarRPC implements RPC, SiteBarService {
     private final UserInfoService userInfoService;
 
     @Inject
-    public SiteBarRPC(final UserSession session, final UserManager userManager, final GroupManager groupManager,
+    public UserRPC(final UserSession session, final UserManager userManager, final GroupManager groupManager,
             final UserInfoService userInfoService, final Mapper mapper) {
         this.session = session;
         this.userManager = userManager;
@@ -67,10 +68,7 @@ public class SiteBarRPC implements RPC, SiteBarService {
     private UserInfoDTO loginUser(final User user) throws SerializableException {
         if (user != null) {
             session.setUser(user);
-            // FIXME: Join this:
-            UserInfo userInfo = userInfoService.buildInfo(user);
-            userInfo.setUserHash(session.getHash());
-            return mapper.map(userInfo, UserInfoDTO.class);
+            return loadUserInfo(user);
         } else {
             throw new UserAuthException();
         }
@@ -92,10 +90,15 @@ public class SiteBarRPC implements RPC, SiteBarService {
 
     @Transactional(type = TransactionType.READ_ONLY)
     public UserInfoDTO reloadUserInfo(final String userHash) throws SerializableException {
+        if (session.getUser().getId() == null) {
+            throw new UserMustBeLoggedException();
+        }
         User user = session.getUser();
-        // FIXME: Join this:
-        UserInfo userInfo = userInfoService.buildInfo(user);
-        userInfo.setUserHash(session.getHash());
+        return loadUserInfo(user);
+    }
+
+    private UserInfoDTO loadUserInfo(final User user) throws SerializableException {
+        UserInfo userInfo = userInfoService.buildInfo(user, session.getHash());
         return mapper.map(userInfo, UserInfoDTO.class);
     }
 

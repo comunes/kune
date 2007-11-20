@@ -39,4 +39,6 @@ public interface SiteBar {
 
     void doLogin(String returnToken);
 
+    void showAlertMessage(String message);
+
 }

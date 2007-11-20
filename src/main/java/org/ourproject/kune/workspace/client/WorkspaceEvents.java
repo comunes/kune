@@ -38,4 +38,9 @@ public interface WorkspaceEvents {
     public static final String UNJOIN_GROUP = "ws.UnJoinGroup";
     public static final String CHANGE_GROUP_WSTHEME = "ws.changeGroupWsTheme";
     public static final String RATE_CONTENT = "ws.rateContent";
+    public static final String ENABLE_RATEIT = "ws.enableRateIt";
+    public static final String DISABLE_RATEIT = "ws.disableRateIt";
+    public static final String ATTACH_TO_EXT_POINT = "ws.attachToExtensionPoint";
+    public static final String DETACH_FROM_EXT_POINT = "ws.detachToExtensionPoint";
+    public static final String CLEAR_EXT_POINT = "ws.clearExtensionPoint";
 }

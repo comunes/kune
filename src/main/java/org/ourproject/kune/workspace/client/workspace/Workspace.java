@@ -23,6 +23,7 @@ package org.ourproject.kune.workspace.client.workspace;
 import java.util.Iterator;
 
 import org.ourproject.kune.platf.client.Component;
+import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 import org.ourproject.kune.workspace.client.license.LicenseComponent;
@@ -64,5 +65,11 @@ public interface Workspace extends Component {
     public void setVisible(boolean visible);
 
     public ContentBottomToolBarComponent getContentBottomToolBarComponent();
+
+    public void attachToExtensionPoint(String id, View view);
+
+    public void detachFromExtensionPoint(String id, View view);
+
+    public void clearExtensionPoint(String id);
 
 }

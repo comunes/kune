@@ -40,30 +40,30 @@ public class ServiceFilter extends AbstractProcessor {
     private final String relative;
 
     public ServiceFilter(final String appName, final String serviceName,
-	    final Class<? extends RemoteService> serviceClass) {
-	super(POST);
-	this.serviceClass = serviceClass;
-	this.relative = "/" + appName + "/" + serviceName;
-	this.servlet = new DelegatedRemoteServlet();
+            final Class<? extends RemoteService> serviceClass) {
+        super(POST);
+        this.serviceClass = serviceClass;
+        this.relative = "/" + appName + "/" + serviceName;
+        this.servlet = new DelegatedRemoteServlet();
     }
 
     @Override
     public void init(final ServletContext servletContext, final Injector injector) {
-	super.init(servletContext, injector);
-	servlet.setServletContext(servletContext);
+        super.init(servletContext, injector);
+        servlet.setServletContext(servletContext);
     }
 
     @Override
     protected boolean process(final String relativeUrl, final HttpServletRequest request,
-	    final HttpServletResponse response) throws IOException, ServletException {
+            final HttpServletResponse response) throws IOException, ServletException {
 
-	if (relative.equals(relativeUrl)) {
-	    log.debug("CALLING THE SERVICE: " + relative);
-	    RemoteService service = super.getInjector().getInstance(serviceClass);
-	    servlet.setService(service);
-	    servlet.doPost(request, response);
-	    return true;
-	}
-	return false;
+        if (relative.equals(relativeUrl)) {
+            log.debug("SESSION: " + request.getSession().getId() + " CALLING THE SERVICE: " + relative);
+            RemoteService service = super.getInjector().getInstance(serviceClass);
+            servlet.setService(service);
+            servlet.doPost(request, response);
+            return true;
+        }
+        return false;
     }
 }

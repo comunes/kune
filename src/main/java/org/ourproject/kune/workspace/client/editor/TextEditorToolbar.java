@@ -33,9 +33,7 @@ import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.KeyboardListener;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.PushButton;
@@ -49,7 +47,7 @@ import com.google.gwt.user.client.ui.Widget;
  * for all rich text formatting, dynamically displayed only for the available
  * functionality.
  */
-public class TextEditorToolbar extends Composite {
+public class TextEditorToolbar extends Composite implements TextEditorToolbarView {
 
     /**
      * We use an inner EventListener class to avoid exposing event methods on
@@ -222,13 +220,8 @@ public class TextEditorToolbar extends Composite {
         initWidget(outer);
 
         outer.add(topPanel);
-        outer.setWidth("100%");
-        // topPanel.setWidth("100%");
-        outer.setCellWidth(topPanel, "100%");
-        // topPanel.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         outer.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         setStyleName("gwt-RichTextToolbar");
-        topPanel.addStyleName("kune-Margin-Large-l");
 
         if (basic != null) {
             topPanel.add(bold = createToggleButton(images.bold(), strings.bold()));
@@ -272,14 +265,6 @@ public class TextEditorToolbar extends Composite {
             richText.addKeyboardListener(listener);
             richText.addClickListener(listener);
         }
-
-        HorizontalPanel expandPanel = new HorizontalPanel();
-        Label expand = new Label("");
-        topPanel.add(expandPanel);
-        expandPanel.add(expand);
-        expandPanel.setWidth("100%");
-        expand.setWidth("100%");
-        expandPanel.setCellWidth(expand, "100%");
 
         save = new CustomPushButton(strings.Save(), new ClickListener() {
             public void onClick(final Widget sender) {

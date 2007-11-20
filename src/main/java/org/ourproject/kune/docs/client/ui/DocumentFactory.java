@@ -31,9 +31,13 @@ import org.ourproject.kune.docs.client.cnt.folder.viewer.FolderViewerPresenter;
 import org.ourproject.kune.docs.client.cnt.folder.viewer.FolderViewerView;
 import org.ourproject.kune.docs.client.cnt.folder.viewer.ui.FolderViewerPanel;
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReader;
+import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderControl;
+import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderControlPresenter;
+import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderControlView;
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderListener;
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderPresenter;
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderView;
+import org.ourproject.kune.docs.client.cnt.reader.ui.DocumentReaderControlPanel;
 import org.ourproject.kune.docs.client.cnt.reader.ui.DocumentReaderPanel;
 import org.ourproject.kune.docs.client.ctx.DocumentContext;
 import org.ourproject.kune.docs.client.ctx.DocumentContextPresenter;
@@ -43,52 +47,58 @@ import org.ourproject.kune.docs.client.ctx.admin.AdminContextView;
 import org.ourproject.kune.docs.client.ctx.admin.ui.AdminContextPanel;
 import org.ourproject.kune.docs.client.ctx.folder.FolderContext;
 import org.ourproject.kune.docs.client.ctx.folder.FolderContextPresenter;
-import org.ourproject.kune.workspace.client.component.WorkspaceDeckPanel;
 import org.ourproject.kune.workspace.client.WorkspaceFactory;
+import org.ourproject.kune.workspace.client.component.WorkspaceDeckPanel;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 
 public class DocumentFactory {
 
     public static DocumentContent createDocumentContent(final DocumentContentListener listener) {
-	WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
-	DocumentContentPresenter presenter = new DocumentContentPresenter(listener, panel);
-	return presenter;
+        WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
+        DocumentContentPresenter presenter = new DocumentContentPresenter(listener, panel);
+        return presenter;
     }
 
     public static DocumentContext createDocumentContext() {
-	WorkspaceDeckPanel view = new WorkspaceDeckPanel();
-	DocumentContextPresenter presenter = new DocumentContextPresenter(view);
-	return presenter;
+        WorkspaceDeckPanel view = new WorkspaceDeckPanel();
+        DocumentContextPresenter presenter = new DocumentContextPresenter(view);
+        return presenter;
     }
 
     public static DocumentReader createDocumentReader(final DocumentReaderListener listener) {
-	DocumentReaderView view = new DocumentReaderPanel(listener);
-	DocumentReaderPresenter presenter = new DocumentReaderPresenter(view);
-	return presenter;
+        DocumentReaderView view = new DocumentReaderPanel();
+        DocumentReaderPresenter presenter = new DocumentReaderPresenter(view);
+        return presenter;
+    }
+
+    public static DocumentReaderControl createDocumentReaderControl(final DocumentReaderListener listener) {
+        DocumentReaderControlView view = new DocumentReaderControlPanel(listener);
+        DocumentReaderControlPresenter presenter = new DocumentReaderControlPresenter(view);
+        return presenter;
     }
 
     public static FolderContext createFolderContext() {
-	ContextItems contextItems = WorkspaceFactory.createContextItems();
-	FolderContextPresenter presenter = new FolderContextPresenter(contextItems);
-	return presenter;
+        ContextItems contextItems = WorkspaceFactory.createContextItems();
+        FolderContextPresenter presenter = new FolderContextPresenter(contextItems);
+        return presenter;
     }
 
     public static FolderViewer createFolderViewer() {
-	FolderViewerView view = new FolderViewerPanel();
-	FolderViewerPresenter presenter = new FolderViewerPresenter(view);
-	return presenter;
+        FolderViewerView view = new FolderViewerPanel();
+        FolderViewerPresenter presenter = new FolderViewerPresenter(view);
+        return presenter;
     }
 
     public static FolderEditor createFolderEditor() {
-	FolderEditorPanel view = new FolderEditorPanel();
-	FolderEditorPresenter presenter = new FolderEditorPresenter(view);
-	return presenter;
+        FolderEditorPanel view = new FolderEditorPanel();
+        FolderEditorPresenter presenter = new FolderEditorPresenter(view);
+        return presenter;
     }
 
     public static AdminContext createAdminContext() {
-	AdminContextView view = new AdminContextPanel();
-	AdminContextPresenter presenter = new AdminContextPresenter(view);
-	return presenter;
+        AdminContextView view = new AdminContextPanel();
+        AdminContextPresenter presenter = new AdminContextPresenter(view);
+        return presenter;
     }
 
 }

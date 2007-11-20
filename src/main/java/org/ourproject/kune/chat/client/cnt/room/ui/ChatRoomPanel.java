@@ -20,44 +20,13 @@
 
 package org.ourproject.kune.chat.client.cnt.room.ui;
 
-import org.ourproject.kune.chat.client.cnt.room.ChatRoomListener;
 import org.ourproject.kune.chat.client.cnt.room.ChatRoomView;
-import org.ourproject.kune.workspace.client.workspace.ui.ContentToolBarPanel;
+import org.ourproject.kune.workspace.client.workspace.ui.DefaultContentPanel;
 
-import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
+public class ChatRoomPanel extends DefaultContentPanel implements ChatRoomView {
 
-public class ChatRoomPanel extends VerticalPanel implements ChatRoomView {
-
-    private final HTML content;
-    private ContentToolBarPanel toolbar;
-
-    public ChatRoomPanel(final ChatRoomListener listener) {
-	add(createToolBar(listener));
-	// FIXME: control perms
-	setEditEnabled(true);
-	content = new HTML("Here the History of room conversations.");
-	add(content);
-	this.setWidth("100%");
-	this.setCellWidth(content, "100%");
-	content.addStyleName("main-content");
-    }
-
-    private Widget createToolBar(final ChatRoomListener listener) {
-	toolbar = new ContentToolBarPanel();
-	// i18n
-	toolbar.addButton("Enter room", new ClickListener() {
-	    public void onClick(final Widget sender) {
-		listener.onEnterRoom();
-	    }
-	});
-	return toolbar;
-    }
-
-    public void setEditEnabled(final boolean isEnabled) {
-	toolbar.setButtonVisible(isEnabled);
+    public ChatRoomPanel() {
+        setContent("History of room conversations.");
     }
 
 }

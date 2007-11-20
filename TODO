@@ -1,14 +1,3 @@
-
-DESORDENADO
-
-* 	el GWT filter es un caos: hay muchas maneras de aumentar el perfomance y es bastante clave!
-* 	deberíamos encontrar una manera de que dozer mapease directamente los
-	fields sin utilizar los getters y setters => menos código js y mayor performance
-
-
-
-
-
 TODO-list for kune
 --------------------------------------------------------------------------------
 <nick>  == reported by
@@ -16,71 +5,38 @@ TODO-list for kune
 
 SHORT-TERM (URGENT):
 --------------------------------------------------------------------------------
-<danigb> Exploration of some techs (Unit tests, monks, guice, IoC, persistence)
---> danigb, vjrj
+<vjrj> login session. Follow incubation recomendations. See:
+http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/e8e14b16e57b266f
+Now there are problems if client was started before server, and with server restart
+--> vjrj
+<vjrj> hibernate search: follow server search code (global, not per class), and
+continue with the client search dialog
+--> vjrj
 <vjrj> See differences between star-yellow-grey.png and -50.png
 --> vjrj
 <vjrj> explorer specific problems: fonts antialiasing problem?
---> vjrj
-<danigb>Progress bar integred with img
---> vjrj
 
 MIND-TERM:
 --------------------------------------------------------------------------------
-<danigb> README is empty
---> vjrj
 <vjrj> apply csstidy to css, again
 --> vjrj
 <vjrj> layout problems (specially resizing) with old Mozilla (wait gwt 1.4)
 <vjrj> RTE right to left writing
 <vjrj> Restarting server don't affect client session
-<vjrj> hibernate search http://www.hibernate.org/hib_docs/search/reference/en/html/
+<vjrj> See css utilities in http://code.google.com/p/cobogw/
+<vjrj> RTE css style: http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/f64c0024d8676a66/d5f26a54145fc5d4?lnk=gst&q=richtextarea++css#d5f26a54145fc5d4
 
 LONG-TERM:
 --------------------------------------------------------------------------------
-<vjrj> Richtext toolbar, don't show fonts, sizes and color current value (like
-toggle buttons)
 
 IDEAS:
 --------------------------------------------------------------------------------
+<danigb> GWT filter is a chaos: we have to improve the performance, its is very important
+<danigb> Try to find a way dozer maps directly without use getters/setters (less js code and better performance)
 
 DO-NOT-IMPLEMENT (stuff that was rejected):
 --------------------------------------------------------------------------------
 
 BACKTRACES/DEBUG/VALGRIND/EXCEPTIONS:
 --------------------------------------------------------------------------------
-<vjrj> Sometimes the repo is initialized without reason:
-DEBUG - item added to cache. size=88
-DEBUG - item added to cache. size=89
-DEBUG - item added to cache. size=90
-DEBUG - item added to cache. size=91
-DEBUG - item added to cache. size=92
-DEBUG - item added to cache. size=93
-INFO - workspace 'default' initialized
-DEBUG - JackrabbitTextExtractor(org.apache.jackrabbit.extractor.DefaultTextExtractor)
-INFO - LocalFileSystem initialized at path repository/repository/index
-DEBUG - index added: name=_0, numDocs=96
-DEBUG - index added: name=_1, numDocs=7
-DEBUG - index added: name=_2, numDocs=1
-DEBUG - RedoLog is empty, no recovery needed.
-INFO - Index initialized: repository/repository/index
-DEBUG - org.apache.jackrabbit.core.state.MLRUItemStateCache@109e109e size=1, 1264/4194304
-DEBUG - JackrabbitTextExtractor(org.apache.jackrabbit.extractor.DefaultTextExtractor)
-INFO - LocalFileSystem initialized at path repository/workspaces/default/index
-DEBUG - index added: name=_0, numDocs=1
-DEBUG - index added: name=_1, numDocs=1
-DEBUG - index added: name=_2, numDocs=1
-DEBUG - RedoLog is empty, no recovery needed.
-INFO - Index initialized: repository/workspaces/default/index
-INFO - Repository started
-INFO - Transient repository initialized
-DEBUG - Opening a new session
-DEBUG - org.apache.jackrabbit.core.state.MLRUItemStateCache@2dce2dce size=1, 964/4194304
-INFO - Session opened
-DEBUG - org.apache.jackrabbit.core.state.MLRUItemStateCache@31623162 size=1, 1264/4194304
-DEBUG - created item cafebabe-cafe-babe-cafe-babecafebabe
-DEBUG - caching item cafebabe-cafe-babe-cafe-babecafebabe
-DEBUG - created item 1b6e4c38-deb3-4b6a-8d23-718d105d2629
-DEBUG - caching item 1b6e4c38-deb3-4b6a-8d23-718d105d2629
-(...)
 

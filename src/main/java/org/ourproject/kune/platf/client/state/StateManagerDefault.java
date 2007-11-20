@@ -26,6 +26,7 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
+import org.ourproject.kune.platf.client.errors.LastAdminInGroupException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.sitebar.client.Site;
@@ -128,7 +129,8 @@ public class StateManagerDefault implements StateManager {
         workspace.getTagsComponent().setTags("FIXME");
 
         if (oldState != null && oldState.getGroup().getShortName().equals(state.getGroup().getShortName())
-                && oldState.getGroupRights().equals(state.getGroupRights())) {
+                && oldState.getGroupRights().isAdministrable() == state.getGroupRights().isAdministrable()
+                && oldState.getGroupRights().isEditable() == state.getGroupRights().isEditable()) {
             // Same group, same rights, do nothing
             FireLog.debug("Same group, same rights, not reloading SN");
         } else {
@@ -172,6 +174,9 @@ public class StateManagerDefault implements StateManager {
             Site.error("Group not found");
         } catch (final ContentNotFoundException e) {
             Site.error("Content not found");
+        } catch (final LastAdminInGroupException e) {
+            Site.showAlertMessage("Sorry, you are the last admin of this group. "
+                    + "Look for someone to substitute you appropriately as admin before unjoin this group.");
         } catch (final Throwable e) {
             Site.error("Error performing operation");
             GWT.log("Other kind of exception in StateManagerDefault/processErrorException", null);

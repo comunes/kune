@@ -34,79 +34,82 @@ public class GroupMembersPanel extends StackedDropDownPanel implements GroupMemb
     private final Images img = Images.App.getInstance();
 
     public GroupMembersPanel(final AbstractPresenter presenter) {
-	super(presenter, "#00D4AA", "Group members", "People and groups collaborating in this group", COUNTS_VISIBLE);
+        super(presenter, "#00D4AA", "Group members", "People and groups collaborating in this group", COUNTS_VISIBLE);
     }
 
     public void addJoinLink() {
-	// FIXME: add new event
-	// i18n
-	super.addBottomLink(img.addGreen(), "Request to join", "fixme", WorkspaceEvents.REQ_JOIN_GROUP);
+        // i18n
+        super.addBottomLink(img.addGreen(), "Request to join", "fixme", WorkspaceEvents.REQ_JOIN_GROUP);
+    }
+
+    public void addUnjoinLink() {
+        super.addBottomLink(img.del(), "Unjoin this group", "fixme", WorkspaceEvents.UNJOIN_GROUP);
     }
 
     public void addAddMemberLink() {
-	// FIXME: add new event
-	// i18n
-	super.addBottomLink(img.addGreen(), "Add member", "fixme", WorkspaceEvents.ADD_ADMIN_MEMBER);
+        // FIXME: add new event
+        // i18n
+        super.addBottomLink(img.addGreen(), "Add member", "fixme", WorkspaceEvents.ADD_ADMIN_MEMBER);
     }
 
     public void clear() {
-	super.clear();
+        super.clear();
     }
 
     public void addCategory(final String name, final String title) {
-	super.addStackItem(name, title, COUNTS_VISIBLE);
+        super.addStackItem(name, title, COUNTS_VISIBLE);
     }
 
     public void addCategory(final String name, final String title, final String iconType) {
-	super.addStackItem(name, title, getIcon(iconType), StackedDropDownPanel.ICON_HORIZ_ALIGN_RIGHT, COUNTS_VISIBLE);
+        super.addStackItem(name, title, getIcon(iconType), StackedDropDownPanel.ICON_HORIZ_ALIGN_RIGHT, COUNTS_VISIBLE);
     }
 
     public void addCategoryMember(final String categoryName, final String name, final String title,
-	    final MemberAction[] memberActions) {
-	StackSubItemAction[] subItems = new StackSubItemAction[memberActions.length];
-	for (int i = 0; i < memberActions.length; i++) {
-	    subItems[i] = new StackSubItemAction(getIconFronEvent(memberActions[i].getAction()), memberActions[i]
-		    .getText(), memberActions[i].getAction());
-	}
+            final MemberAction[] memberActions) {
+        StackSubItemAction[] subItems = new StackSubItemAction[memberActions.length];
+        for (int i = 0; i < memberActions.length; i++) {
+            subItems[i] = new StackSubItemAction(getIconFronEvent(memberActions[i].getAction()), memberActions[i]
+                    .getText(), memberActions[i].getAction());
+        }
 
-	super.addStackSubItem(categoryName, img.groupDefIcon(), name, title, subItems);
+        super.addStackSubItem(categoryName, img.groupDefIcon(), name, title, subItems);
     }
 
     private AbstractImagePrototype getIcon(final String event) {
-	if (event == GroupMembersView.ICON_ALERT) {
-	    return img.alert();
-	}
-	throw new IndexOutOfBoundsException("Icon unknown in GroupMemebersPanel");
+        if (event == GroupMembersView.ICON_ALERT) {
+            return img.alert();
+        }
+        throw new IndexOutOfBoundsException("Icon unknown in GroupMemebersPanel");
     }
 
     private AbstractImagePrototype getIconFronEvent(final String event) {
-	if (event == WorkspaceEvents.ACCEPT_JOIN_GROUP) {
-	    return img.accept();
-	}
-	if (event == WorkspaceEvents.DENY_JOIN_GROUP) {
-	    return img.cancel();
-	}
-	if (event == WorkspaceEvents.DEL_MEMBER) {
-	    return img.del();
-	}
-	if (event == WorkspaceEvents.GOTO) {
-	    return img.groupHome();
-	}
-	if (event == WorkspaceEvents.SET_ADMIN_AS_COLLAB) {
-	    return img.arrowDownGreen();
-	}
-	if (event == WorkspaceEvents.SET_COLLAB_AS_ADMIN) {
-	    return img.arrowUpGreen();
-	}
-	throw new IndexOutOfBoundsException("Event unknown in GroupMembersPanel");
+        if (event == WorkspaceEvents.ACCEPT_JOIN_GROUP) {
+            return img.accept();
+        }
+        if (event == WorkspaceEvents.DENY_JOIN_GROUP) {
+            return img.cancel();
+        }
+        if (event == WorkspaceEvents.DEL_MEMBER) {
+            return img.del();
+        }
+        if (event == WorkspaceEvents.GOTO) {
+            return img.groupHome();
+        }
+        if (event == WorkspaceEvents.SET_ADMIN_AS_COLLAB) {
+            return img.arrowDownGreen();
+        }
+        if (event == WorkspaceEvents.SET_COLLAB_AS_ADMIN) {
+            return img.arrowUpGreen();
+        }
+        throw new IndexOutOfBoundsException("Event unknown in GroupMembersPanel");
     }
 
     public void show() {
-	this.setVisible(true);
+        this.setVisible(true);
     }
 
     public void hide() {
-	this.setVisible(false);
+        this.setVisible(false);
     }
 
 }

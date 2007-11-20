@@ -1,5 +1,26 @@
 <module>
-	<!-- Inherit the core Web Toolkit stuff.                  -->
-	<inherits name='com.google.gwt.user.User'/>
-    <inherits name='org.ourproject.kune.sitebar.Kune-Sitebar'/>
+  <!-- Inherit the core Web Toolkit stuff.                  -->
+  <inherits name='com.google.gwt.user.User' />
+  <inherits name='org.ourproject.kune.sitebar.Kune-Sitebar' />
+
+  <replace-with
+    class="org.ourproject.kune.platf.client.ui.CustomHorizontalSplitPanel.Impl">
+    <when-type-is
+      class="org.ourproject.kune.platf.client.ui.CustomHorizontalSplitPanel.Impl" />
+  </replace-with>
+
+  <replace-with
+    class="org.ourproject.kune.platf.client.ui.CustomHorizontalSplitPanel.ImplIE6">
+    <when-type-is
+      class="org.ourproject.kune.platf.client.ui.CustomHorizontalSplitPanel.Impl" />
+    <when-property-is name="user.agent" value="ie6" />
+  </replace-with>
+
+  <replace-with
+    class="org.ourproject.kune.platf.client.ui.CustomHorizontalSplitPanel.ImplSafari">
+    <when-type-is
+      class="org.ourproject.kune.platf.client.ui.CustomHorizontalSplitPanel.Impl" />
+    <when-property-is name="user.agent" value="safari" />
+  </replace-with>
+
 </module>

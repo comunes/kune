@@ -50,7 +50,7 @@ public class ApplicationBuilder {
     public Application build(final String userHash) {
         HashMap tools = indexTools(platform.getTools());
         DefaultApplication application = new DefaultApplication(tools);
-        Site.showProgressProcessing();
+        Site.showProgressLoading();
         final Session session = new Session(userHash);
         ContentProvider provider = new ContentProviderImpl(ContentService.App.getInstance());
         final StateManager stateManager = new StateManagerDefault(provider, application, session);

@@ -129,6 +129,8 @@ public class User implements HasId {
 
     public void setPassword(final String password) {
         this.password = password;
+        // http://www.dynamic.net.au/christos/crypt/
+        // Use UnixCrypt (jetty)
     }
 
     public Group getUserGroup() {

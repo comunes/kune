@@ -79,7 +79,7 @@ public class GroupMembersPresenter implements GroupMembersComponent, AbstractPre
         int numPendingCollabs = pendingCollabsList.size();
 
         boolean userIsAdmin = rights.isAdministrable();
-        boolean userIsCollab = rights.isEditable();
+        boolean userIsCollab = !userIsAdmin && rights.isEditable();
         boolean userCanView = rights.isVisible();
         boolean userIsMember = isMember(userIsAdmin, userIsCollab);
 
@@ -92,6 +92,8 @@ public class GroupMembersPresenter implements GroupMembersComponent, AbstractPre
 
         if (!userIsMember) {
             view.addJoinLink();
+        } else if (userIsAdmin && numAdmins > 1 || userIsCollab) {
+            view.addUnjoinLink();
         }
 
         if (userCanView) {

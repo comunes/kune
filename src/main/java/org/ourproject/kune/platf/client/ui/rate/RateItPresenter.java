@@ -48,16 +48,19 @@ public class RateItPresenter {
     }
 
     protected void revertCurrentRate() {
-        setRatePanel(currentRate);
+        if (!isRating) {
+            setRatePanel(currentRate);
+        }
     }
 
     protected void starClicked(final int starClicked) {
+        isRating = true;
         Double newValue = new Double(starClicked + 1);
         if (Math.ceil(currentRate.doubleValue()) == newValue.doubleValue()) {
             // Same star, rest 1/2
             newValue = new Double(currentRate.doubleValue() - 0.5);
         }
-        isRating = true;
+        setRatePanel(newValue);
         DefaultDispatcher.getInstance().fire(WorkspaceEvents.RATE_CONTENT, newValue, null);
     }
 

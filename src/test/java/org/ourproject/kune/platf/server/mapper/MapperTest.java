@@ -53,7 +53,7 @@ public class MapperTest {
     @Test
     public void testUserInfo() throws SerializableException {
         final User user = TestDomainHelper.createUser(1);
-        final UserInfo userInfo = userInfoService.buildInfo(user);
+        final UserInfo userInfo = userInfoService.buildInfo(user, "someuserhash");
 
         final UserInfoDTO userInfoDTO = mapper.map(userInfo, UserInfoDTO.class);
         assertEquals(userInfo.getName(), userInfoDTO.getName());

@@ -26,8 +26,8 @@ import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.newgroup.NewGroupListener;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.login.LoginListener;
-import org.ourproject.kune.sitebar.client.rpc.SiteBarService;
-import org.ourproject.kune.sitebar.client.rpc.SiteBarServiceAsync;
+import org.ourproject.kune.sitebar.client.rpc.UserService;
+import org.ourproject.kune.sitebar.client.rpc.UserServiceAsync;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -51,6 +51,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
         this.previousToken = previousToken;
         Site.showProgressProcessing();
         view.showLoginDialog();
+        view.centerLoginDialog();
         Site.hideProgress();
     }
 
@@ -59,6 +60,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
         if (isLogged) {
             Site.showProgressProcessing();
             view.showNewGroupDialog();
+            view.centerNewGroupDialog();
         } else {
             returnToPreviousState();
             // i18n
@@ -73,7 +75,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 
     public void doLogout() {
         Site.showProgressProcessing();
-        SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
+        UserServiceAsync siteBarService = UserService.App.getInstance();
         siteBarService.logout(new AsyncCallback() {
             public void onFailure(final Throwable arg0) {
                 Site.hideProgress();
@@ -91,7 +93,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
     }
 
     public void reloadUserInfo(final String userHash) {
-        SiteBarServiceAsync siteBarService = SiteBarService.App.getInstance();
+        UserServiceAsync siteBarService = UserService.App.getInstance();
         siteBarService.reloadUserInfo(userHash, new AsyncCallback() {
             public void onFailure(final Throwable arg0) {
                 Site.hideProgress();
@@ -153,6 +155,10 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 
     public void showProgress(final String text) {
         view.showProgress(text);
+    }
+
+    public void showAlertMessage(final String message) {
+        view.showAlertMessage(message);
     }
 
     public View getView() {

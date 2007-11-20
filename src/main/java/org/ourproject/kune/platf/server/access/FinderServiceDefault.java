@@ -72,7 +72,7 @@ public class FinderServiceDefault implements FinderService {
 
     }
 
-    public Content getContent(final Group group, final StateToken token) throws ContentNotFoundException,
+    public Content getContent(final StateToken token, final Group defaultGroup) throws ContentNotFoundException,
             GroupNotFoundException {
         Long contentId = checkAndParse(token.getDocument());
         Long folderId = checkAndParse(token.getFolder());
@@ -86,7 +86,7 @@ public class FinderServiceDefault implements FinderService {
         } else if (token.hasGroup()) {
             return findDefaultOfGroup(token.getGroup());
         } else if (token.hasNothing()) {
-            return findDefaultOfGroup(group);
+            return findDefaultOfGroup(defaultGroup);
         } else {
             throw new ContentNotFoundException();
         }

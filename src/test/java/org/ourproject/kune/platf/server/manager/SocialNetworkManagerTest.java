@@ -8,8 +8,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
+import org.ourproject.kune.platf.client.errors.LastAdminInGroupException;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.GroupListMode;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.impl.SocialNetworkManagerDefault;
 import org.ourproject.kune.testhelper.ctx.DomainContext;
@@ -57,6 +59,7 @@ public class SocialNetworkManagerTest {
         final String result = socialNetworkManager.requestToJoin(user, group);
         assertEquals(result, SocialNetworkDTO.REQ_JOIN_ACEPTED);
         assertTrue(group.getSocialNetwork().getAccessLists().getEditors().getList().contains(userGroup));
+        assertEquals(group.getSocialNetwork().getAccessLists().getEditors().getMode(), GroupListMode.NORMAL);
     }
 
     @Test
@@ -95,6 +98,7 @@ public class SocialNetworkManagerTest {
         assertFalse(group.getSocialNetwork().getPendingCollaborators().getList().contains(userGroup));
         assertTrue(group.getSocialNetwork().getAccessLists().getEditors().getList().contains(userGroup));
         assertEquals(group.getSocialNetwork().getAccessLists().getEditors().getList().size(), 1);
+        assertEquals(group.getSocialNetwork().getAccessLists().getEditors().getMode(), GroupListMode.NORMAL);
         assertEquals(group.getSocialNetwork().getPendingCollaborators().getList().size(), 0);
     }
 
@@ -128,8 +132,16 @@ public class SocialNetworkManagerTest {
         socialNetworkManager.deleteMember(admin, userGroup, group);
         assertFalse(group.getSocialNetwork().getPendingCollaborators().getList().contains(userGroup));
         assertFalse(group.getSocialNetwork().getAccessLists().getEditors().getList().contains(userGroup));
+        assertEquals(group.getSocialNetwork().getAccessLists().getEditors().getMode(), GroupListMode.NOBODY);
         assertEquals(group.getSocialNetwork().getAccessLists().getEditors().getList().size(), 0);
         assertEquals(group.getSocialNetwork().getPendingCollaborators().getList().size(), 0);
+    }
+
+    @Test(expected = LastAdminInGroupException.class)
+    public void lastAdminUnjoinGroupFails() throws SerializableException {
+        assertSocialNetworkIsEmpty();
+        socialNetworkManager.addAdmin(admin, group);
+        socialNetworkManager.unJoinGroup(admin.getUserGroup(), group);
     }
 
     @Test(expected = AccessViolationException.class)
@@ -174,7 +186,9 @@ public class SocialNetworkManagerTest {
         assertFalse(group.getSocialNetwork().getAccessLists().getEditors().getList().contains(userGroup));
         assertTrue(group.getSocialNetwork().getAccessLists().getAdmins().getList().contains(userGroup));
         assertEquals(group.getSocialNetwork().getAccessLists().getAdmins().getList().size(), 2);
+        assertEquals(group.getSocialNetwork().getAccessLists().getAdmins().getMode(), GroupListMode.NORMAL);
         assertEquals(group.getSocialNetwork().getAccessLists().getEditors().getList().size(), 0);
+        assertEquals(group.getSocialNetwork().getAccessLists().getEditors().getMode(), GroupListMode.NOBODY);
         assertEquals(group.getSocialNetwork().getPendingCollaborators().getList().size(), 0);
     }
 
@@ -200,7 +214,9 @@ public class SocialNetworkManagerTest {
         assertTrue(group.getSocialNetwork().getAccessLists().getEditors().getList().contains(userGroup));
         assertFalse(group.getSocialNetwork().getAccessLists().getAdmins().getList().contains(userGroup));
         assertEquals(group.getSocialNetwork().getAccessLists().getAdmins().getList().size(), 1);
+        assertEquals(group.getSocialNetwork().getAccessLists().getAdmins().getMode(), GroupListMode.NORMAL);
         assertEquals(group.getSocialNetwork().getAccessLists().getEditors().getList().size(), 1);
+        assertEquals(group.getSocialNetwork().getAccessLists().getEditors().getMode(), GroupListMode.NORMAL);
         assertEquals(group.getSocialNetwork().getPendingCollaborators().getList().size(), 0);
     }
 

@@ -509,4 +509,8 @@ public class LoginPanel implements LoginView, View {
         registerHP.add(registerLabel);
         return registerHP;
     }
+
+    public void center() {
+        dialog.center();
+    }
 }

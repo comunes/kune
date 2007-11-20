@@ -20,8 +20,6 @@
 
 package org.ourproject.kune.platf.server.rpc;
 
-import java.util.List;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
@@ -85,8 +83,8 @@ public class GroupRPC implements RPC, GroupService {
 
     @Transactional(type = TransactionType.READ_ONLY)
     public void search(final String userHash, final String searchTerm, final int firstResult, final int maxResults) {
-        List<Group> search = groupManager.search(searchTerm, firstResult, maxResults);
-
+        // List<Group> search = groupManager.search(searchTerm, firstResult,
+        // maxResults);
     }
 
 }

@@ -61,8 +61,18 @@ public interface WorkspaceView extends View {
 
     void setTags(View view);
 
+    void setContentToolBar(View view);
+
     void setContentBottomToolBar(View view);
 
     void setPutYourLogoVisible(boolean visible);
+
+    void setUIExtensionPoints();
+
+    void attachToExtensionPoint(String id, View viewToAttach);
+
+    void detachFromExtensionPoint(String id, View viewToDetach);
+
+    void clearExtensionPoint(String id);
 
 }

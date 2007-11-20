@@ -31,7 +31,7 @@ import org.ourproject.kune.platf.server.domain.User;
 
 public interface FinderService {
 
-    Content getContent(Group group, StateToken token) throws ContentNotFoundException, GroupNotFoundException;
+    Content getContent(StateToken token, Group defaultGroup) throws ContentNotFoundException, GroupNotFoundException;
 
     Content getContent(Long contentId) throws ContentNotFoundException;
 

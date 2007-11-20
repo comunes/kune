@@ -1,4 +1,18 @@
-2007-10-27 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+2007-11-20 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* Workspace refactorization, added UIEntryPoints to attach widgets to
+	parts of the WP
+	* Custom SPlitPanel to fire splitter position changes
+	* Better SN error processing
+	* Alert message dialog using gwt-ext
+	* Unjoing group in GroupMemberPanel if you are member
+	* Last admin in group message if try to unjoin
+	* If save docs is pending, get confirmation before close
+	* RateIt use improved
+	* RateIt disabled editing docs
+	* Added gwt sources and gwt-jsjac sources to kune maven2 repo
+
+2007-11-06 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* Deprecated methods clean-up in server
 	* #newgroup, and #login tokens instead of #fixme
 	* login, sessionId, and cookies refactor using gwt-incubator recommendations
 	* Rate content RPC calls

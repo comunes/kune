@@ -68,4 +68,8 @@ public class ContentBottomToolBarPresenter implements ContentBottomToolBarCompon
         view.setRateItVisible(visible);
     }
 
+    public void setEnabledRateIt(final boolean enabled) {
+        view.setRateItVisible(enabled);
+    }
+
 }

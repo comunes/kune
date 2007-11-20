@@ -66,4 +66,9 @@ public interface SiteBarView extends View {
 
     void showSearchPanel(String termToSearch);
 
+    void centerLoginDialog();
+
+    void centerNewGroupDialog();
+
+    void showAlertMessage(String message);
 }

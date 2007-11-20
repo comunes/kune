@@ -24,7 +24,7 @@ import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
-import org.ourproject.kune.platf.client.rpc.KuneService;
+import org.ourproject.kune.platf.client.rpc.SiteService;
 import org.ourproject.kune.platf.server.InitData;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
@@ -41,7 +41,7 @@ import com.wideplay.warp.persist.TransactionType;
 import com.wideplay.warp.persist.Transactional;
 
 @Singleton
-public class KuneRPC implements RPC, KuneService {
+public class SiteRPC implements RPC, SiteService {
     private final Mapper mapper;
     private final UserSession session;
     private final LicenseManager licenseManager;
@@ -52,7 +52,7 @@ public class KuneRPC implements RPC, KuneService {
 
     // TODO: refactor: too many parameters! refactor to Facade Pattern
     @Inject
-    public KuneRPC(final UserSession session, final UserManager userManager, final UserInfoService userInfoService,
+    public SiteRPC(final UserSession session, final UserManager userManager, final UserInfoService userInfoService,
             final LicenseManager licenseManager, final Mapper mapper, final KuneProperties kuneProperties,
             final ChatProperties chatProperties) {
         this.session = session;
@@ -70,7 +70,7 @@ public class KuneRPC implements RPC, KuneService {
 
         data.setCCLicenses(licenseManager.getCC());
         data.setNotCCLicenses(licenseManager.getNotCC());
-        data.setUserInfo(userInfoService.buildInfo(userManager.find(session.getUser().getId())));
+        data.setUserInfo(userInfoService.buildInfo(userManager.find(session.getUser().getId()), session.getHash()));
         data.setChatHttpBase(chatProperties.getHttpBase());
         data.setChatDomain(chatProperties.getDomain());
         data.setChatRoomHost(chatProperties.getRoomHost());

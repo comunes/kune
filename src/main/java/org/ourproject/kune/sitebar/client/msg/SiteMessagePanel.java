@@ -33,7 +33,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class SiteMessagePanel extends HorizontalPanel implements SiteMessageView {
-    private static final int TIMEVISIBLE = 5000;
+    private static final int TIMEVISIBLE = 4000;
 
     final Images images = Images.App.getInstance();
     AbstractImagePrototype[] messageIcons = new AbstractImagePrototype[] { images.error(), images.important(),

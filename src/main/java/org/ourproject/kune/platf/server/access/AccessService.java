@@ -31,19 +31,12 @@ import org.ourproject.kune.platf.server.domain.User;
 public interface AccessService {
 
     Access getAccess(User user, StateToken token, Group defaultGroup, AccessType accessType)
-	    throws ContentNotFoundException, AccessViolationException, GroupNotFoundException;
-
-    @Deprecated
-    Access getAccess(StateToken token, Group defaultGroup, Group loggedGroup, AccessType accessType)
-	    throws ContentNotFoundException, AccessViolationException, GroupNotFoundException;
-
-    Access getFolderAccess(Long folderId, Group group, AccessType accessType) throws AccessViolationException,
-	    ContentNotFoundException;
+            throws ContentNotFoundException, AccessViolationException, GroupNotFoundException;
 
     Access getFolderAccess(Long folderId, User user, AccessType accessType) throws AccessViolationException,
-	    ContentNotFoundException;
+            ContentNotFoundException;
 
     Content accessToContent(Long contentId, User user, AccessType accessType) throws ContentNotFoundException,
-	    AccessViolationException;
+            AccessViolationException;
 
 }

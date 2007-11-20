@@ -50,15 +50,18 @@ import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPanel;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPresenter;
 import org.ourproject.kune.workspace.client.workspace.BuddiesPresenceComponent;
+import org.ourproject.kune.workspace.client.workspace.ContentBottomToolBarComponent;
+import org.ourproject.kune.workspace.client.workspace.ContentBottomToolBarPresenter;
+import org.ourproject.kune.workspace.client.workspace.ContentBottomToolBarView;
 import org.ourproject.kune.workspace.client.workspace.ContentSubTitleComponent;
 import org.ourproject.kune.workspace.client.workspace.ContentSubTitlePresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentSubTitleView;
 import org.ourproject.kune.workspace.client.workspace.ContentTitleComponent;
 import org.ourproject.kune.workspace.client.workspace.ContentTitlePresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentTitleView;
-import org.ourproject.kune.workspace.client.workspace.ContentBottomToolBarComponent;
-import org.ourproject.kune.workspace.client.workspace.ContentBottomToolBarPresenter;
-import org.ourproject.kune.workspace.client.workspace.ContentBottomToolBarView;
+import org.ourproject.kune.workspace.client.workspace.ContentToolBarComponent;
+import org.ourproject.kune.workspace.client.workspace.ContentToolBarPresenter;
+import org.ourproject.kune.workspace.client.workspace.ContentToolBarView;
 import org.ourproject.kune.workspace.client.workspace.GroupMembersComponent;
 import org.ourproject.kune.workspace.client.workspace.ParticipationComponent;
 import org.ourproject.kune.workspace.client.workspace.TagsComponent;
@@ -66,16 +69,18 @@ import org.ourproject.kune.workspace.client.workspace.ThemeMenuComponent;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 import org.ourproject.kune.workspace.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.workspace.client.workspace.WorkspaceView;
+import org.ourproject.kune.workspace.client.workspace.ui.ContentBottomToolBarPanel;
+import org.ourproject.kune.workspace.client.workspace.ui.ContentNewToolBarPanel;
 import org.ourproject.kune.workspace.client.workspace.ui.ContentSubTitlePanel;
 import org.ourproject.kune.workspace.client.workspace.ui.ContentTitlePanel;
-import org.ourproject.kune.workspace.client.workspace.ui.ContentBottomToolBarPanel;
 import org.ourproject.kune.workspace.client.workspace.ui.WorkspacePanel;
 
 public class WorkspaceFactory {
 
     public static Workspace createWorkspace() {
-        WorkspaceView view = new WorkspacePanel();
-        WorkspacePresenter workspace = new WorkspacePresenter(view);
+        WorkspacePresenter workspace = new WorkspacePresenter();
+        WorkspaceView view = new WorkspacePanel(workspace);
+        workspace.init(view);
         return workspace;
     }
 
@@ -156,6 +161,13 @@ public class WorkspaceFactory {
     public static ContentBottomToolBarComponent createContentBottomToolBarComponent() {
         ContentBottomToolBarPresenter presenter = new ContentBottomToolBarPresenter();
         ContentBottomToolBarView view = new ContentBottomToolBarPanel(presenter);
+        presenter.init(view);
+        return presenter;
+    }
+
+    public static ContentToolBarComponent createContentToolBarComponent() {
+        ContentToolBarPresenter presenter = new ContentToolBarPresenter();
+        ContentToolBarView view = new ContentNewToolBarPanel(presenter);
         presenter.init(view);
         return presenter;
     }

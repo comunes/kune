@@ -20,23 +20,30 @@
 
 package org.ourproject.kune.workspace.client.editor;
 
+import org.ourproject.kune.platf.client.View;
+
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.gwtext.client.widgets.MessageBox;
 
 public class TextEditorPanel extends Composite implements TextEditorView {
     private static final String BACKCOLOR_ENABLED = "#FFF";
     private static final String BACKCOLOR_DISABLED = "#CCC";
     private final RichTextArea gwtRTarea;
     private final TextEditorToolbar textEditorToolbar;
+    private final TextEditorPresenter presenter;
+    private final Timer saveTimer;
 
-    public TextEditorPanel(final TextEditorPresenter panelListener) {
+    public TextEditorPanel(final TextEditorPresenter presenter) {
 
+        this.presenter = presenter;
         gwtRTarea = new RichTextArea();
-        textEditorToolbar = new TextEditorToolbar(gwtRTarea, panelListener);
+        textEditorToolbar = new TextEditorToolbar(gwtRTarea, presenter);
         final VerticalPanel areaVP = new VerticalPanel();
         areaVP.add(textEditorToolbar);
         areaVP.add(gwtRTarea);
@@ -45,12 +52,26 @@ public class TextEditorPanel extends Composite implements TextEditorView {
         gwtRTarea.setWidth("97%");
         gwtRTarea.addStyleName("kune-TexEditorPanel-TextArea");
         areaVP.setWidth("100%");
-        adjustSize("" + (Window.getClientHeight() - 212 - 24));
+        adjustSize("" + (Window.getClientHeight() - 238));
         Window.addWindowResizeListener(new WindowResizeListener() {
             public void onWindowResized(final int arg0, final int arg1) {
-                adjustSize("" + (Window.getClientHeight() - 212 - 24));
+                adjustSize("" + (Window.getClientHeight() - 238));
             }
         });
+        saveTimer = new Timer() {
+            public void run() {
+                presenter.onSave();
+            }
+        };
+
+    }
+
+    public void scheduleSave(final int delayMillis) {
+        saveTimer.schedule(delayMillis);
+    }
+
+    public void saveTimerCancel() {
+        saveTimer.cancel();
     }
 
     public void setEnabled(final boolean enabled) {
@@ -99,4 +120,21 @@ public class TextEditorPanel extends Composite implements TextEditorView {
         gwtRTarea.setHeight(height);
     }
 
+    public void showSaveBeforeDialog() {
+        // i18n
+        MessageBox.confirm("Save confirmation", "Save before close?", new MessageBox.ConfirmCallback() {
+            public void execute(final String btnID) {
+                if (btnID.equals("yes")) {
+                    presenter.onSaveAndClose();
+                } else {
+                    presenter.onCancelConfirmed();
+                }
+            }
+        });
+
+    }
+
+    public View getToolBar() {
+        return this.textEditorToolbar;
+    }
 }

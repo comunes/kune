@@ -51,59 +51,68 @@ public class GroupList {
     private GroupListMode mode;
 
     public GroupList() {
-	this(new ArrayList<Group>());
-	this.mode = GroupListMode.NORMAL;
+        this(new ArrayList<Group>());
+        this.mode = GroupListMode.NORMAL;
     }
 
     public GroupList(final List<Group> list) {
-	this.list = list;
+        this.list = list;
     }
 
     public Long getId() {
-	return id;
+        return id;
     }
 
     public void setId(final Long id) {
-	this.id = id;
+        this.id = id;
     }
 
     public List<Group> getList() {
-	return list;
+        return list;
     }
 
     public void setList(final List<Group> list) {
-	this.list = list;
+        this.list = list;
     }
 
     public void add(final Group group) {
-	// No group duplicate
-	if (!list.contains(group)) {
-	    list.add(group);
-	}
+        // No group duplicate
+        // TODO: Get this outside Domain?
+        if (!list.contains(group)) {
+            list.add(group);
+        }
+        // TODO: Get this outside Domain?
+        if (getMode() == GroupListMode.NOBODY) {
+            setMode(GroupListMode.NORMAL);
+        }
     }
 
     public boolean includes(final Group group) {
-	return mode.checkIfIncludes(group, this.list);
+        return mode.checkIfIncludes(group, this.list);
     }
 
     public ArrayList<Group> duplicate() {
-	return new ArrayList<Group>(list);
+        return new ArrayList<Group>(list);
     }
 
     public boolean isEmpty() {
-	return list.size() == 0;
+        return list.size() == 0;
     }
 
     public GroupListMode getMode() {
-	return mode;
+        return mode;
     }
 
     public void setMode(final GroupListMode mode) {
-	this.mode = mode;
+        this.mode = mode;
     }
 
     public void remove(final Group group) {
-	list.remove(group);
+        list.remove(group);
+        // TODO: Get this outside Domain?
+        if (list.isEmpty()) {
+            setMode(GroupListMode.NOBODY);
+        }
     }
 
 }

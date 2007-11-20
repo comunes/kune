@@ -35,7 +35,7 @@ public interface Application {
     StateManager getStateManager();
 
     /**
-     * Commicates to every tool the current group
+     * Communicates to every tool the current group
      * 
      * @param group
      */

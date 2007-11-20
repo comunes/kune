@@ -23,6 +23,7 @@ package org.ourproject.kune.chat.client.cnt;
 import org.ourproject.kune.chat.client.ChatFactory;
 import org.ourproject.kune.chat.client.cnt.info.ChatInfo;
 import org.ourproject.kune.chat.client.cnt.room.ChatRoom;
+import org.ourproject.kune.chat.client.cnt.room.ChatRoomControl;
 import org.ourproject.kune.chat.client.rooms.MultiRoom;
 
 class ChatComponents {
@@ -31,6 +32,7 @@ class ChatComponents {
     private MultiRoom multiRoom;
     private ChatRoom chatRoom;
     private ChatInfo chatInfo;
+    private ChatRoomControl chatRoomControl;
 
     public ChatComponents(final ChatContentPresenter owner) {
         this.owner = owner;
@@ -41,6 +43,13 @@ class ChatComponents {
             chatRoom = ChatFactory.createChatRoomViewer(owner);
         }
         return chatRoom;
+    }
+
+    public ChatRoomControl getChatRoomControl() {
+        if (chatRoomControl == null) {
+            chatRoomControl = ChatFactory.createChatRoomControlViewer(owner);
+        }
+        return chatRoomControl;
     }
 
     public MultiRoom getRooms() {

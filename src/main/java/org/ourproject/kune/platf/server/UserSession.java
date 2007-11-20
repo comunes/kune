@@ -28,7 +28,7 @@ import com.google.inject.servlet.SessionScoped;
 
 @SessionScoped
 public class UserSession {
-    private String hash;
+    private String userHash;
     private Long userId;
     private final UserManager manager;
 
@@ -50,11 +50,11 @@ public class UserSession {
     }
 
     public String getHash() {
-        return hash;
+        return userHash;
     }
 
     public void setHash(final String hash) {
-        this.hash = hash;
+        this.userHash = hash;
     }
 
     public boolean isUserLoggedIn() {

@@ -32,6 +32,7 @@ class WorkspaceUIComponents {
     private ContentBottomToolBarComponent contentBottomToolBar;
     private ThemeMenuComponent themeMenu;
     private TagsComponent tags;
+    private ContentToolBarComponent contentToolBar;
 
     public WorkspaceUIComponents(final WorkspacePresenter presenter) {
     }
@@ -97,6 +98,13 @@ class WorkspaceUIComponents {
             contentBottomToolBar = WorkspaceFactory.createContentBottomToolBarComponent();
         }
         return contentBottomToolBar;
+    }
+
+    public ContentToolBarComponent getContentToolBarComponent() {
+        if (contentToolBar == null) {
+            contentToolBar = WorkspaceFactory.createContentToolBarComponent();
+        }
+        return contentToolBar;
     }
 
 }

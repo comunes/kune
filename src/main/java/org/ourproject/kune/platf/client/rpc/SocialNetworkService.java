@@ -38,7 +38,7 @@ public interface SocialNetworkService extends RemoteService {
 
     void denyJoinGroup(String hash, String groupToDenyShortName, String groupShortName) throws SerializableException;
 
-    void unJoinGroup(String hash, String groupToUnJoinShortName, String groupShortName) throws SerializableException;
+    void unJoinGroup(String hash, String groupShortName) throws SerializableException;
 
     void setCollabAsAdmin(String hash, String groupToSetAdminShortName, String groupShortName)
             throws SerializableException;

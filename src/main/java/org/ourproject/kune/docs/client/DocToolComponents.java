@@ -30,21 +30,21 @@ class DocToolComponents {
     private final DocumentClientTool documentClientTool;
 
     public DocToolComponents(final DocumentClientTool documentClientTool) {
-	this.documentClientTool = documentClientTool;
+        this.documentClientTool = documentClientTool;
     }
 
     public DocumentContent getContent() {
-	if (content == null) {
-	    content = DocumentFactory.createDocumentContent(documentClientTool);
-	}
-	return content;
+        if (content == null) {
+            content = DocumentFactory.createDocumentContent(documentClientTool);
+        }
+        return content;
     }
 
     public DocumentContext getContext() {
-	if (context == null) {
-	    context = DocumentFactory.createDocumentContext();
-	}
-	return context;
+        if (context == null) {
+            context = DocumentFactory.createDocumentContext();
+        }
+        return context;
     }
 
 }

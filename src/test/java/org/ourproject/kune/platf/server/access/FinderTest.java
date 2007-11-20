@@ -45,7 +45,7 @@ public class FinderTest {
         Content descriptor = TestDomainHelper.createDescriptor(1l, "title", "content");
         userGroup.setDefaultContent(descriptor);
 
-        Content content = finder.getContent(userGroup, new StateToken());
+        Content content = finder.getContent(new StateToken(), userGroup);
         assertSame(descriptor, content);
     }
 
@@ -55,7 +55,7 @@ public class FinderTest {
         Content descriptor = TestDomainHelper.createDescriptor(1l, "title", "content");
         userGroup.setDefaultContent(descriptor);
 
-        Content content = finder.getContent(userGroup, new StateToken());
+        Content content = finder.getContent(new StateToken(), userGroup);
         assertSame(userGroup.getDefaultLicense(), content.getLicense());
     }
 
@@ -69,7 +69,7 @@ public class FinderTest {
         expect(contentManager.find(2l)).andReturn(descriptor);
         replay(contentManager);
 
-        Content content = finder.getContent(null, new StateToken("groupShortName", "toolName", "1", "2"));
+        Content content = finder.getContent(new StateToken("groupShortName", "toolName", "1", "2"), null);
         assertSame(descriptor, content);
         verify(contentManager);
     }
@@ -82,7 +82,7 @@ public class FinderTest {
         expect(contentManager.find(1l)).andReturn(descriptor);
         replay(contentManager);
 
-        finder.getContent(null, new StateToken("groupShortName", "toolName", "5", "1"));
+        finder.getContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
         verify(contentManager);
     }
 
@@ -94,7 +94,7 @@ public class FinderTest {
         expect(contentManager.find(1l)).andReturn(descriptor);
         replay(contentManager);
 
-        finder.getContent(null, new StateToken("groupShortName", "toolName", "5", "1"));
+        finder.getContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
         verify(contentManager);
     }
 
@@ -106,13 +106,13 @@ public class FinderTest {
         expect(contentManager.find(1l)).andReturn(descriptor);
         replay(contentManager);
 
-        finder.getContent(null, new StateToken("groupShortName", "toolName", "5", "1"));
+        finder.getContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
         verify(contentManager);
     }
 
     @Test(expected = ContentNotFoundException.class)
     public void voyAJoder() throws ContentNotFoundException, GroupNotFoundException {
-        finder.getContent(null, new StateToken(null, "toolName", "1", "2"));
+        finder.getContent(new StateToken(null, "toolName", "1", "2"), null);
     }
 
     @Test
@@ -121,7 +121,7 @@ public class FinderTest {
         expect(containerManager.find(1l)).andReturn(container);
 
         replay(containerManager);
-        Content content = finder.getContent(null, new StateToken("groupShortName", "toolName", "1", null));
+        Content content = finder.getContent(new StateToken("groupShortName", "toolName", "1", null), null);
         assertNotNull(content);
         assertSame(container, content.getFolder());
         verify(containerManager);
@@ -136,7 +136,7 @@ public class FinderTest {
         replay(groupManager);
 
         StateToken token = new StateToken("groupShortName", "toolName", null, null);
-        Content content = finder.getContent(null, token);
+        Content content = finder.getContent(token, null);
         assertSame(container, content.getFolder());
         verify(groupManager);
     }
@@ -149,7 +149,7 @@ public class FinderTest {
         expect(groupManager.findByShortName("groupShortName")).andReturn(group);
         replay(groupManager);
 
-        Content content = finder.getContent(null, new StateToken("groupShortName", null, null, null));
+        Content content = finder.getContent(new StateToken("groupShortName", null, null, null), null);
         assertSame(descriptor, content);
         verify(groupManager);
     }
@@ -159,7 +159,7 @@ public class FinderTest {
         Content content = new Content();
         Group group = new Group();
         group.setDefaultContent(content);
-        Content response = finder.getContent(group, new StateToken());
+        Content response = finder.getContent(new StateToken(), group);
         assertSame(content, response);
     }
 
@@ -171,7 +171,7 @@ public class FinderTest {
         expect(contentManager.find(1l)).andReturn(descriptor);
         replay(contentManager);
 
-        finder.getContent(null, new StateToken("groupShortName", "toolName", "5", "1a"));
+        finder.getContent(new StateToken("groupShortName", "toolName", "5", "1a"), null);
         verify(contentManager);
     }
 
