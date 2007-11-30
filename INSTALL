@@ -14,6 +14,10 @@ For development:
   mkdir -p src/main/webapp/gwt/org.ourproject.kune.app.Kune
   unison -batch -auto -ui text target/org.ourproject.kune-0.0.1/org.ourproject.kune.app.Kune/ src/main/webapp/gwt/org.ourproject.kune.app.Kune
 
+  (if you're using windows as dev plaftorm... you will have to write your own script ;). the idea is to
+  copy everything from src/main/webapp/gwt/org.ourproject.kune.app.Kune to
+  src/main/webapp/gwt/org.ourproject.kune.app.Kune)
+
 - Make two databases in your mysql:
 
 mysql> CREATE DATABASE kune_dev;
@@ -30,6 +34,12 @@ mysql> FLUSH PRIVILEGES;
   sudo mkdir -p /var/lib/lucene/kune_test/indexes
   sudo chown yourUser:yourUser /var/lib/lucene/kune_dev/indexes
   sudo chown yourUser:yourUser /var/lib/lucene/kune_test/indexes
+ 
+ (in case you are using windows as dev platform you only have to create a couple of folders
+ anywhere you like and then specify them in persistence.xml, as follows:
+		<property name="hibernate.search.default.indexBase" value="C:\kune\kune-index"/>
+ do the same with every persistence unit defined inside.
+ )
  
 - Install a run openfire jabber server (see Appendix B for proper configuration of openfire)
 
