@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.rack.dock.Dock;
 import org.ourproject.rack.dock.RegexDock;
-import org.ourproject.rack.filters.gwt.GWTServiceFilter;
+import org.ourproject.rack.filters.gwt2.GWTServiceFilter;
 import org.ourproject.rack.filters.json.JSONServiceFilter;
 
 import com.google.gwt.user.client.rpc.RemoteService;
