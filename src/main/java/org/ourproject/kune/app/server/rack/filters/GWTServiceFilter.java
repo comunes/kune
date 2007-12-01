@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.ourproject.kune.app.server.rack.DelegatedRemoteServlet;
 import org.ourproject.kune.app.server.rack.RackHelper;
-import org.ourproject.kune.app.server.servlet.DelegatedRemoteServlet;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 

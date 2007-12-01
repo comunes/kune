@@ -18,7 +18,7 @@
  *
  */
 
-package org.ourproject.kune.app.server.servlet;
+package org.ourproject.kune.app.server.rack;
 
 import javax.servlet.ServletContext;
 
