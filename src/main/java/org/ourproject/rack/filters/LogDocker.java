@@ -1,4 +1,4 @@
-package org.ourproject.kune.app.server.rack.filters;
+package org.ourproject.rack.filters;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ import javax.servlet.ServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.ourproject.kune.app.server.rack.RackHelper;
+import org.ourproject.rack.RackHelper;
 
 public class LogDocker implements Filter {
 	public static final Log log = LogFactory.getLog(LogDocker.class);

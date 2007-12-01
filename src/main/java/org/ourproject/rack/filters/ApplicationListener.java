@@ -1,4 +1,4 @@
-package org.ourproject.kune.app.server.rack.filters;
+package org.ourproject.rack.filters;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

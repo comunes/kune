@@ -10,14 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.PropertyConfigurator;
-import org.ourproject.kune.app.server.rack.ContainerListener;
-import org.ourproject.kune.app.server.rack.RackBuilder;
-import org.ourproject.kune.app.server.rack.RackModule;
-import org.ourproject.kune.app.server.rack.filters.ApplicationListener;
-import org.ourproject.kune.app.server.rack.filters.ForwardFilter;
-import org.ourproject.kune.app.server.rack.filters.ListenerFilter;
-import org.ourproject.kune.app.server.rack.filters.LogDocker;
-import org.ourproject.kune.app.server.rack.filters.RedirectFilter;
 import org.ourproject.kune.chat.server.ChatServerModule;
 import org.ourproject.kune.docs.server.DocumentServerModule;
 import org.ourproject.kune.docs.server.DocumentServerTool;
@@ -29,9 +21,20 @@ import org.ourproject.kune.platf.server.KunePersistenceService;
 import org.ourproject.kune.platf.server.LoggerMethodInterceptor;
 import org.ourproject.kune.platf.server.PlatformServerModule;
 import org.ourproject.kune.platf.server.UserSession;
+import org.ourproject.kune.platf.server.json.TestJSONService;
+import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.properties.PropertiesFileName;
 import org.ourproject.kune.platf.server.tool.ToolRegistry;
 import org.ourproject.kune.sitebar.client.rpc.UserService;
+import org.ourproject.rack.ContainerListener;
+import org.ourproject.rack.RackBuilder;
+import org.ourproject.rack.RackModule;
+import org.ourproject.rack.dock.RackGuiceModule;
+import org.ourproject.rack.filters.ApplicationListener;
+import org.ourproject.rack.filters.ForwardFilter;
+import org.ourproject.rack.filters.ListenerFilter;
+import org.ourproject.rack.filters.LogDocker;
+import org.ourproject.rack.filters.RedirectFilter;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
@@ -61,6 +64,7 @@ public class KuneRackModule implements RackModule {
 		builder.use(new PlatformServerModule());
 		builder.use(new DocumentServerModule());
 		builder.use(new ChatServerModule());
+		builder.use(new RackGuiceModule());
 		builder.use(new AbstractModule() {
 			public void configure() {
 				bindInterceptor(Matchers.any(), new NotInObject(), new LoggerMethodInterceptor());
@@ -70,7 +74,7 @@ public class KuneRackModule implements RackModule {
 			}
 		});
 
-		builder.addListener(KuneContainerListener.class);
+//		builder.addListener(KuneContainerListener.class);
 
 		builder.at(".*").install(new LogDocker());
 		builder.at(".*").install(new GuiceFilter());
@@ -83,6 +87,7 @@ public class KuneRackModule implements RackModule {
 		
 		builder.installGWTServices("^/kune/", SiteService.class, GroupService.class, ContentService.class, 
 				UserService.class, SocialNetworkService.class);
+		builder.installJSonServices("^/kune/json/", TestJSONService.class);
 		
 		builder.at("^/kune/(.*)$").install(new ForwardFilter("^/kune/(.*)$", "/gwt/org.ourproject.kune.app.Kune/{0}"));
 	}

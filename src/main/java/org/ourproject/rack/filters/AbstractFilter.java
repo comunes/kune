@@ -1,4 +1,4 @@
-package org.ourproject.kune.app.server.rack.filters;
+package org.ourproject.rack.filters;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterConfig;
@@ -6,8 +6,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 
-import org.ourproject.kune.app.server.rack.RackHelper;
-import org.ourproject.kune.app.server.rack.RackServletFilter;
+import org.ourproject.rack.RackHelper;
+import org.ourproject.rack.RackServletFilter;
 
 import com.google.inject.Injector;
 

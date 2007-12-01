@@ -31,7 +31,6 @@ LONG-TERM:
 
 IDEAS:
 --------------------------------------------------------------------------------
-<danigb> GWT filter is a chaos: we have to improve the performance, its is very important
 <danigb> Try to find a way dozer maps directly without use getters/setters (less js code and better performance)
 
 DO-NOT-IMPLEMENT (stuff that was rejected):

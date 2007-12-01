@@ -1,4 +1,4 @@
-package org.ourproject.kune.app.server.rack;
+package org.ourproject.rack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,9 +7,11 @@ import javax.servlet.Filter;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.ourproject.kune.app.server.rack.dock.Dock;
-import org.ourproject.kune.app.server.rack.dock.RegexDock;
-import org.ourproject.kune.app.server.rack.filters.GWTServiceFilter;
+import org.ourproject.kune.platf.server.manager.GroupManager;
+import org.ourproject.rack.dock.Dock;
+import org.ourproject.rack.dock.RegexDock;
+import org.ourproject.rack.filters.gwt.GWTServiceFilter;
+import org.ourproject.rack.filters.json.JSONServiceFilter;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.inject.Module;
@@ -89,6 +91,16 @@ public class RackBuilder {
 		}
 		
 		return this;
+	}
+
+	public void installJSonServices(String root, Class<?>... serviceClasses) {
+		for (Class<?> serviceClass : serviceClasses) {
+			String simpleName = serviceClass.getSimpleName();
+			String pattern = root + simpleName + "/(.*)$";
+			RegexDock dock = new RegexDock(pattern);
+			dock.setFilter(new JSONServiceFilter(pattern, serviceClass));
+			add(dock);
+		}
 	}
 
 }

@@ -1,4 +1,4 @@
-package org.ourproject.kune.app.server.rack;
+package org.ourproject.rack;
 
 
 public interface RackModule {

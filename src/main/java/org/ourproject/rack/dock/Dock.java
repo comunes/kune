@@ -1,4 +1,4 @@
-package org.ourproject.kune.app.server.rack.dock;
+package org.ourproject.rack.dock;
 
 import javax.servlet.Filter;
 import javax.servlet.ServletRequest;

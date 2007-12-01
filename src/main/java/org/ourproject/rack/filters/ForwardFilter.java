@@ -1,4 +1,4 @@
-package org.ourproject.kune.app.server.rack.filters;
+package org.ourproject.rack.filters;
 
 import java.io.IOException;
 import java.util.regex.Matcher;
@@ -10,7 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-import org.ourproject.kune.app.server.rack.RackHelper;
+import org.ourproject.rack.RackHelper;
 
 public class ForwardFilter extends AbstractFilter{
 //	private static final Log log = LogFactory.getLog(ForwardFilter.class);
