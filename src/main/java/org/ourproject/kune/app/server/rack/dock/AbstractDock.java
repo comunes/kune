@@ -1,8 +1,9 @@
-package org.ourproject.kune.app.server.rack;
+package org.ourproject.kune.app.server.rack.dock;
 
 import javax.servlet.Filter;
 
-public abstract class AbstractRackDock implements Dock {
+
+public abstract class AbstractDock implements Dock {
 	private Filter filter;
 
 	public Filter getFilter() {

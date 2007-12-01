@@ -7,6 +7,8 @@ import javax.servlet.Filter;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.ourproject.kune.app.server.rack.dock.Dock;
+import org.ourproject.kune.app.server.rack.dock.RegexDock;
 import org.ourproject.kune.app.server.rack.filters.GWTServiceFilter;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -25,7 +27,7 @@ public class RackBuilder {
 		}
 
 		public RackDockBuilder install(Filter filter) {
-			RegexRackDock dock = new RegexRackDock(regex);
+			RegexDock dock = new RegexDock(regex);
 			dock.setFilter(filter);
 			builder.add(dock);
 			return this;
@@ -81,7 +83,7 @@ public class RackBuilder {
 		
 		for (Class<? extends RemoteService> serviceClass : serviceClasses) {
 			String simpleName = serviceClass.getSimpleName();
-			RegexRackDock dock = new RegexRackDock(root + simpleName + "$");
+			RegexDock dock = new RegexDock(root + simpleName + "$");
 			dock.setFilter(new GWTServiceFilter(serviceClass));
 			add(dock);
 		}

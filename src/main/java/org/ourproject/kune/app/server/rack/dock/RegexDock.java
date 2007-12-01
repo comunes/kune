@@ -1,14 +1,16 @@
-package org.ourproject.kune.app.server.rack;
+package org.ourproject.kune.app.server.rack.dock;
 
 import java.util.regex.Pattern;
 
 import javax.servlet.ServletRequest;
 
-public class RegexRackDock extends AbstractRackDock {
+import org.ourproject.kune.app.server.rack.RackHelper;
+
+public class RegexDock extends AbstractDock {
 //	private static final Log log = LogFactory.getLog(RegexRackDock.class);
 	private Pattern pattern;
 
-	public RegexRackDock(String regex) {
+	public RegexDock(String regex) {
 		this.pattern = Pattern.compile(regex);
 	}
 

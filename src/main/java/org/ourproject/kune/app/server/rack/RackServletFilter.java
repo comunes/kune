@@ -13,6 +13,7 @@ import javax.servlet.ServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.ourproject.kune.app.server.rack.dock.Dock;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
