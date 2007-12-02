@@ -2,16 +2,16 @@ package org.ourproject.rack.filters.rest;
 
 import java.lang.reflect.Method;
 
-
 public class DefaultRESTMethodFinder implements RESTMethodFinder {
 
-	public JsonMethod findMethod(String methodName, Parameters parameters, Class<?> serviceType) {
+	public RESTMethod findMethod(String methodName, Parameters parameters, Class<?> serviceType) {
 		Method[] allMethods = serviceType.getMethods();
 		for (Method method : allMethods) {
 			REST methodAnnotation = method.getAnnotation(REST.class);
 			if (methodAnnotation != null && method.getName().equals(methodName)) {
-				checkParams(methodAnnotation, parameters);
-				return new JsonMethod(method, methodAnnotation.params(), parameters);
+				if (checkParams(methodAnnotation, parameters)) {
+					return new RESTMethod(method, methodAnnotation.params(), parameters, methodAnnotation.format());
+				}
 			}
 		}
 		return null;

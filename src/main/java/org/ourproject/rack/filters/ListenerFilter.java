@@ -9,7 +9,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ListenerFilter extends AbstractFilter {
+public class ListenerFilter extends InjectedFilter {
 	private Class<? extends ApplicationListener> listenerClass;
 
 	public ListenerFilter(Class<? extends ApplicationListener> listenerClass) {

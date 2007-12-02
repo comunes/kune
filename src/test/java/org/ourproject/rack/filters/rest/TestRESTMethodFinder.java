@@ -2,6 +2,7 @@ package org.ourproject.rack.filters.rest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
@@ -19,10 +20,15 @@ public class TestRESTMethodFinder {
 		this.service = new MyTestService();
 	}
 
+	@Test
+	public void notEnoughParameters() {
+		RESTMethod method = finder.findMethod("simpleMethod", new TestParameters(), MyTestService.class);
+		assertNull(method);
+	}
 	
 	@Test
 	public void simpleTest() {
-		JsonMethod method = finder.findMethod("simpleMethod", new TestParameters("name", "theName"), MyTestService.class);
+		RESTMethod method = finder.findMethod("simpleMethod", new TestParameters("name", "theName"), MyTestService.class);
 		assertNotNull(method);
 		assertTrue(method.invoke(service));
 		assertEquals("the name: theName", method.getResponse().toString());
@@ -30,7 +36,7 @@ public class TestRESTMethodFinder {
 	
 	@Test
 	public void conversionTest() {
-		JsonMethod method = finder.findMethod("convertIntMethod", new TestParameters("length", "12", "stamp", "13"), MyTestService.class);
+		RESTMethod method = finder.findMethod("convertIntMethod", new TestParameters("length", "12", "stamp", "13"), MyTestService.class);
 		assertNotNull(method);
 		assertTrue(method.invoke(service));
 		assertEquals("the data: 12 13", method.getResponse().toString());

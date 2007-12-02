@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.ourproject.rack.RackHelper;
 
-public class ForwardFilter extends AbstractFilter{
+public class ForwardFilter extends InjectedFilter{
 //	private static final Log log = LogFactory.getLog(ForwardFilter.class);
 	
 	private final String forward;
@@ -44,7 +44,7 @@ public class ForwardFilter extends AbstractFilter{
 			replaced = replaced.replace(tag, group);
 		}
 		
-		String forwardString = super.buildForwardString(request, replaced);
+		String forwardString = RackHelper.buildForwardString(request, replaced);
 		forward(request, response, forwardString);
 	}
 

@@ -13,8 +13,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ourproject.rack.RackHelper;
 
-public class LogDocker implements Filter {
-	public static final Log log = LogFactory.getLog(LogDocker.class);
+public class LogFilter implements Filter {
+	public static final Log log = LogFactory.getLog(LogFilter.class);
 	
 	public void destroy() {
 	}

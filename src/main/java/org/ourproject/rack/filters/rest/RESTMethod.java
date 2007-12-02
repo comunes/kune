@@ -1,19 +1,22 @@
 package org.ourproject.rack.filters.rest;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-
-public class JsonMethod {
+public class RESTMethod {
+	public static final String FORMAT_JSON = "json";
+	public static final String FORMAT_XML = "xml";
+	
 	private final Method method;
 	private final Parameters parameters;
 	private final String[] names;
 	private Object response;
+	private final String format;
 
-	public JsonMethod(Method method, String[] names, Parameters parameters) {
+	public RESTMethod(Method method, String[] names, Parameters parameters, String format) {
 		this.method = method;
 		this.names = names;
 		this.parameters = parameters;
+		this.format = format;
 	}
 
 	public boolean invoke(Object service) {
@@ -48,6 +51,12 @@ public class JsonMethod {
 		} else {
 			throw new RuntimeException("unable to convert parameter in JSON method to type: " + type);
 		}
+	}
+	
+	
+
+	public String getFormat() {
+		return format;
 	}
 
 	public Object getResponse() {
