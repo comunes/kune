@@ -56,10 +56,21 @@
 			<artifactId>dozer</artifactId>
 			<version>4.0</version>
 		</dependency>
+		<!-- REST: xml and json (stax) -->
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
 			<version>1.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>stax</groupId>
+			<artifactId>stax-api</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jettison</groupId>
+			<artifactId>jettison</artifactId>
+			<version>1.0-RC2</version>
 		</dependency>
 
 		<!-- xmpp -->

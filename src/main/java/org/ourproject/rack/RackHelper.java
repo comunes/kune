@@ -30,4 +30,9 @@ public class RackHelper {
 		return httpServletRequest.getRequestURI();
 	}
 
+	public static String buildForwardString(ServletRequest request, String forward) {
+		String parameters = RackHelper.extractParameters(request);
+		return new StringBuilder(forward).append(parameters).toString();
+	}
+
 }

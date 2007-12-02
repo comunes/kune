@@ -11,7 +11,7 @@ import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.rack.dock.Dock;
 import org.ourproject.rack.dock.RegexDock;
 import org.ourproject.rack.filters.gwts.GWTServiceFilter;
-import org.ourproject.rack.filters.rest.JSONServiceFilter;
+import org.ourproject.rack.filters.rest.RESTServiceFilter;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.inject.Module;
@@ -98,7 +98,7 @@ public class RackBuilder {
 			String simpleName = serviceClass.getSimpleName();
 			String pattern = root + simpleName + "/(.*)$";
 			RegexDock dock = new RegexDock(pattern);
-			dock.setFilter(new JSONServiceFilter(pattern, serviceClass));
+			dock.setFilter(new RESTServiceFilter(pattern, serviceClass));
 			add(dock);
 		}
 	}
