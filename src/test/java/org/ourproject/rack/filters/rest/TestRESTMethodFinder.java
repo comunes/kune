@@ -25,39 +25,55 @@ public class TestRESTMethodFinder {
 		RESTMethod method = finder.findMethod("simpleMethod", new TestParameters(), MyTestService.class);
 		assertNull(method);
 	}
-	
+
 	@Test
 	public void simpleTest() {
-		RESTMethod method = finder.findMethod("simpleMethod", new TestParameters("name", "theName"), MyTestService.class);
+		RESTMethod method = finder.findMethod("simpleMethod", new TestParameters("name", "theName"),
+				MyTestService.class);
 		assertNotNull(method);
 		assertTrue(method.invoke(service));
 		assertEquals("the name: theName", method.getResponse().toString());
 	}
-	
+
+	@Test
+	public void shouldTakeMoreParamsMethod() {
+		RESTMethod method = finder.findMethod("simpleMethod",
+				new TestParameters("name", "theName", "value", "theValue"), MyTestService.class);
+		assertNotNull(method);
+		assertTrue(method.invoke(service));
+		assertEquals("more params: theName: theValue", method.getResponse().toString());
+	}
+
 	@Test
 	public void conversionTest() {
-		RESTMethod method = finder.findMethod("convertIntMethod", new TestParameters("length", "12", "stamp", "13"), MyTestService.class);
+		RESTMethod method = finder.findMethod("convertIntMethod", new TestParameters("length", "12", "stamp", "13"),
+				MyTestService.class);
 		assertNotNull(method);
 		assertTrue(method.invoke(service));
 		assertEquals("the data: 12 13", method.getResponse().toString());
 	}
-	
+
 	public static class MyTestService {
-		@REST(params={"name"})
+		@REST(params = { "name" })
 		public String simpleMethod(String name) {
 			return "the name: " + name;
 		}
-		
-		@REST(params={"length", "stamp"}) 
+
+		@REST(params = { "name", "value"})
+		public String simpleMethod(String name, String value) {
+			return "more params: " + name + ": " + value;
+		}
+
+		@REST(params = { "length", "stamp" })
 		public String convertIntMethod(int length, long theStamp) {
 			return "the data: " + length + " " + theStamp;
 		}
 	}
-	
+
 	public static class TestParameters implements Parameters {
 		private final HashMap<String, String> map;
 
-		public TestParameters(String ...pairs) {
+		public TestParameters(String... pairs) {
 			this.map = new HashMap<String, String>();
 			for (int index = 0; index < pairs.length; index += 2) {
 				map.put(pairs[index], pairs[index + 1]);
@@ -67,7 +83,7 @@ public class TestRESTMethodFinder {
 		public String get(String name) {
 			return map.get(name);
 		}
-		
+
 		public int getSize() {
 			return map.size();
 		}
