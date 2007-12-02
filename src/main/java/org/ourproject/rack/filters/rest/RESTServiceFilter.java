@@ -52,11 +52,13 @@ public class RESTServiceFilter extends InjectedFilter {
 		Matcher matcher = pattern.matcher(relativeURL);
 		matcher.find();
 		String methodName = matcher.group(1);
-		log.debug("JSON METHOD: " + methodName + " on: " + serviceClass.getSimpleName());
+		log.debug("JSON METHOD: '" + methodName + "' on: " + serviceClass.getSimpleName());
 		RESTMethod rest = methodFinder.findMethod(methodName, new ParametersAdapter(request), serviceClass);
 		if (rest != null && rest.invoke(getInstance(serviceClass))) {
 			String output = serializer.serialize(rest.getResponse(), rest.getFormat());
 			write(response, output);
+		} else {
+			chain.doFilter(request, response);
 		}
 	}
 

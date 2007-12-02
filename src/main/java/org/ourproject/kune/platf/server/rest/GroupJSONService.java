@@ -17,12 +17,12 @@ public class GroupJSONService {
 	}
 
 	@REST(params={"query"})
-	List<Group> search(String search) {
+	public List<Group> search(String search) {
 		return manager.search(search);
 	}
 
 	@REST(params={"query", "fisrt", "max"})
-	List<Group> search(String search, Integer firstResult, Integer maxResults) {
+	public List<Group> search(String search, Integer firstResult, Integer maxResults) {
 		return manager.search(search, firstResult, maxResults);
 	}
 }
