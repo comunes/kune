@@ -3,7 +3,6 @@ package org.ourproject.rack.filters.rest;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import org.ourproject.rack.filters.rest.Parameters;
 
 public class JsonMethod {
 	private final Method method;

@@ -1,6 +1,5 @@
 package org.ourproject.rack.filters.rest;
 
-import org.ourproject.rack.filters.rest.Parameters;
 
 
 public interface RESTMethodFinder {
