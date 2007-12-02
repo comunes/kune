@@ -8,6 +8,10 @@ import java.util.HashMap;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.ourproject.rack.filters.rest.DefaultJSONMethodFinder;
+import org.ourproject.rack.filters.rest.JSONMethod;
+import org.ourproject.rack.filters.rest.JSONMethodFinder;
+import org.ourproject.rack.filters.rest.JsonMethod;
 
 public class TestJSONMethodFinder {
 	

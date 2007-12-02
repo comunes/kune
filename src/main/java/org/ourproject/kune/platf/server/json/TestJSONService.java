@@ -2,7 +2,7 @@ package org.ourproject.kune.platf.server.json;
 
 import java.util.Date;
 
-import org.ourproject.rack.filters.json.JSONMethod;
+import org.ourproject.rack.filters.rest.JSONMethod;
 
 import com.google.inject.Inject;
 

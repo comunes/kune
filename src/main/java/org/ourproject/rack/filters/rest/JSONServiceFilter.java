@@ -1,4 +1,4 @@
-package org.ourproject.rack.filters.json;
+package org.ourproject.rack.filters.rest;
 
 import java.io.IOException;
 import java.lang.reflect.Method;

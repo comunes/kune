@@ -1,4 +1,4 @@
-package org.ourproject.rack.filters.json;
+package org.ourproject.rack.filters.rest;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

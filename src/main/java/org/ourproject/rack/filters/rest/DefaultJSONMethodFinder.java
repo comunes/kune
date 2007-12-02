@@ -1,6 +1,8 @@
-package org.ourproject.rack.filters.json;
+package org.ourproject.rack.filters.rest;
 
 import java.lang.reflect.Method;
+
+import org.ourproject.rack.filters.json.Parameters;
 
 public class DefaultJSONMethodFinder implements JSONMethodFinder {
 

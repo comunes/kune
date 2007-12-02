@@ -1,7 +1,7 @@
 package org.ourproject.rack.dock;
 
-import org.ourproject.rack.filters.json.DefaultJSONMethodFinder;
-import org.ourproject.rack.filters.json.JSONMethodFinder;
+import org.ourproject.rack.filters.rest.DefaultJSONMethodFinder;
+import org.ourproject.rack.filters.rest.JSONMethodFinder;
 
 import com.google.inject.AbstractModule;
 
