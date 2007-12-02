@@ -10,8 +10,7 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.inject.Module;
 
 public class RackBuilder {
-	
-	
+
 	public static class RackDockBuilder {
 		private String regex;
 		private final Rack rack;
@@ -21,13 +20,15 @@ public class RackBuilder {
 			this.regex = regex;
 		}
 
-		public RackDockBuilder install(Filter filter) {
-			RegexDock dock = new RegexDock(regex);
-			dock.setFilter(filter);
-			rack.add(dock);
+		public RackDockBuilder install(Filter... filters) {
+			for (Filter filter : filters) {
+				RegexDock dock = new RegexDock(regex);
+				dock.setFilter(filter);
+				rack.add(dock);
+			}
 			return this;
 		}
-		
+
 	}
 
 	private final Rack rack;
@@ -35,7 +36,7 @@ public class RackBuilder {
 	public RackBuilder() {
 		this.rack = new Rack();
 	}
-	
+
 	public RackBuilder use(Module... list) {
 		for (Module m : list) {
 			rack.add(m);
@@ -47,16 +48,15 @@ public class RackBuilder {
 		return new RackDockBuilder(rack, regex);
 	}
 
-
 	public RackBuilder installGWTServices(String root, Class<? extends RemoteService>... serviceClasses) {
-		
+
 		for (Class<? extends RemoteService> serviceClass : serviceClasses) {
 			String simpleName = serviceClass.getSimpleName();
 			RegexDock dock = new RegexDock(root + simpleName + "$");
 			dock.setFilter(new GWTServiceFilter(serviceClass));
 			rack.add(dock);
 		}
-		
+
 		return this;
 	}
 
