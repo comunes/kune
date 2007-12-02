@@ -20,54 +20,41 @@ import com.google.inject.Inject;
 public class RESTServiceFilter extends InjectedFilter {
 	private static final Log log = LogFactory.getLog(RESTServiceFilter.class);
 
-	public static class ParametersAdapter implements Parameters {
-		private final ServletRequest request;
-
-		public ParametersAdapter(ServletRequest request) {
-			this.request = request;
-		}
-
-		public String get(String name) {
-			return request.getParameter(name);
-		}
-		
-	}
-	
 	private final Pattern pattern;
 	private final Class<?> serviceClass;
-	@Inject
-	private RESTMethodFinder methodFinder;
-	@Inject
-	private RESTSerializer serializer;
+
+	@Inject 
+	private TransactionalServiceExecutor transactionalFilter;
 
 	public RESTServiceFilter(String pattern, Class<?> serviceClass) {
 		this.serviceClass = serviceClass;
 		this.pattern = Pattern.compile(pattern);
 	}
+
 	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
 			ServletException {
-
-		String relativeURL = RackHelper.getRelativeURL(request);
-		Matcher matcher = pattern.matcher(relativeURL);
-		matcher.find();
-		String methodName = matcher.group(1);
+		
+		String methodName = getMethodName(request);
+		ParametersAdapter parameters = new ParametersAdapter(request);
 		log.debug("JSON METHOD: '" + methodName + "' on: " + serviceClass.getSimpleName());
-		RESTMethod rest = methodFinder.findMethod(methodName, new ParametersAdapter(request), serviceClass);
-		if (rest != null && rest.invoke(getInstance(serviceClass))) {
-			String output = serializer.serialize(rest.getResponse(), rest.getFormat());
-			write(response, output);
+
+		Object output = transactionalFilter.doService(serviceClass, methodName, parameters, getInstance(serviceClass));
+		if (output != null) {
+			PrintWriter writer = response.getWriter();
+			writer.print(output);
+			writer.flush();
 		} else {
 			chain.doFilter(request, response);
 		}
 	}
 
-	private void write(ServletResponse response, String output) throws IOException {
-		PrintWriter writer = response.getWriter();
-		writer.print(output);
-		writer.flush();
+
+	private String getMethodName(ServletRequest request) {
+		String relativeURL = RackHelper.getRelativeURL(request);
+		Matcher matcher = pattern.matcher(relativeURL);
+		matcher.find();
+		String methodName = matcher.group(1);
+		return methodName;
 	}
-
-
-
 }

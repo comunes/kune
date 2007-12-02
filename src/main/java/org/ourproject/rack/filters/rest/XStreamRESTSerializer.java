@@ -10,7 +10,8 @@ public class XStreamRESTSerializer implements RESTSerializer {
 
 	public XStreamRESTSerializer() {
 		serializers = new HashMap<String, XStream>(2);
-		serializers.put(RESTMethod.FORMAT_JSON, new XStream(new JettisonMappedXmlDriver()));
+		XStream stream = new XStream(new JettisonMappedXmlDriver());
+		serializers.put(RESTMethod.FORMAT_JSON, stream);
 		serializers.put(RESTMethod.FORMAT_XML, new XStream());
 		
 	}
@@ -18,5 +19,4 @@ public class XStreamRESTSerializer implements RESTSerializer {
 	public String serialize(Object target, String format) {
 		return serializers.get(format).toXML(target);
 	}
-
 }
