@@ -38,41 +38,42 @@ import org.ourproject.rack.filters.rest.RESTServicesModule;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
+import com.google.inject.Module;
 import com.google.inject.Scope;
-import com.google.inject.Scopes;
 import com.google.inject.matcher.Matchers;
 import com.google.inject.servlet.GuiceFilter;
+import com.google.inject.servlet.ServletModule;
 import com.google.inject.servlet.SessionScoped;
 import com.wideplay.warp.jpa.JpaUnit;
 
 public class KuneRackModule implements RackModule {
-	private final String jpaUnit;
-	private final String propertiesFileName;
-	private final Scope sessionScope;
+
+	private Module configModule;
 
 	public KuneRackModule(final String jpaUnit, final String propertiesFileName, final Scope sessionScope) {
-		this.jpaUnit = jpaUnit;
-		this.propertiesFileName = propertiesFileName;
-		this.sessionScope = sessionScope;
+		configModule = new AbstractModule() {
+			public void configure() {
+				bindInterceptor(Matchers.any(), new NotInObject(), new LoggerMethodInterceptor());
+				bindConstant().annotatedWith(JpaUnit.class).to(jpaUnit);
+				bindConstant().annotatedWith(PropertiesFileName.class).to(propertiesFileName);
+				if (sessionScope != null) {
+					bindScope(SessionScoped.class, sessionScope);
+				}	
+			}
+		};
 	}
 
 	public KuneRackModule() {
-		this("development", "kune.properties", Scopes.SINGLETON);
+		this("development", "kune.properties", null);
 	}
 
 	public void configure(RackBuilder builder) {
+		builder.use(new ServletModule ());
 		builder.use(new PlatformServerModule());
 		builder.use(new DocumentServerModule());
 		builder.use(new ChatServerModule());
 		builder.use(new RESTServicesModule());
-		builder.use(new AbstractModule() {
-			public void configure() {
-				bindInterceptor(Matchers.any(), new NotInObject(), new LoggerMethodInterceptor());
-				bindScope(SessionScoped.class, sessionScope);
-				bindConstant().annotatedWith(JpaUnit.class).to(jpaUnit);
-				bindConstant().annotatedWith(PropertiesFileName.class).to(propertiesFileName);
-			}
-		});
+		builder.use(configModule);
 
 		builder.add(KuneContainerListener.class);
 
