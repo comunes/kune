@@ -93,7 +93,7 @@ public class RackBuilder {
 		return this;
 	}
 
-	public void installJSonServices(String root, Class<?>... serviceClasses) {
+	public void installRESTServices(String root, Class<?>... serviceClasses) {
 		for (Class<?> serviceClass : serviceClasses) {
 			String simpleName = serviceClass.getSimpleName();
 			String pattern = root + simpleName + "/(.*)$";

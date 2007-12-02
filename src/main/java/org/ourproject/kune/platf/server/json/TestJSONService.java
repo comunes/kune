@@ -2,7 +2,7 @@ package org.ourproject.kune.platf.server.json;
 
 import java.util.Date;
 
-import org.ourproject.rack.filters.rest.RESTMethod;
+import org.ourproject.rack.filters.rest.REST;
 
 import com.google.inject.Inject;
 
@@ -12,12 +12,12 @@ public class TestJSONService {
 	public TestJSONService() {
 	}
 
-	@RESTMethod(params = { "value" })
+	@REST(params = { "value" }, format="json")
 	public String test(String value) {
 		return "The value is " + value;
 	}
 
-	@RESTMethod(params = { "name", "value" })
+	@REST(params = { "name", "value" }, format="json")
 	public SimpleObject test(String theName, String theValue) {
 		return new SimpleObject(theName, theValue, new Date());
 	}

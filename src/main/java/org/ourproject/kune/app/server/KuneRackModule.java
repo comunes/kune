@@ -87,7 +87,7 @@ public class KuneRackModule implements RackModule {
 		
 		builder.installGWTServices("^/kune/", SiteService.class, GroupService.class, ContentService.class, 
 				UserService.class, SocialNetworkService.class);
-		builder.installJSonServices("^/kune/json/", TestJSONService.class);
+		builder.installRESTServices("^/kune/json/", TestJSONService.class);
 		
 		builder.at("^/kune/(.*)$").install(new ForwardFilter("^/kune/(.*)$", "/gwt/org.ourproject.kune.app.Kune/{0}"));
 	}

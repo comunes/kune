@@ -30,21 +30,21 @@ public class TestRESTMethodFinder {
 	
 	@Test
 	public void conversionTest() {
-		JsonMethod method = finder.findMethod("convertIntMethod", new TestParameters("length", "12"), MyTestService.class);
+		JsonMethod method = finder.findMethod("convertIntMethod", new TestParameters("length", "12", "stamp", "13"), MyTestService.class);
 		assertNotNull(method);
 		assertTrue(method.invoke(service));
-		assertEquals("the length: 12", method.getResponse().toString());
+		assertEquals("the data: 12 13", method.getResponse().toString());
 	}
 	
 	public static class MyTestService {
-		@RESTMethod(params={"name"})
+		@REST(params={"name"})
 		public String simpleMethod(String name) {
 			return "the name: " + name;
 		}
 		
-		@RESTMethod(params={"length"}) 
-		public String convertIntMethod(int length) {
-			return "the length: " + length;
+		@REST(params={"length", "stamp"}) 
+		public String convertIntMethod(int length, long theStamp) {
+			return "the data: " + length + " " + theStamp;
 		}
 	}
 	

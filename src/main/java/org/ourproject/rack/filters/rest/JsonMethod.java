@@ -43,6 +43,8 @@ public class JsonMethod {
 			return stringValue;
 		} else if (type.equals(Integer.TYPE) || type.equals(Integer.class)) {
 			return Integer.parseInt(stringValue);
+		} else if (type.equals(Long.TYPE) || type.equals(Long.class)) {
+			return Long.parseLong(stringValue);
 		} else {
 			throw new RuntimeException("unable to convert parameter in JSON method to type: " + type);
 		}
