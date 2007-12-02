@@ -74,7 +74,7 @@ public class KuneRackModule implements RackModule {
 			}
 		});
 
-		builder.addListener(KuneContainerListener.class);
+		builder.add(KuneContainerListener.class);
 
 		builder.at(".*").install(new LogFilter());
 		builder.at(".*").install(new GuiceFilter());

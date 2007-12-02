@@ -65,10 +65,12 @@ public class RackServletFilter implements Filter {
 		RackModule module = getModule(filterConfig);
 		RackBuilder builder = new RackBuilder();
 		module.configure(builder);
-		Injector injector = installInjector(filterConfig, builder);
-		startContainerListeners(builder.getListeners(), injector);
 		
-		docks = builder.getDocks();
+		Rack rack = builder.getRack();
+		Injector injector = installInjector(filterConfig, rack);
+		startContainerListeners(rack.getListeners(), injector);
+		
+		docks = rack.getDocks();
 		initFilters(filterConfig);
 		log.debug("INITIALIZATION DONE!");
 	}
@@ -89,8 +91,8 @@ public class RackServletFilter implements Filter {
 		}
 	}
 
-	private Injector installInjector(FilterConfig filterConfig, RackBuilder builder) {
-		Injector injector = Guice.createInjector(builder.getGuiceModules());
+	private Injector installInjector(FilterConfig filterConfig, Rack rack) {
+		Injector injector = Guice.createInjector(rack.getGuiceModules());
 		filterConfig.getServletContext().setAttribute(INJECTOR_ATTRIBUTE, injector);
 		return injector;
 	}

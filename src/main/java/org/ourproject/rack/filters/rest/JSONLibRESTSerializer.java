@@ -11,9 +11,12 @@ public class JSONLibRESTSerializer implements RESTSerializer {
 		config = new JsonConfig();
 		config.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
 	}
-	
+
 	public String serialize(Object target, String format) {
-		return JSONSerializer.toJSON(target, config).toString();
+		if (format.equals(RESTMethod.FORMAT_JSON))
+			return JSONSerializer.toJSON(target, config).toString();
+		else
+			throw new RuntimeException("format not implemented!");
 	}
 
 }
