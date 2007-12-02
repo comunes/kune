@@ -13,11 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ourproject.rack.RackHelper;
-import org.ourproject.rack.filters.AbstractFilter;
+import org.ourproject.rack.filters.InjectedFilter;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 
-public class GWTServiceFilter extends AbstractFilter {
+public class GWTServiceFilter extends InjectedFilter {
 	public static final Log log = LogFactory.getLog(GWTServiceFilter.class);
 	
 	private final Class<? extends RemoteService> serviceClass;
