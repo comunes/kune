@@ -28,13 +28,13 @@ import org.ourproject.kune.platf.server.tool.ToolRegistry;
 import org.ourproject.kune.sitebar.client.rpc.UserService;
 import org.ourproject.rack.ContainerListener;
 import org.ourproject.rack.RackBuilder;
-import org.ourproject.rack.RackGuiceModule;
 import org.ourproject.rack.RackModule;
 import org.ourproject.rack.filters.ApplicationListener;
 import org.ourproject.rack.filters.ForwardFilter;
 import org.ourproject.rack.filters.ListenerFilter;
 import org.ourproject.rack.filters.LogFilter;
 import org.ourproject.rack.filters.RedirectFilter;
+import org.ourproject.rack.filters.rest.RESTServicesModule;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
@@ -64,7 +64,7 @@ public class KuneRackModule implements RackModule {
 		builder.use(new PlatformServerModule());
 		builder.use(new DocumentServerModule());
 		builder.use(new ChatServerModule());
-		builder.use(new RackGuiceModule());
+		builder.use(new RESTServicesModule());
 		builder.use(new AbstractModule() {
 			public void configure() {
 				bindInterceptor(Matchers.any(), new NotInObject(), new LoggerMethodInterceptor());
