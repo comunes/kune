@@ -21,19 +21,19 @@ import org.ourproject.kune.platf.server.KunePersistenceService;
 import org.ourproject.kune.platf.server.LoggerMethodInterceptor;
 import org.ourproject.kune.platf.server.PlatformServerModule;
 import org.ourproject.kune.platf.server.UserSession;
-import org.ourproject.kune.platf.server.json.TestJSONService;
-import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.properties.PropertiesFileName;
+import org.ourproject.kune.platf.server.rest.GroupJSONService;
+import org.ourproject.kune.platf.server.rest.TestJSONService;
 import org.ourproject.kune.platf.server.tool.ToolRegistry;
 import org.ourproject.kune.sitebar.client.rpc.UserService;
 import org.ourproject.rack.ContainerListener;
 import org.ourproject.rack.RackBuilder;
+import org.ourproject.rack.RackGuiceModule;
 import org.ourproject.rack.RackModule;
-import org.ourproject.rack.dock.RackGuiceModule;
 import org.ourproject.rack.filters.ApplicationListener;
 import org.ourproject.rack.filters.ForwardFilter;
 import org.ourproject.rack.filters.ListenerFilter;
-import org.ourproject.rack.filters.LogDocker;
+import org.ourproject.rack.filters.LogFilter;
 import org.ourproject.rack.filters.RedirectFilter;
 
 import com.google.inject.AbstractModule;
@@ -76,7 +76,7 @@ public class KuneRackModule implements RackModule {
 
 //		builder.addListener(KuneContainerListener.class);
 
-		builder.at(".*").install(new LogDocker());
+		builder.at(".*").install(new LogFilter());
 		builder.at(".*").install(new GuiceFilter());
 
 		builder.at("^/kune$").install(new RedirectFilter("/kune/"));
@@ -87,7 +87,7 @@ public class KuneRackModule implements RackModule {
 		
 		builder.installGWTServices("^/kune/", SiteService.class, GroupService.class, ContentService.class, 
 				UserService.class, SocialNetworkService.class);
-		builder.installRESTServices("^/kune/json/", TestJSONService.class);
+		builder.installRESTServices("^/kune/json/", TestJSONService.class, GroupJSONService.class);
 		
 		builder.at("^/kune/(.*)$").install(new ForwardFilter("^/kune/(.*)$", "/gwt/org.ourproject.kune.app.Kune/{0}"));
 	}
