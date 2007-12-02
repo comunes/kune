@@ -5,7 +5,7 @@ import java.lang.annotation.RetentionPolicy;
 
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface JSONMethod {
-	String name();
+public @interface RESTMethod {
+	String format() default "json";
 	String[] params();
 }
