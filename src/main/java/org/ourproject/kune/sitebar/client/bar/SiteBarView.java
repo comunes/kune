@@ -71,4 +71,8 @@ public interface SiteBarView extends View {
     void centerNewGroupDialog();
 
     void showAlertMessage(String message);
+
+    void setLanguages(List languages);
+
+    void setCountries(List countries);
 }

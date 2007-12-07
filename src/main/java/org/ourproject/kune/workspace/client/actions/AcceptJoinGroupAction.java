@@ -23,6 +23,7 @@ import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.sitebar.client.Site;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -45,9 +46,7 @@ public class AcceptJoinGroupAction implements Action {
 
             public void onSuccess(final Object result) {
                 Site.hideProgress();
-                // i18n
-                Site.info("Member accepted");
-                // TODO: Reload SocialNetwork info only
+                Site.info(Kune.I18N.t("Member accepted"));
                 services.stateManager.reloadSocialNetwork();
             }
         });

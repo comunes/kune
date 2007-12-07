@@ -19,27 +19,27 @@
 
 package org.ourproject.kune.workspace.client.socialnet;
 
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
 public class MemberAction {
 
-    // i18n
-    public final static MemberAction GOTO_GROUP_COMMAND = new MemberAction("Visit this member homepage",
-	    WorkspaceEvents.GOTO);
+    public final static MemberAction GOTO_GROUP_COMMAND = new MemberAction(Kune.I18N.t("Visit this member homepage"),
+            WorkspaceEvents.GOTO);
 
     private final String text;
     private final String action;
 
     public MemberAction(final String text, final String action) {
-	this.text = text;
-	this.action = action;
+        this.text = text;
+        this.action = action;
     }
 
     public String getText() {
-	return text;
+        return text;
     }
 
     public String getAction() {
-	return action;
+        return action;
     }
 }

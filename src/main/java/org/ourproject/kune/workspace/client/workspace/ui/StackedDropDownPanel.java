@@ -205,7 +205,7 @@ public class StackedDropDownPanel extends DropDownPanel {
         link.addStyleName("kune-StackedDropDownPanelLink");
         link.addClickListener(new ClickListener() {
             public void onClick(final Widget arg0) {
-                presenter.doAction(action, null);
+                presenter.doAction(action, null, null);
 
             }
         });
@@ -342,7 +342,7 @@ public class StackedDropDownPanel extends DropDownPanel {
             setStyleName("kune-StackSubItemLabel");
             actions.setStyleName("kune-StackSubItemActions");
             for (int i = 0; i < memberActions.length; i++) {
-                addAction(memberActions[i], name);
+                addAction(memberActions[i], name, null);
             }
         }
 
@@ -356,14 +356,14 @@ public class StackedDropDownPanel extends DropDownPanel {
             setMenu();
         }
 
-        public void addAction(final StackSubItemAction memberAction, final String param) {
+        public void addAction(final StackSubItemAction memberAction, final String param1, final String param2) {
             String itemHtml = "";
             AbstractImagePrototype icon = memberAction.getIcon();
             if (icon != null) {
                 itemHtml = icon.getHTML();
             }
             itemHtml += memberAction.getText();
-            actions.addItem(itemHtml, true, createCommand(memberAction.getAction(), param));
+            actions.addItem(itemHtml, true, createCommand(memberAction.getAction(), param1, param2));
         }
 
         private void setMenu() {
@@ -371,10 +371,10 @@ public class StackedDropDownPanel extends DropDownPanel {
             ((MenuItem) getItems().get(0)).setText(label);
         }
 
-        private Command createCommand(final String action, final String param) {
+        private Command createCommand(final String action, final String param1, final String param2) {
             return new Command() {
                 public void execute() {
-                    presenter.doAction(action, param);
+                    presenter.doAction(action, param1, param2);
                 }
             };
         }

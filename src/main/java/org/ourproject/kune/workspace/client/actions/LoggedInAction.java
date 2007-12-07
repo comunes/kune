@@ -24,6 +24,7 @@ import java.util.Date;
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
+import org.ourproject.kune.platf.client.services.I18nUITranslation;
 import org.ourproject.kune.sitebar.client.Site;
 
 import com.google.gwt.user.client.Cookies;
@@ -39,6 +40,7 @@ public class LoggedInAction implements Action {
         Site.sitebar.showLoggedUser(userInfoDTO);
         services.stateManager.reload();
         services.stateManager.reloadSocialNetwork();
+        I18nUITranslation.getInstance().setLexicon(userInfoDTO.getLanguage().getCode(), userInfoDTO.getLexicon());
     }
 
     private void setCookie(final UserInfoDTO userInfoDTO) {

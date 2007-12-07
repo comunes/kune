@@ -19,6 +19,7 @@
 
 package org.ourproject.kune.workspace.client.socialnet.ui;
 
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
@@ -34,22 +35,21 @@ public class GroupMembersPanel extends StackedDropDownPanel implements GroupMemb
     private final Images img = Images.App.getInstance();
 
     public GroupMembersPanel(final AbstractPresenter presenter) {
-        super(presenter, "#00D4AA", "Group members", "People and groups collaborating in this group", COUNTS_VISIBLE);
+        super(presenter, "#00D4AA", Kune.I18N.t("Group members"), Kune.I18N
+                .t("People and groups collaborating in this group"), COUNTS_VISIBLE);
     }
 
     public void addJoinLink() {
-        // i18n
-        super.addBottomLink(img.addGreen(), "Request to join", "fixme", WorkspaceEvents.REQ_JOIN_GROUP);
+        super.addBottomLink(img.addGreen(), Kune.I18N.t("Request to join"), "fixme", WorkspaceEvents.REQ_JOIN_GROUP);
     }
 
     public void addUnjoinLink() {
-        super.addBottomLink(img.del(), "Unjoin this group", "fixme", WorkspaceEvents.UNJOIN_GROUP);
+        super.addBottomLink(img.del(), Kune.I18N.t("Unjoin this group"), "fixme", WorkspaceEvents.UNJOIN_GROUP);
     }
 
     public void addAddMemberLink() {
         // FIXME: add new event
-        // i18n
-        super.addBottomLink(img.addGreen(), "Add member", "fixme", WorkspaceEvents.ADD_ADMIN_MEMBER);
+        super.addBottomLink(img.addGreen(), Kune.I18N.t("Add member"), "fixme", WorkspaceEvents.ADD_ADMIN_MEMBER);
     }
 
     public void clear() {
@@ -73,6 +73,14 @@ public class GroupMembersPanel extends StackedDropDownPanel implements GroupMemb
         }
 
         super.addStackSubItem(categoryName, img.groupDefIcon(), name, title, subItems);
+    }
+
+    public void show() {
+        this.setVisible(true);
+    }
+
+    public void hide() {
+        this.setVisible(false);
     }
 
     private AbstractImagePrototype getIcon(final String event) {
@@ -102,14 +110,6 @@ public class GroupMembersPanel extends StackedDropDownPanel implements GroupMemb
             return img.arrowUpGreen();
         }
         throw new IndexOutOfBoundsException("Event unknown in GroupMembersPanel");
-    }
-
-    public void show() {
-        this.setVisible(true);
-    }
-
-    public void hide() {
-        this.setVisible(false);
     }
 
 }

@@ -21,6 +21,7 @@
 package org.ourproject.kune.workspace.client.editor;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.services.Kune;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Timer;
@@ -121,16 +122,16 @@ public class TextEditorPanel extends Composite implements TextEditorView {
     }
 
     public void showSaveBeforeDialog() {
-        // i18n
-        MessageBox.confirm("Save confirmation", "Save before close?", new MessageBox.ConfirmCallback() {
-            public void execute(final String btnID) {
-                if (btnID.equals("yes")) {
-                    presenter.onSaveAndClose();
-                } else {
-                    presenter.onCancelConfirmed();
-                }
-            }
-        });
+        MessageBox.confirm(Kune.I18N.t("Save confirmation"), Kune.I18N.t("Save before close?"),
+                new MessageBox.ConfirmCallback() {
+                    public void execute(final String btnID) {
+                        if (btnID.equals("yes")) {
+                            presenter.onSaveAndClose();
+                        } else {
+                            presenter.onCancelConfirmed();
+                        }
+                    }
+                });
 
     }
 

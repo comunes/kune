@@ -19,6 +19,7 @@
 
 package org.ourproject.kune.platf.client.ui.rate;
 
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
@@ -87,17 +88,16 @@ public class RateItPresenter {
     }
 
     private void setDesc(final int rateTruncated) {
-        // i18n
         if (rateTruncated >= 0 && rateTruncated <= 1) {
-            view.setDesc("Poor");
+            view.setDesc(Kune.I18N.t("Poor"));
         } else if (rateTruncated == 2) {
-            view.setDesc("Below average");
+            view.setDesc(Kune.I18N.t("Below average"));
         } else if (rateTruncated == 3) {
-            view.setDesc("Average");
+            view.setDesc(Kune.I18N.t("Average"));
         } else if (rateTruncated == 4) {
-            view.setDesc("Above average");
+            view.setDesc(Kune.I18N.t("Above average"));
         } else if (rateTruncated == 5) {
-            view.setDesc("Excellent");
+            view.setDesc(Kune.I18N.t("Excellent"));
         } else {
             view.setDesc("");
         }

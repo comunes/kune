@@ -34,6 +34,7 @@ import org.ourproject.kune.workspace.client.actions.DenyJoinGroupAction;
 import org.ourproject.kune.workspace.client.actions.DetachFromExtensionPointAction;
 import org.ourproject.kune.workspace.client.actions.DisableRateItAction;
 import org.ourproject.kune.workspace.client.actions.EnableRateItAction;
+import org.ourproject.kune.workspace.client.actions.GetTranslationAction;
 import org.ourproject.kune.workspace.client.actions.GotoAction;
 import org.ourproject.kune.workspace.client.actions.InitAction;
 import org.ourproject.kune.workspace.client.actions.InitDataReceivedAction;
@@ -71,5 +72,6 @@ public class WorkspaceClientModule implements ClientModule {
         register.addAction(WorkspaceEvents.ATTACH_TO_EXT_POINT, new AttachToExtensionPointAction());
         register.addAction(WorkspaceEvents.DETACH_FROM_EXT_POINT, new DetachFromExtensionPointAction());
         register.addAction(WorkspaceEvents.CLEAR_EXT_POINT, new ClearExtensionPointAction());
+        register.addAction(WorkspaceEvents.GET_TRANSLATION, new GetTranslationAction());
     }
 }

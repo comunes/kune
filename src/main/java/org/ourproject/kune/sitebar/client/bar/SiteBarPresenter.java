@@ -20,10 +20,13 @@
 
 package org.ourproject.kune.sitebar.client.bar;
 
+import java.util.List;
+
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.newgroup.NewGroupListener;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.login.LoginListener;
 import org.ourproject.kune.sitebar.client.rpc.UserService;
@@ -63,8 +66,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
             view.centerNewGroupDialog();
         } else {
             returnToPreviousState();
-            // i18n
-            Site.info("Sign in or register to create a group");
+            Site.info(Kune.I18N.t("Sign in or register to create a group"));
         }
     }
 
@@ -167,6 +169,14 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 
     public void changeState(final StateToken token) {
         listener.onChangeState(token);
+    }
+
+    public void setLanguages(final List languages) {
+        view.setLanguages(languages);
+    }
+
+    public void setCountries(final List countries) {
+        view.setCountries(countries);
     }
 
     protected void onSearchLostFocus(final String search) {

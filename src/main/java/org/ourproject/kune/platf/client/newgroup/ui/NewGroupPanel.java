@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.platf.client.newgroup.ui;
 
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.license.LicenseChoose;
 import org.ourproject.kune.platf.client.license.LicenseChoosePanel;
@@ -42,6 +43,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.EventCallback;
 import com.gwtext.client.core.EventObject;
+import com.gwtext.client.core.Position;
 import com.gwtext.client.widgets.form.CheckboxConfig;
 import com.gwtext.client.widgets.form.FieldSetConfig;
 import com.gwtext.client.widgets.form.Form;
@@ -53,6 +55,8 @@ import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.form.TextFieldConfig;
 
 public class NewGroupPanel extends WizardDialog implements NewGroupView {
+    private static final String MUST_BE_BETWEEN_3_AND_15 = "Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes";
+
     private static final Translate t = SiteBarTrans.getInstance().t;
 
     private static final String SHORTNAME_FIELD = "short_name";
@@ -73,9 +77,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
     private final SiteMessagePanel messagesPanel;
 
     public NewGroupPanel(final NewGroupPresenter presenter) {
-        // i18n
-        // 550, 460
-        super("Register a new Group", true, false, 470, 440, new WizardListener() {
+        super(Kune.I18N.t("Register a new Group"), true, false, 470, 440, new WizardListener() {
             public void onBack() {
                 presenter.onBack();
             }
@@ -103,17 +105,17 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         HorizontalPanel newGroupInitialDataHP = new HorizontalPanel();
         VerticalPanel chooseLicenseVP = new VerticalPanel();
         HorizontalPanel chooseLicenseHP = new HorizontalPanel();
-        // i18n
         Images img = Images.App.getInstance();
         newGroupInitialDataHP.add(img.step1().createImage());
-        Label step1Label = new Label("Please fill this form and follow the next steps to register a new group:");
+        Label step1Label = new Label(Kune.I18N
+                .t("Please fill this form and follow the next steps to register a new group:"));
         newGroupInitialDataHP.add(step1Label);
         newGroupInitialDataVP.add(newGroupInitialDataHP);
         newGroupInitialDataVP.add(newGroupInitialDataForm);
         chooseLicenseHP.add(img.step2().createImage());
         HTML step2Label = new HTML(
-                "Select a license to share your group contents with other people. "
-                        + "We recomend <a href='http://en.wikipedia.org/copyleft' target='_blank'>copyleft</a> licenses for practical works.");
+                Kune.I18N
+                        .t("Select a license to share your group contents with other people. We recomend <a href='http://en.wikipedia.org/copyleft' target='_blank'>copyleft</a> licenses for practical works."));
         chooseLicenseHP.add(step2Label);
         Label licenseTypeLabel = new Label("Choose a license type:");
         chooseLicenseVP.add(chooseLicenseHP);
@@ -211,8 +213,8 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
             {
                 setWidth(400);
                 setLabelWidth(100);
-                setLabelAlign("right");
-                setButtonAlign("right");
+                setLabelAlign(Position.RIGHT);
+                setButtonAlign(Position.RIGHT);
             }
         });
 
@@ -226,10 +228,9 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
                 setAllowBlank(false);
                 setMsgTarget("side");
                 setRegex("^[a-z0-9_\\-]+$");
-                // i18n
-                setMinLengthText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
-                setMaxLengthText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
-                setRegexText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
+                setMinLengthText(Kune.I18N.t(MUST_BE_BETWEEN_3_AND_15));
+                setMaxLengthText(Kune.I18N.t(MUST_BE_BETWEEN_3_AND_15));
+                setRegexText(Kune.I18N.t(MUST_BE_BETWEEN_3_AND_15));
             }
         });
         form.add(shortNameField);

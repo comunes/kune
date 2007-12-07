@@ -19,6 +19,7 @@
 
 package org.ourproject.kune.workspace.client.socialnet;
 
+import org.ourproject.kune.platf.client.services.Kune;
 import java.util.Iterator;
 import java.util.List;
 
@@ -37,11 +38,10 @@ import org.ourproject.kune.workspace.client.workspace.ParticipationComponent;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class ParticipationPresenter implements ParticipationComponent, AbstractPresenter {
-    private static final String ADMIN_SUBTITLE = "admin in:";
+public class ParticipationPresenter extends AbstractPresenter implements ParticipationComponent {
+    private static final String ADMIN_SUBTITLE = Kune.I18N.t("admin in:");
 
-    // i18n
-    private final static MemberAction GOTO_GROUP_COMMAND = new MemberAction("Visit this group homepage",
+    private final static MemberAction GOTO_GROUP_COMMAND = new MemberAction(Kune.I18N.t("Visit this group homepage"),
             WorkspaceEvents.GOTO);
 
     private ParticipationView view;
@@ -79,7 +79,7 @@ public class ParticipationPresenter implements ParticipationComponent, AbstractP
         view.setDropDownContentVisible(false);
         view.clear();
         MemberAction[] adminsActions = {
-                new MemberAction("Don't participate more in this group", WorkspaceEvents.UNJOIN_GROUP),
+                new MemberAction(Kune.I18N.t("Don't participate more in this group"), WorkspaceEvents.UNJOIN_GROUP),
                 GOTO_GROUP_COMMAND };
         MemberAction[] collabActions = adminsActions;
         MemberAction[] viewerActions = { GOTO_GROUP_COMMAND };
@@ -121,16 +121,14 @@ public class ParticipationPresenter implements ParticipationComponent, AbstractP
             }
         }
         if (numAdmins > 0) {
-            // i18n
-            view.addCategory(ADMIN_SUBTITLE, "Admisnistrate these groups");
+            view.addCategory(ADMIN_SUBTITLE, Kune.I18N.t("Administrate these groups"));
             iteraList(ADMIN_SUBTITLE, groupsIsAdmin, actions);
-            collabTitle = "and as collaborator in:";
+            collabTitle = Kune.I18N.t("and as collaborator in:");
         } else {
-            collabTitle = "collaborator in:";
+            collabTitle = Kune.I18N.t("collaborator in:");
         }
         if (numCollaborators > 0) {
-            // i18n
-            view.addCategory(collabTitle, "Collaborate in these groups");
+            view.addCategory(collabTitle, Kune.I18N.t("Collaborate in these groups"));
             iteraList(collabTitle, groupsIsCollab, actions);
         }
 

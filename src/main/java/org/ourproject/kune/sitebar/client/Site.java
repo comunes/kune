@@ -20,8 +20,8 @@
 
 package org.ourproject.kune.sitebar.client;
 
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.sitebar.client.bar.SiteBar;
-import org.ourproject.kune.sitebar.client.bar.SiteBarTrans;
 import org.ourproject.kune.sitebar.client.msg.SiteMessage;
 
 public class Site {
@@ -60,13 +60,11 @@ public class Site {
     }
 
     public static void showProgressProcessing() {
-        // i18n
-        sitebar.showProgress(SiteBarTrans.getInstance().t.Processing());
+        sitebar.showProgress(Kune.I18N.t("Processing"));
     }
 
     public static void showProgressLoading() {
-        // i18n
-        sitebar.showProgress("Loading");
+        sitebar.showProgress(Kune.I18N.t("Loading"));
     }
 
     public static void doNewGroup(final String returnToken) {

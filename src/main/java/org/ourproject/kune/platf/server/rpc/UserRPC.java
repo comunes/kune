@@ -81,9 +81,9 @@ public class UserRPC implements RPC, UserService {
 
     @Transactional(type = TransactionType.READ_WRITE, rollbackOn = SerializableException.class)
     public UserInfoDTO createUser(final String shortName, final String longName, final String email,
-            final String passwd, final LicenseDTO license) throws SerializableException {
-        User user;
-        user = userManager.createUser(shortName, longName, email, passwd);
+            final String passwd, final LicenseDTO license, final String language, final String country,
+            final String timezone) throws SerializableException {
+        User user = userManager.createUser(shortName, longName, email, passwd, language, country);
         groupManager.createUserGroup(user);
         return loginUser(user);
     }

@@ -115,12 +115,12 @@ public class Group implements HasId {
         this.admissionType = AdmissionType.Moderated;
     }
 
-    @Finder(query = "from Group")
+    @Finder(query = "FROM Group")
     public List<Group> getAll() {
         return null;
     }
 
-    @Finder(query = "from Group g where g.shortName = :shortName")
+    @Finder(query = "FROM Group g WHERE g.shortName = :shortName")
     public Group findByShortName(@Named("shortName")
     final String shortName) {
         return null;

@@ -1,5 +1,4 @@
 /*
- *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -18,21 +17,22 @@
  *
  */
 
-package org.ourproject.kune.platf.client.sandbox;
+package org.ourproject.kune.workspace.client.socialnet;
 
-import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.platf.client.ui.IconHyperlink;
+import org.ourproject.kune.platf.client.AbstractPresenter;
+import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.workspace.client.workspace.AddGroupMembersComponent;
 
-import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.VerticalPanel;
+public class AddGroupMembersPresenter extends AbstractPresenter implements AddGroupMembersComponent {
 
-public class Sandbox extends Composite {
+    private AddGroupMembersView view;
 
-    public Sandbox() {
-	VerticalPanel vp = new VerticalPanel();
-	initWidget(vp);
-	IconHyperlink hl = new IconHyperlink(Images.App.getInstance().bulletStar(), "hello", "hello");
-	vp.add(hl);
+    public void init(final AddGroupMembersView view) {
+        this.view = view;
+    }
+
+    public View getView() {
+        return view;
     }
 
 }

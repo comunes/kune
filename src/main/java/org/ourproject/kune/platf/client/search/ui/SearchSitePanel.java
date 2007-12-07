@@ -19,6 +19,7 @@
 
 package org.ourproject.kune.platf.client.search.ui;
 
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.search.SearchSitePresenter;
 import org.ourproject.kune.platf.client.search.SearchSiteView;
 
@@ -82,8 +83,7 @@ public class SearchSitePanel implements SearchSiteView {
                 setClosable(true);
                 setProxyDrag(true);
                 setCollapsible(false);
-                // i18n
-                setTitle("Search results");
+                setTitle(Kune.I18N.t("Search results"));
             }
         }, north, null, null, null, center);
         final BorderLayout layout = dialog.getLayout();
@@ -107,8 +107,7 @@ public class SearchSitePanel implements SearchSiteView {
 
         layout.endUpdate();
 
-        // i18n
-        final Button closeBtn = new Button("Close");
+        final Button closeBtn = new Button(Kune.I18N.t("Close"));
         closeBtn.addButtonListener(new ButtonListenerAdapter() {
             public void onClick(final Button button, final EventObject e) {
                 presenter.doClose();
@@ -121,16 +120,15 @@ public class SearchSitePanel implements SearchSiteView {
 
         tabPanel.getTab(0).addTabPanelItemListener(new TabPanelItemListenerAdapter() {
             public void onActivate(final TabPanelItem tab) {
-                // i18n
-                dialog.setTitle("Search groups");
+                dialog.setTitle(Kune.I18N.t("Search groups"));
                 presenter.doSearchGroups();
                 tab.getTextEl().highlight();
             }
         });
 
         tabPanel.getTab(1).addTabPanelItemListener(new TabPanelItemListenerAdapter() {
-            public void onActivate(final TabPanelItem tab) { // i18n
-                dialog.setTitle("Search users");
+            public void onActivate(final TabPanelItem tab) { 
+                dialog.setTitle(Kune.I18N.t("Search users"));
                 presenter.doSearchUsers();
                 tab.getTextEl().highlight();
             }
@@ -147,8 +145,7 @@ public class SearchSitePanel implements SearchSiteView {
             {
                 setWidth(610);
                 setHideLabels(true);
-                // i18n
-                // setHeader("Type something to search");
+                // setHeader(Kune.I18N.t("Type something to search"));
             }
         });
 
@@ -160,12 +157,11 @@ public class SearchSitePanel implements SearchSiteView {
                 setStore(store);
                 setDisplayField("term");
                 setTypeAhead(false);
-                // i18n
-                setLoadingText("Searching...");
+                setLoadingText(Kune.I18N.t("Searching..."));
                 setWidth(300);
                 setPageSize(10);
                 setHideTrigger(true);
-                setMode("local");
+                setMode(ComboBox.LOCAL);
                 setMinChars(2);
                 // setTitle("Kune search");
 
@@ -180,8 +176,7 @@ public class SearchSitePanel implements SearchSiteView {
 
         form.add(cb);
         form.render();
-        // i18n
-        Button searchBtn = new Button("Search");
+        Button searchBtn = new Button(Kune.I18N.t("Search"));
         hp.add(form);
         hp.add(searchBtn);
         hp.setSpacing(7);

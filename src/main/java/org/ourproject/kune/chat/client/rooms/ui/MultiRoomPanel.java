@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.chat.client.rooms.ui;
 
+import org.ourproject.kune.platf.client.services.Kune;
 import java.util.HashMap;
 
 import org.ourproject.kune.chat.client.rooms.EmoticonPaletteListener;
@@ -198,8 +199,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
 		setMinHeight(300);
 		setMinHeight(300);
 		setProxyDrag(true);
-		// i18n
-		setTitle("Chat rooms");
+		setTitle(Kune.I18N.t("Chat rooms"));
 		setCollapsible(true);
 	    }
 	}, north, south, null, east, center);
@@ -208,8 +208,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	    {
 		setIcon("images/smile.png");
 		setCls("x-btn-icon");
-		// i18n
-		setTooltip("Insert a emoticon");
+		setTooltip(Kune.I18N.t("Insert a emoticon"));
 
 	    }
 	});
@@ -222,7 +221,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
 	    }
 	});
 
-	sendBtn = dialog.addButton("Send");
+	sendBtn = dialog.addButton(Kune.I18N.t("Send"));
 	sendBtn.addButtonListener(new ButtonListenerAdapter() {
 	    public void onClick(final Button button, final EventObject e) {
 		presenter.onSend();
@@ -260,7 +259,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
 		    if (presenter.isCloseAllConfirmed()) {
 			return true;
 		    } else {
-			MessageBox.confirm("Confirm", "Are you sure you want to exit all the rooms?",
+			MessageBox.confirm(Kune.I18N.t("Confirm"), Kune.I18N.t("Are you sure you want to exit all the rooms?"),
 				new MessageBox.ConfirmCallback() {
 				    public void execute(final String btnID) {
 					if (btnID.equals("yes")) {
@@ -313,7 +312,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
 			|| ((RoomPresenter) panelIdToRoom.get(panel.getId())).isCloseConfirmed()) {
 		    return true;
 		} else {
-		    MessageBox.confirm("Confirm", "Are you sure you want to exit from this room?",
+		    MessageBox.confirm(Kune.I18N.t("Confirm"), Kune.I18N.t("Are you sure you want to exit from this room?"),
 			    new MessageBox.ConfirmCallback() {
 				public void execute(final String btnID) {
 				    String panelId = panel.getId();
@@ -372,8 +371,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
     }
 
     private ContentPanel createUsersPanel() {
-	// i18n
-	ContentPanel eastPanel = new ContentPanel(Ext.generateId(), "Users", new ContentPanelConfig() {
+	ContentPanel eastPanel = new ContentPanel(Ext.generateId(), Kune.I18N.t("Users"), new ContentPanelConfig() {
 	    {
 		setAutoScroll(true);
 		setFitToContainer(true);

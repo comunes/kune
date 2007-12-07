@@ -25,6 +25,9 @@ MIND-TERM:
 <vjrj> Restarting server don't affect client session
 <vjrj> See css utilities in http://code.google.com/p/cobogw/
 <vjrj> RTE css style: http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/f64c0024d8676a66/d5f26a54145fc5d4?lnk=gst&q=richtextarea++css#d5f26a54145fc5d4
+<vjrj> Get users timezone in registration:
+http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/f6fa38b59610ab65
+<vjrj> Add a new group type (orphan project) without people
 
 LONG-TERM:
 --------------------------------------------------------------------------------

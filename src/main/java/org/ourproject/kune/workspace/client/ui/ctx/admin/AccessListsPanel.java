@@ -26,6 +26,7 @@ import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.GroupListDTO;
 import org.ourproject.kune.platf.client.services.Images;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.IconHyperlink;
 
 import com.google.gwt.user.client.ui.Composite;
@@ -40,20 +41,17 @@ public class AccessListsPanel extends Composite implements View {
     private final VerticalPanel viewersVP;
 
     public AccessListsPanel() {
-        // i18n
-
         final VerticalPanel vp = new VerticalPanel();
-        // i18n
-        final Label adminsLabel = new Label("Who can admin this:");
+        final Label adminsLabel = new Label(Kune.I18N.t("Who can admin this:"));
         adminsVP = new VerticalPanel();
-        final Label editorsLabel = new Label("Who more can edit:");
+        final Label editorsLabel = new Label(Kune.I18N.t("Who more can edit:"));
         editorsVP = new VerticalPanel();
-        final Label viewersLabel = new Label("Who more can view:");
+        final Label viewersLabel = new Label(Kune.I18N.t("Who more can view:"));
         viewersVP = new VerticalPanel();
 
         // Layout
         initWidget(vp);
-        vp.add(new Label("Permissions"));
+        vp.add(new Label(Kune.I18N.t("Permissions")));
         vp.add(adminsLabel);
         vp.add(adminsVP);
         vp.add(editorsLabel);
@@ -89,11 +87,9 @@ public class AccessListsPanel extends Composite implements View {
     private void setGroupList(final GroupListDTO groupList, final VerticalPanel groupVP) {
         groupVP.clear();
         if (groupList.getMode() == GroupListDTO.EVERYONE) {
-            // i18n
-            groupVP.add(new IconHyperlink(img.everybody(), "Everybody", "fixme"));
+            groupVP.add(new IconHyperlink(img.everybody(), Kune.I18N.t("Everybody"), "fixme"));
         } else if (groupList.getMode() == GroupListDTO.NOBODY) {
-            // i18n
-            groupVP.add(new IconHyperlink(img.nobody(), "Nobody", "fixme"));
+            groupVP.add(new IconHyperlink(img.nobody(), Kune.I18N.t("Nobody"), "fixme"));
         } else {
             final Iterator iter = groupList.getList().iterator();
             while (iter.hasNext()) {

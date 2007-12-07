@@ -1,75 +1,87 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
    http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
-    version="1.0">
+  version="1.0">
 
-  <persistence-unit name="development" transaction-type="RESOURCE_LOCAL">
+  <persistence-unit name="development"
+    transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <properties>
-      <property name="hibernate.archive.autodetection" value="class, hbm"/>
-      <property name="hibernate.show_sql" value="false"/>
-      <property name="hibernate.format_sql" value="false"/>
-      <property name="use_sql_comments" value="true"/>
-      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
-      <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
-      <property name="hibernate.connection.url" value="jdbc:mysql://localhost/kune_dev?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8"/>
-      <property name="hibernate.connection.username" value="kune"/>
+      <property name="hibernate.archive.autodetection"
+        value="class, hbm" />
+      <property name="hibernate.show_sql" value="false" />
+      <property name="hibernate.format_sql" value="false" />
+      <property name="use_sql_comments" value="true" />
+      <property name="hibernate.dialect"
+        value="org.hibernate.dialect.MySQL5Dialect" />
+      <property name="hibernate.connection.driver_class"
+        value="com.mysql.jdbc.Driver" />
+      <property name="hibernate.connection.url"
+        value="jdbc:mysql://localhost/kune_dev?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8" />
+      <property name="hibernate.connection.username" value="kune" />
       <property name="hibernate.connection.password" value="db4kune" />
-      <property name="hibernate.hbm2ddl.auto" value="update"/>
-      <property name="hibernate.c3p0.min_size" value="5"/>
-      <property name="hibernate.c3p0.max_size" value="20"/>
-      <property name="hibernate.c3p0.timeout" value="300"/>
-      <property name="hibernate.c3p0.max_statements" value="50"/>
-      <property name="hibernate.c3p0.idle_test_period" value="3000"/>
-      <property name="hibernate.search.default.directory_provider" value="org.hibernate.search.store.FSDirectoryProvider"/>
-      <property name="hibernate.search.default.indexBase" value="/var/lib/lucene/kune_dev/indexes"/>
+      <property name="hibernate.hbm2ddl.auto" value="update" />
+      <property name="hibernate.c3p0.min_size" value="5" />
+      <property name="hibernate.c3p0.max_size" value="20" />
+      <property name="hibernate.c3p0.timeout" value="300" />
+      <property name="hibernate.c3p0.max_statements" value="50" />
+      <property name="hibernate.c3p0.idle_test_period" value="3000" />
+      <property name="hibernate.search.default.directory_provider"
+        value="org.hibernate.search.store.FSDirectoryProvider" />
+      <property name="hibernate.search.default.indexBase"
+        value="/var/lib/lucene/kune_dev/indexes" />
     </properties>
   </persistence-unit>
-
-
 
   <persistence-unit name="test_db" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <properties>
-      <property name="hibernate.archive.autodetection" value="class, hbm"/>
-      <property name="hibernate.show_sql" value="false"/>
-      <property name="hibernate.format_sql" value="false"/>
-      <property name="use_sql_comments" value="false"/>
-      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
-      <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
-      <property name="hibernate.connection.url" value="jdbc:mysql://localhost/kune_test?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8"/>
-      <property name="hibernate.connection.username" value="kune"/>
+      <property name="hibernate.archive.autodetection"
+        value="class, hbm" />
+      <property name="hibernate.show_sql" value="false" />
+      <property name="hibernate.format_sql" value="false" />
+      <property name="use_sql_comments" value="false" />
+      <property name="hibernate.dialect"
+        value="org.hibernate.dialect.MySQL5Dialect" />
+      <property name="hibernate.connection.driver_class"
+        value="com.mysql.jdbc.Driver" />
+      <property name="hibernate.connection.url"
+        value="jdbc:mysql://localhost/kune_test?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8" />
+      <property name="hibernate.connection.username" value="kune" />
       <property name="hibernate.connection.password" value="db4kune" />
-      <property name="hibernate.hbm2ddl.auto" value="create"/>
-      <property name="hibernate.c3p0.min_size" value="5"/>
-      <property name="hibernate.c3p0.max_size" value="20"/>
-      <property name="hibernate.c3p0.timeout" value="300"/>
-      <property name="hibernate.c3p0.max_statements" value="50"/>
-      <property name="hibernate.c3p0.idle_test_period" value="3000"/>
-      <property name="hibernate.search.default.directory_provider" value="org.hibernate.search.store.FSDirectoryProvider"/>
-      <property name="hibernate.search.default.indexBase" value="/var/lib/lucene/kune_test/indexes"/>
+      <property name="hibernate.hbm2ddl.auto" value="create" />
+      <property name="hibernate.c3p0.min_size" value="5" />
+      <property name="hibernate.c3p0.max_size" value="20" />
+      <property name="hibernate.c3p0.timeout" value="300" />
+      <property name="hibernate.c3p0.max_statements" value="50" />
+      <property name="hibernate.c3p0.idle_test_period" value="3000" />
+      <property name="hibernate.search.default.directory_provider"
+        value="org.hibernate.search.store.FSDirectoryProvider" />
+      <property name="hibernate.search.default.indexBase"
+        value="/var/lib/lucene/kune_test/indexes" />
     </properties>
   </persistence-unit>
 
-
-    <persistence-unit name="test" transaction-type="RESOURCE_LOCAL">
-        <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <properties>
-              <property name="hibernate.show_sql" value="false"/>
-              <property name="hibernate.format_sql" value="false"/>
-              <property name="use_sql_comments" value="false"/>
-            <property name="hibernate.dialect"
-                value="org.hibernate.dialect.H2Dialect" />
-            <property name="hibernate.hbm2ddl.auto" value="create" />
-            <property name="hibernate.connection.driver_class"
-                value="org.h2.Driver" />
-            <property name="hibernate.connection.username" value="sa" />
-            <property name="hibernate.connection.password" value="" />
-            <property name="hibernate.connection.url"
-                value="jdbc:h2:mem:testdb" />
-            <property name="hibernate.search.default.directory_provider" value="org.hibernate.search.store.FSDirectoryProvider"/>
-            <property name="hibernate.search.default.indexBase" value="/var/lib/lucene/kune_test/indexes"/>
-        </properties>
-    </persistence-unit>
+  <persistence-unit name="test" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <properties>
+      <property name="hibernate.show_sql" value="false" />
+      <property name="hibernate.format_sql" value="false" />
+      <property name="use_sql_comments" value="false" />
+      <property name="hibernate.dialect"
+        value="org.hibernate.dialect.H2Dialect" />
+      <property name="hibernate.hbm2ddl.auto" value="create" />
+      <property name="hibernate.connection.driver_class"
+        value="org.h2.Driver" />
+      <property name="hibernate.connection.username" value="sa" />
+      <property name="hibernate.connection.password" value="" />
+      <property name="hibernate.connection.url"
+        value="jdbc:h2:mem:testdb" />
+      <property name="hibernate.search.default.directory_provider"
+        value="org.hibernate.search.store.FSDirectoryProvider" />
+      <property name="hibernate.search.default.indexBase"
+        value="/var/lib/lucene/kune_test/indexes" />
+    </properties>
+  </persistence-unit>
 </persistence>

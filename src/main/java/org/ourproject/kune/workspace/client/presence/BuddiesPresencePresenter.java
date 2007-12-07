@@ -23,12 +23,12 @@ import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.workspace.client.workspace.BuddiesPresenceComponent;
 
-public class BuddiesPresencePresenter implements BuddiesPresenceComponent, AbstractPresenter {
+public class BuddiesPresencePresenter extends AbstractPresenter implements BuddiesPresenceComponent {
 
     private BuddiesPresenceView view;
 
     public void setBuddiesPresence() {
-	// TODO
+        // TODO
     }
 
     public void addRoster(final String name, final String category, final int status) {
@@ -36,15 +36,11 @@ public class BuddiesPresencePresenter implements BuddiesPresenceComponent, Abstr
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void init(final BuddiesPresenceView view) {
-	this.view = view;
-    }
-
-    public void doAction(final String action, final String param) {
-	// TODO Auto-generated method stub
+        this.view = view;
     }
 
 }

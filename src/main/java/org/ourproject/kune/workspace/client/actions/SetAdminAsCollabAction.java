@@ -19,6 +19,7 @@
 
 package org.ourproject.kune.workspace.client.actions;
 
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
@@ -45,9 +46,7 @@ public class SetAdminAsCollabAction implements Action {
 
             public void onSuccess(final Object result) {
                 Site.hideProgress();
-                // i18n
-                Site.info("Type of member changed");
-                // TODO: Reload SocialNetwork info only
+                Site.info(Kune.I18N.t("Type of member changed"));
                 services.stateManager.reloadSocialNetwork();
             }
         });

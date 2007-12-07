@@ -20,6 +20,7 @@
 package org.ourproject.kune.workspace.client.license.ui;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.workspace.client.license.LicensePresenter;
 import org.ourproject.kune.workspace.client.license.LicenseView;
 
@@ -35,35 +36,34 @@ public class LicensePanel extends HorizontalPanel implements LicenseView {
     private final Label license;
 
     public LicensePanel(final LicensePresenter presenter) {
-	copyright = new Label();
-	image = new Image();
-	license = new Label();
-	this.add(copyright);
-	this.add(license);
-	this.add(image);
-	ClickListener clickListener = new ClickListener() {
-	    public void onClick(Widget arg0) {
-		presenter.onLicenseClick();
-	    }
-	};
+        copyright = new Label();
+        image = new Image();
+        license = new Label();
+        this.add(copyright);
+        this.add(license);
+        this.add(image);
+        ClickListener clickListener = new ClickListener() {
+            public void onClick(Widget arg0) {
+                presenter.onLicenseClick();
+            }
+        };
 
-	license.addClickListener(clickListener);
-	image.addClickListener(clickListener);
-	copyright.setVisible(false);
-	license.setVisible(false);
-	image.setVisible(false);
+        license.addClickListener(clickListener);
+        image.addClickListener(clickListener);
+        copyright.setVisible(false);
+        license.setVisible(false);
+        image.setVisible(false);
 
-	copyright.addStyleName("kune-Margin-Large-l");
-	license.setStyleName("kune-LicensePanel-licensetext");
+        copyright.addStyleName("kune-Margin-Large-l");
+        license.setStyleName("kune-LicensePanel-licensetext");
     }
 
     public void showLicense(final String groupName, final LicenseDTO licenseDTO) {
-	// i18n
-	copyright.setText("© " + groupName + ", under license: ");
-	license.setText(licenseDTO.getLongName());
-	copyright.setVisible(true);
-	license.setVisible(true);
-	image.setVisible(true);
-	image.setUrl(licenseDTO.getImageUrl());
+        copyright.setText(Kune.I18N.t("© <tt>%s</tt>, under license: ", groupName));
+        license.setText(licenseDTO.getLongName());
+        copyright.setVisible(true);
+        license.setVisible(true);
+        image.setVisible(true);
+        image.setUrl(licenseDTO.getImageUrl());
     }
 }

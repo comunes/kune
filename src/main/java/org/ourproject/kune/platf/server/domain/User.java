@@ -27,6 +27,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -74,20 +75,41 @@ public class User implements HasId {
     @Pattern(regex = "^[a-z0-9_\\-]+$", message = "Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes")
     private String shortName;
 
+    @ManyToOne
+    // TODO: @NotNull
+    private I18nLanguage language;
+
+    @ManyToOne
+    // TODO: @NotNull
+    private I18nCountry country;
+
+    // TODO: Timezone
+
     // see: http://docs.codehaus.org/display/PICO/Good+Citizen:
     // Never expect or return null
     public static final User UNKNOWN_USER = new User();
 
-    public User(final String shortName, final String name, final String email, final String password) {
-        this.shortName = shortName;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.userGroup = Group.NO_GROUP;
+    /*
+     * Create User with Language and Country instead
+     */
+    @Deprecated
+    public User(final String shortName, final String longName, final String email, final String passwd) {
+        this(shortName, longName, email, passwd, null, null);
     }
 
     public User() {
         this(null, null, null, null);
+    }
+
+    public User(final String shortName, final String longName, final String email, final String passwd,
+            final I18nLanguage language, final I18nCountry country) {
+        this.shortName = shortName;
+        this.name = longName;
+        this.email = email;
+        this.password = passwd;
+        this.userGroup = Group.NO_GROUP;
+        this.language = language;
+        this.country = country;
     }
 
     @Finder(query = "from User")
@@ -159,6 +181,22 @@ public class User implements HasId {
 
     public static boolean isKnownUser(final User user) {
         return user != UNKNOWN_USER;
+    }
+
+    public I18nLanguage getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(final I18nLanguage language) {
+        this.language = language;
+    }
+
+    public I18nCountry getCountry() {
+        return country;
+    }
+
+    public void setCountry(final I18nCountry country) {
+        this.country = country;
     }
 
 }

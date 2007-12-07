@@ -73,10 +73,10 @@ public class SiteBarFactory {
         return siteMessage;
     }
 
-    public static Login getLoginForm(final LoginListener listener) {
+    public static Login getLoginForm(final LoginListener listener, final List languages, final List countries) {
         if (login == null) {
             LoginPresenter presenter = new LoginPresenter(listener);
-            LoginPanel view = new LoginPanel(presenter);
+            LoginPanel view = new LoginPanel(presenter, languages, countries);
             presenter.init(view);
             login = presenter;
         }

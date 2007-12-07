@@ -20,7 +20,7 @@
 package org.ourproject.kune.workspace.client;
 
 public interface WorkspaceEvents {
-    public static final String START_APP = "plaft.StartApplication";
+    public static final String START_APP = "platf.StartApplication";
     public static final String STOP_APP = "platf.StopApplication";
     public static final String USER_LOGGED_IN = "ws.UserLoggedIn";
     public static final String USER_LOGGED_OUT = "ws.UserLoggedOut";
@@ -36,11 +36,12 @@ public interface WorkspaceEvents {
     public static final String ADD_COLLAB_MEMBER = "ws.AddCollabMember";
     public static final String ADD_VIEWER_MEMBER = "ws.AddViewerMember";
     public static final String UNJOIN_GROUP = "ws.UnJoinGroup";
-    public static final String CHANGE_GROUP_WSTHEME = "ws.changeGroupWsTheme";
-    public static final String RATE_CONTENT = "ws.rateContent";
-    public static final String ENABLE_RATEIT = "ws.enableRateIt";
-    public static final String DISABLE_RATEIT = "ws.disableRateIt";
-    public static final String ATTACH_TO_EXT_POINT = "ws.attachToExtensionPoint";
-    public static final String DETACH_FROM_EXT_POINT = "ws.detachToExtensionPoint";
-    public static final String CLEAR_EXT_POINT = "ws.clearExtensionPoint";
+    public static final String CHANGE_GROUP_WSTHEME = "ws.ChangeGroupWsTheme";
+    public static final String RATE_CONTENT = "ws.RateContent";
+    public static final String ENABLE_RATEIT = "ws.EnableRateIt";
+    public static final String DISABLE_RATEIT = "ws.DisableRateIt";
+    public static final String ATTACH_TO_EXT_POINT = "ws.AttachToExtensionPoint";
+    public static final String DETACH_FROM_EXT_POINT = "ws.DetachToExtensionPoint";
+    public static final String CLEAR_EXT_POINT = "ws.ClearExtensionPoint";
+    public static final String GET_TRANSLATION = "platf.GetTranslation";
 }

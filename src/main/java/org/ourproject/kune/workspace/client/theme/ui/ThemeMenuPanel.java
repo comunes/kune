@@ -34,30 +34,29 @@ public class ThemeMenuPanel extends MenuBar implements ThemeMenuView {
     private final ThemeMenuPresenter presenter;
 
     public ThemeMenuPanel(final ThemeMenuPresenter presenter) {
-	this.presenter = presenter;
-	themesMB = new MenuBar(true);
-	this.addItem(Images.App.getInstance().themeChoose().getHTML(), true, themesMB);
-	setStyleName("kune-ThemeMenuPanel");
-	// i18n
-	setTitle("Select Workspace theme for this group");
+        this.presenter = presenter;
+        themesMB = new MenuBar(true);
+        this.addItem(Images.App.getInstance().themeChoose().getHTML(), true, themesMB);
+        setStyleName("kune-ThemeMenuPanel");
+        setTitle(Kune.I18N.t("Select Workspace theme for this group"));
     }
 
     public void setThemes(final String[] themes) {
-	for (int i = 0; i < themes.length; i++) {
-	    final String theme = themes[i];
-	    final ColorTheme colorTheme = Kune.getInstance().theme;
-	    colorTheme.setTheme(theme);
-	    String themeName = colorTheme.getThemeName();
-	    String mainColor = colorTheme.getContentMainBorder();
-	    themesMB.addItem("<span style=\"color: " + mainColor + ";\">" + themeName + "</span>", true, new Command() {
-		public void execute() {
-		    presenter.chooseTheme(theme);
-		}
-	    });
-	}
+        for (int i = 0; i < themes.length; i++) {
+            final String theme = themes[i];
+            final ColorTheme colorTheme = Kune.getInstance().theme;
+            colorTheme.setTheme(theme);
+            String themeName = colorTheme.getThemeName();
+            String mainColor = colorTheme.getContentMainBorder();
+            themesMB.addItem("<span style=\"color: " + mainColor + ";\">" + themeName + "</span>", true, new Command() {
+                public void execute() {
+                    presenter.chooseTheme(theme);
+                }
+            });
+        }
     }
 
     public void setVisible(final boolean visible) {
-	super.setVisible(visible);
+        super.setVisible(visible);
     }
 }

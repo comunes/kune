@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.workspace.client.workspace.ui;
 
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.workspace.client.workspace.ContentSubTitlePresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentSubTitleView;
 
@@ -46,15 +47,14 @@ public class ContentSubTitlePanel extends HorizontalPanel implements ContentSubT
 	rigthHP.add(languageLabel);
 
 	setWidth("100%");
-	// i18n
-	languageTitle.setText("Language: ");
+	languageTitle.setText(Kune.I18N.t("Language:"));
 	titleLabel.addStyleName("kune-Margin-Large-l");
 	titleLabel.addStyleName("kune-ft15px");
 	languageLabel.addStyleName("kune-Margin-Large-r");
 	languageTitle.addStyleName("kune-ft12px");
 	languageLabel.addStyleName("kune-ft12px");
 	titleLabel.addStyleName("kune-ContentSubTitleBar-l");
-	rigthHP.addStyleName("kune-ContentSubTitleBar-r");
+ 	rigthHP.addStyleName("kune-ContentSubTitleBar-r");
 	setCellVerticalAlignment(rigthHP, VerticalPanel.ALIGN_MIDDLE);
 	rigthHP.setCellVerticalAlignment(titleLabel, VerticalPanel.ALIGN_MIDDLE);
 	rigthHP.setCellVerticalAlignment(languageTitle, VerticalPanel.ALIGN_MIDDLE);

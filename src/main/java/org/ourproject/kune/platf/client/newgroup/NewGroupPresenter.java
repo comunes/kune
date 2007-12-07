@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.platf.client.newgroup;
 
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
@@ -63,11 +64,11 @@ public class NewGroupPresenter implements NewGroup, MessagePresenter {
                     throw caught;
                 } catch (final GroupNameInUseException e) {
                     onBack();
-                    // i18n
-                    setMessage("This name in already in use, try with a different name.", SiteMessage.ERROR);
+                    setMessage(Kune.I18N.t("This name in already in use, try with a different name."),
+                            SiteMessage.ERROR);
                 } catch (final Throwable e) {
                     onBack(); // The messageP is in first page of wizard :-/
-                    setMessage("Error creating group", SiteMessage.ERROR);
+                    setMessage(Kune.I18N.t("Error creating group"), SiteMessage.ERROR);
                     GWT.log("Other kind of exception in group registration", null);
                     throw new RuntimeException();
                 }

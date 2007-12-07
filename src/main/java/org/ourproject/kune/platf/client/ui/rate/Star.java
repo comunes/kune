@@ -30,7 +30,6 @@ public class Star {
 
     public final static Star[] CLEAR = { new Star(), new Star(), new Star(), new Star(), new Star() };
 
-    // private Image image;
     private AbstractImagePrototype image;
 
     public Star() {

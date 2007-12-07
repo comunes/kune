@@ -20,21 +20,23 @@ public class LicenseManagerTest extends PersistenceTest {
 
     @Before
     public void insertData() {
-	openTransaction();
-	assertEquals(0, licenseFinder.getAll().size());
-	license = new License("by", "Creative Commons Attribution", "", "http://creativecommons.org/licenses/by/3.0/",
-		true, false, false, "", "");
-	licenseManager.persist(license);
+        openTransaction();
+        assertEquals(0, licenseFinder.getAll().size());
+        license = new License("by", "Creative Commons Attribution", "", "http://creativecommons.org/licenses/by/3.0/",
+                true, false, false, "", "");
+        licenseManager.persist(license);
     }
 
     @Test
     public void testLicenseCreation() {
-	assertNotNull(license.getId());
-	assertEquals(1, licenseFinder.getAll().size());
+        assertNotNull(license.getId());
+        assertEquals(1, licenseFinder.getAll().size());
     }
 
     @After
     public void close() {
-	closeTransaction();
+        if (getTransaction().isActive()) {
+            getTransaction().rollback();
+        }
     }
 }

@@ -19,6 +19,7 @@
 
 package org.ourproject.kune.platf.client.ui.rate;
 
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.services.Images;
 
 import com.google.gwt.user.client.ui.ClickListener;
@@ -45,8 +46,7 @@ public class RateItPanel extends Composite implements ClickListener, RateItView 
     }
 
     private void initialize() {
-        // i18n
-        rateItLabel = new Label("Rate it:");
+        rateItLabel = new Label(Kune.I18N.t("Rate it:"));
         rateGrid = new Grid(1, 7);
         starImg = new Image[5];
         rateDesc = new Label();

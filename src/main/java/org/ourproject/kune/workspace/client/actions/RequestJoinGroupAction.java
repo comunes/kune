@@ -19,6 +19,7 @@
 
 package org.ourproject.kune.workspace.client.actions;
 
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
@@ -47,16 +48,15 @@ public class RequestJoinGroupAction implements Action {
                     public void onSuccess(final Object result) {
                         Site.hideProgress();
                         final String resultType = (String) result;
-                        // i18n
                         if (resultType == SocialNetworkDTO.REQ_JOIN_ACEPTED) {
-                            Site.info("You are now member of this group");
+                            Site.info(Kune.I18N.t("You are now member of this group"));
                             services.stateManager.reload();
                         }
                         if (resultType == SocialNetworkDTO.REQ_JOIN_DENIED) {
-                            Site.important("Sorry this is a closed group");
+                            Site.important(Kune.I18N.t("Sorry this is a closed group"));
                         }
                         if (resultType == SocialNetworkDTO.REQ_JOIN_WAITING_MODERATION) {
-                            Site.info("Requested. Waiting for admins decision");
+                            Site.info(Kune.I18N.t("Requested. Waiting for admins decision"));
                         }
                     }
                 });

@@ -34,7 +34,7 @@ public class Services {
         this.app = application;
         this.stateManager = stateManager;
         this.dispatcher = dispatcher;
-        session = this.stateManager.getSession();
+        this.session = this.stateManager.getSession();
     }
 
     public void setUserHash(final String userHash) {

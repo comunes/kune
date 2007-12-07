@@ -13,6 +13,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.server.PersistenceTest;
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.I18nCountry;
+import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.users.UserManager;
 
@@ -31,6 +33,11 @@ public class UserManagerTest extends PersistenceTest {
     User userFinder;
     @Inject
     Group groupFinder;
+    @Inject
+    I18nLanguageManager languageManager;
+    @Inject
+    I18nCountryManager countryManager;
+
     private User user;
 
     @Before
@@ -38,7 +45,13 @@ public class UserManagerTest extends PersistenceTest {
         openTransaction();
         assertEquals(0, userFinder.getAll().size());
         assertEquals(0, groupFinder.getAll().size());
-        user = new User(USER_SHORT_NAME, USER_LONG_NAME, USER_EMAIL, USER_PASSWORD);
+        I18nLanguage english = new I18nLanguage(new Long(1819), "English", "English", "en");
+        languageManager.persist(english);
+        I18nCountry gb = new I18nCountry(new Long(75), "GB", "United Kingdom", "", "£%n", "GBP", ",", ".", ".",
+                "western");
+        countryManager.merge(gb);
+        // FIXME: Use gb instead of null here:
+        user = new User(USER_SHORT_NAME, USER_LONG_NAME, USER_EMAIL, USER_PASSWORD, english, null);
         persist(user);
     }
 
@@ -62,37 +75,38 @@ public class UserManagerTest extends PersistenceTest {
 
     @Test
     public void emailCorrect() {
-        user = new User("test1", "test1 name", "test@example.com", "some passwd");
+        user = new User("test1", "test1 name", "test@example.com", "some passwd", new I18nLanguage(), new I18nCountry());
         persist(user);
     }
 
     @Test(expected = InvalidStateException.class)
     public void emailIncorrect() {
-        user = new User("test1", "test1 name", "falseEmail@", "some passwd");
+        user = new User("test1", "test1 name", "falseEmail@", "some passwd", new I18nLanguage(), new I18nCountry());
         persist(user);
     }
 
     @Test(expected = InvalidStateException.class)
     public void userShortNameIncorrect() {
-        user = new User("test1A", "test1 name", "test@example.com", "some passwd");
+        user = new User("test1A", "test1 name", "test@example.com", "some passwd", new I18nLanguage(),
+                new I18nCountry());
         persist(user);
     }
 
     @Test(expected = InvalidStateException.class)
     public void userNameLengthIncorrect() {
-        user = new User("test1A", "te", "test@example.com", "some passwd");
+        user = new User("test1A", "te", "test@example.com", "some passwd", new I18nLanguage(), new I18nCountry());
         persist(user);
     }
 
     @Test(expected = InvalidStateException.class)
     public void passwdLengthIncorrect() {
-        user = new User("test1A", "test1 name", "test@example.com", "pass");
+        user = new User("test1A", "test1 name", "test@example.com", "pass", new I18nLanguage(), new I18nCountry());
         persist(user);
     }
 
     @Test(expected = InvalidStateException.class)
     public void emailEmpty() {
-        user = new User("test1A", "test1 name", "", "some passwd");
+        user = new User("test1A", "test1 name", "", "some passwd", new I18nLanguage(), new I18nCountry());
         persist(user);
     }
 

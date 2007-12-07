@@ -20,7 +20,13 @@
 
 package org.ourproject.kune.sitebar.client.login;
 
+import java.util.Iterator;
+import java.util.List;
+
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.I18nCountryDTO;
+import org.ourproject.kune.platf.client.dto.I18nLanguageSimpleDTO;
 import org.ourproject.kune.sitebar.client.bar.SiteBarTrans;
 import org.ourproject.kune.sitebar.client.msg.SiteMessage;
 import org.ourproject.kune.sitebar.client.msg.SiteMessagePanel;
@@ -33,6 +39,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Ext;
+import com.gwtext.client.core.Position;
 import com.gwtext.client.data.SimpleStore;
 import com.gwtext.client.data.Store;
 import com.gwtext.client.widgets.Button;
@@ -59,6 +66,8 @@ import com.gwtext.client.widgets.layout.ContentPanelConfig;
 import com.gwtext.client.widgets.layout.LayoutRegionConfig;
 
 public class LoginPanel implements LoginView, View {
+    private static final String MUST_BE_BETWEEN_3_AND_15 = "Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes";
+
     private static final Translate t = SiteBarTrans.getInstance().t;
 
     private static final String NICKOREMAIL_FIELD = "nickOrEmail";
@@ -68,6 +77,7 @@ public class LoginPanel implements LoginView, View {
     private static final String LONGNAME_FIELD = "long_name";
     private static final String PASSWORD_FIELD_DUP = "passwordDup";
     private static final String LANG_FIELD = "lang";
+    private static final String COUNTRY_FIELD = "country";
 
     private TextField loginPassField;
 
@@ -95,9 +105,41 @@ public class LoginPanel implements LoginView, View {
 
     private TabPanel tabPanel;
 
-    public LoginPanel(final LoginPresenter initialPresenter) {
+    private final Object[][] countries;
+
+    private final Object[][] languages;
+
+    private ComboBox countryCombo;
+
+    private ComboBox languageCombo;
+
+    public LoginPanel(final LoginPresenter initialPresenter, final List languages, final List countries) {
         this.presenter = initialPresenter;
+        this.languages = mapLangs(languages);
+        this.countries = mapCountries(countries);
         createPanel();
+    }
+
+    private Object[][] mapCountries(final List countries) {
+        Object[][] objs = new Object[countries.size()][1];
+        int i = 0;
+        for (Iterator iterator = countries.iterator(); iterator.hasNext();) {
+            I18nCountryDTO country = (I18nCountryDTO) iterator.next();
+            Object[] obj = new Object[] { country.getCode(), country.getEnglishName() };
+            objs[i++] = obj;
+        }
+        return objs;
+    }
+
+    private Object[][] mapLangs(final List languages) {
+        Object[][] objs = new Object[languages.size()][1];
+        int i = 0;
+        for (Iterator iterator = languages.iterator(); iterator.hasNext();) {
+            I18nLanguageSimpleDTO language = (I18nLanguageSimpleDTO) iterator.next();
+            Object[] obj = new Object[] { language.getCode(), language.getEnglishName() };
+            objs[i++] = obj;
+        }
+        return objs;
     }
 
     public boolean isSignInFormValid() {
@@ -142,6 +184,14 @@ public class LoginPanel implements LoginView, View {
         return passwdRegFieldDup.getValueAsString();
     }
 
+    public String getLanguage() {
+        return languageCombo.getValueAsString();
+    }
+
+    public String getCountry() {
+        return countryCombo.getValueAsString();
+    }
+
     public void showErrorMessage(final String message) {
         messagesPanel.setMessage(message, SiteMessage.ERROR, SiteMessage.ERROR);
         messagesPanel.show();
@@ -162,6 +212,18 @@ public class LoginPanel implements LoginView, View {
 
     public void hide() {
         dialog.hide();
+    }
+
+    private Object[][] getLanguages() {
+        return languages;
+    }
+
+    private Object[][] getCountries() {
+        return countries;
+    }
+
+    public void center() {
+        dialog.center();
     }
 
     private void createPanel() {
@@ -189,7 +251,7 @@ public class LoginPanel implements LoginView, View {
             {
                 setModal(true);
                 setWidth(400);
-                setHeight(380);
+                setHeight(400);
                 setShadow(true);
                 setResizable(true);
                 setClosable(true);
@@ -336,7 +398,7 @@ public class LoginPanel implements LoginView, View {
             {
                 setWidth(300);
                 setLabelWidth(75);
-                setLabelAlign("right");
+                setLabelAlign(Position.RIGHT);
             }
         });
         form.fieldset(t.SignIn());
@@ -373,7 +435,7 @@ public class LoginPanel implements LoginView, View {
             {
                 setWidth(300);
                 setLabelWidth(75);
-                setLabelAlign("right");
+                setLabelAlign(Position.RIGHT);
             }
         });
 
@@ -389,10 +451,9 @@ public class LoginPanel implements LoginView, View {
                 setMinLength(3);
                 setMaxLength(15);
                 setRegex("^[a-z0-9_\\-]+$");
-                // i18n
-                setMinLengthText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
-                setMaxLengthText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
-                setRegexText("Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes");
+                setMinLengthText(Kune.I18N.t(MUST_BE_BETWEEN_3_AND_15));
+                setMaxLengthText(Kune.I18N.t(MUST_BE_BETWEEN_3_AND_15));
+                setRegexText(Kune.I18N.t(MUST_BE_BETWEEN_3_AND_15));
             }
         });
         form.add(shortNameRegField);
@@ -434,8 +495,7 @@ public class LoginPanel implements LoginView, View {
                 setMaxLength(40);
                 setWidth(200);
                 setMsgTarget("side");
-                // i18n
-                setInvalidText("Passwords do not match");
+                setInvalidText(Kune.I18N.t("Passwords do not match"));
                 setValidator(new Validator() {
                     public boolean validate(final String value) throws ValidationException {
                         return passwdRegField.getValueAsString().equals(passwdRegFieldDup.getValueAsString());
@@ -457,46 +517,63 @@ public class LoginPanel implements LoginView, View {
         });
         form.add(emailRegField);
 
-        final Store store = new SimpleStore(new String[] { "abbr", "language" }, getLanguages());
-        store.load();
+        final Store langStore = new SimpleStore(new String[] { "abbr", "language" }, getLanguages());
+        langStore.load();
 
-        ComboBox languageCombo = new ComboBox(new ComboBoxConfig() {
+        languageCombo = new ComboBox(new ComboBoxConfig() {
             {
-                // i18n
                 setName(LANG_FIELD);
                 setMinChars(1);
-                setFieldLabel(t.Language());
-                setStore(store);
+                setFieldLabel(Kune.I18N.t("Language"));
+                setStore(langStore);
                 setDisplayField("language");
-                setMode("local");
-                setTriggerAction("all");
-                setEmptyText("Enter language");
-                setLoadingText("Searching...");
+                setMode(ComboBox.LOCAL);
+                setTriggerAction(ComboBox.ALL);
+                setEmptyText(Kune.I18N.t("Enter language"));
+                setLoadingText(Kune.I18N.t("Searching..."));
                 setTypeAhead(true);
                 setSelectOnFocus(true);
                 setWidth(200);
                 setMsgTarget("side");
+                setAllowBlank(false);
             }
         });
 
         form.add(languageCombo);
+
+        final Store countryStore = new SimpleStore(new String[] { "abbr", "country" }, getCountries());
+        countryStore.load();
+
+        countryCombo = new ComboBox(new ComboBoxConfig() {
+            {
+                setName(COUNTRY_FIELD);
+                setMinChars(1);
+                setFieldLabel(Kune.I18N.t("Country"));
+                setStore(countryStore);
+                setDisplayField("country");
+                setMode(ComboBox.LOCAL);
+                setTriggerAction(ComboBox.ALL);
+                setEmptyText(Kune.I18N.t("Enter your country"));
+                setLoadingText(Kune.I18N.t("Searching..."));
+                setTypeAhead(true);
+                setSelectOnFocus(true);
+                setWidth(200);
+                setMsgTarget("side");
+                setAllowBlank(false);
+            }
+        });
+
+        form.add(countryCombo);
 
         form.end();
         form.render();
         return form;
     }
 
-    private Object[][] getLanguages() {
-        // FIXME: hardcoded...
-        return new Object[][] { new Object[] { "en", "English" }, new Object[] { "es", "Español" },
-                new Object[] { "pt", "Português do Brasil" } };
-    }
-
     private HorizontalPanel createNoAccountRegister() {
         HorizontalPanel registerHP = new HorizontalPanel();
-        // i18n
-        Label dontHaveAccountLabel = new Label("Don't have an account?");
-        Label registerLabel = new Label("Create one.");
+        Label dontHaveAccountLabel = new Label(Kune.I18N.t("Don't have an account?"));
+        Label registerLabel = new Label(Kune.I18N.t("Create one."));
         registerLabel.addClickListener(new ClickListener() {
             public void onClick(final Widget arg0) {
                 tabPanel.getTab(1).activate();
@@ -508,9 +585,5 @@ public class LoginPanel implements LoginView, View {
         registerHP.add(dontHaveAccountLabel);
         registerHP.add(registerLabel);
         return registerHP;
-    }
-
-    public void center() {
-        dialog.center();
     }
 }

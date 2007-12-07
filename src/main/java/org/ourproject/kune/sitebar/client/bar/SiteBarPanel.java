@@ -28,6 +28,7 @@ import org.ourproject.kune.platf.client.newgroup.NewGroup;
 import org.ourproject.kune.platf.client.newgroup.ui.NewGroupPanel;
 import org.ourproject.kune.platf.client.search.SearchSite;
 import org.ourproject.kune.platf.client.search.ui.SearchSitePanel;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.IconHyperlink;
 import org.ourproject.kune.platf.client.ui.IconLabel;
 import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
@@ -89,6 +90,8 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     private final Widget progressText;
     private final HorizontalPanel publicHP;
     private SearchSitePanel searchPanel;
+    private List countries;
+    private List languages;
 
     public SiteBarPanel(final SiteBarPresenter initPresenter) {
         t = SiteBarTrans.getInstance().t;
@@ -103,8 +106,8 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         progressPanel = RootPanel.get("kuneprogresspanel");
         progressText = RootPanel.get("kuneprogresstext");
         publicHP = new HorizontalPanel();
-        gotoPublic = new IconHyperlink(img.anybody(), "Go to Public Space", Site.FIXME_TOKEN);
-        contentNoPublic = new IconLabel(img.anybody(), "This content is not public");
+        gotoPublic = new IconHyperlink(img.anybody(), Kune.I18N.t("Go to Public Space"), Site.FIXME_TOKEN);
+        contentNoPublic = new IconLabel(img.anybody(), Kune.I18N.t("This content is not public"));
         final Label expandLabel = new Label("");
         newGroupHyperlink = new Hyperlink();
         final HTML pipeSeparatorHtml = new HTML();
@@ -245,7 +248,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     public void showLoginDialog() {
-        final Login login = SiteBarFactory.getLoginForm(presenter);
+        final Login login = SiteBarFactory.getLoginForm(presenter, languages, countries);
         loginPanel = (LoginPanel) login.getView();
         loginPanel.show();
     }
@@ -348,16 +351,24 @@ public class SiteBarPanel extends Composite implements SiteBarView {
                 addItemToYourGroupSubmenu(link);
             }
         }
-        // i18n
         addDefaultItemsToOptions();
     }
 
     public void showAlertMessage(final String message) {
-        MessageBox.alert("Alert", message, new MessageBox.AlertCallback() {
+        MessageBox.alert(Kune.I18N.t("Alert"), message, new MessageBox.AlertCallback() {
             public void execute() {
                 // Do nothing
             }
         });
+    }
+
+    public void setLanguages(final List languages) {
+        this.languages = languages;
+
+    }
+
+    public void setCountries(final List countries) {
+        this.countries = countries;
     }
 
     private void addDefaultItemsToOptions() {

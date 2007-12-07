@@ -19,6 +19,7 @@
 
 package org.ourproject.kune.workspace.client.actions;
 
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
@@ -45,9 +46,7 @@ public class AddCollabAction implements Action {
 
             public void onSuccess(final Object result) {
                 Site.hideProgress();
-                // i18n
-                Site.info("Member added as collaborator");
-                // TODO: Reload SocialNetwork info only
+                Site.info(Kune.I18N.t("Member added as collaborator"));
                 services.stateManager.reloadSocialNetwork();
             }
         });

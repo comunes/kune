@@ -60,7 +60,6 @@ public class InitAction implements Action {
         SiteServiceAsync server = SiteService.App.getInstance();
         server.getInitData(services.session.userHash, new AsyncCallback() {
             public void onFailure(final Throwable error) {
-                // i18n
                 Site.error("Error fetching initial data");
                 FireLog.debug(error.getMessage());
             }
@@ -72,6 +71,8 @@ public class InitAction implements Action {
                 services.session.setNotCCLicenses(initData.getNotCCLicenses());
                 services.session.setWsThemes(initData.getWsThemes());
                 services.session.setDefaultWsTheme(initData.getDefaultWsTheme());
+                services.session.setLanguages(initData.getLanguages());
+                services.session.setCountries(initData.getCountries());
                 UserInfoDTO currentUser = initData.getUserInfo();
                 dispatcher.fire(WorkspaceEvents.INIT_DATA_RECEIVED, response, null);
                 if (currentUser == null) {
@@ -79,6 +80,8 @@ public class InitAction implements Action {
                 } else {
                     dispatcher.fire(WorkspaceEvents.USER_LOGGED_IN, currentUser, null);
                 }
+                Site.sitebar.setLanguages(initData.getLanguages());
+                Site.sitebar.setCountries(initData.getCountries());
                 RootPanel.get("kuneinitialcurtain").setVisible(false);
             }
         });

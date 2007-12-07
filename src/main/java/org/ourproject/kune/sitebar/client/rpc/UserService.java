@@ -34,8 +34,8 @@ public interface UserService extends RemoteService {
     UserInfoDTO login(String nickOrEmail, String passwd) throws SerializableException;
 
     // FIXME: Vicente, userHash
-    UserInfoDTO createUser(String shortName, String longName, String email, String passwd, LicenseDTO license)
-            throws SerializableException;
+    UserInfoDTO createUser(String shortName, String longName, String email, String passwd, LicenseDTO license,
+            String language, String country, String timezone) throws SerializableException;
 
     // FIXME: Vicente, userHash
     void logout() throws SerializableException;

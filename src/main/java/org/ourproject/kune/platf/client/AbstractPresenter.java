@@ -19,8 +19,12 @@
 
 package org.ourproject.kune.platf.client;
 
-public interface AbstractPresenter {
+import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 
-    void doAction(String action, String param);
+public abstract class AbstractPresenter {
+
+    public void doAction(final String action, final String value, final String extra) {
+        DefaultDispatcher.getInstance().fire(action, value, extra);
+    }
 
 }

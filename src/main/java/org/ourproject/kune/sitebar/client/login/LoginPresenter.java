@@ -26,6 +26,7 @@ import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.EmailAddressInUseException;
 import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
 import org.ourproject.kune.platf.client.errors.UserAuthException;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.msg.MessagePresenter;
 import org.ourproject.kune.sitebar.client.msg.SiteMessage;
@@ -68,8 +69,7 @@ public class LoginPresenter implements Login, MessagePresenter {
                     try {
                         throw caught;
                     } catch (final UserAuthException e) {
-                        // i18n
-                        setMessage("Incorrect username/email or password.", SiteMessage.ERROR);
+                        setMessage(Kune.I18N.t("Incorrect username/email or password"), SiteMessage.ERROR);
                     } catch (final Throwable e) {
                         setMessage("Error in login", SiteMessage.ERROR);
                         GWT.log("Other kind of exception in LoginFormPresenter/doLogin", null);
@@ -92,33 +92,37 @@ public class LoginPresenter implements Login, MessagePresenter {
             final String passwd = view.getRegisterPassword();
             final String longName = view.getLongName();
             final String email = view.getEmail();
+            final String language = view.getLanguage();
+            final String country = view.getCountry();
             UserServiceAsync siteBarService = UserService.App.getInstance();
             // TODO: Form of register, license menu;
             LicenseDTO defaultLicense = new LicenseDTO("by-sa", "Creative Commons Attribution-ShareAlike", "",
                     "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
-            siteBarService.createUser(shortName, longName, email, passwd, defaultLicense, new AsyncCallback() {
-                public void onFailure(final Throwable caught) {
-                    // i18n: Error creating user
-                    Site.hideProgress();
-                    try {
-                        throw caught;
-                    } catch (final EmailAddressInUseException e) {
-                        setMessage("This email in in use by other person, try with another.", SiteMessage.ERROR);
-                    } catch (final GroupNameInUseException e) {
-                        // i18n
-                        setMessage("This name in already in use, try with a different name.", SiteMessage.ERROR);
-                    } catch (final Throwable e) {
-                        setMessage("Error during registration.", SiteMessage.ERROR);
-                        GWT.log("Other kind of exception in user registration", null);
-                        throw new RuntimeException();
-                    }
-                }
+            // FIXME: Timezone
+            siteBarService.createUser(shortName, longName, email, passwd, defaultLicense, language, country, "GMT",
+                    new AsyncCallback() {
+                        public void onFailure(final Throwable caught) {
+                            Site.hideProgress();
+                            try {
+                                throw caught;
+                            } catch (final EmailAddressInUseException e) {
+                                setMessage(Kune.I18N.t("This email in in use by other person, try with another."),
+                                        SiteMessage.ERROR);
+                            } catch (final GroupNameInUseException e) {
+                                setMessage(Kune.I18N.t("This name in already in use, try with a different name."),
+                                        SiteMessage.ERROR);
+                            } catch (final Throwable e) {
+                                setMessage(Kune.I18N.t("Error during registration."), SiteMessage.ERROR);
+                                GWT.log("Other kind of exception in user registration", null);
+                                throw new RuntimeException();
+                            }
+                        }
 
-                public void onSuccess(final Object response) {
-                    listener.userLoggedIn((UserInfoDTO) response);
-                    Site.hideProgress();
-                }
-            });
+                        public void onSuccess(final Object response) {
+                            listener.userLoggedIn((UserInfoDTO) response);
+                            Site.hideProgress();
+                        }
+                    });
         }
     }
 

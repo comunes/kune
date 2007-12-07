@@ -25,6 +25,7 @@ import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
@@ -36,21 +37,17 @@ public class SaveDocument implements Action {
     }
 
     private void save(final Services services, final StateDTO content, final DocumentContent documentContent) {
-        // i18n: Saving
-        Site.showProgress("Saving");
+        Site.showProgress(Kune.I18N.t("Saving"));
         ContentServiceAsync server = ContentService.App.getInstance();
         server.save(services.session.userHash, content.getDocumentId(), content.getContent(), new AsyncCallback() {
             public void onFailure(final Throwable caught) {
-                // i18n: Error saving
                 Site.hideProgress();
-                Site.error("Error saving document. Retrying...");
+                Site.error(Kune.I18N.t("Error saving document. Retrying..."));
                 documentContent.onSaveFailed();
             }
 
             public void onSuccess(final Object result) {
-                // i18n: Saved
-                Site.hideProgress();
-                Site.info("Document Saved");
+                Site.info(Kune.I18N.t("Document Saved"));
                 documentContent.onSaved();
             }
 

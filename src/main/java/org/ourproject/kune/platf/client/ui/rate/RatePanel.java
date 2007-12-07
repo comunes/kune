@@ -17,6 +17,7 @@
  */
 package org.ourproject.kune.platf.client.ui.rate;
 
+import org.ourproject.kune.platf.client.services.Kune;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Image;
@@ -41,14 +42,12 @@ public class RatePanel extends Composite implements RateView {
 
     public void setByUsers(final Integer byUsers) {
         if (byUsers.intValue() == 0) {
-            // i18n
-            rateDesc.setText("(Not rated)");
+            rateDesc.setText(Kune.I18N.t("(Not rated)"));
         } else if (byUsers.intValue() == 1) {
-            // i18n
-            rateDesc.setText("(" + byUsers + " " + "user)");
+            // i18n params pluralization
+            rateDesc.setText(Kune.I18N.t("(<tt>%d</tt> user)", byUsers));
         } else {
-            // i18n
-            rateDesc.setText("(" + byUsers + " " + "users)");
+            rateDesc.setText(Kune.I18N.t("(<tt>%d</tt> users)", byUsers));
         }
     }
 

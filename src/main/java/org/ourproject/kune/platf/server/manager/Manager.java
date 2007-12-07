@@ -26,4 +26,6 @@ public interface Manager<T, X> {
 
     public T persist(T entity);
 
+    public T merge(T entity);
+
 }

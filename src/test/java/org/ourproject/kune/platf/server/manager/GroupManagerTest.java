@@ -15,6 +15,8 @@ import org.ourproject.kune.platf.server.PersistenceTest;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.GroupType;
+import org.ourproject.kune.platf.server.domain.I18nCountry;
+import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
@@ -36,6 +38,10 @@ public class GroupManagerTest extends PersistenceTest {
     UserManager userManager;
     @Inject
     LicenseManager licenseManager;
+    @Inject
+    I18nLanguageManager languageManager;
+    @Inject
+    I18nCountryManager countryManager;
 
     private User user;
     private License defLicense;
@@ -46,7 +52,12 @@ public class GroupManagerTest extends PersistenceTest {
         assertEquals(0, userFinder.getAll().size());
         assertEquals(0, groupFinder.getAll().size());
         assertEquals(0, licenseFinder.getAll().size());
-        user = userManager.createUser("username", "the user name", "email@example.com", "userPassword");
+        I18nLanguage english = new I18nLanguage(new Long(1819), "English", "English", "en");
+        languageManager.persist(english);
+        I18nCountry gb = new I18nCountry(new Long(75), "GB", "United Kingdom", "", "£%n", "GBP", ",", ".", ".",
+                "western");
+        countryManager.merge(gb);
+        user = userManager.createUser("username", "the user name", "email@example.com", "userPassword", "en", "GB");
         defLicense = new License("by-sa", "Creative Commons Attribution-ShareAlike", "",
                 "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
         licenseManager.persist(defLicense);
@@ -106,21 +117,24 @@ public class GroupManagerTest extends PersistenceTest {
 
     @Test(expected = GroupNameInUseException.class)
     public void createUserWithExistingShortName() throws SerializableException {
-        User user2 = userManager.createUser("username", "the user name 2", "email2@example.com", "userPassword");
+        User user2 = userManager.createUser("username", "the user name 2", "email2@example.com", "userPassword", "en",
+                "GB");
         groupManager.createUserGroup(user2);
         rollbackTransaction();
     }
 
     @Test(expected = GroupNameInUseException.class)
     public void createUserWithExistingLongName() throws SerializableException {
-        User user2 = userManager.createUser("username2", "the user name", "email2@example.com", "userPassword");
+        User user2 = userManager.createUser("username2", "the user name", "email2@example.com", "userPassword", "en",
+                "GB");
         groupManager.createUserGroup(user2);
         rollbackTransaction();
     }
 
     @Test(expected = EmailAddressInUseException.class)
     public void createUserWithExistingEmail() throws SerializableException {
-        User user2 = userManager.createUser("username2", "the user name 2", "email@example.com", "userPassword");
+        User user2 = userManager.createUser("username2", "the user name 2", "email@example.com", "userPassword", "en",
+                "GB");
         groupManager.createUserGroup(user2);
         rollbackTransaction();
     }

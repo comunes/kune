@@ -44,41 +44,41 @@ public class ChatServerTool implements ServerTool {
 
     @Inject
     public ChatServerTool(final ToolConfigurationManager configurationManager, final ContainerManager containerManager) {
-	this.configurationManager = configurationManager;
-	this.containerManager = containerManager;
+        this.configurationManager = configurationManager;
+        this.containerManager = containerManager;
     }
 
     public String getName() {
-	return NAME;
+        return NAME;
     }
 
     public void onCreateContainer(final Container container, final Container parent) {
-	if (!parent.getTypeId().equals(TYPE_ROOT)) {
-	    throw new RuntimeException();
-	}
-	container.setTypeId(TYPE_ROOM);
+        if (!parent.getTypeId().equals(TYPE_ROOT)) {
+            throw new RuntimeException();
+        }
+        container.setTypeId(TYPE_ROOM);
     }
 
     public void onCreateContent(final Content content, final Container parent) {
-	if (parent.getTypeId().equals(TYPE_ROOM)) {
-	    throw new RuntimeException();
-	}
-	content.setTypeId(TYPE_CHAT);
+        if (parent.getTypeId().equals(TYPE_ROOM)) {
+            throw new RuntimeException();
+        }
+        content.setTypeId(TYPE_CHAT);
     }
 
     public Group initGroup(final User user, final Group group) {
-	ToolConfiguration config = new ToolConfiguration();
-	// i18n: salas
-	Container container = containerManager.createRootFolder(group, NAME, ROOT_NAME, TYPE_ROOT);
-	config.setRoot(container);
-	group.setToolConfig(NAME, config);
-	configurationManager.persist(config);
-	return group;
+        ToolConfiguration config = new ToolConfiguration();
+        // i18n
+        Container container = containerManager.createRootFolder(group, NAME, ROOT_NAME, TYPE_ROOT);
+        config.setRoot(container);
+        group.setToolConfig(NAME, config);
+        configurationManager.persist(config);
+        return group;
     }
 
     @Inject
     public void register(final ToolRegistry registry) {
-	registry.register(this);
+        registry.register(this);
     }
 
 }

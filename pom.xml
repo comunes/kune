@@ -168,11 +168,20 @@
       <artifactId>scriptella-drivers</artifactId>
       <version>0.9</version>
     </dependency>
-
+    <dependency>
+      <groupId>com.javaforge.scriptella</groupId>
+      <artifactId>scriptella-tools</artifactId>
+      <version>0.9</version>
+    </dependency>
     <dependency>
       <groupId>au.com.bytecode.opencsv</groupId>
       <artifactId>opencsv</artifactId>
       <version>1.8</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-jexl</groupId>
+      <artifactId>commons-jexl</artifactId>
+      <version>1.0</version>
     </dependency>
 
     <!-- jetty dependencies -->

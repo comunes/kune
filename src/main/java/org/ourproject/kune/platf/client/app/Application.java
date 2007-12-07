@@ -26,6 +26,7 @@ import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 public interface Application {
+
     ClientTool getTool(String toolName);
 
     Workspace getWorkspace();

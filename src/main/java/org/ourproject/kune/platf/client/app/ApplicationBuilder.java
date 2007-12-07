@@ -39,6 +39,8 @@ import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.sitebar.client.Site;
 
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.WindowCloseListener;
 
 public class ApplicationBuilder {
     private final KunePlatform platform;
@@ -47,9 +49,9 @@ public class ApplicationBuilder {
         this.platform = platform;
     }
 
-    public Application build(final String userHash) {
+    public void build(final String userHash) {
         HashMap tools = indexTools(platform.getTools());
-        DefaultApplication application = new DefaultApplication(tools);
+        final DefaultApplication application = new DefaultApplication(tools);
         Site.showProgressLoading();
         final Session session = new Session(userHash);
         ContentProvider provider = new ContentProviderImpl(ContentService.App.getInstance());
@@ -62,7 +64,16 @@ public class ApplicationBuilder {
 
         Services services = new Services(application, stateManager, dispatcher);
         dispatcher.setServices(services);
-        return application;
+        Window.addWindowCloseListener(new WindowCloseListener() {
+            public void onWindowClosed() {
+                application.stop();
+            }
+
+            public String onWindowClosing() {
+                return null;
+            }
+        });
+        application.start();
     }
 
     private void subscribeActions(final DefaultDispatcher dispatcher, final ArrayList actions) {

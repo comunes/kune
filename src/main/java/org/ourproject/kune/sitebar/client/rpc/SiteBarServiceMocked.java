@@ -29,35 +29,36 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public class SiteBarServiceMocked implements UserServiceAsync {
 
     public void login(final String nick, final String pass, final AsyncCallback callback) {
-	Site.showProgress("Login");
-	Timer timer = new Timer() {
-	    public void run() {
-		Site.hideProgress();
-		callback.onSuccess("ThisIsTheUserHash");
-	    }
-	};
-	timer.schedule(1000);
+        Site.showProgress("Login");
+        Timer timer = new Timer() {
+            public void run() {
+                Site.hideProgress();
+                callback.onSuccess("ThisIsTheUserHash");
+            }
+        };
+        timer.schedule(1000);
     }
 
     public void logout(final AsyncCallback callback) {
-	timerAndSuccess(callback);
+        timerAndSuccess(callback);
     }
 
     private void timerAndSuccess(final AsyncCallback callback) {
-	Timer timer = new Timer() {
-	    public void run() {
-		callback.onSuccess(null);
-	    }
-	};
-	timer.schedule(1000);
+        Timer timer = new Timer() {
+            public void run() {
+                callback.onSuccess(null);
+            }
+        };
+        timer.schedule(1000);
     }
 
     public void createUser(final String shortName, final String longName, final String email, final String paswd,
-	    final LicenseDTO license, final AsyncCallback asyncCallback) {
-	timerAndSuccess(asyncCallback);
+            final LicenseDTO license, final String lang, final String country, final String timezone,
+            final AsyncCallback asyncCallback) {
+        timerAndSuccess(asyncCallback);
     }
 
     public void reloadUserInfo(final String userHash, final AsyncCallback asyncCallback) {
-	timerAndSuccess(asyncCallback);
+        timerAndSuccess(asyncCallback);
     }
 }

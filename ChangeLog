@@ -1,3 +1,15 @@
+2007-12-05 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* Added i18n Support in gwt side and server based in custom solution
+	(inspired in Rail's Globalize)
+	* First db schema upgrade aproach
+	* Reindex of lucene during creation of database 
+	* Updated to gwt 0.9.3
+
+2007-12-03 Daniel Gómez Blasco <danigb@gmail.com>
+	* Added JSON support
+	* App server filters refactorization
+	* Added simple benchmark logs in server petitions
+
 2007-11-20 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* Workspace refactorization, added UIEntryPoints to attach widgets to
 	parts of the WP

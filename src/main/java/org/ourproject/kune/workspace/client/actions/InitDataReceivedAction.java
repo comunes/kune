@@ -26,14 +26,14 @@ import org.ourproject.kune.workspace.client.workspace.Workspace;
 public class InitDataReceivedAction implements Action {
 
     public void execute(final Object value, final Object extra, final Services services) {
-	onInitDataReceived(services);
+        onInitDataReceived(services);
     }
 
     private void onInitDataReceived(final Services services) {
-	String themes[] = services.session.getWsThemes();
-	String defTheme = services.session.getDefaultWsTheme();
-	Workspace workspace = services.app.getWorkspace();
-	workspace.setTheme(defTheme);
-	workspace.getThemeMenuComponent().setThemes(themes);
+        String themes[] = services.session.getWsThemes();
+        String defTheme = services.session.getDefaultWsTheme();
+        Workspace workspace = services.app.getWorkspace();
+        workspace.setTheme(defTheme);
+        workspace.getThemeMenuComponent().setThemes(themes);
     }
 }

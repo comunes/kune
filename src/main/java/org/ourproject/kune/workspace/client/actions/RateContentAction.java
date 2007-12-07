@@ -19,6 +19,7 @@
 
 package org.ourproject.kune.workspace.client.actions;
 
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.rpc.ContentService;
@@ -45,8 +46,7 @@ public class RateContentAction implements Action {
 
                     public void onSuccess(final Object result) {
                         Site.hideProgress();
-                        // i18n
-                        Site.info("Content rated");
+                        Site.info(Kune.I18N.t("Content rated"));
                         services.stateManager.reload();
                     }
                 });

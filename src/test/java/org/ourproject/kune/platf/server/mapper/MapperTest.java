@@ -14,8 +14,6 @@ import org.ourproject.kune.platf.client.dto.ContentDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.GroupListDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
-import org.ourproject.kune.platf.client.dto.LinkDTO;
-import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.server.TestDomainHelper;
 import org.ourproject.kune.platf.server.TestHelper;
 import org.ourproject.kune.platf.server.access.AccessRights;
@@ -26,15 +24,11 @@ import org.ourproject.kune.platf.server.domain.GroupList;
 import org.ourproject.kune.platf.server.domain.GroupListMode;
 import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.Revision;
-import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.state.State;
-import org.ourproject.kune.platf.server.users.Link;
-import org.ourproject.kune.platf.server.users.UserInfo;
 import org.ourproject.kune.platf.server.users.UserInfoService;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
-import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
 
 public class MapperTest {
@@ -48,35 +42,6 @@ public class MapperTest {
     @Before
     public void inject() {
         TestHelper.inject(this);
-    }
-
-    @Test
-    public void testUserInfo() throws SerializableException {
-        final User user = TestDomainHelper.createUser(1);
-        final UserInfo userInfo = userInfoService.buildInfo(user, "someuserhash");
-
-        final UserInfoDTO userInfoDTO = mapper.map(userInfo, UserInfoDTO.class);
-        assertEquals(userInfo.getName(), userInfoDTO.getName());
-        assertEquals(userInfo.getChatName(), userInfoDTO.getChatName());
-        assertEquals(userInfo.getChatPassword(), userInfoDTO.getChatPassword());
-        final List<Link> adminsGroup = userInfo.getGroupsIsAdmin();
-        final List<Link> adminsGroupDTO = userInfoDTO.getGroupsIsAdmin();
-        assertEqualListsLink(adminsGroupDTO, adminsGroup);
-    }
-
-    private void assertEqualListsLink(final List<Link> listDTO, final List<Link> list) {
-        assertEquals(listDTO.size(), list.size());
-        for (int i = 0; i < listDTO.size(); i++) {
-            final Object object = listDTO.get(i);
-            assertEquals(LinkDTO.class, object.getClass());
-            final LinkDTO d = (LinkDTO) object;
-            final Link l = list.get(i);
-            assertNotNull(d);
-            assertNotNull(l);
-            final LinkDTO map = mapper.map(l, LinkDTO.class);
-            assertEquals(map.getShortName(), d.getShortName());
-            assertEquals(map.getLink(), d.getLink());
-        }
     }
 
     @Test

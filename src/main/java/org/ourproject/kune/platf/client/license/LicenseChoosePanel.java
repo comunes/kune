@@ -23,6 +23,7 @@ package org.ourproject.kune.platf.client.license;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.HorizontalLine;
 import org.ourproject.kune.platf.client.ui.IconLabel;
 import org.ourproject.kune.platf.client.ui.TitledPanel;
@@ -87,8 +88,8 @@ public class LicenseChoosePanel extends Composite implements LicenseChooseView {
         licenseTypesVP.add(ccRB);
         licenseTypesVP.add(notCcRB);
 
-        copyleft = new IconLabel(img.copyleft(), "This is a copyleft license", false);
-        nonCopyleft = new IconLabel(img.noCopyleft(), "This is not a copyleft license", false);
+        copyleft = new IconLabel(img.copyleft(), Kune.I18N.t("This is a copyleft license"), false);
+        nonCopyleft = new IconLabel(img.noCopyleft(), Kune.I18N.t("This is not a copyleft license"), false);
         nonCopyleft.setVisible(false);
 
         generalVP.add(options);
@@ -110,7 +111,6 @@ public class LicenseChoosePanel extends Composite implements LicenseChooseView {
         ccOptionsVP.add(allowModifShareAlikeRB);
         ccOptionsVP.add(noModifRB);
 
-        // i18n
         nonCcOptionsVP.add(otherLicenses);
 
         options.add(ccOptionsVP);
@@ -212,8 +212,7 @@ public class LicenseChoosePanel extends Composite implements LicenseChooseView {
 
     public void showNotCCoptions() {
         options.showWidget(1);
-        // i18n
-        optionsBox.setTitle("Select one of these licenses:");
+        optionsBox.setTitle(Kune.I18N.t("Select one of these licenses:"));
     }
 
     public void showIsCopyleft() {

@@ -9,36 +9,52 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.server.PersistenceTest;
+import org.ourproject.kune.platf.server.domain.I18nCountry;
+import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.manager.I18nCountryManager;
+import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 
 import com.google.inject.Inject;
 
 public class UserFinderTest extends PersistenceTest {
     @Inject
     User finder;
+    @Inject
+    I18nLanguageManager languageManager;
+    @Inject
+    I18nCountryManager countryManager;
 
     @Before
-    public void addData() {
-	openTransaction();
-	persist(new User("shortname1", "the name1", "one@here.com", "password1"));
-	persist(new User("shortname2", "the name2", "two@here.com", "password1"));
+    public void initData() {
+        openTransaction();
+        I18nLanguage english = new I18nLanguage(new Long(1819), "English", "English", "en");
+        languageManager.persist(english);
+        I18nCountry gb = new I18nCountry(new Long(75), "GB", "United Kingdom", "", "£%n", "GBP", ",", ".", ".",
+                "western");
+        countryManager.merge(gb);
+        // FIXME: I want to use english/gb and don't permit null in user table
+        persist(new User("shortname1", "the name1", "one@here.com", "password1", english, null));
+        persist(new User("shortname2", "the name2", "two@here.com", "password1", english, null));
     }
 
     @Test
     public void findAll() {
-	List<User> all = finder.getAll();
-	assertEquals(2, all.size());
+        List<User> all = finder.getAll();
+        assertEquals(2, all.size());
     }
 
     @Test
     public void findByEmail() {
-	User user = finder.getByEmail("one@here.com");
-	assertNotNull(user);
+        User user = finder.getByEmail("one@here.com");
+        assertNotNull(user);
     }
 
     @After
     public void close() {
-	closeTransaction();
+        if (getTransaction().isActive()) {
+            getTransaction().rollback();
+        }
     }
 
 }

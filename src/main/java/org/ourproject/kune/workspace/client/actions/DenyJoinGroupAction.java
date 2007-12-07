@@ -19,6 +19,7 @@
 
 package org.ourproject.kune.workspace.client.actions;
 
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
@@ -44,8 +45,7 @@ public class DenyJoinGroupAction implements Action {
             }
 
             public void onSuccess(final Object result) {
-                Site.info("Member rejected");
-                // TODO: Reload SocialNetwork info only
+                Site.info(Kune.I18N.t("Member rejected"));
                 services.stateManager.reloadSocialNetwork();
             }
         });

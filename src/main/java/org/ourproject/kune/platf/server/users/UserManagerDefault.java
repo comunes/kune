@@ -29,7 +29,12 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.Query;
+import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
+import org.ourproject.kune.platf.server.domain.I18nCountry;
+import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.manager.I18nCountryManager;
+import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 import org.ourproject.kune.platf.server.manager.impl.DefaultManager;
 
 import com.google.inject.Inject;
@@ -39,11 +44,16 @@ import com.google.inject.Singleton;
 @Singleton
 public class UserManagerDefault extends DefaultManager<User, Long> implements UserManager {
     private final User finder;
+    private final I18nCountryManager countryManager;
+    private final I18nLanguageManager languageManager;
 
     @Inject
-    public UserManagerDefault(final Provider<EntityManager> provider, final User finder) {
+    public UserManagerDefault(final Provider<EntityManager> provider, final User finder,
+            final I18nLanguageManager languageManager, final I18nCountryManager countryManager) {
         super(provider, User.class);
         this.finder = finder;
+        this.languageManager = languageManager;
+        this.countryManager = countryManager;
     }
 
     public List<User> getAll() {
@@ -74,8 +84,20 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     }
 
     public User createUser(final String shortName, final String longName, final String email, final String passwd) {
-        User user = new User(shortName, longName, email, passwd);
+        User user = new User(shortName, longName, email, passwd, null, null);
         return user;
+    }
+
+    public User createUser(final String shortName, final String longName, final String email, final String passwd,
+            final String langCode, final String countryCode) throws I18nNotFoundException {
+        try {
+            I18nLanguage language = languageManager.findByCode(langCode);
+            I18nCountry country = countryManager.findByCode(countryCode);
+            User user = new User(shortName, longName, email, passwd, language, country);
+            return user;
+        } catch (NoResultException e) {
+            throw new I18nNotFoundException();
+        }
     }
 
     public User find(final Long userId) {

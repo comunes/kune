@@ -35,6 +35,8 @@ public class Session {
     public String userHash;
     private List ccLicenses;
     private List notCCLicenses;
+    private List languages;
+    private List countries;
     private StateDTO currentState;
     private String[] wsThemes;
     private String defaultWsTheme;
@@ -43,6 +45,8 @@ public class Session {
         this.userHash = usersHash;
         ccLicenses = null;
         notCCLicenses = null;
+        languages = null;
+        countries = null;
     }
 
     public List getCCLicenses() {
@@ -92,6 +96,22 @@ public class Session {
 
     public boolean isLogged() {
         return userHash != null;
+    }
+
+    public List getLanguages() {
+        return languages;
+    }
+
+    public void setLanguages(final List languages) {
+        this.languages = languages;
+    }
+
+    public List getCountries() {
+        return countries;
+    }
+
+    public void setCountries(final List countries) {
+        this.countries = countries;
     }
 
 }

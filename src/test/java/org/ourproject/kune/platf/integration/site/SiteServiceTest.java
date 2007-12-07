@@ -1,4 +1,4 @@
-package org.ourproject.kune.platf.integration.kuneservice;
+package org.ourproject.kune.platf.integration.site;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.ourproject.kune.platf.client.dto.I18nCountryDTO;
+import org.ourproject.kune.platf.client.dto.I18nLanguageSimpleDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.rpc.SiteService;
@@ -15,6 +17,7 @@ import org.ourproject.kune.platf.integration.IntegrationTest;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
@@ -23,12 +26,12 @@ public class SiteServiceTest extends IntegrationTest {
 
     @Inject
     SiteService service;
-
     @Inject
     UserSession session;
-
     @Inject
     Group groupFinder;
+    @Inject
+    I18nLanguageManager i18nLangManager;
 
     @Before
     public void init() {
@@ -41,6 +44,10 @@ public class SiteServiceTest extends IntegrationTest {
         assertNotNull(initData);
         assertValidLicenseDTOList(initData.getNotCCLicenses());
         assertValidLicenseDTOList(initData.getCCLicenses());
+        assertTrue(initData.getLanguages().size() > 0);
+        assertTrue(initData.getCountries().size() > 0);
+        assertNotNull(((I18nLanguageSimpleDTO) initData.getLanguages().get(0)).getCode());
+        assertNotNull(((I18nCountryDTO) initData.getCountries().get(0)).getCode());
     }
 
     private void assertValidLicenseDTOList(final ArrayList licenseList) {

@@ -22,12 +22,26 @@ package org.ourproject.kune.platf.server.users;
 
 import java.util.List;
 
+import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
 import org.ourproject.kune.platf.server.domain.User;
 
 public interface UserManager {
     User login(String nickOrEmail, String passwd);
 
+    /**
+     * Use createUser new method with language and country params
+     * 
+     * @param shortName
+     * @param longName
+     * @param email
+     * @param passwd
+     * @return User
+     */
+    @Deprecated
     User createUser(String shortName, String longName, String email, String passwd);
+
+    User createUser(String shortName, String longName, String email, String passwd, String language, String country)
+            throws I18nNotFoundException;
 
     /**
      * IMPORTANT: if userId == null, it returns User.NONE

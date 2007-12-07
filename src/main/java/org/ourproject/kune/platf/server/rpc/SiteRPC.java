@@ -27,6 +27,8 @@ import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.rpc.SiteService;
 import org.ourproject.kune.platf.server.InitData;
 import org.ourproject.kune.platf.server.UserSession;
+import org.ourproject.kune.platf.server.manager.I18nCountryManager;
+import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.platf.server.properties.ChatProperties;
@@ -49,12 +51,15 @@ public class SiteRPC implements RPC, SiteService {
     private final ChatProperties chatProperties;
     private final UserInfoService userInfoService;
     private final KuneProperties kuneProperties;
+    private final I18nLanguageManager languageManager;
+    private final I18nCountryManager countryManager;
 
     // TODO: refactor: too many parameters! refactor to Facade Pattern
     @Inject
     public SiteRPC(final UserSession session, final UserManager userManager, final UserInfoService userInfoService,
             final LicenseManager licenseManager, final Mapper mapper, final KuneProperties kuneProperties,
-            final ChatProperties chatProperties) {
+            final ChatProperties chatProperties, final I18nLanguageManager languageManager,
+            final I18nCountryManager countryManager) {
         this.session = session;
         this.userManager = userManager;
         this.userInfoService = userInfoService;
@@ -62,6 +67,8 @@ public class SiteRPC implements RPC, SiteService {
         this.mapper = mapper;
         this.kuneProperties = kuneProperties;
         this.chatProperties = chatProperties;
+        this.languageManager = languageManager;
+        this.countryManager = countryManager;
     }
 
     @Transactional(type = TransactionType.READ_ONLY)
@@ -70,6 +77,8 @@ public class SiteRPC implements RPC, SiteService {
 
         data.setCCLicenses(licenseManager.getCC());
         data.setNotCCLicenses(licenseManager.getNotCC());
+        data.setLanguages(languageManager.getAll());
+        data.setCountries(countryManager.getAll());
         data.setUserInfo(userInfoService.buildInfo(userManager.find(session.getUser().getId()), session.getHash()));
         data.setChatHttpBase(chatProperties.getHttpBase());
         data.setChatDomain(chatProperties.getDomain());

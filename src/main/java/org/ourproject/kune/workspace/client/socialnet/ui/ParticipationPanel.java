@@ -19,6 +19,7 @@
 
 package org.ourproject.kune.workspace.client.socialnet.ui;
 
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
@@ -36,7 +37,7 @@ public class ParticipationPanel extends StackedDropDownPanel implements Particip
     private final Images img = Images.App.getInstance();
 
     public ParticipationPanel(final AbstractPresenter presenter) {
-	super(presenter, "#00D4AA", "Participates as...", "Other groups in which participates", COUNTS_VISIBLE);
+	super(presenter, "#00D4AA", Kune.I18N.t("Participates as..."), Kune.I18N.t("Other groups in which participates"), COUNTS_VISIBLE);
     }
 
     public void clear() {

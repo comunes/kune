@@ -20,19 +20,20 @@
 
 package org.ourproject.kune.app.client;
 
+import java.util.HashMap;
+
 import org.ourproject.kune.chat.client.ChatClientModule;
 import org.ourproject.kune.docs.client.DocsClientModule;
 import org.ourproject.kune.platf.client.KunePlatform;
-import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.ApplicationBuilder;
+import org.ourproject.kune.platf.client.services.I18nUITranslation;
 import org.ourproject.kune.workspace.client.WorkspaceClientModule;
 
 import to.tipit.gwtlib.FireLog;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Cookies;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.WindowCloseListener;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class KuneEntryPoint implements EntryPoint {
 
@@ -40,29 +41,21 @@ public class KuneEntryPoint implements EntryPoint {
     }
 
     public void onModuleLoad() {
-        String userHash = obtainUserHash();
-        KunePlatform platform = new KunePlatform();
-        platform.install(new WorkspaceClientModule());
-        platform.install(new DocsClientModule());
-        platform.install(new ChatClientModule());
-        final Application app = new ApplicationBuilder(platform).build(userHash);
-        Window.addWindowCloseListener(new WindowCloseListener() {
-            public void onWindowClosed() {
-                app.stop();
+        final String userHash = Cookies.getCookie("userHash");
+        FireLog.debug("UserHash: " + userHash);
+        I18nUITranslation.getInstance().init(new AsyncCallback() {
+            public void onFailure(final Throwable caught) {
+                FireLog.debug("Workspace adaptation to your language failed");
             }
 
-            public String onWindowClosing() {
-                return null;
+            public void onSuccess(final Object result) {
+                I18nUITranslation.getInstance().setLexicon((HashMap) result);
+                KunePlatform platform = new KunePlatform();
+                platform.install(new WorkspaceClientModule());
+                platform.install(new DocsClientModule());
+                platform.install(new ChatClientModule());
+                new ApplicationBuilder(platform).build(userHash);
             }
         });
-        app.start();
-
     }
-
-    private String obtainUserHash() {
-        String userHash = Cookies.getCookie("userHash");
-        FireLog.debug("UserHash: " + userHash);
-        return userHash;
-    }
-
 }

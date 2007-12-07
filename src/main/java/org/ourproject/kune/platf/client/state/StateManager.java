@@ -26,6 +26,7 @@ import org.ourproject.kune.workspace.client.dto.StateDTO;
 import com.google.gwt.user.client.HistoryListener;
 
 public interface StateManager extends HistoryListener {
+
     String getUser();
 
     void reload();

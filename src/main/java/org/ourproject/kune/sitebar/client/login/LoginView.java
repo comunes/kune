@@ -48,4 +48,8 @@ public interface LoginView extends View {
 
     public void setMessage(String message, int type);
 
+    public String getLanguage();
+
+    public String getCountry();
+
 }

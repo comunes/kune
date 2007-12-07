@@ -22,7 +22,9 @@ package org.ourproject.kune.platf.server.users;
 import org.ourproject.kune.platf.server.ParticipationData;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.manager.I18nTranslationManager;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 
 import com.google.gwt.user.client.rpc.SerializableException;
@@ -33,10 +35,13 @@ import com.google.inject.Singleton;
 public class UserInfoServiceDefault implements UserInfoService {
 
     private final SocialNetworkManager socialNetworkManager;
+    private final I18nTranslationManager translationManager;
 
     @Inject
-    public UserInfoServiceDefault(final SocialNetworkManager socialNetwork) {
+    public UserInfoServiceDefault(final SocialNetworkManager socialNetwork,
+            final I18nTranslationManager translationManager) {
         this.socialNetworkManager = socialNetwork;
+        this.translationManager = translationManager;
     }
 
     public UserInfo buildInfo(final User user, final String userHash) throws SerializableException {
@@ -48,7 +53,10 @@ public class UserInfoServiceDefault implements UserInfoService {
             info.setName(user.getName());
             info.setChatName(user.getShortName());
             info.setChatPassword(user.getPassword());
-
+            I18nLanguage language = user.getLanguage();
+            info.setLanguage(language);
+            info.setCountry(user.getCountry());
+            info.setLexicon(translationManager.getLexicon(language.getCode()));
             info.setUserHash(userHash);
 
             Group userGroup = user.getUserGroup();

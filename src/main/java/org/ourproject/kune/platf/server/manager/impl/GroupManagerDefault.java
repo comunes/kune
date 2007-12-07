@@ -120,7 +120,6 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
             initGroup(user, group);
             return group;
         } else {
-            // i18n
             throw new UserMustBeLoggedException();
         }
 

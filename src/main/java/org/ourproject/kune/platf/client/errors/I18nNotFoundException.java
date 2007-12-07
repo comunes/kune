@@ -18,8 +18,12 @@
  *
  */
 
-package org.ourproject.kune.platf.server.domain;
+package org.ourproject.kune.platf.client.errors;
 
-public class Lang {
+import com.google.gwt.user.client.rpc.SerializableException;
+
+public class I18nNotFoundException extends SerializableException {
+
+    private static final long serialVersionUID = 1L;
 
 }

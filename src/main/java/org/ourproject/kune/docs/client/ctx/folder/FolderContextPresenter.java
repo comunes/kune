@@ -26,6 +26,7 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsImages;
 
@@ -33,22 +34,22 @@ public class FolderContextPresenter implements FolderContext {
     private final ContextItems contextItems;
 
     public FolderContextPresenter(final ContextItems contextItems) {
-	this.contextItems = contextItems;
-	ContextItemsImages contextImages = ContextItemsImages.App.getInstance();
-	contextItems.registerType(DocumentClientTool.TYPE_DOCUMENT, contextImages.pageWhite());
-	contextItems.registerType(DocumentClientTool.TYPE_FOLDER, contextImages.folder());
-	// i18n
-	contextItems.canCreate(DocumentClientTool.TYPE_DOCUMENT, "Add new document", DocsEvents.ADD_DOCUMENT);
-	contextItems.canCreate(DocumentClientTool.TYPE_FOLDER, "Add new folder", DocsEvents.ADD_FOLDER);
-	contextItems.setParentTreeVisible(true);
+        this.contextItems = contextItems;
+        ContextItemsImages contextImages = ContextItemsImages.App.getInstance();
+        contextItems.registerType(DocumentClientTool.TYPE_DOCUMENT, contextImages.pageWhite());
+        contextItems.registerType(DocumentClientTool.TYPE_FOLDER, contextImages.folder());
+        contextItems.canCreate(DocumentClientTool.TYPE_DOCUMENT, Kune.I18N.t("Add new document"),
+                DocsEvents.ADD_DOCUMENT);
+        contextItems.canCreate(DocumentClientTool.TYPE_FOLDER, Kune.I18N.t("Add new folder"), DocsEvents.ADD_FOLDER);
+        contextItems.setParentTreeVisible(true);
     }
 
     public View getView() {
-	return contextItems.getView();
+        return contextItems.getView();
     }
 
     public void setContainer(final StateToken state, final ContainerDTO container, final AccessRightsDTO rights) {
-	contextItems.showContainer(state, container, rights);
+        contextItems.showContainer(state, container, rights);
     }
 
 }

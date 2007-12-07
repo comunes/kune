@@ -30,8 +30,8 @@ public interface UserServiceAsync {
 
     void logout(AsyncCallback callback);
 
-    void createUser(String shortName, String longName, String email, String paswd, LicenseDTO license,
-            AsyncCallback asyncCallback);
+    void createUser(String shortName, String longName, String email, String paswd, LicenseDTO license, String language,
+            String country, String timezone, AsyncCallback asyncCallback);
 
     void reloadUserInfo(String userHash, AsyncCallback asyncCallback);
 

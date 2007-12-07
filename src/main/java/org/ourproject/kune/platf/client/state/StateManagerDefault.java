@@ -28,6 +28,7 @@ import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
 import org.ourproject.kune.platf.client.errors.LastAdminInGroupException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
@@ -165,20 +166,17 @@ public class StateManagerDefault implements StateManager {
         try {
             throw caught;
         } catch (final AccessViolationException e) {
-            // i18n
-            Site.error("You don't have rights to do that");
+            Site.error(Kune.I18N.t("You don't have rights to do that"));
         } catch (final UserMustBeLoggedException e) {
-            // i18n
-            Site.error("Please sign in or register");
+            Site.error(Kune.I18N.t("Please sign in or register"));
         } catch (final GroupNotFoundException e) {
-            Site.error("Group not found");
+            Site.error(Kune.I18N.t("Group not found"));
         } catch (final ContentNotFoundException e) {
-            Site.error("Content not found");
+            Site.error(Kune.I18N.t("Content not found"));
         } catch (final LastAdminInGroupException e) {
-            Site.showAlertMessage("Sorry, you are the last admin of this group. "
-                    + "Look for someone to substitute you appropriately as admin before unjoin this group.");
+            Site.showAlertMessage(Kune.I18N.t("Sorry, you are the last admin of this group. Look for someone to substitute you appropriately as admin before unjoin this group."));
         } catch (final Throwable e) {
-            Site.error("Error performing operation");
+            Site.error(Kune.I18N.t("Error performing operation"));
             GWT.log("Other kind of exception in StateManagerDefault/processErrorException", null);
             throw new RuntimeException();
         }

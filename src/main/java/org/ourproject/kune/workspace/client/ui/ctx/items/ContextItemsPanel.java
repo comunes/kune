@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.workspace.client.ui.ctx.items;
 
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.HorizontalLine;
 import org.ourproject.kune.platf.client.ui.IconLabel;
@@ -115,11 +116,11 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
     public void showCreationField(final String typeName) {
         // Workaround: gwt-ext bug, I cannot use typeName directly
         workaroundTypeName = typeName;
-        // i18n
-        MessageBox.prompt("Add a new " + typeName, "Please enter name:", new MessageBox.PromptCallback() {
-            public void execute(final String btnID, final String text) {
-                presenter.create(workaroundTypeName, text, currentEventName);
-            }
-        });
+        MessageBox.prompt(Kune.I18N.t("Add a new <tt>%s</tt>", typeName), Kune.I18N.t("Please enter name:"),
+                new MessageBox.PromptCallback() {
+                    public void execute(final String btnID, final String text) {
+                        presenter.create(workaroundTypeName, text, currentEventName);
+                    }
+                });
     }
 }

@@ -27,6 +27,8 @@ public class IntegrationTestHelper {
                     @Override
                     protected void configure() {
                         bindScope(SessionScoped.class, Scopes.SINGLETON);
+                        // test: use memory
+                        // test_db: use mysql
                         bindConstant().annotatedWith(JpaUnit.class).to("test");
                         bindConstant().annotatedWith(PropertiesFileName.class).to("kune.properties");
                     }

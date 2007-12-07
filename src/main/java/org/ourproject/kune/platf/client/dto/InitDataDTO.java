@@ -27,11 +27,12 @@ public class InitDataDTO implements IsSerializable {
     /**
      * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.LicenseDTO>
      */
-    ArrayList ccLicenses;
+    private ArrayList ccLicenses;
+
     /**
      * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.LicenseDTO>
      */
-    ArrayList notCCLicenses;
+    private ArrayList notCCLicenses;
 
     UserInfoDTO userInfo;
     private String chatHttpBase;
@@ -40,72 +41,98 @@ public class InitDataDTO implements IsSerializable {
     private String defaultWsTheme;
     private String[] wsThemes;
 
+    /**
+     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.I18nLanguageSimpleDTO>
+     */
+    private ArrayList languages;
+
+    /**
+     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.I18nCountryDTO>
+     */
+    private ArrayList countries;
+
     public ArrayList getCCLicenses() {
-	return ccLicenses;
+        return ccLicenses;
     }
 
     public void setCCLicenses(final ArrayList ccLicenses) {
-	this.ccLicenses = ccLicenses;
+        this.ccLicenses = ccLicenses;
     }
 
     public ArrayList getNotCCLicenses() {
-	return notCCLicenses;
+        return notCCLicenses;
     }
 
     public void setNotCCLicenses(final ArrayList notLicenses) {
-	this.notCCLicenses = notLicenses;
+        this.notCCLicenses = notLicenses;
     }
 
     public UserInfoDTO getUserInfo() {
-	return userInfo;
+        return userInfo;
     }
 
     public void setUserInfo(final UserInfoDTO currentUser) {
-	this.userInfo = currentUser;
+        this.userInfo = currentUser;
     }
 
     public String getChatHttpBase() {
-	return chatHttpBase;
+        return chatHttpBase;
     }
 
     public void setChatHttpBase(final String chatHttpBase) {
-	this.chatHttpBase = chatHttpBase;
+        this.chatHttpBase = chatHttpBase;
     }
 
     public String getChatDomain() {
-	return chatDomain;
+        return chatDomain;
     }
 
     public void setChatDomain(final String chatDomain) {
-	this.chatDomain = chatDomain;
+        this.chatDomain = chatDomain;
     }
 
     public String getChatRoomHost() {
-	return chatRoomHost;
+        return chatRoomHost;
     }
 
     public void setChatRoomHost(final String chatRoomHost) {
-	this.chatRoomHost = chatRoomHost;
+        this.chatRoomHost = chatRoomHost;
     }
 
     public boolean hasUser() {
-	return getUserInfo() != null;
+        return getUserInfo() != null;
     }
 
     public String getDefaultWsTheme() {
-	return defaultWsTheme;
+        return defaultWsTheme;
     }
 
     public void setDefaultWsTheme(final String defaultWsTheme) {
-	this.defaultWsTheme = defaultWsTheme;
+        this.defaultWsTheme = defaultWsTheme;
     }
 
     public String[] getWsThemes() {
-	return wsThemes;
+        return wsThemes;
     }
 
     public void setWsThemes(final String[] wsThemes) {
-	this.wsThemes = wsThemes;
+        this.wsThemes = wsThemes;
+    }
+
+    public ArrayList getLanguages() {
+        return languages;
+    }
+
+    public void setLanguages(final ArrayList languages) {
+        this.languages = languages;
+    }
+
+    public ArrayList getCountries() {
+        return countries;
+    }
+
+    public void setCountries(final ArrayList countries) {
+        this.countries = countries;
     }
 
 }
