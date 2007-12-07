@@ -1,4 +1,5 @@
-2007-12-05 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+2007-12-07 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* Added search total results to lucene/json searchs
 	* Added i18n Support in gwt side and server based in custom solution
 	(inspired in Rail's Globalize)
 	* First db schema upgrade aproach

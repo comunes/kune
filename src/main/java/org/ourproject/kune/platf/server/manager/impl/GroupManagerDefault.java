@@ -138,11 +138,11 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         return userId != null ? find(User.class, userId).getUserGroup() : null;
     }
 
-    public List<Group> search(final String search) {
+    public SearchResult search(final String search) {
         return this.search(search, null, null);
     }
 
-    public List<Group> search(final String search, final Integer firstResult, final Integer maxResults) {
+    public SearchResult search(final String search, final Integer firstResult, final Integer maxResults) {
         MultiFieldQueryParser parser = new MultiFieldQueryParser(
                 new String[] { "longName", "shortName", "publicDesc" }, new StandardAnalyzer());
         Query query;

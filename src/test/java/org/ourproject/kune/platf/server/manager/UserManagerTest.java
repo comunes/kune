@@ -4,8 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-import java.util.List;
-
 import org.apache.lucene.queryParser.ParseException;
 import org.hibernate.validator.InvalidStateException;
 import org.junit.After;
@@ -16,6 +14,7 @@ import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.I18nCountry;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.manager.impl.DefaultManager.SearchResult;
 import org.ourproject.kune.platf.server.users.UserManager;
 
 import com.google.gwt.user.client.rpc.SerializableException;
@@ -113,9 +112,9 @@ public class UserManagerTest extends PersistenceTest {
     @Test
     public void userSearch() throws SerializableException, ParseException {
         userManager.reIndex();
-        List<User> result = userManager.search(USER_SHORT_NAME);
-        assertEquals(1, result.size());
-        assertEquals(USER_SHORT_NAME, result.get(0).getShortName());
+        SearchResult result = userManager.search(USER_SHORT_NAME);
+        assertEquals(1, result.getSize());
+        assertEquals(USER_SHORT_NAME, ((User) result.getList().get(0)).getShortName());
         rollbackTransaction();
     }
 

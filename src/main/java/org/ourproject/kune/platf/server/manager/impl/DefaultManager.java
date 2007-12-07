@@ -65,11 +65,11 @@ public abstract class DefaultManager<T, K> {
         return entity;
     }
 
-    public List<T> search(final Query query) {
+    public SearchResult search(final Query query) {
         return search(query, null, null);
     }
 
-    public List<T> search(final Query query, final Integer firstResult, final Integer maxResults) {
+    public SearchResult search(final Query query, final Integer firstResult, final Integer maxResults) {
         // TODO: Inject this
         FullTextEntityManager fullTextEm = org.hibernate.search.jpa.Search
                 .createFullTextEntityManager(getEntityManager());
@@ -78,8 +78,7 @@ public abstract class DefaultManager<T, K> {
             emQuery.setFirstResult(firstResult);
             emQuery.setMaxResults(maxResults);
         }
-        return emQuery.getResultList();
-
+        return new SearchResult(emQuery.getResultSize(), emQuery.getResultList());
     }
 
     public void reIndex() {
@@ -102,6 +101,37 @@ public abstract class DefaultManager<T, K> {
      */
     protected <X> X find(final Class<X> entityClass, final Long primaryKey) {
         return getEntityManager().find(entityClass, primaryKey);
+    }
+
+    public class SearchResult {
+        List<T> list;
+        Integer size;
+
+        public SearchResult() {
+            this(null, null);
+        }
+
+        public SearchResult(final Integer size, final List<T> list) {
+            this.list = list;
+            this.size = size;
+        }
+
+        public List<T> getList() {
+            return list;
+        }
+
+        public void setList(final List<T> list) {
+            this.list = list;
+        }
+
+        public Integer getSize() {
+            return size;
+        }
+
+        public void setSize(final Integer size) {
+            this.size = size;
+        }
+
     }
 
 }

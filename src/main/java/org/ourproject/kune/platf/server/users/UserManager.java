@@ -20,10 +20,9 @@
 
 package org.ourproject.kune.platf.server.users;
 
-import java.util.List;
-
 import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
 import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.manager.impl.DefaultManager.SearchResult;
 
 public interface UserManager {
     User login(String nickOrEmail, String passwd);
@@ -51,10 +50,10 @@ public interface UserManager {
      */
     User find(Long userId);
 
-    List<User> search(String search);
+    SearchResult search(String search);
+
+    SearchResult search(String search, Integer firstResult, Integer maxResults);
 
     void reIndex();
-
-    List<User> search(String search, Integer firstResult, Integer maxResults);
 
 }

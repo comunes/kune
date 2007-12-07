@@ -3,8 +3,6 @@ package org.ourproject.kune.platf.server.manager;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.List;
-
 import org.apache.lucene.queryParser.ParseException;
 import org.junit.After;
 import org.junit.Before;
@@ -20,6 +18,7 @@ import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.manager.impl.DefaultManager.SearchResult;
 import org.ourproject.kune.platf.server.users.UserManager;
 
 import com.google.gwt.user.client.rpc.SerializableException;
@@ -145,9 +144,9 @@ public class GroupManagerTest extends PersistenceTest {
                 GroupType.PROJECT);
         groupManager.createGroup(group, user);
         groupManager.reIndex();
-        List<Group> result = groupManager.search("ysei");
-        assertEquals(1, result.size());
-        assertEquals("ysei", result.get(0).getShortName());
+        SearchResult result = groupManager.search("ysei");
+        assertEquals(1, result.getSize());
+        assertEquals("ysei", ((Group) result.getList().get(0)).getShortName());
         rollbackTransaction();
     }
 
@@ -157,10 +156,12 @@ public class GroupManagerTest extends PersistenceTest {
             createTestGroup(i);
         }
         groupManager.reIndex();
-        List<Group> result = groupManager.search("Yellow", 0, 5);
-        assertEquals(5, result.size());
-        List<Group> result2 = groupManager.search("Yellow", 5, 5);
-        assertEquals(4, result2.size());
+        SearchResult result = groupManager.search("Yellow", 0, 5);
+        assertEquals(9, result.getSize());
+        assertEquals(5, result.getList().size());
+        SearchResult result2 = groupManager.search("Yellow", 5, 5);
+        assertEquals(9, result2.getSize());
+        assertEquals(4, result2.getList().size());
         rollbackTransaction();
     }
 

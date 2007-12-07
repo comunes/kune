@@ -13,6 +13,7 @@ import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.GroupType;
 import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.manager.impl.DefaultManager.SearchResult;
 import org.ourproject.kune.platf.server.users.UserManager;
 
 import com.google.gwt.user.client.rpc.SerializableException;
@@ -68,10 +69,10 @@ public class SearchManagerTest extends PersistenceTest {
             createTestGroup(i);
         }
         groupManager.reIndex();
-        List<Group> result = groupManager.search("Yellow", 0, 5);
-        assertEquals(5, result.size());
-        List<Group> result2 = groupManager.search("Yellow", 5, 5);
-        assertEquals(4, result2.size());
+        SearchResult result = groupManager.search("Yellow", 0, 5);
+        assertEquals(5, result.getSize());
+        SearchResult result2 = groupManager.search("Yellow", 5, 5);
+        assertEquals(4, result2.getSize());
         rollbackTransaction();
     }
 

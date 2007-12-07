@@ -28,6 +28,7 @@ import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.manager.impl.DefaultManager.SearchResult;
 
 public interface GroupManager extends Manager<Group, Long> {
 
@@ -53,9 +54,9 @@ public interface GroupManager extends Manager<Group, Long> {
      */
     Group getGroupOfUserWithId(Long userId);
 
-    List<Group> search(String search);
+    SearchResult search(String search);
 
-    List<Group> search(String search, Integer firstResult, Integer maxResults);
+    SearchResult search(String search, Integer firstResult, Integer maxResults);
 
     void reIndex();
 
