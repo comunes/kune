@@ -17,28 +17,27 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.actions;
+package org.ourproject.kune.workspace.client.actions.sn;
 
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.sitebar.client.Site;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class DeleteMemberAction implements Action {
+public class UnJoinGroupAction implements Action {
 
     public void execute(final Object value, final Object extra, final Services services) {
-        onDeleteMember(services, (String) value);
+        onUnJoinGroup(services, (String) value);
     }
 
-    private void onDeleteMember(final Services services, final String groupShortName) {
+    private void onUnJoinGroup(final Services services, final String groupShortName) {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        server.deleteMember(services.session.userHash, groupShortName, services.session.getCurrentState().getGroup()
-                .getShortName(), new AsyncCallback() {
+        server.unJoinGroup(services.session.userHash, groupShortName, new AsyncCallback() {
             public void onFailure(final Throwable caught) {
                 Site.hideProgress();
                 services.stateManager.processErrorException(caught);
@@ -46,10 +45,9 @@ public class DeleteMemberAction implements Action {
 
             public void onSuccess(final Object result) {
                 Site.hideProgress();
-                Site.info(Kune.I18N.t("Member removed"));
+                Site.info(Kune.I18N.t("Removed as member"));
                 services.stateManager.reloadSocialNetwork();
             }
         });
-
     }
 }

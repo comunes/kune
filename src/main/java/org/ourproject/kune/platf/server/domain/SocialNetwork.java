@@ -41,72 +41,80 @@ public class SocialNetwork {
     GroupList pendingCollaborators;
 
     public SocialNetwork() {
-	accessLists = new AccessLists();
-	pendingCollaborators = new GroupList();
+        accessLists = new AccessLists();
+        pendingCollaborators = new GroupList();
     }
 
     public Long getId() {
-	return id;
+        return id;
     }
 
     public GroupList getPendingCollaborators() {
-	return pendingCollaborators;
+        return pendingCollaborators;
     }
 
     public void setPendingCollaborators(final GroupList pendingCollaborators) {
-	this.pendingCollaborators = pendingCollaborators;
+        this.pendingCollaborators = pendingCollaborators;
     }
 
     public void setAccessLists(final AccessLists accessList) {
-	this.accessLists = accessList;
+        this.accessLists = accessList;
     }
 
     public void setId(final Long id) {
-	this.id = id;
+        this.id = id;
     }
 
     public void addAdmin(final Group group) {
-	accessLists.addAdmin(group);
+        accessLists.addAdmin(group);
     }
 
     public void addCollaborator(final Group group) {
-	accessLists.addEditor(group);
+        accessLists.addEditor(group);
     }
 
     public void addViewer(final Group group) {
-	accessLists.addViewer(group);
+        accessLists.addViewer(group);
     }
 
     public void addPendingCollaborator(final Group group) {
-	pendingCollaborators.add(group);
+        pendingCollaborators.add(group);
     }
 
     public void removeAdmin(final Group group) {
-	accessLists.removeAdmin(group);
+        accessLists.removeAdmin(group);
     }
 
     public void removeCollaborator(final Group group) {
-	accessLists.removeEditor(group);
+        accessLists.removeEditor(group);
     }
 
     public void removeViewer(final Group group) {
-	accessLists.removeViewer(group);
+        accessLists.removeViewer(group);
     }
 
     public void removePendingCollaborator(final Group group) {
-	pendingCollaborators.getList().remove(group);
+        pendingCollaborators.getList().remove(group);
     }
 
     public AccessLists getAccessLists() {
-	return accessLists;
+        return accessLists;
     }
 
     public boolean isAdmin(final Group group) {
-	return accessLists.getAdmins().getList().contains(group);
+        return accessLists.getAdmins().getList().contains(group);
     }
 
     public boolean isCollab(final Group group) {
-	return accessLists.getEditors().getList().contains(group);
+        return accessLists.getEditors().getList().contains(group);
+    }
+
+    public boolean isViewer(final Group group) {
+        return accessLists.getViewers().getList().contains(group);
+    }
+
+    public boolean isPendingCollab(final Group group) {
+        return pendingCollaborators.getList().contains(group);
     }
 
 }

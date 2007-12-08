@@ -136,6 +136,10 @@ public class WorkspacePresenter implements Workspace {
         return components.getTagsComponent();
     }
 
+    public GroupLiveSearchComponent getGroupLiveSearchComponent() {
+        return components.getGroupLiveSearchComponent();
+    }
+
     public void setTheme(final String theme) {
         view.setTheme(theme);
     }

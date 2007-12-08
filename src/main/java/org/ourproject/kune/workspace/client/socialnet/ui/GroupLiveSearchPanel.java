@@ -20,18 +20,20 @@
 package org.ourproject.kune.workspace.client.socialnet.ui;
 
 import org.ourproject.kune.platf.client.AbstractPresenter;
-import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
-import org.ourproject.kune.workspace.client.WorkspaceEvents;
-import org.ourproject.kune.workspace.client.socialnet.AddGroupMembersView;
+import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.workspace.client.socialnet.GroupLiveSearchPresenter;
+import org.ourproject.kune.workspace.client.socialnet.GroupLiveSearchView;
 
+import com.google.gwt.user.client.ui.PopupPanel;
+import com.gwtext.client.core.Connection;
 import com.gwtext.client.core.Template;
 import com.gwtext.client.data.DataProxy;
 import com.gwtext.client.data.FieldDef;
+import com.gwtext.client.data.HttpProxy;
 import com.gwtext.client.data.JsonReader;
 import com.gwtext.client.data.JsonReaderConfig;
 import com.gwtext.client.data.Record;
 import com.gwtext.client.data.RecordDef;
-import com.gwtext.client.data.ScriptTagProxy;
 import com.gwtext.client.data.Store;
 import com.gwtext.client.data.StringFieldDef;
 import com.gwtext.client.widgets.form.ComboBox;
@@ -40,23 +42,48 @@ import com.gwtext.client.widgets.form.Form;
 import com.gwtext.client.widgets.form.FormConfig;
 import com.gwtext.client.widgets.form.event.ComboBoxListenerAdapter;
 
-public class AddGroupMembersPanel implements AddGroupMembersView {
+public class GroupLiveSearchPanel implements GroupLiveSearchView {
 
-    private Form createGroupSearchForm;
+    private final Form groupSearchForm;
+    private final AbstractPresenter presenter;
+    private PopupPanel groupLiveSearchPopup;
 
-    public AddGroupMembersPanel(final AbstractPresenter presenter) {
-        createGroupSearchForm();
+    public GroupLiveSearchPanel(final AbstractPresenter initPresenter) {
+        this.presenter = initPresenter;
+        groupSearchForm = createGroupSearchForm();
+    }
+
+    public void reset() {
+        groupSearchForm.reset();
+    }
+
+    public void show() {
+        groupLiveSearchPopup = new PopupPanel(true);
+        groupLiveSearchPopup.setVisible(false);
+        groupLiveSearchPopup.show();
+        groupLiveSearchPopup.setWidget(groupSearchForm);
+        groupLiveSearchPopup.center();
+        groupLiveSearchPopup.setVisible(true);
+    }
+
+    public void hide() {
+        groupLiveSearchPopup.hide();
+    }
+
+    public void center() {
+        groupLiveSearchPopup.center();
     }
 
     private Form createGroupSearchForm() {
-        // http://localhost:8080/kune/json/GroupJSONService/search?query=site
-        DataProxy dataProxy = new ScriptTagProxy("/kune/json/GroupJSONService/search?query=site");
+        DataProxy dataProxy = new HttpProxy("/kune/json/GroupJSONService/search", Connection.POST);
+        // DataProxy dataProxy = new
+        // ScriptTagProxy("/kune/json/GroupJSONService/search");
 
         JsonReader reader = new JsonReader(new JsonReaderConfig() {
             {
-                setRoot("groups");
-                setTotalProperty("totalCount");
-                setId("groupId");
+                setRoot("list");
+                setTotalProperty("size");
+                setId("shortName");
             }
         }, new RecordDef(new FieldDef[] { new StringFieldDef("shortName", "shortName"),
                 new StringFieldDef("longName", "longName"), new StringFieldDef("link", "link"),
@@ -70,30 +97,29 @@ public class AddGroupMembersPanel implements AddGroupMembersView {
                 setWidth(610);
                 setSurroundWithBox(true);
                 setHideLabels(true);
-                setHeader("Search for existing users/groups");
+                setHeader(Kune.I18N.t("Search existing users and groups and add as members"));
             }
         });
 
         final Template resultTpl = new Template(
-                "<div class=\"search-item\"><h3><span>{shortName}</span></h3>{longName}</div>");
+                "<div class=\"search-item\"><span><img alt=\"group logo\" src=\"images/group-def-icon.png\" style=\"height: 16px; width: 16px;\" />{shortName}:&nbsp;{longName}</span></div>");
         ComboBox cb = new ComboBox(new ComboBoxConfig() {
             {
                 setStore(store);
                 setDisplayField("longName");
                 setTypeAhead(false);
-                setLoadingText("Searching...");
+                setLoadingText(Kune.I18N.t("Searching..."));
                 setWidth(570);
                 setPageSize(10);
                 setHideTrigger(true);
                 setTpl(resultTpl);
                 setMode(ComboBox.REMOTE);
-                setTitle("Groups");
+                setTitle(Kune.I18N.t("User or group"));
+                setMinChars(3);
 
                 setComboBoxListener(new ComboBoxListenerAdapter() {
                     public void onSelect(ComboBox comboBox, Record record, int index) {
-                        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ADD_COLLAB_MEMBER,
-                                record.getAsString("shortName"), null);
-                        // presenter.close ?
+                        ((GroupLiveSearchPresenter) presenter).fireListener(record.getAsString("shortName"));
                     }
                 });
             }

@@ -34,10 +34,13 @@ import org.ourproject.kune.workspace.client.license.ui.LicensePanel;
 import org.ourproject.kune.workspace.client.presence.BuddiesPresencePresenter;
 import org.ourproject.kune.workspace.client.presence.BuddiesPresenceView;
 import org.ourproject.kune.workspace.client.presence.ui.BuddiesPresencePanel;
+import org.ourproject.kune.workspace.client.socialnet.GroupLiveSearchPresenter;
+import org.ourproject.kune.workspace.client.socialnet.GroupLiveSearchView;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersPresenter;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersView;
 import org.ourproject.kune.workspace.client.socialnet.ParticipationPresenter;
 import org.ourproject.kune.workspace.client.socialnet.ParticipationView;
+import org.ourproject.kune.workspace.client.socialnet.ui.GroupLiveSearchPanel;
 import org.ourproject.kune.workspace.client.socialnet.ui.GroupMembersPanel;
 import org.ourproject.kune.workspace.client.socialnet.ui.ParticipationPanel;
 import org.ourproject.kune.workspace.client.tags.TagsPresenter;
@@ -62,6 +65,7 @@ import org.ourproject.kune.workspace.client.workspace.ContentTitleView;
 import org.ourproject.kune.workspace.client.workspace.ContentToolBarComponent;
 import org.ourproject.kune.workspace.client.workspace.ContentToolBarPresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentToolBarView;
+import org.ourproject.kune.workspace.client.workspace.GroupLiveSearchComponent;
 import org.ourproject.kune.workspace.client.workspace.GroupMembersComponent;
 import org.ourproject.kune.workspace.client.workspace.ParticipationComponent;
 import org.ourproject.kune.workspace.client.workspace.TagsComponent;
@@ -168,6 +172,13 @@ public class WorkspaceFactory {
     public static ContentToolBarComponent createContentToolBarComponent() {
         ContentToolBarPresenter presenter = new ContentToolBarPresenter();
         ContentToolBarView view = new ContentToolBarPanel(presenter);
+        presenter.init(view);
+        return presenter;
+    }
+
+    public static GroupLiveSearchComponent createGroupLiveSearchComponent() {
+        GroupLiveSearchPresenter presenter = new GroupLiveSearchPresenter();
+        GroupLiveSearchView view = new GroupLiveSearchPanel(presenter);
         presenter.init(view);
         return presenter;
     }

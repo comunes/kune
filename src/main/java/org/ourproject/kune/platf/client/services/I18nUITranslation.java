@@ -59,6 +59,7 @@ public class I18nUITranslation {
             // Not translated and not in db, make a petition for translation
             DefaultDispatcher.getInstance().fireDeferred(WorkspaceEvents.GET_TRANSLATION, this.language, text);
             translation = text;
+            lexicon.put(text, translation);
         }
         return translation;
     }

@@ -28,6 +28,7 @@ import javax.persistence.EntityManager;
 
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
+import org.ourproject.kune.platf.client.errors.AlreadyGroupMemberException;
 import org.ourproject.kune.platf.client.errors.LastAdminInGroupException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.server.ParticipationData;
@@ -63,21 +64,33 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
             throws SerializableException {
         SocialNetwork sn = inGroup.getSocialNetwork();
         checkUserLoggedIsAdmin(userLogged, sn);
+        checkGroupIsNotAlreadyAMember(group, sn);
         sn.addAdmin(group);
+        if (sn.isPendingCollab(group)) {
+            sn.removePendingCollaborator(group);
+        }
     }
 
     public void addGroupToCollabs(final User userLogged, final Group group, final Group inGroup)
             throws SerializableException {
         SocialNetwork sn = inGroup.getSocialNetwork();
         checkUserLoggedIsAdmin(userLogged, sn);
+        checkGroupIsNotAlreadyAMember(group, sn);
         sn.addCollaborator(group);
+        if (sn.isPendingCollab(group)) {
+            sn.removePendingCollaborator(group);
+        }
     }
 
     public void addGroupToViewers(final User userLogged, final Group group, final Group inGroup)
             throws SerializableException {
         SocialNetwork sn = inGroup.getSocialNetwork();
         checkUserLoggedIsAdmin(userLogged, sn);
+        checkGroupIsNotAlreadyAMember(group, sn);
         sn.addViewer(group);
+        if (sn.isPendingCollab(group)) {
+            sn.removePendingCollaborator(group);
+        }
     }
 
     public String requestToJoin(final User user, final Group inGroup) throws SerializableException,
@@ -231,6 +244,14 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
         if (!sn.isAdmin(userLogged.getUserGroup())) {
             throw new AccessViolationException();
         }
+    }
+
+    private void checkGroupIsNotAlreadyAMember(final Group group, final SocialNetwork sn)
+            throws AlreadyGroupMemberException {
+        if (sn.isAdmin(group) || sn.isCollab(group) || sn.isViewer(group)) {
+            throw new AlreadyGroupMemberException();
+        }
+
     }
 
 }

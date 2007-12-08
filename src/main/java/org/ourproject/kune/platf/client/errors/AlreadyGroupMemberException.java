@@ -1,4 +1,5 @@
 /*
+ *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -17,10 +18,11 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.socialnet;
+package org.ourproject.kune.platf.client.errors;
 
-import org.ourproject.kune.platf.client.View;
+import com.google.gwt.user.client.rpc.SerializableException;
 
-public interface AddGroupMembersView extends View {
+public class AlreadyGroupMemberException extends SerializableException {
+    private static final long serialVersionUID = 1L;
 
 }

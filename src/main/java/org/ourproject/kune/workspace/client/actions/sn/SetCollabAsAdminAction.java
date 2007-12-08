@@ -17,7 +17,7 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.actions;
+package org.ourproject.kune.workspace.client.actions.sn;
 
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.Services;
@@ -28,16 +28,16 @@ import org.ourproject.kune.sitebar.client.Site;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class SetAdminAsCollabAction implements Action {
+public class SetCollabAsAdminAction implements Action {
 
     public void execute(final Object value, final Object extra, final Services services) {
-        onSetAdminAsCollab(services, (String) value);
+        onSetCollabAsAdmin(services, (String) value);
     }
 
-    private void onSetAdminAsCollab(final Services services, final String groupShortName) {
+    private void onSetCollabAsAdmin(final Services services, final String groupShortName) {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        server.setAdminAsCollab(services.session.userHash, groupShortName, services.session.getCurrentState()
+        server.setCollabAsAdmin(services.session.userHash, groupShortName, services.session.getCurrentState()
                 .getGroup().getShortName(), new AsyncCallback() {
             public void onFailure(final Throwable caught) {
                 Site.hideProgress();
@@ -48,6 +48,7 @@ public class SetAdminAsCollabAction implements Action {
                 Site.hideProgress();
                 Site.info(Kune.I18N.t("Type of member changed"));
                 services.stateManager.reloadSocialNetwork();
+                services.app.getWorkspace().getGroupMembersComponent().showAdmins();
             }
         });
 

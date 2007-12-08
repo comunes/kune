@@ -27,4 +27,8 @@ public interface GroupMembersComponent extends Component {
 
     public void getGroupMembers(String user, GroupDTO group, AccessRightsDTO accessRightsDTO);
 
+    public void showCollabs();
+
+    public void showAdmins();
+
 }

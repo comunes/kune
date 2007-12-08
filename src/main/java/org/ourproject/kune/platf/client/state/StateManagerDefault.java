@@ -24,6 +24,7 @@ import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
+import org.ourproject.kune.platf.client.errors.AlreadyGroupMemberException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
 import org.ourproject.kune.platf.client.errors.LastAdminInGroupException;
@@ -174,7 +175,11 @@ public class StateManagerDefault implements StateManager {
         } catch (final ContentNotFoundException e) {
             Site.error(Kune.I18N.t("Content not found"));
         } catch (final LastAdminInGroupException e) {
-            Site.showAlertMessage(Kune.I18N.t("Sorry, you are the last admin of this group. Look for someone to substitute you appropriately as admin before unjoin this group."));
+            Site
+                    .showAlertMessage(Kune.I18N
+                            .t("Sorry, you are the last admin of this group. Look for someone to substitute you appropriately as admin before unjoin this group."));
+        } catch (final AlreadyGroupMemberException e) {
+            Site.error(Kune.I18N.t("This group is already a group member"));
         } catch (final Throwable e) {
             Site.error(Kune.I18N.t("Error performing operation"));
             GWT.log("Other kind of exception in StateManagerDefault/processErrorException", null);

@@ -17,7 +17,7 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.actions;
+package org.ourproject.kune.workspace.client.actions.sn;
 
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.Services;

@@ -56,6 +56,8 @@ public interface Workspace extends Component {
 
     public BuddiesPresenceComponent getBuddiesPresenceComponent();
 
+    public GroupLiveSearchComponent getGroupLiveSearchComponent();
+
     public TagsComponent getTagsComponent();
 
     public void setTheme(String theme);

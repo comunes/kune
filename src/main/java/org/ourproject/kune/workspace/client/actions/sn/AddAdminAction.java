@@ -17,27 +17,27 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.actions;
+package org.ourproject.kune.workspace.client.actions.sn;
 
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.sitebar.client.Site;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class AddViewerAction implements Action {
+public class AddAdminAction implements Action {
 
     public void execute(final Object value, final Object extra, final Services services) {
-        onAddViewer(services, (String) value);
+        onAddAdmin(services, (String) value);
     }
 
-    private void onAddViewer(final Services services, final String groupShortName) {
+    private void onAddAdmin(final Services services, final String groupShortName) {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        server.addViewerMember(services.session.userHash, groupShortName, services.session.getCurrentState().getGroup()
+        server.addAdminMember(services.session.userHash, groupShortName, services.session.getCurrentState().getGroup()
                 .getShortName(), new AsyncCallback() {
             public void onFailure(final Throwable caught) {
                 Site.hideProgress();
@@ -46,8 +46,9 @@ public class AddViewerAction implements Action {
 
             public void onSuccess(final Object result) {
                 Site.hideProgress();
-                Site.info(Kune.I18N.t("Member can now view this group contents"));
+                Site.info(Kune.I18N.t("Member added as admin"));
                 services.stateManager.reloadSocialNetwork();
+                services.app.getWorkspace().getGroupMembersComponent().showAdmins();
             }
         });
 

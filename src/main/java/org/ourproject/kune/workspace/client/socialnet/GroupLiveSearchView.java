@@ -19,20 +19,16 @@
 
 package org.ourproject.kune.workspace.client.socialnet;
 
-import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.workspace.client.workspace.AddGroupMembersComponent;
 
-public class AddGroupMembersPresenter extends AbstractPresenter implements AddGroupMembersComponent {
+public interface GroupLiveSearchView extends View {
 
-    private AddGroupMembersView view;
+    void reset();
 
-    public void init(final AddGroupMembersView view) {
-        this.view = view;
-    }
+    void show();
 
-    public View getView() {
-        return view;
-    }
+    void hide();
+
+    void center();
 
 }

@@ -144,6 +144,11 @@ public class StackedDropDownPanel extends DropDownPanel {
         stackList.remove(idx);
     }
 
+    public void showStackItem(final String name) {
+        int idx = indexInArray(name);
+        stack.showStack(idx);
+    }
+
     private int indexInArray(final String name) {
         final Iterator iter = stackList.iterator();
         int i = 0;
@@ -199,18 +204,22 @@ public class StackedDropDownPanel extends DropDownPanel {
     }
 
     public void addBottomLink(final AbstractImagePrototype icon, final String text, final String targetHistoryToken,
-            final String action) {
+            final String action, final Object value, final Object extra) {
         IconHyperlink link = new IconHyperlink(icon, text, targetHistoryToken);
         bottomLinksVP.add(link);
         link.addStyleName("kune-StackedDropDownPanelLink");
         link.addClickListener(new ClickListener() {
             public void onClick(final Widget arg0) {
-                presenter.doAction(action, null, null);
-
+                presenter.doAction(action, value, extra);
             }
         });
         bottomLinksVP.setCellHorizontalAlignment(link, HorizontalPanel.ALIGN_CENTER);
         bottomLinksIndex.add(text);
+    }
+
+    public void addBottomLink(final AbstractImagePrototype icon, final String text, final String targetHistoryToken,
+            final String action) {
+        this.addBottomLink(icon, text, targetHistoryToken, action, null, null);
     }
 
     public void cleanBottomLinks() {
@@ -388,4 +397,5 @@ public class StackedDropDownPanel extends DropDownPanel {
         headerCount = 0;
         updateHeaderText();
     }
+
 }

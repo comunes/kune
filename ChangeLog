@@ -1,3 +1,9 @@
+2007-12-08 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* Added "Add member" to SN with Group/User live search component
+	* SN fixes (now we cannot add a already member). More tests.
+	* StackDropDown show affected stack and links now accept params
+	* User registration fixes (i18n issues)
+
 2007-12-07 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* Added search total results to lucene/json searchs
 	* Added i18n Support in gwt side and server based in custom solution

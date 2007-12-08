@@ -22,15 +22,9 @@ package org.ourproject.kune.workspace.client;
 
 import org.ourproject.kune.platf.client.extend.ClientModule;
 import org.ourproject.kune.platf.client.extend.Register;
-import org.ourproject.kune.workspace.client.actions.AcceptJoinGroupAction;
-import org.ourproject.kune.workspace.client.actions.AddAdminAction;
-import org.ourproject.kune.workspace.client.actions.AddCollabAction;
-import org.ourproject.kune.workspace.client.actions.AddViewerAction;
 import org.ourproject.kune.workspace.client.actions.AttachToExtensionPointAction;
 import org.ourproject.kune.workspace.client.actions.ChangeGroupWsThemeAction;
 import org.ourproject.kune.workspace.client.actions.ClearExtensionPointAction;
-import org.ourproject.kune.workspace.client.actions.DeleteMemberAction;
-import org.ourproject.kune.workspace.client.actions.DenyJoinGroupAction;
 import org.ourproject.kune.workspace.client.actions.DetachFromExtensionPointAction;
 import org.ourproject.kune.workspace.client.actions.DisableRateItAction;
 import org.ourproject.kune.workspace.client.actions.EnableRateItAction;
@@ -41,11 +35,18 @@ import org.ourproject.kune.workspace.client.actions.InitDataReceivedAction;
 import org.ourproject.kune.workspace.client.actions.LoggedInAction;
 import org.ourproject.kune.workspace.client.actions.LoggedOutAction;
 import org.ourproject.kune.workspace.client.actions.RateContentAction;
-import org.ourproject.kune.workspace.client.actions.RequestJoinGroupAction;
-import org.ourproject.kune.workspace.client.actions.SetAdminAsCollabAction;
-import org.ourproject.kune.workspace.client.actions.SetCollabAsAdminAction;
 import org.ourproject.kune.workspace.client.actions.StopAction;
-import org.ourproject.kune.workspace.client.actions.UnJoinGroupAction;
+import org.ourproject.kune.workspace.client.actions.sn.AcceptJoinGroupAction;
+import org.ourproject.kune.workspace.client.actions.sn.AddAdminAction;
+import org.ourproject.kune.workspace.client.actions.sn.AddCollabAction;
+import org.ourproject.kune.workspace.client.actions.sn.AddMemberGroupLiveSearchAction;
+import org.ourproject.kune.workspace.client.actions.sn.AddViewerAction;
+import org.ourproject.kune.workspace.client.actions.sn.DeleteMemberAction;
+import org.ourproject.kune.workspace.client.actions.sn.DenyJoinGroupAction;
+import org.ourproject.kune.workspace.client.actions.sn.RequestJoinGroupAction;
+import org.ourproject.kune.workspace.client.actions.sn.SetAdminAsCollabAction;
+import org.ourproject.kune.workspace.client.actions.sn.SetCollabAsAdminAction;
+import org.ourproject.kune.workspace.client.actions.sn.UnJoinGroupAction;
 
 public class WorkspaceClientModule implements ClientModule {
     public void configure(final Register register) {
@@ -73,5 +74,6 @@ public class WorkspaceClientModule implements ClientModule {
         register.addAction(WorkspaceEvents.DETACH_FROM_EXT_POINT, new DetachFromExtensionPointAction());
         register.addAction(WorkspaceEvents.CLEAR_EXT_POINT, new ClearExtensionPointAction());
         register.addAction(WorkspaceEvents.GET_TRANSLATION, new GetTranslationAction());
+        register.addAction(WorkspaceEvents.ADD_MEMBER_GROUPLIVESEARCH, new AddMemberGroupLiveSearchAction());
     }
 }

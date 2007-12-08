@@ -33,6 +33,7 @@ class WorkspaceUIComponents {
     private ThemeMenuComponent themeMenu;
     private TagsComponent tags;
     private ContentToolBarComponent contentToolBar;
+    private GroupLiveSearchComponent groupLiveSearch;
 
     public WorkspaceUIComponents(final WorkspacePresenter presenter) {
     }
@@ -105,6 +106,13 @@ class WorkspaceUIComponents {
             contentToolBar = WorkspaceFactory.createContentToolBarComponent();
         }
         return contentToolBar;
+    }
+
+    public GroupLiveSearchComponent getGroupLiveSearchComponent() {
+        if (groupLiveSearch == null) {
+            groupLiveSearch = WorkspaceFactory.createGroupLiveSearchComponent();
+        }
+        return groupLiveSearch;
     }
 
 }

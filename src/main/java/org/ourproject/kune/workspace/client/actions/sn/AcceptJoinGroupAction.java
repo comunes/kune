@@ -17,7 +17,7 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.actions;
+package org.ourproject.kune.workspace.client.actions.sn;
 
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
@@ -28,16 +28,16 @@ import org.ourproject.kune.sitebar.client.Site;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class AddAdminAction implements Action {
+public class AcceptJoinGroupAction implements Action {
 
     public void execute(final Object value, final Object extra, final Services services) {
-        onAddAdmin(services, (String) value);
+        onAcceptJoinGroup(services, (String) value);
     }
 
-    private void onAddAdmin(final Services services, final String groupShortName) {
+    private void onAcceptJoinGroup(final Services services, final String groupShortName) {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        server.addAdminMember(services.session.userHash, groupShortName, services.session.getCurrentState().getGroup()
+        server.AcceptJoinGroup(services.session.userHash, groupShortName, services.session.getCurrentState().getGroup()
                 .getShortName(), new AsyncCallback() {
             public void onFailure(final Throwable caught) {
                 Site.hideProgress();
@@ -46,8 +46,9 @@ public class AddAdminAction implements Action {
 
             public void onSuccess(final Object result) {
                 Site.hideProgress();
-                Site.info(Kune.I18N.t("Member added as admin"));
+                Site.info(Kune.I18N.t("Member accepted"));
                 services.stateManager.reloadSocialNetwork();
+                services.app.getWorkspace().getGroupMembersComponent().showCollabs();
             }
         });
 

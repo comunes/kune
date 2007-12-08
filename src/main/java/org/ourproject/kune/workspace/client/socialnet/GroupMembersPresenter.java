@@ -38,8 +38,11 @@ import org.ourproject.kune.workspace.client.workspace.GroupMembersComponent;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class GroupMembersPresenter extends AbstractPresenter implements GroupMembersComponent {
+public class GroupMembersPresenter extends AbstractPresenter implements GroupMembersComponent, GroupLiveSearchListener {
 
+    private static final String ADMIN_CATEGORY = Kune.I18N.t("Admins");
+    private static final String COLLAB_CATEGORY = Kune.I18N.t("Collaborators");
+    private static final String PENDING_CATEGORY = Kune.I18N.t("Pending");
     private GroupMembersView view;
 
     public void init(final GroupMembersView view) {
@@ -99,10 +102,12 @@ public class GroupMembersPresenter extends AbstractPresenter implements GroupMem
 
         if (userCanView) {
             if (rights.isAdministrable()) {
-                MemberAction[] adminsActions = { new MemberAction(Kune.I18N.t("Remove this member"), WorkspaceEvents.DEL_MEMBER),
+                MemberAction[] adminsActions = {
+                        new MemberAction(Kune.I18N.t("Remove this member"), WorkspaceEvents.DEL_MEMBER),
                         new MemberAction(Kune.I18N.t("Change to collaborator"), WorkspaceEvents.SET_ADMIN_AS_COLLAB),
                         MemberAction.GOTO_GROUP_COMMAND };
-                MemberAction[] collabActions = { new MemberAction(Kune.I18N.t("Remove this member"), WorkspaceEvents.DEL_MEMBER),
+                MemberAction[] collabActions = {
+                        new MemberAction(Kune.I18N.t("Remove this member"), WorkspaceEvents.DEL_MEMBER),
                         new MemberAction(Kune.I18N.t("Change to admin"), WorkspaceEvents.SET_COLLAB_AS_ADMIN),
                         MemberAction.GOTO_GROUP_COMMAND };
                 MemberAction[] pendingsActions = {
@@ -125,6 +130,14 @@ public class GroupMembersPresenter extends AbstractPresenter implements GroupMem
         view.show();
     }
 
+    public void showAdmins() {
+        view.showCategory(ADMIN_CATEGORY);
+    }
+
+    public void showCollabs() {
+        view.showCategory(COLLAB_CATEGORY);
+    }
+
     public void hide() {
         view.hide();
     }
@@ -133,12 +146,8 @@ public class GroupMembersPresenter extends AbstractPresenter implements GroupMem
         DefaultDispatcher.getInstance().fire(WorkspaceEvents.REQ_JOIN_GROUP, null, null);
     }
 
-    public void onAddAdmin(final GroupDTO group) {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ADD_ADMIN_MEMBER, group, this);
-    }
-
-    public void onAddCollab(final GroupDTO group) {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ADD_COLLAB_MEMBER, group, this);
+    public void onSelection(final String groupShortName) {
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ADD_COLLAB_MEMBER, groupShortName, this);
     }
 
     public void onAddViewer(final GroupDTO group) {
@@ -157,18 +166,18 @@ public class GroupMembersPresenter extends AbstractPresenter implements GroupMem
             final MemberAction[] adminsActions, final MemberAction[] collabActions,
             final MemberAction[] pendingsActions, final MemberAction[] viewerActions) {
         if (numAdmins > 0) {
-            view.addCategory(Kune.I18N.t("Admins"), Kune.I18N.t("People that can admin this group"));
-            iteraList("Admins", adminsList, adminsActions);
+            view.addCategory(ADMIN_CATEGORY, Kune.I18N.t("People that can admin this group"));
+            iteraList(ADMIN_CATEGORY, adminsList, adminsActions);
         }
         if (numCollaborators > 0) {
-            view.addCategory(Kune.I18N.t("Collaborators"), Kune.I18N.t("Other people that collaborate with this group"));
-            iteraList(Kune.I18N.t("Collaborators"), collabList, collabActions);
+            view.addCategory(COLLAB_CATEGORY, Kune.I18N.t("Other people that collaborate with this group"));
+            iteraList(COLLAB_CATEGORY, collabList, collabActions);
         }
         if (isAdmin) {
             if (numPendingCollabs > 0) {
-                view.addCategory(Kune.I18N.t("Pending"), Kune.I18N.t("People pending to be accepted in this group by the admins"),
-                        GroupMembersView.ICON_ALERT);
-                iteraList(Kune.I18N.t("Pending"), pendingCollabsList, pendingsActions);
+                view.addCategory(PENDING_CATEGORY, Kune.I18N
+                        .t("People pending to be accepted in this group by the admins"), GroupMembersView.ICON_ALERT);
+                iteraList(PENDING_CATEGORY, pendingCollabsList, pendingsActions);
             }
         }
 

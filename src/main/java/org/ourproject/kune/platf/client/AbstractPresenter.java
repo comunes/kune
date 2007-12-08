@@ -23,7 +23,7 @@ import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 
 public abstract class AbstractPresenter {
 
-    public void doAction(final String action, final String value, final String extra) {
+    public void doAction(final String action, final Object value, final Object extra) {
         DefaultDispatcher.getInstance().fire(action, value, extra);
     }
 

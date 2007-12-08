@@ -536,6 +536,8 @@ public class LoginPanel implements LoginView, View {
                 setWidth(200);
                 setMsgTarget("side");
                 setAllowBlank(false);
+                setValueField("abbr");
+                setPageSize(10);
             }
         });
 
@@ -560,6 +562,8 @@ public class LoginPanel implements LoginView, View {
                 setWidth(200);
                 setMsgTarget("side");
                 setAllowBlank(false);
+                setValueField("abbr");
+                setPageSize(10);
             }
         });
 

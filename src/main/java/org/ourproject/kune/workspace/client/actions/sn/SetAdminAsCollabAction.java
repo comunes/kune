@@ -17,7 +17,7 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.actions;
+package org.ourproject.kune.workspace.client.actions.sn;
 
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.Services;
@@ -28,25 +28,27 @@ import org.ourproject.kune.sitebar.client.Site;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class DenyJoinGroupAction implements Action {
+public class SetAdminAsCollabAction implements Action {
 
     public void execute(final Object value, final Object extra, final Services services) {
-        onDenyJoinGroup(services, (String) value);
+        onSetAdminAsCollab(services, (String) value);
     }
 
-    private void onDenyJoinGroup(final Services services, final String groupShortName) {
+    private void onSetAdminAsCollab(final Services services, final String groupShortName) {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        server.denyJoinGroup(services.session.userHash, groupShortName, services.session.getCurrentState().getGroup()
-                .getShortName(), new AsyncCallback() {
+        server.setAdminAsCollab(services.session.userHash, groupShortName, services.session.getCurrentState()
+                .getGroup().getShortName(), new AsyncCallback() {
             public void onFailure(final Throwable caught) {
                 Site.hideProgress();
                 services.stateManager.processErrorException(caught);
             }
 
             public void onSuccess(final Object result) {
-                Site.info(Kune.I18N.t("Member rejected"));
+                Site.hideProgress();
+                Site.info(Kune.I18N.t("Type of member changed"));
                 services.stateManager.reloadSocialNetwork();
+                services.app.getWorkspace().getGroupMembersComponent().showCollabs();
             }
         });
 

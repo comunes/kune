@@ -17,7 +17,7 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.actions;
+package org.ourproject.kune.workspace.client.actions.sn;
 
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.Services;
@@ -28,17 +28,17 @@ import org.ourproject.kune.sitebar.client.Site;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class SetCollabAsAdminAction implements Action {
+public class AddViewerAction implements Action {
 
     public void execute(final Object value, final Object extra, final Services services) {
-        onSetCollabAsAdmin(services, (String) value);
+        onAddViewer(services, (String) value);
     }
 
-    private void onSetCollabAsAdmin(final Services services, final String groupShortName) {
+    private void onAddViewer(final Services services, final String groupShortName) {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        server.setCollabAsAdmin(services.session.userHash, groupShortName, services.session.getCurrentState()
-                .getGroup().getShortName(), new AsyncCallback() {
+        server.addViewerMember(services.session.userHash, groupShortName, services.session.getCurrentState().getGroup()
+                .getShortName(), new AsyncCallback() {
             public void onFailure(final Throwable caught) {
                 Site.hideProgress();
                 services.stateManager.processErrorException(caught);
@@ -46,7 +46,7 @@ public class SetCollabAsAdminAction implements Action {
 
             public void onSuccess(final Object result) {
                 Site.hideProgress();
-                Site.info(Kune.I18N.t("Type of member changed"));
+                Site.info(Kune.I18N.t("Member can now view this group contents"));
                 services.stateManager.reloadSocialNetwork();
             }
         });

@@ -33,10 +33,12 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 public class GroupMembersPanel extends StackedDropDownPanel implements GroupMembersView {
     private static final boolean COUNTS_VISIBLE = true;
     private final Images img = Images.App.getInstance();
+    private final AbstractPresenter presenter;
 
-    public GroupMembersPanel(final AbstractPresenter presenter) {
-        super(presenter, "#00D4AA", Kune.I18N.t("Group members"), Kune.I18N
+    public GroupMembersPanel(final AbstractPresenter initPresenter) {
+        super(initPresenter, "#00D4AA", Kune.I18N.t("Group members"), Kune.I18N
                 .t("People and groups collaborating in this group"), COUNTS_VISIBLE);
+        presenter = initPresenter;
     }
 
     public void addJoinLink() {
@@ -49,7 +51,8 @@ public class GroupMembersPanel extends StackedDropDownPanel implements GroupMemb
 
     public void addAddMemberLink() {
         // FIXME: add new event
-        super.addBottomLink(img.addGreen(), Kune.I18N.t("Add member"), "fixme", WorkspaceEvents.ADD_ADMIN_MEMBER);
+        super.addBottomLink(img.addGreen(), Kune.I18N.t("Add member"), "fixme",
+                WorkspaceEvents.ADD_MEMBER_GROUPLIVESEARCH, presenter, null);
     }
 
     public void clear() {
@@ -58,6 +61,10 @@ public class GroupMembersPanel extends StackedDropDownPanel implements GroupMemb
 
     public void addCategory(final String name, final String title) {
         super.addStackItem(name, title, COUNTS_VISIBLE);
+    }
+
+    public void showCategory(final String name) {
+        super.showStackItem(name);
     }
 
     public void addCategory(final String name, final String title, final String iconType) {

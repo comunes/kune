@@ -45,4 +45,6 @@ public interface GroupMembersView extends View {
 
     void addUnjoinLink();
 
+    void showCategory(String name);
+
 }

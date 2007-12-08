@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
+import org.ourproject.kune.platf.client.errors.AlreadyGroupMemberException;
 import org.ourproject.kune.platf.client.errors.LastAdminInGroupException;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Group;
@@ -261,6 +262,45 @@ public class SocialNetworkManagerTest {
     public void addViewerNotAdminFails() throws SerializableException {
         assertSocialNetworkIsEmpty();
         socialNetworkManager.addGroupToViewers(otherUser, userGroup, group);
+    }
+
+    @Test(expected = AlreadyGroupMemberException.class)
+    public void addAdminAsAdminFails() throws SerializableException {
+        assertSocialNetworkIsEmpty();
+        socialNetworkManager.addAdmin(admin, group);
+        socialNetworkManager.addGroupToAdmins(admin, admin.getUserGroup(), group);
+    }
+
+    @Test(expected = AlreadyGroupMemberException.class)
+    public void addAdminAsCollabFails() throws SerializableException {
+        assertSocialNetworkIsEmpty();
+        socialNetworkManager.addAdmin(admin, group);
+        socialNetworkManager.addGroupToCollabs(admin, admin.getUserGroup(), group);
+    }
+
+    @Test(expected = AlreadyGroupMemberException.class)
+    public void addAdminAsViewerFails() throws SerializableException {
+        assertSocialNetworkIsEmpty();
+        socialNetworkManager.addAdmin(admin, group);
+        socialNetworkManager.addGroupToViewers(admin, admin.getUserGroup(), group);
+    }
+
+    @Test
+    public void addPendingAsCollabDirectly() throws SerializableException {
+        assertSocialNetworkIsEmpty();
+        socialNetworkManager.addAdmin(admin, group);
+        socialNetworkManager.requestToJoin(user, group);
+        socialNetworkManager.addGroupToCollabs(admin, userGroup, group);
+        assertEquals(group.getSocialNetwork().getPendingCollaborators().getList().size(), 0);
+    }
+
+    @Test
+    public void addPendingAsCollabDirectlyAsAdmin() throws SerializableException {
+        assertSocialNetworkIsEmpty();
+        socialNetworkManager.addAdmin(admin, group);
+        socialNetworkManager.requestToJoin(user, group);
+        socialNetworkManager.addGroupToAdmins(admin, userGroup, group);
+        assertEquals(group.getSocialNetwork().getPendingCollaborators().getList().size(), 0);
     }
 
     private void assertSocialNetworkIsEmpty() {

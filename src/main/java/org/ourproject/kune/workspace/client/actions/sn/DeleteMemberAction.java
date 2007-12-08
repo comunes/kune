@@ -17,27 +17,27 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.actions;
+package org.ourproject.kune.workspace.client.actions.sn;
 
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.sitebar.client.Site;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class AcceptJoinGroupAction implements Action {
+public class DeleteMemberAction implements Action {
 
     public void execute(final Object value, final Object extra, final Services services) {
-        onAcceptJoinGroup(services, (String) value);
+        onDeleteMember(services, (String) value);
     }
 
-    private void onAcceptJoinGroup(final Services services, final String groupShortName) {
+    private void onDeleteMember(final Services services, final String groupShortName) {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        server.AcceptJoinGroup(services.session.userHash, groupShortName, services.session.getCurrentState().getGroup()
+        server.deleteMember(services.session.userHash, groupShortName, services.session.getCurrentState().getGroup()
                 .getShortName(), new AsyncCallback() {
             public void onFailure(final Throwable caught) {
                 Site.hideProgress();
@@ -46,7 +46,7 @@ public class AcceptJoinGroupAction implements Action {
 
             public void onSuccess(final Object result) {
                 Site.hideProgress();
-                Site.info(Kune.I18N.t("Member accepted"));
+                Site.info(Kune.I18N.t("Member removed"));
                 services.stateManager.reloadSocialNetwork();
             }
         });
