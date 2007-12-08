@@ -1,12 +1,15 @@
 package org.ourproject.kune.platf.server.manager;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.ourproject.kune.platf.server.domain.I18nTranslation;
 
 public interface I18nTranslationManager extends Manager<I18nTranslation, Long> {
 
     HashMap<String, String> getLexicon(String language);
+
+    List<I18nTranslation> getUntranslatedLexicon(String language);
 
     String getTranslation(String language, String text);
 

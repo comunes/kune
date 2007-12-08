@@ -11,6 +11,7 @@ import org.ourproject.kune.platf.server.LoggerMethodInterceptor;
 import org.ourproject.kune.platf.server.PlatformServerModule;
 import org.ourproject.kune.platf.server.properties.PropertiesFileName;
 import org.ourproject.kune.platf.server.rest.GroupJSONService;
+import org.ourproject.kune.platf.server.rest.I18nTranslationJSONService;
 import org.ourproject.kune.platf.server.rest.TestJSONService;
 import org.ourproject.kune.sitebar.client.rpc.UserService;
 import org.ourproject.rack.RackBuilder;
@@ -71,7 +72,8 @@ public class KuneRackModule implements RackModule {
 
         builder.installGWTServices("^/kune/", SiteService.class, GroupService.class, ContentService.class,
                 UserService.class, SocialNetworkService.class, I18nService.class);
-        builder.installRESTServices("^/kune/json/", TestJSONService.class, GroupJSONService.class);
+        builder.installRESTServices("^/kune/json/", TestJSONService.class, GroupJSONService.class,
+                I18nTranslationJSONService.class);
 
         builder.at("^/kune/(.*)$").install(new ForwardFilter("^/kune/(.*)$", "/gwt/org.ourproject.kune.app.Kune/{0}"));
     }

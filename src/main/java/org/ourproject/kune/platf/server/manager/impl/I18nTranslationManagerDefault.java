@@ -75,6 +75,10 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
         return map;
     }
 
+    public List<I18nTranslation> getUntranslatedLexicon(final String language) {
+        return finder.getUnstranslatedLexicon(language);
+    }
+
     public String getTranslation(final String language, final String text) {
         HashMap<String, String> lexicon = getLexicon(language);
         if (lexicon.containsKey(text)) {

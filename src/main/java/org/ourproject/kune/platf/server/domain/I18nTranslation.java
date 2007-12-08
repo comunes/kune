@@ -180,4 +180,10 @@ public class I18nTranslation implements HasId {
         return null;
     }
 
+    @Finder(query = "SELECT gt FROM I18nTranslation gt JOIN gt.language gl WHERE gl.code = :language and text=null")
+    public List<I18nTranslation> getUnstranslatedLexicon(@Named("language")
+    final String language) {
+        return null;
+    }
+
 }
