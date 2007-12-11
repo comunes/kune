@@ -198,7 +198,7 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
                 setHeader(Kune.I18N.t("Text to traslate"));
                 setDataIndex("trKey");
                 setTooltip(Kune.I18N.t("Click to sort"));
-                setWidth(330);
+                setWidth(310);
             }
         }, new ColumnConfig() {
             {

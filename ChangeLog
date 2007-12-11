@@ -1,4 +1,5 @@
 2007-12-11 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* i18n languages sincronization with default
 	* i18n fixes and refactoring
 	* Unjoin SN fix
 	* Add member confirmation

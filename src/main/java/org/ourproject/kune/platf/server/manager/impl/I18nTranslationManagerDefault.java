@@ -63,7 +63,21 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
         return map;
     }
 
-    public List<I18nTranslation> getUntranslatedLexicon(final String language) {
+    public List<I18nTranslation> getUntranslatedLexicon(final String languageCode) {
+        I18nLanguage defLanguage = languageManager.findByCode(I18nTranslation.DEFAULT_LANG);
+        I18nLanguage language;
+        if (languageCode.equals(I18nTranslation.DEFAULT_LANG)) {
+            language = defLanguage;
+        } else {
+            language = languageManager.findByCode(languageCode);
+            List<I18nTranslation> list = finder.getNonExistentFromDefault(defLanguage, language);
+            for (Iterator iterator = list.iterator(); iterator.hasNext();) {
+                I18nTranslation defTrans = (I18nTranslation) iterator.next();
+                I18nTranslation newTrans = defTrans.cloneForNewLanguage();
+                newTrans.setLanguage(language);
+                persist(newTrans);
+            }
+        }
         return finder.getUnstranslatedLexicon(language);
     }
 

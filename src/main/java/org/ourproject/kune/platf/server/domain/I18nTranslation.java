@@ -180,10 +180,30 @@ public class I18nTranslation implements HasId {
         return null;
     }
 
-    @Finder(query = "SELECT gt FROM I18nTranslation gt JOIN gt.language gl WHERE gl.code = :language and text=null")
+    @Finder(query = "SELECT gt FROM I18nTranslation gt WHERE gt.language = :language and text=null")
     public List<I18nTranslation> getUnstranslatedLexicon(@Named("language")
-    final String language) {
+    final I18nLanguage language) {
         return null;
+    }
+
+    @Finder(query = "SELECT gt FROM I18nTranslation gt WHERE gt.language = :deflanguage AND gt.trKey NOT IN (SELECT gt.trKey FROM I18nTranslation gt WHERE gt.language = :language)")
+    public List<I18nTranslation> getNonExistentFromDefault(@Named("deflanguage")
+    final I18nLanguage deflanguage, @Named("language")
+    final I18nLanguage language) {
+        return null;
+    }
+
+    public I18nTranslation cloneForNewLanguage() {
+        I18nTranslation clone = new I18nTranslation();
+        clone.type = type;
+        clone.trKey = trKey;
+        clone.tableName = tableName;
+        clone.itemId = itemId;
+        clone.facet = facet;
+        clone.language = null;
+        clone.pluralizationIndex = pluralizationIndex;
+        clone.text = null;
+        return clone;
     }
 
 }
