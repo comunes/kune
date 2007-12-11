@@ -80,8 +80,8 @@ public class InitAction implements Action {
                 } else {
                     dispatcher.fire(WorkspaceEvents.USER_LOGGED_IN, currentUser, null);
                 }
-                Site.sitebar.setLanguages(initData.getLanguages());
-                Site.sitebar.setCountries(initData.getCountries());
+                Site.sitebar.setLanguages(services.session.getLanguagesArray());
+                Site.sitebar.setCountries(services.session.getCountriesArray());
                 RootPanel.get("kuneinitialcurtain").setVisible(false);
             }
         });

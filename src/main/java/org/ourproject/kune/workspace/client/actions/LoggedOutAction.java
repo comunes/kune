@@ -34,7 +34,7 @@ public class LoggedOutAction implements Action {
         services.stateManager.onHistoryChanged(token);
         services.stateManager.reloadSocialNetwork();
         Cookies.removeCookie("userHash");
-        services.setUserHash(null);
+        services.session.userHash = null;
     }
 
 }

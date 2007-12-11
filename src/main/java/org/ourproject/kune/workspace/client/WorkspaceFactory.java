@@ -22,11 +22,21 @@ package org.ourproject.kune.workspace.client;
 
 import org.ourproject.kune.platf.client.app.DesktopView;
 import org.ourproject.kune.platf.client.app.ui.DesktopPanel;
+import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.sitebar.client.bar.SiteBarListener;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.editor.TextEditorListener;
 import org.ourproject.kune.workspace.client.editor.TextEditorPanel;
 import org.ourproject.kune.workspace.client.editor.TextEditorPresenter;
+import org.ourproject.kune.workspace.client.i18n.I18nTranslatorComponent;
+import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPresenter;
+import org.ourproject.kune.workspace.client.i18n.I18nTranslatorView;
+import org.ourproject.kune.workspace.client.i18n.LanguageSelectorComponent;
+import org.ourproject.kune.workspace.client.i18n.LanguageSelectorPresenter;
+import org.ourproject.kune.workspace.client.i18n.LanguageSelectorView;
+import org.ourproject.kune.workspace.client.i18n.ui.I18nTranslatorPanel;
+import org.ourproject.kune.workspace.client.i18n.ui.LanguageSelectorPanel;
 import org.ourproject.kune.workspace.client.license.LicenseComponent;
 import org.ourproject.kune.workspace.client.license.LicensePresenter;
 import org.ourproject.kune.workspace.client.license.LicenseView;
@@ -74,15 +84,15 @@ import org.ourproject.kune.workspace.client.workspace.Workspace;
 import org.ourproject.kune.workspace.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.workspace.client.workspace.WorkspaceView;
 import org.ourproject.kune.workspace.client.workspace.ui.ContentBottomToolBarPanel;
-import org.ourproject.kune.workspace.client.workspace.ui.ContentToolBarPanel;
 import org.ourproject.kune.workspace.client.workspace.ui.ContentSubTitlePanel;
 import org.ourproject.kune.workspace.client.workspace.ui.ContentTitlePanel;
+import org.ourproject.kune.workspace.client.workspace.ui.ContentToolBarPanel;
 import org.ourproject.kune.workspace.client.workspace.ui.WorkspacePanel;
 
 public class WorkspaceFactory {
 
-    public static Workspace createWorkspace() {
-        WorkspacePresenter workspace = new WorkspacePresenter();
+    public static Workspace createWorkspace(final Session session) {
+        WorkspacePresenter workspace = new WorkspacePresenter(session);
         WorkspaceView view = new WorkspacePanel(workspace);
         workspace.init(view);
         return workspace;
@@ -179,6 +189,20 @@ public class WorkspaceFactory {
     public static GroupLiveSearchComponent createGroupLiveSearchComponent() {
         GroupLiveSearchPresenter presenter = new GroupLiveSearchPresenter();
         GroupLiveSearchView view = new GroupLiveSearchPanel(presenter);
+        presenter.init(view);
+        return presenter;
+    }
+
+    public static I18nTranslatorComponent createI18nTranslatorComponent(final Object[][] languages) {
+        I18nTranslatorPresenter presenter = new I18nTranslatorPresenter();
+        I18nTranslatorView view = new I18nTranslatorPanel(presenter, languages);
+        presenter.init(view);
+        return presenter;
+    }
+
+    public static LanguageSelectorComponent createLanguageSelectorComponent(final Object[][] languages) {
+        LanguageSelectorPresenter presenter = new LanguageSelectorPresenter();
+        LanguageSelectorView view = new LanguageSelectorPanel(presenter, languages, Kune.I18N.t("Language"));
         presenter.init(view);
         return presenter;
     }

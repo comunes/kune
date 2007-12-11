@@ -26,6 +26,8 @@ import org.ourproject.kune.platf.client.Component;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
+import org.ourproject.kune.workspace.client.i18n.I18nTranslatorComponent;
+import org.ourproject.kune.workspace.client.i18n.LanguageSelectorComponent;
 import org.ourproject.kune.workspace.client.license.LicenseComponent;
 
 public interface Workspace extends Component {
@@ -74,4 +76,7 @@ public interface Workspace extends Component {
 
     public void clearExtensionPoint(String id);
 
+    public I18nTranslatorComponent getI18nTranslatorComponent();
+
+    public LanguageSelectorComponent getLanguageSelectorComponent();
 }

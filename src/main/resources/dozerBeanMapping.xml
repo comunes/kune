@@ -179,10 +179,6 @@
         org.ourproject.kune.platf.server.domain.I18nCountry
       </b-hint>
     </field>
-    <field>
-      <a>lexicon</a>
-      <b>lexicon</b>
-    </field>
   </mapping>
 
   <mapping>

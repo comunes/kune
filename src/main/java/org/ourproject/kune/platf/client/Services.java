@@ -28,18 +28,14 @@ public class Services {
     public final Application app;
     public final StateManager stateManager;
     public final Dispatcher dispatcher;
-    public Session session;
+    public final Session session;
 
-    public Services(final Application application, final StateManager stateManager, final Dispatcher dispatcher) {
+    public Services(final Application application, final StateManager stateManager, final Dispatcher dispatcher,
+            final Session session) {
         this.app = application;
         this.stateManager = stateManager;
         this.dispatcher = dispatcher;
-        this.session = this.stateManager.getSession();
-    }
-
-    public void setUserHash(final String userHash) {
-        this.session.userHash = userHash;
-        this.stateManager.getSession().userHash = userHash;
+        this.session = session;
     }
 
 }

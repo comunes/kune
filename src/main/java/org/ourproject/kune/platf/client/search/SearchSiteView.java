@@ -23,4 +23,8 @@ import org.ourproject.kune.platf.client.View;
 
 public interface SearchSiteView extends View {
 
+    void searchGroups(String text);
+
+    String getComboTextToSearch();
+
 }

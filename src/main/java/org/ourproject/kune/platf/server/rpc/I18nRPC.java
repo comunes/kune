@@ -26,6 +26,7 @@ import org.ourproject.kune.platf.client.rpc.I18nService;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.manager.I18nTranslationManager;
 
+import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.wideplay.warp.persist.TransactionType;
@@ -48,6 +49,12 @@ public class I18nRPC implements RPC, I18nService {
     @Transactional(type = TransactionType.READ_WRITE)
     public String getTranslation(final String userHash, final String language, final String text) {
         return i18nTranslationManager.getTranslation(language, text);
+    }
+
+    @Transactional(type = TransactionType.READ_WRITE)
+    public void setTranslation(final String userHash, final String id, final String translation)
+            throws SerializableException {
+        i18nTranslationManager.setTranslation(id, translation);
     }
 
 }

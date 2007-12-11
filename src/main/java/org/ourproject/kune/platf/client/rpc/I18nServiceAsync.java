@@ -28,4 +28,6 @@ public interface I18nServiceAsync {
 
     void getTranslation(String userHash, String language, String text, AsyncCallback callback);
 
+    void setTranslation(String userHash, String id, String translation, AsyncCallback asyncCallback);
+
 }

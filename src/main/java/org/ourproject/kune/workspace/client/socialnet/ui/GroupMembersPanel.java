@@ -19,9 +19,10 @@
 
 package org.ourproject.kune.workspace.client.socialnet.ui;
 
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.AbstractPresenter;
+import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.services.Images;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersView;
 import org.ourproject.kune.workspace.client.socialnet.MemberAction;
@@ -29,6 +30,7 @@ import org.ourproject.kune.workspace.client.workspace.ui.StackSubItemAction;
 import org.ourproject.kune.workspace.client.workspace.ui.StackedDropDownPanel;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import com.gwtext.client.widgets.MessageBox;
 
 public class GroupMembersPanel extends StackedDropDownPanel implements GroupMembersView {
     private static final boolean COUNTS_VISIBLE = true;
@@ -88,6 +90,19 @@ public class GroupMembersPanel extends StackedDropDownPanel implements GroupMemb
 
     public void hide() {
         this.setVisible(false);
+    }
+
+    public void confirmAddCollab(final String groupShortName, final String groupLongName) {
+        String groupName = groupLongName + "(" + groupShortName + ")";
+        MessageBox.confirm(Kune.I18N.t("Confirm addition of member"), Kune.I18N.t("Add [%s] as member?", groupName),
+                new MessageBox.ConfirmCallback() {
+                    public void execute(final String btnID) {
+                        if (btnID.equals("yes")) {
+                            DefaultDispatcher.getInstance().fire(WorkspaceEvents.ADD_COLLAB_MEMBER, groupShortName,
+                                    this);
+                        }
+                    }
+                });
     }
 
     private AbstractImagePrototype getIcon(final String event) {

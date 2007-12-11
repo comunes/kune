@@ -1,0 +1,55 @@
+<!DOCTYPE etl SYSTEM "http://scriptella.javaforge.com/dtd/etl.dtd">
+<etl>
+
+  <connection id="kune_dev" driver="mysql"
+    url="jdbc:mysql://localhost/kune_dev" user="kune"
+    password="db4kune" />
+
+  <connection id="kune_test_db" driver="mysql"
+    url="jdbc:mysql://localhost/kune_test" user="kune"
+    password="db4kune" />
+
+  <!--
+    <connection id="kune_test" driver="hsqldb"
+    url="??????????????" user="ha"
+    password="" />
+
+    <connection id="countries-in" driver="csv" url="country_data.csv"
+    classpath="opencsv.jar">
+    #Use empty quote to turn off quoting quote=" separator=,
+    </connection>
+  -->
+
+  <!-- Upgrade procedure -->
+  <query connection-id="kune_dev">
+    <!-- Selects current DB build -->
+    SELECT * FROM metainf
+    <!-- Check if upgrade is necessary -->
+    <script if="buildnum lt 1">
+      <!--Upgrades DB to build 1 -->
+      <include href="init-data.sql" />
+      <!--...-->
+      <!-- Update metainf to confirm successful upgrade -->
+      UPDATE metainf SET buildnum=1;
+    </script>
+    <!-- upgrade scripts for subsequent builds -->
+  </query>
+
+
+  <!-- Tests mysql database -->
+
+  <!-- Upgrade procedure -->
+  <query connection-id="kune_test_db">
+    <!-- Selects current DB build -->
+    SELECT * FROM metainf
+    <!-- Check if upgrade is necessary -->
+    <script if="buildnum lt 1">
+      <!--Upgrades DB to build 1 -->
+      <include href="init-data-min.sql" />
+      <!--...-->
+      <!-- Update metainf to confirm successful upgrade -->
+      UPDATE metainf SET buildnum=1;
+    </script>
+    <!-- upgrade scripts for subsequent builds -->
+  </query>
+</etl>

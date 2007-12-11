@@ -43,11 +43,11 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class StateManagerDefault implements StateManager {
     private final Application app;
-    private final Session session;
     private final ContentProvider provider;
     private final Workspace workspace;
     private StateDTO oldState;
     private String lastTheme;
+    private final Session session;
 
     public StateManagerDefault(final ContentProvider provider, final Application app, final Session session) {
         this.provider = provider;

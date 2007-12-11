@@ -3,7 +3,6 @@ package org.ourproject.kune.platf.integration.site;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -94,7 +93,6 @@ public class UserServiceTest extends IntegrationTest {
         final List<Link> adminsGroup = userInfo.getGroupsIsAdmin();
         final List<Link> adminsGroupDTO = userInfoDTO.getGroupsIsAdmin();
         assertEqualListsLink(adminsGroupDTO, adminsGroup);
-        assertTrue(userInfoDTO.getLexicon().size() == userInfo.getLexicon().size());
     }
 
     private void assertEqualListsLink(final List<Link> listDTO, final List<Link> list) {

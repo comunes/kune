@@ -1,14 +1,22 @@
 DEVELOPMENT GUIDE
 --------------------------------------------------------------------------------
 
+Development Environment
+--------------------------------------------------------------------------------
+See INSTALL for dev specific instructions
+
 Code
 --------------------------------------------------------------------------------
-Code Conventions for the JavaTM Programming Language
-http://java.sun.com/docs/codeconv/html/CodeConvTOC.doc.html
+We use some eclipse code preferences for kune project:
+  kune.cleanup.eclipse.preferences.xml
+  kune.formatter.eclipse.preferences.xml
+please use it if you want to contribute.
 
 We will (try) to follow:
 http://code.google.com/webtoolkit/makinggwtbetter.html#codestyle
 
+and the code conventions for the JavaTM Programming Language:
+http://java.sun.com/docs/codeconv/html/CodeConvTOC.doc.html
 
 License
 --------------------------------------------------------------------------------

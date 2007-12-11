@@ -132,23 +132,6 @@ public class ContentRPC implements ContentService, RPC {
         return createFolder(groupShortName, parentFolderId, title);
     }
 
-    private StateDTO createFolder(final String groupShortName, final Long parentFolderId, final String title)
-            throws AccessViolationException, ContentNotFoundException, GroupNotFoundException {
-        final User user = session.getUser();
-        final Group group = groupManager.findByShortName(groupShortName);
-
-        Access access = accessManager.getFolderAccess(parentFolderId, user, AccessType.EDIT);
-        final Container container = creationService.createFolder(group, parentFolderId, title);
-        final String toolName = container.getToolName();
-        // Trying not to enter in new folder:
-        // final StateToken token = new StateToken(group.getShortName(),
-        // toolName, container.getId().toString(), null);
-        final StateToken token = new StateToken(group.getShortName(), toolName, parentFolderId.toString(), null);
-        access = accessManager.getAccess(user, token, group, AccessType.READ);
-        final State state = stateService.create(access);
-        return mapper.map(state, StateDTO.class);
-    }
-
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
     public StateDTO addRoom(final String userHash, final String groupShortName, final Long parentFolderId,
@@ -192,6 +175,23 @@ public class ContentRPC implements ContentService, RPC {
         } catch (final NumberFormatException e) {
             throw new ContentNotFoundException();
         }
+    }
+
+    private StateDTO createFolder(final String groupShortName, final Long parentFolderId, final String title)
+            throws AccessViolationException, ContentNotFoundException, GroupNotFoundException {
+        final User user = session.getUser();
+        final Group group = groupManager.findByShortName(groupShortName);
+
+        Access access = accessManager.getFolderAccess(parentFolderId, user, AccessType.EDIT);
+        final Container container = creationService.createFolder(group, parentFolderId, title);
+        final String toolName = container.getToolName();
+        // Trying not to enter in new folder:
+        // final StateToken token = new StateToken(group.getShortName(),
+        // toolName, container.getId().toString(), null);
+        final StateToken token = new StateToken(group.getShortName(), toolName, parentFolderId.toString(), null);
+        access = accessManager.getAccess(user, token, group, AccessType.READ);
+        final State state = stateService.create(access);
+        return mapper.map(state, StateDTO.class);
     }
 
 }

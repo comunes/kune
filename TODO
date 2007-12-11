@@ -5,6 +5,7 @@ TODO-list for kune
 
 SHORT-TERM (URGENT):
 --------------------------------------------------------------------------------
+<vjrj> content not found exception (and related)
 <vjrj> login session. Follow incubation recomendations. See:
 http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/e8e14b16e57b266f
 Now there are problems if client was started before server, and with server restart
@@ -18,6 +19,7 @@ continue with the client search dialog
 
 MIND-TERM:
 --------------------------------------------------------------------------------
+<vjrj> Clean /scrits/ directory
 <vjrj> apply csstidy to css, again
 --> vjrj
 <vjrj> layout problems (specially resizing) with old Mozilla (wait gwt 1.4)

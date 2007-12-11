@@ -23,6 +23,6 @@ import org.ourproject.kune.platf.client.View;
 
 public interface GroupLiveSearchListener extends View {
 
-    void onSelection(String groupShortName);
+    void onSelection(String groupShortName, String groupLongName);
 
 }

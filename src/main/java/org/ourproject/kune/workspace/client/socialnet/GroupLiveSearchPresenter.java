@@ -53,8 +53,8 @@ public class GroupLiveSearchPresenter extends AbstractPresenter implements Group
         view.hide();
     }
 
-    public void fireListener(final String groupShortName) {
-        listener.onSelection(groupShortName);
+    public void fireListener(final String groupShortName, final String groupLongName) {
+        listener.onSelection(groupShortName, groupLongName);
         hide();
     }
 

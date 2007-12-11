@@ -51,9 +51,9 @@ public class ApplicationBuilder {
 
     public void build(final String userHash) {
         HashMap tools = indexTools(platform.getTools());
-        final DefaultApplication application = new DefaultApplication(tools);
-        Site.showProgressLoading();
         final Session session = new Session(userHash);
+        final DefaultApplication application = new DefaultApplication(tools, session);
+        Site.showProgressLoading();
         ContentProvider provider = new ContentProviderImpl(ContentService.App.getInstance());
         final StateManager stateManager = new StateManagerDefault(provider, application, session);
         History.addHistoryListener(stateManager);
@@ -62,7 +62,7 @@ public class ApplicationBuilder {
         application.init(dispatcher, stateManager);
         subscribeActions(dispatcher, platform.getActions());
 
-        Services services = new Services(application, stateManager, dispatcher);
+        Services services = new Services(application, stateManager, dispatcher, session);
         dispatcher.setServices(services);
         Window.addWindowCloseListener(new WindowCloseListener() {
             public void onWindowClosed() {

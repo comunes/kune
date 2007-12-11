@@ -35,6 +35,7 @@ import com.gwtext.client.data.JsonReaderConfig;
 import com.gwtext.client.data.Record;
 import com.gwtext.client.data.RecordDef;
 import com.gwtext.client.data.Store;
+import com.gwtext.client.data.StoreLoadConfig;
 import com.gwtext.client.data.StringFieldDef;
 import com.gwtext.client.widgets.form.ComboBox;
 import com.gwtext.client.widgets.form.ComboBoxConfig;
@@ -42,8 +43,11 @@ import com.gwtext.client.widgets.form.Form;
 import com.gwtext.client.widgets.form.FormConfig;
 import com.gwtext.client.widgets.form.event.ComboBoxListenerAdapter;
 
+import com.gwtext.client.core.UrlParam;
+
 public class GroupLiveSearchPanel implements GroupLiveSearchView {
 
+    private static final int PAGINATION_SIZE = 10;
     private final Form groupSearchForm;
     private final AbstractPresenter presenter;
     private PopupPanel groupLiveSearchPopup;
@@ -76,8 +80,6 @@ public class GroupLiveSearchPanel implements GroupLiveSearchView {
 
     private Form createGroupSearchForm() {
         DataProxy dataProxy = new HttpProxy("/kune/json/GroupJSONService/search", Connection.POST);
-        // DataProxy dataProxy = new
-        // ScriptTagProxy("/kune/json/GroupJSONService/search");
 
         JsonReader reader = new JsonReader(new JsonReaderConfig() {
             {
@@ -85,12 +87,17 @@ public class GroupLiveSearchPanel implements GroupLiveSearchView {
                 setTotalProperty("size");
                 setId("shortName");
             }
-        }, new RecordDef(new FieldDef[] { new StringFieldDef("shortName", "shortName"),
-                new StringFieldDef("longName", "longName"), new StringFieldDef("link", "link"),
-                new StringFieldDef("iconUrl", "iconUrl") }));
+        }, new RecordDef(new FieldDef[] { new StringFieldDef("shortName"), new StringFieldDef("longName"),
+                new StringFieldDef("link"), new StringFieldDef("iconUrl") }));
 
         final Store store = new Store(dataProxy, reader);
-        store.load();
+
+        store.load(new StoreLoadConfig() {
+            {
+                setParams(new UrlParam[] { new UrlParam("query", "."), new UrlParam("first", 1),
+                        new UrlParam("max", PAGINATION_SIZE) });
+            }
+        });
 
         Form form = new Form(new FormConfig() {
             {
@@ -102,24 +109,25 @@ public class GroupLiveSearchPanel implements GroupLiveSearchView {
         });
 
         final Template resultTpl = new Template(
-                "<div class=\"search-item\"><span><img alt=\"group logo\" src=\"images/group-def-icon.png\" style=\"height: 16px; width: 16px;\" />{shortName}:&nbsp;{longName}</span></div>");
+                "<div class=\"search-item\"><span class=\"kune-IconHyperlink\"><img alt=\"group logo\" src=\"images/group-def-icon.png\" style=\"height: 16px; width: 16px;\" />{shortName}:&nbsp;{longName}</span></div>");
         ComboBox cb = new ComboBox(new ComboBoxConfig() {
             {
                 setStore(store);
                 setDisplayField("longName");
-                setTypeAhead(false);
+                setTypeAhead(true);
                 setLoadingText(Kune.I18N.t("Searching..."));
                 setWidth(570);
-                setPageSize(10);
-                setHideTrigger(true);
+                setPageSize(PAGINATION_SIZE);
+                // setHideTrigger(true);
                 setTpl(resultTpl);
                 setMode(ComboBox.REMOTE);
-                setTitle(Kune.I18N.t("User or group"));
+                // setTitle(Kune.I18N.t("User or group"));
                 setMinChars(3);
 
                 setComboBoxListener(new ComboBoxListenerAdapter() {
                     public void onSelect(ComboBox comboBox, Record record, int index) {
-                        ((GroupLiveSearchPresenter) presenter).fireListener(record.getAsString("shortName"));
+                        ((GroupLiveSearchPresenter) presenter).fireListener(record.getAsString("shortName"), record
+                                .getAsString("longName"));
                     }
                 });
             }

@@ -19,7 +19,6 @@
 
 package org.ourproject.kune.platf.server.users;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.ourproject.kune.platf.server.domain.I18nCountry;
@@ -36,7 +35,6 @@ public class UserInfo {
     private String userHash;
     private I18nLanguage language;
     private I18nCountry country;
-    private HashMap<String, String> lexicon;
 
     public String getHomePage() {
         return homePage;
@@ -116,14 +114,6 @@ public class UserInfo {
 
     public void setCountry(final I18nCountry country) {
         this.country = country;
-    }
-
-    public void setLexicon(final HashMap<String, String> lexicon) {
-        this.lexicon = lexicon;
-    }
-
-    public HashMap<String, String> getLexicon() {
-        return lexicon;
     }
 
 }

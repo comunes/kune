@@ -67,6 +67,10 @@ public class Site {
         sitebar.showProgress(Kune.I18N.t("Loading"));
     }
 
+    public static void showProgressSaving() {
+        sitebar.showProgress(Kune.I18N.t("Saving"));
+    }
+
     public static void doNewGroup(final String returnToken) {
         sitebar.doNewGroup(returnToken);
     }

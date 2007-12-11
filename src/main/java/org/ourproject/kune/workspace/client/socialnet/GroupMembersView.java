@@ -47,4 +47,6 @@ public interface GroupMembersView extends View {
 
     void showCategory(String name);
 
+    void confirmAddCollab(String groupShortName, String groupLongName);
+
 }

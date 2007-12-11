@@ -1,3 +1,11 @@
+2007-12-11 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* i18n fixes and refactoring
+	* Unjoin SN fix
+	* Add member confirmation
+	* Search panel connected to json
+	* Partial solving of login issues following GWT recomendations
+	* new LanguageSelectorComponent
+
 2007-12-08 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* Added "Add member" to SN with Group/User live search component
 	* SN fixes (now we cannot add a already member). More tests.

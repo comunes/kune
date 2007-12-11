@@ -73,7 +73,8 @@ public class SiteBarFactory {
         return siteMessage;
     }
 
-    public static Login getLoginForm(final LoginListener listener, final List languages, final List countries) {
+    public static Login getLoginForm(final LoginListener listener, final Object[][] languages,
+            final Object[][] countries) {
         if (login == null) {
             LoginPresenter presenter = new LoginPresenter(listener);
             LoginPanel view = new LoginPanel(presenter, languages, countries);

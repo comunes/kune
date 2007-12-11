@@ -55,12 +55,12 @@ public class JoinRoomAction implements Action {
         handler.addRoomPresenceListener(new RoomPresenceListener() {
             public void onUserEntered(final String alias, final String status) {
                 room.addUser(alias, RoomUser.MODERADOR);
-                room.addInfoMessage(Kune.I18N.t("<tt>%s</tt> came online", alias));
+                room.addInfoMessage(Kune.I18N.t("[%s] came online", alias));
             }
 
             public void onUserLeft(final String alias) {
                 room.removeUser(alias);
-                room.addInfoMessage(Kune.I18N.t("<tt>%s</tt> went offline", alias));
+                room.addInfoMessage(Kune.I18N.t("[%s] went offline", alias));
             }
         });
         room.setHandler(handler);

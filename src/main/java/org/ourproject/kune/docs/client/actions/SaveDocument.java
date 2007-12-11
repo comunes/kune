@@ -37,7 +37,7 @@ public class SaveDocument implements Action {
     }
 
     private void save(final Services services, final StateDTO content, final DocumentContent documentContent) {
-        Site.showProgress(Kune.I18N.t("Saving"));
+        Site.showProgressSaving();
         ContentServiceAsync server = ContentService.App.getInstance();
         server.save(services.session.userHash, content.getDocumentId(), content.getContent(), new AsyncCallback() {
             public void onFailure(final Throwable caught) {

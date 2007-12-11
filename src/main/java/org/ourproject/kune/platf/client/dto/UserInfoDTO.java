@@ -19,7 +19,6 @@
 
 package org.ourproject.kune.platf.client.dto;
 
-import java.util.HashMap;
 import java.util.List;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
@@ -33,10 +32,6 @@ public class UserInfoDTO implements IsSerializable {
     private String userHash;
     private I18nLanguageDTO language;
     private I18nCountryDTO country;
-    /**
-     * @gwt.typeArgs <java.lang.String,java.lang.String>
-     */
-    private HashMap lexicon;
 
     /**
      * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.LinkDTO>
@@ -127,14 +122,6 @@ public class UserInfoDTO implements IsSerializable {
 
     public void setCountry(final I18nCountryDTO country) {
         this.country = country;
-    }
-
-    public HashMap getLexicon() {
-        return lexicon;
-    }
-
-    public void setLexicon(final HashMap lexicon) {
-        this.lexicon = lexicon;
     }
 
 }

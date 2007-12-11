@@ -23,9 +23,12 @@ import java.util.Date;
 
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.services.I18nUITranslation;
 import org.ourproject.kune.sitebar.client.Site;
+
+import to.tipit.gwtlib.FireLog;
 
 import com.google.gwt.user.client.Cookies;
 
@@ -36,11 +39,14 @@ public class LoggedInAction implements Action {
 
     private void onLoggedIn(final Services services, final UserInfoDTO userInfoDTO) {
         setCookie(userInfoDTO);
+        FireLog.debug("Userhash after login: " + userInfoDTO.getUserHash());
         services.session.userHash = userInfoDTO.getUserHash();
         Site.sitebar.showLoggedUser(userInfoDTO);
         services.stateManager.reload();
         services.stateManager.reloadSocialNetwork();
-        I18nUITranslation.getInstance().setLexicon(userInfoDTO.getLanguage().getCode(), userInfoDTO.getLexicon());
+        I18nLanguageDTO language = userInfoDTO.getLanguage();
+        I18nUITranslation.getInstance().setCurrentLanguage(language.getCode());
+        services.app.getWorkspace().getI18nTranslatorComponent().setLanguage(language);
     }
 
     private void setCookie(final UserInfoDTO userInfoDTO) {

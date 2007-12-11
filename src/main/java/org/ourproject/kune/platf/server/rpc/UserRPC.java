@@ -27,10 +27,10 @@ import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
+import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.platf.server.users.UserInfo;
 import org.ourproject.kune.platf.server.users.UserInfoService;
-import org.ourproject.kune.platf.server.users.UserManager;
 import org.ourproject.kune.sitebar.client.rpc.UserService;
 
 import com.google.gwt.user.client.rpc.SerializableException;

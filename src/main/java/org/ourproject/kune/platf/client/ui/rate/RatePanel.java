@@ -45,9 +45,9 @@ public class RatePanel extends Composite implements RateView {
             rateDesc.setText(Kune.I18N.t("(Not rated)"));
         } else if (byUsers.intValue() == 1) {
             // i18n params pluralization
-            rateDesc.setText(Kune.I18N.t("(<tt>%d</tt> user)", byUsers));
+            rateDesc.setText(Kune.I18N.t("([%d] user)", byUsers));
         } else {
-            rateDesc.setText(Kune.I18N.t("(<tt>%d</tt> users)", byUsers));
+            rateDesc.setText(Kune.I18N.t("([%d] users)", byUsers));
         }
     }
 

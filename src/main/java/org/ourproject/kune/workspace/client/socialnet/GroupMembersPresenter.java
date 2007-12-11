@@ -146,8 +146,8 @@ public class GroupMembersPresenter extends AbstractPresenter implements GroupMem
         DefaultDispatcher.getInstance().fire(WorkspaceEvents.REQ_JOIN_GROUP, null, null);
     }
 
-    public void onSelection(final String groupShortName) {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ADD_COLLAB_MEMBER, groupShortName, this);
+    public void onSelection(final String groupShortName, final String groupLongName) {
+        view.confirmAddCollab(groupShortName, groupLongName);
     }
 
     public void onAddViewer(final GroupDTO group) {

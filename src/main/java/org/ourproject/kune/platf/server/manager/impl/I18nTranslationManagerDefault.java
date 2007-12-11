@@ -27,11 +27,13 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.persistence.EntityManager;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.I18nTranslation;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 import org.ourproject.kune.platf.server.manager.I18nTranslationManager;
 
+import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -61,42 +63,23 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
         return map;
     }
 
-    private HashMap<String, String> getLexiconFromDb(final String language) {
-        HashMap<String, String> map = new HashMap();
-        List<I18nTranslation> set = finder.findByLanguage(language);
-        if (language != I18nTranslation.DEFAULT_LANG) {
-            map = (HashMap<String, String>) getLexicon(I18nTranslation.DEFAULT_LANG).clone();
-        }
-        for (Iterator iterator = set.iterator(); iterator.hasNext();) {
-            I18nTranslation trans = (I18nTranslation) iterator.next();
-            map.put(trans.getTrKey(), trans.getText());
-        }
-        langCache.put(language, map);
-        return map;
-    }
-
     public List<I18nTranslation> getUntranslatedLexicon(final String language) {
         return finder.getUnstranslatedLexicon(language);
     }
 
     public String getTranslation(final String language, final String text) {
         HashMap<String, String> lexicon = getLexicon(language);
-        if (lexicon.containsKey(text)) {
-            String translation = lexicon.get(text);
+        String escapedText = StringEscapeUtils.escapeHtml(text);
+        if (lexicon.containsKey(escapedText)) {
+            String translation = lexicon.get(escapedText);
             return translation;
         } else {
             // new key, add to language and default language and let
             // untranslated
-            // I18nTranslation newTranslation = new
-            // I18nTranslation(I18nTranslation.DEF_NAMESPACE, text, "", null,
-            // "",
-            // languageManager.findByCode(language),
-            // I18nTranslation.UNTRANSLATED_VALUE, 1);
-            // persist(newTranslation);
             if (!getLexicon(I18nTranslation.DEFAULT_LANG).containsKey(text)) {
-                I18nTranslation newTranslation = new I18nTranslation(I18nTranslation.DEF_NAMESPACE, text, "", null, "",
-                        languageManager.findByCode(I18nTranslation.DEFAULT_LANG), I18nTranslation.UNTRANSLATED_VALUE,
-                        I18nTranslation.DEF_PLUR_INDEX);
+                I18nTranslation newTranslation = new I18nTranslation(I18nTranslation.DEF_NAMESPACE, escapedText, "",
+                        null, "", languageManager.findByCode(I18nTranslation.DEFAULT_LANG),
+                        I18nTranslation.UNTRANSLATED_VALUE, I18nTranslation.DEF_PLUR_INDEX);
                 persist(newTranslation);
                 langCache.clear();
             }
@@ -106,13 +89,13 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
 
     public String getTranslation(final String language, final String text, final String arg) {
         String translation = getTranslation(language, text);
-        translation = translation.replaceFirst("<tt>%s</tt>", arg);
+        translation = translation.replaceFirst("\\[%s\\]", arg);
         return translation;
     }
 
     public String getTranslation(final String language, final String text, final Integer arg) {
         String translation = getTranslation(language, text);
-        translation = translation.replaceFirst("<tt>%d</tt>", arg.toString());
+        translation = translation.replaceFirst("\\[%d\\]", arg.toString());
         return translation;
     }
 
@@ -125,6 +108,31 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
         } else {
             langCache.clear();
         }
+    }
+
+    public void setTranslation(final String id, final String translation) throws SerializableException {
+        I18nTranslation trans = super.find(new Long(id));
+        if (trans != null) {
+            String escapedTranslation = StringEscapeUtils.escapeHtml(translation);
+            trans.setText(escapedTranslation);
+            persist(trans);
+        } else {
+            throw new SerializableException();
+        }
+    }
+
+    private HashMap<String, String> getLexiconFromDb(final String language) {
+        HashMap<String, String> map = new HashMap();
+        List<I18nTranslation> set = finder.findByLanguage(language);
+        if (!language.equals(I18nTranslation.DEFAULT_LANG)) {
+            map = (HashMap<String, String>) getLexicon(I18nTranslation.DEFAULT_LANG).clone();
+        }
+        for (Iterator iterator = set.iterator(); iterator.hasNext();) {
+            I18nTranslation trans = (I18nTranslation) iterator.next();
+            map.put(trans.getTrKey(), trans.getText());
+        }
+        langCache.put(language, map);
+        return map;
     }
 
 }

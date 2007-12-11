@@ -9,9 +9,9 @@
 
   <filter>
     <filter-name>rack</filter-name>
-    <filter-class>org.ourproject.rack.RackServletFilter</filter-class>
+    <filter-class>org.ourproject.kune.rack.RackServletFilter</filter-class>
     <init-param>
-      <param-name>org.ourproject.rack.RackModule</param-name>
+      <param-name>org.ourproject.kune.rack.RackModule</param-name>
       <param-value>
         org.ourproject.kune.app.server.KuneRackModule
       </param-value>

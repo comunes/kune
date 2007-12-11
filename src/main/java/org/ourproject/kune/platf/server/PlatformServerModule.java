@@ -42,21 +42,21 @@ import org.ourproject.kune.platf.server.manager.I18nCountryManager;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 import org.ourproject.kune.platf.server.manager.I18nTranslationManager;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
-import org.ourproject.kune.platf.server.manager.MetainfManager;
 import org.ourproject.kune.platf.server.manager.RateManager;
 import org.ourproject.kune.platf.server.manager.SearchManager;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 import org.ourproject.kune.platf.server.manager.ToolConfigurationManager;
+import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.manager.impl.GroupManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.I18nCountryManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.I18nLanguageManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.I18nTranslationManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.LicenseManagerDefault;
-import org.ourproject.kune.platf.server.manager.impl.MetainfManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.RateManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.SearchManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.SocialNetworkManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.ToolConfigurationManagerDefault;
+import org.ourproject.kune.platf.server.manager.impl.UserManagerDefault;
 import org.ourproject.kune.platf.server.mapper.DozerMapper;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.platf.server.properties.KuneProperties;
@@ -65,15 +65,13 @@ import org.ourproject.kune.platf.server.rpc.ContentRPC;
 import org.ourproject.kune.platf.server.rpc.GroupRPC;
 import org.ourproject.kune.platf.server.rpc.I18nRPC;
 import org.ourproject.kune.platf.server.rpc.SiteRPC;
-import org.ourproject.kune.platf.server.rpc.UserRPC;
 import org.ourproject.kune.platf.server.rpc.SocialNetworkRPC;
+import org.ourproject.kune.platf.server.rpc.UserRPC;
 import org.ourproject.kune.platf.server.state.StateService;
 import org.ourproject.kune.platf.server.state.StateServiceDefault;
 import org.ourproject.kune.platf.server.tool.ToolRegistry;
 import org.ourproject.kune.platf.server.users.UserInfoService;
 import org.ourproject.kune.platf.server.users.UserInfoServiceDefault;
-import org.ourproject.kune.platf.server.users.UserManager;
-import org.ourproject.kune.platf.server.users.UserManagerDefault;
 import org.ourproject.kune.sitebar.client.rpc.UserService;
 
 import com.google.inject.AbstractModule;
@@ -125,6 +123,5 @@ public class PlatformServerModule extends AbstractModule {
         bind(I18nCountryManager.class).to(I18nCountryManagerDefault.class);
         bind(I18nLanguageManager.class).to(I18nLanguageManagerDefault.class);
         bind(I18nTranslationManager.class).to(I18nTranslationManagerDefault.class);
-        bind(MetainfManager.class).to(MetainfManagerDefault.class);
     }
 }

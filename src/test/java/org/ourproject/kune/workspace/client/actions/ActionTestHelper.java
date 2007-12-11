@@ -24,7 +24,7 @@ public class ActionTestHelper {
         this.action = action;
         app = new ApplicationStub(useNiceMocks);
         session = new NiceState();
-        services = new Services(app, app.getStateManager(), app.getDispatcher());
+        services = new Services(app, app.getStateManager(), app.getDispatcher(), session);
     }
 
     public void execute(final Object value) {

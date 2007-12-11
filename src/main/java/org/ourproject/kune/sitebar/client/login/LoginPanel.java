@@ -20,13 +20,8 @@
 
 package org.ourproject.kune.sitebar.client.login;
 
-import java.util.Iterator;
-import java.util.List;
-
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.I18nCountryDTO;
-import org.ourproject.kune.platf.client.dto.I18nLanguageSimpleDTO;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.sitebar.client.bar.SiteBarTrans;
 import org.ourproject.kune.sitebar.client.msg.SiteMessage;
 import org.ourproject.kune.sitebar.client.msg.SiteMessagePanel;
@@ -113,33 +108,11 @@ public class LoginPanel implements LoginView, View {
 
     private ComboBox languageCombo;
 
-    public LoginPanel(final LoginPresenter initialPresenter, final List languages, final List countries) {
+    public LoginPanel(final LoginPresenter initialPresenter, final Object[][] languages, final Object[][] countries) {
         this.presenter = initialPresenter;
-        this.languages = mapLangs(languages);
-        this.countries = mapCountries(countries);
+        this.languages = languages;
+        this.countries = countries;
         createPanel();
-    }
-
-    private Object[][] mapCountries(final List countries) {
-        Object[][] objs = new Object[countries.size()][1];
-        int i = 0;
-        for (Iterator iterator = countries.iterator(); iterator.hasNext();) {
-            I18nCountryDTO country = (I18nCountryDTO) iterator.next();
-            Object[] obj = new Object[] { country.getCode(), country.getEnglishName() };
-            objs[i++] = obj;
-        }
-        return objs;
-    }
-
-    private Object[][] mapLangs(final List languages) {
-        Object[][] objs = new Object[languages.size()][1];
-        int i = 0;
-        for (Iterator iterator = languages.iterator(); iterator.hasNext();) {
-            I18nLanguageSimpleDTO language = (I18nLanguageSimpleDTO) iterator.next();
-            Object[] obj = new Object[] { language.getCode(), language.getEnglishName() };
-            objs[i++] = obj;
-        }
-        return objs;
     }
 
     public boolean isSignInFormValid() {
@@ -214,16 +187,16 @@ public class LoginPanel implements LoginView, View {
         dialog.hide();
     }
 
+    public void center() {
+        dialog.center();
+    }
+
     private Object[][] getLanguages() {
         return languages;
     }
 
     private Object[][] getCountries() {
         return countries;
-    }
-
-    public void center() {
-        dialog.center();
     }
 
     private void createPanel() {
@@ -533,7 +506,7 @@ public class LoginPanel implements LoginView, View {
                 setLoadingText(Kune.I18N.t("Searching..."));
                 setTypeAhead(true);
                 setSelectOnFocus(true);
-                setWidth(200);
+                setWidth(186);
                 setMsgTarget("side");
                 setAllowBlank(false);
                 setValueField("abbr");
@@ -559,7 +532,7 @@ public class LoginPanel implements LoginView, View {
                 setLoadingText(Kune.I18N.t("Searching..."));
                 setTypeAhead(true);
                 setSelectOnFocus(true);
-                setWidth(200);
+                setWidth(186);
                 setMsgTarget("side");
                 setAllowBlank(false);
                 setValueField("abbr");

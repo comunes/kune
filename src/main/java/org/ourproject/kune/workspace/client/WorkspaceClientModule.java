@@ -28,7 +28,6 @@ import org.ourproject.kune.workspace.client.actions.ClearExtensionPointAction;
 import org.ourproject.kune.workspace.client.actions.DetachFromExtensionPointAction;
 import org.ourproject.kune.workspace.client.actions.DisableRateItAction;
 import org.ourproject.kune.workspace.client.actions.EnableRateItAction;
-import org.ourproject.kune.workspace.client.actions.GetTranslationAction;
 import org.ourproject.kune.workspace.client.actions.GotoAction;
 import org.ourproject.kune.workspace.client.actions.InitAction;
 import org.ourproject.kune.workspace.client.actions.InitDataReceivedAction;
@@ -36,6 +35,10 @@ import org.ourproject.kune.workspace.client.actions.LoggedInAction;
 import org.ourproject.kune.workspace.client.actions.LoggedOutAction;
 import org.ourproject.kune.workspace.client.actions.RateContentAction;
 import org.ourproject.kune.workspace.client.actions.StopAction;
+import org.ourproject.kune.workspace.client.actions.i18n.DoTranslationAction;
+import org.ourproject.kune.workspace.client.actions.i18n.GetLexiconAction;
+import org.ourproject.kune.workspace.client.actions.i18n.GetTranslationAction;
+import org.ourproject.kune.workspace.client.actions.i18n.ShowTranslatorAction;
 import org.ourproject.kune.workspace.client.actions.sn.AcceptJoinGroupAction;
 import org.ourproject.kune.workspace.client.actions.sn.AddAdminAction;
 import org.ourproject.kune.workspace.client.actions.sn.AddCollabAction;
@@ -75,5 +78,8 @@ public class WorkspaceClientModule implements ClientModule {
         register.addAction(WorkspaceEvents.CLEAR_EXT_POINT, new ClearExtensionPointAction());
         register.addAction(WorkspaceEvents.GET_TRANSLATION, new GetTranslationAction());
         register.addAction(WorkspaceEvents.ADD_MEMBER_GROUPLIVESEARCH, new AddMemberGroupLiveSearchAction());
+        register.addAction(WorkspaceEvents.SHOW_TRANSLATOR, new ShowTranslatorAction());
+        register.addAction(WorkspaceEvents.DO_TRANSLATION, new DoTranslationAction());
+        register.addAction(WorkspaceEvents.GET_LEXICON, new GetLexiconAction());
     }
 }

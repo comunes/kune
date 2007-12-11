@@ -1,3 +1,22 @@
+/*
+ * Copyright (C) 2007 The kune development team (see CREDITS for details)
+ * This file is part of kune.
+ *
+ * Kune is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Kune is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+
 package org.ourproject.kune.app.server;
 
 import org.ourproject.kune.chat.server.ChatServerModule;
@@ -13,14 +32,15 @@ import org.ourproject.kune.platf.server.properties.PropertiesFileName;
 import org.ourproject.kune.platf.server.rest.GroupJSONService;
 import org.ourproject.kune.platf.server.rest.I18nTranslationJSONService;
 import org.ourproject.kune.platf.server.rest.TestJSONService;
+import org.ourproject.kune.platf.server.rest.UserJSONService;
+import org.ourproject.kune.rack.RackBuilder;
+import org.ourproject.kune.rack.RackModule;
+import org.ourproject.kune.rack.filters.ForwardFilter;
+import org.ourproject.kune.rack.filters.ListenerFilter;
+import org.ourproject.kune.rack.filters.LogFilter;
+import org.ourproject.kune.rack.filters.RedirectFilter;
+import org.ourproject.kune.rack.filters.rest.RESTServicesModule;
 import org.ourproject.kune.sitebar.client.rpc.UserService;
-import org.ourproject.rack.RackBuilder;
-import org.ourproject.rack.RackModule;
-import org.ourproject.rack.filters.ForwardFilter;
-import org.ourproject.rack.filters.ListenerFilter;
-import org.ourproject.rack.filters.LogFilter;
-import org.ourproject.rack.filters.RedirectFilter;
-import org.ourproject.rack.filters.rest.RESTServicesModule;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Module;
@@ -73,7 +93,7 @@ public class KuneRackModule implements RackModule {
         builder.installGWTServices("^/kune/", SiteService.class, GroupService.class, ContentService.class,
                 UserService.class, SocialNetworkService.class, I18nService.class);
         builder.installRESTServices("^/kune/json/", TestJSONService.class, GroupJSONService.class,
-                I18nTranslationJSONService.class);
+                UserJSONService.class, I18nTranslationJSONService.class);
 
         builder.at("^/kune/(.*)$").install(new ForwardFilter("^/kune/(.*)$", "/gwt/org.ourproject.kune.app.Kune/{0}"));
     }

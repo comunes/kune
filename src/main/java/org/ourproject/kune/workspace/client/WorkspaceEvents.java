@@ -43,6 +43,9 @@ public interface WorkspaceEvents {
     public static final String ATTACH_TO_EXT_POINT = "ws.AttachToExtensionPoint";
     public static final String DETACH_FROM_EXT_POINT = "ws.DetachToExtensionPoint";
     public static final String CLEAR_EXT_POINT = "ws.ClearExtensionPoint";
-    public static final String GET_TRANSLATION = "platf.GetTranslation";
     public static final String ADD_MEMBER_GROUPLIVESEARCH = "ws.AddMemberGroupLiveSearch";
+    public static final String GET_LEXICON = "i18n.getLexicon";
+    public static final String SHOW_TRANSLATOR = "i18n.ShowTranslator";
+    public static final String GET_TRANSLATION = "i18n.GetTranslation";
+    public static final String DO_TRANSLATION = "i18n.doTranslation";
 }

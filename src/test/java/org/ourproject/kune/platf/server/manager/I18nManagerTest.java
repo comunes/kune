@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,8 +39,10 @@ public class I18nManagerTest extends PersistenceTest {
         translationManager.persist(new I18nTranslation("January [month]", english, "January"));
         translationManager.persist(new I18nTranslation("Sunday [weekday]", afrikaans, "Sondag"));
         translationManager.persist(new I18nTranslation("January [month]", greek, "Ιανουάριος"));
-        translationManager.persist(new I18nTranslation("<tt>%s</tt> users", english, "<tt>%s</tt> users"));
-        translationManager.persist(new I18nTranslation("<tt>%d</tt> users", english, "<tt>%d</tt> users"));
+        translationManager.persist(new I18nTranslation(StringEscapeUtils.escapeHtml("[%s] users"), english,
+                StringEscapeUtils.escapeHtml("[%s] users")));
+        translationManager.persist(new I18nTranslation(StringEscapeUtils.escapeHtml("[%d] users"), english,
+                StringEscapeUtils.escapeHtml("[%d] users")));
         I18nCountry gb = new I18nCountry(new Long(75), "GB", "United Kingdom", "", "£%n", "GBP", ",", ".", ".",
                 "western");
         countryManager.merge(gb);
@@ -107,13 +110,13 @@ public class I18nManagerTest extends PersistenceTest {
 
     @Test
     public void getTranslationWithStringArg() {
-        String translation = translationManager.getTranslation("en", "<tt>%s</tt> users", "Twenty");
+        String translation = translationManager.getTranslation("en", "[%s] users", "Twenty");
         assertEquals("Twenty users", translation);
     }
 
     @Test
     public void getTranslationWithIntArg() {
-        String translation = translationManager.getTranslation("en", "<tt>%d</tt> users", 20);
+        String translation = translationManager.getTranslation("en", "[%d] users", 20);
         assertEquals("20 users", translation);
     }
 

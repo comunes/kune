@@ -41,7 +41,6 @@ import org.ourproject.kune.sitebar.client.services.Translate;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FocusListener;
@@ -90,8 +89,8 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     private final Widget progressText;
     private final HorizontalPanel publicHP;
     private SearchSitePanel searchPanel;
-    private List countries;
-    private List languages;
+    private Object[][] languages;
+    private Object[][] countries;
 
     public SiteBarPanel(final SiteBarPresenter initPresenter) {
         t = SiteBarTrans.getInstance().t;
@@ -180,7 +179,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     private void createOptionsSubmenu() {
         linkHelpInTrans = new MenuItem(img.language().getHTML() + t.HelpWithTranslation(), true, new Command() {
             public void execute() {
-                Window.open("http://translate-kune.ourproject.org", "_blank", "");
+                presenter.onHelpInTranslation();
             }
         });
         linkHelp = new MenuItem(img.kuneIcon16().getHTML() + t.Help(), true, new Command() {
@@ -362,12 +361,12 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         });
     }
 
-    public void setLanguages(final List languages) {
+    public void setLanguages(final Object[][] languages) {
         this.languages = languages;
 
     }
 
-    public void setCountries(final List countries) {
+    public void setCountries(final Object[][] countries) {
         this.countries = countries;
     }
 

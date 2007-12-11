@@ -20,9 +20,8 @@
 
 package org.ourproject.kune.sitebar.client.bar;
 
-import java.util.List;
-
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.newgroup.NewGroupListener;
@@ -31,6 +30,7 @@ import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.login.LoginListener;
 import org.ourproject.kune.sitebar.client.rpc.UserService;
 import org.ourproject.kune.sitebar.client.rpc.UserServiceAsync;
+import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -171,11 +171,11 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
         listener.onChangeState(token);
     }
 
-    public void setLanguages(final List languages) {
+    public void setLanguages(final Object[][] languages) {
         view.setLanguages(languages);
     }
 
-    public void setCountries(final List countries) {
+    public void setCountries(final Object[][] countries) {
         view.setCountries(countries);
     }
 
@@ -196,6 +196,10 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
             listener.onChangeState(new StateToken(this.previousToken));
             this.previousToken = null;
         }
+    }
+
+    public void onHelpInTranslation() {
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.SHOW_TRANSLATOR, null, null);
     }
 
 }

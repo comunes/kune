@@ -19,13 +19,23 @@
 
 package org.ourproject.kune.platf.client.search;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.rpc.SiteService;
-import org.ourproject.kune.platf.client.rpc.SiteServiceAsync;
 
 public class SearchSitePresenter implements SearchSite {
 
+    private static final String GROUPS_SEARCH = "groups";
+    private static final String USERS_SEARCH = "users";
     private SearchSiteView view;
+    private String currentSearch;
+    private final ArrayList searchHistory;
+
+    public SearchSitePresenter() {
+        searchHistory = new ArrayList();
+        currentSearch = GROUPS_SEARCH;
+    }
 
     public void init(final SearchSiteView view) {
         this.view = view;
@@ -36,21 +46,34 @@ public class SearchSitePresenter implements SearchSite {
     }
 
     public void doClose() {
-        // TODO Auto-generated method stub
-
     }
 
     public void doSearchGroups() {
-        // TODO Auto-generated method stub
-
+        currentSearch = GROUPS_SEARCH;
+        doSearch(view.getComboTextToSearch());
     }
 
     public void doSearchUsers() {
-        // TODO Auto-generated method stub
-
+        currentSearch = USERS_SEARCH;
+        doSearch(view.getComboTextToSearch());
     }
 
-    public void doSearch(final String asString) {
-        SiteServiceAsync siteService = SiteService.App.getInstance();
+    public void doSearch(final String text) {
+        searchHistory.add(text);
+        if (currentSearch == GROUPS_SEARCH) {
+            view.searchGroups(text);
+        }
+    }
+
+    public Object[][] getSearchHistory() {
+        Object[][] objs = new Object[searchHistory.size()][1];
+        int i = 0;
+        for (Iterator iterator = searchHistory.iterator(); iterator.hasNext();) {
+            String search = (String) iterator.next();
+            Object[] obj = new Object[] { search };
+            objs[i++] = obj;
+        }
+        return objs;
+
     }
 }

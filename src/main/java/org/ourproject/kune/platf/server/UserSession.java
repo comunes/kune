@@ -21,7 +21,7 @@
 package org.ourproject.kune.platf.server;
 
 import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.users.UserManager;
+import org.ourproject.kune.platf.server.manager.UserManager;
 
 import com.google.inject.Inject;
 import com.google.inject.servlet.SessionScoped;

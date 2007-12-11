@@ -59,7 +59,7 @@ public class LicensePanel extends HorizontalPanel implements LicenseView {
     }
 
     public void showLicense(final String groupName, final LicenseDTO licenseDTO) {
-        copyright.setText(Kune.I18N.t("© <tt>%s</tt>, under license: ", groupName));
+        copyright.setText(Kune.I18N.t("© [%s], under license: ", groupName));
         license.setText(licenseDTO.getLongName());
         copyright.setVisible(true);
         license.setVisible(true);

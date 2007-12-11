@@ -20,8 +20,6 @@
 
 package org.ourproject.kune.sitebar.client.bar;
 
-import java.util.List;
-
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 
@@ -43,8 +41,8 @@ public interface SiteBar {
 
     void showAlertMessage(String message);
 
-    void setLanguages(List language);
+    void setLanguages(Object[][] language);
 
-    void setCountries(List countries);
+    void setCountries(Object[][] countries);
 
 }

@@ -27,6 +27,7 @@ import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.GroupType;
 import org.ourproject.kune.platf.server.domain.I18nCountry;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
+import org.ourproject.kune.platf.server.domain.I18nTranslation;
 import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
@@ -34,8 +35,8 @@ import org.ourproject.kune.platf.server.manager.I18nCountryManager;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 import org.ourproject.kune.platf.server.manager.I18nTranslationManager;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
+import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.properties.DatabaseProperties;
-import org.ourproject.kune.platf.server.users.UserManager;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
@@ -49,6 +50,7 @@ public class DatabaseInitializer {
     private final UserManager userManager;
     private final I18nLanguageManager languageManager;
     private final I18nCountryManager countryManager;
+    private final I18nTranslationManager translationManager;
 
     @Inject
     public DatabaseInitializer(final DatabaseProperties properties, final UserManager userManager,
@@ -61,6 +63,7 @@ public class DatabaseInitializer {
         this.licenseManager = licenseManager;
         this.languageManager = languageManager;
         this.countryManager = countryManager;
+        this.translationManager = translationManager;
     }
 
     public void initConditional() throws SerializableException {
@@ -79,64 +82,15 @@ public class DatabaseInitializer {
     }
 
     public void createOthers() {
-        // try {
-        // Metainf metainf = new Metainf(0);
-        // metainfManager.persist(metainf);
-        // EtlExecutor.newExecutor(new
-        // File("src/main/resources/db/kune-db-init.xml")).execute();
-        // } catch (EtlExecutorException e) {
-        // e.printStackTrace();
-        // }
-
         I18nLanguage english = new I18nLanguage(new Long(1819), "English", "English", "en");
+        I18nLanguage spanish = new I18nLanguage(new Long(5889), "Spanish", "Español", "es");
         languageManager.persist(english);
+        languageManager.persist(spanish);
         I18nCountry gb = new I18nCountry(new Long(75), "GB", "United Kingdom", "", "£%n", "GBP", ",", ".", ".",
                 "western");
         countryManager.merge(gb);
-
-        // CSVReader reader;
-        // String[] line = null;
-        // try {
-        // reader = new CSVReader(new FileReader("data/country_data.csv"), ',',
-        // '"');
-        // while ((line = reader.readNext()) != null) {
-        // I18nCountry country = new I18nCountry(new Long(line[0]), line[1],
-        // line[2], line[3], line[4], line[5],
-        // line[6], line[7], line[8], line[9]);
-        // countryManager.merge(country);
-        // }
-        //
-        // reader = new CSVReader(new FileReader("data/language_data.csv"), ',',
-        // '"');
-        //
-        // // code is iso6391 || iso6392 || rfc3306
-        // while ((line = reader.readNext()) != null) {
-        // I18nLanguage language = new I18nLanguage(new Long(line[0]), line[1],
-        // line[2], line[3], line[4],
-        // line[5], line[6], line[7], line[8], line[9], line[10],
-        // line[11].equals(0), line[12], line[13],
-        // line[14], (line[1].length() > 0 ? line[1] : line[2].length() > 0 ?
-        // line[2] : line[4]));
-        // languageManager.merge(language);
-        // }
-        //
-        // reader = new CSVReader(new FileReader("data/translation_data.csv"),
-        // ',', '"');
-        //
-        // while ((line = reader.readNext()) != null) {
-        // I18nTranslation trans = new I18nTranslation(line[1], line[2],
-        // line[3], line[4].length() == 0 ? null
-        // : new Integer(line[4]), line[5], languageManager.find(new
-        // Long(line[6])), line[7], new Integer(
-        // line[8]));
-        // translationManager.persist(trans);
-        // }
-        // } catch (Exception e) {
-        // e.printStackTrace();
-        // System.err.print(line[0] + " " + line[1] + " " + line[7] + " " + new
-        // Integer(line[8]));
-        // }
-
+        I18nTranslation test = new I18nTranslation("test", english, "test");
+        translationManager.persist(test);
     }
 
     private void createDefUsersGroup() throws SerializableException, UserMustBeLoggedException {

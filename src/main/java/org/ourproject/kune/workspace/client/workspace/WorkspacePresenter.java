@@ -24,8 +24,11 @@ import java.util.Iterator;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
+import org.ourproject.kune.workspace.client.i18n.I18nTranslatorComponent;
+import org.ourproject.kune.workspace.client.i18n.LanguageSelectorComponent;
 import org.ourproject.kune.workspace.client.license.LicenseComponent;
 
 public class WorkspacePresenter implements Workspace {
@@ -33,8 +36,10 @@ public class WorkspacePresenter implements Workspace {
     private WorkspaceComponent context;
     private WorkspaceComponent content;
     private WorkspaceUIComponents components;
+    private final Session session;
 
-    public WorkspacePresenter() {
+    public WorkspacePresenter(final Session session) {
+        this.session = session;
     }
 
     public void init(final WorkspaceView view) {
@@ -138,6 +143,14 @@ public class WorkspacePresenter implements Workspace {
 
     public GroupLiveSearchComponent getGroupLiveSearchComponent() {
         return components.getGroupLiveSearchComponent();
+    }
+
+    public I18nTranslatorComponent getI18nTranslatorComponent() {
+        return components.getI18nTranslatorComponent(session.getLanguagesArray());
+    }
+
+    public LanguageSelectorComponent getLanguageSelectorComponent() {
+        return components.getLanguageSelectorComponent(session.getLanguagesArray());
     }
 
     public void setTheme(final String theme) {

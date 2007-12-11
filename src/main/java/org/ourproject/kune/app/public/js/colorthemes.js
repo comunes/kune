@@ -27,7 +27,7 @@ var greenKuneTheme = {
   contentBottomText: "#FFF",
   context: "#CFA",
   splitter: "#DCE8AB",
-  groupMembersDD: "#08000",
+  groupMembersDD: "#008000",
   participationDD: "#00AA00",
   buddiesPresenceDD: "#00D400",
   tagsDD: "#00D400"
