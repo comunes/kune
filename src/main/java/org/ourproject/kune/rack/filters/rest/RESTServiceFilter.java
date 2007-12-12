@@ -57,6 +57,7 @@ public class RESTServiceFilter extends InjectedFilter {
         ParametersAdapter parameters = new ParametersAdapter(request);
         log.debug("JSON METHOD: '" + methodName + "' on: " + serviceClass.getSimpleName());
 
+        response.setCharacterEncoding("utf-8");
         Object output = transactionalFilter.doService(serviceClass, methodName, parameters, getInstance(serviceClass));
         if (output != null) {
             PrintWriter writer = response.getWriter();
