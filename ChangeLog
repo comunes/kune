@@ -1,4 +1,5 @@
 2007-12-13 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* cleanup of files in repo
 	* first liquibase integration via maven (see README)
 	* i18n fixes
 	* i18n initialization of data (languages, translations and countries) via
