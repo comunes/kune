@@ -97,11 +97,11 @@ public class I18nLanguage implements HasId {
     }
 
     // code is iso6391 || iso6392 || rfc3306 (see DatabaInicializer)
-    public I18nLanguage(final Long id, final String iso6391, final String iso6392, final String iso6393,
-            final String rfc3066, final String englishName, final String englishNameLocale,
-            final String englishNameModifier, final String nativeName, final String nativeNameLocale,
-            final String nativeNameModifier, final Boolean macroLanguage, final String direction,
-            final String pluralization, final String scope, final String code) {
+    public I18nLanguage(final Long id, final String code, final String direction, final String englishName,
+            final String englishNameLocale, final String englishNameModifier, final String iso6391,
+            final String iso6392, final String iso6393, final Boolean macroLanguage,
+            final String nativeName, final String nativeNameLocale, final String nativeNameModifier,
+            final String pluralization, final String rfc3066, final String scope) {
         this.id = id;
         this.iso6391 = iso6391;
         this.iso6392 = iso6392;

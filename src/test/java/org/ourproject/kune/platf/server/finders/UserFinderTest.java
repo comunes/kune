@@ -30,12 +30,11 @@ public class UserFinderTest extends PersistenceTest {
         openTransaction();
         I18nLanguage english = new I18nLanguage(new Long(1819), "English", "English", "en");
         languageManager.persist(english);
-        I18nCountry gb = new I18nCountry(new Long(75), "GB", "United Kingdom", "", "£%n", "GBP", ",", ".", ".",
-                "western");
-        countryManager.merge(gb);
-        // FIXME: I want to use english/gb and don't permit null in user table
-        persist(new User("shortname1", "the name1", "one@here.com", "password1", english, null));
-        persist(new User("shortname2", "the name2", "two@here.com", "password1", english, null));
+        I18nCountry gb = new I18nCountry(new Long(75), "GB", "GBP", ".", "£%n", "", ".", "United Kingdom", "western",
+                ",");
+        countryManager.persist(gb);
+        persist(new User("shortname1", "the name1", "one@here.com", "password1", english, gb));
+        persist(new User("shortname2", "the name2", "two@here.com", "password1", english, gb));
     }
 
     @Test

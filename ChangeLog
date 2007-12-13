@@ -1,3 +1,12 @@
+2007-12-13 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* first liquibase integration via maven (see README)
+	* i18n fixes
+	* i18n initialization of data (languages, translations and countries) via
+	liquibase
+
+2007-12-12 Daniel Gómez Blasco <danigb@gmail.com>
+	* utf8 problems with JSON fixed
+
 2007-12-11 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* i18n languages sincronization with default
 	* i18n fixes and refactoring

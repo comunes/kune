@@ -82,13 +82,15 @@ public class DatabaseInitializer {
     }
 
     public void createOthers() {
-        I18nLanguage english = new I18nLanguage(new Long(1819), "English", "English", "en");
-        I18nLanguage spanish = new I18nLanguage(new Long(5889), "Spanish", "Español", "es");
+        I18nLanguage english = new I18nLanguage(new Long(1819), "en", "ltr", "English", "", "", "en", "eng", "eng",
+                false, "", "", "", "c == 1 ? 1 : 2", "", "L");
+        I18nLanguage spanish = new I18nLanguage(new Long(5889), "es", "ltr", "Spanish", "", "", "es", "spa", "spa",
+                true, "Español", "", "", "c == 1 ? 1 : 2", "", "L");
         languageManager.persist(english);
         languageManager.persist(spanish);
-        I18nCountry gb = new I18nCountry(new Long(75), "GB", "United Kingdom", "", "£%n", "GBP", ",", ".", ".",
-                "western");
-        countryManager.merge(gb);
+        I18nCountry gb = new I18nCountry(new Long(75), "GB", "GBP", ".", "£%n", "", ".", "United Kingdom", "western",
+                ",");
+        countryManager.persist(gb);
         I18nTranslation test = new I18nTranslation("test", english, "test");
         translationManager.persist(test);
     }

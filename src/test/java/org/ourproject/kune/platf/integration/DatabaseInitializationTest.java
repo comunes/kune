@@ -66,8 +66,9 @@ public class DatabaseInitializationTest {
 
     @Test
     public void testI18n() {
-        assertNotNull(countryManager.find(new Long(1)));
+        assertNotNull(countryManager.find(new Long(75)));
         assertNotNull(languageManager.findByCode("en"));
+        assertNotNull(languageManager.find(new Long(1819)));
     }
 
 }

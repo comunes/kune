@@ -4,9 +4,7 @@
   <groupId>org.ourproject.kune</groupId>
   <artifactId>org.ourproject.kune</artifactId>
   <version>0.0.1</version>
-  <description>
-    kune free/open/libre collaboration platform
-  </description>
+  <description>kune free/open/libre collaboration platform</description>
   <name>Kune</name>
   <url>http://kune.ourproject.org</url>
   <dependencies>
@@ -129,59 +127,68 @@
       <version>0.6</version>
     </dependency>
 
-                <!-- REST: xml and json (stax) -->
-                <dependency>
-                        <groupId>com.thoughtworks.xstream</groupId>
-                        <artifactId>xstream</artifactId>
-                        <version>1.2.2</version>
-                </dependency>
-                <dependency>
-                        <groupId>stax</groupId>
-                        <artifactId>stax-api</artifactId>
-                        <version>1.0.1</version>
-                </dependency>
-                <dependency>
-                        <groupId>org.codehaus.jettison</groupId>
-                        <artifactId>jettison</artifactId>
-                        <version>1.0-RC2</version>
-                </dependency>
-                <dependency>
-                        <groupId>net.sf.json-lib</groupId>
-                        <artifactId>json-lib</artifactId>
-                        <version>2.1</version>
-                        <classifier>jdk15</classifier>
-                </dependency>
-                <dependency>
-                        <groupId>commons-collections</groupId>
-                        <artifactId>commons-collections</artifactId>
-                        <version>3.2</version>
-                </dependency>
-
-    <!-- scriptella, db upgrades -->
+    <!-- REST: xml and json (stax) -->
     <dependency>
+      <groupId>com.thoughtworks.xstream</groupId>
+      <artifactId>xstream</artifactId>
+      <version>1.2.2</version>
+    </dependency>
+    <dependency>
+      <groupId>stax</groupId>
+      <artifactId>stax-api</artifactId>
+      <version>1.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.jettison</groupId>
+      <artifactId>jettison</artifactId>
+      <version>1.0-RC2</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.json-lib</groupId>
+      <artifactId>json-lib</artifactId>
+      <version>2.1</version>
+      <classifier>jdk15</classifier>
+    </dependency>
+    <dependency>
+      <groupId>commons-collections</groupId>
+      <artifactId>commons-collections</artifactId>
+      <version>3.2</version>
+    </dependency>
+
+    <!-- db upgrades -->
+
+    <!-- scriptella, now used liquibase instead -->
+    <!--     <dependency>
       <groupId>com.javaforge.scriptella</groupId>
       <artifactId>scriptella-core</artifactId>
       <version>0.9</version>
-    </dependency>
-    <dependency>
+      </dependency>
+      <dependency>
       <groupId>com.javaforge.scriptella</groupId>
       <artifactId>scriptella-drivers</artifactId>
       <version>0.9</version>
-    </dependency>
-    <dependency>
+      </dependency>
+      <dependency>
       <groupId>com.javaforge.scriptella</groupId>
       <artifactId>scriptella-tools</artifactId>
       <version>0.9</version>
-    </dependency>
-    <dependency>
+      </dependency>
+      <dependency>
       <groupId>au.com.bytecode.opencsv</groupId>
       <artifactId>opencsv</artifactId>
       <version>1.8</version>
-    </dependency>
-    <dependency>
+      </dependency>
+      <dependency>
       <groupId>commons-jexl</groupId>
       <artifactId>commons-jexl</artifactId>
       <version>1.0</version>
+      </dependency>
+    -->
+
+    <dependency>
+      <groupId>org.liquibase</groupId>
+      <artifactId>liquibase-core</artifactId>
+      <version>1.4.1</version>
     </dependency>
 
     <!-- jetty dependencies -->
@@ -242,9 +249,7 @@
     </repository>
     <repository>
       <id>gwt-maven</id>
-      <url>
-        http://gwt-maven.googlecode.com/svn/trunk/mavenrepo/
-      </url>
+      <url>http://gwt-maven.googlecode.com/svn/trunk/mavenrepo/</url>
     </repository>
     <repository>
       <id>kune-maven</id>
@@ -254,9 +259,7 @@
   <pluginRepositories>
     <pluginRepository>
       <id>gwt-maven</id>
-      <url>
-        http://gwt-maven.googlecode.com/svn/trunk/mavenrepo/
-      </url>
+      <url>http://gwt-maven.googlecode.com/svn/trunk/mavenrepo/</url>
     </pluginRepository>
     <pluginRepository>
       <id>kune-maven</id>
@@ -286,9 +289,7 @@
         <version>1.5.3-SNAPSHOT</version>
         <configuration>
           <logLevel>INFO</logLevel>
-          <runTarget>
-            org.ourproject.kune.app.Kune/Kune.html
-          </runTarget>
+          <runTarget>org.ourproject.kune.app.Kune/Kune.html</runTarget>
           <compileTarget>
             <param>org.ourproject.kune.app.Kune</param>
           </compileTarget>
@@ -298,9 +299,7 @@
           <generatorDestinationPackage>
             org.ourproject.kune.app.Kune
           </generatorDestinationPackage>
-          <generateGettersAndSetters>
-            true
-          </generateGettersAndSetters>
+          <generateGettersAndSetters>true</generateGettersAndSetters>
           <generatePropertyChangeSupport>
             true
           </generatePropertyChangeSupport>
@@ -341,6 +340,38 @@
         </configuration>
       </plugin>
 
+      <plugin>
+        <groupId>org.liquibase</groupId>
+        <artifactId>liquibase-plugin</artifactId>
+        <version>1.4.1.0</version>
+        <executions>
+          <execution>
+            <phase>process-resources</phase>
+            <configuration>
+              <changeLogFile>
+                src/main/resources/db/liquibase_changelog.xml
+              </changeLogFile>
+              <driver>com.mysql.jdbc.Driver</driver>
+              <url>jdbc:mysql://localhost/kune_dev</url>
+              <username>kune</username>
+              <password>db4kune</password>
+              <verbose>true</verbose>
+            </configuration>
+            <!--
+              <configuration>
+              <verbose>true</verbose>
+              <propertiesFile>
+              src/main/resources/db/liquibase.properties
+              </propertiesFile>
+              </configuration>
+            -->
+            <goals>
+              <goal>migrate</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
   </build>
 
@@ -371,9 +402,7 @@
         <configuration>
           <systemProperties>
             <property>
-              <name>
-                net.sourceforge.cobertura.datafile
-              </name>
+              <name>net.sourceforge.cobertura.datafile</name>
               <value>
                 ${project.build.directory}/cobertura/cobertura.ser
               </value>

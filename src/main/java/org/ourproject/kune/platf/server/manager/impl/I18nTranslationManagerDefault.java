@@ -91,9 +91,9 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
             // new key, add to language and default language and let
             // untranslated
             if (!getLexicon(I18nTranslation.DEFAULT_LANG).containsKey(text)) {
-                I18nTranslation newTranslation = new I18nTranslation(I18nTranslation.DEF_NAMESPACE, escapedText, "",
-                        null, "", languageManager.findByCode(I18nTranslation.DEFAULT_LANG),
-                        I18nTranslation.UNTRANSLATED_VALUE, I18nTranslation.DEF_PLUR_INDEX);
+                I18nTranslation newTranslation = new I18nTranslation("", null, I18nTranslation.DEF_PLUR_INDEX,
+                        "", I18nTranslation.UNTRANSLATED_VALUE, escapedText,
+                        I18nTranslation.DEF_NAMESPACE, languageManager.findByCode(I18nTranslation.DEFAULT_LANG));
                 persist(newTranslation);
                 langCache.clear();
             }

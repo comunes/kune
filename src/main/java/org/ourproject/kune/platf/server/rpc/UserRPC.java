@@ -43,15 +43,19 @@ import com.wideplay.warp.persist.Transactional;
 public class UserRPC implements RPC, UserService {
 
     private final UserManager userManager;
-    private final UserSession session;
+    private final UserSession userSession;
     private final GroupManager groupManager;
     private final Mapper mapper;
     private final UserInfoService userInfoService;
 
+    // private final Provider<HttpServletRequest> sessionProvider;
+
     @Inject
     public UserRPC(final UserSession session, final UserManager userManager, final GroupManager groupManager,
             final UserInfoService userInfoService, final Mapper mapper) {
-        this.session = session;
+        // final Provider<HttpServletRequest> sessionProvider,
+        // this.sessionProvider = sessionProvider;
+        this.userSession = session;
         this.userManager = userManager;
         this.groupManager = groupManager;
         this.userInfoService = userInfoService;
@@ -65,18 +69,12 @@ public class UserRPC implements RPC, UserService {
     }
 
     @Transactional(type = TransactionType.READ_ONLY)
-    private UserInfoDTO loginUser(final User user) throws SerializableException {
-        if (user != null) {
-            session.setUser(user);
-            return loadUserInfo(user);
-        } else {
-            throw new UserAuthException();
-        }
-    }
-
-    @Transactional(type = TransactionType.READ_ONLY)
     public void logout() throws SerializableException {
-        session.clearUserId();
+        // FIXME: the invalidate is not working (UserSession injection problem
+        // within sessions)
+        // getHttpSession().invalidate();
+        // sessionProvider.get().getSession(true);
+        userSession.logout();
     }
 
     @Transactional(type = TransactionType.READ_WRITE, rollbackOn = SerializableException.class)
@@ -90,16 +88,30 @@ public class UserRPC implements RPC, UserService {
 
     @Transactional(type = TransactionType.READ_ONLY)
     public UserInfoDTO reloadUserInfo(final String userHash) throws SerializableException {
-        if (session.getUser().getId() == null) {
+        if (userSession.getUser().getId() == null) {
             throw new UserMustBeLoggedException();
         }
-        User user = session.getUser();
+        User user = userSession.getUser();
         return loadUserInfo(user);
     }
 
+    private UserInfoDTO loginUser(final User user) throws SerializableException {
+        if (user != null) {
+            // Maybe use terracotta.org for http session clustering
+            userSession.login(user, "FIXME_HERE_GENERATE_ANOTHER_USER_SESSION_ID"); // getHttpSession().getId());
+            return loadUserInfo(user);
+        } else {
+            throw new UserAuthException();
+        }
+    }
+
     private UserInfoDTO loadUserInfo(final User user) throws SerializableException {
-        UserInfo userInfo = userInfoService.buildInfo(user, session.getHash());
+        UserInfo userInfo = userInfoService.buildInfo(user, userSession.getHash());
         return mapper.map(userInfo, UserInfoDTO.class);
     }
+
+    // private HttpSession getHttpSession() {
+    // return sessionProvider.get().getSession();
+    // }
 
 }

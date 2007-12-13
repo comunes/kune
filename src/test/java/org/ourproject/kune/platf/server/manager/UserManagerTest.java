@@ -45,11 +45,10 @@ public class UserManagerTest extends PersistenceTest {
         assertEquals(0, groupFinder.getAll().size());
         I18nLanguage english = new I18nLanguage(new Long(1819), "English", "English", "en");
         languageManager.persist(english);
-        I18nCountry gb = new I18nCountry(new Long(75), "GB", "United Kingdom", "", "£%n", "GBP", ",", ".", ".",
-                "western");
-        countryManager.merge(gb);
-        // FIXME: Use gb instead of null here:
-        user = new User(USER_SHORT_NAME, USER_LONG_NAME, USER_EMAIL, USER_PASSWORD, english, null);
+        I18nCountry gb = new I18nCountry(new Long(75), "GB", "GBP", ".", "£%n", "", ".", "United Kingdom", "western",
+                ",");
+        countryManager.persist(gb);
+        user = new User(USER_SHORT_NAME, USER_LONG_NAME, USER_EMAIL, USER_PASSWORD, english, gb);
         persist(user);
     }
 

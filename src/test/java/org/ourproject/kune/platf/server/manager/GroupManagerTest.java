@@ -52,9 +52,9 @@ public class GroupManagerTest extends PersistenceTest {
         assertEquals(0, licenseFinder.getAll().size());
         I18nLanguage english = new I18nLanguage(new Long(1819), "English", "English", "en");
         languageManager.persist(english);
-        I18nCountry gb = new I18nCountry(new Long(75), "GB", "United Kingdom", "", "£%n", "GBP", ",", ".", ".",
-                "western");
-        countryManager.merge(gb);
+        I18nCountry gb = new I18nCountry(new Long(75), "GB", "GBP", ".", "£%n", "", ".", "United Kingdom", "western",
+                ",");
+        countryManager.persist(gb);
         user = userManager.createUser("username", "the user name", "email@example.com", "userPassword", "en", "GB");
         defLicense = new License("by-sa", "Creative Commons Attribution-ShareAlike", "",
                 "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");

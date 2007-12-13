@@ -43,9 +43,9 @@ public class I18nManagerTest extends PersistenceTest {
                 StringEscapeUtils.escapeHtml("[%s] users")));
         translationManager.persist(new I18nTranslation(StringEscapeUtils.escapeHtml("[%d] users"), english,
                 StringEscapeUtils.escapeHtml("[%d] users")));
-        I18nCountry gb = new I18nCountry(new Long(75), "GB", "United Kingdom", "", "£%n", "GBP", ",", ".", ".",
-                "western");
-        countryManager.merge(gb);
+        I18nCountry gb = new I18nCountry(new Long(75), "GB", "GBP", ".", "£%n", "", ".", "United Kingdom", "western",
+                ",");
+        countryManager.persist(gb);
     }
 
     @Test

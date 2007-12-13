@@ -20,13 +20,10 @@
 
 package org.ourproject.kune.platf.server.domain;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -45,7 +42,7 @@ import com.wideplay.warp.persist.dao.Finder;
 public class I18nCountry implements HasId {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    // Is not a @GeneratedValue similar to I18nLanguage (we have already ids)
     @DocumentId
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
@@ -81,9 +78,9 @@ public class I18nCountry implements HasId {
         this(null, null, null, null, null, null, null, null, null, null);
     }
 
-    public I18nCountry(final Long id, final String code, final String englishName, final String dateFormat,
-            final String currencyFormat, final String currencyCode, final String thousandsSep, final String decimalSep,
-            final String currencyDecimalSep, final String numberGroupingScheme) {
+    public I18nCountry(final Long id, final String code, final String currencyCode, final String currencyDecimalSep,
+            final String currencyFormat, final String dateFormat, final String decimalSep, final String englishName,
+            final String numberGroupingScheme, final String thousandsSep) {
         this.id = id;
         this.code = code;
         this.englishName = englishName;

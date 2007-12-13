@@ -8,8 +8,8 @@ See INSTALL for dev specific instructions
 Code
 --------------------------------------------------------------------------------
 We use some eclipse code preferences for kune project:
-  kune.cleanup.eclipse.preferences.xml
-  kune.formatter.eclipse.preferences.xml
+  dev-utils/kune.cleanup.eclipse.preferences.xml
+  dev-utils/kune.formatter.eclipse.preferences.xml
 please use it if you want to contribute.
 
 We will (try) to follow:

@@ -37,28 +37,35 @@ public class UserSession {
         this.manager = manager;
     }
 
+    public void login(final User user, final String newUserHash) {
+        setUser(user);
+        // FIXME: until solved Inject issues (see KuneAplicationListener)
+        // setHash(newUserHash);
+    }
+
+    public void logout() {
+        userId = null;
+        userHash = null;
+    }
+
     public User getUser() {
         return manager.find(userId);
-    }
-
-    public void setUser(final User user) {
-        userId = user.getId();
-    }
-
-    public void clearUserId() {
-        userId = null;
     }
 
     public String getHash() {
         return userHash;
     }
 
-    public void setHash(final String hash) {
-        this.userHash = hash;
-    }
-
     public boolean isUserLoggedIn() {
         return userId != null;
+    }
+
+    private void setUser(final User user) {
+        userId = user.getId();
+    }
+
+    public void setHash(final String hash) {
+        this.userHash = hash;
     }
 
 }

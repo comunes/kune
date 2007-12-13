@@ -86,8 +86,8 @@ public class I18nTranslation implements HasId {
         this(null, null, null, null, null, null, null, null);
     }
 
-    public I18nTranslation(final String type, final String trKey, final String tableName, final Integer itemId,
-            final String facet, final I18nLanguage language, final String text, final Integer pluralizationIndex) {
+    public I18nTranslation(final String facet, final Integer itemId, final Integer pluralizationIndex, final String tableName,
+            final String text, final String trKey, final String type, final I18nLanguage language) {
         this.type = type;
         this.trKey = trKey;
         this.tableName = tableName;
@@ -99,7 +99,7 @@ public class I18nTranslation implements HasId {
     }
 
     public I18nTranslation(final String trKey, final I18nLanguage language, final String text) {
-        this(DEF_NAMESPACE, trKey, "", null, "", language, text, DEF_PLUR_INDEX);
+        this("", null, DEF_PLUR_INDEX, "", text, trKey, DEF_NAMESPACE, language);
     }
 
     public Long getId() {
