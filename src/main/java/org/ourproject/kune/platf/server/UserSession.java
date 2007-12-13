@@ -39,8 +39,7 @@ public class UserSession {
 
     public void login(final User user, final String newUserHash) {
         setUser(user);
-        // FIXME: until solved Inject issues (see KuneAplicationListener)
-        // setHash(newUserHash);
+        setHash(newUserHash);
     }
 
     public void logout() {

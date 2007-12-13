@@ -21,6 +21,7 @@
 package org.ourproject.kune.platf.server.domain;
 
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -83,7 +84,8 @@ public class User implements HasId {
     // TODO: @NotNull
     private I18nCountry country;
 
-    // TODO: Timezone
+    // TODO: @NotNull
+    private TimeZone timezone;
 
     // see: http://docs.codehaus.org/display/PICO/Good+Citizen:
     // Never expect or return null
@@ -197,6 +199,14 @@ public class User implements HasId {
 
     public void setCountry(final I18nCountry country) {
         this.country = country;
+    }
+
+    public TimeZone getTimezone() {
+        return timezone;
+    }
+
+    public void setTimezone(final TimeZone timezone) {
+        this.timezone = timezone;
     }
 
 }

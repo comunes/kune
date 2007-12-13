@@ -45,7 +45,7 @@ mysql> FLUSH PRIVILEGES;
 
 - Run jetty:
   mvn jetty:run -Ddatabase.migrator.should.run=false # without liquibase db migraton
-once started (and initialized the db), you can stop a run jetty with de db migrator to insert initial data:
+once started (and initialized the db), you can stop a run jetty with de db migrator to insert initial data and migrate:
   mvn jetty:run
 
 - And conect to http://yourIP:8080/kune
