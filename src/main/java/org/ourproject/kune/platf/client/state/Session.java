@@ -36,8 +36,7 @@ import org.ourproject.kune.workspace.client.dto.StateDTO;
  */
 public class Session {
     public String userHash;
-    private List ccLicenses;
-    private List notCCLicenses;
+    private List licenses;
     private List languages;
     private List countries;
     private Object[][] languagesArray;
@@ -45,30 +44,22 @@ public class Session {
     private StateDTO currentState;
     private String[] wsThemes;
     private String defaultWsTheme;
+    private String[] timezones;
 
     public Session(final String usersHash) {
         this.userHash = usersHash;
-        ccLicenses = null;
-        notCCLicenses = null;
+        licenses = null;
         languages = null;
         languagesArray = null;
         countries = null;
     }
 
-    public List getCCLicenses() {
-        return ccLicenses;
+    public List getLicenses() {
+        return licenses;
     }
 
-    public void setCCLicenses(final List licenses) {
-        this.ccLicenses = licenses;
-    }
-
-    public List getNotCCLicenses() {
-        return notCCLicenses;
-    }
-
-    public void setNotCCLicenses(final List licensesNotCC) {
-        this.notCCLicenses = licensesNotCC;
+    public void setLicenses(final List licenses) {
+        this.licenses = licenses;
     }
 
     public void setCurrent(final StateDTO currentState) {
@@ -155,4 +146,13 @@ public class Session {
         }
         return objs;
     }
+
+    public void setTimezones(final String[] timezones) {
+        this.timezones = timezones;
+    }
+
+    public String[] getTimezones() {
+        return timezones;
+    }
+
 }

@@ -52,4 +52,6 @@ public interface LoginView extends View {
 
     public String getCountry();
 
+    public String getTimezone();
+
 }

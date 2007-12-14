@@ -38,6 +38,7 @@ import com.gwtext.client.data.RecordDef;
 import com.gwtext.client.data.Store;
 import com.gwtext.client.data.StoreLoadConfig;
 import com.gwtext.client.data.StringFieldDef;
+import com.gwtext.client.util.Format;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.ButtonConfig;
 import com.gwtext.client.widgets.LayoutDialog;
@@ -47,12 +48,14 @@ import com.gwtext.client.widgets.form.ComboBox;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.form.TextFieldConfig;
 import com.gwtext.client.widgets.form.event.ComboBoxListenerAdapter;
+import com.gwtext.client.widgets.grid.CellMetadata;
 import com.gwtext.client.widgets.grid.ColumnConfig;
 import com.gwtext.client.widgets.grid.ColumnModel;
 import com.gwtext.client.widgets.grid.EditorGrid;
 import com.gwtext.client.widgets.grid.EditorGridConfig;
 import com.gwtext.client.widgets.grid.Grid;
 import com.gwtext.client.widgets.grid.GridEditor;
+import com.gwtext.client.widgets.grid.Renderer;
 import com.gwtext.client.widgets.grid.event.EditorGridListenerAdapter;
 import com.gwtext.client.widgets.layout.BorderLayout;
 import com.gwtext.client.widgets.layout.ContentPanel;
@@ -61,6 +64,7 @@ import com.gwtext.client.widgets.layout.LayoutRegionConfig;
 
 public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslatorView {
 
+    private static final String TRANSLATION_NOTE_REGEXP = " (\\[)%NT (.*)(\\])$";
     private final LayoutDialog dialog;
     private final I18nTranslatorPresenter presenter;
     private Store store;
@@ -197,14 +201,17 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
             {
                 setHeader(Kune.I18N.t("Text to traslate"));
                 setDataIndex("trKey");
+                setWidth(335);
+                // setCss("kune-I18nTranslatorCell");
                 setTooltip(Kune.I18N.t("Click to sort"));
-                setWidth(310);
+                setRenderer(renderNT);
             }
         }, new ColumnConfig() {
             {
                 setHeader(Kune.I18N.t("Translation (double click to edit)"));
                 setDataIndex("text");
-                setWidth(330);
+                setWidth(335);
+                // setCss("kune-I18nTranslatorCell");
                 setTooltip(Kune.I18N.t("Click to sort"));
                 setEditor(new GridEditor(new TextField(new TextFieldConfig() {
                     {
@@ -216,7 +223,7 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
 
         columnModel.setDefaultSortable(true);
 
-        EditorGrid grid = new EditorGrid("grid-translation", "700px", "200px", store, columnModel,
+        EditorGrid grid = new EditorGrid("grid-translation", "695px", "180px", store, columnModel,
                 new EditorGridConfig() {
                     {
                         // setAutoExpandColumn(1);
@@ -227,10 +234,24 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
 
         grid.addEditorGridListener(new EditorGridListenerAdapter() {
 
-            // public boolean doBeforeEdit(Grid grid, Record record, String
-            // field, Object value, int rowIndex, int colIndex) {
             // public boolean doValidateEdit(Grid grid, Record record, String
             // field, Object value, Object originalValue,
+
+            public boolean doBeforeEdit(final Grid grid, final Record record, final String field, final Object value,
+                    final int rowIndex, final int colIndex) {
+                if (((String) value).length() == 0) {
+                    // Save in db same value as def language (if only set the
+                    // record and we don't edit more, ext not detect the field
+                    // as changed. After this edit on place (and save if you
+                    // modify the field).
+                    String id = record.getAsString("id");
+                    String trKey = record.getAsString("trKey");
+                    String trWithoutNT = removeNT(trKey);
+                    record.set("text", trWithoutNT);
+                    presenter.doTranslation(id, trKey, trWithoutNT, trWithoutNT);
+                }
+                return true;
+            }
 
             public void onAfterEdit(final Grid grid, final Record record, final String field, final Object newValue,
                     final Object oldValue, final int rowIndex, final int colIndex) {
@@ -246,4 +267,27 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
         return grid;
 
     }
+
+    private String removeNT(final String string) {
+        return string.replaceAll(TRANSLATION_NOTE_REGEXP, "");
+    }
+
+    private String[] splitNT(final String string) {
+        return string.split(" \\[%NT .*\\]");
+    }
+
+    private final Renderer renderNT = new Renderer() {
+
+        public String render(Object value, CellMetadata cellMetadata, Record record, int rowIndex, int colNum,
+                Store store) {
+            String renderer;
+            String[] splitted = splitNT((String) value);
+            if (splitted.length > 1) {
+                renderer = "{0}";
+            } else {
+                renderer = "{0} <b><i>Note for translators:</i></b> {1}";
+            }
+            return Format.format(renderer, splitted);
+        }
+    };
 }

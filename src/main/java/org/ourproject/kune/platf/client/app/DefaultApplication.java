@@ -58,7 +58,7 @@ public class DefaultApplication implements Application {
             public void onChangeState(StateToken token) {
                 stateManager.setState(token);
             }
-        });
+        }, session);
         desktop.attach();
 
     }

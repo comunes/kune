@@ -21,6 +21,7 @@
 package org.ourproject.kune.sitebar.client;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
@@ -35,6 +36,7 @@ import org.ourproject.kune.platf.client.search.SearchSite;
 import org.ourproject.kune.platf.client.search.SearchSitePresenter;
 import org.ourproject.kune.platf.client.search.SearchSiteView;
 import org.ourproject.kune.platf.client.search.ui.SearchSitePanel;
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.sitebar.client.bar.SiteBar;
 import org.ourproject.kune.sitebar.client.bar.SiteBarListener;
 import org.ourproject.kune.sitebar.client.bar.SiteBarPanel;
@@ -53,8 +55,10 @@ public class SiteBarFactory {
     private static Login login;
     private static NewGroup newGroup;
     private static SearchSite search;
+    private static Session session;
 
-    public static SiteBar createSiteBar(final SiteBarListener listener) {
+    public static SiteBar createSiteBar(final SiteBarListener listener, final Session session) {
+        SiteBarFactory.session = session;
         SiteBarPresenter siteBarPresenter = new SiteBarPresenter(listener);
         SiteBarPanel siteBarView = new SiteBarPanel(siteBarPresenter);
         siteBarPresenter.init(siteBarView);
@@ -73,11 +77,11 @@ public class SiteBarFactory {
         return siteMessage;
     }
 
-    public static Login getLoginForm(final LoginListener listener, final Object[][] languages,
-            final Object[][] countries) {
+    public static Login getLoginForm(final LoginListener listener) {
         if (login == null) {
             LoginPresenter presenter = new LoginPresenter(listener);
-            LoginPanel view = new LoginPanel(presenter, languages, countries);
+            LoginPanel view = new LoginPanel(presenter, session.getLanguagesArray(), session.getCountriesArray(),
+                    session.getTimezones());
             presenter.init(view);
             login = presenter;
         }
@@ -105,33 +109,15 @@ public class SiteBarFactory {
     }
 
     public static LicenseChoose createLicenseChoose() {
-
-        // TODO (Dani): get this from Session
-        List licensesList = new ArrayList();
-        licensesList.add(new LicenseDTO("by", "Creative Commons Attribution", "",
-                "http://creativecommons.org/licenses/by/3.0/", true, false, false, "", ""));
-        licensesList.add(new LicenseDTO("by-sa", "Creative Commons Attribution-ShareAlike", "",
-                "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", ""));
-        licensesList.add(new LicenseDTO("by-nd", "Creative Commons Attribution-NoDerivs", "",
-                "http://creativecommons.org/licenses/by-nd/3.0/", true, false, false, "", ""));
-        licensesList.add(new LicenseDTO("by-nc", "Creative Commons Attribution-NonCommercial", "",
-                "http://creativecommons.org/licenses/by-nc/3.0/", true, false, false, "", ""));
-        licensesList.add(new LicenseDTO("by-nc-sa", "Creative Commons Attribution-NonCommercial-ShareAlike", "",
-                "http://creativecommons.org/licenses/by-nc-sa/3.0/", true, false, false, "", ""));
-        licensesList.add(new LicenseDTO("by-nc-nd", "Creative Commons Attribution-NonCommercial-NoDerivs", "",
-                "http://creativecommons.org/licenses/by-nc-nd/3.0/", true, false, false, "", ""));
-        licensesList.add(new LicenseDTO("gfdl", "GNU Free Documentation License", "",
-                "http://www.gnu.org/copyleft/fdl.html", false, true, false, "", ""));
-        licensesList.add(new LicenseDTO("gfdl", "GNU Free Documentation License", "",
-                "http://www.gnu.org/copyleft/fdl.html", false, true, false, "", ""));
-        licensesList.add(new LicenseDTO("fal", "Free Art License", "None", "http://artlibre.org/licence/lal/en/",
-                false, true, false, "", "images/lic/fal-license.gif"));
-
+        List licensesList = session.getLicenses();
         List licensesNonCCList = new ArrayList();
-        licensesNonCCList.add(new LicenseDTO("gfdl", "GNU Free Documentation License", "",
-                "http://www.gnu.org/copyleft/fdl.html", false, true, false, "", ""));
-        licensesNonCCList.add(new LicenseDTO("fal", "Free Art License", "None", "http://artlibre.org/licence/lal/en/",
-                false, true, false, "", "images/lic/fal-license.gif"));
+
+        for (Iterator iterator = licensesList.iterator(); iterator.hasNext();) {
+            LicenseDTO license = (LicenseDTO) iterator.next();
+            if (!license.isCC()) {
+                licensesNonCCList.add(license);
+            }
+        }
         LicenseChoosePresenter presenter = new LicenseChoosePresenter();
         LicenseChoosePanel view = new LicenseChoosePanel(licensesNonCCList, presenter);
         presenter.init(view, licensesList, licensesNonCCList);

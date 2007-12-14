@@ -72,7 +72,4 @@ public interface SiteBarView extends View {
 
     void showAlertMessage(String message);
 
-    void setLanguages(Object[][] languages);
-
-    void setCountries(Object[][] countries);
 }

@@ -80,12 +80,12 @@ public class LanguageSelectorPanel extends Form implements LanguageSelectorView 
                 setEmptyText(Kune.I18N.t("Enter language"));
                 setLoadingText(Kune.I18N.t("Searching..."));
                 setTypeAhead(true);
-                setSelectOnFocus(true);
+                setSelectOnFocus(false);
                 setWidth(187);
                 setMsgTarget("side");
                 setAllowBlank(false);
                 setValueField("abbr");
-                setPageSize(10);
+                setPageSize(7);
             }
         });
     }

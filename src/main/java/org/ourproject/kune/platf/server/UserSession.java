@@ -31,6 +31,7 @@ public class UserSession {
     private String userHash;
     private Long userId;
     private final UserManager manager;
+    private String browserLanguage;
 
     @Inject
     public UserSession(final UserManager manager) {
@@ -65,6 +66,15 @@ public class UserSession {
 
     public void setHash(final String hash) {
         this.userHash = hash;
+    }
+
+    public void setBrowserLanguage(final String browserLanguage) {
+        this.browserLanguage = browserLanguage;
+
+    }
+
+    public String getBrowserLanguage() {
+        return browserLanguage;
     }
 
 }

@@ -32,6 +32,7 @@ public class UserInfoDTO implements IsSerializable {
     private String userHash;
     private I18nLanguageDTO language;
     private I18nCountryDTO country;
+    // private TimeZoneDTO timezone;
 
     /**
      * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.LinkDTO>

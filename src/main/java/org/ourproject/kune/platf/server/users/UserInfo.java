@@ -20,7 +20,6 @@
 package org.ourproject.kune.platf.server.users;
 
 import java.util.List;
-import java.util.TimeZone;
 
 import org.ourproject.kune.platf.server.domain.I18nCountry;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
@@ -36,7 +35,6 @@ public class UserInfo {
     private String userHash;
     private I18nLanguage language;
     private I18nCountry country;
-    private TimeZone timezone;
 
     public String getHomePage() {
         return homePage;
@@ -116,14 +114,6 @@ public class UserInfo {
 
     public void setCountry(final I18nCountry country) {
         this.country = country;
-    }
-
-    public TimeZone getTimezone() {
-        return timezone;
-    }
-
-    public void setTimezone(final TimeZone timezone) {
-        this.timezone = timezone;
     }
 
 }

@@ -558,3 +558,9 @@
   background-color: #F2F2F2;
 }
 
+/* i18n */
+
+.kune-I18nTranslatorCell {
+  white-space: normal;
+}
+

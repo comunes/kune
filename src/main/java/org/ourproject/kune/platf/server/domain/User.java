@@ -39,6 +39,7 @@ import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.Store;
 import org.hibernate.validator.Email;
 import org.hibernate.validator.Length;
+import org.hibernate.validator.NotNull;
 import org.hibernate.validator.Pattern;
 
 import com.google.inject.name.Named;
@@ -77,34 +78,26 @@ public class User implements HasId {
     private String shortName;
 
     @ManyToOne
-    // TODO: @NotNull
+    @NotNull
     private I18nLanguage language;
 
     @ManyToOne
-    // TODO: @NotNull
+    @NotNull
     private I18nCountry country;
 
-    // TODO: @NotNull
+    @NotNull
     private TimeZone timezone;
 
     // see: http://docs.codehaus.org/display/PICO/Good+Citizen:
     // Never expect or return null
     public static final User UNKNOWN_USER = new User();
 
-    /*
-     * Create User with Language and Country instead
-     */
-    @Deprecated
-    public User(final String shortName, final String longName, final String email, final String passwd) {
-        this(shortName, longName, email, passwd, null, null);
-    }
-
     public User() {
-        this(null, null, null, null);
+        this(null, null, null, null, null, null, null);
     }
 
     public User(final String shortName, final String longName, final String email, final String passwd,
-            final I18nLanguage language, final I18nCountry country) {
+            final I18nLanguage language, final I18nCountry country, final TimeZone timezone) {
         this.shortName = shortName;
         this.name = longName;
         this.email = email;
@@ -112,6 +105,7 @@ public class User implements HasId {
         this.userGroup = Group.NO_GROUP;
         this.language = language;
         this.country = country;
+        this.timezone = timezone;
     }
 
     @Finder(query = "from User")

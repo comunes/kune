@@ -27,10 +27,10 @@ import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.users.UserInfo;
 
 public class InitData {
-    private List<License> ccLicenses;
-    private List<License> notCCLicenses;
+    private List<License> licenses;
     private List<I18nLanguage> languages;
     private List<I18nCountry> countries;
+    private String[] timezones;
     private UserInfo userInfo;
     private String chatHttpBase;
     private String chatDomain;
@@ -46,20 +46,12 @@ public class InitData {
         this.userInfo = currentUserInfo;
     }
 
-    public void setCCLicenses(final List<License> ccLicenses) {
-        this.ccLicenses = ccLicenses;
+    public List<License> getLicenses() {
+        return licenses;
     }
 
-    public List<License> getCCLicenses() {
-        return ccLicenses;
-    }
-
-    public void setNotCCLicenses(final List<License> notCCLicenses) {
-        this.notCCLicenses = notCCLicenses;
-    }
-
-    public List<License> getNotCCLicenses() {
-        return notCCLicenses;
+    public void setLicenses(final List<License> licenses) {
+        this.licenses = licenses;
     }
 
     public void setChatHttpBase(final String chatHttpBase) {
@@ -116,6 +108,14 @@ public class InitData {
 
     public void setCountries(final List<I18nCountry> countries) {
         this.countries = countries;
+    }
+
+    public void setTimezones(final String[] timezones) {
+        this.timezones = timezones;
+    }
+
+    public String[] getTimezones() {
+        return timezones;
     }
 
 }

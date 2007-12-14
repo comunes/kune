@@ -105,8 +105,9 @@ public class WorkspaceFactory {
         return presenter;
     }
 
-    public static DesktopView createDesktop(final Workspace workspace, final SiteBarListener listener) {
-        return new DesktopPanel(workspace, listener);
+    public static DesktopView createDesktop(final Workspace workspace, final SiteBarListener listener,
+            final Session session) {
+        return new DesktopPanel(workspace, listener, session);
     }
 
     public static LicenseComponent createLicenseComponent() {

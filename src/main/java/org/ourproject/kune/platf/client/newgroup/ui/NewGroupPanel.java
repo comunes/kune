@@ -27,6 +27,7 @@ import org.ourproject.kune.platf.client.license.LicenseChoosePanel;
 import org.ourproject.kune.platf.client.newgroup.NewGroupPresenter;
 import org.ourproject.kune.platf.client.newgroup.NewGroupView;
 import org.ourproject.kune.platf.client.services.Images;
+import org.ourproject.kune.platf.client.ui.KuneStringUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.WizardDialog;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
 import org.ourproject.kune.sitebar.client.bar.SiteBarTrans;
@@ -115,7 +116,9 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         chooseLicenseHP.add(img.step2().createImage());
         HTML step2Label = new HTML(
                 Kune.I18N
-                        .t("Select a license to share your group contents with other people. We recomend <a href='http://en.wikipedia.org/copyleft' target='_blank'>copyleft</a> licenses for practical works."));
+                        .t(
+                                "Select a license to share your group contents with other people. We recomend [%s] licenses for practical works.",
+                                KuneStringUtils.generateHtmlLink("http://en.wikipedia.org/wiki/Copyleft", "copyleft")));
         chooseLicenseHP.add(step2Label);
         Label licenseTypeLabel = new Label("Choose a license type:");
         chooseLicenseVP.add(chooseLicenseHP);

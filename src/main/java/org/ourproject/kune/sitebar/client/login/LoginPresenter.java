@@ -94,12 +94,12 @@ public class LoginPresenter implements Login, MessagePresenter {
             final String email = view.getEmail();
             final String language = view.getLanguage();
             final String country = view.getCountry();
+            final String timezone = view.getTimezone();
             UserServiceAsync siteBarService = UserService.App.getInstance();
             // TODO: Form of register, license menu;
             LicenseDTO defaultLicense = new LicenseDTO("by-sa", "Creative Commons Attribution-ShareAlike", "",
                     "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
-            // FIXME: Timezone
-            siteBarService.createUser(shortName, longName, email, passwd, defaultLicense, language, country, "GMT",
+            siteBarService.createUser(shortName, longName, email, passwd, defaultLicense, language, country, timezone,
                     new AsyncCallback() {
                         public void onFailure(final Throwable caught) {
                             Site.hideProgress();

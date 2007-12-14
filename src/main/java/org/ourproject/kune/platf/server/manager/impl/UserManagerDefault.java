@@ -21,6 +21,7 @@
 package org.ourproject.kune.platf.server.manager.impl;
 
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -56,12 +57,17 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         this.countryManager = countryManager;
     }
 
-    public List<User> getAll() {
-        return finder.getAll();
-    }
-
-    public User getByShortName(final String shortName) {
-        return finder.getByShortName(shortName);
+    public User createUser(final String shortName, final String longName, final String email, final String passwd,
+            final String langCode, final String countryCode, final String timezone) throws I18nNotFoundException {
+        try {
+            I18nLanguage language = languageManager.findByCode(langCode);
+            I18nCountry country = countryManager.findByCode(countryCode);
+            TimeZone tz = TimeZone.getTimeZone(timezone);
+            User user = new User(shortName, longName, email, passwd, language, country, tz);
+            return user;
+        } catch (NoResultException e) {
+            throw new I18nNotFoundException();
+        }
     }
 
     public User login(final String nickOrEmail, final String passwd) {
@@ -83,21 +89,12 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         }
     }
 
-    public User createUser(final String shortName, final String longName, final String email, final String passwd) {
-        User user = new User(shortName, longName, email, passwd, null, null);
-        return user;
+    public List<User> getAll() {
+        return finder.getAll();
     }
 
-    public User createUser(final String shortName, final String longName, final String email, final String passwd,
-            final String langCode, final String countryCode) throws I18nNotFoundException {
-        try {
-            I18nLanguage language = languageManager.findByCode(langCode);
-            I18nCountry country = countryManager.findByCode(countryCode);
-            User user = new User(shortName, longName, email, passwd, language, country);
-            return user;
-        } catch (NoResultException e) {
-            throw new I18nNotFoundException();
-        }
+    public User getByShortName(final String shortName) {
+        return finder.getByShortName(shortName);
     }
 
     public User find(final Long userId) {

@@ -31,13 +31,13 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public class DoTranslationAction implements Action {
 
     public void execute(final Object value, final Object extra, final Services services) {
-        onDoTranslationAction(services, (String) value, (String) extra);
+        onDoTranslationAction(services, (String) value, (String[]) extra);
     }
 
-    private void onDoTranslationAction(final Services services, final String id, final String translation) {
+    private void onDoTranslationAction(final Services services, final String id, final String[] translation) {
         Site.showProgressSaving();
         final I18nServiceAsync server = I18nService.App.getInstance();
-        server.setTranslation(services.session.userHash, id, translation, new AsyncCallback() {
+        server.setTranslation(services.session.userHash, id, translation[1], new AsyncCallback() {
             public void onFailure(final Throwable caught) {
                 Site.hideProgress();
                 Site.error(Kune.I18N.t("Server error saving translation"));
@@ -45,6 +45,7 @@ public class DoTranslationAction implements Action {
 
             public void onSuccess(final Object result) {
                 Site.hideProgress();
+                Kune.I18N.setTranslationAfterSave(translation[0], translation[1]);
             }
         });
     }

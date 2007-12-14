@@ -18,27 +18,29 @@
  *
  */
 
-package org.ourproject.kune.sitebar.client.bar;
+package org.ourproject.kune.platf.client.dto;
 
-import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.UserInfoDTO;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
-public interface SiteBar {
+public class TimeZoneDTO implements IsSerializable {
 
-    void showProgress(String text);
+    private String id;
+    private String displayName;
 
-    void hideProgress();
+    public String getId() {
+        return id;
+    }
 
-    View getView();
+    public void setId(final String id) {
+        this.id = id;
+    }
 
-    void showLoggedUser(UserInfoDTO user);
+    public String getDisplayName() {
+        return displayName;
+    }
 
-    void reloadUserInfo(String userHash);
-
-    void doNewGroup(String returnToken);
-
-    void doLogin(String returnToken);
-
-    void showAlertMessage(String message);
+    public void setDisplayName(final String displayName) {
+        this.displayName = displayName;
+    }
 
 }

@@ -89,8 +89,6 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     private final Widget progressText;
     private final HorizontalPanel publicHP;
     private SearchSitePanel searchPanel;
-    private Object[][] languages;
-    private Object[][] countries;
 
     public SiteBarPanel(final SiteBarPresenter initPresenter) {
         t = SiteBarTrans.getInstance().t;
@@ -247,7 +245,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     public void showLoginDialog() {
-        final Login login = SiteBarFactory.getLoginForm(presenter, languages, countries);
+        final Login login = SiteBarFactory.getLoginForm(presenter);
         loginPanel = (LoginPanel) login.getView();
         loginPanel.show();
     }
@@ -359,15 +357,6 @@ public class SiteBarPanel extends Composite implements SiteBarView {
                 // Do nothing
             }
         });
-    }
-
-    public void setLanguages(final Object[][] languages) {
-        this.languages = languages;
-
-    }
-
-    public void setCountries(final Object[][] countries) {
-        this.countries = countries;
     }
 
     private void addDefaultItemsToOptions() {

@@ -69,7 +69,8 @@ public class I18nTranslatorPresenter implements I18nTranslatorComponent {
     }
 
     public void doTranslation(final String id, final String trKey, final Object oldValue, final Object newValue) {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.DO_TRANSLATION, id, newValue);
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.DO_TRANSLATION, id,
+                new String[] { trKey, (String) newValue });
     }
 
     public I18nLanguageDTO getLanguage() {

@@ -73,6 +73,7 @@ public class LoginPanel implements LoginView, View {
     private static final String PASSWORD_FIELD_DUP = "passwordDup";
     private static final String LANG_FIELD = "lang";
     private static final String COUNTRY_FIELD = "country";
+    private static final String TIMEZONE_FIELD = "timezone";
 
     private TextField loginPassField;
 
@@ -104,14 +105,24 @@ public class LoginPanel implements LoginView, View {
 
     private final Object[][] languages;
 
+    private final Object[][] timezones;
+
     private ComboBox countryCombo;
 
     private ComboBox languageCombo;
 
-    public LoginPanel(final LoginPresenter initialPresenter, final Object[][] languages, final Object[][] countries) {
+    private ComboBox timezoneCombo;
+
+    public LoginPanel(final LoginPresenter initialPresenter, final Object[][] languages, final Object[][] countries,
+            final String[] timezones) {
         this.presenter = initialPresenter;
         this.languages = languages;
         this.countries = countries;
+        this.timezones = new Object[timezones.length][1];
+        for (int i = 0; i < timezones.length; i++) {
+            Object[] obj = new Object[] { timezones[i] };
+            this.timezones[i] = obj;
+        }
         createPanel();
     }
 
@@ -165,6 +176,10 @@ public class LoginPanel implements LoginView, View {
         return countryCombo.getValueAsString();
     }
 
+    public String getTimezone() {
+        return timezoneCombo.getValueAsString();
+    }
+
     public void showErrorMessage(final String message) {
         messagesPanel.setMessage(message, SiteMessage.ERROR, SiteMessage.ERROR);
         messagesPanel.show();
@@ -199,6 +214,10 @@ public class LoginPanel implements LoginView, View {
         return countries;
     }
 
+    private Object[][] getTimezones() {
+        return timezones;
+    }
+
     private void createPanel() {
 
         LayoutRegionConfig south = new LayoutRegionConfig() {
@@ -224,7 +243,7 @@ public class LoginPanel implements LoginView, View {
             {
                 setModal(true);
                 setWidth(400);
-                setHeight(400);
+                setHeight(430);
                 setShadow(true);
                 setResizable(true);
                 setClosable(true);
@@ -505,12 +524,12 @@ public class LoginPanel implements LoginView, View {
                 setEmptyText(Kune.I18N.t("Enter language"));
                 setLoadingText(Kune.I18N.t("Searching..."));
                 setTypeAhead(true);
-                setSelectOnFocus(true);
+                setSelectOnFocus(false);
                 setWidth(186);
                 setMsgTarget("side");
                 setAllowBlank(false);
                 setValueField("abbr");
-                setPageSize(10);
+                setPageSize(7);
             }
         });
 
@@ -531,16 +550,42 @@ public class LoginPanel implements LoginView, View {
                 setEmptyText(Kune.I18N.t("Enter your country"));
                 setLoadingText(Kune.I18N.t("Searching..."));
                 setTypeAhead(true);
-                setSelectOnFocus(true);
+                setSelectOnFocus(false);
                 setWidth(186);
                 setMsgTarget("side");
                 setAllowBlank(false);
                 setValueField("abbr");
-                setPageSize(10);
+                setPageSize(7);
             }
         });
 
         form.add(countryCombo);
+
+        final Store timezoneStore = new SimpleStore(new String[] { "id" }, getTimezones());
+        timezoneStore.load();
+
+        timezoneCombo = new ComboBox(new ComboBoxConfig() {
+            {
+                setName(TIMEZONE_FIELD);
+                setMinChars(1);
+                setFieldLabel(Kune.I18N.t("Timezone"));
+                setStore(timezoneStore);
+                setDisplayField("id");
+                setMode(ComboBox.LOCAL);
+                setTriggerAction(ComboBox.ALL);
+                setEmptyText(Kune.I18N.t("Enter your timezone"));
+                setLoadingText(Kune.I18N.t("Searching..."));
+                setTypeAhead(true);
+                setSelectOnFocus(false);
+                setWidth(186);
+                setMsgTarget("side");
+                setAllowBlank(false);
+                setValueField("id");
+                setPageSize(7);
+            }
+        });
+
+        form.add(timezoneCombo);
 
         form.end();
         form.render();

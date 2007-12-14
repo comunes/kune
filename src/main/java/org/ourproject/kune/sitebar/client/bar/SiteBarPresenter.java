@@ -171,14 +171,6 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
         listener.onChangeState(token);
     }
 
-    public void setLanguages(final Object[][] languages) {
-        view.setLanguages(languages);
-    }
-
-    public void setCountries(final Object[][] countries) {
-        view.setCountries(countries);
-    }
-
     protected void onSearchLostFocus(final String search) {
         if (search.length() == 0) {
             view.setDefaultTextSearch();

@@ -12,14 +12,8 @@
     <class-a>org.ourproject.kune.platf.client.dto.InitDataDTO</class-a>
     <class-b>org.ourproject.kune.platf.server.InitData</class-b>
     <field>
-      <a>CCLicenses</a>
-      <b>CCLicenses</b>
-      <a-hint>org.ourproject.kune.platf.client.dto.LicenseDTO</a-hint>
-      <b-hint>org.ourproject.kune.platf.server.domain.License</b-hint>
-    </field>
-    <field>
-      <a>notCCLicenses</a>
-      <b>notCCLicenses</b>
+      <a>licenses</a>
+      <b>licenses</b>
       <a-hint>org.ourproject.kune.platf.client.dto.LicenseDTO</a-hint>
       <b-hint>org.ourproject.kune.platf.server.domain.License</b-hint>
     </field>

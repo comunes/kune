@@ -28,19 +28,21 @@ public interface UserManager {
     User login(String nickOrEmail, String passwd);
 
     /**
-     * Use createUser new method with language and country params
+     * CreateUser new method with language country and timezone params
      * 
      * @param shortName
      * @param longName
      * @param email
      * @param passwd
+     * @param timezone
+     * @param country
+     * @param language
+     * @param timezone
      * @return User
+     * @throws I18nNotFoundException
      */
-    @Deprecated
-    User createUser(String shortName, String longName, String email, String passwd);
-
-    User createUser(String shortName, String longName, String email, String passwd, String language, String country)
-            throws I18nNotFoundException;
+    User createUser(String shortName, String longName, String email, String passwd, String language, String country,
+            String timezone) throws I18nNotFoundException;
 
     /**
      * IMPORTANT: if userId == null, it returns User.NONE

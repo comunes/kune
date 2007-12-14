@@ -1,6 +1,7 @@
 package org.ourproject.kune.testhelper.ctx;
 
 import java.util.HashMap;
+import java.util.TimeZone;
 
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Group;
@@ -22,7 +23,7 @@ public class DomainContext {
         User user;
         for (String name : userNames) {
             user = new User(name, "long" + name, name + "@email.com", "password" + name, new I18nLanguage(),
-                    new I18nCountry());
+                    new I18nCountry(), TimeZone.getDefault());
             user.setUserGroup(new Group(name, "groupLong" + name));
             users.put(name, user);
         }

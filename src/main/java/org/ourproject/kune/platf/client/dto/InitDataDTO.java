@@ -27,19 +27,7 @@ public class InitDataDTO implements IsSerializable {
     /**
      * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.LicenseDTO>
      */
-    private ArrayList ccLicenses;
-
-    /**
-     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.LicenseDTO>
-     */
-    private ArrayList notCCLicenses;
-
-    UserInfoDTO userInfo;
-    private String chatHttpBase;
-    private String chatDomain;
-    private String chatRoomHost;
-    private String defaultWsTheme;
-    private String[] wsThemes;
+    private ArrayList licenses;
 
     /**
      * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.I18nLanguageSimpleDTO>
@@ -51,20 +39,21 @@ public class InitDataDTO implements IsSerializable {
      */
     private ArrayList countries;
 
-    public ArrayList getCCLicenses() {
-        return ccLicenses;
+    private String[] timezones;
+
+    UserInfoDTO userInfo;
+    private String chatHttpBase;
+    private String chatDomain;
+    private String chatRoomHost;
+    private String defaultWsTheme;
+    private String[] wsThemes;
+
+    public ArrayList getLicenses() {
+        return licenses;
     }
 
-    public void setCCLicenses(final ArrayList ccLicenses) {
-        this.ccLicenses = ccLicenses;
-    }
-
-    public ArrayList getNotCCLicenses() {
-        return notCCLicenses;
-    }
-
-    public void setNotCCLicenses(final ArrayList notLicenses) {
-        this.notCCLicenses = notLicenses;
+    public void setLicenses(final ArrayList licenses) {
+        this.licenses = licenses;
     }
 
     public UserInfoDTO getUserInfo() {
@@ -135,4 +124,11 @@ public class InitDataDTO implements IsSerializable {
         this.countries = countries;
     }
 
+    public void setTimezones(final String[] timezones) {
+        this.timezones = timezones;
+    }
+
+    public String[] getTimezones() {
+        return timezones;
+    }
 }

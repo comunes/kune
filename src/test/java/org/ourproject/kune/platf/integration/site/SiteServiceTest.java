@@ -42,8 +42,7 @@ public class SiteServiceTest extends IntegrationTest {
     public void testGetInitData() throws SerializableException {
         InitDataDTO initData = service.getInitData(null);
         assertNotNull(initData);
-        assertValidLicenseDTOList(initData.getNotCCLicenses());
-        assertValidLicenseDTOList(initData.getCCLicenses());
+        assertValidLicenseDTOList(initData.getLicenses());
         assertTrue(initData.getLanguages().size() > 0);
         assertTrue(initData.getCountries().size() > 0);
         assertNotNull(((I18nLanguageSimpleDTO) initData.getLanguages().get(0)).getCode());

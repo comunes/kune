@@ -27,12 +27,16 @@ import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
 import org.ourproject.kune.platf.client.ui.Location;
 import org.ourproject.kune.platf.client.ui.WindowUtils;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
+import org.ourproject.kune.workspace.client.i18n.I18nChangeListener;
+import org.ourproject.kune.workspace.client.i18n.I18nChangeListenerCollection;
 
 import to.tipit.gwtlib.FireLog;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class I18nUITranslation {
+    private static final String NOTE_FOR_TRANSLATOR_TAG_BEGIN = " [%NT ";
+    private static final String NOTE_FOR_TRANSLATOR_TAG_END = "]";
     // Also in I18nTranslation
     private static final String DEFAULT_LANG = "en";
     private static final String UNTRANSLATED_VALUE = null;
@@ -40,6 +44,7 @@ public class I18nUITranslation {
     private static I18nUITranslation instance;
     private HashMap lexicon;
     private String currentLanguage;
+    private I18nChangeListenerCollection i18nChangeListeners;
 
     public void init(final AsyncCallback callback) {
         currentLanguage = DEFAULT_LANG;
@@ -60,13 +65,9 @@ public class I18nUITranslation {
         return instance;
     }
 
-    public void setLexicon(final String language, final HashMap lexicon) {
-        this.currentLanguage = language;
-        this.lexicon = lexicon;
-    }
-
     public void setLexicon(final HashMap lexicon) {
         this.lexicon = lexicon;
+        fireI18nLanguageChange();
     }
 
     public void setCurrentLanguage(final String newLanguage) {
@@ -130,6 +131,48 @@ public class I18nUITranslation {
 
     }
 
+    /*
+     * Adds [%NT noteForTranslators] at the end of text. This tag is later
+     * renderer in the translator panel to inform translator how to do this
+     * translation
+     * 
+     * 
+     */
+    public String tWithNT(final String text, final String noteForTranslators) {
+        return t(text + NOTE_FOR_TRANSLATOR_TAG_BEGIN + noteForTranslators + NOTE_FOR_TRANSLATOR_TAG_END);
+    }
+
+    /*
+     * Use [%s] to reference the String parameter.
+     * 
+     * Also adds [%NT noteForTranslators] at the end of text. This tag is later
+     * renderer in the translator panel to inform translator how to do this
+     * translation
+     * 
+     * 
+     */
+    public String tWithNT(final String text, final String noteForTranslators, final String arg) {
+        return t(text + NOTE_FOR_TRANSLATOR_TAG_BEGIN + noteForTranslators + NOTE_FOR_TRANSLATOR_TAG_END, arg);
+    }
+
+    /*
+     * Use [%d] to reference the Integer parameter.
+     * 
+     * Also adds [%NT noteForTranslators] at the end of text. This tag is later
+     * renderer in the translator panel to inform translator how to do this
+     * translation
+     * 
+     * 
+     */
+    public String tWithNT(final String text, final String noteForTranslators, final Integer arg) {
+        return t(text + NOTE_FOR_TRANSLATOR_TAG_BEGIN + noteForTranslators + NOTE_FOR_TRANSLATOR_TAG_END, arg);
+    }
+
+    public void setTranslationAfterSave(final String text, final String translation) {
+        lexicon.put(text, translation);
+        fireI18nLanguageChange();
+    }
+
     public String encodeHtml(final String textToEncode) {
         String text = textToEncode;
         text = text.replaceAll("&", "&amp;");
@@ -144,5 +187,24 @@ public class I18nUITranslation {
         String text = textToDecode;
         text = text.replaceAll("&copy;", "©");
         return text;
+    }
+
+    public void addI18nChangeListener(final I18nChangeListener listener) {
+        if (i18nChangeListeners == null) {
+            i18nChangeListeners = new I18nChangeListenerCollection();
+        }
+        i18nChangeListeners.add(listener);
+    }
+
+    public void removeI18nChangeListener(final I18nChangeListener listener) {
+        if (i18nChangeListeners != null) {
+            i18nChangeListeners.remove(listener);
+        }
+    }
+
+    private void fireI18nLanguageChange() {
+        if (i18nChangeListeners != null) {
+            i18nChangeListeners.fireI18nLanguageChange();
+        }
     }
 }

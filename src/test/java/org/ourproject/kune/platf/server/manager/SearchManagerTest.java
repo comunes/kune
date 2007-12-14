@@ -3,6 +3,7 @@ package org.ourproject.kune.platf.server.manager;
 import static org.junit.Assert.assertEquals;
 
 import java.util.List;
+import java.util.TimeZone;
 
 import org.apache.lucene.queryParser.ParseException;
 import org.junit.After;
@@ -43,7 +44,8 @@ public class SearchManagerTest extends PersistenceTest {
         assertEquals(0, userFinder.getAll().size());
         assertEquals(0, groupFinder.getAll().size());
         assertEquals(0, licenseFinder.getAll().size());
-        user = userManager.createUser("username", "the user name", "email@example.com", "userPassword", "en", "GB");
+        user = userManager.createUser("username", "the user name", "email@example.com", "userPassword", "en", "GB",
+                TimeZone.getDefault().getID());
         defLicense = new License("by-sa", "Creative Commons Attribution-ShareAlike", "",
                 "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
         licenseManager.persist(defLicense);

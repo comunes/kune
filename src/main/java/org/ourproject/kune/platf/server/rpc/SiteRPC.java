@@ -20,10 +20,9 @@
 
 package org.ourproject.kune.platf.server.rpc;
 
-import java.util.List;
+import java.util.TimeZone;
 
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
-import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.rpc.SiteService;
 import org.ourproject.kune.platf.server.InitData;
 import org.ourproject.kune.platf.server.UserSession;
@@ -75,10 +74,10 @@ public class SiteRPC implements RPC, SiteService {
     public InitDataDTO getInitData(final String userHash) throws SerializableException {
         final InitData data = new InitData();
 
-        data.setCCLicenses(licenseManager.getCC());
-        data.setNotCCLicenses(licenseManager.getNotCC());
+        data.setLicenses(licenseManager.getAll());
         data.setLanguages(languageManager.getAll());
         data.setCountries(countryManager.getAll());
+        data.setTimezones(TimeZone.getAvailableIDs());
         data.setUserInfo(userInfoService.buildInfo(userManager.find(session.getUser().getId()), session.getHash()));
         data.setChatHttpBase(chatProperties.getHttpBase());
         data.setChatDomain(chatProperties.getDomain());
@@ -86,16 +85,6 @@ public class SiteRPC implements RPC, SiteService {
         data.setWsThemes(this.kuneProperties.get(KuneProperties.WS_THEMES).split(","));
         data.setDefaultWsTheme(this.kuneProperties.get(KuneProperties.WS_THEMES_DEF));
         return mapper.map(data, InitDataDTO.class);
-    }
-
-    @Transactional(type = TransactionType.READ_ONLY)
-    public List getAllLicenses() throws SerializableException {
-        return mapper.mapList(licenseManager.getAll(), LicenseDTO.class);
-    }
-
-    @Transactional(type = TransactionType.READ_ONLY)
-    public List getNotCCLicenses() throws SerializableException {
-        return mapper.mapList(licenseManager.getNotCC(), LicenseDTO.class);
     }
 
 }

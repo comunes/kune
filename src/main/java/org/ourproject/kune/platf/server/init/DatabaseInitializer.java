@@ -20,6 +20,8 @@
 
 package org.ourproject.kune.platf.server.init;
 
+import java.util.TimeZone;
+
 import javax.persistence.NoResultException;
 
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
@@ -100,8 +102,9 @@ public class DatabaseInitializer {
         String adminShortName = properties.getAdminShortName();
         String adminEmail = properties.getAdminEmail();
         String adminPassword = properties.getAdminPassword();
+        // FIXME: Ma
         User user = new User(adminShortName, adminName, adminEmail, adminPassword, languageManager.findByCode("en"),
-                countryManager.findByCode("GB"));
+                countryManager.findByCode("GB"), TimeZone.getDefault());
         groupManager.createUserGroup(user);
 
         String siteName = properties.getDefaultSiteName();

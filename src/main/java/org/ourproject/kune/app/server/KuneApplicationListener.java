@@ -42,6 +42,7 @@ class KuneApplicationListener implements ApplicationListener {
 
         String userSessionId = request.getSession().getId();
         userSession.setHash(userSessionId);
+        userSession.setBrowserLanguage(request.getLocale().getDisplayLanguage());
     }
 
     public void doBefore(final HttpServletRequest httpServletRequest, final HttpServletResponse httpServletResponse) {

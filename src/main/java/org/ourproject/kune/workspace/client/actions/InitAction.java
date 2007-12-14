@@ -67,12 +67,12 @@ public class InitAction implements Action {
             public void onSuccess(final Object response) {
                 Dispatcher dispatcher = services.dispatcher;
                 InitDataDTO initData = (InitDataDTO) response;
-                services.session.setCCLicenses(initData.getCCLicenses());
-                services.session.setNotCCLicenses(initData.getNotCCLicenses());
+                services.session.setLicenses(initData.getLicenses());
                 services.session.setWsThemes(initData.getWsThemes());
                 services.session.setDefaultWsTheme(initData.getDefaultWsTheme());
                 services.session.setLanguages(initData.getLanguages());
                 services.session.setCountries(initData.getCountries());
+                services.session.setTimezones(initData.getTimezones());
                 UserInfoDTO currentUser = initData.getUserInfo();
                 dispatcher.fire(WorkspaceEvents.INIT_DATA_RECEIVED, response, null);
                 if (currentUser == null) {
@@ -80,8 +80,6 @@ public class InitAction implements Action {
                 } else {
                     dispatcher.fire(WorkspaceEvents.USER_LOGGED_IN, currentUser, null);
                 }
-                Site.sitebar.setLanguages(services.session.getLanguagesArray());
-                Site.sitebar.setCountries(services.session.getCountriesArray());
                 RootPanel.get("kuneinitialcurtain").setVisible(false);
             }
         });

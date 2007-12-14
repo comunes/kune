@@ -4,6 +4,7 @@ import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 
 import java.util.List;
+import java.util.TimeZone;
 
 import org.junit.After;
 import org.junit.Before;
@@ -33,8 +34,8 @@ public class UserFinderTest extends PersistenceTest {
         I18nCountry gb = new I18nCountry(new Long(75), "GB", "GBP", ".", "£%n", "", ".", "United Kingdom", "western",
                 ",");
         countryManager.persist(gb);
-        persist(new User("shortname1", "the name1", "one@here.com", "password1", english, gb));
-        persist(new User("shortname2", "the name2", "two@here.com", "password1", english, gb));
+        persist(new User("shortname1", "the name1", "one@here.com", "password1", english, gb, TimeZone.getDefault()));
+        persist(new User("shortname2", "the name2", "two@here.com", "password1", english, gb, TimeZone.getDefault()));
     }
 
     @Test

@@ -4,19 +4,39 @@ import static org.junit.Assert.assertEquals;
 
 import javax.persistence.EntityManager;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.server.PersistenceTest;
 import org.ourproject.kune.platf.server.TestDomainHelper;
 import org.ourproject.kune.platf.server.domain.Content;
+import org.ourproject.kune.platf.server.domain.I18nCountry;
+import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.Rate;
 import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.manager.I18nCountryManager;
+import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 
+import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
 
 public class RateFinderTest extends PersistenceTest {
 
     @Inject
     Rate rateFinder;
+    @Inject
+    I18nLanguageManager languageManager;
+    @Inject
+    I18nCountryManager countryManager;
+    private I18nLanguage english;
+    private I18nCountry gb;
+
+    @Before
+    public void insertData() throws SerializableException {
+        english = new I18nLanguage(new Long(1819), "English", "English", "en");
+        languageManager.persist(english);
+        gb = new I18nCountry(new Long(75), "GB", "GBP", ".", "£%n", "", ".", "United Kingdom", "western", ",");
+        countryManager.persist(gb);
+    }
 
     @Test
     public void testContentRateAverage() {
@@ -24,6 +44,13 @@ public class RateFinderTest extends PersistenceTest {
 
         User user1 = TestDomainHelper.createUser(1);
         User user2 = TestDomainHelper.createUser(2);
+
+        user1.setLanguage(english);
+        user2.setLanguage(english);
+
+        user1.setCountry(gb);
+        user2.setCountry(gb);
+
         manager.persist(user1);
         manager.persist(user2);
 

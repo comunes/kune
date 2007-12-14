@@ -3,6 +3,8 @@ package org.ourproject.kune.platf.server.manager;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.TimeZone;
+
 import org.apache.lucene.queryParser.ParseException;
 import org.junit.After;
 import org.junit.Before;
@@ -55,7 +57,8 @@ public class GroupManagerTest extends PersistenceTest {
         I18nCountry gb = new I18nCountry(new Long(75), "GB", "GBP", ".", "£%n", "", ".", "United Kingdom", "western",
                 ",");
         countryManager.persist(gb);
-        user = userManager.createUser("username", "the user name", "email@example.com", "userPassword", "en", "GB");
+        user = userManager.createUser("username", "the user name", "email@example.com", "userPassword", "en", "GB",
+                TimeZone.getDefault().getID());
         defLicense = new License("by-sa", "Creative Commons Attribution-ShareAlike", "",
                 "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
         licenseManager.persist(defLicense);
@@ -116,7 +119,7 @@ public class GroupManagerTest extends PersistenceTest {
     @Test(expected = GroupNameInUseException.class)
     public void createUserWithExistingShortName() throws SerializableException {
         User user2 = userManager.createUser("username", "the user name 2", "email2@example.com", "userPassword", "en",
-                "GB");
+                "GB", TimeZone.getDefault().getID());
         groupManager.createUserGroup(user2);
         rollbackTransaction();
     }
@@ -124,7 +127,7 @@ public class GroupManagerTest extends PersistenceTest {
     @Test(expected = GroupNameInUseException.class)
     public void createUserWithExistingLongName() throws SerializableException {
         User user2 = userManager.createUser("username2", "the user name", "email2@example.com", "userPassword", "en",
-                "GB");
+                "GB", TimeZone.getDefault().getID());
         groupManager.createUserGroup(user2);
         rollbackTransaction();
     }
@@ -132,7 +135,7 @@ public class GroupManagerTest extends PersistenceTest {
     @Test(expected = EmailAddressInUseException.class)
     public void createUserWithExistingEmail() throws SerializableException {
         User user2 = userManager.createUser("username2", "the user name 2", "email@example.com", "userPassword", "en",
-                "GB");
+                "GB", TimeZone.getDefault().getID());
         groupManager.createUserGroup(user2);
         rollbackTransaction();
     }

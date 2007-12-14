@@ -1,3 +1,8 @@
+2007-12-14 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* User.java i18n fields not null
+	* Added TimeZone to User
+	* License/Languages/Countries/Timezone in session passed to UI
+
 2007-12-13 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* cleanup of files in repo
 	* first liquibase integration via maven (see INSTALL)

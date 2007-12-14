@@ -52,7 +52,6 @@ public class GroupMembersPanel extends StackedDropDownPanel implements GroupMemb
     }
 
     public void addAddMemberLink() {
-        // FIXME: add new event
         super.addBottomLink(img.addGreen(), Kune.I18N.t("Add member"), "fixme",
                 WorkspaceEvents.ADD_MEMBER_GROUPLIVESEARCH, presenter, null);
     }
