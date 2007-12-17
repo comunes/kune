@@ -1,4 +1,3 @@
-INSERT INTO `globalize_translations` VALUES (3573,'',NULL,1,'','Close','Close','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (3574,'',NULL,1,'','([%d] user)','([%d] user)','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (3575,'',NULL,1,'','Content rated','Content rated','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (3577,'',NULL,1,'','([%d] usuario/a)','([%d] user)','kune_core',5889);
@@ -32,7 +31,7 @@ INSERT INTO `globalize_translations` VALUES (3604,'',NULL,1,'','Organization','O
 INSERT INTO `globalize_translations` VALUES (3605,'',NULL,1,'','Community','Community','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (3606,'',NULL,1,'','Creative Commons','Creative Commons','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (3607,'',NULL,1,'','Others licenses','Others licenses','kune_core',1819);
-INSERT INTO `globalize_translations` VALUES (3608,'',NULL,1,'','With a Creative Commons license, you keep your copyright but allow people to copy and distribute your work provided they give you credit &amp;mdash; and only on the conditions you specify here. What do you want to do?','With a Creative Commons license, you keep your copyright but allow people to copy and distribute your work provided they give you credit &mdash; and only on the conditions you specify here. What do you want to do?','kune_core',1819);
+INSERT INTO `globalize_translations` VALUES (3608,'',NULL,1,'','With a Creative Commons license, you keep your copyright but allow people to copy and distribute your work provided they give you credit — and only on the conditions you specify here. What do you want to do?','With a Creative Commons license, you keep your copyright but allow people to copy and distribute your work provided they give you credit — and only on the conditions you specify here. What do you want to do?','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (3609,'',NULL,1,'','Allow commercial uses of your work?','Allow commercial uses of your work?','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (3610,'',NULL,1,'','Yes','Yes','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (3611,'',NULL,1,'','No','No','kune_core',1819);
@@ -76,7 +75,7 @@ INSERT INTO `globalize_translations` VALUES (3649,'',NULL,1,'','Organización','
 INSERT INTO `globalize_translations` VALUES (3650,'',NULL,1,'','Comunidad','Community','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (3651,'',NULL,1,'','Creative Commons','Creative Commons','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (3652,'',NULL,1,'','Otras licencias','Others licenses','kune_core',5889);
-INSERT INTO `globalize_translations` VALUES (3653,'',NULL,1,'','Con una licencia de Creative Commons, se puede copiar y distribuir su obra, atribuyendo la correspondiente autoría -- y solamente bajo las condiciones especificadas. ¿Qué quiere hacer?','With a Creative Commons license, you keep your copyright but allow people to copy and distribute your work provided they give you credit &mdash; and only on the conditions you specify here. What do you want to do?','kune_core',5889);
+INSERT INTO `globalize_translations` VALUES (3653,'',NULL,1,'','Con una licencia de Creative Commons, se puede copiar y distribuir su obra, atribuyendo la correspondiente autoría -- y solamente bajo las condiciones especificadas. ¿Qué quiere hacer?','With a Creative Commons license, you keep your copyright but allow people to copy and distribute your work provided they give you credit — and only on the conditions you specify here. What do you want to do?','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (3654,'',NULL,1,'','¿Permitir un uso comercial de su obra?','Allow commercial uses of your work?','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (3655,'',NULL,1,'','Sí','Yes','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (3656,'',NULL,1,'','No','No','kune_core',5889);
