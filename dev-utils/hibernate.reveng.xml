@@ -4,12 +4,9 @@
 <hibernate-reverse-engineering>
 
   <table-filter match-name="globalize_countries"
-    match-catalog="kune_test">
-  </table-filter>
+    match-catalog="kune_test" />
   <table-filter match-name="globalize_languages"
-    match-catalog="kune_test">
-  </table-filter>
+    match-catalog="kune_test" />
   <table-filter match-name="globalize_translations"
-    match-catalog="kune_test">
-  </table-filter>
+    match-catalog="kune_test" />
 </hibernate-reverse-engineering>
