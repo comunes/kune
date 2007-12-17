@@ -20,20 +20,18 @@
 
 package org.ourproject.kune.platf.client.newgroup.ui;
 
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.license.LicenseChoose;
 import org.ourproject.kune.platf.client.license.LicenseChoosePanel;
 import org.ourproject.kune.platf.client.newgroup.NewGroupPresenter;
 import org.ourproject.kune.platf.client.newgroup.NewGroupView;
 import org.ourproject.kune.platf.client.services.Images;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.KuneStringUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.WizardDialog;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
-import org.ourproject.kune.sitebar.client.bar.SiteBarTrans;
 import org.ourproject.kune.sitebar.client.msg.SiteMessage;
 import org.ourproject.kune.sitebar.client.msg.SiteMessagePanel;
-import org.ourproject.kune.sitebar.client.services.Translate;
 import org.ourproject.kune.workspace.client.ui.form.WizardListener;
 
 import com.google.gwt.user.client.ui.DeckPanel;
@@ -57,8 +55,6 @@ import com.gwtext.client.widgets.form.TextFieldConfig;
 
 public class NewGroupPanel extends WizardDialog implements NewGroupView {
     private static final String MUST_BE_BETWEEN_3_AND_15 = "Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes";
-
-    private static final Translate t = SiteBarTrans.getInstance().t;
 
     private static final String SHORTNAME_FIELD = "short_name";
     private static final String LONGNAME_FIELD = "long_name";
@@ -145,7 +141,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         licenseTypeLabel.addStyleName("kune-License-CC-Header");
         newGroupInitialDataVP.setHeight("10"); // Ext set this to 100% ...
         chooseLicenseVP.setHeight("10"); // (same here)
-        super.setFinishText(t.Register());
+        super.setFinishText(Kune.I18N.t("Register"));
     }
 
     public boolean isFormValid() {
@@ -223,7 +219,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
 
         shortNameField = new TextField(new TextFieldConfig() {
             {
-                setFieldLabel(t.ShortName());
+                setFieldLabel(Kune.I18N.t("Short name"));
                 setName(SHORTNAME_FIELD);
                 setWidth(175);
                 setMinLength(3);
@@ -240,7 +236,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
 
         longNameField = new TextField(new TextFieldConfig() {
             {
-                setFieldLabel(t.LongName());
+                setFieldLabel(Kune.I18N.t("Long name"));
                 setName(LONGNAME_FIELD);
                 setWidth(300);
                 setAllowBlank(false);
@@ -253,7 +249,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
 
         publicDescField = new TextArea(new TextAreaConfig() {
             {
-                setFieldLabel(t.PublicDescription());
+                setFieldLabel(Kune.I18N.t("Public description"));
                 setName(PUBLICDESC_FIELD);
                 setWidth(300);
                 setAllowBlank(false);
@@ -266,7 +262,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
 
         form.fieldset(new FieldSetConfig() {
             {
-                setLegend(t.TypeOfGroup());
+                setLegend(Kune.I18N.t("Type of group"));
                 setHideLabels(true);
                 setStyle("margin-left: 105px");
             }
@@ -275,7 +271,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         projectRadio = new Radio(new CheckboxConfig() {
             {
                 setName(TYPEOFGROUP_FIELD);
-                setBoxLabel(t.Project());
+                setBoxLabel(Kune.I18N.t("Project"));
                 setAutoCreate(true);
                 setChecked(true);
             }
@@ -285,7 +281,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         orgRadio = new Radio(new CheckboxConfig() {
             {
                 setName(TYPEOFGROUP_FIELD);
-                setBoxLabel(t.Organization());
+                setBoxLabel(Kune.I18N.t("Organization"));
                 setAutoCreate(true);
             }
         });
@@ -294,7 +290,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         communityRadio = new Radio(new CheckboxConfig() {
             {
                 setName(TYPEOFGROUP_FIELD);
-                setBoxLabel(t.Community());
+                setBoxLabel(Kune.I18N.t("Community"));
                 setAutoCreate(true);
             }
         });

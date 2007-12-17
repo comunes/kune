@@ -22,10 +22,8 @@ package org.ourproject.kune.sitebar.client.login;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.services.Kune;
-import org.ourproject.kune.sitebar.client.bar.SiteBarTrans;
 import org.ourproject.kune.sitebar.client.msg.SiteMessage;
 import org.ourproject.kune.sitebar.client.msg.SiteMessagePanel;
-import org.ourproject.kune.sitebar.client.services.Translate;
 
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -62,8 +60,6 @@ import com.gwtext.client.widgets.layout.LayoutRegionConfig;
 
 public class LoginPanel implements LoginView, View {
     private static final String MUST_BE_BETWEEN_3_AND_15 = "Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes";
-
-    private static final Translate t = SiteBarTrans.getInstance().t;
 
     private static final String NICKOREMAIL_FIELD = "nickOrEmail";
     private static final String PASSWORD_FIELD = "password";
@@ -249,14 +245,14 @@ public class LoginPanel implements LoginView, View {
                 setClosable(true);
                 setProxyDrag(true);
                 setCollapsible(false);
-                setTitle(t.SignIn());
+                setTitle(Kune.I18N.t("Sign in"));
             }
         }, null, south, null, null, center);
 
         final BorderLayout layout = dialog.getLayout();
         layout.beginUpdate();
 
-        ContentPanel signInPanel = new ContentPanel(Ext.generateId(), t.SignIn());
+        ContentPanel signInPanel = new ContentPanel(Ext.generateId(), Kune.I18N.t("Sign in"));
 
         signInForm = createSignInForm();
 
@@ -277,7 +273,7 @@ public class LoginPanel implements LoginView, View {
 
         ContentPanel registerPanel = new ContentPanel(Ext.generateId(), new ContentPanelConfig() {
             {
-                setTitle(t.Register());
+                setTitle(Kune.I18N.t("Register"));
                 setBackground(true);
             }
         });
@@ -312,14 +308,14 @@ public class LoginPanel implements LoginView, View {
 
         layout.endUpdate();
 
-        final Button signInBtn = dialog.addButton(t.SignIn());
+        final Button signInBtn = dialog.addButton(Kune.I18N.t("Sign in"));
         signInBtn.addButtonListener(new ButtonListenerAdapter() {
             public void onClick(final Button button, final EventObject e) {
                 presenter.doLogin();
             }
         });
 
-        final Button registerBtn = dialog.addButton(t.Register());
+        final Button registerBtn = dialog.addButton(Kune.I18N.t("Register"));
         registerBtn.addButtonListener(new ButtonListenerAdapter() {
             public void onClick(final Button button, final EventObject e) {
                 presenter.doRegister();
@@ -329,7 +325,7 @@ public class LoginPanel implements LoginView, View {
 
         dialog.addButton(new Button(new ButtonConfig() {
             {
-                setText(t.Cancel());
+                setText(Kune.I18N.tWithNT("Cancel", "used in button"));
                 setButtonListener(new ButtonListenerAdapter() {
                     public void onClick(final Button button, final EventObject e) {
                         presenter.onCancel();
@@ -341,7 +337,7 @@ public class LoginPanel implements LoginView, View {
         tabPanel = layout.getRegion(LayoutRegionConfig.CENTER).getTabs();
         tabPanel.getTab(0).addTabPanelItemListener(new TabPanelItemListenerAdapter() {
             public void onActivate(final TabPanelItem tab) {
-                dialog.setTitle(t.SignIn());
+                dialog.setTitle(Kune.I18N.t("Sign in"));
                 registerBtn.hide();
                 signInBtn.show();
                 tab.getTextEl().highlight();
@@ -350,7 +346,7 @@ public class LoginPanel implements LoginView, View {
 
         tabPanel.getTab(1).addTabPanelItemListener(new TabPanelItemListenerAdapter() {
             public void onActivate(final TabPanelItem tab) {
-                dialog.setTitle(t.Register());
+                dialog.setTitle(Kune.I18N.t("Register"));
                 signInBtn.hide();
                 registerBtn.show();
                 tab.getTextEl().highlight();
@@ -393,10 +389,10 @@ public class LoginPanel implements LoginView, View {
                 setLabelAlign(Position.RIGHT);
             }
         });
-        form.fieldset(t.SignIn());
+        form.fieldset(Kune.I18N.t("Sign in"));
         loginNickOrEmailField = new TextField(new TextFieldConfig() {
             {
-                setFieldLabel(t.UserNameOrEmail());
+                setFieldLabel(Kune.I18N.t("Nickname or email"));
                 setName(NICKOREMAIL_FIELD);
                 setWidth(175);
                 setAllowBlank(false);
@@ -407,7 +403,7 @@ public class LoginPanel implements LoginView, View {
 
         loginPassField = new TextField(new TextFieldConfig() {
             {
-                setFieldLabel(t.Password());
+                setFieldLabel(Kune.I18N.t("Password"));
                 setName(PASSWORD_FIELD);
                 setWidth(175);
                 setPassword(true);
@@ -431,11 +427,11 @@ public class LoginPanel implements LoginView, View {
             }
         });
 
-        form.fieldset(t.Register());
+        form.fieldset(Kune.I18N.t("Register"));
 
         shortNameRegField = new TextField(new TextFieldConfig() {
             {
-                setFieldLabel(t.NickName());
+                setFieldLabel(Kune.I18N.t("Nickname"));
                 setName(NICK_FIELD);
                 setWidth(200);
                 setAllowBlank(false);
@@ -452,7 +448,7 @@ public class LoginPanel implements LoginView, View {
 
         longNameRegField = new TextField(new TextFieldConfig() {
             {
-                setFieldLabel(t.FullName());
+                setFieldLabel(Kune.I18N.t("Full Name"));
                 setName(LONGNAME_FIELD);
                 setWidth(200);
                 setAllowBlank(false);
@@ -465,7 +461,7 @@ public class LoginPanel implements LoginView, View {
 
         passwdRegField = new TextField(new TextFieldConfig() {
             {
-                setFieldLabel(t.Password());
+                setFieldLabel(Kune.I18N.t("Password"));
                 setName(PASSWORD_FIELD);
                 setPassword(true);
                 setAllowBlank(false);
@@ -479,7 +475,7 @@ public class LoginPanel implements LoginView, View {
 
         passwdRegFieldDup = new TextField(new TextFieldConfig() {
             {
-                setFieldLabel(t.RetypePassword());
+                setFieldLabel(Kune.I18N.t("Retype password"));
                 setName(PASSWORD_FIELD_DUP);
                 setPassword(true);
                 setAllowBlank(false);
@@ -499,7 +495,7 @@ public class LoginPanel implements LoginView, View {
 
         emailRegField = new TextField(new TextFieldConfig() {
             {
-                setFieldLabel(t.Email());
+                setFieldLabel(Kune.I18N.t("Email"));
                 setName(EMAIL_FIELD);
                 setVtype(VType.EMAIL);
                 setWidth(200);

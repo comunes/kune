@@ -121,7 +121,7 @@ public class ParticipationPresenter extends AbstractPresenter implements Partici
             }
         }
         if (numAdmins > 0) {
-            view.addCategory(ADMIN_SUBTITLE, Kune.I18N.t("Administrate these groups"));
+            view.addCategory(ADMIN_SUBTITLE, Kune.I18N.tWithNT("Administrate these groups", "talking about a person"));
             iteraList(ADMIN_SUBTITLE, groupsIsAdmin, actions);
             collabTitle = Kune.I18N.t("and as collaborator in:");
         } else {

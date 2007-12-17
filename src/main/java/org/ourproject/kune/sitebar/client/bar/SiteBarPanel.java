@@ -37,7 +37,6 @@ import org.ourproject.kune.sitebar.client.SiteBarFactory;
 import org.ourproject.kune.sitebar.client.login.Login;
 import org.ourproject.kune.sitebar.client.login.LoginPanel;
 import org.ourproject.kune.sitebar.client.services.Images;
-import org.ourproject.kune.sitebar.client.services.Translate;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
@@ -63,7 +62,6 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     private static final String SEARCH_TEXT_WIDTH_SMALL = "120";
     private static final String SEARCH_TEXT_WIDTH_BIG = "180";
     private final SiteBarPresenter presenter;
-    private final Translate t;
     private final Image logoImage;
 
     private final HorizontalPanel siteBarHP;
@@ -91,7 +89,6 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     private SearchSitePanel searchPanel;
 
     public SiteBarPanel(final SiteBarPresenter initPresenter) {
-        t = SiteBarTrans.getInstance().t;
         img = Images.App.getInstance();
 
         // Initialize
@@ -141,22 +138,22 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         // Set properties
         siteBarHP.addStyleName("kune-SiteBarPanel");
         siteBarHP.setCellWidth(expandLabel, "100%");
-        showProgress(t.Processing());
+        showProgress(Kune.I18N.t("Processing"));
         gotoPublic.addStyleName("kune-Margin-Medium-r");
         contentNoPublic.setVisible(false);
         contentNoPublic.addStyleName("kune-Margin-Medium-r");
-        newGroupHyperlink.setText(t.CreateNewGroup());
+        newGroupHyperlink.setText(Kune.I18N.t("Create New Group"));
         newGroupHyperlink.setTargetHistoryToken(Site.NEWGROUP_TOKEN);
         loggedUserHyperlink.setVisible(false);
         pipeSeparatorHtml.setHTML("|");
         pipeSeparatorHtml.setStyleName("kune-SiteBarPanel-Separator");
         pipeSeparatorHtml2.setHTML("|");
         pipeSeparatorHtml2.setStyleName("kune-SiteBarPanel-Separator");
-        loginHyperlink.setText(t.SignInToCollaborate());
+        loginHyperlink.setText(Kune.I18N.t("Sign in to collaborate"));
         loginHyperlink.setTargetHistoryToken(Site.LOGIN_TOKEN);
-        logoutLabel.setText(t.SignOut());
+        logoutLabel.setText(Kune.I18N.t("Sign out"));
         logoutLabel.addStyleName("kune-SiteBarPanel-LabelLink");
-        options.addItem(t.Options(), true, optionsSubmenu);
+        options.addItem(Kune.I18N.t("Options"), true, optionsSubmenu);
         options.setStyleName("kune-MenuBar");
         optionsButton.setColor("AAA");
         optionsButton.setHeight("16px");
@@ -175,12 +172,12 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     private void createOptionsSubmenu() {
-        linkHelpInTrans = new MenuItem(img.language().getHTML() + t.HelpWithTranslation(), true, new Command() {
+        linkHelpInTrans = new MenuItem(img.language().getHTML() + Kune.I18N.t("Help with the translation"), true, new Command() {
             public void execute() {
                 presenter.onHelpInTranslation();
             }
         });
-        linkHelp = new MenuItem(img.kuneIcon16().getHTML() + t.Help(), true, new Command() {
+        linkHelp = new MenuItem(img.kuneIcon16().getHTML() + Kune.I18N.t("Help"), true, new Command() {
             public void execute() {
                 // FIXME: Url to doc
                 presenter.changeState(new StateToken("site.docs"));
@@ -210,7 +207,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     public void setDefaultTextSearch() {
-        searchTextBox.setText(t.Search());
+        searchTextBox.setText(Kune.I18N.t("Search"));
     }
 
     public void clearSearchText() {
@@ -218,7 +215,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     public void clearUserName() {
-        loginHyperlink.setText(t.SignInToCollaborate());
+        loginHyperlink.setText(Kune.I18N.t("Sign in to collaborate"));
     }
 
     public void setLogo(final Image logo) {
@@ -338,7 +335,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         int isAdminCount = groupsIsAdmin.size();
         int isCollabCount = groupsIsCollab.size();
         if (isAdminCount > 0 || isCollabCount > 0) {
-            optionsSubmenu.addItem(t.MyGroups() + " »", yourGroupsSubmenu);
+            optionsSubmenu.addItem(Kune.I18N.t("My Groups") + " »", yourGroupsSubmenu);
             for (int i = 0; i < isAdminCount; i++) {
                 final LinkDTO link = (LinkDTO) groupsIsAdmin.get(i);
                 addItemToYourGroupSubmenu(link);

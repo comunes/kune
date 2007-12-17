@@ -24,6 +24,7 @@ import java.util.HashMap;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.rpc.I18nService;
 import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
+import org.ourproject.kune.platf.client.ui.KuneStringUtils;
 import org.ourproject.kune.platf.client.ui.Location;
 import org.ourproject.kune.platf.client.ui.WindowUtils;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
@@ -93,7 +94,7 @@ public class I18nUITranslation {
      * @return text translated in the current language
      */
     public String t(final String text) {
-        String encodeText = encodeHtml(text);
+        String encodeText = KuneStringUtils.escapeHtmlLight(text);
         String translation = (String) lexicon.get(encodeText);
         if (lexicon.containsKey(encodeText)) {
             if (translation == UNTRANSLATED_VALUE) {
@@ -173,22 +174,17 @@ public class I18nUITranslation {
         fireI18nLanguageChange();
     }
 
-    public String encodeHtml(final String textToEncode) {
-        String text = textToEncode;
-        text = text.replaceAll("&", "&amp;");
-        text = text.replaceAll("\"", "&quot;");
-        text = text.replaceAll("<", "&lt;");
-        text = text.replaceAll(">", "&gt;");
-        text = text.replaceAll("©", "&copy;");
-        return text;
-    }
-
     public String decodeHtml(final String textToDecode) {
         String text = textToDecode;
-        text = text.replaceAll("&copy;", "©");
+        // text = text.replaceAll("&copy;", "©");
         return text;
     }
 
+    /*
+     * If a UI element need to be fired when (for instance) the language changes
+     * use this. Useful if you widget have to take in account text language
+     * direction, for instance.
+     */
     public void addI18nChangeListener(final I18nChangeListener listener) {
         if (i18nChangeListeners == null) {
             i18nChangeListeners = new I18nChangeListenerCollection();

@@ -1,3 +1,5 @@
+DELETE FROM `globalize_translations` WHERE id=1;
+INSERT INTO `globalize_translations` VALUES (1,'',NULL,1,'','Sondag','Sunday [%NT weekday]','ViewTranslation',114);
 INSERT INTO `globalize_translations` VALUES (2,'',NULL,1,'','Maandag','Monday [%NT weekday]','ViewTranslation',114);
 INSERT INTO `globalize_translations` VALUES (3,'',NULL,1,'','Dinsdag','Tuesday [%NT weekday]','ViewTranslation',114);
 INSERT INTO `globalize_translations` VALUES (4,'',NULL,1,'','Woensdag','Wednesday [%NT weekday]','ViewTranslation',114);
@@ -3417,4 +3419,3 @@ INSERT INTO `globalize_translations` VALUES (3417,'',NULL,1,'','Sep','Sep [%NT a
 INSERT INTO `globalize_translations` VALUES (3418,'',NULL,1,'','Okt','Oct [%NT abbreviated month]','ViewTranslation',7594);
 INSERT INTO `globalize_translations` VALUES (3419,'',NULL,1,'','Nov','Nov [%NT abbreviated month]','ViewTranslation',7594);
 INSERT INTO `globalize_translations` VALUES (3420,'',NULL,1,'','Dis','Dec [%NT abbreviated month]','ViewTranslation',7594);
-INSERT INTO `globalize_translations` VALUES (3421,'',NULL,1,'','Sondag','Sunday [%NT weekday]','ViewTranslation',114);

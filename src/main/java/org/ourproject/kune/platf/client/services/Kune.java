@@ -20,16 +20,12 @@
 
 package org.ourproject.kune.platf.client.services;
 
-import com.google.gwt.core.client.GWT;
-
 public class Kune {
     private static Kune instance;
     public static final I18nUITranslation I18N = I18nUITranslation.getInstance();
-    public final Translate t;
     public ColorTheme theme;
 
     private Kune() {
-        t = (Translate) GWT.create(Translate.class);
         theme = new ColorTheme();
     }
 

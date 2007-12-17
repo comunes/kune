@@ -1,9 +1,4 @@
 <module>
-	<inherits name='org.ourproject.kune.platf.Kune-Platform' />
-	<inherits name='org.ourproject.kune.workspace.Kune-Workspace' />
-
-<!--
-	<entry-point class='org.ourproject.kune.app.client.editor.EditorSample'/>
--->
-
+        <inherits name='org.ourproject.kune.platf.Kune-Platform' />
+        <inherits name='org.ourproject.kune.workspace.Kune-Workspace' />
 </module>

@@ -116,7 +116,7 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
     public void showCreationField(final String typeName) {
         // Workaround: gwt-ext bug, I cannot use typeName directly
         workaroundTypeName = typeName;
-        MessageBox.prompt(Kune.I18N.t("Add a new [%s]", typeName), Kune.I18N.t("Please enter name:"),
+        MessageBox.prompt(Kune.I18N.t("Add a new [%s]", typeName), Kune.I18N.t("Please enter a name:"),
                 new MessageBox.PromptCallback() {
                     public void execute(final String btnID, final String text) {
                         presenter.create(workaroundTypeName, text, currentEventName);

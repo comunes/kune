@@ -27,9 +27,7 @@ import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.HorizontalLine;
 import org.ourproject.kune.platf.client.ui.IconLabel;
 import org.ourproject.kune.platf.client.ui.TitledPanel;
-import org.ourproject.kune.sitebar.client.bar.SiteBarTrans;
 import org.ourproject.kune.sitebar.client.services.Images;
-import org.ourproject.kune.sitebar.client.services.Translate;
 
 import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.ClickListener;
@@ -51,7 +49,6 @@ public class LicenseChoosePanel extends Composite implements LicenseChooseView {
     private final RadioButton commercialRB;
     private final RadioButton allowModifShareAlikeRB;
     private final DeckPanel options;
-    private final Translate t;
     private final Label ccIntro;
     private final ListBox otherLicenses;
     private final TitledPanel optionsBox;
@@ -61,29 +58,28 @@ public class LicenseChoosePanel extends Composite implements LicenseChooseView {
     private final RadioButton nonCommercialRB;
 
     public LicenseChoosePanel(final List nonCCLicenses, final LicenseChoosePresenter presenter) {
-        t = SiteBarTrans.getInstance().t;
         Images img = Images.App.getInstance();
 
         VerticalPanel generalVP = new VerticalPanel();
         initWidget(generalVP);
 
         VerticalPanel licenseTypesVP = new VerticalPanel();
-        ccRB = new RadioButton("ccOrNot", t.CreativeCommons());
-        RadioButton notCcRB = new RadioButton("ccOrNot", t.OtherLicenses());
+        ccRB = new RadioButton("ccOrNot", Kune.I18N.t("Creative Commons"));
+        RadioButton notCcRB = new RadioButton("ccOrNot", Kune.I18N.t("Others licenses"));
         options = new DeckPanel();
-        ccIntro = new Label(t.CCExplainMessage());
+        ccIntro = new Label(Kune.I18N.t("With a Creative Commons license, you keep your copyright but allow people to copy and distribute your work provided they give you credit — and only on the conditions you specify here. What do you want to do?"));
 
         otherLicenses = new ListBox();
         VerticalPanel ccOptionsVP = new VerticalPanel();
         VerticalPanel nonCcOptionsVP = new VerticalPanel();
 
-        Label comercialLabel = new Label(t.CCAllowComercial());
-        commercialRB = new RadioButton("comercial", t.Yes());
-        nonCommercialRB = new RadioButton("comercial", t.No());
-        Label allowModifLabel = new Label(t.CCAllowModifications());
-        allowModifRB = new RadioButton("allowModif", t.Yes());
-        allowModifShareAlikeRB = new RadioButton("allowModif", t.CCShareAlike());
-        noModifRB = new RadioButton("allowModif", t.No());
+        Label comercialLabel = new Label(Kune.I18N.t("Allow commercial uses of your work?"));
+        commercialRB = new RadioButton("comercial", Kune.I18N.t("Yes"));
+        nonCommercialRB = new RadioButton("comercial", Kune.I18N.t("No"));
+        Label allowModifLabel = new Label(Kune.I18N.t("Allow modifications of your work?"));
+        allowModifRB = new RadioButton("allowModif", Kune.I18N.t("Yes"));
+        allowModifShareAlikeRB = new RadioButton("allowModif", Kune.I18N.t("Yes, as long as others share alike"));
+        noModifRB = new RadioButton("allowModif", Kune.I18N.t("No"));
         generalVP.add(licenseTypesVP);
         licenseTypesVP.add(ccRB);
         licenseTypesVP.add(notCcRB);
@@ -96,7 +92,7 @@ public class LicenseChoosePanel extends Composite implements LicenseChooseView {
 
         // Options
 
-        optionsBox = new TitledPanel(t.Options(), options);
+        optionsBox = new TitledPanel(Kune.I18N.t("Options"), options);
         generalVP.add(optionsBox);
         generalVP.add(nonCopyleft);
         generalVP.add(copyleft);
@@ -206,7 +202,7 @@ public class LicenseChoosePanel extends Composite implements LicenseChooseView {
 
     public void showCCoptions() {
         options.showWidget(0);
-        optionsBox.setTitle(t.Options());
+        optionsBox.setTitle(Kune.I18N.t("Options"));
 
     }
 

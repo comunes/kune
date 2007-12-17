@@ -18,11 +18,18 @@
     <changeSet id="3" author="vjrj" >
     <comment>Languages insert</comment>
     <sqlFile path="src/main/resources/db/init-data-languages.sql" encoding="utf8" stripComments="1" />
-    <rollback/>
+    <!-- <rollback/> -->
     </changeSet>
     <changeSet id="4" author="vjrj" >
     <comment>Languages insert</comment>
     <sqlFile path="src/main/resources/db/init-data-translations.sql" encoding="utf8" stripComments="1" />
-    <rollback/>
+    </changeSet>
+    <changeSet id="5" author="vjrj" >
+    <comment>First english and spanish translations</comment>
+    <sqlFile path="src/main/resources/db/update-0001-i18n.sql" encoding="utf8" stripComments="1" />
+    </changeSet>
+    <changeSet id="6" author="vjrj" >
+    <comment>English and spanish translations (continuation)</comment>
+    <sqlFile path="src/main/resources/db/update-0002-i18n.sql" encoding="utf8" stripComments="1" />
     </changeSet>
 </databaseChangeLog>

@@ -27,7 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.persistence.EntityManager;
 
-import org.apache.commons.lang.StringEscapeUtils;
+import org.ourproject.kune.platf.client.ui.KuneStringUtils;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.I18nTranslation;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
@@ -83,7 +83,7 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
 
     public String getTranslation(final String language, final String text) {
         HashMap<String, String> lexicon = getLexicon(language);
-        String escapedText = StringEscapeUtils.escapeHtml(text);
+        String escapedText = KuneStringUtils.escapeHtmlLight(text);
         if (lexicon.containsKey(escapedText)) {
             String translation = lexicon.get(escapedText);
             return translation;
@@ -91,9 +91,9 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
             // new key, add to language and default language and let
             // untranslated
             if (!getLexicon(I18nTranslation.DEFAULT_LANG).containsKey(text)) {
-                I18nTranslation newTranslation = new I18nTranslation("", null, I18nTranslation.DEF_PLUR_INDEX,
-                        "", I18nTranslation.UNTRANSLATED_VALUE, escapedText,
-                        I18nTranslation.DEF_NAMESPACE, languageManager.findByCode(I18nTranslation.DEFAULT_LANG));
+                I18nTranslation newTranslation = new I18nTranslation("", null, I18nTranslation.DEF_PLUR_INDEX, "",
+                        I18nTranslation.UNTRANSLATED_VALUE, escapedText, I18nTranslation.DEF_NAMESPACE, languageManager
+                                .findByCode(I18nTranslation.DEFAULT_LANG));
                 persist(newTranslation);
                 langCache.clear();
             }
@@ -127,7 +127,7 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
     public void setTranslation(final String id, final String translation) throws SerializableException {
         I18nTranslation trans = super.find(new Long(id));
         if (trans != null) {
-            String escapedTranslation = StringEscapeUtils.escapeHtml(translation);
+            String escapedTranslation = KuneStringUtils.escapeHtmlLight(translation);
             trans.setText(escapedTranslation);
             persist(trans);
         } else {

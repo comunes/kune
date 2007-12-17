@@ -75,7 +75,7 @@ public class SearchSitePanel implements SearchSiteView {
     }
 
     public void searchGroups(final String text) {
-        dialog.setTitle(Kune.I18N.t("Searching for [%s]", text));
+        dialog.setTitle(Kune.I18N.t("Searching for: [%s]", text));
         searchCombo.setValue(text);
 
         groupStore.load(new StoreLoadConfig() {
@@ -150,7 +150,7 @@ public class SearchSitePanel implements SearchSiteView {
 
         layout.endUpdate();
 
-        final Button closeBtn = new Button(Kune.I18N.t("Close"));
+        final Button closeBtn = new Button(Kune.I18N.tWithNT("Close", "in button"));
         closeBtn.addButtonListener(new ButtonListenerAdapter() {
             public void onClick(final Button button, final EventObject e) {
                 presenter.doClose();
@@ -222,7 +222,7 @@ public class SearchSitePanel implements SearchSiteView {
         });
         form.add(searchCombo);
         form.render();
-        Button searchBtn = new Button(Kune.I18N.t("Search"));
+        Button searchBtn = new Button(Kune.I18N.tWithNT("Search", "in button"));
         searchBtn.addButtonListener(new ButtonListenerAdapter() {
             public void onClick(final Button button, final EventObject e) {
                 presenter.doSearch(getComboTextToSearch());

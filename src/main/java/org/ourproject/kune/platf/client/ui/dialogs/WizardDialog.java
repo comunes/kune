@@ -21,7 +21,6 @@
 package org.ourproject.kune.platf.client.ui.dialogs;
 
 import org.ourproject.kune.platf.client.services.Kune;
-import org.ourproject.kune.platf.client.services.Translate;
 import org.ourproject.kune.platf.client.ui.CustomButton;
 import org.ourproject.kune.workspace.client.ui.form.WizardListener;
 
@@ -46,8 +45,6 @@ public class WizardDialog {
 
     public WizardDialog(final String caption, final boolean modal, final boolean minimizable, final int width,
             final int height, final int minWidth, final int minHeight, final WizardListener listener) {
-        Translate t = Kune.getInstance().t;
-
         dialog = new LayoutDialog(new LayoutDialogConfig() {
             {
                 // Param values
@@ -64,29 +61,33 @@ public class WizardDialog {
             }
         }, new LayoutRegionConfig());
 
-        backButton = dialog.addButton(new CustomButton(t.ArrowBack(), new ClickListener() {
-            public void onClick(final Widget sender) {
-                listener.onBack();
-            }
-        }).getButton());
+        backButton = dialog.addButton(new CustomButton(Kune.I18N.tWithNT("« Back", "used in button"),
+                new ClickListener() {
+                    public void onClick(final Widget sender) {
+                        listener.onBack();
+                    }
+                }).getButton());
 
-        nextButton = dialog.addButton(new CustomButton(t.NextArrow(), new ClickListener() {
-            public void onClick(final Widget sender) {
-                listener.onNext();
-            }
-        }).getButton());
+        nextButton = dialog.addButton(new CustomButton(Kune.I18N.tWithNT("Next »", "used in button"),
+                new ClickListener() {
+                    public void onClick(final Widget sender) {
+                        listener.onNext();
+                    }
+                }).getButton());
 
-        cancelButton = dialog.addButton(new CustomButton(t.Cancel(), new ClickListener() {
-            public void onClick(final Widget sender) {
-                listener.onCancel();
-            }
-        }).getButton());
+        cancelButton = dialog.addButton(new CustomButton(Kune.I18N.tWithNT("Cancel", "used in button"),
+                new ClickListener() {
+                    public void onClick(final Widget sender) {
+                        listener.onCancel();
+                    }
+                }).getButton());
 
-        finishButton = dialog.addButton(new CustomButton(t.Finish(), new ClickListener() {
-            public void onClick(final Widget sender) {
-                listener.onFinish();
-            }
-        }).getButton());
+        finishButton = dialog.addButton(new CustomButton(Kune.I18N.tWithNT("Finish", "used in button"),
+                new ClickListener() {
+                    public void onClick(final Widget sender) {
+                        listener.onFinish();
+                    }
+                }).getButton());
 
         dialog.addDialogListener(new DialogListener() {
 

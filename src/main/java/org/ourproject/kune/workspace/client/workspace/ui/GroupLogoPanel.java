@@ -84,7 +84,7 @@ class GroupLogoPanel extends SimplePanel {
 
             // Set properties
             // TODO: Put your logo here functionality
-            defTextPutYourLogoHL.setText(Kune.getInstance().t.PutYourLogoHere());
+            defTextPutYourLogoHL.setText(Kune.I18N.t("Put Your Logo Here"));
             expandCell.setWidth("100%");
             putYourLogoHP.setCellWidth(expandCell, "100%");
             // TODO: link to configure the logo

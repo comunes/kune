@@ -1,5 +1,6 @@
 <module>
-        <inherits name='com.google.gwt.i18n.I18N' />
+        <!--         <inherits name='com.google.gwt.i18n.I18N' />
+        -->
         <inherits name='com.google.gwt.user.User' />
         <inherits name='com.gwtext.GwtExt' />
         <inherits name='org.ourproject.kune.platf.Kune-Platform' />
@@ -7,8 +8,10 @@
         <inherits name='org.ourproject.kune.chat.Kune-Chat' />
         <inherits name='to.tipit.GWTlib' />
 
+        <!--
         <extend-property name="locale" values="es" />
         <extend-property name="locale" values="ar" />
+        -->
 
         <!-- Specify the app entry point class.                   -->
         <entry-point class='org.ourproject.kune.app.client.KuneEntryPoint' />
@@ -21,5 +24,5 @@
 
         <!--http://code.google.com/p/google-web-toolkit/issues/detail?id=42 -->
 
-        <set-property name="user.agent" value="gecko" />
+        <!-- <set-property name="user.agent" value="gecko" /> -->
 </module>

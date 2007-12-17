@@ -1,4 +1,5 @@
-2007-12-14 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+2007-12-17 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* Translation to English & Spanish
 	* User.java i18n fields not null
 	* Added TimeZone to User
 	* License/Languages/Countries/Timezone in session passed to UI
