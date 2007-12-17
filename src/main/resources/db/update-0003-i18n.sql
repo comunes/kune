@@ -58,3 +58,13 @@ INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'',"Grande","Large",'k
 INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'',"Muy grande","Very large",'kune_core',5889);
 INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'',"Extra grande","Extra large",'kune_core',5889);
 INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'',"Editar HTML","Edit HTML",'kune_core',5889);
+INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Tags','Tags','kune_core',1819);
+INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Save','Save [%NT in button]','kune_core',1819);
+INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Document Saved','Document Saved','kune_core',1819);
+INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Save confirmation','Save confirmation','kune_core',1819);
+INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Save before close?','Save before close?','kune_core',1819);
+INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Tags','Tags','kune_core',5889);
+INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Guardar','Save [%NT in button]','kune_core',5889);
+INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Documento guardado','Document Saved','kune_core',5889);
+INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Confirmar guardado','Save confirmation','kune_core',5889);
+INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','¿Guardar antes de cerrar?','Save before close?','kune_core',5889);
