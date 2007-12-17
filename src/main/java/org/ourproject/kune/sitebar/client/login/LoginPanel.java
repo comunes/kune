@@ -239,7 +239,7 @@ public class LoginPanel implements LoginView, View {
             {
                 setModal(true);
                 setWidth(400);
-                setHeight(430);
+                setHeight(440);
                 setShadow(true);
                 setResizable(true);
                 setClosable(true);

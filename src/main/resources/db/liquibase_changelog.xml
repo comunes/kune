@@ -32,4 +32,8 @@
     <comment>English and spanish translations (continuation)</comment>
     <sqlFile path="src/main/resources/db/update-0002-i18n.sql" encoding="utf8" stripComments="1" />
     </changeSet>
+    <changeSet id="7" author="vjrj" >
+    <comment>English and spanish translations of TextEditor</comment>
+    <sqlFile path="src/main/resources/db/update-0003-i18n.sql" encoding="utf8" stripComments="1" />
+    </changeSet>
 </databaseChangeLog>

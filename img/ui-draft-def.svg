@@ -616,8 +616,8 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="1082.1959"
-     inkscape:cy="237.08564"
+     inkscape:cx="2271.1959"
+     inkscape:cy="365.05204"
      inkscape:document-units="px"
      inkscape:current-layer="layer5"
      inkscape:object-points="false"
@@ -629,8 +629,8 @@
      guidetolerance="3.9"
      showgrid="false"
      gridempspacing="0"
-     inkscape:window-width="1377"
-     inkscape:window-height="889"
+     inkscape:window-width="1379"
+     inkscape:window-height="936"
      inkscape:window-x="61"
      inkscape:window-y="0"
      width="1488.189px"
@@ -19447,7 +19447,7 @@
        x="2242.2112"
        font-size="11"
        id="text16933"
-       style="font-size:12px;fill:#008000;display:inline;font-family:Arial">group editors</text>
+       style="font-size:12px;fill:#008000;display:inline;font-family:Arial">group collabs</text>
     <g
        transform="matrix(0.9990223,0,0,1,1771.0942,848.98128)"
        id="g16935"
@@ -19499,16 +19499,6 @@
        id="path5437"
        style="color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3.22371006;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        sodipodi:type="star"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <rect
-       style="color:#000000;fill:#ccffaa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
-       id="rect5446"
-       width="220.33809"
-       height="408.01724"
-       x="2460"
-       y="948.18896"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
@@ -25295,5 +25285,611 @@
            height="17.352015"
            width="121.27197"
            id="rect11997" /></flowRegion><flowPara
-         id="flowPara11999">more</flowPara></flowRoot>  </g>
+         id="flowPara11999">more</flowPara></flowRoot>    <rect
+       style="color:#000000;fill:#ccffaa;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       id="rect6027"
+       width="220.33809"
+       height="445.01724"
+       x="2507.8311"
+       y="990.18036"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="opacity:1;color:#000000;fill:#e5ffd5;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect6228"
+       width="165.76958"
+       height="131.7739"
+       x="2536.1152"
+       y="-1157.0759"
+       transform="scale(1,-1)" />
+    <rect
+       style="opacity:1;color:#000000;fill:#ffe6d5;fill-opacity:1;fill-rule:nonzero;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect6032"
+       width="129.09938"
+       height="18.569901"
+       x="2556.6606"
+       y="1043.7737" />
+    <text
+       id="text6034"
+       x="2547.0947"
+       y="1074.4509"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#225500;display:inline;font-family:Arial"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <tspan
+         id="tspan6036"
+         sodipodi:role="line"
+         x="2547.0947"
+         y="1074.4509">who more can edit:</tspan>
+    </text>
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       sodipodi:linespacing="125%"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#225500;display:inline;font-family:Arial"
+       y="1039.8596"
+       x="2548.6731"
+       id="text6038">
+      <tspan
+         y="1039.8596"
+         x="2548.6731"
+         sodipodi:role="line"
+         id="tspan6040">Who can admin this:</tspan>
+    </text>
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       sodipodi:linespacing="125%"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#225500;display:inline;font-family:Arial"
+       y="1123.475"
+       x="2547.0947"
+       id="text6042">
+      <tspan
+         y="1123.475"
+         x="2547.0947"
+         sodipodi:role="line"
+         id="tspan6044">who more can view:</tspan>
+    </text>
+    <image
+       style="display:inline"
+       xlink:href="/usr/share/icons/Tango/16x16/apps/browser.png"
+       sodipodi:absref="/usr/share/icons/Tango/16x16/apps/browser.png"
+       width="16"
+       height="16"
+       id="image6046"
+       x="2561.8271"
+       y="1126.6796"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/nobody.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <g
+       style="display:inline"
+       id="g6048"
+       transform="translate(371.18964,300.0025)">
+      <image
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/nobody.png"
+         y="798.40515"
+         x="2189.1494"
+         id="image6050"
+         height="16"
+         width="16"
+         sodipodi:absref="/usr/share/icons/Tango/16x16/apps/browser.png"
+         xlink:href="/usr/share/icons/Tango/16x16/apps/browser.png" />
+      <image
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/nobody.png"
+         xlink:href="/usr/share/icons/Tango/22x22/status/dialog-error.png"
+         sodipodi:absref="/usr/share/icons/Tango/22x22/status/dialog-error.png"
+         width="10.062655"
+         height="10.062655"
+         id="image6052"
+         x="2196.3354"
+         y="797.47827" />
+    </g>
+    <flowRoot
+       transform="translate(746.8903,612.19198)"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;color:#000000;fill:#225500;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial"
+       id="flowRoot6054"
+       xml:space="preserve"><flowRegion
+         id="flowRegion6056"><rect
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#225500;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial"
+           y="513.18896"
+           x="1837"
+           height="17.352015"
+           width="121.27197"
+           id="rect6059" /></flowRegion><flowPara
+         id="flowPara6061">anybody</flowPara></flowRoot>    <text
+       style="font-size:12px;fill:#008000;display:inline;font-family:Arial"
+       id="text6063"
+       font-size="11"
+       x="2582.1091"
+       y="1056.7615"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/desarrollo/redefinicion2005/sandbox/newUIdraftwithoutcomments-0.1.png"
+       inkscape:export-xdpi="71.000000"
+       inkscape:export-ydpi="71.000000">group admins</text>
+    <g
+       style="display:inline"
+       id="g6065"
+       transform="matrix(0.9990223,0,0,1,2110.9921,810.22241)">
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         sodipodi:type="arc"
+         style="color:#000000;fill:#eeaaff;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:1.63379204;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path6067"
+         sodipodi:cx="-55.5"
+         sodipodi:cy="242.36218"
+         sodipodi:rx="12.5"
+         sodipodi:ry="12"
+         d="M -43 242.36218 A 12.5 12 0 1 1  -68,242.36218 A 12.5 12 0 1 1  -43 242.36218 z"
+         transform="matrix(0.6,0,0,0.6249999,492.30736,91.885844)" />
+      <path
+         id="path6069"
+         d="M 459.00736,235.875 C 457.08757,235.875 455.15858,236.59879 453.69486,238.0625 C 450.78889,240.96847 450.76899,245.66144 453.63236,248.59375 C 453.22489,246.80976 453.74378,244.85733 455.13236,243.46875 C 457.27946,241.32165 460.73526,241.32165 462.88236,243.46875 C 464.27093,244.85733 464.78983,246.80976 464.38236,248.59375 C 467.24574,245.66143 467.22585,240.96847 464.31986,238.0625 C 462.85615,236.59879 460.92715,235.875 459.00736,235.875 z "
+         style="color:#000000;fill:#dbdee3;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:1.00048912;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         transform="matrix(0.1979899,0.1979899,-0.2062394,0.2062394,519.98096,202.36546)"
+         d="M -43 242.36218 A 12.5 12 0 1 1  -68,242.36218 A 12.5 12 0 1 1  -43 242.36218 z"
+         sodipodi:ry="12"
+         sodipodi:rx="12.5"
+         sodipodi:cy="242.36218"
+         sodipodi:cx="-55.5"
+         id="path6071"
+         style="color:#000000;fill:#ffe680;fill-opacity:1;fill-rule:nonzero;stroke:#784421;stroke-width:3.500983;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+    </g>
+    <flowRoot
+       transform="translate(747.30583,583.77625)"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;color:#000000;fill:#225500;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial"
+       id="flowRoot6073"
+       xml:space="preserve"
+       inkscape:transform-center-x="13.152172"
+       inkscape:transform-center-y="-5.6308594"><flowRegion
+         id="flowRegion6075"><rect
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#225500;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial"
+           y="513.18896"
+           x="1837"
+           height="17.352015"
+           width="121.27197"
+           id="rect6077" /></flowRegion><flowPara
+         id="flowPara6081">anybody</flowPara></flowRoot>    <rect
+       transform="scale(1,-1)"
+       y="-1251.2964"
+       x="2535.8848"
+       height="70.430435"
+       width="165.76958"
+       id="rect6084"
+       style="opacity:1;color:#000000;fill:#e5ffd5;fill-opacity:1;fill-rule:nonzero;stroke:#338000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <g
+       style="display:inline"
+       id="g6086"
+       transform="translate(377.9759,243.78732)">
+      <rect
+         y="991.16534"
+         x="2158.0103"
+         height="16.770695"
+         width="165.54318"
+         id="rect6088"
+         style="color:#000000;fill:#f4eed7;fill-opacity:1;fill-rule:nonzero;stroke:#338000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <image
+         xlink:href="/usr/share/icons/Tango/16x16/emblems/emblem-system.png"
+         sodipodi:absref="/usr/share/icons/Tango/16x16/emblems/emblem-system.png"
+         width="16"
+         height="16"
+         id="image6090"
+         x="2258.7495"
+         y="991.82117"
+         style="display:inline" />
+      <flowRoot
+         xml:space="preserve"
+         id="flowRoot6092"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#225500;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial"
+         transform="translate(437.72275,477.31599)"><flowRegion
+           id="flowRegion6094"><rect
+             id="rect6096"
+             width="121.27197"
+             height="17.352015"
+             x="1837"
+             y="513.18896"
+             style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#225500;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial" /></flowRegion><flowPara
+           id="flowPara6098">change</flowPara></flowRoot>    </g>
+    <rect
+       y="1174.9526"
+       x="2535.9863"
+       height="16.770695"
+       width="165.54318"
+       id="rect6100"
+       style="color:#000000;fill:#aade87;fill-opacity:1;fill-rule:nonzero;stroke:#338000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <rect
+       style="color:#000000;fill:#aade87;fill-opacity:1;fill-rule:nonzero;stroke:#338000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect6102"
+       width="165.54318"
+       height="16.770695"
+       x="2535.9863"
+       y="1009.9526" />
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       sodipodi:linespacing="125%"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#225500;display:inline;font-family:Arial"
+       y="1022.4684"
+       x="2557.6636"
+       id="text6104">
+      <tspan
+         y="1022.4684"
+         x="2557.6636"
+         sodipodi:role="line"
+         id="tspan6106">Permisions</tspan>
+    </text>
+    <rect
+       style="color:#000000;fill:#aade87;fill-opacity:1;fill-rule:nonzero;stroke:#338000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect6108"
+       width="165.54318"
+       height="16.770695"
+       x="2535.9863"
+       y="1251.468" />
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       sodipodi:linespacing="125%"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#225500;display:inline;font-family:Arial"
+       y="1263.0343"
+       x="2557.6167"
+       id="text6110">
+      <tspan
+         y="1263.0343"
+         x="2557.6167"
+         sodipodi:role="line"
+         id="tspan6112">Labels (5)</tspan>
+    </text>
+    <rect
+       y="1267.468"
+       x="2535.9863"
+       height="16.770695"
+       width="165.54318"
+       id="rect6114"
+       style="color:#000000;fill:#aade87;fill-opacity:1;fill-rule:nonzero;stroke:#338000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <text
+       id="text6116"
+       x="2557.9683"
+       y="1279.0343"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#225500;display:inline;font-family:Arial"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <tspan
+         id="tspan6118"
+         sodipodi:role="line"
+         x="2557.9683"
+         y="1279.0343">Comments (12)</tspan>
+    </text>
+    <rect
+       style="color:#000000;fill:#aade87;fill-opacity:1;fill-rule:nonzero;stroke:#338000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect6120"
+       width="165.54318"
+       height="16.770695"
+       x="2535.9863"
+       y="1283.468" />
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       sodipodi:linespacing="125%"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#225500;display:inline;font-family:Arial"
+       y="1295.0343"
+       x="2557.6577"
+       id="text6122">
+      <tspan
+         y="1295.0343"
+         x="2557.6577"
+         sodipodi:role="line"
+         id="tspan6124">Rate</tspan>
+    </text>
+    <rect
+       y="1299.468"
+       x="2535.9863"
+       height="16.770695"
+       width="165.54318"
+       id="rect6126"
+       style="color:#000000;fill:#aade87;fill-opacity:1;fill-rule:nonzero;stroke:#338000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <text
+       id="text6128"
+       x="2557.6167"
+       y="1311.0343"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#225500;display:inline;font-family:Arial"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <tspan
+         id="tspan6130"
+         sodipodi:role="line"
+         x="2557.6167"
+         y="1311.0343">Language</tspan>
+    </text>
+    <rect
+       y="1149.344"
+       x="2535.9863"
+       height="16.770695"
+       width="165.54318"
+       id="rect6135"
+       style="color:#000000;fill:#e6e6e6;fill-opacity:1;fill-rule:nonzero;stroke:#338000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <image
+       xlink:href="/usr/share/icons/Tango/16x16/emblems/emblem-system.png"
+       sodipodi:absref="/usr/share/icons/Tango/16x16/emblems/emblem-system.png"
+       width="16"
+       height="16"
+       id="image6137"
+       x="2636.7256"
+       y="1149.9998"
+       style="display:inline" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot6139"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#225500;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial"
+       transform="translate(815.69865,635.49464)"><flowRegion
+         id="flowRegion6141"><rect
+           id="rect6177"
+           width="121.27197"
+           height="17.352015"
+           x="1837"
+           y="513.18896"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#225500;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Arial" /></flowRegion><flowPara
+         id="flowPara6179">change</flowPara></flowRoot>    <text
+       id="text6181"
+       x="2557.6167"
+       y="1187.4684"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#225500;display:inline;font-family:Arial"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <tspan
+         id="tspan6183"
+         sodipodi:role="line"
+         x="2557.6167"
+         y="1187.4684">License</tspan>
+    </text>
+    <path
+       transform="matrix(1.5269836,0,0,0.8790278,161.23714,590.47566)"
+       d="M 1563.0192,677.96995 L 1559.716,672.3151 L 1566.2648,672.28185 L 1563.0192,677.96995 z "
+       inkscape:randomized="0"
+       inkscape:rounded="0"
+       inkscape:flatsided="true"
+       sodipodi:arg2="2.6129171"
+       sodipodi:arg1="1.5657195"
+       sodipodi:r2="0.90551758"
+       sodipodi:r1="3.7810335"
+       sodipodi:cy="674.18896"
+       sodipodi:cx="1563"
+       sodipodi:sides="3"
+       id="path6185"
+       style="color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.70422542;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       sodipodi:type="star" />
+    <path
+       sodipodi:type="star"
+       style="color:#000000;fill:#666666;fill-opacity:1;fill-rule:evenodd;stroke:#2b0000;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path6187"
+       sodipodi:sides="3"
+       sodipodi:cx="1563"
+       sodipodi:cy="674.18896"
+       sodipodi:r1="3.7810335"
+       sodipodi:r2="0.90551758"
+       sodipodi:arg1="1.5657195"
+       sodipodi:arg2="2.6129171"
+       inkscape:flatsided="true"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="M 1563.0192,677.96995 L 1559.716,672.3151 L 1566.2648,672.28185 L 1563.0192,677.96995 z "
+       transform="translate(987.18188,584.46015)" />
+    <path
+       transform="translate(987.18188,600.46015)"
+       d="M 1563.0192,677.96995 L 1559.716,672.3151 L 1566.2648,672.28185 L 1563.0192,677.96995 z "
+       inkscape:randomized="0"
+       inkscape:rounded="0"
+       inkscape:flatsided="true"
+       sodipodi:arg2="2.6129171"
+       sodipodi:arg1="1.5657195"
+       sodipodi:r2="0.90551758"
+       sodipodi:r1="3.7810335"
+       sodipodi:cy="674.18896"
+       sodipodi:cx="1563"
+       sodipodi:sides="3"
+       id="path6189"
+       style="color:#000000;fill:#666666;fill-opacity:1;fill-rule:evenodd;stroke:#2b0000;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       sodipodi:type="star" />
+    <path
+       sodipodi:type="star"
+       style="color:#000000;fill:#666666;fill-opacity:1;fill-rule:evenodd;stroke:#2b0000;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path6191"
+       sodipodi:sides="3"
+       sodipodi:cx="1563"
+       sodipodi:cy="674.18896"
+       sodipodi:r1="3.7810335"
+       sodipodi:r2="0.90551758"
+       sodipodi:arg1="1.5657195"
+       sodipodi:arg2="2.6129171"
+       inkscape:flatsided="true"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="M 1563.0192,677.96995 L 1559.716,672.3151 L 1566.2648,672.28185 L 1563.0192,677.96995 z "
+       transform="translate(987.18188,616.46015)" />
+    <path
+       transform="translate(987.18188,632.46015)"
+       d="M 1563.0192,677.96995 L 1559.716,672.3151 L 1566.2648,672.28185 L 1563.0192,677.96995 z "
+       inkscape:randomized="0"
+       inkscape:rounded="0"
+       inkscape:flatsided="true"
+       sodipodi:arg2="2.6129171"
+       sodipodi:arg1="1.5657195"
+       sodipodi:r2="0.90551758"
+       sodipodi:r1="3.7810335"
+       sodipodi:cy="674.18896"
+       sodipodi:cx="1563"
+       sodipodi:sides="3"
+       id="path6193"
+       style="color:#000000;fill:#666666;fill-opacity:1;fill-rule:evenodd;stroke:#2b0000;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       sodipodi:type="star" />
+    <rect
+       y="1079.7737"
+       x="2556.6606"
+       height="18.569901"
+       width="129.09938"
+       id="rect6195"
+       style="opacity:1;color:#000000;fill:#ffe6d5;fill-opacity:1;fill-rule:nonzero;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <text
+       inkscape:export-ydpi="71.000000"
+       inkscape:export-xdpi="71.000000"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/desarrollo/redefinicion2005/sandbox/newUIdraftwithoutcomments-0.1.png"
+       y="1092.7615"
+       x="2582.1091"
+       font-size="11"
+       id="text6197"
+       style="font-size:12px;fill:#008000;display:inline;font-family:Arial">group collabs</text>
+    <g
+       transform="matrix(0.9990223,0,0,1,2110.9921,846.22241)"
+       id="g6199"
+       style="display:inline">
+      <path
+         transform="matrix(0.6,0,0,0.6249999,492.30736,91.885844)"
+         d="M -43 242.36218 A 12.5 12 0 1 1  -68,242.36218 A 12.5 12 0 1 1  -43 242.36218 z"
+         sodipodi:ry="12"
+         sodipodi:rx="12.5"
+         sodipodi:cy="242.36218"
+         sodipodi:cx="-55.5"
+         id="path6201"
+         style="color:#000000;fill:#eeaaff;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:1.63379204;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+      <path
+         style="color:#000000;fill:#dbdee3;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:1.00048912;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         d="M 459.00736,235.875 C 457.08757,235.875 455.15858,236.59879 453.69486,238.0625 C 450.78889,240.96847 450.76899,245.66144 453.63236,248.59375 C 453.22489,246.80976 453.74378,244.85733 455.13236,243.46875 C 457.27946,241.32165 460.73526,241.32165 462.88236,243.46875 C 464.27093,244.85733 464.78983,246.80976 464.38236,248.59375 C 467.24574,245.66143 467.22585,240.96847 464.31986,238.0625 C 462.85615,236.59879 460.92715,235.875 459.00736,235.875 z "
+         id="path6203" />
+      <path
+         sodipodi:type="arc"
+         style="color:#000000;fill:#ffe680;fill-opacity:1;fill-rule:nonzero;stroke:#784421;stroke-width:3.500983;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path6205"
+         sodipodi:cx="-55.5"
+         sodipodi:cy="242.36218"
+         sodipodi:rx="12.5"
+         sodipodi:ry="12"
+         d="M -43 242.36218 A 12.5 12 0 1 1  -68,242.36218 A 12.5 12 0 1 1  -43 242.36218 z"
+         transform="matrix(0.1979899,0.1979899,-0.2062394,0.2062394,519.98096,202.36546)"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+    </g>
+    <path
+       transform="matrix(0,0.1659875,-0.2874988,0,2630.7519,847.78951)"
+       d="M 1040.0818,288.18896 L 1009.9591,305.58034 L 1009.9591,270.79759 L 1040.0818,288.18896 z "
+       inkscape:randomized="0"
+       inkscape:rounded="0"
+       inkscape:flatsided="true"
+       sodipodi:arg2="1.0471976"
+       sodipodi:arg1="0"
+       sodipodi:r2="10.040914"
+       sodipodi:r1="20.081829"
+       sodipodi:cy="288.18896"
+       sodipodi:cx="1020"
+       sodipodi:sides="3"
+       id="path6207"
+       style="color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3.22371006;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       sodipodi:type="star"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="color:#000000;fill:#aade87;fill-opacity:1;fill-rule:nonzero;stroke:#338000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect6209"
+       width="165.54318"
+       height="16.770695"
+       x="2535.9863"
+       y="1316.4176" />
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       sodipodi:linespacing="125%"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#225500;display:inline;font-family:Arial"
+       y="1327.9839"
+       x="2557.6167"
+       id="text6212">
+      <tspan
+         y="1327.9839"
+         x="2557.6167"
+         sodipodi:role="line"
+         id="tspan6214">Authors (3)</tspan>
+    </text>
+    <path
+       sodipodi:type="star"
+       style="color:#000000;fill:#666666;fill-opacity:1;fill-rule:evenodd;stroke:#2b0000;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path6216"
+       sodipodi:sides="3"
+       sodipodi:cx="1563"
+       sodipodi:cy="674.18896"
+       sodipodi:r1="3.7810335"
+       sodipodi:r2="0.90551758"
+       sodipodi:arg1="1.5657195"
+       sodipodi:arg2="2.6129171"
+       inkscape:flatsided="true"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="M 1563.0192,677.96995 L 1559.716,672.3151 L 1566.2648,672.28185 L 1563.0192,677.96995 z "
+       transform="translate(987.18188,649.40972)" />
+    <rect
+       y="1332.4176"
+       x="2535.9863"
+       height="16.770695"
+       width="165.54318"
+       id="rect6218"
+       style="color:#000000;fill:#aade87;fill-opacity:1;fill-rule:nonzero;stroke:#338000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <text
+       id="text6221"
+       x="2557.6167"
+       y="1343.9839"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#225500;display:inline;font-family:Arial"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-org-home-draft-def-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <tspan
+         id="tspan6223"
+         sodipodi:role="line"
+         x="2557.6167"
+         y="1343.9839">Date</tspan>
+    </text>
+    <path
+       transform="translate(987.18188,665.40972)"
+       d="M 1563.0192,677.96995 L 1559.716,672.3151 L 1566.2648,672.28185 L 1563.0192,677.96995 z "
+       inkscape:randomized="0"
+       inkscape:rounded="0"
+       inkscape:flatsided="true"
+       sodipodi:arg2="2.6129171"
+       sodipodi:arg1="1.5657195"
+       sodipodi:r2="0.90551758"
+       sodipodi:r1="3.7810335"
+       sodipodi:cy="674.18896"
+       sodipodi:cx="1563"
+       sodipodi:sides="3"
+       id="path6225"
+       style="color:#000000;fill:#666666;fill-opacity:1;fill-rule:evenodd;stroke:#2b0000;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       sodipodi:type="star" />
+  </g>
 </svg>

@@ -1,4 +1,5 @@
 2007-12-17 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* TextEditor & I18n
 	* Translation to English & Spanish
 	* User.java i18n fields not null
 	* Added TimeZone to User

@@ -22,6 +22,7 @@ package org.ourproject.kune.docs.client.cnt.reader.ui;
 
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderControlView;
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderListener;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.CustomPushButton;
 
 import com.google.gwt.user.client.ui.ClickListener;
@@ -32,7 +33,7 @@ public class DocumentReaderControlPanel extends HorizontalPanel implements Docum
     private final CustomPushButton editBtn;
 
     public DocumentReaderControlPanel(final DocumentReaderListener listener) {
-        editBtn = new CustomPushButton("Edit", new ClickListener() {
+        editBtn = new CustomPushButton(Kune.I18N.tWithNT("Edit", "in button"), new ClickListener() {
             public void onClick(final Widget sender) {
                 listener.onEdit();
             }

@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.workspace.client.editor;
 
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.CustomPushButton;
 import org.ourproject.kune.platf.client.ui.palette.ColorSelectListener;
 import org.ourproject.kune.platf.client.ui.palette.WebSafePalettePanel;
@@ -163,7 +164,6 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
             RichTextArea.FontSize.XX_LARGE };
 
     private final TextEditorImages images = (TextEditorImages) GWT.create(TextEditorImages.class);
-    private final TextEditorStrings strings = (TextEditorStrings) GWT.create(TextEditorStrings.class);
     private final EventListener listener = new EventListener();
 
     private final RichTextArea richText;
@@ -224,38 +224,39 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
         setStyleName("gwt-RichTextToolbar");
 
         if (basic != null) {
-            topPanel.add(bold = createToggleButton(images.bold(), strings.bold()));
-            topPanel.add(italic = createToggleButton(images.italic(), strings.italic()));
-            topPanel.add(underline = createToggleButton(images.underline(), strings.underline()));
+            topPanel.add(bold = createToggleButton(images.bold(), Kune.I18N.t("Toggle Bold")));
+            topPanel.add(italic = createToggleButton(images.italic(), Kune.I18N.t("Toggle Italic")));
+            topPanel.add(underline = createToggleButton(images.underline(), Kune.I18N.t("Toggle Underline")));
         }
 
         if (extended != null) {
-            topPanel.add(strikethrough = createToggleButton(images.strikeThrough(), strings.strikeThrough()));
+            topPanel
+                    .add(strikethrough = createToggleButton(images.strikeThrough(), Kune.I18N.t("Toggle Strikethrough")));
         }
 
         if (basic != null) {
-            topPanel.add(subscript = createToggleButton(images.subscript(), strings.subscript()));
-            topPanel.add(superscript = createToggleButton(images.superscript(), strings.superscript()));
-            topPanel.add(justifyLeft = createPushButton(images.justifyLeft(), strings.justifyLeft()));
-            topPanel.add(justifyCenter = createPushButton(images.justifyCenter(), strings.justifyCenter()));
-            topPanel.add(justifyRight = createPushButton(images.justifyRight(), strings.justifyRight()));
+            topPanel.add(subscript = createToggleButton(images.subscript(), Kune.I18N.t("Toggle Subscript")));
+            topPanel.add(superscript = createToggleButton(images.superscript(), Kune.I18N.t("Toggle Superscript")));
+            topPanel.add(justifyLeft = createPushButton(images.justifyLeft(), Kune.I18N.t("Left Justify")));
+            topPanel.add(justifyCenter = createPushButton(images.justifyCenter(), Kune.I18N.t("Center")));
+            topPanel.add(justifyRight = createPushButton(images.justifyRight(), Kune.I18N.t("Right Justify")));
         }
 
         if (extended != null) {
-            topPanel.add(indent = createPushButton(images.indent(), strings.indent()));
-            topPanel.add(outdent = createPushButton(images.outdent(), strings.outdent()));
-            topPanel.add(hr = createPushButton(images.hr(), strings.hr()));
-            topPanel.add(ol = createPushButton(images.ol(), strings.ol()));
-            topPanel.add(ul = createPushButton(images.ul(), strings.ul()));
-            topPanel.add(insertImage = createPushButton(images.insertImage(), strings.insertImage()));
-            topPanel.add(createLink = createPushButton(images.createLink(), strings.createLink()));
-            topPanel.add(removeLink = createPushButton(images.removeLink(), strings.removeLink()));
-            topPanel.add(removeFormat = createPushButton(images.removeFormat(), strings.removeFormat()));
+            topPanel.add(indent = createPushButton(images.indent(), Kune.I18N.t("Indent Right")));
+            topPanel.add(outdent = createPushButton(images.outdent(), Kune.I18N.t("Indent Left")));
+            topPanel.add(hr = createPushButton(images.hr(), Kune.I18N.t("Insert Horizontal Rule")));
+            topPanel.add(ol = createPushButton(images.ol(), Kune.I18N.t("Insert Ordered List")));
+            topPanel.add(ul = createPushButton(images.ul(), Kune.I18N.t("Insert Unordered List")));
+            topPanel.add(insertImage = createPushButton(images.insertImage(), Kune.I18N.t("Insert Image")));
+            topPanel.add(createLink = createPushButton(images.createLink(), Kune.I18N.t("Create Link")));
+            topPanel.add(removeLink = createPushButton(images.removeLink(), Kune.I18N.t("Remove Link")));
+            topPanel.add(removeFormat = createPushButton(images.removeFormat(), Kune.I18N.t("Remove Formatting")));
         }
 
         if (basic != null) {
-            topPanel.add(backColor = createPushButton(images.backcolor(), strings.backcolor()));
-            topPanel.add(fontColor = createPushButton(images.fontcolor(), strings.fontcolor()));
+            topPanel.add(backColor = createPushButton(images.backcolor(), Kune.I18N.t("Background Color")));
+            topPanel.add(fontColor = createPushButton(images.fontcolor(), Kune.I18N.t("Font Color")));
             topPanel.add(fonts = createFontsMenu());
             topPanel.add(fontSizes = createFontSizesMenu());
 
@@ -266,7 +267,7 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
             richText.addClickListener(listener);
         }
 
-        save = new CustomPushButton(strings.Save(), new ClickListener() {
+        save = new CustomPushButton(Kune.I18N.tWithNT("Save", "in button"), new ClickListener() {
             public void onClick(final Widget sender) {
                 if (save.isEnabled()) {
                     fireSave();
@@ -275,7 +276,7 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
         });
         save.addStyleName("kune-Button-Large-lSpace");
 
-        close = new CustomPushButton(strings.Close(), new ClickListener() {
+        close = new CustomPushButton(Kune.I18N.tWithNT("Close", "in button"), new ClickListener() {
             public void onClick(final Widget sender) {
                 if (close.isEnabled()) {
                     fireCancel();
@@ -286,7 +287,7 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
         close.addStyleName("kune-Button-Large-lrSpace");
 
         if (basic != null) {
-            topPanel.add(editHtml = createToggleButton(images.editHtml(), strings.EditHTML()));
+            topPanel.add(editHtml = createToggleButton(images.editHtml(), Kune.I18N.t("Edit HTML")));
         }
 
         topPanel.add(save);
@@ -344,7 +345,7 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
         MenuBar submenu = new MenuBar(true);
         String fontName[] = { "Times New Roman", "Arial", "Courier New", "Georgia", "Trebuchet", "Verdana" };
 
-        menu.setTitle(strings.fontType());
+        menu.setTitle(Kune.I18N.t("Font Type"));
         menu.addItem(images.charfontname().getHTML(), true, submenu);
         for (int i = 0; i < fontName.length; i++) {
             final String f = fontName[i];
@@ -363,10 +364,10 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
     private MenuBar createFontSizesMenu() {
         MenuBar menu = new MenuBar();
         MenuBar submenu = new MenuBar(true);
-        String fontSizes[] = { strings.ExtraSmall(), strings.VerySmall(), strings.Small(), strings.Medium(),
-                strings.Large(), strings.VeryLarge(), strings.ExtraLarge() };
+        String fontSizes[] = { Kune.I18N.t("Extra small"), Kune.I18N.t("Very small"), Kune.I18N.t("small"),
+                Kune.I18N.t("Medium"), Kune.I18N.t("Large"), Kune.I18N.t("Very large"), Kune.I18N.t("Extra large") };
 
-        menu.setTitle(strings.fontSize());
+        menu.setTitle(Kune.I18N.t("Font Size"));
         menu.addItem(images.fontheight().getHTML(), true, submenu);
         for (int i = 0; i < fontSizes.length; i++) {
             final String f = fontSizes[i];
