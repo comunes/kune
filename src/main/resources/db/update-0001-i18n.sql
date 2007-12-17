@@ -130,7 +130,7 @@ INSERT INTO `globalize_translations` VALUES (3549,'',NULL,1,'','Cambiar a admini
 INSERT INTO `globalize_translations` VALUES (3550,'',NULL,1,'','Aceptar este miembro/a','Accept this member','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (3551,'',NULL,1,'','No aceptar este miembro/a',"Don't accept this member",'kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (3552,'',NULL,1,'','Ayude a traducir kune a [%s]','Help to translate kune to [%s]','kune_core',5889);
-INSERT INTO `globalize_translations` VALUES (3553,'',NULL,1,'','Salvando','Saving','kune_core',5889);
+INSERT INTO `globalize_translations` VALUES (3553,'',NULL,1,'','Guardando','Saving','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (3554,'',NULL,1,'','Administra estos grupos','Administrate these groups [%NT talking about a person]','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (3555,'',NULL,1,'','y es colaborador/a en:','and as collaborator in:','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (3556,'',NULL,1,'','Excelente','Excellent','kune_core',5889);
