@@ -52,7 +52,7 @@ import com.wideplay.warp.persist.Transactional;
 @Singleton
 public class ContentRPC implements ContentService, RPC {
     private final StateService stateService;
-    private final UserSession session;
+    private final UserSession userSession;
     private final Mapper mapper;
     private final GroupManager groupManager;
     private final AccessService accessManager;
@@ -64,7 +64,7 @@ public class ContentRPC implements ContentService, RPC {
     public ContentRPC(final UserSession session, final AccessService contentAccess, final StateService stateService,
             final CreationService creationService, final GroupManager groupManager, final XmppManager xmppManager,
             final ContentManager contentManager, final Mapper mapper) {
-        this.session = session;
+        this.userSession = session;
         this.accessManager = contentAccess;
         this.stateService = stateService;
         this.creationService = creationService;
@@ -79,8 +79,8 @@ public class ContentRPC implements ContentService, RPC {
             AccessViolationException, GroupNotFoundException {
         Group contentGroup;
 
-        User user = session.getUser();
-        boolean userIsLoggedIn = session.isUserLoggedIn();
+        User user = userSession.getUser();
+        boolean userIsLoggedIn = userSession.isUserLoggedIn();
         if (userIsLoggedIn) {
             contentGroup = groupManager.getGroupOfUserWithId(user.getId());
         } else {
@@ -107,7 +107,7 @@ public class ContentRPC implements ContentService, RPC {
             throws AccessViolationException, ContentNotFoundException {
 
         final Long contentId = parseId(documentId);
-        final User user = session.getUser();
+        final User user = userSession.getUser();
         final Content content = accessManager.accessToContent(contentId, user, AccessType.EDIT);
         final Content descriptor = creationService.saveContent(user, content, textContent);
         return descriptor.getVersion();
@@ -118,7 +118,7 @@ public class ContentRPC implements ContentService, RPC {
     public StateDTO addContent(final String userHash, final Long parentFolderId, final String title)
             throws AccessViolationException, ContentNotFoundException {
 
-        final User user = session.getUser();
+        final User user = userSession.getUser();
         final Access access = accessManager.getFolderAccess(parentFolderId, user, AccessType.EDIT);
         access.setContentWidthFolderRights(creationService.createContent(title, user, access.getFolder()));
         final State state = stateService.create(access);
@@ -136,8 +136,9 @@ public class ContentRPC implements ContentService, RPC {
     @Transactional(type = TransactionType.READ_WRITE)
     public StateDTO addRoom(final String userHash, final String groupShortName, final Long parentFolderId,
             final String roomName) throws ContentNotFoundException, AccessViolationException, GroupNotFoundException {
-        final String userShortName = session.getUser().getShortName();
-        final ChatConnection connection = xmppManager.login(userShortName, session.getUser().getPassword(), userHash);
+        final String userShortName = userSession.getUser().getShortName();
+        final ChatConnection connection = xmppManager.login(userShortName, userSession.getUser().getPassword(),
+                userHash);
         xmppManager.createRoom(connection, roomName, userShortName + userHash);
         xmppManager.disconnect(connection);
         try {
@@ -158,10 +159,10 @@ public class ContentRPC implements ContentService, RPC {
     @Transactional(type = TransactionType.READ_WRITE)
     public void rateContent(final String userHash, final String documentId, final Double value)
             throws ContentNotFoundException, AccessViolationException {
-        User rater = session.getUser();
+        User rater = userSession.getUser();
         final Long contentId = parseId(documentId);
 
-        if (session.isUserLoggedIn()) {
+        if (userSession.isUserLoggedIn()) {
             contentManager.rateContent(rater, contentId, value);
         } else {
             throw new AccessViolationException();
@@ -179,11 +180,12 @@ public class ContentRPC implements ContentService, RPC {
 
     private StateDTO createFolder(final String groupShortName, final Long parentFolderId, final String title)
             throws AccessViolationException, ContentNotFoundException, GroupNotFoundException {
-        final User user = session.getUser();
+        final User user = userSession.getUser();
         final Group group = groupManager.findByShortName(groupShortName);
 
         Access access = accessManager.getFolderAccess(parentFolderId, user, AccessType.EDIT);
-        final Container container = creationService.createFolder(group, parentFolderId, title);
+
+        final Container container = creationService.createFolder(group, parentFolderId, title, user.getLanguage());
         final String toolName = container.getToolName();
         // Trying not to enter in new folder:
         // final StateToken token = new StateToken(group.getShortName(),

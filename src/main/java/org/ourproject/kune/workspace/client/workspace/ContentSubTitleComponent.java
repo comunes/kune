@@ -23,5 +23,11 @@ import org.ourproject.kune.platf.client.Component;
 
 public interface ContentSubTitleComponent extends Component {
 
-    void setContentSubTitle(String subTitle, String lang);
+    void setContentSubTitleLeft(String subTitle);
+
+    void setContentSubTitleRight(String subTitle);
+
+    void setContentSubTitleLeftVisible(boolean visible);
+
+    void setContentSubTitleRightVisible(boolean visible);
 }

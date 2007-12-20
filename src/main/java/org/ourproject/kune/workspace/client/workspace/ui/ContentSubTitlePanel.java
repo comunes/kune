@@ -30,50 +30,53 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class ContentSubTitlePanel extends HorizontalPanel implements ContentSubTitleView {
-    private final Label titleLabel;
-    private final Label languageLabel;
-    private final Label languageTitle;
+    private final Label subTitleLeftLabel;
+    private final Label subTitleRightLabel;
 
     public ContentSubTitlePanel(final ContentSubTitlePresenter presenter) {
 
-	titleLabel = new Label();
-	HorizontalPanel rigthHP = new HorizontalPanel();
-	languageTitle = new Label();
-	languageLabel = new Label();
+        subTitleLeftLabel = new Label();
+        HorizontalPanel rigthHP = new HorizontalPanel();
+        subTitleRightLabel = new Label();
 
-	add(titleLabel);
-	add(rigthHP);
-	rigthHP.add(languageTitle);
-	rigthHP.add(languageLabel);
+        add(subTitleLeftLabel);
+        add(rigthHP);
+        rigthHP.add(subTitleRightLabel);
 
-	setWidth("100%");
-	languageTitle.setText(Kune.I18N.t("Language:"));
-	titleLabel.addStyleName("kune-Margin-Large-l");
-	titleLabel.addStyleName("kune-ft15px");
-	languageLabel.addStyleName("kune-Margin-Large-r");
-	languageTitle.addStyleName("kune-ft12px");
-	languageLabel.addStyleName("kune-ft12px");
-	titleLabel.addStyleName("kune-ContentSubTitleBar-l");
- 	rigthHP.addStyleName("kune-ContentSubTitleBar-r");
-	setCellVerticalAlignment(rigthHP, VerticalPanel.ALIGN_MIDDLE);
-	rigthHP.setCellVerticalAlignment(titleLabel, VerticalPanel.ALIGN_MIDDLE);
-	rigthHP.setCellVerticalAlignment(languageTitle, VerticalPanel.ALIGN_MIDDLE);
-	rigthHP.setCellVerticalAlignment(languageLabel, VerticalPanel.ALIGN_MIDDLE);
+        setWidth("100%");
+        subTitleRightLabel.setText(Kune.I18N.t("Language:"));
+        subTitleLeftLabel.addStyleName("kune-Margin-Large-l");
+        subTitleLeftLabel.addStyleName("kune-ft15px");
+        subTitleLeftLabel.addStyleName("kune-ContentSubTitleBar-l");
+        subTitleRightLabel.addStyleName("kune-Margin-Large-r");
+        subTitleRightLabel.addStyleName("kune-ft12px");
+        rigthHP.addStyleName("kune-ContentSubTitleBar-r");
+        setCellVerticalAlignment(rigthHP, VerticalPanel.ALIGN_MIDDLE);
+        rigthHP.setCellVerticalAlignment(subTitleLeftLabel, VerticalPanel.ALIGN_MIDDLE);
+        rigthHP.setCellVerticalAlignment(subTitleRightLabel, VerticalPanel.ALIGN_MIDDLE);
     }
 
-    public void setContentSubTitle(final String title) {
-	titleLabel.setText(title);
+    public void setContentSubTitleLeft(final String subTitle) {
+        subTitleLeftLabel.setText(subTitle);
     }
 
-    public void setContentSubTitleLanguage(final String lang) {
-	languageLabel.setText(lang);
+    public void setContentSubTitleLeftVisible(final boolean visible) {
+        subTitleLeftLabel.setVisible(visible);
+    }
+
+    public void setContentSubTitleRight(final String subTitle) {
+        subTitleRightLabel.setText(subTitle);
+
+    }
+
+    public void setContentSubTitleRightVisible(final boolean visible) {
+        subTitleRightLabel.setVisible(visible);
     }
 
     public void setColors(final String background, final String textColor) {
-	DOM.setStyleAttribute(this.getElement(), "backgroundColor", background);
-	DOM.setStyleAttribute(titleLabel.getElement(), "color", textColor);
-	DOM.setStyleAttribute(languageTitle.getElement(), "color", textColor);
-	DOM.setStyleAttribute(languageLabel.getElement(), "color", textColor);
+        DOM.setStyleAttribute(this.getElement(), "backgroundColor", background);
+        DOM.setStyleAttribute(subTitleLeftLabel.getElement(), "color", textColor);
+        DOM.setStyleAttribute(subTitleRightLabel.getElement(), "color", textColor);
     }
 
 }

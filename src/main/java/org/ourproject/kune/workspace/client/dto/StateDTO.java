@@ -20,10 +20,14 @@
 
 package org.ourproject.kune.workspace.client.dto;
 
+import java.util.Date;
+import java.util.List;
+
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
@@ -49,6 +53,13 @@ public class StateDTO implements IsSerializable {
     private Double currentUserRate;
     private String typeId;
     private LicenseDTO license;
+    private I18nLanguageDTO language;
+    private Date publishedOn;
+
+    /**
+     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.UserDTO>
+     */
+    private List authors;
 
     public StateDTO() {
         this(null, null, null);
@@ -128,8 +139,7 @@ public class StateDTO implements IsSerializable {
         return new StateToken(group.getShortName(), toolName, folder.getId().toString(), getDocumentId());
     }
 
-    // FIXME: probablemente, un tag en el content indicando el tipo!!, darle una
-    // pensada a esto
+    // FIXME: maybe a tag in the content showing the type, think about this
     public boolean hasDocument() {
         return documentId != null;
     }
@@ -213,4 +223,29 @@ public class StateDTO implements IsSerializable {
     public void setRateable(final boolean isRateable) {
         this.isRateable = isRateable;
     }
+
+    public I18nLanguageDTO getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(final I18nLanguageDTO language) {
+        this.language = language;
+    }
+
+    public Date getPublishedOn() {
+        return publishedOn;
+    }
+
+    public void setPublishedOn(final Date publishedOn) {
+        this.publishedOn = publishedOn;
+    }
+
+    public List getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(final List authors) {
+        this.authors = authors;
+    }
+
 }

@@ -26,22 +26,27 @@ public class ContentSubTitlePresenter implements ContentSubTitleComponent {
     private ContentSubTitleView view;
 
     public void init(final ContentSubTitleView view) {
-	this.view = view;
+        this.view = view;
     }
 
-    public void setContentSubTitle(final String title, final String lang) {
-	if (title != null) {
-	    view.setContentSubTitle(title);
-	}
-	if (lang != null) {
-	    view.setContentSubTitleLanguage(lang);
-	} else {
-	    view.setContentSubTitleLanguage("");
-	}
+    public void setContentSubTitleLeft(final String subTitle) {
+        view.setContentSubTitleLeft(subTitle);
+    }
+
+    public void setContentSubTitleLeftVisible(final boolean visible) {
+        view.setContentSubTitleLeftVisible(visible);
+    }
+
+    public void setContentSubTitleRight(final String subTitle) {
+        view.setContentSubTitleRight(subTitle);
+    }
+
+    public void setContentSubTitleRightVisible(final boolean visible) {
+        view.setContentSubTitleRightVisible(visible);
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
 }

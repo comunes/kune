@@ -21,6 +21,7 @@
 package org.ourproject.kune.platf.server.domain;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -37,6 +38,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
+
+import org.hibernate.validator.NotNull;
 
 @Entity
 @Table(name = "contents")
@@ -60,11 +63,11 @@ public class Content implements HasStateToken {
     @OneToOne(cascade = { CascadeType.ALL })
     private Revision lastRevision;
 
-    @OneToOne
-    private Group creator;
-
     @Basic(optional = false)
     private Long createdOn;
+
+    @Basic(optional = false)
+    private Date publishedOn;
 
     // @Basic(optional = false)
     private String typeId;
@@ -75,6 +78,7 @@ public class Content implements HasStateToken {
     @ManyToOne
     private Container container;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     private I18nLanguage language;
 
@@ -86,6 +90,7 @@ public class Content implements HasStateToken {
 
     public Content() {
         translations = new ArrayList<ContentTranslation>();
+        authors = new ArrayList<User>();
         tags = new ArrayList<Tag>();
         this.createdOn = System.currentTimeMillis();
         this.lastRevision = new Revision();
@@ -148,20 +153,20 @@ public class Content implements HasStateToken {
         this.translations = translations;
     }
 
-    public Group getCreator() {
-        return creator;
-    }
-
-    public void setCreator(final Group creator) {
-        this.creator = creator;
-    }
-
     public Long getCreatedOn() {
         return createdOn;
     }
 
     public void setCreatedOn(final Long createdOn) {
         this.createdOn = createdOn;
+    }
+
+    public Date getPublishedOn() {
+        return publishedOn;
+    }
+
+    public void setPublishedOn(final Date publishedOn) {
+        this.publishedOn = publishedOn;
     }
 
     public Container getFolder() {
@@ -216,6 +221,14 @@ public class Content implements HasStateToken {
 
     public void setAuthors(final List<User> authors) {
         this.authors = authors;
+    }
+
+    public void addAuthor(final User user) {
+        this.authors.add(user);
+    }
+
+    public void removeAuthor(final User user) {
+        this.authors.remove(user);
     }
 
 }

@@ -20,6 +20,8 @@
 
 package org.ourproject.kune.platf.server.content;
 
+import java.util.Date;
+
 import javax.persistence.EntityManager;
 
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
@@ -48,7 +50,10 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
 
     public Content createContent(final String title, final User user, final Container container) {
         Content descriptor = new Content();
-        descriptor.setCreator(user.getUserGroup());
+        descriptor.addAuthor(user);
+        descriptor.setLanguage(user.getLanguage());
+        // FIXME: remove this when UI take publishing into account
+        descriptor.setPublishedOn(new Date());
         descriptor.setFolder(container);
         container.addContent(descriptor);
         Revision revision = new Revision();

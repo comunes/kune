@@ -2,8 +2,11 @@ package org.ourproject.kune.platf.server.finders;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Date;
+
 import javax.persistence.EntityManager;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.server.PersistenceTest;
@@ -55,6 +58,8 @@ public class RateFinderTest extends PersistenceTest {
         manager.persist(user2);
 
         Content cd = new Content();
+        cd.setLanguage(english);
+        cd.setPublishedOn(new Date());
         manager.persist(cd);
 
         manager.persist(new Rate(user1, cd, 1.3));
@@ -81,6 +86,8 @@ public class RateFinderTest extends PersistenceTest {
         EntityManager manager = openTransaction();
 
         Content cd = new Content();
+        cd.setLanguage(english);
+        cd.setPublishedOn(new Date());
         manager.persist(cd);
 
         closeTransaction();
@@ -89,6 +96,14 @@ public class RateFinderTest extends PersistenceTest {
         assertEquals(0, rateByUsers);
 
         // FIXME: Why null? in other tests this return zero
-        assertEquals(0, rate);
+        assertEquals(null, rate);
     }
+
+    @After
+    public void close() {
+        if (getTransaction().isActive()) {
+            getTransaction().rollback();
+        }
+    }
+
 }

@@ -1,4 +1,6 @@
 2007-12-20 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* Added lang, authors, publishedDate to Container
+	* More i18n small fixes
 	* src/main/resources/db/liquibase_changelog.xml: Added liquibase custom
 	rollbacks to i18n inserts
 	* Added lang to content and container

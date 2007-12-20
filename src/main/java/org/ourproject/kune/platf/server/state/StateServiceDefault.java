@@ -40,10 +40,14 @@ public class StateServiceDefault implements StateService {
             state.setTypeId(content.getTypeId());
             state.setDocumentId(documentId.toString());
             state.setIsRateable(true);
+            state.setLanguage(content.getLanguage());
+            state.setPublishedOn(content.getPublishedOn());
+            state.setAuthors(content.getAuthors());
         } else {
             state.setTypeId(container.getTypeId());
             state.setDocumentId(null);
             state.setIsRateable(false);
+            state.setLanguage(container.getLanguage());
         }
         final Data data = content.getLastRevision().getData();
         final char[] text = data.getContent();

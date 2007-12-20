@@ -33,38 +33,42 @@ public class ContentTitlePanel extends HorizontalPanel implements ContentTitleVi
     private final Label dateLabel;
 
     public ContentTitlePanel(final ContentTitlePresenter presenter) {
-	titleLabel = new Label();
-	HorizontalPanel rigthHP = new HorizontalPanel();
-	dateLabel = new Label();
+        titleLabel = new Label();
+        HorizontalPanel rigthHP = new HorizontalPanel();
+        dateLabel = new Label();
 
-	add(titleLabel);
-	add(rigthHP);
-	rigthHP.add(dateLabel);
+        add(titleLabel);
+        add(rigthHP);
+        rigthHP.add(dateLabel);
 
-	setWidth("100%");
-	titleLabel.addStyleName("kune-Margin-Large-l");
-	titleLabel.addStyleName("kune-ft17px");
-	dateLabel.addStyleName("kune-Margin-Large-r");
-	dateLabel.addStyleName("kune-ft12px");
-	titleLabel.addStyleName("kune-ContentTitleBar-l");
-	rigthHP.addStyleName("kune-ContentTitleBar-r");
-	setCellVerticalAlignment(titleLabel, VerticalPanel.ALIGN_MIDDLE);
-	setCellVerticalAlignment(rigthHP, VerticalPanel.ALIGN_MIDDLE);
-	rigthHP.setCellVerticalAlignment(dateLabel, VerticalPanel.ALIGN_MIDDLE);
+        setWidth("100%");
+        titleLabel.addStyleName("kune-Margin-Large-l");
+        titleLabel.addStyleName("kune-ft17px");
+        dateLabel.addStyleName("kune-Margin-Large-r");
+        dateLabel.addStyleName("kune-ft12px");
+        titleLabel.addStyleName("kune-ContentTitleBar-l");
+        rigthHP.addStyleName("kune-ContentTitleBar-r");
+        setCellVerticalAlignment(titleLabel, VerticalPanel.ALIGN_MIDDLE);
+        setCellVerticalAlignment(rigthHP, VerticalPanel.ALIGN_MIDDLE);
+        rigthHP.setCellVerticalAlignment(dateLabel, VerticalPanel.ALIGN_MIDDLE);
     }
 
     public void setContentTitle(final String title) {
-	titleLabel.setText(title);
+        titleLabel.setText(title);
     }
 
     public void setContentDate(final String date) {
-	dateLabel.setText(date);
+        dateLabel.setText(date);
     }
 
     public void setColors(final String background, final String textColor) {
-	DOM.setStyleAttribute(this.getElement(), "backgroundColor", background);
-	DOM.setStyleAttribute(titleLabel.getElement(), "color", textColor);
-	DOM.setStyleAttribute(dateLabel.getElement(), "color", textColor);
+        DOM.setStyleAttribute(this.getElement(), "backgroundColor", background);
+        DOM.setStyleAttribute(titleLabel.getElement(), "color", textColor);
+        DOM.setStyleAttribute(dateLabel.getElement(), "color", textColor);
     }
 
+    public void setDateVisible(final boolean visible) {
+        dateLabel.setVisible(visible);
+
+    }
 }

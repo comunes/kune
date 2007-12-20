@@ -1,0 +1,10 @@
+INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Edit','Edit [%NT in button]','kune_core',1819);
+INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','by: [%s]','by: [%s] [%NT used in a list of authors]','kune_core',1819);
+INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Language: [%s]','Language: [%s]','kune_core',1819);
+INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Sign in or register to help with translation','Sign in or register to help with translation','kune_core',1819);
+INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Editar','Edit [%NT in button]','kune_core',5889);
+INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','por: [%s]','by: [%s] [%NT used in a list of authors]','kune_core',5889);
+INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Idioma: [%s]','Language: [%s]','kune_core',5889);
+INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Accede o registrate para ayudar con la traducción','Sign in or register to help with translation','kune_core',5889);
+INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Published on: [%s]','Published on: [%s]','kune_core',1819);
+INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Publicado el: [%s]','Published on: [%s]','kune_core',5889);

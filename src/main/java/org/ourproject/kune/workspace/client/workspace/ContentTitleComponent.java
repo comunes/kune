@@ -23,6 +23,10 @@ import org.ourproject.kune.platf.client.Component;
 
 public interface ContentTitleComponent extends Component {
 
-    void setContentTitle(String title, String date);
+    void setContentTitle(String title);
+
+    void setContentDate(String date);
+
+    void setContentDateVisible(boolean visible);
 
 }

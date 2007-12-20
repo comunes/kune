@@ -69,7 +69,7 @@ import com.gwtext.client.widgets.layout.LayoutRegionConfig;
 public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslatorView {
 
     private static final String ALERT_IMAGE_HTML = Images.App.getInstance().alert().getHTML();
-    private static final String TRANSLATION_NOTE_REGEXP = " (\\[)%NT (.*)(\\])$";
+
     private final LayoutDialog dialog;
     private final I18nTranslatorPresenter presenter;
     private Store store;
@@ -279,7 +279,7 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
     }
 
     private String removeNT(final String string) {
-        return string.replaceAll(TRANSLATION_NOTE_REGEXP, "");
+        return Kune.I18N.removeNT(string);
     }
 
     private String[] splitNT(final String textWithNT) {

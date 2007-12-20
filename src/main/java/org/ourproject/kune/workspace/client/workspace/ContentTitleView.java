@@ -27,4 +27,6 @@ public interface ContentTitleView extends View {
 
     void setContentDate(String date);
 
+    void setDateVisible(boolean visible);
+
 }

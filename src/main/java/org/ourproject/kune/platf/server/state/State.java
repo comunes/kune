@@ -20,10 +20,14 @@
 
 package org.ourproject.kune.platf.server.state;
 
+import java.util.Date;
+import java.util.List;
+
 import org.ourproject.kune.platf.server.access.AccessRights;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.License;
 
 public class State {
@@ -43,6 +47,9 @@ public class State {
     private Double currentUserRate;
     private String typeId;
     private License license;
+    private I18nLanguage language;
+    private List authors;
+    private Date publishedOn;
 
     public State() {
     }
@@ -181,6 +188,30 @@ public class State {
 
     public void setIsRateable(final boolean isRateable) {
         this.isRateable = isRateable;
+    }
+
+    public I18nLanguage getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(final I18nLanguage language) {
+        this.language = language;
+    }
+
+    public Date getPublishedOn() {
+        return publishedOn;
+    }
+
+    public void setPublishedOn(final Date publishedOn) {
+        this.publishedOn = publishedOn;
+    }
+
+    public List getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(final List authors) {
+        this.authors = authors;
     }
 
 }

@@ -23,6 +23,7 @@ package org.ourproject.kune.platf.client.state;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.AlreadyGroupMemberException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
@@ -33,11 +34,14 @@ import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
+import org.ourproject.kune.workspace.client.workspace.ContentSubTitleComponent;
+import org.ourproject.kune.workspace.client.workspace.ContentTitleComponent;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 import to.tipit.gwtlib.FireLog;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -121,8 +125,29 @@ public class StateManagerDefault implements StateManager {
 
         final ClientTool clientTool = app.getTool(toolName);
         clientTool.setContent(state);
-        workspace.getContentTitleComponent().setContentTitle(state.getTitle(), "11/06/07");
-        workspace.getContentSubTitleComponent().setContentSubTitle("by Luther Blissett, Luther Blissett Jr", "English");
+        ContentTitleComponent contentTitleComponent = workspace.getContentTitleComponent();
+        ContentSubTitleComponent contentSubTitleComponent = workspace.getContentSubTitleComponent();
+        contentTitleComponent.setContentTitle(state.getTitle());
+        if (state.hasDocument()) {
+            contentTitleComponent.setContentDateVisible(true);
+            DateTimeFormat.getFullDateTimeFormat();
+
+            contentTitleComponent.setContentDate(Kune.I18N.t("Published on: [%s]", state.getPublishedOn().toString()));
+            contentSubTitleComponent.setContentSubTitleLeft(Kune.I18N.tWithNT("by: [%s]", "used in a list of authors",
+                    ((UserDTO) state.getAuthors().get(0)).getName()));
+            contentSubTitleComponent.setContentSubTitleLeftVisible(true);
+        } else {
+            contentTitleComponent.setContentDateVisible(false);
+            contentSubTitleComponent.setContentSubTitleLeftVisible(false);
+        }
+        if (state.getLanguage() != null) {
+            contentSubTitleComponent.setContentSubTitleRight(Kune.I18N.t("Language: [%s]", state.getLanguage()
+                    .getEnglishName()));
+            contentSubTitleComponent.setContentSubTitleRightVisible(true);
+        } else {
+            contentSubTitleComponent.setContentSubTitleRightVisible(false);
+        }
+
         workspace.getContentBottomToolBarComponent().setRate(state.isRateable(), session.isLogged(), state.getRate(),
                 state.getRateByUsers(), state.getCurrentUserRate());
         workspace.setContent(clientTool.getContent());

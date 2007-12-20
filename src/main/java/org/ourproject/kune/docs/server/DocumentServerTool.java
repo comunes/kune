@@ -46,41 +46,43 @@ public class DocumentServerTool implements ServerTool {
 
     @Inject
     public DocumentServerTool(final ContentManager contentManager, final ContainerManager containerManager,
-	    final ToolConfigurationManager configurationManager) {
-	this.contentManager = contentManager;
-	this.containerManager = containerManager;
-	this.configurationManager = configurationManager;
+            final ToolConfigurationManager configurationManager) {
+        this.contentManager = contentManager;
+        this.containerManager = containerManager;
+        this.configurationManager = configurationManager;
     }
 
     @Inject
     public void register(final ToolRegistry registry) {
-	registry.register(this);
+        registry.register(this);
     }
 
     public String getName() {
-	return NAME;
+        return NAME;
     }
 
     public void onCreateContainer(final Container container, final Container parent) {
-	container.setTypeId(TYPE_FOLDER);
+        container.setTypeId(TYPE_FOLDER);
     }
 
     public void onCreateContent(final Content content, final Container parent) {
-	content.setTypeId(TYPE_DOCUMENT);
+        content.setTypeId(TYPE_DOCUMENT);
     }
 
     public Group initGroup(final User user, final Group group) {
-	ToolConfiguration config = new ToolConfiguration();
-	// i18n: docs (ROOT_NAME)
-	Container container = containerManager.createRootFolder(group, NAME, ROOT_NAME, TYPE_ROOT);
-	config.setRoot(container);
-	group.setToolConfig(NAME, config);
-	configurationManager.persist(config);
-	// i18n
-	Content descriptor = contentManager.createContent("Home", user, container);
-	descriptor.setTypeId(TYPE_DOCUMENT);
-	group.setDefaultContent(descriptor);
-	return group;
+        ToolConfiguration config = new ToolConfiguration();
+        // i18n: docs (ROOT_NAME)
+        Container container = containerManager.createRootFolder(group, NAME, ROOT_NAME, TYPE_ROOT);
+        config.setRoot(container);
+        group.setToolConfig(NAME, config);
+        configurationManager.persist(config);
+        // i18n
+        Content descriptor = contentManager.createContent("Home", user, container);
+        descriptor.addAuthor(user);
+        descriptor.setLanguage(user.getLanguage());
+        descriptor.setTypeId(TYPE_DOCUMENT);
+        group.setDefaultContent(descriptor);
+        return group;
     }
 
 }

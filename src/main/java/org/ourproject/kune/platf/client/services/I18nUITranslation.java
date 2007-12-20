@@ -36,6 +36,7 @@ import to.tipit.gwtlib.FireLog;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class I18nUITranslation {
+    private static final String TRANSLATION_NOTE_REGEXP = " (\\[)%NT (.*)(\\])$";
     private static final String NOTE_FOR_TRANSLATOR_TAG_BEGIN = " [%NT ";
     private static final String NOTE_FOR_TRANSLATOR_TAG_END = "]";
     // Also in I18nTranslation
@@ -106,13 +107,13 @@ public class I18nUITranslation {
         if (lexicon.containsKey(encodeText)) {
             if (translation == UNTRANSLATED_VALUE) {
                 // Not translated but in db, return text
-                translation = encodeText;
+                translation = removeNT(encodeText);
             }
         } else {
             // Not translated and not in db, make a petition for translation
             DefaultDispatcher.getInstance().fireDeferred(WorkspaceEvents.GET_TRANSLATION, this.currentLanguage, text);
             FireLog.debug("Registering in db '" + text + "' as pending translation");
-            translation = encodeText;
+            translation = removeNT(encodeText);
             lexicon.put(encodeText, UNTRANSLATED_VALUE);
         }
         return decodeHtml(translation);
@@ -203,6 +204,10 @@ public class I18nUITranslation {
         if (i18nChangeListeners != null) {
             i18nChangeListeners.remove(listener);
         }
+    }
+
+    public String removeNT(final String string) {
+        return string.replaceAll(TRANSLATION_NOTE_REGEXP, "");
     }
 
     private void fireI18nLanguageChange() {

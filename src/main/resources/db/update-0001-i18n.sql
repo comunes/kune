@@ -76,7 +76,7 @@ INSERT INTO `globalize_translations` VALUES (3495,'',NULL,1,'','Search users','S
 INSERT INTO `globalize_translations` VALUES (3496,'',NULL,1,'','Search groups','Search groups','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (3497,'',NULL,1,'','documentos','documents','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (3498,'',NULL,1,'','salas de chat','chat rooms','kune_core',5889);
-INSERT INTO `globalize_translations` VALUES (3499,'',NULL,1,'','Puntua:','Rate it:','kune_core',5889);
+INSERT INTO `globalize_translations` VALUES (3499,'',NULL,1,'','Puntue:','Rate it:','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (3500,'',NULL,1,'','Administradoræs','Admins','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (3501,'',NULL,1,'','Idioma:','Language:','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (3502,'',NULL,1,'','Pendiente','Pending','kune_core',5889);

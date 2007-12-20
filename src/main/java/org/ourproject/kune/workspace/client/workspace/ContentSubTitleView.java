@@ -23,7 +23,11 @@ import org.ourproject.kune.platf.client.View;
 
 public interface ContentSubTitleView extends View {
 
-    void setContentSubTitle(String title);
+    void setContentSubTitleLeft(String subTitle);
 
-    void setContentSubTitleLanguage(String lang);
+    void setContentSubTitleRight(String subTitle);
+
+    void setContentSubTitleLeftVisible(boolean visible);
+
+    void setContentSubTitleRightVisible(boolean visible);
 }
