@@ -20,6 +20,8 @@
 
 package org.ourproject.kune.platf.server.rpc;
 
+import java.util.UUID;
+
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.UserAuthException;
@@ -98,7 +100,7 @@ public class UserRPC implements RPC, UserService {
     private UserInfoDTO loginUser(final User user) throws SerializableException {
         if (user != null) {
             // Maybe use terracotta.org for http session clustering
-            userSession.login(user, "FIXME_HERE_GENERATE_ANOTHER_USER_SESSION_ID"); // getHttpSession().getId());
+            userSession.login(user, UUID.randomUUID().toString());
             return loadUserInfo(user);
         } else {
             throw new UserAuthException();

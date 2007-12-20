@@ -65,4 +65,10 @@
       encoding="utf8" stripComments="1" />
     <rollback>DELETE FROM globalize_translations WHERE id BETWEEN 3739 AND 3746;</rollback>
   </changeSet>
+  <changeSet id="9" author="vjrj">
+    <comment>English and spanish translations (continuation)</comment>
+    <sqlFile path="src/main/resources/db/update-0005-i18n.sql"
+      encoding="utf8" stripComments="1" />
+    <rollback>DELETE FROM globalize_translations WHERE id BETWEEN 3747 AND 3768;</rollback>
+  </changeSet>
 </databaseChangeLog>

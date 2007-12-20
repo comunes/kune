@@ -23,6 +23,8 @@ continue with the client search dialog
 
 MIND-TERM:
 --------------------------------------------------------------------------------
+<vjrj> Strip html better in RTE, I18nTranslator, Chat
+  http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/b4a27c80f50581cc
 <vjrj> Clean /scrits/ directory
 <vjrj> apply csstidy to css, again
 --> vjrj

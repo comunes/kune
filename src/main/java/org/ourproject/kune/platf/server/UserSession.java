@@ -64,7 +64,7 @@ public class UserSession {
         userId = user.getId();
     }
 
-    public void setHash(final String hash) {
+    private void setHash(final String hash) {
         this.userHash = hash;
     }
 

@@ -19,6 +19,8 @@
 
 package org.ourproject.kune.workspace.client.actions;
 
+import java.util.Date;
+
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.sitebar.client.Site;
@@ -29,12 +31,16 @@ import com.google.gwt.user.client.History;
 public class LoggedOutAction implements Action {
 
     public void execute(final Object value, final Object extra, final Services services) {
+        // FIXME: Remove cookie doesn't works in all browsers, know issue:
+        // http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/ded86778ee56690/515dc513c7d085eb?lnk=st&q=remove+cookie#515dc513c7d085eb
+        // http://code.google.com/p/google-web-toolkit/issues/detail?id=1735&q=removeCookie
+        Cookies.removeCookie("userHash");
+        // Workaround:
+        Cookies.setCookie("userHash", null, new Date(0), null, "/", false);
+        services.session.userHash = null;
         Site.sitebar.showLoggedUser(null);
         String token = History.getToken();
         services.stateManager.onHistoryChanged(token);
         services.stateManager.reloadSocialNetwork();
-        Cookies.removeCookie("userHash");
-        services.session.userHash = null;
     }
-
 }

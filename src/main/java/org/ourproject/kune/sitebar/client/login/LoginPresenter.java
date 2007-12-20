@@ -69,7 +69,7 @@ public class LoginPresenter implements Login, MessagePresenter {
                     try {
                         throw caught;
                     } catch (final UserAuthException e) {
-                        setMessage(Kune.I18N.t("Incorrect username/email or password"), SiteMessage.ERROR);
+                        setMessage(Kune.I18N.t("Incorrect nickname/email or password"), SiteMessage.ERROR);
                     } catch (final Throwable e) {
                         setMessage("Error in login", SiteMessage.ERROR);
                         GWT.log("Other kind of exception in LoginFormPresenter/doLogin", null);

@@ -40,8 +40,9 @@ class KuneApplicationListener implements ApplicationListener {
         // Also we need the sessionId when the client application is already
         // running (for instance if we restart the server)
 
-        String userSessionId = request.getSession().getId();
-        userSession.setHash(userSessionId);
+        // String userSessionId = request.getSession().getId();
+        // userSession.setHash(userSessionId);
+
         userSession.setBrowserLanguage(request.getLocale().getLanguage());
         // TODO: think about: httpServletResponse.sendRedirect(locale) ???
     }

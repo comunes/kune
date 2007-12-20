@@ -22,8 +22,13 @@ package org.ourproject.kune.platf.server.mapper;
 
 import java.util.List;
 
+import org.ourproject.kune.platf.client.dto.SearchResultDTO;
+import org.ourproject.kune.platf.server.manager.impl.DefaultManager.SearchResult;
+
 public interface Mapper {
     <T> T map(Object source, Class<T> type);
 
     <T> List<T> mapList(List<?> list, Class<T> type);
+
+    <T> SearchResultDTO mapSearchResult(SearchResult result, Class<T> type);
 }
