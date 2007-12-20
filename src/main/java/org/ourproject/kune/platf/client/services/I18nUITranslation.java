@@ -53,6 +53,7 @@ public class I18nUITranslation {
             // If locale parameter exist, use it
             String[] localeSplitted = locale.split("_");
             currentLanguage = localeSplitted[0];
+            callback.onSuccess(currentLanguage);
         } else {
             I18nServiceAsync server = I18nService.App.getInstance();
             server.getInitialLanguage(callback);
