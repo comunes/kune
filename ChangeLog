@@ -1,4 +1,7 @@
 2007-12-20 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* src/main/resources/db/liquibase_changelog.xml: Added liquibase custom
+	rollbacks to i18n inserts
+	* Added lang to content and container
 	* Added browser lang recognition and UI init language takes account of this
 	and also the user lang if is logged
 
