@@ -27,6 +27,7 @@ import org.ourproject.kune.docs.client.DocsClientModule;
 import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.app.ApplicationBuilder;
 import org.ourproject.kune.platf.client.services.I18nUITranslation;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.workspace.client.WorkspaceClientModule;
 
 import to.tipit.gwtlib.FireLog;
@@ -43,18 +44,26 @@ public class KuneEntryPoint implements EntryPoint {
     public void onModuleLoad() {
         final String userHash = Cookies.getCookie("userHash");
         FireLog.debug("UserHash: " + userHash);
-        I18nUITranslation.getInstance().init(new AsyncCallback() {
+        Kune.I18N.getInitialLanguage(new AsyncCallback() {
             public void onFailure(final Throwable caught) {
                 FireLog.debug("Workspace adaptation to your language failed");
             }
 
             public void onSuccess(final Object result) {
-                I18nUITranslation.getInstance().setLexicon((HashMap) result);
-                KunePlatform platform = new KunePlatform();
-                platform.install(new WorkspaceClientModule());
-                platform.install(new DocsClientModule());
-                platform.install(new ChatClientModule());
-                new ApplicationBuilder(platform).build(userHash);
+                Kune.I18N.getInitialLexicon((String) result, new AsyncCallback() {
+                    public void onFailure(final Throwable caught) {
+                        FireLog.debug("Workspace adaptation to your language failed");
+                    }
+
+                    public void onSuccess(final Object result) {
+                        I18nUITranslation.getInstance().setLexicon((HashMap) result);
+                        KunePlatform platform = new KunePlatform();
+                        platform.install(new WorkspaceClientModule());
+                        platform.install(new DocsClientModule());
+                        platform.install(new ChatClientModule());
+                        new ApplicationBuilder(platform).build(userHash);
+                    }
+                });
             }
         });
     }

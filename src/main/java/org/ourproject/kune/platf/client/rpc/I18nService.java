@@ -28,6 +28,8 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 public interface I18nService extends RemoteService {
 
+    String getInitialLanguage();
+
     /**
      * @gwt.typeArgs <java.lang.String,java.lang.String>
      */

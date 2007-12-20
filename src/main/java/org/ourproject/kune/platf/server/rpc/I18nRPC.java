@@ -24,6 +24,7 @@ import java.util.HashMap;
 
 import org.ourproject.kune.platf.client.rpc.I18nService;
 import org.ourproject.kune.platf.server.UserSession;
+import org.ourproject.kune.platf.server.domain.I18nTranslation;
 import org.ourproject.kune.platf.server.manager.I18nTranslationManager;
 
 import com.google.gwt.user.client.rpc.SerializableException;
@@ -35,10 +36,28 @@ import com.wideplay.warp.persist.Transactional;
 @Singleton
 public class I18nRPC implements RPC, I18nService {
     private final I18nTranslationManager i18nTranslationManager;
+    private final UserSession userSession;
 
     @Inject
-    public I18nRPC(final UserSession session, final I18nTranslationManager i18nTranslationManager) {
+    public I18nRPC(final UserSession userSession, final I18nTranslationManager i18nTranslationManager) {
+        this.userSession = userSession;
         this.i18nTranslationManager = i18nTranslationManager;
+    }
+
+    @Transactional(type = TransactionType.READ_ONLY)
+    public String getInitialLanguage() {
+        String initLanguage;
+        if (userSession.isUserLoggedIn()) {
+            initLanguage = userSession.getUser().getLanguage().getCode();
+        } else {
+            if (userSession.getBrowserLanguage() != null) {
+                // Not logged, use browser language if possible
+                initLanguage = userSession.getBrowserLanguage();
+            } else {
+                initLanguage = I18nTranslation.DEFAULT_LANG;
+            }
+        }
+        return initLanguage;
     }
 
     @Transactional(type = TransactionType.READ_ONLY)

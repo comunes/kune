@@ -39,7 +39,6 @@ public class I18nUITranslation {
     private static final String NOTE_FOR_TRANSLATOR_TAG_BEGIN = " [%NT ";
     private static final String NOTE_FOR_TRANSLATOR_TAG_END = "]";
     // Also in I18nTranslation
-    private static final String DEFAULT_LANG = "en";
     private static final String UNTRANSLATED_VALUE = null;
 
     private static I18nUITranslation instance;
@@ -47,14 +46,21 @@ public class I18nUITranslation {
     private String currentLanguage;
     private I18nChangeListenerCollection i18nChangeListeners;
 
-    public void init(final AsyncCallback callback) {
-        currentLanguage = DEFAULT_LANG;
+    public void getInitialLanguage(final AsyncCallback callback) {
         Location loc = WindowUtils.getLocation();
         String locale = loc.getParameter("locale");
         if (locale != null) {
+            // If locale parameter exist, use it
             String[] localeSplitted = locale.split("_");
             currentLanguage = localeSplitted[0];
+        } else {
+            I18nServiceAsync server = I18nService.App.getInstance();
+            server.getInitialLanguage(callback);
         }
+    }
+
+    public void getInitialLexicon(final String initLanguage, final AsyncCallback callback) {
+        currentLanguage = initLanguage;
         I18nServiceAsync server = I18nService.App.getInstance();
         server.getLexicon(currentLanguage, callback);
     }
@@ -203,4 +209,5 @@ public class I18nUITranslation {
             i18nChangeListeners.fireI18nLanguageChange();
         }
     }
+
 }

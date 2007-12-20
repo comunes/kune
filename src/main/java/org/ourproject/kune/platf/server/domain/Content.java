@@ -26,6 +26,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -69,19 +70,22 @@ public class Content implements HasStateToken {
     private String typeId;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Translation> translations;
+    private List<ContentTranslation> translations;
 
     @ManyToOne
     private Container container;
 
-    // TODO: lang, languages, etc
-    private String locale;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private I18nLanguage language;
 
     @OneToOne(cascade = CascadeType.ALL)
     private AccessLists accessLists;
 
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    private List<User> authors;
+
     public Content() {
-        translations = new ArrayList<Translation>();
+        translations = new ArrayList<ContentTranslation>();
         tags = new ArrayList<Tag>();
         this.createdOn = System.currentTimeMillis();
         this.lastRevision = new Revision();
@@ -102,14 +106,6 @@ public class Content implements HasStateToken {
 
     public void setVersion(final int version) {
         this.version = version;
-    }
-
-    public String getLocale() {
-        return locale;
-    }
-
-    public void setLocale(final String locale) {
-        this.locale = locale;
     }
 
     public AccessLists getAccessLists() {
@@ -144,11 +140,11 @@ public class Content implements HasStateToken {
         this.lastRevision = revision;
     }
 
-    public List<Translation> getTranslations() {
+    public List<ContentTranslation> getTranslations() {
         return translations;
     }
 
-    public void setTranslations(final List<Translation> translations) {
+    public void setTranslations(final List<ContentTranslation> translations) {
         this.translations = translations;
     }
 
@@ -201,9 +197,25 @@ public class Content implements HasStateToken {
         return accessLists != null;
     }
 
+    public I18nLanguage getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(final I18nLanguage language) {
+        this.language = language;
+    }
+
     public String getStateToken() {
         return getFolder().getOwner().getShortName() + TOKEN_SEPARATOR + getFolder().getToolName() + TOKEN_SEPARATOR
                 + getFolder().getId() + TOKEN_SEPARATOR + getId();
+    }
+
+    public List<User> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(final List<User> authors) {
+        this.authors = authors;
     }
 
 }

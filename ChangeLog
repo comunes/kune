@@ -1,3 +1,7 @@
+2007-12-20 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* Added browser lang recognition and UI init language takes account of this
+	and also the user lang if is logged
+
 2007-12-17 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* TextEditor & I18n
 	* Translation to English & Spanish

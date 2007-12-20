@@ -10,3 +10,4 @@
   <table-filter match-name="globalize_translations"
     match-catalog="kune_test" />
 </hibernate-reverse-engineering>
+
