@@ -20,7 +20,7 @@
 
 package org.ourproject.kune.sitebar.client.rpc;
 
-import org.ourproject.kune.platf.client.dto.LicenseDTO;
+import org.ourproject.kune.platf.client.dto.UserCompleteDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 
 import com.google.gwt.core.client.GWT;
@@ -30,15 +30,11 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 public interface UserService extends RemoteService {
 
-    // FIXME: Vicente, userHash
     UserInfoDTO login(String nickOrEmail, String passwd) throws SerializableException;
 
-    // FIXME: Vicente, userHash
-    UserInfoDTO createUser(String shortName, String longName, String email, String passwd, LicenseDTO license,
-            String language, String country, String timezone) throws SerializableException;
+    UserInfoDTO createUser(UserCompleteDTO user) throws SerializableException;
 
-    // FIXME: Vicente, userHash
-    void logout() throws SerializableException;
+    void logout(String userHash) throws SerializableException;
 
     UserInfoDTO reloadUserInfo(String userHash) throws SerializableException;
 

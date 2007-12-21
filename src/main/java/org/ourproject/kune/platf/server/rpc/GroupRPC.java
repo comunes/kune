@@ -28,6 +28,7 @@ import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.rpc.GroupService;
 import org.ourproject.kune.platf.server.UserSession;
+import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
@@ -54,6 +55,7 @@ public class GroupRPC implements RPC, GroupService {
         this.mapper = mapper;
     }
 
+    @Authenticated
     @Transactional(type = TransactionType.READ_WRITE, rollbackOn = SerializableException.class)
     public StateToken createNewGroup(final String userHash, final GroupDTO groupDTO) throws SerializableException,
             UserMustBeLoggedException {
@@ -72,6 +74,7 @@ public class GroupRPC implements RPC, GroupService {
         return new StateToken(newGroup.getDefaultContent().getStateToken());
     }
 
+    @Authenticated
     @Transactional(type = TransactionType.READ_WRITE, rollbackOn = SerializableException.class)
     public void changeGroupWsTheme(final String userHash, final String groupShortName, final String theme)
             throws AccessViolationException {
@@ -79,12 +82,6 @@ public class GroupRPC implements RPC, GroupService {
         final User user = session.getUser();
         Group group = groupManager.findByShortName(groupShortName);
         groupManager.changeWsTheme(user, group, theme);
-    }
-
-    @Transactional(type = TransactionType.READ_ONLY)
-    public void search(final String userHash, final String searchTerm, final int firstResult, final int maxResults) {
-        // List<Group> search = groupManager.search(searchTerm, firstResult,
-        // maxResults);
     }
 
 }

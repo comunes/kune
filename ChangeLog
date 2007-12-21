@@ -1,3 +1,10 @@
+2007-12-21 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* Added AuthenticatedMethodInterceptor to test logged user in @Authenticated
+	RPC methods
+	* Added Login/Logout/Register and NewGroup Actions taking into account
+	userHash better
+	* Added UserSimpleDTO and UserDTO for User.java serialization
+
 2007-12-20 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* Added UID userHash generation
 	* delete cookie on Logout workaorund

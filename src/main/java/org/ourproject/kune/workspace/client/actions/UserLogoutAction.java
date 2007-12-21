@@ -1,5 +1,4 @@
 /*
- *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -18,29 +17,23 @@
  *
  */
 
-package org.ourproject.kune.app.server;
+package org.ourproject.kune.workspace.client.actions;
 
-import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.List;
+import org.ourproject.kune.platf.client.Services;
+import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.sitebar.client.rpc.UserService;
+import org.ourproject.kune.sitebar.client.rpc.UserServiceAsync;
 
-import com.google.inject.matcher.AbstractMatcher;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class NotInObject extends AbstractMatcher<Method> {
-    private final List<String> excluded;
-    Object o;
+public class UserLogoutAction implements Action {
 
-    public NotInObject() {
-        // FIXME exclude password
-        excluded = Arrays.asList(new String[] { "finalize", "toString", "hashCode", "getClass", "wait", "equals" });
+    public void execute(final Object value, final Object extra, final Services services) {
+        onLogout(services, (AsyncCallback) value);
     }
 
-    public boolean matches(final Method t) {
-        String name = t.getName();
-
-        boolean isGetter = name.startsWith("set");
-        boolean isExcluded = excluded.contains(name);
-        return !isGetter || !isExcluded;
+    private void onLogout(final Services services, final AsyncCallback callback) {
+        UserServiceAsync userService = UserService.App.getInstance();
+        userService.logout(services.session.userHash, callback);
     }
-
 }

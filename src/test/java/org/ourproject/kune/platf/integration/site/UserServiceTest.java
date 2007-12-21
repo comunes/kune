@@ -8,8 +8,11 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.dto.LicenseDTO;
+import org.ourproject.kune.platf.client.dto.I18nCountryDTO;
+import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
+import org.ourproject.kune.platf.client.dto.TimeZoneDTO;
+import org.ourproject.kune.platf.client.dto.UserCompleteDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.EmailAddressInUseException;
 import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
@@ -41,10 +44,19 @@ public class UserServiceTest extends IntegrationTest {
     Mapper mapper;
     @Inject
     I18nLanguageManager i18nLangManager;
+    private I18nLanguageDTO lang;
+    private I18nCountryDTO country;
+    private TimeZoneDTO timezone;
 
     @Before
     public void init() {
         new IntegrationTestHelper(this);
+        lang = new I18nLanguageDTO();
+        country = new I18nCountryDTO();
+        timezone = new TimeZoneDTO();
+        lang.setCode("en");
+        country.setCode("GB");
+        timezone.setId("GMT");
     }
 
     @Test
@@ -64,15 +76,17 @@ public class UserServiceTest extends IntegrationTest {
     @Test(expected = GroupNameInUseException.class)
     public void createUserExistingNameFails() throws SerializableException {
         assertNull(session.getUser().getId());
-        userService.createUser(properties.getAdminShortName(), "test", "example@example.com", "123456",
-                new LicenseDTO(), "en", "GB", "GMT");
+        UserCompleteDTO user = new UserCompleteDTO("test", properties.getAdminShortName(), "123456",
+                "example@example.com", lang, country, timezone);
+        userService.createUser(user);
     }
 
     @Test(expected = EmailAddressInUseException.class)
     public void createUserExistingEmailFails() throws SerializableException {
         assertNull(session.getUser().getId());
-        userService.createUser("test", "test", properties.getAdminEmail(), "123456", new LicenseDTO(), "en", "GB",
-                "GMT");
+        UserCompleteDTO user = new UserCompleteDTO("test", "test", "123456", properties.getAdminEmail(), lang, country,
+                timezone);
+        userService.createUser(user);
     }
 
     @Test(expected = UserMustBeLoggedException.class)

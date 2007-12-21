@@ -20,8 +20,13 @@
 
 package org.ourproject.kune.platf.server.auth;
 
-/* FIXME: Only to remember */
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
+import com.google.inject.BindingAnnotation;
+
+@BindingAnnotation
+@Retention(RetentionPolicy.RUNTIME)
 public @interface Authenticated {
 
 }

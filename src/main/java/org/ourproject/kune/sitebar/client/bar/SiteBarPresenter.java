@@ -77,8 +77,8 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 
     public void doLogout() {
         Site.showProgressProcessing();
-        UserServiceAsync siteBarService = UserService.App.getInstance();
-        siteBarService.logout(new AsyncCallback() {
+
+        AsyncCallback callback = new AsyncCallback() {
             public void onFailure(final Throwable arg0) {
                 Site.hideProgress();
             }
@@ -91,7 +91,9 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
                 view.setLogoutLinkVisible(false);
                 listener.onUserLoggedOut();
             }
-        });
+        };
+
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.USER_LOGOUT, callback, null);
     }
 
     public void reloadUserInfo(final String userHash) {
@@ -109,7 +111,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
     }
 
     public void userLoggedIn(final UserInfoDTO userInfoDTO) {
-        listener.onUserLoggedIn(userInfoDTO);
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.USER_LOGGED_IN, userInfoDTO, null);
         view.hideLoginDialog();
         returnToPreviousState();
     }

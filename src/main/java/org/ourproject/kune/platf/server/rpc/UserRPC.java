@@ -22,11 +22,12 @@ package org.ourproject.kune.platf.server.rpc;
 
 import java.util.UUID;
 
-import org.ourproject.kune.platf.client.dto.LicenseDTO;
+import org.ourproject.kune.platf.client.dto.UserCompleteDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.UserAuthException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.server.UserSession;
+import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
@@ -70,8 +71,9 @@ public class UserRPC implements RPC, UserService {
         return loginUser(user);
     }
 
+    @Authenticated
     @Transactional(type = TransactionType.READ_ONLY)
-    public void logout() throws SerializableException {
+    public void logout(final String userHash) throws SerializableException {
         // FIXME: the invalidate is not working (UserSession injection problem
         // within sessions)
         // getHttpSession().invalidate();
@@ -80,14 +82,15 @@ public class UserRPC implements RPC, UserService {
     }
 
     @Transactional(type = TransactionType.READ_WRITE, rollbackOn = SerializableException.class)
-    public UserInfoDTO createUser(final String shortName, final String longName, final String email,
-            final String passwd, final LicenseDTO license, final String language, final String country,
-            final String timezone) throws SerializableException {
-        User user = userManager.createUser(shortName, longName, email, passwd, language, country, timezone);
+    public UserInfoDTO createUser(final UserCompleteDTO userDTO) throws SerializableException {
+        User user = userManager.createUser(userDTO.getShortName(), userDTO.getName(), userDTO.getEmail(), userDTO
+                .getPassword(), userDTO.getLanguage().getCode(), userDTO.getCountry().getCode(), userDTO.getTimezone()
+                .getId());
         groupManager.createUserGroup(user);
         return loginUser(user);
     }
 
+    @Authenticated
     @Transactional(type = TransactionType.READ_ONLY)
     public UserInfoDTO reloadUserInfo(final String userHash) throws SerializableException {
         if (userSession.getUser().getId() == null) {

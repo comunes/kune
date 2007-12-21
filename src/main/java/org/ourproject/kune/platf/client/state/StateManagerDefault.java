@@ -23,7 +23,7 @@ package org.ourproject.kune.platf.client.state;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.dto.UserDTO;
+import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.AlreadyGroupMemberException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
@@ -134,7 +134,7 @@ public class StateManagerDefault implements StateManager {
 
             contentTitleComponent.setContentDate(Kune.I18N.t("Published on: [%s]", state.getPublishedOn().toString()));
             contentSubTitleComponent.setContentSubTitleLeft(Kune.I18N.tWithNT("by: [%s]", "used in a list of authors",
-                    ((UserDTO) state.getAuthors().get(0)).getName()));
+                    ((UserSimpleDTO) state.getAuthors().get(0)).getName()));
             contentSubTitleComponent.setContentSubTitleLeftVisible(true);
         } else {
             contentTitleComponent.setContentDateVisible(false);

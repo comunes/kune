@@ -1,5 +1,4 @@
 /*
- *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -18,20 +17,24 @@
  *
  */
 
-package org.ourproject.kune.sitebar.client.rpc;
+package org.ourproject.kune.workspace.client.actions;
 
+import org.ourproject.kune.platf.client.Services;
+import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.UserCompleteDTO;
+import org.ourproject.kune.sitebar.client.rpc.UserService;
+import org.ourproject.kune.sitebar.client.rpc.UserServiceAsync;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public interface UserServiceAsync {
+public class UserRegisterAction implements Action {
 
-    void login(String nickOrEmail, String passwd, AsyncCallback callback);
+    public void execute(final Object value, final Object extra, final Services services) {
+        onRegister(services, (UserCompleteDTO) value, (AsyncCallback) extra);
+    }
 
-    void logout(String userHash, AsyncCallback callback);
-
-    void createUser(UserCompleteDTO user, AsyncCallback asyncCallback);
-
-    void reloadUserInfo(String userHash, AsyncCallback asyncCallback);
-
+    private void onRegister(final Services services, final UserCompleteDTO user, final AsyncCallback callback) {
+        UserServiceAsync userService = UserService.App.getInstance();
+        userService.createUser(user, callback);
+    }
 }

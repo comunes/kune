@@ -21,7 +21,11 @@
 package org.ourproject.kune.sitebar.client.login;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.LicenseDTO;
+import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
+import org.ourproject.kune.platf.client.dto.I18nCountryDTO;
+import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
+import org.ourproject.kune.platf.client.dto.TimeZoneDTO;
+import org.ourproject.kune.platf.client.dto.UserCompleteDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.EmailAddressInUseException;
 import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
@@ -30,8 +34,7 @@ import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.msg.MessagePresenter;
 import org.ourproject.kune.sitebar.client.msg.SiteMessage;
-import org.ourproject.kune.sitebar.client.rpc.UserService;
-import org.ourproject.kune.sitebar.client.rpc.UserServiceAsync;
+import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -60,10 +63,15 @@ public class LoginPresenter implements Login, MessagePresenter {
     public void doLogin() {
         if (view.isSignInFormValid()) {
             Site.showProgressProcessing();
+
             final String nickOrEmail = view.getNickOrEmail();
             final String passwd = view.getLoginPassword();
-            UserServiceAsync siteBarService = UserService.App.getInstance();
-            siteBarService.login(nickOrEmail, passwd, new AsyncCallback() {
+
+            UserCompleteDTO user = new UserCompleteDTO();
+            user.setShortName(nickOrEmail);
+            user.setPassword(passwd);
+
+            AsyncCallback callback = new AsyncCallback() {
                 public void onFailure(final Throwable caught) {
                     Site.hideProgress();
                     try {
@@ -81,48 +89,52 @@ public class LoginPresenter implements Login, MessagePresenter {
                     listener.userLoggedIn((UserInfoDTO) response);
                     Site.hideProgress();
                 }
-            });
+            };
+
+            DefaultDispatcher.getInstance().fire(WorkspaceEvents.USER_LOGIN, user, callback);
         }
     }
 
     public void doRegister() {
         if (view.isRegisterFormValid()) {
             Site.showProgressProcessing();
-            final String shortName = view.getShortName();
-            final String passwd = view.getRegisterPassword();
-            final String longName = view.getLongName();
-            final String email = view.getEmail();
-            final String language = view.getLanguage();
-            final String country = view.getCountry();
-            final String timezone = view.getTimezone();
-            UserServiceAsync siteBarService = UserService.App.getInstance();
-            // TODO: Form of register, license menu;
-            LicenseDTO defaultLicense = new LicenseDTO("by-sa", "Creative Commons Attribution-ShareAlike", "",
-                    "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
-            siteBarService.createUser(shortName, longName, email, passwd, defaultLicense, language, country, timezone,
-                    new AsyncCallback() {
-                        public void onFailure(final Throwable caught) {
-                            Site.hideProgress();
-                            try {
-                                throw caught;
-                            } catch (final EmailAddressInUseException e) {
-                                setMessage(Kune.I18N.t("This email in in use by other person, try with another."),
-                                        SiteMessage.ERROR);
-                            } catch (final GroupNameInUseException e) {
-                                setMessage(Kune.I18N.t("This name in already in use, try with a different name."),
-                                        SiteMessage.ERROR);
-                            } catch (final Throwable e) {
-                                setMessage(Kune.I18N.t("Error during registration."), SiteMessage.ERROR);
-                                GWT.log("Other kind of exception in user registration", null);
-                                throw new RuntimeException();
-                            }
-                        }
 
-                        public void onSuccess(final Object response) {
-                            listener.userLoggedIn((UserInfoDTO) response);
-                            Site.hideProgress();
-                        }
-                    });
+            I18nLanguageDTO language = new I18nLanguageDTO();
+            language.setCode(view.getLanguage());
+
+            I18nCountryDTO country = new I18nCountryDTO();
+            country.setCode(view.getCountry());
+
+            TimeZoneDTO timezone = new TimeZoneDTO();
+            timezone.setId(view.getTimezone());
+
+            UserCompleteDTO user = new UserCompleteDTO(view.getLongName(), view.getShortName(), view
+                    .getRegisterPassword(), view.getEmail(), language, country, timezone);
+            AsyncCallback callback = new AsyncCallback() {
+                public void onFailure(final Throwable caught) {
+                    Site.hideProgress();
+                    try {
+                        throw caught;
+                    } catch (final EmailAddressInUseException e) {
+                        setMessage(Kune.I18N.t("This email in in use by other person, try with another."),
+                                SiteMessage.ERROR);
+                    } catch (final GroupNameInUseException e) {
+                        setMessage(Kune.I18N.t("This name in already in use, try with a different name."),
+                                SiteMessage.ERROR);
+                    } catch (final Throwable e) {
+                        setMessage(Kune.I18N.t("Error during registration."), SiteMessage.ERROR);
+                        GWT.log("Other kind of exception in user registration", null);
+                        throw new RuntimeException();
+                    }
+                }
+
+                public void onSuccess(final Object response) {
+                    listener.userLoggedIn((UserInfoDTO) response);
+                    Site.hideProgress();
+                }
+            };
+
+            DefaultDispatcher.getInstance().fire(WorkspaceEvents.USER_REGISTER, user, callback);
         }
     }
 

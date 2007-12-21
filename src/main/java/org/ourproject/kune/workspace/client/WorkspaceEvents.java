@@ -48,4 +48,8 @@ public interface WorkspaceEvents {
     public static final String SHOW_TRANSLATOR = "i18n.ShowTranslator";
     public static final String GET_TRANSLATION = "i18n.GetTranslation";
     public static final String DO_TRANSLATION = "i18n.doTranslation";
+    public static final String USER_LOGIN = "ws.UserLogin";
+    public static final String USER_LOGOUT = "ws.UserLogout";
+    public static final String USER_REGISTER = "ws.UserRegister";
+    public static final String CREATE_NEW_GROUP = "ws.CreateNewGroup";
 }

@@ -5,6 +5,9 @@ TODO-list for kune
 
 SHORT-TERM (URGENT):
 --------------------------------------------------------------------------------
+<vjrj> BUG: Duplicate Keys in group/user creation different exception [1]
+---> vjrj
+<vjrj> Inject in interceptors (see AuthenticatedMethodInterceptor), also useful for translation of db fields
 <vjrj> BUG: SN you can add the same group as Member
 <vjrj> content not found exception (and related)
 <vjrj> login session. Follow incubation recomendations. See:
@@ -49,4 +52,8 @@ DO-NOT-IMPLEMENT (stuff that was rejected):
 
 BACKTRACES/DEBUG/VALGRIND/EXCEPTIONS:
 --------------------------------------------------------------------------------
-
+[1]
+2007-12-21 10:35:16,193 [btpool0-5] ERROR - Duplicate entry 'vjrj' for key 3
+2007-12-21 10:35:16,195 [btpool0-5] DEBUG - ContentManagerDefault.persist EXCEPTION => javax.persistence.EntityExistsException: org.hibernate.exception.ConstraintViolationException: could not insert: [org.ourproject.kune.platf.server.domain.Group]
+2007-12-21 10:35:16,196 [btpool0-5] DEBUG - ContentManagerDefault.persist EXCEPTION => javax.persistence.EntityExistsException: org.hibernate.exception.ConstraintViolationException: could not insert: [org.ourproject.kune.platf.server.domain.Group]
+2007-12-21 10:35:16,197 [btpool0-5] DEBUG - ContentManagerDefault.createContent EXCEPTION => javax.persistence.Entity

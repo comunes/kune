@@ -33,7 +33,11 @@ import org.ourproject.kune.workspace.client.actions.InitAction;
 import org.ourproject.kune.workspace.client.actions.InitDataReceivedAction;
 import org.ourproject.kune.workspace.client.actions.LoggedInAction;
 import org.ourproject.kune.workspace.client.actions.LoggedOutAction;
+import org.ourproject.kune.workspace.client.actions.UserLoginAction;
+import org.ourproject.kune.workspace.client.actions.UserLogoutAction;
+import org.ourproject.kune.workspace.client.actions.CreateNewGroupAction;
 import org.ourproject.kune.workspace.client.actions.RateContentAction;
+import org.ourproject.kune.workspace.client.actions.UserRegisterAction;
 import org.ourproject.kune.workspace.client.actions.StopAction;
 import org.ourproject.kune.workspace.client.actions.i18n.DoTranslationAction;
 import org.ourproject.kune.workspace.client.actions.i18n.GetLexiconAction;
@@ -81,5 +85,10 @@ public class WorkspaceClientModule implements ClientModule {
         register.addAction(WorkspaceEvents.SHOW_TRANSLATOR, new ShowTranslatorAction());
         register.addAction(WorkspaceEvents.DO_TRANSLATION, new DoTranslationAction());
         register.addAction(WorkspaceEvents.GET_LEXICON, new GetLexiconAction());
+        register.addAction(WorkspaceEvents.USER_LOGIN, new UserLoginAction());
+        register.addAction(WorkspaceEvents.USER_LOGOUT, new UserLogoutAction());
+        register.addAction(WorkspaceEvents.USER_REGISTER, new UserRegisterAction());
+        register.addAction(WorkspaceEvents.CREATE_NEW_GROUP, new CreateNewGroupAction());
+
     }
 }

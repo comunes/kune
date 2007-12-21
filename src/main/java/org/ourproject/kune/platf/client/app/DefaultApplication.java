@@ -26,7 +26,6 @@ import java.util.Map;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.tool.ClientTool;
@@ -47,10 +46,6 @@ public class DefaultApplication implements Application {
         workspace.attachTools(tools.values().iterator());
 
         DesktopView desktop = WorkspaceFactory.createDesktop(workspace, new SiteBarListener() {
-            public void onUserLoggedIn(final UserInfoDTO user) {
-                dispatcher.fire(WorkspaceEvents.USER_LOGGED_IN, user, null);
-            }
-
             public void onUserLoggedOut() {
                 dispatcher.fire(WorkspaceEvents.USER_LOGGED_OUT, null, null);
             }

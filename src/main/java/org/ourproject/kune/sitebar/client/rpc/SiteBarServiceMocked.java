@@ -21,6 +21,7 @@
 package org.ourproject.kune.sitebar.client.rpc;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
+import org.ourproject.kune.platf.client.dto.UserCompleteDTO;
 import org.ourproject.kune.sitebar.client.Site;
 
 import com.google.gwt.user.client.Timer;
@@ -39,7 +40,7 @@ public class SiteBarServiceMocked implements UserServiceAsync {
         timer.schedule(1000);
     }
 
-    public void logout(final AsyncCallback callback) {
+    public void logout(final String userHash, final AsyncCallback callback) {
         timerAndSuccess(callback);
     }
 
@@ -55,6 +56,10 @@ public class SiteBarServiceMocked implements UserServiceAsync {
     public void createUser(final String shortName, final String longName, final String email, final String paswd,
             final LicenseDTO license, final String lang, final String country, final String timezone,
             final AsyncCallback asyncCallback) {
+        timerAndSuccess(asyncCallback);
+    }
+
+    public void createUser(final UserCompleteDTO user, final AsyncCallback asyncCallback) {
         timerAndSuccess(asyncCallback);
     }
 

@@ -57,7 +57,7 @@ public class StateDTO implements IsSerializable {
     private Date publishedOn;
 
     /**
-     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.UserDTO>
+     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.UserSimpleDTO>
      */
     private List authors;
 

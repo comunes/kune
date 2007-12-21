@@ -2,8 +2,7 @@ package org.ourproject.kune.platf.client.dto;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-public class UserDTO implements IsSerializable {
-
+public class UserCompleteDTO implements IsSerializable {
     private Long id;
 
     private String name;
@@ -16,14 +15,20 @@ public class UserDTO implements IsSerializable {
 
     private TimeZoneDTO timezone;
 
-    public UserDTO() {
-        this(null, null, null, null, null);
+    private String password;
+
+    private String email;
+
+    public UserCompleteDTO() {
+        this(null, null, null, null, null, null, null);
     }
 
-    public UserDTO(final String name, final String shortName, final I18nLanguageDTO language,
-            final I18nCountryDTO country, final TimeZoneDTO timezone) {
+    public UserCompleteDTO(final String name, final String shortName, final String password, final String email,
+            final I18nLanguageDTO language, final I18nCountryDTO country, final TimeZoneDTO timezone) {
         this.name = name;
         this.shortName = shortName;
+        this.password = password;
+        this.email = email;
         this.language = language;
         this.country = country;
         this.timezone = timezone;
@@ -75,6 +80,22 @@ public class UserDTO implements IsSerializable {
 
     public void setTimezone(final TimeZoneDTO timezone) {
         this.timezone = timezone;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(final String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(final String email) {
+        this.email = email;
     }
 
 }

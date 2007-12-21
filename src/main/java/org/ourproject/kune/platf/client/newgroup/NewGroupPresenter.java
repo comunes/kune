@@ -20,17 +20,17 @@
 
 package org.ourproject.kune.platf.client.newgroup;
 
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
-import org.ourproject.kune.platf.client.rpc.GroupService;
-import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.msg.MessagePresenter;
 import org.ourproject.kune.sitebar.client.msg.SiteMessage;
+import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -48,16 +48,14 @@ public class NewGroupPresenter implements NewGroup, MessagePresenter {
     }
 
     public void onFinish() {
-        GroupServiceAsync groupService = GroupService.App.getInstance();
         String shortName = view.getShortName();
         String longName = view.getLongName();
         String publicDesc = view.getPublicDesc();
-
         LicenseDTO license = view.getLicense();
         GroupDTO group = new GroupDTO(shortName, longName, publicDesc, getTypeOfGroup());
         group.setDefaultLicense(license);
-        // FIXME: get User hash
-        groupService.createNewGroup("FIXMEFIXME", group, new AsyncCallback() {
+
+        AsyncCallback callback = new AsyncCallback() {
             public void onFailure(final Throwable caught) {
                 Site.hideProgress();
                 try {
@@ -79,7 +77,9 @@ public class NewGroupPresenter implements NewGroup, MessagePresenter {
                 view.hide();
                 reset();
             }
-        });
+        };
+
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.CREATE_NEW_GROUP, group, callback);
     }
 
     public View getView() {

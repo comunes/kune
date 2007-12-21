@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
+import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.rpc.GroupService;
 import org.ourproject.kune.platf.integration.IntegrationTest;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
@@ -38,6 +39,14 @@ public class GroupServiceTest extends IntegrationTest {
         GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative", "Public Desc",
                 GroupDTO.PROJECT);
         service.createNewGroup(session.getHash(), group);
+    }
+
+    @Test(expected = UserMustBeLoggedException.class)
+    public void createGroupNullUserHash() throws SerializableException {
+        doLogin();
+        GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative", "Public Desc",
+                GroupDTO.PROJECT);
+        service.createNewGroup(null, group);
     }
 
     @Test
