@@ -12,7 +12,7 @@ import org.ourproject.kune.platf.client.dto.I18nCountryDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.TimeZoneDTO;
-import org.ourproject.kune.platf.client.dto.UserCompleteDTO;
+import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.EmailAddressInUseException;
 import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
@@ -76,7 +76,7 @@ public class UserServiceTest extends IntegrationTest {
     @Test(expected = GroupNameInUseException.class)
     public void createUserExistingNameFails() throws SerializableException {
         assertNull(session.getUser().getId());
-        UserCompleteDTO user = new UserCompleteDTO("test", properties.getAdminShortName(), "123456",
+        UserDTO user = new UserDTO("test", properties.getAdminShortName(), "123456",
                 "example@example.com", lang, country, timezone);
         userService.createUser(user);
     }
@@ -84,7 +84,7 @@ public class UserServiceTest extends IntegrationTest {
     @Test(expected = EmailAddressInUseException.class)
     public void createUserExistingEmailFails() throws SerializableException {
         assertNull(session.getUser().getId());
-        UserCompleteDTO user = new UserCompleteDTO("test", "test", "123456", properties.getAdminEmail(), lang, country,
+        UserDTO user = new UserDTO("test", "test", "123456", properties.getAdminEmail(), lang, country,
                 timezone);
         userService.createUser(user);
     }

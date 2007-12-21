@@ -25,7 +25,7 @@ import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.I18nCountryDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.TimeZoneDTO;
-import org.ourproject.kune.platf.client.dto.UserCompleteDTO;
+import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.EmailAddressInUseException;
 import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
@@ -67,7 +67,7 @@ public class LoginPresenter implements Login, MessagePresenter {
             final String nickOrEmail = view.getNickOrEmail();
             final String passwd = view.getLoginPassword();
 
-            UserCompleteDTO user = new UserCompleteDTO();
+            UserDTO user = new UserDTO();
             user.setShortName(nickOrEmail);
             user.setPassword(passwd);
 
@@ -108,7 +108,7 @@ public class LoginPresenter implements Login, MessagePresenter {
             TimeZoneDTO timezone = new TimeZoneDTO();
             timezone.setId(view.getTimezone());
 
-            UserCompleteDTO user = new UserCompleteDTO(view.getLongName(), view.getShortName(), view
+            UserDTO user = new UserDTO(view.getLongName(), view.getShortName(), view
                     .getRegisterPassword(), view.getEmail(), language, country, timezone);
             AsyncCallback callback = new AsyncCallback() {
                 public void onFailure(final Throwable caught) {

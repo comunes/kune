@@ -20,7 +20,7 @@
 
 package org.ourproject.kune.sitebar.client.rpc;
 
-import org.ourproject.kune.platf.client.dto.UserCompleteDTO;
+import org.ourproject.kune.platf.client.dto.UserDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -30,7 +30,7 @@ public interface UserServiceAsync {
 
     void logout(String userHash, AsyncCallback callback);
 
-    void createUser(UserCompleteDTO user, AsyncCallback asyncCallback);
+    void createUser(UserDTO user, AsyncCallback asyncCallback);
 
     void reloadUserInfo(String userHash, AsyncCallback asyncCallback);
 

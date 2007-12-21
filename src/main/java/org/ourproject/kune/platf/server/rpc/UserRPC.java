@@ -22,7 +22,7 @@ package org.ourproject.kune.platf.server.rpc;
 
 import java.util.UUID;
 
-import org.ourproject.kune.platf.client.dto.UserCompleteDTO;
+import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.UserAuthException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
@@ -82,7 +82,7 @@ public class UserRPC implements RPC, UserService {
     }
 
     @Transactional(type = TransactionType.READ_WRITE, rollbackOn = SerializableException.class)
-    public UserInfoDTO createUser(final UserCompleteDTO userDTO) throws SerializableException {
+    public UserInfoDTO createUser(final UserDTO userDTO) throws SerializableException {
         User user = userManager.createUser(userDTO.getShortName(), userDTO.getName(), userDTO.getEmail(), userDTO
                 .getPassword(), userDTO.getLanguage().getCode(), userDTO.getCountry().getCode(), userDTO.getTimezone()
                 .getId());
