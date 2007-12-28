@@ -21,22 +21,26 @@
 package org.ourproject.kune.docs.client.ctx.admin;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.AccessListsDTO;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public class AdminContextPresenter implements AdminContext {
 
     private final AdminContextView view;
 
     public AdminContextPresenter(final AdminContextView view) {
-	this.view = view;
+        this.view = view;
     }
 
-    public void setAccessLists(final AccessListsDTO accessLists) {
-	view.setAccessLists(accessLists);
+    public void setState(final StateDTO content) {
+        view.setAccessLists(content.getAccessLists());
+        view.setLanguage(content.getLanguage());
+        view.setAuthors(content.getAuthors());
+        view.setPublishedOn(content.getPublishedOn());
+        view.setTags(content.getTags());
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
 }

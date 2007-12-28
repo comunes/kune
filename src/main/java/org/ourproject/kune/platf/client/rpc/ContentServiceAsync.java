@@ -20,22 +20,44 @@
 
 package org.ourproject.kune.platf.client.rpc;
 
+import java.util.Date;
+
 import org.ourproject.kune.platf.client.dto.StateToken;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface ContentServiceAsync {
 
-    void addContent(String user, Long parentFolderId, String name, AsyncCallback callback);
+    void addContent(String user, String groupShortName, Long parentFolderId, String name, AsyncCallback callback);
 
-    void getContent(String user, StateToken newState, AsyncCallback callback);
+    void getContent(String user, String groupShortName, StateToken newState, AsyncCallback callback);
 
     void addFolder(String hash, String groupShortName, Long parentFolderId, String title, AsyncCallback callback);
 
     void addRoom(String user, String groupShortName, Long parentFolderId, String name, AsyncCallback callback);
 
-    void save(String user, String documentId, String content, AsyncCallback asyncCallback);
+    void save(String user, String groupShortName, String documentId, String content, AsyncCallback asyncCallback);
 
-    void rateContent(String userHash, String documentId, Double value, AsyncCallback asyncCallback);
+    void rateContent(String userHash, String groupShortName, String documentId, Double value,
+            AsyncCallback asyncCallback);
+
+    void setLanguage(String userHash, String groupShortName, String documentId, String languageCode,
+            AsyncCallback asyncCallback);
+
+    void setPublishedOn(String userHash, String groupShortName, String documentId, Date publishedOn,
+            AsyncCallback asyncCallback);
+
+    void setTags(String userHash, String groupShortName, String documentId, String tags, AsyncCallback asyncCallback);
+
+    void addAuthor(String userHash, String groupShortName, String documentId, String authorShortName,
+            AsyncCallback asyncCallback);
+
+    void removeAuthor(String userHash, String groupShortName, String documentId, String authorShortName,
+            AsyncCallback asyncCallback);
+
+    void setTitle(String userHash, String groupShortName, String documentId, String newTitle,
+            AsyncCallback asyncCallback);
+
+    void delContent(String userHash, String groupShortName, String documentId, AsyncCallback asyncCallback);
 
 }

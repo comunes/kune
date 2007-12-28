@@ -50,6 +50,7 @@ public class State {
     private I18nLanguage language;
     private List authors;
     private Date publishedOn;
+    private String tags;
 
     public State() {
     }
@@ -212,6 +213,14 @@ public class State {
 
     public void setAuthors(final List authors) {
         this.authors = authors;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(final String tags) {
+        this.tags = tags;
     }
 
 }

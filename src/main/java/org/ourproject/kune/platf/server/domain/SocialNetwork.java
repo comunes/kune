@@ -102,15 +102,15 @@ public class SocialNetwork {
     }
 
     public boolean isAdmin(final Group group) {
-        return accessLists.getAdmins().getList().contains(group);
+        return accessLists.getAdmins().includes(group);
     }
 
     public boolean isCollab(final Group group) {
-        return accessLists.getEditors().getList().contains(group);
+        return accessLists.getEditors().includes(group);
     }
 
     public boolean isViewer(final Group group) {
-        return accessLists.getViewers().getList().contains(group);
+        return accessLists.getViewers().includes(group);
     }
 
     public boolean isPendingCollab(final Group group) {

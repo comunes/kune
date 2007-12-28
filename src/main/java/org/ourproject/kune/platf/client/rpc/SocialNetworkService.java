@@ -31,26 +31,26 @@ public interface SocialNetworkService extends RemoteService {
 
     String requestJoinGroup(String hash, String groupShortName) throws SerializableException;
 
-    void AcceptJoinGroup(String hash, String groupToAcceptShortName, String groupShortName)
+    void AcceptJoinGroup(String hash, String groupShortName, String groupToAcceptShortName)
             throws SerializableException;
 
-    void deleteMember(String hash, String groupToDeleteShortName, String groupShortName) throws SerializableException;
+    void deleteMember(String hash, String groupShortName, String groupToDeleteShortName) throws SerializableException;
 
-    void denyJoinGroup(String hash, String groupToDenyShortName, String groupShortName) throws SerializableException;
+    void denyJoinGroup(String hash, String groupShortName, String groupToDenyShortName) throws SerializableException;
 
     void unJoinGroup(String hash, String groupShortName) throws SerializableException;
 
-    void setCollabAsAdmin(String hash, String groupToSetAdminShortName, String groupShortName)
+    void setCollabAsAdmin(String hash, String groupShortName, String groupToSetAdminShortName)
             throws SerializableException;
 
-    void setAdminAsCollab(String hash, String groupToSetCollabShortName, String groupShortName)
+    void setAdminAsCollab(String hash, String groupShortName, String groupToSetCollabShortName)
             throws SerializableException;
 
-    void addAdminMember(String hash, String groupToAddShortName, String groupShortName) throws SerializableException;
+    void addAdminMember(String hash, String groupShortName, String groupToAddShortName) throws SerializableException;
 
-    void addCollabMember(String hash, String groupToAddShortName, String groupShortName) throws SerializableException;
+    void addCollabMember(String hash, String groupShortName, String groupToAddShortName) throws SerializableException;
 
-    void addViewerMember(String hash, String groupToAddShortName, String groupShortName) throws SerializableException;
+    void addViewerMember(String hash, String groupShortName, String groupToAddShortName) throws SerializableException;
 
     SocialNetworkDTO getGroupMembers(String hash, String groupShortName) throws SerializableException;
 

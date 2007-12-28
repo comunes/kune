@@ -45,6 +45,7 @@ public class WorkspacePresenter implements Workspace {
     public void init(final WorkspaceView view) {
         this.view = view;
         this.components = new WorkspaceUIComponents(this);
+        // FIXME: get components breaks test (because make calls to GWT)
         view.setContentTitle(components.getContentTitleComponent().getView());
         view.setContentSubTitle(components.getContentSubTitleComponent().getView());
         view.setContentToolBar(components.getContentToolBarComponent().getView());

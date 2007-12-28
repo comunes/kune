@@ -22,6 +22,7 @@ package org.ourproject.kune.platf.server.domain;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -224,11 +225,25 @@ public class Content implements HasStateToken {
     }
 
     public void addAuthor(final User user) {
-        this.authors.add(user);
+        if (!this.authors.contains(user)) {
+            this.authors.add(user);
+        }
     }
 
     public void removeAuthor(final User user) {
         this.authors.remove(user);
+    }
+
+    public String getTagsAsString() {
+        String tagConcatenated = "";
+        for (Iterator iterator = tags.iterator(); iterator.hasNext();) {
+            Tag tag = (Tag) iterator.next();
+            tagConcatenated = tagConcatenated + tag.getName();
+            if (iterator.hasNext()) {
+                tagConcatenated = tagConcatenated + " ";
+            }
+        }
+        return tagConcatenated;
     }
 
 }

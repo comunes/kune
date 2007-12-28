@@ -20,8 +20,12 @@
 
 package org.ourproject.kune.docs.client.ctx.admin.ui;
 
+import java.util.Date;
+import java.util.List;
+
 import org.ourproject.kune.docs.client.ctx.admin.AdminContextView;
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
+import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.workspace.client.ui.ctx.admin.AccessListsPanel;
 
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -30,12 +34,32 @@ public class AdminContextPanel extends VerticalPanel implements AdminContextView
     private final AccessListsPanel accessListsPanel;
 
     public AdminContextPanel() {
-	accessListsPanel = new AccessListsPanel();
-	add(accessListsPanel);
-	setCellWidth(accessListsPanel, "100%");
+        accessListsPanel = new AccessListsPanel();
+        add(accessListsPanel);
+        setCellWidth(accessListsPanel, "100%");
     }
 
     public void setAccessLists(final AccessListsDTO accessLists) {
-	accessListsPanel.setAccessLists(accessLists);
+        accessListsPanel.setAccessLists(accessLists);
+    }
+
+    public void setAuthors(final List authors) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void setLanguage(final I18nLanguageDTO language) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void setPublishedOn(final Date publishedOn) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void setTags(final String tags) {
+        // TODO Auto-generated method stub
+
     }
 }

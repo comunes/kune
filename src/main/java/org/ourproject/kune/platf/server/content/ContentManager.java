@@ -20,7 +20,11 @@
 
 package org.ourproject.kune.platf.server.content;
 
+import java.util.Date;
+
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
+import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
+import org.ourproject.kune.platf.client.errors.UserNotFoundException;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.User;
@@ -39,5 +43,22 @@ public interface ContentManager extends Manager<Content, Long> {
     public Long getRateByUsers(Content content);
 
     public Double getRateAvg(Content content);
+
+    public void setTitle(User user, Long contentId, String newTitle) throws ContentNotFoundException;
+
+    public void setLanguage(User user, Long contentId, String languageCode) throws ContentNotFoundException,
+            I18nNotFoundException;
+
+    public void setPublishedOn(User user, Long contentId, Date publishedOn) throws ContentNotFoundException;
+
+    public void setTags(User user, Long contentId, String tags) throws ContentNotFoundException;
+
+    public void addAuthor(User user, Long contentId, String authorShortName) throws ContentNotFoundException,
+            UserNotFoundException;
+
+    public void removeAuthor(User user, Long contentId, String authorShortName) throws ContentNotFoundException,
+            UserNotFoundException;
+
+    public void delContent(User user, Long contentId) throws ContentNotFoundException;
 
 }

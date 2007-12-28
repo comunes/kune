@@ -50,7 +50,7 @@ public class RequestJoinGroupAction implements Action {
                         final String resultType = (String) result;
                         if (resultType == SocialNetworkDTO.REQ_JOIN_ACEPTED) {
                             Site.info(Kune.I18N.t("You are now member of this group"));
-                            services.stateManager.reload();
+                            services.stateManager.reload(false);
                         }
                         if (resultType == SocialNetworkDTO.REQ_JOIN_DENIED) {
                             Site.important(Kune.I18N.t("Sorry this is a closed group"));

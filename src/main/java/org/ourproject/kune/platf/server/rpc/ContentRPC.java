@@ -20,18 +20,23 @@
 
 package org.ourproject.kune.platf.server.rpc;
 
+import java.util.Date;
+
 import org.ourproject.kune.chat.server.managers.ChatConnection;
 import org.ourproject.kune.chat.server.managers.XmppManager;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
+import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
+import org.ourproject.kune.platf.client.errors.UserNotFoundException;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.access.Access;
 import org.ourproject.kune.platf.server.access.AccessService;
 import org.ourproject.kune.platf.server.access.AccessType;
 import org.ourproject.kune.platf.server.auth.Authenticated;
+import org.ourproject.kune.platf.server.auth.Authorizated;
 import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.content.CreationService;
 import org.ourproject.kune.platf.server.domain.Container;
@@ -45,6 +50,7 @@ import org.ourproject.kune.platf.server.state.StateService;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.wideplay.warp.persist.TransactionType;
 import com.wideplay.warp.persist.Transactional;
@@ -52,20 +58,20 @@ import com.wideplay.warp.persist.Transactional;
 @Singleton
 public class ContentRPC implements ContentService, RPC {
     private final StateService stateService;
-    private final UserSession userSession;
+    private final Provider<UserSession> userSessionProvider;
     private final Mapper mapper;
     private final GroupManager groupManager;
-    private final AccessService accessManager;
+    private final AccessService accessService;
     private final CreationService creationService;
     private final XmppManager xmppManager;
     private final ContentManager contentManager;
 
     @Inject
-    public ContentRPC(final UserSession session, final AccessService contentAccess, final StateService stateService,
-            final CreationService creationService, final GroupManager groupManager, final XmppManager xmppManager,
-            final ContentManager contentManager, final Mapper mapper) {
-        this.userSession = session;
-        this.accessManager = contentAccess;
+    public ContentRPC(final Provider<UserSession> userSessionProvider, final AccessService accessService,
+            final StateService stateService, final CreationService creationService, final GroupManager groupManager,
+            final XmppManager xmppManager, final ContentManager contentManager, final Mapper mapper) {
+        this.userSessionProvider = userSessionProvider;
+        this.accessService = accessService;
         this.stateService = stateService;
         this.creationService = creationService;
         this.groupManager = groupManager;
@@ -74,19 +80,22 @@ public class ContentRPC implements ContentService, RPC {
         this.mapper = mapper;
     }
 
+    // Not using @Authorizated because accessService is doing this job and is
+    // more complex than other access checks (we use getContent to get default
+    // contents for instance)
     @Transactional(type = TransactionType.READ_ONLY)
-    public StateDTO getContent(final String userHash, final StateToken token) throws ContentNotFoundException,
-            AccessViolationException, GroupNotFoundException {
-        Group contentGroup;
-
+    public StateDTO getContent(final String userHash, final String groupShortName, final StateToken token)
+            throws ContentNotFoundException, AccessViolationException, GroupNotFoundException {
+        Group defaultGroup;
+        UserSession userSession = getUserSession();
         User user = userSession.getUser();
         boolean userIsLoggedIn = userSession.isUserLoggedIn();
         if (userIsLoggedIn) {
-            contentGroup = groupManager.getGroupOfUserWithId(user.getId());
+            defaultGroup = groupManager.getGroupOfUserWithId(user.getId());
         } else {
-            contentGroup = groupManager.getDefaultGroup();
+            defaultGroup = groupManager.getDefaultGroup();
         }
-        final Access access = accessManager.getAccess(user, token, contentGroup, AccessType.READ);
+        final Access access = accessService.getAccess(user, token, defaultGroup, AccessType.READ);
         final State state = stateService.create(access);
         if (state.isRateable()) {
             final Long contentId = parseId(state.getDocumentId());
@@ -102,30 +111,34 @@ public class ContentRPC implements ContentService, RPC {
     }
 
     @Authenticated
+    @Authorizated(accessTypeRequired = AccessType.EDIT, checkContent = true)
     @Transactional(type = TransactionType.READ_WRITE)
-    public int save(final String userHash, final String documentId, final String textContent)
-            throws AccessViolationException, ContentNotFoundException {
+    public int save(final String userHash, final String groupShortName, final String documentId,
+            final String textContent) throws AccessViolationException, ContentNotFoundException {
 
         final Long contentId = parseId(documentId);
+        UserSession userSession = getUserSession();
         final User user = userSession.getUser();
-        final Content content = accessManager.accessToContent(contentId, user, AccessType.EDIT);
+        final Content content = accessService.accessToContent(contentId, user, AccessType.EDIT);
         final Content descriptor = creationService.saveContent(user, content, textContent);
         return descriptor.getVersion();
     }
 
     @Authenticated
+    @Authorizated(accessTypeRequired = AccessType.EDIT)
     @Transactional(type = TransactionType.READ_WRITE)
-    public StateDTO addContent(final String userHash, final Long parentFolderId, final String title)
-            throws AccessViolationException, ContentNotFoundException {
-
+    public StateDTO addContent(final String userHash, final String groupShortName, final Long parentFolderId,
+            final String title) throws AccessViolationException, ContentNotFoundException {
+        UserSession userSession = getUserSession();
         final User user = userSession.getUser();
-        final Access access = accessManager.getFolderAccess(parentFolderId, user, AccessType.EDIT);
+        final Access access = accessService.getFolderAccess(parentFolderId, user, AccessType.EDIT);
         access.setContentWidthFolderRights(creationService.createContent(title, user, access.getFolder()));
         final State state = stateService.create(access);
         return mapper.map(state, StateDTO.class);
     }
 
     @Authenticated
+    @Authorizated(accessTypeRequired = AccessType.EDIT)
     @Transactional(type = TransactionType.READ_WRITE)
     public StateDTO addFolder(final String userHash, final String groupShortName, final Long parentFolderId,
             final String title) throws ContentNotFoundException, AccessViolationException, GroupNotFoundException {
@@ -133,9 +146,11 @@ public class ContentRPC implements ContentService, RPC {
     }
 
     @Authenticated
+    @Authorizated(accessTypeRequired = AccessType.EDIT)
     @Transactional(type = TransactionType.READ_WRITE)
     public StateDTO addRoom(final String userHash, final String groupShortName, final Long parentFolderId,
             final String roomName) throws ContentNotFoundException, AccessViolationException, GroupNotFoundException {
+        UserSession userSession = getUserSession();
         final String userShortName = userSession.getUser().getShortName();
         final ChatConnection connection = xmppManager.login(userShortName, userSession.getUser().getPassword(),
                 userHash);
@@ -156,9 +171,11 @@ public class ContentRPC implements ContentService, RPC {
     }
 
     @Authenticated
+    @Authorizated(accessTypeRequired = AccessType.READ, checkContent = true)
     @Transactional(type = TransactionType.READ_WRITE)
-    public void rateContent(final String userHash, final String documentId, final Double value)
-            throws ContentNotFoundException, AccessViolationException {
+    public void rateContent(final String userHash, final String groupShortName, final String documentId,
+            final Double value) throws ContentNotFoundException, AccessViolationException {
+        UserSession userSession = getUserSession();
         User rater = userSession.getUser();
         final Long contentId = parseId(documentId);
 
@@ -167,7 +184,83 @@ public class ContentRPC implements ContentService, RPC {
         } else {
             throw new AccessViolationException();
         }
+    }
 
+    @Authenticated
+    @Authorizated(accessTypeRequired = AccessType.EDIT, checkContent = true)
+    @Transactional(type = TransactionType.READ_WRITE)
+    public void addAuthor(final String userHash, final String groupShortName, final String documentId,
+            final String authorShortName) throws ContentNotFoundException, UserNotFoundException {
+        final Long contentId = parseId(documentId);
+        UserSession userSession = getUserSession();
+        User user = userSession.getUser();
+        contentManager.addAuthor(user, contentId, authorShortName);
+    }
+
+    @Authenticated
+    @Authorizated(accessTypeRequired = AccessType.EDIT, checkContent = true)
+    @Transactional(type = TransactionType.READ_WRITE)
+    public void removeAuthor(final String userHash, final String groupShortName, final String documentId,
+            final String authorShortName) throws ContentNotFoundException, UserNotFoundException {
+        final Long contentId = parseId(documentId);
+        UserSession userSession = getUserSession();
+        User user = userSession.getUser();
+        contentManager.removeAuthor(user, contentId, authorShortName);
+    }
+
+    @Authenticated
+    @Authorizated(accessTypeRequired = AccessType.ADMIN, checkContent = true)
+    @Transactional(type = TransactionType.READ_WRITE)
+    public void delContent(final String userHash, final String groupShortName, final String documentId)
+            throws ContentNotFoundException {
+        final Long contentId = parseId(documentId);
+        UserSession userSession = getUserSession();
+        User user = userSession.getUser();
+        contentManager.delContent(user, contentId);
+    }
+
+    @Authenticated
+    @Authorizated(accessTypeRequired = AccessType.EDIT, checkContent = true)
+    @Transactional(type = TransactionType.READ_WRITE)
+    public void setTitle(final String userHash, final String groupShortName, final String documentId,
+            final String newTitle) throws ContentNotFoundException {
+        final Long contentId = parseId(documentId);
+        UserSession userSession = getUserSession();
+        User user = userSession.getUser();
+        contentManager.setTitle(user, contentId, newTitle);
+    }
+
+    @Authenticated
+    @Authorizated(accessTypeRequired = AccessType.EDIT, checkContent = true)
+    @Transactional(type = TransactionType.READ_WRITE)
+    public void setLanguage(final String userHash, final String groupShortName, final String documentId,
+            final String languageCode) throws ContentNotFoundException, I18nNotFoundException {
+        final Long contentId = parseId(documentId);
+        UserSession userSession = getUserSession();
+        User user = userSession.getUser();
+        contentManager.setLanguage(user, contentId, languageCode);
+    }
+
+    @Authenticated
+    @Authorizated(accessTypeRequired = AccessType.EDIT, checkContent = true)
+    @Transactional(type = TransactionType.READ_WRITE)
+    public void setPublishedOn(final String userHash, final String groupShortName, final String documentId,
+            final Date publishedOn) throws ContentNotFoundException {
+        final Long contentId = parseId(documentId);
+        UserSession userSession = getUserSession();
+        User user = userSession.getUser();
+        contentManager.setPublishedOn(user, contentId, publishedOn);
+    }
+
+    @Authenticated
+    @Authorizated(accessTypeRequired = AccessType.EDIT, checkContent = true)
+    @Transactional(type = TransactionType.READ_WRITE)
+    public void setTags(final String userHash, final String groupShortName, final String documentId, final String tags)
+            throws ContentNotFoundException {
+        final Long contentId = parseId(documentId);
+        UserSession userSession = getUserSession();
+        User user = userSession.getUser();
+        contentManager.setTags(user, contentId, tags);
     }
 
     private Long parseId(final String documentId) throws ContentNotFoundException {
@@ -180,10 +273,11 @@ public class ContentRPC implements ContentService, RPC {
 
     private StateDTO createFolder(final String groupShortName, final Long parentFolderId, final String title)
             throws AccessViolationException, ContentNotFoundException, GroupNotFoundException {
+        UserSession userSession = getUserSession();
         final User user = userSession.getUser();
         final Group group = groupManager.findByShortName(groupShortName);
 
-        Access access = accessManager.getFolderAccess(parentFolderId, user, AccessType.EDIT);
+        Access access = accessService.getFolderAccess(parentFolderId, user, AccessType.EDIT);
 
         final Container container = creationService.createFolder(group, parentFolderId, title, user.getLanguage());
         final String toolName = container.getToolName();
@@ -191,9 +285,12 @@ public class ContentRPC implements ContentService, RPC {
         // final StateToken token = new StateToken(group.getShortName(),
         // toolName, container.getId().toString(), null);
         final StateToken token = new StateToken(group.getShortName(), toolName, parentFolderId.toString(), null);
-        access = accessManager.getAccess(user, token, group, AccessType.READ);
+        access = accessService.getAccess(user, token, group, AccessType.READ);
         final State state = stateService.create(access);
         return mapper.map(state, StateDTO.class);
     }
 
+    private UserSession getUserSession() {
+        return userSessionProvider.get();
+    }
 }

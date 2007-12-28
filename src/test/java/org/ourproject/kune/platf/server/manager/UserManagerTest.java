@@ -6,11 +6,14 @@ import static org.junit.Assert.assertNull;
 
 import java.util.TimeZone;
 
+import javax.persistence.EntityExistsException;
+
 import org.apache.lucene.queryParser.ParseException;
 import org.hibernate.validator.InvalidStateException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
 import org.ourproject.kune.platf.server.PersistenceTest;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.I18nCountry;
@@ -55,6 +58,16 @@ public class UserManagerTest extends PersistenceTest {
         persist(user);
     }
 
+    @Test(expected = EntityExistsException.class)
+    public void testUserExist() throws I18nNotFoundException {
+        User user1 = userManager.createUser("test", "test 1 name", "test1@example.com", "some password", "en", "GB",
+                "GMT");
+        persist(user1);
+        User user2 = userManager.createUser("test", "test 1 name", "test1@example.com", "some password", "en", "GB",
+                "GMT");
+        persist(user2);
+    }
+
     @Test
     public void loginWithNickCorrect() {
         User result = userManager.login(USER_SHORT_NAME, USER_PASSWORD);
@@ -93,19 +106,19 @@ public class UserManagerTest extends PersistenceTest {
 
     @Test(expected = InvalidStateException.class)
     public void userNameLengthIncorrect() {
-        user = new User("test1A", "te", "test@example.com", "some passwd", english, gb, getTimeZone());
+        user = new User("test1", "te", "test@example.com", "some passwd", english, gb, getTimeZone());
         persist(user);
     }
 
     @Test(expected = InvalidStateException.class)
     public void passwdLengthIncorrect() {
-        user = new User("test1A", "test1 name", "test@example.com", "pass", english, gb, getTimeZone());
+        user = new User("test1", "test1 name", "test@example.com", "pass", english, gb, getTimeZone());
         persist(user);
     }
 
     @Test(expected = InvalidStateException.class)
     public void emailEmpty() {
-        user = new User("test1A", "test1 name", "", "some passwd", english, gb, getTimeZone());
+        user = new User("test1", "test1 name", "", "some passwd", english, gb, getTimeZone());
         persist(user);
     }
 

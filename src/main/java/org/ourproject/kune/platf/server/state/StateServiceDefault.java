@@ -43,6 +43,7 @@ public class StateServiceDefault implements StateService {
             state.setLanguage(content.getLanguage());
             state.setPublishedOn(content.getPublishedOn());
             state.setAuthors(content.getAuthors());
+            state.setTags(content.getTagsAsString());
         } else {
             state.setTypeId(container.getTypeId());
             state.setDocumentId(null);

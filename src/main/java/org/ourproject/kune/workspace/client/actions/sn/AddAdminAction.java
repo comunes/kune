@@ -37,8 +37,8 @@ public class AddAdminAction implements Action {
     private void onAddAdmin(final Services services, final String groupShortName) {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        server.addAdminMember(services.session.userHash, groupShortName, services.session.getCurrentState().getGroup()
-                .getShortName(), new AsyncCallback() {
+        server.addAdminMember(services.session.userHash, services.session.getCurrentState().getGroup()
+                .getShortName(), groupShortName, new AsyncCallback() {
             public void onFailure(final Throwable caught) {
                 Site.hideProgress();
                 services.stateManager.processErrorException(caught);

@@ -26,13 +26,14 @@ import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.rack.filters.ApplicationListener;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 class KuneApplicationListener implements ApplicationListener {
-    final UserSession userSession;
+    final Provider<UserSession> userSessionProvider;
 
     @Inject
-    public KuneApplicationListener(final UserSession userSession) {
-        this.userSession = userSession;
+    public KuneApplicationListener(final Provider<UserSession> userSessionProvider) {
+        this.userSessionProvider = userSessionProvider;
     }
 
     public void doAfter(final HttpServletRequest request, final HttpServletResponse httpServletResponse) {
@@ -43,7 +44,7 @@ class KuneApplicationListener implements ApplicationListener {
         // String userSessionId = request.getSession().getId();
         // userSession.setHash(userSessionId);
 
-        userSession.setBrowserLanguage(request.getLocale().getLanguage());
+        userSessionProvider.get().setBrowserLanguage(request.getLocale().getLanguage());
         // TODO: think about: httpServletResponse.sendRedirect(locale) ???
     }
 

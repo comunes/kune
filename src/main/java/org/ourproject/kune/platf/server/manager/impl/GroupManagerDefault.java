@@ -24,6 +24,7 @@ import java.util.List;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
@@ -59,13 +60,15 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     private final DatabaseProperties properties;
     private final License licenseFinder;
     private final KuneProperties kuneProperties;
+    private final User userFinder;
 
     @Inject
-    public GroupManagerDefault(final Provider<EntityManager> provider, final Group finder,
+    public GroupManagerDefault(final Provider<EntityManager> provider, final Group finder, final User userFinder,
             final KuneProperties kuneProperties, final DatabaseProperties properties, final ToolRegistry registry,
             final License licenseFinder) {
         super(provider, Group.class);
         this.finder = finder;
+        this.userFinder = userFinder;
         this.kuneProperties = kuneProperties;
         this.properties = properties;
         this.registry = registry;
@@ -94,15 +97,24 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         final String licenseDefId = properties.getDefaultLicense();
         final License licenseDef = licenseFinder.findByShortName(licenseDefId);
         final Group group = new Group(user.getShortName(), user.getName(), licenseDef, GroupType.PERSONAL);
+        User userSameEmail = null;
+        try {
+            userSameEmail = userFinder.getByEmail(user.getEmail());
+        } catch (NoResultException e) {
+            // Ok, no more with this email
+        }
+        if (userSameEmail != null) {
+            throw new EmailAddressInUseException();
+        }
         group.setAdmissionType(AdmissionType.Closed);
         group.setWorkspaceTheme(defaultSiteWorkspaceTheme);
         user.setUserGroup(group);
         initSocialNetwork(group, group);
-        initGroup(user, group);
         try {
+            initGroup(user, group);
             super.persist(user, User.class);
         } catch (final EntityExistsException e) {
-            throw new EmailAddressInUseException();
+            throw new GroupNameInUseException();
         }
         return group;
     }

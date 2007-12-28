@@ -23,7 +23,9 @@ package org.ourproject.kune.sitebar.client.bar;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
 public interface SiteBarListener {
+
     public void onUserLoggedOut();
 
     public void onChangeState(StateToken token);
+
 }

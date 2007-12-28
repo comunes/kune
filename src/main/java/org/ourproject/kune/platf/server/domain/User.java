@@ -56,6 +56,7 @@ public class User implements HasId {
 
     @Column(unique = true, nullable = false)
     @Email
+    @Length(min = 1)
     private String email;
 
     @Column(nullable = false)

@@ -28,8 +28,6 @@ import org.ourproject.kune.platf.client.rpc.SiteService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.server.LoggerMethodInterceptor;
 import org.ourproject.kune.platf.server.PlatformServerModule;
-import org.ourproject.kune.platf.server.auth.Authenticated;
-import org.ourproject.kune.platf.server.auth.AuthenticatedMethodInterceptor;
 import org.ourproject.kune.platf.server.properties.PropertiesFileName;
 import org.ourproject.kune.platf.server.rest.GroupJSONService;
 import org.ourproject.kune.platf.server.rest.I18nTranslationJSONService;
@@ -61,8 +59,6 @@ public class KuneRackModule implements RackModule {
         configModule = new AbstractModule() {
             public void configure() {
                 bindInterceptor(Matchers.any(), new NotInObject(), new LoggerMethodInterceptor());
-                bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authenticated.class),
-                        new AuthenticatedMethodInterceptor());
                 bindConstant().annotatedWith(JpaUnit.class).to(jpaUnit);
                 bindConstant().annotatedWith(PropertiesFileName.class).to(propertiesFileName);
                 if (sessionScope != null) {

@@ -25,6 +25,7 @@ import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.sitebar.client.Site;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -37,18 +38,19 @@ public class RateContentAction implements Action {
     private void onRateContent(final Services services, final Double value) {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
-        server.rateContent(services.session.userHash, services.session.getCurrentState().getDocumentId(), value,
-                new AsyncCallback() {
-                    public void onFailure(final Throwable caught) {
-                        Site.hideProgress();
-                        services.stateManager.processErrorException(caught);
-                    }
+        StateDTO currentState = services.session.getCurrentState();
+        server.rateContent(services.session.userHash, currentState.getGroup().getShortName(), currentState
+                .getDocumentId(), value, new AsyncCallback() {
+            public void onFailure(final Throwable caught) {
+                Site.hideProgress();
+                services.stateManager.processErrorException(caught);
+            }
 
-                    public void onSuccess(final Object result) {
-                        Site.hideProgress();
-                        Site.info(Kune.I18N.t("Content rated"));
-                        services.stateManager.reload();
-                    }
-                });
+            public void onSuccess(final Object result) {
+                Site.hideProgress();
+                Site.info(Kune.I18N.t("Content rated"));
+                services.stateManager.reload();
+            }
+        });
     }
 }

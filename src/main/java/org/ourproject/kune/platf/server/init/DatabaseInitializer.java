@@ -102,7 +102,7 @@ public class DatabaseInitializer {
         String adminShortName = properties.getAdminShortName();
         String adminEmail = properties.getAdminEmail();
         String adminPassword = properties.getAdminPassword();
-        // FIXME: Ma
+        // FIXME:
         User user = new User(adminShortName, adminName, adminEmail, adminPassword, languageManager.findByCode("en"),
                 countryManager.findByCode("GB"), TimeZone.getDefault());
         groupManager.createUserGroup(user);

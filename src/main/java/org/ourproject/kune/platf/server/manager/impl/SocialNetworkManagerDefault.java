@@ -34,6 +34,7 @@ import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.server.ParticipationData;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.GroupListMode;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
@@ -248,10 +249,14 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 
     private void checkGroupIsNotAlreadyAMember(final Group group, final SocialNetwork sn)
             throws AlreadyGroupMemberException {
-        if (sn.isAdmin(group) || sn.isCollab(group) || sn.isViewer(group)) {
+        if (sn.isAdmin(group) || sn.isCollab(group) || sn.isViewer(group) && notEveryOneCanView(sn)) {
             throw new AlreadyGroupMemberException();
         }
 
+    }
+
+    private boolean notEveryOneCanView(final SocialNetwork sn) {
+        return !sn.getAccessLists().getViewers().getMode().equals(GroupListMode.EVERYONE);
     }
 
 }

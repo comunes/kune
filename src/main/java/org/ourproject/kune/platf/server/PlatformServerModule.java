@@ -20,6 +20,8 @@
 
 package org.ourproject.kune.platf.server;
 
+import static org.ourproject.kune.platf.server.OutermostCallInterceptor.outermostCall;
+import org.ourproject.kune.app.server.AbstractExtendedModule;
 import org.ourproject.kune.chat.server.managers.XmppManager;
 import org.ourproject.kune.chat.server.managers.XmppManagerDefault;
 import org.ourproject.kune.platf.client.rpc.ContentService;
@@ -31,6 +33,10 @@ import org.ourproject.kune.platf.server.access.AccessService;
 import org.ourproject.kune.platf.server.access.AccessServiceDefault;
 import org.ourproject.kune.platf.server.access.FinderService;
 import org.ourproject.kune.platf.server.access.FinderServiceDefault;
+import org.ourproject.kune.platf.server.auth.Authenticated;
+import org.ourproject.kune.platf.server.auth.AuthenticatedMethodInterceptor;
+import org.ourproject.kune.platf.server.auth.Authorizated;
+import org.ourproject.kune.platf.server.auth.AuthorizatedMethodInterceptor;
 import org.ourproject.kune.platf.server.content.ContainerManager;
 import org.ourproject.kune.platf.server.content.ContainerManagerDefault;
 import org.ourproject.kune.platf.server.content.ContentManager;
@@ -45,6 +51,7 @@ import org.ourproject.kune.platf.server.manager.LicenseManager;
 import org.ourproject.kune.platf.server.manager.RateManager;
 import org.ourproject.kune.platf.server.manager.SearchManager;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
+import org.ourproject.kune.platf.server.manager.TagManager;
 import org.ourproject.kune.platf.server.manager.ToolConfigurationManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.manager.impl.GroupManagerDefault;
@@ -55,6 +62,7 @@ import org.ourproject.kune.platf.server.manager.impl.LicenseManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.RateManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.SearchManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.SocialNetworkManagerDefault;
+import org.ourproject.kune.platf.server.manager.impl.TagManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.ToolConfigurationManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.UserManagerDefault;
 import org.ourproject.kune.platf.server.mapper.DozerMapper;
@@ -74,11 +82,11 @@ import org.ourproject.kune.platf.server.users.UserInfoService;
 import org.ourproject.kune.platf.server.users.UserInfoServiceDefault;
 import org.ourproject.kune.sitebar.client.rpc.UserService;
 
-import com.google.inject.AbstractModule;
+import com.google.inject.matcher.Matchers;
 import com.wideplay.warp.persist.PersistenceService;
 import com.wideplay.warp.persist.UnitOfWork;
 
-public class PlatformServerModule extends AbstractModule {
+public class PlatformServerModule extends AbstractExtendedModule {
     @Override
     protected void configure() {
         install(PersistenceService.usingJpa().across(UnitOfWork.TRANSACTION).buildModule());
@@ -90,6 +98,11 @@ public class PlatformServerModule extends AbstractModule {
         bind(KuneProperties.class).to(KunePropertiesDefault.class);
         bind(Mapper.class).to(DozerMapper.class);
         bind(ToolRegistry.class);
+
+        bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authenticated.class),
+                outermostCall(new AuthenticatedMethodInterceptor()));
+        bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authorizated.class),
+                outermostCall(new AuthorizatedMethodInterceptor()));
     }
 
     private void bindServices() {
@@ -123,5 +136,6 @@ public class PlatformServerModule extends AbstractModule {
         bind(I18nCountryManager.class).to(I18nCountryManagerDefault.class);
         bind(I18nLanguageManager.class).to(I18nLanguageManagerDefault.class);
         bind(I18nTranslationManager.class).to(I18nTranslationManagerDefault.class);
+        bind(TagManager.class).to(TagManagerDefault.class);
     }
 }

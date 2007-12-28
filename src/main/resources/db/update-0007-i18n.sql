@@ -1,0 +1,16 @@
+INSERT INTO globalize_translations VALUES (3781,'',NULL,1,'','Error saving document. Retrying...','Error saving document. Retrying...','kune_core',1819);
+INSERT INTO globalize_translations VALUES (3782,'',NULL,1,'','This group is already a group member','This group is already a group member','kune_core',1819);
+INSERT INTO globalize_translations VALUES (3783,'',NULL,1,'','Type of member changed','Type of member changed','kune_core',1819);
+INSERT INTO globalize_translations VALUES (3784,'',NULL,1,'','Unjoin this group','Unjoin this group','kune_core',1819);
+INSERT INTO globalize_translations VALUES (3785,'',NULL,1,'','Member removed','Member removed','kune_core',1819);
+INSERT INTO globalize_translations VALUES (3786,'',NULL,1,'','You are now member of this group','You are now member of this group','kune_core',1819);
+INSERT INTO globalize_translations VALUES (3787,'',NULL,1,'','Removed as member','Removed as member','kune_core',1819);
+INSERT INTO globalize_translations VALUES (3788,'',NULL,1,'','Collaborate in these groups','Collaborate in these groups','kune_core',1819);
+INSERT INTO globalize_translations VALUES (3789,'',NULL,1,'','Error guardando documento. Reintentándolo ... ','Error saving document. Retrying...','kune_core',5889);
+INSERT INTO globalize_translations VALUES (3790,'',NULL,1,'','Este grupo es actualmente ya miembro','This group is already a group member','kune_core',5889);
+INSERT INTO globalize_translations VALUES (3791,'',NULL,1,'','Tipo de miembro cambiado','Type of member changed','kune_core',5889);
+INSERT INTO globalize_translations VALUES (3792,'',NULL,1,'','Dejar de ser miembro/a del grupo','Unjoin this group','kune_core',5889);
+INSERT INTO globalize_translations VALUES (3793,'',NULL,1,'','Miembro quitado','Member removed','kune_core',5889);
+INSERT INTO globalize_translations VALUES (3794,'',NULL,1,'','Ahora eres ya miembro/a de este grupo','You are now member of this group','kune_core',5889);
+INSERT INTO globalize_translations VALUES (3795,'',NULL,1,'','Eliminado como miembro/a','Removed as member','kune_core',5889);
+INSERT INTO globalize_translations VALUES (3796,'',NULL,1,'','Colabora en estos grupos','Collaborate in these groups','kune_core',5889);

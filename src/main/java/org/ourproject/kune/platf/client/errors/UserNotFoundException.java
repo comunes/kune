@@ -18,17 +18,12 @@
  *
  */
 
-package org.ourproject.kune.platf.client.state;
+package org.ourproject.kune.platf.client.errors;
 
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
+import com.google.gwt.user.client.rpc.SerializableException;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
+public class UserNotFoundException extends SerializableException {
 
-public interface ContentProvider {
-    void getContent(String user, StateToken newState, AsyncCallback callback);
+    private static final long serialVersionUID = 1L;
 
-    void cache(StateToken encodeState, StateDTO content);
-
-    void removeCache(StateToken state);
 }

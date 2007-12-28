@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.errors.EmailAddressInUseException;
 import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
+import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
 import org.ourproject.kune.platf.server.PersistenceTest;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Group;
@@ -63,6 +64,39 @@ public class GroupManagerTest extends PersistenceTest {
                 "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
         licenseManager.persist(defLicense);
         groupManager.createUserGroup(user);
+    }
+
+    @Test(expected = GroupNameInUseException.class)
+    public void createUserExistingShortName() throws I18nNotFoundException, GroupNameInUseException,
+            EmailAddressInUseException {
+        User user1 = userManager.createUser("test", "test 1 name", "test1@example.com", "some password", "en", "GB",
+                "GMT");
+        groupManager.createUserGroup(user1);
+        User user2 = userManager.createUser("test", "test 2 name", "test2@example.com", "some password", "en", "GB",
+                "GMT");
+        groupManager.createUserGroup(user2);
+    }
+
+    @Test(expected = GroupNameInUseException.class)
+    public void createUserExistingLongName() throws I18nNotFoundException, GroupNameInUseException,
+            EmailAddressInUseException {
+        User user1 = userManager.createUser("test", "test 1 name", "test1@example.com", "some password", "en", "GB",
+                "GMT");
+        groupManager.createUserGroup(user1);
+        User user2 = userManager.createUser("test2", "test 1 name", "test2@example.com", "some password", "en", "GB",
+                "GMT");
+        groupManager.createUserGroup(user2);
+    }
+
+    @Test(expected = EmailAddressInUseException.class)
+    public void createUserExistingEmail() throws I18nNotFoundException, GroupNameInUseException,
+            EmailAddressInUseException {
+        User user1 = userManager.createUser("test", "test 1 name", "test1@example.com", "some password", "en", "GB",
+                "GMT");
+        groupManager.createUserGroup(user1);
+        User user2 = userManager.createUser("test2", "test 2 name", "test1@example.com", "some password", "en", "GB",
+                "GMT");
+        groupManager.createUserGroup(user2);
     }
 
     @Test

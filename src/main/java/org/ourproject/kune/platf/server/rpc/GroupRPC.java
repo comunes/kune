@@ -29,6 +29,8 @@ import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.rpc.GroupService;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.auth.Authenticated;
+import org.ourproject.kune.platf.server.auth.Authorizated;
+import org.ourproject.kune.platf.server.access.AccessType;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
@@ -37,6 +39,7 @@ import org.ourproject.kune.platf.server.mapper.Mapper;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.wideplay.warp.persist.TransactionType;
 import com.wideplay.warp.persist.Transactional;
@@ -45,12 +48,13 @@ import com.wideplay.warp.persist.Transactional;
 public class GroupRPC implements RPC, GroupService {
     private final Mapper mapper;
     private final GroupManager groupManager;
-    private final UserSession session;
+    private final Provider<UserSession> userSessionProvider;
     private static final Log log = LogFactory.getLog(GroupRPC.class);
 
     @Inject
-    public GroupRPC(final UserSession session, final GroupManager groupManager, final Mapper mapper) {
-        this.session = session;
+    public GroupRPC(final Provider<UserSession> userSessionProvider, final GroupManager groupManager,
+            final Mapper mapper) {
+        this.userSessionProvider = userSessionProvider;
         this.groupManager = groupManager;
         this.mapper = mapper;
     }
@@ -61,7 +65,8 @@ public class GroupRPC implements RPC, GroupService {
             UserMustBeLoggedException {
         log.debug(groupDTO.getShortName() + groupDTO.getLongName() + groupDTO.getPublicDesc()
                 + groupDTO.getDefaultLicense() + groupDTO.getType());
-        final User user = session.getUser();
+        UserSession userSession = getUserSession();
+        final User user = userSession.getUser();
         Group group = mapper.map(groupDTO, Group.class);
         if (groupDTO.getType().equals(GroupDTO.COMMUNITY)) {
             group.setAdmissionType(AdmissionType.Open);
@@ -75,13 +80,18 @@ public class GroupRPC implements RPC, GroupService {
     }
 
     @Authenticated
+    @Authorizated(accessTypeRequired = AccessType.ADMIN)
     @Transactional(type = TransactionType.READ_WRITE, rollbackOn = SerializableException.class)
     public void changeGroupWsTheme(final String userHash, final String groupShortName, final String theme)
             throws AccessViolationException {
-        // TODO Auto-generated method stub
-        final User user = session.getUser();
+        UserSession userSession = getUserSession();
+        final User user = userSession.getUser();
         Group group = groupManager.findByShortName(groupShortName);
         groupManager.changeWsTheme(user, group, theme);
+    }
+
+    private UserSession getUserSession() {
+        return userSessionProvider.get();
     }
 
 }

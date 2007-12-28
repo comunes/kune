@@ -60,8 +60,31 @@ public class StateManagerDefault implements StateManager {
         this.workspace = app.getWorkspace();
     }
 
+    /**
+     * <p>
+     * Reload current state (using client cache if available)
+     * </p>
+     */
     public void reload() {
         onHistoryChanged(History.getToken());
+    }
+
+    /**
+     * <p>
+     * Reload current state
+     * </p>
+     * 
+     * @param useCache
+     *                set to false if you really want to reload the content from
+     *                the server
+     * 
+     */
+    public void reload(boolean useCache) {
+        String token = History.getToken();
+        if (!useCache) {
+            provider.removeCache(new StateToken(token));
+        }
+        onHistoryChanged(token);
     }
 
     public Session getSession() {

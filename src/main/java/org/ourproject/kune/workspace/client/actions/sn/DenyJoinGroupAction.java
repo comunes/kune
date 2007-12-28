@@ -37,8 +37,8 @@ public class DenyJoinGroupAction implements Action {
     private void onDenyJoinGroup(final Services services, final String groupShortName) {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        server.denyJoinGroup(services.session.userHash, groupShortName, services.session.getCurrentState().getGroup()
-                .getShortName(), new AsyncCallback() {
+        server.denyJoinGroup(services.session.userHash, services.session.getCurrentState().getGroup()
+                .getShortName(), groupShortName, new AsyncCallback() {
             public void onFailure(final Throwable caught) {
                 Site.hideProgress();
                 services.stateManager.processErrorException(caught);

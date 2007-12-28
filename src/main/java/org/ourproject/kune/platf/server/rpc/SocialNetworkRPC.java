@@ -24,6 +24,8 @@ import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.auth.Authenticated;
+import org.ourproject.kune.platf.server.auth.Authorizated;
+import org.ourproject.kune.platf.server.access.AccessType;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
@@ -32,6 +34,7 @@ import org.ourproject.kune.platf.server.mapper.Mapper;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.wideplay.warp.persist.TransactionType;
 import com.wideplay.warp.persist.Transactional;
@@ -39,15 +42,15 @@ import com.wideplay.warp.persist.Transactional;
 @Singleton
 public class SocialNetworkRPC implements SocialNetworkService, RPC {
 
-    private final UserSession session;
+    private final Provider<UserSession> userSessionProvider;
     private final GroupManager groupManager;
     private final SocialNetworkManager socialNetworkManager;
     private final Mapper mapper;
 
     @Inject
-    public SocialNetworkRPC(final UserSession session, final GroupManager groupManager,
+    public SocialNetworkRPC(final Provider<UserSession> userSessionProvider, final GroupManager groupManager,
             final SocialNetworkManager socialNetworkManager, final Mapper mapper) {
-        this.session = session;
+        this.userSessionProvider = userSessionProvider;
         this.groupManager = groupManager;
         this.socialNetworkManager = socialNetworkManager;
         this.mapper = mapper;
@@ -56,7 +59,8 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
     public String requestJoinGroup(final String hash, final String groupShortName) throws SerializableException {
-        User user = session.getUser();
+        UserSession userSession = getUserSession();
+        User user = userSession.getUser();
         Group group = groupManager.findByShortName(groupShortName);
         return socialNetworkManager.requestToJoin(user, group);
     }
@@ -64,107 +68,132 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
     public void unJoinGroup(final String hash, final String groupShortName) throws SerializableException {
-        User userLogged = session.getUser();
+        UserSession userSession = getUserSession();
+        User userLogged = userSession.getUser();
         Group group = groupManager.findByShortName(groupShortName);
         socialNetworkManager.unJoinGroup(userLogged.getUserGroup(), group);
     }
 
     @Authenticated
+    @Authorizated(accessTypeRequired = AccessType.ADMIN)
     @Transactional(type = TransactionType.READ_WRITE)
-    public void AcceptJoinGroup(final String hash, final String groupToAcceptShortName, final String groupShortName)
+    public void AcceptJoinGroup(final String hash, final String groupShortName, final String groupToAcceptShortName)
             throws SerializableException {
-        User userLogged = session.getUser();
+        UserSession userSession = getUserSession();
+        User userLogged = userSession.getUser();
         Group group = groupManager.findByShortName(groupShortName);
         Group groupToAccept = groupManager.findByShortName(groupToAcceptShortName);
         socialNetworkManager.acceptJoinGroup(userLogged, groupToAccept, group);
     }
 
     @Authenticated
+    @Authorizated(accessTypeRequired = AccessType.ADMIN)
     @Transactional(type = TransactionType.READ_WRITE)
-    public void deleteMember(final String hash, final String groupToDeleleShortName, final String groupShortName)
+    public void deleteMember(final String hash, final String groupShortName, final String groupToDeleleShortName)
             throws SerializableException {
-        User userLogged = session.getUser();
+        UserSession userSession = getUserSession();
+        User userLogged = userSession.getUser();
         Group group = groupManager.findByShortName(groupShortName);
         Group groupToDelete = groupManager.findByShortName(groupToDeleleShortName);
         socialNetworkManager.deleteMember(userLogged, groupToDelete, group);
     }
 
     @Authenticated
+    @Authorizated(accessTypeRequired = AccessType.ADMIN)
     @Transactional(type = TransactionType.READ_WRITE)
-    public void denyJoinGroup(final String hash, final String groupToDenyShortName, final String groupShortName)
+    public void denyJoinGroup(final String hash, final String groupShortName, final String groupToDenyShortName)
             throws SerializableException {
-        User userLogged = session.getUser();
+        UserSession userSession = getUserSession();
+        User userLogged = userSession.getUser();
         Group group = groupManager.findByShortName(groupShortName);
         Group groupToDenyJoin = groupManager.findByShortName(groupToDenyShortName);
         socialNetworkManager.denyJoinGroup(userLogged, groupToDenyJoin, group);
     }
 
     @Authenticated
+    @Authorizated(accessTypeRequired = AccessType.ADMIN)
     @Transactional(type = TransactionType.READ_WRITE)
-    public void setCollabAsAdmin(final String hash, final String groupToSetAdminShortName, final String groupShortName)
+    public void setCollabAsAdmin(final String hash, final String groupShortName, final String groupToSetAdminShortName)
             throws SerializableException {
-        User userLogged = session.getUser();
+        UserSession userSession = getUserSession();
+        User userLogged = userSession.getUser();
         Group group = groupManager.findByShortName(groupShortName);
         Group groupToSetAdmin = groupManager.findByShortName(groupToSetAdminShortName);
         socialNetworkManager.setCollabAsAdmin(userLogged, groupToSetAdmin, group);
     }
 
     @Authenticated
+    @Authorizated(accessTypeRequired = AccessType.ADMIN)
     @Transactional(type = TransactionType.READ_WRITE)
-    public void setAdminAsCollab(final String hash, final String groupToSetCollabShortName, final String groupShortName)
+    public void setAdminAsCollab(final String hash, final String groupShortName, final String groupToSetCollabShortName)
             throws SerializableException {
-        User userLogged = session.getUser();
+        UserSession userSession = getUserSession();
+        User userLogged = userSession.getUser();
         Group group = groupManager.findByShortName(groupShortName);
         Group groupToSetCollab = groupManager.findByShortName(groupToSetCollabShortName);
         socialNetworkManager.setAdminAsCollab(userLogged, groupToSetCollab, group);
     }
 
     @Authenticated
+    @Authorizated(accessTypeRequired = AccessType.ADMIN)
     @Transactional(type = TransactionType.READ_WRITE)
-    public void addAdminMember(final String hash, final String groupToAddShortName, final String groupShortName)
+    public void addAdminMember(final String hash, final String groupShortName, final String groupToAddShortName)
             throws SerializableException {
-        User userLogged = session.getUser();
+        UserSession userSession = getUserSession();
+        User userLogged = userSession.getUser();
         Group group = groupManager.findByShortName(groupShortName);
         Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
         socialNetworkManager.addGroupToAdmins(userLogged, groupToAdd, group);
     }
 
     @Authenticated
+    @Authorizated(accessTypeRequired = AccessType.ADMIN)
     @Transactional(type = TransactionType.READ_WRITE)
-    public void addCollabMember(final String hash, final String groupToAddShortName, final String groupShortName)
+    public void addCollabMember(final String hash, final String groupShortName, final String groupToAddShortName)
             throws SerializableException {
-        User userLogged = session.getUser();
+        UserSession userSession = getUserSession();
+        User userLogged = userSession.getUser();
         Group group = groupManager.findByShortName(groupShortName);
         Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
         socialNetworkManager.addGroupToCollabs(userLogged, groupToAdd, group);
     }
 
     @Authenticated
+    @Authorizated(accessTypeRequired = AccessType.ADMIN)
     @Transactional(type = TransactionType.READ_WRITE)
-    public void addViewerMember(final String hash, final String groupToAddShortName, final String groupShortName)
+    public void addViewerMember(final String hash, final String groupShortName, final String groupToAddShortName)
             throws SerializableException {
-        User userLogged = session.getUser();
+        UserSession userSession = getUserSession();
+        User userLogged = userSession.getUser();
         Group group = groupManager.findByShortName(groupShortName);
         Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
         socialNetworkManager.addGroupToViewers(userLogged, groupToAdd, group);
     }
 
-    @Authenticated
+    // At least you can access as Viewer to the Group
+    @Authorizated(accessTypeRequired = AccessType.READ)
     @Transactional(type = TransactionType.READ_ONLY)
     public SocialNetworkDTO getGroupMembers(final String hash, final String groupShortName)
             throws SerializableException {
-        User user = session.getUser();
+        UserSession userSession = getUserSession();
+        User user = userSession.getUser();
         Group group = groupManager.findByShortName(groupShortName);
         return mapper.map(socialNetworkManager.find(user, group), SocialNetworkDTO.class);
     }
 
-    @Authenticated
+    // At least you can access as Viewer to the Group
+    @Authorizated(accessTypeRequired = AccessType.READ)
     @Transactional(type = TransactionType.READ_ONLY)
     public ParticipationDataDTO getParticipation(final String hash, final String groupShortName)
             throws SerializableException {
-        User user = session.getUser();
+        UserSession userSession = getUserSession();
+        User user = userSession.getUser();
         Group group = groupManager.findByShortName(groupShortName);
         return mapper.map(socialNetworkManager.findParticipation(user, group), ParticipationDataDTO.class);
+    }
+
+    private UserSession getUserSession() {
+        return userSessionProvider.get();
     }
 
 }

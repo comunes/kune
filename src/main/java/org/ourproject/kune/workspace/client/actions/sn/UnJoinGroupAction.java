@@ -47,7 +47,7 @@ public class UnJoinGroupAction implements Action {
                     public void onSuccess(final Object result) {
                         Site.hideProgress();
                         Site.info(Kune.I18N.t("Removed as member"));
-                        services.stateManager.reload();
+                        services.stateManager.reload(false);
                     }
                 });
     }

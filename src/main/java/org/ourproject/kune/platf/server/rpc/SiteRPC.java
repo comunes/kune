@@ -37,6 +37,7 @@ import org.ourproject.kune.platf.server.users.UserInfoService;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.wideplay.warp.persist.TransactionType;
 import com.wideplay.warp.persist.Transactional;
@@ -44,7 +45,7 @@ import com.wideplay.warp.persist.Transactional;
 @Singleton
 public class SiteRPC implements RPC, SiteService {
     private final Mapper mapper;
-    private final UserSession session;
+    private final Provider<UserSession> userSessionProvider;
     private final LicenseManager licenseManager;
     private final UserManager userManager;
     private final ChatProperties chatProperties;
@@ -55,11 +56,11 @@ public class SiteRPC implements RPC, SiteService {
 
     // TODO: refactor: too many parameters! refactor to Facade Pattern
     @Inject
-    public SiteRPC(final UserSession session, final UserManager userManager, final UserInfoService userInfoService,
-            final LicenseManager licenseManager, final Mapper mapper, final KuneProperties kuneProperties,
-            final ChatProperties chatProperties, final I18nLanguageManager languageManager,
-            final I18nCountryManager countryManager) {
-        this.session = session;
+    public SiteRPC(final Provider<UserSession> userSessionProvider, final UserManager userManager,
+            final UserInfoService userInfoService, final LicenseManager licenseManager, final Mapper mapper,
+            final KuneProperties kuneProperties, final ChatProperties chatProperties,
+            final I18nLanguageManager languageManager, final I18nCountryManager countryManager) {
+        this.userSessionProvider = userSessionProvider;
         this.userManager = userManager;
         this.userInfoService = userInfoService;
         this.licenseManager = licenseManager;
@@ -73,12 +74,14 @@ public class SiteRPC implements RPC, SiteService {
     @Transactional(type = TransactionType.READ_ONLY)
     public InitDataDTO getInitData(final String userHash) throws SerializableException {
         final InitData data = new InitData();
+        UserSession userSession = getUserSession();
 
         data.setLicenses(licenseManager.getAll());
         data.setLanguages(languageManager.getAll());
         data.setCountries(countryManager.getAll());
         data.setTimezones(TimeZone.getAvailableIDs());
-        data.setUserInfo(userInfoService.buildInfo(userManager.find(session.getUser().getId()), session.getHash()));
+        data.setUserInfo(userInfoService.buildInfo(userManager.find(userSession.getUser().getId()), userSession
+                .getHash()));
         data.setChatHttpBase(chatProperties.getHttpBase());
         data.setChatDomain(chatProperties.getDomain());
         data.setChatRoomHost(chatProperties.getRoomHost());
@@ -87,4 +90,7 @@ public class SiteRPC implements RPC, SiteService {
         return mapper.map(data, InitDataDTO.class);
     }
 
+    private UserSession getUserSession() {
+        return userSessionProvider.get();
+    }
 }

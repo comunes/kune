@@ -25,6 +25,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.google.inject.name.Named;
+import com.wideplay.warp.persist.dao.Finder;
+
 @Entity
 @Table(name = "tags")
 public class Tag implements HasId {
@@ -33,20 +36,34 @@ public class Tag implements HasId {
     private Long id;
     private String name;
 
+    public Tag() {
+        this(null);
+    }
+
+    public Tag(final String name) {
+        this.name = name;
+    }
+
     public Long getId() {
-	return id;
+        return id;
     }
 
     public void setId(final Long id) {
-	this.id = id;
+        this.id = id;
     }
 
     public String getName() {
-	return name;
+        return name;
     }
 
     public void setName(final String name) {
-	this.name = name;
+        this.name = name;
+    }
+
+    @Finder(query = "FROM Tag g WHERE g.name = :name")
+    public Tag findByTagName(@Named("name")
+    final String tag) {
+        return null;
     }
 
 }

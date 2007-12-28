@@ -24,6 +24,7 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
+import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.newgroup.NewGroupListener;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.sitebar.client.Site;
@@ -32,6 +33,7 @@ import org.ourproject.kune.sitebar.client.rpc.UserService;
 import org.ourproject.kune.sitebar.client.rpc.UserServiceAsync;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListener {
@@ -79,12 +81,24 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
         Site.showProgressProcessing();
 
         AsyncCallback callback = new AsyncCallback() {
-            public void onFailure(final Throwable arg0) {
+            public void onFailure(final Throwable caught) {
                 Site.hideProgress();
+                try {
+                    throw caught;
+                } catch (final UserMustBeLoggedException e) {
+                    logout();
+                } catch (final Throwable e) {
+                    GWT.log("Other kind of exception in doLogout", null);
+                    throw new RuntimeException();
+                }
             }
 
             public void onSuccess(final Object arg0) {
                 Site.hideProgress();
+                logout();
+            }
+
+            private void logout() {
                 isLogged = false;
                 view.restoreLoginLink();
                 view.resetOptionsSubmenu();

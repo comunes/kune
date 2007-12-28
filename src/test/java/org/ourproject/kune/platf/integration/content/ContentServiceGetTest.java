@@ -17,14 +17,23 @@ import com.google.gwt.user.client.rpc.SerializableException;
 
 public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 
+    private String groupName;
+
     @Before
     public void create() {
         new IntegrationTestHelper(this);
+        groupName = getDefSiteGroupName();
+    }
+
+    @Test
+    public void noContentNotLogged() throws SerializableException {
+        final StateDTO response = contentService.getContent(null, null, new StateToken());
+        assertNotNull(response);
     }
 
     @Test(expected = GroupNotFoundException.class)
     public void unknownContent() throws ContentNotFoundException, AccessViolationException, GroupNotFoundException {
-        final StateDTO content = contentService.getContent(null, new StateToken("kune.docs"));
+        final StateDTO content = contentService.getContent(null, groupName, new StateToken("kune.docs"));
         assertNotNull(content);
         assertNotNull(content.getGroup());
         assertNotNull(content.getFolder());
@@ -37,7 +46,7 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
     @Test
     public void contentWithLoggedUserIsEditable() throws SerializableException {
         doLogin();
-        final StateDTO response = contentService.getContent(null, new StateToken());
+        final StateDTO response = contentService.getContent(null, groupName, new StateToken());
         assertNotNull(response.getContentRights());
         assertTrue(response.getContentRights().isEditable());
         // assertTrue(response.getAccessLists().getAdmin().size() == 1);
@@ -46,7 +55,7 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
     @Test
     public void notLoggedUserShouldNotEditDefaultDoc() throws ContentNotFoundException, AccessViolationException,
             GroupNotFoundException {
-        final StateDTO content = contentService.getContent(null, new StateToken());
+        final StateDTO content = contentService.getContent(null, groupName, new StateToken());
         assertFalse(content.getContentRights().isAdministrable());
         assertFalse(content.getContentRights().isEditable());
         assertTrue(content.getContentRights().isVisible());
@@ -58,7 +67,7 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
     @Test
     public void defaultCountentShouldExist() throws ContentNotFoundException, AccessViolationException,
             GroupNotFoundException {
-        final StateDTO content = contentService.getContent(null, new StateToken());
+        final StateDTO content = contentService.getContent(null, groupName, new StateToken());
         assertNotNull(content);
         assertNotNull(content.getGroup());
         assertNotNull(content.getFolder());

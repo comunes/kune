@@ -1,5 +1,15 @@
+2007-12-28 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* UserSession now injected with Provider<UserSession> to prevent session scope
+	problems
+	* Added @Authorizated to check group membership, and content access
+	* Now interceptors can be injected
+	* Reload of state without use of cache (fix several issues)
+	* Added new methods to content management (del, tag, lang selection, authors selection
+	etc)
+	* More tests in the server side
+
 2007-12-21 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* Added AuthenticatedMethodInterceptor to test logged user in @Authenticated
+	* Added AuthenticatedMethodInterceptor to test logged users in @Authenticated
 	RPC methods
 	* Added Login/Logout/Register and NewGroup Actions taking into account
 	userHash better

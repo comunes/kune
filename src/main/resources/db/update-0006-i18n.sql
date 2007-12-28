@@ -4,7 +4,7 @@ INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','People pending to 
 INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Member accepted','Member accepted','kune_core',1819);
 INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Error during registration.','Error during registration.','kune_core',1819);
 INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Alerta','Alert','kune_core',5889);
-INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Disculpa, eres la ultima persona con permisos de administración en este grupo. Busca a alguna otra persona que te substituya como administrador/a antes de abondar el grupo', 'Sorry, you are the last admin of this group. Look for someone to substitute you appropriately as admin before unjoin this group.','kune_core',5889);
+INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Disculpa, eres la ultima persona con permisos de administración en este grupo. Busca a alguna otra persona que te substituya como administrador/a antes de abandonar el grupo', 'Sorry, you are the last admin of this group. Look for someone to substitute you appropriately as admin before unjoin this group.','kune_core',5889);
 INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Personas pendientes de ser aceptadas al grupo por las/os administradoræs','People pending to be accepted in this group by the admins','kune_core',5889);
 INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Member accepted','Member accepted','kune_core',5889);
 INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Error durante el registro','Error during registration.','kune_core',5889);

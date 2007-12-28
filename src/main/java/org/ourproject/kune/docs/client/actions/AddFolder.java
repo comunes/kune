@@ -27,7 +27,6 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.sitebar.client.Site;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -49,8 +48,8 @@ public class AddFolder implements Action {
             }
 
             public void onSuccess(final Object result) {
-                StateDTO content = (StateDTO) result;
-                services.stateManager.setState(content);
+                Site.hideProgress();
+                services.stateManager.reload(false);
             }
         });
     }

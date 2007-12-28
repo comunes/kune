@@ -20,17 +20,26 @@
 
 package org.ourproject.kune.platf.server.content;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
+import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
+import org.ourproject.kune.platf.client.errors.UserNotFoundException;
+import org.ourproject.kune.platf.client.ui.KuneStringUtils;
 import org.ourproject.kune.platf.server.access.FinderService;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
+import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.Rate;
 import org.ourproject.kune.platf.server.domain.Revision;
+import org.ourproject.kune.platf.server.domain.Tag;
 import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.manager.TagManager;
 import org.ourproject.kune.platf.server.manager.impl.DefaultManager;
 
 import com.google.inject.Inject;
@@ -41,11 +50,18 @@ import com.google.inject.Singleton;
 public class ContentManagerDefault extends DefaultManager<Content, Long> implements ContentManager {
 
     private final FinderService finder;
+    private final User userFinder;
+    private final I18nLanguage languageFinder;
+    private final TagManager tagManager;
 
     @Inject
-    public ContentManagerDefault(final Provider<EntityManager> provider, final FinderService finder) {
+    public ContentManagerDefault(final Provider<EntityManager> provider, final FinderService finder,
+            final User userFinder, final I18nLanguage languageFinder, final TagManager tagManager) {
         super(provider, Content.class);
         this.finder = finder;
+        this.userFinder = userFinder;
+        this.languageFinder = languageFinder;
+        this.tagManager = tagManager;
     }
 
     public Content createContent(final String title, final User user, final Container container) {
@@ -100,4 +116,71 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
             return null;
         }
     }
+
+    public void addAuthor(final User user, final Long contentId, final String authorShortName)
+            throws ContentNotFoundException, UserNotFoundException {
+        Content content = finder.getContent(contentId);
+        User author = userFinder.getByShortName(authorShortName);
+        if (author == null) {
+            throw new UserNotFoundException();
+        }
+        content.addAuthor(author);
+    }
+
+    public void removeAuthor(final User user, final Long contentId, final String authorShortName)
+            throws ContentNotFoundException, UserNotFoundException {
+        Content content = finder.getContent(contentId);
+        User author = userFinder.getByShortName(authorShortName);
+        if (author == null) {
+            throw new UserNotFoundException();
+        }
+        content.removeAuthor(author);
+    }
+
+    public void setLanguage(final User user, final Long contentId, final String languageCode)
+            throws ContentNotFoundException, I18nNotFoundException {
+        Content content = finder.getContent(contentId);
+        I18nLanguage language = languageFinder.findByCode(languageCode);
+        if (language == null) {
+            throw new I18nNotFoundException();
+        }
+        content.setLanguage(language);
+    }
+
+    public void setPublishedOn(final User user, final Long contentId, final Date publishedOn)
+            throws ContentNotFoundException {
+        Content content = finder.getContent(contentId);
+        content.setPublishedOn(publishedOn);
+    }
+
+    public void setTags(final User user, final Long contentId, final String tags) throws ContentNotFoundException {
+        Content content = finder.getContent(contentId);
+        ArrayList<String> tagsStripped = KuneStringUtils.splitTags(tags);
+        ArrayList<Tag> tagList = new ArrayList<Tag>();
+        for (Iterator i = tagsStripped.iterator(); i.hasNext();) {
+            String tagString = (String) i.next();
+            Tag tag;
+            try {
+                tag = tagManager.findByTagName(tagString);
+            } catch (NoResultException e) {
+                tag = new Tag(tagString);
+                tagManager.persist(tag);
+            }
+            if (!tagList.contains(tag)) {
+                tagList.add(tag);
+            }
+        }
+        content.setTags(tagList);
+    }
+
+    public void setTitle(final User user, final Long contentId, final String newTitle) throws ContentNotFoundException {
+        Content content = finder.getContent(contentId);
+        content.getLastRevision().getData().setTitle(newTitle);
+    }
+
+    public void delContent(final User user, final Long contentId) throws ContentNotFoundException {
+        // TODO
+        // Content content = finder.getContent(contentId);
+    }
+
 }

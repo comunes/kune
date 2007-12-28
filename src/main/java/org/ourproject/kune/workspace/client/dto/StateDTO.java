@@ -55,6 +55,7 @@ public class StateDTO implements IsSerializable {
     private LicenseDTO license;
     private I18nLanguageDTO language;
     private Date publishedOn;
+    private String tags;
 
     /**
      * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.UserSimpleDTO>
@@ -246,6 +247,14 @@ public class StateDTO implements IsSerializable {
 
     public void setAuthors(final List authors) {
         this.authors = authors;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(final String tags) {
+        this.tags = tags;
     }
 
 }

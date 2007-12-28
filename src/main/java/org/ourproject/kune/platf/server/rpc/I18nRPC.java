@@ -24,11 +24,13 @@ import java.util.HashMap;
 
 import org.ourproject.kune.platf.client.rpc.I18nService;
 import org.ourproject.kune.platf.server.UserSession;
+import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.domain.I18nTranslation;
 import org.ourproject.kune.platf.server.manager.I18nTranslationManager;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.wideplay.warp.persist.TransactionType;
 import com.wideplay.warp.persist.Transactional;
@@ -36,20 +38,22 @@ import com.wideplay.warp.persist.Transactional;
 @Singleton
 public class I18nRPC implements RPC, I18nService {
     private final I18nTranslationManager i18nTranslationManager;
-    private final UserSession userSession;
+    private final Provider<UserSession> userSessionProvider;
 
     @Inject
-    public I18nRPC(final UserSession userSession, final I18nTranslationManager i18nTranslationManager) {
-        this.userSession = userSession;
+    public I18nRPC(final Provider<UserSession> userSessionProvider, final I18nTranslationManager i18nTranslationManager) {
+        this.userSessionProvider = userSessionProvider;
         this.i18nTranslationManager = i18nTranslationManager;
     }
 
     @Transactional(type = TransactionType.READ_ONLY)
     public String getInitialLanguage() {
         String initLanguage;
+        UserSession userSession = getUserSession();
         if (userSession.isUserLoggedIn()) {
             initLanguage = userSession.getUser().getLanguage().getCode();
         } else {
+            // FIXME: get here browserLang from request not from userSession
             if (userSession.getBrowserLanguage() != null) {
                 // Not logged, use browser language if possible
                 initLanguage = userSession.getBrowserLanguage();
@@ -70,10 +74,15 @@ public class I18nRPC implements RPC, I18nService {
         return i18nTranslationManager.getTranslation(language, text);
     }
 
+    @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
     public void setTranslation(final String userHash, final String id, final String translation)
             throws SerializableException {
         i18nTranslationManager.setTranslation(id, translation);
+    }
+
+    private UserSession getUserSession() {
+        return userSessionProvider.get();
     }
 
 }

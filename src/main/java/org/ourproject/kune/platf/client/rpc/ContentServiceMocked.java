@@ -20,6 +20,8 @@
 
 package org.ourproject.kune.platf.client.rpc;
 
+import java.util.Date;
+
 import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
@@ -31,7 +33,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class ContentServiceMocked extends MockedService implements ContentServiceAsync {
 
-    public void getContent(final String user, final StateToken newState, final AsyncCallback callback) {
+    public void getContent(final String user, final String groupShortName, final StateToken newState,
+            final AsyncCallback callback) {
         StateDTO content = new StateDTO();
         ContainerDTO folder = new ContainerDTO();
         folder.setId(new Long(1));
@@ -49,11 +52,12 @@ public class ContentServiceMocked extends MockedService implements ContentServic
         answer(content, callback);
     }
 
-    public void save(final String user, final String documentId, final String content, final AsyncCallback asyncCallback) {
+    public void save(final String user, final String groupShortName, final String documentId, final String content,
+            final AsyncCallback asyncCallback) {
     }
 
-    public void addContent(final String user, final Long parentFolderId, final String name,
-            final AsyncCallback asyncCallback) {
+    public void addContent(final String user, final String groupShortName, final Long parentFolderId,
+            final String name, final AsyncCallback asyncCallback) {
     }
 
     public void addFolder(final String hash, final String groupShortName, final Long parentFolderId,
@@ -64,9 +68,36 @@ public class ContentServiceMocked extends MockedService implements ContentServic
             final AsyncCallback callback) {
     }
 
-    public void rateContent(final String userHash, final String documentId, final Double value,
-            final AsyncCallback asyncCallback) {
+    public void rateContent(final String userHash, final String groupShortName, final String documentId,
+            final Double value, final AsyncCallback asyncCallback) {
+    }
 
+    public void addAuthor(final String userHash, final String groupShortName, final String documentId,
+            final String authorShortName, final AsyncCallback asyncCallback) {
+    }
+
+    public void removeAuthor(final String userHash, final String groupShortName, final String documentId,
+            final String authorShortName, final AsyncCallback asyncCallback) {
+    }
+
+    public void delContent(final String userHash, final String groupShortName, final String documentId,
+            final AsyncCallback asyncCallback) {
+    }
+
+    public void setLanguage(final String userHash, final String groupShortName, final String documentId,
+            final String languageCode, final AsyncCallback asyncCallback) {
+    }
+
+    public void setPublishedOn(final String userHash, final String groupShortName, final String documentId,
+            final Date date, final AsyncCallback asyncCallback) {
+    }
+
+    public void setTags(final String userHash, final String groupShortName, final String documentId, final String tags,
+            final AsyncCallback asyncCallback) {
+    }
+
+    public void setTitle(final String userHash, final String groupShortName, final String documentId,
+            final String newTitle, final AsyncCallback asyncCallback) {
     }
 
 }

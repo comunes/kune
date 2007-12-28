@@ -32,8 +32,8 @@ public class DocumentContextPresenter implements DocumentContext {
     private final DocumentContextComponents components;
 
     public DocumentContextPresenter(final WorkspaceDeckView view) {
-	this.view = view;
-	this.components = new DocumentContextComponents(this);
+        this.view = view;
+        this.components = new DocumentContextComponents(this);
     }
 
     public void attach() {
@@ -43,24 +43,25 @@ public class DocumentContextPresenter implements DocumentContext {
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void setContent(final StateDTO content) {
-	StateToken state = content.getState();
-	FolderContext folderContext = components.getFolderContext();
-	folderContext.setContainer(state, content.getFolder(), content.getFolderRights());
-	components.getAdminContext().setAccessLists(content.getAccessLists());
-	view.show(folderContext.getView());
+        StateToken state = content.getState();
+        FolderContext folderContext = components.getFolderContext();
+        folderContext.setContainer(state, content.getFolder(), content.getFolderRights());
+        AdminContext adminContext = components.getAdminContext();
+        adminContext.setState(content);
+        view.show(folderContext.getView());
     }
 
     public void showAdmin() {
-	AdminContext adminContext = components.getAdminContext();
-	view.show(adminContext.getView());
+        AdminContext adminContext = components.getAdminContext();
+        view.show(adminContext.getView());
     }
 
     public void showFolders() {
-	FolderContext folderContext = components.getFolderContext();
-	view.show(folderContext.getView());
+        FolderContext folderContext = components.getFolderContext();
+        view.show(folderContext.getView());
     }
 }

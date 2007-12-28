@@ -38,15 +38,17 @@ public class AddDocument implements Action {
     private void addDocument(final Services services, final String name, final ContainerDTO containerDTO) {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
-        server.addContent(services.session.userHash, containerDTO.getId(), name, new AsyncCallback() {
-            public void onFailure(final Throwable caught) {
-                services.stateManager.processErrorException(caught);
-            }
+        server.addContent(services.session.userHash, services.session.getCurrentState().getGroup().getShortName(),
+                containerDTO.getId(), name, new AsyncCallback() {
+                    public void onFailure(final Throwable caught) {
+                        services.stateManager.processErrorException(caught);
+                    }
 
-            public void onSuccess(final Object result) {
-                StateDTO content = (StateDTO) result;
-                services.stateManager.setState(content);
-            }
-        });
+                    public void onSuccess(final Object result) {
+                        Site.hideProgress();
+                        StateDTO content = (StateDTO) result;
+                        services.stateManager.setState(content);
+                    }
+                });
     }
 }

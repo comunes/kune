@@ -39,7 +39,8 @@ public class SaveDocument implements Action {
     private void save(final Services services, final StateDTO content, final DocumentContent documentContent) {
         Site.showProgressSaving();
         ContentServiceAsync server = ContentService.App.getInstance();
-        server.save(services.session.userHash, content.getDocumentId(), content.getContent(), new AsyncCallback() {
+        server.save(services.session.userHash, services.session.getCurrentState().getGroup().getShortName(), content
+                .getDocumentId(), content.getContent(), new AsyncCallback() {
             public void onFailure(final Throwable caught) {
                 Site.hideProgress();
                 Site.error(Kune.I18N.t("Error saving document. Retrying..."));

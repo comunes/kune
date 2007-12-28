@@ -38,6 +38,7 @@ import org.ourproject.kune.sitebar.client.rpc.UserService;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.wideplay.warp.persist.TransactionType;
 import com.wideplay.warp.persist.Transactional;
@@ -46,7 +47,7 @@ import com.wideplay.warp.persist.Transactional;
 public class UserRPC implements RPC, UserService {
 
     private final UserManager userManager;
-    private final UserSession userSession;
+    private final Provider<UserSession> userSessionProvider;
     private final GroupManager groupManager;
     private final Mapper mapper;
     private final UserInfoService userInfoService;
@@ -54,11 +55,11 @@ public class UserRPC implements RPC, UserService {
     // private final Provider<HttpServletRequest> sessionProvider;
 
     @Inject
-    public UserRPC(final UserSession session, final UserManager userManager, final GroupManager groupManager,
-            final UserInfoService userInfoService, final Mapper mapper) {
+    public UserRPC(final Provider<UserSession> userSessionProvider, final UserManager userManager,
+            final GroupManager groupManager, final UserInfoService userInfoService, final Mapper mapper) {
         // final Provider<HttpServletRequest> sessionProvider,
         // this.sessionProvider = sessionProvider;
-        this.userSession = session;
+        this.userSessionProvider = userSessionProvider;
         this.userManager = userManager;
         this.groupManager = groupManager;
         this.userInfoService = userInfoService;
@@ -78,7 +79,7 @@ public class UserRPC implements RPC, UserService {
         // within sessions)
         // getHttpSession().invalidate();
         // sessionProvider.get().getSession(true);
-        userSession.logout();
+        getUserSession().logout();
     }
 
     @Transactional(type = TransactionType.READ_WRITE, rollbackOn = SerializableException.class)
@@ -93,6 +94,7 @@ public class UserRPC implements RPC, UserService {
     @Authenticated
     @Transactional(type = TransactionType.READ_ONLY)
     public UserInfoDTO reloadUserInfo(final String userHash) throws SerializableException {
+        UserSession userSession = getUserSession();
         if (userSession.getUser().getId() == null) {
             throw new UserMustBeLoggedException();
         }
@@ -100,10 +102,14 @@ public class UserRPC implements RPC, UserService {
         return loadUserInfo(user);
     }
 
+    private UserSession getUserSession() {
+        return userSessionProvider.get();
+    }
+
     private UserInfoDTO loginUser(final User user) throws SerializableException {
         if (user != null) {
             // Maybe use terracotta.org for http session clustering
-            userSession.login(user, UUID.randomUUID().toString());
+            getUserSession().login(user, UUID.randomUUID().toString());
             return loadUserInfo(user);
         } else {
             throw new UserAuthException();
@@ -111,7 +117,7 @@ public class UserRPC implements RPC, UserService {
     }
 
     private UserInfoDTO loadUserInfo(final User user) throws SerializableException {
-        UserInfo userInfo = userInfoService.buildInfo(user, userSession.getHash());
+        UserInfo userInfo = userInfoService.buildInfo(user, getUserSession().getHash());
         return mapper.map(userInfo, UserInfoDTO.class);
     }
 
