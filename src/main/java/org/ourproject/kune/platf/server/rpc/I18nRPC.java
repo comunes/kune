@@ -22,6 +22,8 @@ package org.ourproject.kune.platf.server.rpc;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.ourproject.kune.platf.client.rpc.I18nService;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.auth.Authenticated;
@@ -39,9 +41,12 @@ import com.wideplay.warp.persist.Transactional;
 public class I18nRPC implements RPC, I18nService {
     private final I18nTranslationManager i18nTranslationManager;
     private final Provider<UserSession> userSessionProvider;
+    private final Provider<HttpServletRequest> requestProvider;
 
     @Inject
-    public I18nRPC(final Provider<UserSession> userSessionProvider, final I18nTranslationManager i18nTranslationManager) {
+    public I18nRPC(final Provider<HttpServletRequest> requestProvider, final Provider<UserSession> userSessionProvider,
+            final I18nTranslationManager i18nTranslationManager) {
+        this.requestProvider = requestProvider;
         this.userSessionProvider = userSessionProvider;
         this.i18nTranslationManager = i18nTranslationManager;
     }
@@ -53,10 +58,10 @@ public class I18nRPC implements RPC, I18nService {
         if (userSession.isUserLoggedIn()) {
             initLanguage = userSession.getUser().getLanguage().getCode();
         } else {
-            // FIXME: get here browserLang from request not from userSession
-            if (userSession.getBrowserLanguage() != null) {
+            String browserLang = requestProvider.get().getLocale().getLanguage();
+            if (browserLang != null) {
                 // Not logged, use browser language if possible
-                initLanguage = userSession.getBrowserLanguage();
+                initLanguage = browserLang;
             } else {
                 initLanguage = I18nTranslation.DEFAULT_LANG;
             }

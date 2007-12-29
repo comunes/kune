@@ -81,7 +81,7 @@ INSERT INTO `globalize_translations` VALUES (3500,'',NULL,1,'','Administradoræs
 INSERT INTO `globalize_translations` VALUES (3501,'',NULL,1,'','Idioma:','Language:','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (3502,'',NULL,1,'','Pendiente','Pending','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (3503,'',NULL,1,'','Colaboradoræs','Collaborators','kune_core',5889);
-INSERT INTO `globalize_translations` VALUES (3504,'',NULL,1,'','Miembras/os del grupo','Group members','kune_core',5889);
+INSERT INTO `globalize_translations` VALUES (3504,'',NULL,1,'','Miembros/as del grupo','Group members','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (3505,'',NULL,1,'','Personas y grupos que colaboran en este grupo','People and groups collaborating in this group','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (3506,'',NULL,1,'','administrador/a en:','admin in:','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (3507,'',NULL,1,'','Visita la página inicial del grupo','Visit this group homepage','kune_core',5889);
@@ -123,7 +123,7 @@ INSERT INTO `globalize_translations` VALUES (3542,'',NULL,1,'','Texto a traducir
 INSERT INTO `globalize_translations` VALUES (3543,'',NULL,1,'','Haga click para ordenar','Click to sort','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (3544,'',NULL,1,'','Traducción (clic para editar)','Translation (click to edit)','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (3545,'',NULL,1,'','Cambiar idioma','Change language','kune_core',5889);
-INSERT INTO `globalize_translations` VALUES (3546,'',NULL,1,'','Añada mienbra/o','Add member','kune_core',5889);
+INSERT INTO `globalize_translations` VALUES (3546,'',NULL,1,'','Añada miembro/a','Add member','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (3547,'',NULL,1,'','Elimine este miembro/a','Remove this member','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (3548,'',NULL,1,'','Cambiar a colaborador/a','Change to collaborator','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (3549,'',NULL,1,'','Cambiar a administrador/a','Change to admin','kune_core',5889);

@@ -1,3 +1,10 @@
+2007-12-29 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* pom.xml: upgrade to gwt-maven version 1.5.3
+	* extjs locale first integration
+	* If language changes in UI, we make a redirect with proper ?locale
+	* new ServletRequestMocked for tests and now we can inject ServletRequest
+	for invalidate sessions (login/logout) and to detect browser language.
+
 2007-12-28 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* UserSession now injected with Provider<UserSession> to prevent session scope
 	problems

@@ -43,9 +43,9 @@ public class LoggedInAction implements Action {
         services.session.userHash = userInfoDTO.getUserHash();
         Site.sitebar.showLoggedUser(userInfoDTO);
         I18nLanguageDTO language = userInfoDTO.getLanguage();
-        I18nUITranslation.getInstance().setCurrentLanguage(language.getCode());
-        services.app.getWorkspace().getI18nTranslatorComponent().setLanguage(language);
         services.stateManager.reload(false);
+        services.app.getWorkspace().getI18nTranslatorComponent().setLanguage(language);
+        I18nUITranslation.getInstance().setCurrentLanguage(language.getCode());
     }
 
     private void setCookie(final UserInfoDTO userInfoDTO) {

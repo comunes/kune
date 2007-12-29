@@ -1,5 +1,7 @@
 package org.ourproject.kune.platf.integration;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.ourproject.kune.chat.server.ChatServerModule;
 import org.ourproject.kune.docs.server.DocumentServerModule;
 import org.ourproject.kune.platf.server.KunePersistenceService;
@@ -31,6 +33,7 @@ public class IntegrationTestHelper {
                         // test_db: use mysql
                         bindConstant().annotatedWith(JpaUnit.class).to("test");
                         bindConstant().annotatedWith(PropertiesFileName.class).to("kune.properties");
+                        bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
                     }
                 });
         return injector;

@@ -22,6 +22,8 @@ package org.ourproject.kune.platf.server.rpc;
 
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.UserAuthException;
@@ -51,14 +53,14 @@ public class UserRPC implements RPC, UserService {
     private final GroupManager groupManager;
     private final Mapper mapper;
     private final UserInfoService userInfoService;
-
-    // private final Provider<HttpServletRequest> sessionProvider;
+    private final Provider<HttpServletRequest> requestProvider;
 
     @Inject
-    public UserRPC(final Provider<UserSession> userSessionProvider, final UserManager userManager,
-            final GroupManager groupManager, final UserInfoService userInfoService, final Mapper mapper) {
-        // final Provider<HttpServletRequest> sessionProvider,
-        // this.sessionProvider = sessionProvider;
+    public UserRPC(final Provider<HttpServletRequest> requestProvider, final Provider<UserSession> userSessionProvider,
+            final UserManager userManager, final GroupManager groupManager, final UserInfoService userInfoService,
+            final Mapper mapper) {
+
+        this.requestProvider = requestProvider;
         this.userSessionProvider = userSessionProvider;
         this.userManager = userManager;
         this.groupManager = groupManager;
@@ -68,6 +70,7 @@ public class UserRPC implements RPC, UserService {
 
     @Transactional(type = TransactionType.READ_ONLY)
     public UserInfoDTO login(final String nickOrEmail, final String passwd) throws SerializableException {
+        getNewSession();
         User user = userManager.login(nickOrEmail, passwd);
         return loginUser(user);
     }
@@ -75,11 +78,8 @@ public class UserRPC implements RPC, UserService {
     @Authenticated
     @Transactional(type = TransactionType.READ_ONLY)
     public void logout(final String userHash) throws SerializableException {
-        // FIXME: the invalidate is not working (UserSession injection problem
-        // within sessions)
-        // getHttpSession().invalidate();
-        // sessionProvider.get().getSession(true);
         getUserSession().logout();
+        getNewSession();
     }
 
     @Transactional(type = TransactionType.READ_WRITE, rollbackOn = SerializableException.class)
@@ -102,10 +102,6 @@ public class UserRPC implements RPC, UserService {
         return loadUserInfo(user);
     }
 
-    private UserSession getUserSession() {
-        return userSessionProvider.get();
-    }
-
     private UserInfoDTO loginUser(final User user) throws SerializableException {
         if (user != null) {
             // Maybe use terracotta.org for http session clustering
@@ -116,13 +112,18 @@ public class UserRPC implements RPC, UserService {
         }
     }
 
+    private void getNewSession() {
+        requestProvider.get().getSession().invalidate();
+        requestProvider.get().getSession(true);
+    }
+
+    private UserSession getUserSession() {
+        return userSessionProvider.get();
+    }
+
     private UserInfoDTO loadUserInfo(final User user) throws SerializableException {
         UserInfo userInfo = userInfoService.buildInfo(user, getUserSession().getHash());
         return mapper.map(userInfo, UserInfoDTO.class);
     }
-
-    // private HttpSession getHttpSession() {
-    // return sessionProvider.get().getSession();
-    // }
 
 }

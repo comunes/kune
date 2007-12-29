@@ -286,7 +286,7 @@
       <plugin>
         <groupId>com.totsp.gwt</groupId>
         <artifactId>maven-googlewebtoolkit2-plugin</artifactId>
-        <version>1.5.3-SNAPSHOT</version>
+        <version>1.5.3</version>
         <configuration>
           <logLevel>INFO</logLevel>
           <runTarget>org.ourproject.kune.app.Kune/Kune.html</runTarget>
