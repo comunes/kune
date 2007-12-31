@@ -1,4 +1,5 @@
 2007-12-30 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* (drop database to test this changes)
 	* Containers parent/child modification follow hibernate pattern recomendations
 	* AbsolutePath in containers is now a list of containers (needed in UI)
 	* Tests when RequestServletMocked return null Session fixed 
