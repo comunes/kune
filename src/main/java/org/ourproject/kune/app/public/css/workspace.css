@@ -300,7 +300,7 @@
 }
 
 .kune-NavigationBar .kune-ContextItemsPanel-LabelLink {
-  text-decoration: underline;
+/*  text-decoration: underline; */
   color: green;
   cursor: pointer;
   margin-left: 3px;
@@ -406,6 +406,7 @@
   border-top: 1px solid #CCC;
   border-bottom: 1px solid #F2F2F2;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .kune-StackedDropDownPanel .kune-DropDownInner {

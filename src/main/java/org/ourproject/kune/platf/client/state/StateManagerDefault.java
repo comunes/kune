@@ -217,7 +217,12 @@ public class StateManagerDefault implements StateManager {
         } catch (final AccessViolationException e) {
             Site.error(Kune.I18N.t("You don't have rights to do that"));
         } catch (final UserMustBeLoggedException e) {
-            Site.error(Kune.I18N.t("Please sign in or register"));
+            if (session.isLogged()) {
+                Site.doLogout();
+                Site.showAlertMessage(Kune.I18N.t("Your session has expired. Please login again."));
+            } else {
+                Site.error(Kune.I18N.t("Please sign in or register"));
+            }
         } catch (final GroupNotFoundException e) {
             Site.error(Kune.I18N.t("Group not found"));
         } catch (final ContentNotFoundException e) {

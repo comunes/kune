@@ -10,7 +10,7 @@ INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Member added as co
 INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Other people that collaborate with this group','Other people that collaborate with this group','kune_core',1819);
 INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Error realizando la operación','Error performing operation','kune_core',5889);
 INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Apodo, correo o contraseña incorrectos','Incorrect nickname/email or password','kune_core',5889);
-INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Solicitado. Esperando la decisión de las/os administradoræs','Requested. Waiting for admins decision','kune_core',5889);
+INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Solicitado. Esperando la decisión de los/as administradoræs','Requested. Waiting for admins decision','kune_core',5889);
 INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Ese nombre está ya en uso, intentelo con otro diferente.','This name in already in use, try with a different name.','kune_core',5889);
 INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Buscar usuarios/as existentes y añadir como miembros/as','Search existing users and groups and add as members','kune_core',5889);
 INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Por favor, acceda o regístrese','Please sign in or register','kune_core',5889);

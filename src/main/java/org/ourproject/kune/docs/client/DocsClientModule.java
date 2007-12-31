@@ -22,6 +22,13 @@ package org.ourproject.kune.docs.client;
 
 import org.ourproject.kune.docs.client.actions.AddDocument;
 import org.ourproject.kune.docs.client.actions.AddFolder;
+import org.ourproject.kune.docs.client.actions.ContentAddAuthorAction;
+import org.ourproject.kune.docs.client.actions.ContentDelContentAction;
+import org.ourproject.kune.docs.client.actions.ContentRemoveAuthorAction;
+import org.ourproject.kune.docs.client.actions.ContentSetLanguageAction;
+import org.ourproject.kune.docs.client.actions.ContentSetPublishedOnAction;
+import org.ourproject.kune.docs.client.actions.ContentSetTagsAction;
+import org.ourproject.kune.docs.client.actions.ContentSetTitleAction;
 import org.ourproject.kune.docs.client.actions.DocsEvents;
 import org.ourproject.kune.docs.client.actions.GoParentFolder;
 import org.ourproject.kune.docs.client.actions.SaveDocument;
@@ -30,10 +37,17 @@ import org.ourproject.kune.platf.client.extend.Register;
 
 public class DocsClientModule implements ClientModule {
     public void configure(final Register register) {
-	register.addTool(new DocumentClientTool());
-	register.addAction(DocsEvents.SAVE_DOCUMENT, new SaveDocument());
-	register.addAction(DocsEvents.ADD_DOCUMENT, new AddDocument());
-	register.addAction(DocsEvents.ADD_FOLDER, new AddFolder());
-	register.addAction(DocsEvents.GO_PARENT_FOLDER, new GoParentFolder());
+        register.addTool(new DocumentClientTool());
+        register.addAction(DocsEvents.SAVE_DOCUMENT, new SaveDocument());
+        register.addAction(DocsEvents.ADD_DOCUMENT, new AddDocument());
+        register.addAction(DocsEvents.ADD_FOLDER, new AddFolder());
+        register.addAction(DocsEvents.GO_PARENT_FOLDER, new GoParentFolder());
+        register.addAction(DocsEvents.ADD_AUTHOR, new ContentAddAuthorAction());
+        register.addAction(DocsEvents.REMOVE_AUTHOR, new ContentRemoveAuthorAction());
+        register.addAction(DocsEvents.SET_LANGUAGE, new ContentSetLanguageAction());
+        register.addAction(DocsEvents.SET_PUBLISHED_ON, new ContentSetPublishedOnAction());
+        register.addAction(DocsEvents.SET_TAGS, new ContentSetTagsAction());
+        register.addAction(DocsEvents.SET_TITLE, new ContentSetTitleAction());
+        register.addAction(DocsEvents.DEL_CONTENT, new ContentDelContentAction());
     }
 }

@@ -35,14 +35,11 @@ import to.tipit.gwtlib.FireLog;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class I18nUITranslation {
-    private static final String TRANSLATION_NOTE_REGEXP = " (\\[)%NT (.*)(\\])$";
-    private static final String NOTE_FOR_TRANSLATOR_TAG_BEGIN = " [%NT ";
-    private static final String NOTE_FOR_TRANSLATOR_TAG_END = "]";
+public class I18nUITranslationService extends I18nTranslationService {
     // Also in I18nTranslation
     private static final String UNTRANSLATED_VALUE = null;
 
-    private static I18nUITranslation instance;
+    private static I18nUITranslationService instance;
     private HashMap lexicon;
     private String currentLanguage;
     private I18nChangeListenerCollection i18nChangeListeners;
@@ -67,9 +64,9 @@ public class I18nUITranslation {
         server.getLexicon(currentLanguage, callback);
     }
 
-    public static I18nUITranslation getInstance() {
+    public static I18nUITranslationService getInstance() {
         if (instance == null) {
-            instance = new I18nUITranslation();
+            instance = new I18nUITranslationService();
         }
         return instance;
     }
@@ -121,73 +118,9 @@ public class I18nUITranslation {
         return decodeHtml(translation);
     }
 
-    /*
-     * Use [%s] to reference the string parameter
-     * 
-     */
-    public String t(final String text, final String arg) {
-        String translation = t(text);
-        translation = translation.replaceFirst("\\[%s\\]", arg);
-        return decodeHtml(translation);
-    }
-
-    /*
-     * Use [%d] to reference the Integer parameter
-     * 
-     */
-    public String t(final String text, final Integer arg) {
-        String translation = t(text);
-        translation = translation.replaceFirst("\\[%d\\]", arg.toString());
-        return decodeHtml(translation);
-
-    }
-
-    /*
-     * Adds [%NT noteForTranslators] at the end of text. This tag is later
-     * renderer in the translator panel to inform translator how to do this
-     * translation
-     * 
-     * 
-     */
-    public String tWithNT(final String text, final String noteForTranslators) {
-        return t(text + NOTE_FOR_TRANSLATOR_TAG_BEGIN + noteForTranslators + NOTE_FOR_TRANSLATOR_TAG_END);
-    }
-
-    /*
-     * Use [%s] to reference the String parameter.
-     * 
-     * Also adds [%NT noteForTranslators] at the end of text. This tag is later
-     * renderer in the translator panel to inform translator how to do this
-     * translation
-     * 
-     * 
-     */
-    public String tWithNT(final String text, final String noteForTranslators, final String arg) {
-        return t(text + NOTE_FOR_TRANSLATOR_TAG_BEGIN + noteForTranslators + NOTE_FOR_TRANSLATOR_TAG_END, arg);
-    }
-
-    /*
-     * Use [%d] to reference the Integer parameter.
-     * 
-     * Also adds [%NT noteForTranslators] at the end of text. This tag is later
-     * renderer in the translator panel to inform translator how to do this
-     * translation
-     * 
-     * 
-     */
-    public String tWithNT(final String text, final String noteForTranslators, final Integer arg) {
-        return t(text + NOTE_FOR_TRANSLATOR_TAG_BEGIN + noteForTranslators + NOTE_FOR_TRANSLATOR_TAG_END, arg);
-    }
-
     public void setTranslationAfterSave(final String text, final String translation) {
         lexicon.put(text, translation);
         fireI18nLanguageChange();
-    }
-
-    public String decodeHtml(final String textToDecode) {
-        String text = textToDecode;
-        // text = text.replaceAll("&copy;", "©");
-        return text;
     }
 
     /*
@@ -206,10 +139,6 @@ public class I18nUITranslation {
         if (i18nChangeListeners != null) {
             i18nChangeListeners.remove(listener);
         }
-    }
-
-    public String removeNT(final String string) {
-        return string.replaceAll(TRANSLATION_NOTE_REGEXP, "");
     }
 
     private void fireI18nLanguageChange() {
@@ -231,7 +160,7 @@ public class I18nUITranslation {
      * the "debugger" line.
      * 
      * @param newLocale
-     *                String value of the new i18n locale to go to.
+     *                String value of the new locale to go to.
      */
     private native void changeLocale(String newLocale)
     /*-{

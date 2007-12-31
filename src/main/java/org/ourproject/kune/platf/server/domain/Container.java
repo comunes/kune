@@ -21,66 +21,72 @@
 package org.ourproject.kune.platf.server.domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "containers")
 public class Container implements HasId {
-    public static final String SEP = "/";
-
     @Id
     @GeneratedValue
     Long id;
 
+    private String name;
+
+    private String toolName;
+
+    private String typeId;
+
+    @ManyToOne
+    private I18nLanguage language;
+
     @OneToOne
     private Group owner;
 
+    // Parent/Child pattern:
+    // http://www.hibernate.org/hib_docs/reference/en/html/example-parentchild.html
+    // http://www.researchkitchen.co.uk/blog/archives/57
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
     private Container parent;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Container> childs;
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Container> childs;
 
-    @OneToMany(mappedBy = "container")
-    private final List<Content> contents;
+    @OneToMany(mappedBy = "container", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Content> contents;
 
-    @Basic(optional = false)
-    private String absolutePath;
-
-    private String typeId;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Container> absolutePath;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<ContainerTranslation> containerTranslations;
 
-    private String toolName;
-
-    private String name;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private I18nLanguage language;
-
-    public Container(final String parentPath, final String title, final Group group, final String toolName) {
+    public Container(final String title, final Group group, final String toolName) {
         this.name = title;
-        this.absolutePath = parentPath + SEP + title;
         owner = group;
         this.toolName = toolName;
-        this.contents = new ArrayList<Content>();
-        this.childs = new ArrayList<Container>();
+        this.contents = new HashSet<Content>();
+        this.childs = new HashSet<Container>();
+        this.absolutePath = new ArrayList<Container>();
     }
 
     public Container() {
-        this(null, null, null, null);
+        this(null, null, null);
     }
 
     public String getName() {
@@ -111,20 +117,12 @@ public class Container implements HasId {
         this.parent = parent;
     }
 
-    public List<Container> getChilds() {
+    public Set<Container> getChilds() {
         return childs;
     }
 
-    public void setChilds(final List<Container> childs) {
+    public void setChilds(final Set<Container> childs) {
         this.childs = childs;
-    }
-
-    public String getAbsolutePath() {
-        return absolutePath;
-    }
-
-    public void setAbsolutePath(final String absolutePath) {
-        this.absolutePath = absolutePath;
     }
 
     public List<ContainerTranslation> getAliases() {
@@ -166,13 +164,15 @@ public class Container implements HasId {
         this.typeId = typeId;
     }
 
-    public List<Content> getContents() {
+    public Set<Content> getContents() {
         return contents;
     }
 
-    public void addChild(final Container container) {
-        childs.size();
-        childs.add(container);
+    public void addChild(final Container child) {
+        // childs.size();
+        // childs.add(container);
+        child.setParent(this);
+        childs.add(child);
     }
 
     public I18nLanguage getLanguage() {
@@ -183,4 +183,33 @@ public class Container implements HasId {
         this.language = language;
     }
 
+    public List<ContainerTranslation> getContainerTranslations() {
+        return containerTranslations;
+    }
+
+    public void setContainerTranslations(final List<ContainerTranslation> containerTranslations) {
+        this.containerTranslations = containerTranslations;
+    }
+
+    public void setContents(final HashSet<Content> contents) {
+        this.contents = contents;
+    }
+
+    public List<Container> getAbsolutePath() {
+        return absolutePath;
+    }
+
+    public void setAbsolutePath(final List<Container> absolutePath) {
+        this.absolutePath = absolutePath;
+    }
+
+    @Transient
+    public boolean isLeaf() {
+        return childs.size() == 0 && contents.size() == 0;
+    }
+
+    @Transient
+    public boolean isRoot() {
+        return parent == null;
+    }
 }

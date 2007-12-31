@@ -26,6 +26,7 @@ import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.sitebar.client.Site;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -40,7 +41,7 @@ public class AddFolder implements Action {
 
     private void addFolder(final Services services, final String name, final GroupDTO group,
             final ContainerDTO container) {
-        Site.showProgress("adding document");
+        Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
         server.addFolder(services.session.userHash, group.getShortName(), container.getId(), name, new AsyncCallback() {
             public void onFailure(final Throwable caught) {
@@ -49,6 +50,7 @@ public class AddFolder implements Action {
 
             public void onSuccess(final Object result) {
                 Site.hideProgress();
+                Site.info(Kune.I18N.t("Folder created"));
                 services.stateManager.reload(false);
             }
         });

@@ -229,7 +229,7 @@ legend {
 }
 
 .kune-IconHyperlink a:link {
-  text-decoration: underline;
+  /* text-decoration: underline; */
   color: green;
 }
 

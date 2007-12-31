@@ -108,8 +108,8 @@ public class LoginPresenter implements Login, MessagePresenter {
             TimeZoneDTO timezone = new TimeZoneDTO();
             timezone.setId(view.getTimezone());
 
-            UserDTO user = new UserDTO(view.getLongName(), view.getShortName(), view
-                    .getRegisterPassword(), view.getEmail(), language, country, timezone);
+            UserDTO user = new UserDTO(view.getLongName(), view.getShortName(), view.getRegisterPassword(), view
+                    .getEmail(), language, country, timezone);
             AsyncCallback callback = new AsyncCallback() {
                 public void onFailure(final Throwable caught) {
                     Site.hideProgress();

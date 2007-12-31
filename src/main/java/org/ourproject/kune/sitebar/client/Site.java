@@ -79,6 +79,10 @@ public class Site {
         sitebar.doLogin(returnToken);
     }
 
+    public static void doLogout() {
+        sitebar.doLogout();
+    }
+
     public static void showAlertMessage(final String message) {
         sitebar.showAlertMessage(message);
     }

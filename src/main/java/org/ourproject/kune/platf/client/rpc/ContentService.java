@@ -23,56 +23,48 @@ package org.ourproject.kune.platf.client.rpc;
 import java.util.Date;
 
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.errors.AccessViolationException;
-import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
-import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
-import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
-import org.ourproject.kune.platf.client.errors.UserNotFoundException;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 public interface ContentService extends RemoteService {
 
-    StateDTO getContent(String userHash, String groupShortName, StateToken token) throws ContentNotFoundException,
-            AccessViolationException, GroupNotFoundException;
+    StateDTO getContent(String userHash, String groupShortName, StateToken token) throws SerializableException;
 
-    int save(String user, String groupShortName, String documentId, String content) throws AccessViolationException,
-            ContentNotFoundException;
+    int save(String user, String groupShortName, String documentId, String content) throws SerializableException;
 
     StateDTO addContent(String user, String groupShortName, Long parentFolderId, String name)
-            throws AccessViolationException, ContentNotFoundException;
+            throws SerializableException;
 
     StateDTO addFolder(String hash, String groupShortName, Long parentFolderId, String title)
-            throws ContentNotFoundException, AccessViolationException, GroupNotFoundException;
+            throws SerializableException;
 
-    StateDTO addRoom(String user, String groupShortName, Long parentFolderId, String name)
-            throws AccessViolationException, ContentNotFoundException, GroupNotFoundException;
+    StateDTO addRoom(String user, String groupShortName, Long parentFolderId, String name) throws SerializableException;
 
     void rateContent(String userHash, String groupShortName, String documentId, Double value)
-            throws ContentNotFoundException, AccessViolationException;
+            throws SerializableException;
 
     void setLanguage(String userHash, String groupShortName, String documentId, String languageCode)
-            throws ContentNotFoundException, I18nNotFoundException;
+            throws SerializableException;
 
     void setPublishedOn(String userHash, String groupShortName, String documentId, Date date)
-            throws ContentNotFoundException;
+            throws SerializableException;
 
-    void setTags(String userHash, String groupShortName, String documentId, String tags)
-            throws ContentNotFoundException;
+    void setTags(String userHash, String groupShortName, String documentId, String tags) throws SerializableException;
 
     void addAuthor(String userHash, String groupShortName, String documentId, String authorShortName)
-            throws ContentNotFoundException, UserNotFoundException;
+            throws SerializableException;
 
     void removeAuthor(String userHash, String groupShortName, String documentId, String authorShortName)
-            throws ContentNotFoundException, UserNotFoundException;
+            throws SerializableException;
 
     void setTitle(String userHash, String groupShortName, String documentId, String newTitle)
-            throws ContentNotFoundException;
+            throws SerializableException;
 
-    void delContent(String userHash, String groupShortName, String documentId) throws ContentNotFoundException;
+    void delContent(String userHash, String groupShortName, String documentId) throws SerializableException;
 
     public static class App {
         private static ContentServiceAsync instance;

@@ -24,7 +24,7 @@ import java.util.Iterator;
 
 import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.ui.DropDownPanel;
-import org.ourproject.kune.platf.client.ui.IconHyperlink;
+import org.ourproject.kune.platf.client.ui.IconLabel;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
@@ -203,9 +203,13 @@ public class StackedDropDownPanel extends DropDownPanel {
         updateScroll(indexOfStackItem, stackItem.getCount());
     }
 
-    public void addBottomLink(final AbstractImagePrototype icon, final String text, final String targetHistoryToken,
-            final String action, final Object value, final Object extra) {
-        IconHyperlink link = new IconHyperlink(icon, text, targetHistoryToken);
+    public void addBottomLink(final AbstractImagePrototype icon, final String text, final String action) {
+        this.addBottomLink(icon, text, action, null, null);
+    }
+
+    public void addBottomLink(final AbstractImagePrototype icon, final String text, final String action,
+            final Object value, final Object extra) {
+        IconLabel link = new IconLabel(icon, text);
         bottomLinksVP.add(link);
         link.addStyleName("kune-StackedDropDownPanelLink");
         link.addClickListener(new ClickListener() {
@@ -215,11 +219,6 @@ public class StackedDropDownPanel extends DropDownPanel {
         });
         bottomLinksVP.setCellHorizontalAlignment(link, HorizontalPanel.ALIGN_CENTER);
         bottomLinksIndex.add(text);
-    }
-
-    public void addBottomLink(final AbstractImagePrototype icon, final String text, final String targetHistoryToken,
-            final String action) {
-        this.addBottomLink(icon, text, targetHistoryToken, action, null, null);
     }
 
     public void cleanBottomLinks() {

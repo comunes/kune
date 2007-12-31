@@ -22,7 +22,7 @@ package org.ourproject.kune.platf.client.services;
 
 public class Kune {
     private static Kune instance;
-    public static final I18nUITranslation I18N = I18nUITranslation.getInstance();
+    public static final I18nUITranslationService I18N = I18nUITranslationService.getInstance();
     public ColorTheme theme;
 
     private Kune() {

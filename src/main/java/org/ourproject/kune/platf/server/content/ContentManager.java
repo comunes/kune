@@ -32,7 +32,7 @@ import org.ourproject.kune.platf.server.manager.Manager;
 
 public interface ContentManager extends Manager<Content, Long> {
 
-    public Content createContent(String title, User user, Container container);
+    public Content createContent(String title, String body, User user, Container container);
 
     public Content save(User editor, Content descriptor, String content);
 

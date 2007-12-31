@@ -44,16 +44,16 @@ public class GroupMembersPanel extends StackedDropDownPanel implements GroupMemb
     }
 
     public void addJoinLink() {
-        super.addBottomLink(img.addGreen(), Kune.I18N.t("Request to join"), "fixme", WorkspaceEvents.REQ_JOIN_GROUP);
+        super.addBottomLink(img.addGreen(), Kune.I18N.t("Request to join"), WorkspaceEvents.REQ_JOIN_GROUP);
     }
 
     public void addUnjoinLink() {
-        super.addBottomLink(img.del(), Kune.I18N.t("Unjoin this group"), "fixme", WorkspaceEvents.UNJOIN_GROUP);
+        super.addBottomLink(img.del(), Kune.I18N.t("Unjoin this group"), WorkspaceEvents.UNJOIN_GROUP);
     }
 
     public void addAddMemberLink() {
-        super.addBottomLink(img.addGreen(), Kune.I18N.t("Add member"), "fixme",
-                WorkspaceEvents.ADD_MEMBER_GROUPLIVESEARCH, presenter, null);
+        super.addBottomLink(img.addGreen(), Kune.I18N.t("Add member"), WorkspaceEvents.ADD_MEMBER_GROUPLIVESEARCH,
+                presenter, null);
     }
 
     public void clear() {

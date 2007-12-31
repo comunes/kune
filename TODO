@@ -20,12 +20,14 @@ continue with the client search dialog
 <vjrj> See differences between star-yellow-grey.png and -50.png
 --> vjrj
 <vjrj> explorer specific problems: fonts antialiasing problem?
-<vjrj> Ext localization:
+<vjrj> Ext localization (see I18nUiTranslation):
   http://groups.google.com/group/gwt-ext/browse_thread/thread/ebec316effea2b80/bfbdadc7239b4e5d?lnk=gst&q=i18n#bfbdadc7239b4e5d
   http://extjs.com/forum/showthread.php?t=20160&highlight=localization
 
 MIND-TERM:
 --------------------------------------------------------------------------------
+<vjrj> rails group-shortname.kune-site-domain/tool-name/folder-id/doc-id routing, maybe use:
+http://agilewebdevelopment.com/plugins/request_routing
 <vjrj> Strip html better in RTE, I18nTranslator, Chat
   http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/b4a27c80f50581cc
 <vjrj> Clean /scrits/ directory

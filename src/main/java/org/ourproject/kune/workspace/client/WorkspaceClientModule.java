@@ -29,6 +29,7 @@ import org.ourproject.kune.workspace.client.actions.DetachFromExtensionPointActi
 import org.ourproject.kune.workspace.client.actions.DisableRateItAction;
 import org.ourproject.kune.workspace.client.actions.EnableRateItAction;
 import org.ourproject.kune.workspace.client.actions.GotoAction;
+import org.ourproject.kune.workspace.client.actions.GotoContainerAction;
 import org.ourproject.kune.workspace.client.actions.InitAction;
 import org.ourproject.kune.workspace.client.actions.InitDataReceivedAction;
 import org.ourproject.kune.workspace.client.actions.LoggedInAction;
@@ -67,6 +68,7 @@ public class WorkspaceClientModule implements ClientModule {
         register.addAction(WorkspaceEvents.DENY_JOIN_GROUP, new DenyJoinGroupAction());
         register.addAction(WorkspaceEvents.DEL_MEMBER, new DeleteMemberAction());
         register.addAction(WorkspaceEvents.GOTO, new GotoAction());
+        register.addAction(WorkspaceEvents.GOTO_CONTAINER, new GotoContainerAction());
         register.addAction(WorkspaceEvents.SET_COLLAB_AS_ADMIN, new SetCollabAsAdminAction());
         register.addAction(WorkspaceEvents.SET_ADMIN_AS_COLLAB, new SetAdminAsCollabAction());
         register.addAction(WorkspaceEvents.ADD_ADMIN_MEMBER, new AddAdminAction());

@@ -1,5 +1,4 @@
 /*
- *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -22,34 +21,31 @@ package org.ourproject.kune.docs.client.actions;
 
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
-import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.sitebar.client.Site;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class AddDocument implements Action {
+public class ContentSetLanguageAction implements Action {
+
     public void execute(final Object value, final Object extra, final Services services) {
-        addDocument(services, (String) value, services.session.getCurrentState().getFolder());
+        onContentSetLanguage(services, (String) value, (String) extra);
     }
 
-    private void addDocument(final Services services, final String name, final ContainerDTO containerDTO) {
+    private void onContentSetLanguage(final Services services, final String documentId, final String languageCode) {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
-        server.addContent(services.session.userHash, services.session.getCurrentState().getGroup().getShortName(),
-                containerDTO.getId(), name, new AsyncCallback() {
+        server.setLanguage(services.session.userHash, services.session.getCurrentState().getGroup().getShortName(),
+                documentId, languageCode, new AsyncCallback() {
+
                     public void onFailure(final Throwable caught) {
                         services.stateManager.processErrorException(caught);
                     }
 
                     public void onSuccess(final Object result) {
                         Site.hideProgress();
-                        Site.info(Kune.I18N.t("Created, now you can edit the document"));
-                        StateDTO content = (StateDTO) result;
-                        services.stateManager.setState(content);
+                        services.stateManager.reload();
                     }
                 });
     }

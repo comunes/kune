@@ -30,7 +30,7 @@ public interface CreationService {
 
     Content saveContent(User editor, Content descriptor, String content);
 
-    Content createContent(String title, User user, Container container);
+    Content createContent(String title, String body, User user, Container container);
 
     Container createFolder(Group group, Long parentFolderId, String name, I18nLanguage language);
 

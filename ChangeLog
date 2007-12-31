@@ -1,3 +1,15 @@
+2007-12-30 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* Containers parent/child modification follow hibernate pattern recomendations
+	* AbsolutePath in containers is now a list of containers (needed in UI)
+	* Tests when RequestServletMocked return null Session fixed 
+	* "Report kune bugs" entry in options menu
+	* I18nTranslationService abstraction to use also in server
+	* folder navigator UI menu (container.absolutePath) now works
+	* ContentSetPublishedOnAction.java ContentSetTagsAction.java AddFolder.java
+	ContentAddAuthorAction.java ContentSetTitleAction.java AddDocument.java
+	ContentDelContentAction.java ContentSetLanguageAction.java
+	ContentRemoveAuthorAction.java: new content actions
+
 2007-12-29 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* pom.xml: upgrade to gwt-maven version 1.5.3
 	* extjs locale first integration

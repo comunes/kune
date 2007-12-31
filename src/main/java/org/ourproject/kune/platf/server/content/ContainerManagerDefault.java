@@ -20,6 +20,10 @@
 
 package org.ourproject.kune.platf.server.content;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import org.ourproject.kune.platf.server.domain.Container;
@@ -40,17 +44,29 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
     }
 
     public Container createRootFolder(final Group group, final String toolName, final String name, final String type) {
-        Container container = new Container("", name, group, toolName);
+        Container container = new Container(name, group, toolName);
         container.setTypeId(type);
+        List<Container> absolutePath = new ArrayList<Container>();
+        absolutePath.add(container);
+        container.setAbsolutePath(absolutePath);
         return persist(container);
     }
 
     public Container createFolder(final Group group, final Container parent, final String name,
             final I18nLanguage language) {
-        Container child = new Container(parent.getAbsolutePath(), name, group, parent.getToolName());
+        List<Container> parentAbsolutePath = parent.getAbsolutePath();
+        List<Container> childAbsolutePath = new ArrayList<Container>();
+
+        for (Iterator iterator = parentAbsolutePath.iterator(); iterator.hasNext();) {
+            Container parentRef = (Container) iterator.next();
+            childAbsolutePath.add(parentRef);
+        }
+        Container child = new Container(name, group, parent.getToolName());
+        childAbsolutePath.add(child);
         child.setLanguage(language);
+        child.setAbsolutePath(childAbsolutePath);
         parent.addChild(child);
-        child.setParent(parent);
+        // child.setParent(parent);
         persist(child);
         return child;
     }

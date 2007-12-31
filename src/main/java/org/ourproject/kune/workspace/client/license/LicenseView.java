@@ -26,4 +26,6 @@ public interface LicenseView extends View {
 
     void showLicense(String groupName, LicenseDTO licenseDTO);
 
+    void openWindow(String url);
+
 }

@@ -26,7 +26,7 @@ import org.ourproject.kune.chat.client.ChatClientModule;
 import org.ourproject.kune.docs.client.DocsClientModule;
 import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.app.ApplicationBuilder;
-import org.ourproject.kune.platf.client.services.I18nUITranslation;
+import org.ourproject.kune.platf.client.services.I18nUITranslationService;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.workspace.client.WorkspaceClientModule;
 
@@ -56,7 +56,7 @@ public class KuneEntryPoint implements EntryPoint {
                     }
 
                     public void onSuccess(final Object result) {
-                        I18nUITranslation.getInstance().setLexicon((HashMap) result);
+                        I18nUITranslationService.getInstance().setLexicon((HashMap) result);
                         KunePlatform platform = new KunePlatform();
                         platform.install(new WorkspaceClientModule());
                         platform.install(new DocsClientModule());

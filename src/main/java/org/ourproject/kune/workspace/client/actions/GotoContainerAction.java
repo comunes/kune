@@ -17,33 +17,22 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.license;
+package org.ourproject.kune.workspace.client.actions;
 
-import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.LicenseDTO;
+import org.ourproject.kune.platf.client.Services;
+import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.dto.StateToken;
 
-public class LicensePresenter implements LicenseComponent {
+public class GotoContainerAction implements Action {
 
-    private LicenseView view;
-    private LicenseDTO license;
-
-    public LicensePresenter() {
+    public void execute(final Object value, final Object extra, final Services services) {
+        onGoto(services, (Long) value);
     }
 
-    public void init(final LicenseView view) {
-        this.view = view;
-    }
-
-    public View getView() {
-        return view;
-    }
-
-    public void setLicense(final String groupName, final LicenseDTO license) {
-        this.license = license;
-        view.showLicense(groupName, license);
-    }
-
-    public void onLicenseClick() {
-        view.openWindow(license.getUrl());
+    private void onGoto(final Services services, final Long folderId) {
+        StateToken newStateToken = services.session.getCurrentState().getState();
+        newStateToken.setDocument(null);
+        newStateToken.setFolder(folderId.toString());
+        services.stateManager.setState(newStateToken);
     }
 }

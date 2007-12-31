@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.workspace.client.ui.ctx.items;
 
+import org.ourproject.kune.platf.client.dto.ContainerSimpleDTO;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.HorizontalLine;
@@ -114,13 +115,26 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
     }
 
     public void showCreationField(final String typeName) {
+        String title;
         // Workaround: gwt-ext bug, I cannot use typeName directly
         workaroundTypeName = typeName;
-        MessageBox.prompt(Kune.I18N.t("Add a new [%s]", typeName), Kune.I18N.t("Please enter a name:"),
-                new MessageBox.PromptCallback() {
-                    public void execute(final String btnID, final String text) {
-                        presenter.create(workaroundTypeName, text, currentEventName);
-                    }
-                });
+        if (typeName.equals("docs.doc")) {
+            title = Kune.I18N.t("Add a document");
+        } else if (typeName.equals("docs.folder")) {
+            title = Kune.I18N.t("Add a folder");
+        } else if (typeName.equals("chat.room")) {
+            title = Kune.I18N.t("Add a chatroom");
+        } else {
+            title = Kune.I18N.t("Add a new [%s]", typeName);
+        }
+        MessageBox.prompt(title, Kune.I18N.t("Please enter a name:"), new MessageBox.PromptCallback() {
+            public void execute(final String btnID, final String text) {
+                presenter.create(workaroundTypeName, text, currentEventName);
+            }
+        });
+    }
+
+    public void setAbsolutePath(final ContainerSimpleDTO[] absolutePath) {
+        topBar.setAbsolutePath(absolutePath);
     }
 }

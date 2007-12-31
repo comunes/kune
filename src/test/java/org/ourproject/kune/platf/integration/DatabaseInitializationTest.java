@@ -54,7 +54,7 @@ public class DatabaseInitializationTest {
         Content content = defaultGroup.getDefaultContent();
         assertEquals(DocumentServerTool.TYPE_DOCUMENT, content.getTypeId());
         Container rootDocFolder = content.getFolder();
-        assertEquals("/" + DocumentServerTool.ROOT_NAME, rootDocFolder.getAbsolutePath());
+        assertEquals(true, rootDocFolder.isRoot());
     }
 
     @Test

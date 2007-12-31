@@ -33,6 +33,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -67,6 +68,11 @@ public class Content implements HasStateToken {
     @Basic(optional = false)
     private Long createdOn;
 
+    @Basic(optional = true)
+    private Date deletedOn;
+
+    private boolean markForDeletion;
+
     @Basic(optional = false)
     private Date publishedOn;
 
@@ -77,6 +83,7 @@ public class Content implements HasStateToken {
     private List<ContentTranslation> translations;
 
     @ManyToOne
+    @JoinColumn
     private Container container;
 
     @NotNull
@@ -96,6 +103,7 @@ public class Content implements HasStateToken {
         this.createdOn = System.currentTimeMillis();
         this.lastRevision = new Revision();
         accessLists = null;
+        markForDeletion = false;
     }
 
     public Long getId() {
@@ -244,6 +252,22 @@ public class Content implements HasStateToken {
             }
         }
         return tagConcatenated;
+    }
+
+    public Date getDeletedOn() {
+        return deletedOn;
+    }
+
+    public void setDeletedOn(final Date date) {
+        this.deletedOn = date;
+    }
+
+    public boolean isMarkForDeletion() {
+        return markForDeletion;
+    }
+
+    public void setMarkForDeletion(final boolean markForDeletion) {
+        this.markForDeletion = markForDeletion;
     }
 
 }

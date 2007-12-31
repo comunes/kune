@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.docs.server;
 
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.content.ContainerManager;
 import org.ourproject.kune.platf.server.domain.Content;
@@ -43,13 +44,15 @@ public class DocumentServerTool implements ServerTool {
     private final ContentManager contentManager;
     private final ToolConfigurationManager configurationManager;
     private final ContainerManager containerManager;
+    private final I18nTranslationService i18n;
 
     @Inject
     public DocumentServerTool(final ContentManager contentManager, final ContainerManager containerManager,
-            final ToolConfigurationManager configurationManager) {
+            final ToolConfigurationManager configurationManager, final I18nTranslationService translationService) {
         this.contentManager = contentManager;
         this.containerManager = containerManager;
         this.configurationManager = configurationManager;
+        this.i18n = translationService;
     }
 
     @Inject
@@ -71,13 +74,17 @@ public class DocumentServerTool implements ServerTool {
 
     public Group initGroup(final User user, final Group group) {
         ToolConfiguration config = new ToolConfiguration();
-        // i18n: docs (ROOT_NAME)
         Container container = containerManager.createRootFolder(group, NAME, ROOT_NAME, TYPE_ROOT);
         config.setRoot(container);
         group.setToolConfig(NAME, config);
         configurationManager.persist(config);
+        // FIXME
+        // Content descriptor = contentManager.createContent(i18n.t("Welcome"),
         // i18n
-        Content descriptor = contentManager.createContent("Home", user, container);
+        // .t("This is an example of document. You can modify or delete it."),
+        // user, container);
+        Content descriptor = contentManager.createContent("Welcome",
+                "This is an example of document. You can modify or delete it.", user, container);
         descriptor.addAuthor(user);
         descriptor.setLanguage(user.getLanguage());
         descriptor.setTypeId(TYPE_DOCUMENT);

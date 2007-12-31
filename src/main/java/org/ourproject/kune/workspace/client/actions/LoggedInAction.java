@@ -25,7 +25,7 @@ import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
-import org.ourproject.kune.platf.client.services.I18nUITranslation;
+import org.ourproject.kune.platf.client.services.I18nUITranslationService;
 import org.ourproject.kune.sitebar.client.Site;
 
 import to.tipit.gwtlib.FireLog;
@@ -45,7 +45,7 @@ public class LoggedInAction implements Action {
         I18nLanguageDTO language = userInfoDTO.getLanguage();
         services.stateManager.reload(false);
         services.app.getWorkspace().getI18nTranslatorComponent().setLanguage(language);
-        I18nUITranslation.getInstance().setCurrentLanguage(language.getCode());
+        I18nUITranslationService.getInstance().setCurrentLanguage(language.getCode());
     }
 
     private void setCookie(final UserInfoDTO userInfoDTO) {

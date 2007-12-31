@@ -20,10 +20,12 @@
 
 package org.ourproject.kune.workspace.client.ui.ctx.items;
 
+import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
+import org.ourproject.kune.platf.client.dto.ContainerSimpleDTO;
 import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
+import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -37,23 +39,23 @@ class ContextTopBar extends VerticalPanel {
     public final Label currentFolder;
     public final PushButton btnGoParent;
     public final HorizontalPanel firstRow;
+    private final ContextItemsImages img;
+    private final MenuBar pathSubmenu;
 
     public ContextTopBar(final ContextItemsPresenter presenter) {
-        final ContextItemsImages Img = ContextItemsImages.App.getInstance();
-
+        img = ContextItemsImages.App.getInstance();
         firstRow = new HorizontalPanel();
         final HorizontalPanel secondRow = new HorizontalPanel();
         final HorizontalPanel iconBarHP = new HorizontalPanel();
         final HorizontalPanel currentFolderHP = new HorizontalPanel();
-        btnGoParent = new PushButton(Img.folderGoUp().createImage(), Img.folderGoUpLight().createImage());
+        btnGoParent = new PushButton(img.folderGoUp().createImage(), img.folderGoUpLight().createImage());
         btnGoParent.addClickListener(new ClickListener() {
             public void onClick(final Widget sender) {
                 presenter.onGoUp();
             }
         });
         final MenuBar pathMenu = new MenuBar();
-        final MenuBar pathSubmenu = new MenuBar(true);
-
+        pathSubmenu = new MenuBar(true);
         // Layout
         add(firstRow);
         add(secondRow);
@@ -63,19 +65,7 @@ class ContextTopBar extends VerticalPanel {
         final RoundedBorderDecorator buttonRounded = new RoundedBorderDecorator(pathMenu, RoundedBorderDecorator.ALL,
                 RoundedBorderDecorator.SIMPLE);
         iconBarHP.add(buttonRounded);
-        pathMenu.addItem(Img.folderpathmenu().getHTML(), true, pathSubmenu);
-        pathSubmenu.addItem(Img.folder().getHTML() + "&nbsp;Container", true, new Command() {
-            public void execute() {
-                // FIXME
-                Window.alert("jump!");
-            }
-        });
-        pathSubmenu.addItem(Img.folder().getHTML() + "&nbsp;Container 2", true, new Command() {
-            public void execute() {
-                // FIXME
-                Window.alert("jump too!");
-            }
-        });
+        pathMenu.addItem(img.folderpathmenu().getHTML(), true, pathSubmenu);
         currentFolderHP.add(btnGoParent);
         currentFolder = new Label("Current Container");
         currentFolderHP.add(currentFolder);
@@ -96,6 +86,20 @@ class ContextTopBar extends VerticalPanel {
         pathMenu.setStyleName("pathMenu");
         buttonRounded.setColor("AAA");
         btnGoParent.addStyleName("kune-pointer");
+    }
+
+    public void setAbsolutePath(final ContainerSimpleDTO[] absolutePath) {
+        pathSubmenu.clearItems();
+        String indent = "";
+        for (int i = 0; i < absolutePath.length; i++) {
+            final ContainerSimpleDTO folder = absolutePath[i];
+            pathSubmenu.addItem(indent + img.folder().getHTML() + "&nbsp;" + folder.getName(), true, new Command() {
+                public void execute() {
+                    DefaultDispatcher.getInstance().fire(WorkspaceEvents.GOTO_CONTAINER, folder.getId(), null);
+                }
+            });
+            indent = indent + "&nbsp&nbsp;";
+        }
     }
 
 }

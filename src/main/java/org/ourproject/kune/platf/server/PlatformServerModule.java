@@ -29,6 +29,7 @@ import org.ourproject.kune.platf.client.rpc.GroupService;
 import org.ourproject.kune.platf.client.rpc.I18nService;
 import org.ourproject.kune.platf.client.rpc.SiteService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.server.access.AccessService;
 import org.ourproject.kune.platf.server.access.AccessServiceDefault;
 import org.ourproject.kune.platf.server.access.FinderService;
@@ -43,6 +44,7 @@ import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.content.ContentManagerDefault;
 import org.ourproject.kune.platf.server.content.CreationService;
 import org.ourproject.kune.platf.server.content.CreationServiceDefault;
+import org.ourproject.kune.platf.server.i18n.I18nTranslationServiceDefault;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.I18nCountryManager;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
@@ -111,6 +113,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
         bind(AccessService.class).to(AccessServiceDefault.class);
         bind(FinderService.class).to(FinderServiceDefault.class);
         bind(StateService.class).to(StateServiceDefault.class);
+        bind(I18nTranslationService.class).to(I18nTranslationServiceDefault.class);
     }
 
     private void bindRPC() {

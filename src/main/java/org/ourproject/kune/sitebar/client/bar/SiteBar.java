@@ -41,4 +41,6 @@ public interface SiteBar {
 
     void showAlertMessage(String message);
 
+    void doLogout();
+
 }

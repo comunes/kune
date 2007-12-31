@@ -28,8 +28,6 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
-import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
-import org.ourproject.kune.platf.client.errors.UserNotFoundException;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.access.Access;
@@ -49,6 +47,7 @@ import org.ourproject.kune.platf.server.state.State;
 import org.ourproject.kune.platf.server.state.StateService;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
+import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -85,7 +84,7 @@ public class ContentRPC implements ContentService, RPC {
     // contents for instance)
     @Transactional(type = TransactionType.READ_ONLY)
     public StateDTO getContent(final String userHash, final String groupShortName, final StateToken token)
-            throws ContentNotFoundException, AccessViolationException, GroupNotFoundException {
+            throws SerializableException {
         Group defaultGroup;
         UserSession userSession = getUserSession();
         User user = userSession.getUser();
@@ -114,7 +113,7 @@ public class ContentRPC implements ContentService, RPC {
     @Authorizated(accessTypeRequired = AccessType.EDIT, checkContent = true)
     @Transactional(type = TransactionType.READ_WRITE)
     public int save(final String userHash, final String groupShortName, final String documentId,
-            final String textContent) throws AccessViolationException, ContentNotFoundException {
+            final String textContent) throws SerializableException {
 
         final Long contentId = parseId(documentId);
         UserSession userSession = getUserSession();
@@ -128,11 +127,11 @@ public class ContentRPC implements ContentService, RPC {
     @Authorizated(accessTypeRequired = AccessType.EDIT)
     @Transactional(type = TransactionType.READ_WRITE)
     public StateDTO addContent(final String userHash, final String groupShortName, final Long parentFolderId,
-            final String title) throws AccessViolationException, ContentNotFoundException {
+            final String title) throws SerializableException {
         UserSession userSession = getUserSession();
         final User user = userSession.getUser();
         final Access access = accessService.getFolderAccess(parentFolderId, user, AccessType.EDIT);
-        access.setContentWidthFolderRights(creationService.createContent(title, user, access.getFolder()));
+        access.setContentWidthFolderRights(creationService.createContent(title, "", user, access.getFolder()));
         final State state = stateService.create(access);
         return mapper.map(state, StateDTO.class);
     }
@@ -141,7 +140,7 @@ public class ContentRPC implements ContentService, RPC {
     @Authorizated(accessTypeRequired = AccessType.EDIT)
     @Transactional(type = TransactionType.READ_WRITE)
     public StateDTO addFolder(final String userHash, final String groupShortName, final Long parentFolderId,
-            final String title) throws ContentNotFoundException, AccessViolationException, GroupNotFoundException {
+            final String title) throws SerializableException {
         return createFolder(groupShortName, parentFolderId, title);
     }
 
@@ -149,7 +148,7 @@ public class ContentRPC implements ContentService, RPC {
     @Authorizated(accessTypeRequired = AccessType.EDIT)
     @Transactional(type = TransactionType.READ_WRITE)
     public StateDTO addRoom(final String userHash, final String groupShortName, final Long parentFolderId,
-            final String roomName) throws ContentNotFoundException, AccessViolationException, GroupNotFoundException {
+            final String roomName) throws SerializableException {
         UserSession userSession = getUserSession();
         final String userShortName = userSession.getUser().getShortName();
         final ChatConnection connection = xmppManager.login(userShortName, userSession.getUser().getPassword(),
@@ -174,7 +173,7 @@ public class ContentRPC implements ContentService, RPC {
     @Authorizated(accessTypeRequired = AccessType.READ, checkContent = true)
     @Transactional(type = TransactionType.READ_WRITE)
     public void rateContent(final String userHash, final String groupShortName, final String documentId,
-            final Double value) throws ContentNotFoundException, AccessViolationException {
+            final Double value) throws SerializableException {
         UserSession userSession = getUserSession();
         User rater = userSession.getUser();
         final Long contentId = parseId(documentId);
@@ -190,7 +189,7 @@ public class ContentRPC implements ContentService, RPC {
     @Authorizated(accessTypeRequired = AccessType.EDIT, checkContent = true)
     @Transactional(type = TransactionType.READ_WRITE)
     public void addAuthor(final String userHash, final String groupShortName, final String documentId,
-            final String authorShortName) throws ContentNotFoundException, UserNotFoundException {
+            final String authorShortName) throws SerializableException {
         final Long contentId = parseId(documentId);
         UserSession userSession = getUserSession();
         User user = userSession.getUser();
@@ -201,7 +200,7 @@ public class ContentRPC implements ContentService, RPC {
     @Authorizated(accessTypeRequired = AccessType.EDIT, checkContent = true)
     @Transactional(type = TransactionType.READ_WRITE)
     public void removeAuthor(final String userHash, final String groupShortName, final String documentId,
-            final String authorShortName) throws ContentNotFoundException, UserNotFoundException {
+            final String authorShortName) throws SerializableException {
         final Long contentId = parseId(documentId);
         UserSession userSession = getUserSession();
         User user = userSession.getUser();
@@ -212,7 +211,7 @@ public class ContentRPC implements ContentService, RPC {
     @Authorizated(accessTypeRequired = AccessType.ADMIN, checkContent = true)
     @Transactional(type = TransactionType.READ_WRITE)
     public void delContent(final String userHash, final String groupShortName, final String documentId)
-            throws ContentNotFoundException {
+            throws SerializableException {
         final Long contentId = parseId(documentId);
         UserSession userSession = getUserSession();
         User user = userSession.getUser();
@@ -223,7 +222,7 @@ public class ContentRPC implements ContentService, RPC {
     @Authorizated(accessTypeRequired = AccessType.EDIT, checkContent = true)
     @Transactional(type = TransactionType.READ_WRITE)
     public void setTitle(final String userHash, final String groupShortName, final String documentId,
-            final String newTitle) throws ContentNotFoundException {
+            final String newTitle) throws SerializableException {
         final Long contentId = parseId(documentId);
         UserSession userSession = getUserSession();
         User user = userSession.getUser();
@@ -234,7 +233,7 @@ public class ContentRPC implements ContentService, RPC {
     @Authorizated(accessTypeRequired = AccessType.EDIT, checkContent = true)
     @Transactional(type = TransactionType.READ_WRITE)
     public void setLanguage(final String userHash, final String groupShortName, final String documentId,
-            final String languageCode) throws ContentNotFoundException, I18nNotFoundException {
+            final String languageCode) throws SerializableException {
         final Long contentId = parseId(documentId);
         UserSession userSession = getUserSession();
         User user = userSession.getUser();
@@ -245,7 +244,7 @@ public class ContentRPC implements ContentService, RPC {
     @Authorizated(accessTypeRequired = AccessType.EDIT, checkContent = true)
     @Transactional(type = TransactionType.READ_WRITE)
     public void setPublishedOn(final String userHash, final String groupShortName, final String documentId,
-            final Date publishedOn) throws ContentNotFoundException {
+            final Date publishedOn) throws SerializableException {
         final Long contentId = parseId(documentId);
         UserSession userSession = getUserSession();
         User user = userSession.getUser();
@@ -256,7 +255,7 @@ public class ContentRPC implements ContentService, RPC {
     @Authorizated(accessTypeRequired = AccessType.EDIT, checkContent = true)
     @Transactional(type = TransactionType.READ_WRITE)
     public void setTags(final String userHash, final String groupShortName, final String documentId, final String tags)
-            throws ContentNotFoundException {
+            throws SerializableException {
         final Long contentId = parseId(documentId);
         UserSession userSession = getUserSession();
         User user = userSession.getUser();

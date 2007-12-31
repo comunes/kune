@@ -23,6 +23,7 @@ package org.ourproject.kune.platf.server.rpc;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
@@ -113,7 +114,11 @@ public class UserRPC implements RPC, UserService {
     }
 
     private void getNewSession() {
-        requestProvider.get().getSession().invalidate();
+        HttpSession session = requestProvider.get().getSession();
+        if (session != null) {
+            // During tests session == null
+            session.invalidate();
+        }
         requestProvider.get().getSession(true);
     }
 

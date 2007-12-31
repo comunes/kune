@@ -40,6 +40,7 @@ import org.ourproject.kune.sitebar.client.services.Images;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FocusListener;
@@ -79,7 +80,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     private final Images img;
     private final MenuBar optionsSubmenu;
     private MenuItem linkHelpInTrans;
-    private MenuItem linkHelp;
+    private MenuItem linkKuneBugs;
     private final MenuBar yourGroupsSubmenu;
     private NewGroupPanel newGroupPanel;
     private final IconLabel contentNoPublic;
@@ -172,17 +173,23 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     private void createOptionsSubmenu() {
-        linkHelpInTrans = new MenuItem(img.language().getHTML() + Kune.I18N.t("Help with the translation"), true, new Command() {
+        linkHelpInTrans = new MenuItem(img.language().getHTML() + Kune.I18N.t("Help with the translation"), true,
+                new Command() {
+                    public void execute() {
+                        presenter.onHelpInTranslation();
+                    }
+                });
+        linkKuneBugs = new MenuItem(img.kuneIcon16().getHTML() + Kune.I18N.t("Report kune bugs"), true, new Command() {
             public void execute() {
-                presenter.onHelpInTranslation();
+                Window.open("http://code.google.com/p/kune/issues/list", "_blank", null);
             }
         });
-        linkHelp = new MenuItem(img.kuneIcon16().getHTML() + Kune.I18N.t("Help"), true, new Command() {
-            public void execute() {
-                // FIXME: Url to doc
-                presenter.changeState(new StateToken("site.docs"));
-            }
-        });
+        // linkHelp = new MenuItem(img.kuneIcon16().getHTML() +
+        // Kune.I18N.t("Help"), true, new Command() {
+        // public void execute() {
+        // presenter.changeState(new StateToken("site.docs"));
+        // }
+        // });
     }
 
     private void createSearchBox() {
@@ -358,7 +365,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 
     private void addDefaultItemsToOptions() {
         optionsSubmenu.addItem(linkHelpInTrans);
-        optionsSubmenu.addItem(linkHelp);
+        optionsSubmenu.addItem(linkKuneBugs);
     }
 
     private void addItemToYourGroupSubmenu(final LinkDTO link) {

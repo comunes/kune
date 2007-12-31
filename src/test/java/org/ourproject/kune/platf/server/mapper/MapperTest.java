@@ -5,11 +5,13 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
+import org.ourproject.kune.platf.client.dto.ContainerSimpleDTO;
 import org.ourproject.kune.platf.client.dto.ContentDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.GroupListDTO;
@@ -26,7 +28,6 @@ import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.Revision;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.state.State;
-import org.ourproject.kune.platf.server.users.UserInfoService;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.inject.Inject;
@@ -34,8 +35,6 @@ import com.google.inject.Inject;
 public class MapperTest {
     @Inject
     Mapper mapper;
-    @Inject
-    UserInfoService userInfoService;
     @Inject
     GroupManager groupManager;
 
@@ -129,12 +128,20 @@ public class MapperTest {
         container.addContent(new Content());
         container.addContent(new Content());
         container.addContent(new Content());
+        final Container containerChild = new Container();
+        container.addChild(containerChild);
+        List<Container> absolutePathChild = new ArrayList<Container>();
+        absolutePathChild.add(container);
+        containerChild.setAbsolutePath(absolutePathChild);
 
         final ContainerDTO dto = mapper.map(container, ContainerDTO.class);
-        assertEquals(2, dto.getChilds().size());
+        assertEquals(3, dto.getChilds().size());
         assertEquals(3, dto.getContents().size());
         assertTrue(dto.getContents().get(0) instanceof ContentDTO);
         assertTrue(dto.getChilds().get(0) instanceof ContainerDTO);
+
+        final ContainerDTO dtoChild = mapper.map(containerChild, ContainerDTO.class);
+        assertTrue(dtoChild.getAbsolutePath()[0] instanceof ContainerSimpleDTO);
     }
 
     @Test

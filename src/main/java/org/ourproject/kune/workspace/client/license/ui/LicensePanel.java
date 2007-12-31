@@ -24,6 +24,7 @@ import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.workspace.client.license.LicensePresenter;
 import org.ourproject.kune.workspace.client.license.LicenseView;
 
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -65,5 +66,9 @@ public class LicensePanel extends HorizontalPanel implements LicenseView {
         license.setVisible(true);
         image.setVisible(true);
         image.setUrl(licenseDTO.getImageUrl());
+    }
+
+    public void openWindow(final String url) {
+        Window.open(url, "_blank", "");
     }
 }

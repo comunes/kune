@@ -46,7 +46,7 @@ public class BuddiesPresencePanel extends StackedDropDownPanel implements Buddie
         super.addStackItem(Kune.I18N.t("Connected"), Kune.I18N.t("Buddies connected"), true);
         super.addStackItem(Kune.I18N.t("Not connected"), Kune.I18N.t("Buddies not connected"), true);
         super.addStackItem("test", Kune.I18N.t("Buddies not connected"), true);
-        super.addBottomLink(img.addGreen(), Kune.I18N.t("Add new buddy"), "addbuddy", "Test");
+        super.addBottomLink(img.addGreen(), Kune.I18N.t("Add new buddy"), "Test");
         addRoster("fulano", Kune.I18N.t("Connected"), CONTACT_ONLINE);
         addRoster("fulano away", Kune.I18N.t("Connected"), CONTACT_AWAY);
         addRoster("fulano busy", Kune.I18N.t("Connected"), CONTACT_BUSY);

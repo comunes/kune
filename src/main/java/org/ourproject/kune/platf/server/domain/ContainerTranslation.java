@@ -28,7 +28,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "aliases")
+@Table(name = "container_translation")
 public class ContainerTranslation implements HasId {
     @Id
     @GeneratedValue

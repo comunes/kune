@@ -60,9 +60,9 @@ public class ContextItemsPresenter implements ContextItems {
             state.setDocument(dto.getId().toString());
             view.addItem(dto.getTitle(), dto.getTypeId(), state.getEncoded());
         }
-        GWT.log(container.getAbsolutePath(), null);
         view.setParentButtonEnabled(container.getParentFolderId() != null);
         view.setControlsVisible(rights.isEditable());
+        view.setAbsolutePath(container.getAbsolutePath());
     }
 
     public View getView() {

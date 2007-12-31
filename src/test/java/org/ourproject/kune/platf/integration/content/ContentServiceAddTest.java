@@ -80,11 +80,29 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 
         ContainerDTO parentAgain = getDefaultContent().getFolder();
         ContainerDTO child = (ContainerDTO) parentAgain.getChilds().get(0);
-        assertEquals(parent.getAbsolutePath() + ContainerDTO.SEP + title, child.getAbsolutePath());
+        assertEquals(parent.getAbsolutePath().length + 1, child.getAbsolutePath().length);
         assertEquals(parent.getId(), child.getParentFolderId());
 
         assertEquals(parent.getId(), parentAgain.getId());
         assertEquals(1, parentAgain.getChilds().size());
+    }
+
+    @Test
+    public void testAddTwoFolders() throws SerializableException {
+        doLogin();
+        defaultContent = getDefaultContent();
+        ContainerDTO parent = defaultContent.getFolder();
+        String title = "folder name";
+        StateDTO newState = contentService.addFolder(session.getHash(), groupName, parent.getId(), title);
+        assertNotNull(newState);
+
+        StateDTO newState2 = contentService.addFolder(session.getHash(), groupName, parent.getId(), title);
+        assertNotNull(newState2);
+
+        ContainerDTO parentAgain = getDefaultContent().getFolder();
+
+        assertEquals(parent.getId(), parentAgain.getId());
+        assertEquals(2, parentAgain.getChilds().size());
     }
 
 }

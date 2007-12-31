@@ -64,7 +64,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         this.tagManager = tagManager;
     }
 
-    public Content createContent(final String title, final User user, final Container container) {
+    public Content createContent(final String title, final String body, final User user, final Container container) {
         Content descriptor = new Content();
         descriptor.addAuthor(user);
         descriptor.setLanguage(user.getLanguage());
@@ -74,6 +74,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         container.addContent(descriptor);
         Revision revision = new Revision();
         revision.setTitle(title);
+        revision.setDataContent(body);
         descriptor.addRevision(revision);
         return persist(descriptor);
     }
@@ -179,8 +180,9 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     }
 
     public void delContent(final User user, final Long contentId) throws ContentNotFoundException {
-        // TODO
-        // Content content = finder.getContent(contentId);
+        Content content = finder.getContent(contentId);
+        content.setMarkForDeletion(true);
+        content.setDeletedOn(new Date());
     }
 
 }

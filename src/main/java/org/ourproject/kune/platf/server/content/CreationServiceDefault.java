@@ -44,9 +44,9 @@ public class CreationServiceDefault implements CreationService {
         this.tools = toolRegistry;
     }
 
-    public Content createContent(final String title, final User user, final Container container) {
+    public Content createContent(final String title, final String body, final User user, final Container container) {
         String toolName = container.getToolName();
-        Content content = contentManager.createContent(title, user, container);
+        Content content = contentManager.createContent(title, body, user, container);
         tools.get(toolName).onCreateContent(content, container);
         return content;
     }

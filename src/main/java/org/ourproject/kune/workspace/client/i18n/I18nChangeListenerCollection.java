@@ -32,7 +32,7 @@ public class I18nChangeListenerCollection extends ArrayList {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Fires a i18n change event to all listeners.
+     * Fires a locale change event to all listeners.
      * 
      */
     public void fireI18nLanguageChange() {

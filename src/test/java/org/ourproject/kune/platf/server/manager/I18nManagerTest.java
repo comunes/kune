@@ -9,6 +9,7 @@ import org.apache.commons.lang.StringEscapeUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.server.PersistenceTest;
 import org.ourproject.kune.platf.server.domain.I18nCountry;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
@@ -23,6 +24,8 @@ public class I18nManagerTest extends PersistenceTest {
     I18nCountryManager countryManager;
     @Inject
     I18nLanguageManager languageManager;
+    @Inject
+    I18nTranslationService translationService;
 
     @Before
     public void insertData() {
@@ -118,6 +121,30 @@ public class I18nManagerTest extends PersistenceTest {
     public void getTranslationWithIntArg() {
         String translation = translationManager.getTranslation("en", "[%d] users", 20);
         assertEquals("20 users", translation);
+    }
+
+    @Test
+    public void getTranslationWithIntArgFromService() {
+        String translation = translationService.t("[%d] users", 20);
+        assertEquals("20 users", translation);
+    }
+
+    @Test
+    public void getTranslationWithStringArgFromService() {
+        String translation = translationService.t("[%s] users", "Twenty");
+        assertEquals("Twenty users", translation);
+    }
+
+    @Test
+    public void getTranslationWithIntArgFromWithNtService() {
+        String translation = translationService.tWithNT("[%d] users", "foo foo", 20);
+        assertEquals("20 users", translation);
+    }
+
+    @Test
+    public void getTranslationWithStringArgWithNtFromService() {
+        String translation = translationService.tWithNT("[%s] users", "foo foo", "Twenty");
+        assertEquals("Twenty users", translation);
     }
 
     @After
