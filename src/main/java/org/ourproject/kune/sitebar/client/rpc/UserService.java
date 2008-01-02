@@ -38,6 +38,8 @@ public interface UserService extends RemoteService {
 
     UserInfoDTO reloadUserInfo(String userHash) throws SerializableException;
 
+    void onlyCheckSession(String userHash) throws SerializableException;
+
     public class App {
         private static UserServiceAsync ourInstance = null;
 

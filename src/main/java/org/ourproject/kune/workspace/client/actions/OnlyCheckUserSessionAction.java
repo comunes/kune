@@ -1,5 +1,4 @@
 /*
- *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -18,22 +17,23 @@
  *
  */
 
-package org.ourproject.kune.sitebar.client.rpc;
+package org.ourproject.kune.workspace.client.actions;
 
-import org.ourproject.kune.platf.client.dto.UserDTO;
+import org.ourproject.kune.platf.client.Services;
+import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.sitebar.client.rpc.UserService;
+import org.ourproject.kune.sitebar.client.rpc.UserServiceAsync;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public interface UserServiceAsync {
+public class OnlyCheckUserSessionAction implements Action {
 
-    void login(String nickOrEmail, String passwd, AsyncCallback callback);
+    public void execute(final Object value, final Object extra, final Services services) {
+        onOnlyCheckUserSession(services, (AsyncCallback) value);
+    }
 
-    void logout(String userHash, AsyncCallback callback);
-
-    void createUser(UserDTO user, AsyncCallback asyncCallback);
-
-    void reloadUserInfo(String userHash, AsyncCallback asyncCallback);
-
-    void onlyCheckSession(String userHash, AsyncCallback asyncCallback);
-
+    private void onOnlyCheckUserSession(final Services services, final AsyncCallback callback) {
+        UserServiceAsync server = UserService.App.getInstance();
+        server.onlyCheckSession(services.session.userHash, callback);
+    }
 }

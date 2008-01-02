@@ -24,12 +24,11 @@ import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.sitebar.client.Site;
-
-import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class AddFolder implements Action {
     public void execute(final Object value, final Object extra, final Services services) {
@@ -43,16 +42,13 @@ public class AddFolder implements Action {
             final ContainerDTO container) {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
-        server.addFolder(services.session.userHash, group.getShortName(), container.getId(), name, new AsyncCallback() {
-            public void onFailure(final Throwable caught) {
-                services.stateManager.processErrorException(caught);
-            }
-
-            public void onSuccess(final Object result) {
-                Site.hideProgress();
-                Site.info(Kune.I18N.t("Folder created"));
-                services.stateManager.reload(false);
-            }
-        });
+        server.addFolder(services.session.userHash, group.getShortName(), container.getId(), name,
+                new AsyncCallbackSimple() {
+                    public void onSuccess(final Object result) {
+                        Site.hideProgress();
+                        Site.info(Kune.I18N.t("Folder created"));
+                        services.stateManager.reload(false);
+                    }
+                });
     }
 }

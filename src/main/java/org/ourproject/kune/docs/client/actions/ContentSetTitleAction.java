@@ -21,11 +21,10 @@ package org.ourproject.kune.docs.client.actions;
 
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.sitebar.client.Site;
-
-import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class ContentSetTitleAction implements Action {
 
@@ -37,12 +36,7 @@ public class ContentSetTitleAction implements Action {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
         server.setTitle(services.session.userHash, services.session.getCurrentState().getGroup().getShortName(),
-                documentId, newTitle, new AsyncCallback() {
-
-                    public void onFailure(final Throwable caught) {
-                        services.stateManager.processErrorException(caught);
-                    }
-
+                documentId, newTitle, new AsyncCallbackSimple() {
                     public void onSuccess(final Object result) {
                         Site.hideProgress();
                         services.stateManager.reload();

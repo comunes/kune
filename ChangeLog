@@ -1,4 +1,8 @@
 2008-01-02 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* Added OnlyCheckSessionExpiration for some methods (like new group
+	creation)
+	* Added ErrorHandler and AsyncCallbackSimple for simple callback error
+	handling (used by almost every Action now)
 	* Added orphaned projects
 	* More 'Content not found' checks added
 	* Added Custom Stack Panel to permit close current open item

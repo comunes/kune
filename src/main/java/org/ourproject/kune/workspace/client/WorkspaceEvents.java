@@ -24,6 +24,7 @@ public interface WorkspaceEvents {
     public static final String STOP_APP = "platf.StopApplication";
     public static final String USER_LOGGED_IN = "ws.UserLoggedIn";
     public static final String USER_LOGGED_OUT = "ws.UserLoggedOut";
+    public static final String ONLY_CHECK_USER_SESSION = "ws_OnlyCheckUserSession";
     public static final String INIT_DATA_RECEIVED = "ws.InitDataReceived";
     public static final String REQ_JOIN_GROUP = "ws.RequestJoinGroup";
     public static final String DEL_MEMBER = "ws.DeleteMember";

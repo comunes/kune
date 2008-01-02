@@ -21,11 +21,10 @@ package org.ourproject.kune.workspace.client.actions;
 
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.GroupService;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.sitebar.client.Site;
-
-import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class ChangeGroupWsThemeAction implements Action {
 
@@ -37,11 +36,7 @@ public class ChangeGroupWsThemeAction implements Action {
         Site.showProgressProcessing();
         final GroupServiceAsync server = GroupService.App.getInstance();
         server.changeGroupWsTheme(services.session.userHash, services.session.getCurrentState().getGroup()
-                .getShortName(), theme, new AsyncCallback() {
-            public void onFailure(final Throwable caught) {
-                services.stateManager.processErrorException(caught);
-            }
-
+                .getShortName(), theme, new AsyncCallbackSimple() {
             public void onSuccess(final Object result) {
                 services.app.getWorkspace().setTheme(theme);
                 Site.hideProgress();

@@ -66,4 +66,8 @@ public class SiteBarServiceMocked implements UserServiceAsync {
     public void reloadUserInfo(final String userHash, final AsyncCallback asyncCallback) {
         timerAndSuccess(asyncCallback);
     }
+
+    public void onlyCheckSession(final String userHash, final AsyncCallback asyncCallback) {
+        timerAndSuccess(asyncCallback);
+    }
 }

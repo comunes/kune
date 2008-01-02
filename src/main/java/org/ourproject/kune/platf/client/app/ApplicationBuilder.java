@@ -30,6 +30,7 @@ import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.ActionEvent;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.rpc.ContentService;
+import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.ContentProvider;
 import org.ourproject.kune.platf.client.state.ContentProviderImpl;
 import org.ourproject.kune.platf.client.state.Session;
@@ -52,6 +53,7 @@ public class ApplicationBuilder {
     public void build(final String userHash) {
         HashMap tools = indexTools(platform.getTools());
         final Session session = new Session(userHash);
+        new KuneErrorHandler(session);
         final DefaultApplication application = new DefaultApplication(tools, session);
         Site.showProgressLoading();
         ContentProvider provider = new ContentProviderImpl(ContentService.App.getInstance());

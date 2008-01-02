@@ -28,6 +28,12 @@ continue with the client search dialog
 
 MIND-TERM:
 --------------------------------------------------------------------------------
+<vjrj> for dev, study jetty hot deploy (if scanIntervalSeconds > 0 also reload with client changes ... ). It will be nice to send a signal or something like that. See:
+  http://jetty.mortbay.org/jetty5/faq/faq_s_200-General_t_HotDeploy.html
+See, I think is what we are looking for:
+  http://www.opensymphony.com/webwork/wikidocs/QuickStart.html
+Now using maven jetty from eclise with debugger, hot reload the new class, but other things like hibernate (or cache/session) still reference the old copy of the class.
+
 <vjrj> Use of maven-exec plugin to exec scripts (to css tidy, etcetera)
   http://mojo.codehaus.org/exec-maven-plugin/introduction.html
 <vjrj> rails group-shortname.kune-site-domain/tool-name/folder-id/doc-id routing, maybe use:

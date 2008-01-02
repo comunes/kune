@@ -21,12 +21,11 @@ package org.ourproject.kune.workspace.client.actions.sn;
 
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.sitebar.client.Site;
-
-import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class UnJoinGroupAction implements Action {
 
@@ -38,12 +37,7 @@ public class UnJoinGroupAction implements Action {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
         server.unJoinGroup(services.session.userHash, services.session.getCurrentState().getGroup().getShortName(),
-                new AsyncCallback() {
-                    public void onFailure(final Throwable caught) {
-                        Site.hideProgress();
-                        services.stateManager.processErrorException(caught);
-                    }
-
+                new AsyncCallbackSimple() {
                     public void onSuccess(final Object result) {
                         Site.hideProgress();
                         Site.info(Kune.I18N.t("Removed as member"));

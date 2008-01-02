@@ -332,7 +332,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
             setDefaultSplitterPosition();
         }
         contentSP.setSize("" + (cntcxtHSP.getLeftWidgetAvailableWidth() - 2) + "px", "" + (contentHeight - 53) + "px");
-        groupDropDownsSP.setHeight("" + contentHeight + "px");
+        groupDropDownsSP.setHeight("" + (contentHeight + 7) + "px");
     }
 
     private void adjustSizeContentSP() {

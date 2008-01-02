@@ -19,14 +19,13 @@
 
 package org.ourproject.kune.workspace.client.actions.sn;
 
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.sitebar.client.Site;
-
-import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class DenyJoinGroupAction implements Action {
 
@@ -37,18 +36,13 @@ public class DenyJoinGroupAction implements Action {
     private void onDenyJoinGroup(final Services services, final String groupShortName) {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        server.denyJoinGroup(services.session.userHash, services.session.getCurrentState().getGroup()
-                .getShortName(), groupShortName, new AsyncCallback() {
-            public void onFailure(final Throwable caught) {
-                Site.hideProgress();
-                services.stateManager.processErrorException(caught);
-            }
-
-            public void onSuccess(final Object result) {
-                Site.info(Kune.I18N.t("Member rejected"));
-                services.stateManager.reloadSocialNetwork();
-            }
-        });
+        server.denyJoinGroup(services.session.userHash, services.session.getCurrentState().getGroup().getShortName(),
+                groupShortName, new AsyncCallbackSimple() {
+                    public void onSuccess(final Object result) {
+                        Site.info(Kune.I18N.t("Member rejected"));
+                        services.stateManager.reloadSocialNetwork();
+                    }
+                });
 
     }
 }

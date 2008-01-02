@@ -23,12 +23,11 @@ import java.util.Date;
 
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
-
-import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class ContentSetPublishedOnAction implements Action {
 
@@ -41,11 +40,7 @@ public class ContentSetPublishedOnAction implements Action {
         ContentServiceAsync server = ContentService.App.getInstance();
         StateDTO currentState = services.session.getCurrentState();
         server.setPublishedOn(services.session.userHash, currentState.getGroup().getShortName(), currentState
-                .getDocumentId(), publishedOn, new AsyncCallback() {
-            public void onFailure(final Throwable caught) {
-                services.stateManager.processErrorException(caught);
-            }
-
+                .getDocumentId(), publishedOn, new AsyncCallbackSimple() {
             public void onSuccess(final Object result) {
                 Site.hideProgress();
             }

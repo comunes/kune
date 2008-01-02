@@ -19,14 +19,13 @@
 
 package org.ourproject.kune.workspace.client.actions.sn;
 
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.sitebar.client.Site;
-
-import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class AddCollabAction implements Action {
 
@@ -37,20 +36,15 @@ public class AddCollabAction implements Action {
     private void onAddCollab(final Services services, final String groupShortName) {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        server.addCollabMember(services.session.userHash, services.session.getCurrentState().getGroup()
-                .getShortName(), groupShortName, new AsyncCallback() {
-            public void onFailure(final Throwable caught) {
-                Site.hideProgress();
-                services.stateManager.processErrorException(caught);
-            }
-
-            public void onSuccess(final Object result) {
-                Site.hideProgress();
-                Site.info(Kune.I18N.t("Member added as collaborator"));
-                services.stateManager.reloadSocialNetwork();
-                services.app.getWorkspace().getGroupMembersComponent().showCollabs();
-            }
-        });
+        server.addCollabMember(services.session.userHash, services.session.getCurrentState().getGroup().getShortName(),
+                groupShortName, new AsyncCallbackSimple() {
+                    public void onSuccess(final Object result) {
+                        Site.hideProgress();
+                        Site.info(Kune.I18N.t("Member added as collaborator"));
+                        services.stateManager.reloadSocialNetwork();
+                        services.app.getWorkspace().getGroupMembersComponent().showCollabs();
+                    }
+                });
 
     }
 }

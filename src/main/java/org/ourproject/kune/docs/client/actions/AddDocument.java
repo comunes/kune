@@ -23,13 +23,12 @@ package org.ourproject.kune.docs.client.actions;
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
+import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
-
-import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class AddDocument implements Action {
     public void execute(final Object value, final Object extra, final Services services) {
@@ -40,11 +39,7 @@ public class AddDocument implements Action {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
         server.addContent(services.session.userHash, services.session.getCurrentState().getGroup().getShortName(),
-                containerDTO.getId(), name, new AsyncCallback() {
-                    public void onFailure(final Throwable caught) {
-                        services.stateManager.processErrorException(caught);
-                    }
-
+                containerDTO.getId(), name, new AsyncCallbackSimple() {
                     public void onSuccess(final Object result) {
                         Site.hideProgress();
                         Site.info(Kune.I18N.t("Created, now you can edit the document"));

@@ -19,15 +19,14 @@
 
 package org.ourproject.kune.workspace.client.actions;
 
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
-
-import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class RateContentAction implements Action {
 
@@ -40,12 +39,7 @@ public class RateContentAction implements Action {
         ContentServiceAsync server = ContentService.App.getInstance();
         StateDTO currentState = services.session.getCurrentState();
         server.rateContent(services.session.userHash, currentState.getGroup().getShortName(), currentState
-                .getDocumentId(), value, new AsyncCallback() {
-            public void onFailure(final Throwable caught) {
-                Site.hideProgress();
-                services.stateManager.processErrorException(caught);
-            }
-
+                .getDocumentId(), value, new AsyncCallbackSimple() {
             public void onSuccess(final Object result) {
                 Site.hideProgress();
                 Site.info(Kune.I18N.t("Content rated"));

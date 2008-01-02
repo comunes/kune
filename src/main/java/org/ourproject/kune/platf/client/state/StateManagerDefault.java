@@ -24,16 +24,11 @@ import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
-import org.ourproject.kune.platf.client.errors.AccessViolationException;
-import org.ourproject.kune.platf.client.errors.AlreadyGroupMemberException;
-import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
-import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
-import org.ourproject.kune.platf.client.errors.LastAdminInGroupException;
-import org.ourproject.kune.platf.client.errors.SessionExpiredException;
-import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
+import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.sitebar.client.Site;
+import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 import org.ourproject.kune.workspace.client.workspace.ContentSubTitleComponent;
 import org.ourproject.kune.workspace.client.workspace.ContentTitleComponent;
@@ -44,7 +39,6 @@ import to.tipit.gwtlib.FireLog;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class StateManagerDefault implements StateManager {
     private final Application app;
@@ -95,7 +89,7 @@ public class StateManagerDefault implements StateManager {
     public void onHistoryChanged(final String historyToken) {
         GWT.log("State: " + historyToken, null);
         if (historyToken.equals(Site.NEWGROUP_TOKEN)) {
-            Site.doNewGroup(oldState.getState().getEncoded());
+            checkSessionBeforeNewGroup();
         } else if (historyToken.equals(Site.LOGIN_TOKEN)) {
             Site.doLogin(oldState.getState().getEncoded());
         } else if (historyToken.equals(Site.FIXME_TOKEN)) {
@@ -103,22 +97,6 @@ public class StateManagerDefault implements StateManager {
         } else {
             onHistoryChanged(new StateToken(historyToken));
         }
-    }
-
-    private void onHistoryChanged(final StateToken newState) {
-        Site.showProgressProcessing();
-        provider.getContent(session.userHash, newState, new AsyncCallback() {
-            public void onFailure(final Throwable caught) {
-                processErrorException(caught);
-            }
-
-            public void onSuccess(final Object result) {
-                GWT.log("State response: " + result, null);
-                StateDTO newStateDTO = (StateDTO) result;
-                loadContent(newStateDTO);
-                oldState = newStateDTO;
-            }
-        });
     }
 
     public void setState(final StateDTO content) {
@@ -129,6 +107,27 @@ public class StateManagerDefault implements StateManager {
 
     public void setState(final StateToken state) {
         History.newItem(state.getEncoded());
+    }
+
+    public String getUser() {
+        return session.userHash;
+    }
+
+    public void reloadSocialNetwork() {
+        Site.sitebar.reloadUserInfo(session.userHash);
+        loadSocialNetwork();
+    }
+
+    private void onHistoryChanged(final StateToken newState) {
+        Site.showProgressProcessing();
+        provider.getContent(session.userHash, newState, new AsyncCallbackSimple() {
+            public void onSuccess(final Object result) {
+                GWT.log("State response: " + result, null);
+                StateDTO newStateDTO = (StateDTO) result;
+                loadContent(newStateDTO);
+                oldState = newStateDTO;
+            }
+        });
     }
 
     private void loadContent(final StateDTO state) {
@@ -208,51 +207,6 @@ public class StateManagerDefault implements StateManager {
         lastTheme = nextTheme;
     }
 
-    public String getUser() {
-        return session.userHash;
-    }
-
-    public void reloadSocialNetwork() {
-        Site.sitebar.reloadUserInfo(session.userHash);
-        loadSocialNetwork();
-    }
-
-    // TODO: Extract this to a utility class
-    public void processErrorException(final Throwable caught) {
-        Site.hideProgress();
-        try {
-            throw caught;
-        } catch (final AccessViolationException e) {
-            Site.error(Kune.I18N.t("You don't have rights to do that"));
-        } catch (final SessionExpiredException e) {
-            doSessionExpired();
-        } catch (final UserMustBeLoggedException e) {
-            if (session.isLogged()) {
-                doSessionExpired();
-            } else {
-                Site.important(Kune.I18N.t("Please sign in or register"));
-            }
-        } catch (final GroupNotFoundException e) {
-            Site.error(Kune.I18N.t("Group not found"));
-        } catch (final ContentNotFoundException e) {
-            Site.error(Kune.I18N.t("Content not found"));
-        } catch (final LastAdminInGroupException e) {
-            Site.showAlertMessage(Kune.I18N.t("Sorry, you are the last admin of this group."
-                    + " Look for someone to substitute you appropriately as admin before unjoin this group."));
-        } catch (final AlreadyGroupMemberException e) {
-            Site.error(Kune.I18N.t("This group is already a group member"));
-        } catch (final Throwable e) {
-            Site.error(Kune.I18N.t("Error performing operation"));
-            GWT.log("Other kind of exception in StateManagerDefault/processErrorException", null);
-            throw new RuntimeException();
-        }
-    }
-
-    private void doSessionExpired() {
-        Site.doLogout();
-        Site.showAlertMessage(Kune.I18N.t("Your session has expired. Please login again."));
-    }
-
     private void loadSocialNetwork() {
         StateDTO state;
         if (session != null && (state = session.getCurrentState()) != null) {
@@ -261,6 +215,14 @@ public class StateManagerDefault implements StateManager {
             workspace.getParticipationComponent().getParticipation(session.userHash, state.getGroup(),
                     state.getGroupRights());
         }
+    }
+
+    private void checkSessionBeforeNewGroup() {
+        app.getDispatcher().fire(WorkspaceEvents.ONLY_CHECK_USER_SESSION, new AsyncCallbackSimple() {
+            public void onSuccess(final Object result) {
+                Site.doNewGroup(oldState.getState().getEncoded());
+            }
+        }, null);
     }
 
 }

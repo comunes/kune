@@ -99,6 +99,12 @@ public class UserRPC implements RPC, UserService {
         return loadUserInfo(user);
     }
 
+    @Authenticated(mandatory = false)
+    @Transactional(type = TransactionType.READ_ONLY)
+    public void onlyCheckSession(final String userHash) throws SerializableException {
+        // Do nothing @Authenticated checks user session
+    };
+
     private UserInfoDTO loginUser(final User user) throws SerializableException {
         if (user != null) {
             // Maybe use terracotta.org for http session clustering
