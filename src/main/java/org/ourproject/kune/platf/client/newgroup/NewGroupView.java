@@ -35,6 +35,8 @@ public interface NewGroupView extends View {
 
     boolean isProject();
 
+    boolean isOrphanedProject();
+
     boolean isOrganization();
 
     boolean isCommunity();

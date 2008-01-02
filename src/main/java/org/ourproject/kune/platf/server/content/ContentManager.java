@@ -22,13 +22,12 @@ package org.ourproject.kune.platf.server.content;
 
 import java.util.Date;
 
-import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
-import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
-import org.ourproject.kune.platf.client.errors.UserNotFoundException;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.Manager;
+
+import com.google.gwt.user.client.rpc.SerializableException;
 
 public interface ContentManager extends Manager<Content, Long> {
 
@@ -36,7 +35,7 @@ public interface ContentManager extends Manager<Content, Long> {
 
     public Content save(User editor, Content descriptor, String content);
 
-    public void rateContent(User rater, Long contentId, Double value) throws ContentNotFoundException;
+    public void rateContent(User rater, Long contentId, Double value) throws SerializableException;
 
     public Double getRateContent(User user, Content content);
 
@@ -44,21 +43,18 @@ public interface ContentManager extends Manager<Content, Long> {
 
     public Double getRateAvg(Content content);
 
-    public void setTitle(User user, Long contentId, String newTitle) throws ContentNotFoundException;
+    public void setTitle(User user, Long contentId, String newTitle) throws SerializableException;
 
-    public void setLanguage(User user, Long contentId, String languageCode) throws ContentNotFoundException,
-            I18nNotFoundException;
+    public void setLanguage(User user, Long contentId, String languageCode) throws SerializableException;
 
-    public void setPublishedOn(User user, Long contentId, Date publishedOn) throws ContentNotFoundException;
+    public void setPublishedOn(User user, Long contentId, Date publishedOn) throws SerializableException;
 
-    public void setTags(User user, Long contentId, String tags) throws ContentNotFoundException;
+    public void setTags(User user, Long contentId, String tags) throws SerializableException;
 
-    public void addAuthor(User user, Long contentId, String authorShortName) throws ContentNotFoundException,
-            UserNotFoundException;
+    public void addAuthor(User user, Long contentId, String authorShortName) throws SerializableException;
 
-    public void removeAuthor(User user, Long contentId, String authorShortName) throws ContentNotFoundException,
-            UserNotFoundException;
+    public void removeAuthor(User user, Long contentId, String authorShortName) throws SerializableException;
 
-    public void delContent(User user, Long contentId) throws ContentNotFoundException;
+    public void delContent(User user, Long contentId) throws SerializableException;
 
 }

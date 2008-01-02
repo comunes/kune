@@ -22,12 +22,13 @@ package org.ourproject.kune.workspace.client.socialnet.ui;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.services.Images;
+import org.ourproject.kune.platf.client.ui.UIConstants;
+import org.ourproject.kune.platf.client.ui.stacks.StackSubItemAction;
+import org.ourproject.kune.platf.client.ui.stacks.StackedDropDownPanel;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.socialnet.MemberAction;
 import org.ourproject.kune.workspace.client.socialnet.ParticipationView;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersView;
-import org.ourproject.kune.workspace.client.workspace.ui.StackSubItemAction;
-import org.ourproject.kune.workspace.client.workspace.ui.StackedDropDownPanel;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
@@ -49,7 +50,7 @@ public class ParticipationPanel extends StackedDropDownPanel implements Particip
     }
 
     public void addCategory(final String name, final String title, final String iconType) {
-	super.addStackItem(name, title, getIcon(iconType), StackedDropDownPanel.ICON_HORIZ_ALIGN_RIGHT, COUNTS_VISIBLE);
+	super.addStackItem(name, title, getIcon(iconType), UIConstants.ICON_HORIZ_ALIGN_RIGHT, COUNTS_VISIBLE);
     }
 
     public void addCategoryMember(final String categoryName, final String name, final String title,

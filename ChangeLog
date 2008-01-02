@@ -1,3 +1,13 @@
+2008-01-02 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* Added orphaned projects
+	* More 'Content not found' checks added
+	* Added Custom Stack Panel to permit close current open item
+	* More authorization/authentication functionality and checks.
+	* Session expiration improved (now for test purposes session expiration time is very
+	short)
+	* I18n can be used also in server now
+	* Added welcome mensaje after user register
+
 2007-12-30 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* (drop database to test this changes)
 	* Containers parent/child modification follow hibernate pattern recomendations

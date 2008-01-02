@@ -34,6 +34,7 @@ import org.ourproject.kune.sitebar.client.msg.SiteMessage;
 import org.ourproject.kune.sitebar.client.msg.SiteMessagePanel;
 import org.ourproject.kune.workspace.client.ui.form.WizardListener;
 
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -72,6 +73,8 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
     private LicenseChoose licenseChoosePanel;
 
     private final SiteMessagePanel messagesPanel;
+
+    private Radio orphanedProjectRadio;
 
     public NewGroupPanel(final NewGroupPresenter presenter) {
         super(Kune.I18N.t("Register a new Group"), true, false, 470, 440, new WizardListener() {
@@ -170,6 +173,10 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
 
     public boolean isProject() {
         return projectRadio.getValue();
+    }
+
+    public boolean isOrphanedProject() {
+        return orphanedProjectRadio.getValue();
     }
 
     public boolean isOrganization() {
@@ -295,10 +302,29 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
             }
         });
         form.add(communityRadio);
+
+        orphanedProjectRadio = new Radio(new CheckboxConfig() {
+            {
+                setName(TYPEOFGROUP_FIELD);
+                setBoxLabel(Kune.I18N.t("Orphaned Project"));
+                setAutoCreate(true);
+            }
+        });
+        form.add(orphanedProjectRadio);
+
         form.end();
 
         form.end();
         form.render();
+
+        // FIXME: Find other way to show tips:
+        projectRadio.setTitle(Kune.I18N.t("A kind of group in which new members inclusion are moderated by admins."));
+        orgRadio.setTitle(Kune.I18N.t("Like a project, but organizations must have a legal entity."));
+        communityRadio.setTitle(Kune.I18N.t("A community is a group of persons open to new members."));
+
+        DOM.setElementProperty(orphanedProjectRadio.getElement(), "ext:qtip", Kune.I18N
+                .t("If you have an idea but you don't have capacity/possibilities to do it, "
+                        + "register it, and permit others to work on it"));
 
         shortNameField.getEl().addListener("keypress", new EventCallback() {
             public void execute(final EventObject e) {

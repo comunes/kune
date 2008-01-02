@@ -129,6 +129,10 @@ legend {
   cursor: pointer;
 }
 
+.kuneLabelPre {
+  white-space: pre !important;
+}
+
 /* Buttons */
 
 .kune-CustomPushButton-space {
@@ -328,6 +332,37 @@ legend {
 
 .kune-Margin-40-l {
   margin-left: 40px;
+}
+
+.kune-Margin-20-trbl {
+  margin: 20px;
+}
+
+.kune-Margin-20-lr {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.kune-Margin-20-tl {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.kune-Margin-20-tb {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.kune-Margin-20-t {
+  margin-top: 20px;
+}
+
+.kune-Margin-20-r {
+  margin-right: 20px;
+}
+
+.kune-Margin-20-l {
+  margin-left: 20px;
 }
 
 .kune-Margin-Large-trbl {

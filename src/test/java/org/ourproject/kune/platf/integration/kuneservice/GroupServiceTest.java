@@ -109,4 +109,26 @@ public class GroupServiceTest extends IntegrationTest {
         assertEquals(groupCreated.getType(), GroupType.ORGANIZATION);
     }
 
+    @Test
+    public void createOrphanedProject() throws SerializableException {
+        doLogin();
+
+        GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative", "Public Desc",
+                GroupDTO.ORPHANED_PROJECT);
+
+        LicenseDTO license = new LicenseDTO();
+        license.setShortName("by-sa");
+        group.setDefaultLicense(license);
+        service.createNewGroup(session.getHash(), group);
+
+        Group groupCreated = groupFinder.findByShortName("ysei");
+        assertEquals(groupCreated.getShortName(), group.getShortName());
+        assertEquals(groupCreated.getLongName(), group.getLongName());
+        assertEquals(groupCreated.getPublicDesc(), group.getPublicDesc());
+        assertEquals(groupCreated.getAdmissionType(), AdmissionType.Open);
+        assertEquals(groupCreated.getType(), GroupType.ORPHANED_PROJECT);
+        assertEquals(0, groupCreated.getSocialNetwork().getAccessLists().getAdmins().getList().size());
+        assertEquals(0, groupCreated.getSocialNetwork().getAccessLists().getEditors().getList().size());
+    }
+
 }

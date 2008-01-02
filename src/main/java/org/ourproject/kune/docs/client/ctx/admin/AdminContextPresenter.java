@@ -20,18 +20,26 @@
 
 package org.ourproject.kune.docs.client.ctx.admin;
 
+import java.util.Date;
+
+import org.ourproject.kune.docs.client.actions.DocsEvents;
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public class AdminContextPresenter implements AdminContext {
 
-    private final AdminContextView view;
+    private AdminContextView view;
 
-    public AdminContextPresenter(final AdminContextView view) {
+    public AdminContextPresenter() {
+    }
+
+    public void init(final AdminContextView view) {
         this.view = view;
     }
 
     public void setState(final StateDTO content) {
+        // In the future check the use of these components by each tool
         view.setAccessLists(content.getAccessLists());
         view.setLanguage(content.getLanguage());
         view.setAuthors(content.getAuthors());
@@ -41,6 +49,10 @@ public class AdminContextPresenter implements AdminContext {
 
     public View getView() {
         return view;
+    }
+
+    public void setPublishedOn(final Date date) {
+        DefaultDispatcher.getInstance().fire(DocsEvents.SET_PUBLISHED_ON, date, null);
     }
 
 }

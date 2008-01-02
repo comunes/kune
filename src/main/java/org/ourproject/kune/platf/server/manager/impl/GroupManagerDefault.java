@@ -123,7 +123,15 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
             UserMustBeLoggedException {
         String defaultSiteWorkspaceTheme = kuneProperties.get(KuneProperties.WS_THEMES_DEF);
         if (User.isKnownUser(user)) {
-            // FIXME: A better way to do this license part?
+            if (group.getType().equals(GroupType.COMMUNITY)) {
+                group.setAdmissionType(AdmissionType.Open);
+            } else if (group.getType().equals(GroupType.ORGANIZATION)) {
+                group.setAdmissionType(AdmissionType.Moderated);
+            } else if (group.getType().equals(GroupType.PROJECT)) {
+                group.setAdmissionType(AdmissionType.Moderated);
+            } else if (group.getType().equals(GroupType.ORPHANED_PROJECT)) {
+                group.setAdmissionType(AdmissionType.Open);
+            }
             String licName = group.getDefaultLicense().getShortName();
             License license = licenseFinder.findByShortName(licName);
             group.setDefaultLicense(license);
@@ -171,17 +179,19 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         final AccessLists lists = network.getAccessLists();
         lists.getEditors().setMode(GroupListMode.NOBODY);
         lists.getViewers().setMode(GroupListMode.EVERYONE);
-        network.addAdmin(userGroup);
+        if (!group.getType().equals(GroupType.ORPHANED_PROJECT)) {
+            network.addAdmin(userGroup);
+        }
     }
 
     private void initGroup(final User user, final Group group) throws GroupNameInUseException {
-        for (final ServerTool tool : registry.all()) {
-            tool.initGroup(user, group);
-        }
         try {
             persist(group);
         } catch (final EntityExistsException e) {
             throw new GroupNameInUseException();
+        }
+        for (final ServerTool tool : registry.all()) {
+            tool.initGroup(user, group);
         }
     }
 

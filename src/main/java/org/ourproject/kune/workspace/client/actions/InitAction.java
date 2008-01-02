@@ -48,7 +48,7 @@ public class InitAction implements Action {
                 PrefetchUtilities.preFetchLessImpImages();
             }
         };
-        prefetchTimer.schedule(10000);
+        prefetchTimer.schedule(20000);
         getInitData(services);
         int windowWidth = Window.getClientWidth();
         Workspace workspace = services.app.getWorkspace();

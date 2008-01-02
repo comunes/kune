@@ -26,6 +26,7 @@ import javax.persistence.PersistenceException;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
+import org.ourproject.kune.platf.client.errors.ToolNotFoundException;
 import org.ourproject.kune.platf.server.content.ContainerManager;
 import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.domain.Container;
@@ -36,6 +37,7 @@ import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.RateManager;
 
+import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -72,8 +74,7 @@ public class FinderServiceDefault implements FinderService {
 
     }
 
-    public Content getContent(final StateToken token, final Group defaultGroup) throws ContentNotFoundException,
-            GroupNotFoundException {
+    public Content getContent(final StateToken token, final Group defaultGroup) throws SerializableException {
         Long contentId = checkAndParse(token.getDocument());
         Long folderId = checkAndParse(token.getFolder());
 
@@ -125,9 +126,12 @@ public class FinderServiceDefault implements FinderService {
         return generateFolderFakeContent(container);
     }
 
-    private Content findByRootOnGroup(final String groupName, final String toolName) throws GroupNotFoundException {
+    private Content findByRootOnGroup(final String groupName, final String toolName) throws SerializableException {
         try {
             Group group = groupManager.findByShortName(groupName);
+            if (!group.existToolConfig(toolName)) {
+                throw new ToolNotFoundException();
+            }
             Container container = group.getRoot(toolName);
             return generateFolderFakeContent(container);
         } catch (NoResultException e) {

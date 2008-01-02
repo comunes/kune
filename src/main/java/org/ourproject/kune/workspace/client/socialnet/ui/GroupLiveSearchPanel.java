@@ -101,7 +101,7 @@ public class GroupLiveSearchPanel implements GroupLiveSearchView {
 
         Form form = new Form(new FormConfig() {
             {
-                setWidth(610);
+                setWidth(410);
                 setSurroundWithBox(true);
                 setHideLabels(true);
                 setHeader(Kune.I18N.t("Search existing users and groups and add as members"));
@@ -116,7 +116,7 @@ public class GroupLiveSearchPanel implements GroupLiveSearchView {
                 setDisplayField("longName");
                 setTypeAhead(true);
                 setLoadingText(Kune.I18N.t("Searching..."));
-                setWidth(570);
+                setWidth(370);
                 setPageSize(PAGINATION_SIZE);
                 // setHideTrigger(true);
                 setTpl(resultTpl);

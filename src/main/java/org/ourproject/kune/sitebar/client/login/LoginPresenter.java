@@ -87,7 +87,7 @@ public class LoginPresenter implements Login, MessagePresenter {
 
                 public void onSuccess(final Object response) {
                     listener.userLoggedIn((UserInfoDTO) response);
-                    Site.hideProgress();
+                    // Site.hideProgress();
                 }
             };
 
@@ -131,6 +131,7 @@ public class LoginPresenter implements Login, MessagePresenter {
                 public void onSuccess(final Object response) {
                     listener.userLoggedIn((UserInfoDTO) response);
                     Site.hideProgress();
+                    view.showWelcolmeDialog();
                 }
             };
 

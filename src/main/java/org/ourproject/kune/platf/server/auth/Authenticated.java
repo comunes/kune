@@ -34,4 +34,11 @@ import com.google.inject.BindingAnnotation;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Authenticated {
 
+    /**
+     * if false, only checks for session expiration
+     * 
+     * @return
+     */
+    boolean mandatory() default true;
+
 }

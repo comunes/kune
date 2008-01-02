@@ -39,13 +39,12 @@ public class ChangeGroupWsThemeAction implements Action {
         server.changeGroupWsTheme(services.session.userHash, services.session.getCurrentState().getGroup()
                 .getShortName(), theme, new AsyncCallback() {
             public void onFailure(final Throwable caught) {
-                Site.hideProgress();
                 services.stateManager.processErrorException(caught);
             }
 
             public void onSuccess(final Object result) {
+                services.app.getWorkspace().setTheme(theme);
                 Site.hideProgress();
-                services.stateManager.reload();
             }
         });
 

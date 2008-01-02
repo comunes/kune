@@ -7,7 +7,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
+import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
@@ -29,22 +29,20 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
         assertNotNull(response);
     }
 
-    @Test(expected = GroupNotFoundException.class)
+    @Test
     public void unknownContent() throws SerializableException {
-        final StateDTO content = contentService.getContent(null, groupName, new StateToken("kune.docs"));
+        final StateDTO content = contentService.getContent(null, groupName, new StateToken("site.docs"));
         assertNotNull(content);
         assertNotNull(content.getGroup());
         assertNotNull(content.getFolder());
         assertNotNull(content.getFolder().getId());
         assertNotNull(content.getToolName());
-        assertNotNull(content.getDocumentId());
-        assertNotNull(content.getRateByUsers());
     }
 
     @Test
     public void contentWithLoggedUserIsEditable() throws SerializableException {
-        doLogin();
-        final StateDTO response = contentService.getContent(null, groupName, new StateToken());
+        String userHash = doLogin();
+        final StateDTO response = contentService.getContent(userHash, groupName, new StateToken());
         assertNotNull(response.getContentRights());
         assertTrue(response.getContentRights().isEditable());
         // assertTrue(response.getAccessLists().getAdmin().size() == 1);
@@ -74,4 +72,25 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
         assertNotNull(content.getRate());
     }
 
+    @Test(expected = ContentNotFoundException.class)
+    public void nonExistentContent() throws SerializableException {
+        contentService.getContent(null, groupName, new StateToken("foo foo foo"));
+    }
+
+    @Test(expected = ContentNotFoundException.class)
+    public void nonExistentContent2() throws SerializableException {
+        contentService.getContent(null, groupName, new StateToken("site.foofoo"));
+    }
+
+    @Test(expected = ContentNotFoundException.class)
+    public void nonExistentContent3() throws SerializableException {
+        contentService.getContent(null, groupName, new StateToken("site.docs.foofoo"));
+    }
+
+    @Test(expected = ContentNotFoundException.class)
+    public void nonExistentContent4() throws SerializableException {
+        StateDTO stateDTO = getDefaultContent();
+        stateDTO.setDocumentId("foofoo");
+        contentService.getContent(null, groupName, stateDTO.getState());
+    }
 }

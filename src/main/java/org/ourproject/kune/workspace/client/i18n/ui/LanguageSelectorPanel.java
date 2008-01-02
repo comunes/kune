@@ -80,6 +80,7 @@ public class LanguageSelectorPanel extends Form implements LanguageSelectorView 
                 setEmptyText(Kune.I18N.t("Enter language"));
                 setLoadingText(Kune.I18N.t("Searching..."));
                 setTypeAhead(true);
+                setTypeAheadDelay(1000);
                 setSelectOnFocus(false);
                 setWidth(187);
                 setMsgTarget("side");

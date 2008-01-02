@@ -67,7 +67,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     private final VerticalPanel cntcxtVP;
     private final ScrollPanel groupDropDownsSP;
     private final ColorTheme th;
-    private final HorizontalPanel temporalSpaceForGroupOptions;
+    private final HorizontalPanel BottomIconsPanel;
     private ContentTitlePanel contentTitlePanel;
     private ContentSubTitlePanel contentSubTitlePanel;
     private ContentToolBarPanel contentToolBarPanel;
@@ -91,7 +91,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         cntcxtVP = new VerticalPanel();
         final VerticalPanel groupNavBarVP = new VerticalPanel();
         groupToolsBar = new GroupToolsBar();
-        temporalSpaceForGroupOptions = new HorizontalPanel();
+        BottomIconsPanel = new HorizontalPanel();
         groupDropDownsSP = new ScrollPanel();
         groupDropDownsVP = new VerticalPanel();
         contentTitleBarHP = new HorizontalPanel();
@@ -121,8 +121,8 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         generalHP.add(cntcxtVP);
         generalHP.add(groupNavBarVP);
         groupNavBarVP.add(groupToolsBar);
-        groupNavBarVP.add(temporalSpaceForGroupOptions);
         groupNavBarVP.add(groupDropDownsSP);
+        groupNavBarVP.add(BottomIconsPanel);
         groupDropDownsSP.add(groupDropDownsVP);
         cntcxtVP.add(contentTitleBarBorderDec);
         cntcxtVP.add(contentSubTitleBarHP);
@@ -161,7 +161,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         contentBottomBarHP.addStyleName("kune-ft12px");
         groupDropDownsVP.addStyleName("kune-GroupSummaryPanel");
         bottomBorderDecorator.setColor(th.getContentMainBorder());
-        temporalSpaceForGroupOptions.addStyleName("kune-Margin-Medium-l");
+        BottomIconsPanel.addStyleName("kune-Margin-Medium-l");
         previosRightWidgetWidth = DEF_CONTEXT_WIDTH;
     }
 
@@ -254,7 +254,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     }
 
     public void setThemeMenuComponent(final View view) {
-        temporalSpaceForGroupOptions.add((Widget) view);
+        BottomIconsPanel.add((Widget) view);
     }
 
     public void setTheme(final String theme) {

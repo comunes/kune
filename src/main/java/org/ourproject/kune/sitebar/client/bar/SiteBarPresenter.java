@@ -24,9 +24,11 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
+import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.newgroup.NewGroupListener;
 import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.login.LoginListener;
 import org.ourproject.kune.sitebar.client.rpc.UserService;
@@ -40,11 +42,12 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 
     private SiteBarView view;
     private final SiteBarListener listener;
-    private boolean isLogged;
     private String previousToken;
+    private final Session session;
 
-    public SiteBarPresenter(final SiteBarListener listener) {
+    public SiteBarPresenter(final SiteBarListener listener, final Session session) {
         this.listener = listener;
+        this.session = session;
     }
 
     public void init(final SiteBarView view) {
@@ -62,7 +65,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 
     public void doNewGroup(final String previousToken) {
         this.previousToken = previousToken;
-        if (isLogged) {
+        if (session.isLogged()) {
             Site.showProgressProcessing();
             view.showNewGroupDialog();
             view.centerNewGroupDialog();
@@ -85,8 +88,10 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
                 Site.hideProgress();
                 try {
                     throw caught;
+                } catch (final SessionExpiredException e) {
+                    clientUILogout();
                 } catch (final UserMustBeLoggedException e) {
-                    logout();
+                    clientUILogout();
                 } catch (final Throwable e) {
                     GWT.log("Other kind of exception in doLogout", null);
                     throw new RuntimeException();
@@ -95,11 +100,10 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 
             public void onSuccess(final Object arg0) {
                 Site.hideProgress();
-                logout();
+                clientUILogout();
             }
 
-            private void logout() {
-                isLogged = false;
+            private void clientUILogout() {
                 view.restoreLoginLink();
                 view.resetOptionsSubmenu();
                 view.setLogoutLinkVisible(false);
@@ -135,7 +139,6 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
             view.restoreLoginLink();
             view.setLogoutLinkVisible(false);
         } else {
-            isLogged = true;
             view.showLoggedUserName(user.getShortName(), user.getHomePage());
             view.setLogoutLinkVisible(true);
             view.setGroupsIsMember(user.getGroupsIsAdmin(), user.getGroupsIsCollab());
@@ -148,7 +151,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
     }
 
     public void onLoginClose() {
-        if (!isLogged) {
+        if (!session.isLogged()) {
             returnToPreviousState();
         }
     }

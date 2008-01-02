@@ -22,12 +22,11 @@ package org.ourproject.kune.platf.server.access;
 
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
-import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
-import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 
+import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -48,8 +47,7 @@ public class AccessServiceDefault implements AccessService {
     }
 
     public Access getAccess(final User user, final StateToken token, final Group defaultGroup,
-            final AccessType accessType) throws ContentNotFoundException, AccessViolationException,
-            GroupNotFoundException {
+            final AccessType accessType) throws SerializableException {
         Content descriptor = finder.getContent(token, defaultGroup);
         Access access = new Access(descriptor, descriptor.getFolder());
         addContentRights(access, user);
@@ -62,7 +60,7 @@ public class AccessServiceDefault implements AccessService {
     }
 
     public Content accessToContent(final Long contentId, final User user, final AccessType accessType)
-            throws AccessViolationException, ContentNotFoundException {
+            throws SerializableException {
         Content descriptor = finder.getContent(contentId);
         Access access = new Access(descriptor, null);
         addContentRights(access, user);
@@ -70,7 +68,7 @@ public class AccessServiceDefault implements AccessService {
     }
 
     public Access getFolderAccess(final Long folderId, final User user, final AccessType accessType)
-            throws AccessViolationException, ContentNotFoundException {
+            throws SerializableException {
         Access access = new Access(null, finder.getFolder(folderId));
         addFolderRights(access, user);
         return check(access, access.getFolderRights(), accessType);

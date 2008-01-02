@@ -17,7 +17,7 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.workspace.ui;
+package org.ourproject.kune.platf.client.ui.stacks;
 
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.services.Kune;

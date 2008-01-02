@@ -170,6 +170,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
         socialNetworkManager.addGroupToViewers(userLogged, groupToAdd, group);
     }
 
+    @Authenticated(mandatory = false)
     // At least you can access as Viewer to the Group
     @Authorizated(accessTypeRequired = AccessType.READ)
     @Transactional(type = TransactionType.READ_ONLY)
@@ -181,6 +182,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
         return mapper.map(socialNetworkManager.find(user, group), SocialNetworkDTO.class);
     }
 
+    @Authenticated(mandatory = false)
     // At least you can access as Viewer to the Group
     @Authorizated(accessTypeRequired = AccessType.READ)
     @Transactional(type = TransactionType.READ_ONLY)

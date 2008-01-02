@@ -96,8 +96,9 @@ public class DocumentFactory {
     }
 
     public static AdminContext createAdminContext() {
-        AdminContextView view = new AdminContextPanel();
-        AdminContextPresenter presenter = new AdminContextPresenter(view);
+        AdminContextPresenter presenter = new AdminContextPresenter();
+        AdminContextView view = new AdminContextPanel(presenter);
+        presenter.init(view);
         return presenter;
     }
 

@@ -256,6 +256,7 @@
 .kune-LicensePanel-licensetext {
   cursor: pointer;
   margin-left: 5px;
+  text-decoration:underline;
 }
 
 /* Main Content & Context */
@@ -564,4 +565,56 @@
 .kune-I18nTranslatorCell {
   white-space: normal;
 }
+
+/* Admin Context */
+
+.kune-AdminContextPanel {
+  margin: 6px;
+  width: 100%;
+}
+
+.kune-AdminContextPanel .gwt-StackPanelItem {
+  background: transparent url(img/arrow-right-white.gif) no-repeat scroll 3%;
+  cursor: pointer;
+  padding: 3px 10px 1px 20px;
+  owerflow: hidden;
+  width: 100%;
+}
+
+.kune-AdminContextPanel .gwt-StackPanelItem img {
+  margin: 0 0 0 3px;
+  vertical-align: middle;
+}
+
+.kune-AdminContextPanel .gwt-StackPanelItem-selected {
+  background: transparent url(img/arrow-down-white.gif) no-repeat scroll 2%;
+  background-color: #DEE3DB;
+  /* border-bottom: 2px solid #DEE3DB;
+  border-top: 1px solid #DEE3DB;
+  border-left: : 1px solid #DEE3DB;
+  border-right: : 1px solid #DEE3DB; */
+}
+
+.kune-AdminContextPanelLink {
+  background-color: #E6E6E6;
+  border-top: 1px solid #CCC;
+  border-bottom: 1px solid #F2F2F2;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.kune-AdminContextPanel-inner {
+  /* background-color: white; */
+  padding: 10px;
+  border-bottom: 2px solid #DEE3DB;
+  /* border-left: : 1px solid #DEE3DB;
+  border-right: : 1px solid #DEE3DB; */
+}
+
+.gwt-MenuBar-kune-ThemeMenu-offset {
+  margin-left: -120px;
+  margin-top: -120px;
+}
+
+
 

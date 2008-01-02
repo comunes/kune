@@ -29,6 +29,7 @@ import org.ourproject.kune.platf.client.errors.AlreadyGroupMemberException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
 import org.ourproject.kune.platf.client.errors.LastAdminInGroupException;
+import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.tool.ClientTool;
@@ -150,8 +151,8 @@ public class StateManagerDefault implements StateManager {
         clientTool.setContent(state);
         ContentTitleComponent contentTitleComponent = workspace.getContentTitleComponent();
         ContentSubTitleComponent contentSubTitleComponent = workspace.getContentSubTitleComponent();
-        contentTitleComponent.setContentTitle(state.getTitle());
         if (state.hasDocument()) {
+            contentTitleComponent.setContentTitle(state.getTitle());
             contentTitleComponent.setContentDateVisible(true);
             DateTimeFormat.getFullDateTimeFormat();
 
@@ -160,6 +161,13 @@ public class StateManagerDefault implements StateManager {
                     ((UserSimpleDTO) state.getAuthors().get(0)).getName()));
             contentSubTitleComponent.setContentSubTitleLeftVisible(true);
         } else {
+            if (state.getFolder().getParentFolderId() == null) {
+                // We translate root folder names (documents, chat room,
+                // etcetera)
+                contentTitleComponent.setContentTitle(Kune.I18N.t(state.getTitle()));
+            } else {
+                contentTitleComponent.setContentTitle(state.getTitle());
+            }
             contentTitleComponent.setContentDateVisible(false);
             contentSubTitleComponent.setContentSubTitleLeftVisible(false);
         }
@@ -216,21 +224,21 @@ public class StateManagerDefault implements StateManager {
             throw caught;
         } catch (final AccessViolationException e) {
             Site.error(Kune.I18N.t("You don't have rights to do that"));
+        } catch (final SessionExpiredException e) {
+            doSessionExpired();
         } catch (final UserMustBeLoggedException e) {
             if (session.isLogged()) {
-                Site.doLogout();
-                Site.showAlertMessage(Kune.I18N.t("Your session has expired. Please login again."));
+                doSessionExpired();
             } else {
-                Site.error(Kune.I18N.t("Please sign in or register"));
+                Site.important(Kune.I18N.t("Please sign in or register"));
             }
         } catch (final GroupNotFoundException e) {
             Site.error(Kune.I18N.t("Group not found"));
         } catch (final ContentNotFoundException e) {
             Site.error(Kune.I18N.t("Content not found"));
         } catch (final LastAdminInGroupException e) {
-            Site
-                    .showAlertMessage(Kune.I18N
-                            .t("Sorry, you are the last admin of this group. Look for someone to substitute you appropriately as admin before unjoin this group."));
+            Site.showAlertMessage(Kune.I18N.t("Sorry, you are the last admin of this group."
+                    + " Look for someone to substitute you appropriately as admin before unjoin this group."));
         } catch (final AlreadyGroupMemberException e) {
             Site.error(Kune.I18N.t("This group is already a group member"));
         } catch (final Throwable e) {
@@ -238,6 +246,11 @@ public class StateManagerDefault implements StateManager {
             GWT.log("Other kind of exception in StateManagerDefault/processErrorException", null);
             throw new RuntimeException();
         }
+    }
+
+    private void doSessionExpired() {
+        Site.doLogout();
+        Site.showAlertMessage(Kune.I18N.t("Your session has expired. Please login again."));
     }
 
     private void loadSocialNetwork() {

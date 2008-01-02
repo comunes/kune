@@ -35,6 +35,7 @@ import org.ourproject.kune.platf.server.ParticipationData;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.GroupListMode;
+import org.ourproject.kune.platf.server.domain.GroupType;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
@@ -108,7 +109,14 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
             sn.addPendingCollaborator(user.getUserGroup());
             return SocialNetworkDTO.REQ_JOIN_WAITING_MODERATION;
         } else if (isOpen(admissionType)) {
-            sn.addCollaborator(user.getUserGroup());
+            if (inGroup.getType().equals(GroupType.ORPHANED_PROJECT)) {
+                sn.addAdmin(user.getUserGroup());
+                inGroup.setType(GroupType.PROJECT);
+                inGroup.setAdmissionType(AdmissionType.Moderated);
+                persist(inGroup, Group.class);
+            } else {
+                sn.addCollaborator(user.getUserGroup());
+            }
             return SocialNetworkDTO.REQ_JOIN_ACEPTED;
         } else if (isClosed(admissionType)) {
             return SocialNetworkDTO.REQ_JOIN_DENIED;

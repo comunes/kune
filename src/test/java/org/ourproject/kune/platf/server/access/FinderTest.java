@@ -11,16 +11,17 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
-import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
 import org.ourproject.kune.platf.server.TestDomainHelper;
-import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.content.ContainerManager;
-import org.ourproject.kune.platf.server.domain.Content;
+import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.domain.Container;
+import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.ToolConfiguration;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.RateManager;
+
+import com.google.gwt.user.client.rpc.SerializableException;
 
 public class FinderTest {
 
@@ -40,7 +41,7 @@ public class FinderTest {
     }
 
     @Test
-    public void testDefaultGroupContent() throws ContentNotFoundException, GroupNotFoundException {
+    public void testDefaultGroupContent() throws SerializableException {
         Group userGroup = new Group();
         Content descriptor = TestDomainHelper.createDescriptor(1l, "title", "content");
         userGroup.setDefaultContent(descriptor);
@@ -50,7 +51,7 @@ public class FinderTest {
     }
 
     @Test
-    public void testDefaultGroupContentHasDefLicense() throws ContentNotFoundException, GroupNotFoundException {
+    public void testDefaultGroupContentHasDefLicense() throws SerializableException {
         Group userGroup = new Group();
         Content descriptor = TestDomainHelper.createDescriptor(1l, "title", "content");
         userGroup.setDefaultContent(descriptor);
@@ -60,7 +61,7 @@ public class FinderTest {
     }
 
     @Test
-    public void testCompleteToken() throws ContentNotFoundException, GroupNotFoundException {
+    public void testCompleteToken() throws SerializableException {
         Container container = TestDomainHelper.createFolderWithIdAndGroupAndTool(1, "groupShortName", "toolName");
         Content descriptor = new Content();
         descriptor.setId(1l);
@@ -75,7 +76,7 @@ public class FinderTest {
     }
 
     @Test(expected = ContentNotFoundException.class)
-    public void contentAndFolderMatch() throws ContentNotFoundException, GroupNotFoundException {
+    public void contentAndFolderMatch() throws SerializableException {
         Content descriptor = new Content();
         Container container = TestDomainHelper.createFolderWithIdAndToolName(5, "toolName2");
         descriptor.setFolder(container);
@@ -87,7 +88,7 @@ public class FinderTest {
     }
 
     @Test(expected = ContentNotFoundException.class)
-    public void contentAndToolMatch() throws ContentNotFoundException, GroupNotFoundException {
+    public void contentAndToolMatch() throws SerializableException {
         Content descriptor = new Content();
         Container container = TestDomainHelper.createFolderWithId(1);
         descriptor.setFolder(container);
@@ -99,7 +100,7 @@ public class FinderTest {
     }
 
     @Test(expected = ContentNotFoundException.class)
-    public void contentAndGrouplMatch() throws ContentNotFoundException, GroupNotFoundException {
+    public void contentAndGrouplMatch() throws SerializableException {
         Content descriptor = new Content();
         Container container = TestDomainHelper.createFolderWithIdAndGroupAndTool(5, "groupOther", "toolName");
         descriptor.setFolder(container);
@@ -111,12 +112,12 @@ public class FinderTest {
     }
 
     @Test(expected = ContentNotFoundException.class)
-    public void voyAJoder() throws ContentNotFoundException, GroupNotFoundException {
+    public void voyAJoder() throws SerializableException {
         finder.getContent(new StateToken(null, "toolName", "1", "2"), null);
     }
 
     @Test
-    public void testDocMissing() throws ContentNotFoundException, GroupNotFoundException {
+    public void testDocMissing() throws SerializableException {
         Container container = new Container();
         expect(containerManager.find(1l)).andReturn(container);
 
@@ -128,7 +129,7 @@ public class FinderTest {
     }
 
     @Test
-    public void testFolderMissing() throws ContentNotFoundException, GroupNotFoundException {
+    public void testFolderMissing() throws SerializableException {
         Group group = new Group();
         ToolConfiguration config = group.setToolConfig("toolName", new ToolConfiguration());
         Container container = config.setRoot(new Container());
@@ -142,7 +143,7 @@ public class FinderTest {
     }
 
     @Test
-    public void getGroupDefaultContent() throws ContentNotFoundException, GroupNotFoundException {
+    public void getGroupDefaultContent() throws SerializableException {
         Group group = new Group();
         Content descriptor = new Content();
         group.setDefaultContent(descriptor);
@@ -155,7 +156,7 @@ public class FinderTest {
     }
 
     @Test
-    public void testDefaultUserContent() throws ContentNotFoundException, GroupNotFoundException {
+    public void testDefaultUserContent() throws SerializableException {
         Content content = new Content();
         Group group = new Group();
         group.setDefaultContent(content);
@@ -164,7 +165,7 @@ public class FinderTest {
     }
 
     @Test(expected = ContentNotFoundException.class)
-    public void testIds() throws ContentNotFoundException, GroupNotFoundException {
+    public void testIds() throws SerializableException {
         Content descriptor = new Content();
         Container container = TestDomainHelper.createFolderWithIdAndToolName(5, "toolName");
         descriptor.setFolder(container);

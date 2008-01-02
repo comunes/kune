@@ -16,8 +16,8 @@ public abstract class IntegrationTest {
     @Inject
     DatabaseProperties properties;
 
-    protected void doLogin() throws SerializableException {
-        userService.login(getSiteAdminShortName(), properties.getAdminPassword());
+    protected String doLogin() throws SerializableException {
+        return userService.login(getSiteAdminShortName(), properties.getAdminPassword()).getUserHash();
     }
 
     protected String getSiteAdminShortName() {

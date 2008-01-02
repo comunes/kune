@@ -190,6 +190,10 @@ public class Group implements HasId {
         return toolsConfig.get(toolName).getRoot();
     }
 
+    public boolean existToolConfig(final String toolName) {
+        return toolsConfig.get(toolName) != null;
+    }
+
     public Map<String, ToolConfiguration> getToolsConfig() {
         return toolsConfig;
     }

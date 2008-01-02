@@ -26,29 +26,29 @@ import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.sitebar.client.Site;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class ContentSetPublishedOnAction implements Action {
 
     public void execute(final Object value, final Object extra, final Services services) {
-        onContentsetPublishedOn(services, (String) value, (Date) extra);
+        onContentsetPublishedOn(services, (Date) value);
     }
 
-    private void onContentsetPublishedOn(final Services services, final String documentId, final Date publishedOn) {
+    private void onContentsetPublishedOn(final Services services, final Date publishedOn) {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
-        server.setPublishedOn(services.session.userHash, services.session.getCurrentState().getGroup().getShortName(),
-                documentId, publishedOn, new AsyncCallback() {
+        StateDTO currentState = services.session.getCurrentState();
+        server.setPublishedOn(services.session.userHash, currentState.getGroup().getShortName(), currentState
+                .getDocumentId(), publishedOn, new AsyncCallback() {
+            public void onFailure(final Throwable caught) {
+                services.stateManager.processErrorException(caught);
+            }
 
-                    public void onFailure(final Throwable caught) {
-                        services.stateManager.processErrorException(caught);
-                    }
-
-                    public void onSuccess(final Object result) {
-                        Site.hideProgress();
-                        services.stateManager.reload();
-                    }
-                });
+            public void onSuccess(final Object result) {
+                Site.hideProgress();
+            }
+        });
     }
 }

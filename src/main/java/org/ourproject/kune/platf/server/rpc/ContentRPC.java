@@ -22,12 +22,15 @@ package org.ourproject.kune.platf.server.rpc;
 
 import java.util.Date;
 
+import javax.persistence.NoResultException;
+
 import org.ourproject.kune.chat.server.managers.ChatConnection;
 import org.ourproject.kune.chat.server.managers.XmppManager;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
+import org.ourproject.kune.platf.client.errors.ToolNotFoundException;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.access.Access;
@@ -82,6 +85,7 @@ public class ContentRPC implements ContentService, RPC {
     // Not using @Authorizated because accessService is doing this job and is
     // more complex than other access checks (we use getContent to get default
     // contents for instance)
+    @Authenticated(mandatory = false)
     @Transactional(type = TransactionType.READ_ONLY)
     public StateDTO getContent(final String userHash, final String groupShortName, final StateToken token)
             throws SerializableException {
@@ -94,7 +98,14 @@ public class ContentRPC implements ContentService, RPC {
         } else {
             defaultGroup = groupManager.getDefaultGroup();
         }
-        final Access access = accessService.getAccess(user, token, defaultGroup, AccessType.READ);
+        Access access;
+        try {
+            access = accessService.getAccess(user, token, defaultGroup, AccessType.READ);
+        } catch (NoResultException e) {
+            throw new ContentNotFoundException();
+        } catch (ToolNotFoundException e) {
+            throw new ContentNotFoundException();
+        }
         final State state = stateService.create(access);
         if (state.isRateable()) {
             final Long contentId = parseId(state.getDocumentId());
@@ -271,7 +282,7 @@ public class ContentRPC implements ContentService, RPC {
     }
 
     private StateDTO createFolder(final String groupShortName, final Long parentFolderId, final String title)
-            throws AccessViolationException, ContentNotFoundException, GroupNotFoundException {
+            throws SerializableException {
         UserSession userSession = getUserSession();
         final User user = userSession.getUser();
         final Group group = groupManager.findByShortName(groupShortName);

@@ -100,6 +100,11 @@ public class GroupMembersPresenter extends AbstractPresenter implements GroupMem
             view.addUnjoinLink();
         }
 
+        if (numAdmins == 0 && numCollaborators == 0) {
+            view.addComment(Kune.I18N.t("This is an orphaned project, if you are interested "
+                    + "please request to join to work on it"));
+        }
+
         if (userCanView) {
             if (rights.isAdministrable()) {
                 MemberAction[] adminsActions = {

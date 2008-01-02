@@ -54,4 +54,6 @@ public interface LoginView extends View {
 
     public String getTimezone();
 
+    public void showWelcolmeDialog();
+
 }

@@ -27,7 +27,6 @@ import java.util.Iterator;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
-import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
 import org.ourproject.kune.platf.client.errors.UserNotFoundException;
 import org.ourproject.kune.platf.client.ui.KuneStringUtils;
@@ -42,6 +41,7 @@ import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.TagManager;
 import org.ourproject.kune.platf.server.manager.impl.DefaultManager;
 
+import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -96,7 +96,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         return finder.getRateByUsers(content);
     }
 
-    public void rateContent(final User rater, final Long contentId, final Double value) throws ContentNotFoundException {
+    public void rateContent(final User rater, final Long contentId, final Double value) throws SerializableException {
         Content content = finder.getContent(contentId);
         Rate oldRate = finder.getRate(rater, content);
         if (oldRate == null) {
@@ -119,7 +119,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     }
 
     public void addAuthor(final User user, final Long contentId, final String authorShortName)
-            throws ContentNotFoundException, UserNotFoundException {
+            throws SerializableException {
         Content content = finder.getContent(contentId);
         User author = userFinder.getByShortName(authorShortName);
         if (author == null) {
@@ -129,7 +129,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     }
 
     public void removeAuthor(final User user, final Long contentId, final String authorShortName)
-            throws ContentNotFoundException, UserNotFoundException {
+            throws SerializableException {
         Content content = finder.getContent(contentId);
         User author = userFinder.getByShortName(authorShortName);
         if (author == null) {
@@ -139,7 +139,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     }
 
     public void setLanguage(final User user, final Long contentId, final String languageCode)
-            throws ContentNotFoundException, I18nNotFoundException {
+            throws SerializableException {
         Content content = finder.getContent(contentId);
         I18nLanguage language = languageFinder.findByCode(languageCode);
         if (language == null) {
@@ -149,12 +149,12 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     }
 
     public void setPublishedOn(final User user, final Long contentId, final Date publishedOn)
-            throws ContentNotFoundException {
+            throws SerializableException {
         Content content = finder.getContent(contentId);
         content.setPublishedOn(publishedOn);
     }
 
-    public void setTags(final User user, final Long contentId, final String tags) throws ContentNotFoundException {
+    public void setTags(final User user, final Long contentId, final String tags) throws SerializableException {
         Content content = finder.getContent(contentId);
         ArrayList<String> tagsStripped = KuneStringUtils.splitTags(tags);
         ArrayList<Tag> tagList = new ArrayList<Tag>();
@@ -174,15 +174,16 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         content.setTags(tagList);
     }
 
-    public void setTitle(final User user, final Long contentId, final String newTitle) throws ContentNotFoundException {
+    public void setTitle(final User user, final Long contentId, final String newTitle) throws SerializableException {
         Content content = finder.getContent(contentId);
         content.getLastRevision().getData().setTitle(newTitle);
     }
 
-    public void delContent(final User user, final Long contentId) throws ContentNotFoundException {
+    public void delContent(final User user, final Long contentId) throws SerializableException {
         Content content = finder.getContent(contentId);
         content.setMarkForDeletion(true);
         content.setDeletedOn(new Date());
+        // FIXME: Maybe set only visible for admins
     }
 
 }

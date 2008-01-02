@@ -97,6 +97,10 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
         DefaultDispatcher.getInstance().fire(WorkspaceEvents.ENABLE_RATEIT, null, null);
     }
 
+    public void onDelete() {
+        DefaultDispatcher.getInstance().fire(DocsEvents.DEL_CONTENT, content.getDocumentId(), null);
+    }
+
     public View getView() {
         return view;
     }

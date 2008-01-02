@@ -37,7 +37,7 @@ public class ChatServerTool implements ServerTool {
     public static final String TYPE_ROOT = ChatClientTool.TYPE_ROOT;
     public static final String TYPE_ROOM = ChatClientTool.TYPE_ROOM;
     public static final String TYPE_CHAT = ChatClientTool.TYPE_CHAT;
-    public static final String ROOT_NAME = "chats";
+    public static final String ROOT_NAME = "chat rooms";
     public static final String NAME = "chats";
     private final ToolConfigurationManager configurationManager;
     private final ContainerManager containerManager;

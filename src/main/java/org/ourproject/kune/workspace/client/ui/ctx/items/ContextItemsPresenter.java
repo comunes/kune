@@ -30,6 +30,7 @@ import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.ContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.services.Kune;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
@@ -44,7 +45,13 @@ public class ContextItemsPresenter implements ContextItems {
         GWT.log("current folder: " + container.getId(), null);
         GWT.log("parent: " + container.getParentFolderId(), null);
         state.setDocument(null);
-        view.setCurrentName(container.getName());
+        if (container.getParentFolderId() == null) {
+            // We translate root folder names (documents, chat room,
+            // etcetera)
+            view.setCurrentName(Kune.I18N.t(container.getName()));
+        } else {
+            view.setCurrentName(container.getName());
+        }
         view.clear();
         List folders = container.getChilds();
         for (int index = 0; index < folders.size(); index++) {

@@ -45,4 +45,9 @@ public class ContentTitlePresenter implements ContentTitleComponent {
         return view;
     }
 
+    public void onTitleClicked() {
+        // TODO Auto-generated method stub
+
+    }
+
 }

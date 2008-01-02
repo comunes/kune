@@ -74,6 +74,7 @@ public class I18nRPC implements RPC, I18nService {
         return i18nTranslationManager.getLexicon(language);
     }
 
+    @Authenticated(mandatory = false)
     @Transactional(type = TransactionType.READ_WRITE)
     public String getTranslation(final String userHash, final String language, final String text) {
         return i18nTranslationManager.getTranslation(language, text);

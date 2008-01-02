@@ -39,7 +39,7 @@ public class DocumentServerTool implements ServerTool {
     public static final String TYPE_FOLDER = "docs.folder";
     public static final String TYPE_DOCUMENT = "docs.doc";
     public static final String NAME = "docs";
-    public static final String ROOT_NAME = "docs";
+    public static final String ROOT_NAME = "documents";
 
     private final ContentManager contentManager;
     private final ToolConfigurationManager configurationManager;
@@ -78,13 +78,9 @@ public class DocumentServerTool implements ServerTool {
         config.setRoot(container);
         group.setToolConfig(NAME, config);
         configurationManager.persist(config);
-        // FIXME
-        // Content descriptor = contentManager.createContent(i18n.t("Welcome"),
-        // i18n
-        // .t("This is an example of document. You can modify or delete it."),
-        // user, container);
-        Content descriptor = contentManager.createContent("Welcome",
-                "This is an example of document. You can modify or delete it.", user, container);
+        Content descriptor = contentManager.createContent(i18n.t("Welcome"), i18n.t("This is an example of document. "
+                + "You can modify it if you are a group's collaborator and/or delete it if you are admin."), user,
+                container);
         descriptor.addAuthor(user);
         descriptor.setLanguage(user.getLanguage());
         descriptor.setTypeId(TYPE_DOCUMENT);

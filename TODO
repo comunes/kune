@@ -5,6 +5,7 @@ TODO-list for kune
 
 SHORT-TERM (URGENT):
 --------------------------------------------------------------------------------
+<vjrj> BUG: group.tool.folder no check folder owner is group (maybe others)
 <vjrj> BUG: Duplicate Keys in group/user creation different exception [1]
 ---> vjrj
 <vjrj> Inject in interceptors (see AuthenticatedMethodInterceptor), also useful for translation of db fields
@@ -21,13 +22,16 @@ continue with the client search dialog
 --> vjrj
 <vjrj> explorer specific problems: fonts antialiasing problem?
 <vjrj> Ext localization (see I18nUiTranslation):
+  http://extjs.com/deploy/ext/examples/locale/dutch-form.js
   http://groups.google.com/group/gwt-ext/browse_thread/thread/ebec316effea2b80/bfbdadc7239b4e5d?lnk=gst&q=i18n#bfbdadc7239b4e5d
   http://extjs.com/forum/showthread.php?t=20160&highlight=localization
 
 MIND-TERM:
 --------------------------------------------------------------------------------
+<vjrj> Use of maven-exec plugin to exec scripts (to css tidy, etcetera)
+  http://mojo.codehaus.org/exec-maven-plugin/introduction.html
 <vjrj> rails group-shortname.kune-site-domain/tool-name/folder-id/doc-id routing, maybe use:
-http://agilewebdevelopment.com/plugins/request_routing
+  http://agilewebdevelopment.com/plugins/request_routing
 <vjrj> Strip html better in RTE, I18nTranslator, Chat
   http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/b4a27c80f50581cc
 <vjrj> Clean /scrits/ directory

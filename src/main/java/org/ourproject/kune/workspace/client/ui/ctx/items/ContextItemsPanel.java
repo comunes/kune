@@ -123,7 +123,7 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
         } else if (typeName.equals("docs.folder")) {
             title = Kune.I18N.t("Add a folder");
         } else if (typeName.equals("chat.room")) {
-            title = Kune.I18N.t("Add a chatroom");
+            title = Kune.I18N.t("Add a chat room");
         } else {
             title = Kune.I18N.t("Add a new [%s]", typeName);
         }

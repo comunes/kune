@@ -27,7 +27,7 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.GroupListDTO;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.services.Kune;
-import org.ourproject.kune.platf.client.ui.IconHyperlink;
+import org.ourproject.kune.platf.client.ui.IconLabel;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
@@ -51,7 +51,6 @@ public class AccessListsPanel extends Composite implements View {
 
         // Layout
         initWidget(vp);
-        vp.add(new Label(Kune.I18N.t("Permissions")));
         vp.add(adminsLabel);
         vp.add(adminsVP);
         vp.add(editorsLabel);
@@ -87,14 +86,14 @@ public class AccessListsPanel extends Composite implements View {
     private void setGroupList(final GroupListDTO groupList, final VerticalPanel groupVP) {
         groupVP.clear();
         if (groupList.getMode() == GroupListDTO.EVERYONE) {
-            groupVP.add(new IconHyperlink(img.everybody(), Kune.I18N.t("Everybody"), "fixme"));
+            groupVP.add(new IconLabel(img.everybody(), Kune.I18N.t("Everybody")));
         } else if (groupList.getMode() == GroupListDTO.NOBODY) {
-            groupVP.add(new IconHyperlink(img.nobody(), Kune.I18N.t("Nobody"), "fixme"));
+            groupVP.add(new IconLabel(img.nobody(), Kune.I18N.t("Nobody")));
         } else {
             final Iterator iter = groupList.getList().iterator();
             while (iter.hasNext()) {
                 final GroupDTO next = (GroupDTO) iter.next();
-                groupVP.add(new IconHyperlink(img.groupDefIcon(), next.getLongName(), "linkToGroupDefContent"));
+                groupVP.add(new IconLabel(img.groupDefIcon(), next.getLongName()));
             }
         }
     }

@@ -49,4 +49,6 @@ public interface GroupMembersView extends View {
 
     void confirmAddCollab(String groupShortName, String groupLongName);
 
+    void addComment(String comment);
+
 }

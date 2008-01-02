@@ -16,7 +16,7 @@ import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.EmailAddressInUseException;
 import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
-import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
+import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.integration.IntegrationTest;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 import org.ourproject.kune.platf.server.UserSession;
@@ -76,23 +76,22 @@ public class UserServiceTest extends IntegrationTest {
     @Test(expected = GroupNameInUseException.class)
     public void createUserExistingNameFails() throws SerializableException {
         assertNull(session.getUser().getId());
-        UserDTO user = new UserDTO("test", properties.getAdminShortName(), "123456",
-                "example@example.com", lang, country, timezone);
+        UserDTO user = new UserDTO("test", properties.getAdminShortName(), "123456", "example@example.com", lang,
+                country, timezone);
         userService.createUser(user);
     }
 
     @Test(expected = EmailAddressInUseException.class)
     public void createUserExistingEmailFails() throws SerializableException {
         assertNull(session.getUser().getId());
-        UserDTO user = new UserDTO("test", "test", "123456", properties.getAdminEmail(), lang, country,
-                timezone);
+        UserDTO user = new UserDTO("test", "test", "123456", properties.getAdminEmail(), lang, country, timezone);
         userService.createUser(user);
     }
 
-    @Test(expected = UserMustBeLoggedException.class)
+    @Test(expected = SessionExpiredException.class)
     public void testReloadUserInfoNotLogged() throws SerializableException {
         assertNull(session.getUser().getId());
-        userService.reloadUserInfo("FOO");
+        userService.reloadUserInfo("AndOldUserHash");
     }
 
     @Test

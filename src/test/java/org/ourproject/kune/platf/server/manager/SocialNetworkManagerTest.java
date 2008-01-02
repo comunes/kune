@@ -4,39 +4,45 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.AlreadyGroupMemberException;
 import org.ourproject.kune.platf.client.errors.LastAdminInGroupException;
+import org.ourproject.kune.platf.server.PersistenceTest;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.GroupListMode;
 import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.manager.impl.SocialNetworkManagerDefault;
 import org.ourproject.kune.testhelper.ctx.DomainContext;
 
 import com.google.gwt.user.client.rpc.SerializableException;
+import com.google.inject.Inject;
 
-public class SocialNetworkManagerTest {
-    private SocialNetworkManagerDefault socialNetworkManager;
+public class SocialNetworkManagerTest extends PersistenceTest {
+    @Inject
+    private SocialNetworkManager socialNetworkManager;
     private Group group;
-    private User user;
     private Group userGroup;
+    private Group orphanedGroup;
+    private User user;
     private User admin;
     private User otherUser;
 
     @Before
     public void init() {
-        socialNetworkManager = new SocialNetworkManagerDefault(null, null);
+        openTransaction();
         final DomainContext ctx = new DomainContext();
         ctx.createUsers("user1");
         ctx.createUsers("admin");
         ctx.createUsers("otheruser");
         ctx.createGroups("group1");
+        ctx.createOrphanGroup("grouporph");
         user = ctx.getUser("user1");
         group = ctx.getGroup("group1");
+        orphanedGroup = ctx.getGroup("grouporph");
         userGroup = user.getUserGroup();
         admin = ctx.getUser("admin");
         otherUser = ctx.getUser("otheruser");
@@ -61,6 +67,19 @@ public class SocialNetworkManagerTest {
         assertEquals(result, SocialNetworkDTO.REQ_JOIN_ACEPTED);
         assertTrue(group.getSocialNetwork().getAccessLists().getEditors().getList().contains(userGroup));
         assertEquals(group.getSocialNetwork().getAccessLists().getEditors().getMode(), GroupListMode.NORMAL);
+    }
+
+    @Test
+    public void requestJoinAOrphanedGroupAddUserGroupToAdmins() throws SerializableException {
+        assertSocialNetworkIsEmpty();
+        orphanedGroup.setAdmissionType(AdmissionType.Open);
+
+        final String result = socialNetworkManager.requestToJoin(user, orphanedGroup);
+        assertEquals(result, SocialNetworkDTO.REQ_JOIN_ACEPTED);
+        assertTrue(orphanedGroup.getSocialNetwork().getAccessLists().getAdmins().getList().contains(userGroup));
+        assertEquals(orphanedGroup.getSocialNetwork().getAccessLists().getAdmins().getMode(), GroupListMode.NORMAL);
+
+        // FIXME Change group type to PROJECT
     }
 
     @Test
@@ -309,4 +328,10 @@ public class SocialNetworkManagerTest {
         assertEquals(group.getSocialNetwork().getPendingCollaborators().getList().size(), 0);
     }
 
+    @After
+    public void close() {
+        if (getTransaction().isActive()) {
+            getTransaction().rollback();
+        }
+    }
 }

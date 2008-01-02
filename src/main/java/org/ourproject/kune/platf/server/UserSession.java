@@ -59,6 +59,10 @@ public class UserSession {
         return userId != null;
     }
 
+    public boolean isUserNotLoggedIn() {
+        return !isUserLoggedIn();
+    }
+
     private void setUser(final User user) {
         userId = user.getId();
     }

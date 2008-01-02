@@ -71,7 +71,6 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     }
 
     public User login(final String nickOrEmail, final String passwd) {
-        // TODO: integrate a existing Auth manager
         User user;
         try {
             user = finder.getByShortName(nickOrEmail);

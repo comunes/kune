@@ -21,6 +21,7 @@
 package org.ourproject.kune.platf.server;
 
 import static org.ourproject.kune.platf.server.OutermostCallInterceptor.outermostCall;
+
 import org.ourproject.kune.app.server.AbstractExtendedModule;
 import org.ourproject.kune.chat.server.managers.XmppManager;
 import org.ourproject.kune.chat.server.managers.XmppManagerDefault;
@@ -38,6 +39,8 @@ import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.auth.AuthenticatedMethodInterceptor;
 import org.ourproject.kune.platf.server.auth.Authorizated;
 import org.ourproject.kune.platf.server.auth.AuthorizatedMethodInterceptor;
+import org.ourproject.kune.platf.server.auth.SessionService;
+import org.ourproject.kune.platf.server.auth.SessionServiceDefault;
 import org.ourproject.kune.platf.server.content.ContainerManager;
 import org.ourproject.kune.platf.server.content.ContainerManagerDefault;
 import org.ourproject.kune.platf.server.content.ContentManager;
@@ -114,6 +117,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
         bind(FinderService.class).to(FinderServiceDefault.class);
         bind(StateService.class).to(StateServiceDefault.class);
         bind(I18nTranslationService.class).to(I18nTranslationServiceDefault.class);
+        bind(SessionService.class).to(SessionServiceDefault.class);
     }
 
     private void bindRPC() {

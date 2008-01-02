@@ -59,7 +59,7 @@ public class SiteBarFactory {
 
     public static SiteBar createSiteBar(final SiteBarListener listener, final Session session) {
         SiteBarFactory.session = session;
-        SiteBarPresenter siteBarPresenter = new SiteBarPresenter(listener);
+        SiteBarPresenter siteBarPresenter = new SiteBarPresenter(listener, session);
         SiteBarPanel siteBarView = new SiteBarPanel(siteBarPresenter);
         siteBarPresenter.init(siteBarView);
         Site.sitebar = siteBarPresenter;

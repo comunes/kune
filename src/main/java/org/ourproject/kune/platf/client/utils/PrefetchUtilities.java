@@ -25,66 +25,70 @@ import com.google.gwt.user.client.ui.Image;
 public class PrefetchUtilities {
 
     public static void preFetchImpImages() {
-	Image.prefetch("images/spin-kune-thund-green.gif");
-	Image.prefetch("css/img/button-bg-hard.gif");
-	Image.prefetch("css/img/button-bg-soft.gif");
+        Image.prefetch("images/spin-kune-thund-green.gif");
+        Image.prefetch("css/img/button-bg-hard.gif");
+        Image.prefetch("css/img/button-bg-soft.gif");
 
-	Image.prefetch("images/lic/gnu-fdl.gif");
-	Image.prefetch("images/lic/bysa80x15.png");
-	Image.prefetch("images/lic/bynd80x15.png");
-	Image.prefetch("images/lic/byncsa80x15.png");
-	Image.prefetch("images/lic/byncnd80x15.png");
-	Image.prefetch("images/lic/bync80x15.png");
-	Image.prefetch("images/lic/by80x15.png");
-	Image.prefetch("images/lic/fal-license.gif");
+        Image.prefetch("css/img/arrow-down-white.gif");
+        Image.prefetch("css/img/arrow-right-white.gif");
+
+        Image.prefetch("images/lic/bysa80x15.png");
     }
 
     public static void preFetchLessImpImages() {
-	// gwt-ext dialog images
+        Image.prefetch("images/lic/gnu-fdl.gif");
+        Image.prefetch("images/lic/bynd80x15.png");
+        Image.prefetch("images/lic/byncsa80x15.png");
+        Image.prefetch("images/lic/byncnd80x15.png");
+        Image.prefetch("images/lic/bync80x15.png");
+        Image.prefetch("images/lic/by80x15.png");
+        Image.prefetch("images/lic/fal-license.gif");
 
-	Image.prefetch("js/ext/resources/images/default/basic-dialog/btn-sprite.gif");
-	Image.prefetch("js/ext/resources/images/default/form/text-bg.gif");
-	Image.prefetch("js/ext/resources/images/default/qtip/close.gif");
-	Image.prefetch("js/ext/resources/images/default/s.gif");
-	Image.prefetch("js/ext/resources/images/default/shadow-c.png");
-	Image.prefetch("js/ext/resources/images/default/shadow-lr.png");
-	Image.prefetch("js/ext/resources/images/default/shadow.png");
-	Image.prefetch("js/ext/resources/images/default/form/exclamation.gif");
-	Image.prefetch("js/ext/resources/images/default/layout/panel-close.gif");
-	Image.prefetch("js/ext/resources/images/default/qtip/tip-sprite.gif");
+        // gwt-ext dialog images
 
-	/* Gray extjs theme */
-	Image.prefetch("js/ext/resources/images/gray/basic-dialog/close.gif");
-	Image.prefetch("js/ext/resources/images/gray/basic-dialog/collapse.gif");
-	Image.prefetch("js/ext/resources/images/gray/basic-dialog/e-handle.gif");
-	Image.prefetch("js/ext/resources/images/gray/basic-dialog/hd-sprite.gif");
-	Image.prefetch("js/ext/resources/images/gray/basic-dialog/s-handle.gif");
-	Image.prefetch("js/ext/resources/images/gray/basic-dialog/se-handle.gif");
-	Image.prefetch("js/ext/resources/images/gray/layout/collapse.gif");
-	Image.prefetch("js/ext/resources/images/gray/layout/expand.gif");
-	Image.prefetch("js/ext/resources/images/gray/layout/gradient-bg.gif");
-	Image.prefetch("js/ext/resources/images/gray/layout/panel-close.gif");
-	Image.prefetch("js/ext/resources/images/gray/layout/panel-title-light-bg.gif");
-	Image.prefetch("js/ext/resources/images/gray/layout/tab-close-on.gif");
-	Image.prefetch("js/ext/resources/images/gray/qtip/tip-sprite.gif");
-	Image.prefetch("js/ext/resources/images/gray/s.gif");
-	Image.prefetch("js/ext/resources/images/gray/sizer/e-handle-dark.gif");
-	Image.prefetch("js/ext/resources/images/gray/sizer/s-handle-dark.gif");
-	Image.prefetch("js/ext/resources/images/gray/sizer/sw-handle-dark.gif");
-	Image.prefetch("js/ext/resources/images/gray/tabs/tab-sprite.gif");
-	/*
-	 * Aero extjs theme
-	 * Image.prefetch("js/ext/resources/images/aero/basic-dialog/bg-center.gif");
-	 * Image.prefetch("js/ext/resources/images/aero/basic-dialog/bg-left.gif");
-	 * Image.prefetch("js/ext/resources/images/aero/basic-dialog/bg-right.gif");
-	 * Image.prefetch("js/ext/resources/images/aero/basic-dialog/collapse.gif");
-	 * Image.prefetch("js/ext/resources/images/aero/basic-dialog/hd-sprite.gif");
-	 * Image.prefetch("js/ext/resources/images/aero/basic-dialog/se-handle.gif");
-	 * Image.prefetch("js/ext/resources/images/aero/grid/grid-hrow.gif");
-	 * Image.prefetch("js/ext/resources/images/aero/s.gif");
-	 * Image.prefetch("js/ext/resources/images/aero/tabs/tab-sprite.gif");
-	 * Image.prefetch("js/ext/resources/images/aero/tabs/tab-strip-bg.gif");
-	 */
+        Image.prefetch("js/ext/resources/images/default/basic-dialog/btn-sprite.gif");
+        Image.prefetch("js/ext/resources/images/default/form/text-bg.gif");
+        Image.prefetch("js/ext/resources/images/default/qtip/close.gif");
+        Image.prefetch("js/ext/resources/images/default/s.gif");
+        Image.prefetch("js/ext/resources/images/default/shadow-c.png");
+        Image.prefetch("js/ext/resources/images/default/shadow-lr.png");
+        Image.prefetch("js/ext/resources/images/default/shadow.png");
+        Image.prefetch("js/ext/resources/images/default/form/exclamation.gif");
+        Image.prefetch("js/ext/resources/images/default/layout/panel-close.gif");
+        Image.prefetch("js/ext/resources/images/default/qtip/tip-sprite.gif");
+
+        /* Gray extjs theme */
+        Image.prefetch("js/ext/resources/images/gray/basic-dialog/close.gif");
+        Image.prefetch("js/ext/resources/images/gray/basic-dialog/collapse.gif");
+        Image.prefetch("js/ext/resources/images/gray/basic-dialog/e-handle.gif");
+        Image.prefetch("js/ext/resources/images/gray/basic-dialog/hd-sprite.gif");
+        Image.prefetch("js/ext/resources/images/gray/basic-dialog/s-handle.gif");
+        Image.prefetch("js/ext/resources/images/gray/basic-dialog/se-handle.gif");
+        Image.prefetch("js/ext/resources/images/gray/layout/collapse.gif");
+        Image.prefetch("js/ext/resources/images/gray/layout/expand.gif");
+        Image.prefetch("js/ext/resources/images/gray/layout/gradient-bg.gif");
+        Image.prefetch("js/ext/resources/images/gray/layout/panel-close.gif");
+        Image.prefetch("js/ext/resources/images/gray/layout/panel-title-light-bg.gif");
+        Image.prefetch("js/ext/resources/images/gray/layout/tab-close-on.gif");
+        Image.prefetch("js/ext/resources/images/gray/qtip/tip-sprite.gif");
+        Image.prefetch("js/ext/resources/images/gray/s.gif");
+        Image.prefetch("js/ext/resources/images/gray/sizer/e-handle-dark.gif");
+        Image.prefetch("js/ext/resources/images/gray/sizer/s-handle-dark.gif");
+        Image.prefetch("js/ext/resources/images/gray/sizer/sw-handle-dark.gif");
+        Image.prefetch("js/ext/resources/images/gray/tabs/tab-sprite.gif");
+        /*
+         * Aero extjs theme
+         * Image.prefetch("js/ext/resources/images/aero/basic-dialog/bg-center.gif");
+         * Image.prefetch("js/ext/resources/images/aero/basic-dialog/bg-left.gif");
+         * Image.prefetch("js/ext/resources/images/aero/basic-dialog/bg-right.gif");
+         * Image.prefetch("js/ext/resources/images/aero/basic-dialog/collapse.gif");
+         * Image.prefetch("js/ext/resources/images/aero/basic-dialog/hd-sprite.gif");
+         * Image.prefetch("js/ext/resources/images/aero/basic-dialog/se-handle.gif");
+         * Image.prefetch("js/ext/resources/images/aero/grid/grid-hrow.gif");
+         * Image.prefetch("js/ext/resources/images/aero/s.gif");
+         * Image.prefetch("js/ext/resources/images/aero/tabs/tab-sprite.gif");
+         * Image.prefetch("js/ext/resources/images/aero/tabs/tab-strip-bg.gif");
+         */
     }
 
 }

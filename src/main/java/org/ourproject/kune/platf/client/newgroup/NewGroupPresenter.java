@@ -89,6 +89,8 @@ public class NewGroupPresenter implements NewGroup, MessagePresenter {
     private String getTypeOfGroup() {
         if (view.isProject()) {
             return GroupDTO.PROJECT;
+        } else if (view.isOrphanedProject()) {
+            return GroupDTO.ORPHANED_PROJECT;
         } else if (view.isOrganization()) {
             return GroupDTO.ORGANIZATION;
         } else {
@@ -108,14 +110,14 @@ public class NewGroupPresenter implements NewGroup, MessagePresenter {
     }
 
     public void onCancel() {
+        listener.onNewGroupCancel();
         view.hide();
         reset();
-        listener.onNewGroupCancel();
     }
 
     public void onClose() {
-        reset();
         listener.onNewGroupClose();
+        reset();
     }
 
     public void onNext() {

@@ -22,15 +22,12 @@ package org.ourproject.kune.platf.server.rpc;
 
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.UserAuthException;
-import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.auth.Authenticated;
+import org.ourproject.kune.platf.server.auth.SessionService;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
@@ -54,14 +51,14 @@ public class UserRPC implements RPC, UserService {
     private final GroupManager groupManager;
     private final Mapper mapper;
     private final UserInfoService userInfoService;
-    private final Provider<HttpServletRequest> requestProvider;
+    private final Provider<SessionService> sessionServiceProvider;
 
     @Inject
-    public UserRPC(final Provider<HttpServletRequest> requestProvider, final Provider<UserSession> userSessionProvider,
-            final UserManager userManager, final GroupManager groupManager, final UserInfoService userInfoService,
-            final Mapper mapper) {
+    public UserRPC(final Provider<SessionService> sessionServiceProvider,
+            final Provider<UserSession> userSessionProvider, final UserManager userManager,
+            final GroupManager groupManager, final UserInfoService userInfoService, final Mapper mapper) {
 
-        this.requestProvider = requestProvider;
+        this.sessionServiceProvider = sessionServiceProvider;
         this.userSessionProvider = userSessionProvider;
         this.userManager = userManager;
         this.groupManager = groupManager;
@@ -71,7 +68,8 @@ public class UserRPC implements RPC, UserService {
 
     @Transactional(type = TransactionType.READ_ONLY)
     public UserInfoDTO login(final String nickOrEmail, final String passwd) throws SerializableException {
-        getNewSession();
+        SessionService sessionService = sessionServiceProvider.get();
+        sessionService.getNewSession();
         User user = userManager.login(nickOrEmail, passwd);
         return loginUser(user);
     }
@@ -80,7 +78,8 @@ public class UserRPC implements RPC, UserService {
     @Transactional(type = TransactionType.READ_ONLY)
     public void logout(final String userHash) throws SerializableException {
         getUserSession().logout();
-        getNewSession();
+        SessionService sessionService = sessionServiceProvider.get();
+        sessionService.getNewSession();
     }
 
     @Transactional(type = TransactionType.READ_WRITE, rollbackOn = SerializableException.class)
@@ -96,9 +95,6 @@ public class UserRPC implements RPC, UserService {
     @Transactional(type = TransactionType.READ_ONLY)
     public UserInfoDTO reloadUserInfo(final String userHash) throws SerializableException {
         UserSession userSession = getUserSession();
-        if (userSession.getUser().getId() == null) {
-            throw new UserMustBeLoggedException();
-        }
         User user = userSession.getUser();
         return loadUserInfo(user);
     }
@@ -111,15 +107,6 @@ public class UserRPC implements RPC, UserService {
         } else {
             throw new UserAuthException();
         }
-    }
-
-    private void getNewSession() {
-        HttpSession session = requestProvider.get().getSession();
-        if (session != null) {
-            // During tests session == null
-            session.invalidate();
-        }
-        requestProvider.get().getSession(true);
     }
 
     private UserSession getUserSession() {

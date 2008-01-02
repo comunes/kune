@@ -24,14 +24,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.errors.AccessViolationException;
-import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.rpc.GroupService;
 import org.ourproject.kune.platf.server.UserSession;
+import org.ourproject.kune.platf.server.access.AccessType;
 import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.auth.Authorizated;
-import org.ourproject.kune.platf.server.access.AccessType;
-import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
@@ -61,20 +58,12 @@ public class GroupRPC implements RPC, GroupService {
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE, rollbackOn = SerializableException.class)
-    public StateToken createNewGroup(final String userHash, final GroupDTO groupDTO) throws SerializableException,
-            UserMustBeLoggedException {
+    public StateToken createNewGroup(final String userHash, final GroupDTO groupDTO) throws SerializableException {
         log.debug(groupDTO.getShortName() + groupDTO.getLongName() + groupDTO.getPublicDesc()
                 + groupDTO.getDefaultLicense() + groupDTO.getType());
         UserSession userSession = getUserSession();
         final User user = userSession.getUser();
         Group group = mapper.map(groupDTO, Group.class);
-        if (groupDTO.getType().equals(GroupDTO.COMMUNITY)) {
-            group.setAdmissionType(AdmissionType.Open);
-        } else if (groupDTO.getType().equals(GroupDTO.ORGANIZATION)) {
-            group.setAdmissionType(AdmissionType.Moderated);
-        } else if (groupDTO.getType().equals(GroupDTO.PROJECT)) {
-            group.setAdmissionType(AdmissionType.Moderated);
-        }
         final Group newGroup = groupManager.createGroup(group, user);
         return new StateToken(newGroup.getDefaultContent().getStateToken());
     }
@@ -83,7 +72,7 @@ public class GroupRPC implements RPC, GroupService {
     @Authorizated(accessTypeRequired = AccessType.ADMIN)
     @Transactional(type = TransactionType.READ_WRITE, rollbackOn = SerializableException.class)
     public void changeGroupWsTheme(final String userHash, final String groupShortName, final String theme)
-            throws AccessViolationException {
+            throws SerializableException {
         UserSession userSession = getUserSession();
         final User user = userSession.getUser();
         Group group = groupManager.findByShortName(groupShortName);

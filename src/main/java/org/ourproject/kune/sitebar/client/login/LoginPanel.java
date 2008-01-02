@@ -22,10 +22,13 @@ package org.ourproject.kune.sitebar.client.login;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
 import org.ourproject.kune.sitebar.client.msg.SiteMessage;
 import org.ourproject.kune.sitebar.client.msg.SiteMessagePanel;
 
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -109,6 +112,8 @@ public class LoginPanel implements LoginView, View {
 
     private ComboBox timezoneCombo;
 
+    private BasicDialog welcomeDialog;
+
     public LoginPanel(final LoginPresenter initialPresenter, final Object[][] languages, final Object[][] countries,
             final String[] timezones) {
         this.presenter = initialPresenter;
@@ -120,6 +125,24 @@ public class LoginPanel implements LoginView, View {
             this.timezones[i] = obj;
         }
         createPanel();
+    }
+
+    public void showWelcolmeDialog() {
+        welcomeDialog = new BasicDialog(Kune.I18N.t("Welcome"), Kune.I18N.t("Ok"), true, 400, 250, new ClickListener() {
+            public void onClick(final Widget sender) {
+                welcomeDialog.hide();
+            }
+        });
+
+        String message = Kune.I18N.t("Thanks for registering") + "\n\n"
+                + Kune.I18N.t("Now you can participate more actively in this site with other people and groups.")
+                + "\n" + Kune.I18N.t("You can also use your personal space to publish contents.") + "\n\n"
+                + Kune.I18N.t("Your email is not verified, please follow the instructions you will receive by email.");
+
+        HTML messageHtml = new HTML(DOM.getInnerHTML((new Label(message)).getElement()).replaceAll("\n", "<br/>\n"));
+        messageHtml.addStyleName("kune-Margin-20-trbl");
+        welcomeDialog.add(messageHtml);
+        welcomeDialog.show();
     }
 
     public boolean isSignInFormValid() {
@@ -520,6 +543,7 @@ public class LoginPanel implements LoginView, View {
                 setEmptyText(Kune.I18N.t("Enter language"));
                 setLoadingText(Kune.I18N.t("Searching..."));
                 setTypeAhead(true);
+                setTypeAheadDelay(1000);
                 setSelectOnFocus(false);
                 setWidth(186);
                 setMsgTarget("side");
@@ -546,6 +570,7 @@ public class LoginPanel implements LoginView, View {
                 setEmptyText(Kune.I18N.t("Enter your country"));
                 setLoadingText(Kune.I18N.t("Searching..."));
                 setTypeAhead(true);
+                setTypeAheadDelay(1000);
                 setSelectOnFocus(false);
                 setWidth(186);
                 setMsgTarget("side");
@@ -572,6 +597,7 @@ public class LoginPanel implements LoginView, View {
                 setEmptyText(Kune.I18N.t("Enter your timezone"));
                 setLoadingText(Kune.I18N.t("Searching..."));
                 setTypeAhead(true);
+                setTypeAheadDelay(1000);
                 setSelectOnFocus(false);
                 setWidth(186);
                 setMsgTarget("side");

@@ -22,6 +22,7 @@ package org.ourproject.kune.workspace.client.ui.ctx.items;
 
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.ContainerSimpleDTO;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
@@ -93,7 +94,12 @@ class ContextTopBar extends VerticalPanel {
         String indent = "";
         for (int i = 0; i < absolutePath.length; i++) {
             final ContainerSimpleDTO folder = absolutePath[i];
-            pathSubmenu.addItem(indent + img.folder().getHTML() + "&nbsp;" + folder.getName(), true, new Command() {
+            String folderName = folder.getName();
+            if (i == 0) {
+                // We translate root folders
+                folderName = Kune.I18N.t(folderName);
+            }
+            pathSubmenu.addItem(indent + img.folder().getHTML() + "&nbsp;" + folderName, true, new Command() {
                 public void execute() {
                     DefaultDispatcher.getInstance().fire(WorkspaceEvents.GOTO_CONTAINER, folder.getId(), null);
                 }

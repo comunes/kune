@@ -31,6 +31,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class DocumentReaderControlPanel extends HorizontalPanel implements DocumentReaderControlView {
     private final CustomPushButton editBtn;
+    private final CustomPushButton deleteBtn;
 
     public DocumentReaderControlPanel(final DocumentReaderListener listener) {
         editBtn = new CustomPushButton(Kune.I18N.tWithNT("Edit", "in button"), new ClickListener() {
@@ -39,11 +40,23 @@ public class DocumentReaderControlPanel extends HorizontalPanel implements Docum
             }
         });
         add(editBtn);
+        deleteBtn = new CustomPushButton(Kune.I18N.tWithNT("Delete", "in button"), new ClickListener() {
+            public void onClick(final Widget sender) {
+                listener.onDelete();
+            }
+        });
+        add(deleteBtn);
+        deleteBtn.addStyleName("kune-Button-Small-lSpace");
         setEditEnabled(false);
+        setDeleteEnabled(false);
     }
 
     public void setEditEnabled(final boolean isEnabled) {
-        editBtn.setEnabled(isEnabled);
+        editBtn.setVisible(isEnabled);
+    }
+
+    public void setDeleteEnabled(final boolean isEnabled) {
+        deleteBtn.setVisible(isEnabled);
     }
 
 }

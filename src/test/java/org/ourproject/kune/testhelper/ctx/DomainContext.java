@@ -5,6 +5,7 @@ import java.util.TimeZone;
 
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.GroupType;
 import org.ourproject.kune.platf.server.domain.I18nCountry;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
@@ -33,6 +34,15 @@ public class DomainContext {
         Group group;
         for (String name : groupNames) {
             group = new Group("name", "Some group: " + name);
+            groups.put(name, group);
+        }
+    }
+
+    public void createOrphanGroup(final String... groupNames) {
+        Group group;
+        for (String name : groupNames) {
+            group = new Group("name", "Some group: " + name);
+            group.setType(GroupType.ORPHANED_PROJECT);
             groups.put(name, group);
         }
     }

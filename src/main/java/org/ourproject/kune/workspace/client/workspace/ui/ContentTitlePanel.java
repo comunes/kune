@@ -24,15 +24,19 @@ import org.ourproject.kune.workspace.client.workspace.ContentTitlePresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentTitleView;
 
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 public class ContentTitlePanel extends HorizontalPanel implements ContentTitleView {
     private final Label titleLabel;
     private final Label dateLabel;
+    private final ContentTitlePresenter presenter;
 
     public ContentTitlePanel(final ContentTitlePresenter presenter) {
+        this.presenter = presenter;
         titleLabel = new Label();
         HorizontalPanel rigthHP = new HorizontalPanel();
         dateLabel = new Label();
@@ -55,6 +59,21 @@ public class ContentTitlePanel extends HorizontalPanel implements ContentTitleVi
 
     public void setContentTitle(final String title) {
         titleLabel.setText(title);
+        titleLabel.addClickListener(new ClickListener() {
+            public void onClick(final Widget sender) {
+                presenter.onTitleClicked();
+            }
+        });
+    }
+
+    public void setContentTitleEditable(final boolean editable) {
+        if (editable) {
+
+        } else {
+            titleLabel.setVisible(true);
+
+        }
+
     }
 
     public void setContentDate(final String date) {

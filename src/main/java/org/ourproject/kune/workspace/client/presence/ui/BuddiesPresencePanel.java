@@ -22,10 +22,10 @@ package org.ourproject.kune.workspace.client.presence.ui;
 import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.ui.stacks.StackSubItemAction;
+import org.ourproject.kune.platf.client.ui.stacks.StackedDropDownPanel;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.presence.BuddiesPresenceView;
-import org.ourproject.kune.workspace.client.workspace.ui.StackedDropDownPanel;
-import org.ourproject.kune.workspace.client.workspace.ui.StackSubItemAction;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
@@ -46,7 +46,8 @@ public class BuddiesPresencePanel extends StackedDropDownPanel implements Buddie
         super.addStackItem(Kune.I18N.t("Connected"), Kune.I18N.t("Buddies connected"), true);
         super.addStackItem(Kune.I18N.t("Not connected"), Kune.I18N.t("Buddies not connected"), true);
         super.addStackItem("test", Kune.I18N.t("Buddies not connected"), true);
-        super.addBottomLink(img.addGreen(), Kune.I18N.t("Add new buddy"), "Test");
+        super.addBottomLink(img.addGreen(), Kune.I18N.t("Add new buddy"), Kune.I18N
+                .t("Add a new buddy to your contact list"), "Test");
         addRoster("fulano", Kune.I18N.t("Connected"), CONTACT_ONLINE);
         addRoster("fulano away", Kune.I18N.t("Connected"), CONTACT_AWAY);
         addRoster("fulano busy", Kune.I18N.t("Connected"), CONTACT_BUSY);
