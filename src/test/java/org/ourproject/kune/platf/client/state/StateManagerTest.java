@@ -16,7 +16,7 @@ public class StateManagerTest {
     public void init() {
         ContentProvider contentProvider = EasyMock.createStrictMock(ContentProvider.class);
         Application application = EasyMock.createStrictMock(Application.class);
-        Session1 session = EasyMock.createStrictMock(Session1.class);
+        Session session = EasyMock.createStrictMock(Session.class);
         history = EasyMock.createStrictMock(HistoryWrapper.class);
         stateManager = new StateManagerDefault(contentProvider, application, session, history);
     }

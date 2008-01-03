@@ -22,14 +22,14 @@ package org.ourproject.kune.workspace.client.i18n;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
-import org.ourproject.kune.platf.client.state.Session1;
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
 public class I18nTranslatorPresenter implements I18nTranslatorComponent {
     private I18nTranslatorView view;
-    private final Session1 session;
+    private final Session session;
 
-    public I18nTranslatorPresenter(final Session1 session) {
+    public I18nTranslatorPresenter(final Session session) {
         this.session = session;
     }
 

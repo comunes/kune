@@ -23,7 +23,7 @@ package org.ourproject.kune.workspace.client;
 import org.ourproject.kune.platf.client.app.DesktopView;
 import org.ourproject.kune.platf.client.app.ui.DesktopPanel;
 import org.ourproject.kune.platf.client.services.Kune;
-import org.ourproject.kune.platf.client.state.Session1;
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.sitebar.client.bar.SiteBarListener;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.editor.TextEditorListener;
@@ -91,7 +91,7 @@ import org.ourproject.kune.workspace.client.workspace.ui.WorkspacePanel;
 
 public class WorkspaceFactory {
 
-    public static Workspace createWorkspace(final Session1 session) {
+    public static Workspace createWorkspace(final Session session) {
         WorkspacePresenter workspace = new WorkspacePresenter(session);
         WorkspaceView view = new WorkspacePanel(workspace);
         workspace.init(view);
@@ -106,7 +106,7 @@ public class WorkspaceFactory {
     }
 
     public static DesktopView createDesktop(final Workspace workspace, final SiteBarListener listener,
-            final Session1 session) {
+            final Session session) {
         return new DesktopPanel(workspace, listener, session);
     }
 
@@ -194,7 +194,7 @@ public class WorkspaceFactory {
         return presenter;
     }
 
-    public static I18nTranslatorComponent createI18nTranslatorComponent(final Session1 session) {
+    public static I18nTranslatorComponent createI18nTranslatorComponent(final Session session) {
         I18nTranslatorPresenter presenter = new I18nTranslatorPresenter(session);
         I18nTranslatorView view = new I18nTranslatorPanel(presenter);
         presenter.init(view);

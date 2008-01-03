@@ -21,17 +21,17 @@ package org.ourproject.kune.platf.client;
 
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
-import org.ourproject.kune.platf.client.state.Session1;
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 
 public class Services {
     public final Application app;
     public final StateManager stateManager;
     public final Dispatcher dispatcher;
-    public final Session1 session;
+    public final Session session;
 
     public Services(final Application application, final StateManager stateManager, final Dispatcher dispatcher,
-            final Session1 session) {
+            final Session session) {
         this.app = application;
         this.stateManager = stateManager;
         this.dispatcher = dispatcher;

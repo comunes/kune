@@ -35,6 +35,6 @@ public interface StateManager extends HistoryListener {
 
     void setState(StateToken state);
 
-    Session1 getSession();
+    Session getSession();
 
 }

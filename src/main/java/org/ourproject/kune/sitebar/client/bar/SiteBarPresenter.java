@@ -29,7 +29,7 @@ import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.newgroup.NewGroupListener;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.services.Kune;
-import org.ourproject.kune.platf.client.state.Session1;
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.login.LoginListener;
 import org.ourproject.kune.sitebar.client.rpc.UserService;
@@ -44,9 +44,9 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
     private SiteBarView view;
     private final SiteBarListener listener;
     private String previousToken;
-    private final Session1 session;
+    private final Session session;
 
-    public SiteBarPresenter(final SiteBarListener listener, final Session1 session) {
+    public SiteBarPresenter(final SiteBarListener listener, final Session session) {
         this.listener = listener;
         this.session = session;
     }

@@ -42,10 +42,10 @@ public class StateManagerDefault implements StateManager {
     private final Workspace workspace;
     private StateDTO oldState;
     private String lastTheme;
-    private final Session1 session;
+    private final Session session;
     private final HistoryWrapper history;
 
-    public StateManagerDefault(final ContentProvider provider, final Application app, final Session1 session,
+    public StateManagerDefault(final ContentProvider provider, final Application app, final Session session,
             final HistoryWrapper history) {
         this.provider = provider;
         this.app = app;
@@ -64,7 +64,7 @@ public class StateManagerDefault implements StateManager {
         onHistoryChanged(history.getToken());
     }
 
-    public Session1 getSession() {
+    public Session getSession() {
         return session;
     }
 

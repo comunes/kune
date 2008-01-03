@@ -21,7 +21,7 @@
 package org.ourproject.kune.platf.client.app.ui;
 
 import org.ourproject.kune.platf.client.app.DesktopView;
-import org.ourproject.kune.platf.client.state.Session1;
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
 import org.ourproject.kune.sitebar.client.bar.SiteBar;
 import org.ourproject.kune.sitebar.client.bar.SiteBarListener;
@@ -37,7 +37,7 @@ import com.gwtext.client.widgets.QuickTips;
 import com.gwtext.client.widgets.QuickTipsConfig;
 
 public class DesktopPanel extends AbsolutePanel implements DesktopView {
-    public DesktopPanel(final Workspace workspace, final SiteBarListener listener, final Session1 session) {
+    public DesktopPanel(final Workspace workspace, final SiteBarListener listener, final Session session) {
         QuickTips.init(); // extgwt tips
         new QuickTipsConfig() {
             {

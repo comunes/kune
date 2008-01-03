@@ -5,7 +5,7 @@ import java.util.List;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
-public interface Session1 {
+public interface Session {
 
     public List getLicenses();
 

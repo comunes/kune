@@ -35,7 +35,7 @@ import org.ourproject.kune.workspace.client.dto.StateDTO;
  * @author danigb
  * 
  */
-public class SessionImpl implements Session1 {
+public class SessionImpl implements Session {
     private String userHash;
     private List licenses;
     private List languages;
