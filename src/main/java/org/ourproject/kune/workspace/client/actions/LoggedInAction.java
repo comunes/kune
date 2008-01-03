@@ -40,12 +40,12 @@ public class LoggedInAction implements Action {
     private void onLoggedIn(final Services services, final UserInfoDTO userInfoDTO) {
         setCookie(userInfoDTO);
         FireLog.debug("Userhash after login: " + userInfoDTO.getUserHash());
-        services.session.userHash = userInfoDTO.getUserHash();
+        services.session.setUserHash(userInfoDTO.getUserHash());
         Site.sitebar.showLoggedUser(userInfoDTO);
         I18nLanguageDTO language = userInfoDTO.getLanguage();
-        services.stateManager.reload(false);
-        services.app.getWorkspace().getI18nTranslatorComponent().setLanguage(language);
+        services.stateManager.reload();
         I18nUITranslationService.getInstance().setCurrentLanguage(language.getCode());
+        services.session.setCurrentLanguage(language);
     }
 
     private void setCookie(final UserInfoDTO userInfoDTO) {

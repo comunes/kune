@@ -68,17 +68,16 @@ import com.gwtext.client.widgets.layout.LayoutRegionConfig;
 
 public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslatorView {
 
-    private static final String ALERT_IMAGE_HTML = Images.App.getInstance().alert().getHTML();
+    private static final String NOTE_FOR_TRANSLATORS_IMAGE_HTML = Images.App.getInstance().noteForTranslators()
+            .getHTML();
 
     private final LayoutDialog dialog;
     private final I18nTranslatorPresenter presenter;
     private Store store;
     private LanguageSelectorPanel languageSelectorPanel;
-    private final Object[][] languages;
 
-    public I18nTranslatorPanel(final I18nTranslatorPresenter initPresenter, final Object[][] languages) {
+    public I18nTranslatorPanel(final I18nTranslatorPresenter initPresenter) {
         this.presenter = initPresenter;
-        this.languages = languages;
         dialog = createDialog();
     }
 
@@ -170,7 +169,8 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
         EditorGrid grid = createGridPanel();
 
         HorizontalPanel hp = new HorizontalPanel();
-        languageSelectorPanel = new LanguageSelectorPanel(null, languages, Kune.I18N.t("Change language"));
+        languageSelectorPanel = new LanguageSelectorPanel(null, presenter.getLanguages(), Kune.I18N
+                .t("Change language"));
         languageSelectorPanel.addChangeListener(new ComboBoxListenerAdapter() {
             public void onSelect(final ComboBox comboBox, final Record record, final int index) {
                 setLanguage(record.getAsString("abbr"));
@@ -299,7 +299,7 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
             String renderer;
             String[] splitted = splitNT((String) value);
             if (splitted.length > 1) {
-                renderer = "{0} " + ALERT_IMAGE_HTML;
+                renderer = "{0} " + NOTE_FOR_TRANSLATORS_IMAGE_HTML;
                 cellMetadata.setHtmlAttribute("ext:qtip=\"" + splitted[1] + "\" ext:qtitle=\"Note for translators\"");
             } else {
                 renderer = "{0}";

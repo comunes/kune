@@ -38,6 +38,7 @@ import org.ourproject.kune.platf.server.access.AccessService;
 import org.ourproject.kune.platf.server.access.AccessType;
 import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.auth.Authorizated;
+import org.ourproject.kune.platf.server.content.ContainerManager;
 import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.content.CreationService;
 import org.ourproject.kune.platf.server.domain.Container;
@@ -67,11 +68,13 @@ public class ContentRPC implements ContentService, RPC {
     private final CreationService creationService;
     private final XmppManager xmppManager;
     private final ContentManager contentManager;
+    private final ContainerManager containerManager;
 
     @Inject
     public ContentRPC(final Provider<UserSession> userSessionProvider, final AccessService accessService,
             final StateService stateService, final CreationService creationService, final GroupManager groupManager,
-            final XmppManager xmppManager, final ContentManager contentManager, final Mapper mapper) {
+            final XmppManager xmppManager, final ContentManager contentManager,
+            final ContainerManager containerManager, final Mapper mapper) {
         this.userSessionProvider = userSessionProvider;
         this.accessService = accessService;
         this.stateService = stateService;
@@ -79,6 +82,7 @@ public class ContentRPC implements ContentService, RPC {
         this.groupManager = groupManager;
         this.xmppManager = xmppManager;
         this.contentManager = contentManager;
+        this.containerManager = containerManager;
         this.mapper = mapper;
     }
 
@@ -139,9 +143,10 @@ public class ContentRPC implements ContentService, RPC {
     @Transactional(type = TransactionType.READ_WRITE)
     public StateDTO addContent(final String userHash, final String groupShortName, final Long parentFolderId,
             final String title) throws SerializableException {
+        final Group group = groupManager.findByShortName(groupShortName);
         UserSession userSession = getUserSession();
         final User user = userSession.getUser();
-        final Access access = accessService.getFolderAccess(parentFolderId, user, AccessType.EDIT);
+        final Access access = accessService.getFolderAccess(group, parentFolderId, user, AccessType.EDIT);
         access.setContentWidthFolderRights(creationService.createContent(title, "", user, access.getFolder()));
         final State state = stateService.create(access);
         return mapper.map(state, StateDTO.class);
@@ -153,6 +158,18 @@ public class ContentRPC implements ContentService, RPC {
     public StateDTO addFolder(final String userHash, final String groupShortName, final Long parentFolderId,
             final String title) throws SerializableException {
         return createFolder(groupShortName, parentFolderId, title);
+    }
+
+    @Authenticated
+    @Authorizated(accessTypeRequired = AccessType.EDIT)
+    @Transactional(type = TransactionType.READ_WRITE)
+    public String renameFolder(final String userHash, final String groupShortName, final Long folderId,
+            final String newName) throws SerializableException {
+        final Group group = groupManager.findByShortName(groupShortName);
+        UserSession userSession = getUserSession();
+        final User user = userSession.getUser();
+        Access folderAccess = accessService.getFolderAccess(group, folderId, user, AccessType.EDIT);
+        return containerManager.renameFolder(group, folderAccess.getFolder(), newName);
     }
 
     @Authenticated
@@ -232,12 +249,12 @@ public class ContentRPC implements ContentService, RPC {
     @Authenticated
     @Authorizated(accessTypeRequired = AccessType.EDIT, checkContent = true)
     @Transactional(type = TransactionType.READ_WRITE)
-    public void setTitle(final String userHash, final String groupShortName, final String documentId,
+    public String renameContent(final String userHash, final String groupShortName, final String documentId,
             final String newTitle) throws SerializableException {
         final Long contentId = parseId(documentId);
         UserSession userSession = getUserSession();
         User user = userSession.getUser();
-        contentManager.setTitle(user, contentId, newTitle);
+        return contentManager.renameContent(user, contentId, newTitle);
     }
 
     @Authenticated
@@ -287,7 +304,7 @@ public class ContentRPC implements ContentService, RPC {
         final User user = userSession.getUser();
         final Group group = groupManager.findByShortName(groupShortName);
 
-        Access access = accessService.getFolderAccess(parentFolderId, user, AccessType.EDIT);
+        Access access = accessService.getFolderAccess(group, parentFolderId, user, AccessType.EDIT);
 
         final Container container = creationService.createFolder(group, parentFolderId, title, user.getLanguage());
         final String toolName = container.getToolName();

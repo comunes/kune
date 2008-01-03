@@ -19,16 +19,10 @@
 
 package org.ourproject.kune.workspace.client.i18n;
 
-import java.util.List;
-
 import org.ourproject.kune.platf.client.Component;
-import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 
 public interface I18nTranslatorComponent extends Component {
 
     void show();
 
-    void setLanguage(I18nLanguageDTO language);
-
-    void setLanguages(List languages);
 }

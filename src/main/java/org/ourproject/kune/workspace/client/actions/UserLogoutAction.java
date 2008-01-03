@@ -34,6 +34,6 @@ public class UserLogoutAction implements Action {
 
     private void onLogout(final Services services, final AsyncCallback callback) {
         UserServiceAsync userService = UserService.App.getInstance();
-        userService.logout(services.session.userHash, callback);
+        userService.logout(services.session.getUserHash(), callback);
     }
 }

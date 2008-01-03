@@ -1776,9 +1776,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="656.19453"
-     inkscape:cy="764.08035"
+     inkscape:zoom="0.65756829"
+     inkscape:cx="372.04724"
+     inkscape:cy="526.18109"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      inkscape:window-width="1377"
@@ -4485,6 +4485,38 @@
          d="M 664.34717,302.42865 C 662.85858,303.85497 661.52504,305.47517 660.13496,307.02278 C 657.89637,309.57849 655.70899,312.19035 653.53915,314.82211 C 652.61186,315.99594 651.62556,317.10023 650.62937,318.19392 L 648.34717,317.96771 C 649.38459,316.90278 650.41143,315.82623 651.34186,314.63078 C 653.53858,312.02625 655.71669,309.40155 657.93701,306.82337 C 659.29429,305.27989 660.60311,303.68279 662.00686,302.19392 L 664.34717,302.42865 z "
          id="path25265"
          style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       id="g2689"
+       transform="translate(-262.57536,171.54205)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/nt.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         ry="2.323848"
+         y="309.08121"
+         x="899.96295"
+         height="8.1000004"
+         width="11.860715"
+         id="rect2678"
+         style="opacity:1;color:#000000;fill:#cc6633;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         sodipodi:nodetypes="cccc"
+         id="path2680"
+         d="M 903.55433,311.5335 L 900.38545,320.61763 C 902.63888,318.99798 913.62805,313.14089 906.51195,315.1249 C 900.94078,315.4562 904.5402,312.73064 903.55433,311.5335 z "
+         style="fill:#cc6633;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0" />
+      <text
+         sodipodi:linespacing="100%"
+         id="text2685"
+         y="315.53394"
+         x="905.71832"
+         style="font-size:8.02623177px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+         xml:space="preserve"><tspan
+           style="font-size:8.02623177px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:100%;writing-mode:lr-tb;text-anchor:middle;font-family:HoratioDMed"
+           y="315.53394"
+           x="905.71832"
+           sodipodi:role="line"
+           id="tspan2687">NT</tspan></text>
     </g>
   </g>
 </svg>

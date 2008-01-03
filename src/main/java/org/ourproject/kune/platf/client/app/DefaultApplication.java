@@ -26,7 +26,7 @@ import java.util.Map;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.Session1;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.sitebar.client.bar.SiteBarListener;
@@ -40,7 +40,7 @@ public class DefaultApplication implements Application {
     private Dispatcher dispatcher;
     private StateManager stateManager;
 
-    public DefaultApplication(final Map tools, final Session session) {
+    public DefaultApplication(final Map tools, final Session1 session) {
         this.tools = tools;
         workspace = WorkspaceFactory.createWorkspace(session);
         workspace.attachTools(tools.values().iterator());

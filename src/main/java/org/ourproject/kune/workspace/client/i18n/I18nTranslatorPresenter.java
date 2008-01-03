@@ -19,41 +19,30 @@
 
 package org.ourproject.kune.workspace.client.i18n;
 
-import java.util.List;
-
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
+import org.ourproject.kune.platf.client.state.Session1;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
 public class I18nTranslatorPresenter implements I18nTranslatorComponent {
-
     private I18nTranslatorView view;
-    private I18nLanguageDTO language;
-    private List languages;
+    private final Session1 session;
 
-    public I18nTranslatorPresenter() {
+    public I18nTranslatorPresenter(final Session1 session) {
+        this.session = session;
     }
 
     public void init(final I18nTranslatorView view) {
         this.view = view;
-        this.language = null;
     }
 
     public View getView() {
         return view;
     }
 
-    public void setLanguage(final I18nLanguageDTO language) {
-        this.language = language;
-    }
-
-    public void setLanguages(final List languages) {
-        this.languages = languages;
-    }
-
-    public List getLanguages() {
-        return languages;
+    public Object[][] getLanguages() {
+        return session.getLanguagesArray();
     }
 
     public void show() {
@@ -74,7 +63,7 @@ public class I18nTranslatorPresenter implements I18nTranslatorComponent {
     }
 
     public I18nLanguageDTO getLanguage() {
-        return language;
+        return session.getCurrentLanguage();
     }
 
 }

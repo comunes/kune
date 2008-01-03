@@ -35,7 +35,7 @@ public class ChangeGroupWsThemeAction implements Action {
     private void onChangeGroupWsTheme(final Services services, final String theme) {
         Site.showProgressProcessing();
         final GroupServiceAsync server = GroupService.App.getInstance();
-        server.changeGroupWsTheme(services.session.userHash, services.session.getCurrentState().getGroup()
+        server.changeGroupWsTheme(services.session.getUserHash(), services.session.getCurrentState().getGroup()
                 .getShortName(), theme, new AsyncCallbackSimple() {
             public void onSuccess(final Object result) {
                 services.app.getWorkspace().setTheme(theme);

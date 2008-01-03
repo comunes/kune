@@ -63,6 +63,7 @@ public class LoginPresenter implements Login, MessagePresenter {
     public void doLogin() {
         if (view.isSignInFormValid()) {
             Site.showProgressProcessing();
+            view.setVisible(false);
 
             final String nickOrEmail = view.getNickOrEmail();
             final String passwd = view.getLoginPassword();
@@ -73,6 +74,7 @@ public class LoginPresenter implements Login, MessagePresenter {
 
             AsyncCallback callback = new AsyncCallback() {
                 public void onFailure(final Throwable caught) {
+                    view.setVisible(true);
                     Site.hideProgress();
                     try {
                         throw caught;
@@ -144,8 +146,8 @@ public class LoginPresenter implements Login, MessagePresenter {
     }
 
     public void onClose() {
-        resetMessage();
         reset();
+        resetMessage();
         listener.onLoginClose();
     }
 

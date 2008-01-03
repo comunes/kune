@@ -36,7 +36,7 @@ public class AddCollabAction implements Action {
     private void onAddCollab(final Services services, final String groupShortName) {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        server.addCollabMember(services.session.userHash, services.session.getCurrentState().getGroup().getShortName(),
+        server.addCollabMember(services.session.getUserHash(), services.session.getCurrentState().getGroup().getShortName(),
                 groupShortName, new AsyncCallbackSimple() {
                     public void onSuccess(final Object result) {
                         Site.hideProgress();

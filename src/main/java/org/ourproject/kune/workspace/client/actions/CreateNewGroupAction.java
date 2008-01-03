@@ -35,6 +35,6 @@ public class CreateNewGroupAction implements Action {
 
     private void onNewGroup(final Services services, final GroupDTO group, final AsyncCallback callback) {
         GroupServiceAsync groupService = GroupService.App.getInstance();
-        groupService.createNewGroup(services.session.userHash, group, callback);
+        groupService.createNewGroup(services.session.getUserHash(), group, callback);
     }
 }

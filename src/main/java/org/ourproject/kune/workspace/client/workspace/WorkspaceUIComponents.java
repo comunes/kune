@@ -19,6 +19,7 @@
 
 package org.ourproject.kune.workspace.client.workspace;
 
+import org.ourproject.kune.platf.client.state.Session1;
 import org.ourproject.kune.workspace.client.WorkspaceFactory;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorComponent;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelectorComponent;
@@ -119,9 +120,9 @@ class WorkspaceUIComponents {
         return groupLiveSearch;
     }
 
-    public I18nTranslatorComponent getI18nTranslatorComponent(final Object[][] languages) {
+    public I18nTranslatorComponent getI18nTranslatorComponent(final Session1 session) {
         if (i18nTranslatorSearch == null) {
-            i18nTranslatorSearch = WorkspaceFactory.createI18nTranslatorComponent(languages);
+            i18nTranslatorSearch = WorkspaceFactory.createI18nTranslatorComponent(session);
         }
         return i18nTranslatorSearch;
     }

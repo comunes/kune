@@ -36,7 +36,7 @@ public class DeleteMemberAction implements Action {
     private void onDeleteMember(final Services services, final String groupShortName) {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        server.deleteMember(services.session.userHash, services.session.getCurrentState().getGroup().getShortName(),
+        server.deleteMember(services.session.getUserHash(), services.session.getCurrentState().getGroup().getShortName(),
                 groupShortName, new AsyncCallbackSimple() {
                     public void onSuccess(final Object result) {
                         Site.hideProgress();

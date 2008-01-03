@@ -39,7 +39,7 @@ public class SaveDocument implements Action {
     private void save(final Services services, final StateDTO content, final DocumentContent documentContent) {
         Site.showProgressSaving();
         ContentServiceAsync server = ContentService.App.getInstance();
-        server.save(services.session.userHash, services.session.getCurrentState().getGroup().getShortName(), content
+        server.save(services.session.getUserHash(), services.session.getCurrentState().getGroup().getShortName(), content
                 .getDocumentId(), content.getContent(), new AsyncCallback() {
             public void onFailure(final Throwable caught) {
                 Site.hideProgress();

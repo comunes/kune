@@ -19,8 +19,8 @@
 
 package org.ourproject.kune.platf.client.ui.rate;
 
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.services.Images;
+import org.ourproject.kune.platf.client.services.Kune;
 
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
@@ -55,6 +55,7 @@ public class RateItPanel extends Composite implements ClickListener, RateItView 
             img.starGrey().applyTo(starImg[i]);
             starImg[i].addStyleName("rateit-star");
             starImg[i].setStyleName("rateit-star");
+            starImg[i].setTitle(Kune.I18N.t("Click to rate this"));
             starImg[i].addClickListener(this);
             starImg[i].addMouseListener(new MouseListenerAdapter() {
                 public void onMouseLeave(final Widget sender) {

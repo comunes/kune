@@ -35,7 +35,7 @@ public class ContentRemoveAuthorAction implements Action {
     private void onContentRemoveAuthor(final Services services, final String documentId, final String authorShortName) {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
-        server.removeAuthor(services.session.userHash, services.session.getCurrentState().getGroup().getShortName(),
+        server.removeAuthor(services.session.getUserHash(), services.session.getCurrentState().getGroup().getShortName(),
                 documentId, authorShortName, new AsyncCallbackSimple() {
                     public void onSuccess(final Object result) {
                         Site.hideProgress();

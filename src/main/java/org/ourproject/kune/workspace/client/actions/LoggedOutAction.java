@@ -36,8 +36,8 @@ public class LoggedOutAction implements Action {
         Cookies.removeCookie("userHash");
         // Workaround:
         Cookies.setCookie("userHash", null, new Date(0), null, "/", false);
-        services.session.userHash = null;
+        services.session.setUserHash(null);
         Site.sitebar.showLoggedUser(null);
-        services.stateManager.reload(false);
+        services.stateManager.reload();
     }
 }

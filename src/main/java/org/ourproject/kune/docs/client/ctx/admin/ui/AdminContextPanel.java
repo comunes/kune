@@ -32,17 +32,19 @@ import org.ourproject.kune.platf.client.ui.stacks.IndexedStackPanel;
 import org.ourproject.kune.workspace.client.ui.ctx.admin.AccessListsPanel;
 
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.gwtext.client.widgets.DatePicker;
-import com.gwtext.client.widgets.DatePickerConfig;
-import com.gwtext.client.widgets.event.DatePickerListener;
+import com.gwtext.client.widgets.form.DateField;
+import com.gwtext.client.widgets.form.DateFieldConfig;
+import com.gwtext.client.widgets.form.Field;
+import com.gwtext.client.widgets.form.Form;
+import com.gwtext.client.widgets.form.FormConfig;
+import com.gwtext.client.widgets.form.event.FieldListenerAdapter;
 
 public class AdminContextPanel extends VerticalPanel implements AdminContextView {
     private final AccessListsPanel accessListsPanel;
     private final IndexedStackPanel options;
     private final AdminContextPresenter presenter;
-    private DatePicker datePicker;
+    private DateField dateField;
 
     public AdminContextPanel(final AdminContextPresenter presenter) {
         this.presenter = presenter;
@@ -77,23 +79,29 @@ public class AdminContextPanel extends VerticalPanel implements AdminContextView
     }
 
     private VerticalPanel createPublicationComponent() {
-        datePicker = new DatePicker(new DatePickerConfig() {
+        Form form = new Form(new FormConfig() {
             {
-                setTitle("Select publication date");
+                setHideLabels(true);
+            }
+        });
+
+        dateField = new DateField(new DateFieldConfig() {
+            {
                 setWidth("200");
                 setFormat("Y-m-d");
             }
         });
 
-        datePicker.addDatePickerListener(new DatePickerListener() {
-            public void onSelect(final DatePicker dataPicker, final Date date) {
-                presenter.setPublishedOn(date);
-            };
+        dateField.addFieldListener(new FieldListenerAdapter() {
+            public void onChange(final Field field, final Object newVal, final Object oldVal) {
+                presenter.setPublishedOn((Date) newVal);
+            }
         });
 
-        datePicker.render(RootPanel.get().getElement());
+        form.add(dateField);
+        form.render();
         VerticalPanel vp = new VerticalPanel();
-        vp.add(datePicker);
+        vp.add(form);
         return vp;
     }
 

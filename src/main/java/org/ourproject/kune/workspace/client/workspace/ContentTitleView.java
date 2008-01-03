@@ -29,4 +29,8 @@ public interface ContentTitleView extends View {
 
     void setDateVisible(boolean visible);
 
+    void setContentTitleEditable(boolean editable);
+
+    void restoreOldTitle();
+
 }

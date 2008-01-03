@@ -38,13 +38,13 @@ public class AddDocument implements Action {
     private void addDocument(final Services services, final String name, final ContainerDTO containerDTO) {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
-        server.addContent(services.session.userHash, services.session.getCurrentState().getGroup().getShortName(),
+        server.addContent(services.session.getUserHash(), services.session.getCurrentState().getGroup().getShortName(),
                 containerDTO.getId(), name, new AsyncCallbackSimple() {
                     public void onSuccess(final Object result) {
                         Site.hideProgress();
                         Site.info(Kune.I18N.t("Created, now you can edit the document"));
-                        StateDTO content = (StateDTO) result;
-                        services.stateManager.setState(content);
+                        StateDTO state = (StateDTO) result;
+                        services.stateManager.setRetrievedState(state);
                     }
                 });
     }

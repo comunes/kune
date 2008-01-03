@@ -58,7 +58,7 @@ public class InitAction implements Action {
 
     private void getInitData(final Services services) {
         SiteServiceAsync server = SiteService.App.getInstance();
-        server.getInitData(services.session.userHash, new AsyncCallback() {
+        server.getInitData(services.session.getUserHash(), new AsyncCallback() {
             public void onFailure(final Throwable error) {
                 Site.error("Error fetching initial data");
                 FireLog.debug(error.getMessage());

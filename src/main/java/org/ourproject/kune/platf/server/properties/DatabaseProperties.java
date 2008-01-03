@@ -36,7 +36,7 @@ public class DatabaseProperties {
     }
 
     public String getDefaultSiteShortName() {
-        return properties.get(KuneProperties.DEFAULT_SITE_SHORT_NAME);
+        return properties.get("kune.default.site.shortName");
     }
 
     public String getDefaultSiteName() {

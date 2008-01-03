@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.ourproject.kune.platf.client.ui.CustomStackPanel;
+import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.UIConstants;
 
 import com.google.gwt.user.client.DOM;
@@ -164,10 +165,11 @@ public class IndexedStackPanel extends CustomStackPanel {
             Element div = DOM.createDiv();
             Element labelElem = DOM.createSpan();
             Element iconElement = null;
-            DOM.setElementAttribute(div, "title", title);
+            KuneUiUtils.setQuickTip(labelElem, title);
             boolean insertIcon = icon != null && iconAlign != null;
             if (insertIcon) {
                 iconElement = icon.createImage().getElement();
+                KuneUiUtils.setQuickTip(iconElement, title);
                 if (iconAlign == UIConstants.ICON_HORIZ_ALIGN_LEFT) {
                     DOM.appendChild(div, iconElement);
                 }

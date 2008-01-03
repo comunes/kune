@@ -36,7 +36,7 @@ public class SetAdminAsCollabAction implements Action {
     private void onSetAdminAsCollab(final Services services, final String groupShortName) {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        server.setAdminAsCollab(services.session.userHash,
+        server.setAdminAsCollab(services.session.getUserHash(),
                 services.session.getCurrentState().getGroup().getShortName(), groupShortName,
                 new AsyncCallbackSimple() {
                     public void onSuccess(final Object result) {

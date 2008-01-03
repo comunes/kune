@@ -4,7 +4,7 @@ import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.SessionImpl;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 import org.ourproject.kune.workspace.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.workspace.client.workspace.WorkspaceView;
@@ -15,7 +15,7 @@ public class WorkspaceTest {
 
     @Before
     public void create() {
-        presenter = new WorkspacePresenter(new Session("userHash"));
+        presenter = new WorkspacePresenter(new SessionImpl("userHash"));
         view = EasyMock.createStrictMock(WorkspaceView.class);
         presenter.init(view);
     }

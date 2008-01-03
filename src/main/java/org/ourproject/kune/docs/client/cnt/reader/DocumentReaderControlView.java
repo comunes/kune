@@ -28,4 +28,6 @@ public interface DocumentReaderControlView extends View {
 
     public void setDeleteEnabled(boolean isEnabled);
 
+    public void setTranslateEnabled(boolean isEnabled);
+
 }

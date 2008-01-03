@@ -35,7 +35,7 @@ public class ContentSetLanguageAction implements Action {
     private void onContentSetLanguage(final Services services, final String documentId, final String languageCode) {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
-        server.setLanguage(services.session.userHash, services.session.getCurrentState().getGroup().getShortName(),
+        server.setLanguage(services.session.getUserHash(), services.session.getCurrentState().getGroup().getShortName(),
                 documentId, languageCode, new AsyncCallbackSimple() {
                     public void onSuccess(final Object result) {
                         Site.hideProgress();

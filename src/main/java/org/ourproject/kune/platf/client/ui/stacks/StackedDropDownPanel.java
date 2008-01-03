@@ -82,7 +82,7 @@ public class StackedDropDownPanel extends DropDownPanel implements UIConstants {
 
     public void setHeaderTitle(final String headerTitle) {
         this.headerTitle = headerTitle;
-        super.setTitle(headerTitle);
+        super.setHeaderTitle(headerTitle);
     }
 
     public void setHeaderCountVisible(final boolean headerCountVisible) {

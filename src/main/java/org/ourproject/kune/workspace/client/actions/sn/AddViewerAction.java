@@ -36,7 +36,7 @@ public class AddViewerAction implements Action {
     private void onAddViewer(final Services services, final String groupShortName) {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        server.addViewerMember(services.session.userHash, services.session.getCurrentState().getGroup().getShortName(),
+        server.addViewerMember(services.session.getUserHash(), services.session.getCurrentState().getGroup().getShortName(),
                 groupShortName, new AsyncCallbackSimple() {
                     public void onSuccess(final Object result) {
                         Site.hideProgress();

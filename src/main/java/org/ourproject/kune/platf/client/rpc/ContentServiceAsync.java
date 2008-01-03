@@ -55,8 +55,10 @@ public interface ContentServiceAsync {
     void removeAuthor(String userHash, String groupShortName, String documentId, String authorShortName,
             AsyncCallback asyncCallback);
 
-    void setTitle(String userHash, String groupShortName, String documentId, String newTitle,
+    void renameContent(String userHash, String groupShortName, String documentId, String newTitle,
             AsyncCallback asyncCallback);
+
+    void renameFolder(String hash, String groupShortName, Long folderId, String title, AsyncCallback asyncCallback);
 
     void delContent(String userHash, String groupShortName, String documentId, AsyncCallback asyncCallback);
 

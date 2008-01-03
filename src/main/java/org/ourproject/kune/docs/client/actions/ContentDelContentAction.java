@@ -35,7 +35,7 @@ public class ContentDelContentAction implements Action {
     private void onContentDelContent(final Services services, final String documentId) {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
-        server.delContent(services.session.userHash, services.session.getCurrentState().getGroup().getShortName(),
+        server.delContent(services.session.getUserHash(), services.session.getCurrentState().getGroup().getShortName(),
                 documentId, new AsyncCallbackSimple() {
                     public void onSuccess(final Object result) {
                         Site.hideProgress();

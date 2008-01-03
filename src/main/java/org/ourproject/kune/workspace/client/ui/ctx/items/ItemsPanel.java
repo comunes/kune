@@ -24,7 +24,6 @@ import java.util.HashMap;
 
 import org.ourproject.kune.platf.client.ui.IconHyperlink;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -32,17 +31,17 @@ class ItemsPanel extends VerticalPanel {
     private final HashMap fileIcons;
 
     public ItemsPanel() {
-	addStyleName("kune-NavigationBar");
-	addStyleName("Items");
-	fileIcons = new HashMap();
+        addStyleName("kune-NavigationBar");
+        addStyleName("Items");
+        fileIcons = new HashMap();
     }
 
     public void add(final String name, final String type, final String event) {
-	GWT.log("Item: " + name + " type: " + type, null);
-	add(new IconHyperlink(((AbstractImagePrototype) fileIcons.get(type)), name, event));
+        IconHyperlink item = new IconHyperlink((AbstractImagePrototype) fileIcons.get(type), name, event);
+        add(item);
     }
 
     public void registerType(final String typeName, final AbstractImagePrototype image) {
-	fileIcons.put(typeName, image);
+        fileIcons.put(typeName, image);
     }
 }

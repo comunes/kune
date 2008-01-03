@@ -27,8 +27,9 @@ import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.newgroup.NewGroupListener;
+import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.services.Kune;
-import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.Session1;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.login.LoginListener;
 import org.ourproject.kune.sitebar.client.rpc.UserService;
@@ -43,9 +44,9 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
     private SiteBarView view;
     private final SiteBarListener listener;
     private String previousToken;
-    private final Session session;
+    private final Session1 session;
 
-    public SiteBarPresenter(final SiteBarListener listener, final Session session) {
+    public SiteBarPresenter(final SiteBarListener listener, final Session1 session) {
         this.listener = listener;
         this.session = session;
     }
@@ -63,16 +64,20 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
         Site.hideProgress();
     }
 
-    public void doNewGroup(final String previousToken) {
-        this.previousToken = previousToken;
-        if (session.isLogged()) {
-            Site.showProgressProcessing();
-            view.showNewGroupDialog();
-            view.centerNewGroupDialog();
-        } else {
-            returnToPreviousState();
-            Site.info(Kune.I18N.t("Sign in or register to create a group"));
-        }
+    public void doNewGroup(final String previousTokenOrig) {
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ONLY_CHECK_USER_SESSION, new AsyncCallbackSimple() {
+            public void onSuccess(final Object result) {
+                previousToken = previousTokenOrig;
+                if (session.isLogged()) {
+                    Site.showProgressProcessing();
+                    view.showNewGroupDialog();
+                    view.centerNewGroupDialog();
+                } else {
+                    returnToPreviousState();
+                    Site.info(Kune.I18N.t("Sign in or register to create a group"));
+                }
+            }
+        }, null);
     }
 
     public void doSearch(final String termToSearch) {

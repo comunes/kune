@@ -36,7 +36,7 @@ public class DenyJoinGroupAction implements Action {
     private void onDenyJoinGroup(final Services services, final String groupShortName) {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        server.denyJoinGroup(services.session.userHash, services.session.getCurrentState().getGroup().getShortName(),
+        server.denyJoinGroup(services.session.getUserHash(), services.session.getCurrentState().getGroup().getShortName(),
                 groupShortName, new AsyncCallbackSimple() {
                     public void onSuccess(final Object result) {
                         Site.info(Kune.I18N.t("Member rejected"));

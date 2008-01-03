@@ -19,7 +19,13 @@
 
 package org.ourproject.kune.workspace.client.workspace;
 
+import org.ourproject.kune.docs.client.actions.DocsEvents;
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
+import org.ourproject.kune.platf.client.services.KuneErrorHandler;
+import org.ourproject.kune.sitebar.client.Site;
+
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class ContentTitlePresenter implements ContentTitleComponent {
 
@@ -29,8 +35,9 @@ public class ContentTitlePresenter implements ContentTitleComponent {
         this.view = view;
     }
 
-    public void setContentTitle(final String title) {
+    public void setContentTitle(final String title, final boolean editable) {
         view.setContentTitle(title);
+        view.setContentTitleEditable(editable);
     }
 
     public void setContentDate(final String date) {
@@ -45,9 +52,19 @@ public class ContentTitlePresenter implements ContentTitleComponent {
         return view;
     }
 
-    public void onTitleClicked() {
-        // TODO Auto-generated method stub
+    public void onTitleRename(final String text) {
+        Site.showProgressSaving();
+        DefaultDispatcher.getInstance().fire(DocsEvents.RENAME_CONTENT, text, new AsyncCallback() {
+            public void onFailure(final Throwable caught) {
+                view.restoreOldTitle();
+                KuneErrorHandler.getInstance().process(caught);
+            }
 
+            public void onSuccess(final Object result) {
+                Site.hideProgress();
+                view.setContentTitle((String) result);
+            }
+        });
     }
 
 }

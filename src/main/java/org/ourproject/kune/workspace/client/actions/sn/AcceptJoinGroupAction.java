@@ -36,7 +36,7 @@ public class AcceptJoinGroupAction implements Action {
     private void onAcceptJoinGroup(final Services services, final String groupShortName) {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        server.AcceptJoinGroup(services.session.userHash, services.session.getCurrentState().getGroup().getShortName(),
+        server.AcceptJoinGroup(services.session.getUserHash(), services.session.getCurrentState().getGroup().getShortName(),
                 groupShortName, new AsyncCallbackSimple() {
                     public void onSuccess(final Object result) {
                         Site.hideProgress();

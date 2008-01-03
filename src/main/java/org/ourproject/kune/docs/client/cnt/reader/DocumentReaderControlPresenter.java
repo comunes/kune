@@ -33,6 +33,7 @@ public class DocumentReaderControlPresenter implements DocumentReaderControl {
     public void setRights(final AccessRightsDTO accessRights) {
         view.setEditEnabled(accessRights.isEditable());
         view.setDeleteEnabled(accessRights.isAdministrable());
+        view.setTranslateEnabled(accessRights.isEditable());
     }
 
     public View getView() {

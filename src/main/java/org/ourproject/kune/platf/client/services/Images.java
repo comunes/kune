@@ -503,6 +503,11 @@ public interface Images extends ImageBundle {
     AbstractImagePrototype nobody();
 
     /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/nt.png
+     */
+    AbstractImagePrototype noteForTranslators();
+
+    /**
      * @gwt.resource org/ourproject/kune/platf/public/images/no-copyleft.png
      */
     AbstractImagePrototype noCopyleft();

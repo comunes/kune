@@ -4,7 +4,7 @@ import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
-import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.Session1;
 import org.ourproject.kune.platf.client.stubs.ApplicationStub;
 import org.ourproject.kune.platf.client.stubs.NiceState;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
@@ -15,7 +15,7 @@ public class ActionTestHelper {
 
     public Application app;
     public Dispatcher dispatcher;
-    public Session session;
+    public Session1 session;
     public Workspace workspace;
     private final Action action;
     private final Services services;

@@ -1,28 +1,29 @@
 <module>
-        <!--         <inherits name='com.google.gwt.i18n.I18N' />
-        -->
-        <inherits name='com.google.gwt.user.User' />
-        <inherits name='com.gwtext.GwtExt' />
-        <inherits name='org.ourproject.kune.platf.Kune-Platform' />
-        <inherits name='org.ourproject.kune.docs.Kune-Docs' />
-        <inherits name='org.ourproject.kune.chat.Kune-Chat' />
-        <inherits name='to.tipit.GWTlib' />
+  <!--         <inherits name='com.google.gwt.i18n.I18N' />
+  -->
+  <inherits name='com.google.gwt.user.User' />
+  <inherits name='com.gwtext.GwtExt' />
+  <inherits name='org.ourproject.kune.platf.Kune-Platform' />
+  <inherits name='org.ourproject.kune.docs.Kune-Docs' />
+  <inherits name='org.ourproject.kune.chat.Kune-Chat' />
+  <inherits name='to.tipit.GWTlib' />
 
-        <!--
-        <extend-property name="locale" values="es" />
-        <extend-property name="locale" values="ar" />
-        -->
+  <!--
+    <extend-property name="locale" values="es" />
+    <extend-property name="locale" values="ar" />
+  -->
 
-        <!-- Specify the app entry point class.                   -->
-        <entry-point class='org.ourproject.kune.app.client.KuneEntryPoint' />
+  <!-- Specify the app entry point class. -->
+  <entry-point class='org.ourproject.kune.app.client.KuneEntryPoint' />
 
-        <script src="js/ext/adapter/yui/yui-utilities.js" />
-        <script src="js/ext/adapter/yui/ext-yui-adapter.js" />
-        <script src="js/ext/ext-all.js" />
+  <script src="js/ext/adapter/yui/yui-utilities.js" />
+  <script src="js/ext/adapter/yui/ext-yui-adapter.js" />
+  <!-- <script src="js/ext/ext-custom.js" /> -->
+  <script src="js/ext/ext-all.js" />
 
-        <script src="js/colorthemes.js" />
+  <script src="js/colorthemes.js" />
 
-        <!--http://code.google.com/p/google-web-toolkit/issues/detail?id=42 -->
+  <!--http://code.google.com/p/google-web-toolkit/issues/detail?id=42 -->
 
-        <!-- <set-property name="user.agent" value="gecko" /> -->
+  <!--  <set-property name="user.agent" value="gecko" /> -->
 </module>

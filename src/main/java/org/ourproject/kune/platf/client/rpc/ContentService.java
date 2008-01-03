@@ -61,10 +61,12 @@ public interface ContentService extends RemoteService {
     void removeAuthor(String userHash, String groupShortName, String documentId, String authorShortName)
             throws SerializableException;
 
-    void setTitle(String userHash, String groupShortName, String documentId, String newTitle)
+    String renameContent(String userHash, String groupShortName, String documentId, String newTitle)
             throws SerializableException;
 
     void delContent(String userHash, String groupShortName, String documentId) throws SerializableException;
+
+    String renameFolder(String hash, String groupShortName, Long folderId, String title) throws SerializableException;
 
     public static class App {
         private static ContentServiceAsync instance;

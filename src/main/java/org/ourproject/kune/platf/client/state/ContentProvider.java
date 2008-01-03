@@ -26,9 +26,9 @@ import org.ourproject.kune.workspace.client.dto.StateDTO;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface ContentProvider {
+
     void getContent(String user, StateToken newState, AsyncCallback callback);
 
     void cache(StateToken encodeState, StateDTO content);
 
-    void removeCache(StateToken state);
 }

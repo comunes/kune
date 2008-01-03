@@ -21,27 +21,29 @@ package org.ourproject.kune.docs.client.actions;
 
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
-import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.sitebar.client.Site;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
-public class ContentSetTitleAction implements Action {
+import com.google.gwt.user.client.rpc.AsyncCallback;
+
+public class ContentRenameAction implements Action {
 
     public void execute(final Object value, final Object extra, final Services services) {
-        onContentSetTitle(services, (String) value, (String) extra);
+        onContentRename(services, (String) value, (AsyncCallback) extra);
     }
 
-    private void onContentSetTitle(final Services services, final String documentId, final String newTitle) {
+    private void onContentRename(final Services services, final String newName, final AsyncCallback callback) {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
-        server.setTitle(services.session.userHash, services.session.getCurrentState().getGroup().getShortName(),
-                documentId, newTitle, new AsyncCallbackSimple() {
-                    public void onSuccess(final Object result) {
-                        Site.hideProgress();
-                        services.stateManager.reload();
-                    }
-                });
-
+        StateDTO currentState = services.session.getCurrentState();
+        if (currentState.hasDocument()) {
+            server.renameContent(services.session.getUserHash(), currentState.getGroup().getShortName(), currentState
+                    .getDocumentId(), newName, callback);
+        } else {
+            server.renameFolder(services.session.getUserHash(), currentState.getGroup().getShortName(), currentState
+                    .getFolder().getId(), newName, callback);
+        }
     }
 }

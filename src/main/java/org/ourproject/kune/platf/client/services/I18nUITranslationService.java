@@ -141,6 +141,10 @@ public class I18nUITranslationService extends I18nTranslationService {
         }
     }
 
+    public String getCurrentLanguage() {
+        return currentLanguage;
+    }
+
     private void fireI18nLanguageChange() {
         if (i18nChangeListeners != null) {
             i18nChangeListeners.fireI18nLanguageChange();

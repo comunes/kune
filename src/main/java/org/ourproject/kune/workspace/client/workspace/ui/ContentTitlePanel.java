@@ -20,24 +20,26 @@
 
 package org.ourproject.kune.workspace.client.workspace.ui;
 
+import org.ourproject.kune.platf.client.ui.EditableClickListener;
+import org.ourproject.kune.platf.client.ui.EditableLabel;
 import org.ourproject.kune.workspace.client.workspace.ContentTitlePresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentTitleView;
 
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 public class ContentTitlePanel extends HorizontalPanel implements ContentTitleView {
-    private final Label titleLabel;
+    private final EditableLabel titleLabel;
     private final Label dateLabel;
-    private final ContentTitlePresenter presenter;
 
     public ContentTitlePanel(final ContentTitlePresenter presenter) {
-        this.presenter = presenter;
-        titleLabel = new Label();
+        titleLabel = new EditableLabel(new EditableClickListener() {
+            public void onEdited(final String text) {
+                presenter.onTitleRename(text);
+            }
+        });
         HorizontalPanel rigthHP = new HorizontalPanel();
         dateLabel = new Label();
 
@@ -59,21 +61,10 @@ public class ContentTitlePanel extends HorizontalPanel implements ContentTitleVi
 
     public void setContentTitle(final String title) {
         titleLabel.setText(title);
-        titleLabel.addClickListener(new ClickListener() {
-            public void onClick(final Widget sender) {
-                presenter.onTitleClicked();
-            }
-        });
     }
 
     public void setContentTitleEditable(final boolean editable) {
-        if (editable) {
-
-        } else {
-            titleLabel.setVisible(true);
-
-        }
-
+        titleLabel.setEditable(editable);
     }
 
     public void setContentDate(final String date) {
@@ -89,5 +80,9 @@ public class ContentTitlePanel extends HorizontalPanel implements ContentTitleVi
     public void setDateVisible(final boolean visible) {
         dateLabel.setVisible(visible);
 
+    }
+
+    public void restoreOldTitle() {
+        titleLabel.restoreOldText();
     }
 }

@@ -125,6 +125,7 @@ public class LoginPanel implements LoginView, View {
             this.timezones[i] = obj;
         }
         createPanel();
+        dialog.setVisible(false);
     }
 
     public void showWelcolmeDialog() {
@@ -154,9 +155,9 @@ public class LoginPanel implements LoginView, View {
     }
 
     public void reset() {
+        dialog.setVisible(false);
         signInForm.reset();
         registerForm.reset();
-        tabPanel.getTab(0).activate();
     }
 
     public String getNickOrEmail() {
@@ -214,6 +215,8 @@ public class LoginPanel implements LoginView, View {
     }
 
     public void show() {
+        tabPanel.getTab(0).activate();
+        dialog.setVisible(true);
         dialog.show();
     }
 
@@ -223,6 +226,10 @@ public class LoginPanel implements LoginView, View {
 
     public void center() {
         dialog.center();
+    }
+
+    public void setVisible(final boolean visible) {
+        dialog.setVisible(visible);
     }
 
     private Object[][] getLanguages() {
@@ -378,7 +385,7 @@ public class LoginPanel implements LoginView, View {
 
         dialog.addDialogListener(new DialogListener() {
             public boolean doBeforeHide(final LayoutDialog dialog) {
-                presenter.onClose();
+                // presenter.onClose();
                 return true;
             }
 
@@ -387,6 +394,7 @@ public class LoginPanel implements LoginView, View {
             }
 
             public void onHide(final LayoutDialog dialog) {
+                presenter.onClose();
             }
 
             public void onKeyDown(final LayoutDialog dialog, final EventObject e) {

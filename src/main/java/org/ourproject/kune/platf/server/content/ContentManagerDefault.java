@@ -174,9 +174,11 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         content.setTags(tagList);
     }
 
-    public void setTitle(final User user, final Long contentId, final String newTitle) throws SerializableException {
+    public String renameContent(final User user, final Long contentId, final String newTitle)
+            throws SerializableException {
         Content content = finder.getContent(contentId);
         content.getLastRevision().getData().setTitle(newTitle);
+        return newTitle;
     }
 
     public void delContent(final User user, final Long contentId) throws SerializableException {

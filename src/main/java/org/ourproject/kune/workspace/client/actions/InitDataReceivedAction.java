@@ -21,7 +21,7 @@ package org.ourproject.kune.workspace.client.actions;
 
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
-import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.Session1;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 public class InitDataReceivedAction implements Action {
@@ -32,7 +32,7 @@ public class InitDataReceivedAction implements Action {
 
     private void onInitDataReceived(final Services services) {
         Workspace workspace = services.app.getWorkspace();
-        Session session = services.session;
+        Session1 session = services.session;
         workspace.setTheme(session.getDefaultWsTheme());
         workspace.getThemeMenuComponent().setThemes(session.getWsThemes());
     }

@@ -1,4 +1,11 @@
-2008-01-02 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+2008-01-03 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* Folder rename methods
+	* Ext QuickTips use instead of html title.
+	* Several bugs with StateManager fixed. StateManager refactorized and Test
+	added
+	* bug 'group.tool.folder no check folder owner is group' fixed
+	* Same browser use same session, diferent browsers use different session.
+	If we logout in one tab, is correctly handled in the other tab.
 	* Added OnlyCheckSessionExpiration for some methods (like new group
 	creation)
 	* Added ErrorHandler and AsyncCallbackSimple for simple callback error

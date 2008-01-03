@@ -20,6 +20,7 @@
 package org.ourproject.kune.platf.client.ui.stacks;
 
 import org.ourproject.kune.platf.client.AbstractPresenter;
+import org.ourproject.kune.platf.client.ui.IconLabel;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
@@ -86,10 +87,10 @@ public class IndexedStackPanelWithSubItems extends IndexedStackPanel {
             this.icon = icon;
             this.name = name;
             this.presenter = presenter;
-            String label = icon.getHTML() + name;
-            setTitle(title);
+            IconLabel label = new IconLabel(icon, name);
+            label.setTitle(title);
             actions = new MenuBar(true);
-            addItem(label, true, actions);
+            addItem(label.toString(), true, actions);
             setAutoOpen(false);
             actions.setAutoOpen(true);
             setStyleName("kune-StackSubItemLabel");

@@ -27,18 +27,14 @@ import com.google.gwt.user.client.HistoryListener;
 
 public interface StateManager extends HistoryListener {
 
-    String getUser();
-
     void reload();
-
-    void reload(boolean useCache);
 
     void reloadSocialNetwork();
 
-    void setState(StateDTO content);
+    void setRetrievedState(StateDTO content);
 
     void setState(StateToken state);
 
-    Session getSession();
+    Session1 getSession();
 
 }

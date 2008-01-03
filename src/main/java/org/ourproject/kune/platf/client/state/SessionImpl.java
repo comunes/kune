@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.I18nCountryDTO;
+import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageSimpleDTO;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
@@ -34,8 +35,8 @@ import org.ourproject.kune.workspace.client.dto.StateDTO;
  * @author danigb
  * 
  */
-public class Session {
-    public String userHash;
+public class SessionImpl implements Session1 {
+    private String userHash;
     private List licenses;
     private List languages;
     private List countries;
@@ -45,8 +46,9 @@ public class Session {
     private String[] wsThemes;
     private String defaultWsTheme;
     private String[] timezones;
+    private I18nLanguageDTO currentLanguage;
 
-    public Session(final String usersHash) {
+    public SessionImpl(final String usersHash) {
         this.userHash = usersHash;
         licenses = null;
         languages = null;
@@ -54,63 +56,138 @@ public class Session {
         countries = null;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.ourproject.kune.platf.client.state.Session#getLicenses()
+     */
     public List getLicenses() {
         return licenses;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.ourproject.kune.platf.client.state.Session#setLicenses(java.util.List)
+     */
     public void setLicenses(final List licenses) {
         this.licenses = licenses;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.ourproject.kune.platf.client.state.Session#setCurrent(org.ourproject.kune.workspace.client.dto.StateDTO)
+     */
     public void setCurrent(final StateDTO currentState) {
         this.currentState = currentState;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.ourproject.kune.platf.client.state.Session#getCurrentState()
+     */
     public StateDTO getCurrentState() {
         return currentState;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.ourproject.kune.platf.client.state.Session#setCurrentState(org.ourproject.kune.workspace.client.dto.StateDTO)
+     */
     public void setCurrentState(final StateDTO currentState) {
         this.currentState = currentState;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.ourproject.kune.platf.client.state.Session#setDefaultWsTheme(java.lang.String)
+     */
     public void setDefaultWsTheme(final String defaultWsTheme) {
         this.defaultWsTheme = defaultWsTheme;
 
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.ourproject.kune.platf.client.state.Session#setWsThemes(java.lang.String[])
+     */
     public void setWsThemes(final String[] wsThemes) {
         this.wsThemes = wsThemes;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.ourproject.kune.platf.client.state.Session#getWsThemes()
+     */
     public String[] getWsThemes() {
         return wsThemes;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.ourproject.kune.platf.client.state.Session#getDefaultWsTheme()
+     */
     public String getDefaultWsTheme() {
         return defaultWsTheme;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.ourproject.kune.platf.client.state.Session#isLogged()
+     */
     public boolean isLogged() {
         return userHash != null;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.ourproject.kune.platf.client.state.Session#getLanguages()
+     */
     public List getLanguages() {
         return languages;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.ourproject.kune.platf.client.state.Session#setLanguages(java.util.List)
+     */
     public void setLanguages(final List languages) {
         this.languages = languages;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.ourproject.kune.platf.client.state.Session#getCountries()
+     */
     public List getCountries() {
         return countries;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.ourproject.kune.platf.client.state.Session#setCountries(java.util.List)
+     */
     public void setCountries(final List countries) {
         this.countries = countries;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.ourproject.kune.platf.client.state.Session#getLanguagesArray()
+     */
     public Object[][] getLanguagesArray() {
         if (languagesArray == null) {
             languagesArray = mapLangs(languages);
@@ -118,6 +195,11 @@ public class Session {
         return languagesArray;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.ourproject.kune.platf.client.state.Session#getCountriesArray()
+     */
     public Object[][] getCountriesArray() {
         if (countriesArray == null) {
             countriesArray = mapCountries(countries);
@@ -147,12 +229,48 @@ public class Session {
         return objs;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.ourproject.kune.platf.client.state.Session#setTimezones(java.lang.String[])
+     */
     public void setTimezones(final String[] timezones) {
         this.timezones = timezones;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.ourproject.kune.platf.client.state.Session#getTimezones()
+     */
     public String[] getTimezones() {
         return timezones;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.ourproject.kune.platf.client.state.Session#setCurrentLanguage(org.ourproject.kune.platf.client.dto.I18nLanguageDTO)
+     */
+    public void setCurrentLanguage(final I18nLanguageDTO currentLanguage) {
+        this.currentLanguage = currentLanguage;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.ourproject.kune.platf.client.state.Session#getCurrentLanguage()
+     */
+    public I18nLanguageDTO getCurrentLanguage() {
+        return currentLanguage;
+    }
+
+    public String getUserHash() {
+        return userHash;
+    }
+
+    public void setUserHash(final String userHash) {
+        this.userHash = userHash;
     }
 
 }

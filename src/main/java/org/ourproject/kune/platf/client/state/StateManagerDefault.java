@@ -21,6 +21,7 @@
 package org.ourproject.kune.platf.client.state;
 
 import org.ourproject.kune.platf.client.app.Application;
+import org.ourproject.kune.platf.client.app.HistoryWrapper;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
@@ -28,7 +29,6 @@ import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.sitebar.client.Site;
-import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 import org.ourproject.kune.workspace.client.workspace.ContentSubTitleComponent;
 import org.ourproject.kune.workspace.client.workspace.ContentTitleComponent;
@@ -36,23 +36,23 @@ import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 import to.tipit.gwtlib.FireLog;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.user.client.History;
-
 public class StateManagerDefault implements StateManager {
     private final Application app;
     private final ContentProvider provider;
     private final Workspace workspace;
     private StateDTO oldState;
     private String lastTheme;
-    private final Session session;
+    private final Session1 session;
+    private final HistoryWrapper history;
 
-    public StateManagerDefault(final ContentProvider provider, final Application app, final Session session) {
+    public StateManagerDefault(final ContentProvider provider, final Application app, final Session1 session,
+            final HistoryWrapper history) {
         this.provider = provider;
         this.app = app;
         this.session = session;
+        this.history = history;
         this.workspace = app.getWorkspace();
+        this.oldState = null;
     }
 
     /**
@@ -61,68 +61,51 @@ public class StateManagerDefault implements StateManager {
      * </p>
      */
     public void reload() {
-        onHistoryChanged(History.getToken());
+        onHistoryChanged(history.getToken());
     }
 
-    /**
-     * <p>
-     * Reload current state
-     * </p>
-     * 
-     * @param useCache
-     *                set to false if you really want to reload the content from
-     *                the server
-     * 
-     */
-    public void reload(boolean useCache) {
-        String token = History.getToken();
-        if (!useCache) {
-            provider.removeCache(new StateToken(token));
-        }
-        onHistoryChanged(token);
-    }
-
-    public Session getSession() {
+    public Session1 getSession() {
         return session;
     }
 
     public void onHistoryChanged(final String historyToken) {
-        GWT.log("State: " + historyToken, null);
+        String oldStateEncoded = "";
+        if (oldState != null) {
+            oldStateEncoded = oldState.getState().getEncoded();
+        }
         if (historyToken.equals(Site.NEWGROUP_TOKEN)) {
-            checkSessionBeforeNewGroup();
+            Site.doNewGroup(oldStateEncoded);
         } else if (historyToken.equals(Site.LOGIN_TOKEN)) {
-            Site.doLogin(oldState.getState().getEncoded());
+            Site.doLogin(oldStateEncoded);
         } else if (historyToken.equals(Site.FIXME_TOKEN)) {
-            loadContent(oldState);
+            if (oldState == null) {
+                onHistoryChanged(new StateToken());
+            } else {
+                loadContent(oldState);
+            }
         } else {
             onHistoryChanged(new StateToken(historyToken));
         }
     }
 
-    public void setState(final StateDTO content) {
+    public void setRetrievedState(final StateDTO content) {
         final StateToken state = content.getState();
         provider.cache(state, content);
         setState(state);
     }
 
     public void setState(final StateToken state) {
-        History.newItem(state.getEncoded());
-    }
-
-    public String getUser() {
-        return session.userHash;
+        history.newItem(state.getEncoded());
     }
 
     public void reloadSocialNetwork() {
-        Site.sitebar.reloadUserInfo(session.userHash);
+        Site.sitebar.reloadUserInfo(session.getUserHash());
         loadSocialNetwork();
     }
 
     private void onHistoryChanged(final StateToken newState) {
-        Site.showProgressProcessing();
-        provider.getContent(session.userHash, newState, new AsyncCallbackSimple() {
+        provider.getContent(session.getUserHash(), newState, new AsyncCallbackSimple() {
             public void onSuccess(final Object result) {
-                GWT.log("State response: " + result, null);
                 StateDTO newStateDTO = (StateDTO) result;
                 loadContent(newStateDTO);
                 oldState = newStateDTO;
@@ -131,7 +114,6 @@ public class StateManagerDefault implements StateManager {
     }
 
     private void loadContent(final StateDTO state) {
-        GWT.log("title: " + state.getTitle(), null);
         session.setCurrent(state);
         final GroupDTO group = state.getGroup();
         app.setGroupState(group.getShortName());
@@ -151,10 +133,8 @@ public class StateManagerDefault implements StateManager {
         ContentTitleComponent contentTitleComponent = workspace.getContentTitleComponent();
         ContentSubTitleComponent contentSubTitleComponent = workspace.getContentSubTitleComponent();
         if (state.hasDocument()) {
-            contentTitleComponent.setContentTitle(state.getTitle());
+            contentTitleComponent.setContentTitle(state.getTitle(), state.getContentRights().isEditable());
             contentTitleComponent.setContentDateVisible(true);
-            DateTimeFormat.getFullDateTimeFormat();
-
             contentTitleComponent.setContentDate(Kune.I18N.t("Published on: [%s]", state.getPublishedOn().toString()));
             contentSubTitleComponent.setContentSubTitleLeft(Kune.I18N.tWithNT("by: [%s]", "used in a list of authors",
                     ((UserSimpleDTO) state.getAuthors().get(0)).getName()));
@@ -163,9 +143,9 @@ public class StateManagerDefault implements StateManager {
             if (state.getFolder().getParentFolderId() == null) {
                 // We translate root folder names (documents, chat room,
                 // etcetera)
-                contentTitleComponent.setContentTitle(Kune.I18N.t(state.getTitle()));
+                contentTitleComponent.setContentTitle(Kune.I18N.t(state.getTitle()), false);
             } else {
-                contentTitleComponent.setContentTitle(state.getTitle());
+                contentTitleComponent.setContentTitle(state.getTitle(), state.getContentRights().isEditable());
             }
             contentTitleComponent.setContentDateVisible(false);
             contentSubTitleComponent.setContentSubTitleLeftVisible(false);
@@ -210,19 +190,11 @@ public class StateManagerDefault implements StateManager {
     private void loadSocialNetwork() {
         StateDTO state;
         if (session != null && (state = session.getCurrentState()) != null) {
-            workspace.getGroupMembersComponent().getGroupMembers(session.userHash, state.getGroup(),
+            workspace.getGroupMembersComponent().getGroupMembers(session.getUserHash(), state.getGroup(),
                     state.getGroupRights());
-            workspace.getParticipationComponent().getParticipation(session.userHash, state.getGroup(),
+            workspace.getParticipationComponent().getParticipation(session.getUserHash(), state.getGroup(),
                     state.getGroupRights());
         }
-    }
-
-    private void checkSessionBeforeNewGroup() {
-        app.getDispatcher().fire(WorkspaceEvents.ONLY_CHECK_USER_SESSION, new AsyncCallbackSimple() {
-            public void onSuccess(final Object result) {
-                Site.doNewGroup(oldState.getState().getEncoded());
-            }
-        }, null);
     }
 
 }

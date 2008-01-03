@@ -51,7 +51,7 @@ import com.google.gwt.user.client.ui.Widget;
  */
 
 public class IconLabel extends Widget implements SourcesClickEvents, SourcesMouseEvents, SourcesMouseWheelEvents,
-	HasHorizontalAlignment, HasText, HasWordWrap {
+        HasHorizontalAlignment, HasText, HasWordWrap {
 
     private ClickListenerCollection clickListeners;
     private HorizontalAlignmentConstant horzAlign;
@@ -67,13 +67,13 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
      *                the icon to add
      */
     public IconLabel(final AbstractImagePrototype image) {
-	setElement(DOM.createDiv());
-	sinkEvents(Event.ONCLICK | Event.MOUSEEVENTS | Event.ONMOUSEWHEEL);
-	setStyleName("kune-IconLabel");
-	icon = image.createImage().getElement();
-	textLabel = DOM.createSpan();
-	DOM.appendChild(getElement(), icon);
-	DOM.appendChild(getElement(), textLabel);
+        setElement(DOM.createDiv());
+        sinkEvents(Event.ONCLICK | Event.MOUSEEVENTS | Event.ONMOUSEWHEEL);
+        setStyleName("kune-IconLabel");
+        icon = image.createImage().getElement();
+        textLabel = DOM.createSpan();
+        DOM.appendChild(getElement(), icon);
+        DOM.appendChild(getElement(), textLabel);
     }
 
     /**
@@ -85,8 +85,8 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
      *                the new label's text
      */
     public IconLabel(final AbstractImagePrototype image, final String text) {
-	this(image);
-	setText(text);
+        this(image);
+        setText(text);
     }
 
     /**
@@ -100,101 +100,107 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
      *                <code>false</code> to disable word wrapping
      */
     public IconLabel(final AbstractImagePrototype image, final String text, final boolean wordWrap) {
-	this(image, text);
-	setWordWrap(wordWrap);
+        this(image, text);
+        setWordWrap(wordWrap);
     }
 
     public void addClickListener(final ClickListener listener) {
-	if (clickListeners == null) {
-	    clickListeners = new ClickListenerCollection();
-	}
-	clickListeners.add(listener);
+        if (clickListeners == null) {
+            clickListeners = new ClickListenerCollection();
+        }
+        clickListeners.add(listener);
     }
 
     public void addMouseListener(final MouseListener listener) {
-	if (mouseListeners == null) {
-	    mouseListeners = new MouseListenerCollection();
-	}
-	mouseListeners.add(listener);
+        if (mouseListeners == null) {
+            mouseListeners = new MouseListenerCollection();
+        }
+        mouseListeners.add(listener);
     }
 
     public void addMouseWheelListener(final MouseWheelListener listener) {
-	if (mouseWheelListeners == null) {
-	    mouseWheelListeners = new MouseWheelListenerCollection();
-	}
-	mouseWheelListeners.add(listener);
+        if (mouseWheelListeners == null) {
+            mouseWheelListeners = new MouseWheelListenerCollection();
+        }
+        mouseWheelListeners.add(listener);
     }
 
     public HorizontalAlignmentConstant getHorizontalAlignment() {
-	return horzAlign;
+        return horzAlign;
     }
 
     public String getText() {
-	return DOM.getInnerText(textLabel);
+        return DOM.getInnerText(textLabel);
     }
 
     public boolean getWordWrap() {
-	return !DOM.getStyleAttribute(textLabel, "whiteSpace").equals("nowrap");
+        return !DOM.getStyleAttribute(textLabel, "whiteSpace").equals("nowrap");
     }
 
     public void onBrowserEvent(final Event event) {
-	switch (DOM.eventGetType(event)) {
-	case Event.ONCLICK:
-	    if (clickListeners != null) {
-		clickListeners.fireClick(this);
-	    }
-	    break;
+        switch (DOM.eventGetType(event)) {
+        case Event.ONCLICK:
+            if (clickListeners != null) {
+                clickListeners.fireClick(this);
+            }
+            break;
 
-	case Event.ONMOUSEDOWN:
-	case Event.ONMOUSEUP:
-	case Event.ONMOUSEMOVE:
-	case Event.ONMOUSEOVER:
-	case Event.ONMOUSEOUT:
-	    if (mouseListeners != null) {
-		mouseListeners.fireMouseEvent(this, event);
-	    }
-	    break;
+        case Event.ONMOUSEDOWN:
+        case Event.ONMOUSEUP:
+        case Event.ONMOUSEMOVE:
+        case Event.ONMOUSEOVER:
+        case Event.ONMOUSEOUT:
+            if (mouseListeners != null) {
+                mouseListeners.fireMouseEvent(this, event);
+            }
+            break;
 
-	case Event.ONMOUSEWHEEL:
-	    if (mouseWheelListeners != null) {
-		mouseWheelListeners.fireMouseWheelEvent(this, event);
-	    }
-	    break;
-	}
+        case Event.ONMOUSEWHEEL:
+            if (mouseWheelListeners != null) {
+                mouseWheelListeners.fireMouseWheelEvent(this, event);
+            }
+            break;
+        }
     }
 
     public void removeClickListener(final ClickListener listener) {
-	if (clickListeners != null) {
-	    clickListeners.remove(listener);
-	}
+        if (clickListeners != null) {
+            clickListeners.remove(listener);
+        }
     }
 
     public void removeMouseListener(final MouseListener listener) {
-	if (mouseListeners != null) {
-	    mouseListeners.remove(listener);
-	}
+        if (mouseListeners != null) {
+            mouseListeners.remove(listener);
+        }
     }
 
     public void removeMouseWheelListener(final MouseWheelListener listener) {
-	if (mouseWheelListeners != null) {
-	    mouseWheelListeners.remove(listener);
-	}
+        if (mouseWheelListeners != null) {
+            mouseWheelListeners.remove(listener);
+        }
     }
 
     public void setHorizontalAlignment(final HorizontalAlignmentConstant align) {
-	horzAlign = align;
-	DOM.setStyleAttribute(textLabel, "textAlign", align.getTextAlignString());
+        horzAlign = align;
+        DOM.setStyleAttribute(textLabel, "textAlign", align.getTextAlignString());
     }
 
     public void setText(final String text) {
-	DOM.setInnerText(textLabel, text);
+        DOM.setInnerText(textLabel, text);
     }
 
     public void setWordWrap(final boolean wrap) {
-	DOM.setStyleAttribute(textLabel, "whiteSpace", wrap ? "normal" : "nowrap");
+        DOM.setStyleAttribute(textLabel, "whiteSpace", wrap ? "normal" : "nowrap");
     }
 
     public void setColor(final String color) {
-	DOM.setStyleAttribute(textLabel, "color", color);
+        DOM.setStyleAttribute(textLabel, "color", color);
+    }
+
+    public void setTitle(final String title) {
+        // problem with size of Quicktips in icons...
+        // KuneUiUtils.setQuickTip(icon, title);
+        KuneUiUtils.setQuickTip(textLabel, title);
     }
 }

@@ -28,7 +28,7 @@ import org.ourproject.kune.docs.client.actions.ContentRemoveAuthorAction;
 import org.ourproject.kune.docs.client.actions.ContentSetLanguageAction;
 import org.ourproject.kune.docs.client.actions.ContentSetPublishedOnAction;
 import org.ourproject.kune.docs.client.actions.ContentSetTagsAction;
-import org.ourproject.kune.docs.client.actions.ContentSetTitleAction;
+import org.ourproject.kune.docs.client.actions.ContentRenameAction;
 import org.ourproject.kune.docs.client.actions.DocsEvents;
 import org.ourproject.kune.docs.client.actions.GoParentFolder;
 import org.ourproject.kune.docs.client.actions.SaveDocument;
@@ -47,7 +47,7 @@ public class DocsClientModule implements ClientModule {
         register.addAction(DocsEvents.SET_LANGUAGE, new ContentSetLanguageAction());
         register.addAction(DocsEvents.SET_PUBLISHED_ON, new ContentSetPublishedOnAction());
         register.addAction(DocsEvents.SET_TAGS, new ContentSetTagsAction());
-        register.addAction(DocsEvents.SET_TITLE, new ContentSetTitleAction());
+        register.addAction(DocsEvents.RENAME_CONTENT, new ContentRenameAction());
         register.addAction(DocsEvents.DEL_CONTENT, new ContentDelContentAction());
     }
 }

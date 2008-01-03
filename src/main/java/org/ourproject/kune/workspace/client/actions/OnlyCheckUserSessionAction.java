@@ -34,6 +34,6 @@ public class OnlyCheckUserSessionAction implements Action {
 
     private void onOnlyCheckUserSession(final Services services, final AsyncCallback callback) {
         UserServiceAsync server = UserService.App.getInstance();
-        server.onlyCheckSession(services.session.userHash, callback);
+        server.onlyCheckSession(services.session.getUserHash(), callback);
     }
 }

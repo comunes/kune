@@ -35,7 +35,7 @@ public class ContentSetTagsAction implements Action {
     private void onContentsetTags(final Services services, final String documentId, final String tags) {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
-        server.setTags(services.session.userHash, services.session.getCurrentState().getGroup().getShortName(),
+        server.setTags(services.session.getUserHash(), services.session.getCurrentState().getGroup().getShortName(),
                 documentId, tags, new AsyncCallbackSimple() {
                     public void onSuccess(final Object result) {
                         Site.hideProgress();

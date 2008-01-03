@@ -13,7 +13,8 @@ public abstract class ContentServiceIntegrationTest extends IntegrationTest {
     protected ContentService contentService;
 
     protected StateDTO getDefaultContent() throws SerializableException {
-        StateDTO content = contentService.getContent(session.getHash(), getDefSiteGroupName(), new StateToken());
+        StateToken stateToken = new StateToken(getDefSiteGroupName());
+        StateDTO content = contentService.getContent(session.getHash(), getDefSiteGroupName(), stateToken);
         return content;
     }
 

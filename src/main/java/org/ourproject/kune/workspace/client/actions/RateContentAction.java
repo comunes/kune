@@ -38,7 +38,7 @@ public class RateContentAction implements Action {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
         StateDTO currentState = services.session.getCurrentState();
-        server.rateContent(services.session.userHash, currentState.getGroup().getShortName(), currentState
+        server.rateContent(services.session.getUserHash(), currentState.getGroup().getShortName(), currentState
                 .getDocumentId(), value, new AsyncCallbackSimple() {
             public void onSuccess(final Object result) {
                 Site.hideProgress();

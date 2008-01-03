@@ -5,7 +5,7 @@ TODO-list for kune
 
 SHORT-TERM (URGENT):
 --------------------------------------------------------------------------------
-<vjrj> BUG: group.tool.folder no check folder owner is group (maybe others)
+<vjrj> Use http://extjs.com/docs/output/LoadMask.jss.html in Grids
 <vjrj> BUG: Duplicate Keys in group/user creation different exception [1]
 ---> vjrj
 <vjrj> Inject in interceptors (see AuthenticatedMethodInterceptor), also useful for translation of db fields

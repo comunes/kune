@@ -589,10 +589,6 @@
 .kune-AdminContextPanel .gwt-StackPanelItem-selected {
   background: transparent url(img/arrow-down-white.gif) no-repeat scroll 2%;
   background-color: #DEE3DB;
-  /* border-bottom: 2px solid #DEE3DB;
-  border-top: 1px solid #DEE3DB;
-  border-left: : 1px solid #DEE3DB;
-  border-right: : 1px solid #DEE3DB; */
 }
 
 .kune-AdminContextPanelLink {
@@ -604,17 +600,26 @@
 }
 
 .kune-AdminContextPanel-inner {
-  /* background-color: white; */
   padding: 10px;
   border-bottom: 2px solid #DEE3DB;
-  /* border-left: : 1px solid #DEE3DB;
-  border-right: : 1px solid #DEE3DB; */
 }
 
 .gwt-MenuBar-kune-ThemeMenu-offset {
   margin-left: -120px;
   margin-top: -120px;
 }
+
+.kune-EditableLabel {
+}
+
+.kune-EditableLabel .kune-EditableLabel-editable {
+}
+
+.kune-EditableLabel-high {
+  background-color: #FFFBC1;
+  cursor: pointer;
+}
+
 
 
 

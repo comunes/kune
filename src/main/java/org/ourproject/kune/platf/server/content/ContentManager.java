@@ -43,7 +43,7 @@ public interface ContentManager extends Manager<Content, Long> {
 
     public Double getRateAvg(Content content);
 
-    public void setTitle(User user, Long contentId, String newTitle) throws SerializableException;
+    public String renameContent(User user, Long contentId, String newName) throws SerializableException;
 
     public void setLanguage(User user, Long contentId, String languageCode) throws SerializableException;
 

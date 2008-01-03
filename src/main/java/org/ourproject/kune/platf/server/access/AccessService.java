@@ -32,7 +32,7 @@ public interface AccessService {
     Access getAccess(User user, StateToken token, Group defaultGroup, AccessType accessType)
             throws SerializableException;
 
-    Access getFolderAccess(Long folderId, User user, AccessType accessType) throws SerializableException;
+    Access getFolderAccess(Group group, Long folderId, User user, AccessType accessType) throws SerializableException;
 
     Content accessToContent(Long contentId, User user, AccessType accessType) throws SerializableException;
 

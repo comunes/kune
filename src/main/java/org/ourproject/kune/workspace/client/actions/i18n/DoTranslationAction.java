@@ -37,7 +37,7 @@ public class DoTranslationAction implements Action {
     private void onDoTranslationAction(final Services services, final String id, final String[] translation) {
         Site.showProgressSaving();
         final I18nServiceAsync server = I18nService.App.getInstance();
-        server.setTranslation(services.session.userHash, id, translation[1], new AsyncCallback() {
+        server.setTranslation(services.session.getUserHash(), id, translation[1], new AsyncCallback() {
             public void onFailure(final Throwable caught) {
                 Site.hideProgress();
                 Site.error(Kune.I18N.t("Server error saving translation"));

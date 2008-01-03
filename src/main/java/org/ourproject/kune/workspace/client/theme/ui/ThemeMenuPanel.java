@@ -39,7 +39,7 @@ public class ThemeMenuPanel extends MenuBar implements ThemeMenuView {
         themesMB.addStyleDependentName("kune-ThemeMenu-offset");
         this.addItem(Images.App.getInstance().themeChoose().getHTML(), true, themesMB);
         setStyleName("kune-ThemeMenuPanel");
-        setTitle(Kune.I18N.t("Select Workspace theme for this group"));
+        setTitle("Select Workspace theme for this group");
     }
 
     public void setThemes(final String[] themes) {

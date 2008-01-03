@@ -31,6 +31,7 @@ import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.manager.impl.DefaultManager;
 
+import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -69,5 +70,15 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
         // child.setParent(parent);
         persist(child);
         return child;
+    }
+
+    public String renameFolder(final Group group, final Container container, final String newName)
+            throws SerializableException {
+        if (container.isRoot()) {
+            throw new RuntimeException("Root folder cannot be renamed");
+        }
+        container.setName(newName);
+        persist(container);
+        return newName;
     }
 }

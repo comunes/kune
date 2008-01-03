@@ -36,7 +36,7 @@ import org.ourproject.kune.platf.client.search.SearchSite;
 import org.ourproject.kune.platf.client.search.SearchSitePresenter;
 import org.ourproject.kune.platf.client.search.SearchSiteView;
 import org.ourproject.kune.platf.client.search.ui.SearchSitePanel;
-import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.Session1;
 import org.ourproject.kune.sitebar.client.bar.SiteBar;
 import org.ourproject.kune.sitebar.client.bar.SiteBarListener;
 import org.ourproject.kune.sitebar.client.bar.SiteBarPanel;
@@ -55,9 +55,9 @@ public class SiteBarFactory {
     private static Login login;
     private static NewGroup newGroup;
     private static SearchSite search;
-    private static Session session;
+    private static Session1 session;
 
-    public static SiteBar createSiteBar(final SiteBarListener listener, final Session session) {
+    public static SiteBar createSiteBar(final SiteBarListener listener, final Session1 session) {
         SiteBarFactory.session = session;
         SiteBarPresenter siteBarPresenter = new SiteBarPresenter(listener, session);
         SiteBarPanel siteBarView = new SiteBarPanel(siteBarPresenter);

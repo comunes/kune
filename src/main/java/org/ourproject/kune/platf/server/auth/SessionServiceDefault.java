@@ -31,7 +31,7 @@ public class SessionServiceDefault implements SessionService {
         HttpSession session = getSession();
         if (session != null) {
             // During tests session == null
-            session.setMaxInactiveInterval(100);
+            session.setMaxInactiveInterval(300);
         }
     }
 

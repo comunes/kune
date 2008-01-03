@@ -7,16 +7,16 @@ import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
 import org.ourproject.kune.platf.client.errors.LastAdminInGroupException;
 import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
-import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.Session1;
 import org.ourproject.kune.sitebar.client.Site;
 
 import com.google.gwt.core.client.GWT;
 
 public class KuneErrorHandler {
     private static KuneErrorHandler instance;
-    private final Session session;
+    private final Session1 session;
 
-    public KuneErrorHandler(final Session session) {
+    public KuneErrorHandler(final Session1 session) {
         this.session = session;
         instance = this;
     }

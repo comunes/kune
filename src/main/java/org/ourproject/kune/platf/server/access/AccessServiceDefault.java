@@ -22,6 +22,7 @@ package org.ourproject.kune.platf.server.access;
 
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
+import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
@@ -67,9 +68,13 @@ public class AccessServiceDefault implements AccessService {
         return check(access, access.getContentRights(), accessType).getContent();
     }
 
-    public Access getFolderAccess(final Long folderId, final User user, final AccessType accessType)
+    public Access getFolderAccess(final Group group, final Long folderId, final User user, final AccessType accessType)
             throws SerializableException {
-        Access access = new Access(null, finder.getFolder(folderId));
+        Container folder = finder.getFolder(folderId);
+        if (!folder.getOwner().equals(group)) {
+            throw new AccessViolationException();
+        }
+        Access access = new Access(null, folder);
         addFolderRights(access, user);
         return check(access, access.getFolderRights(), accessType);
     }

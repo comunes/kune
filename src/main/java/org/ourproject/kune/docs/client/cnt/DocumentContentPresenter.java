@@ -111,6 +111,10 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
     public void detach() {
     }
 
+    public void onTranslate() {
+        // TODO Auto-generated method stub
+    }
+
     private void showContent() {
         if (content.hasDocument()) {
             reader.showDocument(content.getContent());

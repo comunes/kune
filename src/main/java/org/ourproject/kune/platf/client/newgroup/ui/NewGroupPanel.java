@@ -28,13 +28,13 @@ import org.ourproject.kune.platf.client.newgroup.NewGroupView;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.KuneStringUtils;
+import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.WizardDialog;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
 import org.ourproject.kune.sitebar.client.msg.SiteMessage;
 import org.ourproject.kune.sitebar.client.msg.SiteMessagePanel;
 import org.ourproject.kune.workspace.client.ui.form.WizardListener;
 
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -113,11 +113,9 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         newGroupInitialDataVP.add(newGroupInitialDataHP);
         newGroupInitialDataVP.add(newGroupInitialDataForm);
         chooseLicenseHP.add(img.step2().createImage());
-        HTML step2Label = new HTML(
-                Kune.I18N
-                        .t(
-                                "Select a license to share your group contents with other people. We recomend [%s] licenses for practical works.",
-                                KuneStringUtils.generateHtmlLink("http://en.wikipedia.org/wiki/Copyleft", "copyleft")));
+        HTML step2Label = new HTML(Kune.I18N.t("Select a license to share your group contents with other people. "
+                + "We recomend [%s] licenses for practical works.", KuneStringUtils.generateHtmlLink(
+                "http://en.wikipedia.org/wiki/Copyleft", "copyleft")));
         chooseLicenseHP.add(step2Label);
         Label licenseTypeLabel = new Label("Choose a license type:");
         chooseLicenseVP.add(chooseLicenseHP);
@@ -317,14 +315,23 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         form.end();
         form.render();
 
-        // FIXME: Find other way to show tips:
-        projectRadio.setTitle(Kune.I18N.t("A kind of group in which new members inclusion are moderated by admins."));
-        orgRadio.setTitle(Kune.I18N.t("Like a project, but organizations must have a legal entity."));
-        communityRadio.setTitle(Kune.I18N.t("A community is a group of persons open to new members."));
+        KuneUiUtils.setQuickTip(projectRadio, Kune.I18N
+                .t("A project is a kind of group in which new members inclusion "
+                        + "is moderated by the project administrators. "
+                        + "An administrator is the person who creates the project "
+                        + "and other people she/he choose in the future as administrator too."));
 
-        DOM.setElementProperty(orphanedProjectRadio.getElement(), "ext:qtip", Kune.I18N
-                .t("If you have an idea but you don't have capacity/possibilities to do it, "
-                        + "register it, and permit others to work on it"));
+        KuneUiUtils.setQuickTip(orgRadio, Kune.I18N.t("An organization is like a project, "
+                + "but organizations must be a legal entity."));
+
+        KuneUiUtils.setQuickTip(communityRadio, Kune.I18N.t("Communities are social group of persons "
+                + "with shared interests and they are open to new members "
+                + "(for instance the environmental community or the LGBT community). "
+                + "Normally they aren't a legal entity."));
+
+        KuneUiUtils.setQuickTip(orphanedProjectRadio, Kune.I18N.t("If you have an idea but you don't have "
+                + "capacity/possibilities/resources to work on it, "
+                + "just register a orphaned project, and permit others to work and develop it."));
 
         shortNameField.getEl().addListener("keypress", new EventCallback() {
             public void execute(final EventObject e) {

@@ -21,7 +21,7 @@
 package org.ourproject.kune.platf.client.app.ui;
 
 import org.ourproject.kune.platf.client.app.DesktopView;
-import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.Session1;
 import org.ourproject.kune.sitebar.client.SiteBarFactory;
 import org.ourproject.kune.sitebar.client.bar.SiteBar;
 import org.ourproject.kune.sitebar.client.bar.SiteBarListener;
@@ -34,10 +34,18 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.QuickTips;
+import com.gwtext.client.widgets.QuickTipsConfig;
 
 public class DesktopPanel extends AbsolutePanel implements DesktopView {
-    public DesktopPanel(final Workspace workspace, final SiteBarListener listener, final Session session) {
+    public DesktopPanel(final Workspace workspace, final SiteBarListener listener, final Session1 session) {
         QuickTips.init(); // extgwt tips
+        new QuickTipsConfig() {
+            {
+                setMinWidth(100);
+                setShowDelay(300);
+                setInterceptTitles(true);
+            }
+        };
         SiteBar siteBar = SiteBarFactory.createSiteBar(listener, session);
         SiteMessage siteMessage = SiteBarFactory.getSiteMessage();
         this.add((Widget) siteMessage.getView(), Window.getClientWidth() * 20 / 100 - 10, 2);

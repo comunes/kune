@@ -24,13 +24,11 @@ import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
-
-import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class AddRoomAction implements Action {
 
@@ -45,16 +43,12 @@ public class AddRoomAction implements Action {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
         String groupShortName = group.getShortName();
-        server.addRoom(services.session.userHash, groupShortName, container.getId(), groupShortName + "-" + name,
-                new AsyncCallback() {
-                    public void onFailure(final Throwable caught) {
-                        Site.hideProgress();
-                        Site.error(Kune.I18N.t("Error creating room"));
-                    }
-
+        server.addRoom(services.session.getUserHash(), groupShortName, container.getId(), groupShortName + "-" + name,
+                new AsyncCallbackSimple() {
                     public void onSuccess(final Object result) {
-                        StateDTO content = (StateDTO) result;
-                        services.stateManager.setState(content);
+                        Site.hideProgress();
+                        StateDTO state = (StateDTO) result;
+                        services.stateManager.setRetrievedState(state);
                     }
                 });
     }
