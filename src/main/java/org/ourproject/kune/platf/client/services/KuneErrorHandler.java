@@ -33,7 +33,7 @@ public class KuneErrorHandler {
             if (session.isLogged()) {
                 doSessionExpired();
             } else {
-                Site.important(Kune.I18N.t("Please sign in or register"));
+                Site.important(Kune.I18N.t("Please sign in or register to collaborate"));
             }
         } catch (final GroupNotFoundException e) {
             Site.error(Kune.I18N.t("Group not found"));

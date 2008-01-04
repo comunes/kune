@@ -150,7 +150,7 @@ public class SearchSitePanel implements SearchSiteView {
 
         layout.endUpdate();
 
-        final Button closeBtn = new Button(Kune.I18N.tWithNT("Close", "in button"));
+        final Button closeBtn = new Button(Kune.I18N.tWithNT("Close", "used in button"));
         closeBtn.addButtonListener(new ButtonListenerAdapter() {
             public void onClick(final Button button, final EventObject e) {
                 presenter.doClose();
@@ -222,7 +222,7 @@ public class SearchSitePanel implements SearchSiteView {
         });
         form.add(searchCombo);
         form.render();
-        Button searchBtn = new Button(Kune.I18N.tWithNT("Search", "in button"));
+        Button searchBtn = new Button(Kune.I18N.tWithNT("Search", "used in button"));
         searchBtn.addButtonListener(new ButtonListenerAdapter() {
             public void onClick(final Button button, final EventObject e) {
                 presenter.doSearch(getComboTextToSearch());

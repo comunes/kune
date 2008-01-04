@@ -38,9 +38,8 @@ public class FolderContextPresenter implements FolderContext {
         ContextItemsImages contextImages = ContextItemsImages.App.getInstance();
         contextItems.registerType(DocumentClientTool.TYPE_DOCUMENT, contextImages.pageWhite());
         contextItems.registerType(DocumentClientTool.TYPE_FOLDER, contextImages.folder());
-        contextItems.canCreate(DocumentClientTool.TYPE_DOCUMENT, Kune.I18N.t("Add new document"),
-                DocsEvents.ADD_DOCUMENT);
-        contextItems.canCreate(DocumentClientTool.TYPE_FOLDER, Kune.I18N.t("Add new folder"), DocsEvents.ADD_FOLDER);
+        contextItems.canCreate(DocumentClientTool.TYPE_DOCUMENT, Kune.I18N.t("New document"), DocsEvents.ADD_DOCUMENT);
+        contextItems.canCreate(DocumentClientTool.TYPE_FOLDER, Kune.I18N.t("New folder"), DocsEvents.ADD_FOLDER);
         contextItems.setParentTreeVisible(true);
     }
 

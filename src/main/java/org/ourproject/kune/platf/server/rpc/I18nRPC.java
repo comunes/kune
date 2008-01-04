@@ -76,7 +76,8 @@ public class I18nRPC implements RPC, I18nService {
 
     @Authenticated(mandatory = false)
     @Transactional(type = TransactionType.READ_WRITE)
-    public String getTranslation(final String userHash, final String language, final String text) {
+    public String getTranslation(final String userHash, final String language, final String text)
+            throws SerializableException {
         return i18nTranslationManager.getTranslation(language, text);
     }
 

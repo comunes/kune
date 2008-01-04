@@ -1,4 +1,7 @@
 2008-01-03 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* (drop database needed)
+
+2008-01-03 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* Folder rename methods
 	* Ext QuickTips use instead of html title.
 	* Several bugs with StateManager fixed. StateManager refactorized and Test

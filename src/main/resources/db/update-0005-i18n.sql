@@ -3,7 +3,7 @@ INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Incorrect nickname
 INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Requested. Waiting for admins decision','Requested. Waiting for admins decision','kune_core',1819);
 INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','This name in already in use, try with a different name.','This name in already in use, try with a different name.','kune_core',1819);
 INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Search existing users and groups and add as members','Search existing users and groups and add as members','kune_core',1819);
-INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Please sign in or register','Please sign in or register','kune_core',1819);
+INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Please sign in or register to collaborate','Please sign in or register to collaborate','kune_core',1819);
 INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Add [%s] as member?','Add [%s] as member?','kune_core',1819);
 INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Confirm addition of member','Confirm addition of member','kune_core',1819);
 INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Member added as collaborator','Member added as collaborator','kune_core',1819);
@@ -13,7 +13,7 @@ INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Apodo, correo o co
 INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Solicitado. Esperando la decisión de los/as administradoræs','Requested. Waiting for admins decision','kune_core',5889);
 INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Ese nombre está ya en uso, intentelo con otro diferente.','This name in already in use, try with a different name.','kune_core',5889);
 INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Buscar usuarios/as existentes y añadir como miembros/as','Search existing users and groups and add as members','kune_core',5889);
-INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Por favor, acceda o regístrese','Please sign in or register','kune_core',5889);
+INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Por favor, acceda o regístrese para colaborar','Please sign in or register to collaborate','kune_core',5889);
 INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','¿Añadir [%s] como miembro/a?','Add [%s] as member?','kune_core',5889);
 INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Confirmar la inclusión del miembro/a','Confirm addition of member','kune_core',5889);
 INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Miembro/a añadido como colaborador/a','Member added as collaborator','kune_core',5889);

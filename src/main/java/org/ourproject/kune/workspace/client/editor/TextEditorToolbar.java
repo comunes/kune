@@ -267,7 +267,7 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
             richText.addClickListener(listener);
         }
 
-        save = new CustomPushButton(Kune.I18N.tWithNT("Save", "in button"), new ClickListener() {
+        save = new CustomPushButton(Kune.I18N.tWithNT("Save", "used in button"), new ClickListener() {
             public void onClick(final Widget sender) {
                 if (save.isEnabled()) {
                     fireSave();
@@ -276,7 +276,7 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
         });
         save.addStyleName("kune-Button-Large-lSpace");
 
-        close = new CustomPushButton(Kune.I18N.tWithNT("Close", "in button"), new ClickListener() {
+        close = new CustomPushButton(Kune.I18N.tWithNT("Close", "used in button"), new ClickListener() {
             public void onClick(final Widget sender) {
                 if (close.isEnabled()) {
                     fireCancel();

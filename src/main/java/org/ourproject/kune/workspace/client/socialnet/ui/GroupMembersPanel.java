@@ -100,7 +100,7 @@ public class GroupMembersPanel extends StackedDropDownPanel implements GroupMemb
     }
 
     public void confirmAddCollab(final String groupShortName, final String groupLongName) {
-        String groupName = groupLongName + "(" + groupShortName + ")";
+        String groupName = groupLongName + " (" + groupShortName + ")";
         MessageBox.confirm(Kune.I18N.t("Confirm addition of member"), Kune.I18N.t("Add [%s] as member?", groupName),
                 new MessageBox.ConfirmCallback() {
                     public void execute(final String btnID) {

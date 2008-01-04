@@ -33,6 +33,7 @@ import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.ContentProvider;
 import org.ourproject.kune.platf.client.state.ContentProviderImpl;
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.SessionImpl;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.state.StateManagerDefault;
@@ -52,7 +53,7 @@ public class ApplicationBuilder {
 
     public void build(final String userHash) {
         HashMap tools = indexTools(platform.getTools());
-        final SessionImpl session = new SessionImpl(userHash);
+        final Session session = new SessionImpl(userHash);
         new KuneErrorHandler(session);
         final DefaultApplication application = new DefaultApplication(tools, session);
         Site.showProgressLoading();

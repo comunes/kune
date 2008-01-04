@@ -35,7 +35,7 @@ public interface I18nService extends RemoteService {
      */
     HashMap getLexicon(String language);
 
-    String getTranslation(String userHash, String language, String text);
+    String getTranslation(String userHash, String language, String text) throws SerializableException;
 
     void setTranslation(String userHash, String id, String translation) throws SerializableException;
 

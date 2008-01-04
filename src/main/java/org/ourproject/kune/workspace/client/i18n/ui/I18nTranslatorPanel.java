@@ -138,7 +138,7 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
 
         dialog.addButton(new Button(new ButtonConfig() {
             {
-                setText(Kune.I18N.tWithNT("Close", "in button"));
+                setText(Kune.I18N.tWithNT("Close", "used in button"));
                 setButtonListener(new ButtonListenerAdapter() {
                     public void onClick(final Button button, final EventObject e) {
                         presenter.onHide();
