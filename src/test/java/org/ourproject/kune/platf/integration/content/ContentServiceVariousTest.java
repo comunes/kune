@@ -110,6 +110,43 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
         StateDTO folderAgain = contentService.getContent(getHash(), groupShortName, newFolderToken);
 
         assertEquals(newTitle, folderAgain.getFolder().getName());
+
+        newTitle = "folder last name";
+
+        result = contentService.rename(getHash(), groupShortName, newFolderToken.getEncoded(), newTitle);
+
+        folderAgain = contentService.getContent(getHash(), groupShortName, newFolderToken);
+
+        assertEquals(newTitle, folderAgain.getFolder().getName());
+
+    }
+
+    @Test
+    public void tokenRename() throws SerializableException {
+        doLogin();
+        defaultContent = getDefaultContent();
+        ContainerDTO folder = defaultContent.getFolder();
+
+        String oldTitle = "some title";
+        String newTitle = "folder new name";
+        StateDTO newState = contentService.addFolder(session.getHash(), groupShortName, folder.getId(), oldTitle);
+
+        ContainerDTO newFolder = (ContainerDTO) newState.getFolder().getChilds().get(0);
+
+        assertEquals(oldTitle, newFolder.getName());
+
+        StateToken newFolderToken = new StateToken(groupShortName, defaultContent.getState().getTool(), newFolder
+                .getId().toString(), null);
+
+        newTitle = "folder last name";
+
+        String result = contentService.rename(getHash(), groupShortName, newFolderToken.getEncoded(), newTitle);
+
+        assertEquals(newTitle, result);
+
+        StateDTO folderAgain = contentService.getContent(getHash(), groupShortName, newFolderToken);
+
+        assertEquals(newTitle, folderAgain.getFolder().getName());
     }
 
     @Test(expected = AccessViolationException.class)

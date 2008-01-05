@@ -33,6 +33,7 @@ public class InitData {
     private String[] timezones;
     private UserInfo userInfo;
     private String chatHttpBase;
+    private String siteDomain;
     private String chatDomain;
     private String chatRoomHost;
     private String defaultWsTheme;
@@ -116,6 +117,14 @@ public class InitData {
 
     public String[] getTimezones() {
         return timezones;
+    }
+
+    public String getSiteDomain() {
+        return siteDomain;
+    }
+
+    public void setSiteDomain(final String siteDomain) {
+        this.siteDomain = siteDomain;
     }
 
 }

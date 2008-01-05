@@ -44,4 +44,10 @@ public class I18nTranslationJSONService {
         List<I18nTranslation> results = manager.getUntranslatedLexicon(language);
         return mapper.mapList(results, I18nTranslationDTO.class);
     }
+
+    @REST(params = { "language" })
+    public List<I18nTranslationDTO> searchtranslated(final String language) {
+        List<I18nTranslation> results = manager.getTranslatedLexicon(language);
+        return mapper.mapList(results, I18nTranslationDTO.class);
+    }
 }

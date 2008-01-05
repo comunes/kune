@@ -27,6 +27,7 @@ import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPresenter;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorView;
 
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.gwtext.client.core.Connection;
 import com.gwtext.client.core.EventObject;
@@ -46,6 +47,7 @@ import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.ButtonConfig;
 import com.gwtext.client.widgets.LayoutDialog;
 import com.gwtext.client.widgets.LayoutDialogConfig;
+import com.gwtext.client.widgets.LoadMaskConfig;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.form.ComboBox;
 import com.gwtext.client.widgets.form.TextField;
@@ -64,6 +66,7 @@ import com.gwtext.client.widgets.grid.event.GridCellListenerAdapter;
 import com.gwtext.client.widgets.layout.BorderLayout;
 import com.gwtext.client.widgets.layout.ContentPanel;
 import com.gwtext.client.widgets.layout.ContentPanelConfig;
+import com.gwtext.client.widgets.layout.LayoutRegion;
 import com.gwtext.client.widgets.layout.LayoutRegionConfig;
 
 public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslatorView {
@@ -71,17 +74,21 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
     private static final String NOTE_FOR_TRANSLATORS_IMAGE_HTML = Images.App.getInstance().noteForTranslators()
             .getHTML();
 
-    private final LayoutDialog dialog;
+    private LayoutDialog dialog;
     private final I18nTranslatorPresenter presenter;
-    private Store store;
     private LanguageSelectorPanel languageSelectorPanel;
+
+    private Store unTransStore;
+    private Store transStore;
 
     public I18nTranslatorPanel(final I18nTranslatorPresenter initPresenter) {
         this.presenter = initPresenter;
-        dialog = createDialog();
     }
 
     public void show() {
+        if (dialog == null) {
+            dialog = createDialog();
+        }
         // By default we use the user lang to help in translation
         I18nLanguageDTO lang = presenter.getLanguage();
         setLanguage(lang.getCode());
@@ -98,7 +105,12 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
 
     private void setLanguage(final String language) {
         Site.showProgressLoading();
-        store.load(new StoreLoadConfig() {
+        unTransStore.load(new StoreLoadConfig() {
+            {
+                setParams(new UrlParam[] { new UrlParam("language", language) });
+            }
+        });
+        transStore.load(new StoreLoadConfig() {
             {
                 setParams(new UrlParam[] { new UrlParam("language", language) });
             }
@@ -157,7 +169,7 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
             }
         });
 
-        ContentPanel centerPanel = new ContentPanel(Ext.generateId(), Kune.I18N.t("Untranslated"),
+        ContentPanel unTrasnCenterPanel = new ContentPanel(Ext.generateId(), Kune.I18N.t("Untranslated"),
                 new ContentPanelConfig() {
                     {
                         setAutoScroll(false);
@@ -166,7 +178,29 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
                     }
                 });
 
-        EditorGrid grid = createGridPanel();
+        ContentPanel trasnCenterPanel = new ContentPanel(Ext.generateId(), Kune.I18N.t("Translated"),
+                new ContentPanelConfig() {
+                    {
+                        setAutoScroll(false);
+                        setFitToContainer(true);
+                        setFitToFrame(true);
+                    }
+                });
+
+        ContentPanel recommendationPanel = new ContentPanel(Ext.generateId(), Kune.I18N.t("Recommendations"),
+                new ContentPanelConfig() {
+                    {
+                        setAutoScroll(true);
+                        setFitToContainer(true);
+                        setFitToFrame(true);
+                    }
+                });
+
+        HTML recommendations = createRecomendatios();
+
+        EditorGrid transGrid = createGridPanel(true);
+
+        EditorGrid unTransGrid = createGridPanel(false);
 
         HorizontalPanel hp = new HorizontalPanel();
         languageSelectorPanel = new LanguageSelectorPanel(null, presenter.getLanguages(), Kune.I18N
@@ -181,35 +215,50 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
         hp.addStyleName("kune-Margin-Large-trbl");
         northPanel.add(hp);
 
-        centerPanel.add(grid);
+        unTrasnCenterPanel.add(unTransGrid);
+        trasnCenterPanel.add(transGrid);
+        recommendationPanel.add(recommendations);
 
         layout.add(LayoutRegionConfig.NORTH, northPanel);
-        layout.add(LayoutRegionConfig.CENTER, centerPanel);
+        layout.add(LayoutRegionConfig.CENTER, unTrasnCenterPanel);
+        layout.add(LayoutRegionConfig.CENTER, trasnCenterPanel);
+        layout.add(LayoutRegionConfig.CENTER, recommendationPanel);
 
         layout.endUpdate();
+
+        LayoutRegion centerRegion = layout.getRegion(LayoutRegionConfig.CENTER);
+        String panelId = unTrasnCenterPanel.getId();
+        centerRegion.showPanel(panelId);
 
         return dialog;
     }
 
-    private EditorGrid createGridPanel() {
-
-        HttpProxy proxy = new HttpProxy("/kune/json/I18nTranslationJSONService/search", Connection.POST);
-
-        JsonReader reader = new JsonReader(new JsonReaderConfig() {
-            {
-                setId("id");
-            }
-        }, new RecordDef(new FieldDef[] { new StringFieldDef("trKey"), new StringFieldDef("text"),
-                new StringFieldDef("id") }));
-
-        store = new Store(proxy, reader);
+    private EditorGrid createGridPanel(final boolean translated) {
+        if (translated) {
+            JsonReader reader = new JsonReader(new JsonReaderConfig() {
+                {
+                    setId("id");
+                }
+            }, new RecordDef(new FieldDef[] { new StringFieldDef("trKey"), new StringFieldDef("text"),
+                    new StringFieldDef("id") }));
+            HttpProxy proxy = new HttpProxy("/kune/json/I18nTranslationJSONService/searchtranslated", Connection.POST);
+            transStore = new Store(proxy, reader);
+        } else {
+            JsonReader reader = new JsonReader(new JsonReaderConfig() {
+                {
+                    setId("id");
+                }
+            }, new RecordDef(new FieldDef[] { new StringFieldDef("trKey"), new StringFieldDef("text"),
+                    new StringFieldDef("id") }));
+            HttpProxy proxy = new HttpProxy("/kune/json/I18nTranslationJSONService/search", Connection.POST);
+            unTransStore = new Store(proxy, reader);
+        }
 
         ColumnModel columnModel = new ColumnModel(new ColumnConfig[] { new ColumnConfig() {
             {
-                setHeader(Kune.I18N.t("Text to traslate"));
+                setHeader(Kune.I18N.t("Text to translate"));
                 setDataIndex("trKey");
                 setWidth(335);
-                // setCss("kune-I18nTranslatorCell");
                 setTooltip(Kune.I18N.t("Click to sort"));
                 setRenderer(renderNT);
             }
@@ -218,8 +267,6 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
                 setHeader(Kune.I18N.t("Translation (click to edit)"));
                 setDataIndex("text");
                 setWidth(335);
-                // setCss("kune-I18nTranslatorCell");
-                setTooltip(Kune.I18N.t("Click to sort"));
                 setEditor(new GridEditor(new TextField(new TextFieldConfig() {
                     {
                         setAllowBlank(true);
@@ -230,25 +277,19 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
 
         columnModel.setDefaultSortable(true);
 
-        EditorGrid grid = new EditorGrid("grid-translation", "695px", "180px", store, columnModel,
-                new EditorGridConfig() {
+        Store store = translated ? transStore : unTransStore;
+
+        EditorGrid grid = new EditorGrid((translated ? "grid-translated" : "grid-untranslated"), "695px", "180px",
+                store, columnModel, new EditorGridConfig() {
                     {
                         setClicksToEdit(1);
-                        // setAutoExpandColumn(1);
-                        // setAutoWidth(true);
                         setEnableRowHeightSync(true);
+                        setLoadMask(true);
+                        setLoadMask(new LoadMaskConfig(Kune.I18N.t("Loading")));
                     }
                 });
 
         grid.addEditorGridListener(new EditorGridListenerAdapter() {
-
-            // public boolean doValidateEdit(Grid grid, Record record, String
-            // field, Object value, Object originalValue,
-
-            // public boolean doBeforeEdit(final Grid grid, final Record record,
-            // final String field, final Object value,
-            // final int rowIndex, final int colIndex) {
-
             public void onAfterEdit(final Grid grid, final Record record, final String field, final Object newValue,
                     final Object oldValue, final int rowIndex, final int colIndex) {
                 String id = record.getAsString("id");
@@ -260,7 +301,7 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
 
         grid.addGridCellListener(new GridCellListenerAdapter() {
             public void onCellDblClick(final Grid grid, final int rowIndex, final int colIndex, final EventObject e) {
-                Record record = store.getRecordAt(rowIndex);
+                Record record = unTransStore.getRecordAt(rowIndex);
                 String id = record.getAsString("id");
                 String trKey = record.getAsString("trKey");
                 String text = record.getAsString("text");
@@ -274,8 +315,21 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
 
         grid.render();
 
-        return grid;
+        // TODO: pagging
+        // We need hibernate with start and limit
 
+        // ExtElement gridFoot = grid.getView().getFooterPanel(true);
+        // PagingToolbar pagging = new PagingToolbar(gridFoot, store, new
+        // PagingToolbarConfig() {
+        // {
+        // setPageSize(25);
+        // setDisplayInfo(true);
+        // setDisplayMsg("Displaying results {0} - {1} of {2}");
+        // setDisplayMsg("No results to display");
+        // }
+        // });
+
+        return grid;
     }
 
     private String removeNT(final String string) {
@@ -307,4 +361,147 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
             return Format.format(renderer, splitted);
         }
     };
+
+    private HTML createRecomendatios() {
+        HTML recommendations = new HTML(
+                "<h1><a name=\"common_translation_errors\" id=\"common_translation_errors\">Common Translation Errors</a></h1>\n"
+                        + "<div class=\"level1\">\n"
+                        + "\n"
+                        + "<p>\n"
+                        + " Translators - even professional translators - usually make these error when translating computer software.\n"
+                        + "</p>\n"
+                        + "\n"
+                        + "</div>\n"
+                        + "\n"
+                        + "<h2><a name=\"overview_of_common_errors\" id=\"overview_of_common_errors\">Overview of common errors</a></h2>\n"
+                        + "<div class=\"level2\">\n"
+                        + "\n"
+                        + "</div>\n"
+                        + "\n"
+                        + "<h3><a name=\"capitalisation\" id=\"capitalisation\">Capitalisation</a></h3>\n"
+                        + "<div class=\"level3\">\n"
+                        + "\n"
+                        + "<p>\n"
+                        + " <strong>Wrong</strong>: no capitalisation in translation<br/>\n"
+                        + "\n"
+                        + " <strong>Correct</strong>: translation follows translation language capitalisation convention\n"
+                        + "</p>\n"
+                        + "\n"
+                        + "</div>\n"
+                        + "\n"
+                        + "<h3><a name=\"double_words\" id=\"double_words\">Double words</a></h3>\n"
+                        + "<div class=\"level3\">\n"
+                        + "\n"
+                        + "<p>\n"
+                        + " <em>Translator could not decide which word was more appropriate</em>\n"
+                        + "</p>\n"
+                        + "\n"
+                        + "<p>\n"
+                        + "<strong>Wrong</strong>: two translated words for one original word<br/>\n"
+                        + " <strong>Correct</strong>: choose one word if you have two options\n"
+                        + "</p>\n"
+                        + "\n"
+                        + "</div>\n"
+                        + "\n"
+                        + "<h3><a name=\"translated_things_that_should_stay_in_english\" id=\"translated_things_that_should_stay_in_english\">Translated things that should stay in English</a></h3>\n"
+                        + "<div class=\"level3\">\n"
+                        + "\n"
+                        + "<p>\n"
+                        + "  <strong>Wrong</strong>: translating program function name like get_file_attributes()<br/>\n"
+                        + "\n"
+                        + " <strong>Correct</strong>: leave program syntax or function names untranslated\n"
+                        + "</p>\n"
+                        + "\n"
+                        + "</div>\n"
+                        + "\n"
+                        + "<h3><a name=\"variables\" id=\"variables\">Variables</a></h3>\n"
+                        + "<div class=\"level3\">\n"
+                        + "\n"
+                        + "<p>\n"
+                        + " <strong>Wrong</strong>: variables left out of translation<br/>\n"
+                        + " <strong>Correct</strong>: variable in translation in the correct order for the language\n"
+                        + "\n"
+                        + "</p>\n"
+                        + "\n"
+                        + "<p>\n"
+                        + "<strong>Wrong</strong>: environment variable names (eg. EDITOR) and possible fixed values (eg. COLOR, TRANSPARENT) translated<br/>\n"
+                        + " <strong>Correct</strong>: left in English and perhaps surrounded by single quotes to indicate that they are not in the target language on purpose.\n"
+                        + "</p>\n"
+                        + "\n"
+                        + "</div>\n"
+                        + "\n"
+                        + "<h3><a name=\"punctuation\" id=\"punctuation\">Punctuation</a></h3>\n"
+                        + "<div class=\"level3\">\n"
+                        + "\n"
+                        + "<p>\n"
+                        + " <strong>Wrong</strong>: leaving out end punctuation and whitespace (eg. <code>“File: ”</code>)<br/>\n"
+                        + " <strong>Correct</strong>: copying end punctuation and whitespace almost exactly as the original into the translation.\n"
+                        + "</p>\n"
+                        + "\n"
+                        + "<p>\n"
+                        + "<strong>Wrong</strong>: adding missing fullstops to translated sentence<br/>\n"
+                        + " <strong>Correct</strong>: if full sentences do not contain a fullstop in the original do not add one to the translation.\n"
+                        + "\n"
+                        + "</p>\n"
+                        + "\n"
+                        + "<p>\n"
+                        + "<strong>Wrong</strong>: adding exclamation marks (!) to the translation when they occur in the original<br/>\n"
+                        + " <strong>Correct</strong>: use exclamation marks to correspond with the tone of the application and the convention of the translated language.  Ie you may leave them out of the translation.\n"
+                        + "</p>\n"
+                        + "\n"
+                        + "<p>\n"
+                        + "<strong>Wrong</strong>: leaving out ellipses (&hellip;)<br/>\n"
+                        + " <strong>Correct</strong>: always add ellipses to the translation\n"
+                        + "\n"
+                        + "</p>\n"
+                        + "\n"
+                        + "</div>\n"
+                        + "\n"
+                        + "<h3><a name=\"accelerators\" id=\"accelerators\">Accelerators</a></h3>\n"
+                        + "<div class=\"level3\">\n"
+                        + "\n"
+                        + "<p>\n"
+                        + " <strong>Wrong</strong>: leaving out accelerators (either _&amp;~ depending on the application)<br/>\n"
+                        + " <strong>Correct</strong>: if the original has an accelerator so should the translation\n"
+                        + "\n"
+                        + "</p>\n"
+                        + "\n"
+                        + "<p>\n"
+                        + "<strong>Wrong</strong>: placing the accelerator exactly in the same position as the original<br/>\n"
+                        + " <strong>Correct</strong>: place the accelerator on the word / syllable / part of the sentence that is accented in its pronunciation or is the focus of the sentence.\n"
+                        + "</p>\n"
+                        + "\n"
+                        + "<p>\n"
+                        + "<strong>Wrong</strong>: using the same letter for accelerator keys<br/>\n"
+                        + " <strong>Correct</strong>: try to vary the letters chosen as the accelerator key (in some languages almost all words start with U or I.  In this case make an effort to choose other letters)\n"
+                        + "\n"
+                        + "</p>\n"
+                        + "\n"
+                        + "</div>\n"
+                        + "\n"
+                        + "<h3><a name=\"html\" id=\"html\">HTML</a></h3>\n"
+                        + "<div class=\"level3\">\n"
+                        + "\n"
+                        + "<p>\n"
+                        + " <strong>Wrong</strong>: <acronym title=\"HyperText Markup Language\">HTML</acronym> tags are translated<br/>\n"
+                        + " <strong>Correct</strong>: <acronym title=\"HyperText Markup Language\">HTML</acronym> tags are not translated\n"
+                        + "\n"
+                        + "</p>\n"
+                        + "\n"
+                        + "<p>\n"
+                        + "<strong>Wrong</strong>: translatable <acronym title=\"HyperText Markup Language\">HTML</acronym> entities are not translated<br/>\n"
+                        + " <strong>Correct</strong>: translate items that will be viewable.  Eg <acronym title=\"HyperText Markup Language\">HTML</acronym> img tag&#039;s alt entity &lt;img alt=“translate me”&gt;, a tag&#039;s title entity &lt;a href=blah title=“translate me”&gt;.\n"
+                        + "\n"
+                        + "</p>\n"
+                        + "<p>\n"
+                        + "This recommendations are from "
+                        + KuneStringUtils.generateHtmlLink("http://translate.sourceforge.net",
+                                "Translate Toolkit & Pootle Project")
+                        + " under "
+                        + KuneStringUtils.generateHtmlLink("http://creativecommons.org/licenses/by-sa/3.0/",
+                                "cc-by-sa license") + "." + "</p>\n" + "\n" + "</div>\n" + "");
+        recommendations.setStyleName("kune-i18nTranslator-recommend");
+        return recommendations;
+    }
+
 }

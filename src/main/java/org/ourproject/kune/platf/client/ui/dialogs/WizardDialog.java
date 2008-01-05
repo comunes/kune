@@ -194,4 +194,16 @@ public class WizardDialog {
         finishButton.setText(text);
     }
 
+    public void mask(final String message) {
+        dialog.getEl().mask(message, "x-mask-loading");
+    }
+
+    public void maskProcessing() {
+        mask(Kune.I18N.t("Processing"));
+    }
+
+    public void unMask() {
+        dialog.getEl().unmask();
+    }
+
 }

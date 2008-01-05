@@ -117,7 +117,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
                 + "We recomend [%s] licenses for practical works.", KuneStringUtils.generateHtmlLink(
                 "http://en.wikipedia.org/wiki/Copyleft", "copyleft")));
         chooseLicenseHP.add(step2Label);
-        Label licenseTypeLabel = new Label("Choose a license type:");
+        Label licenseTypeLabel = new Label(Kune.I18N.t("Choose a license type:"));
         chooseLicenseVP.add(chooseLicenseHP);
         chooseLicenseVP.add(licenseTypeLabel);
 
@@ -143,6 +143,18 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         newGroupInitialDataVP.setHeight("10"); // Ext set this to 100% ...
         chooseLicenseVP.setHeight("10"); // (same here)
         super.setFinishText(Kune.I18N.t("Register"));
+    }
+
+    public void mask(final String message) {
+        super.mask(message);
+    }
+
+    public void maskProcessing() {
+        super.maskProcessing();
+    }
+
+    public void unMask() {
+        super.unMask();
     }
 
     public boolean isFormValid() {
@@ -356,6 +368,5 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
 
     private void createChooseLicensePanel() {
         licenseChoosePanel = SiteBarFactory.createLicenseChoose();
-
     }
 }

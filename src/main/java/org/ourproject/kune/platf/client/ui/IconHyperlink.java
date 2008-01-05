@@ -19,8 +19,6 @@
 
 package org.ourproject.kune.platf.client.ui;
 
-import to.tipit.gwtlib.FireLog;
-
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
@@ -28,13 +26,17 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.ClickListenerCollection;
+import com.google.gwt.user.client.ui.MouseListener;
+import com.google.gwt.user.client.ui.MouseListenerCollection;
 import com.google.gwt.user.client.ui.SourcesClickEvents;
 import com.google.gwt.user.client.ui.Widget;
 
-public class IconHyperlink extends Widget implements SourcesClickEvents {
+public class IconHyperlink extends Widget implements SourcesClickEvents, AbstractLabel {
 
     private Element anchorElem;
     private ClickListenerCollection clickListeners;
+    private ClickListenerCollection doubleClickListeners;
+    private MouseListenerCollection mouseListeners;
     private String targetHistoryToken;
     private final Element link;
     private final Element icon;
@@ -42,7 +44,7 @@ public class IconHyperlink extends Widget implements SourcesClickEvents {
     public IconHyperlink(final AbstractImagePrototype image) {
         setElement(DOM.createDiv());
         DOM.appendChild(getElement(), anchorElem = DOM.createAnchor());
-        sinkEvents(Event.ONCLICK | Event.ONDBLCLICK);
+        sinkEvents(Event.ONCLICK | Event.ONDBLCLICK | Event.MOUSEEVENTS);
         setStyleName("kune-IconHyperlink");
         icon = image.createImage().getElement();
         link = DOM.createSpan();
@@ -74,25 +76,52 @@ public class IconHyperlink extends Widget implements SourcesClickEvents {
         clickListeners.add(listener);
     }
 
+    public void addDoubleClickListener(final ClickListener listener) {
+        if (doubleClickListeners == null) {
+            doubleClickListeners = new ClickListenerCollection();
+        }
+        doubleClickListeners.add(listener);
+    }
+
     public String getTargetHistoryToken() {
         return targetHistoryToken;
     }
 
     public void onBrowserEvent(final Event event) {
-        if (DOM.eventGetType(event) == Event.ONCLICK) {
+        switch (DOM.eventGetType(event)) {
+        case Event.ONDBLCLICK:
+            if (doubleClickListeners != null) {
+                doubleClickListeners.fireClick(this);
+            }
+            break;
+        case Event.ONCLICK:
             if (clickListeners != null) {
                 clickListeners.fireClick(this);
             }
             History.newItem(targetHistoryToken);
             DOM.eventPreventDefault(event);
-        } else if (DOM.eventGetType(event) == Event.ONDBLCLICK) {
-            FireLog.debug("Double click");
+            break;
+        case Event.ONMOUSEDOWN:
+        case Event.ONMOUSEUP:
+        case Event.ONMOUSEMOVE:
+        case Event.ONMOUSEOVER:
+        case Event.ONMOUSEOUT:
+            if (mouseListeners != null) {
+                mouseListeners.fireMouseEvent(this, event);
+            }
+            break;
         }
     }
 
     public void removeClickListener(final ClickListener listener) {
         if (clickListeners != null) {
             clickListeners.remove(listener);
+        }
+    }
+
+    public void removeDoubleClickListener(final ClickListener listener) {
+        if (doubleClickListeners != null) {
+            doubleClickListeners.remove(listener);
         }
     }
 
@@ -116,6 +145,31 @@ public class IconHyperlink extends Widget implements SourcesClickEvents {
     public void setTitle(final String title) {
         // problem with size of Quicktips in icons...
         // KuneUiUtils.setQuickTip(icon, title);
-        KuneUiUtils.setQuickTip(link, title);
+        KuneUiUtils.setQuickTip(anchorElem, title);
+    }
+
+    public void addMouseListener(final MouseListener listener) {
+        if (mouseListeners == null) {
+            mouseListeners = new MouseListenerCollection();
+        }
+        mouseListeners.add(listener);
+    }
+
+    public String getText() {
+        return DOM.getInnerText(link);
+    }
+
+    public void removeMouseListener(final MouseListener listener) {
+        if (mouseListeners != null) {
+            mouseListeners.remove(listener);
+        }
+    }
+
+    public void setColor(final String color) {
+        DOM.setStyleAttribute(link, "color", color);
+    }
+
+    public void setText(final String text) {
+        setLabelText(text);
     }
 }

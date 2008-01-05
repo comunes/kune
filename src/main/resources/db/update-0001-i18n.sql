@@ -43,7 +43,7 @@ INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Timezone','Timez
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Enter your timezone','Enter your timezone','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Close','Close [%NT used in button]','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Untranslated','Untranslated','kune_core',1819);
-INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Text to traslate','Text to traslate','kune_core',1819);
+INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Text to translate','Text to translate','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Click to sort','Click to sort','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Translation (click to edit)','Translation (click to edit)','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Change language','Change language','kune_core',1819);
@@ -119,7 +119,7 @@ INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Zona horaria','T
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Introduzca su zona horaria','Enter your timezone','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Cerrar','Close [%NT used in button]','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','No traducido','Untranslated','kune_core',5889);
-INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Texto a traducir','Text to traslate','kune_core',5889);
+INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Texto a traducir','Text to translate','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Haga click para ordenar','Click to sort','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Traducción (clic para editar)','Translation (click to edit)','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Cambiar idioma','Change language','kune_core',5889);

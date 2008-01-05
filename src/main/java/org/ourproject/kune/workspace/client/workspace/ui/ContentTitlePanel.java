@@ -20,8 +20,8 @@
 
 package org.ourproject.kune.workspace.client.workspace.ui;
 
+import org.ourproject.kune.platf.client.ui.EditableIconLabel;
 import org.ourproject.kune.platf.client.ui.EditableClickListener;
-import org.ourproject.kune.platf.client.ui.EditableLabel;
 import org.ourproject.kune.workspace.client.workspace.ContentTitlePresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentTitleView;
 
@@ -31,11 +31,11 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class ContentTitlePanel extends HorizontalPanel implements ContentTitleView {
-    private final EditableLabel titleLabel;
+    private final EditableIconLabel titleLabel;
     private final Label dateLabel;
 
     public ContentTitlePanel(final ContentTitlePresenter presenter) {
-        titleLabel = new EditableLabel(new EditableClickListener() {
+        titleLabel = new EditableIconLabel(new EditableClickListener() {
             public void onEdited(final String text) {
                 presenter.onTitleRename(text);
             }

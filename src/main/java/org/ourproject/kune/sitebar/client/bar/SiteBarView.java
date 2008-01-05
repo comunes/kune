@@ -72,4 +72,14 @@ public interface SiteBarView extends View {
 
     void showAlertMessage(String message);
 
+    void mask();
+
+    void mask(String message);
+
+    void unMask();
+
+    void setContentGotoPublicUrl(String publicUrl);
+
+    void setContentPublic(boolean visible);
+
 }

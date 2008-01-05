@@ -27,7 +27,6 @@ import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
 import org.ourproject.kune.platf.client.services.Kune;
-import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.msg.MessagePresenter;
 import org.ourproject.kune.sitebar.client.msg.SiteMessage;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
@@ -48,6 +47,7 @@ public class NewGroupPresenter implements NewGroup, MessagePresenter {
     }
 
     public void onFinish() {
+        view.maskProcessing();
         String shortName = view.getShortName();
         String longName = view.getLongName();
         String publicDesc = view.getPublicDesc();
@@ -57,7 +57,7 @@ public class NewGroupPresenter implements NewGroup, MessagePresenter {
 
         AsyncCallback callback = new AsyncCallback() {
             public void onFailure(final Throwable caught) {
-                Site.hideProgress();
+                view.unMask();
                 try {
                     throw caught;
                 } catch (final GroupNameInUseException e) {
@@ -76,6 +76,7 @@ public class NewGroupPresenter implements NewGroup, MessagePresenter {
                 listener.onNewGroupCreated((StateToken) token);
                 view.hide();
                 reset();
+                view.unMask();
             }
         };
 

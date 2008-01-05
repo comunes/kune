@@ -81,6 +81,11 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
         return finder.getUnstranslatedLexicon(language);
     }
 
+    public List<I18nTranslation> getTranslatedLexicon(final String languageCode) {
+        I18nLanguage language = languageManager.findByCode(languageCode);
+        return finder.getTranslatedLexicon(language);
+    }
+
     public String getTranslation(final String language, final String text) {
         HashMap<String, String> lexicon = getLexicon(language);
         String escapedText = KuneStringUtils.escapeHtmlLight(text);

@@ -29,13 +29,13 @@
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-user</artifactId>
-      <version>1.4.60</version>
+      <version>1.4.61</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-servlet</artifactId>
-      <version>1.4.60</version>
+      <version>1.4.61</version>
     </dependency>
     <dependency>
       <groupId>com.gwtext</groupId>
@@ -229,7 +229,7 @@
       <dependency>
       <groupId>com.google</groupId>
       <artifactId>gwt-dev</artifactId>
-      <version>1.4.60</version>
+      <version>1.4.61</version>
       <scope>test</scope>
       </dependency>
     -->

@@ -21,8 +21,8 @@
 package org.ourproject.kune.workspace.client.ui.ctx.items;
 
 import org.ourproject.kune.platf.client.dto.ContainerSimpleDTO;
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.services.Images;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.HorizontalLine;
 import org.ourproject.kune.platf.client.ui.IconLabel;
 
@@ -47,7 +47,7 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
         topBar = new ContextTopBar(presenter);
         addTopBar(topBar);
 
-        items = new ItemsPanel();
+        items = new ItemsPanel(presenter);
         add(items, DockPanel.NORTH);
         HTML expand = new HTML("<b></b>");
         add(expand, DockPanel.CENTER);
@@ -70,8 +70,8 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
         add(topBar, DockPanel.NORTH);
     }
 
-    public void addItem(final String name, final String type, final String event) {
-        items.add(name, type, event);
+    public void addItem(final String name, final String type, final String event, final boolean editable) {
+        items.add(name, type, event, editable);
     }
 
     public void selectItem(final int index) {
@@ -118,6 +118,8 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
         String title;
         // Workaround: gwt-ext bug, I cannot use typeName directly
         workaroundTypeName = typeName;
+
+        // FIXME use constants!!!!
         if (typeName.equals("docs.doc")) {
             title = Kune.I18N.t("Add a document");
         } else if (typeName.equals("docs.folder")) {

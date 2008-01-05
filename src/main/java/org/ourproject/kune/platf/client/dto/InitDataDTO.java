@@ -43,6 +43,7 @@ public class InitDataDTO implements IsSerializable {
 
     UserInfoDTO userInfo;
     private String chatHttpBase;
+    private String siteDomain;
     private String chatDomain;
     private String chatRoomHost;
     private String defaultWsTheme;
@@ -130,5 +131,13 @@ public class InitDataDTO implements IsSerializable {
 
     public String[] getTimezones() {
         return timezones;
+    }
+
+    public String getSiteDomain() {
+        return siteDomain;
+    }
+
+    public void setSiteDomain(final String siteDomain) {
+        this.siteDomain = siteDomain;
     }
 }

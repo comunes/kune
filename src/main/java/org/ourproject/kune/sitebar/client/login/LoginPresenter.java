@@ -62,8 +62,7 @@ public class LoginPresenter implements Login, MessagePresenter {
 
     public void doLogin() {
         if (view.isSignInFormValid()) {
-            Site.showProgressProcessing();
-            view.setVisible(false);
+            view.maskProcessing();
 
             final String nickOrEmail = view.getNickOrEmail();
             final String passwd = view.getLoginPassword();
@@ -74,7 +73,7 @@ public class LoginPresenter implements Login, MessagePresenter {
 
             AsyncCallback callback = new AsyncCallback() {
                 public void onFailure(final Throwable caught) {
-                    view.setVisible(true);
+                    view.unMask();
                     Site.hideProgress();
                     try {
                         throw caught;
@@ -89,7 +88,7 @@ public class LoginPresenter implements Login, MessagePresenter {
 
                 public void onSuccess(final Object response) {
                     listener.userLoggedIn((UserInfoDTO) response);
-                    // Site.hideProgress();
+                    view.unMask();
                 }
             };
 
@@ -99,7 +98,7 @@ public class LoginPresenter implements Login, MessagePresenter {
 
     public void doRegister() {
         if (view.isRegisterFormValid()) {
-            Site.showProgressProcessing();
+            view.maskProcessing();
 
             I18nLanguageDTO language = new I18nLanguageDTO();
             language.setCode(view.getLanguage());
@@ -114,7 +113,7 @@ public class LoginPresenter implements Login, MessagePresenter {
                     .getEmail(), language, country, timezone);
             AsyncCallback callback = new AsyncCallback() {
                 public void onFailure(final Throwable caught) {
-                    Site.hideProgress();
+                    view.unMask();
                     try {
                         throw caught;
                     } catch (final EmailAddressInUseException e) {
@@ -131,9 +130,11 @@ public class LoginPresenter implements Login, MessagePresenter {
                 }
 
                 public void onSuccess(final Object response) {
-                    listener.userLoggedIn((UserInfoDTO) response);
-                    Site.hideProgress();
+                    UserInfoDTO userInfoDTO = (UserInfoDTO) response;
+                    listener.userLoggedIn(userInfoDTO);
+                    view.unMask();
                     view.showWelcolmeDialog();
+                    DefaultDispatcher.getInstance().fire(WorkspaceEvents.GOTO, userInfoDTO.getShortName(), null);
                 }
             };
 

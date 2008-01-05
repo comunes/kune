@@ -84,6 +84,7 @@ public class SiteRPC implements RPC, SiteService {
                 .getHash()));
         data.setChatHttpBase(chatProperties.getHttpBase());
         data.setChatDomain(chatProperties.getDomain());
+        data.setSiteDomain(kuneProperties.get(KuneProperties.SITE_DOMAIN));
         data.setChatRoomHost(chatProperties.getRoomHost());
         data.setWsThemes(this.kuneProperties.get(KuneProperties.WS_THEMES).split(","));
         data.setDefaultWsTheme(this.kuneProperties.get(KuneProperties.WS_THEMES_DEF));

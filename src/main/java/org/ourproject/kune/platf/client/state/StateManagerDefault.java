@@ -29,6 +29,7 @@ import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.sitebar.client.Site;
+import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 import org.ourproject.kune.workspace.client.workspace.ContentSubTitleComponent;
 import org.ourproject.kune.workspace.client.workspace.ContentTitleComponent;
@@ -77,6 +78,8 @@ public class StateManagerDefault implements StateManager {
             Site.doNewGroup(oldStateEncoded);
         } else if (historyToken.equals(Site.LOGIN_TOKEN)) {
             Site.doLogin(oldStateEncoded);
+        } else if (historyToken.equals(Site.TRANSLATE_TOKEN)) {
+            app.getDispatcher().fire(WorkspaceEvents.SHOW_TRANSLATOR, null, null);
         } else if (historyToken.equals(Site.FIXME_TOKEN)) {
             if (oldState == null) {
                 onHistoryChanged(new StateToken());
@@ -127,6 +130,8 @@ public class StateManagerDefault implements StateManager {
         workspace.showGroup(group, isAdmin);
         final String toolName = state.getToolName();
         workspace.setTool(toolName);
+
+        Site.sitebar.setState(state);
 
         final ClientTool clientTool = app.getTool(toolName);
         clientTool.setContent(state);

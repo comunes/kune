@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
+import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
 public class SearchSitePresenter implements SearchSite {
 
@@ -46,6 +48,7 @@ public class SearchSitePresenter implements SearchSite {
     }
 
     public void doClose() {
+        view.hide();
     }
 
     public void doSearchGroups() {
@@ -74,6 +77,9 @@ public class SearchSitePresenter implements SearchSite {
             objs[i++] = obj;
         }
         return objs;
+    }
 
+    public void doGoto(final String groupShortName) {
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.GOTO, groupShortName, null);
     }
 }

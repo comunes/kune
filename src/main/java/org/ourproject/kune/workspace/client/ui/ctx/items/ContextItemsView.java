@@ -28,7 +28,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 public interface ContextItemsView extends View {
     void clear();
 
-    void addItem(String name, String type, String event);
+    void addItem(String name, String type, String event, boolean editable);
 
     void selectItem(int index);
 

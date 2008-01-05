@@ -27,4 +27,6 @@ public interface SearchSiteView extends View {
 
     String getComboTextToSearch();
 
+    void hide();
+
 }

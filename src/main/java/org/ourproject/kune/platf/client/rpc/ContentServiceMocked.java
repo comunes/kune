@@ -104,4 +104,8 @@ public class ContentServiceMocked extends MockedService implements ContentServic
             final AsyncCallback asyncCallback) {
     }
 
+    public void rename(final String userHash, final String groupShortName, final String token, final String newName,
+            final AsyncCallback asyncCallback) {
+    }
+
 }

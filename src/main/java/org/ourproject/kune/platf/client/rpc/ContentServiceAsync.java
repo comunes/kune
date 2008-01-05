@@ -60,6 +60,8 @@ public interface ContentServiceAsync {
 
     void renameFolder(String hash, String groupShortName, Long folderId, String title, AsyncCallback asyncCallback);
 
+    void rename(String userHash, String groupShortName, String token, String newName, AsyncCallback asyncCallback);
+
     void delContent(String userHash, String groupShortName, String documentId, AsyncCallback asyncCallback);
 
 }

@@ -22,22 +22,33 @@ package org.ourproject.kune.workspace.client.ui.ctx.items;
 
 import java.util.HashMap;
 
-import org.ourproject.kune.platf.client.ui.IconHyperlink;
+import org.ourproject.kune.platf.client.ui.EditableClickListener;
+import org.ourproject.kune.platf.client.ui.EditableIconLabel;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 class ItemsPanel extends VerticalPanel {
     private final HashMap fileIcons;
+    private final ContextItemsPresenter presenter;
 
-    public ItemsPanel() {
+    public ItemsPanel(final ContextItemsPresenter presenter) {
+        this.presenter = presenter;
         addStyleName("kune-NavigationBar");
         addStyleName("Items");
         fileIcons = new HashMap();
     }
 
-    public void add(final String name, final String type, final String event) {
-        IconHyperlink item = new IconHyperlink((AbstractImagePrototype) fileIcons.get(type), name, event);
+    public void add(final String name, final String type, final String token, final boolean editable) {
+        // IconHyperlink item = new IconHyperlink((AbstractImagePrototype)
+        // fileIcons.get(type), name, event);
+        EditableIconLabel item = new EditableIconLabel((AbstractImagePrototype) fileIcons.get(type), name, token, true,
+                new EditableClickListener() {
+                    public void onEdited(String text) {
+                        presenter.onTitleRename(text, token);
+                    }
+                });
+        item.setEditable(editable);
         add(item);
     }
 

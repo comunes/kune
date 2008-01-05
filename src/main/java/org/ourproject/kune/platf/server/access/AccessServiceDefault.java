@@ -20,8 +20,11 @@
 
 package org.ourproject.kune.platf.server.access;
 
+import javax.persistence.NoResultException;
+
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
+import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
@@ -36,19 +39,23 @@ public class AccessServiceDefault implements AccessService {
 
     private final FinderService finder;
     private final AccessRightsService accessRightsService;
+    private final Group groupFinder;
 
     @Inject
-    public AccessServiceDefault(final FinderService finder) {
-        this(finder, new AccessRightsServiceDefault());
+    public AccessServiceDefault(final FinderService finder, final Group groupFinder) {
+        this(finder, new AccessRightsServiceDefault(), groupFinder);
     }
 
-    public AccessServiceDefault(final FinderService finder, final AccessRightsService accessRightsService) {
+    public AccessServiceDefault(final FinderService finder, final AccessRightsService accessRightsService,
+            final Group groupFinder) {
         this.finder = finder;
         this.accessRightsService = accessRightsService;
+        this.groupFinder = groupFinder;
     }
 
     public Access getAccess(final User user, final StateToken token, final Group defaultGroup,
             final AccessType accessType) throws SerializableException {
+        checkGroupExistence(token);
         Content descriptor = finder.getContent(token, defaultGroup);
         Access access = new Access(descriptor, descriptor.getFolder());
         addContentRights(access, user);
@@ -58,6 +65,17 @@ public class AccessServiceDefault implements AccessService {
             throw new AccessViolationException();
         }
         return access;
+    }
+
+    private void checkGroupExistence(final StateToken token) throws ContentNotFoundException {
+        if (token.hasGroup()) {
+            try {
+                String tokenGroup = token.getGroup();
+                groupFinder.findByShortName(tokenGroup);
+            } catch (NoResultException e) {
+                throw new ContentNotFoundException();
+            }
+        }
     }
 
     public Content accessToContent(final Long contentId, final User user, final AccessType accessType)

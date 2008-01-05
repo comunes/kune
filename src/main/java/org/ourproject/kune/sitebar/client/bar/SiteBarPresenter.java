@@ -22,6 +22,7 @@ package org.ourproject.kune.sitebar.client.bar;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
+import org.ourproject.kune.platf.client.dto.GroupListDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.SessionExpiredException;
@@ -35,6 +36,7 @@ import org.ourproject.kune.sitebar.client.login.LoginListener;
 import org.ourproject.kune.sitebar.client.rpc.UserService;
 import org.ourproject.kune.sitebar.client.rpc.UserServiceAsync;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -54,6 +56,18 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
     public void init(final SiteBarView view) {
         this.view = view;
         view.setLogoutLinkVisible(false);
+    }
+
+    public void setState(final StateDTO state) {
+        StateToken token = state.getState();
+        if (state.getAccessLists().getViewers().getMode().equals(GroupListDTO.EVERYONE)) {
+            String publicUrl = token.getPublicUrl();
+            view.setContentGotoPublicUrl(publicUrl);
+            view.setContentPublic(true);
+        } else {
+            view.setContentPublic(false);
+        }
+
     }
 
     public void doLogin(final String previousToken) {
@@ -195,6 +209,22 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
         listener.onChangeState(token);
     }
 
+    public void onHelpInTranslation() {
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.SHOW_TRANSLATOR, null, null);
+    }
+
+    public void mask() {
+        view.mask();
+    }
+
+    public void mask(final String message) {
+        view.mask(message);
+    }
+
+    public void unMask() {
+        view.unMask();
+    }
+
     protected void onSearchLostFocus(final String search) {
         if (search.length() == 0) {
             view.setDefaultTextSearch();
@@ -212,10 +242,6 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
             listener.onChangeState(new StateToken(this.previousToken));
             this.previousToken = null;
         }
-    }
-
-    public void onHelpInTranslation() {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.SHOW_TRANSLATOR, null, null);
     }
 
 }

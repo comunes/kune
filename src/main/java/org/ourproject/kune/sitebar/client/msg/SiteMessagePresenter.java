@@ -32,44 +32,46 @@ public class SiteMessagePresenter implements SiteMessage, MessagePresenter {
     }
 
     public void init(final SiteMessageView siteMessageView) {
-	this.view = siteMessageView;
-	this.lastMessageType = SiteMessage.INFO;
-	resetMessage();
+        this.view = siteMessageView;
+        this.lastMessageType = SiteMessage.INFO;
+        resetMessage();
     }
 
     public void resetMessage() {
-	this.message = "";
-	this.isVisible = false;
-	view.hide();
+        this.message = "";
+        this.isVisible = false;
+        view.hide();
     }
 
     public void setMessage(final String message, final int type) {
-	if (isVisible) {
-	    // Concatenate message
-	    this.message = this.message + "<br>" + message;
-	} else {
-	    // New message
-	    this.message = message;
-	}
-	if (lastMessageType != type) {
-	    if (isVisible) {
-		if (type < lastMessageType) {
-		    // more severe message
-		    view.setMessage(this.message, lastMessageType, type);
-		    lastMessageType = type;
-		} else {
-		    view.setMessage(this.message);
-		}
-	    } else {
-		// Was closed, and different message level
-		view.setMessage(this.message, lastMessageType, type);
-		lastMessageType = type;
-	    }
-	} else {
-	    view.setMessage(this.message);
-	}
-	isVisible = true;
-	view.show();
+        if (isVisible) {
+            if (!this.message.equals(message)) {
+                // Concatenate message (if not is the same)
+                this.message = this.message + "<br>" + message;
+            }
+        } else {
+            // New message
+            this.message = message;
+        }
+        if (lastMessageType != type) {
+            if (isVisible) {
+                if (type < lastMessageType) {
+                    // more severe message
+                    view.setMessage(this.message, lastMessageType, type);
+                    lastMessageType = type;
+                } else {
+                    view.setMessage(this.message);
+                }
+            } else {
+                // Was closed, and different message level
+                view.setMessage(this.message, lastMessageType, type);
+                lastMessageType = type;
+            }
+        } else {
+            view.setMessage(this.message);
+        }
+        isVisible = true;
+        view.show();
     }
 
     /*
@@ -78,14 +80,14 @@ public class SiteMessagePresenter implements SiteMessage, MessagePresenter {
      * @see org.ourproject.kune.sitebar.client.msg.MessagePresenter#onClose()
      */
     public void onMessageClose() {
-	resetMessage();
+        resetMessage();
     }
 
     public void adjustWidth(final int windowWidth) {
-	view.adjustWidth(windowWidth);
+        view.adjustWidth(windowWidth);
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 }

@@ -27,6 +27,8 @@ continue with the client search dialog
 
 MIND-TERM:
 --------------------------------------------------------------------------------
+<vjrj> Hibernate pagination (for i18n Json query) and ext grid pagination:
+  http://www.hibernate.org/314.html
 <vjrj> Use http://extjs.com/docs/output/LoadMask.jss.html in Grids
 <vjrj> for dev, study jetty hot deploy (if scanIntervalSeconds > 0 also reload with client changes ... ). It will be nice to send a signal or something like that. See:
   http://jetty.mortbay.org/jetty5/faq/faq_s_200-General_t_HotDeploy.html

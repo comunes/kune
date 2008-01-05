@@ -93,4 +93,9 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
         stateDTO.setDocumentId("foofoo");
         contentService.getContent(null, groupName, stateDTO.getState());
     }
+
+    @Test(expected = ContentNotFoundException.class)
+    public void nonExistentContent5() throws SerializableException {
+        contentService.getContent(null, groupName, new StateToken("comm3.docs.19"));
+    }
 }

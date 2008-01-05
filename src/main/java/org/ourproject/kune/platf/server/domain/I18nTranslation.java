@@ -86,8 +86,9 @@ public class I18nTranslation implements HasId {
         this(null, null, null, null, null, null, null, null);
     }
 
-    public I18nTranslation(final String facet, final Integer itemId, final Integer pluralizationIndex, final String tableName,
-            final String text, final String trKey, final String type, final I18nLanguage language) {
+    public I18nTranslation(final String facet, final Integer itemId, final Integer pluralizationIndex,
+            final String tableName, final String text, final String trKey, final String type,
+            final I18nLanguage language) {
         this.type = type;
         this.trKey = trKey;
         this.tableName = tableName;
@@ -189,6 +190,12 @@ public class I18nTranslation implements HasId {
     @Finder(query = "SELECT gt FROM I18nTranslation gt WHERE gt.language = :deflanguage AND gt.trKey NOT IN (SELECT gt.trKey FROM I18nTranslation gt WHERE gt.language = :language)")
     public List<I18nTranslation> getNonExistentFromDefault(@Named("deflanguage")
     final I18nLanguage deflanguage, @Named("language")
+    final I18nLanguage language) {
+        return null;
+    }
+
+    @Finder(query = "SELECT gt FROM I18nTranslation gt WHERE gt.language = :language and text!=null")
+    public List<I18nTranslation> getTranslatedLexicon(@Named("language")
     final I18nLanguage language) {
         return null;
     }

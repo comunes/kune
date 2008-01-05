@@ -51,9 +51,10 @@ import com.google.gwt.user.client.ui.Widget;
  */
 
 public class IconLabel extends Widget implements SourcesClickEvents, SourcesMouseEvents, SourcesMouseWheelEvents,
-        HasHorizontalAlignment, HasText, HasWordWrap {
+        HasHorizontalAlignment, HasText, HasWordWrap, AbstractLabel {
 
     private ClickListenerCollection clickListeners;
+    private ClickListenerCollection doubleClickListeners;
     private HorizontalAlignmentConstant horzAlign;
     private MouseListenerCollection mouseListeners;
     private MouseWheelListenerCollection mouseWheelListeners;
@@ -68,7 +69,7 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
      */
     public IconLabel(final AbstractImagePrototype image) {
         setElement(DOM.createDiv());
-        sinkEvents(Event.ONCLICK | Event.MOUSEEVENTS | Event.ONMOUSEWHEEL);
+        sinkEvents(Event.ONCLICK | Event.MOUSEEVENTS | Event.ONMOUSEWHEEL | Event.ONDBLCLICK);
         setStyleName("kune-IconLabel");
         icon = image.createImage().getElement();
         textLabel = DOM.createSpan();
@@ -111,6 +112,13 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
         clickListeners.add(listener);
     }
 
+    public void addDoubleClickListener(final ClickListener listener) {
+        if (doubleClickListeners == null) {
+            doubleClickListeners = new ClickListenerCollection();
+        }
+        doubleClickListeners.add(listener);
+    }
+
     public void addMouseListener(final MouseListener listener) {
         if (mouseListeners == null) {
             mouseListeners = new MouseListenerCollection();
@@ -144,7 +152,6 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
                 clickListeners.fireClick(this);
             }
             break;
-
         case Event.ONMOUSEDOWN:
         case Event.ONMOUSEUP:
         case Event.ONMOUSEMOVE:
@@ -160,12 +167,23 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
                 mouseWheelListeners.fireMouseWheelEvent(this, event);
             }
             break;
+        case Event.ONDBLCLICK:
+            if (doubleClickListeners != null) {
+                doubleClickListeners.fireClick(this);
+            }
+            break;
         }
     }
 
     public void removeClickListener(final ClickListener listener) {
         if (clickListeners != null) {
             clickListeners.remove(listener);
+        }
+    }
+
+    public void removeDoubleClickListener(final ClickListener listener) {
+        if (doubleClickListeners != null) {
+            doubleClickListeners.remove(listener);
         }
     }
 
@@ -203,4 +221,5 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
         // KuneUiUtils.setQuickTip(icon, title);
         KuneUiUtils.setQuickTip(textLabel, title);
     }
+
 }

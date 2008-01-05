@@ -61,4 +61,8 @@ public interface NewGroupView extends View {
 
     void setMessage(String message, int type);
 
+    void unMask();
+
+    void maskProcessing();
+
 }

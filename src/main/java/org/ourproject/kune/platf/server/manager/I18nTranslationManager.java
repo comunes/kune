@@ -32,6 +32,8 @@ public interface I18nTranslationManager extends Manager<I18nTranslation, Long> {
 
     List<I18nTranslation> getUntranslatedLexicon(String language);
 
+    List<I18nTranslation> getTranslatedLexicon(String language);
+
     String getTranslation(String language, String text);
 
     String getTranslation(String language, String text, String arg);

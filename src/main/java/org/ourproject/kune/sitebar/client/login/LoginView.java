@@ -56,6 +56,8 @@ public interface LoginView extends View {
 
     public void showWelcolmeDialog();
 
-    public void setVisible(boolean visible);
+    public void unMask();
+
+    public void maskProcessing();
 
 }

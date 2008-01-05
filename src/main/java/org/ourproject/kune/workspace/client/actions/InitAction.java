@@ -43,17 +43,17 @@ import com.google.gwt.user.client.ui.RootPanel;
 public class InitAction implements Action {
     public void execute(final Object value, final Object extra, final Services services) {
         PrefetchUtilities.preFetchImpImages();
+        getInitData(services);
+        int windowWidth = Window.getClientWidth();
+        final Workspace workspace = services.app.getWorkspace();
+        workspace.adjustSize(windowWidth, Window.getClientHeight());
+        SiteBarFactory.getSiteMessage().adjustWidth(windowWidth);
         Timer prefetchTimer = new Timer() {
             public void run() {
-                PrefetchUtilities.preFetchLessImpImages();
+                PrefetchUtilities.doTasksDeferred(workspace);
             }
         };
         prefetchTimer.schedule(20000);
-        getInitData(services);
-        int windowWidth = Window.getClientWidth();
-        Workspace workspace = services.app.getWorkspace();
-        workspace.adjustSize(windowWidth, Window.getClientHeight());
-        SiteBarFactory.getSiteMessage().adjustWidth(windowWidth);
     }
 
     private void getInitData(final Services services) {
@@ -81,6 +81,7 @@ public class InitAction implements Action {
                     dispatcher.fire(WorkspaceEvents.USER_LOGGED_IN, currentUser, null);
                 }
                 RootPanel.get("kuneinitialcurtain").setVisible(false);
+                Site.unMask();
             }
         });
     }

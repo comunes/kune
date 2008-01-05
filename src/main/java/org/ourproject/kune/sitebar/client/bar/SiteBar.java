@@ -22,6 +22,7 @@ package org.ourproject.kune.sitebar.client.bar;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public interface SiteBar {
 
@@ -42,5 +43,13 @@ public interface SiteBar {
     void showAlertMessage(String message);
 
     void doLogout();
+
+    void mask();
+
+    void unMask();
+
+    void mask(String message);
+
+    void setState(StateDTO state);
 
 }

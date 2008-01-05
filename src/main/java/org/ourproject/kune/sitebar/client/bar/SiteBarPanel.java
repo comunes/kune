@@ -29,7 +29,6 @@ import org.ourproject.kune.platf.client.newgroup.ui.NewGroupPanel;
 import org.ourproject.kune.platf.client.search.SearchSite;
 import org.ourproject.kune.platf.client.search.ui.SearchSitePanel;
 import org.ourproject.kune.platf.client.services.Kune;
-import org.ourproject.kune.platf.client.ui.IconHyperlink;
 import org.ourproject.kune.platf.client.ui.IconLabel;
 import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
 import org.ourproject.kune.sitebar.client.Site;
@@ -56,6 +55,7 @@ import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtext.client.core.ExtElement;
 import com.gwtext.client.widgets.MessageBox;
 
 public class SiteBarPanel extends Composite implements SiteBarView {
@@ -67,7 +67,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 
     private final HorizontalPanel siteBarHP;
 
-    private final IconHyperlink gotoPublic;
+    private final IconLabel gotoPublic;
     private final Hyperlink loginHyperlink;
     private final Hyperlink loggedUserHyperlink;
     private final Hyperlink newGroupHyperlink;
@@ -88,6 +88,8 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     private final Widget progressText;
     private final HorizontalPanel publicHP;
     private SearchSitePanel searchPanel;
+    private final ExtElement extRootBody;
+    private String publicUrl;
 
     public SiteBarPanel(final SiteBarPresenter initPresenter) {
         img = Images.App.getInstance();
@@ -100,9 +102,11 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 
         progressPanel = RootPanel.get("kuneprogresspanel");
         progressText = RootPanel.get("kuneprogresstext");
+
         publicHP = new HorizontalPanel();
-        gotoPublic = new IconHyperlink(img.anybody(), Kune.I18N.t("Go to Public Space"), Site.FIXME_TOKEN);
+        gotoPublic = new IconLabel(img.anybody(), Kune.I18N.t("Go to Public Space"), false);
         contentNoPublic = new IconLabel(img.anybody(), Kune.I18N.t("This content is not public"));
+
         final Label expandLabel = new Label("");
         newGroupHyperlink = new Hyperlink();
         final HTML pipeSeparatorHtml = new HTML();
@@ -141,7 +145,13 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         siteBarHP.setCellWidth(expandLabel, "100%");
         showProgress(Kune.I18N.t("Processing"));
         gotoPublic.addStyleName("kune-Margin-Medium-r");
-        contentNoPublic.setVisible(false);
+        setContentPublic(true);
+        gotoPublic.addClickListener(new ClickListener() {
+            public void onClick(final Widget sender) {
+                gotoPublic();
+            }
+        });
+        gotoPublic.addStyleName("kune-SiteBarPanel-LabelLink");
         contentNoPublic.addStyleName("kune-Margin-Medium-r");
         newGroupHyperlink.setText(Kune.I18N.t("Create New Group"));
         newGroupHyperlink.setTargetHistoryToken(Site.NEWGROUP_TOKEN);
@@ -170,6 +180,20 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         img.kuneLogo16px().applyTo(logoImage);
 
         this.hideProgress();
+        extRootBody = new ExtElement(RootPanel.getBodyElement());
+    }
+
+    public void setContentPublic(boolean visible) {
+        gotoPublic.setVisible(visible);
+        contentNoPublic.setVisible(!visible);
+    }
+
+    public void setContentGotoPublicUrl(final String publicUrl) {
+        this.publicUrl = publicUrl;
+    }
+
+    public void gotoPublic() {
+        Window.open(publicUrl, "_blank", "");
     }
 
     private void createOptionsSubmenu() {
@@ -305,6 +329,18 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 
     public void centerNewGroupDialog() {
         newGroupPanel.center();
+    }
+
+    public void mask() {
+        extRootBody.mask();
+    }
+
+    public void mask(final String message) {
+        extRootBody.mask(message, "x-mask-loading");
+    }
+
+    public void unMask() {
+        extRootBody.unmask();
     }
 
     private void createListeners() {

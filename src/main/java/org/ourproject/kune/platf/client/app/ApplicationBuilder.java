@@ -57,6 +57,7 @@ public class ApplicationBuilder {
         new KuneErrorHandler(session);
         final DefaultApplication application = new DefaultApplication(tools, session);
         Site.showProgressLoading();
+        Site.mask();
         ContentProvider provider = new ContentProviderImpl(ContentService.App.getInstance());
         HistoryWrapper historyWrapper = new HistoryWrapperImpl();
         final StateManager stateManager = new StateManagerDefault(provider, application, session, historyWrapper);

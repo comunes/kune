@@ -35,6 +35,8 @@ public class Site {
 
     public static final String FIXME_TOKEN = "fixme";
 
+    public static final String TRANSLATE_TOKEN = "translate";
+
     public static void info(final String value) {
         siteUserMessage.setMessage(value, SiteMessage.INFO);
     }
@@ -85,6 +87,18 @@ public class Site {
 
     public static void showAlertMessage(final String message) {
         sitebar.showAlertMessage(message);
+    }
+
+    public static void mask() {
+        sitebar.mask();
+    }
+
+    public static void mask(final String message) {
+        sitebar.mask(message);
+    }
+
+    public static void unMask() {
+        sitebar.unMask();
     }
 
 }

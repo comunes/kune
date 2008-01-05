@@ -1,5 +1,6 @@
 package org.ourproject.kune.platf.client.services;
 
+import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.AlreadyGroupMemberException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
@@ -9,6 +10,7 @@ import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.sitebar.client.Site;
+import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
 import com.google.gwt.core.client.GWT;
 
@@ -39,6 +41,7 @@ public class KuneErrorHandler {
             Site.error(Kune.I18N.t("Group not found"));
         } catch (final ContentNotFoundException e) {
             Site.error(Kune.I18N.t("Content not found"));
+            DefaultDispatcher.getInstance().fire(WorkspaceEvents.GOTO, "", null);
         } catch (final LastAdminInGroupException e) {
             Site.showAlertMessage(Kune.I18N.t("Sorry, you are the last admin of this group."
                     + " Look for someone to substitute you appropriately as admin before unjoin this group."));

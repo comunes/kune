@@ -20,6 +20,8 @@
 
 package org.ourproject.kune.platf.client.dto;
 
+import org.ourproject.kune.platf.client.ui.WindowUtils;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class StateToken implements IsSerializable {
@@ -32,127 +34,149 @@ public class StateToken implements IsSerializable {
     private String encoded;
 
     public StateToken(final String group, final String tool, final String folder, final String document) {
-	this.setGroup(group);
-	this.setTool(tool);
-	this.setFolder(folder);
-	this.setDocument(document);
-	encoded = null;
+        this.setGroup(group);
+        this.setTool(tool);
+        this.setFolder(folder);
+        this.setDocument(document);
+        encoded = null;
     }
 
     public StateToken() {
-	this(null, null, null, null);
+        this(null, null, null, null);
     }
 
     public String toString() {
-	return getEncoded();
+        return getEncoded();
     }
 
     public String getEncoded() {
-	if (encoded == null) {
-	    encoded = StateToken.encode(getGroup(), getTool(), getFolder(), getDocument());
-	}
-	return encoded;
+        if (encoded == null) {
+            encoded = StateToken.encode(getGroup(), getTool(), getFolder(), getDocument());
+        }
+        return encoded;
     }
 
     public int hashCode() {
-	return getEncoded().hashCode();
+        return getEncoded().hashCode();
     }
 
     public StateToken(final String encoded) {
-	String[] splitted;
-	if (encoded != null && encoded.length() > 0) {
-	    splitted = encoded.split("\\.");
-	} else {
-	    splitted = EMPTY;
-	}
-	setGroup(conditionalAssign(0, splitted));
-	setTool(conditionalAssign(1, splitted));
-	setFolder(conditionalAssign(2, splitted));
-	setDocument(conditionalAssign(3, splitted));
+        String[] splitted;
+        if (encoded != null && encoded.length() > 0) {
+            splitted = encoded.split("\\.");
+        } else {
+            splitted = EMPTY;
+        }
+        setGroup(conditionalAssign(0, splitted));
+        setTool(conditionalAssign(1, splitted));
+        setFolder(conditionalAssign(2, splitted));
+        setDocument(conditionalAssign(3, splitted));
     }
 
     private String conditionalAssign(final int index, final String[] splitted) {
-	if (splitted.length > index) {
-	    return splitted[index];
-	} else {
-	    return null;
-	}
+        if (splitted.length > index) {
+            return splitted[index];
+        } else {
+            return null;
+        }
     }
 
     public static String encode(final String group, final String tool, final String folder, final String document) {
-	String encoded = "";
-	if (group != null) {
-	    encoded += group;
-	}
-	if (tool != null) {
-	    encoded += DOT + tool;
-	}
-	if (folder != null) {
-	    encoded += DOT + folder;
-	}
-	if (document != null) {
-	    encoded += DOT + document;
-	}
-	return encoded;
+        String encoded = "";
+        if (group != null) {
+            encoded += group;
+        }
+        if (tool != null) {
+            encoded += DOT + tool;
+        }
+        if (folder != null) {
+            encoded += DOT + folder;
+        }
+        if (document != null) {
+            encoded += DOT + document;
+        }
+        return encoded;
     }
 
     public boolean isComplete() {
-	return getDocument() != null;
+        return getDocument() != null;
     }
 
     public boolean hasAll() {
-	return getGroup() != null && getTool() != null && getFolder() != null && getDocument() != null;
+        return getGroup() != null && getTool() != null && getFolder() != null && getDocument() != null;
     }
 
     public boolean hasGroupToolAndFolder() {
-	return getGroup() != null && getTool() != null && getFolder() != null;
+        return getGroup() != null && getTool() != null && getFolder() != null;
     }
 
     public boolean hasGroupAndTool() {
-	return getGroup() != null && getTool() != null;
+        return getGroup() != null && getTool() != null;
     }
 
     public boolean hasGroup() {
-	return getGroup() != null;
+        return getGroup() != null;
     }
 
     public boolean hasNothing() {
-	return getGroup() == null && getTool() == null && getFolder() == null && getDocument() == null;
+        return getGroup() == null && getTool() == null && getFolder() == null && getDocument() == null;
     }
 
     public void setGroup(final String group) {
-	this.group = group;
-	encoded = null;
+        this.group = group;
+        encoded = null;
     }
 
     public String getGroup() {
-	return group;
+        return group;
     }
 
     public void setTool(final String tool) {
-	this.tool = tool;
-	encoded = null;
+        this.tool = tool;
+        encoded = null;
     }
 
     public String getTool() {
-	return tool;
+        return tool;
     }
 
     public void setFolder(final String folder) {
-	this.folder = folder;
-	encoded = null;
+        this.folder = folder;
+        encoded = null;
     }
 
     public String getFolder() {
-	return folder;
+        return folder;
     }
 
     public void setDocument(final String document) {
-	this.document = document;
-	encoded = null;
+        this.document = document;
+        encoded = null;
     }
 
     public String getDocument() {
-	return document;
+        return document;
+    }
+
+    public String getPublicUrl() {
+        String publicUrl = "http://";
+
+        if (group != null) {
+            publicUrl += group + DOT;
+        }
+
+        // Maybe get from InitData the site.domain
+        publicUrl += WindowUtils.getLocation().getHostName() + "/";
+
+        if (tool != null) {
+            publicUrl += tool;
+        }
+        if (folder != null) {
+            publicUrl += DOT + folder;
+        }
+        if (document != null) {
+            publicUrl += DOT + document;
+        }
+        return publicUrl;
     }
 }

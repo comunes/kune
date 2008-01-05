@@ -163,18 +163,6 @@ public class ContentRPC implements ContentService, RPC {
     @Authenticated
     @Authorizated(accessTypeRequired = AccessType.EDIT)
     @Transactional(type = TransactionType.READ_WRITE)
-    public String renameFolder(final String userHash, final String groupShortName, final Long folderId,
-            final String newName) throws SerializableException {
-        final Group group = groupManager.findByShortName(groupShortName);
-        UserSession userSession = getUserSession();
-        final User user = userSession.getUser();
-        Access folderAccess = accessService.getFolderAccess(group, folderId, user, AccessType.EDIT);
-        return containerManager.renameFolder(group, folderAccess.getFolder(), newName);
-    }
-
-    @Authenticated
-    @Authorizated(accessTypeRequired = AccessType.EDIT)
-    @Transactional(type = TransactionType.READ_WRITE)
     public StateDTO addRoom(final String userHash, final String groupShortName, final Long parentFolderId,
             final String roomName) throws SerializableException {
         UserSession userSession = getUserSession();
@@ -249,17 +237,6 @@ public class ContentRPC implements ContentService, RPC {
     @Authenticated
     @Authorizated(accessTypeRequired = AccessType.EDIT, checkContent = true)
     @Transactional(type = TransactionType.READ_WRITE)
-    public String renameContent(final String userHash, final String groupShortName, final String documentId,
-            final String newTitle) throws SerializableException {
-        final Long contentId = parseId(documentId);
-        UserSession userSession = getUserSession();
-        User user = userSession.getUser();
-        return contentManager.renameContent(user, contentId, newTitle);
-    }
-
-    @Authenticated
-    @Authorizated(accessTypeRequired = AccessType.EDIT, checkContent = true)
-    @Transactional(type = TransactionType.READ_WRITE)
     public void setLanguage(final String userHash, final String groupShortName, final String documentId,
             final String languageCode) throws SerializableException {
         final Long contentId = parseId(documentId);
@@ -288,6 +265,66 @@ public class ContentRPC implements ContentService, RPC {
         UserSession userSession = getUserSession();
         User user = userSession.getUser();
         contentManager.setTags(user, contentId, tags);
+    }
+
+    @Authenticated
+    @Authorizated(accessTypeRequired = AccessType.EDIT, checkContent = true)
+    @Transactional(type = TransactionType.READ_WRITE)
+    public String renameContent(final String userHash, final String groupShortName, final String documentId,
+            final String newName) throws SerializableException {
+        return renameContent(documentId, newName);
+    }
+
+    private String renameContent(final String documentId, final String newName) throws ContentNotFoundException,
+            SerializableException {
+        final Long contentId = parseId(documentId);
+        UserSession userSession = getUserSession();
+        User user = userSession.getUser();
+        return contentManager.renameContent(user, contentId, newName);
+    }
+
+    @Authenticated
+    @Authorizated(accessTypeRequired = AccessType.EDIT)
+    @Transactional(type = TransactionType.READ_WRITE)
+    public String renameFolder(final String userHash, final String groupShortName, final Long folderId,
+            final String newName) throws SerializableException {
+        return renameFolder(groupShortName, folderId, newName);
+    }
+
+    private String renameFolder(final String groupShortName, final Long folderId, final String newName)
+            throws SerializableException {
+        final Group group = groupManager.findByShortName(groupShortName);
+        UserSession userSession = getUserSession();
+        final User user = userSession.getUser();
+        Access folderAccess = accessService.getFolderAccess(group, folderId, user, AccessType.EDIT);
+        return containerManager.renameFolder(group, folderAccess.getFolder(), newName);
+    }
+
+    @Authenticated
+    @Authorizated(accessTypeRequired = AccessType.EDIT)
+    @Transactional(type = TransactionType.READ_WRITE)
+    public String rename(final String userHash, final String groupShortName, final String token, final String newName)
+            throws SerializableException {
+        String result;
+        UserSession userSession = getUserSession();
+        final User user = userSession.getUser();
+        StateToken stateToken = new StateToken(token);
+        final Group group = groupManager.findByShortName(groupShortName);
+        if (stateToken.isComplete()) {
+            try {
+                Content content = accessService.accessToContent(parseId(stateToken.getDocument()), user,
+                        AccessType.EDIT);
+                if (!content.getFolder().getOwner().equals(group)) {
+                    throw new AccessViolationException();
+                }
+            } catch (NoResultException e) {
+                throw new AccessViolationException();
+            }
+            result = renameContent(stateToken.getDocument(), newName);
+        } else {
+            result = renameFolder(groupShortName, parseId(stateToken.getFolder()), newName);
+        }
+        return result;
     }
 
     private Long parseId(final String documentId) throws ContentNotFoundException {

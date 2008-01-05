@@ -1,6 +1,16 @@
 2008-01-03 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* (drop database needed)
+	* Updated to gwt-1.4.61 (added also to our maven repo)
+	* #translate token added
+	* search panel improved
+	* default content for site project
+	* mask of Login/NewGroup and Root using ext
 	* i18n translation added
+	* Editable Icon Label/Hyperlink
+	* i18n translator more complete (with recomendations and with translated
+	tabs)
+	* scripts/css* for use of csstidy and css update of target (for
+	dev/tests)
 
 2008-01-03 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* Folder rename methods

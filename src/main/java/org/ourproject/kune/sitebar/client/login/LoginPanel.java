@@ -26,7 +26,9 @@ import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
 import org.ourproject.kune.sitebar.client.msg.SiteMessage;
 import org.ourproject.kune.sitebar.client.msg.SiteMessagePanel;
 
+import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -125,7 +127,18 @@ public class LoginPanel implements LoginView, View {
             this.timezones[i] = obj;
         }
         createPanel();
-        dialog.setVisible(false);
+    }
+
+    private void mask(final String message) {
+        dialog.getEl().mask(message, "x-mask-loading");
+    }
+
+    public void maskProcessing() {
+        mask(Kune.I18N.t("Processing"));
+    }
+
+    public void unMask() {
+        dialog.getEl().unmask();
     }
 
     public void showWelcolmeDialog() {
@@ -155,9 +168,12 @@ public class LoginPanel implements LoginView, View {
     }
 
     public void reset() {
-        dialog.setVisible(false);
-        signInForm.reset();
-        registerForm.reset();
+        DeferredCommand.addCommand(new Command() {
+            public void execute() {
+                signInForm.reset();
+                registerForm.reset();
+            }
+        });
     }
 
     public String getNickOrEmail() {
@@ -226,10 +242,6 @@ public class LoginPanel implements LoginView, View {
 
     public void center() {
         dialog.center();
-    }
-
-    public void setVisible(final boolean visible) {
-        dialog.setVisible(visible);
     }
 
     private Object[][] getLanguages() {

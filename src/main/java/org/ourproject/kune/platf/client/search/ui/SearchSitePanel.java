@@ -24,10 +24,12 @@ import org.ourproject.kune.platf.client.search.SearchSiteView;
 import org.ourproject.kune.platf.client.services.Kune;
 
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.Label;
 import com.gwtext.client.core.Connection;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Ext;
+import com.gwtext.client.core.ExtElement;
 import com.gwtext.client.core.UrlParam;
 import com.gwtext.client.data.DataProxy;
 import com.gwtext.client.data.FieldDef;
@@ -43,19 +45,25 @@ import com.gwtext.client.data.StringFieldDef;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.LayoutDialog;
 import com.gwtext.client.widgets.LayoutDialogConfig;
+import com.gwtext.client.widgets.LoadMaskConfig;
+import com.gwtext.client.widgets.PagingToolbar;
+import com.gwtext.client.widgets.PagingToolbarConfig;
 import com.gwtext.client.widgets.TabPanel;
 import com.gwtext.client.widgets.TabPanelItem;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.event.TabPanelItemListenerAdapter;
 import com.gwtext.client.widgets.form.ComboBox;
 import com.gwtext.client.widgets.form.ComboBoxConfig;
+import com.gwtext.client.widgets.form.Field;
 import com.gwtext.client.widgets.form.Form;
 import com.gwtext.client.widgets.form.FormConfig;
 import com.gwtext.client.widgets.form.event.ComboBoxListenerAdapter;
+import com.gwtext.client.widgets.form.event.FieldListenerAdapter;
 import com.gwtext.client.widgets.grid.ColumnConfig;
 import com.gwtext.client.widgets.grid.ColumnModel;
 import com.gwtext.client.widgets.grid.Grid;
 import com.gwtext.client.widgets.grid.GridConfig;
+import com.gwtext.client.widgets.grid.event.GridCellListenerAdapter;
 import com.gwtext.client.widgets.layout.BorderLayout;
 import com.gwtext.client.widgets.layout.ContentPanel;
 import com.gwtext.client.widgets.layout.LayoutRegionConfig;
@@ -68,6 +76,8 @@ public class SearchSitePanel implements SearchSiteView {
     private Store groupStore;
 
     private ComboBox searchCombo;
+
+    private Store historyStore;
 
     public SearchSitePanel(final SearchSitePresenter initPresenter) {
         this.presenter = initPresenter;
@@ -196,7 +206,7 @@ public class SearchSitePanel implements SearchSiteView {
             }
         });
 
-        final Store historyStore = new SimpleStore(new String[] { "term" }, presenter.getSearchHistory());
+        historyStore = new SimpleStore(new String[] { "term" }, presenter.getSearchHistory());
         historyStore.load();
 
         searchCombo = new ComboBox(new ComboBoxConfig() {
@@ -215,10 +225,26 @@ public class SearchSitePanel implements SearchSiteView {
                 setComboBoxListener(new ComboBoxListenerAdapter() {
                     public void onSelect(final ComboBox comboBox, final Record record, final int index) {
                         presenter.doSearch(getComboTextToSearch());
+                        historyStore.load();
                     }
-
                 });
             }
+        });
+        searchCombo.addFieldListener(new FieldListenerAdapter() {
+            public void onChange(final Field field, final Object newVal, final Object oldVal) {
+                // Maybe we use...
+            }
+
+            public void onSpecialKey(final Field field, final EventObject e) {
+                switch (e.getKey()) {
+                case KeyboardListener.KEY_ENTER:
+                    presenter.doSearch(getComboTextToSearch());
+                    historyStore.load();
+                    break;
+                }
+                e.stopEvent();
+            }
+
         });
         form.add(searchCombo);
         form.render();
@@ -262,26 +288,49 @@ public class SearchSitePanel implements SearchSiteView {
                 // setHeader(Kune.I18N.t("Shortname"));
                 setDataIndex("shortName");
                 setWidth(100);
+                setTooltip(Kune.I18N.t("Click to go to the group homepage"));
             }
         }, new ColumnConfig() {
             {
                 // setHeader(Kune.I18N.t("Longname"));
                 setDataIndex("longName");
-                setWidth(300);
+                setWidth(350);
+                setTooltip(Kune.I18N.t("Click to go to the group homepage"));
                 // setRender();
             }
         } });
 
         // columnModel.setDefaultSortable(true);
 
-        Grid grid = new Grid("grid-search", "478px", "300px", groupStore, columnModel, new GridConfig() {
+        Grid grid = new Grid("grid-search", "470px", "250px", groupStore, columnModel, new GridConfig() {
             {
-                setAutoExpandColumn(1);
-                setAutoHeight(true);
+                setLoadMask(true);
+                setLoadMask(new LoadMaskConfig(Kune.I18N.t("Searching")));
+            }
+        });
+
+        grid.addGridCellListener(new GridCellListenerAdapter() {
+
+            public void onCellClick(final Grid grid, final int rowIndex, final int colIndex, final EventObject e) {
+                Record record = groupStore.getRecordAt(rowIndex);
+                String groupShortName = record.getAsString("shortName");
+                presenter.doGoto(groupShortName);
             }
         });
 
         grid.render();
+
+        ExtElement gridFoot = grid.getView().getFooterPanel(true);
+        new PagingToolbar(gridFoot, groupStore, new PagingToolbarConfig() {
+            {
+                setPageSize(25);
+                setDisplayInfo(true);
+                setDisplayMsg(Kune.I18N
+                        .tWithNT("Displaying results {0} - {1} of {2}",
+                                "Respect {} values in translations, these will produce: 'Displaying results 1 - 25 of 95465' for instance"));
+                setDisplayMsg(Kune.I18N.t("No results to display"));
+            }
+        });
 
         return grid;
     }
