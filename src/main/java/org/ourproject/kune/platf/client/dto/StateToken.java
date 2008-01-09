@@ -22,8 +22,6 @@ package org.ourproject.kune.platf.client.dto;
 
 import org.ourproject.kune.platf.client.ui.WindowUtils;
 
-import to.tipit.gwtlib.FireLog;
-
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class StateToken implements IsSerializable {
@@ -167,7 +165,7 @@ public class StateToken implements IsSerializable {
             publicUrl += group + DOT;
         }
 
-        // Maybe get from InitData the site.domain
+        // FIXME: Maybe get from InitData the site.domain
         publicUrl += WindowUtils.getLocation().getHostName() + "/";
 
         if (tool != null) {
@@ -180,7 +178,6 @@ public class StateToken implements IsSerializable {
             publicUrl += DOT + document;
         }
 
-        FireLog.debug("Public url: " + publicUrl);
         return publicUrl;
     }
 }

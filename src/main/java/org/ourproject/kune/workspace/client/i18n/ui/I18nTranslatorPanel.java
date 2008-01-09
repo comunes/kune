@@ -367,7 +367,8 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
             String[] splitted = splitNT((String) value);
             if (splitted.length > 1) {
                 renderer = "{0} " + NOTE_FOR_TRANSLATORS_IMAGE_HTML;
-                cellMetadata.setHtmlAttribute("ext:qtip=\"" + splitted[1] + "\" ext:qtitle=\"Note for translators\"");
+                String tip = "<div style='min-width: 75px'>" + splitted[1] + "</div>";
+                cellMetadata.setHtmlAttribute("ext:qtip=\"" + tip + "\" ext:qtitle=\"Note for translators\"");
             } else {
                 renderer = "{0}";
             }
