@@ -48,6 +48,7 @@ import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
+import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 import org.ourproject.kune.platf.server.manager.TagManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.platf.server.state.State;
@@ -73,12 +74,14 @@ public class ContentRPC implements ContentService, RPC {
     private final ContentManager contentManager;
     private final ContainerManager containerManager;
     private final TagManager tagManager;
+    private final SocialNetworkManager socialNetworkManager;
 
     @Inject
     public ContentRPC(final Provider<UserSession> userSessionProvider, final AccessService accessService,
             final StateService stateService, final CreationService creationService, final GroupManager groupManager,
             final XmppManager xmppManager, final ContentManager contentManager,
-            final ContainerManager containerManager, final TagManager tagManager, final Mapper mapper) {
+            final ContainerManager containerManager, final TagManager tagManager,
+            final SocialNetworkManager socialNetworkManager, final Mapper mapper) {
         this.userSessionProvider = userSessionProvider;
         this.accessService = accessService;
         this.stateService = stateService;
@@ -88,6 +91,7 @@ public class ContentRPC implements ContentService, RPC {
         this.contentManager = contentManager;
         this.containerManager = containerManager;
         this.tagManager = tagManager;
+        this.socialNetworkManager = socialNetworkManager;
         this.mapper = mapper;
     }
 
@@ -125,7 +129,10 @@ public class ContentRPC implements ContentService, RPC {
             state.setRate(contentManager.getRateAvg(content));
             state.setRateByUsers(contentManager.getRateByUsers(content));
         }
-        state.setGroupTags(tagManager.getSummaryByGroup(state.getFolder().getOwner()));
+        Group group = state.getGroup();
+        state.setGroupTags(tagManager.getSummaryByGroup(group));
+        state.setGroupMembers(socialNetworkManager.find(user, group));
+        state.setParticipation(socialNetworkManager.findParticipation(user, group));
         return mapper.map(state, StateDTO.class);
     }
 

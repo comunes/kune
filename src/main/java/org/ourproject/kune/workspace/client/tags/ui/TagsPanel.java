@@ -49,6 +49,8 @@ public class TagsPanel extends DropDownPanel implements TagsView {
         flowPanel = new FlowPanel();
         VerticalPanel vp = new VerticalPanel();
         vp.add(flowPanel);
+        vp.setWidth("100%");
+        vp.setCellWidth(flowPanel, "100%");
         super.setContent(vp);
         noTagsLabel = new Label(Kune.I18N.t("The contents of this group don't have any tag"));
     }

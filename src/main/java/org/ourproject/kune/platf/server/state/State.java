@@ -23,12 +23,14 @@ package org.ourproject.kune.platf.server.state;
 import java.util.Date;
 import java.util.List;
 
+import org.ourproject.kune.platf.server.ParticipationData;
 import org.ourproject.kune.platf.server.access.AccessRights;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.License;
+import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.TagResult;
 
 public class State {
@@ -53,6 +55,24 @@ public class State {
     private Date publishedOn;
     private String tags;
     private List<TagResult> groupTags;
+    private SocialNetwork groupMembers;
+    private ParticipationData participation;
+
+    public SocialNetwork getGroupMembers() {
+        return groupMembers;
+    }
+
+    public void setGroupMembers(final SocialNetwork groupMembers) {
+        this.groupMembers = groupMembers;
+    }
+
+    public ParticipationData getParticipation() {
+        return participation;
+    }
+
+    public void setParticipation(final ParticipationData participation) {
+        this.participation = participation;
+    }
 
     public State() {
     }

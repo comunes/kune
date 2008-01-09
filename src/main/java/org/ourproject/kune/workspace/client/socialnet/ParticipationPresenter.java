@@ -19,7 +19,6 @@
 
 package org.ourproject.kune.workspace.client.socialnet;
 
-import org.ourproject.kune.platf.client.services.Kune;
 import java.util.Iterator;
 import java.util.List;
 
@@ -27,16 +26,12 @@ import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
-import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
-import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
-import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
-import org.ourproject.kune.sitebar.client.Site;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 import org.ourproject.kune.workspace.client.workspace.ParticipationComponent;
-
-import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class ParticipationPresenter extends AbstractPresenter implements ParticipationComponent {
     private static final String ADMIN_SUBTITLE = Kune.I18N.t("admin in:");
@@ -50,23 +45,6 @@ public class ParticipationPresenter extends AbstractPresenter implements Partici
         this.view = view;
     }
 
-    public void getParticipation(final String user, final GroupDTO group, final AccessRightsDTO accessRightsDTO) {
-        Site.showProgressProcessing();
-        final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-
-        server.getParticipation(user, group.getShortName(), new AsyncCallback() {
-            public void onFailure(final Throwable caught) {
-                Site.hideProgress();
-            }
-
-            public void onSuccess(final Object result) {
-                ParticipationDataDTO participation = (ParticipationDataDTO) result;
-                setParticipation(participation, accessRightsDTO);
-                Site.hideProgress();
-            }
-        });
-    }
-
     public void doAction(final String action, final String group) {
         DefaultDispatcher.getInstance().fire(action, group, this);
     }
@@ -75,7 +53,9 @@ public class ParticipationPresenter extends AbstractPresenter implements Partici
         return view;
     }
 
-    private void setParticipation(final ParticipationDataDTO participation, final AccessRightsDTO rights) {
+    public void setParticipation(final StateDTO state) {
+        ParticipationDataDTO participation = state.getParticipation();
+        AccessRightsDTO rights = state.getGroupRights();
         view.setDropDownContentVisible(false);
         view.clear();
         MemberAction[] adminsActions = {

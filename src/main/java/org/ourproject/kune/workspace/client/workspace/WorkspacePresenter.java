@@ -42,17 +42,7 @@ public class WorkspacePresenter implements Workspace {
     public void init(final WorkspaceView view) {
         this.view = view;
         this.components = new WorkspaceUIComponents(this);
-        // FIXME: get components breaks test (because make calls to GWT)
-        view.setContentTitle(components.getContentTitleComponent().getView());
-        view.setContentSubTitle(components.getContentSubTitleComponent().getView());
-        view.setContentToolBar(components.getContentToolBarComponent().getView());
-        view.setContentBottomToolBar(components.getContentBottomToolBarComponent().getView());
-        view.setBottom(components.getLicenseComponent().getView());
-        view.setGroupMembers(components.getGroupMembersComponent().getView());
-        view.setParticipation(components.getParticipationComponent().getView());
-        view.setTags(components.getTagsComponent().getView());
-        view.setSummary(components.getGroupSummaryComponent().getView());
-        view.addBottomIconComponent(components.getThemeMenuComponent().getView());
+        view.setComponents(components);
         view.registerUIExtensionPoints();
     }
 

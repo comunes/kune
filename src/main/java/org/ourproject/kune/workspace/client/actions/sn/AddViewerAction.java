@@ -21,6 +21,7 @@ package org.ourproject.kune.workspace.client.actions.sn;
 
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
@@ -36,14 +37,14 @@ public class AddViewerAction implements Action {
     private void onAddViewer(final Services services, final String groupShortName) {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        server.addViewerMember(services.session.getUserHash(), services.session.getCurrentState().getGroup().getShortName(),
-                groupShortName, new AsyncCallbackSimple() {
-                    public void onSuccess(final Object result) {
-                        Site.hideProgress();
-                        Site.info(Kune.I18N.t("Member can now view this group contents"));
-                        services.stateManager.reloadSocialNetwork();
-                    }
-                });
+        server.addViewerMember(services.session.getUserHash(), services.session.getCurrentState().getGroup()
+                .getShortName(), groupShortName, new AsyncCallbackSimple() {
+            public void onSuccess(final Object result) {
+                Site.hideProgress();
+                Site.info(Kune.I18N.t("Member can now view this group contents"));
+                services.stateManager.setSocialNetwork((SocialNetworkResultDTO) result);
+            }
+        });
 
     }
 }

@@ -33,6 +33,7 @@ import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
 import org.ourproject.kune.workspace.client.WorkspaceUIExtensionPoint;
 import org.ourproject.kune.workspace.client.license.ui.LicensePanel;
 import org.ourproject.kune.workspace.client.workspace.WorkspacePresenter;
+import org.ourproject.kune.workspace.client.workspace.WorkspaceUIComponents;
 import org.ourproject.kune.workspace.client.workspace.WorkspaceView;
 
 import com.google.gwt.user.client.DOM;
@@ -339,6 +340,19 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         }
         contentSP.setSize("" + (cntcxtHSP.getLeftWidgetAvailableWidth() - 2) + "px", "" + (contentHeight - 53) + "px");
         groupDropDownsSP.setHeight("" + (contentHeight + 7) + "px");
+    }
+
+    public void setComponents(final WorkspaceUIComponents components) {
+        setContentTitle(components.getContentTitleComponent().getView());
+        setContentSubTitle(components.getContentSubTitleComponent().getView());
+        setContentToolBar(components.getContentToolBarComponent().getView());
+        setContentBottomToolBar(components.getContentBottomToolBarComponent().getView());
+        setBottom(components.getLicenseComponent().getView());
+        setGroupMembers(components.getGroupMembersComponent().getView());
+        setParticipation(components.getParticipationComponent().getView());
+        setTags(components.getTagsComponent().getView());
+        setSummary(components.getGroupSummaryComponent().getView());
+        addBottomIconComponent(components.getThemeMenuComponent().getView());
     }
 
     private void adjustSizeContentSP() {

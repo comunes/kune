@@ -19,7 +19,8 @@ public class KuneUiUtils {
      * title is limited to 64chars).
      * 
      * Bug: extjs quicktips don't work with images or span inside divs (like
-     * pushbutton)
+     * pushbutton). See: http://extjs.com/forum/showthread.php?t=22293
+     * http://extjs.com/forum/showthread.php?t=5200
      * 
      * @param element
      * @param tip
@@ -30,7 +31,7 @@ public class KuneUiUtils {
         if (tip == null || tip.length() == 0) {
             DOM.removeElementAttribute(element, "ext:qtip");
         } else {
-            String newTip = "<div style='min-width: 100px'>" + tip + "</div>";
+            String newTip = "<div style='min-width: 75px'>" + tip + "</div>";
             DOM.setElementAttribute(element, "ext:qtip", newTip);
         }
     }

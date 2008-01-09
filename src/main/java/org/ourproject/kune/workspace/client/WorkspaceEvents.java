@@ -56,7 +56,4 @@ public interface WorkspaceEvents {
     public static final String USER_REGISTER = "ws.UserRegister";
     public static final String CREATE_NEW_GROUP = "ws.CreateNewGroup";
     public static final String RELOAD_CONTEXT = "ws.ReoloadContext";
-    public static final String REFRESH_CONTENT_SUBTITLE = "ws.RefreshContentSubTitle";
-    public static final String REFRESH_CONTENT_TITLE = "ws.RefreshContentTitle";
-
 }

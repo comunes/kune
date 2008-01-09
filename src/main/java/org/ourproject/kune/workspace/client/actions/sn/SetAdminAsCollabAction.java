@@ -36,16 +36,14 @@ public class SetAdminAsCollabAction implements Action {
     private void onSetAdminAsCollab(final Services services, final String groupShortName) {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        server.setAdminAsCollab(services.session.getUserHash(),
-                services.session.getCurrentState().getGroup().getShortName(), groupShortName,
-                new AsyncCallbackSimple() {
-                    public void onSuccess(final Object result) {
-                        Site.hideProgress();
-                        Site.info(Kune.I18N.t("Type of member changed"));
-                        services.stateManager.reloadSocialNetwork();
-                        services.app.getWorkspace().getGroupMembersComponent().showCollabs();
-                    }
-                });
-
+        server.setAdminAsCollab(services.session.getUserHash(), services.session.getCurrentState().getGroup()
+                .getShortName(), groupShortName, new AsyncCallbackSimple() {
+            public void onSuccess(final Object result) {
+                Site.hideProgress();
+                Site.info(Kune.I18N.t("Type of member changed"));
+                services.stateManager.reload();
+                services.app.getWorkspace().getGroupMembersComponent().showCollabs();
+            }
+        });
     }
 }

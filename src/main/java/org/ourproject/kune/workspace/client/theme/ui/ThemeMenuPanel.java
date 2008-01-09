@@ -38,7 +38,7 @@ public class ThemeMenuPanel extends BottomTrayIcon implements ThemeMenuView {
         super(Kune.I18N.t("Select Workspace theme for this group"));
         this.presenter = presenter;
         themesMB = new MenuBar(true);
-        themesMB.setStyleName("kune-ThemeMenu-offset");
+        themesMB.addStyleDependentName("bottomMenu");
         this.addItem(Images.App.getInstance().themeChoose().getHTML(), true, themesMB);
     }
 

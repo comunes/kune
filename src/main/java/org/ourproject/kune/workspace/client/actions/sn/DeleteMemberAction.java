@@ -36,14 +36,17 @@ public class DeleteMemberAction implements Action {
     private void onDeleteMember(final Services services, final String groupShortName) {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        server.deleteMember(services.session.getUserHash(), services.session.getCurrentState().getGroup().getShortName(),
-                groupShortName, new AsyncCallbackSimple() {
-                    public void onSuccess(final Object result) {
-                        Site.hideProgress();
-                        Site.info(Kune.I18N.t("Member removed"));
-                        services.stateManager.reloadSocialNetwork();
-                    }
-                });
+        server.deleteMember(services.session.getUserHash(), services.session.getCurrentState().getGroup()
+                .getShortName(), groupShortName, new AsyncCallbackSimple() {
+            public void onSuccess(final Object result) {
+                Site.hideProgress();
+                Site.info(Kune.I18N.t("Member removed"));
+                services.stateManager.reload();
+                // in the future, only if I cannot be affected:
+                // services.stateManager.reloadSocialNetwork((SocialNetworkResultDTO)
+                // result);
+            }
+        });
 
     }
 }

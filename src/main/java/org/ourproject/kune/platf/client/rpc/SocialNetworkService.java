@@ -21,6 +21,7 @@ package org.ourproject.kune.platf.client.rpc;
 
 import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
+import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -31,26 +32,31 @@ public interface SocialNetworkService extends RemoteService {
 
     String requestJoinGroup(String hash, String groupShortName) throws SerializableException;
 
-    void AcceptJoinGroup(String hash, String groupShortName, String groupToAcceptShortName)
+    SocialNetworkResultDTO AcceptJoinGroup(String hash, String groupShortName, String groupToAcceptShortName)
             throws SerializableException;
 
-    void deleteMember(String hash, String groupShortName, String groupToDeleteShortName) throws SerializableException;
-
-    void denyJoinGroup(String hash, String groupShortName, String groupToDenyShortName) throws SerializableException;
-
-    void unJoinGroup(String hash, String groupShortName) throws SerializableException;
-
-    void setCollabAsAdmin(String hash, String groupShortName, String groupToSetAdminShortName)
+    SocialNetworkResultDTO deleteMember(String hash, String groupShortName, String groupToDeleteShortName)
             throws SerializableException;
 
-    void setAdminAsCollab(String hash, String groupShortName, String groupToSetCollabShortName)
+    SocialNetworkResultDTO denyJoinGroup(String hash, String groupShortName, String groupToDenyShortName)
             throws SerializableException;
 
-    void addAdminMember(String hash, String groupShortName, String groupToAddShortName) throws SerializableException;
+    SocialNetworkResultDTO unJoinGroup(String hash, String groupShortName) throws SerializableException;
 
-    void addCollabMember(String hash, String groupShortName, String groupToAddShortName) throws SerializableException;
+    SocialNetworkResultDTO setCollabAsAdmin(String hash, String groupShortName, String groupToSetAdminShortName)
+            throws SerializableException;
 
-    void addViewerMember(String hash, String groupShortName, String groupToAddShortName) throws SerializableException;
+    SocialNetworkResultDTO setAdminAsCollab(String hash, String groupShortName, String groupToSetCollabShortName)
+            throws SerializableException;
+
+    SocialNetworkResultDTO addAdminMember(String hash, String groupShortName, String groupToAddShortName)
+            throws SerializableException;
+
+    SocialNetworkResultDTO addCollabMember(String hash, String groupShortName, String groupToAddShortName)
+            throws SerializableException;
+
+    SocialNetworkResultDTO addViewerMember(String hash, String groupShortName, String groupToAddShortName)
+            throws SerializableException;
 
     SocialNetworkDTO getGroupMembers(String hash, String groupShortName) throws SerializableException;
 

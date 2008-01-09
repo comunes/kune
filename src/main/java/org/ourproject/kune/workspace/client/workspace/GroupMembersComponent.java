@@ -20,15 +20,14 @@
 package org.ourproject.kune.workspace.client.workspace;
 
 import org.ourproject.kune.platf.client.Component;
-import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
-import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public interface GroupMembersComponent extends Component {
-
-    public void getGroupMembers(String user, GroupDTO group, AccessRightsDTO accessRightsDTO);
 
     public void showCollabs();
 
     public void showAdmins();
+
+    public void setGroupMembers(StateDTO state);
 
 }

@@ -24,7 +24,7 @@ import org.ourproject.kune.workspace.client.i18n.I18nTranslatorComponent;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelectorComponent;
 import org.ourproject.kune.workspace.client.license.LicenseComponent;
 
-class WorkspaceUIComponents {
+public class WorkspaceUIComponents {
     private LicenseComponent license;
     private ContentTitleComponent contentTitle;
     private GroupMembersComponent groupMembers;

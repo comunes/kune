@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.platf.client.state;
 
+import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
@@ -29,16 +30,12 @@ public interface StateManager extends HistoryListener {
 
     void reload();
 
-    void reloadSocialNetwork();
+    void setSocialNetwork(SocialNetworkResultDTO socialNet);
 
     void setRetrievedState(StateDTO content);
 
     void setState(StateToken state);
 
     void reloadContextAndTitles();
-
-    void refreshContentSubTitle();
-
-    void refreshContentTitle();
 
 }

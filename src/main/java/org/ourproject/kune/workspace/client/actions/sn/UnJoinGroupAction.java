@@ -36,12 +36,15 @@ public class UnJoinGroupAction implements Action {
     private void onUnJoinGroup(final Services services, final String groupShortName) {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        server.unJoinGroup(services.session.getUserHash(), services.session.getCurrentState().getGroup().getShortName(),
-                new AsyncCallbackSimple() {
+        server.unJoinGroup(services.session.getUserHash(),
+                services.session.getCurrentState().getGroup().getShortName(), new AsyncCallbackSimple() {
                     public void onSuccess(final Object result) {
                         Site.hideProgress();
                         Site.info(Kune.I18N.t("Removed as member"));
                         services.stateManager.reload();
+                        // in the future with user info:
+                        // services.stateManager.reloadSocialNetwork((SocialNetworkResultDTO)
+                        // result);
                     }
                 });
     }

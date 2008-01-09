@@ -22,7 +22,6 @@ package org.ourproject.kune.workspace.client.socialnet;
 import java.util.Iterator;
 import java.util.List;
 
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
@@ -30,13 +29,10 @@ import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
-import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
-import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
-import org.ourproject.kune.sitebar.client.Site;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 import org.ourproject.kune.workspace.client.workspace.GroupMembersComponent;
-
-import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class GroupMembersPresenter extends AbstractPresenter implements GroupMembersComponent, GroupLiveSearchListener {
 
@@ -49,29 +45,15 @@ public class GroupMembersPresenter extends AbstractPresenter implements GroupMem
         this.view = view;
     }
 
-    public void getGroupMembers(final String user, final GroupDTO group, final AccessRightsDTO accessRightsDTO) {
-        Site.showProgressProcessing();
-        final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-
-        server.getGroupMembers(user, group.getShortName(), new AsyncCallback() {
-            public void onFailure(final Throwable caught) {
-                Site.hideProgress();
-            }
-
-            public void onSuccess(final Object result) {
-                SocialNetworkDTO sn = (SocialNetworkDTO) result;
-                if (group.getType() != GroupDTO.PERSONAL) {
-                    setSocialNetworkOfGroup(sn, accessRightsDTO);
-
-                } else {
-                    hide();
-                }
-                Site.hideProgress();
-            }
-        });
+    public void setGroupMembers(final StateDTO state) {
+        if (state.getGroup().getType() == GroupDTO.PERSONAL) {
+            hide();
+        } else {
+            setGroupMembers(state.getGroupMembers(), state.getGroupRights());
+        }
     }
 
-    public void setSocialNetworkOfGroup(final SocialNetworkDTO socialNetwork, final AccessRightsDTO rights) {
+    private void setGroupMembers(final SocialNetworkDTO socialNetwork, final AccessRightsDTO rights) {
         final AccessListsDTO accessLists = socialNetwork.getAccessLists();
 
         List adminsList = accessLists.getAdmins().getList();

@@ -29,6 +29,7 @@ import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
+import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
@@ -64,6 +65,8 @@ public class StateDTO implements IsSerializable {
      * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.TagResultDTO>
      */
     private List groupTags;
+    private SocialNetworkDTO groupMembers;
+    private ParticipationDataDTO participation;
 
     public StateDTO() {
         this(null, null, null);
@@ -266,6 +269,22 @@ public class StateDTO implements IsSerializable {
 
     public void setGroupTags(final List groupTags) {
         this.groupTags = groupTags;
+    }
+
+    public SocialNetworkDTO getGroupMembers() {
+        return groupMembers;
+    }
+
+    public void setGroupMembers(final SocialNetworkDTO groupMembers) {
+        this.groupMembers = groupMembers;
+    }
+
+    public ParticipationDataDTO getParticipation() {
+        return participation;
+    }
+
+    public void setParticipation(final ParticipationDataDTO participation) {
+        this.participation = participation;
     }
 
 }
