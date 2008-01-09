@@ -24,7 +24,6 @@ import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.HistoryWrapper;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.tool.ClientTool;
@@ -65,14 +64,36 @@ public class StateManagerDefault implements StateManager {
         onHistoryChanged(history.getToken());
     }
 
-    public Session getSession() {
-        return session;
+    public void reloadContextAndTitles() {
+        provider.getContent(session.getUserHash(), new StateToken(history.getToken()), new AsyncCallbackSimple() {
+            public void onSuccess(final Object result) {
+                StateDTO newStateDTO = (StateDTO) result;
+                loadContextOnly(newStateDTO);
+                oldState = newStateDTO;
+                workspace.getContentTitleComponent().setState(oldState);
+                workspace.getContentSubTitleComponent().setState(oldState);
+            }
+        });
+    }
+
+    /**
+     * Warning: don't getContent from server currently
+     */
+    public void refreshContentTitle() {
+        workspace.getContentTitleComponent().setState(oldState);
+    }
+
+    /**
+     * Warning: don't getContent from server currently
+     */
+    public void refreshContentSubTitle() {
+        workspace.getContentSubTitleComponent().setState(oldState);
     }
 
     public void onHistoryChanged(final String historyToken) {
         String oldStateEncoded = "";
         if (oldState != null) {
-            oldStateEncoded = oldState.getState().getEncoded();
+            oldStateEncoded = oldState.getStateToken().getEncoded();
         }
         if (historyToken.equals(Site.NEWGROUP_TOKEN)) {
             Site.doNewGroup(oldStateEncoded);
@@ -92,7 +113,7 @@ public class StateManagerDefault implements StateManager {
     }
 
     public void setRetrievedState(final StateDTO content) {
-        final StateToken state = content.getState();
+        final StateToken state = content.getStateToken();
         provider.cache(state, content);
         setState(state);
     }
@@ -104,6 +125,7 @@ public class StateManagerDefault implements StateManager {
     public void reloadSocialNetwork() {
         Site.sitebar.reloadUserInfo(session.getUserHash());
         loadSocialNetwork();
+        Site.hideProgress();
     }
 
     private void onHistoryChanged(final StateToken newState) {
@@ -114,6 +136,14 @@ public class StateManagerDefault implements StateManager {
                 oldState = newStateDTO;
             }
         });
+    }
+
+    private void loadContextOnly(final StateDTO state) {
+        session.setCurrent(state);
+        final String toolName = state.getToolName();
+        final ClientTool clientTool = app.getTool(toolName);
+        clientTool.setContext(state);
+        workspace.setContext(clientTool.getContext());
     }
 
     private void loadContent(final StateDTO state) {
@@ -135,26 +165,11 @@ public class StateManagerDefault implements StateManager {
 
         final ClientTool clientTool = app.getTool(toolName);
         clientTool.setContent(state);
+        clientTool.setContext(state);
         ContentTitleComponent contentTitleComponent = workspace.getContentTitleComponent();
         ContentSubTitleComponent contentSubTitleComponent = workspace.getContentSubTitleComponent();
-        if (state.hasDocument()) {
-            contentTitleComponent.setContentTitle(state.getTitle(), state.getContentRights().isEditable());
-            contentTitleComponent.setContentDateVisible(true);
-            contentTitleComponent.setContentDate(Kune.I18N.t("Published on: [%s]", state.getPublishedOn().toString()));
-            contentSubTitleComponent.setContentSubTitleLeft(Kune.I18N.tWithNT("by: [%s]", "used in a list of authors",
-                    ((UserSimpleDTO) state.getAuthors().get(0)).getName()));
-            contentSubTitleComponent.setContentSubTitleLeftVisible(true);
-        } else {
-            if (state.getFolder().getParentFolderId() == null) {
-                // We translate root folder names (documents, chat room,
-                // etcetera)
-                contentTitleComponent.setContentTitle(Kune.I18N.t(state.getTitle()), false);
-            } else {
-                contentTitleComponent.setContentTitle(state.getTitle(), state.getContentRights().isEditable());
-            }
-            contentTitleComponent.setContentDateVisible(false);
-            contentSubTitleComponent.setContentSubTitleLeftVisible(false);
-        }
+        contentTitleComponent.setState(state);
+        contentSubTitleComponent.setState(state);
         if (state.getLanguage() != null) {
             contentSubTitleComponent.setContentSubTitleRight(Kune.I18N.t("Language: [%s]", state.getLanguage()
                     .getEnglishName()));
@@ -168,7 +183,7 @@ public class StateManagerDefault implements StateManager {
         workspace.setContent(clientTool.getContent());
         workspace.setContext(clientTool.getContext());
         workspace.getLicenseComponent().setLicense(state.getGroup().getLongName(), state.getLicense());
-        workspace.getTagsComponent().setTags("FIXME");
+        workspace.getTagsComponent().setState(state);
 
         if (oldState != null && oldState.getGroup().getShortName().equals(state.getGroup().getShortName())
                 && oldState.getGroupRights().isAdministrable() == state.getGroupRights().isAdministrable()
@@ -179,8 +194,7 @@ public class StateManagerDefault implements StateManager {
             loadSocialNetwork();
         }
 
-        // only for UI tests:
-        workspace.getBuddiesPresenceComponent().setBuddiesPresence();
+        workspace.getGroupSummaryComponent().setGroupSummary(state);
         Site.hideProgress();
     }
 

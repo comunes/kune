@@ -26,6 +26,7 @@ import org.ourproject.kune.chat.client.ChatClientModule;
 import org.ourproject.kune.docs.client.DocsClientModule;
 import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.app.ApplicationBuilder;
+import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.services.I18nUITranslationService;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.workspace.client.WorkspaceClientModule;
@@ -50,7 +51,8 @@ public class KuneEntryPoint implements EntryPoint {
             }
 
             public void onSuccess(final Object result) {
-                Kune.I18N.getInitialLexicon((String) result, new AsyncCallback() {
+                final I18nLanguageDTO initialLang = (I18nLanguageDTO) result;
+                Kune.I18N.getInitialLexicon(initialLang.getCode(), new AsyncCallback() {
                     public void onFailure(final Throwable caught) {
                         FireLog.debug("Workspace adaptation to your language failed");
                     }
@@ -61,7 +63,7 @@ public class KuneEntryPoint implements EntryPoint {
                         platform.install(new WorkspaceClientModule());
                         platform.install(new DocsClientModule());
                         platform.install(new ChatClientModule());
-                        new ApplicationBuilder(platform).build(userHash);
+                        new ApplicationBuilder(platform).build(userHash, initialLang);
                     }
                 });
             }

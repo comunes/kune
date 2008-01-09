@@ -23,6 +23,7 @@ package org.ourproject.kune.platf.server.content;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
+import org.ourproject.kune.platf.server.manager.impl.DefaultManager.SearchResult;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 
@@ -36,4 +37,7 @@ public interface ContainerManager {
 
     String renameFolder(Group group, Container container, String newName) throws SerializableException;
 
+    SearchResult search(String search);
+
+    SearchResult search(String search, Integer firstResult, Integer maxResults);
 }

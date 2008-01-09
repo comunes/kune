@@ -38,12 +38,7 @@ public class ContentRenameAction implements Action {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
         StateDTO currentState = services.session.getCurrentState();
-        if (currentState.hasDocument()) {
-            server.renameContent(services.session.getUserHash(), currentState.getGroup().getShortName(), currentState
-                    .getDocumentId(), newName, callback);
-        } else {
-            server.renameFolder(services.session.getUserHash(), currentState.getGroup().getShortName(), currentState
-                    .getFolder().getId(), newName, callback);
-        }
+        server.rename(services.session.getUserHash(), currentState.getGroup().getShortName(), currentState
+                .getStateToken().getEncoded(), newName, callback);
     }
 }

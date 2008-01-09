@@ -22,35 +22,28 @@ package org.ourproject.kune.platf.client.search.ui;
 import org.ourproject.kune.platf.client.search.SearchSitePresenter;
 import org.ourproject.kune.platf.client.search.SearchSiteView;
 import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.ui.AbstractSearcherPanel;
+import org.ourproject.kune.sitebar.client.services.Images;
+import org.ourproject.kune.workspace.client.workspace.ui.BottomTrayIcon;
 
+import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.KeyboardListener;
-import com.google.gwt.user.client.ui.Label;
-import com.gwtext.client.core.Connection;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Ext;
-import com.gwtext.client.core.ExtElement;
-import com.gwtext.client.core.UrlParam;
-import com.gwtext.client.data.DataProxy;
 import com.gwtext.client.data.FieldDef;
-import com.gwtext.client.data.HttpProxy;
-import com.gwtext.client.data.JsonReader;
-import com.gwtext.client.data.JsonReaderConfig;
 import com.gwtext.client.data.Record;
-import com.gwtext.client.data.RecordDef;
 import com.gwtext.client.data.SimpleStore;
 import com.gwtext.client.data.Store;
-import com.gwtext.client.data.StoreLoadConfig;
 import com.gwtext.client.data.StringFieldDef;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.LayoutDialog;
 import com.gwtext.client.widgets.LayoutDialogConfig;
 import com.gwtext.client.widgets.LoadMaskConfig;
-import com.gwtext.client.widgets.PagingToolbar;
-import com.gwtext.client.widgets.PagingToolbarConfig;
 import com.gwtext.client.widgets.TabPanel;
 import com.gwtext.client.widgets.TabPanelItem;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
+import com.gwtext.client.widgets.event.DialogListenerAdapter;
 import com.gwtext.client.widgets.event.TabPanelItemListenerAdapter;
 import com.gwtext.client.widgets.form.ComboBox;
 import com.gwtext.client.widgets.form.ComboBoxConfig;
@@ -66,10 +59,10 @@ import com.gwtext.client.widgets.grid.GridConfig;
 import com.gwtext.client.widgets.grid.event.GridCellListenerAdapter;
 import com.gwtext.client.widgets.layout.BorderLayout;
 import com.gwtext.client.widgets.layout.ContentPanel;
+import com.gwtext.client.widgets.layout.LayoutRegion;
 import com.gwtext.client.widgets.layout.LayoutRegionConfig;
 
-public class SearchSitePanel implements SearchSiteView {
-    private static final int PAGINATION_SIZE = 10;
+public class SearchSitePanel extends AbstractSearcherPanel implements SearchSiteView {
 
     private final LayoutDialog dialog;
     private final SearchSitePresenter presenter;
@@ -79,26 +72,46 @@ public class SearchSitePanel implements SearchSiteView {
 
     private Store historyStore;
 
+    private Store contentStore;
+
+    private BottomTrayIcon bottomIcon;
+
     public SearchSitePanel(final SearchSitePresenter initPresenter) {
         this.presenter = initPresenter;
         dialog = createDialog();
     }
 
-    public void searchGroups(final String text) {
-        dialog.setTitle(Kune.I18N.t("Searching for: [%s]", text));
+    public void search(final String text, final int type) {
         searchCombo.setValue(text);
-
-        groupStore.load(new StoreLoadConfig() {
-            {
-                setParams(new UrlParam[] { new UrlParam("query", text), new UrlParam("first", 1),
-                        new UrlParam("max", PAGINATION_SIZE) });
-            }
-        });
+        switch (type) {
+        case SearchSiteView.GROUP_USER_SEARCH:
+            query(groupStore, text);
+            break;
+        case SearchSiteView.CONTENT_SEARCH:
+            query(contentStore, text);
+            break;
+        default:
+            break;
+        }
     }
 
     public void show() {
-        dialog.center();
         dialog.show();
+        dialog.expand();
+        dialog.center();
+        if (bottomIcon == null) {
+            bottomIcon = new BottomTrayIcon(Kune.I18N.t("Show/hide searcher"));
+            bottomIcon.addMainButton(Images.App.getInstance().kuneSearchIcoPush(), new Command() {
+                public void execute() {
+                    if (dialog.isVisible()) {
+                        dialog.hide();
+                    } else {
+                        dialog.show();
+                    }
+                }
+            });
+            presenter.attachIconToBottomBar(bottomIcon);
+        }
     }
 
     public void hide() {
@@ -132,11 +145,11 @@ public class SearchSitePanel implements SearchSiteView {
                 setWidth(500);
                 setHeight(400);
                 setShadow(true);
-                setResizable(true);
+                setResizable(false);
                 setClosable(true);
                 setProxyDrag(true);
-                setCollapsible(false);
-                setTitle(Kune.I18N.t("Search results"));
+                setCollapsible(true);
+                // setTitle(Kune.I18N.t("Search results"));
             }
         }, north, null, null, null, center);
         final BorderLayout layout = dialog.getLayout();
@@ -145,18 +158,17 @@ public class SearchSitePanel implements SearchSiteView {
 
         ContentPanel searchPanel = createSearchForm(presenter);
 
-        ContentPanel groupsPanel = new ContentPanel(Ext.generateId(), "Groups");
-        Grid groupsGrid = createGroupsPanel();
+        ContentPanel groupsPanel = new ContentPanel(Ext.generateId(), "Groups & Users");
+        ContentPanel contentPanel = new ContentPanel(Ext.generateId(), "Content");
+
+        Grid groupsGrid = createSearchPanel(GROUP_USER_SEARCH);
+        Grid contentGrid = createSearchPanel(CONTENT_SEARCH);
         groupsPanel.add(groupsGrid);
-
-        ContentPanel usersPanel = new ContentPanel(Ext.generateId(), "Users");
-        usersPanel.add(new Label("In development"));
-        // usersPanel = createGroupsPanel();
-
+        ;
+        contentPanel.add(contentGrid);
         layout.add(LayoutRegionConfig.NORTH, searchPanel);
-
         layout.add(LayoutRegionConfig.CENTER, groupsPanel);
-        layout.add(LayoutRegionConfig.CENTER, usersPanel);
+        layout.add(LayoutRegionConfig.CENTER, contentPanel);
 
         layout.endUpdate();
 
@@ -175,17 +187,29 @@ public class SearchSitePanel implements SearchSiteView {
 
         tabPanel.getTab(0).addTabPanelItemListener(new TabPanelItemListenerAdapter() {
             public void onActivate(final TabPanelItem tab) {
-                dialog.setTitle(Kune.I18N.t("Search groups"));
-                presenter.doSearchGroups();
+                dialog.setTitle(Kune.I18N.t("Search users & groups"));
+                presenter.doSearch(GROUP_USER_SEARCH);
                 tab.getTextEl().highlight();
             }
         });
 
         tabPanel.getTab(1).addTabPanelItemListener(new TabPanelItemListenerAdapter() {
             public void onActivate(final TabPanelItem tab) {
-                dialog.setTitle(Kune.I18N.t("Search users"));
-                presenter.doSearchUsers();
+                dialog.setTitle(Kune.I18N.t("Search contents"));
+                presenter.doSearch(CONTENT_SEARCH);
                 tab.getTextEl().highlight();
+            }
+        });
+
+        LayoutRegion centerRegion = layout.getRegion(LayoutRegionConfig.CENTER);
+        String panelId = groupsPanel.getId();
+        centerRegion.showPanel(panelId);
+
+        dialog.addDialogListener(new DialogListenerAdapter() {
+            public void onResize(final LayoutDialog dialog, final int width, final int height) {
+                if (height < 40) {
+                    dialog.hide();
+                }
             }
         });
 
@@ -262,47 +286,45 @@ public class SearchSitePanel implements SearchSiteView {
         return searchPanel;
     }
 
-    private Grid createGroupsPanel() {
-        DataProxy dataProxy = new HttpProxy("/kune/json/GroupJSONService/search", Connection.POST);
+    private Grid createSearchPanel(final int type) {
+        final String id = "shortName";
+        FieldDef[] fieldDefs = new FieldDef[] { new StringFieldDef(id), new StringFieldDef("longName"),
+                new StringFieldDef("link"), new StringFieldDef("iconUrl") };
+        Store store;
 
-        JsonReader reader = new JsonReader(new JsonReaderConfig() {
-            {
-                setRoot("list");
-                setTotalProperty("size");
-                setId("shortName");
-            }
-        }, new RecordDef(new FieldDef[] { new StringFieldDef("shortName"), new StringFieldDef("longName"),
-                new StringFieldDef("link"), new StringFieldDef("iconUrl") }));
-
-        groupStore = new Store(dataProxy, reader);
-
-        groupStore.load(new StoreLoadConfig() {
-            {
-                setParams(new UrlParam[] { new UrlParam("query", "."), new UrlParam("first", 1),
-                        new UrlParam("max", PAGINATION_SIZE) });
-            }
-        });
+        switch (type) {
+        case GROUP_USER_SEARCH:
+            store = groupStore = createStore(fieldDefs, "/kune/json/GroupJSONService/search", id);
+            break;
+        case CONTENT_SEARCH:
+            store = contentStore = createStore(fieldDefs, "/kune/json/ContentJSONService/search", id);
+            break;
+        default:
+            throw new RuntimeException("Unknown type of search");
+        }
 
         ColumnModel columnModel = new ColumnModel(new ColumnConfig[] { new ColumnConfig() {
             {
                 // setHeader(Kune.I18N.t("Shortname"));
-                setDataIndex("shortName");
+                setDataIndex(id);
                 setWidth(100);
-                setTooltip(Kune.I18N.t("Click to go to the group homepage"));
+                // setTooltip(Kune.I18N.t("Click to go to the group homepage"));
             }
         }, new ColumnConfig() {
             {
                 // setHeader(Kune.I18N.t("Longname"));
                 setDataIndex("longName");
                 setWidth(350);
-                setTooltip(Kune.I18N.t("Click to go to the group homepage"));
+                // setTooltip(Kune.I18N.t("Click to go to the group homepage"));
                 // setRender();
             }
         } });
 
         // columnModel.setDefaultSortable(true);
 
-        Grid grid = new Grid("grid-search", "470px", "250px", groupStore, columnModel, new GridConfig() {
+        String gridName = type == GROUP_USER_SEARCH ? "group-search" : "content-search";
+
+        Grid grid = new Grid(gridName, "474px", "250px", store, columnModel, new GridConfig() {
             {
                 setLoadMask(true);
                 setLoadMask(new LoadMaskConfig(Kune.I18N.t("Searching")));
@@ -313,24 +335,14 @@ public class SearchSitePanel implements SearchSiteView {
 
             public void onCellClick(final Grid grid, final int rowIndex, final int colIndex, final EventObject e) {
                 Record record = groupStore.getRecordAt(rowIndex);
-                String groupShortName = record.getAsString("shortName");
+                String groupShortName = record.getAsString(id);
                 presenter.doGoto(groupShortName);
             }
         });
 
         grid.render();
 
-        ExtElement gridFoot = grid.getView().getFooterPanel(true);
-        new PagingToolbar(gridFoot, groupStore, new PagingToolbarConfig() {
-            {
-                setPageSize(25);
-                setDisplayInfo(true);
-                setDisplayMsg(Kune.I18N
-                        .tWithNT("Displaying results {0} - {1} of {2}",
-                                "Respect {} values in translations, these will produce: 'Displaying results 1 - 25 of 95465' for instance"));
-                setDisplayMsg(Kune.I18N.t("No results to display"));
-            }
-        });
+        createPagingToolbar(store, grid);
 
         return grid;
     }

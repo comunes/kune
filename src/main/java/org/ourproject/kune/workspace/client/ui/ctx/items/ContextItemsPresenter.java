@@ -30,7 +30,10 @@ import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.ContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.sitebar.client.Site;
+import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
@@ -112,7 +115,13 @@ public class ContextItemsPresenter implements ContextItems {
     }
 
     public void onTitleRename(final String text, final String token) {
-        // DefaultDispatcher.getInstance().fire(W, token, extra)
+        Site.showProgressSaving();
+        DefaultDispatcher.getInstance().fire(DocsEvents.RENAME_CONTENT, text, new AsyncCallbackSimple() {
+            public void onSuccess(final Object result) {
+                DefaultDispatcher.getInstance().fire(WorkspaceEvents.RELOAD_CONTEXT, null, null);
+                Site.hideProgress();
+            }
+        });
     }
 
 }

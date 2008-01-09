@@ -17,12 +17,18 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.workspace;
+package org.ourproject.kune.workspace.client.actions;
 
-import org.ourproject.kune.platf.client.Component;
+import org.ourproject.kune.platf.client.Services;
+import org.ourproject.kune.platf.client.dispatch.Action;
 
-public interface BuddiesPresenceComponent extends Component {
+public class RefreshContentTitleAction implements Action {
 
-    void setBuddiesPresence();
+    public void execute(final Object value, final Object extra, final Services services) {
+        onRefreshContentTitle(services);
+    }
 
+    private void onRefreshContentTitle(final Services services) {
+        services.stateManager.refreshContentTitle();
+    }
 }

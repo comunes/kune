@@ -1,12 +1,12 @@
 package org.ourproject.kune.platf.integration.socialnet;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
+import org.ourproject.kune.platf.client.errors.AlreadyUserMemberException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.integration.IntegrationTest;
@@ -30,11 +30,10 @@ public class SocialNetworkServiceTest extends IntegrationTest {
         groupShortName = getDefSiteGroupName();
     }
 
-    @Test
+    @Test(expected = AlreadyUserMemberException.class)
     public void testRequestJoinPersonalGroup() throws SerializableException {
         doLogin();
-        final String result = socialNetworkService.requestJoinGroup(session.getHash(), groupShortName);
-        assertEquals(SocialNetworkDTO.REQ_JOIN_WAITING_MODERATION, result);
+        socialNetworkService.requestJoinGroup(session.getHash(), groupShortName);
     }
 
     @Test(expected = UserMustBeLoggedException.class)

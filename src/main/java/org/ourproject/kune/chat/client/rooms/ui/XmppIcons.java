@@ -17,7 +17,7 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.presence.ui;
+package org.ourproject.kune.chat.client.rooms.ui;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;

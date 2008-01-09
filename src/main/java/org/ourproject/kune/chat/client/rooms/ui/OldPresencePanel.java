@@ -17,7 +17,7 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.presence.ui;
+package org.ourproject.kune.chat.client.rooms.ui;
 
 import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.services.Images;
@@ -25,11 +25,10 @@ import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.stacks.StackSubItemAction;
 import org.ourproject.kune.platf.client.ui.stacks.StackedDropDownPanel;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
-import org.ourproject.kune.workspace.client.presence.BuddiesPresenceView;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
-public class BuddiesPresencePanel extends StackedDropDownPanel implements BuddiesPresenceView {
+public class OldPresencePanel extends StackedDropDownPanel {
     private static final int CONTACT_ONLINE = 0;
     private static final int CONTACT_OFFLINE = 1;
     private static final int CONTACT_BUSY = 2;
@@ -41,7 +40,7 @@ public class BuddiesPresencePanel extends StackedDropDownPanel implements Buddie
     XmppIcons statusIcons = XmppIcons.App.getInstance();
     Images img = Images.App.getInstance();
 
-    public BuddiesPresencePanel(final AbstractPresenter presenter) {
+    public OldPresencePanel(final AbstractPresenter presenter) {
         super(presenter, "#CD87DE", Kune.I18N.t("My buddies"), Kune.I18N.t("Presence of my buddies"), true);
         super.addStackItem(Kune.I18N.t("Connected"), Kune.I18N.t("Buddies connected"), true);
         super.addStackItem(Kune.I18N.t("Not connected"), Kune.I18N.t("Buddies not connected"), true);

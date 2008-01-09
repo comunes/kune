@@ -29,6 +29,7 @@ import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.License;
+import org.ourproject.kune.platf.server.domain.TagResult;
 
 public class State {
     private String documentId;
@@ -51,6 +52,7 @@ public class State {
     private List authors;
     private Date publishedOn;
     private String tags;
+    private List<TagResult> groupTags;
 
     public State() {
     }
@@ -221,6 +223,14 @@ public class State {
 
     public void setTags(final String tags) {
         this.tags = tags;
+    }
+
+    public List<TagResult> getGroupTags() {
+        return groupTags;
+    }
+
+    public void setGroupTags(final List<TagResult> groupTags) {
+        this.groupTags = groupTags;
     }
 
 }

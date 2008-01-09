@@ -187,6 +187,7 @@ public class StackedDropDownPanel extends DropDownPanel implements UIConstants {
 
     public void clear() {
         commentsVP.clear();
+        commentsVP.setVisible(false);
         stack.clear();
         bottomLinksIndex.clear();
         bottomLinksVP.clear();
@@ -195,6 +196,9 @@ public class StackedDropDownPanel extends DropDownPanel implements UIConstants {
     }
 
     public void addComment(final String comment) {
+        if (!commentsVP.isVisible()) {
+            commentsVP.setVisible(true);
+        }
         Label label = new Label(comment);
         commentsVP.add(label);
         label.addStyleName("kune-Margin-Small-trbl");

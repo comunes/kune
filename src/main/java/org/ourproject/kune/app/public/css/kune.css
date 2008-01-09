@@ -150,17 +150,20 @@ legend {
   padding: 0px 12px;
 }
 
-.kune-CustomPushButton-up {}
+.kune-CustomPushButton-up {
+  color: #161616;
+}
 
 .kune-CustomPushButton-down {
   color: black;
 }
 
 .kune-CustomPushButton-up-hovering {
-  color: #996633;
+  background: transparent url(img/button-bg-soft.gif) repeat-x 0 0;
 }
 
 .kune-CustomPushButton-down-hovering {
+  color: black;
 }
 
 .kune-CustomPushButton-up-disabled {
@@ -421,6 +424,10 @@ legend {
 
 .kune-Margin-Medium-r {
   margin-right: 5px;
+}
+
+.kune-Margin-Medium-b {
+  margin-bottom: 5px;
 }
 
 .kune-Margin-Medium-l {

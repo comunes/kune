@@ -36,4 +36,6 @@ public interface TextEditor {
 
     public void onSaveFailed();
 
+    public void reset();
+
 }

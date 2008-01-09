@@ -26,6 +26,7 @@ public class WorkspaceUIExtensionPoint {
     public static final String CONTENT_TOOLBAR_LEFT = "ws.entity.content.toolbar.left";
     public static final String CONTENT_BOTTOM_TOOLBAR_RIGHT = "ws.entity.content.bottomtb.right";
     public static final String CONTENT_BOTTOM_TOOLBAR_LEFT = "ws.entity.content.bottomtb.left";
+    public static final String CONTENT_BOTTOM_ICONBAR = "ws.site.bottom.iconbar";
 
     private final String id;
     private final CellPanel panel;

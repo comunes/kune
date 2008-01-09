@@ -48,8 +48,8 @@ public class LanguageSelectorPanel extends Form implements LanguageSelectorView 
         super.render();
     }
 
-    public void selectLanguage(final String languageCode) {
-        langCombo.selectByValue(languageCode, true);
+    public void selectLanguage(final String languageEnglishName) {
+        langCombo.setValue(languageEnglishName);
     }
 
     public String getLanguage() {

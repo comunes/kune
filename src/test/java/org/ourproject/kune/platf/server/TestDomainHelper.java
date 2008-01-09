@@ -83,11 +83,11 @@ public abstract class TestDomainHelper {
     public static Content createDescriptor(final long id, final String title, final String content) {
         Content descriptor = new Content();
         descriptor.setId(id);
-        Revision rev = new Revision();
+        Revision rev = new Revision(descriptor);
         descriptor.addRevision(rev);
         Data data = rev.getData();
         data.setTitle(title);
-        data.setContent(content.toCharArray());
+        data.setBody(content.toCharArray());
         return descriptor;
     }
 

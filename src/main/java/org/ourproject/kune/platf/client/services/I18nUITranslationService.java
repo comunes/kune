@@ -49,8 +49,13 @@ public class I18nUITranslationService extends I18nTranslationService {
         String locale = loc.getParameter("locale");
         if (locale != null) {
             // If locale parameter exist, use it
-            String[] localeSplitted = locale.split("_");
-            currentLanguage = localeSplitted[0];
+            if (locale.equals("pt-br") || locale.equals("zh-Hant") || locale.equals("zh-Hans")) {
+                // initially only three rfc 3306 langs supported
+                currentLanguage = locale;
+            } else {
+                String[] localeSplitted = locale.split("-");
+                currentLanguage = localeSplitted[0];
+            }
             callback.onSuccess(currentLanguage);
         } else {
             I18nServiceAsync server = I18nService.App.getInstance();

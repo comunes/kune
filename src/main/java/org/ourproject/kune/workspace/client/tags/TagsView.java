@@ -19,10 +19,12 @@
 
 package org.ourproject.kune.workspace.client.tags;
 
+import java.util.List;
+
 import org.ourproject.kune.platf.client.View;
 
 public interface TagsView extends View {
 
-    void setTags(String thisIsOnlyForTests);
+    void setTags(List groupTags);
 
 }

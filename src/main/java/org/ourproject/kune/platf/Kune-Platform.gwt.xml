@@ -2,6 +2,7 @@
   <!-- Inherit the core Web Toolkit stuff.                  -->
   <inherits name='com.google.gwt.user.User' />
   <inherits name='org.ourproject.kune.sitebar.Kune-Sitebar' />
+  <inherits name="com.google.gwt.user.UserAgent" />
 
   <replace-with
     class="org.ourproject.kune.platf.client.ui.CustomHorizontalSplitPanel.Impl">

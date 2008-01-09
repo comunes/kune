@@ -28,7 +28,6 @@ import org.ourproject.kune.platf.client.ui.palette.WebSafePalettePresenter;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.ClickListener;
@@ -42,6 +41,8 @@ import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.ToggleButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtext.client.widgets.MessageBox;
+import com.gwtext.client.widgets.MessageBox.PromptCallback;
 
 /**
  * A sample toolbar for use with {@link RichTextArea}. It provides a simple UI
@@ -84,15 +85,24 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
             } else if (sender == justifyRight) {
                 basic.setJustification(RichTextArea.Justification.RIGHT);
             } else if (sender == insertImage) {
-                String url = Window.prompt("Enter an image URL:", "http://");
-                if (url != null) {
-                    extended.insertImage(url);
-                }
+                // i18n
+                MessageBox.prompt("Insert image", "Enter an image URL:", new PromptCallback() {
+                    public void execute(final String btnID, final String text) {
+                        if (btnID.equals("ok") && text != null) {
+                            extended.insertImage(text);
+                        }
+                    }
+                });
+                showImagePanel();
             } else if (sender == createLink) {
-                String url = Window.prompt("Enter a link URL:", "http://");
-                if (url != null) {
-                    extended.createLink(url);
-                }
+                MessageBox.prompt("Insert a link", "Enter a link URL:", new PromptCallback() {
+                    public void execute(final String btnID, final String text) {
+                        if (btnID.equals("ok") && text != null) {
+                            extended.createLink(text);
+                        }
+                    }
+                });
+                showLinkPanel();
             } else if (sender == backColor) {
                 showPalette(sender, sender.getAbsoluteLeft(), sender.getAbsoluteTop() + 20);
                 palettePresenter.addColorSelectListener(new ColorSelectListener() {
@@ -121,8 +131,6 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
                 extended.insertUnorderedList();
             } else if (sender == removeFormat) {
                 extended.removeFormat();
-            } else if (sender == editHtml) {
-                fireEditHTML();
             } else if (sender == richText) {
                 // We use the RichTextArea's onKeyUp event to update the
                 // toolbar status.
@@ -138,7 +146,20 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
             }
         }
 
+        private void showLinkPanel() {
+            // TODO Auto-generated method stub
+
+        }
+
+        private void showImagePanel() {
+            // TODO Auto-generated method stub
+
+        }
+
         public void onKeyDown(final Widget sender, final char keyCode, final int modifiers) {
+            if (sender == removeLink && keyCode == KeyboardListener.KEY_ENTER) {
+                fireEditHTML();
+            }
         }
 
         public void onKeyPress(final Widget sender, final char keyCode, final int modifiers) {
@@ -196,7 +217,6 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
     private MenuBar fontSizes;
     private final CustomPushButton save;
     private final CustomPushButton close;
-    private ToggleButton editHtml;
     private WebSafePalettePanel palettePanel;
     private final TextEditorPresenter panelListener;
 
@@ -286,9 +306,10 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
 
         close.addStyleName("kune-Button-Large-lrSpace");
 
-        if (basic != null) {
-            topPanel.add(editHtml = createToggleButton(images.editHtml(), Kune.I18N.t("Edit HTML")));
-        }
+        // if (basic != null) {
+        // topPanel.add(editHtml = createToggleButton(images.editHtml(),
+        // Kune.I18N.t("Edit HTML")));
+        // }
 
         topPanel.add(save);
         topPanel.add(close);
@@ -310,31 +331,31 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
         panelListener.onEditHTML();
     }
 
-    public void editHTML(boolean edit) {
+    public void editHTML(final boolean edit) {
         boolean enable = !edit;
         if (basic != null) {
-            bold.setVisible(enable);
-            italic.setVisible(enable);
-            underline.setVisible(enable);
-            subscript.setVisible(enable);
-            superscript.setVisible(enable);
-            justifyLeft.setVisible(enable);
-            justifyCenter.setVisible(enable);
-            justifyRight.setVisible(enable);
-            backColor.setVisible(enable);
-            fontColor.setVisible(enable);
+            bold.setEnabled(enable);
+            italic.setEnabled(enable);
+            underline.setEnabled(enable);
+            subscript.setEnabled(enable);
+            superscript.setEnabled(enable);
+            justifyLeft.setEnabled(enable);
+            justifyCenter.setEnabled(enable);
+            justifyRight.setEnabled(enable);
+            backColor.setEnabled(enable);
+            fontColor.setEnabled(enable);
         }
         if (extended != null) {
-            strikethrough.setVisible(enable);
-            indent.setVisible(enable);
-            outdent.setVisible(enable);
-            insertImage.setVisible(enable);
-            createLink.setVisible(enable);
-            removeLink.setVisible(enable);
-            ol.setVisible(enable);
-            ul.setVisible(enable);
-            hr.setVisible(enable);
-            removeFormat.setVisible(enable);
+            strikethrough.setEnabled(enable);
+            indent.setEnabled(enable);
+            outdent.setEnabled(enable);
+            insertImage.setEnabled(enable);
+            createLink.setEnabled(enable);
+            removeLink.setEnabled(enable);
+            ol.setEnabled(enable);
+            ul.setEnabled(enable);
+            hr.setEnabled(enable);
+            removeFormat.setEnabled(enable);
             fonts.setVisible(enable);
             fontSizes.setVisible(enable);
         }

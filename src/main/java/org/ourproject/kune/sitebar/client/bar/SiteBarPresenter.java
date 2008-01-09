@@ -59,7 +59,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
     }
 
     public void setState(final StateDTO state) {
-        StateToken token = state.getState();
+        StateToken token = state.getStateToken();
         if (state.getAccessLists().getViewers().getMode().equals(GroupListDTO.EVERYONE)) {
             String publicUrl = token.getPublicUrl();
             view.setContentGotoPublicUrl(publicUrl);
@@ -73,7 +73,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
     public void doLogin(final String previousToken) {
         this.previousToken = previousToken;
         Site.showProgressProcessing();
-        view.showLoginDialog();
+        view.showLoginDialog(session.getCurrentLanguage());
         view.centerLoginDialog();
         Site.hideProgress();
     }

@@ -29,27 +29,27 @@ public class ContentDTO implements IsSerializable {
     private String typeId;
 
     public Long getId() {
-	return id;
+        return id;
     }
 
     public void setId(final Long id) {
-	this.id = id;
+        this.id = id;
     }
 
     public String getTitle() {
-	return title;
+        return title;
     }
 
     public void setTitle(final String title) {
-	this.title = title;
+        this.title = title;
     }
 
     public String getTypeId() {
-	return typeId;
+        return typeId;
     }
 
     public void setTypeId(final String typeId) {
-	this.typeId = typeId;
+        this.typeId = typeId;
     }
 
 }

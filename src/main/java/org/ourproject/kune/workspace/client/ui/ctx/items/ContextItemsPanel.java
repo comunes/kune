@@ -86,7 +86,8 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
     }
 
     public void setParentButtonEnabled(final boolean isEnabled) {
-        topBar.btnGoParent.setEnabled(isEnabled);
+        topBar.btnGoParent.setVisible(isEnabled);
+        topBar.btnGoParentDisabled.setVisible(!isEnabled);
     }
 
     public void setParentTreeVisible(final boolean visible) {

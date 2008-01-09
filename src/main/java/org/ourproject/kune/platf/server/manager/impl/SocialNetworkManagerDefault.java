@@ -29,6 +29,7 @@ import javax.persistence.EntityManager;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.AlreadyGroupMemberException;
+import org.ourproject.kune.platf.client.errors.AlreadyUserMemberException;
 import org.ourproject.kune.platf.client.errors.LastAdminInGroupException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.server.ParticipationData;
@@ -64,6 +65,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 
     public void addGroupToAdmins(final User userLogged, final Group group, final Group inGroup)
             throws SerializableException {
+        checkGroupAddingToSelf(group, inGroup);
         SocialNetwork sn = inGroup.getSocialNetwork();
         checkUserLoggedIsAdmin(userLogged, sn);
         checkGroupIsNotAlreadyAMember(group, sn);
@@ -75,6 +77,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 
     public void addGroupToCollabs(final User userLogged, final Group group, final Group inGroup)
             throws SerializableException {
+        checkGroupAddingToSelf(group, inGroup);
         SocialNetwork sn = inGroup.getSocialNetwork();
         checkUserLoggedIsAdmin(userLogged, sn);
         checkGroupIsNotAlreadyAMember(group, sn);
@@ -86,6 +89,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 
     public void addGroupToViewers(final User userLogged, final Group group, final Group inGroup)
             throws SerializableException {
+        checkGroupAddingToSelf(group, inGroup);
         SocialNetwork sn = inGroup.getSocialNetwork();
         checkUserLoggedIsAdmin(userLogged, sn);
         checkGroupIsNotAlreadyAMember(group, sn);
@@ -105,17 +109,19 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
         if (admissionType == null) {
             throw new RuntimeException();
         }
+        Group userGroup = user.getUserGroup();
+        checkGroupIsNotAlreadyAMember(userGroup, sn);
         if (isModerated(admissionType)) {
-            sn.addPendingCollaborator(user.getUserGroup());
+            sn.addPendingCollaborator(userGroup);
             return SocialNetworkDTO.REQ_JOIN_WAITING_MODERATION;
         } else if (isOpen(admissionType)) {
             if (inGroup.getType().equals(GroupType.ORPHANED_PROJECT)) {
-                sn.addAdmin(user.getUserGroup());
+                sn.addAdmin(userGroup);
                 inGroup.setType(GroupType.PROJECT);
                 inGroup.setAdmissionType(AdmissionType.Moderated);
                 persist(inGroup, Group.class);
             } else {
-                sn.addCollaborator(user.getUserGroup());
+                sn.addCollaborator(userGroup);
             }
             return SocialNetworkDTO.REQ_JOIN_ACEPTED;
         } else if (isClosed(admissionType)) {
@@ -255,12 +261,24 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
         }
     }
 
-    private void checkGroupIsNotAlreadyAMember(final Group group, final SocialNetwork sn)
-            throws AlreadyGroupMemberException {
+    private void checkGroupIsNotAlreadyAMember(final Group group, final SocialNetwork sn) throws SerializableException {
         if (sn.isAdmin(group) || sn.isCollab(group) || sn.isViewer(group) && notEveryOneCanView(sn)) {
+            throwGroupMemberException(group);
+        }
+    }
+
+    private void throwGroupMemberException(final Group group) throws SerializableException {
+        if (group.getType().equals(GroupType.PERSONAL)) {
+            throw new AlreadyUserMemberException();
+        } else {
             throw new AlreadyGroupMemberException();
         }
+    }
 
+    private void checkGroupAddingToSelf(final Group group, final Group inGroup) throws SerializableException {
+        if (group.equals(inGroup)) {
+            throwGroupMemberException(group);
+        }
     }
 
     private boolean notEveryOneCanView(final SocialNetwork sn) {

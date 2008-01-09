@@ -35,33 +35,36 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
     private ChatEngine chat;
 
     public ChatClientTool() {
-	super(Kune.I18N.t("chat rooms"));
-	components = new ChatToolComponents(this);
+        super(Kune.I18N.t("chat rooms"));
+        components = new ChatToolComponents(this);
     }
 
     public ChatEngine getChat() {
-	return chat;
+        return chat;
     }
 
     public void initEngine(final ChatState state) {
-	this.chat = new ChatEngineXmpp(state);
+        this.chat = new ChatEngineXmpp(state);
     }
 
     public WorkspaceComponent getContent() {
-	return components.getContent();
+        return components.getContent();
     }
 
     public WorkspaceComponent getContext() {
-	return components.getContext();
+        return components.getContext();
     }
 
     public String getName() {
-	return NAME;
+        return NAME;
     }
 
     public void setContent(final StateDTO state) {
-	components.getContent().setState(state);
-	components.getContext().setState(state);
+        components.getContent().setState(state);
+    }
+
+    public void setContext(final StateDTO state) {
+        components.getContext().setState(state);
     }
 
 }

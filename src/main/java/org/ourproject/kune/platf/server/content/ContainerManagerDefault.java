@@ -26,6 +26,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.queryParser.MultiFieldQueryParser;
+import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.search.Query;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
@@ -81,4 +85,20 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
         persist(container);
         return newName;
     }
+
+    public SearchResult search(final String search) {
+        return this.search(search, null, null);
+    }
+
+    public SearchResult search(final String search, final Integer firstResult, final Integer maxResults) {
+        MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "name" }, new StandardAnalyzer());
+        Query query;
+        try {
+            query = parser.parse(search);
+        } catch (ParseException e) {
+            throw new RuntimeException("Error parsing search");
+        }
+        return super.search(query, firstResult, maxResults);
+    }
+
 }

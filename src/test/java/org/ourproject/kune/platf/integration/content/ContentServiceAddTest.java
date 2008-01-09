@@ -63,7 +63,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
         assertEquals(cntRights, added.getContentRights());
         assertEquals(ctxRight, added.getFolderRights());
 
-        StateToken newState = added.getState();
+        StateToken newState = added.getStateToken();
         StateDTO sameAgain = contentService.getContent(session.getHash(), groupName, newState);
         assertNotNull(sameAgain);
         assertEquals(2, sameAgain.getFolder().getContents().size());

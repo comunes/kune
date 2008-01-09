@@ -32,11 +32,13 @@ public class ShowTranslatorAction implements Action {
     }
 
     private void onShowTranslatorAction(final Services services) {
+        Site.showProgressLoading();
         if (services.session.isLogged()) {
             Workspace ws = services.app.getWorkspace();
             ws.getI18nTranslatorComponent().show();
         } else {
             Site.info(Kune.I18N.t("Sign in or register to help with translation"));
         }
+        Site.hideProgress();
     }
 }

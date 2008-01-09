@@ -41,9 +41,7 @@ import org.ourproject.kune.workspace.client.license.LicenseComponent;
 import org.ourproject.kune.workspace.client.license.LicensePresenter;
 import org.ourproject.kune.workspace.client.license.LicenseView;
 import org.ourproject.kune.workspace.client.license.ui.LicensePanel;
-import org.ourproject.kune.workspace.client.presence.BuddiesPresencePresenter;
-import org.ourproject.kune.workspace.client.presence.BuddiesPresenceView;
-import org.ourproject.kune.workspace.client.presence.ui.BuddiesPresencePanel;
+import org.ourproject.kune.workspace.client.presence.ui.GroupSummaryPanel;
 import org.ourproject.kune.workspace.client.socialnet.GroupLiveSearchPresenter;
 import org.ourproject.kune.workspace.client.socialnet.GroupLiveSearchView;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersPresenter;
@@ -53,6 +51,8 @@ import org.ourproject.kune.workspace.client.socialnet.ParticipationView;
 import org.ourproject.kune.workspace.client.socialnet.ui.GroupLiveSearchPanel;
 import org.ourproject.kune.workspace.client.socialnet.ui.GroupMembersPanel;
 import org.ourproject.kune.workspace.client.socialnet.ui.ParticipationPanel;
+import org.ourproject.kune.workspace.client.summary.GroupSummaryPresenter;
+import org.ourproject.kune.workspace.client.summary.GroupSummaryView;
 import org.ourproject.kune.workspace.client.tags.TagsPresenter;
 import org.ourproject.kune.workspace.client.tags.TagsView;
 import org.ourproject.kune.workspace.client.tags.ui.TagsPanel;
@@ -62,7 +62,7 @@ import org.ourproject.kune.workspace.client.theme.ui.ThemeMenuPanel;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPanel;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPresenter;
-import org.ourproject.kune.workspace.client.workspace.BuddiesPresenceComponent;
+import org.ourproject.kune.workspace.client.workspace.GroupSummaryComponent;
 import org.ourproject.kune.workspace.client.workspace.ContentBottomToolBarComponent;
 import org.ourproject.kune.workspace.client.workspace.ContentBottomToolBarPresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentBottomToolBarView;
@@ -91,7 +91,11 @@ import org.ourproject.kune.workspace.client.workspace.ui.WorkspacePanel;
 
 public class WorkspaceFactory {
 
+    private static LanguageSelectorPresenter presenter;
+    private static Session session;
+
     public static Workspace createWorkspace(final Session session) {
+        WorkspaceFactory.session = session;
         WorkspacePresenter workspace = new WorkspacePresenter(session);
         WorkspaceView view = new WorkspacePanel(workspace);
         workspace.init(view);
@@ -152,9 +156,9 @@ public class WorkspaceFactory {
         return presenter;
     }
 
-    public static BuddiesPresenceComponent createBuddiesPresenceComponent() {
-        BuddiesPresencePresenter presenter = new BuddiesPresencePresenter();
-        BuddiesPresenceView view = new BuddiesPresencePanel(presenter);
+    public static GroupSummaryComponent createGroupSummaryComponent() {
+        GroupSummaryPresenter presenter = new GroupSummaryPresenter();
+        GroupSummaryView view = new GroupSummaryPanel(presenter);
         presenter.init(view);
         return presenter;
     }
@@ -194,17 +198,20 @@ public class WorkspaceFactory {
         return presenter;
     }
 
-    public static I18nTranslatorComponent createI18nTranslatorComponent(final Session session) {
+    public static I18nTranslatorComponent createI18nTranslatorComponent() {
         I18nTranslatorPresenter presenter = new I18nTranslatorPresenter(session);
         I18nTranslatorView view = new I18nTranslatorPanel(presenter);
         presenter.init(view);
         return presenter;
     }
 
-    public static LanguageSelectorComponent createLanguageSelectorComponent(final Object[][] languages) {
-        LanguageSelectorPresenter presenter = new LanguageSelectorPresenter();
-        LanguageSelectorView view = new LanguageSelectorPanel(presenter, languages, Kune.I18N.t("Language"));
-        presenter.init(view);
+    public static LanguageSelectorComponent getLanguageSelectorComponent() {
+        if (presenter == null) {
+            presenter = new LanguageSelectorPresenter();
+            LanguageSelectorView view = new LanguageSelectorPanel(presenter, session.getLanguagesArray(), Kune.I18N
+                    .t("Language"));
+            presenter.init(view);
+        }
         return presenter;
     }
 

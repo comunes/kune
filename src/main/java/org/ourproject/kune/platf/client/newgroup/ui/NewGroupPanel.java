@@ -65,6 +65,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
     private Radio projectRadio;
     private Radio orgRadio;
     private Radio communityRadio;
+    private Radio orphanedProjectRadio;
 
     private TextField shortNameField;
     private TextField longNameField;
@@ -73,8 +74,6 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
     private LicenseChoose licenseChoosePanel;
 
     private final SiteMessagePanel messagesPanel;
-
-    private Radio orphanedProjectRadio;
 
     public NewGroupPanel(final NewGroupPresenter presenter) {
         super(Kune.I18N.t("Register a new Group"), true, false, 470, 440, new WizardListener() {
@@ -125,6 +124,8 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         newGroupInitialDataHP.addStyleName("kune-Margin-Medium-b");
         step1Label.addStyleName("kune-Margin-Large-l");
         step2Label.addStyleName("kune-Margin-Large-l");
+        step1Label.addStyleName("kune-Margin-Medium-b");
+        step2Label.addStyleName("kune-Margin-Medium-b");
 
         messagesPanel = new SiteMessagePanel(presenter, false);
         messagesPanel.setWidth("425");
@@ -167,6 +168,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         ((LicenseChoosePanel) licenseChoosePanel.getView()).reset();
         showNewGroupInitialDataForm();
         initBottomButtons();
+        shortNameField.focus(false);
     }
 
     public String getShortName() {

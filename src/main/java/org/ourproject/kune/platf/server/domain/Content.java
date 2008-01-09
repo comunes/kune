@@ -41,27 +41,34 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
 import org.hibernate.validator.NotNull;
 
 @Entity
 @Table(name = "contents")
+@Indexed
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Content implements HasStateToken {
     private static final String TOKEN_SEPARATOR = ".";
 
     @Id
+    @DocumentId
     @GeneratedValue
     private Long id;
 
     @Version
     private int version;
 
+    @IndexedEmbedded
     @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private List<Tag> tags;
 
     @OneToOne
     private License license;
 
+    @IndexedEmbedded
     @OneToOne(cascade = { CascadeType.ALL })
     private Revision lastRevision;
 
@@ -76,7 +83,6 @@ public class Content implements HasStateToken {
     @Basic(optional = false)
     private Date publishedOn;
 
-    // @Basic(optional = false)
     private String typeId;
 
     @OneToMany(cascade = CascadeType.ALL)
@@ -101,7 +107,7 @@ public class Content implements HasStateToken {
         authors = new ArrayList<User>();
         tags = new ArrayList<Tag>();
         this.createdOn = System.currentTimeMillis();
-        this.lastRevision = new Revision();
+        this.lastRevision = new Revision(this);
         accessLists = null;
         markForDeletion = false;
     }

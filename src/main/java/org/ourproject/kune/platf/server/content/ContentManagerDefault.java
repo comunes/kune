@@ -27,6 +27,10 @@ import java.util.Iterator;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.queryParser.MultiFieldQueryParser;
+import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.search.Query;
 import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
 import org.ourproject.kune.platf.client.errors.UserNotFoundException;
 import org.ourproject.kune.platf.client.ui.KuneStringUtils;
@@ -72,7 +76,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         descriptor.setPublishedOn(new Date());
         descriptor.setFolder(container);
         container.addContent(descriptor);
-        Revision revision = new Revision();
+        Revision revision = new Revision(descriptor);
         revision.setTitle(title);
         revision.setDataContent(body);
         descriptor.addRevision(revision);
@@ -80,7 +84,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     }
 
     public Content save(final User editor, final Content descriptor, final String content) {
-        Revision revision = new Revision();
+        Revision revision = new Revision(descriptor);
         revision.setEditor(editor);
         revision.setTitle(descriptor.getTitle());
         revision.setDataContent(content);
@@ -186,6 +190,22 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         content.setMarkForDeletion(true);
         content.setDeletedOn(new Date());
         // FIXME: Maybe set only visible for admins
+    }
+
+    public SearchResult search(final String search) {
+        return this.search(search, null, null);
+    }
+
+    public SearchResult search(final String search, final Integer firstResult, final Integer maxResults) {
+        MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "data", "title", "tags.name" },
+                new StandardAnalyzer());
+        Query query;
+        try {
+            query = parser.parse(search);
+        } catch (ParseException e) {
+            throw new RuntimeException("Error parsing search");
+        }
+        return super.search(query, firstResult, maxResults);
     }
 
 }

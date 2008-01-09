@@ -22,21 +22,21 @@ package org.ourproject.kune.platf.client.search;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
+import org.ourproject.kune.workspace.client.WorkspaceUIExtensionPoint;
 
-public class SearchSitePresenter implements SearchSite {
+public class SearchSitePresenter extends AbstractPresenter implements SearchSite {
 
-    private static final String GROUPS_SEARCH = "groups";
-    private static final String USERS_SEARCH = "users";
     private SearchSiteView view;
-    private String currentSearch;
+    private int currentSearch;
     private final ArrayList searchHistory;
 
     public SearchSitePresenter() {
         searchHistory = new ArrayList();
-        currentSearch = GROUPS_SEARCH;
+        currentSearch = SearchSiteView.GROUP_USER_SEARCH;
     }
 
     public void init(final SearchSiteView view) {
@@ -51,21 +51,18 @@ public class SearchSitePresenter implements SearchSite {
         view.hide();
     }
 
-    public void doSearchGroups() {
-        currentSearch = GROUPS_SEARCH;
-        doSearch(view.getComboTextToSearch());
+    public void doSearch(final int typeOfSearch) {
+        doSearchOfType(view.getComboTextToSearch(), typeOfSearch);
     }
 
-    public void doSearchUsers() {
-        currentSearch = USERS_SEARCH;
-        doSearch(view.getComboTextToSearch());
+    public void doSearchOfType(final String text, final int typeOfSearch) {
+        this.currentSearch = typeOfSearch;
+        doSearch(text);
     }
 
     public void doSearch(final String text) {
         searchHistory.add(text);
-        if (currentSearch == GROUPS_SEARCH) {
-            view.searchGroups(text);
-        }
+        view.search(text, currentSearch);
     }
 
     public Object[][] getSearchHistory() {
@@ -79,7 +76,9 @@ public class SearchSitePresenter implements SearchSite {
         return objs;
     }
 
-    public void doGoto(final String groupShortName) {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.GOTO, groupShortName, null);
+    public void attachIconToBottomBar(final View view) {
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ATTACH_TO_EXT_POINT,
+                WorkspaceUIExtensionPoint.CONTENT_BOTTOM_ICONBAR, view);
     }
+
 }

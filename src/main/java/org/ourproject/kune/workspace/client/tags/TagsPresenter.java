@@ -19,7 +19,13 @@
 
 package org.ourproject.kune.workspace.client.tags;
 
+import java.util.List;
+
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
+import org.ourproject.kune.platf.client.search.SearchSiteView;
+import org.ourproject.kune.workspace.client.WorkspaceEvents;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 import org.ourproject.kune.workspace.client.workspace.TagsComponent;
 
 public class TagsPresenter implements TagsComponent {
@@ -29,8 +35,12 @@ public class TagsPresenter implements TagsComponent {
     public TagsPresenter() {
     }
 
-    public void setTags(final String thisIsOnlyForTests) {
-        view.setTags(thisIsOnlyForTests);
+    public void setState(final StateDTO state) {
+        view.setTags(state.getGroupTags());
+    }
+
+    public void setGroupTags(final List groupTags) {
+        view.setTags(groupTags);
     }
 
     public void init(final TagsView view) {
@@ -39,5 +49,10 @@ public class TagsPresenter implements TagsComponent {
 
     public View getView() {
         return view;
+    }
+
+    public void doSearchTag(final String name) {
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.SHOW_SEARCHER, "tag:" + name,
+                new Integer(SearchSiteView.CONTENT_SEARCH));
     }
 }

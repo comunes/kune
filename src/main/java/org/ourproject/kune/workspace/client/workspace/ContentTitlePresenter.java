@@ -22,8 +22,11 @@ package org.ourproject.kune.workspace.client.workspace;
 import org.ourproject.kune.docs.client.actions.DocsEvents;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.sitebar.client.Site;
+import org.ourproject.kune.workspace.client.WorkspaceEvents;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -33,6 +36,23 @@ public class ContentTitlePresenter implements ContentTitleComponent {
 
     public void init(final ContentTitleView view) {
         this.view = view;
+    }
+
+    public void setState(final StateDTO state) {
+        if (state.hasDocument()) {
+            setContentTitle(state.getTitle(), state.getContentRights().isEditable());
+            setContentDateVisible(true);
+            setContentDate(Kune.I18N.t("Published on: [%s]", state.getPublishedOn().toString()));
+        } else {
+            if (state.getFolder().getParentFolderId() == null) {
+                // We translate root folder names (documents, chat room,
+                // etcetera)
+                setContentTitle(Kune.I18N.t(state.getTitle()), false);
+            } else {
+                setContentTitle(state.getTitle(), state.getContentRights().isEditable());
+            }
+            setContentDateVisible(false);
+        }
     }
 
     public void setContentTitle(final String title, final boolean editable) {
@@ -63,6 +83,7 @@ public class ContentTitlePresenter implements ContentTitleComponent {
             public void onSuccess(final Object result) {
                 Site.hideProgress();
                 view.setContentTitle((String) result);
+                DefaultDispatcher.getInstance().fire(WorkspaceEvents.RELOAD_CONTEXT, null, null);
             }
         });
     }

@@ -29,6 +29,7 @@ import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.stacks.IndexedStackPanel;
+import org.ourproject.kune.workspace.client.i18n.LanguageSelectorComponent;
 import org.ourproject.kune.workspace.client.ui.ctx.admin.AccessListsPanel;
 
 import com.google.gwt.user.client.ui.Label;
@@ -38,16 +39,24 @@ import com.gwtext.client.widgets.form.DateFieldConfig;
 import com.gwtext.client.widgets.form.Field;
 import com.gwtext.client.widgets.form.Form;
 import com.gwtext.client.widgets.form.FormConfig;
+import com.gwtext.client.widgets.form.TextArea;
+import com.gwtext.client.widgets.form.TextAreaConfig;
 import com.gwtext.client.widgets.form.event.FieldListenerAdapter;
 
 public class AdminContextPanel extends VerticalPanel implements AdminContextView {
     private final AccessListsPanel accessListsPanel;
     private final IndexedStackPanel options;
     private final AdminContextPresenter presenter;
-    private DateField dateField;
+    private DateField publishedOnField;
+    private TextArea tagsField;
+    private final LanguageSelectorComponent languageSelectorComponent;
+    private final VerticalPanel pubComponent;
+    private final VerticalPanel tagsComponent;
 
-    public AdminContextPanel(final AdminContextPresenter presenter) {
+    public AdminContextPanel(final AdminContextPresenter presenter,
+            final LanguageSelectorComponent languageSelectorComponent) {
         this.presenter = presenter;
+        this.languageSelectorComponent = languageSelectorComponent;
         options = new IndexedStackPanel();
         options.addStyleName("kune-AdminContextPanel");
 
@@ -60,11 +69,12 @@ public class AdminContextPanel extends VerticalPanel implements AdminContextView
         vp.add(new Label("bla, bla"));
 
         vp = options.addStackItem("Publication", "If this work is public", false);
-        VerticalPanel pubComponent = createPublicationComponent();
-        vp.add(createPublicationComponent());
+        pubComponent = createPublicationComponent();
+        vp.add(pubComponent);
 
         vp = options.addStackItem("Tags", "Tags bla bla", true);
-        vp.add(new Label("bla, bla"));
+        tagsComponent = createTagsComponent();
+        vp.add(tagsComponent);
 
         vp = options.addStackItem(Kune.I18N.t("Permissions"), "Who can admin/edit/view this", false);
         accessListsPanel = new AccessListsPanel();
@@ -82,23 +92,52 @@ public class AdminContextPanel extends VerticalPanel implements AdminContextView
         Form form = new Form(new FormConfig() {
             {
                 setHideLabels(true);
+                setWidth(155);
             }
         });
 
-        dateField = new DateField(new DateFieldConfig() {
+        publishedOnField = new DateField(new DateFieldConfig() {
             {
-                setWidth("200");
+                setWidth("150");
                 setFormat("Y-m-d");
             }
         });
 
-        dateField.addFieldListener(new FieldListenerAdapter() {
+        publishedOnField.addFieldListener(new FieldListenerAdapter() {
             public void onChange(final Field field, final Object newVal, final Object oldVal) {
                 presenter.setPublishedOn((Date) newVal);
             }
         });
 
-        form.add(dateField);
+        form.add(publishedOnField);
+        form.render();
+        VerticalPanel vp = new VerticalPanel();
+        vp.add(form);
+        return vp;
+    }
+
+    private VerticalPanel createTagsComponent() {
+        Form form = new Form(new FormConfig() {
+            {
+                setHideLabels(true);
+                setWidth(155);
+            }
+        });
+
+        tagsField = new TextArea(new TextAreaConfig() {
+            {
+                setWidth("150");
+                setHeight("3em");
+            }
+        });
+
+        tagsField.addFieldListener(new FieldListenerAdapter() {
+            public void onChange(final Field field, final Object newVal, final Object oldVal) {
+                presenter.setTags((String) newVal);
+            }
+        });
+
+        form.add(tagsField);
         form.render();
         VerticalPanel vp = new VerticalPanel();
         vp.add(form);
@@ -120,11 +159,11 @@ public class AdminContextPanel extends VerticalPanel implements AdminContextView
     }
 
     public void setPublishedOn(final Date publishedOn) {
-        // publishedCombo.setValue(publishedOn);
+        publishedOnField.setValue(publishedOn);
     }
 
     public void setTags(final String tags) {
-        // TODO Auto-generated method stub
-
+        tagsField.setValue(tags);
     }
+
 }

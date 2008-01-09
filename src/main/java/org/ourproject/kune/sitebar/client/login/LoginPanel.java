@@ -21,8 +21,10 @@
 package org.ourproject.kune.sitebar.client.login;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
+import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.msg.SiteMessage;
 import org.ourproject.kune.sitebar.client.msg.SiteMessagePanel;
 
@@ -170,7 +172,8 @@ public class LoginPanel implements LoginView, View {
     public void reset() {
         DeferredCommand.addCommand(new Command() {
             public void execute() {
-                signInForm.reset();
+                // signInForm.reset();
+                loginPassField.reset();
                 registerForm.reset();
             }
         });
@@ -230,10 +233,14 @@ public class LoginPanel implements LoginView, View {
         messagesPanel.hide();
     }
 
-    public void show() {
+    public void show(final I18nLanguageDTO currentLanguage) {
         tabPanel.getTab(0).activate();
         dialog.setVisible(true);
         dialog.show();
+        Site.hideProgress();
+        dialog.focus();
+        loginNickOrEmailField.focus(false);
+        languageCombo.setValue(currentLanguage.getEnglishName());
     }
 
     public void hide() {

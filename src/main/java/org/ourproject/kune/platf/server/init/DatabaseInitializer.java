@@ -90,9 +90,9 @@ public class DatabaseInitializer {
 
     public void createOthers() {
         I18nLanguage english = new I18nLanguage(new Long(1819), "en", "ltr", "English", "", "", "en", "eng", "eng",
-                false, "", "", "", "c == 1 ? 1 : 2", "", "L");
+                false, "", "", "", "c == 1 ? 1 : 2", null, "L");
         I18nLanguage spanish = new I18nLanguage(new Long(5889), "es", "ltr", "Spanish", "", "", "es", "spa", "spa",
-                true, "Español", "", "", "c == 1 ? 1 : 2", "", "L");
+                true, "Español", "", "", "c == 1 ? 1 : 2", null, "L");
         languageManager.persist(english);
         languageManager.persist(spanish);
         I18nCountry gb = new I18nCountry(new Long(75), "GB", "GBP", ".", "£%n", "", ".", "United Kingdom", "western",
@@ -123,11 +123,11 @@ public class DatabaseInitializer {
         userManager.reIndex();
         groupManager.reIndex();
 
-        Revision revision = new Revision();
+        Content defaultContent = siteGroup.getDefaultContent();
+        Revision revision = new Revision(defaultContent);
         revision.setTitle("Welcome to kune demo");
         revision
-                .setDataContent("<img src=\"http://kune.ourproject.org/IMG/cache-200x37/siteon0-200x37.png\" align=\"right\">This a initial demo of <a href=\"http://kune.ourproject.org\">kune</a>.<br><div style=\"text-align: right;\"><br></div>Kune is currently under initial development.<br><br>To test it, <a href=\"/#login\">sign in registering an user</a>, but take into account that:<br><ul><li>kune is not optimized yet, then the initial load and other operations maybe are slow.</li><li>Don\'t use passwords that you are using in other sites (kune isn\'t secure yet storing passwords).</li><li>The site is divided in two main areas: the public space and the workspace:</li><ul><li>The workspace is the most important part of kune, because is where users collaborate and communicates which each others. This part is the most dynamic and we are using modern (and sometimes experimental) web technologies to improve the end user experience. I heavily under development.<br></li><li>The public space is currently lest developed. Our main goal is to offer customs and configurable styles for groups/users contents.</li></ul></ul><font size=\"4\"><br>We need your feedback<br><br></font>Please help us to improve this software reporting <a href=\"http://code.google.com/p/kune/issues\">bugs and/or suggestions</a>. Also you <a href=\"/#translate\">help us to translate it</a> into other languages.<br><br>Thank you,<br><br>--<br><span style=\"font-style: italic;\">The kune development team</span><br>");
-        Content defaultContent = siteGroup.getDefaultContent();
+                .setDataContent("<img src=\"http://kune.ourproject.org/IMG/cache-200x37/siteon0-200x37.png\" align=\"right\">This a initial demo of <a href=\"http://kune.ourproject.org\">kune</a>.<br><div style=\"text-align: right;\"><br></div>Kune is currently under initial development.<br><br>To test it, <a href=\"#login\">sign in registering an user</a>, but take into account that:<br><ul><li>kune is not optimized yet, then the initial load and other operations maybe are slow.</li><li>Don\'t use passwords that you are using in other sites (kune isn\'t secure yet storing passwords).</li><li>The site is divided in two main areas: the public space and the workspace:</li><ul><li>The workspace is the most important part of kune, because is where users collaborate and communicates which each others. This part is the most dynamic and we are using modern (and sometimes experimental) web technologies to improve the end user experience. I heavily under development.<br></li><li>The public space is currently lest developed. Our main goal is to offer customs and configurable styles for groups/users contents.</li></ul></ul><font size=\"4\"><br>We need your feedback<br><br></font>Please help us to improve this software reporting <a href=\"http://code.google.com/p/kune/issues\">bugs and/or suggestions</a>. Also you <a href=\"#translate\">help us to translate it</a> into other languages.<br><br>Thank you,<br><br>--<br><span style=\"font-style: italic;\">The kune development team</span><br>");
         defaultContent.addRevision(revision);
         contentManager.persist(defaultContent);
     }

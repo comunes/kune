@@ -64,6 +64,19 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
     }
 
     public List<I18nTranslation> getUntranslatedLexicon(final String languageCode) {
+        I18nLanguage language = initUnstranlated(languageCode);
+        return finder.getUnstranslatedLexicon(language);
+    }
+
+    public SearchResult getUntranslatedLexicon(final String languageCode, final Integer firstResult,
+            final Integer maxResults) {
+        I18nLanguage language = initUnstranlated(languageCode);
+        Long count = finder.getUnstranslatedLexiconCount(language);
+        List<I18nTranslation> list = finder.getUnstranslatedLexicon(language, firstResult, maxResults);
+        return new SearchResult(count, list);
+    }
+
+    private I18nLanguage initUnstranlated(final String languageCode) {
         I18nLanguage defLanguage = languageManager.findByCode(I18nTranslation.DEFAULT_LANG);
         I18nLanguage language;
         if (languageCode.equals(I18nTranslation.DEFAULT_LANG)) {
@@ -78,12 +91,20 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
                 persist(newTrans);
             }
         }
-        return finder.getUnstranslatedLexicon(language);
+        return language;
     }
 
     public List<I18nTranslation> getTranslatedLexicon(final String languageCode) {
         I18nLanguage language = languageManager.findByCode(languageCode);
         return finder.getTranslatedLexicon(language);
+    }
+
+    public SearchResult getTranslatedLexicon(final String languageCode, final Integer firstResult,
+            final Integer maxResults) {
+        I18nLanguage language = languageManager.findByCode(languageCode);
+        List<I18nTranslation> list = finder.getTranslatedLexicon(language, firstResult, maxResults);
+        Long count = finder.getTranslatedLexiconCount(language);
+        return new SearchResult(count, list);
     }
 
     public String getTranslation(final String language, final String text) {

@@ -34,6 +34,8 @@ public interface ClientTool {
 
     void setContent(StateDTO state);
 
+    void setContext(StateDTO state);
+
     void setGroupState(String groupShortName);
 
 }

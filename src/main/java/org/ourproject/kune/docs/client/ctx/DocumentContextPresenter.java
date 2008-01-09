@@ -46,8 +46,8 @@ public class DocumentContextPresenter implements DocumentContext {
         return view;
     }
 
-    public void setContent(final StateDTO content) {
-        StateToken state = content.getState();
+    public void setContext(final StateDTO content) {
+        StateToken state = content.getStateToken();
         FolderContext folderContext = components.getFolderContext();
         folderContext.setContainer(state, content.getFolder(), content.getFolderRights());
         AdminContext adminContext = components.getAdminContext();

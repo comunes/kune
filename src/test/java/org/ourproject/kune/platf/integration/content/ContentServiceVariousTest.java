@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.dto.TagResultDTO;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
@@ -26,14 +27,33 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
         new IntegrationTestHelper(this);
         doLogin();
         defaultContent = getDefaultContent();
-        groupShortName = defaultContent.getState().getGroup();
-        defDocument = defaultContent.getState().getDocument();
+        groupShortName = defaultContent.getStateToken().getGroup();
+        defDocument = defaultContent.getStateToken().getDocument();
+    }
+
+    @Test
+    public void setTagsAndResults() throws SerializableException {
+        contentService.setTags(getHash(), groupShortName, defDocument, "bfoo cfoa afoo2");
+        List summaryTags = contentService.getSummaryTags(getHash(), groupShortName);
+        assertEquals(3, summaryTags.size());
+
+        TagResultDTO tagResultDTO = (TagResultDTO) summaryTags.get(0);
+        assertEquals("afoo2", tagResultDTO.getName());
+        assertEquals(1, tagResultDTO.getCount());
+
+        tagResultDTO = (TagResultDTO) summaryTags.get(1);
+        assertEquals("bfoo", tagResultDTO.getName());
+        assertEquals(1, tagResultDTO.getCount());
+
+        tagResultDTO = (TagResultDTO) summaryTags.get(2);
+        assertEquals("cfoa", tagResultDTO.getName());
+        assertEquals(1, tagResultDTO.getCount());
     }
 
     @Test
     public void contentRateAndRetrieve() throws SerializableException {
         contentService.rateContent(getHash(), groupShortName, defDocument, 4.5);
-        final StateDTO again = contentService.getContent(getHash(), groupShortName, defaultContent.getState());
+        final StateDTO again = contentService.getContent(getHash(), groupShortName, defaultContent.getStateToken());
         assertEquals(true, again.isRateable());
         assertEquals(4.5, again.getCurrentUserRate());
         assertEquals(4.5, again.getRate());
@@ -43,7 +63,8 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     @Test
     public void contentSetLanguage() throws SerializableException {
         contentService.setLanguage(getHash(), groupShortName, defDocument, "es");
-        StateDTO contentRetrieved = contentService.getContent(getHash(), groupShortName, defaultContent.getState());
+        StateDTO contentRetrieved = contentService
+                .getContent(getHash(), groupShortName, defaultContent.getStateToken());
         assertEquals("es", contentRetrieved.getLanguage().getCode());
     }
 
@@ -78,7 +99,9 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
         ContainerDTO folder = defaultContent.getFolder();
 
         String newTitle = "folder new name";
-        String result = contentService.renameFolder(getHash(), groupShortName, folder.getId(), newTitle);
+        StateToken folderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(), folder
+                .getId().toString(), null);
+        String result = contentService.rename(getHash(), groupShortName, folderToken.getEncoded(), newTitle);
 
         assertEquals(newTitle, result);
 
@@ -101,11 +124,13 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
         assertEquals(oldTitle, newFolder.getName());
 
-        String result = contentService.renameFolder(getHash(), groupShortName, newFolder.getId(), newTitle);
+        StateToken folderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(), newFolder
+                .getId().toString(), null);
+        String result = contentService.rename(getHash(), groupShortName, folderToken.getEncoded(), newTitle);
 
         assertEquals(newTitle, result);
 
-        StateToken newFolderToken = new StateToken(groupShortName, defaultContent.getState().getTool(), newFolder
+        StateToken newFolderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(), newFolder
                 .getId().toString(), null);
         StateDTO folderAgain = contentService.getContent(getHash(), groupShortName, newFolderToken);
 
@@ -135,7 +160,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
         assertEquals(oldTitle, newFolder.getName());
 
-        StateToken newFolderToken = new StateToken(groupShortName, defaultContent.getState().getTool(), newFolder
+        StateToken newFolderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(), newFolder
                 .getId().toString(), null);
 
         newTitle = "folder last name";
@@ -154,9 +179,11 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
         doLogin();
         defaultContent = getDefaultContent();
         ContainerDTO folder = defaultContent.getFolder();
+        StateToken folderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(), folder
+                .getId().toString(), null);
 
         String newTitle = "folder new name";
-        contentService.renameFolder(getHash(), super.getSiteAdminShortName(), folder.getId(), newTitle);
+        contentService.rename(getHash(), super.getSiteAdminShortName(), folderToken.getEncoded(), newTitle);
     }
 
 }

@@ -1,3 +1,27 @@
 <module>
-    <inherits name='org.ourproject.kune.platf.Kune-Platform'/>
+  <inherits name='org.ourproject.kune.platf.Kune-Platform' />
+  <inherits name="com.google.gwt.core.Core" />
+  <inherits name="com.google.gwt.user.UserAgent" />
+  <!-- RTE css inject -->
+
+  <replace-with
+    class="org.ourproject.kune.workspace.client.editor.WrappedRichTextAreaImplIE6">
+    <when-type-is
+      class="com.google.gwt.user.client.ui.impl.RichTextAreaImpl" />
+    <when-property-is name="user.agent" value="ie6" />
+  </replace-with>
+
+  <replace-with
+    class="org.ourproject.kune.workspace.client.editor.WrappedRichTextAreaImplMozilla">
+    <when-type-is
+      class="com.google.gwt.user.client.ui.impl.RichTextAreaImpl" />
+    <any>
+      <when-property-is name="user.agent" value="gecko1_8" />
+      <when-property-is name="user.agent" value="gecko" />
+    </any>
+  </replace-with>
+
+  <!--
+    TODO: .... same for Safari and Opera.
+  -->
 </module>

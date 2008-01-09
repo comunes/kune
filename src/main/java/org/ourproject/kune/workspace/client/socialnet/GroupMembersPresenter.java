@@ -200,4 +200,8 @@ public class GroupMembersPresenter extends AbstractPresenter implements GroupMem
         return userIsAdmin || userIsCollab;
     }
 
+    public void addCollab(final String groupShortName) {
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ADD_COLLAB_MEMBER, groupShortName, this);
+    }
+
 }

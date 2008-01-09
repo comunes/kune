@@ -82,20 +82,14 @@ public class SocialNetworkManagerTest extends PersistenceTest {
         // FIXME Check change group type to PROJECT
     }
 
-    @Test
+    @Test(expected = AlreadyGroupMemberException.class)
     public void requestJoinTwiceAOrphanedGroupAddUserGroupToAdmins() throws SerializableException {
         assertSocialNetworkIsEmpty();
         orphanedGroup.setAdmissionType(AdmissionType.Open);
 
         final String result = socialNetworkManager.requestToJoin(user, orphanedGroup);
-        assertEquals(result, SocialNetworkDTO.REQ_JOIN_ACEPTED);
-        final String result2 = socialNetworkManager.requestToJoin(user, orphanedGroup);
-        assertEquals(result2, SocialNetworkDTO.REQ_JOIN_ACEPTED);
-        assertTrue(orphanedGroup.getSocialNetwork().getAccessLists().getAdmins().getList().contains(userGroup));
-        assertEquals(1, orphanedGroup.getSocialNetwork().getAccessLists().getAdmins().getList().size());
-        assertEquals(orphanedGroup.getSocialNetwork().getAccessLists().getAdmins().getMode(), GroupListMode.NORMAL);
-
-        // FIXME Change group type to PROJECT
+        assertEquals(SocialNetworkDTO.REQ_JOIN_ACEPTED, result);
+        socialNetworkManager.requestToJoin(user, orphanedGroup);
     }
 
     @Test

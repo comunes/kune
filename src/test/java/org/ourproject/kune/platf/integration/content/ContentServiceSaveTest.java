@@ -29,8 +29,8 @@ public class ContentServiceSaveTest extends ContentServiceIntegrationTest {
         final String text = "Lorem ipsum dolor sit amet";
         final int version = defaultContent.getVersion();
         final int currentVersion = contentService.save(getHash(), groupName, defaultContent.getDocumentId(), text);
-        assertEquals(version + 1, currentVersion);
-        final StateDTO again = contentService.getContent(getHash(), groupName, defaultContent.getState());
+        assertEquals(version + 2, currentVersion);
+        final StateDTO again = contentService.getContent(getHash(), groupName, defaultContent.getStateToken());
         assertEquals(text, again.getContent());
         assertEquals(0, again.getRateByUsers());
         assertEquals(0, again.getRate());
@@ -42,8 +42,8 @@ public class ContentServiceSaveTest extends ContentServiceIntegrationTest {
         ;
         final int version = defaultContent.getVersion();
         final int currentVersion = contentService.save(getHash(), groupName, defaultContent.getDocumentId(), text);
-        assertEquals(version + 1, currentVersion);
-        final StateDTO again = contentService.getContent(getHash(), groupName, defaultContent.getState());
+        assertEquals(version + 2, currentVersion);
+        final StateDTO again = contentService.getContent(getHash(), groupName, defaultContent.getStateToken());
         assertEquals(text, again.getContent());
     }
 

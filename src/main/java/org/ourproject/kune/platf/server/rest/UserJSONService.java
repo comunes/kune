@@ -40,11 +40,10 @@ public class UserJSONService {
 
     @REST(params = { "query" })
     public SearchResultDTO search(final String search) {
-        SearchResult results = manager.search(search);
-        return mapper.mapSearchResult(results, LinkDTO.class);
+        return search(search, null, null);
     }
 
-    @REST(params = { "query", "first", "max" })
+    @REST(params = { "query", "start", "limit" })
     public SearchResultDTO search(final String search, final Integer firstResult, final Integer maxResults) {
         SearchResult results = manager.search(search, firstResult, maxResults);
         return mapper.mapSearchResult(results, LinkDTO.class);

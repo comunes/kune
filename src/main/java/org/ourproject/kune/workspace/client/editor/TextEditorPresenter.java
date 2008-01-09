@@ -101,7 +101,7 @@ public class TextEditorPresenter implements TextEditor {
         }
     }
 
-    private void reset() {
+    public void reset() {
         view.saveTimerCancel();
         savePending = false;
         saveAndCloseConfirmed = false;

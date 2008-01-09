@@ -26,15 +26,24 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.hibernate.search.annotations.ContainedIn;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
+
 @Entity
 @Table(name = "revisions")
+@Indexed
 public class Revision {
     @Id
     @GeneratedValue
+    @DocumentId
     private Long id;
 
     @OneToOne
@@ -43,78 +52,97 @@ public class Revision {
     @Basic(optional = false)
     private Long createdOn;
 
+    @IndexedEmbedded
     @OneToOne(cascade = { CascadeType.ALL })
     private Data data;
 
     @Version
     private int version;
 
+    @ContainedIn
+    @ManyToOne
+    @JoinColumn
+    private Content content;
+
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Revision previous;
 
     public Revision() {
-	this.data = new Data();
-	createdOn = System.currentTimeMillis();
+        this(null);
+    }
+
+    public Revision(final Content content) {
+        this.content = content;
+        this.data = new Data(content);
+        createdOn = System.currentTimeMillis();
     }
 
     public Long getId() {
-	return id;
+        return id;
     }
 
     public void setId(final Long id) {
-	this.id = id;
+        this.id = id;
     }
 
     public User getEditor() {
-	return editor;
+        return editor;
     }
 
     public void setEditor(final User editor) {
-	this.editor = editor;
+        this.editor = editor;
     }
 
     public Long getCreatedOn() {
-	return createdOn;
+        return createdOn;
     }
 
     public void setCreatedOn(final Long modifiedOn) {
-	this.createdOn = modifiedOn;
+        this.createdOn = modifiedOn;
     }
 
     public Data getData() {
-	return data;
+        return data;
     }
 
     public void setData(final Data content) {
-	this.data = content;
+        this.data = content;
     }
 
     public int getVersion() {
-	return version;
+        return version;
     }
 
     public void setVersion(final int version) {
-	this.version = version;
+        this.version = version;
     }
 
     public Revision getPrevious() {
-	return previous;
+        return previous;
     }
 
     public void setPrevious(final Revision previous) {
-	this.previous = previous;
+        this.previous = previous;
     }
 
     public void setDataContent(final String text) {
-	this.data.setContent(text.toCharArray());
+        this.data.setBody(text.toCharArray());
     }
 
     public void setDataTitle(final String text) {
-	this.data.setTitle(text);
+        this.data.setTitle(text);
     }
 
     public void setTitle(final String title) {
-	data.setTitle(title);
+        data.setTitle(title);
+    }
+
+    public Content getContent() {
+        return content;
+    }
+
+    public void setContent(final Content content) {
+        this.content = content;
     }
 
 }

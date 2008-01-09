@@ -20,11 +20,16 @@
 package org.ourproject.kune.platf.client;
 
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
+import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
 public abstract class AbstractPresenter {
 
     public void doAction(final String action, final Object value, final Object extra) {
         DefaultDispatcher.getInstance().fire(action, value, extra);
+    }
+
+    public void doGoto(final String token) {
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.GOTO, token, null);
     }
 
 }

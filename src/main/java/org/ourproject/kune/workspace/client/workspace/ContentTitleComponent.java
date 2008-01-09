@@ -20,6 +20,7 @@
 package org.ourproject.kune.workspace.client.workspace;
 
 import org.ourproject.kune.platf.client.Component;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public interface ContentTitleComponent extends Component {
 
@@ -28,5 +29,7 @@ public interface ContentTitleComponent extends Component {
     void setContentDate(String date);
 
     void setContentDateVisible(boolean visible);
+
+    void setState(StateDTO state);
 
 }

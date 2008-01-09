@@ -56,11 +56,14 @@ public class StateDTO implements IsSerializable {
     private I18nLanguageDTO language;
     private Date publishedOn;
     private String tags;
-
     /**
      * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.UserSimpleDTO>
      */
     private List authors;
+    /**
+     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.TagResultDTO>
+     */
+    private List groupTags;
 
     public StateDTO() {
         this(null, null, null);
@@ -136,7 +139,7 @@ public class StateDTO implements IsSerializable {
         this.folder = folder;
     }
 
-    public StateToken getState() {
+    public StateToken getStateToken() {
         return new StateToken(group.getShortName(), toolName, folder.getId().toString(), getDocumentId());
     }
 
@@ -255,6 +258,14 @@ public class StateDTO implements IsSerializable {
 
     public void setTags(final String tags) {
         this.tags = tags;
+    }
+
+    public List getGroupTags() {
+        return groupTags;
+    }
+
+    public void setGroupTags(final List groupTags) {
+        this.groupTags = groupTags;
     }
 
 }

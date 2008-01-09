@@ -24,6 +24,7 @@ import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
+import org.ourproject.kune.workspace.client.WorkspaceUIExtensionPoint;
 
 public class I18nTranslatorPresenter implements I18nTranslatorComponent {
     private I18nTranslatorView view;
@@ -55,6 +56,8 @@ public class I18nTranslatorPresenter implements I18nTranslatorComponent {
 
     public void onHide() {
         hide();
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.DETACH_FROM_EXT_POINT,
+                WorkspaceUIExtensionPoint.CONTENT_BOTTOM_ICONBAR, view);
     }
 
     public void doTranslation(final String id, final String trKey, final Object oldValue, final Object newValue) {
@@ -64,6 +67,15 @@ public class I18nTranslatorPresenter implements I18nTranslatorComponent {
 
     public I18nLanguageDTO getLanguage() {
         return session.getCurrentLanguage();
+    }
+
+    public void doShowTranslator() {
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.SHOW_TRANSLATOR, null, null);
+    }
+
+    public void attachIconToBottomBar(final View view) {
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ATTACH_TO_EXT_POINT,
+                WorkspaceUIExtensionPoint.CONTENT_BOTTOM_ICONBAR, view);
     }
 
 }

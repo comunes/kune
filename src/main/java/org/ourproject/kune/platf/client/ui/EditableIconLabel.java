@@ -124,7 +124,7 @@ public class EditableIconLabel extends Composite {
                 setClosable(true);
                 setModal(true);
                 setWidth(300);
-                setHeight("100px");
+                setDefaultTextHeight(2);
                 setButtons(MessageBox.OKCANCEL);
                 setTitle(Kune.I18N.t("Rename"));
                 setMsg(Kune.I18N.t("Write a new name:"));

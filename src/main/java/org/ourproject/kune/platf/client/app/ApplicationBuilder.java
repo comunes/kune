@@ -29,6 +29,7 @@ import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.ActionEvent;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
+import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.ContentProvider;
@@ -51,9 +52,9 @@ public class ApplicationBuilder {
         this.platform = platform;
     }
 
-    public void build(final String userHash) {
+    public void build(final String userHash, final I18nLanguageDTO initialLang) {
         HashMap tools = indexTools(platform.getTools());
-        final Session session = new SessionImpl(userHash);
+        final Session session = new SessionImpl(userHash, initialLang);
         new KuneErrorHandler(session);
         final DefaultApplication application = new DefaultApplication(tools, session);
         Site.showProgressLoading();

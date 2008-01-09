@@ -22,23 +22,21 @@ package org.ourproject.kune.workspace.client.i18n.ui;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.ui.AbstractSearcherPanel;
 import org.ourproject.kune.platf.client.ui.KuneStringUtils;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPresenter;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorView;
+import org.ourproject.kune.workspace.client.workspace.ui.BottomTrayIcon;
 
+import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.gwtext.client.core.Connection;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Ext;
 import com.gwtext.client.core.UrlParam;
 import com.gwtext.client.data.FieldDef;
-import com.gwtext.client.data.HttpProxy;
-import com.gwtext.client.data.JsonReader;
-import com.gwtext.client.data.JsonReaderConfig;
 import com.gwtext.client.data.Record;
-import com.gwtext.client.data.RecordDef;
 import com.gwtext.client.data.Store;
 import com.gwtext.client.data.StoreLoadConfig;
 import com.gwtext.client.data.StringFieldDef;
@@ -49,6 +47,7 @@ import com.gwtext.client.widgets.LayoutDialog;
 import com.gwtext.client.widgets.LayoutDialogConfig;
 import com.gwtext.client.widgets.LoadMaskConfig;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
+import com.gwtext.client.widgets.event.DialogListenerAdapter;
 import com.gwtext.client.widgets.form.ComboBox;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.form.TextFieldConfig;
@@ -69,7 +68,7 @@ import com.gwtext.client.widgets.layout.ContentPanelConfig;
 import com.gwtext.client.widgets.layout.LayoutRegion;
 import com.gwtext.client.widgets.layout.LayoutRegionConfig;
 
-public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslatorView {
+public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTranslatorView {
 
     private static final String NOTE_FOR_TRANSLATORS_IMAGE_HTML = Images.App.getInstance().noteForTranslators()
             .getHTML();
@@ -81,6 +80,8 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
     private Store unTransStore;
     private Store transStore;
 
+    private BottomTrayIcon bottomIcon;
+
     public I18nTranslatorPanel(final I18nTranslatorPresenter initPresenter) {
         this.presenter = initPresenter;
     }
@@ -91,12 +92,26 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
         }
         // By default we use the user lang to help in translation
         I18nLanguageDTO lang = presenter.getLanguage();
-        setLanguage(lang.getCode());
+        setLanguage(lang);
         String languageNativeNameIfAvailable = lang.getNativeName().length() > 0 ? lang.getNativeName() : lang
                 .getEnglishName();
         dialog.setTitle(Kune.I18N.t("Help to translate kune to [%s]", languageNativeNameIfAvailable));
-        dialog.center();
         dialog.show();
+        dialog.expand();
+        dialog.center();
+        if (bottomIcon == null) {
+            bottomIcon = new BottomTrayIcon(Kune.I18N.t("Show/hide translator"));
+            bottomIcon.addMainButton(Images.App.getInstance().language(), new Command() {
+                public void execute() {
+                    if (dialog.isVisible()) {
+                        dialog.hide();
+                    } else {
+                        dialog.show();
+                    }
+                }
+            });
+            presenter.attachIconToBottomBar(bottomIcon);
+        }
     }
 
     public void hide() {
@@ -105,18 +120,14 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
 
     private void setLanguage(final String language) {
         Site.showProgressLoading();
-        unTransStore.load(new StoreLoadConfig() {
-            {
-                setParams(new UrlParam[] { new UrlParam("language", language) });
-            }
-        });
-        transStore.load(new StoreLoadConfig() {
-            {
-                setParams(new UrlParam[] { new UrlParam("language", language) });
-            }
-        });
-        languageSelectorPanel.selectLanguage(language);
+        query(unTransStore, language);
+        query(transStore, language);
         Site.hideProgress();
+    }
+
+    private void setLanguage(final I18nLanguageDTO language) {
+        languageSelectorPanel.selectLanguage(language.getEnglishName());
+        setLanguage(language.getCode());
     }
 
     private LayoutDialog createDialog() {
@@ -139,11 +150,12 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
 
         final LayoutDialog dialog = new LayoutDialog(new LayoutDialogConfig() {
             {
-                setModal(true);
+                setModal(false);
                 setWidth(720);
                 setHeight(330);
                 setShadow(true);
-                setCollapsible(false);
+                setCollapsible(true);
+                setProxyDrag(true);
                 setResizable(false);
             }
         }, north, null, null, null, center);
@@ -196,7 +208,7 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
                     }
                 });
 
-        HTML recommendations = createRecomendatios();
+        HTML recommendations = createRecomendations();
 
         EditorGrid transGrid = createGridPanel(true);
 
@@ -230,29 +242,44 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
         String panelId = unTrasnCenterPanel.getId();
         centerRegion.showPanel(panelId);
 
+        dialog.addDialogListener(new DialogListenerAdapter() {
+            public void onResize(final LayoutDialog dialog, final int width, final int height) {
+                if (height < 40) {
+                    // There is no a minimize event, then when resize has less
+                    // than this height, is equivalent to a minimize, and we put
+                    // the dialog in the bottom of the screen
+                    dialog.hide();
+                }
+            }
+        });
+
         return dialog;
     }
 
     private EditorGrid createGridPanel(final boolean translated) {
+
+        Store store;
+        final String id = "id";
+        FieldDef[] fieldDefs = new FieldDef[] { new StringFieldDef("trKey"), new StringFieldDef("text"),
+                new StringFieldDef(id) };
+
         if (translated) {
-            JsonReader reader = new JsonReader(new JsonReaderConfig() {
-                {
-                    setId("id");
-                }
-            }, new RecordDef(new FieldDef[] { new StringFieldDef("trKey"), new StringFieldDef("text"),
-                    new StringFieldDef("id") }));
-            HttpProxy proxy = new HttpProxy("/kune/json/I18nTranslationJSONService/searchtranslated", Connection.POST);
-            transStore = new Store(proxy, reader);
+            String url = "/kune/json/I18nTranslationJSONService/searchtranslated";
+            transStore = createStore(fieldDefs, url, id);
+            store = transStore;
         } else {
-            JsonReader reader = new JsonReader(new JsonReaderConfig() {
-                {
-                    setId("id");
-                }
-            }, new RecordDef(new FieldDef[] { new StringFieldDef("trKey"), new StringFieldDef("text"),
-                    new StringFieldDef("id") }));
-            HttpProxy proxy = new HttpProxy("/kune/json/I18nTranslationJSONService/search", Connection.POST);
-            unTransStore = new Store(proxy, reader);
+            String url = "/kune/json/I18nTranslationJSONService/search";
+            unTransStore = createStore(fieldDefs, url, id);
+            store = unTransStore;
         }
+
+        // Delete this?
+        store.load(new StoreLoadConfig() {
+            {
+                setParams(new UrlParam[] { new UrlParam("query", ""), new UrlParam("start", 1),
+                        new UrlParam("limit", PAGINATION_SIZE) });
+            }
+        });
 
         ColumnModel columnModel = new ColumnModel(new ColumnConfig[] { new ColumnConfig() {
             {
@@ -277,8 +304,6 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
 
         columnModel.setDefaultSortable(true);
 
-        Store store = translated ? transStore : unTransStore;
-
         EditorGrid grid = new EditorGrid((translated ? "grid-translated" : "grid-untranslated"), "695px", "180px",
                 store, columnModel, new EditorGridConfig() {
                     {
@@ -292,9 +317,9 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
         grid.addEditorGridListener(new EditorGridListenerAdapter() {
             public void onAfterEdit(final Grid grid, final Record record, final String field, final Object newValue,
                     final Object oldValue, final int rowIndex, final int colIndex) {
-                String id = record.getAsString("id");
+                String idValue = record.getAsString(id);
                 String trKey = record.getAsString("trKey");
-                presenter.doTranslation(id, trKey, oldValue, newValue);
+                presenter.doTranslation(idValue, trKey, oldValue, newValue);
                 record.set(field, KuneStringUtils.escapeHtmlLight((String) newValue));
             }
         });
@@ -302,32 +327,20 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
         grid.addGridCellListener(new GridCellListenerAdapter() {
             public void onCellDblClick(final Grid grid, final int rowIndex, final int colIndex, final EventObject e) {
                 Record record = unTransStore.getRecordAt(rowIndex);
-                String id = record.getAsString("id");
+                String idValue = record.getAsString(id);
                 String trKey = record.getAsString("trKey");
                 String text = record.getAsString("text");
                 if (text.length() == 0) {
                     String trWithoutNT = removeNT(trKey);
                     record.set("text", trWithoutNT);
-                    presenter.doTranslation(id, trKey, trWithoutNT, trWithoutNT);
+                    presenter.doTranslation(idValue, trKey, trWithoutNT, trWithoutNT);
                 }
             }
         });
 
         grid.render();
 
-        // TODO: pagging
-        // We need hibernate with start and limit
-
-        // ExtElement gridFoot = grid.getView().getFooterPanel(true);
-        // PagingToolbar pagging = new PagingToolbar(gridFoot, store, new
-        // PagingToolbarConfig() {
-        // {
-        // setPageSize(25);
-        // setDisplayInfo(true);
-        // setDisplayMsg("Displaying results {0} - {1} of {2}");
-        // setDisplayMsg("No results to display");
-        // }
-        // });
+        createPagingToolbar(store, grid);
 
         return grid;
     }
@@ -362,7 +375,7 @@ public class I18nTranslatorPanel extends HorizontalPanel implements I18nTranslat
         }
     };
 
-    private HTML createRecomendatios() {
+    private HTML createRecomendations() {
         HTML recommendations = new HTML(
                 "<h1><a name=\"common_translation_errors\" id=\"common_translation_errors\">Common Translation Errors</a></h1>\n"
                         + "<div class=\"level1\">\n"

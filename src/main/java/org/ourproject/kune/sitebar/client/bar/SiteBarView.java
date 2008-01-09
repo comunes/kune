@@ -23,6 +23,7 @@ package org.ourproject.kune.sitebar.client.bar;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 
 import com.google.gwt.user.client.ui.Image;
 
@@ -42,7 +43,7 @@ public interface SiteBarView extends View {
 
     void setSearchText(String text);
 
-    void showLoginDialog();
+    void showLoginDialog(I18nLanguageDTO languageDTO);
 
     void setLogoutLinkVisible(boolean visible);
 

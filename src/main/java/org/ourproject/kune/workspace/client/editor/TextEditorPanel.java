@@ -64,7 +64,6 @@ public class TextEditorPanel extends Composite implements TextEditorView {
                 presenter.onSave();
             }
         };
-
     }
 
     public void scheduleSave(final int delayMillis) {

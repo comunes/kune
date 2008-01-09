@@ -58,6 +58,7 @@ public class WizardDialog {
 
                 // Def values
                 setShadow(true);
+                setProxyDrag(true);
             }
         }, new LayoutRegionConfig());
 

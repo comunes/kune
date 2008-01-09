@@ -113,6 +113,12 @@
       </a-hint>
       <b-hint>org.ourproject.kune.platf.server.domain.User</b-hint>
     </field>
+    <field>
+      <a>groupTags</a>
+      <b>groupTags</b>
+      <a-hint>org.ourproject.kune.platf.client.dto.TagResultDTO</a-hint>
+      <b-hint>org.ourproject.kune.platf.server.domain.TagResult</b-hint>
+    </field>
 
   </mapping>
 
@@ -239,6 +245,16 @@
       org.ourproject.kune.platf.client.dto.UserSimpleDTO
     </class-a>
     <class-b>org.ourproject.kune.platf.server.domain.User</class-b>
+  </mapping>
+
+    <mapping>
+    <class-a>org.ourproject.kune.platf.client.dto.TagDTO</class-a>
+    <class-b>org.ourproject.kune.platf.server.domain.Tag</class-b>
+  </mapping>
+
+  <mapping>
+    <class-a>org.ourproject.kune.platf.client.dto.TagResultDTO</class-a>
+    <class-b>org.ourproject.kune.platf.server.domain.TagResult</class-b>
   </mapping>
 
 </mappings>

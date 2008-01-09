@@ -42,9 +42,15 @@ public class AdminContextPresenter implements AdminContext {
         // In the future check the use of these components by each tool
         view.setAccessLists(content.getAccessLists());
         view.setLanguage(content.getLanguage());
-        view.setAuthors(content.getAuthors());
-        view.setPublishedOn(content.getPublishedOn());
-        view.setTags(content.getTags());
+        if (content.getAccessLists() != null) {
+            view.setAuthors(content.getAuthors());
+        }
+        if (content.getPublishedOn() != null) {
+            view.setPublishedOn(content.getPublishedOn());
+        }
+        if (content.getTags() != null) {
+            view.setTags(content.getTags());
+        }
     }
 
     public View getView() {
@@ -53,6 +59,10 @@ public class AdminContextPresenter implements AdminContext {
 
     public void setPublishedOn(final Date date) {
         DefaultDispatcher.getInstance().fire(DocsEvents.SET_PUBLISHED_ON, date, null);
+    }
+
+    public void setTags(final String tags) {
+        DefaultDispatcher.getInstance().fire(DocsEvents.SET_TAGS, tags, null);
     }
 
 }

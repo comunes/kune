@@ -21,6 +21,7 @@
 package org.ourproject.kune.platf.client.rpc;
 
 import java.util.Date;
+import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
@@ -53,7 +54,10 @@ public interface ContentService extends RemoteService {
     void setPublishedOn(String userHash, String groupShortName, String documentId, Date date)
             throws SerializableException;
 
-    void setTags(String userHash, String groupShortName, String documentId, String tags) throws SerializableException;
+    /**
+     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.TagResultDTO>
+     */
+    List setTags(String userHash, String groupShortName, String documentId, String tags) throws SerializableException;
 
     void addAuthor(String userHash, String groupShortName, String documentId, String authorShortName)
             throws SerializableException;
@@ -63,12 +67,12 @@ public interface ContentService extends RemoteService {
 
     void delContent(String userHash, String groupShortName, String documentId) throws SerializableException;
 
-    String renameContent(String userHash, String groupShortName, String documentId, String newName)
-            throws SerializableException;
-
-    String renameFolder(String hash, String groupShortName, Long folderId, String newName) throws SerializableException;
-
     String rename(String userHash, String groupShortName, String token, String newName) throws SerializableException;
+
+    /**
+     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.TagResultDTO>
+     */
+    List getSummaryTags(String userHash, String groupShortName) throws SerializableException;
 
     public static class App {
         private static ContentServiceAsync instance;

@@ -19,14 +19,13 @@
 
 package org.ourproject.kune.workspace.client.socialnet.ui;
 
-import org.ourproject.kune.platf.client.AbstractPresenter;
-import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.UIConstants;
 import org.ourproject.kune.platf.client.ui.stacks.StackSubItemAction;
 import org.ourproject.kune.platf.client.ui.stacks.StackedDropDownPanel;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
+import org.ourproject.kune.workspace.client.socialnet.GroupMembersPresenter;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersView;
 import org.ourproject.kune.workspace.client.socialnet.MemberAction;
 
@@ -36,9 +35,9 @@ import com.gwtext.client.widgets.MessageBox;
 public class GroupMembersPanel extends StackedDropDownPanel implements GroupMembersView {
     private static final boolean COUNTS_VISIBLE = true;
     private final Images img = Images.App.getInstance();
-    private final AbstractPresenter presenter;
+    private final GroupMembersPresenter presenter;
 
-    public GroupMembersPanel(final AbstractPresenter initPresenter) {
+    public GroupMembersPanel(final GroupMembersPresenter initPresenter) {
         super(initPresenter, "#00D4AA", Kune.I18N.t("Group members"), Kune.I18N
                 .t("People and groups collaborating in this group"), COUNTS_VISIBLE);
         presenter = initPresenter;
@@ -105,8 +104,7 @@ public class GroupMembersPanel extends StackedDropDownPanel implements GroupMemb
                 new MessageBox.ConfirmCallback() {
                     public void execute(final String btnID) {
                         if (btnID.equals("yes")) {
-                            DefaultDispatcher.getInstance().fire(WorkspaceEvents.ADD_COLLAB_MEMBER, groupShortName,
-                                    this);
+                            presenter.addCollab(groupShortName);
                         }
                     }
                 });

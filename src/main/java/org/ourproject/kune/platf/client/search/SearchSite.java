@@ -27,4 +27,6 @@ public interface SearchSite {
 
     public void doSearch(String termToSearch);
 
+    public void doSearchOfType(String termToSearch, int type);
+
 }

@@ -63,11 +63,11 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     private final RoundedBorderDecorator bottomBorderDecorator;
     private DropDownPanel groupMembersPanel;
     private DropDownPanel participationPanel;
-    private DropDownPanel buddiesPresencePanel;
+    private DropDownPanel groupSummaryPanel;
     private final VerticalPanel cntcxtVP;
     private final ScrollPanel groupDropDownsSP;
     private final ColorTheme th;
-    private final HorizontalPanel BottomIconsPanel;
+    private final HorizontalPanel BottomIconsTrayPanel;
     private ContentTitlePanel contentTitlePanel;
     private ContentSubTitlePanel contentSubTitlePanel;
     private ContentToolBarPanel contentToolBarPanel;
@@ -91,7 +91,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         cntcxtVP = new VerticalPanel();
         final VerticalPanel groupNavBarVP = new VerticalPanel();
         groupToolsBar = new GroupToolsBar();
-        BottomIconsPanel = new HorizontalPanel();
+        BottomIconsTrayPanel = new HorizontalPanel();
         groupDropDownsSP = new ScrollPanel();
         groupDropDownsVP = new VerticalPanel();
         contentTitleBarHP = new HorizontalPanel();
@@ -122,7 +122,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         generalHP.add(groupNavBarVP);
         groupNavBarVP.add(groupToolsBar);
         groupNavBarVP.add(groupDropDownsSP);
-        groupNavBarVP.add(BottomIconsPanel);
+        groupNavBarVP.add(BottomIconsTrayPanel);
         groupDropDownsSP.add(groupDropDownsVP);
         cntcxtVP.add(contentTitleBarBorderDec);
         cntcxtVP.add(contentSubTitleBarHP);
@@ -161,7 +161,10 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         contentBottomBarHP.addStyleName("kune-ft12px");
         groupDropDownsVP.addStyleName("kune-GroupSummaryPanel");
         bottomBorderDecorator.setColor(th.getContentMainBorder());
-        BottomIconsPanel.addStyleName("kune-Margin-Medium-l");
+        BottomIconsTrayPanel.addStyleName("kune-Margin-Medium-l");
+        BottomIconsTrayPanel.addStyleName("kune-BottomIconsTrayPanel");
+        BottomIconsTrayPanel.setHorizontalAlignment(HorizontalPanel.ALIGN_CENTER);
+        BottomIconsTrayPanel.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         previosRightWidgetWidth = DEF_CONTEXT_WIDTH;
     }
 
@@ -243,9 +246,9 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         AddDropDown(participationPanel, th.getParticipationDD());
     }
 
-    public void setBuddiesPresence(final View view) {
-        buddiesPresencePanel = (DropDownPanel) view;
-        AddDropDown(buddiesPresencePanel, th.getBuddiesPresenceDD());
+    public void setSummary(final View view) {
+        groupSummaryPanel = (DropDownPanel) view;
+        AddDropDown(groupSummaryPanel, th.getSummaryDD());
     }
 
     public void setTags(final View view) {
@@ -253,8 +256,8 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         AddDropDown(tagsPanel, th.getTagsDD());
     }
 
-    public void setThemeMenuComponent(final View view) {
-        BottomIconsPanel.add((Widget) view);
+    public void addBottomIconComponent(final View view) {
+        BottomIconsTrayPanel.add((Widget) view);
     }
 
     public void setTheme(final String theme) {
@@ -276,7 +279,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         DOM.setStyleAttribute(contentBottomBarHP.getWidget(0).getElement(), "color", th.getContentBottomText());
         groupMembersPanel.setColor(th.getGroupMembersDD());
         participationPanel.setColor(th.getParticipationDD());
-        buddiesPresencePanel.setColor(th.getBuddiesPresenceDD());
+        groupSummaryPanel.setColor(th.getSummaryDD());
         tagsPanel.setColor(th.getTagsDD());
         groupToolsBar.setTabsColors(th.getToolSelected(), th.getToolUnselected());
     }
@@ -286,8 +289,11 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         super.setVisible(visible);
     }
 
-    public void setUIExtensionPoints() {
+    public void registerUIExtensionPoints() {
         this.uiExtPoints.putAll(contentToolBarPanel.getExtensionPoints());
+        WorkspaceUIExtensionPoint bottomIconsPanelsEP = new WorkspaceUIExtensionPoint(
+                WorkspaceUIExtensionPoint.CONTENT_BOTTOM_ICONBAR, BottomIconsTrayPanel);
+        this.addUIExtensionPoint(bottomIconsPanelsEP);
     }
 
     public void addUIExtensionPoint(final WorkspaceUIExtensionPoint extPoint) {

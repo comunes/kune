@@ -31,6 +31,7 @@ import org.ourproject.kune.docs.client.actions.ContentSetTagsAction;
 import org.ourproject.kune.docs.client.actions.ContentRenameAction;
 import org.ourproject.kune.docs.client.actions.DocsEvents;
 import org.ourproject.kune.docs.client.actions.GoParentFolder;
+import org.ourproject.kune.docs.client.actions.RenameTokenAction;
 import org.ourproject.kune.docs.client.actions.SaveDocument;
 import org.ourproject.kune.platf.client.extend.ClientModule;
 import org.ourproject.kune.platf.client.extend.Register;
@@ -49,5 +50,6 @@ public class DocsClientModule implements ClientModule {
         register.addAction(DocsEvents.SET_TAGS, new ContentSetTagsAction());
         register.addAction(DocsEvents.RENAME_CONTENT, new ContentRenameAction());
         register.addAction(DocsEvents.DEL_CONTENT, new ContentDelContentAction());
+        register.addAction(DocsEvents.RENAME_TOKEN, new RenameTokenAction());
     }
 }

@@ -39,18 +39,21 @@ public class DocumentReaderControlPanel extends HorizontalPanel implements Docum
         editBtn = new CustomPushButton(Kune.I18N.tWithNT("Edit", "used in button"), new ClickListener() {
             public void onClick(final Widget sender) {
                 listener.onEdit();
+                editBtn.removeStyleDependentName("up-hovering");
             }
         });
 
         deleteBtn = new CustomPushButton(Kune.I18N.tWithNT("Delete", "used in button"), new ClickListener() {
             public void onClick(final Widget sender) {
                 listener.onDelete();
+                deleteBtn.removeStyleDependentName("up-hovering");
             }
         });
 
         translateBtn = new CustomPushButton(Kune.I18N.tWithNT("Translate", "used in button"), new ClickListener() {
             public void onClick(final Widget sender) {
                 listener.onTranslate();
+                translateBtn.removeStyleDependentName("up-hovering");
                 Site.showAlertMessage(Kune.I18N.t("Sorry, this functionality is currently in development"));
             }
         });

@@ -49,6 +49,8 @@ class ItemsPanel extends VerticalPanel {
                     }
                 });
         item.setEditable(editable);
+        item.addStyleName("Items");
+        item.addStyleName("kune-floatleft");
         add(item);
     }
 

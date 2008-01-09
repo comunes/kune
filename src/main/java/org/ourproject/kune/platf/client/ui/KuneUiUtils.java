@@ -10,10 +10,34 @@ public class KuneUiUtils {
         setQuickTip(widget.getElement(), tip);
     }
 
+    public static void setQuickTip(final Widget widget, final String tip, final String tipTitle) {
+        setQuickTip(widget.getElement(), tip, tipTitle);
+    }
+
+    /**
+     * Use widget.setTitle if you don't want to use extjs (but remember that
+     * title is limited to 64chars).
+     * 
+     * Bug: extjs quicktips don't work with images or span inside divs (like
+     * pushbutton)
+     * 
+     * @param element
+     * @param tip
+     */
     public static void setQuickTip(final Element element, final String tip) {
         // If we don't want to use ext, use 'title' instead (limited to 64
         // chars)
-        DOM.setElementAttribute(element, "ext:qtip", tip);
+        if (tip == null || tip.length() == 0) {
+            DOM.removeElementAttribute(element, "ext:qtip");
+        } else {
+            String newTip = "<div style='min-width: 100px'>" + tip + "</div>";
+            DOM.setElementAttribute(element, "ext:qtip", newTip);
+        }
+    }
+
+    public static void setQuickTip(final Element element, final String tip, final String tipTitle) {
+        setQuickTip(element, tip);
+        DOM.setElementAttribute(element, "ext:qtitle", tipTitle);
     }
 
 }

@@ -24,22 +24,22 @@ import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.workspace.client.theme.ThemeMenuPresenter;
 import org.ourproject.kune.workspace.client.theme.ThemeMenuView;
+import org.ourproject.kune.workspace.client.workspace.ui.BottomTrayIcon;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.MenuBar;
 
-public class ThemeMenuPanel extends MenuBar implements ThemeMenuView {
+public class ThemeMenuPanel extends BottomTrayIcon implements ThemeMenuView {
 
     private final MenuBar themesMB;
     private final ThemeMenuPresenter presenter;
 
     public ThemeMenuPanel(final ThemeMenuPresenter presenter) {
+        super(Kune.I18N.t("Select Workspace theme for this group"));
         this.presenter = presenter;
         themesMB = new MenuBar(true);
-        themesMB.addStyleDependentName("kune-ThemeMenu-offset");
+        themesMB.setStyleName("kune-ThemeMenu-offset");
         this.addItem(Images.App.getInstance().themeChoose().getHTML(), true, themesMB);
-        setStyleName("kune-ThemeMenuPanel");
-        setTitle("Select Workspace theme for this group");
     }
 
     public void setThemes(final String[] themes) {

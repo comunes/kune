@@ -48,12 +48,13 @@ public class SessionImpl implements Session {
     private String[] timezones;
     private I18nLanguageDTO currentLanguage;
 
-    public SessionImpl(final String usersHash) {
+    public SessionImpl(final String usersHash, final I18nLanguageDTO initialLang) {
         this.userHash = usersHash;
         licenses = null;
         languages = null;
         languagesArray = null;
         countries = null;
+        currentLanguage = initialLang;
     }
 
     /*
@@ -229,38 +230,18 @@ public class SessionImpl implements Session {
         return objs;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.ourproject.kune.platf.client.state.Session#setTimezones(java.lang.String[])
-     */
     public void setTimezones(final String[] timezones) {
         this.timezones = timezones;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.ourproject.kune.platf.client.state.Session#getTimezones()
-     */
     public String[] getTimezones() {
         return timezones;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.ourproject.kune.platf.client.state.Session#setCurrentLanguage(org.ourproject.kune.platf.client.dto.I18nLanguageDTO)
-     */
     public void setCurrentLanguage(final I18nLanguageDTO currentLanguage) {
         this.currentLanguage = currentLanguage;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.ourproject.kune.platf.client.state.Session#getCurrentLanguage()
-     */
     public I18nLanguageDTO getCurrentLanguage() {
         return currentLanguage;
     }

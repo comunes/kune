@@ -19,28 +19,32 @@
 
 package org.ourproject.kune.docs.client.actions;
 
+import java.util.List;
+
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.sitebar.client.Site;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public class ContentSetTagsAction implements Action {
 
     public void execute(final Object value, final Object extra, final Services services) {
-        onContentsetTags(services, (String) value, (String) extra);
+        onContentsetTags(services, (String) value);
     }
 
-    private void onContentsetTags(final Services services, final String documentId, final String tags) {
+    private void onContentsetTags(final Services services, final String tags) {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
-        server.setTags(services.session.getUserHash(), services.session.getCurrentState().getGroup().getShortName(),
-                documentId, tags, new AsyncCallbackSimple() {
-                    public void onSuccess(final Object result) {
-                        Site.hideProgress();
-                        services.stateManager.reload();
-                    }
-                });
+        StateDTO currentState = services.session.getCurrentState();
+        server.setTags(services.session.getUserHash(), currentState.getGroup().getShortName(), currentState
+                .getDocumentId(), tags, new AsyncCallbackSimple() {
+            public void onSuccess(final Object result) {
+                services.app.getWorkspace().getTagsComponent().setGroupTags((List) result);
+                Site.hideProgress();
+            }
+        });
     }
 }

@@ -52,13 +52,17 @@ public class DocumentClientTool extends AbstractClientTool implements DocumentCo
         return NAME;
     }
 
-    public void setContent(final StateDTO content) {
+    public void setContent(final StateDTO state) {
         DocumentContent docContent = components.getContent();
-        docContent.setContent(content);
-        DocumentContext context = components.getContext();
-        context.setContent(content);
+        docContent.setContent(state);
+
         // TODO: revistar el interface de trigger (setState)
-        trigger.setState(content.getState().toString());
+        trigger.setState(state.getStateToken().toString());
+    }
+
+    public void setContext(final StateDTO state) {
+        DocumentContext context = components.getContext();
+        context.setContext(state);
     }
 
     public void onEdit() {

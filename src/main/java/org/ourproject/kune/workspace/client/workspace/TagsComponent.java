@@ -19,10 +19,15 @@
 
 package org.ourproject.kune.workspace.client.workspace;
 
+import java.util.List;
+
 import org.ourproject.kune.platf.client.Component;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public interface TagsComponent extends Component {
 
-    void setTags(String thisIsOnlyForTests);
+    void setState(StateDTO state);
+
+    void setGroupTags(List result);
 
 }

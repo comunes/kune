@@ -50,6 +50,7 @@ public class AddFolder implements Action {
                         Site.info(Kune.I18N.t("Folder created"));
                         StateDTO state = (StateDTO) result;
                         services.stateManager.setRetrievedState(state);
+                        services.stateManager.reload();
                     }
                 });
     }

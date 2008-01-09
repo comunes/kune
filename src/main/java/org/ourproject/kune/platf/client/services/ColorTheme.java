@@ -85,8 +85,8 @@ public class ColorTheme {
         return theme.get("participationDD");
     }
 
-    public String getBuddiesPresenceDD() {
-        return theme.get("buddiesPresenceDD");
+    public String getSummaryDD() {
+        return theme.get("summaryDD");
     }
 
     public String getTagsDD() {

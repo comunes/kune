@@ -3,6 +3,7 @@ package org.ourproject.kune.platf.client.services;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.AlreadyGroupMemberException;
+import org.ourproject.kune.platf.client.errors.AlreadyUserMemberException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
 import org.ourproject.kune.platf.client.errors.LastAdminInGroupException;
@@ -39,6 +40,7 @@ public class KuneErrorHandler {
             }
         } catch (final GroupNotFoundException e) {
             Site.error(Kune.I18N.t("Group not found"));
+            DefaultDispatcher.getInstance().fire(WorkspaceEvents.GOTO, "", null);
         } catch (final ContentNotFoundException e) {
             Site.error(Kune.I18N.t("Content not found"));
             DefaultDispatcher.getInstance().fire(WorkspaceEvents.GOTO, "", null);
@@ -47,6 +49,8 @@ public class KuneErrorHandler {
                     + " Look for someone to substitute you appropriately as admin before unjoin this group."));
         } catch (final AlreadyGroupMemberException e) {
             Site.error(Kune.I18N.t("This group is already a group member"));
+        } catch (final AlreadyUserMemberException e) {
+            Site.error(Kune.I18N.t("This user is already a member of this group"));
         } catch (final Throwable e) {
             Site.error(Kune.I18N.t("Error performing operation"));
             GWT.log("Other kind of exception in StateManagerDefault/processErrorException", null);

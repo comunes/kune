@@ -111,7 +111,7 @@ public class MapperTest {
     public void testContentDescriptorMapping() {
         final Content d = new Content();
         d.setId(1l);
-        final Revision revision = new Revision();
+        final Revision revision = new Revision(d);
         revision.getData().setTitle("title");
         d.addRevision(revision);
 

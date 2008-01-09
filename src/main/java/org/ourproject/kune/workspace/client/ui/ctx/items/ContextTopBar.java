@@ -23,12 +23,14 @@ package org.ourproject.kune.workspace.client.ui.ctx.items;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.ContainerSimpleDTO;
 import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.PushButton;
@@ -39,6 +41,7 @@ class ContextTopBar extends VerticalPanel {
 
     public final Label currentFolder;
     public final PushButton btnGoParent;
+    public final Image btnGoParentDisabled;
     public final HorizontalPanel firstRow;
     private final ContextItemsImages img;
     private final MenuBar pathSubmenu;
@@ -55,6 +58,9 @@ class ContextTopBar extends VerticalPanel {
                 presenter.onGoUp();
             }
         });
+
+        KuneUiUtils.setQuickTip(btnGoParent, Kune.I18N.t("Go to parent folder"));
+        btnGoParentDisabled = img.folderGoUpLight().createImage();
         final MenuBar pathMenu = new MenuBar();
         pathSubmenu = new MenuBar(true);
         // Layout
@@ -67,7 +73,9 @@ class ContextTopBar extends VerticalPanel {
                 RoundedBorderDecorator.SIMPLE);
         iconBarHP.add(buttonRounded);
         pathMenu.addItem(img.folderpathmenu().getHTML(), true, pathSubmenu);
+        KuneUiUtils.setQuickTip(pathMenu, Kune.I18N.t("Navigation tree"));
         currentFolderHP.add(btnGoParent);
+        currentFolderHP.add(btnGoParentDisabled);
         currentFolder = new Label("Current Container");
         currentFolderHP.add(currentFolder);
 

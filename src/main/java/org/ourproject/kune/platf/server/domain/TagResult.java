@@ -1,4 +1,5 @@
 /*
+ *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -17,14 +18,40 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.presence;
+package org.ourproject.kune.platf.server.domain;
 
-import org.ourproject.kune.platf.client.View;
 
-public interface BuddiesPresenceView extends View {
+public class TagResult {
+    private String name;
+    private Long count;
 
-    void removeRoster(String name, String category);
+    public TagResult() {
+        this(null, null);
+    }
 
-    void addRoster(String name, String category, int status);
+    public TagResult(final String name) {
+        this(name, null);
+    }
+
+    public TagResult(final String name, final Long count) {
+        this.name = name;
+        this.count = count;
+    }
+
+    public Long getCount() {
+        return count;
+    }
+
+    public void setCount(final Long count) {
+        this.count = count;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(final String name) {
+        this.name = name;
+    }
 
 }

@@ -3,18 +3,32 @@ ORIG=src/main/java/org/ourproject/kune/app/public/
 CATTMPFILE=`mktemp` || exit 1
 CSSTMPFILE=`mktemp` || exit 1
 DEST=src/main/java/org/ourproject/kune/app/public/css/all.css
-CSS='css/reset.css css/fonts-min.css js/ext/resources/css/ext-all.css js/ext/resources/css/xtheme-gray.css css/workspace.css css/chat.css css/docs.css css/kune.css'
+DEST2=src/main/java/org/ourproject/kune/app/public/css/richtext.css
+CSS='css/reset.css css/fonts-min.css js/ext/resources/css/ext-all.css js/ext/resources/css/xtheme-gray.css css/kune.css css/workspace.css css/chat.css css/docs.css'
+CSS2='css/reset.css css/fonts-min.css css/rte.css'
 
-for i in $CSS
+function concat {
+for i in $*
 do
   cat $ORIG/$i >> $CATTMPFILE
   echo -e "\n" >> $CATTMPFILE
 done
+}
 
+function tidy {
 # Dependency csstidy (apt-get install csstidy)
 csstidy $CATTMPFILE \
   --template=highest \
   --optimise_shorthands=2 \
   --preserve_css=true \
   $CSSTMPFILE
-cat $CSSTMPFILE | sed 's/\.\.\/images/\.\.\/js\/ext\/resources\/images/g' > $DEST
+cat $CSSTMPFILE | sed 's/\.\.\/images/\.\.\/js\/ext\/resources\/images/g' > $1
+}
+
+concat $CSS
+tidy $DEST
+
+echo > $CATTMPFILE
+
+concat $CSS2
+tidy $DEST2

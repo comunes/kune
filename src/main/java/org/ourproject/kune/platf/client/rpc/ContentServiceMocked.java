@@ -108,4 +108,7 @@ public class ContentServiceMocked extends MockedService implements ContentServic
             final AsyncCallback asyncCallback) {
     }
 
+    public void getSummaryTags(final String userHash, final String groupShortName, final AsyncCallback asyncCallback) {
+    }
+
 }

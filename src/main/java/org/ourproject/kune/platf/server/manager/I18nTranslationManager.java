@@ -25,6 +25,7 @@ import java.util.List;
 import org.ourproject.kune.platf.server.domain.I18nTranslation;
 
 import com.google.gwt.user.client.rpc.SerializableException;
+import org.ourproject.kune.platf.server.manager.impl.DefaultManager.SearchResult;
 
 public interface I18nTranslationManager extends Manager<I18nTranslation, Long> {
 
@@ -43,5 +44,9 @@ public interface I18nTranslationManager extends Manager<I18nTranslation, Long> {
     void setTranslation(String language, String text, String translation);
 
     void setTranslation(String id, String translation) throws SerializableException;
+
+    SearchResult getUntranslatedLexicon(String language, Integer firstResult, Integer maxResults);
+
+    SearchResult getTranslatedLexicon(String language, Integer firstResult, Integer maxResults);
 
 }

@@ -35,6 +35,10 @@ public interface StateManager extends HistoryListener {
 
     void setState(StateToken state);
 
-    Session getSession();
+    void reloadContextAndTitles();
+
+    void refreshContentSubTitle();
+
+    void refreshContentTitle();
 
 }

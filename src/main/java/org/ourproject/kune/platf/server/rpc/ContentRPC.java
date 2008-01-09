@@ -21,12 +21,14 @@
 package org.ourproject.kune.platf.server.rpc;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.NoResultException;
 
 import org.ourproject.kune.chat.server.managers.ChatConnection;
 import org.ourproject.kune.chat.server.managers.XmppManager;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.dto.TagResultDTO;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
@@ -46,6 +48,7 @@ import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
+import org.ourproject.kune.platf.server.manager.TagManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.platf.server.state.State;
 import org.ourproject.kune.platf.server.state.StateService;
@@ -69,12 +72,13 @@ public class ContentRPC implements ContentService, RPC {
     private final XmppManager xmppManager;
     private final ContentManager contentManager;
     private final ContainerManager containerManager;
+    private final TagManager tagManager;
 
     @Inject
     public ContentRPC(final Provider<UserSession> userSessionProvider, final AccessService accessService,
             final StateService stateService, final CreationService creationService, final GroupManager groupManager,
             final XmppManager xmppManager, final ContentManager contentManager,
-            final ContainerManager containerManager, final Mapper mapper) {
+            final ContainerManager containerManager, final TagManager tagManager, final Mapper mapper) {
         this.userSessionProvider = userSessionProvider;
         this.accessService = accessService;
         this.stateService = stateService;
@@ -83,6 +87,7 @@ public class ContentRPC implements ContentService, RPC {
         this.xmppManager = xmppManager;
         this.contentManager = contentManager;
         this.containerManager = containerManager;
+        this.tagManager = tagManager;
         this.mapper = mapper;
     }
 
@@ -120,7 +125,7 @@ public class ContentRPC implements ContentService, RPC {
             state.setRate(contentManager.getRateAvg(content));
             state.setRateByUsers(contentManager.getRateByUsers(content));
         }
-
+        state.setGroupTags(tagManager.getSummaryByGroup(state.getFolder().getOwner()));
         return mapper.map(state, StateDTO.class);
     }
 
@@ -259,20 +264,14 @@ public class ContentRPC implements ContentService, RPC {
     @Authenticated
     @Authorizated(accessTypeRequired = AccessType.EDIT, checkContent = true)
     @Transactional(type = TransactionType.READ_WRITE)
-    public void setTags(final String userHash, final String groupShortName, final String documentId, final String tags)
+    public List setTags(final String userHash, final String groupShortName, final String documentId, final String tags)
             throws SerializableException {
         final Long contentId = parseId(documentId);
         UserSession userSession = getUserSession();
         User user = userSession.getUser();
+        final Group group = groupManager.findByShortName(groupShortName);
         contentManager.setTags(user, contentId, tags);
-    }
-
-    @Authenticated
-    @Authorizated(accessTypeRequired = AccessType.EDIT, checkContent = true)
-    @Transactional(type = TransactionType.READ_WRITE)
-    public String renameContent(final String userHash, final String groupShortName, final String documentId,
-            final String newName) throws SerializableException {
-        return renameContent(documentId, newName);
+        return getSummaryTags(group);
     }
 
     private String renameContent(final String documentId, final String newName) throws ContentNotFoundException,
@@ -283,14 +282,6 @@ public class ContentRPC implements ContentService, RPC {
         return contentManager.renameContent(user, contentId, newName);
     }
 
-    @Authenticated
-    @Authorizated(accessTypeRequired = AccessType.EDIT)
-    @Transactional(type = TransactionType.READ_WRITE)
-    public String renameFolder(final String userHash, final String groupShortName, final Long folderId,
-            final String newName) throws SerializableException {
-        return renameFolder(groupShortName, folderId, newName);
-    }
-
     private String renameFolder(final String groupShortName, final Long folderId, final String newName)
             throws SerializableException {
         final Group group = groupManager.findByShortName(groupShortName);
@@ -298,6 +289,18 @@ public class ContentRPC implements ContentService, RPC {
         final User user = userSession.getUser();
         Access folderAccess = accessService.getFolderAccess(group, folderId, user, AccessType.EDIT);
         return containerManager.renameFolder(group, folderAccess.getFolder(), newName);
+    }
+
+    @Authenticated(mandatory = false)
+    @Authorizated(accessTypeRequired = AccessType.READ)
+    @Transactional(type = TransactionType.READ_ONLY)
+    public List getSummaryTags(final String userHash, final String groupShortName) {
+        final Group group = groupManager.findByShortName(groupShortName);
+        return getSummaryTags(group);
+    }
+
+    private List getSummaryTags(final Group group) {
+        return mapper.mapList(tagManager.getSummaryByGroup(group), TagResultDTO.class);
     }
 
     @Authenticated

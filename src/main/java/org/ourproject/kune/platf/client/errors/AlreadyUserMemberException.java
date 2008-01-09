@@ -1,4 +1,5 @@
 /*
+ *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -17,30 +18,11 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.presence;
+package org.ourproject.kune.platf.client.errors;
 
-import org.ourproject.kune.platf.client.AbstractPresenter;
-import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.workspace.client.workspace.BuddiesPresenceComponent;
+import com.google.gwt.user.client.rpc.SerializableException;
 
-public class BuddiesPresencePresenter extends AbstractPresenter implements BuddiesPresenceComponent {
-
-    private BuddiesPresenceView view;
-
-    public void setBuddiesPresence() {
-        // TODO
-    }
-
-    public void addRoster(final String name, final String category, final int status) {
-
-    }
-
-    public View getView() {
-        return view;
-    }
-
-    public void init(final BuddiesPresenceView view) {
-        this.view = view;
-    }
+public class AlreadyUserMemberException extends SerializableException {
+    private static final long serialVersionUID = 1L;
 
 }

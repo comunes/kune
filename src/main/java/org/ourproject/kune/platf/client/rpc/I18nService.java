@@ -21,6 +21,8 @@ package org.ourproject.kune.platf.client.rpc;
 
 import java.util.HashMap;
 
+import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.SerializableException;
@@ -28,7 +30,7 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 public interface I18nService extends RemoteService {
 
-    String getInitialLanguage();
+    I18nLanguageDTO getInitialLanguage();
 
     /**
      * @gwt.typeArgs <java.lang.String,java.lang.String>

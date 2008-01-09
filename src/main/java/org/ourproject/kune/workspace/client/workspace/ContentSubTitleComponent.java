@@ -20,6 +20,7 @@
 package org.ourproject.kune.workspace.client.workspace;
 
 import org.ourproject.kune.platf.client.Component;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public interface ContentSubTitleComponent extends Component {
 
@@ -30,4 +31,6 @@ public interface ContentSubTitleComponent extends Component {
     void setContentSubTitleLeftVisible(boolean visible);
 
     void setContentSubTitleRightVisible(boolean visible);
+
+    void setState(StateDTO state);
 }

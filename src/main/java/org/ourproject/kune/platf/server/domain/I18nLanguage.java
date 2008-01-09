@@ -29,6 +29,8 @@ import javax.persistence.Table;
 
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Indexed;
+import org.hibernate.validator.Length;
+import org.hibernate.validator.Pattern;
 
 import com.google.inject.name.Named;
 import com.wideplay.warp.persist.dao.Finder;
@@ -47,19 +49,19 @@ public class I18nLanguage implements HasId {
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "code")
+    @Column(name = "code", unique = true)
     private String code;
 
     @Column(name = "iso_639_1", length = 2)
     private String iso6391;
 
-    @Column(name = "iso_639_2", length = 3)
+    @Column(name = "iso_639_2", length = 3, unique = true)
     private String iso6392;
 
-    @Column(name = "iso_639_3", length = 3)
+    @Column(name = "iso_639_3", length = 3, unique = true)
     private String iso6393;
 
-    @Column(name = "rfc_3066")
+    @Column(name = "rfc_3066", unique = true)
     private String rfc3066;
 
     @Column(name = "english_name")
@@ -86,7 +88,9 @@ public class I18nLanguage implements HasId {
     @Column(name = "direction")
     private String direction;
 
+    @Pattern(regex = "^[c=\\d?:%!<>&|() ]+$")
     @Column(name = "pluralization")
+    @Length(max = 200)
     private String pluralization;
 
     @Column(name = "scope", length = 1)
@@ -99,9 +103,9 @@ public class I18nLanguage implements HasId {
     // code is iso6391 || iso6392 || rfc3306 (see DatabaInicializer)
     public I18nLanguage(final Long id, final String code, final String direction, final String englishName,
             final String englishNameLocale, final String englishNameModifier, final String iso6391,
-            final String iso6392, final String iso6393, final Boolean macroLanguage,
-            final String nativeName, final String nativeNameLocale, final String nativeNameModifier,
-            final String pluralization, final String rfc3066, final String scope) {
+            final String iso6392, final String iso6393, final Boolean macroLanguage, final String nativeName,
+            final String nativeNameLocale, final String nativeNameModifier, final String pluralization,
+            final String rfc3066, final String scope) {
         this.id = id;
         this.iso6391 = iso6391;
         this.iso6392 = iso6392;

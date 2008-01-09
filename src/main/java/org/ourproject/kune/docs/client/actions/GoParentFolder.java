@@ -32,7 +32,7 @@ public class GoParentFolder implements Action {
     }
 
     private void goParent(final StateDTO state, final StateManager stateManager) {
-	StateToken token = state.getState();
+	StateToken token = state.getStateToken();
 	token.setDocument(null);
 	token.setFolder(state.getFolder().getParentFolderId().toString());
 	stateManager.setState(token);

@@ -1,3 +1,13 @@
+2008-01-08 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* Added Tags group results (pre cloud)
+	* Added Content lucene search
+	* Pagination to i18nTranslator
+	* Search inproved
+	* Focus on panel when showing it
+	* Trying to solve css issues in RTE iframe (not totally tested/finished)
+	* Added bottom icon bar
+	* Many bug fixes and refactorizations
+
 2008-01-03 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* (drop database needed)
 	* Updated to gwt-1.4.61 (added also to our maven repo)

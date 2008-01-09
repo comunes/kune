@@ -28,6 +28,7 @@ import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderControl;
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderListener;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
+import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.WorkspaceUIExtensionPoint;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
@@ -65,22 +66,26 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
     }
 
     public void onEdit() {
-        if (content.hasDocument()) {
-            // Don't permit rate content while your are editing
-            DefaultDispatcher.getInstance().fire(WorkspaceEvents.DISABLE_RATEIT, null, null);
-            TextEditor editor = components.getDocumentEditor();
-            editor.setContent(content.getContent());
-            view.show(editor.getView());
-            DefaultDispatcher.getInstance().fire(WorkspaceEvents.CLEAR_EXT_POINT,
-                    WorkspaceUIExtensionPoint.CONTENT_TOOLBAR_LEFT, null);
-            DefaultDispatcher.getInstance().fire(WorkspaceEvents.ATTACH_TO_EXT_POINT,
-                    WorkspaceUIExtensionPoint.CONTENT_TOOLBAR_LEFT, editor.getToolBar());
-        } else {
-            FolderEditor editor = components.getFolderEditor();
-            editor.setFolder(content.getFolder());
-            view.show(editor.getView());
-        }
-        listener.onEdit();
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ONLY_CHECK_USER_SESSION, new AsyncCallbackSimple() {
+            public void onSuccess(final Object result) {
+                if (content.hasDocument()) {
+                    // Don't permit rate content while your are editing
+                    DefaultDispatcher.getInstance().fire(WorkspaceEvents.DISABLE_RATEIT, null, null);
+                    TextEditor editor = components.getDocumentEditor();
+                    editor.setContent(content.getContent());
+                    view.show(editor.getView());
+                    DefaultDispatcher.getInstance().fire(WorkspaceEvents.CLEAR_EXT_POINT,
+                            WorkspaceUIExtensionPoint.CONTENT_TOOLBAR_LEFT, null);
+                    DefaultDispatcher.getInstance().fire(WorkspaceEvents.ATTACH_TO_EXT_POINT,
+                            WorkspaceUIExtensionPoint.CONTENT_TOOLBAR_LEFT, editor.getToolBar());
+                } else {
+                    FolderEditor editor = components.getFolderEditor();
+                    editor.setFolder(content.getFolder());
+                    view.show(editor.getView());
+                }
+                listener.onEdit();
+            }
+        }, null);
     }
 
     public void onSave(final String text) {
@@ -118,6 +123,7 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
     private void showContent() {
         if (content.hasDocument()) {
             reader.showDocument(content.getContent());
+            components.getDocumentEditor().reset();
             readerControl.setRights(content.getContentRights());
             DefaultDispatcher.getInstance().fire(WorkspaceEvents.CLEAR_EXT_POINT,
                     WorkspaceUIExtensionPoint.CONTENT_TOOLBAR_LEFT, null);

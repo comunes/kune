@@ -51,9 +51,9 @@ public interface WorkspaceView extends View {
 
     void setParticipation(View view);
 
-    void setBuddiesPresence(View view);
+    void setSummary(View view);
 
-    void setThemeMenuComponent(View view);
+    void addBottomIconComponent(View view);
 
     void setTheme(String theme);
 
@@ -67,7 +67,7 @@ public interface WorkspaceView extends View {
 
     void setPutYourLogoVisible(boolean visible);
 
-    void setUIExtensionPoints();
+    void registerUIExtensionPoints();
 
     void attachToExtensionPoint(String id, View viewToAttach);
 

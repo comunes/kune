@@ -145,7 +145,9 @@ public class IconHyperlink extends Widget implements SourcesClickEvents, Abstrac
     public void setTitle(final String title) {
         // problem with size of Quicktips in icons...
         // KuneUiUtils.setQuickTip(icon, title);
-        KuneUiUtils.setQuickTip(anchorElem, title);
+        // KuneUiUtils.setQuickTip(anchorElem, title);
+        DOM.setElementAttribute(anchorElem, "ext:qtip", title);
+        KuneUiUtils.setQuickTip(getElement(), title);
     }
 
     public void addMouseListener(final MouseListener listener) {

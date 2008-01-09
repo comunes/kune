@@ -91,7 +91,7 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
     public void nonExistentContent4() throws SerializableException {
         StateDTO stateDTO = getDefaultContent();
         stateDTO.setDocumentId("foofoo");
-        contentService.getContent(null, groupName, stateDTO.getState());
+        contentService.getContent(null, groupName, stateDTO.getStateToken());
     }
 
     @Test(expected = ContentNotFoundException.class)

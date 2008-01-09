@@ -15,7 +15,7 @@ public class WorkspaceTest {
 
     @Before
     public void create() {
-        presenter = new WorkspacePresenter(new SessionImpl("userHash"));
+        presenter = new WorkspacePresenter(new SessionImpl("userHash", null));
         view = EasyMock.createStrictMock(WorkspaceView.class);
         presenter.init(view);
     }

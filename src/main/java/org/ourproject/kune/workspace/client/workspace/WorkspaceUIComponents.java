@@ -19,7 +19,6 @@
 
 package org.ourproject.kune.workspace.client.workspace;
 
-import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.WorkspaceFactory;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorComponent;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelectorComponent;
@@ -30,7 +29,7 @@ class WorkspaceUIComponents {
     private ContentTitleComponent contentTitle;
     private GroupMembersComponent groupMembers;
     private ParticipationComponent participatesInGroups;
-    private BuddiesPresenceComponent buddiesPresence;
+    private GroupSummaryComponent groupSummary;
     private ContentSubTitleComponent contentSubTitle;
     private ContentBottomToolBarComponent contentBottomToolBar;
     private ThemeMenuComponent themeMenu;
@@ -71,11 +70,11 @@ class WorkspaceUIComponents {
         return groupMembers;
     }
 
-    public BuddiesPresenceComponent getBuddiesPresenceComponent() {
-        if (buddiesPresence == null) {
-            buddiesPresence = WorkspaceFactory.createBuddiesPresenceComponent();
+    public GroupSummaryComponent getGroupSummaryComponent() {
+        if (groupSummary == null) {
+            groupSummary = WorkspaceFactory.createGroupSummaryComponent();
         }
-        return buddiesPresence;
+        return groupSummary;
     }
 
     public ParticipationComponent getParticipationComponent() {
@@ -120,17 +119,11 @@ class WorkspaceUIComponents {
         return groupLiveSearch;
     }
 
-    public I18nTranslatorComponent getI18nTranslatorComponent(final Session session) {
+    public I18nTranslatorComponent getI18nTranslatorComponent() {
         if (i18nTranslatorSearch == null) {
-            i18nTranslatorSearch = WorkspaceFactory.createI18nTranslatorComponent(session);
+            i18nTranslatorSearch = WorkspaceFactory.createI18nTranslatorComponent();
         }
         return i18nTranslatorSearch;
     }
 
-    public LanguageSelectorComponent getLanguageSelectorComponent(final Object[][] languages) {
-        if (languageSelector == null) {
-            languageSelector = WorkspaceFactory.createLanguageSelectorComponent(languages);
-        }
-        return languageSelector;
-    }
 }

@@ -22,6 +22,7 @@ package org.ourproject.kune.sitebar.client.bar;
 
 import java.util.List;
 
+import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.newgroup.NewGroup;
@@ -39,6 +40,7 @@ import org.ourproject.kune.sitebar.client.services.Images;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
@@ -60,6 +62,7 @@ import com.gwtext.client.widgets.MessageBox;
 
 public class SiteBarPanel extends Composite implements SiteBarView {
 
+    private static final int MAX_TIME_PROGRESS_BAR = 20000;
     private static final String SEARCH_TEXT_WIDTH_SMALL = "120";
     private static final String SEARCH_TEXT_WIDTH_BIG = "180";
     private final SiteBarPresenter presenter;
@@ -90,6 +93,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     private SearchSitePanel searchPanel;
     private final ExtElement extRootBody;
     private String publicUrl;
+    private Timer timeProgressMaxTime;
 
     public SiteBarPanel(final SiteBarPresenter initPresenter) {
         img = Images.App.getInstance();
@@ -178,7 +182,6 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 
         // TODO: externalize this
         img.kuneLogo16px().applyTo(logoImage);
-
         this.hideProgress();
         extRootBody = new ExtElement(RootPanel.getBodyElement());
     }
@@ -272,10 +275,11 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         loggedUserHyperlink.setTargetHistoryToken(homePage);
     }
 
-    public void showLoginDialog() {
+    public void showLoginDialog(final I18nLanguageDTO currentLanguage) {
         final Login login = SiteBarFactory.getLoginForm(presenter);
         loginPanel = (LoginPanel) login.getView();
-        loginPanel.show();
+        loginPanel.show(currentLanguage);
+
     }
 
     public void hideLoginDialog() {
@@ -313,12 +317,21 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     public void showProgress(final String text) {
+        if (timeProgressMaxTime == null) {
+            timeProgressMaxTime = new Timer() {
+                public void run() {
+                    hideProgress();
+                }
+            };
+        }
+        timeProgressMaxTime.schedule(MAX_TIME_PROGRESS_BAR);
         publicHP.setVisible(false);
         progressPanel.setVisible(true);
         DOM.setInnerText(progressText.getElement(), text);
     }
 
     public void hideProgress() {
+        timeProgressMaxTime.cancel();
         progressPanel.setVisible(false);
         publicHP.setVisible(true);
     }

@@ -51,7 +51,7 @@ public class StateServiceDefault implements StateService {
             state.setLanguage(container.getLanguage());
         }
         final Data data = content.getLastRevision().getData();
-        final char[] text = data.getContent();
+        final char[] text = data.getBody();
         state.setContent(text == null ? null : new String(text));
         if (documentId != null) {
             state.setTitle(data.getTitle());

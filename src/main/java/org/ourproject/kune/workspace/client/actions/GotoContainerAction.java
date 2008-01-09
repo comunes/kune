@@ -30,7 +30,7 @@ public class GotoContainerAction implements Action {
     }
 
     private void onGoto(final Services services, final Long folderId) {
-        StateToken newStateToken = services.session.getCurrentState().getState();
+        StateToken newStateToken = services.session.getCurrentState().getStateToken();
         newStateToken.setDocument(null);
         newStateToken.setFolder(folderId.toString());
         services.stateManager.setState(newStateToken);
