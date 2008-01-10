@@ -310,7 +310,7 @@ public class LoginPanel implements LoginView, View {
         VerticalPanel signInWrapper = new VerticalPanel() {
             {
                 setSpacing(30);
-                setWidth("100%");
+                // setWidth("100%");
                 setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
             }
         };
@@ -334,7 +334,7 @@ public class LoginPanel implements LoginView, View {
         VerticalPanel registerWrapper = new VerticalPanel() {
             {
                 setSpacing(30);
-                setWidth("100%");
+                // setWidth("100%");
                 setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
             }
         };
@@ -577,6 +577,7 @@ public class LoginPanel implements LoginView, View {
                 setAllowBlank(false);
                 setValueField("abbr");
                 setPageSize(7);
+                setForceSelection(true);
             }
         });
 
@@ -604,6 +605,7 @@ public class LoginPanel implements LoginView, View {
                 setAllowBlank(false);
                 setValueField("abbr");
                 setPageSize(7);
+                setForceSelection(true);
             }
         });
 
@@ -631,6 +633,7 @@ public class LoginPanel implements LoginView, View {
                 setAllowBlank(false);
                 setValueField("id");
                 setPageSize(7);
+                setForceSelection(true);
             }
         });
 

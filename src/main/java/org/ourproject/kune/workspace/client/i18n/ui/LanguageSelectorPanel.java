@@ -86,6 +86,7 @@ public class LanguageSelectorPanel extends Form implements LanguageSelectorView 
                 setMsgTarget("side");
                 setValueField("abbr");
                 setPageSize(7);
+                setForceSelection(true);
             }
         });
     }

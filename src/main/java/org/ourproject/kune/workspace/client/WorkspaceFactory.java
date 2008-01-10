@@ -171,7 +171,7 @@ public class WorkspaceFactory {
     }
 
     public static TagsComponent createTagsComponent() {
-        TagsPresenter presenter = new TagsPresenter();
+        TagsPresenter presenter = new TagsPresenter(session);
         TagsView view = new TagsPanel(presenter);
         presenter.init(view);
         return presenter;
