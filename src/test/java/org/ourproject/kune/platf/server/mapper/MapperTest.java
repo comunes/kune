@@ -112,7 +112,7 @@ public class MapperTest {
         final Content d = new Content();
         d.setId(1l);
         final Revision revision = new Revision(d);
-        revision.getData().setTitle("title");
+        revision.setTitle("title");
         d.addRevision(revision);
 
         final ContentDTO dto = mapper.map(d, ContentDTO.class);

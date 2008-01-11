@@ -78,7 +78,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         container.addContent(descriptor);
         Revision revision = new Revision(descriptor);
         revision.setTitle(title);
-        revision.setDataContent(body);
+        revision.setBody(body);
         descriptor.addRevision(revision);
         return persist(descriptor);
     }
@@ -87,7 +87,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         Revision revision = new Revision(descriptor);
         revision.setEditor(editor);
         revision.setTitle(descriptor.getTitle());
-        revision.setDataContent(content);
+        revision.setBody(content);
         descriptor.addRevision(revision);
         return persist(descriptor);
     }
@@ -181,7 +181,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     public String renameContent(final User user, final Long contentId, final String newTitle)
             throws SerializableException {
         Content content = finder.getContent(contentId);
-        content.getLastRevision().getData().setTitle(newTitle);
+        content.getLastRevision().setTitle(newTitle);
         return newTitle;
     }
 

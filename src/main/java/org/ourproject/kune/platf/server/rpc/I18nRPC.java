@@ -62,25 +62,29 @@ public class I18nRPC implements RPC, I18nService {
     }
 
     @Transactional(type = TransactionType.READ_ONLY)
-    public I18nLanguageDTO getInitialLanguage() {
+    public I18nLanguageDTO getInitialLanguage(final String localeParam) {
         String initLanguage;
         I18nLanguage lang;
         UserSession userSession = getUserSession();
-        if (userSession.isUserLoggedIn()) {
-            initLanguage = userSession.getUser().getLanguage().getCode();
+        if (localeParam != null) {
+            initLanguage = localeParam;
         } else {
-            String browserLang = requestProvider.get().getLocale().getLanguage();
-            if (browserLang != null) {
-                // Not logged, use browser language if possible
-                String country = requestProvider.get().getLocale().getCountry();
-                if (browserLang.equals("pt") && country != null && country.equals("BR")) {
-                    // FIXME: the only supported rfc 3066 lang supported
-                    initLanguage = "pt-br";
-                } else {
-                    initLanguage = browserLang;
-                }
+            if (userSession.isUserLoggedIn()) {
+                initLanguage = userSession.getUser().getLanguage().getCode();
             } else {
-                initLanguage = I18nTranslation.DEFAULT_LANG;
+                String browserLang = requestProvider.get().getLocale().getLanguage();
+                if (browserLang != null) {
+                    // Not logged, use browser language if possible
+                    String country = requestProvider.get().getLocale().getCountry();
+                    if (browserLang.equals("pt") && country != null && country.equals("BR")) {
+                        // FIXME: the only supported rfc 3066 lang supported
+                        initLanguage = "pt-br";
+                    } else {
+                        initLanguage = browserLang;
+                    }
+                } else {
+                    initLanguage = I18nTranslation.DEFAULT_LANG;
+                }
             }
         }
         try {

@@ -90,8 +90,10 @@ public class Content implements HasStateToken {
 
     @ManyToOne
     @JoinColumn
+    @IndexedEmbedded
     private Container container;
 
+    @IndexedEmbedded
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     private I18nLanguage language;
@@ -99,6 +101,7 @@ public class Content implements HasStateToken {
     @OneToOne(cascade = CascadeType.ALL)
     private AccessLists accessLists;
 
+    @IndexedEmbedded
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private List<User> authors;
 
@@ -202,7 +205,7 @@ public class Content implements HasStateToken {
     }
 
     public String getTitle() {
-        return lastRevision.getData().getTitle();
+        return lastRevision.getTitle();
     }
 
     public String getTypeId() {

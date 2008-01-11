@@ -1,4 +1,4 @@
-Your session has expired. Please login again.
+INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Your session has expired. Please login again.','Your session has expired. Please login again.','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Domingo','Sunday [%NT weekday]','ViewTranslation',7597);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Segunda','Monday [%NT weekday]','ViewTranslation',7597);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Terça','Tuesday [%NT weekday]','ViewTranslation',7597);

@@ -28,7 +28,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
 import org.hibernate.validator.Length;
 import org.hibernate.validator.Pattern;
 
@@ -49,6 +52,7 @@ public class I18nLanguage implements HasId {
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
+    @Field(index = Index.TOKENIZED, store = Store.NO)
     @Column(name = "code", unique = true)
     private String code;
 
@@ -64,6 +68,7 @@ public class I18nLanguage implements HasId {
     @Column(name = "rfc_3066", unique = true)
     private String rfc3066;
 
+    @Field(index = Index.TOKENIZED, store = Store.NO)
     @Column(name = "english_name")
     private String englishName;
 
@@ -73,6 +78,7 @@ public class I18nLanguage implements HasId {
     @Column(name = "english_name_modifier")
     private String englishNameModifier;
 
+    @Field(index = Index.TOKENIZED, store = Store.NO)
     @Column(name = "native_name")
     private String nativeName;
 

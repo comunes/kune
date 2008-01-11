@@ -9,15 +9,10 @@ SHORT-TERM (URGENT):
 <vjrj> BUG: Duplicate Keys in group/user creation different exception [1]
 ---> vjrj
 <vjrj> Interceptors also useful for translation of db fields
-<vjrj> BUG: SN you can add the same group as Member
 <vjrj> login session. Follow incubation recomendations. See:
 http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/e8e14b16e57b266f
 Now there are problems if client was started before server, and with server restart
 --> vjrj
-<vjrj> hibernate search: follow server search code (global, not per class), and
-continue with the client search dialog
---> vjrj
-<vjrj> See differences between star-yellow-grey.png and -50.png
 --> vjrj
 <vjrj> explorer specific problems: fonts antialiasing problem? please if you have a ie, report problems (with screenshots if possible)
 <vjrj> Ext localization (see I18nUiTranslation):
@@ -27,18 +22,11 @@ continue with the client search dialog
 
 MIND-TERM:
 --------------------------------------------------------------------------------
-<vjrj> Hibernate pagination (for i18n Json query) and ext grid pagination:
-  http://www.hibernate.org/314.html
-Better:
-    @Finder(namedQuery = Blog.LIST_ALL_QUERY)
-    List<Blog> getAllEntityAByPage(@MaxResults int pageSize, @FirstResult int firstResultIndx);
-
-<vjrj> Use http://extjs.com/docs/output/LoadMask.jss.html in Grids
 <vjrj> for dev, study jetty hot deploy (if scanIntervalSeconds > 0 also reload with client changes ... ). It will be nice to send a signal or something like that. See:
   http://jetty.mortbay.org/jetty5/faq/faq_s_200-General_t_HotDeploy.html
 See, I think is what we are looking for:
   http://www.opensymphony.com/webwork/wikidocs/QuickStart.html
-Now using maven jetty from eclise with debugger, hot reload the new class, but other things like hibernate (or cache/session) still reference the old copy of the class.
+Now using maven jetty from eclipse with debugger, hot reload the new class, but other things like hibernate (or cache/session) still reference the old copy of the class.
 
 <vjrj> Use of maven-exec plugin to exec scripts (to css tidy, etcetera)
   http://mojo.codehaus.org/exec-maven-plugin/introduction.html
@@ -46,15 +34,10 @@ Now using maven jetty from eclise with debugger, hot reload the new class, but o
   http://agilewebdevelopment.com/plugins/request_routing
 <vjrj> Strip html better in RTE, I18nTranslator, Chat
   http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/b4a27c80f50581cc
-<vjrj> Clean /scrits/ directory
-<vjrj> layout problems (specially resizing) with old Mozilla (wait gwt 1.4)
 <vjrj> RTE right to left writing
 <vjrj> Restarting server don't affect client session
 <vjrj> See css utilities in http://code.google.com/p/cobogw/
 <vjrj> RTE css style: http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/f64c0024d8676a66/d5f26a54145fc5d4?lnk=gst&q=richtextarea++css#d5f26a54145fc5d4
-<vjrj> Get users timezone in registration:
-http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/f6fa38b59610ab65
-<vjrj> Add a new group type (orphan project) without people
 
 LONG-TERM:
 --------------------------------------------------------------------------------

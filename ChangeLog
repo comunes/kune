@@ -1,3 +1,8 @@
+2008-01-11 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* Some minor bug fixes... 
+	* Data & Revision joined
+	* Lucene search of contents improved
+
 2008-01-09 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* SN and StateManager refactor
 	* Small bug fixes...

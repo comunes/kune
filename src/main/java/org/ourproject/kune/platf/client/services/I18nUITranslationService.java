@@ -47,20 +47,8 @@ public class I18nUITranslationService extends I18nTranslationService {
     public void getInitialLanguage(final AsyncCallback callback) {
         Location loc = WindowUtils.getLocation();
         String locale = loc.getParameter("locale");
-        if (locale != null) {
-            // If locale parameter exist, use it
-            if (locale.equals("pt-br") || locale.equals("zh-Hant") || locale.equals("zh-Hans")) {
-                // initially only three rfc 3306 langs supported
-                currentLanguage = locale;
-            } else {
-                String[] localeSplitted = locale.split("-");
-                currentLanguage = localeSplitted[0];
-            }
-            callback.onSuccess(currentLanguage);
-        } else {
-            I18nServiceAsync server = I18nService.App.getInstance();
-            server.getInitialLanguage(callback);
-        }
+        I18nServiceAsync server = I18nService.App.getInstance();
+        server.getInitialLanguage(locale, callback);
     }
 
     public void getInitialLexicon(final String initLanguage, final AsyncCallback callback) {

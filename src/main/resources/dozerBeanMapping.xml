@@ -132,10 +132,9 @@
     <class-b>org.ourproject.kune.platf.server.domain.Content</class-b>
     <field>
       <a>title</a>
-      <b>lastRevision.data.title</b>
+      <b>lastRevision.title</b>
     </field>
   </mapping>
-
 
   <mapping>
     <class-a>org.ourproject.kune.platf.client.dto.ContainerDTO</class-a>
@@ -247,7 +246,7 @@
     <class-b>org.ourproject.kune.platf.server.domain.User</class-b>
   </mapping>
 
-    <mapping>
+  <mapping>
     <class-a>org.ourproject.kune.platf.client.dto.TagDTO</class-a>
     <class-b>org.ourproject.kune.platf.server.domain.Tag</class-b>
   </mapping>
@@ -256,5 +255,7 @@
     <class-a>org.ourproject.kune.platf.client.dto.TagResultDTO</class-a>
     <class-b>org.ourproject.kune.platf.server.domain.TagResult</class-b>
   </mapping>
+
+
 
 </mappings>

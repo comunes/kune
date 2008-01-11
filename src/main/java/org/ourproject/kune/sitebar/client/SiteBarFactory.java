@@ -79,7 +79,7 @@ public class SiteBarFactory {
 
     public static Login getLoginForm(final LoginListener listener) {
         if (login == null) {
-            LoginPresenter presenter = new LoginPresenter(listener);
+            LoginPresenter presenter = new LoginPresenter(session, listener);
             LoginPanel view = new LoginPanel(presenter, session.getLanguagesArray(), session.getCountriesArray(),
                     session.getTimezones());
             presenter.init(view);

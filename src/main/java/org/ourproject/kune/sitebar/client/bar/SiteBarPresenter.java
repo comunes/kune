@@ -73,7 +73,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
     public void doLogin(final String previousToken) {
         this.previousToken = previousToken;
         Site.showProgressProcessing();
-        view.showLoginDialog(session.getCurrentLanguage());
+        view.showLoginDialog();
         view.centerLoginDialog();
         Site.hideProgress();
     }

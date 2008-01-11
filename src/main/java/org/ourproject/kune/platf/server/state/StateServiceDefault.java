@@ -23,8 +23,8 @@ package org.ourproject.kune.platf.server.state;
 import org.ourproject.kune.platf.server.access.Access;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.Data;
 import org.ourproject.kune.platf.server.domain.License;
+import org.ourproject.kune.platf.server.domain.Revision;
 
 import com.google.inject.Singleton;
 
@@ -50,11 +50,11 @@ public class StateServiceDefault implements StateService {
             state.setIsRateable(false);
             state.setLanguage(container.getLanguage());
         }
-        final Data data = content.getLastRevision().getData();
-        final char[] text = data.getBody();
+        final Revision revision = content.getLastRevision();
+        final char[] text = revision.getBody();
         state.setContent(text == null ? null : new String(text));
         if (documentId != null) {
-            state.setTitle(data.getTitle());
+            state.setTitle(revision.getTitle());
         } else {
             state.setTitle(container.getName());
         }

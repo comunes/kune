@@ -38,10 +38,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.search.annotations.ContainedIn;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
 import org.hibernate.search.annotations.Store;
 
 @Entity
@@ -63,6 +65,7 @@ public class Container implements HasId {
     @ManyToOne
     private I18nLanguage language;
 
+    @IndexedEmbedded
     @OneToOne
     private Group owner;
 
@@ -76,6 +79,7 @@ public class Container implements HasId {
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Container> childs;
 
+    @ContainedIn
     @OneToMany(mappedBy = "container", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Content> contents;
 

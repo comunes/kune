@@ -30,7 +30,7 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 public interface I18nService extends RemoteService {
 
-    I18nLanguageDTO getInitialLanguage();
+    I18nLanguageDTO getInitialLanguage(String localeParam);
 
     /**
      * @gwt.typeArgs <java.lang.String,java.lang.String>

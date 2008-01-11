@@ -31,6 +31,7 @@ import org.ourproject.kune.platf.client.errors.EmailAddressInUseException;
 import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
 import org.ourproject.kune.platf.client.errors.UserAuthException;
 import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.sitebar.client.msg.MessagePresenter;
 import org.ourproject.kune.sitebar.client.msg.SiteMessage;
@@ -45,7 +46,10 @@ public class LoginPresenter implements Login, MessagePresenter {
 
     final LoginListener listener;
 
-    public LoginPresenter(final LoginListener listener) {
+    private final Session session;
+
+    public LoginPresenter(final Session session, final LoginListener listener) {
+        this.session = session;
         this.listener = listener;
     }
 
@@ -166,6 +170,10 @@ public class LoginPresenter implements Login, MessagePresenter {
 
     private void reset() {
         view.reset();
+    }
+
+    public I18nLanguageDTO getCurrentLanguage() {
+        return session.getCurrentLanguage();
     }
 
 }

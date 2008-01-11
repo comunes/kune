@@ -6,7 +6,6 @@ import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.Data;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.Revision;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
@@ -85,9 +84,8 @@ public abstract class TestDomainHelper {
         descriptor.setId(id);
         Revision rev = new Revision(descriptor);
         descriptor.addRevision(rev);
-        Data data = rev.getData();
-        data.setTitle(title);
-        data.setBody(content.toCharArray());
+        rev.setTitle(title);
+        rev.setBody(content);
         return descriptor;
     }
 

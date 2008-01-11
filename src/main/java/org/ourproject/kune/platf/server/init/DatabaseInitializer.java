@@ -33,7 +33,6 @@ import org.ourproject.kune.platf.server.domain.I18nCountry;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.I18nTranslation;
 import org.ourproject.kune.platf.server.domain.License;
-import org.ourproject.kune.platf.server.domain.Revision;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.I18nCountryManager;
@@ -124,12 +123,33 @@ public class DatabaseInitializer {
         groupManager.reIndex();
 
         Content defaultContent = siteGroup.getDefaultContent();
-        Revision revision = new Revision(defaultContent);
-        revision.setTitle("Welcome to kune demo");
-        revision
-                .setDataContent("<img src=\"http://kune.ourproject.org/IMG/cache-200x37/siteon0-200x37.png\" align=\"right\">This a initial demo of <a href=\"http://kune.ourproject.org\">kune</a>.<br><div style=\"text-align: right;\"><br></div>Kune is currently under initial development.<br><br>To test it, <a href=\"#login\">sign in registering an user</a>, but take into account that:<br><ul><li>kune is not optimized yet, then the initial load and other operations maybe are slow.</li><li>Don\'t use passwords that you are using in other sites (kune isn\'t secure yet storing passwords).</li><li>The site is divided in two main areas: the public space and the workspace:</li><ul><li>The workspace is the most important part of kune, because is where users collaborate and communicates which each others. This part is the most dynamic and we are using modern (and sometimes experimental) web technologies to improve the end user experience. I heavily under development.<br></li><li>The public space is currently lest developed. Our main goal is to offer customs and configurable styles for groups/users contents.</li></ul></ul><font size=\"4\"><br>We need your feedback<br><br></font>Please help us to improve this software reporting <a href=\"http://code.google.com/p/kune/issues\">bugs and/or suggestions</a>. Also you <a href=\"#translate\">help us to translate it</a> into other languages.<br><br>Thank you,<br><br>--<br><span style=\"font-style: italic;\">The kune development team</span><br>");
-        defaultContent.addRevision(revision);
-        contentManager.persist(defaultContent);
+        contentManager.save(user, defaultContent,
+                "<img src=\"http://kune.ourproject.org/IMG/cache-200x37/siteon0-200x37.png\" "
+                        + "align=\"right\">This a initial demo of "
+                        + "<a href=\"http://kune.ourproject.org\">kune</a>."
+                        + "<br><div style=\"text-align: right;\"><br></div>"
+                        + "Kune is currently under initial development.<br>"
+                        + "<br>To test it, <a href=\"#login\">sign in registering an user</a>, "
+                        + "but take into account that:<br><ul><li>kune is not optimized yet, "
+                        + "then the initial load and other operations maybe are slow.</li>"
+                        + "<li>Don\'t use passwords that you are using in other sites "
+                        + "(kune isn\'t secure yet storing passwords).</li>"
+                        + "<li>The site is divided in two main areas: the public "
+                        + "space and the workspace:</li><ul>"
+                        + "<li>The workspace is the most important part of kune, "
+                        + "because is where users collaborate and communicates which each others. "
+                        + "This part is the most dynamic and we are using modern "
+                        + "(and sometimes experimental) web technologies to improve the end user "
+                        + "experience. I heavily under development.<br></li>"
+                        + "<li>The public space is currently lest developed. "
+                        + "Our main goal is to offer customs and configurable styles "
+                        + "for groups/users contents.</li></ul></ul><font size=\"4\"><br>"
+                        + "We need your feedback<br><br></font>Please help us to improve this software "
+                        + "reporting <a href=\"http://code.google.com/p/kune/issues\">bugs and/or "
+                        + "suggestions</a>. Also you <a href=\"#translate\">help us to translate it</a> "
+                        + "into other languages.<br><br>Thank you,<br>"
+                        + "<br>--<br><span style=\"font-style: italic;\">" + "The kune development team</span><br>");
+        contentManager.renameContent(user, defaultContent.getId(), "Welcome to kune demo");
     }
 
     private void createLicenses() {

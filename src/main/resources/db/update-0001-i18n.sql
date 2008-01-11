@@ -109,7 +109,7 @@ INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','No participar m�
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','¿No tiene una cuenta?',"Don't have an account?",'kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Debe ser entre 3 y 15 carácteres en minúsculas. Solo puede contener letras, números y guiones','Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Las contraseña no coinciden','Passwords do not match','kune_core',5889);
-INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Cree una','Create one.','kune_core',5889);
+INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Cree una.','Create one.','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Idioma','Language','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Buscando...','Searching...','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Introduzca idioma','Enter language','kune_core',5889);

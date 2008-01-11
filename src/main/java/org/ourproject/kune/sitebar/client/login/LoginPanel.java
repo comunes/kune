@@ -21,7 +21,6 @@
 package org.ourproject.kune.sitebar.client.login;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
 import org.ourproject.kune.sitebar.client.Site;
@@ -233,14 +232,16 @@ public class LoginPanel implements LoginView, View {
         messagesPanel.hide();
     }
 
-    public void show(final I18nLanguageDTO currentLanguage) {
+    public void show() {
         tabPanel.getTab(0).activate();
         dialog.setVisible(true);
         dialog.show();
         Site.hideProgress();
         dialog.focus();
         loginNickOrEmailField.focus(false);
-        languageCombo.setValue(currentLanguage.getEnglishName());
+        // languageCombo.setValue(currentLanguage.getEnglishName()); --> error
+        // registro
+        languageCombo.setValue(presenter.getCurrentLanguage().getCode());
     }
 
     public void hide() {
@@ -270,7 +271,7 @@ public class LoginPanel implements LoginView, View {
                 setSplit(false);
                 setInitialSize(49);
                 setHideWhenEmpty(true);
-                setFloatable(true);
+                // setFloatable(true);
                 setAutoHide(true);
             }
         };
@@ -310,7 +311,7 @@ public class LoginPanel implements LoginView, View {
         VerticalPanel signInWrapper = new VerticalPanel() {
             {
                 setSpacing(30);
-                // setWidth("100%");
+                setWidth("100%");
                 setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
             }
         };
@@ -334,7 +335,7 @@ public class LoginPanel implements LoginView, View {
         VerticalPanel registerWrapper = new VerticalPanel() {
             {
                 setSpacing(30);
-                // setWidth("100%");
+                setWidth("100%");
                 setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
             }
         };
@@ -404,7 +405,6 @@ public class LoginPanel implements LoginView, View {
 
         dialog.addDialogListener(new DialogListener() {
             public boolean doBeforeHide(final LayoutDialog dialog) {
-                // presenter.onClose();
                 return true;
             }
 
@@ -447,6 +447,7 @@ public class LoginPanel implements LoginView, View {
                 setWidth(175);
                 setAllowBlank(false);
                 setMsgTarget("side");
+                setValidateOnBlur(false);
             }
         });
         form.add(loginNickOrEmailField);
@@ -492,6 +493,7 @@ public class LoginPanel implements LoginView, View {
                 setMinLengthText(Kune.I18N.t(MUST_BE_BETWEEN_3_AND_15));
                 setMaxLengthText(Kune.I18N.t(MUST_BE_BETWEEN_3_AND_15));
                 setRegexText(Kune.I18N.t(MUST_BE_BETWEEN_3_AND_15));
+                setValidationDelay(1000);
             }
         });
         form.add(shortNameRegField);
@@ -505,6 +507,7 @@ public class LoginPanel implements LoginView, View {
                 setMsgTarget("side");
                 setMinLength(3);
                 setMaxLength(50);
+                setValidationDelay(1000);
             }
         });
         form.add(longNameRegField);
@@ -515,10 +518,10 @@ public class LoginPanel implements LoginView, View {
                 setName(PASSWORD_FIELD);
                 setPassword(true);
                 setAllowBlank(false);
-                setMinLength(6);
                 setMaxLength(40);
                 setWidth(200);
                 setMsgTarget("side");
+                setValidationDelay(1000);
             }
         });
         form.add(passwdRegField);
@@ -539,6 +542,7 @@ public class LoginPanel implements LoginView, View {
                         return passwdRegField.getValueAsString().equals(passwdRegFieldDup.getValueAsString());
                     }
                 });
+                setValidationDelay(1000);
             }
         });
         form.add(passwdRegFieldDup);
@@ -551,6 +555,7 @@ public class LoginPanel implements LoginView, View {
                 setWidth(200);
                 setMsgTarget("side");
                 setAllowBlank(false);
+                setValidationDelay(1000);
             }
         });
         form.add(emailRegField);

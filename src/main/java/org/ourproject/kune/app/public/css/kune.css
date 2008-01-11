@@ -159,6 +159,7 @@ legend {
 }
 
 .kune-CustomPushButton-up-hovering {
+  color: #161616;
   background: transparent url(img/button-bg-soft.gif) repeat-x 0 0;
 }
 

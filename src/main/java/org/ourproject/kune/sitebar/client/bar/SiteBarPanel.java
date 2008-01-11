@@ -22,7 +22,6 @@ package org.ourproject.kune.sitebar.client.bar;
 
 import java.util.List;
 
-import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.newgroup.NewGroup;
@@ -275,10 +274,10 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         loggedUserHyperlink.setTargetHistoryToken(homePage);
     }
 
-    public void showLoginDialog(final I18nLanguageDTO currentLanguage) {
+    public void showLoginDialog() {
         final Login login = SiteBarFactory.getLoginForm(presenter);
         loginPanel = (LoginPanel) login.getView();
-        loginPanel.show(currentLanguage);
+        loginPanel.show();
 
     }
 
