@@ -35,6 +35,7 @@ import org.ourproject.kune.workspace.client.actions.InitAction;
 import org.ourproject.kune.workspace.client.actions.InitDataReceivedAction;
 import org.ourproject.kune.workspace.client.actions.LoggedInAction;
 import org.ourproject.kune.workspace.client.actions.LoggedOutAction;
+import org.ourproject.kune.workspace.client.actions.RecalculateWorkspaceAction;
 import org.ourproject.kune.workspace.client.actions.OnlyCheckUserSessionAction;
 import org.ourproject.kune.workspace.client.actions.RateContentAction;
 import org.ourproject.kune.workspace.client.actions.ReloadContextAction;
@@ -97,5 +98,6 @@ public class WorkspaceClientModule implements ClientModule {
         register.addAction(WorkspaceEvents.USER_REGISTER, new UserRegisterAction());
         register.addAction(WorkspaceEvents.CREATE_NEW_GROUP, new CreateNewGroupAction());
         register.addAction(WorkspaceEvents.RELOAD_CONTEXT, new ReloadContextAction());
+        register.addAction(WorkspaceEvents.RECALCULATE_WORKSPACE_SIZE, new RecalculateWorkspaceAction());
     }
 }

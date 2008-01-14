@@ -23,6 +23,7 @@ package org.ourproject.kune.platf.client.rpc;
 import java.util.Date;
 import java.util.List;
 
+import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
@@ -48,7 +49,7 @@ public interface ContentService extends RemoteService {
     void rateContent(String userHash, String groupShortName, String documentId, Double value)
             throws SerializableException;
 
-    void setLanguage(String userHash, String groupShortName, String documentId, String languageCode)
+    I18nLanguageDTO setLanguage(String userHash, String groupShortName, String documentId, String languageCode)
             throws SerializableException;
 
     void setPublishedOn(String userHash, String groupShortName, String documentId, Date date)

@@ -21,13 +21,17 @@
 package org.ourproject.kune.docs.client.ctx.admin;
 
 import java.util.Date;
+import java.util.List;
 
 import org.ourproject.kune.docs.client.actions.DocsEvents;
+import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
+import org.ourproject.kune.platf.client.dto.AccessListsDTO;
+import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
-public class AdminContextPresenter implements AdminContext {
+public class AdminContextPresenter extends AbstractPresenter implements AdminContext {
 
     private AdminContextView view;
 
@@ -40,16 +44,36 @@ public class AdminContextPresenter implements AdminContext {
 
     public void setState(final StateDTO content) {
         // In the future check the use of these components by each tool
-        view.setAccessLists(content.getAccessLists());
-        view.setLanguage(content.getLanguage());
-        if (content.getAccessLists() != null) {
-            view.setAuthors(content.getAuthors());
+        I18nLanguageDTO language = content.getLanguage();
+        AccessListsDTO accessLists = content.getAccessLists();
+        Date publishedOn = content.getPublishedOn();
+        String tags = content.getTags();
+        List authors = content.getAuthors();
+
+        if (tags != null) {
+            view.setTags(tags);
+        } else {
+            view.removeTagsComponent();
         }
-        if (content.getPublishedOn() != null) {
-            view.setPublishedOn(content.getPublishedOn());
+        if (language != null) {
+            view.setLanguage(language);
+        } else {
+            view.removeLangComponent();
         }
-        if (content.getTags() != null) {
-            view.setTags(content.getTags());
+        if (authors != null) {
+            view.setAuthors(authors);
+        } else {
+            view.removeAuthorsComponent();
+        }
+        if (publishedOn != null) {
+            view.setPublishedOn(publishedOn);
+        } else {
+            view.removePublishedOnComponent();
+        }
+        if (accessLists != null) {
+            view.setAccessLists(accessLists);
+        } else {
+            view.removeAccessListComponent();
         }
     }
 
@@ -63,6 +87,10 @@ public class AdminContextPresenter implements AdminContext {
 
     public void setTags(final String tags) {
         DefaultDispatcher.getInstance().fire(DocsEvents.SET_TAGS, tags, null);
+    }
+
+    public void doChangeLanguage(final String langCode) {
+        DefaultDispatcher.getInstance().fire(DocsEvents.SET_LANGUAGE, langCode, null);
     }
 
 }

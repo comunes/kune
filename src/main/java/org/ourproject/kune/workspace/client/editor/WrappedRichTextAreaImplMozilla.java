@@ -43,6 +43,24 @@ public class WrappedRichTextAreaImplMozilla extends RichTextAreaImplMozilla {
       // designMode, so let's avoid doing it more than once.
       iframe.onload = null;
 
+      // patch ccs inject:
+
+      var doc = _this.@com.google.gwt.user.client.ui.impl.RichTextAreaImpl::elem.contentWindow.document;
+      head=doc.getElementsByTagName('head')[0];
+      link=document.createElement('link');
+      link.setAttribute('rel',"stylesheet");
+      link.setAttribute('type',"text/css");
+      link.setAttribute('href',"css/richtext.css" );
+      head.appendChild(link);
+
+      var styles = document.createElement('style');
+      styles.setAttribute('type', 'text/css');
+      var newStyle = document.createTextNode('\n<!--\nbody{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:400;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:400;}q:before,q:after{content:\'\';}abbr,acronym{border:0;font-variant:normal;}sup,sub{line-height:-1px;vertical-align:text-top;}sub{vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}body{font:13px/1.22 arial,helvetica,clean,sans-serif;font-size:small;font:x-small;}table{font-size:inherit;font:100%;}pre,code,kbd,samp,tt{font-family:monospace;font-size:108%;line-height:99%;}h1{font-size:138.5%;}h2{font-size:123.1%;}h3{font-size:108%;}h1,h2,h3{margin:1em 0;}h1,h2,h3,h4,h5,h6,strong{font-weight:700;}abbr,acronym{border-bottom:1px dotted #000;cursor:help;}em{font-style:italic;}blockquote,ul,ol,dl{margin:1em;}ol,ul,dl{margin-left:2em;}ol li{list-style:decimal outside;}ul li{list-style:disc outside;}dl dd{margin-left:1em;}th,td{border:1px solid #000;padding:.5em;}th{font-weight:700;text-align:center;}caption{margin-bottom:.5em;text-align:center;}p,fieldset,table,pre{margin-bottom:1em;}input[type=text],input[type=password],textarea{width:12.25em;width:11.9em;}body{font-family:arial, sans;margin:5px}\n-->\n');
+      styles.appendChild(newStyle);
+      head.appendChild(styles);
+
+      // -- patch
+
       // Send notification that the iframe has finished loading.
       _this.@com.google.gwt.user.client.ui.impl.RichTextAreaImplStandard::onElementInitialized()();
 
@@ -55,29 +73,7 @@ public class WrappedRichTextAreaImplMozilla extends RichTextAreaImplMozilla {
       iframe.contentWindow.onfocus = function() {
         iframe.contentWindow.onfocus = null;
         iframe.contentWindow.document.designMode = 'On';
-
-
-      var doc = _this.@com.google.gwt.user.client.ui.impl.RichTextAreaImpl::elem.contentWindow.document;
-
-      // patch ccs inject:
-
-      head=doc.getElementsByTagName('head')[0];
-      link=document.createElement('link');
-      link.setAttribute('rel',"stylesheet");
-      link.setAttribute('type',"text/css");
-      link.setAttribute('href',"css/richtext.css" );
-      head.appendChild(link);
-
-      var styles = document.createElement('style');
-      styles.setAttribute('type', 'text/css');
-      var newStyle = document.createTextNode('\n<!--\nbody {\nbackground-color: yellow;}\n-->\n');
-      styles.appendChild(newStyle);
-      head.appendChild(styles);
-
-      // -- patch
-
-      };
-
+     };
 
     };
     }-*/;

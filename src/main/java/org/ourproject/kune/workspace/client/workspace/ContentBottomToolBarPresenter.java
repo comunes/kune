@@ -20,6 +20,7 @@
 package org.ourproject.kune.workspace.client.workspace;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public class ContentBottomToolBarPresenter implements ContentBottomToolBarComponent {
 
@@ -33,13 +34,12 @@ public class ContentBottomToolBarPresenter implements ContentBottomToolBarCompon
         return view;
     }
 
-    public void setRate(final boolean isRateable, boolean isLogged, final Double value, final Integer rateByUsers,
-            final Double currentUserRate) {
-        if (isRateable) {
-            if (!isLogged) {
-                setRate(value, rateByUsers);
+    public void setRate(final StateDTO state, boolean logged) {
+        if (state.isRateable()) {
+            if (!logged) {
+                setRate(state.getRate(), state.getRateByUsers());
             } else {
-                setRate(value, rateByUsers, currentUserRate);
+                setRate(state.getRate(), state.getRateByUsers(), state.getCurrentUserRate());
             }
         } else {
             setRateVisible(false);

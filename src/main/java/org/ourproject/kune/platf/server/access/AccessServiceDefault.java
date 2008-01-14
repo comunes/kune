@@ -57,7 +57,7 @@ public class AccessServiceDefault implements AccessService {
             final AccessType accessType) throws SerializableException {
         checkGroupExistence(token);
         Content descriptor = finder.getContent(token, defaultGroup);
-        Access access = new Access(descriptor, descriptor.getFolder());
+        Access access = new Access(descriptor, descriptor.getContainer());
         addContentRights(access, user);
         addFolderRights(access, user);
         addGroupRights(access, user);

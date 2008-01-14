@@ -30,7 +30,7 @@ public abstract class DefaultContentPanel extends VerticalPanel {
         add(content);
         this.setWidth("100%");
         this.setCellWidth(content, "100%");
-        content.addStyleName("main-content");
+        content.setStyleName("kune-Content-Main");
     }
 
     public void setContent(final String text) {

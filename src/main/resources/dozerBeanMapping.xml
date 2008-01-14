@@ -136,6 +136,23 @@
     </field>
   </mapping>
 
+  <mapping type="one-way">
+    <class-a>org.ourproject.kune.platf.server.domain.Content</class-a>
+    <class-b>org.ourproject.kune.platf.client.dto.LinkDTO</class-b>
+    <field>
+      <a>lastRevision.title</a>
+      <b>longName</b>
+    </field>
+    <field>
+      <a>container.owner.shortName</a>
+      <b>shortName</b>
+    </field>
+        <field>
+      <a get-method="getStateToken">link</a>
+      <b>link</b>
+    </field>
+  </mapping>
+
   <mapping>
     <class-a>org.ourproject.kune.platf.client.dto.ContainerDTO</class-a>
     <class-b>org.ourproject.kune.platf.server.domain.Container</class-b>

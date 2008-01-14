@@ -65,7 +65,7 @@ public class FinderTest {
         Container container = TestDomainHelper.createFolderWithIdAndGroupAndTool(1, "groupShortName", "toolName");
         Content descriptor = new Content();
         descriptor.setId(1l);
-        descriptor.setFolder(container);
+        descriptor.setContainer(container);
 
         expect(contentManager.find(2l)).andReturn(descriptor);
         replay(contentManager);
@@ -79,7 +79,7 @@ public class FinderTest {
     public void contentAndFolderMatch() throws SerializableException {
         Content descriptor = new Content();
         Container container = TestDomainHelper.createFolderWithIdAndToolName(5, "toolName2");
-        descriptor.setFolder(container);
+        descriptor.setContainer(container);
         expect(contentManager.find(1l)).andReturn(descriptor);
         replay(contentManager);
 
@@ -91,7 +91,7 @@ public class FinderTest {
     public void contentAndToolMatch() throws SerializableException {
         Content descriptor = new Content();
         Container container = TestDomainHelper.createFolderWithId(1);
-        descriptor.setFolder(container);
+        descriptor.setContainer(container);
         expect(contentManager.find(1l)).andReturn(descriptor);
         replay(contentManager);
 
@@ -103,7 +103,7 @@ public class FinderTest {
     public void contentAndGrouplMatch() throws SerializableException {
         Content descriptor = new Content();
         Container container = TestDomainHelper.createFolderWithIdAndGroupAndTool(5, "groupOther", "toolName");
-        descriptor.setFolder(container);
+        descriptor.setContainer(container);
         expect(contentManager.find(1l)).andReturn(descriptor);
         replay(contentManager);
 
@@ -124,7 +124,7 @@ public class FinderTest {
         replay(containerManager);
         Content content = finder.getContent(new StateToken("groupShortName", "toolName", "1", null), null);
         assertNotNull(content);
-        assertSame(container, content.getFolder());
+        assertSame(container, content.getContainer());
         verify(containerManager);
     }
 
@@ -138,7 +138,7 @@ public class FinderTest {
 
         StateToken token = new StateToken("groupShortName", "toolName", null, null);
         Content content = finder.getContent(token, null);
-        assertSame(container, content.getFolder());
+        assertSame(container, content.getContainer());
         verify(groupManager);
     }
 
@@ -168,7 +168,7 @@ public class FinderTest {
     public void testIds() throws SerializableException {
         Content descriptor = new Content();
         Container container = TestDomainHelper.createFolderWithIdAndToolName(5, "toolName");
-        descriptor.setFolder(container);
+        descriptor.setContainer(container);
         expect(contentManager.find(1l)).andReturn(descriptor);
         replay(contentManager);
 

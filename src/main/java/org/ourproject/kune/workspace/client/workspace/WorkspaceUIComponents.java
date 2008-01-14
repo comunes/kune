@@ -21,7 +21,6 @@ package org.ourproject.kune.workspace.client.workspace;
 
 import org.ourproject.kune.workspace.client.WorkspaceFactory;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorComponent;
-import org.ourproject.kune.workspace.client.i18n.LanguageSelectorComponent;
 import org.ourproject.kune.workspace.client.license.LicenseComponent;
 
 public class WorkspaceUIComponents {
@@ -37,7 +36,6 @@ public class WorkspaceUIComponents {
     private ContentToolBarComponent contentToolBar;
     private GroupLiveSearchComponent groupLiveSearch;
     private I18nTranslatorComponent i18nTranslatorSearch;
-    private LanguageSelectorComponent languageSelector;
 
     public WorkspaceUIComponents(final WorkspacePresenter presenter) {
     }

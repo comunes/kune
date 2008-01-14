@@ -26,9 +26,8 @@ import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.services.I18nUITranslationService;
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.sitebar.client.Site;
-
-import to.tipit.gwtlib.FireLog;
 
 import com.google.gwt.user.client.Cookies;
 
@@ -39,7 +38,6 @@ public class LoggedInAction implements Action {
 
     private void onLoggedIn(final Services services, final UserInfoDTO userInfoDTO) {
         setCookie(userInfoDTO);
-        FireLog.debug("Userhash after login: " + userInfoDTO.getUserHash());
         services.session.setUserHash(userInfoDTO.getUserHash());
         Site.sitebar.showLoggedUser(userInfoDTO);
         I18nLanguageDTO language = userInfoDTO.getLanguage();
@@ -51,8 +49,7 @@ public class LoggedInAction implements Action {
     private void setCookie(final UserInfoDTO userInfoDTO) {
         // http://code.google.com/p/google-web-toolkit-incubator/wiki/LoginSecurityFAQ
         String sessionId = userInfoDTO.getUserHash();
-        // duration remembering login. 2 weeks
-        final long duration = 1000 * 60 * 60 * 24 * 14;
+        final long duration = Session.SESSION_DURATION;
         Date expires = new Date(System.currentTimeMillis() + duration);
         Cookies.setCookie("userHash", sessionId, expires, null, "/", false);
     }

@@ -29,11 +29,10 @@ import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.IconLabel;
 
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class AccessListsPanel extends Composite implements View {
+public class AccessListsPanel extends VerticalPanel implements View {
 
     private static final Images img = Images.App.getInstance();
     private final VerticalPanel adminsVP;
@@ -41,7 +40,6 @@ public class AccessListsPanel extends Composite implements View {
     private final VerticalPanel viewersVP;
 
     public AccessListsPanel() {
-        final VerticalPanel vp = new VerticalPanel();
         final Label adminsLabel = new Label(Kune.I18N.t("Who can admin this:"));
         adminsVP = new VerticalPanel();
         final Label editorsLabel = new Label(Kune.I18N.t("Who more can edit:"));
@@ -50,26 +48,25 @@ public class AccessListsPanel extends Composite implements View {
         viewersVP = new VerticalPanel();
 
         // Layout
-        initWidget(vp);
-        vp.add(adminsLabel);
-        vp.add(adminsVP);
-        vp.add(editorsLabel);
-        vp.add(editorsVP);
-        vp.add(viewersLabel);
-        vp.add(viewersVP);
+        this.add(adminsLabel);
+        this.add(adminsVP);
+        this.add(editorsLabel);
+        this.add(editorsVP);
+        this.add(viewersLabel);
+        this.add(viewersVP);
 
         // Set properties
         // FIXME: titledPanel.setTitle("Who can admin, edit or view this
         // content");
         // addStyleName("kune-AccessList");
         setWidth("100%");
-        vp.setWidth("100%");
-        vp.setCellWidth(adminsLabel, "100%");
-        vp.setCellWidth(editorsLabel, "100%");
-        vp.setCellWidth(viewersLabel, "100%");
-        vp.setCellWidth(adminsVP, "100%");
-        vp.setCellWidth(editorsVP, "100%");
-        vp.setCellWidth(viewersVP, "100%");
+        this.setWidth("100%");
+        this.setCellWidth(adminsLabel, "100%");
+        this.setCellWidth(editorsLabel, "100%");
+        this.setCellWidth(viewersLabel, "100%");
+        this.setCellWidth(adminsVP, "100%");
+        this.setCellWidth(editorsVP, "100%");
+        this.setCellWidth(viewersVP, "100%");
 
         adminsLabel.addStyleName("kune-AccessListSubLabel");
         editorsLabel.addStyleName("kune-AccessListSubLabel");

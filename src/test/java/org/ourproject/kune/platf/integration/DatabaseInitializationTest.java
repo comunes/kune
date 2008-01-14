@@ -53,7 +53,7 @@ public class DatabaseInitializationTest {
     public void testDefaultDocumentContent() {
         Content content = defaultGroup.getDefaultContent();
         assertEquals(DocumentServerTool.TYPE_DOCUMENT, content.getTypeId());
-        Container rootDocFolder = content.getFolder();
+        Container rootDocFolder = content.getContainer();
         assertEquals(true, rootDocFolder.isRoot());
     }
 

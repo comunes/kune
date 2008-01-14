@@ -19,6 +19,8 @@
 
 package org.ourproject.kune.workspace.client.workspace;
 
+import java.util.Date;
+
 import org.ourproject.kune.docs.client.actions.DocsEvents;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
@@ -28,6 +30,7 @@ import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class ContentTitlePresenter implements ContentTitleComponent {
@@ -42,7 +45,7 @@ public class ContentTitlePresenter implements ContentTitleComponent {
         if (state.hasDocument()) {
             setContentTitle(state.getTitle(), state.getContentRights().isEditable());
             setContentDateVisible(true);
-            setContentDate(Kune.I18N.t("Published on: [%s]", state.getPublishedOn().toString()));
+            setContentDate(state.getPublishedOn());
         } else {
             if (state.getFolder().getParentFolderId() == null) {
                 // We translate root folder names (documents, chat room,
@@ -55,16 +58,17 @@ public class ContentTitlePresenter implements ContentTitleComponent {
         }
     }
 
-    public void setContentTitle(final String title, final boolean editable) {
+    public void setContentDate(final Date publishedOn) {
+        DateTimeFormat fmt = DateTimeFormat.getFormat("MM/dd/yyyy, Z");
+        view.setContentDate(Kune.I18N.t("Published on: [%s]", fmt.format(publishedOn)));
+    }
+
+    private void setContentTitle(final String title, final boolean editable) {
         view.setContentTitle(title);
         view.setContentTitleEditable(editable);
     }
 
-    public void setContentDate(final String date) {
-        view.setContentDate(date);
-    }
-
-    public void setContentDateVisible(final boolean visible) {
+    private void setContentDateVisible(final boolean visible) {
         view.setDateVisible(visible);
     }
 

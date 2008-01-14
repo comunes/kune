@@ -5,6 +5,8 @@ TODO-list for kune
 
 SHORT-TERM (URGENT):
 --------------------------------------------------------------------------------
+<vjrj> Double click issue:
+http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/147f09153c4752d2/4caf0ac41c4625d3?lnk=gst&q=timer+double+click&rnum=1#4caf0ac41c4625d3
 <vjrj> Injection problem [2]
 <vjrj> BUG: Duplicate Keys in group/user creation different exception [1]
 ---> vjrj
@@ -22,6 +24,8 @@ Now there are problems if client was started before server, and with server rest
 
 MIND-TERM:
 --------------------------------------------------------------------------------
+<vjrj> Test:
+http://gwtforge.com/
 <vjrj> for dev, study jetty hot deploy (if scanIntervalSeconds > 0 also reload with client changes ... ). It will be nice to send a signal or something like that. See:
   http://jetty.mortbay.org/jetty5/faq/faq_s_200-General_t_HotDeploy.html
 See, I think is what we are looking for:

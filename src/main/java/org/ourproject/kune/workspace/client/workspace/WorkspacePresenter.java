@@ -23,12 +23,16 @@ package org.ourproject.kune.workspace.client.workspace;
 import java.util.Iterator;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.tool.ClientTool;
+import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorComponent;
 import org.ourproject.kune.workspace.client.license.LicenseComponent;
+
+import com.google.gwt.user.client.ui.Widget;
 
 public class WorkspacePresenter implements Workspace {
     private WorkspaceView view;
@@ -156,5 +160,13 @@ public class WorkspacePresenter implements Workspace {
     public void clearExtensionPoint(final String id) {
         view.clearExtensionPoint(id);
 
+    }
+
+    public void onSplitterStartResizing(final Widget sender) {
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.WS_SPLITTER_STARTRESIZING, null, null);
+    }
+
+    public void onSplitterStopResizing(final Widget sender) {
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.WS_SPLITTER_STOPRESIZING, null, null);
     }
 }

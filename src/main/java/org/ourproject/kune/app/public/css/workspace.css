@@ -1,4 +1,5 @@
 /* Sitebar */
+
 #kuneprogresspanel {
   position: absolute;
   top: 2px;
@@ -316,7 +317,6 @@
   opacity: 0.2;
 }
 */
-
 .kune-NavigationBar .topBar .gwt-Image {
   margin: 0 2px 0 5px;
 }
@@ -598,8 +598,7 @@
 }
 
 .kune-AdminContextPanel .gwt-StackPanelItem {
-  background: transparent url(img/arrow-right-white.gif) no-repeat scroll
-    3%;
+  background: transparent url(img/arrow-right-white.gif) no-repeat scroll 3px 2px;
   cursor: pointer;
   padding: 3px 10px 1px 20px;
   owerflow: hidden;
@@ -612,8 +611,7 @@
 }
 
 .kune-AdminContextPanel .gwt-StackPanelItem-selected {
-  background: transparent url(img/arrow-down-white.gif) no-repeat scroll
-    2%;
+  background: transparent url(img/arrow-down-white.gif) no-repeat scroll 3px 2px;
   background-color: #DEE3DB;
 }
 
@@ -626,8 +624,11 @@
 }
 
 .kune-AdminContextPanel-inner {
-  padding: 10px;
-  border-bottom: 2px solid #DEE3DB;
+  background-color: #FFF;
+}
+
+.kune-AdminContextPanel-inner-wrap {
+  margin: 5px;
 }
 
 .kune-EditableLabel {
@@ -646,6 +647,7 @@
 .kune-EditableLabel-high span {
   background-color: #FFFBC1;
 }
+
 .kune-EditableLabel a {
   margin-left: 5px;
 }
@@ -691,4 +693,96 @@
   float: left;
   margin-right: 5px;
   cursor: pointer;
+}
+
+.kune-Content-Main {
+  margin: 5px;
+}
+
+/* Yahoo ui base.css */
+
+.kune-Content-Main h1 {
+  font-size: 138.5%;
+}
+
+.kune-Content-Main h2 {
+  font-size: 123.1%;
+}
+
+.kune-Content-Main h3 {
+  font-size: 108%;
+}
+
+.kune-Content-Main h1,h2,h3 {
+  margin: 1em 0;
+}
+
+.kune-Content-Main h1,h2,h3,h4,h5,h6,strong {
+  font-weight: bold;
+}
+
+.kune-Content-Main abbr,acronym {
+  border-bottom: 1px dotted #000;
+  cursor: help;
+}
+
+.kune-Content-Main em {
+  font-style: italic;
+}
+
+.kune-Content-Main blockquote,ul,ol,dl {
+  margin: 1em;
+}
+
+.kune-Content-Main ol,ul,dl {
+  margin-left: 2em;
+}
+
+.kune-Content-Main ol li {
+  list-style: decimal outside;
+}
+
+.kune-Content-Main ul li {
+  list-style: disc outside;
+}
+
+.kune-Content-Main dl dd {
+  margin-left: 1em;
+}
+
+.kune-Content-Main th {
+  border: 1px solid #000;
+  padding: .5em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.kune-Content-Main td {
+  border: 1px solid #000;
+  padding: .5em;
+}
+
+.kune-Content-Main caption {
+  margin-bottom: .5em;
+  text-align: center;
+}
+
+.kune-Content-Main p {
+  margin-bottom: 1em;
+}
+
+.kune-Content-Main fieldset {
+  margin-bottom: 1em;
+}
+.kune-Content-Main table {
+  margin-bottom: 1em;
+}
+
+.kune-Content-Main pre {
+  margin-bottom: 1em;
+}
+
+.kune-Content-Main input[type=text],input[type=password],textarea {
+  width: 12.25em; *
+  width: 11.9em;
 }

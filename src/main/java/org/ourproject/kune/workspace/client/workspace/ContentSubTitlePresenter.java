@@ -34,28 +34,23 @@ public class ContentSubTitlePresenter implements ContentSubTitleComponent {
 
     public void setState(final StateDTO state) {
         if (state.hasDocument()) {
-            setContentSubTitleLeft(Kune.I18N.tWithNT("by: [%s]", "used in a list of authors", ((UserSimpleDTO) state
-                    .getAuthors().get(0)).getName()));
-            setContentSubTitleLeftVisible(true);
+            view.setContentSubTitleLeft(Kune.I18N.tWithNT("by: [%s]", "used in a list of authors",
+                    ((UserSimpleDTO) state.getAuthors().get(0)).getName()));
+            view.setContentSubTitleLeftVisible(true);
         } else {
-            setContentSubTitleLeftVisible(false);
+            view.setContentSubTitleLeftVisible(false);
+        }
+        if (state.getLanguage() != null) {
+            String langName = state.getLanguage().getEnglishName();
+            setContentLanguage(langName);
+            view.setContentSubTitleRightVisible(true);
+        } else {
+            view.setContentSubTitleRightVisible(false);
         }
     }
 
-    public void setContentSubTitleLeft(final String subTitle) {
-        view.setContentSubTitleLeft(subTitle);
-    }
-
-    public void setContentSubTitleLeftVisible(final boolean visible) {
-        view.setContentSubTitleLeftVisible(visible);
-    }
-
-    public void setContentSubTitleRight(final String subTitle) {
-        view.setContentSubTitleRight(subTitle);
-    }
-
-    public void setContentSubTitleRightVisible(final boolean visible) {
-        view.setContentSubTitleRightVisible(visible);
+    public void setContentLanguage(final String langName) {
+        view.setContentSubTitleRight(Kune.I18N.t("Language: [%s]", langName));
     }
 
     public View getView() {

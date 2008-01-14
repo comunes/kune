@@ -1,3 +1,13 @@
+2008-01-13 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* added response.setContentType("text/json");
+	* StateManagerDefault refactoring
+	* AdminContext with more actions
+	* TextArea size issues
+
+2008-01-12 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* css style in Content and RTE
+	* Small window enables scroll
+
 2008-01-11 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* Some minor bug fixes... 
 	* Data & Revision joined

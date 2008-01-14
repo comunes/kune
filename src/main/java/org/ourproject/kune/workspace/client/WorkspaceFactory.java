@@ -22,7 +22,6 @@ package org.ourproject.kune.workspace.client;
 
 import org.ourproject.kune.platf.client.app.DesktopView;
 import org.ourproject.kune.platf.client.app.ui.DesktopPanel;
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.sitebar.client.bar.SiteBarListener;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
@@ -62,7 +61,6 @@ import org.ourproject.kune.workspace.client.theme.ui.ThemeMenuPanel;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPanel;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPresenter;
-import org.ourproject.kune.workspace.client.workspace.GroupSummaryComponent;
 import org.ourproject.kune.workspace.client.workspace.ContentBottomToolBarComponent;
 import org.ourproject.kune.workspace.client.workspace.ContentBottomToolBarPresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentBottomToolBarView;
@@ -77,6 +75,7 @@ import org.ourproject.kune.workspace.client.workspace.ContentToolBarPresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentToolBarView;
 import org.ourproject.kune.workspace.client.workspace.GroupLiveSearchComponent;
 import org.ourproject.kune.workspace.client.workspace.GroupMembersComponent;
+import org.ourproject.kune.workspace.client.workspace.GroupSummaryComponent;
 import org.ourproject.kune.workspace.client.workspace.ParticipationComponent;
 import org.ourproject.kune.workspace.client.workspace.TagsComponent;
 import org.ourproject.kune.workspace.client.workspace.ThemeMenuComponent;
@@ -91,7 +90,6 @@ import org.ourproject.kune.workspace.client.workspace.ui.WorkspacePanel;
 
 public class WorkspaceFactory {
 
-    private static LanguageSelectorPresenter presenter;
     private static Session session;
 
     public static Workspace createWorkspace(final Session session) {
@@ -205,13 +203,10 @@ public class WorkspaceFactory {
         return presenter;
     }
 
-    public static LanguageSelectorComponent getLanguageSelectorComponent() {
-        if (presenter == null) {
-            presenter = new LanguageSelectorPresenter();
-            LanguageSelectorView view = new LanguageSelectorPanel(presenter, session.getLanguagesArray(), Kune.I18N
-                    .t("Language"));
-            presenter.init(view);
-        }
+    public static LanguageSelectorComponent createLanguageSelectorComponent() {
+        LanguageSelectorPresenter presenter = new LanguageSelectorPresenter(session);
+        LanguageSelectorView view = new LanguageSelectorPanel(presenter);
+        presenter.init(view);
         return presenter;
     }
 

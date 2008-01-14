@@ -38,7 +38,7 @@ import org.ourproject.kune.workspace.client.editor.TextEditorListener;
 
 public class DocumentContentPresenter implements DocumentContent, DocumentReaderListener, TextEditorListener {
     private final WorkspaceDeckView view;
-    private final DocumentComponents components;
+    private final DocumentContentComponents components;
     private StateDTO content;
     private final DocumentContentListener listener;
     private final DocumentReader reader;
@@ -47,7 +47,7 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
     public DocumentContentPresenter(final DocumentContentListener listener, final WorkspaceDeckView view) {
         this.listener = listener;
         this.view = view;
-        this.components = new DocumentComponents(this);
+        this.components = new DocumentContentComponents(this);
         reader = components.getDocumentReader();
         readerControl = components.getDocumentReaderControl();
     }
@@ -78,6 +78,7 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
                             WorkspaceUIExtensionPoint.CONTENT_TOOLBAR_LEFT, null);
                     DefaultDispatcher.getInstance().fire(WorkspaceEvents.ATTACH_TO_EXT_POINT,
                             WorkspaceUIExtensionPoint.CONTENT_TOOLBAR_LEFT, editor.getToolBar());
+                    DefaultDispatcher.getInstance().fire(WorkspaceEvents.RECALCULATE_WORKSPACE_SIZE, null, null);
                 } else {
                     FolderEditor editor = components.getFolderEditor();
                     editor.setFolder(content.getFolder());
@@ -93,6 +94,7 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
         DefaultDispatcher.getInstance().fire(DocsEvents.SAVE_DOCUMENT, content, this);
         // Re-enable rateIt widget
         DefaultDispatcher.getInstance().fire(WorkspaceEvents.ENABLE_RATEIT, null, null);
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.RECALCULATE_WORKSPACE_SIZE, null, null);
     }
 
     public void onCancel() {

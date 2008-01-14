@@ -16,6 +16,7 @@ import org.ourproject.kune.platf.client.dto.ContentDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.GroupListDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
+import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.server.TestDomainHelper;
 import org.ourproject.kune.platf.server.TestHelper;
 import org.ourproject.kune.platf.server.access.AccessRights;
@@ -118,6 +119,27 @@ public class MapperTest {
         final ContentDTO dto = mapper.map(d, ContentDTO.class);
         assertEquals(1l, dto.getId());
         assertEquals("title", dto.getTitle());
+    }
+
+    @Test
+    public void testContentDescriptorToLinkMapping() {
+        final Group group = new Group("grouptest", "This is a group Test");
+        final Container container = new Container();
+        container.setId(1l);
+        container.setToolName("docs");
+        container.setOwner(group);
+        container.setName("folder");
+        final Content d = new Content();
+        d.setId(1l);
+        final Revision revision = new Revision(d);
+        revision.setTitle("title");
+        d.addRevision(revision);
+        d.setContainer(container);
+
+        final LinkDTO dto = mapper.map(d, LinkDTO.class);
+        assertEquals("title", dto.getLongName());
+        assertEquals("grouptest", dto.getShortName());
+        assertEquals("grouptest.docs.1.1", dto.getLink());
     }
 
     @Test

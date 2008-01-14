@@ -64,7 +64,11 @@ public class TagsPanel extends DropDownPanel implements TagsView {
                 final TagResultDTO tagResult = (TagResultDTO) iterator.next();
                 Label label = new Label(tagResult.getName());
                 // i18n pluralization
-                KuneUiUtils.setQuickTip(label, Kune.I18N.t("[%d] items with this tag", tagResult.getCount()));
+                if (tagResult.getCount().intValue() > 1) {
+                    KuneUiUtils.setQuickTip(label, Kune.I18N.t("[%d] items with this tag", tagResult.getCount()));
+                } else {
+                    KuneUiUtils.setQuickTip(label, Kune.I18N.t("[%d] item with this tag", tagResult.getCount()));
+                }
                 label.addClickListener(new ClickListener() {
                     public void onClick(final Widget sender) {
                         presenter.doSearchTag(tagResult.getName());

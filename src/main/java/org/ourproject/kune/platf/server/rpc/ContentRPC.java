@@ -27,6 +27,7 @@ import javax.persistence.NoResultException;
 
 import org.ourproject.kune.chat.server.managers.ChatConnection;
 import org.ourproject.kune.chat.server.managers.XmppManager;
+import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.TagResultDTO;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
@@ -249,12 +250,12 @@ public class ContentRPC implements ContentService, RPC {
     @Authenticated
     @Authorizated(accessTypeRequired = AccessType.EDIT, checkContent = true)
     @Transactional(type = TransactionType.READ_WRITE)
-    public void setLanguage(final String userHash, final String groupShortName, final String documentId,
+    public I18nLanguageDTO setLanguage(final String userHash, final String groupShortName, final String documentId,
             final String languageCode) throws SerializableException {
         final Long contentId = parseId(documentId);
         UserSession userSession = getUserSession();
         User user = userSession.getUser();
-        contentManager.setLanguage(user, contentId, languageCode);
+        return mapper.map(contentManager.setLanguage(user, contentId, languageCode), I18nLanguageDTO.class);
     }
 
     @Authenticated
@@ -324,7 +325,7 @@ public class ContentRPC implements ContentService, RPC {
             try {
                 Content content = accessService.accessToContent(parseId(stateToken.getDocument()), user,
                         AccessType.EDIT);
-                if (!content.getFolder().getOwner().equals(group)) {
+                if (!content.getContainer().getOwner().equals(group)) {
                     throw new AccessViolationException();
                 }
             } catch (NoResultException e) {

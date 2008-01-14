@@ -57,17 +57,17 @@ public class IndexedStackPanel extends CustomStackPanel {
     }
 
     public void removeStackItem(final String name) {
-        int idx = indexInArray(name);
+        int idx = indexOf(name);
         remove(idx);
         stackList.remove(idx);
     }
 
     public void showStackItem(final String name) {
-        int idx = indexInArray(name);
+        int idx = indexOf(name);
         showStack(idx);
     }
 
-    public int indexInArray(final String name) {
+    public int indexOf(final String name) {
         final Iterator iter = stackList.iterator();
         int i = 0;
         while (iter.hasNext()) {
@@ -78,7 +78,11 @@ public class IndexedStackPanel extends CustomStackPanel {
                 i++;
             }
         }
-        throw new IndexOutOfBoundsException();
+        return -1;
+    }
+
+    public boolean containsItem(final String name) {
+        return indexOf(name) == -1 ? false : true;
     }
 
     public StackItem getItem(final int indexOfStackItem) {
@@ -86,10 +90,14 @@ public class IndexedStackPanel extends CustomStackPanel {
     }
 
     public StackItem getItem(final String name) {
-        return (StackItem) stackList.get(indexInArray(name));
+        return (StackItem) stackList.get(indexOf(name));
     }
 
     public void clear() {
+        for (Iterator iterator = stackList.iterator(); iterator.hasNext();) {
+            StackItem item = (StackItem) iterator.next();
+            item.clear();
+        }
         stackList.clear();
         super.clear();
     }
@@ -99,7 +107,7 @@ public class IndexedStackPanel extends CustomStackPanel {
      * generating the Html with getHtml
      */
 
-    protected class StackItem {
+    public class StackItem {
         private String text;
         private String title;
         private AbstractImagePrototype icon;
@@ -131,6 +139,10 @@ public class IndexedStackPanel extends CustomStackPanel {
 
         public void removeSubItem(final String name) {
             subItems.remove(name);
+        }
+
+        public void clear() {
+            subItems.clear();
         }
 
         public String getName() {

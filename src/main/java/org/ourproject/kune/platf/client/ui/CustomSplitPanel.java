@@ -237,6 +237,8 @@ abstract class CustomSplitPanel extends Panel implements SourcesChangeEvents {
 
     private ChangeListenerCollection changeListeners;
 
+    private SplitterListenerCollection splitterListeners;
+
     /**
      * Initializes the split panel.
      * 
@@ -291,6 +293,7 @@ abstract class CustomSplitPanel extends Panel implements SourcesChangeEvents {
                         - getAbsoluteTop());
                 DOM.setCapture(getElement());
                 DOM.eventPreventDefault(event);
+                splitterListeners.fireStartResizing(this);
             }
             break;
         }
@@ -299,6 +302,7 @@ abstract class CustomSplitPanel extends Panel implements SourcesChangeEvents {
             DOM.releaseCapture(getElement());
             if (isResizing) {
                 changeListeners.fireChange(this);
+                splitterListeners.fireStopResizing(this);
             }
             stopResizing();
             break;
@@ -329,6 +333,19 @@ abstract class CustomSplitPanel extends Panel implements SourcesChangeEvents {
     public void removeChangeListener(final ChangeListener listener) {
         if (changeListeners != null) {
             changeListeners.remove(listener);
+        }
+    }
+
+    public void addSplitterListener(final SplitterListener listener) {
+        if (splitterListeners == null) {
+            splitterListeners = new SplitterListenerCollection();
+        }
+        splitterListeners.add(listener);
+    }
+
+    public void removeSplitterListener(final SplitterListener listener) {
+        if (splitterListeners != null) {
+            splitterListeners.remove(listener);
         }
     }
 

@@ -30,6 +30,7 @@ import org.ourproject.kune.platf.client.tool.ToolTrigger;
 import org.ourproject.kune.platf.client.ui.CustomHorizontalSplitPanel;
 import org.ourproject.kune.platf.client.ui.DropDownPanel;
 import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
+import org.ourproject.kune.platf.client.ui.SplitterListener;
 import org.ourproject.kune.workspace.client.WorkspaceUIExtensionPoint;
 import org.ourproject.kune.workspace.client.license.ui.LicensePanel;
 import org.ourproject.kune.workspace.client.workspace.WorkspacePresenter;
@@ -79,7 +80,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     private LicensePanel bottomPanel;
     private DropDownPanel tagsPanel;
     private final HashMap uiExtPoints;
-    private int previosRightWidgetWidth;
+    private int previousRightWidgetWidth;
 
     public WorkspacePanel(final WorkspacePresenter presenter) {
         this.uiExtPoints = new HashMap();
@@ -107,6 +108,15 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         cntcxtHSP.addChangeListener(new ChangeListener() {
             public void onChange(final Widget sender) {
                 adjustSizeContentSP();
+            }
+        });
+        cntcxtHSP.addSplitterListener(new SplitterListener() {
+            public void onStartResizing(final Widget sender) {
+                presenter.onSplitterStartResizing(sender);
+            }
+
+            public void onStopResizing(final Widget sender) {
+                presenter.onSplitterStopResizing(sender);
             }
         });
         contentVP = new VerticalPanel();
@@ -166,7 +176,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         BottomIconsTrayPanel.addStyleName("kune-BottomIconsTrayPanel");
         BottomIconsTrayPanel.setHorizontalAlignment(HorizontalPanel.ALIGN_CENTER);
         BottomIconsTrayPanel.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
-        previosRightWidgetWidth = DEF_CONTEXT_WIDTH;
+        previousRightWidgetWidth = DEF_CONTEXT_WIDTH;
     }
 
     public void addTab(final ToolTrigger trigger) {
@@ -193,8 +203,6 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         contentSP.clear();
         final Widget widget = (Widget) content;
         contentSP.add(widget);
-        // widget.setWidth("100%");
-        // contentVP.setCellWidth(widget, "100%");
     }
 
     public void setContext(final View contextMenu) {
@@ -329,16 +337,17 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 
     public void adjustSize(final int windowWidth, final int windowHeight) {
         final int contentWidth = windowWidth - 184;
-        final int contentHeight = windowHeight - 175;
+        final int contentHeight = windowHeight - 176;
 
         cntcxtHSP.setSize("" + contentWidth + "px", "" + contentHeight + "px");
-        if (contentWidth > previosRightWidgetWidth) {
-            cntcxtHSP.setSplitPosition("" + (contentWidth - previosRightWidgetWidth - 6) + "px");
+        if (contentWidth > previousRightWidgetWidth) {
+            cntcxtHSP.setSplitPosition("" + (contentWidth - previousRightWidgetWidth - 6) + "px");
             saveCurrentLeftWidgetWidth();
         } else {
             setDefaultSplitterPosition();
         }
-        contentSP.setSize("" + (cntcxtHSP.getLeftWidgetAvailableWidth() - 2) + "px", "" + (contentHeight - 53) + "px");
+        contentSP.setSize("" + (cntcxtHSP.getLeftWidgetAvailableWidth() - 2) + "px", ""
+                + (contentHeight - 29 - contentToolBarHP.getOffsetHeight()) + "px");
         groupDropDownsSP.setHeight("" + (contentHeight + 7) + "px");
     }
 
@@ -368,7 +377,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     }
 
     private void saveCurrentLeftWidgetWidth() {
-        previosRightWidgetWidth = cntcxtHSP.getRightWidgetAvailableWidth();
+        previousRightWidgetWidth = cntcxtHSP.getRightWidgetAvailableWidth();
     }
 
 }

@@ -42,25 +42,32 @@ public class AbstractSearcherPanel {
         super();
     }
 
-    protected void query(final Store store, final String language) {
-        UrlParam[] newParams = new UrlParam[] { new UrlParam("query", language), new UrlParam("start", 1),
+    protected void query(final Store store, final Grid grid, final String language) {
+        UrlParam[] newParams = new UrlParam[] { new UrlParam("query", language), new UrlParam("start", 0),
                 new UrlParam("limit", PAGINATION_SIZE) };
         store.setBaseParams(newParams);
-        store.reload();
+        store.load(0, PAGINATION_SIZE);
     }
 
     protected void createPagingToolbar(final Store store, final Grid grid) {
         ExtElement gridFoot = grid.getView().getFooterPanel(true);
-        new PagingToolbar(gridFoot, store, new PagingToolbarConfig() {
+        PagingToolbar pag = new PagingToolbar(gridFoot, store, new PagingToolbarConfig() {
             {
                 setPageSize(PAGINATION_SIZE);
                 setDisplayInfo(true);
                 setDisplayMsg(Kune.I18N
                         .tWithNT("Displaying results {0} - {1} of {2}",
                                 "Respect {} values in translations, these will produce: 'Displaying results 1 - 25 of 95465' for instance"));
-                setDisplayMsg(Kune.I18N.t("No results to display"));
+                setEmptyMsg(Kune.I18N.t("No results to display"));
             }
         });
+        pag.setAfterPageText(Kune.I18N.tWithNT("of {0}", "Used to show multiple results: '1 of 30'"));
+        pag.setBeforePageText(Kune.I18N.t("Page"));
+        pag.setFirstText(Kune.I18N.t("First Page"));
+        pag.setLastText(Kune.I18N.t("Last Page"));
+        pag.setNextText(Kune.I18N.t("Next Page"));
+        pag.setPrevText(Kune.I18N.t("Previous Page"));
+        pag.setRefreshText(Kune.I18N.t("Refresh"));
     }
 
     protected Store createStore(final FieldDef[] fieldDefs, final String url, final String id) {

@@ -25,8 +25,10 @@ import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.AbstractSearcherPanel;
 import org.ourproject.kune.platf.client.ui.KuneStringUtils;
 import org.ourproject.kune.sitebar.client.Site;
+import org.ourproject.kune.workspace.client.WorkspaceFactory;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPresenter;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorView;
+import org.ourproject.kune.workspace.client.i18n.LanguageSelectorComponent;
 import org.ourproject.kune.workspace.client.workspace.ui.BottomTrayIcon;
 
 import com.google.gwt.user.client.Command;
@@ -120,13 +122,13 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
 
     private void setLanguage(final String language) {
         Site.showProgressLoading();
-        query(unTransStore, language);
-        query(transStore, language);
+        query(unTransStore, unTransGrid, language);
+        query(transStore, transGrid, language);
         Site.hideProgress();
     }
 
     private void setLanguage(final I18nLanguageDTO language) {
-        languageSelectorPanel.selectLanguage(language.getEnglishName());
+        languageSelectorPanel.setLanguage(language.getCode());
         setLanguage(language.getCode());
     }
 
@@ -210,16 +212,14 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
 
         HTML recommendations = createRecomendations();
 
-        EditorGrid transGrid = createGridPanel(true);
-
-        EditorGrid unTransGrid = createGridPanel(false);
-
+        transGrid = createGridPanel(true);
+        unTransGrid = createGridPanel(false);
         HorizontalPanel hp = new HorizontalPanel();
-        languageSelectorPanel = new LanguageSelectorPanel(null, presenter.getLanguages(), Kune.I18N
-                .t("Change language"));
+        LanguageSelectorComponent langComponent = WorkspaceFactory.createLanguageSelectorComponent();
+        languageSelectorPanel = (LanguageSelectorPanel) langComponent.getView();
         languageSelectorPanel.addChangeListener(new ComboBoxListenerAdapter() {
             public void onSelect(final ComboBox comboBox, final Record record, final int index) {
-                setLanguage(record.getAsString("abbr"));
+                setLanguage(record.getAsString(LanguageSelectorPanel.LANG_ID));
                 dialog.setTitle(Kune.I18N.t("Help to translate kune to [%s]", record.getAsString("language")));
             }
         });
@@ -276,7 +276,7 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
         // Delete this?
         store.load(new StoreLoadConfig() {
             {
-                setParams(new UrlParam[] { new UrlParam("query", ""), new UrlParam("start", 1),
+                setParams(new UrlParam[] { new UrlParam("query", "G*"), new UrlParam("start", 0),
                         new UrlParam("limit", PAGINATION_SIZE) });
             }
         });
@@ -375,6 +375,10 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
             return Format.format(renderer, splitted);
         }
     };
+
+    private EditorGrid transGrid;
+
+    private EditorGrid unTransGrid;
 
     private HTML createRecomendations() {
         HTML recommendations = new HTML(

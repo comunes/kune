@@ -32,7 +32,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.PopupPanel;
@@ -192,7 +192,8 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
     private final RichTextArea.ExtendedFormatter extended;
 
     private final VerticalPanel outer = new VerticalPanel();
-    private final FlowPanel topPanel = new FlowPanel();
+    private final HorizontalPanel topPanel = new HorizontalPanel();
+    private final HorizontalPanel subtopPanel = new HorizontalPanel();
     private ToggleButton bold;
     private ToggleButton italic;
     private ToggleButton underline;
@@ -240,6 +241,7 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
         initWidget(outer);
 
         outer.add(topPanel);
+        outer.add(subtopPanel);
         outer.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         setStyleName("gwt-RichTextToolbar");
 
@@ -294,7 +296,6 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
                 }
             }
         });
-        save.addStyleName("kune-Button-Large-lSpace");
 
         close = new CustomPushButton(Kune.I18N.tWithNT("Close", "used in button"), new ClickListener() {
             public void onClick(final Widget sender) {
@@ -311,8 +312,8 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
         // Kune.I18N.t("Edit HTML")));
         // }
 
-        topPanel.add(save);
-        topPanel.add(close);
+        subtopPanel.add(save);
+        subtopPanel.add(close);
     }
 
     private void fireEdit() {

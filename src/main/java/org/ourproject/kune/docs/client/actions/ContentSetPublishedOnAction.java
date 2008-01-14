@@ -43,6 +43,7 @@ public class ContentSetPublishedOnAction implements Action {
                 .getDocumentId(), publishedOn, new AsyncCallbackSimple() {
             public void onSuccess(final Object result) {
                 Site.hideProgress();
+                services.app.getWorkspace().getContentTitleComponent().setContentDate(publishedOn);
             }
         });
     }

@@ -53,7 +53,6 @@ public class ContentJSONService {
         SearchResult resultsContainer = containerManager.search(search, firstResult, maxResults);
         results.setSize(results.getSize() + resultsContainer.getSize());
         results.getList().addAll(results.getList());
-        // FIXME: wrong mapping
         return mapper.mapSearchResult(results, LinkDTO.class);
     }
 

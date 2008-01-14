@@ -17,16 +17,20 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.i18n;
+package org.ourproject.kune.workspace.client.actions;
 
-import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.Services;
+import org.ourproject.kune.platf.client.dispatch.Action;
 
-public interface LanguageSelectorView extends View {
+import com.google.gwt.user.client.Window;
 
-    void reset();
+public class RecalculateWorkspaceAction implements Action {
 
-    String getLanguage();
+    public void execute(final Object value, final Object extra, final Services services) {
+        onRecalculateWorkspaceAction(services);
+    }
 
-    void setLanguage(String code);
-
+    private void onRecalculateWorkspaceAction(final Services services) {
+        services.app.getWorkspace().adjustSize(Window.getClientWidth(), Window.getClientHeight());
+    }
 }

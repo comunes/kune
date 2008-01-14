@@ -37,6 +37,12 @@ import com.gwtext.client.widgets.QuickTips;
 import com.gwtext.client.widgets.QuickTipsConfig;
 
 public class DesktopPanel extends AbsolutePanel implements DesktopView {
+    // private static final int MAX_WIDTH = 800;
+    // private static final int MAX_HEIGHT = 600;
+
+    private static final int MAX_WIDTH = 800;
+    private static final int MAX_HEIGHT = 480;
+
     public DesktopPanel(final Workspace workspace, final SiteBarListener listener, final Session session) {
         QuickTips.init(); // extgwt tips
         new QuickTipsConfig() {
@@ -48,7 +54,8 @@ public class DesktopPanel extends AbsolutePanel implements DesktopView {
         };
         SiteBar siteBar = SiteBarFactory.createSiteBar(listener, session);
         SiteMessage siteMessage = SiteBarFactory.getSiteMessage();
-        this.add((Widget) siteMessage.getView(), Window.getClientWidth() * 20 / 100 - 10, 2);
+        this.add((Widget) siteMessage.getView(), calculateMessageWidth(Window.getClientWidth()),
+                calculateMessageHeight());
         this.setSize("100%", "100%");
         this.add((Widget) siteBar.getView(), 0, 0);
         this.add((Widget) workspace.getView(), 0, 20);
@@ -64,11 +71,36 @@ public class DesktopPanel extends AbsolutePanel implements DesktopView {
             final SiteMessage siteMessage) {
         Window.addWindowResizeListener(new WindowResizeListener() {
             public void onWindowResized(final int width, final int height) {
+                final boolean scroll = width <= MAX_WIDTH || height <= MAX_HEIGHT ? true : false;
+                resizeDesktop(desktop, workspace, siteMessage, width <= MAX_WIDTH ? MAX_WIDTH : width,
+                        height <= MAX_HEIGHT ? MAX_HEIGHT : height, scroll);
+            }
+
+            private void resizeDesktop(final AbsolutePanel desktop, final Workspace workspace,
+                    final SiteMessage siteMessage, final int width, final int height, final boolean scroll) {
+                Window.enableScrolling(scroll);
+                if (scroll) {
+                    desktop.setSize("" + width, "" + height);
+                } else {
+                    desktop.setSize("100%", "100%");
+                }
                 workspace.adjustSize(width, height);
                 siteMessage.adjustWidth(width);
-                desktop.setWidgetPosition((Widget) siteMessage.getView(), Window.getClientWidth() * 20 / 100 - 10, 2);
+                desktop.setWidgetPosition((Widget) siteMessage.getView(), calculateMessageWidth(width),
+                        calculateMessageHeight());
             }
         });
+
+        // ?
         Window.enableScrolling(false);
     }
+
+    private int calculateMessageWidth(final int width) {
+        return width * 20 / 100 - 10;
+    }
+
+    private int calculateMessageHeight() {
+        return 2;
+    }
+
 }

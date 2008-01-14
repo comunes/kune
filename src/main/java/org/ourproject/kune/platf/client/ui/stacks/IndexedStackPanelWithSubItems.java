@@ -41,7 +41,7 @@ public class IndexedStackPanelWithSubItems extends IndexedStackPanel {
     public void addStackSubItem(final String parentItemName, final AbstractImagePrototype icon, final String name,
             final String title, final StackSubItemAction[] memberActions, final AbstractPresenter presenter) {
         StackSubItem stackSubItem = new StackSubItem(icon, name, title, memberActions, presenter);
-        int indexOfStackItem = this.indexInArray(parentItemName);
+        int indexOfStackItem = this.indexOf(parentItemName);
         ScrollPanel sp = (ScrollPanel) this.getWidget(indexOfStackItem);
         VerticalPanel vp = (VerticalPanel) sp.getWidget();
         vp.add(stackSubItem);
@@ -52,7 +52,7 @@ public class IndexedStackPanelWithSubItems extends IndexedStackPanel {
     }
 
     public void removeStackSubItem(final String parentItemName, final String name) {
-        int indexOfStackItem = this.indexInArray(parentItemName);
+        int indexOfStackItem = this.indexOf(parentItemName);
         int indexOfStackSubItem = this.getItem(indexOfStackItem).indexOfSubItem(name);
 
         ScrollPanel sp = (ScrollPanel) this.getWidget(indexOfStackItem);

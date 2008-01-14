@@ -358,11 +358,13 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     private void createListeners() {
         searchButton.addClickListener(new ClickListener() {
             public void onClick(final Widget arg0) {
+                Site.showProgressProcessing();
                 presenter.doSearch(searchTextBox.getText());
             }
         });
         logoutLabel.addClickListener(new ClickListener() {
             public void onClick(final Widget arg0) {
+                Site.showProgressProcessing();
                 presenter.doLogout();
             }
         });
@@ -376,6 +378,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
             public void onKeyUp(final Widget widget, final char key, final int mod) {
                 if (key == KEY_ENTER) {
                     if (searchTextBox.getText().length() > 0) {
+                        Site.showProgressProcessing();
                         presenter.doSearch(searchTextBox.getText());
                     }
                 }

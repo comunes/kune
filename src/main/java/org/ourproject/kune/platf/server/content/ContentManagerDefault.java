@@ -74,7 +74,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         descriptor.setLanguage(user.getLanguage());
         // FIXME: remove this when UI take publishing into account
         descriptor.setPublishedOn(new Date());
-        descriptor.setFolder(container);
+        descriptor.setContainer(container);
         container.addContent(descriptor);
         Revision revision = new Revision(descriptor);
         revision.setTitle(title);
@@ -142,7 +142,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         content.removeAuthor(author);
     }
 
-    public void setLanguage(final User user, final Long contentId, final String languageCode)
+    public I18nLanguage setLanguage(final User user, final Long contentId, final String languageCode)
             throws SerializableException {
         Content content = finder.getContent(contentId);
         I18nLanguage language = languageFinder.findByCode(languageCode);
@@ -150,6 +150,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
             throw new I18nNotFoundException();
         }
         content.setLanguage(language);
+        return language;
     }
 
     public void setPublishedOn(final User user, final Long contentId, final Date publishedOn)
@@ -197,8 +198,9 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     }
 
     public SearchResult search(final String search, final Integer firstResult, final Integer maxResults) {
-        MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "data", "title", "tags.name" },
-                new StandardAnalyzer());
+        MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "authors.name", "authors.shortName",
+                "container.name", "language.code", "language.englishName", "language.nativeName", "lastRevision.body",
+                "lastRevision.title", "tags.name" }, new StandardAnalyzer());
         Query query;
         try {
             query = parser.parse(search);

@@ -56,4 +56,7 @@ public interface WorkspaceEvents {
     public static final String USER_REGISTER = "ws.UserRegister";
     public static final String CREATE_NEW_GROUP = "ws.CreateNewGroup";
     public static final String RELOAD_CONTEXT = "ws.ReoloadContext";
+    public static final String WS_SPLITTER_STARTRESIZING = "ws.SplitterStartResizing";
+    public static final String WS_SPLITTER_STOPRESIZING = "ws.SplitterStopResizing";
+    public static final String RECALCULATE_WORKSPACE_SIZE = "ws.RecalculateWorkspaceSize";
 }

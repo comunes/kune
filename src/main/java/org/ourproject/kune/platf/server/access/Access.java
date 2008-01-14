@@ -128,7 +128,7 @@ public class Access {
 	if (descriptor.hasAccessList()) {
 	    accessLists = descriptor.getAccessLists();
 	} else {
-	    SocialNetwork socialNetwork = descriptor.getFolder().getOwner().getSocialNetwork();
+	    SocialNetwork socialNetwork = descriptor.getContainer().getOwner().getSocialNetwork();
 	    accessLists = socialNetwork.getAccessLists();
 	}
 	return accessLists;

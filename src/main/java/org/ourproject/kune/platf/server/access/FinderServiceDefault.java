@@ -107,7 +107,7 @@ public class FinderServiceDefault implements FinderService {
     private Content findByContentReference(final String groupName, final String toolName, final Long folderId,
             final Long contentId) throws ContentNotFoundException {
         Content descriptor = contentManager.find(contentId);
-        Container container = descriptor.getFolder();
+        Container container = descriptor.getContainer();
 
         if (!container.getId().equals(folderId)) {
             throw new ContentNotFoundException();
@@ -141,7 +141,7 @@ public class FinderServiceDefault implements FinderService {
 
     private Content generateFolderFakeContent(final Container container) {
         Content descriptor = new Content();
-        descriptor.setFolder(container);
+        descriptor.setContainer(container);
         return descriptor;
     }
 

@@ -58,6 +58,7 @@ public class RESTServiceFilter extends InjectedFilter {
         log.debug("JSON METHOD: '" + methodName + "' on: " + serviceClass.getSimpleName());
 
         response.setCharacterEncoding("utf-8");
+        response.setContentType("text/json");
         Object output = transactionalFilter.doService(serviceClass, methodName, parameters, getInstance(serviceClass));
         if (output != null) {
             PrintWriter writer = response.getWriter();

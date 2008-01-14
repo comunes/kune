@@ -32,7 +32,7 @@ import com.google.inject.Singleton;
 public class StateServiceDefault implements StateService {
     public State create(final Access access) {
         final Content content = access.getContent();
-        final Container container = content.getFolder();
+        final Container container = content.getContainer();
         final State state = new State();
 
         final Long documentId = content.getId();

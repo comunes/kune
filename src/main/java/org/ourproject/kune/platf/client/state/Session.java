@@ -26,6 +26,11 @@ import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public interface Session {
 
+    /**
+     * Duration remembering login: 2 weeks
+     */
+    public static int SESSION_DURATION = 1000 * 60 * 60 * 24 * 14;
+
     public List getLicenses();
 
     public void setLicenses(final List licenses);

@@ -29,7 +29,6 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RichTextArea;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.gwtext.client.widgets.MessageBox;
 
 public class TextEditorPanel extends Composite implements TextEditorView {
@@ -45,18 +44,14 @@ public class TextEditorPanel extends Composite implements TextEditorView {
         this.presenter = presenter;
         gwtRTarea = new RichTextArea();
         textEditorToolbar = new TextEditorToolbar(gwtRTarea, presenter);
-        final VerticalPanel areaVP = new VerticalPanel();
-        areaVP.add(textEditorToolbar);
-        areaVP.add(gwtRTarea);
-        initWidget(areaVP);
+        initWidget(gwtRTarea);
 
         gwtRTarea.setWidth("97%");
         gwtRTarea.addStyleName("kune-TexEditorPanel-TextArea");
-        areaVP.setWidth("100%");
-        adjustSize("" + (Window.getClientHeight() - 240));
+        adjustSize("" + (Window.getClientHeight() - 265));
         Window.addWindowResizeListener(new WindowResizeListener() {
             public void onWindowResized(final int arg0, final int arg1) {
-                adjustSize("" + (Window.getClientHeight() - 240));
+                adjustSize("" + (Window.getClientHeight() - 265));
             }
         });
         saveTimer = new Timer() {

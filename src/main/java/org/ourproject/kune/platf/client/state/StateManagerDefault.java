@@ -28,13 +28,10 @@ import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
-import org.ourproject.kune.workspace.client.workspace.ContentSubTitleComponent;
-import org.ourproject.kune.workspace.client.workspace.ContentTitleComponent;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 public class StateManagerDefault implements StateManager {
@@ -143,27 +140,15 @@ public class StateManagerDefault implements StateManager {
         workspace.setTool(toolName);
 
         Site.sitebar.setState(state);
-
         final ClientTool clientTool = app.getTool(toolName);
         clientTool.setContent(state);
         clientTool.setContext(state);
-        ContentTitleComponent contentTitleComponent = workspace.getContentTitleComponent();
-        ContentSubTitleComponent contentSubTitleComponent = workspace.getContentSubTitleComponent();
-        contentTitleComponent.setState(state);
-        contentSubTitleComponent.setState(state);
-        if (state.getLanguage() != null) {
-            contentSubTitleComponent.setContentSubTitleRight(Kune.I18N.t("Language: [%s]", state.getLanguage()
-                    .getEnglishName()));
-            contentSubTitleComponent.setContentSubTitleRightVisible(true);
-        } else {
-            contentSubTitleComponent.setContentSubTitleRightVisible(false);
-        }
-
-        workspace.getContentBottomToolBarComponent().setRate(state.isRateable(), session.isLogged(), state.getRate(),
-                state.getRateByUsers(), state.getCurrentUserRate());
+        workspace.getContentTitleComponent().setState(state);
+        workspace.getContentSubTitleComponent().setState(state);
+        workspace.getContentBottomToolBarComponent().setRate(state, session.isLogged());
         workspace.setContent(clientTool.getContent());
         workspace.setContext(clientTool.getContext());
-        workspace.getLicenseComponent().setLicense(state.getGroup().getLongName(), state.getLicense());
+        workspace.getLicenseComponent().setLicense(state);
         workspace.getTagsComponent().setState(state);
         setSocialNetwork(state);
         workspace.getGroupSummaryComponent().setGroupSummary(state);

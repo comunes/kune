@@ -93,6 +93,7 @@ public class IconHyperlink extends Widget implements SourcesClickEvents, Abstrac
             if (doubleClickListeners != null) {
                 doubleClickListeners.fireClick(this);
             }
+            DOM.eventPreventDefault(event);
             break;
         case Event.ONCLICK:
             if (clickListeners != null) {

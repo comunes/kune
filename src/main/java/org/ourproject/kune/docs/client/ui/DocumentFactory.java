@@ -97,7 +97,7 @@ public class DocumentFactory {
 
     public static AdminContext createAdminContext() {
         AdminContextPresenter presenter = new AdminContextPresenter();
-        AdminContextView view = new AdminContextPanel(presenter, WorkspaceFactory.getLanguageSelectorComponent());
+        AdminContextView view = new AdminContextPanel(presenter);
         presenter.init(view);
         return presenter;
     }

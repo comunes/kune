@@ -24,13 +24,8 @@ import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public interface ContentSubTitleComponent extends Component {
 
-    void setContentSubTitleLeft(String subTitle);
-
-    void setContentSubTitleRight(String subTitle);
-
-    void setContentSubTitleLeftVisible(boolean visible);
-
-    void setContentSubTitleRightVisible(boolean visible);
-
     void setState(StateDTO state);
+
+    void setContentLanguage(String langName);
+
 }

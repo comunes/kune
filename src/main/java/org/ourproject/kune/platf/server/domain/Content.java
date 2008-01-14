@@ -39,6 +39,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 
 import org.hibernate.search.annotations.DocumentId;
@@ -187,11 +188,11 @@ public class Content implements HasStateToken {
         this.publishedOn = publishedOn;
     }
 
-    public Container getFolder() {
+    public Container getContainer() {
         return container;
     }
 
-    public void setFolder(final Container container) {
+    public void setContainer(final Container container) {
         this.container = container;
     }
 
@@ -228,9 +229,10 @@ public class Content implements HasStateToken {
         this.language = language;
     }
 
+    @Transient
     public String getStateToken() {
-        return getFolder().getOwner().getShortName() + TOKEN_SEPARATOR + getFolder().getToolName() + TOKEN_SEPARATOR
-                + getFolder().getId() + TOKEN_SEPARATOR + getId();
+        return getContainer().getOwner().getShortName() + TOKEN_SEPARATOR + getContainer().getToolName()
+                + TOKEN_SEPARATOR + getContainer().getId() + TOKEN_SEPARATOR + getId();
     }
 
     public List<User> getAuthors() {
@@ -277,6 +279,10 @@ public class Content implements HasStateToken {
 
     public void setMarkForDeletion(final boolean markForDeletion) {
         this.markForDeletion = markForDeletion;
+    }
+
+    public Group getOwner(final Group group) {
+        return container.getOwner();
     }
 
 }

@@ -21,26 +21,30 @@ package org.ourproject.kune.docs.client.actions;
 
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.sitebar.client.Site;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public class ContentSetLanguageAction implements Action {
 
     public void execute(final Object value, final Object extra, final Services services) {
-        onContentSetLanguage(services, (String) value, (String) extra);
+        onContentSetLanguage(services, (String) value);
     }
 
-    private void onContentSetLanguage(final Services services, final String documentId, final String languageCode) {
+    private void onContentSetLanguage(final Services services, final String languageCode) {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
-        server.setLanguage(services.session.getUserHash(), services.session.getCurrentState().getGroup().getShortName(),
-                documentId, languageCode, new AsyncCallbackSimple() {
-                    public void onSuccess(final Object result) {
-                        Site.hideProgress();
-                        services.stateManager.reload();
-                    }
-                });
+        StateDTO currentState = services.session.getCurrentState();
+        server.setLanguage(services.session.getUserHash(), currentState.getGroup().getShortName(), currentState
+                .getDocumentId(), languageCode, new AsyncCallbackSimple() {
+            public void onSuccess(final Object result) {
+                Site.hideProgress();
+                I18nLanguageDTO lang = (I18nLanguageDTO) result;
+                services.app.getWorkspace().getContentSubTitleComponent().setContentLanguage(lang.getEnglishName());
+            }
+        });
     }
 }

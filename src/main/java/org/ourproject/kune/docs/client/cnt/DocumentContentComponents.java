@@ -28,7 +28,7 @@ import org.ourproject.kune.docs.client.ui.DocumentFactory;
 import org.ourproject.kune.workspace.client.WorkspaceFactory;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
 
-class DocumentComponents {
+class DocumentContentComponents {
     private DocumentReader reader;
     private TextEditor editor;
     private final DocumentContentPresenter documentContentPresenter;
@@ -36,7 +36,7 @@ class DocumentComponents {
     private FolderEditor folderEditor;
     private DocumentReaderControl readerControl;
 
-    public DocumentComponents(final DocumentContentPresenter documentContentPresenter) {
+    public DocumentContentComponents(final DocumentContentPresenter documentContentPresenter) {
         this.documentContentPresenter = documentContentPresenter;
     }
 

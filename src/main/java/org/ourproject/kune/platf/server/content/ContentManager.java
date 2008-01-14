@@ -24,6 +24,7 @@ import java.util.Date;
 
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
+import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.Manager;
 import org.ourproject.kune.platf.server.manager.impl.DefaultManager.SearchResult;
@@ -46,7 +47,7 @@ public interface ContentManager extends Manager<Content, Long> {
 
     public String renameContent(User user, Long contentId, String newName) throws SerializableException;
 
-    public void setLanguage(User user, Long contentId, String languageCode) throws SerializableException;
+    public I18nLanguage setLanguage(User user, Long contentId, String languageCode) throws SerializableException;
 
     public void setPublishedOn(User user, Long contentId, Date publishedOn) throws SerializableException;
 

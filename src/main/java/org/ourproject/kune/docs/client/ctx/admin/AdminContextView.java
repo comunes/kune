@@ -39,4 +39,14 @@ public interface AdminContextView extends View {
 
     void setPublishedOn(Date publishedOn);
 
+    void removeLangComponent();
+
+    void removeAccessListComponent();
+
+    void removePublishedOnComponent();
+
+    void removeTagsComponent();
+
+    void removeAuthorsComponent();
+
 }

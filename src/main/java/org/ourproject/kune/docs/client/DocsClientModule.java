@@ -25,16 +25,19 @@ import org.ourproject.kune.docs.client.actions.AddFolder;
 import org.ourproject.kune.docs.client.actions.ContentAddAuthorAction;
 import org.ourproject.kune.docs.client.actions.ContentDelContentAction;
 import org.ourproject.kune.docs.client.actions.ContentRemoveAuthorAction;
+import org.ourproject.kune.docs.client.actions.ContentRenameAction;
 import org.ourproject.kune.docs.client.actions.ContentSetLanguageAction;
 import org.ourproject.kune.docs.client.actions.ContentSetPublishedOnAction;
 import org.ourproject.kune.docs.client.actions.ContentSetTagsAction;
-import org.ourproject.kune.docs.client.actions.ContentRenameAction;
 import org.ourproject.kune.docs.client.actions.DocsEvents;
 import org.ourproject.kune.docs.client.actions.GoParentFolder;
 import org.ourproject.kune.docs.client.actions.RenameTokenAction;
 import org.ourproject.kune.docs.client.actions.SaveDocument;
+import org.ourproject.kune.docs.client.actions.WSSplitterStartResizingAction;
+import org.ourproject.kune.docs.client.actions.WSSplitterStopResizingAction;
 import org.ourproject.kune.platf.client.extend.ClientModule;
 import org.ourproject.kune.platf.client.extend.Register;
+import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
 public class DocsClientModule implements ClientModule {
     public void configure(final Register register) {
@@ -51,5 +54,7 @@ public class DocsClientModule implements ClientModule {
         register.addAction(DocsEvents.RENAME_CONTENT, new ContentRenameAction());
         register.addAction(DocsEvents.DEL_CONTENT, new ContentDelContentAction());
         register.addAction(DocsEvents.RENAME_TOKEN, new RenameTokenAction());
+        register.addAction(WorkspaceEvents.WS_SPLITTER_STARTRESIZING, new WSSplitterStartResizingAction());
+        register.addAction(WorkspaceEvents.WS_SPLITTER_STOPRESIZING, new WSSplitterStopResizingAction());
     }
 }

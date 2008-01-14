@@ -28,28 +28,40 @@ import com.gwtext.client.data.Store;
 import com.gwtext.client.widgets.form.ComboBox;
 import com.gwtext.client.widgets.form.ComboBoxConfig;
 import com.gwtext.client.widgets.form.Form;
-import com.gwtext.client.widgets.form.event.ComboBoxListenerAdapter;
+import com.gwtext.client.widgets.form.FormConfig;
+import com.gwtext.client.widgets.form.event.ComboBoxListener;
 
 public class LanguageSelectorPanel extends Form implements LanguageSelectorView {
 
-    private static final String LANG_FIELD = "lang";
+    public static final String LANG_ID = "abbr";
 
-    private final Object[][] languages;
+    private static final String LANG_FIELD = "lang";
 
     private ComboBox langCombo;
 
-    public LanguageSelectorPanel(final LanguageSelectorPresenter presenter, final Object[][] languages,
-            final String fieldTitle) {
-        super();
-        this.languages = languages;
-        createForm(fieldTitle);
+    private final LanguageSelectorPresenter presenter;
+
+    public LanguageSelectorPanel(final LanguageSelectorPresenter presenter, final String langFieldTitle) {
+        super(new FormConfig() {
+            {
+                if (langFieldTitle == null) {
+                    setHideLabels(true);
+                }
+            }
+        });
+        this.presenter = presenter;
+        createLangCombo(langFieldTitle);
         super.add(langCombo);
         super.end();
         super.render();
     }
 
-    public void selectLanguage(final String languageEnglishName) {
-        langCombo.setValue(languageEnglishName);
+    public LanguageSelectorPanel(final LanguageSelectorPresenter presenter) {
+        this(presenter, null);
+    }
+
+    public void setLanguage(final String languageCode) {
+        langCombo.setValue(languageCode);
     }
 
     public String getLanguage() {
@@ -60,19 +72,21 @@ public class LanguageSelectorPanel extends Form implements LanguageSelectorView 
         langCombo.reset();
     }
 
-    public void addChangeListener(final ComboBoxListenerAdapter listener) {
+    public void addChangeListener(final ComboBoxListener listener) {
         langCombo.addComboBoxListener(listener);
     }
 
-    private void createForm(final String fieldTitle) {
-        final Store langStore = new SimpleStore(new String[] { "abbr", "language" }, getLanguages());
+    private void createLangCombo(final String langFieldTitle) {
+        final Store langStore = new SimpleStore(new String[] { LANG_ID, "language" }, getLanguages());
         langStore.load();
 
         langCombo = new ComboBox(new ComboBoxConfig() {
             {
                 setName(LANG_FIELD);
                 setMinChars(1);
-                setFieldLabel(fieldTitle);
+                if (langFieldTitle != null) {
+                    setFieldLabel(langFieldTitle);
+                }
                 setStore(langStore);
                 setDisplayField("language");
                 setMode(ComboBox.LOCAL);
@@ -82,9 +96,10 @@ public class LanguageSelectorPanel extends Form implements LanguageSelectorView 
                 setTypeAhead(true);
                 setTypeAheadDelay(1000);
                 setSelectOnFocus(false);
-                setWidth(187);
+                // setWidth(187);
+                setWidth(150);
                 setMsgTarget("side");
-                setValueField("abbr");
+                setValueField(LANG_ID);
                 setPageSize(7);
                 setForceSelection(true);
             }
@@ -92,6 +107,6 @@ public class LanguageSelectorPanel extends Form implements LanguageSelectorView 
     }
 
     private Object[][] getLanguages() {
-        return languages;
+        return presenter.getLanguages();
     }
 }

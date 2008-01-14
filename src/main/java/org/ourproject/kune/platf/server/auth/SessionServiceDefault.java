@@ -22,6 +22,8 @@ package org.ourproject.kune.platf.server.auth;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.ourproject.kune.platf.client.state.Session;
+
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -49,8 +51,7 @@ public class SessionServiceDefault implements SessionService {
     public void setSessionExpiration() {
         HttpSession session = getSession();
         if (session != null) {
-            // During tests session == null
-            session.setMaxInactiveInterval(300);
+            session.setMaxInactiveInterval(Session.SESSION_DURATION / 1000);
         }
     }
 

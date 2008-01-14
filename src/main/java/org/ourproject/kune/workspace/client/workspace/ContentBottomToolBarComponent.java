@@ -20,11 +20,12 @@
 package org.ourproject.kune.workspace.client.workspace;
 
 import org.ourproject.kune.platf.client.Component;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public interface ContentBottomToolBarComponent extends Component {
 
-    void setRate(boolean isRateable, boolean isLogged, Double value, Integer rateByUsers, Double currentUserRate);
-
     void setEnabledRateIt(boolean enabled);
+
+    void setRate(StateDTO state, boolean logged);
 
 }

@@ -171,9 +171,10 @@ public class LoginPanel implements LoginView, View {
     public void reset() {
         DeferredCommand.addCommand(new Command() {
             public void execute() {
-                // signInForm.reset();
                 loginPassField.reset();
-                registerForm.reset();
+                if (registerForm != null) {
+                    registerForm.reset();
+                }
             }
         });
     }
@@ -239,9 +240,6 @@ public class LoginPanel implements LoginView, View {
         Site.hideProgress();
         dialog.focus();
         loginNickOrEmailField.focus(false);
-        // languageCombo.setValue(currentLanguage.getEnglishName()); --> error
-        // registro
-        languageCombo.setValue(presenter.getCurrentLanguage().getCode());
     }
 
     public void hide() {
@@ -321,27 +319,13 @@ public class LoginPanel implements LoginView, View {
         signInPanel.add(createNoAccountRegister());
         layout.add(LayoutRegionConfig.CENTER, signInPanel);
 
-        ContentPanel registerPanel = new ContentPanel(Ext.generateId(), new ContentPanelConfig() {
+        final ContentPanel registerPanel = new ContentPanel(Ext.generateId(), new ContentPanelConfig() {
             {
                 setTitle(Kune.I18N.t("Register"));
                 setBackground(true);
             }
         });
 
-        registerForm = createRegistrationForm();
-
-        registerForm.addStyleName("kune-Default-Form");
-
-        VerticalPanel registerWrapper = new VerticalPanel() {
-            {
-                setSpacing(30);
-                setWidth("100%");
-                setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-            }
-        };
-        registerWrapper.add(registerForm);
-
-        registerPanel.add(registerWrapper);
         layout.add(LayoutRegionConfig.CENTER, registerPanel);
 
         messagesPanel = new SiteMessagePanel(presenter, false);
@@ -396,10 +380,28 @@ public class LoginPanel implements LoginView, View {
 
         tabPanel.getTab(1).addTabPanelItemListener(new TabPanelItemListenerAdapter() {
             public void onActivate(final TabPanelItem tab) {
+                maskProcessing();
+                if (registerForm == null) {
+                    registerForm = createRegistrationForm(presenter.getCurrentLanguage().getCode());
+
+                    registerForm.addStyleName("kune-Default-Form");
+
+                    VerticalPanel registerWrapper = new VerticalPanel() {
+                        {
+                            setSpacing(30);
+                            setWidth("100%");
+                            setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
+                        }
+                    };
+                    registerWrapper.add(registerForm);
+
+                    registerPanel.add(registerWrapper);
+                }
                 dialog.setTitle(Kune.I18N.t("Register"));
                 signInBtn.hide();
                 registerBtn.show();
                 tab.getTextEl().highlight();
+                unMask();
             }
         });
 
@@ -469,7 +471,7 @@ public class LoginPanel implements LoginView, View {
         return form;
     }
 
-    private Form createRegistrationForm() {
+    private Form createRegistrationForm(final String langCode) {
         Form form = new Form(new FormConfig() {
             {
                 setWidth(300);
@@ -581,6 +583,7 @@ public class LoginPanel implements LoginView, View {
                 setMsgTarget("side");
                 setAllowBlank(false);
                 setValueField("abbr");
+                setValue(langCode);
                 setPageSize(7);
                 setForceSelection(true);
             }

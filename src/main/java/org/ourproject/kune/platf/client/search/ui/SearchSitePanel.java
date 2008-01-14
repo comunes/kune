@@ -75,6 +75,8 @@ public class SearchSitePanel extends AbstractSearcherPanel implements SearchSite
     private Store contentStore;
 
     private BottomTrayIcon bottomIcon;
+    private Grid groupsGrid;
+    private Grid contentGrid;
 
     public SearchSitePanel(final SearchSitePresenter initPresenter) {
         this.presenter = initPresenter;
@@ -85,10 +87,10 @@ public class SearchSitePanel extends AbstractSearcherPanel implements SearchSite
         searchCombo.setValue(text);
         switch (type) {
         case SearchSiteView.GROUP_USER_SEARCH:
-            query(groupStore, text);
+            query(groupStore, groupsGrid, text);
             break;
         case SearchSiteView.CONTENT_SEARCH:
-            query(contentStore, text);
+            query(contentStore, contentGrid, text);
             break;
         default:
             break;
@@ -161,8 +163,8 @@ public class SearchSitePanel extends AbstractSearcherPanel implements SearchSite
         ContentPanel groupsPanel = new ContentPanel(Ext.generateId(), "Groups & Users");
         ContentPanel contentPanel = new ContentPanel(Ext.generateId(), "Content");
 
-        Grid groupsGrid = createSearchPanel(GROUP_USER_SEARCH);
-        Grid contentGrid = createSearchPanel(CONTENT_SEARCH);
+        groupsGrid = createSearchPanel(GROUP_USER_SEARCH);
+        contentGrid = createSearchPanel(CONTENT_SEARCH);
         groupsPanel.add(groupsGrid);
         ;
         contentPanel.add(contentGrid);

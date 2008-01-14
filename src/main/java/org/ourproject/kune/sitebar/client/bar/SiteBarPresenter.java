@@ -95,13 +95,10 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
     }
 
     public void doSearch(final String termToSearch) {
-        Site.showProgressProcessing();
         view.showSearchPanel(termToSearch);
     }
 
     public void doLogout() {
-        Site.showProgressProcessing();
-
         AsyncCallback callback = new AsyncCallback() {
             public void onFailure(final Throwable caught) {
                 Site.hideProgress();

@@ -70,7 +70,7 @@ public class AuthorizatedMethodInterceptor implements MethodInterceptor {
             String contentIdS = (String) arguments[2];
             Long contentId = parseId(contentIdS);
             Content content = accessService.accessToContent(contentId, user, accessType);
-            if (!content.getFolder().getOwner().equals(group)) {
+            if (!content.getContainer().getOwner().equals(group)) {
                 throw new AccessViolationException();
             }
         }
