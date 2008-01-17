@@ -41,6 +41,8 @@ import org.ourproject.kune.workspace.client.WorkspaceUIExtensionPoint;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
+import to.tipit.gwtlib.FireLog;
+
 import com.calclab.gwtjsjac.client.mandioca.rooms.XmppRoom;
 
 public class ChatContentPresenter implements ChatContent, ChatRoomListener, MultiRoomListener {
@@ -91,7 +93,8 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener, Mult
     public void onEnterRoom() {
         MultiRoom rooms = components.getRooms();
         String roomName = state.getFolder().getName();
-        Room room = getRoom(roomName, "me" + new Date().getTime(), RoomUser.VISITOR);
+        // FIXME Moderator?
+        Room room = getRoom(roomName, "me" + new Date().getTime(), RoomUser.MODERADOR);
         rooms.activateRoom(room);
         rooms.show();
     }
@@ -116,6 +119,17 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener, Mult
         XmppRoom handler = room.getHandler();
         if (handler != null) {
             handler.sendMessage(message);
+        } else {
+            debugNoHandler(room);
         }
     }
+
+    public void onCloseRoom(final Room room) {
+        roomNamesToRooms.remove(room.getName());
+    }
+
+    private void debugNoHandler(final Room room) {
+        FireLog.debug("Room '" + room.getName() + "' has no xmmp handler");
+    }
+
 }

@@ -46,11 +46,12 @@ public class AddFolder implements Action {
         server.addFolder(services.session.getUserHash(), group.getShortName(), container.getId(), name,
                 new AsyncCallbackSimple() {
                     public void onSuccess(final Object result) {
-                        Site.hideProgress();
                         Site.info(Kune.I18N.t("Folder created"));
                         StateDTO state = (StateDTO) result;
                         services.stateManager.setRetrievedState(state);
-                        services.stateManager.reload();
+                        // FIXME: Isn't using cache
+                        services.stateManager.reloadContextAndTitles();
+                        Site.hideProgress();
                     }
                 });
     }

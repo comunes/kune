@@ -50,30 +50,32 @@ public class AdminContextPresenter extends AbstractPresenter implements AdminCon
         String tags = content.getTags();
         List authors = content.getAuthors();
 
-        if (tags != null) {
-            view.setTags(tags);
-        } else {
-            view.removeTagsComponent();
-        }
-        if (language != null) {
-            view.setLanguage(language);
-        } else {
-            view.removeLangComponent();
-        }
-        if (authors != null) {
-            view.setAuthors(authors);
-        } else {
-            view.removeAuthorsComponent();
-        }
-        if (publishedOn != null) {
-            view.setPublishedOn(publishedOn);
-        } else {
-            view.removePublishedOnComponent();
-        }
-        if (accessLists != null) {
-            view.setAccessLists(accessLists);
-        } else {
-            view.removeAccessListComponent();
+        if (content.hasDocument()) {
+            if (tags != null) {
+                view.setTags(tags);
+            } else {
+                view.removeTagsComponent();
+            }
+            if (language != null) {
+                view.setLanguage(language);
+            } else {
+                view.removeLangComponent();
+            }
+            if (authors != null) {
+                view.setAuthors(authors);
+            } else {
+                view.removeAuthorsComponent();
+            }
+            if (publishedOn != null) {
+                view.setPublishedOn(publishedOn);
+            } else {
+                view.removePublishedOnComponent();
+            }
+            if (accessLists != null) {
+                view.setAccessLists(accessLists);
+            } else {
+                view.removeAccessListComponent();
+            }
         }
     }
 

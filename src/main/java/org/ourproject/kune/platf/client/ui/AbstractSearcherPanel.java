@@ -42,11 +42,12 @@ public class AbstractSearcherPanel {
         super();
     }
 
-    protected void query(final Store store, final Grid grid, final String language) {
-        UrlParam[] newParams = new UrlParam[] { new UrlParam("query", language), new UrlParam("start", 0),
+    protected void query(final Store store, final Grid grid, final String query) {
+        UrlParam[] newParams = new UrlParam[] { new UrlParam("query", query), new UrlParam("start", 0),
                 new UrlParam("limit", PAGINATION_SIZE) };
         store.setBaseParams(newParams);
         store.load(0, PAGINATION_SIZE);
+        createPagingToolbar(store, grid);
     }
 
     protected void createPagingToolbar(final Store store, final Grid grid) {

@@ -63,18 +63,22 @@ public class MultiRoomPresenter implements MultiRoom, RoomListener {
 
     public void onNoRooms() {
         // TODO
-        view.hideRooms();
+        view.closeRooms();
     }
 
     public void closeRoom(final RoomPresenter room) {
         room.doClose();
+        listener.onCloseRoom(room);
     }
 
     public void activateRoom(final Room nextRoom) {
-        currentRoom.saveInput(view.getInputText());
+        if (currentRoom != null) {
+            currentRoom.saveInput(view.getInputText());
+        }
         view.setSendEnabled(nextRoom.isReady());
         view.setInputText(nextRoom.getSavedInput());
         view.setSubject(nextRoom.getSubject());
+        view.setSubjectEditable(nextRoom.getUserType().equals(RoomUser.MODERADOR));
         view.showUserList(nextRoom.getUsersListView());
         nextRoom.activate();
         currentRoom = nextRoom;
@@ -87,17 +91,17 @@ public class MultiRoomPresenter implements MultiRoom, RoomListener {
     }
 
     public void onMessageReceived(final Room room) {
-        // TODO: hacer algo!! mostrar un mensaje, abrir la room... lo que sea!!
+        view.highlightRoom(room);
     }
 
     public void closeAllRooms() {
-        // TODO xmpp: Close all the rooms;
         closeAllConfirmed = true;
-        view.hideRooms();
+        view.closeRooms();
     }
 
     public void onCloseAllNotConfirmed() {
         closeAllConfirmed = false;
+        view.setSubject("");
     }
 
     public boolean isCloseAllConfirmed() {
@@ -109,4 +113,9 @@ public class MultiRoomPresenter implements MultiRoom, RoomListener {
                 WorkspaceUIExtensionPoint.CONTENT_BOTTOM_ICONBAR, view);
     }
 
+    public void changeRoomSubject(final String text) {
+        // FIXME Do the real subject rename
+        view.setSubject(text);
+        currentRoom.setSubject(text);
+    }
 }

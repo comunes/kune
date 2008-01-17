@@ -228,6 +228,7 @@ public class AdminContextPanel extends VerticalPanel implements AdminContextView
 
         form.add(publishedOnField);
         form.render();
+
         VerticalPanel vp = new VerticalPanel();
         vp.add(form);
         return vp;

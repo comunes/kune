@@ -29,14 +29,12 @@ import org.ourproject.kune.platf.client.rpc.SiteService;
 import org.ourproject.kune.platf.client.rpc.SiteServiceAsync;
 import org.ourproject.kune.platf.client.utils.PrefetchUtilities;
 import org.ourproject.kune.sitebar.client.Site;
-import org.ourproject.kune.sitebar.client.SiteBarFactory;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 import to.tipit.gwtlib.FireLog;
 
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 
@@ -44,10 +42,8 @@ public class InitAction implements Action {
     public void execute(final Object value, final Object extra, final Services services) {
         PrefetchUtilities.preFetchImpImages();
         getInitData(services);
-        int windowWidth = Window.getClientWidth();
         final Workspace workspace = services.app.getWorkspace();
-        workspace.adjustSize(windowWidth, Window.getClientHeight());
-        SiteBarFactory.getSiteMessage().adjustWidth(windowWidth);
+        services.dispatcher.fire(WorkspaceEvents.RECALCULATE_WORKSPACE_SIZE, null, null);
         Timer prefetchTimer = new Timer() {
             public void run() {
                 PrefetchUtilities.doTasksDeferred(workspace);
@@ -81,6 +77,7 @@ public class InitAction implements Action {
                     dispatcher.fire(WorkspaceEvents.USER_LOGGED_IN, currentUser, null);
                 }
                 RootPanel.get("kuneinitialcurtain").setVisible(false);
+
                 Site.unMask();
             }
         });

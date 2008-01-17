@@ -21,6 +21,7 @@
 package org.ourproject.kune.chat.client.rooms;
 
 public interface MultiRoomView {
+
     void addRoomUsersPanel(RoomUserListView view);
 
     void show();
@@ -35,9 +36,14 @@ public interface MultiRoomView {
 
     void showUserList(RoomUserListView usersListView);
 
-    void hideRooms();
+    void closeRooms();
 
     void setSendEnabled(boolean enabled);
 
     void clearInputText();
+
+    void highlightRoom(Room room);
+
+    void setSubjectEditable(boolean editable);
+
 }

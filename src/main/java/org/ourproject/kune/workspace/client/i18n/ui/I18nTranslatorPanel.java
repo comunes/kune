@@ -36,11 +36,9 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Ext;
-import com.gwtext.client.core.UrlParam;
 import com.gwtext.client.data.FieldDef;
 import com.gwtext.client.data.Record;
 import com.gwtext.client.data.Store;
-import com.gwtext.client.data.StoreLoadConfig;
 import com.gwtext.client.data.StringFieldDef;
 import com.gwtext.client.util.Format;
 import com.gwtext.client.widgets.Button;
@@ -120,6 +118,11 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
         dialog.hide();
     }
 
+    public void close() {
+        dialog.hide();
+        // dialog.destroy(true);
+    }
+
     private void setLanguage(final String language) {
         Site.showProgressLoading();
         query(unTransStore, unTransGrid, language);
@@ -167,7 +170,7 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
                 setText(Kune.I18N.tWithNT("Close", "used in button"));
                 setButtonListener(new ButtonListenerAdapter() {
                     public void onClick(final Button button, final EventObject e) {
-                        presenter.onHide();
+                        presenter.onClose();
                     }
                 });
             }
@@ -251,6 +254,10 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
                     dialog.hide();
                 }
             }
+
+            public void onHide(final LayoutDialog dialog) {
+                dialog.destroy();
+            }
         });
 
         return dialog;
@@ -272,14 +279,6 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
             unTransStore = createStore(fieldDefs, url, id);
             store = unTransStore;
         }
-
-        // Delete this?
-        store.load(new StoreLoadConfig() {
-            {
-                setParams(new UrlParam[] { new UrlParam("query", "G*"), new UrlParam("start", 0),
-                        new UrlParam("limit", PAGINATION_SIZE) });
-            }
-        });
 
         ColumnModel columnModel = new ColumnModel(new ColumnConfig[] { new ColumnConfig() {
             {
@@ -308,7 +307,6 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
                 store, columnModel, new EditorGridConfig() {
                     {
                         setClicksToEdit(1);
-                        setEnableRowHeightSync(true);
                         setLoadMask(true);
                         setLoadMask(new LoadMaskConfig(Kune.I18N.t("Loading")));
                     }
@@ -339,8 +337,6 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
         });
 
         grid.render();
-
-        createPagingToolbar(store, grid);
 
         return grid;
     }

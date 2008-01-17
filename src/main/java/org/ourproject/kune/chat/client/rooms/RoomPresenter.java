@@ -32,7 +32,7 @@ import com.calclab.gwtjsjac.client.mandioca.rooms.XmppRoom;
 public class RoomPresenter implements Room {
 
     private final static String[] USERCOLORS = { "green", "navy", "black", "grey", "olive", "teal", "blue", "lime",
-	    "purple", "fuchsia", "maroon", "red" };
+            "purple", "fuchsia", "maroon", "red" };
 
     private int currentColor;
 
@@ -52,137 +52,151 @@ public class RoomPresenter implements Room {
 
     private boolean closeConfirmed;
 
+    private UserType userType;
+
     // TODO: la información del usuario no está disponible (ni debe estar ;)
     // cuando se crea
     // el room presenter => solución: usar setAlias, setRoomName,
     // setUserType... etc...
     public RoomPresenter(final RoomListener listener, final String roomName, final String userAlias,
-	    final UserType userType, final RoomUserList userList) {
-	this.listener = listener;
-	this.roomName = roomName;
-	this.sessionUserAlias = userAlias;
-	this.userList = userList;
-	this.input = "";
-	this.currentColor = 0;
-	users = new HashMap();
+            final UserType userType, final RoomUserList userList) {
+        this.listener = listener;
+        this.roomName = roomName;
+        this.sessionUserAlias = userAlias;
+        this.userType = userType;
+        this.userList = userList;
+        this.input = "";
+        this.currentColor = 0;
+        this.subject = "Subject: " + roomName;
+        users = new HashMap();
     }
 
     public void init(final RoomView view) {
-	this.view = view;
-	view.showRoomName(roomName);
-	closeConfirmed = false;
+        this.view = view;
+        view.showRoomName(roomName);
+        closeConfirmed = false;
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void addMessage(final String userAlias, final String message) {
-	String userColor;
+        String userColor;
 
-	RoomUser user = (RoomUser) users.get(userAlias);
-	if (user != null) {
-	    userColor = user.getColor();
-	} else {
-	    FireLog.debug("User " + userAlias + " not in our users list");
-	    userColor = "black";
-	}
-	view.showMessage(userAlias, userColor, message);
-	listener.onMessageReceived(this);
+        RoomUser user = (RoomUser) users.get(userAlias);
+        if (user != null) {
+            userColor = user.getColor();
+        } else {
+            FireLog.debug("User " + userAlias + " not in our users list");
+            userColor = "black";
+        }
+        view.showMessage(userAlias, userColor, message);
+        listener.onMessageReceived(this);
     }
 
     public void addInfoMessage(final String message) {
-	view.showInfoMessage(message);
+        view.showInfoMessage(message);
     }
 
     public void addUser(final String alias, final UserType type) {
-	RoomUser user = new RoomUser(alias, getNextColor(), type);
-	getUsersList().add(user);
-	users.put(alias, user);
+        RoomUser user = new RoomUser(alias, getNextColor(), type);
+        getUsersList().add(user);
+        users.put(alias, user);
     }
 
     public void removeUser(final String alias) {
-	getUsersList().remove((RoomUser) users.get(alias));
+        getUsersList().remove((RoomUser) users.get(alias));
     }
 
     public void addDelimiter(final String datetime) {
-	view.showDelimiter(datetime);
+        view.showDelimiter(datetime);
     }
 
     // TODO: ¿no bastaría con saveInput(null)?
     public void clearSavedInput() {
-	input = null;
+        input = null;
     }
 
     public String getSessionAlias() {
-	return sessionUserAlias;
+        return sessionUserAlias;
     }
 
     public void saveInput(final String inputText) {
-	input = inputText;
+        input = inputText;
     }
 
     public String getSavedInput() {
-	return input;
+        return input;
     }
 
     protected void doClose() {
-	handler.logout();
-	closeConfirmed = true;
+        handler.logout();
     }
 
     public String getSubject() {
-	return subject;
+        return subject;
     }
 
     public void setSubject(final String subject) {
-	this.subject = subject;
+        this.subject = subject;
     }
 
     public String getName() {
-	return roomName;
+        return roomName;
     }
 
     private String getNextColor() {
-	String color = USERCOLORS[currentColor++];
-	if (currentColor >= USERCOLORS.length) {
-	    currentColor = 0;
-	}
-	return color;
+        String color = USERCOLORS[currentColor++];
+        if (currentColor >= USERCOLORS.length) {
+            currentColor = 0;
+        }
+        return color;
     }
 
     public RoomUserList getUsersList() {
-	return userList;
+        return userList;
     }
 
     public RoomUserListView getUsersListView() {
-	return userList.getView();
+        return userList.getView();
     }
 
     public void setHandler(final XmppRoom handler) {
-	this.handler = handler;
-	listener.onRoomReady(this);
+        this.handler = handler;
+        listener.onRoomReady(this);
     }
 
     public boolean isReady() {
-	return handler != null;
+        return handler != null;
     }
 
     public XmppRoom getHandler() {
-	return handler;
+        return handler;
+    }
+
+    public void onCloseConfirmed() {
+        closeConfirmed = true;
     }
 
     public void onCloseNotConfirmed() {
-	closeConfirmed = false;
-
+        closeConfirmed = false;
     }
 
     public boolean isCloseConfirmed() {
-	return closeConfirmed;
+        return closeConfirmed;
     }
 
     public void activate() {
-	view.scrollDown();
+        view.scrollDown();
+    }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(final UserType userType) {
+        this.userType = userType;
     }
 
 }

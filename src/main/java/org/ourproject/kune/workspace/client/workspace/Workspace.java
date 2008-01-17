@@ -31,6 +31,10 @@ import org.ourproject.kune.workspace.client.license.LicenseComponent;
 
 public interface Workspace extends Component {
 
+    public static final int MIN_WIDTH = 800;
+
+    public static final int MIN_HEIGHT = 480;
+
     public void showError(Throwable caught);
 
     public void showGroup(GroupDTO group, boolean isAdmin);
@@ -76,5 +80,9 @@ public interface Workspace extends Component {
     public void clearExtensionPoint(String id);
 
     public I18nTranslatorComponent getI18nTranslatorComponent();
+
+    public int calculateWidth(int clientWidth);
+
+    public int calculateHeight(int clientHeight);
 
 }

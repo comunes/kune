@@ -38,7 +38,6 @@ import to.tipit.gwtlib.FireLog;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.DeckPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.EventObject;
@@ -48,6 +47,10 @@ import com.gwtext.client.widgets.ButtonConfig;
 import com.gwtext.client.widgets.LayoutDialog;
 import com.gwtext.client.widgets.LayoutDialogConfig;
 import com.gwtext.client.widgets.MessageBox;
+import com.gwtext.client.widgets.SplitButtonConfig;
+import com.gwtext.client.widgets.Toolbar;
+import com.gwtext.client.widgets.ToolbarButton;
+import com.gwtext.client.widgets.ToolbarMenuButton;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.event.DialogListenerAdapter;
 import com.gwtext.client.widgets.form.Field;
@@ -62,6 +65,11 @@ import com.gwtext.client.widgets.layout.ContentPanelConfig;
 import com.gwtext.client.widgets.layout.LayoutRegion;
 import com.gwtext.client.widgets.layout.LayoutRegionConfig;
 import com.gwtext.client.widgets.layout.event.LayoutRegionListener;
+import com.gwtext.client.widgets.menu.CheckItem;
+import com.gwtext.client.widgets.menu.CheckItemConfig;
+import com.gwtext.client.widgets.menu.Menu;
+import com.gwtext.client.widgets.menu.MenuConfig;
+import com.gwtext.client.widgets.menu.event.CheckItemListenerAdapter;
 
 public class MultiRoomPanel implements MultiRoomView, View {
     protected static final String INPUT_FIELD = "input-area";
@@ -69,12 +77,12 @@ public class MultiRoomPanel implements MultiRoomView, View {
     private Button sendBtn;
     private final MultiRoomPresenter presenter;
     private LayoutRegion centralLayout;
-    private Label subject;
+    private TextArea subject;
     private DeckPanel usersDeckPanel;
     private TextArea input;
-    private Form inputForm;
     private final HashMap userListToIndex;
     private final HashMap panelIdToRoom;
+    private final HashMap panelIdToTabId;
     private EmoticonPalettePanel emoticonPalettePanel;
     private PopupPanel emoticonPopup;
     private BottomTrayIcon bottomIcon;
@@ -83,6 +91,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
         this.presenter = presenter;
         this.userListToIndex = new HashMap();
         panelIdToRoom = new HashMap();
+        panelIdToTabId = new HashMap();
         createLayout();
     }
 
@@ -97,7 +106,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
         String panelId = roomPanel.getId();
         panelIdToRoom.put(panelId, room);
         centerRegion.showPanel(panelId);
-
+        panelIdToTabId.put(panelId, centerRegion.getTabs().getActiveTab().getId());
         // bug test: http://code.google.com/p/gwt-ext/issues/detai3754,l?id=81
         // ContentPanel panel = centerRegion.getPanel(panelId);
         // FireLog.debug("My panel id: " + panelId);
@@ -108,10 +117,19 @@ public class MultiRoomPanel implements MultiRoomView, View {
         layout.endUpdate();
     }
 
+    public void highlightRoom(final Room room) {
+        final BorderLayout layout = dialog.getLayout();
+        LayoutRegion centerRegion = layout.getRegion(LayoutRegionConfig.CENTER);
+        ContentPanel roomPanel = (ContentPanel) room.getView();
+        String panelId = roomPanel.getId();
+        String tabId = (String) panelIdToTabId.get(panelId);
+        centerRegion.getTabs().getTab(tabId).getTextEl().highlight();
+    }
+
     public void show() {
         dialog.show();
         dialog.expand();
-        dialog.center();
+        // dialog.center();
         if (bottomIcon == null) {
             bottomIcon = new BottomTrayIcon(Kune.I18N.t("Show/hide chat dialog"));
             bottomIcon.addMainButton(Images.App.getInstance().chat(), new Command() {
@@ -127,8 +145,8 @@ public class MultiRoomPanel implements MultiRoomView, View {
         }
     }
 
-    public void hideRooms() {
-        dialog.hide();
+    public void closeRooms() {
+        // dialog.destroy(true);
     }
 
     public void setSendEnabled(final boolean enabled) {
@@ -140,7 +158,11 @@ public class MultiRoomPanel implements MultiRoomView, View {
     }
 
     public void setSubject(final String text) {
-        subject.setText(text);
+        subject.setValue(text);
+    }
+
+    public void setSubjectEditable(final boolean editable) {
+        subject.setDisabled(editable);
     }
 
     public void showUserList(final RoomUserListView view) {
@@ -151,6 +173,12 @@ public class MultiRoomPanel implements MultiRoomView, View {
     public void addRoomUsersPanel(final RoomUserListView view) {
         usersDeckPanel.add((Widget) view);
         userListToIndex.put(view, new Integer(usersDeckPanel.getWidgetIndex((Widget) view)));
+    }
+
+    public void removeRoomUsersPanel(final RoomUserListView view) {
+        Integer index = (Integer) userListToIndex.get(view);
+        usersDeckPanel.remove(index.intValue());
+        userListToIndex.remove(view);
     }
 
     public void clearInputText() {
@@ -171,7 +199,8 @@ public class MultiRoomPanel implements MultiRoomView, View {
         LayoutRegionConfig north = new LayoutRegionConfig() {
             {
                 setTitlebar(false);
-                setInitialSize(30);
+                setInitialSize(54);
+                setHideWhenEmpty(false);
             }
         };
 
@@ -185,6 +214,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
                 setAnimate(true);
                 setTitlebar(true);
                 setAlwaysShowTabs(false);
+                setMargins(5, 0, 0, 0);
             }
         };
 
@@ -195,7 +225,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
                 setTabPosition("top");
                 setCloseOnTab(true);
                 setAlwaysShowTabs(true);
-                setMargins(5, 5, 5, 5);
+                setMargins(5, 0, 0, 0);
                 setHideWhenEmpty(true);
             }
         };
@@ -204,7 +234,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
             {
                 setSplit(true);
                 setHideWhenEmpty(false);
-                setInitialSize(50);
+                setInitialSize(70);
             }
         };
 
@@ -212,7 +242,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
             {
                 setModal(false);
                 setWidth(600);
-                setHeight(400);
+                setHeight(410);
                 setShadow(true);
                 setMinHeight(300);
                 setMinHeight(300);
@@ -221,23 +251,6 @@ public class MultiRoomPanel implements MultiRoomView, View {
                 setCollapsible(true);
             }
         }, north, south, null, east, center);
-
-        final Button emotiButton = new Button(new ButtonConfig() {
-            {
-                setIcon("images/smile.png");
-                setCls("x-btn-icon");
-                setTooltip(Kune.I18N.t("Insert a emoticon"));
-
-            }
-        });
-
-        dialog.addButton(emotiButton);
-        emotiButton.setWidth("18px");
-        emotiButton.addButtonListener(new ButtonListenerAdapter() {
-            public void onClick(final Button button, final EventObject e) {
-                showEmoticonPalette(e.getXY()[0], e.getXY()[1]);
-            }
-        });
 
         sendBtn = dialog.addButton(Kune.I18N.t("Send"));
         sendBtn.addButtonListener(new ButtonListenerAdapter() {
@@ -311,6 +324,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
 
             public void onShow(final LayoutDialog dialog) {
             }
+
         });
 
         centralLayout = dialog.getLayout().getRegion(LayoutRegionConfig.CENTER);
@@ -318,19 +332,21 @@ public class MultiRoomPanel implements MultiRoomView, View {
         centralLayout.addLayoutRegionListener(new LayoutRegionListener() {
 
             public boolean doBeforeRemove(final LayoutRegion region, final ContentPanel panel) {
-                if (presenter.isCloseAllConfirmed()
-                        || ((RoomPresenter) panelIdToRoom.get(panel.getId())).isCloseConfirmed()) {
+                final String panelId = panel.getId();
+                final RoomPresenter roomPresenter = (RoomPresenter) panelIdToRoom.get(panelId);
+                if (presenter.isCloseAllConfirmed() || roomPresenter.isCloseConfirmed()) {
+                    panelIdToRoom.remove(panelId);
+                    panelIdToTabId.remove(panelId);
+                    removeRoomUsersPanel(roomPresenter.getUsersListView());
+                    presenter.closeRoom(roomPresenter);
                     return true;
                 } else {
                     MessageBox.confirm(Kune.I18N.t("Confirm"), Kune.I18N
                             .t("Are you sure you want to exit from this room?"), new MessageBox.ConfirmCallback() {
                         public void execute(final String btnID) {
-                            String panelId = panel.getId();
                             RoomPresenter roomPresenter = (RoomPresenter) panelIdToRoom.get(panelId);
                             if (btnID.equals("yes")) {
-                                panelIdToRoom.remove(panelId);
-                                // TODO remove userList
-                                presenter.closeRoom(roomPresenter);
+                                roomPresenter.onCloseConfirmed();
                                 region.remove(panelId);
                             } else {
                                 roomPresenter.onCloseNotConfirmed();
@@ -395,24 +411,116 @@ public class MultiRoomPanel implements MultiRoomView, View {
     }
 
     private ContentPanel createSubjectPanel() {
-        subject = new Label();
-        ContentPanel northPanel = new ContentPanel(subject, "", new ContentPanelConfig() {
-            {
-                setBackground(false);
-            }
-        });
-        northPanel.addStyleName("kune-MultiRoomPanel-Subject");
-        return northPanel;
-    }
-
-    private ContentPanel createInputPanel() {
-
-        inputForm = new Form(new FormConfig() {
+        Form subjectForm = new Form(new FormConfig() {
             {
                 setHideLabels(true);
                 setWidth("100%");
             }
         });
+
+        subject = new TextArea(new TextAreaConfig() {
+            {
+                setFieldListener(new FieldListener() {
+                    public void onBlur(final Field field) {
+                    }
+
+                    public void onChange(final Field field, final Object newVal, final Object oldVal) {
+                    }
+
+                    public void onFocus(final Field field) {
+                    }
+
+                    public void onInvalid(final Field field, final String msg) {
+                    }
+
+                    public void onSpecialKey(final Field field, final EventObject e) {
+                        if (e.getKey() == 13) {
+                            presenter.changeRoomSubject(field.getValueAsString());
+                            e.stopEvent();
+                        }
+                    }
+
+                    public void onValid(final Field field) {
+                    }
+                });
+            }
+        });
+
+        /* Top toolbar */
+
+        final Toolbar topToolbar = new Toolbar("chat-topbar");
+
+        Menu menu = new Menu("xmmp-presence-menu", new MenuConfig() {
+            {
+                setShadow(true);
+                setMinWidth(10);
+            }
+        });
+
+        menu.addItem(new CheckItem(new CheckItemConfig() {
+            {
+                setText("online");
+                setChecked(true);
+                setCheckItemListener(new CheckItemListenerAdapter() {
+                    public void onCheckChange(final CheckItem item, final boolean checked) {
+                        // presenter.something();
+                    }
+                });
+            }
+        }));
+
+        CheckItem offlineCheckItem = new CheckItem(new CheckItemConfig() {
+            {
+                setText("offline");
+                setChecked(true);
+                setCheckItemListener(new CheckItemListenerAdapter() {
+                    public void onCheckChange(final CheckItem item, final boolean checked) {
+                        // presenter.something();
+                    }
+                });
+            }
+        });
+
+        menu.addItem(offlineCheckItem);
+
+        ToolbarMenuButton menuButton = new ToolbarMenuButton("foos-mb", "Set status", menu, new SplitButtonConfig() {
+            {
+                setTooltip("Change your current status");
+                setArrowTooltip("Change your current status");
+                setCls("x-btn-text-icon bmenu");
+            }
+        });
+
+        topToolbar.addButton(menuButton);
+
+        subjectForm.add(subject);
+
+        subjectForm.end();
+        subjectForm.render();
+
+        subject.setWidth("100%");
+        subject.setHeight("100%");
+
+        ContentPanel northPanel = new ContentPanel(subjectForm, "", new ContentPanelConfig() {
+            {
+                setBackground(false);
+                setFitToFrame(true);
+                setToolbar(topToolbar);
+            }
+        });
+        northPanel.addStyleName("kune-MultiRoomPanel-Subject");
+
+        return northPanel;
+    }
+
+    private ContentPanel createInputPanel() {
+        Form inputForm = new Form(new FormConfig() {
+            {
+                setHideLabels(true);
+                setWidth("100%");
+            }
+        });
+
         input = new TextArea(new TextAreaConfig() {
             {
                 setFieldListener(new FieldListener() {
@@ -440,15 +548,38 @@ public class MultiRoomPanel implements MultiRoomView, View {
                 });
             }
         });
+
         inputForm.add(input);
 
         inputForm.end();
         inputForm.render();
 
-        ContentPanel southPanel = new ContentPanel(input, "", new ContentPanelConfig() {
+        /* Input toolbar */
+
+        final Toolbar inputToolbar = new Toolbar("chat-input-topbar");
+
+        ToolbarButton emoticonIcon = new ToolbarButton(new ButtonConfig() {
+            {
+                setIcon("images/smile.png");
+                setCls("x-btn-icon");
+                setTooltip(Kune.I18N.t("Insert a emoticon"));
+
+            }
+        });
+
+        emoticonIcon.addButtonListener(new ButtonListenerAdapter() {
+            public void onClick(final Button button, final EventObject e) {
+                showEmoticonPalette(e.getXY()[0], e.getXY()[1]);
+            }
+        });
+
+        inputToolbar.addButton(emoticonIcon);
+
+        ContentPanel southPanel = new ContentPanel(inputForm, "", new ContentPanelConfig() {
             {
                 setBackground(true);
                 setFitToFrame(true);
+                setToolbar(inputToolbar);
             }
         });
 
@@ -470,8 +601,10 @@ public class MultiRoomPanel implements MultiRoomView, View {
         emoticonPopup = new PopupPanel(true);
         emoticonPopup.setVisible(false);
         emoticonPopup.show();
-        emoticonPopup.setPopupPosition(x - 170, y - 170);
+        // emoticonPopup.setPopupPosition(x - 170, y - 170);
+        emoticonPopup.setPopupPosition(x + 2, y - 160);
         emoticonPopup.setWidget(emoticonPalettePanel);
         emoticonPopup.setVisible(true);
     }
+
 }

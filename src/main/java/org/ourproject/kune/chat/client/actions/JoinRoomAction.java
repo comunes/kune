@@ -54,6 +54,7 @@ public class JoinRoomAction implements Action {
         });
         handler.addRoomPresenceListener(new RoomPresenceListener() {
             public void onUserEntered(final String alias, final String status) {
+                // FIXME: Put correct user type
                 room.addUser(alias, RoomUser.MODERADOR);
                 room.addInfoMessage(Kune.I18N.t("[%s] came online", alias));
             }

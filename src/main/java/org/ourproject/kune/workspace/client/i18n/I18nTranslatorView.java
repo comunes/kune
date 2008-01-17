@@ -27,4 +27,6 @@ public interface I18nTranslatorView extends View {
 
     void hide();
 
+    void close();
+
 }

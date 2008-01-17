@@ -89,10 +89,6 @@ public class WorkspacePresenter implements Workspace {
         view.setContent(content.getView());
     }
 
-    public void adjustSize(final int windowWidth, final int clientHeight) {
-        view.adjustSize(windowWidth, clientHeight);
-    }
-
     public View getView() {
         return view;
     }
@@ -169,4 +165,26 @@ public class WorkspacePresenter implements Workspace {
     public void onSplitterStopResizing(final Widget sender) {
         DefaultDispatcher.getInstance().fire(WorkspaceEvents.WS_SPLITTER_STOPRESIZING, null, null);
     }
+
+    /**
+     * Calculates Workspaceheight depending of the client Window size but with a
+     * limit
+     */
+    public int calculateHeight(final int clientHeight) {
+        // 15 is the size of scrollbar
+        return clientHeight <= MIN_HEIGHT ? MIN_HEIGHT - 15 : clientHeight;
+    }
+
+    /**
+     * Calculates Workspace width depending of the client Window size but with a
+     * limit
+     */
+    public int calculateWidth(final int clientWidth) {
+        return clientWidth <= MIN_WIDTH ? MIN_WIDTH - 15 : clientWidth;
+    }
+
+    public void adjustSize(final int windowWidth, final int clientHeight) {
+        view.adjustSize(windowWidth, clientHeight);
+    }
+
 }

@@ -344,7 +344,7 @@ public class SearchSitePanel extends AbstractSearcherPanel implements SearchSite
 
         grid.render();
 
-        createPagingToolbar(store, grid);
+        // createPagingToolbar(store, grid);
 
         return grid;
     }

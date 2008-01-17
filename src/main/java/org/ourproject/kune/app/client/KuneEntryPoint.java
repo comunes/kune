@@ -44,7 +44,6 @@ public class KuneEntryPoint implements EntryPoint {
 
     public void onModuleLoad() {
         final String userHash = Cookies.getCookie("userHash");
-        FireLog.debug("UserHash: " + userHash);
         Kune.I18N.getInitialLanguage(new AsyncCallback() {
             public void onFailure(final Throwable caught) {
                 FireLog.debug("Workspace adaptation to your language failed");

@@ -108,6 +108,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         cntcxtHSP.addChangeListener(new ChangeListener() {
             public void onChange(final Widget sender) {
                 adjustSizeContentSP();
+                saveCurrentRightWidgetWidth(cntcxtHSP.getRightWidgetAvailableWidth());
             }
         });
         cntcxtHSP.addSplitterListener(new SplitterListener() {
@@ -339,15 +340,17 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         final int contentWidth = windowWidth - 184;
         final int contentHeight = windowHeight - 176;
 
+        // FireLog.debug("w1: " + windowWidth + ", h1: " + windowHeight);
+        // FireLog.debug("w2: " + contentWidth + ", h2: " + contentHeight);
+        // FireLog.debug("sp1: " + previousRightWidgetWidth);
         cntcxtHSP.setSize("" + contentWidth + "px", "" + contentHeight + "px");
         if (contentWidth > previousRightWidgetWidth) {
             cntcxtHSP.setSplitPosition("" + (contentWidth - previousRightWidgetWidth - 6) + "px");
-            saveCurrentLeftWidgetWidth();
+            saveCurrentRightWidgetWidth(previousRightWidgetWidth);
         } else {
             setDefaultSplitterPosition();
         }
-        contentSP.setSize("" + (cntcxtHSP.getLeftWidgetAvailableWidth() - 2) + "px", ""
-                + (contentHeight - 29 - contentToolBarHP.getOffsetHeight()) + "px");
+        adjustSizeContentSP();
         groupDropDownsSP.setHeight("" + (contentHeight + 7) + "px");
     }
 
@@ -365,19 +368,26 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     }
 
     private void adjustSizeContentSP() {
-        int leftWidgetAvailableWidth = cntcxtHSP.getLeftWidgetAvailableWidth();
-        contentSP.setWidth("" + (leftWidgetAvailableWidth - 2) + "px");
-        saveCurrentLeftWidgetWidth();
+        contentSP.setSize("" + (cntcxtHSP.getLeftWidgetAvailableWidth() - 2) + "px", ""
+                + (cntcxtHSP.getOffsetHeight() - 29 - contentToolBarHP.getOffsetHeight()) + "px");
     }
 
     private void setDefaultSplitterPosition() {
-        cntcxtHSP.setSplitPosition((cntcxtHSP.getLeftWidgetAvailableWidth() + cntcxtHSP.getRightWidgetAvailableWidth())
-                * 0.7 + "px");
-        saveCurrentLeftWidgetWidth();
+        int newLefttWidgetWidth = (int) (cntcxtHSP.getOffsetWidth() * 0.7);
+        cntcxtHSP.setSplitPosition(newLefttWidgetWidth + "px");
+        saveCurrentRightWidgetWidth(cntcxtHSP.getLeftWidgetAvailableWidth());
     }
 
-    private void saveCurrentLeftWidgetWidth() {
-        previousRightWidgetWidth = cntcxtHSP.getRightWidgetAvailableWidth();
+    private void saveCurrentRightWidgetWidth(final int newRightWidgetWidth) {
+        previousRightWidgetWidth = newRightWidgetWidth;
     }
+
+    // private void logSplitter(final String count) {
+    // FireLog.debug("" + count + " cntcxtHSP.getRightWidgetAvailableWidth: "
+    // + cntcxtHSP.getRightWidgetAvailableWidth());
+    // FireLog
+    // .debug("" + count + " cntcxtHSP.getLeftWidgetAvailableWidth: "
+    // + cntcxtHSP.getLeftWidgetAvailableWidth());
+    // }
 
 }

@@ -173,7 +173,7 @@ public class I18nCountry implements HasId {
         this.numberGroupingScheme = numberGroupingScheme;
     }
 
-    @Finder(query = "FROM I18nCountry")
+    @Finder(query = "FROM I18nCountry ORDER BY english_name")
     public List<I18nCountry> getAll() {
         return null;
     }

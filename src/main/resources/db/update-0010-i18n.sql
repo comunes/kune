@@ -39,7 +39,6 @@ INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','El idioma de est
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','[%d] elemento con este tag','[%d] item with this tag','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Add author','Add author','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Añade autor/a','Add author','kune_core',5889);
-INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'',NULL,"of %0 [%NT Used to show multiple results: \'1 of 30\']",'kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Page','Page','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','First Page','First Page','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Next Page','Next Page','kune_core',1819);
@@ -47,7 +46,6 @@ INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Last Page','Last
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Previous Page','Previous Page','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Refresh','Refresh','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Search users &amp;amp; groups','Search users &amp; groups','kune_core',1819);
-INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'',NULL,"of %0 [%NT Used to show multiple results: \'1 of 30\']",'kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Página','Page','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Primera página','First Page','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Siguiente página','Next Page','kune_core',5889);

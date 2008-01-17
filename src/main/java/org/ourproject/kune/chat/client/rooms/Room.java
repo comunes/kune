@@ -25,6 +25,7 @@ import org.ourproject.kune.platf.client.View;
 import com.calclab.gwtjsjac.client.mandioca.rooms.XmppRoom;
 
 public interface Room {
+
     String getName();
 
     void setSubject(String subject);
@@ -61,5 +62,9 @@ public interface Room {
     void removeUser(String alias);
 
     void activate();
+
+    UserType getUserType();
+
+    void setUserType(UserType userType);
 
 }
