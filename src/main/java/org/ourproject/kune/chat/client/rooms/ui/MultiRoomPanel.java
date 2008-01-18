@@ -29,8 +29,13 @@ import org.ourproject.kune.chat.client.rooms.Room;
 import org.ourproject.kune.chat.client.rooms.RoomPresenter;
 import org.ourproject.kune.chat.client.rooms.RoomUserListView;
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.ui.stacks.IndexedStackPanelWithSubItems;
+import org.ourproject.kune.platf.client.ui.stacks.StackSubItemAction;
+import org.ourproject.kune.workspace.client.WorkspaceEvents;
+import org.ourproject.kune.workspace.client.socialnet.EntityLiveSearchListener;
 import org.ourproject.kune.workspace.client.workspace.ui.BottomTrayIcon;
 
 import to.tipit.gwtlib.FireLog;
@@ -74,6 +79,8 @@ import com.gwtext.client.widgets.menu.TextItem;
 import com.gwtext.client.widgets.menu.event.CheckItemListenerAdapter;
 
 public class MultiRoomPanel implements MultiRoomView, View {
+    private static final String MYBUDDIES = Kune.I18N.t("My buddies");
+
     private static final XmppIcons icons = XmppIcons.App.getInstance();
 
     protected static final String INPUT_FIELD = "input-area";
@@ -82,7 +89,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
     private final MultiRoomPresenter presenter;
     private LayoutRegion centralLayout;
     private TextArea subject;
-    private DeckPanel usersDeckPanel;
+    private DeckPanel roomUsersDeckPanel;
     private TextArea input;
     private final HashMap userListToIndex;
     private final HashMap panelIdToRoom;
@@ -102,6 +109,10 @@ public class MultiRoomPanel implements MultiRoomView, View {
     private CheckItem awayMenuItem;
 
     private ToolbarMenuButton statusButton;
+
+    private IndexedStackPanelWithSubItems usersStack;
+
+    private ToolbarButton inviteUserToRoom;
 
     public MultiRoomPanel(final MultiRoomPresenter presenter) {
         this.presenter = presenter;
@@ -183,17 +194,18 @@ public class MultiRoomPanel implements MultiRoomView, View {
 
     public void showUserList(final RoomUserListView view) {
         Integer index = (Integer) userListToIndex.get(view);
-        usersDeckPanel.showWidget(index.intValue());
+        roomUsersDeckPanel.showWidget(index.intValue());
+        usersStack.showStack(1);
     }
 
     public void addRoomUsersPanel(final RoomUserListView view) {
-        usersDeckPanel.add((Widget) view);
-        userListToIndex.put(view, new Integer(usersDeckPanel.getWidgetIndex((Widget) view)));
+        roomUsersDeckPanel.add((Widget) view);
+        userListToIndex.put(view, new Integer(roomUsersDeckPanel.getWidgetIndex((Widget) view)));
     }
 
     public void removeRoomUsersPanel(final RoomUserListView view) {
         Integer index = (Integer) userListToIndex.get(view);
-        usersDeckPanel.remove(index.intValue());
+        roomUsersDeckPanel.remove(index.intValue());
         userListToIndex.remove(view);
     }
 
@@ -207,6 +219,17 @@ public class MultiRoomPanel implements MultiRoomView, View {
 
     public String getInputText() {
         return input.getValueAsString();
+    }
+
+    public void addPresenceBuddy(final String name, final String title, final int status) {
+        StackSubItemAction[] actions = {
+                new StackSubItemAction(Images.App.getInstance().chat(), Kune.I18N.t("Start a chat with this person"),
+                        WorkspaceEvents.GOTO), StackSubItemAction.DEFAULT_VISIT_GROUP };
+        usersStack.addStackSubItem(MYBUDDIES, getStatusIcon(status), name, title, actions, presenter);
+    }
+
+    public void removePresenceBuddy(final String name) {
+        usersStack.removeStackSubItem(MYBUDDIES, name);
     }
 
     private void createLayout() {
@@ -420,9 +443,14 @@ public class MultiRoomPanel implements MultiRoomView, View {
                 setFitToFrame(true);
             }
         });
-        usersDeckPanel = new DeckPanel();
-        usersDeckPanel.addStyleName("kune-MultiRoomPanel-User");
-        eastPanel.add(usersDeckPanel);
+        usersStack = new IndexedStackPanelWithSubItems();
+        usersStack.setStyleName("kune-StackedDropDownPanel");
+        roomUsersDeckPanel = new DeckPanel();
+        roomUsersDeckPanel.addStyleName("kune-MultiRoomPanel-User");
+        usersStack.addStackItem(MYBUDDIES, Kune.I18N.t("Presence of my buddies"), true);
+        usersStack.add(roomUsersDeckPanel, Kune.I18N.t("Now in this room"));
+        eastPanel.add(usersStack);
+        usersStack.setWidth("100%");
         return eastPanel;
     }
 
@@ -491,12 +519,10 @@ public class MultiRoomPanel implements MultiRoomView, View {
         statusMenu = new Menu("xmmp-presence-menu", new MenuConfig() {
             {
                 setShadow(true);
-                setMinWidth(10);
             }
         });
 
-        // i18n:
-        statusMenu.addItem(new TextItem("<b class=\"menu-title\">Change your status</b>"));
+        statusMenu.addItem(new TextItem("<b class=\"menu-title\">" + Kune.I18N.t("Change your status") + "</b>"));
 
         onlineMenuItem = createStatusCheckItem(STATUS_ONLINE);
         offlineMenuItem = createStatusCheckItem(STATUS_OFFLINE);
@@ -510,9 +536,8 @@ public class MultiRoomPanel implements MultiRoomView, View {
 
         statusButton = new ToolbarMenuButton("chat-menu-button", "Set status", statusMenu, new SplitButtonConfig() {
             {
-                setTooltip("Set status");
+                setTooltip(Kune.I18N.t("Set status"));
                 setMenu(statusMenu);
-                // setCls("x-btn-icon");
             }
         });
 
@@ -528,23 +553,50 @@ public class MultiRoomPanel implements MultiRoomView, View {
 
         topToolbar.addSeparator();
 
+        inviteUserToRoom = new ToolbarButton(new ButtonConfig() {
+            {
+                // i18n
+                setIcon("images/group_add.png");
+                setCls("x-btn-icon");
+                setTooltip("Invite user to this chat room");
+            }
+        });
         ToolbarButton buddyAdd = new ToolbarButton(new ButtonConfig() {
             {
                 setIcon("images/user_add.png");
-                // setCls("x-btn-icon");
-                setTooltip("Add buddy");
+                setCls("x-btn-icon");
+                setTooltip("Add a new buddy");
             }
         });
 
-        // buddyAdd.setText(icons.userAdd().getHTML());
+        final EntityLiveSearchListener inviteUserToRoomListener = new EntityLiveSearchListener() {
+            public void onSelection(String shortName, String longName) {
+                presenter.inviteUserToRoom(shortName, longName);
+            }
+        };
+
+        final EntityLiveSearchListener addBuddyListener = new EntityLiveSearchListener() {
+            public void onSelection(String shortName, String longName) {
+                presenter.addBuddy(shortName, longName);
+            }
+        };
 
         buddyAdd.addButtonListener(new ButtonListenerAdapter() {
             public void onClick(final Button button, final EventObject e) {
-                // TODO Auto-generated method stub
+                DefaultDispatcher.getInstance().fire(WorkspaceEvents.ADD_USERLIVESEARCH, addBuddyListener, null);
+            }
+        });
+
+        inviteUserToRoom.addButtonListener(new ButtonListenerAdapter() {
+            public void onClick(final Button button, final EventObject e) {
+                DefaultDispatcher.getInstance()
+                        .fire(WorkspaceEvents.ADD_USERLIVESEARCH, inviteUserToRoomListener, null);
             }
         });
 
         topToolbar.addButton(buddyAdd);
+
+        topToolbar.addButton(inviteUserToRoom);
 
         return topToolbar;
     }
@@ -687,25 +739,32 @@ public class MultiRoomPanel implements MultiRoomView, View {
     }
 
     private String getStatusText(final int status) {
-        String icon = "<span style=\'vertical-align: middle\'>" + getStatusIcon(status).getHTML();
-        // i18n
+        String textLabel;
+
         switch (status) {
         case STATUS_ONLINE:
-            return icon + "&nbsp;" + "online" + "</span>";
+            textLabel = Kune.I18N.t("online");
+            break;
         case STATUS_OFFLINE:
-            return icon + "&nbsp;" + "offline" + "</span>";
+            textLabel = Kune.I18N.t("offline");
+            break;
         case STATUS_BUSY:
-            return icon + "&nbsp;" + "busy" + "</span>";
+            textLabel = Kune.I18N.t("busy");
+            break;
         case STATUS_INVISIBLE:
-            return icon + "&nbsp;" + "invisible" + "</span>";
+            textLabel = Kune.I18N.t("invisible");
+            break;
         case STATUS_XA:
-            return icon + "&nbsp;" + "extended away" + "</span>";
+            textLabel = Kune.I18N.t("extended away");
+            break;
         case STATUS_AWAY:
-            return icon + "&nbsp;" + "away" + "</span>";
+            textLabel = Kune.I18N.t("away");
+            break;
         default:
             throw new IndexOutOfBoundsException("Xmpp status unknown");
-
         }
+
+        return getStatusIcon(status).getHTML() + textLabel;
     }
 
 }

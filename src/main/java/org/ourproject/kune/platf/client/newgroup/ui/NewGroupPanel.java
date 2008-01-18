@@ -76,7 +76,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
     private final SiteMessagePanel messagesPanel;
 
     public NewGroupPanel(final NewGroupPresenter presenter) {
-        super(Kune.I18N.t("Register a new Group"), true, false, 470, 440, new WizardListener() {
+        super(Kune.I18N.t("Register a new Group"), true, false, 470, 450, new WizardListener() {
             public void onBack() {
                 presenter.onBack();
             }

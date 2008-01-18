@@ -19,43 +19,8 @@
 
 package org.ourproject.kune.workspace.client.socialnet;
 
-import org.ourproject.kune.platf.client.AbstractPresenter;
-import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.workspace.client.workspace.GroupLiveSearchComponent;
 
-public class GroupLiveSearchPresenter extends AbstractPresenter implements GroupLiveSearchComponent {
-
-    private GroupLiveSearchView view;
-    private GroupLiveSearchListener listener;
-
-    public void init(final GroupLiveSearchView view) {
-        this.view = view;
-    }
-
-    public View getView() {
-        return view;
-    }
-
-    public void addListener(final GroupLiveSearchListener listener) {
-        this.listener = listener;
-    }
-
-    public void reset() {
-        this.listener = null;
-        view.reset();
-    }
-
-    public void show() {
-        view.show();
-    }
-
-    public void hide() {
-        view.hide();
-    }
-
-    public void fireListener(final String groupShortName, final String groupLongName) {
-        listener.onSelection(groupShortName, groupLongName);
-        hide();
-    }
+public class GroupLiveSearchPresenter extends EntityLiveSearchPresenter implements GroupLiveSearchComponent {
 
 }

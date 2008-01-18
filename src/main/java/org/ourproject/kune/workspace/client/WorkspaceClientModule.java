@@ -22,6 +22,8 @@ package org.ourproject.kune.workspace.client;
 
 import org.ourproject.kune.platf.client.extend.ClientModule;
 import org.ourproject.kune.platf.client.extend.Register;
+import org.ourproject.kune.workspace.client.actions.AddGroupLiveSearchAction;
+import org.ourproject.kune.workspace.client.actions.AddUserLiveSearchAction;
 import org.ourproject.kune.workspace.client.actions.AttachToExtensionPointAction;
 import org.ourproject.kune.workspace.client.actions.ChangeGroupWsThemeAction;
 import org.ourproject.kune.workspace.client.actions.ClearExtensionPointAction;
@@ -51,7 +53,6 @@ import org.ourproject.kune.workspace.client.actions.i18n.ShowTranslatorAction;
 import org.ourproject.kune.workspace.client.actions.sn.AcceptJoinGroupAction;
 import org.ourproject.kune.workspace.client.actions.sn.AddAdminAction;
 import org.ourproject.kune.workspace.client.actions.sn.AddCollabAction;
-import org.ourproject.kune.workspace.client.actions.sn.AddMemberGroupLiveSearchAction;
 import org.ourproject.kune.workspace.client.actions.sn.AddViewerAction;
 import org.ourproject.kune.workspace.client.actions.sn.DeleteMemberAction;
 import org.ourproject.kune.workspace.client.actions.sn.DenyJoinGroupAction;
@@ -88,7 +89,8 @@ public class WorkspaceClientModule implements ClientModule {
         register.addAction(WorkspaceEvents.DETACH_FROM_EXT_POINT, new DetachFromExtensionPointAction());
         register.addAction(WorkspaceEvents.CLEAR_EXT_POINT, new ClearExtensionPointAction());
         register.addAction(WorkspaceEvents.GET_TRANSLATION, new GetTranslationAction());
-        register.addAction(WorkspaceEvents.ADD_MEMBER_GROUPLIVESEARCH, new AddMemberGroupLiveSearchAction());
+        register.addAction(WorkspaceEvents.ADD_MEMBER_GROUPLIVESEARCH, new AddGroupLiveSearchAction());
+        register.addAction(WorkspaceEvents.ADD_USERLIVESEARCH, new AddUserLiveSearchAction());
         register.addAction(WorkspaceEvents.SHOW_TRANSLATOR, new ShowTranslatorAction());
         register.addAction(WorkspaceEvents.SHOW_SEARCHER, new ShowSearcherAction());
         register.addAction(WorkspaceEvents.DO_TRANSLATION, new DoTranslationAction());

@@ -38,37 +38,37 @@ class ChatEngineXmpp implements ChatEngine {
     private final XmppConnection connection;
 
     public ChatEngineXmpp(final ChatState state) {
-	this.state = state;
-	XmppFactory factory = JsJacFactory.getInstance();
-	connection = factory.createBindingConnection(state.httpBase, 2000);
-	Debugger.debug(connection, new FirebugLoggerOutput());
+        this.state = state;
+        XmppFactory factory = JsJacFactory.getInstance();
+        connection = factory.createBindingConnection(state.httpBase, 2000);
+        Debugger.debug(connection, new FirebugLoggerOutput());
     }
 
     public ChatState getState() {
-	return state;
+        return state;
     }
 
     public void login(final String chatName, final String chatPassword) {
-	FireLog.debug("LOGIN CHAT: " + chatName + "[" + chatPassword + "]");
-	state.user = new XmppUserSettings(state.domain, chatName, chatPassword, XmppUserSettings.NON_SASL);
-	state.user.resource = "kuneClient" + new Date().getTime();
-	session = new XmppSession(connection, true);
-	session.login(state.user);
-	// FIXME: hardcoded
-	session.getUser().sendPresence(PresenceShow.CHAT, ":: ready ::");
+        FireLog.debug("LOGIN CHAT: " + chatName + "[" + chatPassword + "]");
+        state.user = new XmppUserSettings(state.domain, chatName, chatPassword, XmppUserSettings.NON_SASL);
+        state.user.resource = "kuneClient" + new Date().getTime();
+        session = new XmppSession(connection, true);
+        session.login(state.user);
+        // FIXME: hardcoded
+        session.getUser().sendPresence(PresenceShow.CHAT, ":: ready ::");
     }
 
     public void logout() {
-	// FIXME: bug
-	// this$static has no properties
-	// [Break on this error] if (this$static.session !== null) {
-	if (session != null) {
-	    session.logout();
-	}
+        // FIXME: bug
+        // this$static has no properties
+        // [Break on this error] if (this$static.session !== null) {
+        if (session != null) {
+            session.logout();
+        }
     }
 
     public XmppRoom joinRoom(final String roomName, final String userAlias) {
-	return session.joinRoom(state.roomHost, roomName, userAlias);
+        return session.joinRoom(state.roomHost, roomName, userAlias);
     }
 
 }

@@ -22,12 +22,13 @@ package org.ourproject.kune.chat.client.rooms;
 
 import org.ourproject.kune.chat.client.ChatFactory;
 import org.ourproject.kune.chat.client.rooms.RoomUser.UserType;
+import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.WorkspaceUIExtensionPoint;
 
-public class MultiRoomPresenter implements MultiRoom, RoomListener {
+public class MultiRoomPresenter extends AbstractPresenter implements MultiRoom, RoomListener {
     private MultiRoomView view;
     private Room currentRoom;
     private final MultiRoomListener listener;
@@ -40,6 +41,10 @@ public class MultiRoomPresenter implements MultiRoom, RoomListener {
     public void init(final MultiRoomView view) {
         this.view = view;
         closeAllConfirmed = false;
+
+        // only for tests
+        view.addPresenceBuddy("fulano", "I'm out for dinner", MultiRoomView.STATUS_AWAY);
+        view.addPresenceBuddy("mengano", "Working", MultiRoomView.STATUS_BUSY);
     }
 
     public Room createRoom(final String roomName, final String userAlias, final UserType type) {
@@ -128,6 +133,14 @@ public class MultiRoomPresenter implements MultiRoom, RoomListener {
         default:
             break;
         }
+    }
+
+    public void addBuddy(final String shortName, final String longName) {
+        // TODO Auto-generated method stub
+    }
+
+    public void inviteUserToRoom(final String shortName, final String longName) {
+        // TODO Auto-generated method stub
     }
 
 }

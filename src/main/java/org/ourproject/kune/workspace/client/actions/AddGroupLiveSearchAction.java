@@ -17,23 +17,23 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.actions.sn;
+package org.ourproject.kune.workspace.client.actions;
 
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
-import org.ourproject.kune.workspace.client.socialnet.GroupLiveSearchListener;
+import org.ourproject.kune.workspace.client.socialnet.EntityLiveSearchListener;
 import org.ourproject.kune.workspace.client.workspace.GroupLiveSearchComponent;
 
-public class AddMemberGroupLiveSearchAction implements Action {
+public class AddGroupLiveSearchAction implements Action {
 
     public void execute(final Object value, final Object extra, final Services services) {
-        onAddMemberGroupLiveSearchAction(services, (GroupLiveSearchListener) value);
+        onAddMemberGroupLiveSearchAction(services, (EntityLiveSearchListener) value);
     }
 
-    private void onAddMemberGroupLiveSearchAction(final Services services, final GroupLiveSearchListener presenter) {
+    private void onAddMemberGroupLiveSearchAction(final Services services, final EntityLiveSearchListener listener) {
         GroupLiveSearchComponent groupLiveSearchComponent = services.app.getWorkspace().getGroupLiveSearchComponent();
         groupLiveSearchComponent.reset();
-        groupLiveSearchComponent.addListener(presenter);
+        groupLiveSearchComponent.addListener(listener);
         groupLiveSearchComponent.show();
     }
 }

@@ -4518,5 +4518,21 @@
            sodipodi:role="line"
            id="tspan2687">NT</tspan></text>
     </g>
+    <image
+       y="189.6981"
+       x="332.64905"
+       id="image2770"
+       height="16"
+       width="16"
+       sodipodi:absref="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/add.png"
+       xlink:href="icons/add.png" />
+    <image
+       y="165.33966"
+       x="308.50156"
+       id="image2828"
+       height="16"
+       width="16"
+       sodipodi:absref="/usr/share/icons/Tango/16x16/actions/contact-new.png"
+       xlink:href="/usr/share/icons/Tango/16x16/actions/contact-new.png" />
   </g>
 </svg>

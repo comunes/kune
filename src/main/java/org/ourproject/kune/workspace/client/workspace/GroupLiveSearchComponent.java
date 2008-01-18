@@ -19,15 +19,6 @@
 
 package org.ourproject.kune.workspace.client.workspace;
 
-import org.ourproject.kune.platf.client.Component;
-import org.ourproject.kune.workspace.client.socialnet.GroupLiveSearchListener;
-
-public interface GroupLiveSearchComponent extends Component {
-
-    void addListener(GroupLiveSearchListener presenter);
-
-    void reset();
-
-    void show();
+public interface GroupLiveSearchComponent extends EntityLiveSearchComponent {
 
 }

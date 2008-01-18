@@ -36,6 +36,7 @@ public class WorkspaceUIComponents {
     private ContentToolBarComponent contentToolBar;
     private GroupLiveSearchComponent groupLiveSearch;
     private I18nTranslatorComponent i18nTranslatorSearch;
+    private UserLiveSearchComponent userLiveSearch;
 
     public WorkspaceUIComponents(final WorkspacePresenter presenter) {
     }
@@ -115,6 +116,13 @@ public class WorkspaceUIComponents {
             groupLiveSearch = WorkspaceFactory.createGroupLiveSearchComponent();
         }
         return groupLiveSearch;
+    }
+
+    public UserLiveSearchComponent getUserLiveSearchComponent() {
+        if (userLiveSearch == null) {
+            userLiveSearch = WorkspaceFactory.createUserLiveSearchComponent();
+        }
+        return userLiveSearch;
     }
 
     public I18nTranslatorComponent getI18nTranslatorComponent() {

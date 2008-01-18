@@ -34,7 +34,7 @@ import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 import org.ourproject.kune.workspace.client.workspace.GroupMembersComponent;
 
-public class GroupMembersPresenter extends AbstractPresenter implements GroupMembersComponent, GroupLiveSearchListener {
+public class GroupMembersPresenter extends AbstractPresenter implements GroupMembersComponent, EntityLiveSearchListener {
 
     private static final String ADMIN_CATEGORY = Kune.I18N.t("Admins");
     private static final String COLLAB_CATEGORY = Kune.I18N.t("Collaborators");

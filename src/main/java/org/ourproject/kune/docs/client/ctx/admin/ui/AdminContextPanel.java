@@ -111,8 +111,10 @@ public class AdminContextPanel extends VerticalPanel implements AdminContextView
                 }
             });
         } else {
+            if (options.containsItem(AUTHORS_ITEM)) {
+                options.removeStackItem(AUTHORS_ITEM);
+            }
             authorsComponent.clear();
-            options.removeStackItem(AUTHORS_ITEM);
         }
         if (!options.containsItem(AUTHORS_ITEM)) {
             addComponent(AUTHORS_ITEM, Kune.I18N.t("Authors of this work"), authorsComponent);

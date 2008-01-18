@@ -51,7 +51,7 @@ public class KuneUiUtils {
             DOM.removeElementAttribute(element, "ext:qtip");
         } else {
             // check size here?
-            String newTip = "<div style='min-width: 75px'>" + tip + "</div>";
+            String newTip = "<div style='min-width: 35px'>" + tip + "</div>";
             DOM.setElementAttribute(element, "ext:qtip", newTip);
         }
     }

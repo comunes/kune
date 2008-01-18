@@ -133,6 +133,10 @@ public class WorkspacePresenter implements Workspace {
         return components.getGroupLiveSearchComponent();
     }
 
+    public UserLiveSearchComponent getUserLiveSearchComponent() {
+        return components.getUserLiveSearchComponent();
+    }
+
     public I18nTranslatorComponent getI18nTranslatorComponent() {
         return components.getI18nTranslatorComponent();
     }

@@ -17,15 +17,21 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.socialnet.ui;
+package org.ourproject.kune.workspace.client.socialnet;
 
-import org.ourproject.kune.platf.client.AbstractPresenter;
-import org.ourproject.kune.workspace.client.socialnet.EntityLiveSearchView;
+import org.ourproject.kune.platf.client.View;
 
-public class GroupLiveSearchPanel extends EntityLiveSearchPanel {
+public interface EntityLiveSearchView extends View {
 
-    public GroupLiveSearchPanel(final AbstractPresenter presenter) {
-        super(presenter, EntityLiveSearchView.SEARCH_GROUPS);
-    }
+    final public static int SEARCH_GROUPS = 1;
+    final public static int SEARCH_USERS = 2;
+
+    void reset();
+
+    void show();
+
+    void hide();
+
+    void center();
 
 }

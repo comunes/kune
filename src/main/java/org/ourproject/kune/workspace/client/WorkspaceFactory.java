@@ -42,14 +42,16 @@ import org.ourproject.kune.workspace.client.license.LicenseView;
 import org.ourproject.kune.workspace.client.license.ui.LicensePanel;
 import org.ourproject.kune.workspace.client.presence.ui.GroupSummaryPanel;
 import org.ourproject.kune.workspace.client.socialnet.GroupLiveSearchPresenter;
-import org.ourproject.kune.workspace.client.socialnet.GroupLiveSearchView;
+import org.ourproject.kune.workspace.client.socialnet.EntityLiveSearchView;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersPresenter;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersView;
 import org.ourproject.kune.workspace.client.socialnet.ParticipationPresenter;
 import org.ourproject.kune.workspace.client.socialnet.ParticipationView;
+import org.ourproject.kune.workspace.client.socialnet.UserLiveSearchPresenter;
 import org.ourproject.kune.workspace.client.socialnet.ui.GroupLiveSearchPanel;
 import org.ourproject.kune.workspace.client.socialnet.ui.GroupMembersPanel;
 import org.ourproject.kune.workspace.client.socialnet.ui.ParticipationPanel;
+import org.ourproject.kune.workspace.client.socialnet.ui.UserLiveSearchPanel;
 import org.ourproject.kune.workspace.client.summary.GroupSummaryPresenter;
 import org.ourproject.kune.workspace.client.summary.GroupSummaryView;
 import org.ourproject.kune.workspace.client.tags.TagsPresenter;
@@ -79,6 +81,7 @@ import org.ourproject.kune.workspace.client.workspace.GroupSummaryComponent;
 import org.ourproject.kune.workspace.client.workspace.ParticipationComponent;
 import org.ourproject.kune.workspace.client.workspace.TagsComponent;
 import org.ourproject.kune.workspace.client.workspace.ThemeMenuComponent;
+import org.ourproject.kune.workspace.client.workspace.UserLiveSearchComponent;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 import org.ourproject.kune.workspace.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.workspace.client.workspace.WorkspaceView;
@@ -191,7 +194,14 @@ public class WorkspaceFactory {
 
     public static GroupLiveSearchComponent createGroupLiveSearchComponent() {
         GroupLiveSearchPresenter presenter = new GroupLiveSearchPresenter();
-        GroupLiveSearchView view = new GroupLiveSearchPanel(presenter);
+        EntityLiveSearchView view = new GroupLiveSearchPanel(presenter);
+        presenter.init(view);
+        return presenter;
+    }
+
+    public static UserLiveSearchComponent createUserLiveSearchComponent() {
+        UserLiveSearchPresenter presenter = new UserLiveSearchPresenter();
+        EntityLiveSearchView view = new UserLiveSearchPanel(presenter);
         presenter.init(view);
         return presenter;
     }

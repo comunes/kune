@@ -56,4 +56,8 @@ public interface MultiRoomView {
 
     void setStatus(int statusOnline);
 
+    void addPresenceBuddy(String buddyName, String title, int status);
+
+    void removePresenceBuddy(String buddyName);
+
 }

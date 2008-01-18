@@ -309,6 +309,12 @@ legend {
   vertical-align: middle;
 }
 
+/* Used in multi chat panel status change */
+.x-menu-item img {
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
 /* Margins */
 
 .kune-Margin-40-trbl {

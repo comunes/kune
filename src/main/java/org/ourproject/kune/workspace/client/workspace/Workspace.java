@@ -63,6 +63,8 @@ public interface Workspace extends Component {
 
     public GroupLiveSearchComponent getGroupLiveSearchComponent();
 
+    public UserLiveSearchComponent getUserLiveSearchComponent();
+
     public TagsComponent getTagsComponent();
 
     public void setTheme(String theme);

@@ -46,6 +46,7 @@ public interface WorkspaceEvents {
     public static final String DETACH_FROM_EXT_POINT = "ws.DetachToExtensionPoint";
     public static final String CLEAR_EXT_POINT = "ws.ClearExtensionPoint";
     public static final String ADD_MEMBER_GROUPLIVESEARCH = "ws.AddMemberGroupLiveSearch";
+    public static final String ADD_USERLIVESEARCH = "ws.AddUserLiveSearch";
     public static final String GET_LEXICON = "i18n.getLexicon";
     public static final String SHOW_TRANSLATOR = "i18n.ShowTranslator";
     public static final String SHOW_SEARCHER = "ws.ShowSearcher";
