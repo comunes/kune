@@ -49,6 +49,8 @@ public class AddRoomAction implements Action {
                         Site.hideProgress();
                         StateDTO state = (StateDTO) result;
                         services.stateManager.setRetrievedState(state);
+                        // FIXME: Isn't using cache (same in Add folder)
+                        services.stateManager.reloadContextAndTitles();
                     }
                 });
     }

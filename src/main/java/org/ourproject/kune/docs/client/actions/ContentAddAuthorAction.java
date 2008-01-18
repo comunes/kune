@@ -25,22 +25,24 @@ import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.sitebar.client.Site;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public class ContentAddAuthorAction implements Action {
 
     public void execute(final Object value, final Object extra, final Services services) {
-        onContentAddAuthor(services, (String) value, (String) extra);
+        onContentAddAuthor(services, (String) value);
     }
 
-    private void onContentAddAuthor(final Services services, final String documentId, final String authorShortName) {
+    private void onContentAddAuthor(final Services services, final String authorShortName) {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
-        server.addAuthor(services.session.getUserHash(), services.session.getCurrentState().getGroup().getShortName(),
-                documentId, authorShortName, new AsyncCallbackSimple() {
-                    public void onSuccess(final Object result) {
-                        Site.hideProgress();
-                        services.stateManager.reload();
-                    }
-                });
+        StateDTO currentState = services.session.getCurrentState();
+        server.addAuthor(services.session.getUserHash(), currentState.getGroup().getShortName(), currentState
+                .getDocumentId(), authorShortName, new AsyncCallbackSimple() {
+            public void onSuccess(final Object result) {
+                Site.hideProgress();
+                services.stateManager.reload();
+            }
+        });
     }
 }

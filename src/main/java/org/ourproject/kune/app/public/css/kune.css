@@ -99,6 +99,10 @@
   margin: 10px;
 }
 
+.kune-valignmiddle {
+  vertical-align: middle;
+}
+
 fieldset {
   border:1px solid #B5B8C8;
   /* margin-bottom:10px; */

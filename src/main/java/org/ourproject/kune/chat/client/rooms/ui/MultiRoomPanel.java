@@ -37,6 +37,7 @@ import to.tipit.gwtlib.FireLog;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -69,9 +70,12 @@ import com.gwtext.client.widgets.menu.CheckItem;
 import com.gwtext.client.widgets.menu.CheckItemConfig;
 import com.gwtext.client.widgets.menu.Menu;
 import com.gwtext.client.widgets.menu.MenuConfig;
+import com.gwtext.client.widgets.menu.TextItem;
 import com.gwtext.client.widgets.menu.event.CheckItemListenerAdapter;
 
 public class MultiRoomPanel implements MultiRoomView, View {
+    private static final XmppIcons icons = XmppIcons.App.getInstance();
+
     protected static final String INPUT_FIELD = "input-area";
     private LayoutDialog dialog;
     private Button sendBtn;
@@ -86,6 +90,18 @@ public class MultiRoomPanel implements MultiRoomView, View {
     private EmoticonPalettePanel emoticonPalettePanel;
     private PopupPanel emoticonPopup;
     private BottomTrayIcon bottomIcon;
+
+    private Menu statusMenu;
+
+    private CheckItem onlineMenuItem;
+
+    private CheckItem offlineMenuItem;
+
+    private CheckItem busyMenuItem;
+
+    private CheckItem awayMenuItem;
+
+    private ToolbarMenuButton statusButton;
 
     public MultiRoomPanel(final MultiRoomPresenter presenter) {
         this.presenter = presenter;
@@ -234,7 +250,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
             {
                 setSplit(true);
                 setHideWhenEmpty(false);
-                setInitialSize(70);
+                setInitialSize(75);
             }
         };
 
@@ -242,7 +258,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
             {
                 setModal(false);
                 setWidth(600);
-                setHeight(410);
+                setHeight(415);
                 setShadow(true);
                 setMinHeight(300);
                 setMinHeight(300);
@@ -446,52 +462,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
             }
         });
 
-        /* Top toolbar */
-
-        final Toolbar topToolbar = new Toolbar("chat-topbar");
-
-        Menu menu = new Menu("xmmp-presence-menu", new MenuConfig() {
-            {
-                setShadow(true);
-                setMinWidth(10);
-            }
-        });
-
-        menu.addItem(new CheckItem(new CheckItemConfig() {
-            {
-                setText("online");
-                setChecked(true);
-                setCheckItemListener(new CheckItemListenerAdapter() {
-                    public void onCheckChange(final CheckItem item, final boolean checked) {
-                        // presenter.something();
-                    }
-                });
-            }
-        }));
-
-        CheckItem offlineCheckItem = new CheckItem(new CheckItemConfig() {
-            {
-                setText("offline");
-                setChecked(true);
-                setCheckItemListener(new CheckItemListenerAdapter() {
-                    public void onCheckChange(final CheckItem item, final boolean checked) {
-                        // presenter.something();
-                    }
-                });
-            }
-        });
-
-        menu.addItem(offlineCheckItem);
-
-        ToolbarMenuButton menuButton = new ToolbarMenuButton("foos-mb", "Set status", menu, new SplitButtonConfig() {
-            {
-                setTooltip("Change your current status");
-                setArrowTooltip("Change your current status");
-                setCls("x-btn-text-icon bmenu");
-            }
-        });
-
-        topToolbar.addButton(menuButton);
+        final Toolbar topToolbar = createTopToolbar();
 
         subjectForm.add(subject);
 
@@ -511,6 +482,85 @@ public class MultiRoomPanel implements MultiRoomView, View {
         northPanel.addStyleName("kune-MultiRoomPanel-Subject");
 
         return northPanel;
+    }
+
+    private Toolbar createTopToolbar() {
+
+        final Toolbar topToolbar = new Toolbar("chat-topbar");
+
+        statusMenu = new Menu("xmmp-presence-menu", new MenuConfig() {
+            {
+                setShadow(true);
+                setMinWidth(10);
+            }
+        });
+
+        // i18n:
+        statusMenu.addItem(new TextItem("<b class=\"menu-title\">Change your status</b>"));
+
+        onlineMenuItem = createStatusCheckItem(STATUS_ONLINE);
+        offlineMenuItem = createStatusCheckItem(STATUS_OFFLINE);
+        busyMenuItem = createStatusCheckItem(STATUS_BUSY);
+        awayMenuItem = createStatusCheckItem(STATUS_AWAY);
+
+        statusMenu.addItem(onlineMenuItem);
+        statusMenu.addItem(offlineMenuItem);
+        statusMenu.addItem(busyMenuItem);
+        statusMenu.addItem(awayMenuItem);
+
+        statusButton = new ToolbarMenuButton("chat-menu-button", "Set status", statusMenu, new SplitButtonConfig() {
+            {
+                setTooltip("Set status");
+                setMenu(statusMenu);
+                // setCls("x-btn-icon");
+            }
+        });
+
+        setStatus(STATUS_ONLINE);
+
+        topToolbar.addButton(statusButton);
+
+        statusButton.addButtonListener(new ButtonListenerAdapter() {
+            public void onClick(final Button button, final EventObject e) {
+                statusMenu.show("chat-menu-button");
+            }
+        });
+
+        topToolbar.addSeparator();
+
+        ToolbarButton buddyAdd = new ToolbarButton(new ButtonConfig() {
+            {
+                setIcon("images/user_add.png");
+                // setCls("x-btn-icon");
+                setTooltip("Add buddy");
+            }
+        });
+
+        buddyAdd.setText(icons.userAdd().getHTML());
+
+        buddyAdd.addButtonListener(new ButtonListenerAdapter() {
+            public void onClick(final Button button, final EventObject e) {
+                // TODO Auto-generated method stub
+            }
+        });
+
+        topToolbar.addButton(buddyAdd);
+
+        return topToolbar;
+    }
+
+    private CheckItem createStatusCheckItem(final int status) {
+        return new CheckItem(new CheckItemConfig() {
+            {
+                setText(getStatusText(status));
+                setGroup("chatstatus");
+                setCheckItemListener(new CheckItemListenerAdapter() {
+                    public void onCheckChange(final CheckItem item, final boolean checked) {
+                        presenter.onStatusSelected(status);
+                    }
+                });
+            }
+        });
     }
 
     private ContentPanel createInputPanel() {
@@ -561,7 +611,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
         ToolbarButton emoticonIcon = new ToolbarButton(new ButtonConfig() {
             {
                 setIcon("images/smile.png");
-                setCls("x-btn-icon");
+                setCls("x-btn-icon x-btn-focus");
                 setTooltip(Kune.I18N.t("Insert a emoticon"));
 
             }
@@ -574,6 +624,8 @@ public class MultiRoomPanel implements MultiRoomView, View {
         });
 
         inputToolbar.addButton(emoticonIcon);
+
+        inputToolbar.addSeparator();
 
         ContentPanel southPanel = new ContentPanel(inputForm, "", new ContentPanelConfig() {
             {
@@ -605,6 +657,55 @@ public class MultiRoomPanel implements MultiRoomView, View {
         emoticonPopup.setPopupPosition(x + 2, y - 160);
         emoticonPopup.setWidget(emoticonPalettePanel);
         emoticonPopup.setVisible(true);
+    }
+
+    private AbstractImagePrototype getStatusIcon(final int status) {
+        switch (status) {
+        case STATUS_ONLINE:
+            return icons.online();
+        case STATUS_OFFLINE:
+            return icons.offline();
+        case STATUS_BUSY:
+            return icons.busy();
+        case STATUS_INVISIBLE:
+            return icons.invisible();
+        case STATUS_XA:
+            return icons.extendedAway();
+        case STATUS_AWAY:
+            return icons.away();
+        case STATUS_MESSAGE:
+            return icons.message();
+        default:
+            throw new IndexOutOfBoundsException("Xmpp status unknown");
+
+        }
+    }
+
+    public void setStatus(final int status) {
+        String icon = getStatusIcon(status).getHTML();
+        statusButton.setText(icon);
+    }
+
+    private String getStatusText(final int status) {
+        String icon = "<span style=\'vertical-align: middle\'>" + getStatusIcon(status).getHTML();
+        // i18n
+        switch (status) {
+        case STATUS_ONLINE:
+            return icon + "&nbsp;" + "online" + "</span>";
+        case STATUS_OFFLINE:
+            return icon + "&nbsp;" + "offline" + "</span>";
+        case STATUS_BUSY:
+            return icon + "&nbsp;" + "busy" + "</span>";
+        case STATUS_INVISIBLE:
+            return icon + "&nbsp;" + "invisible" + "</span>";
+        case STATUS_XA:
+            return icon + "&nbsp;" + "extended away" + "</span>";
+        case STATUS_AWAY:
+            return icon + "&nbsp;" + "away" + "</span>";
+        default:
+            throw new IndexOutOfBoundsException("Xmpp status unknown");
+
+        }
     }
 
 }

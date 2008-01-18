@@ -112,12 +112,11 @@ public class AdminContextPanel extends VerticalPanel implements AdminContextView
             });
         } else {
             authorsComponent.clear();
-            options.getItem(AUTHORS_ITEM).clear();
+            options.removeStackItem(AUTHORS_ITEM);
         }
         if (!options.containsItem(AUTHORS_ITEM)) {
             addComponent(AUTHORS_ITEM, Kune.I18N.t("Authors of this work"), authorsComponent);
         }
-        options.getItem(AUTHORS_ITEM).clear();
         for (Iterator iterator = authors.iterator(); iterator.hasNext();) {
             UserSimpleDTO author = (UserSimpleDTO) iterator.next();
             StackSubItemAction[] authorActions = { new StackSubItemAction(IMG.del(), Kune.I18N.t("Remove author"),

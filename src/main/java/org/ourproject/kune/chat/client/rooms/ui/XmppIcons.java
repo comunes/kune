@@ -26,14 +26,14 @@ import com.google.gwt.user.client.ui.ImageBundle;
 public interface XmppIcons extends ImageBundle {
 
     public static class App {
-	private static XmppIcons ourInstance = null;
+        private static XmppIcons ourInstance = null;
 
-	public static synchronized XmppIcons getInstance() {
-	    if (ourInstance == null) {
-		ourInstance = (XmppIcons) GWT.create(XmppIcons.class);
-	    }
-	    return ourInstance;
-	}
+        public static synchronized XmppIcons getInstance() {
+            if (ourInstance == null) {
+                ourInstance = (XmppIcons) GWT.create(XmppIcons.class);
+            }
+            return ourInstance;
+        }
     }
 
     /**
@@ -70,5 +70,10 @@ public interface XmppIcons extends ImageBundle {
      * @gwt.resource online.png
      */
     AbstractImagePrototype online();
+
+    /**
+     * @gwt.resource user_add.png
+     */
+    AbstractImagePrototype userAdd();
 
 }

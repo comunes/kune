@@ -118,4 +118,16 @@ public class MultiRoomPresenter implements MultiRoom, RoomListener {
         view.setSubject(text);
         currentRoom.setSubject(text);
     }
+
+    public void onStatusSelected(final int status) {
+        view.setStatus(status);
+        switch (status) {
+        case MultiRoomView.STATUS_AWAY:
+            // FIXME
+            break;
+        default:
+            break;
+        }
+    }
+
 }
