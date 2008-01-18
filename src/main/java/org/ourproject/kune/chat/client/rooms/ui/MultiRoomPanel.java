@@ -536,7 +536,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
             }
         });
 
-        buddyAdd.setText(icons.userAdd().getHTML());
+        // buddyAdd.setText(icons.userAdd().getHTML());
 
         buddyAdd.addButtonListener(new ButtonListenerAdapter() {
             public void onClick(final Button button, final EventObject e) {
