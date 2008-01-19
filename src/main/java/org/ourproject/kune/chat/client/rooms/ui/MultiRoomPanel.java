@@ -114,6 +114,8 @@ public class MultiRoomPanel implements MultiRoomView, View {
 
     private ToolbarButton inviteUserToRoom;
 
+    private boolean statusManualChanged;
+
     public MultiRoomPanel(final MultiRoomPresenter presenter) {
         this.presenter = presenter;
         this.userListToIndex = new HashMap();
@@ -558,7 +560,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
                 // i18n
                 setIcon("images/group_add.png");
                 setCls("x-btn-icon");
-                setTooltip("Invite user to this chat room");
+                setTooltip("Invite another user to this chat room");
             }
         });
         ToolbarButton buddyAdd = new ToolbarButton(new ButtonConfig() {
@@ -734,6 +736,24 @@ public class MultiRoomPanel implements MultiRoomView, View {
     }
 
     public void setStatus(final int status) {
+        if (!statusManualChanged) {
+            switch (status) {
+            case STATUS_ONLINE:
+                onlineMenuItem.setChecked(true);
+                break;
+            case STATUS_OFFLINE:
+                offlineMenuItem.setChecked(true);
+                break;
+            case STATUS_BUSY:
+                busyMenuItem.setChecked(true);
+                break;
+            case STATUS_AWAY:
+                awayMenuItem.setChecked(true);
+                break;
+            default:
+                break;
+            }
+        }
         String icon = getStatusIcon(status).getHTML();
         statusButton.setText(icon);
     }

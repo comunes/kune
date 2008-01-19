@@ -70,7 +70,7 @@ public class EntityLiveSearchPanel implements EntityLiveSearchView {
         liveSearchPopup.setWidget(searchForm);
         liveSearchPopup.center();
         liveSearchPopup.setVisible(true);
-        DOM.setElementPropertyInt(liveSearchPopup.getElement(), "zIndex", 10000);
+        DOM.setStyleAttribute(liveSearchPopup.getElement(), "zIndex", "10000");
     }
 
     public void hide() {
