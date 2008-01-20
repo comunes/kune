@@ -43,6 +43,7 @@ import com.gwtext.client.data.StringFieldDef;
 import com.gwtext.client.util.Format;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.ButtonConfig;
+import com.gwtext.client.widgets.DialogManager;
 import com.gwtext.client.widgets.LayoutDialog;
 import com.gwtext.client.widgets.LayoutDialogConfig;
 import com.gwtext.client.widgets.LoadMaskConfig;
@@ -69,6 +70,8 @@ import com.gwtext.client.widgets.layout.LayoutRegion;
 import com.gwtext.client.widgets.layout.LayoutRegionConfig;
 
 public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTranslatorView {
+
+    private static final String DIALOG_ID = "i18ntranslator";
 
     private static final String NOTE_FOR_TRANSLATORS_IMAGE_HTML = Images.App.getInstance().noteForTranslators()
             .getHTML();
@@ -99,6 +102,7 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
         dialog.show();
         dialog.expand();
         dialog.center();
+        DialogManager.bringToFront(DIALOG_ID);
         if (bottomIcon == null) {
             bottomIcon = new BottomTrayIcon(Kune.I18N.t("Show/hide translator"));
             bottomIcon.addMainButton(Images.App.getInstance().language(), new Command() {
@@ -155,6 +159,7 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
 
         final LayoutDialog dialog = new LayoutDialog(new LayoutDialogConfig() {
             {
+                setId(DIALOG_ID);
                 setModal(false);
                 setWidth(720);
                 setHeight(330);

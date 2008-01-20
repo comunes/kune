@@ -154,6 +154,8 @@ public class SiteBarPanel extends Composite implements SiteBarView {
                 gotoPublic();
             }
         });
+        gotoPublic.setTitle(Kune.I18N.t("Leave the workspace and go to the public space of this group")
+                + Site.IN_DEVELOPMENT);
         gotoPublic.addStyleName("kune-SiteBarPanel-LabelLink");
         contentNoPublic.addStyleName("kune-Margin-Medium-r");
         newGroupHyperlink.setText(Kune.I18N.t("Create New Group"));

@@ -37,6 +37,8 @@ public class Site {
 
     public static final String TRANSLATE_TOKEN = "translate";
 
+    public static final String IN_DEVELOPMENT = " (in development)";
+
     public static void info(final String value) {
         siteUserMessage.setMessage(value, SiteMessage.INFO);
     }

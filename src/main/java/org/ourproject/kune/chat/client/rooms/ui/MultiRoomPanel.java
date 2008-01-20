@@ -71,12 +71,13 @@ import com.gwtext.client.widgets.layout.ContentPanelConfig;
 import com.gwtext.client.widgets.layout.LayoutRegion;
 import com.gwtext.client.widgets.layout.LayoutRegionConfig;
 import com.gwtext.client.widgets.layout.event.LayoutRegionListener;
+import com.gwtext.client.widgets.menu.BaseItem;
 import com.gwtext.client.widgets.menu.CheckItem;
 import com.gwtext.client.widgets.menu.CheckItemConfig;
 import com.gwtext.client.widgets.menu.Menu;
 import com.gwtext.client.widgets.menu.MenuConfig;
 import com.gwtext.client.widgets.menu.TextItem;
-import com.gwtext.client.widgets.menu.event.CheckItemListenerAdapter;
+import com.gwtext.client.widgets.menu.event.BaseItemListener;
 
 public class MultiRoomPanel implements MultiRoomView, View {
     private static final String MYBUDDIES = Kune.I18N.t("My buddies");
@@ -113,8 +114,6 @@ public class MultiRoomPanel implements MultiRoomView, View {
     private IndexedStackPanelWithSubItems usersStack;
 
     private ToolbarButton inviteUserToRoom;
-
-    private boolean statusManualChanged;
 
     public MultiRoomPanel(final MultiRoomPresenter presenter) {
         this.presenter = presenter;
@@ -543,6 +542,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
             }
         });
 
+        // FIXME hardcoded
         setStatus(STATUS_ONLINE);
 
         topToolbar.addButton(statusButton);
@@ -557,17 +557,16 @@ public class MultiRoomPanel implements MultiRoomView, View {
 
         inviteUserToRoom = new ToolbarButton(new ButtonConfig() {
             {
-                // i18n
                 setIcon("images/group_add.png");
                 setCls("x-btn-icon");
-                setTooltip("Invite another user to this chat room");
+                setTooltip(Kune.I18N.t("Invite another user to this chat room"));
             }
         });
         ToolbarButton buddyAdd = new ToolbarButton(new ButtonConfig() {
             {
                 setIcon("images/user_add.png");
                 setCls("x-btn-icon");
-                setTooltip("Add a new buddy");
+                setTooltip(Kune.I18N.t("Add a new buddy"));
             }
         });
 
@@ -604,17 +603,25 @@ public class MultiRoomPanel implements MultiRoomView, View {
     }
 
     private CheckItem createStatusCheckItem(final int status) {
-        return new CheckItem(new CheckItemConfig() {
+        CheckItem checkItem = new CheckItem(new CheckItemConfig() {
             {
                 setText(getStatusText(status));
                 setGroup("chatstatus");
-                setCheckItemListener(new CheckItemListenerAdapter() {
-                    public void onCheckChange(final CheckItem item, final boolean checked) {
-                        presenter.onStatusSelected(status);
-                    }
-                });
             }
         });
+
+        checkItem.addBaseItemListener(new BaseItemListener() {
+            public void onActivate(final BaseItem item) {
+            }
+
+            public void onClick(final BaseItem item, final EventObject e) {
+                presenter.onStatusSelected(status);
+            }
+
+            public void onDeactivate(final BaseItem item) {
+            }
+        });
+        return checkItem;
     }
 
     private ContentPanel createInputPanel() {
@@ -736,23 +743,21 @@ public class MultiRoomPanel implements MultiRoomView, View {
     }
 
     public void setStatus(final int status) {
-        if (!statusManualChanged) {
-            switch (status) {
-            case STATUS_ONLINE:
-                onlineMenuItem.setChecked(true);
-                break;
-            case STATUS_OFFLINE:
-                offlineMenuItem.setChecked(true);
-                break;
-            case STATUS_BUSY:
-                busyMenuItem.setChecked(true);
-                break;
-            case STATUS_AWAY:
-                awayMenuItem.setChecked(true);
-                break;
-            default:
-                break;
-            }
+        switch (status) {
+        case STATUS_ONLINE:
+            onlineMenuItem.setChecked(true);
+            break;
+        case STATUS_OFFLINE:
+            offlineMenuItem.setChecked(true);
+            break;
+        case STATUS_BUSY:
+            busyMenuItem.setChecked(true);
+            break;
+        case STATUS_AWAY:
+            awayMenuItem.setChecked(true);
+            break;
+        default:
+            break;
         }
         String icon = getStatusIcon(status).getHTML();
         statusButton.setText(icon);
