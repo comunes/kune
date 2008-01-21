@@ -24,6 +24,7 @@ Now there are problems if client was started before server, and with server rest
 
 MIND-TERM:
 --------------------------------------------------------------------------------
+<danigb> click in new group, reload sn innecessary
 <vjrj> Test:
 http://gwtforge.com/
 <vjrj> for dev, study jetty hot deploy (if scanIntervalSeconds > 0 also reload with client changes ... ). It will be nice to send a signal or something like that. See:
