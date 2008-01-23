@@ -5,12 +5,12 @@ TARGET=target/org.ourproject.kune-0.0.1/org.ourproject.kune.app.Kune
 
 $PWD/scripts/css-compact-and-tidy.css
 
-rsync -aC $TR/$APPPUB/Kune.html $TR/$WEBAPP/Kune.html
-rsync -aC $TR/$APPPUB/js/ $TR/$WEBAPP/js
-rsync -aC $TR/$APPPUB/css/ $TR/$WEBAPP/css
-rsync -aC $TR/$APPPUB/images/ $TR/$WEBAPP/images
+rsync -aC $APPPUB/Kune.html $WEBAPP/Kune.html
+rsync -aC $APPPUB/js/ $WEBAPP/js
+rsync -aC $APPPUB/css/ $WEBAPP/css
+rsync -aC $APPPUB/images/ $WEBAPP/images
 
-rsync -aC $TR/$APPPUB/Kune.html $TR/$TARGET/Kune.html
-rsync -aC $TR/$APPPUB/js/ $TR/$TARGET/js
-rsync -aC $TR/$APPPUB/css/ $TR/$TARGET/css
-rsync -aC $TR/$APPPUB/images/ $TR/$TARGET/images
+rsync -aC $APPPUB/Kune.html $TARGET/Kune.html
+rsync -aC $APPPUB/js/ $TARGET/js
+rsync -aC $APPPUB/css/ $TARGET/css
+rsync -aC $APPPUB/images/ $TARGET/images
