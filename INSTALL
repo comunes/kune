@@ -20,13 +20,13 @@ For development:
 
 - Make two databases in your mysql:
 
-mysql> CREATE DATABASE kune_dev;
-mysql> GRANT ALL PRIVILEGES ON kune_dev.* TO kune@localhost IDENTIFIED BY 'db4kune';
-mysql> FLUSH PRIVILEGES;
+CREATE DATABASE kune_dev;
+GRANT ALL PRIVILEGES ON kune_dev.* TO kune@localhost IDENTIFIED BY 'db4kune';
+FLUSH PRIVILEGES;
 
-mysql> CREATE DATABASE kune_test;
-mysql> GRANT ALL PRIVILEGES ON kune_test.* TO kune@localhost IDENTIFIED BY 'db4kune';
-mysql> FLUSH PRIVILEGES;
+CREATE DATABASE kune_test;
+GRANT ALL PRIVILEGES ON kune_test.* TO kune@localhost IDENTIFIED BY 'db4kune';
+FLUSH PRIVILEGES;
 
 - Configurate hibernate-search (GNU/Linux instructions, look persistence.xml if you want to change indexes destination):
 	# yourUser is the user you are using to develop/run the application
