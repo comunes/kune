@@ -29,6 +29,7 @@ import com.calclab.gwtjsjac.client.XmppConnection;
 import com.calclab.gwtjsjac.client.XmppFactory;
 import com.calclab.gwtjsjac.client.XmppUserSettings;
 import com.calclab.gwtjsjac.client.impl.JsJacFactory;
+import com.calclab.gwtjsjac.client.log.GWTLoggerOutput;
 import com.calclab.gwtjsjac.client.mandioca.XmppSession;
 import com.calclab.gwtjsjac.client.mandioca.rooms.XmppRoom;
 
@@ -40,7 +41,7 @@ class ChatEngineXmpp implements ChatEngine {
     public ChatEngineXmpp(final ChatState state) {
         this.state = state;
         XmppFactory factory = JsJacFactory.getInstance();
-        connection = factory.createBindingConnection(state.httpBase, 2000);
+        connection = factory.createBindingConnection(state.httpBase, 2000, GWTLoggerOutput.instance);
         Debugger.debug(connection, new FirebugLoggerOutput());
     }
 
