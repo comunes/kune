@@ -63,8 +63,8 @@ public class SaveDocument implements Action {
                     }
 
                     public void onSuccess(final Object result) {
+                        // Site.info(Kune.I18N.t("Document Saved"));
                         Site.hideProgress();
-                        Site.info(Kune.I18N.t("Document Saved"));
                         documentContent.onSaved();
                     }
 

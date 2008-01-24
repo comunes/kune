@@ -20,7 +20,6 @@
 
 package org.ourproject.kune.chat.client.cnt;
 
-import java.util.Date;
 import java.util.HashMap;
 
 import org.ourproject.kune.chat.client.ChatClientTool;
@@ -94,7 +93,9 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener, Mult
         MultiRoom rooms = components.getRooms();
         String roomName = state.getFolder().getName();
         // FIXME Moderator?
-        Room room = getRoom(roomName, "me" + new Date().getTime(), RoomUser.MODERADOR);
+        // Room room = getRoom(roomName, "me" + new Date().getTime(),
+        // RoomUser.MODERADOR);
+        Room room = getRoom(roomName, "me", RoomUser.MODERADOR);
         rooms.activateRoom(room);
         rooms.show();
     }
