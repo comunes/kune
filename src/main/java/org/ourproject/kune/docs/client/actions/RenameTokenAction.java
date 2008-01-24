@@ -40,8 +40,8 @@ public class RenameTokenAction implements Action {
         server.rename(services.session.getUserHash(), currentState.getGroup().getShortName(), token, newName,
                 new AsyncCallbackSimple() {
                     public void onSuccess(final Object result) {
-                        Site.hideProgress();
                         services.stateManager.reloadContextAndTitles();
+                        Site.hideProgress();
                     }
                 });
     }
