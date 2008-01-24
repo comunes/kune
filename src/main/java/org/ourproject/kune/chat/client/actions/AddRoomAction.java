@@ -46,11 +46,11 @@ public class AddRoomAction implements Action {
         server.addRoom(services.session.getUserHash(), groupShortName, container.getId(), groupShortName + "-" + name,
                 new AsyncCallbackSimple() {
                     public void onSuccess(final Object result) {
-                        Site.hideProgress();
                         StateDTO state = (StateDTO) result;
                         services.stateManager.setRetrievedState(state);
                         // FIXME: Isn't using cache (same in Add folder)
                         services.stateManager.reloadContextAndTitles();
+                        Site.hideProgress();
                     }
                 });
     }
