@@ -40,5 +40,6 @@ public class ContentRenameAction implements Action {
         StateDTO currentState = services.session.getCurrentState();
         server.rename(services.session.getUserHash(), currentState.getGroup().getShortName(), currentState
                 .getStateToken().getEncoded(), newName, callback);
+        Site.hideProgress();
     }
 }
