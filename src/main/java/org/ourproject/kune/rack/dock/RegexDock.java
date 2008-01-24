@@ -21,20 +21,15 @@ package org.ourproject.kune.rack.dock;
 
 import java.util.regex.Pattern;
 
-import javax.servlet.ServletRequest;
-
-import org.ourproject.kune.rack.RackHelper;
-
 public class RegexDock extends AbstractDock {
-    // private static final Log log = LogFactory.getLog(RegexRackDock.class);
     private final Pattern pattern;
 
     public RegexDock(final String regex) {
         this.pattern = Pattern.compile(regex);
     }
 
-    public boolean matches(final ServletRequest request) {
-    	return RackHelper.matches(request, pattern);
+    public boolean matches(final String url) {
+        return pattern.matcher(url).matches();
     }
 
     @Override

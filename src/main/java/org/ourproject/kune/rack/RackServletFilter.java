@@ -57,9 +57,10 @@ public class RackServletFilter implements Filter {
 			Dock dock = null;
 			boolean matched = false;
 
+			String relative = RackHelper.getRelativeURL(request);
 			while (!matched && iterator.hasNext()) {
 				dock = iterator.next();
-				matched = dock.matches(request);
+				matched = dock.matches(relative);
 			}
 			if (matched) {
 				execute(dock.getFilter(), request, response);
@@ -76,10 +77,11 @@ public class RackServletFilter implements Filter {
 	public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
 			throws IOException, ServletException {
 
-
+		String relative = RackHelper.getRelativeURL(request);
+		log.debug("REQUEST: " + relative);
 		for (RequestMatcher matcher : excludes) {
-			if (matcher.matches(request)) {
-				log.debug("SKIPING request!");
+			if (matcher.matches(relative)) {
+				log.debug("SKIPING!");
 				chain.doFilter(request, response);
 				return;
 			}

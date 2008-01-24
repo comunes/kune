@@ -2,10 +2,6 @@ package org.ourproject.kune.rack.dock;
 
 import java.util.regex.Pattern;
 
-import javax.servlet.ServletRequest;
-
-import org.ourproject.kune.rack.RackHelper;
-
 public class RegexMatcher implements RequestMatcher {
 	private final Pattern pattern;
 
@@ -17,8 +13,8 @@ public class RegexMatcher implements RequestMatcher {
 		this.pattern = pattern;
 	}
 
-	public boolean matches(ServletRequest request) {
-		return RackHelper.matches(request, pattern);
+	public boolean matches(String url) {
+        return pattern.matcher(url).matches();
 	}
 
 }

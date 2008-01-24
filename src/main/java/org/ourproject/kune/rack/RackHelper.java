@@ -56,9 +56,4 @@ public class RackHelper {
         return new StringBuilder(forward).append(parameters).toString();
     }
 
-	public static boolean matches(ServletRequest request, Pattern pattern) {
-        String relativeURL = RackHelper.getRelativeURL(request);
-        return pattern.matcher(relativeURL).matches();
-	}
-
 }
