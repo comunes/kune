@@ -75,7 +75,7 @@
     <dependency>
       <groupId>com.calclab</groupId>
       <artifactId>gwt-jsjac</artifactId>
-      <version>0.1.10</version>
+      <version>0.1.11</version>
     </dependency>
 
     <!--  mysql -->
