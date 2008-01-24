@@ -351,7 +351,12 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
             setDefaultSplitterPosition();
         }
         adjustSizeContentSP();
-        groupDropDownsSP.setHeight("" + (contentHeight + 7) + "px");
+
+        int bottomMarginForTray = 35;
+        int distanceFromTop = 89;
+        int groupDropDownsHeight = windowHeight - groupToolsBar.getOffsetHeight() - distanceFromTop
+                - bottomMarginForTray;
+        groupDropDownsSP.setHeight("" + groupDropDownsHeight + "px");
     }
 
     public void setComponents(final WorkspaceUIComponents components) {

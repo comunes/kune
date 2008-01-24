@@ -5,6 +5,8 @@ TODO-list for kune
 
 SHORT-TERM (URGENT):
 --------------------------------------------------------------------------------
+<vjrj> chat add new room name validation (do a form with validation)
+--> vjrj
 <vjrj> Double click issue:
 http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/147f09153c4752d2/4caf0ac41c4625d3?lnk=gst&q=timer+double+click&rnum=1#4caf0ac41c4625d3
 <vjrj> Injection problem [2]
@@ -24,9 +26,28 @@ Now there are problems if client was started before server, and with server rest
 
 MIND-TERM:
 --------------------------------------------------------------------------------
+<<<<<<< .mine
+<<<<<<< .mine
+<vjrj> browser font size (different from default) issues (scroll in dialogs, buttons background, etc)
+--> vjrj
+<danigb> click in new group, reload sn innecessary
+--> vjrj
+<vjrj> Test:
+http://gwtforge.com/
+=======
+<vjrj> Hibernate pagination (for i18n Json query) and ext grid pagination:
+  http://www.hibernate.org/314.html
+Better:
+    @Finder(namedQuery = Blog.LIST_ALL_QUERY)
+    List<Blog> getAllEntityAByPage(@MaxResults int pageSize, @FirstResult int firstResultIndx);
+
+<vjrj> Use http://extjs.com/docs/output/LoadMask.jss.html in Grids
+=======
 <danigb> click in new group, reload sn innecessary
 <vjrj> Test:
 http://gwtforge.com/
+>>>>>>> .r653
+>>>>>>> .r653
 <vjrj> for dev, study jetty hot deploy (if scanIntervalSeconds > 0 also reload with client changes ... ). It will be nice to send a signal or something like that. See:
   http://jetty.mortbay.org/jetty5/faq/faq_s_200-General_t_HotDeploy.html
 See, I think is what we are looking for:

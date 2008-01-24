@@ -1,4 +1,5 @@
 /*
+ *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -17,18 +18,15 @@
  *
  */
 
-package org.ourproject.kune.rack.dock;
+package org.ourproject.kune.blogs.client.ctx.folder;
 
-import javax.servlet.Filter;
-import javax.servlet.ServletRequest;
+import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
+import org.ourproject.kune.platf.client.dto.ContainerDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
 
-/**
- * A filter with a matcher ... se RegexDock for a uri regex implementation
- */
-public interface Dock {
-    public void setFilter(Filter filter);
+public interface FolderContext {
+    View getView();
 
-    Filter getFilter();
-
-    boolean matches(ServletRequest request);
+    void setContainer(StateToken currentState, ContainerDTO folder, AccessRightsDTO accessRightsDTO);
 }

@@ -22,6 +22,7 @@ package org.ourproject.kune.app.client;
 
 import java.util.HashMap;
 
+import org.ourproject.kune.blogs.client.BlogsClientModule;
 import org.ourproject.kune.chat.client.ChatClientModule;
 import org.ourproject.kune.docs.client.DocsClientModule;
 import org.ourproject.kune.platf.client.KunePlatform;
@@ -62,6 +63,7 @@ public class KuneEntryPoint implements EntryPoint {
                         platform.install(new WorkspaceClientModule());
                         platform.install(new DocsClientModule());
                         platform.install(new ChatClientModule());
+                        platform.install(new BlogsClientModule());
                         new ApplicationBuilder(platform).build(userHash, initialLang);
                     }
                 });

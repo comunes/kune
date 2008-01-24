@@ -31,74 +31,74 @@ import com.google.inject.Module;
 public class RackBuilder {
 
     public static class RackDockBuilder {
-	private final String regex;
-	private final Rack rack;
+        private final String regex;
+        private final Rack rack;
 
-	public RackDockBuilder(final Rack rack, final String regex) {
-	    this.rack = rack;
-	    this.regex = regex;
-	}
+        public RackDockBuilder(final Rack rack, final String regex) {
+            this.rack = rack;
+            this.regex = regex;
+        }
 
-	public RackDockBuilder install(final Filter... filters) {
-	    for (Filter filter : filters) {
-		RegexDock dock = new RegexDock(regex);
-		dock.setFilter(filter);
-		rack.add(dock);
-	    }
-	    return this;
-	}
+        public RackDockBuilder install(final Filter... filters) {
+            for (Filter filter : filters) {
+                RegexDock dock = new RegexDock(regex);
+                dock.setFilter(filter);
+                rack.add(dock);
+            }
+            return this;
+        }
 
     }
 
     private final Rack rack;
 
     public RackBuilder() {
-	this.rack = new Rack();
+        this.rack = new Rack();
     }
 
     public RackBuilder use(final Module... list) {
-	for (Module m : list) {
-	    rack.add(m);
-	}
-	return this;
+        for (Module m : list) {
+            rack.add(m);
+        }
+        return this;
     }
 
     public RackDockBuilder at(final String regex) {
-	return new RackDockBuilder(rack, regex);
+        return new RackDockBuilder(rack, regex);
     }
 
     public RackBuilder installGWTServices(final String root, final Class<? extends RemoteService>... serviceClasses) {
 
-	for (Class<? extends RemoteService> serviceClass : serviceClasses) {
-	    String simpleName = serviceClass.getSimpleName();
-	    RegexDock dock = new RegexDock(root + simpleName + "$");
-	    dock.setFilter(new GWTServiceFilter(serviceClass));
-	    rack.add(dock);
-	}
+        for (Class<? extends RemoteService> serviceClass : serviceClasses) {
+            String simpleName = serviceClass.getSimpleName();
+            RegexDock dock = new RegexDock(root + simpleName + "$");
+            dock.setFilter(new GWTServiceFilter(serviceClass));
+            rack.add(dock);
+        }
 
-	return this;
+        return this;
     }
 
     public void installRESTServices(final String root, final Class<?>... serviceClasses) {
-	for (Class<?> serviceClass : serviceClasses) {
-	    String simpleName = serviceClass.getSimpleName();
-	    String pattern = root + simpleName + "/(.*)$";
-	    RegexDock dock = new RegexDock(pattern);
-	    dock.setFilter(new RESTServiceFilter(pattern, serviceClass));
-	    rack.add(dock);
-	}
+        for (Class<?> serviceClass : serviceClasses) {
+            String simpleName = serviceClass.getSimpleName();
+            String pattern = root + simpleName + "/(.*)$";
+            RegexDock dock = new RegexDock(pattern);
+            dock.setFilter(new RESTServiceFilter(pattern, serviceClass));
+            rack.add(dock);
+        }
     }
 
     public RackBuilder add(final Class<? extends ContainerListener> listener) {
-	rack.add(listener);
-	return this;
+        rack.add(listener);
+        return this;
     }
 
     public Rack getRack() {
-	return rack;
+        return rack;
     }
 
     public void skip(final String skipable) {
-	rack.addSkip(skipable);
+        rack.addSkip(skipable);
     }
 }

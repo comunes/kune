@@ -143,11 +143,12 @@ public class LoginPanel implements LoginView, View {
     }
 
     public void showWelcolmeDialog() {
-        welcomeDialog = new BasicDialog(Kune.I18N.t("Welcome"), Kune.I18N.t("Ok"), true, 400, 250, new ClickListener() {
-            public void onClick(final Widget sender) {
-                welcomeDialog.hide();
-            }
-        });
+        welcomeDialog = new BasicDialog(Kune.I18N.t("Welcome"), Kune.I18N.t("Ok"), true, true, 400, 270,
+                new ClickListener() {
+                    public void onClick(final Widget sender) {
+                        welcomeDialog.hide();
+                    }
+                });
 
         String message = Kune.I18N.t("Thanks for registering") + "\n\n"
                 + Kune.I18N.t("Now you can participate more actively in this site with other people and groups.")

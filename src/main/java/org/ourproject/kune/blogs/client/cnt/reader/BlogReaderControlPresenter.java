@@ -1,4 +1,5 @@
 /*
+ *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -17,18 +18,25 @@
  *
  */
 
-package org.ourproject.kune.rack.dock;
+package org.ourproject.kune.blogs.client.cnt.reader;
 
-import javax.servlet.Filter;
-import javax.servlet.ServletRequest;
+import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 
-/**
- * A filter with a matcher ... se RegexDock for a uri regex implementation
- */
-public interface Dock {
-    public void setFilter(Filter filter);
+public class BlogReaderControlPresenter implements BlogReaderControl {
+    private final BlogReaderControlView view;
 
-    Filter getFilter();
+    public BlogReaderControlPresenter(final BlogReaderControlView view) {
+        this.view = view;
+    }
 
-    boolean matches(ServletRequest request);
+    public void setRights(final AccessRightsDTO accessRights) {
+        view.setEditEnabled(accessRights.isEditable());
+        view.setDeleteEnabled(accessRights.isAdministrable());
+        view.setTranslateEnabled(accessRights.isEditable());
+    }
+
+    public View getView() {
+        return view;
+    }
 }

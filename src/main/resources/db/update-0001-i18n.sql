@@ -11,7 +11,7 @@ INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','admin in:','admi
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Visit this group homepage','Visit this group homepage','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Visit this member homepage','Visit this member homepage','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Participates as...','Participates as...','kune_core',1819);
-INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Other groups in which participates','Other groups in which participates','kune_core',1819);
+INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Groups in which participates','Groups in which participates','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Select Workspace theme for this group','Select Workspace theme for this group','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Go to Public Space','Go to Public Space','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','This content is not public','This content is not public','kune_core',1819);
@@ -87,7 +87,7 @@ INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','administrador/a 
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Visita la página inicial del grupo','Visit this group homepage','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Visita la página de este miembro','Visit this member homepage','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Participa como...','Participates as...','kune_core',5889);
-INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Otros grupos en los que participa','Other groups in which participates','kune_core',5889);
+INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Grupos en los que participa','Groups in which participates','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Selecciona el tema de escritorio para este grupo','Select Workspace theme for this group','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Ir al espacio público','Go to Public Space','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Este contenido no es público','This content is not public','kune_core',5889);

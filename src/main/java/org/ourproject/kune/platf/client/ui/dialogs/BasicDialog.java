@@ -34,8 +34,8 @@ public class BasicDialog {
 
     private final LayoutDialog dialog;
 
-    public BasicDialog(final String caption, final String buttonText, final boolean modal, final int width,
-            final int height, final int minWidth, final int minHeight, final ClickListener listener) {
+    public BasicDialog(final String caption, final String buttonText, final boolean modal, final boolean autoScroll,
+            final int width, final int height, final int minWidth, final int minHeight, final ClickListener listener) {
 
         dialog = new LayoutDialog(new LayoutDialogConfig() {
             {
@@ -46,7 +46,7 @@ public class BasicDialog {
                 setHeight(height);
                 setMinWidth(minWidth);
                 setMinHeight(minHeight);
-
+                setAutoScroll(autoScroll);
                 // Def values
                 setCollapsible(false);
                 setShadow(true);
@@ -57,9 +57,9 @@ public class BasicDialog {
 
     }
 
-    public BasicDialog(final String caption, final String buttonText, final boolean modal, final int width,
-            final int height, final ClickListener listener) {
-        this(caption, buttonText, modal, width, height, width, height, listener);
+    public BasicDialog(final String caption, final String buttonText, final boolean modal, final boolean autoScroll,
+            final int width, final int height, final ClickListener listener) {
+        this(caption, buttonText, modal, autoScroll, width, height, width, height, listener);
     }
 
     public void add(final Widget widget) {

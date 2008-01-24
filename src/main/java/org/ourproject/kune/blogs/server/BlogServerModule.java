@@ -1,4 +1,5 @@
 /*
+ *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -17,18 +18,13 @@
  *
  */
 
-package org.ourproject.kune.rack.dock;
+package org.ourproject.kune.blogs.server;
 
-import javax.servlet.Filter;
-import javax.servlet.ServletRequest;
+import com.google.inject.Binder;
+import com.google.inject.Module;
 
-/**
- * A filter with a matcher ... se RegexDock for a uri regex implementation
- */
-public interface Dock {
-    public void setFilter(Filter filter);
-
-    Filter getFilter();
-
-    boolean matches(ServletRequest request);
+public class BlogServerModule implements Module {
+    public void configure(final Binder binder) {
+	binder.bind(BlogServerTool.class).asEagerSingleton();
+    }
 }

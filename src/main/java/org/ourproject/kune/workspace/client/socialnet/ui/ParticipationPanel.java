@@ -38,55 +38,56 @@ public class ParticipationPanel extends StackedDropDownPanel implements Particip
     private final Images img = Images.App.getInstance();
 
     public ParticipationPanel(final AbstractPresenter presenter) {
-	super(presenter, "#00D4AA", Kune.I18N.t("Participates as..."), Kune.I18N.t("Other groups in which participates"), COUNTS_VISIBLE);
+        super(presenter, "#00D4AA", Kune.I18N.t("Participates as..."), Kune.I18N.t("Groups in which participates"),
+                COUNTS_VISIBLE);
     }
 
     public void clear() {
-	super.clear();
+        super.clear();
     }
 
     public void addCategory(final String name, final String title) {
-	super.addStackItem(name, title, COUNTS_VISIBLE);
+        super.addStackItem(name, title, COUNTS_VISIBLE);
     }
 
     public void addCategory(final String name, final String title, final String iconType) {
-	super.addStackItem(name, title, getIcon(iconType), UIConstants.ICON_HORIZ_ALIGN_RIGHT, COUNTS_VISIBLE);
+        super.addStackItem(name, title, getIcon(iconType), UIConstants.ICON_HORIZ_ALIGN_RIGHT, COUNTS_VISIBLE);
     }
 
     public void addCategoryMember(final String categoryName, final String name, final String title,
-	    final MemberAction[] memberActions) {
-	StackSubItemAction[] subItems = new StackSubItemAction[memberActions.length];
-	for (int i = 0; i < memberActions.length; i++) {
-	    subItems[i] = new StackSubItemAction(getIconFronEvent(memberActions[i].getAction()), memberActions[i]
-		    .getText(), memberActions[i].getAction());
-	}
+            final MemberAction[] memberActions) {
+        StackSubItemAction[] subItems = new StackSubItemAction[memberActions.length];
+        for (int i = 0; i < memberActions.length; i++) {
+            subItems[i] = new StackSubItemAction(getIconFronEvent(memberActions[i].getAction()), memberActions[i]
+                    .getText(), memberActions[i].getAction());
+        }
 
-	super.addStackSubItem(categoryName, img.groupDefIcon(), name, title, subItems);
+        super.addStackSubItem(categoryName, img.groupDefIcon(), name, title, subItems);
     }
 
     private AbstractImagePrototype getIcon(final String event) {
-	if (event == GroupMembersView.ICON_ALERT) {
-	    return img.alert();
-	}
-	throw new IndexOutOfBoundsException("Icon unknown in ParticipationPanelk");
+        if (event == GroupMembersView.ICON_ALERT) {
+            return img.alert();
+        }
+        throw new IndexOutOfBoundsException("Icon unknown in ParticipationPanelk");
     }
 
     private AbstractImagePrototype getIconFronEvent(final String event) {
-	if (event == WorkspaceEvents.UNJOIN_GROUP) {
-	    return img.del();
-	}
-	if (event == WorkspaceEvents.GOTO) {
-	    return img.groupHome();
-	}
-	throw new IndexOutOfBoundsException("Event unknown in ParticipationPanel");
+        if (event == WorkspaceEvents.UNJOIN_GROUP) {
+            return img.del();
+        }
+        if (event == WorkspaceEvents.GOTO) {
+            return img.groupHome();
+        }
+        throw new IndexOutOfBoundsException("Event unknown in ParticipationPanel");
     }
 
     public void show() {
-	this.setVisible(true);
+        this.setVisible(true);
     }
 
     public void hide() {
-	this.setVisible(false);
+        this.setVisible(false);
     }
 
 }
