@@ -33,36 +33,51 @@ public class Rack {
     private final ArrayList<Dock> docks;
     private final ArrayList<Module> modules;
     private final ArrayList<Class<? extends ContainerListener>> listeners;
+    private String skip;
 
     public Rack() {
-        this.docks = new ArrayList<Dock>();
-        this.modules = new ArrayList<Module>();
-        this.listeners = new ArrayList<Class<? extends ContainerListener>>();
+	skip = null;
+	this.docks = new ArrayList<Dock>();
+	this.modules = new ArrayList<Module>();
+	this.listeners = new ArrayList<Class<? extends ContainerListener>>();
     }
 
-    public void add(Dock dock) {
-        log.debug("INSTALLING: " + dock.toString());
-        docks.add(dock);
+    public void add(final Dock dock) {
+	log.debug("INSTALLING: " + dock.toString());
+	docks.add(dock);
     }
 
     public void add(final Module module) {
-        modules.add(module);
+	modules.add(module);
     }
 
     public List<Dock> getDocks() {
-        return docks;
+	return docks;
     }
 
     public List<Module> getGuiceModules() {
-        return modules;
+	return modules;
     }
 
     public void add(final Class<? extends ContainerListener> listenerType) {
-        listeners.add(listenerType);
+	listeners.add(listenerType);
     }
 
     public List<Class<? extends ContainerListener>> getListeners() {
-        return listeners;
+	return listeners;
+    }
+
+    // TODO
+    public void addSkip(final String skipable) {
+	if (skip != null) {
+	    throw new RuntimeException("Este código es una chapuza para la demo!");
+	} else {
+	    skip = skipable;
+	}
+    }
+
+    public String getSkipable() {
+	return skip;
     }
 
 }
