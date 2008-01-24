@@ -249,6 +249,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
                 setMinLengthText(Kune.I18N.t(MUST_BE_BETWEEN_3_AND_15));
                 setMaxLengthText(Kune.I18N.t(MUST_BE_BETWEEN_3_AND_15));
                 setRegexText(Kune.I18N.t(MUST_BE_BETWEEN_3_AND_15));
+                setValidationDelay(1000);
             }
         });
         form.add(shortNameField);
@@ -262,6 +263,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
                 setMsgTarget("side");
                 setMinLength(3);
                 setMaxLength(50);
+                setValidationDelay(1000);
             }
         });
         form.add(longNameField);
@@ -275,6 +277,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
                 setMsgTarget("side");
                 setMinLength(10);
                 setMaxLength(255);
+                setValidationDelay(1000);
             }
         });
         form.add(publicDescField);
