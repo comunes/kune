@@ -83,6 +83,7 @@ public class KuneRackModule implements RackModule {
         builder.at(".*").install(new LogFilter());
         builder.at(".*").install(new GuiceFilter());
 
+        builder.at("^/$").install(new RedirectFilter("/kune/"));
         builder.at("^/kune$").install(new RedirectFilter("/kune/"));
 
         builder.at("^/kune/$").install(new ListenerFilter(KuneApplicationListener.class),
