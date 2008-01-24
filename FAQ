@@ -1,0 +1,11 @@
+Q: I get the error: Caused by: org.ourproject.kune.chat.server.managers.ChatException: remote-server-not-found(404)
+trying to create a room.
+
+A: Check that the openfire server name is the same in the kune.properties file, and you can resolv the names :
+  $ host yourhostname
+and
+  $ host rooms.yourhostname
+
+Q: ERROR - Incorrect string value: '\xEF\xBF\xBD\xEF\xBF\xBD...' for column 'native_name' at row 1
+
+A: Verify that your system supports UTF8 (in debian systems check /etc/locale.gen and locale-gen)
