@@ -34,10 +34,7 @@ public class RegexDock extends AbstractDock {
     }
 
     public boolean matches(final ServletRequest request) {
-        String relativeURL = RackHelper.getRelativeURL(request);
-        // log.debug ("MATCHING: " + pattern.toString() + " AGAINST: " +
-        // relativeURL);
-        return pattern.matcher(relativeURL).matches();
+    	return RackHelper.matches(request, pattern);
     }
 
     @Override

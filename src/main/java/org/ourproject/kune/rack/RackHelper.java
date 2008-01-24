@@ -19,6 +19,8 @@
 
 package org.ourproject.kune.rack;
 
+import java.util.regex.Pattern;
+
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
@@ -53,5 +55,10 @@ public class RackHelper {
         String parameters = RackHelper.extractParameters(request);
         return new StringBuilder(forward).append(parameters).toString();
     }
+
+	public static boolean matches(ServletRequest request, Pattern pattern) {
+        String relativeURL = RackHelper.getRelativeURL(request);
+        return pattern.matcher(relativeURL).matches();
+	}
 
 }

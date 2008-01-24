@@ -25,6 +25,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ourproject.kune.rack.dock.Dock;
+import org.ourproject.kune.rack.dock.RequestMatcher;
 
 import com.google.inject.Module;
 
@@ -32,13 +33,13 @@ public class Rack {
     public static final Log log = LogFactory.getLog(Rack.class);
     private final ArrayList<Dock> docks;
     private final ArrayList<Module> modules;
+    private final ArrayList<RequestMatcher> excludes;
     private final ArrayList<Class<? extends ContainerListener>> listeners;
-    private String skip;
 
     public Rack() {
-        skip = null;
         this.docks = new ArrayList<Dock>();
         this.modules = new ArrayList<Module>();
+        this.excludes = new ArrayList<RequestMatcher>();
         this.listeners = new ArrayList<Class<? extends ContainerListener>>();
     }
 
@@ -67,17 +68,12 @@ public class Rack {
         return listeners;
     }
 
-    // TODO
-    public void addSkip(final String skipable) {
-        if (skip != null) {
-            throw new RuntimeException("Este código es una chapuza para la demo!");
-        } else {
-            skip = skipable;
-        }
-    }
+	public void addExclusion(RequestMatcher matcher) {
+		excludes.add(matcher);
+	}
 
-    public String getSkipable() {
-        return skip;
-    }
+	public List<RequestMatcher> getExcludes() {
+		return excludes;
+	}
 
 }

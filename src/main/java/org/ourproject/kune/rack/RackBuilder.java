@@ -22,6 +22,7 @@ package org.ourproject.kune.rack;
 import javax.servlet.Filter;
 
 import org.ourproject.kune.rack.dock.RegexDock;
+import org.ourproject.kune.rack.dock.RegexMatcher;
 import org.ourproject.kune.rack.filters.gwts.GWTServiceFilter;
 import org.ourproject.kune.rack.filters.rest.RESTServiceFilter;
 
@@ -98,7 +99,8 @@ public class RackBuilder {
         return rack;
     }
 
-    public void skip(final String skipable) {
-        rack.addSkip(skipable);
+    public RackBuilder exclude(final String skipable) {
+        rack.addExclusion(new RegexMatcher(skipable));
+        return this;
     }
 }
