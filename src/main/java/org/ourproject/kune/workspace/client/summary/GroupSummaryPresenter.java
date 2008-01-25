@@ -29,7 +29,7 @@ public class GroupSummaryPresenter extends AbstractPresenter implements GroupSum
     private GroupSummaryView view;
 
     public void setGroupSummary(final StateDTO state) {
-        view.setComment("Summary about this group");
+        view.setComment("Summary about this group (in development)");
     }
 
     public View getView() {
