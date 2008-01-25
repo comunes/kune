@@ -70,6 +70,7 @@ public class StateManagerDefault implements StateManager {
                 oldState = newStateDTO;
                 workspace.getContentTitleComponent().setState(oldState);
                 workspace.getContentSubTitleComponent().setState(oldState);
+                Site.hideProgress();
             }
         });
     }
@@ -157,7 +158,7 @@ public class StateManagerDefault implements StateManager {
 
     private void setWsTheme(final GroupDTO group) {
         String nextTheme = group.getWorkspaceTheme();
-        if (lastTheme == null || lastTheme != nextTheme) {
+        if (lastTheme == null || !lastTheme.equals(nextTheme)) {
             workspace.setTheme(nextTheme);
         }
         lastTheme = nextTheme;
