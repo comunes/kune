@@ -45,60 +45,66 @@
     <comment>First english and spanish translations</comment>
     <sqlFile path="src/main/resources/db/update-0001-i18n.sql"
       encoding="utf8" stripComments="1" />
-    <rollback>DELETE FROM globalize_translations WHERE id BETWEEN 1 AND 3970;</rollback>
+    <rollback>DELETE FROM globalize_translations WHERE id BETWEEN 1 AND 4003;</rollback>
   </changeSet>
   <changeSet id="6" author="vjrj">
     <comment>English and spanish translations (continuation)</comment>
     <sqlFile path="src/main/resources/db/update-0002-i18n.sql"
       encoding="utf8" stripComments="1" />
-    <rollback>DELETE FROM globalize_translations WHERE id BETWEEN 1 AND 3970;</rollback>
+    <rollback>DELETE FROM globalize_translations WHERE id BETWEEN 1 AND 4003;</rollback>
   </changeSet>
   <changeSet id="7" author="vjrj">
     <comment>English and spanish translations of TextEditor</comment>
     <sqlFile path="src/main/resources/db/update-0003-i18n.sql"
       encoding="utf8" stripComments="1" />
-    <rollback>DELETE FROM globalize_translations WHERE id BETWEEN 1 AND 3970;</rollback>
+    <rollback>DELETE FROM globalize_translations WHERE id BETWEEN 1 AND 4003;</rollback>
   </changeSet>
   <changeSet id="8" author="vjrj">
     <comment>English and spanish translations (continuation)</comment>
     <sqlFile path="src/main/resources/db/update-0004-i18n.sql"
       encoding="utf8" stripComments="1" />
-    <rollback>DELETE FROM globalize_translations WHERE id BETWEEN 1 AND 3970;</rollback>
+    <rollback>DELETE FROM globalize_translations WHERE id BETWEEN 1 AND 4003;</rollback>
   </changeSet>
   <changeSet id="9" author="vjrj">
     <comment>English and spanish translations (continuation)</comment>
     <sqlFile path="src/main/resources/db/update-0005-i18n.sql"
       encoding="utf8" stripComments="1" />
-    <rollback>DELETE FROM globalize_translations WHERE id BETWEEN 1 AND 3970;</rollback>
+    <rollback>DELETE FROM globalize_translations WHERE id BETWEEN 1 AND 4003;</rollback>
   </changeSet>
   <changeSet id="10" author="vjrj">
     <comment>English and spanish translations (continuation)</comment>
     <sqlFile path="src/main/resources/db/update-0006-i18n.sql"
       encoding="utf8" stripComments="1" />
-    <rollback>DELETE FROM globalize_translations WHERE id BETWEEN 1 AND 3970;</rollback>
+    <rollback>DELETE FROM globalize_translations WHERE id BETWEEN 1 AND 4003;</rollback>
   </changeSet>
   <changeSet id="11" author="vjrj">
     <comment>English and spanish translations (continuation)</comment>
     <sqlFile path="src/main/resources/db/update-0007-i18n.sql"
       encoding="utf8" stripComments="1" />
-    <rollback>DELETE FROM globalize_translations WHERE id BETWEEN 1 AND 3970;</rollback>
+    <rollback>DELETE FROM globalize_translations WHERE id BETWEEN 1 AND 4003;</rollback>
   </changeSet>
   <changeSet id="12" author="vjrj">
     <comment>English and spanish translations (continuation)</comment>
     <sqlFile path="src/main/resources/db/update-0008-i18n.sql"
       encoding="utf8" stripComments="1" />
-    <rollback>DELETE FROM globalize_translations WHERE id BETWEEN 1 AND 3970;</rollback>
+    <rollback>DELETE FROM globalize_translations WHERE id BETWEEN 1 AND 4003;</rollback>
   </changeSet>
   <changeSet id="13" author="vjrj">
     <comment>English and spanish translations (continuation)</comment>
     <sqlFile path="src/main/resources/db/update-0009-i18n.sql"
       encoding="utf8" stripComments="1" />
-    <rollback>DELETE FROM globalize_translations WHERE id BETWEEN 1 AND 3970;</rollback>
+    <rollback>DELETE FROM globalize_translations WHERE id BETWEEN 1 AND 4003;</rollback>
   </changeSet>
   <changeSet id="14" author="vjrj">
     <comment>English and spanish translations (continuation)</comment>
     <sqlFile path="src/main/resources/db/update-0010-i18n.sql"
       encoding="utf8" stripComments="1" />
-    <rollback>DELETE FROM globalize_translations WHERE id BETWEEN 1 AND 3970;</rollback>
+    <rollback>DELETE FROM globalize_translations WHERE id BETWEEN 1 AND 4003;</rollback>
+  </changeSet>
+  <changeSet id="15" author="vjrj">
+    <comment>English and spanish translations (continuation)</comment>
+    <sqlFile path="src/main/resources/db/update-0011-i18n.sql"
+      encoding="utf8" stripComments="1" />
+    <rollback>DELETE FROM globalize_translations WHERE id BETWEEN 1 AND 4003;</rollback>
   </changeSet>
 </databaseChangeLog>
