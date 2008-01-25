@@ -40,6 +40,7 @@ public class DenyJoinGroupAction implements Action {
         server.denyJoinGroup(services.session.getUserHash(), services.session.getCurrentState().getGroup()
                 .getShortName(), groupShortName, new AsyncCallbackSimple() {
             public void onSuccess(final Object result) {
+                Site.hideProgress();
                 Site.info(Kune.I18N.t("Member rejected"));
                 services.stateManager.setSocialNetwork((SocialNetworkResultDTO) result);
             }
