@@ -5,6 +5,7 @@ TODO-list for kune
 
 SHORT-TERM (URGENT):
 --------------------------------------------------------------------------------
+<vjrj> Think about Affero GPL v3 ....
 <vjrj> chat add new room name validation (do a form with validation)
 --> vjrj
 <vjrj> Double click issue:
@@ -26,28 +27,18 @@ Now there are problems if client was started before server, and with server rest
 
 MIND-TERM:
 --------------------------------------------------------------------------------
-<<<<<<< .mine
-<<<<<<< .mine
+<samer,vjrj> Add in license choose a free/non-free indicator [3]
+<vjrj> think about more secure login, SRP protocol thread, and:
+http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/97623347b448e16e
+http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/367bdb56dd4e5ad1
+<vjrj> Build better our maven repo
+  http://maven.apache.org/guides/mini/guide-central-repository-upload.html
 <vjrj> browser font size (different from default) issues (scroll in dialogs, buttons background, etc)
 --> vjrj
 <danigb> click in new group, reload sn innecessary
 --> vjrj
 <vjrj> Test:
 http://gwtforge.com/
-=======
-<vjrj> Hibernate pagination (for i18n Json query) and ext grid pagination:
-  http://www.hibernate.org/314.html
-Better:
-    @Finder(namedQuery = Blog.LIST_ALL_QUERY)
-    List<Blog> getAllEntityAByPage(@MaxResults int pageSize, @FirstResult int firstResultIndx);
-
-<vjrj> Use http://extjs.com/docs/output/LoadMask.jss.html in Grids
-=======
-<danigb> click in new group, reload sn innecessary
-<vjrj> Test:
-http://gwtforge.com/
->>>>>>> .r653
->>>>>>> .r653
 <vjrj> for dev, study jetty hot deploy (if scanIntervalSeconds > 0 also reload with client changes ... ). It will be nice to send a signal or something like that. See:
   http://jetty.mortbay.org/jetty5/faq/faq_s_200-General_t_HotDeploy.html
 See, I think is what we are looking for:
@@ -329,3 +320,23 @@ Caused by: java.lang.RuntimeException: Please apply com.google.inject.servlet.Gu
         ... 58 more
 2008-01-03 23:17:57.697::INFO:  Started SelectChannelConnector@0.0.0.0:8080
 
+[3] - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+(sorry only in Spanish)ç
+Samer comment:
+>     * No libre, no copyleft: explicación de lo que es libre, qué es
+>       copyleft, básico. Citar proyectos libres conocidos.
+>     * Libre, no copyleft: explicación de qué es copyleft, sin que deje
+>       de ser libre. ¿Enlace a GNU?
+>     * No libre, copyleft: explicación de las puñeteras no-comerciales
+>       jejeje. Creo que en estos casos lo de citar que la famosa
+>       wikipedia no acepta contenido así es un argumento de peso.
+>     * Libre y Copyleft...  si no es GPL o compatible con GPL (o GFDL)
+>       debería explicarse las ventajas de tener una licencia compatible
+>       al menos con la GPLv3 y tal, ¿no créeis? ¿O pasando y con que
+>       tengan una libre rara ya vale? Es que la no normalización conlleva
+>       mucho caos a la hora de compartir cosas de distintos proyectos...
+>       de hecho a los flipados de la licencia de ayer a lo mejor habría
+>       que comentarles esto. ¿Opiniones?
+
+[?] - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
