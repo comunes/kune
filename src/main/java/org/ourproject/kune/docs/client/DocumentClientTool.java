@@ -56,7 +56,7 @@ public class DocumentClientTool extends AbstractClientTool implements DocumentCo
         DocumentContent docContent = components.getContent();
         docContent.setContent(state);
 
-        // TODO: revistar el interface de trigger (setState)
+        // TODO: check trigger interface (setState)
         trigger.setState(state.getStateToken().toString());
     }
 

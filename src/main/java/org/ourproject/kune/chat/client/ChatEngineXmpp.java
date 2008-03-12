@@ -21,8 +21,7 @@ package org.ourproject.kune.chat.client;
 
 import java.util.Date;
 
-import to.tipit.gwtlib.FireLog;
-
+import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.gwtjsjac.client.Debugger;
 import com.calclab.gwtjsjac.client.PresenceShow;
 import com.calclab.gwtjsjac.client.XmppConnection;
@@ -42,7 +41,7 @@ class ChatEngineXmpp implements ChatEngine {
         this.state = state;
         XmppFactory factory = JsJacFactory.getInstance();
         connection = factory.createBindingConnection(state.httpBase, 2000, GWTLoggerOutput.instance);
-        Debugger.debug(connection, new FirebugLoggerOutput());
+        Debugger.debug(connection, new LoggerOutputImpl());
     }
 
     public ChatState getState() {
@@ -50,7 +49,7 @@ class ChatEngineXmpp implements ChatEngine {
     }
 
     public void login(final String chatName, final String chatPassword) {
-        FireLog.debug("LOGIN CHAT: " + chatName + "[" + chatPassword + "]");
+        Log.debug("LOGIN CHAT: " + chatName + "[" + chatPassword + "]");
         state.user = new XmppUserSettings(state.domain, chatName, chatPassword, XmppUserSettings.NON_SASL);
         state.user.resource = "kuneClient" + new Date().getTime();
         session = new XmppSession(connection, true);

@@ -25,8 +25,7 @@ import java.util.Map;
 import org.ourproject.kune.chat.client.rooms.RoomUser.UserType;
 import org.ourproject.kune.platf.client.View;
 
-import to.tipit.gwtlib.FireLog;
-
+import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.gwtjsjac.client.mandioca.rooms.XmppRoom;
 
 public class RoomPresenter implements Room {
@@ -39,12 +38,12 @@ public class RoomPresenter implements Room {
     private RoomView view;
     private String input;
     private String subject;
-    private final String sessionUserAlias;
-    // FIXME: probablemente este mapa tiene más sentido en RoomUserList
+    private String userAlias;
+    // FIXME: this in RoomUserList?
     private final Map users;
-    private final String roomName;
+    private String roomName;
 
-    private final RoomUserList userList;
+    private RoomUserList userList;
 
     private XmppRoom handler;
 
@@ -54,26 +53,33 @@ public class RoomPresenter implements Room {
 
     private UserType userType;
 
-    // TODO: la información del usuario no está disponible (ni debe estar ;)
-    // cuando se crea
-    // el room presenter => solución: usar setAlias, setRoomName,
-    // setUserType... etc...
-    public RoomPresenter(final RoomListener listener, final String roomName, final String userAlias,
-            final UserType userType, final RoomUserList userList) {
+    public RoomPresenter(final RoomListener listener) {
         this.listener = listener;
-        this.roomName = roomName;
-        this.sessionUserAlias = userAlias;
-        this.userType = userType;
-        this.userList = userList;
         this.input = "";
         this.currentColor = 0;
         this.subject = "Subject: " + roomName;
         users = new HashMap();
     }
 
+    public void setRoomName(final String roomName) {
+        this.roomName = roomName;
+        view.showRoomName(roomName);
+    }
+
+    public void setUserAlias(final String userAlias) {
+        this.userAlias = userAlias;
+    }
+
+    public void setUserType(final UserType userType) {
+        this.userType = userType;
+    }
+
+    public void setUserList(final RoomUserList userList) {
+        this.userList = userList;
+    }
+
     public void init(final RoomView view) {
         this.view = view;
-        view.showRoomName(roomName);
         closeConfirmed = false;
     }
 
@@ -88,7 +94,7 @@ public class RoomPresenter implements Room {
         if (user != null) {
             userColor = user.getColor();
         } else {
-            FireLog.debug("User " + userAlias + " not in our users list");
+            Log.debug("User " + userAlias + " not in our users list");
             userColor = "black";
         }
         view.showMessage(userAlias, userColor, message);
@@ -113,13 +119,12 @@ public class RoomPresenter implements Room {
         view.showDelimiter(datetime);
     }
 
-    // TODO: ¿no bastaría con saveInput(null)?
     public void clearSavedInput() {
-        input = null;
+        saveInput(null);
     }
 
     public String getSessionAlias() {
-        return sessionUserAlias;
+        return userAlias;
     }
 
     public void saveInput(final String inputText) {
@@ -193,10 +198,6 @@ public class RoomPresenter implements Room {
 
     public UserType getUserType() {
         return userType;
-    }
-
-    public void setUserType(final UserType userType) {
-        this.userType = userType;
     }
 
 }

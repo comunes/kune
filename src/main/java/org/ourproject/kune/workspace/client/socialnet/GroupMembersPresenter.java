@@ -137,13 +137,6 @@ public class GroupMembersPresenter extends AbstractPresenter implements GroupMem
         view.confirmAddCollab(groupShortName, groupLongName);
     }
 
-    public void onAddViewer(final GroupDTO group) {
-    }
-
-    public void onAddMember() {
-        // TODO Auto-generated method stub
-    }
-
     public View getView() {
         return view;
     }

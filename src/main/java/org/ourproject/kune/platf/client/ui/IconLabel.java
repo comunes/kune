@@ -67,18 +67,23 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
      * @param image
      *                the icon to add
      */
-    public IconLabel(final AbstractImagePrototype image) {
+    private IconLabel(final AbstractImagePrototype image, final boolean leftIcon) {
         setElement(DOM.createDiv());
         sinkEvents(Event.ONCLICK | Event.MOUSEEVENTS | Event.ONMOUSEWHEEL | Event.ONDBLCLICK);
         setStyleName("kune-IconLabel");
         icon = image.createImage().getElement();
         textLabel = DOM.createSpan();
-        DOM.appendChild(getElement(), icon);
-        DOM.appendChild(getElement(), textLabel);
+        if (leftIcon) {
+            DOM.appendChild(getElement(), icon);
+            DOM.appendChild(getElement(), textLabel);
+        } else {
+            DOM.appendChild(getElement(), textLabel);
+            DOM.appendChild(getElement(), icon);
+        }
     }
 
     /**
-     * Creates a label with the specified text.
+     * Creates a label with the specified text and a icon in the left.
      * 
      * @param image
      *                the icon to add
@@ -86,12 +91,40 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
      *                the new label's text
      */
     public IconLabel(final AbstractImagePrototype image, final String text) {
-        this(image);
+        this(image, true);
         setText(text);
     }
 
     /**
-     * Creates a label with the specified text.
+     * Creates a label with the specified text and a icon in the right.
+     * 
+     * @param image
+     *                the icon to add
+     * @param text
+     *                the new label's text
+     */
+    public IconLabel(final String text, final AbstractImagePrototype image) {
+        this(image, false);
+        setText(text);
+    }
+
+    /**
+     * Creates a label with the specified text and a icon in the right.
+     * 
+     * @param image
+     *                the icon to add
+     * @param text
+     *                the new label's text
+     * @param wordWrap
+     *                <code>false</code> to disable word wrapping
+     */
+    public IconLabel(final String text, final AbstractImagePrototype image, final boolean wordWrap) {
+        this(text, image);
+        setWordWrap(wordWrap);
+    }
+
+    /**
+     * Creates a label with the specified text and a icon in the left.
      * 
      * @param image
      *                the icon to add
@@ -217,8 +250,7 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
     }
 
     public void setTitle(final String title) {
-        // problem with size of Quicktips in icons...
-        // KuneUiUtils.setQuickTip(icon, title);
+        KuneUiUtils.setQuickTip(icon, title);
         KuneUiUtils.setQuickTip(textLabel, title);
     }
 

@@ -119,7 +119,6 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
     }
 
     public void onTranslate() {
-        // TODO Auto-generated method stub
     }
 
     private void showContent() {

@@ -19,35 +19,35 @@ public class ApplicationStub implements Application {
     private final StateManager stateManager;
 
     public ApplicationStub(final boolean useNiceMocks) {
-	this.useNiceMocks = useNiceMocks;
-	dispatcher = mock(Dispatcher.class);
-	workspace = mock(Workspace.class);
-	stateManager = mock(StateManager.class);
-	clientTools = new HashMap<String, ClientTool>();
+        this.useNiceMocks = useNiceMocks;
+        dispatcher = mock(Dispatcher.class);
+        workspace = mock(Workspace.class);
+        stateManager = mock(StateManager.class);
+        clientTools = new HashMap<String, ClientTool>();
     }
 
     private <T> T mock(final Class<T> type) {
-	if (useNiceMocks) {
-	    return EasyMock.createNiceMock(type);
-	} else {
-	    return EasyMock.createStrictMock(type);
-	}
+        if (useNiceMocks) {
+            return EasyMock.createNiceMock(type);
+        } else {
+            return EasyMock.createStrictMock(type);
+        }
     }
 
     public Dispatcher getDispatcher() {
-	return dispatcher;
+        return dispatcher;
     }
 
     public ClientTool getTool(final String toolName) {
-	return clientTools.get(toolName);
+        return clientTools.get(toolName);
     }
 
     public Workspace getWorkspace() {
-	return workspace;
+        return workspace;
     }
 
     public StateManager getStateManager() {
-	return stateManager;
+        return stateManager;
     }
 
     public void setGroupState(final String groupShortName) {
@@ -58,7 +58,5 @@ public class ApplicationStub implements Application {
     }
 
     public void stop() {
-	// TODO Auto-generated method stub
-
     }
 }

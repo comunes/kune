@@ -40,7 +40,6 @@ public class SiteMessagePresenter implements SiteMessage, MessagePresenter {
     public void resetMessage() {
         this.message = "";
         this.isVisible = false;
-        view.hide();
     }
 
     public void setMessage(final String message, final int type) {
@@ -72,15 +71,6 @@ public class SiteMessagePresenter implements SiteMessage, MessagePresenter {
         }
         isVisible = true;
         view.show();
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.ourproject.kune.sitebar.client.msg.MessagePresenter#onClose()
-     */
-    public void onMessageClose() {
-        resetMessage();
     }
 
     public void adjustWidth(final int windowWidth) {

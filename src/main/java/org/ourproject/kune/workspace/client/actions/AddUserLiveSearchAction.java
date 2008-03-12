@@ -32,7 +32,6 @@ public class AddUserLiveSearchAction implements Action {
 
     private void onAddUserLiveSearchAction(final Services services, final EntityLiveSearchListener listener) {
         UserLiveSearchComponent userLiveSearchComponent = services.app.getWorkspace().getUserLiveSearchComponent();
-        userLiveSearchComponent.reset();
         userLiveSearchComponent.addListener(listener);
         userLiveSearchComponent.show();
     }

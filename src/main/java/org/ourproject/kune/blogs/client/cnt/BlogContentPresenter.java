@@ -117,7 +117,6 @@ public class BlogContentPresenter implements BlogContent, BlogReaderListener, Te
     }
 
     public void onTranslate() {
-        // TODO Auto-generated method stub
     }
 
     private void showContent() {

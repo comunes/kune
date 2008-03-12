@@ -40,8 +40,7 @@ import org.ourproject.kune.workspace.client.WorkspaceUIExtensionPoint;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
-import to.tipit.gwtlib.FireLog;
-
+import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.gwtjsjac.client.mandioca.rooms.XmppRoom;
 
 public class ChatContentPresenter implements ChatContent, ChatRoomListener, MultiRoomListener {
@@ -96,8 +95,8 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener, Mult
         // Room room = getRoom(roomName, "me" + new Date().getTime(),
         // RoomUser.MODERADOR);
         Room room = getRoom(roomName, "me", RoomUser.MODERADOR);
-        rooms.activateRoom(room);
         rooms.show();
+        rooms.activateRoom(room);
     }
 
     private Room getRoom(final String roomName, final String userAlias, final UserType userType) {
@@ -130,7 +129,7 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener, Mult
     }
 
     private void debugNoHandler(final Room room) {
-        FireLog.debug("Room '" + room.getName() + "' has no xmmp handler");
+        Log.debug("Room '" + room.getName() + "' has no xmmp handler");
     }
 
 }

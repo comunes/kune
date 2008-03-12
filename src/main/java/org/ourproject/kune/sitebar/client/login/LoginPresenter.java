@@ -33,14 +33,13 @@ import org.ourproject.kune.platf.client.errors.UserAuthException;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.sitebar.client.Site;
-import org.ourproject.kune.sitebar.client.msg.MessagePresenter;
 import org.ourproject.kune.sitebar.client.msg.SiteMessage;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class LoginPresenter implements Login, MessagePresenter {
+public class LoginPresenter implements Login {
 
     LoginView view;
 
@@ -59,7 +58,7 @@ public class LoginPresenter implements Login, MessagePresenter {
     }
 
     public void onCancel() {
-        resetMessage();
+        resetMessages();
         reset();
         listener.onLoginCancelled();
     }
@@ -82,9 +81,9 @@ public class LoginPresenter implements Login, MessagePresenter {
                     try {
                         throw caught;
                     } catch (final UserAuthException e) {
-                        setMessage(Kune.I18N.t("Incorrect nickname/email or password"), SiteMessage.ERROR);
+                        view.setSignInMessage(Kune.I18N.t("Incorrect nickname/email or password"), SiteMessage.ERROR);
                     } catch (final Throwable e) {
-                        setMessage("Error in login", SiteMessage.ERROR);
+                        view.setSignInMessage("Error in login", SiteMessage.ERROR);
                         GWT.log("Other kind of exception in LoginFormPresenter/doLogin", null);
                         throw new RuntimeException();
                     }
@@ -121,13 +120,13 @@ public class LoginPresenter implements Login, MessagePresenter {
                     try {
                         throw caught;
                     } catch (final EmailAddressInUseException e) {
-                        setMessage(Kune.I18N.t("This email in in use by other person, try with another."),
+                        view.setRegisterMessage(Kune.I18N.t("This email in in use by other person, try with another."),
                                 SiteMessage.ERROR);
                     } catch (final GroupNameInUseException e) {
-                        setMessage(Kune.I18N.t("This name in already in use, try with a different name."),
+                        view.setRegisterMessage(Kune.I18N.t("This name in already in use, try with a different name."),
                                 SiteMessage.ERROR);
                     } catch (final Throwable e) {
-                        setMessage(Kune.I18N.t("Error during registration."), SiteMessage.ERROR);
+                        view.setRegisterMessage(Kune.I18N.t("Error during registration."), SiteMessage.ERROR);
                         GWT.log("Other kind of exception in user registration", null);
                         throw new RuntimeException();
                     }
@@ -146,26 +145,14 @@ public class LoginPresenter implements Login, MessagePresenter {
         }
     }
 
-    public void onMessageClose() {
-        // From MessagePresenter: do nothing
-    }
-
     public void onClose() {
         reset();
-        resetMessage();
+        view.hideMessages();
         listener.onLoginClose();
-    }
-
-    public void setMessage(final String message, final int type) {
-        view.setMessage(message, type);
     }
 
     public View getView() {
         return view;
-    }
-
-    public void resetMessage() {
-        view.hideMessage();
     }
 
     private void reset() {
@@ -174,6 +161,22 @@ public class LoginPresenter implements Login, MessagePresenter {
 
     public I18nLanguageDTO getCurrentLanguage() {
         return session.getCurrentLanguage();
+    }
+
+    public Object[][] getLanguages() {
+        return session.getLanguagesArray();
+    }
+
+    public Object[][] getCountries() {
+        return session.getCountriesArray();
+    }
+
+    public Object[][] getTimezones() {
+        return session.getTimezones();
+    }
+
+    private void resetMessages() {
+        view.hideMessages();
     }
 
 }

@@ -3,7 +3,7 @@
 <svg
    xmlns:i="http://ns.adobe.com/AdobeIllustrator/10.0/"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
@@ -13,12 +13,20 @@
    height="297mm"
    id="svg6293"
    sodipodi:version="0.32"
-   inkscape:version="0.45.1"
+   inkscape:version="0.45.1+0.46pre1"
    sodipodi:docbase="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img"
    sodipodi:docname="kune-arch.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <defs
-     id="defs6295" />
+     id="defs6295">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="-50 : 600 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="700 : 600 : 1"
+       inkscape:persp3d-origin="300 : 400 : 1"
+       id="perspective358" />
+  </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="white"
@@ -36,7 +44,8 @@
      inkscape:window-x="61"
      inkscape:window-y="0"
      showguides="true"
-     inkscape:guide-bbox="true" />
+     inkscape:guide-bbox="true"
+     showgrid="false" />
   <metadata
      id="metadata6298">
     <rdf:RDF>
@@ -771,7 +780,10 @@
        inkscape:export-ydpi="89.910126" />
     <g
        id="g7302"
-       transform="matrix(0.330985,0,0,0.330985,843.20232,973.49985)">
+       transform="matrix(0.330985,0,0,0.330985,843.20232,973.49985)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
+       inkscape:export-xdpi="89.910126"
+       inkscape:export-ydpi="89.910126">
       <g
          transform="translate(-420.3467,-6.57331)"
          id="g7304">
@@ -844,7 +856,10 @@
        x="666.15839"
        y="997.65466"
        id="text7328"
-       sodipodi:linespacing="100%"><tspan
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
+       inkscape:export-xdpi="89.910126"
+       inkscape:export-ydpi="89.910126"><tspan
          id="tspan7330"
          sodipodi:role="line"
          x="666.15839"
@@ -855,7 +870,10 @@
        y="1020.048"
        x="666.21216"
        style="font-size:5.95772934px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
-       xml:space="preserve"><tspan
+       xml:space="preserve"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
+       inkscape:export-xdpi="89.910126"
+       inkscape:export-ydpi="89.910126"><tspan
          y="1020.048"
          x="666.21216"
          sodipodi:role="line"
@@ -866,7 +884,10 @@
        y="1003.6124"
        x="666.15839"
        style="font-size:5.95772934px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
-       xml:space="preserve"><tspan
+       xml:space="preserve"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
+       inkscape:export-xdpi="89.910126"
+       inkscape:export-ydpi="89.910126"><tspan
          y="1003.6124"
          x="666.15839"
          sodipodi:role="line"
@@ -2166,7 +2187,10 @@
          y="448.21835">lang</tspan></text>
     <g
        id="g23013"
-       transform="translate(50,12)">
+       transform="translate(50,12)"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/kune-arch.png"
+       inkscape:export-xdpi="89.910126"
+       inkscape:export-ydpi="89.910126">
       <rect
          ry="5.0739045"
          y="571.96918"

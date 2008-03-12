@@ -32,10 +32,11 @@ import org.ourproject.kune.platf.client.services.I18nUITranslationService;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.workspace.client.WorkspaceClientModule;
 
-import to.tipit.gwtlib.FireLog;
-
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class KuneEntryPoint implements EntryPoint {
@@ -44,17 +45,38 @@ public class KuneEntryPoint implements EntryPoint {
     }
 
     public void onModuleLoad() {
+        /*
+         * Install an UncaughtExceptionHandler which will produce <code>FATAL</code>
+         * log messages
+         */
+        Log.setUncaughtExceptionHandler();
+
+        // At the moment, in runtime:
+        Log.setCurrentLogLevel(Log.LOG_LEVEL_DEBUG);
+
+        /*
+         * Use a deferred command so that the UncaughtExceptionHandler catches
+         * any exceptions in onModuleLoadCont()
+         */
+        DeferredCommand.addCommand(new Command() {
+            public void execute() {
+                onModuleLoadCont();
+            }
+        });
+    }
+
+    public void onModuleLoadCont() {
         final String userHash = Cookies.getCookie("userHash");
         Kune.I18N.getInitialLanguage(new AsyncCallback() {
             public void onFailure(final Throwable caught) {
-                FireLog.debug("Workspace adaptation to your language failed");
+                Log.debug("Workspace adaptation to your language failed");
             }
 
             public void onSuccess(final Object result) {
                 final I18nLanguageDTO initialLang = (I18nLanguageDTO) result;
                 Kune.I18N.getInitialLexicon(initialLang.getCode(), new AsyncCallback() {
                     public void onFailure(final Throwable caught) {
-                        FireLog.debug("Workspace adaptation to your language failed");
+                        Log.debug("Workspace adaptation to your language failed");
                     }
 
                     public void onSuccess(final Object result) {

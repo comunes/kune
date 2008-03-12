@@ -27,8 +27,7 @@ import org.ourproject.kune.platf.client.rpc.I18nService;
 import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
 import org.ourproject.kune.platf.client.services.Kune;
 
-import to.tipit.gwtlib.FireLog;
-
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class GetLexiconAction implements Action {
@@ -41,7 +40,7 @@ public class GetLexiconAction implements Action {
         final I18nServiceAsync server = I18nService.App.getInstance();
         server.getLexicon(language, new AsyncCallback() {
             public void onFailure(final Throwable caught) {
-                FireLog.debug("Workspace adaptation to your language failed");
+                Log.debug("Workspace adaptation to your language failed");
             }
 
             public void onSuccess(final Object result) {

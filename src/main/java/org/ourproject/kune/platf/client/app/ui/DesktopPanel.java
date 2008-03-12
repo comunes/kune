@@ -33,20 +33,17 @@ import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtext.client.widgets.QuickTip;
 import com.gwtext.client.widgets.QuickTips;
-import com.gwtext.client.widgets.QuickTipsConfig;
 
 public class DesktopPanel extends AbsolutePanel implements DesktopView {
 
     public DesktopPanel(final Workspace workspace, final SiteBarListener listener, final Session session) {
         QuickTips.init(); // extgwt tips
-        new QuickTipsConfig() {
-            {
-                setMinWidth(100);
-                setShowDelay(300);
-                setInterceptTitles(true);
-            }
-        };
+        QuickTip quickTipInstance = QuickTips.getQuickTip();
+        quickTipInstance.setDismissDelay(8000);
+        quickTipInstance.setHideDelay(500);
+        quickTipInstance.setInterceptTitles(true);
         SiteBar siteBar = SiteBarFactory.createSiteBar(listener, session);
         SiteMessage siteMessage = SiteBarFactory.getSiteMessage();
         this.add((Widget) siteMessage.getView(), calculateMessageWidth(Window.getClientWidth()),

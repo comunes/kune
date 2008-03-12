@@ -39,11 +39,6 @@ public class EntityLiveSearchPresenter extends AbstractPresenter {
         this.listener = listener;
     }
 
-    public void reset() {
-        this.listener = null;
-        view.reset();
-    }
-
     public void show() {
         view.show();
     }

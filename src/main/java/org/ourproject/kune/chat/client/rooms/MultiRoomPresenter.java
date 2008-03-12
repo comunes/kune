@@ -47,8 +47,11 @@ public class MultiRoomPresenter extends AbstractPresenter implements MultiRoom, 
         view.addPresenceBuddy("mengano", "Working", MultiRoomView.STATUS_BUSY);
     }
 
-    public Room createRoom(final String roomName, final String userAlias, final UserType type) {
-        Room room = ChatFactory.createRoom(this, roomName, userAlias, type);
+    public Room createRoom(final String roomName, final String userAlias, final UserType userType) {
+        Room room = ChatFactory.createRoom(this);
+        room.setRoomName(roomName);
+        room.setUserAlias(userAlias);
+        room.setUserType(userType);
         currentRoom = room;
         view.addRoomUsersPanel(room.getUsersListView());
         view.addRoom(room);
@@ -64,11 +67,6 @@ public class MultiRoomPresenter extends AbstractPresenter implements MultiRoom, 
         listener.onSendMessage(currentRoom, view.getInputText());
         // view.setSendEnabled(false);
         view.clearInputText();
-    }
-
-    public void onNoRooms() {
-        // TODO
-        view.closeRooms();
     }
 
     public void closeRoom(final RoomPresenter room) {
@@ -97,11 +95,6 @@ public class MultiRoomPresenter extends AbstractPresenter implements MultiRoom, 
 
     public void onMessageReceived(final Room room) {
         view.highlightRoom(room);
-    }
-
-    public void closeAllRooms() {
-        closeAllConfirmed = true;
-        view.closeRooms();
     }
 
     public void onCloseAllNotConfirmed() {

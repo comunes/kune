@@ -31,8 +31,7 @@ import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.i18n.I18nChangeListener;
 import org.ourproject.kune.workspace.client.i18n.I18nChangeListenerCollection;
 
-import to.tipit.gwtlib.FireLog;
-
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class I18nUITranslationService extends I18nTranslationService {
@@ -104,7 +103,7 @@ public class I18nUITranslationService extends I18nTranslationService {
         } else {
             // Not translated and not in db, make a petition for translation
             DefaultDispatcher.getInstance().fireDeferred(WorkspaceEvents.GET_TRANSLATION, this.currentLanguage, text);
-            FireLog.debug("Registering in db '" + text + "' as pending translation");
+            Log.debug("Registering in db '" + text + "' as pending translation");
             translation = removeNT(encodeText);
             lexicon.put(encodeText, UNTRANSLATED_VALUE);
         }

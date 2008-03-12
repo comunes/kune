@@ -453,6 +453,11 @@ public interface Images extends ImageBundle {
     AbstractImagePrototype info();
 
     /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/info-light.png
+     */
+    AbstractImagePrototype infoLight();
+
+    /**
      * @gwt.resource org/ourproject/kune/platf/public/images/kune-close.png
      */
     AbstractImagePrototype kuneClose();

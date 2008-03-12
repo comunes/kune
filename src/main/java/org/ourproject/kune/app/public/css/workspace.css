@@ -713,15 +713,52 @@
   font-size: 108%;
 }
 
-.kune-Content-Main h1,h2,h3 {
+.kune-Content-Main h1 {
   margin: 1em 0;
 }
 
-.kune-Content-Main h1,h2,h3,h4,h5,h6,strong {
+.kune-Content-Main h2 {
+  margin: 1em 0;
+}
+
+.kune-Content-Main h3 {
+  margin: 1em 0;
+}
+
+.kune-Content-Main h1 {
   font-weight: bold;
 }
 
-.kune-Content-Main abbr,acronym {
+.kune-Content-Main h2 {
+  font-weight: bold;
+}
+
+.kune-Content-Main h3 {
+  font-weight: bold;
+}
+
+.kune-Content-Main h4 {
+  font-weight: bold;
+}
+
+.kune-Content-Main h5 {
+  font-weight: bold;
+}
+
+.kune-Content-Main h6 {
+  font-weight: bold;
+}
+
+.kune-Content-Main strong {
+  font-weight: bold;
+}
+
+.kune-Content-Main abbr {
+  border-bottom: 1px dotted #000;
+  cursor: help;
+}
+
+.kune-Content-Main acronym {
   border-bottom: 1px dotted #000;
   cursor: help;
 }
@@ -730,23 +767,56 @@
   font-style: italic;
 }
 
-.kune-Content-Main blockquote,ul,ol,dl {
+.kune-Content-Main blockquote {
   margin: 1em;
 }
 
-.kune-Content-Main ol,ul,dl {
+.kune-Content-Main ul {
+  margin: 1em;
+}
+
+.kune-Content-Main ol {
+  margin: 1em;
+}
+
+.kune-Content-Main dl {
+  margin: 1em;
+}
+
+.kune-Content-Main ol {
   margin-left: 2em;
 }
 
-.kune-Content-Main ol li {
+.kune-Content-Main ul {
+  margin-left: 2em;
+}
+
+.kune-Content-Main dl {
+  margin-left: 2em;
+}
+
+.kune-Content-Main ol {
   list-style: decimal outside;
 }
 
-.kune-Content-Main ul li {
+.kune-Content-Main li {
+  list-style: decimal outside;
+}
+
+.kune-Content-Main li {
   list-style: disc outside;
 }
 
-.kune-Content-Main dl dd {
+.kune-Content-Main ul {
+  list-style: disc outside;
+}
+
+
+.kune-Content-Main dl {
+  margin-left: 1em;
+}
+
+.kune-Content-Main dd {
   margin-left: 1em;
 }
 
@@ -782,7 +852,41 @@
   margin-bottom: 1em;
 }
 
-.kune-Content-Main input[type=text],input[type=password],textarea {
+.kune-Content-Main input[type=text] {
   width: 12.25em; *
   width: 11.9em;
+}
+
+.kune-Content-Main input[type=password] {
+  width: 12.25em; *
+  width: 11.9em;
+}
+
+.kune-Content-Main textarea {
+  width: 12.25em; *
+  width: 11.9em;
+}
+
+.search-icon {
+  background-image: url(img/search.gif) !important;
+}
+
+.i18n-icon {
+  background-image: url(img/language.gif) !important;
+}
+
+.chat-icon {
+  background-image: url(img/chat.gif) !important;
+}
+
+.group-icon {
+  background-image: url(img/group.gif) !important;
+}
+
+.user-icon {
+  background-image: url(img/user.gif) !important;
+}
+
+.userf-icon {
+  background-image: url(img/userf.gif) !important;
 }

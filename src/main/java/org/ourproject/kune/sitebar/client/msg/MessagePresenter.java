@@ -25,6 +25,4 @@ public interface MessagePresenter {
 
     public abstract void setMessage(final String message, final int type);
 
-    public abstract void onMessageClose();
-
 }

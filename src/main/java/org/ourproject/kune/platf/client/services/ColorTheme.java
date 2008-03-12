@@ -23,10 +23,12 @@ import com.google.gwt.i18n.client.Dictionary;
 
 public class ColorTheme {
 
+    private static final String DEFAULT_KUNE_THEME = "defaultKuneTheme";
+
     private Dictionary theme;
 
     public ColorTheme() {
-        this("defaultKuneTheme");
+        this(DEFAULT_KUNE_THEME);
     }
 
     public ColorTheme(final String theme) {

@@ -26,8 +26,6 @@ public interface EntityLiveSearchComponent extends Component {
 
     void addListener(EntityLiveSearchListener presenter);
 
-    void reset();
-
     void show();
 
 }

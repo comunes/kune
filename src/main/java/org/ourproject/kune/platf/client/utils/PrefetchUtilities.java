@@ -39,24 +39,31 @@ public class PrefetchUtilities {
     }
 
     public static void doTasksDeferred(final Workspace workspace) {
+
         DeferredCommand.addCommand(new IncrementalCommand() {
             int i = 0;
             int j = 0;
-            int k = 0;
 
             String[] lic = { "gnu-fdl.gif", "bynd80x15.png", "byncsa80x15.png", "byncnd80x15.png", "bync80x15.png",
                     "by80x15.png", "fal-license.gif" };
 
-            String[] ext = { "basic-dialog/btn-sprite.gif", "form/text-bg.gif", "qtip/close.gif", "s.gif",
-                    "shadow-c.png", "shadow-lr.png", "shadow.png", "form/exclamation.gif", "layout/panel-close.gif",
-                    "qtip/tip-sprite.gif" };
-
-            String[] extgray = { "basic-dialog/close.gif", "basic-dialog/collapse.gif", "basic-dialog/e-handle.gif",
-                    "basic-dialog/hd-sprite.gif", "basic-dialog/s-handle.gif", "basic-dialog/se-handle.gif",
-                    "layout/collapse.gif", "layout/expand.gif", "layout/gradient-bg.gif", "layout/panel-close.gif",
-                    "layout/panel-title-light-bg.gif", "layout/tab-close-on.gif", "qtip/tip-sprite.gif", "s.gif",
-                    "sizer/e-handle-dark.gif", "sizer/s-handle-dark.gif", "sizer/sw-handle-dark.gif",
-                    "tabs/tab-sprite.gif" };
+            String[] ext = { "default/form/text-bg.gif", "default/form/trigger.gif", "default/form/date-trigger.gif",
+                    "gray/window/left-corners.png", "gray/button/btn-sprite.gif", "gray/window/top-bottom.png",
+                    "gray/window/right-corners.png", "gray/window/left-right.png", "default/sizer/s-handle.gif",
+                    "default/sizer/e-handle.gif", "default/sizer/ne-handle.gif", "default/sizer/se-handle.gif",
+                    "default/sizer/sw-handle.gif", "gray/panel/tool-sprites.gif", "default/sizer/nw-handle.gif",
+                    "gray/tabs/tabs-sprite.gif", "gray/tabs/tab-strip-bg.gif", "default/shadow.png",
+                    "default/shadow-lr.png", "default/shadow-c.png", "default/grid/invalid_line.gif",
+                    "default/form/exclamation.gif", "default/box/tb-blue.gif", "default/grid/loading.gif",
+                    "gray/toolbar/bg.gif", "default/grid/grid3-hrow.gif", "default/dd/drop-no.gif",
+                    "default/grid/col-move-top.gif", "default/grid/col-move-bottom.gif", "default/grid/row-over.gif",
+                    "default/grid/grid-split.gif", "default/grid/page-first-disabled.gif",
+                    "default/grid/page-last-disabled.gif", "default/grid/done.gif",
+                    "default/grid/page-prev-disabled.gif", "default/grid/done.gif",
+                    "default/grid/page-next-disabled.gif", "default/qtip/tip-sprite.gif",
+                    "default/grid/grid3-hrow-over.gif", "default/grid/grid3-hd-btn.gif",
+                    "gray/panel/white-top-bottom.gif", "gray/tabs/tab-close.gif", "gray/toolbar/btn-arrow.gif",
+                    "gray/toolbar/tb-btn-sprite.gif", "gray/panel/light-hd.gif" };
 
             public boolean execute() {
 
@@ -68,17 +75,11 @@ public class PrefetchUtilities {
 
                 while (j < ext.length) {
                     String extImg = ext[j];
-                    Image.prefetch("js/ext/resources/images/default/" + extImg);
+                    Image.prefetch("js/ext/resources/images/" + extImg);
                     j++;
                 }
 
-                while (k < extgray.length) {
-                    String extgrayImg = extgray[k];
-                    Image.prefetch("js/ext/resources/images/gray/" + extgrayImg);
-                    k++;
-                }
-
-                boolean notFinished = i + j + k < lic.length + ext.length + extgray.length;
+                boolean notFinished = i + j < lic.length + ext.length;
 
                 boolean finished = !notFinished;
 
@@ -89,19 +90,5 @@ public class PrefetchUtilities {
                 return notFinished;
             }
         });
-
-        /*
-         * Aero extjs theme
-         * Image.prefetch("js/ext/resources/images/aero/basic-dialog/bg-center.gif");
-         * Image.prefetch("js/ext/resources/images/aero/basic-dialog/bg-left.gif");
-         * Image.prefetch("js/ext/resources/images/aero/basic-dialog/bg-right.gif");
-         * Image.prefetch("js/ext/resources/images/aero/basic-dialog/collapse.gif");
-         * Image.prefetch("js/ext/resources/images/aero/basic-dialog/hd-sprite.gif");
-         * Image.prefetch("js/ext/resources/images/aero/basic-dialog/se-handle.gif");
-         * Image.prefetch("js/ext/resources/images/aero/grid/grid-hrow.gif");
-         * Image.prefetch("js/ext/resources/images/aero/s.gif");
-         * Image.prefetch("js/ext/resources/images/aero/tabs/tab-sprite.gif");
-         * Image.prefetch("js/ext/resources/images/aero/tabs/tab-strip-bg.gif");
-         */
     }
 }

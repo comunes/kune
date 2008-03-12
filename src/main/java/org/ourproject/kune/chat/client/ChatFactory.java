@@ -43,12 +43,11 @@ import org.ourproject.kune.chat.client.rooms.RoomListener;
 import org.ourproject.kune.chat.client.rooms.RoomPresenter;
 import org.ourproject.kune.chat.client.rooms.RoomUserList;
 import org.ourproject.kune.chat.client.rooms.RoomUserListPresenter;
-import org.ourproject.kune.chat.client.rooms.RoomUser.UserType;
 import org.ourproject.kune.chat.client.rooms.ui.MultiRoomPanel;
 import org.ourproject.kune.chat.client.rooms.ui.RoomPanel;
 import org.ourproject.kune.chat.client.rooms.ui.RoomUserListPanel;
-import org.ourproject.kune.workspace.client.component.WorkspaceDeckPanel;
 import org.ourproject.kune.workspace.client.WorkspaceFactory;
+import org.ourproject.kune.workspace.client.component.WorkspaceDeckPanel;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 
 public class ChatFactory {
@@ -97,10 +96,10 @@ public class ChatFactory {
         return userListPresenter;
     }
 
-    public static Room createRoom(final RoomListener listener, final String roomName, final String userAlias,
-            final UserType type) {
+    public static Room createRoom(final RoomListener listener) {
         RoomUserList userList = ChatFactory.createUserList();
-        RoomPresenter presenter = new RoomPresenter(listener, roomName, userAlias, type, userList);
+        RoomPresenter presenter = new RoomPresenter(listener);
+        presenter.setUserList(userList);
         RoomPanel panel = new RoomPanel(presenter);
         presenter.init(panel);
         return presenter;

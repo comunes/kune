@@ -30,7 +30,6 @@ import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
-import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class ContentTitlePresenter implements ContentTitleComponent {
@@ -59,8 +58,15 @@ public class ContentTitlePresenter implements ContentTitleComponent {
     }
 
     public void setContentDate(final Date publishedOn) {
-        DateTimeFormat fmt = DateTimeFormat.getFormat("MM/dd/yyyy, Z");
-        view.setContentDate(Kune.I18N.t("Published on: [%s]", fmt.format(publishedOn)));
+        // FIXME: gwt 1.5
+        // DateTimeFormat fmt = DateTimeFormat.getFormat("MM/dd/yyyy, Z");
+        // view.setContentDate(Kune.I18N.t("Published on: [%s]",
+        // fmt.format(publishedOn)));
+
+        // "Unresolved type
+        // com.google.gwt.i18n.client.DateTimeFormat$PatternPart"
+
+        view.setContentDate(Kune.I18N.t("Published on: [%s]", "FIXME gwt 1.5m1 ISSUE"));
     }
 
     private void setContentTitle(final String title, final boolean editable) {

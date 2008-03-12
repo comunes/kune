@@ -44,10 +44,6 @@ public interface LoginView extends View {
 
     public boolean isRegisterFormValid();
 
-    public void hideMessage();
-
-    public void setMessage(String message, int type);
-
     public String getLanguage();
 
     public String getCountry();
@@ -59,5 +55,11 @@ public interface LoginView extends View {
     public void unMask();
 
     public void maskProcessing();
+
+    public void setSignInMessage(String message, int type);
+
+    public void setRegisterMessage(String t, int error);
+
+    public void hideMessages();
 
 }

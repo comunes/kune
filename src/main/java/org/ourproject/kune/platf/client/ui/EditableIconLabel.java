@@ -99,23 +99,19 @@ public class EditableIconLabel extends Composite {
         reset();
         if (editable) {
             if (useDoubleClick) {
-                setQuickTip(Kune.I18N.t("Double click to rename"));
+                label.setTitle(Kune.I18N.t("Double click to rename"));
                 label.addDoubleClickListener(listener);
             } else {
-                setQuickTip(Kune.I18N.t("Click to rename"));
+                label.setTitle(Kune.I18N.t("Click to rename"));
                 label.addClickListener(listener);
             }
             label.addStyleDependentName("editable");
             // label.addDoubleClickListener(listener);
             label.addMouseListener(mouseOverListener);
         } else {
-            setQuickTip("");
+            label.setTitle("");
             label.addStyleDependentName("noneditable");
         }
-    }
-
-    private void setQuickTip(final String text) {
-        KuneUiUtils.setQuickTip((Widget) label, text);
     }
 
     public void restoreOldText() {

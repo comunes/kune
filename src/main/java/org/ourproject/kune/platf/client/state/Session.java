@@ -65,7 +65,7 @@ public interface Session {
 
     public void setTimezones(final String[] timezones);
 
-    public String[] getTimezones();
+    public Object[][] getTimezones();
 
     public void setCurrentLanguage(final I18nLanguageDTO currentLanguage);
 

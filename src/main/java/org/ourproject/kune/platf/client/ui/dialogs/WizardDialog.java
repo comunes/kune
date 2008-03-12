@@ -26,18 +26,13 @@ import org.ourproject.kune.workspace.client.ui.form.WizardListener;
 
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Widget;
-import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
-import com.gwtext.client.widgets.LayoutDialog;
-import com.gwtext.client.widgets.LayoutDialogConfig;
-import com.gwtext.client.widgets.event.DialogListener;
-import com.gwtext.client.widgets.layout.BorderLayout;
-import com.gwtext.client.widgets.layout.ContentPanel;
-import com.gwtext.client.widgets.layout.LayoutRegionConfig;
+import com.gwtext.client.widgets.Panel;
+import com.gwtext.client.widgets.event.WindowListenerAdapter;
 
 public class WizardDialog {
 
-    private final LayoutDialog dialog;
+    private final BasicDialog dialog;
     private final Button backButton;
     private final Button nextButton;
     private final Button cancelButton;
@@ -45,78 +40,46 @@ public class WizardDialog {
 
     public WizardDialog(final String caption, final boolean modal, final boolean minimizable, final int width,
             final int height, final int minWidth, final int minHeight, final WizardListener listener) {
-        dialog = new LayoutDialog(new LayoutDialogConfig() {
-            {
-                // Param values
-                setTitle(caption);
-                setModal(modal);
-                setWidth(width);
-                setHeight(height);
-                setMinWidth(minWidth);
-                setMinHeight(minHeight);
-                setCollapsible(minimizable);
+        dialog = new BasicDialog(caption, modal, false, width, height, minWidth, minHeight);
+        dialog.setCollapsible(minimizable);
+        dialog.setShadow(true);
+        dialog.setPlain(true);
+        dialog.setCollapsible(false);
+        dialog.setResizable(false);
 
-                // Def values
-                setShadow(true);
-                setProxyDrag(true);
+        backButton = new CustomButton(Kune.I18N.tWithNT("« Back", "used in button"), new ClickListener() {
+            public void onClick(final Widget sender) {
+                listener.onBack();
             }
-        }, new LayoutRegionConfig());
+        }).getButton();
+        dialog.addButton(backButton);
 
-        backButton = dialog.addButton(new CustomButton(Kune.I18N.tWithNT("« Back", "used in button"),
-                new ClickListener() {
-                    public void onClick(final Widget sender) {
-                        listener.onBack();
-                    }
-                }).getButton());
+        nextButton = new CustomButton(Kune.I18N.tWithNT("Next »", "used in button"), new ClickListener() {
+            public void onClick(final Widget sender) {
+                listener.onNext();
+            }
+        }).getButton();
+        dialog.addButton(nextButton);
 
-        nextButton = dialog.addButton(new CustomButton(Kune.I18N.tWithNT("Next »", "used in button"),
-                new ClickListener() {
-                    public void onClick(final Widget sender) {
-                        listener.onNext();
-                    }
-                }).getButton());
+        cancelButton = new CustomButton(Kune.I18N.tWithNT("Cancel", "used in button"), new ClickListener() {
+            public void onClick(final Widget sender) {
+                listener.onCancel();
+            }
+        }).getButton();
+        dialog.addButton(cancelButton);
 
-        cancelButton = dialog.addButton(new CustomButton(Kune.I18N.tWithNT("Cancel", "used in button"),
-                new ClickListener() {
-                    public void onClick(final Widget sender) {
-                        listener.onCancel();
-                    }
-                }).getButton());
+        finishButton = new CustomButton(Kune.I18N.tWithNT("Finish", "used in button"), new ClickListener() {
+            public void onClick(final Widget sender) {
+                listener.onFinish();
+            }
+        }).getButton();
+        dialog.addButton(finishButton);
 
-        finishButton = dialog.addButton(new CustomButton(Kune.I18N.tWithNT("Finish", "used in button"),
-                new ClickListener() {
-                    public void onClick(final Widget sender) {
-                        listener.onFinish();
-                    }
-                }).getButton());
-
-        dialog.addDialogListener(new DialogListener() {
-
-            public boolean doBeforeHide(final LayoutDialog dialog) {
+        dialog.addListener(new WindowListenerAdapter() {
+            public void onClose(final Panel panel) {
                 listener.onClose();
-                return true;
-            }
-
-            public boolean doBeforeShow(final LayoutDialog dialog) {
-                return true;
-            }
-
-            public void onHide(final LayoutDialog dialog) {
-            }
-
-            public void onKeyDown(final LayoutDialog dialog, final EventObject e) {
-            }
-
-            public void onMove(final LayoutDialog dialog, final int x, final int y) {
-            }
-
-            public void onResize(final LayoutDialog dialog, final int width, final int height) {
-            }
-
-            public void onShow(final LayoutDialog dialog) {
             }
         });
-
     }
 
     public WizardDialog(final String caption, final boolean modal, final boolean minimizable, final int width,
@@ -125,10 +88,7 @@ public class WizardDialog {
     }
 
     public void add(final Widget widget) {
-        BorderLayout layout = dialog.getLayout();
-        ContentPanel contentPanel = new ContentPanel();
-        contentPanel.add(widget);
-        layout.add(contentPanel);
+        dialog.add(widget);
     }
 
     public void show() {

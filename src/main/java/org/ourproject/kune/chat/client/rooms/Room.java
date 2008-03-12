@@ -67,4 +67,8 @@ public interface Room {
 
     void setUserType(UserType userType);
 
+    void setUserAlias(String userAlias);
+
+    void setRoomName(String roomName);
+
 }

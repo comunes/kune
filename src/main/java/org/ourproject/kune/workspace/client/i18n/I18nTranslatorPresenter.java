@@ -54,7 +54,7 @@ public class I18nTranslatorPresenter implements I18nTranslatorComponent {
         view.hide();
     }
 
-    public void onClose() {
+    public void doClose() {
         view.hide();
         DefaultDispatcher.getInstance().fire(WorkspaceEvents.DETACH_FROM_EXT_POINT,
                 WorkspaceUIExtensionPoint.CONTENT_BOTTOM_ICONBAR, view);

@@ -20,6 +20,7 @@
 package org.ourproject.kune.workspace.client.workspace.ui;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
@@ -29,7 +30,8 @@ public class BottomTrayIcon extends MenuBar implements View {
 
     public BottomTrayIcon(final String title) {
         super(true);
-        super.setTitle(title);
+        // super.setTitle(title);
+        KuneUiUtils.setQuickTip(this, title);
         super.addStyleDependentName("kune-IconBottomMenu-offset");
         super.addStyleName("kune-Margin-Medium-r");
         super.setStyleName("kune-IconBottomPanel");

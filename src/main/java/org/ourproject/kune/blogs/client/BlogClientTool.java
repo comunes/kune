@@ -55,8 +55,6 @@ public class BlogClientTool extends AbstractClientTool implements BlogContentLis
     public void setContent(final StateDTO state) {
         BlogContent docContent = components.getContent();
         docContent.setContent(state);
-
-        // TODO: revistar el interface de trigger (setState)
         trigger.setState(state.getStateToken().toString());
     }
 

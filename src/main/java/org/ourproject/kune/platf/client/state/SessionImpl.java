@@ -42,10 +42,11 @@ public class SessionImpl implements Session {
     private List countries;
     private Object[][] languagesArray;
     private Object[][] countriesArray;
+    private String[] timezones;
+    private Object[][] timezonesArray;
     private StateDTO currentState;
     private String[] wsThemes;
     private String defaultWsTheme;
-    private String[] timezones;
     private I18nLanguageDTO currentLanguage;
 
     public SessionImpl(final String usersHash, final I18nLanguageDTO initialLang) {
@@ -191,7 +192,7 @@ public class SessionImpl implements Session {
      */
     public Object[][] getLanguagesArray() {
         if (languagesArray == null) {
-            languagesArray = mapLangs(languages);
+            languagesArray = mapLangs();
         }
         return languagesArray;
     }
@@ -203,12 +204,23 @@ public class SessionImpl implements Session {
      */
     public Object[][] getCountriesArray() {
         if (countriesArray == null) {
-            countriesArray = mapCountries(countries);
+            countriesArray = mapCountries();
         }
         return countriesArray;
     }
 
-    private Object[][] mapCountries(final List countries) {
+    public void setTimezones(final String[] timezones) {
+        this.timezones = timezones;
+    }
+
+    public Object[][] getTimezones() {
+        if (timezonesArray == null) {
+            mapTimezones();
+        }
+        return timezonesArray;
+    }
+
+    private Object[][] mapCountries() {
         Object[][] objs = new Object[countries.size()][1];
         int i = 0;
         for (Iterator iterator = countries.iterator(); iterator.hasNext();) {
@@ -219,7 +231,7 @@ public class SessionImpl implements Session {
         return objs;
     }
 
-    private Object[][] mapLangs(final List languages) {
+    private Object[][] mapLangs() {
         Object[][] objs = new Object[languages.size()][1];
         int i = 0;
         for (Iterator iterator = languages.iterator(); iterator.hasNext();) {
@@ -230,12 +242,12 @@ public class SessionImpl implements Session {
         return objs;
     }
 
-    public void setTimezones(final String[] timezones) {
-        this.timezones = timezones;
-    }
-
-    public String[] getTimezones() {
-        return timezones;
+    private void mapTimezones() {
+        timezonesArray = new Object[timezones.length][1];
+        for (int i = 0; i < timezones.length; i++) {
+            Object[] obj = new Object[] { timezones[i] };
+            timezonesArray[i] = obj;
+        }
     }
 
     public void setCurrentLanguage(final I18nLanguageDTO currentLanguage) {

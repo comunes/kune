@@ -44,8 +44,6 @@ public interface MultiRoomView {
 
     void showUserList(RoomUserListView usersListView);
 
-    void closeRooms();
-
     void setSendEnabled(boolean enabled);
 
     void clearInputText();

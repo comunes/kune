@@ -22,6 +22,7 @@ package org.ourproject.kune.workspace.client.editor;
 
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.CustomPushButton;
+import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.palette.ColorSelectListener;
 import org.ourproject.kune.platf.client.ui.palette.WebSafePalettePanel;
 import org.ourproject.kune.platf.client.ui.palette.WebSafePalettePresenter;
@@ -147,13 +148,9 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
         }
 
         private void showLinkPanel() {
-            // TODO Auto-generated method stub
-
         }
 
         private void showImagePanel() {
-            // TODO Auto-generated method stub
-
         }
 
         public void onKeyDown(final Widget sender, final char keyCode, final int modifiers) {
@@ -367,7 +364,7 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
         MenuBar submenu = new MenuBar(true);
         String fontName[] = { "Times New Roman", "Arial", "Courier New", "Georgia", "Trebuchet", "Verdana" };
 
-        menu.setTitle(Kune.I18N.t("Font Type"));
+        KuneUiUtils.setQuickTip(menu, Kune.I18N.t("Font Type"));
         menu.addItem(images.charfontname().getHTML(), true, submenu);
         for (int i = 0; i < fontName.length; i++) {
             final String f = fontName[i];
@@ -389,7 +386,7 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
         String fontSizes[] = { Kune.I18N.t("Extra small"), Kune.I18N.t("Very small"), Kune.I18N.t("small"),
                 Kune.I18N.t("Medium"), Kune.I18N.t("Large"), Kune.I18N.t("Very large"), Kune.I18N.t("Extra large") };
 
-        menu.setTitle(Kune.I18N.t("Font Size"));
+        KuneUiUtils.setQuickTip(menu, Kune.I18N.t("Font Size"));
         menu.addItem(images.fontheight().getHTML(), true, submenu);
         for (int i = 0; i < fontSizes.length; i++) {
             final String f = fontSizes[i];
@@ -409,14 +406,14 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
     private PushButton createPushButton(final AbstractImagePrototype img, final String tip) {
         PushButton pb = new PushButton(img.createImage());
         pb.addClickListener(listener);
-        pb.setTitle(tip);
+        KuneUiUtils.setQuickTip(pb, tip);
         return pb;
     }
 
     private ToggleButton createToggleButton(final AbstractImagePrototype img, final String tip) {
         ToggleButton tb = new ToggleButton(img.createImage());
         tb.addClickListener(listener);
-        tb.setTitle(tip);
+        KuneUiUtils.setQuickTip(tb, tip);
         return tb;
     }
 

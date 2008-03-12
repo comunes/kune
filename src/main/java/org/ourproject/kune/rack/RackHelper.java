@@ -19,8 +19,6 @@
 
 package org.ourproject.kune.rack;
 
-import java.util.regex.Pattern;
-
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 

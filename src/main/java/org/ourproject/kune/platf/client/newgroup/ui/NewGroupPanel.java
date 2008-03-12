@@ -35,48 +35,46 @@ import org.ourproject.kune.sitebar.client.msg.SiteMessage;
 import org.ourproject.kune.sitebar.client.msg.SiteMessagePanel;
 import org.ourproject.kune.workspace.client.ui.form.WizardListener;
 
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.gwtext.client.core.EventCallback;
-import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Position;
-import com.gwtext.client.widgets.form.CheckboxConfig;
-import com.gwtext.client.widgets.form.FieldSetConfig;
-import com.gwtext.client.widgets.form.Form;
-import com.gwtext.client.widgets.form.FormConfig;
+import com.gwtext.client.widgets.Panel;
+import com.gwtext.client.widgets.form.Field;
+import com.gwtext.client.widgets.form.FieldSet;
+import com.gwtext.client.widgets.form.FormPanel;
 import com.gwtext.client.widgets.form.Radio;
 import com.gwtext.client.widgets.form.TextArea;
-import com.gwtext.client.widgets.form.TextAreaConfig;
 import com.gwtext.client.widgets.form.TextField;
-import com.gwtext.client.widgets.form.TextFieldConfig;
+import com.gwtext.client.widgets.form.event.TextFieldListenerAdapter;
+import com.gwtext.client.widgets.layout.FitLayout;
 
 public class NewGroupPanel extends WizardDialog implements NewGroupView {
+    private static final AbstractImagePrototype INFO_IMAGE = Images.App.getInstance().info();
     private static final String MUST_BE_BETWEEN_3_AND_15 = "Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes";
-
     private static final String SHORTNAME_FIELD = "short_name";
     private static final String LONGNAME_FIELD = "long_name";
     private static final String PUBLICDESC_FIELD = "public_desc";
     private static final String TYPEOFGROUP_FIELD = "type_of_group";
-    private final Form newGroupInitialDataForm;
+
+    private final FormPanel newGroupInitialDataForm;
     private Radio projectRadio;
     private Radio orgRadio;
     private Radio communityRadio;
     private Radio orphanedProjectRadio;
-
     private TextField shortNameField;
     private TextField longNameField;
     private TextArea publicDescField;
     private final DeckPanel deck;
     private LicenseChoose licenseChoosePanel;
-
     private final SiteMessagePanel messagesPanel;
 
     public NewGroupPanel(final NewGroupPresenter presenter) {
-        super(Kune.I18N.t("Register a new Group"), true, false, 470, 450, new WizardListener() {
+        super(Kune.I18N.t("Register a new Group"), true, false, 460, 480, new WizardListener() {
             public void onBack() {
                 presenter.onBack();
             }
@@ -97,6 +95,9 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
                 presenter.onClose();
             }
         });
+        Field.setMsgTarget("side");
+        Panel centerPanel = new Panel();
+        centerPanel.setLayout(new FitLayout());
         deck = new DeckPanel();
         newGroupInitialDataForm = createNewGroupInitialDataForm(presenter);
         createChooseLicensePanel();
@@ -121,13 +122,12 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         chooseLicenseVP.add(licenseTypeLabel);
 
         newGroupInitialDataHP.addStyleName("kune-Margin-Medium-b");
-        newGroupInitialDataHP.addStyleName("kune-Margin-Medium-b");
         step1Label.addStyleName("kune-Margin-Large-l");
         step2Label.addStyleName("kune-Margin-Large-l");
         step1Label.addStyleName("kune-Margin-Medium-b");
         step2Label.addStyleName("kune-Margin-Medium-b");
 
-        messagesPanel = new SiteMessagePanel(presenter, false);
+        messagesPanel = new SiteMessagePanel(null, false);
         messagesPanel.setWidth("425");
         messagesPanel.setMessage("", SiteMessage.INFO, SiteMessage.ERROR);
         newGroupInitialDataVP.add(messagesPanel);
@@ -135,7 +135,8 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         chooseLicenseVP.add((Widget) licenseChoosePanel.getView());
         deck.add(newGroupInitialDataVP);
         deck.add(chooseLicenseVP);
-        super.add(deck);
+        centerPanel.add(deck);
+        super.add(centerPanel);
         deck.showWidget(0);
         initBottomButtons();
         // newGroupInitialDataVP.addStyleName("kune-Default-Form");
@@ -159,12 +160,12 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
     }
 
     public boolean isFormValid() {
-        return newGroupInitialDataForm.isValid();
+        return newGroupInitialDataForm.getForm().isValid();
     }
 
     public void clearData() {
         deck.showWidget(0);
-        newGroupInitialDataForm.reset();
+        newGroupInitialDataForm.getForm().reset();
         ((LicenseChoosePanel) licenseChoosePanel.getView()).reset();
         showNewGroupInitialDataForm();
         initBottomButtons();
@@ -226,149 +227,111 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         super.setEnabledNextButton(true);
     }
 
-    private Form createNewGroupInitialDataForm(final NewGroupPresenter presenter) {
-        Form form = new Form(new FormConfig() {
-            {
-                setWidth(400);
-                setLabelWidth(100);
-                setLabelAlign(Position.RIGHT);
-                setButtonAlign(Position.RIGHT);
-            }
-        });
+    private FormPanel createNewGroupInitialDataForm(final NewGroupPresenter presenter) {
+        FormPanel form = new FormPanel();
+        form.setBorder(false);
+        form.setWidth(420);
+        form.setLabelWidth(100);
+        form.setLabelAlign(Position.RIGHT);
+        form.setButtonAlign(Position.RIGHT);
 
-        shortNameField = new TextField(new TextFieldConfig() {
-            {
-                setFieldLabel(Kune.I18N.t("Short name"));
-                setName(SHORTNAME_FIELD);
-                setWidth(175);
-                setMinLength(3);
-                setMaxLength(15);
-                setAllowBlank(false);
-                setMsgTarget("side");
-                setRegex("^[a-z0-9_\\-]+$");
-                setMinLengthText(Kune.I18N.t(MUST_BE_BETWEEN_3_AND_15));
-                setMaxLengthText(Kune.I18N.t(MUST_BE_BETWEEN_3_AND_15));
-                setRegexText(Kune.I18N.t(MUST_BE_BETWEEN_3_AND_15));
-                setValidationDelay(1000);
-            }
-        });
+        shortNameField = new TextField();
+        shortNameField.setFieldLabel(Kune.I18N.t("Short name"));
+        shortNameField.
+
+        setName(SHORTNAME_FIELD);
+        shortNameField.setWidth(175);
+        shortNameField.setMinLength(3);
+        shortNameField.setMaxLength(15);
+        shortNameField.setAllowBlank(false);
+        shortNameField.setRegex("^[a-z0-9_\\-]+$");
+        shortNameField.setMinLengthText(Kune.I18N.t(MUST_BE_BETWEEN_3_AND_15));
+        shortNameField.setMaxLengthText(Kune.I18N.t(MUST_BE_BETWEEN_3_AND_15));
+        shortNameField.setRegexText(Kune.I18N.t(MUST_BE_BETWEEN_3_AND_15));
+        shortNameField.setValidationDelay(1000);
+
         form.add(shortNameField);
 
-        longNameField = new TextField(new TextFieldConfig() {
-            {
-                setFieldLabel(Kune.I18N.t("Long name"));
-                setName(LONGNAME_FIELD);
-                setWidth(300);
-                setAllowBlank(false);
-                setMsgTarget("side");
-                setMinLength(3);
-                setMaxLength(50);
-                setValidationDelay(1000);
-            }
-        });
+        longNameField = new TextField();
+        longNameField.setFieldLabel(Kune.I18N.t("Long name"));
+        longNameField.setName(LONGNAME_FIELD);
+        longNameField.setWidth(300);
+        longNameField.setAllowBlank(false);
+
+        longNameField.setMinLength(3);
+        longNameField.setMaxLength(50);
+        longNameField.setValidationDelay(1000);
         form.add(longNameField);
 
-        publicDescField = new TextArea(new TextAreaConfig() {
-            {
-                setFieldLabel(Kune.I18N.t("Public description"));
-                setName(PUBLICDESC_FIELD);
-                setWidth(300);
-                setAllowBlank(false);
-                setMsgTarget("side");
-                setMinLength(10);
-                setMaxLength(255);
-                setValidationDelay(1000);
-            }
-        });
+        publicDescField = new TextArea();
+        publicDescField.setFieldLabel(Kune.I18N.t("Public description"));
+        publicDescField.setName(PUBLICDESC_FIELD);
+        publicDescField.setWidth(300);
+        publicDescField.setAllowBlank(false);
+        publicDescField.setMinLength(10);
+        publicDescField.setMaxLength(255);
+        publicDescField.setValidationDelay(1000);
+
         form.add(publicDescField);
 
-        form.fieldset(new FieldSetConfig() {
-            {
-                setLegend(Kune.I18N.t("Type of group"));
-                setHideLabels(true);
-                setStyle("margin-left: 105px");
-            }
-        });
+        FieldSet groupTypeFieldSet = new FieldSet(Kune.I18N.t("Type of group"));
+        groupTypeFieldSet.setStyle("margin-left: 105px");
+        groupTypeFieldSet.setCollapsible(true);
+        form.add(groupTypeFieldSet);
 
-        projectRadio = new Radio(new CheckboxConfig() {
-            {
-                setName(TYPEOFGROUP_FIELD);
-                setBoxLabel(Kune.I18N.t("Project"));
-                setAutoCreate(true);
-                setChecked(true);
-            }
-        });
-        form.add(projectRadio);
-
-        orgRadio = new Radio(new CheckboxConfig() {
-            {
-                setName(TYPEOFGROUP_FIELD);
-                setBoxLabel(Kune.I18N.t("Organization"));
-                setAutoCreate(true);
-            }
-        });
-        form.add(orgRadio);
-
-        communityRadio = new Radio(new CheckboxConfig() {
-            {
-                setName(TYPEOFGROUP_FIELD);
-                setBoxLabel(Kune.I18N.t("Community"));
-                setAutoCreate(true);
-            }
-        });
-        form.add(communityRadio);
-
-        orphanedProjectRadio = new Radio(new CheckboxConfig() {
-            {
-                setName(TYPEOFGROUP_FIELD);
-                setBoxLabel(Kune.I18N.t("Orphaned Project"));
-                setAutoCreate(true);
-            }
-        });
-        form.add(orphanedProjectRadio);
-
-        form.end();
-
-        form.end();
-        form.render();
-
-        KuneUiUtils.setQuickTip(projectRadio, Kune.I18N
-                .t("A project is a kind of group in which new members inclusion "
+        projectRadio = new Radio();
+        createRadio(groupTypeFieldSet, projectRadio, "Project",
+                "A project is a kind of group in which new members inclusion "
                         + "is moderated by the project administrators. "
                         + "An administrator is the person who creates the project "
-                        + "and other people she/he choose in the future as administrator too."));
+                        + "and other people she/he choose in the future as administrator too.");
+        projectRadio.setChecked(true);
 
-        KuneUiUtils.setQuickTip(orgRadio, Kune.I18N.t("An organization is like a project, "
-                + "but organizations must be a legal entity."));
+        orgRadio = new Radio();
+        createRadio(groupTypeFieldSet, orgRadio, "Organization", "An organization is like a project, "
+                + "but organizations must be a legal entity.");
 
-        KuneUiUtils.setQuickTip(communityRadio, Kune.I18N.t("Communities are social group of persons "
+        communityRadio = new Radio();
+        createRadio(groupTypeFieldSet, communityRadio, "Community", "Communities are social group of persons "
                 + "with shared interests and they are open to new members "
                 + "(for instance the environmental community or the LGBT community). "
-                + "Normally they aren't a legal entity."));
+                + "Normally they aren't a legal entity.");
 
-        KuneUiUtils.setQuickTip(orphanedProjectRadio, Kune.I18N.t("If you have an idea but you don't have "
-                + "capacity/possibilities/resources to work on it, "
-                + "just register a orphaned project, and permit others to work and develop it."));
+        orphanedProjectRadio = new Radio();
+        createRadio(groupTypeFieldSet, orphanedProjectRadio, "Orphaned Project",
+                "If you have an idea but you don't have " + "capacity/possibilities/resources to work on it, "
+                        + "just register a orphaned project, and permit others to work and develop it.");
 
-        shortNameField.getEl().addListener("keypress", new EventCallback() {
-            public void execute(final EventObject e) {
+        groupTypeFieldSet.setCollapsible(false);
+
+        shortNameField.addListener(new TextFieldListenerAdapter() {
+            public void onChange(final Field field, final Object newVal, final Object oldVal) {
                 presenter.onChange();
             }
         });
 
-        longNameField.getEl().addListener("keypress", new EventCallback() {
-            public void execute(final EventObject e) {
+        longNameField.addListener(new TextFieldListenerAdapter() {
+            public void onChange(final Field field, final Object newVal, final Object oldVal) {
                 presenter.onChange();
             }
         });
 
-        publicDescField.getEl().addListener("keypress", new EventCallback() {
-            public void execute(final EventObject e) {
+        publicDescField.addListener(new TextFieldListenerAdapter() {
+            public void onChange(final Field field, final Object newVal, final Object oldVal) {
                 presenter.onChange();
             }
         });
 
         return form;
+    }
+
+    private void createRadio(final FieldSet fieldSet, final Radio radio, final String radioLabel, final String radioTip) {
+        radio.setName(TYPEOFGROUP_FIELD);
+        radio.setBoxLabel(KuneUiUtils
+                .genQuickTipLabel(Kune.I18N.t(radioLabel), null, Kune.I18N.t(radioTip), INFO_IMAGE));
+        radio.setAutoCreate(true);
+        radio.setHideLabel(true);
+        fieldSet.add(radio);
     }
 
     private void createChooseLicensePanel() {

@@ -19,7 +19,7 @@
 
 package org.ourproject.kune.platf.client.search;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import org.ourproject.kune.platf.client.AbstractPresenter;
@@ -28,14 +28,16 @@ import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.WorkspaceUIExtensionPoint;
 
+import com.allen_sauer.gwt.log.client.Log;
+
 public class SearchSitePresenter extends AbstractPresenter implements SearchSite {
 
     private SearchSiteView view;
     private int currentSearch;
-    private final ArrayList searchHistory;
+    private final HashMap searchHistory;
 
     public SearchSitePresenter() {
-        searchHistory = new ArrayList();
+        searchHistory = new HashMap();
         currentSearch = SearchSiteView.GROUP_USER_SEARCH;
     }
 
@@ -61,14 +63,15 @@ public class SearchSitePresenter extends AbstractPresenter implements SearchSite
     }
 
     public void doSearch(final String text) {
-        searchHistory.add(text);
+        searchHistory.put(text, null);
+        Log.debug("Search History: " + searchHistory.toString());
         view.search(text, currentSearch);
     }
 
     public Object[][] getSearchHistory() {
         Object[][] objs = new Object[searchHistory.size()][1];
         int i = 0;
-        for (Iterator iterator = searchHistory.iterator(); iterator.hasNext();) {
+        for (Iterator iterator = searchHistory.keySet().iterator(); iterator.hasNext();) {
             String search = (String) iterator.next();
             Object[] obj = new Object[] { search };
             objs[i++] = obj;

@@ -21,7 +21,10 @@ package org.ourproject.kune.platf.client.ui;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtext.client.widgets.ToolTip;
 
 public class KuneUiUtils {
 
@@ -44,21 +47,40 @@ public class KuneUiUtils {
      * @param element
      * @param tip
      */
-    public static void setQuickTip(final Element element, final String tip) {
+    public static void setQuickTip(final Element element, final String tipText) {
+        setQuickTip(element, tipText, null);
+    }
+
+    public static void setQuickTip(final Element element, final String tipText, final String tipTitle) {
         // If we don't want to use ext, use 'title' instead (limited to 64
         // chars)
-        if (tip == null || tip.length() == 0) {
+        if (tipText == null || tipText.length() == 0) {
             DOM.removeElementAttribute(element, "ext:qtip");
         } else {
+            ToolTip tip = new ToolTip();
+            tip.setHtml(tipText);
+            if (tipTitle != null) {
+                tip.setTitle(tipTitle);
+            }
+            tip.applyTo(element);
             // check size here?
-            String newTip = "<div style='min-width: 35px'>" + tip + "</div>";
-            DOM.setElementAttribute(element, "ext:qtip", newTip);
+            // String newTip = "<div style='min-width: 35px'>" + tip + "</div>";
         }
     }
 
-    public static void setQuickTip(final Element element, final String tip, final String tipTitle) {
-        setQuickTip(element, tip);
-        DOM.setElementAttribute(element, "ext:qtitle", tipTitle);
+    public static String genQuickTipLabel(final String labelText, final String tipTitle, final String tipText,
+            final AbstractImagePrototype icon) {
+        String tipHtml = "<span style=\"vertical-align: middle;\" ext:qtip=\"" + tipText + "\"";
+        if (tipTitle != null && tipTitle.length() > 0) {
+            tipHtml += " ext:qtitle=\"" + tipTitle + "\"";
+        }
+        tipHtml += ">" + labelText + "&nbsp;";
+        Image iconImg = new Image();
+        icon.applyTo(iconImg);
+        setQuickTip(iconImg, tipText, tipTitle);
+        tipHtml += iconImg.toString();
+        tipHtml += "</span>";
+        return tipHtml;
     }
 
 }

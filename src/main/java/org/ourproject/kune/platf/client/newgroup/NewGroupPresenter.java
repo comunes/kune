@@ -27,14 +27,13 @@ import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
 import org.ourproject.kune.platf.client.services.Kune;
-import org.ourproject.kune.sitebar.client.msg.MessagePresenter;
 import org.ourproject.kune.sitebar.client.msg.SiteMessage;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class NewGroupPresenter implements NewGroup, MessagePresenter {
+public class NewGroupPresenter implements NewGroup {
     private final NewGroupListener listener;
     private NewGroupView view;
 
@@ -57,15 +56,16 @@ public class NewGroupPresenter implements NewGroup, MessagePresenter {
 
         AsyncCallback callback = new AsyncCallback() {
             public void onFailure(final Throwable caught) {
-                view.unMask();
                 try {
                     throw caught;
                 } catch (final GroupNameInUseException e) {
                     onBack();
+                    view.unMask();
                     setMessage(Kune.I18N.t("This name in already in use, try with a different name."),
                             SiteMessage.ERROR);
                 } catch (final Throwable e) {
                     onBack(); // The messageP is in first page of wizard :-/
+                    view.unMask();
                     setMessage(Kune.I18N.t("Error creating group"), SiteMessage.ERROR);
                     GWT.log("Other kind of exception in group registration", null);
                     throw new RuntimeException();
@@ -137,14 +137,6 @@ public class NewGroupPresenter implements NewGroup, MessagePresenter {
         // } else {
         // view.setEnabledNextButton(false);
         // }
-    }
-
-    public void onMessageClose() {
-        // From MessagePresenter: do nothing
-    }
-
-    public void resetMessage() {
-        view.hideMessage();
     }
 
     public void setMessage(final String message, final int type) {

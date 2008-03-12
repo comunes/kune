@@ -27,13 +27,13 @@ import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.rpc.SiteService;
 import org.ourproject.kune.platf.client.rpc.SiteServiceAsync;
+import org.ourproject.kune.platf.client.ui.WindowUtils;
 import org.ourproject.kune.platf.client.utils.PrefetchUtilities;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
-import to.tipit.gwtlib.FireLog;
-
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -57,12 +57,13 @@ public class InitAction implements Action {
         server.getInitData(services.session.getUserHash(), new AsyncCallback() {
             public void onFailure(final Throwable error) {
                 Site.error("Error fetching initial data");
-                FireLog.debug(error.getMessage());
+                Log.debug(error.getMessage());
             }
 
             public void onSuccess(final Object response) {
                 Dispatcher dispatcher = services.dispatcher;
                 InitDataDTO initData = (InitDataDTO) response;
+                checkChatDomain(initData.getChatDomain());
                 services.session.setLicenses(initData.getLicenses());
                 services.session.setWsThemes(initData.getWsThemes());
                 services.session.setDefaultWsTheme(initData.getDefaultWsTheme());
@@ -79,6 +80,15 @@ public class InitAction implements Action {
                 RootPanel.get("kuneinitialcurtain").setVisible(false);
 
                 Site.unMask();
+            }
+
+            private void checkChatDomain(final String chatDomain) {
+                String httpDomain = WindowUtils.getLocation().getHostName();
+                if (!chatDomain.equals(httpDomain)) {
+                    Log.error("Your http domain (" + httpDomain + ") is different from the chat domain (" + chatDomain
+                            + "). This will produce problems with the chat functionality. "
+                            + "Check kune.properties on the server.");
+                }
             }
         });
     }

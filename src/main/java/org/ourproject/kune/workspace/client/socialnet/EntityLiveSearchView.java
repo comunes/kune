@@ -26,8 +26,6 @@ public interface EntityLiveSearchView extends View {
     final public static int SEARCH_GROUPS = 1;
     final public static int SEARCH_USERS = 2;
 
-    void reset();
-
     void show();
 
     void hide();

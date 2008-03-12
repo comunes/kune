@@ -46,12 +46,9 @@ import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.data.Record;
 import com.gwtext.client.widgets.form.ComboBox;
 import com.gwtext.client.widgets.form.DateField;
-import com.gwtext.client.widgets.form.DateFieldConfig;
 import com.gwtext.client.widgets.form.Field;
-import com.gwtext.client.widgets.form.Form;
-import com.gwtext.client.widgets.form.FormConfig;
+import com.gwtext.client.widgets.form.FormPanel;
 import com.gwtext.client.widgets.form.TextArea;
-import com.gwtext.client.widgets.form.TextAreaConfig;
 import com.gwtext.client.widgets.form.event.ComboBoxListenerAdapter;
 import com.gwtext.client.widgets.form.event.FieldListenerAdapter;
 
@@ -212,60 +209,45 @@ public class AdminContextPanel extends VerticalPanel implements AdminContextView
     }
 
     private VerticalPanel createPublicationComponent() {
-        Form form = createDefaultForm();
+        FormPanel form = createDefaultForm();
 
-        publishedOnField = new DateField(new DateFieldConfig() {
-            {
-                setWidth("150");
-                setFormat("Y-m-d");
-            }
-        });
+        publishedOnField = new DateField();
+        publishedOnField.setWidth("140");
+        publishedOnField.setFormat("Y-m-d");
 
-        publishedOnField.addFieldListener(new FieldListenerAdapter() {
+        publishedOnField.addListener(new FieldListenerAdapter() {
             public void onChange(final Field field, final Object newVal, final Object oldVal) {
                 presenter.setPublishedOn((Date) newVal);
             }
         });
 
         form.add(publishedOnField);
-        form.render();
 
         VerticalPanel vp = new VerticalPanel();
         vp.add(form);
         return vp;
     }
 
-    private Form createDefaultForm() {
-        Form form = new Form(new FormConfig() {
-            {
-                setHideLabels(true);
-                setWidth(155);
-            }
-        });
+    private FormPanel createDefaultForm() {
+        FormPanel form = new FormPanel();
+        form.setHideLabels(true);
+        form.setWidth(FORMS_WIDTH);
+        form.setBorder(false);
         return form;
     }
 
     private VerticalPanel createTagsComponent() {
-        Form form = new Form(new FormConfig() {
-            {
-                setHideLabels(true);
-                setWidth(FORMS_WIDTH);
-            }
-        });
-        tagsField = new TextArea(new TextAreaConfig() {
-            {
-                setWidth("" + FORMS_WIDTH);
-                setHeight("3em");
-            }
-        });
-        tagsField.addFieldListener(new FieldListenerAdapter() {
+        FormPanel form = createDefaultForm();
+        tagsField = new TextArea();
+        tagsField.setWidth("" + FORMS_WIDTH);
+        tagsField.setHeight("3em");
+        tagsField.addListener(new FieldListenerAdapter() {
             public void onChange(final Field field, final Object newVal, final Object oldVal) {
                 presenter.setTags((String) newVal);
             }
         });
 
         form.add(tagsField);
-        form.render();
         VerticalPanel vp = new VerticalPanel();
         vp.add(form);
         return vp;

@@ -22,65 +22,65 @@ package org.ourproject.kune.platf.client.ui;
 import org.ourproject.kune.platf.client.services.Kune;
 
 import com.gwtext.client.core.Connection;
-import com.gwtext.client.core.ExtElement;
 import com.gwtext.client.core.UrlParam;
 import com.gwtext.client.data.FieldDef;
 import com.gwtext.client.data.HttpProxy;
 import com.gwtext.client.data.JsonReader;
-import com.gwtext.client.data.JsonReaderConfig;
 import com.gwtext.client.data.RecordDef;
 import com.gwtext.client.data.Store;
+import com.gwtext.client.widgets.Component;
 import com.gwtext.client.widgets.PagingToolbar;
-import com.gwtext.client.widgets.PagingToolbarConfig;
-import com.gwtext.client.widgets.grid.Grid;
+import com.gwtext.client.widgets.event.PanelListenerAdapter;
+import com.gwtext.client.widgets.grid.GridPanel;
 
 public class AbstractSearcherPanel {
 
     protected static final int PAGINATION_SIZE = 10;
 
     public AbstractSearcherPanel() {
-        super();
     }
 
-    protected void query(final Store store, final Grid grid, final String query) {
+    protected void query(final Store store, final GridPanel grid, final String query) {
         UrlParam[] newParams = new UrlParam[] { new UrlParam("query", query), new UrlParam("start", 0),
                 new UrlParam("limit", PAGINATION_SIZE) };
         store.setBaseParams(newParams);
         store.load(0, PAGINATION_SIZE);
-        createPagingToolbar(store, grid);
+        // createPagingToolbar(store, grid);
     }
 
-    protected void createPagingToolbar(final Store store, final Grid grid) {
-        ExtElement gridFoot = grid.getView().getFooterPanel(true);
-        PagingToolbar pag = new PagingToolbar(gridFoot, store, new PagingToolbarConfig() {
-            {
-                setPageSize(PAGINATION_SIZE);
-                setDisplayInfo(true);
-                setDisplayMsg(Kune.I18N
-                        .tWithNT("Displaying results {0} - {1} of {2}",
-                                "Respect {} values in translations, these will produce: 'Displaying results 1 - 25 of 95465' for instance"));
-                setEmptyMsg(Kune.I18N.t("No results to display"));
+    protected void createPagingToolbar(final Store store, final GridPanel grid) {
+        PagingToolbar pag = new PagingToolbar(store);
+        pag.setPageSize(PAGINATION_SIZE);
+        pag.setDisplayInfo(true);
+        pag.setDisplayMsg(Kune.I18N.tWithNT("Displaying results {0} - {1} of {2}",
+                "Respect {} values in translations, "
+                        + "these will produce: 'Displaying results 1 - 25 of 95465' for instance"));
+        pag.setEmptyMsg(Kune.I18N.t("No results to display"));
+        // FIXME (remove from liquibase)
+        // pag.setAfterPageText(Kune.I18N.tWithNT("of {0}", "Used to show
+        // multiple results: '1 of 30'"));
+        // pag.setBeforePageText(Kune.I18N.t("Page"));
+        // pag.setFirstText(Kune.I18N.t("First Page"));
+        // pag.setLastText(Kune.I18N.t("Last Page"));
+        // pag.setNextText(Kune.I18N.t("Next Page"));
+        // pag.setPrevText(Kune.I18N.t("Previous Page"));
+        // pag.setRefreshText(Kune.I18N.t("Refresh"));
+
+        grid.addListener(new PanelListenerAdapter() {
+            public void onRender(final Component component) {
+                store.load(0, PAGINATION_SIZE);
             }
         });
-        pag.setAfterPageText(Kune.I18N.tWithNT("of {0}", "Used to show multiple results: '1 of 30'"));
-        pag.setBeforePageText(Kune.I18N.t("Page"));
-        pag.setFirstText(Kune.I18N.t("First Page"));
-        pag.setLastText(Kune.I18N.t("Last Page"));
-        pag.setNextText(Kune.I18N.t("Next Page"));
-        pag.setPrevText(Kune.I18N.t("Previous Page"));
-        pag.setRefreshText(Kune.I18N.t("Refresh"));
+        grid.setBottomToolbar(pag);
     }
 
     protected Store createStore(final FieldDef[] fieldDefs, final String url, final String id) {
-        JsonReader reader = new JsonReader(new JsonReaderConfig() {
-            {
-                setRoot("list");
-                setTotalProperty("size");
-                setId(id);
-            }
-        }, new RecordDef(fieldDefs));
+        JsonReader reader = new JsonReader(new RecordDef(fieldDefs));
+        reader.setRoot("list");
+        reader.setTotalProperty("size");
+        reader.setId(id);
         HttpProxy proxy = new HttpProxy(url, Connection.POST);
-        return new Store(proxy, reader);
+        return new Store(proxy, reader, true);
     }
 
 }

@@ -32,7 +32,6 @@ public class AddGroupLiveSearchAction implements Action {
 
     private void onAddMemberGroupLiveSearchAction(final Services services, final EntityLiveSearchListener listener) {
         GroupLiveSearchComponent groupLiveSearchComponent = services.app.getWorkspace().getGroupLiveSearchComponent();
-        groupLiveSearchComponent.reset();
         groupLiveSearchComponent.addListener(listener);
         groupLiveSearchComponent.show();
     }

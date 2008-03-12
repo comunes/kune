@@ -29,8 +29,8 @@ import org.ourproject.kune.platf.client.license.LicenseChoose;
 import org.ourproject.kune.platf.client.license.LicenseChoosePanel;
 import org.ourproject.kune.platf.client.license.LicenseChoosePresenter;
 import org.ourproject.kune.platf.client.newgroup.NewGroup;
-import org.ourproject.kune.platf.client.newgroup.NewGroupPresenter;
 import org.ourproject.kune.platf.client.newgroup.NewGroupListener;
+import org.ourproject.kune.platf.client.newgroup.NewGroupPresenter;
 import org.ourproject.kune.platf.client.newgroup.ui.NewGroupPanel;
 import org.ourproject.kune.platf.client.search.SearchSite;
 import org.ourproject.kune.platf.client.search.SearchSitePresenter;
@@ -42,9 +42,9 @@ import org.ourproject.kune.sitebar.client.bar.SiteBarListener;
 import org.ourproject.kune.sitebar.client.bar.SiteBarPanel;
 import org.ourproject.kune.sitebar.client.bar.SiteBarPresenter;
 import org.ourproject.kune.sitebar.client.login.Login;
+import org.ourproject.kune.sitebar.client.login.LoginListener;
 import org.ourproject.kune.sitebar.client.login.LoginPanel;
 import org.ourproject.kune.sitebar.client.login.LoginPresenter;
-import org.ourproject.kune.sitebar.client.login.LoginListener;
 import org.ourproject.kune.sitebar.client.msg.SiteMessage;
 import org.ourproject.kune.sitebar.client.msg.SiteMessagePanel;
 import org.ourproject.kune.sitebar.client.msg.SiteMessagePresenter;
@@ -80,8 +80,7 @@ public class SiteBarFactory {
     public static Login getLoginForm(final LoginListener listener) {
         if (login == null) {
             LoginPresenter presenter = new LoginPresenter(session, listener);
-            LoginPanel view = new LoginPanel(presenter, session.getLanguagesArray(), session.getCountriesArray(),
-                    session.getTimezones());
+            LoginPanel view = new LoginPanel(presenter);
             presenter.init(view);
             login = presenter;
         }

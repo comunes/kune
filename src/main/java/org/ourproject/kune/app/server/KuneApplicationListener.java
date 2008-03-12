@@ -37,8 +37,6 @@ class KuneApplicationListener implements ApplicationListener {
     }
 
     public void doAfter(final HttpServletRequest request, final HttpServletResponse httpServletResponse) {
-        // userSessionProvider.get().setBrowserLanguage(request.getLocale().getLanguage());
-        // TODO: think about: httpServletResponse.sendRedirect(locale) ???
     }
 
     public void doBefore(final HttpServletRequest httpServletRequest, final HttpServletResponse httpServletResponse) {

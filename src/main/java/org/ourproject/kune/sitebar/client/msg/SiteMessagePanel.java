@@ -33,7 +33,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class SiteMessagePanel extends HorizontalPanel implements SiteMessageView {
-    private static final int TIMEVISIBLE = 4000;
+    private static final int TIMEVISIBLE = 6000;
 
     final Images images = Images.App.getInstance();
     AbstractImagePrototype[] messageIcons = new AbstractImagePrototype[] { images.error(), images.important(),
@@ -60,7 +60,10 @@ public class SiteMessagePanel extends HorizontalPanel implements SiteMessageView
 
         timer = new Timer() {
             public void run() {
-                presenter.resetMessage();
+                hide();
+                if (presenter != null) {
+                    presenter.resetMessage();
+                }
             }
         };
         setVisible(false);
@@ -78,7 +81,10 @@ public class SiteMessagePanel extends HorizontalPanel implements SiteMessageView
                 public void onClick(final Widget sender) {
                     if (sender == closeIcon) {
                         setVisible(false);
-                        presenter.onMessageClose();
+                        hide();
+                        if (presenter != null) {
+                            presenter.resetMessage();
+                        }
                     }
                 }
             });
@@ -101,7 +107,6 @@ public class SiteMessagePanel extends HorizontalPanel implements SiteMessageView
     public void adjustWidth(final int windowWidth) {
         int messageWidth = windowWidth * 60 / 100 - 3;
         this.setWidth("" + messageWidth);
-        // message.setWidth("" + (messageWidth - 16 - 40));
     }
 
     public void show() {

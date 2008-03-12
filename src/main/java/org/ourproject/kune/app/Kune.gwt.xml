@@ -7,7 +7,32 @@
   <inherits name='org.ourproject.kune.docs.Kune-Docs' />
   <inherits name='org.ourproject.kune.chat.Kune-Chat' />
   <inherits name='org.ourproject.kune.blogs.Kune-Blogs' />
-  <inherits name='to.tipit.GWTlib' />
+  <!-- <inherits name='to.tipit.GWTlib' /> -->
+  <inherits name="com.allen_sauer.gwt.log.gwt-log" />
+
+  <!--
+    The default log level is `OFF`. In development you'll usually want
+    to switch to `DEBUG` level logging.
+  -->
+  <extend-property name="log_level" values="DEBUG" />
+  <set-property name="log_level" value="DEBUG" />
+  <set-property name="log_DivLogger" value="DISABLED" />
+  <set-property name="log_FirebugLogger" value="ENABLED" />
+  <!--
+  <set-property name="log_RemoteLogger" value="ENABLED" />
+  -->
+
+  <!--
+    Alternatively, you may want to generate two or more combinations,
+    at the cost of increased compile time.
+
+    However, please note that the runtime default will still be `OFF`.
+
+    To compile both an `OFF` (production) and a `DEBUG` (development)
+    version of your application:
+
+    <extend-property name="log_level" values="DEBUG,OFF" />
+  -->
 
   <!--
     <extend-property name="locale" values="es" />
@@ -17,9 +42,9 @@
   <!-- Specify the app entry point class. -->
   <entry-point class='org.ourproject.kune.app.client.KuneEntryPoint' />
 
-  <script src="js/ext/adapter/yui/yui-utilities.js" />
-  <script src="js/ext/adapter/yui/ext-yui-adapter.js" />
   <!-- <script src="js/ext/ext-custom.js" /> -->
+
+  <script src="js/ext/adapter/ext/ext-base.js" />
   <script src="js/ext/ext-all.js" />
 
   <script src="js/colorthemes.js" />

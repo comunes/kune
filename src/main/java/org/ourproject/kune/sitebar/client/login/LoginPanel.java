@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007 The kune development team (see CREDITS for details)
+ * Copyright (C) FIELD_DEF_WIDTH7 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * Kune is free software; you can redistribute it and/or modify
@@ -32,39 +32,34 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.EventObject;
-import com.gwtext.client.core.Ext;
 import com.gwtext.client.core.Position;
+import com.gwtext.client.core.RegionPosition;
 import com.gwtext.client.data.SimpleStore;
 import com.gwtext.client.data.Store;
 import com.gwtext.client.widgets.Button;
-import com.gwtext.client.widgets.ButtonConfig;
-import com.gwtext.client.widgets.LayoutDialog;
-import com.gwtext.client.widgets.LayoutDialogConfig;
+import com.gwtext.client.widgets.Component;
+import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.TabPanel;
-import com.gwtext.client.widgets.TabPanelItem;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
-import com.gwtext.client.widgets.event.DialogListener;
-import com.gwtext.client.widgets.event.TabPanelItemListenerAdapter;
+import com.gwtext.client.widgets.event.PanelListenerAdapter;
+import com.gwtext.client.widgets.event.WindowListenerAdapter;
 import com.gwtext.client.widgets.form.ComboBox;
-import com.gwtext.client.widgets.form.ComboBoxConfig;
-import com.gwtext.client.widgets.form.Form;
-import com.gwtext.client.widgets.form.FormConfig;
+import com.gwtext.client.widgets.form.Field;
+import com.gwtext.client.widgets.form.FormPanel;
 import com.gwtext.client.widgets.form.TextField;
-import com.gwtext.client.widgets.form.TextFieldConfig;
 import com.gwtext.client.widgets.form.VType;
 import com.gwtext.client.widgets.form.ValidationException;
 import com.gwtext.client.widgets.form.Validator;
+import com.gwtext.client.widgets.layout.AnchorLayoutData;
 import com.gwtext.client.widgets.layout.BorderLayout;
-import com.gwtext.client.widgets.layout.ContentPanel;
-import com.gwtext.client.widgets.layout.ContentPanelConfig;
-import com.gwtext.client.widgets.layout.LayoutRegionConfig;
+import com.gwtext.client.widgets.layout.BorderLayoutData;
 
 public class LoginPanel implements LoginView, View {
+    private static final int FIELD_DEF_WIDTH = 200;
+
     private static final String MUST_BE_BETWEEN_3_AND_15 = "Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes";
 
     private static final String NICKOREMAIL_FIELD = "nickOrEmail";
@@ -81,7 +76,7 @@ public class LoginPanel implements LoginView, View {
 
     private TextField loginNickOrEmailField;
 
-    private LayoutDialog dialog;
+    private BasicDialog dialog;
 
     private final LoginPresenter presenter;
 
@@ -93,21 +88,13 @@ public class LoginPanel implements LoginView, View {
 
     private TextField passwdRegField;
 
-    private Form signInForm;
+    private FormPanel signInForm;
 
-    private Form registerForm;
+    private FormPanel registerForm;
 
     private TextField passwdRegFieldDup;
 
-    private SiteMessagePanel messagesPanel;
-
-    private TabPanel tabPanel;
-
-    private final Object[][] countries;
-
-    private final Object[][] languages;
-
-    private final Object[][] timezones;
+    private SiteMessagePanel messagesSignInPanel;
 
     private ComboBox countryCombo;
 
@@ -117,16 +104,13 @@ public class LoginPanel implements LoginView, View {
 
     private BasicDialog welcomeDialog;
 
-    public LoginPanel(final LoginPresenter initialPresenter, final Object[][] languages, final Object[][] countries,
-            final String[] timezones) {
+    private TabPanel centerPanel;
+
+    private SiteMessagePanel messagesRegisterPanel;
+
+    public LoginPanel(final LoginPresenter initialPresenter) {
+        Field.setMsgTarget("side");
         this.presenter = initialPresenter;
-        this.languages = languages;
-        this.countries = countries;
-        this.timezones = new Object[timezones.length][1];
-        for (int i = 0; i < timezones.length; i++) {
-            Object[] obj = new Object[] { timezones[i] };
-            this.timezones[i] = obj;
-        }
         createPanel();
     }
 
@@ -143,13 +127,13 @@ public class LoginPanel implements LoginView, View {
     }
 
     public void showWelcolmeDialog() {
-        welcomeDialog = new BasicDialog(Kune.I18N.t("Welcome"), Kune.I18N.t("Ok"), true, true, 400, 270,
-                new ClickListener() {
-                    public void onClick(final Widget sender) {
-                        welcomeDialog.hide();
-                    }
-                });
-
+        welcomeDialog = new BasicDialog(Kune.I18N.t("Welcome"), true, true, 400, 270);
+        Button okButton = new Button(Kune.I18N.t("Ok"));
+        okButton.addListener(new ButtonListenerAdapter() {
+            public void onClick(final Button button, final EventObject e) {
+                welcomeDialog.hide();
+            }
+        });
         String message = Kune.I18N.t("Thanks for registering") + "\n\n"
                 + Kune.I18N.t("Now you can participate more actively in this site with other people and groups.")
                 + "\n" + Kune.I18N.t("You can also use your personal space to publish contents.") + "\n\n"
@@ -158,15 +142,16 @@ public class LoginPanel implements LoginView, View {
         HTML messageHtml = new HTML(DOM.getInnerHTML((new Label(message)).getElement()).replaceAll("\n", "<br/>\n"));
         messageHtml.addStyleName("kune-Margin-20-trbl");
         welcomeDialog.add(messageHtml);
+        welcomeDialog.add(okButton);
         welcomeDialog.show();
     }
 
     public boolean isSignInFormValid() {
-        return signInForm.isValid();
+        return signInForm.getForm().isValid();
     }
 
     public boolean isRegisterFormValid() {
-        return registerForm.isValid();
+        return registerForm.getForm().isValid();
     }
 
     public void reset() {
@@ -174,7 +159,7 @@ public class LoginPanel implements LoginView, View {
             public void execute() {
                 loginPassField.reset();
                 if (registerForm != null) {
-                    registerForm.reset();
+                    registerForm.getForm().reset();
                 }
             }
         });
@@ -220,22 +205,25 @@ public class LoginPanel implements LoginView, View {
         return timezoneCombo.getValueAsString();
     }
 
-    public void showErrorMessage(final String message) {
-        messagesPanel.setMessage(message, SiteMessage.ERROR, SiteMessage.ERROR);
-        messagesPanel.show();
+    public void setSignInMessage(final String message, final int type) {
+        messagesSignInPanel.setMessage(message, type, type);
+        messagesSignInPanel.show();
     }
 
-    public void setMessage(final String message, final int type) {
-        messagesPanel.setMessage(message, type, type);
-        messagesPanel.show();
+    public void setRegisterMessage(final String message, final int type) {
+        messagesRegisterPanel.setMessage(message, type, type);
+        messagesRegisterPanel.show();
     }
 
-    public void hideMessage() {
-        messagesPanel.hide();
+    public void hideMessages() {
+        messagesSignInPanel.hide();
+        if (messagesRegisterPanel != null) {
+            messagesRegisterPanel.hide();
+        }
     }
 
     public void show() {
-        tabPanel.getTab(0).activate();
+        centerPanel.activate(0);
         dialog.setVisible(true);
         dialog.show();
         Site.hideProgress();
@@ -251,422 +239,295 @@ public class LoginPanel implements LoginView, View {
         dialog.center();
     }
 
-    private Object[][] getLanguages() {
-        return languages;
-    }
-
-    private Object[][] getCountries() {
-        return countries;
-    }
-
-    private Object[][] getTimezones() {
-        return timezones;
-    }
-
     private void createPanel() {
+        dialog = new BasicDialog(Kune.I18N.t("Sign in"), true, true, 380, 400);
+        dialog.setCollapsible(false);
+        dialog.setLayout(new BorderLayout());
 
-        LayoutRegionConfig south = new LayoutRegionConfig() {
-            {
-                setSplit(false);
-                setInitialSize(49);
-                setHideWhenEmpty(true);
-                // setFloatable(true);
-                setAutoHide(true);
-            }
-        };
+        centerPanel = new TabPanel();
+        centerPanel.setActiveTab(0);
+        centerPanel.setClosable(false);
 
-        LayoutRegionConfig center = new LayoutRegionConfig() {
-            {
-                setAutoScroll(true);
-                setTabPosition("top");
-                setCloseOnTab(true);
-                setAlwaysShowTabs(true);
-            }
-        };
-
-        dialog = new LayoutDialog(new LayoutDialogConfig() {
-            {
-                setModal(true);
-                setWidth(400);
-                setHeight(440);
-                setShadow(true);
-                setResizable(true);
-                setClosable(true);
-                setProxyDrag(true);
-                setCollapsible(false);
-                setTitle(Kune.I18N.t("Sign in"));
-            }
-        }, null, south, null, null, center);
-
-        final BorderLayout layout = dialog.getLayout();
-        layout.beginUpdate();
-
-        ContentPanel signInPanel = new ContentPanel(Ext.generateId(), Kune.I18N.t("Sign in"));
-
+        final Panel signInPanel = new Panel(Kune.I18N.t("Sign in"));
+        confPanel(signInPanel);
         signInForm = createSignInForm();
-
         signInForm.addStyleName("kune-Default-Form");
+        signInPanel.add(signInForm, new AnchorLayoutData("100% 100%"));
+        signInPanel.add(createNoAccountRegister(), new AnchorLayoutData("100% -20"));
 
-        VerticalPanel signInWrapper = new VerticalPanel() {
-            {
-                setSpacing(30);
-                setWidth("100%");
-                setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-            }
-        };
-        signInWrapper.add(signInForm);
+        final Panel registerPanel = new Panel(Kune.I18N.t("Register"));
+        confPanel(registerPanel);
 
-        signInPanel.add(signInWrapper);
-        signInPanel.add(createNoAccountRegister());
-        layout.add(LayoutRegionConfig.CENTER, signInPanel);
+        centerPanel.add(signInPanel, new AnchorLayoutData("100% 100%"));
+        centerPanel.add(registerPanel, new AnchorLayoutData("100% 100%"));
+        dialog.add(centerPanel, new BorderLayoutData(RegionPosition.CENTER));
 
-        final ContentPanel registerPanel = new ContentPanel(Ext.generateId(), new ContentPanelConfig() {
-            {
-                setTitle(Kune.I18N.t("Register"));
-                setBackground(true);
-            }
-        });
+        messagesSignInPanel = createMessagePanel(signInPanel);
 
-        layout.add(LayoutRegionConfig.CENTER, registerPanel);
-
-        messagesPanel = new SiteMessagePanel(presenter, false);
-        ContentPanel southPanel = new ContentPanel(messagesPanel, "", new ContentPanelConfig() {
-            {
-                setBackground(false);
-                setFitToFrame(true);
-            }
-        });
-        messagesPanel.setWidth("100%");
-        messagesPanel.setHeight("100%");
-        messagesPanel.setMessage("", SiteMessage.INFO, SiteMessage.ERROR);
-        layout.add(LayoutRegionConfig.SOUTH, southPanel);
-
-        layout.endUpdate();
-
-        final Button signInBtn = dialog.addButton(Kune.I18N.t("Sign in"));
-        signInBtn.addButtonListener(new ButtonListenerAdapter() {
+        final Button signInBtn = new Button(Kune.I18N.t("Sign in"));
+        signInBtn.addListener(new ButtonListenerAdapter() {
             public void onClick(final Button button, final EventObject e) {
                 presenter.doLogin();
             }
         });
+        dialog.addButton(signInBtn);
 
-        final Button registerBtn = dialog.addButton(Kune.I18N.t("Register"));
-        registerBtn.addButtonListener(new ButtonListenerAdapter() {
+        final Button registerBtn = new Button(Kune.I18N.t("Register"));
+        registerBtn.addListener(new ButtonListenerAdapter() {
             public void onClick(final Button button, final EventObject e) {
                 presenter.doRegister();
             }
         });
+        dialog.addButton(registerBtn);
         registerBtn.hide();
 
-        dialog.addButton(new Button(new ButtonConfig() {
-            {
-                setText(Kune.I18N.tWithNT("Cancel", "used in button"));
-                setButtonListener(new ButtonListenerAdapter() {
-                    public void onClick(final Button button, final EventObject e) {
-                        presenter.onCancel();
-                    }
-                });
-            }
-        }));
-
-        tabPanel = layout.getRegion(LayoutRegionConfig.CENTER).getTabs();
-        tabPanel.getTab(0).addTabPanelItemListener(new TabPanelItemListenerAdapter() {
-            public void onActivate(final TabPanelItem tab) {
-                dialog.setTitle(Kune.I18N.t("Sign in"));
-                registerBtn.hide();
-                signInBtn.show();
-                tab.getTextEl().highlight();
+        Button cancel = new Button();
+        dialog.addButton(cancel);
+        cancel.setText(Kune.I18N.tWithNT("Cancel", "used in button"));
+        cancel.addListener(new ButtonListenerAdapter() {
+            public void onClick(final Button button, final EventObject e) {
+                presenter.onCancel();
             }
         });
 
-        tabPanel.getTab(1).addTabPanelItemListener(new TabPanelItemListenerAdapter() {
-            public void onActivate(final TabPanelItem tab) {
-                maskProcessing();
+        signInPanel.addListener(new PanelListenerAdapter() {
+            public void onActivate(final Panel panel) {
+                dialog.setTitle(Kune.I18N.t("Sign in"));
+                registerBtn.hide();
+                signInBtn.show();
+            }
+        });
+
+        registerPanel.addListener(new PanelListenerAdapter() {
+            public void onActivate(final Panel panel) {
                 if (registerForm == null) {
+                    maskProcessing();
                     registerForm = createRegistrationForm(presenter.getCurrentLanguage().getCode());
-
                     registerForm.addStyleName("kune-Default-Form");
-
-                    VerticalPanel registerWrapper = new VerticalPanel() {
-                        {
-                            setSpacing(30);
-                            setWidth("100%");
-                            setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-                        }
-                    };
-                    registerWrapper.add(registerForm);
-
-                    registerPanel.add(registerWrapper);
+                    registerPanel.add(registerForm);
+                    messagesRegisterPanel = createMessagePanel(registerPanel);
+                    registerPanel.doLayout();
+                    unMask();
                 }
                 dialog.setTitle(Kune.I18N.t("Register"));
                 signInBtn.hide();
                 registerBtn.show();
-                tab.getTextEl().highlight();
-                unMask();
+                // tab.getTextEl().highlight();
             }
         });
 
-        dialog.addDialogListener(new DialogListener() {
-            public boolean doBeforeHide(final LayoutDialog dialog) {
-                return true;
-            }
-
-            public boolean doBeforeShow(final LayoutDialog dialog) {
-                return true;
-            }
-
-            public void onHide(final LayoutDialog dialog) {
+        dialog.addListener(new WindowListenerAdapter() {
+            public void onHide(final Component component) {
                 presenter.onClose();
-            }
-
-            public void onKeyDown(final LayoutDialog dialog, final EventObject e) {
-            }
-
-            public void onMove(final LayoutDialog dialog, final int x, final int y) {
-            }
-
-            public void onResize(final LayoutDialog dialog, final int width, final int height) {
-            }
-
-            public void onShow(final LayoutDialog dialog) {
             }
         });
     }
 
-    private Form createSignInForm() {
+    private void confPanel(final Panel panel) {
+        panel.setAutoScroll(true);
+        panel.setPaddings(20);
+        panel.setHeight("100%");
+    }
 
-        Form form = new Form(new FormConfig() {
-            {
-                setWidth(300);
-                setLabelWidth(75);
-                setLabelAlign(Position.RIGHT);
-            }
-        });
-        form.fieldset(Kune.I18N.t("Sign in"));
-        loginNickOrEmailField = new TextField(new TextFieldConfig() {
-            {
-                setFieldLabel(Kune.I18N.t("Nickname or email"));
-                setName(NICKOREMAIL_FIELD);
-                setWidth(175);
-                setAllowBlank(false);
-                setMsgTarget("side");
-                setValidateOnBlur(false);
-            }
-        });
+    private SiteMessagePanel createMessagePanel(final Panel panel) {
+        SiteMessagePanel siteMessagesPanel = new SiteMessagePanel(null, false);
+        siteMessagesPanel.setMessage("", SiteMessage.INFO, SiteMessage.ERROR);
+        // HP before
+        Panel messagesPanelWrapper = new Panel();
+        messagesPanelWrapper.setBorder(false);
+        messagesPanelWrapper.setMargins(20, 0, 0, 0);
+        messagesPanelWrapper.add(siteMessagesPanel);
+        panel.add(messagesPanelWrapper);
+        return siteMessagesPanel;
+    }
+
+    private FormPanel createSignInForm() {
+        FormPanel form = createStandardForm();
+
+        loginNickOrEmailField = new TextField();
+        loginNickOrEmailField.setFieldLabel(Kune.I18N.t("Nickname or email"));
+        loginNickOrEmailField.setName(NICKOREMAIL_FIELD);
+        loginNickOrEmailField.setWidth(FIELD_DEF_WIDTH);
+        loginNickOrEmailField.setAllowBlank(false);
+        loginNickOrEmailField.setValidateOnBlur(false);
         form.add(loginNickOrEmailField);
 
-        loginPassField = new TextField(new TextFieldConfig() {
-            {
-                setFieldLabel(Kune.I18N.t("Password"));
-                setName(PASSWORD_FIELD);
-                setWidth(175);
-                setPassword(true);
-                setAllowBlank(false);
-                setMsgTarget("side");
-            }
-        });
+        loginPassField = new TextField();
+        loginPassField.setFieldLabel(Kune.I18N.t("Password"));
+        loginPassField.setName(PASSWORD_FIELD);
+        loginPassField.setWidth(FIELD_DEF_WIDTH);
+        loginPassField.setPassword(true);
+        loginPassField.setAllowBlank(false);
         form.add(loginPassField);
-        form.end();
-        form.render();
 
         return form;
     }
 
-    private Form createRegistrationForm(final String langCode) {
-        Form form = new Form(new FormConfig() {
-            {
-                setWidth(300);
-                setLabelWidth(75);
-                setLabelAlign(Position.RIGHT);
-            }
-        });
+    private FormPanel createRegistrationForm(final String langCode) {
+        FormPanel form = createStandardForm();
 
-        form.fieldset(Kune.I18N.t("Register"));
-
-        shortNameRegField = new TextField(new TextFieldConfig() {
-            {
-                setFieldLabel(Kune.I18N.t("Nickname"));
-                setName(NICK_FIELD);
-                setWidth(200);
-                setAllowBlank(false);
-                setMsgTarget("side");
-                setMinLength(3);
-                setMaxLength(15);
-                setRegex("^[a-z0-9_\\-]+$");
-                setMinLengthText(Kune.I18N.t(MUST_BE_BETWEEN_3_AND_15));
-                setMaxLengthText(Kune.I18N.t(MUST_BE_BETWEEN_3_AND_15));
-                setRegexText(Kune.I18N.t(MUST_BE_BETWEEN_3_AND_15));
-                setValidationDelay(1000);
-            }
-        });
+        shortNameRegField = new TextField();
+        shortNameRegField.setFieldLabel(Kune.I18N.t("Nickname"));
+        shortNameRegField.setName(NICK_FIELD);
+        shortNameRegField.setWidth(FIELD_DEF_WIDTH);
+        shortNameRegField.setAllowBlank(false);
+        shortNameRegField.setMinLength(3);
+        shortNameRegField.setMaxLength(15);
+        shortNameRegField.setRegex("^[a-z0-9_\\-]+$");
+        shortNameRegField.setMinLengthText(Kune.I18N.t(MUST_BE_BETWEEN_3_AND_15));
+        shortNameRegField.setMaxLengthText(Kune.I18N.t(MUST_BE_BETWEEN_3_AND_15));
+        shortNameRegField.setRegexText(Kune.I18N.t(MUST_BE_BETWEEN_3_AND_15));
+        shortNameRegField.setValidationDelay(1000);
         form.add(shortNameRegField);
 
-        longNameRegField = new TextField(new TextFieldConfig() {
-            {
-                setFieldLabel(Kune.I18N.t("Full Name"));
-                setName(LONGNAME_FIELD);
-                setWidth(200);
-                setAllowBlank(false);
-                setMsgTarget("side");
-                setMinLength(3);
-                setMaxLength(50);
-                setValidationDelay(1000);
-            }
-        });
+        longNameRegField = new TextField();
+        longNameRegField.setFieldLabel(Kune.I18N.t("Full Name"));
+        longNameRegField.setName(LONGNAME_FIELD);
+        longNameRegField.setWidth(FIELD_DEF_WIDTH);
+        longNameRegField.setAllowBlank(false);
+        longNameRegField.setMinLength(3);
+        longNameRegField.setMaxLength(50);
+        longNameRegField.setValidationDelay(1000);
         form.add(longNameRegField);
 
-        passwdRegField = new TextField(new TextFieldConfig() {
-            {
-                setFieldLabel(Kune.I18N.t("Password"));
-                setName(PASSWORD_FIELD);
-                setPassword(true);
-                setAllowBlank(false);
-                setMaxLength(40);
-                setWidth(200);
-                setMsgTarget("side");
-                setValidationDelay(1000);
-            }
-        });
+        passwdRegField = new TextField();
+        passwdRegField.setFieldLabel(Kune.I18N.t("Password"));
+        passwdRegField.setName(PASSWORD_FIELD);
+        passwdRegField.setPassword(true);
+        passwdRegField.setAllowBlank(false);
+        passwdRegField.setMaxLength(40);
+        passwdRegField.setWidth(FIELD_DEF_WIDTH);
+        passwdRegField.setValidationDelay(1000);
+
         form.add(passwdRegField);
 
-        passwdRegFieldDup = new TextField(new TextFieldConfig() {
-            {
-                setFieldLabel(Kune.I18N.t("Retype password"));
-                setName(PASSWORD_FIELD_DUP);
-                setPassword(true);
-                setAllowBlank(false);
-                setMinLength(6);
-                setMaxLength(40);
-                setWidth(200);
-                setMsgTarget("side");
-                setInvalidText(Kune.I18N.t("Passwords do not match"));
-                setValidator(new Validator() {
-                    public boolean validate(final String value) throws ValidationException {
-                        return passwdRegField.getValueAsString().equals(passwdRegFieldDup.getValueAsString());
-                    }
-                });
-                setValidationDelay(1000);
+        passwdRegFieldDup = new TextField();
+        passwdRegFieldDup.setFieldLabel(Kune.I18N.t("Retype password"));
+        passwdRegFieldDup.setName(PASSWORD_FIELD_DUP);
+        passwdRegFieldDup.setPassword(true);
+        passwdRegFieldDup.setAllowBlank(false);
+        passwdRegFieldDup.setMinLength(6);
+        passwdRegFieldDup.setMaxLength(40);
+        passwdRegFieldDup.setWidth(FIELD_DEF_WIDTH);
+        passwdRegFieldDup.setInvalidText(Kune.I18N.t("Passwords do not match"));
+        passwdRegFieldDup.setValidator(new Validator() {
+            public boolean validate(final String value) throws ValidationException {
+                return passwdRegField.getValueAsString().equals(passwdRegFieldDup.getValueAsString());
             }
         });
+        passwdRegFieldDup.setValidationDelay(1000);
         form.add(passwdRegFieldDup);
 
-        emailRegField = new TextField(new TextFieldConfig() {
-            {
-                setFieldLabel(Kune.I18N.t("Email"));
-                setName(EMAIL_FIELD);
-                setVtype(VType.EMAIL);
-                setWidth(200);
-                setMsgTarget("side");
-                setAllowBlank(false);
-                setValidationDelay(1000);
-            }
-        });
+        emailRegField = new TextField();
+        emailRegField.setFieldLabel(Kune.I18N.t("Email"));
+        emailRegField.setName(EMAIL_FIELD);
+        emailRegField.setVtype(VType.EMAIL);
+        emailRegField.setWidth(FIELD_DEF_WIDTH);
+        emailRegField.setAllowBlank(false);
+        emailRegField.setValidationDelay(1000);
+
         form.add(emailRegField);
 
-        final Store langStore = new SimpleStore(new String[] { "abbr", "language" }, getLanguages());
+        final Store langStore = new SimpleStore(new String[] { "abbr", "language" }, presenter.getLanguages());
         langStore.load();
 
-        languageCombo = new ComboBox(new ComboBoxConfig() {
-            {
-                setName(LANG_FIELD);
-                setMinChars(1);
-                setFieldLabel(Kune.I18N.t("Language"));
-                setStore(langStore);
-                setDisplayField("language");
-                setMode(ComboBox.LOCAL);
-                setTriggerAction(ComboBox.ALL);
-                setEmptyText(Kune.I18N.t("Enter language"));
-                setLoadingText(Kune.I18N.t("Searching..."));
-                setTypeAhead(true);
-                setTypeAheadDelay(1000);
-                setSelectOnFocus(false);
-                setWidth(186);
-                setMsgTarget("side");
-                setAllowBlank(false);
-                setValueField("abbr");
-                setValue(langCode);
-                setPageSize(7);
-                setForceSelection(true);
-            }
-        });
+        languageCombo = new ComboBox();
+        languageCombo.setName(LANG_FIELD);
+        languageCombo.setMinChars(1);
+        languageCombo.setFieldLabel(Kune.I18N.t("Language"));
+        languageCombo.setStore(langStore);
+        languageCombo.setDisplayField("language");
+        languageCombo.setMode(ComboBox.LOCAL);
+        languageCombo.setTriggerAction(ComboBox.ALL);
+        languageCombo.setEmptyText(Kune.I18N.t("Enter language"));
+        languageCombo.setLoadingText(Kune.I18N.t("Searching..."));
+        languageCombo.setTypeAhead(true);
+        languageCombo.setTypeAheadDelay(1000);
+        languageCombo.setSelectOnFocus(false);
+        languageCombo.setWidth(186);
+        languageCombo.setAllowBlank(false);
+        languageCombo.setValueField("abbr");
+        languageCombo.setValue(langCode);
+        languageCombo.setPageSize(7);
+        languageCombo.setForceSelection(true);
 
         form.add(languageCombo);
 
-        final Store countryStore = new SimpleStore(new String[] { "abbr", "country" }, getCountries());
+        final Store countryStore = new SimpleStore(new String[] { "abbr", "country" }, presenter.getCountries());
         countryStore.load();
 
-        countryCombo = new ComboBox(new ComboBoxConfig() {
-            {
-                setName(COUNTRY_FIELD);
-                setMinChars(1);
-                setFieldLabel(Kune.I18N.t("Country"));
-                setStore(countryStore);
-                setDisplayField("country");
-                setMode(ComboBox.LOCAL);
-                setTriggerAction(ComboBox.ALL);
-                setEmptyText(Kune.I18N.t("Enter your country"));
-                setLoadingText(Kune.I18N.t("Searching..."));
-                setTypeAhead(true);
-                setTypeAheadDelay(1000);
-                setSelectOnFocus(false);
-                setWidth(186);
-                setMsgTarget("side");
-                setAllowBlank(false);
-                setValueField("abbr");
-                setPageSize(7);
-                setForceSelection(true);
-            }
-        });
+        countryCombo = new ComboBox();
+        countryCombo.setName(COUNTRY_FIELD);
+        countryCombo.setMinChars(1);
+        countryCombo.setFieldLabel(Kune.I18N.t("Country"));
+        countryCombo.setStore(countryStore);
+        countryCombo.setDisplayField("country");
+        countryCombo.setMode(ComboBox.LOCAL);
+        countryCombo.setTriggerAction(ComboBox.ALL);
+        countryCombo.setEmptyText(Kune.I18N.t("Enter your country"));
+        countryCombo.setLoadingText(Kune.I18N.t("Searching..."));
+        countryCombo.setTypeAhead(true);
+        countryCombo.setTypeAheadDelay(1000);
+        countryCombo.setSelectOnFocus(false);
+        countryCombo.setWidth(186);
+        countryCombo.setAllowBlank(false);
+        countryCombo.setValueField("abbr");
+        countryCombo.setPageSize(7);
+        countryCombo.setForceSelection(true);
 
         form.add(countryCombo);
 
-        final Store timezoneStore = new SimpleStore(new String[] { "id" }, getTimezones());
+        final Store timezoneStore = new SimpleStore(new String[] { "id" }, presenter.getTimezones());
         timezoneStore.load();
 
-        timezoneCombo = new ComboBox(new ComboBoxConfig() {
-            {
-                setName(TIMEZONE_FIELD);
-                setMinChars(1);
-                setFieldLabel(Kune.I18N.t("Timezone"));
-                setStore(timezoneStore);
-                setDisplayField("id");
-                setMode(ComboBox.LOCAL);
-                setTriggerAction(ComboBox.ALL);
-                setEmptyText(Kune.I18N.t("Enter your timezone"));
-                setLoadingText(Kune.I18N.t("Searching..."));
-                setTypeAhead(true);
-                setTypeAheadDelay(1000);
-                setSelectOnFocus(false);
-                setWidth(186);
-                setMsgTarget("side");
-                setAllowBlank(false);
-                setValueField("id");
-                setPageSize(7);
-                setForceSelection(true);
-            }
-        });
+        timezoneCombo = new ComboBox();
+        timezoneCombo.setName(TIMEZONE_FIELD);
+        timezoneCombo.setMinChars(1);
+        timezoneCombo.setFieldLabel(Kune.I18N.t("Timezone"));
+        timezoneCombo.setStore(timezoneStore);
+        timezoneCombo.setDisplayField("id");
+        timezoneCombo.setMode(ComboBox.LOCAL);
+        timezoneCombo.setTriggerAction(ComboBox.ALL);
+        timezoneCombo.setEmptyText(Kune.I18N.t("Enter your timezone"));
+        timezoneCombo.setLoadingText(Kune.I18N.t("Searching..."));
+        timezoneCombo.setTypeAhead(true);
+        timezoneCombo.setTypeAheadDelay(1000);
+        timezoneCombo.setSelectOnFocus(false);
+        timezoneCombo.setWidth(186);
+        timezoneCombo.setAllowBlank(false);
+        timezoneCombo.setValueField("id");
+        timezoneCombo.setPageSize(7);
+        timezoneCombo.setForceSelection(true);
 
         form.add(timezoneCombo);
 
-        form.end();
-        form.render();
         return form;
     }
 
-    private HorizontalPanel createNoAccountRegister() {
-        HorizontalPanel registerHP = new HorizontalPanel();
+    private FormPanel createStandardForm() {
+        FormPanel form = new FormPanel();
+        form.setWidth(300);
+        form.setLabelWidth(75);
+        form.setLabelAlign(Position.RIGHT);
+        form.setBorder(false);
+        return form;
+    }
+
+    private Panel createNoAccountRegister() {
+        Panel noAccRegisterPanel = new Panel();
+        noAccRegisterPanel.setBorder(false);
+        noAccRegisterPanel.setMargins(0, 90, 0, 0);
         Label dontHaveAccountLabel = new Label(Kune.I18N.t("Don't have an account?"));
         Label registerLabel = new Label(Kune.I18N.t("Create one."));
         registerLabel.addClickListener(new ClickListener() {
             public void onClick(final Widget arg0) {
-                tabPanel.getTab(1).activate();
+                centerPanel.activate(1);
             }
         });
         registerLabel.addStyleName("kune-Margin-Medium-l");
         registerLabel.addStyleName("kune-link");
-        registerHP.addStyleName("kune-Margin-40-l");
-        registerHP.add(dontHaveAccountLabel);
-        registerHP.add(registerLabel);
-        return registerHP;
+        noAccRegisterPanel.add(dontHaveAccountLabel);
+        noAccRegisterPanel.add(registerLabel);
+        return noAccRegisterPanel;
     }
 }

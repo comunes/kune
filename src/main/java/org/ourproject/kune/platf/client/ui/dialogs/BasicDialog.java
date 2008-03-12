@@ -20,65 +20,43 @@
 
 package org.ourproject.kune.platf.client.ui.dialogs;
 
-import org.ourproject.kune.platf.client.ui.CustomButton;
+import com.gwtext.client.widgets.Window;
 
-import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.Widget;
-import com.gwtext.client.widgets.LayoutDialog;
-import com.gwtext.client.widgets.LayoutDialogConfig;
-import com.gwtext.client.widgets.layout.BorderLayout;
-import com.gwtext.client.widgets.layout.ContentPanel;
-import com.gwtext.client.widgets.layout.LayoutRegionConfig;
+public class BasicDialog extends Window {
 
-public class BasicDialog {
-
-    private final LayoutDialog dialog;
-
-    public BasicDialog(final String caption, final String buttonText, final boolean modal, final boolean autoScroll,
-            final int width, final int height, final int minWidth, final int minHeight, final ClickListener listener) {
-
-        dialog = new LayoutDialog(new LayoutDialogConfig() {
-            {
-                // Param values
-                setTitle(caption);
-                setModal(modal);
-                setWidth(width);
-                setHeight(height);
-                setMinWidth(minWidth);
-                setMinHeight(minHeight);
-                setAutoScroll(autoScroll);
-                // Def values
-                setCollapsible(false);
-                setShadow(true);
-            }
-        }, new LayoutRegionConfig());
-
-        dialog.addButton(new CustomButton(buttonText, listener).getButton());
-
+    public BasicDialog(final String caption, final boolean modal, final boolean autoScroll) {
+        setAutoWidth(true);
+        // Param values
+        setTitle(caption);
+        setModal(modal);
+        setAutoScroll(autoScroll);
+        // Def values
+        setShadow(true);
+        setPlain(true);
+        setClosable(true);
+        setCollapsible(true);
+        setResizable(true);
+        setCloseAction(Window.HIDE);
     }
 
-    public BasicDialog(final String caption, final String buttonText, final boolean modal, final boolean autoScroll,
-            final int width, final int height, final ClickListener listener) {
-        this(caption, buttonText, modal, autoScroll, width, height, width, height, listener);
+    public BasicDialog(final String caption, final boolean modal) {
+        this(caption, modal, false);
     }
 
-    public void add(final Widget widget) {
-        BorderLayout layout = dialog.getLayout();
-        ContentPanel contentPanel = new ContentPanel();
-        contentPanel.add(widget);
-        layout.add(contentPanel);
+    public BasicDialog(final String caption, final boolean modal, final boolean autoScroll, final int width,
+            final int height, final int minWidth, final int minHeight) {
+        this(caption, modal, autoScroll);
+        setAutoWidth(false);
+        // Param values
+        setWidth(width);
+        setHeight(height);
+        setMinWidth(minWidth);
+        setMinHeight(minHeight);
     }
 
-    public void show() {
-        dialog.show();
-    }
-
-    public void center() {
-        dialog.center();
-    }
-
-    public void hide() {
-        dialog.hide();
+    public BasicDialog(final String caption, final boolean modal, final boolean autoScroll, final int width,
+            final int height) {
+        this(caption, modal, autoScroll, width, height, width, height);
     }
 
 }

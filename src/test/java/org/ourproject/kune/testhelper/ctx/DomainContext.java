@@ -61,10 +61,6 @@ public class DomainContext {
         return users.get(userName);
     }
 
-    public UserOperator user(final String userName) {
-        return new UserOperator(this, getUser(userName));
-    }
-
     public AccessLists getDefaultAccessListOf(final String userName) {
         return getSocialNetworkOf(userName).getAccessLists();
     }
