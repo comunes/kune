@@ -329,7 +329,7 @@
 	* Complete refactorization
 	* user login/registration, group creation, docs and chat tool first implementacion
 	* JPA integration
-	* js-jsac integration
+	* gwt-jsjac integration
 	* gwt-ext integration
 	* and several major changes
 

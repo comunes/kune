@@ -15,6 +15,6 @@ For reports please use:
 - Oversized conversation area in chat room (gwt-ext related).
 - Oversized user registration tab (gwt-ext related).
 - OK button in new users welcome wrong identation (gwt-ext related).
-- User logout in rooms problem (gwt-jsac or openfire related).
-- Problem entering rooms with an existing alias (gwt-jsac related).
+- User logout in rooms problem (gwt-jsjac or openfire related).
+- Problem entering rooms with an existing alias (gwt-jsjac related).
 - Rename of a doc title while editing, reload context.
