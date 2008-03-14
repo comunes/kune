@@ -56,9 +56,9 @@ public class GroupMembersPresenter extends AbstractPresenter implements GroupMem
     private void setGroupMembers(final SocialNetworkDTO socialNetwork, final AccessRightsDTO rights) {
         final AccessListsDTO accessLists = socialNetwork.getAccessLists();
 
-        List adminsList = accessLists.getAdmins().getList();
-        List collabList = accessLists.getEditors().getList();
-        List pendingCollabsList = socialNetwork.getPendingCollaborators().getList();
+        List<GroupDTO> adminsList = accessLists.getAdmins().getList();
+        List<GroupDTO> collabList = accessLists.getEditors().getList();
+        List<GroupDTO> pendingCollabsList = socialNetwork.getPendingCollaborators().getList();
 
         int numAdmins = adminsList.size();
         int numCollaborators = collabList.size();
@@ -141,10 +141,10 @@ public class GroupMembersPresenter extends AbstractPresenter implements GroupMem
         return view;
     }
 
-    private void addMembers(final List adminsList, final List collabList, final List pendingCollabsList,
-            final int numAdmins, final int numCollaborators, final int numPendingCollabs, final boolean isAdmin,
-            final MemberAction[] adminsActions, final MemberAction[] collabActions,
-            final MemberAction[] pendingsActions, final MemberAction[] viewerActions) {
+    private void addMembers(final List<GroupDTO> adminsList, final List<GroupDTO> collabList,
+            final List<GroupDTO> pendingCollabsList, final int numAdmins, final int numCollaborators,
+            final int numPendingCollabs, final boolean isAdmin, final MemberAction[] adminsActions,
+            final MemberAction[] collabActions, final MemberAction[] pendingsActions, final MemberAction[] viewerActions) {
         if (numAdmins > 0) {
             view.addCategory(ADMIN_CATEGORY, Kune.I18N.t("People that can admin this group"));
             iteraList(ADMIN_CATEGORY, adminsList, adminsActions);
@@ -163,10 +163,10 @@ public class GroupMembersPresenter extends AbstractPresenter implements GroupMem
 
     }
 
-    private void iteraList(final String categoryName, final List groupList, final MemberAction[] actions) {
-        final Iterator iter = groupList.iterator();
+    private void iteraList(final String categoryName, final List<GroupDTO> groupList, final MemberAction[] actions) {
+        final Iterator<GroupDTO> iter = groupList.iterator();
         while (iter.hasNext()) {
-            final GroupDTO group = (GroupDTO) iter.next();
+            final GroupDTO group = iter.next();
             view.addCategoryMember(categoryName, group.getShortName(), group.getLongName(), actions);
         }
     }

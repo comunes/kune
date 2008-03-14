@@ -29,6 +29,7 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
+import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public class AdminContextPresenter extends AbstractPresenter implements AdminContext {
@@ -48,7 +49,7 @@ public class AdminContextPresenter extends AbstractPresenter implements AdminCon
         AccessListsDTO accessLists = content.getAccessLists();
         Date publishedOn = content.getPublishedOn();
         String tags = content.getTags();
-        List authors = content.getAuthors();
+        List<UserSimpleDTO> authors = content.getAuthors();
 
         if (content.hasDocument()) {
             if (tags != null) {

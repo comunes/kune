@@ -32,14 +32,14 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public class ContentProviderImpl implements ContentProvider {
 
     private final ContentServiceAsync server;
-    private final HashMap cache;
+    private final HashMap<StateToken, StateDTO> cache;
 
     public ContentProviderImpl(final ContentServiceAsync server) {
         this.server = server;
-        this.cache = new HashMap();
+        this.cache = new HashMap<StateToken, StateDTO>();
     }
 
-    public void getContent(final String user, final StateToken newState, final AsyncCallback callback) {
+    public void getContent(final String user, final StateToken newState, final AsyncCallback<StateDTO> callback) {
         Site.showProgressProcessing();
         StateDTO catched = getCached(newState);
         if (catched != null) {
@@ -50,7 +50,7 @@ public class ContentProviderImpl implements ContentProvider {
     }
 
     private StateDTO getCached(final StateToken newState) {
-        return (StateDTO) cache.remove(newState);
+        return cache.remove(newState);
     }
 
     public void cache(final StateToken encodeState, final StateDTO content) {

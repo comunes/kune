@@ -38,11 +38,11 @@ public class AddCollabAction implements Action {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
         server.addCollabMember(services.session.getUserHash(), services.session.getCurrentState().getGroup()
-                .getShortName(), groupShortName, new AsyncCallbackSimple() {
-            public void onSuccess(final Object result) {
+                .getShortName(), groupShortName, new AsyncCallbackSimple<SocialNetworkResultDTO>() {
+            public void onSuccess(final SocialNetworkResultDTO result) {
                 Site.hideProgress();
                 Site.info(Kune.I18N.t("Member added as collaborator"));
-                services.stateManager.setSocialNetwork((SocialNetworkResultDTO) result);
+                services.stateManager.setSocialNetwork(result);
                 services.app.getWorkspace().getGroupMembersComponent().showCollabs();
             }
         });

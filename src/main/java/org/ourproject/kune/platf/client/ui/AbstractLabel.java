@@ -19,6 +19,7 @@
 
 package org.ourproject.kune.platf.client.ui;
 
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.MouseListener;
@@ -30,6 +31,8 @@ public interface AbstractLabel {
     public void addMouseListener(final MouseListener listener);
 
     public String getText();
+
+    public Element getElement();
 
     public void onBrowserEvent(final Event event);
 

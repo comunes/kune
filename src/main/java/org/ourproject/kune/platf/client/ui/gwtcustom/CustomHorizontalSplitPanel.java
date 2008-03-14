@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.ourproject.kune.platf.client.ui;
+package org.ourproject.kune.platf.client.ui.gwtcustom;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Command;
@@ -41,27 +41,27 @@ import com.google.gwt.user.client.ui.Widget;
  * <li>.gwt-HorizontalSplitPanel hsplitter { the splitter }</li>
  * </ul>
  */
-public final class CustomHorizontalSplitPanel extends CustomSplitPanel {
+public class CustomHorizontalSplitPanel extends CustomSplitPanel {
 
     /**
      * The standard implementation for horizontal split panels.
      */
     private static class Impl {
-        private static void expandToFitParentHorizontally(final Element elem) {
+        private static void expandToFitParentHorizontally(Element elem) {
             addAbsolutePositoning(elem);
-            final String zeroSize = "0px";
+      final String zeroSize = "0px";
             setTop(elem, zeroSize);
             setBottom(elem, zeroSize);
         }
 
         protected CustomHorizontalSplitPanel panel;
 
-        public void init(final CustomHorizontalSplitPanel panel) {
+        public void init(CustomHorizontalSplitPanel panel) {
             this.panel = panel;
 
             DOM.setStyleAttribute(panel.getElement(), "position", "relative");
 
-            final Element rightElem = panel.getElement(RIGHT);
+      final Element rightElem = panel.getElement(RIGHT);
 
             expandToFitParentHorizontally(panel.getElement(LEFT));
             expandToFitParentHorizontally(rightElem);
@@ -79,15 +79,15 @@ public final class CustomHorizontalSplitPanel extends CustomSplitPanel {
         public void onDetach() {
         }
 
-        public void onSplitResize(final int px) {
+        public void onSplitResize(int px) {
             setSplitPosition(px);
         }
 
         public void setSplitPosition(int px) {
-            final Element splitElem = panel.getSplitElement();
+      final Element splitElem = panel.getSplitElement();
 
-            final int rootElemWidth = getOffsetWidth(panel.container);
-            final int splitElemWidth = getOffsetWidth(splitElem);
+      final int rootElemWidth = getOffsetWidth(panel.container);
+      final int splitElemWidth = getOffsetWidth(splitElem);
 
             // This represents an invalid state where layout is incomplete. This
             // typically happens before DOM attachment, but I leave it here as a
@@ -109,7 +109,7 @@ public final class CustomHorizontalSplitPanel extends CustomSplitPanel {
                 newRightWidth = 0;
             }
 
-            final Element rightElem = panel.getElement(RIGHT);
+      final Element rightElem = panel.getElement(RIGHT);
 
             // Set the width of the left side.
             setWidth(panel.getElement(LEFT), px + "px");
@@ -118,12 +118,12 @@ public final class CustomHorizontalSplitPanel extends CustomSplitPanel {
             setLeft(splitElem, px + "px");
 
             // Move the right element to the right of the splitter.
-            setLeft(rightElem, px + splitElemWidth + "px");
+      setLeft(rightElem, (px + splitElemWidth) + "px");
 
             updateRightWidth(rightElem, newRightWidth);
         }
 
-        public void updateRightWidth(final Element rightElem, final int newRightWidth) {
+        public void updateRightWidth(Element rightElem, int newRightWidth) {
             // Update is handled by CSS.
         }
     }
@@ -137,19 +137,20 @@ public final class CustomHorizontalSplitPanel extends CustomSplitPanel {
 
         private int splitPosition = 0;
 
-        public void init(final CustomHorizontalSplitPanel panel) {
+    @Override
+        public void init(CustomHorizontalSplitPanel panel) {
             this.panel = panel;
 
-            final Element elem = panel.getElement();
+      final Element elem = panel.getElement();
             // Prevents inherited text-align settings from interfering with the
             // panel's layout.
             DOM.setStyleAttribute(elem, "textAlign", "left");
             DOM.setStyleAttribute(elem, "position", "relative");
 
             /*
-             * Technically, these are snapped to the top and bottom, but IE
-             * doesn't provide a reliable way to make that happen, so a resize
-             * listener is wired up to control the height of these elements.
+       * Technically, these are snapped to the top and bottom, but IE doesn't
+       * provide a reliable way to make that happen, so a resize listener is
+       * wired up to control the height of these elements.
              */
             addAbsolutePositoning(panel.getElement(LEFT));
             addAbsolutePositoning(panel.getElement(RIGHT));
@@ -158,20 +159,24 @@ public final class CustomHorizontalSplitPanel extends CustomSplitPanel {
             expandToFitParentUsingPercentages(panel.container);
         }
 
+    @Override
         public void onAttach() {
             addResizeListener(panel.container);
             onResize();
         }
 
+    @Override
         public void onDetach() {
             DOM.setElementAttribute(panel.container, "onresize", null);
         }
 
-        public void onSplitResize(final int px) {
-            final int resizeUpdatePeriod = 20; // ms
+    @Override
+    public void onSplitResize(int px) {
+      final int resizeUpdatePeriod = 20; // ms
             if (!isResizeInProgress) {
                 isResizeInProgress = true;
                 new Timer() {
+          @Override
                     public void run() {
                         setSplitPosition(splitPosition);
                         isResizeInProgress = false;
@@ -181,7 +186,8 @@ public final class CustomHorizontalSplitPanel extends CustomSplitPanel {
             splitPosition = px;
         }
 
-        public void updateRightWidth(final Element rightElem, final int newRightWidth) {
+    @Override
+    public void updateRightWidth(Element rightElem, int newRightWidth) {
             setWidth(rightElem, newRightWidth + "px");
         }
 
@@ -193,10 +199,10 @@ public final class CustomHorizontalSplitPanel extends CustomSplitPanel {
                                                                           }-*/;
 
         private void onResize() {
-            final Element leftElem = panel.getElement(LEFT);
-            final Element rightElem = panel.getElement(RIGHT);
+      final Element leftElem = panel.getElement(LEFT);
+      final Element rightElem = panel.getElement(RIGHT);
 
-            final String height = getOffsetHeight(panel.container) + "px";
+      final String height = getOffsetHeight(panel.container) + "px";
             setHeight(rightElem, height);
             setHeight(panel.getSplitElement(), height);
             setHeight(leftElem, height);
@@ -209,9 +215,10 @@ public final class CustomHorizontalSplitPanel extends CustomSplitPanel {
      * WebKit bug: http://bugs.webkit.org/show_bug.cgi?id=9137.
      */
     private static class ImplSafari extends Impl {
-        public void init(final CustomHorizontalSplitPanel panel) {
+				@Override
+        public void init(CustomHorizontalSplitPanel panel) {
             this.panel = panel;
-            final String fullSize = "100%";
+      final String fullSize = "100%";
             super.init(panel);
             setHeight(panel.container, fullSize);
             setHeight(panel.getElement(LEFT), fullSize);
@@ -224,22 +231,22 @@ public final class CustomHorizontalSplitPanel extends CustomSplitPanel {
      * Constant makes for readable calls to {@link #getElement(int)} and
      * {@link #getWidget(int)}.
      */
-    private static final int LEFT = 0;
+  private static final int LEFT = 0;
 
     /**
      * Constant makes for readable calls to {@link #getElement(int)} and
      * {@link #getWidget(int)}.
      */
-    private static final int RIGHT = 1;
+  private static final int RIGHT = 1;
 
     // A style-free element to serve as the root container.
-    private final Element container;
+  private final Element container;
 
-    private final Impl impl = (Impl) GWT.create(Impl.class);
+  private final Impl impl = GWT.create(Impl.class);
 
     /**
-     * If the split position is set while the split panel is not attached, save
-     * it here to be applied when the panel is attached to the document.
+   * If the split position is set while the split panel is not attached, save it
+   * here to be applied when the panel is attached to the document.
      */
     private String lastSplitPosition = "50%";
 
@@ -248,14 +255,15 @@ public final class CustomHorizontalSplitPanel extends CustomSplitPanel {
     private int initialLeftWidth;
 
     public CustomHorizontalSplitPanel() {
-        this((HorizontalSplitPanelImages) GWT.create(HorizontalSplitPanelImages.class));
+    this(GWT.<HorizontalSplitPanelImages>create(HorizontalSplitPanelImages.class));
     }
 
     /**
      * Creates an empty horizontal split panel.
      */
-    public CustomHorizontalSplitPanel(final HorizontalSplitPanelImages images) {
-        super(DOM.createDiv(), DOM.createDiv(), preventBoxStyles(DOM.createDiv()), preventBoxStyles(DOM.createDiv()));
+    public CustomHorizontalSplitPanel(HorizontalSplitPanelImages images) {
+        super(DOM.createDiv(), DOM.createDiv(), preventBoxStyles(DOM.createDiv()),
+				preventBoxStyles(DOM.createDiv()));
 
         container = preventBoxStyles(DOM.createDiv());
 
@@ -265,8 +273,7 @@ public final class CustomHorizontalSplitPanel extends CustomSplitPanel {
 
         impl.init(this);
 
-        // By default, the panel will fill its parent vertically and
-        // horizontally.
+    // By default, the panel will fill its parent vertically and horizontally.
         // The horizontal case is covered by the fact that the top level div is
         // block display.
         setHeight("100%");
@@ -277,7 +284,7 @@ public final class CustomHorizontalSplitPanel extends CustomSplitPanel {
      * 
      * @return the widget, <code>null</code> if there is not one.
      */
-    public final Widget getLeftWidget() {
+  public final Widget getLeftWidget() {
         return getWidget(LEFT);
     }
 
@@ -286,33 +293,32 @@ public final class CustomHorizontalSplitPanel extends CustomSplitPanel {
      * 
      * @return the widget, <code>null</code> if there is not one.
      */
-    public final Widget getRightWidget() {
+  public final Widget getRightWidget() {
         return getWidget(RIGHT);
     }
 
     /**
      * Sets the widget in the left side of the panel.
      * 
-     * @param w
-     *                the widget
+   * @param w the widget
      */
-    public final void setLeftWidget(final Widget w) {
+  public final void setLeftWidget(Widget w) {
         setWidget(LEFT, w);
     }
 
     /**
      * Sets the widget in the right side of the panel.
      * 
-     * @param w
-     *                the widget
+   * @param w the widget
      */
-    public final void setRightWidget(final Widget w) {
+  public final void setRightWidget(Widget w) {
         setWidget(RIGHT, w);
     }
 
-    public final void setSplitPosition(final String pos) {
+  @Override
+  public final void setSplitPosition(String pos) {
         lastSplitPosition = pos;
-        final Element leftElem = getElement(LEFT);
+    final Element leftElem = getElement(LEFT);
         setWidth(leftElem, pos);
         impl.setSplitPosition(getOffsetWidth(leftElem));
     }
@@ -327,14 +333,32 @@ public final class CustomHorizontalSplitPanel extends CustomSplitPanel {
         return getOffsetWidth() - splitRightEdge - 1;
     }
 
+  /**
+   * <b>Affected Elements:</b>
+   * <ul>
+   * <li>-splitter = the container containing the splitter element.</li>
+   * <li>-right = the container on the right side of the splitter.</li>
+   * <li>-left = the container on the left side of the splitter.</li>
+   * </ul>
+   * 
+   * @see UIObject#onEnsureDebugId(String)
+   */
+  @Override
+  protected void onEnsureDebugId(String baseID) {
+    super.onEnsureDebugId(baseID);
+    ensureDebugId(getElement(LEFT), baseID, "left");
+    ensureDebugId(getElement(RIGHT), baseID, "right");
+  }
+
+  @Override
     protected void onLoad() {
         impl.onAttach();
 
         /*
-         * If the split position has been changed while detached, apply the
-         * change. Set the position realizing that it might not work until after
-         * layout runs. This first call is simply to try to avoid a jitter
-         * effect if possible.
+     * If the split position has been changed while detached, apply the change.
+     * Set the position realizing that it might not work until after layout
+     * runs. This first call is simply to try to avoid a jitter effect if
+     * possible.
          */
         setSplitPosition(lastSplitPosition);
         DeferredCommand.addCommand(new Command() {
@@ -344,23 +368,26 @@ public final class CustomHorizontalSplitPanel extends CustomSplitPanel {
         });
     }
 
+  @Override
     protected void onUnload() {
         impl.onDetach();
     }
 
-    final void onSplitterResize(final int x, final int y) {
+  @Override
+  final void onSplitterResize(int x, int y) {
         impl.onSplitResize(initialLeftWidth + x - initialThumbPos);
     }
 
-    final void onSplitterResizeStarted(final int x, final int y) {
+  @Override
+  final void onSplitterResizeStarted(int x, int y) {
         initialThumbPos = x;
         initialLeftWidth = getOffsetWidth(getElement(LEFT));
     }
 
-    private void buildDOM(final AbstractImagePrototype thumbImage) {
-        final Element leftDiv = getElement(LEFT);
-        final Element rightDiv = getElement(RIGHT);
-        final Element splitDiv = getSplitElement();
+    private void buildDOM(AbstractImagePrototype thumbImage) {
+    final Element leftDiv = getElement(LEFT);
+    final Element rightDiv = getElement(RIGHT);
+    final Element splitDiv = getSplitElement();
 
         DOM.appendChild(getElement(), container);
 
@@ -369,12 +396,14 @@ public final class CustomHorizontalSplitPanel extends CustomSplitPanel {
         DOM.appendChild(container, rightDiv);
 
         /*
-         * Sadly, this is the only way I've found to get vertical centering in
-         * this case. The usually CSS hacks (display: table-cell,
-         * vertical-align: middle) don't work in an absolute positioned DIV.
-         */
-        DOM.setInnerHTML(splitDiv, "<table class='hsplitter' height='100%' cellpadding='0' "
-                + "cellspacing='0'><tr><td align='center' valign='middle'>" + thumbImage.getHTML());
+     * Sadly, this is the only way I've found to get vertical centering in this
+     * case. The usually CSS hacks (display: table-cell, vertical-align: middle)
+     * don't work in an absolute positioned DIV.
+     */
+    DOM.setInnerHTML(splitDiv,
+        "<table class='hsplitter' height='100%' cellpadding='0' "
+            + "cellspacing='0'><tr><td align='center' valign='middle'>"
+            + thumbImage.getHTML());
 
         addScrolling(leftDiv);
         addScrolling(rightDiv);

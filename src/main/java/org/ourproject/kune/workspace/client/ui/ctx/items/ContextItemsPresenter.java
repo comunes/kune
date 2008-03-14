@@ -56,17 +56,17 @@ public class ContextItemsPresenter implements ContextItems {
             view.setCurrentName(container.getName());
         }
         view.clear();
-        List folders = container.getChilds();
+        List<ContainerDTO> folders = container.getChilds();
         for (int index = 0; index < folders.size(); index++) {
-            ContainerDTO child = (ContainerDTO) folders.get(index);
+            ContainerDTO child = folders.get(index);
             state.setFolder(child.getId().toString());
             view.addItem(child.getName(), child.getTypeId(), state.getEncoded(), rights.isEditable());
         }
 
         state.setFolder(container.getId().toString());
-        List contents = container.getContents();
+        List<ContentDTO> contents = container.getContents();
         for (int index = 0; index < contents.size(); index++) {
-            ContentDTO dto = (ContentDTO) contents.get(index);
+            ContentDTO dto = contents.get(index);
             state.setDocument(dto.getId().toString());
             view.addItem(dto.getTitle(), dto.getTypeId(), state.getEncoded(), rights.isEditable());
         }
@@ -116,7 +116,7 @@ public class ContextItemsPresenter implements ContextItems {
 
     public void onTitleRename(final String text, final String token) {
         Site.showProgressSaving();
-        DefaultDispatcher.getInstance().fire(DocsEvents.RENAME_CONTENT, text, new AsyncCallbackSimple() {
+        DefaultDispatcher.getInstance().fire(DocsEvents.RENAME_CONTENT, text, new AsyncCallbackSimple<Object>() {
             public void onSuccess(final Object result) {
                 DefaultDispatcher.getInstance().fire(WorkspaceEvents.RELOAD_CONTEXT, null, null);
                 Site.hideProgress();

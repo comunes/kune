@@ -79,19 +79,20 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
     }
 
     public void doNewGroup(final String previousTokenOrig) {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ONLY_CHECK_USER_SESSION, new AsyncCallbackSimple() {
-            public void onSuccess(final Object result) {
-                previousToken = previousTokenOrig;
-                if (session.isLogged()) {
-                    Site.showProgressProcessing();
-                    view.showNewGroupDialog();
-                    view.centerNewGroupDialog();
-                } else {
-                    returnToPreviousState();
-                    Site.info(Kune.I18N.t("Sign in or register to create a group"));
-                }
-            }
-        }, null);
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ONLY_CHECK_USER_SESSION,
+                new AsyncCallbackSimple<Object>() {
+                    public void onSuccess(final Object result) {
+                        previousToken = previousTokenOrig;
+                        if (session.isLogged()) {
+                            Site.showProgressProcessing();
+                            view.showNewGroupDialog();
+                            view.centerNewGroupDialog();
+                        } else {
+                            returnToPreviousState();
+                            Site.info(Kune.I18N.t("Sign in or register to create a group"));
+                        }
+                    }
+                }, null);
     }
 
     public void doSearch(final String termToSearch) {
@@ -99,7 +100,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
     }
 
     public void doLogout() {
-        AsyncCallback callback = new AsyncCallback() {
+        AsyncCallback<Object> callback = new AsyncCallback<Object>() {
             public void onFailure(final Throwable caught) {
                 Site.hideProgress();
                 try {
@@ -132,13 +133,13 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 
     public void reloadUserInfo(final String userHash) {
         UserServiceAsync siteBarService = UserService.App.getInstance();
-        siteBarService.reloadUserInfo(userHash, new AsyncCallback() {
+        siteBarService.reloadUserInfo(userHash, new AsyncCallback<UserInfoDTO>() {
             public void onFailure(final Throwable arg0) {
                 Site.hideProgress();
             }
 
-            public void onSuccess(final Object response) {
-                showLoggedUser((UserInfoDTO) response);
+            public void onSuccess(final UserInfoDTO response) {
+                showLoggedUser(response);
                 Site.hideProgress();
             }
         });

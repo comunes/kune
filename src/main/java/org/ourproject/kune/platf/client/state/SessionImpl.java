@@ -26,6 +26,7 @@ import java.util.List;
 import org.ourproject.kune.platf.client.dto.I18nCountryDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageSimpleDTO;
+import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 /**
@@ -37,9 +38,9 @@ import org.ourproject.kune.workspace.client.dto.StateDTO;
  */
 public class SessionImpl implements Session {
     private String userHash;
-    private List licenses;
-    private List languages;
-    private List countries;
+    private List<LicenseDTO> licenses;
+    private List<I18nLanguageSimpleDTO> languages;
+    private List<I18nCountryDTO> countries;
     private Object[][] languagesArray;
     private Object[][] countriesArray;
     private String[] timezones;
@@ -58,138 +59,62 @@ public class SessionImpl implements Session {
         currentLanguage = initialLang;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.ourproject.kune.platf.client.state.Session#getLicenses()
-     */
-    public List getLicenses() {
+    public List<LicenseDTO> getLicenses() {
         return licenses;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.ourproject.kune.platf.client.state.Session#setLicenses(java.util.List)
-     */
-    public void setLicenses(final List licenses) {
+    public void setLicenses(final List<LicenseDTO> licenses) {
         this.licenses = licenses;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.ourproject.kune.platf.client.state.Session#setCurrent(org.ourproject.kune.workspace.client.dto.StateDTO)
-     */
     public void setCurrent(final StateDTO currentState) {
         this.currentState = currentState;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.ourproject.kune.platf.client.state.Session#getCurrentState()
-     */
     public StateDTO getCurrentState() {
         return currentState;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.ourproject.kune.platf.client.state.Session#setCurrentState(org.ourproject.kune.workspace.client.dto.StateDTO)
-     */
     public void setCurrentState(final StateDTO currentState) {
         this.currentState = currentState;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.ourproject.kune.platf.client.state.Session#setDefaultWsTheme(java.lang.String)
-     */
     public void setDefaultWsTheme(final String defaultWsTheme) {
         this.defaultWsTheme = defaultWsTheme;
-
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.ourproject.kune.platf.client.state.Session#setWsThemes(java.lang.String[])
-     */
     public void setWsThemes(final String[] wsThemes) {
         this.wsThemes = wsThemes;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.ourproject.kune.platf.client.state.Session#getWsThemes()
-     */
     public String[] getWsThemes() {
         return wsThemes;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.ourproject.kune.platf.client.state.Session#getDefaultWsTheme()
-     */
     public String getDefaultWsTheme() {
         return defaultWsTheme;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.ourproject.kune.platf.client.state.Session#isLogged()
-     */
     public boolean isLogged() {
         return userHash != null;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.ourproject.kune.platf.client.state.Session#getLanguages()
-     */
-    public List getLanguages() {
+    public List<I18nLanguageSimpleDTO> getLanguages() {
         return languages;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.ourproject.kune.platf.client.state.Session#setLanguages(java.util.List)
-     */
-    public void setLanguages(final List languages) {
+    public void setLanguages(final List<I18nLanguageSimpleDTO> languages) {
         this.languages = languages;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.ourproject.kune.platf.client.state.Session#getCountries()
-     */
-    public List getCountries() {
+    public List<I18nCountryDTO> getCountries() {
         return countries;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.ourproject.kune.platf.client.state.Session#setCountries(java.util.List)
-     */
-    public void setCountries(final List countries) {
+    public void setCountries(final List<I18nCountryDTO> countries) {
         this.countries = countries;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.ourproject.kune.platf.client.state.Session#getLanguagesArray()
-     */
     public Object[][] getLanguagesArray() {
         if (languagesArray == null) {
             languagesArray = mapLangs();
@@ -197,11 +122,6 @@ public class SessionImpl implements Session {
         return languagesArray;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.ourproject.kune.platf.client.state.Session#getCountriesArray()
-     */
     public Object[][] getCountriesArray() {
         if (countriesArray == null) {
             countriesArray = mapCountries();
@@ -223,8 +143,8 @@ public class SessionImpl implements Session {
     private Object[][] mapCountries() {
         Object[][] objs = new Object[countries.size()][1];
         int i = 0;
-        for (Iterator iterator = countries.iterator(); iterator.hasNext();) {
-            I18nCountryDTO country = (I18nCountryDTO) iterator.next();
+        for (Iterator<I18nCountryDTO> iterator = countries.iterator(); iterator.hasNext();) {
+            I18nCountryDTO country = iterator.next();
             Object[] obj = new Object[] { country.getCode(), country.getEnglishName() };
             objs[i++] = obj;
         }
@@ -234,8 +154,8 @@ public class SessionImpl implements Session {
     private Object[][] mapLangs() {
         Object[][] objs = new Object[languages.size()][1];
         int i = 0;
-        for (Iterator iterator = languages.iterator(); iterator.hasNext();) {
-            I18nLanguageSimpleDTO language = (I18nLanguageSimpleDTO) iterator.next();
+        for (Iterator<I18nLanguageSimpleDTO> iterator = languages.iterator(); iterator.hasNext();) {
+            I18nLanguageSimpleDTO language = iterator.next();
             Object[] obj = new Object[] { language.getCode(), language.getEnglishName() };
             objs[i++] = obj;
         }

@@ -37,23 +37,23 @@ public class RequestJoinGroupAction implements Action {
     private void onRequestJoinGroup(final Services services) {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        server.requestJoinGroup(services.session.getUserHash(),
-                services.session.getCurrentState().getGroup().getShortName(), new AsyncCallbackSimple() {
-                    public void onSuccess(final Object result) {
-                        Site.hideProgress();
-                        final String resultType = (String) result;
-                        if (resultType == SocialNetworkDTO.REQ_JOIN_ACEPTED) {
-                            Site.info(Kune.I18N.t("You are now member of this group"));
-                            services.stateManager.reload();
-                        }
-                        if (resultType == SocialNetworkDTO.REQ_JOIN_DENIED) {
-                            Site.important(Kune.I18N.t("Sorry this is a closed group"));
-                        }
-                        if (resultType == SocialNetworkDTO.REQ_JOIN_WAITING_MODERATION) {
-                            Site.info(Kune.I18N.t("Requested. Waiting for admins decision"));
-                        }
-                    }
-                });
+        server.requestJoinGroup(services.session.getUserHash(), services.session.getCurrentState().getGroup()
+                .getShortName(), new AsyncCallbackSimple<Object>() {
+            public void onSuccess(final Object result) {
+                Site.hideProgress();
+                final String resultType = (String) result;
+                if (resultType == SocialNetworkDTO.REQ_JOIN_ACEPTED) {
+                    Site.info(Kune.I18N.t("You are now member of this group"));
+                    services.stateManager.reload();
+                }
+                if (resultType == SocialNetworkDTO.REQ_JOIN_DENIED) {
+                    Site.important(Kune.I18N.t("Sorry this is a closed group"));
+                }
+                if (resultType == SocialNetworkDTO.REQ_JOIN_WAITING_MODERATION) {
+                    Site.info(Kune.I18N.t("Requested. Waiting for admins decision"));
+                }
+            }
+        });
     }
 
 }

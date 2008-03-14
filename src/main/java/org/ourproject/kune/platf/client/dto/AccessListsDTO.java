@@ -23,54 +23,42 @@ package org.ourproject.kune.platf.client.dto;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class AccessListsDTO implements IsSerializable {
-
-    /**
-     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.GroupListDTO>
-     */
     private GroupListDTO admins;
-
-    /**
-     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.GroupListDTO>
-     */
     private GroupListDTO editors;
-
-    /**
-     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.GroupListDTO>
-     */
     private GroupListDTO viewers;
 
     public AccessListsDTO() {
-	this(null, null, null);
+        this(null, null, null);
     }
 
     public AccessListsDTO(final GroupListDTO admins, final GroupListDTO editors, final GroupListDTO viewers) {
-	this.admins = admins;
-	this.editors = editors;
-	this.viewers = viewers;
+        this.admins = admins;
+        this.editors = editors;
+        this.viewers = viewers;
     }
 
     public GroupListDTO getAdmins() {
-	return admins;
+        return admins;
     }
 
     public void setAdmins(final GroupListDTO admins) {
-	this.admins = admins;
+        this.admins = admins;
     }
 
     public GroupListDTO getEditors() {
-	return editors;
+        return editors;
     }
 
     public void setEditors(final GroupListDTO editors) {
-	this.editors = editors;
+        this.editors = editors;
     }
 
     public GroupListDTO getViewers() {
-	return viewers;
+        return viewers;
     }
 
     public void setViewers(final GroupListDTO viewers) {
-	this.viewers = viewers;
+        this.viewers = viewers;
     }
 
 }

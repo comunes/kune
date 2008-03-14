@@ -22,20 +22,19 @@ package org.ourproject.kune.blogs.client.actions;
 
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.ContainerDTO;
+import org.ourproject.kune.platf.client.dto.GroupDTO;
 
-public class GoParentFolder implements Action {
+public class AddFolderAction implements Action {
     public void execute(final Object value, final Object extra, final Services services) {
-	goParent(services.session.getCurrentState(), services.stateManager);
+        String name = (String) value;
+        GroupDTO group = services.session.getCurrentState().getGroup();
+        ContainerDTO container = services.session.getCurrentState().getFolder();
+        addFolder(services, name, group, container);
     }
 
-    private void goParent(final StateDTO state, final StateManager stateManager) {
-	StateToken token = state.getStateToken();
-	token.setDocument(null);
-	token.setFolder(state.getFolder().getParentFolderId().toString());
-	stateManager.setState(token);
-    }
+    private void addFolder(final Services services, final String name, final GroupDTO group,
+            final ContainerDTO container) {
 
+    }
 }

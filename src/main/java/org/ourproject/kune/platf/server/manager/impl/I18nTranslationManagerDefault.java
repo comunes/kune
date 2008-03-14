@@ -84,8 +84,8 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
         } else {
             language = languageManager.findByCode(languageCode);
             List<I18nTranslation> list = finder.getNonExistentFromDefault(defLanguage, language);
-            for (Iterator iterator = list.iterator(); iterator.hasNext();) {
-                I18nTranslation defTrans = (I18nTranslation) iterator.next();
+            for (Iterator<I18nTranslation> iterator = list.iterator(); iterator.hasNext();) {
+                I18nTranslation defTrans = iterator.next();
                 I18nTranslation newTrans = defTrans.cloneForNewLanguage();
                 newTrans.setLanguage(language);
                 persist(newTrans);
@@ -162,13 +162,13 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
     }
 
     private HashMap<String, String> getLexiconFromDb(final String language) {
-        HashMap<String, String> map = new HashMap();
+        HashMap<String, String> map = new HashMap<String, String>();
         List<I18nTranslation> set = finder.findByLanguage(language);
         if (!language.equals(I18nTranslation.DEFAULT_LANG)) {
             map = (HashMap<String, String>) getLexicon(I18nTranslation.DEFAULT_LANG).clone();
         }
-        for (Iterator iterator = set.iterator(); iterator.hasNext();) {
-            I18nTranslation trans = (I18nTranslation) iterator.next();
+        for (Iterator<I18nTranslation> iterator = set.iterator(); iterator.hasNext();) {
+            I18nTranslation trans = iterator.next();
             map.put(trans.getTrKey(), trans.getText());
         }
         langCache.put(language, map);

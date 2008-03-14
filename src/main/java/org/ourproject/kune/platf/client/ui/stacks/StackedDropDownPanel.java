@@ -38,7 +38,7 @@ public class StackedDropDownPanel extends DropDownPanel implements UIConstants {
     private final AbstractPresenter presenter;
     private final IndexedStackPanelWithSubItems stack;
     private final VerticalPanel bottomLinksVP;
-    private final ArrayList bottomLinksIndex;
+    private final ArrayList<String> bottomLinksIndex;
     private String headerText;
     private String headerTitle;
     private int headerCount;
@@ -56,7 +56,7 @@ public class StackedDropDownPanel extends DropDownPanel implements UIConstants {
         commentsVP = new VerticalPanel();
         stack = new IndexedStackPanelWithSubItems();
         bottomLinksVP = new VerticalPanel();
-        bottomLinksIndex = new ArrayList();
+        bottomLinksIndex = new ArrayList<String>();
 
         // Layout
         generalVP.add(commentsVP);
@@ -170,7 +170,7 @@ public class StackedDropDownPanel extends DropDownPanel implements UIConstants {
     }
 
     public void cleanBottomLinks() {
-        Iterator iter = bottomLinksIndex.iterator();
+        Iterator<String> iter = bottomLinksIndex.iterator();
         while (iter.hasNext()) {
             bottomLinksVP.remove(0);
         }

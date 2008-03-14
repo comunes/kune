@@ -44,9 +44,8 @@ public class AddRoomAction implements Action {
         ContentServiceAsync server = ContentService.App.getInstance();
         String groupShortName = group.getShortName();
         server.addRoom(services.session.getUserHash(), groupShortName, container.getId(), groupShortName + "-" + name,
-                new AsyncCallbackSimple() {
-                    public void onSuccess(final Object result) {
-                        StateDTO state = (StateDTO) result;
+                new AsyncCallbackSimple<StateDTO>() {
+                    public void onSuccess(final StateDTO state) {
                         services.stateManager.setRetrievedState(state);
                         // FIXME: Isn't using cache (same in Add folder)
                         services.stateManager.reloadContextAndTitles();

@@ -57,7 +57,7 @@ public class LicenseChoosePanel extends Composite implements LicenseChooseView {
     private final RadioButton noModifRB;
     private final RadioButton nonCommercialRB;
 
-    public LicenseChoosePanel(final List nonCCLicenses, final LicenseChoosePresenter presenter) {
+    public LicenseChoosePanel(final List<LicenseDTO> nonCCLicenses, final LicenseChoosePresenter presenter) {
         Images img = Images.App.getInstance();
 
         VerticalPanel generalVP = new VerticalPanel();
@@ -67,7 +67,9 @@ public class LicenseChoosePanel extends Composite implements LicenseChooseView {
         ccRB = new RadioButton("ccOrNot", Kune.I18N.t("Creative Commons"));
         RadioButton notCcRB = new RadioButton("ccOrNot", Kune.I18N.t("Others licenses"));
         options = new DeckPanel();
-        ccIntro = new Label(Kune.I18N.t("With a Creative Commons license, you keep your copyright but allow people to copy and distribute your work provided they give you credit — and only on the conditions you specify here. What do you want to do?"));
+        ccIntro = new Label(
+                Kune.I18N
+                        .t("With a Creative Commons license, you keep your copyright but allow people to copy and distribute your work provided they give you credit — and only on the conditions you specify here. What do you want to do?"));
 
         otherLicenses = new ListBox();
         VerticalPanel ccOptionsVP = new VerticalPanel();
@@ -141,7 +143,7 @@ public class LicenseChoosePanel extends Composite implements LicenseChooseView {
         });
 
         for (int i = 0; i < nonCCLicenses.size(); i++) {
-            String licenseDescrip = ((LicenseDTO) nonCCLicenses.get(i)).getLongName();
+            String licenseDescrip = (nonCCLicenses.get(i)).getLongName();
             otherLicenses.addItem(licenseDescrip);
         }
         if (nonCCLicenses.size() > 0) {

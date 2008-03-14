@@ -22,21 +22,22 @@ package org.ourproject.kune.platf.client.ui.stacks;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.ourproject.kune.platf.client.ui.CustomStackPanel;
+import org.ourproject.kune.platf.client.ui.AbstractLabel;
+import org.ourproject.kune.platf.client.ui.IconLabel;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
+import org.ourproject.kune.platf.client.ui.LabelWrapper;
 import org.ourproject.kune.platf.client.ui.UIConstants;
+import org.ourproject.kune.platf.client.ui.gwtcustom.CustomStackPanel;
 
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class IndexedStackPanel extends CustomStackPanel {
-    private final ArrayList stackList;
+    private final ArrayList<StackItem> stackList;
 
     public IndexedStackPanel() {
-        stackList = new ArrayList();
+        stackList = new ArrayList<StackItem>();
     }
 
     /* Stack items */
@@ -68,10 +69,10 @@ public class IndexedStackPanel extends CustomStackPanel {
     }
 
     public int indexOf(final String name) {
-        final Iterator iter = stackList.iterator();
+        final Iterator<StackItem> iter = stackList.iterator();
         int i = 0;
         while (iter.hasNext()) {
-            final StackItem stackItem = (StackItem) iter.next();
+            final StackItem stackItem = iter.next();
             if (stackItem.getName() == name) {
                 return i;
             } else {
@@ -86,16 +87,16 @@ public class IndexedStackPanel extends CustomStackPanel {
     }
 
     public StackItem getItem(final int indexOfStackItem) {
-        return (StackItem) stackList.get(indexOfStackItem);
+        return stackList.get(indexOfStackItem);
     }
 
     public StackItem getItem(final String name) {
-        return (StackItem) stackList.get(indexOf(name));
+        return stackList.get(indexOf(name));
     }
 
     public void clear() {
-        for (Iterator iterator = stackList.iterator(); iterator.hasNext();) {
-            StackItem item = (StackItem) iterator.next();
+        for (Iterator<StackItem> iterator = stackList.iterator(); iterator.hasNext();) {
+            StackItem item = iterator.next();
             item.clear();
         }
         stackList.clear();
@@ -113,7 +114,7 @@ public class IndexedStackPanel extends CustomStackPanel {
         private AbstractImagePrototype icon;
         private String iconAlign;
         private boolean countVisible;
-        private final ArrayList subItems;
+        private final ArrayList<String> subItems;
 
         public StackItem(final String text, final String title, final AbstractImagePrototype icon,
                 final String iconAlign, final boolean countVisible) {
@@ -122,7 +123,7 @@ public class IndexedStackPanel extends CustomStackPanel {
             this.icon = icon;
             this.iconAlign = iconAlign;
             this.countVisible = countVisible;
-            subItems = new ArrayList();
+            subItems = new ArrayList<String>();
         }
 
         public int getCount() {
@@ -174,26 +175,20 @@ public class IndexedStackPanel extends CustomStackPanel {
         }
 
         public String getHtml() {
-            Element div = DOM.createDiv();
-            Element labelElem = DOM.createSpan();
-            Element iconElement = null;
-            KuneUiUtils.setQuickTip(labelElem, title);
             boolean insertIcon = icon != null && iconAlign != null;
-            if (insertIcon) {
-                iconElement = icon.createImage().getElement();
-                KuneUiUtils.setQuickTip(iconElement, title);
-                if (iconAlign == UIConstants.ICON_HORIZ_ALIGN_LEFT) {
-                    DOM.appendChild(div, iconElement);
-                }
-            }
-            DOM.setInnerText(labelElem, text + (countVisible ? " (" + subItems.size() + ")" : ""));
-            DOM.appendChild(div, labelElem);
+            String textWithCount = text + (countVisible ? " (" + subItems.size() + ")" : "");
+            AbstractLabel label;
             if (insertIcon) {
                 if (iconAlign == UIConstants.ICON_HORIZ_ALIGN_RIGHT) {
-                    DOM.appendChild(div, iconElement);
+                    label = new IconLabel(textWithCount, icon);
+                } else {
+                    label = new IconLabel(textWithCount, icon);
                 }
+            } else {
+                label = new LabelWrapper(textWithCount);
             }
-            return div.toString();
+            KuneUiUtils.setQuickTip(label.getElement(), title);
+            return label.toString();
         }
     }
 

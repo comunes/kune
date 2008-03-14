@@ -34,10 +34,10 @@ public class SearchSitePresenter extends AbstractPresenter implements SearchSite
 
     private SearchSiteView view;
     private int currentSearch;
-    private final HashMap searchHistory;
+    private final HashMap<String, Integer> searchHistory;
 
     public SearchSitePresenter() {
-        searchHistory = new HashMap();
+        searchHistory = new HashMap<String, Integer>();
         currentSearch = SearchSiteView.GROUP_USER_SEARCH;
     }
 
@@ -71,8 +71,8 @@ public class SearchSitePresenter extends AbstractPresenter implements SearchSite
     public Object[][] getSearchHistory() {
         Object[][] objs = new Object[searchHistory.size()][1];
         int i = 0;
-        for (Iterator iterator = searchHistory.keySet().iterator(); iterator.hasNext();) {
-            String search = (String) iterator.next();
+        for (Iterator<String> iterator = searchHistory.keySet().iterator(); iterator.hasNext();) {
+            String search = iterator.next();
             Object[] obj = new Object[] { search };
             objs[i++] = obj;
         }

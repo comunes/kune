@@ -32,10 +32,7 @@ public interface I18nService extends RemoteService {
 
     I18nLanguageDTO getInitialLanguage(String localeParam);
 
-    /**
-     * @gwt.typeArgs <java.lang.String,java.lang.String>
-     */
-    HashMap getLexicon(String language);
+    HashMap<String, String> getLexicon(String language);
 
     String getTranslation(String userHash, String language, String text) throws SerializableException;
 

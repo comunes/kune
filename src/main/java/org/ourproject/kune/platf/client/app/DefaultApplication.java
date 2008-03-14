@@ -36,11 +36,11 @@ import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 public class DefaultApplication implements Application {
     private final Workspace workspace;
-    private final Map tools;
+    private final Map<String, ClientTool> tools;
     private Dispatcher dispatcher;
     private StateManager stateManager;
 
-    public DefaultApplication(final Map tools, final Session session) {
+    public DefaultApplication(final Map<String, ClientTool> tools, final Session session) {
         this.tools = tools;
         workspace = WorkspaceFactory.createWorkspace(session);
         workspace.attachTools(tools.values().iterator());
@@ -67,7 +67,7 @@ public class DefaultApplication implements Application {
     }
 
     public ClientTool getTool(final String toolName) {
-        return (ClientTool) tools.get(toolName);
+        return tools.get(toolName);
     }
 
     public void init(final DefaultDispatcher dispatcher, final StateManager stateManager) {
@@ -80,9 +80,9 @@ public class DefaultApplication implements Application {
     }
 
     public void setGroupState(final String groupShortName) {
-        Iterator iterator = tools.values().iterator();
+        Iterator<ClientTool> iterator = tools.values().iterator();
         while (iterator.hasNext()) {
-            ClientTool tool = (ClientTool) iterator.next();
+            ClientTool tool = iterator.next();
             tool.setGroupState(groupShortName);
         }
     }

@@ -5,6 +5,7 @@ TODO-list for kune
 
 SHORT-TERM (URGENT):
 --------------------------------------------------------------------------------
+<vjrj> IconHyperlink.java and IconLabel.java to gwt1.5
 <vjrj> Think about Affero GPL v3 ....
 <vjrj> chat add new room name validation (do a form with validation)
 --> vjrj
@@ -27,6 +28,7 @@ Now there are problems if client was started before server, and with server rest
 
 MIND-TERM:
 --------------------------------------------------------------------------------
+<vjrj> upgrade warp-persist to 1.0
 <samer,vjrj> Add in license choose a free/non-free indicator [3]
 <vjrj> think about more secure login, SRP protocol thread, and:
 http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/97623347b448e16e

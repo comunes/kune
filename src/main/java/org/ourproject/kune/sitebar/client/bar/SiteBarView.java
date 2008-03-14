@@ -23,6 +23,7 @@ package org.ourproject.kune.sitebar.client.bar;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.LinkDTO;
 
 import com.google.gwt.user.client.ui.Image;
 
@@ -56,7 +57,7 @@ public interface SiteBarView extends View {
 
     void setDefaultTextSearch();
 
-    void setGroupsIsMember(List groupsIsAdmin, List groupsIsCollab);
+    void setGroupsIsMember(List<LinkDTO> groupsIsAdmin, List<LinkDTO> groupsIsCollab);
 
     void resetOptionsSubmenu();
 

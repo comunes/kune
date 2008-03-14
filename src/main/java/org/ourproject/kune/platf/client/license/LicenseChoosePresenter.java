@@ -29,14 +29,15 @@ public class LicenseChoosePresenter implements LicenseChoose, View {
 
     private LicenseChooseView view;
 
-    private List licenses;
+    private List<LicenseDTO> licenses;
 
-    private List licensesNonCCList;
+    private List<LicenseDTO> licensesNonCCList;
 
     public LicenseChoosePresenter() {
     }
 
-    public void init(final LicenseChooseView view, final List licenses, final List licensesNonCCList) {
+    public void init(final LicenseChooseView view, final List<LicenseDTO> licenses,
+            final List<LicenseDTO> licensesNonCCList) {
         this.view = view;
         this.licenses = licenses;
         this.licensesNonCCList = licensesNonCCList;
@@ -54,14 +55,14 @@ public class LicenseChoosePresenter implements LicenseChoose, View {
                         : "by-nc-nd";
             }
         } else {
-            licenseShortName = ((LicenseDTO) licensesNonCCList.get(view.getSelectedNonCCLicenseIndex())).getShortName();
+            licenseShortName = (licensesNonCCList.get(view.getSelectedNonCCLicenseIndex())).getShortName();
         }
         return getLicenseFromShortName(licenseShortName);
     }
 
     private LicenseDTO getLicenseFromShortName(final String shortName) {
         for (int i = 0; i < licenses.size(); i++) {
-            LicenseDTO licenseDTO = (LicenseDTO) licenses.get(i);
+            LicenseDTO licenseDTO = licenses.get(i);
             if (licenseDTO.getShortName() == shortName) {
                 return licenseDTO;
             }

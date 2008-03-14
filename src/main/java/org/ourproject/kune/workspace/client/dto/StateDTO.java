@@ -32,6 +32,8 @@ import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.dto.TagResultDTO;
+import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
@@ -57,14 +59,8 @@ public class StateDTO implements IsSerializable {
     private I18nLanguageDTO language;
     private Date publishedOn;
     private String tags;
-    /**
-     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.UserSimpleDTO>
-     */
-    private List authors;
-    /**
-     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.TagResultDTO>
-     */
-    private List groupTags;
+    private List<UserSimpleDTO> authors;
+    private List<TagResultDTO> groupTags;
     private SocialNetworkDTO groupMembers;
     private ParticipationDataDTO participation;
 
@@ -247,11 +243,11 @@ public class StateDTO implements IsSerializable {
         this.publishedOn = publishedOn;
     }
 
-    public List getAuthors() {
+    public List<UserSimpleDTO> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(final List authors) {
+    public void setAuthors(final List<UserSimpleDTO> authors) {
         this.authors = authors;
     }
 
@@ -263,11 +259,11 @@ public class StateDTO implements IsSerializable {
         this.tags = tags;
     }
 
-    public List getGroupTags() {
+    public List<TagResultDTO> getGroupTags() {
         return groupTags;
     }
 
-    public void setGroupTags(final List groupTags) {
+    public void setGroupTags(final List<TagResultDTO> groupTags) {
         this.groupTags = groupTags;
     }
 

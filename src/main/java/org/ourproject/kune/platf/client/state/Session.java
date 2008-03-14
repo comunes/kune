@@ -21,7 +21,10 @@ package org.ourproject.kune.platf.client.state;
 
 import java.util.List;
 
+import org.ourproject.kune.platf.client.dto.I18nCountryDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
+import org.ourproject.kune.platf.client.dto.I18nLanguageSimpleDTO;
+import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public interface Session {
@@ -31,9 +34,9 @@ public interface Session {
      */
     public static int SESSION_DURATION = 1000 * 60 * 60 * 24 * 14;
 
-    public List getLicenses();
+    public List<LicenseDTO> getLicenses();
 
-    public void setLicenses(final List licenses);
+    public void setLicenses(final List<LicenseDTO> licenses);
 
     public void setCurrent(final StateDTO currentState);
 
@@ -51,13 +54,13 @@ public interface Session {
 
     public boolean isLogged();
 
-    public List getLanguages();
+    public List<I18nLanguageSimpleDTO> getLanguages();
 
-    public void setLanguages(final List languages);
+    public void setLanguages(final List<I18nLanguageSimpleDTO> languages);
 
-    public List getCountries();
+    public List<I18nCountryDTO> getCountries();
 
-    public void setCountries(final List countries);
+    public void setCountries(final List<I18nCountryDTO> countries);
 
     public Object[][] getLanguagesArray();
 

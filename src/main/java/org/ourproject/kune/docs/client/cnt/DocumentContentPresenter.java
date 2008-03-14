@@ -66,27 +66,29 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
     }
 
     public void onEdit() {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ONLY_CHECK_USER_SESSION, new AsyncCallbackSimple() {
-            public void onSuccess(final Object result) {
-                if (content.hasDocument()) {
-                    // Don't permit rate content while your are editing
-                    DefaultDispatcher.getInstance().fire(WorkspaceEvents.DISABLE_RATEIT, null, null);
-                    TextEditor editor = components.getDocumentEditor();
-                    editor.setContent(content.getContent());
-                    view.show(editor.getView());
-                    DefaultDispatcher.getInstance().fire(WorkspaceEvents.CLEAR_EXT_POINT,
-                            WorkspaceUIExtensionPoint.CONTENT_TOOLBAR_LEFT, null);
-                    DefaultDispatcher.getInstance().fire(WorkspaceEvents.ATTACH_TO_EXT_POINT,
-                            WorkspaceUIExtensionPoint.CONTENT_TOOLBAR_LEFT, editor.getToolBar());
-                    DefaultDispatcher.getInstance().fire(WorkspaceEvents.RECALCULATE_WORKSPACE_SIZE, null, null);
-                } else {
-                    FolderEditor editor = components.getFolderEditor();
-                    editor.setFolder(content.getFolder());
-                    view.show(editor.getView());
-                }
-                listener.onEdit();
-            }
-        }, null);
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ONLY_CHECK_USER_SESSION,
+                new AsyncCallbackSimple<Object>() {
+                    public void onSuccess(final Object result) {
+                        if (content.hasDocument()) {
+                            // Don't permit rate content while your are editing
+                            DefaultDispatcher.getInstance().fire(WorkspaceEvents.DISABLE_RATEIT, null, null);
+                            TextEditor editor = components.getDocumentEditor();
+                            editor.setContent(content.getContent());
+                            view.show(editor.getView());
+                            DefaultDispatcher.getInstance().fire(WorkspaceEvents.CLEAR_EXT_POINT,
+                                    WorkspaceUIExtensionPoint.CONTENT_TOOLBAR_LEFT, null);
+                            DefaultDispatcher.getInstance().fire(WorkspaceEvents.ATTACH_TO_EXT_POINT,
+                                    WorkspaceUIExtensionPoint.CONTENT_TOOLBAR_LEFT, editor.getToolBar());
+                            DefaultDispatcher.getInstance()
+                                    .fire(WorkspaceEvents.RECALCULATE_WORKSPACE_SIZE, null, null);
+                        } else {
+                            FolderEditor editor = components.getFolderEditor();
+                            editor.setFolder(content.getFolder());
+                            view.show(editor.getView());
+                        }
+                        listener.onEdit();
+                    }
+                }, null);
     }
 
     public void onSave(final String text) {

@@ -53,7 +53,7 @@ public class I18nManagerTest extends PersistenceTest {
 
     @Test
     public void testGetLexicon() {
-        HashMap map = translationManager.getLexicon("af");
+        HashMap<String, String> map = translationManager.getLexicon("af");
         assertTrue(map.size() > 0);
     }
 
@@ -78,8 +78,8 @@ public class I18nManagerTest extends PersistenceTest {
 
     @Test
     public void byDefaultUseEnglish() {
-        HashMap map = translationManager.getLexicon("en");
-        HashMap map2 = translationManager.getLexicon("af");
+        HashMap<String, String> map = translationManager.getLexicon("en");
+        HashMap<String, String> map2 = translationManager.getLexicon("af");
         assertEquals(map.size(), map2.size());
     }
 
@@ -91,8 +91,8 @@ public class I18nManagerTest extends PersistenceTest {
 
     @Test
     public void getNonExistentTranslationInAnyLangReturnsKey() {
-        HashMap map = translationManager.getLexicon("en");
-        HashMap map2 = translationManager.getLexicon("aa");
+        HashMap<String, String> map = translationManager.getLexicon("en");
+        HashMap<String, String> map2 = translationManager.getLexicon("aa");
         int initialSize = map.size();
         int initialSize2 = map2.size();
 

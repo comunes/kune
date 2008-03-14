@@ -59,10 +59,10 @@ public class WorkspacePresenter implements Workspace {
         view.setPutYourLogoVisible(isAdmin);
     }
 
-    public void attachTools(final Iterator iterator) {
+    public void attachTools(final Iterator<ClientTool> iterator) {
         ClientTool clientTool;
         while (iterator.hasNext()) {
-            clientTool = (ClientTool) iterator.next();
+            clientTool = iterator.next();
             view.addTab(clientTool.getTrigger());
         }
     }

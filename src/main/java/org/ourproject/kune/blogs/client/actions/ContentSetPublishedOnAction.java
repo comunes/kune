@@ -40,7 +40,7 @@ public class ContentSetPublishedOnAction implements Action {
         ContentServiceAsync server = ContentService.App.getInstance();
         StateDTO currentState = services.session.getCurrentState();
         server.setPublishedOn(services.session.getUserHash(), currentState.getGroup().getShortName(), currentState
-                .getDocumentId(), publishedOn, new AsyncCallbackSimple() {
+                .getDocumentId(), publishedOn, new AsyncCallbackSimple<Object>() {
             public void onSuccess(final Object result) {
                 Site.hideProgress();
             }

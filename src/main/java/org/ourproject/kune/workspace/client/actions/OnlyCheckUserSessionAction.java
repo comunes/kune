@@ -29,10 +29,10 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public class OnlyCheckUserSessionAction implements Action {
 
     public void execute(final Object value, final Object extra, final Services services) {
-        onOnlyCheckUserSession(services, (AsyncCallback) value);
+        onOnlyCheckUserSession(services, (AsyncCallback<Object>) value);
     }
 
-    private void onOnlyCheckUserSession(final Services services, final AsyncCallback callback) {
+    private void onOnlyCheckUserSession(final Services services, final AsyncCallback<Object> callback) {
         UserServiceAsync server = UserService.App.getInstance();
         server.onlyCheckSession(services.session.getUserHash(), callback);
     }

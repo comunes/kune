@@ -28,20 +28,10 @@ public class ContainerDTO implements IsSerializable {
     private Long parentFolderId;
     private Long id;
     private String name;
-
     private ContainerSimpleDTO[] absolutePath;
-
     private String typeId;
-
-    /**
-     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.ContainerDTO>
-     */
-    private List childs;
-
-    /**
-     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.ContentDTO>
-     */
-    private List contents;
+    private List<ContainerDTO> childs;
+    private List<ContentDTO> contents;
 
     public ContainerDTO() {
     }
@@ -78,19 +68,19 @@ public class ContainerDTO implements IsSerializable {
         this.id = id;
     }
 
-    public List getChilds() {
+    public List<ContainerDTO> getChilds() {
         return childs;
     }
 
-    public void setChilds(final List childs) {
+    public void setChilds(final List<ContainerDTO> childs) {
         this.childs = childs;
     }
 
-    public List getContents() {
+    public List<ContentDTO> getContents() {
         return contents;
     }
 
-    public void setContents(final List contents) {
+    public void setContents(final List<ContentDTO> contents) {
         this.contents = contents;
     }
 

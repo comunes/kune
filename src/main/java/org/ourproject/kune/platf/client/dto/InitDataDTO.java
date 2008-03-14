@@ -24,23 +24,10 @@ import java.util.ArrayList;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class InitDataDTO implements IsSerializable {
-    /**
-     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.LicenseDTO>
-     */
-    private ArrayList licenses;
-
-    /**
-     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.I18nLanguageSimpleDTO>
-     */
-    private ArrayList languages;
-
-    /**
-     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.I18nCountryDTO>
-     */
-    private ArrayList countries;
-
+    private ArrayList<LicenseDTO> licenses;
+    private ArrayList<I18nLanguageSimpleDTO> languages;
+    private ArrayList<I18nCountryDTO> countries;
     private String[] timezones;
-
     UserInfoDTO userInfo;
     private String chatHttpBase;
     private String siteDomain;
@@ -49,11 +36,11 @@ public class InitDataDTO implements IsSerializable {
     private String defaultWsTheme;
     private String[] wsThemes;
 
-    public ArrayList getLicenses() {
+    public ArrayList<LicenseDTO> getLicenses() {
         return licenses;
     }
 
-    public void setLicenses(final ArrayList licenses) {
+    public void setLicenses(final ArrayList<LicenseDTO> licenses) {
         this.licenses = licenses;
     }
 
@@ -109,19 +96,19 @@ public class InitDataDTO implements IsSerializable {
         this.wsThemes = wsThemes;
     }
 
-    public ArrayList getLanguages() {
+    public ArrayList<I18nLanguageSimpleDTO> getLanguages() {
         return languages;
     }
 
-    public void setLanguages(final ArrayList languages) {
+    public void setLanguages(final ArrayList<I18nLanguageSimpleDTO> languages) {
         this.languages = languages;
     }
 
-    public ArrayList getCountries() {
+    public ArrayList<I18nCountryDTO> getCountries() {
         return countries;
     }
 
-    public void setCountries(final ArrayList countries) {
+    public void setCountries(final ArrayList<I18nCountryDTO> countries) {
         this.countries = countries;
     }
 

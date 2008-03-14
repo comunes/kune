@@ -8,8 +8,6 @@ import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.dto.I18nCountryDTO;
-import org.ourproject.kune.platf.client.dto.I18nLanguageSimpleDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.rpc.SiteService;
@@ -45,11 +43,11 @@ public class SiteServiceTest extends IntegrationTest {
         assertValidLicenseDTOList(initData.getLicenses());
         assertTrue(initData.getLanguages().size() > 0);
         assertTrue(initData.getCountries().size() > 0);
-        assertNotNull(((I18nLanguageSimpleDTO) initData.getLanguages().get(0)).getCode());
-        assertNotNull(((I18nCountryDTO) initData.getCountries().get(0)).getCode());
+        assertNotNull((initData.getLanguages().get(0)).getCode());
+        assertNotNull((initData.getCountries().get(0)).getCode());
     }
 
-    private void assertValidLicenseDTOList(final ArrayList licenseList) {
+    private void assertValidLicenseDTOList(final ArrayList<LicenseDTO> licenseList) {
         assertTrue(licenseList.size() > 0);
         for (Object o : licenseList) {
             assertNotNull(o);

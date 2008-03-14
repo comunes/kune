@@ -24,7 +24,7 @@ import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 
-public class AddDocument implements Action {
+public class AddDocumentAction implements Action {
     public void execute(final Object value, final Object extra, final Services services) {
         addDocument(services, (String) value, services.session.getCurrentState().getFolder());
     }

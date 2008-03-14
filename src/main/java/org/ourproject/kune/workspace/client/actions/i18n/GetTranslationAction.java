@@ -34,11 +34,11 @@ public class GetTranslationAction implements Action {
 
     private void onGetTranslation(final Services services, final String language, final String text) {
         final I18nServiceAsync server = I18nService.App.getInstance();
-        server.getTranslation(services.session.getUserHash(), language, text, new AsyncCallback() {
+        server.getTranslation(services.session.getUserHash(), language, text, new AsyncCallback<String>() {
             public void onFailure(final Throwable caught) {
             }
 
-            public void onSuccess(final Object result) {
+            public void onSuccess(final String result) {
             }
         });
 

@@ -26,70 +26,66 @@ import java.util.List;
 
 import org.ourproject.kune.platf.client.Services;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.History;
 
 public class DefaultDispatcher implements Dispatcher {
     private static DefaultDispatcher instance;
-    private final HashMap subscriptors;
+    private final HashMap<String, List<Action>> subscriptors;
     private Services services;
 
     DefaultDispatcher() {
-	this.subscriptors = new HashMap();
+        this.subscriptors = new HashMap<String, List<Action>>();
     }
 
     public Action subscribe(final String eventName, final Action action) {
-	GWT.log("SUBSCRIBE: " + eventName + " => " + action, null);
-	List list = getSubscriptorsList(eventName);
-	list.add(action);
-	return action;
+        List<Action> list = getSubscriptorsList(eventName);
+        list.add(action);
+        return action;
     }
 
-    private List getSubscriptorsList(final String eventName) {
-	Object list = subscriptors.get(eventName);
-	if (list == null) {
-	    list = new ArrayList();
-	    subscriptors.put(eventName, list);
-	}
-	return (List) list;
+    private List<Action> getSubscriptorsList(final String eventName) {
+        List<Action> list = subscriptors.get(eventName);
+        if (list == null) {
+            list = new ArrayList<Action>();
+            subscriptors.put(eventName, list);
+        }
+        return list;
     }
 
     public void fireDeferred(final String eventName, final Object value, final Object extra) {
-	DeferredCommand.addCommand(new Command() {
-	    public void execute() {
-		fire(eventName, value, extra);
-	    }
-	});
+        DeferredCommand.addCommand(new Command() {
+            public void execute() {
+                fire(eventName, value, extra);
+            }
+        });
     }
 
     public void fire(final String eventName, final Object value, final Object extra) {
-	GWT.log("DISPATCH: " + eventName + " (" + value + ")", null);
-	List list = getSubscriptorsList(eventName);
-	for (int index = 0; index < list.size(); index++) {
-	    fire((Action) list.get(index), value, extra);
-	}
+        List<Action> list = getSubscriptorsList(eventName);
+        for (int index = 0; index < list.size(); index++) {
+            fire(list.get(index), value, extra);
+        }
     }
 
     private void fire(final Action action, final Object value, final Object extra) {
-	GWT.log("ACTION: " + action, null);
-	action.execute(value, extra, services);
+        action.execute(value, extra, services);
     }
 
     public void fireState(final String encodedEvent) {
-	History.newItem(encodedEvent);
+        History.newItem(encodedEvent);
     }
 
     public void setServices(final Services services) {
-	this.services = services;
+        this.services = services;
     }
 
     public static DefaultDispatcher getInstance() {
-	if (instance == null) {
-	    instance = new DefaultDispatcher();
-	}
-	return instance;
+        if (instance == null) {
+            instance = new DefaultDispatcher();
+        }
+        return instance;
     }
 
 }

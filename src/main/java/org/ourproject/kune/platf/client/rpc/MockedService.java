@@ -27,32 +27,32 @@ public class MockedService {
     public static boolean isTest;
 
     public static interface Delayer {
-	void run();
+        void run();
     }
 
-    protected void answer(final Object response, final AsyncCallback callback) {
-	delay(new Delayer() {
-	    public void run() {
-		callback.onSuccess(response);
-	    }
-	});
+    protected void answer(final Object response, final AsyncCallback<Object> callback) {
+        delay(new Delayer() {
+            public void run() {
+                callback.onSuccess(response);
+            }
+        });
     }
 
     protected void delay(final Delayer timer) {
-	if (isTest) {
-	    timer.run();
-	} else {
-	    schedule(timer);
-	}
+        if (isTest) {
+            timer.run();
+        } else {
+            schedule(timer);
+        }
     }
 
     private void schedule(final Delayer delayer) {
-	Timer timer = new Timer() {
-	    public void run() {
-		delayer.run();
-	    }
-	};
-	timer.schedule(1500);
+        Timer timer = new Timer() {
+            public void run() {
+                delayer.run();
+            }
+        };
+        timer.schedule(1500);
     }
 
 }

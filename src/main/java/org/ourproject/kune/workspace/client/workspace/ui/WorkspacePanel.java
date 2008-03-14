@@ -27,10 +27,10 @@ import org.ourproject.kune.platf.client.services.ColorTheme;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.tool.ToolTrigger;
-import org.ourproject.kune.platf.client.ui.CustomHorizontalSplitPanel;
 import org.ourproject.kune.platf.client.ui.DropDownPanel;
 import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
 import org.ourproject.kune.platf.client.ui.SplitterListener;
+import org.ourproject.kune.platf.client.ui.gwtcustom.CustomHorizontalSplitPanel;
 import org.ourproject.kune.workspace.client.WorkspaceUIExtensionPoint;
 import org.ourproject.kune.workspace.client.license.ui.LicensePanel;
 import org.ourproject.kune.workspace.client.workspace.WorkspacePresenter;
@@ -79,11 +79,11 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     private ContentBottomToolBarPanel contentBottomToolBarPanel;
     private LicensePanel bottomPanel;
     private DropDownPanel tagsPanel;
-    private final HashMap uiExtPoints;
+    private final HashMap<String, WorkspaceUIExtensionPoint> uiExtPoints;
     private int previousRightWidgetWidth;
 
     public WorkspacePanel(final WorkspacePresenter presenter) {
-        this.uiExtPoints = new HashMap();
+        this.uiExtPoints = new HashMap<String, WorkspaceUIExtensionPoint>();
         th = Kune.getInstance().theme;
         // Initialize
         final VerticalPanel generalVP = new VerticalPanel();
@@ -321,7 +321,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     }
 
     private WorkspaceUIExtensionPoint getExtPoint(final String id) {
-        WorkspaceUIExtensionPoint extPoint = (WorkspaceUIExtensionPoint) this.uiExtPoints.get(id);
+        WorkspaceUIExtensionPoint extPoint = this.uiExtPoints.get(id);
         return extPoint;
     }
 

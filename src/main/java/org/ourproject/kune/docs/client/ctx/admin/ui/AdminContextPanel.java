@@ -98,7 +98,7 @@ public class AdminContextPanel extends VerticalPanel implements AdminContextView
         accessListsPanel.setAccessLists(accessLists);
     }
 
-    public void setAuthors(final List authors) {
+    public void setAuthors(final List<UserSimpleDTO> authors) {
         if (authorsComponent == null) {
             authorsComponent = new VerticalPanel();
             addAuthorLabel = new IconLabel(IMG.addGreen(), Kune.I18N.t("Add author"));
@@ -116,8 +116,8 @@ public class AdminContextPanel extends VerticalPanel implements AdminContextView
         if (!options.containsItem(AUTHORS_ITEM)) {
             addComponent(AUTHORS_ITEM, Kune.I18N.t("Authors of this work"), authorsComponent);
         }
-        for (Iterator iterator = authors.iterator(); iterator.hasNext();) {
-            UserSimpleDTO author = (UserSimpleDTO) iterator.next();
+        for (Iterator<UserSimpleDTO> iterator = authors.iterator(); iterator.hasNext();) {
+            UserSimpleDTO author = iterator.next();
             StackSubItemAction[] authorActions = { new StackSubItemAction(IMG.del(), Kune.I18N.t("Remove author"),
                     DocsEvents.REMOVE_AUTHOR) };
             options.addStackSubItem(AUTHORS_ITEM, IMG.personDef(), author.getShortName(), author.getName(),

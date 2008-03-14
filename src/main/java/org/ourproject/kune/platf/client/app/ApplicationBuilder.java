@@ -53,7 +53,7 @@ public class ApplicationBuilder {
     }
 
     public void build(final String userHash, final I18nLanguageDTO initialLang) {
-        HashMap tools = indexTools(platform.getTools());
+        HashMap<String, ClientTool> tools = indexTools(platform.getTools());
         final Session session = new SessionImpl(userHash, initialLang);
         new KuneErrorHandler(session);
         final DefaultApplication application = new DefaultApplication(tools, session);
@@ -82,20 +82,20 @@ public class ApplicationBuilder {
         application.start();
     }
 
-    private void subscribeActions(final DefaultDispatcher dispatcher, final ArrayList actions) {
+    private void subscribeActions(final DefaultDispatcher dispatcher, final ArrayList<ActionEvent> actions) {
         ActionEvent actionEvent;
 
-        for (Iterator it = actions.iterator(); it.hasNext();) {
-            actionEvent = (ActionEvent) it.next();
+        for (Iterator<ActionEvent> it = actions.iterator(); it.hasNext();) {
+            actionEvent = it.next();
             dispatcher.subscribe(actionEvent.event, actionEvent.action);
         }
     }
 
-    private HashMap indexTools(final List toolList) {
-        HashMap tools = new HashMap();
+    private HashMap<String, ClientTool> indexTools(final List<ClientTool> toolList) {
+        HashMap<String, ClientTool> tools = new HashMap<String, ClientTool>();
         int total = toolList.size();
         for (int index = 0; index < total; index++) {
-            ClientTool clientTool = (ClientTool) toolList.get(index);
+            ClientTool clientTool = toolList.get(index);
             tools.put(clientTool.getName(), clientTool);
         }
         return tools;

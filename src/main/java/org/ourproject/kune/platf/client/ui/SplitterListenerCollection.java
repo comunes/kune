@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 import com.google.gwt.user.client.ui.Widget;
 
-public class SplitterListenerCollection extends ArrayList {
+public class SplitterListenerCollection extends ArrayList<SplitterListener> {
 
     private static final long serialVersionUID = 1L;
 
@@ -16,8 +16,8 @@ public class SplitterListenerCollection extends ArrayList {
      *                the widget sending the event.
      */
     public void fireStartResizing(final Widget sender) {
-        for (Iterator it = iterator(); it.hasNext();) {
-            SplitterListener listener = (SplitterListener) it.next();
+        for (Iterator<SplitterListener> it = iterator(); it.hasNext();) {
+            SplitterListener listener = it.next();
             listener.onStartResizing(sender);
         }
     }
@@ -29,8 +29,8 @@ public class SplitterListenerCollection extends ArrayList {
      *                the widget sending the event.
      */
     public void fireStopResizing(final Widget sender) {
-        for (Iterator it = iterator(); it.hasNext();) {
-            SplitterListener listener = (SplitterListener) it.next();
+        for (Iterator<SplitterListener> it = iterator(); it.hasNext();) {
+            SplitterListener listener = it.next();
             listener.onStopResizing(sender);
         }
     }

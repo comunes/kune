@@ -29,10 +29,7 @@ public class LinkDTO implements IsSerializable {
     private String iconUrl;
     private String link;
     private Double rate;
-    /**
-     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.TagDTO>
-     */
-    private List tags;
+    private List<TagDTO> tags;
 
     public LinkDTO() {
         this(null, null, null, null);
@@ -85,11 +82,11 @@ public class LinkDTO implements IsSerializable {
         this.rate = rate;
     }
 
-    public List getTags() {
+    public List<TagDTO> getTags() {
         return tags;
     }
 
-    public void setTags(final List tags) {
+    public void setTags(final List<TagDTO> tags) {
         this.tags = tags;
     }
 

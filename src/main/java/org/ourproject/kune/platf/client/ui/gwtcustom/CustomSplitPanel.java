@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2008 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,9 +13,12 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.ourproject.kune.platf.client.ui;
+package org.ourproject.kune.platf.client.ui.gwtcustom;
 
 import java.util.Iterator;
+
+import org.ourproject.kune.platf.client.ui.SplitterListener;
+import org.ourproject.kune.platf.client.ui.SplitterListenerCollection;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
@@ -24,7 +27,7 @@ import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.ChangeListenerCollection;
 import com.google.gwt.user.client.ui.HorizontalSplitPanel;
 import com.google.gwt.user.client.ui.Panel;
-import com.google.gwt.user.client.ui.SourcesChangeEvents;
+import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.VerticalSplitPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -32,7 +35,7 @@ import com.google.gwt.user.client.ui.Widget;
  * Abstract base class for {@link HorizontalSplitPanel} and
  * {@link VerticalSplitPanel}.
  */
-abstract class CustomSplitPanel extends Panel implements SourcesChangeEvents {
+abstract class CustomSplitPanel extends Panel {
 
     /**
      * Sets an elements positioning to absolute.
@@ -50,7 +53,7 @@ abstract class CustomSplitPanel extends Panel implements SourcesChangeEvents {
      * @param elem
      *                the element
      */
-    static final void addClipping(final Element elem) {
+    static void addClipping(final Element elem) {
         DOM.setStyleAttribute(elem, "overflow", "hidden");
     }
 
@@ -60,7 +63,7 @@ abstract class CustomSplitPanel extends Panel implements SourcesChangeEvents {
      * @param elem
      *                the element
      */
-    static final void addScrolling(final Element elem) {
+    static void addScrolling(final Element elem) {
         DOM.setStyleAttribute(elem, "overflow", "auto");
     }
 
@@ -72,8 +75,8 @@ abstract class CustomSplitPanel extends Panel implements SourcesChangeEvents {
      * @param elem
      *                the element
      */
-    static final void expandToFitParentUsingCssOffsets(final Element elem) {
-        final String zeroSize = "0px";
+    static void expandToFitParentUsingCssOffsets(final Element elem) {
+        String zeroSize = "0px";
 
         addAbsolutePositoning(elem);
         setLeft(elem, zeroSize);
@@ -90,9 +93,9 @@ abstract class CustomSplitPanel extends Panel implements SourcesChangeEvents {
      * @param elem
      *                the element
      */
-    static final void expandToFitParentUsingPercentages(final Element elem) {
-        final String zeroSize = "0px";
-        final String fullSize = "100%";
+    static void expandToFitParentUsingPercentages(final Element elem) {
+        String zeroSize = "0px";
+        String fullSize = "100%";
 
         addAbsolutePositoning(elem);
         setTop(elem, zeroSize);
@@ -108,7 +111,7 @@ abstract class CustomSplitPanel extends Panel implements SourcesChangeEvents {
      *                the element
      * @return the offsetHeight property
      */
-    static final int getOffsetHeight(final Element elem) {
+    static int getOffsetHeight(final Element elem) {
         return DOM.getElementPropertyInt(elem, "offsetHeight");
     }
 
@@ -119,7 +122,7 @@ abstract class CustomSplitPanel extends Panel implements SourcesChangeEvents {
      *                the element
      * @return the offsetWidth property
      */
-    static final int getOffsetWidth(final Element elem) {
+    static int getOffsetWidth(final Element elem) {
         return DOM.getElementPropertyInt(elem, "offsetWidth");
     }
 
@@ -132,7 +135,7 @@ abstract class CustomSplitPanel extends Panel implements SourcesChangeEvents {
      *                the element
      * @return the element
      */
-    static final Element preventBoxStyles(final Element elem) {
+    static Element preventBoxStyles(final Element elem) {
         DOM.setIntStyleAttribute(elem, "padding", 0);
         DOM.setIntStyleAttribute(elem, "margin", 0);
         DOM.setStyleAttribute(elem, "border", "none");
@@ -159,7 +162,7 @@ abstract class CustomSplitPanel extends Panel implements SourcesChangeEvents {
      * @param className
      *                the class name
      */
-    static final void setClassname(final Element elem, final String className) {
+    static void setClassname(final Element elem, final String className) {
         DOM.setElementProperty(elem, "className", className);
     }
 
@@ -171,7 +174,7 @@ abstract class CustomSplitPanel extends Panel implements SourcesChangeEvents {
      * @param height
      *                a CSS length value for the height
      */
-    static final void setHeight(final Element elem, final String height) {
+    static void setHeight(final Element elem, final String height) {
         DOM.setStyleAttribute(elem, "height", height);
     }
 
@@ -180,10 +183,10 @@ abstract class CustomSplitPanel extends Panel implements SourcesChangeEvents {
      * 
      * @param elem
      *                the element
-     * @param height
+     * @param left
      *                a CSS length value for left
      */
-    static final void setLeft(final Element elem, final String left) {
+    static void setLeft(final Element elem, final String left) {
         DOM.setStyleAttribute(elem, "left", left);
     }
 
@@ -192,10 +195,10 @@ abstract class CustomSplitPanel extends Panel implements SourcesChangeEvents {
      * 
      * @param elem
      *                the element
-     * @param height
+     * @param right
      *                a CSS length value for right
      */
-    static final void setRight(final Element elem, final String right) {
+    static void setRight(final Element elem, final String right) {
         DOM.setStyleAttribute(elem, "right", right);
     }
 
@@ -204,10 +207,10 @@ abstract class CustomSplitPanel extends Panel implements SourcesChangeEvents {
      * 
      * @param elem
      *                the element
-     * @param height
+     * @param top
      *                a CSS length value for top
      */
-    static final void setTop(final Element elem, final String top) {
+    static void setTop(final Element elem, final String top) {
         DOM.setStyleAttribute(elem, "top", top);
     }
 
@@ -216,10 +219,10 @@ abstract class CustomSplitPanel extends Panel implements SourcesChangeEvents {
      * 
      * @param elem
      *                the element
-     * @param height
+     * @param width
      *                a CSS length value for the width
      */
-    static final void setWidth(final Element elem, final String width) {
+    static void setWidth(final Element elem, final String width) {
         DOM.setStyleAttribute(elem, "width", width);
     }
 
@@ -259,6 +262,7 @@ abstract class CustomSplitPanel extends Panel implements SourcesChangeEvents {
         sinkEvents(Event.MOUSEEVENTS);
     }
 
+    @Override
     public void add(final Widget w) {
         if (getWidget(0) == null) {
             setWidget(0, w);
@@ -279,10 +283,11 @@ abstract class CustomSplitPanel extends Panel implements SourcesChangeEvents {
         return isResizing;
     }
 
-    public Iterator iterator() {
+    public Iterator<Widget> iterator() {
         return WidgetIterators.createWidgetIterator(this, widgets);
     }
 
+    @Override
     public void onBrowserEvent(final Event event) {
         switch (DOM.eventGetType(event)) {
 
@@ -306,7 +311,6 @@ abstract class CustomSplitPanel extends Panel implements SourcesChangeEvents {
             }
             stopResizing();
             break;
-
         }
 
         case Event.ONMOUSEMOVE: {
@@ -349,6 +353,7 @@ abstract class CustomSplitPanel extends Panel implements SourcesChangeEvents {
         }
     }
 
+    @Override
     public boolean remove(final Widget widget) {
         if (widgets[0] == widget) {
             setWidget(0, null);
@@ -398,6 +403,20 @@ abstract class CustomSplitPanel extends Panel implements SourcesChangeEvents {
      */
     protected Widget getWidget(final int index) {
         return widgets[index];
+    }
+
+    /**
+     * <b>Affected Elements:</b>
+     * <ul>
+     * <li>-splitter = the container containing the splitter element.</li>
+     * </ul>
+     * 
+     * @see UIObject#onEnsureDebugId(String)
+     */
+    @Override
+    protected void onEnsureDebugId(final String baseID) {
+        super.onEnsureDebugId(baseID);
+        ensureDebugId(splitElem, baseID, "splitter");
     }
 
     /**

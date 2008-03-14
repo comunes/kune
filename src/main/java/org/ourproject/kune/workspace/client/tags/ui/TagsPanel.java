@@ -55,13 +55,13 @@ public class TagsPanel extends DropDownPanel implements TagsView {
         noTagsLabel = new Label(Kune.I18N.t("The contents of this group don't have any tag"));
     }
 
-    public void setTags(final List groupTags) {
+    public void setTags(final List<TagResultDTO> groupTags) {
         flowPanel.clear();
         if (groupTags.size() == 0) {
             flowPanel.add(noTagsLabel);
         } else {
-            for (Iterator iterator = groupTags.iterator(); iterator.hasNext();) {
-                final TagResultDTO tagResult = (TagResultDTO) iterator.next();
+            for (Iterator<TagResultDTO> iterator = groupTags.iterator(); iterator.hasNext();) {
+                final TagResultDTO tagResult = iterator.next();
                 Label label = new Label(tagResult.getName());
                 // i18n pluralization
                 if (tagResult.getCount().intValue() > 1) {

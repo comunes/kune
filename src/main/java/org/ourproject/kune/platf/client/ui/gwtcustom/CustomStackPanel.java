@@ -16,7 +16,7 @@
  * Modified by kune team, to permit also close the current stack item
  *
  */
-package org.ourproject.kune.platf.client.ui;
+package org.ourproject.kune.platf.client.ui.gwtcustom;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
@@ -36,6 +36,8 @@ import com.google.gwt.user.client.ui.Widget;
  * <li>.gwt-StackPanel { the panel itself }</li>
  * <li>.gwt-StackPanel .gwt-StackPanelItem { unselected items }</li>
  * <li>.gwt-StackPanel .gwt-StackPanelItem-selected { selected items }</li>
+ * <li>.gwt-StackPanel .gwt-StackPanelContent { the wrapper around the contents
+ * of the item }</li>
  * </ul>
  * <p>
  * <h3>Example</h3>
@@ -70,6 +72,7 @@ public class CustomStackPanel extends ComplexPanel {
      * @param w
      *                the widget to be added
      */
+    @Override
     public void add(final Widget w) {
         insert(w, getWidgetCount());
     }
@@ -146,6 +149,7 @@ public class CustomStackPanel extends ComplexPanel {
         DOM.setElementProperty(tdh, "height", "1px");
 
         // body styling
+        setStyleName(tdb, "gwt-StackPanelContent", true);
         DOM.setElementProperty(tdb, "height", "100%");
         DOM.setElementProperty(tdb, "vAlign", "top");
 
@@ -168,6 +172,7 @@ public class CustomStackPanel extends ComplexPanel {
         }
     }
 
+    @Override
     public void onBrowserEvent(final Event event) {
         if (DOM.eventGetType(event) == Event.ONCLICK) {
             Element target = DOM.eventGetTarget(event);
@@ -178,10 +183,12 @@ public class CustomStackPanel extends ComplexPanel {
         }
     }
 
+    @Override
     public boolean remove(final int index) {
         return remove(getWidget(index), index);
     }
 
+    @Override
     public boolean remove(final Widget child) {
         return remove(child, getWidgetIndex(child));
     }
@@ -245,8 +252,30 @@ public class CustomStackPanel extends ComplexPanel {
         }
     }
 
+    /**
+     * <b>Affected Elements:</b>
+     * <ul>
+     * <li>-text# = The element around the header at the specified index.</li>
+     * <li>-content# = The element around the body at the specified index.</li>
+     * </ul>
+     * 
+     * @see UIObject#onEnsureDebugId(String)
+     */
+    @Override
+    protected void onEnsureDebugId(final String baseID) {
+        super.onEnsureDebugId(baseID);
+
+        int numHeaders = DOM.getChildCount(body) / 2;
+        for (int i = 0; i < numHeaders; i++) {
+            Element headerElem = DOM.getFirstChild(DOM.getChild(body, 2 * i));
+            Element bodyElem = DOM.getFirstChild(DOM.getChild(body, 2 * i + 1));
+            ensureDebugId(headerElem, baseID, "text" + i);
+            ensureDebugId(bodyElem, baseID, "content" + i);
+        }
+    }
+
     private int findDividerIndex(Element elem) {
-        while (elem != null && !DOM.compare(elem, getElement())) {
+        while (elem != getElement()) {
             String expando = DOM.getElementProperty(elem, "__index");
             if (expando != null) {
                 // Make sure it belongs to me!

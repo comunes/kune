@@ -38,8 +38,8 @@ public class RenameTokenAction implements Action {
         ContentServiceAsync server = ContentService.App.getInstance();
         StateDTO currentState = services.session.getCurrentState();
         server.rename(services.session.getUserHash(), currentState.getGroup().getShortName(), token, newName,
-                new AsyncCallbackSimple() {
-                    public void onSuccess(final Object result) {
+                new AsyncCallbackSimple<String>() {
+                    public void onSuccess(final String result) {
                         services.stateManager.reloadContextAndTitles();
                         Site.hideProgress();
                     }

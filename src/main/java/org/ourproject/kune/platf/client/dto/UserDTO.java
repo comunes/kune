@@ -23,19 +23,12 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class UserDTO implements IsSerializable {
     private Long id;
-
     private String name;
-
     private String shortName;
-
     private I18nLanguageDTO language;
-
     private I18nCountryDTO country;
-
     private TimeZoneDTO timezone;
-
     private String password;
-
     private String email;
 
     public UserDTO() {

@@ -28,11 +28,12 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class UserLogoutAction implements Action {
 
+    @SuppressWarnings("unchecked")
     public void execute(final Object value, final Object extra, final Services services) {
-        onLogout(services, (AsyncCallback) value);
+        onLogout(services, (AsyncCallback<Object>) value);
     }
 
-    private void onLogout(final Services services, final AsyncCallback callback) {
+    private void onLogout(final Services services, final AsyncCallback<Object> callback) {
         UserServiceAsync userService = UserService.App.getInstance();
         userService.logout(services.session.getUserHash(), callback);
     }

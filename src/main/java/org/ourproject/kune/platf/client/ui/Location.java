@@ -27,7 +27,7 @@ public class Location {
     private String port;
     private String protocol;
     private String queryString;
-    private HashMap paramMap;
+    private HashMap<String, String> paramMap;
 
     public String getHash() {
         return hash;
@@ -91,7 +91,7 @@ public class Location {
 
     protected void setQueryString(final String queryString) {
         this.queryString = queryString;
-        paramMap = new HashMap();
+        paramMap = new HashMap<String, String>();
 
         if (queryString != null && queryString.length() > 1) {
             String qs = queryString.substring(1);
@@ -108,14 +108,14 @@ public class Location {
     }
 
     private native String unescape(String val) /*-{
-                 return unescape(val);
-             }-*/;
+                       return unescape(val);
+                   }-*/;
 
     public String getParameter(final String name) {
-        return (String) paramMap.get(name);
+        return paramMap.get(name);
     }
 
-    public Map getParameterMap() {
+    public Map<String, String> getParameterMap() {
         return paramMap;
     }
 

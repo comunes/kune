@@ -1,12 +1,14 @@
 <module>
-  <!--         <inherits name='com.google.gwt.i18n.I18N' />
-  -->
+  <inherits name='com.google.gwt.i18n.I18N' />
+
   <inherits name='com.google.gwt.user.User' />
   <inherits name='com.gwtext.GwtExt' />
   <inherits name='org.ourproject.kune.platf.Kune-Platform' />
   <inherits name='org.ourproject.kune.docs.Kune-Docs' />
   <inherits name='org.ourproject.kune.chat.Kune-Chat' />
   <inherits name='org.ourproject.kune.blogs.Kune-Blogs' />
+
+
   <!-- <inherits name='to.tipit.GWTlib' /> -->
   <inherits name="com.allen_sauer.gwt.log.gwt-log" />
 

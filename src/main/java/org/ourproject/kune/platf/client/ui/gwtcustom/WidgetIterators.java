@@ -14,7 +14,7 @@
  * the License.
  */
 
-package org.ourproject.kune.platf.client.ui;
+package org.ourproject.kune.platf.client.ui.gwtcustom;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -42,14 +42,13 @@ class WidgetIterators {
      * <code>null</code> is allowed in the array and will be skipped during
      * iteration.
      * 
-     * @param container
-     *                the container of the widgets in <code>contained</code>
-     * @param contained
-     *                the array of widgets
+   * @param container the container of the widgets in <code>contained</code>
+   * @param contained the array of widgets
      * @return the iterator
      */
-    static final Iterator createWidgetIterator(final HasWidgets container, final Widget[] contained) {
-        return new Iterator() {
+  static final Iterator<Widget> createWidgetIterator(final HasWidgets container,
+      final Widget[] contained) {
+    return new Iterator<Widget>() {
             int index = -1, last = -1;
             boolean widgetsWasCopied = false;
             Widget[] widgets = contained;
@@ -69,10 +68,10 @@ class WidgetIterators {
             }
 
             public boolean hasNext() {
-                return index < contained.length;
+        return (index < contained.length);
             }
 
-            public Object next() {
+      public Widget next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }

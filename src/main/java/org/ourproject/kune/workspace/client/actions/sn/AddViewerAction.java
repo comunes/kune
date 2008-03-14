@@ -38,11 +38,11 @@ public class AddViewerAction implements Action {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
         server.addViewerMember(services.session.getUserHash(), services.session.getCurrentState().getGroup()
-                .getShortName(), groupShortName, new AsyncCallbackSimple() {
-            public void onSuccess(final Object result) {
+                .getShortName(), groupShortName, new AsyncCallbackSimple<SocialNetworkResultDTO>() {
+            public void onSuccess(final SocialNetworkResultDTO result) {
                 Site.hideProgress();
                 Site.info(Kune.I18N.t("Member can now view this group contents"));
-                services.stateManager.setSocialNetwork((SocialNetworkResultDTO) result);
+                services.stateManager.setSocialNetwork(result);
             }
         });
 

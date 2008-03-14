@@ -36,7 +36,7 @@ public class ChangeGroupWsThemeAction implements Action {
         Site.showProgressProcessing();
         final GroupServiceAsync server = GroupService.App.getInstance();
         server.changeGroupWsTheme(services.session.getUserHash(), services.session.getCurrentState().getGroup()
-                .getShortName(), theme, new AsyncCallbackSimple() {
+                .getShortName(), theme, new AsyncCallbackSimple<Object>() {
             public void onSuccess(final Object result) {
                 services.app.getWorkspace().setTheme(theme);
                 Site.hideProgress();

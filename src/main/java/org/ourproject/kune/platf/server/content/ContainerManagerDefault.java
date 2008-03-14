@@ -62,8 +62,8 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
         List<Container> parentAbsolutePath = parent.getAbsolutePath();
         List<Container> childAbsolutePath = new ArrayList<Container>();
 
-        for (Iterator iterator = parentAbsolutePath.iterator(); iterator.hasNext();) {
-            Container parentRef = (Container) iterator.next();
+        for (Iterator<Container> iterator = parentAbsolutePath.iterator(); iterator.hasNext();) {
+            Container parentRef = iterator.next();
             childAbsolutePath.add(parentRef);
         }
         Container child = new Container(name, group, parent.getToolName());

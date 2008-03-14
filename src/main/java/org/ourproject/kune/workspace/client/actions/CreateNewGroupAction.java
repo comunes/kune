@@ -22,6 +22,7 @@ package org.ourproject.kune.workspace.client.actions;
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.GroupService;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 
@@ -29,11 +30,12 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class CreateNewGroupAction implements Action {
 
+    @SuppressWarnings("unchecked")
     public void execute(final Object value, final Object extra, final Services services) {
-        onNewGroup(services, (GroupDTO) value, (AsyncCallback) extra);
+        onNewGroup(services, (GroupDTO) value, (AsyncCallback<StateToken>) extra);
     }
 
-    private void onNewGroup(final Services services, final GroupDTO group, final AsyncCallback callback) {
+    private void onNewGroup(final Services services, final GroupDTO group, final AsyncCallback<StateToken> callback) {
         GroupServiceAsync groupService = GroupService.App.getInstance();
         groupService.createNewGroup(services.session.getUserHash(), group, callback);
     }

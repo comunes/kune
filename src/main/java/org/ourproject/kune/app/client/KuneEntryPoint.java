@@ -67,20 +67,20 @@ public class KuneEntryPoint implements EntryPoint {
 
     public void onModuleLoadCont() {
         final String userHash = Cookies.getCookie("userHash");
-        Kune.I18N.getInitialLanguage(new AsyncCallback() {
+        Kune.I18N.getInitialLanguage(new AsyncCallback<I18nLanguageDTO>() {
             public void onFailure(final Throwable caught) {
                 Log.debug("Workspace adaptation to your language failed");
             }
 
-            public void onSuccess(final Object result) {
-                final I18nLanguageDTO initialLang = (I18nLanguageDTO) result;
-                Kune.I18N.getInitialLexicon(initialLang.getCode(), new AsyncCallback() {
+            public void onSuccess(final I18nLanguageDTO result) {
+                final I18nLanguageDTO initialLang = result;
+                Kune.I18N.getInitialLexicon(initialLang.getCode(), new AsyncCallback<HashMap<String, String>>() {
                     public void onFailure(final Throwable caught) {
                         Log.debug("Workspace adaptation to your language failed");
                     }
 
-                    public void onSuccess(final Object result) {
-                        I18nUITranslationService.getInstance().setLexicon((HashMap) result);
+                    public void onSuccess(final HashMap<String, String> result) {
+                        I18nUITranslationService.getInstance().setLexicon(result);
                         KunePlatform platform = new KunePlatform();
                         platform.install(new WorkspaceClientModule());
                         platform.install(new DocsClientModule());

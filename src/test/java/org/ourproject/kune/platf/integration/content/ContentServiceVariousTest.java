@@ -34,18 +34,18 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     @Test
     public void setTagsAndResults() throws SerializableException {
         contentService.setTags(getHash(), groupShortName, defDocument, "bfoo cfoa afoo2");
-        List summaryTags = contentService.getSummaryTags(getHash(), groupShortName);
+        List<TagResultDTO> summaryTags = contentService.getSummaryTags(getHash(), groupShortName);
         assertEquals(3, summaryTags.size());
 
-        TagResultDTO tagResultDTO = (TagResultDTO) summaryTags.get(0);
+        TagResultDTO tagResultDTO = summaryTags.get(0);
         assertEquals("afoo2", tagResultDTO.getName());
         assertEquals(1, tagResultDTO.getCount());
 
-        tagResultDTO = (TagResultDTO) summaryTags.get(1);
+        tagResultDTO = summaryTags.get(1);
         assertEquals("bfoo", tagResultDTO.getName());
         assertEquals(1, tagResultDTO.getCount());
 
-        tagResultDTO = (TagResultDTO) summaryTags.get(2);
+        tagResultDTO = summaryTags.get(2);
         assertEquals("cfoa", tagResultDTO.getName());
         assertEquals(1, tagResultDTO.getCount());
     }
@@ -120,7 +120,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
         String newTitle = "folder new name";
         StateDTO newState = contentService.addFolder(session.getHash(), groupShortName, folder.getId(), oldTitle);
 
-        ContainerDTO newFolder = (ContainerDTO) newState.getFolder().getChilds().get(0);
+        ContainerDTO newFolder = newState.getFolder().getChilds().get(0);
 
         assertEquals(oldTitle, newFolder.getName());
 
@@ -156,7 +156,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
         String newTitle = "folder new name";
         StateDTO newState = contentService.addFolder(session.getHash(), groupShortName, folder.getId(), oldTitle);
 
-        ContainerDTO newFolder = (ContainerDTO) newState.getFolder().getChilds().get(0);
+        ContainerDTO newFolder = newState.getFolder().getChilds().get(0);
 
         assertEquals(oldTitle, newFolder.getName());
 

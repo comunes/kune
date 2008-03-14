@@ -54,15 +54,14 @@ public class InitAction implements Action {
 
     private void getInitData(final Services services) {
         SiteServiceAsync server = SiteService.App.getInstance();
-        server.getInitData(services.session.getUserHash(), new AsyncCallback() {
+        server.getInitData(services.session.getUserHash(), new AsyncCallback<InitDataDTO>() {
             public void onFailure(final Throwable error) {
                 Site.error("Error fetching initial data");
                 Log.debug(error.getMessage());
             }
 
-            public void onSuccess(final Object response) {
+            public void onSuccess(final InitDataDTO initData) {
                 Dispatcher dispatcher = services.dispatcher;
-                InitDataDTO initData = (InitDataDTO) response;
                 checkChatDomain(initData.getChatDomain());
                 services.session.setLicenses(initData.getLicenses());
                 services.session.setWsThemes(initData.getWsThemes());
@@ -71,7 +70,7 @@ public class InitAction implements Action {
                 services.session.setCountries(initData.getCountries());
                 services.session.setTimezones(initData.getTimezones());
                 UserInfoDTO currentUser = initData.getUserInfo();
-                dispatcher.fire(WorkspaceEvents.INIT_DATA_RECEIVED, response, null);
+                dispatcher.fire(WorkspaceEvents.INIT_DATA_RECEIVED, initData, null);
                 if (currentUser == null) {
                     dispatcher.fire(WorkspaceEvents.USER_LOGGED_OUT, null, null);
                 } else {

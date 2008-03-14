@@ -27,7 +27,7 @@ import java.util.Iterator;
  * This subclass of {@link ArrayList} assumes that all objects added to it will
  * be of type {@link com.google.gwt.user.client.ui.I18nChangeListener}.
  */
-public class I18nChangeListenerCollection extends ArrayList {
+public class I18nChangeListenerCollection extends ArrayList<I18nChangeListener> {
 
     private static final long serialVersionUID = 1L;
 
@@ -36,8 +36,8 @@ public class I18nChangeListenerCollection extends ArrayList {
      * 
      */
     public void fireI18nLanguageChange() {
-        for (Iterator it = iterator(); it.hasNext();) {
-            I18nChangeListener listener = (I18nChangeListener) it.next();
+        for (Iterator<I18nChangeListener> it = iterator(); it.hasNext();) {
+            I18nChangeListener listener = it.next();
             listener.onI18nLanguageChange();
         }
     }

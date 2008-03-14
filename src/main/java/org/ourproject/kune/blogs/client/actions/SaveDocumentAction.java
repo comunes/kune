@@ -18,7 +18,7 @@
  *
  */
 
-package org.ourproject.kune.docs.client.actions;
+package org.ourproject.kune.blogs.client.actions;
 
 import org.ourproject.kune.docs.client.cnt.DocumentContent;
 import org.ourproject.kune.platf.client.Services;
@@ -34,7 +34,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtext.client.widgets.MessageBox;
 import com.gwtext.client.widgets.MessageBox.AlertCallback;
 
-public class SaveDocument implements Action {
+public class SaveDocumentAction implements Action {
     public void execute(final Object value, final Object extra, final Services services) {
         save(services, (StateDTO) value, (DocumentContent) extra);
     }
@@ -43,7 +43,7 @@ public class SaveDocument implements Action {
         Site.showProgressSaving();
         ContentServiceAsync server = ContentService.App.getInstance();
         server.save(services.session.getUserHash(), services.session.getCurrentState().getGroup().getShortName(),
-                content.getDocumentId(), content.getContent(), new AsyncCallback() {
+                content.getDocumentId(), content.getContent(), new AsyncCallback<Integer>() {
                     public void onFailure(final Throwable caught) {
                         Site.hideProgress();
                         try {
@@ -62,9 +62,8 @@ public class SaveDocument implements Action {
                         }
                     }
 
-                    public void onSuccess(final Object result) {
+                    public void onSuccess(final Integer result) {
                         Site.hideProgress();
-                        // Site.info(Kune.I18N.t("Document Saved"));
                         documentContent.onSaved();
                     }
 

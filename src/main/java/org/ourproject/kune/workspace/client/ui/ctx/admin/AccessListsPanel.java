@@ -87,9 +87,9 @@ public class AccessListsPanel extends VerticalPanel implements View {
         } else if (groupList.getMode() == GroupListDTO.NOBODY) {
             groupVP.add(new IconLabel(img.nobody(), Kune.I18N.t("Nobody")));
         } else {
-            final Iterator iter = groupList.getList().iterator();
+            final Iterator<GroupDTO> iter = groupList.getList().iterator();
             while (iter.hasNext()) {
-                final GroupDTO next = (GroupDTO) iter.next();
+                final GroupDTO next = iter.next();
                 groupVP.add(new IconLabel(img.groupDefIcon(), next.getLongName()));
             }
         }

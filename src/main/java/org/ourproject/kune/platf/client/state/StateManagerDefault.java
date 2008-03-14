@@ -63,16 +63,16 @@ public class StateManagerDefault implements StateManager {
     }
 
     public void reloadContextAndTitles() {
-        provider.getContent(session.getUserHash(), new StateToken(history.getToken()), new AsyncCallbackSimple() {
-            public void onSuccess(final Object result) {
-                StateDTO newStateDTO = (StateDTO) result;
-                loadContextOnly(newStateDTO);
-                oldState = newStateDTO;
-                workspace.getContentTitleComponent().setState(oldState);
-                workspace.getContentSubTitleComponent().setState(oldState);
-                Site.hideProgress();
-            }
-        });
+        provider.getContent(session.getUserHash(), new StateToken(history.getToken()),
+                new AsyncCallbackSimple<StateDTO>() {
+                    public void onSuccess(final StateDTO newStateDTO) {
+                        loadContextOnly(newStateDTO);
+                        oldState = newStateDTO;
+                        workspace.getContentTitleComponent().setState(oldState);
+                        workspace.getContentSubTitleComponent().setState(oldState);
+                        Site.hideProgress();
+                    }
+                });
     }
 
     public void onHistoryChanged(final String historyToken) {
@@ -108,9 +108,8 @@ public class StateManagerDefault implements StateManager {
     }
 
     private void onHistoryChanged(final StateToken newState) {
-        provider.getContent(session.getUserHash(), newState, new AsyncCallbackSimple() {
-            public void onSuccess(final Object result) {
-                StateDTO newStateDTO = (StateDTO) result;
+        provider.getContent(session.getUserHash(), newState, new AsyncCallbackSimple<StateDTO>() {
+            public void onSuccess(final StateDTO newStateDTO) {
                 loadContent(newStateDTO);
                 oldState = newStateDTO;
             }

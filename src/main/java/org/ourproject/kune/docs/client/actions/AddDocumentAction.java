@@ -23,7 +23,6 @@ package org.ourproject.kune.docs.client.actions;
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
-import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
@@ -31,27 +30,20 @@ import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
-public class AddFolder implements Action {
+public class AddDocumentAction implements Action {
     public void execute(final Object value, final Object extra, final Services services) {
-        String name = (String) value;
-        GroupDTO group = services.session.getCurrentState().getGroup();
-        ContainerDTO container = services.session.getCurrentState().getFolder();
-        addFolder(services, name, group, container);
+        addDocument(services, (String) value, services.session.getCurrentState().getFolder());
     }
 
-    private void addFolder(final Services services, final String name, final GroupDTO group,
-            final ContainerDTO container) {
+    private void addDocument(final Services services, final String name, final ContainerDTO containerDTO) {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
-        server.addFolder(services.session.getUserHash(), group.getShortName(), container.getId(), name,
-                new AsyncCallbackSimple() {
-                    public void onSuccess(final Object result) {
-                        Site.info(Kune.I18N.t("Folder created"));
-                        StateDTO state = (StateDTO) result;
-                        services.stateManager.setRetrievedState(state);
-                        // FIXME: Isn't using cache
-                        services.stateManager.reloadContextAndTitles();
+        server.addContent(services.session.getUserHash(), services.session.getCurrentState().getGroup().getShortName(),
+                containerDTO.getId(), name, new AsyncCallbackSimple<StateDTO>() {
+                    public void onSuccess(final StateDTO state) {
                         Site.hideProgress();
+                        Site.info(Kune.I18N.t("Created, now you can edit the document"));
+                        services.stateManager.setRetrievedState(state);
                     }
                 });
     }

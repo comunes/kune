@@ -39,10 +39,9 @@ public class ContentSetLanguageAction implements Action {
         ContentServiceAsync server = ContentService.App.getInstance();
         StateDTO currentState = services.session.getCurrentState();
         server.setLanguage(services.session.getUserHash(), currentState.getGroup().getShortName(), currentState
-                .getDocumentId(), languageCode, new AsyncCallbackSimple() {
-            public void onSuccess(final Object result) {
+                .getDocumentId(), languageCode, new AsyncCallbackSimple<I18nLanguageDTO>() {
+            public void onSuccess(final I18nLanguageDTO lang) {
                 Site.hideProgress();
-                I18nLanguageDTO lang = (I18nLanguageDTO) result;
                 services.app.getWorkspace().getContentSubTitleComponent().setContentLanguage(lang.getEnglishName());
             }
         });

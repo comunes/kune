@@ -96,7 +96,7 @@ public class I18nRPC implements RPC, I18nService {
     }
 
     @Transactional(type = TransactionType.READ_ONLY)
-    public HashMap getLexicon(final String language) {
+    public HashMap<String, String> getLexicon(final String language) {
         return i18nTranslationManager.getLexicon(language);
     }
 

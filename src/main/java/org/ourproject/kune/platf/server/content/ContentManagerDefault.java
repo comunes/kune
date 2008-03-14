@@ -163,8 +163,8 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         Content content = finder.getContent(contentId);
         ArrayList<String> tagsStripped = KuneStringUtils.splitTags(tags);
         ArrayList<Tag> tagList = new ArrayList<Tag>();
-        for (Iterator i = tagsStripped.iterator(); i.hasNext();) {
-            String tagString = (String) i.next();
+        for (Iterator<String> i = tagsStripped.iterator(); i.hasNext();) {
+            String tagString = i.next();
             Tag tag;
             try {
                 tag = tagManager.findByTagName(tagString);

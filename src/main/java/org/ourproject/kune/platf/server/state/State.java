@@ -32,6 +32,7 @@ import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.TagResult;
+import org.ourproject.kune.platf.server.domain.User;
 
 public class State {
     private String documentId;
@@ -51,7 +52,7 @@ public class State {
     private String typeId;
     private License license;
     private I18nLanguage language;
-    private List authors;
+    private List<User> authors;
     private Date publishedOn;
     private String tags;
     private List<TagResult> groupTags;
@@ -229,11 +230,11 @@ public class State {
         this.publishedOn = publishedOn;
     }
 
-    public List getAuthors() {
+    public List<User> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(final List authors) {
+    public void setAuthors(final List<User> authors) {
         this.authors = authors;
     }
 

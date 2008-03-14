@@ -38,13 +38,13 @@ public class GetLexiconAction implements Action {
 
     private void onGetLexicon(final Services services, final String language) {
         final I18nServiceAsync server = I18nService.App.getInstance();
-        server.getLexicon(language, new AsyncCallback() {
+        server.getLexicon(language, new AsyncCallback<HashMap<String, String>>() {
             public void onFailure(final Throwable caught) {
                 Log.debug("Workspace adaptation to your language failed");
             }
 
-            public void onSuccess(final Object result) {
-                Kune.I18N.setLexicon((HashMap) result);
+            public void onSuccess(final HashMap<String, String> result) {
+                Kune.I18N.setLexicon(result);
             }
         });
 

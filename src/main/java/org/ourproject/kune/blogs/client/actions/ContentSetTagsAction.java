@@ -23,6 +23,7 @@ import java.util.List;
 
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.dto.TagResultDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
@@ -40,9 +41,9 @@ public class ContentSetTagsAction implements Action {
         ContentServiceAsync server = ContentService.App.getInstance();
         StateDTO currentState = services.session.getCurrentState();
         server.setTags(services.session.getUserHash(), currentState.getGroup().getShortName(), currentState
-                .getDocumentId(), tags, new AsyncCallbackSimple() {
-            public void onSuccess(final Object result) {
-                services.app.getWorkspace().getTagsComponent().setGroupTags((List) result);
+                .getDocumentId(), tags, new AsyncCallbackSimple<List<TagResultDTO>>() {
+            public void onSuccess(final List<TagResultDTO> result) {
+                services.app.getWorkspace().getTagsComponent().setGroupTags(result);
                 Site.hideProgress();
             }
         });

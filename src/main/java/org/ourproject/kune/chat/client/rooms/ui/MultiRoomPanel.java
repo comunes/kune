@@ -83,37 +83,27 @@ public class MultiRoomPanel implements MultiRoomView, View {
     private TextArea subject;
     private DeckPanel roomUsersDeckPanel;
     private TextArea input;
-    private final HashMap userListToIndex;
-    private final HashMap panelIdToRoom;
+    private final HashMap<RoomUserListView, Integer> userListToIndex;
+    private final HashMap<String, Room> panelIdToRoom;
     // private final HashMap panelIdToTabId;
     private EmoticonPalettePanel emoticonPalettePanel;
     private PopupPanel emoticonPopup;
     private BottomTrayIcon bottomIcon;
-
     private Menu statusMenu;
-
     private CheckItem onlineMenuItem;
-
     private CheckItem offlineMenuItem;
-
     private CheckItem busyMenuItem;
-
     private CheckItem awayMenuItem;
-
     private ToolbarMenuButton statusButton;
-
     // private IndexedStackPanelWithSubItems usersStack;
-
     private ToolbarButton inviteUserToRoom;
-
     private TabPanel centerPanel;
-
     private Panel usersPanel;;
 
     public MultiRoomPanel(final MultiRoomPresenter presenter) {
         this.presenter = presenter;
-        this.userListToIndex = new HashMap();
-        panelIdToRoom = new HashMap();
+        this.userListToIndex = new HashMap<RoomUserListView, Integer>();
+        panelIdToRoom = new HashMap<String, Room>();
         // panelIdToTabId = new HashMap();
         createLayout();
     }
@@ -130,8 +120,8 @@ public class MultiRoomPanel implements MultiRoomView, View {
     }
 
     public void highlightRoom(final Room room) {
-        Panel roomPanel = (Panel) room.getView();
-        String panelId = roomPanel.getId();
+        // Panel roomPanel = (Panel) room.getView();
+        // String panelId = roomPanel.getId();
         // String tabId = (String) panelIdToTabId.get(panelId);
         // centerPanel.get(tabId).getTextEl().highlight();
     }
@@ -172,7 +162,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
     }
 
     public void showUserList(final RoomUserListView view) {
-        Integer index = (Integer) userListToIndex.get(view);
+        Integer index = userListToIndex.get(view);
         roomUsersDeckPanel.showWidget(index.intValue());
         usersPanel.setActiveItem(1);
     }
@@ -183,7 +173,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
     }
 
     public void removeRoomUsersPanel(final RoomUserListView view) {
-        Integer index = (Integer) userListToIndex.get(view);
+        Integer index = userListToIndex.get(view);
         roomUsersDeckPanel.remove(index.intValue());
         userListToIndex.remove(view);
     }
@@ -462,6 +452,7 @@ public class MultiRoomPanel implements MultiRoomView, View {
         FormPanel subjectForm = createGenericInputForm();
 
         subject = new TextArea();
+        // TODO: Fixed in gwt-ext 2.0.3 TextArea.setEnterIsSpecial
         subject.addListener(new TextFieldListenerAdapter() {
             public void onSpecialKey(final Field field, final EventObject e) {
                 Log.debug("Special key: " + e.getKey());

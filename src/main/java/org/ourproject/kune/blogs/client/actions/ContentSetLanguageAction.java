@@ -21,6 +21,7 @@ package org.ourproject.kune.blogs.client.actions;
 
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
@@ -35,9 +36,10 @@ public class ContentSetLanguageAction implements Action {
     private void onContentSetLanguage(final Services services, final String documentId, final String languageCode) {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
-        server.setLanguage(services.session.getUserHash(), services.session.getCurrentState().getGroup().getShortName(),
-                documentId, languageCode, new AsyncCallbackSimple() {
-                    public void onSuccess(final Object result) {
+        server.setLanguage(services.session.getUserHash(),
+                services.session.getCurrentState().getGroup().getShortName(), documentId, languageCode,
+                new AsyncCallbackSimple<I18nLanguageDTO>() {
+                    public void onSuccess(final I18nLanguageDTO result) {
                         Site.hideProgress();
                         services.stateManager.reload();
                     }

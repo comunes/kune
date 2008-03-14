@@ -43,115 +43,115 @@ public class XmppManagerDefault implements XmppManager {
 
     @Inject
     public XmppManagerDefault(final ChatProperties chatProperties) {
-	this.chatProperties = chatProperties;
+        this.chatProperties = chatProperties;
     }
 
     public ChatConnection login(final String userName, final String password, final String resource) {
-	ConnectionConfiguration config = new ConnectionConfiguration(getServerName(), 5222);
-	XMPPConnection conn = new XMPPConnection(config);
-	try {
-	    conn.connect();
-	    conn.login(userName, password, resource, true);
-	    return new XmppConnection(userName, conn);
-	} catch (XMPPException e) {
-	    throw new ChatException(e);
-	}
+        ConnectionConfiguration config = new ConnectionConfiguration(getServerName(), 5222);
+        XMPPConnection conn = new XMPPConnection(config);
+        try {
+            conn.connect();
+            conn.login(userName, password, resource, true);
+            return new XmppConnection(userName, conn);
+        } catch (XMPPException e) {
+            throw new ChatException(e);
+        }
     }
 
     private String getServerName() {
-	return chatProperties.getDomain();
+        return chatProperties.getDomain();
     }
 
     private String getRoomName(final String room) {
-	return room + "@" + chatProperties.getRoomHost();
+        return room + "@" + chatProperties.getRoomHost();
     }
 
     public Room createRoom(final ChatConnection conn, final String roomName, final String alias) {
-	XmppConnection xConn = (XmppConnection) conn;
-	MultiUserChat muc = new MultiUserChat(xConn.getConn(), getRoomName(roomName));
-	try {
-	    muc.create(alias);
-	    configure(muc);
-	    XmppRoom room = new XmppRoom(muc, alias);
-	    muc.addMessageListener(room);
-	    return room;
-	} catch (XMPPException e) {
-	    throw new ChatException(e);
-	}
+        XmppConnection xConn = (XmppConnection) conn;
+        MultiUserChat muc = new MultiUserChat(xConn.getConn(), getRoomName(roomName));
+        try {
+            muc.create(alias);
+            configure(muc);
+            XmppRoom room = new XmppRoom(muc, alias);
+            muc.addMessageListener(room);
+            return room;
+        } catch (XMPPException e) {
+            throw new ChatException(e);
+        }
     }
 
     public void destroyRoom(final ChatConnection conn, final String roomName) {
-	XmppConnection xConn = (XmppConnection) conn;
-	MultiUserChat muc = new MultiUserChat(xConn.getConn(), getRoomName(roomName));
-	try {
-	    muc.destroy("Room removed by kune server", "");
-	} catch (XMPPException e) {
-	    throw new ChatException(e);
-	}
+        XmppConnection xConn = (XmppConnection) conn;
+        MultiUserChat muc = new MultiUserChat(xConn.getConn(), getRoomName(roomName));
+        try {
+            muc.destroy("Room removed by kune server", "");
+        } catch (XMPPException e) {
+            throw new ChatException(e);
+        }
     }
 
     public Room joinRoom(final ChatConnection connection, final String roomName, final String alias) {
-	XmppConnection xConn = (XmppConnection) connection;
-	MultiUserChat muc = new MultiUserChat(xConn.getConn(), getRoomName(roomName));
-	try {
-	    muc.join(alias);
-	    // configure(muc);
-	    XmppRoom room = new XmppRoom(muc, alias);
-	    muc.addMessageListener(room);
-	    return room;
-	} catch (XMPPException e) {
-	    throw new ChatException(e);
-	}
+        XmppConnection xConn = (XmppConnection) connection;
+        MultiUserChat muc = new MultiUserChat(xConn.getConn(), getRoomName(roomName));
+        try {
+            muc.join(alias);
+            // configure(muc);
+            XmppRoom room = new XmppRoom(muc, alias);
+            muc.addMessageListener(room);
+            return room;
+        } catch (XMPPException e) {
+            throw new ChatException(e);
+        }
     }
 
     public void sendMessage(final Room room, final String body) {
-	XmppRoom xAccess = (XmppRoom) room;
-	MultiUserChat muc = xAccess.getMuc();
-	Message message = muc.createMessage();
-	message.setBody(body);
-	message.setFrom(muc.getNickname());
-	try {
-	    muc.sendMessage(body);
-	} catch (XMPPException e) {
-	    throw new ChatException(e);
-	}
+        XmppRoom xAccess = (XmppRoom) room;
+        MultiUserChat muc = xAccess.getMuc();
+        Message message = muc.createMessage();
+        message.setBody(body);
+        message.setFrom(muc.getNickname());
+        try {
+            muc.sendMessage(body);
+        } catch (XMPPException e) {
+            throw new ChatException(e);
+        }
     }
 
     private void configure(final MultiUserChat muc) throws XMPPException {
-	Form form = muc.getConfigurationForm();
-	Form answer = form.createAnswerForm();
+        Form form = muc.getConfigurationForm();
+        Form answer = form.createAnswerForm();
 
-	for (Iterator fields = form.getFields(); fields.hasNext();) {
-	    FormField field = (FormField) fields.next();
-	    String type = field.getType();
-	    if (isVisible(type) && isNotEmpty(field) && isNotList(type)) {
-		List values = new ArrayList();
-		for (Iterator it = field.getValues(); it.hasNext();) {
-		    values.add(it.next());
-		}
-		answer.setAnswer(field.getVariable(), values);
-	    }
-	}
-	answer.setAnswer("muc#roomconfig_persistentroom", true);
-	muc.sendConfigurationForm(answer);
+        for (Iterator<FormField> fields = form.getFields(); fields.hasNext();) {
+            FormField field = fields.next();
+            String type = field.getType();
+            if (isVisible(type) && isNotEmpty(field) && isNotList(type)) {
+                List<String> values = new ArrayList<String>();
+                for (Iterator<String> it = field.getValues(); it.hasNext();) {
+                    values.add(it.next());
+                }
+                answer.setAnswer(field.getVariable(), values);
+            }
+        }
+        answer.setAnswer("muc#roomconfig_persistentroom", true);
+        muc.sendConfigurationForm(answer);
     }
 
     private boolean isNotEmpty(final FormField field) {
-	return field.getVariable() != null;
+        return field.getVariable() != null;
     }
 
     private boolean isVisible(final String type) {
-	return !FormField.TYPE_HIDDEN.equals(type);
+        return !FormField.TYPE_HIDDEN.equals(type);
     }
 
     private boolean isNotList(final String type) {
-	return !FormField.TYPE_JID_MULTI.equals(type) && !FormField.TYPE_LIST_MULTI.equals(type)
-		&& !FormField.TYPE_LIST_SINGLE.equals(type) && !isVisible(type);
+        return !FormField.TYPE_JID_MULTI.equals(type) && !FormField.TYPE_LIST_MULTI.equals(type)
+                && !FormField.TYPE_LIST_SINGLE.equals(type) && !isVisible(type);
     }
 
     public void disconnect(final ChatConnection connection) {
-	XmppConnection xConn = (XmppConnection) connection;
-	xConn.getConn().disconnect();
+        XmppConnection xConn = (XmppConnection) connection;
+        xConn.getConn().disconnect();
 
     }
 }

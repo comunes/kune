@@ -34,13 +34,10 @@ public class GroupDTO implements IsSerializable {
     private String longName;
     private String publicDesc;
     private String type;
-
     private String defaultToolName;
     private Long defaultFolderId;
     private Long defaultContentId;
-
     private LicenseDTO defaultLicense;
-
     private String workspaceTheme;
 
     public GroupDTO() {

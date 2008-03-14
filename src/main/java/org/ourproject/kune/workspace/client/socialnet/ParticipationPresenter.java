@@ -63,8 +63,8 @@ public class ParticipationPresenter extends AbstractPresenter implements Partici
                 GOTO_GROUP_COMMAND };
         MemberAction[] collabActions = adminsActions;
         MemberAction[] viewerActions = { GOTO_GROUP_COMMAND };
-        List groupsIsAdmin = participation.getGroupsIsAdmin();
-        List groupsIsCollab = participation.getGroupsIsCollab();
+        List<LinkDTO> groupsIsAdmin = participation.getGroupsIsAdmin();
+        List<LinkDTO> groupsIsCollab = participation.getGroupsIsCollab();
         boolean userIsAdmin = rights.isAdministrable();
         boolean userIsCollab = !userIsAdmin && rights.isEditable();
         boolean userIsMember = isMember(userIsAdmin, userIsCollab);
@@ -85,8 +85,8 @@ public class ParticipationPresenter extends AbstractPresenter implements Partici
         view.hide();
     }
 
-    private void addParticipants(final List groupsIsAdmin, final List groupsIsCollab, final int numAdmins,
-            final int numCollaborators, final boolean userIsAdmin, boolean userIsMember,
+    private void addParticipants(final List<LinkDTO> groupsIsAdmin, final List<LinkDTO> groupsIsCollab,
+            final int numAdmins, final int numCollaborators, final boolean userIsAdmin, boolean userIsMember,
             final MemberAction[] adminsActions, final MemberAction[] collabActions, final MemberAction[] viewerActions) {
         MemberAction[] actions;
         String collabTitle;
@@ -114,10 +114,10 @@ public class ParticipationPresenter extends AbstractPresenter implements Partici
 
     }
 
-    private void iteraList(final String categoryName, final List groupList, final MemberAction[] actions) {
-        final Iterator iter = groupList.iterator();
+    private void iteraList(final String categoryName, final List<LinkDTO> groupList, final MemberAction[] actions) {
+        final Iterator<LinkDTO> iter = groupList.iterator();
         while (iter.hasNext()) {
-            final LinkDTO group = (LinkDTO) iter.next();
+            final LinkDTO group = iter.next();
             view.addCategoryMember(categoryName, group.getShortName(), group.getLongName(), actions);
         }
     }

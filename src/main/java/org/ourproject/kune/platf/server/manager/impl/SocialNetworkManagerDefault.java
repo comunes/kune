@@ -219,11 +219,11 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
         Long groupId = group.getId();
         List<Group> adminInGroups = finder.findAdminInGroups(groupId);
         List<Group> collabInGroups = finder.findCollabInGroups(groupId);
-        List<Link> groupsIsAdmin = new ArrayList();
-        List<Link> groupsIsCollab = new ArrayList();
-        Iterator iter = adminInGroups.iterator();
+        List<Link> groupsIsAdmin = new ArrayList<Link>();
+        List<Link> groupsIsCollab = new ArrayList<Link>();
+        Iterator<Group> iter = adminInGroups.iterator();
         while (iter.hasNext()) {
-            Group g = (Group) iter.next();
+            Group g = iter.next();
             if (group.getId() != g.getId()) {
                 // Don't self participation of group in same group
                 groupsIsAdmin
@@ -233,7 +233,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
         }
         iter = collabInGroups.iterator();
         while (iter.hasNext()) {
-            Group g = (Group) iter.next();
+            Group g = iter.next();
             if (group.getId() != g.getId()) {
                 groupsIsCollab.add(new Link(g.getShortName(), g.getLongName(), "", g.getDefaultContent()
                         .getStateToken()));

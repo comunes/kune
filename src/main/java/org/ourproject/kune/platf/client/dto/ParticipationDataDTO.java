@@ -25,39 +25,32 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class ParticipationDataDTO implements IsSerializable {
 
-    /**
-     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.LinkDTO>
-     */
-    private List groupsIsAdmin;
-
-    /**
-     * @gwt.typeArgs <org.ourproject.kune.platf.client.dto.LinkDTO>
-     */
-    private List groupsIsCollab;
+    private List<LinkDTO> groupsIsAdmin;
+    private List<LinkDTO> groupsIsCollab;
 
     public ParticipationDataDTO() {
-	this(null, null);
+        this(null, null);
     }
 
-    public ParticipationDataDTO(final List groupsIsAdmin, final List groupsIsCollab) {
-	this.groupsIsAdmin = groupsIsAdmin;
-	this.groupsIsCollab = groupsIsCollab;
+    public ParticipationDataDTO(final List<LinkDTO> groupsIsAdmin, final List<LinkDTO> groupsIsCollab) {
+        this.groupsIsAdmin = groupsIsAdmin;
+        this.groupsIsCollab = groupsIsCollab;
     }
 
-    public List getGroupsIsAdmin() {
-	return groupsIsAdmin;
+    public List<LinkDTO> getGroupsIsAdmin() {
+        return groupsIsAdmin;
     }
 
-    public void setGroupsIsAdmin(final List groupsIsAdmin) {
-	this.groupsIsAdmin = groupsIsAdmin;
+    public void setGroupsIsAdmin(final List<LinkDTO> groupsIsAdmin) {
+        this.groupsIsAdmin = groupsIsAdmin;
     }
 
-    public List getGroupsIsCollab() {
-	return groupsIsCollab;
+    public List<LinkDTO> getGroupsIsCollab() {
+        return groupsIsCollab;
     }
 
-    public void setGroupsIsCollab(final List groupsIsCollab) {
-	this.groupsIsCollab = groupsIsCollab;
+    public void setGroupsIsCollab(final List<LinkDTO> groupsIsCollab) {
+        this.groupsIsCollab = groupsIsCollab;
     }
 
 }

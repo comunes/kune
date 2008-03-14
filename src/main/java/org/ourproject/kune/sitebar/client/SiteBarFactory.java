@@ -108,11 +108,11 @@ public class SiteBarFactory {
     }
 
     public static LicenseChoose createLicenseChoose() {
-        List licensesList = session.getLicenses();
-        List licensesNonCCList = new ArrayList();
+        List<LicenseDTO> licensesList = session.getLicenses();
+        List<LicenseDTO> licensesNonCCList = new ArrayList<LicenseDTO>();
 
-        for (Iterator iterator = licensesList.iterator(); iterator.hasNext();) {
-            LicenseDTO license = (LicenseDTO) iterator.next();
+        for (Iterator<LicenseDTO> iterator = licensesList.iterator(); iterator.hasNext();) {
+            LicenseDTO license = iterator.next();
             if (!license.isCC()) {
                 licensesNonCCList.add(license);
             }

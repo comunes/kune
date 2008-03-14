@@ -38,7 +38,7 @@ public class ContentRemoveAuthorAction implements Action {
         ContentServiceAsync server = ContentService.App.getInstance();
         StateDTO currentState = services.session.getCurrentState();
         server.removeAuthor(services.session.getUserHash(), currentState.getGroup().getShortName(), currentState
-                .getDocumentId(), authorShortName, new AsyncCallbackSimple() {
+                .getDocumentId(), authorShortName, new AsyncCallbackSimple<Object>() {
             public void onSuccess(final Object result) {
                 Site.hideProgress();
                 services.stateManager.reload();

@@ -41,8 +41,8 @@ public class ContentToolBarPanel extends HorizontalPanel implements ContentToolB
         leftHP.addStyleName("kune-Margin-Large-l");
     }
 
-    public HashMap getExtensionPoints() {
-        HashMap extPoints = new HashMap();
+    public HashMap<String, WorkspaceUIExtensionPoint> getExtensionPoints() {
+        HashMap<String, WorkspaceUIExtensionPoint> extPoints = new HashMap<String, WorkspaceUIExtensionPoint>();
         String leftId = WorkspaceUIExtensionPoint.CONTENT_TOOLBAR_LEFT;
         extPoints.put(leftId, new WorkspaceUIExtensionPoint(leftId, leftHP));
         return extPoints;

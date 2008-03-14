@@ -21,43 +21,52 @@
 package org.ourproject.kune.platf.client.rpc;
 
 import java.util.Date;
+import java.util.List;
 
+import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.dto.TagResultDTO;
+import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface ContentServiceAsync {
 
-    void addContent(String user, String groupShortName, Long parentFolderId, String name, AsyncCallback callback);
+    void addAuthor(String userHash, String groupShortName, String documentId, String authorShortName,
+            AsyncCallback<Object> asyncCallback);
 
-    void getContent(String user, String groupShortName, StateToken newState, AsyncCallback callback);
+    void addContent(String user, String groupShortName, Long parentFolderId, String name,
+            AsyncCallback<StateDTO> callback);
 
-    void addFolder(String hash, String groupShortName, Long parentFolderId, String title, AsyncCallback callback);
+    void addFolder(String hash, String groupShortName, Long parentFolderId, String title,
+            AsyncCallback<StateDTO> callback);
 
-    void addRoom(String user, String groupShortName, Long parentFolderId, String name, AsyncCallback callback);
+    void addRoom(String user, String groupShortName, Long parentFolderId, String name, AsyncCallback<StateDTO> callback);
 
-    void save(String user, String groupShortName, String documentId, String content, AsyncCallback asyncCallback);
+    void delContent(String userHash, String groupShortName, String documentId, AsyncCallback<Object> asyncCallback);
+
+    void getContent(String user, String groupShortName, StateToken newState, AsyncCallback<StateDTO> callback);
+
+    void getSummaryTags(String userHash, String groupShortName, AsyncCallback<List<TagResultDTO>> asyncCallback);
 
     void rateContent(String userHash, String groupShortName, String documentId, Double value,
-            AsyncCallback asyncCallback);
-
-    void setLanguage(String userHash, String groupShortName, String documentId, String languageCode,
-            AsyncCallback asyncCallback);
-
-    void setPublishedOn(String userHash, String groupShortName, String documentId, Date publishedOn,
-            AsyncCallback asyncCallback);
-
-    void setTags(String userHash, String groupShortName, String documentId, String tags, AsyncCallback asyncCallback);
-
-    void addAuthor(String userHash, String groupShortName, String documentId, String authorShortName,
-            AsyncCallback asyncCallback);
+            AsyncCallback<Object> asyncCallback);
 
     void removeAuthor(String userHash, String groupShortName, String documentId, String authorShortName,
-            AsyncCallback asyncCallback);
+            AsyncCallback<Object> asyncCallback);
 
-    void rename(String userHash, String groupShortName, String token, String newName, AsyncCallback asyncCallback);
+    void rename(String userHash, String groupShortName, String token, String newName,
+            AsyncCallback<String> asyncCallback);
 
-    void delContent(String userHash, String groupShortName, String documentId, AsyncCallback asyncCallback);
+    void save(String user, String groupShortName, String documentId, String content,
+            AsyncCallback<Integer> asyncCallback);
 
-    void getSummaryTags(String userHash, String groupShortName, AsyncCallback asyncCallback);
+    void setLanguage(String userHash, String groupShortName, String documentId, String languageCode,
+            AsyncCallback<I18nLanguageDTO> asyncCallback);
+
+    void setPublishedOn(String userHash, String groupShortName, String documentId, Date publishedOn,
+            AsyncCallback<Object> asyncCallback);
+
+    void setTags(String userHash, String groupShortName, String documentId, String tags,
+            AsyncCallback<List<TagResultDTO>> asyncCallback);
 }

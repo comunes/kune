@@ -47,13 +47,13 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener, Mult
 
     private final WorkspaceDeckView view;
     private final ChatComponents components;
-    private final HashMap roomNamesToRooms;
+    private final HashMap<String, Room> roomNamesToRooms;
     private StateDTO state;
 
     public ChatContentPresenter(final WorkspaceDeckView view) {
         this.view = view;
         this.components = new ChatComponents(this);
-        this.roomNamesToRooms = new HashMap();
+        this.roomNamesToRooms = new HashMap<String, Room>();
     }
 
     public void attach() {
@@ -100,7 +100,7 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener, Mult
     }
 
     private Room getRoom(final String roomName, final String userAlias, final UserType userType) {
-        Room room = (Room) roomNamesToRooms.get(roomName);
+        Room room = roomNamesToRooms.get(roomName);
         if (room == null) {
             room = createRoom(roomName, userAlias, userType);
             roomNamesToRooms.put(roomName, room);

@@ -34,23 +34,17 @@ public class RoomPresenter implements Room {
             "purple", "fuchsia", "maroon", "red" };
 
     private int currentColor;
-
     private RoomView view;
     private String input;
     private String subject;
     private String userAlias;
     // FIXME: this in RoomUserList?
-    private final Map users;
+    private final Map<String, RoomUser> users;
     private String roomName;
-
     private RoomUserList userList;
-
     private XmppRoom handler;
-
     private final RoomListener listener;
-
     private boolean closeConfirmed;
-
     private UserType userType;
 
     public RoomPresenter(final RoomListener listener) {
@@ -58,7 +52,7 @@ public class RoomPresenter implements Room {
         this.input = "";
         this.currentColor = 0;
         this.subject = "Subject: " + roomName;
-        users = new HashMap();
+        users = new HashMap<String, RoomUser>();
     }
 
     public void setRoomName(final String roomName) {
@@ -90,7 +84,7 @@ public class RoomPresenter implements Room {
     public void addMessage(final String userAlias, final String message) {
         String userColor;
 
-        RoomUser user = (RoomUser) users.get(userAlias);
+        RoomUser user = users.get(userAlias);
         if (user != null) {
             userColor = user.getColor();
         } else {
@@ -112,7 +106,7 @@ public class RoomPresenter implements Room {
     }
 
     public void removeUser(final String alias) {
-        getUsersList().remove((RoomUser) users.get(alias));
+        getUsersList().remove(users.get(alias));
     }
 
     public void addDelimiter(final String datetime) {

@@ -39,7 +39,7 @@ public class RateContentAction implements Action {
         ContentServiceAsync server = ContentService.App.getInstance();
         StateDTO currentState = services.session.getCurrentState();
         server.rateContent(services.session.getUserHash(), currentState.getGroup().getShortName(), currentState
-                .getDocumentId(), value, new AsyncCallbackSimple() {
+                .getDocumentId(), value, new AsyncCallbackSimple<Object>() {
             public void onSuccess(final Object result) {
                 Site.hideProgress();
                 Site.info(Kune.I18N.t("Content rated"));

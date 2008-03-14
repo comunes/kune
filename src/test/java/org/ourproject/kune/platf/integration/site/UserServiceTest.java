@@ -104,11 +104,11 @@ public class UserServiceTest extends IntegrationTest {
         assertEquals(userInfo.getChatName(), userInfoDTO.getChatName());
         assertEquals(userInfo.getChatPassword(), userInfoDTO.getChatPassword());
         final List<Link> adminsGroup = userInfo.getGroupsIsAdmin();
-        final List<Link> adminsGroupDTO = userInfoDTO.getGroupsIsAdmin();
+        final List<LinkDTO> adminsGroupDTO = userInfoDTO.getGroupsIsAdmin();
         assertEqualListsLink(adminsGroupDTO, adminsGroup);
     }
 
-    private void assertEqualListsLink(final List<Link> listDTO, final List<Link> list) {
+    private void assertEqualListsLink(final List<LinkDTO> listDTO, final List<Link> list) {
         assertEquals(listDTO.size(), list.size());
         for (int i = 0; i < listDTO.size(); i++) {
             final Object object = listDTO.get(i);

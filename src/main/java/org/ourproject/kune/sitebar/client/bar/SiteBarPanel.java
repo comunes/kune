@@ -388,7 +388,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         });
     }
 
-    public void setGroupsIsMember(final List groupsIsAdmin, final List groupsIsCollab) {
+    public void setGroupsIsMember(final List<LinkDTO> groupsIsAdmin, final List<LinkDTO> groupsIsCollab) {
         optionsSubmenu.clearItems();
         yourGroupsSubmenu.clearItems();
 
@@ -397,11 +397,11 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         if (isAdminCount > 0 || isCollabCount > 0) {
             optionsSubmenu.addItem(Kune.I18N.t("My Groups") + " »", yourGroupsSubmenu);
             for (int i = 0; i < isAdminCount; i++) {
-                final LinkDTO link = (LinkDTO) groupsIsAdmin.get(i);
+                final LinkDTO link = groupsIsAdmin.get(i);
                 addItemToYourGroupSubmenu(link);
             }
             for (int i = 0; i < isCollabCount; i++) {
-                final LinkDTO link = (LinkDTO) groupsIsCollab.get(i);
+                final LinkDTO link = groupsIsCollab.get(i);
                 addItemToYourGroupSubmenu(link);
             }
         }

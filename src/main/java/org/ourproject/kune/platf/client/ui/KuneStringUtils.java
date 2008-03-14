@@ -56,8 +56,8 @@ public class KuneStringUtils {
         return text;
     }
 
-    public static ArrayList splitTags(final String tagsString) {
-        ArrayList tagsList = new ArrayList();
+    public static ArrayList<String> splitTags(final String tagsString) {
+        ArrayList<String> tagsList = new ArrayList<String>();
         String tagsCopy = tagsString;
         // remove commas and quotes
         tagsCopy = tagsCopy.replaceAll(",", " ");

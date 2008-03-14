@@ -21,24 +21,24 @@ package org.ourproject.kune.platf.client.dto;
 
 import java.util.List;
 
-public class SearchResultDTO {
-    List list;
+public class SearchResultDTO<T> {
+    List<T> list;
     Long size;
 
     public SearchResultDTO() {
         this(null, null);
     }
 
-    public SearchResultDTO(final Long size, final List list) {
+    public SearchResultDTO(final Long size, final List<T> list) {
         this.list = list;
         this.size = size;
     }
 
-    public List getList() {
+    public List<T> getList() {
         return list;
     }
 
-    public void setList(final List list) {
+    public void setList(final List<T> list) {
         this.list = list;
     }
 

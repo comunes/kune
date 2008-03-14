@@ -255,8 +255,8 @@ public class Content implements HasStateToken {
 
     public String getTagsAsString() {
         String tagConcatenated = "";
-        for (Iterator iterator = tags.iterator(); iterator.hasNext();) {
-            Tag tag = (Tag) iterator.next();
+        for (Iterator<Tag> iterator = tags.iterator(); iterator.hasNext();) {
+            Tag tag = iterator.next();
             tagConcatenated = tagConcatenated + tag.getName();
             if (iterator.hasNext()) {
                 tagConcatenated = tagConcatenated + " ";

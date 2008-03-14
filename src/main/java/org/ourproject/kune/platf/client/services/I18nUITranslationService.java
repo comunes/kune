@@ -22,6 +22,7 @@ package org.ourproject.kune.platf.client.services;
 import java.util.HashMap;
 
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
+import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.rpc.I18nService;
 import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
 import org.ourproject.kune.platf.client.ui.KuneStringUtils;
@@ -39,18 +40,18 @@ public class I18nUITranslationService extends I18nTranslationService {
     private static final String UNTRANSLATED_VALUE = null;
 
     private static I18nUITranslationService instance;
-    private HashMap lexicon;
+    private HashMap<String, String> lexicon;
     private String currentLanguage;
     private I18nChangeListenerCollection i18nChangeListeners;
 
-    public void getInitialLanguage(final AsyncCallback callback) {
+    public void getInitialLanguage(final AsyncCallback<I18nLanguageDTO> callback) {
         Location loc = WindowUtils.getLocation();
         String locale = loc.getParameter("locale");
         I18nServiceAsync server = I18nService.App.getInstance();
         server.getInitialLanguage(locale, callback);
     }
 
-    public void getInitialLexicon(final String initLanguage, final AsyncCallback callback) {
+    public void getInitialLexicon(final String initLanguage, final AsyncCallback<HashMap<String, String>> callback) {
         currentLanguage = initLanguage;
         I18nServiceAsync server = I18nService.App.getInstance();
         server.getLexicon(currentLanguage, callback);
@@ -63,7 +64,7 @@ public class I18nUITranslationService extends I18nTranslationService {
         return instance;
     }
 
-    public void setLexicon(final HashMap lexicon) {
+    public void setLexicon(final HashMap<String, String> lexicon) {
         this.lexicon = lexicon;
         fireI18nLanguageChange();
     }
@@ -77,7 +78,7 @@ public class I18nUITranslationService extends I18nTranslationService {
         }
     }
 
-    public HashMap getLexicon() {
+    public HashMap<String, String> getLexicon() {
         return lexicon;
     }
 
@@ -94,7 +95,7 @@ public class I18nUITranslationService extends I18nTranslationService {
      */
     public String t(final String text) {
         String encodeText = KuneStringUtils.escapeHtmlLight(text);
-        String translation = (String) lexicon.get(encodeText);
+        String translation = lexicon.get(encodeText);
         if (lexicon.containsKey(encodeText)) {
             if (translation == UNTRANSLATED_VALUE) {
                 // Not translated but in db, return text

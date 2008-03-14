@@ -30,32 +30,32 @@ import org.ourproject.kune.platf.client.extend.Register;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 
 public class KunePlatform implements Register {
-    private final ArrayList tools;
-    private final ArrayList actions;
+    private final ArrayList<ClientTool> tools;
+    private final ArrayList<ActionEvent> actions;
 
     public KunePlatform() {
-	this.tools = new ArrayList();
-	this.actions = new ArrayList();
+        this.tools = new ArrayList<ClientTool>();
+        this.actions = new ArrayList<ActionEvent>();
     }
 
     public void addTool(final ClientTool clientTool) {
-	tools.add(clientTool);
+        tools.add(clientTool);
     }
 
     public void addAction(final String eventName, final Action action) {
-	actions.add(new ActionEvent(eventName, action));
+        actions.add(new ActionEvent(eventName, action));
     }
 
     public void install(final ClientModule module) {
-	module.configure(this);
+        module.configure(this);
     }
 
-    public List getTools() {
-	return tools;
+    public List<ClientTool> getTools() {
+        return tools;
     }
 
-    public ArrayList getActions() {
-	return actions;
+    public ArrayList<ActionEvent> getActions() {
+        return actions;
     }
 
 }

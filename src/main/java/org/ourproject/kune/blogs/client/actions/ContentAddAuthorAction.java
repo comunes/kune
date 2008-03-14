@@ -36,7 +36,7 @@ public class ContentAddAuthorAction implements Action {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
         server.addAuthor(services.session.getUserHash(), services.session.getCurrentState().getGroup().getShortName(),
-                documentId, authorShortName, new AsyncCallbackSimple() {
+                documentId, authorShortName, new AsyncCallbackSimple<Object>() {
                     public void onSuccess(final Object result) {
                         Site.hideProgress();
                         services.stateManager.reload();
