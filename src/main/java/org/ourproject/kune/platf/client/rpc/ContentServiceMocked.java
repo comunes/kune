@@ -21,12 +21,15 @@
 package org.ourproject.kune.platf.client.rpc;
 
 import java.util.Date;
+import java.util.List;
 
 import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.dto.TagResultDTO;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -34,7 +37,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public class ContentServiceMocked extends MockedService implements ContentServiceAsync {
 
     public void getContent(final String user, final String groupShortName, final StateToken newState,
-            final AsyncCallback callback) {
+            final AsyncCallback<StateDTO> callback) {
         StateDTO content = new StateDTO();
         ContainerDTO folder = new ContainerDTO();
         folder.setId(new Long(1));
@@ -53,62 +56,63 @@ public class ContentServiceMocked extends MockedService implements ContentServic
     }
 
     public void save(final String user, final String groupShortName, final String documentId, final String content,
-            final AsyncCallback asyncCallback) {
+            final AsyncCallback<Integer> asyncCallback) {
     }
 
     public void addContent(final String user, final String groupShortName, final Long parentFolderId,
-            final String name, final AsyncCallback asyncCallback) {
+            final String name, final AsyncCallback<StateDTO> asyncCallback) {
     }
 
     public void addFolder(final String hash, final String groupShortName, final Long parentFolderId,
-            final String title, final AsyncCallback callback) {
+            final String title, final AsyncCallback<StateDTO> callback) {
     }
 
     public void addRoom(final String user, final String groupShortName, final Long parentFolderId, final String name,
-            final AsyncCallback callback) {
+            final AsyncCallback<StateDTO> callback) {
     }
 
     public void rateContent(final String userHash, final String groupShortName, final String documentId,
-            final Double value, final AsyncCallback asyncCallback) {
+            final Double value, final AsyncCallback<?> asyncCallback) {
     }
 
     public void addAuthor(final String userHash, final String groupShortName, final String documentId,
-            final String authorShortName, final AsyncCallback asyncCallback) {
+            final String authorShortName, final AsyncCallback<?> asyncCallback) {
     }
 
     public void removeAuthor(final String userHash, final String groupShortName, final String documentId,
-            final String authorShortName, final AsyncCallback asyncCallback) {
+            final String authorShortName, final AsyncCallback<?> asyncCallback) {
     }
 
     public void delContent(final String userHash, final String groupShortName, final String documentId,
-            final AsyncCallback asyncCallback) {
+            final AsyncCallback<?> asyncCallback) {
     }
 
     public void setLanguage(final String userHash, final String groupShortName, final String documentId,
-            final String languageCode, final AsyncCallback asyncCallback) {
+            final String languageCode, final AsyncCallback<I18nLanguageDTO> asyncCallback) {
     }
 
     public void setPublishedOn(final String userHash, final String groupShortName, final String documentId,
-            final Date date, final AsyncCallback asyncCallback) {
+            final Date date, final AsyncCallback<?> asyncCallback) {
     }
 
     public void setTags(final String userHash, final String groupShortName, final String documentId, final String tags,
-            final AsyncCallback asyncCallback) {
+            final AsyncCallback<List<TagResultDTO>> asyncCallback) {
     }
 
     public void renameContent(final String userHash, final String groupShortName, final String documentId,
-            final String newTitle, final AsyncCallback asyncCallback) {
+            final String newTitle, final AsyncCallback<?> asyncCallback) {
     }
 
     public void renameFolder(final String hash, final String groupShortName, final Long folderId, final String title,
-            final AsyncCallback asyncCallback) {
+            final AsyncCallback<?> asyncCallback) {
     }
 
     public void rename(final String userHash, final String groupShortName, final String token, final String newName,
-            final AsyncCallback asyncCallback) {
+            final AsyncCallback<String> asyncCallback) {
     }
 
-    public void getSummaryTags(final String userHash, final String groupShortName, final AsyncCallback asyncCallback) {
+    public void getSummaryTags(final String userHash, final String groupShortName,
+            final AsyncCallback<List<TagResultDTO>> asyncCallback) {
     }
 
 }

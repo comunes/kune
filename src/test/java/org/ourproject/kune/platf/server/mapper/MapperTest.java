@@ -69,14 +69,14 @@ public class MapperTest {
     }
 
     private void assertValidAccessListsMapping(final GroupList groupList, final GroupListDTO groupListDTO) {
-        final List listOrig = groupList.getList();
-        final List listDto = groupListDTO.getList();
+        final List<Group> listOrig = groupList.getList();
+        final List<GroupDTO> listDto = groupListDTO.getList();
         assertEquals(listDto.size(), listOrig.size());
         for (int i = 0; i < listDto.size(); i++) {
             final Object object = listDto.get(i);
             assertEquals(GroupDTO.class, object.getClass());
             final GroupDTO d = (GroupDTO) object;
-            final Group g = (Group) listOrig.get(i);
+            final Group g = listOrig.get(i);
             assertNotNull(d);
             assertNotNull(g);
             final GroupDTO map = mapper.map(g, GroupDTO.class);

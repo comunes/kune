@@ -40,6 +40,7 @@ public class SiteMessagePresenter implements SiteMessage, MessagePresenter {
     public void resetMessage() {
         this.message = "";
         this.isVisible = false;
+        view.hide();
     }
 
     public void setMessage(final String message, final int type) {

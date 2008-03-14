@@ -34,6 +34,7 @@ import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.manager.impl.DefaultManager;
+import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
@@ -86,11 +87,11 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
         return newName;
     }
 
-    public SearchResult search(final String search) {
+    public SearchResult<Container> search(final String search) {
         return this.search(search, null, null);
     }
 
-    public SearchResult search(final String search, final Integer firstResult, final Integer maxResults) {
+    public SearchResult<Container> search(final String search, final Integer firstResult, final Integer maxResults) {
         MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "name" }, new StandardAnalyzer());
         Query query;
         try {

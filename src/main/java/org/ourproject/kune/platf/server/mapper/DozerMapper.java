@@ -23,13 +23,13 @@ package org.ourproject.kune.platf.server.mapper;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ourproject.kune.platf.client.dto.SearchResultDTO;
-import org.ourproject.kune.platf.server.manager.impl.DefaultManager.SearchResult;
-
-import com.google.inject.Singleton;
-
 import net.sf.dozer.util.mapping.DozerBeanMapperSingletonWrapper;
 import net.sf.dozer.util.mapping.MapperIF;
+
+import org.ourproject.kune.platf.client.dto.SearchResultDTO;
+import org.ourproject.kune.platf.server.manager.impl.SearchResult;
+
+import com.google.inject.Singleton;
 
 @Singleton
 public class DozerMapper implements Mapper {
@@ -51,9 +51,9 @@ public class DozerMapper implements Mapper {
         return dest;
     }
 
-    public <T> SearchResultDTO mapSearchResult(final SearchResult result, final Class<T> type) {
-        SearchResultDTO resultDTO = new SearchResultDTO();
-        List list = result.getList();
+    public <K, T> SearchResultDTO<T> mapSearchResult(final SearchResult<K> result, final Class<T> type) {
+        SearchResultDTO<T> resultDTO = new SearchResultDTO<T>();
+        List<K> list = result.getList();
         ArrayList<T> dest = new ArrayList<T>(list.size());
         for (Object o : list) {
             dest.add((T) mapper.map(o, type));

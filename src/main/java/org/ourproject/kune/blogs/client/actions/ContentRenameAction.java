@@ -30,11 +30,12 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class ContentRenameAction implements Action {
 
+    @SuppressWarnings("unchecked")
     public void execute(final Object value, final Object extra, final Services services) {
-        onContentRename(services, (String) value, (AsyncCallback) extra);
+        onContentRename(services, (String) value, (AsyncCallback<String>) extra);
     }
 
-    private void onContentRename(final Services services, final String newName, final AsyncCallback callback) {
+    private void onContentRename(final Services services, final String newName, final AsyncCallback<String> callback) {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
         StateDTO currentState = services.session.getCurrentState();

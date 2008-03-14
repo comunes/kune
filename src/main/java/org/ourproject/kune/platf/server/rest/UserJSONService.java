@@ -21,8 +21,9 @@ package org.ourproject.kune.platf.server.rest;
 
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.SearchResultDTO;
+import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.UserManager;
-import org.ourproject.kune.platf.server.manager.impl.DefaultManager.SearchResult;
+import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.rack.filters.rest.REST;
 
@@ -39,13 +40,13 @@ public class UserJSONService {
     }
 
     @REST(params = { "query" })
-    public SearchResultDTO search(final String search) {
+    public SearchResultDTO<LinkDTO> search(final String search) {
         return search(search, null, null);
     }
 
     @REST(params = { "query", "start", "limit" })
-    public SearchResultDTO search(final String search, final Integer firstResult, final Integer maxResults) {
-        SearchResult results = manager.search(search, firstResult, maxResults);
+    public SearchResultDTO<LinkDTO> search(final String search, final Integer firstResult, final Integer maxResults) {
+        SearchResult<User> results = manager.search(search, firstResult, maxResults);
         return mapper.mapSearchResult(results, LinkDTO.class);
     }
 

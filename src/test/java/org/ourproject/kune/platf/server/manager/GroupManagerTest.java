@@ -21,7 +21,7 @@ import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.manager.impl.DefaultManager.SearchResult;
+import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
@@ -180,9 +180,9 @@ public class GroupManagerTest extends PersistenceTest {
                 GroupType.PROJECT);
         groupManager.createGroup(group, user);
         groupManager.reIndex();
-        SearchResult result = groupManager.search("ysei");
+        SearchResult<Group> result = groupManager.search("ysei");
         assertEquals(1, result.getSize());
-        assertEquals("ysei", ((Group) result.getList().get(0)).getShortName());
+        assertEquals("ysei", result.getList().get(0).getShortName());
         rollbackTransaction();
     }
 
@@ -192,10 +192,10 @@ public class GroupManagerTest extends PersistenceTest {
             createTestGroup(i);
         }
         groupManager.reIndex();
-        SearchResult result = groupManager.search("Yellow", 0, 5);
+        SearchResult<Group> result = groupManager.search("Yellow", 0, 5);
         assertEquals(9, result.getSize());
         assertEquals(5, result.getList().size());
-        SearchResult result2 = groupManager.search("Yellow", 5, 5);
+        SearchResult<Group> result2 = groupManager.search("Yellow", 5, 5);
         assertEquals(9, result2.getSize());
         assertEquals(4, result2.getList().size());
         rollbackTransaction();

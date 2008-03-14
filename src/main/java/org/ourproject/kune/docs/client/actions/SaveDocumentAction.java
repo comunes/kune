@@ -43,7 +43,7 @@ public class SaveDocumentAction implements Action {
         Site.showProgressSaving();
         ContentServiceAsync server = ContentService.App.getInstance();
         server.save(services.session.getUserHash(), services.session.getCurrentState().getGroup().getShortName(),
-                content.getDocumentId(), content.getContent(), new AsyncCallback() {
+                content.getDocumentId(), content.getContent(), new AsyncCallback<Integer>() {
                     public void onFailure(final Throwable caught) {
                         Site.hideProgress();
                         try {
@@ -62,9 +62,8 @@ public class SaveDocumentAction implements Action {
                         }
                     }
 
-                    public void onSuccess(final Object result) {
+                    public void onSuccess(final Integer result) {
                         Site.hideProgress();
-                        // Site.info(Kune.I18N.t("Document Saved"));
                         documentContent.onSaved();
                     }
 

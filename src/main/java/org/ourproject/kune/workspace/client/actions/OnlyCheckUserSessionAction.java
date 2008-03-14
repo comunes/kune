@@ -28,6 +28,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class OnlyCheckUserSessionAction implements Action {
 
+    @SuppressWarnings("unchecked")
     public void execute(final Object value, final Object extra, final Services services) {
         onOnlyCheckUserSession(services, (AsyncCallback<Object>) value);
     }

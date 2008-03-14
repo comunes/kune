@@ -100,11 +100,11 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         return userId != null ? super.find(userId) : User.UNKNOWN_USER;
     }
 
-    public SearchResult search(final String search) {
+    public SearchResult<User> search(final String search) {
         return this.search(search, null, null);
     }
 
-    public SearchResult search(final String search, final Integer firstResult, final Integer maxResults) {
+    public SearchResult<User> search(final String search, final Integer firstResult, final Integer maxResults) {
         MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "name", "shortName" },
                 new StandardAnalyzer());
         Query query;

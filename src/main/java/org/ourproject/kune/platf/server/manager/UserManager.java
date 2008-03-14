@@ -22,7 +22,7 @@ package org.ourproject.kune.platf.server.manager;
 
 import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
 import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.manager.impl.DefaultManager.SearchResult;
+import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 
 public interface UserManager {
     User login(String nickOrEmail, String passwd);
@@ -52,9 +52,9 @@ public interface UserManager {
      */
     User find(Long userId);
 
-    SearchResult search(String search);
+    SearchResult<User> search(String search);
 
-    SearchResult search(String search, Integer firstResult, Integer maxResults);
+    SearchResult<User> search(String search, Integer firstResult, Integer maxResults);
 
     void reIndex();
 

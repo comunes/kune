@@ -30,7 +30,7 @@ public class MockedService {
         void run();
     }
 
-    protected void answer(final Object response, final AsyncCallback<Object> callback) {
+    protected void answer(final Object response, final AsyncCallback callback) {
         delay(new Delayer() {
             public void run() {
                 callback.onSuccess(response);

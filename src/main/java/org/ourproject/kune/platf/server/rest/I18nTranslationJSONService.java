@@ -25,7 +25,7 @@ import org.ourproject.kune.platf.client.dto.I18nTranslationDTO;
 import org.ourproject.kune.platf.client.dto.SearchResultDTO;
 import org.ourproject.kune.platf.server.domain.I18nTranslation;
 import org.ourproject.kune.platf.server.manager.I18nTranslationManager;
-import org.ourproject.kune.platf.server.manager.impl.DefaultManager.SearchResult;
+import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.rack.filters.rest.REST;
 
@@ -54,14 +54,16 @@ public class I18nTranslationJSONService {
     }
 
     @REST(params = { "query", "start", "limit" })
-    public SearchResultDTO search(final String language, final Integer firstResult, final Integer maxResults) {
-        SearchResult results = manager.getUntranslatedLexicon(language, firstResult, maxResults);
+    public SearchResultDTO<I18nTranslationDTO> search(final String language, final Integer firstResult,
+            final Integer maxResults) {
+        SearchResult<I18nTranslation> results = manager.getUntranslatedLexicon(language, firstResult, maxResults);
         return mapper.mapSearchResult(results, I18nTranslationDTO.class);
     }
 
     @REST(params = { "query", "start", "limit" })
-    public SearchResultDTO searchtranslated(final String language, final Integer firstResult, final Integer maxResults) {
-        SearchResult results = manager.getTranslatedLexicon(language, firstResult, maxResults);
+    public SearchResultDTO<I18nTranslationDTO> searchtranslated(final String language, final Integer firstResult,
+            final Integer maxResults) {
+        SearchResult<I18nTranslation> results = manager.getTranslatedLexicon(language, firstResult, maxResults);
         return mapper.mapSearchResult(results, I18nTranslationDTO.class);
     }
 

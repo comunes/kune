@@ -84,15 +84,15 @@ public class ContentTitlePresenter implements ContentTitleComponent {
 
     public void onTitleRename(final String text) {
         Site.showProgressSaving();
-        DefaultDispatcher.getInstance().fire(DocsEvents.RENAME_CONTENT, text, new AsyncCallback() {
+        DefaultDispatcher.getInstance().fire(DocsEvents.RENAME_CONTENT, text, new AsyncCallback<String>() {
             public void onFailure(final Throwable caught) {
                 view.restoreOldTitle();
                 KuneErrorHandler.getInstance().process(caught);
             }
 
-            public void onSuccess(final Object result) {
+            public void onSuccess(final String result) {
                 Site.hideProgress();
-                view.setContentTitle((String) result);
+                view.setContentTitle(result);
                 DefaultDispatcher.getInstance().fire(WorkspaceEvents.RELOAD_CONTEXT, null, null);
             }
         });

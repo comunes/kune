@@ -19,7 +19,7 @@ import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.I18nCountry;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.manager.impl.DefaultManager.SearchResult;
+import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
@@ -125,9 +125,9 @@ public class UserManagerTest extends PersistenceTest {
     @Test
     public void userSearch() throws SerializableException, ParseException {
         userManager.reIndex();
-        SearchResult result = userManager.search(USER_SHORT_NAME);
+        SearchResult<User> result = userManager.search(USER_SHORT_NAME);
         assertEquals(1, result.getSize());
-        assertEquals(USER_SHORT_NAME, ((User) result.getList().get(0)).getShortName());
+        assertEquals(USER_SHORT_NAME, (result.getList().get(0)).getShortName());
         rollbackTransaction();
     }
 

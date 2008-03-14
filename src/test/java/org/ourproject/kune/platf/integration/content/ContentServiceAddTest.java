@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
+import org.ourproject.kune.platf.client.dto.ContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
@@ -57,7 +58,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
         StateDTO added = contentService.addContent(session.getHash(), groupName, defaultContent.getFolder().getId(),
                 title);
         assertNotNull(added);
-        List contents = added.getFolder().getContents();
+        List<ContentDTO> contents = added.getFolder().getContents();
         assertEquals(title, added.getTitle());
         assertEquals(2, contents.size());
         assertEquals(cntRights, added.getContentRights());
@@ -79,7 +80,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
         assertNotNull(newState);
 
         ContainerDTO parentAgain = getDefaultContent().getFolder();
-        ContainerDTO child = (ContainerDTO) parentAgain.getChilds().get(0);
+        ContainerDTO child = parentAgain.getChilds().get(0);
         assertEquals(parent.getAbsolutePath().length + 1, child.getAbsolutePath().length);
         assertEquals(parent.getId(), child.getParentFolderId());
 

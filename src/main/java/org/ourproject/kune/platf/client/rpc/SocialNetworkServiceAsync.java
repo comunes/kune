@@ -26,7 +26,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface SocialNetworkServiceAsync {
 
-    void requestJoinGroup(String hash, String groupShortName, AsyncCallback<Object> callback);
+    void requestJoinGroup(String hash, String groupShortName, AsyncCallback<?> callback);
 
     void AcceptJoinGroup(String hash, String groupShortName, String groupToAcceptShortName,
             AsyncCallback<SocialNetworkResultDTO> callback);

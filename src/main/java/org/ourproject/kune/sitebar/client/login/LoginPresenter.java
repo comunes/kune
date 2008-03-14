@@ -74,7 +74,7 @@ public class LoginPresenter implements Login {
             user.setShortName(nickOrEmail);
             user.setPassword(passwd);
 
-            AsyncCallback callback = new AsyncCallback() {
+            AsyncCallback<UserInfoDTO> callback = new AsyncCallback<UserInfoDTO>() {
                 public void onFailure(final Throwable caught) {
                     view.unMask();
                     Site.hideProgress();
@@ -89,8 +89,8 @@ public class LoginPresenter implements Login {
                     }
                 }
 
-                public void onSuccess(final Object response) {
-                    listener.userLoggedIn((UserInfoDTO) response);
+                public void onSuccess(final UserInfoDTO response) {
+                    listener.userLoggedIn(response);
                     view.unMask();
                 }
             };
@@ -114,7 +114,7 @@ public class LoginPresenter implements Login {
 
             UserDTO user = new UserDTO(view.getLongName(), view.getShortName(), view.getRegisterPassword(), view
                     .getEmail(), language, country, timezone);
-            AsyncCallback callback = new AsyncCallback() {
+            AsyncCallback<UserInfoDTO> callback = new AsyncCallback<UserInfoDTO>() {
                 public void onFailure(final Throwable caught) {
                     view.unMask();
                     try {
@@ -132,8 +132,7 @@ public class LoginPresenter implements Login {
                     }
                 }
 
-                public void onSuccess(final Object response) {
-                    UserInfoDTO userInfoDTO = (UserInfoDTO) response;
+                public void onSuccess(final UserInfoDTO userInfoDTO) {
                     listener.userLoggedIn(userInfoDTO);
                     view.unMask();
                     view.showWelcolmeDialog();

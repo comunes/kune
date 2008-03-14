@@ -27,7 +27,7 @@ import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.Manager;
-import org.ourproject.kune.platf.server.manager.impl.DefaultManager.SearchResult;
+import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 
@@ -59,8 +59,8 @@ public interface ContentManager extends Manager<Content, Long> {
 
     public void delContent(User user, Long contentId) throws SerializableException;
 
-    SearchResult search(String search);
+    SearchResult<Content> search(String search);
 
-    SearchResult search(String search, Integer firstResult, Integer maxResults);
+    SearchResult<Content> search(String search, Integer firstResult, Integer maxResults);
 
 }

@@ -54,7 +54,7 @@ public class NewGroupPresenter implements NewGroup {
         GroupDTO group = new GroupDTO(shortName, longName, publicDesc, getTypeOfGroup());
         group.setDefaultLicense(license);
 
-        AsyncCallback callback = new AsyncCallback() {
+        AsyncCallback<StateToken> callback = new AsyncCallback<StateToken>() {
             public void onFailure(final Throwable caught) {
                 try {
                     throw caught;
@@ -72,8 +72,8 @@ public class NewGroupPresenter implements NewGroup {
                 }
             }
 
-            public void onSuccess(final Object token) {
-                listener.onNewGroupCreated((StateToken) token);
+            public void onSuccess(final StateToken token) {
+                listener.onNewGroupCreated(token);
                 view.hide();
                 reset();
                 view.unMask();

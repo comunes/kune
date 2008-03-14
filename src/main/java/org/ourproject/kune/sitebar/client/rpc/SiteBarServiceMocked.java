@@ -40,7 +40,7 @@ public class SiteBarServiceMocked implements UserServiceAsync {
         timer.schedule(1000);
     }
 
-    public void logout(final String userHash, final AsyncCallback<Object> callback) {
+    public void logout(final String userHash, final AsyncCallback<?> callback) {
         timerAndSuccess(callback);
     }
 
@@ -62,7 +62,7 @@ public class SiteBarServiceMocked implements UserServiceAsync {
         timerAndSuccess(asyncCallback);
     }
 
-    public void onlyCheckSession(final String userHash, final AsyncCallback<Object> asyncCallback) {
+    public void onlyCheckSession(final String userHash, final AsyncCallback<?> asyncCallback) {
         timerAndSuccess(asyncCallback);
     }
 }

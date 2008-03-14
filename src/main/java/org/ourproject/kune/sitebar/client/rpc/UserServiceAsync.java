@@ -29,12 +29,12 @@ public interface UserServiceAsync {
 
     void login(String nickOrEmail, String passwd, AsyncCallback<UserInfoDTO> callback);
 
-    void logout(String userHash, AsyncCallback<Object> callback);
+    void logout(String userHash, AsyncCallback<?> callback);
 
     void createUser(UserDTO user, AsyncCallback<UserInfoDTO> asyncCallback);
 
     void reloadUserInfo(String userHash, AsyncCallback<UserInfoDTO> asyncCallback);
 
-    void onlyCheckSession(String userHash, AsyncCallback<Object> asyncCallback);
+    void onlyCheckSession(String userHash, AsyncCallback<?> asyncCallback);
 
 }
