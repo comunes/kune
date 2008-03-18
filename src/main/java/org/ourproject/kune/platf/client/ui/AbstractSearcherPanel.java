@@ -45,7 +45,8 @@ public class AbstractSearcherPanel {
                 new UrlParam("limit", PAGINATION_SIZE) };
         store.setBaseParams(newParams);
         store.load(0, PAGINATION_SIZE);
-        // createPagingToolbar(store, grid);
+				// see bind/unbind in:
+        // http://groups.google.com/group/gwt-ext/browse_thread/thread/ae0badb8114b30cd?hl=en
     }
 
     protected void createPagingToolbar(final Store store, final GridPanel grid) {

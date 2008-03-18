@@ -33,10 +33,10 @@ import org.ourproject.kune.chat.client.rooms.Room;
 import org.ourproject.kune.chat.client.rooms.RoomUser;
 import org.ourproject.kune.chat.client.rooms.RoomUser.UserType;
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.app.ui.UIExtensionPoint;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.ui.UnknowComponent;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
-import org.ourproject.kune.workspace.client.WorkspaceUIExtensionPoint;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 
@@ -73,18 +73,18 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener, Mult
             ChatInfo info = components.getChatInfo();
             view.show(info.getView());
             DefaultDispatcher.getInstance().fire(WorkspaceEvents.CLEAR_EXT_POINT,
-                    WorkspaceUIExtensionPoint.CONTENT_TOOLBAR_LEFT, null);
+                    UIExtensionPoint.CONTENT_TOOLBAR_LEFT, null);
         } else if (typeId.equals(ChatClientTool.TYPE_ROOM)) {
             ChatRoom viewer = components.getChatRoom();
             view.show(viewer.getView());
             DefaultDispatcher.getInstance().fire(WorkspaceEvents.CLEAR_EXT_POINT,
-                    WorkspaceUIExtensionPoint.CONTENT_TOOLBAR_LEFT, null);
+                    UIExtensionPoint.CONTENT_TOOLBAR_LEFT, null);
             DefaultDispatcher.getInstance().fire(WorkspaceEvents.ATTACH_TO_EXT_POINT,
-                    WorkspaceUIExtensionPoint.CONTENT_TOOLBAR_LEFT, components.getChatRoomControl().getView());
+                    UIExtensionPoint.CONTENT_TOOLBAR_LEFT, components.getChatRoomControl().getView());
         } else {
             view.show(UnknowComponent.instance.getView());
             DefaultDispatcher.getInstance().fire(WorkspaceEvents.CLEAR_EXT_POINT,
-                    WorkspaceUIExtensionPoint.CONTENT_TOOLBAR_LEFT, null);
+                    UIExtensionPoint.CONTENT_TOOLBAR_LEFT, null);
         }
     }
 

@@ -69,12 +69,6 @@ public interface WorkspaceView extends View {
 
     void registerUIExtensionPoints();
 
-    void attachToExtensionPoint(String id, View viewToAttach);
-
-    void detachFromExtensionPoint(String id, View viewToDetach);
-
-    void clearExtensionPoint(String id);
-
     void setComponents(WorkspaceUIComponents components);
 
 }

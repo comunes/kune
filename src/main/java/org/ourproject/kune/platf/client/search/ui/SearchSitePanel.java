@@ -312,7 +312,9 @@ public class SearchSitePanel extends AbstractSearcherPanel implements SearchSite
         });
 
         createPagingToolbar(store, grid);
-
+        // grid.render(gridName);
+        // grid.getTopToolbar().addSpacer();
+        // grid.doLayout();
         return grid;
     }
 }

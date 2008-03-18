@@ -25,12 +25,16 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import org.ourproject.kune.app.client.HelloWorldPlugin;
+import org.ourproject.kune.app.client.PluginManager;
 import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.Services;
+import org.ourproject.kune.platf.client.app.ui.UIExtensionPointManager;
 import org.ourproject.kune.platf.client.dispatch.ActionEvent;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.rpc.ContentService;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.ContentProvider;
 import org.ourproject.kune.platf.client.state.ContentProviderImpl;
@@ -55,8 +59,9 @@ public class ApplicationBuilder {
     public void build(final String userHash, final I18nLanguageDTO initialLang) {
         HashMap<String, ClientTool> tools = indexTools(platform.getTools());
         final Session session = new SessionImpl(userHash, initialLang);
+        UIExtensionPointManager extensionPointManager = new UIExtensionPointManager();
         new KuneErrorHandler(session);
-        final DefaultApplication application = new DefaultApplication(tools, session);
+        final DefaultApplication application = new DefaultApplication(tools, session, extensionPointManager);
         Site.showProgressLoading();
         Site.mask();
         ContentProvider provider = new ContentProviderImpl(ContentService.App.getInstance());
@@ -68,8 +73,13 @@ public class ApplicationBuilder {
         application.init(dispatcher, stateManager);
         subscribeActions(dispatcher, platform.getActions());
 
-        Services services = new Services(application, stateManager, dispatcher, session);
+        Services services = new Services(application, stateManager, dispatcher, session, extensionPointManager,
+                Kune.I18N);
         dispatcher.setServices(services);
+
+        PluginManager pluginManager = new PluginManager(services);
+        pluginManager.install(new HelloWorldPlugin());
+
         Window.addWindowCloseListener(new WindowCloseListener() {
             public void onWindowClosed() {
                 application.stop();

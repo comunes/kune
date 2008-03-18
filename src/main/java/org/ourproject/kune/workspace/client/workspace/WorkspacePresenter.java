@@ -20,9 +20,12 @@
 
 package org.ourproject.kune.workspace.client.workspace;
 
+import java.util.HashMap;
 import java.util.Iterator;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.app.ui.UIExtensionPoint;
+import org.ourproject.kune.platf.client.app.ui.UIExtensionPointManager;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.state.Session;
@@ -39,12 +42,14 @@ public class WorkspacePresenter implements Workspace {
     private WorkspaceComponent context;
     private WorkspaceComponent content;
     private WorkspaceUIComponents components;
+    private UIExtensionPointManager extensionPointManager;
 
     public WorkspacePresenter(final Session session) {
     }
 
-    public void init(final WorkspaceView view) {
+    public void init(final WorkspaceView view, final UIExtensionPointManager extensionPointManager) {
         this.view = view;
+        this.extensionPointManager = extensionPointManager;
         this.components = new WorkspaceUIComponents(this);
         view.setComponents(components);
         view.registerUIExtensionPoints();
@@ -150,15 +155,15 @@ public class WorkspacePresenter implements Workspace {
     }
 
     public void attachToExtensionPoint(final String id, final View viewToAttach) {
-        view.attachToExtensionPoint(id, viewToAttach);
+        extensionPointManager.attachToExtensionPoint(id, viewToAttach);
     }
 
     public void detachFromExtensionPoint(final String id, final View viewToDetach) {
-        view.detachFromExtensionPoint(id, viewToDetach);
+        extensionPointManager.detachFromExtensionPoint(id, viewToDetach);
     }
 
     public void clearExtensionPoint(final String id) {
-        view.clearExtensionPoint(id);
+        extensionPointManager.clearExtensionPoint(id);
 
     }
 
@@ -189,6 +194,15 @@ public class WorkspacePresenter implements Workspace {
 
     public void adjustSize(final int windowWidth, final int clientHeight) {
         view.adjustSize(windowWidth, clientHeight);
+    }
+
+    public void addUIExtensionPoint(final UIExtensionPoint extensionPoint) {
+        extensionPointManager.addUIExtensionPoint(extensionPoint);
+
+    }
+
+    public void addUIExtensionPoints(final HashMap<String, UIExtensionPoint> extensionPoints) {
+        extensionPointManager.addUIExtensionPoints(extensionPoints);
     }
 
 }

@@ -37,6 +37,8 @@
       <artifactId>gwt-servlet</artifactId>
       <version>0.0.2030</version>
     </dependency>
+		<!-- Use new repo -->
+		<!-- http://code.google.com/p/gwt-ext/issues/detail?id=180 -->
     <dependency>
       <groupId>com.gwtext</groupId>
       <artifactId>gwt-ext</artifactId>

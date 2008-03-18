@@ -479,9 +479,9 @@ public class MultiRoomPanel implements MultiRoomView, View {
         Panel northPanel = new Panel();
         northPanel.setLayout(new FitLayout());
         northPanel.setTopToolbar(topToolbar);
-
         subject.setWidth("100%");
         subject.setHeight("100%");
+        northPanel.doLayout();
 
         northPanel.addStyleName("kune-MultiRoomPanel-Subject");
 
@@ -530,9 +530,9 @@ public class MultiRoomPanel implements MultiRoomView, View {
         southPanel.setLayout(new FitLayout());
         southPanel.setTopToolbar(inputToolbar);
         southPanel.add(inputForm);
-
         input.setWidth("100%");
         input.setHeight("100%");
+        southPanel.doLayout();
 
         return southPanel;
     }

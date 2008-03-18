@@ -24,9 +24,9 @@ import java.util.Iterator;
 
 import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.app.ui.UIExtensionPoint;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
-import org.ourproject.kune.workspace.client.WorkspaceUIExtensionPoint;
 
 import com.allen_sauer.gwt.log.client.Log;
 
@@ -81,7 +81,7 @@ public class SearchSitePresenter extends AbstractPresenter implements SearchSite
 
     public void attachIconToBottomBar(final View view) {
         DefaultDispatcher.getInstance().fire(WorkspaceEvents.ATTACH_TO_EXT_POINT,
-                WorkspaceUIExtensionPoint.CONTENT_BOTTOM_ICONBAR, view);
+                UIExtensionPoint.CONTENT_BOTTOM_ICONBAR, view);
     }
 
 }

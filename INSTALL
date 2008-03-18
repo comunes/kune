@@ -85,9 +85,18 @@ Example of .m2/settings.xml:
         <!-- <google.webtoolkit.extrajvmargs>-Xmx250m</google.webtoolkit.extrajvmargs> -->
       </properties>
      </profile>
+     <profile>
+       <id>gwt-0.0.2030</id>
+       <properties>
+         <google.webtoolkit.home>/usr/local/lib/gwt/gwt-linux-0.0.2030</google.webtoolkit.home>
+         <!-- <google.webtoolkit.devjar>gwt-dev-linux</google.webtoolkit.devjar> -->
+        <!-- you only need this is you are on a max -->
+        <!-- <google.webtoolkit.extrajvmargs>-Xmx256M</google.webtoolkit.extrajvmargs> -->
+        <google.webtoolkit.extrajvmargs>-Xmx256M</google.webtoolkit.extrajvmargs>
+      </properties>
    </profiles>
    <activeProfiles>
-     <activeProfile>gwt-1.4.60</activeProfile>
+     <activeProfile>gwt-0.0.2030</activeProfile>
    </activeProfiles>
 </settings>
 

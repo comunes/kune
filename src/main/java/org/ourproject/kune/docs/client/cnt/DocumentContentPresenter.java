@@ -27,10 +27,10 @@ import org.ourproject.kune.docs.client.cnt.reader.DocumentReader;
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderControl;
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderListener;
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.app.ui.UIExtensionPoint;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
-import org.ourproject.kune.workspace.client.WorkspaceUIExtensionPoint;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
 import org.ourproject.kune.workspace.client.dto.StateDTO;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
@@ -76,9 +76,9 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
                             editor.setContent(content.getContent());
                             view.show(editor.getView());
                             DefaultDispatcher.getInstance().fire(WorkspaceEvents.CLEAR_EXT_POINT,
-                                    WorkspaceUIExtensionPoint.CONTENT_TOOLBAR_LEFT, null);
+                                    UIExtensionPoint.CONTENT_TOOLBAR_LEFT, null);
                             DefaultDispatcher.getInstance().fire(WorkspaceEvents.ATTACH_TO_EXT_POINT,
-                                    WorkspaceUIExtensionPoint.CONTENT_TOOLBAR_LEFT, editor.getToolBar());
+                                    UIExtensionPoint.CONTENT_TOOLBAR_LEFT, editor.getToolBar());
                             DefaultDispatcher.getInstance()
                                     .fire(WorkspaceEvents.RECALCULATE_WORKSPACE_SIZE, null, null);
                         } else {
@@ -129,15 +129,15 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
             components.getDocumentEditor().reset();
             readerControl.setRights(content.getContentRights());
             DefaultDispatcher.getInstance().fire(WorkspaceEvents.CLEAR_EXT_POINT,
-                    WorkspaceUIExtensionPoint.CONTENT_TOOLBAR_LEFT, null);
+                    UIExtensionPoint.CONTENT_TOOLBAR_LEFT, null);
             DefaultDispatcher.getInstance().fire(WorkspaceEvents.ATTACH_TO_EXT_POINT,
-                    WorkspaceUIExtensionPoint.CONTENT_TOOLBAR_LEFT, readerControl.getView());
+                    UIExtensionPoint.CONTENT_TOOLBAR_LEFT, readerControl.getView());
             view.show(reader.getView());
         } else {
             FolderViewer viewer = components.getFolderViewer();
             viewer.setFolder(content.getFolder());
             DefaultDispatcher.getInstance().fire(WorkspaceEvents.CLEAR_EXT_POINT,
-                    WorkspaceUIExtensionPoint.CONTENT_TOOLBAR_LEFT, null);
+                    UIExtensionPoint.CONTENT_TOOLBAR_LEFT, null);
             view.show(viewer.getView());
         }
     }

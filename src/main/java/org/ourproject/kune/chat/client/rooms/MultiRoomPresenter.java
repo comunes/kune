@@ -24,9 +24,9 @@ import org.ourproject.kune.chat.client.ChatFactory;
 import org.ourproject.kune.chat.client.rooms.RoomUser.UserType;
 import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.app.ui.UIExtensionPoint;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
-import org.ourproject.kune.workspace.client.WorkspaceUIExtensionPoint;
 
 public class MultiRoomPresenter extends AbstractPresenter implements MultiRoom, RoomListener {
     private MultiRoomView view;
@@ -108,7 +108,7 @@ public class MultiRoomPresenter extends AbstractPresenter implements MultiRoom, 
 
     public void attachIconToBottomBar(final View view) {
         DefaultDispatcher.getInstance().fire(WorkspaceEvents.ATTACH_TO_EXT_POINT,
-                WorkspaceUIExtensionPoint.CONTENT_BOTTOM_ICONBAR, view);
+                UIExtensionPoint.CONTENT_BOTTOM_ICONBAR, view);
     }
 
     public void changeRoomSubject(final String text) {

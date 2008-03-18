@@ -20,9 +20,8 @@
 
 package org.ourproject.kune.workspace.client.workspace.ui;
 
-import java.util.HashMap;
-
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.app.ui.UIExtensionPoint;
 import org.ourproject.kune.platf.client.services.ColorTheme;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.services.Kune;
@@ -31,7 +30,6 @@ import org.ourproject.kune.platf.client.ui.DropDownPanel;
 import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
 import org.ourproject.kune.platf.client.ui.SplitterListener;
 import org.ourproject.kune.platf.client.ui.gwtcustom.CustomHorizontalSplitPanel;
-import org.ourproject.kune.workspace.client.WorkspaceUIExtensionPoint;
 import org.ourproject.kune.workspace.client.license.ui.LicensePanel;
 import org.ourproject.kune.workspace.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.workspace.client.workspace.WorkspaceUIComponents;
@@ -79,11 +77,12 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     private ContentBottomToolBarPanel contentBottomToolBarPanel;
     private LicensePanel bottomPanel;
     private DropDownPanel tagsPanel;
-    private final HashMap<String, WorkspaceUIExtensionPoint> uiExtPoints;
+
     private int previousRightWidgetWidth;
+    private final WorkspacePresenter presenter;
 
     public WorkspacePanel(final WorkspacePresenter presenter) {
-        this.uiExtPoints = new HashMap<String, WorkspaceUIExtensionPoint>();
+        this.presenter = presenter;
         th = Kune.getInstance().theme;
         // Initialize
         final VerticalPanel generalVP = new VerticalPanel();
@@ -299,37 +298,6 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         super.setVisible(visible);
     }
 
-    public void registerUIExtensionPoints() {
-        this.uiExtPoints.putAll(contentToolBarPanel.getExtensionPoints());
-        WorkspaceUIExtensionPoint bottomIconsPanelsEP = new WorkspaceUIExtensionPoint(
-                WorkspaceUIExtensionPoint.CONTENT_BOTTOM_ICONBAR, BottomIconsTrayPanel);
-        this.addUIExtensionPoint(bottomIconsPanelsEP);
-    }
-
-    public void addUIExtensionPoint(final WorkspaceUIExtensionPoint extPoint) {
-        this.uiExtPoints.put(extPoint.getId(), extPoint);
-    }
-
-    public void attachToExtensionPoint(final String id, final View viewToAttach) {
-        WorkspaceUIExtensionPoint extPoint = getExtPoint(id);
-        extPoint.getPanel().add((Widget) viewToAttach);
-    }
-
-    public void detachFromExtensionPoint(final String id, final View viewToDetach) {
-        WorkspaceUIExtensionPoint extPoint = getExtPoint(id);
-        extPoint.getPanel().remove((Widget) viewToDetach);
-    }
-
-    private WorkspaceUIExtensionPoint getExtPoint(final String id) {
-        WorkspaceUIExtensionPoint extPoint = this.uiExtPoints.get(id);
-        return extPoint;
-    }
-
-    public void clearExtensionPoint(final String id) {
-        WorkspaceUIExtensionPoint extPoint = getExtPoint(id);
-        extPoint.getPanel().clear();
-    }
-
     private void AddDropDown(final DropDownPanel panel, final String color) {
         groupDropDownsVP.add(panel);
         panel.setWidth("145px");
@@ -385,6 +353,13 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 
     private void saveCurrentRightWidgetWidth(final int newRightWidgetWidth) {
         previousRightWidgetWidth = newRightWidgetWidth;
+    }
+
+    public void registerUIExtensionPoints() {
+        presenter.addUIExtensionPoints(contentToolBarPanel.getExtensionPoints());
+        UIExtensionPoint bottomIconsPanelsEP = new UIExtensionPoint(
+                UIExtensionPoint.CONTENT_BOTTOM_ICONBAR, BottomIconsTrayPanel);
+        presenter.addUIExtensionPoint(bottomIconsPanelsEP);
     }
 
     // private void logSplitter(final String count) {

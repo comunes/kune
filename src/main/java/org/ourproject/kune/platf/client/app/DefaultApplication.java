@@ -23,6 +23,7 @@ package org.ourproject.kune.platf.client.app;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.ourproject.kune.platf.client.app.ui.UIExtensionPointManager;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.dto.StateToken;
@@ -40,9 +41,10 @@ public class DefaultApplication implements Application {
     private Dispatcher dispatcher;
     private StateManager stateManager;
 
-    public DefaultApplication(final Map<String, ClientTool> tools, final Session session) {
+    public DefaultApplication(final Map<String, ClientTool> tools, final Session session,
+            final UIExtensionPointManager extensionPointManager) {
         this.tools = tools;
-        workspace = WorkspaceFactory.createWorkspace(session);
+        workspace = WorkspaceFactory.createWorkspace(session, extensionPointManager);
         workspace.attachTools(tools.values().iterator());
 
         DesktopView desktop = WorkspaceFactory.createDesktop(workspace, new SiteBarListener() {

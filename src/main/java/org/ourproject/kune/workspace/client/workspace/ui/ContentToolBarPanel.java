@@ -21,7 +21,7 @@ package org.ourproject.kune.workspace.client.workspace.ui;
 
 import java.util.HashMap;
 
-import org.ourproject.kune.workspace.client.WorkspaceUIExtensionPoint;
+import org.ourproject.kune.platf.client.app.ui.UIExtensionPoint;
 import org.ourproject.kune.workspace.client.workspace.ContentToolBarPresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentToolBarView;
 
@@ -41,10 +41,10 @@ public class ContentToolBarPanel extends HorizontalPanel implements ContentToolB
         leftHP.addStyleName("kune-Margin-Large-l");
     }
 
-    public HashMap<String, WorkspaceUIExtensionPoint> getExtensionPoints() {
-        HashMap<String, WorkspaceUIExtensionPoint> extPoints = new HashMap<String, WorkspaceUIExtensionPoint>();
-        String leftId = WorkspaceUIExtensionPoint.CONTENT_TOOLBAR_LEFT;
-        extPoints.put(leftId, new WorkspaceUIExtensionPoint(leftId, leftHP));
+    public HashMap<String, UIExtensionPoint> getExtensionPoints() {
+        HashMap<String, UIExtensionPoint> extPoints = new HashMap<String, UIExtensionPoint>();
+        String leftId = UIExtensionPoint.CONTENT_TOOLBAR_LEFT;
+        extPoints.put(leftId, new UIExtensionPoint(leftId, leftHP));
         return extPoints;
     }
 }

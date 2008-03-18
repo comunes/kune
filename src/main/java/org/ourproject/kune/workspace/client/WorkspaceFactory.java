@@ -22,6 +22,7 @@ package org.ourproject.kune.workspace.client;
 
 import org.ourproject.kune.platf.client.app.DesktopView;
 import org.ourproject.kune.platf.client.app.ui.DesktopPanel;
+import org.ourproject.kune.platf.client.app.ui.UIExtensionPointManager;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.sitebar.client.bar.SiteBarListener;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
@@ -41,8 +42,8 @@ import org.ourproject.kune.workspace.client.license.LicensePresenter;
 import org.ourproject.kune.workspace.client.license.LicenseView;
 import org.ourproject.kune.workspace.client.license.ui.LicensePanel;
 import org.ourproject.kune.workspace.client.presence.ui.GroupSummaryPanel;
-import org.ourproject.kune.workspace.client.socialnet.GroupLiveSearchPresenter;
 import org.ourproject.kune.workspace.client.socialnet.EntityLiveSearchView;
+import org.ourproject.kune.workspace.client.socialnet.GroupLiveSearchPresenter;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersPresenter;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersView;
 import org.ourproject.kune.workspace.client.socialnet.ParticipationPresenter;
@@ -95,11 +96,12 @@ public class WorkspaceFactory {
 
     private static Session session;
 
-    public static Workspace createWorkspace(final Session session) {
+    public static Workspace createWorkspace(final Session session,
+            final UIExtensionPointManager extensionPointManager) {
         WorkspaceFactory.session = session;
         WorkspacePresenter workspace = new WorkspacePresenter(session);
         WorkspaceView view = new WorkspacePanel(workspace);
-        workspace.init(view);
+        workspace.init(view, extensionPointManager);
         return workspace;
     }
 
