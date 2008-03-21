@@ -22,9 +22,9 @@ package org.ourproject.kune.workspace.client.theme.ui;
 import org.ourproject.kune.platf.client.services.ColorTheme;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.ui.BottomTrayIcon;
 import org.ourproject.kune.workspace.client.theme.ThemeMenuPresenter;
 import org.ourproject.kune.workspace.client.theme.ThemeMenuView;
-import org.ourproject.kune.workspace.client.workspace.ui.BottomTrayIcon;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.MenuBar;

@@ -23,12 +23,12 @@ package org.ourproject.kune.blogs.client.actions;
 import org.ourproject.kune.docs.client.cnt.DocumentContent;
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.sitebar.client.Site;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtext.client.widgets.MessageBox;

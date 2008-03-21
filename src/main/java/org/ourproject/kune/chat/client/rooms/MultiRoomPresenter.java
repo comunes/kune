@@ -22,13 +22,12 @@ package org.ourproject.kune.chat.client.rooms;
 
 import org.ourproject.kune.chat.client.ChatFactory;
 import org.ourproject.kune.chat.client.rooms.RoomUser.UserType;
-import org.ourproject.kune.platf.client.AbstractPresenter;
+import org.ourproject.kune.platf.client.PlatformEvents;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.app.ui.UIExtensionPoint;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
-import org.ourproject.kune.workspace.client.WorkspaceEvents;
+import org.ourproject.kune.platf.client.extend.UIExtensionPoint;
 
-public class MultiRoomPresenter extends AbstractPresenter implements MultiRoom, RoomListener {
+public class MultiRoomPresenter implements MultiRoom, RoomListener {
     private MultiRoomView view;
     private Room currentRoom;
     private final MultiRoomListener listener;
@@ -107,7 +106,7 @@ public class MultiRoomPresenter extends AbstractPresenter implements MultiRoom, 
     }
 
     public void attachIconToBottomBar(final View view) {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ATTACH_TO_EXT_POINT,
+        DefaultDispatcher.getInstance().fire(PlatformEvents.ATTACH_TO_EXT_POINT,
                 UIExtensionPoint.CONTENT_BOTTOM_ICONBAR, view);
     }
 

@@ -23,9 +23,9 @@ import org.ourproject.kune.platf.client.search.SearchSitePresenter;
 import org.ourproject.kune.platf.client.search.SearchSiteView;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.AbstractSearcherPanel;
+import org.ourproject.kune.platf.client.ui.BottomTrayIcon;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
 import org.ourproject.kune.sitebar.client.services.Images;
-import org.ourproject.kune.workspace.client.workspace.ui.BottomTrayIcon;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.client.Command;

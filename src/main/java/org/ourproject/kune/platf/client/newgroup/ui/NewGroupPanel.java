@@ -147,18 +147,6 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         super.setFinishText(Kune.I18N.t("Register"));
     }
 
-    public void mask(final String message) {
-        super.mask(message);
-    }
-
-    public void maskProcessing() {
-        super.maskProcessing();
-    }
-
-    public void unMask() {
-        super.unMask();
-    }
-
     public boolean isFormValid() {
         return newGroupInitialDataForm.getForm().isValid();
     }

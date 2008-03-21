@@ -23,9 +23,9 @@ package org.ourproject.kune.docs.client.ctx;
 import org.ourproject.kune.docs.client.ctx.admin.AdminContext;
 import org.ourproject.kune.docs.client.ctx.folder.FolderContext;
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public class DocumentContextPresenter implements DocumentContext {
     private final WorkspaceDeckView view;

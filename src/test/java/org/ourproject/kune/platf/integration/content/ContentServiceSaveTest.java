@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 import org.ourproject.kune.platf.server.TestDomainHelper;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 

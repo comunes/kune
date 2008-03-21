@@ -25,7 +25,7 @@ import org.ourproject.kune.platf.client.dto.I18nCountryDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageSimpleDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateDTO;
 
 public interface Session {
 

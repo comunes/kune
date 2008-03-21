@@ -19,10 +19,11 @@
 
 package org.ourproject.kune.workspace.client.i18n;
 
+import org.ourproject.kune.platf.client.PlatformEvents;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.app.ui.UIExtensionPoint;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
+import org.ourproject.kune.platf.client.extend.UIExtensionPoint;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
@@ -56,7 +57,7 @@ public class I18nTranslatorPresenter implements I18nTranslatorComponent {
 
     public void doClose() {
         view.hide();
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.DETACH_FROM_EXT_POINT,
+        DefaultDispatcher.getInstance().fire(PlatformEvents.DETACH_FROM_EXT_POINT,
                 UIExtensionPoint.CONTENT_BOTTOM_ICONBAR, view);
     }
 
@@ -74,7 +75,7 @@ public class I18nTranslatorPresenter implements I18nTranslatorComponent {
     }
 
     public void attachIconToBottomBar(final View view) {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ATTACH_TO_EXT_POINT,
+        DefaultDispatcher.getInstance().fire(PlatformEvents.ATTACH_TO_EXT_POINT,
                 UIExtensionPoint.CONTENT_BOTTOM_ICONBAR, view);
     }
 

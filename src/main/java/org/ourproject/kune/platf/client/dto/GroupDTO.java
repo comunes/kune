@@ -135,7 +135,6 @@ public class GroupDTO implements IsSerializable {
         result = prime * result + (publicDesc == null ? 0 : publicDesc.hashCode());
         result = prime * result + (shortName == null ? 0 : shortName.hashCode());
         result = prime * result + (type == null ? 0 : type.hashCode());
-        ;
         return result;
     }
 

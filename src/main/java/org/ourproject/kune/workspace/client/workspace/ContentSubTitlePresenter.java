@@ -20,9 +20,9 @@
 package org.ourproject.kune.workspace.client.workspace;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.services.Kune;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public class ContentSubTitlePresenter implements ContentSubTitleComponent {
 

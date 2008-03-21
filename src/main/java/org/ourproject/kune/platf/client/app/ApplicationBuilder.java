@@ -25,14 +25,14 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import org.ourproject.kune.app.client.HelloWorldPlugin;
-import org.ourproject.kune.app.client.PluginManager;
 import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.Services;
-import org.ourproject.kune.platf.client.app.ui.UIExtensionPointManager;
 import org.ourproject.kune.platf.client.dispatch.ActionEvent;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
+import org.ourproject.kune.platf.client.extend.HelloWorldPlugin;
+import org.ourproject.kune.platf.client.extend.PluginManager;
+import org.ourproject.kune.platf.client.extend.UIExtensionPointManager;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;

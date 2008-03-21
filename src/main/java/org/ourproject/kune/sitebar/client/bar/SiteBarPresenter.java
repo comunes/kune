@@ -23,6 +23,7 @@ package org.ourproject.kune.sitebar.client.bar;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.GroupListDTO;
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.SessionExpiredException;
@@ -36,7 +37,6 @@ import org.ourproject.kune.sitebar.client.login.LoginListener;
 import org.ourproject.kune.sitebar.client.rpc.UserService;
 import org.ourproject.kune.sitebar.client.rpc.UserServiceAsync;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;

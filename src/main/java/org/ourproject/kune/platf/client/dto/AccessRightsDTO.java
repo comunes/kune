@@ -65,6 +65,7 @@ public class AccessRightsDTO implements IsSerializable {
         return "[" + isAdministrable + ", " + isEditable + ", " + isVisible + "]";
     }
 
+    @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
             return true;

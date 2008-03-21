@@ -23,10 +23,10 @@ package org.ourproject.kune.blogs.client;
 import org.ourproject.kune.blogs.client.cnt.BlogContent;
 import org.ourproject.kune.blogs.client.cnt.BlogContentListener;
 import org.ourproject.kune.blogs.client.ctx.BlogContext;
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.tool.AbstractClientTool;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public class BlogClientTool extends AbstractClientTool implements BlogContentListener {
     public static final String TYPE_ROOT = "blogs.root";

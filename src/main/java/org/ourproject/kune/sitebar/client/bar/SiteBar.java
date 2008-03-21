@@ -21,8 +21,8 @@
 package org.ourproject.kune.sitebar.client.bar;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public interface SiteBar {
 

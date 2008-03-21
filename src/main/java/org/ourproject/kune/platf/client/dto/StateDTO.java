@@ -18,22 +18,11 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.dto;
+package org.ourproject.kune.platf.client.dto;
 
 import java.util.Date;
 import java.util.List;
 
-import org.ourproject.kune.platf.client.dto.AccessListsDTO;
-import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
-import org.ourproject.kune.platf.client.dto.ContainerDTO;
-import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
-import org.ourproject.kune.platf.client.dto.LicenseDTO;
-import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
-import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.dto.TagResultDTO;
-import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 

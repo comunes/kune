@@ -17,7 +17,7 @@
  *
  */
 
-package org.ourproject.kune.platf.client.app.ui;
+package org.ourproject.kune.platf.client.extend;
 
 import com.google.gwt.user.client.ui.CellPanel;
 

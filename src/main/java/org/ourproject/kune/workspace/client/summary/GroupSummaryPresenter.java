@@ -21,7 +21,7 @@ package org.ourproject.kune.workspace.client.summary;
 
 import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.workspace.client.workspace.GroupSummaryComponent;
 
 public class GroupSummaryPresenter extends AbstractPresenter implements GroupSummaryComponent {

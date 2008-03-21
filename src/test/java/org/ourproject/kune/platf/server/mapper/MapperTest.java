@@ -17,6 +17,7 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.GroupListDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.server.TestDomainHelper;
 import org.ourproject.kune.platf.server.TestHelper;
 import org.ourproject.kune.platf.server.access.AccessRights;
@@ -29,7 +30,6 @@ import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.Revision;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.state.State;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.inject.Inject;
 

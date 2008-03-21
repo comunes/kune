@@ -56,6 +56,7 @@ public class StateToken implements IsSerializable {
         return encoded;
     }
 
+    @Override
     public int hashCode() {
         return getEncoded().hashCode();
     }

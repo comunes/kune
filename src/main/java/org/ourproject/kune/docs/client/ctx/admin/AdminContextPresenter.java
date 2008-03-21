@@ -29,8 +29,8 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public class AdminContextPresenter extends AbstractPresenter implements AdminContext {
 

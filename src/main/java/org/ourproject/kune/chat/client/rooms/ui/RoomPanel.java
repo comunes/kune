@@ -19,7 +19,6 @@
 
 package org.ourproject.kune.chat.client.rooms.ui;
 
-import org.ourproject.kune.chat.client.ChatTextFormatter;
 import org.ourproject.kune.chat.client.rooms.RoomPresenter;
 import org.ourproject.kune.chat.client.rooms.RoomView;
 import org.ourproject.kune.platf.client.ui.HorizontalLine;
@@ -82,6 +81,6 @@ public class RoomPanel extends Panel implements RoomView {
     private void addWidget(final Widget widget) {
         vp.add(widget);
         widget.addStyleName("kune-RoomPanel-Message");
-        scrollDown();
+        DOM.setElementPropertyInt(DOM.getParent(this.getElement()), "scrollTop", vp.getOffsetHeight());
     }
 }

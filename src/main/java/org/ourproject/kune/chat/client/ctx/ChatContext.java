@@ -20,8 +20,8 @@
 
 package org.ourproject.kune.chat.client.ctx;
 
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public interface ChatContext extends WorkspaceComponent {
 

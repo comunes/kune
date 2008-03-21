@@ -1,8 +1,7 @@
-package org.ourproject.kune.app.client;
+package org.ourproject.kune.platf.client.extend;
 
+import org.ourproject.kune.platf.client.PlatformEvents;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.app.ui.UIExtensionPoint;
-import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -22,14 +21,14 @@ public class HelloWorldPlugin extends Plugin {
         HelloWorldPanel panel = new HelloWorldPanel(helloWorld);
         helloWorld.init(panel);
 
-        getDisplacher().fire(WorkspaceEvents.ATTACH_TO_EXT_POINT, UIExtensionPoint.CONTENT_BOTTOM_ICONBAR,
+        getDisplacher().fire(PlatformEvents.ATTACH_TO_EXT_POINT, UIExtensionPoint.CONTENT_BOTTOM_ICONBAR,
                 helloWorld.getView());
 
     }
 
     @Override
     protected void stop() {
-        getDisplacher().fire(WorkspaceEvents.DETACH_FROM_EXT_POINT, UIExtensionPoint.CONTENT_BOTTOM_ICONBAR,
+        getDisplacher().fire(PlatformEvents.DETACH_FROM_EXT_POINT, UIExtensionPoint.CONTENT_BOTTOM_ICONBAR,
                 helloWorld.getView());
 
     }

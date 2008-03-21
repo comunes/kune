@@ -21,7 +21,7 @@
 package org.ourproject.kune.workspace.client.workspace.ui;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.app.ui.UIExtensionPoint;
+import org.ourproject.kune.platf.client.extend.UIExtensionPoint;
 import org.ourproject.kune.platf.client.services.ColorTheme;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.services.Kune;

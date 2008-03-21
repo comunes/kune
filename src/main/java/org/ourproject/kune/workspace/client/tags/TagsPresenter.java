@@ -23,11 +23,11 @@ import java.util.List;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.TagResultDTO;
 import org.ourproject.kune.platf.client.search.SearchSiteView;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
 import org.ourproject.kune.workspace.client.workspace.TagsComponent;
 
 public class TagsPresenter implements TagsComponent {

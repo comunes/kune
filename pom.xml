@@ -3,10 +3,12 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.ourproject.kune</groupId>
   <artifactId>org.ourproject.kune</artifactId>
+  <packaging>jar</packaging>
   <version>0.0.1</version>
   <description>kune free/open/libre collaboration platform</description>
   <name>Kune</name>
   <url>http://kune.ourproject.org</url>
+
   <dependencies>
     <!-- guice -->
     <dependency>
@@ -37,8 +39,8 @@
       <artifactId>gwt-servlet</artifactId>
       <version>0.0.2030</version>
     </dependency>
-		<!-- Use new repo -->
-		<!-- http://code.google.com/p/gwt-ext/issues/detail?id=180 -->
+    <!-- Use new repo -->
+    <!-- http://code.google.com/p/gwt-ext/issues/detail?id=180 -->
     <dependency>
       <groupId>com.gwtext</groupId>
       <artifactId>gwt-ext</artifactId>
@@ -350,8 +352,63 @@
           </execution>
         </executions>
       </plugin>
-
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.2</version>
+        <executions>
+          <execution>
+            <id>core</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <configuration>
+              <classifier>core</classifier>
+              <includes>
+<!--                <include>**/Kune-Platform.gwt.xml**</include>
+                <include>**/platf/client/extend/**</include>
+                <include>**/platf/client/app/**</include>
+                <include>**/platf/client/dispatch/**</include>
+                <include>**/platf/client/*java</include>
+                <include>**/I18nTranslationService**</include>
+                <include>**/Dispatcher.**</include>
+                <include>**/Services.**</include>
+                <include>**/Plugin.**</include>
+                <include>**/PlatformEvents.**</include>
+                <include>**/BasicDialog.**</include>
+                <include>**/HorizontalLine.**</include>
+                <include>**/IconLabel.**</include>
+                <include>**/KuneStringUtils.**</include>
+                <include>**/View.**</include> -->
+                <include>**/platf/**</include>
+              </includes>
+            </configuration>
+          </execution>
+          <execution>
+            <id>helloworldplugin</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <configuration>
+              <classifier>helloworldplugin</classifier>
+              <includes>
+                <include>**/HelloWorld*</include>
+              </includes>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+            </resource>            
+        </resources>     
   </build>
 
   <reporting>

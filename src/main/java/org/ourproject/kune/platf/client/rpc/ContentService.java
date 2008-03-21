@@ -24,9 +24,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.TagResultDTO;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;

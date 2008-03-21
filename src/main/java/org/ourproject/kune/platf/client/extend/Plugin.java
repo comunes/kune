@@ -1,7 +1,6 @@
-package org.ourproject.kune.app.client;
+package org.ourproject.kune.platf.client.extend;
 
 import org.ourproject.kune.platf.client.Services;
-import org.ourproject.kune.platf.client.app.ui.UIExtensionPointManager;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;

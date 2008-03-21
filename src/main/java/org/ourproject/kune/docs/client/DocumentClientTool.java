@@ -23,10 +23,10 @@ package org.ourproject.kune.docs.client;
 import org.ourproject.kune.docs.client.cnt.DocumentContent;
 import org.ourproject.kune.docs.client.cnt.DocumentContentListener;
 import org.ourproject.kune.docs.client.ctx.DocumentContext;
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.tool.AbstractClientTool;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public class DocumentClientTool extends AbstractClientTool implements DocumentContentListener {
     public static final String TYPE_ROOT = "docs.root";

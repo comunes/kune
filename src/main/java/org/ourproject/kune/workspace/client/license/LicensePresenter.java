@@ -21,7 +21,7 @@ package org.ourproject.kune.workspace.client.license;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateDTO;
 
 public class LicensePresenter implements LicenseComponent {
 

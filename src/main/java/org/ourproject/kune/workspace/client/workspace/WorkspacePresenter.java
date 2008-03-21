@@ -24,10 +24,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.app.ui.UIExtensionPoint;
-import org.ourproject.kune.platf.client.app.ui.UIExtensionPointManager;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.extend.UIExtensionPoint;
+import org.ourproject.kune.platf.client.extend.UIExtensionPointManager;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;

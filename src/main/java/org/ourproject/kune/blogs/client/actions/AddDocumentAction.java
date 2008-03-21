@@ -22,14 +22,11 @@ package org.ourproject.kune.blogs.client.actions;
 
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
-import org.ourproject.kune.platf.client.dto.ContainerDTO;
 
 public class AddDocumentAction implements Action {
     public void execute(final Object value, final Object extra, final Services services) {
-        addDocument(services, (String) value, services.session.getCurrentState().getFolder());
+        // addDocument(services, (String) value,
+        // services.session.getCurrentState().getFolder());
     }
 
-    private void addDocument(final Services services, final String name, final ContainerDTO containerDTO) {
-
-    }
 }

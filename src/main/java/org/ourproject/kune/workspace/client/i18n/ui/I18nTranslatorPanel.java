@@ -23,6 +23,7 @@ import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.AbstractSearcherPanel;
+import org.ourproject.kune.platf.client.ui.BottomTrayIcon;
 import org.ourproject.kune.platf.client.ui.KuneStringUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
 import org.ourproject.kune.sitebar.client.Site;
@@ -30,7 +31,6 @@ import org.ourproject.kune.workspace.client.WorkspaceFactory;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPresenter;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorView;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelectorComponent;
-import org.ourproject.kune.workspace.client.workspace.ui.BottomTrayIcon;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.Frame;

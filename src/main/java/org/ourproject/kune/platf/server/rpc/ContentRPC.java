@@ -28,6 +28,7 @@ import javax.persistence.NoResultException;
 import org.ourproject.kune.chat.server.managers.ChatConnection;
 import org.ourproject.kune.chat.server.managers.XmppManager;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.TagResultDTO;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
@@ -54,7 +55,6 @@ import org.ourproject.kune.platf.server.manager.TagManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.platf.server.state.State;
 import org.ourproject.kune.platf.server.state.StateService;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;

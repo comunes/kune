@@ -17,9 +17,8 @@
  *
  */
 
-package org.ourproject.kune.chat.client;
+package org.ourproject.kune.chat.client.rooms.ui;
 
-import org.ourproject.kune.chat.client.rooms.ui.RoomImages;
 import org.ourproject.kune.platf.client.ui.KuneStringUtils;
 
 import com.google.gwt.user.client.ui.HTML;

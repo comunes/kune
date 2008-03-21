@@ -32,10 +32,10 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.ui.BottomTrayIcon;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.socialnet.EntityLiveSearchListener;
-import org.ourproject.kune.workspace.client.workspace.ui.BottomTrayIcon;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.client.Command;

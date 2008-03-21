@@ -27,7 +27,7 @@ class ChatToolComponents {
     private ChatContent content;
     private ChatContext context;
 
-    public ChatToolComponents(final ChatProvider provider) {
+    public ChatToolComponents() {
     }
 
     public ChatContent getContent() {

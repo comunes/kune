@@ -20,10 +20,10 @@
 
 package org.ourproject.kune.chat.client;
 
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.tool.AbstractClientTool;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public class ChatClientTool extends AbstractClientTool implements ChatProvider {
     public static final String NAME = "chats";
@@ -36,7 +36,7 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
 
     public ChatClientTool() {
         super(Kune.I18N.t("chat rooms"));
-        components = new ChatToolComponents(this);
+        components = new ChatToolComponents();
     }
 
     public ChatEngine getChat() {

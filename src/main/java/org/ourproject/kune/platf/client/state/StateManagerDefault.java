@@ -26,12 +26,12 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 public class StateManagerDefault implements StateManager {

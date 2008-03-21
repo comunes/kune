@@ -26,13 +26,14 @@ import org.ourproject.kune.blogs.client.cnt.folder.viewer.FolderViewer;
 import org.ourproject.kune.blogs.client.cnt.reader.BlogReader;
 import org.ourproject.kune.blogs.client.cnt.reader.BlogReaderControl;
 import org.ourproject.kune.blogs.client.cnt.reader.BlogReaderListener;
+import org.ourproject.kune.platf.client.PlatformEvents;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.app.ui.UIExtensionPoint;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
+import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.extend.UIExtensionPoint;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.editor.TextEditorListener;
 
@@ -75,9 +76,9 @@ public class BlogContentPresenter implements BlogContent, BlogReaderListener, Te
                             TextEditor editor = components.getDocumentEditor();
                             editor.setContent(content.getContent());
                             view.show(editor.getView());
-                            DefaultDispatcher.getInstance().fire(WorkspaceEvents.CLEAR_EXT_POINT,
+                            DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXT_POINT,
                                     UIExtensionPoint.CONTENT_TOOLBAR_LEFT, null);
-                            DefaultDispatcher.getInstance().fire(WorkspaceEvents.ATTACH_TO_EXT_POINT,
+                            DefaultDispatcher.getInstance().fire(PlatformEvents.ATTACH_TO_EXT_POINT,
                                     UIExtensionPoint.CONTENT_TOOLBAR_LEFT, editor.getToolBar());
                         } else {
                             FolderEditor editor = components.getFolderEditor();
@@ -125,16 +126,16 @@ public class BlogContentPresenter implements BlogContent, BlogReaderListener, Te
             reader.showDocument(content.getContent());
             components.getDocumentEditor().reset();
             readerControl.setRights(content.getContentRights());
-            DefaultDispatcher.getInstance().fire(WorkspaceEvents.CLEAR_EXT_POINT,
-                    UIExtensionPoint.CONTENT_TOOLBAR_LEFT, null);
-            DefaultDispatcher.getInstance().fire(WorkspaceEvents.ATTACH_TO_EXT_POINT,
+            DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXT_POINT, UIExtensionPoint.CONTENT_TOOLBAR_LEFT,
+                    null);
+            DefaultDispatcher.getInstance().fire(PlatformEvents.ATTACH_TO_EXT_POINT,
                     UIExtensionPoint.CONTENT_TOOLBAR_LEFT, readerControl.getView());
             view.show(reader.getView());
         } else {
             FolderViewer viewer = components.getFolderViewer();
             viewer.setFolder(content.getFolder());
-            DefaultDispatcher.getInstance().fire(WorkspaceEvents.CLEAR_EXT_POINT,
-                    UIExtensionPoint.CONTENT_TOOLBAR_LEFT, null);
+            DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXT_POINT, UIExtensionPoint.CONTENT_TOOLBAR_LEFT,
+                    null);
             view.show(viewer.getView());
         }
     }

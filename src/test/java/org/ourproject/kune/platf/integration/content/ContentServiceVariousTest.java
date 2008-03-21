@@ -7,12 +7,12 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.TagResultDTO;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 

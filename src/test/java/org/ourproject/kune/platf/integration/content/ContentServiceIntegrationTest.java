@@ -1,9 +1,9 @@
 package org.ourproject.kune.platf.integration.content;
 
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.integration.IntegrationTest;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;

@@ -21,7 +21,7 @@ package org.ourproject.kune.workspace.client.workspace.ui;
 
 import java.util.HashMap;
 
-import org.ourproject.kune.platf.client.app.ui.UIExtensionPoint;
+import org.ourproject.kune.platf.client.extend.UIExtensionPoint;
 import org.ourproject.kune.workspace.client.workspace.ContentToolBarPresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentToolBarView;
 

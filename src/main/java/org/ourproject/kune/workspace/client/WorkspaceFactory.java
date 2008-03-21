@@ -22,7 +22,7 @@ package org.ourproject.kune.workspace.client;
 
 import org.ourproject.kune.platf.client.app.DesktopView;
 import org.ourproject.kune.platf.client.app.ui.DesktopPanel;
-import org.ourproject.kune.platf.client.app.ui.UIExtensionPointManager;
+import org.ourproject.kune.platf.client.extend.UIExtensionPointManager;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.sitebar.client.bar.SiteBarListener;
 import org.ourproject.kune.workspace.client.editor.TextEditor;

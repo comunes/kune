@@ -1,4 +1,4 @@
-package org.ourproject.kune.platf.client.app.ui;
+package org.ourproject.kune.platf.client.extend;
 
 import java.util.HashMap;
 

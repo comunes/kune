@@ -1,17 +1,19 @@
 <module>
   <inherits name='com.google.gwt.i18n.I18N' />
-
   <inherits name='com.google.gwt.user.User' />
-  <inherits name='com.gwtext.GwtExt' />
+
   <inherits name='org.ourproject.kune.platf.Kune-Platform' />
+  <inherits name='org.ourproject.kune.sitebar.Kune-Sitebar' />
   <inherits name='org.ourproject.kune.docs.Kune-Docs' />
   <inherits name='org.ourproject.kune.chat.Kune-Chat' />
   <inherits name='org.ourproject.kune.blogs.Kune-Blogs' />
+  <script src="js/colorthemes.js" />
 
+  <inherits name='com.gwtext.GwtExt' />
+  <script src="js/ext/adapter/ext/ext-base.js" />
+  <script src="js/ext/ext-all.js" />
 
-  <!-- <inherits name='to.tipit.GWTlib' /> -->
   <inherits name="com.allen_sauer.gwt.log.gwt-log" />
-
   <!--
     The default log level is `OFF`. In development you'll usually want
     to switch to `DEBUG` level logging.
@@ -45,11 +47,6 @@
   <entry-point class='org.ourproject.kune.app.client.KuneEntryPoint' />
 
   <!-- <script src="js/ext/ext-custom.js" /> -->
-
-  <script src="js/ext/adapter/ext/ext-base.js" />
-  <script src="js/ext/ext-all.js" />
-
-  <script src="js/colorthemes.js" />
 
   <!--http://code.google.com/p/google-web-toolkit/issues/detail?id=42 -->
 

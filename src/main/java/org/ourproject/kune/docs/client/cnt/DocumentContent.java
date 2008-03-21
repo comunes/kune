@@ -20,8 +20,8 @@
 
 package org.ourproject.kune.docs.client.cnt;
 
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 public interface DocumentContent extends WorkspaceComponent {
 

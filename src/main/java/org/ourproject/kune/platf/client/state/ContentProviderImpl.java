@@ -22,10 +22,10 @@ package org.ourproject.kune.platf.client.state;
 
 import java.util.HashMap;
 
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.sitebar.client.Site;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 

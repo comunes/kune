@@ -29,9 +29,9 @@ import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
 import org.ourproject.kune.workspace.client.workspace.GroupMembersComponent;
 
 public class GroupMembersPresenter extends AbstractPresenter implements GroupMembersComponent, EntityLiveSearchListener {

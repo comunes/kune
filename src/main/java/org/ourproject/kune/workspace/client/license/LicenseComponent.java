@@ -20,7 +20,7 @@
 package org.ourproject.kune.workspace.client.license;
 
 import org.ourproject.kune.platf.client.Component;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateDTO;
 
 public interface LicenseComponent extends Component {
 

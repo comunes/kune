@@ -28,9 +28,9 @@ import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
-import org.ourproject.kune.workspace.client.dto.StateDTO;
 import org.ourproject.kune.workspace.client.workspace.ParticipationComponent;
 
 public class ParticipationPresenter extends AbstractPresenter implements ParticipationComponent {
