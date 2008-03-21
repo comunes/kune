@@ -46,10 +46,6 @@ public interface ContentService extends RemoteService {
             }
             return instance;
         }
-
-        public static void setMock(final ContentServiceMocked mock) {
-            instance = mock;
-        }
     }
 
     void addAuthor(String userHash, String groupShortName, String documentId, String authorShortName)

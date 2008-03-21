@@ -21,7 +21,7 @@
 package org.ourproject.kune.platf.client.ui.dialogs;
 
 import org.ourproject.kune.platf.client.ui.CustomButton;
-import org.ourproject.kune.workspace.client.ui.form.FormListener;
+import org.ourproject.kune.platf.client.ui.form.FormListener;
 
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Widget;

@@ -43,7 +43,7 @@ import org.ourproject.kune.platf.client.state.SessionImpl;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.state.StateManagerDefault;
 import org.ourproject.kune.platf.client.tool.ClientTool;
-import org.ourproject.kune.sitebar.client.Site;
+import org.ourproject.kune.workspace.client.sitebar.Site;
 
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;

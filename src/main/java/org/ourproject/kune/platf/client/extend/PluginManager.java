@@ -20,7 +20,7 @@ public class PluginManager {
             throw new RuntimeException("Plugin with this name already installed");
         }
         plugins.put(name, plugin);
-        plugin.init(services);
+        plugin.init(services.extensionPointManager, services.i18n);
         plugin.start();
     }
 

@@ -1,14 +1,12 @@
 package org.ourproject.kune.platf.client.extend;
 
-import org.ourproject.kune.platf.client.Services;
-import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.platf.client.state.Session;
 
 public abstract class Plugin {
     private String name;
     private final boolean started;
-    private Services services;
+    private UIExtensionPointManager extensionPointManager;
+    private I18nTranslationService i18n;
 
     public Plugin(final String name) {
         this.name = name;
@@ -16,28 +14,26 @@ public abstract class Plugin {
         // InitDataDTO...
     }
 
-    protected void init(final Services services) {
-        this.services = services;
+    protected void init(final UIExtensionPointManager extensionPointManager, final I18nTranslationService i18n) {
+        this.extensionPointManager = extensionPointManager;
+        this.i18n = i18n;
     }
 
     public final boolean isActive() {
         return started;
     }
 
-    public final Dispatcher getDisplacher() {
-        return services.dispatcher;
-    }
+    //
+    // public final Dispatcher getDisplacher() {
+    // return dispatcher;
+    // }
 
     public final I18nTranslationService getI18n() {
-        return services.i18n;
-    }
-
-    public Session getSession() {
-        return services.session;
+        return i18n;
     }
 
     public UIExtensionPointManager getExtensionPointManager() {
-        return services.extensionPointManager;
+        return extensionPointManager;
     }
 
     public String getName() {

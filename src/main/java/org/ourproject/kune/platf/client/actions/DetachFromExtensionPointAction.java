@@ -1,5 +1,4 @@
 /*
- *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -18,15 +17,19 @@
  *
  */
 
-package org.ourproject.kune.platf.client.license;
+package org.ourproject.kune.platf.client.actions;
 
+import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.LicenseDTO;
+import org.ourproject.kune.platf.client.dispatch.Action;
 
-public interface LicenseChoose {
+public class DetachFromExtensionPointAction implements Action {
 
-    View getView();
+    public void execute(final Object value, final Object extra, final Services services) {
+        onDetachAction(services, (String) value, (View) extra);
+    }
 
-    LicenseDTO getLicense();
-
+    private void onDetachAction(final Services services, final String id, final View view) {
+        services.app.getWorkspace().detachFromExtensionPoint(id, view);
+    }
 }

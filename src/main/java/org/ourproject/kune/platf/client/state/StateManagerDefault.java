@@ -30,8 +30,8 @@ import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.tool.ClientTool;
-import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
+import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 public class StateManagerDefault implements StateManager {

@@ -58,6 +58,11 @@ public interface Images extends ImageBundle {
     AbstractImagePrototype alert();
 
     /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/anybody.png
+     */
+    AbstractImagePrototype anybody();
+
+    /**
      * @gwt.resource org/ourproject/kune/platf/public/images/arrow-down-black.gif
      */
     AbstractImagePrototype arrowDownBlack();
@@ -413,9 +418,24 @@ public interface Images extends ImageBundle {
     AbstractImagePrototype copyleft();
 
     /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/cross-dark.png
+     */
+    AbstractImagePrototype crossDark();
+
+    /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/cross.png
+     */
+    AbstractImagePrototype cross();
+
+    /**
      * @gwt.resource org/ourproject/kune/platf/public/images/del.png
      */
     AbstractImagePrototype del();
+
+    /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/emblem-important.png
+     */
+    AbstractImagePrototype emblemImportant();
 
     /**
      * @gwt.resource org/ourproject/kune/platf/public/images/error.png
@@ -433,6 +453,11 @@ public interface Images extends ImageBundle {
     AbstractImagePrototype fullscreen();
 
     /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/gnu-fdl.gif
+     */
+    AbstractImagePrototype gnuFdl();
+
+    /**
      * @gwt.resource org/ourproject/kune/platf/public/images/group-def-icon.png
      */
     AbstractImagePrototype groupDefIcon();
@@ -448,14 +473,14 @@ public interface Images extends ImageBundle {
     AbstractImagePrototype important();
 
     /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/info.png
-     */
-    AbstractImagePrototype info();
-
-    /**
      * @gwt.resource org/ourproject/kune/platf/public/images/info-light.png
      */
     AbstractImagePrototype infoLight();
+
+    /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/info.png
+     */
+    AbstractImagePrototype info();
 
     /**
      * @gwt.resource org/ourproject/kune/platf/public/images/kune-close.png
@@ -508,14 +533,14 @@ public interface Images extends ImageBundle {
     AbstractImagePrototype nobody();
 
     /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/nt.png
-     */
-    AbstractImagePrototype noteForTranslators();
-
-    /**
      * @gwt.resource org/ourproject/kune/platf/public/images/no-copyleft.png
      */
     AbstractImagePrototype noCopyleft();
+
+    /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/nt.png
+     */
+    AbstractImagePrototype nt();
 
     /**
      * @gwt.resource org/ourproject/kune/platf/public/images/opentriangle.gif
@@ -541,6 +566,11 @@ public interface Images extends ImageBundle {
      * @gwt.resource org/ourproject/kune/platf/public/images/search-ico.png
      */
     AbstractImagePrototype searchIco();
+
+    /**
+     * @gwt.resource org/ourproject/kune/platf/public/images/spin-kune-thund-green.gif
+     */
+    AbstractImagePrototype spinKuneThundGreen();
 
     /**
      * @gwt.resource org/ourproject/kune/platf/public/images/splitter-vert-bar.gif

@@ -29,11 +29,11 @@ public interface Application {
 
     ClientTool getTool(String toolName);
 
-    Workspace getWorkspace();
-
     Dispatcher getDispatcher();
 
     StateManager getStateManager();
+
+    Workspace getWorkspace();
 
     /**
      * Communicates to every tool the current group

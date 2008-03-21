@@ -63,9 +63,9 @@ public class RateItPanel extends Composite implements ClickListener, RateItView 
                 }
 
                 public void onMouseEnter(final Widget sender) {
-                    for (int i = 0; i < 5; i++) {
-                        if (sender == starImg[i]) {
-                            presenter.starOver(i);
+                    for (int j = 0; j < 5; j++) {
+                        if (sender == starImg[j]) {
+                            presenter.starOver(j);
                         }
                     }
 

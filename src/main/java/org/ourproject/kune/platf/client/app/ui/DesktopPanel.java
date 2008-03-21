@@ -22,10 +22,10 @@ package org.ourproject.kune.platf.client.app.ui;
 
 import org.ourproject.kune.platf.client.app.DesktopView;
 import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.sitebar.client.SiteBarFactory;
-import org.ourproject.kune.sitebar.client.bar.SiteBar;
-import org.ourproject.kune.sitebar.client.bar.SiteBarListener;
-import org.ourproject.kune.sitebar.client.msg.SiteMessage;
+import org.ourproject.kune.workspace.client.sitebar.SiteBarFactory;
+import org.ourproject.kune.workspace.client.sitebar.bar.SiteBar;
+import org.ourproject.kune.workspace.client.sitebar.bar.SiteBarListener;
+import org.ourproject.kune.workspace.client.sitebar.msg.SiteMessage;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 import com.google.gwt.user.client.Window;

@@ -1,5 +1,4 @@
 /*
- *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -18,29 +17,18 @@
  *
  */
 
-package org.ourproject.kune.platf.client.license;
+package org.ourproject.kune.platf.client.actions;
 
-import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.Services;
+import org.ourproject.kune.platf.client.dispatch.Action;
 
-public interface LicenseChooseView extends View {
+public class ClearExtensionPointAction implements Action {
 
-    boolean isCCselected();
+    public void execute(final Object value, final Object extra, final Services services) {
+        onClearAction(services, (String) value);
+    }
 
-    boolean isAllowModif();
-
-    boolean isAllowModifShareAlike();
-
-    int getSelectedNonCCLicenseIndex();
-
-    boolean permitComercial();
-
-    void reset();
-
-    void showNotCCoptions();
-
-    void showCCoptions();
-
-    void showIsCopyleft();
-
-    void showIsNotCopyleft();
+    private void onClearAction(final Services services, final String id) {
+        services.app.getWorkspace().clearExtensionPoint(id);
+    }
 }

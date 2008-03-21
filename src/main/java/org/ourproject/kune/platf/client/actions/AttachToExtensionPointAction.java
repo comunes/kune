@@ -17,12 +17,19 @@
  *
  */
 
-package org.ourproject.kune.platf.client;
+package org.ourproject.kune.platf.client.actions;
 
-public interface PlatformEvents {
-    public static final String ATTACH_TO_EXT_POINT = "ws.AttachToExtensionPoint";
-    public static final String DETACH_FROM_EXT_POINT = "ws.DetachToExtensionPoint";
-    public static final String CLEAR_EXT_POINT = "ws.ClearExtensionPoint";
-    public static final String GOTO = "ws.Goto";
-    public static final String GOTO_CONTAINER = "ws.GotoContainer";
+import org.ourproject.kune.platf.client.Services;
+import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dispatch.Action;
+
+public class AttachToExtensionPointAction implements Action {
+
+    public void execute(final Object value, final Object extra, final Services services) {
+        onAttachAction(services, (String) value, (View) extra);
+    }
+
+    private void onAttachAction(final Services services, final String id, final View view) {
+        services.app.getWorkspace().attachToExtensionPoint(id, view);
+    }
 }

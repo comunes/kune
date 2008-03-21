@@ -17,19 +17,19 @@
  *
  */
 
-package org.ourproject.kune.platf.client.search;
+package org.ourproject.kune.platf.client.actions;
 
-import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.Services;
+import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.dto.StateToken;
 
-public interface SearchSiteView extends View {
+public class GotoAction implements Action {
 
-    public static final int GROUP_USER_SEARCH = 1;
-    public static final int CONTENT_SEARCH = 2;
+    public void execute(final Object value, final Object extra, final Services services) {
+        onGoto(services, (String) value);
+    }
 
-    void search(String text, int currentSearch);
-
-    String getComboTextToSearch();
-
-    void hide();
-
+    private void onGoto(final Services services, final String token) {
+        services.stateManager.setState(new StateToken(token));
+    }
 }

@@ -17,16 +17,22 @@
  *
  */
 
-package org.ourproject.kune.platf.client.search;
+package org.ourproject.kune.platf.client.actions;
 
-import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.Services;
+import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.dto.StateToken;
 
-public interface SearchSite {
+public class GotoContainerAction implements Action {
 
-    public View getView();
+    public void execute(final Object value, final Object extra, final Services services) {
+        onGoto(services, (Long) value);
+    }
 
-    public void doSearch(String termToSearch);
-
-    public void doSearchOfType(String termToSearch, int type);
-
+    private void onGoto(final Services services, final Long folderId) {
+        StateToken newStateToken = services.session.getCurrentState().getStateToken();
+        newStateToken.setDocument(null);
+        newStateToken.setFolder(folderId.toString());
+        services.stateManager.setState(newStateToken);
+    }
 }

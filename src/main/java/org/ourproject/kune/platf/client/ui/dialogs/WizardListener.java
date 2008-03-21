@@ -18,12 +18,18 @@
  *
  */
 
-package org.ourproject.kune.platf.client.newgroup;
+package org.ourproject.kune.platf.client.ui.dialogs;
 
-import org.ourproject.kune.platf.client.View;
+public interface WizardListener {
 
-public interface NewGroup {
+    void onBack();
 
-    public View getView();
+    void onNext();
+
+    void onFinish();
+
+    void onCancel();
+
+    void onClose();
 
 }

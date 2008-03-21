@@ -20,6 +20,8 @@
 
 package org.ourproject.kune.platf.client.services;
 
+import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+
 public class Kune {
     private static Kune instance;
     public static final I18nUITranslationService I18N = I18nUITranslationService.getInstance();

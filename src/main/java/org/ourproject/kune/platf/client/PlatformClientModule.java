@@ -20,16 +20,20 @@
 
 package org.ourproject.kune.platf.client;
 
+import org.ourproject.kune.platf.client.actions.AttachToExtensionPointAction;
+import org.ourproject.kune.platf.client.actions.ClearExtensionPointAction;
+import org.ourproject.kune.platf.client.actions.DetachFromExtensionPointAction;
+import org.ourproject.kune.platf.client.actions.GotoAction;
+import org.ourproject.kune.platf.client.actions.GotoContainerAction;
 import org.ourproject.kune.platf.client.extend.ClientModule;
 import org.ourproject.kune.platf.client.extend.Register;
-import org.ourproject.kune.workspace.client.actions.AttachToExtensionPointAction;
-import org.ourproject.kune.workspace.client.actions.ClearExtensionPointAction;
-import org.ourproject.kune.workspace.client.actions.DetachFromExtensionPointAction;
 
 public class PlatformClientModule implements ClientModule {
     public void configure(final Register register) {
         register.addAction(PlatformEvents.ATTACH_TO_EXT_POINT, new AttachToExtensionPointAction());
         register.addAction(PlatformEvents.DETACH_FROM_EXT_POINT, new DetachFromExtensionPointAction());
         register.addAction(PlatformEvents.CLEAR_EXT_POINT, new ClearExtensionPointAction());
+        register.addAction(PlatformEvents.GOTO, new GotoAction());
+        register.addAction(PlatformEvents.GOTO_CONTAINER, new GotoContainerAction());
     }
 }

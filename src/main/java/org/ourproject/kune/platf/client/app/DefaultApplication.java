@@ -30,9 +30,9 @@ import org.ourproject.kune.platf.client.extend.UIExtensionPointManager;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.tool.ClientTool;
-import org.ourproject.kune.sitebar.client.bar.SiteBarListener;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.WorkspaceFactory;
+import org.ourproject.kune.workspace.client.sitebar.bar.SiteBarListener;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 public class DefaultApplication implements Application {
