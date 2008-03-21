@@ -19,16 +19,17 @@
 
 package org.ourproject.kune.workspace.client.socialnet.ui;
 
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.AbstractPresenter;
+import org.ourproject.kune.platf.client.PlatformEvents;
 import org.ourproject.kune.platf.client.services.Images;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.UIConstants;
 import org.ourproject.kune.platf.client.ui.stacks.StackSubItemAction;
 import org.ourproject.kune.platf.client.ui.stacks.StackedDropDownPanel;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
+import org.ourproject.kune.workspace.client.socialnet.GroupMembersView;
 import org.ourproject.kune.workspace.client.socialnet.MemberAction;
 import org.ourproject.kune.workspace.client.socialnet.ParticipationView;
-import org.ourproject.kune.workspace.client.socialnet.GroupMembersView;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
@@ -76,7 +77,7 @@ public class ParticipationPanel extends StackedDropDownPanel implements Particip
         if (event == WorkspaceEvents.UNJOIN_GROUP) {
             return img.del();
         }
-        if (event == WorkspaceEvents.GOTO) {
+        if (event == PlatformEvents.GOTO) {
             return img.groupHome();
         }
         throw new IndexOutOfBoundsException("Event unknown in ParticipationPanel");

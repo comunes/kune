@@ -19,6 +19,7 @@
 
 package org.ourproject.kune.workspace.client.socialnet.ui;
 
+import org.ourproject.kune.platf.client.PlatformEvents;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.UIConstants;
@@ -127,7 +128,7 @@ public class GroupMembersPanel extends StackedDropDownPanel implements GroupMemb
         if (event == WorkspaceEvents.DEL_MEMBER) {
             return img.del();
         }
-        if (event == WorkspaceEvents.GOTO) {
+        if (event == PlatformEvents.GOTO) {
             return img.groupHome();
         }
         if (event == WorkspaceEvents.SET_ADMIN_AS_COLLAB) {

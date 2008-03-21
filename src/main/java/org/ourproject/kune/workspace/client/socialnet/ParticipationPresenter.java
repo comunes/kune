@@ -23,6 +23,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.AbstractPresenter;
+import org.ourproject.kune.platf.client.PlatformEvents;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
@@ -37,7 +38,7 @@ public class ParticipationPresenter extends AbstractPresenter implements Partici
     private static final String ADMIN_SUBTITLE = Kune.I18N.t("admin in:");
 
     private final static MemberAction GOTO_GROUP_COMMAND = new MemberAction(Kune.I18N.t("Visit this group homepage"),
-            WorkspaceEvents.GOTO);
+            PlatformEvents.GOTO);
 
     private ParticipationView view;
 

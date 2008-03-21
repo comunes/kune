@@ -19,13 +19,13 @@
 
 package org.ourproject.kune.workspace.client.socialnet;
 
+import org.ourproject.kune.platf.client.PlatformEvents;
 import org.ourproject.kune.platf.client.services.Kune;
-import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
 public class MemberAction {
 
     public final static MemberAction GOTO_GROUP_COMMAND = new MemberAction(Kune.I18N.t("Visit this member homepage"),
-            WorkspaceEvents.GOTO);
+            PlatformEvents.GOTO);
 
     private final String text;
     private final String action;
