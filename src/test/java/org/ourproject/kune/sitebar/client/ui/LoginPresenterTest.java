@@ -5,9 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.state.SessionImpl;
-import org.ourproject.kune.sitebar.client.login.LoginListener;
-import org.ourproject.kune.sitebar.client.login.LoginPresenter;
-import org.ourproject.kune.sitebar.client.login.LoginView;
+import org.ourproject.kune.workspace.client.sitebar.login.LoginListener;
+import org.ourproject.kune.workspace.client.sitebar.login.LoginPresenter;
+import org.ourproject.kune.workspace.client.sitebar.login.LoginView;
 
 public class LoginPresenterTest {
     private LoginPresenter presenter;

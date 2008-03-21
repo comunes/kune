@@ -3,6 +3,8 @@ package org.ourproject.kune.sitebar.client.msg;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
+import org.ourproject.kune.workspace.client.sitebar.msg.SiteMessagePresenter;
+import org.ourproject.kune.workspace.client.sitebar.msg.SiteMessageView;
 
 public class SiteMessagePresenterTest {
 

@@ -26,7 +26,7 @@ import org.ourproject.kune.platf.server.properties.DatabaseProperties;
 import org.ourproject.kune.platf.server.users.Link;
 import org.ourproject.kune.platf.server.users.UserInfo;
 import org.ourproject.kune.platf.server.users.UserInfoService;
-import org.ourproject.kune.sitebar.client.rpc.UserService;
+import org.ourproject.kune.workspace.client.sitebar.rpc.UserService;
 
 import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;

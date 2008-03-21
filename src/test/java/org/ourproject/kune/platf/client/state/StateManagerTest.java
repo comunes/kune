@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.HistoryWrapper;
-import org.ourproject.kune.sitebar.client.Site;
+import org.ourproject.kune.workspace.client.sitebar.Site;
 
 public class StateManagerTest {
 
