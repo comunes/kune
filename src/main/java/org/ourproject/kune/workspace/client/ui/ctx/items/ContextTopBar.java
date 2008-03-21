@@ -20,12 +20,12 @@
 
 package org.ourproject.kune.workspace.client.ui.ctx.items;
 
+import org.ourproject.kune.platf.client.PlatformEvents;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.ContainerSimpleDTO;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
-import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.ClickListener;
@@ -109,7 +109,7 @@ class ContextTopBar extends VerticalPanel {
             }
             pathSubmenu.addItem(indent + img.folder().getHTML() + "&nbsp;" + folderName, true, new Command() {
                 public void execute() {
-                    DefaultDispatcher.getInstance().fire(WorkspaceEvents.GOTO_CONTAINER, folder.getId(), null);
+                    DefaultDispatcher.getInstance().fire(PlatformEvents.GOTO_CONTAINER, folder.getId(), null);
                 }
             });
             indent = indent + "&nbsp&nbsp;";
