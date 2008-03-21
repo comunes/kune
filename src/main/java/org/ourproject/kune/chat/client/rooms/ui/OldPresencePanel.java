@@ -20,11 +20,11 @@
 package org.ourproject.kune.chat.client.rooms.ui;
 
 import org.ourproject.kune.platf.client.AbstractPresenter;
+import org.ourproject.kune.platf.client.PlatformEvents;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.stacks.StackSubItemAction;
 import org.ourproject.kune.platf.client.ui.stacks.StackedDropDownPanel;
-import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
@@ -67,7 +67,7 @@ public class OldPresencePanel extends StackedDropDownPanel {
 
     public void addRoster(final String name, final String category, final int status) {
         StackSubItemAction[] actions = {
-                new StackSubItemAction(img.chat(), Kune.I18N.t("Start a chat with this person"), WorkspaceEvents.GOTO),
+                new StackSubItemAction(img.chat(), Kune.I18N.t("Start a chat with this person"), PlatformEvents.GOTO),
                 StackSubItemAction.DEFAULT_VISIT_GROUP };
         super.addStackSubItem(category, getStatusIcon(status), name, getStatusText(status), actions);
     }

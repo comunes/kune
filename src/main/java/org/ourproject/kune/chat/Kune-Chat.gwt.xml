@@ -1,5 +1,5 @@
 <module>
         <inherits name='org.ourproject.kune.platf.Kune-Platform' />
         <inherits name='org.ourproject.kune.workspace.Kune-Workspace' />
-        <inherits name="com.calclab.gwtjsjac.Xmpp"/>
+        <inherits name='com.calclab.gwtjsjac.Xmpp' />
 </module>
