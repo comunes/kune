@@ -30,7 +30,7 @@ import org.ourproject.kune.platf.client.ui.DropDownPanel;
 import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
 import org.ourproject.kune.platf.client.ui.SplitterListener;
 import org.ourproject.kune.platf.client.ui.gwtcustom.CustomHorizontalSplitPanel;
-import org.ourproject.kune.workspace.client.license.ui.LicensePanel;
+import org.ourproject.kune.workspace.client.licensefoot.ui.LicensePanel;
 import org.ourproject.kune.workspace.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.workspace.client.workspace.WorkspaceUIComponents;
 import org.ourproject.kune.workspace.client.workspace.WorkspaceView;
