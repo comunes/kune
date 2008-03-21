@@ -3,7 +3,6 @@
   <inherits name='com.google.gwt.user.User' />
 
   <inherits name='org.ourproject.kune.platf.Kune-Platform' />
-  <inherits name='org.ourproject.kune.sitebar.Kune-Sitebar' />
   <inherits name='org.ourproject.kune.docs.Kune-Docs' />
   <inherits name='org.ourproject.kune.chat.Kune-Chat' />
   <inherits name='org.ourproject.kune.blogs.Kune-Blogs' />

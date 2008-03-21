@@ -29,9 +29,9 @@ import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.PlatformClientModule;
 import org.ourproject.kune.platf.client.app.ApplicationBuilder;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
-import org.ourproject.kune.platf.client.services.I18nUITranslationService;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.workspace.client.WorkspaceClientModule;
+import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.EntryPoint;

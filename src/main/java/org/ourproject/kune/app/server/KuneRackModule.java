@@ -42,7 +42,7 @@ import org.ourproject.kune.rack.filters.ListenerFilter;
 import org.ourproject.kune.rack.filters.LogFilter;
 import org.ourproject.kune.rack.filters.RedirectFilter;
 import org.ourproject.kune.rack.filters.rest.RESTServicesModule;
-import org.ourproject.kune.sitebar.client.rpc.UserService;
+import org.ourproject.kune.workspace.client.sitebar.rpc.UserService;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Module;
