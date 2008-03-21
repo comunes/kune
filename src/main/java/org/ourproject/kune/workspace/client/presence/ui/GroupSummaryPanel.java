@@ -22,7 +22,7 @@ package org.ourproject.kune.workspace.client.presence.ui;
 import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.stacks.StackedDropDownPanel;
-import org.ourproject.kune.sitebar.client.Site;
+import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.summary.GroupSummaryView;
 
 public class GroupSummaryPanel extends StackedDropDownPanel implements GroupSummaryView {
