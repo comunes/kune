@@ -33,7 +33,7 @@ import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorComponent;
-import org.ourproject.kune.workspace.client.license.LicenseComponent;
+import org.ourproject.kune.workspace.client.licensefoot.LicenseComponent;
 
 import com.google.gwt.user.client.ui.Widget;
 

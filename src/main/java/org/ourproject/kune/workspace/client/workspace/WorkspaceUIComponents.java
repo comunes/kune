@@ -21,7 +21,7 @@ package org.ourproject.kune.workspace.client.workspace;
 
 import org.ourproject.kune.workspace.client.WorkspaceFactory;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorComponent;
-import org.ourproject.kune.workspace.client.license.LicenseComponent;
+import org.ourproject.kune.workspace.client.licensefoot.LicenseComponent;
 
 public class WorkspaceUIComponents {
     private LicenseComponent license;
