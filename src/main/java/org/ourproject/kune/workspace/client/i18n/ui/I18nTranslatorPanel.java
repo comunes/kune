@@ -26,11 +26,11 @@ import org.ourproject.kune.platf.client.ui.AbstractSearcherPanel;
 import org.ourproject.kune.platf.client.ui.BottomTrayIcon;
 import org.ourproject.kune.platf.client.ui.KuneStringUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
-import org.ourproject.kune.sitebar.client.Site;
 import org.ourproject.kune.workspace.client.WorkspaceFactory;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPresenter;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorView;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelectorComponent;
+import org.ourproject.kune.workspace.client.sitebar.Site;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.Frame;
@@ -65,8 +65,7 @@ import com.gwtext.client.widgets.layout.FitLayout;
 
 public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTranslatorView {
 
-    private static final String NOTE_FOR_TRANSLATORS_IMAGE_HTML = Images.App.getInstance().noteForTranslators()
-            .getHTML();
+    private static final String NOTE_FOR_TRANSLATORS_IMAGE_HTML = Images.App.getInstance().nt().getHTML();
 
     private Window dialog;
     private final I18nTranslatorPresenter presenter;
