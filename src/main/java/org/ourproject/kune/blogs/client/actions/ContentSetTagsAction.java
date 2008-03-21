@@ -28,7 +28,7 @@ import org.ourproject.kune.platf.client.dto.TagResultDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
-import org.ourproject.kune.sitebar.client.Site;
+import org.ourproject.kune.workspace.client.sitebar.Site;
 
 public class ContentSetTagsAction implements Action {
 

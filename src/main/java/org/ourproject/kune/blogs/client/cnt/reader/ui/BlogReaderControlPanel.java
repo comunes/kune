@@ -24,7 +24,7 @@ import org.ourproject.kune.blogs.client.cnt.reader.BlogReaderControlView;
 import org.ourproject.kune.blogs.client.cnt.reader.BlogReaderListener;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.CustomPushButton;
-import org.ourproject.kune.sitebar.client.Site;
+import org.ourproject.kune.workspace.client.sitebar.Site;
 
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HorizontalPanel;

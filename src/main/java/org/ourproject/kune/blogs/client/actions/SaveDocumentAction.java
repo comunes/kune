@@ -28,7 +28,7 @@ import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.services.Kune;
-import org.ourproject.kune.sitebar.client.Site;
+import org.ourproject.kune.workspace.client.sitebar.Site;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtext.client.widgets.MessageBox;
