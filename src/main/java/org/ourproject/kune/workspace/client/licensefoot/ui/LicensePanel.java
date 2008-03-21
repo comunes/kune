@@ -17,12 +17,12 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.license.ui;
+package org.ourproject.kune.workspace.client.licensefoot.ui;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.services.Kune;
-import org.ourproject.kune.workspace.client.license.LicensePresenter;
-import org.ourproject.kune.workspace.client.license.LicenseView;
+import org.ourproject.kune.workspace.client.licensefoot.LicensePresenter;
+import org.ourproject.kune.workspace.client.licensefoot.LicenseView;
 
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ClickListener;

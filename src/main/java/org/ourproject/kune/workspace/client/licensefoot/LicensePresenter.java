@@ -17,7 +17,7 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.license;
+package org.ourproject.kune.workspace.client.licensefoot;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;

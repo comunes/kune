@@ -1,4 +1,5 @@
 /*
+ *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -17,13 +18,15 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.license;
+package org.ourproject.kune.workspace.client.licensechoose;
 
-import org.ourproject.kune.platf.client.Component;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.LicenseDTO;
 
-public interface LicenseComponent extends Component {
+public interface LicenseChoose {
 
-    void setLicense(StateDTO state);
+    View getView();
+
+    LicenseDTO getLicense();
 
 }

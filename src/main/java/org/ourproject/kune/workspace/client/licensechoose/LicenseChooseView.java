@@ -1,4 +1,5 @@
 /*
+ *
  * Copyright (C) 2007 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -17,15 +18,29 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.license;
+package org.ourproject.kune.workspace.client.licensechoose;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.LicenseDTO;
 
-public interface LicenseView extends View {
+public interface LicenseChooseView extends View {
 
-    void showLicense(String groupName, LicenseDTO licenseDTO);
+    boolean isCCselected();
 
-    void openWindow(String url);
+    boolean isAllowModif();
 
+    boolean isAllowModifShareAlike();
+
+    int getSelectedNonCCLicenseIndex();
+
+    boolean permitComercial();
+
+    void reset();
+
+    void showNotCCoptions();
+
+    void showCCoptions();
+
+    void showIsCopyleft();
+
+    void showIsNotCopyleft();
 }
