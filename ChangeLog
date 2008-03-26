@@ -1,3 +1,7 @@
+2008-03-26 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* Some minor changes
+	* maven-get plugin update
+
 2008-03-21 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* Refactorization for Plugins and jar generation
 

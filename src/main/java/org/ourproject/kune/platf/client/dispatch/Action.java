@@ -23,5 +23,7 @@ package org.ourproject.kune.platf.client.dispatch;
 import org.ourproject.kune.platf.client.Services;
 
 public interface Action {
+
     public void execute(Object value, Object extra, Services services);
+
 }

@@ -2,16 +2,18 @@ package org.ourproject.kune.platf.client.extend;
 
 import java.util.HashMap;
 
-import org.ourproject.kune.platf.client.Services;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 
 public class PluginManager {
 
-    private final Services services;
     private final HashMap<String, Plugin> plugins;
+    private final UIExtensionPointManager extensionPointManager;
+    private final I18nTranslationService i18n;
 
-    public PluginManager(final Services services) {
-        this.services = services;
+    public PluginManager(final UIExtensionPointManager extensionPointManager, final I18nTranslationService i18n) {
         plugins = new HashMap<String, Plugin>();
+        this.extensionPointManager = extensionPointManager;
+        this.i18n = i18n;
     }
 
     public void install(final Plugin plugin) {
@@ -20,7 +22,7 @@ public class PluginManager {
             throw new RuntimeException("Plugin with this name already installed");
         }
         plugins.put(name, plugin);
-        plugin.init(services.extensionPointManager, services.i18n);
+        plugin.init(extensionPointManager, i18n);
         plugin.start();
     }
 

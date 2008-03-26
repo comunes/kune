@@ -61,28 +61,12 @@ Example of .m2/settings.xml:
  <settings>
    <profiles>
      <profile>
-       <id>gwt-1.2.22</id>
+       <id>gwt-1.4.61</id>
        <properties>
-         <google.webtoolkit.home>/usr/local/lib/gwt/gwt-mac-1.2.22</google.webtoolkit.home>
-         <google.webtoolkit.extrajvmargs>-XstartOnFirstThread</google.webtoolkit.extrajvmargs>
-       </properties>
-     </profile>
-     <profile>
-       <id>gwt-1.3.3</id>
-       <properties>
-         <google.webtoolkit.home>/usr/local/lib/gwt/gwt-linux-1.3.3</google.webtoolkit.home>
-        <!-- you only need this is you are on a mac -->
-        <!-- <google.webtoolkit.extrajvmargs>-XstartOnFirstThread</google.webtoolkit.extrajvmargs> -->
-      </properties>
-     </profile>
-     <profile>
-       <id>gwt-1.4.60</id>
-       <properties>
-         <google.webtoolkit.home>/usr/local/lib/gwt/gwt-linux-1.4.60</google.webtoolkit.home>
-        <!-- you only need this is you are on a mac -->
-        <!-- <google.webtoolkit.extrajvmargs>-XstartOnFirstThread</google.webtoolkit.extrajvmargs> -->
-        <!-- If you experiment java.lang.OutOfMemoryError compiling -->
-        <!-- <google.webtoolkit.extrajvmargs>-Xmx250m</google.webtoolkit.extrajvmargs> -->
+         <google.webtoolkit.home>/usr/local/lib/gwt/gwt-linux-1.4.61</google.webtoolkit.home>
+         <!-- <google.webtoolkit.devjar>gwt-dev-linux</google.webtoolkit.devjar> -->
+         <!-- you only need this is you are on a mac -->
+        <google.webtoolkit.extrajvmargs>-Xmx256M</google.webtoolkit.extrajvmargs>
       </properties>
      </profile>
      <profile>
@@ -90,15 +74,15 @@ Example of .m2/settings.xml:
        <properties>
          <google.webtoolkit.home>/usr/local/lib/gwt/gwt-linux-0.0.2030</google.webtoolkit.home>
          <!-- <google.webtoolkit.devjar>gwt-dev-linux</google.webtoolkit.devjar> -->
-        <!-- you only need this is you are on a max -->
-        <!-- <google.webtoolkit.extrajvmargs>-Xmx256M</google.webtoolkit.extrajvmargs> -->
+         <!-- you only need this is you are on a mac -->
         <google.webtoolkit.extrajvmargs>-Xmx256M</google.webtoolkit.extrajvmargs>
       </properties>
+     </profile>
    </profiles>
    <activeProfiles>
      <activeProfile>gwt-0.0.2030</activeProfile>
    </activeProfiles>
-</settings>
+</settings>  
 
 Appendix B: Configuration of Openfire xmpp server
 --------------------------------------------------------------------------------

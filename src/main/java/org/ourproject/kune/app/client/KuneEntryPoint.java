@@ -50,7 +50,11 @@ public class KuneEntryPoint implements EntryPoint {
          * Install an UncaughtExceptionHandler which will produce <code>FATAL</code>
          * log messages
          */
-        Log.setUncaughtExceptionHandler();
+
+        /*
+         * Currently we let firebug to catch the error:
+         * Log.setUncaughtExceptionHandler();
+         */
 
         // At the moment, in runtime:
         Log.setCurrentLogLevel(Log.LOG_LEVEL_DEBUG);

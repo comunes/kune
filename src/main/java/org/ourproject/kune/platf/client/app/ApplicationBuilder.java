@@ -28,6 +28,7 @@ import java.util.List;
 import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.ActionEvent;
+import org.ourproject.kune.platf.client.dispatch.DefaultDispacherRevisited;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.extend.HelloWorldPlugin;
@@ -70,14 +71,17 @@ public class ApplicationBuilder {
         History.addHistoryListener(stateManager);
 
         final DefaultDispatcher dispatcher = DefaultDispatcher.getInstance();
+        final DefaultDispacherRevisited dispatcherRev = DefaultDispacherRevisited.getInstance();
+
         application.init(dispatcher, stateManager);
         subscribeActions(dispatcher, platform.getActions());
 
         Services services = new Services(application, stateManager, dispatcher, session, extensionPointManager,
                 Kune.I18N);
         dispatcher.setServices(services);
+        dispatcherRev.setEnvironment(services);
 
-        PluginManager pluginManager = new PluginManager(services);
+        PluginManager pluginManager = new PluginManager(extensionPointManager, Kune.I18N);
         pluginManager.install(new HelloWorldPlugin());
 
         Window.addWindowCloseListener(new WindowCloseListener() {

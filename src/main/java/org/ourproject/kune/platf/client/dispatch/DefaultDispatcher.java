@@ -35,6 +35,13 @@ public class DefaultDispatcher implements Dispatcher {
     private final HashMap<String, List<Action>> subscriptors;
     private Services services;
 
+    public static DefaultDispatcher getInstance() {
+        if (instance == null) {
+            instance = new DefaultDispatcher();
+        }
+        return instance;
+    }
+
     DefaultDispatcher() {
         this.subscriptors = new HashMap<String, List<Action>>();
     }
@@ -45,13 +52,11 @@ public class DefaultDispatcher implements Dispatcher {
         return action;
     }
 
-    private List<Action> getSubscriptorsList(final String eventName) {
-        List<Action> list = subscriptors.get(eventName);
-        if (list == null) {
-            list = new ArrayList<Action>();
-            subscriptors.put(eventName, list);
+    public void fire(final String eventName, final Object value, final Object extra) {
+        List<Action> list = getSubscriptorsList(eventName);
+        for (int index = 0; index < list.size(); index++) {
+            fire(list.get(index), value, extra);
         }
-        return list;
     }
 
     public void fireDeferred(final String eventName, final Object value, final Object extra) {
@@ -62,17 +67,6 @@ public class DefaultDispatcher implements Dispatcher {
         });
     }
 
-    public void fire(final String eventName, final Object value, final Object extra) {
-        List<Action> list = getSubscriptorsList(eventName);
-        for (int index = 0; index < list.size(); index++) {
-            fire(list.get(index), value, extra);
-        }
-    }
-
-    private void fire(final Action action, final Object value, final Object extra) {
-        action.execute(value, extra, services);
-    }
-
     public void fireState(final String encodedEvent) {
         History.newItem(encodedEvent);
     }
@@ -81,11 +75,17 @@ public class DefaultDispatcher implements Dispatcher {
         this.services = services;
     }
 
-    public static DefaultDispatcher getInstance() {
-        if (instance == null) {
-            instance = new DefaultDispatcher();
+    private void fire(final Action action, final Object value, final Object extra) {
+        action.execute(value, extra, services);
+    }
+
+    private List<Action> getSubscriptorsList(final String eventName) {
+        List<Action> list = subscriptors.get(eventName);
+        if (list == null) {
+            list = new ArrayList<Action>();
+            subscriptors.put(eventName, list);
         }
-        return instance;
+        return list;
     }
 
 }

@@ -25,9 +25,17 @@ Now there are problems if client was started before server, and with server rest
   http://extjs.com/deploy/ext/examples/locale/dutch-form.js
   http://groups.google.com/group/gwt-ext/browse_thread/thread/ebec316effea2b80/bfbdadc7239b4e5d?lnk=gst&q=i18n#bfbdadc7239b4e5d
   http://extjs.com/forum/showthread.php?t=20160&highlight=localization
+<vjrj> i18n changes:
+  - Remove pagination i18n's
+  - Chat rooms --> Chats
+  - Confirmation of chat close (see code)
 
 MIND-TERM:
 --------------------------------------------------------------------------------
+<vjrj> RTL (BiDi support). The problem will be extjs (gwt will support bidi in 1.5):
+http://extjs.com/forum/showthread.php?t=9659
+http://cssjanus.commoner.com/
+<vjrj> Study the possibility to include in SN something similar to "Member since <date>".
 <vjrj> upgrade warp-persist to 1.0
 <samer,vjrj> Add in license choose a free/non-free indicator [3]
 <vjrj> think about more secure login, SRP protocol thread, and:
