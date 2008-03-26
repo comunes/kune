@@ -5,10 +5,10 @@ import java.util.Iterator;
 
 public class ActionRevisitedList<T> {
 
-    private ArrayList<ActionRevisited<T>> list;
+    private final ArrayList<ActionRevisited<T>> list;
 
     public ActionRevisitedList() {
-        list = new ArrayList<ActionRevisited<<T>>();
+        list = new ArrayList<ActionRevisited<T>>();
     }
 
     public void addAction(final ActionRevisited<T> action) {
