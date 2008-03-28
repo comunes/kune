@@ -35,16 +35,15 @@ public class ChatClientModule implements ClientModule {
 
     private final Session session;
     private final StateManager stateManager;
+    private final ChatClientTool chatTool;
 
-    public ChatClientModule(final Session session, final StateManager stateManager) {
+    public ChatClientModule(final Session session, final StateManager stateManager, final ChatClientTool chatTool) {
         this.session = session;
         this.stateManager = stateManager;
+        this.chatTool = chatTool;
     }
 
     public void configure(final Register register) {
-        final ChatClientTool chatTool = new ChatClientTool();
-        register.addTool(chatTool);
-
         register.addAction(WorkspaceEvents.INIT_DATA_RECEIVED, new InitChatEngineAction(chatTool));
         register.addAction(WorkspaceEvents.USER_LOGGED_IN, new ChatLoginAction(chatTool));
         ChatLogoutAction logoutAction = new ChatLogoutAction(chatTool);

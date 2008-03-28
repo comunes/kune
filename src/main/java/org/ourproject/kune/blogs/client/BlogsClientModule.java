@@ -29,6 +29,5 @@ public class BlogsClientModule implements ClientModule {
     }
 
     public void configure(final Register register) {
-        register.addTool(new BlogClientTool());
     }
 }

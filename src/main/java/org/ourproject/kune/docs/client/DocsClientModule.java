@@ -55,7 +55,6 @@ public class DocsClientModule implements ClientModule {
     }
 
     public void configure(final Register register) {
-        register.addTool(new DocumentClientTool());
         register.addAction(DocsEvents.SAVE_DOCUMENT, new SaveDocumentAction(session));
         register.addAction(DocsEvents.ADD_DOCUMENT, new AddDocumentAction(stateManager, session));
         register.addAction(DocsEvents.ADD_FOLDER, new AddFolderAction(stateManager, session));

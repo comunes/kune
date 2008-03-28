@@ -64,8 +64,9 @@ public class ApplicationBuilder {
 
     public void build(final String userHash, final I18nLanguageDTO initialLang) {
         KunePlatform platform = new KunePlatform();
+        ChatClientTool chatClientTool = new ChatClientTool();
         platform.addTool(new DocumentClientTool());
-        platform.addTool(new ChatClientTool());
+        platform.addTool(chatClientTool);
         platform.addTool(new BlogClientTool());
 
         HashMap<String, ClientTool> tools = indexTools(platform.getTools());
@@ -86,7 +87,7 @@ public class ApplicationBuilder {
         History.addHistoryListener(stateManager);
 
         platform.install(new PlatformClientModule(session, stateManager));
-        platform.install(new ChatClientModule(session, stateManager));
+        platform.install(new ChatClientModule(session, stateManager, chatClientTool));
         platform.install(new WorkspaceClientModule(session, stateManager, workspace));
         platform.install(new DocsClientModule(session, stateManager, workspace));
         platform.install(new BlogsClientModule());
