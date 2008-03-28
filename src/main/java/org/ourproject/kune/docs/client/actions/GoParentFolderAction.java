@@ -20,15 +20,23 @@
 
 package org.ourproject.kune.docs.client.actions;
 
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 
 public class GoParentFolderAction implements Action {
-    public void execute(final Object value, final Object extra, final Services services) {
-        goParent(services.session.getCurrentState(), services.stateManager);
+    private final StateManager stateManager;
+    private final Session session;
+
+    public GoParentFolderAction(final StateManager stateManager, final Session session) {
+        this.stateManager = stateManager;
+        this.session = session;
+    }
+
+    public void execute(final Object value, final Object extra) {
+        goParent(session.getCurrentState(), stateManager);
     }
 
     private void goParent(final StateDTO state, final StateManager stateManager) {

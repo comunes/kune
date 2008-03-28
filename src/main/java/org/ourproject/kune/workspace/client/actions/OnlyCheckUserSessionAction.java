@@ -19,22 +19,27 @@
 
 package org.ourproject.kune.workspace.client.actions;
 
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.sitebar.rpc.UserService;
 import org.ourproject.kune.workspace.client.sitebar.rpc.UserServiceAsync;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class OnlyCheckUserSessionAction implements Action {
+    private final Session session;
 
-    @SuppressWarnings("unchecked")
-    public void execute(final Object value, final Object extra, final Services services) {
-        onOnlyCheckUserSession(services, (AsyncCallback<Object>) value);
+    public OnlyCheckUserSessionAction(final Session session) {
+        this.session = session;
     }
 
-    private void onOnlyCheckUserSession(final Services services, final AsyncCallback<Object> callback) {
+    @SuppressWarnings("unchecked")
+    public void execute(final Object value, final Object extra) {
+        onOnlyCheckUserSession((AsyncCallback<Object>) value);
+    }
+
+    private void onOnlyCheckUserSession(final AsyncCallback<Object> callback) {
         UserServiceAsync server = UserService.App.getInstance();
-        server.onlyCheckSession(services.session.getUserHash(), callback);
+        server.onlyCheckSession(session.getUserHash(), callback);
     }
 }

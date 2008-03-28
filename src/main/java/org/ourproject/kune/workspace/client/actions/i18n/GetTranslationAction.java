@@ -19,22 +19,27 @@
 
 package org.ourproject.kune.workspace.client.actions.i18n;
 
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.rpc.I18nService;
 import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
+import org.ourproject.kune.platf.client.state.Session;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class GetTranslationAction implements Action {
+    private final Session session;
 
-    public void execute(final Object value, final Object extra, final Services services) {
-        onGetTranslation(services, (String) value, (String) extra);
+    public GetTranslationAction(final Session session) {
+        this.session = session;
     }
 
-    private void onGetTranslation(final Services services, final String language, final String text) {
+    public void execute(final Object value, final Object extra) {
+        onGetTranslation((String) value, (String) extra);
+    }
+
+    private void onGetTranslation(final String language, final String text) {
         final I18nServiceAsync server = I18nService.App.getInstance();
-        server.getTranslation(services.session.getUserHash(), language, text, new AsyncCallback<String>() {
+        server.getTranslation(session.getUserHash(), language, text, new AsyncCallback<String>() {
             public void onFailure(final Throwable caught) {
             }
 

@@ -19,17 +19,23 @@
 
 package org.ourproject.kune.platf.client.actions;
 
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.state.StateManager;
 
 public class GotoAction implements Action {
 
-    public void execute(final Object value, final Object extra, final Services services) {
-        onGoto(services, (String) value);
+    private final StateManager stateManager;
+
+    public GotoAction(final StateManager stateManager) {
+        this.stateManager = stateManager;
     }
 
-    private void onGoto(final Services services, final String token) {
-        services.stateManager.setState(new StateToken(token));
+    public void execute(final Object value, final Object extra) {
+        onGoto((String) value);
+    }
+
+    private void onGoto(final String token) {
+        stateManager.setState(new StateToken(token));
     }
 }

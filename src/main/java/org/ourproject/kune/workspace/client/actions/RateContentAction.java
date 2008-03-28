@@ -19,32 +19,41 @@
 
 package org.ourproject.kune.workspace.client.actions;
 
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
 public class RateContentAction implements Action {
 
-    public void execute(final Object value, final Object extra, final Services services) {
-        onRateContent(services, (Double) value);
+    private final StateManager stateManager;
+    private final Session session;
+
+    public RateContentAction(final Session session, final StateManager stateManager) {
+        this.session = session;
+        this.stateManager = stateManager;
     }
 
-    private void onRateContent(final Services services, final Double value) {
+    public void execute(final Object value, final Object extra) {
+        onRateContent((Double) value);
+    }
+
+    private void onRateContent(final Double value) {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
-        StateDTO currentState = services.session.getCurrentState();
-        server.rateContent(services.session.getUserHash(), currentState.getGroup().getShortName(), currentState
-                .getDocumentId(), value, new AsyncCallbackSimple<Object>() {
-            public void onSuccess(final Object result) {
-                Site.hideProgress();
-                Site.info(Kune.I18N.t("Content rated"));
-                services.stateManager.reload();
-            }
-        });
+        StateDTO currentState = session.getCurrentState();
+        server.rateContent(session.getUserHash(), currentState.getGroup().getShortName(), currentState.getDocumentId(),
+                value, new AsyncCallbackSimple<Object>() {
+                    public void onSuccess(final Object result) {
+                        Site.hideProgress();
+                        Site.info(Kune.I18N.t("Content rated"));
+                        stateManager.reload();
+                    }
+                });
     }
 }

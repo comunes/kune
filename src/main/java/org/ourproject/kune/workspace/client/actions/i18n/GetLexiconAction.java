@@ -21,7 +21,6 @@ package org.ourproject.kune.workspace.client.actions.i18n;
 
 import java.util.HashMap;
 
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.rpc.I18nService;
 import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
@@ -32,11 +31,11 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class GetLexiconAction implements Action {
 
-    public void execute(final Object value, final Object extra, final Services services) {
-        onGetLexicon(services, (String) value);
+    public void execute(final Object value, final Object extra) {
+        onGetLexicon((String) value);
     }
 
-    private void onGetLexicon(final Services services, final String language) {
+    private void onGetLexicon(final String language) {
         final I18nServiceAsync server = I18nService.App.getInstance();
         server.getLexicon(language, new AsyncCallback<HashMap<String, String>>() {
             public void onFailure(final Throwable caught) {

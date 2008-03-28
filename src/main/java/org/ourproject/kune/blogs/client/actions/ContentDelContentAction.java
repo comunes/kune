@@ -19,28 +19,11 @@
 
 package org.ourproject.kune.blogs.client.actions;
 
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
-import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
-import org.ourproject.kune.platf.client.rpc.ContentService;
-import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
-import org.ourproject.kune.workspace.client.sitebar.Site;
 
 public class ContentDelContentAction implements Action {
 
-    public void execute(final Object value, final Object extra, final Services services) {
-        onContentDelContent(services, (String) value);
+    public void execute(final Object value, final Object extra) {
     }
 
-    private void onContentDelContent(final Services services, final String documentId) {
-        Site.showProgressProcessing();
-        ContentServiceAsync server = ContentService.App.getInstance();
-        server.delContent(services.session.getUserHash(), services.session.getCurrentState().getGroup().getShortName(),
-                documentId, new AsyncCallbackSimple<Object>() {
-                    public void onSuccess(final Object result) {
-                        Site.hideProgress();
-                        services.stateManager.reload();
-                    }
-                });
-    }
 }

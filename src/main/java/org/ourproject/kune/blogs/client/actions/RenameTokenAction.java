@@ -19,30 +19,10 @@
 
 package org.ourproject.kune.blogs.client.actions;
 
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
-import org.ourproject.kune.platf.client.dto.StateDTO;
-import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
-import org.ourproject.kune.platf.client.rpc.ContentService;
-import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
-import org.ourproject.kune.workspace.client.sitebar.Site;
 
 public class RenameTokenAction implements Action {
 
-    public void execute(final Object value, final Object extra, final Services services) {
-        onRenameToken(services, (String) value, (String) extra);
-    }
-
-    private void onRenameToken(final Services services, final String newName, final String token) {
-        Site.showProgressProcessing();
-        ContentServiceAsync server = ContentService.App.getInstance();
-        StateDTO currentState = services.session.getCurrentState();
-        server.rename(services.session.getUserHash(), currentState.getGroup().getShortName(), token, newName,
-                new AsyncCallbackSimple<String>() {
-                    public void onSuccess(final String result) {
-                        Site.hideProgress();
-                        services.stateManager.reloadContextAndTitles();
-                    }
-                });
+    public void execute(final Object value, final Object extra) {
     }
 }

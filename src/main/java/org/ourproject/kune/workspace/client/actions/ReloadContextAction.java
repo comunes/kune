@@ -19,16 +19,22 @@
 
 package org.ourproject.kune.workspace.client.actions;
 
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.state.StateManager;
 
 public class ReloadContextAction implements Action {
 
-    public void execute(final Object value, final Object extra, final Services services) {
-        onReloadContext(services);
+    private final StateManager stateManager;
+
+    public ReloadContextAction(final StateManager stateManager) {
+        this.stateManager = stateManager;
     }
 
-    private void onReloadContext(final Services services) {
-        services.stateManager.reloadContextAndTitles();
+    public void execute(final Object value, final Object extra) {
+        onReloadContext();
+    }
+
+    private void onReloadContext() {
+        stateManager.reloadContextAndTitles();
     }
 }

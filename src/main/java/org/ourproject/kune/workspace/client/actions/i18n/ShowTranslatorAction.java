@@ -19,23 +19,30 @@
 
 package org.ourproject.kune.workspace.client.actions.i18n;
 
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 public class ShowTranslatorAction implements Action {
 
-    public void execute(final Object value, final Object extra, final Services services) {
-        onShowTranslatorAction(services);
+    private final Session session;
+    private final Workspace workspace;
+
+    public ShowTranslatorAction(final Session session, final Workspace workspace) {
+        this.session = session;
+        this.workspace = workspace;
     }
 
-    private void onShowTranslatorAction(final Services services) {
+    public void execute(final Object value, final Object extra) {
+        onShowTranslatorAction();
+    }
+
+    private void onShowTranslatorAction() {
         Site.showProgressLoading();
-        if (services.session.isLogged()) {
-            Workspace ws = services.app.getWorkspace();
-            ws.getI18nTranslatorComponent().show();
+        if (session.isLogged()) {
+            workspace.getI18nTranslatorComponent().show();
         } else {
             Site.info(Kune.I18N.t("Sign in or register to help with translation"));
         }

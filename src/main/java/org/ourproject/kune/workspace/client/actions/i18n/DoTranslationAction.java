@@ -19,25 +19,31 @@
 
 package org.ourproject.kune.workspace.client.actions.i18n;
 
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.rpc.I18nService;
 import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
 import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class DoTranslationAction implements Action {
 
-    public void execute(final Object value, final Object extra, final Services services) {
-        onDoTranslationAction(services, (String) value, (String[]) extra);
+    private final Session session;
+
+    public DoTranslationAction(final Session session) {
+        this.session = session;
     }
 
-    private void onDoTranslationAction(final Services services, final String id, final String[] translation) {
+    public void execute(final Object value, final Object extra) {
+        onDoTranslationAction((String) value, (String[]) extra);
+    }
+
+    private void onDoTranslationAction(final String id, final String[] translation) {
         Site.showProgressSaving();
         final I18nServiceAsync server = I18nService.App.getInstance();
-        server.setTranslation(services.session.getUserHash(), id, translation[1], new AsyncCallback<Object>() {
+        server.setTranslation(session.getUserHash(), id, translation[1], new AsyncCallback<Object>() {
             public void onFailure(final Throwable caught) {
                 Site.hideProgress();
                 Site.error(Kune.I18N.t("Server error saving translation"));

@@ -19,27 +19,12 @@
 
 package org.ourproject.kune.blogs.client.actions;
 
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
-import org.ourproject.kune.platf.client.dto.StateDTO;
-import org.ourproject.kune.platf.client.rpc.ContentService;
-import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
-import org.ourproject.kune.workspace.client.sitebar.Site;
-
-import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class ContentRenameAction implements Action {
 
     @SuppressWarnings("unchecked")
-    public void execute(final Object value, final Object extra, final Services services) {
-        onContentRename(services, (String) value, (AsyncCallback<String>) extra);
+    public void execute(final Object value, final Object extra) {
     }
 
-    private void onContentRename(final Services services, final String newName, final AsyncCallback<String> callback) {
-        Site.showProgressProcessing();
-        ContentServiceAsync server = ContentService.App.getInstance();
-        StateDTO currentState = services.session.getCurrentState();
-        server.rename(services.session.getUserHash(), currentState.getGroup().getShortName(), currentState
-                .getStateToken().getEncoded(), newName, callback);
-    }
 }

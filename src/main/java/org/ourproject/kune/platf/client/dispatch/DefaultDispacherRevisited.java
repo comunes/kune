@@ -7,11 +7,10 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.History;
 
-public class DefaultDispacherRevisited<E> implements DispatcherRevisited {
+public class DefaultDispacherRevisited implements DispatcherRevisited {
 
     private static DefaultDispacherRevisited instance;
     private final HashMap<String, ActionRevisitedList> subscriptors;
-    private E environment;
 
     public static DefaultDispacherRevisited getInstance() {
         if (instance == null) {
@@ -50,12 +49,8 @@ public class DefaultDispacherRevisited<E> implements DispatcherRevisited {
         History.newItem(encodedEvent);
     }
 
-    public void setEnvironment(final E environment) {
-        this.environment = environment;
-    }
-
     private <T> void fire(final ActionRevisited<T> action, final T param) {
-        action.execute(param, environment);
+        action.execute(param);
     }
 
     private <T> ActionRevisitedList<T> getSubscriptorsList(final String eventName) {

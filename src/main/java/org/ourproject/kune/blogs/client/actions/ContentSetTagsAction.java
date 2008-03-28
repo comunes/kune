@@ -19,33 +19,12 @@
 
 package org.ourproject.kune.blogs.client.actions;
 
-import java.util.List;
-
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
-import org.ourproject.kune.platf.client.dto.StateDTO;
-import org.ourproject.kune.platf.client.dto.TagResultDTO;
-import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
-import org.ourproject.kune.platf.client.rpc.ContentService;
-import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
-import org.ourproject.kune.workspace.client.sitebar.Site;
 
 public class ContentSetTagsAction implements Action {
 
-    public void execute(final Object value, final Object extra, final Services services) {
-        onContentsetTags(services, (String) value);
+    public void execute(final Object value, final Object extra) {
+
     }
 
-    private void onContentsetTags(final Services services, final String tags) {
-        Site.showProgressProcessing();
-        ContentServiceAsync server = ContentService.App.getInstance();
-        StateDTO currentState = services.session.getCurrentState();
-        server.setTags(services.session.getUserHash(), currentState.getGroup().getShortName(), currentState
-                .getDocumentId(), tags, new AsyncCallbackSimple<List<TagResultDTO>>() {
-            public void onSuccess(final List<TagResultDTO> result) {
-                services.app.getWorkspace().getTagsComponent().setGroupTags(result);
-                Site.hideProgress();
-            }
-        });
-    }
 }

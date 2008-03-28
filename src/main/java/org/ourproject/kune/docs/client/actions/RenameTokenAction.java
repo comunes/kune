@@ -19,28 +19,37 @@
 
 package org.ourproject.kune.docs.client.actions;
 
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
+import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
 public class RenameTokenAction implements Action {
 
-    public void execute(final Object value, final Object extra, final Services services) {
-        onRenameToken(services, (String) value, (String) extra);
+    private final StateManager stateManager;
+    private final Session session;
+
+    public RenameTokenAction(final Session session, final StateManager stateManager) {
+        this.session = session;
+        this.stateManager = stateManager;
     }
 
-    private void onRenameToken(final Services services, final String newName, final String token) {
+    public void execute(final Object value, final Object extra) {
+        onRenameToken((String) value, (String) extra);
+    }
+
+    private void onRenameToken(final String newName, final String token) {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
-        StateDTO currentState = services.session.getCurrentState();
-        server.rename(services.session.getUserHash(), currentState.getGroup().getShortName(), token, newName,
+        StateDTO currentState = session.getCurrentState();
+        server.rename(session.getUserHash(), currentState.getGroup().getShortName(), token, newName,
                 new AsyncCallbackSimple<String>() {
                     public void onSuccess(final String result) {
-                        services.stateManager.reloadContextAndTitles();
+                        stateManager.reloadContextAndTitles();
                         Site.hideProgress();
                     }
                 });

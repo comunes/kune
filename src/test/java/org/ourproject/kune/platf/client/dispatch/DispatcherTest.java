@@ -9,32 +9,32 @@ public class DispatcherTest {
 
     @Before
     public void create() {
-	dispatcher = new DefaultDispatcher();
+        dispatcher = new DefaultDispatcher();
     }
 
     @Test
     public void testSubscribe() {
-	Object value = new Object();
-	String eventName = "eventName";
-	Action[] actions = new Action[3];
-	for (int index = 0; index < actions.length; index++) {
-	    Action action = EasyMock.createNiceMock(Action.class);
-	    action.execute(value, null, null);
-	    EasyMock.expectLastCall();
-	    actions[index] = action;
-	}
-	for (int index = 0; index < actions.length; index++) {
-	    EasyMock.replay(actions[index]);
-	}
-	for (int index = 0; index < actions.length; index++) {
-	    dispatcher.subscribe(eventName, actions[index]);
-	}
+        Object value = new Object();
+        String eventName = "eventName";
+        Action[] actions = new Action[3];
+        for (int index = 0; index < actions.length; index++) {
+            Action action = EasyMock.createNiceMock(Action.class);
+            action.execute(value, null);
+            EasyMock.expectLastCall();
+            actions[index] = action;
+        }
+        for (int index = 0; index < actions.length; index++) {
+            EasyMock.replay(actions[index]);
+        }
+        for (int index = 0; index < actions.length; index++) {
+            dispatcher.subscribe(eventName, actions[index]);
+        }
 
-	dispatcher.fire(eventName, value, null);
+        dispatcher.fire(eventName, value, null);
 
-	for (int index = 0; index < actions.length; index++) {
-	    EasyMock.verify(actions[index]);
-	}
+        for (int index = 0; index < actions.length; index++) {
+            EasyMock.verify(actions[index]);
+        }
     }
 
 }

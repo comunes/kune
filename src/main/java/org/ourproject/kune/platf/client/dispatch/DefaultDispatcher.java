@@ -24,8 +24,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.ourproject.kune.platf.client.Services;
-
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.History;
@@ -33,7 +31,6 @@ import com.google.gwt.user.client.History;
 public class DefaultDispatcher implements Dispatcher {
     private static DefaultDispatcher instance;
     private final HashMap<String, List<Action>> subscriptors;
-    private Services services;
 
     public static DefaultDispatcher getInstance() {
         if (instance == null) {
@@ -71,12 +68,8 @@ public class DefaultDispatcher implements Dispatcher {
         History.newItem(encodedEvent);
     }
 
-    public void setServices(final Services services) {
-        this.services = services;
-    }
-
     private void fire(final Action action, final Object value, final Object extra) {
-        action.execute(value, extra, services);
+        action.execute(value, extra);
     }
 
     private List<Action> getSubscriptorsList(final String eventName) {

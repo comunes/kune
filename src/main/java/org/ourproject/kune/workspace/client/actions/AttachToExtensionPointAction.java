@@ -17,18 +17,25 @@
  *
  */
 
-package org.ourproject.kune.platf.client.actions;
+package org.ourproject.kune.workspace.client.actions;
 
-import org.ourproject.kune.platf.client.Services;
+import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.workspace.client.workspace.Workspace;
 
-public class ClearExtensionPointAction implements Action {
+public class AttachToExtensionPointAction implements Action {
 
-    public void execute(final Object value, final Object extra, final Services services) {
-        onClearAction(services, (String) value);
+    private final Workspace workspace;
+
+    public AttachToExtensionPointAction(final Workspace workspace) {
+        this.workspace = workspace;
     }
 
-    private void onClearAction(final Services services, final String id) {
-        services.app.getWorkspace().clearExtensionPoint(id);
+    public void execute(final Object value, final Object extra) {
+        onAttachAction((String) value, (View) extra);
+    }
+
+    private void onAttachAction(final String id, final View view) {
+        workspace.attachToExtensionPoint(id, view);
     }
 }

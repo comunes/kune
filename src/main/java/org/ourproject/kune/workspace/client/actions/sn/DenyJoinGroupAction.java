@@ -19,31 +19,40 @@
 
 package org.ourproject.kune.workspace.client.actions.sn;
 
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
 import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
 public class DenyJoinGroupAction implements Action {
 
-    public void execute(final Object value, final Object extra, final Services services) {
-        onDenyJoinGroup(services, (String) value);
+    private final Session session;
+    private final StateManager stateManager;
+
+    public DenyJoinGroupAction(final Session session, final StateManager stateManager) {
+        this.session = session;
+        this.stateManager = stateManager;
     }
 
-    private void onDenyJoinGroup(final Services services, final String groupShortName) {
+    public void execute(final Object value, final Object extra) {
+        onDenyJoinGroup((String) value);
+    }
+
+    private void onDenyJoinGroup(final String groupShortName) {
         Site.showProgressProcessing();
         final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        server.denyJoinGroup(services.session.getUserHash(), services.session.getCurrentState().getGroup()
-                .getShortName(), groupShortName, new AsyncCallbackSimple<SocialNetworkResultDTO>() {
-            public void onSuccess(final SocialNetworkResultDTO result) {
-                Site.hideProgress();
-                Site.info(Kune.I18N.t("Member rejected"));
-                services.stateManager.setSocialNetwork(result);
-            }
-        });
+        server.denyJoinGroup(session.getUserHash(), session.getCurrentState().getGroup().getShortName(),
+                groupShortName, new AsyncCallbackSimple<SocialNetworkResultDTO>() {
+                    public void onSuccess(final SocialNetworkResultDTO result) {
+                        Site.hideProgress();
+                        Site.info(Kune.I18N.t("Member rejected"));
+                        stateManager.setSocialNetwork(result);
+                    }
+                });
     }
 }

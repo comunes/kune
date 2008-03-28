@@ -19,28 +19,11 @@
 
 package org.ourproject.kune.blogs.client.actions;
 
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
-import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
-import org.ourproject.kune.platf.client.rpc.ContentService;
-import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
-import org.ourproject.kune.workspace.client.sitebar.Site;
 
 public class ContentAddAuthorAction implements Action {
 
-    public void execute(final Object value, final Object extra, final Services services) {
-        onContentAddAuthor(services, (String) value, (String) extra);
-    }
+    public void execute(final Object value, final Object extra) {
 
-    private void onContentAddAuthor(final Services services, final String documentId, final String authorShortName) {
-        Site.showProgressProcessing();
-        ContentServiceAsync server = ContentService.App.getInstance();
-        server.addAuthor(services.session.getUserHash(), services.session.getCurrentState().getGroup().getShortName(),
-                documentId, authorShortName, new AsyncCallbackSimple<Object>() {
-                    public void onSuccess(final Object result) {
-                        Site.hideProgress();
-                        services.stateManager.reload();
-                    }
-                });
     }
 }

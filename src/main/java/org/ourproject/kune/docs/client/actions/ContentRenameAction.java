@@ -19,28 +19,34 @@
 
 package org.ourproject.kune.docs.client.actions;
 
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class ContentRenameAction implements Action {
 
-    @SuppressWarnings("unchecked")
-    public void execute(final Object value, final Object extra, final Services services) {
-        onContentRename(services, (String) value, (AsyncCallback<String>) extra);
+    private final Session session;
+
+    public ContentRenameAction(final Session session) {
+        this.session = session;
     }
 
-    private void onContentRename(final Services services, final String newName, final AsyncCallback<String> callback) {
+    @SuppressWarnings("unchecked")
+    public void execute(final Object value, final Object extra) {
+        onContentRename((String) value, (AsyncCallback<String>) extra);
+    }
+
+    private void onContentRename(final String newName, final AsyncCallback<String> callback) {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
-        StateDTO currentState = services.session.getCurrentState();
-        server.rename(services.session.getUserHash(), currentState.getGroup().getShortName(), currentState
-                .getStateToken().getEncoded(), newName, callback);
+        StateDTO currentState = session.getCurrentState();
+        server.rename(session.getUserHash(), currentState.getGroup().getShortName(), currentState.getStateToken()
+                .getEncoded(), newName, callback);
         Site.hideProgress();
     }
 }

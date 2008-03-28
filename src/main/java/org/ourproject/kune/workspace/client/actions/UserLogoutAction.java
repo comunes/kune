@@ -19,8 +19,8 @@
 
 package org.ourproject.kune.workspace.client.actions;
 
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.sitebar.rpc.UserService;
 import org.ourproject.kune.workspace.client.sitebar.rpc.UserServiceAsync;
 
@@ -28,13 +28,19 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class UserLogoutAction implements Action {
 
-    @SuppressWarnings("unchecked")
-    public void execute(final Object value, final Object extra, final Services services) {
-        onLogout(services, (AsyncCallback<Object>) value);
+    private final Session session;
+
+    public UserLogoutAction(final Session session) {
+        this.session = session;
     }
 
-    private void onLogout(final Services services, final AsyncCallback<Object> callback) {
+    @SuppressWarnings("unchecked")
+    public void execute(final Object value, final Object extra) {
+        onLogout((AsyncCallback<Object>) value);
+    }
+
+    private void onLogout(final AsyncCallback<Object> callback) {
         UserServiceAsync userService = UserService.App.getInstance();
-        userService.logout(services.session.getUserHash(), callback);
+        userService.logout(session.getUserHash(), callback);
     }
 }

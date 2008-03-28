@@ -17,19 +17,25 @@
  *
  */
 
-package org.ourproject.kune.platf.client.actions;
+package org.ourproject.kune.workspace.client.actions;
 
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.workspace.client.workspace.Workspace;
 
-public class AttachToExtensionPointAction implements Action {
+public class DetachFromExtensionPointAction implements Action {
 
-    public void execute(final Object value, final Object extra, final Services services) {
-        onAttachAction(services, (String) value, (View) extra);
+    private final Workspace workspace;
+
+    public DetachFromExtensionPointAction(final Workspace workspace) {
+        this.workspace = workspace;
     }
 
-    private void onAttachAction(final Services services, final String id, final View view) {
-        services.app.getWorkspace().attachToExtensionPoint(id, view);
+    public void execute(final Object value, final Object extra) {
+        onDetachAction((String) value, (View) extra);
+    }
+
+    private void onDetachAction(final String id, final View view) {
+        workspace.detachFromExtensionPoint(id, view);
     }
 }

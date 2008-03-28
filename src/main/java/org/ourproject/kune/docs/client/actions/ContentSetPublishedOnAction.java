@@ -21,29 +21,38 @@ package org.ourproject.kune.docs.client.actions;
 
 import java.util.Date;
 
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.sitebar.Site;
+import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 public class ContentSetPublishedOnAction implements Action {
 
-    public void execute(final Object value, final Object extra, final Services services) {
-        onContentsetPublishedOn(services, (Date) value);
+    private final Workspace workspace;
+    private final Session session;
+
+    public ContentSetPublishedOnAction(final Session session, final Workspace workspace) {
+        this.session = session;
+        this.workspace = workspace;
     }
 
-    private void onContentsetPublishedOn(final Services services, final Date publishedOn) {
+    public void execute(final Object value, final Object extra) {
+        onContentsetPublishedOn((Date) value);
+    }
+
+    private void onContentsetPublishedOn(final Date publishedOn) {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
-        StateDTO currentState = services.session.getCurrentState();
-        server.setPublishedOn(services.session.getUserHash(), currentState.getGroup().getShortName(), currentState
+        StateDTO currentState = session.getCurrentState();
+        server.setPublishedOn(session.getUserHash(), currentState.getGroup().getShortName(), currentState
                 .getDocumentId(), publishedOn, new AsyncCallbackSimple<Object>() {
             public void onSuccess(final Object result) {
                 Site.hideProgress();
-                services.app.getWorkspace().getContentTitleComponent().setContentDate(publishedOn);
+                workspace.getContentTitleComponent().setContentDate(publishedOn);
             }
         });
     }

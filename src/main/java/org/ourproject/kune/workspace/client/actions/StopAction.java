@@ -19,16 +19,22 @@
 
 package org.ourproject.kune.workspace.client.actions;
 
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 public class StopAction implements Action {
 
-    public void execute(final Object value, final Object extra, final Services services) {
-	onStop(services);
+    private final Workspace workspace;
+
+    public StopAction(final Workspace workspace) {
+        this.workspace = workspace;
     }
 
-    private void onStop(final Services services) {
-	services.app.getWorkspace().setVisible(false);
+    public void execute(final Object value, final Object extra) {
+        onStop();
+    }
+
+    private void onStop() {
+        workspace.setVisible(false);
     }
 }

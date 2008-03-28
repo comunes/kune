@@ -21,29 +21,37 @@ package org.ourproject.kune.workspace.client.actions;
 
 import java.util.Date;
 
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
 import com.google.gwt.user.client.Cookies;
 
 public class LoggedInAction implements Action {
-    public void execute(final Object value, final Object extra, final Services services) {
-        onLoggedIn(services, (UserInfoDTO) value);
+    private final Session session;
+    private final StateManager stateManager;
+
+    public LoggedInAction(final Session session, final StateManager stateManager) {
+        this.session = session;
+        this.stateManager = stateManager;
     }
 
-    private void onLoggedIn(final Services services, final UserInfoDTO userInfoDTO) {
+    public void execute(final Object value, final Object extra) {
+        onLoggedIn((UserInfoDTO) value);
+    }
+
+    private void onLoggedIn(final UserInfoDTO userInfoDTO) {
         setCookie(userInfoDTO);
-        services.session.setUserHash(userInfoDTO.getUserHash());
+        session.setUserHash(userInfoDTO.getUserHash());
         Site.sitebar.showLoggedUser(userInfoDTO);
         I18nLanguageDTO language = userInfoDTO.getLanguage();
-        services.stateManager.reload();
+        stateManager.reload();
         I18nUITranslationService.getInstance().setCurrentLanguage(language.getCode());
-        services.session.setCurrentLanguage(language);
+        session.setCurrentLanguage(language);
     }
 
     private void setCookie(final UserInfoDTO userInfoDTO) {

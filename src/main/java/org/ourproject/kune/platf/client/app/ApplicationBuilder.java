@@ -25,10 +25,15 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import org.ourproject.kune.blogs.client.BlogClientTool;
+import org.ourproject.kune.blogs.client.BlogsClientModule;
+import org.ourproject.kune.chat.client.ChatClientModule;
+import org.ourproject.kune.chat.client.ChatClientTool;
+import org.ourproject.kune.docs.client.DocsClientModule;
+import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.platf.client.KunePlatform;
-import org.ourproject.kune.platf.client.Services;
+import org.ourproject.kune.platf.client.PlatformClientModule;
 import org.ourproject.kune.platf.client.dispatch.ActionEvent;
-import org.ourproject.kune.platf.client.dispatch.DefaultDispacherRevisited;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.extend.HelloWorldPlugin;
@@ -44,42 +49,56 @@ import org.ourproject.kune.platf.client.state.SessionImpl;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.state.StateManagerDefault;
 import org.ourproject.kune.platf.client.tool.ClientTool;
+import org.ourproject.kune.workspace.client.WorkspaceClientModule;
 import org.ourproject.kune.workspace.client.sitebar.Site;
+import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowCloseListener;
 
 public class ApplicationBuilder {
-    private final KunePlatform platform;
 
-    public ApplicationBuilder(final KunePlatform platform) {
-        this.platform = platform;
+    public ApplicationBuilder() {
     }
 
     public void build(final String userHash, final I18nLanguageDTO initialLang) {
+        KunePlatform platform = new KunePlatform();
+        platform.addTool(new DocumentClientTool());
+        platform.addTool(new ChatClientTool());
+        platform.addTool(new BlogClientTool());
+
         HashMap<String, ClientTool> tools = indexTools(platform.getTools());
+
         final Session session = new SessionImpl(userHash, initialLang);
-        UIExtensionPointManager extensionPointManager = new UIExtensionPointManager();
         new KuneErrorHandler(session);
+
+        UIExtensionPointManager extensionPointManager = new UIExtensionPointManager();
         final DefaultApplication application = new DefaultApplication(tools, session, extensionPointManager);
+        Workspace workspace = application.getWorkspace();
         Site.showProgressLoading();
         Site.mask();
+
         ContentProvider provider = new ContentProviderImpl(ContentService.App.getInstance());
+
         HistoryWrapper historyWrapper = new HistoryWrapperImpl();
         final StateManager stateManager = new StateManagerDefault(provider, application, session, historyWrapper);
         History.addHistoryListener(stateManager);
 
+        platform.install(new PlatformClientModule(session, stateManager));
+        platform.install(new ChatClientModule(session, stateManager));
+        platform.install(new WorkspaceClientModule(session, stateManager, workspace));
+        platform.install(new DocsClientModule(session, stateManager, workspace));
+        platform.install(new BlogsClientModule());
+
         final DefaultDispatcher dispatcher = DefaultDispatcher.getInstance();
-        final DefaultDispacherRevisited dispatcherRev = DefaultDispacherRevisited.getInstance();
+
+        // Services services = new Services(application, stateManager,
+        // dispatcher, session, extensionPointManager,
+        // Kune.I18N);
 
         application.init(dispatcher, stateManager);
         subscribeActions(dispatcher, platform.getActions());
-
-        Services services = new Services(application, stateManager, dispatcher, session, extensionPointManager,
-                Kune.I18N);
-        dispatcher.setServices(services);
-        dispatcherRev.setEnvironment(services);
 
         PluginManager pluginManager = new PluginManager(extensionPointManager, Kune.I18N);
         pluginManager.install(new HelloWorldPlugin());

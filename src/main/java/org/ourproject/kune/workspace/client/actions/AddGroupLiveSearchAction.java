@@ -19,19 +19,25 @@
 
 package org.ourproject.kune.workspace.client.actions;
 
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.workspace.client.socialnet.EntityLiveSearchListener;
 import org.ourproject.kune.workspace.client.workspace.GroupLiveSearchComponent;
+import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 public class AddGroupLiveSearchAction implements Action {
 
-    public void execute(final Object value, final Object extra, final Services services) {
-        onAddMemberGroupLiveSearchAction(services, (EntityLiveSearchListener) value);
+    private final Workspace workspace;
+
+    public AddGroupLiveSearchAction(final Workspace workspace) {
+        this.workspace = workspace;
     }
 
-    private void onAddMemberGroupLiveSearchAction(final Services services, final EntityLiveSearchListener listener) {
-        GroupLiveSearchComponent groupLiveSearchComponent = services.app.getWorkspace().getGroupLiveSearchComponent();
+    public void execute(final Object value, final Object extra) {
+        onAddMemberGroupLiveSearchAction((EntityLiveSearchListener) value);
+    }
+
+    private void onAddMemberGroupLiveSearchAction(final EntityLiveSearchListener listener) {
+        GroupLiveSearchComponent groupLiveSearchComponent = workspace.getGroupLiveSearchComponent();
         groupLiveSearchComponent.addListener(listener);
         groupLiveSearchComponent.show();
     }

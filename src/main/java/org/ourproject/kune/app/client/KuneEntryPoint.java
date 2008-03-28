@@ -22,15 +22,9 @@ package org.ourproject.kune.app.client;
 
 import java.util.HashMap;
 
-import org.ourproject.kune.blogs.client.BlogsClientModule;
-import org.ourproject.kune.chat.client.ChatClientModule;
-import org.ourproject.kune.docs.client.DocsClientModule;
-import org.ourproject.kune.platf.client.KunePlatform;
-import org.ourproject.kune.platf.client.PlatformClientModule;
 import org.ourproject.kune.platf.client.app.ApplicationBuilder;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.services.Kune;
-import org.ourproject.kune.workspace.client.WorkspaceClientModule;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -86,13 +80,7 @@ public class KuneEntryPoint implements EntryPoint {
 
                     public void onSuccess(final HashMap<String, String> result) {
                         I18nUITranslationService.getInstance().setLexicon(result);
-                        KunePlatform platform = new KunePlatform();
-                        platform.install(new PlatformClientModule());
-                        platform.install(new WorkspaceClientModule());
-                        platform.install(new DocsClientModule());
-                        platform.install(new ChatClientModule());
-                        platform.install(new BlogsClientModule());
-                        new ApplicationBuilder(platform).build(userHash, initialLang);
+                        new ApplicationBuilder().build(userHash, initialLang);
                     }
                 });
             }

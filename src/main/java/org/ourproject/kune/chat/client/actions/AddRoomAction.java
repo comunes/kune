@@ -20,7 +20,6 @@
 
 package org.ourproject.kune.chat.client.actions;
 
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
@@ -28,27 +27,37 @@ import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
+import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
 public class AddRoomAction implements Action {
 
-    public void execute(final Object value, final Object extra, final Services services) {
-        String name = (String) value;
-        GroupDTO group = services.session.getCurrentState().getGroup();
-        ContainerDTO container = services.session.getCurrentState().getFolder();
-        addRoom(services, name, group, container);
+    private final StateManager stateManager;
+    private final Session session;
+
+    public AddRoomAction(final Session session, final StateManager stateManager) {
+        this.session = session;
+        this.stateManager = stateManager;
     }
 
-    private void addRoom(final Services services, final String name, final GroupDTO group, final ContainerDTO container) {
+    public void execute(final Object value, final Object extra) {
+        String name = (String) value;
+        GroupDTO group = session.getCurrentState().getGroup();
+        ContainerDTO container = session.getCurrentState().getFolder();
+        addRoom(name, group, container);
+    }
+
+    private void addRoom(final String name, final GroupDTO group, final ContainerDTO container) {
         Site.showProgressProcessing();
         ContentServiceAsync server = ContentService.App.getInstance();
         String groupShortName = group.getShortName();
-        server.addRoom(services.session.getUserHash(), groupShortName, container.getId(), groupShortName + "-" + name,
+        server.addRoom(session.getUserHash(), groupShortName, container.getId(), groupShortName + "-" + name,
                 new AsyncCallbackSimple<StateDTO>() {
                     public void onSuccess(final StateDTO state) {
-                        services.stateManager.setRetrievedState(state);
+                        stateManager.setRetrievedState(state);
                         // FIXME: Isn't using cache (same in Add folder)
-                        services.stateManager.reloadContextAndTitles();
+                        stateManager.reloadContextAndTitles();
                         Site.hideProgress();
                     }
                 });

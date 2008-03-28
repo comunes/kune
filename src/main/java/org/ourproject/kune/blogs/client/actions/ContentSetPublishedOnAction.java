@@ -19,31 +19,11 @@
 
 package org.ourproject.kune.blogs.client.actions;
 
-import java.util.Date;
-
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
-import org.ourproject.kune.platf.client.dto.StateDTO;
-import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
-import org.ourproject.kune.platf.client.rpc.ContentService;
-import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
-import org.ourproject.kune.workspace.client.sitebar.Site;
 
 public class ContentSetPublishedOnAction implements Action {
 
-    public void execute(final Object value, final Object extra, final Services services) {
-        onContentsetPublishedOn(services, (Date) value);
+    public void execute(final Object value, final Object extra) {
     }
 
-    private void onContentsetPublishedOn(final Services services, final Date publishedOn) {
-        Site.showProgressProcessing();
-        ContentServiceAsync server = ContentService.App.getInstance();
-        StateDTO currentState = services.session.getCurrentState();
-        server.setPublishedOn(services.session.getUserHash(), currentState.getGroup().getShortName(), currentState
-                .getDocumentId(), publishedOn, new AsyncCallbackSimple<Object>() {
-            public void onSuccess(final Object result) {
-                Site.hideProgress();
-            }
-        });
-    }
 }

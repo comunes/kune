@@ -20,21 +20,10 @@
 
 package org.ourproject.kune.blogs.client.actions;
 
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
-import org.ourproject.kune.platf.client.dto.ContainerDTO;
-import org.ourproject.kune.platf.client.dto.GroupDTO;
 
 public class AddFolderAction implements Action {
-    public void execute(final Object value, final Object extra, final Services services) {
-        String name = (String) value;
-        GroupDTO group = services.session.getCurrentState().getGroup();
-        ContainerDTO container = services.session.getCurrentState().getFolder();
-        addFolder(services, name, group, container);
-    }
 
-    private void addFolder(final Services services, final String name, final GroupDTO group,
-            final ContainerDTO container) {
-
+    public void execute(final Object value, final Object extra) {
     }
 }

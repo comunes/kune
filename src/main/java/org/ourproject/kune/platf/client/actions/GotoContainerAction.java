@@ -19,20 +19,29 @@
 
 package org.ourproject.kune.platf.client.actions;
 
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.StateManager;
 
 public class GotoContainerAction implements Action {
 
-    public void execute(final Object value, final Object extra, final Services services) {
-        onGoto(services, (Long) value);
+    private final Session session;
+    private final StateManager stateManager;
+
+    public GotoContainerAction(final StateManager stateManager, final Session session) {
+        this.stateManager = stateManager;
+        this.session = session;
     }
 
-    private void onGoto(final Services services, final Long folderId) {
-        StateToken newStateToken = services.session.getCurrentState().getStateToken();
+    public void execute(final Object value, final Object extra) {
+        onGoto((Long) value);
+    }
+
+    private void onGoto(final Long folderId) {
+        StateToken newStateToken = session.getCurrentState().getStateToken();
         newStateToken.setDocument(null);
         newStateToken.setFolder(folderId.toString());
-        services.stateManager.setState(newStateToken);
+        stateManager.setState(newStateToken);
     }
 }

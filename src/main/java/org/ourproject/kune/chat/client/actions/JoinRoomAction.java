@@ -19,12 +19,11 @@
 
 package org.ourproject.kune.chat.client.actions;
 
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.chat.client.ChatProvider;
 import org.ourproject.kune.chat.client.rooms.Room;
 import org.ourproject.kune.chat.client.rooms.RoomUser;
-import org.ourproject.kune.platf.client.Services;
 import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.services.Kune;
 
 import com.calclab.gwtjsjac.client.XmppMessage;
 import com.calclab.gwtjsjac.client.XmppMessageListener;
@@ -69,7 +68,7 @@ public class JoinRoomAction implements Action {
         room.addInfoMessage(Kune.I18N.t("You have entered the room!"));
     }
 
-    public void execute(final Object value, final Object extra, final Services services) {
+    public void execute(final Object value, final Object extra) {
         joinRoom((Room) value, (String) extra);
     }
 
