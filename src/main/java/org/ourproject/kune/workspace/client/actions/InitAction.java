@@ -38,7 +38,7 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 
-public class InitAction implements Action {
+public class InitAction implements Action<Object> {
     private final Session session;
     private final Dispatcher dispatcher;
     private final Workspace workspace;
@@ -49,10 +49,10 @@ public class InitAction implements Action {
         this.workspace = workspace;
     }
 
-    public void execute(final Object value, final Object extra) {
+    public void execute(final Object value) {
         PrefetchUtilities.preFetchImpImages();
         getInitData();
-        dispatcher.fire(WorkspaceEvents.RECALCULATE_WORKSPACE_SIZE, null, null);
+        dispatcher.fire(WorkspaceEvents.RECALCULATE_WORKSPACE_SIZE, null);
         Timer prefetchTimer = new Timer() {
             public void run() {
                 PrefetchUtilities.doTasksDeferred(workspace);
@@ -78,11 +78,11 @@ public class InitAction implements Action {
                 session.setCountries(initData.getCountries());
                 session.setTimezones(initData.getTimezones());
                 UserInfoDTO currentUser = initData.getUserInfo();
-                dispatcher.fire(WorkspaceEvents.INIT_DATA_RECEIVED, initData, null);
+                dispatcher.fire(WorkspaceEvents.INIT_DATA_RECEIVED, initData);
                 if (currentUser == null) {
-                    dispatcher.fire(WorkspaceEvents.USER_LOGGED_OUT, null, null);
+                    dispatcher.fire(WorkspaceEvents.USER_LOGGED_OUT, null);
                 } else {
-                    dispatcher.fire(WorkspaceEvents.USER_LOGGED_IN, currentUser, null);
+                    dispatcher.fire(WorkspaceEvents.USER_LOGGED_IN, currentUser);
                 }
                 RootPanel.get("kuneinitialcurtain").setVisible(false);
 

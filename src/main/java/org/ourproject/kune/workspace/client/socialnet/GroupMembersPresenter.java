@@ -130,7 +130,7 @@ public class GroupMembersPresenter extends AbstractPresenter implements GroupMem
     }
 
     public void onJoin() {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.REQ_JOIN_GROUP, null, null);
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.REQ_JOIN_GROUP, null);
     }
 
     public void onSelection(final String groupShortName, final String groupLongName) {
@@ -176,7 +176,7 @@ public class GroupMembersPresenter extends AbstractPresenter implements GroupMem
     }
 
     public void addCollab(final String groupShortName) {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ADD_COLLAB_MEMBER, groupShortName, this);
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ADD_COLLAB_MEMBER, groupShortName);
     }
 
 }

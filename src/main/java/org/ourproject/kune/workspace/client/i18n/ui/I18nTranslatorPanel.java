@@ -269,7 +269,7 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
                     final Object newValue, final Object oldValue, final int rowIndex, final int colIndex) {
                 String idValue = record.getAsString(id);
                 String trKey = record.getAsString("trKey");
-                presenter.doTranslation(idValue, trKey, oldValue, newValue);
+                presenter.doTranslation(idValue, trKey, (String) newValue);
                 record.set(field, KuneStringUtils.escapeHtmlLight((String) newValue));
             }
         });
@@ -283,7 +283,7 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
                 if (text == null || text.length() == 0) {
                     String trWithoutNT = removeNT(trKey);
                     record.set("text", trWithoutNT);
-                    presenter.doTranslation(idValue, trKey, trWithoutNT, trWithoutNT);
+                    presenter.doTranslation(idValue, trKey, trWithoutNT);
                 }
             }
         });

@@ -31,18 +31,19 @@ import org.ourproject.kune.platf.client.tool.ClientTool;
 
 public class KunePlatform implements Register {
     private final ArrayList<ClientTool> tools;
-    private final ArrayList<ActionEvent> actions;
+    private final ArrayList<ActionEvent<?>> actions;
 
     public KunePlatform() {
         this.tools = new ArrayList<ClientTool>();
-        this.actions = new ArrayList<ActionEvent>();
+        this.actions = new ArrayList<ActionEvent<?>>();
     }
 
     public void addTool(final ClientTool clientTool) {
         tools.add(clientTool);
     }
 
-    public void addAction(final String eventName, final Action action) {
+    @SuppressWarnings("unchecked")
+    public void addAction(final String eventName, final Action<?> action) {
         actions.add(new ActionEvent(eventName, action));
     }
 
@@ -54,7 +55,7 @@ public class KunePlatform implements Register {
         return tools;
     }
 
-    public ArrayList<ActionEvent> getActions() {
+    public ArrayList<ActionEvent<?>> getActions() {
         return actions;
     }
 

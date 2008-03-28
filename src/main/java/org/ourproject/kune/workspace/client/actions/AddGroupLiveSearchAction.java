@@ -24,7 +24,7 @@ import org.ourproject.kune.workspace.client.socialnet.EntityLiveSearchListener;
 import org.ourproject.kune.workspace.client.workspace.GroupLiveSearchComponent;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
-public class AddGroupLiveSearchAction implements Action {
+public class AddGroupLiveSearchAction implements Action<EntityLiveSearchListener> {
 
     private final Workspace workspace;
 
@@ -32,8 +32,8 @@ public class AddGroupLiveSearchAction implements Action {
         this.workspace = workspace;
     }
 
-    public void execute(final Object value, final Object extra) {
-        onAddMemberGroupLiveSearchAction((EntityLiveSearchListener) value);
+    public void execute(final EntityLiveSearchListener listener) {
+        onAddMemberGroupLiveSearchAction(listener);
     }
 
     private void onAddMemberGroupLiveSearchAction(final EntityLiveSearchListener listener) {

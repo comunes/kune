@@ -22,7 +22,9 @@ package org.ourproject.kune.workspace.client.i18n;
 import org.ourproject.kune.platf.client.PlatformEvents;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
+import org.ourproject.kune.platf.client.dto.DoTranslationActionParams;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
+import org.ourproject.kune.platf.client.extend.UIExtensionElement;
 import org.ourproject.kune.platf.client.extend.UIExtensionPoint;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
@@ -58,12 +60,12 @@ public class I18nTranslatorPresenter implements I18nTranslatorComponent {
     public void doClose() {
         view.hide();
         DefaultDispatcher.getInstance().fire(PlatformEvents.DETACH_FROM_EXT_POINT,
-                UIExtensionPoint.CONTENT_BOTTOM_ICONBAR, view);
+                new UIExtensionElement(UIExtensionPoint.CONTENT_BOTTOM_ICONBAR, view));
     }
 
-    public void doTranslation(final String id, final String trKey, final Object oldValue, final Object newValue) {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.DO_TRANSLATION, id,
-                new String[] { trKey, (String) newValue });
+    public void doTranslation(final String id, final String trKey, final String translation) {
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.DO_TRANSLATION,
+                new DoTranslationActionParams(id, trKey, translation));
     }
 
     public I18nLanguageDTO getLanguage() {
@@ -71,12 +73,12 @@ public class I18nTranslatorPresenter implements I18nTranslatorComponent {
     }
 
     public void doShowTranslator() {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.SHOW_TRANSLATOR, null, null);
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.SHOW_TRANSLATOR, null);
     }
 
     public void attachIconToBottomBar(final View view) {
         DefaultDispatcher.getInstance().fire(PlatformEvents.ATTACH_TO_EXT_POINT,
-                UIExtensionPoint.CONTENT_BOTTOM_ICONBAR, view);
+                new UIExtensionElement(UIExtensionPoint.CONTENT_BOTTOM_ICONBAR, view));
     }
 
 }

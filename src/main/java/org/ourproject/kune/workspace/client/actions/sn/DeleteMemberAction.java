@@ -29,7 +29,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
-public class DeleteMemberAction implements Action {
+public class DeleteMemberAction implements Action<String> {
     private final Session session;
     private final StateManager stateManager;
 
@@ -38,8 +38,8 @@ public class DeleteMemberAction implements Action {
         this.stateManager = stateManager;
     }
 
-    public void execute(final Object value, final Object extra) {
-        onDeleteMember((String) value);
+    public void execute(final String value) {
+        onDeleteMember(value);
     }
 
     private void onDeleteMember(final String groupShortName) {

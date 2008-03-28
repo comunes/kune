@@ -31,7 +31,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
-public class ContentSetTagsAction implements Action {
+public class ContentSetTagsAction implements Action<String> {
 
     private final Session session;
     private final Workspace workspace;
@@ -41,8 +41,8 @@ public class ContentSetTagsAction implements Action {
         this.workspace = workspace;
     }
 
-    public void execute(final Object value, final Object extra) {
-        onContentsetTags((String) value);
+    public void execute(final String value) {
+        onContentsetTags(value);
     }
 
     private void onContentsetTags(final String tags) {

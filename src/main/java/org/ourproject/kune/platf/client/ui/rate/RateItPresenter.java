@@ -19,8 +19,8 @@
 
 package org.ourproject.kune.platf.client.ui.rate;
 
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
 public class RateItPresenter {
@@ -62,7 +62,7 @@ public class RateItPresenter {
             newValue = new Double(currentRate.doubleValue() - 0.5);
         }
         setRatePanel(newValue);
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.RATE_CONTENT, newValue, null);
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.RATE_CONTENT, newValue);
     }
 
     protected void starOver(final int starMouseOver) {

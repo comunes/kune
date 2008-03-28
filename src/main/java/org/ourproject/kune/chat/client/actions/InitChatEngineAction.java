@@ -24,7 +24,7 @@ import org.ourproject.kune.chat.client.ChatState;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 
-public class InitChatEngineAction implements Action {
+public class InitChatEngineAction implements Action<InitDataDTO> {
 
     private final ChatClientTool chatTool;
 
@@ -32,8 +32,8 @@ public class InitChatEngineAction implements Action {
         this.chatTool = chatTool;
     }
 
-    public void execute(final Object value, final Object extra) {
-        InitDataDTO initData = (InitDataDTO) value;
+    public void execute(final InitDataDTO value) {
+        InitDataDTO initData = value;
         ChatState state = new ChatState(initData.getChatHttpBase(), initData.getChatDomain(), initData
                 .getChatRoomHost());
         chatTool.initEngine(state);

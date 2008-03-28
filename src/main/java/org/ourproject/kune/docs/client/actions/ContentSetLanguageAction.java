@@ -29,7 +29,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
-public class ContentSetLanguageAction implements Action {
+public class ContentSetLanguageAction implements Action<String> {
 
     private final Session session;
     private final Workspace workspace;
@@ -39,8 +39,8 @@ public class ContentSetLanguageAction implements Action {
         this.workspace = workspace;
     }
 
-    public void execute(final Object value, final Object extra) {
-        onContentSetLanguage((String) value);
+    public void execute(final String value) {
+        onContentSetLanguage(value);
     }
 
     private void onContentSetLanguage(final String languageCode) {

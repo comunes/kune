@@ -25,6 +25,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
+@SuppressWarnings("unchecked")
 public class ShowTranslatorAction implements Action {
 
     private final Session session;
@@ -35,7 +36,7 @@ public class ShowTranslatorAction implements Action {
         this.workspace = workspace;
     }
 
-    public void execute(final Object value, final Object extra) {
+    public void execute(final Object value) {
         onShowTranslatorAction();
     }
 

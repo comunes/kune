@@ -28,7 +28,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
-public class ContentAddAuthorAction implements Action {
+public class ContentAddAuthorAction implements Action<String> {
 
     private final Session session;
     private final StateManager stateManager;
@@ -38,8 +38,8 @@ public class ContentAddAuthorAction implements Action {
         this.session = session;
     }
 
-    public void execute(final Object value, final Object extra) {
-        onContentAddAuthor((String) value);
+    public void execute(final String value) {
+        onContentAddAuthor(value);
     }
 
     private void onContentAddAuthor(final String authorShortName) {

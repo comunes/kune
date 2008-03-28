@@ -26,6 +26,7 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 
+@SuppressWarnings("unchecked")
 public class GoParentFolderAction implements Action {
     private final StateManager stateManager;
     private final Session session;
@@ -35,7 +36,7 @@ public class GoParentFolderAction implements Action {
         this.session = session;
     }
 
-    public void execute(final Object value, final Object extra) {
+    public void execute(final Object value) {
         goParent(session.getCurrentState(), stateManager);
     }
 

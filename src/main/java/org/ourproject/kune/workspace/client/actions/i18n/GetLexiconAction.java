@@ -29,10 +29,10 @@ import org.ourproject.kune.platf.client.services.Kune;
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class GetLexiconAction implements Action {
+public class GetLexiconAction implements Action<String> {
 
-    public void execute(final Object value, final Object extra) {
-        onGetLexicon((String) value);
+    public void execute(final String value) {
+        onGetLexicon(value);
     }
 
     private void onGetLexicon(final String language) {

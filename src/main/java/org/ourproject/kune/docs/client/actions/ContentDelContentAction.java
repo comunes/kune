@@ -27,7 +27,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
-public class ContentDelContentAction implements Action {
+public class ContentDelContentAction implements Action<String> {
 
     private final Session session;
     private final StateManager stateManager;
@@ -37,8 +37,8 @@ public class ContentDelContentAction implements Action {
         this.session = session;
     }
 
-    public void execute(final Object value, final Object extra) {
-        onContentDelContent((String) value);
+    public void execute(final String value) {
+        onContentDelContent(value);
     }
 
     private void onContentDelContent(final String documentId) {

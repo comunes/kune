@@ -49,7 +49,7 @@ public class DefaultApplication implements Application {
 
         DesktopView desktop = WorkspaceFactory.createDesktop(workspace, new SiteBarListener() {
             public void onUserLoggedOut() {
-                dispatcher.fire(WorkspaceEvents.USER_LOGGED_OUT, null, null);
+                dispatcher.fire(WorkspaceEvents.USER_LOGGED_OUT, null);
             }
 
             public void onChangeState(StateToken token) {
@@ -90,10 +90,10 @@ public class DefaultApplication implements Application {
     }
 
     public void start() {
-        dispatcher.fireDeferred(WorkspaceEvents.START_APP, null, null);
+        dispatcher.fireDeferred(WorkspaceEvents.START_APP, null);
     }
 
     public void stop() {
-        dispatcher.fire(WorkspaceEvents.STOP_APP, null, null);
+        dispatcher.fire(WorkspaceEvents.STOP_APP, null);
     }
 }

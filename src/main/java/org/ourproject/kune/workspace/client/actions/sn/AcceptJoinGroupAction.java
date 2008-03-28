@@ -30,7 +30,7 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
-public class AcceptJoinGroupAction implements Action {
+public class AcceptJoinGroupAction implements Action<String> {
 
     private final StateManager stateManager;
     private final Workspace workspace;
@@ -42,8 +42,8 @@ public class AcceptJoinGroupAction implements Action {
         this.stateManager = stateManager;
     }
 
-    public void execute(final Object value, final Object extra) {
-        onAcceptJoinGroup((String) value);
+    public void execute(final String groupShortName) {
+        onAcceptJoinGroup(groupShortName);
     }
 
     private void onAcceptJoinGroup(final String groupShortName) {

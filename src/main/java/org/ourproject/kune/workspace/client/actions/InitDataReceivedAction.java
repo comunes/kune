@@ -23,7 +23,7 @@ import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
-public class InitDataReceivedAction implements Action {
+public class InitDataReceivedAction implements Action<Object> {
 
     private final Workspace workspace;
     private final Session session;
@@ -33,7 +33,7 @@ public class InitDataReceivedAction implements Action {
         this.workspace = workspace;
     }
 
-    public void execute(final Object value, final Object extra) {
+    public void execute(final Object value) {
         onInitDataReceived();
     }
 

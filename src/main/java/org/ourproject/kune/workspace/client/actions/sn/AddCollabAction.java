@@ -30,7 +30,7 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
-public class AddCollabAction implements Action {
+public class AddCollabAction implements Action<String> {
 
     private final Session session;
     private final StateManager stateManager;
@@ -42,8 +42,8 @@ public class AddCollabAction implements Action {
         this.workspace = workspace;
     }
 
-    public void execute(final Object value, final Object extra) {
-        onAddCollab((String) value);
+    public void execute(final String groupShortName) {
+        onAddCollab(groupShortName);
     }
 
     private void onAddCollab(final String groupShortName) {

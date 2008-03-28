@@ -27,7 +27,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
-public class ChangeGroupWsThemeAction implements Action {
+public class ChangeGroupWsThemeAction implements Action<String> {
 
     private final Workspace workspace;
     private final Session session;
@@ -37,8 +37,8 @@ public class ChangeGroupWsThemeAction implements Action {
         this.workspace = workspace;
     }
 
-    public void execute(final Object value, final Object extra) {
-        onChangeGroupWsTheme((String) value);
+    public void execute(final String theme) {
+        onChangeGroupWsTheme(theme);
     }
 
     private void onChangeGroupWsTheme(final String theme) {

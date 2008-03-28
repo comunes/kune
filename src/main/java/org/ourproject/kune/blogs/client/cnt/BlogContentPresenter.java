@@ -30,6 +30,7 @@ import org.ourproject.kune.platf.client.PlatformEvents;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.extend.UIExtensionElement;
 import org.ourproject.kune.platf.client.extend.UIExtensionPoint;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
@@ -72,14 +73,14 @@ public class BlogContentPresenter implements BlogContent, BlogReaderListener, Te
                     public void onSuccess(final Object result) {
                         if (content.hasDocument()) {
                             // Don't permit rate content while your are editing
-                            DefaultDispatcher.getInstance().fire(WorkspaceEvents.DISABLE_RATEIT, null, null);
+                            DefaultDispatcher.getInstance().fire(WorkspaceEvents.DISABLE_RATEIT, null);
                             TextEditor editor = components.getDocumentEditor();
                             editor.setContent(content.getContent());
                             view.show(editor.getView());
                             DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXT_POINT,
-                                    UIExtensionPoint.CONTENT_TOOLBAR_LEFT, null);
+                                    UIExtensionPoint.CONTENT_TOOLBAR_LEFT);
                             DefaultDispatcher.getInstance().fire(PlatformEvents.ATTACH_TO_EXT_POINT,
-                                    UIExtensionPoint.CONTENT_TOOLBAR_LEFT, editor.getToolBar());
+                                    new UIExtensionElement(UIExtensionPoint.CONTENT_TOOLBAR_LEFT, editor.getToolBar()));
                         } else {
                             FolderEditor editor = components.getFolderEditor();
                             editor.setFolder(content.getFolder());
@@ -87,25 +88,25 @@ public class BlogContentPresenter implements BlogContent, BlogReaderListener, Te
                         }
                         listener.onEdit();
                     }
-                }, null);
+                });
     }
 
     public void onSave(final String text) {
         content.setContent(text);
-        DefaultDispatcher.getInstance().fire(BlogsEvents.SAVE_DOCUMENT, content, this);
+        DefaultDispatcher.getInstance().fire(BlogsEvents.SAVE_DOCUMENT, content);
         // Re-enable rateIt widget
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ENABLE_RATEIT, null, null);
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ENABLE_RATEIT, null);
     }
 
     public void onCancel() {
         showContent();
         listener.onCancel();
         // Re-enable rateIt widget
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ENABLE_RATEIT, null, null);
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ENABLE_RATEIT, null);
     }
 
     public void onDelete() {
-        DefaultDispatcher.getInstance().fire(BlogsEvents.DEL_CONTENT, content.getDocumentId(), null);
+        DefaultDispatcher.getInstance().fire(BlogsEvents.DEL_CONTENT, content.getDocumentId());
     }
 
     public View getView() {
@@ -126,18 +127,15 @@ public class BlogContentPresenter implements BlogContent, BlogReaderListener, Te
             reader.showDocument(content.getContent());
             components.getDocumentEditor().reset();
             readerControl.setRights(content.getContentRights());
-            DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXT_POINT, UIExtensionPoint.CONTENT_TOOLBAR_LEFT,
-                    null);
+            DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXT_POINT, UIExtensionPoint.CONTENT_TOOLBAR_LEFT);
             DefaultDispatcher.getInstance().fire(PlatformEvents.ATTACH_TO_EXT_POINT,
-                    UIExtensionPoint.CONTENT_TOOLBAR_LEFT, readerControl.getView());
+                    new UIExtensionElement(UIExtensionPoint.CONTENT_TOOLBAR_LEFT, readerControl.getView()));
             view.show(reader.getView());
         } else {
             FolderViewer viewer = components.getFolderViewer();
             viewer.setFolder(content.getFolder());
-            DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXT_POINT, UIExtensionPoint.CONTENT_TOOLBAR_LEFT,
-                    null);
+            DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXT_POINT, UIExtensionPoint.CONTENT_TOOLBAR_LEFT);
             view.show(viewer.getView());
         }
     }
-
 }

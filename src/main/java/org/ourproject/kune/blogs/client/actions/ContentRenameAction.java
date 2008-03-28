@@ -21,10 +21,10 @@ package org.ourproject.kune.blogs.client.actions;
 
 import org.ourproject.kune.platf.client.dispatch.Action;
 
+@SuppressWarnings("unchecked")
 public class ContentRenameAction implements Action {
 
-    @SuppressWarnings("unchecked")
-    public void execute(final Object value, final Object extra) {
+    public void execute(final Object value) {
     }
 
 }

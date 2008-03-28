@@ -22,7 +22,7 @@ package org.ourproject.kune.workspace.client.actions;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
-public class ClearExtensionPointAction implements Action {
+public class ClearExtensionPointAction implements Action<String> {
 
     private final Workspace workspace;
 
@@ -30,11 +30,7 @@ public class ClearExtensionPointAction implements Action {
         this.workspace = workspace;
     }
 
-    public void execute(final Object value, final Object extra) {
-        onClearAction((String) value);
-    }
-
-    private void onClearAction(final String id) {
-        workspace.clearExtensionPoint(id);
+    public void execute(final String extId) {
+        workspace.clearExtensionPoint(extId);
     }
 }

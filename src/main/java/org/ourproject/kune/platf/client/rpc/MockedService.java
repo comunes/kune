@@ -30,6 +30,7 @@ public class MockedService {
         void run();
     }
 
+    @SuppressWarnings("unchecked")
     protected void answer(final Object response, final AsyncCallback callback) {
         delay(new Delayer() {
             public void run() {

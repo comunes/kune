@@ -22,7 +22,8 @@ package org.ourproject.kune.blogs.client.actions;
 
 import org.ourproject.kune.platf.client.dispatch.Action;
 
+@SuppressWarnings("unchecked")
 public class SaveDocumentAction implements Action {
-    public void execute(final Object value, final Object extra) {
+    public void execute(final Object value) {
     }
 }

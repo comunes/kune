@@ -150,12 +150,13 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
         }
     }
 
-    public void setTranslation(final String id, final String translation) throws SerializableException {
+    public String setTranslation(final String id, final String translation) throws SerializableException {
         I18nTranslation trans = super.find(new Long(id));
         if (trans != null) {
             String escapedTranslation = KuneStringUtils.escapeHtmlLight(translation);
             trans.setText(escapedTranslation);
             persist(trans);
+            return escapedTranslation;
         } else {
             throw new SerializableException();
         }

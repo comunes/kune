@@ -25,7 +25,6 @@ import org.ourproject.kune.platf.client.ui.IconLabel;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.MenuBar;
-import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -96,7 +95,7 @@ public class IndexedStackPanelWithSubItems extends IndexedStackPanel {
             setStyleName("kune-StackSubItemLabel");
             actions.setStyleName("kune-StackSubItemActions");
             for (int i = 0; i < memberActions.length; i++) {
-                addAction(memberActions[i], name, null);
+                addAction(memberActions[i], name);
             }
         }
 
@@ -110,25 +109,25 @@ public class IndexedStackPanelWithSubItems extends IndexedStackPanel {
             setMenu();
         }
 
-        public void addAction(final StackSubItemAction memberAction, final String param1, final String param2) {
+        public void addAction(final StackSubItemAction memberAction, final String param) {
             String itemHtml = "";
             AbstractImagePrototype icon = memberAction.getIcon();
             if (icon != null) {
                 itemHtml = icon.getHTML();
             }
             itemHtml += memberAction.getText();
-            actions.addItem(itemHtml, true, createCommand(memberAction.getAction(), param1, param2));
+            actions.addItem(itemHtml, true, createCommand(memberAction.getAction(), param));
         }
 
         private void setMenu() {
             String label = icon.getHTML() + name;
-            ((MenuItem) getItems().get(0)).setText(label);
+            getItems().get(0).setText(label);
         }
 
-        private Command createCommand(final String action, final String param1, final String param2) {
+        private Command createCommand(final String action, final String param) {
             return new Command() {
                 public void execute() {
-                    presenter.doAction(action, param1, param2);
+                    presenter.doAction(action, param);
                 }
             };
         }

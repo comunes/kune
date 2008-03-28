@@ -109,9 +109,9 @@ public class I18nRPC implements RPC, I18nService {
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
-    public void setTranslation(final String userHash, final String id, final String translation)
+    public String setTranslation(final String userHash, final String id, final String translation)
             throws SerializableException {
-        i18nTranslationManager.setTranslation(id, translation);
+        return i18nTranslationManager.setTranslation(id, translation);
     }
 
     private UserSession getUserSession() {

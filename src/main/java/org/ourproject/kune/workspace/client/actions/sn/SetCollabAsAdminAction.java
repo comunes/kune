@@ -30,7 +30,7 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
-public class SetCollabAsAdminAction implements Action {
+public class SetCollabAsAdminAction implements Action<String> {
 
     private final Session session;
     private final StateManager stateManager;
@@ -42,8 +42,8 @@ public class SetCollabAsAdminAction implements Action {
         this.workspace = workspace;
     }
 
-    public void execute(final Object value, final Object extra) {
-        onSetCollabAsAdmin((String) value);
+    public void execute(final String value) {
+        onSetCollabAsAdmin(value);
     }
 
     private void onSetCollabAsAdmin(final String groupShortName) {

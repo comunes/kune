@@ -29,7 +29,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
-public class UnJoinGroupAction implements Action {
+public class UnJoinGroupAction implements Action<String> {
     private final Session session;
     private final StateManager stateManager;
 
@@ -38,8 +38,8 @@ public class UnJoinGroupAction implements Action {
         this.stateManager = stateManager;
     }
 
-    public void execute(final Object value, final Object extra) {
-        onUnJoinGroup((String) value);
+    public void execute(final String value) {
+        onUnJoinGroup(value);
     }
 
     private void onUnJoinGroup(final String groupShortName) {

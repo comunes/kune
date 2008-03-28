@@ -32,7 +32,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
-public class AddFolderAction implements Action {
+public class AddFolderAction implements Action<String> {
     private final Session session;
     private final StateManager stateManager;
 
@@ -41,8 +41,7 @@ public class AddFolderAction implements Action {
         this.session = session;
     }
 
-    public void execute(final Object value, final Object extra) {
-        String name = (String) value;
+    public void execute(final String name) {
         GroupDTO group = session.getCurrentState().getGroup();
         ContainerDTO container = session.getCurrentState().getFolder();
         addFolder(name, group, container);

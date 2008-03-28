@@ -24,11 +24,12 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.GroupService;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
+import org.ourproject.kune.platf.client.rpc.ParamCallback;
 import org.ourproject.kune.platf.client.state.Session;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class CreateNewGroupAction implements Action {
+public class CreateNewGroupAction implements Action<ParamCallback<GroupDTO, StateToken>> {
 
     private final Session session;
 
@@ -36,9 +37,8 @@ public class CreateNewGroupAction implements Action {
         this.session = session;
     }
 
-    @SuppressWarnings("unchecked")
-    public void execute(final Object value, final Object extra) {
-        onNewGroup((GroupDTO) value, (AsyncCallback<StateToken>) extra);
+    public void execute(final ParamCallback<GroupDTO, StateToken> paramCall) {
+        onNewGroup(paramCall.getParam(), paramCall.getCallback());
     }
 
     private void onNewGroup(final GroupDTO group, final AsyncCallback<StateToken> callback) {

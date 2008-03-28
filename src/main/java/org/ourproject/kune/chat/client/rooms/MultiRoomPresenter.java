@@ -27,6 +27,8 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.extend.UIExtensionPoint;
 
+import com.google.gwt.user.client.ui.CellPanel;
+
 public class MultiRoomPresenter implements MultiRoom, RoomListener {
     private MultiRoomView view;
     private Room currentRoom;
@@ -106,8 +108,9 @@ public class MultiRoomPresenter implements MultiRoom, RoomListener {
     }
 
     public void attachIconToBottomBar(final View view) {
+
         DefaultDispatcher.getInstance().fire(PlatformEvents.ATTACH_TO_EXT_POINT,
-                UIExtensionPoint.CONTENT_BOTTOM_ICONBAR, view);
+                new UIExtensionPoint(UIExtensionPoint.CONTENT_BOTTOM_ICONBAR, (CellPanel) view));
     }
 
     public void changeRoomSubject(final String text) {

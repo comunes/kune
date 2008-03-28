@@ -29,22 +29,22 @@ public class ThemeMenuPresenter implements ThemeMenuComponent {
     private ThemeMenuView view;
 
     public void chooseTheme(final String theme) {
-	DefaultDispatcher.getInstance().fire(WorkspaceEvents.CHANGE_GROUP_WSTHEME, theme, null);
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.CHANGE_GROUP_WSTHEME, theme);
     }
 
     public void init(final ThemeMenuView view) {
-	this.view = view;
+        this.view = view;
     }
 
     public void setThemes(final String[] themes) {
-	view.setThemes(themes);
+        view.setThemes(themes);
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void setVisible(final boolean visible) {
-	view.setVisible(visible);
+        view.setVisible(visible);
     }
 }

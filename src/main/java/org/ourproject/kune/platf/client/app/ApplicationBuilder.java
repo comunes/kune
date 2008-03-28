@@ -116,10 +116,10 @@ public class ApplicationBuilder {
         application.start();
     }
 
-    private void subscribeActions(final DefaultDispatcher dispatcher, final ArrayList<ActionEvent> actions) {
-        ActionEvent actionEvent;
+    private void subscribeActions(final DefaultDispatcher dispatcher, final ArrayList<ActionEvent<?>> actions) {
+        ActionEvent<?> actionEvent;
 
-        for (Iterator<ActionEvent> it = actions.iterator(); it.hasNext();) {
+        for (Iterator<ActionEvent<?>> it = actions.iterator(); it.hasNext();) {
             actionEvent = it.next();
             dispatcher.subscribe(actionEvent.event, actionEvent.action);
         }

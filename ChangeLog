@@ -1,4 +1,5 @@
 2008-03-28 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* Added generalization to Actions
 	* Action/Dispacher refactorization
 
 2008-03-26 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>

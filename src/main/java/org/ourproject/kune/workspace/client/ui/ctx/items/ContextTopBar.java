@@ -109,7 +109,7 @@ class ContextTopBar extends VerticalPanel {
             }
             pathSubmenu.addItem(indent + img.folder().getHTML() + "&nbsp;" + folderName, true, new Command() {
                 public void execute() {
-                    DefaultDispatcher.getInstance().fire(PlatformEvents.GOTO_CONTAINER, folder.getId(), null);
+                    DefaultDispatcher.getInstance().fire(PlatformEvents.GOTO_CONTAINER, folder.getId());
                 }
             });
             indent = indent + "&nbsp&nbsp;";

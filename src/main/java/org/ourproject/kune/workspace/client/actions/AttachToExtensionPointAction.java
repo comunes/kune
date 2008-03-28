@@ -19,11 +19,11 @@
 
 package org.ourproject.kune.workspace.client.actions;
 
-import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.extend.UIExtensionElement;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
-public class AttachToExtensionPointAction implements Action {
+public class AttachToExtensionPointAction implements Action<UIExtensionElement> {
 
     private final Workspace workspace;
 
@@ -31,11 +31,7 @@ public class AttachToExtensionPointAction implements Action {
         this.workspace = workspace;
     }
 
-    public void execute(final Object value, final Object extra) {
-        onAttachAction((String) value, (View) extra);
-    }
-
-    private void onAttachAction(final String id, final View view) {
-        workspace.attachToExtensionPoint(id, view);
+    public void execute(final UIExtensionElement element) {
+        workspace.attachToExtensionPoint(element);
     }
 }

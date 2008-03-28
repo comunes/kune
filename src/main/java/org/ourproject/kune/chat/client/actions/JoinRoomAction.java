@@ -23,6 +23,7 @@ import org.ourproject.kune.chat.client.ChatProvider;
 import org.ourproject.kune.chat.client.rooms.Room;
 import org.ourproject.kune.chat.client.rooms.RoomUser;
 import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.dto.JoinRoomActionParams;
 import org.ourproject.kune.platf.client.services.Kune;
 
 import com.calclab.gwtjsjac.client.XmppMessage;
@@ -30,14 +31,20 @@ import com.calclab.gwtjsjac.client.XmppMessageListener;
 import com.calclab.gwtjsjac.client.mandioca.rooms.RoomPresenceListener;
 import com.calclab.gwtjsjac.client.mandioca.rooms.XmppRoom;
 
-public class JoinRoomAction implements Action {
+public class JoinRoomAction implements Action<JoinRoomActionParams> {
     private final ChatProvider provider;
 
     public JoinRoomAction(final ChatProvider provider) {
         this.provider = provider;
     }
 
-    private void joinRoom(final Room room, final String userAlias) {
+    public void execute(final JoinRoomActionParams params) {
+        joinRoom(params);
+    }
+
+    private void joinRoom(final JoinRoomActionParams params) {
+        final Room room = params.getRoom();
+        // FIXME and params.userAlias() ????
         room.addInfoMessage(Kune.I18N.t("Connecting to the room..."));
         XmppRoom handler = provider.getChat().joinRoom(room.getName(), room.getSessionAlias());
         handler.addMessageListener(new XmppMessageListener() {
@@ -66,10 +73,6 @@ public class JoinRoomAction implements Action {
         room.setHandler(handler);
 
         room.addInfoMessage(Kune.I18N.t("You have entered the room!"));
-    }
-
-    public void execute(final Object value, final Object extra) {
-        joinRoom((Room) value, (String) extra);
     }
 
 }

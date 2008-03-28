@@ -85,7 +85,7 @@ public class StateManagerDefault implements StateManager {
         } else if (historyToken.equals(Site.LOGIN_TOKEN)) {
             Site.doLogin(oldStateEncoded);
         } else if (historyToken.equals(Site.TRANSLATE_TOKEN)) {
-            app.getDispatcher().fire(WorkspaceEvents.SHOW_TRANSLATOR, null, null);
+            app.getDispatcher().fire(WorkspaceEvents.SHOW_TRANSLATOR, null);
         } else if (historyToken.equals(Site.FIXME_TOKEN)) {
             if (oldState == null) {
                 onHistoryChanged(new StateToken());

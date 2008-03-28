@@ -57,7 +57,7 @@ public class GroupMembersPanel extends StackedDropDownPanel implements GroupMemb
     public void addAddMemberLink() {
         super.addBottomLink(img.addGreen(), Kune.I18N.t("Add member"), Kune.I18N
                 .t("Add a group or a person as member of this group"), WorkspaceEvents.ADD_MEMBER_GROUPLIVESEARCH,
-                presenter, null);
+                presenter);
     }
 
     public void clear() {

@@ -23,12 +23,13 @@ import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
+import org.ourproject.kune.platf.client.rpc.ParamCallback;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class ContentRenameAction implements Action {
+public class ContentRenameAction implements Action<ParamCallback<String, String>> {
 
     private final Session session;
 
@@ -36,9 +37,8 @@ public class ContentRenameAction implements Action {
         this.session = session;
     }
 
-    @SuppressWarnings("unchecked")
-    public void execute(final Object value, final Object extra) {
-        onContentRename((String) value, (AsyncCallback<String>) extra);
+    public void execute(final ParamCallback<String, String> paramCall) {
+        onContentRename(paramCall.getParam(), paramCall.getCallback());
     }
 
     private void onContentRename(final String newName, final AsyncCallback<String> callback) {

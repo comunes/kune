@@ -25,7 +25,6 @@ import java.util.List;
 import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.PlatformEvents;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
@@ -44,10 +43,6 @@ public class ParticipationPresenter extends AbstractPresenter implements Partici
 
     public void init(final ParticipationView view) {
         this.view = view;
-    }
-
-    public void doAction(final String action, final String group) {
-        DefaultDispatcher.getInstance().fire(action, group, this);
     }
 
     public View getView() {

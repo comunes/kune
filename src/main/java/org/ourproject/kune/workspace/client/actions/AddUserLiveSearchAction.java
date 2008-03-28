@@ -24,7 +24,7 @@ import org.ourproject.kune.workspace.client.socialnet.EntityLiveSearchListener;
 import org.ourproject.kune.workspace.client.workspace.UserLiveSearchComponent;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
-public class AddUserLiveSearchAction implements Action {
+public class AddUserLiveSearchAction implements Action<EntityLiveSearchListener> {
 
     private final Workspace workspace;
 
@@ -32,8 +32,8 @@ public class AddUserLiveSearchAction implements Action {
         this.workspace = workspace;
     }
 
-    public void execute(final Object value, final Object extra) {
-        onAddUserLiveSearchAction((EntityLiveSearchListener) value);
+    public void execute(final EntityLiveSearchListener listener) {
+        onAddUserLiveSearchAction(listener);
     }
 
     private void onAddUserLiveSearchAction(final EntityLiveSearchListener listener) {

@@ -26,6 +26,7 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
+import org.ourproject.kune.platf.client.rpc.ParamCallback;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.sitebar.msg.SiteMessage;
@@ -80,7 +81,8 @@ public class NewGroupPresenter implements NewGroup {
             }
         };
 
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.CREATE_NEW_GROUP, group, callback);
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.CREATE_NEW_GROUP,
+                new ParamCallback<GroupDTO, StateToken>(group, callback));
     }
 
     public View getView() {

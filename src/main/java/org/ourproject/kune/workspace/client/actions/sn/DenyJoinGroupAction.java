@@ -29,7 +29,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
-public class DenyJoinGroupAction implements Action {
+public class DenyJoinGroupAction implements Action<String> {
 
     private final Session session;
     private final StateManager stateManager;
@@ -39,8 +39,8 @@ public class DenyJoinGroupAction implements Action {
         this.stateManager = stateManager;
     }
 
-    public void execute(final Object value, final Object extra) {
-        onDenyJoinGroup((String) value);
+    public void execute(final String value) {
+        onDenyJoinGroup(value);
     }
 
     private void onDenyJoinGroup(final String groupShortName) {

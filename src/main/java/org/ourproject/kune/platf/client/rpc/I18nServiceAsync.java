@@ -32,7 +32,7 @@ public interface I18nServiceAsync {
 
     void getTranslation(String userHash, String language, String text, AsyncCallback<String> callback);
 
-    void setTranslation(String userHash, String id, String translation, AsyncCallback<?> asyncCallback);
+    void setTranslation(String userHash, String id, String translation, AsyncCallback<String> asyncCallback);
 
     void getInitialLanguage(String localeParam, AsyncCallback<I18nLanguageDTO> callback);
 

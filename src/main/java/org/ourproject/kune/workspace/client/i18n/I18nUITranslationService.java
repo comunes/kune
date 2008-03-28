@@ -22,6 +22,7 @@ package org.ourproject.kune.workspace.client.i18n;
 import java.util.HashMap;
 
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
+import org.ourproject.kune.platf.client.dto.GetTranslationActionParams;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.rpc.I18nService;
 import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
@@ -102,7 +103,8 @@ public class I18nUITranslationService extends I18nTranslationService {
             }
         } else {
             // Not translated and not in db, make a petition for translation
-            DefaultDispatcher.getInstance().fireDeferred(WorkspaceEvents.GET_TRANSLATION, this.currentLanguage, text);
+            DefaultDispatcher.getInstance().fireDeferred(WorkspaceEvents.GET_TRANSLATION,
+                    new GetTranslationActionParams(this.currentLanguage, text));
             Log.debug("Registering in db '" + text + "' as pending translation");
             translation = removeNT(encodeText);
             lexicon.put(encodeText, UNTRANSLATED_VALUE);

@@ -36,7 +36,7 @@ public interface I18nService extends RemoteService {
 
     String getTranslation(String userHash, String language, String text) throws SerializableException;
 
-    void setTranslation(String userHash, String id, String translation) throws SerializableException;
+    String setTranslation(String userHash, String id, String translation) throws SerializableException;
 
     public class App {
         private static I18nServiceAsync ourInstance = null;

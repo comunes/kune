@@ -26,16 +26,15 @@ import org.ourproject.kune.workspace.client.sitebar.rpc.UserServiceAsync;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class OnlyCheckUserSessionAction implements Action {
+public class OnlyCheckUserSessionAction implements Action<AsyncCallback<Object>> {
     private final Session session;
 
     public OnlyCheckUserSessionAction(final Session session) {
         this.session = session;
     }
 
-    @SuppressWarnings("unchecked")
-    public void execute(final Object value, final Object extra) {
-        onOnlyCheckUserSession((AsyncCallback<Object>) value);
+    public void execute(final AsyncCallback<Object> value) {
+        onOnlyCheckUserSession(value);
     }
 
     private void onOnlyCheckUserSession(final AsyncCallback<Object> callback) {

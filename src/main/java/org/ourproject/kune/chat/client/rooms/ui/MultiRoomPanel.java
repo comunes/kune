@@ -417,14 +417,13 @@ public class MultiRoomPanel implements MultiRoomView, View {
 
         buddyAdd.addListener(new ButtonListenerAdapter() {
             public void onClick(final Button button, final EventObject e) {
-                DefaultDispatcher.getInstance().fire(WorkspaceEvents.ADD_USERLIVESEARCH, addBuddyListener, null);
+                DefaultDispatcher.getInstance().fire(WorkspaceEvents.ADD_USERLIVESEARCH, addBuddyListener);
             }
         });
 
         inviteUserToRoom.addListener(new ButtonListenerAdapter() {
             public void onClick(final Button button, final EventObject e) {
-                DefaultDispatcher.getInstance()
-                        .fire(WorkspaceEvents.ADD_USERLIVESEARCH, inviteUserToRoomListener, null);
+                DefaultDispatcher.getInstance().fire(WorkspaceEvents.ADD_USERLIVESEARCH, inviteUserToRoomListener);
             }
         });
 

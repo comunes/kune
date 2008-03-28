@@ -104,7 +104,7 @@ public class AdminContextPanel extends VerticalPanel implements AdminContextView
             addAuthorLabel = new IconLabel(IMG.addGreen(), Kune.I18N.t("Add author"));
             addAuthorLabel.addClickListener(new ClickListener() {
                 public void onClick(final Widget sender) {
-                    presenter.doAction(DocsEvents.ADD_AUTHOR, null, null);
+                    presenter.doAction(DocsEvents.ADD_AUTHOR, null);
                 }
             });
         } else {

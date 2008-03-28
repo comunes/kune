@@ -20,9 +20,8 @@
 
 package org.ourproject.kune.docs.client.actions;
 
-import org.ourproject.kune.docs.client.cnt.DocumentContent;
 import org.ourproject.kune.platf.client.dispatch.Action;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.SaveDocumentActionParams;
 import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
@@ -34,46 +33,46 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtext.client.widgets.MessageBox;
 import com.gwtext.client.widgets.MessageBox.AlertCallback;
 
-public class SaveDocumentAction implements Action {
+public class SaveDocumentAction implements Action<SaveDocumentActionParams> {
     private final Session session;
 
     public SaveDocumentAction(final Session session) {
         this.session = session;
     }
 
-    public void execute(final Object value, final Object extra) {
-        save((StateDTO) value, (DocumentContent) extra);
+    public void execute(final SaveDocumentActionParams params) {
+        save(params);
     }
 
-    private void save(final StateDTO content, final DocumentContent documentContent) {
+    private void save(final SaveDocumentActionParams params) {
         Site.showProgressSaving();
         ContentServiceAsync server = ContentService.App.getInstance();
-        server.save(session.getUserHash(), session.getCurrentState().getGroup().getShortName(),
-                content.getDocumentId(), content.getContent(), new AsyncCallback<Integer>() {
-                    public void onFailure(final Throwable caught) {
-                        Site.hideProgress();
-                        try {
-                            throw caught;
-                        } catch (final SessionExpiredException e) {
-                            Site.doLogout();
-                            MessageBox.alert(Kune.I18N.t("Alert"), Kune.I18N
-                                    .t("Your session has expired. Please login again."), new AlertCallback() {
+        server.save(session.getUserHash(), session.getCurrentState().getGroup().getShortName(), params.getStateDTO()
+                .getDocumentId(), params.getStateDTO().getContent(), new AsyncCallback<Integer>() {
+            public void onFailure(final Throwable caught) {
+                Site.hideProgress();
+                try {
+                    throw caught;
+                } catch (final SessionExpiredException e) {
+                    Site.doLogout();
+                    MessageBox.alert(Kune.I18N.t("Alert"),
+                            Kune.I18N.t("Your session has expired. Please login again."), new AlertCallback() {
                                 public void execute() {
                                     Site.doLogin(null);
                                 }
                             });
-                        } catch (final Throwable e) {
-                            Site.error(Kune.I18N.t("Error saving document. Retrying..."));
-                            documentContent.onSaveFailed();
-                        }
-                    }
+                } catch (final Throwable e) {
+                    Site.error(Kune.I18N.t("Error saving document. Retrying..."));
+                    params.getDocumentContent().onSaveFailed();
+                }
+            }
 
-                    public void onSuccess(final Integer result) {
-                        Site.hideProgress();
-                        documentContent.onSaved();
-                    }
+            public void onSuccess(final Integer result) {
+                Site.hideProgress();
+                params.getDocumentContent().onSaved();
+            }
 
-                });
+        });
     }
 
 }

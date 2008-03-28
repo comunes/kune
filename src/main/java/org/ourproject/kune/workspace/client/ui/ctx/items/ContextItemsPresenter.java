@@ -31,6 +31,7 @@ import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.ContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
+import org.ourproject.kune.platf.client.rpc.ParamCallback;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.sitebar.Site;
@@ -94,7 +95,7 @@ public class ContextItemsPresenter implements ContextItems {
     public void create(final String typeName, final String value, final String eventName) {
         if (value != null) {
             Dispatcher dispatcher = DefaultDispatcher.getInstance();
-            dispatcher.fire(eventName, value, null);
+            dispatcher.fire(eventName, value);
         }
     }
 
@@ -107,7 +108,7 @@ public class ContextItemsPresenter implements ContextItems {
     }
 
     public void onGoUp() {
-        DefaultDispatcher.getInstance().fire(DocsEvents.GO_PARENT_FOLDER, null, null);
+        DefaultDispatcher.getInstance().fire(DocsEvents.GO_PARENT_FOLDER, null);
     }
 
     public void setControlsVisible(final boolean visible) {
@@ -116,12 +117,12 @@ public class ContextItemsPresenter implements ContextItems {
 
     public void onTitleRename(final String text, final String token) {
         Site.showProgressSaving();
-        DefaultDispatcher.getInstance().fire(DocsEvents.RENAME_CONTENT, text, new AsyncCallbackSimple<Object>() {
-            public void onSuccess(final Object result) {
-                DefaultDispatcher.getInstance().fire(WorkspaceEvents.RELOAD_CONTEXT, null, null);
-                Site.hideProgress();
-            }
-        });
+        DefaultDispatcher.getInstance().fire(DocsEvents.RENAME_CONTENT,
+                new ParamCallback<String, Object>(text, new AsyncCallbackSimple<Object>() {
+                    public void onSuccess(final Object result) {
+                        DefaultDispatcher.getInstance().fire(WorkspaceEvents.RELOAD_CONTEXT, null);
+                        Site.hideProgress();
+                    }
+                }));
     }
-
 }

@@ -23,8 +23,8 @@ package org.ourproject.kune.workspace.client.workspace;
 import java.util.Iterator;
 
 import org.ourproject.kune.platf.client.Component;
-import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.extend.UIExtensionElement;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorComponent;
@@ -76,9 +76,9 @@ public interface Workspace extends Component {
 
     public ContentBottomToolBarComponent getContentBottomToolBarComponent();
 
-    public void attachToExtensionPoint(String id, View view);
+    public void attachToExtensionPoint(UIExtensionElement ext);
 
-    public void detachFromExtensionPoint(String id, View view);
+    public void detachFromExtensionPoint(UIExtensionElement ext);
 
     public void clearExtensionPoint(String id);
 

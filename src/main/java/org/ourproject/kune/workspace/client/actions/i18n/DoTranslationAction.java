@@ -20,6 +20,7 @@
 package org.ourproject.kune.workspace.client.actions.i18n;
 
 import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.dto.DoTranslationActionParams;
 import org.ourproject.kune.platf.client.rpc.I18nService;
 import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
 import org.ourproject.kune.platf.client.services.Kune;
@@ -28,7 +29,7 @@ import org.ourproject.kune.workspace.client.sitebar.Site;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class DoTranslationAction implements Action {
+public class DoTranslationAction implements Action<DoTranslationActionParams> {
 
     private final Session session;
 
@@ -36,22 +37,22 @@ public class DoTranslationAction implements Action {
         this.session = session;
     }
 
-    public void execute(final Object value, final Object extra) {
-        onDoTranslationAction((String) value, (String[]) extra);
+    public void execute(final DoTranslationActionParams params) {
+        onDoTranslationAction(params);
     }
 
-    private void onDoTranslationAction(final String id, final String[] translation) {
+    private void onDoTranslationAction(final DoTranslationActionParams params) {
         Site.showProgressSaving();
         final I18nServiceAsync server = I18nService.App.getInstance();
-        server.setTranslation(session.getUserHash(), id, translation[1], new AsyncCallback<Object>() {
+        server.setTranslation(session.getUserHash(), params.getId(), params.getText(), new AsyncCallback<String>() {
             public void onFailure(final Throwable caught) {
                 Site.hideProgress();
                 Site.error(Kune.I18N.t("Server error saving translation"));
             }
 
-            public void onSuccess(final Object result) {
+            public void onSuccess(final String result) {
                 Site.hideProgress();
-                Kune.I18N.setTranslationAfterSave(translation[0], translation[1]);
+                Kune.I18N.setTranslationAfterSave(params.getTrKey(), result);
             }
         });
     }

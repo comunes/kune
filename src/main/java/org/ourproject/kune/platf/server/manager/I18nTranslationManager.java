@@ -43,7 +43,7 @@ public interface I18nTranslationManager extends Manager<I18nTranslation, Long> {
 
     void setTranslation(String language, String text, String translation);
 
-    void setTranslation(String id, String translation) throws SerializableException;
+    String setTranslation(String id, String translation) throws SerializableException;
 
     SearchResult<I18nTranslation> getUntranslatedLexicon(String language, Integer firstResult, Integer maxResults);
 

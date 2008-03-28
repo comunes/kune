@@ -24,7 +24,7 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 
-public class GotoContainerAction implements Action {
+public class GotoContainerAction implements Action<Long> {
 
     private final Session session;
     private final StateManager stateManager;
@@ -34,8 +34,8 @@ public class GotoContainerAction implements Action {
         this.session = session;
     }
 
-    public void execute(final Object value, final Object extra) {
-        onGoto((Long) value);
+    public void execute(final Long value) {
+        onGoto(value);
     }
 
     private void onGoto(final Long folderId) {

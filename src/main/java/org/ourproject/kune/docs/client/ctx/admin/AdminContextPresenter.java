@@ -85,15 +85,15 @@ public class AdminContextPresenter extends AbstractPresenter implements AdminCon
     }
 
     public void setPublishedOn(final Date date) {
-        DefaultDispatcher.getInstance().fire(DocsEvents.SET_PUBLISHED_ON, date, null);
+        DefaultDispatcher.getInstance().fire(DocsEvents.SET_PUBLISHED_ON, date);
     }
 
     public void setTags(final String tags) {
-        DefaultDispatcher.getInstance().fire(DocsEvents.SET_TAGS, tags, null);
+        DefaultDispatcher.getInstance().fire(DocsEvents.SET_TAGS, tags);
     }
 
     public void doChangeLanguage(final String langCode) {
-        DefaultDispatcher.getInstance().fire(DocsEvents.SET_LANGUAGE, langCode, null);
+        DefaultDispatcher.getInstance().fire(DocsEvents.SET_LANGUAGE, langCode);
     }
 
 }

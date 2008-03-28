@@ -25,6 +25,7 @@ import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 import com.google.gwt.user.client.Window;
 
+@SuppressWarnings("unchecked")
 public class RecalculateWorkspaceAction implements Action {
 
     private final Workspace workspace;
@@ -33,7 +34,7 @@ public class RecalculateWorkspaceAction implements Action {
         this.workspace = workspace;
     }
 
-    public void execute(final Object value, final Object extra) {
+    public void execute(final Object value) {
         onRecalculateWorkspaceAction();
     }
 

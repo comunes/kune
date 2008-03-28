@@ -31,7 +31,7 @@ import org.ourproject.kune.workspace.client.sitebar.Site;
 
 import com.google.gwt.user.client.Cookies;
 
-public class LoggedInAction implements Action {
+public class LoggedInAction implements Action<UserInfoDTO> {
     private final Session session;
     private final StateManager stateManager;
 
@@ -40,8 +40,8 @@ public class LoggedInAction implements Action {
         this.stateManager = stateManager;
     }
 
-    public void execute(final Object value, final Object extra) {
-        onLoggedIn((UserInfoDTO) value);
+    public void execute(final UserInfoDTO value) {
+        onLoggedIn(value);
     }
 
     private void onLoggedIn(final UserInfoDTO userInfoDTO) {

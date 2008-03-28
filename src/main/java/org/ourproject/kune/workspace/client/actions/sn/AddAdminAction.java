@@ -30,7 +30,7 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
-public class AddAdminAction implements Action {
+public class AddAdminAction implements Action<String> {
 
     private final Workspace workspace;
     private final StateManager stateManager;
@@ -42,8 +42,8 @@ public class AddAdminAction implements Action {
         this.workspace = workspace;
     }
 
-    public void execute(final Object value, final Object extrs) {
-        onAddAdmin((String) value);
+    public void execute(final String groupShortName) {
+        onAddAdmin(groupShortName);
     }
 
     private void onAddAdmin(final String groupShortName) {

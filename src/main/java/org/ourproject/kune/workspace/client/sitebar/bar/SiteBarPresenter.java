@@ -92,7 +92,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
                             Site.info(Kune.I18N.t("Sign in or register to create a group"));
                         }
                     }
-                }, null);
+                });
     }
 
     public void doSearch(final String termToSearch) {
@@ -128,7 +128,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
             }
         };
 
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.USER_LOGOUT, callback, null);
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.USER_LOGOUT, callback);
     }
 
     public void reloadUserInfo(final String userHash) {
@@ -146,7 +146,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
     }
 
     public void userLoggedIn(final UserInfoDTO userInfoDTO) {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.USER_LOGGED_IN, userInfoDTO, null);
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.USER_LOGGED_IN, userInfoDTO);
         view.hideLoginDialog();
         returnToPreviousState();
     }
@@ -208,7 +208,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
     }
 
     public void onHelpInTranslation() {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.SHOW_TRANSLATOR, null, null);
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.SHOW_TRANSLATOR, null);
     }
 
     public void mask() {

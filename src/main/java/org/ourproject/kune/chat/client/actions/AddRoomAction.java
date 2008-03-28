@@ -31,7 +31,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
-public class AddRoomAction implements Action {
+public class AddRoomAction implements Action<String> {
 
     private final StateManager stateManager;
     private final Session session;
@@ -41,8 +41,7 @@ public class AddRoomAction implements Action {
         this.stateManager = stateManager;
     }
 
-    public void execute(final Object value, final Object extra) {
-        String name = (String) value;
+    public void execute(final String name) {
         GroupDTO group = session.getCurrentState().getGroup();
         ContainerDTO container = session.getCurrentState().getFolder();
         addRoom(name, group, container);

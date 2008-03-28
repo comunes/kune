@@ -30,7 +30,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
-public class ContentSetPublishedOnAction implements Action {
+public class ContentSetPublishedOnAction implements Action<Date> {
 
     private final Workspace workspace;
     private final Session session;
@@ -40,8 +40,8 @@ public class ContentSetPublishedOnAction implements Action {
         this.workspace = workspace;
     }
 
-    public void execute(final Object value, final Object extra) {
-        onContentsetPublishedOn((Date) value);
+    public void execute(final Date value) {
+        onContentsetPublishedOn(value);
     }
 
     private void onContentsetPublishedOn(final Date publishedOn) {

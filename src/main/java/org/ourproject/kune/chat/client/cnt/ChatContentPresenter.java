@@ -35,7 +35,9 @@ import org.ourproject.kune.chat.client.rooms.RoomUser.UserType;
 import org.ourproject.kune.platf.client.PlatformEvents;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
+import org.ourproject.kune.platf.client.dto.JoinRoomActionParams;
 import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.extend.UIExtensionElement;
 import org.ourproject.kune.platf.client.extend.UIExtensionPoint;
 import org.ourproject.kune.platf.client.ui.UnknowComponent;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
@@ -72,19 +74,18 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener, Mult
         if (typeId.equals(ChatClientTool.TYPE_ROOT)) {
             ChatInfo info = components.getChatInfo();
             view.show(info.getView());
-            DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXT_POINT, UIExtensionPoint.CONTENT_TOOLBAR_LEFT,
-                    null);
+            DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXT_POINT, UIExtensionPoint.CONTENT_TOOLBAR_LEFT);
         } else if (typeId.equals(ChatClientTool.TYPE_ROOM)) {
             ChatRoom viewer = components.getChatRoom();
             view.show(viewer.getView());
-            DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXT_POINT, UIExtensionPoint.CONTENT_TOOLBAR_LEFT,
-                    null);
-            DefaultDispatcher.getInstance().fire(PlatformEvents.ATTACH_TO_EXT_POINT,
-                    UIExtensionPoint.CONTENT_TOOLBAR_LEFT, components.getChatRoomControl().getView());
+            DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXT_POINT, UIExtensionPoint.CONTENT_TOOLBAR_LEFT);
+            DefaultDispatcher.getInstance().fire(
+                    PlatformEvents.ATTACH_TO_EXT_POINT,
+                    new UIExtensionElement(UIExtensionPoint.CONTENT_TOOLBAR_LEFT, components.getChatRoomControl()
+                            .getView()));
         } else {
             view.show(UnknowComponent.instance.getView());
-            DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXT_POINT, UIExtensionPoint.CONTENT_TOOLBAR_LEFT,
-                    null);
+            DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXT_POINT, UIExtensionPoint.CONTENT_TOOLBAR_LEFT);
         }
     }
 
@@ -111,7 +112,7 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener, Mult
     private Room createRoom(final String roomName, final String userAlias, final UserType userType) {
         MultiRoom rooms = components.getRooms();
         final Room room = rooms.createRoom(roomName, userAlias, userType);
-        DefaultDispatcher.getInstance().fireDeferred(ChatEvents.JOIN_ROOM, room, userAlias);
+        DefaultDispatcher.getInstance().fireDeferred(ChatEvents.JOIN_ROOM, new JoinRoomActionParams(room, userAlias));
         return room;
     }
 

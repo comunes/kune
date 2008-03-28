@@ -23,6 +23,7 @@ import java.util.List;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
+import org.ourproject.kune.platf.client.dto.ShowSearcherActionParams;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.TagResultDTO;
 import org.ourproject.kune.platf.client.state.Session;
@@ -56,8 +57,9 @@ public class TagsPresenter implements TagsComponent {
     }
 
     public void doSearchTag(final String name) {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.SHOW_SEARCHER,
-                "group:" + session.getCurrentState().getGroup().getShortName() + " tag:" + name,
-                new Integer(SearchSiteView.CONTENT_SEARCH));
+        DefaultDispatcher.getInstance().fire(
+                WorkspaceEvents.SHOW_SEARCHER,
+                new ShowSearcherActionParams("group:" + session.getCurrentState().getGroup().getShortName() + " tag:"
+                        + name, SearchSiteView.CONTENT_SEARCH));
     }
 }

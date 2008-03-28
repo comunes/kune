@@ -24,7 +24,9 @@ import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 
 public interface Register {
+
     public void addTool(ClientTool clientTool);
 
-    public void addAction(String event, Action action);
+    public void addAction(String event, Action<?> action);
+
 }

@@ -29,6 +29,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
+@SuppressWarnings("unchecked")
 public class RequestJoinGroupAction implements Action {
 
     private final Session session;
@@ -39,7 +40,7 @@ public class RequestJoinGroupAction implements Action {
         this.stateManager = stateManager;
     }
 
-    public void execute(final Object value, final Object extra) {
+    public void execute(final Object value) {
         onRequestJoinGroup();
     }
 

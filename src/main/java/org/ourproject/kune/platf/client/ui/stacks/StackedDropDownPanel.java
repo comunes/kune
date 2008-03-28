@@ -151,18 +151,18 @@ public class StackedDropDownPanel extends DropDownPanel implements UIConstants {
 
     public void addBottomLink(final AbstractImagePrototype icon, final String text, final String title,
             final String action) {
-        this.addBottomLink(icon, text, title, action, null, null);
+        this.addBottomLink(icon, text, title, action, null);
     }
 
     public void addBottomLink(final AbstractImagePrototype icon, final String text, final String title,
-            final String action, final Object value, final Object extra) {
+            final String action, final Object value) {
         IconLabel link = new IconLabel(icon, text);
         link.setTitle(title);
         bottomLinksVP.add(link);
         link.addStyleName("kune-StackedDropDownPanelLink");
         link.addClickListener(new ClickListener() {
             public void onClick(final Widget arg0) {
-                presenter.doAction(action, value, extra);
+                presenter.doAction(action, value);
             }
         });
         bottomLinksVP.setCellHorizontalAlignment(link, HorizontalPanel.ALIGN_CENTER);

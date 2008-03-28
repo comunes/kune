@@ -50,6 +50,7 @@ public class TagManagerDefault extends DefaultManager<Tag, Long> implements TagM
         return tagFinder.findByTagName(tag);
     }
 
+    @SuppressWarnings("unchecked")
     public List<TagResult> getSummaryByGroup(final Group group) {
         Query q = provider.get().createNamedQuery(Tag.TAGSGROUPED);
         q.setParameter("group", group);

@@ -29,7 +29,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
-public class RateContentAction implements Action {
+public class RateContentAction implements Action<Double> {
 
     private final StateManager stateManager;
     private final Session session;
@@ -39,8 +39,8 @@ public class RateContentAction implements Action {
         this.stateManager = stateManager;
     }
 
-    public void execute(final Object value, final Object extra) {
-        onRateContent((Double) value);
+    public void execute(final Double value) {
+        onRateContent(value);
     }
 
     private void onRateContent(final Double value) {

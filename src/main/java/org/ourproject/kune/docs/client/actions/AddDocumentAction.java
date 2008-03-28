@@ -31,7 +31,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
-public class AddDocumentAction implements Action {
+public class AddDocumentAction implements Action<String> {
 
     private final Session session;
     private final StateManager stateManager;
@@ -41,8 +41,8 @@ public class AddDocumentAction implements Action {
         this.session = session;
     }
 
-    public void execute(final Object value, final Object extra) {
-        addDocument((String) value, session.getCurrentState().getFolder());
+    public void execute(final String name) {
+        addDocument(name, session.getCurrentState().getFolder());
     }
 
     private void addDocument(final String name, final ContainerDTO containerDTO) {

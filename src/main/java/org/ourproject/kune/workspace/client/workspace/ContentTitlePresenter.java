@@ -25,6 +25,7 @@ import org.ourproject.kune.docs.client.actions.DocsEvents;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.rpc.ParamCallback;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
@@ -78,7 +79,7 @@ public class ContentTitlePresenter implements ContentTitleComponent {
 
     public void onTitleRename(final String text) {
         Site.showProgressSaving();
-        DefaultDispatcher.getInstance().fire(DocsEvents.RENAME_CONTENT, text, new AsyncCallback<String>() {
+        AsyncCallback<String> callback = new AsyncCallback<String>() {
             public void onFailure(final Throwable caught) {
                 view.restoreOldTitle();
                 KuneErrorHandler.getInstance().process(caught);
@@ -87,9 +88,11 @@ public class ContentTitlePresenter implements ContentTitleComponent {
             public void onSuccess(final String result) {
                 Site.hideProgress();
                 view.setContentTitle(result);
-                DefaultDispatcher.getInstance().fire(WorkspaceEvents.RELOAD_CONTEXT, null, null);
+                DefaultDispatcher.getInstance().fire(WorkspaceEvents.RELOAD_CONTEXT, null);
             }
-        });
+        };
+        DefaultDispatcher.getInstance().fire(DocsEvents.RENAME_CONTENT,
+                new ParamCallback<String, String>(text, callback));
     }
 
 }

@@ -12,6 +12,7 @@ public class DispatcherTest {
         dispatcher = new DefaultDispatcher();
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testSubscribe() {
         Object value = new Object();
@@ -19,7 +20,7 @@ public class DispatcherTest {
         Action[] actions = new Action[3];
         for (int index = 0; index < actions.length; index++) {
             Action action = EasyMock.createNiceMock(Action.class);
-            action.execute(value, null);
+            action.execute(value);
             EasyMock.expectLastCall();
             actions[index] = action;
         }
@@ -30,7 +31,7 @@ public class DispatcherTest {
             dispatcher.subscribe(eventName, actions[index]);
         }
 
-        dispatcher.fire(eventName, value, null);
+        dispatcher.fire(eventName, value);
 
         for (int index = 0; index < actions.length; index++) {
             EasyMock.verify(actions[index]);

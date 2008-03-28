@@ -31,6 +31,7 @@ import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.EmailAddressInUseException;
 import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
 import org.ourproject.kune.platf.client.errors.UserAuthException;
+import org.ourproject.kune.platf.client.rpc.ParamCallback;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
@@ -96,7 +97,8 @@ public class LoginPresenter implements Login {
                 }
             };
 
-            DefaultDispatcher.getInstance().fire(WorkspaceEvents.USER_LOGIN, user, callback);
+            DefaultDispatcher.getInstance().fire(WorkspaceEvents.USER_LOGIN,
+                    new ParamCallback<UserDTO, UserInfoDTO>(user, callback));
         }
     }
 
@@ -137,11 +139,12 @@ public class LoginPresenter implements Login {
                     listener.userLoggedIn(userInfoDTO);
                     view.unMask();
                     view.showWelcolmeDialog();
-                    DefaultDispatcher.getInstance().fire(PlatformEvents.GOTO, userInfoDTO.getShortName(), null);
+                    DefaultDispatcher.getInstance().fire(PlatformEvents.GOTO, userInfoDTO.getShortName());
                 }
             };
 
-            DefaultDispatcher.getInstance().fire(WorkspaceEvents.USER_REGISTER, user, callback);
+            DefaultDispatcher.getInstance().fire(WorkspaceEvents.USER_REGISTER,
+                    new ParamCallback<UserDTO, UserInfoDTO>(user, callback));
         }
     }
 

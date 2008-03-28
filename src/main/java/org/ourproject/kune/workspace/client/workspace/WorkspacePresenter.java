@@ -26,6 +26,7 @@ import java.util.Iterator;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.extend.UIExtensionElement;
 import org.ourproject.kune.platf.client.extend.UIExtensionPoint;
 import org.ourproject.kune.platf.client.extend.UIExtensionPointManager;
 import org.ourproject.kune.platf.client.state.Session;
@@ -154,12 +155,12 @@ public class WorkspacePresenter implements Workspace {
         view.setVisible(visible);
     }
 
-    public void attachToExtensionPoint(final String id, final View viewToAttach) {
-        extensionPointManager.attachToExtensionPoint(id, viewToAttach);
+    public void attachToExtensionPoint(final UIExtensionElement element) {
+        extensionPointManager.attachToExtensionPoint(element.getId(), element.getView());
     }
 
-    public void detachFromExtensionPoint(final String id, final View viewToDetach) {
-        extensionPointManager.detachFromExtensionPoint(id, viewToDetach);
+    public void detachFromExtensionPoint(final UIExtensionElement element) {
+        extensionPointManager.detachFromExtensionPoint(element.getId(), element.getView());
     }
 
     public void clearExtensionPoint(final String id) {
@@ -168,11 +169,11 @@ public class WorkspacePresenter implements Workspace {
     }
 
     public void onSplitterStartResizing(final Widget sender) {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.WS_SPLITTER_STARTRESIZING, null, null);
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.WS_SPLITTER_STARTRESIZING, null);
     }
 
     public void onSplitterStopResizing(final Widget sender) {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.WS_SPLITTER_STOPRESIZING, null, null);
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.WS_SPLITTER_STOPRESIZING, null);
     }
 
     /**

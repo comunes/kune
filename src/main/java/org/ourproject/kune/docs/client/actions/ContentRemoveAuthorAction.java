@@ -28,7 +28,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
-public class ContentRemoveAuthorAction implements Action {
+public class ContentRemoveAuthorAction implements Action<String> {
 
     private final Session session;
     private final StateManager stateManager;
@@ -38,8 +38,8 @@ public class ContentRemoveAuthorAction implements Action {
         this.session = session;
     }
 
-    public void execute(final Object value, final Object extra) {
-        onContentRemoveAuthor((String) value);
+    public void execute(final String value) {
+        onContentRemoveAuthor(value);
     }
 
     private void onContentRemoveAuthor(final String authorShortName) {

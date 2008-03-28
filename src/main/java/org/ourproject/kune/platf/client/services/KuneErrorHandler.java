@@ -59,10 +59,10 @@ public class KuneErrorHandler {
             }
         } catch (final GroupNotFoundException e) {
             Site.error(Kune.I18N.t("Group not found"));
-            DefaultDispatcher.getInstance().fire(PlatformEvents.GOTO, "", null);
+            DefaultDispatcher.getInstance().fire(PlatformEvents.GOTO, "");
         } catch (final ContentNotFoundException e) {
             Site.error(Kune.I18N.t("Content not found"));
-            DefaultDispatcher.getInstance().fire(PlatformEvents.GOTO, "", null);
+            DefaultDispatcher.getInstance().fire(PlatformEvents.GOTO, "");
         } catch (final LastAdminInGroupException e) {
             Site.showAlertMessage(Kune.I18N.t("Sorry, you are the last admin of this group."
                     + " Look for someone to substitute you appropriately as admin before unjoin this group."));
