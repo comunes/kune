@@ -101,7 +101,7 @@ public class ApplicationBuilder {
         application.init(dispatcher, stateManager);
         subscribeActions(dispatcher, platform.getActions());
 
-        PluginManager pluginManager = new PluginManager(extensionPointManager, Kune.I18N);
+        PluginManager pluginManager = new PluginManager(dispatcher, extensionPointManager, Kune.I18N);
         pluginManager.install(new HelloWorldPlugin());
 
         Window.addWindowCloseListener(new WindowCloseListener() {
