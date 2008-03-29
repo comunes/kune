@@ -376,6 +376,7 @@
                 <include>**/dispatch/**</include>
                 <include>**/UIExtension*</include>
                 <include>**/PlatformEvents.**</include>
+                <include>**/BottomTrayIcon.**</include>
                 <include>**/BasicDialog.**</include>
                 <include>**/HorizontalLine.**</include>
                 <include>**/AbstractLabel.**</include>
