@@ -133,4 +133,8 @@ You'll most likely want to change which usernames are authorized to login to the
 For more details:
 http://www.igniterealtime.org/builds/openfire/docs/latest/documentation/db-integration-guide.html
 
+Appendix C: jar generation (kune-core is the base for plugin development)
+--------------------------------------------------------------------------------
+
+mvn package -Dmaven.test.skip=true -o   
 
