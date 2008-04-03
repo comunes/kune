@@ -385,6 +385,7 @@
                 <include>**/KuneUiUtils.**</include>
                 <include>**/View.**</include>
 <!--                <include>**/platf/**</include> 
+                <include>**/AbstractPresenter**</include>
                 <include>**/platf/client/extend/**</include>
                 <include>**/platf/client/*java</include>
                 <include>**/platf/client/app/**</include>
