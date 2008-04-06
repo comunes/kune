@@ -41,7 +41,7 @@ FLUSH PRIVILEGES;
  do the same with every persistence unit defined inside.
  )
  
-- Install a run openfire jabber server (see Appendix B for proper configuration of openfire)
+- Install and run a openfire jabber server (see Appendix B for proper configuration of openfire)
 
 - Run jetty:
   mvn jetty:run -Ddatabase.migrator.should.run=false # without liquibase db migraton
@@ -86,7 +86,8 @@ Example of .m2/settings.xml:
 
 Appendix B: Configuration of Openfire xmpp server
 --------------------------------------------------------------------------------
-- Install openfire in your system.
+- Install openfire in your system. 
+  NOTE: version openfire 3.4.5 don't work with this configuration, use a nightly build (Openfire 3.6.0 Alpha works) or a prior version.
   Remember: the openfire administration is in: http://localhost:9090/
 - Configure the 'Server Name' (during installation of openfire, or after editing 'Server Settings') with "localhost" initially (See kune.chat.roomHost in kune.properties if you want to use other values).
 - Configure the 'Group chat service' (in Group chat tab) with "rooms" instead of "conference".
@@ -104,6 +105,9 @@ Add this lines to conf/openfire.xml and check that the user/passwd of the db is 
     <auth>
       <className>org.jivesoftware.openfire.auth.JDBCAuthProvider</className>
     </auth>
+    <user>
+      <className>org.jivesoftware.openfire.user.JDBCUserProvider</className>
+    </user>
   </provider>
   <jdbcAuthProvider>
     <passwordSQL>SELECT password FROM kune_dev.kusers WHERE shortName=?</passwordSQL>
@@ -113,7 +117,7 @@ Add this lines to conf/openfire.xml and check that the user/passwd of the db is 
     <loadUserSQL>SELECT shortName,email FROM kune_dev.kusers WHERE shortName=?</loadUserSQL>
     <userCountSQL>SELECT COUNT(*) FROM kune_dev.kusers</userCountSQL>
     <allUsersSQL>SELECT shortName FROM kune_dev.kusers</allUsersSQL>
-    <searchSQL>SELECT shortName FROM kusers WHERE</searchSQL>
+    <searchSQL>SELECT shortName FROM kune_dev.kusers WHERE</searchSQL>
     <usernameField>shortName</usernameField>
     <nameField>name</nameField>
     <emailField>email</emailField>
