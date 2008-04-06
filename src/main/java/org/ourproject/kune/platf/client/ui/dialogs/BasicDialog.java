@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.platf.client.ui.dialogs;
 
+import com.gwtext.client.core.Position;
 import com.gwtext.client.widgets.Window;
 
 public class BasicDialog extends Window {
@@ -37,6 +38,7 @@ public class BasicDialog extends Window {
         setCollapsible(true);
         setResizable(true);
         setCloseAction(Window.HIDE);
+        setButtonAlign(Position.RIGHT);
     }
 
     public BasicDialog(final String caption, final boolean modal) {

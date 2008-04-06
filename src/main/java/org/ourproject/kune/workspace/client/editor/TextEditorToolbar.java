@@ -23,6 +23,11 @@ package org.ourproject.kune.workspace.client.editor;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.CustomPushButton;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
+import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
+import org.ourproject.kune.platf.client.ui.form.FileUploadFormSample;
+import org.ourproject.kune.platf.client.ui.imgchooser.ImageChooser;
+import org.ourproject.kune.platf.client.ui.imgchooser.ImageChooserCallback;
+import org.ourproject.kune.platf.client.ui.imgchooser.ImageData;
 import org.ourproject.kune.platf.client.ui.palette.ColorSelectListener;
 import org.ourproject.kune.platf.client.ui.palette.WebSafePalettePanel;
 import org.ourproject.kune.platf.client.ui.palette.WebSafePalettePresenter;
@@ -42,6 +47,14 @@ import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.ToggleButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtext.client.data.ArrayReader;
+import com.gwtext.client.data.DateFieldDef;
+import com.gwtext.client.data.FieldDef;
+import com.gwtext.client.data.IntegerFieldDef;
+import com.gwtext.client.data.MemoryProxy;
+import com.gwtext.client.data.RecordDef;
+import com.gwtext.client.data.Store;
+import com.gwtext.client.data.StringFieldDef;
 import com.gwtext.client.widgets.MessageBox;
 import com.gwtext.client.widgets.MessageBox.PromptCallback;
 
@@ -57,6 +70,8 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
      * the RichTextToolbar itself.
      */
     private class EventListener implements ClickListener, ChangeListener, KeyboardListener {
+
+        private ImageChooser ic;
 
         public void onChange(final Widget sender) {
             fireEdit();
@@ -86,14 +101,6 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
             } else if (sender == justifyRight) {
                 basic.setJustification(RichTextArea.Justification.RIGHT);
             } else if (sender == insertImage) {
-                // i18n
-                MessageBox.prompt("Insert image", "Enter an image URL:", new PromptCallback() {
-                    public void execute(final String btnID, final String text) {
-                        if (btnID.equals("ok") && text != null) {
-                            extended.insertImage(text);
-                        }
-                    }
-                });
                 showImagePanel();
             } else if (sender == createLink) {
                 MessageBox.prompt("Insert a link", "Enter a link URL:", new PromptCallback() {
@@ -151,6 +158,76 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
         }
 
         private void showImagePanel() {
+            // i18n:
+            FileUploadFormSample fileUploadFormSample = new FileUploadFormSample();
+            BasicDialog dialog = new BasicDialog("Insert image", false, true, 400, 400);
+            dialog.add(fileUploadFormSample);
+            dialog.show();
+
+            if (ic == null) {
+                MemoryProxy dataProxy = new MemoryProxy(getData());
+                RecordDef recordDef = new RecordDef(new FieldDef[] { new StringFieldDef("name"),
+                        new IntegerFieldDef("size"), new DateFieldDef("lastmod", "timestamp"),
+                        new StringFieldDef("url") });
+                ArrayReader reader = new ArrayReader(recordDef);
+                final Store store = new Store(dataProxy, reader, true);
+                store.load();
+
+                ic = new ImageChooser("Image Chooser", 515, 400, store);
+            }
+
+            ic.show(new ImageChooserCallback() {
+                public void onImageSelection(final ImageData data) {
+                    // Element el = DomHelper.append("images",
+                    // Format.format("<img src='{0}'
+                    // style='margin:20px;visibility:hidden;'/>",
+                    // data.getUrl()));
+                    // ExtElement extEl = new ExtElement(el);
+                    // extEl.show(true).frame();
+                }
+            });
+            // MessageBox.prompt("Insert image", "Enter an image URL:", new
+            // PromptCallback() {
+            // public void execute(final String btnID, final String text) {
+            // if (btnID.equals("ok") && text != null) {
+            // extended.insertImage(text);
+            // }
+            // }
+            // });
+
+        }
+
+        private Object[][] getData() {
+            return new Object[][] {
+            // new Object[]{"Pirates of the Caribbean", new Integer(2120), new
+            // Long(1180231870000l), "images/view/carribean.jpg"},
+            // new Object[]{"Resident Evil", new Integer(2120), new
+            // Long(1180231870000l), "images/view/resident_evil.jpg"},
+            // new Object[]{"Blood Diamond", new Integer(2120), new
+            // Long(1180231870000l), "images/view/blood_diamond.jpg"},
+            // new Object[]{"No Reservations", new Integer(2120), new
+            // Long(1180231870000l), "images/view/no_reservations.jpg"},
+            // new Object[]{"Casino Royale", new Integer(2120), new
+            // Long(1180231870000l), "images/view/casino_royale.jpg"},
+            // new Object[]{"Good Shepherd", new Integer(2120), new
+            // Long(1180231870000l), "images/view/good_shepherd.jpg"},
+            // new Object[]{"Ghost Rider", new Integer(2120), new
+            // Long(1180231870000l), "images/view/ghost_rider.jpg"},
+            // new Object[]{"Batman Begins", new Integer(2120), new
+            // Long(1180231870000l), "images/view/batman_begins.jpg"},
+            // new Object[]{"Last Samurai", new Integer(2120), new
+            // Long(1180231870000l), "images/view/last_samurai.jpg"},
+            // new Object[]{"Italian Job", new Integer(2120), new
+            // Long(1180231870000l), "images/view/italian_job.jpg"},
+            // new Object[]{"Mission Impossible III", new Integer(2120), new
+            // Long(1180231870000l), "images/view/mi3.jpg"},
+            // new Object[]{"Mr & Mrs Smith", new Integer(2120), new
+            // Long(1180231870000l), "images/view/smith.jpg"},
+            // new Object[]{"Inside Man", new Integer(2120), new
+            // Long(1180231870000l), "images/view/inside_man.jpg"},
+            // new Object[]{"The Island", new Integer(2120), new
+            // Long(1180231870000l), "images/view/island.jpg"}
+            };
         }
 
         public void onKeyDown(final Widget sender, final char keyCode, final int modifiers) {

@@ -1,6 +1,7 @@
 <module>
   <inherits name='com.google.gwt.i18n.I18N' />
   <inherits name='com.google.gwt.user.User' />
+  <inherits name="org.cafesip.gwtcomp.GWTComponents"/>
 
   <inherits name='org.ourproject.kune.platf.Kune-Platform' />
   <inherits name='org.ourproject.kune.docs.Kune-Docs' />

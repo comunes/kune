@@ -1,3 +1,7 @@
+2008-04-07 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+	* gwt-ext 2.0.3
+	* FileUpload first tests
+
 2008-03-28 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
 	* Dispacher added to Plugins
 	* Added generalization to Actions

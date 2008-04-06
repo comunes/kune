@@ -5,22 +5,26 @@ import static org.junit.Assert.assertNotNull;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Before;
+import org.junit.Test;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
+
+import com.google.inject.Inject;
 
 //FIXME: check this tests
 public abstract class XmppManagerTest {
 
-    // @Inject
+    @Inject
     XmppManager manager;
 
-    // @Before
+    @Before
     public void init() {
         IntegrationTestHelper.createInjector().injectMembers(this);
     }
 
-    // @Test
+    @Test
     public void testConnection() {
-        ChatConnection handler1 = manager.login("testUser1", "easy1", "test");
+        ChatConnection handler1 = manager.login("admin", "easyeasy", "test");
         assertNotNull(handler1);
     }
 

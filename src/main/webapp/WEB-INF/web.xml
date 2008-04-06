@@ -9,7 +9,9 @@
 
   <filter>
     <filter-name>rack</filter-name>
-    <filter-class>org.ourproject.kune.rack.RackServletFilter</filter-class>
+    <filter-class>
+      org.ourproject.kune.rack.RackServletFilter
+    </filter-class>
     <init-param>
       <param-name>org.ourproject.kune.rack.RackModule</param-name>
       <param-value>
@@ -31,6 +33,26 @@
   <servlet-mapping>
     <servlet-name>Jabber HTTP Binding Servlet</servlet-name>
     <url-pattern>/http-bind/</url-pattern>
+  </servlet-mapping>
+
+  <!-- Change the servlet name and mapping with appropriate name and URL pattern respectively -->
+  <servlet>
+    <servlet-name>FileUploadService</servlet-name>
+    <servlet-class>
+      org.cafesip.gwtcomp.server.FileUploadServlet
+    </servlet-class>
+
+    <init-param>
+      <param-name>action-class</param-name>
+
+      <!-- Replace the action class name below with the fully qualified name of the action class -->
+      <param-value>org.ourproject.kune.platf.server.manager.impl.FileUploadManagerDefault</param-value>
+    </init-param>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>FileUploadService</servlet-name>
+    <url-pattern>/services/fileupload</url-pattern>
   </servlet-mapping>
 
 </web-app>

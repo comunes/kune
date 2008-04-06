@@ -45,7 +45,7 @@ public class AbstractSearcherPanel {
                 new UrlParam("limit", PAGINATION_SIZE) };
         store.setBaseParams(newParams);
         store.load(0, PAGINATION_SIZE);
-				// see bind/unbind in:
+        // see bind/unbind in:
         // http://groups.google.com/group/gwt-ext/browse_thread/thread/ae0badb8114b30cd?hl=en
     }
 
@@ -57,15 +57,13 @@ public class AbstractSearcherPanel {
                 "Respect {} values in translations, "
                         + "these will produce: 'Displaying results 1 - 25 of 95465' for instance"));
         pag.setEmptyMsg(Kune.I18N.t("No results to display"));
-        // FIXME (remove from liquibase)
-        // pag.setAfterPageText(Kune.I18N.tWithNT("of {0}", "Used to show
-        // multiple results: '1 of 30'"));
-        // pag.setBeforePageText(Kune.I18N.t("Page"));
-        // pag.setFirstText(Kune.I18N.t("First Page"));
-        // pag.setLastText(Kune.I18N.t("Last Page"));
-        // pag.setNextText(Kune.I18N.t("Next Page"));
-        // pag.setPrevText(Kune.I18N.t("Previous Page"));
-        // pag.setRefreshText(Kune.I18N.t("Refresh"));
+        pag.setAfterPageText(Kune.I18N.tWithNT("of {0}", "Used to show multiple results: '1 of 30'"));
+        pag.setBeforePageText(Kune.I18N.t("Page"));
+        pag.setFirstText(Kune.I18N.t("First Page"));
+        pag.setLastText(Kune.I18N.t("Last Page"));
+        pag.setNextText(Kune.I18N.t("Next Page"));
+        pag.setPrevText(Kune.I18N.t("Previous Page"));
+        pag.setRefreshText(Kune.I18N.t("Refresh"));
 
         grid.addListener(new PanelListenerAdapter() {
             public void onRender(final Component component) {

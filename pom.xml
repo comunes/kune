@@ -43,8 +43,8 @@
     <!-- http://code.google.com/p/gwt-ext/issues/detail?id=180 -->
     <dependency>
       <groupId>com.gwtext</groupId>
-      <artifactId>gwt-ext</artifactId>
-      <version>2.0.2</version>
+      <artifactId>gwtext</artifactId>
+      <version>2.0.3</version>
     </dependency>
     <dependency>
       <groupId>com.allen_sauer.gwt.log.gwt-log</groupId>
@@ -158,10 +158,44 @@
       <version>2.1</version>
       <classifier>jdk15</classifier>
     </dependency>
+
     <dependency>
       <groupId>commons-collections</groupId>
       <artifactId>commons-collections</artifactId>
       <version>3.2</version>
+    </dependency>
+
+		<!-- File upload -->
+    <dependency>
+      <groupId>commons-beanutils</groupId>
+      <artifactId>commons-beanutils</artifactId>
+      <version>1.7.0</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>1.2</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>1.1.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.cafesip.gwtcomp</groupId>
+      <artifactId>gwtcomp</artifactId>
+      <version>0.0.2b</version>
+    </dependency>
+    <dependency>
+      <groupId>org.cafesip.gwtcomp</groupId>
+      <artifactId>gwtcomp-servlet</artifactId>
+      <version>0.0.2b</version>
     </dependency>
 
     <!-- db upgrades -->
@@ -235,6 +269,10 @@
     <repository>
       <id>kune-maven</id>
       <url>http://kune.ourproject.org/mavenrepo/</url>
+    </repository>
+    <repository>
+      <id>gwtext</id>
+      <url>http://www.gwt-ext.com/maven2/</url>
     </repository>
   </repositories>
   <pluginRepositories>

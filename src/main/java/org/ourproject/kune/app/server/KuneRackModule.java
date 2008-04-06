@@ -80,6 +80,7 @@ public class KuneRackModule implements RackModule {
         builder.add(KuneContainerListener.class);
 
         builder.exclude("/http-bind.*");
+        builder.exclude("/services/fileupload.*");
         builder.at(".*").install(new LogFilter());
         builder.at(".*").install(new GuiceFilter());
 
@@ -97,14 +98,14 @@ public class KuneRackModule implements RackModule {
         builder.at("^/kune/(.*)$").install(new ForwardFilter("^/kune/(.*)$", "/gwt/org.ourproject.kune.app.Kune/{0}"));
     }
 
-	private void installGuiceModules(final RackBuilder builder) {
-		builder.use(new ServletModule());
+    private void installGuiceModules(final RackBuilder builder) {
+        builder.use(new ServletModule());
         builder.use(new PlatformServerModule());
         builder.use(new DocumentServerModule());
         builder.use(new ChatServerModule());
         builder.use(new BlogServerModule());
         builder.use(new RESTServicesModule());
         builder.use(configModule);
-	}
+    }
 
 }
