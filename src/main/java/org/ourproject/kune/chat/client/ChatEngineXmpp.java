@@ -19,29 +19,24 @@
  */
 package org.ourproject.kune.chat.client;
 
-import java.util.Date;
+import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
+import org.ourproject.kune.platf.client.services.Kune;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.gwtjsjac.client.Debugger;
-import com.calclab.gwtjsjac.client.PresenceShow;
-import com.calclab.gwtjsjac.client.XmppConnection;
-import com.calclab.gwtjsjac.client.XmppFactory;
-import com.calclab.gwtjsjac.client.XmppUserSettings;
-import com.calclab.gwtjsjac.client.impl.JsJacFactory;
-import com.calclab.gwtjsjac.client.log.GWTLoggerOutput;
-import com.calclab.gwtjsjac.client.mandioca.XmppSession;
-import com.calclab.gwtjsjac.client.mandioca.rooms.XmppRoom;
+import com.calclab.emite.client.core.bosh.BoshOptions;
+import com.calclab.emite.client.im.roster.Roster.SubscriptionMode;
+import com.calclab.emite.client.xmpp.stanzas.XmppURI;
+import com.calclab.emiteuiplugin.client.EmiteUIPlugin;
+import com.calclab.emiteuiplugin.client.UserChatOptions;
+import com.calclab.emiteuiplugin.client.dialog.OwnPresence;
+import com.calclab.emiteuiplugin.client.dialog.OwnPresence.OwnStatus;
+import com.calclab.emiteuiplugin.client.params.MultiChatCreationParam;
 
 class ChatEngineXmpp implements ChatEngine {
-    private XmppSession session;
     private final ChatState state;
-    private final XmppConnection connection;
 
     public ChatEngineXmpp(final ChatState state) {
         this.state = state;
-        XmppFactory factory = JsJacFactory.getInstance();
-        connection = factory.createBindingConnection(state.httpBase, 2000, GWTLoggerOutput.instance);
-        Debugger.debug(connection, new LoggerOutputImpl());
     }
 
     public ChatState getState() {
@@ -49,26 +44,25 @@ class ChatEngineXmpp implements ChatEngine {
     }
 
     public void login(final String chatName, final String chatPassword) {
+        UserChatOptions userChatOptions = new UserChatOptions(chatName + "@" + state.domain, chatPassword, "blue",
+                SubscriptionMode.auto_accept_all);
+        state.userOptions = userChatOptions;
+        DefaultDispatcher.getInstance().fire(EmiteUIPlugin.CREATE_CHAT_DIALOG,
+                new MultiChatCreationParam(new BoshOptions(state.httpBase), Kune.I18N, state.userOptions));
         Log.debug("LOGIN CHAT: " + chatName + "[" + chatPassword + "]");
-        state.user = new XmppUserSettings(state.domain, chatName, chatPassword, XmppUserSettings.NON_SASL);
-        state.user.resource = "kuneClient" + new Date().getTime();
-        session = new XmppSession(connection, true);
-        session.login(state.user);
-        // FIXME: hardcoded
-        session.getUser().sendPresence(PresenceShow.CHAT, ":: ready ::");
+        DefaultDispatcher.getInstance().fire(EmiteUIPlugin.SET_OWN_PRESENCE, new OwnPresence(OwnStatus.online));
     }
 
     public void logout() {
-        // FIXME: bug
-        // this$static has no properties
-        // [Break on this error] if (this$static.session !== null) {
-        if (session != null) {
-            session.logout();
-        }
+        DefaultDispatcher.getInstance().fire(EmiteUIPlugin.SET_OWN_PRESENCE, new OwnPresence(OwnStatus.offline));
+        DefaultDispatcher.getInstance().fire(EmiteUIPlugin.CLOSE_ALLCHATS, new Boolean(false));
     }
 
-    public XmppRoom joinRoom(final String roomName, final String userAlias) {
-        return session.joinRoom(state.roomHost, roomName, userAlias);
+    public void joinRoom(final String roomName, final String userAlias) {
+        // FIXME muc nick support
+        DefaultDispatcher.getInstance().fire(
+                EmiteUIPlugin.ROOMOPEN,
+                XmppURI.parse(roomName + "@" + state.roomHost + "/" + XmppURI.parse(state.userOptions.getUserJid()))
+                        .getNode());
     }
-
 }

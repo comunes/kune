@@ -19,18 +19,18 @@
  */
 package org.ourproject.kune.chat.client;
 
-import com.calclab.gwtjsjac.client.XmppUserSettings;
+import com.calclab.emiteuiplugin.client.UserChatOptions;
 
 public class ChatState {
-    public XmppUserSettings user;
+    public UserChatOptions userOptions;
     public final String httpBase;
     public final String domain;
     public final String roomHost;
 
     public ChatState(final String httpBase, final String domain, final String roomHost) {
-	this.httpBase = httpBase;
-	this.domain = domain;
-	this.roomHost = roomHost;
-	user = null;
+        this.httpBase = httpBase;
+        this.domain = domain;
+        this.roomHost = roomHost;
+        userOptions = null;
     }
 }

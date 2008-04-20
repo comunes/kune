@@ -81,12 +81,6 @@
       <version>3.0.4</version>
     </dependency>
 
-    <dependency>
-      <groupId>com.calclab</groupId>
-      <artifactId>gwt-jsjac</artifactId>
-      <version>0.1.11</version>
-    </dependency>
-
     <!--  mysql -->
     <dependency>
       <groupId>mysql</groupId>
@@ -165,7 +159,7 @@
       <version>3.2</version>
     </dependency>
 
-		<!-- File upload -->
+    <!-- File upload -->
     <dependency>
       <groupId>commons-beanutils</groupId>
       <artifactId>commons-beanutils</artifactId>
@@ -248,7 +242,22 @@
       <scope>test</scope>
       </dependency>
     -->
-
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-all</artifactId>
+      <version>1.2</version>
+      <scope>test</scope>
+    </dependency>
+     <dependency>
+      <groupId>com.calclab.emite</groupId>
+      <artifactId>emite</artifactId>
+      <version>0.2.0</version>
+    </dependency>
+         <dependency>
+      <groupId>com.calclab.emite</groupId>
+      <artifactId>emiteuiplugin</artifactId>
+      <version>0.2.0</version>
+    </dependency>
   </dependencies>
   <!-- http://gwt-maven.googlecode.com/svn/docs/maven-googlewebtoolkit2-plugin/index.html -->
   <repositories>
@@ -311,9 +320,7 @@
           <style>PRETTY</style>
           <runTarget>org.ourproject.kune.app.Kune/Kune.html</runTarget>
           <compileTargets>
-            <compileTarget>
-              org.ourproject.kune.app.Kune
-            </compileTarget>
+            <compileTarget>org.ourproject.kune.app.Kune</compileTarget>
           </compileTargets>
           <generatorRootClasses>
             <value>org.ourproject.kune.MyBean</value>
@@ -422,13 +429,13 @@
                 <include>**/KuneStringUtils.**</include>
                 <include>**/KuneUiUtils.**</include>
                 <include>**/View.**</include>
-<!--                <include>**/platf/**</include> 
-                <include>**/AbstractPresenter**</include>
-                <include>**/platf/client/extend/**</include>
-                <include>**/platf/client/*java</include>
-                <include>**/platf/client/app/**</include>
-                <include>**/platf/client/dispatch/**</include>
--->
+                <!--                <include>**/platf/**</include>
+                  <include>**/AbstractPresenter**</include>
+                  <include>**/platf/client/extend/**</include>
+                  <include>**/platf/client/*java</include>
+                  <include>**/platf/client/app/**</include>
+                  <include>**/platf/client/dispatch/**</include>
+                -->
               </includes>
             </configuration>
           </execution>
@@ -448,14 +455,14 @@
         </executions>
       </plugin>
     </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-            <resource>
-                <directory>src/main/java</directory>
-            </resource>            
-        </resources>     
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>src/main/java</directory>
+      </resource>
+    </resources>
   </build>
 
   <reporting>

@@ -24,12 +24,10 @@ import org.ourproject.kune.chat.client.ChatFactory;
 import org.ourproject.kune.chat.client.cnt.info.ChatInfo;
 import org.ourproject.kune.chat.client.cnt.room.ChatRoom;
 import org.ourproject.kune.chat.client.cnt.room.ChatRoomControl;
-import org.ourproject.kune.chat.client.rooms.MultiRoom;
 
 class ChatComponents {
 
     private final ChatContentPresenter owner;
-    private MultiRoom multiRoom;
     private ChatRoom chatRoom;
     private ChatInfo chatInfo;
     private ChatRoomControl chatRoomControl;
@@ -50,13 +48,6 @@ class ChatComponents {
             chatRoomControl = ChatFactory.createChatRoomControlViewer(owner);
         }
         return chatRoomControl;
-    }
-
-    public MultiRoom getRooms() {
-        if (multiRoom == null) {
-            multiRoom = ChatFactory.createChatMultiRoom(owner);
-        }
-        return multiRoom;
     }
 
     public ChatInfo getChatInfo() {

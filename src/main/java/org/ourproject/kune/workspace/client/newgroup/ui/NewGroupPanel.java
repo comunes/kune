@@ -263,7 +263,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
 
         FieldSet groupTypeFieldSet = new FieldSet(Kune.I18N.t("Type of group"));
         groupTypeFieldSet.setStyle("margin-left: 105px");
-        groupTypeFieldSet.setCollapsible(true);
+
         form.add(groupTypeFieldSet);
 
         projectRadio = new Radio();
@@ -319,6 +319,31 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         radio.setAutoCreate(true);
         radio.setHideLabel(true);
         fieldSet.add(radio);
+        // ToolTip fieldToolTip = new ToolTip("Tooltip on a Field.");
+        // fieldToolTip.applyTo(captchaField);
+        // Image info = new Image("images/silk/information.gif");
+        //
+        // ToolTip tooltip = new ToolTip();
+        // tooltip.setHtml("A <b>CAPTCHA</b> is a challenge-response test to
+        // determine whether " +
+        // "the user is human.");
+        // tooltip.setWidth(150);
+        // tooltip.applyTo(info.getElement());
+
+        // Tested:
+        // Set tooltip
+        // Image info = new Image();
+        // ChatIcons.App.getInstance().info().applyTo(info);
+        // ToolTip tooltip = new ToolTip();
+        // tooltip.setHtml(i18n.t("Note that the 'Jabber Id' sometimes is the
+        // same as the email "
+        // + "(in gmail accounts for instance)."));
+        // tooltip.setWidth(250);
+        // tooltip.applyTo(info.getElement());
+        // jidPanel.addToRow(info, new ColumnLayoutData(1));
+        //
+        // formPanel.add(jidPanel);
+
     }
 
     private void createChooseLicensePanel() {

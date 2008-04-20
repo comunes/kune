@@ -24,7 +24,6 @@ import org.ourproject.kune.chat.client.actions.AddRoomAction;
 import org.ourproject.kune.chat.client.actions.ChatLoginAction;
 import org.ourproject.kune.chat.client.actions.ChatLogoutAction;
 import org.ourproject.kune.chat.client.actions.InitChatEngineAction;
-import org.ourproject.kune.chat.client.actions.JoinRoomAction;
 import org.ourproject.kune.platf.client.extend.ClientModule;
 import org.ourproject.kune.platf.client.extend.Register;
 import org.ourproject.kune.platf.client.state.Session;
@@ -50,6 +49,5 @@ public class ChatClientModule implements ClientModule {
         register.addAction(WorkspaceEvents.USER_LOGGED_OUT, logoutAction);
         register.addAction(WorkspaceEvents.STOP_APP, logoutAction);
         register.addAction(ChatEvents.ADD_ROOM, new AddRoomAction(session, stateManager));
-        register.addAction(ChatEvents.JOIN_ROOM, new JoinRoomAction(chatTool));
     }
 }
