@@ -43,8 +43,8 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener {
     private StateDTO state;
 
     public ChatContentPresenter(final WorkspaceDeckView view) {
-        this.view = view;
-        this.components = new ChatComponents(this);
+	this.view = view;
+	this.components = new ChatComponents(this);
     }
 
     public void attach() {
@@ -54,37 +54,37 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener {
     }
 
     public View getView() {
-        return view;
+	return view;
     }
 
     public void setState(final StateDTO state) {
-        this.state = state;
-        String typeId = state.getTypeId();
-        if (typeId.equals(ChatClientTool.TYPE_ROOT)) {
-            ChatInfo info = components.getChatInfo();
-            view.show(info.getView());
-            DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXT_POINT, UIExtensionPoint.CONTENT_TOOLBAR_LEFT);
-        } else if (typeId.equals(ChatClientTool.TYPE_ROOM)) {
-            ChatRoom viewer = components.getChatRoom();
-            view.show(viewer.getView());
-            DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXT_POINT, UIExtensionPoint.CONTENT_TOOLBAR_LEFT);
-            DefaultDispatcher.getInstance().fire(
-                    PlatformEvents.ATTACH_TO_EXT_POINT,
-                    new UIExtensionElement(UIExtensionPoint.CONTENT_TOOLBAR_LEFT, components.getChatRoomControl()
-                            .getView()));
-        } else {
-            view.show(UnknowComponent.instance.getView());
-            DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXT_POINT, UIExtensionPoint.CONTENT_TOOLBAR_LEFT);
-        }
+	this.state = state;
+	String typeId = state.getTypeId();
+	if (typeId.equals(ChatClientTool.TYPE_ROOT)) {
+	    ChatInfo info = components.getChatInfo();
+	    view.show(info.getView());
+	    DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXT_POINT, UIExtensionPoint.CONTENT_TOOLBAR_LEFT);
+	} else if (typeId.equals(ChatClientTool.TYPE_ROOM)) {
+	    ChatRoom viewer = components.getChatRoom();
+	    view.show(viewer.getView());
+	    DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXT_POINT, UIExtensionPoint.CONTENT_TOOLBAR_LEFT);
+	    DefaultDispatcher.getInstance().fire(
+		    PlatformEvents.ATTACH_TO_EXT_POINT,
+		    new UIExtensionElement(UIExtensionPoint.CONTENT_TOOLBAR_LEFT, components.getChatRoomControl()
+			    .getView()));
+	} else {
+	    view.show(UnknowComponent.instance.getView());
+	    DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXT_POINT, UIExtensionPoint.CONTENT_TOOLBAR_LEFT);
+	}
     }
 
     public void onEnterRoom() {
-        String roomName = state.getFolder().getName();
-        // FIXME Moderator?
-        // Room room = getRoom(roomName, "me" + new Date().getTime(),
-        // RoomUser.MODERADOR);
+	String roomName = state.getFolder().getName();
+	// FIXME Moderator?
+	// Room room = getRoom(roomName, "me" + new Date().getTime(),
+	// RoomUser.MODERADOR);
 
-        DefaultDispatcher.getInstance().fire(EmiteUIPlugin.ROOMOPEN, XmppURI.parse(roomName));
+	DefaultDispatcher.getInstance().fire(EmiteUIPlugin.ROOMOPEN, XmppURI.uri(roomName));
     }
 
 }

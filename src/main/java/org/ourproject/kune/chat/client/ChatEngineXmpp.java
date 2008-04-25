@@ -36,33 +36,35 @@ class ChatEngineXmpp implements ChatEngine {
     private final ChatState state;
 
     public ChatEngineXmpp(final ChatState state) {
-        this.state = state;
+	this.state = state;
     }
 
     public ChatState getState() {
-        return state;
+	return state;
     }
 
     public void login(final String chatName, final String chatPassword) {
-        UserChatOptions userChatOptions = new UserChatOptions(chatName + "@" + state.domain, chatPassword, "blue",
-                SubscriptionMode.auto_accept_all);
-        state.userOptions = userChatOptions;
-        DefaultDispatcher.getInstance().fire(EmiteUIPlugin.CREATE_CHAT_DIALOG,
-                new MultiChatCreationParam(new BoshOptions(state.httpBase), Kune.I18N, state.userOptions));
-        Log.debug("LOGIN CHAT: " + chatName + "[" + chatPassword + "]");
-        DefaultDispatcher.getInstance().fire(EmiteUIPlugin.SET_OWN_PRESENCE, new OwnPresence(OwnStatus.online));
+	UserChatOptions userChatOptions = new UserChatOptions(chatName + "@" + state.domain, chatPassword, "blue",
+		SubscriptionMode.auto_accept_all);
+	state.userOptions = userChatOptions;
+	DefaultDispatcher.getInstance().fire(
+		EmiteUIPlugin.CREATE_CHAT_DIALOG,
+		new MultiChatCreationParam(Kune.I18N.t("Chat"), new BoshOptions(state.httpBase), state.roomHost,
+			Kune.I18N, state.userOptions));
+	Log.debug("LOGIN CHAT: " + chatName + "[" + chatPassword + "]");
+	DefaultDispatcher.getInstance().fire(EmiteUIPlugin.SET_OWN_PRESENCE, new OwnPresence(OwnStatus.online));
     }
 
     public void logout() {
-        DefaultDispatcher.getInstance().fire(EmiteUIPlugin.SET_OWN_PRESENCE, new OwnPresence(OwnStatus.offline));
-        DefaultDispatcher.getInstance().fire(EmiteUIPlugin.CLOSE_ALLCHATS, new Boolean(false));
+	DefaultDispatcher.getInstance().fire(EmiteUIPlugin.SET_OWN_PRESENCE, new OwnPresence(OwnStatus.offline));
+	DefaultDispatcher.getInstance().fire(EmiteUIPlugin.CLOSE_ALLCHATS, new Boolean(false));
     }
 
     public void joinRoom(final String roomName, final String userAlias) {
-        // FIXME muc nick support
-        DefaultDispatcher.getInstance().fire(
-                EmiteUIPlugin.ROOMOPEN,
-                XmppURI.parse(roomName + "@" + state.roomHost + "/" + XmppURI.parse(state.userOptions.getUserJid()))
-                        .getNode());
+	// FIXME muc nick support
+	DefaultDispatcher.getInstance().fire(
+		EmiteUIPlugin.ROOMOPEN,
+		XmppURI.uri(roomName + "@" + state.roomHost + "/" + XmppURI.jid(state.userOptions.getUserJid()))
+			.getNode());
     }
 }
