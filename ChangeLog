@@ -1,456 +1,461 @@
+2008-05-06 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+    * emite integrated
+    * gwt 1.5M2 supported
+    * some bug fixed
+
 2008-04-07 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* gwt-ext 2.0.3
-	* FileUpload first tests
+    * gwt-ext 2.0.3
+    * FileUpload first tests
 
 2008-03-28 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* Dispacher added to Plugins
-	* Added generalization to Actions
-	* Action/Dispacher refactorization
+    * Dispacher added to Plugins
+    * Added generalization to Actions
+    * Action/Dispacher refactorization
 
 2008-03-26 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* Some minor changes
-	* maven-get plugin update
+    * Some minor changes
+    * maven-get plugin update
 
 2008-03-21 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* Refactorization for Plugins and jar generation
+    * Refactorization for Plugins and jar generation
 
 2008-03-18 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* Simple plugin infraestructure first proposal
+    * Simple plugin infraestructure first proposal
 
 2008-03-14 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* gwt 1.5m1 upgrade
+    * gwt 1.5m1 upgrade
 
 2008-03-12 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* gwt-ext 2.0.2 upgraded (see BUGS for know bugs related with new version of
-	gwt-ext)
-	* first works looking to gwt 1.5 (but not upgraded yet)
-	* Some general refactorizations
-	* Title & Tips improved
-	* Added gwt-log
-	* Several TODO/FIXME resolved
+    * gwt-ext 2.0.2 upgraded (see BUGS for know bugs related with new version of
+    gwt-ext)
+    * first works looking to gwt 1.5 (but not upgraded yet)
+    * Some general refactorizations
+    * Title & Tips improved
+    * Added gwt-log
+    * Several TODO/FIXME resolved
 
 2008-01-24 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* Added blog tool (first release)
-	* Minnor changes
-	* FAQ file added
+    * Added blog tool (first release)
+    * Minnor changes
+    * FAQ file added
 
 2008-01-24 Daniel Gómez Blasco <danigb@gmail.com>
-	* /http-bind/ bug fixed
+    * /http-bind/ bug fixed
 
 2008-01-17 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* Chat panel new functionality and some bugs fixed
+    * Chat panel new functionality and some bugs fixed
 
 2008-01-14 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* Initial size of workspace with small windows issues fixed
-	* Chat room close bug fixed (UI part)
-	* Hightligth of room when message arrives
-	* Add two folder refrex context bug fixed
+    * Initial size of workspace with small windows issues fixed
+    * Chat room close bug fixed (UI part)
+    * Hightligth of room when message arrives
+    * Add two folder refrex context bug fixed
 
 2008-01-13 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* added response.setContentType("text/json");
-	* StateManagerDefault refactoring
-	* AdminContext with more actions
-	* TextArea size issues
+    * added response.setContentType("text/json");
+    * StateManagerDefault refactoring
+    * AdminContext with more actions
+    * TextArea size issues
 
 2008-01-12 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* css style in Content and RTE
-	* Small window enables scroll
+    * css style in Content and RTE
+    * Small window enables scroll
 
 2008-01-11 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* Some minor bug fixes... 
-	* Data & Revision joined
-	* Lucene search of contents improved
+    * Some minor bug fixes...
+    * Data & Revision joined
+    * Lucene search of contents improved
 
 2008-01-09 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* SN and StateManager refactor
-	* Small bug fixes...
+    * SN and StateManager refactor
+    * Small bug fixes...
 
 2008-01-08 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* Added Tags group results (pre cloud)
-	* Added Content lucene search
-	* Pagination to i18nTranslator
-	* Search inproved
-	* Focus on panel when showing it
-	* Trying to solve css issues in RTE iframe (not totally tested/finished)
-	* Added bottom icon bar
-	* Many bug fixes and refactorizations
+    * Added Tags group results (pre cloud)
+    * Added Content lucene search
+    * Pagination to i18nTranslator
+    * Search inproved
+    * Focus on panel when showing it
+    * Trying to solve css issues in RTE iframe (not totally tested/finished)
+    * Added bottom icon bar
+    * Many bug fixes and refactorizations
 
 2008-01-03 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* (drop database needed)
-	* Updated to gwt-1.4.61 (added also to our maven repo)
-	* #translate token added
-	* search panel improved
-	* default content for site project
-	* mask of Login/NewGroup and Root using ext
-	* i18n translation added
-	* Editable Icon Label/Hyperlink
-	* i18n translator more complete (with recomendations and with translated
-	tabs)
-	* scripts/css* for use of csstidy and css update of target (for
-	dev/tests)
+    * (drop database needed)
+    * Updated to gwt-1.4.61 (added also to our maven repo)
+    * #translate token added
+    * search panel improved
+    * default content for site project
+    * mask of Login/NewGroup and Root using ext
+    * i18n translation added
+    * Editable Icon Label/Hyperlink
+    * i18n translator more complete (with recomendations and with translated
+    tabs)
+    * scripts/css* for use of csstidy and css update of target (for
+    dev/tests)
 
 2008-01-03 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* Folder rename methods
-	* Ext QuickTips use instead of html title.
-	* Several bugs with StateManager fixed. StateManager refactorized and Test
-	added
-	* bug 'group.tool.folder no check folder owner is group' fixed
-	* Same browser use same session, diferent browsers use different session.
-	If we logout in one tab, is correctly handled in the other tab.
-	* Added OnlyCheckSessionExpiration for some methods (like new group
-	creation)
-	* Added ErrorHandler and AsyncCallbackSimple for simple callback error
-	handling (used by almost every Action now)
-	* Added orphaned projects
-	* More 'Content not found' checks added
-	* Added Custom Stack Panel to permit close current open item
-	* More authorization/authentication functionality and checks.
-	* Session expiration improved (now for test purposes session expiration time is very
-	short)
-	* I18n can be used also in server now
-	* Added welcome mensaje after user register
+    * Folder rename methods
+    * Ext QuickTips use instead of html title.
+    * Several bugs with StateManager fixed. StateManager refactorized and Test
+    added
+    * bug 'group.tool.folder no check folder owner is group' fixed
+    * Same browser use same session, diferent browsers use different session.
+    If we logout in one tab, is correctly handled in the other tab.
+    * Added OnlyCheckSessionExpiration for some methods (like new group
+    creation)
+    * Added ErrorHandler and AsyncCallbackSimple for simple callback error
+    handling (used by almost every Action now)
+    * Added orphaned projects
+    * More 'Content not found' checks added
+    * Added Custom Stack Panel to permit close current open item
+    * More authorization/authentication functionality and checks.
+    * Session expiration improved (now for test purposes session expiration time is very
+    short)
+    * I18n can be used also in server now
+    * Added welcome mensaje after user register
 
 2007-12-30 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* (drop database to test this changes)
-	* Containers parent/child modification follow hibernate pattern recomendations
-	* AbsolutePath in containers is now a list of containers (needed in UI)
-	* Tests when RequestServletMocked return null Session fixed 
-	* "Report kune bugs" entry in options menu
-	* I18nTranslationService abstraction to use also in server
-	* folder navigator UI menu (container.absolutePath) now works
-	* ContentSetPublishedOnAction.java ContentSetTagsAction.java AddFolder.java
-	ContentAddAuthorAction.java ContentSetTitleAction.java AddDocument.java
-	ContentDelContentAction.java ContentSetLanguageAction.java
-	ContentRemoveAuthorAction.java: new content actions
+    * (drop database to test this changes)
+    * Containers parent/child modification follow hibernate pattern recomendations
+    * AbsolutePath in containers is now a list of containers (needed in UI)
+    * Tests when RequestServletMocked return null Session fixed
+    * "Report kune bugs" entry in options menu
+    * I18nTranslationService abstraction to use also in server
+    * folder navigator UI menu (container.absolutePath) now works
+    * ContentSetPublishedOnAction.java ContentSetTagsAction.java AddFolder.java
+    ContentAddAuthorAction.java ContentSetTitleAction.java AddDocument.java
+    ContentDelContentAction.java ContentSetLanguageAction.java
+    ContentRemoveAuthorAction.java: new content actions
 
 2007-12-29 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* pom.xml: upgrade to gwt-maven version 1.5.3
-	* extjs locale first integration
-	* If language changes in UI, we make a redirect with proper ?locale
-	* new ServletRequestMocked for tests and now we can inject ServletRequest
-	for invalidate sessions (login/logout) and to detect browser language.
+    * pom.xml: upgrade to gwt-maven version 1.5.3
+    * extjs locale first integration
+    * If language changes in UI, we make a redirect with proper ?locale
+    * new ServletRequestMocked for tests and now we can inject ServletRequest
+    for invalidate sessions (login/logout) and to detect browser language.
 
 2007-12-28 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* UserSession now injected with Provider<UserSession> to prevent session scope
-	problems
-	* Added @Authorizated to check group membership, and content access
-	* Now interceptors can be injected
-	* Reload of state without use of cache (fix several issues)
-	* Added new methods to content management (del, tag, lang selection, authors selection
-	etc)
-	* More tests in the server side
+    * UserSession now injected with Provider<UserSession> to prevent session scope
+    problems
+    * Added @Authorizated to check group membership, and content access
+    * Now interceptors can be injected
+    * Reload of state without use of cache (fix several issues)
+    * Added new methods to content management (del, tag, lang selection, authors selection
+    etc)
+    * More tests in the server side
 
 2007-12-21 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* Added AuthenticatedMethodInterceptor to test logged users in @Authenticated
-	RPC methods
-	* Added Login/Logout/Register and NewGroup Actions taking into account
-	userHash better
-	* Added UserSimpleDTO and UserDTO for User.java serialization
+    * Added AuthenticatedMethodInterceptor to test logged users in @Authenticated
+    RPC methods
+    * Added Login/Logout/Register and NewGroup Actions taking into account
+    userHash better
+    * Added UserSimpleDTO and UserDTO for User.java serialization
 
 2007-12-20 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* Added UID userHash generation
-	* delete cookie on Logout workaorund
-	* JSON serialization issues fixed
-	* Added lang, authors, publishedDate to Container
-	* More i18n small fixes
-	* src/main/resources/db/liquibase_changelog.xml: Added liquibase custom
-	rollbacks to i18n inserts
-	* Added lang to content and container
-	* Added browser lang recognition and UI init language takes account of this
-	and also the user lang if is logged
+    * Added UID userHash generation
+    * delete cookie on Logout workaorund
+    * JSON serialization issues fixed
+    * Added lang, authors, publishedDate to Container
+    * More i18n small fixes
+    * src/main/resources/db/liquibase_changelog.xml: Added liquibase custom
+    rollbacks to i18n inserts
+    * Added lang to content and container
+    * Added browser lang recognition and UI init language takes account of this
+    and also the user lang if is logged
 
 2007-12-17 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* TextEditor & I18n
-	* Translation to English & Spanish
-	* User.java i18n fields not null
-	* Added TimeZone to User
-	* License/Languages/Countries/Timezone in session passed to UI
+    * TextEditor & I18n
+    * Translation to English & Spanish
+    * User.java i18n fields not null
+    * Added TimeZone to User
+    * License/Languages/Countries/Timezone in session passed to UI
 
 2007-12-13 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* cleanup of files in repo
-	* first liquibase integration via maven (see INSTALL)
-	* i18n fixes
-	* i18n initialization of data (languages, translations and countries) via
-	liquibase
+    * cleanup of files in repo
+    * first liquibase integration via maven (see INSTALL)
+    * i18n fixes
+    * i18n initialization of data (languages, translations and countries) via
+    liquibase
 
 2007-12-12 Daniel Gómez Blasco <danigb@gmail.com>
-	* utf8 problems with JSON fixed
+    * utf8 problems with JSON fixed
 
 2007-12-11 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* i18n languages sincronization with default
-	* i18n fixes and refactoring
-	* Unjoin SN fix
-	* Add member confirmation
-	* Search panel connected to json
-	* Partial solving of login issues following GWT recomendations
-	* new LanguageSelectorComponent
+    * i18n languages sincronization with default
+    * i18n fixes and refactoring
+    * Unjoin SN fix
+    * Add member confirmation
+    * Search panel connected to json
+    * Partial solving of login issues following GWT recomendations
+    * new LanguageSelectorComponent
 
 2007-12-08 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* Added "Add member" to SN with Group/User live search component
-	* SN fixes (now we cannot add a already member). More tests.
-	* StackDropDown show affected stack and links now accept params
-	* User registration fixes (i18n issues)
+    * Added "Add member" to SN with Group/User live search component
+    * SN fixes (now we cannot add a already member). More tests.
+    * StackDropDown show affected stack and links now accept params
+    * User registration fixes (i18n issues)
 
 2007-12-07 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* Added search total results to lucene/json searchs
-	* Added i18n Support in gwt side and server based in custom solution
-	(inspired in Rail's Globalize)
-	* First db schema upgrade aproach
-	* Reindex of lucene during creation of database 
-	* Updated to gwt 0.9.3
+    * Added search total results to lucene/json searchs
+    * Added i18n Support in gwt side and server based in custom solution
+    (inspired in Rail's Globalize)
+    * First db schema upgrade aproach
+    * Reindex of lucene during creation of database
+    * Updated to gwt 0.9.3
 
 2007-12-03 Daniel Gómez Blasco <danigb@gmail.com>
-	* Added JSON support
-	* App server filters refactorization
-	* Added simple benchmark logs in server petitions
+    * Added JSON support
+    * App server filters refactorization
+    * Added simple benchmark logs in server petitions
 
 2007-11-20 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* Workspace refactorization, added UIEntryPoints to attach widgets to
-	parts of the WP
-	* Custom SPlitPanel to fire splitter position changes
-	* Better SN error processing
-	* Alert message dialog using gwt-ext
-	* Unjoing group in GroupMemberPanel if you are member
-	* Last admin in group message if try to unjoin
-	* If save docs is pending, get confirmation before close
-	* RateIt use improved
-	* RateIt disabled editing docs
-	* Added gwt sources and gwt-jsjac sources to kune maven2 repo
+    * Workspace refactorization, added UIEntryPoints to attach widgets to
+    parts of the WP
+    * Custom SPlitPanel to fire splitter position changes
+    * Better SN error processing
+    * Alert message dialog using gwt-ext
+    * Unjoing group in GroupMemberPanel if you are member
+    * Last admin in group message if try to unjoin
+    * If save docs is pending, get confirmation before close
+    * RateIt use improved
+    * RateIt disabled editing docs
+    * Added gwt sources and gwt-jsjac sources to kune maven2 repo
 
 2007-11-06 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* Deprecated methods clean-up in server
-	* #newgroup, and #login tokens instead of #fixme
-	* login, sessionId, and cookies refactor using gwt-incubator recommendations
-	* Rate content RPC calls
-	* Rate and RateIt widgets
-	* Empty user email now checked
-	* Better error handling in new group panel
-	* Copyleft information icon in LicenseChoose
-	* New custom push button instead of gwt-ext
-	* Some general css fixes
-	* Name/email in use progressed to UI
-	* Add folder in non personal group, fixed
-	* Communities/Org/Projects admission fixed
-	* SocialNetwork new tests and permissions check
-	* Fixed newGroup/LoginForm creation and close/cancel bugs
-	* Added custom extgwt theme
-	* Added Group/User indexing with hibernate-search and basic search/reindex functions
-	to DefaultManager
-	* Several workspace fixes and adjustments
-	* Added grey/blue/purple workspace themes
-	* Added new reset/fonts .css from yahoo
-	* Workspace reestructuration
-	* Added 1st workspace themes implementation via Dictionary
-	* Use of only one progress indicator (the one form Kune.html)
-	* Added more validations to login/register/newGroup forms
-	* Added persistance validation
-	* Participation component in workspace (shows person-groups and
-	groups-groups relations)
-	* SN, Link refactorization
-	* SiteMessagePanel fixed finally
-	* SiteMessagePanel colors and position fixed
-	* Room creation and join with real room names (not hardcoded)
-	* Overflow of bottom title panel fixed
-	* SocialNetwork pending collabs only show to admins
-	* Added groupType to model
+    * Deprecated methods clean-up in server
+    * #newgroup, and #login tokens instead of #fixme
+    * login, sessionId, and cookies refactor using gwt-incubator recommendations
+    * Rate content RPC calls
+    * Rate and RateIt widgets
+    * Empty user email now checked
+    * Better error handling in new group panel
+    * Copyleft information icon in LicenseChoose
+    * New custom push button instead of gwt-ext
+    * Some general css fixes
+    * Name/email in use progressed to UI
+    * Add folder in non personal group, fixed
+    * Communities/Org/Projects admission fixed
+    * SocialNetwork new tests and permissions check
+    * Fixed newGroup/LoginForm creation and close/cancel bugs
+    * Added custom extgwt theme
+    * Added Group/User indexing with hibernate-search and basic search/reindex functions
+    to DefaultManager
+    * Several workspace fixes and adjustments
+    * Added grey/blue/purple workspace themes
+    * Added new reset/fonts .css from yahoo
+    * Workspace reestructuration
+    * Added 1st workspace themes implementation via Dictionary
+    * Use of only one progress indicator (the one form Kune.html)
+    * Added more validations to login/register/newGroup forms
+    * Added persistance validation
+    * Participation component in workspace (shows person-groups and
+    groups-groups relations)
+    * SN, Link refactorization
+    * SiteMessagePanel fixed finally
+    * SiteMessagePanel colors and position fixed
+    * Room creation and join with real room names (not hardcoded)
+    * Overflow of bottom title panel fixed
+    * SocialNetwork pending collabs only show to admins
+    * Added groupType to model
 
 2007-10-03 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* SocialNetwork request/join fixed
-	* Chat room creation now make persist room
+    * SocialNetwork request/join fixed
+    * Chat room creation now make persist room
 
 2007-10-02 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* New ChatTextFormatter more complete
-	* Some fixes
+    * New ChatTextFormatter more complete
+    * Some fixes
 
 2007-10-01 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* Custom splitter for Workspace HorizontalSplitPanel
-	* new finders in Group to search groups in which a User(or a Group) is
-	member. Now Users don't have a redundant list of groups
-	* Remove groupManager createGroup duplicate method (only used in a test)
-	* Chat user list, overflow with big alias fixed
-	* EmoticonPalette widget added to MultiRoomPanel
+    * Custom splitter for Workspace HorizontalSplitPanel
+    * new finders in Group to search groups in which a User(or a Group) is
+    member. Now Users don't have a redundant list of groups
+    * Remove groupManager createGroup duplicate method (only used in a test)
+    * Chat user list, overflow with big alias fixed
+    * EmoticonPalette widget added to MultiRoomPanel
 
 2007-09-30 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* New gwtext-0.9.2
+    * New gwtext-0.9.2
 
 2007-09-28 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* Added scroll to chat users
-	* Close room fixed
-	* group text logo overflow and small font for big group named added
+    * Added scroll to chat users
+    * Close room fixed
+    * group text logo overflow and small font for big group named added
 
 2007-09-27 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* New wizard panel
-	* New forms for group creation
-	* Chat tool improved
+    * New wizard panel
+    * New forms for group creation
+    * Chat tool improved
 
 2007-09-26 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* Fixed RoomPanel scroll and resize problems
-	* Fixed addRoom activation
-	* Workaround to use the same alias in a room (new fix)
+    * Fixed RoomPanel scroll and resize problems
+    * Fixed addRoom activation
+    * Workaround to use the same alias in a room (new fix)
 
 2007-09-25 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* new gwtext library (bug fixes)
-	* Added icons of presence to BuddiePresence
-	* SocialNetwork refactorization using StackedDropDownPanel
+    * new gwtext library (bug fixes)
+    * Added icons of presence to BuddiePresence
+    * SocialNetwork refactorization using StackedDropDownPanel
 
 2007-09-24 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* new StackedDropDown (Abstraction of SocialNetworkPanel)
-	* BuddiesPanel based in StackedDropDownPanel
+    * new StackedDropDown (Abstraction of SocialNetworkPanel)
+    * BuddiesPanel based in StackedDropDownPanel
 
 2007-09-21 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* SocialNetwork new methods, tests and options
-	* Menu styles improved
+    * SocialNetwork new methods, tests and options
+    * Menu styles improved
 
 2007-09-20 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* SocialNetworkPanel new implementation
+    * SocialNetworkPanel new implementation
 
 2007-09-19 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* New SocialNetworkPanel and BuddiesPanel svg drafts
-	* DropDown refactor
-	* TextEditor style changes
-	* new RatePanel
+    * New SocialNetworkPanel and BuddiesPanel svg drafts
+    * DropDown refactor
+    * TextEditor style changes
+    * new RatePanel
 
 2007-09-18 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* AccessList refactor
-	* SocialNetwork refactor
-	* SocialNetwork new tests and Manager methods
-	* New icons (folder, add, del, cancel)
+    * AccessList refactor
+    * SocialNetwork refactor
+    * SocialNetwork new tests and Manager methods
+    * New icons (folder, add, del, cancel)
 
 2007-09-17 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* IconHyperlink fixes
-	* new IconLabel widget
-	* added gwt-ext images to PrefetchUtilities
-	* new SocialNewtworkSevice/Rpc implements requestJoinGroup action
-	* remove group and currentTool from session, because now is not used (we get the current group from state)
+    * IconHyperlink fixes
+    * new IconLabel widget
+    * added gwt-ext images to PrefetchUtilities
+    * new SocialNewtworkSevice/Rpc implements requestJoinGroup action
+    * remove group and currentTool from session, because now is not used (we get the current group from state)
 
 2007-09-15 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* New hibernate version
+    * New hibernate version
 
 2007-09-13 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* New subtitle component to workspace
-	* Some css fixes, new workspace.css
-	* workspace refactor
-	* SocialNetwork dropdown improved
+    * New subtitle component to workspace
+    * Some css fixes, new workspace.css
+    * workspace refactor
+    * SocialNetwork dropdown improved
 
 2007-09-12 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* new SocialNetworkDTO
-	* SocialNetwork included in State
-	* DropDown fixes
-	* INSTALL: Better description of integration with Openfire xmpp server
-	* new gwt-ext SNAPSHOT included in libs with some bugfixes
-	* added BuddiesPresence and SocialNetwork component to Workspace
+    * new SocialNetworkDTO
+    * SocialNetwork included in State
+    * DropDown fixes
+    * INSTALL: Better description of integration with Openfire xmpp server
+    * new gwt-ext SNAPSHOT included in libs with some bugfixes
+    * added BuddiesPresence and SocialNetwork component to Workspace
 
 2007-09-11 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* DropDowns for content AccessList
-	* Minor refactorizations
+    * DropDowns for content AccessList
+    * Minor refactorizations
 
 2007-09-06  Daniel Gómez Blasco <danigb@gmail.com>, Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* Complete refactorization
-	* user login/registration, group creation, docs and chat tool first implementacion
-	* JPA integration
-	* gwt-jsjac integration
-	* gwt-ext integration
-	* and several major changes
+    * Complete refactorization
+    * user login/registration, group creation, docs and chat tool first implementacion
+    * JPA integration
+    * gwt-jsjac integration
+    * gwt-ext integration
+    * and several major changes
 
 2007-07-19  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* XmppManagerImpl.java: first xmpp integration tests
+    * XmppManagerImpl.java: first xmpp integration tests
 
 2007-07-16  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* EventHub.java: new EventHub class to permit transmite from the server events to subscribed objects in client
-	* AsyncRemoteServiceServlet.java: gwt 1.4 adaptation of jetty + continuations remote event management
+    * EventHub.java: new EventHub class to permit transmite from the server events to subscribed objects in client
+    * AsyncRemoteServiceServlet.java: gwt 1.4 adaptation of jetty + continuations remote event management
 
 2007-07-11  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* pom.xml: increase scanIntervalSeconds to 10
-	* INSTALL: google.webtoolkit.devjar variable to point to gwt-dev-*.jar specific var (see pom.xml), necessary for "mnv test".
-	* src/main/java/org/ourproject/kune/client/ui/desktop/SiteMessageDialog.java: added setBackgroundColor to get different colors for different types of messages. Control z-index to put siteMessages over all frames. Small font. And concatenate several messages.
-	* src/main/java/org/ourproject/kune/client/ui/desktop/SiteBar.java: added z-indez over all windows
-	* src/main/java/org/ourproject/kune/server/servlet/OpenRemoteServiceServlet.java: server push tests
-	* src/main/java/org/ourproject/kune/server/servlet/AsyncRemoteServiceServlet.java: server push tests
+    * pom.xml: increase scanIntervalSeconds to 10
+    * INSTALL: google.webtoolkit.devjar variable to point to gwt-dev-*.jar specific var (see pom.xml), necessary for "mnv test".
+    * src/main/java/org/ourproject/kune/client/ui/desktop/SiteMessageDialog.java: added setBackgroundColor to get different colors for different types of messages. Control z-index to put siteMessages over all frames. Small font. And concatenate several messages.
+    * src/main/java/org/ourproject/kune/client/ui/desktop/SiteBar.java: added z-indez over all windows
+    * src/main/java/org/ourproject/kune/server/servlet/OpenRemoteServiceServlet.java: server push tests
+    * src/main/java/org/ourproject/kune/server/servlet/AsyncRemoteServiceServlet.java: server push tests
 
 2007-07-05 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* fixed ContextContent scroll bug
-	* refactoring of muc services and widgets
-	* ConferenceRoomDialog fixes
-	* gwm custom theme fixes (-off, botthom line)
-	* ConferenceRoomDialog resize issues
-	* gwm theme resize improve
+    * fixed ContextContent scroll bug
+    * refactoring of muc services and widgets
+    * ConferenceRoomDialog fixes
+    * gwm custom theme fixes (-off, botthom line)
+    * ConferenceRoomDialog resize issues
+    * gwm theme resize improve
 
 2007-07-04 Daniel Gómez Blasco <danigb@gmail.com>
-	* EntityManager provider implemented
+    * EntityManager provider implemented
 
 2007-07-03 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* edithtml button in editor (only us a dev tool)
-	* new split panel image button
-	* workaround for bug in setHtml in RTE
+    * edithtml button in editor (only us a dev tool)
+    * new split panel image button
+    * workaround for bug in setHtml in RTE
 
 2007-06-20 Daniel Gómez Blasco <danigb@gmail.com>
-	* new hibernate+JPA pom dependencies
+    * new hibernate+JPA pom dependencies
 
 2007-06-15 Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	* fixed mvn download of pom in our mavenrepo
-	* Added Richarea with a first version of autosave functionality
-	* Change Kitchesink RichTextarea icons with Openoffice-human icons (and others)
-	* initialstatusbar floating over the rest during loading
-	* richtext toolbar icons and style improved
-	* siteMessage and options button fonts size fixed
-	* siteMessage position adjust
-	* WebSafePaletteDialog.java: new palette widget with web safe colors
-	* added web safe palette to richtext toolbar backcolor and fontcolor
-	* sitebar options css fix
-	* font and font size graphical menu in richtext toolbar
-	* RichTextToolbar$Strings_es.properties: spanish translation of toolbar
-	* copyrights/credits update
-	* new KuneFactory class, webSafaPalette Refactor
-	* getChildren, createDocument new rpc services
-	* fast websafecolor palette generation
-	* some desktop improves
-	* new Expand panel widget for manage 100% expansion
-	* prefetching of some important images
-	* css fixes
+    * fixed mvn download of pom in our mavenrepo
+    * Added Richarea with a first version of autosave functionality
+    * Change Kitchesink RichTextarea icons with Openoffice-human icons (and others)
+    * initialstatusbar floating over the rest during loading
+    * richtext toolbar icons and style improved
+    * siteMessage and options button fonts size fixed
+    * siteMessage position adjust
+    * WebSafePaletteDialog.java: new palette widget with web safe colors
+    * added web safe palette to richtext toolbar backcolor and fontcolor
+    * sitebar options css fix
+    * font and font size graphical menu in richtext toolbar
+    * RichTextToolbar$Strings_es.properties: spanish translation of toolbar
+    * copyrights/credits update
+    * new KuneFactory class, webSafaPalette Refactor
+    * getChildren, createDocument new rpc services
+    * fast websafecolor palette generation
+    * some desktop improves
+    * new Expand panel widget for manage 100% expansion
+    * prefetching of some important images
+    * css fixes
 
 2007-06-14 Daniel Gómez Blasco <danigb@gmail.com>
-	* pom.xml: danigb fixes in pom.xml
-	* .project: danigb fixes
-	* new doc rpc services
-	* pom.xml: mvn jetty:run works now, thanks danigb
-	* jackrabbit dependencies
-	* CreateRepository utility class
-	* The DocumentService can read a TransientRepository
+    * pom.xml: danigb fixes in pom.xml
+    * .project: danigb fixes
+    * new doc rpc services
+    * pom.xml: mvn jetty:run works now, thanks danigb
+    * jackrabbit dependencies
+    * CreateRepository utility class
+    * The DocumentService can read a TransientRepository
 
 2007-04-20  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
-	*	gwm-0.6 update:
-	- theme alphacube improves
-	- glass desactivation
-	- desktop now includes the general dockpanel
-	* initialstatusbar float
-	* model clases for user/group
-	* new KuneFrame class with default frame conf
-	* options button in sidebar
-	* new drow-down-panel widget
-	* border panel for add margin space in layouts
-	* rollover images widget (on mouse over)
-	* drow-down-panel improve
-	* New Rate Widget
-	* upgrade to gwt-1.4-snapshot
-	* Desktop refactor
-	* new SiteMessageDialog class
-	* add ImageBundle gwt1.4 support
-	* generateMainImageBundle.sh generates MainImageBundle methods with public/images/ files
-	* now Images use ImageBundle
-	* remove PNGImage use
-	* sitebar clean
-	* license widgets added
-	* new customPushButton with png rounded corners
-	* groupBox class for widget grouping using Apple guidelines
-	* script for generation of button images
-	* added license to contextBottom
-	* defaul.css fixes (thanks to csstiny)
-	* Rollover image fixed
-	* Splitter button added and style modification using Apple guidelines
-	* favicon.ico added
-	* gwt upgrade r1166
-	* css fonts from yahoo yui added
-	* several desktop modifications
-	* update to gwt 1.4rc
-	* pom.xml update to latest maven-gwt plugin
-	* gwm 0.6.6
+    *	gwm-0.6 update:
+    - theme alphacube improves
+    - glass desactivation
+    - desktop now includes the general dockpanel
+    * initialstatusbar float
+    * model clases for user/group
+    * new KuneFrame class with default frame conf
+    * options button in sidebar
+    * new drow-down-panel widget
+    * border panel for add margin space in layouts
+    * rollover images widget (on mouse over)
+    * drow-down-panel improve
+    * New Rate Widget
+    * upgrade to gwt-1.4-snapshot
+    * Desktop refactor
+    * new SiteMessageDialog class
+    * add ImageBundle gwt1.4 support
+    * generateMainImageBundle.sh generates MainImageBundle methods with public/images/ files
+    * now Images use ImageBundle
+    * remove PNGImage use
+    * sitebar clean
+    * license widgets added
+    * new customPushButton with png rounded corners
+    * groupBox class for widget grouping using Apple guidelines
+    * script for generation of button images
+    * added license to contextBottom
+    * defaul.css fixes (thanks to csstiny)
+    * Rollover image fixed
+    * Splitter button added and style modification using Apple guidelines
+    * favicon.ico added
+    * gwt upgrade r1166
+    * css fonts from yahoo yui added
+    * several desktop modifications
+    * update to gwt 1.4rc
+    * pom.xml update to latest maven-gwt plugin
+    * gwm 0.6.6

@@ -1,58 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="http://java.sun.com/xml/ns/j2ee"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_3.xsd"
-  version="2.3">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_3.xsd"
+    version="2.3">
 
-  <display-name>kune</display-name>
-  <description>kune</description>
+    <display-name>kune</display-name>
+    <description>kune</description>
 
-  <filter>
-    <filter-name>rack</filter-name>
-    <filter-class>
-      org.ourproject.kune.rack.RackServletFilter
-    </filter-class>
-    <init-param>
-      <param-name>org.ourproject.kune.rack.RackModule</param-name>
-      <param-value>
-        org.ourproject.kune.app.server.KuneRackModule
-      </param-value>
-    </init-param>
-  </filter>
+    <filter>
+        <filter-name>rack</filter-name>
+        <filter-class>
+            org.ourproject.kune.rack.RackServletFilter
+        </filter-class>
+        <init-param>
+            <param-name>org.ourproject.kune.rack.RackModule</param-name>
+            <param-value>
+                org.ourproject.kune.app.server.KuneRackModule
+            </param-value>
+        </init-param>
+    </filter>
 
-  <filter-mapping>
-    <filter-name>rack</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
+    <filter-mapping>
+        <filter-name>rack</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
-  <servlet>
-    <servlet-name>Jabber HTTP Binding Servlet</servlet-name>
-    <servlet-class>org.jabber.JabberHTTPBind.JHBServlet</servlet-class>
-  </servlet>
+    <servlet>
+        <servlet-name>Proxy</servlet-name>
+        <servlet-class>de.spieleck.servlets.ProxyServlet</servlet-class>
+        <init-param>
+            <param-name>remotePath</param-name>
+            <param-value>/http-bind/</param-value>
+        </init-param>
+        <init-param>
+            <param-name>remoteServer</param-name>
+            <param-value>localhost</param-value>
+        </init-param>
+        <init-param>
+            <param-name>remotePort</param-name>
+            <param-value>8383</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Proxy</servlet-name>
+        <url-pattern>/http-bind/</url-pattern>
+    </servlet-mapping>
 
-  <servlet-mapping>
-    <servlet-name>Jabber HTTP Binding Servlet</servlet-name>
-    <url-pattern>/http-bind/</url-pattern>
-  </servlet-mapping>
+    <!-- Change the servlet name and mapping with appropriate name and URL pattern respectively -->
+    <servlet>
+        <servlet-name>FileUploadService</servlet-name>
+        <servlet-class>
+            org.cafesip.gwtcomp.server.FileUploadServlet
+        </servlet-class>
 
-  <!-- Change the servlet name and mapping with appropriate name and URL pattern respectively -->
-  <servlet>
-    <servlet-name>FileUploadService</servlet-name>
-    <servlet-class>
-      org.cafesip.gwtcomp.server.FileUploadServlet
-    </servlet-class>
+        <init-param>
+            <param-name>action-class</param-name>
 
-    <init-param>
-      <param-name>action-class</param-name>
+            <!-- Replace the action class name below with the fully qualified name of the action class -->
+            <param-value>
+                org.ourproject.kune.platf.server.manager.impl.FileUploadManagerDefault
+            </param-value>
+        </init-param>
+    </servlet>
 
-      <!-- Replace the action class name below with the fully qualified name of the action class -->
-      <param-value>org.ourproject.kune.platf.server.manager.impl.FileUploadManagerDefault</param-value>
-    </init-param>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>FileUploadService</servlet-name>
-    <url-pattern>/services/fileupload</url-pattern>
-  </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FileUploadService</servlet-name>
+        <url-pattern>/services/fileupload</url-pattern>
+    </servlet-mapping>
 
 </web-app>

@@ -20,45 +20,46 @@
 package org.ourproject.kune.workspace.client.sitebar.login;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.workspace.client.newgroup.ui.SiteErrorType;
 
 public interface LoginView extends View {
 
-    public void reset();
+    public String getCountry();
 
-    public String getNickOrEmail();
+    public String getEmail();
+
+    public String getLanguage();
 
     public String getLoginPassword();
 
-    public String getShortName();
-
     public String getLongName();
 
-    public String getEmail();
+    public String getNickOrEmail();
 
     public String getRegisterPassword();
 
     public String getRegisterPasswordDup();
 
-    public boolean isSignInFormValid();
+    public String getShortName();
+
+    public String getTimezone();
+
+    public void hideMessages();
 
     public boolean isRegisterFormValid();
 
-    public String getLanguage();
+    public boolean isSignInFormValid();
 
-    public String getCountry();
+    public void maskProcessing();
 
-    public String getTimezone();
+    public void reset();
 
     public void showWelcolmeDialog();
 
     public void unMask();
 
-    public void maskProcessing();
+    void setRegisterMessage(String message, SiteErrorType type);
 
-    public void setSignInMessage(String message, int type);
-
-    public void setRegisterMessage(String t, int error);
-
-    public void hideMessages();
+    void setSignInMessage(String message, SiteErrorType type);
 
 }

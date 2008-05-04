@@ -75,182 +75,182 @@ public class AdminContextPanel extends VerticalPanel implements AdminContextView
     private IconLabel addAuthorLabel;
 
     public AdminContextPanel(final AdminContextPresenter presenter) {
-        this.presenter = presenter;
-        options = new IndexedStackPanelWithSubItems();
-        options.addStyleName("kune-AdminContextPanel");
+	this.presenter = presenter;
+	options = new IndexedStackPanelWithSubItems();
+	options.addStyleName("kune-AdminContextPanel");
 
-        add(options);
-        setCellWidth(options, "100%");
-        setWidth("100%");
-    }
-
-    public void reset() {
-        options.clear();
-    }
-
-    public void setAccessLists(final AccessListsDTO accessLists) {
-        if (accessListsPanel == null) {
-            accessListsPanel = new AccessListsPanel();
-        }
-        if (!options.containsItem(PERMS_ITEM)) {
-            addComponent(PERMS_ITEM, Kune.I18N.t("Who can admin/edit/view this work"), accessListsPanel);
-        }
-        accessListsPanel.setAccessLists(accessLists);
-    }
-
-    public void setAuthors(final List<UserSimpleDTO> authors) {
-        if (authorsComponent == null) {
-            authorsComponent = new VerticalPanel();
-            addAuthorLabel = new IconLabel(IMG.addGreen(), Kune.I18N.t("Add author"));
-            addAuthorLabel.addClickListener(new ClickListener() {
-                public void onClick(final Widget sender) {
-                    presenter.doAction(DocsEvents.ADD_AUTHOR, null);
-                }
-            });
-        } else {
-            if (options.containsItem(AUTHORS_ITEM)) {
-                options.removeStackItem(AUTHORS_ITEM);
-            }
-            authorsComponent.clear();
-        }
-        if (!options.containsItem(AUTHORS_ITEM)) {
-            addComponent(AUTHORS_ITEM, Kune.I18N.t("Authors of this work"), authorsComponent);
-        }
-        for (Iterator<UserSimpleDTO> iterator = authors.iterator(); iterator.hasNext();) {
-            UserSimpleDTO author = iterator.next();
-            StackSubItemAction[] authorActions = { new StackSubItemAction(IMG.del(), Kune.I18N.t("Remove author"),
-                    DocsEvents.REMOVE_AUTHOR) };
-            options.addStackSubItem(AUTHORS_ITEM, IMG.personDef(), author.getShortName(), author.getName(),
-                    authorActions, presenter);
-        }
-        authorsComponent.add(addAuthorLabel);
-    }
-
-    public void setLanguage(final I18nLanguageDTO language) {
-        if (langComponent == null) {
-            langPresenter = WorkspaceFactory.createLanguageSelectorComponent();
-            langComponent = new VerticalPanel();
-            LanguageSelectorPanel view = (LanguageSelectorPanel) langPresenter.getView();
-            view.setWidth("" + FORMS_WIDTH);
-            langComponent.add(view);
-            view.addChangeListener(new ComboBoxListenerAdapter() {
-                public void onSelect(final ComboBox comboBox, final Record record, final int index) {
-                    presenter.doChangeLanguage(record.getAsString(LanguageSelectorPanel.LANG_ID));
-                }
-            });
-        }
-        if (!options.containsItem(LANGUAGE_ITEM)) {
-            addComponent(LANGUAGE_ITEM, Kune.I18N.t("The language of this work"), langComponent);
-        }
-        langPresenter.setLanguage(language);
-    }
-
-    public void setPublishedOn(final Date publishedOn) {
-        if (publishedOnField == null) {
-            publishedOnComponent = createPublicationComponent();
-        }
-        if (!options.containsItem(PUBLICATION_ITEM)) {
-            addComponent(PUBLICATION_ITEM, Kune.I18N.t("Date of publication of this work"), publishedOnComponent);
-        }
-        publishedOnField.setValue(publishedOn);
-    }
-
-    public void setTags(final String tags) {
-        if (tagsComponent == null) {
-            tagsComponent = createTagsComponent();
-        }
-        if (!options.containsItem(TAGS_ITEM)) {
-            addComponent(TAGS_ITEM, Kune.I18N.t("Keywords or terms associated with this work"), tagsComponent);
-        }
-        tagsField.setValue(tags);
+	add(options);
+	setCellWidth(options, "100%");
+	setWidth("100%");
     }
 
     public void removeAccessListComponent() {
-        if (options.containsItem(PERMS_ITEM)) {
-            removeComponent(PERMS_ITEM);
-        }
+	if (options.containsItem(PERMS_ITEM)) {
+	    removeComponent(PERMS_ITEM);
+	}
     }
 
     public void removeAuthorsComponent() {
-        if (options.containsItem(AUTHORS_ITEM)) {
-            removeComponent(AUTHORS_ITEM);
-        }
+	if (options.containsItem(AUTHORS_ITEM)) {
+	    removeComponent(AUTHORS_ITEM);
+	}
     }
 
     public void removeLangComponent() {
-        if (options.containsItem(LANGUAGE_ITEM)) {
-            removeComponent(LANGUAGE_ITEM);
-        }
+	if (options.containsItem(LANGUAGE_ITEM)) {
+	    removeComponent(LANGUAGE_ITEM);
+	}
     }
 
     public void removePublishedOnComponent() {
-        if (options.containsItem(PUBLICATION_ITEM)) {
-            removeComponent(PUBLICATION_ITEM);
-        }
+	if (options.containsItem(PUBLICATION_ITEM)) {
+	    removeComponent(PUBLICATION_ITEM);
+	}
     }
 
     public void removeTagsComponent() {
-        if (options.containsItem(TAGS_ITEM)) {
-            removeComponent(TAGS_ITEM);
-        }
+	if (options.containsItem(TAGS_ITEM)) {
+	    removeComponent(TAGS_ITEM);
+	}
+    }
+
+    public void reset() {
+	options.clear();
+    }
+
+    public void setAccessLists(final AccessListsDTO accessLists) {
+	if (accessListsPanel == null) {
+	    accessListsPanel = new AccessListsPanel();
+	}
+	if (!options.containsItem(PERMS_ITEM)) {
+	    addComponent(PERMS_ITEM, Kune.I18N.t("Who can admin/edit/view this work"), accessListsPanel);
+	}
+	accessListsPanel.setAccessLists(accessLists);
+    }
+
+    public void setAuthors(final List<UserSimpleDTO> authors) {
+	if (authorsComponent == null) {
+	    authorsComponent = new VerticalPanel();
+	    addAuthorLabel = new IconLabel(IMG.addGreen(), Kune.I18N.t("Add author"));
+	    addAuthorLabel.addClickListener(new ClickListener() {
+		public void onClick(final Widget sender) {
+		    presenter.doAction(DocsEvents.ADD_AUTHOR, null);
+		}
+	    });
+	} else {
+	    if (options.containsItem(AUTHORS_ITEM)) {
+		options.removeStackItem(AUTHORS_ITEM);
+	    }
+	    authorsComponent.clear();
+	}
+	if (!options.containsItem(AUTHORS_ITEM)) {
+	    addComponent(AUTHORS_ITEM, Kune.I18N.t("Authors of this work"), authorsComponent);
+	}
+	for (final Iterator<UserSimpleDTO> iterator = authors.iterator(); iterator.hasNext();) {
+	    final UserSimpleDTO author = iterator.next();
+	    final StackSubItemAction[] authorActions = { new StackSubItemAction(IMG.del(),
+		    Kune.I18N.t("Remove author"), DocsEvents.REMOVE_AUTHOR) };
+	    options.addStackSubItem(AUTHORS_ITEM, IMG.personDef(), author.getShortName(), author.getName(),
+		    authorActions, presenter);
+	}
+	authorsComponent.add(addAuthorLabel);
+    }
+
+    public void setLanguage(final I18nLanguageDTO language) {
+	if (langComponent == null) {
+	    langPresenter = WorkspaceFactory.createLanguageSelectorComponent();
+	    langComponent = new VerticalPanel();
+	    final LanguageSelectorPanel view = (LanguageSelectorPanel) langPresenter.getView();
+	    view.setWidth("" + FORMS_WIDTH);
+	    langComponent.add(view);
+	    view.addChangeListener(new ComboBoxListenerAdapter() {
+		public void onSelect(final ComboBox comboBox, final Record record, final int index) {
+		    presenter.doChangeLanguage(record.getAsString(LanguageSelectorPanel.LANG_ID));
+		}
+	    });
+	}
+	if (!options.containsItem(LANGUAGE_ITEM)) {
+	    addComponent(LANGUAGE_ITEM, Kune.I18N.t("The language of this work"), langComponent);
+	}
+	langPresenter.setLanguage(language);
+    }
+
+    public void setPublishedOn(final Date publishedOn) {
+	if (publishedOnField == null) {
+	    publishedOnComponent = createPublicationComponent();
+	}
+	if (!options.containsItem(PUBLICATION_ITEM)) {
+	    addComponent(PUBLICATION_ITEM, Kune.I18N.t("Date of publication of this work"), publishedOnComponent);
+	}
+	// publishedOnField.setValue(publishedOn);
+    }
+
+    public void setTags(final String tags) {
+	if (tagsComponent == null) {
+	    tagsComponent = createTagsComponent();
+	}
+	if (!options.containsItem(TAGS_ITEM)) {
+	    addComponent(TAGS_ITEM, Kune.I18N.t("Keywords or terms associated with this work"), tagsComponent);
+	}
+	tagsField.setValue(tags);
     }
 
     private void addComponent(final String header, final String headerTitle, final VerticalPanel panel) {
-        panel.addStyleName("kune-AdminContextPanel-inner-wrap");
-        VerticalPanel vp = options.addStackItem(header, headerTitle, false);
-        vp.setStyleName("kune-AdminContextPanel-inner");
-        vp.add(panel);
-        vp.setCellWidth(panel, "100%");
-        vp.setWidth("100%");
-    }
-
-    private void removeComponent(final String header) {
-        options.removeStackItem(header);
-    }
-
-    private VerticalPanel createPublicationComponent() {
-        FormPanel form = createDefaultForm();
-
-        publishedOnField = new DateField();
-        publishedOnField.setWidth("140");
-        publishedOnField.setFormat("Y-m-d");
-
-        publishedOnField.addListener(new FieldListenerAdapter() {
-            public void onChange(final Field field, final Object newVal, final Object oldVal) {
-                presenter.setPublishedOn((Date) newVal);
-            }
-        });
-
-        form.add(publishedOnField);
-
-        VerticalPanel vp = new VerticalPanel();
-        vp.add(form);
-        return vp;
+	panel.addStyleName("kune-AdminContextPanel-inner-wrap");
+	final VerticalPanel vp = options.addStackItem(header, headerTitle, false);
+	vp.setStyleName("kune-AdminContextPanel-inner");
+	vp.add(panel);
+	vp.setCellWidth(panel, "100%");
+	vp.setWidth("100%");
     }
 
     private FormPanel createDefaultForm() {
-        FormPanel form = new FormPanel();
-        form.setHideLabels(true);
-        form.setWidth(FORMS_WIDTH);
-        form.setBorder(false);
-        return form;
+	final FormPanel form = new FormPanel();
+	form.setHideLabels(true);
+	form.setWidth(FORMS_WIDTH);
+	form.setBorder(false);
+	return form;
+    }
+
+    private VerticalPanel createPublicationComponent() {
+	final FormPanel form = createDefaultForm();
+
+	publishedOnField = new DateField();
+	publishedOnField.setWidth("140");
+	publishedOnField.setFormat("Y-m-d");
+
+	publishedOnField.addListener(new FieldListenerAdapter() {
+	    public void onChange(final Field field, final Object newVal, final Object oldVal) {
+		presenter.setPublishedOn((Date) newVal);
+	    }
+	});
+
+	form.add(publishedOnField);
+
+	final VerticalPanel vp = new VerticalPanel();
+	vp.add(form);
+	return vp;
     }
 
     private VerticalPanel createTagsComponent() {
-        FormPanel form = createDefaultForm();
-        tagsField = new TextArea();
-        tagsField.setWidth("" + FORMS_WIDTH);
-        tagsField.setHeight("3em");
-        tagsField.addListener(new FieldListenerAdapter() {
-            public void onChange(final Field field, final Object newVal, final Object oldVal) {
-                presenter.setTags((String) newVal);
-            }
-        });
+	final FormPanel form = createDefaultForm();
+	tagsField = new TextArea();
+	tagsField.setWidth("" + FORMS_WIDTH);
+	tagsField.setHeight("3em");
+	tagsField.addListener(new FieldListenerAdapter() {
+	    public void onChange(final Field field, final Object newVal, final Object oldVal) {
+		presenter.setTags((String) newVal);
+	    }
+	});
 
-        form.add(tagsField);
-        VerticalPanel vp = new VerticalPanel();
-        vp.add(form);
-        return vp;
+	form.add(tagsField);
+	final VerticalPanel vp = new VerticalPanel();
+	vp.add(form);
+	return vp;
+    }
+
+    private void removeComponent(final String header) {
+	options.removeStackItem(header);
     }
 
 }

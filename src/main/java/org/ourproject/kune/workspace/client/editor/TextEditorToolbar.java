@@ -301,7 +301,7 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
 
     /**
      * Creates a new toolbar that drives the given rich text area.
-     * 
+     *
      * @param richText
      *                the rich text area to be controlled
      */
@@ -327,26 +327,26 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
 
         if (extended != null) {
             topPanel
-                    .add(strikethrough = createToggleButton(images.strikeThrough(), Kune.I18N.t("Toggle Strikethrough")));
+                    .add(strikethrough = createToggleButton(images.strikeout(), Kune.I18N.t("Toggle Strikethrough")));
         }
 
         if (basic != null) {
             topPanel.add(subscript = createToggleButton(images.subscript(), Kune.I18N.t("Toggle Subscript")));
             topPanel.add(superscript = createToggleButton(images.superscript(), Kune.I18N.t("Toggle Superscript")));
-            topPanel.add(justifyLeft = createPushButton(images.justifyLeft(), Kune.I18N.t("Left Justify")));
-            topPanel.add(justifyCenter = createPushButton(images.justifyCenter(), Kune.I18N.t("Center")));
-            topPanel.add(justifyRight = createPushButton(images.justifyRight(), Kune.I18N.t("Right Justify")));
+            topPanel.add(justifyLeft = createPushButton(images.alignleft(), Kune.I18N.t("Left Justify")));
+            topPanel.add(justifyCenter = createPushButton(images.centerpara(), Kune.I18N.t("Center")));
+            topPanel.add(justifyRight = createPushButton(images.alignright(), Kune.I18N.t("Right Justify")));
         }
 
         if (extended != null) {
-            topPanel.add(indent = createPushButton(images.indent(), Kune.I18N.t("Indent Right")));
-            topPanel.add(outdent = createPushButton(images.outdent(), Kune.I18N.t("Indent Left")));
-            topPanel.add(hr = createPushButton(images.hr(), Kune.I18N.t("Insert Horizontal Rule")));
-            topPanel.add(ol = createPushButton(images.ol(), Kune.I18N.t("Insert Ordered List")));
-            topPanel.add(ul = createPushButton(images.ul(), Kune.I18N.t("Insert Unordered List")));
-            topPanel.add(insertImage = createPushButton(images.insertImage(), Kune.I18N.t("Insert Image")));
-            topPanel.add(createLink = createPushButton(images.createLink(), Kune.I18N.t("Create Link")));
-            topPanel.add(removeLink = createPushButton(images.removeLink(), Kune.I18N.t("Remove Link")));
+            topPanel.add(indent = createPushButton(images.incrementindent(), Kune.I18N.t("Indent Right")));
+            topPanel.add(outdent = createPushButton(images.decrementindent(), Kune.I18N.t("Indent Left")));
+            topPanel.add(hr = createPushButton(images.hfixedline(), Kune.I18N.t("Insert Horizontal Rule")));
+            topPanel.add(ol = createPushButton(images.defaultnumbering(), Kune.I18N.t("Insert Ordered List")));
+            topPanel.add(ul = createPushButton(images.defaultbullet(), Kune.I18N.t("Insert Unordered List")));
+            topPanel.add(insertImage = createPushButton(images.images(), Kune.I18N.t("Insert Image")));
+            topPanel.add(createLink = createPushButton(images.link(), Kune.I18N.t("Create Link")));
+            topPanel.add(removeLink = createPushButton(images.linkBreak(), Kune.I18N.t("Remove Link")));
             topPanel.add(removeFormat = createPushButton(images.removeFormat(), Kune.I18N.t("Remove Formatting")));
         }
 

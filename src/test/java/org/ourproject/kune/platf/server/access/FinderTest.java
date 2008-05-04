@@ -21,8 +21,6 @@ import org.ourproject.kune.platf.server.domain.ToolConfiguration;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.RateManager;
 
-import com.google.gwt.user.client.rpc.SerializableException;
-
 public class FinderTest {
 
     private GroupManager groupManager;
@@ -31,149 +29,149 @@ public class FinderTest {
     private RateManager rateManager;
     private FinderServiceDefault finder;
 
+    @Test(expected = ContentNotFoundException.class)
+    public void contentAndFolderMatch() throws Exception {
+	final Content descriptor = new Content();
+	final Container container = TestDomainHelper.createFolderWithIdAndToolName(5, "toolName2");
+	descriptor.setContainer(container);
+	expect(contentManager.find(1l)).andReturn(descriptor);
+	replay(contentManager);
+
+	finder.getContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
+	verify(contentManager);
+    }
+
+    @Test(expected = ContentNotFoundException.class)
+    public void contentAndGrouplMatch() throws Exception {
+	final Content descriptor = new Content();
+	final Container container = TestDomainHelper.createFolderWithIdAndGroupAndTool(5, "groupOther", "toolName");
+	descriptor.setContainer(container);
+	expect(contentManager.find(1l)).andReturn(descriptor);
+	replay(contentManager);
+
+	finder.getContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
+	verify(contentManager);
+    }
+
+    @Test(expected = ContentNotFoundException.class)
+    public void contentAndToolMatch() throws Exception {
+	final Content descriptor = new Content();
+	final Container container = TestDomainHelper.createFolderWithId(1);
+	descriptor.setContainer(container);
+	expect(contentManager.find(1l)).andReturn(descriptor);
+	replay(contentManager);
+
+	finder.getContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
+	verify(contentManager);
+    }
+
     @Before
     public void createSession() {
-        this.groupManager = createStrictMock(GroupManager.class);
-        this.containerManager = createStrictMock(ContainerManager.class);
-        this.contentManager = createStrictMock(ContentManager.class);
-        this.rateManager = createStrictMock(RateManager.class);
-        this.finder = new FinderServiceDefault(groupManager, containerManager, contentManager, rateManager);
+	this.groupManager = createStrictMock(GroupManager.class);
+	this.containerManager = createStrictMock(ContainerManager.class);
+	this.contentManager = createStrictMock(ContentManager.class);
+	this.rateManager = createStrictMock(RateManager.class);
+	this.finder = new FinderServiceDefault(groupManager, containerManager, contentManager, rateManager);
     }
 
     @Test
-    public void testDefaultGroupContent() throws SerializableException {
-        Group userGroup = new Group();
-        Content descriptor = TestDomainHelper.createDescriptor(1l, "title", "content");
-        userGroup.setDefaultContent(descriptor);
+    public void getGroupDefaultContent() throws Exception {
+	final Group group = new Group();
+	final Content descriptor = new Content();
+	group.setDefaultContent(descriptor);
+	expect(groupManager.findByShortName("groupShortName")).andReturn(group);
+	replay(groupManager);
 
-        Content content = finder.getContent(new StateToken(), userGroup);
-        assertSame(descriptor, content);
+	final Content content = finder.getContent(new StateToken("groupShortName", null, null, null), null);
+	assertSame(descriptor, content);
+	verify(groupManager);
     }
 
     @Test
-    public void testDefaultGroupContentHasDefLicense() throws SerializableException {
-        Group userGroup = new Group();
-        Content descriptor = TestDomainHelper.createDescriptor(1l, "title", "content");
-        userGroup.setDefaultContent(descriptor);
+    public void testCompleteToken() throws Exception {
+	final Container container = TestDomainHelper.createFolderWithIdAndGroupAndTool(1, "groupShortName", "toolName");
+	final Content descriptor = new Content();
+	descriptor.setId(1l);
+	descriptor.setContainer(container);
 
-        Content content = finder.getContent(new StateToken(), userGroup);
-        assertSame(userGroup.getDefaultLicense(), content.getLicense());
+	expect(contentManager.find(2l)).andReturn(descriptor);
+	replay(contentManager);
+
+	final Content content = finder.getContent(new StateToken("groupShortName", "toolName", "1", "2"), null);
+	assertSame(descriptor, content);
+	verify(contentManager);
     }
 
     @Test
-    public void testCompleteToken() throws SerializableException {
-        Container container = TestDomainHelper.createFolderWithIdAndGroupAndTool(1, "groupShortName", "toolName");
-        Content descriptor = new Content();
-        descriptor.setId(1l);
-        descriptor.setContainer(container);
+    public void testDefaultGroupContent() throws Exception {
+	final Group userGroup = new Group();
+	final Content descriptor = TestDomainHelper.createDescriptor(1l, "title", "content");
+	userGroup.setDefaultContent(descriptor);
 
-        expect(contentManager.find(2l)).andReturn(descriptor);
-        replay(contentManager);
+	final Content content = finder.getContent(new StateToken(), userGroup);
+	assertSame(descriptor, content);
+    }
 
-        Content content = finder.getContent(new StateToken("groupShortName", "toolName", "1", "2"), null);
-        assertSame(descriptor, content);
-        verify(contentManager);
+    @Test
+    public void testDefaultGroupContentHasDefLicense() throws Exception {
+	final Group userGroup = new Group();
+	final Content descriptor = TestDomainHelper.createDescriptor(1l, "title", "content");
+	userGroup.setDefaultContent(descriptor);
+
+	final Content content = finder.getContent(new StateToken(), userGroup);
+	assertSame(userGroup.getDefaultLicense(), content.getLicense());
+    }
+
+    @Test
+    public void testDefaultUserContent() throws Exception {
+	final Content content = new Content();
+	final Group group = new Group();
+	group.setDefaultContent(content);
+	final Content response = finder.getContent(new StateToken(), group);
+	assertSame(content, response);
+    }
+
+    @Test
+    public void testDocMissing() throws Exception {
+	final Container container = new Container();
+	expect(containerManager.find(1l)).andReturn(container);
+
+	replay(containerManager);
+	final Content content = finder.getContent(new StateToken("groupShortName", "toolName", "1", null), null);
+	assertNotNull(content);
+	assertSame(container, content.getContainer());
+	verify(containerManager);
+    }
+
+    @Test
+    public void testFolderMissing() throws Exception {
+	final Group group = new Group();
+	final ToolConfiguration config = group.setToolConfig("toolName", new ToolConfiguration());
+	final Container container = config.setRoot(new Container());
+	expect(groupManager.findByShortName("groupShortName")).andReturn(group);
+	replay(groupManager);
+
+	final StateToken token = new StateToken("groupShortName", "toolName", null, null);
+	final Content content = finder.getContent(token, null);
+	assertSame(container, content.getContainer());
+	verify(groupManager);
     }
 
     @Test(expected = ContentNotFoundException.class)
-    public void contentAndFolderMatch() throws SerializableException {
-        Content descriptor = new Content();
-        Container container = TestDomainHelper.createFolderWithIdAndToolName(5, "toolName2");
-        descriptor.setContainer(container);
-        expect(contentManager.find(1l)).andReturn(descriptor);
-        replay(contentManager);
+    public void testIds() throws Exception {
+	final Content descriptor = new Content();
+	final Container container = TestDomainHelper.createFolderWithIdAndToolName(5, "toolName");
+	descriptor.setContainer(container);
+	expect(contentManager.find(1l)).andReturn(descriptor);
+	replay(contentManager);
 
-        finder.getContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
-        verify(contentManager);
+	finder.getContent(new StateToken("groupShortName", "toolName", "5", "1a"), null);
+	verify(contentManager);
     }
 
     @Test(expected = ContentNotFoundException.class)
-    public void contentAndToolMatch() throws SerializableException {
-        Content descriptor = new Content();
-        Container container = TestDomainHelper.createFolderWithId(1);
-        descriptor.setContainer(container);
-        expect(contentManager.find(1l)).andReturn(descriptor);
-        replay(contentManager);
-
-        finder.getContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
-        verify(contentManager);
-    }
-
-    @Test(expected = ContentNotFoundException.class)
-    public void contentAndGrouplMatch() throws SerializableException {
-        Content descriptor = new Content();
-        Container container = TestDomainHelper.createFolderWithIdAndGroupAndTool(5, "groupOther", "toolName");
-        descriptor.setContainer(container);
-        expect(contentManager.find(1l)).andReturn(descriptor);
-        replay(contentManager);
-
-        finder.getContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
-        verify(contentManager);
-    }
-
-    @Test(expected = ContentNotFoundException.class)
-    public void voyAJoder() throws SerializableException {
-        finder.getContent(new StateToken(null, "toolName", "1", "2"), null);
-    }
-
-    @Test
-    public void testDocMissing() throws SerializableException {
-        Container container = new Container();
-        expect(containerManager.find(1l)).andReturn(container);
-
-        replay(containerManager);
-        Content content = finder.getContent(new StateToken("groupShortName", "toolName", "1", null), null);
-        assertNotNull(content);
-        assertSame(container, content.getContainer());
-        verify(containerManager);
-    }
-
-    @Test
-    public void testFolderMissing() throws SerializableException {
-        Group group = new Group();
-        ToolConfiguration config = group.setToolConfig("toolName", new ToolConfiguration());
-        Container container = config.setRoot(new Container());
-        expect(groupManager.findByShortName("groupShortName")).andReturn(group);
-        replay(groupManager);
-
-        StateToken token = new StateToken("groupShortName", "toolName", null, null);
-        Content content = finder.getContent(token, null);
-        assertSame(container, content.getContainer());
-        verify(groupManager);
-    }
-
-    @Test
-    public void getGroupDefaultContent() throws SerializableException {
-        Group group = new Group();
-        Content descriptor = new Content();
-        group.setDefaultContent(descriptor);
-        expect(groupManager.findByShortName("groupShortName")).andReturn(group);
-        replay(groupManager);
-
-        Content content = finder.getContent(new StateToken("groupShortName", null, null, null), null);
-        assertSame(descriptor, content);
-        verify(groupManager);
-    }
-
-    @Test
-    public void testDefaultUserContent() throws SerializableException {
-        Content content = new Content();
-        Group group = new Group();
-        group.setDefaultContent(content);
-        Content response = finder.getContent(new StateToken(), group);
-        assertSame(content, response);
-    }
-
-    @Test(expected = ContentNotFoundException.class)
-    public void testIds() throws SerializableException {
-        Content descriptor = new Content();
-        Container container = TestDomainHelper.createFolderWithIdAndToolName(5, "toolName");
-        descriptor.setContainer(container);
-        expect(contentManager.find(1l)).andReturn(descriptor);
-        replay(contentManager);
-
-        finder.getContent(new StateToken("groupShortName", "toolName", "5", "1a"), null);
-        verify(contentManager);
+    public void voyAJoder() throws Exception {
+	finder.getContent(new StateToken(null, "toolName", "1", "2"), null);
     }
 
 }

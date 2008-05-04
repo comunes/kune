@@ -17,7 +17,6 @@ import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 
-import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
 
 public class SiteServiceTest extends IntegrationTest {
@@ -33,26 +32,26 @@ public class SiteServiceTest extends IntegrationTest {
 
     @Before
     public void init() {
-        new IntegrationTestHelper(this);
+	new IntegrationTestHelper(this);
     }
 
     @Test
-    public void testGetInitData() throws SerializableException {
-        InitDataDTO initData = service.getInitData(null);
-        assertNotNull(initData);
-        assertValidLicenseDTOList(initData.getLicenses());
-        assertTrue(initData.getLanguages().size() > 0);
-        assertTrue(initData.getCountries().size() > 0);
-        assertNotNull((initData.getLanguages().get(0)).getCode());
-        assertNotNull((initData.getCountries().get(0)).getCode());
+    public void testGetInitData() throws Exception {
+	final InitDataDTO initData = service.getInitData(null);
+	assertNotNull(initData);
+	assertValidLicenseDTOList(initData.getLicenses());
+	assertTrue(initData.getLanguages().size() > 0);
+	assertTrue(initData.getCountries().size() > 0);
+	assertNotNull(initData.getLanguages().get(0).getCode());
+	assertNotNull(initData.getCountries().get(0).getCode());
     }
 
     private void assertValidLicenseDTOList(final ArrayList<LicenseDTO> licenseList) {
-        assertTrue(licenseList.size() > 0);
-        for (Object o : licenseList) {
-            assertNotNull(o);
-            assertEquals(LicenseDTO.class, o.getClass());
-        }
+	assertTrue(licenseList.size() > 0);
+	for (final Object o : licenseList) {
+	    assertNotNull(o);
+	    assertEquals(LicenseDTO.class, o.getClass());
+	}
     }
 
 }

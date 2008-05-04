@@ -17,12 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-
 package org.ourproject.kune.platf.client.errors;
 
-import com.google.gwt.user.client.rpc.SerializableException;
-
-public class UserAuthException extends SerializableException {
+public class UserAuthException extends DefaultException {
     private static final long serialVersionUID = 1L;
-
 }

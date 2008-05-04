@@ -26,8 +26,9 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 /*
- * See: http://tembrel.blogspot.com/2007/09/matcher-and-methodinterceptor-for-dwr.html
- *
+ * See:
+ * http://tembrel.blogspot.com/2007/09/matcher-and-methodinterceptor-for-dwr.html
+ * 
  */
 
 public class OutermostCallInterceptor implements MethodInterceptor {
@@ -37,39 +38,41 @@ public class OutermostCallInterceptor implements MethodInterceptor {
      * ignored.
      */
     public static MethodInterceptor outermostCall(final MethodInterceptor interceptor) {
-        return new OutermostCallInterceptor(interceptor);
+	return new OutermostCallInterceptor(interceptor);
+    }
+
+    private final MethodInterceptor interceptor;
+
+    @SuppressWarnings("unchecked")
+    private final ThreadLocal count = new ThreadLocal() {
+	@Override
+	protected Integer initialValue() {
+	    return 0;
+	}
+    };
+
+    private OutermostCallInterceptor(final MethodInterceptor interceptor) {
+	this.interceptor = interceptor;
+    }
+
+    @SuppressWarnings("unchecked")
+    public Object invoke(final MethodInvocation invocation) throws Throwable {
+	final int savedCount = (Integer) count.get();
+	count.set(savedCount + 1);
+	try {
+	    if ((Integer) count.get() > 1) {
+		return invocation.proceed();
+	    } else {
+		return interceptor.invoke(invocation);
+	    }
+	} finally {
+	    count.set(savedCount);
+	}
     }
 
     /** Ensure underlying interceptor is injected. */
     @Inject
     void injectInterceptor(final Injector injector) {
-        injector.injectMembers(interceptor);
+	injector.injectMembers(interceptor);
     }
-
-    public Object invoke(final MethodInvocation invocation) throws Throwable {
-        int savedCount = (Integer) count.get();
-        count.set(savedCount + 1);
-        try {
-            if ((Integer) count.get() > 1) {
-                return invocation.proceed();
-            } else {
-                return interceptor.invoke(invocation);
-            }
-        } finally {
-            count.set(savedCount);
-        }
-    }
-
-    private OutermostCallInterceptor(final MethodInterceptor interceptor) {
-        this.interceptor = interceptor;
-    }
-
-    private final MethodInterceptor interceptor;
-
-    private final ThreadLocal count = new ThreadLocal() {
-        @Override
-        protected Integer initialValue() {
-            return 0;
-        }
-    };
 }

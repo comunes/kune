@@ -31,6 +31,7 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.Query;
+import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
 import org.ourproject.kune.platf.client.errors.UserNotFoundException;
 import org.ourproject.kune.platf.client.ui.KuneStringUtils;
@@ -46,7 +47,6 @@ import org.ourproject.kune.platf.server.manager.TagManager;
 import org.ourproject.kune.platf.server.manager.impl.DefaultManager;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 
-import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -61,154 +61,151 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
 
     @Inject
     public ContentManagerDefault(final Provider<EntityManager> provider, final FinderService finder,
-            final User userFinder, final I18nLanguage languageFinder, final TagManager tagManager) {
-        super(provider, Content.class);
-        this.finder = finder;
-        this.userFinder = userFinder;
-        this.languageFinder = languageFinder;
-        this.tagManager = tagManager;
+	    final User userFinder, final I18nLanguage languageFinder, final TagManager tagManager) {
+	super(provider, Content.class);
+	this.finder = finder;
+	this.userFinder = userFinder;
+	this.languageFinder = languageFinder;
+	this.tagManager = tagManager;
+    }
+
+    public void addAuthor(final User user, final Long contentId, final String authorShortName) throws DefaultException {
+	final Content content = finder.getContent(contentId);
+	final User author = userFinder.getByShortName(authorShortName);
+	if (author == null) {
+	    throw new UserNotFoundException();
+	}
+	content.addAuthor(author);
     }
 
     public Content createContent(final String title, final String body, final User user, final Container container) {
-        Content descriptor = new Content();
-        descriptor.addAuthor(user);
-        descriptor.setLanguage(user.getLanguage());
-        // FIXME: remove this when UI take publishing into account
-        descriptor.setPublishedOn(new Date());
-        descriptor.setContainer(container);
-        container.addContent(descriptor);
-        Revision revision = new Revision(descriptor);
-        revision.setTitle(title);
-        revision.setBody(body);
-        descriptor.addRevision(revision);
-        return persist(descriptor);
+	final Content descriptor = new Content();
+	descriptor.addAuthor(user);
+	descriptor.setLanguage(user.getLanguage());
+	// FIXME: remove this when UI take publishing into account
+	descriptor.setPublishedOn(new Date());
+	descriptor.setContainer(container);
+	container.addContent(descriptor);
+	final Revision revision = new Revision(descriptor);
+	revision.setTitle(title);
+	revision.setBody(body);
+	descriptor.addRevision(revision);
+	return persist(descriptor);
     }
 
-    public Content save(final User editor, final Content descriptor, final String content) {
-        Revision revision = new Revision(descriptor);
-        revision.setEditor(editor);
-        revision.setTitle(descriptor.getTitle());
-        revision.setBody(content);
-        descriptor.addRevision(revision);
-        return persist(descriptor);
+    public void delContent(final User user, final Long contentId) throws DefaultException {
+	final Content content = finder.getContent(contentId);
+	content.setMarkForDeletion(true);
+	content.setDeletedOn(new Date());
+	// FIXME: Maybe set only visible for admins
     }
 
     public Double getRateAvg(final Content content) {
-        return finder.getRateAvg(content);
+	return finder.getRateAvg(content);
     }
 
     public Long getRateByUsers(final Content content) {
-        return finder.getRateByUsers(content);
-    }
-
-    public void rateContent(final User rater, final Long contentId, final Double value) throws SerializableException {
-        Content content = finder.getContent(contentId);
-        Rate oldRate = finder.getRate(rater, content);
-        if (oldRate == null) {
-            Rate rate = new Rate(rater, content, value);
-            super.persist(rate, Rate.class);
-        } else {
-            oldRate.setValue(value);
-            super.persist(oldRate, Rate.class);
-        }
-
+	return finder.getRateByUsers(content);
     }
 
     public Double getRateContent(final User rater, final Content content) {
-        Rate rate = finder.getRate(rater, content);
-        if (rate != null) {
-            return rate.getValue();
-        } else {
-            return null;
-        }
+	final Rate rate = finder.getRate(rater, content);
+	if (rate != null) {
+	    return rate.getValue();
+	} else {
+	    return null;
+	}
     }
 
-    public void addAuthor(final User user, final Long contentId, final String authorShortName)
-            throws SerializableException {
-        Content content = finder.getContent(contentId);
-        User author = userFinder.getByShortName(authorShortName);
-        if (author == null) {
-            throw new UserNotFoundException();
-        }
-        content.addAuthor(author);
+    public void rateContent(final User rater, final Long contentId, final Double value) throws DefaultException {
+	final Content content = finder.getContent(contentId);
+	final Rate oldRate = finder.getRate(rater, content);
+	if (oldRate == null) {
+	    final Rate rate = new Rate(rater, content, value);
+	    super.persist(rate, Rate.class);
+	} else {
+	    oldRate.setValue(value);
+	    super.persist(oldRate, Rate.class);
+	}
+
     }
 
     public void removeAuthor(final User user, final Long contentId, final String authorShortName)
-            throws SerializableException {
-        Content content = finder.getContent(contentId);
-        User author = userFinder.getByShortName(authorShortName);
-        if (author == null) {
-            throw new UserNotFoundException();
-        }
-        content.removeAuthor(author);
+	    throws DefaultException {
+	final Content content = finder.getContent(contentId);
+	final User author = userFinder.getByShortName(authorShortName);
+	if (author == null) {
+	    throw new UserNotFoundException();
+	}
+	content.removeAuthor(author);
     }
 
-    public I18nLanguage setLanguage(final User user, final Long contentId, final String languageCode)
-            throws SerializableException {
-        Content content = finder.getContent(contentId);
-        I18nLanguage language = languageFinder.findByCode(languageCode);
-        if (language == null) {
-            throw new I18nNotFoundException();
-        }
-        content.setLanguage(language);
-        return language;
+    public String renameContent(final User user, final Long contentId, final String newTitle) throws DefaultException {
+	final Content content = finder.getContent(contentId);
+	content.getLastRevision().setTitle(newTitle);
+	return newTitle;
     }
 
-    public void setPublishedOn(final User user, final Long contentId, final Date publishedOn)
-            throws SerializableException {
-        Content content = finder.getContent(contentId);
-        content.setPublishedOn(publishedOn);
-    }
-
-    public void setTags(final User user, final Long contentId, final String tags) throws SerializableException {
-        Content content = finder.getContent(contentId);
-        ArrayList<String> tagsStripped = KuneStringUtils.splitTags(tags);
-        ArrayList<Tag> tagList = new ArrayList<Tag>();
-        for (Iterator<String> i = tagsStripped.iterator(); i.hasNext();) {
-            String tagString = i.next();
-            Tag tag;
-            try {
-                tag = tagManager.findByTagName(tagString);
-            } catch (NoResultException e) {
-                tag = new Tag(tagString);
-                tagManager.persist(tag);
-            }
-            if (!tagList.contains(tag)) {
-                tagList.add(tag);
-            }
-        }
-        content.setTags(tagList);
-    }
-
-    public String renameContent(final User user, final Long contentId, final String newTitle)
-            throws SerializableException {
-        Content content = finder.getContent(contentId);
-        content.getLastRevision().setTitle(newTitle);
-        return newTitle;
-    }
-
-    public void delContent(final User user, final Long contentId) throws SerializableException {
-        Content content = finder.getContent(contentId);
-        content.setMarkForDeletion(true);
-        content.setDeletedOn(new Date());
-        // FIXME: Maybe set only visible for admins
+    public Content save(final User editor, final Content descriptor, final String content) {
+	final Revision revision = new Revision(descriptor);
+	revision.setEditor(editor);
+	revision.setTitle(descriptor.getTitle());
+	revision.setBody(content);
+	descriptor.addRevision(revision);
+	return persist(descriptor);
     }
 
     public SearchResult<Content> search(final String search) {
-        return this.search(search, null, null);
+	return this.search(search, null, null);
     }
 
     public SearchResult<Content> search(final String search, final Integer firstResult, final Integer maxResults) {
-        MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "authors.name", "authors.shortName",
-                "container.name", "language.code", "language.englishName", "language.nativeName", "lastRevision.body",
-                "lastRevision.title", "tags.name" }, new StandardAnalyzer());
-        Query query;
-        try {
-            query = parser.parse(search);
-        } catch (ParseException e) {
-            throw new RuntimeException("Error parsing search");
-        }
-        return super.search(query, firstResult, maxResults);
+	final MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "authors.name",
+		"authors.shortName", "container.name", "language.code", "language.englishName", "language.nativeName",
+		"lastRevision.body", "lastRevision.title", "tags.name" }, new StandardAnalyzer());
+	Query query;
+	try {
+	    query = parser.parse(search);
+	} catch (final ParseException e) {
+	    throw new RuntimeException("Error parsing search");
+	}
+	return super.search(query, firstResult, maxResults);
+    }
+
+    public I18nLanguage setLanguage(final User user, final Long contentId, final String languageCode)
+	    throws DefaultException {
+	final Content content = finder.getContent(contentId);
+	final I18nLanguage language = languageFinder.findByCode(languageCode);
+	if (language == null) {
+	    throw new I18nNotFoundException();
+	}
+	content.setLanguage(language);
+	return language;
+    }
+
+    public void setPublishedOn(final User user, final Long contentId, final Date publishedOn) throws DefaultException {
+	final Content content = finder.getContent(contentId);
+	content.setPublishedOn(publishedOn);
+    }
+
+    public void setTags(final User user, final Long contentId, final String tags) throws DefaultException {
+	final Content content = finder.getContent(contentId);
+	final ArrayList<String> tagsStripped = KuneStringUtils.splitTags(tags);
+	final ArrayList<Tag> tagList = new ArrayList<Tag>();
+	for (final Iterator<String> i = tagsStripped.iterator(); i.hasNext();) {
+	    final String tagString = i.next();
+	    Tag tag;
+	    try {
+		tag = tagManager.findByTagName(tagString);
+	    } catch (final NoResultException e) {
+		tag = new Tag(tagString);
+		tagManager.persist(tag);
+	    }
+	    if (!tagList.contains(tag)) {
+		tagList.add(tag);
+	    }
+	}
+	content.setTags(tagList);
     }
 
 }

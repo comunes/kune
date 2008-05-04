@@ -20,9 +20,7 @@
 
 package org.ourproject.kune.platf.client.errors;
 
-import com.google.gwt.user.client.rpc.SerializableException;
 
-public class AlreadyUserMemberException extends SerializableException {
+public class AlreadyUserMemberException extends DefaultException {
     private static final long serialVersionUID = 1L;
-
 }

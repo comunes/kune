@@ -33,6 +33,7 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.TagResultDTO;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
+import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
 import org.ourproject.kune.platf.client.errors.ToolNotFoundException;
 import org.ourproject.kune.platf.client.rpc.ContentService;
@@ -56,7 +57,6 @@ import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.platf.server.state.State;
 import org.ourproject.kune.platf.server.state.StateService;
 
-import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -79,109 +79,90 @@ public class ContentRPC implements ContentService, RPC {
 
     @Inject
     public ContentRPC(final Provider<UserSession> userSessionProvider, final AccessService accessService,
-            final StateService stateService, final CreationService creationService, final GroupManager groupManager,
-            final XmppManager xmppManager, final ContentManager contentManager,
-            final ContainerManager containerManager, final TagManager tagManager,
-            final SocialNetworkManager socialNetworkManager, final Mapper mapper) {
-        this.userSessionProvider = userSessionProvider;
-        this.accessService = accessService;
-        this.stateService = stateService;
-        this.creationService = creationService;
-        this.groupManager = groupManager;
-        this.xmppManager = xmppManager;
-        this.contentManager = contentManager;
-        this.containerManager = containerManager;
-        this.tagManager = tagManager;
-        this.socialNetworkManager = socialNetworkManager;
-        this.mapper = mapper;
+	    final StateService stateService, final CreationService creationService, final GroupManager groupManager,
+	    final XmppManager xmppManager, final ContentManager contentManager,
+	    final ContainerManager containerManager, final TagManager tagManager,
+	    final SocialNetworkManager socialNetworkManager, final Mapper mapper) {
+	this.userSessionProvider = userSessionProvider;
+	this.accessService = accessService;
+	this.stateService = stateService;
+	this.creationService = creationService;
+	this.groupManager = groupManager;
+	this.xmppManager = xmppManager;
+	this.contentManager = contentManager;
+	this.containerManager = containerManager;
+	this.tagManager = tagManager;
+	this.socialNetworkManager = socialNetworkManager;
+	this.mapper = mapper;
     }
 
     @Authenticated
     @Authorizated(accessTypeRequired = AccessType.EDIT, checkContent = true)
     @Transactional(type = TransactionType.READ_WRITE)
     public void addAuthor(final String userHash, final String groupShortName, final String documentId,
-            final String authorShortName) throws SerializableException {
-        final Long contentId = parseId(documentId);
-        UserSession userSession = getUserSession();
-        User user = userSession.getUser();
-        contentManager.addAuthor(user, contentId, authorShortName);
+	    final String authorShortName) throws DefaultException {
+	final Long contentId = parseId(documentId);
+	final UserSession userSession = getUserSession();
+	final User user = userSession.getUser();
+	contentManager.addAuthor(user, contentId, authorShortName);
     }
 
     @Authenticated
     @Authorizated(accessTypeRequired = AccessType.EDIT)
     @Transactional(type = TransactionType.READ_WRITE)
     public StateDTO addContent(final String userHash, final String groupShortName, final Long parentFolderId,
-            final String title) throws SerializableException {
-        final Group group = groupManager.findByShortName(groupShortName);
-        UserSession userSession = getUserSession();
-        final User user = userSession.getUser();
-        final Access access = accessService.getFolderAccess(group, parentFolderId, user, AccessType.EDIT);
-        access.setContentWidthFolderRights(creationService.createContent(title, "", user, access.getFolder()));
-        final State state = stateService.create(access);
-        return mapper.map(state, StateDTO.class);
+	    final String title) throws DefaultException {
+	final Group group = groupManager.findByShortName(groupShortName);
+	final UserSession userSession = getUserSession();
+	final User user = userSession.getUser();
+	final Access access = accessService.getFolderAccess(group, parentFolderId, user, AccessType.EDIT);
+	access.setContentWidthFolderRights(creationService.createContent(title, "", user, access.getFolder()));
+	final State state = stateService.create(access);
+	return mapper.map(state, StateDTO.class);
     }
 
     @Authenticated
     @Authorizated(accessTypeRequired = AccessType.EDIT)
     @Transactional(type = TransactionType.READ_WRITE)
     public StateDTO addFolder(final String userHash, final String groupShortName, final Long parentFolderId,
-            final String title) throws SerializableException {
-        return createFolder(groupShortName, parentFolderId, title);
+	    final String title) throws DefaultException {
+	return createFolder(groupShortName, parentFolderId, title);
     }
 
     @Authenticated
     @Authorizated(accessTypeRequired = AccessType.EDIT)
     @Transactional(type = TransactionType.READ_WRITE)
     public StateDTO addRoom(final String userHash, final String groupShortName, final Long parentFolderId,
-            final String roomName) throws SerializableException {
-        UserSession userSession = getUserSession();
-        final String userShortName = userSession.getUser().getShortName();
-        final ChatConnection connection = xmppManager.login(userShortName, userSession.getUser().getPassword(),
-                userHash);
-        xmppManager.createRoom(connection, roomName, userShortName + userHash);
-        xmppManager.disconnect(connection);
-        try {
-            return createFolder(groupShortName, parentFolderId, roomName);
-        } catch (ContentNotFoundException e) {
-            xmppManager.destroyRoom(connection, roomName);
-            throw new ContentNotFoundException();
-        } catch (AccessViolationException e) {
-            xmppManager.destroyRoom(connection, roomName);
-            throw new AccessViolationException();
-        } catch (GroupNotFoundException e) {
-            xmppManager.destroyRoom(connection, roomName);
-            throw new GroupNotFoundException();
-        }
-    }
-
-    private StateDTO createFolder(final String groupShortName, final Long parentFolderId, final String title)
-            throws SerializableException {
-        UserSession userSession = getUserSession();
-        final User user = userSession.getUser();
-        final Group group = groupManager.findByShortName(groupShortName);
-
-        Access access = accessService.getFolderAccess(group, parentFolderId, user, AccessType.EDIT);
-
-        final Container container = creationService.createFolder(group, parentFolderId, title, user.getLanguage());
-        final String toolName = container.getToolName();
-        // Trying not to enter in new folder:
-        // final StateToken token = new StateToken(group.getShortName(),
-        // toolName, container.getId().toString(), null);
-        final StateToken token = new StateToken(group.getShortName(), toolName, parentFolderId.toString(), null);
-        access = accessService.getAccess(user, token, group, AccessType.READ);
-        final State state = stateService.create(access);
-        return mapper.map(state, StateDTO.class);
+	    final String roomName) throws DefaultException {
+	final UserSession userSession = getUserSession();
+	final String userShortName = userSession.getUser().getShortName();
+	final ChatConnection connection = xmppManager.login(userShortName, userSession.getUser().getPassword(),
+		userHash);
+	xmppManager.createRoom(connection, roomName, userShortName + userHash);
+	xmppManager.disconnect(connection);
+	try {
+	    return createFolder(groupShortName, parentFolderId, roomName);
+	} catch (final ContentNotFoundException e) {
+	    xmppManager.destroyRoom(connection, roomName);
+	    throw new ContentNotFoundException();
+	} catch (final AccessViolationException e) {
+	    xmppManager.destroyRoom(connection, roomName);
+	    throw new AccessViolationException();
+	} catch (final GroupNotFoundException e) {
+	    xmppManager.destroyRoom(connection, roomName);
+	    throw new GroupNotFoundException();
+	}
     }
 
     @Authenticated
     @Authorizated(accessTypeRequired = AccessType.ADMIN, checkContent = true)
     @Transactional(type = TransactionType.READ_WRITE)
     public void delContent(final String userHash, final String groupShortName, final String documentId)
-            throws SerializableException {
-        final Long contentId = parseId(documentId);
-        UserSession userSession = getUserSession();
-        User user = userSession.getUser();
-        contentManager.delContent(user, contentId);
+	    throws DefaultException {
+	final Long contentId = parseId(documentId);
+	final UserSession userSession = getUserSession();
+	final User user = userSession.getUser();
+	contentManager.delContent(user, contentId);
     }
 
     // Not using @Authorizated because accessService is doing this job and is
@@ -190,182 +171,201 @@ public class ContentRPC implements ContentService, RPC {
     @Authenticated(mandatory = false)
     @Transactional(type = TransactionType.READ_ONLY)
     public StateDTO getContent(final String userHash, final String groupShortName, final StateToken token)
-            throws SerializableException {
-        Group defaultGroup;
-        UserSession userSession = getUserSession();
-        User user = userSession.getUser();
-        boolean userIsLoggedIn = userSession.isUserLoggedIn();
-        if (userIsLoggedIn) {
-            defaultGroup = groupManager.getGroupOfUserWithId(user.getId());
-        } else {
-            defaultGroup = groupManager.getDefaultGroup();
-        }
-        Access access;
-        try {
-            access = accessService.getAccess(user, token, defaultGroup, AccessType.READ);
-        } catch (NoResultException e) {
-            throw new ContentNotFoundException();
-        } catch (ToolNotFoundException e) {
-            throw new ContentNotFoundException();
-        }
-        final State state = stateService.create(access);
-        if (state.isRateable()) {
-            final Long contentId = parseId(state.getDocumentId());
-            Content content = contentManager.find(contentId);
-            if (userIsLoggedIn) {
-                state.setCurrentUserRate(contentManager.getRateContent(user, content));
-            }
-            state.setRate(contentManager.getRateAvg(content));
-            state.setRateByUsers(contentManager.getRateByUsers(content));
-        }
-        Group group = state.getGroup();
-        state.setGroupTags(tagManager.getSummaryByGroup(group));
-        state.setGroupMembers(socialNetworkManager.find(user, group));
-        state.setParticipation(socialNetworkManager.findParticipation(user, group));
-        return mapper.map(state, StateDTO.class);
-    }
-
-    private List<TagResultDTO> getSummaryTags(final Group group) {
-        return mapper.mapList(tagManager.getSummaryByGroup(group), TagResultDTO.class);
+	    throws DefaultException {
+	Group defaultGroup;
+	final UserSession userSession = getUserSession();
+	final User user = userSession.getUser();
+	final boolean userIsLoggedIn = userSession.isUserLoggedIn();
+	if (userIsLoggedIn) {
+	    defaultGroup = groupManager.getGroupOfUserWithId(user.getId());
+	} else {
+	    defaultGroup = groupManager.getDefaultGroup();
+	}
+	Access access;
+	try {
+	    access = accessService.getAccess(user, token, defaultGroup, AccessType.READ);
+	} catch (final NoResultException e) {
+	    throw new ContentNotFoundException();
+	} catch (final ToolNotFoundException e) {
+	    throw new ContentNotFoundException();
+	}
+	final State state = stateService.create(access);
+	if (state.isRateable()) {
+	    final Long contentId = parseId(state.getDocumentId());
+	    final Content content = contentManager.find(contentId);
+	    if (userIsLoggedIn) {
+		state.setCurrentUserRate(contentManager.getRateContent(user, content));
+	    }
+	    state.setRate(contentManager.getRateAvg(content));
+	    state.setRateByUsers(contentManager.getRateByUsers(content));
+	}
+	final Group group = state.getGroup();
+	state.setGroupTags(tagManager.getSummaryByGroup(group));
+	state.setGroupMembers(socialNetworkManager.find(user, group));
+	state.setParticipation(socialNetworkManager.findParticipation(user, group));
+	return mapper.map(state, StateDTO.class);
     }
 
     @Authenticated(mandatory = false)
     @Authorizated(accessTypeRequired = AccessType.READ)
     @Transactional(type = TransactionType.READ_ONLY)
     public List<TagResultDTO> getSummaryTags(final String userHash, final String groupShortName) {
-        final Group group = groupManager.findByShortName(groupShortName);
-        return getSummaryTags(group);
-    }
-
-    private UserSession getUserSession() {
-        return userSessionProvider.get();
-    }
-
-    private Long parseId(final String documentId) throws ContentNotFoundException {
-        try {
-            return new Long(documentId);
-        } catch (final NumberFormatException e) {
-            throw new ContentNotFoundException();
-        }
+	final Group group = groupManager.findByShortName(groupShortName);
+	return getSummaryTags(group);
     }
 
     @Authenticated
     @Authorizated(accessTypeRequired = AccessType.READ, checkContent = true)
     @Transactional(type = TransactionType.READ_WRITE)
     public void rateContent(final String userHash, final String groupShortName, final String documentId,
-            final Double value) throws SerializableException {
-        UserSession userSession = getUserSession();
-        User rater = userSession.getUser();
-        final Long contentId = parseId(documentId);
+	    final Double value) throws DefaultException {
+	final UserSession userSession = getUserSession();
+	final User rater = userSession.getUser();
+	final Long contentId = parseId(documentId);
 
-        if (userSession.isUserLoggedIn()) {
-            contentManager.rateContent(rater, contentId, value);
-        } else {
-            throw new AccessViolationException();
-        }
+	if (userSession.isUserLoggedIn()) {
+	    contentManager.rateContent(rater, contentId, value);
+	} else {
+	    throw new AccessViolationException();
+	}
     }
 
     @Authenticated
     @Authorizated(accessTypeRequired = AccessType.EDIT, checkContent = true)
     @Transactional(type = TransactionType.READ_WRITE)
     public void removeAuthor(final String userHash, final String groupShortName, final String documentId,
-            final String authorShortName) throws SerializableException {
-        final Long contentId = parseId(documentId);
-        UserSession userSession = getUserSession();
-        User user = userSession.getUser();
-        contentManager.removeAuthor(user, contentId, authorShortName);
+	    final String authorShortName) throws DefaultException {
+	final Long contentId = parseId(documentId);
+	final UserSession userSession = getUserSession();
+	final User user = userSession.getUser();
+	contentManager.removeAuthor(user, contentId, authorShortName);
     }
 
     @Authenticated
     @Authorizated(accessTypeRequired = AccessType.EDIT)
     @Transactional(type = TransactionType.READ_WRITE)
     public String rename(final String userHash, final String groupShortName, final String token, final String newName)
-            throws SerializableException {
-        String result;
-        UserSession userSession = getUserSession();
-        final User user = userSession.getUser();
-        StateToken stateToken = new StateToken(token);
-        final Group group = groupManager.findByShortName(groupShortName);
-        if (stateToken.isComplete()) {
-            try {
-                Content content = accessService.accessToContent(parseId(stateToken.getDocument()), user,
-                        AccessType.EDIT);
-                if (!content.getContainer().getOwner().equals(group)) {
-                    throw new AccessViolationException();
-                }
-            } catch (NoResultException e) {
-                throw new AccessViolationException();
-            }
-            result = renameContent(stateToken.getDocument(), newName);
-        } else {
-            result = renameFolder(groupShortName, parseId(stateToken.getFolder()), newName);
-        }
-        return result;
-    }
-
-    private String renameContent(final String documentId, final String newName) throws ContentNotFoundException,
-            SerializableException {
-        final Long contentId = parseId(documentId);
-        UserSession userSession = getUserSession();
-        User user = userSession.getUser();
-        return contentManager.renameContent(user, contentId, newName);
-    }
-
-    private String renameFolder(final String groupShortName, final Long folderId, final String newName)
-            throws SerializableException {
-        final Group group = groupManager.findByShortName(groupShortName);
-        UserSession userSession = getUserSession();
-        final User user = userSession.getUser();
-        Access folderAccess = accessService.getFolderAccess(group, folderId, user, AccessType.EDIT);
-        return containerManager.renameFolder(group, folderAccess.getFolder(), newName);
+	    throws DefaultException {
+	String result;
+	final UserSession userSession = getUserSession();
+	final User user = userSession.getUser();
+	final StateToken stateToken = new StateToken(token);
+	final Group group = groupManager.findByShortName(groupShortName);
+	if (stateToken.isComplete()) {
+	    try {
+		final Content content = accessService.accessToContent(parseId(stateToken.getDocument()), user,
+			AccessType.EDIT);
+		if (!content.getContainer().getOwner().equals(group)) {
+		    throw new AccessViolationException();
+		}
+	    } catch (final NoResultException e) {
+		throw new AccessViolationException();
+	    }
+	    result = renameContent(stateToken.getDocument(), newName);
+	} else {
+	    result = renameFolder(groupShortName, parseId(stateToken.getFolder()), newName);
+	}
+	return result;
     }
 
     @Authenticated
     @Authorizated(accessTypeRequired = AccessType.EDIT, checkContent = true)
     @Transactional(type = TransactionType.READ_WRITE)
     public Integer save(final String userHash, final String groupShortName, final String documentId,
-            final String textContent) throws SerializableException {
+	    final String textContent) throws DefaultException {
 
-        final Long contentId = parseId(documentId);
-        UserSession userSession = getUserSession();
-        final User user = userSession.getUser();
-        final Content content = accessService.accessToContent(contentId, user, AccessType.EDIT);
-        final Content descriptor = creationService.saveContent(user, content, textContent);
-        return descriptor.getVersion();
+	final Long contentId = parseId(documentId);
+	final UserSession userSession = getUserSession();
+	final User user = userSession.getUser();
+	final Content content = accessService.accessToContent(contentId, user, AccessType.EDIT);
+	final Content descriptor = creationService.saveContent(user, content, textContent);
+	return descriptor.getVersion();
     }
 
     @Authenticated
     @Authorizated(accessTypeRequired = AccessType.EDIT, checkContent = true)
     @Transactional(type = TransactionType.READ_WRITE)
     public I18nLanguageDTO setLanguage(final String userHash, final String groupShortName, final String documentId,
-            final String languageCode) throws SerializableException {
-        final Long contentId = parseId(documentId);
-        UserSession userSession = getUserSession();
-        User user = userSession.getUser();
-        return mapper.map(contentManager.setLanguage(user, contentId, languageCode), I18nLanguageDTO.class);
+	    final String languageCode) throws DefaultException {
+	final Long contentId = parseId(documentId);
+	final UserSession userSession = getUserSession();
+	final User user = userSession.getUser();
+	return mapper.map(contentManager.setLanguage(user, contentId, languageCode), I18nLanguageDTO.class);
     }
 
     @Authenticated
     @Authorizated(accessTypeRequired = AccessType.EDIT, checkContent = true)
     @Transactional(type = TransactionType.READ_WRITE)
     public void setPublishedOn(final String userHash, final String groupShortName, final String documentId,
-            final Date publishedOn) throws SerializableException {
-        final Long contentId = parseId(documentId);
-        UserSession userSession = getUserSession();
-        User user = userSession.getUser();
-        contentManager.setPublishedOn(user, contentId, publishedOn);
+	    final Date publishedOn) throws DefaultException {
+	final Long contentId = parseId(documentId);
+	final UserSession userSession = getUserSession();
+	final User user = userSession.getUser();
+	contentManager.setPublishedOn(user, contentId, publishedOn);
     }
 
     @Authenticated
     @Authorizated(accessTypeRequired = AccessType.EDIT, checkContent = true)
     @Transactional(type = TransactionType.READ_WRITE)
     public List<TagResultDTO> setTags(final String userHash, final String groupShortName, final String documentId,
-            final String tags) throws SerializableException {
-        final Long contentId = parseId(documentId);
-        UserSession userSession = getUserSession();
-        User user = userSession.getUser();
-        final Group group = groupManager.findByShortName(groupShortName);
-        contentManager.setTags(user, contentId, tags);
-        return getSummaryTags(group);
+	    final String tags) throws DefaultException {
+	final Long contentId = parseId(documentId);
+	final UserSession userSession = getUserSession();
+	final User user = userSession.getUser();
+	final Group group = groupManager.findByShortName(groupShortName);
+	contentManager.setTags(user, contentId, tags);
+	return getSummaryTags(group);
+    }
+
+    private StateDTO createFolder(final String groupShortName, final Long parentFolderId, final String title)
+	    throws DefaultException {
+	final UserSession userSession = getUserSession();
+	final User user = userSession.getUser();
+	final Group group = groupManager.findByShortName(groupShortName);
+
+	Access access = accessService.getFolderAccess(group, parentFolderId, user, AccessType.EDIT);
+
+	final Container container = creationService.createFolder(group, parentFolderId, title, user.getLanguage());
+	final String toolName = container.getToolName();
+	// Trying not to enter in new folder:
+	// final StateToken token = new StateToken(group.getShortName(),
+	// toolName, container.getId().toString(), null);
+	final StateToken token = new StateToken(group.getShortName(), toolName, parentFolderId.toString(), null);
+	access = accessService.getAccess(user, token, group, AccessType.READ);
+	final State state = stateService.create(access);
+	return mapper.map(state, StateDTO.class);
+    }
+
+    private List<TagResultDTO> getSummaryTags(final Group group) {
+	return mapper.mapList(tagManager.getSummaryByGroup(group), TagResultDTO.class);
+    }
+
+    private UserSession getUserSession() {
+	return userSessionProvider.get();
+    }
+
+    private Long parseId(final String documentId) throws ContentNotFoundException {
+	try {
+	    return new Long(documentId);
+	} catch (final NumberFormatException e) {
+	    throw new ContentNotFoundException();
+	}
+    }
+
+    private String renameContent(final String documentId, final String newName) throws ContentNotFoundException,
+	    DefaultException {
+	final Long contentId = parseId(documentId);
+	final UserSession userSession = getUserSession();
+	final User user = userSession.getUser();
+	return contentManager.renameContent(user, contentId, newName);
+    }
+
+    private String renameFolder(final String groupShortName, final Long folderId, final String newName)
+	    throws DefaultException {
+	final Group group = groupManager.findByShortName(groupShortName);
+	final UserSession userSession = getUserSession();
+	final User user = userSession.getUser();
+	final Access folderAccess = accessService.getFolderAccess(group, folderId, user, AccessType.EDIT);
+	return containerManager.renameFolder(group, folderAccess.getFolder(), newName);
     }
 }

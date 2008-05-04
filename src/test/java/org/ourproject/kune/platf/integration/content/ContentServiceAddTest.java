@@ -16,94 +16,92 @@ import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 
-import com.google.gwt.user.client.rpc.SerializableException;
-
 public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 
-    private StateDTO defaultContent;
     String groupName;
+    private StateDTO defaultContent;
 
     @Before
-    public void init() throws SerializableException {
-        new IntegrationTestHelper(this);
-        groupName = getDefSiteGroupName();
-    }
-
-    // @Test
-    public void testAddRoom() throws SerializableException {
-        doLogin();
-        defaultContent = getDefaultContent();
-        ContainerDTO parent = defaultContent.getFolder();
-        String roomName = "testroom";
-        StateDTO newState = contentService.addRoom(session.getHash(), groupName, parent.getId(), roomName);
-        assertNotNull(newState);
+    public void init() throws Exception {
+	new IntegrationTestHelper(this);
+	groupName = getDefSiteGroupName();
     }
 
     @Test(expected = UserMustBeLoggedException.class)
-    public void noLoggedInShouldThrowIllegalAccess() throws ContentNotFoundException, SerializableException {
-        defaultContent = getDefaultContent();
-        Long folderId = defaultContent.getFolder().getId();
-        contentService.addContent(session.getHash(), groupName, folderId, "a name");
+    public void noLoggedInShouldThrowIllegalAccess() throws ContentNotFoundException, Exception {
+	defaultContent = getDefaultContent();
+	final Long folderId = defaultContent.getFolder().getId();
+	contentService.addContent(session.getHash(), groupName, folderId, "a name");
     }
 
     @Test
-    public void testAddContent() throws SerializableException {
-        doLogin();
-        defaultContent = getDefaultContent();
-        assertEquals(1, defaultContent.getFolder().getContents().size());
-        AccessRightsDTO cntRights = defaultContent.getContentRights();
-        AccessRightsDTO ctxRight = defaultContent.getFolderRights();
+    public void testAddContent() throws Exception {
+	doLogin();
+	defaultContent = getDefaultContent();
+	assertEquals(1, defaultContent.getFolder().getContents().size());
+	final AccessRightsDTO cntRights = defaultContent.getContentRights();
+	final AccessRightsDTO ctxRight = defaultContent.getFolderRights();
 
-        String title = "New Content Title";
-        StateDTO added = contentService.addContent(session.getHash(), groupName, defaultContent.getFolder().getId(),
-                title);
-        assertNotNull(added);
-        List<ContentDTO> contents = added.getFolder().getContents();
-        assertEquals(title, added.getTitle());
-        assertEquals(2, contents.size());
-        assertEquals(cntRights, added.getContentRights());
-        assertEquals(ctxRight, added.getFolderRights());
+	final String title = "New Content Title";
+	final StateDTO added = contentService.addContent(session.getHash(), groupName, defaultContent.getFolder()
+		.getId(), title);
+	assertNotNull(added);
+	final List<ContentDTO> contents = added.getFolder().getContents();
+	assertEquals(title, added.getTitle());
+	assertEquals(2, contents.size());
+	assertEquals(cntRights, added.getContentRights());
+	assertEquals(ctxRight, added.getFolderRights());
 
-        StateToken newState = added.getStateToken();
-        StateDTO sameAgain = contentService.getContent(session.getHash(), groupName, newState);
-        assertNotNull(sameAgain);
-        assertEquals(2, sameAgain.getFolder().getContents().size());
+	final StateToken newState = added.getStateToken();
+	final StateDTO sameAgain = contentService.getContent(session.getHash(), groupName, newState);
+	assertNotNull(sameAgain);
+	assertEquals(2, sameAgain.getFolder().getContents().size());
     }
 
     @Test
-    public void testAddFolder() throws SerializableException {
-        doLogin();
-        defaultContent = getDefaultContent();
-        ContainerDTO parent = defaultContent.getFolder();
-        String title = "folder name";
-        StateDTO newState = contentService.addFolder(session.getHash(), groupName, parent.getId(), title);
-        assertNotNull(newState);
+    public void testAddFolder() throws Exception {
+	doLogin();
+	defaultContent = getDefaultContent();
+	final ContainerDTO parent = defaultContent.getFolder();
+	final String title = "folder name";
+	final StateDTO newState = contentService.addFolder(session.getHash(), groupName, parent.getId(), title);
+	assertNotNull(newState);
 
-        ContainerDTO parentAgain = getDefaultContent().getFolder();
-        ContainerDTO child = parentAgain.getChilds().get(0);
-        assertEquals(parent.getAbsolutePath().length + 1, child.getAbsolutePath().length);
-        assertEquals(parent.getId(), child.getParentFolderId());
+	final ContainerDTO parentAgain = getDefaultContent().getFolder();
+	final ContainerDTO child = parentAgain.getChilds().get(0);
+	assertEquals(parent.getAbsolutePath().length + 1, child.getAbsolutePath().length);
+	assertEquals(parent.getId(), child.getParentFolderId());
 
-        assertEquals(parent.getId(), parentAgain.getId());
-        assertEquals(1, parentAgain.getChilds().size());
+	assertEquals(parent.getId(), parentAgain.getId());
+	assertEquals(1, parentAgain.getChilds().size());
+    }
+
+    // @Test
+    public void testAddRoom() throws Exception {
+	doLogin();
+	defaultContent = getDefaultContent();
+	final ContainerDTO parent = defaultContent.getFolder();
+	final String roomName = "testroom";
+	final StateDTO newState = contentService.addRoom(session.getHash(), groupName, parent.getId(), roomName);
+	assertNotNull(newState);
     }
 
     @Test
-    public void testAddTwoFolders() throws SerializableException {
-        doLogin();
-        defaultContent = getDefaultContent();
-        ContainerDTO parent = defaultContent.getFolder();
-        String title = "folder name";
-        StateDTO newState = contentService.addFolder(session.getHash(), groupName, parent.getId(), title);
-        assertNotNull(newState);
+    public void testAddTwoFolders() throws Exception {
+	doLogin();
+	defaultContent = getDefaultContent();
+	final ContainerDTO parent = defaultContent.getFolder();
+	final String title = "folder name";
+	final StateDTO newState = contentService.addFolder(session.getHash(), groupName, parent.getId(), title);
+	assertNotNull(newState);
 
-        StateDTO newState2 = contentService.addFolder(session.getHash(), groupName, parent.getId(), title);
-        assertNotNull(newState2);
+	final StateDTO newState2 = contentService.addFolder(session.getHash(), groupName, parent.getId(), title);
+	assertNotNull(newState2);
 
-        ContainerDTO parentAgain = getDefaultContent().getFolder();
+	final ContainerDTO parentAgain = getDefaultContent().getFolder();
 
-        assertEquals(parent.getId(), parentAgain.getId());
-        assertEquals(2, parentAgain.getChilds().size());
+	assertEquals(parent.getId(), parentAgain.getId());
+	assertEquals(2, parentAgain.getChilds().size());
     }
 
 }

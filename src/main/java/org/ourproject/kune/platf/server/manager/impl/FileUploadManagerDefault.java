@@ -11,10 +11,11 @@ import org.cafesip.gwtcomp.server.FormResponse;
 public class FileUploadManagerDefault implements FileUploadAction {
 
     public FormResponse onSubmit(final HttpServlet servlet, final HttpServletRequest request) {
-        return new FormResponse(200, "", false);
+	return new FormResponse(200, "", false);
     }
 
-    public void setFileList(final HashMap files) {        
+    @SuppressWarnings("unchecked")
+    public void setFileList(final HashMap files) {
     }
 
 }

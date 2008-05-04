@@ -35,6 +35,7 @@ import org.ourproject.kune.workspace.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.workspace.client.workspace.WorkspaceUIComponents;
 import org.ourproject.kune.workspace.client.workspace.WorkspaceView;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ChangeListener;
@@ -82,284 +83,289 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     private final WorkspacePresenter presenter;
 
     public WorkspacePanel(final WorkspacePresenter presenter) {
-        this.presenter = presenter;
-        th = Kune.getInstance().theme;
-        // Initialize
-        final VerticalPanel generalVP = new VerticalPanel();
-        initWidget(generalVP);
-        groupLogoPanel = new GroupLogoPanel();
-        final HorizontalPanel generalHP = new HorizontalPanel();
-        cntcxtVP = new VerticalPanel();
-        final VerticalPanel groupNavBarVP = new VerticalPanel();
-        groupToolsBar = new GroupToolsBar();
-        BottomIconsTrayPanel = new HorizontalPanel();
-        groupDropDownsSP = new ScrollPanel();
-        groupDropDownsVP = new VerticalPanel();
-        contentTitleBarHP = new HorizontalPanel();
-        contentTitleBarBorderDec = new RoundedBorderDecorator(contentTitleBarHP, RoundedBorderDecorator.TOPLEFT);
-        contentSubTitleBarHP = new HorizontalPanel();
-        contentToolBarHP = new HorizontalPanel();
-        cntcxtHSP = new CustomHorizontalSplitPanel(new HorizontalSplitPanelImages() {
-            public AbstractImagePrototype horizontalSplitPanelThumb() {
-                return img.splitterVertBar();
-            }
-        });
-        cntcxtHSP.addChangeListener(new ChangeListener() {
-            public void onChange(final Widget sender) {
-                adjustSizeContentSP();
-                saveCurrentRightWidgetWidth(cntcxtHSP.getRightWidgetAvailableWidth());
-            }
-        });
-        cntcxtHSP.addSplitterListener(new SplitterListener() {
-            public void onStartResizing(final Widget sender) {
-                presenter.onSplitterStartResizing(sender);
-            }
+	this.presenter = presenter;
+	th = Kune.getInstance().theme;
+	// Initialize
+	final VerticalPanel generalVP = new VerticalPanel();
+	initWidget(generalVP);
+	groupLogoPanel = new GroupLogoPanel();
+	final HorizontalPanel generalHP = new HorizontalPanel();
+	cntcxtVP = new VerticalPanel();
+	final VerticalPanel groupNavBarVP = new VerticalPanel();
+	groupToolsBar = new GroupToolsBar();
+	BottomIconsTrayPanel = new HorizontalPanel();
+	groupDropDownsSP = new ScrollPanel();
+	groupDropDownsVP = new VerticalPanel();
+	contentTitleBarHP = new HorizontalPanel();
+	contentTitleBarBorderDec = new RoundedBorderDecorator(contentTitleBarHP, RoundedBorderDecorator.TOPLEFT);
+	contentSubTitleBarHP = new HorizontalPanel();
+	contentToolBarHP = new HorizontalPanel();
+	cntcxtHSP = new CustomHorizontalSplitPanel(new HorizontalSplitPanelImages() {
+	    public AbstractImagePrototype horizontalSplitPanelThumb() {
+		return img.splitterVertBar();
+	    }
+	});
+	cntcxtHSP.addChangeListener(new ChangeListener() {
+	    public void onChange(final Widget sender) {
+		adjustSizeContentSP();
+		saveCurrentRightWidgetWidth(cntcxtHSP.getRightWidgetAvailableWidth());
+	    }
+	});
+	cntcxtHSP.addSplitterListener(new SplitterListener() {
+	    public void onStartResizing(final Widget sender) {
+		presenter.onSplitterStartResizing(sender);
+	    }
 
-            public void onStopResizing(final Widget sender) {
-                presenter.onSplitterStopResizing(sender);
-            }
-        });
-        contentVP = new VerticalPanel();
-        contextVP = new VerticalPanel();
-        contentSP = new ScrollPanel();
-        contentBottomToolBarHP = new HorizontalPanel();
-        contentBottomBarHP = new HorizontalPanel();
-        bottomBorderDecorator = new RoundedBorderDecorator(contentBottomBarHP, RoundedBorderDecorator.BOTTOMLEFT);
+	    public void onStopResizing(final Widget sender) {
+		presenter.onSplitterStopResizing(sender);
+	    }
+	});
+	contentVP = new VerticalPanel();
+	contextVP = new VerticalPanel();
+	contentSP = new ScrollPanel();
+	contentBottomToolBarHP = new HorizontalPanel();
+	contentBottomBarHP = new HorizontalPanel();
+	bottomBorderDecorator = new RoundedBorderDecorator(contentBottomBarHP, RoundedBorderDecorator.BOTTOMLEFT);
 
-        // Layout
-        generalVP.add(groupLogoPanel);
-        generalVP.add(generalHP);
-        generalHP.add(cntcxtVP);
-        generalHP.add(groupNavBarVP);
-        groupNavBarVP.add(groupToolsBar);
-        groupNavBarVP.add(groupDropDownsSP);
-        groupNavBarVP.add(BottomIconsTrayPanel);
-        groupDropDownsSP.add(groupDropDownsVP);
-        cntcxtVP.add(contentTitleBarBorderDec);
-        cntcxtVP.add(contentSubTitleBarHP);
-        cntcxtVP.add(cntcxtHSP);
-        cntcxtHSP.setLeftWidget(contentVP);
-        cntcxtHSP.setRightWidget(contextVP);
-        cntcxtVP.add(bottomBorderDecorator);
-        contentVP.add(contentToolBarHP);
-        contentVP.add(contentSP);
-        contentVP.add(contentBottomToolBarHP);
+	// Layout
+	generalVP.add(groupLogoPanel);
+	generalVP.add(generalHP);
+	generalHP.add(cntcxtVP);
+	generalHP.add(groupNavBarVP);
+	groupNavBarVP.add(groupToolsBar);
+	groupNavBarVP.add(groupDropDownsSP);
+	groupNavBarVP.add(BottomIconsTrayPanel);
+	groupDropDownsSP.add(groupDropDownsVP);
+	cntcxtVP.add(contentTitleBarBorderDec);
+	cntcxtVP.add(contentSubTitleBarHP);
+	cntcxtVP.add(cntcxtHSP);
+	cntcxtHSP.setLeftWidget(contentVP);
+	cntcxtHSP.setRightWidget(contextVP);
+	cntcxtVP.add(bottomBorderDecorator);
+	contentVP.add(contentToolBarHP);
+	contentVP.add(contentSP);
+	contentVP.add(contentBottomToolBarHP);
 
-        contentVP.addStyleName("kune-WorkspacePanel-Content");
-        contextVP.addStyleName("kune-WorkspacePanel-Context");
-        contentVP.setWidth("100%");
-        contextVP.setWidth("100%");
-        contextVP.setHeight("100%");
+	contentVP.addStyleName("kune-WorkspacePanel-Content");
+	contextVP.addStyleName("kune-WorkspacePanel-Context");
+	contentVP.setWidth("100%");
+	contextVP.setWidth("100%");
+	contextVP.setHeight("100%");
 
-        // Set properties
-        addStyleName("kune-WorkspacePanel");
-        setGroupLogo("");
-        generalHP.addStyleName("GeneralHP");
-        contentTitleBarBorderDec.setColor(th.getContentMainBorder());
-        contentTitleBarHP.setWidth("100%");
-        contentSubTitleBarHP.setWidth("100%");
-        contentTitleBarHP.addStyleName("kune-ContentTitleBar");
-        contentSubTitleBarHP.addStyleName("kune-ContentSubTitleBar");
-        contentToolBarHP.setWidth("100%");
-        cntcxtVP.addStyleName("ContextPanel");
-        cntcxtVP.setCellVerticalAlignment(contentTitleBarHP, VerticalPanel.ALIGN_MIDDLE);
-        cntcxtVP.setCellVerticalAlignment(contentSubTitleBarHP, VerticalPanel.ALIGN_MIDDLE);
-        cntcxtVP.setCellVerticalAlignment(bottomBorderDecorator, VerticalPanel.ALIGN_MIDDLE);
-        contentTitleBarHP.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
-        contentSubTitleBarHP.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
-        contentBottomToolBarHP.setWidth("100%");
-        contentBottomBarHP.addStyleName("kune-ContentBottomBar");
-        contentBottomBarHP.addStyleName("kune-ft12px");
-        groupDropDownsVP.addStyleName("kune-GroupSummaryPanel");
-        bottomBorderDecorator.setColor(th.getContentMainBorder());
-        BottomIconsTrayPanel.addStyleName("kune-Margin-Medium-l");
-        BottomIconsTrayPanel.addStyleName("kune-BottomIconsTrayPanel");
-        BottomIconsTrayPanel.setHorizontalAlignment(HorizontalPanel.ALIGN_CENTER);
-        BottomIconsTrayPanel.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
-        previousRightWidgetWidth = DEF_CONTEXT_WIDTH;
-    }
-
-    public void addTab(final ToolTrigger trigger) {
-        groupToolsBar.addItem(trigger);
-    }
-
-    public void setGroupLogo(final String groupName) {
-        groupLogoPanel.setLogo(groupName);
-    }
-
-    public void setPutYourLogoVisible(final boolean visible) {
-        groupLogoPanel.setPutYourLogoVisible(visible);
-    }
-
-    public void setGroupLogo(final Image image) {
-        groupLogoPanel.setLogo(image);
-    }
-
-    public void setTool(final String toolName) {
-        groupToolsBar.selectItem(toolName);
-    }
-
-    public void setContent(final View content) {
-        contentSP.clear();
-        final Widget widget = (Widget) content;
-        contentSP.add(widget);
-    }
-
-    public void setContext(final View contextMenu) {
-        contextVP.clear();
-        final Widget widget = (Widget) contextMenu;
-        contextVP.add(widget);
-        widget.setHeight("100%");
-        widget.setWidth("100%");
-        contextVP.setCellWidth(widget, "100%");
-        contextVP.setCellHeight(widget, "100%");
-    }
-
-    public void setContentTitle(final View view) {
-        contentTitlePanel = (ContentTitlePanel) view;
-        contentTitleBarHP.add(contentTitlePanel);
-        contentTitleBarHP.setCellVerticalAlignment(contentTitlePanel, VerticalPanel.ALIGN_MIDDLE);
-    }
-
-    public void setContentSubTitle(final View view) {
-        contentSubTitlePanel = (ContentSubTitlePanel) view;
-        contentSubTitleBarHP.add(contentSubTitlePanel);
-        contentSubTitleBarHP.setCellVerticalAlignment(contentSubTitlePanel, VerticalPanel.ALIGN_MIDDLE);
-    }
-
-    public void setContentToolBar(final View view) {
-        contentToolBarPanel = (ContentToolBarPanel) view;
-        contentToolBarHP.add(contentToolBarPanel);
-        contentToolBarHP.setCellVerticalAlignment(contentToolBarPanel, VerticalPanel.ALIGN_MIDDLE);
-    }
-
-    public void setContentBottomToolBar(final View view) {
-        contentBottomToolBarPanel = (ContentBottomToolBarPanel) view;
-        contentBottomToolBarHP.add(contentBottomToolBarPanel);
-        contentBottomToolBarHP.setCellVerticalAlignment(contentBottomToolBarPanel, VerticalPanel.ALIGN_MIDDLE);
-    }
-
-    public void setBottom(final View view) {
-        bottomPanel = (LicensePanel) view;
-        contentBottomBarHP.add(bottomPanel);
-        contentBottomBarHP.setCellVerticalAlignment(bottomPanel, VerticalPanel.ALIGN_MIDDLE);
-    }
-
-    public void setGroupMembers(final View view) {
-        groupMembersPanel = (DropDownPanel) view;
-        AddDropDown(groupMembersPanel, th.getGroupMembersDD());
-    }
-
-    public void setParticipation(final View view) {
-        participationPanel = (DropDownPanel) view;
-        AddDropDown(participationPanel, th.getParticipationDD());
-    }
-
-    public void setSummary(final View view) {
-        groupSummaryPanel = (DropDownPanel) view;
-        AddDropDown(groupSummaryPanel, th.getSummaryDD());
-    }
-
-    public void setTags(final View view) {
-        tagsPanel = (DropDownPanel) view;
-        AddDropDown(tagsPanel, th.getTagsDD());
+	// Set properties
+	addStyleName("kune-WorkspacePanel");
+	setGroupLogo("");
+	generalHP.addStyleName("GeneralHP");
+	contentTitleBarBorderDec.setColor(th.getContentMainBorder());
+	contentTitleBarHP.setWidth("100%");
+	contentSubTitleBarHP.setWidth("100%");
+	contentTitleBarHP.addStyleName("kune-ContentTitleBar");
+	contentSubTitleBarHP.addStyleName("kune-ContentSubTitleBar");
+	contentToolBarHP.setWidth("100%");
+	cntcxtVP.addStyleName("ContextPanel");
+	cntcxtVP.setCellVerticalAlignment(contentTitleBarHP, VerticalPanel.ALIGN_MIDDLE);
+	cntcxtVP.setCellVerticalAlignment(contentSubTitleBarHP, VerticalPanel.ALIGN_MIDDLE);
+	cntcxtVP.setCellVerticalAlignment(bottomBorderDecorator, VerticalPanel.ALIGN_MIDDLE);
+	contentTitleBarHP.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
+	contentSubTitleBarHP.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
+	contentBottomToolBarHP.setWidth("100%");
+	contentBottomBarHP.addStyleName("kune-ContentBottomBar");
+	contentBottomBarHP.addStyleName("kune-ft12px");
+	groupDropDownsVP.addStyleName("kune-GroupSummaryPanel");
+	bottomBorderDecorator.setColor(th.getContentMainBorder());
+	BottomIconsTrayPanel.addStyleName("kune-Margin-Medium-l");
+	BottomIconsTrayPanel.addStyleName("kune-BottomIconsTrayPanel");
+	BottomIconsTrayPanel.setHorizontalAlignment(HorizontalPanel.ALIGN_CENTER);
+	BottomIconsTrayPanel.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
+	previousRightWidgetWidth = DEF_CONTEXT_WIDTH;
     }
 
     public void addBottomIconComponent(final View view) {
-        BottomIconsTrayPanel.add((Widget) view);
+	BottomIconsTrayPanel.add((Widget) view);
     }
 
-    public void setTheme(final String theme) {
-        th.setTheme(theme);
-        String mainColor = th.getContentMainBorder();
-        groupLogoPanel.setTextColor(th.getContentTitleText());
-        contentTitleBarBorderDec.setColor(mainColor);
-        bottomBorderDecorator.setColor(mainColor);
-        DOM.setStyleAttribute(cntcxtVP.getElement(), "borderRightColor", mainColor);
-        contentTitlePanel.setColors(th.getContentTitle(), th.getContentTitleText());
-        contentSubTitlePanel.setColors(mainColor, th.getContentSubTitleText());
-        DOM.setStyleAttribute(contentTitleBarHP.getElement(), "borderLeftColor", mainColor);
-        DOM.setStyleAttribute(contentTitleBarHP.getElement(), "backgroundColor", th.getContentTitle());
-        DOM.setStyleAttribute(contentSubTitleBarHP.getElement(), "backgroundColor", mainColor);
-        DOM.setStyleAttribute(contentBottomBarHP.getElement(), "backgroundColor", mainColor);
-        DOM.setStyleAttribute(cntcxtHSP.getRightWidget().getElement(), "backgroundColor", th.getContext());
-        DOM.setStyleAttribute(DOM.getChild(DOM.getChild(cntcxtHSP.getElement(), 0), 1), "backgroundColor", th
-                .getSplitter());
-        DOM.setStyleAttribute(contentBottomBarHP.getWidget(0).getElement(), "color", th.getContentBottomText());
-        groupMembersPanel.setColor(th.getGroupMembersDD());
-        participationPanel.setColor(th.getParticipationDD());
-        groupSummaryPanel.setColor(th.getSummaryDD());
-        tagsPanel.setColor(th.getTagsDD());
-        groupToolsBar.setTabsColors(th.getToolSelected(), th.getToolUnselected());
-    }
-
-    public void setVisible(final boolean visible) {
-        // false: Used when the app stops
-        super.setVisible(visible);
-    }
-
-    private void AddDropDown(final DropDownPanel panel, final String color) {
-        groupDropDownsVP.add(panel);
-        panel.setWidth("145px");
-        panel.setColor(color);
+    public void addTab(final ToolTrigger trigger) {
+	groupToolsBar.addItem(trigger);
     }
 
     public void adjustSize(final int windowWidth, final int windowHeight) {
-        final int contentWidth = windowWidth - 184;
-        final int contentHeight = windowHeight - 176;
+	final int contentWidth = windowWidth - 184;
+	final int contentHeight = windowHeight - 176;
 
-        // FireLog.debug("w1: " + windowWidth + ", h1: " + windowHeight);
-        // FireLog.debug("w2: " + contentWidth + ", h2: " + contentHeight);
-        // FireLog.debug("sp1: " + previousRightWidgetWidth);
-        cntcxtHSP.setSize("" + contentWidth + "px", "" + contentHeight + "px");
-        if (contentWidth > previousRightWidgetWidth) {
-            cntcxtHSP.setSplitPosition("" + (contentWidth - previousRightWidgetWidth - 6) + "px");
-            saveCurrentRightWidgetWidth(previousRightWidgetWidth);
-        } else {
-            setDefaultSplitterPosition();
-        }
-        adjustSizeContentSP();
+	// FireLog.debug("w1: " + windowWidth + ", h1: " + windowHeight);
+	// FireLog.debug("w2: " + contentWidth + ", h2: " + contentHeight);
+	// FireLog.debug("sp1: " + previousRightWidgetWidth);
+	cntcxtHSP.setSize("" + contentWidth + "px", "" + contentHeight + "px");
+	if (contentWidth > previousRightWidgetWidth) {
+	    cntcxtHSP.setSplitPosition("" + (contentWidth - previousRightWidgetWidth - 6) + "px");
+	    saveCurrentRightWidgetWidth(previousRightWidgetWidth);
+	} else {
+	    setDefaultSplitterPosition();
+	}
+	adjustSizeContentSP();
 
-        int bottomMarginForTray = 35;
-        int distanceFromTop = 89;
-        int groupDropDownsHeight = windowHeight - groupToolsBar.getOffsetHeight() - distanceFromTop
-                - bottomMarginForTray;
-        groupDropDownsSP.setHeight("" + groupDropDownsHeight + "px");
-    }
-
-    public void setComponents(final WorkspaceUIComponents components) {
-        setContentTitle(components.getContentTitleComponent().getView());
-        setContentSubTitle(components.getContentSubTitleComponent().getView());
-        setContentToolBar(components.getContentToolBarComponent().getView());
-        setContentBottomToolBar(components.getContentBottomToolBarComponent().getView());
-        setBottom(components.getLicenseComponent().getView());
-        setGroupMembers(components.getGroupMembersComponent().getView());
-        setParticipation(components.getParticipationComponent().getView());
-        setTags(components.getTagsComponent().getView());
-        setSummary(components.getGroupSummaryComponent().getView());
-        addBottomIconComponent(components.getThemeMenuComponent().getView());
-    }
-
-    private void adjustSizeContentSP() {
-        contentSP.setSize("" + (cntcxtHSP.getLeftWidgetAvailableWidth() - 2) + "px", ""
-                + (cntcxtHSP.getOffsetHeight() - 29 - contentToolBarHP.getOffsetHeight()) + "px");
-    }
-
-    private void setDefaultSplitterPosition() {
-        int newLefttWidgetWidth = (int) (cntcxtHSP.getOffsetWidth() * 0.7);
-        cntcxtHSP.setSplitPosition(newLefttWidgetWidth + "px");
-        saveCurrentRightWidgetWidth(cntcxtHSP.getLeftWidgetAvailableWidth());
-    }
-
-    private void saveCurrentRightWidgetWidth(final int newRightWidgetWidth) {
-        previousRightWidgetWidth = newRightWidgetWidth;
+	final int bottomMarginForTray = 35;
+	final int distanceFromTop = 89;
+	final int groupDropDownsHeight = windowHeight - groupToolsBar.getOffsetHeight() - distanceFromTop
+		- bottomMarginForTray;
+	groupDropDownsSP.setHeight("" + groupDropDownsHeight + "px");
     }
 
     public void registerUIExtensionPoints() {
-        presenter.addUIExtensionPoints(contentToolBarPanel.getExtensionPoints());
-        UIExtensionPoint bottomIconsPanelsEP = new UIExtensionPoint(
-                UIExtensionPoint.CONTENT_BOTTOM_ICONBAR, BottomIconsTrayPanel);
-        presenter.addUIExtensionPoint(bottomIconsPanelsEP);
+	presenter.addUIExtensionPoints(contentToolBarPanel.getExtensionPoints());
+	final UIExtensionPoint bottomIconsPanelsEP = new UIExtensionPoint(UIExtensionPoint.CONTENT_BOTTOM_ICONBAR,
+		BottomIconsTrayPanel);
+	presenter.addUIExtensionPoint(bottomIconsPanelsEP);
+    }
+
+    public void setBottom(final View view) {
+	bottomPanel = (LicensePanel) view;
+	contentBottomBarHP.add(bottomPanel);
+	contentBottomBarHP.setCellVerticalAlignment(bottomPanel, VerticalPanel.ALIGN_MIDDLE);
+    }
+
+    public void setComponents(final WorkspaceUIComponents components) {
+	setContentTitle(components.getContentTitleComponent().getView());
+	setContentSubTitle(components.getContentSubTitleComponent().getView());
+	setContentToolBar(components.getContentToolBarComponent().getView());
+	setContentBottomToolBar(components.getContentBottomToolBarComponent().getView());
+	setBottom(components.getLicenseComponent().getView());
+	setGroupMembers(components.getGroupMembersComponent().getView());
+	setParticipation(components.getParticipationComponent().getView());
+	setTags(components.getTagsComponent().getView());
+	setSummary(components.getGroupSummaryComponent().getView());
+	addBottomIconComponent(components.getThemeMenuComponent().getView());
+    }
+
+    public void setContent(final View content) {
+	contentSP.clear();
+	final Widget widget = (Widget) content;
+	contentSP.add(widget);
+    }
+
+    public void setContentBottomToolBar(final View view) {
+	contentBottomToolBarPanel = (ContentBottomToolBarPanel) view;
+	contentBottomToolBarHP.add(contentBottomToolBarPanel);
+	contentBottomToolBarHP.setCellVerticalAlignment(contentBottomToolBarPanel, VerticalPanel.ALIGN_MIDDLE);
+    }
+
+    public void setContentSubTitle(final View view) {
+	contentSubTitlePanel = (ContentSubTitlePanel) view;
+	contentSubTitleBarHP.add(contentSubTitlePanel);
+	contentSubTitleBarHP.setCellVerticalAlignment(contentSubTitlePanel, VerticalPanel.ALIGN_MIDDLE);
+    }
+
+    public void setContentTitle(final View view) {
+	contentTitlePanel = (ContentTitlePanel) view;
+	contentTitleBarHP.add(contentTitlePanel);
+	contentTitleBarHP.setCellVerticalAlignment(contentTitlePanel, VerticalPanel.ALIGN_MIDDLE);
+    }
+
+    public void setContentToolBar(final View view) {
+	contentToolBarPanel = (ContentToolBarPanel) view;
+	contentToolBarHP.add(contentToolBarPanel);
+	contentToolBarHP.setCellVerticalAlignment(contentToolBarPanel, VerticalPanel.ALIGN_MIDDLE);
+    }
+
+    public void setContext(final View contextMenu) {
+	contextVP.clear();
+	final Widget widget = (Widget) contextMenu;
+	contextVP.add(widget);
+	widget.setHeight("100%");
+	widget.setWidth("100%");
+	contextVP.setCellWidth(widget, "100%");
+	contextVP.setCellHeight(widget, "100%");
+    }
+
+    public void setGroupLogo(final Image image) {
+	groupLogoPanel.setLogo(image);
+    }
+
+    public void setGroupLogo(final String groupName) {
+	groupLogoPanel.setLogo(groupName);
+    }
+
+    public void setGroupMembers(final View view) {
+	groupMembersPanel = (DropDownPanel) view;
+	AddDropDown(groupMembersPanel, th.getGroupMembersDD());
+    }
+
+    public void setParticipation(final View view) {
+	participationPanel = (DropDownPanel) view;
+	AddDropDown(participationPanel, th.getParticipationDD());
+    }
+
+    public void setPutYourLogoVisible(final boolean visible) {
+	groupLogoPanel.setPutYourLogoVisible(visible);
+    }
+
+    public void setSummary(final View view) {
+	groupSummaryPanel = (DropDownPanel) view;
+	AddDropDown(groupSummaryPanel, th.getSummaryDD());
+    }
+
+    public void setTags(final View view) {
+	tagsPanel = (DropDownPanel) view;
+	AddDropDown(tagsPanel, th.getTagsDD());
+    }
+
+    public void setTheme(final String theme) {
+	th.setTheme(theme);
+	final String mainColor = th.getContentMainBorder();
+	groupLogoPanel.setTextColor(th.getContentTitleText());
+	contentTitleBarBorderDec.setColor(mainColor);
+	bottomBorderDecorator.setColor(mainColor);
+	DOM.setStyleAttribute(cntcxtVP.getElement(), "borderRightColor", mainColor);
+	contentTitlePanel.setColors(th.getContentTitle(), th.getContentTitleText());
+	contentSubTitlePanel.setColors(mainColor, th.getContentSubTitleText());
+	DOM.setStyleAttribute(contentTitleBarHP.getElement(), "borderLeftColor", mainColor);
+	DOM.setStyleAttribute(contentTitleBarHP.getElement(), "backgroundColor", th.getContentTitle());
+	DOM.setStyleAttribute(contentSubTitleBarHP.getElement(), "backgroundColor", mainColor);
+	DOM.setStyleAttribute(contentBottomBarHP.getElement(), "backgroundColor", mainColor);
+	DOM.setStyleAttribute(cntcxtHSP.getRightWidget().getElement(), "backgroundColor", th.getContext());
+	DOM.setStyleAttribute(DOM.getChild(DOM.getChild(cntcxtHSP.getElement(), 0), 1), "backgroundColor", th
+		.getSplitter());
+	DOM.setStyleAttribute(contentBottomBarHP.getWidget(0).getElement(), "color", th.getContentBottomText());
+	groupMembersPanel.setColor(th.getGroupMembersDD());
+	participationPanel.setColor(th.getParticipationDD());
+	groupSummaryPanel.setColor(th.getSummaryDD());
+	tagsPanel.setColor(th.getTagsDD());
+	groupToolsBar.setTabsColors(th.getToolSelected(), th.getToolUnselected());
+    }
+
+    public void setTool(final String toolName) {
+	groupToolsBar.selectItem(toolName);
+    }
+
+    public void setVisible(final boolean visible) {
+	// false: Used when the app stops
+	super.setVisible(visible);
+    }
+
+    private void AddDropDown(final DropDownPanel panel, final String color) {
+	groupDropDownsVP.add(panel);
+	panel.setWidth("145px");
+	panel.setColor(color);
+    }
+
+    private void adjustSizeContentSP() {
+	final int width = cntcxtHSP.getLeftWidgetAvailableWidth() - 2;
+	final int height = cntcxtHSP.getOffsetHeight() - 29 - contentToolBarHP.getOffsetHeight();
+	if (width > 0 && height > 0) {
+	    contentSP.setSize("" + width + "px", "" + height + "px");
+	} else {
+	    Log.debug("Can't resize ScrollPanel now");
+	}
+    }
+
+    private void saveCurrentRightWidgetWidth(final int newRightWidgetWidth) {
+	previousRightWidgetWidth = newRightWidgetWidth;
+    }
+
+    private void setDefaultSplitterPosition() {
+	final int newLefttWidgetWidth = (int) (cntcxtHSP.getOffsetWidth() * 0.7);
+	cntcxtHSP.setSplitPosition(newLefttWidgetWidth + "px");
+	saveCurrentRightWidgetWidth(cntcxtHSP.getLeftWidgetAvailableWidth());
     }
 
     // private void logSplitter(final String count) {

@@ -32,11 +32,11 @@ public class UserRegisterAction implements Action<ParamCallback<UserDTO, UserInf
 
     @SuppressWarnings("unchecked")
     public void execute(final ParamCallback<UserDTO, UserInfoDTO> paramCall) {
-        onRegister(paramCall.getParam(), (AsyncCallback<UserInfoDTO>) paramCall.getParam());
+	onRegister(paramCall.getParam(), paramCall.getCallback());
     }
 
     private void onRegister(final UserDTO user, final AsyncCallback<UserInfoDTO> callback) {
-        UserServiceAsync userService = UserService.App.getInstance();
-        userService.createUser(user, callback);
+	final UserServiceAsync userService = UserService.App.getInstance();
+	userService.createUser(user, callback);
     }
 }

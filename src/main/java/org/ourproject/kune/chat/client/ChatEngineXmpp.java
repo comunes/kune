@@ -19,17 +19,20 @@
  */
 package org.ourproject.kune.chat.client;
 
+import java.util.Date;
+
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.services.Kune;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.emite.client.core.bosh.BoshOptions;
-import com.calclab.emite.client.im.roster.Roster.SubscriptionMode;
+import com.calclab.emite.client.im.roster.RosterManager.SubscriptionMode;
 import com.calclab.emite.client.xmpp.stanzas.XmppURI;
 import com.calclab.emiteuiplugin.client.EmiteUIPlugin;
 import com.calclab.emiteuiplugin.client.UserChatOptions;
 import com.calclab.emiteuiplugin.client.dialog.OwnPresence;
 import com.calclab.emiteuiplugin.client.dialog.OwnPresence.OwnStatus;
+import com.calclab.emiteuiplugin.client.params.AvatarProvider;
 import com.calclab.emiteuiplugin.client.params.MultiChatCreationParam;
 
 class ChatEngineXmpp implements ChatEngine {
@@ -43,14 +46,30 @@ class ChatEngineXmpp implements ChatEngine {
 	return state;
     }
 
+    public void joinRoom(final String roomName, final String userAlias) {
+	// FIXME muc nick support
+	DefaultDispatcher.getInstance().fire(
+		EmiteUIPlugin.ROOMOPEN,
+		XmppURI.uri(roomName + "@" + state.roomHost + "/" + XmppURI.jid(state.userOptions.getUserJid()))
+			.getNode());
+    }
+
     public void login(final String chatName, final String chatPassword) {
-	UserChatOptions userChatOptions = new UserChatOptions(chatName + "@" + state.domain, chatPassword, "blue",
-		SubscriptionMode.auto_accept_all);
+	final String resource = "emiteui-" + new Date().getTime() + "-kune"; // +
+	// getGwtMetaProperty(GWT_PROPERTY_RELEASE);
+	final UserChatOptions userChatOptions = new UserChatOptions(chatName + "@" + state.domain, chatPassword,
+		resource, "blue", SubscriptionMode.autoAcceptAll);
+	// FIXME: Avatar provider
+	final AvatarProvider avatarProvider = new AvatarProvider() {
+	    public String getAvatarURL(XmppURI userURI) {
+		return "images/person-def.gif";
+	    }
+	};
 	state.userOptions = userChatOptions;
 	DefaultDispatcher.getInstance().fire(
 		EmiteUIPlugin.CREATE_CHAT_DIALOG,
 		new MultiChatCreationParam(Kune.I18N.t("Chat"), new BoshOptions(state.httpBase), state.roomHost,
-			Kune.I18N, state.userOptions));
+			Kune.I18N, avatarProvider, state.userOptions));
 	Log.debug("LOGIN CHAT: " + chatName + "[" + chatPassword + "]");
 	DefaultDispatcher.getInstance().fire(EmiteUIPlugin.SET_OWN_PRESENCE, new OwnPresence(OwnStatus.online));
     }
@@ -58,13 +77,5 @@ class ChatEngineXmpp implements ChatEngine {
     public void logout() {
 	DefaultDispatcher.getInstance().fire(EmiteUIPlugin.SET_OWN_PRESENCE, new OwnPresence(OwnStatus.offline));
 	DefaultDispatcher.getInstance().fire(EmiteUIPlugin.CLOSE_ALLCHATS, new Boolean(false));
-    }
-
-    public void joinRoom(final String roomName, final String userAlias) {
-	// FIXME muc nick support
-	DefaultDispatcher.getInstance().fire(
-		EmiteUIPlugin.ROOMOPEN,
-		XmppURI.uri(roomName + "@" + state.roomHost + "/" + XmppURI.jid(state.userOptions.getUserJid()))
-			.getNode());
     }
 }

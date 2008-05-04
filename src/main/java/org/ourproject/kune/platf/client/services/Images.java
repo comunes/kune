@@ -27,654 +27,397 @@ import com.google.gwt.user.client.ui.ImageBundle;
 public interface Images extends ImageBundle {
 
     public static class App {
-        private static Images ourInstance = null;
+	private static Images ourInstance = null;
 
-        public static synchronized Images getInstance() {
-            if (ourInstance == null) {
-                ourInstance = (Images) GWT.create(Images.class);
-            }
-            return ourInstance;
-        }
+	public static synchronized Images getInstance() {
+	    if (ourInstance == null) {
+		ourInstance = (Images) GWT.create(Images.class);
+	    }
+	    return ourInstance;
+	}
     }
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/accept.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/accept.png")
     AbstractImagePrototype accept();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/add-green.png
-     */
-    AbstractImagePrototype addGreen();
-
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/add.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/add.png")
     AbstractImagePrototype add();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/alert.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/add-green.png")
+    AbstractImagePrototype addGreen();
+
+    @Resource("org/ourproject/kune/platf/public/images/alert.png")
     AbstractImagePrototype alert();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/anybody.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/anybody.png")
     AbstractImagePrototype anybody();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/arrow-down-black.gif
-     */
+    @Resource("org/ourproject/kune/platf/public/images/arrow-down-black.gif")
     AbstractImagePrototype arrowDownBlack();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/arrow-down-green.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/arrow-down-green.png")
     AbstractImagePrototype arrowDownGreen();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/arrow-down-white.gif
-     */
+    @Resource("org/ourproject/kune/platf/public/images/arrow-down-white.gif")
     AbstractImagePrototype arrowDownWhite();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/arrow-left-green.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/arrow-left-green.png")
     AbstractImagePrototype arrowLeftGreen();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/arrow-right-black.gif
-     */
+    @Resource("org/ourproject/kune/platf/public/images/arrow-right-black.gif")
     AbstractImagePrototype arrowRightBlack();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/arrow-right-green.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/arrow-right-green.png")
     AbstractImagePrototype arrowRightGreen();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/arrow-right-white.gif
-     */
+    @Resource("org/ourproject/kune/platf/public/images/arrow-right-white.gif")
     AbstractImagePrototype arrowRightWhite();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/arrow-up-green.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/arrow-up-green.png")
     AbstractImagePrototype arrowUpGreen();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/bullet_add.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/bullet_add.png")
     AbstractImagePrototype bulletAdd();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/bullet_black.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/bullet_black.png")
     AbstractImagePrototype bulletBlack();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/bullet_blue.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/bullet_blue.png")
     AbstractImagePrototype bulletBlue();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/bullet_delete.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/bullet_delete.png")
     AbstractImagePrototype bulletDelete();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/bullet_green.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/bullet_green.png")
     AbstractImagePrototype bulletGreen();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/bullet_pink.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/bullet_pink.png")
     AbstractImagePrototype bulletPink();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/bullet_purple.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/bullet_purple.png")
     AbstractImagePrototype bulletPurple();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/bullet_red.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/bullet_red.png")
     AbstractImagePrototype bulletRed();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/bullet_star.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/bullet_star.png")
     AbstractImagePrototype bulletStar();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/bullet_toggle_minus.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/bullet_toggle_minus.png")
     AbstractImagePrototype bulletToggleMinus();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/bullet_toggle_plus.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/bullet_toggle_plus.png")
     AbstractImagePrototype bulletTogglePlus();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/bullet_yellow.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/bullet_yellow.png")
     AbstractImagePrototype bulletYellow();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button15cblue.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button15cblue.png")
     AbstractImagePrototype button15cblue();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button15cdark.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button15cdark.png")
     AbstractImagePrototype button15cdark();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button15clight.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button15clight.png")
     AbstractImagePrototype button15clight();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button15cxlight.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button15cxlight.png")
     AbstractImagePrototype button15cxlight();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button15lblue.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button15lblue.png")
     AbstractImagePrototype button15lblue();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button15ldark.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button15ldark.png")
     AbstractImagePrototype button15ldark();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button15llight.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button15llight.png")
     AbstractImagePrototype button15llight();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button15lxlight.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button15lxlight.png")
     AbstractImagePrototype button15lxlight();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button15rblue.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button15rblue.png")
     AbstractImagePrototype button15rblue();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button15rdark.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button15rdark.png")
     AbstractImagePrototype button15rdark();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button15rlight.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button15rlight.png")
     AbstractImagePrototype button15rlight();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button15rxlight.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button15rxlight.png")
     AbstractImagePrototype button15rxlight();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button17cblue.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button17cblue.png")
     AbstractImagePrototype button17cblue();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button17cdark.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button17cdark.png")
     AbstractImagePrototype button17cdark();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button17clight.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button17clight.png")
     AbstractImagePrototype button17clight();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button17cxlight.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button17cxlight.png")
     AbstractImagePrototype button17cxlight();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button17lblue.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button17lblue.png")
     AbstractImagePrototype button17lblue();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button17ldark.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button17ldark.png")
     AbstractImagePrototype button17ldark();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button17llight.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button17llight.png")
     AbstractImagePrototype button17llight();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button17lxlight.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button17lxlight.png")
     AbstractImagePrototype button17lxlight();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button17rblue.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button17rblue.png")
     AbstractImagePrototype button17rblue();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button17rdark.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button17rdark.png")
     AbstractImagePrototype button17rdark();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button17rlight.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button17rlight.png")
     AbstractImagePrototype button17rlight();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button17rxlight.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button17rxlight.png")
     AbstractImagePrototype button17rxlight();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button20cblue.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button20cblue.png")
     AbstractImagePrototype button20cblue();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button20cdark.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button20cdark.png")
     AbstractImagePrototype button20cdark();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button20clight.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button20clight.png")
     AbstractImagePrototype button20clight();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button20cxlight.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button20cxlight.png")
     AbstractImagePrototype button20cxlight();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button20lblue.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button20lblue.png")
     AbstractImagePrototype button20lblue();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button20ldark.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button20ldark.png")
     AbstractImagePrototype button20ldark();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button20llight.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button20llight.png")
     AbstractImagePrototype button20llight();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button20lxlight.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button20lxlight.png")
     AbstractImagePrototype button20lxlight();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button20rblue.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button20rblue.png")
     AbstractImagePrototype button20rblue();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button20rdark.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button20rdark.png")
     AbstractImagePrototype button20rdark();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button20rlight.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button20rlight.png")
     AbstractImagePrototype button20rlight();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button20rxlight.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button20rxlight.png")
     AbstractImagePrototype button20rxlight();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button-arrow-down.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button-arrow-down.png")
     AbstractImagePrototype buttonArrowDown();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button-help-blue.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button-help-blue.png")
     AbstractImagePrototype buttonHelpBlue();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button-help-dark.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button-help-dark.png")
     AbstractImagePrototype buttonHelpDark();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button-help-light.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button-help-light.png")
     AbstractImagePrototype buttonHelpLight();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/button-sitebar-arrow-down.gif
-     */
+    @Resource("org/ourproject/kune/platf/public/images/button-sitebar-arrow-down.gif")
     AbstractImagePrototype buttonSitebarArrowDown();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/by80x15.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/by80x15.png")
     AbstractImagePrototype by80x15();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/bync80x15.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/bync80x15.png")
     AbstractImagePrototype bync80x15();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/byncnd80x15.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/byncnd80x15.png")
     AbstractImagePrototype byncnd80x15();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/byncsa80x15.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/byncsa80x15.png")
     AbstractImagePrototype byncsa80x15();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/bynd80x15.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/bynd80x15.png")
     AbstractImagePrototype bynd80x15();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/bysa80x15.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/bysa80x15.png")
     AbstractImagePrototype bysa80x15();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/cancel.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/cancel.png")
     AbstractImagePrototype cancel();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/chat.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/chat.png")
     AbstractImagePrototype chat();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/clear.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/clear.png")
     AbstractImagePrototype clear();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/copyleft.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/copyleft.png")
     AbstractImagePrototype copyleft();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/cross-dark.png
-     */
-    AbstractImagePrototype crossDark();
-
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/cross.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/cross.png")
     AbstractImagePrototype cross();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/del.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/cross-dark.png")
+    AbstractImagePrototype crossDark();
+
+    @Resource("org/ourproject/kune/platf/public/images/del.png")
     AbstractImagePrototype del();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/emblem-important.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/emblem-important.png")
     AbstractImagePrototype emblemImportant();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/error.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/error.png")
     AbstractImagePrototype error();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/everybody.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/everybody.png")
     AbstractImagePrototype everybody();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/fullscreen.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/fullscreen.png")
     AbstractImagePrototype fullscreen();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/gnu-fdl.gif
-     */
+    @Resource("org/ourproject/kune/platf/public/images/gnu-fdl.gif")
     AbstractImagePrototype gnuFdl();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/group-def-icon.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/group-def-icon.png")
     AbstractImagePrototype groupDefIcon();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/group-home.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/group-home.png")
     AbstractImagePrototype groupHome();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/important.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/important.png")
     AbstractImagePrototype important();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/info-light.png
-     */
-    AbstractImagePrototype infoLight();
-
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/info.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/info.png")
     AbstractImagePrototype info();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/kune-close.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/info-light.png")
+    AbstractImagePrototype infoLight();
+
+    @Resource("org/ourproject/kune/platf/public/images/kune-close.png")
     AbstractImagePrototype kuneClose();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/kune-external-window.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/kune-external-window.png")
     AbstractImagePrototype kuneExternalWindow();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/kune-help-translation-icon.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/kune-help-translation-icon.png")
     AbstractImagePrototype kuneHelpTranslationIcon();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/kune-icon16.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/kune-icon16.png")
     AbstractImagePrototype kuneIcon16();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/kune-logo-16px.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/kune-logo-16px.png")
     AbstractImagePrototype kuneLogo16px();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/kune-preferences.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/kune-preferences.png")
     AbstractImagePrototype kunePreferences();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/kune-search-ico.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/kune-search-ico.png")
     AbstractImagePrototype kuneSearchIco();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/kune-search-ico-push.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/kune-search-ico-push.png")
     AbstractImagePrototype kuneSearchIcoPush();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/language.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/language.png")
     AbstractImagePrototype language();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/nobody.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/nobody.png")
     AbstractImagePrototype nobody();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/no-copyleft.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/no-copyleft.png")
     AbstractImagePrototype noCopyleft();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/nt.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/nt.png")
     AbstractImagePrototype nt();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/opentriangle.gif
-     */
+    @Resource("org/ourproject/kune/platf/public/images/opentriangle.gif")
     AbstractImagePrototype opentriangle();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/person-def.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/person-def.png")
     AbstractImagePrototype personDef();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/remove.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/remove.png")
     AbstractImagePrototype remove();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/rss-icon.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/rss-icon.png")
     AbstractImagePrototype rssIcon();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/search-ico.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/search-ico.png")
     AbstractImagePrototype searchIco();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/spin-kune-thund-green.gif
-     */
+    @Resource("org/ourproject/kune/platf/public/images/spin-kune-thund-green.gif")
     AbstractImagePrototype spinKuneThundGreen();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/splitter-vert-bar.gif
-     */
+    @Resource("org/ourproject/kune/platf/public/images/splitter-vert-bar.gif")
     AbstractImagePrototype splitterVertBar();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/star-10.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/star-10.png")
     AbstractImagePrototype star10();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/star-20.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/star-20.png")
     AbstractImagePrototype star20();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/star-30.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/star-30.png")
     AbstractImagePrototype star30();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/star-40.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/star-40.png")
     AbstractImagePrototype star40();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/star-50.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/star-50.png")
     AbstractImagePrototype star50();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/star-60.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/star-60.png")
     AbstractImagePrototype star60();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/star-70.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/star-70.png")
     AbstractImagePrototype star70();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/star-80.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/star-80.png")
     AbstractImagePrototype star80();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/star-90.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/star-90.png")
     AbstractImagePrototype star90();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/star-grey.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/star-grey.png")
     AbstractImagePrototype starGrey();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/star-small-yellow.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/star-small-yellow.png")
     AbstractImagePrototype starSmallYellow();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/star-vsmall-yellow.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/star-vsmall-yellow.png")
     AbstractImagePrototype starVsmallYellow();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/star-yellow.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/star-yellow.png")
     AbstractImagePrototype starYellow();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/step1.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/step1.png")
     AbstractImagePrototype step1();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/step2.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/step2.png")
     AbstractImagePrototype step2();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/step3.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/step3.png")
     AbstractImagePrototype step3();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/step4.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/step4.png")
     AbstractImagePrototype step4();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/step5.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/step5.png")
     AbstractImagePrototype step5();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/theme-choose.png
-     */
+    @Resource("org/ourproject/kune/platf/public/images/theme-choose.png")
     AbstractImagePrototype themeChoose();
 
-    /**
-     * @gwt.resource org/ourproject/kune/platf/public/images/triangle.gif
-     */
+    @Resource("org/ourproject/kune/platf/public/images/triangle.gif")
     AbstractImagePrototype triangle();
-
 }

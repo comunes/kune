@@ -76,6 +76,7 @@ public abstract class AbstractExtendedModule extends AbstractModule {
         }
     }
 
+    @SuppressWarnings("unused")
     @Inject
     private void injectRegisteredObjects(final Injector injector) {
         for (Object injectee : toBeInjected) {
@@ -98,7 +99,7 @@ public abstract class AbstractExtendedModule extends AbstractModule {
      * Hack to ensure unique Keys for binding different instances of
      * ExtendedModule. The prefix is chosen to reduce the chances of a conflict
      * with some other use of
-     * 
+     *
      * @Named. A better solution would be to invent an Annotation for just this
      *         purpose.
      */

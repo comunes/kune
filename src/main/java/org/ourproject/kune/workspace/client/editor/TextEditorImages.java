@@ -24,119 +24,73 @@ import com.google.gwt.user.client.ui.ImageBundle;
 
 public interface TextEditorImages extends ImageBundle {
 
-    /**
-     * @gwt.resource bold.png
-     */
-    AbstractImagePrototype bold();
+    @Resource("alignleft.png")
+    AbstractImagePrototype alignleft();
 
-    /**
-     * @gwt.resource link.png
-     */
-    AbstractImagePrototype createLink();
+    @Resource("alignright.png")
+    AbstractImagePrototype alignright();
 
-    /**
-     * @gwt.resource edithtml.png
-     */
-    AbstractImagePrototype editHtml();
-
-    /**
-     * @gwt.resource hfixedline.png
-     */
-    AbstractImagePrototype hr();
-
-    /**
-     * @gwt.resource incrementindent.png
-     */
-    AbstractImagePrototype indent();
-
-    /**
-     * @gwt.resource images.png
-     */
-    AbstractImagePrototype insertImage();
-
-    /**
-     * @gwt.resource italic.png
-     */
-    AbstractImagePrototype italic();
-
-    /**
-     * @gwt.resource centerpara.png
-     */
-    AbstractImagePrototype justifyCenter();
-
-    /**
-     * @gwt.resource alignleft.png
-     */
-    AbstractImagePrototype justifyLeft();
-
-    /**
-     * @gwt.resource alignright.png
-     */
-    AbstractImagePrototype justifyRight();
-
-    /**
-     * @gwt.resource defaultnumbering.png
-     */
-    AbstractImagePrototype ol();
-
-    /**
-     * @gwt.resource decrementindent.png
-     */
-    AbstractImagePrototype outdent();
-
-    /**
-     * @gwt.resource removeFormat.png
-     */
-    AbstractImagePrototype removeFormat();
-
-    /**
-     * @gwt.resource link_break.png
-     */
-    AbstractImagePrototype removeLink();
-
-    /**
-     * @gwt.resource strikeout.png
-     */
-    AbstractImagePrototype strikeThrough();
-
-    /**
-     * @gwt.resource subscript.png
-     */
-    AbstractImagePrototype subscript();
-
-    /**
-     * @gwt.resource superscript.png
-     */
-    AbstractImagePrototype superscript();
-
-    /**
-     * @gwt.resource defaultbullet.png
-     */
-    AbstractImagePrototype ul();
-
-    /**
-     * @gwt.resource underline.png
-     */
-    AbstractImagePrototype underline();
-
-    /**
-     * @gwt.resource backcolor.png
-     */
+    @Resource("backcolor.png")
     AbstractImagePrototype backcolor();
 
-    /**
-     * @gwt.resource fontcolor.png
-     */
-    AbstractImagePrototype fontcolor();
+    @Resource("bold.png")
+    AbstractImagePrototype bold();
 
-    /**
-     * @gwt.resource charfontname.png
-     */
+    @Resource("centerpara.png")
+    AbstractImagePrototype centerpara();
+
+    @Resource("charfontname.png")
     AbstractImagePrototype charfontname();
 
-    /**
-     * @gwt.resource fontheight.png
-     */
+    @Resource("decrementindent.png")
+    AbstractImagePrototype decrementindent();
+
+    @Resource("defaultbullet.png")
+    AbstractImagePrototype defaultbullet();
+
+    @Resource("defaultnumbering.png")
+    AbstractImagePrototype defaultnumbering();
+
+    @Resource("edithtml.png")
+    AbstractImagePrototype edithtml();
+
+    @Resource("fontcolor.png")
+    AbstractImagePrototype fontcolor();
+
+    @Resource("fontheight.png")
     AbstractImagePrototype fontheight();
+
+    @Resource("hfixedline.png")
+    AbstractImagePrototype hfixedline();
+
+    @Resource("images.png")
+    AbstractImagePrototype images();
+
+    @Resource("incrementindent.png")
+    AbstractImagePrototype incrementindent();
+
+    @Resource("italic.png")
+    AbstractImagePrototype italic();
+
+    @Resource("link.png")
+    AbstractImagePrototype link();
+
+    @Resource("link_break.png")
+    AbstractImagePrototype linkBreak();
+
+    @Resource("removeFormat.png")
+    AbstractImagePrototype removeFormat();
+
+    @Resource("strikeout.png")
+    AbstractImagePrototype strikeout();
+
+    @Resource("subscript.png")
+    AbstractImagePrototype subscript();
+
+    @Resource("superscript.png")
+    AbstractImagePrototype superscript();
+
+    @Resource("underline.png")
+    AbstractImagePrototype underline();
 
 }

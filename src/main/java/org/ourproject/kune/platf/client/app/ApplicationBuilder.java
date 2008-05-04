@@ -25,8 +25,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import org.ourproject.kune.blogs.client.BlogClientTool;
-import org.ourproject.kune.blogs.client.BlogsClientModule;
 import org.ourproject.kune.chat.client.ChatClientModule;
 import org.ourproject.kune.chat.client.ChatClientTool;
 import org.ourproject.kune.docs.client.DocsClientModule;
@@ -63,77 +61,77 @@ public class ApplicationBuilder {
     }
 
     public void build(final String userHash, final I18nLanguageDTO initialLang) {
-        KunePlatform platform = new KunePlatform();
-        ChatClientTool chatClientTool = new ChatClientTool();
-        platform.addTool(new DocumentClientTool());
-        platform.addTool(chatClientTool);
-        platform.addTool(new BlogClientTool());
+	final KunePlatform platform = new KunePlatform();
+	final ChatClientTool chatClientTool = new ChatClientTool();
+	platform.addTool(new DocumentClientTool());
+	platform.addTool(chatClientTool);
+	// platform.addTool(new BlogClientTool());
 
-        HashMap<String, ClientTool> tools = indexTools(platform.getTools());
+	final HashMap<String, ClientTool> tools = indexTools(platform.getTools());
 
-        final Session session = new SessionImpl(userHash, initialLang);
-        new KuneErrorHandler(session);
+	final Session session = new SessionImpl(userHash, initialLang);
+	new KuneErrorHandler(session);
 
-        UIExtensionPointManager extensionPointManager = new UIExtensionPointManager();
-        final DefaultApplication application = new DefaultApplication(tools, session, extensionPointManager);
-        Workspace workspace = application.getWorkspace();
-        Site.showProgressLoading();
-        Site.mask();
+	final UIExtensionPointManager extensionPointManager = new UIExtensionPointManager();
+	final DefaultApplication application = new DefaultApplication(tools, session, extensionPointManager);
+	final Workspace workspace = application.getWorkspace();
+	Site.showProgressLoading();
+	Site.mask();
 
-        ContentProvider provider = new ContentProviderImpl(ContentService.App.getInstance());
+	final ContentProvider provider = new ContentProviderImpl(ContentService.App.getInstance());
 
-        HistoryWrapper historyWrapper = new HistoryWrapperImpl();
-        final StateManager stateManager = new StateManagerDefault(provider, application, session, historyWrapper);
-        History.addHistoryListener(stateManager);
+	final HistoryWrapper historyWrapper = new HistoryWrapperImpl();
+	final StateManager stateManager = new StateManagerDefault(provider, application, session, historyWrapper);
+	History.addHistoryListener(stateManager);
 
-        platform.install(new PlatformClientModule(session, stateManager));
-        platform.install(new ChatClientModule(session, stateManager, chatClientTool));
-        platform.install(new WorkspaceClientModule(session, stateManager, workspace));
-        platform.install(new DocsClientModule(session, stateManager, workspace));
-        platform.install(new BlogsClientModule());
+	platform.install(new PlatformClientModule(session, stateManager));
+	platform.install(new ChatClientModule(session, stateManager, chatClientTool));
+	platform.install(new WorkspaceClientModule(session, stateManager, workspace));
+	platform.install(new DocsClientModule(session, stateManager, workspace));
+	// platform.install(new BlogsClientModule());
 
-        final DefaultDispatcher dispatcher = DefaultDispatcher.getInstance();
+	final DefaultDispatcher dispatcher = DefaultDispatcher.getInstance();
 
-        // Services services = new Services(application, stateManager,
-        // dispatcher, session, extensionPointManager,
-        // Kune.I18N);
+	// Services services = new Services(application, stateManager,
+	// dispatcher, session, extensionPointManager,
+	// Kune.I18N);
 
-        application.init(dispatcher, stateManager);
-        subscribeActions(dispatcher, platform.getActions());
+	application.init(dispatcher, stateManager);
+	subscribeActions(dispatcher, platform.getActions());
 
-        PluginManager pluginManager = new PluginManager(dispatcher, extensionPointManager, Kune.I18N);
-        // pluginManager.install(new HelloWorldPlugin());
-        pluginManager.install(new EmiteUIPlugin());
+	final PluginManager pluginManager = new PluginManager(dispatcher, extensionPointManager, Kune.I18N);
+	// pluginManager.install(new HelloWorldPlugin());
+	pluginManager.install(new EmiteUIPlugin());
 
-        Window.addWindowCloseListener(new WindowCloseListener() {
-            public void onWindowClosed() {
-                application.stop();
-            }
+	Window.addWindowCloseListener(new WindowCloseListener() {
+	    public void onWindowClosed() {
+		application.stop();
+	    }
 
-            public String onWindowClosing() {
-                return null;
-            }
-        });
-        application.start();
-    }
-
-    private void subscribeActions(final DefaultDispatcher dispatcher, final ArrayList<ActionEvent<?>> actions) {
-        ActionEvent<?> actionEvent;
-
-        for (Iterator<ActionEvent<?>> it = actions.iterator(); it.hasNext();) {
-            actionEvent = it.next();
-            dispatcher.subscribe(actionEvent.event, actionEvent.action);
-        }
+	    public String onWindowClosing() {
+		return null;
+	    }
+	});
+	application.start();
     }
 
     private HashMap<String, ClientTool> indexTools(final List<ClientTool> toolList) {
-        HashMap<String, ClientTool> tools = new HashMap<String, ClientTool>();
-        int total = toolList.size();
-        for (int index = 0; index < total; index++) {
-            ClientTool clientTool = toolList.get(index);
-            tools.put(clientTool.getName(), clientTool);
-        }
-        return tools;
+	final HashMap<String, ClientTool> tools = new HashMap<String, ClientTool>();
+	final int total = toolList.size();
+	for (int index = 0; index < total; index++) {
+	    final ClientTool clientTool = toolList.get(index);
+	    tools.put(clientTool.getName(), clientTool);
+	}
+	return tools;
+    }
+
+    private void subscribeActions(final DefaultDispatcher dispatcher, final ArrayList<ActionEvent<?>> actions) {
+	ActionEvent<?> actionEvent;
+
+	for (final Iterator<ActionEvent<?>> it = actions.iterator(); it.hasNext();) {
+	    actionEvent = it.next();
+	    dispatcher.subscribe(actionEvent.event, actionEvent.action);
+	}
     }
 
 }

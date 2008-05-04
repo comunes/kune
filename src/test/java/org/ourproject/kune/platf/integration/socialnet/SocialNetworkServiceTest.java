@@ -13,7 +13,6 @@ import org.ourproject.kune.platf.integration.IntegrationTest;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 import org.ourproject.kune.platf.server.UserSession;
 
-import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
 
 public class SocialNetworkServiceTest extends IntegrationTest {
@@ -26,31 +25,31 @@ public class SocialNetworkServiceTest extends IntegrationTest {
 
     @Before
     public void init() {
-        new IntegrationTestHelper(this);
-        groupShortName = getDefSiteGroupName();
+	new IntegrationTestHelper(this);
+	groupShortName = getDefSiteGroupName();
     }
 
-    @Test(expected = AlreadyUserMemberException.class)
-    public void testRequestJoinPersonalGroup() throws SerializableException {
-        doLogin();
-        socialNetworkService.requestJoinGroup(session.getHash(), groupShortName);
+    @Test
+    public void testGetGroupMembersNotLogged() throws Exception {
+	final SocialNetworkDTO groupMembers = socialNetworkService.getGroupMembers(null, groupShortName);
+	assertNotNull(groupMembers);
+    }
+
+    @Test
+    public void testGetParticipationNotLogged() throws Exception {
+	final ParticipationDataDTO participation = socialNetworkService.getParticipation(null, groupShortName);
+	assertNotNull(participation);
     }
 
     @Test(expected = UserMustBeLoggedException.class)
-    public void testRequestJoinNoLogged() throws SerializableException {
-        socialNetworkService.requestJoinGroup(session.getHash(), groupShortName);
+    public void testRequestJoinNoLogged() throws Exception {
+	socialNetworkService.requestJoinGroup(session.getHash(), groupShortName);
     }
 
-    @Test
-    public void testGetGroupMembersNotLogged() throws SerializableException {
-        SocialNetworkDTO groupMembers = socialNetworkService.getGroupMembers(null, groupShortName);
-        assertNotNull(groupMembers);
-    }
-
-    @Test
-    public void testGetParticipationNotLogged() throws SerializableException {
-        ParticipationDataDTO participation = socialNetworkService.getParticipation(null, groupShortName);
-        assertNotNull(participation);
+    @Test(expected = AlreadyUserMemberException.class)
+    public void testRequestJoinPersonalGroup() throws Exception {
+	doLogin();
+	socialNetworkService.requestJoinGroup(session.getHash(), groupShortName);
     }
 
 }

@@ -40,46 +40,46 @@ public class AbstractSearcherPanel {
     public AbstractSearcherPanel() {
     }
 
-    protected void query(final Store store, final GridPanel grid, final String query) {
-        UrlParam[] newParams = new UrlParam[] { new UrlParam("query", query), new UrlParam("start", 0),
-                new UrlParam("limit", PAGINATION_SIZE) };
-        store.setBaseParams(newParams);
-        store.load(0, PAGINATION_SIZE);
-        // see bind/unbind in:
-        // http://groups.google.com/group/gwt-ext/browse_thread/thread/ae0badb8114b30cd?hl=en
-    }
-
     protected void createPagingToolbar(final Store store, final GridPanel grid) {
-        PagingToolbar pag = new PagingToolbar(store);
-        pag.setPageSize(PAGINATION_SIZE);
-        pag.setDisplayInfo(true);
-        pag.setDisplayMsg(Kune.I18N.tWithNT("Displaying results {0} - {1} of {2}",
-                "Respect {} values in translations, "
-                        + "these will produce: 'Displaying results 1 - 25 of 95465' for instance"));
-        pag.setEmptyMsg(Kune.I18N.t("No results to display"));
-        pag.setAfterPageText(Kune.I18N.tWithNT("of {0}", "Used to show multiple results: '1 of 30'"));
-        pag.setBeforePageText(Kune.I18N.t("Page"));
-        pag.setFirstText(Kune.I18N.t("First Page"));
-        pag.setLastText(Kune.I18N.t("Last Page"));
-        pag.setNextText(Kune.I18N.t("Next Page"));
-        pag.setPrevText(Kune.I18N.t("Previous Page"));
-        pag.setRefreshText(Kune.I18N.t("Refresh"));
+	final PagingToolbar pag = new PagingToolbar(store);
+	pag.setPageSize(PAGINATION_SIZE);
+	pag.setDisplayInfo(true);
+	pag.setDisplayMsg(Kune.I18N.tWithNT("Displaying results {0} - {1} of {2}",
+		"Respect {} values in translations, "
+			+ "these will produce: 'Displaying results 1 - 25 of 95465' for instance"));
+	pag.setEmptyMsg(Kune.I18N.t("No results to display"));
+	pag.setAfterPageText(Kune.I18N.tWithNT("of {0}", "Used to show multiple results: '1 of 30'"));
+	pag.setBeforePageText(Kune.I18N.t("Page"));
+	pag.setFirstText(Kune.I18N.t("First Page"));
+	pag.setLastText(Kune.I18N.t("Last Page"));
+	pag.setNextText(Kune.I18N.t("Next Page"));
+	pag.setPrevText(Kune.I18N.t("Previous Page"));
+	pag.setRefreshText(Kune.I18N.t("Refresh"));
+	grid.setBottomToolbar(pag);
 
-        grid.addListener(new PanelListenerAdapter() {
-            public void onRender(final Component component) {
-                store.load(0, PAGINATION_SIZE);
-            }
-        });
-        grid.setBottomToolbar(pag);
+	grid.addListener(new PanelListenerAdapter() {
+	    public void onRender(final Component component) {
+		store.load(0, PAGINATION_SIZE);
+	    }
+	});
     }
 
     protected Store createStore(final FieldDef[] fieldDefs, final String url, final String id) {
-        JsonReader reader = new JsonReader(new RecordDef(fieldDefs));
-        reader.setRoot("list");
-        reader.setTotalProperty("size");
-        reader.setId(id);
-        HttpProxy proxy = new HttpProxy(url, Connection.POST);
-        return new Store(proxy, reader, true);
+	final JsonReader reader = new JsonReader(new RecordDef(fieldDefs));
+	reader.setRoot("list");
+	reader.setTotalProperty("size");
+	reader.setId(id);
+	final HttpProxy proxy = new HttpProxy(url, Connection.POST);
+	return new Store(proxy, reader, true);
+    }
+
+    protected void query(final Store store, final GridPanel grid, final String query) {
+	final UrlParam[] newParams = new UrlParam[] { new UrlParam("query", query), new UrlParam("start", 0),
+		new UrlParam("limit", PAGINATION_SIZE) };
+	store.setBaseParams(newParams);
+	store.load(0, PAGINATION_SIZE);
+	// see bind/unbind in:
+	// http://groups.google.com/group/gwt-ext/browse_thread/thread/ae0badb8114b30cd?hl=en
     }
 
 }

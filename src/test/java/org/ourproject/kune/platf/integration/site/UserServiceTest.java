@@ -28,7 +28,6 @@ import org.ourproject.kune.platf.server.users.UserInfo;
 import org.ourproject.kune.platf.server.users.UserInfoService;
 import org.ourproject.kune.workspace.client.sitebar.rpc.UserService;
 
-import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
 
 public class UserServiceTest extends IntegrationTest {
@@ -48,79 +47,79 @@ public class UserServiceTest extends IntegrationTest {
     private I18nCountryDTO country;
     private TimeZoneDTO timezone;
 
-    @Before
-    public void init() {
-        new IntegrationTestHelper(this);
-        lang = new I18nLanguageDTO();
-        country = new I18nCountryDTO();
-        timezone = new TimeZoneDTO();
-        lang.setCode("en");
-        country.setCode("GB");
-        timezone.setId("GMT");
-    }
-
-    @Test
-    public void testSiteNameLogin() throws SerializableException {
-        assertNull(session.getUser().getId());
-        userService.login(properties.getAdminShortName(), properties.getAdminPassword());
-        assertNotNull(session.getUser().getId());
-    }
-
-    @Test
-    public void testSiteEmailLogin() throws SerializableException {
-        assertNull(session.getUser().getId());
-        userService.login(properties.getAdminEmail(), properties.getAdminPassword());
-        assertNotNull(session.getUser().getId());
+    @Test(expected = EmailAddressInUseException.class)
+    public void createUserExistingEmailFails() throws Exception {
+	assertNull(session.getUser().getId());
+	final UserDTO user = new UserDTO("test", "test", "123456", properties.getAdminEmail(), lang, country, timezone);
+	userService.createUser(user);
     }
 
     @Test(expected = GroupNameInUseException.class)
-    public void createUserExistingNameFails() throws SerializableException {
-        assertNull(session.getUser().getId());
-        UserDTO user = new UserDTO("test", properties.getAdminShortName(), "123456", "example@example.com", lang,
-                country, timezone);
-        userService.createUser(user);
+    public void createUserExistingNameFails() throws Exception {
+	assertNull(session.getUser().getId());
+	final UserDTO user = new UserDTO("test", properties.getAdminShortName(), "123456", "example@example.com", lang,
+		country, timezone);
+	userService.createUser(user);
     }
 
-    @Test(expected = EmailAddressInUseException.class)
-    public void createUserExistingEmailFails() throws SerializableException {
-        assertNull(session.getUser().getId());
-        UserDTO user = new UserDTO("test", "test", "123456", properties.getAdminEmail(), lang, country, timezone);
-        userService.createUser(user);
+    @Before
+    public void init() {
+	new IntegrationTestHelper(this);
+	lang = new I18nLanguageDTO();
+	country = new I18nCountryDTO();
+	timezone = new TimeZoneDTO();
+	lang.setCode("en");
+	country.setCode("GB");
+	timezone.setId("GMT");
     }
 
     @Test(expected = SessionExpiredException.class)
-    public void testReloadUserInfoNotLogged() throws SerializableException {
-        assertNull(session.getUser().getId());
-        userService.reloadUserInfo("AndOldUserHash");
+    public void testReloadUserInfoNotLogged() throws Exception {
+	assertNull(session.getUser().getId());
+	userService.reloadUserInfo("AndOldUserHash");
     }
 
     @Test
-    public void testUserInfo() throws SerializableException {
-        doLogin();
-        final UserInfo userInfo = userInfoService.buildInfo(session.getUser(), session.getHash());
+    public void testSiteEmailLogin() throws Exception {
+	assertNull(session.getUser().getId());
+	userService.login(properties.getAdminEmail(), properties.getAdminPassword());
+	assertNotNull(session.getUser().getId());
+    }
 
-        final UserInfoDTO userInfoDTO = mapper.map(userInfo, UserInfoDTO.class);
-        assertEquals(userInfo.getName(), userInfoDTO.getName());
-        assertEquals(userInfo.getChatName(), userInfoDTO.getChatName());
-        assertEquals(userInfo.getChatPassword(), userInfoDTO.getChatPassword());
-        final List<Link> adminsGroup = userInfo.getGroupsIsAdmin();
-        final List<LinkDTO> adminsGroupDTO = userInfoDTO.getGroupsIsAdmin();
-        assertEqualListsLink(adminsGroupDTO, adminsGroup);
+    @Test
+    public void testSiteNameLogin() throws Exception {
+	assertNull(session.getUser().getId());
+	userService.login(properties.getAdminShortName(), properties.getAdminPassword());
+	assertNotNull(session.getUser().getId());
+    }
+
+    @Test
+    public void testUserInfo() throws Exception {
+	doLogin();
+	final UserInfo userInfo = userInfoService.buildInfo(session.getUser(), session.getHash());
+
+	final UserInfoDTO userInfoDTO = mapper.map(userInfo, UserInfoDTO.class);
+	assertEquals(userInfo.getName(), userInfoDTO.getName());
+	assertEquals(userInfo.getChatName(), userInfoDTO.getChatName());
+	assertEquals(userInfo.getChatPassword(), userInfoDTO.getChatPassword());
+	final List<Link> adminsGroup = userInfo.getGroupsIsAdmin();
+	final List<LinkDTO> adminsGroupDTO = userInfoDTO.getGroupsIsAdmin();
+	assertEqualListsLink(adminsGroupDTO, adminsGroup);
     }
 
     private void assertEqualListsLink(final List<LinkDTO> listDTO, final List<Link> list) {
-        assertEquals(listDTO.size(), list.size());
-        for (int i = 0; i < listDTO.size(); i++) {
-            final Object object = listDTO.get(i);
-            assertEquals(LinkDTO.class, object.getClass());
-            final LinkDTO d = (LinkDTO) object;
-            final Link l = list.get(i);
-            assertNotNull(d);
-            assertNotNull(l);
-            final LinkDTO map = mapper.map(l, LinkDTO.class);
-            assertEquals(map.getShortName(), d.getShortName());
-            assertEquals(map.getLink(), d.getLink());
-        }
+	assertEquals(listDTO.size(), list.size());
+	for (int i = 0; i < listDTO.size(); i++) {
+	    final Object object = listDTO.get(i);
+	    assertEquals(LinkDTO.class, object.getClass());
+	    final LinkDTO d = (LinkDTO) object;
+	    final Link l = list.get(i);
+	    assertNotNull(d);
+	    assertNotNull(l);
+	    final LinkDTO map = mapper.map(l, LinkDTO.class);
+	    assertEquals(map.getShortName(), d.getShortName());
+	    assertEquals(map.getLink(), d.getLink());
+	}
     }
 
 }

@@ -89,10 +89,13 @@ Appendix B: Configuration of Openfire xmpp server
 - Install openfire in your system. 
   NOTE: version openfire 3.4.5 don't work with this configuration, use a nightly build (Openfire 3.6.0 Alpha works partially) or a prior version (3.3.2 works fine).
   Remember: the openfire administration is in: http://localhost:9090/
+  See emite (our xmpp software) Server Compatibility: http://code.google.com/p/emite/wiki/ServerCompatibility
 - Configure the 'Server Name' (during installation of openfire, or after editing 'Server Settings') with "localhost" initially (See kune.chat.roomHost in kune.properties if you want to use other values).
 - Configure the 'Group chat service' (in Group chat tab) with "rooms" instead of "conference".
 - Enable "HTTP Bind Settings" and check the port is not used by other service in your machine.
-
+- Edit the openfire.xml
+  In debian (with a .deb installation) you can to edit the configuration in /etc/openfire...
+  In Mac: /usr/local/openfire/conf
 Add this lines to conf/openfire.xml and check that the user/passwd of the db is the same here and in the persistence.xml:
 
 <jive>

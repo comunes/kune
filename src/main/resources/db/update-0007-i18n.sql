@@ -17,10 +17,8 @@ INSERT INTO globalize_translations VALUES (NULL,'',NULL,1,'','Colabora en estos 
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Translate','Translate [%NT used in button]','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Request to participate in this group','Request to participate in this group','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Ok','Ok','kune_core',1819);
-INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Now you can participate more actively in this site with other people and groups.','Now you can participate more actively in this site with other people and groups.','kune_core',1819);
-INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','You can also use your personal space to publish contents.','You can also use your personal space to publish contents.','kune_core',1819);
+INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Now you can participate more actively in this site with other people and groups. You can also use your personal space to publish contents. Your email is not verified, please follow the instructions you will receive by email.', 'Now you can participate more actively in this site with other people and groups. You can also use your personal space to publish contents. Your email is not verified, please follow the instructions you will receive by email.','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Thanks for registering','Thanks for registering','kune_core',1819);
-INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Your email is not verified, please follow the instructions you will receive by email.','Your email is not verified, please follow the instructions you will receive by email.','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Click to rename','Click to rename','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Write a new name:','Write a new name:','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Rename','Rename','kune_core',1819);
@@ -43,10 +41,8 @@ INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Borrar','Delete 
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Translate','Translate [%NT used in button]','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Solicitar el participar en este grupo','Request to participate in this group','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Ok','Ok','kune_core',5889);
-INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Ahora puede participar más activamente en este sitio con otras personas y grupos','Now you can participate more actively in this site with other people and groups.','kune_core',5889);
-INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Usted también puede usar su espacio personal para publicar contenidos','You can also use your personal space to publish contents.','kune_core',5889);
+INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Ahora puede participar más activamente en este sitio con otras personas y grupos. Usted también puede usar su espacio personal para publicar contenidos. Su correo está sin verificar, por favor, siga las instrucciones que recibirá por correo.','Now you can participate more actively in this site with other people and groups. You can also use your personal space to publish contents. Your email is not verified, please follow the instructions you will receive by email.','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Gracias por registrarse','Thanks for registering','kune_core',5889);
-INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Su correo está sin verificar, por favor, siga las instrucciones que recibirá por correo','Your email is not verified, please follow the instructions you will receive by email.','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Haga clic para renombrar','Click to rename','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Escribe un nuevo nombre:','Write a new name:','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Renombrar','Rename','kune_core',5889);

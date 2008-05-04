@@ -42,74 +42,46 @@ public interface ContextItemsImages extends ImageBundle {
 	}
     }
 
-    /**
-     * @gwt.resource bullet_arrow_right.png
-     */
+    @Resource("bullet_arrow_right.png")
     AbstractImagePrototype bulletArrowRight();
 
-    /**
-     * @gwt.resource chat-green.png
-     */
-    AbstractImagePrototype chatGreen();
-
-    /**
-     * @gwt.resource chat-blue.png
-     */
+    @Resource("chat-blue.png")
     AbstractImagePrototype chatBlue();
 
-    /**
-     * @gwt.resource folder.png
-     */
+    @Resource("chat-green.png")
+    AbstractImagePrototype chatGreen();
+
+    @Resource("folder.png")
     AbstractImagePrototype folder();
 
-    /**
-     * @gwt.resource folder_add.png
-     */
+    @Resource("folder_add.png")
     AbstractImagePrototype folderAdd();
 
-    /**
-     * @gwt.resource folder-go-up.png
-     */
+    @Resource("folder-go-up.png")
     AbstractImagePrototype folderGoUp();
 
-    /**
-     * @gwt.resource folder-go-up-light.png
-     */
+    @Resource("folder-go-up-light.png")
     AbstractImagePrototype folderGoUpLight();
 
-    /**
-     * @gwt.resource folderpathmenu.png
-     */
+    @Resource("folderpathmenu.png")
     AbstractImagePrototype folderpathmenu();
 
-    /**
-     * @gwt.resource go-up.png
-     */
+    @Resource("go-up.png")
     AbstractImagePrototype goUp();
 
-    /**
-     * @gwt.resource go-up-light.png
-     */
+    @Resource("go-up-light.png")
     AbstractImagePrototype goUpLight();
 
-    /**
-     * @gwt.resource page.png
-     */
+    @Resource("page.png")
     AbstractImagePrototype page();
 
-    /**
-     * @gwt.resource page_add.png
-     */
+    @Resource("page_add.png")
     AbstractImagePrototype pageAdd();
 
-    /**
-     * @gwt.resource page_white.png
-     */
+    @Resource("page_white.png")
     AbstractImagePrototype pageWhite();
 
-    /**
-     * @gwt.resource page_white_add.png
-     */
+    @Resource("page_white_add.png")
     AbstractImagePrototype pageWhiteAdd();
 
 }

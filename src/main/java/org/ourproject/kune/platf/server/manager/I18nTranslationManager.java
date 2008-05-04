@@ -22,31 +22,30 @@ package org.ourproject.kune.platf.server.manager;
 import java.util.HashMap;
 import java.util.List;
 
+import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.server.domain.I18nTranslation;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
-
-import com.google.gwt.user.client.rpc.SerializableException;
 
 public interface I18nTranslationManager extends Manager<I18nTranslation, Long> {
 
     HashMap<String, String> getLexicon(String language);
 
-    List<I18nTranslation> getUntranslatedLexicon(String language);
-
     List<I18nTranslation> getTranslatedLexicon(String language);
+
+    SearchResult<I18nTranslation> getTranslatedLexicon(String language, Integer firstResult, Integer maxResults);
 
     String getTranslation(String language, String text);
 
-    String getTranslation(String language, String text, String arg);
-
     String getTranslation(String language, String text, Integer arg);
 
-    void setTranslation(String language, String text, String translation);
+    String getTranslation(String language, String text, String arg);
 
-    String setTranslation(String id, String translation) throws SerializableException;
+    List<I18nTranslation> getUntranslatedLexicon(String language);
 
     SearchResult<I18nTranslation> getUntranslatedLexicon(String language, Integer firstResult, Integer maxResults);
 
-    SearchResult<I18nTranslation> getTranslatedLexicon(String language, Integer firstResult, Integer maxResults);
+    String setTranslation(String id, String translation) throws DefaultException;
+
+    void setTranslation(String language, String text, String translation);
 
 }

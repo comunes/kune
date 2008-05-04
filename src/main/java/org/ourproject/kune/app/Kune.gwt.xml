@@ -1,54 +1,59 @@
 <module>
-  <inherits name='com.google.gwt.i18n.I18N' />
-  <inherits name='com.google.gwt.user.User' />
-  <inherits name="org.cafesip.gwtcomp.GWTComponents"/>
+    <inherits name='com.google.gwt.i18n.I18N' />
+    <inherits name='com.google.gwt.user.User' />
+    <inherits name="org.cafesip.gwtcomp.GWTComponents" />
 
-  <inherits name='org.ourproject.kune.platf.Kune-Platform' />
-  <inherits name='org.ourproject.kune.docs.Kune-Docs' />
-  <inherits name='org.ourproject.kune.chat.Kune-Chat' />
-  <inherits name='org.ourproject.kune.blogs.Kune-Blogs' />
-  <script src="js/colorthemes.js" />
+    <inherits name='org.ourproject.kune.platf.Kune-Platform' />
+    <inherits name='org.ourproject.kune.docs.Kune-Docs' />
+    <inherits name='org.ourproject.kune.chat.Kune-Chat' />
+    <inherits name='org.ourproject.kune.blogs.Kune-Blogs' />
 
-  <inherits name='com.gwtext.GwtExt' />
-  <script src="js/ext/adapter/ext/ext-base.js" />
-  <script src="js/ext/ext-all.js" />
+    <!-- gxt -->
+    <inherits name='com.extjs.gxt.ui.GXT' />
+    <stylesheet src="css/ext-all.css" />
+    <stylesheet src="css/xtheme-gray.css" />
 
-  <inherits name="com.allen_sauer.gwt.log.gwt-log" />
-  <!--
-    The default log level is `OFF`. In development you'll usually want
-    to switch to `DEBUG` level logging.
-  -->
-  <extend-property name="log_level" values="DEBUG" />
-  <set-property name="log_level" value="DEBUG" />
-  <set-property name="log_DivLogger" value="DISABLED" />
-  <set-property name="log_FirebugLogger" value="ENABLED" />
-  <!--
-  <set-property name="log_RemoteLogger" value="ENABLED" />
-  -->
+    <!-- gwt-ext -->
+    <inherits name='com.gwtext.GwtExt' />
+    <script src="js/ext/adapter/ext/ext-base.js" />
+    <script src="js/ext/ext-all.js" />
 
-  <!--
-    Alternatively, you may want to generate two or more combinations,
-    at the cost of increased compile time.
+    <inherits name="com.allen_sauer.gwt.log.gwt-log" />
+    <!--
+        The default log level is `OFF`. In development you'll usually want
+        to switch to `DEBUG` level logging.
+    -->
+    <extend-property name="log_level" values="DEBUG" />
+    <set-property name="log_level" value="DEBUG" />
+    <set-property name="log_DivLogger" value="DISABLED" />
+    <set-property name="log_FirebugLogger" value="ENABLED" />
+    <!--
+        <set-property name="log_RemoteLogger" value="ENABLED" />
+    -->
 
-    However, please note that the runtime default will still be `OFF`.
+    <!--
+        Alternatively, you may want to generate two or more combinations,
+        at the cost of increased compile time.
 
-    To compile both an `OFF` (production) and a `DEBUG` (development)
-    version of your application:
+        However, please note that the runtime default will still be `OFF`.
 
-    <extend-property name="log_level" values="DEBUG,OFF" />
-  -->
+        To compile both an `OFF` (production) and a `DEBUG` (development)
+        version of your application:
 
-  <!--
-    <extend-property name="locale" values="es" />
-    <extend-property name="locale" values="ar" />
-  -->
+        <extend-property name="log_level" values="DEBUG,OFF" />
+    -->
 
-  <!-- Specify the app entry point class. -->
-  <entry-point class='org.ourproject.kune.app.client.KuneEntryPoint' />
+    <!--
+        <extend-property name="locale" values="es" />
+        <extend-property name="locale" values="ar" />
+    -->
 
-  <!-- <script src="js/ext/ext-custom.js" /> -->
+    <!-- Specify the app entry point class. -->
+    <entry-point class='org.ourproject.kune.app.client.KuneEntryPoint' />
 
-  <!--http://code.google.com/p/google-web-toolkit/issues/detail?id=42 -->
+    <!-- <script src="js/ext/ext-custom.js" /> -->
 
-  <!--  <set-property name="user.agent" value="gecko" /> -->
+    <!--http://code.google.com/p/google-web-toolkit/issues/detail?id=42 -->
+
+    <!--  <set-property name="user.agent" value="gecko" /> -->
 </module>

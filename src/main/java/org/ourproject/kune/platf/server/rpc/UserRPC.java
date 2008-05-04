@@ -24,6 +24,7 @@ import java.util.UUID;
 
 import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
+import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.client.errors.UserAuthException;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.auth.Authenticated;
@@ -36,7 +37,6 @@ import org.ourproject.kune.platf.server.users.UserInfo;
 import org.ourproject.kune.platf.server.users.UserInfoService;
 import org.ourproject.kune.workspace.client.sitebar.rpc.UserService;
 
-import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -55,73 +55,73 @@ public class UserRPC implements RPC, UserService {
 
     @Inject
     public UserRPC(final Provider<SessionService> sessionServiceProvider,
-            final Provider<UserSession> userSessionProvider, final UserManager userManager,
-            final GroupManager groupManager, final UserInfoService userInfoService, final Mapper mapper) {
+	    final Provider<UserSession> userSessionProvider, final UserManager userManager,
+	    final GroupManager groupManager, final UserInfoService userInfoService, final Mapper mapper) {
 
-        this.sessionServiceProvider = sessionServiceProvider;
-        this.userSessionProvider = userSessionProvider;
-        this.userManager = userManager;
-        this.groupManager = groupManager;
-        this.userInfoService = userInfoService;
-        this.mapper = mapper;
+	this.sessionServiceProvider = sessionServiceProvider;
+	this.userSessionProvider = userSessionProvider;
+	this.userManager = userManager;
+	this.groupManager = groupManager;
+	this.userInfoService = userInfoService;
+	this.mapper = mapper;
+    }
+
+    @Transactional(type = TransactionType.READ_WRITE, rollbackOn = DefaultException.class)
+    public UserInfoDTO createUser(final UserDTO userDTO) throws DefaultException {
+	final User user = userManager.createUser(userDTO.getShortName(), userDTO.getName(), userDTO.getEmail(), userDTO
+		.getPassword(), userDTO.getLanguage().getCode(), userDTO.getCountry().getCode(), userDTO.getTimezone()
+		.getId());
+	groupManager.createUserGroup(user);
+	return loginUser(user);
     }
 
     @Transactional(type = TransactionType.READ_ONLY)
-    public UserInfoDTO login(final String nickOrEmail, final String passwd) throws SerializableException {
-        SessionService sessionService = sessionServiceProvider.get();
-        sessionService.getNewSession();
-        User user = userManager.login(nickOrEmail, passwd);
-        return loginUser(user);
+    public UserInfoDTO login(final String nickOrEmail, final String passwd) throws DefaultException {
+	final SessionService sessionService = sessionServiceProvider.get();
+	sessionService.getNewSession();
+	final User user = userManager.login(nickOrEmail, passwd);
+	return loginUser(user);
     }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_ONLY)
-    public void logout(final String userHash) throws SerializableException {
-        getUserSession().logout();
-        SessionService sessionService = sessionServiceProvider.get();
-        sessionService.getNewSession();
-    }
-
-    @Transactional(type = TransactionType.READ_WRITE, rollbackOn = SerializableException.class)
-    public UserInfoDTO createUser(final UserDTO userDTO) throws SerializableException {
-        User user = userManager.createUser(userDTO.getShortName(), userDTO.getName(), userDTO.getEmail(), userDTO
-                .getPassword(), userDTO.getLanguage().getCode(), userDTO.getCountry().getCode(), userDTO.getTimezone()
-                .getId());
-        groupManager.createUserGroup(user);
-        return loginUser(user);
-    }
-
-    @Authenticated
-    @Transactional(type = TransactionType.READ_ONLY)
-    public UserInfoDTO reloadUserInfo(final String userHash) throws SerializableException {
-        UserSession userSession = getUserSession();
-        User user = userSession.getUser();
-        return loadUserInfo(user);
+    public void logout(final String userHash) throws DefaultException {
+	getUserSession().logout();
+	final SessionService sessionService = sessionServiceProvider.get();
+	sessionService.getNewSession();
     }
 
     @Authenticated(mandatory = false)
     @Transactional(type = TransactionType.READ_ONLY)
-    public void onlyCheckSession(final String userHash) throws SerializableException {
-        // Do nothing @Authenticated checks user session
+    public void onlyCheckSession(final String userHash) throws DefaultException {
+	// Do nothing @Authenticated checks user session
+    }
+
+    @Authenticated
+    @Transactional(type = TransactionType.READ_ONLY)
+    public UserInfoDTO reloadUserInfo(final String userHash) throws DefaultException {
+	final UserSession userSession = getUserSession();
+	final User user = userSession.getUser();
+	return loadUserInfo(user);
     };
 
-    private UserInfoDTO loginUser(final User user) throws SerializableException {
-        if (user != null) {
-            // Maybe use terracotta.org for http session clustering
-            getUserSession().login(user, UUID.randomUUID().toString());
-            return loadUserInfo(user);
-        } else {
-            throw new UserAuthException();
-        }
-    }
-
     private UserSession getUserSession() {
-        return userSessionProvider.get();
+	return userSessionProvider.get();
     }
 
-    private UserInfoDTO loadUserInfo(final User user) throws SerializableException {
-        UserInfo userInfo = userInfoService.buildInfo(user, getUserSession().getHash());
-        return mapper.map(userInfo, UserInfoDTO.class);
+    private UserInfoDTO loadUserInfo(final User user) throws DefaultException {
+	final UserInfo userInfo = userInfoService.buildInfo(user, getUserSession().getHash());
+	return mapper.map(userInfo, UserInfoDTO.class);
+    }
+
+    private UserInfoDTO loginUser(final User user) throws DefaultException {
+	if (user != null) {
+	    // Maybe use terracotta.org for http session clustering
+	    getUserSession().login(user, UUID.randomUUID().toString());
+	    return loadUserInfo(user);
+	} else {
+	    throw new UserAuthException();
+	}
     }
 
 }

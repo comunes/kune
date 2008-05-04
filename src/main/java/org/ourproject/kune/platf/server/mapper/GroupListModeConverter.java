@@ -28,8 +28,8 @@ import net.sf.dozer.util.mapping.converters.CustomConverter;
 import org.ourproject.kune.platf.server.domain.GroupListMode;
 
 public class GroupListModeConverter implements CustomConverter {
-    private HashMap<String, GroupListMode> stringToEnum;
-    private HashMap<GroupListMode, String> enumToString;
+    private final HashMap<String, GroupListMode> stringToEnum;
+    private final HashMap<GroupListMode, String> enumToString;
 
     public GroupListModeConverter() {
 	this.stringToEnum = new HashMap<String, GroupListMode>();
@@ -39,12 +39,9 @@ public class GroupListModeConverter implements CustomConverter {
 	add(GroupListMode.NOBODY);
     }
 
-    private void add(GroupListMode mode) {
-	enumToString.put(mode, mode.toString());
-	stringToEnum.put(mode.toString(), mode);
-    }
-
-    public Object convert(Object destination, Object source, Class destinationClass, Class sourceClass) {
+    @SuppressWarnings("unchecked")
+    public Object convert(final Object destination, final Object source, final Class destinationClass,
+	    final Class sourceClass) {
 	if (source == null) {
 	    return null;
 	} else if (sourceClass.equals(String.class) && destinationClass.equals(GroupListMode.class)) {
@@ -52,11 +49,16 @@ public class GroupListModeConverter implements CustomConverter {
 	} else if (sourceClass.equals(GroupListMode.class) && destinationClass.equals(String.class)) {
 	    return enumToString.get(source);
 	} else {
-	    String msg = MessageFormat.format("couldn't map {0} ({1}) to {2} ({3})", source, sourceClass, destination,
-		    destinationClass);
+	    final String msg = MessageFormat.format("couldn't map {0} ({1}) to {2} ({3})", source, sourceClass,
+		    destination, destinationClass);
 	    throw new MappingException(msg);
 	}
 
+    }
+
+    private void add(final GroupListMode mode) {
+	enumToString.put(mode, mode.toString());
+	stringToEnum.put(mode.toString(), mode);
     }
 
 }

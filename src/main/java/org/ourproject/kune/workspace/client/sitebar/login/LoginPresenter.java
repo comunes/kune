@@ -34,8 +34,8 @@ import org.ourproject.kune.platf.client.rpc.ParamCallback;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
+import org.ourproject.kune.workspace.client.newgroup.ui.SiteErrorType;
 import org.ourproject.kune.workspace.client.sitebar.Site;
-import org.ourproject.kune.workspace.client.sitebar.msg.SiteMessage;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -49,136 +49,134 @@ public class LoginPresenter implements Login {
     private final Session session;
 
     public LoginPresenter(final Session session, final LoginListener listener) {
-        this.session = session;
-        this.listener = listener;
-    }
-
-    public void init(final LoginView loginview) {
-        this.view = loginview;
-        reset();
-    }
-
-    public void onCancel() {
-        resetMessages();
-        reset();
-        listener.onLoginCancelled();
+	this.session = session;
+	this.listener = listener;
     }
 
     public void doLogin() {
-        if (view.isSignInFormValid()) {
-            view.maskProcessing();
+	if (view.isSignInFormValid()) {
+	    view.maskProcessing();
 
-            final String nickOrEmail = view.getNickOrEmail();
-            final String passwd = view.getLoginPassword();
+	    final String nickOrEmail = view.getNickOrEmail();
+	    final String passwd = view.getLoginPassword();
 
-            UserDTO user = new UserDTO();
-            user.setShortName(nickOrEmail);
-            user.setPassword(passwd);
+	    final UserDTO user = new UserDTO();
+	    user.setShortName(nickOrEmail);
+	    user.setPassword(passwd);
 
-            AsyncCallback<UserInfoDTO> callback = new AsyncCallback<UserInfoDTO>() {
-                public void onFailure(final Throwable caught) {
-                    view.unMask();
-                    Site.hideProgress();
-                    try {
-                        throw caught;
-                    } catch (final UserAuthException e) {
-                        view.setSignInMessage(Kune.I18N.t("Incorrect nickname/email or password"), SiteMessage.ERROR);
-                    } catch (final Throwable e) {
-                        view.setSignInMessage("Error in login", SiteMessage.ERROR);
-                        GWT.log("Other kind of exception in LoginFormPresenter/doLogin", null);
-                        throw new RuntimeException();
-                    }
-                }
+	    final AsyncCallback<UserInfoDTO> callback = new AsyncCallback<UserInfoDTO>() {
+		public void onFailure(final Throwable caught) {
+		    view.unMask();
+		    Site.hideProgress();
+		    try {
+			throw caught;
+		    } catch (final UserAuthException e) {
+			view.setSignInMessage(Kune.I18N.t("Incorrect nickname/email or password"), SiteErrorType.error);
+		    } catch (final Throwable e) {
+			view.setSignInMessage("Error in login", SiteErrorType.error);
+			GWT.log("Other kind of exception in LoginFormPresenter/doLogin", null);
+			throw new RuntimeException();
+		    }
+		}
 
-                public void onSuccess(final UserInfoDTO response) {
-                    listener.userLoggedIn(response);
-                    view.unMask();
-                }
-            };
+		public void onSuccess(final UserInfoDTO response) {
+		    listener.userLoggedIn(response);
+		    view.unMask();
+		}
+	    };
 
-            DefaultDispatcher.getInstance().fire(WorkspaceEvents.USER_LOGIN,
-                    new ParamCallback<UserDTO, UserInfoDTO>(user, callback));
-        }
+	    DefaultDispatcher.getInstance().fire(WorkspaceEvents.USER_LOGIN,
+		    new ParamCallback<UserDTO, UserInfoDTO>(user, callback));
+	}
     }
 
     public void doRegister() {
-        if (view.isRegisterFormValid()) {
-            view.maskProcessing();
+	if (view.isRegisterFormValid()) {
+	    view.maskProcessing();
 
-            I18nLanguageDTO language = new I18nLanguageDTO();
-            language.setCode(view.getLanguage());
+	    final I18nLanguageDTO language = new I18nLanguageDTO();
+	    language.setCode(view.getLanguage());
 
-            I18nCountryDTO country = new I18nCountryDTO();
-            country.setCode(view.getCountry());
+	    final I18nCountryDTO country = new I18nCountryDTO();
+	    country.setCode(view.getCountry());
 
-            TimeZoneDTO timezone = new TimeZoneDTO();
-            timezone.setId(view.getTimezone());
+	    final TimeZoneDTO timezone = new TimeZoneDTO();
+	    timezone.setId(view.getTimezone());
 
-            UserDTO user = new UserDTO(view.getLongName(), view.getShortName(), view.getRegisterPassword(), view
-                    .getEmail(), language, country, timezone);
-            AsyncCallback<UserInfoDTO> callback = new AsyncCallback<UserInfoDTO>() {
-                public void onFailure(final Throwable caught) {
-                    view.unMask();
-                    try {
-                        throw caught;
-                    } catch (final EmailAddressInUseException e) {
-                        view.setRegisterMessage(Kune.I18N.t("This email in in use by other person, try with another."),
-                                SiteMessage.ERROR);
-                    } catch (final GroupNameInUseException e) {
-                        view.setRegisterMessage(Kune.I18N.t("This name in already in use, try with a different name."),
-                                SiteMessage.ERROR);
-                    } catch (final Throwable e) {
-                        view.setRegisterMessage(Kune.I18N.t("Error during registration."), SiteMessage.ERROR);
-                        GWT.log("Other kind of exception in user registration", null);
-                        throw new RuntimeException();
-                    }
-                }
+	    final UserDTO user = new UserDTO(view.getLongName(), view.getShortName(), view.getRegisterPassword(), view
+		    .getEmail(), language, country, timezone);
+	    final AsyncCallback<UserInfoDTO> callback = new AsyncCallback<UserInfoDTO>() {
+		public void onFailure(final Throwable caught) {
+		    view.unMask();
+		    try {
+			throw caught;
+		    } catch (final EmailAddressInUseException e) {
+			view.setRegisterMessage(Kune.I18N.t("This email in in use by other person, try with another."),
+				SiteErrorType.error);
+		    } catch (final GroupNameInUseException e) {
+			view.setRegisterMessage(Kune.I18N.t("This name in already in use, try with a different name."),
+				SiteErrorType.error);
+		    } catch (final Throwable e) {
+			view.setRegisterMessage(Kune.I18N.t("Error during registration."), SiteErrorType.error);
+			GWT.log("Other kind of exception in user registration", null);
+			throw new RuntimeException();
+		    }
+		}
 
-                public void onSuccess(final UserInfoDTO userInfoDTO) {
-                    listener.userLoggedIn(userInfoDTO);
-                    view.unMask();
-                    view.showWelcolmeDialog();
-                    DefaultDispatcher.getInstance().fire(PlatformEvents.GOTO, userInfoDTO.getShortName());
-                }
-            };
-
-            DefaultDispatcher.getInstance().fire(WorkspaceEvents.USER_REGISTER,
-                    new ParamCallback<UserDTO, UserInfoDTO>(user, callback));
-        }
-    }
-
-    public void onClose() {
-        reset();
-        view.hideMessages();
-        listener.onLoginClose();
-    }
-
-    public View getView() {
-        return view;
-    }
-
-    private void reset() {
-        view.reset();
-    }
-
-    public I18nLanguageDTO getCurrentLanguage() {
-        return session.getCurrentLanguage();
-    }
-
-    public Object[][] getLanguages() {
-        return session.getLanguagesArray();
+		public void onSuccess(final UserInfoDTO userInfoDTO) {
+		    listener.userLoggedIn(userInfoDTO);
+		    view.unMask();
+		    view.showWelcolmeDialog();
+		    DefaultDispatcher.getInstance().fire(PlatformEvents.GOTO, userInfoDTO.getShortName());
+		}
+	    };
+	    DefaultDispatcher.getInstance().fire(WorkspaceEvents.USER_REGISTER,
+		    new ParamCallback<UserDTO, UserInfoDTO>(user, callback));
+	}
     }
 
     public Object[][] getCountries() {
-        return session.getCountriesArray();
+	return session.getCountriesArray();
+    }
+
+    public I18nLanguageDTO getCurrentLanguage() {
+	return session.getCurrentLanguage();
+    }
+
+    public Object[][] getLanguages() {
+	return session.getLanguagesArray();
     }
 
     public Object[][] getTimezones() {
-        return session.getTimezones();
+	return session.getTimezones();
+    }
+
+    public View getView() {
+	return view;
+    }
+
+    public void init(final LoginView loginview) {
+	this.view = loginview;
+    }
+
+    public void onCancel() {
+	resetMessages();
+	reset();
+	listener.onLoginCancelled();
+    }
+
+    public void onClose() {
+	reset();
+	view.hideMessages();
+	listener.onLoginClose();
+    }
+
+    private void reset() {
+	view.reset();
     }
 
     private void resetMessages() {
-        view.hideMessages();
+	view.hideMessages();
     }
 
 }

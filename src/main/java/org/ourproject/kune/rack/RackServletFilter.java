@@ -39,127 +39,129 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 public class RackServletFilter implements Filter {
-	private static final String MODULE_PARAMETER = RackModule.class.getName();
-	private static final Log log = LogFactory.getLog(RackServletFilter.class);
-	public static final String INJECTOR_ATTRIBUTE = Injector.class.getName();
-	private List<Dock> docks;
-	private List<RequestMatcher> excludes;
+    public static class DockChain implements FilterChain {
+	private final Iterator<Dock> iterator;
 
-	public static class DockChain implements FilterChain {
-		private final Iterator<Dock> iterator;
-
-		public DockChain(final Iterator<Dock> iterator) {
-			this.iterator = iterator;
-		}
-
-		public void doFilter(final ServletRequest request, final ServletResponse response) throws IOException,
-				ServletException {
-			Dock dock = null;
-			boolean matched = false;
-
-			String relative = RackHelper.getRelativeURL(request);
-			while (!matched && iterator.hasNext()) {
-				dock = iterator.next();
-				matched = dock.matches(relative);
-			}
-			if (matched) {
-				execute(dock.getFilter(), request, response);
-			}
-		}
-
-		private void execute(final Filter filter, final ServletRequest request, final ServletResponse response)
-				throws IOException, ServletException {
-			log.debug("RACK FILTER: " + filter.getClass().getSimpleName());
-			filter.doFilter(request, response, this);
-		}
+	public DockChain(final Iterator<Dock> iterator) {
+	    this.iterator = iterator;
 	}
 
-	public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
-			throws IOException, ServletException {
+	public void doFilter(final ServletRequest request, final ServletResponse response) throws IOException,
+		ServletException {
+	    Dock dock = null;
+	    boolean matched = false;
 
-		String relative = RackHelper.getRelativeURL(request);
-		log.debug("REQUEST: " + relative);
-		for (RequestMatcher matcher : excludes) {
-			if (matcher.matches(relative)) {
-				log.debug("SKIPING!");
-				chain.doFilter(request, response);
-				return;
-			}
-		}
-
-		FilterChain newChain = new DockChain(docks.iterator());
-		newChain.doFilter(request, response);
+	    final String relative = RackHelper.getRelativeURL(request);
+	    while (!matched && iterator.hasNext()) {
+		dock = iterator.next();
+		matched = dock.matches(relative);
+	    }
+	    if (matched) {
+		execute(dock.getFilter(), request, response);
+	    }
 	}
 
-	public void init(final FilterConfig filterConfig) throws ServletException {
-		log.debug("INITIALIZING RackServletFilter...");
-		RackModule module = getModule(filterConfig);
-		RackBuilder builder = new RackBuilder();
-		module.configure(builder);
+	private void execute(final Filter filter, final ServletRequest request, final ServletResponse response)
+		throws IOException, ServletException {
+	    log.debug("RACK FILTER: " + filter.getClass().getSimpleName());
+	    filter.doFilter(request, response, this);
+	}
+    }
+    public static final String INJECTOR_ATTRIBUTE = Injector.class.getName();
+    private static final String MODULE_PARAMETER = RackModule.class.getName();
+    private static final Log log = LogFactory.getLog(RackServletFilter.class);
+    private List<Dock> docks;
 
-		Rack rack = builder.getRack();
-		Injector injector = installInjector(filterConfig, rack);
-		startContainerListeners(rack.getListeners(), injector);
+    private List<RequestMatcher> excludes;
 
-		docks = rack.getDocks();
-		excludes = rack.getExcludes();
-		initFilters(filterConfig);
-		log.debug("INITIALIZATION DONE!");
+    public void destroy() {
+	for (final Dock dock : docks) {
+	    dock.getFilter().destroy();
+	}
+    }
+
+    public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
+	    throws IOException, ServletException {
+
+	final String relative = RackHelper.getRelativeURL(request);
+	log.debug("REQUEST: " + relative);
+	for (final RequestMatcher matcher : excludes) {
+	    if (matcher.matches(relative)) {
+		log.debug("SKIPING!");
+		chain.doFilter(request, response);
+		return;
+	    }
 	}
 
-	private void startContainerListeners(final List<Class<? extends ContainerListener>> listenerClasses,
-			final Injector injector) {
-		log.debug("STARTING CONTAINER LISTENERS...");
-		for (Class<? extends ContainerListener> listenerClass : listenerClasses) {
-			ContainerListener listener = injector.getInstance(listenerClass);
-			listener.start();
-		}
-	}
+	final FilterChain newChain = new DockChain(docks.iterator());
+	newChain.doFilter(request, response);
+    }
 
-	private void stopContainerListeners(final List<Class<? extends ContainerListener>> listenerClasses,
-			final Injector injector) {
-		log.debug("STOPING CONTAINER LISTENERS...");
-		for (Class<? extends ContainerListener> listenerClass : listenerClasses) {
-			ContainerListener listener = injector.getInstance(listenerClass);
-			listener.stop();
-		}
-	}
+    public void init(final FilterConfig filterConfig) throws ServletException {
+	log.debug("INITIALIZING RackServletFilter...");
+	final RackModule module = getModule(filterConfig);
+	final RackBuilder builder = new RackBuilder();
+	module.configure(builder);
 
-	private Injector installInjector(final FilterConfig filterConfig, final Rack rack) {
-		Injector injector = Guice.createInjector(rack.getGuiceModules());
-		filterConfig.getServletContext().setAttribute(INJECTOR_ATTRIBUTE, injector);
-		return injector;
-	}
+	final Rack rack = builder.getRack();
+	final Injector injector = installInjector(filterConfig, rack);
+	startContainerListeners(rack.getListeners(), injector);
 
-	private void initFilters(final FilterConfig filterConfig) throws ServletException {
-		for (Dock dock : docks) {
-			dock.getFilter().init(filterConfig);
-		}
-	}
+	docks = rack.getDocks();
+	excludes = rack.getExcludes();
+	initFilters(filterConfig);
+	log.debug("INITIALIZATION DONE!");
+    }
 
-	public void destroy() {
-		for (Dock dock : docks) {
-			dock.getFilter().destroy();
-		}
+    private RackModule getModule(final FilterConfig filterConfig) {
+	final String moduleName = getModuleName(filterConfig);
+	try {
+	    final Class<?> clazz = Class.forName(moduleName);
+	    final RackModule module = (RackModule) clazz.newInstance();
+	    return module;
+	} catch (final Exception e) {
+	    throw new RuntimeException("couldn't instantiate the rack module", e);
 	}
+    }
 
-	private RackModule getModule(final FilterConfig filterConfig) {
-		String moduleName = getModuleName(filterConfig);
-		try {
-			Class<?> clazz = Class.forName(moduleName);
-			RackModule module = (RackModule) clazz.newInstance();
-			return module;
-		} catch (Exception e) {
-			throw new RuntimeException("couldn't instantiate the rack module", e);
-		}
+    private String getModuleName(final FilterConfig filterConfig) {
+	final String moduleName = filterConfig.getInitParameter(MODULE_PARAMETER);
+	if (moduleName == null) {
+	    throw new RuntimeException("Rack module name can't be null!");
 	}
+	return moduleName;
+    }
 
-	private String getModuleName(final FilterConfig filterConfig) {
-		String moduleName = filterConfig.getInitParameter(MODULE_PARAMETER);
-		if (moduleName == null) {
-			throw new RuntimeException("Rack module name can't be null!");
-		}
-		return moduleName;
+    private void initFilters(final FilterConfig filterConfig) throws ServletException {
+	for (final Dock dock : docks) {
+	    dock.getFilter().init(filterConfig);
 	}
+    }
+
+    private Injector installInjector(final FilterConfig filterConfig, final Rack rack) {
+	final Injector injector = Guice.createInjector(rack.getGuiceModules());
+	filterConfig.getServletContext().setAttribute(INJECTOR_ATTRIBUTE, injector);
+	return injector;
+    }
+
+    private void startContainerListeners(final List<Class<? extends ContainerListener>> listenerClasses,
+	    final Injector injector) {
+	log.debug("STARTING CONTAINER LISTENERS...");
+	for (final Class<? extends ContainerListener> listenerClass : listenerClasses) {
+	    final ContainerListener listener = injector.getInstance(listenerClass);
+	    listener.start();
+	}
+    }
+
+    // FIXME: Dani, never used this:
+    @SuppressWarnings("unused")
+    private void stopContainerListeners(final List<Class<? extends ContainerListener>> listenerClasses,
+	    final Injector injector) {
+	log.debug("STOPING CONTAINER LISTENERS...");
+	for (final Class<? extends ContainerListener> listenerClass : listenerClasses) {
+	    final ContainerListener listener = injector.getInstance(listenerClass);
+	    listener.stop();
+	}
+    }
 
 }

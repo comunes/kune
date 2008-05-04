@@ -1,9 +1,10 @@
 #!/bin/bash
 APPPUB=src/main/java/org/ourproject/kune/app/public
 WEBAPP=src/main/webapp/gwt/org.ourproject.kune.app.Kune
-TARGET=target/org.ourproject.kune-0.0.2/org.ourproject.kune.app.Kune
+TARGET=target/org.ourproject.kune-0.0.3/org.ourproject.kune.app.Kune
 
-$PWD/scripts/css-compact-and-tidy.css
+echo csstidy desactivated
+#$PWD/scripts/css-compact-and-tidy.css
 
 rsync -aC $APPPUB/Kune.html $WEBAPP/Kune.html
 rsync -aC $APPPUB/js/ $WEBAPP/js

@@ -1,7 +1,7 @@
 #!/bin/bash
 ORIG=src/main/java/org/ourproject/kune/app/public/
-CATTMPFILE=`mktemp` || exit 1
-CSSTMPFILE=`mktemp` || exit 1
+CATTMPFILE=`mktemp -t css.1.XXX` || exit 1
+CSSTMPFILE=`mktemp -t css.2.XXX` || exit 1
 DEST=src/main/java/org/ourproject/kune/app/public/css/all.css
 DEST2=src/main/java/org/ourproject/kune/app/public/css/richtext.css
 CSS='css/reset.css css/fonts-min.css js/ext/resources/css/ext-all.css js/ext/resources/css/xtheme-gray.css css/kune.css css/workspace.css css/chat.css css/docs.css'

@@ -21,47 +21,48 @@ package org.ourproject.kune.workspace.client.newgroup;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
+import org.ourproject.kune.workspace.client.newgroup.ui.SiteErrorType;
 
 public interface NewGroupView extends View {
 
     void clearData();
 
-    String getPublicDesc();
+    LicenseDTO getLicense();
 
     String getLongName();
 
+    String getPublicDesc();
+
     String getShortName();
-
-    boolean isProject();
-
-    boolean isOrphanedProject();
-
-    boolean isOrganization();
-
-    boolean isCommunity();
 
     void hide();
 
-    void setEnabledNextButton(boolean enabled);
+    void hideMessage();
 
-    void setEnabledFinishButton(boolean enabled);
-
-    void setEnabledBackButton(boolean enabled);
-
-    void showNewGroupInitialDataForm();
-
-    void showLicenseForm();
-
-    LicenseDTO getLicense();
+    boolean isCommunity();
 
     boolean isFormValid();
 
-    void hideMessage();
+    boolean isOrganization();
 
-    void setMessage(String message, int type);
+    boolean isOrphanedProject();
 
-    void unMask();
+    boolean isProject();
 
     void maskProcessing();
+
+    void setEnabledBackButton(boolean enabled);
+
+    void setEnabledFinishButton(boolean enabled);
+
+    void setEnabledNextButton(boolean enabled);
+
+    void setMessage(String message, SiteErrorType type);
+
+    void showLicenseForm();
+
+    void showNewGroupInitialDataForm();
+
+    void unMask();
 
 }

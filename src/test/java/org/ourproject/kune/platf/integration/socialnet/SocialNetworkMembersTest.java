@@ -13,7 +13,6 @@ import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 
-import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.inject.Inject;
 
 public class SocialNetworkMembersTest extends IntegrationTest {
@@ -28,22 +27,22 @@ public class SocialNetworkMembersTest extends IntegrationTest {
 
     @Before
     public void init() {
-        new IntegrationTestHelper(this);
-        group = groupFinder.findByShortName(getSiteAdminShortName());
+	new IntegrationTestHelper(this);
+	group = groupFinder.findByShortName(getSiteAdminShortName());
     }
 
     @Test
-    public void testAdminMembersOfGroupFinder() throws SerializableException {
-        doLogin();
-        List<Group> result = groupFinder.findAdminInGroups(group.getId());
-        assertEquals(2, result.size());
+    public void testAdminMembersOfGroupFinder() throws Exception {
+	doLogin();
+	final List<Group> result = groupFinder.findAdminInGroups(group.getId());
+	assertEquals(2, result.size());
     }
 
     @Test
-    public void testCollabMembersOfGroupFinder() throws SerializableException {
-        doLogin();
-        List<Group> result = groupFinder.findCollabInGroups(group.getId());
-        assertEquals(0, result.size());
+    public void testCollabMembersOfGroupFinder() throws Exception {
+	doLogin();
+	final List<Group> result = groupFinder.findCollabInGroups(group.getId());
+	assertEquals(0, result.size());
     }
 
 }
