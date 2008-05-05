@@ -110,7 +110,7 @@ public class NewGroupPresenter implements NewGroup {
 		view.unMask();
 	    }
 	};
-
+	GWT.log("New group 1", null);
 	DefaultDispatcher.getInstance().fire(WorkspaceEvents.CREATE_NEW_GROUP,
 		new ParamCallback<GroupDTO, StateToken>(group, callback));
     }

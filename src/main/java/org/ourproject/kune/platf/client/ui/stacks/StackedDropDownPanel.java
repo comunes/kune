@@ -44,168 +44,171 @@ public class StackedDropDownPanel extends DropDownPanel implements UIConstants {
     private int headerCount;
     private boolean headerCountVisible;
     private final VerticalPanel commentsVP;
+    private final VerticalPanel generalVP;
 
     public StackedDropDownPanel(final AbstractPresenter presenter, final String borderColor, final String headerText,
-            final String headerTitle, final boolean headerCountVisible) {
-        this.presenter = presenter;
-        this.headerText = headerText;
-        this.headerTitle = headerTitle;
-        this.headerCountVisible = headerCountVisible;
-        this.headerCount = 0;
-        VerticalPanel generalVP = new VerticalPanel();
-        commentsVP = new VerticalPanel();
-        stack = new IndexedStackPanelWithSubItems();
-        bottomLinksVP = new VerticalPanel();
-        bottomLinksIndex = new ArrayList<String>();
+	    final String headerTitle, final boolean headerCountVisible) {
+	this.presenter = presenter;
+	this.headerText = headerText;
+	this.headerTitle = headerTitle;
+	this.headerCountVisible = headerCountVisible;
+	this.headerCount = 0;
+	generalVP = new VerticalPanel();
+	commentsVP = new VerticalPanel();
+	stack = new IndexedStackPanelWithSubItems();
+	bottomLinksVP = new VerticalPanel();
+	bottomLinksIndex = new ArrayList<String>();
 
-        // Layout
-        generalVP.add(commentsVP);
-        generalVP.add(stack);
-        generalVP.add(bottomLinksVP);
-        setContent(generalVP);
+	// Layout
+	// generalVP.add(commentsVP);
+	generalVP.add(stack);
+	generalVP.add(bottomLinksVP);
+	setContent(generalVP);
 
-        // Set properties
-        super.setColor(borderColor);
-        setContentVisible(false); // DropDown
-        setHeaderText(headerText);
-        setHeaderTitle(headerTitle);
-        addStyleName("kune-StackedDropDownPanel");
-        addStyleName("kune-Margin-Medium-t");
-        stack.setStyleName("kune-StackedDropDownPanel");
+	// Set properties
+	super.setColor(borderColor);
+	setContentVisible(false); // DropDown
+	setHeaderText(headerText);
+	setHeaderTitle(headerTitle);
+	addStyleName("kune-StackedDropDownPanel");
+	addStyleName("kune-Margin-Medium-t");
+	stack.setStyleName("kune-StackedDropDownPanel");
     }
 
     /* Header */
 
-    public void setHeaderText(final String headerText) {
-        this.headerText = headerText;
+    public void addBottomLink(final AbstractImagePrototype icon, final String text, final String title,
+	    final String action) {
+	this.addBottomLink(icon, text, title, action, null);
     }
 
-    public void setHeaderTitle(final String headerTitle) {
-        this.headerTitle = headerTitle;
-        super.setHeaderTitle(headerTitle);
+    public void addBottomLink(final AbstractImagePrototype icon, final String text, final String title,
+	    final String action, final Object value) {
+	final IconLabel link = new IconLabel(icon, text);
+	link.setTitle(title);
+	bottomLinksVP.add(link);
+	link.addStyleName("kune-StackedDropDownPanelLink");
+	link.addClickListener(new ClickListener() {
+	    public void onClick(final Widget arg0) {
+		presenter.doAction(action, value);
+	    }
+	});
+	bottomLinksVP.setCellHorizontalAlignment(link, HorizontalPanel.ALIGN_CENTER);
+	bottomLinksIndex.add(text);
     }
 
-    public void setHeaderCountVisible(final boolean headerCountVisible) {
-        this.headerCountVisible = headerCountVisible;
+    public void addComment(final String comment) {
+	if (!commentsVP.isVisible()) {
+	    generalVP.insert(commentsVP, 0);
+	    commentsVP.setVisible(true);
+	}
+	final Label label = new Label(comment);
+	commentsVP.add(label);
+	label.addStyleName("kune-Margin-Small-trbl");
     }
 
-    public void updateHeaderText() {
-        if (headerCountVisible) {
-            super.setHeaderText(headerText + " (" + headerCount + ")");
-        } else {
-            super.setHeaderText(headerText);
-        }
+    public void addStackItem(final String name, final String title, final AbstractImagePrototype icon,
+	    final String iconAlign, final boolean countVisible) {
+	stack.addStackItem(name, title, icon, iconAlign, countVisible);
     }
 
-    public String getHeaderText() {
-        return headerText;
+    public void addStackItem(final String name, final String title, final boolean countVisible) {
+	stack.addStackItem(name, title, countVisible);
     }
 
-    public String getHeaderTitle() {
-        return headerTitle;
+    public void addStackSubItem(final String parentItemName, final AbstractImagePrototype icon, final String name,
+	    final String title, final StackSubItemAction[] memberActions) {
+	stack.addStackSubItem(parentItemName, icon, name, title, memberActions, presenter);
+	headerCount++;
+	updateHeaderText();
     }
 
-    public int getHeaderCount() {
-        return headerCount;
+    public void cleanBottomLinks() {
+	final Iterator<String> iter = bottomLinksIndex.iterator();
+	while (iter.hasNext()) {
+	    bottomLinksVP.remove(0);
+	}
+	bottomLinksIndex.clear();
     }
 
-    public boolean isHeaderCountVisible() {
-        return headerCountVisible;
+    public void clear() {
+	commentsVP.clear();
+	commentsVP.setVisible(false);
+	generalVP.remove(commentsVP);
+	stack.clear();
+	bottomLinksIndex.clear();
+	bottomLinksVP.clear();
+	headerCount = 0;
+	updateHeaderText();
     }
 
     /* Stack items */
 
-    public void addStackItem(final String name, final String title, final boolean countVisible) {
-        stack.addStackItem(name, title, countVisible);
+    public int getHeaderCount() {
+	return headerCount;
     }
 
-    public void addStackItem(final String name, final String title, final AbstractImagePrototype icon,
-            final String iconAlign, final boolean countVisible) {
-        stack.addStackItem(name, title, icon, iconAlign, countVisible);
+    public String getHeaderText() {
+	return headerText;
     }
 
-    public void removeStackItem(final String name) {
-        stack.removeStackItem(name);
+    public String getHeaderTitle() {
+	return headerTitle;
     }
 
-    public void showStackItem(final String name) {
-        stack.showStackItem(name);
+    public boolean isHeaderCountVisible() {
+	return headerCountVisible;
     }
 
     /* Stack subItems */
 
-    public void addStackSubItem(final String parentItemName, final AbstractImagePrototype icon, final String name,
-            final String title, final StackSubItemAction[] memberActions) {
-        stack.addStackSubItem(parentItemName, icon, name, title, memberActions, presenter);
-        headerCount++;
-        updateHeaderText();
+    public void removeBottomLink(final String text) {
+	bottomLinksVP.remove(indexOfLink(text));
     }
 
-    public void removeStackSubItem(final String parentItemName, final String name) {
-        stack.removeStackSubItem(parentItemName, name);
-        headerCount--;
-        updateHeaderText();
+    public void removeStackItem(final String name) {
+	stack.removeStackItem(name);
     }
 
     /* Bottom links */
 
-    public void addBottomLink(final AbstractImagePrototype icon, final String text, final String title,
-            final String action) {
-        this.addBottomLink(icon, text, title, action, null);
-    }
-
-    public void addBottomLink(final AbstractImagePrototype icon, final String text, final String title,
-            final String action, final Object value) {
-        IconLabel link = new IconLabel(icon, text);
-        link.setTitle(title);
-        bottomLinksVP.add(link);
-        link.addStyleName("kune-StackedDropDownPanelLink");
-        link.addClickListener(new ClickListener() {
-            public void onClick(final Widget arg0) {
-                presenter.doAction(action, value);
-            }
-        });
-        bottomLinksVP.setCellHorizontalAlignment(link, HorizontalPanel.ALIGN_CENTER);
-        bottomLinksIndex.add(text);
-    }
-
-    public void cleanBottomLinks() {
-        Iterator<String> iter = bottomLinksIndex.iterator();
-        while (iter.hasNext()) {
-            bottomLinksVP.remove(0);
-        }
-        bottomLinksIndex.clear();
-    }
-
-    public void removeBottomLink(final String text) {
-        bottomLinksVP.remove(indexOfLink(text));
+    public void removeStackSubItem(final String parentItemName, final String name) {
+	stack.removeStackSubItem(parentItemName, name);
+	headerCount--;
+	updateHeaderText();
     }
 
     public void setDropDownContentVisible(final boolean visible) {
-        setContentVisible(visible);
+	setContentVisible(visible);
     }
 
-    public void clear() {
-        commentsVP.clear();
-        commentsVP.setVisible(false);
-        stack.clear();
-        bottomLinksIndex.clear();
-        bottomLinksVP.clear();
-        headerCount = 0;
-        updateHeaderText();
+    public void setHeaderCountVisible(final boolean headerCountVisible) {
+	this.headerCountVisible = headerCountVisible;
     }
 
-    public void addComment(final String comment) {
-        if (!commentsVP.isVisible()) {
-            commentsVP.setVisible(true);
-        }
-        Label label = new Label(comment);
-        commentsVP.add(label);
-        label.addStyleName("kune-Margin-Small-trbl");
+    public void setHeaderText(final String headerText) {
+	this.headerText = headerText;
+    }
+
+    public void setHeaderTitle(final String headerTitle) {
+	this.headerTitle = headerTitle;
+	super.setHeaderTitle(headerTitle);
+    }
+
+    public void showStackItem(final String name) {
+	stack.showStackItem(name);
+    }
+
+    public void updateHeaderText() {
+	if (headerCountVisible) {
+	    super.setHeaderText(headerText + " (" + headerCount + ")");
+	} else {
+	    super.setHeaderText(headerText);
+	}
     }
 
     private int indexOfLink(final String text) {
-        return bottomLinksIndex.indexOf(text);
+	return bottomLinksIndex.indexOf(text);
     }
 
 }
