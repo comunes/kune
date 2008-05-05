@@ -40,13 +40,11 @@ import com.gwtext.client.data.Store;
 import com.gwtext.client.data.StringFieldDef;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.Component;
-import com.gwtext.client.widgets.PagingToolbar;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.TabPanel;
 import com.gwtext.client.widgets.Window;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.event.PanelListenerAdapter;
-import com.gwtext.client.widgets.event.TabPanelListenerAdapter;
 import com.gwtext.client.widgets.event.WindowListenerAdapter;
 import com.gwtext.client.widgets.form.ComboBox;
 import com.gwtext.client.widgets.form.Field;
@@ -56,7 +54,6 @@ import com.gwtext.client.widgets.form.event.FieldListenerAdapter;
 import com.gwtext.client.widgets.grid.ColumnConfig;
 import com.gwtext.client.widgets.grid.ColumnModel;
 import com.gwtext.client.widgets.grid.GridPanel;
-import com.gwtext.client.widgets.grid.RowSelectionModel;
 import com.gwtext.client.widgets.grid.event.GridCellListenerAdapter;
 import com.gwtext.client.widgets.layout.BorderLayoutData;
 import com.gwtext.client.widgets.layout.FitLayout;
@@ -162,15 +159,17 @@ public class SearchSitePanel extends AbstractSearcherPanel implements SearchSite
 	dialog.add(searchPanel, new BorderLayoutData(RegionPosition.NORTH));
 	dialog.add(centerPanel, new BorderLayoutData(RegionPosition.CENTER));
 
-	centerPanel.addListener(new TabPanelListenerAdapter() {
+	groupsPanel.addListener(new PanelListenerAdapter() {
 	    public void onActivate(final Panel panel) {
-		if (panel.getId().equals(groupsPanel.getId())) {
-		    dialog.setTitle(Kune.I18N.t("Search users & groups"));
-		    presenter.doSearch(GROUP_USER_SEARCH);
-		} else if (panel.getId().equals(contentPanel.getId())) {
-		    dialog.setTitle(Kune.I18N.t("Search contents"));
-		    presenter.doSearch(CONTENT_SEARCH);
-		}
+		dialog.setTitle(Kune.I18N.t("Search users & groups"));
+		presenter.doSearch(GROUP_USER_SEARCH);
+	    }
+	});
+
+	contentPanel.addListener(new PanelListenerAdapter() {
+	    public void onActivate(final Panel panel) {
+		dialog.setTitle(Kune.I18N.t("Search contents"));
+		presenter.doSearch(CONTENT_SEARCH);
 	    }
 	});
 
@@ -212,6 +211,7 @@ public class SearchSitePanel extends AbstractSearcherPanel implements SearchSite
 	searchCombo.setMinChars(1);
 	searchCombo.setValueField("term");
 	searchCombo.setForceSelection(false);
+	searchCombo.setEditable(true);
 	historyStore.load();
 	searchCombo.addListener(new ComboBoxListenerAdapter() {
 	    public void onSelect(final ComboBox comboBox, final Record record, final int index) {
@@ -277,17 +277,13 @@ public class SearchSitePanel extends AbstractSearcherPanel implements SearchSite
 
 	final ColumnModel columnModel = new ColumnModel(new ColumnConfig[] { new ColumnConfig() {
 	    {
-		// setHeader(Kune.I18N.t("Shortname"));
 		setDataIndex(id);
 		setWidth(100);
-		// setTooltip(Kune.I18N.t("Click to go to the group homepage"));
 	    }
 	}, new ColumnConfig() {
 	    {
-		// setHeader(Kune.I18N.t("Longname"));
 		setDataIndex("longName");
 		setWidth(350);
-		// setTooltip(Kune.I18N.t("Click to go to the group homepage"));
 	    }
 	} });
 
@@ -296,30 +292,8 @@ public class SearchSitePanel extends AbstractSearcherPanel implements SearchSite
 	final String gridName = type == GROUP_USER_SEARCH ? "group-search" : "content-search";
 
 	final GridPanel grid = new GridPanel(gridName, 474, 250, store, columnModel);
-	final PagingToolbar pag = new PagingToolbar(store);
-	pag.setPageSize(PAGINATION_SIZE);
-	pag.setDisplayInfo(true);
-	// pag.setDisplayMsg(Kune.I18N.tWithNT("Displaying results {0} - {1} of
-	// {2}",
-	// "Respect {} values in translations, "
-	// + "these will produce: 'Displaying results 1 - 25 of 95465' for
-	// instance"));
-	// pag.setEmptyMsg(Kune.I18N.t("No results to display"));
-	// pag.setAfterPageText(Kune.I18N.tWithNT("of {0}", "Used to show
-	// multiple results: '1 of 30'"));
-	// pag.setBeforePageText(Kune.I18N.t("Page"));
-	// pag.setFirstText(Kune.I18N.t("First Page"));
-	// pag.setLastText(Kune.I18N.t("Last Page"));
-	// pag.setNextText(Kune.I18N.t("Next Page"));
-	// pag.setPrevText(Kune.I18N.t("Previous Page"));
-	// pag.setRefreshText(Kune.I18N.t("Refresh"));
-	grid.setBottomToolbar(pag);
-	// grid.setLoadMask(true);
-	// grid.setLoadMask(Kune.I18N.t("Searching"));
-	grid.setSelectionModel(new RowSelectionModel());
-	grid.setFrame(true);
-	grid.setStripeRows(true);
-
+	createPagingToolbar(store, grid);
+	grid.setHideColumnHeader(true);
 	// final GridView view = new GridView();
 	// view.setForceFit(true);
 	// // view.setEnableRowBody(true);

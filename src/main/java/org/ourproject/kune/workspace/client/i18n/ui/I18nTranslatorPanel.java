@@ -43,7 +43,6 @@ import com.gwtext.client.data.Store;
 import com.gwtext.client.data.StringFieldDef;
 import com.gwtext.client.util.Format;
 import com.gwtext.client.widgets.Button;
-import com.gwtext.client.widgets.PagingToolbar;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.TabPanel;
 import com.gwtext.client.widgets.Window;
@@ -58,7 +57,6 @@ import com.gwtext.client.widgets.grid.EditorGridPanel;
 import com.gwtext.client.widgets.grid.GridEditor;
 import com.gwtext.client.widgets.grid.GridPanel;
 import com.gwtext.client.widgets.grid.Renderer;
-import com.gwtext.client.widgets.grid.RowSelectionModel;
 import com.gwtext.client.widgets.grid.event.EditorGridListenerAdapter;
 import com.gwtext.client.widgets.grid.event.GridCellListenerAdapter;
 import com.gwtext.client.widgets.layout.BorderLayoutData;
@@ -246,27 +244,32 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
 
 	final EditorGridPanel grid = new EditorGridPanel((translated ? "grid-translated" : "grid-untranslated"), 695,
 		180, store, columnModel);
-	final PagingToolbar pag = new PagingToolbar(store);
-	pag.setPageSize(PAGINATION_SIZE);
-	pag.setDisplayInfo(true);
-	pag.setDisplayMsg(Kune.I18N.tWithNT("Displaying results {0} - {1} of {2}",
-		"Respect {} values in translations, "
-			+ "these will produce: 'Displaying results 1 - 25 of 95465' for instance"));
-	pag.setEmptyMsg(Kune.I18N.t("No results to display"));
-	pag.setAfterPageText(Kune.I18N.tWithNT("of {0}", "Used to show multiple results: '1 of 30'"));
-	pag.setBeforePageText(Kune.I18N.t("Page"));
-	pag.setFirstText(Kune.I18N.t("First Page"));
-	pag.setLastText(Kune.I18N.t("Last Page"));
-	pag.setNextText(Kune.I18N.t("Next Page"));
-	pag.setPrevText(Kune.I18N.t("Previous Page"));
-	pag.setRefreshText(Kune.I18N.t("Refresh"));
-	grid.setBottomToolbar(pag);
-	grid.setLoadMask(true);
-	grid.setLoadMask(Kune.I18N.t("Loading"));
+	createPagingToolbar(store, grid);
+
+	// final PagingToolbar pag = new PagingToolbar(store);
+	// pag.setPageSize(PAGINATION_SIZE);
+	// pag.setDisplayInfo(true);
+	// pag.setDisplayMsg(Kune.I18N.tWithNT("Displaying results {0} - {1} of
+	// {2}",
+	// "Respect {} values in translations, "
+	// + "these will produce: 'Displaying results 1 - 25 of 95465' for
+	// instance"));
+	// pag.setEmptyMsg(Kune.I18N.t("No results to display"));
+	// pag.setAfterPageText(Kune.I18N.tWithNT("of {0}", "Used to show
+	// multiple results: '1 of 30'"));
+	// pag.setBeforePageText(Kune.I18N.t("Page"));
+	// pag.setFirstText(Kune.I18N.t("First Page"));
+	// pag.setLastText(Kune.I18N.t("Last Page"));
+	// pag.setNextText(Kune.I18N.t("Next Page"));
+	// pag.setPrevText(Kune.I18N.t("Previous Page"));
+	// pag.setRefreshText(Kune.I18N.t("Refresh"));
+	// grid.setBottomToolbar(pag);
+	// grid.setLoadMask(true);
+	// grid.setLoadMask(Kune.I18N.t("Loading"));
 	grid.setClicksToEdit(1);
-	grid.setStripeRows(true);
-	grid.setFrame(true);
-	grid.setSelectionModel(new RowSelectionModel());
+	// grid.setStripeRows(true);
+	// grid.setFrame(true);
+	// grid.setSelectionModel(new RowSelectionModel());
 
 	grid.addEditorGridListener(new EditorGridListenerAdapter() {
 	    public void onAfterEdit(final GridPanel grid, final Record record, final String field,

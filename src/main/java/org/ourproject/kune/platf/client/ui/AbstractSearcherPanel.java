@@ -28,10 +28,9 @@ import com.gwtext.client.data.HttpProxy;
 import com.gwtext.client.data.JsonReader;
 import com.gwtext.client.data.RecordDef;
 import com.gwtext.client.data.Store;
-import com.gwtext.client.widgets.Component;
 import com.gwtext.client.widgets.PagingToolbar;
-import com.gwtext.client.widgets.event.PanelListenerAdapter;
 import com.gwtext.client.widgets.grid.GridPanel;
+import com.gwtext.client.widgets.grid.RowSelectionModel;
 
 public class AbstractSearcherPanel {
 
@@ -46,7 +45,7 @@ public class AbstractSearcherPanel {
 	pag.setDisplayInfo(true);
 	pag.setDisplayMsg(Kune.I18N.tWithNT("Displaying results {0} - {1} of {2}",
 		"Respect {} values in translations, "
-			+ "these will produce: 'Displaying results 1 - 25 of 95465' for instance"));
+			+ "this will produce: 'Displaying results 1 - 25 of 95465' for instance"));
 	pag.setEmptyMsg(Kune.I18N.t("No results to display"));
 	pag.setAfterPageText(Kune.I18N.tWithNT("of {0}", "Used to show multiple results: '1 of 30'"));
 	pag.setBeforePageText(Kune.I18N.t("Page"));
@@ -56,13 +55,41 @@ public class AbstractSearcherPanel {
 	pag.setPrevText(Kune.I18N.t("Previous Page"));
 	pag.setRefreshText(Kune.I18N.t("Refresh"));
 	grid.setBottomToolbar(pag);
-
-	grid.addListener(new PanelListenerAdapter() {
-	    public void onRender(final Component component) {
-		store.load(0, PAGINATION_SIZE);
-	    }
-	});
+	grid.setLoadMask(true);
+	grid.setLoadMask(Kune.I18N.t("Searching"));
+	grid.setSelectionModel(new RowSelectionModel());
+	grid.setBorder(false);
+	grid.setFrame(true);
+	grid.setStripeRows(true);
     }
+
+    // protected void createPagingToolbar(final Store store, final GridPanel
+    // grid) {
+    // final PagingToolbar pag = new PagingToolbar(store);
+    // pag.setPageSize(PAGINATION_SIZE);
+    // pag.setDisplayInfo(true);
+    // pag.setDisplayMsg(Kune.I18N.tWithNT("Displaying results {0} - {1} of
+    // {2}",
+    // "Respect {} values in translations, "
+    // + "these will produce: 'Displaying results 1 - 25 of 95465' for
+    // instance"));
+    // pag.setEmptyMsg(Kune.I18N.t("No results to display"));
+    // pag.setAfterPageText(Kune.I18N.tWithNT("of {0}", "Used to show multiple
+    // results: '1 of 30'"));
+    // pag.setBeforePageText(Kune.I18N.t("Page"));
+    // pag.setFirstText(Kune.I18N.t("First Page"));
+    // pag.setLastText(Kune.I18N.t("Last Page"));
+    // pag.setNextText(Kune.I18N.t("Next Page"));
+    // pag.setPrevText(Kune.I18N.t("Previous Page"));
+    // pag.setRefreshText(Kune.I18N.t("Refresh"));
+    // grid.setBottomToolbar(pag);
+    //
+    // grid.addListener(new PanelListenerAdapter() {
+    // public void onRender(final Component component) {
+    // store.load(0, PAGINATION_SIZE);
+    // }
+    // });
+    // }
 
     protected Store createStore(final FieldDef[] fieldDefs, final String url, final String id) {
 	final JsonReader reader = new JsonReader(new RecordDef(fieldDefs));
