@@ -20,7 +20,7 @@
 package org.ourproject.kune.platf.client.extend;
 
 public interface ExtensibleWidgetId {
-    // Not yet implemented EW:
+    // Not yet implemented/used EW:
     // public static final String CONTENT_TOOLBAR_RIGHT =
     // "ws.entity.content.toolbar.right";
     // public static final String CONTENT_BOTTOM_TOOLBAR_RIGHT =
