@@ -154,12 +154,12 @@ public class WorkspacePresenter implements Workspace {
         view.setVisible(visible);
     }
 
-    public void attachToExtensibleWidget(final ExtensibleWidgetChild element) {
-        extensionPointManager.attachToExtensible(element.getId(), element.getView());
+    public void attachToExtensibleWidget(final ExtensibleWidgetChild child) {
+        extensionPointManager.attachToExtensible(child);
     }
 
-    public void detachFromExtensibleWidget(final ExtensibleWidgetChild element) {
-        extensionPointManager.detachFromExtensible(element.getId(), element.getView());
+    public void detachFromExtensibleWidget(final ExtensibleWidgetChild child) {
+        extensionPointManager.detachFromExtensible(child);
     }
 
     public void onSplitterStartResizing(final Widget sender) {

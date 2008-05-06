@@ -22,18 +22,18 @@ package org.ourproject.kune.platf.client.extend;
 import org.ourproject.kune.platf.client.View;
 
 public class ExtensibleWidgetChild {
-    private final String id;
+    private final String parentId;
     private final View view;
 
     /**
      * 
-     * @param id
+     * @param parentId
      *                id of the extensible widget
      * @param view
      *                view (a widget) to attach/detach to the extensible widget
      */
-    public ExtensibleWidgetChild(final String id, final View view) {
-        this.id = id;
+    public ExtensibleWidgetChild(final String parentId, final View view) {
+        this.parentId = parentId;
         this.view = view;
     }
 
@@ -41,8 +41,8 @@ public class ExtensibleWidgetChild {
      * 
      * @return the id of the extensible widget
      */
-    public String getId() {
-        return id;
+    public String getParentId() {
+        return parentId;
     }
 
     /**

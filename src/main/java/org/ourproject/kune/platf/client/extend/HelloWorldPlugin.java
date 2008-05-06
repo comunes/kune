@@ -87,15 +87,15 @@ public class HelloWorldPlugin extends Plugin {
             presenter.registerExtensibleWidget(HELLOWORLDPLUGIN_EXT_WIDGET, this);
         }
 
-        public void attach(final String id, final Widget widget) {
-            if (id.equals(HELLOWORLDPLUGIN_EXT_WIDGET)) {
-                hp.add(widget);
+        public void attach(final ExtensibleWidgetChild child) {
+            if (child.getParentId().equals(HELLOWORLDPLUGIN_EXT_WIDGET)) {
+                hp.add((Widget) child.getView());
             }
         }
 
-        public void detach(final String id, final Widget widget) {
-            if (id.equals(HELLOWORLDPLUGIN_EXT_WIDGET)) {
-                hp.remove(widget);
+        public void detach(final ExtensibleWidgetChild child) {
+            if (child.getParentId().equals(HELLOWORLDPLUGIN_EXT_WIDGET)) {
+                hp.remove((Widget) child.getView());
             }
         }
 

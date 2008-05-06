@@ -22,6 +22,7 @@ package org.ourproject.kune.workspace.client.workspace.ui;
 import java.util.HashMap;
 
 import org.ourproject.kune.platf.client.extend.ExtensibleWidget;
+import org.ourproject.kune.platf.client.extend.ExtensibleWidgetChild;
 import org.ourproject.kune.platf.client.extend.ExtensibleWidgetId;
 import org.ourproject.kune.workspace.client.workspace.ContentToolBarPresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentToolBarView;
@@ -49,15 +50,15 @@ public class ContentToolBarPanel extends HorizontalPanel implements ContentToolB
         return extPoints;
     }
 
-    public void attach(final String id, final Widget widget) {
-        if (id.equals(ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT)) {
-            leftHP.add(widget);
+    public void attach(final ExtensibleWidgetChild child) {
+        if (child.getParentId().equals(ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT)) {
+            leftHP.add((Widget) child.getView());
         }
     }
 
-    public void detach(final String id, final Widget widget) {
-        if (id.equals(ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT)) {
-            leftHP.remove(widget);
+    public void detach(final ExtensibleWidgetChild child) {
+        if (child.getParentId().equals(ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT)) {
+            leftHP.remove((Widget) child.getView());
         }
     }
 

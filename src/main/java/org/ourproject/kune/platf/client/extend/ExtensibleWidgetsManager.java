@@ -21,10 +21,6 @@ package org.ourproject.kune.platf.client.extend;
 
 import java.util.HashMap;
 
-import org.ourproject.kune.platf.client.View;
-
-import com.google.gwt.user.client.ui.Widget;
-
 public class ExtensibleWidgetsManager {
 
     private final HashMap<String, ExtensibleWidget> extWidgets;
@@ -37,14 +33,14 @@ public class ExtensibleWidgetsManager {
         extWidgets.put(id, extWidget);
     }
 
-    public void attachToExtensible(final String id, final View viewToAttach) {
-        ExtensibleWidget extPoint = getExtensible(id);
-        extPoint.attach(id, (Widget) viewToAttach);
+    public void attachToExtensible(final ExtensibleWidgetChild child) {
+        ExtensibleWidget extPoint = getExtensible(child.getParentId());
+        extPoint.attach(child);
     }
 
-    public void detachFromExtensible(final String id, final View viewToAttach) {
-        ExtensibleWidget extPoint = getExtensible(id);
-        extPoint.detach(id, (Widget) viewToAttach);
+    public void detachFromExtensible(final ExtensibleWidgetChild child) {
+        ExtensibleWidget extPoint = getExtensible(child.getParentId());
+        extPoint.detach(child);
     }
 
     public void registerExtensibleWidgets(final HashMap<String, ExtensibleWidget> extWidgets) {
