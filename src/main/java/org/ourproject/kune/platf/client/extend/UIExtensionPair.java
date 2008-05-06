@@ -21,19 +21,34 @@ package org.ourproject.kune.platf.client.extend;
 
 import org.ourproject.kune.platf.client.View;
 
-public class UIExtensionElement {
+public class UIExtensionPair {
     private final String id;
     private final View view;
 
-    public UIExtensionElement(final String id, final View view) {
+    /**
+     * 
+     * @param id
+     *                id of the ExtensionPoint
+     * @param view
+     *                view (a widget) to attach/detach to the ExtensionPoint
+     */
+    public UIExtensionPair(final String id, final View view) {
         this.id = id;
         this.view = view;
     }
 
+    /**
+     * 
+     * @return the id of the ExtensionPoint
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * 
+     * @return the view to attach/dettach to the EP
+     */
     public View getView() {
         return view;
     }

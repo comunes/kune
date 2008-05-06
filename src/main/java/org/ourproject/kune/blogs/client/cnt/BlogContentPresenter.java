@@ -29,7 +29,7 @@ import org.ourproject.kune.platf.client.PlatformEvents;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.StateDTO;
-import org.ourproject.kune.platf.client.extend.UIExtensionElement;
+import org.ourproject.kune.platf.client.extend.UIExtensionPair;
 import org.ourproject.kune.platf.client.extend.UIExtensionPoint;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
@@ -79,7 +79,7 @@ public class BlogContentPresenter implements BlogContent, BlogReaderListener, Te
                             DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXT_POINT,
                                     UIExtensionPoint.CONTENT_TOOLBAR_LEFT);
                             DefaultDispatcher.getInstance().fire(PlatformEvents.ATTACH_TO_EXT_POINT,
-                                    new UIExtensionElement(UIExtensionPoint.CONTENT_TOOLBAR_LEFT, editor.getToolBar()));
+                                    new UIExtensionPair(UIExtensionPoint.CONTENT_TOOLBAR_LEFT, editor.getToolBar()));
                         } else {
                             FolderEditor editor = components.getFolderEditor();
                             editor.setFolder(content.getFolder());
@@ -128,7 +128,7 @@ public class BlogContentPresenter implements BlogContent, BlogReaderListener, Te
             readerControl.setRights(content.getContentRights());
             DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXT_POINT, UIExtensionPoint.CONTENT_TOOLBAR_LEFT);
             DefaultDispatcher.getInstance().fire(PlatformEvents.ATTACH_TO_EXT_POINT,
-                    new UIExtensionElement(UIExtensionPoint.CONTENT_TOOLBAR_LEFT, readerControl.getView()));
+                    new UIExtensionPair(UIExtensionPoint.CONTENT_TOOLBAR_LEFT, readerControl.getView()));
             view.show(reader.getView());
         } else {
             FolderViewer viewer = components.getFolderViewer();

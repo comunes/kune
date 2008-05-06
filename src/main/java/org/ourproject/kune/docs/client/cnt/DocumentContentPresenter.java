@@ -31,7 +31,7 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.SaveDocumentActionParams;
 import org.ourproject.kune.platf.client.dto.StateDTO;
-import org.ourproject.kune.platf.client.extend.UIExtensionElement;
+import org.ourproject.kune.platf.client.extend.UIExtensionPair;
 import org.ourproject.kune.platf.client.extend.UIExtensionPoint;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
@@ -81,7 +81,7 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
                             DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXT_POINT,
                                     UIExtensionPoint.CONTENT_TOOLBAR_LEFT);
                             DefaultDispatcher.getInstance().fire(PlatformEvents.ATTACH_TO_EXT_POINT,
-                                    new UIExtensionElement(UIExtensionPoint.CONTENT_TOOLBAR_LEFT, editor.getToolBar()));
+                                    new UIExtensionPair(UIExtensionPoint.CONTENT_TOOLBAR_LEFT, editor.getToolBar()));
                             DefaultDispatcher.getInstance().fire(WorkspaceEvents.RECALCULATE_WORKSPACE_SIZE, null);
                         } else {
                             FolderEditor editor = components.getFolderEditor();
@@ -132,7 +132,7 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
             readerControl.setRights(content.getContentRights());
             DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXT_POINT, UIExtensionPoint.CONTENT_TOOLBAR_LEFT);
             DefaultDispatcher.getInstance().fire(PlatformEvents.ATTACH_TO_EXT_POINT,
-                    new UIExtensionElement(UIExtensionPoint.CONTENT_TOOLBAR_LEFT, readerControl.getView()));
+                    new UIExtensionPair(UIExtensionPoint.CONTENT_TOOLBAR_LEFT, readerControl.getView()));
             view.show(reader.getView());
         } else {
             FolderViewer viewer = components.getFolderViewer();

@@ -21,14 +21,16 @@ package org.ourproject.kune.workspace.client.workspace.ui;
 
 import java.util.HashMap;
 
+import org.ourproject.kune.platf.client.extend.UIExtensible;
 import org.ourproject.kune.platf.client.extend.UIExtensionPoint;
 import org.ourproject.kune.workspace.client.workspace.ContentToolBarPresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentToolBarView;
 
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Widget;
 
-public class ContentToolBarPanel extends HorizontalPanel implements ContentToolBarView {
+public class ContentToolBarPanel extends HorizontalPanel implements ContentToolBarView, UIExtensible {
 
     private final HorizontalPanel leftHP;
 
@@ -41,10 +43,27 @@ public class ContentToolBarPanel extends HorizontalPanel implements ContentToolB
         leftHP.addStyleName("kune-Margin-Large-l");
     }
 
-    public HashMap<String, UIExtensionPoint> getExtensionPoints() {
-        HashMap<String, UIExtensionPoint> extPoints = new HashMap<String, UIExtensionPoint>();
-        String leftId = UIExtensionPoint.CONTENT_TOOLBAR_LEFT;
-        extPoints.put(leftId, new UIExtensionPoint(leftId, leftHP));
+    public HashMap<String, UIExtensible> getExtensionPoints() {
+        HashMap<String, UIExtensible> extPoints = new HashMap<String, UIExtensible>();
+        extPoints.put(UIExtensionPoint.CONTENT_TOOLBAR_LEFT, this);
         return extPoints;
+    }
+
+    public void attach(final String id, final Widget widget) {
+        if (id.equals(UIExtensionPoint.CONTENT_TOOLBAR_LEFT)) {
+            leftHP.add(widget);
+        }
+    }
+
+    public void detach(final String id, final Widget widget) {
+        if (id.equals(UIExtensionPoint.CONTENT_TOOLBAR_LEFT)) {
+            leftHP.remove(widget);
+        }
+    }
+
+    public void detachAll(final String id) {
+        if (id.equals(UIExtensionPoint.CONTENT_TOOLBAR_LEFT)) {
+            leftHP.clear();
+        }
     }
 }

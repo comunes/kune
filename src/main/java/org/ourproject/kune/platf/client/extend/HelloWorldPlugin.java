@@ -25,6 +25,7 @@ import org.ourproject.kune.platf.client.View;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Widget;
 
 public class HelloWorldPlugin extends Plugin {
 
@@ -41,14 +42,14 @@ public class HelloWorldPlugin extends Plugin {
         helloWorld.init(panel);
 
         getDispatcher().fire(PlatformEvents.ATTACH_TO_EXT_POINT,
-                new UIExtensionElement(UIExtensionPoint.CONTENT_BOTTOM_ICONBAR, helloWorld.getView()));
+                new UIExtensionPair(UIExtensionPoint.CONTENT_BOTTOM_ICONBAR, helloWorld.getView()));
 
     }
 
     @Override
     protected void stop() {
         getDispatcher().fire(PlatformEvents.DETACH_FROM_EXT_POINT,
-                new UIExtensionElement(UIExtensionPoint.CONTENT_BOTTOM_ICONBAR, helloWorld.getView()));
+                new UIExtensionPair(UIExtensionPoint.CONTENT_BOTTOM_ICONBAR, helloWorld.getView()));
 
     }
 
@@ -66,15 +67,17 @@ public class HelloWorldPlugin extends Plugin {
             return view;
         }
 
-        public void registerExtPoint(final UIExtensionPoint extPoint) {
-            getExtensionPointManager().addUIExtensionPoint(extPoint);
+        public void registerExtPoint(final String id, final UIExtensible extPoint) {
+            getExtensionPointManager().registerUIExtensionPoint(id, extPoint);
         }
     }
 
     interface HelloWorldView extends View {
     }
 
-    class HelloWorldPanel extends Composite implements HelloWorldView {
+    class HelloWorldPanel extends Composite implements HelloWorldView, UIExtensible {
+
+        private static final String HELLOWORLDPLUGIN_EXT_POINT = "helloworldplugin.extpoint";
         private final HorizontalPanel hp;
 
         public HelloWorldPanel(final HelloWorldPresenter presenter) {
@@ -83,8 +86,25 @@ public class HelloWorldPlugin extends Plugin {
             hp.add(new Label("Hello World"));
 
             // Registering a new Extension Point
-            UIExtensionPoint extPoint = new UIExtensionPoint("helloworldplugin.hp", hp);
-            presenter.registerExtPoint(extPoint);
+            presenter.registerExtPoint(HELLOWORLDPLUGIN_EXT_POINT, this);
+        }
+
+        public void attach(final String id, final Widget widget) {
+            if (id.equals(HELLOWORLDPLUGIN_EXT_POINT)) {
+                hp.add(widget);
+            }
+        }
+
+        public void detach(final String id, final Widget widget) {
+            if (id.equals(HELLOWORLDPLUGIN_EXT_POINT)) {
+                hp.remove(widget);
+            }
+        }
+
+        public void detachAll(final String id) {
+            if (id.equals(HELLOWORLDPLUGIN_EXT_POINT)) {
+                hp.clear();
+            }
         }
     }
 

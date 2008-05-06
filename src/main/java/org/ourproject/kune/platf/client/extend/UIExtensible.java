@@ -6,6 +6,8 @@ public interface UIExtensible {
 
     public void attach(String id, Widget widget);
 
-    public void dettach(String id, Widget widget);
+    public void detach(String id, Widget widget);
+
+    public void detachAll(String id);
 
 }

@@ -27,43 +27,45 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class UIExtensionPointManager {
 
-    private final HashMap<String, UIExtensionPoint> uiExtPoints;
+    private final HashMap<String, UIExtensible> uiExtPointsNew;
 
     public UIExtensionPointManager() {
-        uiExtPoints = new HashMap<String, UIExtensionPoint>();
+        uiExtPointsNew = new HashMap<String, UIExtensible>();
     }
 
-    public void addUIExtensionPoint(final UIExtensionPoint extPoint) {
-        uiExtPoints.put(extPoint.getId(), extPoint);
+    public void registerUIExtensionPoint(final String id, final UIExtensible extensionPoint) {
+        uiExtPointsNew.put(id, extensionPoint);
     }
 
-    public void attachToExtensionPoint(final String id, final View viewToAttach) {
-        UIExtensionPoint extPoint = getExtPoint(id);
-        extPoint.getPanel().add((Widget) viewToAttach);
+    public void attachToExtensible(final String id, final View viewToAttach) {
+        UIExtensible extPoint = getExtensible(id);
+        extPoint.attach(id, (Widget) viewToAttach);
     }
 
-    public void insertToExtensionPoint(final String id, final View viewToAttach) {
-        UIExtensionPoint extPoint = getExtPoint(id);
-        extPoint.getPanel().add((Widget) viewToAttach);
+    public void detachFromExtensible(final String id, final View viewToAttach) {
+        UIExtensible extPoint = getExtensible(id);
+        extPoint.detach(id, (Widget) viewToAttach);
     }
 
-    public void detachFromExtensionPoint(final String id, final View viewToDetach) {
-        UIExtensionPoint extPoint = getExtPoint(id);
-        extPoint.getPanel().remove((Widget) viewToDetach);
+    public void registerUIExtensionPoints(final HashMap<String, UIExtensible> extensionPoints) {
+        uiExtPointsNew.putAll(extensionPoints);
     }
 
-    private UIExtensionPoint getExtPoint(final String id) {
-        UIExtensionPoint extPoint = this.uiExtPoints.get(id);
+    private UIExtensible getExtensible(final String id) {
+        UIExtensible extPoint = this.uiExtPointsNew.get(id);
         return extPoint;
     }
 
-    public void clearExtensionPoint(final String id) {
-        UIExtensionPoint extPoint = getExtPoint(id);
-        extPoint.getPanel().clear();
-    }
-
-    public void addUIExtensionPoints(final HashMap<String, UIExtensionPoint> extensionPoints) {
-        uiExtPoints.putAll(extensionPoints);
+    /**
+     * 
+     * Detach all widtgets from a ExtPoint
+     * 
+     * @param id
+     *                id of the ExtensionPoint
+     */
+    public void detachAll(final String id) {
+        UIExtensible extPoint = getExtensible(id);
+        extPoint.detachAll(id);
     }
 
 }

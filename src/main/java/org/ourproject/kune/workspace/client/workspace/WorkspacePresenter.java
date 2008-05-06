@@ -25,8 +25,8 @@ import java.util.Iterator;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.extend.UIExtensionElement;
-import org.ourproject.kune.platf.client.extend.UIExtensionPoint;
+import org.ourproject.kune.platf.client.extend.UIExtensible;
+import org.ourproject.kune.platf.client.extend.UIExtensionPair;
 import org.ourproject.kune.platf.client.extend.UIExtensionPointManager;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.tool.ClientTool;
@@ -154,17 +154,12 @@ public class WorkspacePresenter implements Workspace {
         view.setVisible(visible);
     }
 
-    public void attachToExtensionPoint(final UIExtensionElement element) {
-        extensionPointManager.attachToExtensionPoint(element.getId(), element.getView());
+    public void attachToExtensionPoint(final UIExtensionPair element) {
+        extensionPointManager.attachToExtensible(element.getId(), element.getView());
     }
 
-    public void detachFromExtensionPoint(final UIExtensionElement element) {
-        extensionPointManager.detachFromExtensionPoint(element.getId(), element.getView());
-    }
-
-    public void clearExtensionPoint(final String id) {
-        extensionPointManager.clearExtensionPoint(id);
-
+    public void detachFromExtensionPoint(final UIExtensionPair element) {
+        extensionPointManager.detachFromExtensible(element.getId(), element.getView());
     }
 
     public void onSplitterStartResizing(final Widget sender) {
@@ -196,13 +191,15 @@ public class WorkspacePresenter implements Workspace {
         view.adjustSize(windowWidth, clientHeight);
     }
 
-    public void addUIExtensionPoint(final UIExtensionPoint extensionPoint) {
-        extensionPointManager.addUIExtensionPoint(extensionPoint);
-
+    public void registerUIExtensionPoints(final HashMap<String, UIExtensible> extensionPoints) {
+        extensionPointManager.registerUIExtensionPoints(extensionPoints);
     }
 
-    public void addUIExtensionPoints(final HashMap<String, UIExtensionPoint> extensionPoints) {
-        extensionPointManager.addUIExtensionPoints(extensionPoints);
+    public void registerUIExtensionPoint(final String id, final UIExtensible extensionPoint) {
+        extensionPointManager.registerUIExtensionPoint(id, extensionPoint);
     }
 
+    public void clearExtensionPoint(final String extPointId) {
+        extensionPointManager.detachAll(extPointId);
+    }
 }
