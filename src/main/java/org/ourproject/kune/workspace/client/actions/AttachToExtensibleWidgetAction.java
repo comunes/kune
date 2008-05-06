@@ -20,18 +20,18 @@
 package org.ourproject.kune.workspace.client.actions;
 
 import org.ourproject.kune.platf.client.dispatch.Action;
-import org.ourproject.kune.platf.client.extend.UIExtensionPair;
+import org.ourproject.kune.platf.client.extend.ExtensibleWidgetChild;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
-public class AttachToExtensionPointAction implements Action<UIExtensionPair> {
+public class AttachToExtensibleWidgetAction implements Action<ExtensibleWidgetChild> {
 
     private final Workspace workspace;
 
-    public AttachToExtensionPointAction(final Workspace workspace) {
+    public AttachToExtensibleWidgetAction(final Workspace workspace) {
         this.workspace = workspace;
     }
 
-    public void execute(final UIExtensionPair element) {
-        workspace.attachToExtensionPoint(element);
+    public void execute(final ExtensibleWidgetChild element) {
+        workspace.attachToExtensibleWidget(element);
     }
 }

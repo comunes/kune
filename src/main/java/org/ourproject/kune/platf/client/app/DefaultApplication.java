@@ -26,7 +26,7 @@ import java.util.Map;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.extend.UIExtensionPointManager;
+import org.ourproject.kune.platf.client.extend.ExtensibleWidgetsManager;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.tool.ClientTool;
@@ -42,7 +42,7 @@ public class DefaultApplication implements Application {
     private StateManager stateManager;
 
     public DefaultApplication(final Map<String, ClientTool> tools, final Session session,
-            final UIExtensionPointManager extensionPointManager) {
+            final ExtensibleWidgetsManager extensionPointManager) {
         this.tools = tools;
         workspace = WorkspaceFactory.createWorkspace(session, extensionPointManager);
         workspace.attachTools(tools.values().iterator());

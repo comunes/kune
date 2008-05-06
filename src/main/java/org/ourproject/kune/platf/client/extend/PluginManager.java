@@ -28,10 +28,10 @@ public class PluginManager {
 
     private final HashMap<String, Plugin> plugins;
     private final Dispatcher dispacher;
-    private final UIExtensionPointManager extensionPointManager;
+    private final ExtensibleWidgetsManager extensionPointManager;
     private final I18nTranslationService i18n;
 
-    public PluginManager(final Dispatcher dispacher, final UIExtensionPointManager extensionPointManager,
+    public PluginManager(final Dispatcher dispacher, final ExtensibleWidgetsManager extensionPointManager,
             final I18nTranslationService i18n) {
         plugins = new HashMap<String, Plugin>();
         this.dispacher = dispacher;

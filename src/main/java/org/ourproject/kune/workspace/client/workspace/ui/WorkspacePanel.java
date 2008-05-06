@@ -21,7 +21,7 @@
 package org.ourproject.kune.workspace.client.workspace.ui;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.extend.UIExtensionPoint;
+import org.ourproject.kune.platf.client.extend.ExtensibleWidgetId;
 import org.ourproject.kune.platf.client.services.ColorTheme;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.services.Kune;
@@ -212,8 +212,8 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     }
 
     public void registerUIExtensionPoints() {
-        presenter.registerUIExtensionPoints(contentToolBarPanel.getExtensionPoints());
-        presenter.registerUIExtensionPoint(UIExtensionPoint.CONTENT_BOTTOM_ICONBAR, bottomIconsTrayPanel);
+        presenter.registerExtensibleWidgets(contentToolBarPanel.getExtensionPoints());
+        presenter.registerExtensibleWidget(ExtensibleWidgetId.CONTENT_BOTTOM_ICONBAR, bottomIconsTrayPanel);
     }
 
     public void setBottom(final View view) {

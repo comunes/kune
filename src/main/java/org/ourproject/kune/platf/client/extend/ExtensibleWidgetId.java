@@ -17,21 +17,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.actions;
+package org.ourproject.kune.platf.client.extend;
 
-import org.ourproject.kune.platf.client.dispatch.Action;
-import org.ourproject.kune.platf.client.extend.UIExtensionPair;
-import org.ourproject.kune.workspace.client.workspace.Workspace;
+public interface ExtensibleWidgetId {
+    // Not yet implemented EW:
+    // public static final String CONTENT_TOOLBAR_RIGHT =
+    // "ws.entity.content.toolbar.right";
+    // public static final String CONTENT_BOTTOM_TOOLBAR_RIGHT =
+    // "ws.entity.content.bottomtb.right";
+    // public static final String CONTENT_BOTTOM_TOOLBAR_LEFT =
+    // "ws.entity.content.bottomtb.left";
+    public static final String CONTENT_TOOLBAR_LEFT = "ws.entity.content.toolbar.left";
+    public static final String CONTENT_BOTTOM_ICONBAR = "ws.site.bottom.iconbar";
 
-public class DetachFromExtensionPointAction implements Action<UIExtensionPair> {
-
-    private final Workspace workspace;
-
-    public DetachFromExtensionPointAction(final Workspace workspace) {
-        this.workspace = workspace;
-    }
-
-    public void execute(final UIExtensionPair element) {
-        workspace.detachFromExtensionPoint(element);
-    }
 }

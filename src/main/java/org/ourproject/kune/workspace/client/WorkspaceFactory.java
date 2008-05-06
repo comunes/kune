@@ -21,7 +21,7 @@ package org.ourproject.kune.workspace.client;
 
 import org.ourproject.kune.platf.client.app.DesktopView;
 import org.ourproject.kune.platf.client.app.ui.DesktopPanel;
-import org.ourproject.kune.platf.client.extend.UIExtensionPointManager;
+import org.ourproject.kune.platf.client.extend.ExtensibleWidgetsManager;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.editor.TextEditorListener;
@@ -95,7 +95,7 @@ public class WorkspaceFactory {
 
     private static Session session;
 
-    public static Workspace createWorkspace(final Session session, final UIExtensionPointManager extensionPointManager) {
+    public static Workspace createWorkspace(final Session session, final ExtensibleWidgetsManager extensionPointManager) {
         WorkspaceFactory.session = session;
         WorkspacePresenter workspace = new WorkspacePresenter(session);
         WorkspaceView view = new WorkspacePanel(workspace);

@@ -25,9 +25,9 @@ import java.util.Iterator;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.extend.UIExtensible;
-import org.ourproject.kune.platf.client.extend.UIExtensionPair;
-import org.ourproject.kune.platf.client.extend.UIExtensionPointManager;
+import org.ourproject.kune.platf.client.extend.ExtensibleWidget;
+import org.ourproject.kune.platf.client.extend.ExtensibleWidgetChild;
+import org.ourproject.kune.platf.client.extend.ExtensibleWidgetsManager;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
@@ -42,12 +42,12 @@ public class WorkspacePresenter implements Workspace {
     private WorkspaceComponent context;
     private WorkspaceComponent content;
     private WorkspaceUIComponents components;
-    private UIExtensionPointManager extensionPointManager;
+    private ExtensibleWidgetsManager extensionPointManager;
 
     public WorkspacePresenter(final Session session) {
     }
 
-    public void init(final WorkspaceView view, final UIExtensionPointManager extensionPointManager) {
+    public void init(final WorkspaceView view, final ExtensibleWidgetsManager extensionPointManager) {
         this.view = view;
         this.extensionPointManager = extensionPointManager;
         this.components = new WorkspaceUIComponents(this);
@@ -154,11 +154,11 @@ public class WorkspacePresenter implements Workspace {
         view.setVisible(visible);
     }
 
-    public void attachToExtensionPoint(final UIExtensionPair element) {
+    public void attachToExtensibleWidget(final ExtensibleWidgetChild element) {
         extensionPointManager.attachToExtensible(element.getId(), element.getView());
     }
 
-    public void detachFromExtensionPoint(final UIExtensionPair element) {
+    public void detachFromExtensibleWidget(final ExtensibleWidgetChild element) {
         extensionPointManager.detachFromExtensible(element.getId(), element.getView());
     }
 
@@ -191,15 +191,15 @@ public class WorkspacePresenter implements Workspace {
         view.adjustSize(windowWidth, clientHeight);
     }
 
-    public void registerUIExtensionPoints(final HashMap<String, UIExtensible> extensionPoints) {
-        extensionPointManager.registerUIExtensionPoints(extensionPoints);
+    public void registerExtensibleWidgets(final HashMap<String, ExtensibleWidget> extensibleWidget) {
+        extensionPointManager.registerExtensibleWidgets(extensibleWidget);
     }
 
-    public void registerUIExtensionPoint(final String id, final UIExtensible extensionPoint) {
-        extensionPointManager.registerUIExtensionPoint(id, extensionPoint);
+    public void registerExtensibleWidget(final String id, final ExtensibleWidget extensibleWidget) {
+        extensionPointManager.registerExtensibleWidget(id, extensibleWidget);
     }
 
-    public void clearExtensionPoint(final String extPointId) {
-        extensionPointManager.detachAll(extPointId);
+    public void clearExtensibleWidget(final String id) {
+        extensionPointManager.detachAll(id);
     }
 }

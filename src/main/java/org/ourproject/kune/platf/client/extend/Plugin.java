@@ -25,7 +25,7 @@ import org.ourproject.kune.platf.client.services.I18nTranslationService;
 public abstract class Plugin {
     private String name;
     private final boolean started;
-    private UIExtensionPointManager extensionPointManager;
+    private ExtensibleWidgetsManager extensionPointManager;
     private I18nTranslationService i18n;
     private Dispatcher dispatcher;
 
@@ -35,7 +35,7 @@ public abstract class Plugin {
         // InitDataDTO...
     }
 
-    protected void init(final Dispatcher dispatcher, final UIExtensionPointManager extensionPointManager,
+    protected void init(final Dispatcher dispatcher, final ExtensibleWidgetsManager extensionPointManager,
             final I18nTranslationService i18n) {
         this.dispatcher = dispatcher;
         this.extensionPointManager = extensionPointManager;
@@ -54,7 +54,7 @@ public abstract class Plugin {
         return i18n;
     }
 
-    public UIExtensionPointManager getExtensionPointManager() {
+    public ExtensibleWidgetsManager getExtensionPointManager() {
         return extensionPointManager;
     }
 

@@ -19,33 +19,38 @@
  */
 package org.ourproject.kune.platf.client.extend;
 
-import com.google.gwt.user.client.ui.CellPanel;
+import org.ourproject.kune.platf.client.View;
 
-public class UIExtensionPoint {
-    // Not yet implemented EP:
-    // public static final String CONTENT_TOOLBAR_RIGHT =
-    // "ws.entity.content.toolbar.right";
-    // public static final String CONTENT_BOTTOM_TOOLBAR_RIGHT =
-    // "ws.entity.content.bottomtb.right";
-    // public static final String CONTENT_BOTTOM_TOOLBAR_LEFT =
-    // "ws.entity.content.bottomtb.left";
-    public static final String CONTENT_TOOLBAR_LEFT = "ws.entity.content.toolbar.left";
-    public static final String CONTENT_BOTTOM_ICONBAR = "ws.site.bottom.iconbar";
-
+public class ExtensibleWidgetChild {
     private final String id;
-    private final CellPanel panel;
+    private final View view;
 
-    public UIExtensionPoint(final String id, final CellPanel panel) {
+    /**
+     * 
+     * @param id
+     *                id of the extensible widget
+     * @param view
+     *                view (a widget) to attach/detach to the extensible widget
+     */
+    public ExtensibleWidgetChild(final String id, final View view) {
         this.id = id;
-        this.panel = panel;
+        this.view = view;
     }
 
+    /**
+     * 
+     * @return the id of the extensible widget
+     */
     public String getId() {
         return id;
     }
 
-    public CellPanel getPanel() {
-        return panel;
+    /**
+     * 
+     * @return the view to attach/dettach to the extensible widget
+     */
+    public View getView() {
+        return view;
     }
 
 }

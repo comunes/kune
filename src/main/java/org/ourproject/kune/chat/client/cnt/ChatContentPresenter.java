@@ -28,8 +28,8 @@ import org.ourproject.kune.platf.client.PlatformEvents;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.StateDTO;
-import org.ourproject.kune.platf.client.extend.UIExtensionPair;
-import org.ourproject.kune.platf.client.extend.UIExtensionPoint;
+import org.ourproject.kune.platf.client.extend.ExtensibleWidgetChild;
+import org.ourproject.kune.platf.client.extend.ExtensibleWidgetId;
 import org.ourproject.kune.platf.client.ui.UnknowComponent;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
 
@@ -63,18 +63,18 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener {
 	if (typeId.equals(ChatClientTool.TYPE_ROOT)) {
 	    ChatInfo info = components.getChatInfo();
 	    view.show(info.getView());
-	    DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXT_POINT, UIExtensionPoint.CONTENT_TOOLBAR_LEFT);
+	    DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXTENSIBLE_WIDGET, ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT);
 	} else if (typeId.equals(ChatClientTool.TYPE_ROOM)) {
 	    ChatRoom viewer = components.getChatRoom();
 	    view.show(viewer.getView());
-	    DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXT_POINT, UIExtensionPoint.CONTENT_TOOLBAR_LEFT);
+	    DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXTENSIBLE_WIDGET, ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT);
 	    DefaultDispatcher.getInstance().fire(
-		    PlatformEvents.ATTACH_TO_EXT_POINT,
-		    new UIExtensionPair(UIExtensionPoint.CONTENT_TOOLBAR_LEFT, components.getChatRoomControl()
+		    PlatformEvents.ATTACH_TO_EXTENSIBLE_WIDGET,
+		    new ExtensibleWidgetChild(ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT, components.getChatRoomControl()
 			    .getView()));
 	} else {
 	    view.show(UnknowComponent.instance.getView());
-	    DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXT_POINT, UIExtensionPoint.CONTENT_TOOLBAR_LEFT);
+	    DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXTENSIBLE_WIDGET, ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT);
 	}
     }
 

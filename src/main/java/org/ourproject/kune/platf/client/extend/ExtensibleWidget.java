@@ -2,7 +2,7 @@ package org.ourproject.kune.platf.client.extend;
 
 import com.google.gwt.user.client.ui.Widget;
 
-public interface UIExtensible {
+public interface ExtensibleWidget {
 
     public void attach(String id, Widget widget);
 

@@ -26,8 +26,8 @@ import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.PlatformEvents;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
-import org.ourproject.kune.platf.client.extend.UIExtensionPair;
-import org.ourproject.kune.platf.client.extend.UIExtensionPoint;
+import org.ourproject.kune.platf.client.extend.ExtensibleWidgetChild;
+import org.ourproject.kune.platf.client.extend.ExtensibleWidgetId;
 
 import com.allen_sauer.gwt.log.client.Log;
 
@@ -81,8 +81,8 @@ public class SearchSitePresenter extends AbstractPresenter implements SearchSite
     }
 
     public void attachIconToBottomBar(final View view) {
-        DefaultDispatcher.getInstance().fire(PlatformEvents.ATTACH_TO_EXT_POINT,
-                new UIExtensionPair(UIExtensionPoint.CONTENT_BOTTOM_ICONBAR, view));
+        DefaultDispatcher.getInstance().fire(PlatformEvents.ATTACH_TO_EXTENSIBLE_WIDGET,
+                new ExtensibleWidgetChild(ExtensibleWidgetId.CONTENT_BOTTOM_ICONBAR, view));
     }
 
 }

@@ -36,7 +36,7 @@ import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.extend.HelloWorldPlugin;
 import org.ourproject.kune.platf.client.extend.PluginManager;
-import org.ourproject.kune.platf.client.extend.UIExtensionPointManager;
+import org.ourproject.kune.platf.client.extend.ExtensibleWidgetsManager;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
@@ -73,7 +73,7 @@ public class ApplicationBuilder {
         final Session session = new SessionImpl(userHash, initialLang);
         new KuneErrorHandler(session);
 
-        final UIExtensionPointManager extensionPointManager = new UIExtensionPointManager();
+        final ExtensibleWidgetsManager extensionPointManager = new ExtensibleWidgetsManager();
         final DefaultApplication application = new DefaultApplication(tools, session, extensionPointManager);
         final Workspace workspace = application.getWorkspace();
         Site.showProgressLoading();

@@ -25,47 +25,47 @@ import org.ourproject.kune.platf.client.View;
 
 import com.google.gwt.user.client.ui.Widget;
 
-public class UIExtensionPointManager {
+public class ExtensibleWidgetsManager {
 
-    private final HashMap<String, UIExtensible> uiExtPointsNew;
+    private final HashMap<String, ExtensibleWidget> extWidgets;
 
-    public UIExtensionPointManager() {
-        uiExtPointsNew = new HashMap<String, UIExtensible>();
+    public ExtensibleWidgetsManager() {
+        extWidgets = new HashMap<String, ExtensibleWidget>();
     }
 
-    public void registerUIExtensionPoint(final String id, final UIExtensible extensionPoint) {
-        uiExtPointsNew.put(id, extensionPoint);
+    public void registerExtensibleWidget(final String id, final ExtensibleWidget extWidget) {
+        extWidgets.put(id, extWidget);
     }
 
     public void attachToExtensible(final String id, final View viewToAttach) {
-        UIExtensible extPoint = getExtensible(id);
+        ExtensibleWidget extPoint = getExtensible(id);
         extPoint.attach(id, (Widget) viewToAttach);
     }
 
     public void detachFromExtensible(final String id, final View viewToAttach) {
-        UIExtensible extPoint = getExtensible(id);
+        ExtensibleWidget extPoint = getExtensible(id);
         extPoint.detach(id, (Widget) viewToAttach);
     }
 
-    public void registerUIExtensionPoints(final HashMap<String, UIExtensible> extensionPoints) {
-        uiExtPointsNew.putAll(extensionPoints);
+    public void registerExtensibleWidgets(final HashMap<String, ExtensibleWidget> extWidgets) {
+        extWidgets.putAll(extWidgets);
     }
 
-    private UIExtensible getExtensible(final String id) {
-        UIExtensible extPoint = this.uiExtPointsNew.get(id);
-        return extPoint;
+    private ExtensibleWidget getExtensible(final String id) {
+        ExtensibleWidget extWidget = this.extWidgets.get(id);
+        return extWidget;
     }
 
     /**
      * 
-     * Detach all widtgets from a ExtPoint
+     * Detach all widtgets from a extensible widget
      * 
      * @param id
-     *                id of the ExtensionPoint
+     *                id of the extensible widget
      */
     public void detachAll(final String id) {
-        UIExtensible extPoint = getExtensible(id);
-        extPoint.detachAll(id);
+        ExtensibleWidget extWidget = getExtensible(id);
+        extWidget.detachAll(id);
     }
 
 }

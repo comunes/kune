@@ -17,40 +17,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.client.extend;
+package org.ourproject.kune.workspace.client.actions;
 
-import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dispatch.Action;
+import org.ourproject.kune.platf.client.extend.ExtensibleWidgetChild;
+import org.ourproject.kune.workspace.client.workspace.Workspace;
 
-public class UIExtensionPair {
-    private final String id;
-    private final View view;
+public class DetachFromExtensibleWidgetAction implements Action<ExtensibleWidgetChild> {
 
-    /**
-     * 
-     * @param id
-     *                id of the ExtensionPoint
-     * @param view
-     *                view (a widget) to attach/detach to the ExtensionPoint
-     */
-    public UIExtensionPair(final String id, final View view) {
-        this.id = id;
-        this.view = view;
+    private final Workspace workspace;
+
+    public DetachFromExtensibleWidgetAction(final Workspace workspace) {
+        this.workspace = workspace;
     }
 
-    /**
-     * 
-     * @return the id of the ExtensionPoint
-     */
-    public String getId() {
-        return id;
+    public void execute(final ExtensibleWidgetChild element) {
+        workspace.detachFromExtensibleWidget(element);
     }
-
-    /**
-     * 
-     * @return the view to attach/dettach to the EP
-     */
-    public View getView() {
-        return view;
-    }
-
 }

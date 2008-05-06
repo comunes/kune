@@ -41,16 +41,14 @@ public class HelloWorldPlugin extends Plugin {
         HelloWorldPanel panel = new HelloWorldPanel(helloWorld);
         helloWorld.init(panel);
 
-        getDispatcher().fire(PlatformEvents.ATTACH_TO_EXT_POINT,
-                new UIExtensionPair(UIExtensionPoint.CONTENT_BOTTOM_ICONBAR, helloWorld.getView()));
-
+        getDispatcher().fire(PlatformEvents.ATTACH_TO_EXTENSIBLE_WIDGET,
+                new ExtensibleWidgetChild(ExtensibleWidgetId.CONTENT_BOTTOM_ICONBAR, helloWorld.getView()));
     }
 
     @Override
     protected void stop() {
-        getDispatcher().fire(PlatformEvents.DETACH_FROM_EXT_POINT,
-                new UIExtensionPair(UIExtensionPoint.CONTENT_BOTTOM_ICONBAR, helloWorld.getView()));
-
+        getDispatcher().fire(PlatformEvents.DETACH_FROM_EXTENSIBLE_WIDGET,
+                new ExtensibleWidgetChild(ExtensibleWidgetId.CONTENT_BOTTOM_ICONBAR, helloWorld.getView()));
     }
 
     class HelloWorldPresenter implements View {
@@ -67,17 +65,17 @@ public class HelloWorldPlugin extends Plugin {
             return view;
         }
 
-        public void registerExtPoint(final String id, final UIExtensible extPoint) {
-            getExtensionPointManager().registerUIExtensionPoint(id, extPoint);
+        public void registerExtensibleWidget(final String id, final ExtensibleWidget extWidget) {
+            getExtensionPointManager().registerExtensibleWidget(id, extWidget);
         }
     }
 
     interface HelloWorldView extends View {
     }
 
-    class HelloWorldPanel extends Composite implements HelloWorldView, UIExtensible {
+    class HelloWorldPanel extends Composite implements HelloWorldView, ExtensibleWidget {
 
-        private static final String HELLOWORLDPLUGIN_EXT_POINT = "helloworldplugin.extpoint";
+        private static final String HELLOWORLDPLUGIN_EXT_WIDGET = "helloworldplugin.extwidget";
         private final HorizontalPanel hp;
 
         public HelloWorldPanel(final HelloWorldPresenter presenter) {
@@ -85,24 +83,24 @@ public class HelloWorldPlugin extends Plugin {
             initWidget(hp);
             hp.add(new Label("Hello World"));
 
-            // Registering a new Extension Point
-            presenter.registerExtPoint(HELLOWORLDPLUGIN_EXT_POINT, this);
+            // Registering a new extensible point
+            presenter.registerExtensibleWidget(HELLOWORLDPLUGIN_EXT_WIDGET, this);
         }
 
         public void attach(final String id, final Widget widget) {
-            if (id.equals(HELLOWORLDPLUGIN_EXT_POINT)) {
+            if (id.equals(HELLOWORLDPLUGIN_EXT_WIDGET)) {
                 hp.add(widget);
             }
         }
 
         public void detach(final String id, final Widget widget) {
-            if (id.equals(HELLOWORLDPLUGIN_EXT_POINT)) {
+            if (id.equals(HELLOWORLDPLUGIN_EXT_WIDGET)) {
                 hp.remove(widget);
             }
         }
 
         public void detachAll(final String id) {
-            if (id.equals(HELLOWORLDPLUGIN_EXT_POINT)) {
+            if (id.equals(HELLOWORLDPLUGIN_EXT_WIDGET)) {
                 hp.clear();
             }
         }

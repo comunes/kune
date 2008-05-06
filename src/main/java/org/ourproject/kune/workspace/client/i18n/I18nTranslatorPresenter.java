@@ -24,8 +24,8 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.DoTranslationActionParams;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
-import org.ourproject.kune.platf.client.extend.UIExtensionPair;
-import org.ourproject.kune.platf.client.extend.UIExtensionPoint;
+import org.ourproject.kune.platf.client.extend.ExtensibleWidgetChild;
+import org.ourproject.kune.platf.client.extend.ExtensibleWidgetId;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
@@ -59,8 +59,8 @@ public class I18nTranslatorPresenter implements I18nTranslatorComponent {
 
     public void doClose() {
         view.hide();
-        DefaultDispatcher.getInstance().fire(PlatformEvents.DETACH_FROM_EXT_POINT,
-                new UIExtensionPair(UIExtensionPoint.CONTENT_BOTTOM_ICONBAR, view));
+        DefaultDispatcher.getInstance().fire(PlatformEvents.DETACH_FROM_EXTENSIBLE_WIDGET,
+                new ExtensibleWidgetChild(ExtensibleWidgetId.CONTENT_BOTTOM_ICONBAR, view));
     }
 
     public void doTranslation(final String id, final String trKey, final String translation) {
@@ -77,8 +77,8 @@ public class I18nTranslatorPresenter implements I18nTranslatorComponent {
     }
 
     public void attachIconToBottomBar(final View view) {
-        DefaultDispatcher.getInstance().fire(PlatformEvents.ATTACH_TO_EXT_POINT,
-                new UIExtensionPair(UIExtensionPoint.CONTENT_BOTTOM_ICONBAR, view));
+        DefaultDispatcher.getInstance().fire(PlatformEvents.ATTACH_TO_EXTENSIBLE_WIDGET,
+                new ExtensibleWidgetChild(ExtensibleWidgetId.CONTENT_BOTTOM_ICONBAR, view));
     }
 
 }

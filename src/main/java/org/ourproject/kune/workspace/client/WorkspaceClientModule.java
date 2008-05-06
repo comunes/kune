@@ -28,11 +28,11 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.actions.AddGroupLiveSearchAction;
 import org.ourproject.kune.workspace.client.actions.AddUserLiveSearchAction;
-import org.ourproject.kune.workspace.client.actions.AttachToExtensionPointAction;
+import org.ourproject.kune.workspace.client.actions.AttachToExtensibleWidgetAction;
 import org.ourproject.kune.workspace.client.actions.ChangeGroupWsThemeAction;
-import org.ourproject.kune.workspace.client.actions.ClearExtensionPointAction;
+import org.ourproject.kune.workspace.client.actions.ClearExtensibleWidgetAction;
 import org.ourproject.kune.workspace.client.actions.CreateNewGroupAction;
-import org.ourproject.kune.workspace.client.actions.DetachFromExtensionPointAction;
+import org.ourproject.kune.workspace.client.actions.DetachFromExtensibleWidgetAction;
 import org.ourproject.kune.workspace.client.actions.DisableRateItAction;
 import org.ourproject.kune.workspace.client.actions.EnableRateItAction;
 import org.ourproject.kune.workspace.client.actions.InitAction;
@@ -85,9 +85,10 @@ public class WorkspaceClientModule implements ClientModule {
         register.addAction(WorkspaceEvents.USER_LOGGED_IN, new LoggedInAction(session, stateManager));
         register.addAction(WorkspaceEvents.USER_LOGGED_OUT, new LoggedOutAction(session, stateManager));
         register.addAction(WorkspaceEvents.ONLY_CHECK_USER_SESSION, new OnlyCheckUserSessionAction(session));
-        register.addAction(PlatformEvents.ATTACH_TO_EXT_POINT, new AttachToExtensionPointAction(workspace));
-        register.addAction(PlatformEvents.DETACH_FROM_EXT_POINT, new DetachFromExtensionPointAction(workspace));
-        register.addAction(PlatformEvents.CLEAR_EXT_POINT, new ClearExtensionPointAction(workspace));
+        register.addAction(PlatformEvents.ATTACH_TO_EXTENSIBLE_WIDGET, new AttachToExtensibleWidgetAction(workspace));
+        register.addAction(PlatformEvents.DETACH_FROM_EXTENSIBLE_WIDGET,
+                new DetachFromExtensibleWidgetAction(workspace));
+        register.addAction(PlatformEvents.CLEAR_EXTENSIBLE_WIDGET, new ClearExtensibleWidgetAction(workspace));
         register.addAction(WorkspaceEvents.REQ_JOIN_GROUP, new RequestJoinGroupAction(session, stateManager));
         register.addAction(WorkspaceEvents.ACCEPT_JOIN_GROUP, new AcceptJoinGroupAction(session, stateManager,
                 workspace));
