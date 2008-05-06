@@ -70,11 +70,14 @@ public class KuneUiUtils {
 
     public static String genQuickTipLabel(final String labelText, final String tipTitle, final String tipText,
             final AbstractImagePrototype icon) {
+        // FIXME: get this from emite
         String tipHtml = "<span style=\"vertical-align: middle;\" ext:qtip=\"" + tipText + "\"";
         if (tipTitle != null && tipTitle.length() > 0) {
             tipHtml += " ext:qtitle=\"" + tipTitle + "\"";
         }
-        tipHtml += ">" + labelText + "&nbsp;";
+        tipHtml += ">";
+        tipHtml += labelText;
+        tipHtml += "&nbsp;";
         Image iconImg = new Image();
         icon.applyTo(iconImg);
         setQuickTip(iconImg, tipText, tipTitle);

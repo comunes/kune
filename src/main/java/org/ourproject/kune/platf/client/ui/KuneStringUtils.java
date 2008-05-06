@@ -49,7 +49,7 @@ public class KuneStringUtils {
     public static String unescapeHtmlLight(final String textOrig) {
         String text = textOrig;
         text = text.replaceAll("&amp;", "&");
-        text = text.replaceAll("&quot;", "&quot;");
+        text = text.replaceAll("&quot;", "\"");
         text = text.replaceAll("&#039;", "\'");
         text = text.replaceAll("&lt;", "<");
         text = text.replaceAll("&gt;", ">");

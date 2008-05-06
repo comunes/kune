@@ -87,7 +87,7 @@ Example of .m2/settings.xml:
 Appendix B: Configuration of Openfire xmpp server
 --------------------------------------------------------------------------------
 - Install openfire in your system. 
-  NOTE: version openfire 3.4.5 don't work with this configuration, use a nightly build (Openfire 3.6.0 Alpha works partially) or a prior version (3.3.2 works fine).
+  NOTE: version openfire 3.5.1 work with this configuration (3.3.2 also works fine), (in 3.4.5 and 3.5.0 doesn't works http-bind).
   Remember: the openfire administration is in: http://localhost:9090/
   See emite (our xmpp software) Server Compatibility: http://code.google.com/p/emite/wiki/ServerCompatibility
 - Configure the 'Server Name' (during installation of openfire, or after editing 'Server Settings') with "localhost" initially (See kune.chat.roomHost in kune.properties if you want to use other values).
