@@ -24,6 +24,8 @@ import java.util.List;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 
+import com.allen_sauer.gwt.log.client.Log;
+
 public class LicenseChoosePresenter implements LicenseChoose, View {
 
     private LicenseChooseView view;
@@ -54,7 +56,7 @@ public class LicenseChoosePresenter implements LicenseChoose, View {
                         : "by-nc-nd";
             }
         } else {
-            licenseShortName = (licensesNonCCList.get(view.getSelectedNonCCLicenseIndex())).getShortName();
+            licenseShortName = licensesNonCCList.get(view.getSelectedNonCCLicenseIndex()).getShortName();
         }
         return getLicenseFromShortName(licenseShortName);
     }
@@ -62,10 +64,11 @@ public class LicenseChoosePresenter implements LicenseChoose, View {
     private LicenseDTO getLicenseFromShortName(final String shortName) {
         for (int i = 0; i < licenses.size(); i++) {
             LicenseDTO licenseDTO = licenses.get(i);
-            if (licenseDTO.getShortName() == shortName) {
+            if (licenseDTO.getShortName().equals(shortName)) {
                 return licenseDTO;
             }
         }
+        Log.error("Internal error: License not found");
         throw new IndexOutOfBoundsException("License not found");
     }
 

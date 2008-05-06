@@ -38,109 +38,108 @@ public class NewGroupPresenter implements NewGroup {
     private NewGroupView view;
 
     public NewGroupPresenter(final NewGroupListener listener) {
-	this.listener = listener;
+        this.listener = listener;
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void init(final NewGroupView view) {
-	this.view = view;
+        this.view = view;
     }
 
     public void onBack() {
-	view.setEnabledBackButton(false);
-	view.setEnabledFinishButton(false);
-	view.setEnabledNextButton(true);
-	view.showNewGroupInitialDataForm();
+        view.setEnabledBackButton(false);
+        view.setEnabledFinishButton(false);
+        view.setEnabledNextButton(true);
+        view.showNewGroupInitialDataForm();
     }
 
     public void onCancel() {
-	listener.onNewGroupCancel();
-	view.hide();
-	reset();
+        listener.onNewGroupCancel();
+        view.hide();
+        reset();
     }
 
     public void onChange() {
-	// This doesn't work perfect (don't use now):
-	// if (view.isFormValid()) {
-	// view.setEnabledNextButton(true);
-	// } else {
-	// view.setEnabledNextButton(false);
-	// }
+        // This doesn't work perfect (don't use now):
+        // if (view.isFormValid()) {
+        // view.setEnabledNextButton(true);
+        // } else {
+        // view.setEnabledNextButton(false);
+        // }
     }
 
     public void onClose() {
-	listener.onNewGroupClose();
-	reset();
+        listener.onNewGroupClose();
+        reset();
     }
 
     public void onFinish() {
-	view.maskProcessing();
-	final String shortName = view.getShortName();
-	final String longName = view.getLongName();
-	final String publicDesc = view.getPublicDesc();
-	final LicenseDTO license = view.getLicense();
-	final GroupDTO group = new GroupDTO(shortName, longName, publicDesc, getTypeOfGroup());
-	group.setDefaultLicense(license);
+        view.maskProcessing();
+        final String shortName = view.getShortName();
+        final String longName = view.getLongName();
+        final String publicDesc = view.getPublicDesc();
+        final LicenseDTO license = view.getLicense();
+        final GroupDTO group = new GroupDTO(shortName, longName, publicDesc, getTypeOfGroup());
+        group.setDefaultLicense(license);
 
-	final AsyncCallback<StateToken> callback = new AsyncCallback<StateToken>() {
-	    public void onFailure(final Throwable caught) {
-		try {
-		    throw caught;
-		} catch (final GroupNameInUseException e) {
-		    onBack();
-		    view.unMask();
-		    setMessage(Kune.I18N.t("This name in already in use, try with a different name."),
-			    SiteErrorType.error);
-		} catch (final Throwable e) {
-		    onBack(); // The messageP is in first page of wizard :-/
-		    view.unMask();
-		    setMessage(Kune.I18N.t("Error creating group"), SiteErrorType.error);
-		    GWT.log("Other kind of exception in group registration", null);
-		    throw new RuntimeException();
-		}
-	    }
+        final AsyncCallback<StateToken> callback = new AsyncCallback<StateToken>() {
+            public void onFailure(final Throwable caught) {
+                try {
+                    throw caught;
+                } catch (final GroupNameInUseException e) {
+                    onBack();
+                    view.unMask();
+                    setMessage(Kune.I18N.t("This name in already in use, try with a different name."),
+                            SiteErrorType.error);
+                } catch (final Throwable e) {
+                    onBack(); // The messageP is in first page of wizard :-/
+                    view.unMask();
+                    setMessage(Kune.I18N.t("Error creating group"), SiteErrorType.error);
+                    GWT.log("Other kind of exception in group registration", null);
+                    throw new RuntimeException();
+                }
+            }
 
-	    public void onSuccess(final StateToken token) {
-		listener.onNewGroupCreated(token);
-		view.hide();
-		reset();
-		view.unMask();
-	    }
-	};
-	GWT.log("New group 1", null);
-	DefaultDispatcher.getInstance().fire(WorkspaceEvents.CREATE_NEW_GROUP,
-		new ParamCallback<GroupDTO, StateToken>(group, callback));
+            public void onSuccess(final StateToken token) {
+                listener.onNewGroupCreated(token);
+                view.hide();
+                reset();
+                view.unMask();
+            }
+        };
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.CREATE_NEW_GROUP,
+                new ParamCallback<GroupDTO, StateToken>(group, callback));
     }
 
     public void onNext() {
-	if (view.isFormValid()) {
-	    view.setEnabledBackButton(true);
-	    view.setEnabledFinishButton(true);
-	    view.setEnabledNextButton(false);
-	    view.showLicenseForm();
-	}
+        if (view.isFormValid()) {
+            view.setEnabledBackButton(true);
+            view.setEnabledFinishButton(true);
+            view.setEnabledNextButton(false);
+            view.showLicenseForm();
+        }
     }
 
     public void setMessage(final String message, final SiteErrorType type) {
-	view.setMessage(message, type);
+        view.setMessage(message, type);
     }
 
     private String getTypeOfGroup() {
-	if (view.isProject()) {
-	    return GroupDTO.PROJECT;
-	} else if (view.isOrphanedProject()) {
-	    return GroupDTO.ORPHANED_PROJECT;
-	} else if (view.isOrganization()) {
-	    return GroupDTO.ORGANIZATION;
-	} else {
-	    return GroupDTO.COMMUNITY;
-	}
+        if (view.isProject()) {
+            return GroupDTO.PROJECT;
+        } else if (view.isOrphanedProject()) {
+            return GroupDTO.ORPHANED_PROJECT;
+        } else if (view.isOrganization()) {
+            return GroupDTO.ORGANIZATION;
+        } else {
+            return GroupDTO.COMMUNITY;
+        }
     }
 
     private void reset() {
-	view.clearData();
+        view.clearData();
     }
 }
