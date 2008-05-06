@@ -34,13 +34,17 @@ public class ExtensibleWidgetsManager {
     }
 
     public void attachToExtensible(final ExtensibleWidgetChild child) {
-        ExtensibleWidget extPoint = getExtensible(child.getParentId());
-        extPoint.attach(child);
+        ExtensibleWidget extWidget = getExtensible(child.getParentId());
+        if (extWidget != null) {
+            extWidget.attach(child);
+        }
     }
 
     public void detachFromExtensible(final ExtensibleWidgetChild child) {
-        ExtensibleWidget extPoint = getExtensible(child.getParentId());
-        extPoint.detach(child);
+        ExtensibleWidget extWidget = getExtensible(child.getParentId());
+        if (extWidget != null) {
+            extWidget.detach(child);
+        }
     }
 
     public void registerExtensibleWidgets(final HashMap<String, ExtensibleWidget> extWidgets) {
@@ -61,7 +65,8 @@ public class ExtensibleWidgetsManager {
      */
     public void detachAll(final String id) {
         ExtensibleWidget extWidget = getExtensible(id);
-        extWidget.detachAll(id);
+        if (extWidget != null) {
+            extWidget.detachAll(id);
+        }
     }
-
 }
