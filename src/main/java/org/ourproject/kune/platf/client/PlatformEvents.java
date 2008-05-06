@@ -20,6 +20,8 @@
 package org.ourproject.kune.platf.client;
 
 public interface PlatformEvents {
+    @Deprecated
+    public static final String ATTACH_TO_EXT_POINT = "ws.AttachToExtensibleWidget";
     public static final String ATTACH_TO_EXTENSIBLE_WIDGET = "ws.AttachToExtensibleWidget";
     public static final String DETACH_FROM_EXTENSIBLE_WIDGET = "ws.DetachToExtensibleWidget";
     public static final String CLEAR_EXTENSIBLE_WIDGET = "ws.ClearExtensionPoint";
