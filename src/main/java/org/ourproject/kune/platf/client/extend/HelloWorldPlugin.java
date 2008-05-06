@@ -85,7 +85,7 @@ public class HelloWorldPlugin extends Plugin {
         public HelloWorldPanel(final HelloWorldPresenter presenter) {
             hp = new HorizontalPanel();
             initWidget(hp);
-            hp.add(new Label("Hello "));
+            hp.add(new Label("Hello"));
 
             // Registering a new extensible point
             presenter.registerExtensibleWidget(HELLOWORLDPLUGIN_EXT_WIDGET, this);
@@ -96,12 +96,16 @@ public class HelloWorldPlugin extends Plugin {
         public void attach(final ExtensibleWidgetChild child) {
             if (child.getParentId().equals(HELLOWORLDPLUGIN_EXT_WIDGET)) {
                 hp.add((Widget) child.getView());
+            } else {
+                // Other extension points in this widget here
             }
         }
 
         public void detach(final ExtensibleWidgetChild child) {
             if (child.getParentId().equals(HELLOWORLDPLUGIN_EXT_WIDGET)) {
                 hp.remove((Widget) child.getView());
+            } else {
+                // Other extension points in this widget here
             }
         }
 
