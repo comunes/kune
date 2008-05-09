@@ -3,11 +3,6 @@
     <inherits name='com.google.gwt.user.User' />
     <inherits name="org.cafesip.gwtcomp.GWTComponents" />
 
-    <inherits name='org.ourproject.kune.platf.Kune-Platform' />
-    <inherits name='org.ourproject.kune.docs.Kune-Docs' />
-    <inherits name='org.ourproject.kune.chat.Kune-Chat' />
-    <inherits name='org.ourproject.kune.blogs.Kune-Blogs' />
-
     <!-- gxt -->
     <inherits name='com.extjs.gxt.ui.GXT' />
     <stylesheet src="css/ext-all.css" />
@@ -17,6 +12,11 @@
     <inherits name='com.gwtext.GwtExt' />
     <script src="js/ext/adapter/ext/ext-base.js" />
     <script src="js/ext/ext-all.js" />
+
+    <inherits name='org.ourproject.kune.platf.Kune-Platform' />
+    <inherits name='org.ourproject.kune.docs.Kune-Docs' />
+    <inherits name='org.ourproject.kune.chat.Kune-Chat' />
+    <inherits name='org.ourproject.kune.blogs.Kune-Blogs' />
 
     <inherits name="com.allen_sauer.gwt.log.gwt-log" />
     <!--

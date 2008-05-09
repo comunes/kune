@@ -4,7 +4,7 @@
   <groupId>org.ourproject.kune</groupId>
   <artifactId>org.ourproject.kune</artifactId>
   <packaging>jar</packaging>
-  <version>0.0.3</version>
+  <version>0.0.4</version>
   <description>kune free/open/libre collaboration platform</description>
   <name>Kune</name>
   <url>http://kune.ourproject.org</url>
@@ -436,7 +436,7 @@
                 <include>**/Plugin.**</include>
                 <include>**/PluginManager.**</include>
                 <include>**/dispatch/**</include>
-                <include>**/UIExtension*</include>
+                <include>**/Extensi*</include>
                 <include>**/PlatformEvents.**</include>
                 <include>**/BottomTrayIcon.**</include>
                 <include>**/BasicDialog.**</include>
@@ -449,6 +449,8 @@
                 <include>**/IconHyperlink*.**</include>
                 <include>**/LabelWrapper*.**</include>
                 <include>**/KuneUiUtils.**</include>
+                <include>**/RoundedBorderDecorator.**</include>
+                <include>**/HasColor.**</include>
                 <include>**/View.**</include>
                 <!--                <include>**/platf/**</include>
                   <include>**/AbstractPresenter**</include>

@@ -51,7 +51,7 @@ public class HelloWorldPlugin extends Plugin {
                 new ExtensibleWidgetChild(ExtensibleWidgetId.CONTENT_BOTTOM_ICONBAR, helloWorld.getView()));
     }
 
-    class HelloWorldPresenter implements View {
+    class HelloWorldPresenter {
         private HelloWorldView view;
 
         public HelloWorldPresenter() {
