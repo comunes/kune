@@ -48,7 +48,7 @@ public class ExtensibleWidgetsManager {
     }
 
     public void registerExtensibleWidgets(final HashMap<String, ExtensibleWidget> extWidgets) {
-        extWidgets.putAll(extWidgets);
+        this.extWidgets.putAll(extWidgets);
     }
 
     private ExtensibleWidget getExtensible(final String id) {

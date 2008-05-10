@@ -34,9 +34,8 @@ import org.ourproject.kune.platf.client.PlatformClientModule;
 import org.ourproject.kune.platf.client.dispatch.ActionEvent;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
-import org.ourproject.kune.platf.client.extend.HelloWorldPlugin;
-import org.ourproject.kune.platf.client.extend.PluginManager;
 import org.ourproject.kune.platf.client.extend.ExtensibleWidgetsManager;
+import org.ourproject.kune.platf.client.extend.PluginManager;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
@@ -101,7 +100,7 @@ public class ApplicationBuilder {
         subscribeActions(dispatcher, platform.getActions());
 
         final PluginManager pluginManager = new PluginManager(dispatcher, extensionPointManager, Kune.I18N);
-        pluginManager.install(new HelloWorldPlugin());
+        // pluginManager.install(new HelloWorldPlugin());
         pluginManager.install(new EmiteUIPlugin());
 
         Window.addWindowCloseListener(new WindowCloseListener() {
