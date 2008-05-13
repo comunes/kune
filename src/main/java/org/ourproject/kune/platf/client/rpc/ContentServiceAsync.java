@@ -23,6 +23,7 @@ package org.ourproject.kune.platf.client.rpc;
 import java.util.Date;
 import java.util.List;
 
+import org.ourproject.kune.platf.client.dto.CommentDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
@@ -34,6 +35,12 @@ public interface ContentServiceAsync {
 
     void addAuthor(String userHash, String groupShortName, String documentId, String authorShortName,
             AsyncCallback<?> asyncCallback);
+
+    void addComment(String userHash, String groupShortName, String documentId, Long parentCommentId,
+            String commentText, AsyncCallback<CommentDTO> asyncCallback);
+
+    void addComment(String userHash, String groupShortName, String documentId, String commentText,
+            AsyncCallback<CommentDTO> asyncCallback);
 
     void addContent(String user, String groupShortName, Long parentFolderId, String name,
             AsyncCallback<StateDTO> callback);
@@ -48,6 +55,9 @@ public interface ContentServiceAsync {
     void getContent(String user, String groupShortName, StateToken newState, AsyncCallback<StateDTO> callback);
 
     void getSummaryTags(String userHash, String groupShortName, AsyncCallback<List<TagResultDTO>> asyncCallback);
+
+    CommentDTO markCommentAsAbuse(String userHash, String groupShortName, String documentId, Long commentId,
+            AsyncCallback<CommentDTO> asyncCallback);
 
     void rateContent(String userHash, String groupShortName, String documentId, Double value,
             AsyncCallback<?> asyncCallback);
@@ -69,4 +79,7 @@ public interface ContentServiceAsync {
 
     void setTags(String userHash, String groupShortName, String documentId, String tags,
             AsyncCallback<List<TagResultDTO>> asyncCallback);
+
+    void voteComment(String userHash, String groupShortName, String documentId, Long commentId, boolean votePositive,
+            AsyncCallback<CommentDTO> asyncCallback);
 }

@@ -35,24 +35,34 @@ public class ToolConfiguration {
     @GeneratedValue
     private Long id;
 
+    private boolean enabled;
+
     @OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private Container root;
 
     public Container setRoot(final Container root) {
-	this.root = root;
-	return root;
+        this.root = root;
+        return root;
     }
 
     public Long getId() {
-	return id;
+        return id;
     }
 
     public void setId(final Long id) {
-	this.id = id;
+        this.id = id;
     }
 
     public Container getRoot() {
-	return root;
+        return root;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(final boolean enabled) {
+        this.enabled = enabled;
     }
 
 }

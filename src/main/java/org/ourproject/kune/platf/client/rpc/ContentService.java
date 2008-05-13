@@ -23,6 +23,7 @@ package org.ourproject.kune.platf.client.rpc;
 import java.util.Date;
 import java.util.List;
 
+import org.ourproject.kune.platf.client.dto.CommentDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
@@ -36,20 +37,26 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 public interface ContentService extends RemoteService {
 
     public static class App {
-	private static ContentServiceAsync instance;
+        private static ContentServiceAsync instance;
 
-	public static ContentServiceAsync getInstance() {
-	    if (instance == null) {
-		instance = (ContentServiceAsync) GWT.create(ContentService.class);
-		((ServiceDefTarget) instance).setServiceEntryPoint(GWT.getModuleBaseURL() + "ContentService");
+        public static ContentServiceAsync getInstance() {
+            if (instance == null) {
+                instance = (ContentServiceAsync) GWT.create(ContentService.class);
+                ((ServiceDefTarget) instance).setServiceEntryPoint(GWT.getModuleBaseURL() + "ContentService");
 
-	    }
-	    return instance;
-	}
+            }
+            return instance;
+        }
     }
 
     void addAuthor(String userHash, String groupShortName, String documentId, String authorShortName)
-	    throws DefaultException;
+            throws DefaultException;
+
+    CommentDTO addComment(String userHash, String groupShortName, String documentId, Long parentCommentId,
+            String commentText) throws DefaultException;
+
+    CommentDTO addComment(String userHash, String groupShortName, String documentId, String commentText)
+            throws DefaultException;
 
     StateDTO addContent(String user, String groupShortName, Long parentFolderId, String name) throws DefaultException;
 
@@ -63,21 +70,26 @@ public interface ContentService extends RemoteService {
 
     List<TagResultDTO> getSummaryTags(String userHash, String groupShortName) throws DefaultException;
 
+    CommentDTO markCommentAsAbuse(String userHash, String groupShortName, String documentId, Long commentId)
+            throws DefaultException;
+
     void rateContent(String userHash, String groupShortName, String documentId, Double value) throws DefaultException;
 
     void removeAuthor(String userHash, String groupShortName, String documentId, String authorShortName)
-	    throws DefaultException;
+            throws DefaultException;
 
     String rename(String userHash, String groupShortName, String token, String newName) throws DefaultException;
 
     Integer save(String user, String groupShortName, String documentId, String content) throws DefaultException;
 
     I18nLanguageDTO setLanguage(String userHash, String groupShortName, String documentId, String languageCode)
-	    throws DefaultException;
+            throws DefaultException;
 
     void setPublishedOn(String userHash, String groupShortName, String documentId, Date date) throws DefaultException;
 
     List<TagResultDTO> setTags(String userHash, String groupShortName, String documentId, String tags)
-	    throws DefaultException;
+            throws DefaultException;
 
+    CommentDTO voteComment(String userHash, String groupShortName, String documentId, Long commentId,
+            boolean votePositive) throws DefaultException;
 }

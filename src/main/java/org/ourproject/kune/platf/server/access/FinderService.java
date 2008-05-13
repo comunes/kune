@@ -22,6 +22,7 @@ package org.ourproject.kune.platf.server.access;
 
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.DefaultException;
+import org.ourproject.kune.platf.server.domain.Comment;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
@@ -35,6 +36,8 @@ public interface FinderService {
     Content getContent(StateToken token, Group defaultGroup) throws DefaultException;
 
     Container getFolder(Long folderId) throws DefaultException;
+
+    Comment getComment(Long commentId) throws DefaultException;
 
     Rate getRate(User user, Content content);
 

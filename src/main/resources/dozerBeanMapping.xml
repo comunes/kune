@@ -147,7 +147,7 @@
       <a>container.owner.shortName</a>
       <b>shortName</b>
     </field>
-        <field>
+    <field>
       <a get-method="getStateToken">link</a>
       <b>link</b>
     </field>
@@ -273,6 +273,39 @@
     <class-b>org.ourproject.kune.platf.server.domain.TagResult</class-b>
   </mapping>
 
+  <mapping>
+    <class-a>org.ourproject.kune.platf.server.domain.Comment</class-a>
+    <class-b>org.ourproject.kune.platf.client.dto.CommentDTO</class-b>
+    <field>
+      <a>author</a>
+      <b>author</b>
+      <a-hint>org.ourproject.kune.platf.server.domain.User</a-hint>
+      <b-hint>
+        org.ourproject.kune.platf.client.dto.UserSimpleDTO
+      </b-hint>
+    </field>
 
+    <field>
+      <a>childs</a>
+      <b>childs</b>
+      <a-hint>org.ourproject.kune.platf.server.domain.Comment</a-hint>
+      <b-hint>org.ourproject.kune.platf.client.dto.CommentDTO</b-hint>
+    </field>
+
+    <field type="one-way">
+      <a get-method="getPositiveVotersCount">positiveVotersCount</a>
+      <b>positiveVotersCount</b>
+    </field>
+
+    <field type="one-way">
+      <a get-method="getNegativeVotersCount">negativeVotersCount</a>
+      <b>negativeVotersCount</b>
+    </field>
+
+    <field type="one-way">
+      <a get-method="getAbuseInformersCount">abuseInformersCount</a>
+      <b>abuseInformersCount</b>
+    </field>
+  </mapping>
 
 </mappings>

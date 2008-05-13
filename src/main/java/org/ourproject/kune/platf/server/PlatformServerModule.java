@@ -41,6 +41,8 @@ import org.ourproject.kune.platf.server.auth.Authorizated;
 import org.ourproject.kune.platf.server.auth.AuthorizatedMethodInterceptor;
 import org.ourproject.kune.platf.server.auth.SessionService;
 import org.ourproject.kune.platf.server.auth.SessionServiceDefault;
+import org.ourproject.kune.platf.server.content.CommentManager;
+import org.ourproject.kune.platf.server.content.CommentManagerDefault;
 import org.ourproject.kune.platf.server.content.ContainerManager;
 import org.ourproject.kune.platf.server.content.ContainerManagerDefault;
 import org.ourproject.kune.platf.server.content.ContentManager;
@@ -108,25 +110,6 @@ public class PlatformServerModule extends AbstractExtendedModule {
                 outermostCall(new AuthorizatedMethodInterceptor()));
     }
 
-    private void bindServices() {
-        bind(UserInfoService.class).to(UserInfoServiceDefault.class);
-        bind(CreationService.class).to(CreationServiceDefault.class);
-        bind(AccessService.class).to(AccessServiceDefault.class);
-        bind(FinderService.class).to(FinderServiceDefault.class);
-        bind(StateService.class).to(StateServiceDefault.class);
-        bind(I18nTranslationService.class).to(I18nTranslationServiceDefault.class);
-        bind(SessionService.class).to(SessionServiceDefault.class);
-    }
-
-    private void bindRPC() {
-        bind(SiteService.class).to(SiteRPC.class);
-        bind(GroupService.class).to(GroupRPC.class);
-        bind(ContentService.class).to(ContentRPC.class);
-        bind(UserService.class).to(UserRPC.class);
-        bind(SocialNetworkService.class).to(SocialNetworkRPC.class);
-        bind(I18nService.class).to(I18nRPC.class);
-    }
-
     private void bindManagers() {
         bind(UserManager.class).to(UserManagerDefault.class);
         bind(GroupManager.class).to(GroupManagerDefault.class);
@@ -141,5 +124,25 @@ public class PlatformServerModule extends AbstractExtendedModule {
         bind(I18nLanguageManager.class).to(I18nLanguageManagerDefault.class);
         bind(I18nTranslationManager.class).to(I18nTranslationManagerDefault.class);
         bind(TagManager.class).to(TagManagerDefault.class);
+        bind(CommentManager.class).to(CommentManagerDefault.class);
+    }
+
+    private void bindRPC() {
+        bind(SiteService.class).to(SiteRPC.class);
+        bind(GroupService.class).to(GroupRPC.class);
+        bind(ContentService.class).to(ContentRPC.class);
+        bind(UserService.class).to(UserRPC.class);
+        bind(SocialNetworkService.class).to(SocialNetworkRPC.class);
+        bind(I18nService.class).to(I18nRPC.class);
+    }
+
+    private void bindServices() {
+        bind(UserInfoService.class).to(UserInfoServiceDefault.class);
+        bind(CreationService.class).to(CreationServiceDefault.class);
+        bind(AccessService.class).to(AccessServiceDefault.class);
+        bind(FinderService.class).to(FinderServiceDefault.class);
+        bind(StateService.class).to(StateServiceDefault.class);
+        bind(I18nTranslationService.class).to(I18nTranslationServiceDefault.class);
+        bind(SessionService.class).to(SessionServiceDefault.class);
     }
 }

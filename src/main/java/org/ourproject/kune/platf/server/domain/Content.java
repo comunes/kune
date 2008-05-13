@@ -22,8 +22,10 @@ package org.ourproject.kune.platf.server.domain;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -42,6 +44,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.Version;
 
+import org.hibernate.search.annotations.ContainedIn;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
@@ -106,14 +109,34 @@ public class Content implements HasStateToken {
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private List<User> authors;
 
+    @ContainedIn
+    @OneToMany(mappedBy = "content", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Comment> comments;
+
     public Content() {
         translations = new ArrayList<ContentTranslation>();
         authors = new ArrayList<User>();
         tags = new ArrayList<Tag>();
+        comments = new HashSet<Comment>();
         this.createdOn = System.currentTimeMillis();
         this.lastRevision = new Revision(this);
         accessLists = null;
         markForDeletion = false;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(final Set<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public void addComment(final Comment comment) {
+        // FIXME: something related with lazy initialization (workaround using
+        // size())
+        comments.size();
+        comments.add(comment);
     }
 
     public Long getId() {

@@ -18,24 +18,24 @@ import com.wideplay.warp.jpa.JpaUnit;
 public class IntegrationTestHelper {
 
     public static Injector createInjector() {
-	final Injector injector = Guice.createInjector(new PlatformServerModule(), new DocumentServerModule(),
-		new ChatServerModule(), new AbstractModule() {
-		    @Override
-		    protected void configure() {
-			bindScope(SessionScoped.class, Scopes.SINGLETON);
-			// test: use memory
-			// test_db: use mysql
-			bindConstant().annotatedWith(JpaUnit.class).to("test");
-			bindConstant().annotatedWith(PropertiesFileName.class).to("kune.properties");
-			bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
-		    }
-		});
-	return injector;
+        final Injector injector = Guice.createInjector(new PlatformServerModule(), new DocumentServerModule(),
+                new ChatServerModule(), new AbstractModule() {
+                    @Override
+                    protected void configure() {
+                        bindScope(SessionScoped.class, Scopes.SINGLETON);
+                        // test: use memory
+                        // test_db: use mysql
+                        bindConstant().annotatedWith(JpaUnit.class).to("test");
+                        bindConstant().annotatedWith(PropertiesFileName.class).to("kune.properties");
+                        bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
+                    }
+                });
+        return injector;
     }
 
     public IntegrationTestHelper(final Object test) {
-	final Injector injector = createInjector();
-	injector.getInstance(KunePersistenceService.class).start();
-	injector.injectMembers(test);
+        final Injector injector = createInjector();
+        injector.getInstance(KunePersistenceService.class).start();
+        injector.injectMembers(test);
     }
 }
