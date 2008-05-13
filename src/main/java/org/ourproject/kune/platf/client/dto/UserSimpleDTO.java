@@ -48,48 +48,83 @@ public class UserSimpleDTO implements IsSerializable {
         this.timezone = timezone;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(final Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public String getShortName() {
-        return shortName;
-    }
-
-    public void setShortName(final String shortName) {
-        this.shortName = shortName;
-    }
-
-    public I18nLanguageDTO getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(final I18nLanguageDTO language) {
-        this.language = language;
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        final UserSimpleDTO other = (UserSimpleDTO) obj;
+        if (id == null) {
+            if (other.id != null) {
+                return false;
+            }
+        } else if (!id.equals(other.id)) {
+            return false;
+        }
+        if (shortName == null) {
+            if (other.shortName != null) {
+                return false;
+            }
+        } else if (!shortName.equals(other.shortName)) {
+            return false;
+        }
+        return true;
     }
 
     public I18nCountryDTO getCountry() {
         return country;
     }
 
-    public void setCountry(final I18nCountryDTO country) {
-        this.country = country;
+    public Long getId() {
+        return id;
+    }
+
+    public I18nLanguageDTO getLanguage() {
+        return language;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getShortName() {
+        return shortName;
     }
 
     public TimeZoneDTO getTimezone() {
         return timezone;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (id == null ? 0 : id.hashCode());
+        result = prime * result + (shortName == null ? 0 : shortName.hashCode());
+        return result;
+    }
+
+    public void setCountry(final I18nCountryDTO country) {
+        this.country = country;
+    }
+
+    public void setId(final Long id) {
+        this.id = id;
+    }
+
+    public void setLanguage(final I18nLanguageDTO language) {
+        this.language = language;
+    }
+
+    public void setName(final String name) {
+        this.name = name;
+    }
+
+    public void setShortName(final String shortName) {
+        this.shortName = shortName;
     }
 
     public void setTimezone(final TimeZoneDTO timezone) {

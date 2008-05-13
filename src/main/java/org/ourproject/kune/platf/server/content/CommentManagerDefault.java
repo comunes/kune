@@ -2,6 +2,7 @@ package org.ourproject.kune.platf.server.content;
 
 import javax.persistence.EntityManager;
 
+import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.server.access.FinderService;
 import org.ourproject.kune.platf.server.domain.Comment;
@@ -38,20 +39,29 @@ public class CommentManagerDefault extends DefaultManager<Comment, Long> impleme
         return persist(comment);
     }
 
-    public Comment markAsAbuse(final User informer, final Long commentId) throws DefaultException {
+    public Comment markAsAbuse(final User informer, final Long contentId, final Long commentId) throws DefaultException {
         Comment comment = finder.getComment(commentId);
+        checkCommentContent(contentId, comment);
         comment.addAbuseInformer(informer);
         return persist(comment);
     }
 
-    public Comment vote(final User voter, final Long commentId, final boolean votePositive) throws DefaultException {
+    public Comment vote(final User voter, final Long contentId, final Long commentId, final boolean votePositive)
+            throws DefaultException {
         Comment comment = finder.getComment(commentId);
+        checkCommentContent(contentId, comment);
         if (votePositive) {
             comment.addPositiveVoter(voter);
             return persist(comment);
         } else {
             comment.addNegativeVoter(voter);
             return persist(comment);
+        }
+    }
+
+    private void checkCommentContent(final Long contentId, final Comment comment) throws ContentNotFoundException {
+        if (!comment.getContent().getId().equals(contentId)) {
+            throw new ContentNotFoundException();
         }
     }
 

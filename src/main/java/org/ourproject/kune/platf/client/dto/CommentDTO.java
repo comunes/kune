@@ -17,6 +17,53 @@ public class CommentDTO implements IsSerializable {
     private int abuseInformersCount;
     private String text;
 
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        final CommentDTO other = (CommentDTO) obj;
+        if (author == null) {
+            if (other.author != null) {
+                return false;
+            }
+        } else if (!author.equals(other.author)) {
+            return false;
+        }
+        if (id == null) {
+            if (other.id != null) {
+                return false;
+            }
+        } else if (!id.equals(other.id)) {
+            return false;
+        }
+        if (parent == null) {
+            if (other.parent != null) {
+                return false;
+            }
+        } else if (!parent.equals(other.parent)) {
+            return false;
+        }
+        if (publishedOn == null) {
+            if (other.publishedOn != null) {
+                return false;
+            }
+        } else if (!publishedOn.equals(other.publishedOn)) {
+            return false;
+        }
+        if (text == null) {
+            if (other.text != null) {
+                return false;
+            }
+        } else if (!text.equals(other.text)) {
+            return false;
+        }
+        return true;
+    }
+
     public int getAbuseInformersCount() {
         return abuseInformersCount;
     }
@@ -51,6 +98,18 @@ public class CommentDTO implements IsSerializable {
 
     public String getText() {
         return text;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (author == null ? 0 : author.hashCode());
+        result = prime * result + (id == null ? 0 : id.hashCode());
+        result = prime * result + (parent == null ? 0 : parent.hashCode());
+        result = prime * result + (publishedOn == null ? 0 : publishedOn.hashCode());
+        result = prime * result + (text == null ? 0 : text.hashCode());
+        return result;
     }
 
     public void setAbuseInformersCount(final int abuseInformersCount) {

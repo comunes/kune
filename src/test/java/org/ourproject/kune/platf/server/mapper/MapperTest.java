@@ -72,6 +72,14 @@ public class MapperTest {
         assertEquals(1, commentDTO.getNegativeVotersCount());
         assertEquals(1, commentDTO.getAbuseInformersCount());
         assertEquals(0, commentDTO.getPositiveVotersCount());
+        Comment childComment = new Comment();
+        childComment.setContent(d);
+        childComment.setParent(comment);
+        comment.getChilds().add(childComment);
+        commentDTO = mapper.map(comment, CommentDTO.class);
+        CommentDTO childCommentDTO = mapper.map(childComment, CommentDTO.class);
+        assertEquals(1, comment.getChilds().size());
+        assertEquals(commentDTO, childCommentDTO.getParent());
     }
 
     @Test

@@ -250,7 +250,8 @@ public class ContentRPC implements ContentService, RPC {
             final Long commentId) throws DefaultException {
         final UserSession userSession = getUserSession();
         final User informer = userSession.getUser();
-        Comment comment = commentManager.markAsAbuse(informer, commentId);
+        final Long contentId = parseId(documentId);
+        Comment comment = commentManager.markAsAbuse(informer, contentId, commentId);
         return mapper.map(comment, CommentDTO.class);
     }
 
@@ -364,7 +365,8 @@ public class ContentRPC implements ContentService, RPC {
             final Long commentId, final boolean votePositive) throws DefaultException {
         final UserSession userSession = getUserSession();
         final User voter = userSession.getUser();
-        Comment comment = commentManager.vote(voter, commentId, votePositive);
+        final Long contentId = parseId(documentId);
+        Comment comment = commentManager.vote(voter, contentId, commentId, votePositive);
         return mapper.map(comment, CommentDTO.class);
     }
 
