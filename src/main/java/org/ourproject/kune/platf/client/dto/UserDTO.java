@@ -19,6 +19,7 @@
  */
 package org.ourproject.kune.platf.client.dto;
 
+import com.calclab.emite.client.im.roster.RosterManager.SubscriptionMode;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class UserDTO implements IsSerializable {
@@ -30,13 +31,19 @@ public class UserDTO implements IsSerializable {
     private TimeZoneDTO timezone;
     private String password;
     private String email;
+    private String avatar;
+    private boolean publishRoster;
+    private SubscriptionMode subscriptionMode;
+    private String chatColor;
 
     public UserDTO() {
-        this(null, null, null, null, null, null, null);
+        this(null, null, null, null, null, null, null, null, true, null, null);
     }
 
     public UserDTO(final String name, final String shortName, final String password, final String email,
-            final I18nLanguageDTO language, final I18nCountryDTO country, final TimeZoneDTO timezone) {
+            final I18nLanguageDTO language, final I18nCountryDTO country, final TimeZoneDTO timezone,
+            final String avatar, final boolean publishRoster, final SubscriptionMode subscriptionMode,
+            final String chatColor) {
         this.name = name;
         this.shortName = shortName;
         this.password = password;
@@ -44,70 +51,106 @@ public class UserDTO implements IsSerializable {
         this.language = language;
         this.country = country;
         this.timezone = timezone;
+        this.avatar = avatar;
+        this.publishRoster = publishRoster;
+        this.subscriptionMode = subscriptionMode;
+        this.chatColor = chatColor;
     }
 
-    public Long getId() {
-        return id;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setId(final Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public String getShortName() {
-        return shortName;
-    }
-
-    public void setShortName(final String shortName) {
-        this.shortName = shortName;
-    }
-
-    public I18nLanguageDTO getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(final I18nLanguageDTO language) {
-        this.language = language;
+    public String getChatColor() {
+        return chatColor;
     }
 
     public I18nCountryDTO getCountry() {
         return country;
     }
 
-    public void setCountry(final I18nCountryDTO country) {
-        this.country = country;
+    public String getEmail() {
+        return email;
     }
 
-    public TimeZoneDTO getTimezone() {
-        return timezone;
+    public Long getId() {
+        return id;
     }
 
-    public void setTimezone(final TimeZoneDTO timezone) {
-        this.timezone = timezone;
+    public I18nLanguageDTO getLanguage() {
+        return language;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(final String password) {
-        this.password = password;
+    public String getShortName() {
+        return shortName;
     }
 
-    public String getEmail() {
-        return email;
+    public SubscriptionMode getSubscriptionMode() {
+        return subscriptionMode;
+    }
+
+    public TimeZoneDTO getTimezone() {
+        return timezone;
+    }
+
+    public boolean isPublishRoster() {
+        return publishRoster;
+    }
+
+    public void setAvatar(final String avatar) {
+        this.avatar = avatar;
+    }
+
+    public void setChatColor(final String chatColor) {
+        this.chatColor = chatColor;
+    }
+
+    public void setCountry(final I18nCountryDTO country) {
+        this.country = country;
     }
 
     public void setEmail(final String email) {
         this.email = email;
+    }
+
+    public void setId(final Long id) {
+        this.id = id;
+    }
+
+    public void setLanguage(final I18nLanguageDTO language) {
+        this.language = language;
+    }
+
+    public void setName(final String name) {
+        this.name = name;
+    }
+
+    public void setPassword(final String password) {
+        this.password = password;
+    }
+
+    public void setPublishRoster(final boolean publishRoster) {
+        this.publishRoster = publishRoster;
+    }
+
+    public void setShortName(final String shortName) {
+        this.shortName = shortName;
+    }
+
+    public void setSubscriptionMode(final SubscriptionMode subscriptionMode) {
+        this.subscriptionMode = subscriptionMode;
+    }
+
+    public void setTimezone(final TimeZoneDTO timezone) {
+        this.timezone = timezone;
     }
 
 }

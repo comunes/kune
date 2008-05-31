@@ -22,20 +22,52 @@ package org.ourproject.kune.platf.client.services;
 
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 
-public class Kune {
-    private static Kune instance;
-    public static final I18nUITranslationService I18N = I18nUITranslationService.getInstance();
-    public ColorTheme theme;
+import com.calclab.emite.client.modular.Container;
+import com.calclab.emite.client.modular.DelegatedContainer;
+import com.calclab.emite.client.modular.Module;
+import com.calclab.emite.client.modular.ModuleBuilder;
+import com.calclab.emiteuimodule.client.EmiteUIDialog;
+import com.calclab.emiteuimodule.client.EmiteUIModule;
 
-    private Kune() {
-        theme = new ColorTheme();
+public class Kune extends DelegatedContainer {
+
+    public static final ColorTheme theme = getInstance().getColorTheme();
+
+    public static final I18nUITranslationService I18N = getInstance().getI18N();
+
+    private static Kune instance;
+
+    public static Kune create() {
+        return create(new KuneModule(), new EmiteUIModule());
+    }
+
+    public static Kune create(final Module... modules) {
+        final ModuleBuilder container = new ModuleBuilder();
+        container.add(modules);
+        return container.getInstance(Kune.class);
     }
 
     public static Kune getInstance() {
         if (instance == null) {
-            instance = new Kune();
+            instance = create();
         }
         return instance;
+    }
+
+    protected Kune(final Container container) {
+        super(container);
+    }
+
+    public ColorTheme getColorTheme() {
+        return this.getInstance(ColorTheme.class);
+    }
+
+    public EmiteUIDialog getEmiteUIDialog() {
+        return this.getInstance(EmiteUIDialog.class);
+    }
+
+    public I18nUITranslationService getI18N() {
+        return this.getInstance(I18nUITranslationService.class);
     }
 
 }

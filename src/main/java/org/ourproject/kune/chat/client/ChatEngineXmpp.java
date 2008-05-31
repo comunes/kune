@@ -21,63 +21,75 @@ package org.ourproject.kune.chat.client;
 
 import java.util.Date;
 
-import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.services.Kune;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.emite.client.core.bosh.BoshOptions;
+import com.calclab.emite.client.core.signal.Listener;
 import com.calclab.emite.client.im.roster.RosterManager.SubscriptionMode;
 import com.calclab.emite.client.xmpp.stanzas.XmppURI;
-import com.calclab.emiteuiplugin.client.EmiteUIPlugin;
-import com.calclab.emiteuiplugin.client.UserChatOptions;
-import com.calclab.emiteuiplugin.client.dialog.OwnPresence;
-import com.calclab.emiteuiplugin.client.dialog.OwnPresence.OwnStatus;
-import com.calclab.emiteuiplugin.client.params.AvatarProvider;
-import com.calclab.emiteuiplugin.client.params.MultiChatCreationParam;
+import com.calclab.emiteuimodule.client.EmiteUIDialog;
+import com.calclab.emiteuimodule.client.UserChatOptions;
+import com.calclab.emiteuimodule.client.params.AvatarProvider;
+import com.calclab.emiteuimodule.client.params.MultiChatCreationParam;
+import com.calclab.emiteuimodule.client.status.OwnPresence.OwnStatus;
+import com.google.gwt.user.client.Window;
 
 class ChatEngineXmpp implements ChatEngine {
-    private final ChatState state;
+    private final ChatOptions chatOptions;
+    private final EmiteUIDialog emiteDialog;
 
-    public ChatEngineXmpp(final ChatState state) {
-        this.state = state;
+    public ChatEngineXmpp(final EmiteUIDialog emiteUIDialog, final ChatOptions chatOptions) {
+        this.emiteDialog = emiteUIDialog;
+        this.chatOptions = chatOptions;
     }
 
-    public ChatState getState() {
-        return state;
+    public ChatOptions getChatOptions() {
+        return chatOptions;
     }
 
     public void joinRoom(final String roomName, final String userAlias) {
-        // FIXME muc nick support
-        DefaultDispatcher.getInstance().fire(
-                EmiteUIPlugin.ROOMOPEN,
-                XmppURI.uri(roomName + "@" + state.roomHost + "/" + XmppURI.jid(state.userOptions.getUserJid()))
-                        .getNode());
+        XmppURI roomURI = XmppURI.uri(roomName + "@" + chatOptions.roomHost + "/"
+                + XmppURI.jid(chatOptions.userOptions.getUserJid()));
+        emiteDialog.joinRoom(roomURI);
     }
 
     public void login(final String chatName, final String chatPassword) {
         final String resource = "emiteui-" + new Date().getTime() + "-kune"; // +
         // getGwtMetaProperty(GWT_PROPERTY_RELEASE);
-        final UserChatOptions userChatOptions = new UserChatOptions(chatName + "@" + state.domain, chatPassword,
-                resource, "blue", SubscriptionMode.autoAcceptAll);
+        // FIXME, get this from user profile
+        final UserChatOptions userChatOptions = new UserChatOptions(chatName + "@" + chatOptions.domain, chatPassword,
+                resource, "blue", SubscriptionMode.autoAcceptAll, true);
         // FIXME: Avatar provider
         final AvatarProvider avatarProvider = new AvatarProvider() {
             public String getAvatarURL(XmppURI userURI) {
                 return "images/person-def.gif";
             }
         };
-        state.userOptions = userChatOptions;
-        DefaultDispatcher.getInstance().fire(
-                EmiteUIPlugin.CREATE_CHAT_DIALOG,
-                new MultiChatCreationParam(Kune.I18N.t("Chat"), new BoshOptions(state.httpBase), state.roomHost,
-                        Kune.I18N, avatarProvider, state.userOptions));
+
+        final String initialWindowTitle = Window.getTitle();
+        emiteDialog.onConversationAttended(new Listener<String>() {
+            public void onEvent(final String parameter) {
+                Window.setTitle(initialWindowTitle);
+            }
+        });
+        emiteDialog.onConversationUnattended(new Listener<String>() {
+            public void onEvent(final String chatTitle) {
+                Window.setTitle("(* " + chatTitle + ") " + initialWindowTitle);
+            }
+        });
+        chatOptions.userOptions = userChatOptions;
+
+        emiteDialog.getChatDialog(new MultiChatCreationParam(Kune.I18N.t("Chat"), chatOptions.roomHost, avatarProvider,
+                chatOptions.userOptions));
         Log.debug("LOGIN CHAT: " + chatName + "[" + chatPassword + "]");
-        DefaultDispatcher.getInstance().fire(EmiteUIPlugin.SHOW_CHAT_DIALOG, null);
-        DefaultDispatcher.getInstance().fire(EmiteUIPlugin.HIDE_CHAT_DIALOG, null);
-        DefaultDispatcher.getInstance().fire(EmiteUIPlugin.SET_OWN_PRESENCE, new OwnPresence(OwnStatus.online));
+        emiteDialog.show(OwnStatus.online);
+        emiteDialog.hide();
     }
 
     public void logout() {
-        DefaultDispatcher.getInstance().fire(EmiteUIPlugin.SET_OWN_PRESENCE, new OwnPresence(OwnStatus.offline));
-        DefaultDispatcher.getInstance().fire(EmiteUIPlugin.CLOSE_ALLCHATS, new Boolean(false));
+        if (emiteDialog.isStarted()) {
+            emiteDialog.closeAllChats(false);
+            emiteDialog.setOwnPresence(OwnStatus.offline);
+        }
     }
 }

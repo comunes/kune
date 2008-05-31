@@ -19,29 +19,11 @@
     <inherits name='org.ourproject.kune.blogs.Kune-Blogs' />
 
     <inherits name="com.allen_sauer.gwt.log.gwt-log" />
-    <!--
-        The default log level is `OFF`. In development you'll usually want
-        to switch to `DEBUG` level logging.
-    -->
+
     <extend-property name="log_level" values="DEBUG" />
     <set-property name="log_level" value="DEBUG" />
     <set-property name="log_DivLogger" value="DISABLED" />
     <set-property name="log_FirebugLogger" value="ENABLED" />
-    <!--
-        <set-property name="log_RemoteLogger" value="ENABLED" />
-    -->
-
-    <!--
-        Alternatively, you may want to generate two or more combinations,
-        at the cost of increased compile time.
-
-        However, please note that the runtime default will still be `OFF`.
-
-        To compile both an `OFF` (production) and a `DEBUG` (development)
-        version of your application:
-
-        <extend-property name="log_level" values="DEBUG,OFF" />
-    -->
 
     <!--
         <extend-property name="locale" values="es" />

@@ -23,16 +23,20 @@ package org.ourproject.kune.chat.client;
 import org.ourproject.kune.chat.client.cnt.ChatContent;
 import org.ourproject.kune.chat.client.ctx.ChatContext;
 
+import com.calclab.emiteuimodule.client.EmiteUIDialog;
+
 class ChatToolComponents {
     private ChatContent content;
     private ChatContext context;
+    private final EmiteUIDialog emiteUIDialog;
 
-    public ChatToolComponents() {
+    public ChatToolComponents(final EmiteUIDialog emiteUIDialog) {
+        this.emiteUIDialog = emiteUIDialog;
     }
 
     public ChatContent getContent() {
         if (content == null) {
-            content = ChatFactory.createChatContent();
+            content = ChatFactory.createChatContent(emiteUIDialog);
         }
         return content;
     }

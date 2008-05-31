@@ -56,7 +56,7 @@ public interface ContentServiceAsync {
 
     void getSummaryTags(String userHash, String groupShortName, AsyncCallback<List<TagResultDTO>> asyncCallback);
 
-    CommentDTO markCommentAsAbuse(String userHash, String groupShortName, String documentId, Long commentId,
+    void markCommentAsAbuse(String userHash, String groupShortName, String documentId, Long commentId,
             AsyncCallback<CommentDTO> asyncCallback);
 
     void rateContent(String userHash, String groupShortName, String documentId, Double value,

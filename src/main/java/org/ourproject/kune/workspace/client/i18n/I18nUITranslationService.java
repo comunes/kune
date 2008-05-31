@@ -36,13 +36,26 @@ import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class I18nUITranslationService extends I18nTranslationService {
-    // Also in I18nTranslation
-    private static final String UNTRANSLATED_VALUE = null;
-
-    private static I18nUITranslationService instance;
     private HashMap<String, String> lexicon;
     private String currentLanguage;
+
     private I18nChangeListenerCollection i18nChangeListeners;
+
+    /*
+     * If a UI element need to be fired when (for instance) the language changes
+     * use this. Useful if you widget have to take in account text language
+     * direction, for instance.
+     */
+    public void addI18nChangeListener(final I18nChangeListener listener) {
+        if (i18nChangeListeners == null) {
+            i18nChangeListeners = new I18nChangeListenerCollection();
+        }
+        i18nChangeListeners.add(listener);
+    }
+
+    public String getCurrentLanguage() {
+        return currentLanguage;
+    }
 
     public void getInitialLanguage(final AsyncCallback<I18nLanguageDTO> callback) {
         Location loc = WindowUtils.getLocation();
@@ -57,16 +70,14 @@ public class I18nUITranslationService extends I18nTranslationService {
         server.getLexicon(currentLanguage, callback);
     }
 
-    public static I18nUITranslationService getInstance() {
-        if (instance == null) {
-            instance = new I18nUITranslationService();
-        }
-        return instance;
+    public HashMap<String, String> getLexicon() {
+        return lexicon;
     }
 
-    public void setLexicon(final HashMap<String, String> lexicon) {
-        this.lexicon = lexicon;
-        fireI18nLanguageChange();
+    public void removeI18nChangeListener(final I18nChangeListener listener) {
+        if (i18nChangeListeners != null) {
+            i18nChangeListeners.remove(listener);
+        }
     }
 
     public void setCurrentLanguage(final String newLanguage) {
@@ -78,8 +89,14 @@ public class I18nUITranslationService extends I18nTranslationService {
         }
     }
 
-    public HashMap<String, String> getLexicon() {
-        return lexicon;
+    public void setLexicon(final HashMap<String, String> lexicon) {
+        this.lexicon = lexicon;
+        fireI18nLanguageChange();
+    }
+
+    public void setTranslationAfterSave(final String text, final String translation) {
+        lexicon.put(text, translation);
+        fireI18nLanguageChange();
     }
 
     /**
@@ -110,39 +127,6 @@ public class I18nUITranslationService extends I18nTranslationService {
             lexicon.put(encodeText, UNTRANSLATED_VALUE);
         }
         return decodeHtml(translation);
-    }
-
-    public void setTranslationAfterSave(final String text, final String translation) {
-        lexicon.put(text, translation);
-        fireI18nLanguageChange();
-    }
-
-    /*
-     * If a UI element need to be fired when (for instance) the language changes
-     * use this. Useful if you widget have to take in account text language
-     * direction, for instance.
-     */
-    public void addI18nChangeListener(final I18nChangeListener listener) {
-        if (i18nChangeListeners == null) {
-            i18nChangeListeners = new I18nChangeListenerCollection();
-        }
-        i18nChangeListeners.add(listener);
-    }
-
-    public void removeI18nChangeListener(final I18nChangeListener listener) {
-        if (i18nChangeListeners != null) {
-            i18nChangeListeners.remove(listener);
-        }
-    }
-
-    public String getCurrentLanguage() {
-        return currentLanguage;
-    }
-
-    private void fireI18nLanguageChange() {
-        if (i18nChangeListeners != null) {
-            i18nChangeListeners.fireI18nLanguageChange();
-        }
     }
 
     /**
@@ -189,5 +173,11 @@ public class I18nUITranslationService extends I18nTranslationService {
        //script.src = "js/ext/locale/ext-lang-"+newLocale+".js";
        //head.appendChild(script);
        }-*/;
+
+    private void fireI18nLanguageChange() {
+        if (i18nChangeListeners != null) {
+            i18nChangeListeners.fireI18nLanguageChange();
+        }
+    }
 
 }

@@ -39,11 +39,13 @@ import org.ourproject.kune.workspace.client.WorkspaceFactory;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckPanel;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 
+import com.calclab.emiteuimodule.client.EmiteUIDialog;
+
 public class ChatFactory {
 
-    public static ChatContent createChatContent() {
+    public static ChatContent createChatContent(final EmiteUIDialog emiteUIDialog) {
         WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
-        ChatContentPresenter presenter = new ChatContentPresenter(panel);
+        ChatContentPresenter presenter = new ChatContentPresenter(emiteUIDialog, panel);
         return presenter;
     }
 
@@ -53,9 +55,14 @@ public class ChatFactory {
         return presenter;
     }
 
-    public static RoomsAdmin createRoomsAdmin() {
-        ContextItems contextItems = WorkspaceFactory.createContextItems();
-        RoomsAdminPresenter presenter = new RoomsAdminPresenter(contextItems);
+    public static ChatInfo createChatInfo(final ChatRoomListener listener) {
+        ChatInfoPanel panel = new ChatInfoPanel(listener);
+        return panel;
+    }
+
+    public static ChatRoomControl createChatRoomControlViewer(final ChatRoomListener listener) {
+        ChatRoomControlPanel panel = new ChatRoomControlPanel(listener);
+        ChatRoomControlPresenter presenter = new ChatRoomControlPresenter(panel);
         return presenter;
     }
 
@@ -65,15 +72,10 @@ public class ChatFactory {
         return presenter;
     }
 
-    public static ChatRoomControl createChatRoomControlViewer(final ChatRoomListener listener) {
-        ChatRoomControlPanel panel = new ChatRoomControlPanel(listener);
-        ChatRoomControlPresenter presenter = new ChatRoomControlPresenter(panel);
+    public static RoomsAdmin createRoomsAdmin() {
+        ContextItems contextItems = WorkspaceFactory.createContextItems();
+        RoomsAdminPresenter presenter = new RoomsAdminPresenter(contextItems);
         return presenter;
-    }
-
-    public static ChatInfo createChatInfo(final ChatRoomListener listener) {
-        ChatInfoPanel panel = new ChatInfoPanel(listener);
-        return panel;
     }
 
 }

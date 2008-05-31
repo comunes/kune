@@ -20,11 +20,11 @@
 package org.ourproject.kune.chat.client;
 
 public interface ChatEngine {
-    void login(String chatName, String chatPassword);
-
-    ChatState getState();
+    ChatOptions getChatOptions();
 
     void joinRoom(String roomName, String userAlias);
+
+    void login(String chatName, String chatPassword);
 
     void logout();
 }

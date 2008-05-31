@@ -24,9 +24,9 @@ import java.util.Date;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
+import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
 import com.google.gwt.user.client.Cookies;
@@ -50,7 +50,7 @@ public class LoggedInAction implements Action<UserInfoDTO> {
         Site.sitebar.showLoggedUser(userInfoDTO);
         I18nLanguageDTO language = userInfoDTO.getLanguage();
         stateManager.reload();
-        I18nUITranslationService.getInstance().setCurrentLanguage(language.getCode());
+        Kune.I18N.setCurrentLanguage(language.getCode());
         session.setCurrentLanguage(language);
     }
 

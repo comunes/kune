@@ -34,17 +34,19 @@ import org.ourproject.kune.platf.client.ui.UnknowComponent;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
 
 import com.calclab.emite.client.xmpp.stanzas.XmppURI;
-import com.calclab.emiteuiplugin.client.EmiteUIPlugin;
+import com.calclab.emiteuimodule.client.EmiteUIDialog;
 
 public class ChatContentPresenter implements ChatContent, ChatRoomListener {
 
     private final WorkspaceDeckView view;
     private final ChatComponents components;
     private StateDTO state;
+    private final EmiteUIDialog emiteUIDialog;
 
-    public ChatContentPresenter(final WorkspaceDeckView view) {
-	this.view = view;
-	this.components = new ChatComponents(this);
+    public ChatContentPresenter(final EmiteUIDialog emiteUIDialog, final WorkspaceDeckView view) {
+        this.emiteUIDialog = emiteUIDialog;
+        this.view = view;
+        this.components = new ChatComponents(this);
     }
 
     public void attach() {
@@ -54,37 +56,36 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener {
     }
 
     public View getView() {
-	return view;
-    }
-
-    public void setState(final StateDTO state) {
-	this.state = state;
-	String typeId = state.getTypeId();
-	if (typeId.equals(ChatClientTool.TYPE_ROOT)) {
-	    ChatInfo info = components.getChatInfo();
-	    view.show(info.getView());
-	    DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXTENSIBLE_WIDGET, ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT);
-	} else if (typeId.equals(ChatClientTool.TYPE_ROOM)) {
-	    ChatRoom viewer = components.getChatRoom();
-	    view.show(viewer.getView());
-	    DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXTENSIBLE_WIDGET, ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT);
-	    DefaultDispatcher.getInstance().fire(
-		    PlatformEvents.ATTACH_TO_EXTENSIBLE_WIDGET,
-		    new ExtensibleWidgetChild(ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT, components.getChatRoomControl()
-			    .getView()));
-	} else {
-	    view.show(UnknowComponent.instance.getView());
-	    DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXTENSIBLE_WIDGET, ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT);
-	}
+        return view;
     }
 
     public void onEnterRoom() {
-	String roomName = state.getFolder().getName();
-	// FIXME Moderator?
-	// Room room = getRoom(roomName, "me" + new Date().getTime(),
-	// RoomUser.MODERADOR);
+        String roomName = state.getFolder().getName();
+        emiteUIDialog.joinRoom(XmppURI.uri(roomName));
+    }
 
-	DefaultDispatcher.getInstance().fire(EmiteUIPlugin.ROOMOPEN, XmppURI.uri(roomName));
+    public void setState(final StateDTO state) {
+        this.state = state;
+        String typeId = state.getTypeId();
+        if (typeId.equals(ChatClientTool.TYPE_ROOT)) {
+            ChatInfo info = components.getChatInfo();
+            view.show(info.getView());
+            DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXTENSIBLE_WIDGET,
+                    ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT);
+        } else if (typeId.equals(ChatClientTool.TYPE_ROOM)) {
+            ChatRoom viewer = components.getChatRoom();
+            view.show(viewer.getView());
+            DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXTENSIBLE_WIDGET,
+                    ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT);
+            DefaultDispatcher.getInstance().fire(
+                    PlatformEvents.ATTACH_TO_EXTENSIBLE_WIDGET,
+                    new ExtensibleWidgetChild(ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT, components.getChatRoomControl()
+                            .getView()));
+        } else {
+            view.show(UnknowComponent.instance.getView());
+            DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXTENSIBLE_WIDGET,
+                    ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT);
+        }
     }
 
 }

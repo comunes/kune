@@ -11,6 +11,7 @@ SHORT-TERM (URGENT):
  -     "     Desktop
  - LoginPanel issues
  - NGPanel issues
+ - use of http://google-web-toolkit-doc-1-5.googlecode.com/svn/javadoc/1.5/com/google/gwt/user/client/rpc/StatusCodeException.html
 
 --> vjrj
 <vjrj/>

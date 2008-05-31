@@ -35,7 +35,6 @@ import org.ourproject.kune.platf.client.dispatch.ActionEvent;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.extend.ExtensibleWidgetsManager;
-import org.ourproject.kune.platf.client.extend.PluginManager;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
@@ -50,7 +49,6 @@ import org.ourproject.kune.workspace.client.WorkspaceClientModule;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
-import com.calclab.emiteuiplugin.client.EmiteUIPlugin;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowCloseListener;
@@ -61,8 +59,10 @@ public class ApplicationBuilder {
     }
 
     public void build(final String userHash, final I18nLanguageDTO initialLang) {
+        final Kune kune = Kune.getInstance();
+
         final KunePlatform platform = new KunePlatform();
-        final ChatClientTool chatClientTool = new ChatClientTool();
+        final ChatClientTool chatClientTool = new ChatClientTool(kune);
         platform.addTool(new DocumentClientTool());
         platform.addTool(chatClientTool);
         // platform.addTool(new BlogClientTool());
@@ -99,9 +99,10 @@ public class ApplicationBuilder {
         application.init(dispatcher, stateManager);
         subscribeActions(dispatcher, platform.getActions());
 
-        final PluginManager pluginManager = new PluginManager(dispatcher, extensionPointManager, Kune.I18N);
+        // final PluginManager pluginManager = new PluginManager(dispatcher,
+        // extensionPointManager, Kune.I18N);
         // pluginManager.install(new HelloWorldPlugin());
-        pluginManager.install(new EmiteUIPlugin());
+        // pluginManager.install(new EmiteUIPlugin());
 
         Window.addWindowCloseListener(new WindowCloseListener() {
             public void onWindowClosed() {

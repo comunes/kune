@@ -24,7 +24,6 @@ import java.util.HashMap;
 import org.ourproject.kune.platf.client.app.ApplicationBuilder;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.services.Kune;
-import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.EntryPoint;
@@ -39,23 +38,11 @@ public class KuneEntryPoint implements EntryPoint {
     }
 
     public void onModuleLoad() {
-        /*
-         * Install an UncaughtExceptionHandler which will produce <code>FATAL</code>
-         * log messages
-         */
-
-        /*
-         * Currently we let firebug to catch the error:
-         * Log.setUncaughtExceptionHandler();
-         */
+        Log.setUncaughtExceptionHandler();
 
         // At the moment, in runtime:
         Log.setCurrentLogLevel(Log.LOG_LEVEL_DEBUG);
 
-        /*
-         * Use a deferred command so that the UncaughtExceptionHandler catches
-         * any exceptions in onModuleLoadCont()
-         */
         DeferredCommand.addCommand(new Command() {
             public void execute() {
                 onModuleLoadCont();
@@ -77,8 +64,8 @@ public class KuneEntryPoint implements EntryPoint {
                         Log.debug("Workspace adaptation to your language failed");
                     }
 
-                    public void onSuccess(final HashMap<String, String> result) {
-                        I18nUITranslationService.getInstance().setLexicon(result);
+                    public void onSuccess(final HashMap<String, String> lexicon) {
+                        Kune.I18N.setLexicon(lexicon);
                         new ApplicationBuilder().build(userHash, initialLang);
                     }
                 });

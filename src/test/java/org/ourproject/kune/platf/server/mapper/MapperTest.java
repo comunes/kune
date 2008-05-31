@@ -91,7 +91,7 @@ public class MapperTest {
         d.addRevision(revision);
 
         final ContentDTO dto = mapper.map(d, ContentDTO.class);
-        assertEquals(1l, dto.getId());
+        assertEquals(1, (long) dto.getId());
         assertEquals("title", dto.getTitle());
     }
 

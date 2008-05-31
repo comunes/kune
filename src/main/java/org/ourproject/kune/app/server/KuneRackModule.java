@@ -57,6 +57,10 @@ public class KuneRackModule implements RackModule {
 
     private final Module configModule;
 
+    public KuneRackModule() {
+        this("development", "kune.properties", null);
+    }
+
     public KuneRackModule(final String jpaUnit, final String propertiesFileName, final Scope sessionScope) {
         configModule = new AbstractModule() {
             public void configure() {
@@ -70,10 +74,7 @@ public class KuneRackModule implements RackModule {
         };
     }
 
-    public KuneRackModule() {
-        this("development", "kune.properties", null);
-    }
-
+    @SuppressWarnings("unchecked")
     public void configure(final RackBuilder builder) {
         installGuiceModules(builder);
 

@@ -42,6 +42,8 @@ import org.hibernate.validator.Length;
 import org.hibernate.validator.NotNull;
 import org.hibernate.validator.Pattern;
 
+import com.calclab.emite.client.im.roster.RosterManager;
+import com.calclab.emite.client.im.roster.RosterManager.SubscriptionMode;
 import com.google.inject.name.Named;
 import com.wideplay.warp.persist.dao.Finder;
 
@@ -49,6 +51,17 @@ import com.wideplay.warp.persist.dao.Finder;
 @Indexed
 @Table(name = "kusers")
 public class User implements HasId {
+
+    // see: http://docs.codehaus.org/display/PICO/Good+Citizen:
+    // Never expect or return null
+    public static final User UNKNOWN_USER = new User();
+
+    private static final String DEF_CHAT_COLOR = "green";
+
+    public static boolean isKnownUser(final User user) {
+        return user != UNKNOWN_USER;
+    }
+
     @Id
     @DocumentId
     @GeneratedValue
@@ -89,9 +102,16 @@ public class User implements HasId {
     @NotNull
     private TimeZone timezone;
 
-    // see: http://docs.codehaus.org/display/PICO/Good+Citizen:
-    // Never expect or return null
-    public static final User UNKNOWN_USER = new User();
+    private String avatar;
+
+    @NotNull
+    private boolean publishRoster;
+
+    @NotNull
+    private SubscriptionMode subscriptionMode;
+
+    @NotNull
+    private String chatColor;
 
     public User() {
         this(null, null, null, null, null, null, null);
@@ -107,11 +127,18 @@ public class User implements HasId {
         this.language = language;
         this.country = country;
         this.timezone = timezone;
+        this.publishRoster = true;
+        this.subscriptionMode = SubscriptionMode.manual;
+        this.chatColor = DEF_CHAT_COLOR;
     }
 
     @Finder(query = "from User")
     public List<User> getAll() {
         return null;
+    }
+
+    public String getAvatar() {
+        return avatar;
     }
 
     @Finder(query = "from User where email = :email")
@@ -126,24 +153,80 @@ public class User implements HasId {
         return null;
     }
 
-    public Long getId() {
-        return id;
+    public String getChatColor() {
+        return chatColor;
     }
 
-    public void setId(final Long id) {
-        this.id = id;
+    public I18nCountry getCountry() {
+        return country;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(final String email) {
-        this.email = email;
+    public Long getId() {
+        return id;
+    }
+
+    public I18nLanguage getLanguage() {
+        return language;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getPassword() {
         return password;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public RosterManager.SubscriptionMode getSubscriptionMode() {
+        return subscriptionMode;
+    }
+
+    public TimeZone getTimezone() {
+        return timezone;
+    }
+
+    public Group getUserGroup() {
+        return userGroup;
+    }
+
+    public boolean isPublishRoster() {
+        return publishRoster;
+    }
+
+    public void setAvatar(final String avatar) {
+        this.avatar = avatar;
+    }
+
+    public void setChatColor(final String chatColor) {
+        this.chatColor = chatColor;
+    }
+
+    public void setCountry(final I18nCountry country) {
+        this.country = country;
+    }
+
+    public void setEmail(final String email) {
+        this.email = email;
+    }
+
+    public void setId(final Long id) {
+        this.id = id;
+    }
+
+    public void setLanguage(final I18nLanguage language) {
+        this.language = language;
+    }
+
+    public void setName(final String name) {
+        this.name = name;
     }
 
     public void setPassword(final String password) {
@@ -152,56 +235,24 @@ public class User implements HasId {
         // Use UnixCrypt (jetty)
     }
 
-    public Group getUserGroup() {
-        return userGroup;
-    }
-
-    public void setUserGroup(final Group userGroup) {
-        this.userGroup = userGroup;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public String getShortName() {
-        return shortName;
+    public void setPublishRoster(final boolean publishRoster) {
+        this.publishRoster = publishRoster;
     }
 
     public void setShortName(final String shortName) {
         this.shortName = shortName;
     }
 
-    public static boolean isKnownUser(final User user) {
-        return user != UNKNOWN_USER;
-    }
-
-    public I18nLanguage getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(final I18nLanguage language) {
-        this.language = language;
-    }
-
-    public I18nCountry getCountry() {
-        return country;
-    }
-
-    public void setCountry(final I18nCountry country) {
-        this.country = country;
-    }
-
-    public TimeZone getTimezone() {
-        return timezone;
+    public void setSubscriptionMode(final RosterManager.SubscriptionMode subscriptionMode) {
+        this.subscriptionMode = subscriptionMode;
     }
 
     public void setTimezone(final TimeZone timezone) {
         this.timezone = timezone;
+    }
+
+    public void setUserGroup(final Group userGroup) {
+        this.userGroup = userGroup;
     }
 
 }
