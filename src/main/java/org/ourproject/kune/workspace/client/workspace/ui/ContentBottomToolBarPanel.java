@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.workspace.client.workspace.ui;
 
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.CustomPushButton;
 import org.ourproject.kune.platf.client.ui.rate.RateItPanel;
 import org.ourproject.kune.platf.client.ui.rate.RateItPresenter;
@@ -39,10 +40,10 @@ public class ContentBottomToolBarPanel extends HorizontalPanel implements Conten
     private final RateItPanel rateIt;
     private CustomPushButton btn;
 
-    public ContentBottomToolBarPanel(final ContentBottomToolBarPresenter presenter) {
-        rate = new RatePanel(null, null);
-        rateItPresenter = new RateItPresenter();
-        rateIt = new RateItPanel(rateItPresenter);
+    public ContentBottomToolBarPanel(final ContentBottomToolBarPresenter presenter, final I18nTranslationService i18n) {
+        rate = new RatePanel(null, null, i18n);
+        rateItPresenter = new RateItPresenter(i18n);
+        rateIt = new RateItPanel(rateItPresenter, i18n);
         rateItPresenter.init(rateIt);
         Label expand = new Label("");
         this.add(rateIt);
@@ -60,6 +61,16 @@ public class ContentBottomToolBarPanel extends HorizontalPanel implements Conten
         // TODO setEnabled false to RateIt
     }
 
+    public void addButton(final String caption, final ClickListener listener) {
+        btn = new CustomPushButton(caption, listener);
+        this.insert(btn, 0);
+        btn.addStyleName("kune-Button-Large-lrSpace");
+    }
+
+    public void setButtonVisible(final boolean isEnabled) {
+        btn.setVisible(isEnabled);
+    }
+
     public void setRate(final Double value, final Integer rateByUsers) {
         rate.setRate(value);
         rate.setByUsers(rateByUsers);
@@ -69,22 +80,12 @@ public class ContentBottomToolBarPanel extends HorizontalPanel implements Conten
         rateItPresenter.setRate(currentUserRate);
     }
 
-    public void setRateVisible(final boolean visible) {
-        rate.setVisible(visible);
-    }
-
     public void setRateItVisible(final boolean visible) {
         rateIt.setVisible(visible);
     }
 
-    public void addButton(final String caption, final ClickListener listener) {
-        btn = new CustomPushButton(caption, listener);
-        this.insert(btn, 0);
-        btn.addStyleName("kune-Button-Large-lrSpace");
-    }
-
-    public void setButtonVisible(final boolean isEnabled) {
-        btn.setVisible(isEnabled);
+    public void setRateVisible(final boolean visible) {
+        rate.setVisible(visible);
     }
 
 }

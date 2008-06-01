@@ -36,11 +36,13 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
     private final ChatToolComponents components;
     private ChatEngine chat;
     private final EmiteUIDialog emiteUIDialog;
+    private final I18nTranslationService i18n;
 
     public ChatClientTool(final I18nTranslationService i18n, final EmiteUIDialog emiteUIDialog) {
         super(i18n.t("chat rooms"));
+        this.i18n = i18n;
         this.emiteUIDialog = emiteUIDialog;
-        components = new ChatToolComponents(emiteUIDialog);
+        components = new ChatToolComponents(emiteUIDialog, i18n);
     }
 
     public ChatEngine getChat() {
@@ -60,7 +62,7 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
     }
 
     public void initEngine(final ChatOptions options) {
-        this.chat = new ChatEngineXmpp(emiteUIDialog, options);
+        this.chat = new ChatEngineXmpp(emiteUIDialog, options, i18n);
     }
 
     public void setContent(final StateDTO state) {

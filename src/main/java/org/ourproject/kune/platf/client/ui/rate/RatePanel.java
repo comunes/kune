@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.platf.client.ui.rate;
 
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
@@ -30,8 +30,10 @@ public class RatePanel extends Composite implements RateView {
     private Grid rateGrid;
     private Image[] starImg;
     private Label rateDesc;
+    private final I18nTranslationService i18n;
 
-    public RatePanel(final Double rate, final Integer byUsers) {
+    public RatePanel(final Double rate, final Integer byUsers, final I18nTranslationService i18n) {
+        this.i18n = i18n;
         initialize();
         layout();
         setProperties();
@@ -45,12 +47,12 @@ public class RatePanel extends Composite implements RateView {
 
     public void setByUsers(final Integer byUsers) {
         if (byUsers.intValue() == 0) {
-            rateDesc.setText(Kune.I18N.t("(Not rated)"));
+            rateDesc.setText(i18n.t("(Not rated)"));
         } else if (byUsers.intValue() == 1) {
             // i18n params pluralization
-            rateDesc.setText(Kune.I18N.t("([%d] user)", byUsers));
+            rateDesc.setText(i18n.t("([%d] user)", byUsers));
         } else {
-            rateDesc.setText(Kune.I18N.t("([%d] users)", byUsers));
+            rateDesc.setText(i18n.t("([%d] users)", byUsers));
         }
     }
 

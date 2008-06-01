@@ -20,7 +20,7 @@
 package org.ourproject.kune.workspace.client.socialnet.ui;
 
 import org.ourproject.kune.platf.client.AbstractPresenter;
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
 import org.ourproject.kune.workspace.client.socialnet.EntityLiveSearchView;
 import org.ourproject.kune.workspace.client.socialnet.GroupLiveSearchPresenter;
@@ -47,10 +47,22 @@ public class EntityLiveSearchPanel implements EntityLiveSearchView {
     private BasicDialog dialog;
     private final int searchType;
     private FormPanel searchForm;
+    private final I18nTranslationService i18n;
 
-    public EntityLiveSearchPanel(final AbstractPresenter initPresenter, final int searchType) {
+    public EntityLiveSearchPanel(final AbstractPresenter initPresenter, final int searchType,
+            final I18nTranslationService i18n) {
         this.presenter = initPresenter;
         this.searchType = searchType;
+        this.i18n = i18n;
+    }
+
+    public void center() {
+        dialog.center();
+    }
+
+    public void hide() {
+        dialog.hide();
+        searchForm.getForm().reset();
     }
 
     public void show() {
@@ -62,21 +74,12 @@ public class EntityLiveSearchPanel implements EntityLiveSearchView {
         // DOM.setStyleAttribute(dialog.getElement(), "zIndex", "10000");
     }
 
-    public void hide() {
-        dialog.hide();
-        searchForm.getForm().reset();
-    }
-
-    public void center() {
-        dialog.center();
-    }
-
     private void createGroupSearchDialog(final int searchType) {
         String title;
         if (searchType == EntityLiveSearchView.SEARCH_GROUPS) {
-            title = Kune.I18N.t("Search existing users and groups");
+            title = i18n.t("Search existing users and groups");
         } else {
-            title = Kune.I18N.t("Search existing users");
+            title = i18n.t("Search existing users");
         }
         dialog = new BasicDialog(title, true, false, 285, 55);
         dialog.setClosable(true);
@@ -114,10 +117,10 @@ public class EntityLiveSearchPanel implements EntityLiveSearchView {
                 "<div class=\"search-item\"><span class=\"kune-IconHyperlink\"><img alt=\"group logo\" src=\"images/group-def-icon.png\" style=\"height: 16px; width: 16px;\" />{shortName}:&nbsp;{longName}</span></div>");
         ComboBox cb = new ComboBox();
         cb.setStore(store);
-        cb.setEmptyText(Kune.I18N.t("Write here to search"));
+        cb.setEmptyText(i18n.t("Write here to search"));
         cb.setDisplayField("longName");
         cb.setTypeAhead(true);
-        cb.setLoadingText(Kune.I18N.t("Searching..."));
+        cb.setLoadingText(i18n.t("Searching..."));
         cb.setWidth(268);
         cb.setPageSize(PAGINATION_SIZE);
         cb.setTpl(resultTpl);
@@ -126,7 +129,7 @@ public class EntityLiveSearchPanel implements EntityLiveSearchView {
         cb.setSelectOnFocus(false);
         cb.setHideTrigger(true);
         cb.setHideLabel(true);
-        // setTitle(Kune.I18N.t("User or group"));
+        // setTitle(i18n.t("User or group"));
         cb.setItemSelector("div.search-item");
 
         cb.addListener(new ComboBoxListenerAdapter() {

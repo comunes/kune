@@ -24,7 +24,7 @@ import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
@@ -33,10 +33,12 @@ public class AddViewerAction implements Action<String> {
 
     private final Session session;
     private final StateManager stateManager;
+    private final I18nTranslationService i18n;
 
-    public AddViewerAction(final Session session, final StateManager stateManager) {
+    public AddViewerAction(final Session session, final StateManager stateManager, final I18nTranslationService i18n) {
         this.session = session;
         this.stateManager = stateManager;
+        this.i18n = i18n;
     }
 
     public void execute(final String groupShortName) {
@@ -50,7 +52,7 @@ public class AddViewerAction implements Action<String> {
                 groupShortName, new AsyncCallbackSimple<SocialNetworkResultDTO>() {
                     public void onSuccess(final SocialNetworkResultDTO result) {
                         Site.hideProgress();
-                        Site.info(Kune.I18N.t("Member can now view this group contents"));
+                        Site.info(i18n.t("Member can now view this group contents"));
                         stateManager.setSocialNetwork(result);
                     }
                 });

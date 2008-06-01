@@ -23,8 +23,8 @@ import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.DoTranslationActionParams;
 import org.ourproject.kune.platf.client.rpc.I18nService;
 import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -32,9 +32,11 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public class DoTranslationAction implements Action<DoTranslationActionParams> {
 
     private final Session session;
+    private final I18nUITranslationService i18n;
 
-    public DoTranslationAction(final Session session) {
+    public DoTranslationAction(final Session session, final I18nUITranslationService i18n) {
         this.session = session;
+        this.i18n = i18n;
     }
 
     public void execute(final DoTranslationActionParams params) {
@@ -47,12 +49,12 @@ public class DoTranslationAction implements Action<DoTranslationActionParams> {
         server.setTranslation(session.getUserHash(), params.getId(), params.getText(), new AsyncCallback<String>() {
             public void onFailure(final Throwable caught) {
                 Site.hideProgress();
-                Site.error(Kune.I18N.t("Server error saving translation"));
+                Site.error(i18n.t("Server error saving translation"));
             }
 
             public void onSuccess(final String result) {
                 Site.hideProgress();
-                Kune.I18N.setTranslationAfterSave(params.getTrKey(), result);
+                i18n.setTranslationAfterSave(params.getTrKey(), result);
             }
         });
     }

@@ -20,7 +20,7 @@
 package org.ourproject.kune.workspace.client.licensefoot.ui;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.workspace.client.licensefoot.LicensePresenter;
 import org.ourproject.kune.workspace.client.licensefoot.LicenseView;
 
@@ -35,8 +35,10 @@ public class LicensePanel extends HorizontalPanel implements LicenseView {
     private final Label copyright;
     private final Image image;
     private final Label license;
+    private final I18nTranslationService i18n;
 
-    public LicensePanel(final LicensePresenter presenter) {
+    public LicensePanel(final LicensePresenter presenter, final I18nTranslationService i18n) {
+        this.i18n = i18n;
         copyright = new Label();
         image = new Image();
         license = new Label();
@@ -59,16 +61,16 @@ public class LicensePanel extends HorizontalPanel implements LicenseView {
         license.setStyleName("kune-LicensePanel-licensetext");
     }
 
+    public void openWindow(final String url) {
+        Window.open(url, "_blank", "");
+    }
+
     public void showLicense(final String groupName, final LicenseDTO licenseDTO) {
-        copyright.setText(Kune.I18N.t("© [%s], under license: ", groupName));
+        copyright.setText(i18n.t("© [%s], under license: ", groupName));
         license.setText(licenseDTO.getLongName());
         copyright.setVisible(true);
         license.setVisible(true);
         image.setVisible(true);
         image.setUrl(licenseDTO.getImageUrl());
-    }
-
-    public void openWindow(final String url) {
-        Window.open(url, "_blank", "");
     }
 }

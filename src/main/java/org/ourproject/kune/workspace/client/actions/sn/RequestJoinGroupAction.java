@@ -24,7 +24,7 @@ import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
@@ -34,10 +34,13 @@ public class RequestJoinGroupAction implements Action {
 
     private final Session session;
     private final StateManager stateManager;
+    private final I18nTranslationService i18n;
 
-    public RequestJoinGroupAction(final Session session, final StateManager stateManager) {
+    public RequestJoinGroupAction(final Session session, final StateManager stateManager,
+            final I18nTranslationService i18n) {
         this.session = session;
         this.stateManager = stateManager;
+        this.i18n = i18n;
     }
 
     public void execute(final Object value) {
@@ -53,14 +56,14 @@ public class RequestJoinGroupAction implements Action {
                         Site.hideProgress();
                         final String resultType = (String) result;
                         if (resultType == SocialNetworkDTO.REQ_JOIN_ACEPTED) {
-                            Site.info(Kune.I18N.t("You are now member of this group"));
+                            Site.info(i18n.t("You are now member of this group"));
                             stateManager.reload();
                         }
                         if (resultType == SocialNetworkDTO.REQ_JOIN_DENIED) {
-                            Site.important(Kune.I18N.t("Sorry this is a closed group"));
+                            Site.important(i18n.t("Sorry this is a closed group"));
                         }
                         if (resultType == SocialNetworkDTO.REQ_JOIN_WAITING_MODERATION) {
-                            Site.info(Kune.I18N.t("Requested. Waiting for admins decision"));
+                            Site.info(i18n.t("Requested. Waiting for admins decision"));
                         }
                     }
                 });

@@ -47,11 +47,21 @@ import org.ourproject.kune.docs.client.ctx.admin.AdminContextView;
 import org.ourproject.kune.docs.client.ctx.admin.ui.AdminContextPanel;
 import org.ourproject.kune.docs.client.ctx.folder.FolderContext;
 import org.ourproject.kune.docs.client.ctx.folder.FolderContextPresenter;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.workspace.client.WorkspaceFactory;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckPanel;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 
 public class DocumentFactory {
+
+    private static I18nTranslationService i18n;
+
+    public static AdminContext createAdminContext() {
+        AdminContextPresenter presenter = new AdminContextPresenter();
+        AdminContextView view = new AdminContextPanel(presenter, i18n);
+        presenter.init(view);
+        return presenter;
+    }
 
     public static DocumentContent createDocumentContent(final DocumentContentListener listener) {
         WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
@@ -72,20 +82,14 @@ public class DocumentFactory {
     }
 
     public static DocumentReaderControl createDocumentReaderControl(final DocumentReaderListener listener) {
-        DocumentReaderControlView view = new DocumentReaderControlPanel(listener);
+        DocumentReaderControlView view = new DocumentReaderControlPanel(listener, i18n);
         DocumentReaderControlPresenter presenter = new DocumentReaderControlPresenter(view);
         return presenter;
     }
 
     public static FolderContext createFolderContext() {
         ContextItems contextItems = WorkspaceFactory.createContextItems();
-        FolderContextPresenter presenter = new FolderContextPresenter(contextItems);
-        return presenter;
-    }
-
-    public static FolderViewer createFolderViewer() {
-        FolderViewerView view = new FolderViewerPanel();
-        FolderViewerPresenter presenter = new FolderViewerPresenter(view);
+        FolderContextPresenter presenter = new FolderContextPresenter(contextItems, i18n);
         return presenter;
     }
 
@@ -95,11 +99,14 @@ public class DocumentFactory {
         return presenter;
     }
 
-    public static AdminContext createAdminContext() {
-        AdminContextPresenter presenter = new AdminContextPresenter();
-        AdminContextView view = new AdminContextPanel(presenter);
-        presenter.init(view);
+    public static FolderViewer createFolderViewer() {
+        FolderViewerView view = new FolderViewerPanel();
+        FolderViewerPresenter presenter = new FolderViewerPresenter(view);
         return presenter;
+    }
+
+    public DocumentFactory(final I18nTranslationService i18n) {
+        DocumentFactory.i18n = i18n;
     }
 
 }

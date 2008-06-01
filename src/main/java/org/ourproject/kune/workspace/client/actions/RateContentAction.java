@@ -24,7 +24,7 @@ import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
@@ -33,10 +33,12 @@ public class RateContentAction implements Action<Double> {
 
     private final StateManager stateManager;
     private final Session session;
+    private final I18nTranslationService i18n;
 
-    public RateContentAction(final Session session, final StateManager stateManager) {
+    public RateContentAction(final Session session, final StateManager stateManager, final I18nTranslationService i18n) {
         this.session = session;
         this.stateManager = stateManager;
+        this.i18n = i18n;
     }
 
     public void execute(final Double value) {
@@ -51,7 +53,7 @@ public class RateContentAction implements Action<Double> {
                 value, new AsyncCallbackSimple<Object>() {
                     public void onSuccess(final Object result) {
                         Site.hideProgress();
-                        Site.info(Kune.I18N.t("Content rated"));
+                        Site.info(i18n.t("Content rated"));
                         stateManager.reload();
                     }
                 });

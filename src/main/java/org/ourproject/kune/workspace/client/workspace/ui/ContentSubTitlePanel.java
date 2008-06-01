@@ -20,7 +20,7 @@
 
 package org.ourproject.kune.workspace.client.workspace.ui;
 
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.workspace.client.workspace.ContentSubTitlePresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentSubTitleView;
 
@@ -33,7 +33,7 @@ public class ContentSubTitlePanel extends HorizontalPanel implements ContentSubT
     private final Label subTitleLeftLabel;
     private final Label subTitleRightLabel;
 
-    public ContentSubTitlePanel(final ContentSubTitlePresenter presenter) {
+    public ContentSubTitlePanel(final ContentSubTitlePresenter presenter, final I18nTranslationService i18n) {
 
         subTitleLeftLabel = new Label();
         HorizontalPanel rigthHP = new HorizontalPanel();
@@ -44,7 +44,7 @@ public class ContentSubTitlePanel extends HorizontalPanel implements ContentSubT
         rigthHP.add(subTitleRightLabel);
 
         setWidth("100%");
-        subTitleRightLabel.setText(Kune.I18N.t("Language:"));
+        subTitleRightLabel.setText(i18n.t("Language:"));
         subTitleLeftLabel.addStyleName("kune-Margin-Large-l");
         subTitleLeftLabel.addStyleName("kune-ft15px");
         subTitleLeftLabel.addStyleName("kune-ContentSubTitleBar-l");
@@ -54,6 +54,12 @@ public class ContentSubTitlePanel extends HorizontalPanel implements ContentSubT
         setCellVerticalAlignment(rigthHP, VerticalPanel.ALIGN_MIDDLE);
         rigthHP.setCellVerticalAlignment(subTitleLeftLabel, VerticalPanel.ALIGN_MIDDLE);
         rigthHP.setCellVerticalAlignment(subTitleRightLabel, VerticalPanel.ALIGN_MIDDLE);
+    }
+
+    public void setColors(final String background, final String textColor) {
+        DOM.setStyleAttribute(this.getElement(), "backgroundColor", background);
+        DOM.setStyleAttribute(subTitleLeftLabel.getElement(), "color", textColor);
+        DOM.setStyleAttribute(subTitleRightLabel.getElement(), "color", textColor);
     }
 
     public void setContentSubTitleLeft(final String subTitle) {
@@ -71,12 +77,6 @@ public class ContentSubTitlePanel extends HorizontalPanel implements ContentSubT
 
     public void setContentSubTitleRightVisible(final boolean visible) {
         subTitleRightLabel.setVisible(visible);
-    }
-
-    public void setColors(final String background, final String textColor) {
-        DOM.setStyleAttribute(this.getElement(), "backgroundColor", background);
-        DOM.setStyleAttribute(subTitleLeftLabel.getElement(), "color", textColor);
-        DOM.setStyleAttribute(subTitleRightLabel.getElement(), "color", textColor);
     }
 
 }

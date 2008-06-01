@@ -22,8 +22,8 @@ package org.ourproject.kune.workspace.client.licensechoose;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.HorizontalLine;
 import org.ourproject.kune.platf.client.ui.IconLabel;
 import org.ourproject.kune.platf.client.ui.TitledPanel;
@@ -55,45 +55,48 @@ public class LicenseChoosePanel extends Composite implements LicenseChooseView {
     private final IconLabel nonCopyleft;
     private final RadioButton noModifRB;
     private final RadioButton nonCommercialRB;
+    private final I18nTranslationService i18n;
 
-    public LicenseChoosePanel(final List<LicenseDTO> nonCCLicenses, final LicenseChoosePresenter presenter) {
+    public LicenseChoosePanel(final List<LicenseDTO> nonCCLicenses, final LicenseChoosePresenter presenter,
+            final I18nTranslationService i18n) {
+        this.i18n = i18n;
         Images img = Images.App.getInstance();
 
         VerticalPanel generalVP = new VerticalPanel();
         initWidget(generalVP);
 
         VerticalPanel licenseTypesVP = new VerticalPanel();
-        ccRB = new RadioButton("ccOrNot", Kune.I18N.t("Creative Commons"));
-        RadioButton notCcRB = new RadioButton("ccOrNot", Kune.I18N.t("Others licenses"));
+        ccRB = new RadioButton("ccOrNot", i18n.t("Creative Commons"));
+        RadioButton notCcRB = new RadioButton("ccOrNot", i18n.t("Others licenses"));
         options = new DeckPanel();
         ccIntro = new Label(
-                Kune.I18N
+                i18n
                         .t("With a Creative Commons license, you keep your copyright but allow people to copy and distribute your work provided they give you credit — and only on the conditions you specify here. What do you want to do?"));
 
         otherLicenses = new ListBox();
         VerticalPanel ccOptionsVP = new VerticalPanel();
         VerticalPanel nonCcOptionsVP = new VerticalPanel();
 
-        Label comercialLabel = new Label(Kune.I18N.t("Allow commercial uses of your work?"));
-        commercialRB = new RadioButton("comercial", Kune.I18N.t("Yes"));
-        nonCommercialRB = new RadioButton("comercial", Kune.I18N.t("No"));
-        Label allowModifLabel = new Label(Kune.I18N.t("Allow modifications of your work?"));
-        allowModifRB = new RadioButton("allowModif", Kune.I18N.t("Yes"));
-        allowModifShareAlikeRB = new RadioButton("allowModif", Kune.I18N.t("Yes, as long as others share alike"));
-        noModifRB = new RadioButton("allowModif", Kune.I18N.t("No"));
+        Label comercialLabel = new Label(i18n.t("Allow commercial uses of your work?"));
+        commercialRB = new RadioButton("comercial", i18n.t("Yes"));
+        nonCommercialRB = new RadioButton("comercial", i18n.t("No"));
+        Label allowModifLabel = new Label(i18n.t("Allow modifications of your work?"));
+        allowModifRB = new RadioButton("allowModif", i18n.t("Yes"));
+        allowModifShareAlikeRB = new RadioButton("allowModif", i18n.t("Yes, as long as others share alike"));
+        noModifRB = new RadioButton("allowModif", i18n.t("No"));
         generalVP.add(licenseTypesVP);
         licenseTypesVP.add(ccRB);
         licenseTypesVP.add(notCcRB);
 
-        copyleft = new IconLabel(img.copyleft(), Kune.I18N.t("This is a copyleft license"), false);
-        nonCopyleft = new IconLabel(img.noCopyleft(), Kune.I18N.t("This is not a copyleft license"), false);
+        copyleft = new IconLabel(img.copyleft(), i18n.t("This is a copyleft license"), false);
+        nonCopyleft = new IconLabel(img.noCopyleft(), i18n.t("This is not a copyleft license"), false);
         nonCopyleft.setVisible(false);
 
         generalVP.add(options);
 
         // Options
 
-        optionsBox = new TitledPanel(Kune.I18N.t("Options"), options);
+        optionsBox = new TitledPanel(i18n.t("Options"), options);
         generalVP.add(optionsBox);
         generalVP.add(nonCopyleft);
         generalVP.add(copyleft);
@@ -153,27 +156,6 @@ public class LicenseChoosePanel extends Composite implements LicenseChooseView {
         configureListeners(presenter);
     }
 
-    private void configureListeners(final LicenseChoosePresenter presenter) {
-        ChangeListener changeListener = new ChangeListener() {
-            public void onChange(final Widget arg0) {
-                presenter.onChange();
-            }
-        };
-
-        ClickListener clickListener = new ClickListener() {
-            public void onClick(final Widget arg0) {
-                presenter.onChange();
-            }
-        };
-        otherLicenses.addChangeListener(changeListener);
-        ccRB.addClickListener(clickListener);
-        allowModifRB.addClickListener(clickListener);
-        commercialRB.addClickListener(clickListener);
-        nonCommercialRB.addClickListener(clickListener);
-        allowModifShareAlikeRB.addClickListener(clickListener);
-        noModifRB.addClickListener(clickListener);
-    }
-
     public int getSelectedNonCCLicenseIndex() {
         return otherLicenses.getSelectedIndex();
     }
@@ -203,13 +185,8 @@ public class LicenseChoosePanel extends Composite implements LicenseChooseView {
 
     public void showCCoptions() {
         options.showWidget(0);
-        optionsBox.setTitle(Kune.I18N.t("Options"));
+        optionsBox.setTitle(i18n.t("Options"));
 
-    }
-
-    public void showNotCCoptions() {
-        options.showWidget(1);
-        optionsBox.setTitle(Kune.I18N.t("Select one of these licenses:"));
     }
 
     public void showIsCopyleft() {
@@ -220,5 +197,31 @@ public class LicenseChoosePanel extends Composite implements LicenseChooseView {
     public void showIsNotCopyleft() {
         nonCopyleft.setVisible(true);
         copyleft.setVisible(false);
+    }
+
+    public void showNotCCoptions() {
+        options.showWidget(1);
+        optionsBox.setTitle(i18n.t("Select one of these licenses:"));
+    }
+
+    private void configureListeners(final LicenseChoosePresenter presenter) {
+        ChangeListener changeListener = new ChangeListener() {
+            public void onChange(final Widget arg0) {
+                presenter.onChange();
+            }
+        };
+
+        ClickListener clickListener = new ClickListener() {
+            public void onClick(final Widget arg0) {
+                presenter.onChange();
+            }
+        };
+        otherLicenses.addChangeListener(changeListener);
+        ccRB.addClickListener(clickListener);
+        allowModifRB.addClickListener(clickListener);
+        commercialRB.addClickListener(clickListener);
+        nonCommercialRB.addClickListener(clickListener);
+        allowModifShareAlikeRB.addClickListener(clickListener);
+        noModifRB.addClickListener(clickListener);
     }
 }

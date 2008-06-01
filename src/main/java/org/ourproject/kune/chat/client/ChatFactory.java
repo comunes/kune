@@ -35,6 +35,7 @@ import org.ourproject.kune.chat.client.ctx.ChatContext;
 import org.ourproject.kune.chat.client.ctx.ChatContextPresenter;
 import org.ourproject.kune.chat.client.ctx.rooms.RoomsAdmin;
 import org.ourproject.kune.chat.client.ctx.rooms.RoomsAdminPresenter;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.workspace.client.WorkspaceFactory;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckPanel;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
@@ -43,7 +44,10 @@ import com.calclab.emiteuimodule.client.EmiteUIDialog;
 
 public class ChatFactory {
 
-    public static ChatContent createChatContent(final EmiteUIDialog emiteUIDialog) {
+    private static I18nTranslationService i18n;
+
+    public static ChatContent createChatContent(final EmiteUIDialog emiteUIDialog, final I18nTranslationService i18n) {
+        ChatFactory.i18n = i18n;
         WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
         ChatContentPresenter presenter = new ChatContentPresenter(emiteUIDialog, panel);
         return presenter;
@@ -61,7 +65,7 @@ public class ChatFactory {
     }
 
     public static ChatRoomControl createChatRoomControlViewer(final ChatRoomListener listener) {
-        ChatRoomControlPanel panel = new ChatRoomControlPanel(listener);
+        ChatRoomControlPanel panel = new ChatRoomControlPanel(listener, i18n);
         ChatRoomControlPresenter presenter = new ChatRoomControlPresenter(panel);
         return presenter;
     }
@@ -74,7 +78,7 @@ public class ChatFactory {
 
     public static RoomsAdmin createRoomsAdmin() {
         ContextItems contextItems = WorkspaceFactory.createContextItems();
-        RoomsAdminPresenter presenter = new RoomsAdminPresenter(contextItems);
+        RoomsAdminPresenter presenter = new RoomsAdminPresenter(contextItems, i18n);
         return presenter;
     }
 

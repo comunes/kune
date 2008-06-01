@@ -21,8 +21,8 @@ package org.ourproject.kune.workspace.client.socialnet.ui;
 
 import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.PlatformEvents;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.UIConstants;
 import org.ourproject.kune.platf.client.ui.stacks.StackSubItemAction;
 import org.ourproject.kune.platf.client.ui.stacks.StackedDropDownPanel;
@@ -38,13 +38,9 @@ public class ParticipationPanel extends StackedDropDownPanel implements Particip
     private static final boolean COUNTS_VISIBLE = false;
     private final Images img = Images.App.getInstance();
 
-    public ParticipationPanel(final AbstractPresenter presenter) {
-        super(presenter, "#00D4AA", Kune.I18N.t("Participates as..."), Kune.I18N.t("Groups in which participates"),
+    public ParticipationPanel(final AbstractPresenter presenter, final I18nTranslationService i18n) {
+        super(presenter, "#00D4AA", i18n.t("Participates as..."), i18n.t("Groups in which participates"),
                 COUNTS_VISIBLE);
-    }
-
-    public void clear() {
-        super.clear();
     }
 
     public void addCategory(final String name, final String title) {
@@ -66,6 +62,18 @@ public class ParticipationPanel extends StackedDropDownPanel implements Particip
         super.addStackSubItem(categoryName, img.groupDefIcon(), name, title, subItems);
     }
 
+    public void clear() {
+        super.clear();
+    }
+
+    public void hide() {
+        this.setVisible(false);
+    }
+
+    public void show() {
+        this.setVisible(true);
+    }
+
     private AbstractImagePrototype getIcon(final String event) {
         if (event == GroupMembersView.ICON_ALERT) {
             return img.alert();
@@ -81,14 +89,6 @@ public class ParticipationPanel extends StackedDropDownPanel implements Particip
             return img.groupHome();
         }
         throw new IndexOutOfBoundsException("Event unknown in ParticipationPanel");
-    }
-
-    public void show() {
-        this.setVisible(true);
-    }
-
-    public void hide() {
-        this.setVisible(false);
     }
 
 }

@@ -1,4 +1,0 @@
-<module>
-        <inherits name='org.ourproject.kune.platf.Kune-Platform' />
-        <inherits name='org.ourproject.kune.workspace.Kune-Workspace' />
-</module>

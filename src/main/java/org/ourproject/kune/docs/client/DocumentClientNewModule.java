@@ -34,7 +34,8 @@ public class DocumentClientNewModule implements Module {
         Session session = builder.getInstance(Session.class);
         StateManager stateManager = builder.getInstance(StateManager.class);
         Application application = builder.getInstance(Application.class);
-        platform.install(new DocsClientModule(session, stateManager, application.getWorkspace()));
+        I18nUITranslationService i18n = builder.getInstance(I18nUITranslationService.class);
+        platform.install(new DocsClientModule(session, stateManager, application.getWorkspace(), i18n));
     }
 
 }

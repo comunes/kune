@@ -24,12 +24,18 @@ import java.util.HashMap;
 import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.rpc.I18nService;
 import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class GetLexiconAction implements Action<String> {
+
+    private final I18nUITranslationService i18n;
+
+    public GetLexiconAction(final I18nUITranslationService i18n) {
+        this.i18n = i18n;
+    }
 
     public void execute(final String value) {
         onGetLexicon(value);
@@ -43,7 +49,7 @@ public class GetLexiconAction implements Action<String> {
             }
 
             public void onSuccess(final HashMap<String, String> result) {
-                Kune.I18N.setLexicon(result);
+                i18n.setLexicon(result);
             }
         });
 

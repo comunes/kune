@@ -20,7 +20,7 @@
 
 package org.ourproject.kune.workspace.client.workspace.ui;
 
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.HTML;
@@ -32,33 +32,6 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 class GroupLogoPanel extends SimplePanel {
-    private EntityTextLogo entityTextLogo;
-
-    public GroupLogoPanel() {
-    }
-
-    private EntityTextLogo getEntityTextLogo() {
-        if (entityTextLogo == null) {
-            this.entityTextLogo = new EntityTextLogo();
-        }
-        return entityTextLogo;
-    }
-
-    public void setLogo(final String groupName) {
-        clear();
-        add(getEntityTextLogo());
-        entityTextLogo.setDefaultText(groupName);
-    }
-
-    public void setLogo(final Image image) {
-        clear();
-        add(image);
-    }
-
-    public void setTextColor(final String color) {
-        this.entityTextLogo.setTextColor(color);
-    }
-
     class EntityTextLogo extends VerticalPanel {
 
         private static final int GROUP_NAME_LIMIT_SIZE = 90;
@@ -84,7 +57,7 @@ class GroupLogoPanel extends SimplePanel {
 
             // Set properties
             // TODO: Put your logo here functionality
-            defTextPutYourLogoHL.setText(Kune.I18N.t("Put Your Logo Here"));
+            defTextPutYourLogoHL.setText(i18n.t("Put Your Logo Here"));
             expandCell.setWidth("100%");
             putYourLogoHP.setCellWidth(expandCell, "100%");
             // TODO: link to configure the logo
@@ -102,19 +75,48 @@ class GroupLogoPanel extends SimplePanel {
 
         }
 
-        public void setTextColor(final String color) {
-            DOM.setStyleAttribute(defTextLogoLabel.getElement(), "color", color);
-        }
-
         public void setPutYourLogoVisible(final boolean visible) {
             putYourLogoHP.setVisible(visible);
 
         }
+
+        public void setTextColor(final String color) {
+            DOM.setStyleAttribute(defTextLogoLabel.getElement(), "color", color);
+        }
+    }
+
+    private EntityTextLogo entityTextLogo;
+    private final I18nTranslationService i18n;
+
+    public GroupLogoPanel(final I18nTranslationService i18n) {
+        this.i18n = i18n;
+    }
+
+    public void setLogo(final Image image) {
+        clear();
+        add(image);
+    }
+
+    public void setLogo(final String groupName) {
+        clear();
+        add(getEntityTextLogo());
+        entityTextLogo.setDefaultText(groupName);
     }
 
     public void setPutYourLogoVisible(final boolean visible) {
         entityTextLogo.setPutYourLogoVisible(visible);
 
+    }
+
+    public void setTextColor(final String color) {
+        this.entityTextLogo.setTextColor(color);
+    }
+
+    private EntityTextLogo getEntityTextLogo() {
+        if (entityTextLogo == null) {
+            this.entityTextLogo = new EntityTextLogo();
+        }
+        return entityTextLogo;
     }
 
 }

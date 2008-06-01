@@ -19,8 +19,8 @@
  */
 package org.ourproject.kune.platf.client.ui.rate;
 
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.platf.client.services.Kune;
 
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
@@ -37,16 +37,46 @@ public class RateItPanel extends Composite implements ClickListener, RateItView 
     private final Images img = Images.App.getInstance();
     private final RateItPresenter presenter;
     private Label rateItLabel;
+    private final I18nTranslationService i18n;
 
-    public RateItPanel(final RateItPresenter presenter) {
+    public RateItPanel(final RateItPresenter presenter, final I18nTranslationService i18n) {
         this.presenter = presenter;
+        this.i18n = i18n;
         initialize();
         layout();
         setProperties();
     }
 
+    public void clearRate() {
+        for (int i = 0; i < 5; i++) {
+            img.starGrey().applyTo(starImg[i]);
+        }
+    }
+
+    public void onClick(final Widget sender) {
+        for (int i = 0; i < 5; i++) {
+            if (sender == starImg[i]) {
+                presenter.starClicked(i);
+            }
+        }
+    }
+
+    public void setDesc(final String desc) {
+        rateDesc.setText(desc);
+    }
+
+    public void setRate(final Star stars[]) {
+        for (int i = 0; i < 5; i++) {
+            stars[i].getImage().applyTo(starImg[i]);
+        }
+    }
+
+    public void setStars(final Double rate) {
+        setRate(Star.genStars(rate.doubleValue()));
+    }
+
     private void initialize() {
-        rateItLabel = new Label(Kune.I18N.t("Rate it:"));
+        rateItLabel = new Label(i18n.t("Rate it:"));
         rateGrid = new Grid(1, 7);
         starImg = new Image[5];
         rateDesc = new Label();
@@ -55,13 +85,9 @@ public class RateItPanel extends Composite implements ClickListener, RateItView 
             img.starGrey().applyTo(starImg[i]);
             starImg[i].addStyleName("rateit-star");
             starImg[i].setStyleName("rateit-star");
-            starImg[i].setTitle(Kune.I18N.t("Click to rate this"));
+            starImg[i].setTitle(i18n.t("Click to rate this"));
             starImg[i].addClickListener(this);
             starImg[i].addMouseListener(new MouseListenerAdapter() {
-                public void onMouseLeave(final Widget sender) {
-                    presenter.revertCurrentRate();
-                }
-
                 public void onMouseEnter(final Widget sender) {
                     for (int j = 0; j < 5; j++) {
                         if (sender == starImg[j]) {
@@ -69,6 +95,10 @@ public class RateItPanel extends Composite implements ClickListener, RateItView 
                         }
                     }
 
+                }
+
+                public void onMouseLeave(final Widget sender) {
+                    presenter.revertCurrentRate();
                 }
             });
         }
@@ -94,33 +124,5 @@ public class RateItPanel extends Composite implements ClickListener, RateItView 
         rateGrid.addStyleName("kune-RatePanel-Stars-RateIt");
         rateDesc.addStyleName("kune-RatePanel-Label");
         rateDesc.addStyleName("kune-Margin-Medium-l");
-    }
-
-    public void onClick(final Widget sender) {
-        for (int i = 0; i < 5; i++) {
-            if (sender == starImg[i]) {
-                presenter.starClicked(i);
-            }
-        }
-    }
-
-    public void setRate(final Star stars[]) {
-        for (int i = 0; i < 5; i++) {
-            stars[i].getImage().applyTo(starImg[i]);
-        }
-    }
-
-    public void clearRate() {
-        for (int i = 0; i < 5; i++) {
-            img.starGrey().applyTo(starImg[i]);
-        }
-    }
-
-    public void setStars(final Double rate) {
-        setRate(Star.genStars(rate.doubleValue()));
-    }
-
-    public void setDesc(final String desc) {
-        rateDesc.setText(desc);
     }
 }

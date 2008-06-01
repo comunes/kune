@@ -27,7 +27,7 @@ import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
@@ -35,10 +35,12 @@ import org.ourproject.kune.workspace.client.sitebar.Site;
 public class AddFolderAction implements Action<String> {
     private final Session session;
     private final StateManager stateManager;
+    private final I18nTranslationService i18n;
 
-    public AddFolderAction(final StateManager stateManager, final Session session) {
+    public AddFolderAction(final StateManager stateManager, final Session session, final I18nTranslationService i18n) {
         this.stateManager = stateManager;
         this.session = session;
+        this.i18n = i18n;
     }
 
     public void execute(final String name) {
@@ -53,7 +55,7 @@ public class AddFolderAction implements Action<String> {
         server.addFolder(session.getUserHash(), group.getShortName(), container.getId(), name,
                 new AsyncCallbackSimple<StateDTO>() {
                     public void onSuccess(final StateDTO state) {
-                        Site.info(Kune.I18N.t("Folder created"));
+                        Site.info(i18n.t("Folder created"));
                         stateManager.setRetrievedState(state);
                         // FIXME: Isn't using cache
                         stateManager.reloadContextAndTitles();

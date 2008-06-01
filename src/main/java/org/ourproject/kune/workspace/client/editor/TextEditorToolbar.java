@@ -20,7 +20,7 @@
 
 package org.ourproject.kune.workspace.client.editor;
 
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.CustomPushButton;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
@@ -154,7 +154,59 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
             }
         }
 
-        private void showLinkPanel() {
+        public void onKeyDown(final Widget sender, final char keyCode, final int modifiers) {
+            if (sender == removeLink && keyCode == KeyboardListener.KEY_ENTER) {
+                fireEditHTML();
+            }
+        }
+
+        public void onKeyPress(final Widget sender, final char keyCode, final int modifiers) {
+        }
+
+        public void onKeyUp(final Widget sender, final char keyCode, final int modifiers) {
+            if (sender == richText) {
+                // We use the RichTextArea's onKeyUp event to update the
+                // toolbar status.
+                // This will catch any cases where the user moves the cursur
+                // using the
+                // keyboard, or uses one of the browser's built-in keyboard
+                // shortcuts.
+                updateStatus();
+                fireEdit();
+            }
+        }
+
+        private Object[][] getData() {
+            return new Object[][] {
+            // new Object[]{"Pirates of the Caribbean", new Integer(2120), new
+            // Long(1180231870000l), "images/view/carribean.jpg"},
+            // new Object[]{"Resident Evil", new Integer(2120), new
+            // Long(1180231870000l), "images/view/resident_evil.jpg"},
+            // new Object[]{"Blood Diamond", new Integer(2120), new
+            // Long(1180231870000l), "images/view/blood_diamond.jpg"},
+            // new Object[]{"No Reservations", new Integer(2120), new
+            // Long(1180231870000l), "images/view/no_reservations.jpg"},
+            // new Object[]{"Casino Royale", new Integer(2120), new
+            // Long(1180231870000l), "images/view/casino_royale.jpg"},
+            // new Object[]{"Good Shepherd", new Integer(2120), new
+            // Long(1180231870000l), "images/view/good_shepherd.jpg"},
+            // new Object[]{"Ghost Rider", new Integer(2120), new
+            // Long(1180231870000l), "images/view/ghost_rider.jpg"},
+            // new Object[]{"Batman Begins", new Integer(2120), new
+            // Long(1180231870000l), "images/view/batman_begins.jpg"},
+            // new Object[]{"Last Samurai", new Integer(2120), new
+            // Long(1180231870000l), "images/view/last_samurai.jpg"},
+            // new Object[]{"Italian Job", new Integer(2120), new
+            // Long(1180231870000l), "images/view/italian_job.jpg"},
+            // new Object[]{"Mission Impossible III", new Integer(2120), new
+            // Long(1180231870000l), "images/view/mi3.jpg"},
+            // new Object[]{"Mr & Mrs Smith", new Integer(2120), new
+            // Long(1180231870000l), "images/view/smith.jpg"},
+            // new Object[]{"Inside Man", new Integer(2120), new
+            // Long(1180231870000l), "images/view/inside_man.jpg"},
+            // new Object[]{"The Island", new Integer(2120), new
+            // Long(1180231870000l), "images/view/island.jpg"}
+            };
         }
 
         private void showImagePanel() {
@@ -197,59 +249,7 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
 
         }
 
-        private Object[][] getData() {
-            return new Object[][] {
-            // new Object[]{"Pirates of the Caribbean", new Integer(2120), new
-            // Long(1180231870000l), "images/view/carribean.jpg"},
-            // new Object[]{"Resident Evil", new Integer(2120), new
-            // Long(1180231870000l), "images/view/resident_evil.jpg"},
-            // new Object[]{"Blood Diamond", new Integer(2120), new
-            // Long(1180231870000l), "images/view/blood_diamond.jpg"},
-            // new Object[]{"No Reservations", new Integer(2120), new
-            // Long(1180231870000l), "images/view/no_reservations.jpg"},
-            // new Object[]{"Casino Royale", new Integer(2120), new
-            // Long(1180231870000l), "images/view/casino_royale.jpg"},
-            // new Object[]{"Good Shepherd", new Integer(2120), new
-            // Long(1180231870000l), "images/view/good_shepherd.jpg"},
-            // new Object[]{"Ghost Rider", new Integer(2120), new
-            // Long(1180231870000l), "images/view/ghost_rider.jpg"},
-            // new Object[]{"Batman Begins", new Integer(2120), new
-            // Long(1180231870000l), "images/view/batman_begins.jpg"},
-            // new Object[]{"Last Samurai", new Integer(2120), new
-            // Long(1180231870000l), "images/view/last_samurai.jpg"},
-            // new Object[]{"Italian Job", new Integer(2120), new
-            // Long(1180231870000l), "images/view/italian_job.jpg"},
-            // new Object[]{"Mission Impossible III", new Integer(2120), new
-            // Long(1180231870000l), "images/view/mi3.jpg"},
-            // new Object[]{"Mr & Mrs Smith", new Integer(2120), new
-            // Long(1180231870000l), "images/view/smith.jpg"},
-            // new Object[]{"Inside Man", new Integer(2120), new
-            // Long(1180231870000l), "images/view/inside_man.jpg"},
-            // new Object[]{"The Island", new Integer(2120), new
-            // Long(1180231870000l), "images/view/island.jpg"}
-            };
-        }
-
-        public void onKeyDown(final Widget sender, final char keyCode, final int modifiers) {
-            if (sender == removeLink && keyCode == KeyboardListener.KEY_ENTER) {
-                fireEditHTML();
-            }
-        }
-
-        public void onKeyPress(final Widget sender, final char keyCode, final int modifiers) {
-        }
-
-        public void onKeyUp(final Widget sender, final char keyCode, final int modifiers) {
-            if (sender == richText) {
-                // We use the RichTextArea's onKeyUp event to update the
-                // toolbar status.
-                // This will catch any cases where the user moves the cursur
-                // using the
-                // keyboard, or uses one of the browser's built-in keyboard
-                // shortcuts.
-                updateStatus();
-                fireEdit();
-            }
+        private void showLinkPanel() {
         }
     }
 
@@ -294,19 +294,20 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
     private final CustomPushButton close;
     private WebSafePalettePanel palettePanel;
     private final TextEditorPresenter panelListener;
-
     private PopupPanel popupPalette;
-
     private WebSafePalettePresenter palettePresenter;
+    private final I18nTranslationService i18n;
 
     /**
      * Creates a new toolbar that drives the given rich text area.
-     *
+     * 
      * @param richText
      *                the rich text area to be controlled
      */
-    public TextEditorToolbar(final RichTextArea richText, final TextEditorPresenter panelListener) {
+    public TextEditorToolbar(final RichTextArea richText, final TextEditorPresenter panelListener,
+            final I18nTranslationService i18n) {
         this.richText = richText;
+        this.i18n = i18n;
         this.basic = richText.getBasicFormatter();
         this.extended = richText.getExtendedFormatter();
 
@@ -320,39 +321,38 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
         setStyleName("gwt-RichTextToolbar");
 
         if (basic != null) {
-            topPanel.add(bold = createToggleButton(images.bold(), Kune.I18N.t("Toggle Bold")));
-            topPanel.add(italic = createToggleButton(images.italic(), Kune.I18N.t("Toggle Italic")));
-            topPanel.add(underline = createToggleButton(images.underline(), Kune.I18N.t("Toggle Underline")));
+            topPanel.add(bold = createToggleButton(images.bold(), i18n.t("Toggle Bold")));
+            topPanel.add(italic = createToggleButton(images.italic(), i18n.t("Toggle Italic")));
+            topPanel.add(underline = createToggleButton(images.underline(), i18n.t("Toggle Underline")));
         }
 
         if (extended != null) {
-            topPanel
-                    .add(strikethrough = createToggleButton(images.strikeout(), Kune.I18N.t("Toggle Strikethrough")));
+            topPanel.add(strikethrough = createToggleButton(images.strikeout(), i18n.t("Toggle Strikethrough")));
         }
 
         if (basic != null) {
-            topPanel.add(subscript = createToggleButton(images.subscript(), Kune.I18N.t("Toggle Subscript")));
-            topPanel.add(superscript = createToggleButton(images.superscript(), Kune.I18N.t("Toggle Superscript")));
-            topPanel.add(justifyLeft = createPushButton(images.alignleft(), Kune.I18N.t("Left Justify")));
-            topPanel.add(justifyCenter = createPushButton(images.centerpara(), Kune.I18N.t("Center")));
-            topPanel.add(justifyRight = createPushButton(images.alignright(), Kune.I18N.t("Right Justify")));
+            topPanel.add(subscript = createToggleButton(images.subscript(), i18n.t("Toggle Subscript")));
+            topPanel.add(superscript = createToggleButton(images.superscript(), i18n.t("Toggle Superscript")));
+            topPanel.add(justifyLeft = createPushButton(images.alignleft(), i18n.t("Left Justify")));
+            topPanel.add(justifyCenter = createPushButton(images.centerpara(), i18n.t("Center")));
+            topPanel.add(justifyRight = createPushButton(images.alignright(), i18n.t("Right Justify")));
         }
 
         if (extended != null) {
-            topPanel.add(indent = createPushButton(images.incrementindent(), Kune.I18N.t("Indent Right")));
-            topPanel.add(outdent = createPushButton(images.decrementindent(), Kune.I18N.t("Indent Left")));
-            topPanel.add(hr = createPushButton(images.hfixedline(), Kune.I18N.t("Insert Horizontal Rule")));
-            topPanel.add(ol = createPushButton(images.defaultnumbering(), Kune.I18N.t("Insert Ordered List")));
-            topPanel.add(ul = createPushButton(images.defaultbullet(), Kune.I18N.t("Insert Unordered List")));
-            topPanel.add(insertImage = createPushButton(images.images(), Kune.I18N.t("Insert Image")));
-            topPanel.add(createLink = createPushButton(images.link(), Kune.I18N.t("Create Link")));
-            topPanel.add(removeLink = createPushButton(images.linkBreak(), Kune.I18N.t("Remove Link")));
-            topPanel.add(removeFormat = createPushButton(images.removeFormat(), Kune.I18N.t("Remove Formatting")));
+            topPanel.add(indent = createPushButton(images.incrementindent(), i18n.t("Indent Right")));
+            topPanel.add(outdent = createPushButton(images.decrementindent(), i18n.t("Indent Left")));
+            topPanel.add(hr = createPushButton(images.hfixedline(), i18n.t("Insert Horizontal Rule")));
+            topPanel.add(ol = createPushButton(images.defaultnumbering(), i18n.t("Insert Ordered List")));
+            topPanel.add(ul = createPushButton(images.defaultbullet(), i18n.t("Insert Unordered List")));
+            topPanel.add(insertImage = createPushButton(images.images(), i18n.t("Insert Image")));
+            topPanel.add(createLink = createPushButton(images.link(), i18n.t("Create Link")));
+            topPanel.add(removeLink = createPushButton(images.linkBreak(), i18n.t("Remove Link")));
+            topPanel.add(removeFormat = createPushButton(images.removeFormat(), i18n.t("Remove Formatting")));
         }
 
         if (basic != null) {
-            topPanel.add(backColor = createPushButton(images.backcolor(), Kune.I18N.t("Background Color")));
-            topPanel.add(fontColor = createPushButton(images.fontcolor(), Kune.I18N.t("Font Color")));
+            topPanel.add(backColor = createPushButton(images.backcolor(), i18n.t("Background Color")));
+            topPanel.add(fontColor = createPushButton(images.fontcolor(), i18n.t("Font Color")));
             topPanel.add(fonts = createFontsMenu());
             topPanel.add(fontSizes = createFontSizesMenu());
 
@@ -363,7 +363,7 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
             richText.addClickListener(listener);
         }
 
-        save = new CustomPushButton(Kune.I18N.tWithNT("Save", "used in button"), new ClickListener() {
+        save = new CustomPushButton(i18n.tWithNT("Save", "used in button"), new ClickListener() {
             public void onClick(final Widget sender) {
                 if (save.isEnabled()) {
                     fireSave();
@@ -371,7 +371,7 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
             }
         });
 
-        close = new CustomPushButton(Kune.I18N.tWithNT("Close", "used in button"), new ClickListener() {
+        close = new CustomPushButton(i18n.tWithNT("Close", "used in button"), new ClickListener() {
             public void onClick(final Widget sender) {
                 if (close.isEnabled()) {
                     fireCancel();
@@ -383,27 +383,11 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
 
         // if (basic != null) {
         // topPanel.add(editHtml = createToggleButton(images.editHtml(),
-        // Kune.I18N.t("Edit HTML")));
+        // i18n.t("Edit HTML")));
         // }
 
         subtopPanel.add(save);
         subtopPanel.add(close);
-    }
-
-    private void fireEdit() {
-        panelListener.onEdit();
-    }
-
-    private void fireSave() {
-        panelListener.onSave();
-    }
-
-    private void fireCancel() {
-        panelListener.onCancel();
-    }
-
-    private void fireEditHTML() {
-        panelListener.onEditHTML();
     }
 
     public void editHTML(final boolean edit) {
@@ -436,18 +420,45 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
         }
     }
 
-    private MenuBar createFontsMenu() {
+    public void setEnabledCloseButton(final boolean enabled) {
+        close.setEnabled(enabled);
+    }
+
+    public void setEnabledSaveButton(final boolean enabled) {
+        save.setEnabled(enabled);
+    }
+
+    public void setTextSaveButton(final String text) {
+        save.setText(text);
+    }
+
+    public void showPalette(final Widget sender, final int left, final int top) {
+        if (palettePanel == null) {
+            palettePresenter = new WebSafePalettePresenter();
+            palettePanel = new WebSafePalettePanel(palettePresenter);
+        }
+        popupPalette = new PopupPanel(true, true);
+        popupPalette.setVisible(false);
+        popupPalette.show();
+        popupPalette.setPopupPosition(left, top);
+        popupPalette.setWidget(palettePanel);
+        popupPalette.setVisible(true);
+    }
+
+    private MenuBar createFontSizesMenu() {
         MenuBar menu = new MenuBar();
         MenuBar submenu = new MenuBar(true);
-        String fontName[] = { "Times New Roman", "Arial", "Courier New", "Georgia", "Trebuchet", "Verdana" };
+        String fontSizes[] = { i18n.t("Extra small"), i18n.t("Very small"), i18n.t("small"), i18n.t("Medium"),
+                i18n.t("Large"), i18n.t("Very large"), i18n.t("Extra large") };
 
-        KuneUiUtils.setQuickTip(menu, Kune.I18N.t("Font Type"));
-        menu.addItem(images.charfontname().getHTML(), true, submenu);
-        for (int i = 0; i < fontName.length; i++) {
-            final String f = fontName[i];
-            submenu.addItem("<span style=\"font-family: " + f + "\">" + f + "</span>", true, new Command() {
+        KuneUiUtils.setQuickTip(menu, i18n.t("Font Size"));
+        menu.addItem(images.fontheight().getHTML(), true, submenu);
+        for (int i = 0; i < fontSizes.length; i++) {
+            final String f = fontSizes[i];
+            final int fontSize = i;
+            submenu.addItem("<font size=\"" + (i + 1) + "\">" + f + "</font>", true, new Command() {
                 public void execute() {
-                    basic.setFontName(f);
+                    basic.setFontSize(fontSizesConstants[fontSize]);
                     fireEdit();
                 }
             });
@@ -457,20 +468,18 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
         return menu;
     }
 
-    private MenuBar createFontSizesMenu() {
+    private MenuBar createFontsMenu() {
         MenuBar menu = new MenuBar();
         MenuBar submenu = new MenuBar(true);
-        String fontSizes[] = { Kune.I18N.t("Extra small"), Kune.I18N.t("Very small"), Kune.I18N.t("small"),
-                Kune.I18N.t("Medium"), Kune.I18N.t("Large"), Kune.I18N.t("Very large"), Kune.I18N.t("Extra large") };
+        String fontName[] = { "Times New Roman", "Arial", "Courier New", "Georgia", "Trebuchet", "Verdana" };
 
-        KuneUiUtils.setQuickTip(menu, Kune.I18N.t("Font Size"));
-        menu.addItem(images.fontheight().getHTML(), true, submenu);
-        for (int i = 0; i < fontSizes.length; i++) {
-            final String f = fontSizes[i];
-            final int fontSize = i;
-            submenu.addItem("<font size=\"" + (i + 1) + "\">" + f + "</font>", true, new Command() {
+        KuneUiUtils.setQuickTip(menu, i18n.t("Font Type"));
+        menu.addItem(images.charfontname().getHTML(), true, submenu);
+        for (int i = 0; i < fontName.length; i++) {
+            final String f = fontName[i];
+            submenu.addItem("<span style=\"font-family: " + f + "\">" + f + "</span>", true, new Command() {
                 public void execute() {
-                    basic.setFontSize(fontSizesConstants[fontSize]);
+                    basic.setFontName(f);
                     fireEdit();
                 }
             });
@@ -494,29 +503,20 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
         return tb;
     }
 
-    public void showPalette(final Widget sender, final int left, final int top) {
-        if (palettePanel == null) {
-            palettePresenter = new WebSafePalettePresenter();
-            palettePanel = new WebSafePalettePanel(palettePresenter);
-        }
-        popupPalette = new PopupPanel(true, true);
-        popupPalette.setVisible(false);
-        popupPalette.show();
-        popupPalette.setPopupPosition(left, top);
-        popupPalette.setWidget(palettePanel);
-        popupPalette.setVisible(true);
+    private void fireCancel() {
+        panelListener.onCancel();
     }
 
-    public void setEnabledSaveButton(final boolean enabled) {
-        save.setEnabled(enabled);
+    private void fireEdit() {
+        panelListener.onEdit();
     }
 
-    public void setEnabledCloseButton(final boolean enabled) {
-        close.setEnabled(enabled);
+    private void fireEditHTML() {
+        panelListener.onEditHTML();
     }
 
-    public void setTextSaveButton(final String text) {
-        save.setText(text);
+    private void fireSave() {
+        panelListener.onSave();
     }
 
     /**

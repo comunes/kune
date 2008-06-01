@@ -41,25 +41,15 @@ import com.calclab.emiteuimodule.client.EmiteUIModule;
 
 public class Kune extends DelegatedContainer {
 
-    public static final ColorTheme theme = getInstance().getColorTheme();
-
-    public static final I18nUITranslationService I18N = getInstance().getI18N();
-
-    private static Kune instance;
-
     public static Kune create(final I18nLanguageDTO initialLang, final HashMap<String, String> lexicon) {
-        return instance = create(new KuneModule(initialLang, lexicon), new EmiteUIModule(),
-                new DocumentClientNewModule(), new ChatClientNewModule());
+        return create(new KuneModule(initialLang, lexicon), new EmiteUIModule(), new DocumentClientNewModule(),
+                new ChatClientNewModule());
     }
 
-    public static Kune create(final Module... modules) {
+    private static Kune create(final Module... modules) {
         final ModuleBuilder container = new ModuleBuilder();
         container.add(modules);
         return container.getInstance(Kune.class);
-    }
-
-    public static Kune getInstance() {
-        return instance;
     }
 
     protected Kune(final Container container) {

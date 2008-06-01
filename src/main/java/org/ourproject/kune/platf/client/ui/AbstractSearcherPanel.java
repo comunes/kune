@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.platf.client.ui;
 
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 
 import com.gwtext.client.core.Connection;
 import com.gwtext.client.core.UrlParam;
@@ -35,32 +35,33 @@ import com.gwtext.client.widgets.grid.RowSelectionModel;
 public class AbstractSearcherPanel {
 
     protected static final int PAGINATION_SIZE = 10;
+    protected final I18nTranslationService i18n;
 
-    public AbstractSearcherPanel() {
+    public AbstractSearcherPanel(final I18nTranslationService i18n) {
+        this.i18n = i18n;
     }
 
     protected void createPagingToolbar(final Store store, final GridPanel grid) {
-	final PagingToolbar pag = new PagingToolbar(store);
-	pag.setPageSize(PAGINATION_SIZE);
-	pag.setDisplayInfo(true);
-	pag.setDisplayMsg(Kune.I18N.tWithNT("Displaying results {0} - {1} of {2}",
-		"Respect {} values in translations, "
-			+ "this will produce: 'Displaying results 1 - 25 of 95465' for instance"));
-	pag.setEmptyMsg(Kune.I18N.t("No results to display"));
-	pag.setAfterPageText(Kune.I18N.tWithNT("of {0}", "Used to show multiple results: '1 of 30'"));
-	pag.setBeforePageText(Kune.I18N.t("Page"));
-	pag.setFirstText(Kune.I18N.t("First Page"));
-	pag.setLastText(Kune.I18N.t("Last Page"));
-	pag.setNextText(Kune.I18N.t("Next Page"));
-	pag.setPrevText(Kune.I18N.t("Previous Page"));
-	pag.setRefreshText(Kune.I18N.t("Refresh"));
-	grid.setBottomToolbar(pag);
-	grid.setLoadMask(true);
-	grid.setLoadMask(Kune.I18N.t("Searching"));
-	grid.setSelectionModel(new RowSelectionModel());
-	grid.setBorder(false);
-	grid.setFrame(true);
-	grid.setStripeRows(true);
+        final PagingToolbar pag = new PagingToolbar(store);
+        pag.setPageSize(PAGINATION_SIZE);
+        pag.setDisplayInfo(true);
+        pag.setDisplayMsg(i18n.tWithNT("Displaying results {0} - {1} of {2}", "Respect {} values in translations, "
+                + "this will produce: 'Displaying results 1 - 25 of 95465' for instance"));
+        pag.setEmptyMsg(i18n.t("No results to display"));
+        pag.setAfterPageText(i18n.tWithNT("of {0}", "Used to show multiple results: '1 of 30'"));
+        pag.setBeforePageText(i18n.t("Page"));
+        pag.setFirstText(i18n.t("First Page"));
+        pag.setLastText(i18n.t("Last Page"));
+        pag.setNextText(i18n.t("Next Page"));
+        pag.setPrevText(i18n.t("Previous Page"));
+        pag.setRefreshText(i18n.t("Refresh"));
+        grid.setBottomToolbar(pag);
+        grid.setLoadMask(true);
+        grid.setLoadMask(i18n.t("Searching"));
+        grid.setSelectionModel(new RowSelectionModel());
+        grid.setBorder(false);
+        grid.setFrame(true);
+        grid.setStripeRows(true);
     }
 
     // protected void createPagingToolbar(final Store store, final GridPanel
@@ -68,20 +69,20 @@ public class AbstractSearcherPanel {
     // final PagingToolbar pag = new PagingToolbar(store);
     // pag.setPageSize(PAGINATION_SIZE);
     // pag.setDisplayInfo(true);
-    // pag.setDisplayMsg(Kune.I18N.tWithNT("Displaying results {0} - {1} of
+    // pag.setDisplayMsg(i18n.tWithNT("Displaying results {0} - {1} of
     // {2}",
     // "Respect {} values in translations, "
     // + "these will produce: 'Displaying results 1 - 25 of 95465' for
     // instance"));
-    // pag.setEmptyMsg(Kune.I18N.t("No results to display"));
-    // pag.setAfterPageText(Kune.I18N.tWithNT("of {0}", "Used to show multiple
+    // pag.setEmptyMsg(i18n.t("No results to display"));
+    // pag.setAfterPageText(i18n.tWithNT("of {0}", "Used to show multiple
     // results: '1 of 30'"));
-    // pag.setBeforePageText(Kune.I18N.t("Page"));
-    // pag.setFirstText(Kune.I18N.t("First Page"));
-    // pag.setLastText(Kune.I18N.t("Last Page"));
-    // pag.setNextText(Kune.I18N.t("Next Page"));
-    // pag.setPrevText(Kune.I18N.t("Previous Page"));
-    // pag.setRefreshText(Kune.I18N.t("Refresh"));
+    // pag.setBeforePageText(i18n.t("Page"));
+    // pag.setFirstText(i18n.t("First Page"));
+    // pag.setLastText(i18n.t("Last Page"));
+    // pag.setNextText(i18n.t("Next Page"));
+    // pag.setPrevText(i18n.t("Previous Page"));
+    // pag.setRefreshText(i18n.t("Refresh"));
     // grid.setBottomToolbar(pag);
     //
     // grid.addListener(new PanelListenerAdapter() {
@@ -92,21 +93,21 @@ public class AbstractSearcherPanel {
     // }
 
     protected Store createStore(final FieldDef[] fieldDefs, final String url, final String id) {
-	final JsonReader reader = new JsonReader(new RecordDef(fieldDefs));
-	reader.setRoot("list");
-	reader.setTotalProperty("size");
-	reader.setId(id);
-	final HttpProxy proxy = new HttpProxy(url, Connection.POST);
-	return new Store(proxy, reader, true);
+        final JsonReader reader = new JsonReader(new RecordDef(fieldDefs));
+        reader.setRoot("list");
+        reader.setTotalProperty("size");
+        reader.setId(id);
+        final HttpProxy proxy = new HttpProxy(url, Connection.POST);
+        return new Store(proxy, reader, true);
     }
 
     protected void query(final Store store, final GridPanel grid, final String query) {
-	final UrlParam[] newParams = new UrlParam[] { new UrlParam("query", query), new UrlParam("start", 0),
-		new UrlParam("limit", PAGINATION_SIZE) };
-	store.setBaseParams(newParams);
-	store.load(0, PAGINATION_SIZE);
-	// see bind/unbind in:
-	// http://groups.google.com/group/gwt-ext/browse_thread/thread/ae0badb8114b30cd?hl=en
+        final UrlParam[] newParams = new UrlParam[] { new UrlParam("query", query), new UrlParam("start", 0),
+                new UrlParam("limit", PAGINATION_SIZE) };
+        store.setBaseParams(newParams);
+        store.load(0, PAGINATION_SIZE);
+        // see bind/unbind in:
+        // http://groups.google.com/group/gwt-ext/browse_thread/thread/ae0badb8114b30cd?hl=en
     }
 
 }

@@ -22,6 +22,7 @@ package org.ourproject.kune.chat.client;
 
 import org.ourproject.kune.chat.client.cnt.ChatContent;
 import org.ourproject.kune.chat.client.ctx.ChatContext;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
 
@@ -29,14 +30,16 @@ class ChatToolComponents {
     private ChatContent content;
     private ChatContext context;
     private final EmiteUIDialog emiteUIDialog;
+    private final I18nTranslationService i18n;
 
-    public ChatToolComponents(final EmiteUIDialog emiteUIDialog) {
+    public ChatToolComponents(final EmiteUIDialog emiteUIDialog, final I18nTranslationService i18n) {
         this.emiteUIDialog = emiteUIDialog;
+        this.i18n = i18n;
     }
 
     public ChatContent getContent() {
         if (content == null) {
-            content = ChatFactory.createChatContent(emiteUIDialog);
+            content = ChatFactory.createChatContent(emiteUIDialog, i18n);
         }
         return content;
     }

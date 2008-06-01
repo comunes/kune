@@ -3,6 +3,7 @@ package org.ourproject.kune.sitebar.client.ui;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
+import org.ourproject.kune.platf.client.services.I18nTranslationServiceMocked;
 import org.ourproject.kune.platf.client.state.SessionImpl;
 import org.ourproject.kune.workspace.client.sitebar.login.LoginListener;
 import org.ourproject.kune.workspace.client.sitebar.login.LoginPresenter;
@@ -16,7 +17,7 @@ public class LoginPresenterTest {
     @Before
     public void createObjects() {
         listener = EasyMock.createStrictMock(LoginListener.class);
-        presenter = new LoginPresenter(new SessionImpl("foo", null), listener);
+        presenter = new LoginPresenter(new SessionImpl("foo", null), listener, new I18nTranslationServiceMocked());
         view = EasyMock.createStrictMock(LoginView.class);
     }
 

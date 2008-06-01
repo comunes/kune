@@ -37,6 +37,7 @@ import org.ourproject.kune.docs.client.actions.WSSplitterStartResizingAction;
 import org.ourproject.kune.docs.client.actions.WSSplitterStopResizingAction;
 import org.ourproject.kune.platf.client.extend.ClientModule;
 import org.ourproject.kune.platf.client.extend.Register;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
@@ -47,17 +48,20 @@ public class DocsClientModule implements ClientModule {
     private final Session session;
     private final Workspace workspace;
     private final StateManager stateManager;
+    private final I18nTranslationService i18n;
 
-    public DocsClientModule(final Session session, final StateManager stateManager, final Workspace workspace) {
+    public DocsClientModule(final Session session, final StateManager stateManager, final Workspace workspace,
+            final I18nTranslationService i18n) {
         this.session = session;
         this.stateManager = stateManager;
         this.workspace = workspace;
+        this.i18n = i18n;
     }
 
     public void configure(final Register register) {
-        register.addAction(DocsEvents.SAVE_DOCUMENT, new SaveDocumentAction(session));
-        register.addAction(DocsEvents.ADD_DOCUMENT, new AddDocumentAction(stateManager, session));
-        register.addAction(DocsEvents.ADD_FOLDER, new AddFolderAction(stateManager, session));
+        register.addAction(DocsEvents.SAVE_DOCUMENT, new SaveDocumentAction(session, i18n));
+        register.addAction(DocsEvents.ADD_DOCUMENT, new AddDocumentAction(stateManager, session, i18n));
+        register.addAction(DocsEvents.ADD_FOLDER, new AddFolderAction(stateManager, session, i18n));
         register.addAction(DocsEvents.GO_PARENT_FOLDER, new GoParentFolderAction(stateManager, session));
         register.addAction(DocsEvents.ADD_AUTHOR, new ContentAddAuthorAction(stateManager, session));
         register.addAction(DocsEvents.REMOVE_AUTHOR, new ContentRemoveAuthorAction(stateManager, session));

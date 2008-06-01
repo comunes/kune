@@ -20,7 +20,7 @@
 package org.ourproject.kune.platf.client.ui.rate;
 
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
 public class RateItPresenter {
@@ -32,6 +32,12 @@ public class RateItPresenter {
     private Double currentRate;
 
     private boolean isRating;
+
+    private final I18nTranslationService i18n;
+
+    public RateItPresenter(final I18nTranslationService i18n) {
+        this.i18n = i18n;
+    }
 
     public void init(final RateItView view) {
         this.view = view;
@@ -77,6 +83,22 @@ public class RateItPresenter {
         }
     }
 
+    private void setDesc(final int rateTruncated) {
+        if (rateTruncated >= 0 && rateTruncated <= 1) {
+            view.setDesc(i18n.t("Poor"));
+        } else if (rateTruncated == 2) {
+            view.setDesc(i18n.t("Below average"));
+        } else if (rateTruncated == 3) {
+            view.setDesc(i18n.t("Average"));
+        } else if (rateTruncated == 4) {
+            view.setDesc(i18n.t("Above average"));
+        } else if (rateTruncated == 5) {
+            view.setDesc(i18n.t("Excellent"));
+        } else {
+            view.setDesc("");
+        }
+    }
+
     private void setRatePanel(final Double value) {
         if (value.equals(NOT_RATED)) {
             view.clearRate();
@@ -84,22 +106,6 @@ public class RateItPresenter {
         } else {
             view.setStars(value);
             setDesc((int) Math.ceil(value.doubleValue()));
-        }
-    }
-
-    private void setDesc(final int rateTruncated) {
-        if (rateTruncated >= 0 && rateTruncated <= 1) {
-            view.setDesc(Kune.I18N.t("Poor"));
-        } else if (rateTruncated == 2) {
-            view.setDesc(Kune.I18N.t("Below average"));
-        } else if (rateTruncated == 3) {
-            view.setDesc(Kune.I18N.t("Average"));
-        } else if (rateTruncated == 4) {
-            view.setDesc(Kune.I18N.t("Above average"));
-        } else if (rateTruncated == 5) {
-            view.setDesc(Kune.I18N.t("Excellent"));
-        } else {
-            view.setDesc("");
         }
     }
 }

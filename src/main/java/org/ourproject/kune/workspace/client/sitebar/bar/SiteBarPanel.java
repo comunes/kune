@@ -23,8 +23,8 @@ import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.IconLabel;
 import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
 import org.ourproject.kune.workspace.client.newgroup.NewGroup;
@@ -92,8 +92,10 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     private final ExtElement extRootBody;
     private String publicUrl;
     private Timer timeProgressMaxTime;
+    private final I18nTranslationService i18n;
 
-    public SiteBarPanel(final SiteBarPresenter initPresenter) {
+    public SiteBarPanel(final SiteBarPresenter initPresenter, final I18nTranslationService i18n) {
+        this.i18n = i18n;
         img = Images.App.getInstance();
 
         // Initialize
@@ -106,8 +108,8 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         progressText = RootPanel.get("kuneprogresstext");
 
         publicHP = new HorizontalPanel();
-        gotoPublic = new IconLabel(img.anybody(), Kune.I18N.t("Go to Public Space"), false);
-        contentNoPublic = new IconLabel(img.anybody(), Kune.I18N.t("This content is not public"));
+        gotoPublic = new IconLabel(img.anybody(), i18n.t("Go to Public Space"), false);
+        contentNoPublic = new IconLabel(img.anybody(), i18n.t("This content is not public"));
 
         final Label expandLabel = new Label("");
         newGroupHyperlink = new Hyperlink();
@@ -145,7 +147,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         // Set properties
         siteBarHP.addStyleName("kune-SiteBarPanel");
         siteBarHP.setCellWidth(expandLabel, "100%");
-        showProgress(Kune.I18N.t("Processing"));
+        showProgress(i18n.t("Processing"));
         gotoPublic.addStyleName("kune-Margin-Medium-r");
         setContentPublic(true);
         gotoPublic.addClickListener(new ClickListener() {
@@ -153,22 +155,22 @@ public class SiteBarPanel extends Composite implements SiteBarView {
                 gotoPublic();
             }
         });
-        gotoPublic.setTitle(Kune.I18N.t("Leave the workspace and go to the public space of this group")
+        gotoPublic.setTitle(i18n.t("Leave the workspace and go to the public space of this group")
                 + Site.IN_DEVELOPMENT);
         gotoPublic.addStyleName("kune-SiteBarPanel-LabelLink");
         contentNoPublic.addStyleName("kune-Margin-Medium-r");
-        newGroupHyperlink.setText(Kune.I18N.t("Create New Group"));
+        newGroupHyperlink.setText(i18n.t("Create New Group"));
         newGroupHyperlink.setTargetHistoryToken(Site.NEWGROUP_TOKEN);
         loggedUserHyperlink.setVisible(false);
         pipeSeparatorHtml.setHTML("|");
         pipeSeparatorHtml.setStyleName("kune-SiteBarPanel-Separator");
         pipeSeparatorHtml2.setHTML("|");
         pipeSeparatorHtml2.setStyleName("kune-SiteBarPanel-Separator");
-        loginHyperlink.setText(Kune.I18N.t("Sign in to collaborate"));
+        loginHyperlink.setText(i18n.t("Sign in to collaborate"));
         loginHyperlink.setTargetHistoryToken(Site.LOGIN_TOKEN);
-        logoutLabel.setText(Kune.I18N.t("Sign out"));
+        logoutLabel.setText(i18n.t("Sign out"));
         logoutLabel.addStyleName("kune-SiteBarPanel-LabelLink");
-        options.addItem(Kune.I18N.t("Options"), true, optionsSubmenu);
+        options.addItem(i18n.t("Options"), true, optionsSubmenu);
         options.setStyleName("kune-MenuBar");
         optionsButton.setColor("AAA");
         optionsButton.setHeight("16px");
@@ -186,62 +188,12 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         extRootBody = new ExtElement(RootPanel.getBodyElement());
     }
 
-    public void setContentPublic(boolean visible) {
-        gotoPublic.setVisible(visible);
-        contentNoPublic.setVisible(!visible);
+    public void centerLoginDialog() {
+        loginPanel.center();
     }
 
-    public void setContentGotoPublicUrl(final String publicUrl) {
-        this.publicUrl = publicUrl;
-    }
-
-    public void gotoPublic() {
-        Window.open(publicUrl, "_blank", "");
-    }
-
-    private void createOptionsSubmenu() {
-        linkHelpInTrans = new MenuItem(img.language().getHTML() + Kune.I18N.t("Help with the translation"), true,
-                new Command() {
-                    public void execute() {
-                        presenter.onHelpInTranslation();
-                    }
-                });
-        linkKuneBugs = new MenuItem(img.kuneIcon16().getHTML() + Kune.I18N.t("Report kune bugs"), true, new Command() {
-            public void execute() {
-                Window.open("http://code.google.com/p/kune/issues/list", "_blank", null);
-            }
-        });
-        // linkHelp = new MenuItem(img.kuneIcon16().getHTML() +
-        // Kune.I18N.t("Help"), true, new Command() {
-        // public void execute() {
-        // presenter.changeState(new StateToken("site.docs"));
-        // }
-        // });
-    }
-
-    private void createSearchBox() {
-        searchButton = new PushButton(img.kuneSearchIco().createImage(), img.kuneSearchIcoPush().createImage());
-        searchTextBox = new TextBox();
-
-        siteBarHP.add(searchButton);
-        siteBarHP.add(searchTextBox);
-
-        setTextSearchSmall();
-        setDefaultTextSearch();
-        searchTextBox.addFocusListener(new FocusListener() {
-
-            public void onFocus(final Widget arg0) {
-                presenter.onSearchFocus();
-            }
-
-            public void onLostFocus(final Widget arg0) {
-                presenter.onSearchLostFocus(searchTextBox.getText());
-            }
-        });
-    }
-
-    public void setDefaultTextSearch() {
-        searchTextBox.setText(Kune.I18N.t("Search"));
+    public void centerNewGroupDialog() {
+        newGroupPanel.center();
     }
 
     public void clearSearchText() {
@@ -249,23 +201,106 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     public void clearUserName() {
-        loginHyperlink.setText(Kune.I18N.t("Sign in to collaborate"));
+        loginHyperlink.setText(i18n.t("Sign in to collaborate"));
+    }
+
+    public void gotoPublic() {
+        Window.open(publicUrl, "_blank", "");
+    }
+
+    public void hideLoginDialog() {
+        loginPanel.hide();
+    }
+
+    public void hideNewGroupDialog() {
+        newGroupPanel.hide();
+    }
+
+    public void hideProgress() {
+        timeProgressMaxTime.cancel();
+        progressPanel.setVisible(false);
+        publicHP.setVisible(true);
+    }
+
+    public void mask() {
+        extRootBody.mask();
+    }
+
+    public void mask(final String message) {
+        extRootBody.mask(message, "x-mask-loading");
+    }
+
+    public void resetOptionsSubmenu() {
+        optionsSubmenu.clearItems();
+        addDefaultItemsToOptions();
+    }
+
+    public void restoreLoginLink() {
+        loginHyperlink.setVisible(true);
+        loggedUserHyperlink.setVisible(false);
+        loginHyperlink.setTargetHistoryToken(Site.LOGIN_TOKEN);
+    }
+
+    public void setContentGotoPublicUrl(final String publicUrl) {
+        this.publicUrl = publicUrl;
+    }
+
+    public void setContentPublic(boolean visible) {
+        gotoPublic.setVisible(visible);
+        contentNoPublic.setVisible(!visible);
+    }
+
+    public void setDefaultTextSearch() {
+        searchTextBox.setText(i18n.t("Search"));
+    }
+
+    public void setGroupsIsMember(final List<LinkDTO> groupsIsAdmin, final List<LinkDTO> groupsIsCollab) {
+        optionsSubmenu.clearItems();
+        yourGroupsSubmenu.clearItems();
+
+        int isAdminCount = groupsIsAdmin.size();
+        int isCollabCount = groupsIsCollab.size();
+        if (isAdminCount > 0 || isCollabCount > 0) {
+            optionsSubmenu.addItem(i18n.t("My Groups") + " »", yourGroupsSubmenu);
+            for (int i = 0; i < isAdminCount; i++) {
+                final LinkDTO link = groupsIsAdmin.get(i);
+                addItemToYourGroupSubmenu(link);
+            }
+            for (int i = 0; i < isCollabCount; i++) {
+                final LinkDTO link = groupsIsCollab.get(i);
+                addItemToYourGroupSubmenu(link);
+            }
+        }
+        addDefaultItemsToOptions();
     }
 
     public void setLogo(final Image logo) {
         // TODO
     }
 
+    public void setLogoutLinkVisible(final boolean visible) {
+        logoutLabel.setVisible(visible);
+        pipeSeparatorHtml2.setVisible(visible);
+    }
+
     public void setSearchText(final String text) {
         searchTextBox.setText(text);
+    }
+
+    public void setTextSearchBig() {
+        searchTextBox.setWidth(SEARCH_TEXT_WIDTH_BIG);
     }
 
     public void setTextSearchSmall() {
         searchTextBox.setWidth(SEARCH_TEXT_WIDTH_SMALL);
     }
 
-    public void setTextSearchBig() {
-        searchTextBox.setWidth(SEARCH_TEXT_WIDTH_BIG);
+    public void showAlertMessage(final String message) {
+        MessageBox.alert(i18n.t("Alert"), message, new MessageBox.AlertCallback() {
+            public void execute() {
+                // Do nothing
+            }
+        });
     }
 
     public void showLoggedUserName(final String name, final String homePage) {
@@ -282,38 +317,11 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 
     }
 
-    public void hideLoginDialog() {
-        loginPanel.hide();
-    }
-
     public void showNewGroupDialog() {
         final NewGroup newGroupForm = SiteBarFactory.getNewGroupForm(presenter);
         newGroupPanel = (NewGroupPanel) newGroupForm.getView();
         newGroupPanel.show();
         Site.hideProgress();
-    }
-
-    public void showSearchPanel(final String termToSearch) {
-        final SearchSite search = SiteBarFactory.getSearch();
-        search.doSearch(termToSearch);
-        searchPanel = (SearchSitePanel) search.getView();
-        searchPanel.show();
-        Site.hideProgress();
-    }
-
-    public void hideNewGroupDialog() {
-        newGroupPanel.hide();
-    }
-
-    public void setLogoutLinkVisible(final boolean visible) {
-        logoutLabel.setVisible(visible);
-        pipeSeparatorHtml2.setVisible(visible);
-    }
-
-    public void restoreLoginLink() {
-        loginHyperlink.setVisible(true);
-        loggedUserHyperlink.setVisible(false);
-        loginHyperlink.setTargetHistoryToken(Site.LOGIN_TOKEN);
     }
 
     public void showProgress(final String text) {
@@ -330,30 +338,29 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         DOM.setInnerText(progressText.getElement(), text);
     }
 
-    public void hideProgress() {
-        timeProgressMaxTime.cancel();
-        progressPanel.setVisible(false);
-        publicHP.setVisible(true);
-    }
-
-    public void centerLoginDialog() {
-        loginPanel.center();
-    }
-
-    public void centerNewGroupDialog() {
-        newGroupPanel.center();
-    }
-
-    public void mask() {
-        extRootBody.mask();
-    }
-
-    public void mask(final String message) {
-        extRootBody.mask(message, "x-mask-loading");
+    public void showSearchPanel(final String termToSearch) {
+        final SearchSite search = SiteBarFactory.getSearch();
+        search.doSearch(termToSearch);
+        searchPanel = (SearchSitePanel) search.getView();
+        searchPanel.show();
+        Site.hideProgress();
     }
 
     public void unMask() {
         extRootBody.unmask();
+    }
+
+    private void addDefaultItemsToOptions() {
+        optionsSubmenu.addItem(linkHelpInTrans);
+        optionsSubmenu.addItem(linkKuneBugs);
+    }
+
+    private void addItemToYourGroupSubmenu(final LinkDTO link) {
+        yourGroupsSubmenu.addItem(link.getShortName(), true, new Command() {
+            public void execute() {
+                presenter.changeState(new StateToken(link.getLink()));
+            }
+        });
     }
 
     private void createListeners() {
@@ -387,50 +394,45 @@ public class SiteBarPanel extends Composite implements SiteBarView {
         });
     }
 
-    public void setGroupsIsMember(final List<LinkDTO> groupsIsAdmin, final List<LinkDTO> groupsIsCollab) {
-        optionsSubmenu.clearItems();
-        yourGroupsSubmenu.clearItems();
-
-        int isAdminCount = groupsIsAdmin.size();
-        int isCollabCount = groupsIsCollab.size();
-        if (isAdminCount > 0 || isCollabCount > 0) {
-            optionsSubmenu.addItem(Kune.I18N.t("My Groups") + " »", yourGroupsSubmenu);
-            for (int i = 0; i < isAdminCount; i++) {
-                final LinkDTO link = groupsIsAdmin.get(i);
-                addItemToYourGroupSubmenu(link);
-            }
-            for (int i = 0; i < isCollabCount; i++) {
-                final LinkDTO link = groupsIsCollab.get(i);
-                addItemToYourGroupSubmenu(link);
-            }
-        }
-        addDefaultItemsToOptions();
-    }
-
-    public void showAlertMessage(final String message) {
-        MessageBox.alert(Kune.I18N.t("Alert"), message, new MessageBox.AlertCallback() {
+    private void createOptionsSubmenu() {
+        linkHelpInTrans = new MenuItem(img.language().getHTML() + i18n.t("Help with the translation"), true,
+                new Command() {
+                    public void execute() {
+                        presenter.onHelpInTranslation();
+                    }
+                });
+        linkKuneBugs = new MenuItem(img.kuneIcon16().getHTML() + i18n.t("Report kune bugs"), true, new Command() {
             public void execute() {
-                // Do nothing
+                Window.open("http://code.google.com/p/kune/issues/list", "_blank", null);
             }
         });
+        // linkHelp = new MenuItem(img.kuneIcon16().getHTML() +
+        // i18n.t("Help"), true, new Command() {
+        // public void execute() {
+        // presenter.changeState(new StateToken("site.docs"));
+        // }
+        // });
     }
 
-    private void addDefaultItemsToOptions() {
-        optionsSubmenu.addItem(linkHelpInTrans);
-        optionsSubmenu.addItem(linkKuneBugs);
-    }
+    private void createSearchBox() {
+        searchButton = new PushButton(img.kuneSearchIco().createImage(), img.kuneSearchIcoPush().createImage());
+        searchTextBox = new TextBox();
 
-    private void addItemToYourGroupSubmenu(final LinkDTO link) {
-        yourGroupsSubmenu.addItem(link.getShortName(), true, new Command() {
-            public void execute() {
-                presenter.changeState(new StateToken(link.getLink()));
+        siteBarHP.add(searchButton);
+        siteBarHP.add(searchTextBox);
+
+        setTextSearchSmall();
+        setDefaultTextSearch();
+        searchTextBox.addFocusListener(new FocusListener() {
+
+            public void onFocus(final Widget arg0) {
+                presenter.onSearchFocus();
+            }
+
+            public void onLostFocus(final Widget arg0) {
+                presenter.onSearchLostFocus(searchTextBox.getText());
             }
         });
-    }
-
-    public void resetOptionsSubmenu() {
-        optionsSubmenu.clearItems();
-        addDefaultItemsToOptions();
     }
 
 }

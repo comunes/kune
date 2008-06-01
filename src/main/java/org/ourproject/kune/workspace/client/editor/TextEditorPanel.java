@@ -21,7 +21,7 @@
 package org.ourproject.kune.workspace.client.editor;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Timer;
@@ -38,12 +38,14 @@ public class TextEditorPanel extends Composite implements TextEditorView {
     private final TextEditorToolbar textEditorToolbar;
     private final TextEditorPresenter presenter;
     private final Timer saveTimer;
+    private final I18nTranslationService i18n;
 
-    public TextEditorPanel(final TextEditorPresenter presenter) {
+    public TextEditorPanel(final TextEditorPresenter presenter, final I18nTranslationService i18n) {
 
         this.presenter = presenter;
+        this.i18n = i18n;
         gwtRTarea = new RichTextArea();
-        textEditorToolbar = new TextEditorToolbar(gwtRTarea, presenter);
+        textEditorToolbar = new TextEditorToolbar(gwtRTarea, presenter, i18n);
         initWidget(gwtRTarea);
 
         gwtRTarea.setWidth("97%");
@@ -61,18 +63,8 @@ public class TextEditorPanel extends Composite implements TextEditorView {
         };
     }
 
-    public void scheduleSave(final int delayMillis) {
-        saveTimer.schedule(delayMillis);
-    }
-
-    public void saveTimerCancel() {
-        saveTimer.cancel();
-    }
-
-    public void setEnabled(final boolean enabled) {
-        final String bgColor = enabled ? BACKCOLOR_ENABLED : BACKCOLOR_DISABLED;
-        DOM.setStyleAttribute(gwtRTarea.getElement(), "backgroundColor", bgColor);
-        gwtRTarea.setEnabled(enabled);
+    public void editHTML(final boolean edit) {
+        textEditorToolbar.editHTML(edit);
     }
 
     public String getHTML() {
@@ -83,6 +75,36 @@ public class TextEditorPanel extends Composite implements TextEditorView {
         return gwtRTarea.getText();
     }
 
+    public View getToolBar() {
+        return this.textEditorToolbar;
+    }
+
+    public void saveTimerCancel() {
+        saveTimer.cancel();
+    }
+
+    public void scheduleSave(final int delayMillis) {
+        saveTimer.schedule(delayMillis);
+    }
+
+    public void setEnabled(final boolean enabled) {
+        final String bgColor = enabled ? BACKCOLOR_ENABLED : BACKCOLOR_DISABLED;
+        DOM.setStyleAttribute(gwtRTarea.getElement(), "backgroundColor", bgColor);
+        gwtRTarea.setEnabled(enabled);
+    }
+
+    public void setEnabledCancelButton(final boolean enabled) {
+        textEditorToolbar.setEnabledCloseButton(enabled);
+    }
+
+    public void setEnabledSaveButton(final boolean enabled) {
+        textEditorToolbar.setEnabledSaveButton(enabled);
+    }
+
+    public void setHeight(final String height) {
+        gwtRTarea.setHeight(height);
+    }
+
     public void setHTML(final String html) {
         gwtRTarea.setHTML(html);
     }
@@ -91,45 +113,24 @@ public class TextEditorPanel extends Composite implements TextEditorView {
         gwtRTarea.setText(text);
     }
 
-    public void setHeight(final String height) {
-        gwtRTarea.setHeight(height);
-    }
-
-    public void setEnabledSaveButton(final boolean enabled) {
-        textEditorToolbar.setEnabledSaveButton(enabled);
-    }
-
-    public void setEnabledCancelButton(final boolean enabled) {
-        textEditorToolbar.setEnabledCloseButton(enabled);
-    }
-
     public void setTextSaveButton(final String text) {
         textEditorToolbar.setTextSaveButton(text);
     }
 
-    public void editHTML(final boolean edit) {
-        textEditorToolbar.editHTML(edit);
+    public void showSaveBeforeDialog() {
+        MessageBox.confirm(i18n.t("Save confirmation"), i18n.t("Save before close?"), new MessageBox.ConfirmCallback() {
+            public void execute(final String btnID) {
+                if (btnID.equals("yes")) {
+                    presenter.onSaveAndClose();
+                } else {
+                    presenter.onCancelConfirmed();
+                }
+            }
+        });
+
     }
 
     private void adjustSize(final String height) {
         gwtRTarea.setHeight(height);
-    }
-
-    public void showSaveBeforeDialog() {
-        MessageBox.confirm(Kune.I18N.t("Save confirmation"), Kune.I18N.t("Save before close?"),
-                new MessageBox.ConfirmCallback() {
-                    public void execute(final String btnID) {
-                        if (btnID.equals("yes")) {
-                            presenter.onSaveAndClose();
-                        } else {
-                            presenter.onCancelConfirmed();
-                        }
-                    }
-                });
-
-    }
-
-    public View getToolBar() {
-        return this.textEditorToolbar;
     }
 }

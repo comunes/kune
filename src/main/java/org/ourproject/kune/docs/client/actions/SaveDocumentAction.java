@@ -25,7 +25,7 @@ import org.ourproject.kune.platf.client.dto.SaveDocumentActionParams;
 import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
@@ -35,9 +35,11 @@ import com.gwtext.client.widgets.MessageBox.AlertCallback;
 
 public class SaveDocumentAction implements Action<SaveDocumentActionParams> {
     private final Session session;
+    private final I18nTranslationService i18n;
 
-    public SaveDocumentAction(final Session session) {
+    public SaveDocumentAction(final Session session, final I18nTranslationService i18n) {
         this.session = session;
+        this.i18n = i18n;
     }
 
     public void execute(final SaveDocumentActionParams params) {
@@ -55,14 +57,14 @@ public class SaveDocumentAction implements Action<SaveDocumentActionParams> {
                     throw caught;
                 } catch (final SessionExpiredException e) {
                     Site.doLogout();
-                    MessageBox.alert(Kune.I18N.t("Alert"),
-                            Kune.I18N.t("Your session has expired. Please login again."), new AlertCallback() {
+                    MessageBox.alert(i18n.t("Alert"), i18n.t("Your session has expired. Please login again."),
+                            new AlertCallback() {
                                 public void execute() {
                                     Site.doLogin(null);
                                 }
                             });
                 } catch (final Throwable e) {
-                    Site.error(Kune.I18N.t("Error saving document. Retrying..."));
+                    Site.error(i18n.t("Error saving document. Retrying..."));
                     params.getDocumentContent().onSaveFailed();
                 }
             }

@@ -20,12 +20,13 @@
 package org.ourproject.kune.workspace.client.socialnet.ui;
 
 import org.ourproject.kune.platf.client.AbstractPresenter;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.workspace.client.socialnet.EntityLiveSearchView;
 
 public class GroupLiveSearchPanel extends EntityLiveSearchPanel {
 
-    public GroupLiveSearchPanel(final AbstractPresenter presenter) {
-        super(presenter, EntityLiveSearchView.SEARCH_GROUPS);
+    public GroupLiveSearchPanel(final AbstractPresenter presenter, final I18nTranslationService i18n) {
+        super(presenter, EntityLiveSearchView.SEARCH_GROUPS, i18n);
     }
 
 }

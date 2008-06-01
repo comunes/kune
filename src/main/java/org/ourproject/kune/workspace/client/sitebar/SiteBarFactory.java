@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoose;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoosePanel;
@@ -55,56 +56,7 @@ public class SiteBarFactory {
     private static NewGroup newGroup;
     private static SearchSite search;
     private static Session session;
-
-    public static SiteBar createSiteBar(final SiteBarListener listener, final Session session) {
-        SiteBarFactory.session = session;
-        SiteBarPresenter siteBarPresenter = new SiteBarPresenter(listener, session);
-        SiteBarPanel siteBarView = new SiteBarPanel(siteBarPresenter);
-        siteBarPresenter.init(siteBarView);
-        Site.sitebar = siteBarPresenter;
-        return siteBarPresenter;
-    }
-
-    public static SiteMessage getSiteMessage() {
-        if (siteMessage == null) {
-            SiteMessagePresenter siteMessagePresenter = new SiteMessagePresenter();
-            SiteMessageView siteMessageView = new SiteMessagePanel(siteMessagePresenter, true);
-            siteMessagePresenter.init(siteMessageView);
-            siteMessage = siteMessagePresenter;
-            Site.siteUserMessage = siteMessagePresenter;
-        }
-        return siteMessage;
-    }
-
-    public static Login getLoginForm(final LoginListener listener) {
-        if (login == null) {
-            LoginPresenter presenter = new LoginPresenter(session, listener);
-            LoginPanel view = new LoginPanel(presenter);
-            presenter.init(view);
-            login = presenter;
-        }
-        return login;
-    }
-
-    public static NewGroup getNewGroupForm(final NewGroupListener listener) {
-        if (newGroup == null) {
-            NewGroupPresenter presenter = new NewGroupPresenter(listener);
-            NewGroupPanel view = new NewGroupPanel(presenter);
-            presenter.init(view);
-            newGroup = presenter;
-        }
-        return newGroup;
-    }
-
-    public static SearchSite getSearch() {
-        if (search == null) {
-            SearchSitePresenter presenter = new SearchSitePresenter();
-            SearchSiteView view = new SearchSitePanel(presenter);
-            presenter.init(view);
-            search = presenter;
-        }
-        return search;
-    }
+    private static I18nTranslationService i18n;
 
     public static LicenseChoose createLicenseChoose() {
         List<LicenseDTO> licensesList = session.getLicenses();
@@ -117,8 +69,60 @@ public class SiteBarFactory {
             }
         }
         LicenseChoosePresenter presenter = new LicenseChoosePresenter();
-        LicenseChoosePanel view = new LicenseChoosePanel(licensesNonCCList, presenter);
+        LicenseChoosePanel view = new LicenseChoosePanel(licensesNonCCList, presenter, i18n);
         presenter.init(view, licensesList, licensesNonCCList);
         return presenter;
+    }
+
+    public static SiteBar createSiteBar(final SiteBarListener listener, final Session session,
+            final I18nTranslationService i18n) {
+        SiteBarFactory.session = session;
+        SiteBarFactory.i18n = i18n;
+        SiteBarPresenter siteBarPresenter = new SiteBarPresenter(listener, session, i18n);
+        SiteBarPanel siteBarView = new SiteBarPanel(siteBarPresenter, i18n);
+        siteBarPresenter.init(siteBarView);
+        Site.sitebar = siteBarPresenter;
+        return siteBarPresenter;
+    }
+
+    public static Login getLoginForm(final LoginListener listener) {
+        if (login == null) {
+            LoginPresenter presenter = new LoginPresenter(session, listener, i18n);
+            LoginPanel view = new LoginPanel(presenter, i18n);
+            presenter.init(view);
+            login = presenter;
+        }
+        return login;
+    }
+
+    public static NewGroup getNewGroupForm(final NewGroupListener listener) {
+        if (newGroup == null) {
+            NewGroupPresenter presenter = new NewGroupPresenter(listener, i18n);
+            NewGroupPanel view = new NewGroupPanel(presenter, i18n);
+            presenter.init(view);
+            newGroup = presenter;
+        }
+        return newGroup;
+    }
+
+    public static SearchSite getSearch() {
+        if (search == null) {
+            SearchSitePresenter presenter = new SearchSitePresenter();
+            SearchSiteView view = new SearchSitePanel(presenter, i18n);
+            presenter.init(view);
+            search = presenter;
+        }
+        return search;
+    }
+
+    public static SiteMessage getSiteMessage() {
+        if (siteMessage == null) {
+            SiteMessagePresenter siteMessagePresenter = new SiteMessagePresenter();
+            SiteMessageView siteMessageView = new SiteMessagePanel(siteMessagePresenter, true);
+            siteMessagePresenter.init(siteMessageView);
+            siteMessage = siteMessagePresenter;
+            Site.siteUserMessage = siteMessagePresenter;
+        }
+        return siteMessage;
     }
 }

@@ -61,8 +61,7 @@ public class KuneEntryPoint implements EntryPoint {
                 Log.debug("Workspace adaptation to your language failed");
             }
 
-            public void onSuccess(final I18nLanguageDTO result) {
-                final I18nLanguageDTO initialLang = result;
+            public void onSuccess(final I18nLanguageDTO initialLang) {
                 server.getLexicon(initialLang.getCode(), new AsyncCallback<HashMap<String, String>>() {
                     public void onFailure(final Throwable caught) {
                         Log.debug("Workspace adaptation to your language failed");

@@ -23,7 +23,7 @@ package org.ourproject.kune.workspace.client.ui.ctx.items;
 import org.ourproject.kune.platf.client.PlatformEvents;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.ContainerSimpleDTO;
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
 
@@ -45,8 +45,10 @@ class ContextTopBar extends VerticalPanel {
     public final HorizontalPanel firstRow;
     private final ContextItemsImages img;
     private final MenuBar pathSubmenu;
+    private final I18nTranslationService i18n;
 
-    public ContextTopBar(final ContextItemsPresenter presenter) {
+    public ContextTopBar(final ContextItemsPresenter presenter, final I18nTranslationService i18n) {
+        this.i18n = i18n;
         img = ContextItemsImages.App.getInstance();
         firstRow = new HorizontalPanel();
         final HorizontalPanel secondRow = new HorizontalPanel();
@@ -59,7 +61,7 @@ class ContextTopBar extends VerticalPanel {
             }
         });
 
-        KuneUiUtils.setQuickTip(btnGoParent, Kune.I18N.t("Go to parent folder"));
+        KuneUiUtils.setQuickTip(btnGoParent, i18n.t("Go to parent folder"));
         btnGoParentDisabled = img.folderGoUpLight().createImage();
         final MenuBar pathMenu = new MenuBar();
         pathSubmenu = new MenuBar(true);
@@ -73,7 +75,7 @@ class ContextTopBar extends VerticalPanel {
                 RoundedBorderDecorator.SIMPLE);
         iconBarHP.add(buttonRounded);
         pathMenu.addItem(img.folderpathmenu().getHTML(), true, pathSubmenu);
-        KuneUiUtils.setQuickTip(pathMenu, Kune.I18N.t("Navigation tree"));
+        KuneUiUtils.setQuickTip(pathMenu, i18n.t("Navigation tree"));
         currentFolderHP.add(btnGoParent);
         currentFolderHP.add(btnGoParentDisabled);
         currentFolder = new Label("Current Container");
@@ -105,7 +107,7 @@ class ContextTopBar extends VerticalPanel {
             String folderName = folder.getName();
             if (i == 0) {
                 // We translate root folders
-                folderName = Kune.I18N.t(folderName);
+                folderName = i18n.t(folderName);
             }
             pathSubmenu.addItem(indent + img.folder().getHTML() + "&nbsp;" + folderName, true, new Command() {
                 public void execute() {

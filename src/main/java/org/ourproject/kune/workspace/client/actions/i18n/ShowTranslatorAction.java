@@ -20,7 +20,7 @@
 package org.ourproject.kune.workspace.client.actions.i18n;
 
 import org.ourproject.kune.platf.client.dispatch.Action;
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
@@ -30,10 +30,12 @@ public class ShowTranslatorAction implements Action {
 
     private final Session session;
     private final Workspace workspace;
+    private final I18nTranslationService i18n;
 
-    public ShowTranslatorAction(final Session session, final Workspace workspace) {
+    public ShowTranslatorAction(final Session session, final Workspace workspace, final I18nTranslationService i18n) {
         this.session = session;
         this.workspace = workspace;
+        this.i18n = i18n;
     }
 
     public void execute(final Object value) {
@@ -45,7 +47,7 @@ public class ShowTranslatorAction implements Action {
         if (session.isLogged()) {
             workspace.getI18nTranslatorComponent().show();
         } else {
-            Site.info(Kune.I18N.t("Sign in or register to help with translation"));
+            Site.info(i18n.t("Sign in or register to help with translation"));
         }
         Site.hideProgress();
     }

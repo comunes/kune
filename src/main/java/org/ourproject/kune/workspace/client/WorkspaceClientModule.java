@@ -62,6 +62,7 @@ import org.ourproject.kune.workspace.client.actions.sn.RequestJoinGroupAction;
 import org.ourproject.kune.workspace.client.actions.sn.SetAdminAsCollabAction;
 import org.ourproject.kune.workspace.client.actions.sn.SetCollabAsAdminAction;
 import org.ourproject.kune.workspace.client.actions.sn.UnJoinGroupAction;
+import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 public class WorkspaceClientModule implements ClientModule {
@@ -70,10 +71,13 @@ public class WorkspaceClientModule implements ClientModule {
     private final Workspace workspace;
     private final Dispatcher dispacher;
     private final Session session;
+    private final I18nUITranslationService i18n;
 
-    public WorkspaceClientModule(final Session session, final StateManager stateManager, final Workspace workspace) {
+    public WorkspaceClientModule(final Session session, final StateManager stateManager, final Workspace workspace,
+            final I18nUITranslationService i18n) {
         this.session = session;
         this.stateManager = stateManager;
+        this.i18n = i18n;
         dispacher = DefaultDispatcher.getInstance();
         this.workspace = workspace;
     }
@@ -82,37 +86,39 @@ public class WorkspaceClientModule implements ClientModule {
         register.addAction(WorkspaceEvents.START_APP, new InitAction(session, dispacher, workspace));
         register.addAction(WorkspaceEvents.STOP_APP, new StopAction(workspace));
         register.addAction(WorkspaceEvents.INIT_DATA_RECEIVED, new InitDataReceivedAction(session, workspace));
-        register.addAction(WorkspaceEvents.USER_LOGGED_IN, new LoggedInAction(session, stateManager));
+        register.addAction(WorkspaceEvents.USER_LOGGED_IN, new LoggedInAction(session, stateManager, i18n));
         register.addAction(WorkspaceEvents.USER_LOGGED_OUT, new LoggedOutAction(session, stateManager));
         register.addAction(WorkspaceEvents.ONLY_CHECK_USER_SESSION, new OnlyCheckUserSessionAction(session));
         register.addAction(PlatformEvents.ATTACH_TO_EXTENSIBLE_WIDGET, new AttachToExtensibleWidgetAction(workspace));
         register.addAction(PlatformEvents.DETACH_FROM_EXTENSIBLE_WIDGET,
                 new DetachFromExtensibleWidgetAction(workspace));
         register.addAction(PlatformEvents.CLEAR_EXTENSIBLE_WIDGET, new ClearExtensibleWidgetAction(workspace));
-        register.addAction(WorkspaceEvents.REQ_JOIN_GROUP, new RequestJoinGroupAction(session, stateManager));
+        register.addAction(WorkspaceEvents.REQ_JOIN_GROUP, new RequestJoinGroupAction(session, stateManager, i18n));
         register.addAction(WorkspaceEvents.ACCEPT_JOIN_GROUP, new AcceptJoinGroupAction(session, stateManager,
-                workspace));
-        register.addAction(WorkspaceEvents.DENY_JOIN_GROUP, new DenyJoinGroupAction(session, stateManager));
-        register.addAction(WorkspaceEvents.DEL_MEMBER, new DeleteMemberAction(session, stateManager));
+                workspace, i18n));
+        register.addAction(WorkspaceEvents.DENY_JOIN_GROUP, new DenyJoinGroupAction(session, stateManager, i18n));
+        register.addAction(WorkspaceEvents.DEL_MEMBER, new DeleteMemberAction(session, stateManager, i18n));
         register.addAction(WorkspaceEvents.SET_COLLAB_AS_ADMIN, new SetCollabAsAdminAction(session, stateManager,
-                workspace));
+                workspace, i18n));
         register.addAction(WorkspaceEvents.SET_ADMIN_AS_COLLAB, new SetAdminAsCollabAction(session, stateManager,
-                workspace));
-        register.addAction(WorkspaceEvents.ADD_ADMIN_MEMBER, new AddAdminAction(session, stateManager, workspace));
-        register.addAction(WorkspaceEvents.ADD_COLLAB_MEMBER, new AddCollabAction(session, stateManager, workspace));
-        register.addAction(WorkspaceEvents.ADD_VIEWER_MEMBER, new AddViewerAction(session, stateManager));
-        register.addAction(WorkspaceEvents.UNJOIN_GROUP, new UnJoinGroupAction(session, stateManager));
+                workspace, i18n));
+        register
+                .addAction(WorkspaceEvents.ADD_ADMIN_MEMBER, new AddAdminAction(session, stateManager, workspace, i18n));
+        register.addAction(WorkspaceEvents.ADD_COLLAB_MEMBER, new AddCollabAction(session, stateManager, workspace,
+                i18n));
+        register.addAction(WorkspaceEvents.ADD_VIEWER_MEMBER, new AddViewerAction(session, stateManager, i18n));
+        register.addAction(WorkspaceEvents.UNJOIN_GROUP, new UnJoinGroupAction(session, stateManager, i18n));
         register.addAction(WorkspaceEvents.CHANGE_GROUP_WSTHEME, new ChangeGroupWsThemeAction(session, workspace));
-        register.addAction(WorkspaceEvents.RATE_CONTENT, new RateContentAction(session, stateManager));
+        register.addAction(WorkspaceEvents.RATE_CONTENT, new RateContentAction(session, stateManager, i18n));
         register.addAction(WorkspaceEvents.ENABLE_RATEIT, new EnableRateItAction(workspace));
         register.addAction(WorkspaceEvents.DISABLE_RATEIT, new DisableRateItAction(workspace));
         register.addAction(WorkspaceEvents.GET_TRANSLATION, new GetTranslationAction(session));
         register.addAction(WorkspaceEvents.ADD_MEMBER_GROUPLIVESEARCH, new AddGroupLiveSearchAction(workspace));
         register.addAction(WorkspaceEvents.ADD_USERLIVESEARCH, new AddUserLiveSearchAction(workspace));
-        register.addAction(WorkspaceEvents.SHOW_TRANSLATOR, new ShowTranslatorAction(session, workspace));
+        register.addAction(WorkspaceEvents.SHOW_TRANSLATOR, new ShowTranslatorAction(session, workspace, i18n));
         register.addAction(WorkspaceEvents.SHOW_SEARCHER, new ShowSearcherAction());
-        register.addAction(WorkspaceEvents.DO_TRANSLATION, new DoTranslationAction(session));
-        register.addAction(WorkspaceEvents.GET_LEXICON, new GetLexiconAction());
+        register.addAction(WorkspaceEvents.DO_TRANSLATION, new DoTranslationAction(session, i18n));
+        register.addAction(WorkspaceEvents.GET_LEXICON, new GetLexiconAction(i18n));
         register.addAction(WorkspaceEvents.USER_LOGIN, new UserLoginAction());
         register.addAction(WorkspaceEvents.USER_LOGOUT, new UserLogoutAction(session));
         register.addAction(WorkspaceEvents.USER_REGISTER, new UserRegisterAction());

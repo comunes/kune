@@ -23,6 +23,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.AbstractPresenter;
+import org.ourproject.kune.platf.client.PlatformEvents;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
@@ -30,19 +31,50 @@ import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.workspace.GroupMembersComponent;
 
 public class GroupMembersPresenter extends AbstractPresenter implements GroupMembersComponent, EntityLiveSearchListener {
 
-    private static final String ADMIN_CATEGORY = Kune.I18N.t("Admins");
-    private static final String COLLAB_CATEGORY = Kune.I18N.t("Collaborators");
-    private static final String PENDING_CATEGORY = Kune.I18N.t("Pending");
     private GroupMembersView view;
+    private final I18nTranslationService i18n;
+    private final String adminCategory;
+    private final String collabCategory;
+    private final String pendigCategory;
+    private final MemberAction gotoGroupCommand;
+
+    public GroupMembersPresenter(final I18nTranslationService i18n) {
+        this.i18n = i18n;
+        adminCategory = i18n.t("Admins");
+        collabCategory = i18n.t("Collaborators");
+        pendigCategory = i18n.t("Pending");
+        gotoGroupCommand = new MemberAction(i18n.t("Visit this member homepage"), PlatformEvents.GOTO);
+
+    }
+
+    public void addCollab(final String groupShortName) {
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ADD_COLLAB_MEMBER, groupShortName);
+    }
+
+    public View getView() {
+        return view;
+    }
+
+    public void hide() {
+        view.hide();
+    }
 
     public void init(final GroupMembersView view) {
         this.view = view;
+    }
+
+    public void onJoin() {
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.REQ_JOIN_GROUP, null);
+    }
+
+    public void onSelection(final String groupShortName, final String groupLongName) {
+        view.confirmAddCollab(groupShortName, groupLongName);
     }
 
     public void setGroupMembers(final StateDTO state) {
@@ -50,6 +82,48 @@ public class GroupMembersPresenter extends AbstractPresenter implements GroupMem
             hide();
         } else {
             setGroupMembers(state.getGroupMembers(), state.getGroupRights());
+        }
+    }
+
+    public void showAdmins() {
+        view.showCategory(adminCategory);
+    }
+
+    public void showCollabs() {
+        view.showCategory(collabCategory);
+    }
+
+    private void addMembers(final List<GroupDTO> adminsList, final List<GroupDTO> collabList,
+            final List<GroupDTO> pendingCollabsList, final int numAdmins, final int numCollaborators,
+            final int numPendingCollabs, final boolean isAdmin, final MemberAction[] adminsActions,
+            final MemberAction[] collabActions, final MemberAction[] pendingsActions, final MemberAction[] viewerActions) {
+        if (numAdmins > 0) {
+            view.addCategory(adminCategory, i18n.t("People that can admin this group"));
+            iteraList(adminCategory, adminsList, adminsActions);
+        }
+        if (numCollaborators > 0) {
+            view.addCategory(collabCategory, i18n.t("Other people that collaborate with this group"));
+            iteraList(collabCategory, collabList, collabActions);
+        }
+        if (isAdmin) {
+            if (numPendingCollabs > 0) {
+                view.addCategory(pendigCategory, i18n.t("People pending to be accepted in this group by the admins"),
+                        GroupMembersView.ICON_ALERT);
+                iteraList(pendigCategory, pendingCollabsList, pendingsActions);
+            }
+        }
+
+    }
+
+    private boolean isMember(final boolean userIsAdmin, final boolean userIsCollab) {
+        return userIsAdmin || userIsCollab;
+    }
+
+    private void iteraList(final String categoryName, final List<GroupDTO> groupList, final MemberAction[] actions) {
+        final Iterator<GroupDTO> iter = groupList.iterator();
+        while (iter.hasNext()) {
+            final GroupDTO group = iter.next();
+            view.addCategoryMember(categoryName, group.getShortName(), group.getLongName(), actions);
         }
     }
 
@@ -83,100 +157,38 @@ public class GroupMembersPresenter extends AbstractPresenter implements GroupMem
         }
 
         if (numAdmins == 0 && numCollaborators == 0) {
-            view.addComment(Kune.I18N.t("This is an orphaned project, if you are interested "
+            view.addComment(i18n.t("This is an orphaned project, if you are interested "
                     + "please request to join to work on it"));
         }
 
         if (userCanView) {
             if (rights.isAdministrable()) {
                 MemberAction[] adminsActions = {
-                        new MemberAction(Kune.I18N.t("Remove this member"), WorkspaceEvents.DEL_MEMBER),
-                        new MemberAction(Kune.I18N.t("Change to collaborator"), WorkspaceEvents.SET_ADMIN_AS_COLLAB),
-                        MemberAction.GOTO_GROUP_COMMAND };
+                        new MemberAction(i18n.t("Remove this member"), WorkspaceEvents.DEL_MEMBER),
+                        new MemberAction(i18n.t("Change to collaborator"), WorkspaceEvents.SET_ADMIN_AS_COLLAB),
+                        gotoGroupCommand };
                 MemberAction[] collabActions = {
-                        new MemberAction(Kune.I18N.t("Remove this member"), WorkspaceEvents.DEL_MEMBER),
-                        new MemberAction(Kune.I18N.t("Change to admin"), WorkspaceEvents.SET_COLLAB_AS_ADMIN),
-                        MemberAction.GOTO_GROUP_COMMAND };
+                        new MemberAction(i18n.t("Remove this member"), WorkspaceEvents.DEL_MEMBER),
+                        new MemberAction(i18n.t("Change to admin"), WorkspaceEvents.SET_COLLAB_AS_ADMIN),
+                        gotoGroupCommand };
                 MemberAction[] pendingsActions = {
-                        new MemberAction(Kune.I18N.t("Accept this member"), WorkspaceEvents.ACCEPT_JOIN_GROUP),
-                        new MemberAction(Kune.I18N.t("Don't accept this member"), WorkspaceEvents.DENY_JOIN_GROUP),
-                        MemberAction.GOTO_GROUP_COMMAND };
-                MemberAction[] viewerActions = { MemberAction.GOTO_GROUP_COMMAND };
+                        new MemberAction(i18n.t("Accept this member"), WorkspaceEvents.ACCEPT_JOIN_GROUP),
+                        new MemberAction(i18n.t("Don't accept this member"), WorkspaceEvents.DENY_JOIN_GROUP),
+                        gotoGroupCommand };
+                MemberAction[] viewerActions = { gotoGroupCommand };
                 addMembers(adminsList, collabList, pendingCollabsList, numAdmins, numCollaborators, numPendingCollabs,
                         userIsAdmin, adminsActions, collabActions, pendingsActions, viewerActions);
             } else if (rights.isEditable() || rights.isVisible()) {
-                MemberAction[] adminsActions = { MemberAction.GOTO_GROUP_COMMAND };
-                MemberAction[] collabActions = { MemberAction.GOTO_GROUP_COMMAND };
-                MemberAction[] pendingsActions = { MemberAction.GOTO_GROUP_COMMAND };
-                MemberAction[] viewerActions = { MemberAction.GOTO_GROUP_COMMAND };
+                MemberAction[] adminsActions = { gotoGroupCommand };
+                MemberAction[] collabActions = { gotoGroupCommand };
+                MemberAction[] pendingsActions = { gotoGroupCommand };
+                MemberAction[] viewerActions = { gotoGroupCommand };
                 addMembers(adminsList, collabList, pendingCollabsList, numAdmins, numCollaborators, numPendingCollabs,
                         userIsAdmin, adminsActions, collabActions, pendingsActions, viewerActions);
             }
         }
         view.setDropDownContentVisible(true);
         view.show();
-    }
-
-    public void showAdmins() {
-        view.showCategory(ADMIN_CATEGORY);
-    }
-
-    public void showCollabs() {
-        view.showCategory(COLLAB_CATEGORY);
-    }
-
-    public void hide() {
-        view.hide();
-    }
-
-    public void onJoin() {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.REQ_JOIN_GROUP, null);
-    }
-
-    public void onSelection(final String groupShortName, final String groupLongName) {
-        view.confirmAddCollab(groupShortName, groupLongName);
-    }
-
-    public View getView() {
-        return view;
-    }
-
-    private void addMembers(final List<GroupDTO> adminsList, final List<GroupDTO> collabList,
-            final List<GroupDTO> pendingCollabsList, final int numAdmins, final int numCollaborators,
-            final int numPendingCollabs, final boolean isAdmin, final MemberAction[] adminsActions,
-            final MemberAction[] collabActions, final MemberAction[] pendingsActions, final MemberAction[] viewerActions) {
-        if (numAdmins > 0) {
-            view.addCategory(ADMIN_CATEGORY, Kune.I18N.t("People that can admin this group"));
-            iteraList(ADMIN_CATEGORY, adminsList, adminsActions);
-        }
-        if (numCollaborators > 0) {
-            view.addCategory(COLLAB_CATEGORY, Kune.I18N.t("Other people that collaborate with this group"));
-            iteraList(COLLAB_CATEGORY, collabList, collabActions);
-        }
-        if (isAdmin) {
-            if (numPendingCollabs > 0) {
-                view.addCategory(PENDING_CATEGORY, Kune.I18N
-                        .t("People pending to be accepted in this group by the admins"), GroupMembersView.ICON_ALERT);
-                iteraList(PENDING_CATEGORY, pendingCollabsList, pendingsActions);
-            }
-        }
-
-    }
-
-    private void iteraList(final String categoryName, final List<GroupDTO> groupList, final MemberAction[] actions) {
-        final Iterator<GroupDTO> iter = groupList.iterator();
-        while (iter.hasNext()) {
-            final GroupDTO group = iter.next();
-            view.addCategoryMember(categoryName, group.getShortName(), group.getLongName(), actions);
-        }
-    }
-
-    private boolean isMember(final boolean userIsAdmin, final boolean userIsCollab) {
-        return userIsAdmin || userIsCollab;
-    }
-
-    public void addCollab(final String groupShortName) {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ADD_COLLAB_MEMBER, groupShortName);
     }
 
 }

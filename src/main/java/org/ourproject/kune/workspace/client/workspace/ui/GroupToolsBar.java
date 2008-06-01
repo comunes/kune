@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import org.ourproject.kune.platf.client.services.ColorTheme;
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.tool.ToolTrigger;
 import org.ourproject.kune.platf.client.tool.ToolTrigger.TriggerListener;
 import org.ourproject.kune.platf.client.ui.HasColor;
@@ -39,8 +38,10 @@ class GroupToolsBar extends VerticalPanel {
     private static final String ITEM_NOT_SELECTED = "kune-GroupToolsBar-itemNotSelected";
     private Widget currentTab;
     private final HashMap<String, Widget> tabs;
+    private final ColorTheme colorTheme;
 
-    public GroupToolsBar() {
+    public GroupToolsBar(final ColorTheme colorTheme) {
+        this.colorTheme = colorTheme;
         tabs = new HashMap<String, Widget>();
         currentTab = null;
         addStyleName("kune-GroupToolsBar");
@@ -52,19 +53,6 @@ class GroupToolsBar extends VerticalPanel {
         setTabSelected(menuItem, false);
         tabs.put(trigger.getName(), menuItem);
         this.add(menuItem);
-    }
-
-    private Widget createItem(final int index, final ToolTrigger trigger) {
-        final SimplePanel menuItem = new SimplePanel();
-        addStyleName("Tab");
-        final Hyperlink hl = new Hyperlink(trigger.getLabel(), "");
-        trigger.setListener(new TriggerListener() {
-            public void onStateChanged(final String encoded) {
-                hl.setTargetHistoryToken(encoded);
-            }
-        });
-        menuItem.add(hl);
-        return new RoundedBorderDecorator(menuItem, RoundedBorderDecorator.RIGHT);
     }
 
     public void selectItem(final String toolName) {
@@ -87,12 +75,24 @@ class GroupToolsBar extends VerticalPanel {
         }
     }
 
+    private Widget createItem(final int index, final ToolTrigger trigger) {
+        final SimplePanel menuItem = new SimplePanel();
+        addStyleName("Tab");
+        final Hyperlink hl = new Hyperlink(trigger.getLabel(), "");
+        trigger.setListener(new TriggerListener() {
+            public void onStateChanged(final String encoded) {
+                hl.setTargetHistoryToken(encoded);
+            }
+        });
+        menuItem.add(hl);
+        return new RoundedBorderDecorator(menuItem, RoundedBorderDecorator.RIGHT);
+    }
+
     private Widget getWidget(final String toolName) {
         return tabs.get(toolName);
     }
 
     private void setTabSelected(final Widget tab, final boolean isSelected) {
-        ColorTheme theme = Kune.getInstance().theme;
         if (isSelected) {
             tab.removeStyleName(ITEM_NOT_SELECTED);
             tab.addStyleName(ITEM_SELECTED);
@@ -100,7 +100,7 @@ class GroupToolsBar extends VerticalPanel {
             tab.removeStyleName(ITEM_SELECTED);
             tab.addStyleName(ITEM_NOT_SELECTED);
         }
-        String color = isSelected ? theme.getToolSelected() : theme.getToolUnselected();
+        String color = isSelected ? colorTheme.getToolSelected() : colorTheme.getToolUnselected();
         ((HasColor) tab).setColor(color);
     }
 

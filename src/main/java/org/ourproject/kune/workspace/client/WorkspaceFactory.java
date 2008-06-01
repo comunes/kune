@@ -22,6 +22,9 @@ package org.ourproject.kune.workspace.client;
 import org.ourproject.kune.platf.client.app.DesktopView;
 import org.ourproject.kune.platf.client.app.ui.DesktopPanel;
 import org.ourproject.kune.platf.client.extend.ExtensibleWidgetsManager;
+import org.ourproject.kune.platf.client.services.ColorTheme;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.editor.TextEditorListener;
@@ -94,93 +97,27 @@ import org.ourproject.kune.workspace.client.workspace.ui.WorkspacePanel;
 public class WorkspaceFactory {
 
     private static Session session;
+    private static I18nTranslationService i18n;
+    private static ColorTheme colorTheme;
+    private static KuneErrorHandler errorHandler;
 
-    public static Workspace createWorkspace(final Session session, final ExtensibleWidgetsManager extensionPointManager) {
-        WorkspaceFactory.session = session;
-        WorkspacePresenter workspace = new WorkspacePresenter(session);
-        WorkspaceView view = new WorkspacePanel(workspace);
-        workspace.init(view, extensionPointManager);
-        return workspace;
-    }
-
-    public static TextEditor createDocumentEditor(final TextEditorListener listener) {
-        TextEditorPresenter presenter = new TextEditorPresenter(listener, true);
-        TextEditorPanel panel = new TextEditorPanel(presenter);
-        presenter.init(panel);
-        return presenter;
-    }
-
-    public static DesktopView createDesktop(final Workspace workspace, final SiteBarListener listener,
-            final Session session) {
-        return new DesktopPanel(workspace, listener, session);
-    }
-
-    public static LicenseComponent createLicenseComponent() {
-        LicensePresenter presenter = new LicensePresenter();
-        LicenseView view = new LicensePanel(presenter);
-        presenter.init(view);
-        return presenter;
-    }
-
-    public static ContentTitleComponent createContentTitleComponent() {
-        ContentTitlePresenter presenter = new ContentTitlePresenter();
-        ContentTitleView view = new ContentTitlePanel(presenter);
+    public static ContentBottomToolBarComponent createContentBottomToolBarComponent() {
+        ContentBottomToolBarPresenter presenter = new ContentBottomToolBarPresenter();
+        ContentBottomToolBarView view = new ContentBottomToolBarPanel(presenter, i18n);
         presenter.init(view);
         return presenter;
     }
 
     public static ContentSubTitleComponent createContentSubTitleComponent() {
-        ContentSubTitlePresenter presenter = new ContentSubTitlePresenter();
-        ContentSubTitleView view = new ContentSubTitlePanel(presenter);
+        ContentSubTitlePresenter presenter = new ContentSubTitlePresenter(i18n);
+        ContentSubTitleView view = new ContentSubTitlePanel(presenter, i18n);
         presenter.init(view);
         return presenter;
     }
 
-    public static ContextItems createContextItems() {
-        ContextItemsPresenter presenter = new ContextItemsPresenter();
-        ContextItemsPanel panel = new ContextItemsPanel(presenter);
-        presenter.init(panel);
-        return presenter;
-    }
-
-    public static GroupMembersComponent createGroupMembersComponent() {
-        GroupMembersPresenter presenter = new GroupMembersPresenter();
-        GroupMembersView view = new GroupMembersPanel(presenter);
-        presenter.init(view);
-        return presenter;
-    }
-
-    public static ParticipationComponent createParticipationComponent() {
-        ParticipationPresenter presenter = new ParticipationPresenter();
-        ParticipationView view = new ParticipationPanel(presenter);
-        presenter.init(view);
-        return presenter;
-    }
-
-    public static GroupSummaryComponent createGroupSummaryComponent() {
-        GroupSummaryPresenter presenter = new GroupSummaryPresenter();
-        GroupSummaryView view = new GroupSummaryPanel(presenter);
-        presenter.init(view);
-        return presenter;
-    }
-
-    public static ThemeMenuComponent createThemeMenuComponent() {
-        ThemeMenuPresenter presenter = new ThemeMenuPresenter();
-        ThemeMenuView view = new ThemeMenuPanel(presenter);
-        presenter.init(view);
-        return presenter;
-    }
-
-    public static TagsComponent createTagsComponent() {
-        TagsPresenter presenter = new TagsPresenter(session);
-        TagsView view = new TagsPanel(presenter);
-        presenter.init(view);
-        return presenter;
-    }
-
-    public static ContentBottomToolBarComponent createContentBottomToolBarComponent() {
-        ContentBottomToolBarPresenter presenter = new ContentBottomToolBarPresenter();
-        ContentBottomToolBarView view = new ContentBottomToolBarPanel(presenter);
+    public static ContentTitleComponent createContentTitleComponent() {
+        ContentTitlePresenter presenter = new ContentTitlePresenter(i18n, errorHandler);
+        ContentTitleView view = new ContentTitlePanel(presenter);
         presenter.init(view);
         return presenter;
     }
@@ -192,32 +129,106 @@ public class WorkspaceFactory {
         return presenter;
     }
 
+    public static ContextItems createContextItems() {
+        ContextItemsPresenter presenter = new ContextItemsPresenter(i18n);
+        ContextItemsPanel panel = new ContextItemsPanel(presenter, i18n);
+        presenter.init(panel);
+        return presenter;
+    }
+
+    public static DesktopView createDesktop(final Workspace workspace, final SiteBarListener listener,
+            final Session session) {
+        return new DesktopPanel(workspace, listener, session, i18n);
+    }
+
+    public static TextEditor createDocumentEditor(final TextEditorListener listener) {
+        TextEditorPresenter presenter = new TextEditorPresenter(listener, true);
+        TextEditorPanel panel = new TextEditorPanel(presenter, i18n);
+        presenter.init(panel);
+        return presenter;
+    }
+
     public static GroupLiveSearchComponent createGroupLiveSearchComponent() {
         GroupLiveSearchPresenter presenter = new GroupLiveSearchPresenter();
-        EntityLiveSearchView view = new GroupLiveSearchPanel(presenter);
+        EntityLiveSearchView view = new GroupLiveSearchPanel(presenter, i18n);
         presenter.init(view);
         return presenter;
     }
 
-    public static UserLiveSearchComponent createUserLiveSearchComponent() {
-        UserLiveSearchPresenter presenter = new UserLiveSearchPresenter();
-        EntityLiveSearchView view = new UserLiveSearchPanel(presenter);
+    public static GroupMembersComponent createGroupMembersComponent() {
+        GroupMembersPresenter presenter = new GroupMembersPresenter(i18n);
+        GroupMembersView view = new GroupMembersPanel(presenter, i18n);
+        presenter.init(view);
+        return presenter;
+    }
+
+    public static GroupSummaryComponent createGroupSummaryComponent() {
+        GroupSummaryPresenter presenter = new GroupSummaryPresenter();
+        GroupSummaryView view = new GroupSummaryPanel(presenter, i18n, colorTheme);
         presenter.init(view);
         return presenter;
     }
 
     public static I18nTranslatorComponent createI18nTranslatorComponent() {
         I18nTranslatorPresenter presenter = new I18nTranslatorPresenter(session);
-        I18nTranslatorView view = new I18nTranslatorPanel(presenter);
+        I18nTranslatorView view = new I18nTranslatorPanel(presenter, i18n);
         presenter.init(view);
         return presenter;
     }
 
     public static LanguageSelectorComponent createLanguageSelectorComponent() {
         LanguageSelectorPresenter presenter = new LanguageSelectorPresenter(session);
-        LanguageSelectorView view = new LanguageSelectorPanel(presenter);
+        LanguageSelectorView view = new LanguageSelectorPanel(presenter, i18n);
         presenter.init(view);
         return presenter;
+    }
+
+    public static LicenseComponent createLicenseComponent() {
+        LicensePresenter presenter = new LicensePresenter();
+        LicenseView view = new LicensePanel(presenter, i18n);
+        presenter.init(view);
+        return presenter;
+    }
+
+    public static ParticipationComponent createParticipationComponent() {
+        ParticipationPresenter presenter = new ParticipationPresenter(i18n);
+        ParticipationView view = new ParticipationPanel(presenter, i18n);
+        presenter.init(view);
+        return presenter;
+    }
+
+    public static TagsComponent createTagsComponent() {
+        TagsPresenter presenter = new TagsPresenter(session);
+        TagsView view = new TagsPanel(presenter, i18n);
+        presenter.init(view);
+        return presenter;
+    }
+
+    public static ThemeMenuComponent createThemeMenuComponent() {
+        ThemeMenuPresenter presenter = new ThemeMenuPresenter();
+        ThemeMenuView view = new ThemeMenuPanel(presenter, i18n, colorTheme);
+        presenter.init(view);
+        return presenter;
+    }
+
+    public static UserLiveSearchComponent createUserLiveSearchComponent() {
+        UserLiveSearchPresenter presenter = new UserLiveSearchPresenter();
+        EntityLiveSearchView view = new UserLiveSearchPanel(presenter, i18n);
+        presenter.init(view);
+        return presenter;
+    }
+
+    public static Workspace createWorkspace(final Session session,
+            final ExtensibleWidgetsManager extensionPointManager, final I18nTranslationService i18n,
+            final ColorTheme colorTheme, final KuneErrorHandler errorHandler) {
+        WorkspaceFactory.session = session;
+        WorkspaceFactory.i18n = i18n;
+        WorkspaceFactory.colorTheme = colorTheme;
+        WorkspaceFactory.errorHandler = errorHandler;
+        WorkspacePresenter workspace = new WorkspacePresenter(session);
+        WorkspaceView view = new WorkspacePanel(workspace, i18n, colorTheme);
+        workspace.init(view, extensionPointManager);
+        return workspace;
     }
 
 }

@@ -21,7 +21,7 @@ package org.ourproject.kune.chat.client;
 
 import java.util.Date;
 
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 
 import com.calclab.emite.client.core.signal.Listener;
 import com.calclab.emite.client.im.roster.RosterManager.SubscriptionMode;
@@ -35,10 +35,13 @@ import com.google.gwt.user.client.Window;
 class ChatEngineXmpp implements ChatEngine {
     private final ChatOptions chatOptions;
     private final EmiteUIDialog emiteDialog;
+    private final I18nTranslationService i18n;
 
-    public ChatEngineXmpp(final EmiteUIDialog emiteUIDialog, final ChatOptions chatOptions) {
+    public ChatEngineXmpp(final EmiteUIDialog emiteUIDialog, final ChatOptions chatOptions,
+            final I18nTranslationService i18n) {
         this.emiteDialog = emiteUIDialog;
         this.chatOptions = chatOptions;
+        this.i18n = i18n;
     }
 
     public ChatOptions getChatOptions() {
@@ -66,8 +69,7 @@ class ChatEngineXmpp implements ChatEngine {
 
         final String initialWindowTitle = Window.getTitle();
         chatOptions.userOptions = userChatOptions;
-        emiteDialog.start(userChatOptions, chatOptions.httpBase, chatOptions.roomHost, avatarProvider, Kune.I18N
-                .t("Chat"));
+        emiteDialog.start(userChatOptions, chatOptions.httpBase, chatOptions.roomHost, avatarProvider, i18n.t("Chat"));
         emiteDialog.show(OwnStatus.online);
         emiteDialog.hide();
         emiteDialog.onConversationAttended(new Listener<String>() {

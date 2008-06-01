@@ -27,6 +27,9 @@ import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.extend.ExtensibleWidgetsManager;
+import org.ourproject.kune.platf.client.services.ColorTheme;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.tool.ClientTool;
@@ -42,18 +45,19 @@ public class DefaultApplication implements Application {
     private StateManager stateManager;
 
     public DefaultApplication(final Map<String, ClientTool> tools, final Session session,
-            final ExtensibleWidgetsManager extensionPointManager) {
+            final ExtensibleWidgetsManager extensionPointManager, final I18nTranslationService i18n,
+            final ColorTheme colorTheme, final KuneErrorHandler errorHandler) {
         this.tools = tools;
-        workspace = WorkspaceFactory.createWorkspace(session, extensionPointManager);
+        workspace = WorkspaceFactory.createWorkspace(session, extensionPointManager, i18n, colorTheme, errorHandler);
         workspace.attachTools(tools.values().iterator());
 
         DesktopView desktop = WorkspaceFactory.createDesktop(workspace, new SiteBarListener() {
-            public void onUserLoggedOut() {
-                dispatcher.fire(WorkspaceEvents.USER_LOGGED_OUT, null);
-            }
-
             public void onChangeState(StateToken token) {
                 stateManager.setState(token);
+            }
+
+            public void onUserLoggedOut() {
+                dispatcher.fire(WorkspaceEvents.USER_LOGGED_OUT, null);
             }
         }, session);
         desktop.attach();
@@ -64,21 +68,21 @@ public class DefaultApplication implements Application {
         return dispatcher;
     }
 
-    public Workspace getWorkspace() {
-        return workspace;
+    public StateManager getStateManager() {
+        return stateManager;
     }
 
     public ClientTool getTool(final String toolName) {
         return tools.get(toolName);
     }
 
+    public Workspace getWorkspace() {
+        return workspace;
+    }
+
     public void init(final DefaultDispatcher dispatcher, final StateManager stateManager) {
         this.dispatcher = dispatcher;
         this.stateManager = stateManager;
-    }
-
-    public StateManager getStateManager() {
-        return stateManager;
     }
 
     public void setGroupState(final String groupShortName) {

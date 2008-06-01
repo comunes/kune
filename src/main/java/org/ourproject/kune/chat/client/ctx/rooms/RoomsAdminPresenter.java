@@ -26,20 +26,24 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsImages;
 
 public class RoomsAdminPresenter implements RoomsAdmin {
     private final ContextItems contextItems;
 
-    public RoomsAdminPresenter(final ContextItems contextItems) {
+    public RoomsAdminPresenter(final ContextItems contextItems, final I18nTranslationService i18n) {
         this.contextItems = contextItems;
         ContextItemsImages images = ContextItemsImages.App.getInstance();
         contextItems.setParentTreeVisible(false);
         contextItems.registerType(ChatClientTool.TYPE_CHAT, images.page());
         contextItems.registerType(ChatClientTool.TYPE_ROOM, images.chatGreen());
-        contextItems.canCreate(ChatClientTool.TYPE_ROOM, Kune.I18N.t("New chat room"), ChatEvents.ADD_ROOM);
+        contextItems.canCreate(ChatClientTool.TYPE_ROOM, i18n.t("New chat room"), ChatEvents.ADD_ROOM);
+    }
+
+    public View getView() {
+        return contextItems.getView();
     }
 
     // FIXME: cierta lógica de negocio en el cliente
@@ -51,10 +55,6 @@ public class RoomsAdminPresenter implements RoomsAdmin {
         if (type.equals(ChatClientTool.TYPE_ROOM)) {
             contextItems.setControlsVisible(false);
         }
-    }
-
-    public View getView() {
-        return contextItems.getView();
     }
 
 }

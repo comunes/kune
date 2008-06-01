@@ -24,7 +24,7 @@ import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
@@ -35,11 +35,14 @@ public class SetCollabAsAdminAction implements Action<String> {
     private final Session session;
     private final StateManager stateManager;
     private final Workspace workspace;
+    private final I18nTranslationService i18n;
 
-    public SetCollabAsAdminAction(final Session session, final StateManager stateManager, final Workspace workspace) {
+    public SetCollabAsAdminAction(final Session session, final StateManager stateManager, final Workspace workspace,
+            final I18nTranslationService i18n) {
         this.session = session;
         this.stateManager = stateManager;
         this.workspace = workspace;
+        this.i18n = i18n;
     }
 
     public void execute(final String value) {
@@ -53,7 +56,7 @@ public class SetCollabAsAdminAction implements Action<String> {
                 groupShortName, new AsyncCallbackSimple<SocialNetworkResultDTO>() {
                     public void onSuccess(final SocialNetworkResultDTO result) {
                         Site.hideProgress();
-                        Site.info(Kune.I18N.t("Type of member changed"));
+                        Site.info(i18n.t("Type of member changed"));
                         stateManager.setSocialNetwork(result);
                         workspace.getGroupMembersComponent().showAdmins();
                         workspace.getGroupMembersComponent().showAdmins();

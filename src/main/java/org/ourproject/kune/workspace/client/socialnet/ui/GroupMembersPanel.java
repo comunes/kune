@@ -20,8 +20,8 @@
 package org.ourproject.kune.workspace.client.socialnet.ui;
 
 import org.ourproject.kune.platf.client.PlatformEvents;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.UIConstants;
 import org.ourproject.kune.platf.client.ui.stacks.StackSubItemAction;
 import org.ourproject.kune.platf.client.ui.stacks.StackedDropDownPanel;
@@ -37,43 +37,23 @@ public class GroupMembersPanel extends StackedDropDownPanel implements GroupMemb
     private static final boolean COUNTS_VISIBLE = true;
     private final Images img = Images.App.getInstance();
     private final GroupMembersPresenter presenter;
+    private final I18nTranslationService i18n;
 
-    public GroupMembersPanel(final GroupMembersPresenter initPresenter) {
-        super(initPresenter, "#00D4AA", Kune.I18N.t("Group members"), Kune.I18N
+    public GroupMembersPanel(final GroupMembersPresenter initPresenter, final I18nTranslationService i18n) {
+        super(initPresenter, "#00D4AA", i18n.t("Group members"), i18n
                 .t("People and groups collaborating in this group"), COUNTS_VISIBLE);
         presenter = initPresenter;
-    }
-
-    public void addJoinLink() {
-        super.addBottomLink(img.addGreen(), Kune.I18N.t("Request to join"), Kune.I18N
-                .t("Request to participate in this group"), WorkspaceEvents.REQ_JOIN_GROUP);
-    }
-
-    public void addUnjoinLink() {
-        super.addBottomLink(img.del(), Kune.I18N.t("Unjoin this group"), Kune.I18N
-                .t("Don't participate more as a member in this group"), WorkspaceEvents.UNJOIN_GROUP);
+        this.i18n = i18n;
     }
 
     public void addAddMemberLink() {
-        super.addBottomLink(img.addGreen(), Kune.I18N.t("Add member"), Kune.I18N
+        super.addBottomLink(img.addGreen(), i18n.t("Add member"), i18n
                 .t("Add a group or a person as member of this group"), WorkspaceEvents.ADD_MEMBER_GROUPLIVESEARCH,
                 presenter);
     }
 
-    public void clear() {
-        super.clear();
-    }
-
-    public void addComment(final String comment) {
-        super.addComment(comment);
-    }
-
     public void addCategory(final String name, final String title) {
         super.addStackItem(name, title, COUNTS_VISIBLE);
-    }
-
-    public void showCategory(final String name) {
-        super.showStackItem(name);
     }
 
     public void addCategory(final String name, final String title, final String iconType) {
@@ -91,17 +71,27 @@ public class GroupMembersPanel extends StackedDropDownPanel implements GroupMemb
         super.addStackSubItem(categoryName, img.groupDefIcon(), name, title, subItems);
     }
 
-    public void show() {
-        this.setVisible(true);
+    public void addComment(final String comment) {
+        super.addComment(comment);
     }
 
-    public void hide() {
-        this.setVisible(false);
+    public void addJoinLink() {
+        super.addBottomLink(img.addGreen(), i18n.t("Request to join"), i18n.t("Request to participate in this group"),
+                WorkspaceEvents.REQ_JOIN_GROUP);
+    }
+
+    public void addUnjoinLink() {
+        super.addBottomLink(img.del(), i18n.t("Unjoin this group"), i18n
+                .t("Don't participate more as a member in this group"), WorkspaceEvents.UNJOIN_GROUP);
+    }
+
+    public void clear() {
+        super.clear();
     }
 
     public void confirmAddCollab(final String groupShortName, final String groupLongName) {
         String groupName = groupLongName + " (" + groupShortName + ")";
-        MessageBox.confirm(Kune.I18N.t("Confirm addition of member"), Kune.I18N.t("Add [%s] as member?", groupName),
+        MessageBox.confirm(i18n.t("Confirm addition of member"), i18n.t("Add [%s] as member?", groupName),
                 new MessageBox.ConfirmCallback() {
                     public void execute(final String btnID) {
                         if (btnID.equals("yes")) {
@@ -109,6 +99,18 @@ public class GroupMembersPanel extends StackedDropDownPanel implements GroupMemb
                         }
                     }
                 });
+    }
+
+    public void hide() {
+        this.setVisible(false);
+    }
+
+    public void show() {
+        this.setVisible(true);
+    }
+
+    public void showCategory(final String name) {
+        super.showStackItem(name);
     }
 
     private AbstractImagePrototype getIcon(final String event) {

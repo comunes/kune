@@ -21,6 +21,7 @@
 package org.ourproject.kune.platf.client.app.ui;
 
 import org.ourproject.kune.platf.client.app.DesktopView;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.sitebar.SiteBarFactory;
 import org.ourproject.kune.workspace.client.sitebar.bar.SiteBar;
@@ -38,13 +39,14 @@ import com.gwtext.client.widgets.QuickTips;
 
 public class DesktopPanel extends AbsolutePanel implements DesktopView {
 
-    public DesktopPanel(final Workspace workspace, final SiteBarListener listener, final Session session) {
+    public DesktopPanel(final Workspace workspace, final SiteBarListener listener, final Session session,
+            final I18nTranslationService i18n) {
         QuickTips.init(); // extgwt tips
         QuickTip quickTipInstance = QuickTips.getQuickTip();
         quickTipInstance.setDismissDelay(8000);
         quickTipInstance.setHideDelay(500);
         quickTipInstance.setInterceptTitles(true);
-        SiteBar siteBar = SiteBarFactory.createSiteBar(listener, session);
+        SiteBar siteBar = SiteBarFactory.createSiteBar(listener, session, i18n);
         SiteMessage siteMessage = SiteBarFactory.getSiteMessage();
         this.add((Widget) siteMessage.getView(), calculateMessageWidth(Window.getClientWidth()),
                 calculateMessageHeight());
@@ -57,6 +59,14 @@ public class DesktopPanel extends AbsolutePanel implements DesktopView {
 
     public void attach() {
         RootPanel.get().add(this);
+    }
+
+    private int calculateMessageHeight() {
+        return 2;
+    }
+
+    private int calculateMessageWidth(final int width) {
+        return width * 20 / 100 - 10;
     }
 
     private void initResizeListener(final AbsolutePanel desktop, final Workspace workspace,
@@ -83,14 +93,6 @@ public class DesktopPanel extends AbsolutePanel implements DesktopView {
         siteMessage.adjustWidth(width);
         desktop.setWidgetPosition((Widget) siteMessage.getView(), calculateMessageWidth(width),
                 calculateMessageHeight());
-    }
-
-    private int calculateMessageWidth(final int width) {
-        return width * 20 / 100 - 10;
-    }
-
-    private int calculateMessageHeight() {
-        return 2;
     }
 
 }

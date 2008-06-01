@@ -22,7 +22,7 @@ package org.ourproject.kune.docs.client.cnt.reader.ui;
 
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderControlView;
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderListener;
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.CustomPushButton;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
@@ -35,26 +35,26 @@ public class DocumentReaderControlPanel extends HorizontalPanel implements Docum
     private final CustomPushButton deleteBtn;
     private final CustomPushButton translateBtn;
 
-    public DocumentReaderControlPanel(final DocumentReaderListener listener) {
-        editBtn = new CustomPushButton(Kune.I18N.tWithNT("Edit", "used in button"), new ClickListener() {
+    public DocumentReaderControlPanel(final DocumentReaderListener listener, final I18nTranslationService i18n) {
+        editBtn = new CustomPushButton(i18n.tWithNT("Edit", "used in button"), new ClickListener() {
             public void onClick(final Widget sender) {
                 listener.onEdit();
                 editBtn.removeStyleDependentName("up-hovering");
             }
         });
 
-        deleteBtn = new CustomPushButton(Kune.I18N.tWithNT("Delete", "used in button"), new ClickListener() {
+        deleteBtn = new CustomPushButton(i18n.tWithNT("Delete", "used in button"), new ClickListener() {
             public void onClick(final Widget sender) {
                 listener.onDelete();
                 deleteBtn.removeStyleDependentName("up-hovering");
             }
         });
 
-        translateBtn = new CustomPushButton(Kune.I18N.tWithNT("Translate", "used in button"), new ClickListener() {
+        translateBtn = new CustomPushButton(i18n.tWithNT("Translate", "used in button"), new ClickListener() {
             public void onClick(final Widget sender) {
                 listener.onTranslate();
                 translateBtn.removeStyleDependentName("up-hovering");
-                Site.showAlertMessage(Kune.I18N.t("Sorry, this functionality is currently in development"));
+                Site.showAlertMessage(i18n.t("Sorry, this functionality is currently in development"));
             }
         });
 
@@ -68,12 +68,12 @@ public class DocumentReaderControlPanel extends HorizontalPanel implements Docum
         setTranslateEnabled(false);
     }
 
-    public void setEditEnabled(final boolean isEnabled) {
-        editBtn.setVisible(isEnabled);
-    }
-
     public void setDeleteEnabled(final boolean isEnabled) {
         deleteBtn.setVisible(isEnabled);
+    }
+
+    public void setEditEnabled(final boolean isEnabled) {
+        editBtn.setVisible(isEnabled);
     }
 
     public void setTranslateEnabled(final boolean isEnabled) {

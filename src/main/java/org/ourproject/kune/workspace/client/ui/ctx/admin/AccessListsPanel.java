@@ -25,8 +25,8 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.GroupListDTO;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.ui.IconLabel;
 
 import com.google.gwt.user.client.ui.Label;
@@ -38,13 +38,15 @@ public class AccessListsPanel extends VerticalPanel implements View {
     private final VerticalPanel adminsVP;
     private final VerticalPanel editorsVP;
     private final VerticalPanel viewersVP;
+    private final I18nTranslationService i18n;
 
-    public AccessListsPanel() {
-        final Label adminsLabel = new Label(Kune.I18N.t("Who can admin this:"));
+    public AccessListsPanel(final I18nTranslationService i18n) {
+        this.i18n = i18n;
+        final Label adminsLabel = new Label(i18n.t("Who can admin this:"));
         adminsVP = new VerticalPanel();
-        final Label editorsLabel = new Label(Kune.I18N.t("Who more can edit:"));
+        final Label editorsLabel = new Label(i18n.t("Who more can edit:"));
         editorsVP = new VerticalPanel();
-        final Label viewersLabel = new Label(Kune.I18N.t("Who more can view:"));
+        final Label viewersLabel = new Label(i18n.t("Who more can view:"));
         viewersVP = new VerticalPanel();
 
         // Layout
@@ -83,9 +85,9 @@ public class AccessListsPanel extends VerticalPanel implements View {
     private void setGroupList(final GroupListDTO groupList, final VerticalPanel groupVP) {
         groupVP.clear();
         if (groupList.getMode() == GroupListDTO.EVERYONE) {
-            groupVP.add(new IconLabel(img.everybody(), Kune.I18N.t("Everybody")));
+            groupVP.add(new IconLabel(img.everybody(), i18n.t("Everybody")));
         } else if (groupList.getMode() == GroupListDTO.NOBODY) {
-            groupVP.add(new IconLabel(img.nobody(), Kune.I18N.t("Nobody")));
+            groupVP.add(new IconLabel(img.nobody(), i18n.t("Nobody")));
         } else {
             final Iterator<GroupDTO> iter = groupList.getList().iterator();
             while (iter.hasNext()) {

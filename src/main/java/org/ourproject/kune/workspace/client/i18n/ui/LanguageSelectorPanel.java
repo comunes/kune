@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.workspace.client.i18n.ui;
 
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelectorPresenter;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelectorView;
 
@@ -40,8 +40,16 @@ public class LanguageSelectorPanel extends FormPanel implements LanguageSelector
 
     private final LanguageSelectorPresenter presenter;
 
-    public LanguageSelectorPanel(final LanguageSelectorPresenter presenter, final String langFieldTitle) {
+    private final I18nTranslationService i18n;
+
+    public LanguageSelectorPanel(final LanguageSelectorPresenter presenter, final I18nTranslationService i18n) {
+        this(presenter, null, i18n);
+    }
+
+    public LanguageSelectorPanel(final LanguageSelectorPresenter presenter, final String langFieldTitle,
+            final I18nTranslationService i18n) {
         super();
+        this.i18n = i18n;
         super.setBorder(false);
         if (langFieldTitle == null) {
             setHideLabels(true);
@@ -51,12 +59,8 @@ public class LanguageSelectorPanel extends FormPanel implements LanguageSelector
         super.add(langCombo);
     }
 
-    public LanguageSelectorPanel(final LanguageSelectorPresenter presenter) {
-        this(presenter, null);
-    }
-
-    public void setLanguage(final String languageCode) {
-        langCombo.setValue(languageCode);
+    public void addChangeListener(final ComboBoxListener listener) {
+        langCombo.addListener(listener);
     }
 
     public String getLanguage() {
@@ -67,8 +71,8 @@ public class LanguageSelectorPanel extends FormPanel implements LanguageSelector
         langCombo.reset();
     }
 
-    public void addChangeListener(final ComboBoxListener listener) {
-        langCombo.addListener(listener);
+    public void setLanguage(final String languageCode) {
+        langCombo.setValue(languageCode);
     }
 
     private void createLangCombo(final String langFieldTitle) {
@@ -86,8 +90,8 @@ public class LanguageSelectorPanel extends FormPanel implements LanguageSelector
         langCombo.setDisplayField("language");
         langCombo.setMode(ComboBox.LOCAL);
         langCombo.setTriggerAction(ComboBox.ALL);
-        langCombo.setEmptyText(Kune.I18N.t("Enter language"));
-        langCombo.setLoadingText(Kune.I18N.t("Searching..."));
+        langCombo.setEmptyText(i18n.t("Enter language"));
+        langCombo.setLoadingText(i18n.t("Searching..."));
         langCombo.setTypeAhead(true);
         langCombo.setTypeAheadDelay(1000);
         langCombo.setSelectOnFocus(false);

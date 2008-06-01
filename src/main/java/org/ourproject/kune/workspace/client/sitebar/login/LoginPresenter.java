@@ -31,7 +31,7 @@ import org.ourproject.kune.platf.client.errors.EmailAddressInUseException;
 import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
 import org.ourproject.kune.platf.client.errors.UserAuthException;
 import org.ourproject.kune.platf.client.rpc.ParamCallback;
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.newgroup.ui.SiteErrorType;
@@ -49,9 +49,12 @@ public class LoginPresenter implements Login {
 
     private final Session session;
 
-    public LoginPresenter(final Session session, final LoginListener listener) {
+    private final I18nTranslationService i18n;
+
+    public LoginPresenter(final Session session, final LoginListener listener, final I18nTranslationService i18n) {
         this.session = session;
         this.listener = listener;
+        this.i18n = i18n;
     }
 
     public void doLogin() {
@@ -72,7 +75,7 @@ public class LoginPresenter implements Login {
                     try {
                         throw caught;
                     } catch (final UserAuthException e) {
-                        view.setSignInMessage(Kune.I18N.t("Incorrect nickname/email or password"), SiteErrorType.error);
+                        view.setSignInMessage(i18n.t("Incorrect nickname/email or password"), SiteErrorType.error);
                     } catch (final Throwable e) {
                         view.setSignInMessage("Error in login", SiteErrorType.error);
                         GWT.log("Other kind of exception in LoginFormPresenter/doLogin", null);
@@ -112,13 +115,13 @@ public class LoginPresenter implements Login {
                     try {
                         throw caught;
                     } catch (final EmailAddressInUseException e) {
-                        view.setRegisterMessage(Kune.I18N.t("This email in in use by other person, try with another."),
+                        view.setRegisterMessage(i18n.t("This email in in use by other person, try with another."),
                                 SiteErrorType.error);
                     } catch (final GroupNameInUseException e) {
-                        view.setRegisterMessage(Kune.I18N.t("This name in already in use, try with a different name."),
+                        view.setRegisterMessage(i18n.t("This name in already in use, try with a different name."),
                                 SiteErrorType.error);
                     } catch (final Throwable e) {
-                        view.setRegisterMessage(Kune.I18N.t("Error during registration."), SiteErrorType.error);
+                        view.setRegisterMessage(i18n.t("Error during registration."), SiteErrorType.error);
                         GWT.log("Other kind of exception in user registration", null);
                         throw new RuntimeException();
                     }

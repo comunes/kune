@@ -28,7 +28,7 @@ import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.newgroup.NewGroupListener;
@@ -46,27 +46,16 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
     private final SiteBarListener listener;
     private String previousToken;
     private final Session session;
+    private final I18nTranslationService i18n;
 
-    public SiteBarPresenter(final SiteBarListener listener, final Session session) {
+    public SiteBarPresenter(final SiteBarListener listener, final Session session, final I18nTranslationService i18n) {
         this.listener = listener;
         this.session = session;
+        this.i18n = i18n;
     }
 
-    public void init(final SiteBarView view) {
-        this.view = view;
-        view.setLogoutLinkVisible(false);
-    }
-
-    public void setState(final StateDTO state) {
-        StateToken token = state.getStateToken();
-        if (state.getAccessLists().getViewers().getMode().equals(GroupListDTO.EVERYONE)) {
-            String publicUrl = token.getPublicUrl();
-            view.setContentGotoPublicUrl(publicUrl);
-            view.setContentPublic(true);
-        } else {
-            view.setContentPublic(false);
-        }
-
+    public void changeState(final StateToken token) {
+        listener.onChangeState(token);
     }
 
     public void doLogin(final String previousToken) {
@@ -75,27 +64,6 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
         view.showLoginDialog();
         view.centerLoginDialog();
         Site.hideProgress();
-    }
-
-    public void doNewGroup(final String previousTokenOrig) {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ONLY_CHECK_USER_SESSION,
-                new AsyncCallbackSimple<Object>() {
-                    public void onSuccess(final Object result) {
-                        previousToken = previousTokenOrig;
-                        if (session.isLogged()) {
-                            Site.showProgressProcessing();
-                            view.showNewGroupDialog();
-                            view.centerNewGroupDialog();
-                        } else {
-                            returnToPreviousState();
-                            Site.info(Kune.I18N.t("Sign in or register to create a group"));
-                        }
-                    }
-                });
-    }
-
-    public void doSearch(final String termToSearch) {
-        view.showSearchPanel(termToSearch);
     }
 
     public void doLogout() {
@@ -130,6 +98,77 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
         DefaultDispatcher.getInstance().fire(WorkspaceEvents.USER_LOGOUT, callback);
     }
 
+    public void doNewGroup(final String previousTokenOrig) {
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ONLY_CHECK_USER_SESSION,
+                new AsyncCallbackSimple<Object>() {
+                    public void onSuccess(final Object result) {
+                        previousToken = previousTokenOrig;
+                        if (session.isLogged()) {
+                            Site.showProgressProcessing();
+                            view.showNewGroupDialog();
+                            view.centerNewGroupDialog();
+                        } else {
+                            returnToPreviousState();
+                            Site.info(i18n.t("Sign in or register to create a group"));
+                        }
+                    }
+                });
+    }
+
+    public void doSearch(final String termToSearch) {
+        view.showSearchPanel(termToSearch);
+    }
+
+    public View getView() {
+        return view;
+    }
+
+    public void hideProgress() {
+        view.hideProgress();
+    }
+
+    public void init(final SiteBarView view) {
+        this.view = view;
+        view.setLogoutLinkVisible(false);
+    }
+
+    public void mask() {
+        view.mask();
+    }
+
+    public void mask(final String message) {
+        view.mask(message);
+    }
+
+    public void onHelpInTranslation() {
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.SHOW_TRANSLATOR, null);
+    }
+
+    public void onLoginCancelled() {
+        view.hideLoginDialog();
+        returnToPreviousState();
+    }
+
+    public void onLoginClose() {
+        if (!session.isLogged()) {
+            returnToPreviousState();
+        }
+    }
+
+    public void onNewGroupCancel() {
+        view.hideNewGroupDialog();
+        returnToPreviousState();
+    }
+
+    public void onNewGroupClose() {
+        returnToPreviousState();
+    }
+
+    public void onNewGroupCreated(final StateToken homePage) {
+        view.hideNewGroupDialog();
+        changeState(homePage);
+    }
+
     public void reloadUserInfo(final String userHash) {
         UserServiceAsync siteBarService = UserService.App.getInstance();
         siteBarService.reloadUserInfo(userHash, new AsyncCallback<UserInfoDTO>() {
@@ -144,10 +183,20 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
         });
     }
 
-    public void userLoggedIn(final UserInfoDTO userInfoDTO) {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.USER_LOGGED_IN, userInfoDTO);
-        view.hideLoginDialog();
-        returnToPreviousState();
+    public void setState(final StateDTO state) {
+        StateToken token = state.getStateToken();
+        if (state.getAccessLists().getViewers().getMode().equals(GroupListDTO.EVERYONE)) {
+            String publicUrl = token.getPublicUrl();
+            view.setContentGotoPublicUrl(publicUrl);
+            view.setContentPublic(true);
+        } else {
+            view.setContentPublic(false);
+        }
+
+    }
+
+    public void showAlertMessage(final String message) {
+        view.showAlertMessage(message);
     }
 
     public void showLoggedUser(final UserInfoDTO user) {
@@ -161,65 +210,23 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
         }
     }
 
-    public void onLoginCancelled() {
-        view.hideLoginDialog();
-        returnToPreviousState();
-    }
-
-    public void onLoginClose() {
-        if (!session.isLogged()) {
-            returnToPreviousState();
-        }
-    }
-
-    public void onNewGroupCreated(final StateToken homePage) {
-        view.hideNewGroupDialog();
-        changeState(homePage);
-    }
-
-    public void onNewGroupCancel() {
-        view.hideNewGroupDialog();
-        returnToPreviousState();
-    }
-
-    public void onNewGroupClose() {
-        returnToPreviousState();
-    }
-
-    public void hideProgress() {
-        view.hideProgress();
-    }
-
     public void showProgress(final String text) {
         view.showProgress(text);
     }
 
-    public void showAlertMessage(final String message) {
-        view.showAlertMessage(message);
-    }
-
-    public View getView() {
-        return view;
-    }
-
-    public void changeState(final StateToken token) {
-        listener.onChangeState(token);
-    }
-
-    public void onHelpInTranslation() {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.SHOW_TRANSLATOR, null);
-    }
-
-    public void mask() {
-        view.mask();
-    }
-
-    public void mask(final String message) {
-        view.mask(message);
-    }
-
     public void unMask() {
         view.unMask();
+    }
+
+    public void userLoggedIn(final UserInfoDTO userInfoDTO) {
+        DefaultDispatcher.getInstance().fire(WorkspaceEvents.USER_LOGGED_IN, userInfoDTO);
+        view.hideLoginDialog();
+        returnToPreviousState();
+    }
+
+    protected void onSearchFocus() {
+        view.setTextSearchBig();
+        view.clearSearchText();
     }
 
     protected void onSearchLostFocus(final String search) {
@@ -227,11 +234,6 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
             view.setDefaultTextSearch();
             view.setTextSearchSmall();
         }
-    }
-
-    protected void onSearchFocus() {
-        view.setTextSearchBig();
-        view.clearSearchText();
     }
 
     private void returnToPreviousState() {

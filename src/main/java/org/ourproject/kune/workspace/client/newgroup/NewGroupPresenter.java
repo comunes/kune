@@ -26,7 +26,7 @@ import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
 import org.ourproject.kune.platf.client.rpc.ParamCallback;
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.newgroup.ui.SiteErrorType;
 
@@ -36,9 +36,11 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public class NewGroupPresenter implements NewGroup {
     private final NewGroupListener listener;
     private NewGroupView view;
+    private final I18nTranslationService i18n;
 
-    public NewGroupPresenter(final NewGroupListener listener) {
+    public NewGroupPresenter(final NewGroupListener listener, final I18nTranslationService i18n) {
         this.listener = listener;
+        this.i18n = i18n;
     }
 
     public View getView() {
@@ -92,12 +94,11 @@ public class NewGroupPresenter implements NewGroup {
                 } catch (final GroupNameInUseException e) {
                     onBack();
                     view.unMask();
-                    setMessage(Kune.I18N.t("This name in already in use, try with a different name."),
-                            SiteErrorType.error);
+                    setMessage(i18n.t("This name in already in use, try with a different name."), SiteErrorType.error);
                 } catch (final Throwable e) {
                     onBack(); // The messageP is in first page of wizard :-/
                     view.unMask();
-                    setMessage(Kune.I18N.t("Error creating group"), SiteErrorType.error);
+                    setMessage(i18n.t("Error creating group"), SiteErrorType.error);
                     GWT.log("Other kind of exception in group registration", null);
                     throw new RuntimeException();
                 }

@@ -24,7 +24,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.TagResultDTO;
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.DropDownPanel;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.workspace.client.tags.TagsPresenter;
@@ -41,10 +41,12 @@ public class TagsPanel extends DropDownPanel implements TagsView {
     private final FlowPanel flowPanel;
     private final TagsPresenter presenter;
     private final Label noTagsLabel;
+    private final I18nTranslationService i18n;
 
-    public TagsPanel(final TagsPresenter presenter) {
-        super(Kune.I18N.t("Tags"), true);
-        setHeaderTitle(Kune.I18N.t("Keywords or terms associated with this group"));
+    public TagsPanel(final TagsPresenter presenter, final I18nTranslationService i18n) {
+        super(i18n.t("Tags"), true);
+        this.i18n = i18n;
+        setHeaderTitle(i18n.t("Keywords or terms associated with this group"));
         this.presenter = presenter;
         addStyleName("kune-Margin-Medium-t");
         flowPanel = new FlowPanel();
@@ -53,7 +55,7 @@ public class TagsPanel extends DropDownPanel implements TagsView {
         vp.setWidth("100%");
         vp.setCellWidth(flowPanel, "100%");
         super.setContent(vp);
-        noTagsLabel = new Label(Kune.I18N.t("The contents of this group don't have any tag"));
+        noTagsLabel = new Label(i18n.t("The contents of this group don't have any tag"));
     }
 
     public void setTags(final List<TagResultDTO> groupTags) {
@@ -66,9 +68,9 @@ public class TagsPanel extends DropDownPanel implements TagsView {
                 Label label = new Label(tagResult.getName());
                 // i18n pluralization
                 if (tagResult.getCount().intValue() > 1) {
-                    KuneUiUtils.setQuickTip(label, Kune.I18N.t("[%d] items with this tag", tagResult.getCount()));
+                    KuneUiUtils.setQuickTip(label, i18n.t("[%d] items with this tag", tagResult.getCount()));
                 } else {
-                    KuneUiUtils.setQuickTip(label, Kune.I18N.t("[%d] item with this tag", tagResult.getCount()));
+                    KuneUiUtils.setQuickTip(label, i18n.t("[%d] item with this tag", tagResult.getCount()));
                 }
                 label.addClickListener(new ClickListener() {
                     public void onClick(final Widget sender) {

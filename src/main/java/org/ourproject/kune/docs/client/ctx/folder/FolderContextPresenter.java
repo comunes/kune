@@ -26,20 +26,20 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsImages;
 
 public class FolderContextPresenter implements FolderContext {
     private final ContextItems contextItems;
 
-    public FolderContextPresenter(final ContextItems contextItems) {
+    public FolderContextPresenter(final ContextItems contextItems, final I18nTranslationService i18n) {
         this.contextItems = contextItems;
         ContextItemsImages contextImages = ContextItemsImages.App.getInstance();
         contextItems.registerType(DocumentClientTool.TYPE_DOCUMENT, contextImages.pageWhite());
         contextItems.registerType(DocumentClientTool.TYPE_FOLDER, contextImages.folder());
-        contextItems.canCreate(DocumentClientTool.TYPE_DOCUMENT, Kune.I18N.t("New document"), DocsEvents.ADD_DOCUMENT);
-        contextItems.canCreate(DocumentClientTool.TYPE_FOLDER, Kune.I18N.t("New folder"), DocsEvents.ADD_FOLDER);
+        contextItems.canCreate(DocumentClientTool.TYPE_DOCUMENT, i18n.t("New document"), DocsEvents.ADD_DOCUMENT);
+        contextItems.canCreate(DocumentClientTool.TYPE_FOLDER, i18n.t("New folder"), DocsEvents.ADD_FOLDER);
         contextItems.setParentTreeVisible(true);
     }
 

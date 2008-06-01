@@ -1,6 +1,6 @@
 package org.ourproject.kune.workspace.client.sitebar.login;
 
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
 
 import com.gwtext.client.data.SimpleStore;
@@ -33,172 +33,175 @@ public class RegisterForm extends DefaultForm {
     private final ComboBox countryCombo;
     private final ComboBox timezoneCombo;
 
-    public RegisterForm(final LoginPresenter presenter) {
-	shortNameRegField = new TextField();
-	shortNameRegField.setFieldLabel(Kune.I18N.t("Nickname"));
-	shortNameRegField.setName(NICK_FIELD);
-	shortNameRegField.setWidth(DEF_FIELD_WIDTH);
-	shortNameRegField.setAllowBlank(false);
-	shortNameRegField.setMinLength(3);
-	shortNameRegField.setMaxLength(15);
-	shortNameRegField.setRegex("^[a-z0-9_\\-]+$");
-	shortNameRegField.setMinLengthText(Kune.I18N.t(MUST_BE_BETWEEN_3_AND_15));
-	shortNameRegField.setMaxLengthText(Kune.I18N.t(MUST_BE_BETWEEN_3_AND_15));
-	shortNameRegField.setRegexText(Kune.I18N.t(MUST_BE_BETWEEN_3_AND_15));
-	shortNameRegField.setValidationEvent(false);
-	add(shortNameRegField);
+    private final I18nTranslationService i18n;
 
-	longNameRegField = new TextField();
-	longNameRegField.setFieldLabel(Kune.I18N.t("Full Name"));
-	longNameRegField.setName(LONGNAME_FIELD);
-	longNameRegField.setWidth(DEF_FIELD_WIDTH);
-	longNameRegField.setAllowBlank(false);
-	longNameRegField.setMinLength(3);
-	longNameRegField.setMaxLength(50);
-	longNameRegField.setValidationEvent(false);
-	add(longNameRegField);
+    public RegisterForm(final LoginPresenter presenter, final I18nTranslationService i18n) {
+        this.i18n = i18n;
+        shortNameRegField = new TextField();
+        shortNameRegField.setFieldLabel(i18n.t("Nickname"));
+        shortNameRegField.setName(NICK_FIELD);
+        shortNameRegField.setWidth(DEF_FIELD_WIDTH);
+        shortNameRegField.setAllowBlank(false);
+        shortNameRegField.setMinLength(3);
+        shortNameRegField.setMaxLength(15);
+        shortNameRegField.setRegex("^[a-z0-9_\\-]+$");
+        shortNameRegField.setMinLengthText(i18n.t(MUST_BE_BETWEEN_3_AND_15));
+        shortNameRegField.setMaxLengthText(i18n.t(MUST_BE_BETWEEN_3_AND_15));
+        shortNameRegField.setRegexText(i18n.t(MUST_BE_BETWEEN_3_AND_15));
+        shortNameRegField.setValidationEvent(false);
+        add(shortNameRegField);
 
-	passwdRegField = new TextField();
-	passwdRegField.setFieldLabel(Kune.I18N.t("Password"));
-	passwdRegField.setName(PASSWORD_FIELD);
-	passwdRegField.setPassword(true);
-	passwdRegField.setAllowBlank(false);
-	passwdRegField.setMaxLength(40);
-	passwdRegField.setWidth(DEF_FIELD_WIDTH);
-	passwdRegField.setValidationEvent(false);
-	add(passwdRegField);
+        longNameRegField = new TextField();
+        longNameRegField.setFieldLabel(i18n.t("Full Name"));
+        longNameRegField.setName(LONGNAME_FIELD);
+        longNameRegField.setWidth(DEF_FIELD_WIDTH);
+        longNameRegField.setAllowBlank(false);
+        longNameRegField.setMinLength(3);
+        longNameRegField.setMaxLength(50);
+        longNameRegField.setValidationEvent(false);
+        add(longNameRegField);
 
-	passwdRegFieldDup = new TextField();
-	passwdRegFieldDup.setFieldLabel(Kune.I18N.t("Retype password"));
-	passwdRegFieldDup.setName(PASSWORD_FIELD_DUP);
-	passwdRegFieldDup.setPassword(true);
-	passwdRegFieldDup.setAllowBlank(false);
-	passwdRegFieldDup.setMinLength(6);
-	passwdRegFieldDup.setMaxLength(40);
-	passwdRegFieldDup.setWidth(DEF_FIELD_WIDTH);
-	passwdRegFieldDup.setInvalidText(Kune.I18N.t("Passwords do not match"));
-	passwdRegFieldDup.setValidator(new Validator() {
-	    public boolean validate(final String value) throws ValidationException {
-		return passwdRegField.getValueAsString().equals(passwdRegFieldDup.getValueAsString());
-	    }
-	});
-	passwdRegFieldDup.setValidationEvent(false);
-	add(passwdRegFieldDup);
+        passwdRegField = new TextField();
+        passwdRegField.setFieldLabel(i18n.t("Password"));
+        passwdRegField.setName(PASSWORD_FIELD);
+        passwdRegField.setPassword(true);
+        passwdRegField.setAllowBlank(false);
+        passwdRegField.setMaxLength(40);
+        passwdRegField.setWidth(DEF_FIELD_WIDTH);
+        passwdRegField.setValidationEvent(false);
+        add(passwdRegField);
 
-	emailRegField = new TextField();
-	emailRegField.setFieldLabel(Kune.I18N.t("Email"));
-	emailRegField.setName(EMAIL_FIELD);
-	emailRegField.setVtype(VType.EMAIL);
-	emailRegField.setWidth(DEF_FIELD_WIDTH);
-	emailRegField.setAllowBlank(false);
-	emailRegField.setValidationEvent(false);
+        passwdRegFieldDup = new TextField();
+        passwdRegFieldDup.setFieldLabel(i18n.t("Retype password"));
+        passwdRegFieldDup.setName(PASSWORD_FIELD_DUP);
+        passwdRegFieldDup.setPassword(true);
+        passwdRegFieldDup.setAllowBlank(false);
+        passwdRegFieldDup.setMinLength(6);
+        passwdRegFieldDup.setMaxLength(40);
+        passwdRegFieldDup.setWidth(DEF_FIELD_WIDTH);
+        passwdRegFieldDup.setInvalidText(i18n.t("Passwords do not match"));
+        passwdRegFieldDup.setValidator(new Validator() {
+            public boolean validate(final String value) throws ValidationException {
+                return passwdRegField.getValueAsString().equals(passwdRegFieldDup.getValueAsString());
+            }
+        });
+        passwdRegFieldDup.setValidationEvent(false);
+        add(passwdRegFieldDup);
 
-	add(emailRegField);
+        emailRegField = new TextField();
+        emailRegField.setFieldLabel(i18n.t("Email"));
+        emailRegField.setName(EMAIL_FIELD);
+        emailRegField.setVtype(VType.EMAIL);
+        emailRegField.setWidth(DEF_FIELD_WIDTH);
+        emailRegField.setAllowBlank(false);
+        emailRegField.setValidationEvent(false);
 
-	final Store langStore = new SimpleStore(new String[] { "abbr", "language" }, presenter.getLanguages());
-	langStore.load();
+        add(emailRegField);
 
-	languageCombo = new ComboBox();
-	languageCombo.setName(LANG_FIELD);
-	languageCombo.setMinChars(1);
-	languageCombo.setFieldLabel(Kune.I18N.t("Language"));
-	languageCombo.setStore(langStore);
-	languageCombo.setDisplayField("language");
-	languageCombo.setMode(ComboBox.LOCAL);
-	languageCombo.setTriggerAction(ComboBox.ALL);
-	languageCombo.setEmptyText(Kune.I18N.t("Enter language"));
-	languageCombo.setLoadingText(Kune.I18N.t("Searching..."));
-	languageCombo.setTypeAhead(true);
-	languageCombo.setTypeAheadDelay(1000);
-	languageCombo.setSelectOnFocus(false);
-	languageCombo.setWidth(186);
-	languageCombo.setAllowBlank(false);
-	languageCombo.setValueField("abbr");
-	languageCombo.setValue(presenter.getCurrentLanguage().getCode());
-	languageCombo.setPageSize(7);
-	languageCombo.setForceSelection(true);
-	languageCombo.setValidationEvent(false);
-	add(languageCombo);
+        final Store langStore = new SimpleStore(new String[] { "abbr", "language" }, presenter.getLanguages());
+        langStore.load();
 
-	final Store countryStore = new SimpleStore(new String[] { "abbr", "country" }, presenter.getCountries());
-	countryStore.load();
+        languageCombo = new ComboBox();
+        languageCombo.setName(LANG_FIELD);
+        languageCombo.setMinChars(1);
+        languageCombo.setFieldLabel(i18n.t("Language"));
+        languageCombo.setStore(langStore);
+        languageCombo.setDisplayField("language");
+        languageCombo.setMode(ComboBox.LOCAL);
+        languageCombo.setTriggerAction(ComboBox.ALL);
+        languageCombo.setEmptyText(i18n.t("Enter language"));
+        languageCombo.setLoadingText(i18n.t("Searching..."));
+        languageCombo.setTypeAhead(true);
+        languageCombo.setTypeAheadDelay(1000);
+        languageCombo.setSelectOnFocus(false);
+        languageCombo.setWidth(186);
+        languageCombo.setAllowBlank(false);
+        languageCombo.setValueField("abbr");
+        languageCombo.setValue(presenter.getCurrentLanguage().getCode());
+        languageCombo.setPageSize(7);
+        languageCombo.setForceSelection(true);
+        languageCombo.setValidationEvent(false);
+        add(languageCombo);
 
-	countryCombo = new ComboBox();
-	countryCombo.setName(COUNTRY_FIELD);
-	countryCombo.setMinChars(1);
-	countryCombo.setFieldLabel(Kune.I18N.t("Country"));
-	countryCombo.setStore(countryStore);
-	countryCombo.setDisplayField("country");
-	countryCombo.setMode(ComboBox.LOCAL);
-	countryCombo.setTriggerAction(ComboBox.ALL);
-	countryCombo.setEmptyText(Kune.I18N.t("Enter your country"));
-	countryCombo.setLoadingText(Kune.I18N.t("Searching..."));
-	countryCombo.setTypeAhead(true);
-	countryCombo.setTypeAheadDelay(1000);
-	countryCombo.setSelectOnFocus(false);
-	countryCombo.setWidth(186);
-	countryCombo.setAllowBlank(false);
-	countryCombo.setValueField("abbr");
-	countryCombo.setPageSize(7);
-	countryCombo.setForceSelection(true);
-	countryCombo.setValidationEvent(false);
-	add(countryCombo);
+        final Store countryStore = new SimpleStore(new String[] { "abbr", "country" }, presenter.getCountries());
+        countryStore.load();
 
-	final Store timezoneStore = new SimpleStore(new String[] { "id" }, presenter.getTimezones());
-	timezoneStore.load();
+        countryCombo = new ComboBox();
+        countryCombo.setName(COUNTRY_FIELD);
+        countryCombo.setMinChars(1);
+        countryCombo.setFieldLabel(i18n.t("Country"));
+        countryCombo.setStore(countryStore);
+        countryCombo.setDisplayField("country");
+        countryCombo.setMode(ComboBox.LOCAL);
+        countryCombo.setTriggerAction(ComboBox.ALL);
+        countryCombo.setEmptyText(i18n.t("Enter your country"));
+        countryCombo.setLoadingText(i18n.t("Searching..."));
+        countryCombo.setTypeAhead(true);
+        countryCombo.setTypeAheadDelay(1000);
+        countryCombo.setSelectOnFocus(false);
+        countryCombo.setWidth(186);
+        countryCombo.setAllowBlank(false);
+        countryCombo.setValueField("abbr");
+        countryCombo.setPageSize(7);
+        countryCombo.setForceSelection(true);
+        countryCombo.setValidationEvent(false);
+        add(countryCombo);
 
-	timezoneCombo = new ComboBox();
-	timezoneCombo.setName(TIMEZONE_FIELD);
-	timezoneCombo.setMinChars(1);
-	timezoneCombo.setFieldLabel(Kune.I18N.t("Timezone"));
-	timezoneCombo.setStore(timezoneStore);
-	timezoneCombo.setDisplayField("id");
-	timezoneCombo.setMode(ComboBox.LOCAL);
-	timezoneCombo.setTriggerAction(ComboBox.ALL);
-	timezoneCombo.setEmptyText(Kune.I18N.t("Enter your timezone"));
-	timezoneCombo.setLoadingText(Kune.I18N.t("Searching..."));
-	timezoneCombo.setTypeAhead(true);
-	timezoneCombo.setTypeAheadDelay(1000);
-	timezoneCombo.setSelectOnFocus(false);
-	timezoneCombo.setWidth(186);
-	timezoneCombo.setAllowBlank(false);
-	timezoneCombo.setValueField("id");
-	timezoneCombo.setPageSize(7);
-	timezoneCombo.setForceSelection(true);
-	timezoneCombo.setValidationEvent(false);
-	add(timezoneCombo);
+        final Store timezoneStore = new SimpleStore(new String[] { "id" }, presenter.getTimezones());
+        timezoneStore.load();
+
+        timezoneCombo = new ComboBox();
+        timezoneCombo.setName(TIMEZONE_FIELD);
+        timezoneCombo.setMinChars(1);
+        timezoneCombo.setFieldLabel(i18n.t("Timezone"));
+        timezoneCombo.setStore(timezoneStore);
+        timezoneCombo.setDisplayField("id");
+        timezoneCombo.setMode(ComboBox.LOCAL);
+        timezoneCombo.setTriggerAction(ComboBox.ALL);
+        timezoneCombo.setEmptyText(i18n.t("Enter your timezone"));
+        timezoneCombo.setLoadingText(i18n.t("Searching..."));
+        timezoneCombo.setTypeAhead(true);
+        timezoneCombo.setTypeAheadDelay(1000);
+        timezoneCombo.setSelectOnFocus(false);
+        timezoneCombo.setWidth(186);
+        timezoneCombo.setAllowBlank(false);
+        timezoneCombo.setValueField("id");
+        timezoneCombo.setPageSize(7);
+        timezoneCombo.setForceSelection(true);
+        timezoneCombo.setValidationEvent(false);
+        add(timezoneCombo);
     }
 
     public String getCountry() {
-	return countryCombo.getValueAsString();
+        return countryCombo.getValueAsString();
     }
 
     public String getEmail() {
-	return emailRegField.getValueAsString();
+        return emailRegField.getValueAsString();
     }
 
     public String getLanguage() {
-	return languageCombo.getValueAsString();
+        return languageCombo.getValueAsString();
     }
 
     public String getLongName() {
-	return longNameRegField.getValueAsString();
+        return longNameRegField.getValueAsString();
     }
 
     public String getRegisterPassword() {
-	return passwdRegField.getValueAsString();
+        return passwdRegField.getValueAsString();
     }
 
     public String getRegisterPasswordDup() {
-	return passwdRegFieldDup.getValueAsString();
+        return passwdRegFieldDup.getValueAsString();
     }
 
     public String getShortName() {
-	return shortNameRegField.getValueAsString();
+        return shortNameRegField.getValueAsString();
     }
 
     public String getTimezone() {
-	return timezoneCombo.getValueAsString();
+        return timezoneCombo.getValueAsString();
     }
 
 }

@@ -17,6 +17,7 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.state.StateManagerDefault;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.workspace.client.sitebar.Site;
 
 import com.calclab.emite.client.modular.Container;
 import com.calclab.emite.client.modular.Module;
@@ -24,6 +25,7 @@ import com.calclab.emite.client.modular.ModuleBuilder;
 import com.calclab.emite.client.modular.Provider;
 import com.calclab.emite.client.modular.Scopes;
 import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.History;
 
 public class KuneModule implements Module {
 
@@ -59,6 +61,8 @@ public class KuneModule implements Module {
             }
         }, Scopes.SINGLETON);
 
+        Site.init(builder.getInstance(I18nUITranslationService.class));
+
         builder.registerProvider(Session.class, new Provider<Session>() {
             public Session get() {
                 return new SessionImpl(Cookies.getCookie("userHash"), initialLang);
@@ -67,19 +71,20 @@ public class KuneModule implements Module {
 
         builder.registerProvider(KuneErrorHandler.class, new Provider<KuneErrorHandler>() {
             public KuneErrorHandler get() {
-                return new KuneErrorHandler(builder.getInstance(Session.class));
+                return new KuneErrorHandler(builder.getInstance(Session.class), builder
+                        .getInstance(I18nUITranslationService.class));
             }
         });
-
-        builder.registerProvider(KunePlatform.class, new Provider<KunePlatform>() {
-            public KunePlatform get() {
-                return new KunePlatform();
-            }
-        }, Scopes.SINGLETON);
 
         builder.registerProvider(ColorTheme.class, new Provider<ColorTheme>() {
             public ColorTheme get() {
                 return new ColorTheme();
+            }
+        }, Scopes.SINGLETON);
+
+        builder.registerProvider(KunePlatform.class, new Provider<KunePlatform>() {
+            public KunePlatform get() {
+                return new KunePlatform();
             }
         }, Scopes.SINGLETON);
 
@@ -89,22 +94,27 @@ public class KuneModule implements Module {
             }
         });
 
-        final Session session = builder.getInstance(Session.class);
-
         builder.registerProvider(Application.class, new Provider<Application>() {
             public Application get() {
+                Session session = builder.getInstance(Session.class);
                 HashMap<String, ClientTool> tools = builder.getInstance(KunePlatform.class).getIndexedTools();
                 ExtensibleWidgetsManager extensionPointManager = builder.getInstance(ExtensibleWidgetsManager.class);
-                return new DefaultApplication(tools, session, extensionPointManager);
+                return new DefaultApplication(tools, session, extensionPointManager, builder
+                        .getInstance(I18nUITranslationService.class), builder.getInstance(ColorTheme.class), builder
+                        .getInstance(KuneErrorHandler.class));
             }
         });
 
         builder.registerProvider(StateManager.class, new Provider<StateManager>() {
             public StateManager get() {
+                Session session = builder.getInstance(Session.class);
                 ContentProviderImpl provider = new ContentProviderImpl(ContentService.App.getInstance());
                 final HistoryWrapper historyWrapper = new HistoryWrapperImpl();
                 Application application = builder.getInstance(Application.class);
-                return new StateManagerDefault(provider, application, session, historyWrapper);
+                StateManagerDefault stateManager = new StateManagerDefault(provider, application, session,
+                        historyWrapper);
+                History.addHistoryListener(stateManager);
+                return stateManager;
             }
         });
 

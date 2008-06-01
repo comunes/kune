@@ -33,9 +33,9 @@ import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.WorkspaceClientModule;
+import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
-import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowCloseListener;
 
@@ -54,11 +54,10 @@ public class ApplicationBuilder {
         final KunePlatform platform = kune.getPlatform();
         final StateManager stateManager = kune.getStateManager();
         final Application application = kune.getInstance(Application.class);
-
-        History.addHistoryListener(stateManager);
+        I18nUITranslationService i18n = kune.getI18N();
 
         platform.install(new PlatformClientModule(session, stateManager));
-        platform.install(new WorkspaceClientModule(session, stateManager, application.getWorkspace()));
+        platform.install(new WorkspaceClientModule(session, stateManager, application.getWorkspace(), i18n));
 
         final DefaultDispatcher dispatcher = DefaultDispatcher.getInstance();
 

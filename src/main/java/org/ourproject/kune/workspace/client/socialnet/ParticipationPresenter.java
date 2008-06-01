@@ -29,24 +29,32 @@ import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.workspace.ParticipationComponent;
 
 public class ParticipationPresenter extends AbstractPresenter implements ParticipationComponent {
-    private static final String ADMIN_SUBTITLE = Kune.I18N.t("admin in:");
-
-    private final static MemberAction GOTO_GROUP_COMMAND = new MemberAction(Kune.I18N.t("Visit this group homepage"),
-            PlatformEvents.GOTO);
 
     private ParticipationView view;
 
-    public void init(final ParticipationView view) {
-        this.view = view;
+    private final I18nTranslationService i18n;
+
+    private final String admin_subtitle;
+
+    private final MemberAction goto_group_command;
+
+    public ParticipationPresenter(final I18nTranslationService i18n) {
+        this.i18n = i18n;
+        admin_subtitle = i18n.t("admin in:");
+        goto_group_command = new MemberAction(i18n.t("Visit this group homepage"), PlatformEvents.GOTO);
     }
 
     public View getView() {
         return view;
+    }
+
+    public void init(final ParticipationView view) {
+        this.view = view;
     }
 
     public void setParticipation(final StateDTO state) {
@@ -55,10 +63,10 @@ public class ParticipationPresenter extends AbstractPresenter implements Partici
         view.setDropDownContentVisible(false);
         view.clear();
         MemberAction[] adminsActions = {
-                new MemberAction(Kune.I18N.t("Don't participate more in this group"), WorkspaceEvents.UNJOIN_GROUP),
-                GOTO_GROUP_COMMAND };
+                new MemberAction(i18n.t("Don't participate more in this group"), WorkspaceEvents.UNJOIN_GROUP),
+                goto_group_command };
         MemberAction[] collabActions = adminsActions;
-        MemberAction[] viewerActions = { GOTO_GROUP_COMMAND };
+        MemberAction[] viewerActions = { goto_group_command };
         List<LinkDTO> groupsIsAdmin = participation.getGroupsIsAdmin();
         List<LinkDTO> groupsIsCollab = participation.getGroupsIsCollab();
         boolean userIsAdmin = rights.isAdministrable();
@@ -77,10 +85,6 @@ public class ParticipationPresenter extends AbstractPresenter implements Partici
 
     }
 
-    private void hide() {
-        view.hide();
-    }
-
     private void addParticipants(final List<LinkDTO> groupsIsAdmin, final List<LinkDTO> groupsIsCollab,
             final int numAdmins, final int numCollaborators, final boolean userIsAdmin, boolean userIsMember,
             final MemberAction[] adminsActions, final MemberAction[] collabActions, final MemberAction[] viewerActions) {
@@ -97,17 +101,25 @@ public class ParticipationPresenter extends AbstractPresenter implements Partici
             }
         }
         if (numAdmins > 0) {
-            view.addCategory(ADMIN_SUBTITLE, Kune.I18N.tWithNT("Administrate these groups", "talking about a person"));
-            iteraList(ADMIN_SUBTITLE, groupsIsAdmin, actions);
-            collabTitle = Kune.I18N.t("and as collaborator in:");
+            view.addCategory(admin_subtitle, i18n.tWithNT("Administrate these groups", "talking about a person"));
+            iteraList(admin_subtitle, groupsIsAdmin, actions);
+            collabTitle = i18n.t("and as collaborator in:");
         } else {
-            collabTitle = Kune.I18N.t("collaborator in:");
+            collabTitle = i18n.t("collaborator in:");
         }
         if (numCollaborators > 0) {
-            view.addCategory(collabTitle, Kune.I18N.t("Collaborate in these groups"));
+            view.addCategory(collabTitle, i18n.t("Collaborate in these groups"));
             iteraList(collabTitle, groupsIsCollab, actions);
         }
 
+    }
+
+    private void hide() {
+        view.hide();
+    }
+
+    private boolean isMember(final boolean userIsAdmin, final boolean userIsCollab) {
+        return userIsAdmin || userIsCollab;
     }
 
     private void iteraList(final String categoryName, final List<LinkDTO> groupList, final MemberAction[] actions) {
@@ -116,9 +128,5 @@ public class ParticipationPresenter extends AbstractPresenter implements Partici
             final LinkDTO group = iter.next();
             view.addCategoryMember(categoryName, group.getShortName(), group.getLongName(), actions);
         }
-    }
-
-    private boolean isMember(final boolean userIsAdmin, final boolean userIsCollab) {
-        return userIsAdmin || userIsCollab;
     }
 }

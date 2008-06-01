@@ -20,7 +20,7 @@
 package org.ourproject.kune.workspace.client.sitebar.login;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
 import org.ourproject.kune.platf.client.ui.dialogs.InfoDialog;
 import org.ourproject.kune.workspace.client.newgroup.ui.SiteErrorType;
@@ -82,8 +82,10 @@ public class LoginPanel implements LoginView, View {
     private InfoDialog welcomeDialog;
     private TabPanel centerPanel;
     private MessagePanel messagesRegisterPanel;
+    private final I18nTranslationService i18n;
 
-    public LoginPanel(final LoginPresenter initialPresenter) {
+    public LoginPanel(final LoginPresenter initialPresenter, final I18nTranslationService i18n) {
+        this.i18n = i18n;
         Field.setMsgTarget("side");
         this.presenter = initialPresenter;
         createPanel();
@@ -154,7 +156,7 @@ public class LoginPanel implements LoginView, View {
     }
 
     public void maskProcessing() {
-        mask(Kune.I18N.t("Processing"));
+        mask(i18n.t("Processing"));
     }
 
     public void reset() {
@@ -191,11 +193,11 @@ public class LoginPanel implements LoginView, View {
 
     public void showWelcolmeDialog() {
         if (welcomeDialog == null) {
-            welcomeDialog = new InfoDialog(Kune.I18N.t("Welcome"), Kune.I18N.t("Thanks for registering"), Kune.I18N
+            welcomeDialog = new InfoDialog(i18n.t("Welcome"), i18n.t("Thanks for registering"), i18n
                     .t("Now you can participate more actively in this site with other people and groups. "
                             + "You can also use your personal space to publish contents. "
                             + "Your email is not verified, please follow the instructions you will receive by email."),
-                    true, true, 400, 270);
+                    i18n.t("Ok"), true, true, 400, 270);
         }
         welcomeDialog.show();
     }
@@ -214,8 +216,8 @@ public class LoginPanel implements LoginView, View {
         final Panel noAccRegisterPanel = new Panel();
         noAccRegisterPanel.setBorder(false);
         noAccRegisterPanel.setMargins(0, 90, 0, 0);
-        final Label dontHaveAccountLabel = new Label(Kune.I18N.t("Don't have an account?"));
-        final Label registerLabel = new Label(Kune.I18N.t("Create one."));
+        final Label dontHaveAccountLabel = new Label(i18n.t("Don't have an account?"));
+        final Label registerLabel = new Label(i18n.t("Create one."));
         registerLabel.addClickListener(new ClickListener() {
             public void onClick(final Widget arg0) {
                 centerPanel.activate(1);
@@ -229,7 +231,7 @@ public class LoginPanel implements LoginView, View {
     }
 
     private void createPanel() {
-        dialog = new BasicDialog(Kune.I18N.t("Sign in"), true, false, 370, 400);
+        dialog = new BasicDialog(i18n.t("Sign in"), true, false, 370, 400);
         dialog.setLayout(new FitLayout());
         final Panel dialogPanel = new Panel();
         dialogPanel.setLayout(new BorderLayout());
@@ -247,15 +249,15 @@ public class LoginPanel implements LoginView, View {
         // centerPanel.setAutoHeight(true);
         centerPanel.setClosable(false);
 
-        final Panel signInPanel = new Panel(Kune.I18N.t("Sign in"));
+        final Panel signInPanel = new Panel(i18n.t("Sign in"));
         confPanel(signInPanel);
-        signInForm = new LoginForm();
+        signInForm = new LoginForm(i18n);
         signInPanel.add(signInForm.getForm());
         signInPanel.add(createNoAccountRegister());
         messagesSignInPanel = new MessagePanel();
         signInPanel.add(messagesSignInPanel);
 
-        final Panel registerPanel = new Panel(Kune.I18N.t("Register"));
+        final Panel registerPanel = new Panel(i18n.t("Register"));
         confPanel(registerPanel);
 
         centerPanel.add(signInPanel);
@@ -263,7 +265,7 @@ public class LoginPanel implements LoginView, View {
         dialogPanel.add(centerPanel, new BorderLayoutData(RegionPosition.CENTER));
         dialog.add(dialogPanel);
 
-        final Button signInBtn = new Button(Kune.I18N.t("Sign in"));
+        final Button signInBtn = new Button(i18n.t("Sign in"));
         signInBtn.addListener(new ButtonListenerAdapter() {
             public void onClick(final Button button, final EventObject e) {
                 signInForm.validate();
@@ -274,7 +276,7 @@ public class LoginPanel implements LoginView, View {
         });
         dialog.addButton(signInBtn);
 
-        final Button registerBtn = new Button(Kune.I18N.t("Register"));
+        final Button registerBtn = new Button(i18n.t("Register"));
         registerBtn.addListener(new ButtonListenerAdapter() {
             public void onClick(final Button button, final EventObject e) {
                 registerForm.validate();
@@ -288,7 +290,7 @@ public class LoginPanel implements LoginView, View {
 
         final Button cancel = new Button();
         dialog.addButton(cancel);
-        cancel.setText(Kune.I18N.tWithNT("Cancel", "used in button"));
+        cancel.setText(i18n.tWithNT("Cancel", "used in button"));
         cancel.addListener(new ButtonListenerAdapter() {
             public void onClick(final Button button, final EventObject e) {
                 presenter.onCancel();
@@ -297,7 +299,7 @@ public class LoginPanel implements LoginView, View {
 
         signInPanel.addListener(new PanelListenerAdapter() {
             public void onActivate(final Panel panel) {
-                dialog.setTitle(Kune.I18N.t("Sign in"));
+                dialog.setTitle(i18n.t("Sign in"));
                 registerBtn.hide();
                 signInBtn.show();
             }
@@ -307,7 +309,7 @@ public class LoginPanel implements LoginView, View {
             public void onActivate(final Panel panel) {
                 if (registerForm == null) {
                     maskProcessing();
-                    registerForm = new RegisterForm(presenter);
+                    registerForm = new RegisterForm(presenter, i18n);
                     registerPanel.add(registerForm.getForm());
                     messagesRegisterPanel = new MessagePanel();
                     registerPanel.add(messagesRegisterPanel);
@@ -315,7 +317,7 @@ public class LoginPanel implements LoginView, View {
                     renderDialogIfNeeded();
                     unMask();
                 }
-                dialog.setTitle(Kune.I18N.t("Register"));
+                dialog.setTitle(i18n.t("Register"));
                 signInBtn.hide();
                 registerBtn.show();
             }

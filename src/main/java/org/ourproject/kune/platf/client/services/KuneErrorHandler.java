@@ -43,9 +43,11 @@ public class KuneErrorHandler {
     }
 
     private final Session session;
+    private final I18nTranslationService i18n;
 
-    public KuneErrorHandler(final Session session) {
+    public KuneErrorHandler(final Session session, final I18nTranslationService i18n) {
         this.session = session;
+        this.i18n = i18n;
         instance = this;
     }
 
@@ -54,30 +56,30 @@ public class KuneErrorHandler {
         try {
             throw caught;
         } catch (final AccessViolationException e) {
-            Site.error(Kune.I18N.t("You don't have rights to do that"));
+            Site.error(i18n.t("You don't have rights to do that"));
         } catch (final SessionExpiredException e) {
             doSessionExpired();
         } catch (final UserMustBeLoggedException e) {
             if (session.isLogged()) {
                 doSessionExpired();
             } else {
-                Site.important(Kune.I18N.t("Please sign in or register to collaborate"));
+                Site.important(i18n.t("Please sign in or register to collaborate"));
             }
         } catch (final GroupNotFoundException e) {
-            Site.error(Kune.I18N.t("Group not found"));
+            Site.error(i18n.t("Group not found"));
             DefaultDispatcher.getInstance().fire(PlatformEvents.GOTO, "");
         } catch (final ContentNotFoundException e) {
-            Site.error(Kune.I18N.t("Content not found"));
+            Site.error(i18n.t("Content not found"));
             DefaultDispatcher.getInstance().fire(PlatformEvents.GOTO, "");
         } catch (final LastAdminInGroupException e) {
-            Site.showAlertMessage(Kune.I18N.t("Sorry, you are the last admin of this group."
+            Site.showAlertMessage(i18n.t("Sorry, you are the last admin of this group."
                     + " Look for someone to substitute you appropriately as admin before unjoin this group."));
         } catch (final AlreadyGroupMemberException e) {
-            Site.error(Kune.I18N.t("This group is already a group member"));
+            Site.error(i18n.t("This group is already a group member"));
         } catch (final AlreadyUserMemberException e) {
-            Site.error(Kune.I18N.t("This user is already a member of this group"));
+            Site.error(i18n.t("This user is already a member of this group"));
         } catch (final Throwable e) {
-            Site.error(Kune.I18N.t("Error performing operation"));
+            Site.error(i18n.t("Error performing operation"));
             GWT.log("Other kind of exception in StateManagerDefault/processErrorException", null);
             throw new RuntimeException();
         }
@@ -85,7 +87,7 @@ public class KuneErrorHandler {
 
     private void doSessionExpired() {
         Site.doLogout();
-        Site.showAlertMessage(Kune.I18N.t("Your session has expired. Please login again."));
+        Site.showAlertMessage(i18n.t("Your session has expired. Please login again."));
     }
 
 }

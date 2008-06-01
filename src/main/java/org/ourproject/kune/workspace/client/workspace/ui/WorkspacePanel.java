@@ -23,8 +23,8 @@ package org.ourproject.kune.workspace.client.workspace.ui;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.extend.ExtensibleWidgetId;
 import org.ourproject.kune.platf.client.services.ColorTheme;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.platf.client.services.Kune;
 import org.ourproject.kune.platf.client.tool.ToolTrigger;
 import org.ourproject.kune.platf.client.ui.DropDownPanel;
 import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
@@ -67,7 +67,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     private DropDownPanel groupSummaryPanel;
     private final VerticalPanel cntcxtVP;
     private final ScrollPanel groupDropDownsSP;
-    private final ColorTheme th;
+    private final ColorTheme colorTheme;
     private final BottomIconsTrayPanel bottomIconsTrayPanel;
     private ContentTitlePanel contentTitlePanel;
     private ContentSubTitlePanel contentSubTitlePanel;
@@ -82,17 +82,18 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     private int previousRightWidgetWidth;
     private final WorkspacePresenter presenter;
 
-    public WorkspacePanel(final WorkspacePresenter presenter) {
+    public WorkspacePanel(final WorkspacePresenter presenter, final I18nTranslationService i18n,
+            final ColorTheme colorTheme) {
         this.presenter = presenter;
-        th = Kune.getInstance().theme;
+        this.colorTheme = colorTheme;
         // Initialize
         final VerticalPanel generalVP = new VerticalPanel();
         initWidget(generalVP);
-        groupLogoPanel = new GroupLogoPanel();
+        groupLogoPanel = new GroupLogoPanel(i18n);
         final HorizontalPanel generalHP = new HorizontalPanel();
         cntcxtVP = new VerticalPanel();
         final VerticalPanel groupNavBarVP = new VerticalPanel();
-        groupToolsBar = new GroupToolsBar();
+        groupToolsBar = new GroupToolsBar(colorTheme);
         bottomIconsTrayPanel = new BottomIconsTrayPanel();
         groupDropDownsSP = new ScrollPanel();
         groupDropDownsVP = new VerticalPanel();
@@ -156,7 +157,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         addStyleName("kune-WorkspacePanel");
         setGroupLogo("");
         generalHP.addStyleName("GeneralHP");
-        contentTitleBarBorderDec.setColor(th.getContentMainBorder());
+        contentTitleBarBorderDec.setColor(colorTheme.getContentMainBorder());
         contentTitleBarHP.setWidth("100%");
         contentSubTitleBarHP.setWidth("100%");
         contentTitleBarHP.addStyleName("kune-ContentTitleBar");
@@ -172,7 +173,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
         contentBottomBarHP.addStyleName("kune-ContentBottomBar");
         contentBottomBarHP.addStyleName("kune-ft12px");
         groupDropDownsVP.addStyleName("kune-GroupSummaryPanel");
-        bottomBorderDecorator.setColor(th.getContentMainBorder());
+        bottomBorderDecorator.setColor(colorTheme.getContentMainBorder());
         bottomIconsTrayPanel.addStyleName("kune-Margin-Medium-l");
         bottomIconsTrayPanel.addStyleName("kune-BottomIconsTrayPanel");
         bottomIconsTrayPanel.setHorizontalAlignment(HorizontalPanel.ALIGN_CENTER);
@@ -285,12 +286,12 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 
     public void setGroupMembers(final View view) {
         groupMembersPanel = (DropDownPanel) view;
-        AddDropDown(groupMembersPanel, th.getGroupMembersDD());
+        AddDropDown(groupMembersPanel, colorTheme.getGroupMembersDD());
     }
 
     public void setParticipation(final View view) {
         participationPanel = (DropDownPanel) view;
-        AddDropDown(participationPanel, th.getParticipationDD());
+        AddDropDown(participationPanel, colorTheme.getParticipationDD());
     }
 
     public void setPutYourLogoVisible(final boolean visible) {
@@ -299,36 +300,36 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 
     public void setSummary(final View view) {
         groupSummaryPanel = (DropDownPanel) view;
-        AddDropDown(groupSummaryPanel, th.getSummaryDD());
+        AddDropDown(groupSummaryPanel, colorTheme.getSummaryDD());
     }
 
     public void setTags(final View view) {
         tagsPanel = (DropDownPanel) view;
-        AddDropDown(tagsPanel, th.getTagsDD());
+        AddDropDown(tagsPanel, colorTheme.getTagsDD());
     }
 
     public void setTheme(final String theme) {
-        th.setTheme(theme);
-        final String mainColor = th.getContentMainBorder();
-        groupLogoPanel.setTextColor(th.getContentTitleText());
+        colorTheme.setTheme(theme);
+        final String mainColor = colorTheme.getContentMainBorder();
+        groupLogoPanel.setTextColor(colorTheme.getContentTitleText());
         contentTitleBarBorderDec.setColor(mainColor);
         bottomBorderDecorator.setColor(mainColor);
         DOM.setStyleAttribute(cntcxtVP.getElement(), "borderRightColor", mainColor);
-        contentTitlePanel.setColors(th.getContentTitle(), th.getContentTitleText());
-        contentSubTitlePanel.setColors(mainColor, th.getContentSubTitleText());
+        contentTitlePanel.setColors(colorTheme.getContentTitle(), colorTheme.getContentTitleText());
+        contentSubTitlePanel.setColors(mainColor, colorTheme.getContentSubTitleText());
         DOM.setStyleAttribute(contentTitleBarHP.getElement(), "borderLeftColor", mainColor);
-        DOM.setStyleAttribute(contentTitleBarHP.getElement(), "backgroundColor", th.getContentTitle());
+        DOM.setStyleAttribute(contentTitleBarHP.getElement(), "backgroundColor", colorTheme.getContentTitle());
         DOM.setStyleAttribute(contentSubTitleBarHP.getElement(), "backgroundColor", mainColor);
         DOM.setStyleAttribute(contentBottomBarHP.getElement(), "backgroundColor", mainColor);
-        DOM.setStyleAttribute(cntcxtHSP.getRightWidget().getElement(), "backgroundColor", th.getContext());
-        DOM.setStyleAttribute(DOM.getChild(DOM.getChild(cntcxtHSP.getElement(), 0), 1), "backgroundColor", th
+        DOM.setStyleAttribute(cntcxtHSP.getRightWidget().getElement(), "backgroundColor", colorTheme.getContext());
+        DOM.setStyleAttribute(DOM.getChild(DOM.getChild(cntcxtHSP.getElement(), 0), 1), "backgroundColor", colorTheme
                 .getSplitter());
-        DOM.setStyleAttribute(contentBottomBarHP.getWidget(0).getElement(), "color", th.getContentBottomText());
-        groupMembersPanel.setColor(th.getGroupMembersDD());
-        participationPanel.setColor(th.getParticipationDD());
-        groupSummaryPanel.setColor(th.getSummaryDD());
-        tagsPanel.setColor(th.getTagsDD());
-        groupToolsBar.setTabsColors(th.getToolSelected(), th.getToolUnselected());
+        DOM.setStyleAttribute(contentBottomBarHP.getWidget(0).getElement(), "color", colorTheme.getContentBottomText());
+        groupMembersPanel.setColor(colorTheme.getGroupMembersDD());
+        participationPanel.setColor(colorTheme.getParticipationDD());
+        groupSummaryPanel.setColor(colorTheme.getSummaryDD());
+        tagsPanel.setColor(colorTheme.getTagsDD());
+        groupToolsBar.setTabsColors(colorTheme.getToolSelected(), colorTheme.getToolUnselected());
     }
 
     public void setTool(final String toolName) {
