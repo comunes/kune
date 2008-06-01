@@ -28,22 +28,24 @@ class DocumentContextComponents {
 
     private FolderContext folderContext;
     private AdminContext adminContext;
+    private final DocumentFactory documentFactory;
 
-    public DocumentContextComponents(final DocumentContextPresenter listener) {
-    }
-
-    public FolderContext getFolderContext() {
-        if (folderContext == null) {
-            folderContext = DocumentFactory.createFolderContext();
-        }
-        return folderContext;
+    public DocumentContextComponents(final DocumentFactory documentFactory, final DocumentContextPresenter listener) {
+        this.documentFactory = documentFactory;
     }
 
     public AdminContext getAdminContext() {
         if (adminContext == null) {
-            adminContext = DocumentFactory.createAdminContext();
+            adminContext = documentFactory.createAdminContext();
         }
         return adminContext;
+    }
+
+    public FolderContext getFolderContext() {
+        if (folderContext == null) {
+            folderContext = documentFactory.createFolderContext();
+        }
+        return folderContext;
     }
 
 }

@@ -27,12 +27,14 @@ import org.ourproject.kune.platf.client.extend.Register;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 
+import com.calclab.emite.client.modular.Provider;
+
 public class PlatformClientModule implements ClientModule {
-    private final StateManager stateManager;
+    private final Provider<StateManager> stateManager;
     private final Session session;
 
-    public PlatformClientModule(final Session session, final StateManager stateManager) {
-        this.stateManager = stateManager;
+    public PlatformClientModule(final Session session, final Provider<StateManager> provider) {
+        this.stateManager = provider;
         this.session = session;
     }
 

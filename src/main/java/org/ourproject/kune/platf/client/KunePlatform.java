@@ -53,13 +53,11 @@ public class KunePlatform implements Register {
     }
 
     public HashMap<String, ClientTool> getIndexedTools() {
-        final HashMap<String, ClientTool> tools = new HashMap<String, ClientTool>();
-        final int total = tools.size();
-        for (int index = 0; index < total; index++) {
-            final ClientTool clientTool = tools.get(index);
-            tools.put(clientTool.getName(), clientTool);
+        final HashMap<String, ClientTool> toolsIndexed = new HashMap<String, ClientTool>();
+        for (ClientTool tool : this.tools) {
+            toolsIndexed.put(tool.getName(), tool);
         }
-        return tools;
+        return toolsIndexed;
     }
 
     public List<ClientTool> getTools() {

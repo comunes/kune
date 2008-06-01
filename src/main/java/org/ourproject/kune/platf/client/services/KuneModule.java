@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.app.Application;
-import org.ourproject.kune.platf.client.app.DefaultApplication;
+import org.ourproject.kune.platf.client.app.ApplicationDefault;
 import org.ourproject.kune.platf.client.app.HistoryWrapper;
 import org.ourproject.kune.platf.client.app.HistoryWrapperImpl;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
@@ -15,11 +15,9 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.SessionImpl;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.state.StateManagerDefault;
-import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
-import com.calclab.emite.client.modular.Container;
 import com.calclab.emite.client.modular.Module;
 import com.calclab.emite.client.modular.ModuleBuilder;
 import com.calclab.emite.client.modular.Provider;
@@ -28,11 +26,6 @@ import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.History;
 
 public class KuneModule implements Module {
-
-    public static Kune getKune(final Container container) {
-        return container.getInstance(Kune.class);
-    }
-
     private final I18nLanguageDTO initialLang;
     private final HashMap<String, String> lexicon;
 
@@ -74,7 +67,7 @@ public class KuneModule implements Module {
                 return new KuneErrorHandler(builder.getInstance(Session.class), builder
                         .getInstance(I18nUITranslationService.class));
             }
-        });
+        }, Scopes.SINGLETON);
 
         builder.registerProvider(ColorTheme.class, new Provider<ColorTheme>() {
             public ColorTheme get() {
@@ -92,18 +85,17 @@ public class KuneModule implements Module {
             public ExtensibleWidgetsManager get() {
                 return new ExtensibleWidgetsManager();
             }
-        });
+        }, Scopes.SINGLETON);
 
         builder.registerProvider(Application.class, new Provider<Application>() {
             public Application get() {
                 Session session = builder.getInstance(Session.class);
-                HashMap<String, ClientTool> tools = builder.getInstance(KunePlatform.class).getIndexedTools();
                 ExtensibleWidgetsManager extensionPointManager = builder.getInstance(ExtensibleWidgetsManager.class);
-                return new DefaultApplication(tools, session, extensionPointManager, builder
+                return new ApplicationDefault(session, extensionPointManager, builder
                         .getInstance(I18nUITranslationService.class), builder.getInstance(ColorTheme.class), builder
                         .getInstance(KuneErrorHandler.class));
             }
-        });
+        }, Scopes.SINGLETON);
 
         builder.registerProvider(StateManager.class, new Provider<StateManager>() {
             public StateManager get() {
@@ -116,7 +108,7 @@ public class KuneModule implements Module {
                 History.addHistoryListener(stateManager);
                 return stateManager;
             }
-        });
+        }, Scopes.SINGLETON);
 
     }
 }

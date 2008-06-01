@@ -54,59 +54,59 @@ import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 
 public class DocumentFactory {
 
-    private static I18nTranslationService i18n;
+    private final I18nTranslationService i18n;
 
-    public static AdminContext createAdminContext() {
+    public DocumentFactory(final I18nTranslationService i18n) {
+        this.i18n = i18n;
+    }
+
+    public AdminContext createAdminContext() {
         AdminContextPresenter presenter = new AdminContextPresenter();
         AdminContextView view = new AdminContextPanel(presenter, i18n);
         presenter.init(view);
         return presenter;
     }
 
-    public static DocumentContent createDocumentContent(final DocumentContentListener listener) {
+    public DocumentContent createDocumentContent(final DocumentContentListener listener) {
         WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
-        DocumentContentPresenter presenter = new DocumentContentPresenter(listener, panel);
+        DocumentContentPresenter presenter = new DocumentContentPresenter(this, listener, panel);
         return presenter;
     }
 
-    public static DocumentContext createDocumentContext() {
+    public DocumentContext createDocumentContext() {
         WorkspaceDeckPanel view = new WorkspaceDeckPanel();
-        DocumentContextPresenter presenter = new DocumentContextPresenter(view);
+        DocumentContextPresenter presenter = new DocumentContextPresenter(this, view);
         return presenter;
     }
 
-    public static DocumentReader createDocumentReader(final DocumentReaderListener listener) {
+    public DocumentReader createDocumentReader(final DocumentReaderListener listener) {
         DocumentReaderView view = new DocumentReaderPanel();
         DocumentReaderPresenter presenter = new DocumentReaderPresenter(view);
         return presenter;
     }
 
-    public static DocumentReaderControl createDocumentReaderControl(final DocumentReaderListener listener) {
+    public DocumentReaderControl createDocumentReaderControl(final DocumentReaderListener listener) {
         DocumentReaderControlView view = new DocumentReaderControlPanel(listener, i18n);
         DocumentReaderControlPresenter presenter = new DocumentReaderControlPresenter(view);
         return presenter;
     }
 
-    public static FolderContext createFolderContext() {
+    public FolderContext createFolderContext() {
         ContextItems contextItems = WorkspaceFactory.createContextItems();
         FolderContextPresenter presenter = new FolderContextPresenter(contextItems, i18n);
         return presenter;
     }
 
-    public static FolderEditor createFolderEditor() {
+    public FolderEditor createFolderEditor() {
         FolderEditorPanel view = new FolderEditorPanel();
         FolderEditorPresenter presenter = new FolderEditorPresenter(view);
         return presenter;
     }
 
-    public static FolderViewer createFolderViewer() {
+    public FolderViewer createFolderViewer() {
         FolderViewerView view = new FolderViewerPanel();
         FolderViewerPresenter presenter = new FolderViewerPresenter(view);
         return presenter;
-    }
-
-    public DocumentFactory(final I18nTranslationService i18n) {
-        DocumentFactory.i18n = i18n;
     }
 
 }

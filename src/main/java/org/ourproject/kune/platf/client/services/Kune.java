@@ -20,13 +20,8 @@
 
 package org.ourproject.kune.platf.client.services;
 
-import java.util.HashMap;
-
-import org.ourproject.kune.chat.client.ChatClientNewModule;
-import org.ourproject.kune.docs.client.DocumentClientNewModule;
 import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.app.Application;
-import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
@@ -37,16 +32,10 @@ import com.calclab.emite.client.modular.DelegatedContainer;
 import com.calclab.emite.client.modular.Module;
 import com.calclab.emite.client.modular.ModuleBuilder;
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
-import com.calclab.emiteuimodule.client.EmiteUIModule;
 
 public class Kune extends DelegatedContainer {
 
-    public static Kune create(final I18nLanguageDTO initialLang, final HashMap<String, String> lexicon) {
-        return create(new KuneModule(initialLang, lexicon), new EmiteUIModule(), new DocumentClientNewModule(),
-                new ChatClientNewModule());
-    }
-
-    private static Kune create(final Module... modules) {
+    public static Kune create(final Module... modules) {
         final ModuleBuilder container = new ModuleBuilder();
         container.add(modules);
         return container.getInstance(Kune.class);

@@ -1,5 +1,6 @@
 package org.ourproject.kune.docs.client;
 
+import org.ourproject.kune.docs.client.ui.DocumentFactory;
 import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.state.Session;
@@ -22,11 +23,19 @@ public class DocumentClientNewModule implements Module {
     }
 
     public void onLoad(final ModuleBuilder builder) {
+        builder.registerProvider(DocumentFactory.class, new Provider<DocumentFactory>() {
+            public DocumentFactory get() {
+                return new DocumentFactory(builder.getInstance(I18nUITranslationService.class));
+            }
+        }, Scopes.SINGLETON);
+
         builder.registerProvider(DocumentClientTool.class, new Provider<DocumentClientTool>() {
             public DocumentClientTool get() {
-                return new DocumentClientTool(builder.getInstance(I18nUITranslationService.class));
+                DocumentFactory factory = builder.getInstance(DocumentFactory.class);
+                return new DocumentClientTool(factory, builder.getInstance(I18nUITranslationService.class));
             }
         }, Scopes.SINGLETON_EAGER);
+
         KunePlatform platform = builder.getInstance(KunePlatform.class);
         DocumentClientTool docClientTool = getDocumentClientTool(builder);
         platform.addTool(docClientTool);

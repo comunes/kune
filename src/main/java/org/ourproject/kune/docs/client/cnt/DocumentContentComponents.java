@@ -35,23 +35,12 @@ class DocumentContentComponents {
     private FolderViewer folderViewer;
     private FolderEditor folderEditor;
     private DocumentReaderControl readerControl;
+    private final DocumentFactory documentFactory;
 
-    public DocumentContentComponents(final DocumentContentPresenter documentContentPresenter) {
+    public DocumentContentComponents(final DocumentFactory documentFactory,
+            final DocumentContentPresenter documentContentPresenter) {
+        this.documentFactory = documentFactory;
         this.documentContentPresenter = documentContentPresenter;
-    }
-
-    public DocumentReader getDocumentReader() {
-        if (reader == null) {
-            reader = DocumentFactory.createDocumentReader(documentContentPresenter);
-        }
-        return reader;
-    }
-
-    public DocumentReaderControl getDocumentReaderControl() {
-        if (readerControl == null) {
-            readerControl = DocumentFactory.createDocumentReaderControl(documentContentPresenter);
-        }
-        return readerControl;
     }
 
     public TextEditor getDocumentEditor() {
@@ -61,18 +50,32 @@ class DocumentContentComponents {
         return editor;
     }
 
-    public FolderViewer getFolderViewer() {
-        if (folderViewer == null) {
-            folderViewer = DocumentFactory.createFolderViewer();
+    public DocumentReader getDocumentReader() {
+        if (reader == null) {
+            reader = documentFactory.createDocumentReader(documentContentPresenter);
         }
-        return folderViewer;
+        return reader;
+    }
+
+    public DocumentReaderControl getDocumentReaderControl() {
+        if (readerControl == null) {
+            readerControl = documentFactory.createDocumentReaderControl(documentContentPresenter);
+        }
+        return readerControl;
     }
 
     public FolderEditor getFolderEditor() {
         if (folderEditor == null) {
-            folderEditor = DocumentFactory.createFolderEditor();
+            folderEditor = documentFactory.createFolderEditor();
         }
         return folderEditor;
+    }
+
+    public FolderViewer getFolderViewer() {
+        if (folderViewer == null) {
+            folderViewer = documentFactory.createFolderViewer();
+        }
+        return folderViewer;
     }
 
 }

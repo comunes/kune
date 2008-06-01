@@ -28,21 +28,23 @@ class DocToolComponents {
     private DocumentContent content;
     private DocumentContext context;
     private final DocumentClientTool documentClientTool;
+    private final DocumentFactory documentFactory;
 
-    public DocToolComponents(final DocumentClientTool documentClientTool) {
+    public DocToolComponents(final DocumentFactory documentFactory, final DocumentClientTool documentClientTool) {
+        this.documentFactory = documentFactory;
         this.documentClientTool = documentClientTool;
     }
 
     public DocumentContent getContent() {
         if (content == null) {
-            content = DocumentFactory.createDocumentContent(documentClientTool);
+            content = documentFactory.createDocumentContent(documentClientTool);
         }
         return content;
     }
 
     public DocumentContext getContext() {
         if (context == null) {
-            context = DocumentFactory.createDocumentContext();
+            context = documentFactory.createDocumentContext();
         }
         return context;
     }

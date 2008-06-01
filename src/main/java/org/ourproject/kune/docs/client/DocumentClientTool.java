@@ -23,6 +23,7 @@ package org.ourproject.kune.docs.client;
 import org.ourproject.kune.docs.client.cnt.DocumentContent;
 import org.ourproject.kune.docs.client.cnt.DocumentContentListener;
 import org.ourproject.kune.docs.client.ctx.DocumentContext;
+import org.ourproject.kune.docs.client.ui.DocumentFactory;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.tool.AbstractClientTool;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
@@ -35,9 +36,9 @@ public class DocumentClientTool extends AbstractClientTool implements DocumentCo
     public static final String NAME = "docs";
     private final DocToolComponents components;
 
-    public DocumentClientTool(final I18nUITranslationService i18n) {
+    public DocumentClientTool(final DocumentFactory documentFactory, final I18nUITranslationService i18n) {
         super(i18n.t("documents"));
-        components = new DocToolComponents(this);
+        components = new DocToolComponents(documentFactory, this);
     }
 
     public WorkspaceComponent getContent() {

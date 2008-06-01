@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.platf.client.app;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -38,19 +39,16 @@ import org.ourproject.kune.workspace.client.WorkspaceFactory;
 import org.ourproject.kune.workspace.client.sitebar.bar.SiteBarListener;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
-public class DefaultApplication implements Application {
+public class ApplicationDefault implements Application {
     private final Workspace workspace;
-    private final Map<String, ClientTool> tools;
+    private Map<String, ClientTool> tools;
     private Dispatcher dispatcher;
     private StateManager stateManager;
 
-    public DefaultApplication(final Map<String, ClientTool> tools, final Session session,
-            final ExtensibleWidgetsManager extensionPointManager, final I18nTranslationService i18n,
-            final ColorTheme colorTheme, final KuneErrorHandler errorHandler) {
-        this.tools = tools;
+    public ApplicationDefault(final Session session, final ExtensibleWidgetsManager extensionPointManager,
+            final I18nTranslationService i18n, final ColorTheme colorTheme, final KuneErrorHandler errorHandler) {
         workspace = WorkspaceFactory.createWorkspace(session, extensionPointManager, i18n, colorTheme, errorHandler);
-        workspace.attachTools(tools.values().iterator());
-
+        tools = new HashMap<String, ClientTool>();
         DesktopView desktop = WorkspaceFactory.createDesktop(workspace, new SiteBarListener() {
             public void onChangeState(StateToken token) {
                 stateManager.setState(token);
@@ -64,14 +62,6 @@ public class DefaultApplication implements Application {
 
     }
 
-    public Dispatcher getDispatcher() {
-        return dispatcher;
-    }
-
-    public StateManager getStateManager() {
-        return stateManager;
-    }
-
     public ClientTool getTool(final String toolName) {
         return tools.get(toolName);
     }
@@ -80,9 +70,12 @@ public class DefaultApplication implements Application {
         return workspace;
     }
 
-    public void init(final DefaultDispatcher dispatcher, final StateManager stateManager) {
+    public void init(final DefaultDispatcher dispatcher, final StateManager stateManager,
+            final HashMap<String, ClientTool> tools) {
         this.dispatcher = dispatcher;
         this.stateManager = stateManager;
+        this.tools = tools;
+        workspace.attachTools(tools.values().iterator());
     }
 
     public void setGroupState(final String groupShortName) {

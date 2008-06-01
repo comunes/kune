@@ -24,12 +24,14 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 
+import com.calclab.emite.client.modular.Provider;
+
 public class GotoContainerAction implements Action<Long> {
 
     private final Session session;
-    private final StateManager stateManager;
+    private final Provider<StateManager> stateManager;
 
-    public GotoContainerAction(final StateManager stateManager, final Session session) {
+    public GotoContainerAction(final Provider<StateManager> stateManager, final Session session) {
         this.stateManager = stateManager;
         this.session = session;
     }
@@ -42,6 +44,6 @@ public class GotoContainerAction implements Action<Long> {
         StateToken newStateToken = session.getCurrentState().getStateToken();
         newStateToken.setDocument(null);
         newStateToken.setFolder(folderId.toString());
-        stateManager.setState(newStateToken);
+        stateManager.get().setState(newStateToken);
     }
 }

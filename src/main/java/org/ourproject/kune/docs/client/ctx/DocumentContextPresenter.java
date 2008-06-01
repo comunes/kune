@@ -22,6 +22,7 @@ package org.ourproject.kune.docs.client.ctx;
 
 import org.ourproject.kune.docs.client.ctx.admin.AdminContext;
 import org.ourproject.kune.docs.client.ctx.folder.FolderContext;
+import org.ourproject.kune.docs.client.ui.DocumentFactory;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
@@ -31,9 +32,9 @@ public class DocumentContextPresenter implements DocumentContext {
     private final WorkspaceDeckView view;
     private final DocumentContextComponents components;
 
-    public DocumentContextPresenter(final WorkspaceDeckView view) {
+    public DocumentContextPresenter(final DocumentFactory documentFactory, final WorkspaceDeckView view) {
         this.view = view;
-        this.components = new DocumentContextComponents(this);
+        this.components = new DocumentContextComponents(documentFactory, this);
     }
 
     public void attach() {
