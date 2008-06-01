@@ -21,9 +21,11 @@
 package org.ourproject.kune.chat.client;
 
 import org.ourproject.kune.platf.client.dto.StateDTO;
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.tool.AbstractClientTool;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
+
+import com.calclab.emiteuimodule.client.EmiteUIDialog;
 
 public class ChatClientTool extends AbstractClientTool implements ChatProvider {
     public static final String NAME = "chats";
@@ -33,12 +35,12 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
 
     private final ChatToolComponents components;
     private ChatEngine chat;
-    private final Kune kune;
+    private final EmiteUIDialog emiteUIDialog;
 
-    public ChatClientTool(final Kune kune) {
-        super(Kune.I18N.t("chat rooms"));
-        this.kune = kune;
-        components = new ChatToolComponents(kune.getEmiteUIDialog());
+    public ChatClientTool(final I18nTranslationService i18n, final EmiteUIDialog emiteUIDialog) {
+        super(i18n.t("chat rooms"));
+        this.emiteUIDialog = emiteUIDialog;
+        components = new ChatToolComponents(emiteUIDialog);
     }
 
     public ChatEngine getChat() {
@@ -58,7 +60,7 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
     }
 
     public void initEngine(final ChatOptions options) {
-        this.chat = new ChatEngineXmpp(kune.getEmiteUIDialog(), options);
+        this.chat = new ChatEngineXmpp(emiteUIDialog, options);
     }
 
     public void setContent(final StateDTO state) {

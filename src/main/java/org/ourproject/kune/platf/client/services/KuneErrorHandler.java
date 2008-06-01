@@ -36,6 +36,12 @@ import com.google.gwt.core.client.GWT;
 
 public class KuneErrorHandler {
     private static KuneErrorHandler instance;
+
+    @Deprecated
+    public static KuneErrorHandler getInstance() {
+        return instance;
+    }
+
     private final Session session;
 
     public KuneErrorHandler(final Session session) {
@@ -80,10 +86,6 @@ public class KuneErrorHandler {
     private void doSessionExpired() {
         Site.doLogout();
         Site.showAlertMessage(Kune.I18N.t("Your session has expired. Please login again."));
-    }
-
-    public static KuneErrorHandler getInstance() {
-        return instance;
     }
 
 }

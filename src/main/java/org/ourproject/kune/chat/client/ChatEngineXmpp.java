@@ -23,14 +23,12 @@ import java.util.Date;
 
 import org.ourproject.kune.platf.client.services.Kune;
 
-import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.emite.client.core.signal.Listener;
 import com.calclab.emite.client.im.roster.RosterManager.SubscriptionMode;
 import com.calclab.emite.client.xmpp.stanzas.XmppURI;
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
 import com.calclab.emiteuimodule.client.UserChatOptions;
 import com.calclab.emiteuimodule.client.params.AvatarProvider;
-import com.calclab.emiteuimodule.client.params.MultiChatCreationParam;
 import com.calclab.emiteuimodule.client.status.OwnPresence.OwnStatus;
 import com.google.gwt.user.client.Window;
 
@@ -67,6 +65,11 @@ class ChatEngineXmpp implements ChatEngine {
         };
 
         final String initialWindowTitle = Window.getTitle();
+        chatOptions.userOptions = userChatOptions;
+        emiteDialog.start(userChatOptions, chatOptions.httpBase, chatOptions.roomHost, avatarProvider, Kune.I18N
+                .t("Chat"));
+        emiteDialog.show(OwnStatus.online);
+        emiteDialog.hide();
         emiteDialog.onConversationAttended(new Listener<String>() {
             public void onEvent(final String parameter) {
                 Window.setTitle(initialWindowTitle);
@@ -77,13 +80,6 @@ class ChatEngineXmpp implements ChatEngine {
                 Window.setTitle("(* " + chatTitle + ") " + initialWindowTitle);
             }
         });
-        chatOptions.userOptions = userChatOptions;
-
-        emiteDialog.getChatDialog(new MultiChatCreationParam(Kune.I18N.t("Chat"), chatOptions.roomHost, avatarProvider,
-                chatOptions.userOptions));
-        Log.debug("LOGIN CHAT: " + chatName + "[" + chatPassword + "]");
-        emiteDialog.show(OwnStatus.online);
-        emiteDialog.hide();
     }
 
     public void logout() {

@@ -20,7 +20,8 @@
 
 package org.ourproject.kune.platf.client.extend;
 
-public interface ClientModule {
+
+public interface ClientModule {// extends Module {
 
     public void configure(Register register);
 

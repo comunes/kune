@@ -23,17 +23,11 @@ import java.util.HashMap;
 
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.GetTranslationActionParams;
-import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
-import org.ourproject.kune.platf.client.rpc.I18nService;
-import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.KuneStringUtils;
-import org.ourproject.kune.platf.client.ui.Location;
-import org.ourproject.kune.platf.client.ui.WindowUtils;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class I18nUITranslationService extends I18nTranslationService {
     private HashMap<String, String> lexicon;
@@ -53,21 +47,15 @@ public class I18nUITranslationService extends I18nTranslationService {
         i18nChangeListeners.add(listener);
     }
 
+    public void changeCurrentLanguage(final String newLanguage) {
+        if (!newLanguage.equals(this.currentLanguage)) {
+            setCurrentLanguage(newLanguage);
+            changeLocale(newLanguage);
+        }
+    }
+
     public String getCurrentLanguage() {
         return currentLanguage;
-    }
-
-    public void getInitialLanguage(final AsyncCallback<I18nLanguageDTO> callback) {
-        Location loc = WindowUtils.getLocation();
-        String locale = loc.getParameter("locale");
-        I18nServiceAsync server = I18nService.App.getInstance();
-        server.getInitialLanguage(locale, callback);
-    }
-
-    public void getInitialLexicon(final String initLanguage, final AsyncCallback<HashMap<String, String>> callback) {
-        currentLanguage = initLanguage;
-        I18nServiceAsync server = I18nService.App.getInstance();
-        server.getLexicon(currentLanguage, callback);
     }
 
     public HashMap<String, String> getLexicon() {
@@ -81,12 +69,7 @@ public class I18nUITranslationService extends I18nTranslationService {
     }
 
     public void setCurrentLanguage(final String newLanguage) {
-        if (!newLanguage.equals(this.currentLanguage)) {
-            this.currentLanguage = newLanguage;
-            changeLocale(newLanguage);
-            // DefaultDispatcher.getInstance().fire(WorkspaceEvents.GET_LEXICON,
-            // newLanguage, null);
-        }
+        this.currentLanguage = newLanguage;
     }
 
     public void setLexicon(final HashMap<String, String> lexicon) {

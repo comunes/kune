@@ -22,6 +22,7 @@ package org.ourproject.kune.platf.client.state;
 
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.HistoryWrapper;
+import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
@@ -53,6 +54,28 @@ public class StateManagerDefault implements StateManager {
         this.oldState = null;
     }
 
+    public void onHistoryChanged(final String historyToken) {
+        String oldStateEncoded = "";
+        if (oldState != null) {
+            oldStateEncoded = oldState.getStateToken().getEncoded();
+        }
+        if (historyToken.equals(Site.NEWGROUP_TOKEN)) {
+            Site.doNewGroup(oldStateEncoded);
+        } else if (historyToken.equals(Site.LOGIN_TOKEN)) {
+            Site.doLogin(oldStateEncoded);
+        } else if (historyToken.equals(Site.TRANSLATE_TOKEN)) {
+            DefaultDispatcher.getInstance().fire(WorkspaceEvents.SHOW_TRANSLATOR, null);
+        } else if (historyToken.equals(Site.FIXME_TOKEN)) {
+            if (oldState == null) {
+                onHistoryChanged(new StateToken());
+            } else {
+                loadContent(oldState);
+            }
+        } else {
+            onHistoryChanged(new StateToken(historyToken));
+        }
+    }
+
     /**
      * <p>
      * Reload current state (using client cache if available)
@@ -75,53 +98,28 @@ public class StateManagerDefault implements StateManager {
                 });
     }
 
-    public void onHistoryChanged(final String historyToken) {
-        String oldStateEncoded = "";
-        if (oldState != null) {
-            oldStateEncoded = oldState.getStateToken().getEncoded();
-        }
-        if (historyToken.equals(Site.NEWGROUP_TOKEN)) {
-            Site.doNewGroup(oldStateEncoded);
-        } else if (historyToken.equals(Site.LOGIN_TOKEN)) {
-            Site.doLogin(oldStateEncoded);
-        } else if (historyToken.equals(Site.TRANSLATE_TOKEN)) {
-            app.getDispatcher().fire(WorkspaceEvents.SHOW_TRANSLATOR, null);
-        } else if (historyToken.equals(Site.FIXME_TOKEN)) {
-            if (oldState == null) {
-                onHistoryChanged(new StateToken());
-            } else {
-                loadContent(oldState);
-            }
-        } else {
-            onHistoryChanged(new StateToken(historyToken));
-        }
-    }
-
     public void setRetrievedState(final StateDTO content) {
         final StateToken state = content.getStateToken();
         provider.cache(state, content);
         setState(state);
     }
 
+    public void setSocialNetwork(final SocialNetworkResultDTO socialNet) {
+        StateDTO state;
+        if (session != null && (state = session.getCurrentState()) != null) {
+            // After a SN operation, usually returns a SocialNetworkResultDTO
+            // with new SN data and we refresh the state
+            // to avoid to reload() again the state
+            SocialNetworkDTO groupMembers = socialNet.getGroupMembers();
+            ParticipationDataDTO userParticipation = socialNet.getUserParticipation();
+            state.setGroupMembers(groupMembers);
+            state.setParticipation(userParticipation);
+            setSocialNetwork(state);
+        }
+    }
+
     public void setState(final StateToken state) {
         history.newItem(state.getEncoded());
-    }
-
-    private void onHistoryChanged(final StateToken newState) {
-        provider.getContent(session.getUserHash(), newState, new AsyncCallbackSimple<StateDTO>() {
-            public void onSuccess(final StateDTO newStateDTO) {
-                loadContent(newStateDTO);
-                oldState = newStateDTO;
-            }
-        });
-    }
-
-    private void loadContextOnly(final StateDTO state) {
-        session.setCurrent(state);
-        final String toolName = state.getToolName();
-        final ClientTool clientTool = app.getTool(toolName);
-        clientTool.setContext(state);
-        workspace.setContext(clientTool.getContext());
     }
 
     private void loadContent(final StateDTO state) {
@@ -155,30 +153,33 @@ public class StateManagerDefault implements StateManager {
         Site.hideProgress();
     }
 
+    private void loadContextOnly(final StateDTO state) {
+        session.setCurrent(state);
+        final String toolName = state.getToolName();
+        final ClientTool clientTool = app.getTool(toolName);
+        clientTool.setContext(state);
+        workspace.setContext(clientTool.getContext());
+    }
+
+    private void onHistoryChanged(final StateToken newState) {
+        provider.getContent(session.getUserHash(), newState, new AsyncCallbackSimple<StateDTO>() {
+            public void onSuccess(final StateDTO newStateDTO) {
+                loadContent(newStateDTO);
+                oldState = newStateDTO;
+            }
+        });
+    }
+
+    private void setSocialNetwork(final StateDTO state) {
+        workspace.getGroupMembersComponent().setGroupMembers(state);
+        workspace.getParticipationComponent().setParticipation(state);
+    }
+
     private void setWsTheme(final GroupDTO group) {
         String nextTheme = group.getWorkspaceTheme();
         if (lastTheme == null || !lastTheme.equals(nextTheme)) {
             workspace.setTheme(nextTheme);
         }
         lastTheme = nextTheme;
-    }
-
-    public void setSocialNetwork(final SocialNetworkResultDTO socialNet) {
-        StateDTO state;
-        if (session != null && (state = session.getCurrentState()) != null) {
-            // After a SN operation, usually returns a SocialNetworkResultDTO
-            // with new SN data and we refresh the state
-            // to avoid to reload() again the state
-            SocialNetworkDTO groupMembers = socialNet.getGroupMembers();
-            ParticipationDataDTO userParticipation = socialNet.getUserParticipation();
-            state.setGroupMembers(groupMembers);
-            state.setParticipation(userParticipation);
-            setSocialNetwork(state);
-        }
-    }
-
-    private void setSocialNetwork(final StateDTO state) {
-        workspace.getGroupMembersComponent().setGroupMembers(state);
-        workspace.getParticipationComponent().setParticipation(state);
     }
 }

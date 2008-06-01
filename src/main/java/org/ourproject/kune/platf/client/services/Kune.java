@@ -20,7 +20,17 @@
 
 package org.ourproject.kune.platf.client.services;
 
+import java.util.HashMap;
+
+import org.ourproject.kune.chat.client.ChatClientNewModule;
+import org.ourproject.kune.docs.client.DocumentClientNewModule;
+import org.ourproject.kune.platf.client.KunePlatform;
+import org.ourproject.kune.platf.client.app.Application;
+import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
+import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 import com.calclab.emite.client.modular.Container;
 import com.calclab.emite.client.modular.DelegatedContainer;
@@ -37,8 +47,9 @@ public class Kune extends DelegatedContainer {
 
     private static Kune instance;
 
-    public static Kune create() {
-        return create(new KuneModule(), new EmiteUIModule());
+    public static Kune create(final I18nLanguageDTO initialLang, final HashMap<String, String> lexicon) {
+        return instance = create(new KuneModule(initialLang, lexicon), new EmiteUIModule(),
+                new DocumentClientNewModule(), new ChatClientNewModule());
     }
 
     public static Kune create(final Module... modules) {
@@ -48,9 +59,6 @@ public class Kune extends DelegatedContainer {
     }
 
     public static Kune getInstance() {
-        if (instance == null) {
-            instance = create();
-        }
         return instance;
     }
 
@@ -68,6 +76,22 @@ public class Kune extends DelegatedContainer {
 
     public I18nUITranslationService getI18N() {
         return this.getInstance(I18nUITranslationService.class);
+    }
+
+    public KunePlatform getPlatform() {
+        return this.getInstance(KunePlatform.class);
+    }
+
+    public Session getSession() {
+        return this.getInstance(Session.class);
+    }
+
+    public StateManager getStateManager() {
+        return this.getInstance(StateManager.class);
+    }
+
+    public Workspace getWorkspace() {
+        return this.getInstance(Application.class).getWorkspace();
     }
 
 }

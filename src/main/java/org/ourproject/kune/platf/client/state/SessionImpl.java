@@ -50,29 +50,82 @@ public class SessionImpl implements Session {
     private String defaultWsTheme;
     private I18nLanguageDTO currentLanguage;
 
-    public SessionImpl(final String usersHash, final I18nLanguageDTO initialLang) {
-        this.userHash = usersHash;
+    public SessionImpl(final String userHash, final I18nLanguageDTO initialLanguage) {
+        this.userHash = userHash;
+        currentLanguage = initialLanguage;
         licenses = null;
         languages = null;
         languagesArray = null;
         countries = null;
-        currentLanguage = initialLang;
+    }
+
+    public List<I18nCountryDTO> getCountries() {
+        return countries;
+    }
+
+    public Object[][] getCountriesArray() {
+        if (countriesArray == null) {
+            countriesArray = mapCountries();
+        }
+        return countriesArray;
+    }
+
+    public I18nLanguageDTO getCurrentLanguage() {
+        return currentLanguage;
+    }
+
+    public StateDTO getCurrentState() {
+        return currentState;
+    }
+
+    public String getDefaultWsTheme() {
+        return defaultWsTheme;
+    }
+
+    public List<I18nLanguageSimpleDTO> getLanguages() {
+        return languages;
+    }
+
+    public Object[][] getLanguagesArray() {
+        if (languagesArray == null) {
+            languagesArray = mapLangs();
+        }
+        return languagesArray;
     }
 
     public List<LicenseDTO> getLicenses() {
         return licenses;
     }
 
-    public void setLicenses(final List<LicenseDTO> licenses) {
-        this.licenses = licenses;
+    public Object[][] getTimezones() {
+        if (timezonesArray == null) {
+            mapTimezones();
+        }
+        return timezonesArray;
+    }
+
+    public String getUserHash() {
+        return userHash;
+    }
+
+    public String[] getWsThemes() {
+        return wsThemes;
+    }
+
+    public boolean isLogged() {
+        return userHash != null;
+    }
+
+    public void setCountries(final List<I18nCountryDTO> countries) {
+        this.countries = countries;
     }
 
     public void setCurrent(final StateDTO currentState) {
         this.currentState = currentState;
     }
 
-    public StateDTO getCurrentState() {
-        return currentState;
+    public void setCurrentLanguage(final I18nLanguageDTO currentLanguage) {
+        this.currentLanguage = currentLanguage;
     }
 
     public void setCurrentState(final StateDTO currentState) {
@@ -83,61 +136,24 @@ public class SessionImpl implements Session {
         this.defaultWsTheme = defaultWsTheme;
     }
 
-    public void setWsThemes(final String[] wsThemes) {
-        this.wsThemes = wsThemes;
-    }
-
-    public String[] getWsThemes() {
-        return wsThemes;
-    }
-
-    public String getDefaultWsTheme() {
-        return defaultWsTheme;
-    }
-
-    public boolean isLogged() {
-        return userHash != null;
-    }
-
-    public List<I18nLanguageSimpleDTO> getLanguages() {
-        return languages;
-    }
-
     public void setLanguages(final List<I18nLanguageSimpleDTO> languages) {
         this.languages = languages;
     }
 
-    public List<I18nCountryDTO> getCountries() {
-        return countries;
-    }
-
-    public void setCountries(final List<I18nCountryDTO> countries) {
-        this.countries = countries;
-    }
-
-    public Object[][] getLanguagesArray() {
-        if (languagesArray == null) {
-            languagesArray = mapLangs();
-        }
-        return languagesArray;
-    }
-
-    public Object[][] getCountriesArray() {
-        if (countriesArray == null) {
-            countriesArray = mapCountries();
-        }
-        return countriesArray;
+    public void setLicenses(final List<LicenseDTO> licenses) {
+        this.licenses = licenses;
     }
 
     public void setTimezones(final String[] timezones) {
         this.timezones = timezones;
     }
 
-    public Object[][] getTimezones() {
-        if (timezonesArray == null) {
-            mapTimezones();
-        }
-        return timezonesArray;
+    public void setUserHash(final String userHash) {
+        this.userHash = userHash;
+    }
+
+    public void setWsThemes(final String[] wsThemes) {
+        this.wsThemes = wsThemes;
     }
 
     private Object[][] mapCountries() {
@@ -168,22 +184,6 @@ public class SessionImpl implements Session {
             Object[] obj = new Object[] { timezones[i] };
             timezonesArray[i] = obj;
         }
-    }
-
-    public void setCurrentLanguage(final I18nLanguageDTO currentLanguage) {
-        this.currentLanguage = currentLanguage;
-    }
-
-    public I18nLanguageDTO getCurrentLanguage() {
-        return currentLanguage;
-    }
-
-    public String getUserHash() {
-        return userHash;
-    }
-
-    public void setUserHash(final String userHash) {
-        this.userHash = userHash;
     }
 
 }

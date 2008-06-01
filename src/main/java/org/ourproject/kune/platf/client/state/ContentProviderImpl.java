@@ -39,6 +39,10 @@ public class ContentProviderImpl implements ContentProvider {
         this.cache = new HashMap<StateToken, StateDTO>();
     }
 
+    public void cache(final StateToken encodeState, final StateDTO content) {
+        cache.put(encodeState, content);
+    }
+
     public void getContent(final String user, final StateToken newState, final AsyncCallback<StateDTO> callback) {
         Site.showProgressProcessing();
         StateDTO catched = getCached(newState);
@@ -51,10 +55,6 @@ public class ContentProviderImpl implements ContentProvider {
 
     private StateDTO getCached(final StateToken newState) {
         return cache.remove(newState);
-    }
-
-    public void cache(final StateToken encodeState, final StateDTO content) {
-        cache.put(encodeState, content);
     }
 
 }

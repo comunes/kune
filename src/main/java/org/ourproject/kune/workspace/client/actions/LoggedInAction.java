@@ -50,7 +50,7 @@ public class LoggedInAction implements Action<UserInfoDTO> {
         Site.sitebar.showLoggedUser(userInfoDTO);
         I18nLanguageDTO language = userInfoDTO.getLanguage();
         stateManager.reload();
-        Kune.I18N.setCurrentLanguage(language.getCode());
+        Kune.I18N.changeCurrentLanguage(language.getCode());
         session.setCurrentLanguage(language);
     }
 

@@ -23,31 +23,17 @@ package org.ourproject.kune.platf.client.app;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 
-import org.ourproject.kune.chat.client.ChatClientModule;
-import org.ourproject.kune.chat.client.ChatClientTool;
-import org.ourproject.kune.docs.client.DocsClientModule;
-import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.PlatformClientModule;
 import org.ourproject.kune.platf.client.dispatch.ActionEvent;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
-import org.ourproject.kune.platf.client.extend.ExtensibleWidgetsManager;
-import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.services.Kune;
-import org.ourproject.kune.platf.client.services.KuneErrorHandler;
-import org.ourproject.kune.platf.client.state.ContentProvider;
-import org.ourproject.kune.platf.client.state.ContentProviderImpl;
 import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.SessionImpl;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.platf.client.state.StateManagerDefault;
-import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.workspace.client.WorkspaceClientModule;
 import org.ourproject.kune.workspace.client.sitebar.Site;
-import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
@@ -58,51 +44,26 @@ public class ApplicationBuilder {
     public ApplicationBuilder() {
     }
 
-    public void build(final String userHash, final I18nLanguageDTO initialLang) {
-        final Kune kune = Kune.getInstance();
+    public void build(final I18nLanguageDTO initialLang, final HashMap<String, String> lexicon) {
+        final Kune kune = Kune.create(initialLang, lexicon);
+        final Session session = kune.getSession();
 
-        final KunePlatform platform = new KunePlatform();
-        final ChatClientTool chatClientTool = new ChatClientTool(kune);
-        platform.addTool(new DocumentClientTool());
-        platform.addTool(chatClientTool);
-        // platform.addTool(new BlogClientTool());
-
-        final HashMap<String, ClientTool> tools = indexTools(platform.getTools());
-
-        final Session session = new SessionImpl(userHash, initialLang);
-        new KuneErrorHandler(session);
-
-        final ExtensibleWidgetsManager extensionPointManager = new ExtensibleWidgetsManager();
-        final DefaultApplication application = new DefaultApplication(tools, session, extensionPointManager);
-        final Workspace workspace = application.getWorkspace();
         Site.showProgressLoading();
         Site.mask();
 
-        final ContentProvider provider = new ContentProviderImpl(ContentService.App.getInstance());
+        final KunePlatform platform = kune.getPlatform();
+        final StateManager stateManager = kune.getStateManager();
+        final Application application = kune.getInstance(Application.class);
 
-        final HistoryWrapper historyWrapper = new HistoryWrapperImpl();
-        final StateManager stateManager = new StateManagerDefault(provider, application, session, historyWrapper);
         History.addHistoryListener(stateManager);
 
         platform.install(new PlatformClientModule(session, stateManager));
-        platform.install(new ChatClientModule(session, stateManager, chatClientTool));
-        platform.install(new WorkspaceClientModule(session, stateManager, workspace));
-        platform.install(new DocsClientModule(session, stateManager, workspace));
-        // platform.install(new BlogsClientModule());
+        platform.install(new WorkspaceClientModule(session, stateManager, application.getWorkspace()));
 
         final DefaultDispatcher dispatcher = DefaultDispatcher.getInstance();
 
-        // Services services = new Services(application, stateManager,
-        // dispatcher, session, extensionPointManager,
-        // Kune.I18N);
-
         application.init(dispatcher, stateManager);
         subscribeActions(dispatcher, platform.getActions());
-
-        // final PluginManager pluginManager = new PluginManager(dispatcher,
-        // extensionPointManager, Kune.I18N);
-        // pluginManager.install(new HelloWorldPlugin());
-        // pluginManager.install(new EmiteUIPlugin());
 
         Window.addWindowCloseListener(new WindowCloseListener() {
             public void onWindowClosed() {
@@ -114,16 +75,6 @@ public class ApplicationBuilder {
             }
         });
         application.start();
-    }
-
-    private HashMap<String, ClientTool> indexTools(final List<ClientTool> toolList) {
-        final HashMap<String, ClientTool> tools = new HashMap<String, ClientTool>();
-        final int total = toolList.size();
-        for (int index = 0; index < total; index++) {
-            final ClientTool clientTool = toolList.get(index);
-            tools.put(clientTool.getName(), clientTool);
-        }
-        return tools;
     }
 
     private void subscribeActions(final DefaultDispatcher dispatcher, final ArrayList<ActionEvent<?>> actions) {

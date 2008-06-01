@@ -3,7 +3,6 @@ package org.ourproject.kune.sitebar.client.ui;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.state.SessionImpl;
 import org.ourproject.kune.workspace.client.sitebar.login.LoginListener;
 import org.ourproject.kune.workspace.client.sitebar.login.LoginPresenter;
@@ -17,15 +16,18 @@ public class LoginPresenterTest {
     @Before
     public void createObjects() {
         listener = EasyMock.createStrictMock(LoginListener.class);
-        presenter = new LoginPresenter(new SessionImpl("foofoo", new I18nLanguageDTO()), listener);
+        presenter = new LoginPresenter(new SessionImpl("foo", null), listener);
         view = EasyMock.createStrictMock(LoginView.class);
     }
 
     @Test
-    public void testViewInitialization() {
+    public void nickPassTyped() {
         // view.setEnabledLoginButton(false);
+        // view.setEnabledLoginButton(true);
         EasyMock.replay(view);
+
         presenter.init(view);
+        // presenter.onDataChanged("luther.b", "somepass");
         EasyMock.verify(view);
     }
 
@@ -40,13 +42,10 @@ public class LoginPresenterTest {
     }
 
     @Test
-    public void nickPassTyped() {
+    public void testViewInitialization() {
         // view.setEnabledLoginButton(false);
-        // view.setEnabledLoginButton(true);
         EasyMock.replay(view);
-
         presenter.init(view);
-        // presenter.onDataChanged("luther.b", "somepass");
         EasyMock.verify(view);
     }
 }

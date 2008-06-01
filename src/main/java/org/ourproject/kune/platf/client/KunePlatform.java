@@ -21,6 +21,7 @@
 package org.ourproject.kune.platf.client;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.dispatch.Action;
@@ -38,25 +39,35 @@ public class KunePlatform implements Register {
         this.actions = new ArrayList<ActionEvent<?>>();
     }
 
-    public void addTool(final ClientTool clientTool) {
-        tools.add(clientTool);
-    }
-
     @SuppressWarnings("unchecked")
     public void addAction(final String eventName, final Action<?> action) {
         actions.add(new ActionEvent(eventName, action));
     }
 
-    public void install(final ClientModule module) {
-        module.configure(this);
+    public void addTool(final ClientTool clientTool) {
+        tools.add(clientTool);
+    }
+
+    public ArrayList<ActionEvent<?>> getActions() {
+        return actions;
+    }
+
+    public HashMap<String, ClientTool> getIndexedTools() {
+        final HashMap<String, ClientTool> tools = new HashMap<String, ClientTool>();
+        final int total = tools.size();
+        for (int index = 0; index < total; index++) {
+            final ClientTool clientTool = tools.get(index);
+            tools.put(clientTool.getName(), clientTool);
+        }
+        return tools;
     }
 
     public List<ClientTool> getTools() {
         return tools;
     }
 
-    public ArrayList<ActionEvent<?>> getActions() {
-        return actions;
+    public void install(final ClientModule module) {
+        module.configure(this);
     }
 
 }
