@@ -33,10 +33,7 @@ public class RegisterForm extends DefaultForm {
     private final ComboBox countryCombo;
     private final ComboBox timezoneCombo;
 
-    private final I18nTranslationService i18n;
-
     public RegisterForm(final LoginPresenter presenter, final I18nTranslationService i18n) {
-        this.i18n = i18n;
         shortNameRegField = new TextField();
         shortNameRegField.setFieldLabel(i18n.t("Nickname"));
         shortNameRegField.setName(NICK_FIELD);

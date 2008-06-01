@@ -72,12 +72,12 @@ class ChatEngineXmpp implements ChatEngine {
         emiteDialog.start(userChatOptions, chatOptions.httpBase, chatOptions.roomHost, avatarProvider, i18n.t("Chat"));
         emiteDialog.show(OwnStatus.online);
         emiteDialog.hide();
-        emiteDialog.onConversationAttended(new Listener<String>() {
+        emiteDialog.onChatAttended(new Listener<String>() {
             public void onEvent(final String parameter) {
                 Window.setTitle(initialWindowTitle);
             }
         });
-        emiteDialog.onConversationUnattended(new Listener<String>() {
+        emiteDialog.onChatUnattendedWithActivity(new Listener<String>() {
             public void onEvent(final String chatTitle) {
                 Window.setTitle("(* " + chatTitle + ") " + initialWindowTitle);
             }
@@ -85,7 +85,7 @@ class ChatEngineXmpp implements ChatEngine {
     }
 
     public void logout() {
-        if (emiteDialog.isStarted()) {
+        if (!emiteDialog.isDialogNotStarted()) {
             emiteDialog.closeAllChats(false);
             emiteDialog.setOwnPresence(OwnStatus.offline);
         }
