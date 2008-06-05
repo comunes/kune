@@ -71,7 +71,7 @@ class ChatEngineXmpp implements ChatEngine {
         chatOptions.userOptions = userChatOptions;
         emiteDialog.start(userChatOptions, chatOptions.httpBase, chatOptions.roomHost, avatarProvider, i18n.t("Chat"));
         emiteDialog.show(OwnStatus.online);
-        emiteDialog.hide();
+        // emiteDialog.hide();
         emiteDialog.onChatAttended(new Listener<String>() {
             public void onEvent(final String parameter) {
                 Window.setTitle(initialWindowTitle);
