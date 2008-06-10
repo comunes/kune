@@ -27,50 +27,50 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
-import com.calclab.emite.client.modular.Container;
-import com.calclab.emite.client.modular.DelegatedContainer;
-import com.calclab.emite.client.modular.Module;
-import com.calclab.emite.client.modular.ModuleBuilder;
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
+import com.calclab.modular.client.container.Container;
+import com.calclab.modular.client.container.DelegatedContainer;
+import com.calclab.modular.client.modules.Module;
+import com.calclab.modular.client.modules.ModuleBuilder;
 
 public class Kune extends DelegatedContainer {
 
     public static Kune create(final Module... modules) {
-        final ModuleBuilder container = new ModuleBuilder();
-        container.add(modules);
-        return container.getInstance(Kune.class);
+	final ModuleBuilder container = new ModuleBuilder();
+	container.add(modules);
+	return container.getInstance(Kune.class);
     }
 
     protected Kune(final Container container) {
-        super(container);
+	super(container);
     }
 
     public ColorTheme getColorTheme() {
-        return this.getInstance(ColorTheme.class);
+	return this.getInstance(ColorTheme.class);
     }
 
     public EmiteUIDialog getEmiteUIDialog() {
-        return this.getInstance(EmiteUIDialog.class);
+	return this.getInstance(EmiteUIDialog.class);
     }
 
     public I18nUITranslationService getI18N() {
-        return this.getInstance(I18nUITranslationService.class);
+	return this.getInstance(I18nUITranslationService.class);
     }
 
     public KunePlatform getPlatform() {
-        return this.getInstance(KunePlatform.class);
+	return this.getInstance(KunePlatform.class);
     }
 
     public Session getSession() {
-        return this.getInstance(Session.class);
+	return this.getInstance(Session.class);
     }
 
     public StateManager getStateManager() {
-        return this.getInstance(StateManager.class);
+	return this.getInstance(StateManager.class);
     }
 
     public Workspace getWorkspace() {
-        return this.getInstance(Application.class).getWorkspace();
+	return this.getInstance(Application.class).getWorkspace();
     }
 
 }

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.ourproject.kune</groupId>
-  <artifactId>org.ourproject.kune</artifactId>
+  <groupId>org.ourproject</groupId>
+  <artifactId>kune</artifactId>
   <packaging>jar</packaging>
   <version>0.0.4</version>
   <description>kune free/open/libre collaboration platform</description>
-  <name>Kune</name>
+  <name>kune</name>
   <url>http://kune.ourproject.org</url>
 
   <dependencies>
@@ -272,9 +272,14 @@
       <artifactId>emite</artifactId>
       <version>0.2.8</version>
     </dependency>
-         <dependency>
+    <dependency>
       <groupId>com.calclab.emite</groupId>
       <artifactId>emiteuimodule</artifactId>
+      <version>0.2.8</version>
+    </dependency>
+    <dependency>
+      <groupId>com.calclab.emite</groupId>
+      <artifactId>emitemodular</artifactId>
       <version>0.2.8</version>
     </dependency>
   </dependencies>

@@ -23,21 +23,21 @@ import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.state.StateManager;
 
-import com.calclab.emite.client.modular.Provider;
+import com.calclab.modular.client.container.Provider;
 
 public class GotoAction implements Action<String> {
 
     private final Provider<StateManager> stateManager;
 
     public GotoAction(final Provider<StateManager> stateManager) {
-        this.stateManager = stateManager;
+	this.stateManager = stateManager;
     }
 
     public void execute(final String value) {
-        onGoto(value);
+	onGoto(value);
     }
 
     private void onGoto(final String token) {
-        stateManager.get().setState(new StateToken(token));
+	stateManager.get().setState(new StateToken(token));
     }
 }

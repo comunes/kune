@@ -23,13 +23,13 @@ import java.util.Date;
 
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 
-import com.calclab.emite.client.core.signal.Listener;
 import com.calclab.emite.client.im.roster.RosterManager.SubscriptionMode;
 import com.calclab.emite.client.xmpp.stanzas.XmppURI;
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
 import com.calclab.emiteuimodule.client.UserChatOptions;
 import com.calclab.emiteuimodule.client.params.AvatarProvider;
 import com.calclab.emiteuimodule.client.status.OwnPresence.OwnStatus;
+import com.calclab.modular.client.signal.Slot;
 import com.google.gwt.user.client.Window;
 
 class ChatEngineXmpp implements ChatEngine {
@@ -38,56 +38,56 @@ class ChatEngineXmpp implements ChatEngine {
     private final I18nTranslationService i18n;
 
     public ChatEngineXmpp(final EmiteUIDialog emiteUIDialog, final ChatOptions chatOptions,
-            final I18nTranslationService i18n) {
-        this.emiteDialog = emiteUIDialog;
-        this.chatOptions = chatOptions;
-        this.i18n = i18n;
+	    final I18nTranslationService i18n) {
+	this.emiteDialog = emiteUIDialog;
+	this.chatOptions = chatOptions;
+	this.i18n = i18n;
     }
 
     public ChatOptions getChatOptions() {
-        return chatOptions;
+	return chatOptions;
     }
 
     public void joinRoom(final String roomName, final String userAlias) {
-        XmppURI roomURI = XmppURI.uri(roomName + "@" + chatOptions.roomHost + "/"
-                + XmppURI.jid(chatOptions.userOptions.getUserJid()));
-        emiteDialog.joinRoom(roomURI);
+	XmppURI roomURI = XmppURI.uri(roomName + "@" + chatOptions.roomHost + "/"
+		+ XmppURI.jid(chatOptions.userOptions.getUserJid()));
+	emiteDialog.joinRoom(roomURI);
     }
 
     public void login(final String chatName, final String chatPassword) {
-        final String resource = "emiteui-" + new Date().getTime() + "-kune"; // +
-        // getGwtMetaProperty(GWT_PROPERTY_RELEASE);
-        // FIXME, get this from user profile
-        final UserChatOptions userChatOptions = new UserChatOptions(chatName + "@" + chatOptions.domain, chatPassword,
-                resource, "blue", SubscriptionMode.autoAcceptAll, true);
-        // FIXME: Avatar provider
-        final AvatarProvider avatarProvider = new AvatarProvider() {
-            public String getAvatarURL(XmppURI userURI) {
-                return "images/person-def.gif";
-            }
-        };
+	final String resource = "emiteui-" + new Date().getTime() + "-kune"; // +
+	// getGwtMetaProperty(GWT_PROPERTY_RELEASE);
+	// FIXME, get this from user profile
+	final UserChatOptions userChatOptions = new UserChatOptions(chatName + "@" + chatOptions.domain, chatPassword,
+		resource, "blue", SubscriptionMode.autoAcceptAll, true);
+	// FIXME: Avatar provider
+	final AvatarProvider avatarProvider = new AvatarProvider() {
+	    public String getAvatarURL(XmppURI userURI) {
+		return "images/person-def.gif";
+	    }
+	};
 
-        final String initialWindowTitle = Window.getTitle();
-        chatOptions.userOptions = userChatOptions;
-        emiteDialog.start(userChatOptions, chatOptions.httpBase, chatOptions.roomHost, avatarProvider, i18n.t("Chat"));
-        emiteDialog.show(OwnStatus.online);
-        // emiteDialog.hide();
-        emiteDialog.onChatAttended(new Listener<String>() {
-            public void onEvent(final String parameter) {
-                Window.setTitle(initialWindowTitle);
-            }
-        });
-        emiteDialog.onChatUnattendedWithActivity(new Listener<String>() {
-            public void onEvent(final String chatTitle) {
-                Window.setTitle("(* " + chatTitle + ") " + initialWindowTitle);
-            }
-        });
+	final String initialWindowTitle = Window.getTitle();
+	chatOptions.userOptions = userChatOptions;
+	emiteDialog.start(userChatOptions, chatOptions.httpBase, chatOptions.roomHost, avatarProvider, i18n.t("Chat"));
+	emiteDialog.show(OwnStatus.online);
+	// emiteDialog.hide();
+	emiteDialog.onChatAttended(new Slot<String>() {
+	    public void onEvent(final String parameter) {
+		Window.setTitle(initialWindowTitle);
+	    }
+	});
+	emiteDialog.onChatUnattendedWithActivity(new Slot<String>() {
+	    public void onEvent(final String chatTitle) {
+		Window.setTitle("(* " + chatTitle + ") " + initialWindowTitle);
+	    }
+	});
     }
 
     public void logout() {
-        if (!emiteDialog.isDialogNotStarted()) {
-            emiteDialog.closeAllChats(false);
-            emiteDialog.setOwnPresence(OwnStatus.offline);
-        }
+	if (!emiteDialog.isDialogNotStarted()) {
+	    emiteDialog.closeAllChats(false);
+	    emiteDialog.setOwnPresence(OwnStatus.offline);
+	}
     }
 }
