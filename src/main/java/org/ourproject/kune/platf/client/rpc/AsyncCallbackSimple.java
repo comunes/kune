@@ -25,8 +25,14 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public abstract class AsyncCallbackSimple<T> implements AsyncCallback<T> {
 
+    private static KuneErrorHandler errorHandler;
+
+    public static void init(KuneErrorHandler kuneErrorHandler) {
+	errorHandler = kuneErrorHandler;
+    }
+
     public void onFailure(final Throwable caught) {
-        KuneErrorHandler.getInstance().process(caught);
+	errorHandler.process(caught);
     }
 
 }

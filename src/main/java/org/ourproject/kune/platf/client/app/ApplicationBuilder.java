@@ -31,7 +31,9 @@ import org.ourproject.kune.platf.client.PlatformClientModule;
 import org.ourproject.kune.platf.client.dispatch.ActionEvent;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
+import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.services.KuneModule;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
@@ -49,46 +51,50 @@ public class ApplicationBuilder {
     }
 
     public void build(final I18nLanguageDTO initialLang, final HashMap<String, String> lexicon) {
-        final Kune kune = Kune.create(new KuneModule(initialLang, lexicon), new EmiteUIModule(),
-                new DocumentClientNewModule(), new ChatClientNewModule());
-        final Session session = kune.getSession();
+	final Kune kune = Kune.create(new KuneModule(initialLang, lexicon), new EmiteUIModule(),
+		new DocumentClientNewModule(), new ChatClientNewModule());
 
-        Site.showProgressLoading();
-        Site.mask();
+	KuneErrorHandler errorHandler = kune.getInstance(KuneErrorHandler.class);
+	AsyncCallbackSimple.init(errorHandler);
 
-        final KunePlatform platform = kune.getPlatform();
-        final StateManager stateManager = kune.getStateManager();
-        final Application application = kune.getInstance(Application.class);
-        I18nUITranslationService i18n = kune.getI18N();
+	final Session session = kune.getSession();
 
-        // Testing providers:
-        platform.install(new PlatformClientModule(session, kune.getProvider(StateManager.class)));
-        platform.install(new WorkspaceClientModule(session, stateManager, application.getWorkspace(), i18n));
+	Site.showProgressLoading();
+	Site.mask();
 
-        final DefaultDispatcher dispatcher = DefaultDispatcher.getInstance();
+	final KunePlatform platform = kune.getPlatform();
+	final StateManager stateManager = kune.getStateManager();
+	final Application application = kune.getInstance(Application.class);
+	I18nUITranslationService i18n = kune.getI18N();
 
-        application.init(dispatcher, stateManager, platform.getIndexedTools());
-        subscribeActions(dispatcher, platform.getActions());
+	// Testing providers:
+	platform.install(new PlatformClientModule(session, kune.getProvider(StateManager.class)));
+	platform.install(new WorkspaceClientModule(session, stateManager, application.getWorkspace(), i18n));
 
-        Window.addWindowCloseListener(new WindowCloseListener() {
-            public void onWindowClosed() {
-                application.stop();
-            }
+	final DefaultDispatcher dispatcher = DefaultDispatcher.getInstance();
 
-            public String onWindowClosing() {
-                return null;
-            }
-        });
-        application.start();
+	application.init(dispatcher, stateManager, platform.getIndexedTools());
+	subscribeActions(dispatcher, platform.getActions());
+
+	Window.addWindowCloseListener(new WindowCloseListener() {
+	    public void onWindowClosed() {
+		application.stop();
+	    }
+
+	    public String onWindowClosing() {
+		return null;
+	    }
+	});
+	application.start();
     }
 
     private void subscribeActions(final DefaultDispatcher dispatcher, final ArrayList<ActionEvent<?>> actions) {
-        ActionEvent<?> actionEvent;
+	ActionEvent<?> actionEvent;
 
-        for (final Iterator<ActionEvent<?>> it = actions.iterator(); it.hasNext();) {
-            actionEvent = it.next();
-            dispatcher.subscribe(actionEvent.event, actionEvent.action);
-        }
+	for (final Iterator<ActionEvent<?>> it = actions.iterator(); it.hasNext();) {
+	    actionEvent = it.next();
+	    dispatcher.subscribe(actionEvent.event, actionEvent.action);
+	}
     }
 
 }
