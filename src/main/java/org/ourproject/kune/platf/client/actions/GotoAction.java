@@ -23,7 +23,7 @@ import org.ourproject.kune.platf.client.dispatch.Action;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.state.StateManager;
 
-import com.calclab.modular.client.container.Provider;
+import com.calclab.suco.client.container.Provider;
 
 public class GotoAction implements Action<String> {
 

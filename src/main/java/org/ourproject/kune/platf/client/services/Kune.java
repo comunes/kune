@@ -28,10 +28,10 @@ import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
-import com.calclab.modular.client.container.Container;
-import com.calclab.modular.client.container.DelegatedContainer;
-import com.calclab.modular.client.modules.Module;
-import com.calclab.modular.client.modules.ModuleBuilder;
+import com.calclab.suco.client.container.Container;
+import com.calclab.suco.client.container.DelegatedContainer;
+import com.calclab.suco.client.modules.Module;
+import com.calclab.suco.client.modules.ModuleBuilder;
 
 public class Kune extends DelegatedContainer {
 

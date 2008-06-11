@@ -6,11 +6,11 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
-import com.calclab.modular.client.container.Container;
-import com.calclab.modular.client.container.Provider;
-import com.calclab.modular.client.modules.Module;
-import com.calclab.modular.client.modules.ModuleBuilder;
-import com.calclab.modular.client.scopes.SingletonScope;
+import com.calclab.suco.client.container.Container;
+import com.calclab.suco.client.container.Provider;
+import com.calclab.suco.client.modules.Module;
+import com.calclab.suco.client.modules.ModuleBuilder;
+import com.calclab.suco.client.scopes.SingletonScope;
 
 public class ChatClientNewModule implements Module {
     public static ChatClientTool getChatClientTool(final Container components) {
@@ -29,12 +29,12 @@ public class ChatClientNewModule implements Module {
 	    }
 	}, SingletonScope.class);
 
-	KunePlatform platform = builder.getInstance(KunePlatform.class);
-	ChatClientTool chatClientTool = getChatClientTool(builder);
+	final KunePlatform platform = builder.getInstance(KunePlatform.class);
+	final ChatClientTool chatClientTool = getChatClientTool(builder);
 	platform.addTool(chatClientTool);
 
-	Session session = builder.getInstance(Session.class);
-	StateManager stateManager = builder.getInstance(StateManager.class);
+	final Session session = builder.getInstance(Session.class);
+	final StateManager stateManager = builder.getInstance(StateManager.class);
 	platform.install(new ChatClientModule(session, stateManager, chatClientTool));
     }
 }

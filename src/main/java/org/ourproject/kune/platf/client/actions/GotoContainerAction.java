@@ -24,7 +24,7 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 
-import com.calclab.modular.client.container.Provider;
+import com.calclab.suco.client.container.Provider;
 
 public class GotoContainerAction implements Action<Long> {
 
@@ -41,7 +41,7 @@ public class GotoContainerAction implements Action<Long> {
     }
 
     private void onGoto(final Long folderId) {
-	StateToken newStateToken = session.getCurrentState().getStateToken();
+	final StateToken newStateToken = session.getCurrentState().getStateToken();
 	newStateToken.setDocument(null);
 	newStateToken.setFolder(folderId.toString());
 	stateManager.get().setState(newStateToken);

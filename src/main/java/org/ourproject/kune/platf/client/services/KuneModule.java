@@ -18,10 +18,10 @@ import org.ourproject.kune.platf.client.state.StateManagerDefault;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
-import com.calclab.modular.client.container.Provider;
-import com.calclab.modular.client.modules.Module;
-import com.calclab.modular.client.modules.ModuleBuilder;
-import com.calclab.modular.client.scopes.SingletonScope;
+import com.calclab.suco.client.container.Provider;
+import com.calclab.suco.client.modules.Module;
+import com.calclab.suco.client.modules.ModuleBuilder;
+import com.calclab.suco.client.scopes.SingletonScope;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.History;
 
@@ -47,7 +47,7 @@ public class KuneModule implements Module {
 
 	builder.registerProvider(I18nUITranslationService.class, new Provider<I18nUITranslationService>() {
 	    public I18nUITranslationService get() {
-		I18nUITranslationService translationService = new I18nUITranslationService();
+		final I18nUITranslationService translationService = new I18nUITranslationService();
 		translationService.setCurrentLanguage(initialLang.getCode());
 		translationService.setLexicon(lexicon);
 		return translationService;
@@ -89,8 +89,9 @@ public class KuneModule implements Module {
 
 	builder.registerProvider(Application.class, new Provider<Application>() {
 	    public Application get() {
-		Session session = builder.getInstance(Session.class);
-		ExtensibleWidgetsManager extensionPointManager = builder.getInstance(ExtensibleWidgetsManager.class);
+		final Session session = builder.getInstance(Session.class);
+		final ExtensibleWidgetsManager extensionPointManager = builder
+			.getInstance(ExtensibleWidgetsManager.class);
 		return new ApplicationDefault(session, extensionPointManager, builder
 			.getInstance(I18nUITranslationService.class), builder.getInstance(ColorTheme.class), builder
 			.getInstance(KuneErrorHandler.class));
@@ -99,11 +100,11 @@ public class KuneModule implements Module {
 
 	builder.registerProvider(StateManager.class, new Provider<StateManager>() {
 	    public StateManager get() {
-		Session session = builder.getInstance(Session.class);
-		ContentProviderImpl provider = new ContentProviderImpl(ContentService.App.getInstance());
+		final Session session = builder.getInstance(Session.class);
+		final ContentProviderImpl provider = new ContentProviderImpl(ContentService.App.getInstance());
 		final HistoryWrapper historyWrapper = new HistoryWrapperImpl();
-		Application application = builder.getInstance(Application.class);
-		StateManagerDefault stateManager = new StateManagerDefault(provider, application, session,
+		final Application application = builder.getInstance(Application.class);
+		final StateManagerDefault stateManager = new StateManagerDefault(provider, application, session,
 			historyWrapper);
 		History.addHistoryListener(stateManager);
 		return stateManager;

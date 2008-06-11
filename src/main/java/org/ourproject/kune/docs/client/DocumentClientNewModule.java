@@ -7,11 +7,11 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 
-import com.calclab.modular.client.container.Container;
-import com.calclab.modular.client.container.Provider;
-import com.calclab.modular.client.modules.Module;
-import com.calclab.modular.client.modules.ModuleBuilder;
-import com.calclab.modular.client.scopes.SingletonScope;
+import com.calclab.suco.client.container.Container;
+import com.calclab.suco.client.container.Provider;
+import com.calclab.suco.client.modules.Module;
+import com.calclab.suco.client.modules.ModuleBuilder;
+import com.calclab.suco.client.scopes.SingletonScope;
 
 public class DocumentClientNewModule implements Module {
     public static DocumentClientTool getDocumentClientTool(final Container components) {
@@ -31,19 +31,19 @@ public class DocumentClientNewModule implements Module {
 
 	builder.registerProvider(DocumentClientTool.class, new Provider<DocumentClientTool>() {
 	    public DocumentClientTool get() {
-		DocumentFactory factory = builder.getInstance(DocumentFactory.class);
+		final DocumentFactory factory = builder.getInstance(DocumentFactory.class);
 		return new DocumentClientTool(factory, builder.getInstance(I18nUITranslationService.class));
 	    }
 	}, SingletonScope.class);
 
-	KunePlatform platform = builder.getInstance(KunePlatform.class);
-	DocumentClientTool docClientTool = getDocumentClientTool(builder);
+	final KunePlatform platform = builder.getInstance(KunePlatform.class);
+	final DocumentClientTool docClientTool = getDocumentClientTool(builder);
 	platform.addTool(docClientTool);
 
-	Session session = builder.getInstance(Session.class);
-	StateManager stateManager = builder.getInstance(StateManager.class);
-	Application application = builder.getInstance(Application.class);
-	I18nUITranslationService i18n = builder.getInstance(I18nUITranslationService.class);
+	final Session session = builder.getInstance(Session.class);
+	final StateManager stateManager = builder.getInstance(StateManager.class);
+	final Application application = builder.getInstance(Application.class);
+	final I18nUITranslationService i18n = builder.getInstance(I18nUITranslationService.class);
 	platform.install(new DocsClientModule(session, stateManager, application.getWorkspace(), i18n));
     }
 

@@ -29,7 +29,7 @@ import com.calclab.emiteuimodule.client.EmiteUIDialog;
 import com.calclab.emiteuimodule.client.UserChatOptions;
 import com.calclab.emiteuimodule.client.params.AvatarProvider;
 import com.calclab.emiteuimodule.client.status.OwnPresence.OwnStatus;
-import com.calclab.modular.client.signal.Slot;
+import com.calclab.suco.client.signal.Slot;
 import com.google.gwt.user.client.Window;
 
 class ChatEngineXmpp implements ChatEngine {
@@ -49,8 +49,8 @@ class ChatEngineXmpp implements ChatEngine {
     }
 
     public void joinRoom(final String roomName, final String userAlias) {
-	XmppURI roomURI = XmppURI.uri(roomName + "@" + chatOptions.roomHost + "/"
-		+ XmppURI.jid(chatOptions.userOptions.getUserJid()));
+	final XmppURI roomURI = XmppURI.uri(roomName + "@" + chatOptions.roomHost + "/"
+		+ chatOptions.userOptions.getUserJid().getNode());
 	emiteDialog.joinRoom(roomURI);
     }
 

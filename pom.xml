@@ -49,7 +49,7 @@
     <dependency>
       <groupId>com.gwtext</groupId>
       <artifactId>gwtext</artifactId>
-      <version>2.0.4-beta2</version>
+      <version>2.0.4</version>
     </dependency>
     <dependency>
       <groupId>com.allen_sauer.gwt.log.gwt-log</groupId>
@@ -278,8 +278,8 @@
       <version>0.2.8</version>
     </dependency>
     <dependency>
-      <groupId>com.calclab.emite</groupId>
-      <artifactId>emitemodular</artifactId>
+      <groupId>com.calclab</groupId>
+      <artifactId>suco</artifactId>
       <version>0.2.8</version>
     </dependency>
   </dependencies>
