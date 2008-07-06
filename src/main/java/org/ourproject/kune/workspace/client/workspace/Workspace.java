@@ -35,56 +35,54 @@ public interface Workspace extends Component {
 
     public static final int MIN_HEIGHT = 480;
 
-    public void showError(Throwable caught);
-
-    public void showGroup(GroupDTO group, boolean isAdmin);
-
-    public void setTool(String toolName);
-
-    public void setContext(WorkspaceComponent contextComponent);
-
-    public void setContent(WorkspaceComponent contentComponent);
-
-    public void attachTools(Iterator<ClientTool> iterator);
-
     public void adjustSize(int windowWidth, int clientHeight);
-
-    public LicenseComponent getLicenseComponent();
-
-    public ContentTitleComponent getContentTitleComponent();
-
-    public ContentSubTitleComponent getContentSubTitleComponent();
-
-    public GroupMembersComponent getGroupMembersComponent();
-
-    public ParticipationComponent getParticipationComponent();
-
-    public GroupSummaryComponent getGroupSummaryComponent();
-
-    public GroupLiveSearchComponent getGroupLiveSearchComponent();
-
-    public UserLiveSearchComponent getUserLiveSearchComponent();
-
-    public TagsComponent getTagsComponent();
-
-    public void setTheme(String theme);
-
-    public ThemeMenuComponent getThemeMenuComponent();
-
-    public void setVisible(boolean visible);
-
-    public ContentBottomToolBarComponent getContentBottomToolBarComponent();
 
     public void attachToExtensibleWidget(ExtensibleWidgetChild ext);
 
-    public void detachFromExtensibleWidget(ExtensibleWidgetChild ext);
-
-    public I18nTranslatorComponent getI18nTranslatorComponent();
-
-    public int calculateWidth(int clientWidth);
+    public void attachTools(Iterator<ClientTool> iterator);
 
     public int calculateHeight(int clientHeight);
 
+    public int calculateWidth(int clientWidth);
+
     public void clearExtensibleWidget(String extId);
+
+    public void detachFromExtensibleWidget(ExtensibleWidgetChild ext);
+
+    public ContentBottomToolBarComponent getContentBottomToolBarComponent();
+
+    public ContentSubTitleComponent getContentSubTitleComponent();
+
+    public ContentTitleComponent getContentTitleComponent();
+
+    public GroupLiveSearchComponent getGroupLiveSearchComponent();
+
+    public GroupMembersComponent getGroupMembersComponent();
+
+    public GroupSummaryComponent getGroupSummaryComponent();
+
+    public I18nTranslatorComponent getI18nTranslatorComponent();
+
+    public LicenseComponent getLicenseComponent();
+
+    public ParticipationComponent getParticipationComponent();
+
+    public TagsComponent getTagsComponent();
+
+    public ThemeMenuComponent getThemeMenuComponent();
+
+    public UserLiveSearchComponent getUserLiveSearchComponent();
+
+    public void setContent(WorkspaceComponent contentComponent);
+
+    public void setContext(WorkspaceComponent contextComponent);
+
+    public void setTheme(String theme);
+
+    public void setTool(String toolName);
+
+    public void setVisible(boolean visible);
+
+    public void showGroup(GroupDTO group, boolean isAdmin);
 
 }

@@ -1,6 +1,4 @@
 INSERT INTO `globalize_languages` VALUES (7597,'pt-br','ltr','Brazilian Portuguese','','','',NULL,NULL,'\0','português do Brasil','','pt-br','c == 1 ? 1 : 2','','L');
-INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Welcome','Welcome','kune_core',1819);
-INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'',"This is an example of document. You can modify it if you are a group\'s collaborator and/or delete it if you are admin.","This is an example of document. You can modify it if you are a group\'s collaborator and/or delete it if you are admin.",'kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Content not found','Content not found','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Double click to rename','Double click to rename','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Contenido no encontrado','Content not found','kune_core',5889);

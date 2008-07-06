@@ -35,8 +35,6 @@ INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Add a document',
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Created, now you can edit the document','Created, now you can edit the document','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Sorry, this functionality is currently in development','Sorry, this functionality is currently in development','kune_core',1819);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','This is an orphaned project, if you are interested please request to join to work on it','This is an orphaned project, if you are interested please request to join to work on it','kune_core',1819);
-INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Bienvenido','Welcome','kune_core',5889);
-INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Este es un ejemplo de documento. Puede modificar si es colaborador/a de este grupo y/o borrarlo si es administrador/a de este grupo.',"This is an example of document. You can modify it if you are a group\'s collaborator and/or delete it if you are admin.",'kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Borrar','Delete [%NT used in button]','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Translate','Translate [%NT used in button]','kune_core',5889);
 INSERT INTO `globalize_translations` VALUES (NULL,'',NULL,1,'','Solicitar el participar en este grupo','Request to participate in this group','kune_core',5889);

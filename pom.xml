@@ -41,11 +41,13 @@
     </dependency>
     <!-- Use new repo -->
     <!-- http://code.google.com/p/gwt-ext/issues/detail?id=180 -->
+    <!--
     <dependency>
       <groupId>com.extjs</groupId>
       <artifactId>gxt</artifactId>
       <version>1.0-beta2</version>
     </dependency>
+    -->
     <dependency>
       <groupId>com.gwtext</groupId>
       <artifactId>gwtext</artifactId>

@@ -47,127 +47,20 @@ public class WorkspacePresenter implements Workspace {
     public WorkspacePresenter(final Session session) {
     }
 
-    public void init(final WorkspaceView view, final ExtensibleWidgetsManager extensionPointManager) {
-        this.view = view;
-        this.extensionPointManager = extensionPointManager;
-        this.components = new WorkspaceUIComponents(this);
-        view.setComponents(components);
-        view.registerUIExtensionPoints();
-    }
-
-    public void showError(final Throwable caught) {
-
-    }
-
-    public void showGroup(final GroupDTO group, final boolean isAdmin) {
-        view.setGroupLogo(group.getLongName());
-        view.setPutYourLogoVisible(isAdmin);
-    }
-
-    public void attachTools(final Iterator<ClientTool> iterator) {
-        ClientTool clientTool;
-        while (iterator.hasNext()) {
-            clientTool = iterator.next();
-            view.addTab(clientTool.getTrigger());
-        }
-    }
-
-    public void setTool(final String toolName) {
-        view.setTool(toolName);
-    }
-
-    public void setContext(final WorkspaceComponent contextComponent) {
-        if (context != null) {
-            context.detach();
-        }
-        context = contextComponent;
-        context.attach();
-        view.setContext(context.getView());
-    }
-
-    public void setContent(final WorkspaceComponent contentComponent) {
-        if (content != null) {
-            content.detach();
-        }
-        content = contentComponent;
-        content.attach();
-        view.setContent(content.getView());
-    }
-
-    public View getView() {
-        return view;
-    }
-
-    public LicenseComponent getLicenseComponent() {
-        return components.getLicenseComponent();
-    }
-
-    public ContentTitleComponent getContentTitleComponent() {
-        return components.getContentTitleComponent();
-    }
-
-    public ContentSubTitleComponent getContentSubTitleComponent() {
-        return components.getContentSubTitleComponent();
-    }
-
-    public GroupMembersComponent getGroupMembersComponent() {
-        return components.getGroupMembersComponent();
-    }
-
-    public ParticipationComponent getParticipationComponent() {
-        return components.getParticipationComponent();
-    }
-
-    public GroupSummaryComponent getGroupSummaryComponent() {
-        return components.getGroupSummaryComponent();
-    }
-
-    public ThemeMenuComponent getThemeMenuComponent() {
-        return components.getThemeMenuComponent();
-    }
-
-    public ContentBottomToolBarComponent getContentBottomToolBarComponent() {
-        return components.getContentBottomToolBarComponent();
-    }
-
-    public TagsComponent getTagsComponent() {
-        return components.getTagsComponent();
-    }
-
-    public GroupLiveSearchComponent getGroupLiveSearchComponent() {
-        return components.getGroupLiveSearchComponent();
-    }
-
-    public UserLiveSearchComponent getUserLiveSearchComponent() {
-        return components.getUserLiveSearchComponent();
-    }
-
-    public I18nTranslatorComponent getI18nTranslatorComponent() {
-        return components.getI18nTranslatorComponent();
-    }
-
-    public void setTheme(final String theme) {
-        view.setTheme(theme);
-    }
-
-    public void setVisible(final boolean visible) {
-        view.setVisible(visible);
+    public void adjustSize(final int windowWidth, final int clientHeight) {
+	view.adjustSize(windowWidth, clientHeight);
     }
 
     public void attachToExtensibleWidget(final ExtensibleWidgetChild child) {
-        extensionPointManager.attachToExtensible(child);
+	extensionPointManager.attachToExtensible(child);
     }
 
-    public void detachFromExtensibleWidget(final ExtensibleWidgetChild child) {
-        extensionPointManager.detachFromExtensible(child);
-    }
-
-    public void onSplitterStartResizing(final Widget sender) {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.WS_SPLITTER_STARTRESIZING, null);
-    }
-
-    public void onSplitterStopResizing(final Widget sender) {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.WS_SPLITTER_STOPRESIZING, null);
+    public void attachTools(final Iterator<ClientTool> iterator) {
+	ClientTool clientTool;
+	while (iterator.hasNext()) {
+	    clientTool = iterator.next();
+	    view.addTab(clientTool.getTrigger());
+	}
     }
 
     /**
@@ -175,8 +68,8 @@ public class WorkspacePresenter implements Workspace {
      * limit
      */
     public int calculateHeight(final int clientHeight) {
-        // 15 is the size of scrollbar
-        return clientHeight <= MIN_HEIGHT ? MIN_HEIGHT - 15 : clientHeight;
+	// 15 is the size of scrollbar
+	return clientHeight <= MIN_HEIGHT ? MIN_HEIGHT - 15 : clientHeight;
     }
 
     /**
@@ -184,22 +77,125 @@ public class WorkspacePresenter implements Workspace {
      * limit
      */
     public int calculateWidth(final int clientWidth) {
-        return clientWidth <= MIN_WIDTH ? MIN_WIDTH - 15 : clientWidth;
-    }
-
-    public void adjustSize(final int windowWidth, final int clientHeight) {
-        view.adjustSize(windowWidth, clientHeight);
-    }
-
-    public void registerExtensibleWidgets(final HashMap<String, ExtensibleWidget> extensibleWidget) {
-        extensionPointManager.registerExtensibleWidgets(extensibleWidget);
-    }
-
-    public void registerExtensibleWidget(final String id, final ExtensibleWidget extensibleWidget) {
-        extensionPointManager.registerExtensibleWidget(id, extensibleWidget);
+	return clientWidth <= MIN_WIDTH ? MIN_WIDTH - 15 : clientWidth;
     }
 
     public void clearExtensibleWidget(final String id) {
-        extensionPointManager.detachAll(id);
+	extensionPointManager.detachAll(id);
+    }
+
+    public void detachFromExtensibleWidget(final ExtensibleWidgetChild child) {
+	extensionPointManager.detachFromExtensible(child);
+    }
+
+    public ContentBottomToolBarComponent getContentBottomToolBarComponent() {
+	return components.getContentBottomToolBarComponent();
+    }
+
+    public ContentSubTitleComponent getContentSubTitleComponent() {
+	return components.getContentSubTitleComponent();
+    }
+
+    public ContentTitleComponent getContentTitleComponent() {
+	return components.getContentTitleComponent();
+    }
+
+    public GroupLiveSearchComponent getGroupLiveSearchComponent() {
+	return components.getGroupLiveSearchComponent();
+    }
+
+    public GroupMembersComponent getGroupMembersComponent() {
+	return components.getGroupMembersComponent();
+    }
+
+    public GroupSummaryComponent getGroupSummaryComponent() {
+	return components.getGroupSummaryComponent();
+    }
+
+    public I18nTranslatorComponent getI18nTranslatorComponent() {
+	return components.getI18nTranslatorComponent();
+    }
+
+    public LicenseComponent getLicenseComponent() {
+	return components.getLicenseComponent();
+    }
+
+    public ParticipationComponent getParticipationComponent() {
+	return components.getParticipationComponent();
+    }
+
+    public TagsComponent getTagsComponent() {
+	return components.getTagsComponent();
+    }
+
+    public ThemeMenuComponent getThemeMenuComponent() {
+	return components.getThemeMenuComponent();
+    }
+
+    public UserLiveSearchComponent getUserLiveSearchComponent() {
+	return components.getUserLiveSearchComponent();
+    }
+
+    public View getView() {
+	return view;
+    }
+
+    public void init(final WorkspaceView view, final ExtensibleWidgetsManager extensionPointManager) {
+	this.view = view;
+	this.extensionPointManager = extensionPointManager;
+	this.components = new WorkspaceUIComponents(this);
+	view.setComponents(components);
+	view.registerUIExtensionPoints();
+    }
+
+    public void onSplitterStartResizing(final Widget sender) {
+	DefaultDispatcher.getInstance().fire(WorkspaceEvents.WS_SPLITTER_STARTRESIZING, null);
+    }
+
+    public void onSplitterStopResizing(final Widget sender) {
+	DefaultDispatcher.getInstance().fire(WorkspaceEvents.WS_SPLITTER_STOPRESIZING, null);
+    }
+
+    public void registerExtensibleWidget(final String id, final ExtensibleWidget extensibleWidget) {
+	extensionPointManager.registerExtensibleWidget(id, extensibleWidget);
+    }
+
+    public void registerExtensibleWidgets(final HashMap<String, ExtensibleWidget> extensibleWidget) {
+	extensionPointManager.registerExtensibleWidgets(extensibleWidget);
+    }
+
+    public void setContent(final WorkspaceComponent contentComponent) {
+	if (content != null) {
+	    content.detach();
+	}
+	content = contentComponent;
+	content.attach();
+	view.setContent(content.getView());
+    }
+
+    public void setContext(final WorkspaceComponent contextComponent) {
+	if (context != null) {
+	    context.detach();
+	}
+	context = contextComponent;
+	context.attach();
+	view.setContext(context.getView());
+    }
+
+    public void setTheme(final String theme) {
+	view.setTheme(theme);
+    }
+
+    public void setTool(final String toolName) {
+	view.setTool(toolName);
+    }
+
+    public void setVisible(final boolean visible) {
+	view.setVisible(visible);
+    }
+
+    public void showGroup(final GroupDTO group, final boolean isAdmin) {
+	view.setGroupLogo(group.getLongName());
+	view.setPutYourLogoVisible(isAdmin);
     }
 }

@@ -36,39 +36,39 @@ public class DatabaseInitializationTest {
 
     @Before
     public void init() {
-        new IntegrationTestHelper(this);
-        defaultGroup = groupManager.getDefaultGroup();
-    }
-
-    @Test
-    public void testToolConfiguration() {
-        assertNotNull(defaultGroup);
-        ToolConfiguration docToolConfig = defaultGroup.getToolConfiguration(DocumentServerTool.NAME);
-        assertNotNull(docToolConfig);
-        ToolConfiguration chatToolConfig = defaultGroup.getToolConfiguration(ChatServerTool.NAME);
-        assertNotNull(chatToolConfig);
-    }
-
-    @Test
-    public void testDefaultDocumentContent() {
-        Content content = defaultGroup.getDefaultContent();
-        assertEquals(DocumentServerTool.TYPE_DOCUMENT, content.getTypeId());
-        Container rootDocFolder = content.getContainer();
-        assertEquals(true, rootDocFolder.isRoot());
+	new IntegrationTestHelper(this);
+	defaultGroup = groupManager.getDefaultGroup();
     }
 
     @Test
     public void testDefaultContentAndLicenses() {
-        assertNotNull(defaultGroup.getDefaultContent());
-        assertTrue(licenseManager.getAll().size() > 0);
-        assertNotNull(defaultGroup.getDefaultLicense());
+	assertNotNull(defaultGroup.getDefaultContent());
+	assertTrue(licenseManager.getAll().size() > 0);
+	assertNotNull(defaultGroup.getDefaultLicense());
+    }
+
+    @Test
+    public void testDefaultDocumentContent() {
+	final Content content = defaultGroup.getDefaultContent();
+	assertEquals(DocumentServerTool.TYPE_DOCUMENT, content.getTypeId());
+	final Container rootDocFolder = content.getContainer();
+	assertEquals(true, rootDocFolder.isRoot());
     }
 
     @Test
     public void testI18n() {
-        assertNotNull(countryManager.find(new Long(75)));
-        assertNotNull(languageManager.findByCode("en"));
-        assertNotNull(languageManager.find(new Long(1819)));
+	assertNotNull(countryManager.find(new Long(75)));
+	assertNotNull(languageManager.findByCode("en"));
+	assertNotNull(languageManager.find(new Long(1819)));
+    }
+
+    @Test
+    public void testToolConfiguration() {
+	assertNotNull(defaultGroup);
+	final ToolConfiguration docToolConfig = defaultGroup.getToolConfiguration(DocumentServerTool.NAME);
+	assertNotNull(docToolConfig);
+	final ToolConfiguration chatToolConfig = defaultGroup.getToolConfiguration(ChatServerTool.NAME);
+	assertNotNull(chatToolConfig);
     }
 
 }

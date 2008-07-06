@@ -31,9 +31,7 @@ import org.ourproject.kune.platf.client.PlatformClientModule;
 import org.ourproject.kune.platf.client.dispatch.ActionEvent;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
-import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.services.Kune;
-import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.services.KuneModule;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
@@ -54,9 +52,6 @@ public class ApplicationBuilder {
 	final Kune kune = Kune.create(new KuneModule(initialLang, lexicon), new EmiteUIModule(),
 		new DocumentClientNewModule(), new ChatClientNewModule());
 
-	KuneErrorHandler errorHandler = kune.getInstance(KuneErrorHandler.class);
-	AsyncCallbackSimple.init(errorHandler);
-
 	final Session session = kune.getSession();
 
 	Site.showProgressLoading();
@@ -65,7 +60,7 @@ public class ApplicationBuilder {
 	final KunePlatform platform = kune.getPlatform();
 	final StateManager stateManager = kune.getStateManager();
 	final Application application = kune.getInstance(Application.class);
-	I18nUITranslationService i18n = kune.getI18N();
+	final I18nUITranslationService i18n = kune.getI18N();
 
 	// Testing providers:
 	platform.install(new PlatformClientModule(session, kune.getProvider(StateManager.class)));

@@ -42,8 +42,6 @@ import org.hibernate.validator.Length;
 import org.hibernate.validator.NotNull;
 import org.hibernate.validator.Pattern;
 
-import com.calclab.emite.client.im.roster.RosterManager;
-import com.calclab.emite.client.im.roster.RosterManager.SubscriptionMode;
 import com.google.inject.name.Named;
 import com.wideplay.warp.persist.dao.Finder;
 
@@ -56,10 +54,8 @@ public class User implements HasId {
     // Never expect or return null
     public static final User UNKNOWN_USER = new User();
 
-    private static final String DEF_CHAT_COLOR = "green";
-
     public static boolean isKnownUser(final User user) {
-        return user != UNKNOWN_USER;
+	return user != UNKNOWN_USER;
     }
 
     @Id
@@ -102,157 +98,111 @@ public class User implements HasId {
     @NotNull
     private TimeZone timezone;
 
-    private String avatar;
-
-    @NotNull
-    private boolean publishRoster;
-
-    @NotNull
-    private SubscriptionMode subscriptionMode;
-
-    @NotNull
-    private String chatColor;
-
     public User() {
-        this(null, null, null, null, null, null, null);
+	this(null, null, null, null, null, null, null);
     }
 
     public User(final String shortName, final String longName, final String email, final String passwd,
-            final I18nLanguage language, final I18nCountry country, final TimeZone timezone) {
-        this.shortName = shortName;
-        this.name = longName;
-        this.email = email;
-        this.password = passwd;
-        this.userGroup = Group.NO_GROUP;
-        this.language = language;
-        this.country = country;
-        this.timezone = timezone;
-        this.publishRoster = true;
-        this.subscriptionMode = SubscriptionMode.manual;
-        this.chatColor = DEF_CHAT_COLOR;
+	    final I18nLanguage language, final I18nCountry country, final TimeZone timezone) {
+	this.shortName = shortName;
+	this.name = longName;
+	this.email = email;
+	this.password = passwd;
+	this.userGroup = Group.NO_GROUP;
+	this.language = language;
+	this.country = country;
+	this.timezone = timezone;
     }
 
     @Finder(query = "from User")
     public List<User> getAll() {
-        return null;
-    }
-
-    public String getAvatar() {
-        return avatar;
+	return null;
     }
 
     @Finder(query = "from User where email = :email")
     public User getByEmail(@Named("email")
     final String email) {
-        return null;
+	return null;
     }
 
     @Finder(query = "from User where shortName = :shortName")
     public User getByShortName(@Named("shortName")
     final String shortName) {
-        return null;
-    }
-
-    public String getChatColor() {
-        return chatColor;
+	return null;
     }
 
     public I18nCountry getCountry() {
-        return country;
+	return country;
     }
 
     public String getEmail() {
-        return email;
+	return email;
     }
 
     public Long getId() {
-        return id;
+	return id;
     }
 
     public I18nLanguage getLanguage() {
-        return language;
+	return language;
     }
 
     public String getName() {
-        return name;
+	return name;
     }
 
     public String getPassword() {
-        return password;
+	return password;
     }
 
     public String getShortName() {
-        return shortName;
-    }
-
-    public RosterManager.SubscriptionMode getSubscriptionMode() {
-        return subscriptionMode;
+	return shortName;
     }
 
     public TimeZone getTimezone() {
-        return timezone;
+	return timezone;
     }
 
     public Group getUserGroup() {
-        return userGroup;
-    }
-
-    public boolean isPublishRoster() {
-        return publishRoster;
-    }
-
-    public void setAvatar(final String avatar) {
-        this.avatar = avatar;
-    }
-
-    public void setChatColor(final String chatColor) {
-        this.chatColor = chatColor;
+	return userGroup;
     }
 
     public void setCountry(final I18nCountry country) {
-        this.country = country;
+	this.country = country;
     }
 
     public void setEmail(final String email) {
-        this.email = email;
+	this.email = email;
     }
 
     public void setId(final Long id) {
-        this.id = id;
+	this.id = id;
     }
 
     public void setLanguage(final I18nLanguage language) {
-        this.language = language;
+	this.language = language;
     }
 
     public void setName(final String name) {
-        this.name = name;
+	this.name = name;
     }
 
     public void setPassword(final String password) {
-        this.password = password;
-        // http://www.dynamic.net.au/christos/crypt/
-        // Use UnixCrypt (jetty)
-    }
-
-    public void setPublishRoster(final boolean publishRoster) {
-        this.publishRoster = publishRoster;
+	this.password = password;
+	// http://www.dynamic.net.au/christos/crypt/
+	// Use UnixCrypt (jetty)
     }
 
     public void setShortName(final String shortName) {
-        this.shortName = shortName;
-    }
-
-    public void setSubscriptionMode(final RosterManager.SubscriptionMode subscriptionMode) {
-        this.subscriptionMode = subscriptionMode;
+	this.shortName = shortName;
     }
 
     public void setTimezone(final TimeZone timezone) {
-        this.timezone = timezone;
+	this.timezone = timezone;
     }
 
     public void setUserGroup(final Group userGroup) {
-        this.userGroup = userGroup;
+	this.userGroup = userGroup;
     }
 
 }

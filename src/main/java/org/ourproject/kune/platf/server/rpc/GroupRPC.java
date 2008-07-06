@@ -30,6 +30,7 @@ import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.access.AccessType;
 import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.auth.Authorizated;
+import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
@@ -47,12 +48,14 @@ public class GroupRPC implements RPC, GroupService {
     private final Mapper mapper;
     private final GroupManager groupManager;
     private final Provider<UserSession> userSessionProvider;
+    private final ContentManager contentManager;
 
     @Inject
     public GroupRPC(final Provider<UserSession> userSessionProvider, final GroupManager groupManager,
-	    final Mapper mapper) {
+	    final ContentManager contentManager, final Mapper mapper) {
 	this.userSessionProvider = userSessionProvider;
 	this.groupManager = groupManager;
+	this.contentManager = contentManager;
 	this.mapper = mapper;
     }
 
@@ -76,6 +79,8 @@ public class GroupRPC implements RPC, GroupService {
 	final User user = userSession.getUser();
 	final Group group = mapper.map(groupDTO, Group.class);
 	final Group newGroup = groupManager.createGroup(group, user);
+	final Long defContentId = newGroup.getDefaultContent().getId();
+	contentManager.setTags(user, defContentId, groupDTO.getTags());
 	return new StateToken(newGroup.getDefaultContent().getStateToken());
     }
 

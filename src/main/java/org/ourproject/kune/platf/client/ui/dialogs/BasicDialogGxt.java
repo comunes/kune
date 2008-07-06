@@ -20,45 +20,48 @@
 
 package org.ourproject.kune.platf.client.ui.dialogs;
 
-import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
-import com.extjs.gxt.ui.client.Style.Scroll;
-import com.extjs.gxt.ui.client.widget.Window;
-
-public class BasicDialogGxt extends Window {
-
-    public BasicDialogGxt(final String caption, final boolean modal) {
-	this(caption, modal, Scroll.AUTO);
-    }
-
-    public BasicDialogGxt(final String caption, final boolean modal, final Scroll scroll) {
-	setAutoWidth(true);
-	// Param values
-	setTitle(caption);
-	setModal(modal);
-	setScrollMode(scroll);
-	// Def values
-	setShadow(true);
-	setPlain(true);
-	setClosable(true);
-	setCollapsible(true);
-	setResizable(true);
-	setButtonAlign(HorizontalAlignment.RIGHT);
-    }
-
-    public BasicDialogGxt(final String caption, final boolean modal, final Scroll scroll, final int width,
-	    final int height) {
-	this(caption, modal, scroll, width, height, width, height);
-    }
-
-    public BasicDialogGxt(final String caption, final boolean modal, final Scroll scroll, final int width,
-	    final int height, final int minWidth, final int minHeight) {
-	this(caption, modal, scroll);
-	setAutoWidth(false);
-	// Param values
-	setWidth(width);
-	setHeight(height);
-	setMinWidth(minWidth);
-	setMinHeight(minHeight);
-    }
-
-}
+// import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
+// import com.extjs.gxt.ui.client.Style.Scroll;
+// import com.extjs.gxt.ui.client.widget.Window;
+//
+// public class BasicDialogGxt extends Window {
+//
+// public BasicDialogGxt(final String caption, final boolean modal) {
+// this(caption, modal, Scroll.AUTO);
+// }
+//
+// public BasicDialogGxt(final String caption, final boolean modal, final Scroll
+// scroll) {
+// setAutoWidth(true);
+// // Param values
+// setTitle(caption);
+// setModal(modal);
+// setScrollMode(scroll);
+// // Def values
+// setShadow(true);
+// setPlain(true);
+// setClosable(true);
+// setCollapsible(true);
+// setResizable(true);
+// setButtonAlign(HorizontalAlignment.RIGHT);
+// }
+//
+// public BasicDialogGxt(final String caption, final boolean modal, final Scroll
+// scroll, final int width,
+// final int height) {
+// this(caption, modal, scroll, width, height, width, height);
+// }
+//
+// public BasicDialogGxt(final String caption, final boolean modal, final Scroll
+// scroll, final int width,
+// final int height, final int minWidth, final int minHeight) {
+// this(caption, modal, scroll);
+// setAutoWidth(false);
+// // Param values
+// setWidth(width);
+// setHeight(height);
+// setMinWidth(minWidth);
+// setMinHeight(minHeight);
+// }
+//
+// }

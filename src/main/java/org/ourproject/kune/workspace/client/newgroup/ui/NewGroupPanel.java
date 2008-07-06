@@ -42,6 +42,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.Position;
 import com.gwtext.client.widgets.Panel;
+import com.gwtext.client.widgets.ToolTip;
 import com.gwtext.client.widgets.form.Field;
 import com.gwtext.client.widgets.form.FieldSet;
 import com.gwtext.client.widgets.form.FormPanel;
@@ -58,6 +59,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
     private static final String LONGNAME_FIELD = "long_name";
     private static final String PUBLICDESC_FIELD = "public_desc";
     private static final String TYPEOFGROUP_FIELD = "type_of_group";
+    private static final String TAGS_FIELD = "tags";
 
     private final FormPanel newGroupInitialDataForm;
     private Radio projectRadio;
@@ -71,282 +73,292 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
     private LicenseChoose licenseChoosePanel;
     private final SiteMessagePanel messagesPanel;
     private final I18nTranslationService i18n;
+    private TextField tags;
 
     public NewGroupPanel(final NewGroupPresenter presenter, final I18nTranslationService i18n) {
-        super(i18n.t("Register a new Group"), true, false, 460, 480, new WizardListener() {
-            public void onBack() {
-                presenter.onBack();
-            }
+	super(i18n.t("Register a new Group"), true, false, 460, 480, new WizardListener() {
+	    public void onBack() {
+		presenter.onBack();
+	    }
 
-            public void onCancel() {
-                presenter.onCancel();
-            }
+	    public void onCancel() {
+		presenter.onCancel();
+	    }
 
-            public void onClose() {
-                presenter.onClose();
-            }
+	    public void onClose() {
+		presenter.onClose();
+	    }
 
-            public void onFinish() {
-                presenter.onFinish();
-            }
+	    public void onFinish() {
+		presenter.onFinish();
+	    }
 
-            public void onNext() {
-                presenter.onNext();
-            }
-        }, i18n);
-        this.i18n = i18n;
-        Field.setMsgTarget("side");
-        final Panel centerPanel = new Panel();
-        centerPanel.setLayout(new FitLayout());
-        deck = new DeckPanel();
-        newGroupInitialDataForm = createNewGroupInitialDataForm(presenter);
-        createChooseLicensePanel();
-        final VerticalPanel newGroupInitialDataVP = new VerticalPanel();
-        final HorizontalPanel newGroupInitialDataHP = new HorizontalPanel();
-        final VerticalPanel chooseLicenseVP = new VerticalPanel();
-        final HorizontalPanel chooseLicenseHP = new HorizontalPanel();
-        final Images img = Images.App.getInstance();
-        newGroupInitialDataHP.add(img.step1().createImage());
-        final Label step1Label = new Label(i18n
-                .t("Please fill this form and follow the next steps to register a new group:"));
-        newGroupInitialDataHP.add(step1Label);
-        newGroupInitialDataVP.add(newGroupInitialDataHP);
-        newGroupInitialDataVP.add(newGroupInitialDataForm);
-        chooseLicenseHP.add(img.step2().createImage());
-        final HTML step2Label = new HTML(i18n.t("Select a license to share your group contents with other people. "
-                + "We recomend [%s] licenses for practical works.", KuneStringUtils.generateHtmlLink(
-                "http://en.wikipedia.org/wiki/Copyleft", "copyleft")));
-        chooseLicenseHP.add(step2Label);
-        final Label licenseTypeLabel = new Label(i18n.t("Choose a license type:"));
-        chooseLicenseVP.add(chooseLicenseHP);
-        chooseLicenseVP.add(licenseTypeLabel);
+	    public void onNext() {
+		presenter.onNext();
+	    }
+	}, i18n);
+	this.i18n = i18n;
+	Field.setMsgTarget("side");
+	final Panel centerPanel = new Panel();
+	centerPanel.setLayout(new FitLayout());
+	deck = new DeckPanel();
+	newGroupInitialDataForm = createNewGroupInitialDataForm(presenter);
+	createChooseLicensePanel();
+	final VerticalPanel newGroupInitialDataVP = new VerticalPanel();
+	final HorizontalPanel newGroupInitialDataHP = new HorizontalPanel();
+	final VerticalPanel chooseLicenseVP = new VerticalPanel();
+	final HorizontalPanel chooseLicenseHP = new HorizontalPanel();
+	final Images img = Images.App.getInstance();
+	newGroupInitialDataHP.add(img.step1().createImage());
+	final Label step1Label = new Label(i18n
+		.t("Please fill this form and follow the next steps to register a new group:"));
+	newGroupInitialDataHP.add(step1Label);
+	newGroupInitialDataVP.add(newGroupInitialDataHP);
+	newGroupInitialDataVP.add(newGroupInitialDataForm);
+	chooseLicenseHP.add(img.step2().createImage());
+	final HTML step2Label = new HTML(i18n.t("Select a license to share your group contents with other people. "
+		+ "We recomend [%s] licenses for practical works.", KuneStringUtils.generateHtmlLink(
+		"http://en.wikipedia.org/wiki/Copyleft", "copyleft")));
+	chooseLicenseHP.add(step2Label);
+	final Label licenseTypeLabel = new Label(i18n.t("Choose a license type:"));
+	chooseLicenseVP.add(chooseLicenseHP);
+	chooseLicenseVP.add(licenseTypeLabel);
 
-        newGroupInitialDataHP.addStyleName("kune-Margin-Medium-b");
-        step1Label.addStyleName("kune-Margin-Large-l");
-        step2Label.addStyleName("kune-Margin-Large-l");
-        step1Label.addStyleName("kune-Margin-Medium-b");
-        step2Label.addStyleName("kune-Margin-Medium-b");
+	newGroupInitialDataHP.addStyleName("kune-Margin-Medium-b");
+	step1Label.addStyleName("kune-Margin-Large-l");
+	step2Label.addStyleName("kune-Margin-Large-l");
+	step1Label.addStyleName("kune-Margin-Medium-b");
+	step2Label.addStyleName("kune-Margin-Medium-b");
 
-        messagesPanel = new SiteMessagePanel(null, false);
-        messagesPanel.setWidth("425");
-        messagesPanel.setMessage("", SiteErrorType.info, SiteErrorType.error);
-        newGroupInitialDataVP.add(messagesPanel);
+	messagesPanel = new SiteMessagePanel(null, false);
+	messagesPanel.setWidth("425");
+	messagesPanel.setMessage("", SiteErrorType.info, SiteErrorType.error);
+	newGroupInitialDataVP.add(messagesPanel);
 
-        chooseLicenseVP.add((Widget) licenseChoosePanel.getView());
-        deck.add(newGroupInitialDataVP);
-        deck.add(chooseLicenseVP);
-        centerPanel.add(deck);
-        super.add(centerPanel);
-        deck.showWidget(0);
-        initBottomButtons();
-        // newGroupInitialDataVP.addStyleName("kune-Default-Form");
-        deck.addStyleName("kune-Default-Form");
-        licenseTypeLabel.addStyleName("kune-License-CC-Header");
-        newGroupInitialDataVP.setHeight("10"); // Ext set this to 100% ...
-        chooseLicenseVP.setHeight("10"); // (same here)
-        super.setFinishText(i18n.t("Register"));
+	chooseLicenseVP.add((Widget) licenseChoosePanel.getView());
+	deck.add(newGroupInitialDataVP);
+	deck.add(chooseLicenseVP);
+	centerPanel.add(deck);
+	super.add(centerPanel);
+	deck.showWidget(0);
+	initBottomButtons();
+	// newGroupInitialDataVP.addStyleName("kune-Default-Form");
+	deck.addStyleName("kune-Default-Form");
+	licenseTypeLabel.addStyleName("kune-License-CC-Header");
+	newGroupInitialDataVP.setHeight("10"); // Ext set this to 100% ...
+	chooseLicenseVP.setHeight("10"); // (same here)
+	super.setFinishText(i18n.t("Register"));
     }
 
     public void clearData() {
-        deck.showWidget(0);
-        newGroupInitialDataForm.getForm().reset();
-        ((LicenseChoosePanel) licenseChoosePanel.getView()).reset();
-        showNewGroupInitialDataForm();
-        initBottomButtons();
-        shortNameField.focus(false);
+	deck.showWidget(0);
+	newGroupInitialDataForm.getForm().reset();
+	((LicenseChoosePanel) licenseChoosePanel.getView()).reset();
+	showNewGroupInitialDataForm();
+	initBottomButtons();
+	shortNameField.focus(false);
     }
 
     public LicenseDTO getLicense() {
-        return licenseChoosePanel.getLicense();
+	return licenseChoosePanel.getLicense();
     }
 
     public String getLongName() {
-        return longNameField.getValueAsString();
+	return longNameField.getValueAsString();
     }
 
     public String getPublicDesc() {
-        return publicDescField.getValueAsString();
+	return publicDescField.getValueAsString();
     }
 
     public String getShortName() {
-        return shortNameField.getValueAsString();
+	return shortNameField.getValueAsString();
     }
 
     public void hideMessage() {
-        messagesPanel.hide();
+	messagesPanel.hide();
     }
 
     public boolean isCommunity() {
-        return communityRadio.getValue();
+	return communityRadio.getValue();
     }
 
     public boolean isFormValid() {
-        return newGroupInitialDataForm.getForm().isValid();
+	return newGroupInitialDataForm.getForm().isValid();
     }
 
     public boolean isOrganization() {
-        return orgRadio.getValue();
+	return orgRadio.getValue();
     }
 
     public boolean isOrphanedProject() {
-        return orphanedProjectRadio.getValue();
+	return orphanedProjectRadio.getValue();
     }
 
     public boolean isProject() {
-        return projectRadio.getValue();
+	return projectRadio.getValue();
     }
 
     public void setMessage(final String message, final SiteErrorType type) {
-        messagesPanel.setMessage(message, type, type);
-        messagesPanel.show();
+	messagesPanel.setMessage(message, type, type);
+	messagesPanel.show();
     }
 
     public void showLicenseForm() {
-        deck.showWidget(1);
+	deck.showWidget(1);
     }
 
     public void showNewGroupInitialDataForm() {
-        deck.showWidget(0);
+	deck.showWidget(0);
     }
 
     private void createChooseLicensePanel() {
-        licenseChoosePanel = SiteBarFactory.createLicenseChoose();
+	licenseChoosePanel = SiteBarFactory.createLicenseChoose();
     }
 
     private FormPanel createNewGroupInitialDataForm(final NewGroupPresenter presenter) {
-        final FormPanel form = new FormPanel();
-        form.setBorder(false);
-        form.setWidth(420);
-        form.setLabelWidth(100);
-        form.setLabelAlign(Position.RIGHT);
-        form.setButtonAlign(Position.RIGHT);
+	final FormPanel form = new FormPanel();
+	form.setBorder(false);
+	form.setWidth(420);
+	form.setLabelWidth(100);
+	form.setLabelAlign(Position.RIGHT);
+	form.setButtonAlign(Position.RIGHT);
 
-        shortNameField = new TextField();
-        shortNameField.setFieldLabel(i18n.t("Short name"));
-        shortNameField.
+	shortNameField = new TextField();
+	shortNameField.setFieldLabel(i18n.t("Short name"));
+	shortNameField.
 
-        setName(SHORTNAME_FIELD);
-        shortNameField.setWidth(175);
-        shortNameField.setMinLength(3);
-        shortNameField.setMaxLength(15);
-        shortNameField.setAllowBlank(false);
-        shortNameField.setRegex("^[a-z0-9_\\-]+$");
-        shortNameField.setMinLengthText(i18n.t(MUST_BE_BETWEEN_3_AND_15));
-        shortNameField.setMaxLengthText(i18n.t(MUST_BE_BETWEEN_3_AND_15));
-        shortNameField.setRegexText(i18n.t(MUST_BE_BETWEEN_3_AND_15));
-        shortNameField.setValidationDelay(1000);
+	setName(SHORTNAME_FIELD);
+	shortNameField.setWidth(175);
+	shortNameField.setMinLength(3);
+	shortNameField.setMaxLength(15);
+	shortNameField.setAllowBlank(false);
+	shortNameField.setRegex("^[a-z0-9_\\-]+$");
+	shortNameField.setMinLengthText(i18n.t(MUST_BE_BETWEEN_3_AND_15));
+	shortNameField.setMaxLengthText(i18n.t(MUST_BE_BETWEEN_3_AND_15));
+	shortNameField.setRegexText(i18n.t(MUST_BE_BETWEEN_3_AND_15));
+	shortNameField.setValidationDelay(1000);
 
-        form.add(shortNameField);
+	form.add(shortNameField);
 
-        longNameField = new TextField();
-        longNameField.setFieldLabel(i18n.t("Long name"));
-        longNameField.setName(LONGNAME_FIELD);
-        longNameField.setWidth(300);
-        longNameField.setAllowBlank(false);
+	longNameField = new TextField();
+	longNameField.setFieldLabel(i18n.t("Long name"));
+	longNameField.setName(LONGNAME_FIELD);
+	longNameField.setWidth(300);
+	longNameField.setAllowBlank(false);
 
-        longNameField.setMinLength(3);
-        longNameField.setMaxLength(50);
-        longNameField.setValidationDelay(1000);
-        form.add(longNameField);
+	longNameField.setMinLength(3);
+	longNameField.setMaxLength(50);
+	longNameField.setValidationDelay(1000);
+	form.add(longNameField);
 
-        publicDescField = new TextArea();
-        publicDescField.setFieldLabel(i18n.t("Public description"));
-        publicDescField.setName(PUBLICDESC_FIELD);
-        publicDescField.setWidth(300);
-        publicDescField.setAllowBlank(false);
-        publicDescField.setMinLength(10);
-        publicDescField.setMaxLength(255);
-        publicDescField.setValidationDelay(1000);
+	publicDescField = new TextArea();
+	publicDescField.setFieldLabel(i18n.t("Public description"));
+	publicDescField.setName(PUBLICDESC_FIELD);
+	publicDescField.setWidth(300);
+	publicDescField.setAllowBlank(false);
+	publicDescField.setMinLength(10);
+	publicDescField.setMaxLength(255);
+	publicDescField.setValidationDelay(1000);
+	form.add(publicDescField);
 
-        form.add(publicDescField);
+	tags = new TextField();
+	tags.setFieldLabel(i18n.t("Group tags"));
+	tags.setName(TAGS_FIELD);
+	tags.setWidth(300);
+	tags.setAllowBlank(false);
+	final ToolTip fieldToolTip = new ToolTip(i18n.t("Some words related to this group (separated with spaces)."));
+	fieldToolTip.applyTo(tags);
+	tags.setValidationDelay(1000);
+	form.add(tags);
 
-        final FieldSet groupTypeFieldSet = new FieldSet(i18n.t("Type of group"));
-        groupTypeFieldSet.setStyle("margin-left: 105px");
+	final FieldSet groupTypeFieldSet = new FieldSet(i18n.t("Type of group"));
+	groupTypeFieldSet.setStyle("margin-left: 105px");
 
-        form.add(groupTypeFieldSet);
+	form.add(groupTypeFieldSet);
 
-        projectRadio = new Radio();
-        createRadio(groupTypeFieldSet, projectRadio, "Project",
-                "A project is a kind of group in which new members inclusion "
-                        + "is moderated by the project administrators. "
-                        + "An administrator is the person who creates the project "
-                        + "and other people she/he choose in the future as administrator too.");
-        projectRadio.setChecked(true);
+	projectRadio = new Radio();
+	createRadio(groupTypeFieldSet, projectRadio, "Project",
+		"A project is a kind of group in which new members inclusion "
+			+ "is moderated by the project administrators. "
+			+ "An administrator is the person who creates the project "
+			+ "and other people she/he choose in the future as administrator too.");
+	projectRadio.setChecked(true);
 
-        orgRadio = new Radio();
-        createRadio(groupTypeFieldSet, orgRadio, "Organization", "An organization is like a project, "
-                + "but organizations must be a legal entity.");
+	orgRadio = new Radio();
+	createRadio(groupTypeFieldSet, orgRadio, "Organization", "An organization is like a project, "
+		+ "but organizations must be a legal entity.");
 
-        communityRadio = new Radio();
-        createRadio(groupTypeFieldSet, communityRadio, "Community", "Communities are social group of persons "
-                + "with shared interests and they are open to new members "
-                + "(for instance the environmental community or the LGBT community). "
-                + "Normally they aren't a legal entity.");
+	communityRadio = new Radio();
+	createRadio(groupTypeFieldSet, communityRadio, "Community", "Communities are social group of persons "
+		+ "with shared interests and they are open to new members "
+		+ "(for instance the environmental community or the LGBT community). "
+		+ "Normally they aren't a legal entity.");
 
-        orphanedProjectRadio = new Radio();
-        createRadio(groupTypeFieldSet, orphanedProjectRadio, "Orphaned Project",
-                "If you have an idea but you don't have " + "capacity/possibilities/resources to work on it, "
-                        + "just register a orphaned project, and permit others to work and develop it.");
+	orphanedProjectRadio = new Radio();
+	createRadio(groupTypeFieldSet, orphanedProjectRadio, "Orphaned Project",
+		"If you have an idea but you don't have " + "capacity/possibilities/resources to work on it, "
+			+ "just register a orphaned project, and permit others to work and develop it.");
 
-        groupTypeFieldSet.setCollapsible(false);
+	groupTypeFieldSet.setCollapsible(false);
 
-        shortNameField.addListener(new TextFieldListenerAdapter() {
-            public void onChange(final Field field, final Object newVal, final Object oldVal) {
-                presenter.onChange();
-            }
-        });
+	shortNameField.addListener(new TextFieldListenerAdapter() {
+	    public void onChange(final Field field, final Object newVal, final Object oldVal) {
+		presenter.onChange();
+	    }
+	});
 
-        longNameField.addListener(new TextFieldListenerAdapter() {
-            public void onChange(final Field field, final Object newVal, final Object oldVal) {
-                presenter.onChange();
-            }
-        });
+	longNameField.addListener(new TextFieldListenerAdapter() {
+	    public void onChange(final Field field, final Object newVal, final Object oldVal) {
+		presenter.onChange();
+	    }
+	});
 
-        publicDescField.addListener(new TextFieldListenerAdapter() {
-            public void onChange(final Field field, final Object newVal, final Object oldVal) {
-                presenter.onChange();
-            }
-        });
+	publicDescField.addListener(new TextFieldListenerAdapter() {
+	    public void onChange(final Field field, final Object newVal, final Object oldVal) {
+		presenter.onChange();
+	    }
+	});
 
-        return form;
+	return form;
     }
 
     private void createRadio(final FieldSet fieldSet, final Radio radio, final String radioLabel, final String radioTip) {
-        radio.setName(TYPEOFGROUP_FIELD);
-        radio.setBoxLabel(KuneUiUtils.genQuickTipLabel(i18n.t(radioLabel), null, i18n.t(radioTip), INFO_IMAGE));
-        radio.setAutoCreate(true);
-        radio.setHideLabel(true);
-        fieldSet.add(radio);
-        // ToolTip fieldToolTip = new ToolTip("Tooltip on a Field.");
-        // fieldToolTip.applyTo(captchaField);
-        // Image info = new Image("images/silk/information.gif");
-        //
-        // ToolTip tooltip = new ToolTip();
-        // tooltip.setHtml("A <b>CAPTCHA</b> is a challenge-response test to
-        // determine whether " +
-        // "the user is human.");
-        // tooltip.setWidth(150);
-        // tooltip.applyTo(info.getElement());
+	radio.setName(TYPEOFGROUP_FIELD);
+	radio.setBoxLabel(KuneUiUtils.genQuickTipLabel(i18n.t(radioLabel), null, i18n.t(radioTip), INFO_IMAGE));
+	radio.setAutoCreate(true);
+	radio.setHideLabel(true);
+	fieldSet.add(radio);
+	// ToolTip fieldToolTip = new ToolTip("Tooltip on a Field.");
+	// fieldToolTip.applyTo(captchaField);
+	// Image info = new Image("images/silk/information.gif");
+	//
+	// ToolTip tooltip = new ToolTip();
+	// tooltip.setHtml("A <b>CAPTCHA</b> is a challenge-response test to
+	// determine whether " +
+	// "the user is human.");
+	// tooltip.setWidth(150);
+	// tooltip.applyTo(info.getElement());
 
-        // Tested:
-        // Set tooltip
-        // Image info = new Image();
-        // ChatIcons.App.getInstance().info().applyTo(info);
-        // ToolTip tooltip = new ToolTip();
-        // tooltip.setHtml(i18n.t("Note that the 'Jabber Id' sometimes is the
-        // same as the email "
-        // + "(in gmail accounts for instance)."));
-        // tooltip.setWidth(250);
-        // tooltip.applyTo(info.getElement());
-        // jidPanel.addToRow(info, new ColumnLayoutData(1));
-        //
-        // formPanel.add(jidPanel);
+	// Tested:
+	// Set tooltip
+	// Image info = new Image();
+	// ChatIcons.App.getInstance().info().applyTo(info);
+	// ToolTip tooltip = new ToolTip();
+	// tooltip.setHtml(i18n.t("Note that the 'Jabber Id' sometimes is the
+	// same as the email "
+	// + "(in gmail accounts for instance)."));
+	// tooltip.setWidth(250);
+	// tooltip.applyTo(info.getElement());
+	// jidPanel.addToRow(info, new ColumnLayoutData(1));
+	//
+	// formPanel.add(jidPanel);
 
     }
 
     private void initBottomButtons() {
-        super.setEnabledBackButton(false);
-        super.setEnabledFinishButton(false);
-        super.setEnabledNextButton(true);
+	super.setEnabledBackButton(false);
+	super.setEnabledFinishButton(false);
+	super.setEnabledNextButton(true);
     }
 }

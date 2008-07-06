@@ -9,6 +9,7 @@ import org.ourproject.kune.platf.client.app.HistoryWrapper;
 import org.ourproject.kune.platf.client.app.HistoryWrapperImpl;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.extend.ExtensibleWidgetsManager;
+import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.state.ContentProviderImpl;
 import org.ourproject.kune.platf.client.state.Session;
@@ -54,8 +55,6 @@ public class KuneModule implements Module {
 	    }
 	}, SingletonScope.class);
 
-	Site.init(builder.getInstance(I18nUITranslationService.class));
-
 	builder.registerProvider(Session.class, new Provider<Session>() {
 	    public Session get() {
 		return new SessionImpl(Cookies.getCookie("userHash"), initialLang);
@@ -68,6 +67,10 @@ public class KuneModule implements Module {
 			.getInstance(I18nUITranslationService.class));
 	    }
 	}, SingletonScope.class);
+
+	final KuneErrorHandler errorHandler = builder.getInstance(KuneErrorHandler.class);
+	AsyncCallbackSimple.init(errorHandler);
+	Site.init(builder.getInstance(I18nUITranslationService.class));
 
 	builder.registerProvider(ColorTheme.class, new Provider<ColorTheme>() {
 	    public ColorTheme get() {
