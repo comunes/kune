@@ -33,6 +33,7 @@ import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.sitebar.Site;
+import org.ourproject.kune.workspace.client.ui.newtmp.WorkspaceManager;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 public class StateManagerDefault implements StateManager {
@@ -43,37 +44,39 @@ public class StateManagerDefault implements StateManager {
     private String lastTheme;
     private final Session session;
     private final HistoryWrapper history;
+    private final WorkspaceManager ws;
 
     public StateManagerDefault(final ContentProvider provider, final Application app, final Session session,
-            final HistoryWrapper history) {
-        this.provider = provider;
-        this.app = app;
-        this.session = session;
-        this.history = history;
-        this.workspace = app.getWorkspace();
-        this.oldState = null;
+	    final HistoryWrapper history, final WorkspaceManager ws) {
+	this.provider = provider;
+	this.app = app;
+	this.session = session;
+	this.history = history;
+	this.ws = ws;
+	this.workspace = app.getWorkspace();
+	this.oldState = null;
     }
 
     public void onHistoryChanged(final String historyToken) {
-        String oldStateEncoded = "";
-        if (oldState != null) {
-            oldStateEncoded = oldState.getStateToken().getEncoded();
-        }
-        if (historyToken.equals(Site.NEWGROUP_TOKEN)) {
-            Site.doNewGroup(oldStateEncoded);
-        } else if (historyToken.equals(Site.LOGIN_TOKEN)) {
-            Site.doLogin(oldStateEncoded);
-        } else if (historyToken.equals(Site.TRANSLATE_TOKEN)) {
-            DefaultDispatcher.getInstance().fire(WorkspaceEvents.SHOW_TRANSLATOR, null);
-        } else if (historyToken.equals(Site.FIXME_TOKEN)) {
-            if (oldState == null) {
-                onHistoryChanged(new StateToken());
-            } else {
-                loadContent(oldState);
-            }
-        } else {
-            onHistoryChanged(new StateToken(historyToken));
-        }
+	String oldStateEncoded = "";
+	if (oldState != null) {
+	    oldStateEncoded = oldState.getStateToken().getEncoded();
+	}
+	if (historyToken.equals(Site.NEWGROUP_TOKEN)) {
+	    Site.doNewGroup(oldStateEncoded);
+	} else if (historyToken.equals(Site.LOGIN_TOKEN)) {
+	    Site.doLogin(oldStateEncoded);
+	} else if (historyToken.equals(Site.TRANSLATE_TOKEN)) {
+	    DefaultDispatcher.getInstance().fire(WorkspaceEvents.SHOW_TRANSLATOR, null);
+	} else if (historyToken.equals(Site.FIXME_TOKEN)) {
+	    if (oldState == null) {
+		onHistoryChanged(new StateToken());
+	    } else {
+		loadContent(oldState);
+	    }
+	} else {
+	    onHistoryChanged(new StateToken(historyToken));
+	}
     }
 
     /**
@@ -82,104 +85,106 @@ public class StateManagerDefault implements StateManager {
      * </p>
      */
     public void reload() {
-        onHistoryChanged(history.getToken());
+	onHistoryChanged(history.getToken());
     }
 
     public void reloadContextAndTitles() {
-        provider.getContent(session.getUserHash(), new StateToken(history.getToken()),
-                new AsyncCallbackSimple<StateDTO>() {
-                    public void onSuccess(final StateDTO newStateDTO) {
-                        loadContextOnly(newStateDTO);
-                        oldState = newStateDTO;
-                        workspace.getContentTitleComponent().setState(oldState);
-                        workspace.getContentSubTitleComponent().setState(oldState);
-                        Site.hideProgress();
-                    }
-                });
+	provider.getContent(session.getUserHash(), new StateToken(history.getToken()),
+		new AsyncCallbackSimple<StateDTO>() {
+		    public void onSuccess(final StateDTO newStateDTO) {
+			loadContextOnly(newStateDTO);
+			oldState = newStateDTO;
+			workspace.getContentTitleComponent().setState(oldState);
+			workspace.getContentSubTitleComponent().setState(oldState);
+			Site.hideProgress();
+		    }
+		});
     }
 
     public void setRetrievedState(final StateDTO content) {
-        final StateToken state = content.getStateToken();
-        provider.cache(state, content);
-        setState(state);
+	final StateToken state = content.getStateToken();
+	provider.cache(state, content);
+	setState(state);
     }
 
     public void setSocialNetwork(final SocialNetworkResultDTO socialNet) {
-        StateDTO state;
-        if (session != null && (state = session.getCurrentState()) != null) {
-            // After a SN operation, usually returns a SocialNetworkResultDTO
-            // with new SN data and we refresh the state
-            // to avoid to reload() again the state
-            SocialNetworkDTO groupMembers = socialNet.getGroupMembers();
-            ParticipationDataDTO userParticipation = socialNet.getUserParticipation();
-            state.setGroupMembers(groupMembers);
-            state.setParticipation(userParticipation);
-            setSocialNetwork(state);
-        }
+	StateDTO state;
+	if (session != null && (state = session.getCurrentState()) != null) {
+	    // After a SN operation, usually returns a SocialNetworkResultDTO
+	    // with new SN data and we refresh the state
+	    // to avoid to reload() again the state
+	    final SocialNetworkDTO groupMembers = socialNet.getGroupMembers();
+	    final ParticipationDataDTO userParticipation = socialNet.getUserParticipation();
+	    state.setGroupMembers(groupMembers);
+	    state.setParticipation(userParticipation);
+	    setSocialNetwork(state);
+	}
     }
 
     public void setState(final StateToken state) {
-        history.newItem(state.getEncoded());
+	history.newItem(state.getEncoded());
     }
 
     private void loadContent(final StateDTO state) {
-        session.setCurrent(state);
-        final GroupDTO group = state.getGroup();
-        app.setGroupState(group.getShortName());
-        boolean isAdmin = state.getGroupRights().isAdministrable();
-        if (isAdmin) {
-            workspace.getThemeMenuComponent().setVisible(true);
-        } else {
-            workspace.getThemeMenuComponent().setVisible(false);
-        }
-        setWsTheme(group);
-        workspace.showGroup(group, isAdmin);
-        final String toolName = state.getToolName();
-        workspace.setTool(toolName);
+	session.setCurrent(state);
+	final GroupDTO group = state.getGroup();
+	app.setGroupState(group.getShortName());
+	final boolean isAdmin = state.getGroupRights().isAdministrable();
+	if (isAdmin) {
+	    workspace.getThemeMenuComponent().setVisible(true);
+	} else {
+	    workspace.getThemeMenuComponent().setVisible(false);
+	}
+	setWsTheme(group);
+	workspace.showGroup(group, isAdmin);
 
-        Site.sitebar.setState(state);
-        final ClientTool clientTool = app.getTool(toolName);
-        clientTool.setContent(state);
-        clientTool.setContext(state);
-        workspace.getContentTitleComponent().setState(state);
-        workspace.getContentSubTitleComponent().setState(state);
-        workspace.getContentBottomToolBarComponent().setRate(state, session.isLogged());
-        workspace.setContent(clientTool.getContent());
-        workspace.setContext(clientTool.getContext());
-        workspace.getLicenseComponent().setLicense(state);
-        workspace.getTagsComponent().setState(state);
-        setSocialNetwork(state);
-        workspace.getGroupSummaryComponent().setGroupSummary(state);
-        Site.hideProgress();
+	final String toolName = state.getToolName();
+	workspace.setTool(toolName);
+
+	Site.sitebar.setState(state);
+	final ClientTool clientTool = app.getTool(toolName);
+	clientTool.setContent(state);
+	clientTool.setContext(state);
+	ws.setState(state);
+	workspace.getContentTitleComponent().setState(state);
+	workspace.getContentSubTitleComponent().setState(state);
+	workspace.getContentBottomToolBarComponent().setRate(state, session.isLogged());
+	workspace.setContent(clientTool.getContent());
+	workspace.setContext(clientTool.getContext());
+	workspace.getLicenseComponent().setLicense(state);
+	workspace.getTagsComponent().setState(state);
+	setSocialNetwork(state);
+	workspace.getGroupSummaryComponent().setGroupSummary(state);
+	Site.hideProgress();
     }
 
     private void loadContextOnly(final StateDTO state) {
-        session.setCurrent(state);
-        final String toolName = state.getToolName();
-        final ClientTool clientTool = app.getTool(toolName);
-        clientTool.setContext(state);
-        workspace.setContext(clientTool.getContext());
+	session.setCurrent(state);
+	final String toolName = state.getToolName();
+	final ClientTool clientTool = app.getTool(toolName);
+	clientTool.setContext(state);
+	workspace.setContext(clientTool.getContext());
     }
 
     private void onHistoryChanged(final StateToken newState) {
-        provider.getContent(session.getUserHash(), newState, new AsyncCallbackSimple<StateDTO>() {
-            public void onSuccess(final StateDTO newStateDTO) {
-                loadContent(newStateDTO);
-                oldState = newStateDTO;
-            }
-        });
+	provider.getContent(session.getUserHash(), newState, new AsyncCallbackSimple<StateDTO>() {
+	    public void onSuccess(final StateDTO newStateDTO) {
+		loadContent(newStateDTO);
+		oldState = newStateDTO;
+	    }
+	});
     }
 
     private void setSocialNetwork(final StateDTO state) {
-        workspace.getGroupMembersComponent().setGroupMembers(state);
-        workspace.getParticipationComponent().setParticipation(state);
+	workspace.getGroupMembersComponent().setGroupMembers(state);
+	workspace.getParticipationComponent().setParticipation(state);
     }
 
     private void setWsTheme(final GroupDTO group) {
-        String nextTheme = group.getWorkspaceTheme();
-        if (lastTheme == null || !lastTheme.equals(nextTheme)) {
-            workspace.setTheme(nextTheme);
-        }
-        lastTheme = nextTheme;
+	final String nextTheme = group.getWorkspaceTheme();
+	if (lastTheme == null || !lastTheme.equals(nextTheme)) {
+	    workspace.setTheme(nextTheme);
+	}
+	lastTheme = nextTheme;
     }
 }

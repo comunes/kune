@@ -3,7 +3,7 @@ APPPUB=src/main/java/org/ourproject/kune/app/public
 WEBAPP=src/main/webapp/gwt/org.ourproject.kune.app.Kune
 TARGET=target/kune-0.0.4/org.ourproject.kune.app.Kune
 
-$PWD/script/css-compact-and-tidy.css
+#$PWD/script/css-compact-and-tidy.css
 
 rsync -aC $APPPUB/Kune.html $WEBAPP/Kune.html
 rsync -aC $APPPUB/js/ $WEBAPP/js

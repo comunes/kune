@@ -38,7 +38,7 @@
         </init-param>
         <init-param>
             <param-name>remotePort</param-name>
-            <param-value>8383</param-value>
+            <param-value>5280</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>

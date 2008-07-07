@@ -40,97 +40,100 @@ public class TextEditorPanel extends Composite implements TextEditorView {
     private final Timer saveTimer;
     private final I18nTranslationService i18n;
 
+    @Deprecated
     public TextEditorPanel(final TextEditorPresenter presenter, final I18nTranslationService i18n) {
 
-        this.presenter = presenter;
-        this.i18n = i18n;
-        gwtRTarea = new RichTextArea();
-        textEditorToolbar = new TextEditorToolbar(gwtRTarea, presenter, i18n);
-        initWidget(gwtRTarea);
+	this.presenter = presenter;
+	this.i18n = i18n;
+	gwtRTarea = new RichTextArea();
+	textEditorToolbar = new TextEditorToolbar(gwtRTarea, presenter, i18n);
+	initWidget(gwtRTarea);
 
-        gwtRTarea.setWidth("97%");
-        gwtRTarea.addStyleName("kune-TexEditorPanel-TextArea");
-        adjustSize("" + (Window.getClientHeight() - 265));
-        Window.addWindowResizeListener(new WindowResizeListener() {
-            public void onWindowResized(final int arg0, final int arg1) {
-                adjustSize("" + (Window.getClientHeight() - 265));
-            }
-        });
-        saveTimer = new Timer() {
-            public void run() {
-                presenter.onSave();
-            }
-        };
+	gwtRTarea.setWidth("97%");
+	gwtRTarea.addStyleName("kune-TexEditorPanel-TextArea");
+	adjustSize("" + (Window.getClientHeight() - 265));
+	Window.addWindowResizeListener(new WindowResizeListener() {
+	    public void onWindowResized(final int arg0, final int arg1) {
+		adjustSize("" + (Window.getClientHeight() - 265));
+	    }
+	});
+	saveTimer = new Timer() {
+	    public void run() {
+		presenter.onSave();
+	    }
+	};
     }
 
     public void editHTML(final boolean edit) {
-        textEditorToolbar.editHTML(edit);
+	textEditorToolbar.editHTML(edit);
     }
 
     public String getHTML() {
-        return gwtRTarea.getHTML();
+	return gwtRTarea.getHTML();
     }
 
     public String getText() {
-        return gwtRTarea.getText();
+	return gwtRTarea.getText();
     }
 
     public View getToolBar() {
-        return this.textEditorToolbar;
+	return this.textEditorToolbar;
     }
 
     public void saveTimerCancel() {
-        saveTimer.cancel();
+	saveTimer.cancel();
     }
 
     public void scheduleSave(final int delayMillis) {
-        saveTimer.schedule(delayMillis);
+	saveTimer.schedule(delayMillis);
     }
 
     public void setEnabled(final boolean enabled) {
-        final String bgColor = enabled ? BACKCOLOR_ENABLED : BACKCOLOR_DISABLED;
-        DOM.setStyleAttribute(gwtRTarea.getElement(), "backgroundColor", bgColor);
-        gwtRTarea.setEnabled(enabled);
+	final String bgColor = enabled ? BACKCOLOR_ENABLED : BACKCOLOR_DISABLED;
+	DOM.setStyleAttribute(gwtRTarea.getElement(), "backgroundColor", bgColor);
+	gwtRTarea.setEnabled(enabled);
     }
 
     public void setEnabledCancelButton(final boolean enabled) {
-        textEditorToolbar.setEnabledCloseButton(enabled);
+	textEditorToolbar.setEnabledCloseButton(enabled);
     }
 
     public void setEnabledSaveButton(final boolean enabled) {
-        textEditorToolbar.setEnabledSaveButton(enabled);
+	textEditorToolbar.setEnabledSaveButton(enabled);
     }
 
     public void setHeight(final String height) {
-        gwtRTarea.setHeight(height);
+	gwtRTarea.setHeight(height);
     }
 
     public void setHTML(final String html) {
-        gwtRTarea.setHTML(html);
+	gwtRTarea.setHTML(html);
     }
 
     public void setText(final String text) {
-        gwtRTarea.setText(text);
+	gwtRTarea.setText(text);
     }
 
     public void setTextSaveButton(final String text) {
-        textEditorToolbar.setTextSaveButton(text);
+	textEditorToolbar.setTextSaveButton(text);
     }
 
     public void showSaveBeforeDialog() {
-        MessageBox.confirm(i18n.t("Save confirmation"), i18n.t("Save before close?"), new MessageBox.ConfirmCallback() {
-            public void execute(final String btnID) {
-                if (btnID.equals("yes")) {
-                    presenter.onSaveAndClose();
-                } else {
-                    presenter.onCancelConfirmed();
-                }
-            }
-        });
+	MessageBox.confirm(i18n.t("Save confirmation"), i18n.t("Save before close?"), new MessageBox.ConfirmCallback() {
+	    public void execute(final String btnID) {
+		if (btnID.equals("yes")) {
+		    presenter.onSaveAndClose();
+		} else {
+		    presenter.onCancelConfirmed();
+		}
+	    }
+	});
 
     }
 
+    @Deprecated
     private void adjustSize(final String height) {
-        gwtRTarea.setHeight(height);
+	// While refactoring
+	// gwtRTarea.setHeight(height);
     }
 }

@@ -127,31 +127,6 @@
   border-right: 3px solid #DD8A3D;
 }
 
-.kune-EntityTextLogo {
-  border: 2px solid #F2F2F2;
-  height: 60px;
-  margin-bottom: 4px;
-  overflow: hidden;
-  width: 468px;
-}
-
-.kune-EntityTextLogo .gwt-Label {
-  color: #AA4400;
-  font-size: 167%;
-  font-weight: 700;
-  margin: 5px;
-  height: 27;
-}
-
-.kune-EntityTextLogo .gwt-Hyperlink a {
-  color: #CCC;
-  font-size: 85%;
-  margin: 5px;
-  text-decoration: underline;
-  white-space: nowrap;
-  background-color: #FFF;
-}
-
 .kune-GroupSummaryPanel {
   margin: 5px 0 0 5px;
   width: 100%;
@@ -383,7 +358,7 @@
   background-color: #EEFFAA;
   cursor: pointer;
   padding: 1px 3px 0 6px;
-  owerflow: hidden;
+  overflow: hidden;
 }
 
 .kune-StackedDropDownPanel .gwt-StackPanelItem img {
@@ -601,7 +576,7 @@
   background: transparent url(img/arrow-right-white.gif) no-repeat scroll 3px 2px;
   cursor: pointer;
   padding: 3px 10px 1px 20px;
-  owerflow: hidden;
+  overflow: hidden;
   width: 100%;
 }
 
@@ -853,19 +828,12 @@
 }
 
 .kune-Content-Main input[type=text] {
-  width: 12.25em; *
-  width: 11.9em;
-}
+  width: 12.25em;*width: 11.9em;}
 
 .kune-Content-Main input[type=password] {
-  width: 12.25em; *
-  width: 11.9em;
-}
+  width: 12.25em;*width: 11.9em;}
 
-.kune-Content-Main textarea {
-  width: 12.25em; *
-  width: 11.9em;
-}
+.kune-Content-Main textarea {width: 12.25em;*width: 11.9em;}
 
 .search-icon {
   background-image: url(img/search.gif) !important;

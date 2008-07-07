@@ -175,13 +175,13 @@ legend {
 .kune-CustomPushButton-up-disabled {
   background: transparent url(img/button-bg-soft.gif) repeat-x 0 0;
   color: #E0E0E0;
-  cursor: normal;
+  cursor: default;
 }
 
 .kune-CustomPushButton-down-disabled {
   background: transparent url(img/button-bg-soft.gif) repeat-x 0 0;
   color: #E0E0E0;
-  cursor: normal;
+  cursor: default;
 }
 
 .kune-Button-Large-lrSpace {
@@ -396,7 +396,7 @@ legend {
 
 .kune-Margin-Large-tb {
   margin-top: 10px;
-  margin-bottom: : 10px;
+  margin-bottom: 10px;
 }
 
 .kune-Margin-Large-t {
@@ -568,5 +568,5 @@ see: http://developer.yahoo.com/yui/fonts/ */
 }
 
 .kune-ft26px {
-  font-size: 197 %
+  font-size: 197%
 }

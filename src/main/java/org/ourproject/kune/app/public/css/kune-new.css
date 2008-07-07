@@ -1,0 +1,182 @@
+.k-site-traybar {
+    background: #FFF none repeat scroll 0% 50%;
+}
+
+.k-sitebar {
+    white-space: nowrap;
+}
+
+.k-entity-summary {
+    border-left-color: #FFF;
+    border-left-width: 5px;
+}
+
+.k-EntityTextLogo {
+    border: 2px solid #F2F2F2;
+    height: 60px;
+    margin-bottom: 4px;
+    overflow: hidden;
+    width: 468px;
+}
+
+.k-entitytextlogo .gwt-Label {
+    font-size: 167%;
+    font-weight: 700;
+    margin: 5px;
+    height: 27px;
+}
+
+.k-entitytextlogo-def .gwt-Label {
+    color: #69312F;
+}
+
+.k-entitytextlogo-green .gwt-Label {
+    color: #000080;
+}
+
+.k-entitytextlogo .gwt-Hyperlink a {
+    color: #CCC;
+    font-size: 85%;
+    margin: 5px;
+    text-decoration: underline;
+    white-space: nowrap;
+    background-color: #FFF;
+}
+
+.k-entity-def .x-layout-split {
+    background: #DD8A3D none repeat scroll 0% 50%;
+}
+
+.k-entity-green .x-layout-split {
+    background: #5FD35F none repeat scroll 0% 50%;
+}
+
+.k-entityworkspace .x-layout-split {
+    background: transparent none repeat scroll 0% 50%;
+}
+
+.k-entityworkspace-def .x-layout-split {
+    background: #DEAA87 none repeat scroll 0% 50%;
+}
+
+.k-entityworkspace-green .x-layout-split {
+    background: #DCE8AB none repeat scroll 0% 50%;
+}
+
+.k-entity-title {
+    line-height: 22px;
+    border-left-style: solid;
+    border-left-width: 2px;
+}
+
+.k-entity-title div {
+	white-space: nowrap;
+}
+
+.k-entity-subtitle {
+    line-height: 2em;
+}
+
+.k-entity-subtitle div {
+    white-space: nowrap;
+}
+
+.k-entity-title-rd-def {
+    background: #DD8A3D;
+}
+
+.k-entity-title-rd-green {
+    background: #5FD35F;
+}
+
+.k-entity-title-def {
+    background: #F1BB59 none repeat scroll 0% 50%;
+    color: #69312F;
+    border-left-color: #DD8A3D;
+}
+
+.k-entity-title-green {
+    background: #AFA none repeat scroll 0% 50%;
+    color: #250;
+    border-left-color: #5FD35F;
+}
+
+.k-entity-subtitle-def {
+    background: #DD8A3D none repeat scroll 0% 50%;
+    color: #FFF;
+}
+
+.k-entity-subtitle-green {
+    background: #5FD35F none repeat scroll 0% 50%;
+    color: #FFF;
+}
+
+.k-entity-bottom-rd-def {
+    background: #DD8A3D;
+}
+
+.k-entity-bottom-rd-green {
+    background: #5FD35F;
+}
+
+.k-entity-container-def div {
+    background: #FFD09D none repeat scroll 0% 50%;
+}
+
+.k-entity-container-green div {
+    background: #CFA none repeat scroll 0% 50%;
+}
+
+.k-entity-bottom {
+    line-height: 2em;
+}
+
+.k-entity-bottom-def {
+    background: #DD8A3D;
+    color: #FFF;
+}
+
+.k-entity-bottom-green {
+    background: #5FD35F;
+    color: #FFF;
+}
+
+.k-toolbar-top-line {
+    border-top-color: rgb( 208, 208, 208 );
+    border-top-style: solid;
+    border-top-width: 1px;
+}
+
+.k-toolbar-bottom-line {
+    border-bottom-color: rgb( 208, 208, 208 );
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
+.x-toolbar td, .x-toolbar span, .x-toolbar input, .x-toolbar div, .x-toolbar select, .x-toolbar label {
+    white-space: nowrap;
+    font: normal 13px arial, sans;
+    line-height: 19px;
+}
+
+.k-toolbar-sep {
+    padding-top: 4px;
+}
+
+.ytb-sep {
+    background-image: url(../js/ext/resources/images/default/grid/grid-split.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+    display: block;
+    font-size: 1px;
+    height: 16px;
+    width: 4px;
+    overflow: hidden;
+    cursor: default;
+    margin: 0 2px 0;
+    border: 0;
+}
+
+.ytb-spacer {
+    width: 2px;
+}

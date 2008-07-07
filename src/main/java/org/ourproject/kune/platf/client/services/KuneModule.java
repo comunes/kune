@@ -18,6 +18,14 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.state.StateManagerDefault;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.sitebar.Site;
+import org.ourproject.kune.workspace.client.ui.newtmp.WorkspaceManager;
+import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePanel;
+import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.ui.newtmp.title.EntityTitlePanel;
+import org.ourproject.kune.workspace.client.ui.newtmp.title.EntityTitlePresenter;
+import org.ourproject.kune.workspace.client.workspace.ui.EntityLogo;
+import org.ourproject.kune.workspace.client.workspace.ui.EntityLogoPanel;
 
 import com.calclab.suco.client.container.Provider;
 import com.calclab.suco.client.modules.Module;
@@ -48,10 +56,10 @@ public class KuneModule implements Module {
 
 	builder.registerProvider(I18nUITranslationService.class, new Provider<I18nUITranslationService>() {
 	    public I18nUITranslationService get() {
-		final I18nUITranslationService translationService = new I18nUITranslationService();
-		translationService.setCurrentLanguage(initialLang.getCode());
-		translationService.setLexicon(lexicon);
-		return translationService;
+		final I18nUITranslationService i18n = new I18nUITranslationService();
+		i18n.setCurrentLanguage(initialLang.getCode());
+		i18n.setLexicon(lexicon);
+		return i18n;
 	    }
 	}, SingletonScope.class);
 
@@ -61,16 +69,16 @@ public class KuneModule implements Module {
 	    }
 	}, SingletonScope.class);
 
+	final I18nUITranslationService i18n = builder.getInstance(I18nUITranslationService.class);
 	builder.registerProvider(KuneErrorHandler.class, new Provider<KuneErrorHandler>() {
 	    public KuneErrorHandler get() {
-		return new KuneErrorHandler(builder.getInstance(Session.class), builder
-			.getInstance(I18nUITranslationService.class));
+		return new KuneErrorHandler(builder.getInstance(Session.class), i18n);
 	    }
 	}, SingletonScope.class);
 
 	final KuneErrorHandler errorHandler = builder.getInstance(KuneErrorHandler.class);
 	AsyncCallbackSimple.init(errorHandler);
-	Site.init(builder.getInstance(I18nUITranslationService.class));
+	Site.init(i18n);
 
 	builder.registerProvider(ColorTheme.class, new Provider<ColorTheme>() {
 	    public ColorTheme get() {
@@ -95,9 +103,49 @@ public class KuneModule implements Module {
 		final Session session = builder.getInstance(Session.class);
 		final ExtensibleWidgetsManager extensionPointManager = builder
 			.getInstance(ExtensibleWidgetsManager.class);
-		return new ApplicationDefault(session, extensionPointManager, builder
-			.getInstance(I18nUITranslationService.class), builder.getInstance(ColorTheme.class), builder
+		return new ApplicationDefault(session, extensionPointManager, i18n, builder
+			.getInstance(ColorTheme.class), builder.getInstance(KuneErrorHandler.class));
+	    }
+	}, SingletonScope.class);
+
+	builder.registerProvider(WorkspaceSkeleton.class, new Provider<WorkspaceSkeleton>() {
+	    public WorkspaceSkeleton get() {
+		return new WorkspaceSkeleton();
+	    }
+	}, SingletonScope.class);
+
+	final WorkspaceSkeleton ws = builder.getInstance(WorkspaceSkeleton.class);
+
+	builder.registerProvider(EntityLogo.class, new Provider<EntityLogo>() {
+	    public EntityLogo get() {
+		return new EntityLogoPanel(i18n, ws);
+	    }
+	}, SingletonScope.class);
+
+	builder.registerProvider(WsThemePresenter.class, new Provider<WsThemePresenter>() {
+	    public WsThemePresenter get() {
+		final WsThemePresenter presenter = new WsThemePresenter();
+		final WsThemePanel panel = new WsThemePanel(ws);
+		presenter.init(panel);
+		return presenter;
+	    }
+	}, SingletonScope.class);
+
+	builder.registerProvider(EntityTitlePresenter.class, new Provider<EntityTitlePresenter>() {
+	    public EntityTitlePresenter get() {
+		final EntityTitlePresenter presenter = new EntityTitlePresenter(i18n, builder
 			.getInstance(KuneErrorHandler.class));
+		final EntityTitlePanel panel = new EntityTitlePanel(ws, presenter);
+		presenter.init(panel);
+		return presenter;
+	    }
+	}, SingletonScope.class);
+
+	builder.registerProvider(WorkspaceManager.class, new Provider<WorkspaceManager>() {
+	    public WorkspaceManager get() {
+		final WorkspaceManager presenter = new WorkspaceManager(builder.getInstance(EntityLogo.class), builder
+			.getInstance(EntityTitlePresenter.class), builder.getInstance(WsThemePresenter.class));
+		return presenter;
 	    }
 	}, SingletonScope.class);
 
@@ -107,12 +155,14 @@ public class KuneModule implements Module {
 		final ContentProviderImpl provider = new ContentProviderImpl(ContentService.App.getInstance());
 		final HistoryWrapper historyWrapper = new HistoryWrapperImpl();
 		final Application application = builder.getInstance(Application.class);
+		final WorkspaceManager wm = builder.getInstance(WorkspaceManager.class);
 		final StateManagerDefault stateManager = new StateManagerDefault(provider, application, session,
-			historyWrapper);
+			historyWrapper, wm);
 		History.addHistoryListener(stateManager);
 		return stateManager;
 	    }
 	}, SingletonScope.class);
 
     }
+
 }

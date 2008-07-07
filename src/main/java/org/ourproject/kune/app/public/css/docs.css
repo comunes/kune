@@ -135,7 +135,7 @@
 .kune-WebSafePalette {
   background-color: #FFF;
   border: 1px solid #AAA;
-  margin: 1px solid red;
+  margin: 1px;
 }
 
 .kune-WebSafePalette td {
