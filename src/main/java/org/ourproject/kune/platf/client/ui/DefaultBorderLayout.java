@@ -72,6 +72,10 @@ public class DefaultBorderLayout {
 	doLayoutIfNeeded();
     }
 
+    public void addStyle(final String style) {
+	mainPanel.addClass(style);
+    }
+
     public Toolbar createBottomBar(final Panel panel) {
 	return createBottomBar(panel, null);
     }
@@ -110,10 +114,15 @@ public class DefaultBorderLayout {
 	return mainPanel;
     }
 
+    public void removeStyle(final String style) {
+	mainPanel.removeClass(style);
+    }
+
     public void setBorder(final boolean border) {
 	mainPanel.setBorder(border);
     }
 
+    @Deprecated
     public void setCls(final String style) {
 	mainPanel.setCls(style);
     }

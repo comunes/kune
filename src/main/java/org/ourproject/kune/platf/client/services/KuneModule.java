@@ -19,9 +19,15 @@ import org.ourproject.kune.platf.client.state.StateManagerDefault;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.ui.newtmp.WorkspaceManager;
+import org.ourproject.kune.workspace.client.ui.newtmp.licensefoot.EntityLicensePanel;
+import org.ourproject.kune.workspace.client.ui.newtmp.licensefoot.EntityLicensePresenter;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.SiteBarPanel;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.SiteBarPresenter;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.ui.newtmp.title.EntitySubTitlePanel;
+import org.ourproject.kune.workspace.client.ui.newtmp.title.EntitySubTitlePresenter;
 import org.ourproject.kune.workspace.client.ui.newtmp.title.EntityTitlePanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.title.EntityTitlePresenter;
 import org.ourproject.kune.workspace.client.workspace.ui.EntityLogo;
@@ -141,10 +147,38 @@ public class KuneModule implements Module {
 	    }
 	}, SingletonScope.class);
 
+	builder.registerProvider(EntitySubTitlePresenter.class, new Provider<EntitySubTitlePresenter>() {
+	    public EntitySubTitlePresenter get() {
+		final EntitySubTitlePresenter presenter = new EntitySubTitlePresenter(i18n);
+		final EntitySubTitlePanel panel = new EntitySubTitlePanel(presenter, i18n, ws);
+		presenter.init(panel);
+		return presenter;
+	    }
+	}, SingletonScope.class);
+
+	builder.registerProvider(EntityLicensePresenter.class, new Provider<EntityLicensePresenter>() {
+	    public EntityLicensePresenter get() {
+		final EntityLicensePresenter presenter = new EntityLicensePresenter();
+		final EntityLicensePanel panel = new EntityLicensePanel(presenter, i18n, ws);
+		presenter.init(panel);
+		return presenter;
+	    }
+	}, SingletonScope.class);
+
+	builder.registerProvider(SiteBarPresenter.class, new Provider<SiteBarPresenter>() {
+	    public SiteBarPresenter get() {
+		final SiteBarPresenter presenter = new SiteBarPresenter();
+		final SiteBarPanel panel = new SiteBarPanel(presenter, i18n, ws);
+		presenter.init(panel);
+		return presenter;
+	    }
+	}, SingletonScope.class);
+
 	builder.registerProvider(WorkspaceManager.class, new Provider<WorkspaceManager>() {
 	    public WorkspaceManager get() {
 		final WorkspaceManager presenter = new WorkspaceManager(builder.getInstance(EntityLogo.class), builder
-			.getInstance(EntityTitlePresenter.class), builder.getInstance(WsThemePresenter.class));
+			.getInstance(EntityTitlePresenter.class), builder.getInstance(EntitySubTitlePresenter.class),
+			builder.getInstance(WsThemePresenter.class), builder.getInstance(EntityLicensePresenter.class));
 		return presenter;
 	    }
 	}, SingletonScope.class);

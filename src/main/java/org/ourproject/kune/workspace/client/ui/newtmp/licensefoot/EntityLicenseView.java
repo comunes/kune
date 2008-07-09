@@ -17,21 +17,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-
-package org.ourproject.kune.workspace.client.ui.newtmp.title;
+package org.ourproject.kune.workspace.client.ui.newtmp.licensefoot;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.LicenseDTO;
 
-public interface EntityTitleView extends View {
+public interface EntityLicenseView extends View {
 
-    void restoreOldTitle();
+    void showLicense(String groupName, LicenseDTO licenseDTO);
 
-    void setContentDate(String date);
-
-    void setContentTitle(String title);
-
-    void setContentTitleEditable(boolean editable);
-
-    void setDateVisible(boolean visible);
+    void openWindow(String url);
 
 }

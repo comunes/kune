@@ -2,6 +2,7 @@ package org.ourproject.kune.workspace.client.ui.newtmp.themes;
 
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 
+import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.ToolbarButton;
 import com.gwtext.client.widgets.menu.BaseItem;
 import com.gwtext.client.widgets.menu.Menu;
@@ -19,7 +20,8 @@ public class WsThemePanel extends ToolbarButton implements WsThemeView {
 	    item.setText(theme.toString());
 	    menu.addItem(item);
 	    item.addListener(new BaseItemListenerAdapter() {
-		public void onActivate(final BaseItem item) {
+		@Override
+		public void onClick(final BaseItem item, final EventObject e) {
 		    ws.setTheme(theme);
 		}
 	    });

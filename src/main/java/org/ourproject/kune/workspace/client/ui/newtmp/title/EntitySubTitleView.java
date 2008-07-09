@@ -22,16 +22,13 @@ package org.ourproject.kune.workspace.client.ui.newtmp.title;
 
 import org.ourproject.kune.platf.client.View;
 
-public interface EntityTitleView extends View {
+public interface EntitySubTitleView extends View {
 
-    void restoreOldTitle();
+    void setContentSubTitleLeft(String subTitle);
 
-    void setContentDate(String date);
+    void setContentSubTitleRight(String subTitle);
 
-    void setContentTitle(String title);
+    void setContentSubTitleLeftVisible(boolean visible);
 
-    void setContentTitleEditable(boolean editable);
-
-    void setDateVisible(boolean visible);
-
+    void setContentSubTitleRightVisible(boolean visible);
 }

@@ -31,7 +31,6 @@ import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.sitebar.Site;
-import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -88,10 +87,6 @@ public class EntityTitlePresenter {
 	    }
 	    setContentDateVisible(false);
 	}
-    }
-
-    public void setTheme(final WsTheme theme) {
-	view.setTheme(theme);
     }
 
     private void setContentDate(final Date publishedOn) {

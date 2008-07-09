@@ -24,7 +24,6 @@ import org.ourproject.kune.platf.client.ui.EditableClickListener;
 import org.ourproject.kune.platf.client.ui.EditableIconLabel;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.TitleBar;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 
 import com.google.gwt.user.client.ui.Label;
 
@@ -48,8 +47,6 @@ public class EntityTitlePanel implements EntityTitleView {
 	titleLabel.addStyleName("kune-ft17px");
 	dateLabel.addStyleName("kune-Margin-Large-r");
 	dateLabel.addStyleName("kune-ft12px");
-	titleLabel.addStyleName("kune-ContentTitleBar-l");
-	dateLabel.addStyleName("kune-ContentTitleBar-r");
     }
 
     public void restoreOldTitle() {
@@ -70,10 +67,6 @@ public class EntityTitlePanel implements EntityTitleView {
 
     public void setDateVisible(final boolean visible) {
 	dateLabel.setVisible(visible);
-
     }
 
-    public void setTheme(final WsTheme theme) {
-
-    }
 }

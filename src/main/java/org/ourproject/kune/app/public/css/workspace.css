@@ -165,44 +165,6 @@
 }
 
 /* Content titles */
-.kune-ContentTitleBar {
-  border-left: 2px solid #DD8A3D;
-  width: 100%;
-  height: 25px;
-  vertical-align: middle;
-}
-
-.kune-ContentTitleBar .gwt-Label {
-  width: 100%;
-}
-
-.kune-ContentTitleBar-l {
-  float: left;
-}
-
-.kune-ContentTitleBar-r {
-  float: right;
-}
-
-.kune-ContentSubTitleBar {
-  vertical-align: middle;
-  font-weight: 700;
-  width: 100%;
-  height: 23px;
-}
-
-.kune-ContentSubTitleBar .gwt-Label {
-  width: 100%;
-  white-space: nowrap;
-}
-
-.kune-ContentSubTitleBar-l {
-  float: left;
-}
-
-.kune-ContentSubTitleBar-r {
-  float: right;
-}
 
 .kune-ContentToolBarPanel {
   background-color: #F2F2F2;
@@ -224,12 +186,6 @@
 
 .kune-ContentBottomBar .gwt-Label a {
 
-}
-
-.kune-LicensePanel-licensetext {
-  cursor: pointer;
-  margin-left: 5px;
-  text-decoration: underline;
 }
 
 /* Main Content & Context */

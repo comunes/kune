@@ -23,6 +23,7 @@ public class EntityWorkspace extends DefaultBorderLayout {
     private final RoundedPanel roundedTitle;
     private final RoundedPanel roundedBottom;
     private final DefaultBorderLayout containerWrap;
+    private WsTheme previousTheme;
 
     public EntityWorkspace() {
 	final Panel titles = new Panel();
@@ -121,12 +122,21 @@ public class EntityWorkspace extends DefaultBorderLayout {
 
     public void setTheme(final WsTheme theme) {
 	final String themeS = theme.toString();
-	super.setCls("k-entityworkspace-" + theme);
+	if (previousTheme != null) {
+	    final String previousThemeS = previousTheme.toString();
+	    title.removeStyleDependentName(previousThemeS);
+	    subTitle.removeStyleDependentName(previousThemeS);
+	    bottom.removeStyleDependentName(previousThemeS);
+	    super.removeStyle("k-entityworkspace-" + previousThemeS);
+	    container.removeStyleName("k-entity-container-" + previousThemeS);
+	}
+	super.addStyle("k-entityworkspace-" + theme);
 	roundedTitle.setCornerStyleName("k-entity-title-rd-" + theme);
 	roundedBottom.setCornerStyleName("k-entity-bottom-rd-" + theme);
 	title.addStyleDependentName(themeS);
 	subTitle.addStyleDependentName(themeS);
 	bottom.addStyleDependentName(themeS);
-	container.setStyleName("k-entity-container-" + theme);
+	container.addStyleName("k-entity-container-" + theme);
+	previousTheme = theme;
     }
 }

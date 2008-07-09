@@ -17,21 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+package org.ourproject.kune.workspace.client.ui.newtmp.sitebar;
 
-package org.ourproject.kune.workspace.client.ui.newtmp.title;
+public class SiteBarPresenter {
 
-import org.ourproject.kune.platf.client.View;
+    private SiteBarView view;
 
-public interface EntityTitleView extends View {
-
-    void restoreOldTitle();
-
-    void setContentDate(String date);
-
-    void setContentTitle(String title);
-
-    void setContentTitleEditable(boolean editable);
-
-    void setDateVisible(boolean visible);
+    public void init(final SiteBarView view) {
+	this.view = view;
+    }
 
 }

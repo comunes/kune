@@ -64,20 +64,20 @@
 }
 
 .k-entity-title {
-    line-height: 22px;
     border-left-style: solid;
     border-left-width: 2px;
 }
 
 .k-entity-title div {
-	white-space: nowrap;
+    line-height: 22px;
+    white-space: nowrap;
 }
 
 .k-entity-subtitle {
-    line-height: 2em;
 }
 
 .k-entity-subtitle div {
+    line-height: 22px;
     white-space: nowrap;
 }
 
@@ -91,23 +91,35 @@
 
 .k-entity-title-def {
     background: #F1BB59 none repeat scroll 0% 50%;
-    color: #69312F;
     border-left-color: #DD8A3D;
+}
+
+.k-entity-title-def div {
+    color: #69312F;
 }
 
 .k-entity-title-green {
     background: #AFA none repeat scroll 0% 50%;
-    color: #250;
     border-left-color: #5FD35F;
+}
+
+.k-entity-title-green div {
+    color: #250;
 }
 
 .k-entity-subtitle-def {
     background: #DD8A3D none repeat scroll 0% 50%;
+}
+
+.k-entity-subtitle-def div {
     color: #FFF;
 }
 
 .k-entity-subtitle-green {
     background: #5FD35F none repeat scroll 0% 50%;
+}
+
+.k-entity-subtitle-green div {
     color: #FFF;
 }
 
@@ -119,6 +131,12 @@
     background: #5FD35F;
 }
 
+.k-entitylicensepanel-licensetext {
+    cursor: pointer;
+    margin-left: 5px;
+    text-decoration: underline;
+}
+
 .k-entity-container-def div {
     background: #FFD09D none repeat scroll 0% 50%;
 }
@@ -127,17 +145,23 @@
     background: #CFA none repeat scroll 0% 50%;
 }
 
-.k-entity-bottom {
+.k-entity-bottom div {
     line-height: 2em;
 }
 
 .k-entity-bottom-def {
     background: #DD8A3D;
+}
+
+.k-entity-bottom-def div {
     color: #FFF;
 }
 
 .k-entity-bottom-green {
     background: #5FD35F;
+}
+
+.k-entity-bottom-green div {
     color: #FFF;
 }
 
