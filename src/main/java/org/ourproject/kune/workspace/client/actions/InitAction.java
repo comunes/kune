@@ -44,59 +44,55 @@ public class InitAction implements Action<Object> {
     private final Workspace workspace;
 
     public InitAction(final Session session, final Dispatcher dispatcher, final Workspace workspace) {
-        this.session = session;
-        this.dispatcher = dispatcher;
-        this.workspace = workspace;
+	this.session = session;
+	this.dispatcher = dispatcher;
+	this.workspace = workspace;
     }
 
     public void execute(final Object value) {
-        PrefetchUtilities.preFetchImpImages();
-        getInitData();
-        dispatcher.fire(WorkspaceEvents.RECALCULATE_WORKSPACE_SIZE, null);
-        Timer prefetchTimer = new Timer() {
-            public void run() {
-                PrefetchUtilities.doTasksDeferred(workspace);
-            }
-        };
-        prefetchTimer.schedule(20000);
+	PrefetchUtilities.preFetchImpImages();
+	getInitData();
+	dispatcher.fire(WorkspaceEvents.RECALCULATE_WORKSPACE_SIZE, null);
+	final Timer prefetchTimer = new Timer() {
+	    public void run() {
+		PrefetchUtilities.doTasksDeferred(workspace);
+	    }
+	};
+	prefetchTimer.schedule(20000);
     }
 
     private void getInitData() {
-        SiteServiceAsync server = SiteService.App.getInstance();
-        server.getInitData(session.getUserHash(), new AsyncCallback<InitDataDTO>() {
-            public void onFailure(final Throwable error) {
-                Site.error("Error fetching initial data");
-                Log.debug(error.getMessage());
-            }
+	final SiteServiceAsync server = SiteService.App.getInstance();
+	server.getInitData(session.getUserHash(), new AsyncCallback<InitDataDTO>() {
+	    public void onFailure(final Throwable error) {
+		Site.error("Error fetching initial data");
+		Log.debug(error.getMessage());
+	    }
 
-            public void onSuccess(final InitDataDTO initData) {
-                checkChatDomain(initData.getChatDomain());
-                session.setLicenses(initData.getLicenses());
-                session.setWsThemes(initData.getWsThemes());
-                session.setDefaultWsTheme(initData.getDefaultWsTheme());
-                session.setLanguages(initData.getLanguages());
-                session.setCountries(initData.getCountries());
-                session.setTimezones(initData.getTimezones());
-                UserInfoDTO currentUser = initData.getUserInfo();
-                dispatcher.fire(WorkspaceEvents.INIT_DATA_RECEIVED, initData);
-                if (currentUser == null) {
-                    dispatcher.fire(WorkspaceEvents.USER_LOGGED_OUT, null);
-                } else {
-                    dispatcher.fire(WorkspaceEvents.USER_LOGGED_IN, currentUser);
-                }
-                RootPanel.get("kuneinitialcurtain").setVisible(false);
+	    public void onSuccess(final InitDataDTO initData) {
+		checkChatDomain(initData.getChatDomain());
+		session.setInitData(initData);
+		final UserInfoDTO currentUser = initData.getUserInfo();
+		// use signals:
+		dispatcher.fire(WorkspaceEvents.INIT_DATA_RECEIVED, initData);
+		if (currentUser == null) {
+		    dispatcher.fire(WorkspaceEvents.USER_LOGGED_OUT, null);
+		} else {
+		    dispatcher.fire(WorkspaceEvents.USER_LOGGED_IN, currentUser);
+		}
+		RootPanel.get("kuneinitialcurtain").setVisible(false);
 
-                Site.unMask();
-            }
+		Site.unMask();
+	    }
 
-            private void checkChatDomain(final String chatDomain) {
-                String httpDomain = WindowUtils.getLocation().getHostName();
-                if (!chatDomain.equals(httpDomain)) {
-                    Log.error("Your http domain (" + httpDomain + ") is different from the chat domain (" + chatDomain
-                            + "). This will produce problems with the chat functionality. "
-                            + "Check kune.properties on the server.");
-                }
-            }
-        });
+	    private void checkChatDomain(final String chatDomain) {
+		final String httpDomain = WindowUtils.getLocation().getHostName();
+		if (!chatDomain.equals(httpDomain)) {
+		    Log.error("Your http domain (" + httpDomain + ") is different from the chat domain (" + chatDomain
+			    + "). This will produce problems with the chat functionality. "
+			    + "Check kune.properties on the server.");
+		}
+	    }
+	});
     }
 }

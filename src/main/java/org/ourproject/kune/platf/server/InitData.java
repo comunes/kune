@@ -38,93 +38,102 @@ public class InitData {
     private String chatRoomHost;
     private String defaultWsTheme;
     private String[] wsThemes;
+    private String siteLogoUrl;
 
-    public UserInfo getUserInfo() {
-        return userInfo;
-    }
-
-    public void setUserInfo(final UserInfo currentUserInfo) {
-        this.userInfo = currentUserInfo;
-    }
-
-    public List<License> getLicenses() {
-        return licenses;
-    }
-
-    public void setLicenses(final List<License> licenses) {
-        this.licenses = licenses;
-    }
-
-    public void setChatHttpBase(final String chatHttpBase) {
-        this.chatHttpBase = chatHttpBase;
+    public String getChatDomain() {
+	return chatDomain;
     }
 
     public String getChatHttpBase() {
-        return chatHttpBase;
-    }
-
-    public void setChatDomain(final String chatDomain) {
-        this.chatDomain = chatDomain;
-    }
-
-    public String getChatDomain() {
-        return chatDomain;
-    }
-
-    public void setChatRoomHost(final String chatRoomHost) {
-        this.chatRoomHost = chatRoomHost;
+	return chatHttpBase;
     }
 
     public String getChatRoomHost() {
-        return chatRoomHost;
-    }
-
-    public String getDefaultWsTheme() {
-        return defaultWsTheme;
-    }
-
-    public void setDefaultWsTheme(final String defaultWsTheme) {
-        this.defaultWsTheme = defaultWsTheme;
-    }
-
-    public String[] getWsThemes() {
-        return wsThemes;
-    }
-
-    public void setWsThemes(final String[] wsThemes) {
-        this.wsThemes = wsThemes;
-    }
-
-    public List<I18nLanguage> getLanguages() {
-        return languages;
-    }
-
-    public void setLanguages(final List<I18nLanguage> languages) {
-        this.languages = languages;
+	return chatRoomHost;
     }
 
     public List<I18nCountry> getCountries() {
-        return countries;
+	return countries;
     }
 
-    public void setCountries(final List<I18nCountry> countries) {
-        this.countries = countries;
+    public String getDefaultWsTheme() {
+	return defaultWsTheme;
     }
 
-    public void setTimezones(final String[] timezones) {
-        this.timezones = timezones;
+    public List<I18nLanguage> getLanguages() {
+	return languages;
     }
 
-    public String[] getTimezones() {
-        return timezones;
+    public List<License> getLicenses() {
+	return licenses;
     }
 
     public String getSiteDomain() {
-        return siteDomain;
+	return siteDomain;
+    }
+
+    public String getSiteLogoUrl() {
+	return siteLogoUrl;
+    }
+
+    public String[] getTimezones() {
+	return timezones;
+    }
+
+    public UserInfo getUserInfo() {
+	return userInfo;
+    }
+
+    public String[] getWsThemes() {
+	return wsThemes;
+    }
+
+    public void setChatDomain(final String chatDomain) {
+	this.chatDomain = chatDomain;
+    }
+
+    public void setChatHttpBase(final String chatHttpBase) {
+	this.chatHttpBase = chatHttpBase;
+    }
+
+    public void setChatRoomHost(final String chatRoomHost) {
+	this.chatRoomHost = chatRoomHost;
+    }
+
+    public void setCountries(final List<I18nCountry> countries) {
+	this.countries = countries;
+    }
+
+    public void setDefaultWsTheme(final String defaultWsTheme) {
+	this.defaultWsTheme = defaultWsTheme;
+    }
+
+    public void setLanguages(final List<I18nLanguage> languages) {
+	this.languages = languages;
+    }
+
+    public void setLicenses(final List<License> licenses) {
+	this.licenses = licenses;
     }
 
     public void setSiteDomain(final String siteDomain) {
-        this.siteDomain = siteDomain;
+	this.siteDomain = siteDomain;
+    }
+
+    public void setSiteLogoUrl(final String siteLogoUrl) {
+	this.siteLogoUrl = siteLogoUrl;
+    }
+
+    public void setTimezones(final String[] timezones) {
+	this.timezones = timezones;
+    }
+
+    public void setUserInfo(final UserInfo currentUserInfo) {
+	this.userInfo = currentUserInfo;
+    }
+
+    public void setWsThemes(final String[] wsThemes) {
+	this.wsThemes = wsThemes;
     }
 
 }

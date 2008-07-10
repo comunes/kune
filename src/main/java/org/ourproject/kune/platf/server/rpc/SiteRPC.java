@@ -88,6 +88,7 @@ public class SiteRPC implements RPC, SiteService {
 	data.setChatRoomHost(chatProperties.getRoomHost());
 	data.setWsThemes(this.kuneProperties.get(KuneProperties.WS_THEMES).split(","));
 	data.setDefaultWsTheme(this.kuneProperties.get(KuneProperties.WS_THEMES_DEF));
+	data.setSiteLogoUrl(kuneProperties.get(KuneProperties.SITE_LOGO_URL));
 	return mapper.map(data, InitDataDTO.class);
     }
 

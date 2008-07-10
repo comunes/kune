@@ -23,6 +23,9 @@ import org.ourproject.kune.workspace.client.ui.newtmp.licensefoot.EntityLicenseP
 import org.ourproject.kune.workspace.client.ui.newtmp.licensefoot.EntityLicensePresenter;
 import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.SiteBarPanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.SiteBarPresenter;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitelogo.SiteLogo;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitelogo.SiteLogoPanel;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitelogo.SiteLogoPresenter;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
@@ -122,6 +125,17 @@ public class KuneModule implements Module {
 
 	final WorkspaceSkeleton ws = builder.getInstance(WorkspaceSkeleton.class);
 
+	builder.registerProvider(SiteLogo.class, new Provider<SiteLogo>() {
+	    public SiteLogo get() {
+		final SiteLogoPresenter presenter = new SiteLogoPresenter(builder.getInstance(Session.class));
+		final SiteLogoPanel panel = new SiteLogoPanel(presenter, ws);
+		presenter.init(panel);
+		return presenter;
+	    }
+	}, SingletonScope.class);
+
+	builder.getInstance(SiteLogo.class);
+
 	builder.registerProvider(EntityLogo.class, new Provider<EntityLogo>() {
 	    public EntityLogo get() {
 		return new EntityLogoPanel(i18n, ws);
@@ -130,7 +144,7 @@ public class KuneModule implements Module {
 
 	builder.registerProvider(WsThemePresenter.class, new Provider<WsThemePresenter>() {
 	    public WsThemePresenter get() {
-		final WsThemePresenter presenter = new WsThemePresenter();
+		final WsThemePresenter presenter = new WsThemePresenter(builder.getInstance(Session.class));
 		final WsThemePanel panel = new WsThemePanel(ws, presenter);
 		presenter.init(panel);
 		return presenter;

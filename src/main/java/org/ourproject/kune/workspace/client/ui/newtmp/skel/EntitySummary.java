@@ -24,6 +24,7 @@ public class EntitySummary {
 	trayBar = mainPanel.createBottomBar(entitySummary, "k-site-traybar");
 	mainPanel.add(entityTools, DefaultBorderLayout.Position.NORTH, 30);
 	mainPanel.add(entitySummary, DefaultBorderLayout.Position.CENTER);
+	trayBar.addFill();
     }
 
     public void addInSummary(final Widget widget) {

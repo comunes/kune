@@ -36,7 +36,6 @@ import org.ourproject.kune.workspace.client.workspace.WorkspaceUIComponents;
 import org.ourproject.kune.workspace.client.workspace.WorkspaceView;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.Composite;
@@ -309,27 +308,38 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     }
 
     public void setTheme(final String theme) {
-	colorTheme.setTheme(theme);
-	final String mainColor = colorTheme.getContentMainBorder();
-	// groupLogoPanel.setTextColor(colorTheme.getContentTitleText());
-	contentTitleBarBorderDec.setColor(mainColor);
-	bottomBorderDecorator.setColor(mainColor);
-	DOM.setStyleAttribute(cntcxtVP.getElement(), "borderRightColor", mainColor);
-	contentTitlePanel.setColors(colorTheme.getContentTitle(), colorTheme.getContentTitleText());
-	contentSubTitlePanel.setColors(mainColor, colorTheme.getContentSubTitleText());
-	DOM.setStyleAttribute(contentTitleBarHP.getElement(), "borderLeftColor", mainColor);
-	DOM.setStyleAttribute(contentTitleBarHP.getElement(), "backgroundColor", colorTheme.getContentTitle());
-	DOM.setStyleAttribute(contentSubTitleBarHP.getElement(), "backgroundColor", mainColor);
-	DOM.setStyleAttribute(contentBottomBarHP.getElement(), "backgroundColor", mainColor);
-	DOM.setStyleAttribute(cntcxtHSP.getRightWidget().getElement(), "backgroundColor", colorTheme.getContext());
-	DOM.setStyleAttribute(DOM.getChild(DOM.getChild(cntcxtHSP.getElement(), 0), 1), "backgroundColor", colorTheme
-		.getSplitter());
-	DOM.setStyleAttribute(contentBottomBarHP.getWidget(0).getElement(), "color", colorTheme.getContentBottomText());
-	groupMembersPanel.setColor(colorTheme.getGroupMembersDD());
-	participationPanel.setColor(colorTheme.getParticipationDD());
-	groupSummaryPanel.setColor(colorTheme.getSummaryDD());
-	tagsPanel.setColor(colorTheme.getTagsDD());
-	groupToolsBar.setTabsColors(colorTheme.getToolSelected(), colorTheme.getToolUnselected());
+	// colorTheme.setTheme(theme);
+	// final String mainColor = colorTheme.getContentMainBorder();
+	// // groupLogoPanel.setTextColor(colorTheme.getContentTitleText());
+	// contentTitleBarBorderDec.setColor(mainColor);
+	// bottomBorderDecorator.setColor(mainColor);
+	// DOM.setStyleAttribute(cntcxtVP.getElement(), "borderRightColor",
+	// mainColor);
+	// contentTitlePanel.setColors(colorTheme.getContentTitle(),
+	// colorTheme.getContentTitleText());
+	// contentSubTitlePanel.setColors(mainColor,
+	// colorTheme.getContentSubTitleText());
+	// DOM.setStyleAttribute(contentTitleBarHP.getElement(),
+	// "borderLeftColor", mainColor);
+	// DOM.setStyleAttribute(contentTitleBarHP.getElement(),
+	// "backgroundColor", colorTheme.getContentTitle());
+	// DOM.setStyleAttribute(contentSubTitleBarHP.getElement(),
+	// "backgroundColor", mainColor);
+	// DOM.setStyleAttribute(contentBottomBarHP.getElement(),
+	// "backgroundColor", mainColor);
+	// DOM.setStyleAttribute(cntcxtHSP.getRightWidget().getElement(),
+	// "backgroundColor", colorTheme.getContext());
+	// DOM.setStyleAttribute(DOM.getChild(DOM.getChild(cntcxtHSP.getElement(),
+	// 0), 1), "backgroundColor", colorTheme
+	// .getSplitter());
+	// DOM.setStyleAttribute(contentBottomBarHP.getWidget(0).getElement(),
+	// "color", colorTheme.getContentBottomText());
+	// groupMembersPanel.setColor(colorTheme.getGroupMembersDD());
+	// participationPanel.setColor(colorTheme.getParticipationDD());
+	// groupSummaryPanel.setColor(colorTheme.getSummaryDD());
+	// tagsPanel.setColor(colorTheme.getTagsDD());
+	// groupToolsBar.setTabsColors(colorTheme.getToolSelected(),
+	// colorTheme.getToolUnselected());
     }
 
     public void setTool(final String toolName) {

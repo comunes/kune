@@ -41,7 +41,6 @@ public class StateManagerDefault implements StateManager {
     private final ContentProvider provider;
     private final Workspace workspace;
     private StateDTO oldState;
-    private String lastTheme;
     private final Session session;
     private final HistoryWrapper history;
     private final WorkspaceManager ws;
@@ -135,7 +134,6 @@ public class StateManagerDefault implements StateManager {
 	} else {
 	    workspace.getThemeMenuComponent().setVisible(false);
 	}
-	setWsTheme(group);
 	workspace.showGroup(group, isAdmin);
 
 	final String toolName = state.getToolName();
@@ -180,11 +178,4 @@ public class StateManagerDefault implements StateManager {
 	workspace.getParticipationComponent().setParticipation(state);
     }
 
-    private void setWsTheme(final GroupDTO group) {
-	final String nextTheme = group.getWorkspaceTheme();
-	if (lastTheme == null || !lastTheme.equals(nextTheme)) {
-	    workspace.setTheme(nextTheme);
-	}
-	lastTheme = nextTheme;
-    }
 }

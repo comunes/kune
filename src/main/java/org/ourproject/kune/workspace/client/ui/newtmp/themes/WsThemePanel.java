@@ -13,10 +13,26 @@ import com.gwtext.client.widgets.menu.event.BaseItemListenerAdapter;
 public class WsThemePanel extends ToolbarButton implements WsThemeView {
 
     private final Menu menu;
+    private final WsThemePresenter presenter;
 
     public WsThemePanel(final WorkspaceSkeleton ws, final WsThemePresenter presenter) {
+	this.presenter = presenter;
 	menu = new Menu();
-	for (final WsTheme theme : WsTheme.values()) {
+
+	menu.setDefaultAlign("br-tr");
+	super.setMenu(menu);
+	super.setIcon("images/colors.gif");
+	ws.getSiteTraybar().addButton(this);
+	presenter.onThemeChanged(new Slot2<WsTheme, WsTheme>() {
+	    public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
+		ws.setTheme(oldTheme, newTheme);
+	    }
+	});
+    }
+
+    public void setThemes(final String[] themes) {
+	for (int i = 0; i < themes.length; i++) {
+	    final WsTheme theme = new WsTheme(themes[i]);
 	    final MenuItem item = new MenuItem();
 	    item.setText(theme.toString());
 	    menu.addItem(item);
@@ -27,14 +43,6 @@ public class WsThemePanel extends ToolbarButton implements WsThemeView {
 		}
 	    });
 	}
-	menu.setDefaultAlign("br-tr");
-	super.setMenu(menu);
-	ws.getSiteTraybar().addButton(this);
-	presenter.onThemeChanged(new Slot2<WsTheme, WsTheme>() {
-	    public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
-		ws.setTheme(oldTheme, newTheme);
-	    }
-	});
     }
 
     public void setVisible(final boolean visible) {

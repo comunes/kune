@@ -39,8 +39,6 @@ import org.ourproject.kune.workspace.client.WorkspaceClientModule;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
-import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
 
 import com.calclab.emiteuimodule.client.EmiteUIModule;
 import com.google.gwt.user.client.Window;
@@ -67,10 +65,8 @@ public class ApplicationBuilder {
 	final I18nUITranslationService i18n = kune.getI18N();
 
 	// Temporary new ws
-	final WsThemePresenter wstheme = kune.getInstance(WsThemePresenter.class);
 	final WorkspaceSkeleton ws = kune.getInstance(WorkspaceSkeleton.class);
 
-	wstheme.setTheme(WsTheme.def);
 	ws.show();
 	ws.getEntityWorkspace().getContentTopBar().add(new Label("Sorry, kune workspace under heavy refactorization"));
 

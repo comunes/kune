@@ -44,6 +44,7 @@ public class WorkspaceManager {
 	entityLicensePresenter.setLicense(state);
 	// Only for probes:
 	wsThemePresenter.setVisible(true);
+	wsThemePresenter.setTheme(new WsTheme(group.getWorkspaceTheme()));
     }
 
     public void setTheme(final WsTheme theme) {

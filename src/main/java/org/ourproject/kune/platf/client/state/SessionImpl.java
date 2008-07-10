@@ -26,8 +26,12 @@ import java.util.List;
 import org.ourproject.kune.platf.client.dto.I18nCountryDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageSimpleDTO;
+import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
+
+import com.calclab.suco.client.signal.Signal;
+import com.calclab.suco.client.signal.Slot;
 
 /**
  * RESPONSABILITIES: - Store the user's application state - Generates URLable's
@@ -38,152 +42,123 @@ import org.ourproject.kune.platf.client.dto.StateDTO;
  */
 public class SessionImpl implements Session {
     private String userHash;
-    private List<LicenseDTO> licenses;
-    private List<I18nLanguageSimpleDTO> languages;
-    private List<I18nCountryDTO> countries;
     private Object[][] languagesArray;
     private Object[][] countriesArray;
-    private String[] timezones;
     private Object[][] timezonesArray;
     private StateDTO currentState;
-    private String[] wsThemes;
-    private String defaultWsTheme;
     private I18nLanguageDTO currentLanguage;
+    private InitDataDTO initData;
+    private final Signal<InitDataDTO> onInitDataReceived;
 
     public SessionImpl(final String userHash, final I18nLanguageDTO initialLanguage) {
-        this.userHash = userHash;
-        currentLanguage = initialLanguage;
-        licenses = null;
-        languages = null;
-        languagesArray = null;
-        countries = null;
+	this.userHash = userHash;
+	currentLanguage = initialLanguage;
+	languagesArray = null;
+	this.onInitDataReceived = new Signal<InitDataDTO>("initDataReceived");
     }
 
     public List<I18nCountryDTO> getCountries() {
-        return countries;
+	return initData.getCountries();
     }
 
     public Object[][] getCountriesArray() {
-        if (countriesArray == null) {
-            countriesArray = mapCountries();
-        }
-        return countriesArray;
+	if (countriesArray == null) {
+	    countriesArray = mapCountries();
+	}
+	return countriesArray;
     }
 
     public I18nLanguageDTO getCurrentLanguage() {
-        return currentLanguage;
+	return currentLanguage;
     }
 
     public StateDTO getCurrentState() {
-        return currentState;
-    }
-
-    public String getDefaultWsTheme() {
-        return defaultWsTheme;
+	return currentState;
     }
 
     public List<I18nLanguageSimpleDTO> getLanguages() {
-        return languages;
+	return initData.getLanguages();
     }
 
     public Object[][] getLanguagesArray() {
-        if (languagesArray == null) {
-            languagesArray = mapLangs();
-        }
-        return languagesArray;
+	if (languagesArray == null) {
+	    languagesArray = mapLangs();
+	}
+	return languagesArray;
     }
 
     public List<LicenseDTO> getLicenses() {
-        return licenses;
+	return initData.getLicenses();
     }
 
     public Object[][] getTimezones() {
-        if (timezonesArray == null) {
-            mapTimezones();
-        }
-        return timezonesArray;
+	if (timezonesArray == null) {
+	    mapTimezones();
+	}
+	return timezonesArray;
     }
 
     public String getUserHash() {
-        return userHash;
-    }
-
-    public String[] getWsThemes() {
-        return wsThemes;
+	return userHash;
     }
 
     public boolean isLogged() {
-        return userHash != null;
+	return userHash != null;
     }
 
-    public void setCountries(final List<I18nCountryDTO> countries) {
-        this.countries = countries;
+    public void onInitDataReceived(final Slot<InitDataDTO> slot) {
+	onInitDataReceived.add(slot);
     }
 
     public void setCurrent(final StateDTO currentState) {
-        this.currentState = currentState;
+	this.currentState = currentState;
     }
 
     public void setCurrentLanguage(final I18nLanguageDTO currentLanguage) {
-        this.currentLanguage = currentLanguage;
+	this.currentLanguage = currentLanguage;
     }
 
     public void setCurrentState(final StateDTO currentState) {
-        this.currentState = currentState;
+	this.currentState = currentState;
     }
 
-    public void setDefaultWsTheme(final String defaultWsTheme) {
-        this.defaultWsTheme = defaultWsTheme;
-    }
-
-    public void setLanguages(final List<I18nLanguageSimpleDTO> languages) {
-        this.languages = languages;
-    }
-
-    public void setLicenses(final List<LicenseDTO> licenses) {
-        this.licenses = licenses;
-    }
-
-    public void setTimezones(final String[] timezones) {
-        this.timezones = timezones;
+    public void setInitData(final InitDataDTO initData) {
+	this.initData = initData;
+	onInitDataReceived.fire(initData);
     }
 
     public void setUserHash(final String userHash) {
-        this.userHash = userHash;
-    }
-
-    public void setWsThemes(final String[] wsThemes) {
-        this.wsThemes = wsThemes;
+	this.userHash = userHash;
     }
 
     private Object[][] mapCountries() {
-        Object[][] objs = new Object[countries.size()][1];
-        int i = 0;
-        for (Iterator<I18nCountryDTO> iterator = countries.iterator(); iterator.hasNext();) {
-            I18nCountryDTO country = iterator.next();
-            Object[] obj = new Object[] { country.getCode(), country.getEnglishName() };
-            objs[i++] = obj;
-        }
-        return objs;
+	final Object[][] objs = new Object[getCountries().size()][1];
+	int i = 0;
+	for (final Iterator<I18nCountryDTO> iterator = getCountries().iterator(); iterator.hasNext();) {
+	    final I18nCountryDTO country = iterator.next();
+	    final Object[] obj = new Object[] { country.getCode(), country.getEnglishName() };
+	    objs[i++] = obj;
+	}
+	return objs;
     }
 
     private Object[][] mapLangs() {
-        Object[][] objs = new Object[languages.size()][1];
-        int i = 0;
-        for (Iterator<I18nLanguageSimpleDTO> iterator = languages.iterator(); iterator.hasNext();) {
-            I18nLanguageSimpleDTO language = iterator.next();
-            Object[] obj = new Object[] { language.getCode(), language.getEnglishName() };
-            objs[i++] = obj;
-        }
-        return objs;
+	final Object[][] objs = new Object[getLanguages().size()][1];
+	int i = 0;
+	for (final Iterator<I18nLanguageSimpleDTO> iterator = getLanguages().iterator(); iterator.hasNext();) {
+	    final I18nLanguageSimpleDTO language = iterator.next();
+	    final Object[] obj = new Object[] { language.getCode(), language.getEnglishName() };
+	    objs[i++] = obj;
+	}
+	return objs;
     }
 
     private void mapTimezones() {
-        timezonesArray = new Object[timezones.length][1];
-        for (int i = 0; i < timezones.length; i++) {
-            Object[] obj = new Object[] { timezones[i] };
-            timezonesArray[i] = obj;
-        }
+	timezonesArray = new Object[getTimezones().length][1];
+	for (int i = 0; i < getTimezones().length; i++) {
+	    final Object[] obj = new Object[] { getTimezones()[i] };
+	    timezonesArray[i] = obj;
+	}
     }
 
 }
