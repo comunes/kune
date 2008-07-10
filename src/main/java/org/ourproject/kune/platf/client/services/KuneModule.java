@@ -26,6 +26,9 @@ import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.SiteBarPresenter;
 import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitelogo.SiteLogo;
 import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitelogo.SiteLogoPanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitelogo.SiteLogoPresenter;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitesearch.SiteSearch;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitesearch.SiteSearchPanel;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitesearch.SiteSearchPresenter;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
@@ -134,6 +137,16 @@ public class KuneModule implements Module {
 	    }
 	}, SingletonScope.class);
 
+	builder.registerProvider(SiteSearch.class, new Provider<SiteSearch>() {
+	    public SiteSearch get() {
+		final SiteSearchPresenter presenter = new SiteSearchPresenter();
+		final SiteSearchPanel panel = new SiteSearchPanel(presenter, ws, i18n);
+		presenter.init(panel);
+		return presenter;
+	    }
+	}, SingletonScope.class);
+
+	builder.getInstance(SiteSearch.class);
 	builder.getInstance(SiteLogo.class);
 
 	builder.registerProvider(EntityLogo.class, new Provider<EntityLogo>() {

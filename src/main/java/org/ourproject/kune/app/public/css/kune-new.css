@@ -2,8 +2,53 @@
     background: #FFF none repeat scroll 0% 50%;
 }
 
+.k-sitebar .kune-IconHyperlink {
+  white-space: nowrap;
+}
+
+.k-sitebar .kune-IconHyperlink a:link {
+  cursor: pointer;
+  text-decoration: underline;
+  color: #B3B3B3;
+}
+
+.k-sitebar .kune-IconHyperlink a:hover {
+  text-decoration: underline;
+}
+
+.k-sitebar .kune-IconHyperlink a:visited {
+  color: #B3B3B3;
+}
+
 .k-sitebar {
-    white-space: nowrap;
+  margin-right: 10px;
+  height: 16px;
+}
+
+.k-sitebar .gwt-TextBox {
+  border: 1px solid #E4A374;
+  margin: 0 15px 0 3px;
+  padding-left: 3px;
+  color: #B3B3B3;
+}
+
+.k-sitebar .gwt-Hyperlink a {
+  white-space: nowrap;
+  color: #B3B3B3;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.k-sitebar .gwt-PushButton {
+  cursor: pointer;
+}
+
+.k-sitebar-LabelLink {
+  white-space: nowrap;
+  color: #B3B3B3;
+  margin-left: 3px;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .k-entity-summary {
