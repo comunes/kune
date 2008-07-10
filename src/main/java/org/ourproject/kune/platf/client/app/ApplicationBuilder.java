@@ -38,9 +38,9 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.WorkspaceClientModule;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.sitebar.Site;
-import org.ourproject.kune.workspace.client.ui.newtmp.WorkspaceManager;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
+import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
 
 import com.calclab.emiteuimodule.client.EmiteUIModule;
 import com.google.gwt.user.client.Window;
@@ -67,26 +67,12 @@ public class ApplicationBuilder {
 	final I18nUITranslationService i18n = kune.getI18N();
 
 	// Temporary new ws
-	final WorkspaceManager wmanager = kune.getInstance(WorkspaceManager.class);
+	final WsThemePresenter wstheme = kune.getInstance(WsThemePresenter.class);
 	final WorkspaceSkeleton ws = kune.getInstance(WorkspaceSkeleton.class);
-	// final com.gwtext.client.widgets.Window dialog = new
-	// com.gwtext.client.widgets.Window("gwt-ext new ws 3", 640,
-	// 480);
-	// final Panel panel = new Panel();
-	// panel.setPaddings(5);
-	// panel.setLayout(new FitLayout());
-	// panel.add(((WorkspaceSkeleton) wsmanager.getView()).getPanel());
-	// new Viewport(panel);
-	// wsnew.getPanel().setWidth(640);
-	// wsnew.getPanel().setHeight(460);
-	// panel.setWidth(640);
-	// panel.setHeight(460);
-	// dialog.add(panel);
-	// dialog.show();
-	ws.setTheme(WsTheme.def);
+
+	wstheme.setTheme(WsTheme.def);
 	ws.show();
 	ws.getEntityWorkspace().getContentTopBar().add(new Label("Sorry, kune workspace under heavy refactorization"));
-	wmanager.setTheme(WsTheme.def);
 
 	// Testing providers:
 	platform.install(new PlatformClientModule(session, kune.getProvider(StateManager.class)));

@@ -47,39 +47,39 @@ public class ChatFactory {
     private static I18nTranslationService i18n;
 
     public static ChatContent createChatContent(final EmiteUIDialog emiteUIDialog, final I18nTranslationService i18n) {
-        ChatFactory.i18n = i18n;
-        WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
-        ChatContentPresenter presenter = new ChatContentPresenter(emiteUIDialog, panel);
-        return presenter;
+	ChatFactory.i18n = i18n;
+	final WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
+	final ChatContentPresenter presenter = new ChatContentPresenter(emiteUIDialog, panel);
+	return presenter;
     }
 
     public static ChatContext createChatContext() {
-        WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
-        ChatContextPresenter presenter = new ChatContextPresenter(panel);
-        return presenter;
+	final WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
+	final ChatContextPresenter presenter = new ChatContextPresenter(panel);
+	return presenter;
     }
 
     public static ChatInfo createChatInfo(final ChatRoomListener listener) {
-        ChatInfoPanel panel = new ChatInfoPanel(listener);
-        return panel;
+	final ChatInfoPanel panel = new ChatInfoPanel(listener);
+	return panel;
     }
 
     public static ChatRoomControl createChatRoomControlViewer(final ChatRoomListener listener) {
-        ChatRoomControlPanel panel = new ChatRoomControlPanel(listener, i18n);
-        ChatRoomControlPresenter presenter = new ChatRoomControlPresenter(panel);
-        return presenter;
+	final ChatRoomControlPanel panel = new ChatRoomControlPanel(listener, i18n);
+	final ChatRoomControlPresenter presenter = new ChatRoomControlPresenter(panel);
+	return presenter;
     }
 
     public static ChatRoom createChatRoomViewer(final ChatRoomListener listener) {
-        ChatRoomPanel panel = new ChatRoomPanel();
-        ChatRoomPresenter presenter = new ChatRoomPresenter(panel);
-        return presenter;
+	final ChatRoomPanel panel = new ChatRoomPanel();
+	final ChatRoomPresenter presenter = new ChatRoomPresenter(panel);
+	return presenter;
     }
 
     public static RoomsAdmin createRoomsAdmin() {
-        ContextItems contextItems = WorkspaceFactory.createContextItems();
-        RoomsAdminPresenter presenter = new RoomsAdminPresenter(contextItems, i18n);
-        return presenter;
+	final ContextItems contextItems = WorkspaceFactory.createContextItems();
+	final RoomsAdminPresenter presenter = new RoomsAdminPresenter(contextItems, i18n);
+	return presenter;
     }
 
 }

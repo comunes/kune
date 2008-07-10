@@ -14,7 +14,7 @@
 .k-EntityTextLogo {
     border: 2px solid #F2F2F2;
     height: 60px;
-    margin-bottom: 4px;
+    margin: 0 0 4px -1px;
     overflow: hidden;
     width: 468px;
 }

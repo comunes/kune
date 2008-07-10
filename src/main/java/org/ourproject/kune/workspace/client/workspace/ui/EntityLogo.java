@@ -12,6 +12,6 @@ public interface EntityLogo {
 
     public abstract void setPutYourLogoVisible(final boolean visible);
 
-    public abstract void setTheme(final WsTheme theme);
+    public abstract void setTheme(final WsTheme oldTheme, WsTheme newTheme);
 
 }

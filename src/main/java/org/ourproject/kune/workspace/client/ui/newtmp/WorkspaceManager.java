@@ -9,6 +9,8 @@ import org.ourproject.kune.workspace.client.ui.newtmp.title.EntitySubTitlePresen
 import org.ourproject.kune.workspace.client.ui.newtmp.title.EntityTitlePresenter;
 import org.ourproject.kune.workspace.client.workspace.ui.EntityLogo;
 
+import com.calclab.suco.client.signal.Slot2;
+
 public class WorkspaceManager {
 
     private final EntityLogo entityLogo;
@@ -23,8 +25,13 @@ public class WorkspaceManager {
 	this.entityLogo = entityLogo;
 	this.entityTitlePresenter = entityTitlePresenter;
 	this.entitySubTitlePresenter = entitySubTitlePresenter;
-	this.wsThemePresenter = wsThemePresenter;
 	this.entityLicensePresenter = entityLicensePresenter;
+	this.wsThemePresenter = wsThemePresenter;
+	wsThemePresenter.onThemeChanged(new Slot2<WsTheme, WsTheme>() {
+	    public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
+		entityLogo.setTheme(oldTheme, newTheme);
+	    }
+	});
     }
 
     public void setState(final StateDTO state) {
@@ -40,6 +47,5 @@ public class WorkspaceManager {
     }
 
     public void setTheme(final WsTheme theme) {
-	entityLogo.setTheme(theme);
     }
 }

@@ -106,8 +106,11 @@ public class EntityLogoPanel extends SimplePanel implements EntityLogo {
 	getEntityTextLogo().setPutYourLogoVisible(visible);
     }
 
-    public void setTheme(final WsTheme theme) {
-	getEntityTextLogo().addStyleDependentName(theme.toString());
+    public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
+	if (oldTheme != null) {
+	    getEntityTextLogo().removeStyleDependentName(oldTheme.toString());
+	}
+	getEntityTextLogo().addStyleDependentName(newTheme.toString());
     }
 
     private EntityTextLogo getEntityTextLogo() {

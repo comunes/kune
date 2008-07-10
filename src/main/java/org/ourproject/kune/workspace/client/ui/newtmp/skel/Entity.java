@@ -33,8 +33,11 @@ public class Entity extends DefaultBorderLayout {
 	return entityWorkspace;
     }
 
-    public void setTheme(final WsTheme theme) {
-	super.setCls("k-entity-" + theme);
-	entityWorkspace.setTheme(theme);
+    public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
+	if (oldTheme != null) {
+	    super.removeStyle("k-entity-" + oldTheme);
+	}
+	super.addStyle("k-entity-" + newTheme);
+	entityWorkspace.setTheme(oldTheme, newTheme);
     }
 }

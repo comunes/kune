@@ -47,8 +47,8 @@ public class WorkspaceSkeleton {
 	return entity.getEntitySummary().getSiteTraybar();
     }
 
-    public void setTheme(final WsTheme theme) {
-	entity.setTheme(theme);
+    public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
+	entity.setTheme(oldTheme, newTheme);
     }
 
     public void show() {
