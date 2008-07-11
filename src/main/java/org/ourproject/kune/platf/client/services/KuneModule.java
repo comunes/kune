@@ -172,7 +172,7 @@ public class KuneModule implements Module {
 	builder.registerProvider(WsThemePresenter.class, new Provider<WsThemePresenter>() {
 	    public WsThemePresenter get() {
 		final WsThemePresenter presenter = new WsThemePresenter(builder.getInstance(Session.class));
-		final WsThemePanel panel = new WsThemePanel(ws, presenter);
+		final WsThemePanel panel = new WsThemePanel(ws, presenter, i18n);
 		presenter.init(panel);
 		return presenter;
 	    }

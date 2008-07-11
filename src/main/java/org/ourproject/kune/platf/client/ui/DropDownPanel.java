@@ -44,11 +44,11 @@ public class DropDownPanel extends Composite implements ClickListener {
     private final SimplePanel contentPanel;
     private final Images img;
     private final Image arrowImage;
-    private final RoundedBorderDecorator outerBorder;
+    private final RoundedPanel outerBorder;
 
     public DropDownPanel() {
 	vp = new VerticalPanel();
-	outerBorder = new RoundedBorderDecorator(vp, RoundedBorderDecorator.ALL);
+	outerBorder = new RoundedPanel(vp, RoundedPanel.ALL);
 	titleHP = new HorizontalPanel();
 	arrowImage = new Image();
 	titleLabel = new Label();
@@ -142,14 +142,14 @@ public class DropDownPanel extends Composite implements ClickListener {
     public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
 	if (oldTheme != null) {
 	    final String oldThemeS = oldTheme.toString();
-	    outerBorder.removeStyleDependentName(oldThemeS);
+	    // outerBorder.removeStyleDependentName(oldThemeS);
 	    vp.removeStyleDependentName(oldThemeS);
 	    titleHP.removeStyleDependentName(oldThemeS);
 	    contentPanel.removeStyleDependentName(oldThemeS);
 	}
 	final String newThemeS = newTheme.toString();
 	outerBorder.setCornerStyleName("k-dropdownouter-" + newThemeS);
-	outerBorder.addStyleDependentName(newThemeS);
+	// outerBorder.addStyleDependentName(newThemeS);
 	vp.addStyleDependentName(newThemeS);
 	titleHP.addStyleDependentName(newThemeS);
 	contentPanel.addStyleDependentName(newThemeS);
