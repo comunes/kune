@@ -42,7 +42,6 @@ import org.ourproject.kune.workspace.client.actions.OnlyCheckUserSessionAction;
 import org.ourproject.kune.workspace.client.actions.RateContentAction;
 import org.ourproject.kune.workspace.client.actions.RecalculateWorkspaceAction;
 import org.ourproject.kune.workspace.client.actions.ReloadContextAction;
-import org.ourproject.kune.workspace.client.actions.ShowSearcherAction;
 import org.ourproject.kune.workspace.client.actions.StopAction;
 import org.ourproject.kune.workspace.client.actions.UserLoginAction;
 import org.ourproject.kune.workspace.client.actions.UserLogoutAction;
@@ -114,7 +113,6 @@ public class WorkspaceClientModule implements ClientModule {
 	register.addAction(WorkspaceEvents.ADD_MEMBER_GROUPLIVESEARCH, new AddGroupLiveSearchAction(workspace));
 	register.addAction(WorkspaceEvents.ADD_USERLIVESEARCH, new AddUserLiveSearchAction(workspace));
 	register.addAction(WorkspaceEvents.SHOW_TRANSLATOR, new ShowTranslatorAction(session, workspace, i18n));
-	register.addAction(WorkspaceEvents.SHOW_SEARCHER, new ShowSearcherAction());
 	register.addAction(WorkspaceEvents.DO_TRANSLATION, new DoTranslationAction(session, i18n));
 	register.addAction(WorkspaceEvents.GET_LEXICON, new GetLexiconAction(i18n));
 	register.addAction(WorkspaceEvents.USER_LOGIN, new UserLoginAction());

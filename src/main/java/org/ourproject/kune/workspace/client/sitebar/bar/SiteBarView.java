@@ -28,58 +28,56 @@ import com.google.gwt.user.client.ui.Image;
 
 public interface SiteBarView extends View {
 
-    void showLoggedUserName(String name, String homePage);
-
-    void clearUserName();
-
-    void setLogo(Image logo);
-
-    void showProgress(String text);
-
-    void hideProgress();
-
-    void clearSearchText();
-
-    void setSearchText(String text);
-
-    void showLoginDialog();
-
-    void setLogoutLinkVisible(boolean visible);
-
     public void hideLoginDialog();
-
-    void restoreLoginLink();
-
-    void showNewGroupDialog();
-
-    void hideNewGroupDialog();
-
-    void setDefaultTextSearch();
-
-    void setGroupsIsMember(List<LinkDTO> groupsIsAdmin, List<LinkDTO> groupsIsCollab);
-
-    void resetOptionsSubmenu();
-
-    void setTextSearchSmall();
-
-    void setTextSearchBig();
-
-    void showSearchPanel(String termToSearch);
 
     void centerLoginDialog();
 
     void centerNewGroupDialog();
 
-    void showAlertMessage(String message);
+    void clearSearchText();
+
+    void clearUserName();
+
+    void hideNewGroupDialog();
+
+    void hideProgress();
 
     void mask();
 
     void mask(String message);
 
-    void unMask();
+    void resetOptionsSubmenu();
+
+    void restoreLoginLink();
 
     void setContentGotoPublicUrl(String publicUrl);
 
     void setContentPublic(boolean visible);
+
+    void setDefaultTextSearch();
+
+    void setGroupsIsMember(List<LinkDTO> groupsIsAdmin, List<LinkDTO> groupsIsCollab);
+
+    void setLogo(Image logo);
+
+    void setLogoutLinkVisible(boolean visible);
+
+    void setSearchText(String text);
+
+    void setTextSearchBig();
+
+    void setTextSearchSmall();
+
+    void showAlertMessage(String message);
+
+    void showLoggedUserName(String name, String homePage);
+
+    void showLoginDialog();
+
+    void showNewGroupDialog();
+
+    void showProgress(String text);
+
+    void unMask();
 
 }

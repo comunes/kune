@@ -33,10 +33,6 @@ import org.ourproject.kune.workspace.client.newgroup.NewGroup;
 import org.ourproject.kune.workspace.client.newgroup.NewGroupListener;
 import org.ourproject.kune.workspace.client.newgroup.NewGroupPresenter;
 import org.ourproject.kune.workspace.client.newgroup.ui.NewGroupPanel;
-import org.ourproject.kune.workspace.client.search.SearchSite;
-import org.ourproject.kune.workspace.client.search.SearchSitePresenter;
-import org.ourproject.kune.workspace.client.search.SearchSiteView;
-import org.ourproject.kune.workspace.client.search.ui.SearchSitePanel;
 import org.ourproject.kune.workspace.client.sitebar.bar.SiteBar;
 import org.ourproject.kune.workspace.client.sitebar.bar.SiteBarListener;
 import org.ourproject.kune.workspace.client.sitebar.bar.SiteBarPanel;
@@ -54,75 +50,64 @@ public class SiteBarFactory {
     private static SiteMessage siteMessage;
     private static Login login;
     private static NewGroup newGroup;
-    private static SearchSite search;
     private static Session session;
     private static I18nTranslationService i18n;
 
     public static LicenseChoose createLicenseChoose() {
-        List<LicenseDTO> licensesList = session.getLicenses();
-        List<LicenseDTO> licensesNonCCList = new ArrayList<LicenseDTO>();
+	final List<LicenseDTO> licensesList = session.getLicenses();
+	final List<LicenseDTO> licensesNonCCList = new ArrayList<LicenseDTO>();
 
-        for (Iterator<LicenseDTO> iterator = licensesList.iterator(); iterator.hasNext();) {
-            LicenseDTO license = iterator.next();
-            if (!license.isCC()) {
-                licensesNonCCList.add(license);
-            }
-        }
-        LicenseChoosePresenter presenter = new LicenseChoosePresenter();
-        LicenseChoosePanel view = new LicenseChoosePanel(licensesNonCCList, presenter, i18n);
-        presenter.init(view, licensesList, licensesNonCCList);
-        return presenter;
+	for (final Iterator<LicenseDTO> iterator = licensesList.iterator(); iterator.hasNext();) {
+	    final LicenseDTO license = iterator.next();
+	    if (!license.isCC()) {
+		licensesNonCCList.add(license);
+	    }
+	}
+	final LicenseChoosePresenter presenter = new LicenseChoosePresenter();
+	final LicenseChoosePanel view = new LicenseChoosePanel(licensesNonCCList, presenter, i18n);
+	presenter.init(view, licensesList, licensesNonCCList);
+	return presenter;
     }
 
     public static SiteBar createSiteBar(final SiteBarListener listener, final Session session,
-            final I18nTranslationService i18n) {
-        SiteBarFactory.session = session;
-        SiteBarFactory.i18n = i18n;
-        SiteBarPresenter siteBarPresenter = new SiteBarPresenter(listener, session, i18n);
-        SiteBarPanel siteBarView = new SiteBarPanel(siteBarPresenter, i18n);
-        siteBarPresenter.init(siteBarView);
-        Site.sitebar = siteBarPresenter;
-        return siteBarPresenter;
+	    final I18nTranslationService i18n) {
+	SiteBarFactory.session = session;
+	SiteBarFactory.i18n = i18n;
+	final SiteBarPresenter siteBarPresenter = new SiteBarPresenter(listener, session, i18n);
+	final SiteBarPanel siteBarView = new SiteBarPanel(siteBarPresenter, i18n);
+	siteBarPresenter.init(siteBarView);
+	Site.sitebar = siteBarPresenter;
+	return siteBarPresenter;
     }
 
     public static Login getLoginForm(final LoginListener listener) {
-        if (login == null) {
-            LoginPresenter presenter = new LoginPresenter(session, listener, i18n);
-            LoginPanel view = new LoginPanel(presenter, i18n);
-            presenter.init(view);
-            login = presenter;
-        }
-        return login;
+	if (login == null) {
+	    final LoginPresenter presenter = new LoginPresenter(session, listener, i18n);
+	    final LoginPanel view = new LoginPanel(presenter, i18n);
+	    presenter.init(view);
+	    login = presenter;
+	}
+	return login;
     }
 
     public static NewGroup getNewGroupForm(final NewGroupListener listener) {
-        if (newGroup == null) {
-            NewGroupPresenter presenter = new NewGroupPresenter(listener, i18n);
-            NewGroupPanel view = new NewGroupPanel(presenter, i18n);
-            presenter.init(view);
-            newGroup = presenter;
-        }
-        return newGroup;
-    }
-
-    public static SearchSite getSearch() {
-        if (search == null) {
-            SearchSitePresenter presenter = new SearchSitePresenter();
-            SearchSiteView view = new SearchSitePanel(presenter, i18n);
-            presenter.init(view);
-            search = presenter;
-        }
-        return search;
+	if (newGroup == null) {
+	    final NewGroupPresenter presenter = new NewGroupPresenter(listener, i18n);
+	    final NewGroupPanel view = new NewGroupPanel(presenter, i18n);
+	    presenter.init(view);
+	    newGroup = presenter;
+	}
+	return newGroup;
     }
 
     public static SiteMessage getSiteMessage() {
-        if (siteMessage == null) {
-            SiteMessagePresenter siteMessagePresenter = new SiteMessagePresenter();
-            SiteMessageView siteMessageView = new SiteMessagePanel(siteMessagePresenter, true);
-            siteMessagePresenter.init(siteMessageView);
-            siteMessage = siteMessagePresenter;
-            Site.siteUserMessage = siteMessagePresenter;
-        }
-        return siteMessage;
+	if (siteMessage == null) {
+	    final SiteMessagePresenter siteMessagePresenter = new SiteMessagePresenter();
+	    final SiteMessageView siteMessageView = new SiteMessagePanel(siteMessagePresenter, true);
+	    siteMessagePresenter.init(siteMessageView);
+	    siteMessage = siteMessagePresenter;
+	    Site.siteUserMessage = siteMessagePresenter;
+	}
+	return siteMessage;
     }
 }

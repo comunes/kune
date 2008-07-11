@@ -33,7 +33,6 @@ public class WorkspaceUIComponents {
     private ContentSubTitleComponent contentSubTitle;
     private ContentBottomToolBarComponent contentBottomToolBar;
     private ThemeMenuComponent themeMenu;
-    private TagsComponent tags;
     private ContentToolBarComponent contentToolBar;
     private GroupLiveSearchComponent groupLiveSearch;
     private I18nTranslatorComponent i18nTranslatorSearch;
@@ -42,95 +41,88 @@ public class WorkspaceUIComponents {
     public WorkspaceUIComponents(final WorkspacePresenter presenter) {
     }
 
-    public LicenseComponent getLicenseComponent() {
-        if (license == null) {
-            license = WorkspaceFactory.createLicenseComponent();
-        }
-        return license;
-    }
-
-    public ContentTitleComponent getContentTitleComponent() {
-        if (contentTitle == null) {
-            contentTitle = WorkspaceFactory.createContentTitleComponent();
-        }
-        return contentTitle;
+    public ContentBottomToolBarComponent getContentBottomToolBarComponent() {
+	if (contentBottomToolBar == null) {
+	    contentBottomToolBar = WorkspaceFactory.createContentBottomToolBarComponent();
+	}
+	return contentBottomToolBar;
     }
 
     public ContentSubTitleComponent getContentSubTitleComponent() {
-        if (contentSubTitle == null) {
-            contentSubTitle = WorkspaceFactory.createContentSubTitleComponent();
-        }
-        return contentSubTitle;
+	if (contentSubTitle == null) {
+	    contentSubTitle = WorkspaceFactory.createContentSubTitleComponent();
+	}
+	return contentSubTitle;
     }
 
-    public GroupMembersComponent getGroupMembersComponent() {
-        if (groupMembers == null) {
-            groupMembers = WorkspaceFactory.createGroupMembersComponent();
-        }
-        return groupMembers;
-    }
-
-    public GroupSummaryComponent getGroupSummaryComponent() {
-        if (groupSummary == null) {
-            groupSummary = WorkspaceFactory.createGroupSummaryComponent();
-        }
-        return groupSummary;
-    }
-
-    public ParticipationComponent getParticipationComponent() {
-        if (participatesInGroups == null) {
-            participatesInGroups = WorkspaceFactory.createParticipationComponent();
-        }
-        return participatesInGroups;
-    }
-
-    public ThemeMenuComponent getThemeMenuComponent() {
-        if (themeMenu == null) {
-            themeMenu = WorkspaceFactory.createThemeMenuComponent();
-        }
-        return themeMenu;
-    }
-
-    public TagsComponent getTagsComponent() {
-        if (tags == null) {
-            tags = WorkspaceFactory.createTagsComponent();
-        }
-        return tags;
-    }
-
-    public ContentBottomToolBarComponent getContentBottomToolBarComponent() {
-        if (contentBottomToolBar == null) {
-            contentBottomToolBar = WorkspaceFactory.createContentBottomToolBarComponent();
-        }
-        return contentBottomToolBar;
+    public ContentTitleComponent getContentTitleComponent() {
+	if (contentTitle == null) {
+	    contentTitle = WorkspaceFactory.createContentTitleComponent();
+	}
+	return contentTitle;
     }
 
     public ContentToolBarComponent getContentToolBarComponent() {
-        if (contentToolBar == null) {
-            contentToolBar = WorkspaceFactory.createContentToolBarComponent();
-        }
-        return contentToolBar;
+	if (contentToolBar == null) {
+	    contentToolBar = WorkspaceFactory.createContentToolBarComponent();
+	}
+	return contentToolBar;
     }
 
     public GroupLiveSearchComponent getGroupLiveSearchComponent() {
-        if (groupLiveSearch == null) {
-            groupLiveSearch = WorkspaceFactory.createGroupLiveSearchComponent();
-        }
-        return groupLiveSearch;
+	if (groupLiveSearch == null) {
+	    groupLiveSearch = WorkspaceFactory.createGroupLiveSearchComponent();
+	}
+	return groupLiveSearch;
     }
 
-    public UserLiveSearchComponent getUserLiveSearchComponent() {
-        if (userLiveSearch == null) {
-            userLiveSearch = WorkspaceFactory.createUserLiveSearchComponent();
-        }
-        return userLiveSearch;
+    public GroupMembersComponent getGroupMembersComponent() {
+	if (groupMembers == null) {
+	    groupMembers = WorkspaceFactory.createGroupMembersComponent();
+	}
+	return groupMembers;
+    }
+
+    public GroupSummaryComponent getGroupSummaryComponent() {
+	if (groupSummary == null) {
+	    groupSummary = WorkspaceFactory.createGroupSummaryComponent();
+	}
+	return groupSummary;
     }
 
     public I18nTranslatorComponent getI18nTranslatorComponent() {
-        if (i18nTranslatorSearch == null) {
-            i18nTranslatorSearch = WorkspaceFactory.createI18nTranslatorComponent();
-        }
-        return i18nTranslatorSearch;
+	if (i18nTranslatorSearch == null) {
+	    i18nTranslatorSearch = WorkspaceFactory.createI18nTranslatorComponent();
+	}
+	return i18nTranslatorSearch;
+    }
+
+    public LicenseComponent getLicenseComponent() {
+	if (license == null) {
+	    license = WorkspaceFactory.createLicenseComponent();
+	}
+	return license;
+    }
+
+    public ParticipationComponent getParticipationComponent() {
+	if (participatesInGroups == null) {
+	    participatesInGroups = WorkspaceFactory.createParticipationComponent();
+	}
+	return participatesInGroups;
+    }
+
+    public ThemeMenuComponent getThemeMenuComponent() {
+	if (themeMenu == null) {
+	    themeMenu = WorkspaceFactory.createThemeMenuComponent();
+	}
+	return themeMenu;
+    }
+
+    public UserLiveSearchComponent getUserLiveSearchComponent() {
+	if (userLiveSearch == null) {
+	    userLiveSearch = WorkspaceFactory.createUserLiveSearchComponent();
+	}
+	return userLiveSearch;
     }
 
 }

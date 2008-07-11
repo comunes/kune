@@ -67,7 +67,7 @@ public class DocumentServerTool implements ServerTool {
 	configurationManager.persist(config);
 	final String longName = group.getLongName();
 	final String publicDesc = group.getPublicDesc();
-	final Content descriptor = contentManager.createContent(i18n.t("About") + longName, publicDesc == null ? ""
+	final Content descriptor = contentManager.createContent(i18n.t("About [%s]", longName), publicDesc == null ? ""
 		: publicDesc, user, container);
 	descriptor.addAuthor(user);
 	descriptor.setLanguage(user.getLanguage());

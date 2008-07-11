@@ -249,3 +249,38 @@
 .ytb-spacer {
     width: 2px;
 }
+
+/* Drop down */
+
+.k-dropdownouter {
+}
+
+.k-dropdownouter-def {
+    background-color: #87501E;
+}
+
+.k-dropdownouter-green {
+	   background-color: #00D400;
+}
+
+.k-dropdowninner {
+  margin: 0 3px 1px 3px;
+  background: green;
+  background-color: #FFF;
+  padding: 3px;
+}
+
+.k-dropdownlabel {
+  color: #FFF;
+  cursor: pointer;
+}
+
+.k-dropdownlabel .gwt-Label {
+  margin: 0 5px 0 0;
+  width: 100%;
+}
+
+.k-dropdownlabel img {
+  margin: 0 3px 0 1px;
+}
+

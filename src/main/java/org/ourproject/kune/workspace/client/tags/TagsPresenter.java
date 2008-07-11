@@ -23,44 +23,50 @@ package org.ourproject.kune.workspace.client.tags;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
-import org.ourproject.kune.platf.client.dto.ShowSearcherActionParams;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.TagResultDTO;
 import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.workspace.client.WorkspaceEvents;
-import org.ourproject.kune.workspace.client.search.SearchSiteView;
-import org.ourproject.kune.workspace.client.workspace.TagsComponent;
+import org.ourproject.kune.workspace.client.search.SiteSearcher;
+import org.ourproject.kune.workspace.client.search.SiteSearcherType;
+import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
+import org.ourproject.kune.workspace.client.workspace.Tags;
 
-public class TagsPresenter implements TagsComponent {
+import com.calclab.suco.client.container.Provider;
+
+public class TagsPresenter implements Tags {
 
     private TagsView view;
-    private final Session session;
+    private final Provider<SiteSearcher> searcherProvider;
+    private final Provider<Session> sessionProvider;
 
-    public TagsPresenter(final Session session) {
-        this.session = session;
-    }
-
-    public void setState(final StateDTO state) {
-        view.setTags(state.getGroupTags());
-    }
-
-    public void setGroupTags(final List<TagResultDTO> groupTags) {
-        view.setTags(groupTags);
-    }
-
-    public void init(final TagsView view) {
-        this.view = view;
-    }
-
-    public View getView() {
-        return view;
+    public TagsPresenter(final Provider<Session> sessionProvider, final Provider<SiteSearcher> searcherProvider) {
+	this.sessionProvider = sessionProvider;
+	this.searcherProvider = searcherProvider;
     }
 
     public void doSearchTag(final String name) {
-        DefaultDispatcher.getInstance().fire(
-                WorkspaceEvents.SHOW_SEARCHER,
-                new ShowSearcherActionParams("group:" + session.getCurrentState().getGroup().getShortName() + " tag:"
-                        + name, SearchSiteView.CONTENT_SEARCH));
+	searcherProvider.get().doSearchOfType(
+		"group:" + sessionProvider.get().getCurrentState().getGroup().getShortName() + " tag:" + name,
+		SiteSearcherType.content);
+    }
+
+    public View getView() {
+	return view;
+    }
+
+    public void init(final TagsView view) {
+	this.view = view;
+    }
+
+    public void setGroupTags(final List<TagResultDTO> groupTags) {
+	view.setTags(groupTags);
+    }
+
+    public void setState(final StateDTO state) {
+	view.setTags(state.getGroupTags());
+    }
+
+    public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
+	view.setTheme(oldTheme, newTheme);
     }
 }

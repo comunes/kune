@@ -29,6 +29,7 @@ import org.ourproject.kune.platf.client.ui.DropDownPanel;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.workspace.client.tags.TagsPresenter;
 import org.ourproject.kune.workspace.client.tags.TagsView;
+import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -43,43 +44,44 @@ public class TagsPanel extends DropDownPanel implements TagsView {
     private final Label noTagsLabel;
     private final I18nTranslationService i18n;
 
-    public TagsPanel(final TagsPresenter presenter, final I18nTranslationService i18n) {
-        super(i18n.t("Tags"), true);
-        this.i18n = i18n;
-        setHeaderTitle(i18n.t("Keywords or terms associated with this group"));
-        this.presenter = presenter;
-        addStyleName("kune-Margin-Medium-t");
-        flowPanel = new FlowPanel();
-        VerticalPanel vp = new VerticalPanel();
-        vp.add(flowPanel);
-        vp.setWidth("100%");
-        vp.setCellWidth(flowPanel, "100%");
-        super.setContent(vp);
-        noTagsLabel = new Label(i18n.t("The contents of this group don't have any tag"));
+    public TagsPanel(final TagsPresenter presenter, final I18nTranslationService i18n, final WorkspaceSkeleton ws) {
+	super(i18n.t("Tags"), true);
+	this.i18n = i18n;
+	setHeaderTitle(i18n.t("Keywords or terms associated with this group"));
+	this.presenter = presenter;
+	addStyleName("kune-Margin-Medium-t");
+	flowPanel = new FlowPanel();
+	final VerticalPanel vp = new VerticalPanel();
+	vp.add(flowPanel);
+	vp.setWidth("100%");
+	vp.setCellWidth(flowPanel, "100%");
+	super.setContent(vp);
+	noTagsLabel = new Label(i18n.t("The contents of this group don't have any tag"));
+	ws.getEntitySummary().addInSummary(this);
     }
 
     public void setTags(final List<TagResultDTO> groupTags) {
-        flowPanel.clear();
-        if (groupTags.size() == 0) {
-            flowPanel.add(noTagsLabel);
-        } else {
-            for (Iterator<TagResultDTO> iterator = groupTags.iterator(); iterator.hasNext();) {
-                final TagResultDTO tagResult = iterator.next();
-                Label label = new Label(tagResult.getName());
-                // i18n pluralization
-                if (tagResult.getCount().intValue() > 1) {
-                    KuneUiUtils.setQuickTip(label, i18n.t("[%d] items with this tag", tagResult.getCount()));
-                } else {
-                    KuneUiUtils.setQuickTip(label, i18n.t("[%d] item with this tag", tagResult.getCount()));
-                }
-                label.addClickListener(new ClickListener() {
-                    public void onClick(final Widget sender) {
-                        presenter.doSearchTag(tagResult.getName());
-                    }
-                });
-                label.addStyleName("kune-TagsPanel-tag");
-                flowPanel.add(label);
-            }
-        }
+	flowPanel.clear();
+	if (groupTags.size() == 0) {
+	    flowPanel.add(noTagsLabel);
+	} else {
+	    for (final Iterator<TagResultDTO> iterator = groupTags.iterator(); iterator.hasNext();) {
+		final TagResultDTO tagResult = iterator.next();
+		final Label label = new Label(tagResult.getName());
+		// i18n pluralization
+		if (tagResult.getCount().intValue() > 1) {
+		    KuneUiUtils.setQuickTip(label, i18n.t("[%d] items with this tag", tagResult.getCount()));
+		} else {
+		    KuneUiUtils.setQuickTip(label, i18n.t("[%d] item with this tag", tagResult.getCount()));
+		}
+		label.addClickListener(new ClickListener() {
+		    public void onClick(final Widget sender) {
+			presenter.doSearchTag(tagResult.getName());
+		    }
+		});
+		label.addStyleName("kune-TagsPanel-tag");
+		flowPanel.add(label);
+	    }
+	}
     }
 }

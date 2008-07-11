@@ -230,7 +230,6 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	setBottom(components.getLicenseComponent().getView());
 	setGroupMembers(components.getGroupMembersComponent().getView());
 	setParticipation(components.getParticipationComponent().getView());
-	setTags(components.getTagsComponent().getView());
 	setSummary(components.getGroupSummaryComponent().getView());
 	addBottomIconComponent(components.getThemeMenuComponent().getView());
     }
@@ -354,7 +353,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     private void AddDropDown(final DropDownPanel panel, final String color) {
 	groupDropDownsVP.add(panel);
 	panel.setWidth("145px");
-	panel.setColor(color);
+	// panel.setColor(color);
     }
 
     private void adjustSizeContentSP() {

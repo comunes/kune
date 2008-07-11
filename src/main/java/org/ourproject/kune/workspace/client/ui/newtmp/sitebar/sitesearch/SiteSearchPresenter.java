@@ -1,16 +1,21 @@
 package org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitesearch;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.workspace.client.search.SiteSearcher;
+
+import com.calclab.suco.client.container.Provider;
 
 public class SiteSearchPresenter implements SiteSearch {
 
     private SiteSearchView view;
+    private final Provider<SiteSearcher> provider;
 
-    public SiteSearchPresenter() {
+    public SiteSearchPresenter(final Provider<SiteSearcher> provider) {
+	this.provider = provider;
     }
 
     public void doSearch(final String termToSearch) {
-	// TODO
+	provider.get().doSearch(termToSearch);
     }
 
     public View getView() {

@@ -49,198 +49,198 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
     private final I18nTranslationService i18n;
 
     public SiteBarPresenter(final SiteBarListener listener, final Session session, final I18nTranslationService i18n) {
-        this.listener = listener;
-        this.session = session;
-        this.i18n = i18n;
+	this.listener = listener;
+	this.session = session;
+	this.i18n = i18n;
     }
 
     public void changeState(final StateToken token) {
-        listener.onChangeState(token);
+	listener.onChangeState(token);
     }
 
     public void doLogin(final String previousToken) {
-        this.previousToken = previousToken;
-        Site.showProgressProcessing();
-        view.showLoginDialog();
-        view.centerLoginDialog();
-        Site.hideProgress();
+	this.previousToken = previousToken;
+	Site.showProgressProcessing();
+	view.showLoginDialog();
+	view.centerLoginDialog();
+	Site.hideProgress();
     }
 
     public void doLogout() {
-        AsyncCallback<Object> callback = new AsyncCallback<Object>() {
-            public void onFailure(final Throwable caught) {
-                Site.hideProgress();
-                try {
-                    throw caught;
-                } catch (final SessionExpiredException e) {
-                    clientUILogout();
-                } catch (final UserMustBeLoggedException e) {
-                    clientUILogout();
-                } catch (final Throwable e) {
-                    GWT.log("Other kind of exception in doLogout", null);
-                    throw new RuntimeException();
-                }
-            }
+	final AsyncCallback<Object> callback = new AsyncCallback<Object>() {
+	    public void onFailure(final Throwable caught) {
+		Site.hideProgress();
+		try {
+		    throw caught;
+		} catch (final SessionExpiredException e) {
+		    clientUILogout();
+		} catch (final UserMustBeLoggedException e) {
+		    clientUILogout();
+		} catch (final Throwable e) {
+		    GWT.log("Other kind of exception in doLogout", null);
+		    throw new RuntimeException();
+		}
+	    }
 
-            public void onSuccess(final Object arg0) {
-                Site.hideProgress();
-                clientUILogout();
-            }
+	    public void onSuccess(final Object arg0) {
+		Site.hideProgress();
+		clientUILogout();
+	    }
 
-            private void clientUILogout() {
-                view.restoreLoginLink();
-                view.resetOptionsSubmenu();
-                view.setLogoutLinkVisible(false);
-                listener.onUserLoggedOut();
-            }
-        };
+	    private void clientUILogout() {
+		view.restoreLoginLink();
+		view.resetOptionsSubmenu();
+		view.setLogoutLinkVisible(false);
+		listener.onUserLoggedOut();
+	    }
+	};
 
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.USER_LOGOUT, callback);
+	DefaultDispatcher.getInstance().fire(WorkspaceEvents.USER_LOGOUT, callback);
     }
 
     public void doNewGroup(final String previousTokenOrig) {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.ONLY_CHECK_USER_SESSION,
-                new AsyncCallbackSimple<Object>() {
-                    public void onSuccess(final Object result) {
-                        previousToken = previousTokenOrig;
-                        if (session.isLogged()) {
-                            Site.showProgressProcessing();
-                            view.showNewGroupDialog();
-                            view.centerNewGroupDialog();
-                        } else {
-                            returnToPreviousState();
-                            Site.info(i18n.t("Sign in or register to create a group"));
-                        }
-                    }
-                });
+	DefaultDispatcher.getInstance().fire(WorkspaceEvents.ONLY_CHECK_USER_SESSION,
+		new AsyncCallbackSimple<Object>() {
+		    public void onSuccess(final Object result) {
+			previousToken = previousTokenOrig;
+			if (session.isLogged()) {
+			    Site.showProgressProcessing();
+			    view.showNewGroupDialog();
+			    view.centerNewGroupDialog();
+			} else {
+			    returnToPreviousState();
+			    Site.info(i18n.t("Sign in or register to create a group"));
+			}
+		    }
+		});
     }
 
     public void doSearch(final String termToSearch) {
-        view.showSearchPanel(termToSearch);
+	// view.showSearchPanel(termToSearch);
     }
 
     public View getView() {
-        return view;
+	return view;
     }
 
     public void hideProgress() {
-        view.hideProgress();
+	view.hideProgress();
     }
 
     public void init(final SiteBarView view) {
-        this.view = view;
-        view.setLogoutLinkVisible(false);
+	this.view = view;
+	view.setLogoutLinkVisible(false);
     }
 
     public void mask() {
-        view.mask();
+	view.mask();
     }
 
     public void mask(final String message) {
-        view.mask(message);
+	view.mask(message);
     }
 
     public void onHelpInTranslation() {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.SHOW_TRANSLATOR, null);
+	DefaultDispatcher.getInstance().fire(WorkspaceEvents.SHOW_TRANSLATOR, null);
     }
 
     public void onLoginCancelled() {
-        view.hideLoginDialog();
-        returnToPreviousState();
+	view.hideLoginDialog();
+	returnToPreviousState();
     }
 
     public void onLoginClose() {
-        if (!session.isLogged()) {
-            returnToPreviousState();
-        }
+	if (!session.isLogged()) {
+	    returnToPreviousState();
+	}
     }
 
     public void onNewGroupCancel() {
-        view.hideNewGroupDialog();
-        returnToPreviousState();
+	view.hideNewGroupDialog();
+	returnToPreviousState();
     }
 
     public void onNewGroupClose() {
-        returnToPreviousState();
+	returnToPreviousState();
     }
 
     public void onNewGroupCreated(final StateToken homePage) {
-        view.hideNewGroupDialog();
-        changeState(homePage);
+	view.hideNewGroupDialog();
+	changeState(homePage);
     }
 
     public void reloadUserInfo(final String userHash) {
-        UserServiceAsync siteBarService = UserService.App.getInstance();
-        siteBarService.reloadUserInfo(userHash, new AsyncCallback<UserInfoDTO>() {
-            public void onFailure(final Throwable arg0) {
-                Site.hideProgress();
-            }
+	final UserServiceAsync siteBarService = UserService.App.getInstance();
+	siteBarService.reloadUserInfo(userHash, new AsyncCallback<UserInfoDTO>() {
+	    public void onFailure(final Throwable arg0) {
+		Site.hideProgress();
+	    }
 
-            public void onSuccess(final UserInfoDTO response) {
-                showLoggedUser(response);
-                Site.hideProgress();
-            }
-        });
+	    public void onSuccess(final UserInfoDTO response) {
+		showLoggedUser(response);
+		Site.hideProgress();
+	    }
+	});
     }
 
     public void setState(final StateDTO state) {
-        StateToken token = state.getStateToken();
-        if (state.getAccessLists().getViewers().getMode().equals(GroupListDTO.EVERYONE)) {
-            String publicUrl = token.getPublicUrl();
-            view.setContentGotoPublicUrl(publicUrl);
-            view.setContentPublic(true);
-        } else {
-            view.setContentPublic(false);
-        }
+	final StateToken token = state.getStateToken();
+	if (state.getAccessLists().getViewers().getMode().equals(GroupListDTO.EVERYONE)) {
+	    final String publicUrl = token.getPublicUrl();
+	    view.setContentGotoPublicUrl(publicUrl);
+	    view.setContentPublic(true);
+	} else {
+	    view.setContentPublic(false);
+	}
 
     }
 
     public void showAlertMessage(final String message) {
-        view.showAlertMessage(message);
+	view.showAlertMessage(message);
     }
 
     public void showLoggedUser(final UserInfoDTO user) {
-        if (user == null) {
-            view.restoreLoginLink();
-            view.setLogoutLinkVisible(false);
-        } else {
-            view.showLoggedUserName(user.getShortName(), user.getHomePage());
-            view.setLogoutLinkVisible(true);
-            view.setGroupsIsMember(user.getGroupsIsAdmin(), user.getGroupsIsCollab());
-        }
+	if (user == null) {
+	    view.restoreLoginLink();
+	    view.setLogoutLinkVisible(false);
+	} else {
+	    view.showLoggedUserName(user.getShortName(), user.getHomePage());
+	    view.setLogoutLinkVisible(true);
+	    view.setGroupsIsMember(user.getGroupsIsAdmin(), user.getGroupsIsCollab());
+	}
     }
 
     public void showProgress(final String text) {
-        view.showProgress(text);
+	view.showProgress(text);
     }
 
     public void unMask() {
-        view.unMask();
+	view.unMask();
     }
 
     public void userLoggedIn(final UserInfoDTO userInfoDTO) {
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.USER_LOGGED_IN, userInfoDTO);
-        view.hideLoginDialog();
-        returnToPreviousState();
+	DefaultDispatcher.getInstance().fire(WorkspaceEvents.USER_LOGGED_IN, userInfoDTO);
+	view.hideLoginDialog();
+	returnToPreviousState();
     }
 
     protected void onSearchFocus() {
-        view.setTextSearchBig();
-        view.clearSearchText();
+	view.setTextSearchBig();
+	view.clearSearchText();
     }
 
     protected void onSearchLostFocus(final String search) {
-        if (search.length() == 0) {
-            view.setDefaultTextSearch();
-            view.setTextSearchSmall();
-        }
+	if (search.length() == 0) {
+	    view.setDefaultTextSearch();
+	    view.setTextSearchSmall();
+	}
     }
 
     private void returnToPreviousState() {
-        if (this.previousToken != null) {
-            listener.onChangeState(new StateToken(this.previousToken));
-            this.previousToken = null;
-        }
+	if (this.previousToken != null) {
+	    listener.onChangeState(new StateToken(this.previousToken));
+	    this.previousToken = null;
+	}
     }
 
 }

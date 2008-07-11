@@ -17,12 +17,16 @@ import org.ourproject.kune.platf.client.state.SessionImpl;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.state.StateManagerDefault;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.workspace.client.search.SiteSearcher;
+import org.ourproject.kune.workspace.client.search.SiteSearcherPanel;
+import org.ourproject.kune.workspace.client.search.SiteSearcherPresenter;
+import org.ourproject.kune.workspace.client.search.SiteSearcherView;
 import org.ourproject.kune.workspace.client.sitebar.Site;
+import org.ourproject.kune.workspace.client.tags.TagsPresenter;
+import org.ourproject.kune.workspace.client.tags.ui.TagsPanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.WorkspaceManager;
 import org.ourproject.kune.workspace.client.ui.newtmp.licensefoot.EntityLicensePanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.licensefoot.EntityLicensePresenter;
-import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.SiteBarPanel;
-import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.SiteBarPresenter;
 import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitelogo.SiteLogo;
 import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitelogo.SiteLogoPanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitelogo.SiteLogoPresenter;
@@ -36,6 +40,7 @@ import org.ourproject.kune.workspace.client.ui.newtmp.title.EntitySubTitlePanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.title.EntitySubTitlePresenter;
 import org.ourproject.kune.workspace.client.ui.newtmp.title.EntityTitlePanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.title.EntityTitlePresenter;
+import org.ourproject.kune.workspace.client.workspace.Tags;
 import org.ourproject.kune.workspace.client.workspace.ui.EntityLogo;
 import org.ourproject.kune.workspace.client.workspace.ui.EntityLogoPanel;
 
@@ -137,9 +142,18 @@ public class KuneModule implements Module {
 	    }
 	}, SingletonScope.class);
 
+	builder.registerProvider(SiteSearcher.class, new Provider<SiteSearcher>() {
+	    public SiteSearcher get() {
+		final SiteSearcherPresenter presenter = new SiteSearcherPresenter();
+		final SiteSearcherView view = new SiteSearcherPanel(presenter, i18n, ws);
+		presenter.init(view);
+		return presenter;
+	    }
+	}, SingletonScope.class);
+
 	builder.registerProvider(SiteSearch.class, new Provider<SiteSearch>() {
 	    public SiteSearch get() {
-		final SiteSearchPresenter presenter = new SiteSearchPresenter();
+		final SiteSearchPresenter presenter = new SiteSearchPresenter(builder.getProvider(SiteSearcher.class));
 		final SiteSearchPanel panel = new SiteSearchPanel(presenter, ws, i18n);
 		presenter.init(panel);
 		return presenter;
@@ -192,23 +206,28 @@ public class KuneModule implements Module {
 	    }
 	}, SingletonScope.class);
 
-	builder.registerProvider(SiteBarPresenter.class, new Provider<SiteBarPresenter>() {
-	    public SiteBarPresenter get() {
-		final SiteBarPresenter presenter = new SiteBarPresenter();
-		final SiteBarPanel panel = new SiteBarPanel(presenter, i18n, ws);
+	builder.registerProvider(WorkspaceManager.class, new Provider<WorkspaceManager>() {
+	    public WorkspaceManager get() {
+		final WorkspaceManager presenter = new WorkspaceManager(builder.getInstance(EntityLogo.class), builder
+			.getInstance(EntityTitlePresenter.class), builder.getInstance(EntitySubTitlePresenter.class),
+			builder.getInstance(WsThemePresenter.class), builder.getInstance(EntityLicensePresenter.class),
+			builder.getInstance(Tags.class));
+		return presenter;
+	    }
+	}, SingletonScope.class);
+
+	builder.registerProvider(Tags.class, new Provider<Tags>() {
+	    public Tags get() {
+		final TagsPresenter presenter = new TagsPresenter(builder.getProvider(Session.class), builder
+			.getProvider(SiteSearcher.class));
+		final TagsPanel panel = new TagsPanel(presenter, i18n, ws);
 		presenter.init(panel);
 		return presenter;
 	    }
 	}, SingletonScope.class);
 
-	builder.registerProvider(WorkspaceManager.class, new Provider<WorkspaceManager>() {
-	    public WorkspaceManager get() {
-		final WorkspaceManager presenter = new WorkspaceManager(builder.getInstance(EntityLogo.class), builder
-			.getInstance(EntityTitlePresenter.class), builder.getInstance(EntitySubTitlePresenter.class),
-			builder.getInstance(WsThemePresenter.class), builder.getInstance(EntityLicensePresenter.class));
-		return presenter;
-	    }
-	}, SingletonScope.class);
+	// builder.registerProvider(type, new Provider<>() {},
+	// SingletonScope.class);
 
 	builder.registerProvider(StateManager.class, new Provider<StateManager>() {
 	    public StateManager get() {

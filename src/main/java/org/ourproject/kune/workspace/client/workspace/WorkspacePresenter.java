@@ -124,10 +124,6 @@ public class WorkspacePresenter implements Workspace {
 	return components.getParticipationComponent();
     }
 
-    public TagsComponent getTagsComponent() {
-	return components.getTagsComponent();
-    }
-
     public ThemeMenuComponent getThemeMenuComponent() {
 	return components.getThemeMenuComponent();
     }

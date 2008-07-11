@@ -24,9 +24,12 @@ import java.util.List;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.TagResultDTO;
+import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 
 public interface TagsView extends View {
 
     void setTags(List<TagResultDTO> groupTags);
+
+    void setTheme(WsTheme oldTheme, WsTheme newTheme);
 
 }

@@ -7,6 +7,7 @@ import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
 import org.ourproject.kune.workspace.client.ui.newtmp.title.EntitySubTitlePresenter;
 import org.ourproject.kune.workspace.client.ui.newtmp.title.EntityTitlePresenter;
+import org.ourproject.kune.workspace.client.workspace.Tags;
 import org.ourproject.kune.workspace.client.workspace.ui.EntityLogo;
 
 import com.calclab.suco.client.signal.Slot2;
@@ -18,18 +19,21 @@ public class WorkspaceManager {
     private final WsThemePresenter wsThemePresenter;
     private final EntityLicensePresenter entityLicensePresenter;
     private final EntitySubTitlePresenter entitySubTitlePresenter;
+    private final Tags tags;
 
     public WorkspaceManager(final EntityLogo entityLogo, final EntityTitlePresenter entityTitlePresenter,
 	    final EntitySubTitlePresenter entitySubTitlePresenter, final WsThemePresenter wsThemePresenter,
-	    final EntityLicensePresenter entityLicensePresenter) {
+	    final EntityLicensePresenter entityLicensePresenter, final Tags tags) {
 	this.entityLogo = entityLogo;
 	this.entityTitlePresenter = entityTitlePresenter;
 	this.entitySubTitlePresenter = entitySubTitlePresenter;
 	this.entityLicensePresenter = entityLicensePresenter;
 	this.wsThemePresenter = wsThemePresenter;
+	this.tags = tags;
 	wsThemePresenter.onThemeChanged(new Slot2<WsTheme, WsTheme>() {
 	    public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
 		entityLogo.setTheme(oldTheme, newTheme);
+		tags.setTheme(oldTheme, newTheme);
 	    }
 	});
     }
@@ -42,11 +46,10 @@ public class WorkspaceManager {
 	entityTitlePresenter.setState(state);
 	entitySubTitlePresenter.setState(state);
 	entityLicensePresenter.setLicense(state);
+	tags.setState(state);
 	// Only for probes:
 	wsThemePresenter.setVisible(true);
 	wsThemePresenter.setTheme(new WsTheme(group.getWorkspaceTheme()));
     }
 
-    public void setTheme(final WsTheme theme) {
-    }
 }

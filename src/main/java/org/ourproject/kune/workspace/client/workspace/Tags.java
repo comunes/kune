@@ -17,19 +17,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.search;
 
-import org.ourproject.kune.platf.client.View;
+package org.ourproject.kune.workspace.client.workspace;
 
-public interface SearchSiteView extends View {
+import java.util.List;
 
-    public static final int GROUP_USER_SEARCH = 1;
-    public static final int CONTENT_SEARCH = 2;
+import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.TagResultDTO;
+import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 
-    void search(String text, int currentSearch);
+public interface Tags {
 
-    String getComboTextToSearch();
+    void setGroupTags(List<TagResultDTO> result);
 
-    void hide();
+    void setState(StateDTO state);
+
+    void setTheme(WsTheme oldTheme, WsTheme newTheme);
 
 }

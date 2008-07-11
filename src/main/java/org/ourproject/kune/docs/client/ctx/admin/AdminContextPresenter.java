@@ -30,70 +30,90 @@ import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.TagResultDTO;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
+import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
+import org.ourproject.kune.platf.client.rpc.ContentService;
+import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
+import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.workspace.client.sitebar.Site;
+import org.ourproject.kune.workspace.client.workspace.Tags;
 
 public class AdminContextPresenter extends AbstractPresenter implements AdminContext {
 
     private AdminContextView view;
+    private final Session session;
+    private final Tags tags;
 
-    public AdminContextPresenter() {
-    }
-
-    public void init(final AdminContextView view) {
-        this.view = view;
-    }
-
-    public void setState(final StateDTO content) {
-        // In the future check the use of these components by each tool
-        I18nLanguageDTO language = content.getLanguage();
-        AccessListsDTO accessLists = content.getAccessLists();
-        Date publishedOn = content.getPublishedOn();
-        String tags = content.getTags();
-        List<UserSimpleDTO> authors = content.getAuthors();
-
-        if (content.hasDocument()) {
-            if (tags != null) {
-                view.setTags(tags);
-            } else {
-                view.removeTagsComponent();
-            }
-            if (language != null) {
-                view.setLanguage(language);
-            } else {
-                view.removeLangComponent();
-            }
-            if (authors != null) {
-                view.setAuthors(authors);
-            } else {
-                view.removeAuthorsComponent();
-            }
-            if (publishedOn != null) {
-                view.setPublishedOn(publishedOn);
-            } else {
-                view.removePublishedOnComponent();
-            }
-            if (accessLists != null) {
-                view.setAccessLists(accessLists);
-            } else {
-                view.removeAccessListComponent();
-            }
-        }
-    }
-
-    public View getView() {
-        return view;
-    }
-
-    public void setPublishedOn(final Date date) {
-        DefaultDispatcher.getInstance().fire(DocsEvents.SET_PUBLISHED_ON, date);
-    }
-
-    public void setTags(final String tags) {
-        DefaultDispatcher.getInstance().fire(DocsEvents.SET_TAGS, tags);
+    public AdminContextPresenter(final Session session, final Tags tags) {
+	this.session = session;
+	this.tags = tags;
     }
 
     public void doChangeLanguage(final String langCode) {
-        DefaultDispatcher.getInstance().fire(DocsEvents.SET_LANGUAGE, langCode);
+	DefaultDispatcher.getInstance().fire(DocsEvents.SET_LANGUAGE, langCode);
+    }
+
+    public View getView() {
+	return view;
+    }
+
+    public void init(final AdminContextView view) {
+	this.view = view;
+    }
+
+    public void setPublishedOn(final Date date) {
+	DefaultDispatcher.getInstance().fire(DocsEvents.SET_PUBLISHED_ON, date);
+    }
+
+    public void setState(final StateDTO content) {
+	// In the future check the use of these components by each tool
+	final I18nLanguageDTO language = content.getLanguage();
+	final AccessListsDTO accessLists = content.getAccessLists();
+	final Date publishedOn = content.getPublishedOn();
+	final String tags = content.getTags();
+	final List<UserSimpleDTO> authors = content.getAuthors();
+
+	if (content.hasDocument()) {
+	    if (tags != null) {
+		view.setTags(tags);
+	    } else {
+		view.removeTagsComponent();
+	    }
+	    if (language != null) {
+		view.setLanguage(language);
+	    } else {
+		view.removeLangComponent();
+	    }
+	    if (authors != null) {
+		view.setAuthors(authors);
+	    } else {
+		view.removeAuthorsComponent();
+	    }
+	    if (publishedOn != null) {
+		view.setPublishedOn(publishedOn);
+	    } else {
+		view.removePublishedOnComponent();
+	    }
+	    if (accessLists != null) {
+		view.setAccessLists(accessLists);
+	    } else {
+		view.removeAccessListComponent();
+	    }
+	}
+    }
+
+    public void setTags(final String tagsString) {
+	Site.showProgressProcessing();
+	final ContentServiceAsync server = ContentService.App.getInstance();
+	final StateDTO currentState = session.getCurrentState();
+	server.setTags(session.getUserHash(), currentState.getGroup().getShortName(), currentState.getDocumentId(),
+		tagsString, new AsyncCallbackSimple<List<TagResultDTO>>() {
+		    public void onSuccess(final List<TagResultDTO> result) {
+			tags.setGroupTags(result);
+			Site.hideProgress();
+		    }
+		});
     }
 
 }

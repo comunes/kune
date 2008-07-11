@@ -29,8 +29,6 @@ import org.ourproject.kune.platf.client.ui.IconLabel;
 import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
 import org.ourproject.kune.workspace.client.newgroup.NewGroup;
 import org.ourproject.kune.workspace.client.newgroup.ui.NewGroupPanel;
-import org.ourproject.kune.workspace.client.search.SearchSite;
-import org.ourproject.kune.workspace.client.search.ui.SearchSitePanel;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.sitebar.SiteBarFactory;
 import org.ourproject.kune.workspace.client.sitebar.login.Login;
@@ -88,7 +86,6 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     private final Widget progressPanel;
     private final Widget progressText;
     private final HorizontalPanel publicHP;
-    private SearchSitePanel searchPanel;
     private final ExtElement extRootBody;
     private String publicUrl;
     private Timer timeProgressMaxTime;
@@ -336,14 +333,6 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	publicHP.setVisible(false);
 	progressPanel.setVisible(true);
 	DOM.setInnerText(progressText.getElement(), text);
-    }
-
-    public void showSearchPanel(final String termToSearch) {
-	final SearchSite search = SiteBarFactory.getSearch();
-	search.doSearch(termToSearch);
-	searchPanel = (SearchSitePanel) search.getView();
-	searchPanel.show();
-	Site.hideProgress();
     }
 
     public void unMask() {

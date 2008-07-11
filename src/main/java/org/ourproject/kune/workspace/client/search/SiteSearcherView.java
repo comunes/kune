@@ -17,14 +17,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.ui.newtmp.sitebar;
+package org.ourproject.kune.workspace.client.search;
 
-import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
-import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
+import org.ourproject.kune.platf.client.View;
 
-public class SiteBarPanel implements SiteBarView {
+public interface SiteSearcherView extends View {
 
-    public SiteBarPanel(final SiteBarPresenter presenter, final I18nUITranslationService i18n,
-	    final WorkspaceSkeleton ws) {
-    }
+    String getComboTextToSearch();
+
+    void hide();
+
+    void search(String text, SiteSearcherType currentSearch);
+
+    void show();
+
 }

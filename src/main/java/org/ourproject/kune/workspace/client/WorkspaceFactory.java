@@ -57,9 +57,6 @@ import org.ourproject.kune.workspace.client.socialnet.ui.ParticipationPanel;
 import org.ourproject.kune.workspace.client.socialnet.ui.UserLiveSearchPanel;
 import org.ourproject.kune.workspace.client.summary.GroupSummaryPresenter;
 import org.ourproject.kune.workspace.client.summary.GroupSummaryView;
-import org.ourproject.kune.workspace.client.tags.TagsPresenter;
-import org.ourproject.kune.workspace.client.tags.TagsView;
-import org.ourproject.kune.workspace.client.tags.ui.TagsPanel;
 import org.ourproject.kune.workspace.client.theme.ThemeMenuPresenter;
 import org.ourproject.kune.workspace.client.theme.ThemeMenuView;
 import org.ourproject.kune.workspace.client.theme.ui.ThemeMenuPanel;
@@ -82,7 +79,6 @@ import org.ourproject.kune.workspace.client.workspace.GroupLiveSearchComponent;
 import org.ourproject.kune.workspace.client.workspace.GroupMembersComponent;
 import org.ourproject.kune.workspace.client.workspace.GroupSummaryComponent;
 import org.ourproject.kune.workspace.client.workspace.ParticipationComponent;
-import org.ourproject.kune.workspace.client.workspace.TagsComponent;
 import org.ourproject.kune.workspace.client.workspace.ThemeMenuComponent;
 import org.ourproject.kune.workspace.client.workspace.UserLiveSearchComponent;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
@@ -102,133 +98,126 @@ public class WorkspaceFactory {
     private static KuneErrorHandler errorHandler;
 
     public static ContentBottomToolBarComponent createContentBottomToolBarComponent() {
-        ContentBottomToolBarPresenter presenter = new ContentBottomToolBarPresenter();
-        ContentBottomToolBarView view = new ContentBottomToolBarPanel(presenter, i18n);
-        presenter.init(view);
-        return presenter;
+	final ContentBottomToolBarPresenter presenter = new ContentBottomToolBarPresenter();
+	final ContentBottomToolBarView view = new ContentBottomToolBarPanel(presenter, i18n);
+	presenter.init(view);
+	return presenter;
     }
 
     public static ContentSubTitleComponent createContentSubTitleComponent() {
-        ContentSubTitlePresenter presenter = new ContentSubTitlePresenter(i18n);
-        ContentSubTitleView view = new ContentSubTitlePanel(presenter, i18n);
-        presenter.init(view);
-        return presenter;
+	final ContentSubTitlePresenter presenter = new ContentSubTitlePresenter(i18n);
+	final ContentSubTitleView view = new ContentSubTitlePanel(presenter, i18n);
+	presenter.init(view);
+	return presenter;
     }
 
     public static ContentTitleComponent createContentTitleComponent() {
-        ContentTitlePresenter presenter = new ContentTitlePresenter(i18n, errorHandler);
-        ContentTitleView view = new ContentTitlePanel(presenter);
-        presenter.init(view);
-        return presenter;
+	final ContentTitlePresenter presenter = new ContentTitlePresenter(i18n, errorHandler);
+	final ContentTitleView view = new ContentTitlePanel(presenter);
+	presenter.init(view);
+	return presenter;
     }
 
     public static ContentToolBarComponent createContentToolBarComponent() {
-        ContentToolBarPresenter presenter = new ContentToolBarPresenter();
-        ContentToolBarView view = new ContentToolBarPanel(presenter);
-        presenter.init(view);
-        return presenter;
+	final ContentToolBarPresenter presenter = new ContentToolBarPresenter();
+	final ContentToolBarView view = new ContentToolBarPanel(presenter);
+	presenter.init(view);
+	return presenter;
     }
 
     public static ContextItems createContextItems() {
-        ContextItemsPresenter presenter = new ContextItemsPresenter(i18n);
-        ContextItemsPanel panel = new ContextItemsPanel(presenter, i18n);
-        presenter.init(panel);
-        return presenter;
+	final ContextItemsPresenter presenter = new ContextItemsPresenter(i18n);
+	final ContextItemsPanel panel = new ContextItemsPanel(presenter, i18n);
+	presenter.init(panel);
+	return presenter;
     }
 
     public static DesktopView createDesktop(final Workspace workspace, final SiteBarListener listener,
-            final Session session) {
-        return new DesktopPanel(workspace, listener, session, i18n);
+	    final Session session) {
+	return new DesktopPanel(workspace, listener, session, i18n);
     }
 
     public static TextEditor createDocumentEditor(final TextEditorListener listener) {
-        TextEditorPresenter presenter = new TextEditorPresenter(listener, true);
-        TextEditorPanel panel = new TextEditorPanel(presenter, i18n);
-        presenter.init(panel);
-        return presenter;
+	final TextEditorPresenter presenter = new TextEditorPresenter(listener, true);
+	final TextEditorPanel panel = new TextEditorPanel(presenter, i18n);
+	presenter.init(panel);
+	return presenter;
     }
 
     public static GroupLiveSearchComponent createGroupLiveSearchComponent() {
-        GroupLiveSearchPresenter presenter = new GroupLiveSearchPresenter();
-        EntityLiveSearchView view = new GroupLiveSearchPanel(presenter, i18n);
-        presenter.init(view);
-        return presenter;
+	final GroupLiveSearchPresenter presenter = new GroupLiveSearchPresenter();
+	final EntityLiveSearchView view = new GroupLiveSearchPanel(presenter, i18n);
+	presenter.init(view);
+	return presenter;
     }
 
     public static GroupMembersComponent createGroupMembersComponent() {
-        GroupMembersPresenter presenter = new GroupMembersPresenter(i18n);
-        GroupMembersView view = new GroupMembersPanel(presenter, i18n);
-        presenter.init(view);
-        return presenter;
+	final GroupMembersPresenter presenter = new GroupMembersPresenter(i18n);
+	final GroupMembersView view = new GroupMembersPanel(presenter, i18n);
+	presenter.init(view);
+	return presenter;
     }
 
     public static GroupSummaryComponent createGroupSummaryComponent() {
-        GroupSummaryPresenter presenter = new GroupSummaryPresenter();
-        GroupSummaryView view = new GroupSummaryPanel(presenter, i18n, colorTheme);
-        presenter.init(view);
-        return presenter;
+	final GroupSummaryPresenter presenter = new GroupSummaryPresenter();
+	final GroupSummaryView view = new GroupSummaryPanel(presenter, i18n, colorTheme);
+	presenter.init(view);
+	return presenter;
     }
 
     public static I18nTranslatorComponent createI18nTranslatorComponent() {
-        I18nTranslatorPresenter presenter = new I18nTranslatorPresenter(session);
-        I18nTranslatorView view = new I18nTranslatorPanel(presenter, i18n);
-        presenter.init(view);
-        return presenter;
+	final I18nTranslatorPresenter presenter = new I18nTranslatorPresenter(session);
+	final I18nTranslatorView view = new I18nTranslatorPanel(presenter, i18n);
+	presenter.init(view);
+	return presenter;
     }
 
     public static LanguageSelectorComponent createLanguageSelectorComponent() {
-        LanguageSelectorPresenter presenter = new LanguageSelectorPresenter(session);
-        LanguageSelectorView view = new LanguageSelectorPanel(presenter, i18n);
-        presenter.init(view);
-        return presenter;
+	final LanguageSelectorPresenter presenter = new LanguageSelectorPresenter(session);
+	final LanguageSelectorView view = new LanguageSelectorPanel(presenter, i18n);
+	presenter.init(view);
+	return presenter;
     }
 
     public static LicenseComponent createLicenseComponent() {
-        LicensePresenter presenter = new LicensePresenter();
-        LicenseView view = new LicensePanel(presenter, i18n);
-        presenter.init(view);
-        return presenter;
+	final LicensePresenter presenter = new LicensePresenter();
+	final LicenseView view = new LicensePanel(presenter, i18n);
+	presenter.init(view);
+	return presenter;
     }
 
     public static ParticipationComponent createParticipationComponent() {
-        ParticipationPresenter presenter = new ParticipationPresenter(i18n);
-        ParticipationView view = new ParticipationPanel(presenter, i18n);
-        presenter.init(view);
-        return presenter;
-    }
-
-    public static TagsComponent createTagsComponent() {
-        TagsPresenter presenter = new TagsPresenter(session);
-        TagsView view = new TagsPanel(presenter, i18n);
-        presenter.init(view);
-        return presenter;
+	final ParticipationPresenter presenter = new ParticipationPresenter(i18n);
+	final ParticipationView view = new ParticipationPanel(presenter, i18n);
+	presenter.init(view);
+	return presenter;
     }
 
     public static ThemeMenuComponent createThemeMenuComponent() {
-        ThemeMenuPresenter presenter = new ThemeMenuPresenter();
-        ThemeMenuView view = new ThemeMenuPanel(presenter, i18n, colorTheme);
-        presenter.init(view);
-        return presenter;
+	final ThemeMenuPresenter presenter = new ThemeMenuPresenter();
+	final ThemeMenuView view = new ThemeMenuPanel(presenter, i18n, colorTheme);
+	presenter.init(view);
+	return presenter;
     }
 
     public static UserLiveSearchComponent createUserLiveSearchComponent() {
-        UserLiveSearchPresenter presenter = new UserLiveSearchPresenter();
-        EntityLiveSearchView view = new UserLiveSearchPanel(presenter, i18n);
-        presenter.init(view);
-        return presenter;
+	final UserLiveSearchPresenter presenter = new UserLiveSearchPresenter();
+	final EntityLiveSearchView view = new UserLiveSearchPanel(presenter, i18n);
+	presenter.init(view);
+	return presenter;
     }
 
     public static Workspace createWorkspace(final Session session,
-            final ExtensibleWidgetsManager extensionPointManager, final I18nTranslationService i18n,
-            final ColorTheme colorTheme, final KuneErrorHandler errorHandler) {
-        WorkspaceFactory.session = session;
-        WorkspaceFactory.i18n = i18n;
-        WorkspaceFactory.colorTheme = colorTheme;
-        WorkspaceFactory.errorHandler = errorHandler;
-        WorkspacePresenter workspace = new WorkspacePresenter(session);
-        WorkspaceView view = new WorkspacePanel(workspace, i18n, colorTheme);
-        workspace.init(view, extensionPointManager);
-        return workspace;
+	    final ExtensibleWidgetsManager extensionPointManager, final I18nTranslationService i18n,
+	    final ColorTheme colorTheme, final KuneErrorHandler errorHandler) {
+	WorkspaceFactory.session = session;
+	WorkspaceFactory.i18n = i18n;
+	WorkspaceFactory.colorTheme = colorTheme;
+	WorkspaceFactory.errorHandler = errorHandler;
+	final WorkspacePresenter workspace = new WorkspacePresenter(session);
+	final WorkspaceView view = new WorkspacePanel(workspace, i18n, colorTheme);
+	workspace.init(view, extensionPointManager);
+	return workspace;
     }
 
 }

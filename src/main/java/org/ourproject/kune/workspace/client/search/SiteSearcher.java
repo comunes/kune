@@ -17,10 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.ui.newtmp.sitebar;
+package org.ourproject.kune.workspace.client.search;
 
-import org.ourproject.kune.platf.client.View;
+public interface SiteSearcher {
 
-public interface SiteBarView extends View {
+    public void doSearch(String termToSearch);
+
+    public void doSearchOfType(String termToSearch, SiteSearcherType type);
 
 }

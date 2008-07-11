@@ -6,6 +6,7 @@ import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.workspace.client.workspace.Tags;
 
 import com.calclab.suco.client.container.Container;
 import com.calclab.suco.client.container.Provider;
@@ -25,7 +26,8 @@ public class DocumentClientNewModule implements Module {
     public void onLoad(final ModuleBuilder builder) {
 	builder.registerProvider(DocumentFactory.class, new Provider<DocumentFactory>() {
 	    public DocumentFactory get() {
-		return new DocumentFactory(builder.getInstance(I18nUITranslationService.class));
+		return new DocumentFactory(builder.getInstance(I18nUITranslationService.class), builder
+			.getInstance(Session.class), builder.getInstance(Tags.class));
 	    }
 	}, SingletonScope.class);
 

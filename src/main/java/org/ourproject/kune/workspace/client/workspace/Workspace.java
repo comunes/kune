@@ -67,8 +67,6 @@ public interface Workspace extends Component {
 
     public ParticipationComponent getParticipationComponent();
 
-    public TagsComponent getTagsComponent();
-
     public ThemeMenuComponent getThemeMenuComponent();
 
     public UserLiveSearchComponent getUserLiveSearchComponent();
