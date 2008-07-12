@@ -29,17 +29,17 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.search.SiteSearcher;
 import org.ourproject.kune.workspace.client.search.SiteSearcherType;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
-import org.ourproject.kune.workspace.client.workspace.Tags;
+import org.ourproject.kune.workspace.client.workspace.TagsSummary;
 
 import com.calclab.suco.client.container.Provider;
 
-public class TagsPresenter implements Tags {
+public class TagsSummaryPresenter implements TagsSummary {
 
-    private TagsView view;
+    private TagsSummaryView view;
     private final Provider<SiteSearcher> searcherProvider;
     private final Provider<Session> sessionProvider;
 
-    public TagsPresenter(final Provider<Session> sessionProvider, final Provider<SiteSearcher> searcherProvider) {
+    public TagsSummaryPresenter(final Provider<Session> sessionProvider, final Provider<SiteSearcher> searcherProvider) {
 	this.sessionProvider = sessionProvider;
 	this.searcherProvider = searcherProvider;
     }
@@ -54,7 +54,7 @@ public class TagsPresenter implements Tags {
 	return view;
     }
 
-    public void init(final TagsView view) {
+    public void init(final TagsSummaryView view) {
 	this.view = view;
     }
 

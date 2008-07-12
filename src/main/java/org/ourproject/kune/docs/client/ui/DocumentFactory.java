@@ -52,15 +52,15 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.WorkspaceFactory;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckPanel;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
-import org.ourproject.kune.workspace.client.workspace.Tags;
+import org.ourproject.kune.workspace.client.workspace.TagsSummary;
 
 public class DocumentFactory {
 
     private final I18nTranslationService i18n;
     private final Session session;
-    private final Tags tags;
+    private final TagsSummary tags;
 
-    public DocumentFactory(final I18nTranslationService i18n, final Session session, final Tags tags) {
+    public DocumentFactory(final I18nTranslationService i18n, final Session session, final TagsSummary tags) {
 	this.i18n = i18n;
 	this.session = session;
 	this.tags = tags;

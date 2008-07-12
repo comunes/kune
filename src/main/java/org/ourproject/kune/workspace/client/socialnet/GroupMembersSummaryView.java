@@ -19,21 +19,39 @@
  */
 package org.ourproject.kune.workspace.client.socialnet;
 
-public class MemberAction {
+import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 
-    private final String text;
-    private final String action;
+public interface GroupMembersSummaryView extends View {
 
-    public MemberAction(final String text, final String action) {
-	this.text = text;
-	this.action = action;
-    }
+    public static final String ICON_ALERT = "alert";
 
-    public String getAction() {
-	return action;
-    }
+    void addAddMemberLink();
 
-    public String getText() {
-	return text;
-    }
+    void addCategory(String name, String title);
+
+    void addCategory(String name, String title, String iconType);
+
+    void addCategoryMember(String categoryName, String name, String title, MemberAction[] memberActions);
+
+    void addComment(String comment);
+
+    void addJoinLink();
+
+    void addUnjoinLink();
+
+    void clear();
+
+    void confirmAddCollab(String groupShortName, String groupLongName);
+
+    void hide();
+
+    void setDropDownContentVisible(boolean visible);
+
+    void setTheme(WsTheme oldTheme, WsTheme newTheme);
+
+    void show();
+
+    void showCategory(String name);
+
 }

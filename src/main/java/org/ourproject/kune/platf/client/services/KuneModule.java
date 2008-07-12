@@ -17,13 +17,22 @@ import org.ourproject.kune.platf.client.state.SessionImpl;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.state.StateManagerDefault;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.workspace.client.presence.ui.GroupSummaryPanel;
 import org.ourproject.kune.workspace.client.search.SiteSearcher;
 import org.ourproject.kune.workspace.client.search.SiteSearcherPanel;
 import org.ourproject.kune.workspace.client.search.SiteSearcherPresenter;
 import org.ourproject.kune.workspace.client.search.SiteSearcherView;
 import org.ourproject.kune.workspace.client.sitebar.Site;
-import org.ourproject.kune.workspace.client.tags.TagsPresenter;
-import org.ourproject.kune.workspace.client.tags.ui.TagsPanel;
+import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryPresenter;
+import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryView;
+import org.ourproject.kune.workspace.client.socialnet.ParticipationSummaryPresenter;
+import org.ourproject.kune.workspace.client.socialnet.ParticipationSummaryView;
+import org.ourproject.kune.workspace.client.socialnet.ui.GroupMembersSummaryPanel;
+import org.ourproject.kune.workspace.client.socialnet.ui.ParticipationSummaryPanel;
+import org.ourproject.kune.workspace.client.summary.GroupSummaryPresenter;
+import org.ourproject.kune.workspace.client.summary.GroupSummaryView;
+import org.ourproject.kune.workspace.client.tags.TagsSummaryPanel;
+import org.ourproject.kune.workspace.client.tags.TagsSummaryPresenter;
 import org.ourproject.kune.workspace.client.ui.newtmp.WorkspaceManager;
 import org.ourproject.kune.workspace.client.ui.newtmp.licensefoot.EntityLicensePanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.licensefoot.EntityLicensePresenter;
@@ -40,7 +49,10 @@ import org.ourproject.kune.workspace.client.ui.newtmp.title.EntitySubTitlePanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.title.EntitySubTitlePresenter;
 import org.ourproject.kune.workspace.client.ui.newtmp.title.EntityTitlePanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.title.EntityTitlePresenter;
-import org.ourproject.kune.workspace.client.workspace.Tags;
+import org.ourproject.kune.workspace.client.workspace.GroupMembersSummary;
+import org.ourproject.kune.workspace.client.workspace.GroupSummary;
+import org.ourproject.kune.workspace.client.workspace.ParticipationSummary;
+import org.ourproject.kune.workspace.client.workspace.TagsSummary;
 import org.ourproject.kune.workspace.client.workspace.ui.EntityLogo;
 import org.ourproject.kune.workspace.client.workspace.ui.EntityLogoPanel;
 
@@ -211,16 +223,45 @@ public class KuneModule implements Module {
 		final WorkspaceManager presenter = new WorkspaceManager(builder.getInstance(EntityLogo.class), builder
 			.getInstance(EntityTitlePresenter.class), builder.getInstance(EntitySubTitlePresenter.class),
 			builder.getInstance(WsThemePresenter.class), builder.getInstance(EntityLicensePresenter.class),
-			builder.getInstance(Tags.class));
+			builder.getInstance(GroupMembersSummary.class),
+			builder.getInstance(ParticipationSummary.class), builder.getInstance(TagsSummary.class),
+			builder.getInstance(GroupSummary.class));
 		return presenter;
 	    }
 	}, SingletonScope.class);
 
-	builder.registerProvider(Tags.class, new Provider<Tags>() {
-	    public Tags get() {
-		final TagsPresenter presenter = new TagsPresenter(builder.getProvider(Session.class), builder
-			.getProvider(SiteSearcher.class));
-		final TagsPanel panel = new TagsPanel(presenter, i18n, ws);
+	builder.registerProvider(GroupMembersSummary.class, new Provider<GroupMembersSummary>() {
+	    public GroupMembersSummary get() {
+		final GroupMembersSummaryPresenter presenter = new GroupMembersSummaryPresenter(i18n);
+		final GroupMembersSummaryView view = new GroupMembersSummaryPanel(presenter, i18n, ws);
+		presenter.init(view);
+		return presenter;
+	    }
+	}, SingletonScope.class);
+
+	builder.registerProvider(GroupSummary.class, new Provider<GroupSummary>() {
+	    public GroupSummary get() {
+		final GroupSummaryPresenter presenter = new GroupSummaryPresenter();
+		final GroupSummaryView view = new GroupSummaryPanel(presenter, i18n, ws);
+		presenter.init(view);
+		return presenter;
+	    }
+	}, SingletonScope.class);
+
+	builder.registerProvider(ParticipationSummary.class, new Provider<ParticipationSummary>() {
+	    public ParticipationSummary get() {
+		final ParticipationSummaryPresenter presenter = new ParticipationSummaryPresenter(i18n);
+		final ParticipationSummaryView view = new ParticipationSummaryPanel(presenter, i18n, ws);
+		presenter.init(view);
+		return presenter;
+	    }
+	}, SingletonScope.class);
+
+	builder.registerProvider(TagsSummary.class, new Provider<TagsSummary>() {
+	    public TagsSummary get() {
+		final TagsSummaryPresenter presenter = new TagsSummaryPresenter(builder.getProvider(Session.class),
+			builder.getProvider(SiteSearcher.class));
+		final TagsSummaryPanel panel = new TagsSummaryPanel(presenter, i18n, ws);
 		presenter.init(panel);
 		return presenter;
 	    }

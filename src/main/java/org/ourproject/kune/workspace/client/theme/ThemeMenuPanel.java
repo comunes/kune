@@ -18,14 +18,12 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.theme.ui;
+package org.ourproject.kune.workspace.client.theme;
 
 import org.ourproject.kune.platf.client.services.ColorTheme;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.BottomTrayIcon;
-import org.ourproject.kune.workspace.client.theme.ThemeMenuPresenter;
-import org.ourproject.kune.workspace.client.theme.ThemeMenuView;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.MenuBar;

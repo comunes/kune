@@ -42,24 +42,15 @@ import org.ourproject.kune.workspace.client.licensefoot.LicenseComponent;
 import org.ourproject.kune.workspace.client.licensefoot.LicensePresenter;
 import org.ourproject.kune.workspace.client.licensefoot.LicenseView;
 import org.ourproject.kune.workspace.client.licensefoot.ui.LicensePanel;
-import org.ourproject.kune.workspace.client.presence.ui.GroupSummaryPanel;
 import org.ourproject.kune.workspace.client.sitebar.bar.SiteBarListener;
 import org.ourproject.kune.workspace.client.socialnet.EntityLiveSearchView;
 import org.ourproject.kune.workspace.client.socialnet.GroupLiveSearchPresenter;
-import org.ourproject.kune.workspace.client.socialnet.GroupMembersPresenter;
-import org.ourproject.kune.workspace.client.socialnet.GroupMembersView;
-import org.ourproject.kune.workspace.client.socialnet.ParticipationPresenter;
-import org.ourproject.kune.workspace.client.socialnet.ParticipationView;
 import org.ourproject.kune.workspace.client.socialnet.UserLiveSearchPresenter;
 import org.ourproject.kune.workspace.client.socialnet.ui.GroupLiveSearchPanel;
-import org.ourproject.kune.workspace.client.socialnet.ui.GroupMembersPanel;
-import org.ourproject.kune.workspace.client.socialnet.ui.ParticipationPanel;
 import org.ourproject.kune.workspace.client.socialnet.ui.UserLiveSearchPanel;
-import org.ourproject.kune.workspace.client.summary.GroupSummaryPresenter;
-import org.ourproject.kune.workspace.client.summary.GroupSummaryView;
+import org.ourproject.kune.workspace.client.theme.ThemeMenuPanel;
 import org.ourproject.kune.workspace.client.theme.ThemeMenuPresenter;
 import org.ourproject.kune.workspace.client.theme.ThemeMenuView;
-import org.ourproject.kune.workspace.client.theme.ui.ThemeMenuPanel;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPanel;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPresenter;
@@ -76,9 +67,6 @@ import org.ourproject.kune.workspace.client.workspace.ContentToolBarComponent;
 import org.ourproject.kune.workspace.client.workspace.ContentToolBarPresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentToolBarView;
 import org.ourproject.kune.workspace.client.workspace.GroupLiveSearchComponent;
-import org.ourproject.kune.workspace.client.workspace.GroupMembersComponent;
-import org.ourproject.kune.workspace.client.workspace.GroupSummaryComponent;
-import org.ourproject.kune.workspace.client.workspace.ParticipationComponent;
 import org.ourproject.kune.workspace.client.workspace.ThemeMenuComponent;
 import org.ourproject.kune.workspace.client.workspace.UserLiveSearchComponent;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
@@ -151,20 +139,6 @@ public class WorkspaceFactory {
 	return presenter;
     }
 
-    public static GroupMembersComponent createGroupMembersComponent() {
-	final GroupMembersPresenter presenter = new GroupMembersPresenter(i18n);
-	final GroupMembersView view = new GroupMembersPanel(presenter, i18n);
-	presenter.init(view);
-	return presenter;
-    }
-
-    public static GroupSummaryComponent createGroupSummaryComponent() {
-	final GroupSummaryPresenter presenter = new GroupSummaryPresenter();
-	final GroupSummaryView view = new GroupSummaryPanel(presenter, i18n, colorTheme);
-	presenter.init(view);
-	return presenter;
-    }
-
     public static I18nTranslatorComponent createI18nTranslatorComponent() {
 	final I18nTranslatorPresenter presenter = new I18nTranslatorPresenter(session);
 	final I18nTranslatorView view = new I18nTranslatorPanel(presenter, i18n);
@@ -182,13 +156,6 @@ public class WorkspaceFactory {
     public static LicenseComponent createLicenseComponent() {
 	final LicensePresenter presenter = new LicensePresenter();
 	final LicenseView view = new LicensePanel(presenter, i18n);
-	presenter.init(view);
-	return presenter;
-    }
-
-    public static ParticipationComponent createParticipationComponent() {
-	final ParticipationPresenter presenter = new ParticipationPresenter(i18n);
-	final ParticipationView view = new ParticipationPanel(presenter, i18n);
 	presenter.init(view);
 	return presenter;
     }

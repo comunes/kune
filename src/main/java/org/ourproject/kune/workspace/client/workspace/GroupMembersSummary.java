@@ -17,22 +17,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.socialnet;
 
-import org.ourproject.kune.platf.client.View;
+package org.ourproject.kune.workspace.client.workspace;
 
-public interface ParticipationView extends View {
+import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 
-    void hide();
+public interface GroupMembersSummary {
 
-    void addCategory(String name, String title);
+    public void setState(StateDTO state);
 
-    void addCategoryMember(String categoryName, String name, String title, MemberAction[] memberActions);
+    public void setTheme(WsTheme oldTheme, WsTheme newTheme);
 
-    void show();
+    public void showAdmins();
 
-    void setDropDownContentVisible(boolean visible);
-
-    void clear();
+    public void showCollabs();
 
 }

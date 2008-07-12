@@ -37,30 +37,32 @@ public class AcceptJoinGroupAction implements Action<String> {
     private final Session session;
     private final I18nTranslationService i18n;
 
+    @Deprecated
     public AcceptJoinGroupAction(final Session session, final StateManager stateManager, final Workspace workspace,
-            final I18nTranslationService i18n) {
-        this.session = session;
-        this.workspace = workspace;
-        this.stateManager = stateManager;
-        this.i18n = i18n;
+	    final I18nTranslationService i18n) {
+	this.session = session;
+	this.workspace = workspace;
+	this.stateManager = stateManager;
+	this.i18n = i18n;
     }
 
     public void execute(final String groupShortName) {
-        onAcceptJoinGroup(groupShortName);
+	onAcceptJoinGroup(groupShortName);
     }
 
     private void onAcceptJoinGroup(final String groupShortName) {
-        Site.showProgressProcessing();
-        final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        server.AcceptJoinGroup(session.getUserHash(), session.getCurrentState().getGroup().getShortName(),
-                groupShortName, new AsyncCallbackSimple<SocialNetworkResultDTO>() {
-                    public void onSuccess(final SocialNetworkResultDTO result) {
-                        Site.hideProgress();
-                        Site.info(i18n.t("Member accepted"));
-                        stateManager.setSocialNetwork(result);
-                        workspace.getGroupMembersComponent().showCollabs();
-                    }
-                });
+	Site.showProgressProcessing();
+	final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
+	server.AcceptJoinGroup(session.getUserHash(), session.getCurrentState().getGroup().getShortName(),
+		groupShortName, new AsyncCallbackSimple<SocialNetworkResultDTO>() {
+		    public void onSuccess(final SocialNetworkResultDTO result) {
+			Site.hideProgress();
+			Site.info(i18n.t("Member accepted"));
+			stateManager.setSocialNetwork(result);
+			// FIXME
+			// workspace.getGroupMembersComponent().showCollabs();
+		    }
+		});
 
     }
 }

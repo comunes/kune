@@ -30,6 +30,7 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
+@Deprecated
 public class AddAdminAction implements Action<String> {
 
     private final Workspace workspace;
@@ -38,29 +39,29 @@ public class AddAdminAction implements Action<String> {
     private final I18nTranslationService i18n;
 
     public AddAdminAction(final Session session, final StateManager stateManager, final Workspace workspace,
-            final I18nTranslationService i18n) {
-        this.session = session;
-        this.stateManager = stateManager;
-        this.workspace = workspace;
-        this.i18n = i18n;
+	    final I18nTranslationService i18n) {
+	this.session = session;
+	this.stateManager = stateManager;
+	this.workspace = workspace;
+	this.i18n = i18n;
     }
 
     public void execute(final String groupShortName) {
-        onAddAdmin(groupShortName);
+	onAddAdmin(groupShortName);
     }
 
     private void onAddAdmin(final String groupShortName) {
-        Site.showProgressProcessing();
-        final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        server.addAdminMember(session.getUserHash(), session.getCurrentState().getGroup().getShortName(),
-                groupShortName, new AsyncCallbackSimple<SocialNetworkResultDTO>() {
-                    public void onSuccess(final SocialNetworkResultDTO result) {
-                        Site.hideProgress();
-                        Site.info(i18n.t("Member added as admin"));
-                        stateManager.setSocialNetwork(result);
-                        workspace.getGroupMembersComponent().showAdmins();
-                    }
-                });
+	Site.showProgressProcessing();
+	final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
+	server.addAdminMember(session.getUserHash(), session.getCurrentState().getGroup().getShortName(),
+		groupShortName, new AsyncCallbackSimple<SocialNetworkResultDTO>() {
+		    public void onSuccess(final SocialNetworkResultDTO result) {
+			Site.hideProgress();
+			Site.info(i18n.t("Member added as admin"));
+			stateManager.setSocialNetwork(result);
+			// workspace.getGroupMembersComponent().showAdmins();
+		    }
+		});
 
     }
 }

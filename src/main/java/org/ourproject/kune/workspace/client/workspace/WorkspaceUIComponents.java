@@ -27,9 +27,9 @@ import org.ourproject.kune.workspace.client.licensefoot.LicenseComponent;
 public class WorkspaceUIComponents {
     private LicenseComponent license;
     private ContentTitleComponent contentTitle;
-    private GroupMembersComponent groupMembers;
-    private ParticipationComponent participatesInGroups;
-    private GroupSummaryComponent groupSummary;
+    private GroupMembersSummary groupMembers;
+    private ParticipationSummary participatesInGroups;
+    private GroupSummary groupSummary;
     private ContentSubTitleComponent contentSubTitle;
     private ContentBottomToolBarComponent contentBottomToolBar;
     private ThemeMenuComponent themeMenu;
@@ -76,20 +76,6 @@ public class WorkspaceUIComponents {
 	return groupLiveSearch;
     }
 
-    public GroupMembersComponent getGroupMembersComponent() {
-	if (groupMembers == null) {
-	    groupMembers = WorkspaceFactory.createGroupMembersComponent();
-	}
-	return groupMembers;
-    }
-
-    public GroupSummaryComponent getGroupSummaryComponent() {
-	if (groupSummary == null) {
-	    groupSummary = WorkspaceFactory.createGroupSummaryComponent();
-	}
-	return groupSummary;
-    }
-
     public I18nTranslatorComponent getI18nTranslatorComponent() {
 	if (i18nTranslatorSearch == null) {
 	    i18nTranslatorSearch = WorkspaceFactory.createI18nTranslatorComponent();
@@ -102,13 +88,6 @@ public class WorkspaceUIComponents {
 	    license = WorkspaceFactory.createLicenseComponent();
 	}
 	return license;
-    }
-
-    public ParticipationComponent getParticipationComponent() {
-	if (participatesInGroups == null) {
-	    participatesInGroups = WorkspaceFactory.createParticipationComponent();
-	}
-	return participatesInGroups;
     }
 
     public ThemeMenuComponent getThemeMenuComponent() {

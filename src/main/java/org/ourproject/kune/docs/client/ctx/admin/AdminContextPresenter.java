@@ -37,15 +37,15 @@ import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.sitebar.Site;
-import org.ourproject.kune.workspace.client.workspace.Tags;
+import org.ourproject.kune.workspace.client.workspace.TagsSummary;
 
 public class AdminContextPresenter extends AbstractPresenter implements AdminContext {
 
     private AdminContextView view;
     private final Session session;
-    private final Tags tags;
+    private final TagsSummary tags;
 
-    public AdminContextPresenter(final Session session, final Tags tags) {
+    public AdminContextPresenter(final Session session, final TagsSummary tags) {
 	this.session = session;
 	this.tags = tags;
     }

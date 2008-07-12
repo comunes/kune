@@ -20,9 +20,12 @@
 package org.ourproject.kune.workspace.client.summary;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 
 public interface GroupSummaryView extends View {
 
     void setComment(String comment);
+
+    void setTheme(WsTheme oldTheme, WsTheme newTheme);
 
 }

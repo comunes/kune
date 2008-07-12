@@ -116,7 +116,7 @@ public class StateManagerDefault implements StateManager {
 	    final ParticipationDataDTO userParticipation = socialNet.getUserParticipation();
 	    state.setGroupMembers(groupMembers);
 	    state.setParticipation(userParticipation);
-	    setSocialNetwork(state);
+	    ws.setSocialNetwork(state);
 	}
     }
 
@@ -150,8 +150,6 @@ public class StateManagerDefault implements StateManager {
 	workspace.setContent(clientTool.getContent());
 	workspace.setContext(clientTool.getContext());
 	workspace.getLicenseComponent().setLicense(state);
-	setSocialNetwork(state);
-	workspace.getGroupSummaryComponent().setGroupSummary(state);
 	Site.hideProgress();
     }
 
@@ -171,10 +169,4 @@ public class StateManagerDefault implements StateManager {
 	    }
 	});
     }
-
-    private void setSocialNetwork(final StateDTO state) {
-	workspace.getGroupMembersComponent().setGroupMembers(state);
-	workspace.getParticipationComponent().setParticipation(state);
-    }
-
 }

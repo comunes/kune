@@ -18,17 +18,19 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.tags;
+package org.ourproject.kune.workspace.client.workspace;
 
 import java.util.List;
 
-import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.TagResultDTO;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 
-public interface TagsView extends View {
+public interface TagsSummary {
 
-    void setTags(List<TagResultDTO> groupTags);
+    void setGroupTags(List<TagResultDTO> result);
+
+    void setState(StateDTO state);
 
     void setTheme(WsTheme oldTheme, WsTheme newTheme);
 

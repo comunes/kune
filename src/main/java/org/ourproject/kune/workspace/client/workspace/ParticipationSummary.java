@@ -20,11 +20,13 @@
 
 package org.ourproject.kune.workspace.client.workspace;
 
-import org.ourproject.kune.platf.client.Component;
 import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 
-public interface ParticipationComponent extends Component {
+public interface ParticipationSummary {
 
-    void setParticipation(StateDTO state);
+    void setState(StateDTO state);
+
+    void setTheme(WsTheme oldTheme, WsTheme newTheme);
 
 }

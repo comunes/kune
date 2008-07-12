@@ -20,15 +20,10 @@
 
 package org.ourproject.kune.workspace.client.workspace;
 
-import java.util.List;
-
 import org.ourproject.kune.platf.client.dto.StateDTO;
-import org.ourproject.kune.platf.client.dto.TagResultDTO;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 
-public interface Tags {
-
-    void setGroupTags(List<TagResultDTO> result);
+public interface GroupSummary {
 
     void setState(StateDTO state);
 

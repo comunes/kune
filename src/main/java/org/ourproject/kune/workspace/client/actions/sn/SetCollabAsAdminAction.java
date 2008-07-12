@@ -30,6 +30,7 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
+@Deprecated
 public class SetCollabAsAdminAction implements Action<String> {
 
     private final Session session;
@@ -38,30 +39,30 @@ public class SetCollabAsAdminAction implements Action<String> {
     private final I18nTranslationService i18n;
 
     public SetCollabAsAdminAction(final Session session, final StateManager stateManager, final Workspace workspace,
-            final I18nTranslationService i18n) {
-        this.session = session;
-        this.stateManager = stateManager;
-        this.workspace = workspace;
-        this.i18n = i18n;
+	    final I18nTranslationService i18n) {
+	this.session = session;
+	this.stateManager = stateManager;
+	this.workspace = workspace;
+	this.i18n = i18n;
     }
 
     public void execute(final String value) {
-        onSetCollabAsAdmin(value);
+	onSetCollabAsAdmin(value);
     }
 
     private void onSetCollabAsAdmin(final String groupShortName) {
-        Site.showProgressProcessing();
-        final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-        server.setCollabAsAdmin(session.getUserHash(), session.getCurrentState().getGroup().getShortName(),
-                groupShortName, new AsyncCallbackSimple<SocialNetworkResultDTO>() {
-                    public void onSuccess(final SocialNetworkResultDTO result) {
-                        Site.hideProgress();
-                        Site.info(i18n.t("Type of member changed"));
-                        stateManager.setSocialNetwork(result);
-                        workspace.getGroupMembersComponent().showAdmins();
-                        workspace.getGroupMembersComponent().showAdmins();
-                    }
-                });
+	Site.showProgressProcessing();
+	final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
+	server.setCollabAsAdmin(session.getUserHash(), session.getCurrentState().getGroup().getShortName(),
+		groupShortName, new AsyncCallbackSimple<SocialNetworkResultDTO>() {
+		    public void onSuccess(final SocialNetworkResultDTO result) {
+			Site.hideProgress();
+			Site.info(i18n.t("Type of member changed"));
+			stateManager.setSocialNetwork(result);
+			// workspace.getGroupMembersComponent().showAdmins();
+			// workspace.getGroupMembersComponent().showAdmins();
+		    }
+		});
 
     }
 }

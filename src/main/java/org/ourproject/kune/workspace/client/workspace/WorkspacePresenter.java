@@ -104,24 +104,12 @@ public class WorkspacePresenter implements Workspace {
 	return components.getGroupLiveSearchComponent();
     }
 
-    public GroupMembersComponent getGroupMembersComponent() {
-	return components.getGroupMembersComponent();
-    }
-
-    public GroupSummaryComponent getGroupSummaryComponent() {
-	return components.getGroupSummaryComponent();
-    }
-
     public I18nTranslatorComponent getI18nTranslatorComponent() {
 	return components.getI18nTranslatorComponent();
     }
 
     public LicenseComponent getLicenseComponent() {
 	return components.getLicenseComponent();
-    }
-
-    public ParticipationComponent getParticipationComponent() {
-	return components.getParticipationComponent();
     }
 
     public ThemeMenuComponent getThemeMenuComponent() {

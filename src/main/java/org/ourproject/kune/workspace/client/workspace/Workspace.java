@@ -57,15 +57,9 @@ public interface Workspace extends Component {
 
     public GroupLiveSearchComponent getGroupLiveSearchComponent();
 
-    public GroupMembersComponent getGroupMembersComponent();
-
-    public GroupSummaryComponent getGroupSummaryComponent();
-
     public I18nTranslatorComponent getI18nTranslatorComponent();
 
     public LicenseComponent getLicenseComponent();
-
-    public ParticipationComponent getParticipationComponent();
 
     public ThemeMenuComponent getThemeMenuComponent();
 
