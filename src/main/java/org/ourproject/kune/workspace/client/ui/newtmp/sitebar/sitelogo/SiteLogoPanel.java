@@ -13,7 +13,6 @@ public class SiteLogoPanel implements SiteLogoView {
 	siteLogoImg = new Image();
 	final SiteBar siteBar = ws.getSiteBar();
 	siteBar.addSpacer();
-	siteBar.addSpacer();
 	siteBar.add(siteLogoImg);
     }
 

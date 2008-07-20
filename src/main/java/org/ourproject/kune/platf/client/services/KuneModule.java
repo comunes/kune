@@ -40,9 +40,24 @@ import org.ourproject.kune.workspace.client.ui.newtmp.licensefoot.EntityLicenseP
 import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitelogo.SiteLogo;
 import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitelogo.SiteLogoPanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitelogo.SiteLogoPresenter;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitenewgroup.SiteNewGroupLink;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitenewgroup.SiteNewGroupLinkPanel;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitenewgroup.SiteNewGroupLinkPresenter;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.siteoptions.SiteOptions;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.siteoptions.SiteOptionsPanel;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.siteoptions.SiteOptionsPresenter;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitepublic.SitePublicSpaceLink;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitepublic.SitePublicSpaceLinkPanel;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitepublic.SitePublicSpaceLinkPresenter;
 import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitesearch.SiteSearch;
 import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitesearch.SiteSearchPanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitesearch.SiteSearchPresenter;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitesign.SiteSignInLink;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitesign.SiteSignInLinkPanel;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitesign.SiteSignInLinkPresenter;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitesign.SiteSignOutLink;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitesign.SiteSignOutLinkPanel;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitesign.SiteSignOutLinkPresenter;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
@@ -99,6 +114,12 @@ public class KuneModule implements Module {
 	    }
 	}, SingletonScope.class);
 
+	builder.registerProvider(Images.class, new Provider<Images>() {
+	    public Images get() {
+		return Images.App.getInstance();
+	    }
+	}, SingletonScope.class);
+
 	builder.registerProvider(ImageUtils.class, new Provider<ImageUtils>() {
 	    public ImageUtils get() {
 		return new ImageUtils();
@@ -152,6 +173,52 @@ public class KuneModule implements Module {
 
 	final WorkspaceSkeleton ws = builder.getInstance(WorkspaceSkeleton.class);
 
+	builder.registerProvider(SitePublicSpaceLink.class, new Provider<SitePublicSpaceLink>() {
+	    public SitePublicSpaceLink get() {
+		final SitePublicSpaceLinkPresenter presenter = new SitePublicSpaceLinkPresenter();
+		final SitePublicSpaceLinkPanel panel = new SitePublicSpaceLinkPanel(presenter, ws, i18n, builder
+			.getInstance(Images.class));
+		presenter.init(panel);
+		return presenter;
+	    }
+	}, SingletonScope.class);
+
+	builder.registerProvider(SiteSignInLink.class, new Provider<SiteSignInLink>() {
+	    public SiteSignInLink get() {
+		final SiteSignInLinkPresenter presenter = new SiteSignInLinkPresenter();
+		final SiteSignInLinkPanel panel = new SiteSignInLinkPanel(presenter, ws);
+		presenter.init(panel);
+		return presenter;
+	    }
+	}, SingletonScope.class);
+
+	builder.registerProvider(SiteSignOutLink.class, new Provider<SiteSignOutLink>() {
+	    public SiteSignOutLink get() {
+		final SiteSignOutLinkPresenter presenter = new SiteSignOutLinkPresenter();
+		final SiteSignOutLinkPanel panel = new SiteSignOutLinkPanel(presenter, ws);
+		presenter.init(panel);
+		return presenter;
+	    }
+	}, SingletonScope.class);
+
+	builder.registerProvider(SiteNewGroupLink.class, new Provider<SiteNewGroupLink>() {
+	    public SiteNewGroupLink get() {
+		final SiteNewGroupLinkPresenter presenter = new SiteNewGroupLinkPresenter();
+		final SiteNewGroupLinkPanel panel = new SiteNewGroupLinkPanel(presenter, ws);
+		presenter.init(panel);
+		return presenter;
+	    }
+	}, SingletonScope.class);
+
+	builder.registerProvider(SiteOptions.class, new Provider<SiteOptions>() {
+	    public SiteOptions get() {
+		final SiteOptionsPresenter presenter = new SiteOptionsPresenter();
+		final SiteOptionsPanel panel = new SiteOptionsPanel(presenter, ws);
+		presenter.init(panel);
+		return presenter;
+	    }
+	}, SingletonScope.class);
+
 	builder.registerProvider(SiteLogo.class, new Provider<SiteLogo>() {
 	    public SiteLogo get() {
 		final SiteLogoPresenter presenter = new SiteLogoPresenter(builder.getInstance(Session.class));
@@ -179,6 +246,10 @@ public class KuneModule implements Module {
 	    }
 	}, SingletonScope.class);
 
+	builder.getInstance(SitePublicSpaceLink.class);
+	builder.getInstance(SiteSignInLink.class);
+	builder.getInstance(SiteSignOutLink.class);
+	builder.getInstance(SiteNewGroupLink.class);
 	builder.getInstance(SiteSearch.class);
 	builder.getInstance(SiteLogo.class);
 
@@ -227,11 +298,13 @@ public class KuneModule implements Module {
 
 	builder.registerProvider(WorkspaceManager.class, new Provider<WorkspaceManager>() {
 	    public WorkspaceManager get() {
-		final WorkspaceManager presenter = new WorkspaceManager(builder.getInstance(EntityLogo.class), builder
-			.getInstance(EntityTitlePresenter.class), builder.getInstance(EntitySubTitlePresenter.class),
-			builder.getInstance(WsThemePresenter.class), builder.getInstance(EntityLicensePresenter.class),
-			builder.getProvider(GroupMembersSummary.class),
-			builder.getProvider(ParticipationSummary.class), builder.getProvider(TagsSummary.class),
+		final WorkspaceManager presenter = new WorkspaceManager(builder.getInstance(SitePublicSpaceLink.class),
+			builder.getInstance(EntityLogo.class), builder.getInstance(EntityTitlePresenter.class), builder
+				.getInstance(EntitySubTitlePresenter.class), builder
+				.getInstance(WsThemePresenter.class),
+			builder.getInstance(EntityLicensePresenter.class), builder
+				.getProvider(GroupMembersSummary.class), builder
+				.getProvider(ParticipationSummary.class), builder.getProvider(TagsSummary.class),
 			builder.getProvider(GroupSummary.class));
 		return presenter;
 	    }

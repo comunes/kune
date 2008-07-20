@@ -3,6 +3,7 @@ package org.ourproject.kune.workspace.client.ui.newtmp;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.workspace.client.ui.newtmp.licensefoot.EntityLicensePresenter;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitepublic.SitePublicSpaceLink;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
 import org.ourproject.kune.workspace.client.ui.newtmp.title.EntitySubTitlePresenter;
@@ -27,13 +28,15 @@ public class WorkspaceManager {
     private final Provider<GroupMembersSummary> groupMembersSummaryProvider;
     private final Provider<ParticipationSummary> participationSummaryProvider;
     private final Provider<GroupSummary> groupSummaryProvider;
+    private final SitePublicSpaceLink publicSpaceLink;
 
-    public WorkspaceManager(final EntityLogo entityLogo, final EntityTitlePresenter entityTitlePresenter,
-	    final EntitySubTitlePresenter entitySubTitlePresenter, final WsThemePresenter wsThemePresenter,
-	    final EntityLicensePresenter entityLicensePresenter,
+    public WorkspaceManager(final SitePublicSpaceLink publicSpaceLink, final EntityLogo entityLogo,
+	    final EntityTitlePresenter entityTitlePresenter, final EntitySubTitlePresenter entitySubTitlePresenter,
+	    final WsThemePresenter wsThemePresenter, final EntityLicensePresenter entityLicensePresenter,
 	    final Provider<GroupMembersSummary> groupMembersSummaryProvider,
 	    final Provider<ParticipationSummary> participationSummaryProvider,
 	    final Provider<TagsSummary> tagsSummaryProvider, final Provider<GroupSummary> groupSummaryProvider) {
+	this.publicSpaceLink = publicSpaceLink;
 	this.entityLogo = entityLogo;
 	this.entityTitlePresenter = entityTitlePresenter;
 	this.entitySubTitlePresenter = entitySubTitlePresenter;
@@ -60,6 +63,7 @@ public class WorkspaceManager {
     }
 
     public void setState(final StateDTO state) {
+	publicSpaceLink.setState(state);
 	final GroupDTO group = state.getGroup();
 	final boolean isAdmin = state.getGroupRights().isAdministrable();
 	entityLogo.setLogo(group.getLongName());

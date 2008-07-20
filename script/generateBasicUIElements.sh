@@ -16,6 +16,11 @@ DIR=$1
 # DO
 PACKAGE=`echo $DIR | cut -d "/" -f 4- | sed 's/\//\./g'`
 
+if [[ ! -d $DIR ]]
+then
+  mkdir $DIR
+fi
+
 cat <<EOF > $DIR/${NAME}.java
 package $PACKAGE;
 
@@ -62,9 +67,11 @@ EOF
 cat <<EOF > $DIR/${NAME}Panel.java
 package $PACKAGE;
 
+import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
+
 public class ${NAME}Panel implements ${NAME}View {
 
-public ${NAME}Panel(final ${NAME}Presenter presenter) {
+public ${NAME}Panel(final ${NAME}Presenter presenter, final WorkspaceSkeleton ws) {
 }
 }
 EOF
@@ -81,7 +88,7 @@ import $PACKAGE.${NAME};
 builder.registerProvider(${NAME}.class, new Provider<${NAME}>() {
     public ${NAME} get() {
 	final ${NAME}Presenter presenter = new ${NAME}Presenter();
-	final ${NAME}Panel panel = new ${NAME}Panel(presenter);
+	final ${NAME}Panel panel = new ${NAME}Panel(presenter, ws);
 	presenter.init(panel);
 	return presenter;
     }
