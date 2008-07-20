@@ -227,13 +227,12 @@ public class KuneModule implements Module {
 
 	builder.registerProvider(WorkspaceManager.class, new Provider<WorkspaceManager>() {
 	    public WorkspaceManager get() {
-		// TODO: use here providers instead of getInstance
 		final WorkspaceManager presenter = new WorkspaceManager(builder.getInstance(EntityLogo.class), builder
 			.getInstance(EntityTitlePresenter.class), builder.getInstance(EntitySubTitlePresenter.class),
 			builder.getInstance(WsThemePresenter.class), builder.getInstance(EntityLicensePresenter.class),
-			builder.getInstance(GroupMembersSummary.class),
-			builder.getInstance(ParticipationSummary.class), builder.getInstance(TagsSummary.class),
-			builder.getInstance(GroupSummary.class));
+			builder.getProvider(GroupMembersSummary.class),
+			builder.getProvider(ParticipationSummary.class), builder.getProvider(TagsSummary.class),
+			builder.getProvider(GroupSummary.class));
 		return presenter;
 	    }
 	}, SingletonScope.class);

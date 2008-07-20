@@ -23,7 +23,7 @@ package org.ourproject.kune.platf.client.ui.gridmenu;
 
 import java.util.ArrayList;
 
-public class GridMenuItemCollection extends ArrayList<GridMenuItem<?>> {
+public class GridMenuItemCollection<T> extends ArrayList<GridMenuItem<T>> {
 
     private static final long serialVersionUID = 1L;
 

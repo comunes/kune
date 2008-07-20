@@ -32,6 +32,7 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.ui.gridmenu.GridMenuItem;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 import org.ourproject.kune.workspace.client.workspace.GroupMembersSummary;
@@ -58,6 +59,11 @@ public class GroupMembersSummaryPresenter extends AbstractPresenter implements G
 	DefaultDispatcher.getInstance().fire(WorkspaceEvents.ADD_COLLAB_MEMBER, groupShortName);
     }
 
+    public void addGroupOperation(final GridMenuItem<GroupDTO> operation, final boolean mustBeLogged) {
+	// TODO Auto-generated method stub
+
+    }
+
     public View getView() {
 	return view;
     }
@@ -76,6 +82,11 @@ public class GroupMembersSummaryPresenter extends AbstractPresenter implements G
 
     public void onSelection(final String groupShortName, final String groupLongName) {
 	view.confirmAddCollab(groupShortName, groupLongName);
+    }
+
+    public void removeGroupOperation(final GridMenuItem<GroupDTO> operation, final boolean mustBeLogged) {
+	// TODO Auto-generated method stub
+
     }
 
     public void setState(final StateDTO state) {

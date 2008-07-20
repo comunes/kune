@@ -20,7 +20,9 @@
 
 package org.ourproject.kune.workspace.client.workspace;
 
+import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.ui.gridmenu.GridMenuItem;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 
 public interface GroupMembersSummary {
@@ -28,5 +30,9 @@ public interface GroupMembersSummary {
     public void setState(StateDTO state);
 
     public void setTheme(WsTheme oldTheme, WsTheme newTheme);
+
+    void addGroupOperation(GridMenuItem<GroupDTO> operation, boolean mustBeLogged);
+
+    void removeGroupOperation(GridMenuItem<GroupDTO> operation, boolean mustBeLogged);
 
 }

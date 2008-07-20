@@ -21,6 +21,7 @@ import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridItem;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridMenu;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridMenuItem;
+import org.ourproject.kune.platf.client.ui.gridmenu.GridMenuItemCollection;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 import org.ourproject.kune.workspace.client.workspace.GroupMembersSummary;
@@ -48,6 +49,8 @@ public class GroupMembersSummaryPresenterNew implements GroupMembersSummary {
     private GridButton addMember;
     private GridButton requestJoin;
     private GridButton unJoinButton;
+    private GridMenuItemCollection<GroupDTO> otherOperations;
+    private GridMenuItemCollection<GroupDTO> otherLoggedOperations;
 
     public GroupMembersSummaryPresenterNew(final I18nTranslationService i18n,
 	    final Provider<StateManager> stateManager, final ImageUtils imageUtils, final Session session,
@@ -83,12 +86,29 @@ public class GroupMembersSummaryPresenterNew implements GroupMembersSummary {
 		});
     }
 
+    public void addGroupOperation(final GridMenuItem<GroupDTO> operation, final boolean mustBeLogged) {
+	GridMenuItemCollection<GroupDTO> collection;
+	collection = mustBeLogged ? otherLoggedOperations : otherOperations;
+	if (collection == null) {
+	    collection = new GridMenuItemCollection<GroupDTO>();
+	}
+	collection.add(operation);
+    }
+
     public void hide() {
 	view.setVisible(false);
     }
 
     public void init(final GroupMembersSummaryViewNew view) {
 	this.view = view;
+    }
+
+    public void removeGroupOperation(final GridMenuItem<GroupDTO> operation, final boolean mustBeLogged) {
+	GridMenuItemCollection<GroupDTO> collection;
+	collection = mustBeLogged ? otherLoggedOperations : otherOperations;
+	if (collection != null) {
+	    collection.remove(operation);
+	}
     }
 
     public void setState(final StateDTO state) {
@@ -115,7 +135,7 @@ public class GroupMembersSummaryPresenterNew implements GroupMembersSummary {
 	    }
 	});
 
-	requestJoin = new GridButton("images/add-green.gif", i18n.t("Request to join"), i18n
+	requestJoin = new GridButton("images/add-green.gif", i18n.t("Participate"), i18n
 		.t("Request to participate in this group"), new Slot<String>() {
 	    public void onEvent(final String parameter) {
 		Site.showProgressProcessing();
@@ -139,7 +159,7 @@ public class GroupMembersSummaryPresenterNew implements GroupMembersSummary {
 	    }
 	});
 
-	unJoinButton = new GridButton("images/del.gif", i18n.t("Unjoin this group"), i18n
+	unJoinButton = new GridButton("images/del.gif", i18n.t("Unjoin"), i18n
 		.t("Don't participate more as a member in this group"), new Slot<String>() {
 	    public void onEvent(final String parameter) {
 		Site.showProgressProcessing();
@@ -165,6 +185,12 @@ public class GroupMembersSummaryPresenterNew implements GroupMembersSummary {
 		.getImageHtml(ImageDescriptor.groupDefIcon), longName, longName, " ", longName, i18n.t(
 		"User name: [%s]", group.getShortName()), menu);
 	menu.addMenuItem(gotoGroupMenuItem);
+	if (otherOperations != null) {
+	    menu.addMenuItemList(otherOperations);
+	}
+	if (session.isLogged() && otherOperations != null) {
+	    menu.addMenuItemList(otherLoggedOperations);
+	}
 	return gridItem;
     }
 

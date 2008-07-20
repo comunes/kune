@@ -1,5 +1,7 @@
 package org.ourproject.kune.workspace.client.socialnet;
 
+import java.util.HashMap;
+
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.ui.DropDownPanel;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridButton;
@@ -22,6 +24,7 @@ public class GroupMembersSummaryPanelNew extends DropDownPanel implements GroupM
     private final GridMenuPanel<GroupDTO> gridMenuPanel;
     private final I18nUITranslationService i18n;
     private final GroupMembersSummaryPresenterNew presenter;
+    private final HashMap<GridButton, ToolbarButton> buttonsCache;
 
     public GroupMembersSummaryPanelNew(final GroupMembersSummaryPresenterNew presenter,
 	    final I18nUITranslationService i18n, final WorkspaceSkeleton ws) {
@@ -31,8 +34,9 @@ public class GroupMembersSummaryPanelNew extends DropDownPanel implements GroupM
 	super.setHeaderText(i18n.t("Group members"));
 	super.setHeaderTitle(i18n.t("People and groups collaborating in this group"));
 	super.setBorderStylePrimaryName("k-dropdownouter-members");
+	super.addStyleName("kune-Margin-Medium-tl");
 	gridMenuPanel = new GridMenuPanel<GroupDTO>(i18n.t("This is an orphaned project, if you are interested "
-		+ "please request to join to work on it"), true, true, false, true);
+		+ "please request to join to work on it"), true, true, false, true, false);
 	final EntitySummary entitySummary = ws.getEntitySummary();
 	entitySummary.addInSummary(this);
 	entitySummary.addListener(new ContainerListenerAdapter() {
@@ -43,18 +47,24 @@ public class GroupMembersSummaryPanelNew extends DropDownPanel implements GroupM
 	    }
 	});
 	this.setContent(gridMenuPanel);
+	buttonsCache = new HashMap<GridButton, ToolbarButton>();
     }
 
     public void addButton(final GridButton gridButton) {
-	final ToolbarButton button = new ToolbarButton(gridButton.getTitle());
-	button.setIcon(gridButton.getIcon());
-	button.setTooltip(gridButton.getTooltip());
-	button.addListener(new ButtonListenerAdapter() {
-	    public void onClick(final Button button, final EventObject e) {
-		gridButton.getSlot().onEvent("");
-	    }
-	});
-	gridMenuPanel.getBottomBar().addButton(button);
+	ToolbarButton button = buttonsCache.get(gridButton);
+	if (button == null) {
+	    button = new ToolbarButton(gridButton.getTitle());
+	    button.setIcon(gridButton.getIcon());
+	    button.setTooltip(gridButton.getTooltip());
+	    button.addListener(new ButtonListenerAdapter() {
+		public void onClick(final Button button, final EventObject e) {
+		    gridButton.getSlot().onEvent("");
+		}
+	    });
+	}
+	if (!button.isAttached()) {
+	    gridMenuPanel.getBottomBar().addButton(button);
+	}
     }
 
     public void addItem(final GridItem<GroupDTO> gridItem) {
@@ -63,6 +73,9 @@ public class GroupMembersSummaryPanelNew extends DropDownPanel implements GroupM
 
     public void clear() {
 	gridMenuPanel.removeAll();
+	for (final ToolbarButton button : buttonsCache.values()) {
+	    button.removeFromParent();
+	}
     }
 
     public void confirmAddCollab(final String groupShortName, final String groupLongName) {

@@ -66,27 +66,28 @@ public class GridMenuPanel<T> extends Composite {
     private final GridDragConfiguration gridDragConfiguration;
     private final GridDropConfiguration gridDropConfiguration;
     private ColumnModel columnModel;
+    private final boolean withEndIcon;
 
     public GridMenuPanel(final String emptyText) {
-	this(emptyText, null, null, false, false, false, false);
+	this(emptyText, null, null, false, false, false, false, false);
     }
 
     public GridMenuPanel(final String emptyText, final boolean grouped, final boolean withCounters) {
-	this(emptyText, null, null, grouped, withCounters, false, false);
+	this(emptyText, null, null, grouped, withCounters, false, false, false);
     }
 
     public GridMenuPanel(final String emptyText, final boolean grouped, final boolean withCounters,
-	    final boolean withTopBar, final boolean withBottomBar) {
-	this(emptyText, null, null, grouped, withCounters, withTopBar, withBottomBar);
+	    final boolean withTopBar, final boolean withBottomBar, final boolean withEndIcon) {
+	this(emptyText, null, null, grouped, withCounters, withTopBar, withBottomBar, withEndIcon);
     }
 
     public GridMenuPanel(final String emptyText, final GridDragConfiguration gridDragConfiguration) {
-	this(emptyText, gridDragConfiguration, null, false, false, false, false);
+	this(emptyText, gridDragConfiguration, null, false, false, false, false, false);
     }
 
     public GridMenuPanel(final String emptyText, final GridDragConfiguration gridDragConfiguration,
 	    final GridDropConfiguration gridDropConfiguration, final boolean grouped, final boolean withCounters,
-	    final boolean withTopBar, final boolean withBottomBar) {
+	    final boolean withTopBar, final boolean withBottomBar, final boolean withEndIcon) {
 	this.emptyText = emptyText;
 	this.gridDragConfiguration = gridDragConfiguration;
 	this.gridDropConfiguration = gridDropConfiguration;
@@ -94,6 +95,7 @@ public class GridMenuPanel<T> extends Composite {
 	this.onDoubleClick = new Signal<String>("onDoubleClick");
 	this.grouped = grouped;
 	this.withCounters = withCounters;
+	this.withEndIcon = withEndIcon;
 	panel = new Panel();
 	panel.setBorder(false);
 	panel.setLayout(new FitLayout());
@@ -111,7 +113,7 @@ public class GridMenuPanel<T> extends Composite {
     }
 
     public GridMenuPanel(final String emptyText, final GridDropConfiguration gridDropConfiguration) {
-	this(emptyText, null, gridDropConfiguration, false, false, false, false);
+	this(emptyText, null, gridDropConfiguration, false, false, false, false, false);
     }
 
     public void addItem(final GridItem<T> gridItem) {
@@ -161,10 +163,12 @@ public class GridMenuPanel<T> extends Composite {
     }
 
     public Toolbar getBottomBar() {
+	assert bottomBar != null;
 	return bottomBar;
     }
 
     public Toolbar getTopBar() {
+	assert topBar != null;
 	return topBar;
     }
 
@@ -194,12 +198,6 @@ public class GridMenuPanel<T> extends Composite {
 	} else {
 	    Log.error("Trying to remove a non existing item: " + gridItem.getId());
 	}
-    }
-
-    public void setEndIconVisible(final boolean visible) {
-	createGrid(emptyText, gridDragConfiguration, gridDropConfiguration);
-	columnModel.setHidden(2, !visible);
-	doLayoutIfNeeded();
     }
 
     public void setWidth(final int width) {
@@ -322,11 +320,13 @@ public class GridMenuPanel<T> extends Composite {
 	    }
 	};
 
-	final ColumnConfig[] columnsConfigs = new ColumnConfig[] {
-		new ColumnConfig("Icon", ICON_HTML, 24, false, iconHtmlRenderer, ICON_HTML),
-		new ColumnConfig("Title", TITLE_HTML, 80, true, titleHtmlRenderer, TITLE_HTML),
-		new ColumnConfig("EndIcon", END_ICON_HTML, 24, false, endIconHtmlRenderer, END_ICON_HTML),
-		new ColumnConfig(GROUP, GROUP, 0) };
+	final ColumnConfig iconColumn = new ColumnConfig("Icon", ICON_HTML, 24, false, iconHtmlRenderer, ICON_HTML);
+	final ColumnConfig titleColumn = new ColumnConfig("Title", TITLE_HTML, 100, true, titleHtmlRenderer, TITLE_HTML);
+	final ColumnConfig endIconColumn = new ColumnConfig("EndIcon", END_ICON_HTML, 24, false, endIconHtmlRenderer,
+		END_ICON_HTML);
+	final ColumnConfig groupColumn = new ColumnConfig(GROUP, GROUP, 0);
+	final ColumnConfig[] columnsConfigs = withEndIcon ? new ColumnConfig[] { iconColumn, titleColumn,
+		endIconColumn, groupColumn } : new ColumnConfig[] { iconColumn, titleColumn, groupColumn };
 	columnModel = new ColumnModel(columnsConfigs);
 	grid.setColumnModel(columnModel);
 

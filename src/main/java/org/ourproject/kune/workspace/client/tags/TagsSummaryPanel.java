@@ -45,18 +45,19 @@ public class TagsSummaryPanel extends DropDownPanel implements TagsSummaryView {
     public TagsSummaryPanel(final TagsSummaryPresenter presenter, final I18nTranslationService i18n,
 	    final WorkspaceSkeleton ws) {
 	super(i18n.t("Tags"), true);
-	super.setBorderStylePrimaryName("k-dropdownouter-tags");
 	this.i18n = i18n;
 	setHeaderTitle(i18n.t("Keywords or terms associated with this group"));
 	this.presenter = presenter;
-	addStyleName("kune-Margin-Medium-t");
 	flowPanel = new FlowPanel();
 	final VerticalPanel vp = new VerticalPanel();
+	noTagsLabel = new Label(i18n.t("The contents of this group don't have any tag"));
 	vp.add(flowPanel);
 	vp.setWidth("100%");
 	vp.setCellWidth(flowPanel, "100%");
 	super.setContent(vp);
-	noTagsLabel = new Label(i18n.t("The contents of this group don't have any tag"));
+	super.setBorderStylePrimaryName("k-dropdownouter-tags");
+	addStyleName("kune-Margin-Medium-tl");
+	flowPanel.addStyleName("kune-Margin-Small-trbl");
 	ws.getEntitySummary().addInSummary(this);
     }
 
