@@ -325,6 +325,10 @@ public class GridMenuPanel<T> extends Composite {
 	final ColumnConfig endIconColumn = new ColumnConfig("EndIcon", END_ICON_HTML, 24, false, endIconHtmlRenderer,
 		END_ICON_HTML);
 	final ColumnConfig groupColumn = new ColumnConfig(GROUP, GROUP, 0);
+	// Fixed widths?
+	iconColumn.setFixed(true);
+	titleColumn.setFixed(false);
+	endIconColumn.setFixed(true);
 	final ColumnConfig[] columnsConfigs = withEndIcon ? new ColumnConfig[] { iconColumn, titleColumn,
 		endIconColumn, groupColumn } : new ColumnConfig[] { iconColumn, titleColumn, groupColumn };
 	columnModel = new ColumnModel(columnsConfigs);
@@ -365,12 +369,13 @@ public class GridMenuPanel<T> extends Composite {
 	    final String groupEndIconHtmlTpl = "{[values.rs[0].data[\"" + GROUP_ENDICON_HTML + "\"]]}";
 	    // http://www.gwt-ext.com/forum/viewtopic.php?f=7&t=1388&p=6789&hilit=setGroupTextTpl#p6789
 	    if (withCounters) {
-		groupView.setGroupTextTpl("<span ext:qtip=\"{[values.rs[0].data[\"" + GROUP_TOOLTIP
-			+ "\"]]}\">{[values.rs[0].data[\"" + GROUP + "\"]]} ({[values.rs.length]})</span>"
-			+ groupEndIconHtmlTpl);
+		groupView.setGroupTextTpl("<span style=\"overflow: hidden;\" ext:qtip=\"{[values.rs[0].data[\""
+			+ GROUP_TOOLTIP + "\"]]}\">{[values.rs[0].data[\"" + GROUP
+			+ "\"]]} ({[values.rs.length]})</span>" + groupEndIconHtmlTpl);
 	    } else {
-		groupView.setGroupTextTpl("<span ext:qtip=\"{[values.rs[0].data[\"" + GROUP_TOOLTIP
-			+ "\"]]}\">{[values.rs[0].data[\"" + GROUP + "\"]]}</span>" + groupEndIconHtmlTpl);
+		groupView.setGroupTextTpl("<span style=\"overflow: hidden;\" ext:qtip=\"{[values.rs[0].data[\""
+			+ GROUP_TOOLTIP + "\"]]}\">{[values.rs[0].data[\"" + GROUP + "\"]]}</span>"
+			+ groupEndIconHtmlTpl);
 	    }
 	    // Other sample with condition:
 	    // view.setGroupTextTpl("{text} ({[values.rs.length]}
