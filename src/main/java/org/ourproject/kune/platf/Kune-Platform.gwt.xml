@@ -4,6 +4,8 @@
   <inherits name='com.google.gwt.i18n.I18N' />
   <inherits name="com.google.gwt.user.UserAgent" />
 
+  <public path="public" />
+  
   <replace-with
     class="org.ourproject.kune.platf.client.ui.CustomHorizontalSplitPanel.Impl">
     <when-type-is
