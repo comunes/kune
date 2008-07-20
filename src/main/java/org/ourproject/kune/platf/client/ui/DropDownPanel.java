@@ -45,6 +45,7 @@ public class DropDownPanel extends Composite implements ClickListener {
     private final Images img;
     private final Image arrowImage;
     private final RoundedPanel outerBorder;
+    private String stylePrimaryName;
 
     public DropDownPanel() {
 	vp = new VerticalPanel();
@@ -60,8 +61,9 @@ public class DropDownPanel extends Composite implements ClickListener {
 	titleHP.add(arrowImage);
 	titleHP.add(titleLabel);
 
-	outerBorder.setCornerStyleName("k-dropdownouter");
-	vp.setStylePrimaryName("k-dropdownouter");
+	this.stylePrimaryName = "k-dropdownouter";
+	outerBorder.setCornerStyleName(stylePrimaryName);
+	vp.setStylePrimaryName(stylePrimaryName);
 	vp.setWidth("100%");
 	vp.setCellWidth(contentPanel, "100%");
 	vp.setCellWidth(titleHP, "100%");
@@ -95,6 +97,12 @@ public class DropDownPanel extends Composite implements ClickListener {
 	if (sender == titleHP | sender == arrowImage | sender == titleLabel) {
 	    setContentVisible(!isContentVisible());
 	}
+    }
+
+    public void setBorderStylePrimaryName(final String stylePrimaryName) {
+	this.stylePrimaryName = stylePrimaryName;
+	outerBorder.setCornerStyleName(stylePrimaryName);
+	vp.setStylePrimaryName(stylePrimaryName);
     }
 
     @Deprecated
@@ -148,7 +156,7 @@ public class DropDownPanel extends Composite implements ClickListener {
 	    contentPanel.removeStyleDependentName(oldThemeS);
 	}
 	final String newThemeS = newTheme.toString();
-	outerBorder.setCornerStyleName("k-dropdownouter-" + newThemeS);
+	outerBorder.setCornerStyleName(stylePrimaryName + "-" + newThemeS);
 	// outerBorder.addStyleDependentName(newThemeS);
 	vp.addStyleDependentName(newThemeS);
 	titleHP.addStyleDependentName(newThemeS);

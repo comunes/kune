@@ -42,8 +42,10 @@ public class TagsSummaryPanel extends DropDownPanel implements TagsSummaryView {
     private final Label noTagsLabel;
     private final I18nTranslationService i18n;
 
-    public TagsSummaryPanel(final TagsSummaryPresenter presenter, final I18nTranslationService i18n, final WorkspaceSkeleton ws) {
+    public TagsSummaryPanel(final TagsSummaryPresenter presenter, final I18nTranslationService i18n,
+	    final WorkspaceSkeleton ws) {
 	super(i18n.t("Tags"), true);
+	super.setBorderStylePrimaryName("k-dropdownouter-tags");
 	this.i18n = i18n;
 	setHeaderTitle(i18n.t("Keywords or terms associated with this group"));
 	this.presenter = presenter;

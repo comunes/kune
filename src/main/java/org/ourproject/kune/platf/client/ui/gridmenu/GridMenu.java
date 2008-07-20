@@ -49,7 +49,7 @@ public class GridMenu<T> {
 
     public void addMenuItem(final GridMenuItem<T> menuItem) {
 	final Item item = new Item(menuItem.getTitle());
-	item.setIconCls(menuItem.getIconCls());
+	item.setIcon(menuItem.getIcon());
 	menu.addItem(item);
 	item.addListener(new BaseItemListenerAdapter() {
 	    public void onClick(final BaseItem item, final EventObject e) {

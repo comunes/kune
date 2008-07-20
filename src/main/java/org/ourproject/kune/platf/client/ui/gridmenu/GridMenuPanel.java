@@ -22,10 +22,8 @@ import com.gwtext.client.dd.DragSource;
 import com.gwtext.client.dd.DropTarget;
 import com.gwtext.client.dd.DropTargetConfig;
 import com.gwtext.client.util.Format;
-import com.gwtext.client.widgets.BoxComponent;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.Toolbar;
-import com.gwtext.client.widgets.event.ContainerListenerAdapter;
 import com.gwtext.client.widgets.grid.CellMetadata;
 import com.gwtext.client.widgets.grid.ColumnConfig;
 import com.gwtext.client.widgets.grid.ColumnModel;
@@ -109,12 +107,6 @@ public class GridMenuPanel<T> extends Composite {
 	}
 	menuMap = new HashMap<String, GridMenu<T>>();
 	recordMap = new HashMap<T, Record>();
-	panel.addListener(new ContainerListenerAdapter() {
-	    public void onResize(final BoxComponent component, final int adjWidth, final int adjHeight,
-		    final int rawWidth, final int rawHeight) {
-		setWidth(adjWidth);
-	    }
-	});
 	initWidget(panel);
     }
 
@@ -208,6 +200,13 @@ public class GridMenuPanel<T> extends Composite {
 	createGrid(emptyText, gridDragConfiguration, gridDropConfiguration);
 	columnModel.setHidden(2, !visible);
 	doLayoutIfNeeded();
+    }
+
+    public void setWidth(final int width) {
+	if (grid != null) {
+	    grid.setWidth(width - 27);
+	    doLayoutIfNeeded();
+	}
     }
 
     public void sort() {
@@ -425,14 +424,5 @@ public class GridMenuPanel<T> extends Composite {
     private void onDoubleClick(final int rowIndex) {
 	final Record record = store.getRecordAt(rowIndex);
 	onDoubleClick.fire(record.getAsString(ID));
-    }
-
-    private void setWidth(final int width) {
-	Log.info("Grid width: " + width);
-	if (grid != null) {
-	    grid.setWidth(width - 27);
-	    // panel.setWidth(width - 25);
-	    doLayoutIfNeeded();
-	}
     }
 }

@@ -5,12 +5,12 @@ import com.calclab.suco.client.signal.Slot;
 
 public class GridMenuItem<T> {
 
-    final String iconCls;
+    final String icon;
     final String title;
     private final Signal<T> onClick;
 
-    public GridMenuItem(final String iconCls, final String title, final Slot<T> slot) {
-	this.iconCls = iconCls;
+    public GridMenuItem(final String icon, final String title, final Slot<T> slot) {
+	this.icon = icon;
 	this.title = title;
 	this.onClick = new Signal<T>("onClick");
 	onClick(slot);
@@ -20,8 +20,8 @@ public class GridMenuItem<T> {
 	onClick.fire(id);
     }
 
-    public String getIconCls() {
-	return iconCls;
+    public String getIcon() {
+	return icon;
     }
 
     public String getTitle() {

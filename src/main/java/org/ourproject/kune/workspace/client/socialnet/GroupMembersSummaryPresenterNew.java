@@ -16,6 +16,7 @@ import org.ourproject.kune.platf.client.services.ImageDescriptor;
 import org.ourproject.kune.platf.client.services.ImageUtils;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.platf.client.ui.gridmenu.GridButton;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridItem;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridMenu;
@@ -44,6 +45,9 @@ public class GroupMembersSummaryPresenterNew implements GroupMembersSummary {
     private GridMenuItem<GroupDTO> changeToAdminMenuItem;
     private GridMenuItem<GroupDTO> acceptJoinGroupMenuItem;
     private GridMenuItem<GroupDTO> denyJoinGroupMenuItem;
+    private GridButton addMember;
+    private GridButton requestJoin;
+    private GridButton unJoinButton;
 
     public GroupMembersSummaryPresenterNew(final I18nTranslationService i18n,
 	    final Provider<StateManager> stateManager, final ImageUtils imageUtils, final Session session,
@@ -62,7 +66,21 @@ public class GroupMembersSummaryPresenterNew implements GroupMembersSummary {
 	pendigGroup = new GridGroup(pendingTitle, pendingTitle, i18n
 		.t("People pending to be accepted in this group by the admins"), imageUtils
 		.getImageHtml(ImageDescriptor.alert), true);
-	createActions();
+	createMenuActions();
+	createButtons();
+    }
+
+    public void addCollab(final String groupShortName) {
+	Site.showProgressProcessing();
+	snService.addCollabMember(session.getUserHash(), session.getCurrentState().getGroup().getShortName(),
+		groupShortName, new AsyncCallbackSimple<SocialNetworkResultDTO>() {
+		    public void onSuccess(final SocialNetworkResultDTO result) {
+			Site.hideProgress();
+			Site.info(i18n.t("Member added as collaborator"));
+			getStateManager().setSocialNetwork(result);
+		    }
+
+		});
     }
 
     public void hide() {
@@ -85,13 +103,80 @@ public class GroupMembersSummaryPresenterNew implements GroupMembersSummary {
 	view.setTheme(oldTheme, newTheme);
     }
 
-    private void createActions() {
-	gotoGroupMenuItem = new GridMenuItem<GroupDTO>("", i18n.t("Visit this member homepage"), new Slot<GroupDTO>() {
-	    public void onEvent(final GroupDTO groupDTO) {
-		getStateManager().gotoToken(groupDTO.getShortName());
+    private void createButtons() {
+	addMember = new GridButton("images/add-green.gif", i18n.t("Add member"), i18n
+		.t("Add a group or a person as member of this group"), new Slot<String>() {
+	    public void onEvent(final String parameter) {
+		// TODO
+		// GroupLiveSearchComponent groupLiveSearchComponent
+		// = workspace.getGroupLiveSearchComponent();
+		// groupLiveSearchComponent.addListener(listener);
+		// groupLiveSearchComponent.show();
 	    }
 	});
-	changeToCollabMenuItem = new GridMenuItem<GroupDTO>("", i18n.t("Change to collaborator"), new Slot<GroupDTO>() {
+
+	requestJoin = new GridButton("images/add-green.gif", i18n.t("Request to join"), i18n
+		.t("Request to participate in this group"), new Slot<String>() {
+	    public void onEvent(final String parameter) {
+		Site.showProgressProcessing();
+		snService.requestJoinGroup(session.getUserHash(), session.getCurrentState().getGroup().getShortName(),
+			new AsyncCallbackSimple<Object>() {
+			    public void onSuccess(final Object result) {
+				Site.hideProgress();
+				final String resultType = (String) result;
+				if (resultType == SocialNetworkDTO.REQ_JOIN_ACEPTED) {
+				    Site.info(i18n.t("You are now member of this group"));
+				    getStateManager().reload();
+				}
+				if (resultType == SocialNetworkDTO.REQ_JOIN_DENIED) {
+				    Site.important(i18n.t("Sorry this is a closed group"));
+				}
+				if (resultType == SocialNetworkDTO.REQ_JOIN_WAITING_MODERATION) {
+				    Site.info(i18n.t("Requested. Waiting for admins decision"));
+				}
+			    }
+			});
+	    }
+	});
+
+	unJoinButton = new GridButton("images/del.gif", i18n.t("Unjoin this group"), i18n
+		.t("Don't participate more as a member in this group"), new Slot<String>() {
+	    public void onEvent(final String parameter) {
+		Site.showProgressProcessing();
+		snService.unJoinGroup(session.getUserHash(), session.getCurrentState().getGroup().getShortName(),
+			new AsyncCallbackSimple<SocialNetworkResultDTO>() {
+			    public void onSuccess(final SocialNetworkResultDTO result) {
+				Site.hideProgress();
+				Site.info(i18n.t("Removed as member"));
+				getStateManager().reload();
+				// in the future with user info:
+				// services.stateManager.reloadSocialNetwork((SocialNetworkResultDTO)
+				// result);
+			    }
+			});
+	    }
+	});
+    }
+
+    private GridItem<GroupDTO> createDefMemberMenu(final GroupDTO group, final GridGroup gridGroup) {
+	final GridMenu<GroupDTO> menu = new GridMenu<GroupDTO>(group);
+	final String longName = group.getLongName();
+	final GridItem<GroupDTO> gridItem = new GridItem<GroupDTO>(group, gridGroup, group.getShortName(), imageUtils
+		.getImageHtml(ImageDescriptor.groupDefIcon), longName, longName, " ", longName, i18n.t(
+		"User name: [%s]", group.getShortName()), menu);
+	menu.addMenuItem(gotoGroupMenuItem);
+	return gridItem;
+    }
+
+    private void createMenuActions() {
+	gotoGroupMenuItem = new GridMenuItem<GroupDTO>("images/group-home.gif", i18n.t("Visit this member homepage"),
+		new Slot<GroupDTO>() {
+		    public void onEvent(final GroupDTO groupDTO) {
+			getStateManager().gotoToken(groupDTO.getShortName());
+		    }
+		});
+	changeToCollabMenuItem = new GridMenuItem<GroupDTO>("images/arrow-down-green.gif", i18n
+		.t("Change to collaborator"), new Slot<GroupDTO>() {
 	    public void onEvent(final GroupDTO group) {
 		Site.showProgressProcessing();
 		snService.setCollabAsAdmin(session.getUserHash(), session.getCurrentState().getGroup().getShortName(),
@@ -104,51 +189,57 @@ public class GroupMembersSummaryPresenterNew implements GroupMembersSummary {
 			});
 	    }
 	});
-	removeMemberMenuItem = new GridMenuItem<GroupDTO>("", i18n.t("Remove this member"), new Slot<GroupDTO>() {
-	    public void onEvent(final GroupDTO group) {
-		Site.showProgressProcessing();
-		snService.deleteMember(session.getUserHash(), session.getCurrentState().getGroup().getShortName(),
-			group.getShortName(), new AsyncCallbackSimple<SocialNetworkResultDTO>() {
-			    public void onSuccess(final SocialNetworkResultDTO result) {
-				Site.hideProgress();
-				Site.info(i18n.t("Member removed"));
-				getStateManager().reload();
-				// in the future, only if I cannot
-				// be affected:
-				// snService.stateManager.reloadSocialNetwork((SocialNetworkResultDTO)
-				// result);
-			    }
-			});
-	    }
-	});
-	changeToAdminMenuItem = new GridMenuItem<GroupDTO>("", i18n.t("Change to admin"), new Slot<GroupDTO>() {
-	    public void onEvent(final GroupDTO group) {
-		Site.showProgressProcessing();
-		final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-		server.addAdminMember(session.getUserHash(), session.getCurrentState().getGroup().getShortName(), group
-			.getShortName(), new AsyncCallbackSimple<SocialNetworkResultDTO>() {
-		    public void onSuccess(final SocialNetworkResultDTO result) {
-			Site.hideProgress();
-			Site.info(i18n.t("Member added as admin"));
-			getStateManager().setSocialNetwork(result);
+	removeMemberMenuItem = new GridMenuItem<GroupDTO>("images/del.gif", i18n.t("Remove this member"),
+		new Slot<GroupDTO>() {
+		    public void onEvent(final GroupDTO group) {
+			Site.showProgressProcessing();
+			snService.deleteMember(session.getUserHash(), session.getCurrentState().getGroup()
+				.getShortName(), group.getShortName(),
+				new AsyncCallbackSimple<SocialNetworkResultDTO>() {
+				    public void onSuccess(final SocialNetworkResultDTO result) {
+					Site.hideProgress();
+					Site.info(i18n.t("Member removed"));
+					getStateManager().reload();
+					// in the future, only if I cannot
+					// be affected:
+					// snService.stateManager.reloadSocialNetwork((SocialNetworkResultDTO)
+					// result);
+				    }
+				});
 		    }
 		});
-	    }
-	});
-	acceptJoinGroupMenuItem = new GridMenuItem<GroupDTO>("", i18n.t("Accept this member"), new Slot<GroupDTO>() {
-	    public void onEvent(final GroupDTO group) {
-		Site.showProgressProcessing();
-		snService.AcceptJoinGroup(session.getUserHash(), session.getCurrentState().getGroup().getShortName(),
-			group.getShortName(), new AsyncCallbackSimple<SocialNetworkResultDTO>() {
-			    public void onSuccess(final SocialNetworkResultDTO result) {
-				Site.hideProgress();
-				Site.info(i18n.t("Member accepted"));
-				getStateManager().setSocialNetwork(result);
-			    }
-			});
-	    }
-	});
-	denyJoinGroupMenuItem = new GridMenuItem<GroupDTO>("", i18n.t("Don't accept this member"),
+	changeToAdminMenuItem = new GridMenuItem<GroupDTO>("images/arrow-up-green.gif", i18n.t("Change to admin"),
+		new Slot<GroupDTO>() {
+		    public void onEvent(final GroupDTO group) {
+			Site.showProgressProcessing();
+			final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
+			server.addAdminMember(session.getUserHash(), session.getCurrentState().getGroup()
+				.getShortName(), group.getShortName(),
+				new AsyncCallbackSimple<SocialNetworkResultDTO>() {
+				    public void onSuccess(final SocialNetworkResultDTO result) {
+					Site.hideProgress();
+					Site.info(i18n.t("Member added as admin"));
+					getStateManager().setSocialNetwork(result);
+				    }
+				});
+		    }
+		});
+	acceptJoinGroupMenuItem = new GridMenuItem<GroupDTO>("images/accept.gif", i18n.t("Accept this member"),
+		new Slot<GroupDTO>() {
+		    public void onEvent(final GroupDTO group) {
+			Site.showProgressProcessing();
+			snService.AcceptJoinGroup(session.getUserHash(), session.getCurrentState().getGroup()
+				.getShortName(), group.getShortName(),
+				new AsyncCallbackSimple<SocialNetworkResultDTO>() {
+				    public void onSuccess(final SocialNetworkResultDTO result) {
+					Site.hideProgress();
+					Site.info(i18n.t("Member accepted"));
+					getStateManager().setSocialNetwork(result);
+				    }
+				});
+		    }
+		});
+	denyJoinGroupMenuItem = new GridMenuItem<GroupDTO>("images/cancel.gif", i18n.t("Don't accept this member"),
 		new Slot<GroupDTO>() {
 		    public void onEvent(final GroupDTO group) {
 			Site.showProgressProcessing();
@@ -164,16 +255,6 @@ public class GroupMembersSummaryPresenterNew implements GroupMembersSummary {
 				});
 		    }
 		});
-    }
-
-    private GridItem<GroupDTO> createDefMemberMenu(final GroupDTO group, final GridGroup gridGroup) {
-	final GridMenu<GroupDTO> menu = new GridMenu<GroupDTO>(group);
-	final String longName = group.getLongName();
-	final GridItem<GroupDTO> gridItem = new GridItem<GroupDTO>(group, gridGroup, group.getShortName(), imageUtils
-		.getImageHtml(ImageDescriptor.groupDefIcon), longName, longName, " ", longName, i18n.t(
-		"User name: [%s]", group.getShortName()), menu);
-	menu.addMenuItem(gotoGroupMenuItem);
-	return gridItem;
     }
 
     private StateManager getStateManager() {
@@ -202,13 +283,13 @@ public class GroupMembersSummaryPresenterNew implements GroupMembersSummary {
 	view.clear();
 
 	if (userIsAdmin) {
-	    view.addAddMemberButton();
+	    view.addButton(addMember);
 	}
 
 	if (!userIsMember) {
-	    view.addJoinButton();
+	    view.addButton(requestJoin);
 	} else if (userIsAdmin && numAdmins > 1 || userIsCollab) {
-	    view.addUnjoinButton();
+	    view.addButton(unJoinButton);
 	}
 
 	if (userCanView) {
