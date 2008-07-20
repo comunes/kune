@@ -168,11 +168,6 @@ public class GroupMembersSummaryPresenter extends AbstractPresenter implements G
 
 	if (userCanView) {
 	    if (rights.isAdministrable()) {
-		new MenuItem("", i18n.t("Remove this member"), new MenuItem.MenuItemListener() {
-		    public void onClick() {
-
-		    }
-		});
 		final MemberAction[] adminsActions = {
 			new MemberAction(i18n.t("Remove this member"), WorkspaceEvents.DEL_MEMBER),
 			new MemberAction(i18n.t("Change to collaborator"), WorkspaceEvents.SET_ADMIN_AS_COLLAB),

@@ -11,6 +11,7 @@ import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.extend.ExtensibleWidgetsManager;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
+import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.client.state.ContentProviderImpl;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.SessionImpl;
@@ -23,11 +24,11 @@ import org.ourproject.kune.workspace.client.search.SiteSearcherPanel;
 import org.ourproject.kune.workspace.client.search.SiteSearcherPresenter;
 import org.ourproject.kune.workspace.client.search.SiteSearcherView;
 import org.ourproject.kune.workspace.client.sitebar.Site;
-import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryPresenter;
-import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryView;
+import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryPanelNew;
+import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryPresenterNew;
+import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryViewNew;
 import org.ourproject.kune.workspace.client.socialnet.ParticipationSummaryPresenter;
 import org.ourproject.kune.workspace.client.socialnet.ParticipationSummaryView;
-import org.ourproject.kune.workspace.client.socialnet.ui.GroupMembersSummaryPanel;
 import org.ourproject.kune.workspace.client.socialnet.ui.ParticipationSummaryPanel;
 import org.ourproject.kune.workspace.client.summary.GroupSummaryPresenter;
 import org.ourproject.kune.workspace.client.summary.GroupSummaryView;
@@ -95,6 +96,12 @@ public class KuneModule implements Module {
 	builder.registerProvider(Session.class, new Provider<Session>() {
 	    public Session get() {
 		return new SessionImpl(Cookies.getCookie("userHash"), initialLang);
+	    }
+	}, SingletonScope.class);
+
+	builder.registerProvider(ImageUtils.class, new Provider<ImageUtils>() {
+	    public ImageUtils get() {
+		return new ImageUtils();
 	    }
 	}, SingletonScope.class);
 
@@ -220,6 +227,7 @@ public class KuneModule implements Module {
 
 	builder.registerProvider(WorkspaceManager.class, new Provider<WorkspaceManager>() {
 	    public WorkspaceManager get() {
+		// TODO: use here providers instead of getInstance
 		final WorkspaceManager presenter = new WorkspaceManager(builder.getInstance(EntityLogo.class), builder
 			.getInstance(EntityTitlePresenter.class), builder.getInstance(EntitySubTitlePresenter.class),
 			builder.getInstance(WsThemePresenter.class), builder.getInstance(EntityLicensePresenter.class),
@@ -232,8 +240,10 @@ public class KuneModule implements Module {
 
 	builder.registerProvider(GroupMembersSummary.class, new Provider<GroupMembersSummary>() {
 	    public GroupMembersSummary get() {
-		final GroupMembersSummaryPresenter presenter = new GroupMembersSummaryPresenter(i18n);
-		final GroupMembersSummaryView view = new GroupMembersSummaryPanel(presenter, i18n, ws);
+		final GroupMembersSummaryPresenterNew presenter = new GroupMembersSummaryPresenterNew(i18n, builder
+			.getProvider(StateManager.class), builder.getInstance(ImageUtils.class), builder
+			.getInstance(Session.class), SocialNetworkService.App.getInstance());
+		final GroupMembersSummaryViewNew view = new GroupMembersSummaryPanelNew(presenter, i18n, ws);
 		presenter.init(view);
 		return presenter;
 	    }

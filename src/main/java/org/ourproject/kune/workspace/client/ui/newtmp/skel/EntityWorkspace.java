@@ -31,6 +31,7 @@ public class EntityWorkspace extends DefaultBorderLayout {
 	final Panel bottomPanel = new Panel();
 	bottomPanel.setBorder(false);
 	bottomPanel.setLayout(new AnchorLayout());
+	;
 
 	title = new TitleBar();
 	title.setHeight("" + (DEF_TOOLBAR_HEIGHT - 2));

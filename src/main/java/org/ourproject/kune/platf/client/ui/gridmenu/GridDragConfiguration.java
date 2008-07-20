@@ -1,7 +1,9 @@
 /*
  *
- * Copyright (C) 2007-2008 The kune development team (see CREDITS for details)
- * This file is part of kune.
+ * ((e)) emite: A pure gwt (Google Web Toolkit) xmpp (jabber) library
+ *
+ * (c) 2008 The emite development team (see CREDITS for details)
+ * This file is part of emite.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -17,27 +19,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+package org.ourproject.kune.platf.client.ui.gridmenu;
 
-package org.ourproject.kune.platf.client.state;
+public class GridDragConfiguration {
 
-import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
-import org.ourproject.kune.platf.client.dto.StateDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
+    private final String ddGroupId;
+    private final String dragMessage;
 
-import com.google.gwt.user.client.HistoryListener;
+    public GridDragConfiguration(final String ddGroupId, final String dragMessage) {
+	this.ddGroupId = ddGroupId;
+	this.dragMessage = dragMessage;
+    }
 
-public interface StateManager extends HistoryListener {
+    public String getDdGroupId() {
+	return ddGroupId;
+    }
 
-    void gotoToken(String token);
-
-    void reload();
-
-    void reloadContextAndTitles();
-
-    void setRetrievedState(StateDTO content);
-
-    void setSocialNetwork(SocialNetworkResultDTO socialNet);
-
-    void setState(StateToken state);
+    public String getDragMessage() {
+	return dragMessage;
+    }
 
 }

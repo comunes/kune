@@ -29,8 +29,4 @@ public interface GroupMembersSummary {
 
     public void setTheme(WsTheme oldTheme, WsTheme newTheme);
 
-    public void showAdmins();
-
-    public void showCollabs();
-
 }

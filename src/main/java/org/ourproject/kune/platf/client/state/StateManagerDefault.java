@@ -56,6 +56,10 @@ public class StateManagerDefault implements StateManager {
 	this.oldState = null;
     }
 
+    public void gotoToken(final String token) {
+	setState(new StateToken(token));
+    }
+
     public void onHistoryChanged(final String historyToken) {
 	String oldStateEncoded = "";
 	if (oldState != null) {
