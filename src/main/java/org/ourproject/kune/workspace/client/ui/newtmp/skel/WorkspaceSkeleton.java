@@ -21,6 +21,8 @@ public class WorkspaceSkeleton {
     private final ExtElement extRootBody;
 
     public WorkspaceSkeleton() {
+	extRootBody = new ExtElement(RootPanel.getBodyElement());
+	mask();
 	QuickTips.init(); // extgwt tips
 	final QuickTip quickTipInstance = QuickTips.getQuickTip();
 	quickTipInstance.setDismissDelay(8000);
@@ -36,7 +38,6 @@ public class WorkspaceSkeleton {
 	mainPanel.add(sitebar, DefaultBorderLayout.Position.NORTH, DefaultBorderLayout.DEF_TOOLBAR_HEIGHT);
 	mainPanel.add(entity.getPanel(), DefaultBorderLayout.Position.CENTER);
 	container.add(mainPanel.getPanel());
-	extRootBody = new ExtElement(RootPanel.getBodyElement());
     }
 
     public Panel getEntityMainHeader() {

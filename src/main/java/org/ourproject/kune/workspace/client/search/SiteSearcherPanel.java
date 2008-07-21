@@ -31,7 +31,6 @@ import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.RegionPosition;
 import com.gwtext.client.data.FieldDef;
 import com.gwtext.client.data.Record;
-import com.gwtext.client.data.SimpleStore;
 import com.gwtext.client.data.Store;
 import com.gwtext.client.data.StringFieldDef;
 import com.gwtext.client.widgets.Button;
@@ -42,15 +41,14 @@ import com.gwtext.client.widgets.ToolbarButton;
 import com.gwtext.client.widgets.Window;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.event.PanelListenerAdapter;
-import com.gwtext.client.widgets.event.WindowListenerAdapter;
-import com.gwtext.client.widgets.form.ComboBox;
 import com.gwtext.client.widgets.form.Field;
 import com.gwtext.client.widgets.form.FormPanel;
-import com.gwtext.client.widgets.form.event.ComboBoxListenerAdapter;
+import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.form.event.FieldListenerAdapter;
 import com.gwtext.client.widgets.grid.ColumnConfig;
 import com.gwtext.client.widgets.grid.ColumnModel;
 import com.gwtext.client.widgets.grid.GridPanel;
+import com.gwtext.client.widgets.grid.GridView;
 import com.gwtext.client.widgets.grid.event.GridCellListenerAdapter;
 import com.gwtext.client.widgets.layout.BorderLayoutData;
 import com.gwtext.client.widgets.layout.FitLayout;
@@ -60,8 +58,7 @@ public class SiteSearcherPanel extends AbstractSearcherPanel implements SiteSear
     private final Window dialog;
     private final SiteSearcherPresenter presenter;
     private Store groupStore;
-    private ComboBox searchCombo;
-    private Store historyStore;
+    private TextField searchField;
     private Store contentStore;
     private GridPanel groupsGrid;
     private GridPanel contentGrid;
@@ -76,8 +73,8 @@ public class SiteSearcherPanel extends AbstractSearcherPanel implements SiteSear
 	dialog = createDialog();
     }
 
-    public String getComboTextToSearch() {
-	return searchCombo.getValue();
+    public String getTextToSearch() {
+	return searchField.getValueAsString();
     }
 
     public void hide() {
@@ -85,7 +82,7 @@ public class SiteSearcherPanel extends AbstractSearcherPanel implements SiteSear
     }
 
     public void search(final String text, final SiteSearcherType type) {
-	searchCombo.setValue(text);
+	searchField.setValue(text);
 	switch (type) {
 	case group_user:
 	    query(groupStore, groupsGrid, text);
@@ -177,12 +174,6 @@ public class SiteSearcherPanel extends AbstractSearcherPanel implements SiteSear
 
 	dialog.setCloseAction(Window.HIDE);
 
-	dialog.addListener(new WindowListenerAdapter() {
-	    public void onCollapse(final Panel panel) {
-		// dialog.hide();
-	    }
-	});
-
 	return dialog;
     }
 
@@ -197,56 +188,26 @@ public class SiteSearcherPanel extends AbstractSearcherPanel implements SiteSear
 	form.setWidth(330);
 	form.setHideLabels(true);
 
-	historyStore = new SimpleStore(new String[] { "term" }, presenter.getSearchHistory());
-
-	searchCombo = new ComboBox();
-	searchCombo.setStore(historyStore);
-	searchCombo.setDisplayField("term");
-	searchCombo.setTypeAhead(false);
-	searchCombo.setLoadingText(i18n.t("Searching..."));
-	searchCombo.setWidth(300);
-	searchCombo.setPageSize(10);
-	searchCombo.setMode(ComboBox.LOCAL);
-	searchCombo.setMinChars(1);
-	searchCombo.setValueField("term");
-	searchCombo.setForceSelection(false);
-	searchCombo.setEditable(true);
-	historyStore.load();
-	searchCombo.addListener(new ComboBoxListenerAdapter() {
-	    public void onSelect(final ComboBox comboBox, final Record record, final int index) {
-		presenter.doSearch(getComboTextToSearch());
-		historyStore = new SimpleStore(new String[] { "term" }, presenter.getSearchHistory());
-		searchCombo.setStore(historyStore);
-		historyStore.load();
-	    }
-	});
-	searchCombo.addListener(new FieldListenerAdapter() {
-	    public void onChange(final Field field, final Object newVal, final Object oldVal) {
-		// Maybe we use...
-	    }
+	searchField = new TextField();
+	searchField.setWidth(300);
+	searchField.addListener(new FieldListenerAdapter() {
 
 	    public void onSpecialKey(final Field field, final EventObject e) {
 		switch (e.getKey()) {
 		case KeyboardListener.KEY_ENTER:
-		    Log.debug("Enter pressed");
-		    Log.debug("field: " + field.getValueAsString());
-		    Log.debug("field2: " + getComboTextToSearch());
 		    presenter.doSearch(field.getValueAsString());
-		    historyStore = new SimpleStore(new String[] { "term" }, presenter.getSearchHistory());
-		    historyStore.load();
-		    searchCombo.setStore(historyStore);
 		    break;
 		}
 		e.stopEvent();
 	    }
 
 	});
-	form.add(searchCombo);
+	form.add(searchField);
 
 	final Button searchBtn = new Button(i18n.tWithNT("Search", "used in button"));
 	searchBtn.addListener(new ButtonListenerAdapter() {
 	    public void onClick(final Button button, final EventObject e) {
-		presenter.doSearch(getComboTextToSearch());
+		presenter.doSearch(getTextToSearch());
 	    }
 	});
 	hp.add(form);
@@ -291,12 +252,13 @@ public class SiteSearcherPanel extends AbstractSearcherPanel implements SiteSear
 	final String gridName = type == SiteSearcherType.group_user ? "group-search" : "content-search";
 
 	final GridPanel grid = new GridPanel(gridName, 474, 250, store, columnModel);
+
 	createPagingToolbar(store, grid);
 	grid.setHideColumnHeader(true);
-	// final GridView view = new GridView();
-	// view.setForceFit(true);
-	// // view.setEnableRowBody(true);
-	// grid.setView(view);
+	final GridView view = new GridView();
+	view.setForceFit(true);
+	view.setEmptyText(i18n.t("No results"));
+	grid.setView(view);
 
 	grid.addListener(new PanelListenerAdapter() {
 	    public void onRender(final Component component) {

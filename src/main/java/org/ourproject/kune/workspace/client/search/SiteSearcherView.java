@@ -23,7 +23,7 @@ import org.ourproject.kune.platf.client.View;
 
 public interface SiteSearcherView extends View {
 
-    String getComboTextToSearch();
+    String getTextToSearch();
 
     void hide();
 

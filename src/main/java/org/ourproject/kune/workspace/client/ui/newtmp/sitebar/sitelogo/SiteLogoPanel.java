@@ -12,7 +12,6 @@ public class SiteLogoPanel implements SiteLogoView {
     public SiteLogoPanel(final SiteLogoPresenter presenter, final WorkspaceSkeleton ws) {
 	siteLogoImg = new Image();
 	final SiteBar siteBar = ws.getSiteBar();
-	siteBar.addSpacer();
 	siteBar.add(siteLogoImg);
     }
 

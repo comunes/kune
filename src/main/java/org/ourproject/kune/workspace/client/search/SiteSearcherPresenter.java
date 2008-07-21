@@ -26,8 +26,6 @@ import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
-import com.allen_sauer.gwt.log.client.Log;
-
 public class SiteSearcherPresenter extends AbstractPresenter implements SiteSearcher {
 
     private SiteSearcherView view;
@@ -44,12 +42,11 @@ public class SiteSearcherPresenter extends AbstractPresenter implements SiteSear
     }
 
     public void doSearch(final SiteSearcherType typeOfSearch) {
-	doSearchOfType(view.getComboTextToSearch(), typeOfSearch);
+	doSearchOfType(view.getTextToSearch(), typeOfSearch);
     }
 
     public void doSearch(final String text) {
 	searchHistory.put(text, null);
-	Log.debug("Search History: " + searchHistory.toString());
 	Site.hideProgress();
 	view.search(text, currentSearch);
 	view.show();

@@ -65,8 +65,6 @@ public class ApplicationBuilder {
 
 	// Temporary new ws
 	final WorkspaceSkeleton ws = kune.getInstance(WorkspaceSkeleton.class);
-	ws.mask();
-
 	ws.show();
 	ws.getEntityWorkspace().getContentTopBar().add(new Label("Sorry, kune workspace under heavy refactorization"));
 
