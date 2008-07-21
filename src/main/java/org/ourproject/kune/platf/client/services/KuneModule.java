@@ -24,6 +24,10 @@ import org.ourproject.kune.workspace.client.search.SiteSearcherPanel;
 import org.ourproject.kune.workspace.client.search.SiteSearcherPresenter;
 import org.ourproject.kune.workspace.client.search.SiteSearcherView;
 import org.ourproject.kune.workspace.client.sitebar.Site;
+import org.ourproject.kune.workspace.client.sitebar.msg.SiteMessage;
+import org.ourproject.kune.workspace.client.sitebar.msg.SiteMessagePanel;
+import org.ourproject.kune.workspace.client.sitebar.msg.SiteMessagePresenter;
+import org.ourproject.kune.workspace.client.sitebar.msg.SiteMessageView;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryPanelNew;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryPresenterNew;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryViewNew;
@@ -46,6 +50,9 @@ import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitenewgroup.SiteN
 import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.siteoptions.SiteOptions;
 import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.siteoptions.SiteOptionsPanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.siteoptions.SiteOptionsPresenter;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.siteprogress.SiteProgress;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.siteprogress.SiteProgressPanel;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.siteprogress.SiteProgressPresenter;
 import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitepublic.SitePublicSpaceLink;
 import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitepublic.SitePublicSpaceLinkPanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitepublic.SitePublicSpaceLinkPresenter;
@@ -129,13 +136,19 @@ public class KuneModule implements Module {
 	final I18nUITranslationService i18n = builder.getInstance(I18nUITranslationService.class);
 	builder.registerProvider(KuneErrorHandler.class, new Provider<KuneErrorHandler>() {
 	    public KuneErrorHandler get() {
-		return new KuneErrorHandler(builder.getInstance(Session.class), i18n);
+		return new KuneErrorHandler(builder.getInstance(Session.class), i18n, builder
+			.getProvider(WorkspaceSkeleton.class));
+	    }
+	}, SingletonScope.class);
+
+	builder.registerProvider(WorkspaceSkeleton.class, new Provider<WorkspaceSkeleton>() {
+	    public WorkspaceSkeleton get() {
+		return new WorkspaceSkeleton();
 	    }
 	}, SingletonScope.class);
 
 	final KuneErrorHandler errorHandler = builder.getInstance(KuneErrorHandler.class);
 	AsyncCallbackSimple.init(errorHandler);
-	Site.init(i18n);
 
 	builder.registerProvider(ColorTheme.class, new Provider<ColorTheme>() {
 	    public ColorTheme get() {
@@ -165,12 +178,6 @@ public class KuneModule implements Module {
 	    }
 	}, SingletonScope.class);
 
-	builder.registerProvider(WorkspaceSkeleton.class, new Provider<WorkspaceSkeleton>() {
-	    public WorkspaceSkeleton get() {
-		return new WorkspaceSkeleton();
-	    }
-	}, SingletonScope.class);
-
 	final WorkspaceSkeleton ws = builder.getInstance(WorkspaceSkeleton.class);
 
 	builder.registerProvider(SitePublicSpaceLink.class, new Provider<SitePublicSpaceLink>() {
@@ -182,6 +189,34 @@ public class KuneModule implements Module {
 		return presenter;
 	    }
 	}, SingletonScope.class);
+
+	builder.registerProvider(SiteProgress.class, new Provider<SiteProgress>() {
+	    public SiteProgress get() {
+		final SiteProgressPresenter presenter = new SiteProgressPresenter();
+		final SiteProgressPanel panel = new SiteProgressPanel(presenter, builder
+			.getProvider(SitePublicSpaceLink.class));
+		presenter.init(panel);
+		return presenter;
+	    }
+	}, SingletonScope.class);
+
+	builder.registerProvider(Site.class, new Provider<Site>() {
+	    public Site get() {
+		return new Site(i18n, builder.getInstance(SiteProgress.class), builder.getProvider(SiteMessage.class));
+	    }
+	}, SingletonScope.class);
+
+	builder.registerProvider(SiteMessage.class, new Provider<SiteMessage>() {
+	    public SiteMessage get() {
+		final SiteMessagePresenter siteMessagePresenter = new SiteMessagePresenter();
+		final SiteMessageView siteMessageView = new SiteMessagePanel(siteMessagePresenter, true, i18n);
+		siteMessagePresenter.init(siteMessageView);
+		return siteMessagePresenter;
+	    }
+	}, SingletonScope.class);
+
+	builder.getInstance(SiteProgress.class);
+	builder.getInstance(Site.class);
 
 	builder.registerProvider(SiteSignInLink.class, new Provider<SiteSignInLink>() {
 	    public SiteSignInLink get() {
@@ -248,6 +283,7 @@ public class KuneModule implements Module {
 
 	builder.getInstance(SitePublicSpaceLink.class);
 	builder.getInstance(SiteSignInLink.class);
+
 	builder.getInstance(SiteSignOutLink.class);
 	builder.getInstance(SiteNewGroupLink.class);
 	builder.getInstance(SiteSearch.class);

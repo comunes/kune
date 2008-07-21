@@ -31,16 +31,25 @@ import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.sitebar.Site;
+import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 
+import com.calclab.suco.client.container.Provider;
 import com.google.gwt.core.client.GWT;
 
 public class KuneErrorHandler {
     private final Session session;
     private final I18nTranslationService i18n;
+    private final Provider<WorkspaceSkeleton> wsProvider;
 
-    public KuneErrorHandler(final Session session, final I18nTranslationService i18n) {
+    public KuneErrorHandler(final Session session, final I18nTranslationService i18n,
+	    final Provider<WorkspaceSkeleton> wsProvider) {
 	this.session = session;
 	this.i18n = i18n;
+	this.wsProvider = wsProvider;
+    }
+
+    public WorkspaceSkeleton getWorkspaceSkeleton() {
+	return wsProvider.get();
     }
 
     public void process(final Throwable caught) {
@@ -64,8 +73,10 @@ public class KuneErrorHandler {
 	    Site.error(i18n.t("Content not found"));
 	    DefaultDispatcher.getInstance().fire(PlatformEvents.GOTO, "");
 	} catch (final LastAdminInGroupException e) {
-	    Site.showAlertMessage(i18n.t("Sorry, you are the last admin of this group."
-		    + " Look for someone to substitute you appropriately as admin before unjoin this group."));
+	    getWorkspaceSkeleton().showAlertMessage(
+		    i18n.t("Warning"),
+		    i18n.t("Sorry, you are the last admin of this group."
+			    + " Look for someone to substitute you appropriately as admin before unjoin this group."));
 	} catch (final AlreadyGroupMemberException e) {
 	    Site.error(i18n.t("This group is already a group member"));
 	} catch (final AlreadyUserMemberException e) {
@@ -79,7 +90,8 @@ public class KuneErrorHandler {
 
     private void doSessionExpired() {
 	Site.doLogout();
-	Site.showAlertMessage(i18n.t("Your session has expired. Please login again."));
+	getWorkspaceSkeleton().showAlertMessage(i18n.t("Session expired"),
+		i18n.t("Your session has expired. Please login again."));
     }
 
 }

@@ -27,7 +27,6 @@ import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
-import org.ourproject.kune.workspace.client.sitebar.Site;
 
 import com.google.gwt.user.client.Cookies;
 
@@ -37,30 +36,30 @@ public class LoggedInAction implements Action<UserInfoDTO> {
     private final I18nUITranslationService i18n;
 
     public LoggedInAction(final Session session, final StateManager stateManager, final I18nUITranslationService i18n) {
-        this.session = session;
-        this.stateManager = stateManager;
-        this.i18n = i18n;
+	this.session = session;
+	this.stateManager = stateManager;
+	this.i18n = i18n;
     }
 
     public void execute(final UserInfoDTO value) {
-        onLoggedIn(value);
+	onLoggedIn(value);
     }
 
     private void onLoggedIn(final UserInfoDTO userInfoDTO) {
-        setCookie(userInfoDTO);
-        session.setUserHash(userInfoDTO.getUserHash());
-        Site.sitebar.showLoggedUser(userInfoDTO);
-        I18nLanguageDTO language = userInfoDTO.getLanguage();
-        stateManager.reload();
-        i18n.changeCurrentLanguage(language.getCode());
-        session.setCurrentLanguage(language);
+	setCookie(userInfoDTO);
+	session.setUserHash(userInfoDTO.getUserHash());
+	// FIXME ite.sitebar.showLoggedUser(userInfoDTO);
+	final I18nLanguageDTO language = userInfoDTO.getLanguage();
+	stateManager.reload();
+	i18n.changeCurrentLanguage(language.getCode());
+	session.setCurrentLanguage(language);
     }
 
     private void setCookie(final UserInfoDTO userInfoDTO) {
-        // http://code.google.com/p/google-web-toolkit-incubator/wiki/LoginSecurityFAQ
-        String sessionId = userInfoDTO.getUserHash();
-        final long duration = Session.SESSION_DURATION;
-        Date expires = new Date(System.currentTimeMillis() + duration);
-        Cookies.setCookie("userHash", sessionId, expires, null, "/", false);
+	// http://code.google.com/p/google-web-toolkit-incubator/wiki/LoginSecurityFAQ
+	final String sessionId = userInfoDTO.getUserHash();
+	final long duration = Session.SESSION_DURATION;
+	final Date expires = new Date(System.currentTimeMillis() + duration);
+	Cookies.setCookie("userHash", sessionId, expires, null, "/", false);
     }
 }

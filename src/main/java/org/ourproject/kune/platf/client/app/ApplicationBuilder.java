@@ -57,7 +57,6 @@ public class ApplicationBuilder {
 	final Session session = kune.getSession();
 
 	Site.showProgressLoading();
-	Site.mask();
 
 	final KunePlatform platform = kune.getPlatform();
 	final StateManager stateManager = kune.getStateManager();
@@ -66,6 +65,7 @@ public class ApplicationBuilder {
 
 	// Temporary new ws
 	final WorkspaceSkeleton ws = kune.getInstance(WorkspaceSkeleton.class);
+	ws.mask();
 
 	ws.show();
 	ws.getEntityWorkspace().getContentTopBar().add(new Label("Sorry, kune workspace under heavy refactorization"));

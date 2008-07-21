@@ -143,7 +143,6 @@ public class StateManagerDefault implements StateManager {
 	final String toolName = state.getToolName();
 	workspace.setTool(toolName);
 
-	Site.sitebar.setState(state);
 	final ClientTool clientTool = app.getTool(toolName);
 	clientTool.setContent(state);
 	clientTool.setContext(state);

@@ -24,9 +24,6 @@ import org.ourproject.kune.workspace.client.newgroup.ui.SiteErrorType;
 
 public interface SiteMessage extends View {
 
-    void adjustWidth(int width);
-
-    View getView();
-
     void setMessage(String message, SiteErrorType type);
+
 }

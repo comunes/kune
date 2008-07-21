@@ -20,19 +20,28 @@
 package org.ourproject.kune.workspace.client.sitebar.msg;
 
 import org.ourproject.kune.platf.client.services.Images;
+import org.ourproject.kune.platf.client.ui.KuneUiUtils;
+import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.PushButton;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtext.client.core.ExtElement;
 
 public class SiteMessagePanel extends SimpleMessagePanel implements SiteMessageView {
     private static final int TIMEVISIBLE = 4000;
 
     private final Timer timer;
 
-    public SiteMessagePanel(final MessagePresenter presenter, final boolean closable) {
+    private final ExtElement extElem;
+
+    public SiteMessagePanel(final MessagePresenter presenter, final boolean closable,
+	    final I18nUITranslationService i18n) {
 	final Images images = Images.App.getInstance();
 	timer = new Timer() {
 	    public void run() {
@@ -45,6 +54,7 @@ public class SiteMessagePanel extends SimpleMessagePanel implements SiteMessageV
 
 	if (closable) {
 	    final PushButton closeIcon = new PushButton(images.cross().createImage(), images.crossDark().createImage());
+	    KuneUiUtils.setQuickTip(closeIcon, i18n.t("Click to close"));
 	    add(closeIcon);
 	    closeIcon.addClickListener(new ClickListener() {
 		public void onClick(final Widget sender) {
@@ -59,15 +69,52 @@ public class SiteMessagePanel extends SimpleMessagePanel implements SiteMessageV
 	    });
 	    setCellVerticalAlignment(closeIcon, VerticalPanel.ALIGN_BOTTOM);
 	}
+	extElem = new ExtElement(this.getElement());
+	final int clientWidth = Window.getClientWidth();
+	adjustWidth(clientWidth);
+	Window.addWindowResizeListener(new WindowResizeListener() {
+	    public void onWindowResized(final int width, final int height) {
+		// Log.debug("Window width: " + width + ", height: " + height);
+		setXY(width);
+		adjustWidth(width);
+	    }
+	});
+	extElem.setVisible(false, false);
+	hide();
+	RootPanel.get().add(this, calculateX(clientWidth), calculateY());
+    }
+
+    @Override
+    public void adjustWidth(final int windowWidth) {
+	super.adjustWidth(windowWidth);
     }
 
     public void hide() {
-	super.hide();
+	extElem.hide(true);
+	super.reset();
 	timer.cancel();
     }
 
     public void show() {
-	super.show();
+	if (!extElem.isVisible()) {
+	    extElem.show(true);
+	}
+	// super.show();
 	timer.schedule(TIMEVISIBLE);
     }
+
+    private int calculateX(final int clientWidth) {
+	final int x = clientWidth * 20 / 100 - 10;
+	// Log.debug("X: " + x);
+	return x;
+    }
+
+    private int calculateY() {
+	return 2;
+    }
+
+    private void setXY(final int clientWidth) {
+	extElem.setXY(calculateX(clientWidth), calculateY(), false);
+    }
+
 }

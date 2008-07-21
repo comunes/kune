@@ -120,6 +120,7 @@ public class WorkspaceFactory {
 	return presenter;
     }
 
+    @Deprecated
     public static DesktopView createDesktop(final Workspace workspace, final SiteBarListener listener,
 	    final Session session) {
 	return new DesktopPanel(workspace, listener, session, i18n);

@@ -24,8 +24,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoose;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoosePanel;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoosePresenter;
@@ -33,25 +33,16 @@ import org.ourproject.kune.workspace.client.newgroup.NewGroup;
 import org.ourproject.kune.workspace.client.newgroup.NewGroupListener;
 import org.ourproject.kune.workspace.client.newgroup.NewGroupPresenter;
 import org.ourproject.kune.workspace.client.newgroup.ui.NewGroupPanel;
-import org.ourproject.kune.workspace.client.sitebar.bar.SiteBar;
-import org.ourproject.kune.workspace.client.sitebar.bar.SiteBarListener;
-import org.ourproject.kune.workspace.client.sitebar.bar.SiteBarPanel;
-import org.ourproject.kune.workspace.client.sitebar.bar.SiteBarPresenter;
 import org.ourproject.kune.workspace.client.sitebar.login.Login;
 import org.ourproject.kune.workspace.client.sitebar.login.LoginListener;
 import org.ourproject.kune.workspace.client.sitebar.login.LoginPanel;
 import org.ourproject.kune.workspace.client.sitebar.login.LoginPresenter;
-import org.ourproject.kune.workspace.client.sitebar.msg.SiteMessage;
-import org.ourproject.kune.workspace.client.sitebar.msg.SiteMessagePanel;
-import org.ourproject.kune.workspace.client.sitebar.msg.SiteMessagePresenter;
-import org.ourproject.kune.workspace.client.sitebar.msg.SiteMessageView;
 
 public class SiteBarFactory {
-    private static SiteMessage siteMessage;
     private static Login login;
     private static NewGroup newGroup;
     private static Session session;
-    private static I18nTranslationService i18n;
+    private static I18nUITranslationService i18n;
 
     public static LicenseChoose createLicenseChoose() {
 	final List<LicenseDTO> licensesList = session.getLicenses();
@@ -67,17 +58,6 @@ public class SiteBarFactory {
 	final LicenseChoosePanel view = new LicenseChoosePanel(licensesNonCCList, presenter, i18n);
 	presenter.init(view, licensesList, licensesNonCCList);
 	return presenter;
-    }
-
-    public static SiteBar createSiteBar(final SiteBarListener listener, final Session session,
-	    final I18nTranslationService i18n) {
-	SiteBarFactory.session = session;
-	SiteBarFactory.i18n = i18n;
-	final SiteBarPresenter siteBarPresenter = new SiteBarPresenter(listener, session, i18n);
-	final SiteBarPanel siteBarView = new SiteBarPanel(siteBarPresenter, i18n);
-	siteBarPresenter.init(siteBarView);
-	Site.sitebar = siteBarPresenter;
-	return siteBarPresenter;
     }
 
     public static Login getLoginForm(final LoginListener listener) {
@@ -100,14 +80,4 @@ public class SiteBarFactory {
 	return newGroup;
     }
 
-    public static SiteMessage getSiteMessage() {
-	if (siteMessage == null) {
-	    final SiteMessagePresenter siteMessagePresenter = new SiteMessagePresenter();
-	    final SiteMessageView siteMessageView = new SiteMessagePanel(siteMessagePresenter, true);
-	    siteMessagePresenter.init(siteMessageView);
-	    siteMessage = siteMessagePresenter;
-	    Site.siteUserMessage = siteMessagePresenter;
-	}
-	return siteMessage;
-    }
 }

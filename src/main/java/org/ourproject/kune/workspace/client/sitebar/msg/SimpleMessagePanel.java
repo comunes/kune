@@ -39,6 +39,10 @@ public class SimpleMessagePanel extends HorizontalPanel implements SiteMessageVi
 	this.setVisible(false);
     }
 
+    public void reset() {
+	message.setText("");
+    }
+
     public void setMessage(final String text) {
 	this.message.setHTML(text);
     }

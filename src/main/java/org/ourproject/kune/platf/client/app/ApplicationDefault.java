@@ -26,7 +26,6 @@ import java.util.Map;
 
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dispatch.Dispatcher;
-import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.extend.ExtensibleWidgetsManager;
 import org.ourproject.kune.platf.client.services.ColorTheme;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
@@ -36,7 +35,6 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.WorkspaceFactory;
-import org.ourproject.kune.workspace.client.sitebar.bar.SiteBarListener;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 public class ApplicationDefault implements Application {
@@ -46,51 +44,52 @@ public class ApplicationDefault implements Application {
     private StateManager stateManager;
 
     public ApplicationDefault(final Session session, final ExtensibleWidgetsManager extensionPointManager,
-            final I18nTranslationService i18n, final ColorTheme colorTheme, final KuneErrorHandler errorHandler) {
-        workspace = WorkspaceFactory.createWorkspace(session, extensionPointManager, i18n, colorTheme, errorHandler);
-        tools = new HashMap<String, ClientTool>();
-        DesktopView desktop = WorkspaceFactory.createDesktop(workspace, new SiteBarListener() {
-            public void onChangeState(StateToken token) {
-                stateManager.setState(token);
-            }
-
-            public void onUserLoggedOut() {
-                dispatcher.fire(WorkspaceEvents.USER_LOGGED_OUT, null);
-            }
-        }, session);
-        desktop.attach();
+	    final I18nTranslationService i18n, final ColorTheme colorTheme, final KuneErrorHandler errorHandler) {
+	workspace = WorkspaceFactory.createWorkspace(session, extensionPointManager, i18n, colorTheme, errorHandler);
+	tools = new HashMap<String, ClientTool>();
+	// DesktopView desktop = WorkspaceFactory.createDesktop(workspace, new
+	// SiteBarListener() {
+	// public void onChangeState(StateToken token) {
+	// stateManager.setState(token);
+	// }
+	//
+	// public void onUserLoggedOut() {
+	// dispatcher.fire(WorkspaceEvents.USER_LOGGED_OUT, null);
+	// }
+	// }, session);
+	// desktop.attach();
 
     }
 
     public ClientTool getTool(final String toolName) {
-        return tools.get(toolName);
+	return tools.get(toolName);
     }
 
     public Workspace getWorkspace() {
-        return workspace;
+	return workspace;
     }
 
     public void init(final DefaultDispatcher dispatcher, final StateManager stateManager,
-            final HashMap<String, ClientTool> tools) {
-        this.dispatcher = dispatcher;
-        this.stateManager = stateManager;
-        this.tools = tools;
-        workspace.attachTools(tools.values().iterator());
+	    final HashMap<String, ClientTool> tools) {
+	this.dispatcher = dispatcher;
+	this.stateManager = stateManager;
+	this.tools = tools;
+	workspace.attachTools(tools.values().iterator());
     }
 
     public void setGroupState(final String groupShortName) {
-        Iterator<ClientTool> iterator = tools.values().iterator();
-        while (iterator.hasNext()) {
-            ClientTool tool = iterator.next();
-            tool.setGroupState(groupShortName);
-        }
+	final Iterator<ClientTool> iterator = tools.values().iterator();
+	while (iterator.hasNext()) {
+	    final ClientTool tool = iterator.next();
+	    tool.setGroupState(groupShortName);
+	}
     }
 
     public void start() {
-        dispatcher.fireDeferred(WorkspaceEvents.START_APP, null);
+	dispatcher.fireDeferred(WorkspaceEvents.START_APP, null);
     }
 
     public void stop() {
-        dispatcher.fire(WorkspaceEvents.STOP_APP, null);
+	dispatcher.fire(WorkspaceEvents.STOP_APP, null);
     }
 }

@@ -36,7 +36,6 @@ import org.ourproject.kune.workspace.client.workspace.Workspace;
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.RootPanel;
 
 public class InitAction implements Action<Object> {
     private final Session session;
@@ -80,9 +79,6 @@ public class InitAction implements Action<Object> {
 		} else {
 		    dispatcher.fire(WorkspaceEvents.USER_LOGGED_IN, currentUser);
 		}
-		RootPanel.get("kuneinitialcurtain").setVisible(false);
-
-		Site.unMask();
 	    }
 
 	    private void checkChatDomain(final String chatDomain) {

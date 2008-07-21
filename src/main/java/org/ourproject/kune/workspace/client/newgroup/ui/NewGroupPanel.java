@@ -20,12 +20,12 @@
 package org.ourproject.kune.workspace.client.newgroup.ui;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.KuneStringUtils;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.WizardDialog;
 import org.ourproject.kune.platf.client.ui.dialogs.WizardListener;
+import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoose;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoosePanel;
 import org.ourproject.kune.workspace.client.newgroup.NewGroupPresenter;
@@ -72,10 +72,10 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
     private final DeckPanel deck;
     private LicenseChoose licenseChoosePanel;
     private final SiteMessagePanel messagesPanel;
-    private final I18nTranslationService i18n;
+    private final I18nUITranslationService i18n;
     private TextField tags;
 
-    public NewGroupPanel(final NewGroupPresenter presenter, final I18nTranslationService i18n) {
+    public NewGroupPanel(final NewGroupPresenter presenter, final I18nUITranslationService i18n) {
 	super(i18n.t("Register a new Group"), true, false, 460, 480, new WizardListener() {
 	    public void onBack() {
 		presenter.onBack();
@@ -130,7 +130,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
 	step1Label.addStyleName("kune-Margin-Medium-b");
 	step2Label.addStyleName("kune-Margin-Medium-b");
 
-	messagesPanel = new SiteMessagePanel(null, false);
+	messagesPanel = new SiteMessagePanel(null, false, i18n);
 	messagesPanel.setWidth("425");
 	messagesPanel.setMessage("", SiteErrorType.info, SiteErrorType.error);
 	newGroupInitialDataVP.add(messagesPanel);

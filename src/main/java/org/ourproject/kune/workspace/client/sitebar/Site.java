@@ -20,94 +20,83 @@
 package org.ourproject.kune.workspace.client.sitebar;
 
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.newgroup.ui.SiteErrorType;
-import org.ourproject.kune.workspace.client.sitebar.bar.SiteBar;
 import org.ourproject.kune.workspace.client.sitebar.msg.SiteMessage;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.siteprogress.SiteProgress;
+
+import com.calclab.suco.client.container.Provider;
 
 public class Site {
-
-    public static SiteMessage siteUserMessage;
-
-    public static SiteBar sitebar;
-
     public static final String LOGIN_TOKEN = "login";
-
     public static final String NEWGROUP_TOKEN = "newgroup";
-
     public static final String FIXME_TOKEN = "fixme";
-
     public static final String TRANSLATE_TOKEN = "translate";
-
     public static final String IN_DEVELOPMENT = " (in development)";
-
     private static I18nTranslationService i18n;
+    private static SiteProgress progress;
+    private static Provider<SiteMessage> siteMessageProvider;
 
+    @Deprecated
     public static void doLogin(final String returnToken) {
-        sitebar.doLogin(returnToken);
+	// sitebar.doLogin(returnToken);
     }
 
+    @Deprecated
     public static void doLogout() {
-        sitebar.doLogout();
+	// sitebar.doLogout();
     }
 
+    @Deprecated
     public static void doNewGroup(final String returnToken) {
-        sitebar.doNewGroup(returnToken);
+	// sitebar.doNewGroup(returnToken);
     }
 
     public static void error(final String value) {
-        siteUserMessage.setMessage(value, SiteErrorType.error);
+	getSiteMessage().setMessage(value, SiteErrorType.error);
     }
 
     public static void hideProgress() {
-        sitebar.hideProgress();
+	progress.hideProgress();
     }
 
     public static void important(final String value) {
-        siteUserMessage.setMessage(value, SiteErrorType.imp);
+	getSiteMessage().setMessage(value, SiteErrorType.imp);
     }
 
     public static void info(final String value) {
-        siteUserMessage.setMessage(value, SiteErrorType.info);
-    }
-
-    public static void init(final I18nTranslationService i18n) {
-        Site.i18n = i18n;
-    }
-
-    public static void mask() {
-        sitebar.mask();
-    }
-
-    public static void mask(final String message) {
-        sitebar.mask(message);
-    }
-
-    public static void showAlertMessage(final String message) {
-        sitebar.showAlertMessage(message);
+	getSiteMessage().setMessage(value, SiteErrorType.info);
     }
 
     public static void showProgress(final String text) {
-        sitebar.showProgress(text);
+	progress.showProgress(text);
     }
 
     public static void showProgressLoading() {
-        sitebar.showProgress(i18n.t("Loading"));
+	progress.showProgress(i18n.t("Loading"));
     }
 
     public static void showProgressProcessing() {
-        sitebar.showProgress(i18n.t("Processing"));
+	progress.showProgress(i18n.t("Processing"));
     }
 
     public static void showProgressSaving() {
-        sitebar.showProgress(i18n.t("Saving"));
-    }
-
-    public static void unMask() {
-        sitebar.unMask();
+	progress.showProgress(i18n.t("Saving"));
     }
 
     public static void veryImportant(final String value) {
-        siteUserMessage.setMessage(value, SiteErrorType.veryimp);
+	getSiteMessage().setMessage(value, SiteErrorType.veryimp);
+    }
+
+    private static SiteMessage getSiteMessage() {
+	return siteMessageProvider.get();
+    }
+
+    public Site(final I18nUITranslationService i18n, final SiteProgress progress,
+	    final Provider<SiteMessage> siteMessageProvider) {
+	Site.i18n = i18n;
+	Site.progress = progress;
+	Site.siteMessageProvider = siteMessageProvider;
     }
 
 }
