@@ -56,7 +56,7 @@ public class ApplicationBuilder {
 
 	final Session session = kune.getSession();
 
-	Site.showProgressLoading();
+	Site.showProgressStarting();
 
 	final KunePlatform platform = kune.getPlatform();
 	final StateManager stateManager = kune.getStateManager();

@@ -46,10 +46,11 @@ public class SiteSearcherPresenter extends AbstractPresenter implements SiteSear
     }
 
     public void doSearch(final String text) {
+	Site.showProgressLoading();
 	searchHistory.put(text, null);
-	Site.hideProgress();
 	view.search(text, currentSearch);
 	view.show();
+	Site.hideProgress();
     }
 
     public void doSearchOfType(final String text, final SiteSearcherType typeOfSearch) {

@@ -19,54 +19,51 @@
  */
 package org.ourproject.kune.workspace.client.socialnet.ui;
 
-import org.ourproject.kune.platf.client.AbstractPresenter;
-import org.ourproject.kune.platf.client.PlatformEvents;
+import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.platf.client.ui.UIConstants;
-import org.ourproject.kune.platf.client.ui.stacks.StackSubItemAction;
-import org.ourproject.kune.platf.client.ui.stacks.StackedDropDownPanel;
-import org.ourproject.kune.workspace.client.WorkspaceEvents;
-import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryView;
-import org.ourproject.kune.workspace.client.socialnet.MemberAction;
+import org.ourproject.kune.platf.client.ui.DropDownPanel;
+import org.ourproject.kune.platf.client.ui.gridmenu.GridItem;
+import org.ourproject.kune.platf.client.ui.gridmenu.GridMenuPanel;
+import org.ourproject.kune.workspace.client.socialnet.ParticipationSummaryPresenter;
 import org.ourproject.kune.workspace.client.socialnet.ParticipationSummaryView;
+import org.ourproject.kune.workspace.client.ui.newtmp.skel.EntitySummary;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import com.gwtext.client.widgets.BoxComponent;
+import com.gwtext.client.widgets.event.ContainerListenerAdapter;
 
-public class ParticipationSummaryPanel extends StackedDropDownPanel implements ParticipationSummaryView {
+public class ParticipationSummaryPanel extends DropDownPanel implements ParticipationSummaryView {
 
-    private static final boolean COUNTS_VISIBLE = false;
-    private final Images img = Images.App.getInstance();
+    private final GridMenuPanel<GroupDTO> gridMenuPanel;
 
-    public ParticipationSummaryPanel(final AbstractPresenter presenter, final I18nTranslationService i18n,
+    public ParticipationSummaryPanel(final ParticipationSummaryPresenter presenter, final I18nTranslationService i18n,
 	    final WorkspaceSkeleton ws) {
-	super(presenter, "#00D4AA", i18n.t("Participates as..."), i18n.t("Groups in which participates"),
-		COUNTS_VISIBLE);
+	super(true);
+	super.setHeaderText(i18n.t("Participates as..."));
+	super.setHeaderTitle(i18n.t("Groups in which participates"));
+	super.setBorderStylePrimaryName("k-dropdownouter-part");
+	super.addStyleName("kune-Margin-Medium-tl");
+	gridMenuPanel = new GridMenuPanel<GroupDTO>(i18n.t("This user is not member of any group"), true, false, false,
+		false, false);
+	final EntitySummary entitySummary = ws.getEntitySummary();
+	entitySummary.addInSummary(this);
+	entitySummary.addListener(new ContainerListenerAdapter() {
+	    @Override
+	    public void onResize(final BoxComponent component, final int adjWidth, final int adjHeight,
+		    final int rawWidth, final int rawHeight) {
+		gridMenuPanel.setWidth(adjWidth);
+	    }
+	});
+	this.setContent(gridMenuPanel);
 	ws.getEntitySummary().addInSummary(this);
     }
 
-    public void addCategory(final String name, final String title) {
-	super.addStackItem(name, title, COUNTS_VISIBLE);
-    }
-
-    public void addCategory(final String name, final String title, final String iconType) {
-	super.addStackItem(name, title, getIcon(iconType), UIConstants.ICON_HORIZ_ALIGN_RIGHT, COUNTS_VISIBLE);
-    }
-
-    public void addCategoryMember(final String categoryName, final String name, final String title,
-	    final MemberAction[] memberActions) {
-	final StackSubItemAction[] subItems = new StackSubItemAction[memberActions.length];
-	for (int i = 0; i < memberActions.length; i++) {
-	    subItems[i] = new StackSubItemAction(getIconFronEvent(memberActions[i].getAction()), memberActions[i]
-		    .getText(), memberActions[i].getAction());
-	}
-
-	super.addStackSubItem(categoryName, img.groupDefIcon(), name, title, subItems);
+    public void addItem(final GridItem<GroupDTO> gridItem) {
+	gridMenuPanel.addItem(gridItem);
     }
 
     public void clear() {
-	super.clear();
+	gridMenuPanel.removeAll();
     }
 
     public void hide() {
@@ -75,23 +72,6 @@ public class ParticipationSummaryPanel extends StackedDropDownPanel implements P
 
     public void show() {
 	this.setVisible(true);
-    }
-
-    private AbstractImagePrototype getIcon(final String event) {
-	if (event == GroupMembersSummaryView.ICON_ALERT) {
-	    return img.alert();
-	}
-	throw new IndexOutOfBoundsException("Icon unknown in ParticipationPanelk");
-    }
-
-    private AbstractImagePrototype getIconFronEvent(final String event) {
-	if (event == WorkspaceEvents.UNJOIN_GROUP) {
-	    return img.del();
-	}
-	if (event == PlatformEvents.GOTO) {
-	    return img.groupHome();
-	}
-	throw new IndexOutOfBoundsException("Event unknown in ParticipationPanel");
     }
 
 }

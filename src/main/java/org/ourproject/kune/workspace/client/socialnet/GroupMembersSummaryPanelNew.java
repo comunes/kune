@@ -12,6 +12,7 @@ import org.ourproject.kune.workspace.client.ui.newtmp.skel.EntitySummary;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.BoxComponent;
 import com.gwtext.client.widgets.Button;
@@ -51,6 +52,7 @@ public class GroupMembersSummaryPanelNew extends DropDownPanel implements GroupM
     }
 
     public void addButton(final GridButton gridButton) {
+	// Workaround: gwt-ext don't have toolbar.removeItem method ...
 	ToolbarButton button = buttonsCache.get(gridButton);
 	if (button == null) {
 	    button = new ToolbarButton(gridButton.getTitle());
@@ -61,10 +63,11 @@ public class GroupMembersSummaryPanelNew extends DropDownPanel implements GroupM
 		    gridButton.getSlot().onEvent("");
 		}
 	    });
+	    buttonsCache.put(gridButton, button);
+	} else {
+	    button.setVisible(true);
 	}
-	if (!button.isAttached()) {
-	    gridMenuPanel.getBottomBar().addButton(button);
-	}
+	gridMenuPanel.getBottomBar().addButton(button);
     }
 
     public void addItem(final GridItem<GroupDTO> gridItem) {
@@ -74,6 +77,9 @@ public class GroupMembersSummaryPanelNew extends DropDownPanel implements GroupM
     public void clear() {
 	gridMenuPanel.removeAll();
 	for (final ToolbarButton button : buttonsCache.values()) {
+	    // Workaround: gwt-ext don't have toolbar.removeItem method ...
+	    // gridMenuPanel.getBottomBar().getEl().removeChild(button.getElement());
+	    button.setVisible(false);
 	    button.removeFromParent();
 	}
     }
@@ -99,6 +105,7 @@ public class GroupMembersSummaryPanelNew extends DropDownPanel implements GroupM
     }
 
     public void setVisible(final boolean visible) {
+	Log.debug("Set visible: " + visible + " in GroupMembers");
 	super.setVisible(visible);
     }
 }

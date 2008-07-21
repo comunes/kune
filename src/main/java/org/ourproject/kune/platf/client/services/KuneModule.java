@@ -179,12 +179,12 @@ public class KuneModule implements Module {
 	}, SingletonScope.class);
 
 	final WorkspaceSkeleton ws = builder.getInstance(WorkspaceSkeleton.class);
+	final Images images = builder.getInstance(Images.class);
 
 	builder.registerProvider(SitePublicSpaceLink.class, new Provider<SitePublicSpaceLink>() {
 	    public SitePublicSpaceLink get() {
 		final SitePublicSpaceLinkPresenter presenter = new SitePublicSpaceLinkPresenter();
-		final SitePublicSpaceLinkPanel panel = new SitePublicSpaceLinkPanel(presenter, ws, i18n, builder
-			.getInstance(Images.class));
+		final SitePublicSpaceLinkPanel panel = new SitePublicSpaceLinkPanel(presenter, ws, i18n, images);
 		presenter.init(panel);
 		return presenter;
 	    }
@@ -368,7 +368,9 @@ public class KuneModule implements Module {
 
 	builder.registerProvider(ParticipationSummary.class, new Provider<ParticipationSummary>() {
 	    public ParticipationSummary get() {
-		final ParticipationSummaryPresenter presenter = new ParticipationSummaryPresenter(i18n);
+		final ParticipationSummaryPresenter presenter = new ParticipationSummaryPresenter(i18n, builder
+			.getProvider(StateManager.class), builder.getInstance(ImageUtils.class), builder
+			.getInstance(Session.class), SocialNetworkService.App.getInstance());
 		final ParticipationSummaryView view = new ParticipationSummaryPanel(presenter, i18n, ws);
 		presenter.init(view);
 		return presenter;

@@ -19,66 +19,77 @@
  */
 package org.ourproject.kune.workspace.client.socialnet;
 
-import java.util.Iterator;
 import java.util.List;
 
-import org.ourproject.kune.platf.client.AbstractPresenter;
-import org.ourproject.kune.platf.client.PlatformEvents;
-import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
+import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.workspace.client.WorkspaceEvents;
+import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
+import org.ourproject.kune.platf.client.services.ImageUtils;
+import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
+import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 import org.ourproject.kune.workspace.client.workspace.ParticipationSummary;
 
-public class ParticipationSummaryPresenter extends AbstractPresenter implements ParticipationSummary {
+import com.calclab.suco.client.container.Provider;
+
+public class ParticipationSummaryPresenter extends SocialNetworkPresenter implements ParticipationSummary {
 
     private ParticipationSummaryView view;
+    private final GridGroup adminCategory;
+    private GridGroup collabCategory;
+    private final GridGroup collabOnlyCategory;
 
-    private final I18nTranslationService i18n;
-
-    private final String admin_subtitle;
-
-    private final MemberAction goto_group_command;
-
-    public ParticipationSummaryPresenter(final I18nTranslationService i18n) {
-	this.i18n = i18n;
-	admin_subtitle = i18n.t("admin in:");
-	goto_group_command = new MemberAction(i18n.t("Visit this group homepage"), PlatformEvents.GOTO);
-    }
-
-    public View getView() {
-	return view;
+    public ParticipationSummaryPresenter(final I18nUITranslationService i18n,
+	    final Provider<StateManager> stateManagerProvider, final ImageUtils imageUtils, final Session session,
+	    final SocialNetworkServiceAsync snService) {
+	super(i18n, stateManagerProvider, imageUtils, session, snService);
+	adminCategory = new GridGroup("admin in:", " ", i18n.tWithNT("Administrate these groups",
+		"talking about a person"), false);
+	collabCategory = new GridGroup(i18n.t("and as collaborator in:"), " ", i18n.t("Collaborate in these groups"),
+		false);
+	collabOnlyCategory = new GridGroup(i18n.t("collaborator in:"), " ", i18n.t("Collaborate in these groups"),
+		false);
+	super.addGroupOperation(gotoGroupMenuItem, false);
     }
 
     public void init(final ParticipationSummaryView view) {
 	this.view = view;
     }
 
+    @SuppressWarnings("unchecked")
     public void setState(final StateDTO state) {
 	final ParticipationDataDTO participation = state.getParticipation();
 	final AccessRightsDTO rights = state.getGroupRights();
-	view.setDropDownContentVisible(false);
+	view.setContentVisible(false);
 	view.clear();
-	final MemberAction[] adminsActions = {
-		new MemberAction(i18n.t("Don't participate more in this group"), WorkspaceEvents.UNJOIN_GROUP),
-		goto_group_command };
-	final MemberAction[] collabActions = adminsActions;
-	final MemberAction[] viewerActions = { goto_group_command };
 	final List<LinkDTO> groupsIsAdmin = participation.getGroupsIsAdmin();
 	final List<LinkDTO> groupsIsCollab = participation.getGroupsIsCollab();
-	boolean userIsAdmin = rights.isAdministrable();
-	final boolean userIsCollab = !userIsAdmin && rights.isEditable();
-	final boolean userIsMember = isMember(userIsAdmin, userIsCollab);
 	final int numAdmins = groupsIsAdmin.size();
 	final int numCollaborators = groupsIsCollab.size();
+	if (numAdmins == 0) {
+	    collabCategory = collabOnlyCategory;
+	}
+	for (final LinkDTO link : groupsIsAdmin) {
+	    // FIXME: return GroupDTO not LinkDTO from server
+	    final GroupDTO group = new GroupDTO();
+	    group.setShortName(link.getShortName());
+	    group.setLongName(link.getLongName());
+	    view.addItem(createGridItem(adminCategory, group, rights, unJoinMenuItem));
+	}
+	for (final LinkDTO link : groupsIsCollab) {
+	    // FIXME: return GroupDTO not LinkDTO from server
+	    final GroupDTO group = new GroupDTO();
+	    group.setShortName(link.getShortName());
+	    group.setLongName(link.getLongName());
+	    view.addItem(createGridItem(collabCategory, group, rights, unJoinMenuItem));
+	}
 	if (numAdmins > 0 || numCollaborators > 0) {
-	    addParticipants(groupsIsAdmin, groupsIsCollab, numAdmins, numCollaborators, userIsAdmin, userIsMember,
-		    adminsActions, collabActions, viewerActions);
-	    view.setDropDownContentVisible(true);
+	    view.setContentVisible(true);
 	    view.show();
 	} else {
 	    hide();
@@ -90,48 +101,8 @@ public class ParticipationSummaryPresenter extends AbstractPresenter implements 
 	view.setTheme(oldTheme, newTheme);
     }
 
-    private void addParticipants(final List<LinkDTO> groupsIsAdmin, final List<LinkDTO> groupsIsCollab,
-	    final int numAdmins, final int numCollaborators, final boolean userIsAdmin, boolean userIsMember,
-	    final MemberAction[] adminsActions, final MemberAction[] collabActions, final MemberAction[] viewerActions) {
-	MemberAction[] actions;
-	String collabTitle;
-
-	if (!userIsMember) {
-	    actions = viewerActions;
-	} else {
-	    if (userIsAdmin) {
-		actions = adminsActions;
-	    } else {
-		actions = collabActions;
-	    }
-	}
-	if (numAdmins > 0) {
-	    view.addCategory(admin_subtitle, i18n.tWithNT("Administrate these groups", "talking about a person"));
-	    iteraList(admin_subtitle, groupsIsAdmin, actions);
-	    collabTitle = i18n.t("and as collaborator in:");
-	} else {
-	    collabTitle = i18n.t("collaborator in:");
-	}
-	if (numCollaborators > 0) {
-	    view.addCategory(collabTitle, i18n.t("Collaborate in these groups"));
-	    iteraList(collabTitle, groupsIsCollab, actions);
-	}
-
-    }
-
     private void hide() {
 	view.hide();
     }
 
-    private boolean isMember(final boolean userIsAdmin, final boolean userIsCollab) {
-	return userIsAdmin || userIsCollab;
-    }
-
-    private void iteraList(final String categoryName, final List<LinkDTO> groupList, final MemberAction[] actions) {
-	final Iterator<LinkDTO> iter = groupList.iterator();
-	while (iter.hasNext()) {
-	    final LinkDTO group = iter.next();
-	    view.addCategoryMember(categoryName, group.getShortName(), group.getLongName(), actions);
-	}
-    }
 }

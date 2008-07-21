@@ -84,6 +84,10 @@ public class Site {
 	progress.showProgress(i18n.t("Saving"));
     }
 
+    public static void showProgressStarting() {
+	progress.showProgress(i18n.t("Starting"));
+    }
+
     public static void veryImportant(final String value) {
 	getSiteMessage().setMessage(value, SiteErrorType.veryimp);
     }
