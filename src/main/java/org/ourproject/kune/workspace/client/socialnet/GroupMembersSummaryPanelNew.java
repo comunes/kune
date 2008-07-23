@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.ui.DropDownPanel;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridButton;
+import org.ourproject.kune.platf.client.ui.gridmenu.GridDragConfiguration;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridItem;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridMenuPanel;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
@@ -12,6 +13,7 @@ import org.ourproject.kune.workspace.client.ui.newtmp.skel.EntitySummary;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 
+import com.calclab.emiteuimodule.client.users.UserGridPanel;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.BoxComponent;
 import com.gwtext.client.widgets.Button;
@@ -35,8 +37,12 @@ public class GroupMembersSummaryPanelNew extends DropDownPanel implements GroupM
 	super.setHeaderTitle(i18n.t("People and groups collaborating in this group"));
 	super.setBorderStylePrimaryName("k-dropdownouter-members");
 	super.addStyleName("kune-Margin-Medium-t");
+
+	final GridDragConfiguration dragConf = new GridDragConfiguration(UserGridPanel.USER_GROUP_DD, i18n
+		.t("Drop in the chat area to start a chat.")
+		+ "<br/>" + i18n.t("Drop into a room to invite the user to join the chat room"));
 	gridMenuPanel = new GridMenuPanel<GroupDTO>(i18n.t("This is an orphaned project, if you are interested "
-		+ "please request to join to work on it"), true, true, false, true, false);
+		+ "please request to join to work on it"), dragConf, true, true, false, true, false);
 	final EntitySummary entitySummary = ws.getEntitySummary();
 	entitySummary.addInSummary(this);
 	entitySummary.addListener(new ContainerListenerAdapter() {

@@ -85,6 +85,11 @@ public class GridMenuPanel<T> extends Composite {
 	this(emptyText, gridDragConfiguration, null, false, false, false, false, false);
     }
 
+    public GridMenuPanel(final String emptyText, final GridDragConfiguration dragConf, final boolean grouped,
+	    final boolean withCounters, final boolean withTopBar, final boolean withBottomBar, final boolean withEndIcon) {
+	this(emptyText, dragConf, null, grouped, withCounters, withTopBar, withBottomBar, withEndIcon);
+    }
+
     public GridMenuPanel(final String emptyText, final GridDragConfiguration gridDragConfiguration,
 	    final GridDropConfiguration gridDropConfiguration, final boolean grouped, final boolean withCounters,
 	    final boolean withTopBar, final boolean withBottomBar, final boolean withEndIcon) {
@@ -114,6 +119,11 @@ public class GridMenuPanel<T> extends Composite {
 
     public GridMenuPanel(final String emptyText, final GridDropConfiguration gridDropConfiguration) {
 	this(emptyText, null, gridDropConfiguration, false, false, false, false, false);
+    }
+
+    public GridMenuPanel(final String emptyText, final GridDropConfiguration dropConf, final boolean grouped,
+	    final boolean withCounters, final boolean withTopBar, final boolean withBottomBar, final boolean withEndIcon) {
+	this(emptyText, null, dropConf, grouped, withCounters, withTopBar, withBottomBar, withEndIcon);
     }
 
     public void addItem(final GridItem<T> gridItem) {
