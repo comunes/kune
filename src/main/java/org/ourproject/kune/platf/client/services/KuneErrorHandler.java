@@ -34,22 +34,30 @@ import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 
 import com.calclab.suco.client.container.Provider;
+import com.calclab.suco.client.signal.Signal;
+import com.calclab.suco.client.signal.Slot;
 import com.google.gwt.core.client.GWT;
 
 public class KuneErrorHandler {
     private final Session session;
     private final I18nTranslationService i18n;
     private final Provider<WorkspaceSkeleton> wsProvider;
+    private final Signal<Object> onSessionExpired;
 
     public KuneErrorHandler(final Session session, final I18nTranslationService i18n,
 	    final Provider<WorkspaceSkeleton> wsProvider) {
 	this.session = session;
 	this.i18n = i18n;
 	this.wsProvider = wsProvider;
+	this.onSessionExpired = new Signal<Object>("onSessionExpired");
     }
 
     public WorkspaceSkeleton getWorkspaceSkeleton() {
 	return wsProvider.get();
+    }
+
+    public void onSessionExpired(final Slot<Object> slot) {
+	onSessionExpired.add(slot);
     }
 
     public void process(final Throwable caught) {
@@ -89,7 +97,7 @@ public class KuneErrorHandler {
     }
 
     private void doSessionExpired() {
-	Site.doLogout();
+	onSessionExpired.fire(null);
 	getWorkspaceSkeleton().showAlertMessage(i18n.t("Session expired"),
 		i18n.t("Your session has expired. Please login again."));
     }

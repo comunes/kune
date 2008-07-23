@@ -33,14 +33,13 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.newgroup.NewGroupListener;
 import org.ourproject.kune.workspace.client.sitebar.Site;
-import org.ourproject.kune.workspace.client.sitebar.login.LoginListener;
 import org.ourproject.kune.workspace.client.sitebar.rpc.UserService;
 import org.ourproject.kune.workspace.client.sitebar.rpc.UserServiceAsync;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListener {
+public class SiteBarPresenter implements SiteBar, NewGroupListener {
 
     private SiteBarView view;
     private final SiteBarListener listener;
@@ -94,8 +93,7 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 		listener.onUserLoggedOut();
 	    }
 	};
-
-	DefaultDispatcher.getInstance().fire(WorkspaceEvents.USER_LOGOUT, callback);
+	UserService.App.getInstance().logout(session.getUserHash(), callback);
     }
 
     public void doNewGroup(final String previousTokenOrig) {
@@ -216,12 +214,6 @@ public class SiteBarPresenter implements SiteBar, LoginListener, NewGroupListene
 
     public void unMask() {
 	view.unMask();
-    }
-
-    public void userLoggedIn(final UserInfoDTO userInfoDTO) {
-	DefaultDispatcher.getInstance().fire(WorkspaceEvents.USER_LOGGED_IN, userInfoDTO);
-	view.hideLoginDialog();
-	returnToPreviousState();
     }
 
     protected void onSearchFocus() {

@@ -232,6 +232,8 @@
     padding-top: 4px;
 }
 
+/* Custom gwt-ext styles */
+
 .ytb-sep {
     background-image: url(../js/ext/resources/images/default/grid/grid-split.gif);
     background-position: center;
@@ -249,7 +251,15 @@
 .ytb-spacer {
     width: 2px;
 }
+
+.x-grid-group-hd {
+    border-bottom: 2px solid grey;
+    cursor: pointer;
+    padding-top: 3px;
+}
+
 /* Drop down */
+
 .k-dropdownouter {
     background-color: gray;
 }

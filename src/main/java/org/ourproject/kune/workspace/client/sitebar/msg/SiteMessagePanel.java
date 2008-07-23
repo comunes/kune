@@ -79,8 +79,9 @@ public class SiteMessagePanel extends SimpleMessagePanel implements SiteMessageV
 		adjustWidth(width);
 	    }
 	});
+	super.reset();
+	super.show();
 	extElem.setVisible(false, false);
-	hide();
 	RootPanel.get().add(this, calculateX(clientWidth), calculateY());
     }
 
@@ -96,9 +97,7 @@ public class SiteMessagePanel extends SimpleMessagePanel implements SiteMessageV
     }
 
     public void show() {
-	if (!extElem.isVisible()) {
-	    extElem.show(true);
-	}
+	extElem.show(false);
 	// super.show();
 	timer.schedule(TIMEVISIBLE);
     }

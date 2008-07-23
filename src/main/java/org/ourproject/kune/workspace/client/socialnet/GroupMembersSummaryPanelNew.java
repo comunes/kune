@@ -12,7 +12,6 @@ import org.ourproject.kune.workspace.client.ui.newtmp.skel.EntitySummary;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 
-import com.allen_sauer.gwt.log.client.Log;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.BoxComponent;
 import com.gwtext.client.widgets.Button;
@@ -35,7 +34,7 @@ public class GroupMembersSummaryPanelNew extends DropDownPanel implements GroupM
 	super.setHeaderText(i18n.t("Group members"));
 	super.setHeaderTitle(i18n.t("People and groups collaborating in this group"));
 	super.setBorderStylePrimaryName("k-dropdownouter-members");
-	super.addStyleName("kune-Margin-Medium-tl");
+	super.addStyleName("kune-Margin-Medium-t");
 	gridMenuPanel = new GridMenuPanel<GroupDTO>(i18n.t("This is an orphaned project, if you are interested "
 		+ "please request to join to work on it"), true, true, false, true, false);
 	final EntitySummary entitySummary = ws.getEntitySummary();
@@ -105,7 +104,6 @@ public class GroupMembersSummaryPanelNew extends DropDownPanel implements GroupM
     }
 
     public void setVisible(final boolean visible) {
-	Log.debug("Set visible: " + visible + " in GroupMembers");
 	super.setVisible(visible);
     }
 }

@@ -39,15 +39,17 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.workspace.TagsSummary;
 
+import com.calclab.suco.client.container.Provider;
+
 public class AdminContextPresenter extends AbstractPresenter implements AdminContext {
 
     private AdminContextView view;
     private final Session session;
-    private final TagsSummary tags;
+    private final Provider<TagsSummary> tagsSummaryProvider;
 
-    public AdminContextPresenter(final Session session, final TagsSummary tags) {
+    public AdminContextPresenter(final Session session, final Provider<TagsSummary> tagsSummaryProvider) {
 	this.session = session;
-	this.tags = tags;
+	this.tagsSummaryProvider = tagsSummaryProvider;
     }
 
     public void doChangeLanguage(final String langCode) {
@@ -110,7 +112,7 @@ public class AdminContextPresenter extends AbstractPresenter implements AdminCon
 	server.setTags(session.getUserHash(), currentState.getGroup().getShortName(), currentState.getDocumentId(),
 		tagsString, new AsyncCallbackSimple<List<TagResultDTO>>() {
 		    public void onSuccess(final List<TagResultDTO> result) {
-			tags.setGroupTags(result);
+			tagsSummaryProvider.get().setGroupTags(result);
 			Site.hideProgress();
 		    }
 		});

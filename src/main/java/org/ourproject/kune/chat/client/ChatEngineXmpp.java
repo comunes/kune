@@ -22,6 +22,7 @@ package org.ourproject.kune.chat.client;
 import java.util.Date;
 
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 
 import com.calclab.emite.client.im.roster.RosterManager.SubscriptionMode;
 import com.calclab.emite.client.xmpp.stanzas.XmppURI;
@@ -31,17 +32,24 @@ import com.calclab.emiteuimodule.client.params.AvatarProvider;
 import com.calclab.emiteuimodule.client.status.OwnPresence.OwnStatus;
 import com.calclab.suco.client.signal.Slot;
 import com.google.gwt.user.client.Window;
+import com.gwtext.client.core.EventObject;
+import com.gwtext.client.widgets.Button;
+import com.gwtext.client.widgets.ToolbarButton;
+import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 
 class ChatEngineXmpp implements ChatEngine {
     private final ChatOptions chatOptions;
     private final EmiteUIDialog emiteDialog;
     private final I18nTranslationService i18n;
+    private final WorkspaceSkeleton ws;
+    private ToolbarButton traybarButton;
 
     public ChatEngineXmpp(final EmiteUIDialog emiteUIDialog, final ChatOptions chatOptions,
-	    final I18nTranslationService i18n) {
+	    final I18nTranslationService i18n, final WorkspaceSkeleton ws) {
 	this.emiteDialog = emiteUIDialog;
 	this.chatOptions = chatOptions;
 	this.i18n = i18n;
+	this.ws = ws;
     }
 
     public ChatOptions getChatOptions() {
@@ -54,24 +62,36 @@ class ChatEngineXmpp implements ChatEngine {
 	emiteDialog.joinRoom(roomURI);
     }
 
-    public void login(final String chatName, final String chatPassword) {
-	final String resource = "emiteui-" + new Date().getTime() + "-kune"; // +
-	// getGwtMetaProperty(GWT_PROPERTY_RELEASE);
-	// FIXME, get this from user profile
-	final UserChatOptions userChatOptions = new UserChatOptions(chatName + "@" + chatOptions.domain, chatPassword,
-		resource, "blue", SubscriptionMode.autoAcceptAll, true);
+    public void login(final String jid, final String passwd) {
+	final UserChatOptions userChatOptions = getUserChatOptions(jid, passwd);
 	// FIXME: Avatar provider
 	final AvatarProvider avatarProvider = new AvatarProvider() {
 	    public String getAvatarURL(XmppURI userURI) {
 		return "images/person-def.gif";
 	    }
 	};
-
 	final String initialWindowTitle = Window.getTitle();
 	chatOptions.userOptions = userChatOptions;
 	emiteDialog.start(userChatOptions, chatOptions.httpBase, chatOptions.roomHost, avatarProvider, i18n.t("Chat"));
 	emiteDialog.show(OwnStatus.online);
-	// emiteDialog.hide();
+	if (traybarButton == null) {
+	    traybarButton = new ToolbarButton();
+	    traybarButton.setTooltip(i18n.t("Show/hide the chat window"));
+	    traybarButton.setIcon("images/emite-chat.gif");
+	    traybarButton.addListener(new ButtonListenerAdapter() {
+		@Override
+		public void onClick(final Button button, final EventObject e) {
+		    if (emiteDialog.isVisible()) {
+			emiteDialog.hide();
+		    } else {
+			emiteDialog.show();
+		    }
+		}
+
+	    });
+	    ws.getSiteTraybar().addButton(traybarButton);
+	}
+	emiteDialog.hide();
 	emiteDialog.onChatAttended(new Slot<String>() {
 	    public void onEvent(final String parameter) {
 		Window.setTitle(initialWindowTitle);
@@ -88,6 +108,17 @@ class ChatEngineXmpp implements ChatEngine {
 	if (!emiteDialog.isDialogNotStarted()) {
 	    emiteDialog.closeAllChats(false);
 	    emiteDialog.setOwnPresence(OwnStatus.offline);
+	    final UserChatOptions userChatOptions = getUserChatOptions("reset@example.com", "");
+	    emiteDialog.refreshUserInfo(userChatOptions);
+	    chatOptions.userOptions = userChatOptions;
 	}
+    }
+
+    private UserChatOptions getUserChatOptions(final String jid, final String passwd) {
+	final String resource = "emiteui-" + new Date().getTime() + "-kune"; // +
+	// getGwtMetaProperty(GWT_PROPERTY_RELEASE);
+	// FIXME, get this from user profile
+	return new UserChatOptions(jid + "@" + chatOptions.domain, passwd, resource, "blue",
+		SubscriptionMode.autoAcceptAll, true);
     }
 }

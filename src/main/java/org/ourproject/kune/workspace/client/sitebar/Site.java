@@ -28,24 +28,11 @@ import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.siteprogress.SiteP
 import com.calclab.suco.client.container.Provider;
 
 public class Site {
-    public static final String LOGIN_TOKEN = "login";
-    public static final String NEWGROUP_TOKEN = "newgroup";
-    public static final String FIXME_TOKEN = "fixme";
-    public static final String TRANSLATE_TOKEN = "translate";
+    public static final String USERHASH = "userHash";
     public static final String IN_DEVELOPMENT = " (in development)";
     private static I18nTranslationService i18n;
     private static SiteProgress progress;
     private static Provider<SiteMessage> siteMessageProvider;
-
-    @Deprecated
-    public static void doLogin(final String returnToken) {
-	// sitebar.doLogin(returnToken);
-    }
-
-    @Deprecated
-    public static void doLogout() {
-	// sitebar.doLogout();
-    }
 
     @Deprecated
     public static void doNewGroup(final String returnToken) {

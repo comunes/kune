@@ -1,46 +1,64 @@
 package org.ourproject.kune.platf.client.state;
 
-import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.app.Application;
+import org.mockito.Mockito;
 import org.ourproject.kune.platf.client.app.HistoryWrapper;
-import org.ourproject.kune.workspace.client.sitebar.Site;
+import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.workspace.client.sitebar.SiteToken;
 import org.ourproject.kune.workspace.client.ui.newtmp.WorkspaceManager;
+
+import com.calclab.suco.client.signal.Slot;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class StateManagerTest {
 
-    private StateManager stateManager;
+    private static final String HASH = "someUserHash";
+    private StateManagerDefault stateManager;
     private HistoryWrapper history;
+    private ContentProvider contentProvider;
+    private Session session;
 
-    @Test
-    public void fixmeToken() {
-	stateManager.onHistoryChanged(Site.FIXME_TOKEN);
-    }
-
+    @SuppressWarnings("unchecked")
     @Test
     public void getDefGroup() {
 	stateManager.onHistoryChanged("site.docs");
+	Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
+		(StateToken) Mockito.anyObject(), (AsyncCallback<StateDTO>) Mockito.anyObject());
     }
 
+    @SuppressWarnings("unchecked")
     @Before
     public void init() {
-	final ContentProvider contentProvider = EasyMock.createStrictMock(ContentProvider.class);
-	final Application application = EasyMock.createStrictMock(Application.class);
-	final Session session = EasyMock.createStrictMock(Session.class);
-	history = EasyMock.createStrictMock(HistoryWrapper.class);
-	final WorkspaceManager ws = EasyMock.createStrictMock(WorkspaceManager.class);
-	stateManager = new StateManagerDefault(contentProvider, application, session, history, ws);
+	contentProvider = Mockito.mock(ContentProvider.class);
+	session = Mockito.mock(Session.class);
+	history = Mockito.mock(HistoryWrapper.class);
+	final WorkspaceManager ws = Mockito.mock(WorkspaceManager.class);
+	stateManager = new StateManagerDefault(contentProvider, session, history, ws);
+	Mockito.stub(session.getUserHash()).toReturn(HASH);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void normalStartLoggedUser() {
 	// When a user enter reload state, also if the application is starting
 	// (and the user was logged)
-	EasyMock.expect(history.getToken()).andReturn("");
-	EasyMock.replay(history);
+	Mockito.stub(history.getToken()).toReturn("");
 	stateManager.reload();
-	EasyMock.verify(history);
+	Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
+		(StateToken) Mockito.anyObject(), (AsyncCallback<StateDTO>) Mockito.anyObject());
     }
 
+    @SuppressWarnings("unchecked")
+    @Test
+    public void siteTokenFirstLoadDefContentAndFireSlot() {
+	final Slot slot = Mockito.mock(Slot.class);
+	final String token = SiteToken.signin.toString();
+	stateManager.addSiteToken(token, slot);
+	stateManager.onHistoryChanged(token);
+	Mockito.verify(slot, Mockito.times(1)).onEvent(Mockito.anyObject());
+	Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
+		(StateToken) Mockito.anyObject(), (AsyncCallback<StateDTO>) Mockito.anyObject());
+    }
 }

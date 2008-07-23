@@ -35,17 +35,10 @@ import org.ourproject.kune.workspace.client.actions.CreateNewGroupAction;
 import org.ourproject.kune.workspace.client.actions.DetachFromExtensibleWidgetAction;
 import org.ourproject.kune.workspace.client.actions.DisableRateItAction;
 import org.ourproject.kune.workspace.client.actions.EnableRateItAction;
-import org.ourproject.kune.workspace.client.actions.InitAction;
-import org.ourproject.kune.workspace.client.actions.LoggedInAction;
-import org.ourproject.kune.workspace.client.actions.LoggedOutAction;
 import org.ourproject.kune.workspace.client.actions.OnlyCheckUserSessionAction;
 import org.ourproject.kune.workspace.client.actions.RateContentAction;
 import org.ourproject.kune.workspace.client.actions.RecalculateWorkspaceAction;
 import org.ourproject.kune.workspace.client.actions.ReloadContextAction;
-import org.ourproject.kune.workspace.client.actions.StopAction;
-import org.ourproject.kune.workspace.client.actions.UserLoginAction;
-import org.ourproject.kune.workspace.client.actions.UserLogoutAction;
-import org.ourproject.kune.workspace.client.actions.UserRegisterAction;
 import org.ourproject.kune.workspace.client.actions.i18n.DoTranslationAction;
 import org.ourproject.kune.workspace.client.actions.i18n.GetLexiconAction;
 import org.ourproject.kune.workspace.client.actions.i18n.GetTranslationAction;
@@ -81,10 +74,6 @@ public class WorkspaceClientModule implements ClientModule {
     }
 
     public void configure(final Register register) {
-	register.addAction(WorkspaceEvents.START_APP, new InitAction(session, dispacher, workspace));
-	register.addAction(WorkspaceEvents.STOP_APP, new StopAction(workspace));
-	register.addAction(WorkspaceEvents.USER_LOGGED_IN, new LoggedInAction(session, stateManager, i18n));
-	register.addAction(WorkspaceEvents.USER_LOGGED_OUT, new LoggedOutAction(session, stateManager));
 	register.addAction(WorkspaceEvents.ONLY_CHECK_USER_SESSION, new OnlyCheckUserSessionAction(session));
 	register.addAction(PlatformEvents.ATTACH_TO_EXTENSIBLE_WIDGET, new AttachToExtensibleWidgetAction(workspace));
 	register.addAction(PlatformEvents.DETACH_FROM_EXTENSIBLE_WIDGET,
@@ -115,9 +104,6 @@ public class WorkspaceClientModule implements ClientModule {
 	register.addAction(WorkspaceEvents.SHOW_TRANSLATOR, new ShowTranslatorAction(session, workspace, i18n));
 	register.addAction(WorkspaceEvents.DO_TRANSLATION, new DoTranslationAction(session, i18n));
 	register.addAction(WorkspaceEvents.GET_LEXICON, new GetLexiconAction(i18n));
-	register.addAction(WorkspaceEvents.USER_LOGIN, new UserLoginAction());
-	register.addAction(WorkspaceEvents.USER_LOGOUT, new UserLogoutAction(session));
-	register.addAction(WorkspaceEvents.USER_REGISTER, new UserRegisterAction());
 	register.addAction(WorkspaceEvents.CREATE_NEW_GROUP, new CreateNewGroupAction(session));
 	register.addAction(WorkspaceEvents.RELOAD_CONTEXT, new ReloadContextAction(stateManager));
 	register.addAction(WorkspaceEvents.RECALCULATE_WORKSPACE_SIZE, new RecalculateWorkspaceAction(workspace));

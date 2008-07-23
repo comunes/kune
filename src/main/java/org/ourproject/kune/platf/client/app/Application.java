@@ -27,6 +27,8 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
+import com.calclab.suco.client.signal.Slot;
+
 public interface Application {
 
     ClientTool getTool(String toolName);
@@ -35,11 +37,10 @@ public interface Application {
 
     void init(DefaultDispatcher dispatcher, StateManager stateManager, HashMap<String, ClientTool> tools);
 
-    /**
-     * Communicates to every tool the current group
-     * 
-     * @param group
-     */
+    void onApplicationStart(Slot<Object> slot);
+
+    void onApplicationStop(Slot<Object> slot);
+
     void setGroupState(String groupShortName);
 
     void start();

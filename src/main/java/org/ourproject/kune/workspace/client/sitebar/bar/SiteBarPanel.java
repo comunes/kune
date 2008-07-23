@@ -31,8 +31,8 @@ import org.ourproject.kune.workspace.client.newgroup.NewGroup;
 import org.ourproject.kune.workspace.client.newgroup.ui.NewGroupPanel;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.sitebar.SiteBarFactory;
-import org.ourproject.kune.workspace.client.sitebar.login.Login;
-import org.ourproject.kune.workspace.client.sitebar.login.LoginPanel;
+import org.ourproject.kune.workspace.client.sitebar.SiteToken;
+import org.ourproject.kune.workspace.client.sitebar.login.SignInPanel;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
@@ -75,7 +75,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     private TextBox searchTextBox;
 
     private final Label logoutLabel;
-    private LoginPanel loginPanel;
+    private SignInPanel signInPanel;
     private final Images img;
     private final MenuBar optionsSubmenu;
     private MenuItem linkHelpInTrans;
@@ -157,14 +157,14 @@ public class SiteBarPanel extends Composite implements SiteBarView {
 	gotoPublic.addStyleName("kune-SiteBarPanel-LabelLink");
 	contentNoPublic.addStyleName("kune-Margin-Medium-r");
 	newGroupHyperlink.setText(i18n.t("Create New Group"));
-	newGroupHyperlink.setTargetHistoryToken(Site.NEWGROUP_TOKEN);
+	newGroupHyperlink.setTargetHistoryToken(SiteToken.newgroup.toString());
 	loggedUserHyperlink.setVisible(false);
 	pipeSeparatorHtml.setHTML("|");
 	pipeSeparatorHtml.setStyleName("kune-SiteBarPanel-Separator");
 	pipeSeparatorHtml2.setHTML("|");
 	pipeSeparatorHtml2.setStyleName("kune-SiteBarPanel-Separator");
 	loginHyperlink.setText(i18n.t("Sign in to collaborate"));
-	loginHyperlink.setTargetHistoryToken(Site.LOGIN_TOKEN);
+	loginHyperlink.setTargetHistoryToken(SiteToken.signin.toString());
 	logoutLabel.setText(i18n.t("Sign out"));
 	logoutLabel.addStyleName("kune-SiteBarPanel-LabelLink");
 	options.addItem(i18n.t("Options"), true, optionsSubmenu);
@@ -186,7 +186,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     public void centerLoginDialog() {
-	loginPanel.center();
+	signInPanel.center();
     }
 
     public void centerNewGroupDialog() {
@@ -206,7 +206,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     public void hideLoginDialog() {
-	loginPanel.hide();
+	signInPanel.hide();
     }
 
     public void hideNewGroupDialog() {
@@ -235,7 +235,7 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     public void restoreLoginLink() {
 	loginHyperlink.setVisible(true);
 	loggedUserHyperlink.setVisible(false);
-	loginHyperlink.setTargetHistoryToken(Site.LOGIN_TOKEN);
+	loginHyperlink.setTargetHistoryToken(SiteToken.signin.toString());
     }
 
     public void setContentGotoPublicUrl(final String publicUrl) {
@@ -308,9 +308,9 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     public void showLoginDialog() {
-	final Login login = SiteBarFactory.getLoginForm(presenter);
-	loginPanel = (LoginPanel) login.getView();
-	loginPanel.show();
+	// final SignIn login = SiteBarFactory.getLoginForm(presenter);
+	// signInPanel = (SignInPanel) login.getView();
+	// signInPanel.show();
 
     }
 

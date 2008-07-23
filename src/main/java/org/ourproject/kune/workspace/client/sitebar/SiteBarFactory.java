@@ -33,13 +33,10 @@ import org.ourproject.kune.workspace.client.newgroup.NewGroup;
 import org.ourproject.kune.workspace.client.newgroup.NewGroupListener;
 import org.ourproject.kune.workspace.client.newgroup.NewGroupPresenter;
 import org.ourproject.kune.workspace.client.newgroup.ui.NewGroupPanel;
-import org.ourproject.kune.workspace.client.sitebar.login.Login;
-import org.ourproject.kune.workspace.client.sitebar.login.LoginListener;
-import org.ourproject.kune.workspace.client.sitebar.login.LoginPanel;
-import org.ourproject.kune.workspace.client.sitebar.login.LoginPresenter;
+import org.ourproject.kune.workspace.client.sitebar.login.SignIn;
 
 public class SiteBarFactory {
-    private static Login login;
+    private static SignIn login;
     private static NewGroup newGroup;
     private static Session session;
     private static I18nUITranslationService i18n;
@@ -58,16 +55,6 @@ public class SiteBarFactory {
 	final LicenseChoosePanel view = new LicenseChoosePanel(licensesNonCCList, presenter, i18n);
 	presenter.init(view, licensesList, licensesNonCCList);
 	return presenter;
-    }
-
-    public static Login getLoginForm(final LoginListener listener) {
-	if (login == null) {
-	    final LoginPresenter presenter = new LoginPresenter(session, listener, i18n);
-	    final LoginPanel view = new LoginPanel(presenter, i18n);
-	    presenter.init(view);
-	    login = presenter;
-	}
-	return login;
     }
 
     public static NewGroup getNewGroupForm(final NewGroupListener listener) {

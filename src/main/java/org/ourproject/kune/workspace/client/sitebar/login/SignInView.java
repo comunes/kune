@@ -22,7 +22,9 @@ package org.ourproject.kune.workspace.client.sitebar.login;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.workspace.client.newgroup.ui.SiteErrorType;
 
-public interface LoginView extends View {
+public interface SignInView extends View {
+
+    public void center();
 
     public String getCountry();
 
@@ -44,6 +46,8 @@ public interface LoginView extends View {
 
     public String getTimezone();
 
+    public void hide();
+
     public void hideMessages();
 
     public boolean isRegisterFormValid();
@@ -53,6 +57,8 @@ public interface LoginView extends View {
     public void maskProcessing();
 
     public void reset();
+
+    public void show();
 
     public void showWelcolmeDialog();
 

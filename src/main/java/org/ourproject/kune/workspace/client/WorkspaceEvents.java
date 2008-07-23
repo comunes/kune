@@ -21,12 +21,7 @@
 package org.ourproject.kune.workspace.client;
 
 public interface WorkspaceEvents {
-    public static final String START_APP = "platf.StartApplication";
-    public static final String STOP_APP = "platf.StopApplication";
-    public static final String USER_LOGGED_IN = "ws.UserLoggedIn";
-    public static final String USER_LOGGED_OUT = "ws.UserLoggedOut";
     public static final String ONLY_CHECK_USER_SESSION = "ws_OnlyCheckUserSession";
-    public static final String INIT_DATA_RECEIVED = "ws.InitDataReceived";
     public static final String REQ_JOIN_GROUP = "ws.RequestJoinGroup";
     public static final String DEL_MEMBER = "ws.DeleteMember";
     public static final String DENY_JOIN_GROUP = "ws.DenyJoinGroup";
@@ -48,9 +43,6 @@ public interface WorkspaceEvents {
     public static final String SHOW_SEARCHER = "ws.ShowSearcher";
     public static final String GET_TRANSLATION = "i18n.GetTranslation";
     public static final String DO_TRANSLATION = "i18n.doTranslation";
-    public static final String USER_LOGIN = "ws.UserLogin";
-    public static final String USER_LOGOUT = "ws.UserLogout";
-    public static final String USER_REGISTER = "ws.UserRegister";
     public static final String CREATE_NEW_GROUP = "ws.CreateNewGroup";
     public static final String RELOAD_CONTEXT = "ws.ReoloadContext";
     public static final String WS_SPLITTER_STARTRESIZING = "ws.SplitterStartResizing";

@@ -24,15 +24,20 @@ import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
+import com.calclab.suco.client.signal.Slot;
 import com.google.gwt.user.client.HistoryListener;
 
 public interface StateManager extends HistoryListener {
+
+    void addSiteToken(String token, Slot<StateToken> whenToken);
 
     void gotoToken(String token);
 
     void reload();
 
     void reloadContextAndTitles();
+
+    void removeSiteToken(String token);
 
     void setRetrievedState(StateDTO content);
 

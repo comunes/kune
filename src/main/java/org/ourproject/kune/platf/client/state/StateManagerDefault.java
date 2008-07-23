@@ -20,40 +20,52 @@
 
 package org.ourproject.kune.platf.client.state;
 
-import org.ourproject.kune.platf.client.app.Application;
+import java.util.HashMap;
+
 import org.ourproject.kune.platf.client.app.HistoryWrapper;
-import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
-import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
-import org.ourproject.kune.platf.client.tool.ClientTool;
-import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.ui.newtmp.WorkspaceManager;
-import org.ourproject.kune.workspace.client.workspace.Workspace;
+
+import com.allen_sauer.gwt.log.client.Log;
+import com.calclab.suco.client.signal.Slot;
 
 public class StateManagerDefault implements StateManager {
-    private final Application app;
-    private final ContentProvider provider;
-    private final Workspace workspace;
+    private final ContentProvider contentProvider;
     private StateDTO oldState;
     private final Session session;
     private final HistoryWrapper history;
-    private final WorkspaceManager ws;
+    private final WorkspaceManager workspaceManager;
+    private final HashMap<String, Slot<StateToken>> siteTokens;
 
-    public StateManagerDefault(final ContentProvider provider, final Application app, final Session session,
-	    final HistoryWrapper history, final WorkspaceManager ws) {
-	this.provider = provider;
-	this.app = app;
+    public StateManagerDefault(final ContentProvider contentProvider, final Session session,
+	    final HistoryWrapper history, final WorkspaceManager workspaceManager) {
+	this.contentProvider = contentProvider;
 	this.session = session;
 	this.history = history;
-	this.ws = ws;
-	this.workspace = app.getWorkspace();
+	this.workspaceManager = workspaceManager;
 	this.oldState = null;
+	session.onUserSignIn(new Slot<UserInfoDTO>() {
+	    public void onEvent(final UserInfoDTO parameter) {
+		restorePreviousState();
+	    }
+	});
+	session.onUserSignOut(new Slot<Object>() {
+	    public void onEvent(final Object parameter) {
+		reload();
+	    }
+	});
+	siteTokens = new HashMap<String, Slot<StateToken>>();
+    }
+
+    public void addSiteToken(final String token, final Slot<StateToken> slot) {
+	siteTokens.put(token, slot);
     }
 
     public void gotoToken(final String token) {
@@ -61,24 +73,20 @@ public class StateManagerDefault implements StateManager {
     }
 
     public void onHistoryChanged(final String historyToken) {
-	String oldStateEncoded = "";
-	if (oldState != null) {
-	    oldStateEncoded = oldState.getStateToken().getEncoded();
-	}
-	if (historyToken.equals(Site.NEWGROUP_TOKEN)) {
-	    Site.doNewGroup(oldStateEncoded);
-	} else if (historyToken.equals(Site.LOGIN_TOKEN)) {
-	    Site.doLogin(oldStateEncoded);
-	} else if (historyToken.equals(Site.TRANSLATE_TOKEN)) {
-	    DefaultDispatcher.getInstance().fire(WorkspaceEvents.SHOW_TRANSLATOR, null);
-	} else if (historyToken.equals(Site.FIXME_TOKEN)) {
-	    if (oldState == null) {
-		onHistoryChanged(new StateToken());
-	    } else {
-		loadContent(oldState);
-	    }
-	} else {
+	final Slot<StateToken> tokenSlot = siteTokens.get(historyToken);
+	Log.debug("history token: " + historyToken);
+	if (tokenSlot == null) {
 	    onHistoryChanged(new StateToken(historyToken));
+	} else {
+	    StateToken stateToken;
+	    if (oldState == null) {
+		// Starting with some token like "signin": load defContent also
+		stateToken = new StateToken();
+		onHistoryChanged(stateToken);
+	    } else {
+		stateToken = oldState.getStateToken();
+	    }
+	    tokenSlot.onEvent(stateToken);
 	}
     }
 
@@ -92,21 +100,25 @@ public class StateManagerDefault implements StateManager {
     }
 
     public void reloadContextAndTitles() {
-	provider.getContent(session.getUserHash(), new StateToken(history.getToken()),
+	contentProvider.getContent(session.getUserHash(), new StateToken(history.getToken()),
 		new AsyncCallbackSimple<StateDTO>() {
 		    public void onSuccess(final StateDTO newStateDTO) {
 			loadContextOnly(newStateDTO);
 			oldState = newStateDTO;
-			workspace.getContentTitleComponent().setState(oldState);
-			workspace.getContentSubTitleComponent().setState(oldState);
+			// workspace.getContentTitleComponent().setState(oldState);
+			// workspace.getContentSubTitleComponent().setState(oldState);
 			Site.hideProgress();
 		    }
 		});
     }
 
+    public void removeSiteToken(final String token) {
+	siteTokens.remove(token);
+    }
+
     public void setRetrievedState(final StateDTO content) {
 	final StateToken state = content.getStateToken();
-	provider.cache(state, content);
+	contentProvider.cache(state, content);
 	setState(state);
     }
 
@@ -120,7 +132,7 @@ public class StateManagerDefault implements StateManager {
 	    final ParticipationDataDTO userParticipation = socialNet.getUserParticipation();
 	    state.setGroupMembers(groupMembers);
 	    state.setParticipation(userParticipation);
-	    ws.setSocialNetwork(state);
+	    workspaceManager.setSocialNetwork(state);
 	}
     }
 
@@ -130,46 +142,55 @@ public class StateManagerDefault implements StateManager {
 
     private void loadContent(final StateDTO state) {
 	session.setCurrent(state);
-	final GroupDTO group = state.getGroup();
-	app.setGroupState(group.getShortName());
-	final boolean isAdmin = state.getGroupRights().isAdministrable();
-	if (isAdmin) {
-	    workspace.getThemeMenuComponent().setVisible(true);
-	} else {
-	    workspace.getThemeMenuComponent().setVisible(false);
-	}
-	workspace.showGroup(group, isAdmin);
+	workspaceManager.setState(state);
+	// final GroupDTO group = state.getGroup();
+	// app.setGroupState(group.getShortName());
+	// final boolean isAdmin = state.getGroupRights().isAdministrable();
+	// if (isAdmin) {
+	// workspace.getThemeMenuComponent().setVisible(true);
+	// } else {
+	// workspace.getThemeMenuComponent().setVisible(false);
+	// }
+	// workspace.showGroup(group, isAdmin);
 
-	final String toolName = state.getToolName();
-	workspace.setTool(toolName);
+	// final String toolName = state.getToolName();
+	// workspace.setTool(toolName);
 
-	final ClientTool clientTool = app.getTool(toolName);
-	clientTool.setContent(state);
-	clientTool.setContext(state);
-	ws.setState(state);
-	workspace.getContentTitleComponent().setState(state);
-	workspace.getContentSubTitleComponent().setState(state);
-	workspace.getContentBottomToolBarComponent().setRate(state, session.isLogged());
-	workspace.setContent(clientTool.getContent());
-	workspace.setContext(clientTool.getContext());
-	workspace.getLicenseComponent().setLicense(state);
+	// final ClientTool clientTool = app.getTool(toolName);
+	// clientTool.setContent(state);
+	// clientTool.setContext(state);
+	// workspace.getContentTitleComponent().setState(state);
+	// workspace.getContentSubTitleComponent().setState(state);
+	// workspace.getContentBottomToolBarComponent().setRate(state,
+	// session.isLogged());
+	// workspace.setContent(clientTool.getContent());
+	// workspace.setContext(clientTool.getContext());
+	// workspace.getLicenseComponent().setLicense(state);
 	Site.hideProgress();
     }
 
     private void loadContextOnly(final StateDTO state) {
 	session.setCurrent(state);
-	final String toolName = state.getToolName();
-	final ClientTool clientTool = app.getTool(toolName);
-	clientTool.setContext(state);
-	workspace.setContext(clientTool.getContext());
+	// /final String toolName = state.getToolName();
+	// /final ClientTool clientTool = app.getTool(toolName);
+	// /clientTool.setContext(state);
+	// /workspace.setContext(clientTool.getContext());
     }
 
     private void onHistoryChanged(final StateToken newState) {
-	provider.getContent(session.getUserHash(), newState, new AsyncCallbackSimple<StateDTO>() {
+	contentProvider.getContent(session.getUserHash(), newState, new AsyncCallbackSimple<StateDTO>() {
 	    public void onSuccess(final StateDTO newStateDTO) {
 		loadContent(newStateDTO);
 		oldState = newStateDTO;
 	    }
 	});
+    }
+
+    private void restorePreviousState() {
+	if (oldState == null) {
+	    onHistoryChanged(new StateToken());
+	} else {
+	    loadContent(oldState);
+	}
     }
 }

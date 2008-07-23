@@ -25,40 +25,47 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
-import org.ourproject.kune.platf.client.dispatch.Dispatcher;
+import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.extend.ExtensibleWidgetsManager;
+import org.ourproject.kune.platf.client.rpc.SiteService;
+import org.ourproject.kune.platf.client.rpc.SiteServiceAsync;
 import org.ourproject.kune.platf.client.services.ColorTheme;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.tool.ClientTool;
-import org.ourproject.kune.workspace.client.WorkspaceEvents;
+import org.ourproject.kune.platf.client.ui.WindowUtils;
+import org.ourproject.kune.platf.client.utils.PrefetchUtilities;
 import org.ourproject.kune.workspace.client.WorkspaceFactory;
+import org.ourproject.kune.workspace.client.sitebar.Site;
+import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
+
+import com.allen_sauer.gwt.log.client.Log;
+import com.calclab.suco.client.signal.Signal;
+import com.calclab.suco.client.signal.Slot;
+import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class ApplicationDefault implements Application {
     private final Workspace workspace;
     private Map<String, ClientTool> tools;
-    private Dispatcher dispatcher;
+    private final Session session;
+    private final Signal<Object> onApplicationStart;
+    private final Signal<Object> onApplicationStop;
+    private final WorkspaceSkeleton ws;
     private StateManager stateManager;
 
     public ApplicationDefault(final Session session, final ExtensibleWidgetsManager extensionPointManager,
-	    final I18nTranslationService i18n, final ColorTheme colorTheme, final KuneErrorHandler errorHandler) {
+	    final I18nTranslationService i18n, final ColorTheme colorTheme, final KuneErrorHandler errorHandler,
+	    final WorkspaceSkeleton ws) {
+	this.session = session;
+	this.ws = ws;
 	workspace = WorkspaceFactory.createWorkspace(session, extensionPointManager, i18n, colorTheme, errorHandler);
 	tools = new HashMap<String, ClientTool>();
-	// DesktopView desktop = WorkspaceFactory.createDesktop(workspace, new
-	// SiteBarListener() {
-	// public void onChangeState(StateToken token) {
-	// stateManager.setState(token);
-	// }
-	//
-	// public void onUserLoggedOut() {
-	// dispatcher.fire(WorkspaceEvents.USER_LOGGED_OUT, null);
-	// }
-	// }, session);
-	// desktop.attach();
-
+	this.onApplicationStart = new Signal<Object>("onApplicationStart");
+	this.onApplicationStop = new Signal<Object>("onApplicationStop");
     }
 
     public ClientTool getTool(final String toolName) {
@@ -71,10 +78,17 @@ public class ApplicationDefault implements Application {
 
     public void init(final DefaultDispatcher dispatcher, final StateManager stateManager,
 	    final HashMap<String, ClientTool> tools) {
-	this.dispatcher = dispatcher;
 	this.stateManager = stateManager;
 	this.tools = tools;
 	workspace.attachTools(tools.values().iterator());
+    }
+
+    public void onApplicationStart(final Slot<Object> slot) {
+	onApplicationStart.add(slot);
+    }
+
+    public void onApplicationStop(final Slot<Object> slot) {
+	onApplicationStop.add(slot);
     }
 
     public void setGroupState(final String groupShortName) {
@@ -86,10 +100,46 @@ public class ApplicationDefault implements Application {
     }
 
     public void start() {
-	dispatcher.fireDeferred(WorkspaceEvents.START_APP, null);
+	onApplicationStart.fire(null);
+	PrefetchUtilities.preFetchImpImages();
+	getInitData();
+	final Timer prefetchTimer = new Timer() {
+	    public void run() {
+		PrefetchUtilities.doTasksDeferred(workspace);
+	    }
+	};
+	prefetchTimer.schedule(20000);
     }
 
     public void stop() {
-	dispatcher.fire(WorkspaceEvents.STOP_APP, null);
+	onApplicationStop.fire(null);
+    }
+
+    private void getInitData() {
+	final SiteServiceAsync server = SiteService.App.getInstance();
+	server.getInitData(session.getUserHash(), new AsyncCallback<InitDataDTO>() {
+	    public void onFailure(final Throwable error) {
+		Site.error("Error fetching initial data");
+		Log.debug(error.getMessage());
+		ws.unMask();
+	    }
+
+	    public void onSuccess(final InitDataDTO initData) {
+		checkChatDomain(initData.getChatDomain());
+		session.setInitData(initData);
+		session.setCurrentUserInfo(initData.getUserInfo());
+		stateManager.reload();
+		ws.unMask();
+	    }
+
+	    private void checkChatDomain(final String chatDomain) {
+		final String httpDomain = WindowUtils.getLocation().getHostName();
+		if (!chatDomain.equals(httpDomain)) {
+		    Log.error("Your http domain (" + httpDomain + ") is different from the chat domain (" + chatDomain
+			    + "). This will produce problems with the chat functionality. "
+			    + "Check kune.properties on the server.");
+		}
+	    }
+	});
     }
 }

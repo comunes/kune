@@ -24,7 +24,7 @@ public interface ChatEngine {
 
     void joinRoom(String roomName, String userAlias);
 
-    void login(String chatName, String chatPassword);
+    void login(String jid, String passwd);
 
     void logout();
 }

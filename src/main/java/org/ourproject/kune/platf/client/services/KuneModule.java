@@ -5,9 +5,9 @@ import java.util.HashMap;
 import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.ApplicationDefault;
-import org.ourproject.kune.platf.client.app.HistoryWrapper;
 import org.ourproject.kune.platf.client.app.HistoryWrapperImpl;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.extend.ExtensibleWidgetsManager;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
@@ -18,16 +18,24 @@ import org.ourproject.kune.platf.client.state.SessionImpl;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.state.StateManagerDefault;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.workspace.client.newgroup.NewGroup;
+import org.ourproject.kune.workspace.client.newgroup.NewGroupPresenter;
+import org.ourproject.kune.workspace.client.newgroup.ui.NewGroupPanel;
 import org.ourproject.kune.workspace.client.presence.ui.GroupSummaryPanel;
 import org.ourproject.kune.workspace.client.search.SiteSearcher;
 import org.ourproject.kune.workspace.client.search.SiteSearcherPanel;
 import org.ourproject.kune.workspace.client.search.SiteSearcherPresenter;
 import org.ourproject.kune.workspace.client.search.SiteSearcherView;
 import org.ourproject.kune.workspace.client.sitebar.Site;
+import org.ourproject.kune.workspace.client.sitebar.SiteToken;
+import org.ourproject.kune.workspace.client.sitebar.login.SignIn;
+import org.ourproject.kune.workspace.client.sitebar.login.SignInPanel;
+import org.ourproject.kune.workspace.client.sitebar.login.SignInPresenter;
 import org.ourproject.kune.workspace.client.sitebar.msg.SiteMessage;
 import org.ourproject.kune.workspace.client.sitebar.msg.SiteMessagePanel;
 import org.ourproject.kune.workspace.client.sitebar.msg.SiteMessagePresenter;
 import org.ourproject.kune.workspace.client.sitebar.msg.SiteMessageView;
+import org.ourproject.kune.workspace.client.sitebar.rpc.UserService;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryPanelNew;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryPresenterNew;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryViewNew;
@@ -83,6 +91,7 @@ import com.calclab.suco.client.container.Provider;
 import com.calclab.suco.client.modules.Module;
 import com.calclab.suco.client.modules.ModuleBuilder;
 import com.calclab.suco.client.scopes.SingletonScope;
+import com.calclab.suco.client.signal.Slot;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.History;
 
@@ -117,7 +126,7 @@ public class KuneModule implements Module {
 
 	builder.registerProvider(Session.class, new Provider<Session>() {
 	    public Session get() {
-		return new SessionImpl(Cookies.getCookie("userHash"), initialLang);
+		return new SessionImpl(Cookies.getCookie(Site.USERHASH), initialLang);
 	    }
 	}, SingletonScope.class);
 
@@ -168,18 +177,18 @@ public class KuneModule implements Module {
 	    }
 	}, SingletonScope.class);
 
+	final WorkspaceSkeleton ws = builder.getInstance(WorkspaceSkeleton.class);
+	final Images images = builder.getInstance(Images.class);
+
 	builder.registerProvider(Application.class, new Provider<Application>() {
 	    public Application get() {
 		final Session session = builder.getInstance(Session.class);
 		final ExtensibleWidgetsManager extensionPointManager = builder
 			.getInstance(ExtensibleWidgetsManager.class);
 		return new ApplicationDefault(session, extensionPointManager, i18n, builder
-			.getInstance(ColorTheme.class), builder.getInstance(KuneErrorHandler.class));
+			.getInstance(ColorTheme.class), builder.getInstance(KuneErrorHandler.class), ws);
 	    }
 	}, SingletonScope.class);
-
-	final WorkspaceSkeleton ws = builder.getInstance(WorkspaceSkeleton.class);
-	final Images images = builder.getInstance(Images.class);
 
 	builder.registerProvider(SitePublicSpaceLink.class, new Provider<SitePublicSpaceLink>() {
 	    public SitePublicSpaceLink get() {
@@ -220,8 +229,9 @@ public class KuneModule implements Module {
 
 	builder.registerProvider(SiteSignInLink.class, new Provider<SiteSignInLink>() {
 	    public SiteSignInLink get() {
-		final SiteSignInLinkPresenter presenter = new SiteSignInLinkPresenter();
-		final SiteSignInLinkPanel panel = new SiteSignInLinkPanel(presenter, ws);
+		final SiteSignInLinkPresenter presenter = new SiteSignInLinkPresenter(builder
+			.getInstance(Session.class));
+		final SiteSignInLinkPanel panel = new SiteSignInLinkPanel(presenter, i18n, ws);
 		presenter.init(panel);
 		return presenter;
 	    }
@@ -229,8 +239,10 @@ public class KuneModule implements Module {
 
 	builder.registerProvider(SiteSignOutLink.class, new Provider<SiteSignOutLink>() {
 	    public SiteSignOutLink get() {
-		final SiteSignOutLinkPresenter presenter = new SiteSignOutLinkPresenter();
-		final SiteSignOutLinkPanel panel = new SiteSignOutLinkPanel(presenter, ws);
+		final SiteSignOutLinkPresenter presenter = new SiteSignOutLinkPresenter(builder
+			.getInstance(Session.class), UserService.App.getInstance(), builder
+			.getInstance(KuneErrorHandler.class));
+		final SiteSignOutLinkPanel panel = new SiteSignOutLinkPanel(presenter, i18n, ws);
 		presenter.init(panel);
 		return presenter;
 	    }
@@ -281,9 +293,27 @@ public class KuneModule implements Module {
 	    }
 	}, SingletonScope.class);
 
+	builder.registerProvider(SignIn.class, new Provider<SignIn>() {
+	    public SignIn get() {
+		final SignInPresenter presenter = new SignInPresenter(builder.getInstance(Session.class), builder
+			.getInstance(StateManager.class), i18n, UserService.App.getInstance());
+		final SignInPanel view = new SignInPanel(presenter, i18n, ws);
+		presenter.init(view);
+		return presenter;
+	    }
+	}, SingletonScope.class);
+
+	builder.registerProvider(NewGroup.class, new Provider<NewGroup>() {
+	    public NewGroup get() {
+		final NewGroupPresenter presenter = new NewGroupPresenter(null, i18n);
+		final NewGroupPanel view = new NewGroupPanel(presenter, i18n);
+		presenter.init(view);
+		return presenter;
+	    }
+	}, SingletonScope.class);
+
 	builder.getInstance(SitePublicSpaceLink.class);
 	builder.getInstance(SiteSignInLink.class);
-
 	builder.getInstance(SiteSignOutLink.class);
 	builder.getInstance(SiteNewGroupLink.class);
 	builder.getInstance(SiteSearch.class);
@@ -346,6 +376,16 @@ public class KuneModule implements Module {
 	    }
 	}, SingletonScope.class);
 
+	builder.registerProvider(StateManager.class, new Provider<StateManager>() {
+	    public StateManager get() {
+		final StateManagerDefault stateManager = new StateManagerDefault(new ContentProviderImpl(
+			ContentService.App.getInstance()), builder.getInstance(Session.class),
+			new HistoryWrapperImpl(), builder.getInstance(WorkspaceManager.class));
+		History.addHistoryListener(stateManager);
+		return stateManager;
+	    }
+	}, SingletonScope.class);
+
 	builder.registerProvider(GroupMembersSummary.class, new Provider<GroupMembersSummary>() {
 	    public GroupMembersSummary get() {
 		final GroupMembersSummaryPresenterNew presenter = new GroupMembersSummaryPresenterNew(i18n, builder
@@ -387,22 +427,15 @@ public class KuneModule implements Module {
 	    }
 	}, SingletonScope.class);
 
-	// builder.registerProvider(type, new Provider<>() {},
-	// SingletonScope.class);
-
-	builder.registerProvider(StateManager.class, new Provider<StateManager>() {
-	    public StateManager get() {
-		final Session session = builder.getInstance(Session.class);
-		final ContentProviderImpl provider = new ContentProviderImpl(ContentService.App.getInstance());
-		final HistoryWrapper historyWrapper = new HistoryWrapperImpl();
-		final Application application = builder.getInstance(Application.class);
-		final WorkspaceManager wm = builder.getInstance(WorkspaceManager.class);
-		final StateManagerDefault stateManager = new StateManagerDefault(provider, application, session,
-			historyWrapper, wm);
-		History.addHistoryListener(stateManager);
-		return stateManager;
+	// Register of tokens like "signin", "newgroup", "translate" etcetera
+	builder.getInstance(StateManager.class).addSiteToken(SiteToken.signin.toString(), new Slot<StateToken>() {
+	    public void onEvent(final StateToken previousStateToken) {
+		builder.getInstance(SignIn.class).doSignIn(previousStateToken);
 	    }
-	}, SingletonScope.class);
+	});
+
+	// builder.registerProvider(type, new Provider<>() {},
+	// SingletonScope.class)
 
     }
 

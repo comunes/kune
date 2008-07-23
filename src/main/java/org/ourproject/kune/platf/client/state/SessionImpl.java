@@ -29,32 +29,31 @@ import org.ourproject.kune.platf.client.dto.I18nLanguageSimpleDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 
 import com.calclab.suco.client.signal.Signal;
 import com.calclab.suco.client.signal.Slot;
 
-/**
- * RESPONSABILITIES: - Store the user's application state - Generates URLable's
- * historyTokens
- * 
- * @author danigb
- * 
- */
 public class SessionImpl implements Session {
     private String userHash;
+    private InitDataDTO initData;
+    private UserInfoDTO currentUserInfo;
     private Object[][] languagesArray;
     private Object[][] countriesArray;
     private Object[][] timezonesArray;
     private StateDTO currentState;
     private I18nLanguageDTO currentLanguage;
-    private InitDataDTO initData;
     private final Signal<InitDataDTO> onInitDataReceived;
+    private final Signal<UserInfoDTO> onUserSignIn;
+    private final Signal<Object> onUserSignOut;
 
     public SessionImpl(final String userHash, final I18nLanguageDTO initialLanguage) {
 	this.userHash = userHash;
 	currentLanguage = initialLanguage;
 	languagesArray = null;
 	this.onInitDataReceived = new Signal<InitDataDTO>("initDataReceived");
+	this.onUserSignIn = new Signal<UserInfoDTO>("onUserSignIn");
+	this.onUserSignOut = new Signal<Object>("onUserSignOut");
     }
 
     public List<I18nCountryDTO> getCountries() {
@@ -74,6 +73,10 @@ public class SessionImpl implements Session {
 
     public StateDTO getCurrentState() {
 	return currentState;
+    }
+
+    public UserInfoDTO getCurrentUserInfo() {
+	return currentUserInfo;
     }
 
     public List<I18nLanguageSimpleDTO> getLanguages() {
@@ -110,6 +113,14 @@ public class SessionImpl implements Session {
 	onInitDataReceived.add(slot);
     }
 
+    public void onUserSignIn(final Slot<UserInfoDTO> slot) {
+	onUserSignIn.add(slot);
+    }
+
+    public void onUserSignOut(final Slot<Object> slot) {
+	onUserSignOut.add(slot);
+    }
+
     public void setCurrent(final StateDTO currentState) {
 	this.currentState = currentState;
     }
@@ -122,6 +133,15 @@ public class SessionImpl implements Session {
 	this.currentState = currentState;
     }
 
+    public void setCurrentUserInfo(final UserInfoDTO currentUserInfo) {
+	this.currentUserInfo = currentUserInfo;
+	if (currentUserInfo != null) {
+	    onUserSignIn.fire(currentUserInfo);
+	} else {
+	    onUserSignOut.fire(null);
+	}
+    }
+
     public void setInitData(final InitDataDTO initData) {
 	this.initData = initData;
 	onInitDataReceived.fire(initData);
@@ -132,9 +152,9 @@ public class SessionImpl implements Session {
     }
 
     private Object[][] mapCountries() {
-	final Object[][] objs = new Object[getCountries().size()][1];
+	final Object[][] objs = new Object[initData.getCountries().size()][1];
 	int i = 0;
-	for (final Iterator<I18nCountryDTO> iterator = getCountries().iterator(); iterator.hasNext();) {
+	for (final Iterator<I18nCountryDTO> iterator = initData.getCountries().iterator(); iterator.hasNext();) {
 	    final I18nCountryDTO country = iterator.next();
 	    final Object[] obj = new Object[] { country.getCode(), country.getEnglishName() };
 	    objs[i++] = obj;
@@ -143,9 +163,9 @@ public class SessionImpl implements Session {
     }
 
     private Object[][] mapLangs() {
-	final Object[][] objs = new Object[getLanguages().size()][1];
+	final Object[][] objs = new Object[initData.getLanguages().size()][1];
 	int i = 0;
-	for (final Iterator<I18nLanguageSimpleDTO> iterator = getLanguages().iterator(); iterator.hasNext();) {
+	for (final Iterator<I18nLanguageSimpleDTO> iterator = initData.getLanguages().iterator(); iterator.hasNext();) {
 	    final I18nLanguageSimpleDTO language = iterator.next();
 	    final Object[] obj = new Object[] { language.getCode(), language.getEnglishName() };
 	    objs[i++] = obj;
@@ -154,9 +174,9 @@ public class SessionImpl implements Session {
     }
 
     private void mapTimezones() {
-	timezonesArray = new Object[getTimezones().length][1];
+	timezonesArray = new Object[initData.getTimezones().length][1];
 	for (int i = 0; i < getTimezones().length; i++) {
-	    final Object[] obj = new Object[] { getTimezones()[i] };
+	    final Object[] obj = new Object[] { initData.getTimezones()[i] };
 	    timezonesArray[i] = obj;
 	}
     }

@@ -17,25 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.actions;
+package org.ourproject.kune.workspace.client.sitebar.login;
 
-import org.ourproject.kune.platf.client.dispatch.Action;
-import org.ourproject.kune.workspace.client.workspace.Workspace;
+import org.ourproject.kune.platf.client.dto.StateToken;
 
-@SuppressWarnings("unchecked")
-public class StopAction implements Action {
+public interface SignIn {
 
-    private final Workspace workspace;
+    void doSignIn(StateToken previousStateToken);
 
-    public StopAction(final Workspace workspace) {
-        this.workspace = workspace;
-    }
-
-    public void execute(final Object value) {
-        onStop();
-    }
-
-    private void onStop() {
-        workspace.setVisible(false);
-    }
 }

@@ -42,7 +42,7 @@ public class ParticipationSummaryPanel extends DropDownPanel implements Particip
 	super.setHeaderText(i18n.t("Participates as..."));
 	super.setHeaderTitle(i18n.t("Groups in which participates"));
 	super.setBorderStylePrimaryName("k-dropdownouter-part");
-	super.addStyleName("kune-Margin-Medium-tl");
+	super.addStyleName("kune-Margin-Medium-t");
 	gridMenuPanel = new GridMenuPanel<GroupDTO>(i18n.t("This user is not member of any group"), true, false, false,
 		false, false);
 	final EntitySummary entitySummary = ws.getEntitySummary();

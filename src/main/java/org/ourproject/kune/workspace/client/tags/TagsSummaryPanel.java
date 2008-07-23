@@ -56,7 +56,7 @@ public class TagsSummaryPanel extends DropDownPanel implements TagsSummaryView {
 	vp.setCellWidth(flowPanel, "100%");
 	super.setContent(vp);
 	super.setBorderStylePrimaryName("k-dropdownouter-tags");
-	addStyleName("kune-Margin-Medium-tl");
+	addStyleName("kune-Margin-Medium-t");
 	flowPanel.addStyleName("kune-Margin-Small-trbl");
 	ws.getEntitySummary().addInSummary(this);
     }

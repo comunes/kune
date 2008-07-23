@@ -1,7 +1,7 @@
 /*
  *
- * Copyright (C) 2007-2008 The kune development team (see CREDITS for details)
  * This file is part of kune.
+ * Copyright (C) 2007-2008 The kune development team (see CREDITS for details)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -27,6 +27,7 @@ import org.ourproject.kune.platf.client.dto.I18nLanguageSimpleDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 
 import com.calclab.suco.client.signal.Slot;
 
@@ -66,6 +67,12 @@ public interface Session {
     String getUserHash();
 
     void onInitDataReceived(Slot<InitDataDTO> slot);
+
+    void onUserSignIn(Slot<UserInfoDTO> slot);
+
+    void onUserSignOut(Slot<Object> slot);
+
+    void setCurrentUserInfo(UserInfoDTO currentUserInfo);
 
     void setUserHash(String userHash);
 

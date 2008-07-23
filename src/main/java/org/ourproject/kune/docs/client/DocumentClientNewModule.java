@@ -28,7 +28,7 @@ public class DocumentClientNewModule implements Module {
 	builder.registerProvider(DocumentFactory.class, new Provider<DocumentFactory>() {
 	    public DocumentFactory get() {
 		return new DocumentFactory(builder.getInstance(I18nUITranslationService.class), builder
-			.getInstance(Session.class), builder.getInstance(TagsSummary.class), builder
+			.getInstance(Session.class), builder.getProvider(TagsSummary.class), builder
 			.getInstance(WorkspaceSkeleton.class));
 	    }
 	}, SingletonScope.class);

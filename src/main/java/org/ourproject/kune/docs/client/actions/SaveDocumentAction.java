@@ -38,43 +38,44 @@ public class SaveDocumentAction implements Action<SaveDocumentActionParams> {
     private final I18nTranslationService i18n;
 
     public SaveDocumentAction(final Session session, final I18nTranslationService i18n) {
-        this.session = session;
-        this.i18n = i18n;
+	this.session = session;
+	this.i18n = i18n;
     }
 
     public void execute(final SaveDocumentActionParams params) {
-        save(params);
+	save(params);
     }
 
     private void save(final SaveDocumentActionParams params) {
-        Site.showProgressSaving();
-        ContentServiceAsync server = ContentService.App.getInstance();
-        server.save(session.getUserHash(), session.getCurrentState().getGroup().getShortName(), params.getStateDTO()
-                .getDocumentId(), params.getStateDTO().getContent(), new AsyncCallback<Integer>() {
-            public void onFailure(final Throwable caught) {
-                Site.hideProgress();
-                try {
-                    throw caught;
-                } catch (final SessionExpiredException e) {
-                    Site.doLogout();
-                    MessageBox.alert(i18n.t("Alert"), i18n.t("Your session has expired. Please login again."),
-                            new AlertCallback() {
-                                public void execute() {
-                                    Site.doLogin(null);
-                                }
-                            });
-                } catch (final Throwable e) {
-                    Site.error(i18n.t("Error saving document. Retrying..."));
-                    params.getDocumentContent().onSaveFailed();
-                }
-            }
+	Site.showProgressSaving();
+	final ContentServiceAsync server = ContentService.App.getInstance();
+	server.save(session.getUserHash(), session.getCurrentState().getGroup().getShortName(), params.getStateDTO()
+		.getDocumentId(), params.getStateDTO().getContent(), new AsyncCallback<Integer>() {
+	    public void onFailure(final Throwable caught) {
+		// User error codes and KuneErrorHandler
+		Site.hideProgress();
+		try {
+		    throw caught;
+		} catch (final SessionExpiredException e) {
+		    // FIXME Logout ???
+		    MessageBox.alert(i18n.t("Alert"), i18n.t("Your session has expired. Please login again."),
+			    new AlertCallback() {
+				public void execute() {
+				    // FIXME Login ???
+				}
+			    });
+		} catch (final Throwable e) {
+		    Site.error(i18n.t("Error saving document. Retrying..."));
+		    params.getDocumentContent().onSaveFailed();
+		}
+	    }
 
-            public void onSuccess(final Integer result) {
-                Site.hideProgress();
-                params.getDocumentContent().onSaved();
-            }
+	    public void onSuccess(final Integer result) {
+		Site.hideProgress();
+		params.getDocumentContent().onSaved();
+	    }
 
-        });
+	});
     }
 
 }

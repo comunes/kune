@@ -1,9 +1,11 @@
 package org.ourproject.kune.chat.client;
 
 import org.ourproject.kune.platf.client.KunePlatform;
+import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
 import com.calclab.suco.client.container.Container;
@@ -24,17 +26,16 @@ public class ChatClientNewModule implements Module {
     public void onLoad(final ModuleBuilder builder) {
 	builder.registerProvider(ChatClientTool.class, new Provider<ChatClientTool>() {
 	    public ChatClientTool get() {
-		return new ChatClientTool(builder.getInstance(I18nUITranslationService.class), builder
-			.getInstance(EmiteUIDialog.class));
+		return new ChatClientTool(builder.getInstance(Session.class), builder.getInstance(Application.class),
+			builder.getInstance(I18nUITranslationService.class), builder.getInstance(EmiteUIDialog.class),
+			builder.getInstance(WorkspaceSkeleton.class));
 	    }
 	}, SingletonScope.class);
 
-	final KunePlatform platform = builder.getInstance(KunePlatform.class);
 	final ChatClientTool chatClientTool = getChatClientTool(builder);
-	platform.addTool(chatClientTool);
-
-	final Session session = builder.getInstance(Session.class);
-	final StateManager stateManager = builder.getInstance(StateManager.class);
-	platform.install(new ChatClientModule(session, stateManager, chatClientTool));
+	builder.getInstance(KunePlatform.class).addTool(chatClientTool);
+	builder.getInstance(KunePlatform.class).install(
+		new ChatClientModule(builder.getInstance(Session.class), builder.getInstance(StateManager.class),
+			chatClientTool));
     }
 }
