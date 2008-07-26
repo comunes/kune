@@ -5,7 +5,6 @@ import java.util.HashMap;
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.signal.Signal;
 import com.calclab.suco.client.signal.Slot;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Composite;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.SortDir;
@@ -209,12 +208,6 @@ public class GridMenuPanel<T> extends Composite {
 	} else {
 	    Log.error("Trying to remove a non existing item: " + gridItem.getId());
 	}
-    }
-
-    public void setDraggable(final boolean draggable) {
-	createGridIfNeeded();
-	DOM.setElementPropertyBoolean(grid.getElement(), "allowDrag", draggable);
-	doLayoutIfNeeded();
     }
 
     public void setWidth(final int width) {

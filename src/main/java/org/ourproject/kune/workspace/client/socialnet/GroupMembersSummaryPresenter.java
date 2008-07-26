@@ -83,17 +83,13 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
 		});
     }
 
-    public void hide() {
-	view.setVisible(false);
-    }
-
     public void init(final GroupMembersSummaryView view) {
 	this.view = view;
     }
 
     public void setState(final StateDTO state) {
 	if (state.getGroup().getType().equals(GroupDTO.PERSONAL)) {
-	    hide();
+	    view.setVisible(false);
 	} else {
 	    setGroupMembers(state.getGroupMembers(), state.getGroupRights());
 	}

@@ -102,7 +102,7 @@ public class GroupMembersSummaryPanel extends DropDownPanel implements GroupMemb
     }
 
     public void setDraggable(final boolean draggable) {
-	gridMenuPanel.setDraggable(draggable);
+	// gridMenuPanel.setDraggable(draggable);
     }
 
     public void setDropDownContentVisible(final boolean visible) {
