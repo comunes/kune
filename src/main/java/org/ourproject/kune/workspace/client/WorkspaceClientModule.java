@@ -26,8 +26,6 @@ import org.ourproject.kune.platf.client.extend.ClientModule;
 import org.ourproject.kune.platf.client.extend.Register;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.actions.AddGroupLiveSearchAction;
-import org.ourproject.kune.workspace.client.actions.AddUserLiveSearchAction;
 import org.ourproject.kune.workspace.client.actions.AttachToExtensibleWidgetAction;
 import org.ourproject.kune.workspace.client.actions.ClearExtensibleWidgetAction;
 import org.ourproject.kune.workspace.client.actions.DetachFromExtensibleWidgetAction;
@@ -69,8 +67,6 @@ public class WorkspaceClientModule implements ClientModule {
 	register.addAction(WorkspaceEvents.ENABLE_RATEIT, new EnableRateItAction(workspace));
 	register.addAction(WorkspaceEvents.DISABLE_RATEIT, new DisableRateItAction(workspace));
 	register.addAction(WorkspaceEvents.GET_TRANSLATION, new GetTranslationAction(session));
-	register.addAction(WorkspaceEvents.ADD_MEMBER_GROUPLIVESEARCH, new AddGroupLiveSearchAction(workspace));
-	register.addAction(WorkspaceEvents.ADD_USERLIVESEARCH, new AddUserLiveSearchAction(workspace));
 	register.addAction(WorkspaceEvents.SHOW_TRANSLATOR, new ShowTranslatorAction(session, workspace, i18n));
 	register.addAction(WorkspaceEvents.DO_TRANSLATION, new DoTranslationAction(session, i18n));
 	register.addAction(WorkspaceEvents.GET_LEXICON, new GetLexiconAction(i18n));

@@ -24,7 +24,6 @@ import com.calclab.suco.client.signal.Slot;
 
 public class SocialNetworkPresenter {
 
-    protected GridButton addMember;
     protected GridButton requestJoin;
     protected GridButton unJoinButton;
     protected GridMenuItem<GroupDTO> changeToCollabMenuItem;
@@ -86,17 +85,6 @@ public class SocialNetworkPresenter {
     }
 
     private void createButtons() {
-	addMember = new GridButton("images/add-green.gif", i18n.t("Add member"), i18n
-		.t("Add a group or a person as member of this group"), new Slot<String>() {
-	    public void onEvent(final String parameter) {
-		// TODO
-		// GroupLiveSearchComponent groupLiveSearchComponent
-		// = workspace.getGroupLiveSearchComponent();
-		// groupLiveSearchComponent.addListener(listener);
-		// groupLiveSearchComponent.show();
-	    }
-	});
-
 	requestJoin = new GridButton("images/add-green.gif", i18n.t("Participate"), i18n
 		.t("Request to participate in this group"), new Slot<String>() {
 	    public void onEvent(final String parameter) {

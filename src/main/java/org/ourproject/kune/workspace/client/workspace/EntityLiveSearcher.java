@@ -17,23 +17,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.socialnet;
+package org.ourproject.kune.workspace.client.workspace;
 
-public class MemberAction {
+import org.ourproject.kune.platf.client.dto.LinkDTO;
 
-    private final String text;
-    private final String action;
+import com.calclab.suco.client.signal.Slot;
 
-    public MemberAction(final String text, final String action) {
-	this.text = text;
-	this.action = action;
-    }
+public interface EntityLiveSearcher {
 
-    public String getAction() {
-	return action;
-    }
+    void onSelectionAdd(Slot<LinkDTO> slot);
 
-    public String getText() {
-	return text;
-    }
+    void onSelectionRemove(Slot<LinkDTO> slot);
+
+    void show();
+
 }

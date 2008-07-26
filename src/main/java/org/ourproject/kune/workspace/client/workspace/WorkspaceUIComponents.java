@@ -34,9 +34,9 @@ public class WorkspaceUIComponents {
     private ContentBottomToolBarComponent contentBottomToolBar;
     private ThemeMenuComponent themeMenu;
     private ContentToolBarComponent contentToolBar;
-    private GroupLiveSearchComponent groupLiveSearch;
+    private GroupLiveSearcher groupLiveSearcher;
     private I18nTranslatorComponent i18nTranslatorSearch;
-    private UserLiveSearchComponent userLiveSearch;
+    private UserLiveSearcher userLiveSearch;
 
     public WorkspaceUIComponents(final WorkspacePresenter presenter) {
     }
@@ -69,13 +69,6 @@ public class WorkspaceUIComponents {
 	return contentToolBar;
     }
 
-    public GroupLiveSearchComponent getGroupLiveSearchComponent() {
-	if (groupLiveSearch == null) {
-	    groupLiveSearch = WorkspaceFactory.createGroupLiveSearchComponent();
-	}
-	return groupLiveSearch;
-    }
-
     public I18nTranslatorComponent getI18nTranslatorComponent() {
 	if (i18nTranslatorSearch == null) {
 	    i18nTranslatorSearch = WorkspaceFactory.createI18nTranslatorComponent();
@@ -88,13 +81,6 @@ public class WorkspaceUIComponents {
 	    license = WorkspaceFactory.createLicenseComponent();
 	}
 	return license;
-    }
-
-    public UserLiveSearchComponent getUserLiveSearchComponent() {
-	if (userLiveSearch == null) {
-	    userLiveSearch = WorkspaceFactory.createUserLiveSearchComponent();
-	}
-	return userLiveSearch;
     }
 
 }

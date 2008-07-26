@@ -60,6 +60,7 @@ public class NewGroupPresenter implements NewGroup {
 		    Site.showProgressProcessing();
 		    view.show();
 		    view.center();
+		    Site.hideProgress();
 		} else {
 		    stateManager.setState(previousTokenOrig);
 		    Site.info(i18n.t("Sign in or register to create a group"));
@@ -102,6 +103,7 @@ public class NewGroupPresenter implements NewGroup {
 	final LicenseDTO license = view.getLicense();
 	final GroupDTO group = new GroupDTO(shortName, longName, publicDesc, getTypeOfGroup());
 	group.setDefaultLicense(license);
+	group.setTags(view.getTags());
 
 	final AsyncCallback<StateToken> callback = new AsyncCallback<StateToken>() {
 	    public void onFailure(final Throwable caught) {

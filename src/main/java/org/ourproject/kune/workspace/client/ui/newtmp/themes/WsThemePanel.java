@@ -49,7 +49,7 @@ public class WsThemePanel extends ToolbarButton implements WsThemeView {
     }
 
     public void setVisible(final boolean visible) {
-	menu.setVisible(visible);
+	super.setVisible(visible);
     }
 
 }

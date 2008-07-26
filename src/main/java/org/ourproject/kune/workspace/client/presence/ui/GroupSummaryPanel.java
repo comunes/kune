@@ -43,7 +43,8 @@ public class GroupSummaryPanel extends DropDownPanel implements GroupSummaryView
 	super.setContentVisible(true);
 	super.setBorderStylePrimaryName("k-dropdownouter-summary");
 	addStyleName("kune-Margin-Medium-t");
-	ws.getEntitySummary().addInSummary(this);
+	// Disabled while in development
+	// ws.getEntitySummary().addInSummary(this);
     }
 
     public void setComment(final String comment) {

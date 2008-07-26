@@ -20,5 +20,5 @@
 
 package org.ourproject.kune.workspace.client.workspace;
 
-public interface UserLiveSearchComponent extends EntityLiveSearchComponent {
+public interface UserLiveSearcher extends EntityLiveSearcher {
 }

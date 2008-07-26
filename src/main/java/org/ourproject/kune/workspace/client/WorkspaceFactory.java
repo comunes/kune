@@ -22,7 +22,6 @@ package org.ourproject.kune.workspace.client;
 import org.ourproject.kune.platf.client.app.DesktopView;
 import org.ourproject.kune.platf.client.app.ui.DesktopPanel;
 import org.ourproject.kune.platf.client.extend.ExtensibleWidgetsManager;
-import org.ourproject.kune.platf.client.services.ColorTheme;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
@@ -43,11 +42,6 @@ import org.ourproject.kune.workspace.client.licensefoot.LicensePresenter;
 import org.ourproject.kune.workspace.client.licensefoot.LicenseView;
 import org.ourproject.kune.workspace.client.licensefoot.ui.LicensePanel;
 import org.ourproject.kune.workspace.client.sitebar.bar.SiteBarListener;
-import org.ourproject.kune.workspace.client.socialnet.EntityLiveSearchView;
-import org.ourproject.kune.workspace.client.socialnet.GroupLiveSearchPresenter;
-import org.ourproject.kune.workspace.client.socialnet.UserLiveSearchPresenter;
-import org.ourproject.kune.workspace.client.socialnet.ui.GroupLiveSearchPanel;
-import org.ourproject.kune.workspace.client.socialnet.ui.UserLiveSearchPanel;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPanel;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPresenter;
@@ -63,8 +57,6 @@ import org.ourproject.kune.workspace.client.workspace.ContentTitleView;
 import org.ourproject.kune.workspace.client.workspace.ContentToolBarComponent;
 import org.ourproject.kune.workspace.client.workspace.ContentToolBarPresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentToolBarView;
-import org.ourproject.kune.workspace.client.workspace.GroupLiveSearchComponent;
-import org.ourproject.kune.workspace.client.workspace.UserLiveSearchComponent;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 import org.ourproject.kune.workspace.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.workspace.client.workspace.WorkspaceView;
@@ -128,13 +120,6 @@ public class WorkspaceFactory {
 	return presenter;
     }
 
-    public static GroupLiveSearchComponent createGroupLiveSearchComponent() {
-	final GroupLiveSearchPresenter presenter = new GroupLiveSearchPresenter();
-	final EntityLiveSearchView view = new GroupLiveSearchPanel(presenter, i18n);
-	presenter.init(view);
-	return presenter;
-    }
-
     public static I18nTranslatorComponent createI18nTranslatorComponent() {
 	final I18nTranslatorPresenter presenter = new I18nTranslatorPresenter(session);
 	final I18nTranslatorView view = new I18nTranslatorPanel(presenter, i18n);
@@ -156,21 +141,14 @@ public class WorkspaceFactory {
 	return presenter;
     }
 
-    public static UserLiveSearchComponent createUserLiveSearchComponent() {
-	final UserLiveSearchPresenter presenter = new UserLiveSearchPresenter();
-	final EntityLiveSearchView view = new UserLiveSearchPanel(presenter, i18n);
-	presenter.init(view);
-	return presenter;
-    }
-
     public static Workspace createWorkspace(final Session session,
 	    final ExtensibleWidgetsManager extensionPointManager, final I18nTranslationService i18n,
-	    final ColorTheme colorTheme, final KuneErrorHandler errorHandler) {
+	    final KuneErrorHandler errorHandler) {
 	WorkspaceFactory.session = session;
 	WorkspaceFactory.i18n = i18n;
 	WorkspaceFactory.errorHandler = errorHandler;
 	final WorkspacePresenter workspace = new WorkspacePresenter(session);
-	final WorkspaceView view = new WorkspacePanel(workspace, i18n, colorTheme);
+	final WorkspaceView view = new WorkspacePanel(workspace, i18n);
 	workspace.init(view, extensionPointManager);
 	return workspace;
     }

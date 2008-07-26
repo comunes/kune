@@ -5,6 +5,7 @@ import java.util.List;
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
@@ -14,17 +15,21 @@ import org.ourproject.kune.platf.client.services.ImageDescriptor;
 import org.ourproject.kune.platf.client.services.ImageUtils;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.platf.client.ui.gridmenu.GridButton;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
+import org.ourproject.kune.workspace.client.workspace.GroupLiveSearcher;
 import org.ourproject.kune.workspace.client.workspace.GroupMembersSummary;
 
 import com.calclab.suco.client.container.Provider;
+import com.calclab.suco.client.signal.Slot;
 
-public class GroupMembersSummaryPresenterNew extends SocialNetworkPresenter implements GroupMembersSummary {
+public class GroupMembersSummaryPresenter extends SocialNetworkPresenter implements GroupMembersSummary {
 
-    private GroupMembersSummaryViewNew view;
+    protected GridButton addMember;
+    private GroupMembersSummaryView view;
     private final I18nUITranslationService i18n;
     private final GridGroup adminCategory;
     private final GridGroup collabCategory;
@@ -32,9 +37,10 @@ public class GroupMembersSummaryPresenterNew extends SocialNetworkPresenter impl
     private final Session session;
     private final Provider<SocialNetworkServiceAsync> snServiceProvider;
 
-    public GroupMembersSummaryPresenterNew(final I18nUITranslationService i18n,
+    public GroupMembersSummaryPresenter(final I18nUITranslationService i18n,
 	    final Provider<StateManager> stateManagerProvider, final ImageUtils imageUtils, final Session session,
-	    final Provider<SocialNetworkServiceAsync> snServiceProvider) {
+	    final Provider<SocialNetworkServiceAsync> snServiceProvider,
+	    final Provider<GroupLiveSearcher> groupLiveSearcherProvider) {
 	super(i18n, stateManagerProvider, imageUtils, session, snServiceProvider);
 	this.i18n = i18n;
 	this.session = session;
@@ -48,6 +54,18 @@ public class GroupMembersSummaryPresenterNew extends SocialNetworkPresenter impl
 	pendigCategory = new GridGroup(pendingTitle, pendingTitle, i18n
 		.t("People pending to be accepted in this group by the admins"), imageUtils
 		.getImageHtml(ImageDescriptor.alert), true);
+	addMember = new GridButton("images/add-green.gif", i18n.t("Add member"), i18n
+		.t("Add a group or a person as member of this group"), new Slot<String>() {
+	    public void onEvent(final String parameter) {
+		groupLiveSearcherProvider.get().onSelectionAdd(new Slot<LinkDTO>() {
+		    public void onEvent(final LinkDTO link) {
+			view.confirmAddCollab(link.getShortName(), link.getLongName());
+			groupLiveSearcherProvider.get().onSelectionRemove(this);
+		    }
+		});
+		groupLiveSearcherProvider.get().show();
+	    }
+	});
 	super.addGroupOperation(gotoMemberMenuItem, false);
     }
 
@@ -69,7 +87,7 @@ public class GroupMembersSummaryPresenterNew extends SocialNetworkPresenter impl
 	view.setVisible(false);
     }
 
-    public void init(final GroupMembersSummaryViewNew view) {
+    public void init(final GroupMembersSummaryView view) {
 	this.view = view;
     }
 
@@ -110,6 +128,8 @@ public class GroupMembersSummaryPresenterNew extends SocialNetworkPresenter impl
 	if (userIsAdmin) {
 	    view.addButton(addMember);
 	}
+
+	view.setDraggable(session.isLogged());
 
 	if (!userIsMember) {
 	    view.addButton(requestJoin);

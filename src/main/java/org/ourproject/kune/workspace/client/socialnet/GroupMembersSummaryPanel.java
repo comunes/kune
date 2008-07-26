@@ -22,14 +22,14 @@ import com.gwtext.client.widgets.ToolbarButton;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.event.ContainerListenerAdapter;
 
-public class GroupMembersSummaryPanelNew extends DropDownPanel implements GroupMembersSummaryViewNew {
+public class GroupMembersSummaryPanel extends DropDownPanel implements GroupMembersSummaryView {
     private final GridMenuPanel<GroupDTO> gridMenuPanel;
     private final I18nUITranslationService i18n;
-    private final GroupMembersSummaryPresenterNew presenter;
+    private final GroupMembersSummaryPresenter presenter;
     private final HashMap<GridButton, ToolbarButton> buttonsCache;
 
-    public GroupMembersSummaryPanelNew(final GroupMembersSummaryPresenterNew presenter,
-	    final I18nUITranslationService i18n, final WorkspaceSkeleton ws) {
+    public GroupMembersSummaryPanel(final GroupMembersSummaryPresenter presenter, final I18nUITranslationService i18n,
+	    final WorkspaceSkeleton ws) {
 	super(true);
 	this.presenter = presenter;
 	this.i18n = i18n;
@@ -99,6 +99,10 @@ public class GroupMembersSummaryPanelNew extends DropDownPanel implements GroupM
 			}
 		    }
 		});
+    }
+
+    public void setDraggable(final boolean draggable) {
+	gridMenuPanel.setDraggable(draggable);
     }
 
     public void setDropDownContentVisible(final boolean visible) {

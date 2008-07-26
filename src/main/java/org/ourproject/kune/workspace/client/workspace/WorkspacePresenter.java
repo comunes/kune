@@ -100,20 +100,12 @@ public class WorkspacePresenter implements Workspace {
 	return components.getContentTitleComponent();
     }
 
-    public GroupLiveSearchComponent getGroupLiveSearchComponent() {
-	return components.getGroupLiveSearchComponent();
-    }
-
     public I18nTranslatorComponent getI18nTranslatorComponent() {
 	return components.getI18nTranslatorComponent();
     }
 
     public LicenseComponent getLicenseComponent() {
 	return components.getLicenseComponent();
-    }
-
-    public UserLiveSearchComponent getUserLiveSearchComponent() {
-	return components.getUserLiveSearchComponent();
     }
 
     public View getView() {

@@ -43,12 +43,17 @@ import org.ourproject.kune.workspace.client.sitebar.msg.SiteMessagePresenter;
 import org.ourproject.kune.workspace.client.sitebar.msg.SiteMessageView;
 import org.ourproject.kune.workspace.client.sitebar.rpc.UserService;
 import org.ourproject.kune.workspace.client.sitebar.rpc.UserServiceAsync;
-import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryPanelNew;
-import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryPresenterNew;
-import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryViewNew;
+import org.ourproject.kune.workspace.client.socialnet.EntityLiveSearcherView;
+import org.ourproject.kune.workspace.client.socialnet.GroupLiveSearcherPresenter;
+import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryPanel;
+import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryPresenter;
+import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryView;
 import org.ourproject.kune.workspace.client.socialnet.ParticipationSummaryPresenter;
 import org.ourproject.kune.workspace.client.socialnet.ParticipationSummaryView;
+import org.ourproject.kune.workspace.client.socialnet.UserLiveSearcherPresenter;
+import org.ourproject.kune.workspace.client.socialnet.ui.GroupLiveSearchPanel;
 import org.ourproject.kune.workspace.client.socialnet.ui.ParticipationSummaryPanel;
+import org.ourproject.kune.workspace.client.socialnet.ui.UserLiveSearcherPanel;
 import org.ourproject.kune.workspace.client.summary.GroupSummaryPresenter;
 import org.ourproject.kune.workspace.client.summary.GroupSummaryView;
 import org.ourproject.kune.workspace.client.tags.TagsSummaryPanel;
@@ -87,10 +92,12 @@ import org.ourproject.kune.workspace.client.ui.newtmp.title.EntitySubTitlePanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.title.EntitySubTitlePresenter;
 import org.ourproject.kune.workspace.client.ui.newtmp.title.EntityTitlePanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.title.EntityTitlePresenter;
+import org.ourproject.kune.workspace.client.workspace.GroupLiveSearcher;
 import org.ourproject.kune.workspace.client.workspace.GroupMembersSummary;
 import org.ourproject.kune.workspace.client.workspace.GroupSummary;
 import org.ourproject.kune.workspace.client.workspace.ParticipationSummary;
 import org.ourproject.kune.workspace.client.workspace.TagsSummary;
+import org.ourproject.kune.workspace.client.workspace.UserLiveSearcher;
 import org.ourproject.kune.workspace.client.workspace.ui.EntityLogo;
 import org.ourproject.kune.workspace.client.workspace.ui.EntityLogoPanel;
 
@@ -196,12 +203,6 @@ public class KuneModule implements Module {
 	final KuneErrorHandler errorHandler = i(KuneErrorHandler.class);
 	AsyncCallbackSimple.init(errorHandler);
 
-	builder.registerProvider(ColorTheme.class, new Provider<ColorTheme>() {
-	    public ColorTheme get() {
-		return new ColorTheme();
-	    }
-	}, SingletonScope.class);
-
 	builder.registerProvider(KunePlatform.class, new Provider<KunePlatform>() {
 	    public KunePlatform get() {
 		return new KunePlatform();
@@ -220,10 +221,8 @@ public class KuneModule implements Module {
 	builder.registerProvider(Application.class, new Provider<Application>() {
 	    public Application get() {
 		final Session session = i(Session.class);
-		final ExtensibleWidgetsManager extensionPointManager = builder
-			.getInstance(ExtensibleWidgetsManager.class);
-		return new ApplicationDefault(session, extensionPointManager, i18n, builder
-			.getInstance(ColorTheme.class), i(KuneErrorHandler.class), ws);
+		final ExtensibleWidgetsManager extensionPointManager = i(ExtensibleWidgetsManager.class);
+		return new ApplicationDefault(session, extensionPointManager, i18n, i(KuneErrorHandler.class), ws);
 	    }
 	}, SingletonScope.class);
 
@@ -239,8 +238,7 @@ public class KuneModule implements Module {
 	builder.registerProvider(SiteProgress.class, new Provider<SiteProgress>() {
 	    public SiteProgress get() {
 		final SiteProgressPresenter presenter = new SiteProgressPresenter();
-		final SiteProgressPanel panel = new SiteProgressPanel(presenter, builder
-			.getProvider(SitePublicSpaceLink.class));
+		final SiteProgressPanel panel = new SiteProgressPanel(presenter, p(SitePublicSpaceLink.class));
 		presenter.init(panel);
 		return presenter;
 	    }
@@ -330,8 +328,8 @@ public class KuneModule implements Module {
 
 	builder.registerProvider(SignIn.class, new Provider<SignIn>() {
 	    public SignIn get() {
-		final SignInPresenter presenter = new SignInPresenter(i(Session.class), builder
-			.getInstance(StateManager.class), i18n, i(UserServiceAsync.class));
+		final SignInPresenter presenter = new SignInPresenter(i(Session.class), i(StateManager.class), i18n,
+			i(UserServiceAsync.class));
 		final SignInPanel view = new SignInPanel(presenter, i18n, ws);
 		presenter.init(view);
 		return presenter;
@@ -358,6 +356,7 @@ public class KuneModule implements Module {
 	}, SingletonScope.class);
 
 	i(SitePublicSpaceLink.class);
+	i(SiteMessage.class);
 	i(SiteSignInLink.class);
 	i(SiteSignOutLink.class);
 	i(SiteNewGroupLink.class);
@@ -381,8 +380,7 @@ public class KuneModule implements Module {
 
 	builder.registerProvider(EntityTitlePresenter.class, new Provider<EntityTitlePresenter>() {
 	    public EntityTitlePresenter get() {
-		final EntityTitlePresenter presenter = new EntityTitlePresenter(i18n, builder
-			.getInstance(KuneErrorHandler.class));
+		final EntityTitlePresenter presenter = new EntityTitlePresenter(i18n, i(KuneErrorHandler.class));
 		final EntityTitlePanel panel = new EntityTitlePanel(ws, presenter);
 		presenter.init(panel);
 		return presenter;
@@ -410,11 +408,9 @@ public class KuneModule implements Module {
 	builder.registerProvider(WorkspaceManager.class, new Provider<WorkspaceManager>() {
 	    public WorkspaceManager get() {
 		final WorkspaceManager presenter = new WorkspaceManager(i(SitePublicSpaceLink.class),
-			i(EntityLogo.class), i(EntityTitlePresenter.class), builder
-				.getInstance(EntitySubTitlePresenter.class), builder
-				.getInstance(WsThemePresenter.class), i(EntityLicensePresenter.class), builder
-				.getProvider(GroupMembersSummary.class), builder
-				.getProvider(ParticipationSummary.class), p(TagsSummary.class), p(GroupSummary.class));
+			i(EntityLogo.class), i(EntityTitlePresenter.class), i(EntitySubTitlePresenter.class),
+			i(WsThemePresenter.class), i(EntityLicensePresenter.class), p(GroupMembersSummary.class),
+			p(ParticipationSummary.class), p(TagsSummary.class), p(GroupSummary.class));
 		return presenter;
 	    }
 	}, SingletonScope.class);
@@ -429,12 +425,30 @@ public class KuneModule implements Module {
 	    }
 	}, SingletonScope.class);
 
+	builder.registerProvider(UserLiveSearcher.class, new Provider<UserLiveSearcher>() {
+	    public UserLiveSearcher get() {
+		final UserLiveSearcherPresenter presenter = new UserLiveSearcherPresenter();
+		final EntityLiveSearcherView view = new UserLiveSearcherPanel(presenter, i18n);
+		presenter.init(view);
+		return presenter;
+	    }
+	}, SingletonScope.class);
+
+	builder.registerProvider(GroupLiveSearcher.class, new Provider<GroupLiveSearcher>() {
+	    public GroupLiveSearcher get() {
+		final GroupLiveSearcherPresenter presenter = new GroupLiveSearcherPresenter();
+		final EntityLiveSearcherView view = new GroupLiveSearchPanel(presenter, i18n);
+		presenter.init(view);
+		return presenter;
+	    }
+	}, SingletonScope.class);
+
 	builder.registerProvider(GroupMembersSummary.class, new Provider<GroupMembersSummary>() {
 	    public GroupMembersSummary get() {
-		final GroupMembersSummaryPresenterNew presenter = new GroupMembersSummaryPresenterNew(i18n,
+		final GroupMembersSummaryPresenter presenter = new GroupMembersSummaryPresenter(i18n,
 			p(StateManager.class), i(ImageUtils.class), i(Session.class),
-			p(SocialNetworkServiceAsync.class));
-		final GroupMembersSummaryViewNew view = new GroupMembersSummaryPanelNew(presenter, i18n, ws);
+			p(SocialNetworkServiceAsync.class), p(GroupLiveSearcher.class));
+		final GroupMembersSummaryView view = new GroupMembersSummaryPanel(presenter, i18n, ws);
 		presenter.init(view);
 		return presenter;
 	    }
@@ -462,8 +476,7 @@ public class KuneModule implements Module {
 
 	builder.registerProvider(TagsSummary.class, new Provider<TagsSummary>() {
 	    public TagsSummary get() {
-		final TagsSummaryPresenter presenter = new TagsSummaryPresenter(p(Session.class), builder
-			.getProvider(SiteSearcher.class));
+		final TagsSummaryPresenter presenter = new TagsSummaryPresenter(p(Session.class), p(SiteSearcher.class));
 		final TagsSummaryPanel panel = new TagsSummaryPanel(presenter, i18n, ws);
 		presenter.init(panel);
 		return presenter;

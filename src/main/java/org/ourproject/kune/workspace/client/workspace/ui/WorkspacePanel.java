@@ -22,7 +22,6 @@ package org.ourproject.kune.workspace.client.workspace.ui;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.extend.ExtensibleWidgetId;
-import org.ourproject.kune.platf.client.services.ColorTheme;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.tool.ToolTrigger;
@@ -66,7 +65,6 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     private DropDownPanel groupSummaryPanel;
     private final VerticalPanel cntcxtVP;
     private final ScrollPanel groupDropDownsSP;
-    private final ColorTheme colorTheme;
     private final BottomIconsTrayPanel bottomIconsTrayPanel;
     private ContentTitlePanel contentTitlePanel;
     private ContentSubTitlePanel contentSubTitlePanel;
@@ -81,10 +79,8 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     private int previousRightWidgetWidth;
     private final WorkspacePresenter presenter;
 
-    public WorkspacePanel(final WorkspacePresenter presenter, final I18nTranslationService i18n,
-	    final ColorTheme colorTheme) {
+    public WorkspacePanel(final WorkspacePresenter presenter, final I18nTranslationService i18n) {
 	this.presenter = presenter;
-	this.colorTheme = colorTheme;
 	// Initialize
 	final VerticalPanel generalVP = new VerticalPanel();
 	initWidget(generalVP);
@@ -92,7 +88,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	final HorizontalPanel generalHP = new HorizontalPanel();
 	cntcxtVP = new VerticalPanel();
 	final VerticalPanel groupNavBarVP = new VerticalPanel();
-	groupToolsBar = new GroupToolsBar(colorTheme);
+	groupToolsBar = new GroupToolsBar();
 	bottomIconsTrayPanel = new BottomIconsTrayPanel();
 	groupDropDownsSP = new ScrollPanel();
 	groupDropDownsVP = new VerticalPanel();
@@ -156,7 +152,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	addStyleName("kune-WorkspacePanel");
 	setGroupLogo("");
 	generalHP.addStyleName("GeneralHP");
-	contentTitleBarBorderDec.setColor(colorTheme.getContentMainBorder());
+	// contentTitleBarBorderDec.setColor(colorTheme.getContentMainBorder());
 	contentTitleBarHP.setWidth("100%");
 	contentSubTitleBarHP.setWidth("100%");
 	contentTitleBarHP.addStyleName("kune-ContentTitleBar");
@@ -172,7 +168,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	contentBottomBarHP.addStyleName("kune-ContentBottomBar");
 	contentBottomBarHP.addStyleName("kune-ft12px");
 	groupDropDownsVP.addStyleName("kune-GroupSummaryPanel");
-	bottomBorderDecorator.setColor(colorTheme.getContentMainBorder());
+	// bottomBorderDecorator.setColor(colorTheme.getContentMainBorder());
 	bottomIconsTrayPanel.addStyleName("kune-Margin-Medium-l");
 	bottomIconsTrayPanel.addStyleName("kune-BottomIconsTrayPanel");
 	bottomIconsTrayPanel.setHorizontalAlignment(HorizontalPanel.ALIGN_CENTER);
@@ -281,12 +277,12 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 
     public void setGroupMembers(final View view) {
 	groupMembersPanel = (DropDownPanel) view;
-	AddDropDown(groupMembersPanel, colorTheme.getGroupMembersDD());
+	// AddDropDown(groupMembersPanel, colorTheme.getGroupMembersDD());
     }
 
     public void setParticipation(final View view) {
 	participationPanel = (DropDownPanel) view;
-	AddDropDown(participationPanel, colorTheme.getParticipationDD());
+	// AddDropDown(participationPanel, colorTheme.getParticipationDD());
     }
 
     public void setPutYourLogoVisible(final boolean visible) {
@@ -295,12 +291,12 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 
     public void setSummary(final View view) {
 	groupSummaryPanel = (DropDownPanel) view;
-	AddDropDown(groupSummaryPanel, colorTheme.getSummaryDD());
+	// AddDropDown(groupSummaryPanel, colorTheme.getSummaryDD());
     }
 
     public void setTags(final View view) {
 	tagsPanel = (DropDownPanel) view;
-	AddDropDown(tagsPanel, colorTheme.getTagsDD());
+	// AddDropDown(tagsPanel, colorTheme.getTagsDD());
     }
 
     public void setTheme(final String theme) {

@@ -37,6 +37,8 @@ public interface NewGroupView extends View {
 
     String getShortName();
 
+    String getTags();
+
     void hide();
 
     void hideMessage();

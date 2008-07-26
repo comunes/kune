@@ -17,16 +17,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.socialnet.ui;
+package org.ourproject.kune.workspace.client.socialnet;
 
-import org.ourproject.kune.platf.client.AbstractPresenter;
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.workspace.client.socialnet.EntityLiveSearchView;
+import org.ourproject.kune.platf.client.View;
 
-public class UserLiveSearchPanel extends EntityLiveSearchPanel {
+public interface EntityLiveSearcherView extends View {
 
-    public UserLiveSearchPanel(final AbstractPresenter presenter, final I18nTranslationService i18n) {
-        super(presenter, EntityLiveSearchView.SEARCH_USERS, i18n);
-    }
+    final public static int SEARCH_GROUPS = 1;
+    final public static int SEARCH_USERS = 2;
+
+    void show();
+
+    void hide();
+
+    void center();
 
 }

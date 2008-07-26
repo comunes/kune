@@ -5,6 +5,7 @@ import java.util.HashMap;
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.signal.Signal;
 import com.calclab.suco.client.signal.Slot;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Composite;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.SortDir;
@@ -210,6 +211,12 @@ public class GridMenuPanel<T> extends Composite {
 	}
     }
 
+    public void setDraggable(final boolean draggable) {
+	createGridIfNeeded();
+	DOM.setElementPropertyBoolean(grid.getElement(), "allowDrag", draggable);
+	doLayoutIfNeeded();
+    }
+
     public void setWidth(final int width) {
 	if (grid != null) {
 	    grid.setWidth(width - 27);
@@ -370,8 +377,9 @@ public class GridMenuPanel<T> extends Composite {
 	    }
 	});
 	grid.stripeRows(true);
-	grid.setAutoWidth(true);
-	grid.setAutoHeight(true);
+	grid.setHideColumnHeader(true);
+	grid.setBorder(false);
+	grid.setAutoScroll(true);
 
 	if (grouped) {
 	    final GroupingView groupView = new GroupingView();
@@ -405,9 +413,10 @@ public class GridMenuPanel<T> extends Composite {
 	    view.setForceFit(true);
 	    grid.setView(view);
 	}
-	grid.setHideColumnHeader(true);
-	grid.setBorder(false);
-	grid.setAutoScroll(true);
+
+	grid.setAutoWidth(true);
+	grid.setAutoHeight(true);
+
 	if (gridDropConfiguration != null) {
 	    configureDrop(gridDropConfiguration);
 	}

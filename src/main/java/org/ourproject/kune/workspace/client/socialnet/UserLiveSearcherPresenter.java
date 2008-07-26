@@ -19,8 +19,8 @@
  */
 package org.ourproject.kune.workspace.client.socialnet;
 
-import org.ourproject.kune.workspace.client.workspace.GroupLiveSearchComponent;
+import org.ourproject.kune.workspace.client.workspace.UserLiveSearcher;
 
-public class GroupLiveSearchPresenter extends EntityLiveSearchPresenter implements GroupLiveSearchComponent {
+public class UserLiveSearcherPresenter extends EntityLiveSearcherPresenter implements UserLiveSearcher {
 
 }

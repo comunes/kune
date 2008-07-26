@@ -29,7 +29,6 @@ import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.extend.ExtensibleWidgetsManager;
 import org.ourproject.kune.platf.client.rpc.SiteService;
 import org.ourproject.kune.platf.client.rpc.SiteServiceAsync;
-import org.ourproject.kune.platf.client.services.ColorTheme;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
@@ -58,11 +57,10 @@ public class ApplicationDefault implements Application {
     private StateManager stateManager;
 
     public ApplicationDefault(final Session session, final ExtensibleWidgetsManager extensionPointManager,
-	    final I18nTranslationService i18n, final ColorTheme colorTheme, final KuneErrorHandler errorHandler,
-	    final WorkspaceSkeleton ws) {
+	    final I18nTranslationService i18n, final KuneErrorHandler errorHandler, final WorkspaceSkeleton ws) {
 	this.session = session;
 	this.ws = ws;
-	workspace = WorkspaceFactory.createWorkspace(session, extensionPointManager, i18n, colorTheme, errorHandler);
+	workspace = WorkspaceFactory.createWorkspace(session, extensionPointManager, i18n, errorHandler);
 	tools = new HashMap<String, ClientTool>();
 	this.onApplicationStart = new Signal<Object>("onApplicationStart");
 	this.onApplicationStop = new Signal<Object>("onApplicationStop");

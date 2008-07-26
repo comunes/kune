@@ -175,6 +175,10 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
 	return shortNameField.getValueAsString();
     }
 
+    public String getTags() {
+	return tags.getRawValue();
+    }
+
     public void hideMessage() {
 	messagesPanel.hide();
     }

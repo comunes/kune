@@ -55,13 +55,9 @@ public interface Workspace extends Component {
 
     public ContentTitleComponent getContentTitleComponent();
 
-    public GroupLiveSearchComponent getGroupLiveSearchComponent();
-
     public I18nTranslatorComponent getI18nTranslatorComponent();
 
     public LicenseComponent getLicenseComponent();
-
-    public UserLiveSearchComponent getUserLiveSearchComponent();
 
     public void setContent(WorkspaceComponent contentComponent);
 

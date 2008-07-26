@@ -19,37 +19,45 @@
  */
 package org.ourproject.kune.workspace.client.socialnet;
 
-import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.LinkDTO;
+import org.ourproject.kune.workspace.client.workspace.EntityLiveSearcher;
 
-public class EntityLiveSearchPresenter extends AbstractPresenter {
+import com.calclab.suco.client.signal.Signal;
+import com.calclab.suco.client.signal.Slot;
 
-    private EntityLiveSearchView view;
-    private EntityLiveSearchListener listener;
+public class EntityLiveSearcherPresenter implements EntityLiveSearcher {
 
-    public void init(final EntityLiveSearchView view) {
-        this.view = view;
+    private EntityLiveSearcherView view;
+    private Signal<LinkDTO> onSelection;
+
+    public void addListener(final EntityLiveSearchListener listener) {
+	this.onSelection = new Signal<LinkDTO>("onSelection");
     }
 
     public View getView() {
-        return view;
+	return view;
     }
 
-    public void addListener(final EntityLiveSearchListener listener) {
-        this.listener = listener;
+    public void init(final EntityLiveSearcherView view) {
+	this.view = view;
+    }
+
+    public void onSelection(final LinkDTO link) {
+	onSelection.fire(link);
+	view.hide();
+    }
+
+    public void onSelectionAdd(final Slot<LinkDTO> slot) {
+	onSelection.add(slot);
+    }
+
+    public void onSelectionRemove(final Slot<LinkDTO> slot) {
+	onSelection.remove(slot);
     }
 
     public void show() {
-        view.show();
-    }
-
-    public void hide() {
-        view.hide();
-    }
-
-    public void fireListener(final String shortName, final String longName) {
-        listener.onSelection(shortName, longName);
-        hide();
+	view.show();
     }
 
 }
