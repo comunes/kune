@@ -371,6 +371,8 @@ public class GridMenuPanel<T> extends Composite {
 	});
 	grid.stripeRows(true);
 	grid.setHideColumnHeader(true);
+	// Not sure if when doLayoutIfNeeded there are problems with size and
+	// column header
 	grid.setBorder(false);
 	grid.setAutoScroll(true);
 

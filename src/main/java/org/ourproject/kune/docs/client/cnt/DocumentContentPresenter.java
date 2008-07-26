@@ -36,6 +36,7 @@ import org.ourproject.kune.platf.client.extend.ExtensibleWidgetChild;
 import org.ourproject.kune.platf.client.extend.ExtensibleWidgetId;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.ui.rate.RateIt;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
@@ -49,12 +50,14 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
     private final DocumentReader reader;
     private final DocumentReaderControl readerControl;
     private final Session session;
+    private final RateIt rateIt;
 
     public DocumentContentPresenter(final DocumentFactory documentFactory, final DocumentContentListener listener,
-	    final WorkspaceDeckView view, final Session session) {
+	    final WorkspaceDeckView view, final Session session, final RateIt rateIt) {
 	this.listener = listener;
 	this.view = view;
 	this.session = session;
+	this.rateIt = rateIt;
 	this.components = new DocumentContentComponents(documentFactory, this);
 	reader = components.getDocumentReader();
 	readerControl = components.getDocumentReaderControl();
@@ -74,7 +77,7 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
 	showContent();
 	listener.onCancel();
 	// Re-enable rateIt widget
-	DefaultDispatcher.getInstance().fire(WorkspaceEvents.ENABLE_RATEIT, null);
+	rateIt.setVisible(true);
     }
 
     public void onDelete() {
@@ -86,7 +89,7 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
 	    public void onSuccess(final Object result) {
 		if (content.hasDocument()) {
 		    // Don't permit rate content while your are editing
-		    DefaultDispatcher.getInstance().fire(WorkspaceEvents.DISABLE_RATEIT, null);
+		    rateIt.setVisible(false);
 		    final TextEditor editor = components.getDocumentEditor();
 		    editor.setContent(content.getContent());
 		    view.show(editor.getView());
@@ -109,7 +112,7 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
 	content.setContent(text);
 	DefaultDispatcher.getInstance().fire(DocsEvents.SAVE_DOCUMENT, new SaveDocumentActionParams(content, this));
 	// Re-enable rateIt widget
-	DefaultDispatcher.getInstance().fire(WorkspaceEvents.ENABLE_RATEIT, null);
+	rateIt.setVisible(true);
 	DefaultDispatcher.getInstance().fire(WorkspaceEvents.RECALCULATE_WORKSPACE_SIZE, null);
     }
 

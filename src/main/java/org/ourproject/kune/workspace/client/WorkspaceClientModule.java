@@ -20,8 +20,6 @@
 package org.ourproject.kune.workspace.client;
 
 import org.ourproject.kune.platf.client.PlatformEvents;
-import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
-import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.extend.ClientModule;
 import org.ourproject.kune.platf.client.extend.Register;
 import org.ourproject.kune.platf.client.state.Session;
@@ -29,9 +27,6 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.actions.AttachToExtensibleWidgetAction;
 import org.ourproject.kune.workspace.client.actions.ClearExtensibleWidgetAction;
 import org.ourproject.kune.workspace.client.actions.DetachFromExtensibleWidgetAction;
-import org.ourproject.kune.workspace.client.actions.DisableRateItAction;
-import org.ourproject.kune.workspace.client.actions.EnableRateItAction;
-import org.ourproject.kune.workspace.client.actions.RateContentAction;
 import org.ourproject.kune.workspace.client.actions.RecalculateWorkspaceAction;
 import org.ourproject.kune.workspace.client.actions.ReloadContextAction;
 import org.ourproject.kune.workspace.client.actions.i18n.DoTranslationAction;
@@ -45,7 +40,6 @@ public class WorkspaceClientModule implements ClientModule {
 
     private final StateManager stateManager;
     private final Workspace workspace;
-    private final Dispatcher dispacher;
     private final Session session;
     private final I18nUITranslationService i18n;
 
@@ -54,7 +48,6 @@ public class WorkspaceClientModule implements ClientModule {
 	this.session = session;
 	this.stateManager = stateManager;
 	this.i18n = i18n;
-	dispacher = DefaultDispatcher.getInstance();
 	this.workspace = workspace;
     }
 
@@ -63,9 +56,6 @@ public class WorkspaceClientModule implements ClientModule {
 	register.addAction(PlatformEvents.DETACH_FROM_EXTENSIBLE_WIDGET,
 		new DetachFromExtensibleWidgetAction(workspace));
 	register.addAction(PlatformEvents.CLEAR_EXTENSIBLE_WIDGET, new ClearExtensibleWidgetAction(workspace));
-	register.addAction(WorkspaceEvents.RATE_CONTENT, new RateContentAction(session, stateManager, i18n));
-	register.addAction(WorkspaceEvents.ENABLE_RATEIT, new EnableRateItAction(workspace));
-	register.addAction(WorkspaceEvents.DISABLE_RATEIT, new DisableRateItAction(workspace));
 	register.addAction(WorkspaceEvents.GET_TRANSLATION, new GetTranslationAction(session));
 	register.addAction(WorkspaceEvents.SHOW_TRANSLATOR, new ShowTranslatorAction(session, workspace, i18n));
 	register.addAction(WorkspaceEvents.DO_TRANSLATION, new DoTranslationAction(session, i18n));

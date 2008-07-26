@@ -2,6 +2,8 @@ package org.ourproject.kune.workspace.client.ui.newtmp;
 
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.ui.rate.RateIt;
+import org.ourproject.kune.platf.client.ui.rate.RatePresenter;
 import org.ourproject.kune.workspace.client.ui.newtmp.licensefoot.EntityLicensePresenter;
 import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitepublic.SitePublicSpaceLink;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
@@ -29,13 +31,16 @@ public class WorkspaceManager {
     private final Provider<ParticipationSummary> participationSummaryProvider;
     private final Provider<GroupSummary> groupSummaryProvider;
     private final SitePublicSpaceLink publicSpaceLink;
+    private final RateIt rateIt;
+    private final RatePresenter ratePresenter;
 
     public WorkspaceManager(final SitePublicSpaceLink publicSpaceLink, final EntityLogo entityLogo,
 	    final EntityTitlePresenter entityTitlePresenter, final EntitySubTitlePresenter entitySubTitlePresenter,
 	    final WsThemePresenter wsThemePresenter, final EntityLicensePresenter entityLicensePresenter,
 	    final Provider<GroupMembersSummary> groupMembersSummaryProvider,
 	    final Provider<ParticipationSummary> participationSummaryProvider,
-	    final Provider<TagsSummary> tagsSummaryProvider, final Provider<GroupSummary> groupSummaryProvider) {
+	    final Provider<TagsSummary> tagsSummaryProvider, final Provider<GroupSummary> groupSummaryProvider,
+	    final RateIt rateIt, final RatePresenter ratePresenter) {
 	this.publicSpaceLink = publicSpaceLink;
 	this.entityLogo = entityLogo;
 	this.entityTitlePresenter = entityTitlePresenter;
@@ -46,6 +51,8 @@ public class WorkspaceManager {
 	this.participationSummaryProvider = participationSummaryProvider;
 	this.tagsProvider = tagsSummaryProvider;
 	this.groupSummaryProvider = groupSummaryProvider;
+	this.rateIt = rateIt;
+	this.ratePresenter = ratePresenter;
 	wsThemePresenter.onThemeChanged(new Slot2<WsTheme, WsTheme>() {
 	    public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
 		entityLogo.setTheme(oldTheme, newTheme);
@@ -75,6 +82,8 @@ public class WorkspaceManager {
 	groupSummaryProvider.get().setState(state);
 	tagsProvider.get().setState(state);
 	wsThemePresenter.setState(state);
+	rateIt.setState(state);
+	ratePresenter.setState(state);
     }
 
 }

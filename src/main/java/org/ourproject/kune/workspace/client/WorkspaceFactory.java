@@ -45,9 +45,6 @@ import org.ourproject.kune.workspace.client.sitebar.bar.SiteBarListener;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPanel;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPresenter;
-import org.ourproject.kune.workspace.client.workspace.ContentBottomToolBarComponent;
-import org.ourproject.kune.workspace.client.workspace.ContentBottomToolBarPresenter;
-import org.ourproject.kune.workspace.client.workspace.ContentBottomToolBarView;
 import org.ourproject.kune.workspace.client.workspace.ContentSubTitleComponent;
 import org.ourproject.kune.workspace.client.workspace.ContentSubTitlePresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentSubTitleView;
@@ -60,7 +57,6 @@ import org.ourproject.kune.workspace.client.workspace.ContentToolBarView;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 import org.ourproject.kune.workspace.client.workspace.WorkspacePresenter;
 import org.ourproject.kune.workspace.client.workspace.WorkspaceView;
-import org.ourproject.kune.workspace.client.workspace.ui.ContentBottomToolBarPanel;
 import org.ourproject.kune.workspace.client.workspace.ui.ContentSubTitlePanel;
 import org.ourproject.kune.workspace.client.workspace.ui.ContentTitlePanel;
 import org.ourproject.kune.workspace.client.workspace.ui.ContentToolBarPanel;
@@ -71,13 +67,6 @@ public class WorkspaceFactory {
     private static Session session;
     private static I18nTranslationService i18n;
     private static KuneErrorHandler errorHandler;
-
-    public static ContentBottomToolBarComponent createContentBottomToolBarComponent() {
-	final ContentBottomToolBarPresenter presenter = new ContentBottomToolBarPresenter();
-	final ContentBottomToolBarView view = new ContentBottomToolBarPanel(presenter, i18n);
-	presenter.init(view);
-	return presenter;
-    }
 
     public static ContentSubTitleComponent createContentSubTitleComponent() {
 	final ContentSubTitlePresenter presenter = new ContentSubTitlePresenter(i18n);

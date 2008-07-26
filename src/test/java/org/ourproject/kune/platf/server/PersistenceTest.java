@@ -16,53 +16,53 @@ public abstract class PersistenceTest {
     private final String persistenceUnit;
     private final String propetiesFileName;
 
-    public PersistenceTest(final String persistenceUnit, final String propetiesFileName) {
-        this.persistenceUnit = persistenceUnit;
-        this.propetiesFileName = propetiesFileName;
+    public PersistenceTest() {
+	// test: use memory
+	// test_db: use mysql
+	this("test", "kune.properties");
     }
 
-    public PersistenceTest() {
-        // test: use memory
-        // test_db: use mysql
-        this("test", "kune.properties");
+    public PersistenceTest(final String persistenceUnit, final String propetiesFileName) {
+	this.persistenceUnit = persistenceUnit;
+	this.propetiesFileName = propetiesFileName;
+    }
+
+    public void closeTransaction() {
+	getManager().getTransaction().commit();
+    }
+
+    public EntityTransaction getTransaction() {
+	return getManager().getTransaction();
+    }
+
+    public EntityManager openTransaction() {
+	final EntityManager manager = getManager();
+	final EntityTransaction transaction = manager.getTransaction();
+	transaction.begin();
+	return manager;
+    }
+
+    public void persist(final Object... entities) {
+	for (final Object entity : entities) {
+	    getManager().persist(entity);
+	}
     }
 
     @Before
     public void prepare() {
-        final Injector injector = TestHelper.create(new PlatformServerModule(), persistenceUnit, propetiesFileName);
-        final PersistenceService persistence = injector.getInstance(PersistenceService.class);
-        // To Debug insert breakpoint here
-        persistence.start();
-        injector.injectMembers(this);
-    }
-
-    public EntityManager openTransaction() {
-        final EntityManager manager = getManager();
-        final EntityTransaction transaction = manager.getTransaction();
-        transaction.begin();
-        return manager;
-    }
-
-    public void closeTransaction() {
-        getManager().getTransaction().commit();
+	final Injector injector = TestHelper.create(new PlatformServerModule(), persistenceUnit, propetiesFileName);
+	final PersistenceService persistence = injector.getInstance(PersistenceService.class);
+	// To Debug insert breakpoint here
+	persistence.start();
+	injector.injectMembers(this);
     }
 
     public void rollbackTransaction() {
-        getManager().getTransaction().rollback();
-    }
-
-    public void persist(final Object... entities) {
-        for (final Object entity : entities) {
-            getManager().persist(entity);
-        }
+	getManager().getTransaction().rollback();
     }
 
     private EntityManager getManager() {
-        return provider.get();
-    }
-
-    public EntityTransaction getTransaction() {
-        return getManager().getTransaction();
+	return provider.get();
     }
 
 }

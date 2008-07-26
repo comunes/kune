@@ -27,25 +27,11 @@ import org.ourproject.kune.workspace.client.licensefoot.LicenseComponent;
 public class WorkspaceUIComponents {
     private LicenseComponent license;
     private ContentTitleComponent contentTitle;
-    private GroupMembersSummary groupMembers;
-    private ParticipationSummary participatesInGroups;
-    private GroupSummary groupSummary;
     private ContentSubTitleComponent contentSubTitle;
-    private ContentBottomToolBarComponent contentBottomToolBar;
-    private ThemeMenuComponent themeMenu;
     private ContentToolBarComponent contentToolBar;
-    private GroupLiveSearcher groupLiveSearcher;
     private I18nTranslatorComponent i18nTranslatorSearch;
-    private UserLiveSearcher userLiveSearch;
 
     public WorkspaceUIComponents(final WorkspacePresenter presenter) {
-    }
-
-    public ContentBottomToolBarComponent getContentBottomToolBarComponent() {
-	if (contentBottomToolBar == null) {
-	    contentBottomToolBar = WorkspaceFactory.createContentBottomToolBarComponent();
-	}
-	return contentBottomToolBar;
     }
 
     public ContentSubTitleComponent getContentSubTitleComponent() {

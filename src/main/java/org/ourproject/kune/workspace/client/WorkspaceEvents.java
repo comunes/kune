@@ -21,9 +21,6 @@
 package org.ourproject.kune.workspace.client;
 
 public interface WorkspaceEvents {
-    public static final String RATE_CONTENT = "ws.RateContent";
-    public static final String ENABLE_RATEIT = "ws.EnableRateIt";
-    public static final String DISABLE_RATEIT = "ws.DisableRateIt";
     public static final String GET_LEXICON = "i18n.getLexicon";
     public static final String SHOW_TRANSLATOR = "i18n.ShowTranslator";
     public static final String SHOW_SEARCHER = "ws.ShowSearcher";

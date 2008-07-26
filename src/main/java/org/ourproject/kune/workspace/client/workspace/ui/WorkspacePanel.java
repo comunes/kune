@@ -222,7 +222,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
 	setContentTitle(components.getContentTitleComponent().getView());
 	setContentSubTitle(components.getContentSubTitleComponent().getView());
 	setContentToolBar(components.getContentToolBarComponent().getView());
-	setContentBottomToolBar(components.getContentBottomToolBarComponent().getView());
+	// setContentBottomToolBar(components.getContentBottomToolBarComponent().getView());
 	setBottom(components.getLicenseComponent().getView());
 	// addBottomIconComponent(components.getThemeMenuComponent().getView());
     }

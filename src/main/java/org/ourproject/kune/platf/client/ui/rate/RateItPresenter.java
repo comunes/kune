@@ -19,93 +19,125 @@
  */
 package org.ourproject.kune.platf.client.ui.rate;
 
-import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
+import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
+import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.workspace.client.WorkspaceEvents;
+import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.workspace.client.sitebar.Site;
 
-public class RateItPresenter {
+import com.calclab.suco.client.container.Provider;
+
+public class RateItPresenter implements RateIt {
 
     private static final Double NOT_RATED = new Double(-1);
-
     private RateItView view;
-
     private Double currentRate;
-
     private boolean isRating;
-
     private final I18nTranslationService i18n;
+    private final Provider<ContentServiceAsync> contentServiceProvider;
+    private final Session session;
+    private final Provider<StateManager> stateManagerProvider;
 
-    public RateItPresenter(final I18nTranslationService i18n) {
-        this.i18n = i18n;
+    public RateItPresenter(final I18nTranslationService i18n, final Session session,
+	    final Provider<ContentServiceAsync> contentServiceProvider,
+	    final Provider<StateManager> stateManagerProvider) {
+	this.i18n = i18n;
+	this.session = session;
+	this.contentServiceProvider = contentServiceProvider;
+	this.stateManagerProvider = stateManagerProvider;
     }
 
     public void init(final RateItView view) {
-        this.view = view;
-        currentRate = NOT_RATED;
-        isRating = false;
+	this.view = view;
+	currentRate = NOT_RATED;
+	isRating = false;
     }
 
     public void setRate(final Double value) {
-        currentRate = value;
-        if (currentRate == null) {
-            currentRate = NOT_RATED;
-        }
-        isRating = false;
-        setRatePanel(currentRate);
+	currentRate = value;
+	if (currentRate == null) {
+	    currentRate = NOT_RATED;
+	}
+	isRating = false;
+	setRatePanel(currentRate);
+    }
+
+    public void setState(final StateDTO state) {
+	if (state.isRateable()) {
+	    if (session.isLogged()) {
+		setRate(state.getCurrentUserRate());
+		view.setVisible(true);
+	    } else {
+		view.setVisible(false);
+	    }
+	} else {
+	    view.setVisible(false);
+	}
+    }
+
+    public void setVisible(final boolean visible) {
+	view.setVisible(visible);
     }
 
     protected void revertCurrentRate() {
-        if (!isRating) {
-            setRatePanel(currentRate);
-        }
+	if (!isRating) {
+	    setRatePanel(currentRate);
+	}
     }
 
     protected void starClicked(final int starClicked) {
-        isRating = true;
-        Double newValue = new Double(starClicked + 1);
-        if (Math.ceil(currentRate.doubleValue()) == newValue.doubleValue()) {
-            // Same star, rest 1/2
-            newValue = new Double(currentRate.doubleValue() - 0.5);
-        }
-        setRatePanel(newValue);
-        DefaultDispatcher.getInstance().fire(WorkspaceEvents.RATE_CONTENT, newValue);
+	isRating = true;
+	final Double newValue = starClicked + 1d == currentRate ? currentRate - 0.5d : starClicked + 1d;
+	setRatePanel(newValue);
+	Site.showProgressProcessing();
+	final StateDTO currentState = session.getCurrentState();
+	contentServiceProvider.get().rateContent(session.getUserHash(), currentState.getGroup().getShortName(),
+		currentState.getDocumentId(), newValue, new AsyncCallbackSimple<Object>() {
+		    public void onSuccess(final Object result) {
+			Site.hideProgress();
+			Site.info(i18n.t("Content rated"));
+			stateManagerProvider.get().reload();
+		    }
+		});
     }
 
     protected void starOver(final int starMouseOver) {
-        Double value = new Double(starMouseOver + 1);
-        if (Math.ceil(currentRate.doubleValue()) == value.doubleValue()) {
-            // use user already rated -> live same value when mouse is over
-            value = currentRate;
-        }
-        if (!isRating) {
-            // If we are not doing a rate rpc call
-            setRatePanel(value);
-        }
+	Double value = new Double(starMouseOver + 1);
+	if (Math.ceil(currentRate.doubleValue()) == value.doubleValue()) {
+	    // use user already rated -> live same value when mouse is over
+	    value = currentRate;
+	}
+	if (!isRating) {
+	    // If we are not doing a rate rpc call
+	    setRatePanel(value);
+	}
     }
 
     private void setDesc(final int rateTruncated) {
-        if (rateTruncated >= 0 && rateTruncated <= 1) {
-            view.setDesc(i18n.t("Poor"));
-        } else if (rateTruncated == 2) {
-            view.setDesc(i18n.t("Below average"));
-        } else if (rateTruncated == 3) {
-            view.setDesc(i18n.t("Average"));
-        } else if (rateTruncated == 4) {
-            view.setDesc(i18n.t("Above average"));
-        } else if (rateTruncated == 5) {
-            view.setDesc(i18n.t("Excellent"));
-        } else {
-            view.setDesc("");
-        }
+	if (rateTruncated >= 0 && rateTruncated <= 1) {
+	    view.setDesc(i18n.t("Poor"));
+	} else if (rateTruncated == 2) {
+	    view.setDesc(i18n.t("Below average"));
+	} else if (rateTruncated == 3) {
+	    view.setDesc(i18n.t("Average"));
+	} else if (rateTruncated == 4) {
+	    view.setDesc(i18n.t("Above average"));
+	} else if (rateTruncated == 5) {
+	    view.setDesc(i18n.t("Excellent"));
+	} else {
+	    view.setDesc("");
+	}
     }
 
     private void setRatePanel(final Double value) {
-        if (value.equals(NOT_RATED)) {
-            view.clearRate();
-            view.setDesc("");
-        } else {
-            view.setStars(value);
-            setDesc((int) Math.ceil(value.doubleValue()));
-        }
+	if (value.equals(NOT_RATED)) {
+	    view.clearRate();
+	    view.setDesc("");
+	} else {
+	    view.setStars(value);
+	    setDesc((int) Math.ceil(value.doubleValue()));
+	}
     }
 }

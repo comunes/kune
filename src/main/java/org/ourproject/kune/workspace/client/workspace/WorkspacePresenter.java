@@ -88,10 +88,6 @@ public class WorkspacePresenter implements Workspace {
 	extensionPointManager.detachFromExtensible(child);
     }
 
-    public ContentBottomToolBarComponent getContentBottomToolBarComponent() {
-	return components.getContentBottomToolBarComponent();
-    }
-
     public ContentSubTitleComponent getContentSubTitleComponent() {
 	return components.getContentSubTitleComponent();
     }

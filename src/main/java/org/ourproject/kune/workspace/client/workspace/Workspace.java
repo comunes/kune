@@ -49,8 +49,6 @@ public interface Workspace extends Component {
 
     public void detachFromExtensibleWidget(ExtensibleWidgetChild ext);
 
-    public ContentBottomToolBarComponent getContentBottomToolBarComponent();
-
     public ContentSubTitleComponent getContentSubTitleComponent();
 
     public ContentTitleComponent getContentTitleComponent();

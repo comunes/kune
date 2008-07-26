@@ -49,6 +49,7 @@ import org.ourproject.kune.docs.client.ctx.folder.FolderContext;
 import org.ourproject.kune.docs.client.ctx.folder.FolderContextPresenter;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.ui.rate.RateIt;
 import org.ourproject.kune.workspace.client.WorkspaceFactory;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckPanel;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
@@ -63,13 +64,15 @@ public class DocumentFactory {
     private final Session session;
     private final Provider<TagsSummary> tagsSummaryProvider;
     private final WorkspaceSkeleton ws;
+    private final RateIt rateIt;
 
     public DocumentFactory(final I18nTranslationService i18n, final Session session,
-	    final Provider<TagsSummary> tagsSummaryProvider, final WorkspaceSkeleton ws) {
+	    final Provider<TagsSummary> tagsSummaryProvider, final WorkspaceSkeleton ws, final RateIt rateIt) {
 	this.i18n = i18n;
 	this.session = session;
 	this.tagsSummaryProvider = tagsSummaryProvider;
 	this.ws = ws;
+	this.rateIt = rateIt;
     }
 
     public AdminContext createAdminContext() {
@@ -81,7 +84,7 @@ public class DocumentFactory {
 
     public DocumentContent createDocumentContent(final DocumentContentListener listener) {
 	final WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
-	final DocumentContentPresenter presenter = new DocumentContentPresenter(this, listener, panel, session);
+	final DocumentContentPresenter presenter = new DocumentContentPresenter(this, listener, panel, session, rateIt);
 	return presenter;
     }
 

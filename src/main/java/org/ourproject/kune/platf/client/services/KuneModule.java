@@ -11,6 +11,7 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.extend.ExtensibleWidgetsManager;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
+import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.GroupService;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
@@ -20,6 +21,11 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.SessionImpl;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.state.StateManagerDefault;
+import org.ourproject.kune.platf.client.ui.rate.RateIt;
+import org.ourproject.kune.platf.client.ui.rate.RateItPanel;
+import org.ourproject.kune.platf.client.ui.rate.RateItPresenter;
+import org.ourproject.kune.platf.client.ui.rate.RatePanel;
+import org.ourproject.kune.platf.client.ui.rate.RatePresenter;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoose;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoosePanel;
@@ -166,6 +172,12 @@ public class KuneModule implements Module {
 		final GroupServiceAsync groupServiceAsync = (GroupServiceAsync) GWT.create(GroupService.class);
 		((ServiceDefTarget) groupServiceAsync).setServiceEntryPoint(GWT.getModuleBaseURL() + "GroupService");
 		return groupServiceAsync;
+	    }
+	}, SingletonScope.class);
+
+	builder.registerProvider(ContentServiceAsync.class, new Provider<ContentServiceAsync>() {
+	    public ContentServiceAsync get() {
+		return ContentService.App.getInstance();
 	    }
 	}, SingletonScope.class);
 
@@ -405,12 +417,32 @@ public class KuneModule implements Module {
 	    }
 	}, SingletonScope.class);
 
+	builder.registerProvider(RatePresenter.class, new Provider<RatePresenter>() {
+	    public RatePresenter get() {
+		final RatePresenter presenter = new RatePresenter();
+		final RatePanel panel = new RatePanel(null, null, i18n, ws);
+		presenter.init(panel);
+		return presenter;
+	    }
+	}, SingletonScope.class);
+
+	builder.registerProvider(RateIt.class, new Provider<RateIt>() {
+	    public RateIt get() {
+		final RateItPresenter presenter = new RateItPresenter(i18n, i(Session.class),
+			p(ContentServiceAsync.class), p(StateManager.class));
+		final RateItPanel panel = new RateItPanel(presenter, i18n, ws);
+		presenter.init(panel);
+		return presenter;
+	    }
+	}, SingletonScope.class);
+
 	builder.registerProvider(WorkspaceManager.class, new Provider<WorkspaceManager>() {
 	    public WorkspaceManager get() {
 		final WorkspaceManager presenter = new WorkspaceManager(i(SitePublicSpaceLink.class),
 			i(EntityLogo.class), i(EntityTitlePresenter.class), i(EntitySubTitlePresenter.class),
 			i(WsThemePresenter.class), i(EntityLicensePresenter.class), p(GroupMembersSummary.class),
-			p(ParticipationSummary.class), p(TagsSummary.class), p(GroupSummary.class));
+			p(ParticipationSummary.class), p(TagsSummary.class), p(GroupSummary.class), i(RateIt.class),
+			i(RatePresenter.class));
 		return presenter;
 	    }
 	}, SingletonScope.class);

@@ -20,6 +20,8 @@
 package org.ourproject.kune.platf.client.ui.rate;
 
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.workspace.client.ui.newtmp.skel.Toolbar;
+import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
@@ -32,65 +34,69 @@ public class RatePanel extends Composite implements RateView {
     private Label rateDesc;
     private final I18nTranslationService i18n;
 
-    public RatePanel(final Double rate, final Integer byUsers, final I18nTranslationService i18n) {
-        this.i18n = i18n;
-        initialize();
-        layout();
-        setProperties();
-        if (rate != null) {
-            setRate(rate);
-        }
-        if (byUsers != null) {
-            setByUsers(byUsers);
-        }
+    public RatePanel(final Double rate, final Integer byUsers, final I18nTranslationService i18n,
+	    final WorkspaceSkeleton ws) {
+	this.i18n = i18n;
+	initialize();
+	layout();
+	setProperties();
+	if (rate != null) {
+	    setRate(rate);
+	}
+	if (byUsers != null) {
+	    setByUsers(byUsers);
+	}
+	final Toolbar bottomBar = ws.getEntityWorkspace().getContentBottomBar();
+	bottomBar.addFill();
+	bottomBar.add(this);
     }
 
     public void setByUsers(final Integer byUsers) {
-        if (byUsers.intValue() == 0) {
-            rateDesc.setText(i18n.t("(Not rated)"));
-        } else if (byUsers.intValue() == 1) {
-            // i18n params pluralization
-            rateDesc.setText(i18n.t("([%d] user)", byUsers));
-        } else {
-            rateDesc.setText(i18n.t("([%d] users)", byUsers));
-        }
+	if (byUsers.intValue() == 0) {
+	    rateDesc.setText(i18n.t("(Not rated)"));
+	} else if (byUsers.intValue() == 1) {
+	    // i18n params pluralization
+	    rateDesc.setText(i18n.t("([%d] user)", byUsers));
+	} else {
+	    rateDesc.setText(i18n.t("([%d] users)", byUsers));
+	}
     }
 
     public void setRate(final Double rate) {
-        setRate(Star.genStars(rate.doubleValue()));
+	setRate(Star.genStars(rate.doubleValue()));
     }
 
     private void initialize() {
-        rateGrid = new Grid(1, 6);
-        starImg = new Image[5];
-        for (int i = 0; i < 5; i++) {
-            starImg[i] = new Image();
-            new Star(Star.GREY).getImage().applyTo(starImg[i]);
-        }
-        rateDesc = new Label();
+	rateGrid = new Grid(1, 6);
+	starImg = new Image[5];
+	for (int i = 0; i < 5; i++) {
+	    starImg[i] = new Image();
+	    new Star(Star.GREY).getImage().applyTo(starImg[i]);
+	}
+	rateDesc = new Label();
     }
 
     private void layout() {
-        initWidget(rateGrid);
-        for (int i = 0; i < 5; i++) {
-            rateGrid.setWidget(0, i, starImg[i]);
-        }
-        rateGrid.setWidget(0, 5, rateDesc);
+	initWidget(rateGrid);
+	for (int i = 0; i < 5; i++) {
+	    rateGrid.setWidget(0, i, starImg[i]);
+	}
+	rateGrid.setWidget(0, 5, rateDesc);
     }
 
     private void setProperties() {
-        rateGrid.setCellPadding(0);
-        rateGrid.setCellSpacing(0);
-        rateGrid.setBorderWidth(0);
-        rateGrid.addStyleName("kune-RatePanel-Stars");
-        rateDesc.addStyleName("kune-RatePanel-Label");
-        rateDesc.addStyleName("kune-Margin-Medium-lr");
+	rateGrid.setCellPadding(0);
+	rateGrid.setCellSpacing(0);
+	rateGrid.setBorderWidth(0);
+	rateGrid.addStyleName("kune-RatePanel-Stars");
+	rateDesc.addStyleName("kune-RatePanel-Label");
+	rateDesc.addStyleName("kune-Margin-Medium-lr");
     }
 
     private void setRate(final Star stars[]) {
-        for (int i = 0; i < 5; i++) {
-            stars[i].getImage().applyTo(starImg[i]);
-        }
+	for (int i = 0; i < 5; i++) {
+	    stars[i].getImage().applyTo(starImg[i]);
+	}
     }
 
 }
