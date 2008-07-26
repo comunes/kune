@@ -19,10 +19,13 @@
  */
 package org.ourproject.kune.workspace.client.licensechoose;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
+import org.ourproject.kune.platf.client.state.Session;
 
 import com.allen_sauer.gwt.log.client.Log;
 
@@ -30,59 +33,68 @@ public class LicenseChoosePresenter implements LicenseChoose, View {
 
     private LicenseChooseView view;
 
-    private List<LicenseDTO> licenses;
+    private final List<LicenseDTO> licenses;
 
-    private List<LicenseDTO> licensesNonCCList;
+    private final List<LicenseDTO> licensesNonCCList;
 
-    public LicenseChoosePresenter() {
-    }
-
-    public void init(final LicenseChooseView view, final List<LicenseDTO> licenses,
-            final List<LicenseDTO> licensesNonCCList) {
-        this.view = view;
-        this.licenses = licenses;
-        this.licensesNonCCList = licensesNonCCList;
-        this.view.reset();
+    public LicenseChoosePresenter(final Session session) {
+	licensesNonCCList = new ArrayList<LicenseDTO>();
+	licenses = session.getLicenses();
+	for (final Iterator<LicenseDTO> iterator = licenses.iterator(); iterator.hasNext();) {
+	    final LicenseDTO license = iterator.next();
+	    if (!license.isCC()) {
+		licensesNonCCList.add(license);
+	    }
+	}
     }
 
     public LicenseDTO getLicense() {
-        String licenseShortName;
+	String licenseShortName;
 
-        if (view.isCCselected()) {
-            if (view.permitComercial()) {
-                licenseShortName = view.isAllowModif() ? "by" : view.isAllowModifShareAlike() ? "by-sa" : "by-nd";
-            } else {
-                licenseShortName = view.isAllowModif() ? "by-nc" : view.isAllowModifShareAlike() ? "by-nc-sa"
-                        : "by-nc-nd";
-            }
-        } else {
-            licenseShortName = licensesNonCCList.get(view.getSelectedNonCCLicenseIndex()).getShortName();
-        }
-        return getLicenseFromShortName(licenseShortName);
+	if (view.isCCselected()) {
+	    if (view.permitComercial()) {
+		licenseShortName = view.isAllowModif() ? "by" : view.isAllowModifShareAlike() ? "by-sa" : "by-nd";
+	    } else {
+		licenseShortName = view.isAllowModif() ? "by-nc" : view.isAllowModifShareAlike() ? "by-nc-sa"
+			: "by-nc-nd";
+	    }
+	} else {
+	    licenseShortName = licensesNonCCList.get(view.getSelectedNonCCLicenseIndex()).getShortName();
+	}
+	return getLicenseFromShortName(licenseShortName);
     }
 
-    private LicenseDTO getLicenseFromShortName(final String shortName) {
-        for (int i = 0; i < licenses.size(); i++) {
-            LicenseDTO licenseDTO = licenses.get(i);
-            if (licenseDTO.getShortName().equals(shortName)) {
-                return licenseDTO;
-            }
-        }
-        Log.error("Internal error: License not found");
-        throw new IndexOutOfBoundsException("License not found");
+    public List<LicenseDTO> getNonCCLicenses() {
+	return licensesNonCCList;
     }
 
     public View getView() {
-        return view;
+	return view;
+    }
+
+    public void init(final LicenseChooseView view) {
+	this.view = view;
+	this.view.reset();
     }
 
     public void onChange() {
-        LicenseDTO licenseDTO = getLicense();
-        if (licenseDTO.isCopyleft()) {
-            view.showIsCopyleft();
-        } else {
-            view.showIsNotCopyleft();
-        }
+	final LicenseDTO licenseDTO = getLicense();
+	if (licenseDTO.isCopyleft()) {
+	    view.showIsCopyleft();
+	} else {
+	    view.showIsNotCopyleft();
+	}
+    }
+
+    private LicenseDTO getLicenseFromShortName(final String shortName) {
+	for (int i = 0; i < licenses.size(); i++) {
+	    final LicenseDTO licenseDTO = licenses.get(i);
+	    if (licenseDTO.getShortName().equals(shortName)) {
+		return licenseDTO;
+	    }
+	}
+	Log.error("Internal error: License not found");
+	throw new IndexOutOfBoundsException("License not found");
     }
 
 }

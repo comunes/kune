@@ -30,7 +30,10 @@ import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
+import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
+import org.ourproject.kune.workspace.client.sitebar.rpc.UserServiceAsync;
 
+import com.calclab.suco.client.container.Provider;
 import com.calclab.suco.client.signal.Signal;
 import com.calclab.suco.client.signal.Slot;
 
@@ -46,14 +49,21 @@ public class SessionImpl implements Session {
     private final Signal<InitDataDTO> onInitDataReceived;
     private final Signal<UserInfoDTO> onUserSignIn;
     private final Signal<Object> onUserSignOut;
+    private final Provider<UserServiceAsync> userServiceProvider;
 
-    public SessionImpl(final String userHash, final I18nLanguageDTO initialLanguage) {
+    public SessionImpl(final String userHash, final I18nLanguageDTO initialLanguage,
+	    final Provider<UserServiceAsync> userServiceProvider) {
 	this.userHash = userHash;
 	currentLanguage = initialLanguage;
+	this.userServiceProvider = userServiceProvider;
 	languagesArray = null;
 	this.onInitDataReceived = new Signal<InitDataDTO>("initDataReceived");
 	this.onUserSignIn = new Signal<UserInfoDTO>("onUserSignIn");
 	this.onUserSignOut = new Signal<Object>("onUserSignOut");
+    }
+
+    public void check(final AsyncCallbackSimple<?> callback) {
+	userServiceProvider.get().onlyCheckSession(getUserHash(), callback);
     }
 
     public List<I18nCountryDTO> getCountries() {

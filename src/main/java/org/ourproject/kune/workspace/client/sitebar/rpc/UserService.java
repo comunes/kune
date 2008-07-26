@@ -24,27 +24,9 @@ import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
-import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 public interface UserService extends RemoteService {
-
-    public class App {
-	private static UserServiceAsync ourInstance = null;
-
-	public static synchronized UserServiceAsync getInstance() {
-	    if (ourInstance == null) {
-		ourInstance = (UserServiceAsync) GWT.create(UserService.class);
-		((ServiceDefTarget) ourInstance).setServiceEntryPoint(GWT.getModuleBaseURL() + "UserService");
-	    }
-	    return ourInstance;
-	}
-
-	public static void setMock(final UserServiceAsync mock) {
-	    ourInstance = mock;
-	}
-    }
 
     UserInfoDTO createUser(UserDTO user) throws DefaultException;
 

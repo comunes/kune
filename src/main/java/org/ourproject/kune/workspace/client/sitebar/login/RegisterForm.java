@@ -34,6 +34,8 @@ public class RegisterForm extends DefaultForm {
     private final ComboBox timezoneCombo;
 
     public RegisterForm(final SignInPresenter presenter, final I18nUITranslationService i18n) {
+	super.addStyleName("kune-Margin-Large-l");
+
 	shortNameRegField = new TextField();
 	shortNameRegField.setFieldLabel(i18n.t("Nickname"));
 	shortNameRegField.setName(NICK_FIELD);

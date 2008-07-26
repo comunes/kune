@@ -74,9 +74,7 @@ public class WorkspaceManager {
 	setSocialNetwork(state);
 	groupSummaryProvider.get().setState(state);
 	tagsProvider.get().setState(state);
-	// Only for probes:
-	wsThemePresenter.setVisible(true);
-	wsThemePresenter.setTheme(new WsTheme(group.getWorkspaceTheme()));
+	wsThemePresenter.setState(state);
     }
 
 }

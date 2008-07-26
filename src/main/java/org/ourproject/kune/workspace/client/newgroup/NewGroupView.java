@@ -25,6 +25,8 @@ import org.ourproject.kune.workspace.client.newgroup.ui.SiteErrorType;
 
 public interface NewGroupView extends View {
 
+    void center();
+
     void clearData();
 
     LicenseDTO getLicense();
@@ -58,6 +60,8 @@ public interface NewGroupView extends View {
     void setEnabledNextButton(boolean enabled);
 
     void setMessage(String message, SiteErrorType type);
+
+    void show();
 
     void showLicenseForm();
 

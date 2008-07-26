@@ -29,13 +29,10 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.actions.AddGroupLiveSearchAction;
 import org.ourproject.kune.workspace.client.actions.AddUserLiveSearchAction;
 import org.ourproject.kune.workspace.client.actions.AttachToExtensibleWidgetAction;
-import org.ourproject.kune.workspace.client.actions.ChangeGroupWsThemeAction;
 import org.ourproject.kune.workspace.client.actions.ClearExtensibleWidgetAction;
-import org.ourproject.kune.workspace.client.actions.CreateNewGroupAction;
 import org.ourproject.kune.workspace.client.actions.DetachFromExtensibleWidgetAction;
 import org.ourproject.kune.workspace.client.actions.DisableRateItAction;
 import org.ourproject.kune.workspace.client.actions.EnableRateItAction;
-import org.ourproject.kune.workspace.client.actions.OnlyCheckUserSessionAction;
 import org.ourproject.kune.workspace.client.actions.RateContentAction;
 import org.ourproject.kune.workspace.client.actions.RecalculateWorkspaceAction;
 import org.ourproject.kune.workspace.client.actions.ReloadContextAction;
@@ -43,16 +40,6 @@ import org.ourproject.kune.workspace.client.actions.i18n.DoTranslationAction;
 import org.ourproject.kune.workspace.client.actions.i18n.GetLexiconAction;
 import org.ourproject.kune.workspace.client.actions.i18n.GetTranslationAction;
 import org.ourproject.kune.workspace.client.actions.i18n.ShowTranslatorAction;
-import org.ourproject.kune.workspace.client.actions.sn.AcceptJoinGroupAction;
-import org.ourproject.kune.workspace.client.actions.sn.AddAdminAction;
-import org.ourproject.kune.workspace.client.actions.sn.AddCollabAction;
-import org.ourproject.kune.workspace.client.actions.sn.AddViewerAction;
-import org.ourproject.kune.workspace.client.actions.sn.DeleteMemberAction;
-import org.ourproject.kune.workspace.client.actions.sn.DenyJoinGroupAction;
-import org.ourproject.kune.workspace.client.actions.sn.RequestJoinGroupAction;
-import org.ourproject.kune.workspace.client.actions.sn.SetAdminAsCollabAction;
-import org.ourproject.kune.workspace.client.actions.sn.SetCollabAsAdminAction;
-import org.ourproject.kune.workspace.client.actions.sn.UnJoinGroupAction;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
@@ -74,27 +61,10 @@ public class WorkspaceClientModule implements ClientModule {
     }
 
     public void configure(final Register register) {
-	register.addAction(WorkspaceEvents.ONLY_CHECK_USER_SESSION, new OnlyCheckUserSessionAction(session));
 	register.addAction(PlatformEvents.ATTACH_TO_EXTENSIBLE_WIDGET, new AttachToExtensibleWidgetAction(workspace));
 	register.addAction(PlatformEvents.DETACH_FROM_EXTENSIBLE_WIDGET,
 		new DetachFromExtensibleWidgetAction(workspace));
 	register.addAction(PlatformEvents.CLEAR_EXTENSIBLE_WIDGET, new ClearExtensibleWidgetAction(workspace));
-	register.addAction(WorkspaceEvents.REQ_JOIN_GROUP, new RequestJoinGroupAction(session, stateManager, i18n));
-	register.addAction(WorkspaceEvents.ACCEPT_JOIN_GROUP, new AcceptJoinGroupAction(session, stateManager,
-		workspace, i18n));
-	register.addAction(WorkspaceEvents.DENY_JOIN_GROUP, new DenyJoinGroupAction(session, stateManager, i18n));
-	register.addAction(WorkspaceEvents.DEL_MEMBER, new DeleteMemberAction(session, stateManager, i18n));
-	register.addAction(WorkspaceEvents.SET_COLLAB_AS_ADMIN, new SetCollabAsAdminAction(session, stateManager,
-		workspace, i18n));
-	register.addAction(WorkspaceEvents.SET_ADMIN_AS_COLLAB, new SetAdminAsCollabAction(session, stateManager,
-		workspace, i18n));
-	register
-		.addAction(WorkspaceEvents.ADD_ADMIN_MEMBER, new AddAdminAction(session, stateManager, workspace, i18n));
-	register.addAction(WorkspaceEvents.ADD_COLLAB_MEMBER, new AddCollabAction(session, stateManager, workspace,
-		i18n));
-	register.addAction(WorkspaceEvents.ADD_VIEWER_MEMBER, new AddViewerAction(session, stateManager, i18n));
-	register.addAction(WorkspaceEvents.UNJOIN_GROUP, new UnJoinGroupAction(session, stateManager, i18n));
-	register.addAction(WorkspaceEvents.CHANGE_GROUP_WSTHEME, new ChangeGroupWsThemeAction(session, workspace));
 	register.addAction(WorkspaceEvents.RATE_CONTENT, new RateContentAction(session, stateManager, i18n));
 	register.addAction(WorkspaceEvents.ENABLE_RATEIT, new EnableRateItAction(workspace));
 	register.addAction(WorkspaceEvents.DISABLE_RATEIT, new DisableRateItAction(workspace));
@@ -104,7 +74,6 @@ public class WorkspaceClientModule implements ClientModule {
 	register.addAction(WorkspaceEvents.SHOW_TRANSLATOR, new ShowTranslatorAction(session, workspace, i18n));
 	register.addAction(WorkspaceEvents.DO_TRANSLATION, new DoTranslationAction(session, i18n));
 	register.addAction(WorkspaceEvents.GET_LEXICON, new GetLexiconAction(i18n));
-	register.addAction(WorkspaceEvents.CREATE_NEW_GROUP, new CreateNewGroupAction(session));
 	register.addAction(WorkspaceEvents.RELOAD_CONTEXT, new ReloadContextAction(stateManager));
 	register.addAction(WorkspaceEvents.RECALCULATE_WORKSPACE_SIZE, new RecalculateWorkspaceAction(workspace));
     }

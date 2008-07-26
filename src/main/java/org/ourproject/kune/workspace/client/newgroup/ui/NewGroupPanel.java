@@ -30,9 +30,9 @@ import org.ourproject.kune.workspace.client.licensechoose.LicenseChoose;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoosePanel;
 import org.ourproject.kune.workspace.client.newgroup.NewGroupPresenter;
 import org.ourproject.kune.workspace.client.newgroup.NewGroupView;
-import org.ourproject.kune.workspace.client.sitebar.SiteBarFactory;
 import org.ourproject.kune.workspace.client.sitebar.msg.SiteMessagePanel;
 
+import com.calclab.suco.client.container.Provider;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.HTML;
@@ -49,7 +49,6 @@ import com.gwtext.client.widgets.form.FormPanel;
 import com.gwtext.client.widgets.form.Radio;
 import com.gwtext.client.widgets.form.TextArea;
 import com.gwtext.client.widgets.form.TextField;
-import com.gwtext.client.widgets.form.event.TextFieldListenerAdapter;
 import com.gwtext.client.widgets.layout.FitLayout;
 
 public class NewGroupPanel extends WizardDialog implements NewGroupView {
@@ -70,12 +69,13 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
     private TextField longNameField;
     private TextArea publicDescField;
     private final DeckPanel deck;
-    private LicenseChoose licenseChoosePanel;
+    private final LicenseChoose licenseChoosePanel;
     private final SiteMessagePanel messagesPanel;
     private final I18nUITranslationService i18n;
     private TextField tags;
 
-    public NewGroupPanel(final NewGroupPresenter presenter, final I18nUITranslationService i18n) {
+    public NewGroupPanel(final NewGroupPresenter presenter, final I18nUITranslationService i18n,
+	    final Provider<LicenseChoose> licenseChooseProvider) {
 	super(i18n.t("Register a new Group"), true, false, 460, 480, new WizardListener() {
 	    public void onBack() {
 		presenter.onBack();
@@ -103,7 +103,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
 	centerPanel.setLayout(new FitLayout());
 	deck = new DeckPanel();
 	newGroupInitialDataForm = createNewGroupInitialDataForm(presenter);
-	createChooseLicensePanel();
+	licenseChoosePanel = licenseChooseProvider.get();
 	final VerticalPanel newGroupInitialDataVP = new VerticalPanel();
 	final HorizontalPanel newGroupInitialDataHP = new HorizontalPanel();
 	final VerticalPanel chooseLicenseVP = new VerticalPanel();
@@ -212,10 +212,6 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
 	deck.showWidget(0);
     }
 
-    private void createChooseLicensePanel() {
-	licenseChoosePanel = SiteBarFactory.createLicenseChoose();
-    }
-
     private FormPanel createNewGroupInitialDataForm(final NewGroupPresenter presenter) {
 	final FormPanel form = new FormPanel();
 	form.setBorder(false);
@@ -301,24 +297,6 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
 			+ "just register a orphaned project, and permit others to work and develop it.");
 
 	groupTypeFieldSet.setCollapsible(false);
-
-	shortNameField.addListener(new TextFieldListenerAdapter() {
-	    public void onChange(final Field field, final Object newVal, final Object oldVal) {
-		presenter.onChange();
-	    }
-	});
-
-	longNameField.addListener(new TextFieldListenerAdapter() {
-	    public void onChange(final Field field, final Object newVal, final Object oldVal) {
-		presenter.onChange();
-	    }
-	});
-
-	publicDescField.addListener(new TextFieldListenerAdapter() {
-	    public void onChange(final Field field, final Object newVal, final Object oldVal) {
-		presenter.onChange();
-	    }
-	});
 
 	return form;
     }

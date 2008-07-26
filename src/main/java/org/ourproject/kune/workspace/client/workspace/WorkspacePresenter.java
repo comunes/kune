@@ -112,10 +112,6 @@ public class WorkspacePresenter implements Workspace {
 	return components.getLicenseComponent();
     }
 
-    public ThemeMenuComponent getThemeMenuComponent() {
-	return components.getThemeMenuComponent();
-    }
-
     public UserLiveSearchComponent getUserLiveSearchComponent() {
 	return components.getUserLiveSearchComponent();
     }

@@ -28,6 +28,7 @@ import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
+import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 
 import com.calclab.suco.client.signal.Slot;
 
@@ -37,6 +38,8 @@ public interface Session {
      * Duration remembering login: 2 weeks
      */
     public static int SESSION_DURATION = 1000 * 60 * 60 * 24 * 14;
+
+    public void check(AsyncCallbackSimple<?> callback);
 
     public List<I18nCountryDTO> getCountries();
 

@@ -24,24 +24,9 @@ import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
-import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 public interface SocialNetworkService extends RemoteService {
-
-    public static class App {
-	private static SocialNetworkServiceAsync instance;
-
-	public static SocialNetworkServiceAsync getInstance() {
-	    if (instance == null) {
-		instance = (SocialNetworkServiceAsync) GWT.create(SocialNetworkService.class);
-		((ServiceDefTarget) instance).setServiceEntryPoint(GWT.getModuleBaseURL() + "SocialNetworkService");
-	    }
-	    return instance;
-	}
-
-    }
 
     SocialNetworkResultDTO AcceptJoinGroup(String hash, String groupShortName, String groupToAcceptShortName)
 	    throws DefaultException;

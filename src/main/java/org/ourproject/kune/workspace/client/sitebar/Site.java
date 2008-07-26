@@ -34,11 +34,6 @@ public class Site {
     private static SiteProgress progress;
     private static Provider<SiteMessage> siteMessageProvider;
 
-    @Deprecated
-    public static void doNewGroup(final String returnToken) {
-	// sitebar.doNewGroup(returnToken);
-    }
-
     public static void error(final String value) {
 	getSiteMessage().setMessage(value, SiteErrorType.error);
     }

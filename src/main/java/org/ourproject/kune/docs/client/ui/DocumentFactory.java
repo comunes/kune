@@ -81,7 +81,7 @@ public class DocumentFactory {
 
     public DocumentContent createDocumentContent(final DocumentContentListener listener) {
 	final WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
-	final DocumentContentPresenter presenter = new DocumentContentPresenter(this, listener, panel);
+	final DocumentContentPresenter presenter = new DocumentContentPresenter(this, listener, panel, session);
 	return presenter;
     }
 

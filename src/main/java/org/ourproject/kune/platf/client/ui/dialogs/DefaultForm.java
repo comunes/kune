@@ -25,12 +25,20 @@ public class DefaultForm {
 	form.add(field);
     }
 
+    public void addStyleName(final String cls) {
+	form.addStyleName(cls);
+    }
+
     public FormPanel getForm() {
 	return form;
     }
 
     public boolean isValid() {
 	return form.getForm().isValid();
+    }
+
+    public void removeStyleName(final String cls) {
+	form.removeStyleName(cls);
     }
 
     public void reset() {

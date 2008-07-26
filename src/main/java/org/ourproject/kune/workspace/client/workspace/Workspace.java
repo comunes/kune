@@ -61,8 +61,6 @@ public interface Workspace extends Component {
 
     public LicenseComponent getLicenseComponent();
 
-    public ThemeMenuComponent getThemeMenuComponent();
-
     public UserLiveSearchComponent getUserLiveSearchComponent();
 
     public void setContent(WorkspaceComponent contentComponent);

@@ -25,21 +25,12 @@ import org.ourproject.kune.platf.client.dto.GroupListDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
-import org.ourproject.kune.platf.client.errors.SessionExpiredException;
-import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
-import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
-import org.ourproject.kune.workspace.client.newgroup.NewGroupListener;
 import org.ourproject.kune.workspace.client.sitebar.Site;
-import org.ourproject.kune.workspace.client.sitebar.rpc.UserService;
-import org.ourproject.kune.workspace.client.sitebar.rpc.UserServiceAsync;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-
-public class SiteBarPresenter implements SiteBar, NewGroupListener {
+public class SiteBarPresenter implements SiteBar {
 
     private SiteBarView view;
     private final SiteBarListener listener;
@@ -66,51 +57,52 @@ public class SiteBarPresenter implements SiteBar, NewGroupListener {
     }
 
     public void doLogout() {
-	final AsyncCallback<Object> callback = new AsyncCallback<Object>() {
-	    public void onFailure(final Throwable caught) {
-		Site.hideProgress();
-		try {
-		    throw caught;
-		} catch (final SessionExpiredException e) {
-		    clientUILogout();
-		} catch (final UserMustBeLoggedException e) {
-		    clientUILogout();
-		} catch (final Throwable e) {
-		    GWT.log("Other kind of exception in doLogout", null);
-		    throw new RuntimeException();
-		}
-	    }
-
-	    public void onSuccess(final Object arg0) {
-		Site.hideProgress();
-		clientUILogout();
-	    }
-
-	    private void clientUILogout() {
-		view.restoreLoginLink();
-		view.resetOptionsSubmenu();
-		view.setLogoutLinkVisible(false);
-		listener.onUserLoggedOut();
-	    }
-	};
-	UserService.App.getInstance().logout(session.getUserHash(), callback);
+	// final AsyncCallback<Object> callback = new AsyncCallback<Object>() {
+	// public void onFailure(final Throwable caught) {
+	// Site.hideProgress();
+	// try {
+	// throw caught;
+	// } catch (final SessionExpiredException e) {
+	// clientUILogout();
+	// } catch (final UserMustBeLoggedException e) {
+	// clientUILogout();
+	// } catch (final Throwable e) {
+	// GWT.log("Other kind of exception in doLogout", null);
+	// throw new RuntimeException();
+	// }
+	// }
+	//
+	// public void onSuccess(final Object arg0) {
+	// Site.hideProgress();
+	// clientUILogout();
+	// }
+	//
+	// private void clientUILogout() {
+	// view.restoreLoginLink();
+	// view.resetOptionsSubmenu();
+	// view.setLogoutLinkVisible(false);
+	// listener.onUserLoggedOut();
+	// }
+	// };
+	// UserService.App.getInstance().logout(session.getUserHash(),
+	// callback);
     }
 
     public void doNewGroup(final String previousTokenOrig) {
-	DefaultDispatcher.getInstance().fire(WorkspaceEvents.ONLY_CHECK_USER_SESSION,
-		new AsyncCallbackSimple<Object>() {
-		    public void onSuccess(final Object result) {
-			previousToken = previousTokenOrig;
-			if (session.isLogged()) {
-			    Site.showProgressProcessing();
-			    view.showNewGroupDialog();
-			    view.centerNewGroupDialog();
-			} else {
-			    returnToPreviousState();
-			    Site.info(i18n.t("Sign in or register to create a group"));
-			}
-		    }
-		});
+	// DefaultDispatcher.getInstance().fire(WorkspaceEvents.ONLY_CHECK_USER_SESSION,
+	// new AsyncCallbackSimple<Object>() {
+	// public void onSuccess(final Object result) {
+	// previousToken = previousTokenOrig;
+	// if (session.isLogged()) {
+	// Site.showProgressProcessing();
+	// view.showNewGroupDialog();
+	// view.centerNewGroupDialog();
+	// } else {
+	// returnToPreviousState();
+	// Site.info(i18n.t("Sign in or register to create a group"));
+	// }
+	// }
+	// });
     }
 
     public void doSearch(final String termToSearch) {
@@ -168,17 +160,19 @@ public class SiteBarPresenter implements SiteBar, NewGroupListener {
     }
 
     public void reloadUserInfo(final String userHash) {
-	final UserServiceAsync siteBarService = UserService.App.getInstance();
-	siteBarService.reloadUserInfo(userHash, new AsyncCallback<UserInfoDTO>() {
-	    public void onFailure(final Throwable arg0) {
-		Site.hideProgress();
-	    }
-
-	    public void onSuccess(final UserInfoDTO response) {
-		showLoggedUser(response);
-		Site.hideProgress();
-	    }
-	});
+	// //final UserServiceAsync siteBarService =
+	// UserService.App.getInstance();
+	// siteBarService.reloadUserInfo(userHash, new
+	// AsyncCallback<UserInfoDTO>() {
+	// public void onFailure(final Throwable arg0) {
+	// Site.hideProgress();
+	// }
+	//
+	// public void onSuccess(final UserInfoDTO response) {
+	// showLoggedUser(response);
+	// Site.hideProgress();
+	// }
+	// });
     }
 
     public void setState(final StateDTO state) {

@@ -19,10 +19,10 @@
  */
 package org.ourproject.kune.workspace.client.newgroup;
 
-import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.StateToken;
 
 public interface NewGroup {
 
-    public View getView();
+    void doNewGroup(StateToken previousToken);
 
 }

@@ -90,13 +90,6 @@ public class WorkspaceUIComponents {
 	return license;
     }
 
-    public ThemeMenuComponent getThemeMenuComponent() {
-	if (themeMenu == null) {
-	    themeMenu = WorkspaceFactory.createThemeMenuComponent();
-	}
-	return themeMenu;
-    }
-
     public UserLiveSearchComponent getUserLiveSearchComponent() {
 	if (userLiveSearch == null) {
 	    userLiveSearch = WorkspaceFactory.createUserLiveSearchComponent();

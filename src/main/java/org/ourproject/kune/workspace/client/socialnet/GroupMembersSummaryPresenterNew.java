@@ -30,15 +30,15 @@ public class GroupMembersSummaryPresenterNew extends SocialNetworkPresenter impl
     private final GridGroup collabCategory;
     private final GridGroup pendigCategory;
     private final Session session;
-    private final SocialNetworkServiceAsync snService;
+    private final Provider<SocialNetworkServiceAsync> snServiceProvider;
 
     public GroupMembersSummaryPresenterNew(final I18nUITranslationService i18n,
 	    final Provider<StateManager> stateManagerProvider, final ImageUtils imageUtils, final Session session,
-	    final SocialNetworkServiceAsync snService) {
-	super(i18n, stateManagerProvider, imageUtils, session, snService);
+	    final Provider<SocialNetworkServiceAsync> snServiceProvider) {
+	super(i18n, stateManagerProvider, imageUtils, session, snServiceProvider);
 	this.i18n = i18n;
 	this.session = session;
-	this.snService = snService;
+	this.snServiceProvider = snServiceProvider;
 	final String adminsTitle = i18n.t("Admins");
 	final String collabsTitle = i18n.t("Collaborators");
 	final String pendingTitle = i18n.t("Pending");
@@ -53,8 +53,9 @@ public class GroupMembersSummaryPresenterNew extends SocialNetworkPresenter impl
 
     public void addCollab(final String groupShortName) {
 	Site.showProgressProcessing();
-	snService.addCollabMember(session.getUserHash(), session.getCurrentState().getGroup().getShortName(),
-		groupShortName, new AsyncCallbackSimple<SocialNetworkResultDTO>() {
+	snServiceProvider.get().addCollabMember(session.getUserHash(),
+		session.getCurrentState().getGroup().getShortName(), groupShortName,
+		new AsyncCallbackSimple<SocialNetworkResultDTO>() {
 		    public void onSuccess(final SocialNetworkResultDTO result) {
 			Site.hideProgress();
 			Site.info(i18n.t("Member added as collaborator"));

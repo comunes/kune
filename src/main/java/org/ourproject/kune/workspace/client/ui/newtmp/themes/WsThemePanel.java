@@ -42,7 +42,7 @@ public class WsThemePanel extends ToolbarButton implements WsThemeView {
 	    item.addListener(new BaseItemListenerAdapter() {
 		@Override
 		public void onClick(final BaseItem item, final EventObject e) {
-		    presenter.setTheme(theme);
+		    presenter.onChangeGroupWsTheme(theme);
 		}
 	    });
 	}

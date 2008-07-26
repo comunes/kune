@@ -13,6 +13,8 @@ public class SignInForm extends DefaultForm {
     private final TextField loginPassField;
 
     public SignInForm(final I18nTranslationService i18n) {
+	super.addStyleName("kune-Margin-Large-trbl");
+
 	loginNickOrEmailField = new TextField();
 	loginNickOrEmailField.setFieldLabel(i18n.t("Nickname or email"));
 	loginNickOrEmailField.setName(NICKOREMAIL_FIELD);

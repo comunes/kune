@@ -27,10 +27,8 @@ import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.IconLabel;
 import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
-import org.ourproject.kune.workspace.client.newgroup.NewGroup;
 import org.ourproject.kune.workspace.client.newgroup.ui.NewGroupPanel;
 import org.ourproject.kune.workspace.client.sitebar.Site;
-import org.ourproject.kune.workspace.client.sitebar.SiteBarFactory;
 import org.ourproject.kune.workspace.client.sitebar.SiteToken;
 import org.ourproject.kune.workspace.client.sitebar.login.SignInPanel;
 
@@ -315,10 +313,6 @@ public class SiteBarPanel extends Composite implements SiteBarView {
     }
 
     public void showNewGroupDialog() {
-	final NewGroup newGroupForm = SiteBarFactory.getNewGroupForm(presenter);
-	newGroupPanel = (NewGroupPanel) newGroupForm.getView();
-	newGroupPanel.show();
-	Site.hideProgress();
     }
 
     public void showProgress(final String text) {

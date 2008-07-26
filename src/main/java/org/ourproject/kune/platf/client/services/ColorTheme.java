@@ -21,6 +21,7 @@ package org.ourproject.kune.platf.client.services;
 
 import com.google.gwt.i18n.client.Dictionary;
 
+@Deprecated
 public class ColorTheme {
 
     private static final String DEFAULT_KUNE_THEME = "defaultKuneTheme";
@@ -28,71 +29,71 @@ public class ColorTheme {
     private Dictionary theme;
 
     public ColorTheme() {
-        this(DEFAULT_KUNE_THEME);
+	this(DEFAULT_KUNE_THEME);
     }
 
     public ColorTheme(final String theme) {
-        this.theme = Dictionary.getDictionary(theme);
-    }
-
-    public void setTheme(final String theme) {
-        this.theme = Dictionary.getDictionary(theme);
-    }
-
-    public String getThemeName() {
-        return theme.get("themeName");
-    }
-
-    public String getToolSelected() {
-        return theme.get("toolSelected");
-    }
-
-    public String getToolUnselected() {
-        return theme.get("toolUnselected");
-    }
-
-    public String getContentMainBorder() {
-        return theme.get("contentMainBorder");
-    }
-
-    public String getContentTitle() {
-        return theme.get("contentTitle");
-    }
-
-    public String getContentTitleText() {
-        return theme.get("contentTitleText");
-    }
-
-    public String getContentSubTitleText() {
-        return theme.get("contentSubTitleText");
+	this.theme = Dictionary.getDictionary(theme);
     }
 
     public String getContentBottomText() {
-        return theme.get("contentBottomText");
+	return theme.get("contentBottomText");
+    }
+
+    public String getContentMainBorder() {
+	return theme.get("contentMainBorder");
+    }
+
+    public String getContentSubTitleText() {
+	return theme.get("contentSubTitleText");
+    }
+
+    public String getContentTitle() {
+	return theme.get("contentTitle");
+    }
+
+    public String getContentTitleText() {
+	return theme.get("contentTitleText");
     }
 
     public String getContext() {
-        return theme.get("context");
-    }
-
-    public String getSplitter() {
-        return theme.get("splitter");
+	return theme.get("context");
     }
 
     public String getGroupMembersDD() {
-        return theme.get("groupMembersDD");
+	return theme.get("groupMembersDD");
     }
 
     public String getParticipationDD() {
-        return theme.get("participationDD");
+	return theme.get("participationDD");
+    }
+
+    public String getSplitter() {
+	return theme.get("splitter");
     }
 
     public String getSummaryDD() {
-        return theme.get("summaryDD");
+	return theme.get("summaryDD");
     }
 
     public String getTagsDD() {
-        return theme.get("tagsDD");
+	return theme.get("tagsDD");
+    }
+
+    public String getThemeName() {
+	return theme.get("themeName");
+    }
+
+    public String getToolSelected() {
+	return theme.get("toolSelected");
+    }
+
+    public String getToolUnselected() {
+	return theme.get("toolUnselected");
+    }
+
+    public void setTheme(final String theme) {
+	this.theme = Dictionary.getDictionary(theme);
     }
 
 }

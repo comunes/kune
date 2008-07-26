@@ -11,13 +11,19 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.extend.ExtensibleWidgetsManager;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
+import org.ourproject.kune.platf.client.rpc.GroupService;
+import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
+import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
 import org.ourproject.kune.platf.client.state.ContentProviderImpl;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.SessionImpl;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.state.StateManagerDefault;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.workspace.client.licensechoose.LicenseChoose;
+import org.ourproject.kune.workspace.client.licensechoose.LicenseChoosePanel;
+import org.ourproject.kune.workspace.client.licensechoose.LicenseChoosePresenter;
 import org.ourproject.kune.workspace.client.newgroup.NewGroup;
 import org.ourproject.kune.workspace.client.newgroup.NewGroupPresenter;
 import org.ourproject.kune.workspace.client.newgroup.ui.NewGroupPanel;
@@ -36,6 +42,7 @@ import org.ourproject.kune.workspace.client.sitebar.msg.SiteMessagePanel;
 import org.ourproject.kune.workspace.client.sitebar.msg.SiteMessagePresenter;
 import org.ourproject.kune.workspace.client.sitebar.msg.SiteMessageView;
 import org.ourproject.kune.workspace.client.sitebar.rpc.UserService;
+import org.ourproject.kune.workspace.client.sitebar.rpc.UserServiceAsync;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryPanelNew;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryPresenterNew;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryViewNew;
@@ -92,12 +99,15 @@ import com.calclab.suco.client.modules.Module;
 import com.calclab.suco.client.modules.ModuleBuilder;
 import com.calclab.suco.client.scopes.SingletonScope;
 import com.calclab.suco.client.signal.Slot;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 public class KuneModule implements Module {
     private final I18nLanguageDTO initialLang;
     private final HashMap<String, String> lexicon;
+    private ModuleBuilder builder;
 
     public KuneModule(final I18nLanguageDTO initialLang, final HashMap<String, String> lexicon) {
 	this.initialLang = initialLang;
@@ -109,6 +119,8 @@ public class KuneModule implements Module {
     }
 
     public void onLoad(final ModuleBuilder builder) {
+	this.builder = builder;
+
 	builder.registerProvider(Kune.class, new Provider<Kune>() {
 	    public Kune get() {
 		return new Kune(builder);
@@ -124,9 +136,35 @@ public class KuneModule implements Module {
 	    }
 	}, SingletonScope.class);
 
+	builder.registerProvider(UserServiceAsync.class, new Provider<UserServiceAsync>() {
+	    public UserServiceAsync get() {
+		final UserServiceAsync service = (UserServiceAsync) GWT.create(UserService.class);
+		((ServiceDefTarget) service).setServiceEntryPoint(GWT.getModuleBaseURL() + "UserService");
+		return service;
+	    }
+	}, SingletonScope.class);
+
+	builder.registerProvider(SocialNetworkServiceAsync.class, new Provider<SocialNetworkServiceAsync>() {
+	    public SocialNetworkServiceAsync get() {
+		final SocialNetworkServiceAsync snServiceAsync = (SocialNetworkServiceAsync) GWT
+			.create(SocialNetworkService.class);
+		((ServiceDefTarget) snServiceAsync).setServiceEntryPoint(GWT.getModuleBaseURL()
+			+ "SocialNetworkService");
+		return snServiceAsync;
+	    }
+	}, SingletonScope.class);
+
+	builder.registerProvider(GroupServiceAsync.class, new Provider<GroupServiceAsync>() {
+	    public GroupServiceAsync get() {
+		final GroupServiceAsync groupServiceAsync = (GroupServiceAsync) GWT.create(GroupService.class);
+		((ServiceDefTarget) groupServiceAsync).setServiceEntryPoint(GWT.getModuleBaseURL() + "GroupService");
+		return groupServiceAsync;
+	    }
+	}, SingletonScope.class);
+
 	builder.registerProvider(Session.class, new Provider<Session>() {
 	    public Session get() {
-		return new SessionImpl(Cookies.getCookie(Site.USERHASH), initialLang);
+		return new SessionImpl(Cookies.getCookie(Site.USERHASH), initialLang, p(UserServiceAsync.class));
 	    }
 	}, SingletonScope.class);
 
@@ -142,11 +180,10 @@ public class KuneModule implements Module {
 	    }
 	}, SingletonScope.class);
 
-	final I18nUITranslationService i18n = builder.getInstance(I18nUITranslationService.class);
+	final I18nUITranslationService i18n = i(I18nUITranslationService.class);
 	builder.registerProvider(KuneErrorHandler.class, new Provider<KuneErrorHandler>() {
 	    public KuneErrorHandler get() {
-		return new KuneErrorHandler(builder.getInstance(Session.class), i18n, builder
-			.getProvider(WorkspaceSkeleton.class));
+		return new KuneErrorHandler(i(Session.class), i18n, p(WorkspaceSkeleton.class));
 	    }
 	}, SingletonScope.class);
 
@@ -156,7 +193,7 @@ public class KuneModule implements Module {
 	    }
 	}, SingletonScope.class);
 
-	final KuneErrorHandler errorHandler = builder.getInstance(KuneErrorHandler.class);
+	final KuneErrorHandler errorHandler = i(KuneErrorHandler.class);
 	AsyncCallbackSimple.init(errorHandler);
 
 	builder.registerProvider(ColorTheme.class, new Provider<ColorTheme>() {
@@ -177,16 +214,16 @@ public class KuneModule implements Module {
 	    }
 	}, SingletonScope.class);
 
-	final WorkspaceSkeleton ws = builder.getInstance(WorkspaceSkeleton.class);
-	final Images images = builder.getInstance(Images.class);
+	final WorkspaceSkeleton ws = i(WorkspaceSkeleton.class);
+	final Images images = i(Images.class);
 
 	builder.registerProvider(Application.class, new Provider<Application>() {
 	    public Application get() {
-		final Session session = builder.getInstance(Session.class);
+		final Session session = i(Session.class);
 		final ExtensibleWidgetsManager extensionPointManager = builder
 			.getInstance(ExtensibleWidgetsManager.class);
 		return new ApplicationDefault(session, extensionPointManager, i18n, builder
-			.getInstance(ColorTheme.class), builder.getInstance(KuneErrorHandler.class), ws);
+			.getInstance(ColorTheme.class), i(KuneErrorHandler.class), ws);
 	    }
 	}, SingletonScope.class);
 
@@ -211,7 +248,7 @@ public class KuneModule implements Module {
 
 	builder.registerProvider(Site.class, new Provider<Site>() {
 	    public Site get() {
-		return new Site(i18n, builder.getInstance(SiteProgress.class), builder.getProvider(SiteMessage.class));
+		return new Site(i18n, i(SiteProgress.class), p(SiteMessage.class));
 	    }
 	}, SingletonScope.class);
 
@@ -224,13 +261,12 @@ public class KuneModule implements Module {
 	    }
 	}, SingletonScope.class);
 
-	builder.getInstance(SiteProgress.class);
-	builder.getInstance(Site.class);
+	i(SiteProgress.class);
+	i(Site.class);
 
 	builder.registerProvider(SiteSignInLink.class, new Provider<SiteSignInLink>() {
 	    public SiteSignInLink get() {
-		final SiteSignInLinkPresenter presenter = new SiteSignInLinkPresenter(builder
-			.getInstance(Session.class));
+		final SiteSignInLinkPresenter presenter = new SiteSignInLinkPresenter(i(Session.class));
 		final SiteSignInLinkPanel panel = new SiteSignInLinkPanel(presenter, i18n, ws);
 		presenter.init(panel);
 		return presenter;
@@ -239,9 +275,8 @@ public class KuneModule implements Module {
 
 	builder.registerProvider(SiteSignOutLink.class, new Provider<SiteSignOutLink>() {
 	    public SiteSignOutLink get() {
-		final SiteSignOutLinkPresenter presenter = new SiteSignOutLinkPresenter(builder
-			.getInstance(Session.class), UserService.App.getInstance(), builder
-			.getInstance(KuneErrorHandler.class));
+		final SiteSignOutLinkPresenter presenter = new SiteSignOutLinkPresenter(i(Session.class),
+			p(UserServiceAsync.class), p(KuneErrorHandler.class));
 		final SiteSignOutLinkPanel panel = new SiteSignOutLinkPanel(presenter, i18n, ws);
 		presenter.init(panel);
 		return presenter;
@@ -251,7 +286,7 @@ public class KuneModule implements Module {
 	builder.registerProvider(SiteNewGroupLink.class, new Provider<SiteNewGroupLink>() {
 	    public SiteNewGroupLink get() {
 		final SiteNewGroupLinkPresenter presenter = new SiteNewGroupLinkPresenter();
-		final SiteNewGroupLinkPanel panel = new SiteNewGroupLinkPanel(presenter, ws);
+		final SiteNewGroupLinkPanel panel = new SiteNewGroupLinkPanel(presenter, ws, i18n);
 		presenter.init(panel);
 		return presenter;
 	    }
@@ -268,7 +303,7 @@ public class KuneModule implements Module {
 
 	builder.registerProvider(SiteLogo.class, new Provider<SiteLogo>() {
 	    public SiteLogo get() {
-		final SiteLogoPresenter presenter = new SiteLogoPresenter(builder.getInstance(Session.class));
+		final SiteLogoPresenter presenter = new SiteLogoPresenter(i(Session.class));
 		final SiteLogoPanel panel = new SiteLogoPanel(presenter, ws);
 		presenter.init(panel);
 		return presenter;
@@ -286,7 +321,7 @@ public class KuneModule implements Module {
 
 	builder.registerProvider(SiteSearch.class, new Provider<SiteSearch>() {
 	    public SiteSearch get() {
-		final SiteSearchPresenter presenter = new SiteSearchPresenter(builder.getProvider(SiteSearcher.class));
+		final SiteSearchPresenter presenter = new SiteSearchPresenter(p(SiteSearcher.class));
 		final SiteSearchPanel panel = new SiteSearchPanel(presenter, ws, i18n);
 		presenter.init(panel);
 		return presenter;
@@ -295,29 +330,39 @@ public class KuneModule implements Module {
 
 	builder.registerProvider(SignIn.class, new Provider<SignIn>() {
 	    public SignIn get() {
-		final SignInPresenter presenter = new SignInPresenter(builder.getInstance(Session.class), builder
-			.getInstance(StateManager.class), i18n, UserService.App.getInstance());
+		final SignInPresenter presenter = new SignInPresenter(i(Session.class), builder
+			.getInstance(StateManager.class), i18n, i(UserServiceAsync.class));
 		final SignInPanel view = new SignInPanel(presenter, i18n, ws);
 		presenter.init(view);
 		return presenter;
 	    }
 	}, SingletonScope.class);
 
+	builder.registerProvider(LicenseChoose.class, new Provider<LicenseChoose>() {
+	    public LicenseChoose get() {
+		final LicenseChoosePresenter presenter = new LicenseChoosePresenter(i(Session.class));
+		final LicenseChoosePanel view = new LicenseChoosePanel(presenter, i18n);
+		presenter.init(view);
+		return presenter;
+	    }
+	});
+
 	builder.registerProvider(NewGroup.class, new Provider<NewGroup>() {
 	    public NewGroup get() {
-		final NewGroupPresenter presenter = new NewGroupPresenter(null, i18n);
-		final NewGroupPanel view = new NewGroupPanel(presenter, i18n);
+		final NewGroupPresenter presenter = new NewGroupPresenter(i18n, i(Session.class),
+			i(StateManager.class), p(GroupServiceAsync.class));
+		final NewGroupPanel view = new NewGroupPanel(presenter, i18n, p(LicenseChoose.class));
 		presenter.init(view);
 		return presenter;
 	    }
 	}, SingletonScope.class);
 
-	builder.getInstance(SitePublicSpaceLink.class);
-	builder.getInstance(SiteSignInLink.class);
-	builder.getInstance(SiteSignOutLink.class);
-	builder.getInstance(SiteNewGroupLink.class);
-	builder.getInstance(SiteSearch.class);
-	builder.getInstance(SiteLogo.class);
+	i(SitePublicSpaceLink.class);
+	i(SiteSignInLink.class);
+	i(SiteSignOutLink.class);
+	i(SiteNewGroupLink.class);
+	i(SiteSearch.class);
+	i(SiteLogo.class);
 
 	builder.registerProvider(EntityLogo.class, new Provider<EntityLogo>() {
 	    public EntityLogo get() {
@@ -327,7 +372,7 @@ public class KuneModule implements Module {
 
 	builder.registerProvider(WsThemePresenter.class, new Provider<WsThemePresenter>() {
 	    public WsThemePresenter get() {
-		final WsThemePresenter presenter = new WsThemePresenter(builder.getInstance(Session.class));
+		final WsThemePresenter presenter = new WsThemePresenter(i(Session.class), p(GroupServiceAsync.class));
 		final WsThemePanel panel = new WsThemePanel(ws, presenter, i18n);
 		presenter.init(panel);
 		return presenter;
@@ -364,14 +409,12 @@ public class KuneModule implements Module {
 
 	builder.registerProvider(WorkspaceManager.class, new Provider<WorkspaceManager>() {
 	    public WorkspaceManager get() {
-		final WorkspaceManager presenter = new WorkspaceManager(builder.getInstance(SitePublicSpaceLink.class),
-			builder.getInstance(EntityLogo.class), builder.getInstance(EntityTitlePresenter.class), builder
+		final WorkspaceManager presenter = new WorkspaceManager(i(SitePublicSpaceLink.class),
+			i(EntityLogo.class), i(EntityTitlePresenter.class), builder
 				.getInstance(EntitySubTitlePresenter.class), builder
-				.getInstance(WsThemePresenter.class),
-			builder.getInstance(EntityLicensePresenter.class), builder
+				.getInstance(WsThemePresenter.class), i(EntityLicensePresenter.class), builder
 				.getProvider(GroupMembersSummary.class), builder
-				.getProvider(ParticipationSummary.class), builder.getProvider(TagsSummary.class),
-			builder.getProvider(GroupSummary.class));
+				.getProvider(ParticipationSummary.class), p(TagsSummary.class), p(GroupSummary.class));
 		return presenter;
 	    }
 	}, SingletonScope.class);
@@ -379,8 +422,8 @@ public class KuneModule implements Module {
 	builder.registerProvider(StateManager.class, new Provider<StateManager>() {
 	    public StateManager get() {
 		final StateManagerDefault stateManager = new StateManagerDefault(new ContentProviderImpl(
-			ContentService.App.getInstance()), builder.getInstance(Session.class),
-			new HistoryWrapperImpl(), builder.getInstance(WorkspaceManager.class));
+			ContentService.App.getInstance()), i(Session.class), new HistoryWrapperImpl(),
+			i(WorkspaceManager.class));
 		History.addHistoryListener(stateManager);
 		return stateManager;
 	    }
@@ -388,9 +431,9 @@ public class KuneModule implements Module {
 
 	builder.registerProvider(GroupMembersSummary.class, new Provider<GroupMembersSummary>() {
 	    public GroupMembersSummary get() {
-		final GroupMembersSummaryPresenterNew presenter = new GroupMembersSummaryPresenterNew(i18n, builder
-			.getProvider(StateManager.class), builder.getInstance(ImageUtils.class), builder
-			.getInstance(Session.class), SocialNetworkService.App.getInstance());
+		final GroupMembersSummaryPresenterNew presenter = new GroupMembersSummaryPresenterNew(i18n,
+			p(StateManager.class), i(ImageUtils.class), i(Session.class),
+			p(SocialNetworkServiceAsync.class));
 		final GroupMembersSummaryViewNew view = new GroupMembersSummaryPanelNew(presenter, i18n, ws);
 		presenter.init(view);
 		return presenter;
@@ -408,9 +451,9 @@ public class KuneModule implements Module {
 
 	builder.registerProvider(ParticipationSummary.class, new Provider<ParticipationSummary>() {
 	    public ParticipationSummary get() {
-		final ParticipationSummaryPresenter presenter = new ParticipationSummaryPresenter(i18n, builder
-			.getProvider(StateManager.class), builder.getInstance(ImageUtils.class), builder
-			.getInstance(Session.class), SocialNetworkService.App.getInstance());
+		final ParticipationSummaryPresenter presenter = new ParticipationSummaryPresenter(i18n,
+			p(StateManager.class), i(ImageUtils.class), i(Session.class),
+			p(SocialNetworkServiceAsync.class));
 		final ParticipationSummaryView view = new ParticipationSummaryPanel(presenter, i18n, ws);
 		presenter.init(view);
 		return presenter;
@@ -419,8 +462,8 @@ public class KuneModule implements Module {
 
 	builder.registerProvider(TagsSummary.class, new Provider<TagsSummary>() {
 	    public TagsSummary get() {
-		final TagsSummaryPresenter presenter = new TagsSummaryPresenter(builder.getProvider(Session.class),
-			builder.getProvider(SiteSearcher.class));
+		final TagsSummaryPresenter presenter = new TagsSummaryPresenter(p(Session.class), builder
+			.getProvider(SiteSearcher.class));
 		final TagsSummaryPanel panel = new TagsSummaryPanel(presenter, i18n, ws);
 		presenter.init(panel);
 		return presenter;
@@ -428,15 +471,26 @@ public class KuneModule implements Module {
 	}, SingletonScope.class);
 
 	// Register of tokens like "signin", "newgroup", "translate" etcetera
-	builder.getInstance(StateManager.class).addSiteToken(SiteToken.signin.toString(), new Slot<StateToken>() {
+	i(StateManager.class).addSiteToken(SiteToken.signin.toString(), new Slot<StateToken>() {
 	    public void onEvent(final StateToken previousStateToken) {
-		builder.getInstance(SignIn.class).doSignIn(previousStateToken);
+		i(SignIn.class).doSignIn(previousStateToken);
 	    }
 	});
 
-	// builder.registerProvider(type, new Provider<>() {},
-	// SingletonScope.class)
+	i(StateManager.class).addSiteToken(SiteToken.newgroup.toString(), new Slot<StateToken>() {
+	    public void onEvent(final StateToken previousStateToken) {
+		i(NewGroup.class).doNewGroup(previousStateToken);
+	    }
+	});
 
+    }
+
+    private <T> T i(final Class<T> componentType) {
+	return builder.getInstance(componentType);
+    }
+
+    private <T> Provider<T> p(final Class<T> componentKey) {
+	return builder.getProvider(componentKey);
     }
 
 }

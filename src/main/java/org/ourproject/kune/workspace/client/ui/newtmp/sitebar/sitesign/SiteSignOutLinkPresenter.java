@@ -11,6 +11,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.sitebar.rpc.UserServiceAsync;
 
+import com.calclab.suco.client.container.Provider;
 import com.calclab.suco.client.signal.Slot;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Cookies;
@@ -20,12 +21,12 @@ public class SiteSignOutLinkPresenter implements SiteSignOutLink {
 
     private SiteSignOutLinkView view;
     private final Session session;
-    private final UserServiceAsync userService;
+    private final Provider<UserServiceAsync> userServiceProvider;
 
-    public SiteSignOutLinkPresenter(final Session session, final UserServiceAsync userService,
-	    final KuneErrorHandler errorHandler) {
+    public SiteSignOutLinkPresenter(final Session session, final Provider<UserServiceAsync> userServiceProvider,
+	    final Provider<KuneErrorHandler> kuneErrorHandlerProvider) {
 	this.session = session;
-	this.userService = userService;
+	this.userServiceProvider = userServiceProvider;
 	session.onUserSignIn(new Slot<UserInfoDTO>() {
 	    public void onEvent(final UserInfoDTO parameter) {
 		view.setVisible(true);
@@ -36,7 +37,7 @@ public class SiteSignOutLinkPresenter implements SiteSignOutLink {
 		view.setVisible(false);
 	    }
 	});
-	errorHandler.onSessionExpired(new Slot<Object>() {
+	kuneErrorHandlerProvider.get().onSessionExpired(new Slot<Object>() {
 	    public void onEvent(final Object parameter) {
 		clientUIsignOut();
 	    }
@@ -65,7 +66,7 @@ public class SiteSignOutLinkPresenter implements SiteSignOutLink {
 	    }
 
 	};
-	userService.logout(session.getUserHash(), callback);
+	userServiceProvider.get().logout(session.getUserHash(), callback);
     }
 
     public View getView() {

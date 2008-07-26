@@ -48,9 +48,6 @@ import org.ourproject.kune.workspace.client.socialnet.GroupLiveSearchPresenter;
 import org.ourproject.kune.workspace.client.socialnet.UserLiveSearchPresenter;
 import org.ourproject.kune.workspace.client.socialnet.ui.GroupLiveSearchPanel;
 import org.ourproject.kune.workspace.client.socialnet.ui.UserLiveSearchPanel;
-import org.ourproject.kune.workspace.client.theme.ThemeMenuPanel;
-import org.ourproject.kune.workspace.client.theme.ThemeMenuPresenter;
-import org.ourproject.kune.workspace.client.theme.ThemeMenuView;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPanel;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPresenter;
@@ -67,7 +64,6 @@ import org.ourproject.kune.workspace.client.workspace.ContentToolBarComponent;
 import org.ourproject.kune.workspace.client.workspace.ContentToolBarPresenter;
 import org.ourproject.kune.workspace.client.workspace.ContentToolBarView;
 import org.ourproject.kune.workspace.client.workspace.GroupLiveSearchComponent;
-import org.ourproject.kune.workspace.client.workspace.ThemeMenuComponent;
 import org.ourproject.kune.workspace.client.workspace.UserLiveSearchComponent;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 import org.ourproject.kune.workspace.client.workspace.WorkspacePresenter;
@@ -82,7 +78,6 @@ public class WorkspaceFactory {
 
     private static Session session;
     private static I18nTranslationService i18n;
-    private static ColorTheme colorTheme;
     private static KuneErrorHandler errorHandler;
 
     public static ContentBottomToolBarComponent createContentBottomToolBarComponent() {
@@ -161,13 +156,6 @@ public class WorkspaceFactory {
 	return presenter;
     }
 
-    public static ThemeMenuComponent createThemeMenuComponent() {
-	final ThemeMenuPresenter presenter = new ThemeMenuPresenter();
-	final ThemeMenuView view = new ThemeMenuPanel(presenter, i18n, colorTheme);
-	presenter.init(view);
-	return presenter;
-    }
-
     public static UserLiveSearchComponent createUserLiveSearchComponent() {
 	final UserLiveSearchPresenter presenter = new UserLiveSearchPresenter();
 	final EntityLiveSearchView view = new UserLiveSearchPanel(presenter, i18n);
@@ -180,7 +168,6 @@ public class WorkspaceFactory {
 	    final ColorTheme colorTheme, final KuneErrorHandler errorHandler) {
 	WorkspaceFactory.session = session;
 	WorkspaceFactory.i18n = i18n;
-	WorkspaceFactory.colorTheme = colorTheme;
 	WorkspaceFactory.errorHandler = errorHandler;
 	final WorkspacePresenter workspace = new WorkspacePresenter(session);
 	final WorkspaceView view = new WorkspacePanel(workspace, i18n, colorTheme);

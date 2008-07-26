@@ -30,19 +30,6 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 public interface GroupService extends RemoteService {
 
-    public class App {
-	private static GroupServiceAsync ourInstance = null;
-
-	public static synchronized GroupServiceAsync getInstance() {
-	    if (ourInstance == null) {
-		ourInstance = (GroupServiceAsync) GWT.create(GroupService.class);
-		((ServiceDefTarget) ourInstance).setServiceEntryPoint(GWT.getModuleBaseURL() + "GroupService");
-	    }
-	    return ourInstance;
-	}
-
-    }
-
     void changeGroupWsTheme(String userHash, String groupShortName, String theme) throws DefaultException;
 
     StateToken createNewGroup(String userHash, GroupDTO group) throws DefaultException;

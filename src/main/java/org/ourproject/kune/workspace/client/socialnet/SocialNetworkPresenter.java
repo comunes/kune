@@ -5,7 +5,6 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
-import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
 import org.ourproject.kune.platf.client.services.ImageDescriptor;
 import org.ourproject.kune.platf.client.services.ImageUtils;
@@ -38,7 +37,7 @@ public class SocialNetworkPresenter {
     protected GridMenuItem<GroupDTO> unJoinMenuItem;
     private final I18nUITranslationService i18n;
     private final Provider<StateManager> stateManagerProvider;
-    private final SocialNetworkServiceAsync snService;
+    private final Provider<SocialNetworkServiceAsync> snServiceProvider;
     private final Session session;
     private final GridMenuItemCollection<GroupDTO> otherOperations;
     private final GridMenuItemCollection<GroupDTO> otherLoggedOperations;
@@ -46,12 +45,12 @@ public class SocialNetworkPresenter {
 
     public SocialNetworkPresenter(final I18nUITranslationService i18n,
 	    final Provider<StateManager> stateManagerProvider, final ImageUtils imageUtils, final Session session,
-	    final SocialNetworkServiceAsync snService) {
+	    final Provider<SocialNetworkServiceAsync> snServiceProvider) {
 	this.i18n = i18n;
 	this.stateManagerProvider = stateManagerProvider;
 	this.imageUtils = imageUtils;
 	this.session = session;
-	this.snService = snService;
+	this.snServiceProvider = snServiceProvider;
 	createButtons();
 	createMenuActions();
 	otherOperations = new GridMenuItemCollection<GroupDTO>();
@@ -102,8 +101,8 @@ public class SocialNetworkPresenter {
 		.t("Request to participate in this group"), new Slot<String>() {
 	    public void onEvent(final String parameter) {
 		Site.showProgressProcessing();
-		snService.requestJoinGroup(session.getUserHash(), session.getCurrentState().getGroup().getShortName(),
-			new AsyncCallbackSimple<Object>() {
+		snServiceProvider.get().requestJoinGroup(session.getUserHash(),
+			session.getCurrentState().getGroup().getShortName(), new AsyncCallbackSimple<Object>() {
 			    public void onSuccess(final Object result) {
 				Site.hideProgress();
 				final String resultType = (String) result;
@@ -168,8 +167,9 @@ public class SocialNetworkPresenter {
 		.t("Change to collaborator"), new Slot<GroupDTO>() {
 	    public void onEvent(final GroupDTO group) {
 		Site.showProgressProcessing();
-		snService.setCollabAsAdmin(session.getUserHash(), session.getCurrentState().getGroup().getShortName(),
-			group.getShortName(), new AsyncCallbackSimple<SocialNetworkResultDTO>() {
+		snServiceProvider.get().setCollabAsAdmin(session.getUserHash(),
+			session.getCurrentState().getGroup().getShortName(), group.getShortName(),
+			new AsyncCallbackSimple<SocialNetworkResultDTO>() {
 			    public void onSuccess(final SocialNetworkResultDTO result) {
 				Site.hideProgress();
 				Site.info(i18n.t("Type of member changed"));
@@ -182,8 +182,8 @@ public class SocialNetworkPresenter {
 		new Slot<GroupDTO>() {
 		    public void onEvent(final GroupDTO group) {
 			Site.showProgressProcessing();
-			snService.deleteMember(session.getUserHash(), session.getCurrentState().getGroup()
-				.getShortName(), group.getShortName(),
+			snServiceProvider.get().deleteMember(session.getUserHash(),
+				session.getCurrentState().getGroup().getShortName(), group.getShortName(),
 				new AsyncCallbackSimple<SocialNetworkResultDTO>() {
 				    public void onSuccess(final SocialNetworkResultDTO result) {
 					Site.hideProgress();
@@ -201,9 +201,8 @@ public class SocialNetworkPresenter {
 		new Slot<GroupDTO>() {
 		    public void onEvent(final GroupDTO group) {
 			Site.showProgressProcessing();
-			final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-			server.addAdminMember(session.getUserHash(), session.getCurrentState().getGroup()
-				.getShortName(), group.getShortName(),
+			snServiceProvider.get().addAdminMember(session.getUserHash(),
+				session.getCurrentState().getGroup().getShortName(), group.getShortName(),
 				new AsyncCallbackSimple<SocialNetworkResultDTO>() {
 				    public void onSuccess(final SocialNetworkResultDTO result) {
 					Site.hideProgress();
@@ -217,8 +216,8 @@ public class SocialNetworkPresenter {
 		new Slot<GroupDTO>() {
 		    public void onEvent(final GroupDTO group) {
 			Site.showProgressProcessing();
-			snService.AcceptJoinGroup(session.getUserHash(), session.getCurrentState().getGroup()
-				.getShortName(), group.getShortName(),
+			snServiceProvider.get().AcceptJoinGroup(session.getUserHash(),
+				session.getCurrentState().getGroup().getShortName(), group.getShortName(),
 				new AsyncCallbackSimple<SocialNetworkResultDTO>() {
 				    public void onSuccess(final SocialNetworkResultDTO result) {
 					Site.hideProgress();
@@ -232,8 +231,7 @@ public class SocialNetworkPresenter {
 		new Slot<GroupDTO>() {
 		    public void onEvent(final GroupDTO group) {
 			Site.showProgressProcessing();
-			final SocialNetworkServiceAsync server = SocialNetworkService.App.getInstance();
-			server.denyJoinGroup(session.getUserHash(),
+			snServiceProvider.get().denyJoinGroup(session.getUserHash(),
 				session.getCurrentState().getGroup().getShortName(), group.getShortName(),
 				new AsyncCallbackSimple<SocialNetworkResultDTO>() {
 				    public void onSuccess(final SocialNetworkResultDTO result) {
@@ -252,7 +250,7 @@ public class SocialNetworkPresenter {
 
     private void removeMemberAction(final GroupDTO groupDTO) {
 	Site.showProgressProcessing();
-	snService.unJoinGroup(session.getUserHash(), groupDTO.getShortName(),
+	snServiceProvider.get().unJoinGroup(session.getUserHash(), groupDTO.getShortName(),
 		new AsyncCallbackSimple<SocialNetworkResultDTO>() {
 		    public void onSuccess(final SocialNetworkResultDTO result) {
 			Site.hideProgress();
