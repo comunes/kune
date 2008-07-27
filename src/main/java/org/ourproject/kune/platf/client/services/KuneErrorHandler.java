@@ -33,6 +33,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.container.Provider;
 import com.calclab.suco.client.signal.Signal;
 import com.calclab.suco.client.signal.Slot;
@@ -65,31 +66,40 @@ public class KuneErrorHandler {
 	try {
 	    throw caught;
 	} catch (final AccessViolationException e) {
+	    logException(e);
 	    Site.error(i18n.t("You don't have rights to do that"));
 	} catch (final SessionExpiredException e) {
+	    logException(e);
 	    doSessionExpired();
 	} catch (final UserMustBeLoggedException e) {
+	    logException(e);
 	    if (session.isLogged()) {
 		doSessionExpired();
 	    } else {
 		Site.important(i18n.t("Please sign in or register to collaborate"));
 	    }
 	} catch (final GroupNotFoundException e) {
+	    logException(e);
 	    Site.error(i18n.t("Group not found"));
 	    DefaultDispatcher.getInstance().fire(PlatformEvents.GOTO, "");
 	} catch (final ContentNotFoundException e) {
+	    logException(e);
 	    Site.error(i18n.t("Content not found"));
 	    DefaultDispatcher.getInstance().fire(PlatformEvents.GOTO, "");
 	} catch (final LastAdminInGroupException e) {
+	    logException(e);
 	    getWorkspaceSkeleton().showAlertMessage(
 		    i18n.t("Warning"),
 		    i18n.t("Sorry, you are the last admin of this group."
 			    + " Look for someone to substitute you appropriately as admin before unjoin this group."));
 	} catch (final AlreadyGroupMemberException e) {
+	    logException(e);
 	    Site.error(i18n.t("This group is already a group member"));
 	} catch (final AlreadyUserMemberException e) {
+	    logException(e);
 	    Site.error(i18n.t("This user is already a member of this group"));
 	} catch (final Throwable e) {
+	    logException(e);
 	    Site.error(i18n.t("Error performing operation"));
 	    GWT.log("Other kind of exception in StateManagerDefault/processErrorException", null);
 	    throw new RuntimeException();
@@ -100,6 +110,10 @@ public class KuneErrorHandler {
 	onSessionExpired.fire(null);
 	getWorkspaceSkeleton().showAlertMessage(i18n.t("Session expired"),
 		i18n.t("Your session has expired. Please login again."));
+    }
+
+    private void logException(final Throwable e) {
+	Log.debug("Exception in KuneErrorHandler", e);
     }
 
 }

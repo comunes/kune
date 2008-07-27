@@ -21,16 +21,21 @@
 package org.ourproject.kune.chat.client;
 
 import org.ourproject.kune.platf.client.app.Application;
+import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.tool.AbstractClientTool;
+import org.ourproject.kune.platf.client.ui.gridmenu.GridMenuItem;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.workspace.GroupMembersSummary;
 
+import com.calclab.emite.client.xmpp.stanzas.XmppURI;
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
+import com.calclab.suco.client.container.Provider;
 import com.calclab.suco.client.signal.Slot;
 
 public class ChatClientTool extends AbstractClientTool implements ChatProvider {
@@ -42,7 +47,8 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
     private ChatEngine chat;
 
     public ChatClientTool(final Session session, final Application application, final I18nTranslationService i18n,
-	    final EmiteUIDialog emiteUIDialog, final WorkspaceSkeleton ws) {
+	    final EmiteUIDialog emiteUIDialog, final WorkspaceSkeleton ws,
+	    final Provider<GroupMembersSummary> groupMembersSummaryProvider) {
 	super(i18n.t("chat rooms"));
 	components = new ChatToolComponents(emiteUIDialog, i18n);
 	session.onInitDataReceived(new Slot<InitDataDTO>() {
@@ -50,6 +56,15 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
 		final ChatOptions chatOptions = new ChatOptions(initData.getChatHttpBase(), initData.getChatDomain(),
 			initData.getChatRoomHost());
 		chat = new ChatEngineXmpp(emiteUIDialog, chatOptions, i18n, ws);
+		groupMembersSummaryProvider.get().addGroupOperation(
+			new GridMenuItem<GroupDTO>("images/chat-basic.gif", i18n.t("Start a chat with this member"),
+				new Slot<GroupDTO>() {
+				    public void onEvent(final GroupDTO group) {
+					emiteUIDialog.chat(XmppURI.jid(group.getShortName() + "@"
+						+ initData.getChatDomain()));
+					emiteUIDialog.show();
+				    }
+				}), true);
 	    }
 	});
 	application.onApplicationStop(new Slot<Object>() {

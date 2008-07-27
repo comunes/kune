@@ -6,6 +6,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.workspace.GroupMembersSummary;
 
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
 import com.calclab.suco.client.container.Container;
@@ -28,7 +29,7 @@ public class ChatClientNewModule implements Module {
 	    public ChatClientTool get() {
 		return new ChatClientTool(builder.getInstance(Session.class), builder.getInstance(Application.class),
 			builder.getInstance(I18nUITranslationService.class), builder.getInstance(EmiteUIDialog.class),
-			builder.getInstance(WorkspaceSkeleton.class));
+			builder.getInstance(WorkspaceSkeleton.class), builder.getProvider(GroupMembersSummary.class));
 	    }
 	}, SingletonScope.class);
 

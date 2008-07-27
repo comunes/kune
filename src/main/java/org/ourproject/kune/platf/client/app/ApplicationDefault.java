@@ -119,7 +119,6 @@ public class ApplicationDefault implements Application {
 	    public void onFailure(final Throwable error) {
 		Site.error("Error fetching initial data");
 		Log.debug(error.getMessage());
-		ws.unMask();
 	    }
 
 	    public void onSuccess(final InitDataDTO initData) {
@@ -127,7 +126,6 @@ public class ApplicationDefault implements Application {
 		session.setInitData(initData);
 		session.setCurrentUserInfo(initData.getUserInfo());
 		stateManager.reload();
-		ws.unMask();
 	    }
 
 	    private void checkChatDomain(final String chatDomain) {

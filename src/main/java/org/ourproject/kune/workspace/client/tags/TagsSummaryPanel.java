@@ -59,6 +59,7 @@ public class TagsSummaryPanel extends DropDownPanel implements TagsSummaryView {
 	addStyleName("kune-Margin-Medium-t");
 	flowPanel.addStyleName("kune-Margin-Small-trbl");
 	ws.getEntitySummary().addInSummary(this);
+	ws.unMask();
     }
 
     public void setTags(final List<TagResultDTO> groupTags) {
