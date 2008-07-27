@@ -22,9 +22,11 @@ package org.ourproject.kune.workspace.client.socialnet.ui;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
-import org.ourproject.kune.workspace.client.socialnet.EntityLiveSearcherView;
 import org.ourproject.kune.workspace.client.socialnet.EntityLiveSearcherPresenter;
+import org.ourproject.kune.workspace.client.socialnet.EntityLiveSearcherView;
 
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DeferredCommand;
 import com.gwtext.client.core.Connection;
 import com.gwtext.client.core.Template;
 import com.gwtext.client.core.UrlParam;
@@ -138,10 +140,14 @@ public class EntityLiveSearcherPanel implements EntityLiveSearcherView {
 
 	cb.addListener(new ComboBoxListenerAdapter() {
 	    public void onSelect(final ComboBox comboBox, final Record record, final int index) {
-		final LinkDTO link = new LinkDTO(record.getAsString(SHORT_NAME_FIELD), record
-			.getAsString(LONG_NAME_FIELD), record.getAsString(ICON_URL_FIELD), record
-			.getAsString(LINK_FIELD));
-		presenter.onSelection(link);
+		DeferredCommand.addCommand(new Command() {
+		    public void execute() {
+			final LinkDTO link = new LinkDTO(record.getAsString(SHORT_NAME_FIELD), record
+				.getAsString(LONG_NAME_FIELD), record.getAsString(ICON_URL_FIELD), record
+				.getAsString(LINK_FIELD));
+			presenter.onSelection(link);
+		    }
+		});
 	    }
 	});
 

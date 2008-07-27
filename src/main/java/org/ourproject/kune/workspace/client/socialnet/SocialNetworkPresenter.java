@@ -155,7 +155,7 @@ public class SocialNetworkPresenter {
 		.t("Change to collaborator"), new Slot<GroupDTO>() {
 	    public void onEvent(final GroupDTO group) {
 		Site.showProgressProcessing();
-		snServiceProvider.get().setCollabAsAdmin(session.getUserHash(),
+		snServiceProvider.get().setAdminAsCollab(session.getUserHash(),
 			session.getCurrentState().getGroup().getShortName(), group.getShortName(),
 			new AsyncCallbackSimple<SocialNetworkResultDTO>() {
 			    public void onSuccess(final SocialNetworkResultDTO result) {
@@ -189,12 +189,12 @@ public class SocialNetworkPresenter {
 		new Slot<GroupDTO>() {
 		    public void onEvent(final GroupDTO group) {
 			Site.showProgressProcessing();
-			snServiceProvider.get().addAdminMember(session.getUserHash(),
+			snServiceProvider.get().setCollabAsAdmin(session.getUserHash(),
 				session.getCurrentState().getGroup().getShortName(), group.getShortName(),
 				new AsyncCallbackSimple<SocialNetworkResultDTO>() {
 				    public void onSuccess(final SocialNetworkResultDTO result) {
 					Site.hideProgress();
-					Site.info(i18n.t("Member added as admin"));
+					Site.info(i18n.t("Type of member changed"));
 					getStateManager().setSocialNetwork(result);
 				    }
 				});

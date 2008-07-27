@@ -69,7 +69,7 @@ public class KuneErrorHandler {
 	    logException(e);
 	    Site.error(i18n.t("You don't have rights to do that"));
 	} catch (final SessionExpiredException e) {
-	    logException(e);
+	    logException(e, true);
 	    doSessionExpired();
 	} catch (final UserMustBeLoggedException e) {
 	    logException(e);
@@ -99,7 +99,7 @@ public class KuneErrorHandler {
 	    logException(e);
 	    Site.error(i18n.t("This user is already a member of this group"));
 	} catch (final Throwable e) {
-	    logException(e);
+	    logException(e, true);
 	    Site.error(i18n.t("Error performing operation"));
 	    GWT.log("Other kind of exception in StateManagerDefault/processErrorException", null);
 	    throw new RuntimeException();
@@ -113,7 +113,15 @@ public class KuneErrorHandler {
     }
 
     private void logException(final Throwable e) {
-	Log.debug("Exception in KuneErrorHandler", e);
+	logException(e, false);
+    }
+
+    private void logException(final Throwable e, final boolean showException) {
+	if (showException) {
+	    Log.debug("Exception in KuneErrorHandler", e);
+	} else {
+	    Log.debug(e.getMessage());
+	}
     }
 
 }

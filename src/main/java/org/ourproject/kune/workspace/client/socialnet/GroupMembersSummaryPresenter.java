@@ -57,10 +57,9 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
 	addMember = new GridButton("images/add-green.gif", i18n.t("Add member"), i18n
 		.t("Add a group or a person as member of this group"), new Slot<String>() {
 	    public void onEvent(final String parameter) {
-		groupLiveSearcherProvider.get().onSelectionAdd(new Slot<LinkDTO>() {
+		groupLiveSearcherProvider.get().onSelection(new Slot<LinkDTO>() {
 		    public void onEvent(final LinkDTO link) {
 			view.confirmAddCollab(link.getShortName(), link.getLongName());
-			groupLiveSearcherProvider.get().onSelectionRemove(this);
 		    }
 		});
 		groupLiveSearcherProvider.get().show();

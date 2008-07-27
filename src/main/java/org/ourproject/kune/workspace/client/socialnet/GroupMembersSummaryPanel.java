@@ -14,6 +14,8 @@ import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 
 import com.calclab.emiteuimodule.client.users.UserGridPanel;
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DeferredCommand;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.BoxComponent;
 import com.gwtext.client.widgets.Button;
@@ -65,7 +67,11 @@ public class GroupMembersSummaryPanel extends DropDownPanel implements GroupMemb
 	    button.setTooltip(gridButton.getTooltip());
 	    button.addListener(new ButtonListenerAdapter() {
 		public void onClick(final Button button, final EventObject e) {
-		    gridButton.getSlot().onEvent("");
+		    DeferredCommand.addCommand(new Command() {
+			public void execute() {
+			    gridButton.getSlot().onEvent("");
+			}
+		    });
 		}
 	    });
 	    buttonsCache.put(gridButton, button);
@@ -95,7 +101,11 @@ public class GroupMembersSummaryPanel extends DropDownPanel implements GroupMemb
 		new MessageBox.ConfirmCallback() {
 		    public void execute(final String btnID) {
 			if (btnID.equals("yes")) {
-			    presenter.addCollab(groupShortName);
+			    DeferredCommand.addCommand(new Command() {
+				public void execute() {
+				    presenter.addCollab(groupShortName);
+				}
+			    });
 			}
 		    }
 		});

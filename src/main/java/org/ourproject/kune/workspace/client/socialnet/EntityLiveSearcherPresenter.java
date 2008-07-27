@@ -23,16 +23,14 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.workspace.client.workspace.EntityLiveSearcher;
 
-import com.calclab.suco.client.signal.Signal;
 import com.calclab.suco.client.signal.Slot;
 
 public class EntityLiveSearcherPresenter implements EntityLiveSearcher {
 
     private EntityLiveSearcherView view;
-    private Signal<LinkDTO> onSelection;
+    private Slot<LinkDTO> slot;
 
-    public void addListener(final EntityLiveSearchListener listener) {
-	this.onSelection = new Signal<LinkDTO>("onSelection");
+    public EntityLiveSearcherPresenter() {
     }
 
     public View getView() {
@@ -44,20 +42,15 @@ public class EntityLiveSearcherPresenter implements EntityLiveSearcher {
     }
 
     public void onSelection(final LinkDTO link) {
-	onSelection.fire(link);
+	slot.onEvent(link);
 	view.hide();
     }
 
-    public void onSelectionAdd(final Slot<LinkDTO> slot) {
-	onSelection.add(slot);
-    }
-
-    public void onSelectionRemove(final Slot<LinkDTO> slot) {
-	onSelection.remove(slot);
+    public void onSelection(final Slot<LinkDTO> slot) {
+	this.slot = slot;
     }
 
     public void show() {
 	view.show();
     }
-
 }

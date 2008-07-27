@@ -33,6 +33,7 @@ import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.workspace.client.sitebar.rpc.UserServiceAsync;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.container.Provider;
 import com.calclab.suco.client.signal.Signal;
 import com.calclab.suco.client.signal.Slot;
@@ -63,6 +64,7 @@ public class SessionImpl implements Session {
     }
 
     public void check(final AsyncCallbackSimple<?> callback) {
+	Log.debug("Checking session (userhash: " + getUserHash() + ")");
 	userServiceProvider.get().onlyCheckSession(getUserHash(), callback);
     }
 

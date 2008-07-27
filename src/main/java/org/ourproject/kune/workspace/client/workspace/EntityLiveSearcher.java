@@ -25,9 +25,7 @@ import com.calclab.suco.client.signal.Slot;
 
 public interface EntityLiveSearcher {
 
-    void onSelectionAdd(Slot<LinkDTO> slot);
-
-    void onSelectionRemove(Slot<LinkDTO> slot);
+    void onSelection(Slot<LinkDTO> slot);
 
     void show();
 
