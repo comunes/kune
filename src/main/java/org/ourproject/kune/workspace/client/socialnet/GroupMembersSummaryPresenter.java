@@ -20,8 +20,8 @@ import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
-import org.ourproject.kune.workspace.client.workspace.GroupLiveSearcher;
 import org.ourproject.kune.workspace.client.workspace.GroupMembersSummary;
+import org.ourproject.kune.workspace.client.workspace.UserLiveSearcher;
 
 import com.calclab.suco.client.container.Provider;
 import com.calclab.suco.client.signal.Slot;
@@ -40,7 +40,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
     public GroupMembersSummaryPresenter(final I18nUITranslationService i18n,
 	    final Provider<StateManager> stateManagerProvider, final ImageUtils imageUtils, final Session session,
 	    final Provider<SocialNetworkServiceAsync> snServiceProvider,
-	    final Provider<GroupLiveSearcher> groupLiveSearcherProvider) {
+	    final Provider<UserLiveSearcher> userLiveSearcherProvider) {
 	super(i18n, stateManagerProvider, imageUtils, session, snServiceProvider);
 	this.i18n = i18n;
 	this.session = session;
@@ -54,15 +54,16 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
 	pendigCategory = new GridGroup(pendingTitle, pendingTitle, i18n
 		.t("People pending to be accepted in this group by the admins"), imageUtils
 		.getImageHtml(ImageDescriptor.alert), true);
-	addMember = new GridButton("images/add-green.gif", i18n.t("Add member"), i18n
+	// i18n.t("Add member")
+	addMember = new GridButton("images/add-green.gif", "", i18n
 		.t("Add a group or a person as member of this group"), new Slot<String>() {
 	    public void onEvent(final String parameter) {
-		groupLiveSearcherProvider.get().onSelection(new Slot<LinkDTO>() {
+		userLiveSearcherProvider.get().onSelection(new Slot<LinkDTO>() {
 		    public void onEvent(final LinkDTO link) {
 			view.confirmAddCollab(link.getShortName(), link.getLongName());
 		    }
 		});
-		groupLiveSearcherProvider.get().show();
+		userLiveSearcherProvider.get().show();
 	    }
 	});
 	super.addGroupOperation(gotoMemberMenuItem, false);
@@ -117,11 +118,11 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
 	final boolean userCanView = rights.isVisible();
 	boolean userIsMember = isMember(userIsAdmin, userIsCollab);
 
-	view.setDropDownContentVisible(false);
 	view.clear();
 
 	if (userIsAdmin) {
 	    view.addButton(addMember);
+	    view.addToolbarFill();
 	}
 
 	view.setDraggable(session.isLogged());
@@ -143,13 +144,24 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
 			.addItem(createGridItem(collabCategory, collab, rights, changeToAdminMenuItem,
 				removeMemberMenuItem));
 	    }
-	    for (final GroupDTO pendingCollab : pendingCollabsList) {
-		view.addItem(createGridItem(pendigCategory, pendingCollab, rights, acceptJoinGroupMenuItem,
-			denyJoinGroupMenuItem));
+	    if (userIsAdmin) {
+		for (final GroupDTO pendingCollab : pendingCollabsList) {
+		    view.addItem(createGridItem(pendigCategory, pendingCollab, rights, acceptJoinGroupMenuItem,
+			    denyJoinGroupMenuItem));
+		}
 	    }
 	}
-	view.setDropDownContentVisible(true);
+	setMaxSize(adminsList.size(), collabList.size(), pendingCollabsList.size(), userIsAdmin);
 	view.setVisible(true);
+    }
+
+    private void setMaxSize(final int admins, final int collabs, final int pendingCollabs, final boolean isAdmin) {
+	final int members = admins + collabs + (isAdmin ? pendingCollabs : 0);
+	if (members > 2) {
+	    view.setMaxHeigth();
+	} else {
+	    view.setDefaultHeigth();
+	}
     }
 
 }

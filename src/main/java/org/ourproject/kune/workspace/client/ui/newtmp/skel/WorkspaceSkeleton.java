@@ -7,8 +7,6 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.gwtext.client.core.ExtElement;
 import com.gwtext.client.widgets.MessageBox;
 import com.gwtext.client.widgets.Panel;
-import com.gwtext.client.widgets.QuickTip;
-import com.gwtext.client.widgets.QuickTips;
 import com.gwtext.client.widgets.Toolbar;
 import com.gwtext.client.widgets.Viewport;
 import com.gwtext.client.widgets.layout.FitLayout;
@@ -22,12 +20,6 @@ public class WorkspaceSkeleton {
 
     public WorkspaceSkeleton() {
 	extRootBody = new ExtElement(RootPanel.getBodyElement());
-	mask();
-	QuickTips.init(); // extgwt tips
-	final QuickTip quickTipInstance = QuickTips.getQuickTip();
-	quickTipInstance.setDismissDelay(8000);
-	quickTipInstance.setHideDelay(500);
-	quickTipInstance.setInterceptTitles(true);
 	container = new Panel();
 	container.setLayout(new FitLayout());
 	container.setBorder(false);
@@ -85,7 +77,6 @@ public class WorkspaceSkeleton {
 
     public void unMask() {
 	extRootBody.unmask();
-	RootPanel.get("kuneinitialcurtain").setVisible(false);
     }
 
 }

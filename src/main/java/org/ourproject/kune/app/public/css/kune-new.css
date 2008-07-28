@@ -71,7 +71,7 @@
     height: 27px;
 }
 
-.k-entitytextlogo-def .gwt-Label {
+.k-entitytextlogo-default .gwt-Label {
     color: #69312F;
 }
 
@@ -104,7 +104,7 @@
     background-color: #FFF;
 }
 
-.k-entity-def .x-layout-split {
+.k-entity-default .x-layout-split {
     background: #DD8A3D none repeat scroll 0% 50%;
 }
 
@@ -132,7 +132,7 @@
     background: transparent none repeat scroll 0% 50%;
 }
 
-.k-entityworkspace-def .x-layout-split {
+.k-entityworkspace-default .x-layout-split {
     background: #DEAA87 none repeat scroll 0% 50%;
 }
 
@@ -174,7 +174,7 @@
     white-space: nowrap;
 }
 
-.k-entity-title-rd-def {
+.k-entity-title-rd-default {
     background: #DD8A3D;
 }
 
@@ -198,7 +198,7 @@
     background: #D40000;
 }
 
-.k-entity-title-def {
+.k-entity-title-default {
     background: #F1BB59 none repeat scroll 0% 50%;
     border-left-color: #DD8A3D;
 }
@@ -228,7 +228,7 @@
     border-left-color: #D40000;
 }
 
-.k-entity-title-def div {
+.k-entity-title-default div {
     color: #69312F;
 }
 
@@ -252,7 +252,7 @@
     color: #800000;
 }
 
-.k-entity-subtitle-def {
+.k-entity-subtitle-default {
     background: #DD8A3D none repeat scroll 0% 50%;
 }
 
@@ -276,7 +276,7 @@
     background: #D40000 none repeat scroll 0% 50%;
 }
 
-.k-entity-subtitle-def div {
+.k-entity-subtitle-default div {
     color: #FFF;
 }
 
@@ -300,7 +300,7 @@
     color: #FFF;
 }
 
-.k-entity-bottom-rd-def, .k-entity-bottom-def {
+.k-entity-bottom-rd-default, .k-entity-bottom-default {
     background: #DD8A3D;
 }
 
@@ -330,7 +330,7 @@
     text-decoration: underline;
 }
 
-.k-entity-container-def div {
+.k-entity-container-default div {
     background: #FFD09D none repeat scroll 0% 50%;
 }
 
@@ -412,7 +412,7 @@
 .k-dropdownouter-members {
 }
 
-.k-dropdownouter-members-def {
+.k-dropdownouter-members-default {
     background-color: #DF5244;
 }
 
@@ -439,7 +439,7 @@
 .k-dropdownouter-part {
 }
 
-.k-dropdownouter-part-def {
+.k-dropdownouter-part-default {
     background-color: #CA5842;
 }
 
@@ -466,7 +466,7 @@
 .k-dropdownouter-tags {
 }
 
-.k-dropdownouter-tags-def {
+.k-dropdownouter-tags-default {
     background-color: #87501E;
 }
 
@@ -493,7 +493,7 @@
 .k-dropdownouter-summary {
 }
 
-.k-dropdownouter-summary-def {
+.k-dropdownouter-summary-default {
     background-color: #9F734B;
 }
 
@@ -538,7 +538,7 @@
     margin: 0 3px 0 1px;
 }
 /* WsTheme */
-.k-wstheme-icon-def {
+.k-wstheme-icon-default {
     background: #FF8C00;
 }
 

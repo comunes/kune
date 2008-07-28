@@ -32,6 +32,7 @@ import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -59,7 +60,7 @@ public class TagsSummaryPanel extends DropDownPanel implements TagsSummaryView {
 	addStyleName("kune-Margin-Medium-t");
 	flowPanel.addStyleName("kune-Margin-Small-trbl");
 	ws.getEntitySummary().addInSummary(this);
-	ws.unMask();
+	RootPanel.get("kuneinitialcurtain").setVisible(false);
     }
 
     public void setTags(final List<TagResultDTO> groupTags) {

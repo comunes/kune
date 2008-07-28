@@ -469,6 +469,18 @@ legend {
   margin-top: 3px;
 }
 
+.kune-Margin-Small-l {
+  margin-left: 3px;
+}
+
+.kune-Margin-Small-r {
+  margin-right: 3px;
+}
+
+.kune-Margin-Small-b {
+  margin-bottom: 3px;
+}
+
 .kune-Margin-Mini-trbl {
   margin: 1px;
 }
@@ -494,6 +506,10 @@ legend {
 
 .kune-Margin-Mini-r {
   margin-right: 1px;
+}
+
+.kune-Margin-Mini-b {
+  margin-bottom: 1px;
 }
 
 .kune-Margin-Mini-l {

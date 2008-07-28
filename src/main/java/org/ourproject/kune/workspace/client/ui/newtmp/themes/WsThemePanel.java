@@ -40,9 +40,8 @@ public class WsThemePanel extends ToolbarButton implements WsThemeView {
 	    final WsTheme theme = new WsTheme(themes[i]);
 	    final MenuItem item = new MenuItem();
 	    final String name = theme.getName();
-	    final String itemText = name.equals("def") ? i18n.t("default") : i18n.t(name);
 	    item.setIconCls("k-wstheme-icon-" + name);
-	    item.setText(itemText);
+	    item.setText(i18n.t(name));
 	    menu.addItem(item);
 	    item.addListener(new BaseItemListenerAdapter() {
 		@Override

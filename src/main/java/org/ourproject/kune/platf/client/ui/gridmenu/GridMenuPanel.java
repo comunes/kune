@@ -5,7 +5,6 @@ import java.util.HashMap;
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.signal.Signal;
 import com.calclab.suco.client.signal.Slot;
-import com.google.gwt.user.client.ui.Composite;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.SortDir;
 import com.gwtext.client.data.ArrayReader;
@@ -36,7 +35,7 @@ import com.gwtext.client.widgets.grid.RowSelectionModel;
 import com.gwtext.client.widgets.grid.event.GridRowListener;
 import com.gwtext.client.widgets.layout.FitLayout;
 
-public class GridMenuPanel<T> extends Composite {
+public class GridMenuPanel<T> extends Panel {
     public static final String GRID_MENU_PANEL_DD = "gridMenuPanelDD";
     public static final int DEFAULT_INITIAL_WIDTH = 150;
     private static final String GROUP = "groupField";
@@ -55,7 +54,6 @@ public class GridMenuPanel<T> extends Composite {
     private RecordDef recordDef;
     private GroupingStore store;
     private GridPanel grid;
-    private final Panel panel;
     private final boolean grouped;
     private final boolean withCounters;
     private final Signal<String> onClick;
@@ -101,20 +99,19 @@ public class GridMenuPanel<T> extends Composite {
 	this.grouped = grouped;
 	this.withCounters = withCounters;
 	this.withEndIcon = withEndIcon;
-	panel = new Panel();
-	panel.setBorder(false);
-	panel.setLayout(new FitLayout());
+	super.setBorder(false);
+	super.setLayout(new FitLayout());
+	//super.setAutoScroll(true);
 	if (withTopBar) {
 	    topBar = new Toolbar();
-	    panel.setTopToolbar(topBar);
+	    super.setTopToolbar(topBar);
 	}
 	if (withBottomBar) {
 	    bottomBar = new Toolbar();
-	    panel.setBottomToolbar(bottomBar);
+	    super.setBottomToolbar(bottomBar);
 	}
 	menuMap = new HashMap<String, GridMenu<T>>();
 	recordMap = new HashMap<T, Record>();
-	initWidget(panel);
     }
 
     public GridMenuPanel(final String emptyText, final GridDropConfiguration gridDropConfiguration) {
@@ -172,6 +169,12 @@ public class GridMenuPanel<T> extends Composite {
 	};
     }
 
+    public void doLayoutIfNeeded() {
+	if (super.isRendered()) {
+	    super.doLayout();
+	}
+    }
+
     public Toolbar getBottomBar() {
 	assert bottomBar != null;
 	return bottomBar;
@@ -210,9 +213,19 @@ public class GridMenuPanel<T> extends Composite {
 	}
     }
 
+    @Override
+    public void setHeight(final int height) {
+	super.setHeight(height);
+	// grid.setHeight(height);
+	doLayoutIfNeeded();
+    }
+
+    @Override
     public void setWidth(final int width) {
 	if (grid != null) {
+	    // grid.setWidth(width - 27);
 	    grid.setWidth(width - 27);
+	    //super.setWidth(width - 11);
 	    doLayoutIfNeeded();
 	}
     }
@@ -420,18 +433,12 @@ public class GridMenuPanel<T> extends Composite {
 	} else {
 	    grid.setDraggable(false);
 	}
-	panel.add(grid);
+	super.add(grid);
     }
 
     private void createGridIfNeeded() {
 	if (grid == null) {
 	    createGrid(emptyText, gridDragConfiguration, gridDropConfiguration);
-	}
-    }
-
-    private void doLayoutIfNeeded() {
-	if (panel.isRendered()) {
-	    panel.doLayout();
 	}
     }
 

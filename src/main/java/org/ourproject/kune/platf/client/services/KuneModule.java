@@ -21,6 +21,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.SessionImpl;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.state.StateManagerDefault;
+import org.ourproject.kune.platf.client.ui.QuickTipHelper;
 import org.ourproject.kune.platf.client.ui.rate.RateIt;
 import org.ourproject.kune.platf.client.ui.rate.RateItPanel;
 import org.ourproject.kune.platf.client.ui.rate.RateItPresenter;
@@ -148,6 +149,14 @@ public class KuneModule implements Module {
 		return i18n;
 	    }
 	}, SingletonScope.class);
+
+	builder.registerProvider(QuickTipHelper.class, new Provider<QuickTipHelper>() {
+	    public QuickTipHelper get() {
+		return new QuickTipHelper();
+	    }
+	}, SingletonScope.class);
+
+	i(QuickTipHelper.class);
 
 	builder.registerProvider(UserServiceAsync.class, new Provider<UserServiceAsync>() {
 	    public UserServiceAsync get() {
@@ -479,7 +488,7 @@ public class KuneModule implements Module {
 	    public GroupMembersSummary get() {
 		final GroupMembersSummaryPresenter presenter = new GroupMembersSummaryPresenter(i18n,
 			p(StateManager.class), i(ImageUtils.class), i(Session.class),
-			p(SocialNetworkServiceAsync.class), p(GroupLiveSearcher.class));
+			p(SocialNetworkServiceAsync.class), p(UserLiveSearcher.class));
 		final GroupMembersSummaryView view = new GroupMembersSummaryPanel(presenter, i18n, ws);
 		presenter.init(view);
 		return presenter;

@@ -213,7 +213,6 @@
     </dependency>
 
     <!-- jetty dependencies -->
-    <!--   for jetty:continuations: -->
     <dependency>
       <groupId>org.mortbay.jetty</groupId>
       <artifactId>jetty-util</artifactId>

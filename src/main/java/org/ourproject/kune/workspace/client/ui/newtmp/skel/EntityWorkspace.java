@@ -1,6 +1,5 @@
 package org.ourproject.kune.workspace.client.ui.newtmp.skel;
 
-import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.ui.DefaultBorderLayout;
 import org.ourproject.kune.platf.client.ui.RoundedPanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
@@ -31,7 +30,6 @@ public class EntityWorkspace extends DefaultBorderLayout {
 	final Panel bottomPanel = new Panel();
 	bottomPanel.setBorder(false);
 	bottomPanel.setLayout(new AnchorLayout());
-	;
 
 	title = new TitleBar();
 	title.setHeight("" + (DEF_TOOLBAR_HEIGHT - 2));
@@ -81,7 +79,7 @@ public class EntityWorkspace extends DefaultBorderLayout {
 	add(titles, DefaultBorderLayout.Position.NORTH, DEF_TOOLBAR_HEIGHT * 2);
 	add(contentWrap.getPanel(), DefaultBorderLayout.Position.CENTER);
 	add(containerWrap.getPanel(), DefaultBorderLayout.Position.EAST, true, 175);
-	add(bottomPanel, DefaultBorderLayout.Position.SOUTH, DEF_TOOLBAR_HEIGHT);
+	add(bottomPanel, DefaultBorderLayout.Position.SOUTH, DEF_TOOLBAR_HEIGHT + 2);
     }
 
     public TitleBar getBottomTitle() {
@@ -112,12 +110,12 @@ public class EntityWorkspace extends DefaultBorderLayout {
 	return title;
     }
 
-    public void setContainer(final View view) {
-	setPanel(container, (Widget) view);
+    public void setContainer(final Widget widget) {
+	setPanel(container, widget);
     }
 
-    public void setContent(final View view) {
-	setPanel(content, (Widget) view);
+    public void setContent(final Widget widget) {
+	setPanel(content, widget);
     }
 
     public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {

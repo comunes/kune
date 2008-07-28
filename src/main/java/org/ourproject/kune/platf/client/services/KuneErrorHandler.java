@@ -102,7 +102,6 @@ public class KuneErrorHandler {
 	    logException(e, true);
 	    Site.error(i18n.t("Error performing operation"));
 	    GWT.log("Other kind of exception in StateManagerDefault/processErrorException", null);
-	    throw new RuntimeException();
 	}
     }
 

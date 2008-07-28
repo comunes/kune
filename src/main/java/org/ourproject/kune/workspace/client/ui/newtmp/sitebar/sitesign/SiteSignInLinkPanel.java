@@ -18,7 +18,8 @@ public class SiteSignInLinkPanel implements SiteSignInLinkView {
 	signInHyperlink.setTargetHistoryToken(SiteToken.signin.toString());
 	loggedUserMenu = new ToolbarButton("user");
 	ws.getSiteBar().add(signInHyperlink);
-	// ws.getSiteBar().add(loggedUserMenu);
+	// ws.getEntityWorkspace().setContainer(loggedUserMenu);
+	// loggedUserMenu.render(loggedUserMenu.getElement());
     }
 
     public void setLoggedUserMenuVisible(final boolean visible) {

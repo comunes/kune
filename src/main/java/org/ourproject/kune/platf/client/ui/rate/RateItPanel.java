@@ -120,7 +120,7 @@ public class RateItPanel extends Composite implements ClickListener, RateItView 
 	rateGrid.setCellSpacing(0);
 	rateGrid.setBorderWidth(0);
 	rateItLabel.addStyleName("kune-Margin-Medium-r");
-	rateItLabel.addStyleName("kune-Margin-Medium-l");
+	// rateItLabel.addStyleName("kune-Margin-Medium-l");
 	rateItLabel.addStyleName("kune-RatePanel-Label");
 	rateGrid.addStyleName("kune-RatePanel-Stars");
 	rateGrid.addStyleName("kune-RatePanel-Stars-RateIt");

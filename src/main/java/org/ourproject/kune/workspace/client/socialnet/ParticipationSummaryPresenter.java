@@ -65,7 +65,6 @@ public class ParticipationSummaryPresenter extends SocialNetworkPresenter implem
     public void setState(final StateDTO state) {
 	final ParticipationDataDTO participation = state.getParticipation();
 	final AccessRightsDTO rights = state.getGroupRights();
-	view.setContentVisible(false);
 	view.clear();
 	final List<LinkDTO> groupsIsAdmin = participation.getGroupsIsAdmin();
 	final List<LinkDTO> groupsIsCollab = participation.getGroupsIsCollab();
@@ -89,7 +88,6 @@ public class ParticipationSummaryPresenter extends SocialNetworkPresenter implem
 	    view.addItem(createGridItem(collabCategory, group, rights, unJoinMenuItem));
 	}
 	if (numAdmins > 0 || numCollaborators > 0) {
-	    view.setContentVisible(true);
 	    view.show();
 	} else {
 	    hide();

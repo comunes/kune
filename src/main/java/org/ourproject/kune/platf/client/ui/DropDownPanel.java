@@ -105,20 +105,14 @@ public class DropDownPanel extends Composite implements ClickListener {
 	vp.setStylePrimaryName(stylePrimaryName);
     }
 
-    @Deprecated
-    public void setColor(final String color) {
-	// outerBorder.setColor(color);
-	// DOM.setStyleAttribute(arrowImage.getElement(), "backgroundColor",
-	// color);
-	// DOM.setStyleAttribute(vp.getElement(), "backgroundColor", color);
-	// DOM.setStyleAttribute(titleLabel.getElement(), "backgroundColor",
-	// color);
-    }
-
     public void setContent(final Widget widget) {
 	contentPanel.setWidget(widget);
 	// refresh panel
 	setContentVisible(isContentVisible());
+    }
+
+    public void setContentHeight(final String height) {
+	contentPanel.setHeight(height);
     }
 
     public void setContentVisible(final boolean visible) {

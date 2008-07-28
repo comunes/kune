@@ -66,7 +66,7 @@ public class StackedDropDownPanel extends DropDownPanel implements UIConstants {
 	setContent(generalVP);
 
 	// Set properties
-	super.setColor(borderColor);
+	// super.setColor(borderColor);
 	setContentVisible(false); // DropDown
 	setHeaderText(headerText);
 	setHeaderTitle(headerTitle);

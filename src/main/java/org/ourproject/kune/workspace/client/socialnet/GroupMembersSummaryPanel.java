@@ -25,6 +25,7 @@ import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.event.ContainerListenerAdapter;
 
 public class GroupMembersSummaryPanel extends DropDownPanel implements GroupMembersSummaryView {
+    // private static final int MAX_HEIGHT = 110;
     private final GridMenuPanel<GroupDTO> gridMenuPanel;
     private final I18nUITranslationService i18n;
     private final GroupMembersSummaryPresenter presenter;
@@ -39,6 +40,7 @@ public class GroupMembersSummaryPanel extends DropDownPanel implements GroupMemb
 	super.setHeaderTitle(i18n.t("People and groups collaborating in this group"));
 	super.setBorderStylePrimaryName("k-dropdownouter-members");
 	super.addStyleName("kune-Margin-Medium-t");
+	// super.addStyleName("kune-Margin-Small-r");
 
 	final GridDragConfiguration dragConf = new GridDragConfiguration(UserGridPanel.USER_GROUP_DD, i18n
 		.t("Drop in the chat area to start a chat.")
@@ -85,6 +87,10 @@ public class GroupMembersSummaryPanel extends DropDownPanel implements GroupMemb
 	gridMenuPanel.addItem(gridItem);
     }
 
+    public void addToolbarFill() {
+	gridMenuPanel.getBottomBar().addFill();
+    }
+
     public void clear() {
 	gridMenuPanel.removeAll();
 	for (final ToolbarButton button : buttonsCache.values()) {
@@ -111,12 +117,19 @@ public class GroupMembersSummaryPanel extends DropDownPanel implements GroupMemb
 		});
     }
 
+    public void setDefaultHeigth() {
+	// super.setContentHeight("");
+	// gridMenuPanel.setHeight("auto");
+	// gridMenuPanel.doLayoutIfNeeded();
+    }
+
     public void setDraggable(final boolean draggable) {
 	// gridMenuPanel.setDraggable(draggable);
     }
 
-    public void setDropDownContentVisible(final boolean visible) {
-	super.setContentVisible(visible);
+    public void setMaxHeigth() {
+	// super.setContentHeight("" + MAX_HEIGHT);
+	// gridMenuPanel.setHeight(MAX_HEIGHT - 26);
     }
 
     public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {

@@ -11,13 +11,19 @@ public interface GroupMembersSummaryView {
 
     void addItem(GridItem<GroupDTO> gridItem);
 
+    void addToolbarFill();
+
     void clear();
 
     void confirmAddCollab(String groupShortName, String groupLongName);
 
+    void setContentVisible(boolean visible);
+
+    void setDefaultHeigth();
+
     void setDraggable(boolean draggable);
 
-    void setDropDownContentVisible(boolean visible);
+    void setMaxHeigth();
 
     void setTheme(WsTheme oldTheme, WsTheme newTheme);
 

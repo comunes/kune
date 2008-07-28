@@ -1787,6 +1787,18 @@ legend {
   margin-top: 3px;
 }
 
+.kune-Margin-Small-l {
+  margin-left: 3px;
+}
+
+.kune-Margin-Small-r {
+  margin-right: 3px;
+}
+
+.kune-Margin-Small-b {
+  margin-bottom: 3px;
+}
+
 .kune-Margin-Mini-trbl {
   margin: 1px;
 }
@@ -1812,6 +1824,10 @@ legend {
 
 .kune-Margin-Mini-r {
   margin-right: 1px;
+}
+
+.kune-Margin-Mini-b {
+  margin-bottom: 1px;
 }
 
 .kune-Margin-Mini-l {
@@ -2929,7 +2945,7 @@ see: http://developer.yahoo.com/yui/fonts/ */
     height: 27px;
 }
 
-.k-entitytextlogo-def .gwt-Label {
+.k-entitytextlogo-default .gwt-Label {
     color: #69312F;
 }
 
@@ -2962,7 +2978,7 @@ see: http://developer.yahoo.com/yui/fonts/ */
     background-color: #FFF;
 }
 
-.k-entity-def .x-layout-split {
+.k-entity-default .x-layout-split {
     background: #DD8A3D none repeat scroll 0% 50%;
 }
 
@@ -2990,7 +3006,7 @@ see: http://developer.yahoo.com/yui/fonts/ */
     background: transparent none repeat scroll 0% 50%;
 }
 
-.k-entityworkspace-def .x-layout-split {
+.k-entityworkspace-default .x-layout-split {
     background: #DEAA87 none repeat scroll 0% 50%;
 }
 
@@ -3032,7 +3048,7 @@ see: http://developer.yahoo.com/yui/fonts/ */
     white-space: nowrap;
 }
 
-.k-entity-title-rd-def {
+.k-entity-title-rd-default {
     background: #DD8A3D;
 }
 
@@ -3056,7 +3072,7 @@ see: http://developer.yahoo.com/yui/fonts/ */
     background: #D40000;
 }
 
-.k-entity-title-def {
+.k-entity-title-default {
     background: #F1BB59 none repeat scroll 0% 50%;
     border-left-color: #DD8A3D;
 }
@@ -3086,7 +3102,7 @@ see: http://developer.yahoo.com/yui/fonts/ */
     border-left-color: #D40000;
 }
 
-.k-entity-title-def div {
+.k-entity-title-default div {
     color: #69312F;
 }
 
@@ -3110,7 +3126,7 @@ see: http://developer.yahoo.com/yui/fonts/ */
     color: #800000;
 }
 
-.k-entity-subtitle-def {
+.k-entity-subtitle-default {
     background: #DD8A3D none repeat scroll 0% 50%;
 }
 
@@ -3134,7 +3150,7 @@ see: http://developer.yahoo.com/yui/fonts/ */
     background: #D40000 none repeat scroll 0% 50%;
 }
 
-.k-entity-subtitle-def div {
+.k-entity-subtitle-default div {
     color: #FFF;
 }
 
@@ -3158,7 +3174,7 @@ see: http://developer.yahoo.com/yui/fonts/ */
     color: #FFF;
 }
 
-.k-entity-bottom-rd-def, .k-entity-bottom-def {
+.k-entity-bottom-rd-default, .k-entity-bottom-default {
     background: #DD8A3D;
 }
 
@@ -3188,7 +3204,7 @@ see: http://developer.yahoo.com/yui/fonts/ */
     text-decoration: underline;
 }
 
-.k-entity-container-def div {
+.k-entity-container-default div {
     background: #FFD09D none repeat scroll 0% 50%;
 }
 
@@ -3270,7 +3286,7 @@ see: http://developer.yahoo.com/yui/fonts/ */
 .k-dropdownouter-members {
 }
 
-.k-dropdownouter-members-def {
+.k-dropdownouter-members-default {
     background-color: #DF5244;
 }
 
@@ -3297,7 +3313,7 @@ see: http://developer.yahoo.com/yui/fonts/ */
 .k-dropdownouter-part {
 }
 
-.k-dropdownouter-part-def {
+.k-dropdownouter-part-default {
     background-color: #CA5842;
 }
 
@@ -3324,7 +3340,7 @@ see: http://developer.yahoo.com/yui/fonts/ */
 .k-dropdownouter-tags {
 }
 
-.k-dropdownouter-tags-def {
+.k-dropdownouter-tags-default {
     background-color: #87501E;
 }
 
@@ -3351,7 +3367,7 @@ see: http://developer.yahoo.com/yui/fonts/ */
 .k-dropdownouter-summary {
 }
 
-.k-dropdownouter-summary-def {
+.k-dropdownouter-summary-default {
     background-color: #9F734B;
 }
 
@@ -3396,7 +3412,7 @@ see: http://developer.yahoo.com/yui/fonts/ */
     margin: 0 3px 0 1px;
 }
 /* WsTheme */
-.k-wstheme-icon-def {
+.k-wstheme-icon-default {
     background: #FF8C00;
 }
 
