@@ -13,13 +13,12 @@ public class SiteSignInLinkPresenter implements SiteSignInLink {
     public SiteSignInLinkPresenter(final Session session) {
 	session.onUserSignIn(new Slot<UserInfoDTO>() {
 	    public void onEvent(final UserInfoDTO user) {
-		doAfterSignIn(user);
+		view.setVisible(false);
 	    }
 	});
 	session.onUserSignOut(new Slot<Object>() {
 	    public void onEvent(final Object parameter) {
-		setLogged(false);
-		view.setLoggedUserName("", "");
+		view.setVisible(true);
 	    }
 	});
     }
@@ -30,21 +29,7 @@ public class SiteSignInLinkPresenter implements SiteSignInLink {
 
     public void init(final SiteSignInLinkView view) {
 	this.view = view;
-	setLogged(false);
-    }
-
-    private void doAfterSignIn(final UserInfoDTO user) {
-	if (user == null) {
-	    setLogged(false);
-	} else {
-	    setLogged(true);
-	    view.setLoggedUserName(user.getShortName(), user.getHomePage());
-	}
-    }
-
-    private void setLogged(boolean logged) {
-	view.setVisibleSignInLink(!logged);
-	view.setLoggedUserMenuVisible(logged);
+	view.setVisible(false);
     }
 
 }

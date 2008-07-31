@@ -19,20 +19,12 @@
  */
 package org.ourproject.kune.app.client;
 
-import java.util.HashMap;
-
-import org.ourproject.kune.platf.client.app.ApplicationBuilder;
-import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
-import org.ourproject.kune.platf.client.rpc.I18nService;
-import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
-import org.ourproject.kune.platf.client.ui.Location;
-import org.ourproject.kune.platf.client.ui.WindowUtils;
+import org.ourproject.kune.platf.client.services.Kune;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class KuneEntryPoint implements EntryPoint {
 
@@ -40,38 +32,20 @@ public class KuneEntryPoint implements EntryPoint {
     }
 
     public void onModuleLoad() {
-        Log.setUncaughtExceptionHandler();
+	Log.setUncaughtExceptionHandler();
 
-        // At the moment, in runtime:
-        Log.setCurrentLogLevel(Log.LOG_LEVEL_DEBUG);
+	// At the moment, in runtime:
+	Log.setCurrentLogLevel(Log.LOG_LEVEL_DEBUG);
 
-        DeferredCommand.addCommand(new Command() {
-            public void execute() {
-                onModuleLoadCont();
-            }
-        });
+	DeferredCommand.addCommand(new Command() {
+	    public void execute() {
+		onModuleLoadCont();
+	    }
+	});
     }
 
     public void onModuleLoadCont() {
-        Location loc = WindowUtils.getLocation();
-        String locale = loc.getParameter("locale");
-        final I18nServiceAsync server = I18nService.App.getInstance();
-        server.getInitialLanguage(locale, new AsyncCallback<I18nLanguageDTO>() {
-            public void onFailure(final Throwable caught) {
-                Log.debug("Workspace adaptation to your language failed");
-            }
-
-            public void onSuccess(final I18nLanguageDTO initialLang) {
-                server.getLexicon(initialLang.getCode(), new AsyncCallback<HashMap<String, String>>() {
-                    public void onFailure(final Throwable caught) {
-                        Log.debug("Workspace adaptation to your language failed");
-                    }
-
-                    public void onSuccess(final HashMap<String, String> lexicon) {
-                        new ApplicationBuilder().build(initialLang, lexicon);
-                    }
-                });
-            }
-        });
+	Kune.create();
+	// RootPanel.getBodyElement().setClassName("kunebody");
     }
 }

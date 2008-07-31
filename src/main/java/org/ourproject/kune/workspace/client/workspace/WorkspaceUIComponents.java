@@ -21,7 +21,6 @@
 package org.ourproject.kune.workspace.client.workspace;
 
 import org.ourproject.kune.workspace.client.WorkspaceFactory;
-import org.ourproject.kune.workspace.client.i18n.I18nTranslatorComponent;
 import org.ourproject.kune.workspace.client.licensefoot.LicenseComponent;
 
 public class WorkspaceUIComponents {
@@ -29,7 +28,6 @@ public class WorkspaceUIComponents {
     private ContentTitleComponent contentTitle;
     private ContentSubTitleComponent contentSubTitle;
     private ContentToolBarComponent contentToolBar;
-    private I18nTranslatorComponent i18nTranslatorSearch;
 
     public WorkspaceUIComponents(final WorkspacePresenter presenter) {
     }
@@ -53,13 +51,6 @@ public class WorkspaceUIComponents {
 	    contentToolBar = WorkspaceFactory.createContentToolBarComponent();
 	}
 	return contentToolBar;
-    }
-
-    public I18nTranslatorComponent getI18nTranslatorComponent() {
-	if (i18nTranslatorSearch == null) {
-	    i18nTranslatorSearch = WorkspaceFactory.createI18nTranslatorComponent();
-	}
-	return i18nTranslatorSearch;
     }
 
     public LicenseComponent getLicenseComponent() {

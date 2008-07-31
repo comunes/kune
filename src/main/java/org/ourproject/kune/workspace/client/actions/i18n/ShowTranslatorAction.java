@@ -33,22 +33,22 @@ public class ShowTranslatorAction implements Action {
     private final I18nTranslationService i18n;
 
     public ShowTranslatorAction(final Session session, final Workspace workspace, final I18nTranslationService i18n) {
-        this.session = session;
-        this.workspace = workspace;
-        this.i18n = i18n;
+	this.session = session;
+	this.workspace = workspace;
+	this.i18n = i18n;
     }
 
     public void execute(final Object value) {
-        onShowTranslatorAction();
+	onShowTranslatorAction();
     }
 
     private void onShowTranslatorAction() {
-        Site.showProgressLoading();
-        if (session.isLogged()) {
-            workspace.getI18nTranslatorComponent().show();
-        } else {
-            Site.info(i18n.t("Sign in or register to help with translation"));
-        }
-        Site.hideProgress();
+	Site.showProgressLoading();
+	if (session.isLogged()) {
+	    // workspace.getI18nTranslatorComponent().show();
+	} else {
+	    Site.info(i18n.t("Sign in or register to help with translation"));
+	}
+	Site.hideProgress();
     }
 }

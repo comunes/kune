@@ -1,12 +1,13 @@
 package org.ourproject.kune.platf.client.services;
 
-import java.util.HashMap;
-
+import org.ourproject.kune.chat.client.ChatClientNewModule;
+import org.ourproject.kune.docs.client.DocumentClientNewModule;
 import org.ourproject.kune.platf.client.KunePlatform;
+import org.ourproject.kune.platf.client.PlatformClientModule;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.ApplicationDefault;
+import org.ourproject.kune.platf.client.app.HistoryWrapper;
 import org.ourproject.kune.platf.client.app.HistoryWrapperImpl;
-import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.extend.ExtensibleWidgetsManager;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
@@ -14,20 +15,28 @@ import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.GroupService;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
+import org.ourproject.kune.platf.client.rpc.I18nService;
+import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
+import org.ourproject.kune.platf.client.state.ContentProvider;
 import org.ourproject.kune.platf.client.state.ContentProviderImpl;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.SessionImpl;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.state.StateManagerDefault;
-import org.ourproject.kune.platf.client.ui.QuickTipHelper;
+import org.ourproject.kune.platf.client.ui.QuickTipsHelper;
 import org.ourproject.kune.platf.client.ui.rate.RateIt;
 import org.ourproject.kune.platf.client.ui.rate.RateItPanel;
 import org.ourproject.kune.platf.client.ui.rate.RateItPresenter;
 import org.ourproject.kune.platf.client.ui.rate.RatePanel;
 import org.ourproject.kune.platf.client.ui.rate.RatePresenter;
+import org.ourproject.kune.workspace.client.WorkspaceClientModule;
+import org.ourproject.kune.workspace.client.i18n.I18nTranslator;
+import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPresenter;
+import org.ourproject.kune.workspace.client.i18n.I18nTranslatorView;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.workspace.client.i18n.ui.I18nTranslatorPanel;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoose;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoosePanel;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoosePresenter;
@@ -92,6 +101,9 @@ import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitesign.SiteSignI
 import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitesign.SiteSignOutLink;
 import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitesign.SiteSignOutLinkPanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitesign.SiteSignOutLinkPresenter;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.siteusermenu.SiteUserMenu;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.siteusermenu.SiteUserMenuPanel;
+import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.siteusermenu.SiteUserMenuPresenter;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
@@ -108,443 +120,523 @@ import org.ourproject.kune.workspace.client.workspace.UserLiveSearcher;
 import org.ourproject.kune.workspace.client.workspace.ui.EntityLogo;
 import org.ourproject.kune.workspace.client.workspace.ui.EntityLogoPanel;
 
-import com.calclab.suco.client.container.Provider;
-import com.calclab.suco.client.modules.Module;
-import com.calclab.suco.client.modules.ModuleBuilder;
+import com.calclab.emiteuimodule.client.EmiteUIModule;
+import com.calclab.suco.client.container.Container;
+import com.calclab.suco.client.modules.AbstractModule;
+import com.calclab.suco.client.provider.Factory;
 import com.calclab.suco.client.scopes.SingletonScope;
 import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.signal.Slot0;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
-public class KuneModule implements Module {
-    private final I18nLanguageDTO initialLang;
-    private final HashMap<String, String> lexicon;
-    private ModuleBuilder builder;
-
-    public KuneModule(final I18nLanguageDTO initialLang, final HashMap<String, String> lexicon) {
-	this.initialLang = initialLang;
-	this.lexicon = lexicon;
+public class KuneModule extends AbstractModule {
+    public KuneModule() {
+	super(KuneModule.class);
     }
 
-    public Class<? extends Module> getType() {
-	return KuneModule.class;
-    }
-
-    public void onLoad(final ModuleBuilder builder) {
-	this.builder = builder;
-
-	builder.registerProvider(Kune.class, new Provider<Kune>() {
-	    public Kune get() {
-		return new Kune(builder);
+    @Override
+    public void onLoad() {
+	register(SingletonScope.class, new Factory<Kune>(Kune.class) {
+	    public Kune create() {
+		return new Kune($(Container.class));
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(I18nUITranslationService.class, new Provider<I18nUITranslationService>() {
-	    public I18nUITranslationService get() {
-		final I18nUITranslationService i18n = new I18nUITranslationService();
-		i18n.setCurrentLanguage(initialLang.getCode());
-		i18n.setLexicon(lexicon);
-		return i18n;
+	register(SingletonScope.class, new Factory<Session>(Session.class) {
+	    public Session create() {
+		return new SessionImpl(Cookies.getCookie(Site.USERHASH), $p(UserServiceAsync.class));
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(QuickTipHelper.class, new Provider<QuickTipHelper>() {
-	    public QuickTipHelper get() {
-		return new QuickTipHelper();
+	/** Services (this in other module after UI refactor * */
+
+	register(SingletonScope.class, new Factory<I18nServiceAsync>(I18nServiceAsync.class) {
+	    public I18nServiceAsync create() {
+		final I18nServiceAsync service = (I18nServiceAsync) GWT.create(I18nService.class);
+		((ServiceDefTarget) service).setServiceEntryPoint(GWT.getModuleBaseURL() + "I18nService");
+		return service;
 	    }
-	}, SingletonScope.class);
+	});
 
-	i(QuickTipHelper.class);
-
-	builder.registerProvider(UserServiceAsync.class, new Provider<UserServiceAsync>() {
-	    public UserServiceAsync get() {
+	register(SingletonScope.class, new Factory<UserServiceAsync>(UserServiceAsync.class) {
+	    public UserServiceAsync create() {
 		final UserServiceAsync service = (UserServiceAsync) GWT.create(UserService.class);
 		((ServiceDefTarget) service).setServiceEntryPoint(GWT.getModuleBaseURL() + "UserService");
 		return service;
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(SocialNetworkServiceAsync.class, new Provider<SocialNetworkServiceAsync>() {
-	    public SocialNetworkServiceAsync get() {
+	register(SingletonScope.class, new Factory<SocialNetworkServiceAsync>(SocialNetworkServiceAsync.class) {
+	    public SocialNetworkServiceAsync create() {
 		final SocialNetworkServiceAsync snServiceAsync = (SocialNetworkServiceAsync) GWT
 			.create(SocialNetworkService.class);
 		((ServiceDefTarget) snServiceAsync).setServiceEntryPoint(GWT.getModuleBaseURL()
 			+ "SocialNetworkService");
 		return snServiceAsync;
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(GroupServiceAsync.class, new Provider<GroupServiceAsync>() {
-	    public GroupServiceAsync get() {
+	register(SingletonScope.class, new Factory<GroupServiceAsync>(GroupServiceAsync.class) {
+	    public GroupServiceAsync create() {
 		final GroupServiceAsync groupServiceAsync = (GroupServiceAsync) GWT.create(GroupService.class);
 		((ServiceDefTarget) groupServiceAsync).setServiceEntryPoint(GWT.getModuleBaseURL() + "GroupService");
 		return groupServiceAsync;
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(ContentServiceAsync.class, new Provider<ContentServiceAsync>() {
-	    public ContentServiceAsync get() {
+	register(SingletonScope.class, new Factory<ContentServiceAsync>(ContentServiceAsync.class) {
+	    public ContentServiceAsync create() {
 		return ContentService.App.getInstance();
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(Session.class, new Provider<Session>() {
-	    public Session get() {
-		return new SessionImpl(Cookies.getCookie(Site.USERHASH), initialLang, p(UserServiceAsync.class));
+	register(SingletonScope.class, new Factory<I18nUITranslationService>(I18nUITranslationService.class) {
+	    public I18nUITranslationService create() {
+		final I18nUITranslationService i18n = new I18nUITranslationService();
+		i18n.init($(I18nServiceAsync.class), $(Session.class), new Slot0() {
+		    public void onEvent() {
+			onI18nReady();
+		    }
+		});
+		return i18n;
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(Images.class, new Provider<Images>() {
-	    public Images get() {
+	$(I18nUITranslationService.class);
+    }
+
+    private void onI18nReady() {
+	final I18nUITranslationService i18n = $(I18nUITranslationService.class);
+
+	register(SingletonScope.class, new Factory<I18nTranslationService>(I18nTranslationService.class) {
+	    public I18nTranslationService create() {
+		return i18n;
+	    }
+	});
+
+	register(SingletonScope.class, new Factory<QuickTipsHelper>(QuickTipsHelper.class) {
+	    public QuickTipsHelper create() {
+		return new QuickTipsHelper();
+	    }
+	});
+
+	$(QuickTipsHelper.class);
+
+	register(SingletonScope.class, new Factory<UserServiceAsync>(UserServiceAsync.class) {
+	    public UserServiceAsync create() {
+		final UserServiceAsync service = (UserServiceAsync) GWT.create(UserService.class);
+		((ServiceDefTarget) service).setServiceEntryPoint(GWT.getModuleBaseURL() + "UserService");
+		return service;
+	    }
+	});
+
+	register(SingletonScope.class, new Factory<SocialNetworkServiceAsync>(SocialNetworkServiceAsync.class) {
+	    public SocialNetworkServiceAsync create() {
+		final SocialNetworkServiceAsync snServiceAsync = (SocialNetworkServiceAsync) GWT
+			.create(SocialNetworkService.class);
+		((ServiceDefTarget) snServiceAsync).setServiceEntryPoint(GWT.getModuleBaseURL()
+			+ "SocialNetworkService");
+		return snServiceAsync;
+	    }
+	});
+
+	register(SingletonScope.class, new Factory<GroupServiceAsync>(GroupServiceAsync.class) {
+	    public GroupServiceAsync create() {
+		final GroupServiceAsync groupServiceAsync = (GroupServiceAsync) GWT.create(GroupService.class);
+		((ServiceDefTarget) groupServiceAsync).setServiceEntryPoint(GWT.getModuleBaseURL() + "GroupService");
+		return groupServiceAsync;
+	    }
+	});
+
+	register(SingletonScope.class, new Factory<ContentServiceAsync>(ContentServiceAsync.class) {
+	    public ContentServiceAsync create() {
+		return ContentService.App.getInstance();
+	    }
+	});
+
+	register(SingletonScope.class, new Factory<Images>(Images.class) {
+	    public Images create() {
 		return Images.App.getInstance();
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(ImageUtils.class, new Provider<ImageUtils>() {
-	    public ImageUtils get() {
+	register(SingletonScope.class, new Factory<ImageUtils>(ImageUtils.class) {
+	    public ImageUtils create() {
 		return new ImageUtils();
 	    }
-	}, SingletonScope.class);
+	});
 
-	final I18nUITranslationService i18n = i(I18nUITranslationService.class);
-	builder.registerProvider(KuneErrorHandler.class, new Provider<KuneErrorHandler>() {
-	    public KuneErrorHandler get() {
-		return new KuneErrorHandler(i(Session.class), i18n, p(WorkspaceSkeleton.class));
+	register(SingletonScope.class, new Factory<KuneErrorHandler>(KuneErrorHandler.class) {
+	    public KuneErrorHandler create() {
+		return new KuneErrorHandler($(Session.class), i18n, $p(WorkspaceSkeleton.class));
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(WorkspaceSkeleton.class, new Provider<WorkspaceSkeleton>() {
-	    public WorkspaceSkeleton get() {
+	register(SingletonScope.class, new Factory<WorkspaceSkeleton>(WorkspaceSkeleton.class) {
+	    public WorkspaceSkeleton create() {
 		return new WorkspaceSkeleton();
 	    }
-	}, SingletonScope.class);
+	});
 
-	final KuneErrorHandler errorHandler = i(KuneErrorHandler.class);
+	final KuneErrorHandler errorHandler = $(KuneErrorHandler.class);
 	AsyncCallbackSimple.init(errorHandler);
 
-	builder.registerProvider(KunePlatform.class, new Provider<KunePlatform>() {
-	    public KunePlatform get() {
+	register(SingletonScope.class, new Factory<KunePlatform>(KunePlatform.class) {
+	    public KunePlatform create() {
 		return new KunePlatform();
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(ExtensibleWidgetsManager.class, new Provider<ExtensibleWidgetsManager>() {
-	    public ExtensibleWidgetsManager get() {
+	register(SingletonScope.class, new Factory<ExtensibleWidgetsManager>(ExtensibleWidgetsManager.class) {
+	    public ExtensibleWidgetsManager create() {
 		return new ExtensibleWidgetsManager();
 	    }
-	}, SingletonScope.class);
+	});
 
-	final WorkspaceSkeleton ws = i(WorkspaceSkeleton.class);
-	final Images images = i(Images.class);
+	final WorkspaceSkeleton ws = $(WorkspaceSkeleton.class);
+	final Images images = $(Images.class);
 
-	builder.registerProvider(Application.class, new Provider<Application>() {
-	    public Application get() {
-		final Session session = i(Session.class);
-		final ExtensibleWidgetsManager extensionPointManager = i(ExtensibleWidgetsManager.class);
-		return new ApplicationDefault(session, extensionPointManager, i18n, i(KuneErrorHandler.class), ws);
+	register(SingletonScope.class, new Factory<Application>(Application.class) {
+	    public Application create() {
+		final Session session = $(Session.class);
+		final ExtensibleWidgetsManager extensionPointManager = $(ExtensibleWidgetsManager.class);
+		return new ApplicationDefault(session, extensionPointManager, i18n, $(KuneErrorHandler.class), ws);
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(SitePublicSpaceLink.class, new Provider<SitePublicSpaceLink>() {
-	    public SitePublicSpaceLink get() {
+	register(SingletonScope.class, new Factory<SitePublicSpaceLink>(SitePublicSpaceLink.class) {
+	    public SitePublicSpaceLink create() {
 		final SitePublicSpaceLinkPresenter presenter = new SitePublicSpaceLinkPresenter();
 		final SitePublicSpaceLinkPanel panel = new SitePublicSpaceLinkPanel(presenter, ws, i18n, images);
 		presenter.init(panel);
 		return presenter;
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(SiteProgress.class, new Provider<SiteProgress>() {
-	    public SiteProgress get() {
+	register(SingletonScope.class, new Factory<SiteProgress>(SiteProgress.class) {
+	    public SiteProgress create() {
 		final SiteProgressPresenter presenter = new SiteProgressPresenter();
-		final SiteProgressPanel panel = new SiteProgressPanel(presenter, p(SitePublicSpaceLink.class));
+		final SiteProgressPanel panel = new SiteProgressPanel(presenter, $p(SitePublicSpaceLink.class));
 		presenter.init(panel);
 		return presenter;
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(Site.class, new Provider<Site>() {
-	    public Site get() {
-		return new Site(i18n, i(SiteProgress.class), p(SiteMessage.class));
+	register(SingletonScope.class, new Factory<Site>(Site.class) {
+	    public Site create() {
+		return new Site(i18n, $(SiteProgress.class), $p(SiteMessage.class));
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(SiteMessage.class, new Provider<SiteMessage>() {
-	    public SiteMessage get() {
+	register(SingletonScope.class, new Factory<SiteMessage>(SiteMessage.class) {
+	    public SiteMessage create() {
 		final SiteMessagePresenter siteMessagePresenter = new SiteMessagePresenter();
 		final SiteMessageView siteMessageView = new SiteMessagePanel(siteMessagePresenter, true, i18n);
 		siteMessagePresenter.init(siteMessageView);
 		return siteMessagePresenter;
 	    }
-	}, SingletonScope.class);
+	});
 
-	i(SiteProgress.class);
-	i(Site.class);
+	$(SiteProgress.class);
+	$(Site.class);
 
-	builder.registerProvider(SiteSignInLink.class, new Provider<SiteSignInLink>() {
-	    public SiteSignInLink get() {
-		final SiteSignInLinkPresenter presenter = new SiteSignInLinkPresenter(i(Session.class));
+	register(SingletonScope.class, new Factory<SiteSignInLink>(SiteSignInLink.class) {
+	    public SiteSignInLink create() {
+		final SiteSignInLinkPresenter presenter = new SiteSignInLinkPresenter($(Session.class));
 		final SiteSignInLinkPanel panel = new SiteSignInLinkPanel(presenter, i18n, ws);
 		presenter.init(panel);
 		return presenter;
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(SiteSignOutLink.class, new Provider<SiteSignOutLink>() {
-	    public SiteSignOutLink get() {
-		final SiteSignOutLinkPresenter presenter = new SiteSignOutLinkPresenter(i(Session.class),
-			p(UserServiceAsync.class), p(KuneErrorHandler.class));
+	register(SingletonScope.class, new Factory<SiteUserMenu>(SiteUserMenu.class) {
+	    public SiteUserMenu create() {
+		final SiteUserMenuPresenter presenter = new SiteUserMenuPresenter($(Session.class));
+		final SiteUserMenuPanel panel = new SiteUserMenuPanel(presenter, ws);
+		presenter.init(panel);
+		return presenter;
+	    }
+	});
+
+	register(SingletonScope.class, new Factory<SiteSignOutLink>(SiteSignOutLink.class) {
+	    public SiteSignOutLink create() {
+		final SiteSignOutLinkPresenter presenter = new SiteSignOutLinkPresenter($(Session.class),
+			$p(UserServiceAsync.class), $p(KuneErrorHandler.class));
 		final SiteSignOutLinkPanel panel = new SiteSignOutLinkPanel(presenter, i18n, ws);
 		presenter.init(panel);
 		return presenter;
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(SiteNewGroupLink.class, new Provider<SiteNewGroupLink>() {
-	    public SiteNewGroupLink get() {
+	register(SingletonScope.class, new Factory<SiteNewGroupLink>(SiteNewGroupLink.class) {
+	    public SiteNewGroupLink create() {
 		final SiteNewGroupLinkPresenter presenter = new SiteNewGroupLinkPresenter();
 		final SiteNewGroupLinkPanel panel = new SiteNewGroupLinkPanel(presenter, ws, i18n);
 		presenter.init(panel);
 		return presenter;
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(SiteOptions.class, new Provider<SiteOptions>() {
-	    public SiteOptions get() {
+	register(SingletonScope.class, new Factory<SiteOptions>(SiteOptions.class) {
+	    public SiteOptions create() {
 		final SiteOptionsPresenter presenter = new SiteOptionsPresenter();
 		final SiteOptionsPanel panel = new SiteOptionsPanel(presenter, ws);
 		presenter.init(panel);
 		return presenter;
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(SiteLogo.class, new Provider<SiteLogo>() {
-	    public SiteLogo get() {
-		final SiteLogoPresenter presenter = new SiteLogoPresenter(i(Session.class));
+	register(SingletonScope.class, new Factory<SiteLogo>(SiteLogo.class) {
+	    public SiteLogo create() {
+		final SiteLogoPresenter presenter = new SiteLogoPresenter($(Session.class));
 		final SiteLogoPanel panel = new SiteLogoPanel(presenter, ws);
 		presenter.init(panel);
 		return presenter;
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(SiteSearcher.class, new Provider<SiteSearcher>() {
-	    public SiteSearcher get() {
+	register(SingletonScope.class, new Factory<SiteSearcher>(SiteSearcher.class) {
+	    public SiteSearcher create() {
 		final SiteSearcherPresenter presenter = new SiteSearcherPresenter();
 		final SiteSearcherView view = new SiteSearcherPanel(presenter, i18n, ws);
 		presenter.init(view);
 		return presenter;
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(SiteSearch.class, new Provider<SiteSearch>() {
-	    public SiteSearch get() {
-		final SiteSearchPresenter presenter = new SiteSearchPresenter(p(SiteSearcher.class));
+	register(SingletonScope.class, new Factory<I18nTranslator>(I18nTranslator.class) {
+	    public I18nTranslator create() {
+		final I18nTranslatorPresenter presenter = new I18nTranslatorPresenter($(Session.class),
+			$(I18nServiceAsync.class), i18n);
+		final I18nTranslatorView view = new I18nTranslatorPanel(presenter, i18n);
+		presenter.init(view);
+		return presenter;
+	    }
+	});
+
+	register(SingletonScope.class, new Factory<SiteSearch>(SiteSearch.class) {
+	    public SiteSearch create() {
+		final SiteSearchPresenter presenter = new SiteSearchPresenter($p(SiteSearcher.class));
 		final SiteSearchPanel panel = new SiteSearchPanel(presenter, ws, i18n);
 		presenter.init(panel);
 		return presenter;
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(SignIn.class, new Provider<SignIn>() {
-	    public SignIn get() {
-		final SignInPresenter presenter = new SignInPresenter(i(Session.class), i(StateManager.class), i18n,
-			i(UserServiceAsync.class));
+	register(SingletonScope.class, new Factory<SignIn>(SignIn.class) {
+	    public SignIn create() {
+		final SignInPresenter presenter = new SignInPresenter($(Session.class), $(StateManager.class), i18n,
+			$(UserServiceAsync.class));
 		final SignInPanel view = new SignInPanel(presenter, i18n, ws);
 		presenter.init(view);
 		return presenter;
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(LicenseChoose.class, new Provider<LicenseChoose>() {
-	    public LicenseChoose get() {
-		final LicenseChoosePresenter presenter = new LicenseChoosePresenter(i(Session.class));
+	register(SingletonScope.class, new Factory<LicenseChoose>(LicenseChoose.class) {
+	    public LicenseChoose create() {
+		final LicenseChoosePresenter presenter = new LicenseChoosePresenter($(Session.class));
 		final LicenseChoosePanel view = new LicenseChoosePanel(presenter, i18n);
 		presenter.init(view);
 		return presenter;
 	    }
 	});
 
-	builder.registerProvider(NewGroup.class, new Provider<NewGroup>() {
-	    public NewGroup get() {
-		final NewGroupPresenter presenter = new NewGroupPresenter(i18n, i(Session.class),
-			i(StateManager.class), p(GroupServiceAsync.class));
-		final NewGroupPanel view = new NewGroupPanel(presenter, i18n, p(LicenseChoose.class));
+	register(SingletonScope.class, new Factory<NewGroup>(NewGroup.class) {
+	    public NewGroup create() {
+		final NewGroupPresenter presenter = new NewGroupPresenter(i18n, $(Session.class),
+			$(StateManager.class), $p(GroupServiceAsync.class));
+		final NewGroupPanel view = new NewGroupPanel(presenter, i18n, $p(LicenseChoose.class));
 		presenter.init(view);
 		return presenter;
 	    }
-	}, SingletonScope.class);
+	});
 
-	i(SitePublicSpaceLink.class);
-	i(SiteMessage.class);
-	i(SiteSignInLink.class);
-	i(SiteSignOutLink.class);
-	i(SiteNewGroupLink.class);
-	i(SiteSearch.class);
-	i(SiteLogo.class);
+	$(SitePublicSpaceLink.class);
+	$(SiteMessage.class);
+	$(SiteUserMenu.class);
+	$(SiteSignInLink.class);
+	$(SiteSignOutLink.class);
+	$(SiteNewGroupLink.class);
+	$(SiteSearch.class);
+	$(SiteLogo.class);
 
-	builder.registerProvider(EntityLogo.class, new Provider<EntityLogo>() {
-	    public EntityLogo get() {
+	register(SingletonScope.class, new Factory<EntityLogo>(EntityLogo.class) {
+	    public EntityLogo create() {
 		return new EntityLogoPanel(i18n, ws);
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(WsThemePresenter.class, new Provider<WsThemePresenter>() {
-	    public WsThemePresenter get() {
-		final WsThemePresenter presenter = new WsThemePresenter(i(Session.class), p(GroupServiceAsync.class));
+	register(SingletonScope.class, new Factory<WsThemePresenter>(WsThemePresenter.class) {
+	    public WsThemePresenter create() {
+		final WsThemePresenter presenter = new WsThemePresenter($(Session.class), $p(GroupServiceAsync.class));
 		final WsThemePanel panel = new WsThemePanel(ws, presenter, i18n);
 		presenter.init(panel);
 		return presenter;
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(EntityTitlePresenter.class, new Provider<EntityTitlePresenter>() {
-	    public EntityTitlePresenter get() {
-		final EntityTitlePresenter presenter = new EntityTitlePresenter(i18n, i(KuneErrorHandler.class));
+	register(SingletonScope.class, new Factory<EntityTitlePresenter>(EntityTitlePresenter.class) {
+	    public EntityTitlePresenter create() {
+		final EntityTitlePresenter presenter = new EntityTitlePresenter(i18n, $(KuneErrorHandler.class));
 		final EntityTitlePanel panel = new EntityTitlePanel(ws, presenter);
 		presenter.init(panel);
 		return presenter;
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(EntitySubTitlePresenter.class, new Provider<EntitySubTitlePresenter>() {
-	    public EntitySubTitlePresenter get() {
+	register(SingletonScope.class, new Factory<EntitySubTitlePresenter>(EntitySubTitlePresenter.class) {
+	    public EntitySubTitlePresenter create() {
 		final EntitySubTitlePresenter presenter = new EntitySubTitlePresenter(i18n);
 		final EntitySubTitlePanel panel = new EntitySubTitlePanel(presenter, i18n, ws);
 		presenter.init(panel);
 		return presenter;
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(EntityLicensePresenter.class, new Provider<EntityLicensePresenter>() {
-	    public EntityLicensePresenter get() {
+	register(SingletonScope.class, new Factory<EntityLicensePresenter>(EntityLicensePresenter.class) {
+	    public EntityLicensePresenter create() {
 		final EntityLicensePresenter presenter = new EntityLicensePresenter();
 		final EntityLicensePanel panel = new EntityLicensePanel(presenter, i18n, ws);
 		presenter.init(panel);
 		return presenter;
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(RatePresenter.class, new Provider<RatePresenter>() {
-	    public RatePresenter get() {
+	register(SingletonScope.class, new Factory<RatePresenter>(RatePresenter.class) {
+	    public RatePresenter create() {
 		final RatePresenter presenter = new RatePresenter();
 		final RatePanel panel = new RatePanel(null, null, i18n, ws);
 		presenter.init(panel);
 		return presenter;
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(RateIt.class, new Provider<RateIt>() {
-	    public RateIt get() {
-		final RateItPresenter presenter = new RateItPresenter(i18n, i(Session.class),
-			p(ContentServiceAsync.class), p(StateManager.class));
+	register(SingletonScope.class, new Factory<RateIt>(RateIt.class) {
+	    public RateIt create() {
+		final RateItPresenter presenter = new RateItPresenter(i18n, $(Session.class),
+			$p(ContentServiceAsync.class), $p(StateManager.class));
 		final RateItPanel panel = new RateItPanel(presenter, i18n, ws);
 		presenter.init(panel);
 		return presenter;
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(WorkspaceManager.class, new Provider<WorkspaceManager>() {
-	    public WorkspaceManager get() {
-		final WorkspaceManager presenter = new WorkspaceManager(i(SitePublicSpaceLink.class),
-			i(EntityLogo.class), i(EntityTitlePresenter.class), i(EntitySubTitlePresenter.class),
-			i(WsThemePresenter.class), i(EntityLicensePresenter.class), p(GroupMembersSummary.class),
-			p(ParticipationSummary.class), p(TagsSummary.class), p(GroupSummary.class), i(RateIt.class),
-			i(RatePresenter.class));
-		return presenter;
-	    }
-	}, SingletonScope.class);
-
-	builder.registerProvider(StateManager.class, new Provider<StateManager>() {
-	    public StateManager get() {
-		final StateManagerDefault stateManager = new StateManagerDefault(new ContentProviderImpl(
-			ContentService.App.getInstance()), i(Session.class), new HistoryWrapperImpl(),
-			i(WorkspaceManager.class));
-		History.addHistoryListener(stateManager);
-		return stateManager;
-	    }
-	}, SingletonScope.class);
-
-	builder.registerProvider(UserLiveSearcher.class, new Provider<UserLiveSearcher>() {
-	    public UserLiveSearcher get() {
-		final UserLiveSearcherPresenter presenter = new UserLiveSearcherPresenter();
-		final EntityLiveSearcherView view = new UserLiveSearcherPanel(presenter, i18n);
-		presenter.init(view);
-		return presenter;
-	    }
-	}, SingletonScope.class);
-
-	builder.registerProvider(GroupLiveSearcher.class, new Provider<GroupLiveSearcher>() {
-	    public GroupLiveSearcher get() {
-		final GroupLiveSearcherPresenter presenter = new GroupLiveSearcherPresenter();
-		final EntityLiveSearcherView view = new GroupLiveSearchPanel(presenter, i18n);
-		presenter.init(view);
-		return presenter;
-	    }
-	}, SingletonScope.class);
-
-	builder.registerProvider(GroupMembersSummary.class, new Provider<GroupMembersSummary>() {
-	    public GroupMembersSummary get() {
+	register(SingletonScope.class, new Factory<GroupMembersSummary>(GroupMembersSummary.class) {
+	    public GroupMembersSummary create() {
 		final GroupMembersSummaryPresenter presenter = new GroupMembersSummaryPresenter(i18n,
-			p(StateManager.class), i(ImageUtils.class), i(Session.class),
-			p(SocialNetworkServiceAsync.class), p(UserLiveSearcher.class));
+			$p(StateManager.class), $(ImageUtils.class), $(Session.class),
+			$p(SocialNetworkServiceAsync.class), $p(UserLiveSearcher.class));
 		final GroupMembersSummaryView view = new GroupMembersSummaryPanel(presenter, i18n, ws);
 		presenter.init(view);
 		return presenter;
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(GroupSummary.class, new Provider<GroupSummary>() {
-	    public GroupSummary get() {
+	register(SingletonScope.class, new Factory<GroupSummary>(GroupSummary.class) {
+	    public GroupSummary create() {
 		final GroupSummaryPresenter presenter = new GroupSummaryPresenter();
 		final GroupSummaryView view = new GroupSummaryPanel(presenter, i18n, ws);
 		presenter.init(view);
 		return presenter;
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(ParticipationSummary.class, new Provider<ParticipationSummary>() {
-	    public ParticipationSummary get() {
+	register(SingletonScope.class, new Factory<ParticipationSummary>(ParticipationSummary.class) {
+	    public ParticipationSummary create() {
 		final ParticipationSummaryPresenter presenter = new ParticipationSummaryPresenter(i18n,
-			p(StateManager.class), i(ImageUtils.class), i(Session.class),
-			p(SocialNetworkServiceAsync.class));
+			$p(StateManager.class), $(ImageUtils.class), $(Session.class),
+			$p(SocialNetworkServiceAsync.class));
 		final ParticipationSummaryView view = new ParticipationSummaryPanel(presenter, i18n, ws);
 		presenter.init(view);
 		return presenter;
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(TagsSummary.class, new Provider<TagsSummary>() {
-	    public TagsSummary get() {
-		final TagsSummaryPresenter presenter = new TagsSummaryPresenter(p(Session.class), p(SiteSearcher.class));
+	register(SingletonScope.class, new Factory<TagsSummary>(TagsSummary.class) {
+	    public TagsSummary create() {
+		final TagsSummaryPresenter presenter = new TagsSummaryPresenter($p(Session.class),
+			$p(SiteSearcher.class));
 		final TagsSummaryPanel panel = new TagsSummaryPanel(presenter, i18n, ws);
 		presenter.init(panel);
 		return presenter;
 	    }
-	}, SingletonScope.class);
+	});
+
+	register(SingletonScope.class, new Factory<WorkspaceManager>(WorkspaceManager.class) {
+	    public WorkspaceManager create() {
+		final WorkspaceManager presenter = new WorkspaceManager($(SitePublicSpaceLink.class),
+			$(EntityLogo.class), $(EntityTitlePresenter.class), $(EntitySubTitlePresenter.class),
+			$(WsThemePresenter.class), $(EntityLicensePresenter.class), $p(GroupMembersSummary.class),
+			$p(ParticipationSummary.class), $p(TagsSummary.class), $p(GroupSummary.class),
+			$p(RateIt.class), $p(RatePresenter.class));
+		return presenter;
+	    }
+	});
+
+	$(WorkspaceManager.class);
+
+	register(SingletonScope.class, new Factory<HistoryWrapper>(HistoryWrapper.class) {
+	    public HistoryWrapper create() {
+		return new HistoryWrapperImpl();
+	    }
+	}, new Factory<ContentProvider>(ContentProvider.class) {
+	    public ContentProvider create() {
+		return new ContentProviderImpl($(ContentServiceAsync.class));
+	    }
+	}, new Factory<StateManager>(StateManager.class) {
+	    public StateManager create() {
+		final StateManagerDefault stateManager = new StateManagerDefault($(ContentProvider.class),
+			$(Session.class), $(HistoryWrapper.class), $(WorkspaceManager.class));
+		History.addHistoryListener(stateManager);
+		return stateManager;
+	    }
+	});
+
+	register(SingletonScope.class, new Factory<UserLiveSearcher>(UserLiveSearcher.class) {
+	    public UserLiveSearcher create() {
+		final UserLiveSearcherPresenter presenter = new UserLiveSearcherPresenter();
+		final EntityLiveSearcherView view = new UserLiveSearcherPanel(presenter, i18n);
+		presenter.init(view);
+		return presenter;
+	    }
+	});
+
+	register(SingletonScope.class, new Factory<GroupLiveSearcher>(GroupLiveSearcher.class) {
+	    public GroupLiveSearcher create() {
+		final GroupLiveSearcherPresenter presenter = new GroupLiveSearcherPresenter();
+		final EntityLiveSearcherView view = new GroupLiveSearchPanel(presenter, i18n);
+		presenter.init(view);
+		return presenter;
+	    }
+	});
+
+	load(new EmiteUIModule(), new DocumentClientNewModule(), new ChatClientNewModule());
 
 	// Register of tokens like "signin", "newgroup", "translate" etcetera
-	i(StateManager.class).addSiteToken(SiteToken.signin.toString(), new Slot<StateToken>() {
+	$(StateManager.class).addSiteToken(SiteToken.signin.toString(), new Slot<StateToken>() {
 	    public void onEvent(final StateToken previousStateToken) {
-		i(SignIn.class).doSignIn(previousStateToken);
+		$(SignIn.class).doSignIn(previousStateToken);
 	    }
 	});
 
-	i(StateManager.class).addSiteToken(SiteToken.newgroup.toString(), new Slot<StateToken>() {
+	$(StateManager.class).addSiteToken(SiteToken.newgroup.toString(), new Slot<StateToken>() {
 	    public void onEvent(final StateToken previousStateToken) {
-		i(NewGroup.class).doNewGroup(previousStateToken);
+		$(NewGroup.class).doNewGroup(previousStateToken);
 	    }
 	});
 
-    }
+	final KunePlatform platform = $(KunePlatform.class);
+	platform.install(new PlatformClientModule($(Session.class), $p(StateManager.class)));
+	platform.install(new WorkspaceClientModule($(Session.class), $(StateManager.class), $(Application.class)
+		.getWorkspace(), i18n));
+	$(Application.class).init($(StateManager.class), platform.getIndexedTools());
+	$(Application.class).subscribeActions(platform.getActions());
+	$(Application.class).getWorkspace().attachTools(platform.getTools().iterator());
+	$(Application.class).start();
 
-    private <T> T i(final Class<T> componentType) {
-	return builder.getInstance(componentType);
     }
-
-    private <T> Provider<T> p(final Class<T> componentKey) {
-	return builder.getProvider(componentKey);
-    }
-
 }

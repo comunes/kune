@@ -15,5 +15,7 @@ public class SiteNewGroupLinkPanel implements SiteNewGroupLinkView {
 	newGroupHyperlink.setTargetHistoryToken(SiteToken.newgroup.toString());
 	ws.getSiteBar().addSeparator();
 	ws.getSiteBar().add(newGroupHyperlink);
+	ws.getSiteBar().addSpacer();
+	ws.getSiteBar().addSpacer();
     }
 }

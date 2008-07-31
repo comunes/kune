@@ -19,8 +19,6 @@
  */
 package org.ourproject.kune.workspace.client;
 
-import org.ourproject.kune.platf.client.app.DesktopView;
-import org.ourproject.kune.platf.client.app.ui.DesktopPanel;
 import org.ourproject.kune.platf.client.extend.ExtensibleWidgetsManager;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
@@ -29,19 +27,14 @@ import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.editor.TextEditorListener;
 import org.ourproject.kune.workspace.client.editor.TextEditorPanel;
 import org.ourproject.kune.workspace.client.editor.TextEditorPresenter;
-import org.ourproject.kune.workspace.client.i18n.I18nTranslatorComponent;
-import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPresenter;
-import org.ourproject.kune.workspace.client.i18n.I18nTranslatorView;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelectorComponent;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelectorPresenter;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelectorView;
-import org.ourproject.kune.workspace.client.i18n.ui.I18nTranslatorPanel;
 import org.ourproject.kune.workspace.client.i18n.ui.LanguageSelectorPanel;
 import org.ourproject.kune.workspace.client.licensefoot.LicenseComponent;
 import org.ourproject.kune.workspace.client.licensefoot.LicensePresenter;
 import org.ourproject.kune.workspace.client.licensefoot.LicenseView;
 import org.ourproject.kune.workspace.client.licensefoot.ui.LicensePanel;
-import org.ourproject.kune.workspace.client.sitebar.bar.SiteBarListener;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPanel;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPresenter;
@@ -96,23 +89,10 @@ public class WorkspaceFactory {
 	return presenter;
     }
 
-    @Deprecated
-    public static DesktopView createDesktop(final Workspace workspace, final SiteBarListener listener,
-	    final Session session) {
-	return new DesktopPanel(workspace, listener, session, i18n);
-    }
-
     public static TextEditor createDocumentEditor(final TextEditorListener listener) {
 	final TextEditorPresenter presenter = new TextEditorPresenter(listener, true);
 	final TextEditorPanel panel = new TextEditorPanel(presenter, i18n);
 	presenter.init(panel);
-	return presenter;
-    }
-
-    public static I18nTranslatorComponent createI18nTranslatorComponent() {
-	final I18nTranslatorPresenter presenter = new I18nTranslatorPresenter(session);
-	final I18nTranslatorView view = new I18nTranslatorPanel(presenter, i18n);
-	presenter.init(view);
 	return presenter;
     }
 

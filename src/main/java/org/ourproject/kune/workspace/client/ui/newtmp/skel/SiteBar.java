@@ -18,16 +18,16 @@ public class SiteBar extends Panel {
 	titleBar.add(widget);
     }
 
-    public void addFill() {
-	titleBar.addFill();
+    public Widget addFill() {
+	return titleBar.addFill();
     }
 
-    public void addSeparator() {
-	titleBar.addSeparator();
+    public Widget addSeparator() {
+	return titleBar.addSeparator();
     }
 
-    public void addSpacer() {
-	titleBar.addSpacer();
+    public Widget addSpacer() {
+	return titleBar.addSpacer();
     }
 
 }

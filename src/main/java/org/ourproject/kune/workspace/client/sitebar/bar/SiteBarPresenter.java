@@ -36,12 +36,10 @@ public class SiteBarPresenter implements SiteBar {
     private final SiteBarListener listener;
     private String previousToken;
     private final Session session;
-    private final I18nTranslationService i18n;
 
     public SiteBarPresenter(final SiteBarListener listener, final Session session, final I18nTranslationService i18n) {
 	this.listener = listener;
 	this.session = session;
-	this.i18n = i18n;
     }
 
     public void changeState(final StateToken token) {

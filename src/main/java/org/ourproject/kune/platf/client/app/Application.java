@@ -20,9 +20,10 @@
 
 package org.ourproject.kune.platf.client.app;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
+import org.ourproject.kune.platf.client.dispatch.ActionEvent;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
@@ -35,7 +36,7 @@ public interface Application {
 
     Workspace getWorkspace();
 
-    void init(DefaultDispatcher dispatcher, StateManager stateManager, HashMap<String, ClientTool> tools);
+    void init(StateManager stateManager, HashMap<String, ClientTool> tools);
 
     void onApplicationStart(Slot<Object> slot);
 
@@ -46,5 +47,7 @@ public interface Application {
     void start();
 
     void stop();
+
+    void subscribeActions(ArrayList<ActionEvent<?>> actions);
 
 }

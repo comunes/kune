@@ -1973,14 +1973,6 @@ see: http://developer.yahoo.com/yui/fonts/ */
   width: 10px;
 }
 
-.kune-SiteBarPanel-LabelLink {
-  white-space: nowrap;
-  color: #B3B3B3;
-  margin-left: 3px;
-  cursor: pointer;
-  text-decoration: underline;
-}
-
 .kune-SiteMessagePanel {
   color: #250;
   position: absolute;
@@ -2894,6 +2886,13 @@ see: http://developer.yahoo.com/yui/fonts/ */
     color: #B3B3B3;
 }
 
+.k-sitebar-labellink {
+  white-space: nowrap;
+  color: #B3B3B3;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 .k-sitebar {
     margin-right: 10px;
     height: 16px;
@@ -2920,7 +2919,6 @@ see: http://developer.yahoo.com/yui/fonts/ */
 .k-sitebar-LabelLink {
     white-space: nowrap;
     color: #B3B3B3;
-    margin-left: 3px;
     cursor: pointer;
     text-decoration: underline;
 }
@@ -3253,6 +3251,7 @@ see: http://developer.yahoo.com/yui/fonts/ */
 
 .k-toolbar-sep {
     padding-top: 4px;
+	padding-left: 5px;
 }
 /* Custom gwt-ext styles */
 .ytb-sep {

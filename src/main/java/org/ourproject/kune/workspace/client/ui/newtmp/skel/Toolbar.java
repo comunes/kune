@@ -2,12 +2,14 @@ package org.ourproject.kune.workspace.client.ui.newtmp.skel;
 
 import org.ourproject.kune.platf.client.ui.DefaultBorderLayout;
 
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.Panel;
 
 public class Toolbar {
     private final Panel container;
-    private final AbstractBar horPanel;
+    private final HorizontalPanel childPanel;
 
     public Toolbar() {
 	container = new Panel();
@@ -18,31 +20,41 @@ public class Toolbar {
 	container.setHeader(false);
 	container.setBaseCls("x-toolbar");
 	container.addClass("x-panel");
-	horPanel = new AbstractBar();
-	container.add(horPanel);
+	childPanel = new HorizontalPanel();
+	container.add(childPanel);
     }
 
     public void add(final Widget widget) {
-	horPanel.add(widget);
+	childPanel.add(widget);
 	if (container.isRendered()) {
 	    container.doLayout(false);
 	}
     }
 
-    public void addClass(final String cls) {
+    public Widget addFill() {
+	final Label emptyLabel = new Label("");
+	this.add(emptyLabel);
+	childPanel.setCellWidth(emptyLabel, "100%");
+	return emptyLabel;
+    }
+
+    public Widget addSeparator() {
+	final Label emptyLabel = new Label("");
+	emptyLabel.setStyleName("ytb-sep");
+	emptyLabel.addStyleName("k-toolbar-sep");
+	this.add(emptyLabel);
+	return emptyLabel;
+    }
+
+    public Widget addSpacer() {
+	final Label emptyLabel = new Label("");
+	emptyLabel.setStyleName("ytb-spacer");
+	this.add(emptyLabel);
+	return emptyLabel;
+    }
+
+    public void addStyleName(final String cls) {
 	container.addClass(cls);
-    }
-
-    public void addFill() {
-	horPanel.addFill();
-    }
-
-    public void addSeparator() {
-	horPanel.addSeparator();
-    }
-
-    public void addSpacer() {
-	horPanel.addSpacer();
     }
 
     public Panel getPanel() {

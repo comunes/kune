@@ -72,7 +72,8 @@ class ChatEngineXmpp implements ChatEngine {
 	};
 	final String initialWindowTitle = Window.getTitle();
 	chatOptions.userOptions = userChatOptions;
-	emiteDialog.start(userChatOptions, chatOptions.httpBase, chatOptions.roomHost, avatarProvider, i18n.t("Chat"));
+	emiteDialog.start(userChatOptions, chatOptions.httpBase, chatOptions.roomHost, initialWindowTitle,
+		avatarProvider, i18n.t("Chat"));
 	emiteDialog.show(OwnStatus.online);
 	if (traybarButton == null) {
 	    traybarButton = new ToolbarButton();

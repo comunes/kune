@@ -25,7 +25,6 @@ import org.ourproject.kune.platf.client.extend.ExtensibleWidgetId;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.tool.ToolTrigger;
-import org.ourproject.kune.platf.client.ui.DropDownPanel;
 import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
 import org.ourproject.kune.platf.client.ui.SplitterListener;
 import org.ourproject.kune.platf.client.ui.gwtcustom.CustomHorizontalSplitPanel;
@@ -60,9 +59,6 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     private final VerticalPanel groupDropDownsVP;
     private final RoundedBorderDecorator contentTitleBarBorderDec;
     private final RoundedBorderDecorator bottomBorderDecorator;
-    private DropDownPanel groupMembersPanel;
-    private DropDownPanel participationPanel;
-    private DropDownPanel groupSummaryPanel;
     private final VerticalPanel cntcxtVP;
     private final ScrollPanel groupDropDownsSP;
     private final BottomIconsTrayPanel bottomIconsTrayPanel;
@@ -74,7 +70,6 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     private final HorizontalPanel contentBottomToolBarHP;
     private ContentBottomToolBarPanel contentBottomToolBarPanel;
     private LicensePanel bottomPanel;
-    private DropDownPanel tagsPanel;
 
     private int previousRightWidgetWidth;
     private final WorkspacePresenter presenter;
@@ -276,12 +271,12 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     }
 
     public void setGroupMembers(final View view) {
-	groupMembersPanel = (DropDownPanel) view;
+	// groupMembersPanel = (DropDownPanel) view;
 	// AddDropDown(groupMembersPanel, colorTheme.getGroupMembersDD());
     }
 
     public void setParticipation(final View view) {
-	participationPanel = (DropDownPanel) view;
+	// participationPanel = (DropDownPanel) view;
 	// AddDropDown(participationPanel, colorTheme.getParticipationDD());
     }
 
@@ -290,12 +285,12 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     }
 
     public void setSummary(final View view) {
-	groupSummaryPanel = (DropDownPanel) view;
+	// groupSummaryPanel = (DropDownPanel) view;
 	// AddDropDown(groupSummaryPanel, colorTheme.getSummaryDD());
     }
 
     public void setTags(final View view) {
-	tagsPanel = (DropDownPanel) view;
+	// tagsPanel = (DropDownPanel) view;
 	// AddDropDown(tagsPanel, colorTheme.getTagsDD());
     }
 
@@ -341,12 +336,6 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     public void setVisible(final boolean visible) {
 	// false: Used when the app stops
 	super.setVisible(visible);
-    }
-
-    private void AddDropDown(final DropDownPanel panel, final String color) {
-	groupDropDownsVP.add(panel);
-	panel.setWidth("145px");
-	// panel.setColor(color);
     }
 
     private void adjustSizeContentSP() {

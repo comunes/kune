@@ -65,10 +65,10 @@ public class EntityWorkspace extends DefaultBorderLayout {
 	contentBottomBar = new Toolbar();
 	containerTopBar = new Toolbar();
 	containerBottomBar = new Toolbar();
-	contentTopBar.addClass("k-toolbar-bottom-line");
-	contentBottomBar.addClass("k-toolbar-top-line");
-	containerTopBar.addClass("k-toolbar-bottom-line");
-	containerBottomBar.addClass("k-toolbar-top-line");
+	contentTopBar.addStyleName("k-toolbar-bottom-line");
+	contentBottomBar.addStyleName("k-toolbar-top-line");
+	containerTopBar.addStyleName("k-toolbar-bottom-line");
+	containerBottomBar.addStyleName("k-toolbar-top-line");
 	contentWrap.add(contentTopBar.getPanel(), Position.NORTH, false, DEF_TOOLBAR_HEIGHT);
 	containerWrap.add(containerTopBar.getPanel(), Position.NORTH, false, DEF_TOOLBAR_HEIGHT);
 	contentWrap.add(content, Position.CENTER);

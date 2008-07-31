@@ -20,6 +20,13 @@
     color: #B3B3B3;
 }
 
+.k-sitebar-labellink {
+  white-space: nowrap;
+  color: #B3B3B3;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 .k-sitebar {
     margin-right: 10px;
     height: 16px;
@@ -46,7 +53,6 @@
 .k-sitebar-LabelLink {
     white-space: nowrap;
     color: #B3B3B3;
-    margin-left: 3px;
     cursor: pointer;
     text-decoration: underline;
 }
@@ -379,6 +385,7 @@
 
 .k-toolbar-sep {
     padding-top: 4px;
+	padding-left: 5px;
 }
 /* Custom gwt-ext styles */
 .ytb-sep {

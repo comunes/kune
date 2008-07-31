@@ -3,6 +3,7 @@ package org.ourproject.kune.workspace.client.ui.newtmp.skel;
 import org.ourproject.kune.platf.client.ui.DefaultBorderLayout;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.gwtext.client.core.ExtElement;
 import com.gwtext.client.widgets.MessageBox;
@@ -30,6 +31,8 @@ public class WorkspaceSkeleton {
 	mainPanel.add(sitebar, DefaultBorderLayout.Position.NORTH, DefaultBorderLayout.DEF_TOOLBAR_HEIGHT);
 	mainPanel.add(entity.getPanel(), DefaultBorderLayout.Position.CENTER);
 	container.add(mainPanel.getPanel());
+	getEntityWorkspace().getContentTopBar().add(new Label("Sorry, kune workspace under heavy refactorization"));
+	new Viewport(container);
     }
 
     public Panel getEntityMainHeader() {
@@ -62,10 +65,6 @@ public class WorkspaceSkeleton {
 
     public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
 	entity.setTheme(oldTheme, newTheme);
-    }
-
-    public void show() {
-	new Viewport(container);
     }
 
     public void showAlertMessage(final String title, final String message) {

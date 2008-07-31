@@ -10,45 +10,40 @@ import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.workspace.TagsSummary;
 
-import com.calclab.suco.client.container.Container;
-import com.calclab.suco.client.container.Provider;
-import com.calclab.suco.client.modules.Module;
-import com.calclab.suco.client.modules.ModuleBuilder;
+import com.calclab.suco.client.modules.AbstractModule;
+import com.calclab.suco.client.provider.Factory;
 import com.calclab.suco.client.scopes.SingletonScope;
 
-public class DocumentClientNewModule implements Module {
-    public static DocumentClientTool getDocumentClientTool(final Container components) {
-	return components.getInstance(DocumentClientTool.class);
+public class DocumentClientNewModule extends AbstractModule {
+
+    public DocumentClientNewModule() {
+	super(DocumentClientNewModule.class);
     }
 
-    public Class<? extends Module> getType() {
-	return DocumentClientNewModule.class;
-    }
-
-    public void onLoad(final ModuleBuilder builder) {
-	builder.registerProvider(DocumentFactory.class, new Provider<DocumentFactory>() {
-	    public DocumentFactory get() {
-		return new DocumentFactory(builder.getInstance(I18nUITranslationService.class), builder
-			.getInstance(Session.class), builder.getProvider(TagsSummary.class), builder
-			.getInstance(WorkspaceSkeleton.class), builder.getInstance(RateIt.class));
+    @Override
+    public void onLoad() {
+	register(SingletonScope.class, new Factory<DocumentFactory>(DocumentFactory.class) {
+	    public DocumentFactory create() {
+		return new DocumentFactory($(I18nUITranslationService.class), $(Session.class), $p(TagsSummary.class),
+			$(WorkspaceSkeleton.class), $(RateIt.class));
 	    }
-	}, SingletonScope.class);
+	});
 
-	builder.registerProvider(DocumentClientTool.class, new Provider<DocumentClientTool>() {
-	    public DocumentClientTool get() {
-		final DocumentFactory factory = builder.getInstance(DocumentFactory.class);
-		return new DocumentClientTool(factory, builder.getInstance(I18nUITranslationService.class));
+	register(SingletonScope.class, new Factory<DocumentClientTool>(DocumentClientTool.class) {
+	    public DocumentClientTool create() {
+		final DocumentFactory factory = $(DocumentFactory.class);
+		return new DocumentClientTool(factory, $(I18nUITranslationService.class));
 	    }
-	}, SingletonScope.class);
+	});
 
-	final KunePlatform platform = builder.getInstance(KunePlatform.class);
-	final DocumentClientTool docClientTool = getDocumentClientTool(builder);
+	final KunePlatform platform = $(KunePlatform.class);
+	final DocumentClientTool docClientTool = $(DocumentClientTool.class);
 	platform.addTool(docClientTool);
 
-	final Session session = builder.getInstance(Session.class);
-	final StateManager stateManager = builder.getInstance(StateManager.class);
-	final Application application = builder.getInstance(Application.class);
-	final I18nUITranslationService i18n = builder.getInstance(I18nUITranslationService.class);
+	final Session session = $(Session.class);
+	final StateManager stateManager = $(StateManager.class);
+	final Application application = $(Application.class);
+	final I18nUITranslationService i18n = $(I18nUITranslationService.class);
 	platform.install(new DocsClientModule(session, stateManager, application.getWorkspace(), i18n));
     }
 

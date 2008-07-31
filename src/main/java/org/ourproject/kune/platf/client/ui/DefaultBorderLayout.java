@@ -130,5 +130,6 @@ public class DefaultBorderLayout {
     public void setPanel(final Panel panel, final Widget widget) {
 	panel.clear();
 	add(panel, widget);
+	doLayoutIfNeeded();
     }
 }

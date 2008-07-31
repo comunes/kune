@@ -28,7 +28,7 @@ public class SiteSignOutLinkPresenter implements SiteSignOutLink {
 	this.session = session;
 	this.userServiceProvider = userServiceProvider;
 	session.onUserSignIn(new Slot<UserInfoDTO>() {
-	    public void onEvent(final UserInfoDTO parameter) {
+	    public void onEvent(final UserInfoDTO userInfoDTO) {
 		view.setVisible(true);
 	    }
 	});

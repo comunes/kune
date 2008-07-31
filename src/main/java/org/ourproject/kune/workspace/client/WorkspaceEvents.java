@@ -21,11 +21,7 @@
 package org.ourproject.kune.workspace.client;
 
 public interface WorkspaceEvents {
-    public static final String GET_LEXICON = "i18n.getLexicon";
     public static final String SHOW_TRANSLATOR = "i18n.ShowTranslator";
-    public static final String SHOW_SEARCHER = "ws.ShowSearcher";
-    public static final String GET_TRANSLATION = "i18n.GetTranslation";
-    public static final String DO_TRANSLATION = "i18n.doTranslation";
     public static final String RELOAD_CONTEXT = "ws.ReoloadContext";
     public static final String WS_SPLITTER_STARTRESIZING = "ws.SplitterStartResizing";
     public static final String WS_SPLITTER_STOPRESIZING = "ws.SplitterStopResizing";

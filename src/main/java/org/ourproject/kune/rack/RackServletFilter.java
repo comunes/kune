@@ -84,10 +84,10 @@ public class RackServletFilter implements Filter {
 	    throws IOException, ServletException {
 
 	final String relative = RackHelper.getRelativeURL(request);
-	log.debug("REQUEST: " + relative);
+	// log.debug("REQUEST: " + relative);
 	for (final RequestMatcher matcher : excludes) {
 	    if (matcher.matches(relative)) {
-		log.debug("SKIPING!");
+		// log.debug("SKIPING!");
 		chain.doFilter(request, response);
 		return;
 	    }

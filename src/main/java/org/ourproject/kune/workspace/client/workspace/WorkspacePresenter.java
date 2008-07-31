@@ -32,7 +32,6 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
-import org.ourproject.kune.workspace.client.i18n.I18nTranslatorComponent;
 import org.ourproject.kune.workspace.client.licensefoot.LicenseComponent;
 
 import com.google.gwt.user.client.ui.Widget;
@@ -94,10 +93,6 @@ public class WorkspacePresenter implements Workspace {
 
     public ContentTitleComponent getContentTitleComponent() {
 	return components.getContentTitleComponent();
-    }
-
-    public I18nTranslatorComponent getI18nTranslatorComponent() {
-	return components.getI18nTranslatorComponent();
     }
 
     public LicenseComponent getLicenseComponent() {

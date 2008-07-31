@@ -20,57 +20,21 @@
 
 package org.ourproject.kune.platf.client.services;
 
-import org.ourproject.kune.platf.client.KunePlatform;
-import org.ourproject.kune.platf.client.app.Application;
-import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
-import org.ourproject.kune.workspace.client.workspace.Workspace;
-
-import com.calclab.emiteuimodule.client.EmiteUIDialog;
+import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.container.Container;
 import com.calclab.suco.client.container.DelegatedContainer;
 import com.calclab.suco.client.modules.Module;
-import com.calclab.suco.client.modules.ModuleBuilder;
 
 public class Kune extends DelegatedContainer {
 
     public static Kune create(final Module... modules) {
-	final ModuleBuilder container = new ModuleBuilder();
-	container.add(modules);
+	final Container container = Suco.create(modules);
+	Suco.add(container, new KuneModule());
 	return container.getInstance(Kune.class);
     }
 
     protected Kune(final Container container) {
 	super(container);
-    }
-
-    public ColorTheme getColorTheme() {
-	return this.getInstance(ColorTheme.class);
-    }
-
-    public EmiteUIDialog getEmiteUIDialog() {
-	return this.getInstance(EmiteUIDialog.class);
-    }
-
-    public I18nUITranslationService getI18N() {
-	return this.getInstance(I18nUITranslationService.class);
-    }
-
-    public KunePlatform getPlatform() {
-	return this.getInstance(KunePlatform.class);
-    }
-
-    public Session getSession() {
-	return this.getInstance(Session.class);
-    }
-
-    public StateManager getStateManager() {
-	return this.getInstance(StateManager.class);
-    }
-
-    public Workspace getWorkspace() {
-	return this.getInstance(Application.class).getWorkspace();
     }
 
 }

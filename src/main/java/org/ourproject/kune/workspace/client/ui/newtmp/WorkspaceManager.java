@@ -31,8 +31,8 @@ public class WorkspaceManager {
     private final Provider<ParticipationSummary> participationSummaryProvider;
     private final Provider<GroupSummary> groupSummaryProvider;
     private final SitePublicSpaceLink publicSpaceLink;
-    private final RateIt rateIt;
-    private final RatePresenter ratePresenter;
+    private final Provider<RateIt> rateItProvider;
+    private final Provider<RatePresenter> ratePresenterProvider;
 
     public WorkspaceManager(final SitePublicSpaceLink publicSpaceLink, final EntityLogo entityLogo,
 	    final EntityTitlePresenter entityTitlePresenter, final EntitySubTitlePresenter entitySubTitlePresenter,
@@ -40,7 +40,7 @@ public class WorkspaceManager {
 	    final Provider<GroupMembersSummary> groupMembersSummaryProvider,
 	    final Provider<ParticipationSummary> participationSummaryProvider,
 	    final Provider<TagsSummary> tagsSummaryProvider, final Provider<GroupSummary> groupSummaryProvider,
-	    final RateIt rateIt, final RatePresenter ratePresenter) {
+	    final Provider<RateIt> rateItProvider, final Provider<RatePresenter> rateProvider) {
 	this.publicSpaceLink = publicSpaceLink;
 	this.entityLogo = entityLogo;
 	this.entityTitlePresenter = entityTitlePresenter;
@@ -51,8 +51,8 @@ public class WorkspaceManager {
 	this.participationSummaryProvider = participationSummaryProvider;
 	this.tagsProvider = tagsSummaryProvider;
 	this.groupSummaryProvider = groupSummaryProvider;
-	this.rateIt = rateIt;
-	this.ratePresenter = ratePresenter;
+	this.rateItProvider = rateItProvider;
+	this.ratePresenterProvider = rateProvider;
 	wsThemePresenter.onThemeChanged(new Slot2<WsTheme, WsTheme>() {
 	    public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
 		entityLogo.setTheme(oldTheme, newTheme);
@@ -82,8 +82,8 @@ public class WorkspaceManager {
 	groupSummaryProvider.get().setState(state);
 	tagsProvider.get().setState(state);
 	wsThemePresenter.setState(state);
-	rateIt.setState(state);
-	ratePresenter.setState(state);
+	rateItProvider.get().setState(state);
+	ratePresenterProvider.get().setState(state);
     }
 
 }

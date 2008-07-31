@@ -307,5 +307,14 @@
       <b>abuseInformersCount</b>
     </field>
   </mapping>
+  
+  <mapping>
+    <class-a>org.ourproject.kune.platf.client.dto.LinkDTO</class-a>
+    <class-b>org.ourproject.kune.platf.server.domain.User</class-b>
+    <field>
+      <a>longName</a>
+      <b>name</b>
+	</field>
+  </mapping>
 
 </mappings>

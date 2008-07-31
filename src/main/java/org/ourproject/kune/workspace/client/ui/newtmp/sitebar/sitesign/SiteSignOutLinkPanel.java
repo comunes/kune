@@ -16,7 +16,7 @@ public class SiteSignOutLinkPanel implements SiteSignOutLinkView {
 	    final WorkspaceSkeleton ws) {
 	signOutLabel = new Label();
 	signOutLabel.setText(i18n.t("Sign out"));
-	signOutLabel.addStyleName("kune-SiteBarPanel-LabelLink");
+	signOutLabel.addStyleName("k-sitebar-labellink");
 	ws.getSiteBar().add(signOutLabel);
 	signOutLabel.addClickListener(new ClickListener() {
 	    public void onClick(final Widget arg0) {

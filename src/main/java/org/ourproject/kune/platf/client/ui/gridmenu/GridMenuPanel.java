@@ -1,5 +1,6 @@
 package org.ourproject.kune.platf.client.ui.gridmenu;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -101,7 +102,7 @@ public class GridMenuPanel<T> extends Panel {
 	this.withEndIcon = withEndIcon;
 	super.setBorder(false);
 	super.setLayout(new FitLayout());
-	//super.setAutoScroll(true);
+	// super.setAutoScroll(true);
 	if (withTopBar) {
 	    topBar = new Toolbar();
 	    super.setTopToolbar(topBar);
@@ -225,7 +226,7 @@ public class GridMenuPanel<T> extends Panel {
 	if (grid != null) {
 	    // grid.setWidth(width - 27);
 	    grid.setWidth(width - 27);
-	    //super.setWidth(width - 11);
+	    // super.setWidth(width - 11);
 	    doLayoutIfNeeded();
 	}
     }
@@ -352,8 +353,17 @@ public class GridMenuPanel<T> extends Panel {
 	iconColumn.setFixed(true);
 	titleColumn.setFixed(false);
 	endIconColumn.setFixed(true);
-	final ColumnConfig[] columnsConfigs = withEndIcon ? new ColumnConfig[] { iconColumn, titleColumn,
-		endIconColumn, groupColumn } : new ColumnConfig[] { iconColumn, titleColumn, groupColumn };
+	final ArrayList<ColumnConfig> columnList = new ArrayList<ColumnConfig>();
+	columnList.add(iconColumn);
+	columnList.add(titleColumn);
+	if (grouped) {
+	    columnList.add(groupColumn);
+	}
+	if (withEndIcon) {
+	    columnList.add(endIconColumn);
+	}
+	ColumnConfig[] columnsConfigs = {};
+	columnsConfigs = columnList.toArray(columnsConfigs);
 	columnModel = new ColumnModel(columnsConfigs);
 	grid.setColumnModel(columnModel);
 

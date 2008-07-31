@@ -39,7 +39,8 @@ public class SitePublicSpaceLinkPanel implements SitePublicSpaceLinkView {
 	});
 	gotoPublic.setTitle(i18n.t("Leave the workspace and go to the public space of this group")
 		+ Site.IN_DEVELOPMENT);
-	gotoPublic.addStyleName("kune-SiteBarPanel-LabelLink");
+	gotoPublic.addStyleName("k-sitebar-labellink");
+	contentNoPublic.addStyleName("k-sitebar-labellink");
     }
 
     public void setContentGotoPublicUrl(final String publicUrl) {

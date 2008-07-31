@@ -21,19 +21,25 @@ package org.ourproject.kune.workspace.client.i18n;
 
 import java.util.HashMap;
 
-import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
-import org.ourproject.kune.platf.client.dto.GetTranslationActionParams;
+import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
+import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.KuneStringUtils;
-import org.ourproject.kune.workspace.client.WorkspaceEvents;
+import org.ourproject.kune.platf.client.ui.Location;
+import org.ourproject.kune.platf.client.ui.WindowUtils;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.calclab.suco.client.signal.Slot0;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class I18nUITranslationService extends I18nTranslationService {
     private HashMap<String, String> lexicon;
-    private String currentLanguage;
-
+    private String currentLanguageCode;
     private I18nChangeListenerCollection i18nChangeListeners;
+    private I18nLanguageDTO initialLang;
+    private I18nServiceAsync i18nService;
+    private Session session;
 
     /*
      * If a UI element need to be fired when (for instance) the language changes
@@ -41,45 +47,77 @@ public class I18nUITranslationService extends I18nTranslationService {
      * direction, for instance.
      */
     public void addI18nChangeListener(final I18nChangeListener listener) {
-        if (i18nChangeListeners == null) {
-            i18nChangeListeners = new I18nChangeListenerCollection();
-        }
-        i18nChangeListeners.add(listener);
+	if (i18nChangeListeners == null) {
+	    i18nChangeListeners = new I18nChangeListenerCollection();
+	}
+	i18nChangeListeners.add(listener);
     }
 
     public void changeCurrentLanguage(final String newLanguage) {
-        if (!newLanguage.equals(this.currentLanguage)) {
-            setCurrentLanguage(newLanguage);
-            changeLocale(newLanguage);
-        }
+	if (!newLanguage.equals(this.currentLanguageCode)) {
+	    setCurrentLanguage(newLanguage);
+	    changeLocale(newLanguage);
+	}
     }
 
     public String getCurrentLanguage() {
-        return currentLanguage;
+	return currentLanguageCode;
+    }
+
+    public I18nLanguageDTO getInitialLang() {
+	return initialLang;
     }
 
     public HashMap<String, String> getLexicon() {
-        return lexicon;
+	return lexicon;
+    }
+
+    public void init(final I18nServiceAsync i18nService, final Session session, final Slot0 onReady) {
+	this.i18nService = i18nService;
+	this.session = session;
+	final Location loc = WindowUtils.getLocation();
+	final String locale = loc.getParameter("locale");
+	i18nService.getInitialLanguage(locale, new AsyncCallback<I18nLanguageDTO>() {
+	    public void onFailure(final Throwable caught) {
+		Log.error("Workspace adaptation to your language failed");
+	    }
+
+	    public void onSuccess(final I18nLanguageDTO result) {
+		initialLang = result;
+		currentLanguageCode = initialLang.getCode();
+		session.setCurrentLanguage(initialLang);
+		i18nService.getLexicon(initialLang.getCode(), new AsyncCallback<HashMap<String, String>>() {
+		    public void onFailure(final Throwable caught) {
+			Log.error("Workspace adaptation to your language failed");
+		    }
+
+		    public void onSuccess(final HashMap<String, String> result) {
+			lexicon = result;
+			onReady.onEvent();
+		    }
+		});
+	    }
+	});
     }
 
     public void removeI18nChangeListener(final I18nChangeListener listener) {
-        if (i18nChangeListeners != null) {
-            i18nChangeListeners.remove(listener);
-        }
+	if (i18nChangeListeners != null) {
+	    i18nChangeListeners.remove(listener);
+	}
     }
 
     public void setCurrentLanguage(final String newLanguage) {
-        this.currentLanguage = newLanguage;
+	this.currentLanguageCode = newLanguage;
     }
 
     public void setLexicon(final HashMap<String, String> lexicon) {
-        this.lexicon = lexicon;
-        fireI18nLanguageChange();
+	this.lexicon = lexicon;
+	fireI18nLanguageChange();
     }
 
     public void setTranslationAfterSave(final String text, final String translation) {
-        lexicon.put(text, translation);
-        fireI18nLanguageChange();
+	lexicon.put(text, translation);
+	fireI18nLanguageChange();
     }
 
     /**
@@ -94,22 +132,27 @@ public class I18nUITranslationService extends I18nTranslationService {
      * @return text translated in the current language
      */
     public String t(final String text) {
-        String encodeText = KuneStringUtils.escapeHtmlLight(text);
-        String translation = lexicon.get(encodeText);
-        if (lexicon.containsKey(encodeText)) {
-            if (translation == UNTRANSLATED_VALUE) {
-                // Not translated but in db, return text
-                translation = removeNT(encodeText);
-            }
-        } else {
-            // Not translated and not in db, make a petition for translation
-            DefaultDispatcher.getInstance().fireDeferred(WorkspaceEvents.GET_TRANSLATION,
-                    new GetTranslationActionParams(this.currentLanguage, text));
-            Log.debug("Registering in db '" + text + "' as pending translation");
-            translation = removeNT(encodeText);
-            lexicon.put(encodeText, UNTRANSLATED_VALUE);
-        }
-        return decodeHtml(translation);
+	final String encodeText = KuneStringUtils.escapeHtmlLight(text);
+	String translation = lexicon.get(encodeText);
+	if (lexicon.containsKey(encodeText)) {
+	    if (translation == UNTRANSLATED_VALUE) {
+		// Not translated but in db, return text
+		translation = removeNT(encodeText);
+	    }
+	} else {
+	    // Not translated and not in db, make a petition for translation
+	    i18nService.getTranslation(session.getUserHash(), currentLanguageCode, text, new AsyncCallback<String>() {
+		public void onFailure(final Throwable caught) {
+		}
+
+		public void onSuccess(final String result) {
+		}
+	    });
+	    Log.debug("Registering in db '" + text + "' as pending translation");
+	    translation = removeNT(encodeText);
+	    lexicon.put(encodeText, UNTRANSLATED_VALUE);
+	}
+	return decodeHtml(translation);
     }
 
     /**
@@ -158,9 +201,9 @@ public class I18nUITranslationService extends I18nTranslationService {
        }-*/;
 
     private void fireI18nLanguageChange() {
-        if (i18nChangeListeners != null) {
-            i18nChangeListeners.fireI18nLanguageChange();
-        }
+	if (i18nChangeListeners != null) {
+	    i18nChangeListeners.fireI18nLanguageChange();
+	}
     }
 
 }

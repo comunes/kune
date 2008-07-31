@@ -65,14 +65,6 @@
   width: 10px;
 }
 
-.kune-SiteBarPanel-LabelLink {
-  white-space: nowrap;
-  color: #B3B3B3;
-  margin-left: 3px;
-  cursor: pointer;
-  text-decoration: underline;
-}
-
 .kune-SiteMessagePanel {
   color: #250;
   position: absolute;

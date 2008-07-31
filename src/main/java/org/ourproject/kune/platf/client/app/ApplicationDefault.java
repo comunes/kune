@@ -20,10 +20,12 @@
 
 package org.ourproject.kune.platf.client.app;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.ourproject.kune.platf.client.dispatch.ActionEvent;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.extend.ExtensibleWidgetsManager;
@@ -45,6 +47,8 @@ import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.signal.Signal;
 import com.calclab.suco.client.signal.Slot;
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.WindowCloseListener;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class ApplicationDefault implements Application {
@@ -53,17 +57,24 @@ public class ApplicationDefault implements Application {
     private final Session session;
     private final Signal<Object> onApplicationStart;
     private final Signal<Object> onApplicationStop;
-    private final WorkspaceSkeleton ws;
     private StateManager stateManager;
 
     public ApplicationDefault(final Session session, final ExtensibleWidgetsManager extensionPointManager,
 	    final I18nTranslationService i18n, final KuneErrorHandler errorHandler, final WorkspaceSkeleton ws) {
 	this.session = session;
-	this.ws = ws;
 	workspace = WorkspaceFactory.createWorkspace(session, extensionPointManager, i18n, errorHandler);
 	tools = new HashMap<String, ClientTool>();
 	this.onApplicationStart = new Signal<Object>("onApplicationStart");
 	this.onApplicationStop = new Signal<Object>("onApplicationStop");
+	Window.addWindowCloseListener(new WindowCloseListener() {
+	    public void onWindowClosed() {
+		stop();
+	    }
+
+	    public String onWindowClosing() {
+		return null;
+	    }
+	});
     }
 
     public ClientTool getTool(final String toolName) {
@@ -74,11 +85,9 @@ public class ApplicationDefault implements Application {
 	return workspace;
     }
 
-    public void init(final DefaultDispatcher dispatcher, final StateManager stateManager,
-	    final HashMap<String, ClientTool> tools) {
+    public void init(final StateManager stateManager, final HashMap<String, ClientTool> tools) {
 	this.stateManager = stateManager;
 	this.tools = tools;
-	workspace.attachTools(tools.values().iterator());
     }
 
     public void onApplicationStart(final Slot<Object> slot) {
@@ -111,6 +120,15 @@ public class ApplicationDefault implements Application {
 
     public void stop() {
 	onApplicationStop.fire(null);
+    }
+
+    public void subscribeActions(final ArrayList<ActionEvent<?>> actions) {
+	ActionEvent<?> actionEvent;
+
+	for (final Iterator<ActionEvent<?>> it = actions.iterator(); it.hasNext();) {
+	    actionEvent = it.next();
+	    DefaultDispatcher.getInstance().subscribe(actionEvent.event, actionEvent.action);
+	}
     }
 
     private void getInitData() {

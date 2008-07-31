@@ -17,10 +17,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.client.app;
+package org.ourproject.kune.workspace.client.i18n;
 
-import org.ourproject.kune.platf.client.View;
+public interface I18nTranslator {
 
-public interface DesktopView extends View {
-    void attach();
+    void show();
+
 }

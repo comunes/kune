@@ -27,7 +27,7 @@ then
     --silent=true \
     $CSSTMPFILE
 else
-  echo Waring: Dependency csstidy, in debian: apt-get install csstidy
+  echo Warning: Dependency csstidy, in debian: apt-get install csstidy
   cp $CATTMPFILE $CSSTMPFILE
 fi
 cat $CSSTMPFILE | sed 's/\.\.\/images/\.\.\/js\/ext\/resources\/images/g' > $1

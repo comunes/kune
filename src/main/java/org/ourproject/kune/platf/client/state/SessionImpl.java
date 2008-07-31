@@ -52,10 +52,8 @@ public class SessionImpl implements Session {
     private final Signal<Object> onUserSignOut;
     private final Provider<UserServiceAsync> userServiceProvider;
 
-    public SessionImpl(final String userHash, final I18nLanguageDTO initialLanguage,
-	    final Provider<UserServiceAsync> userServiceProvider) {
+    public SessionImpl(final String userHash, final Provider<UserServiceAsync> userServiceProvider) {
 	this.userHash = userHash;
-	currentLanguage = initialLanguage;
 	this.userServiceProvider = userServiceProvider;
 	languagesArray = null;
 	this.onInitDataReceived = new Signal<InitDataDTO>("initDataReceived");

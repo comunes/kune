@@ -24,24 +24,9 @@ import java.util.HashMap;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
-import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 public interface I18nService extends RemoteService {
-
-    public class App {
-	private static I18nServiceAsync ourInstance = null;
-
-	public static synchronized I18nServiceAsync getInstance() {
-	    if (ourInstance == null) {
-		ourInstance = (I18nServiceAsync) GWT.create(I18nService.class);
-		((ServiceDefTarget) ourInstance).setServiceEntryPoint(GWT.getModuleBaseURL() + "I18nService");
-	    }
-	    return ourInstance;
-	}
-
-    }
 
     I18nLanguageDTO getInitialLanguage(String localeParam);
 

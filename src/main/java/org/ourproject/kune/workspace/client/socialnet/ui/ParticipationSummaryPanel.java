@@ -39,12 +39,13 @@ public class ParticipationSummaryPanel extends DropDownPanel implements Particip
     public ParticipationSummaryPanel(final ParticipationSummaryPresenter presenter, final I18nTranslationService i18n,
 	    final WorkspaceSkeleton ws) {
 	super(true);
-	super.setHeaderText(i18n.t("Participates as..."));
+	// super.setHeaderText(i18n.t("Participates as..."));
+	super.setHeaderText(i18n.t("Participates in..."));
 	super.setHeaderTitle(i18n.t("Groups in which participates"));
 	super.setBorderStylePrimaryName("k-dropdownouter-part");
 	super.addStyleName("kune-Margin-Medium-t");
-	gridMenuPanel = new GridMenuPanel<GroupDTO>(i18n.t("This user is not member of any group"), true, false, false,
-		false, false);
+	gridMenuPanel = new GridMenuPanel<GroupDTO>(i18n.t("This user is not member of any group"), false, false,
+		false, false, false);
 	final EntitySummary entitySummary = ws.getEntitySummary();
 	entitySummary.addInSummary(this);
 	entitySummary.addListener(new ContainerListenerAdapter() {
