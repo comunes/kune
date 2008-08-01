@@ -19,8 +19,6 @@
  */
 package org.ourproject.kune.platf.client.services;
 
-import org.ourproject.kune.platf.client.PlatformEvents;
-import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.AlreadyGroupMemberException;
 import org.ourproject.kune.platf.client.errors.AlreadyUserMemberException;
@@ -30,6 +28,7 @@ import org.ourproject.kune.platf.client.errors.LastAdminInGroupException;
 import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 
@@ -44,12 +43,14 @@ public class KuneErrorHandler {
     private final I18nTranslationService i18n;
     private final Provider<WorkspaceSkeleton> wsProvider;
     private final Signal<Object> onSessionExpired;
+    private final Provider<StateManager> stateManagerProvider;
 
     public KuneErrorHandler(final Session session, final I18nTranslationService i18n,
-	    final Provider<WorkspaceSkeleton> wsProvider) {
+	    final Provider<WorkspaceSkeleton> wsProvider, final Provider<StateManager> stateManagerProvider) {
 	this.session = session;
 	this.i18n = i18n;
 	this.wsProvider = wsProvider;
+	this.stateManagerProvider = stateManagerProvider;
 	this.onSessionExpired = new Signal<Object>("onSessionExpired");
     }
 
@@ -81,11 +82,11 @@ public class KuneErrorHandler {
 	} catch (final GroupNotFoundException e) {
 	    logException(e);
 	    Site.error(i18n.t("Group not found"));
-	    DefaultDispatcher.getInstance().fire(PlatformEvents.GOTO, "");
+	    stateManagerProvider.get().gotoToken("");
 	} catch (final ContentNotFoundException e) {
 	    logException(e);
 	    Site.error(i18n.t("Content not found"));
-	    DefaultDispatcher.getInstance().fire(PlatformEvents.GOTO, "");
+	    stateManagerProvider.get().gotoToken("");
 	} catch (final LastAdminInGroupException e) {
 	    logException(e);
 	    getWorkspaceSkeleton().showAlertMessage(

@@ -33,9 +33,12 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
+import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
 import org.ourproject.kune.workspace.client.workspace.ParticipationSummary;
 
 import com.calclab.suco.client.container.Provider;
+import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.signal.Slot2;
 
 public class ParticipationSummaryPresenter extends SocialNetworkPresenter implements ParticipationSummary {
 
@@ -44,10 +47,10 @@ public class ParticipationSummaryPresenter extends SocialNetworkPresenter implem
     private GridGroup collabCategory;
     private final GridGroup collabOnlyCategory;
 
-    public ParticipationSummaryPresenter(final I18nUITranslationService i18n,
-	    final Provider<StateManager> stateManagerProvider, final ImageUtils imageUtils, final Session session,
-	    final Provider<SocialNetworkServiceAsync> snServiceProvider) {
-	super(i18n, stateManagerProvider, imageUtils, session, snServiceProvider);
+    public ParticipationSummaryPresenter(final I18nUITranslationService i18n, final StateManager stateManager,
+	    final ImageUtils imageUtils, final Session session,
+	    final Provider<SocialNetworkServiceAsync> snServiceProvider, final WsThemePresenter wsThemePresenter) {
+	super(i18n, stateManager, imageUtils, session, snServiceProvider);
 	adminCategory = new GridGroup("admin in:", " ", i18n.tWithNT("Administrate these groups",
 		"talking about a person"), false);
 	collabCategory = new GridGroup(i18n.t("and as collaborator in:"), " ", i18n.t("Collaborate in these groups"),
@@ -55,14 +58,28 @@ public class ParticipationSummaryPresenter extends SocialNetworkPresenter implem
 	collabOnlyCategory = new GridGroup(i18n.t("collaborator in:"), " ", i18n.t("Collaborate in these groups"),
 		false);
 	super.addGroupOperation(gotoGroupMenuItem, false);
+	stateManager.onStateChanged(new Slot<StateDTO>() {
+	    public void onEvent(final StateDTO state) {
+		setState(state);
+	    }
+	});
+	wsThemePresenter.onThemeChanged(new Slot2<WsTheme, WsTheme>() {
+	    public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
+		view.setTheme(oldTheme, newTheme);
+	    }
+	});
     }
 
     public void init(final ParticipationSummaryView view) {
 	this.view = view;
     }
 
+    private void hide() {
+	view.hide();
+    }
+
     @SuppressWarnings("unchecked")
-    public void setState(final StateDTO state) {
+    private void setState(final StateDTO state) {
 	final ParticipationDataDTO participation = state.getParticipation();
 	final AccessRightsDTO rights = state.getGroupRights();
 	view.clear();
@@ -93,14 +110,6 @@ public class ParticipationSummaryPresenter extends SocialNetworkPresenter implem
 	    hide();
 	}
 
-    }
-
-    public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
-	view.setTheme(oldTheme, newTheme);
-    }
-
-    private void hide() {
-	view.hide();
     }
 
 }

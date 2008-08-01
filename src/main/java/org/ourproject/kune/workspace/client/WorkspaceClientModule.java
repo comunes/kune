@@ -19,14 +19,10 @@
  */
 package org.ourproject.kune.workspace.client;
 
-import org.ourproject.kune.platf.client.PlatformEvents;
 import org.ourproject.kune.platf.client.extend.ClientModule;
 import org.ourproject.kune.platf.client.extend.Register;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.actions.AttachToExtensibleWidgetAction;
-import org.ourproject.kune.workspace.client.actions.ClearExtensibleWidgetAction;
-import org.ourproject.kune.workspace.client.actions.DetachFromExtensibleWidgetAction;
 import org.ourproject.kune.workspace.client.actions.RecalculateWorkspaceAction;
 import org.ourproject.kune.workspace.client.actions.ReloadContextAction;
 import org.ourproject.kune.workspace.client.actions.i18n.ShowTranslatorAction;
@@ -49,10 +45,6 @@ public class WorkspaceClientModule implements ClientModule {
     }
 
     public void configure(final Register register) {
-	register.addAction(PlatformEvents.ATTACH_TO_EXTENSIBLE_WIDGET, new AttachToExtensibleWidgetAction(workspace));
-	register.addAction(PlatformEvents.DETACH_FROM_EXTENSIBLE_WIDGET,
-		new DetachFromExtensibleWidgetAction(workspace));
-	register.addAction(PlatformEvents.CLEAR_EXTENSIBLE_WIDGET, new ClearExtensibleWidgetAction(workspace));
 	register.addAction(WorkspaceEvents.SHOW_TRANSLATOR, new ShowTranslatorAction(session, workspace, i18n));
 	register.addAction(WorkspaceEvents.RELOAD_CONTEXT, new ReloadContextAction(stateManager));
 	register.addAction(WorkspaceEvents.RECALCULATE_WORKSPACE_SIZE, new RecalculateWorkspaceAction(workspace));

@@ -26,12 +26,16 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.TagResultDTO;
 import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.search.SiteSearcher;
 import org.ourproject.kune.workspace.client.search.SiteSearcherType;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
+import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
 import org.ourproject.kune.workspace.client.workspace.TagsSummary;
 
 import com.calclab.suco.client.container.Provider;
+import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.signal.Slot2;
 
 public class TagsSummaryPresenter implements TagsSummary {
 
@@ -39,9 +43,20 @@ public class TagsSummaryPresenter implements TagsSummary {
     private final Provider<SiteSearcher> searcherProvider;
     private final Provider<Session> sessionProvider;
 
-    public TagsSummaryPresenter(final Provider<Session> sessionProvider, final Provider<SiteSearcher> searcherProvider) {
+    public TagsSummaryPresenter(final Provider<Session> sessionProvider, final Provider<SiteSearcher> searcherProvider,
+	    final StateManager stateManager, final WsThemePresenter wsThemePresenter) {
 	this.sessionProvider = sessionProvider;
 	this.searcherProvider = searcherProvider;
+	stateManager.onStateChanged(new Slot<StateDTO>() {
+	    public void onEvent(final StateDTO state) {
+		setState(state);
+	    }
+	});
+	wsThemePresenter.onThemeChanged(new Slot2<WsTheme, WsTheme>() {
+	    public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
+		view.setTheme(oldTheme, newTheme);
+	    }
+	});
     }
 
     public void doSearchTag(final String name) {
@@ -62,11 +77,8 @@ public class TagsSummaryPresenter implements TagsSummary {
 	view.setTags(groupTags);
     }
 
-    public void setState(final StateDTO state) {
+    private void setState(final StateDTO state) {
 	view.setTags(state.getGroupTags());
     }
 
-    public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
-	view.setTheme(oldTheme, newTheme);
-    }
 }

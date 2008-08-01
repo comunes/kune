@@ -4,12 +4,20 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.GroupListDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.state.StateManager;
+
+import com.calclab.suco.client.signal.Slot;
 
 public class SitePublicSpaceLinkPresenter implements SitePublicSpaceLink {
 
     private SitePublicSpaceLinkView view;
 
-    public SitePublicSpaceLinkPresenter() {
+    public SitePublicSpaceLinkPresenter(final StateManager stateManager) {
+	stateManager.onStateChanged(new Slot<StateDTO>() {
+	    public void onEvent(final StateDTO state) {
+		setState(state);
+	    }
+	});
     }
 
     public View getView() {
@@ -20,7 +28,11 @@ public class SitePublicSpaceLinkPresenter implements SitePublicSpaceLink {
 	this.view = view;
     }
 
-    public void setState(final StateDTO state) {
+    public void setVisible(final boolean visible) {
+	view.setVisible(visible);
+    }
+
+    private void setState(final StateDTO state) {
 	final StateToken token = state.getStateToken();
 	if (state.getAccessLists().getViewers().getMode().equals(GroupListDTO.EVERYONE)) {
 	    final String publicUrl = token.getPublicUrl();
@@ -29,10 +41,6 @@ public class SitePublicSpaceLinkPresenter implements SitePublicSpaceLink {
 	} else {
 	    view.setContentPublic(false);
 	}
-    }
-
-    public void setVisible(final boolean visible) {
-	view.setVisible(visible);
     }
 
 }

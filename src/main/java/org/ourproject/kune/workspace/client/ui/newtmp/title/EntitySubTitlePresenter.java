@@ -23,14 +23,22 @@ package org.ourproject.kune.workspace.client.ui.newtmp.title;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.state.StateManager;
+
+import com.calclab.suco.client.signal.Slot;
 
 public class EntitySubTitlePresenter {
 
     private EntitySubTitleView view;
     private final I18nTranslationService i18n;
 
-    public EntitySubTitlePresenter(final I18nTranslationService i18n) {
+    public EntitySubTitlePresenter(final I18nTranslationService i18n, final StateManager stateManager) {
 	this.i18n = i18n;
+	stateManager.onStateChanged(new Slot<StateDTO>() {
+	    public void onEvent(final StateDTO state) {
+		setState(state);
+	    }
+	});
     }
 
     public View getView() {
@@ -45,7 +53,7 @@ public class EntitySubTitlePresenter {
 	view.setContentSubTitleRight(i18n.t("Language: [%s]", langName));
     }
 
-    public void setState(final StateDTO state) {
+    private void setState(final StateDTO state) {
 	if (state.hasDocument()) {
 	    view.setContentSubTitleLeft(i18n.tWithNT("by: [%s]", "used in a list of authors", state.getAuthors().get(0)
 		    .getName()));

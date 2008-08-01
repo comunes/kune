@@ -25,18 +25,23 @@ import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
+import com.calclab.suco.client.signal.Slot;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 public interface ContextItems {
+
+    public void canCreate(String typeName, String label, Slot<?> slot);
+
+    public void canCreate(String typeName, String label, String eventName);
+
     public View getView();
 
     public void registerType(String typeName, AbstractImagePrototype pageWhite);
 
-    public void canCreate(String typeName, String label, String eventName);
+    public void setControlsVisible(boolean visible);
 
     public void setParentTreeVisible(boolean visible);
 
     public void showContainer(StateToken state, ContainerDTO container, AccessRightsDTO rights);
 
-    public void setControlsVisible(boolean visible);
 }

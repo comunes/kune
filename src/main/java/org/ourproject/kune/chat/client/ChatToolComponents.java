@@ -22,33 +22,46 @@ package org.ourproject.kune.chat.client;
 
 import org.ourproject.kune.chat.client.cnt.ChatContent;
 import org.ourproject.kune.chat.client.ctx.ChatContext;
+import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.StateManager;
 
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
+import com.calclab.suco.client.container.Provider;
 
 class ChatToolComponents {
     private ChatContent content;
     private ChatContext context;
     private final EmiteUIDialog emiteUIDialog;
     private final I18nTranslationService i18n;
+    private final Provider<StateManager> stateManagerProvider;
+    private final Session session;
+    private final Provider<ContentServiceAsync> contentServiceProvider;
 
-    public ChatToolComponents(final EmiteUIDialog emiteUIDialog, final I18nTranslationService i18n) {
-        this.emiteUIDialog = emiteUIDialog;
-        this.i18n = i18n;
+    public ChatToolComponents(final EmiteUIDialog emiteUIDialog, final I18nTranslationService i18n,
+	    final Provider<StateManager> stateManagerProvider, final Session session,
+	    final Provider<ContentServiceAsync> contentServiceProvider) {
+	this.emiteUIDialog = emiteUIDialog;
+	this.i18n = i18n;
+	this.stateManagerProvider = stateManagerProvider;
+	this.session = session;
+	this.contentServiceProvider = contentServiceProvider;
     }
 
     public ChatContent getContent() {
-        if (content == null) {
-            content = ChatFactory.createChatContent(emiteUIDialog, i18n);
-        }
-        return content;
+	if (content == null) {
+	    content = ChatFactory.createChatContent(emiteUIDialog, i18n, stateManagerProvider, session,
+		    contentServiceProvider);
+	}
+	return content;
     }
 
     public ChatContext getContext() {
-        if (context == null) {
-            context = ChatFactory.createChatContext();
-        }
-        return context;
+	if (context == null) {
+	    context = ChatFactory.createChatContext();
+	}
+	return context;
     }
 
 }

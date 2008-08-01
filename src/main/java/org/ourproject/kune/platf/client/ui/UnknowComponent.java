@@ -29,7 +29,7 @@ public class UnknowComponent extends Label implements View, Component {
     public static final UnknowComponent instance = new UnknowComponent();
 
     public UnknowComponent() {
-	super("programming error: unknown component!! please contact kune_dev@ourproject.org");
+	super("programming error: unknown component!! please contact kune-devel@lists-ourproject.org");
     }
 
     public View getView() {

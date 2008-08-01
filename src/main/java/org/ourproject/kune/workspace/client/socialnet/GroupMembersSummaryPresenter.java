@@ -20,11 +20,13 @@ import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
+import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
 import org.ourproject.kune.workspace.client.workspace.GroupMembersSummary;
 import org.ourproject.kune.workspace.client.workspace.UserLiveSearcher;
 
 import com.calclab.suco.client.container.Provider;
 import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.signal.Slot2;
 
 public class GroupMembersSummaryPresenter extends SocialNetworkPresenter implements GroupMembersSummary {
 
@@ -36,15 +38,27 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
     private final GridGroup pendigCategory;
     private final Session session;
     private final Provider<SocialNetworkServiceAsync> snServiceProvider;
+    private final StateManager stateManager;
 
-    public GroupMembersSummaryPresenter(final I18nUITranslationService i18n,
-	    final Provider<StateManager> stateManagerProvider, final ImageUtils imageUtils, final Session session,
+    public GroupMembersSummaryPresenter(final I18nUITranslationService i18n, final StateManager stateManager,
+	    final ImageUtils imageUtils, final Session session,
 	    final Provider<SocialNetworkServiceAsync> snServiceProvider,
-	    final Provider<UserLiveSearcher> userLiveSearcherProvider) {
-	super(i18n, stateManagerProvider, imageUtils, session, snServiceProvider);
+	    final Provider<UserLiveSearcher> userLiveSearcherProvider, final WsThemePresenter wsThemePresenter) {
+	super(i18n, stateManager, imageUtils, session, snServiceProvider);
 	this.i18n = i18n;
+	this.stateManager = stateManager;
 	this.session = session;
 	this.snServiceProvider = snServiceProvider;
+	stateManager.onStateChanged(new Slot<StateDTO>() {
+	    public void onEvent(final StateDTO state) {
+		setState(state);
+	    }
+	});
+	wsThemePresenter.onThemeChanged(new Slot2<WsTheme, WsTheme>() {
+	    public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
+		view.setTheme(oldTheme, newTheme);
+	    }
+	});
 	final String adminsTitle = i18n.t("Admins");
 	final String collabsTitle = i18n.t("Collaborators");
 	final String pendingTitle = i18n.t("Pending");
@@ -77,7 +91,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
 		    public void onSuccess(final SocialNetworkResultDTO result) {
 			Site.hideProgress();
 			Site.info(i18n.t("Member added as collaborator"));
-			getStateManager().setSocialNetwork(result);
+			stateManager.setSocialNetwork(result);
 		    }
 
 		});
@@ -85,18 +99,6 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
 
     public void init(final GroupMembersSummaryView view) {
 	this.view = view;
-    }
-
-    public void setState(final StateDTO state) {
-	if (state.getGroup().getType().equals(GroupDTO.PERSONAL)) {
-	    view.setVisible(false);
-	} else {
-	    setGroupMembers(state.getGroupMembers(), state.getGroupRights());
-	}
-    }
-
-    public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
-	view.setTheme(oldTheme, newTheme);
     }
 
     private boolean isMember(final boolean userIsAdmin, final boolean userIsCollab) {
@@ -161,6 +163,14 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
 	    view.setMaxHeigth();
 	} else {
 	    view.setDefaultHeigth();
+	}
+    }
+
+    private void setState(final StateDTO state) {
+	if (state.getGroup().getType().equals(GroupDTO.PERSONAL)) {
+	    view.setVisible(false);
+	} else {
+	    setGroupMembers(state.getGroupMembers(), state.getGroupRights());
 	}
     }
 

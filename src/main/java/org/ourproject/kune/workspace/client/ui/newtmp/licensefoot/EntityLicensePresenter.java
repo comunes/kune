@@ -22,13 +22,21 @@ package org.ourproject.kune.workspace.client.ui.newtmp.licensefoot;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.state.StateManager;
+
+import com.calclab.suco.client.signal.Slot;
 
 public class EntityLicensePresenter {
 
     private EntityLicenseView view;
     private LicenseDTO license;
 
-    public EntityLicensePresenter() {
+    public EntityLicensePresenter(final StateManager stateManager) {
+	stateManager.onStateChanged(new Slot<StateDTO>() {
+	    public void onEvent(final StateDTO state) {
+		setLicense(state);
+	    }
+	});
     }
 
     public View getView() {
@@ -43,7 +51,7 @@ public class EntityLicensePresenter {
 	view.openWindow(license.getUrl());
     }
 
-    public void setLicense(final StateDTO state) {
+    private void setLicense(final StateDTO state) {
 	this.license = state.getLicense();
 	view.showLicense(state.getGroup().getLongName(), license);
     }

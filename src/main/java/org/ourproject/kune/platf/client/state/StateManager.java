@@ -31,7 +31,13 @@ public interface StateManager extends HistoryListener {
 
     void addSiteToken(String token, Slot<StateToken> whenToken);
 
+    void gotoContainer(Long containerId);
+
     void gotoToken(String token);
+
+    void onSocialNetworkChanged(Slot<StateDTO> slot);
+
+    void onStateChanged(Slot<StateDTO> slot);
 
     void reload();
 

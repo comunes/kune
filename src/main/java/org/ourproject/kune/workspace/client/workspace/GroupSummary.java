@@ -20,13 +20,7 @@
 
 package org.ourproject.kune.workspace.client.workspace;
 
-import org.ourproject.kune.platf.client.dto.StateDTO;
-import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 
 public interface GroupSummary {
-
-    void setState(StateDTO state);
-
-    void setTheme(WsTheme oldTheme, WsTheme newTheme);
 
 }

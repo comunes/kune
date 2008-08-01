@@ -3,13 +3,11 @@ package org.ourproject.kune.platf.client.services;
 import org.ourproject.kune.chat.client.ChatClientNewModule;
 import org.ourproject.kune.docs.client.DocumentClientNewModule;
 import org.ourproject.kune.platf.client.KunePlatform;
-import org.ourproject.kune.platf.client.PlatformClientModule;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.ApplicationDefault;
 import org.ourproject.kune.platf.client.app.HistoryWrapper;
 import org.ourproject.kune.platf.client.app.HistoryWrapperImpl;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.extend.ExtensibleWidgetsManager;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
@@ -74,7 +72,6 @@ import org.ourproject.kune.workspace.client.summary.GroupSummaryPresenter;
 import org.ourproject.kune.workspace.client.summary.GroupSummaryView;
 import org.ourproject.kune.workspace.client.tags.TagsSummaryPanel;
 import org.ourproject.kune.workspace.client.tags.TagsSummaryPresenter;
-import org.ourproject.kune.workspace.client.ui.newtmp.WorkspaceManager;
 import org.ourproject.kune.workspace.client.ui.newtmp.licensefoot.EntityLicensePanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.licensefoot.EntityLicensePresenter;
 import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitelogo.SiteLogo;
@@ -119,6 +116,7 @@ import org.ourproject.kune.workspace.client.workspace.TagsSummary;
 import org.ourproject.kune.workspace.client.workspace.UserLiveSearcher;
 import org.ourproject.kune.workspace.client.workspace.ui.EntityLogo;
 import org.ourproject.kune.workspace.client.workspace.ui.EntityLogoPanel;
+import org.ourproject.kune.workspace.client.workspace.ui.EntityLogoPresenter;
 
 import com.calclab.emiteuimodule.client.EmiteUIModule;
 import com.calclab.suco.client.container.Container;
@@ -149,27 +147,19 @@ public class KuneModule extends AbstractModule {
 	    public Session create() {
 		return new SessionImpl(Cookies.getCookie(Site.USERHASH), $p(UserServiceAsync.class));
 	    }
-	});
-
-	/** Services (this in other module after UI refactor * */
-
-	register(SingletonScope.class, new Factory<I18nServiceAsync>(I18nServiceAsync.class) {
+	}, new Factory<I18nServiceAsync>(I18nServiceAsync.class) {
 	    public I18nServiceAsync create() {
 		final I18nServiceAsync service = (I18nServiceAsync) GWT.create(I18nService.class);
 		((ServiceDefTarget) service).setServiceEntryPoint(GWT.getModuleBaseURL() + "I18nService");
 		return service;
 	    }
-	});
-
-	register(SingletonScope.class, new Factory<UserServiceAsync>(UserServiceAsync.class) {
+	}, new Factory<UserServiceAsync>(UserServiceAsync.class) {
 	    public UserServiceAsync create() {
 		final UserServiceAsync service = (UserServiceAsync) GWT.create(UserService.class);
 		((ServiceDefTarget) service).setServiceEntryPoint(GWT.getModuleBaseURL() + "UserService");
 		return service;
 	    }
-	});
-
-	register(SingletonScope.class, new Factory<SocialNetworkServiceAsync>(SocialNetworkServiceAsync.class) {
+	}, new Factory<SocialNetworkServiceAsync>(SocialNetworkServiceAsync.class) {
 	    public SocialNetworkServiceAsync create() {
 		final SocialNetworkServiceAsync snServiceAsync = (SocialNetworkServiceAsync) GWT
 			.create(SocialNetworkService.class);
@@ -177,18 +167,15 @@ public class KuneModule extends AbstractModule {
 			+ "SocialNetworkService");
 		return snServiceAsync;
 	    }
-	});
-
-	register(SingletonScope.class, new Factory<GroupServiceAsync>(GroupServiceAsync.class) {
+	}, new Factory<GroupServiceAsync>(GroupServiceAsync.class) {
 	    public GroupServiceAsync create() {
 		final GroupServiceAsync groupServiceAsync = (GroupServiceAsync) GWT.create(GroupService.class);
 		((ServiceDefTarget) groupServiceAsync).setServiceEntryPoint(GWT.getModuleBaseURL() + "GroupService");
 		return groupServiceAsync;
 	    }
-	});
-
-	register(SingletonScope.class, new Factory<ContentServiceAsync>(ContentServiceAsync.class) {
+	}, new Factory<ContentServiceAsync>(ContentServiceAsync.class) {
 	    public ContentServiceAsync create() {
+		// FIXME
 		return ContentService.App.getInstance();
 	    }
 	});
@@ -225,35 +212,26 @@ public class KuneModule extends AbstractModule {
 
 	$(QuickTipsHelper.class);
 
-	register(SingletonScope.class, new Factory<UserServiceAsync>(UserServiceAsync.class) {
-	    public UserServiceAsync create() {
-		final UserServiceAsync service = (UserServiceAsync) GWT.create(UserService.class);
-		((ServiceDefTarget) service).setServiceEntryPoint(GWT.getModuleBaseURL() + "UserService");
-		return service;
+	register(SingletonScope.class, new Factory<HistoryWrapper>(HistoryWrapper.class) {
+	    public HistoryWrapper create() {
+		return new HistoryWrapperImpl();
+	    }
+	}, new Factory<ContentProvider>(ContentProvider.class) {
+	    public ContentProvider create() {
+		return new ContentProviderImpl($(ContentServiceAsync.class));
+	    }
+	}, new Factory<StateManager>(StateManager.class) {
+	    public StateManager create() {
+		final StateManagerDefault stateManager = new StateManagerDefault($(ContentProvider.class),
+			$(Session.class), $(HistoryWrapper.class));
+		History.addHistoryListener(stateManager);
+		return stateManager;
 	    }
 	});
 
-	register(SingletonScope.class, new Factory<SocialNetworkServiceAsync>(SocialNetworkServiceAsync.class) {
-	    public SocialNetworkServiceAsync create() {
-		final SocialNetworkServiceAsync snServiceAsync = (SocialNetworkServiceAsync) GWT
-			.create(SocialNetworkService.class);
-		((ServiceDefTarget) snServiceAsync).setServiceEntryPoint(GWT.getModuleBaseURL()
-			+ "SocialNetworkService");
-		return snServiceAsync;
-	    }
-	});
-
-	register(SingletonScope.class, new Factory<GroupServiceAsync>(GroupServiceAsync.class) {
-	    public GroupServiceAsync create() {
-		final GroupServiceAsync groupServiceAsync = (GroupServiceAsync) GWT.create(GroupService.class);
-		((ServiceDefTarget) groupServiceAsync).setServiceEntryPoint(GWT.getModuleBaseURL() + "GroupService");
-		return groupServiceAsync;
-	    }
-	});
-
-	register(SingletonScope.class, new Factory<ContentServiceAsync>(ContentServiceAsync.class) {
-	    public ContentServiceAsync create() {
-		return ContentService.App.getInstance();
+	register(SingletonScope.class, new Factory<KuneErrorHandler>(KuneErrorHandler.class) {
+	    public KuneErrorHandler create() {
+		return new KuneErrorHandler($(Session.class), i18n, $p(WorkspaceSkeleton.class), $p(StateManager.class));
 	    }
 	});
 
@@ -261,17 +239,9 @@ public class KuneModule extends AbstractModule {
 	    public Images create() {
 		return Images.App.getInstance();
 	    }
-	});
-
-	register(SingletonScope.class, new Factory<ImageUtils>(ImageUtils.class) {
+	}, new Factory<ImageUtils>(ImageUtils.class) {
 	    public ImageUtils create() {
 		return new ImageUtils();
-	    }
-	});
-
-	register(SingletonScope.class, new Factory<KuneErrorHandler>(KuneErrorHandler.class) {
-	    public KuneErrorHandler create() {
-		return new KuneErrorHandler($(Session.class), i18n, $p(WorkspaceSkeleton.class));
 	    }
 	});
 
@@ -290,26 +260,19 @@ public class KuneModule extends AbstractModule {
 	    }
 	});
 
-	register(SingletonScope.class, new Factory<ExtensibleWidgetsManager>(ExtensibleWidgetsManager.class) {
-	    public ExtensibleWidgetsManager create() {
-		return new ExtensibleWidgetsManager();
-	    }
-	});
-
 	final WorkspaceSkeleton ws = $(WorkspaceSkeleton.class);
 	final Images images = $(Images.class);
 
 	register(SingletonScope.class, new Factory<Application>(Application.class) {
 	    public Application create() {
 		final Session session = $(Session.class);
-		final ExtensibleWidgetsManager extensionPointManager = $(ExtensibleWidgetsManager.class);
-		return new ApplicationDefault(session, extensionPointManager, i18n, $(KuneErrorHandler.class), ws);
+		return new ApplicationDefault(session, $(KuneErrorHandler.class), ws);
 	    }
 	});
 
 	register(SingletonScope.class, new Factory<SitePublicSpaceLink>(SitePublicSpaceLink.class) {
 	    public SitePublicSpaceLink create() {
-		final SitePublicSpaceLinkPresenter presenter = new SitePublicSpaceLinkPresenter();
+		final SitePublicSpaceLinkPresenter presenter = new SitePublicSpaceLinkPresenter($(StateManager.class));
 		final SitePublicSpaceLinkPanel panel = new SitePublicSpaceLinkPanel(presenter, ws, i18n, images);
 		presenter.init(panel);
 		return presenter;
@@ -400,7 +363,7 @@ public class KuneModule extends AbstractModule {
 
 	register(SingletonScope.class, new Factory<SiteSearcher>(SiteSearcher.class) {
 	    public SiteSearcher create() {
-		final SiteSearcherPresenter presenter = new SiteSearcherPresenter();
+		final SiteSearcherPresenter presenter = new SiteSearcherPresenter($p(StateManager.class));
 		final SiteSearcherView view = new SiteSearcherPanel(presenter, i18n, ws);
 		presenter.init(view);
 		return presenter;
@@ -455,24 +418,20 @@ public class KuneModule extends AbstractModule {
 	    }
 	});
 
-	$(SitePublicSpaceLink.class);
-	$(SiteMessage.class);
-	$(SiteUserMenu.class);
-	$(SiteSignInLink.class);
-	$(SiteSignOutLink.class);
-	$(SiteNewGroupLink.class);
-	$(SiteSearch.class);
-	$(SiteLogo.class);
-
 	register(SingletonScope.class, new Factory<EntityLogo>(EntityLogo.class) {
 	    public EntityLogo create() {
-		return new EntityLogoPanel(i18n, ws);
+		final EntityLogoPresenter presenter = new EntityLogoPresenter($(StateManager.class),
+			$(WsThemePresenter.class));
+		final EntityLogoPanel panel = new EntityLogoPanel(i18n, ws);
+		presenter.init(panel);
+		return presenter;
 	    }
 	});
 
 	register(SingletonScope.class, new Factory<WsThemePresenter>(WsThemePresenter.class) {
 	    public WsThemePresenter create() {
-		final WsThemePresenter presenter = new WsThemePresenter($(Session.class), $p(GroupServiceAsync.class));
+		final WsThemePresenter presenter = new WsThemePresenter($(Session.class), $p(GroupServiceAsync.class),
+			$(StateManager.class));
 		final WsThemePanel panel = new WsThemePanel(ws, presenter, i18n);
 		presenter.init(panel);
 		return presenter;
@@ -481,7 +440,8 @@ public class KuneModule extends AbstractModule {
 
 	register(SingletonScope.class, new Factory<EntityTitlePresenter>(EntityTitlePresenter.class) {
 	    public EntityTitlePresenter create() {
-		final EntityTitlePresenter presenter = new EntityTitlePresenter(i18n, $(KuneErrorHandler.class));
+		final EntityTitlePresenter presenter = new EntityTitlePresenter(i18n, $(KuneErrorHandler.class),
+			$(StateManager.class));
 		final EntityTitlePanel panel = new EntityTitlePanel(ws, presenter);
 		presenter.init(panel);
 		return presenter;
@@ -490,7 +450,7 @@ public class KuneModule extends AbstractModule {
 
 	register(SingletonScope.class, new Factory<EntitySubTitlePresenter>(EntitySubTitlePresenter.class) {
 	    public EntitySubTitlePresenter create() {
-		final EntitySubTitlePresenter presenter = new EntitySubTitlePresenter(i18n);
+		final EntitySubTitlePresenter presenter = new EntitySubTitlePresenter(i18n, $(StateManager.class));
 		final EntitySubTitlePanel panel = new EntitySubTitlePanel(presenter, i18n, ws);
 		presenter.init(panel);
 		return presenter;
@@ -499,7 +459,7 @@ public class KuneModule extends AbstractModule {
 
 	register(SingletonScope.class, new Factory<EntityLicensePresenter>(EntityLicensePresenter.class) {
 	    public EntityLicensePresenter create() {
-		final EntityLicensePresenter presenter = new EntityLicensePresenter();
+		final EntityLicensePresenter presenter = new EntityLicensePresenter($(StateManager.class));
 		final EntityLicensePanel panel = new EntityLicensePanel(presenter, i18n, ws);
 		presenter.init(panel);
 		return presenter;
@@ -508,7 +468,7 @@ public class KuneModule extends AbstractModule {
 
 	register(SingletonScope.class, new Factory<RatePresenter>(RatePresenter.class) {
 	    public RatePresenter create() {
-		final RatePresenter presenter = new RatePresenter();
+		final RatePresenter presenter = new RatePresenter($(StateManager.class));
 		final RatePanel panel = new RatePanel(null, null, i18n, ws);
 		presenter.init(panel);
 		return presenter;
@@ -518,7 +478,7 @@ public class KuneModule extends AbstractModule {
 	register(SingletonScope.class, new Factory<RateIt>(RateIt.class) {
 	    public RateIt create() {
 		final RateItPresenter presenter = new RateItPresenter(i18n, $(Session.class),
-			$p(ContentServiceAsync.class), $p(StateManager.class));
+			$p(ContentServiceAsync.class), $(StateManager.class));
 		final RateItPanel panel = new RateItPanel(presenter, i18n, ws);
 		presenter.init(panel);
 		return presenter;
@@ -528,8 +488,8 @@ public class KuneModule extends AbstractModule {
 	register(SingletonScope.class, new Factory<GroupMembersSummary>(GroupMembersSummary.class) {
 	    public GroupMembersSummary create() {
 		final GroupMembersSummaryPresenter presenter = new GroupMembersSummaryPresenter(i18n,
-			$p(StateManager.class), $(ImageUtils.class), $(Session.class),
-			$p(SocialNetworkServiceAsync.class), $p(UserLiveSearcher.class));
+			$(StateManager.class), $(ImageUtils.class), $(Session.class),
+			$p(SocialNetworkServiceAsync.class), $p(UserLiveSearcher.class), $(WsThemePresenter.class));
 		final GroupMembersSummaryView view = new GroupMembersSummaryPanel(presenter, i18n, ws);
 		presenter.init(view);
 		return presenter;
@@ -538,7 +498,8 @@ public class KuneModule extends AbstractModule {
 
 	register(SingletonScope.class, new Factory<GroupSummary>(GroupSummary.class) {
 	    public GroupSummary create() {
-		final GroupSummaryPresenter presenter = new GroupSummaryPresenter();
+		final GroupSummaryPresenter presenter = new GroupSummaryPresenter($(StateManager.class),
+			$(WsThemePresenter.class));
 		final GroupSummaryView view = new GroupSummaryPanel(presenter, i18n, ws);
 		presenter.init(view);
 		return presenter;
@@ -548,8 +509,8 @@ public class KuneModule extends AbstractModule {
 	register(SingletonScope.class, new Factory<ParticipationSummary>(ParticipationSummary.class) {
 	    public ParticipationSummary create() {
 		final ParticipationSummaryPresenter presenter = new ParticipationSummaryPresenter(i18n,
-			$p(StateManager.class), $(ImageUtils.class), $(Session.class),
-			$p(SocialNetworkServiceAsync.class));
+			$(StateManager.class), $(ImageUtils.class), $(Session.class),
+			$p(SocialNetworkServiceAsync.class), $(WsThemePresenter.class));
 		final ParticipationSummaryView view = new ParticipationSummaryPanel(presenter, i18n, ws);
 		presenter.init(view);
 		return presenter;
@@ -559,40 +520,10 @@ public class KuneModule extends AbstractModule {
 	register(SingletonScope.class, new Factory<TagsSummary>(TagsSummary.class) {
 	    public TagsSummary create() {
 		final TagsSummaryPresenter presenter = new TagsSummaryPresenter($p(Session.class),
-			$p(SiteSearcher.class));
+			$p(SiteSearcher.class), $(StateManager.class), $(WsThemePresenter.class));
 		final TagsSummaryPanel panel = new TagsSummaryPanel(presenter, i18n, ws);
 		presenter.init(panel);
 		return presenter;
-	    }
-	});
-
-	register(SingletonScope.class, new Factory<WorkspaceManager>(WorkspaceManager.class) {
-	    public WorkspaceManager create() {
-		final WorkspaceManager presenter = new WorkspaceManager($(SitePublicSpaceLink.class),
-			$(EntityLogo.class), $(EntityTitlePresenter.class), $(EntitySubTitlePresenter.class),
-			$(WsThemePresenter.class), $(EntityLicensePresenter.class), $p(GroupMembersSummary.class),
-			$p(ParticipationSummary.class), $p(TagsSummary.class), $p(GroupSummary.class),
-			$p(RateIt.class), $p(RatePresenter.class));
-		return presenter;
-	    }
-	});
-
-	$(WorkspaceManager.class);
-
-	register(SingletonScope.class, new Factory<HistoryWrapper>(HistoryWrapper.class) {
-	    public HistoryWrapper create() {
-		return new HistoryWrapperImpl();
-	    }
-	}, new Factory<ContentProvider>(ContentProvider.class) {
-	    public ContentProvider create() {
-		return new ContentProviderImpl($(ContentServiceAsync.class));
-	    }
-	}, new Factory<StateManager>(StateManager.class) {
-	    public StateManager create() {
-		final StateManagerDefault stateManager = new StateManagerDefault($(ContentProvider.class),
-			$(Session.class), $(HistoryWrapper.class), $(WorkspaceManager.class));
-		History.addHistoryListener(stateManager);
-		return stateManager;
 	    }
 	});
 
@@ -616,6 +547,28 @@ public class KuneModule extends AbstractModule {
 
 	load(new EmiteUIModule(), new DocumentClientNewModule(), new ChatClientNewModule());
 
+	$(SitePublicSpaceLink.class);
+	$(SiteMessage.class);
+	$(SiteUserMenu.class);
+	$(SiteSignInLink.class);
+	$(SiteSignOutLink.class);
+	$(SiteNewGroupLink.class);
+	$(SiteSearch.class);
+	$(SiteLogo.class);
+
+	$(EntityLogo.class);
+	$(EntityTitlePresenter.class);
+	$(EntitySubTitlePresenter.class);
+	$(WsThemePresenter.class);
+	$(EntityLicensePresenter.class);
+	$(RateIt.class);
+	$(RatePresenter.class);
+
+	$(GroupMembersSummary.class);
+	$(ParticipationSummary.class);
+	$(TagsSummary.class);
+	$(GroupSummary.class);
+
 	// Register of tokens like "signin", "newgroup", "translate" etcetera
 	$(StateManager.class).addSiteToken(SiteToken.signin.toString(), new Slot<StateToken>() {
 	    public void onEvent(final StateToken previousStateToken) {
@@ -630,12 +583,11 @@ public class KuneModule extends AbstractModule {
 	});
 
 	final KunePlatform platform = $(KunePlatform.class);
-	platform.install(new PlatformClientModule($(Session.class), $p(StateManager.class)));
 	platform.install(new WorkspaceClientModule($(Session.class), $(StateManager.class), $(Application.class)
 		.getWorkspace(), i18n));
 	$(Application.class).init($(StateManager.class), platform.getIndexedTools());
 	$(Application.class).subscribeActions(platform.getActions());
-	$(Application.class).getWorkspace().attachTools(platform.getTools().iterator());
+	// $(Application.class).getWorkspace().attachTools(platform.getTools().iterator());
 	$(Application.class).start();
 
     }

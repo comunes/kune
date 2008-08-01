@@ -7,7 +7,6 @@ import org.ourproject.kune.platf.client.app.HistoryWrapper;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.workspace.client.sitebar.SiteToken;
-import org.ourproject.kune.workspace.client.ui.newtmp.WorkspaceManager;
 
 import com.calclab.suco.client.signal.Slot;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -34,8 +33,7 @@ public class StateManagerTest {
 	contentProvider = Mockito.mock(ContentProvider.class);
 	session = Mockito.mock(Session.class);
 	history = Mockito.mock(HistoryWrapper.class);
-	final WorkspaceManager ws = Mockito.mock(WorkspaceManager.class);
-	stateManager = new StateManagerDefault(contentProvider, session, history, ws);
+	stateManager = new StateManagerDefault(contentProvider, session, history);
 	Mockito.stub(session.getUserHash()).toReturn(HASH);
     }
 

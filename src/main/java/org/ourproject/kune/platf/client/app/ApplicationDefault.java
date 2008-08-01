@@ -28,17 +28,14 @@ import java.util.Map;
 import org.ourproject.kune.platf.client.dispatch.ActionEvent;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
-import org.ourproject.kune.platf.client.extend.ExtensibleWidgetsManager;
 import org.ourproject.kune.platf.client.rpc.SiteService;
 import org.ourproject.kune.platf.client.rpc.SiteServiceAsync;
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.platf.client.ui.WindowUtils;
 import org.ourproject.kune.platf.client.utils.PrefetchUtilities;
-import org.ourproject.kune.workspace.client.WorkspaceFactory;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
@@ -52,17 +49,17 @@ import com.google.gwt.user.client.WindowCloseListener;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class ApplicationDefault implements Application {
-    private final Workspace workspace;
+    // private final Workspace workspace;
     private Map<String, ClientTool> tools;
     private final Session session;
     private final Signal<Object> onApplicationStart;
     private final Signal<Object> onApplicationStop;
     private StateManager stateManager;
 
-    public ApplicationDefault(final Session session, final ExtensibleWidgetsManager extensionPointManager,
-	    final I18nTranslationService i18n, final KuneErrorHandler errorHandler, final WorkspaceSkeleton ws) {
+    public ApplicationDefault(final Session session, final KuneErrorHandler errorHandler, final WorkspaceSkeleton ws) {
 	this.session = session;
-	workspace = WorkspaceFactory.createWorkspace(session, extensionPointManager, i18n, errorHandler);
+	// workspace = WorkspaceFactory.createWorkspace(session,
+	// extensionPointManager, i18n, errorHandler);
 	tools = new HashMap<String, ClientTool>();
 	this.onApplicationStart = new Signal<Object>("onApplicationStart");
 	this.onApplicationStop = new Signal<Object>("onApplicationStop");
@@ -81,8 +78,9 @@ public class ApplicationDefault implements Application {
 	return tools.get(toolName);
     }
 
+    @Deprecated
     public Workspace getWorkspace() {
-	return workspace;
+	return null;
     }
 
     public void init(final StateManager stateManager, final HashMap<String, ClientTool> tools) {
@@ -112,7 +110,7 @@ public class ApplicationDefault implements Application {
 	getInitData();
 	final Timer prefetchTimer = new Timer() {
 	    public void run() {
-		PrefetchUtilities.doTasksDeferred(workspace);
+		PrefetchUtilities.doTasksDeferred();
 	    }
 	};
 	prefetchTimer.schedule(20000);

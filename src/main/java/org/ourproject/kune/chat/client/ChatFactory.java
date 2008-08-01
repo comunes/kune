@@ -35,19 +35,31 @@ import org.ourproject.kune.chat.client.ctx.ChatContext;
 import org.ourproject.kune.chat.client.ctx.ChatContextPresenter;
 import org.ourproject.kune.chat.client.ctx.rooms.RoomsAdmin;
 import org.ourproject.kune.chat.client.ctx.rooms.RoomsAdminPresenter;
+import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.WorkspaceFactory;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckPanel;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
+import com.calclab.suco.client.container.Provider;
 
 public class ChatFactory {
 
     private static I18nTranslationService i18n;
+    private static Provider<StateManager> stateManagerProvider;
+    private static Session session;
+    private static Provider<ContentServiceAsync> contentServiceProvider;
 
-    public static ChatContent createChatContent(final EmiteUIDialog emiteUIDialog, final I18nTranslationService i18n) {
+    public static ChatContent createChatContent(final EmiteUIDialog emiteUIDialog, final I18nTranslationService i18n,
+	    final Provider<StateManager> stateManagerProvider, final Session session,
+	    final Provider<ContentServiceAsync> contentServiceProvider) {
 	ChatFactory.i18n = i18n;
+	ChatFactory.stateManagerProvider = stateManagerProvider;
+	ChatFactory.session = session;
+	ChatFactory.contentServiceProvider = contentServiceProvider;
 	final WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
 	final ChatContentPresenter presenter = new ChatContentPresenter(emiteUIDialog, panel);
 	return presenter;
@@ -78,7 +90,8 @@ public class ChatFactory {
 
     public static RoomsAdmin createRoomsAdmin() {
 	final ContextItems contextItems = WorkspaceFactory.createContextItems();
-	final RoomsAdminPresenter presenter = new RoomsAdminPresenter(contextItems, i18n);
+	final RoomsAdminPresenter presenter = new RoomsAdminPresenter(contextItems, i18n, stateManagerProvider,
+		session, contentServiceProvider);
 	return presenter;
     }
 

@@ -24,7 +24,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.ourproject.kune.docs.client.actions.DocsEvents;
-import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
@@ -41,7 +40,7 @@ import org.ourproject.kune.workspace.client.workspace.TagsSummary;
 
 import com.calclab.suco.client.container.Provider;
 
-public class AdminContextPresenter extends AbstractPresenter implements AdminContext {
+public class AdminContextPresenter implements AdminContext {
 
     private AdminContextView view;
     private final Session session;

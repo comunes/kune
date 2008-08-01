@@ -5,6 +5,7 @@ import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
 import com.calclab.suco.client.container.Provider;
@@ -20,13 +21,19 @@ public class WsThemePresenter {
     private final Provider<GroupServiceAsync> groupServiceProvider;
     private final Session session;
 
-    public WsThemePresenter(final Session session, final Provider<GroupServiceAsync> groupServiceProvider) {
+    public WsThemePresenter(final Session session, final Provider<GroupServiceAsync> groupServiceProvider,
+	    final StateManager stateManager) {
 	this.session = session;
 	this.groupServiceProvider = groupServiceProvider;
 	this.onThemeChanged = new Signal2<WsTheme, WsTheme>("onThemeChanged");
 	session.onInitDataReceived(new Slot<InitDataDTO>() {
 	    public void onEvent(final InitDataDTO initData) {
 		view.setThemes(initData.getWsThemes());
+	    }
+	});
+	stateManager.onStateChanged(new Slot<StateDTO>() {
+	    public void onEvent(final StateDTO state) {
+		setState(state);
 	    }
 	});
     }
@@ -39,15 +46,6 @@ public class WsThemePresenter {
 	onThemeChanged.add(slot);
     }
 
-    public void setState(final StateDTO state) {
-	setTheme(new WsTheme(state.getGroup().getWorkspaceTheme()));
-	if (state.getGroupRights().isAdministrable()) {
-	    view.setVisible(true);
-	} else {
-	    view.setVisible(false);
-	}
-    }
-
     protected void onChangeGroupWsTheme(final WsTheme newTheme) {
 	Site.showProgressProcessing();
 	groupServiceProvider.get().changeGroupWsTheme(session.getUserHash(),
@@ -58,6 +56,15 @@ public class WsThemePresenter {
 			Site.hideProgress();
 		    }
 		});
+    }
+
+    private void setState(final StateDTO state) {
+	setTheme(new WsTheme(state.getGroup().getWorkspaceTheme()));
+	if (state.getGroupRights().isAdministrable()) {
+	    view.setVisible(true);
+	} else {
+	    view.setVisible(false);
+	}
     }
 
     private void setTheme(final WsTheme newTheme) {

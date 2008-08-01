@@ -29,9 +29,11 @@ import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.rpc.ParamCallback;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
+import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
+import com.calclab.suco.client.signal.Slot;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -41,9 +43,15 @@ public class EntityTitlePresenter {
     private final I18nTranslationService i18n;
     private final KuneErrorHandler errorHandler;
 
-    public EntityTitlePresenter(final I18nTranslationService i18n, final KuneErrorHandler errorHandler) {
+    public EntityTitlePresenter(final I18nTranslationService i18n, final KuneErrorHandler errorHandler,
+	    final StateManager stateManager) {
 	this.i18n = i18n;
 	this.errorHandler = errorHandler;
+	stateManager.onStateChanged(new Slot<StateDTO>() {
+	    public void onEvent(final StateDTO state) {
+		setState(state);
+	    }
+	});
     }
 
     public View getView() {
@@ -72,7 +80,21 @@ public class EntityTitlePresenter {
 		new ParamCallback<String, String>(text, callback));
     }
 
-    public void setState(final StateDTO state) {
+    private void setContentDate(final Date publishedOn) {
+	final DateTimeFormat fmt = DateTimeFormat.getFormat("MM/dd/yyyy, Z");
+	view.setContentDate(i18n.t("Published on: [%s]", fmt.format(publishedOn)));
+    }
+
+    private void setContentDateVisible(final boolean visible) {
+	view.setDateVisible(visible);
+    }
+
+    private void setContentTitle(final String title, final boolean editable) {
+	view.setContentTitle(title);
+	view.setContentTitleEditable(editable);
+    }
+
+    private void setState(final StateDTO state) {
 	if (state.hasDocument()) {
 	    setContentTitle(state.getTitle(), state.getContentRights().isEditable());
 	    setContentDateVisible(true);
@@ -87,20 +109,6 @@ public class EntityTitlePresenter {
 	    }
 	    setContentDateVisible(false);
 	}
-    }
-
-    private void setContentDate(final Date publishedOn) {
-	final DateTimeFormat fmt = DateTimeFormat.getFormat("MM/dd/yyyy, Z");
-	view.setContentDate(i18n.t("Published on: [%s]", fmt.format(publishedOn)));
-    }
-
-    private void setContentDateVisible(final boolean visible) {
-	view.setDateVisible(visible);
-    }
-
-    private void setContentTitle(final String title, final boolean editable) {
-	view.setContentTitle(title);
-	view.setContentTitleEditable(editable);
     }
 
 }

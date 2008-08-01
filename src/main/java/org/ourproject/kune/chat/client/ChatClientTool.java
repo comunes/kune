@@ -25,8 +25,10 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
+import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.tool.AbstractClientTool;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridMenuItem;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
@@ -45,12 +47,18 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
     public static final String TYPE_CHAT = "chat.chat";
     private final ChatToolComponents components;
     private ChatEngine chat;
+    private final Provider<StateManager> stateManagerProvider;
+    private final Provider<ContentServiceAsync> contentServiceProvider;
 
     public ChatClientTool(final Session session, final Application application, final I18nTranslationService i18n,
 	    final EmiteUIDialog emiteUIDialog, final WorkspaceSkeleton ws,
-	    final Provider<GroupMembersSummary> groupMembersSummaryProvider) {
+	    final Provider<GroupMembersSummary> groupMembersSummaryProvider,
+	    final Provider<StateManager> stateManagerProvider,
+	    final Provider<ContentServiceAsync> contentServiceProvider) {
 	super(i18n.t("chat rooms"));
-	components = new ChatToolComponents(emiteUIDialog, i18n);
+	this.stateManagerProvider = stateManagerProvider;
+	this.contentServiceProvider = contentServiceProvider;
+	components = new ChatToolComponents(emiteUIDialog, i18n, stateManagerProvider, session, contentServiceProvider);
 	session.onInitDataReceived(new Slot<InitDataDTO>() {
 	    public void onEvent(final InitDataDTO initData) {
 		final ChatOptions chatOptions = new ChatOptions(initData.getChatHttpBase(), initData.getChatDomain(),

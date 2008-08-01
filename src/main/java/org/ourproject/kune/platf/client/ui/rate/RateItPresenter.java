@@ -28,6 +28,7 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
 import com.calclab.suco.client.container.Provider;
+import com.calclab.suco.client.signal.Slot;
 
 public class RateItPresenter implements RateIt {
 
@@ -38,15 +39,19 @@ public class RateItPresenter implements RateIt {
     private final I18nTranslationService i18n;
     private final Provider<ContentServiceAsync> contentServiceProvider;
     private final Session session;
-    private final Provider<StateManager> stateManagerProvider;
+    private final StateManager stateManager;
 
     public RateItPresenter(final I18nTranslationService i18n, final Session session,
-	    final Provider<ContentServiceAsync> contentServiceProvider,
-	    final Provider<StateManager> stateManagerProvider) {
+	    final Provider<ContentServiceAsync> contentServiceProvider, final StateManager stateManager) {
 	this.i18n = i18n;
 	this.session = session;
 	this.contentServiceProvider = contentServiceProvider;
-	this.stateManagerProvider = stateManagerProvider;
+	this.stateManager = stateManager;
+	stateManager.onStateChanged(new Slot<StateDTO>() {
+	    public void onEvent(final StateDTO state) {
+		setState(state);
+	    }
+	});
     }
 
     public void init(final RateItView view) {
@@ -62,19 +67,6 @@ public class RateItPresenter implements RateIt {
 	}
 	isRating = false;
 	setRatePanel(currentRate);
-    }
-
-    public void setState(final StateDTO state) {
-	if (state.isRateable()) {
-	    if (session.isLogged()) {
-		setRate(state.getCurrentUserRate());
-		view.setVisible(true);
-	    } else {
-		view.setVisible(false);
-	    }
-	} else {
-	    view.setVisible(false);
-	}
     }
 
     public void setVisible(final boolean visible) {
@@ -98,7 +90,7 @@ public class RateItPresenter implements RateIt {
 		    public void onSuccess(final Object result) {
 			Site.hideProgress();
 			Site.info(i18n.t("Content rated"));
-			stateManagerProvider.get().reload();
+			stateManager.reload();
 		    }
 		});
     }
@@ -138,6 +130,19 @@ public class RateItPresenter implements RateIt {
 	} else {
 	    view.setStars(value);
 	    setDesc((int) Math.ceil(value.doubleValue()));
+	}
+    }
+
+    private void setState(final StateDTO state) {
+	if (state.isRateable()) {
+	    if (session.isLogged()) {
+		setRate(state.getCurrentUserRate());
+		view.setVisible(true);
+	    } else {
+		view.setVisible(false);
+	    }
+	} else {
+	    view.setVisible(false);
 	}
     }
 }

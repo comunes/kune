@@ -31,9 +31,9 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.workspace.client.sitebar.Site;
-import org.ourproject.kune.workspace.client.ui.newtmp.WorkspaceManager;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.calclab.suco.client.signal.Signal;
 import com.calclab.suco.client.signal.Slot;
 
 public class StateManagerDefault implements StateManager {
@@ -41,16 +41,18 @@ public class StateManagerDefault implements StateManager {
     private StateDTO oldState;
     private final Session session;
     private final HistoryWrapper history;
-    private final WorkspaceManager workspaceManager;
     private final HashMap<String, Slot<StateToken>> siteTokens;
+    private final Signal<StateDTO> onStateChanged;
+    private final Signal<StateDTO> onSocialNetworkChanged;
 
     public StateManagerDefault(final ContentProvider contentProvider, final Session session,
-	    final HistoryWrapper history, final WorkspaceManager workspaceManager) {
+	    final HistoryWrapper history) {
 	this.contentProvider = contentProvider;
 	this.session = session;
 	this.history = history;
-	this.workspaceManager = workspaceManager;
 	this.oldState = null;
+	this.onStateChanged = new Signal<StateDTO>("onStateChanged");
+	this.onSocialNetworkChanged = new Signal<StateDTO>("onSocialNetworkChanged");
 	session.onUserSignIn(new Slot<UserInfoDTO>() {
 	    public void onEvent(final UserInfoDTO parameter) {
 		restorePreviousState();
@@ -66,6 +68,13 @@ public class StateManagerDefault implements StateManager {
 
     public void addSiteToken(final String token, final Slot<StateToken> slot) {
 	siteTokens.put(token, slot);
+    }
+
+    public void gotoContainer(final Long containerId) {
+	final StateToken newStateToken = session.getCurrentState().getStateToken();
+	newStateToken.setDocument(null);
+	newStateToken.setFolder(containerId.toString());
+	setState(newStateToken);
     }
 
     public void gotoToken(final String token) {
@@ -88,6 +97,14 @@ public class StateManagerDefault implements StateManager {
 	    }
 	    tokenSlot.onEvent(stateToken);
 	}
+    }
+
+    public void onSocialNetworkChanged(final Slot<StateDTO> slot) {
+	onSocialNetworkChanged.add(slot);
+    }
+
+    public void onStateChanged(final Slot<StateDTO> slot) {
+	onStateChanged.add(slot);
     }
 
     /**
@@ -132,7 +149,7 @@ public class StateManagerDefault implements StateManager {
 	    final ParticipationDataDTO userParticipation = socialNet.getUserParticipation();
 	    state.setGroupMembers(groupMembers);
 	    state.setParticipation(userParticipation);
-	    workspaceManager.setSocialNetwork(state);
+	    onSocialNetworkChanged.fire(state);
 	}
     }
 
@@ -142,7 +159,7 @@ public class StateManagerDefault implements StateManager {
 
     private void loadContent(final StateDTO state) {
 	session.setCurrent(state);
-	workspaceManager.setState(state);
+	onStateChanged.fire(state);
 	// final GroupDTO group = state.getGroup();
 	// app.setGroupState(group.getShortName());
 	// final boolean isAdmin = state.getGroupRights().isAdministrable();

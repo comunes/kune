@@ -23,9 +23,7 @@ import java.util.Iterator;
 
 import org.ourproject.kune.platf.client.Component;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.extend.ExtensibleWidgetChild;
 import org.ourproject.kune.platf.client.tool.ClientTool;
-import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 import org.ourproject.kune.workspace.client.licensefoot.LicenseComponent;
 
 public interface Workspace extends Component {
@@ -36,27 +34,17 @@ public interface Workspace extends Component {
 
     public void adjustSize(int windowWidth, int clientHeight);
 
-    public void attachToExtensibleWidget(ExtensibleWidgetChild ext);
-
     public void attachTools(Iterator<ClientTool> iterator);
 
     public int calculateHeight(int clientHeight);
 
     public int calculateWidth(int clientWidth);
 
-    public void clearExtensibleWidget(String extId);
-
-    public void detachFromExtensibleWidget(ExtensibleWidgetChild ext);
-
     public ContentSubTitleComponent getContentSubTitleComponent();
 
     public ContentTitleComponent getContentTitleComponent();
 
     public LicenseComponent getLicenseComponent();
-
-    public void setContent(WorkspaceComponent contentComponent);
-
-    public void setContext(WorkspaceComponent contextComponent);
 
     public void setTheme(String theme);
 

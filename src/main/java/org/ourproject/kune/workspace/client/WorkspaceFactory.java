@@ -23,6 +23,7 @@ import org.ourproject.kune.platf.client.extend.ExtensibleWidgetsManager;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.editor.TextEditorListener;
 import org.ourproject.kune.workspace.client.editor.TextEditorPanel;
@@ -55,11 +56,14 @@ import org.ourproject.kune.workspace.client.workspace.ui.ContentTitlePanel;
 import org.ourproject.kune.workspace.client.workspace.ui.ContentToolBarPanel;
 import org.ourproject.kune.workspace.client.workspace.ui.WorkspacePanel;
 
+import com.calclab.suco.client.container.Provider;
+
 public class WorkspaceFactory {
 
     private static Session session;
     private static I18nTranslationService i18n;
     private static KuneErrorHandler errorHandler;
+    private static Provider<StateManager> stateManagerProvider;
 
     public static ContentSubTitleComponent createContentSubTitleComponent() {
 	final ContentSubTitlePresenter presenter = new ContentSubTitlePresenter(i18n);
@@ -84,7 +88,7 @@ public class WorkspaceFactory {
 
     public static ContextItems createContextItems() {
 	final ContextItemsPresenter presenter = new ContextItemsPresenter(i18n);
-	final ContextItemsPanel panel = new ContextItemsPanel(presenter, i18n);
+	final ContextItemsPanel panel = new ContextItemsPanel(presenter, i18n, stateManagerProvider);
 	presenter.init(panel);
 	return presenter;
     }
@@ -112,10 +116,11 @@ public class WorkspaceFactory {
 
     public static Workspace createWorkspace(final Session session,
 	    final ExtensibleWidgetsManager extensionPointManager, final I18nTranslationService i18n,
-	    final KuneErrorHandler errorHandler) {
+	    final KuneErrorHandler errorHandler, final Provider<StateManager> stateManagerProvider) {
 	WorkspaceFactory.session = session;
 	WorkspaceFactory.i18n = i18n;
 	WorkspaceFactory.errorHandler = errorHandler;
+	WorkspaceFactory.stateManagerProvider = stateManagerProvider;
 	final WorkspacePresenter workspace = new WorkspacePresenter(session);
 	final WorkspaceView view = new WorkspacePanel(workspace, i18n);
 	workspace.init(view, extensionPointManager);

@@ -28,7 +28,6 @@ import org.ourproject.kune.platf.client.PlatformEvents;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.StateDTO;
-import org.ourproject.kune.platf.client.extend.ExtensibleWidgetChild;
 import org.ourproject.kune.platf.client.extend.ExtensibleWidgetId;
 import org.ourproject.kune.platf.client.ui.UnknowComponent;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
@@ -44,9 +43,9 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener {
     private final EmiteUIDialog emiteUIDialog;
 
     public ChatContentPresenter(final EmiteUIDialog emiteUIDialog, final WorkspaceDeckView view) {
-        this.emiteUIDialog = emiteUIDialog;
-        this.view = view;
-        this.components = new ChatComponents(this);
+	this.emiteUIDialog = emiteUIDialog;
+	this.view = view;
+	this.components = new ChatComponents(this);
     }
 
     public void attach() {
@@ -56,36 +55,32 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener {
     }
 
     public View getView() {
-        return view;
+	return view;
     }
 
     public void onEnterRoom() {
-        String roomName = state.getFolder().getName();
-        emiteUIDialog.joinRoom(XmppURI.uri(roomName));
+	final String roomName = state.getFolder().getName();
+	emiteUIDialog.joinRoom(XmppURI.uri(roomName));
     }
 
     public void setState(final StateDTO state) {
-        this.state = state;
-        String typeId = state.getTypeId();
-        if (typeId.equals(ChatClientTool.TYPE_ROOT)) {
-            ChatInfo info = components.getChatInfo();
-            view.show(info.getView());
-            DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXTENSIBLE_WIDGET,
-                    ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT);
-        } else if (typeId.equals(ChatClientTool.TYPE_ROOM)) {
-            ChatRoom viewer = components.getChatRoom();
-            view.show(viewer.getView());
-            DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXTENSIBLE_WIDGET,
-                    ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT);
-            DefaultDispatcher.getInstance().fire(
-                    PlatformEvents.ATTACH_TO_EXTENSIBLE_WIDGET,
-                    new ExtensibleWidgetChild(ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT, components.getChatRoomControl()
-                            .getView()));
-        } else {
-            view.show(UnknowComponent.instance.getView());
-            DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXTENSIBLE_WIDGET,
-                    ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT);
-        }
+	this.state = state;
+	final String typeId = state.getTypeId();
+	if (typeId.equals(ChatClientTool.TYPE_ROOT)) {
+	    final ChatInfo info = components.getChatInfo();
+	    view.show(info.getView());
+	    DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXTENSIBLE_WIDGET,
+		    ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT);
+	} else if (typeId.equals(ChatClientTool.TYPE_ROOM)) {
+	    final ChatRoom viewer = components.getChatRoom();
+	    view.show(viewer.getView());
+	    DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXTENSIBLE_WIDGET,
+		    ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT);
+	} else {
+	    view.show(UnknowComponent.instance.getView());
+	    DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXTENSIBLE_WIDGET,
+		    ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT);
+	}
     }
 
 }

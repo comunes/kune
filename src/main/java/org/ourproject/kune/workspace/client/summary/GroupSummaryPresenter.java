@@ -19,15 +19,32 @@
  */
 package org.ourproject.kune.workspace.client.summary;
 
-import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
+import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
 import org.ourproject.kune.workspace.client.workspace.GroupSummary;
 
-public class GroupSummaryPresenter extends AbstractPresenter implements GroupSummary {
+import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.signal.Slot2;
+
+public class GroupSummaryPresenter implements GroupSummary {
 
     private GroupSummaryView view;
+
+    public GroupSummaryPresenter(final StateManager stateManager, final WsThemePresenter wsThemePresenter) {
+	stateManager.onStateChanged(new Slot<StateDTO>() {
+	    public void onEvent(final StateDTO state) {
+		setState(state);
+	    }
+	});
+	wsThemePresenter.onThemeChanged(new Slot2<WsTheme, WsTheme>() {
+	    public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
+		view.setTheme(oldTheme, newTheme);
+	    }
+	});
+    }
 
     public View getView() {
 	return view;
@@ -37,12 +54,8 @@ public class GroupSummaryPresenter extends AbstractPresenter implements GroupSum
 	this.view = view;
     }
 
-    public void setState(final StateDTO state) {
+    private void setState(final StateDTO state) {
 	view.setComment("Summary about this group (in development)");
-    }
-
-    public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
-	view.setTheme(oldTheme, newTheme);
     }
 
 }

@@ -22,23 +22,31 @@ package org.ourproject.kune.workspace.client.search;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import org.ourproject.kune.platf.client.AbstractPresenter;
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
-public class SiteSearcherPresenter extends AbstractPresenter implements SiteSearcher {
+import com.calclab.suco.client.container.Provider;
+
+public class SiteSearcherPresenter implements SiteSearcher {
 
     private SiteSearcherView view;
     private SiteSearcherType currentSearch;
     private final HashMap<String, Integer> searchHistory;
+    private final Provider<StateManager> stateManagerProvider;
 
-    public SiteSearcherPresenter() {
+    public SiteSearcherPresenter(final Provider<StateManager> stateManagerProvider) {
+	this.stateManagerProvider = stateManagerProvider;
 	searchHistory = new HashMap<String, Integer>();
 	currentSearch = SiteSearcherType.group_user;
     }
 
     public void doClose() {
 	view.hide();
+    }
+
+    public void doGoto(final String groupShortName) {
+	stateManagerProvider.get().gotoToken(groupShortName);
     }
 
     public void doSearch(final SiteSearcherType typeOfSearch) {

@@ -33,7 +33,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class EntityLogoPanel extends SimplePanel implements EntityLogo {
+public class EntityLogoPanel extends SimplePanel implements EntityLogoView {
     class EntityTextLogo extends VerticalPanel {
 
 	private static final int GROUP_NAME_LIMIT_SIZE = 90;
