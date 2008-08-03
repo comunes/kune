@@ -29,6 +29,7 @@ public class SocialNetworkManagerTest extends PersistenceTest {
     private User user;
     private User admin;
     private User otherUser;
+    private DomainContext ctx;
 
     @Test
     public void acceptJoinGroup() throws Exception {
@@ -163,7 +164,7 @@ public class SocialNetworkManagerTest extends PersistenceTest {
     @Before
     public void init() {
 	openTransaction();
-	final DomainContext ctx = new DomainContext();
+	ctx = new DomainContext();
 	ctx.createUsers("user1");
 	ctx.createUsers("admin");
 	ctx.createUsers("otheruser");

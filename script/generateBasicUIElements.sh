@@ -14,7 +14,7 @@ DIR=$1
   fi
 
 # DO
-PACKAGE=`echo $DIR | cut -d "/" -f 4- | sed 's/\//\./g'`
+PACKAGE=`echo $DIR | cut -d "/" -f 4- | sed 's/\//\./g' | sed 's/.$//g'`
 
 if [[ ! -d $DIR ]]
 then
@@ -85,12 +85,12 @@ import $PACKAGE.${NAME}Presenter;
 import $PACKAGE.${NAME}Panel;
 import $PACKAGE.${NAME};
 
-builder.registerProvider(${NAME}.class, new Provider<${NAME}>() {
-    public ${NAME} get() {
+register(SingletonScope.class, new Factory<${NAME}>(${NAME}.class) {
+    public ${NAME} create() {
 	final ${NAME}Presenter presenter = new ${NAME}Presenter();
 	final ${NAME}Panel panel = new ${NAME}Panel(presenter, ws);
 	presenter.init(panel);
 	return presenter;
     }
-}, SingletonScope.class);
+});
 EOF

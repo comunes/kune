@@ -6,7 +6,7 @@ import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.ApplicationDefault;
 import org.ourproject.kune.platf.client.app.HistoryWrapper;
-import org.ourproject.kune.platf.client.app.HistoryWrapperImpl;
+import org.ourproject.kune.platf.client.app.HistoryWrapperDefault;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
@@ -23,6 +23,9 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.SessionImpl;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.state.StateManagerDefault;
+import org.ourproject.kune.platf.client.tool.ToolSelector;
+import org.ourproject.kune.platf.client.tool.ToolSelectorPanel;
+import org.ourproject.kune.platf.client.tool.ToolSelectorPresenter;
 import org.ourproject.kune.platf.client.ui.QuickTipsHelper;
 import org.ourproject.kune.platf.client.ui.rate.RateIt;
 import org.ourproject.kune.platf.client.ui.rate.RateItPanel;
@@ -214,7 +217,7 @@ public class KuneModule extends AbstractModule {
 
 	register(SingletonScope.class, new Factory<HistoryWrapper>(HistoryWrapper.class) {
 	    public HistoryWrapper create() {
-		return new HistoryWrapperImpl();
+		return new HistoryWrapperDefault();
 	    }
 	}, new Factory<ContentProvider>(ContentProvider.class) {
 	    public ContentProvider create() {
@@ -541,6 +544,16 @@ public class KuneModule extends AbstractModule {
 		final GroupLiveSearcherPresenter presenter = new GroupLiveSearcherPresenter();
 		final EntityLiveSearcherView view = new GroupLiveSearchPanel(presenter, i18n);
 		presenter.init(view);
+		return presenter;
+	    }
+	});
+
+	register(SingletonScope.class, new Factory<ToolSelector>(ToolSelector.class) {
+	    public ToolSelector create() {
+		final ToolSelectorPresenter presenter = new ToolSelectorPresenter($(StateManager.class),
+			$(WsThemePresenter.class));
+		final ToolSelectorPanel panel = new ToolSelectorPanel(presenter, ws);
+		presenter.init(panel);
 		return presenter;
 	    }
 	});

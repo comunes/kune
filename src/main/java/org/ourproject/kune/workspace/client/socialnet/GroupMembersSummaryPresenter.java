@@ -49,11 +49,13 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
 	this.stateManager = stateManager;
 	this.session = session;
 	this.snServiceProvider = snServiceProvider;
-	stateManager.onStateChanged(new Slot<StateDTO>() {
-	    public void onEvent(final StateDTO state) {
+	final Slot<StateDTO> setStateSlot = new Slot<StateDTO>() {
+	    public void onEvent(StateDTO state) {
 		setState(state);
 	    }
-	});
+	};
+	stateManager.onStateChanged(setStateSlot);
+	stateManager.onSocialNetworkChanged(setStateSlot);
 	wsThemePresenter.onThemeChanged(new Slot2<WsTheme, WsTheme>() {
 	    public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
 		view.setTheme(oldTheme, newTheme);

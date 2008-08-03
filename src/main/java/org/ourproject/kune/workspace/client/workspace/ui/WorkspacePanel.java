@@ -176,7 +176,7 @@ public class WorkspacePanel extends Composite implements WorkspaceView {
     }
 
     public void addTab(final ToolTrigger trigger) {
-	groupToolsBar.addItem(trigger);
+	// groupToolsBar.addItem(trigger);
     }
 
     public void adjustSize(final int windowWidth, final int windowHeight) {

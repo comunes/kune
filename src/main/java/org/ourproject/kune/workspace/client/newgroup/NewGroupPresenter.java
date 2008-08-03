@@ -31,8 +31,10 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.newgroup.ui.SiteErrorType;
 import org.ourproject.kune.workspace.client.sitebar.Site;
+import org.ourproject.kune.workspace.client.sitebar.SiteToken;
 
 import com.calclab.suco.client.container.Provider;
+import com.calclab.suco.client.signal.Slot;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -50,10 +52,15 @@ public class NewGroupPresenter implements NewGroup {
 	this.session = session;
 	this.stateManager = stateManager;
 	this.groupServiceProvider = groupServiceProvider;
+	stateManager.addSiteToken(SiteToken.newgroup.toString(), new Slot<StateToken>() {
+	    public void onEvent(final StateToken previousStateToken) {
+		doNewGroup(previousStateToken);
+	    }
+	});
     }
 
-    public void doNewGroup(final StateToken previousTokenOrig) {
-	previousToken = previousTokenOrig;
+    public void doNewGroup(final StateToken previousToken) {
+	this.previousToken = previousToken;
 	session.check(new AsyncCallbackSimple<Object>() {
 	    public void onSuccess(final Object result) {
 		if (session.isLogged()) {
@@ -62,7 +69,7 @@ public class NewGroupPresenter implements NewGroup {
 		    view.center();
 		    Site.hideProgress();
 		} else {
-		    stateManager.setState(previousTokenOrig);
+		    stateManager.setState(previousToken);
 		    Site.info(i18n.t("Sign in or register to create a group"));
 		}
 	    }

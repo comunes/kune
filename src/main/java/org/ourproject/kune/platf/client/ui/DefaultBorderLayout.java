@@ -15,7 +15,7 @@ public class DefaultBorderLayout {
 
     public static final int DEF_TOOLBAR_HEIGHT = 26;
 
-    private static final int NO_SIZE = -1;
+    private static final int NO_SIZE = -666;
 
     private static RegionPosition[] regionPositions = new RegionPosition[] { RegionPosition.NORTH,
 	    RegionPosition.CENTER, RegionPosition.SOUTH, RegionPosition.EAST, RegionPosition.WEST };
@@ -66,10 +66,11 @@ public class DefaultBorderLayout {
     public void add(final Panel panel, final Widget widget) {
 	panel.add(widget);
 	if (panel.isRendered()) {
-	    panel.syncSize();
-	    panel.doLayout();
+	    mainPanel.doLayout(false);
+	    // panel.syncSize();
+	    // panel.doLayout();
 	}
-	doLayoutIfNeeded();
+	// doLayoutIfNeeded();
     }
 
     public void addStyle(final String style) {
@@ -107,6 +108,12 @@ public class DefaultBorderLayout {
     public void doLayoutIfNeeded() {
 	if (mainPanel.isRendered()) {
 	    mainPanel.doLayout();
+	}
+    }
+
+    public void doLayoutIfNeeded(final boolean includeChilds) {
+	if (mainPanel.isRendered()) {
+	    mainPanel.doLayout(!includeChilds);
 	}
     }
 

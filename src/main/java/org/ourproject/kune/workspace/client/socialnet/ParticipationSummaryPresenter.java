@@ -58,11 +58,13 @@ public class ParticipationSummaryPresenter extends SocialNetworkPresenter implem
 	collabOnlyCategory = new GridGroup(i18n.t("collaborator in:"), " ", i18n.t("Collaborate in these groups"),
 		false);
 	super.addGroupOperation(gotoGroupMenuItem, false);
-	stateManager.onStateChanged(new Slot<StateDTO>() {
-	    public void onEvent(final StateDTO state) {
+	final Slot<StateDTO> setStateSlot = new Slot<StateDTO>() {
+	    public void onEvent(StateDTO state) {
 		setState(state);
 	    }
-	});
+	};
+	stateManager.onStateChanged(setStateSlot);
+	stateManager.onSocialNetworkChanged(setStateSlot);
 	wsThemePresenter.onThemeChanged(new Slot2<WsTheme, WsTheme>() {
 	    public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
 		view.setTheme(oldTheme, newTheme);

@@ -25,6 +25,7 @@ import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
 import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.signal.Slot2;
 import com.google.gwt.user.client.HistoryListener;
 
 public interface StateManager extends HistoryListener {
@@ -35,9 +36,13 @@ public interface StateManager extends HistoryListener {
 
     void gotoToken(String token);
 
+    void onGroupChanged(Slot2<String, String> slot);
+
     void onSocialNetworkChanged(Slot<StateDTO> slot);
 
     void onStateChanged(Slot<StateDTO> slot);
+
+    void onToolChanged(Slot2<String, String> slot);
 
     void reload();
 

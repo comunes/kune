@@ -30,15 +30,18 @@ import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.tool.AbstractClientTool;
+import org.ourproject.kune.platf.client.tool.ToolSelector;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridMenuItem;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
 import org.ourproject.kune.workspace.client.workspace.GroupMembersSummary;
 
 import com.calclab.emite.client.xmpp.stanzas.XmppURI;
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
 import com.calclab.suco.client.container.Provider;
 import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.signal.Slot0;
 
 public class ChatClientTool extends AbstractClientTool implements ChatProvider {
     public static final String NAME = "chats";
@@ -47,17 +50,14 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
     public static final String TYPE_CHAT = "chat.chat";
     private final ChatToolComponents components;
     private ChatEngine chat;
-    private final Provider<StateManager> stateManagerProvider;
-    private final Provider<ContentServiceAsync> contentServiceProvider;
 
     public ChatClientTool(final Session session, final Application application, final I18nTranslationService i18n,
 	    final EmiteUIDialog emiteUIDialog, final WorkspaceSkeleton ws,
 	    final Provider<GroupMembersSummary> groupMembersSummaryProvider,
 	    final Provider<StateManager> stateManagerProvider,
-	    final Provider<ContentServiceAsync> contentServiceProvider) {
-	super(i18n.t("chat rooms"));
-	this.stateManagerProvider = stateManagerProvider;
-	this.contentServiceProvider = contentServiceProvider;
+	    final Provider<ContentServiceAsync> contentServiceProvider, final ToolSelector toolSelector,
+	    final WsThemePresenter wsThemePresenter) {
+	super(NAME, i18n.t("chat rooms"), toolSelector, wsThemePresenter, ws);
 	components = new ChatToolComponents(emiteUIDialog, i18n, stateManagerProvider, session, contentServiceProvider);
 	session.onInitDataReceived(new Slot<InitDataDTO>() {
 	    public void onEvent(final InitDataDTO initData) {
@@ -75,13 +75,13 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
 				}), true);
 	    }
 	});
-	application.onApplicationStop(new Slot<Object>() {
-	    public void onEvent(final Object parameter) {
+	application.onApplicationStop(new Slot0() {
+	    public void onEvent() {
 		chat.logout();
 	    }
 	});
-	session.onUserSignOut(new Slot<Object>() {
-	    public void onEvent(final Object parameter) {
+	session.onUserSignOut(new Slot0() {
+	    public void onEvent() {
 		chat.logout();
 	    }
 	});

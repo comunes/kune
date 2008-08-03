@@ -141,16 +141,19 @@ public class I18nUITranslationService extends I18nTranslationService {
 	    }
 	} else {
 	    // Not translated and not in db, make a petition for translation
-	    i18nService.getTranslation(session.getUserHash(), currentLanguageCode, text, new AsyncCallback<String>() {
-		public void onFailure(final Throwable caught) {
-		}
+	    if (session.isLogged()) {
+		i18nService.getTranslation(session.getUserHash(), currentLanguageCode, text,
+			new AsyncCallback<String>() {
+			    public void onFailure(final Throwable caught) {
+			    }
 
-		public void onSuccess(final String result) {
-		}
-	    });
-	    Log.debug("Registering in db '" + text + "' as pending translation");
+			    public void onSuccess(final String result) {
+			    }
+			});
+		Log.debug("Registering in db '" + text + "' as pending translation");
+		lexicon.put(encodeText, UNTRANSLATED_VALUE);
+	    }
 	    translation = removeNT(encodeText);
-	    lexicon.put(encodeText, UNTRANSLATED_VALUE);
 	}
 	return decodeHtml(translation);
     }

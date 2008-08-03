@@ -5,9 +5,11 @@ import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.platf.client.tool.ToolSelector;
 import org.ourproject.kune.platf.client.ui.rate.RateIt;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
 import org.ourproject.kune.workspace.client.workspace.TagsSummary;
 
 import com.calclab.suco.client.modules.AbstractModule;
@@ -32,7 +34,8 @@ public class DocumentClientNewModule extends AbstractModule {
 	register(SingletonScope.class, new Factory<DocumentClientTool>(DocumentClientTool.class) {
 	    public DocumentClientTool create() {
 		final DocumentFactory factory = $(DocumentFactory.class);
-		return new DocumentClientTool(factory, $(I18nUITranslationService.class));
+		return new DocumentClientTool(factory, $(I18nUITranslationService.class), $(ToolSelector.class),
+			$(WsThemePresenter.class), $(WorkspaceSkeleton.class));
 	    }
 	});
 

@@ -22,166 +22,166 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
     @Test
     public void addRemoveAuthor() throws Exception {
-        final List<UserSimpleDTO> authors = defaultContent.getAuthors();
-        assertEquals(1, authors.size());
-        final UserSimpleDTO author = authors.get(0);
-        final String authorShortName = author.getShortName();
-        contentService.removeAuthor(getHash(), groupShortName, defDocument, authorShortName);
-        final List<UserSimpleDTO> authors2 = getDefaultContent().getAuthors();
-        assertEquals(0, authors2.size());
-        contentService.addAuthor(getHash(), groupShortName, defDocument, authorShortName);
-        final List<UserSimpleDTO> authors3 = getDefaultContent().getAuthors();
-        assertEquals(1, authors3.size());
-        contentService.addAuthor(getHash(), groupShortName, defDocument, authorShortName);
-        final List<UserSimpleDTO> authors4 = getDefaultContent().getAuthors();
-        assertEquals(1, authors4.size());
+	final List<UserSimpleDTO> authors = defaultContent.getAuthors();
+	assertEquals(1, authors.size());
+	final UserSimpleDTO author = authors.get(0);
+	final String authorShortName = author.getShortName();
+	contentService.removeAuthor(getHash(), groupShortName, defDocument, authorShortName);
+	final List<UserSimpleDTO> authors2 = getDefaultContent().getAuthors();
+	assertEquals(0, authors2.size());
+	contentService.addAuthor(getHash(), groupShortName, defDocument, authorShortName);
+	final List<UserSimpleDTO> authors3 = getDefaultContent().getAuthors();
+	assertEquals(1, authors3.size());
+	contentService.addAuthor(getHash(), groupShortName, defDocument, authorShortName);
+	final List<UserSimpleDTO> authors4 = getDefaultContent().getAuthors();
+	assertEquals(1, authors4.size());
     }
 
     @Test
     public void contentRateAndRetrieve() throws Exception {
-        contentService.rateContent(getHash(), groupShortName, defDocument, 4.5);
-        final StateDTO again = contentService.getContent(getHash(), groupShortName, defaultContent.getStateToken());
-        assertEquals(true, again.isRateable());
-        assertEquals(4.5, (double) again.getCurrentUserRate());
-        assertEquals(4.5, (double) again.getRate());
-        assertEquals(1, (double) again.getRateByUsers());
+	contentService.rateContent(getHash(), groupShortName, defDocument, 4.5);
+	final StateDTO again = contentService.getContent(getHash(), groupShortName, defaultContent.getStateToken());
+	assertEquals(true, again.isRateable());
+	assertEquals(new Double(4.5), again.getCurrentUserRate());
+	assertEquals(new Double(4.5), again.getRate());
+	assertEquals(new Integer(1), again.getRateByUsers());
     }
 
     @Test
     public void contentSetLanguage() throws Exception {
-        contentService.setLanguage(getHash(), groupShortName, defDocument, "es");
-        final StateDTO contentRetrieved = contentService.getContent(getHash(), groupShortName, defaultContent
-                .getStateToken());
-        assertEquals("es", contentRetrieved.getLanguage().getCode());
+	contentService.setLanguage(getHash(), groupShortName, defDocument, "es");
+	final StateDTO contentRetrieved = contentService.getContent(getHash(), groupShortName, defaultContent
+		.getStateToken());
+	assertEquals("es", contentRetrieved.getLanguage().getCode());
     }
 
     @Test
     public void folderRename() throws Exception {
-        doLogin();
-        defaultContent = getDefaultContent();
-        final ContainerDTO folder = defaultContent.getFolder();
+	doLogin();
+	defaultContent = getDefaultContent();
+	final ContainerDTO folder = defaultContent.getFolder();
 
-        final String oldTitle = "some title";
-        String newTitle = "folder new name";
-        final StateDTO newState = contentService.addFolder(session.getHash(), groupShortName, folder.getId(), oldTitle);
+	final String oldTitle = "some title";
+	String newTitle = "folder new name";
+	final StateDTO newState = contentService.addFolder(session.getHash(), groupShortName, folder.getId(), oldTitle);
 
-        final ContainerDTO newFolder = newState.getFolder().getChilds().get(0);
+	final ContainerDTO newFolder = newState.getFolder().getChilds().get(0);
 
-        assertEquals(oldTitle, newFolder.getName());
+	assertEquals(oldTitle, newFolder.getName());
 
-        final StateToken folderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(),
-                newFolder.getId().toString(), null);
-        String result = contentService.rename(getHash(), groupShortName, folderToken.getEncoded(), newTitle);
+	final StateToken folderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(),
+		newFolder.getId().toString(), null);
+	String result = contentService.rename(getHash(), groupShortName, folderToken.getEncoded(), newTitle);
 
-        assertEquals(newTitle, result);
+	assertEquals(newTitle, result);
 
-        final StateToken newFolderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(),
-                newFolder.getId().toString(), null);
-        StateDTO folderAgain = contentService.getContent(getHash(), groupShortName, newFolderToken);
+	final StateToken newFolderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(),
+		newFolder.getId().toString(), null);
+	StateDTO folderAgain = contentService.getContent(getHash(), groupShortName, newFolderToken);
 
-        assertEquals(newTitle, folderAgain.getFolder().getName());
+	assertEquals(newTitle, folderAgain.getFolder().getName());
 
-        newTitle = "folder last name";
+	newTitle = "folder last name";
 
-        result = contentService.rename(getHash(), groupShortName, newFolderToken.getEncoded(), newTitle);
+	result = contentService.rename(getHash(), groupShortName, newFolderToken.getEncoded(), newTitle);
 
-        folderAgain = contentService.getContent(getHash(), groupShortName, newFolderToken);
+	folderAgain = contentService.getContent(getHash(), groupShortName, newFolderToken);
 
-        assertEquals(newTitle, folderAgain.getFolder().getName());
+	assertEquals(newTitle, folderAgain.getFolder().getName());
 
     }
 
     @Test(expected = AccessViolationException.class)
     public void folderRenameOtherGroupFails() throws Exception {
-        doLogin();
-        defaultContent = getDefaultContent();
-        final ContainerDTO folder = defaultContent.getFolder();
-        final StateToken folderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(), folder
-                .getId().toString(), null);
+	doLogin();
+	defaultContent = getDefaultContent();
+	final ContainerDTO folder = defaultContent.getFolder();
+	final StateToken folderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(), folder
+		.getId().toString(), null);
 
-        final String newTitle = "folder new name";
-        contentService.rename(getHash(), super.getSiteAdminShortName(), folderToken.getEncoded(), newTitle);
+	final String newTitle = "folder new name";
+	contentService.rename(getHash(), super.getSiteAdminShortName(), folderToken.getEncoded(), newTitle);
     }
 
     @Test(expected = RuntimeException.class)
     public void folderRootRenameMustFail() throws Exception {
-        doLogin();
-        defaultContent = getDefaultContent();
-        final ContainerDTO folder = defaultContent.getFolder();
+	doLogin();
+	defaultContent = getDefaultContent();
+	final ContainerDTO folder = defaultContent.getFolder();
 
-        final String newTitle = "folder new name";
-        final StateToken folderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(), folder
-                .getId().toString(), null);
-        final String result = contentService.rename(getHash(), groupShortName, folderToken.getEncoded(), newTitle);
+	final String newTitle = "folder new name";
+	final StateToken folderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(), folder
+		.getId().toString(), null);
+	final String result = contentService.rename(getHash(), groupShortName, folderToken.getEncoded(), newTitle);
 
-        assertEquals(newTitle, result);
+	assertEquals(newTitle, result);
 
-        final ContainerDTO folderAgain = getDefaultContent().getFolder();
+	final ContainerDTO folderAgain = getDefaultContent().getFolder();
 
-        assertEquals(newTitle, folderAgain.getName());
+	assertEquals(newTitle, folderAgain.getName());
     }
 
     @Before
     public void init() throws Exception {
-        new IntegrationTestHelper(this);
-        doLogin();
-        defaultContent = getDefaultContent();
-        groupShortName = defaultContent.getStateToken().getGroup();
-        defDocument = defaultContent.getStateToken().getDocument();
+	new IntegrationTestHelper(this);
+	doLogin();
+	defaultContent = getDefaultContent();
+	groupShortName = defaultContent.getStateToken().getGroup();
+	defDocument = defaultContent.getStateToken().getDocument();
     }
 
     @Test
     public void setTagsAndResults() throws Exception {
-        contentService.setTags(getHash(), groupShortName, defDocument, "bfoo cfoa afoo2");
-        final List<TagResultDTO> summaryTags = contentService.getSummaryTags(getHash(), groupShortName);
-        assertEquals(3, summaryTags.size());
+	contentService.setTags(getHash(), groupShortName, defDocument, "bfoo cfoa afoo2");
+	final List<TagResultDTO> summaryTags = contentService.getSummaryTags(getHash(), groupShortName);
+	assertEquals(3, summaryTags.size());
 
-        TagResultDTO tagResultDTO = summaryTags.get(0);
-        assertEquals("afoo2", tagResultDTO.getName());
-        assertEquals(1, (long) tagResultDTO.getCount());
+	TagResultDTO tagResultDTO = summaryTags.get(0);
+	assertEquals("afoo2", tagResultDTO.getName());
+	assertEquals(1, (long) tagResultDTO.getCount());
 
-        tagResultDTO = summaryTags.get(1);
-        assertEquals("bfoo", tagResultDTO.getName());
-        assertEquals(1, (long) tagResultDTO.getCount());
+	tagResultDTO = summaryTags.get(1);
+	assertEquals("bfoo", tagResultDTO.getName());
+	assertEquals(1, (long) tagResultDTO.getCount());
 
-        tagResultDTO = summaryTags.get(2);
-        assertEquals("cfoa", tagResultDTO.getName());
-        assertEquals(1, (long) tagResultDTO.getCount());
+	tagResultDTO = summaryTags.get(2);
+	assertEquals("cfoa", tagResultDTO.getName());
+	assertEquals(1, (long) tagResultDTO.getCount());
     }
 
     @Test
     public void setTagsAndRetrieve() throws Exception {
-        contentService.setTags(getHash(), groupShortName, defDocument, "foo foa foo");
-        final String tagsRetrieved = getDefaultContent().getTags();
-        assertEquals("foo foa", tagsRetrieved);
+	contentService.setTags(getHash(), groupShortName, defDocument, "foo foa foo");
+	final String tagsRetrieved = getDefaultContent().getTags();
+	assertEquals("foo foa", tagsRetrieved);
     }
 
     @Test
     public void tokenRename() throws Exception {
-        doLogin();
-        defaultContent = getDefaultContent();
-        final ContainerDTO folder = defaultContent.getFolder();
+	doLogin();
+	defaultContent = getDefaultContent();
+	final ContainerDTO folder = defaultContent.getFolder();
 
-        final String oldTitle = "some title";
-        String newTitle = "folder new name";
-        final StateDTO newState = contentService.addFolder(session.getHash(), groupShortName, folder.getId(), oldTitle);
+	final String oldTitle = "some title";
+	String newTitle = "folder new name";
+	final StateDTO newState = contentService.addFolder(session.getHash(), groupShortName, folder.getId(), oldTitle);
 
-        final ContainerDTO newFolder = newState.getFolder().getChilds().get(0);
+	final ContainerDTO newFolder = newState.getFolder().getChilds().get(0);
 
-        assertEquals(oldTitle, newFolder.getName());
+	assertEquals(oldTitle, newFolder.getName());
 
-        final StateToken newFolderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(),
-                newFolder.getId().toString(), null);
+	final StateToken newFolderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(),
+		newFolder.getId().toString(), null);
 
-        newTitle = "folder last name";
+	newTitle = "folder last name";
 
-        final String result = contentService.rename(getHash(), groupShortName, newFolderToken.getEncoded(), newTitle);
+	final String result = contentService.rename(getHash(), groupShortName, newFolderToken.getEncoded(), newTitle);
 
-        assertEquals(newTitle, result);
+	assertEquals(newTitle, result);
 
-        final StateDTO folderAgain = contentService.getContent(getHash(), groupShortName, newFolderToken);
+	final StateDTO folderAgain = contentService.getContent(getHash(), groupShortName, newFolderToken);
 
-        assertEquals(newTitle, folderAgain.getFolder().getName());
+	assertEquals(newTitle, folderAgain.getFolder().getName());
     }
 
 }

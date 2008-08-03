@@ -27,16 +27,28 @@ import javax.persistence.EntityManager;
 import org.apache.lucene.search.Query;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.FullTextQuery;
+import org.hibernate.search.jpa.Search;
 
 import com.google.inject.Provider;
 
 public abstract class DefaultManager<T, K> {
     private final Provider<EntityManager> provider;
+    private final Provider<FullTextEntityManager> fullTextEntityManagerProvider;
     private final Class<T> entityClass;
 
     public DefaultManager(final Provider<EntityManager> provider, final Class<T> entityClass) {
 	this.provider = provider;
 	this.entityClass = entityClass;
+	fullTextEntityManagerProvider = new Provider<FullTextEntityManager>() {
+	    private FullTextEntityManager searchManager;
+
+	    public FullTextEntityManager get() {
+		if (searchManager == null) {
+		    searchManager = Search.createFullTextEntityManager(getEntityManager());
+		}
+		return searchManager;
+	    }
+	};
     }
 
     public T find(final Long primaryKey) {
@@ -63,9 +75,7 @@ public abstract class DefaultManager<T, K> {
 
     @SuppressWarnings("unchecked")
     public void reIndex() {
-	// TODO: Inject this
-	final FullTextEntityManager fullTextEm = org.hibernate.search.jpa.Search
-		.createFullTextEntityManager(getEntityManager());
+	final FullTextEntityManager fullTextEm = fullTextEntityManagerProvider.get();
 	fullTextEm.purgeAll(entityClass);
 	fullTextEm.getTransaction().commit();
 	fullTextEm.getTransaction().begin();
@@ -83,10 +93,7 @@ public abstract class DefaultManager<T, K> {
 
     @SuppressWarnings("unchecked")
     public SearchResult<T> search(final Query query, final Integer firstResult, final Integer maxResults) {
-	// TODO: Inject this?
-	final FullTextEntityManager fullTextEm = org.hibernate.search.jpa.Search
-		.createFullTextEntityManager(getEntityManager());
-	final FullTextQuery emQuery = fullTextEm.createFullTextQuery(query, entityClass);
+	final FullTextQuery emQuery = fullTextEntityManagerProvider.get().createFullTextQuery(query, entityClass);
 	if (firstResult != null && maxResults != null) {
 	    emQuery.setFirstResult(firstResult);
 	    emQuery.setMaxResults(maxResults);

@@ -13,6 +13,7 @@ import org.ourproject.kune.workspace.client.sitebar.rpc.UserServiceAsync;
 
 import com.calclab.suco.client.container.Provider;
 import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.signal.Slot0;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -32,13 +33,13 @@ public class SiteSignOutLinkPresenter implements SiteSignOutLink {
 		view.setVisible(true);
 	    }
 	});
-	session.onUserSignOut(new Slot<Object>() {
-	    public void onEvent(final Object parameter) {
+	session.onUserSignOut(new Slot0() {
+	    public void onEvent() {
 		view.setVisible(false);
 	    }
 	});
-	kuneErrorHandlerProvider.get().onSessionExpired(new Slot<Object>() {
-	    public void onEvent(final Object parameter) {
+	kuneErrorHandlerProvider.get().onSessionExpired(new Slot0() {
+	    public void onEvent() {
 		clientUIsignOut();
 	    }
 	});

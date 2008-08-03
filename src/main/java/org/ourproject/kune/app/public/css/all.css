@@ -3172,27 +3172,27 @@ see: http://developer.yahoo.com/yui/fonts/ */
     color: #FFF;
 }
 
-.k-entity-bottom-rd-default, .k-entity-bottom-default {
+.k-entity-bottom-rd-default, .k-entity-bottom-default, .k-toolselectoritem-sel-default {
     background: #DD8A3D;
 }
 
-.k-entity-bottom-rd-green, .k-entity-bottom-green {
+.k-entity-bottom-rd-green, .k-entity-bottom-green, .k-toolselectoritem-sel-green {
     background: #5FD35F;
 }
 
-.k-entity-bottom-rd-blue, .k-entity-bottom-blue {
+.k-entity-bottom-rd-blue, .k-entity-bottom-blue, .k-toolselectoritem-sel-blue {
     background: #0066FF;
 }
 
-.k-entity-bottom-rd-grey, .k-entity-bottom-grey {
+.k-entity-bottom-rd-grey, .k-entity-bottom-grey, .k-toolselectoritem-sel-grey {
     background: #4D4D4D;
 }
 
-.k-entity-bottom-rd-purple, .k-entity-bottom-purple {
+.k-entity-bottom-rd-purple, .k-entity-bottom-purple, .k-toolselectoritem-sel-purple {
     background: #660080;
 }
 
-.k-entity-bottom-rd-red, .k-entity-bottom-red {
+.k-entity-bottom-rd-red, .k-entity-bottom-red, .k-toolselectoritem-sel-red {
     background: #D40000;
 }
 
@@ -3434,4 +3434,63 @@ see: http://developer.yahoo.com/yui/fonts/ */
 .k-wstheme-icon-red {
     background: red;
 }
+
+/* Tool selector items */
+
+.k-toolselectoritem {
+  width: auto;
+  margin-bottom: 5px;	
+  cursor: pointer;
+}
+
+.k-toolselectoritem-sel {
+}
+
+.k-toolselectoritem-notsel-default {
+	background: #FFE9A5;
+}
+
+.k-toolselectoritem-notsel-green {
+    background: #D6F4D6;
+}
+
+.k-toolselectoritem-notsel-blue {
+    background: #D7D7F4;
+}
+
+.k-toolselectoritem-notsel-grey {
+    background: #E6E6E6;
+}
+
+.k-toolselectoritem-notsel-purple {
+    background: #EED7F4;
+}
+
+.k-toolselectoritem-notsel-red {
+    background: #FFD5D5;
+}
+
+.k-toolselectoritem-sel a {
+  color: #FFF;
+  padding: 0 9px;
+  text-decoration: none;
+}
+
+.k-toolselectoritem-sel a:hover {
+  text-decoration: none;
+}
+
+.k-toolselectoritem-notsel {
+}
+
+.k-toolselectoritem-notsel a {
+  color: blue;
+  padding: 0 9px;
+  text-decoration: none;
+}
+
+.k-toolselectoritem-notsel a:hover {
+  text-decoration: none;
+}
+
 

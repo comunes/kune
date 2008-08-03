@@ -41,8 +41,8 @@ import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.signal.Signal;
-import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.signal.Signal0;
+import com.calclab.suco.client.signal.Slot0;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowCloseListener;
@@ -52,8 +52,8 @@ public class ApplicationDefault implements Application {
     // private final Workspace workspace;
     private Map<String, ClientTool> tools;
     private final Session session;
-    private final Signal<Object> onApplicationStart;
-    private final Signal<Object> onApplicationStop;
+    private final Signal0 onApplicationStart;
+    private final Signal0 onApplicationStop;
     private StateManager stateManager;
 
     public ApplicationDefault(final Session session, final KuneErrorHandler errorHandler, final WorkspaceSkeleton ws) {
@@ -61,8 +61,8 @@ public class ApplicationDefault implements Application {
 	// workspace = WorkspaceFactory.createWorkspace(session,
 	// extensionPointManager, i18n, errorHandler);
 	tools = new HashMap<String, ClientTool>();
-	this.onApplicationStart = new Signal<Object>("onApplicationStart");
-	this.onApplicationStop = new Signal<Object>("onApplicationStop");
+	this.onApplicationStart = new Signal0("onApplicationStart");
+	this.onApplicationStop = new Signal0("onApplicationStop");
 	Window.addWindowCloseListener(new WindowCloseListener() {
 	    public void onWindowClosed() {
 		stop();
@@ -88,24 +88,16 @@ public class ApplicationDefault implements Application {
 	this.tools = tools;
     }
 
-    public void onApplicationStart(final Slot<Object> slot) {
+    public void onApplicationStart(final Slot0 slot) {
 	onApplicationStart.add(slot);
     }
 
-    public void onApplicationStop(final Slot<Object> slot) {
+    public void onApplicationStop(final Slot0 slot) {
 	onApplicationStop.add(slot);
     }
 
-    public void setGroupState(final String groupShortName) {
-	final Iterator<ClientTool> iterator = tools.values().iterator();
-	while (iterator.hasNext()) {
-	    final ClientTool tool = iterator.next();
-	    tool.setGroupState(groupShortName);
-	}
-    }
-
     public void start() {
-	onApplicationStart.fire(null);
+	onApplicationStart.fire();
 	PrefetchUtilities.preFetchImpImages();
 	getInitData();
 	final Timer prefetchTimer = new Timer() {
@@ -117,7 +109,7 @@ public class ApplicationDefault implements Application {
     }
 
     public void stop() {
-	onApplicationStop.fire(null);
+	onApplicationStop.fire();
     }
 
     public void subscribeActions(final ArrayList<ActionEvent<?>> actions) {

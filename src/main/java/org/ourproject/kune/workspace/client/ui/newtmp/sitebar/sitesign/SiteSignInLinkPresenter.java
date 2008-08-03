@@ -5,6 +5,7 @@ import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.state.Session;
 
 import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.signal.Slot0;
 
 public class SiteSignInLinkPresenter implements SiteSignInLink {
 
@@ -16,8 +17,8 @@ public class SiteSignInLinkPresenter implements SiteSignInLink {
 		view.setVisible(false);
 	    }
 	});
-	session.onUserSignOut(new Slot<Object>() {
-	    public void onEvent(final Object parameter) {
+	session.onUserSignOut(new Slot0() {
+	    public void onEvent() {
 		view.setVisible(true);
 	    }
 	});

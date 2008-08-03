@@ -17,9 +17,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+package org.ourproject.kune.platf.client.app;
 
-package org.ourproject.kune.platf.client;
+import com.google.gwt.user.client.History;
 
-public class ToolState {
+public class HistoryWrapperDefault implements HistoryWrapper {
+
+    public String getToken() {
+	return History.getToken();
+    }
+
+    public void newItem(final String historyToken) {
+	History.newItem(historyToken);
+    }
 
 }

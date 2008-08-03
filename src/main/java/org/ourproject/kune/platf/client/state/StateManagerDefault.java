@@ -34,7 +34,10 @@ import org.ourproject.kune.workspace.client.sitebar.Site;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.signal.Signal;
+import com.calclab.suco.client.signal.Signal2;
 import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.signal.Slot0;
+import com.calclab.suco.client.signal.Slot2;
 
 public class StateManagerDefault implements StateManager {
     private final ContentProvider contentProvider;
@@ -44,6 +47,8 @@ public class StateManagerDefault implements StateManager {
     private final HashMap<String, Slot<StateToken>> siteTokens;
     private final Signal<StateDTO> onStateChanged;
     private final Signal<StateDTO> onSocialNetworkChanged;
+    private final Signal2<String, String> onToolChanged;
+    private final Signal2<String, String> onGroupChanged;
 
     public StateManagerDefault(final ContentProvider contentProvider, final Session session,
 	    final HistoryWrapper history) {
@@ -52,14 +57,16 @@ public class StateManagerDefault implements StateManager {
 	this.history = history;
 	this.oldState = null;
 	this.onStateChanged = new Signal<StateDTO>("onStateChanged");
+	this.onGroupChanged = new Signal2<String, String>("onGroupChanged");
+	this.onToolChanged = new Signal2<String, String>("onToolChanged");
 	this.onSocialNetworkChanged = new Signal<StateDTO>("onSocialNetworkChanged");
 	session.onUserSignIn(new Slot<UserInfoDTO>() {
 	    public void onEvent(final UserInfoDTO parameter) {
 		restorePreviousState();
 	    }
 	});
-	session.onUserSignOut(new Slot<Object>() {
-	    public void onEvent(final Object parameter) {
+	session.onUserSignOut(new Slot0() {
+	    public void onEvent() {
 		reload();
 	    }
 	});
@@ -79,6 +86,10 @@ public class StateManagerDefault implements StateManager {
 
     public void gotoToken(final String token) {
 	setState(new StateToken(token));
+    }
+
+    public void onGroupChanged(final Slot2<String, String> slot) {
+	onGroupChanged.add(slot);
     }
 
     public void onHistoryChanged(final String historyToken) {
@@ -105,6 +116,10 @@ public class StateManagerDefault implements StateManager {
 
     public void onStateChanged(final Slot<StateDTO> slot) {
 	onStateChanged.add(slot);
+    }
+
+    public void onToolChanged(final Slot2<String, String> slot) {
+	onToolChanged.add(slot);
     }
 
     /**
@@ -157,6 +172,20 @@ public class StateManagerDefault implements StateManager {
 	history.newItem(state.getEncoded());
     }
 
+    private void checkGroupAndToolChange(final StateDTO oldState, final StateDTO newState) {
+	final String oldGroupName = oldState != null ? oldState.getGroup().getShortName() : null;
+	final String newGroupName = newState.getGroup().getShortName();
+	final String oldToolName = oldState != null ? oldState.getToolName() : null;
+	final String newToolName = newState.getToolName();
+	if (oldState == null || !oldGroupName.equals(newGroupName)) {
+	    onGroupChanged.fire(oldGroupName, newGroupName);
+	}
+	if (oldState == null || !oldToolName.equals(newToolName)) {
+	    onToolChanged.fire(oldToolName, newToolName);
+	}
+
+    }
+
     private void loadContent(final StateDTO state) {
 	session.setCurrent(state);
 	onStateChanged.fire(state);
@@ -196,9 +225,10 @@ public class StateManagerDefault implements StateManager {
 
     private void onHistoryChanged(final StateToken newState) {
 	contentProvider.getContent(session.getUserHash(), newState, new AsyncCallbackSimple<StateDTO>() {
-	    public void onSuccess(final StateDTO newStateDTO) {
-		loadContent(newStateDTO);
-		oldState = newStateDTO;
+	    public void onSuccess(final StateDTO newState) {
+		loadContent(newState);
+		checkGroupAndToolChange(oldState, newState);
+		oldState = newState;
 	    }
 	});
     }
@@ -207,6 +237,8 @@ public class StateManagerDefault implements StateManager {
 	if (oldState == null) {
 	    onHistoryChanged(new StateToken());
 	} else {
+	    final StateDTO currentState = session.getCurrentState();
+	    checkGroupAndToolChange(oldState, currentState);
 	    loadContent(oldState);
 	}
     }

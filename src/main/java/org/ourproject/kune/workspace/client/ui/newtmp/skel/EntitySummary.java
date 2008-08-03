@@ -16,6 +16,7 @@ public class EntitySummary {
     public EntitySummary() {
 	mainPanel = new DefaultBorderLayout();
 	entityTools = new Panel();
+	entityTools.setAutoHeight(true);
 	entitySummary = new Panel();
 	entitySummary.setCls("k-entity-summary");
 	entityTools.setBorder(false);
@@ -23,7 +24,7 @@ public class EntitySummary {
 	entityTools.setAutoScroll(false);
 	entitySummary.setAutoScroll(true);
 	trayBar = mainPanel.createBottomBar(entitySummary, "k-site-traybar");
-	mainPanel.add(entityTools, DefaultBorderLayout.Position.NORTH, 30);
+	mainPanel.add(entityTools, DefaultBorderLayout.Position.NORTH);
 	mainPanel.add(entitySummary, DefaultBorderLayout.Position.CENTER);
 	trayBar.addFill();
     }
@@ -35,7 +36,7 @@ public class EntitySummary {
 
     public void addInTools(final Widget widget) {
 	entityTools.add(widget);
-	mainPanel.doLayoutIfNeeded();
+	mainPanel.doLayoutIfNeeded(true);
     }
 
     public void addListener(final ContainerListener listener) {

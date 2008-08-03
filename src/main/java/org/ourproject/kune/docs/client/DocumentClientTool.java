@@ -26,8 +26,11 @@ import org.ourproject.kune.docs.client.ctx.DocumentContext;
 import org.ourproject.kune.docs.client.ui.DocumentFactory;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.tool.AbstractClientTool;
+import org.ourproject.kune.platf.client.tool.ToolSelector;
 import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
 
 public class DocumentClientTool extends AbstractClientTool implements DocumentContentListener {
     public static final String TYPE_ROOT = "docs.root";
@@ -36,42 +39,43 @@ public class DocumentClientTool extends AbstractClientTool implements DocumentCo
     public static final String NAME = "docs";
     private final DocToolComponents components;
 
-    public DocumentClientTool(final DocumentFactory documentFactory, final I18nUITranslationService i18n) {
-        super(i18n.t("documents"));
-        components = new DocToolComponents(documentFactory, this);
+    public DocumentClientTool(final DocumentFactory documentFactory, final I18nUITranslationService i18n,
+	    final ToolSelector toolSelector, final WsThemePresenter wsThemePresenter, final WorkspaceSkeleton ws) {
+	super(NAME, i18n.t("documents"), toolSelector, wsThemePresenter, ws);
+	components = new DocToolComponents(documentFactory, this);
     }
 
     public WorkspaceComponent getContent() {
-        return components.getContent();
+	return components.getContent();
     }
 
     public WorkspaceComponent getContext() {
-        return components.getContext();
+	return components.getContext();
     }
 
     public String getName() {
-        return NAME;
+	return NAME;
     }
 
     public void onCancel() {
-        components.getContext().showFolders();
+	components.getContext().showFolders();
     }
 
     public void onEdit() {
-        components.getContext().showAdmin();
+	components.getContext().showAdmin();
     }
 
     public void setContent(final StateDTO state) {
-        DocumentContent docContent = components.getContent();
-        docContent.setContent(state);
+	final DocumentContent docContent = components.getContent();
+	docContent.setContent(state);
 
-        // TODO: check trigger interface (setState)
-        trigger.setState(state.getStateToken().toString());
+	// TODO: check trigger interface (setState)
+	// trigger.setState(state.getStateToken().toString());
     }
 
     public void setContext(final StateDTO state) {
-        DocumentContext context = components.getContext();
-        context.setContext(state);
+	final DocumentContext context = components.getContext();
+	context.setContext(state);
     }
 
 }

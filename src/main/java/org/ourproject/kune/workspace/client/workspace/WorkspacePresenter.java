@@ -58,7 +58,7 @@ public class WorkspacePresenter implements Workspace {
 	ClientTool clientTool;
 	while (iterator.hasNext()) {
 	    clientTool = iterator.next();
-	    view.addTab(clientTool.getTrigger());
+	    // view.addTab(clientTool.getTrigger());
 	}
     }
 

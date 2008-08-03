@@ -34,15 +34,15 @@ import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.container.Provider;
-import com.calclab.suco.client.signal.Signal;
-import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.signal.Signal0;
+import com.calclab.suco.client.signal.Slot0;
 import com.google.gwt.core.client.GWT;
 
 public class KuneErrorHandler {
     private final Session session;
     private final I18nTranslationService i18n;
     private final Provider<WorkspaceSkeleton> wsProvider;
-    private final Signal<Object> onSessionExpired;
+    private final Signal0 onSessionExpired;
     private final Provider<StateManager> stateManagerProvider;
 
     public KuneErrorHandler(final Session session, final I18nTranslationService i18n,
@@ -51,14 +51,14 @@ public class KuneErrorHandler {
 	this.i18n = i18n;
 	this.wsProvider = wsProvider;
 	this.stateManagerProvider = stateManagerProvider;
-	this.onSessionExpired = new Signal<Object>("onSessionExpired");
+	this.onSessionExpired = new Signal0("onSessionExpired");
     }
 
     public WorkspaceSkeleton getWorkspaceSkeleton() {
 	return wsProvider.get();
     }
 
-    public void onSessionExpired(final Slot<Object> slot) {
+    public void onSessionExpired(final Slot0 slot) {
 	onSessionExpired.add(slot);
     }
 
@@ -107,7 +107,7 @@ public class KuneErrorHandler {
     }
 
     private void doSessionExpired() {
-	onSessionExpired.fire(null);
+	onSessionExpired.fire();
 	getWorkspaceSkeleton().showAlertMessage(i18n.t("Session expired"),
 		i18n.t("Your session has expired. Please login again."));
     }

@@ -9,6 +9,7 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.workspace.client.sitebar.SiteToken;
 
 import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.signal.Slot2;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class StateManagerTest {
@@ -18,6 +19,28 @@ public class StateManagerTest {
     private HistoryWrapper history;
     private ContentProvider contentProvider;
     private Session session;
+
+    @SuppressWarnings("unchecked")
+    @Test
+    public void changeStateWithDifferentGroupsMustFireSlot() {
+	final Slot2<String, String> groupSlot = Mockito.mock(Slot2.class);
+	stateManager.onGroupChanged(groupSlot);
+	stateManager.onHistoryChanged("group1.tool1");
+	stateManager.onHistoryChanged("group2.tool1");
+	// TODO, think how to test this
+	// Mockito.verify(groupSlot).onEvent("group1", "group2");
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test
+    public void changeStateWithDifferentToolsMustFireSlot() {
+	final Slot2<String, String> toolSlot = Mockito.mock(Slot2.class);
+	stateManager.onToolChanged(toolSlot);
+	stateManager.gotoToken("group1.tool1");
+	stateManager.gotoToken("group1.tool2");
+	// TODO, think how to test this
+	// Mockito.verify(toolSlot).onEvent("tool1", "tool2");
+    }
 
     @SuppressWarnings("unchecked")
     @Test

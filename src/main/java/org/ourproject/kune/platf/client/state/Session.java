@@ -31,6 +31,7 @@ import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 
 import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.signal.Slot0;
 
 public interface Session {
 
@@ -73,7 +74,7 @@ public interface Session {
 
     void onUserSignIn(Slot<UserInfoDTO> slot);
 
-    void onUserSignOut(Slot<Object> slot);
+    void onUserSignOut(Slot0 slot);
 
     void setCurrentUserInfo(UserInfoDTO currentUserInfo);
 

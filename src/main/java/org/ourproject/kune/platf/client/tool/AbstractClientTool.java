@@ -20,21 +20,17 @@
 
 package org.ourproject.kune.platf.client.tool;
 
-import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
 
 public abstract class AbstractClientTool implements ClientTool {
-    protected final ToolTriggerDefault trigger;
 
-    public AbstractClientTool(final String label) {
-	trigger = new ToolTriggerDefault(getName(), label);
-    }
-
-    public ToolTrigger getTrigger() {
-	return trigger;
-    }
-
-    public void setGroupState(final String groupShortName) {
-	trigger.setState(new StateToken(groupShortName, getName(), null, null));
+    public AbstractClientTool(final String shortName, final String longName, final ToolSelector toolSelector,
+	    final WsThemePresenter wsThemePresenter, final WorkspaceSkeleton ws) {
+	final ToolSelectorItemPresenter presenter = new ToolSelectorItemPresenter(shortName, longName, toolSelector,
+		wsThemePresenter);
+	final ToolSelectorItemPanel panel = new ToolSelectorItemPanel(presenter, ws);
+	presenter.init(panel);
     }
 
 }

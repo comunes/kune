@@ -36,7 +36,9 @@ import org.ourproject.kune.workspace.client.sitebar.rpc.UserServiceAsync;
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.container.Provider;
 import com.calclab.suco.client.signal.Signal;
+import com.calclab.suco.client.signal.Signal0;
 import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.signal.Slot0;
 
 public class SessionImpl implements Session {
     private String userHash;
@@ -49,7 +51,7 @@ public class SessionImpl implements Session {
     private I18nLanguageDTO currentLanguage;
     private final Signal<InitDataDTO> onInitDataReceived;
     private final Signal<UserInfoDTO> onUserSignIn;
-    private final Signal<Object> onUserSignOut;
+    private final Signal0 onUserSignOut;
     private final Provider<UserServiceAsync> userServiceProvider;
 
     public SessionImpl(final String userHash, final Provider<UserServiceAsync> userServiceProvider) {
@@ -58,7 +60,7 @@ public class SessionImpl implements Session {
 	languagesArray = null;
 	this.onInitDataReceived = new Signal<InitDataDTO>("initDataReceived");
 	this.onUserSignIn = new Signal<UserInfoDTO>("onUserSignIn");
-	this.onUserSignOut = new Signal<Object>("onUserSignOut");
+	this.onUserSignOut = new Signal0("onUserSignOut");
     }
 
     public void check(final AsyncCallbackSimple<?> callback) {
@@ -127,7 +129,7 @@ public class SessionImpl implements Session {
 	onUserSignIn.add(slot);
     }
 
-    public void onUserSignOut(final Slot<Object> slot) {
+    public void onUserSignOut(final Slot0 slot) {
 	onUserSignOut.add(slot);
     }
 
@@ -148,7 +150,7 @@ public class SessionImpl implements Session {
 	if (currentUserInfo != null) {
 	    onUserSignIn.fire(currentUserInfo);
 	} else {
-	    onUserSignOut.fire(null);
+	    onUserSignOut.fire();
 	}
     }
 
