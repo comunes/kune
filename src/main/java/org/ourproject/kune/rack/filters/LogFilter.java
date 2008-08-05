@@ -39,12 +39,12 @@ public class LogFilter implements Filter {
     }
 
     public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
-            throws IOException, ServletException {
-        long start = System.currentTimeMillis();
-        log.debug("REQUEST: " + RackHelper.getURI(request));
-        chain.doFilter(request, response);
-        long finish = System.currentTimeMillis();
-        log.debug("TOTAL TIME: " + (finish - start) + " miliseconds");
+	    throws IOException, ServletException {
+	// final long start = System.currentTimeMillis();
+	log.debug("REQUEST: " + RackHelper.getURI(request));
+	chain.doFilter(request, response);
+	// final long finish = System.currentTimeMillis();
+	// log.debug("TOTAL TIME: " + (finish - start) + " miliseconds");
     }
 
     public void init(final FilterConfig filterConfig) throws ServletException {

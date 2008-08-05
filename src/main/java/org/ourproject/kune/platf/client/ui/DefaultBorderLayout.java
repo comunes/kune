@@ -68,9 +68,8 @@ public class DefaultBorderLayout {
 	if (panel.isRendered()) {
 	    panel.syncSize();
 	    panel.doLayout();
-	    doLayoutIfNeeded();
 	}
-	// doLayoutIfNeeded();
+	doLayoutIfNeeded();
     }
 
     public void addStyle(final String style) {

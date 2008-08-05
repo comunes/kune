@@ -40,7 +40,7 @@ import com.calclab.suco.client.signal.Signal0;
 import com.calclab.suco.client.signal.Slot;
 import com.calclab.suco.client.signal.Slot0;
 
-public class SessionImpl implements Session {
+public class SessionDefault implements Session {
     private String userHash;
     private InitDataDTO initData;
     private UserInfoDTO currentUserInfo;
@@ -54,7 +54,7 @@ public class SessionImpl implements Session {
     private final Signal0 onUserSignOut;
     private final Provider<UserServiceAsync> userServiceProvider;
 
-    public SessionImpl(final String userHash, final Provider<UserServiceAsync> userServiceProvider) {
+    public SessionDefault(final String userHash, final Provider<UserServiceAsync> userServiceProvider) {
 	this.userHash = userHash;
 	this.userServiceProvider = userServiceProvider;
 	languagesArray = null;

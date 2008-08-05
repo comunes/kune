@@ -1,4 +1,7 @@
 #!/bin/bash
+
+mkdir -p src/main/webapp/gwt/org.ourproject.kune.app.Kune
+
 find target/kune-0.0.4/org.ourproject.kune.app.Kune/ -name .DS_Store -exec rm {} \;
 
 script/css-compact-and-tidy.css

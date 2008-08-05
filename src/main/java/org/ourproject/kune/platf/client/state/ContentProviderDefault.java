@@ -29,12 +29,12 @@ import org.ourproject.kune.workspace.client.sitebar.Site;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class ContentProviderImpl implements ContentProvider {
+public class ContentProviderDefault implements ContentProvider {
 
     private final ContentServiceAsync server;
     private final HashMap<StateToken, StateDTO> cache;
 
-    public ContentProviderImpl(final ContentServiceAsync server) {
+    public ContentProviderDefault(final ContentServiceAsync server) {
 	this.server = server;
 	this.cache = new HashMap<StateToken, StateDTO>();
     }

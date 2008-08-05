@@ -18,9 +18,9 @@ import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
 import org.ourproject.kune.platf.client.state.ContentProvider;
-import org.ourproject.kune.platf.client.state.ContentProviderImpl;
+import org.ourproject.kune.platf.client.state.ContentProviderDefault;
 import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.SessionImpl;
+import org.ourproject.kune.platf.client.state.SessionDefault;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.state.StateManagerDefault;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
@@ -157,7 +157,7 @@ public class KuneModule extends AbstractModule {
 
 	register(SingletonScope.class, new Factory<Session>(Session.class) {
 	    public Session create() {
-		return new SessionImpl(Cookies.getCookie(Site.USERHASH), $p(UserServiceAsync.class));
+		return new SessionDefault(Cookies.getCookie(Site.USERHASH), $p(UserServiceAsync.class));
 	    }
 	}, new Factory<I18nServiceAsync>(I18nServiceAsync.class) {
 	    public I18nServiceAsync create() {
@@ -230,7 +230,7 @@ public class KuneModule extends AbstractModule {
 	    }
 	}, new Factory<ContentProvider>(ContentProvider.class) {
 	    public ContentProvider create() {
-		return new ContentProviderImpl($(ContentServiceAsync.class));
+		return new ContentProviderDefault($(ContentServiceAsync.class));
 	    }
 	}, new Factory<StateManager>(StateManager.class) {
 	    public StateManager create() {

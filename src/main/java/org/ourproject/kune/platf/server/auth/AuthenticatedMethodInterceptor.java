@@ -23,6 +23,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.server.UserSession;
@@ -31,6 +33,8 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class AuthenticatedMethodInterceptor implements MethodInterceptor {
+
+    public static final Log log = LogFactory.getLog(AuthenticatedMethodInterceptor.class);
 
     @Inject
     Provider<UserSession> userSessionProvider;
@@ -42,33 +46,40 @@ public class AuthenticatedMethodInterceptor implements MethodInterceptor {
     Provider<SessionService> sessionServiceProvider;
 
     public Object invoke(final MethodInvocation invocation) throws Throwable {
-        Object[] arguments = invocation.getArguments();
-        String userHash = (String) arguments[0];
+	final Object[] arguments = invocation.getArguments();
+	// Some browsers getCookie returns "null" as String instead of null
+	final String userHash = arguments[0] == null || arguments[0].equals("null") ? null : (String) arguments[0];
 
-        UserSession userSession = userSessionProvider.get();
-        SessionService sessionService = sessionServiceProvider.get();
+	log.info("Method: " + invocation.getMethod().getName());
+	log.info("Userhash received: " + userHash);
+	log.info("--------------------------------------------------------------------------------");
+	final UserSession userSession = userSessionProvider.get();
+	final SessionService sessionService = sessionServiceProvider.get();
 
-        Authenticated authAnnotation = invocation.getStaticPart().getAnnotation(Authenticated.class);
-        boolean mandatory = authAnnotation.mandatory();
+	final Authenticated authAnnotation = invocation.getStaticPart().getAnnotation(Authenticated.class);
+	final boolean mandatory = authAnnotation.mandatory();
 
-        if (userHash == null && mandatory) {
-            sessionService.getNewSession();
-            throw new UserMustBeLoggedException();
-        } else if (userSession.isUserNotLoggedIn() && mandatory) {
-            sessionService.getNewSession();
-            throw new SessionExpiredException();
-        } else if (userSession.isUserNotLoggedIn() && userHash == null) {
-            // Ok, do nothing
-        } else if (userSession.isUserNotLoggedIn() && userHash != null) {
-            sessionService.getNewSession();
-            throw new SessionExpiredException();
-        } else if (!userSession.getHash().equals(userHash)) {
-            userSession.logout();
-            sessionService.getNewSession();
-            throw new SessionExpiredException();
-        }
-        Object result = invocation.proceed();
-        return result;
+	if (userHash == null && mandatory) {
+	    sessionService.getNewSession();
+	    throw new UserMustBeLoggedException();
+	} else if (userSession.isUserNotLoggedIn() && mandatory) {
+	    sessionService.getNewSession();
+	    log.info("Session expired (not logged in server and mandatory)");
+	    throw new SessionExpiredException();
+	} else if (userSession.isUserNotLoggedIn() && userHash == null) {
+	    // Ok, do nothing
+	} else if (userSession.isUserNotLoggedIn() && userHash != null) {
+	    sessionService.getNewSession();
+	    log.info("Session expired (not logged in server)");
+	    throw new SessionExpiredException();
+	} else if (!userSession.getHash().equals(userHash)) {
+	    userSession.logout();
+	    sessionService.getNewSession();
+	    log.info("Session expired (userHash different in server)");
+	    throw new SessionExpiredException();
+	}
+	final Object result = invocation.proceed();
+	return result;
     }
 
 }

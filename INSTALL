@@ -4,19 +4,17 @@ INSTALL
 For development: 
 
 - Install java-jdk (>= 1.5), maven2, mysql (>= 5.0) and for example eclipse
-- Install gwt 1.4.60 and follow Appendix A for maven+gwt configuration
+- Install gwt 1.5rc1 and follow Appendix A for maven+gwt configuration
 - Compile with maven:
   # (in the trunk directory)
   mvn compile
   mvn gwt:compile
 
 - Copy the target to src directory (only for test):
-  mkdir -p src/main/webapp/gwt/org.ourproject.kune.app.Kune
-  unison -batch -auto -ui text target/org.ourproject.kune-0.0.2/org.ourproject.kune.app.Kune/ src/main/webapp/gwt/org.ourproject.kune.app.Kune
+  bin/deploy_gwt.sh 
 
   (if you're using windows as dev plaftorm... you will have to write your own script ;). the idea is to
-  copy everything from src/main/webapp/gwt/org.ourproject.kune.app.Kune to
-  src/main/webapp/gwt/org.ourproject.kune.app.Kune)
+  copy everything from target/kune-0.0.VERSIONHERE/org.ourproject.kune.app.Kune to src/main/webapp/gwt/org.ourproject.kune.app.Kune)
 
 - Make two databases in your mysql:
 
@@ -35,23 +33,18 @@ FLUSH PRIVILEGES;
   sudo chown yourUser:yourUser /var/lib/lucene/kune_dev/indexes
   sudo chown yourUser:yourUser /var/lib/lucene/kune_test/indexes
  
- (in case you are using windows as dev platform you only have to create a couple of folders
- anywhere you like and then specify them in persistence.xml, as follows:
-		<property name="hibernate.search.default.indexBase" value="C:\kune\kune-index"/>
+ In case you are using windows as dev platform you only have to create a couple of folders anywhere you like and then specify them in persistence.xml, as follows:
+   <property name="hibernate.search.default.indexBase" value="C:\kune\kune-index"/>
  do the same with every persistence unit defined inside.
- )
  
-- Install and run a openfire jabber server (see Appendix B for proper configuration of openfire)
+- Install and run a openfire jabber server (see Appendix B for proper configuration of openfire) or ejabberd.
 
 - Run jetty:
   mvn jetty:run -Ddatabase.migrator.should.run=false # without liquibase db migraton (liquibase.should.run=false in new version)
 once started (and initialized the db), you can stop a run jetty with de db migrator to insert initial data and migrate:
   mvn jetty:run
 
-- And conect to http://yourIP:8080/kune
-
-- For development with eclipse:
-  mvn eclipse:eclipse
+- And connect to http://yourIP:8080/kune
 
 Appendix A: Configuration of maven
 --------------------------------------------------------------------------------
@@ -144,4 +137,3 @@ Appendix C: jar generation (kune-core is the base for plugin development)
 --------------------------------------------------------------------------------
 
 mvn package -Dmaven.test.skip=true -o   
-

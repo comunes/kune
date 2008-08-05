@@ -63,7 +63,7 @@ public class RackServletFilter implements Filter {
 
 	private void execute(final Filter filter, final ServletRequest request, final ServletResponse response)
 		throws IOException, ServletException {
-	    log.debug("RACK FILTER: " + filter.getClass().getSimpleName());
+	    // log.debug("RACK FILTER: " + filter.getClass().getSimpleName());
 	    filter.doFilter(request, response, this);
 	}
     }
