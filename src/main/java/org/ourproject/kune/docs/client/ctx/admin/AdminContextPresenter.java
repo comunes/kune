@@ -36,7 +36,7 @@ import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.sitebar.Site;
-import org.ourproject.kune.workspace.client.workspace.TagsSummary;
+import org.ourproject.kune.workspace.client.tags.TagsSummary;
 
 import com.calclab.suco.client.container.Provider;
 

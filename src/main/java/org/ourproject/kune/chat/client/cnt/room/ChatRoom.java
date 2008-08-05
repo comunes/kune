@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.chat.client.cnt.room;
 
-import org.ourproject.kune.platf.client.Component;
+public interface ChatRoom {
 
-public interface ChatRoom extends Component {
+    void show();
 }

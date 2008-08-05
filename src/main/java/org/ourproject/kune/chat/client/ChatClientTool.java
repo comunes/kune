@@ -20,22 +20,21 @@
 
 package org.ourproject.kune.chat.client;
 
+import org.ourproject.kune.chat.client.cnt.ChatContent;
+import org.ourproject.kune.chat.client.ctx.ChatContext;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
-import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.tool.AbstractClientTool;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
-import org.ourproject.kune.platf.client.ui.gridmenu.GridMenuItem;
-import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
+import org.ourproject.kune.platf.client.ui.MenuItem;
+import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummary;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
-import org.ourproject.kune.workspace.client.workspace.GroupMembersSummary;
 
 import com.calclab.emite.client.xmpp.stanzas.XmppURI;
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
@@ -48,24 +47,25 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
     public static final String TYPE_ROOT = "chat.root";
     public static final String TYPE_ROOM = "chat.room";
     public static final String TYPE_CHAT = "chat.chat";
-    private final ChatToolComponents components;
     private ChatEngine chat;
+    private final Provider<ChatContext> chatContextProvider;
+    private final Provider<ChatContent> chatContentProvider;
 
     public ChatClientTool(final Session session, final Application application, final I18nTranslationService i18n,
 	    final EmiteUIDialog emiteUIDialog, final WorkspaceSkeleton ws,
-	    final Provider<GroupMembersSummary> groupMembersSummaryProvider,
-	    final Provider<StateManager> stateManagerProvider,
-	    final Provider<ContentServiceAsync> contentServiceProvider, final ToolSelector toolSelector,
-	    final WsThemePresenter wsThemePresenter) {
+	    final Provider<GroupMembersSummary> groupMembersSummaryProvider, final ToolSelector toolSelector,
+	    final WsThemePresenter wsThemePresenter, final Provider<ChatContent> chatContentProvider,
+	    final Provider<ChatContext> chatContextProvider) {
 	super(NAME, i18n.t("chat rooms"), toolSelector, wsThemePresenter, ws);
-	components = new ChatToolComponents(emiteUIDialog, i18n, stateManagerProvider, session, contentServiceProvider);
+	this.chatContentProvider = chatContentProvider;
+	this.chatContextProvider = chatContextProvider;
 	session.onInitDataReceived(new Slot<InitDataDTO>() {
 	    public void onEvent(final InitDataDTO initData) {
 		final ChatOptions chatOptions = new ChatOptions(initData.getChatHttpBase(), initData.getChatDomain(),
 			initData.getChatRoomHost());
 		chat = new ChatEngineXmpp(emiteUIDialog, chatOptions, i18n, ws);
 		groupMembersSummaryProvider.get().addGroupOperation(
-			new GridMenuItem<GroupDTO>("images/chat-basic.gif", i18n.t("Start a chat with this member"),
+			new MenuItem<GroupDTO>("images/chat-basic.gif", i18n.t("Start a chat with this member"),
 				new Slot<GroupDTO>() {
 				    public void onEvent(final GroupDTO group) {
 					emiteUIDialog.chat(XmppURI.jid(group.getShortName() + "@"
@@ -96,24 +96,16 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
 	return chat;
     }
 
-    public WorkspaceComponent getContent() {
-	return components.getContent();
-    }
-
-    public WorkspaceComponent getContext() {
-	return components.getContext();
-    }
-
     public String getName() {
 	return NAME;
     }
 
     public void setContent(final StateDTO state) {
-	components.getContent().setState(state);
+	chatContentProvider.get().setState(state);
     }
 
     public void setContext(final StateDTO state) {
-	components.getContext().setState(state);
+	chatContextProvider.get().setState(state);
     }
 
 }

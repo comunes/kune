@@ -23,6 +23,8 @@ package org.ourproject.kune.platf.client.ui.gridmenu;
 
 import java.util.Iterator;
 
+import org.ourproject.kune.platf.client.ui.MenuItem;
+
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.gwtext.client.core.EventObject;
@@ -47,7 +49,7 @@ public class GridMenu<T> {
 	menu = new Menu();
     }
 
-    public void addMenuItem(final GridMenuItem<T> menuItem) {
+    public void addMenuItem(final MenuItem<T> menuItem) {
 	final Item item = new Item(menuItem.getTitle());
 	item.setIcon(menuItem.getIcon());
 	menu.addItem(item);
@@ -65,7 +67,7 @@ public class GridMenu<T> {
     @SuppressWarnings("unchecked")
     public void addMenuItemList(final GridMenuItemCollection list) {
 	for (final Iterator iterator = list.iterator(); iterator.hasNext();) {
-	    final GridMenuItem item = (GridMenuItem) iterator.next();
+	    final MenuItem item = (MenuItem) iterator.next();
 	    addMenuItem(item);
 	}
     }

@@ -25,8 +25,10 @@ import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 
 public interface DocumentReaderControl {
 
+    View getView();
+
     void setRights(AccessRightsDTO accessRights);
 
-    View getView();
+    void show();
 
 }

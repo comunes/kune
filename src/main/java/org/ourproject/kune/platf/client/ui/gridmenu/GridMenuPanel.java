@@ -61,9 +61,6 @@ public class GridMenuPanel<T> extends Panel {
     private final Signal<String> onDoubleClick;
     private Toolbar topBar;
     private Toolbar bottomBar;
-    private final String emptyText;
-    private final GridDragConfiguration gridDragConfiguration;
-    private final GridDropConfiguration gridDropConfiguration;
     private ColumnModel columnModel;
     private final boolean withEndIcon;
 
@@ -92,9 +89,6 @@ public class GridMenuPanel<T> extends Panel {
     public GridMenuPanel(final String emptyText, final GridDragConfiguration gridDragConfiguration,
 	    final GridDropConfiguration gridDropConfiguration, final boolean grouped, final boolean withCounters,
 	    final boolean withTopBar, final boolean withBottomBar, final boolean withEndIcon) {
-	this.emptyText = emptyText;
-	this.gridDragConfiguration = gridDragConfiguration;
-	this.gridDropConfiguration = gridDropConfiguration;
 	this.onClick = new Signal<String>("onClick");
 	this.onDoubleClick = new Signal<String>("onDoubleClick");
 	this.grouped = grouped;
@@ -113,6 +107,7 @@ public class GridMenuPanel<T> extends Panel {
 	}
 	menuMap = new HashMap<String, GridMenu<T>>();
 	recordMap = new HashMap<T, Record>();
+	createGrid(emptyText, gridDragConfiguration, gridDropConfiguration);
     }
 
     public GridMenuPanel(final String emptyText, final GridDropConfiguration gridDropConfiguration) {
@@ -125,7 +120,6 @@ public class GridMenuPanel<T> extends Panel {
     }
 
     public void addItem(final GridItem<T> gridItem) {
-	createGridIfNeeded();
 	final String id = gridItem.getId();
 	final Record newRecord = recordDef
 		.createRecord(id, new Object[] { gridItem.getGroup().getName(), gridItem.getGroup().getTooltipTitle(),
@@ -168,6 +162,12 @@ public class GridMenuPanel<T> extends Panel {
 		return "x-tree-drop-ok-append";
 	    }
 	};
+    }
+
+    @Override
+    public void doLayout(final boolean shallow) {
+	// Grid rendered problems with shallow false
+	super.doLayout();
     }
 
     public void doLayoutIfNeeded() {
@@ -444,12 +444,6 @@ public class GridMenuPanel<T> extends Panel {
 	    grid.setDraggable(false);
 	}
 	super.add(grid);
-    }
-
-    private void createGridIfNeeded() {
-	if (grid == null) {
-	    createGrid(emptyText, gridDragConfiguration, gridDropConfiguration);
-	}
     }
 
     private void onClick(final int rowIndex) {

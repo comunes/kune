@@ -38,6 +38,7 @@ Now there are problems if client was started before server, and with server rest
   - Remove pagination i18n's
   - Chat rooms --> Chats
   - Confirmation of chat close (see code)
+  -  Participates as ... --> Participates in
 
 MIND-TERM:
 --------------------------------------------------------------------------------

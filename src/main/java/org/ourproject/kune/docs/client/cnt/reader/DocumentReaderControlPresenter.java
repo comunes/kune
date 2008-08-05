@@ -24,19 +24,32 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 
 public class DocumentReaderControlPresenter implements DocumentReaderControl {
-    private final DocumentReaderControlView view;
+    private DocumentReaderControlView view;
 
-    public DocumentReaderControlPresenter(final DocumentReaderControlView view) {
-        this.view = view;
+    public View getView() {
+	return view;
+    }
+
+    public void init(final DocumentReaderControlView view) {
+	this.view = view;
+    }
+
+    public void onDelete() {
+    }
+
+    public void onEdit() {
+    }
+
+    public void onTranslate() {
     }
 
     public void setRights(final AccessRightsDTO accessRights) {
-        view.setEditEnabled(accessRights.isEditable());
-        view.setDeleteEnabled(accessRights.isAdministrable());
-        view.setTranslateEnabled(accessRights.isEditable());
+	view.setEditEnabled(accessRights.isEditable());
+	view.setDeleteEnabled(accessRights.isAdministrable());
+	view.setTranslateEnabled(accessRights.isEditable());
     }
 
-    public View getView() {
-        return view;
+    public void show() {
+	view.show();
     }
 }

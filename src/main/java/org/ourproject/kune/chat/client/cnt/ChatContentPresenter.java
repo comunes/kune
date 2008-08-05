@@ -23,35 +23,29 @@ package org.ourproject.kune.chat.client.cnt;
 import org.ourproject.kune.chat.client.ChatClientTool;
 import org.ourproject.kune.chat.client.cnt.info.ChatInfo;
 import org.ourproject.kune.chat.client.cnt.room.ChatRoom;
-import org.ourproject.kune.chat.client.cnt.room.ChatRoomListener;
-import org.ourproject.kune.platf.client.PlatformEvents;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.StateDTO;
-import org.ourproject.kune.platf.client.extend.ExtensibleWidgetId;
-import org.ourproject.kune.platf.client.ui.UnknowComponent;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.emite.client.xmpp.stanzas.XmppURI;
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
+import com.calclab.suco.client.container.Provider;
 
-public class ChatContentPresenter implements ChatContent, ChatRoomListener {
+public class ChatContentPresenter implements ChatContent {
 
     private final WorkspaceDeckView view;
-    private final ChatComponents components;
     private StateDTO state;
     private final EmiteUIDialog emiteUIDialog;
+    private final Provider<ChatInfo> chatInfoProvider;
+    private final Provider<ChatRoom> chatRoomProvider;
 
-    public ChatContentPresenter(final EmiteUIDialog emiteUIDialog, final WorkspaceDeckView view) {
+    public ChatContentPresenter(final EmiteUIDialog emiteUIDialog, final WorkspaceDeckView view,
+	    final Provider<ChatInfo> chatInfoProvider, final Provider<ChatRoom> chatRoomProvider) {
 	this.emiteUIDialog = emiteUIDialog;
 	this.view = view;
-	this.components = new ChatComponents(this);
-    }
-
-    public void attach() {
-    }
-
-    public void detach() {
+	this.chatInfoProvider = chatInfoProvider;
+	this.chatRoomProvider = chatRoomProvider;
     }
 
     public View getView() {
@@ -67,20 +61,11 @@ public class ChatContentPresenter implements ChatContent, ChatRoomListener {
 	this.state = state;
 	final String typeId = state.getTypeId();
 	if (typeId.equals(ChatClientTool.TYPE_ROOT)) {
-	    final ChatInfo info = components.getChatInfo();
-	    view.show(info.getView());
-	    DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXTENSIBLE_WIDGET,
-		    ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT);
+	    chatInfoProvider.get().show();
 	} else if (typeId.equals(ChatClientTool.TYPE_ROOM)) {
-	    final ChatRoom viewer = components.getChatRoom();
-	    view.show(viewer.getView());
-	    DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXTENSIBLE_WIDGET,
-		    ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT);
+	    chatRoomProvider.get().show();
 	} else {
-	    view.show(UnknowComponent.instance.getView());
-	    DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXTENSIBLE_WIDGET,
-		    ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT);
+	    Log.error("Programming error: unknown component!! please contact kune-devel@lists-ourproject.org");
 	}
     }
-
 }

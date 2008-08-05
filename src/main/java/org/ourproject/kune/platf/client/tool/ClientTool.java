@@ -21,13 +21,8 @@
 package org.ourproject.kune.platf.client.tool;
 
 import org.ourproject.kune.platf.client.dto.StateDTO;
-import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 
 public interface ClientTool {
-
-    WorkspaceComponent getContent();
-
-    WorkspaceComponent getContext();
 
     String getName();
 

@@ -32,28 +32,21 @@ import org.ourproject.kune.docs.client.actions.DocsEvents;
 import org.ourproject.kune.docs.client.actions.GoParentFolderAction;
 import org.ourproject.kune.docs.client.actions.RenameTokenAction;
 import org.ourproject.kune.docs.client.actions.SaveDocumentAction;
-import org.ourproject.kune.docs.client.actions.WSSplitterStartResizingAction;
-import org.ourproject.kune.docs.client.actions.WSSplitterStopResizingAction;
 import org.ourproject.kune.platf.client.extend.ClientModule;
 import org.ourproject.kune.platf.client.extend.Register;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.WorkspaceEvents;
-import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 public class DocsClientModule implements ClientModule {
 
     private final Session session;
-    private final Workspace workspace;
     private final StateManager stateManager;
     private final I18nTranslationService i18n;
 
-    public DocsClientModule(final Session session, final StateManager stateManager, final Workspace workspace,
-	    final I18nTranslationService i18n) {
+    public DocsClientModule(final Session session, final StateManager stateManager, final I18nTranslationService i18n) {
 	this.session = session;
 	this.stateManager = stateManager;
-	this.workspace = workspace;
 	this.i18n = i18n;
     }
 
@@ -64,12 +57,10 @@ public class DocsClientModule implements ClientModule {
 	register.addAction(DocsEvents.GO_PARENT_FOLDER, new GoParentFolderAction(stateManager, session));
 	register.addAction(DocsEvents.ADD_AUTHOR, new ContentAddAuthorAction(stateManager, session));
 	register.addAction(DocsEvents.REMOVE_AUTHOR, new ContentRemoveAuthorAction(stateManager, session));
-	register.addAction(DocsEvents.SET_LANGUAGE, new ContentSetLanguageAction(session, workspace));
-	register.addAction(DocsEvents.SET_PUBLISHED_ON, new ContentSetPublishedOnAction(session, workspace));
+	register.addAction(DocsEvents.SET_LANGUAGE, new ContentSetLanguageAction(session));
+	register.addAction(DocsEvents.SET_PUBLISHED_ON, new ContentSetPublishedOnAction(session));
 	register.addAction(DocsEvents.RENAME_CONTENT, new ContentRenameAction(session));
 	register.addAction(DocsEvents.DEL_CONTENT, new ContentDelContentAction(stateManager, session));
 	register.addAction(DocsEvents.RENAME_TOKEN, new RenameTokenAction(session, stateManager));
-	register.addAction(WorkspaceEvents.WS_SPLITTER_STARTRESIZING, new WSSplitterStartResizingAction());
-	register.addAction(WorkspaceEvents.WS_SPLITTER_STOPRESIZING, new WSSplitterStopResizingAction());
     }
 }

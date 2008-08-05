@@ -29,15 +29,13 @@ import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.platf.client.services.Images;
 
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.gwtext.client.widgets.form.FormPanel;
 
 public class AdminContextPanel extends VerticalPanel implements AdminContextView {
-    private static final Images IMG = Images.App.getInstance();
+    // private static final Images IMG = Images.App.getInstance();
 
-    private static final int FORMS_WIDTH = 145;
+    // private static final int FORMS_WIDTH = 145;
 
     // private final IndexedStackPanelWithSubItems options;
     // private final AdminContextPresenter presenter;
@@ -195,23 +193,24 @@ public class AdminContextPanel extends VerticalPanel implements AdminContextView
 	// tagsField.setValue(tags);
     }
 
-    private void addComponent(final String header, final String headerTitle, final VerticalPanel panel) {
-	// panel.addStyleName("kune-AdminContextPanel-inner-wrap");
-	// final VerticalPanel vp = options.addStackItem(header, headerTitle,
-	// false);
-	// vp.setStyleName("kune-AdminContextPanel-inner");
-	// vp.add(panel);
-	// vp.setCellWidth(panel, "100%");
-	// vp.setWidth("100%");
-    }
+    // private void addComponent(final String header, final String headerTitle,
+    // final VerticalPanel panel) {
+    // panel.addStyleName("kune-AdminContextPanel-inner-wrap");
+    // final VerticalPanel vp = options.addStackItem(header, headerTitle,
+    // false);
+    // vp.setStyleName("kune-AdminContextPanel-inner");
+    // vp.add(panel);
+    // vp.setCellWidth(panel, "100%");
+    // vp.setWidth("100%");
+    // }
 
-    private FormPanel createDefaultForm() {
-	final FormPanel form = new FormPanel();
-	form.setHideLabels(true);
-	form.setWidth(FORMS_WIDTH);
-	form.setBorder(false);
-	return form;
-    }
+    // private FormPanel createDefaultForm() {
+    // final FormPanel form = new FormPanel();
+    // form.setHideLabels(true);
+    // form.setWidth(FORMS_WIDTH);
+    // form.setBorder(false);
+    // return form;
+    // }
 
     // private VerticalPanel createPublicationComponent() {
     // // final FormPanel form = createDefaultForm();
@@ -252,8 +251,8 @@ public class AdminContextPanel extends VerticalPanel implements AdminContextView
     // return vp;
     // }
 
-    private void removeComponent(final String header) {
-	// options.removeStackItem(header);
-    }
+    // private void removeComponent(final String header) {
+    // options.removeStackItem(header);
+    // }
 
 }

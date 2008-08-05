@@ -23,14 +23,19 @@ import org.ourproject.kune.platf.client.View;
 
 public class ChatRoomControlPresenter implements ChatRoomControl {
 
-    private final ChatRoomControlView view;
-
-    public ChatRoomControlPresenter(final ChatRoomControlView view) {
-        this.view = view;
-    }
+    private ChatRoomControlView view;
 
     public View getView() {
-        return view;
+	return view;
+    }
+
+    public void init(final ChatRoomControlView view) {
+	this.view = view;
+    }
+
+    public void onEnterRoom() {
+	// TODO Auto-generated method stub
+
     }
 
 }

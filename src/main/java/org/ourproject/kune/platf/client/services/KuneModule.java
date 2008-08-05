@@ -32,23 +32,35 @@ import org.ourproject.kune.platf.client.ui.rate.RateItPanel;
 import org.ourproject.kune.platf.client.ui.rate.RateItPresenter;
 import org.ourproject.kune.platf.client.ui.rate.RatePanel;
 import org.ourproject.kune.platf.client.ui.rate.RatePresenter;
-import org.ourproject.kune.workspace.client.WorkspaceClientModule;
+import org.ourproject.kune.workspace.client.editor.TextEditor;
+import org.ourproject.kune.workspace.client.editor.TextEditorPanel;
+import org.ourproject.kune.workspace.client.editor.TextEditorPresenter;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslator;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPresenter;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorView;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.workspace.client.i18n.LanguageSelector;
+import org.ourproject.kune.workspace.client.i18n.LanguageSelectorPresenter;
+import org.ourproject.kune.workspace.client.i18n.LanguageSelectorView;
 import org.ourproject.kune.workspace.client.i18n.ui.I18nTranslatorPanel;
+import org.ourproject.kune.workspace.client.i18n.ui.LanguageSelectorPanel;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoose;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoosePanel;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoosePresenter;
 import org.ourproject.kune.workspace.client.newgroup.NewGroup;
+import org.ourproject.kune.workspace.client.newgroup.NewGroupPanel;
 import org.ourproject.kune.workspace.client.newgroup.NewGroupPresenter;
-import org.ourproject.kune.workspace.client.newgroup.ui.NewGroupPanel;
-import org.ourproject.kune.workspace.client.presence.ui.GroupSummaryPanel;
+import org.ourproject.kune.workspace.client.search.EntityLiveSearcherView;
+import org.ourproject.kune.workspace.client.search.GroupLiveSearchPanel;
+import org.ourproject.kune.workspace.client.search.GroupLiveSearcher;
+import org.ourproject.kune.workspace.client.search.GroupLiveSearcherPresenter;
 import org.ourproject.kune.workspace.client.search.SiteSearcher;
 import org.ourproject.kune.workspace.client.search.SiteSearcherPanel;
 import org.ourproject.kune.workspace.client.search.SiteSearcherPresenter;
 import org.ourproject.kune.workspace.client.search.SiteSearcherView;
+import org.ourproject.kune.workspace.client.search.UserLiveSearcher;
+import org.ourproject.kune.workspace.client.search.UserLiveSearcherPanel;
+import org.ourproject.kune.workspace.client.search.UserLiveSearcherPresenter;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.sitebar.SiteToken;
 import org.ourproject.kune.workspace.client.sitebar.login.SignIn;
@@ -60,21 +72,27 @@ import org.ourproject.kune.workspace.client.sitebar.msg.SiteMessagePresenter;
 import org.ourproject.kune.workspace.client.sitebar.msg.SiteMessageView;
 import org.ourproject.kune.workspace.client.sitebar.rpc.UserService;
 import org.ourproject.kune.workspace.client.sitebar.rpc.UserServiceAsync;
-import org.ourproject.kune.workspace.client.socialnet.EntityLiveSearcherView;
-import org.ourproject.kune.workspace.client.socialnet.GroupLiveSearcherPresenter;
+import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummary;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryPanel;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryPresenter;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryView;
+import org.ourproject.kune.workspace.client.socialnet.ParticipationSummary;
+import org.ourproject.kune.workspace.client.socialnet.ParticipationSummaryPanel;
 import org.ourproject.kune.workspace.client.socialnet.ParticipationSummaryPresenter;
 import org.ourproject.kune.workspace.client.socialnet.ParticipationSummaryView;
-import org.ourproject.kune.workspace.client.socialnet.UserLiveSearcherPresenter;
-import org.ourproject.kune.workspace.client.socialnet.ui.GroupLiveSearchPanel;
-import org.ourproject.kune.workspace.client.socialnet.ui.ParticipationSummaryPanel;
-import org.ourproject.kune.workspace.client.socialnet.ui.UserLiveSearcherPanel;
+import org.ourproject.kune.workspace.client.summary.GroupSummary;
+import org.ourproject.kune.workspace.client.summary.GroupSummaryPanel;
 import org.ourproject.kune.workspace.client.summary.GroupSummaryPresenter;
 import org.ourproject.kune.workspace.client.summary.GroupSummaryView;
+import org.ourproject.kune.workspace.client.tags.TagsSummary;
 import org.ourproject.kune.workspace.client.tags.TagsSummaryPanel;
 import org.ourproject.kune.workspace.client.tags.TagsSummaryPresenter;
+import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
+import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPanel;
+import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPresenter;
+import org.ourproject.kune.workspace.client.ui.newtmp.entitylogo.EntityLogo;
+import org.ourproject.kune.workspace.client.ui.newtmp.entitylogo.EntityLogoPanel;
+import org.ourproject.kune.workspace.client.ui.newtmp.entitylogo.EntityLogoPresenter;
 import org.ourproject.kune.workspace.client.ui.newtmp.licensefoot.EntityLicensePanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.licensefoot.EntityLicensePresenter;
 import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitelogo.SiteLogo;
@@ -111,15 +129,6 @@ import org.ourproject.kune.workspace.client.ui.newtmp.title.EntitySubTitlePanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.title.EntitySubTitlePresenter;
 import org.ourproject.kune.workspace.client.ui.newtmp.title.EntityTitlePanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.title.EntityTitlePresenter;
-import org.ourproject.kune.workspace.client.workspace.GroupLiveSearcher;
-import org.ourproject.kune.workspace.client.workspace.GroupMembersSummary;
-import org.ourproject.kune.workspace.client.workspace.GroupSummary;
-import org.ourproject.kune.workspace.client.workspace.ParticipationSummary;
-import org.ourproject.kune.workspace.client.workspace.TagsSummary;
-import org.ourproject.kune.workspace.client.workspace.UserLiveSearcher;
-import org.ourproject.kune.workspace.client.workspace.ui.EntityLogo;
-import org.ourproject.kune.workspace.client.workspace.ui.EntityLogoPanel;
-import org.ourproject.kune.workspace.client.workspace.ui.EntityLogoPresenter;
 
 import com.calclab.emiteuimodule.client.EmiteUIModule;
 import com.calclab.suco.client.container.Container;
@@ -377,7 +386,7 @@ public class KuneModule extends AbstractModule {
 	    public I18nTranslator create() {
 		final I18nTranslatorPresenter presenter = new I18nTranslatorPresenter($(Session.class),
 			$(I18nServiceAsync.class), i18n);
-		final I18nTranslatorView view = new I18nTranslatorPanel(presenter, i18n);
+		final I18nTranslatorView view = new I18nTranslatorPanel(presenter, i18n, $(LanguageSelector.class), ws);
 		presenter.init(view);
 		return presenter;
 	    }
@@ -522,7 +531,7 @@ public class KuneModule extends AbstractModule {
 
 	register(SingletonScope.class, new Factory<TagsSummary>(TagsSummary.class) {
 	    public TagsSummary create() {
-		final TagsSummaryPresenter presenter = new TagsSummaryPresenter($p(Session.class),
+		final TagsSummaryPresenter presenter = new TagsSummaryPresenter($(Session.class),
 			$p(SiteSearcher.class), $(StateManager.class), $(WsThemePresenter.class));
 		final TagsSummaryPanel panel = new TagsSummaryPanel(presenter, i18n, ws);
 		presenter.init(panel);
@@ -558,6 +567,33 @@ public class KuneModule extends AbstractModule {
 	    }
 	});
 
+	register(SingletonScope.class, new Factory<TextEditor>(TextEditor.class) {
+	    public TextEditor create() {
+		final TextEditorPresenter presenter = new TextEditorPresenter(null, true);
+		final TextEditorPanel panel = new TextEditorPanel(presenter, i18n);
+		presenter.init(panel);
+		return presenter;
+	    }
+	});
+
+	register(SingletonScope.class, new Factory<LanguageSelector>(LanguageSelector.class) {
+	    public LanguageSelector create() {
+		final LanguageSelectorPresenter presenter = new LanguageSelectorPresenter($(Session.class));
+		final LanguageSelectorView view = new LanguageSelectorPanel(presenter, i18n);
+		presenter.init(view);
+		return presenter;
+	    }
+	});
+
+	register(SingletonScope.class, new Factory<ContextItems>(ContextItems.class) {
+	    public ContextItems create() {
+		final ContextItemsPresenter presenter = new ContextItemsPresenter(i18n, $(StateManager.class));
+		final ContextItemsPanel panel = new ContextItemsPanel(presenter, i18n, $(StateManager.class));
+		presenter.init(panel);
+		return presenter;
+	    }
+	});
+
 	load(new EmiteUIModule(), new DocumentClientNewModule(), new ChatClientNewModule());
 
 	$(SitePublicSpaceLink.class);
@@ -569,6 +605,11 @@ public class KuneModule extends AbstractModule {
 	$(SiteSearch.class);
 	$(SiteLogo.class);
 
+	$(GroupMembersSummary.class);
+	$(ParticipationSummary.class);
+	$(TagsSummary.class);
+	$(GroupSummary.class);
+
 	$(EntityLogo.class);
 	$(EntityTitlePresenter.class);
 	$(EntitySubTitlePresenter.class);
@@ -576,11 +617,6 @@ public class KuneModule extends AbstractModule {
 	$(EntityLicensePresenter.class);
 	$(RateIt.class);
 	$(RatePresenter.class);
-
-	$(GroupMembersSummary.class);
-	$(ParticipationSummary.class);
-	$(TagsSummary.class);
-	$(GroupSummary.class);
 
 	// Register of tokens like "signin", "newgroup", "translate" etcetera
 	$(StateManager.class).addSiteToken(SiteToken.signin.toString(), new Slot<StateToken>() {
@@ -596,11 +632,8 @@ public class KuneModule extends AbstractModule {
 	});
 
 	final KunePlatform platform = $(KunePlatform.class);
-	platform.install(new WorkspaceClientModule($(Session.class), $(StateManager.class), $(Application.class)
-		.getWorkspace(), i18n));
 	$(Application.class).init($(StateManager.class), platform.getIndexedTools());
 	$(Application.class).subscribeActions(platform.getActions());
-	// $(Application.class).getWorkspace().attachTools(platform.getTools().iterator());
 	$(Application.class).start();
 
     }

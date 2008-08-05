@@ -38,7 +38,6 @@ import org.ourproject.kune.platf.client.ui.WindowUtils;
 import org.ourproject.kune.platf.client.utils.PrefetchUtilities;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.signal.Signal0;
@@ -47,6 +46,7 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowCloseListener;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.RootPanel;
 
 public class ApplicationDefault implements Application {
     // private final Workspace workspace;
@@ -58,8 +58,6 @@ public class ApplicationDefault implements Application {
 
     public ApplicationDefault(final Session session, final KuneErrorHandler errorHandler, final WorkspaceSkeleton ws) {
 	this.session = session;
-	// workspace = WorkspaceFactory.createWorkspace(session,
-	// extensionPointManager, i18n, errorHandler);
 	tools = new HashMap<String, ClientTool>();
 	this.onApplicationStart = new Signal0("onApplicationStart");
 	this.onApplicationStop = new Signal0("onApplicationStop");
@@ -76,11 +74,6 @@ public class ApplicationDefault implements Application {
 
     public ClientTool getTool(final String toolName) {
 	return tools.get(toolName);
-    }
-
-    @Deprecated
-    public Workspace getWorkspace() {
-	return null;
     }
 
     public void init(final StateManager stateManager, final HashMap<String, ClientTool> tools) {
@@ -125,6 +118,7 @@ public class ApplicationDefault implements Application {
 	final SiteServiceAsync server = SiteService.App.getInstance();
 	server.getInitData(session.getUserHash(), new AsyncCallback<InitDataDTO>() {
 	    public void onFailure(final Throwable error) {
+		RootPanel.get("kuneinitialcurtain").setVisible(false);
 		Site.error("Error fetching initial data");
 		Log.debug(error.getMessage());
 	    }
@@ -134,6 +128,7 @@ public class ApplicationDefault implements Application {
 		session.setInitData(initData);
 		session.setCurrentUserInfo(initData.getUserInfo());
 		stateManager.reload();
+		RootPanel.get("kuneinitialcurtain").setVisible(false);
 	    }
 
 	    private void checkChatDomain(final String chatDomain) {

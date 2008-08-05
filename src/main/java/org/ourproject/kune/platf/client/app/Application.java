@@ -26,15 +26,12 @@ import java.util.HashMap;
 import org.ourproject.kune.platf.client.dispatch.ActionEvent;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.tool.ClientTool;
-import org.ourproject.kune.workspace.client.workspace.Workspace;
 
 import com.calclab.suco.client.signal.Slot0;
 
 public interface Application {
 
     ClientTool getTool(String toolName);
-
-    Workspace getWorkspace();
 
     void init(StateManager stateManager, HashMap<String, ClientTool> tools);
 

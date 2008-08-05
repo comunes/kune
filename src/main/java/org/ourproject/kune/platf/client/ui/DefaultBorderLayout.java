@@ -66,9 +66,9 @@ public class DefaultBorderLayout {
     public void add(final Panel panel, final Widget widget) {
 	panel.add(widget);
 	if (panel.isRendered()) {
-	    mainPanel.doLayout(false);
-	    // panel.syncSize();
-	    // panel.doLayout();
+	    panel.syncSize();
+	    panel.doLayout();
+	    doLayoutIfNeeded();
 	}
 	// doLayoutIfNeeded();
     }
@@ -111,12 +111,6 @@ public class DefaultBorderLayout {
 	}
     }
 
-    public void doLayoutIfNeeded(final boolean includeChilds) {
-	if (mainPanel.isRendered()) {
-	    mainPanel.doLayout(!includeChilds);
-	}
-    }
-
     public Panel getPanel() {
 	return mainPanel;
     }
@@ -127,11 +121,6 @@ public class DefaultBorderLayout {
 
     public void setBorder(final boolean border) {
 	mainPanel.setBorder(border);
-    }
-
-    @Deprecated
-    public void setCls(final String style) {
-	mainPanel.setCls(style);
     }
 
     public void setPanel(final Panel panel, final Widget widget) {

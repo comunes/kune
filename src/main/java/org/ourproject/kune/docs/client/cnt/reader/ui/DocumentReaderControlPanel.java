@@ -20,10 +20,10 @@
 
 package org.ourproject.kune.docs.client.cnt.reader.ui;
 
+import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderControlPresenter;
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderControlView;
-import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderListener;
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.CustomPushButton;
+import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.ui.ClickListener;
@@ -35,25 +35,25 @@ public class DocumentReaderControlPanel extends HorizontalPanel implements Docum
     private final CustomPushButton deleteBtn;
     private final CustomPushButton translateBtn;
 
-    public DocumentReaderControlPanel(final DocumentReaderListener listener, final I18nTranslationService i18n,
-	    final WorkspaceSkeleton ws) {
+    public DocumentReaderControlPanel(final DocumentReaderControlPresenter presenter,
+	    final I18nUITranslationService i18n, final WorkspaceSkeleton ws) {
 	editBtn = new CustomPushButton(i18n.tWithNT("Edit", "used in button"), new ClickListener() {
 	    public void onClick(final Widget sender) {
-		listener.onEdit();
+		presenter.onEdit();
 		editBtn.removeStyleDependentName("up-hovering");
 	    }
 	});
 
 	deleteBtn = new CustomPushButton(i18n.tWithNT("Delete", "used in button"), new ClickListener() {
 	    public void onClick(final Widget sender) {
-		listener.onDelete();
+		presenter.onDelete();
 		deleteBtn.removeStyleDependentName("up-hovering");
 	    }
 	});
 
 	translateBtn = new CustomPushButton(i18n.tWithNT("Translate", "used in button"), new ClickListener() {
 	    public void onClick(final Widget sender) {
-		listener.onTranslate();
+		presenter.onTranslate();
 		translateBtn.removeStyleDependentName("up-hovering");
 		ws.showAlertMessage(i18n.t("Alert"), i18n.t("Sorry, this functionality is currently in development"));
 	    }
@@ -79,6 +79,10 @@ public class DocumentReaderControlPanel extends HorizontalPanel implements Docum
 
     public void setTranslateEnabled(final boolean isEnabled) {
 	translateBtn.setVisible(isEnabled);
+    }
+
+    public void show() {
+
     }
 
 }

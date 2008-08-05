@@ -22,12 +22,14 @@ package org.ourproject.kune.chat.client.cnt.room.ui;
 
 import org.ourproject.kune.chat.client.cnt.room.ChatRoomView;
 import org.ourproject.kune.workspace.client.sitebar.Site;
-import org.ourproject.kune.workspace.client.workspace.ui.DefaultContentPanel;
+import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 
-public class ChatRoomPanel extends DefaultContentPanel implements ChatRoomView {
+import com.google.gwt.user.client.ui.Label;
 
-    public ChatRoomPanel() {
-        setContent("History of room conversations." + Site.IN_DEVELOPMENT);
+public class ChatRoomPanel implements ChatRoomView {
+
+    public ChatRoomPanel(final WorkspaceSkeleton ws) {
+	ws.getEntityWorkspace().setContent(new Label("History of room conversations." + Site.IN_DEVELOPMENT));
     }
 
 }

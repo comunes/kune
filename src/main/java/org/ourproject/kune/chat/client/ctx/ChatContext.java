@@ -21,9 +21,8 @@
 package org.ourproject.kune.chat.client.ctx;
 
 import org.ourproject.kune.platf.client.dto.StateDTO;
-import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 
-public interface ChatContext extends WorkspaceComponent {
+public interface ChatContext {
 
     void setState(StateDTO state);
 

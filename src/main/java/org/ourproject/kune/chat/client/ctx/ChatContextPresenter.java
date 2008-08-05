@@ -25,20 +25,16 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
 
+import com.calclab.suco.client.container.Provider;
+
 public class ChatContextPresenter implements ChatContext {
 
     private final WorkspaceDeckView view;
-    private final ChatContextComponents components;
+    private final Provider<RoomsAdmin> roomAdminsProvider;
 
-    public ChatContextPresenter(final WorkspaceDeckView view) {
+    public ChatContextPresenter(final WorkspaceDeckView view, final Provider<RoomsAdmin> roomAdminsProvider) {
 	this.view = view;
-	this.components = new ChatContextComponents(this);
-    }
-
-    public void attach() {
-    }
-
-    public void detach() {
+	this.roomAdminsProvider = roomAdminsProvider;
     }
 
     public View getView() {
@@ -46,9 +42,8 @@ public class ChatContextPresenter implements ChatContext {
     }
 
     public void setState(final StateDTO state) {
-	RoomsAdmin rooms = components.getRoomsAdmin();
+	final RoomsAdmin rooms = roomAdminsProvider.get();
 	rooms.showRoom(state.getStateToken(), state.getFolder(), state.getFolderRights());
 	view.show(rooms.getView());
     }
-
 }

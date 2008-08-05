@@ -26,14 +26,17 @@ public class DocumentReaderPresenter implements DocumentReader {
     private final DocumentReaderView view;
 
     public DocumentReaderPresenter(final DocumentReaderView view) {
-        this.view = view;
-    }
-
-    public void showDocument(final String text) {
-        view.setContent(text);
+	this.view = view;
     }
 
     public View getView() {
-        return view;
+	return view;
+    }
+
+    public void show() {
+    }
+
+    public void showDocument(final String text) {
+	view.setContent(text);
     }
 }

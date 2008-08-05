@@ -22,47 +22,43 @@ package org.ourproject.kune.docs.client.ctx;
 
 import org.ourproject.kune.docs.client.ctx.admin.AdminContext;
 import org.ourproject.kune.docs.client.ctx.folder.FolderContext;
-import org.ourproject.kune.docs.client.ui.DocumentFactory;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
 
+import com.calclab.suco.client.container.Provider;
+
 public class DocumentContextPresenter implements DocumentContext {
     private final WorkspaceDeckView view;
-    private final DocumentContextComponents components;
+    private final Provider<FolderContext> folderContextProvider;
+    private final Provider<AdminContext> adminContextProvider;
 
-    public DocumentContextPresenter(final DocumentFactory documentFactory, final WorkspaceDeckView view) {
-        this.view = view;
-        this.components = new DocumentContextComponents(documentFactory, this);
-    }
-
-    public void attach() {
-    }
-
-    public void detach() {
+    public DocumentContextPresenter(final WorkspaceDeckView view, final Provider<FolderContext> folderContexProvider,
+	    final Provider<AdminContext> adminContextProvider) {
+	this.view = view;
+	this.folderContextProvider = folderContexProvider;
+	this.adminContextProvider = adminContextProvider;
     }
 
     public View getView() {
-        return view;
+	return view;
     }
 
     public void setContext(final StateDTO content) {
-        StateToken state = content.getStateToken();
-        FolderContext folderContext = components.getFolderContext();
-        folderContext.setContainer(state, content.getFolder(), content.getFolderRights());
-        AdminContext adminContext = components.getAdminContext();
-        adminContext.setState(content);
-        view.show(folderContext.getView());
+	final StateToken state = content.getStateToken();
+	folderContextProvider.get().setContainer(state, content.getFolder(), content.getFolderRights());
+	adminContextProvider.get().setState(content);
+	view.show(folderContextProvider.get().getView());
     }
 
     public void showAdmin() {
-        AdminContext adminContext = components.getAdminContext();
-        view.show(adminContext.getView());
+	final AdminContext adminContext = adminContextProvider.get();
+	view.show(adminContext.getView());
     }
 
     public void showFolders() {
-        FolderContext folderContext = components.getFolderContext();
-        view.show(folderContext.getView());
+	final FolderContext folderContext = folderContextProvider.get();
+	view.show(folderContext.getView());
     }
 }

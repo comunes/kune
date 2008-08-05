@@ -24,7 +24,9 @@ import org.ourproject.kune.platf.client.View;
 
 public interface DocumentReader {
 
-    void showDocument(String text);
-
     View getView();
+
+    void show();
+
+    void showDocument(String text);
 }

@@ -21,11 +21,19 @@
 package org.ourproject.kune.docs.client.cnt.reader.ui;
 
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderView;
-import org.ourproject.kune.workspace.client.workspace.ui.DefaultContentPanel;
+import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 
-public class DocumentReaderPanel extends DefaultContentPanel implements DocumentReaderView {
+import com.google.gwt.user.client.ui.HTML;
 
-    public DocumentReaderPanel() {
-        setContent("This is the content");
+public class DocumentReaderPanel implements DocumentReaderView {
+
+    private final WorkspaceSkeleton ws;
+
+    public DocumentReaderPanel(final WorkspaceSkeleton ws) {
+	this.ws = ws;
+    }
+
+    public void setContent(final String content) {
+	ws.getEntityWorkspace().setContent(new HTML(content));
     }
 }

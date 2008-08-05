@@ -25,48 +25,49 @@ import org.ourproject.kune.docs.client.cnt.folder.FolderEditor;
 import org.ourproject.kune.docs.client.cnt.folder.viewer.FolderViewer;
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReader;
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderControl;
-import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderListener;
-import org.ourproject.kune.docs.client.ui.DocumentFactory;
-import org.ourproject.kune.platf.client.PlatformEvents;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.SaveDocumentActionParams;
 import org.ourproject.kune.platf.client.dto.StateDTO;
-import org.ourproject.kune.platf.client.extend.ExtensibleWidgetChild;
-import org.ourproject.kune.platf.client.extend.ExtensibleWidgetId;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.rate.RateIt;
-import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.editor.TextEditorListener;
 
-public class DocumentContentPresenter implements DocumentContent, DocumentReaderListener, TextEditorListener {
+import com.calclab.suco.client.container.Provider;
+import com.calclab.suco.client.signal.Signal0;
+import com.calclab.suco.client.signal.Slot0;
+
+public class DocumentContentPresenter implements DocumentContent, TextEditorListener {
     private final WorkspaceDeckView view;
-    private final DocumentContentComponents components;
     private StateDTO content;
-    private final DocumentContentListener listener;
-    private final DocumentReader reader;
-    private final DocumentReaderControl readerControl;
     private final Session session;
     private final RateIt rateIt;
+    private final Provider<DocumentReaderControl> docReaderControlProvider;
+    private final Provider<DocumentReader> docReaderProvider;
+    private final Provider<FolderEditor> folderEditorProvider;
+    private final Provider<TextEditor> textEditorProvider;
+    private final Provider<FolderViewer> folderViewerProvider;
+    private final Signal0 onEdit;
+    private final Signal0 onCancel;
 
-    public DocumentContentPresenter(final DocumentFactory documentFactory, final DocumentContentListener listener,
-	    final WorkspaceDeckView view, final Session session, final RateIt rateIt) {
-	this.listener = listener;
+    public DocumentContentPresenter(final WorkspaceDeckView view, final Session session, final RateIt rateIt,
+	    final Provider<DocumentReader> docReaderProvider,
+	    final Provider<DocumentReaderControl> docReaderControlProvider,
+	    final Provider<TextEditor> textEditorProvider, final Provider<FolderViewer> folderViewerProvider,
+	    final Provider<FolderEditor> folderEditorProvider) {
 	this.view = view;
 	this.session = session;
 	this.rateIt = rateIt;
-	this.components = new DocumentContentComponents(documentFactory, this);
-	reader = components.getDocumentReader();
-	readerControl = components.getDocumentReaderControl();
-    }
-
-    public void attach() {
-    }
-
-    public void detach() {
+	this.docReaderProvider = docReaderProvider;
+	this.docReaderControlProvider = docReaderControlProvider;
+	this.textEditorProvider = textEditorProvider;
+	this.folderViewerProvider = folderViewerProvider;
+	this.folderEditorProvider = folderEditorProvider;
+	this.onEdit = new Signal0("onEdit");
+	this.onCancel = new Signal0("onCancel");
     }
 
     public View getView() {
@@ -75,9 +76,13 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
 
     public void onCancel() {
 	showContent();
-	listener.onCancel();
+	onCancel.fire();
 	// Re-enable rateIt widget
 	rateIt.setVisible(true);
+    }
+
+    public void onCancel(final Slot0 slot) {
+	onCancel.add(slot);
     }
 
     public void onDelete() {
@@ -90,22 +95,21 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
 		if (content.hasDocument()) {
 		    // Don't permit rate content while your are editing
 		    rateIt.setVisible(false);
-		    final TextEditor editor = components.getDocumentEditor();
+		    final TextEditor editor = textEditorProvider.get();
 		    editor.setContent(content.getContent());
 		    view.show(editor.getView());
-		    DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXTENSIBLE_WIDGET,
-			    ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT);
-		    DefaultDispatcher.getInstance().fire(PlatformEvents.ATTACH_TO_EXTENSIBLE_WIDGET,
-			    new ExtensibleWidgetChild(ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT, editor.getToolBar()));
-		    DefaultDispatcher.getInstance().fire(WorkspaceEvents.RECALCULATE_WORKSPACE_SIZE, null);
 		} else {
-		    final FolderEditor editor = components.getFolderEditor();
+		    final FolderEditor editor = folderEditorProvider.get();
 		    editor.setFolder(content.getFolder());
 		    view.show(editor.getView());
 		}
-		listener.onEdit();
+		onEdit.fire();
 	    }
 	});
+    }
+
+    public void onEdit(final Slot0 slot) {
+	onEdit.add(slot);
     }
 
     public void onSave(final String text) {
@@ -113,15 +117,14 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
 	DefaultDispatcher.getInstance().fire(DocsEvents.SAVE_DOCUMENT, new SaveDocumentActionParams(content, this));
 	// Re-enable rateIt widget
 	rateIt.setVisible(true);
-	DefaultDispatcher.getInstance().fire(WorkspaceEvents.RECALCULATE_WORKSPACE_SIZE, null);
     }
 
     public void onSaved() {
-	components.getDocumentEditor().onSaved();
+	textEditorProvider.get().onSaved();
     }
 
     public void onSaveFailed() {
-	components.getDocumentEditor().onSaveFailed();
+	textEditorProvider.get().onSaveFailed();
     }
 
     public void onTranslate() {
@@ -134,19 +137,14 @@ public class DocumentContentPresenter implements DocumentContent, DocumentReader
 
     private void showContent() {
 	if (content.hasDocument()) {
-	    reader.showDocument(content.getContent());
-	    components.getDocumentEditor().reset();
-	    readerControl.setRights(content.getContentRights());
-	    DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXTENSIBLE_WIDGET,
-		    ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT);
-	    DefaultDispatcher.getInstance().fire(PlatformEvents.ATTACH_TO_EXTENSIBLE_WIDGET,
-		    new ExtensibleWidgetChild(ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT, readerControl.getView()));
-	    view.show(reader.getView());
+	    docReaderProvider.get().showDocument(content.getContent());
+	    textEditorProvider.get().reset();
+	    docReaderControlProvider.get().setRights(content.getContentRights());
+	    docReaderControlProvider.get().show();
+	    docReaderProvider.get().show();
 	} else {
-	    final FolderViewer viewer = components.getFolderViewer();
+	    final FolderViewer viewer = folderViewerProvider.get();
 	    viewer.setFolder(content.getFolder());
-	    DefaultDispatcher.getInstance().fire(PlatformEvents.CLEAR_EXTENSIBLE_WIDGET,
-		    ExtensibleWidgetId.CONTENT_TOOLBAR_LEFT);
 	    view.show(viewer.getView());
 	}
     }

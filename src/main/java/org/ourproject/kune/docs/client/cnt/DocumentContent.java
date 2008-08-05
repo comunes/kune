@@ -21,14 +21,19 @@
 package org.ourproject.kune.docs.client.cnt;
 
 import org.ourproject.kune.platf.client.dto.StateDTO;
-import org.ourproject.kune.workspace.client.component.WorkspaceComponent;
 
-public interface DocumentContent extends WorkspaceComponent {
+import com.calclab.suco.client.signal.Slot0;
 
-    void setContent(StateDTO content);
+public interface DocumentContent {
+
+    void onCancel(Slot0 slot);
+
+    void onEdit(Slot0 slot);
 
     void onSaved();
 
     void onSaveFailed();
+
+    void setContent(StateDTO content);
 
 }
