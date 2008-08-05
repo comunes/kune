@@ -17,38 +17,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.i18n;
+package org.ourproject.kune.workspace.client.search;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
-import org.ourproject.kune.platf.client.state.Session;
 
-public class LanguageSelectorPresenter implements LanguageSelector {
+public interface EntityLiveSearcherView extends View {
 
-    private LanguageSelectorView view;
-    private final Session session;
+    final public static int SEARCH_GROUPS = 1;
+    final public static int SEARCH_USERS = 2;
 
-    public LanguageSelectorPresenter(final Session session) {
-	this.session = session;
-    }
+    void show();
 
-    public Object[][] getLanguages() {
-	return session.getLanguagesArray();
-    }
+    void hide();
 
-    public String getSelectedLanguage() {
-	return view.getLanguage();
-    }
+    void center();
 
-    public View getView() {
-	return view;
-    }
-
-    public void init(final LanguageSelectorView view) {
-	this.view = view;
-    }
-
-    public void setLanguage(final I18nLanguageDTO language) {
-	view.setLanguage(language.getCode());
-    }
 }

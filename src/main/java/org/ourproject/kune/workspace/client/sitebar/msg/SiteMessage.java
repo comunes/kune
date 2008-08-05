@@ -20,7 +20,7 @@
 package org.ourproject.kune.workspace.client.sitebar.msg;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.workspace.client.newgroup.ui.SiteErrorType;
+import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
 
 public interface SiteMessage extends View {
 

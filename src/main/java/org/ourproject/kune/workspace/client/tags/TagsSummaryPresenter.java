@@ -31,7 +31,6 @@ import org.ourproject.kune.workspace.client.search.SiteSearcher;
 import org.ourproject.kune.workspace.client.search.SiteSearcherType;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
-import org.ourproject.kune.workspace.client.workspace.TagsSummary;
 
 import com.calclab.suco.client.container.Provider;
 import com.calclab.suco.client.signal.Slot;
@@ -41,11 +40,11 @@ public class TagsSummaryPresenter implements TagsSummary {
 
     private TagsSummaryView view;
     private final Provider<SiteSearcher> searcherProvider;
-    private final Provider<Session> sessionProvider;
+    private final Session session;
 
-    public TagsSummaryPresenter(final Provider<Session> sessionProvider, final Provider<SiteSearcher> searcherProvider,
+    public TagsSummaryPresenter(final Session session, final Provider<SiteSearcher> searcherProvider,
 	    final StateManager stateManager, final WsThemePresenter wsThemePresenter) {
-	this.sessionProvider = sessionProvider;
+	this.session = session;
 	this.searcherProvider = searcherProvider;
 	stateManager.onStateChanged(new Slot<StateDTO>() {
 	    public void onEvent(final StateDTO state) {
@@ -61,7 +60,7 @@ public class TagsSummaryPresenter implements TagsSummary {
 
     public void doSearchTag(final String name) {
 	searcherProvider.get().doSearchOfType(
-		"group:" + sessionProvider.get().getCurrentState().getGroup().getShortName() + " tag:" + name,
+		"group:" + session.getCurrentState().getGroup().getShortName() + " tag:" + name,
 		SiteSearcherType.content);
     }
 
@@ -77,8 +76,13 @@ public class TagsSummaryPresenter implements TagsSummary {
 	view.setTags(groupTags);
     }
 
-    private void setState(final StateDTO state) {
-	view.setTags(state.getGroupTags());
+    void setState(final StateDTO state) {
+	if (state.getTags() != null && state.getTags().length() > 0) {
+	    view.setVisible(true);
+	    view.setTags(state.getGroupTags());
+	} else {
+	    view.setVisible(false);
+	}
     }
 
 }

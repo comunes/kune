@@ -21,7 +21,7 @@ package org.ourproject.kune.workspace.client.sitebar;
 
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
-import org.ourproject.kune.workspace.client.newgroup.ui.SiteErrorType;
+import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
 import org.ourproject.kune.workspace.client.sitebar.msg.SiteMessage;
 import org.ourproject.kune.workspace.client.ui.newtmp.sitebar.siteprogress.SiteProgress;
 

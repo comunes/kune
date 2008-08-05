@@ -20,14 +20,12 @@
 package org.ourproject.kune.workspace.client.sitebar.bar;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.GroupListDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
 public class SiteBarPresenter implements SiteBar {
@@ -129,7 +127,6 @@ public class SiteBarPresenter implements SiteBar {
     }
 
     public void onHelpInTranslation() {
-	DefaultDispatcher.getInstance().fire(WorkspaceEvents.SHOW_TRANSLATOR, null);
     }
 
     public void onLoginCancelled() {

@@ -14,6 +14,7 @@ import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 
 import com.calclab.emiteuimodule.client.users.UserGridPanel;
+import com.calclab.suco.client.signal.Slot;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.gwtext.client.core.EventObject;
@@ -40,14 +41,19 @@ public class GroupMembersSummaryPanel extends DropDownPanel implements GroupMemb
 	super.setHeaderTitle(i18n.t("People and groups collaborating in this group"));
 	super.setBorderStylePrimaryName("k-dropdownouter-members");
 	super.addStyleName("kune-Margin-Medium-t");
-	// super.addStyleName("kune-Margin-Small-r");
 
 	final GridDragConfiguration dragConf = new GridDragConfiguration(UserGridPanel.USER_GROUP_DD, i18n
 		.t("Drop in the chat area to start a chat.")
 		+ "<br/>" + i18n.t("Drop into a room to invite the user to join the chat room"));
 	gridMenuPanel = new GridMenuPanel<GroupDTO>(i18n.t("This is an orphaned project, if you are interested "
 		+ "please request to join to work on it"), dragConf, true, true, false, true, false);
+	gridMenuPanel.onDoubleClick(new Slot<String>() {
+	    public void onEvent(final String groupShortName) {
+		presenter.onDoubleClick(groupShortName);
+	    }
+	});
 	final EntitySummary entitySummary = ws.getEntitySummary();
+	this.setContent(gridMenuPanel);
 	entitySummary.addInSummary(this);
 	entitySummary.addListener(new ContainerListenerAdapter() {
 	    @Override
@@ -56,7 +62,6 @@ public class GroupMembersSummaryPanel extends DropDownPanel implements GroupMemb
 		gridMenuPanel.setWidth(adjWidth);
 	    }
 	});
-	this.setContent(gridMenuPanel);
 	buttonsCache = new HashMap<GridButton, ToolbarButton>();
     }
 

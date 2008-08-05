@@ -27,7 +27,6 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.HorizontalLine;
 import org.ourproject.kune.platf.client.ui.IconLabel;
 
-import com.calclab.suco.client.container.Provider;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.DockPanel;
@@ -46,10 +45,10 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
     private final I18nTranslationService i18n;
 
     public ContextItemsPanel(final ContextItemsPresenter presenter, final I18nTranslationService i18n,
-	    final Provider<StateManager> stateManagerProvider) {
+	    final StateManager stateManager) {
 	this.presenter = presenter;
 	this.i18n = i18n;
-	topBar = new ContextTopBar(presenter, i18n, stateManagerProvider);
+	topBar = new ContextTopBar(presenter, i18n, stateManager);
 	addTopBar(topBar);
 
 	items = new ItemsPanel(presenter);

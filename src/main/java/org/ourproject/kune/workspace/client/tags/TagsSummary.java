@@ -22,16 +22,10 @@ package org.ourproject.kune.workspace.client.tags;
 
 import java.util.List;
 
-import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.TagResultDTO;
-import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 
-public interface TagsSummaryView extends View {
+public interface TagsSummary {
 
-    void setTags(List<TagResultDTO> groupTags);
-
-    void setTheme(WsTheme oldTheme, WsTheme newTheme);
-
-    void setVisible(boolean visible);
+    void setGroupTags(List<TagResultDTO> result);
 
 }

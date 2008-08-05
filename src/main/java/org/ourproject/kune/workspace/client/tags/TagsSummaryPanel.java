@@ -29,10 +29,11 @@ import org.ourproject.kune.platf.client.ui.DropDownPanel;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -60,31 +61,34 @@ public class TagsSummaryPanel extends DropDownPanel implements TagsSummaryView {
 	addStyleName("kune-Margin-Medium-t");
 	flowPanel.addStyleName("kune-Margin-Small-trbl");
 	ws.getEntitySummary().addInSummary(this);
-	RootPanel.get("kuneinitialcurtain").setVisible(false);
     }
 
     public void setTags(final List<TagResultDTO> groupTags) {
-	flowPanel.clear();
-	if (groupTags.size() == 0) {
-	    flowPanel.add(noTagsLabel);
-	} else {
-	    for (final Iterator<TagResultDTO> iterator = groupTags.iterator(); iterator.hasNext();) {
-		final TagResultDTO tagResult = iterator.next();
-		final Label label = new Label(tagResult.getName());
-		// i18n pluralization
-		if (tagResult.getCount().intValue() > 1) {
-		    KuneUiUtils.setQuickTip(label, i18n.t("[%d] items with this tag", tagResult.getCount()));
+	DeferredCommand.addCommand(new Command() {
+	    public void execute() {
+		flowPanel.clear();
+		if (groupTags.size() == 0) {
+		    flowPanel.add(noTagsLabel);
 		} else {
-		    KuneUiUtils.setQuickTip(label, i18n.t("[%d] item with this tag", tagResult.getCount()));
-		}
-		label.addClickListener(new ClickListener() {
-		    public void onClick(final Widget sender) {
-			presenter.doSearchTag(tagResult.getName());
+		    for (final Iterator<TagResultDTO> iterator = groupTags.iterator(); iterator.hasNext();) {
+			final TagResultDTO tagResult = iterator.next();
+			final Label label = new Label(tagResult.getName());
+			// i18n pluralization
+			if (tagResult.getCount().intValue() > 1) {
+			    KuneUiUtils.setQuickTip(label, i18n.t("[%d] items with this tag", tagResult.getCount()));
+			} else {
+			    KuneUiUtils.setQuickTip(label, i18n.t("[%d] item with this tag", tagResult.getCount()));
+			}
+			label.addClickListener(new ClickListener() {
+			    public void onClick(final Widget sender) {
+				presenter.doSearchTag(tagResult.getName());
+			    }
+			});
+			label.addStyleName("kune-TagsPanel-tag");
+			flowPanel.add(label);
 		    }
-		});
-		label.addStyleName("kune-TagsPanel-tag");
-		flowPanel.add(label);
+		}
 	    }
-	}
+	});
     }
 }

@@ -21,7 +21,6 @@ package org.ourproject.kune.workspace.client.newgroup;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
-import org.ourproject.kune.workspace.client.newgroup.ui.SiteErrorType;
 
 public interface NewGroupView extends View {
 

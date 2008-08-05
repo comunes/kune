@@ -19,15 +19,10 @@
  */
 package org.ourproject.kune.workspace.client.i18n;
 
-import org.ourproject.kune.platf.client.PlatformEvents;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
-import org.ourproject.kune.platf.client.extend.ExtensibleWidgetChild;
-import org.ourproject.kune.platf.client.extend.ExtensibleWidgetId;
 import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -45,19 +40,18 @@ public class I18nTranslatorPresenter implements I18nTranslator {
 	this.i18n = i18n;
     }
 
-    public void attachIconToBottomBar(final View view) {
-	DefaultDispatcher.getInstance().fire(PlatformEvents.ATTACH_TO_EXTENSIBLE_WIDGET,
-		new ExtensibleWidgetChild(ExtensibleWidgetId.CONTENT_BOTTOM_ICONBAR, view));
-    }
-
     public void doClose() {
 	view.hide();
-	DefaultDispatcher.getInstance().fire(PlatformEvents.DETACH_FROM_EXTENSIBLE_WIDGET,
-		new ExtensibleWidgetChild(ExtensibleWidgetId.CONTENT_BOTTOM_ICONBAR, view));
     }
 
     public void doShowTranslator() {
-	DefaultDispatcher.getInstance().fire(WorkspaceEvents.SHOW_TRANSLATOR, null);
+	Site.showProgressLoading();
+	if (session.isLogged()) {
+	    view.show();
+	} else {
+	    Site.info(i18n.t("Sign in or register to help with translation"));
+	}
+	Site.hideProgress();
     }
 
     public void doTranslation(final String id, final String trKey, final String translation) {

@@ -18,20 +18,15 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.tags;
+package org.ourproject.kune.workspace.client.socialnet;
 
-import java.util.List;
+import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.ui.MenuItem;
 
-import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.TagResultDTO;
-import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
+public interface GroupMembersSummary {
 
-public interface TagsSummaryView extends View {
+    void addGroupOperation(MenuItem<GroupDTO> operation, boolean mustBeLogged);
 
-    void setTags(List<TagResultDTO> groupTags);
-
-    void setTheme(WsTheme oldTheme, WsTheme newTheme);
-
-    void setVisible(boolean visible);
+    void removeGroupOperation(MenuItem<GroupDTO> operation, boolean mustBeLogged);
 
 }

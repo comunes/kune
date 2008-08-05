@@ -26,7 +26,6 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.RoundedBorderDecorator;
 
-import com.calclab.suco.client.container.Provider;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -46,12 +45,12 @@ class ContextTopBar extends VerticalPanel {
     private final ContextItemsImages img;
     private final MenuBar pathSubmenu;
     private final I18nTranslationService i18n;
-    private final Provider<StateManager> stateManagerProvider;
+    private final StateManager stateManager;
 
     public ContextTopBar(final ContextItemsPresenter presenter, final I18nTranslationService i18n,
-	    final Provider<StateManager> stateManagerProvider) {
+	    final StateManager stateManager) {
 	this.i18n = i18n;
-	this.stateManagerProvider = stateManagerProvider;
+	this.stateManager = stateManager;
 	img = ContextItemsImages.App.getInstance();
 	firstRow = new HorizontalPanel();
 	final HorizontalPanel secondRow = new HorizontalPanel();
@@ -114,7 +113,7 @@ class ContextTopBar extends VerticalPanel {
 	    }
 	    pathSubmenu.addItem(indent + img.folder().getHTML() + "&nbsp;" + folderName, true, new Command() {
 		public void execute() {
-		    stateManagerProvider.get().gotoContainer(folder.getId());
+		    stateManager.gotoContainer(folder.getId());
 		}
 	    });
 	    indent = indent + "&nbsp&nbsp;";

@@ -22,7 +22,7 @@ package org.ourproject.kune.workspace.client.sitebar.login;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
 import org.ourproject.kune.platf.client.ui.dialogs.InfoDialog;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
-import org.ourproject.kune.workspace.client.newgroup.ui.SiteErrorType;
+import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.sitebar.msg.SimpleMessagePanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;

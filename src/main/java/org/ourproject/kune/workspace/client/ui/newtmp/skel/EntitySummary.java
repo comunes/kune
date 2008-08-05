@@ -36,7 +36,7 @@ public class EntitySummary {
 
     public void addInTools(final Widget widget) {
 	entityTools.add(widget);
-	mainPanel.doLayoutIfNeeded(true);
+	mainPanel.doLayoutIfNeeded();
     }
 
     public void addListener(final ContainerListener listener) {

@@ -18,11 +18,10 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridButton;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.workspace.client.search.UserLiveSearcher;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
-import org.ourproject.kune.workspace.client.workspace.GroupMembersSummary;
-import org.ourproject.kune.workspace.client.workspace.UserLiveSearcher;
 
 import com.calclab.suco.client.container.Provider;
 import com.calclab.suco.client.signal.Slot;
@@ -174,6 +173,10 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
 	} else {
 	    setGroupMembers(state.getGroupMembers(), state.getGroupRights());
 	}
+    }
+
+    public void onDoubleClick(String groupShortName) {
+	stateManager.gotoToken(groupShortName);	
     }
 
 }

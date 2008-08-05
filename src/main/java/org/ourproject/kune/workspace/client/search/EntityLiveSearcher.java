@@ -17,21 +17,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+package org.ourproject.kune.workspace.client.search;
 
-package org.ourproject.kune.workspace.client.tags;
+import org.ourproject.kune.platf.client.dto.LinkDTO;
 
-import java.util.List;
+import com.calclab.suco.client.signal.Slot;
 
-import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.TagResultDTO;
-import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
+public interface EntityLiveSearcher {
 
-public interface TagsSummaryView extends View {
+    void onSelection(Slot<LinkDTO> slot);
 
-    void setTags(List<TagResultDTO> groupTags);
-
-    void setTheme(WsTheme oldTheme, WsTheme newTheme);
-
-    void setVisible(boolean visible);
+    void show();
 
 }

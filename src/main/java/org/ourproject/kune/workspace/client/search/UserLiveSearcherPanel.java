@@ -17,21 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+package org.ourproject.kune.workspace.client.search;
 
-package org.ourproject.kune.workspace.client.tags;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 
-import java.util.List;
+public class UserLiveSearcherPanel extends EntityLiveSearcherPanel {
 
-import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.TagResultDTO;
-import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
-
-public interface TagsSummaryView extends View {
-
-    void setTags(List<TagResultDTO> groupTags);
-
-    void setTheme(WsTheme oldTheme, WsTheme newTheme);
-
-    void setVisible(boolean visible);
+    public UserLiveSearcherPanel(final EntityLiveSearcherPresenter presenter, final I18nTranslationService i18n) {
+	super(presenter, EntityLiveSearcherView.SEARCH_USERS, i18n);
+    }
 
 }

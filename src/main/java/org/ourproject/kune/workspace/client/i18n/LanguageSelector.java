@@ -21,34 +21,13 @@ package org.ourproject.kune.workspace.client.i18n;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
-import org.ourproject.kune.platf.client.state.Session;
 
-public class LanguageSelectorPresenter implements LanguageSelector {
+public interface LanguageSelector {
 
-    private LanguageSelectorView view;
-    private final Session session;
+    String getSelectedLanguage();
 
-    public LanguageSelectorPresenter(final Session session) {
-	this.session = session;
-    }
+    View getView();
 
-    public Object[][] getLanguages() {
-	return session.getLanguagesArray();
-    }
+    void setLanguage(I18nLanguageDTO language);
 
-    public String getSelectedLanguage() {
-	return view.getLanguage();
-    }
-
-    public View getView() {
-	return view;
-    }
-
-    public void init(final LanguageSelectorView view) {
-	this.view = view;
-    }
-
-    public void setLanguage(final I18nLanguageDTO language) {
-	view.setLanguage(language.getCode());
-    }
 }

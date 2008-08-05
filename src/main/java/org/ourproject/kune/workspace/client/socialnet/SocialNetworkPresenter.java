@@ -10,11 +10,11 @@ import org.ourproject.kune.platf.client.services.ImageDescriptor;
 import org.ourproject.kune.platf.client.services.ImageUtils;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.platf.client.ui.MenuItem;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridButton;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridItem;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridMenu;
-import org.ourproject.kune.platf.client.ui.gridmenu.GridMenuItem;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridMenuItemCollection;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.sitebar.Site;
@@ -26,14 +26,14 @@ public class SocialNetworkPresenter {
 
     protected GridButton requestJoin;
     protected GridButton unJoinButton;
-    protected GridMenuItem<GroupDTO> changeToCollabMenuItem;
-    protected GridMenuItem<GroupDTO> removeMemberMenuItem;
-    protected GridMenuItem<GroupDTO> changeToAdminMenuItem;
-    protected GridMenuItem<GroupDTO> acceptJoinGroupMenuItem;
-    protected GridMenuItem<GroupDTO> denyJoinGroupMenuItem;
-    protected GridMenuItem<GroupDTO> gotoMemberMenuItem;
-    protected GridMenuItem<GroupDTO> gotoGroupMenuItem;
-    protected GridMenuItem<GroupDTO> unJoinMenuItem;
+    protected MenuItem<GroupDTO> changeToCollabMenuItem;
+    protected MenuItem<GroupDTO> removeMemberMenuItem;
+    protected MenuItem<GroupDTO> changeToAdminMenuItem;
+    protected MenuItem<GroupDTO> acceptJoinGroupMenuItem;
+    protected MenuItem<GroupDTO> denyJoinGroupMenuItem;
+    protected MenuItem<GroupDTO> gotoMemberMenuItem;
+    protected MenuItem<GroupDTO> gotoGroupMenuItem;
+    protected MenuItem<GroupDTO> unJoinMenuItem;
     private final I18nUITranslationService i18n;
     private final StateManager stateManager;
     private final Provider<SocialNetworkServiceAsync> snServiceProvider;
@@ -56,24 +56,24 @@ public class SocialNetworkPresenter {
 	otherLoggedOperations = new GridMenuItemCollection<GroupDTO>();
     }
 
-    public void addGroupOperation(final GridMenuItem<GroupDTO> operation, final boolean mustBeLogged) {
+    public void addGroupOperation(final MenuItem<GroupDTO> operation, final boolean mustBeLogged) {
 	GridMenuItemCollection<GroupDTO> collection;
 	collection = mustBeLogged ? otherLoggedOperations : otherOperations;
 	collection.add(operation);
     }
 
-    public void removeGroupOperation(final GridMenuItem<GroupDTO> operation, final boolean mustBeLogged) {
+    public void removeGroupOperation(final MenuItem<GroupDTO> operation, final boolean mustBeLogged) {
 	GridMenuItemCollection<GroupDTO> collection;
 	collection = mustBeLogged ? otherLoggedOperations : otherOperations;
 	collection.remove(operation);
     }
 
     protected GridItem<GroupDTO> createGridItem(final GridGroup groupCategory, final GroupDTO group,
-	    final AccessRightsDTO rights, final GridMenuItem<GroupDTO>... gridMenuItems) {
+	    final AccessRightsDTO rights, final MenuItem<GroupDTO>... gridMenuItems) {
 	final GridItem<GroupDTO> gridItem = createDefMemberMenu(group, groupCategory);
 	final GridMenu<GroupDTO> menu = gridItem.getMenu();
 	if (rights.isAdministrable()) {
-	    for (final GridMenuItem<GroupDTO> item : gridMenuItems) {
+	    for (final MenuItem<GroupDTO> item : gridMenuItems) {
 		menu.addMenuItem(item);
 	    }
 	}
@@ -129,25 +129,25 @@ public class SocialNetworkPresenter {
     }
 
     private void createMenuActions() {
-	gotoGroupMenuItem = new GridMenuItem<GroupDTO>("images/group-home.gif", i18n.t("Visit this group homepage"),
+	gotoGroupMenuItem = new MenuItem<GroupDTO>("images/group-home.gif", i18n.t("Visit this group homepage"),
 		new Slot<GroupDTO>() {
 		    public void onEvent(final GroupDTO groupDTO) {
 			stateManager.gotoToken(groupDTO.getShortName());
 		    }
 		});
-	gotoMemberMenuItem = new GridMenuItem<GroupDTO>("images/group-home.gif", i18n.t("Visit this member homepage"),
+	gotoMemberMenuItem = new MenuItem<GroupDTO>("images/group-home.gif", i18n.t("Visit this member homepage"),
 		new Slot<GroupDTO>() {
 		    public void onEvent(final GroupDTO groupDTO) {
 			stateManager.gotoToken(groupDTO.getShortName());
 		    }
 		});
-	unJoinMenuItem = new GridMenuItem<GroupDTO>("images/del.gif", i18n
+	unJoinMenuItem = new MenuItem<GroupDTO>("images/del.gif", i18n
 		.t("Don't participate more as a member in this group"), new Slot<GroupDTO>() {
 	    public void onEvent(final GroupDTO groupDTO) {
 		removeMemberAction(groupDTO);
 	    }
 	});
-	changeToCollabMenuItem = new GridMenuItem<GroupDTO>("images/arrow-down-green.gif", i18n
+	changeToCollabMenuItem = new MenuItem<GroupDTO>("images/arrow-down-green.gif", i18n
 		.t("Change to collaborator"), new Slot<GroupDTO>() {
 	    public void onEvent(final GroupDTO group) {
 		Site.showProgressProcessing();
@@ -162,7 +162,7 @@ public class SocialNetworkPresenter {
 			});
 	    }
 	});
-	removeMemberMenuItem = new GridMenuItem<GroupDTO>("images/del.gif", i18n.t("Remove this member"),
+	removeMemberMenuItem = new MenuItem<GroupDTO>("images/del.gif", i18n.t("Remove this member"),
 		new Slot<GroupDTO>() {
 		    public void onEvent(final GroupDTO group) {
 			Site.showProgressProcessing();
@@ -181,7 +181,7 @@ public class SocialNetworkPresenter {
 				});
 		    }
 		});
-	changeToAdminMenuItem = new GridMenuItem<GroupDTO>("images/arrow-up-green.gif", i18n.t("Change to admin"),
+	changeToAdminMenuItem = new MenuItem<GroupDTO>("images/arrow-up-green.gif", i18n.t("Change to admin"),
 		new Slot<GroupDTO>() {
 		    public void onEvent(final GroupDTO group) {
 			Site.showProgressProcessing();
@@ -196,7 +196,7 @@ public class SocialNetworkPresenter {
 				});
 		    }
 		});
-	acceptJoinGroupMenuItem = new GridMenuItem<GroupDTO>("images/accept.gif", i18n.t("Accept this member"),
+	acceptJoinGroupMenuItem = new MenuItem<GroupDTO>("images/accept.gif", i18n.t("Accept this member"),
 		new Slot<GroupDTO>() {
 		    public void onEvent(final GroupDTO group) {
 			Site.showProgressProcessing();
@@ -211,7 +211,7 @@ public class SocialNetworkPresenter {
 				});
 		    }
 		});
-	denyJoinGroupMenuItem = new GridMenuItem<GroupDTO>("images/cancel.gif", i18n.t("Don't accept this member"),
+	denyJoinGroupMenuItem = new MenuItem<GroupDTO>("images/cancel.gif", i18n.t("Don't accept this member"),
 		new Slot<GroupDTO>() {
 		    public void onEvent(final GroupDTO group) {
 			Site.showProgressProcessing();

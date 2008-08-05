@@ -37,7 +37,6 @@ import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.Component;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.TabPanel;
-import com.gwtext.client.widgets.ToolbarButton;
 import com.gwtext.client.widgets.Window;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.event.PanelListenerAdapter;
@@ -63,7 +62,7 @@ public class SiteSearcherPanel extends AbstractSearcherPanel implements SiteSear
     private GridPanel groupsGrid;
     private GridPanel contentGrid;
     private final WorkspaceSkeleton ws;
-    private ToolbarButton traybarButton;
+    private SiteBottomTrayButton traybarButton;
 
     public SiteSearcherPanel(final SiteSearcherPresenter initPresenter, final I18nTranslationService i18n,
 	    final WorkspaceSkeleton ws) {
@@ -100,21 +99,8 @@ public class SiteSearcherPanel extends AbstractSearcherPanel implements SiteSear
 	dialog.expand();
 	dialog.center();
 	if (traybarButton == null) {
-	    traybarButton = new ToolbarButton();
-	    traybarButton.setTooltip(i18n.t("Show/hide searcher"));
-	    traybarButton.setIcon("images/kune-search-ico-push.gif");
-	    traybarButton.addListener(new ButtonListenerAdapter() {
-		@Override
-		public void onClick(final Button button, final EventObject e) {
-		    if (dialog.isVisible()) {
-			dialog.hide();
-		    } else {
-			dialog.show();
-		    }
-		}
-
-	    });
-	    ws.getSiteTraybar().addButton(traybarButton);
+	    traybarButton = new SiteBottomTrayButton("images/kune-search-ico-push.gif", i18n.t("Show/hide searcher"),
+		    dialog, ws);
 	}
     }
 

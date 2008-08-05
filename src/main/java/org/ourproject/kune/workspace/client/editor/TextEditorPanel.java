@@ -40,7 +40,6 @@ public class TextEditorPanel extends Composite implements TextEditorView {
     private final Timer saveTimer;
     private final I18nTranslationService i18n;
 
-    @Deprecated
     public TextEditorPanel(final TextEditorPresenter presenter, final I18nTranslationService i18n) {
 
 	this.presenter = presenter;

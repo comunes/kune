@@ -33,7 +33,7 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ParamCallback;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.workspace.client.WorkspaceEvents;
+import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
 import com.calclab.suco.client.signal.Slot;
@@ -42,9 +42,11 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 public class ContextItemsPresenter implements ContextItems {
     protected ContextItemsView view;
     private final I18nTranslationService i18n;
+    private final StateManager stateManager;
 
-    public ContextItemsPresenter(final I18nTranslationService i18n) {
+    public ContextItemsPresenter(final I18nTranslationService i18n, final StateManager stateManager) {
 	this.i18n = i18n;
+	this.stateManager = stateManager;
     }
 
     public void canCreate(final String typeName, final String label, final Slot<?> slot) {
@@ -83,7 +85,7 @@ public class ContextItemsPresenter implements ContextItems {
 	DefaultDispatcher.getInstance().fire(DocsEvents.RENAME_CONTENT,
 		new ParamCallback<String, Object>(text, new AsyncCallbackSimple<Object>() {
 		    public void onSuccess(final Object result) {
-			DefaultDispatcher.getInstance().fire(WorkspaceEvents.RELOAD_CONTEXT, null);
+			stateManager.reloadContextAndTitles();
 			Site.hideProgress();
 		    }
 		}));

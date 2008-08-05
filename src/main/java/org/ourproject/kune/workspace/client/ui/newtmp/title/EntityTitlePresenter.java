@@ -30,7 +30,6 @@ import org.ourproject.kune.platf.client.rpc.ParamCallback;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.WorkspaceEvents;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
 import com.calclab.suco.client.signal.Slot;
@@ -42,11 +41,13 @@ public class EntityTitlePresenter {
     private EntityTitleView view;
     private final I18nTranslationService i18n;
     private final KuneErrorHandler errorHandler;
+    private final StateManager stateManager;
 
     public EntityTitlePresenter(final I18nTranslationService i18n, final KuneErrorHandler errorHandler,
 	    final StateManager stateManager) {
 	this.i18n = i18n;
 	this.errorHandler = errorHandler;
+	this.stateManager = stateManager;
 	stateManager.onStateChanged(new Slot<StateDTO>() {
 	    public void onEvent(final StateDTO state) {
 		setState(state);
@@ -73,7 +74,7 @@ public class EntityTitlePresenter {
 	    public void onSuccess(final String result) {
 		Site.hideProgress();
 		view.setContentTitle(result);
-		DefaultDispatcher.getInstance().fire(WorkspaceEvents.RELOAD_CONTEXT, null);
+		stateManager.reloadContextAndTitles();
 	    }
 	};
 	DefaultDispatcher.getInstance().fire(DocsEvents.RENAME_CONTENT,

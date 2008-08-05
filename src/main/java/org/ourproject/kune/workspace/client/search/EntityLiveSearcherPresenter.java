@@ -17,38 +17,39 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.i18n;
+package org.ourproject.kune.workspace.client.search;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
-import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.dto.LinkDTO;
 
-public class LanguageSelectorPresenter implements LanguageSelector {
+import com.calclab.suco.client.signal.Slot;
 
-    private LanguageSelectorView view;
-    private final Session session;
+public class EntityLiveSearcherPresenter implements EntityLiveSearcher {
 
-    public LanguageSelectorPresenter(final Session session) {
-	this.session = session;
-    }
+    private EntityLiveSearcherView view;
+    private Slot<LinkDTO> slot;
 
-    public Object[][] getLanguages() {
-	return session.getLanguagesArray();
-    }
-
-    public String getSelectedLanguage() {
-	return view.getLanguage();
+    public EntityLiveSearcherPresenter() {
     }
 
     public View getView() {
 	return view;
     }
 
-    public void init(final LanguageSelectorView view) {
+    public void init(final EntityLiveSearcherView view) {
 	this.view = view;
     }
 
-    public void setLanguage(final I18nLanguageDTO language) {
-	view.setLanguage(language.getCode());
+    public void onSelection(final LinkDTO link) {
+	slot.onEvent(link);
+	view.hide();
+    }
+
+    public void onSelection(final Slot<LinkDTO> slot) {
+	this.slot = slot;
+    }
+
+    public void show() {
+	view.show();
     }
 }

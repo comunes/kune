@@ -1,7 +1,7 @@
 package org.ourproject.kune.workspace.client.sitebar.msg;
 
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.workspace.client.newgroup.ui.SiteErrorType;
+import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.HTML;
