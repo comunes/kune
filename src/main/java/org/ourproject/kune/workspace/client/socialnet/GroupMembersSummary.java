@@ -27,6 +27,10 @@ public interface GroupMembersSummary {
 
     void addGroupOperation(MenuItem<GroupDTO> operation, boolean mustBeLogged);
 
+    void addUserOperation(MenuItem<GroupDTO> operation, boolean mustBeLogged);
+
     void removeGroupOperation(MenuItem<GroupDTO> operation, boolean mustBeLogged);
+
+    void removeUserOperation(MenuItem<GroupDTO> operation, boolean mustBeLogged);
 
 }

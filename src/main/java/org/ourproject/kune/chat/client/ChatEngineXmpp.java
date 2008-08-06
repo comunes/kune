@@ -57,9 +57,13 @@ class ChatEngineXmpp implements ChatEngine {
     }
 
     public void joinRoom(final String roomName, final String userAlias) {
-	final XmppURI roomURI = XmppURI.uri(roomName + "@" + chatOptions.roomHost + "/"
-		+ chatOptions.userOptions.getUserJid().getNode());
-	emiteDialog.joinRoom(roomURI);
+	if (emiteDialog.isLoggedIn()) {
+	    final XmppURI roomURI = XmppURI.uri(roomName + "@" + chatOptions.roomHost + "/"
+		    + chatOptions.userOptions.getUserJid().getNode());
+	    emiteDialog.joinRoom(roomURI);
+	} else {
+	    ws.showAlertMessage(i18n.t("Error"), i18n.t("To join a chatroom you need to be 'online'."));
+	}
     }
 
     public void login(final String jid, final String passwd) {
@@ -92,6 +96,7 @@ class ChatEngineXmpp implements ChatEngine {
 	    });
 	    ws.getSiteTraybar().addButton(traybarButton);
 	}
+	emiteDialog.setEnableStatusUI(true);
 	emiteDialog.hide();
 	emiteDialog.onChatAttended(new Slot<String>() {
 	    public void onEvent(final String parameter) {
@@ -111,6 +116,7 @@ class ChatEngineXmpp implements ChatEngine {
 	    final UserChatOptions userChatOptions = getUserChatOptions("reset@example.com", "");
 	    emiteDialog.refreshUserInfo(userChatOptions);
 	    chatOptions.userOptions = userChatOptions;
+	    emiteDialog.setEnableStatusUI(false);
 	}
     }
 

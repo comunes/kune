@@ -33,22 +33,11 @@ import com.google.inject.Provider;
 
 public abstract class DefaultManager<T, K> {
     private final Provider<EntityManager> provider;
-    private final Provider<FullTextEntityManager> fullTextEntityManagerProvider;
     private final Class<T> entityClass;
 
     public DefaultManager(final Provider<EntityManager> provider, final Class<T> entityClass) {
 	this.provider = provider;
 	this.entityClass = entityClass;
-	fullTextEntityManagerProvider = new Provider<FullTextEntityManager>() {
-	    private FullTextEntityManager searchManager;
-
-	    public FullTextEntityManager get() {
-		if (searchManager == null) {
-		    searchManager = Search.createFullTextEntityManager(getEntityManager());
-		}
-		return searchManager;
-	    }
-	};
     }
 
     public T find(final Long primaryKey) {
@@ -75,7 +64,8 @@ public abstract class DefaultManager<T, K> {
 
     @SuppressWarnings("unchecked")
     public void reIndex() {
-	final FullTextEntityManager fullTextEm = fullTextEntityManagerProvider.get();
+	// Inject this?
+	final FullTextEntityManager fullTextEm = Search.createFullTextEntityManager(getEntityManager());
 	fullTextEm.purgeAll(entityClass);
 	fullTextEm.getTransaction().commit();
 	fullTextEm.getTransaction().begin();
@@ -93,7 +83,8 @@ public abstract class DefaultManager<T, K> {
 
     @SuppressWarnings("unchecked")
     public SearchResult<T> search(final Query query, final Integer firstResult, final Integer maxResults) {
-	final FullTextQuery emQuery = fullTextEntityManagerProvider.get().createFullTextQuery(query, entityClass);
+	final FullTextQuery emQuery = Search.createFullTextEntityManager(getEntityManager()).createFullTextQuery(query,
+		entityClass);
 	if (firstResult != null && maxResults != null) {
 	    emQuery.setFirstResult(firstResult);
 	    emQuery.setMaxResults(maxResults);

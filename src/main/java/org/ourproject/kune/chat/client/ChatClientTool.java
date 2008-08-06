@@ -64,13 +64,18 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
 		final ChatOptions chatOptions = new ChatOptions(initData.getChatHttpBase(), initData.getChatDomain(),
 			initData.getChatRoomHost());
 		chat = new ChatEngineXmpp(emiteUIDialog, chatOptions, i18n, ws);
-		groupMembersSummaryProvider.get().addGroupOperation(
+		groupMembersSummaryProvider.get().addUserOperation(
 			new MenuItem<GroupDTO>("images/chat-basic.gif", i18n.t("Start a chat with this member"),
 				new Slot<GroupDTO>() {
 				    public void onEvent(final GroupDTO group) {
-					emiteUIDialog.chat(XmppURI.jid(group.getShortName() + "@"
-						+ initData.getChatDomain()));
 					emiteUIDialog.show();
+					if (emiteUIDialog.isLoggedIn()) {
+					    emiteUIDialog.chat(XmppURI.jid(group.getShortName() + "@"
+						    + initData.getChatDomain()));
+					} else {
+					    ws.showAlertMessage(i18n.t("Error"), i18n
+						    .t("To start a chat you need to be 'online'."));
+					}
 				    }
 				}), true);
 	    }

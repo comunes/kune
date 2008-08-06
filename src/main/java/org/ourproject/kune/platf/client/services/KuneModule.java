@@ -157,7 +157,7 @@ public class KuneModule extends AbstractModule {
 
 	register(SingletonScope.class, new Factory<Session>(Session.class) {
 	    public Session create() {
-		return new SessionDefault(Cookies.getCookie(Site.USERHASH), $p(UserServiceAsync.class));
+		return new SessionDefault(Cookies.getCookie(Site.USERHASH), $$(UserServiceAsync.class));
 	    }
 	}, new Factory<I18nServiceAsync>(I18nServiceAsync.class) {
 	    public I18nServiceAsync create() {
@@ -243,7 +243,7 @@ public class KuneModule extends AbstractModule {
 
 	register(SingletonScope.class, new Factory<KuneErrorHandler>(KuneErrorHandler.class) {
 	    public KuneErrorHandler create() {
-		return new KuneErrorHandler($(Session.class), i18n, $p(WorkspaceSkeleton.class), $p(StateManager.class));
+		return new KuneErrorHandler($(Session.class), i18n, $$(WorkspaceSkeleton.class), $$(StateManager.class));
 	    }
 	});
 
@@ -294,7 +294,7 @@ public class KuneModule extends AbstractModule {
 	register(SingletonScope.class, new Factory<SiteProgress>(SiteProgress.class) {
 	    public SiteProgress create() {
 		final SiteProgressPresenter presenter = new SiteProgressPresenter();
-		final SiteProgressPanel panel = new SiteProgressPanel(presenter, $p(SitePublicSpaceLink.class));
+		final SiteProgressPanel panel = new SiteProgressPanel(presenter, $$(SitePublicSpaceLink.class));
 		presenter.init(panel);
 		return presenter;
 	    }
@@ -302,7 +302,7 @@ public class KuneModule extends AbstractModule {
 
 	register(SingletonScope.class, new Factory<Site>(Site.class) {
 	    public Site create() {
-		return new Site(i18n, $(SiteProgress.class), $p(SiteMessage.class));
+		return new Site(i18n, $(SiteProgress.class), $$(SiteMessage.class));
 	    }
 	});
 
@@ -339,7 +339,7 @@ public class KuneModule extends AbstractModule {
 	register(SingletonScope.class, new Factory<SiteSignOutLink>(SiteSignOutLink.class) {
 	    public SiteSignOutLink create() {
 		final SiteSignOutLinkPresenter presenter = new SiteSignOutLinkPresenter($(Session.class),
-			$p(UserServiceAsync.class), $p(KuneErrorHandler.class));
+			$$(UserServiceAsync.class), $$(KuneErrorHandler.class));
 		final SiteSignOutLinkPanel panel = new SiteSignOutLinkPanel(presenter, i18n, ws);
 		presenter.init(panel);
 		return presenter;
@@ -375,7 +375,7 @@ public class KuneModule extends AbstractModule {
 
 	register(SingletonScope.class, new Factory<SiteSearcher>(SiteSearcher.class) {
 	    public SiteSearcher create() {
-		final SiteSearcherPresenter presenter = new SiteSearcherPresenter($p(StateManager.class));
+		final SiteSearcherPresenter presenter = new SiteSearcherPresenter($$(StateManager.class));
 		final SiteSearcherView view = new SiteSearcherPanel(presenter, i18n, ws);
 		presenter.init(view);
 		return presenter;
@@ -394,7 +394,7 @@ public class KuneModule extends AbstractModule {
 
 	register(SingletonScope.class, new Factory<SiteSearch>(SiteSearch.class) {
 	    public SiteSearch create() {
-		final SiteSearchPresenter presenter = new SiteSearchPresenter($p(SiteSearcher.class));
+		final SiteSearchPresenter presenter = new SiteSearchPresenter($$(SiteSearcher.class));
 		final SiteSearchPanel panel = new SiteSearchPanel(presenter, ws, i18n);
 		presenter.init(panel);
 		return presenter;
@@ -423,8 +423,8 @@ public class KuneModule extends AbstractModule {
 	register(SingletonScope.class, new Factory<NewGroup>(NewGroup.class) {
 	    public NewGroup create() {
 		final NewGroupPresenter presenter = new NewGroupPresenter(i18n, $(Session.class),
-			$(StateManager.class), $p(GroupServiceAsync.class));
-		final NewGroupPanel view = new NewGroupPanel(presenter, i18n, $p(LicenseChoose.class));
+			$(StateManager.class), $$(GroupServiceAsync.class));
+		final NewGroupPanel view = new NewGroupPanel(presenter, i18n, $$(LicenseChoose.class));
 		presenter.init(view);
 		return presenter;
 	    }
@@ -442,7 +442,7 @@ public class KuneModule extends AbstractModule {
 
 	register(SingletonScope.class, new Factory<WsThemePresenter>(WsThemePresenter.class) {
 	    public WsThemePresenter create() {
-		final WsThemePresenter presenter = new WsThemePresenter($(Session.class), $p(GroupServiceAsync.class),
+		final WsThemePresenter presenter = new WsThemePresenter($(Session.class), $$(GroupServiceAsync.class),
 			$(StateManager.class));
 		final WsThemePanel panel = new WsThemePanel(ws, presenter, i18n);
 		presenter.init(panel);
@@ -490,7 +490,7 @@ public class KuneModule extends AbstractModule {
 	register(SingletonScope.class, new Factory<RateIt>(RateIt.class) {
 	    public RateIt create() {
 		final RateItPresenter presenter = new RateItPresenter(i18n, $(Session.class),
-			$p(ContentServiceAsync.class), $(StateManager.class));
+			$$(ContentServiceAsync.class), $(StateManager.class));
 		final RateItPanel panel = new RateItPanel(presenter, i18n, ws);
 		presenter.init(panel);
 		return presenter;
@@ -501,7 +501,7 @@ public class KuneModule extends AbstractModule {
 	    public GroupMembersSummary create() {
 		final GroupMembersSummaryPresenter presenter = new GroupMembersSummaryPresenter(i18n,
 			$(StateManager.class), $(ImageUtils.class), $(Session.class),
-			$p(SocialNetworkServiceAsync.class), $p(UserLiveSearcher.class), $(WsThemePresenter.class));
+			$$(SocialNetworkServiceAsync.class), $$(UserLiveSearcher.class), $(WsThemePresenter.class));
 		final GroupMembersSummaryView view = new GroupMembersSummaryPanel(presenter, i18n, ws);
 		presenter.init(view);
 		return presenter;
@@ -522,7 +522,7 @@ public class KuneModule extends AbstractModule {
 	    public ParticipationSummary create() {
 		final ParticipationSummaryPresenter presenter = new ParticipationSummaryPresenter(i18n,
 			$(StateManager.class), $(ImageUtils.class), $(Session.class),
-			$p(SocialNetworkServiceAsync.class), $(WsThemePresenter.class));
+			$$(SocialNetworkServiceAsync.class), $(WsThemePresenter.class));
 		final ParticipationSummaryView view = new ParticipationSummaryPanel(presenter, i18n, ws);
 		presenter.init(view);
 		return presenter;
@@ -532,7 +532,7 @@ public class KuneModule extends AbstractModule {
 	register(SingletonScope.class, new Factory<TagsSummary>(TagsSummary.class) {
 	    public TagsSummary create() {
 		final TagsSummaryPresenter presenter = new TagsSummaryPresenter($(Session.class),
-			$p(SiteSearcher.class), $(StateManager.class), $(WsThemePresenter.class));
+			$$(SiteSearcher.class), $(StateManager.class), $(WsThemePresenter.class));
 		final TagsSummaryPanel panel = new TagsSummaryPanel(presenter, i18n, ws);
 		presenter.init(panel);
 		return presenter;

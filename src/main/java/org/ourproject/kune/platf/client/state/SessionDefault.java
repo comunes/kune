@@ -55,7 +55,7 @@ public class SessionDefault implements Session {
     private final Provider<UserServiceAsync> userServiceProvider;
 
     public SessionDefault(final String userHash, final Provider<UserServiceAsync> userServiceProvider) {
-	this.userHash = userHash;
+	this.userHash = userHash == null || userHash.equals("null") ? null : userHash;
 	this.userServiceProvider = userServiceProvider;
 	languagesArray = null;
 	this.onInitDataReceived = new Signal<InitDataDTO>("initDataReceived");

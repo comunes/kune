@@ -41,6 +41,8 @@ public class SocialNetworkPresenter {
     private final GridMenuItemCollection<GroupDTO> otherOperations;
     private final GridMenuItemCollection<GroupDTO> otherLoggedOperations;
     private final ImageUtils imageUtils;
+    private final GridMenuItemCollection<GroupDTO> otherOperationsUsers;
+    private final GridMenuItemCollection<GroupDTO> otherLoggedOperationsUsers;
 
     public SocialNetworkPresenter(final I18nUITranslationService i18n, final StateManager stateManager,
 	    final ImageUtils imageUtils, final Session session,
@@ -52,8 +54,11 @@ public class SocialNetworkPresenter {
 	this.snServiceProvider = snServiceProvider;
 	createButtons();
 	createMenuActions();
+	otherOperationsUsers = new GridMenuItemCollection<GroupDTO>();
+	otherLoggedOperationsUsers = new GridMenuItemCollection<GroupDTO>();
 	otherOperations = new GridMenuItemCollection<GroupDTO>();
 	otherLoggedOperations = new GridMenuItemCollection<GroupDTO>();
+
     }
 
     public void addGroupOperation(final MenuItem<GroupDTO> operation, final boolean mustBeLogged) {
@@ -62,9 +67,21 @@ public class SocialNetworkPresenter {
 	collection.add(operation);
     }
 
+    public void addUserOperation(final MenuItem<GroupDTO> operation, final boolean mustBeLogged) {
+	GridMenuItemCollection<GroupDTO> collection;
+	collection = mustBeLogged ? otherLoggedOperationsUsers : otherOperationsUsers;
+	collection.add(operation);
+    }
+
     public void removeGroupOperation(final MenuItem<GroupDTO> operation, final boolean mustBeLogged) {
 	GridMenuItemCollection<GroupDTO> collection;
 	collection = mustBeLogged ? otherLoggedOperations : otherOperations;
+	collection.remove(operation);
+    }
+
+    public void removeUserOperation(final MenuItem<GroupDTO> operation, final boolean mustBeLogged) {
+	GridMenuItemCollection<GroupDTO> collection;
+	collection = mustBeLogged ? otherLoggedOperationsUsers : otherOperationsUsers;
 	collection.remove(operation);
     }
 
@@ -116,15 +133,23 @@ public class SocialNetworkPresenter {
     private GridItem<GroupDTO> createDefMemberMenu(final GroupDTO group, final GridGroup gridGroup) {
 	final GridMenu<GroupDTO> menu = new GridMenu<GroupDTO>(group);
 	final String longName = group.getLongName();
+	final String toolTip = i18n.t(group.getType().equals(GroupDTO.PERSONAL) ? "User nickname: [%s]"
+		: "Group short name: [%s]", group.getShortName());
 	final GridItem<GroupDTO> gridItem = new GridItem<GroupDTO>(group, gridGroup, group.getShortName(), imageUtils
-		.getImageHtml(ImageDescriptor.groupDefIcon), longName, longName, " ", longName, i18n.t(
-		"User name: [%s]", group.getShortName()), menu);
-	if (otherOperations != null) {
+		.getImageHtml(ImageDescriptor.groupDefIcon), longName, longName, " ", longName, toolTip, menu);
+	if (!group.getType().equals(GroupDTO.PERSONAL)) {
 	    menu.addMenuItemList(otherOperations);
 	}
-	if (session.isLogged() && otherOperations != null) {
+	if (session.isLogged() && !group.getType().equals(GroupDTO.PERSONAL)) {
 	    menu.addMenuItemList(otherLoggedOperations);
 	}
+	if (group.getType().equals(GroupDTO.PERSONAL)) {
+	    menu.addMenuItemList(otherOperationsUsers);
+	}
+	if (session.isLogged() && group.getType().equals(GroupDTO.PERSONAL)) {
+	    menu.addMenuItemList(otherLoggedOperationsUsers);
+	}
+
 	return gridItem;
     }
 
@@ -147,21 +172,21 @@ public class SocialNetworkPresenter {
 		removeMemberAction(groupDTO);
 	    }
 	});
-	changeToCollabMenuItem = new MenuItem<GroupDTO>("images/arrow-down-green.gif", i18n
-		.t("Change to collaborator"), new Slot<GroupDTO>() {
-	    public void onEvent(final GroupDTO group) {
-		Site.showProgressProcessing();
-		snServiceProvider.get().setAdminAsCollab(session.getUserHash(),
-			session.getCurrentState().getGroup().getShortName(), group.getShortName(),
-			new AsyncCallbackSimple<SocialNetworkResultDTO>() {
-			    public void onSuccess(final SocialNetworkResultDTO result) {
-				Site.hideProgress();
-				Site.info(i18n.t("Type of member changed"));
-				stateManager.setSocialNetwork(result);
-			    }
-			});
-	    }
-	});
+	changeToCollabMenuItem = new MenuItem<GroupDTO>("images/arrow-down-green.gif",
+		i18n.t("Change to collaborator"), new Slot<GroupDTO>() {
+		    public void onEvent(final GroupDTO group) {
+			Site.showProgressProcessing();
+			snServiceProvider.get().setAdminAsCollab(session.getUserHash(),
+				session.getCurrentState().getGroup().getShortName(), group.getShortName(),
+				new AsyncCallbackSimple<SocialNetworkResultDTO>() {
+				    public void onSuccess(final SocialNetworkResultDTO result) {
+					Site.hideProgress();
+					Site.info(i18n.t("Type of member changed"));
+					stateManager.setSocialNetwork(result);
+				    }
+				});
+		    }
+		});
 	removeMemberMenuItem = new MenuItem<GroupDTO>("images/del.gif", i18n.t("Remove this member"),
 		new Slot<GroupDTO>() {
 		    public void onEvent(final GroupDTO group) {

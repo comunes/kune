@@ -232,7 +232,7 @@ public class GridMenuPanel<T> extends Panel {
     }
 
     public void sort() {
-	store.sort(GROUP);
+	store.sort(GROUP, SortDir.ASC);
     }
 
     public void updateItem(final GridItem<T> gridItem) {
@@ -311,7 +311,7 @@ public class GridMenuPanel<T> extends Panel {
 
 	final ArrayReader reader = new ArrayReader(1, recordDef);
 	store = new GroupingStore(proxy, reader);
-	store.setSortInfo(new SortState(GROUP, SortDir.DESC));
+	store.setSortInfo(new SortState(GROUP, SortDir.ASC));
 	store.setGroupField(GROUP);
 	store.setGroupOnSort(true);
 	store.load();

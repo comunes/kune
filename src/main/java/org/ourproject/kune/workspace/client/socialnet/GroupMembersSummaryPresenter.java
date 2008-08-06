@@ -81,7 +81,8 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
 		userLiveSearcherProvider.get().show();
 	    }
 	});
-	super.addGroupOperation(gotoMemberMenuItem, false);
+	super.addGroupOperation(gotoGroupMenuItem, false);
+	super.addUserOperation(gotoMemberMenuItem, false);
     }
 
     public void addCollab(final String groupShortName) {
@@ -100,6 +101,10 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
 
     public void init(final GroupMembersSummaryView view) {
 	this.view = view;
+    }
+
+    public void onDoubleClick(final String groupShortName) {
+	stateManager.gotoToken(groupShortName);
     }
 
     private boolean isMember(final boolean userIsAdmin, final boolean userIsCollab) {
@@ -173,10 +178,6 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
 	} else {
 	    setGroupMembers(state.getGroupMembers(), state.getGroupRights());
 	}
-    }
-
-    public void onDoubleClick(String groupShortName) {
-	stateManager.gotoToken(groupShortName);	
     }
 
 }

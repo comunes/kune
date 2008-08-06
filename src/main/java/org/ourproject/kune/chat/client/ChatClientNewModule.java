@@ -51,7 +51,7 @@ public class ChatClientNewModule extends AbstractModule {
 	    public ChatContent create() {
 		final WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
 		final ChatContentPresenter presenter = new ChatContentPresenter($(EmiteUIDialog.class), panel,
-			$p(ChatInfo.class), $p(ChatRoom.class));
+			$$(ChatInfo.class), $$(ChatRoom.class));
 		return presenter;
 	    }
 	});
@@ -59,7 +59,7 @@ public class ChatClientNewModule extends AbstractModule {
 	register(SingletonScope.class, new Factory<ChatContext>(ChatContext.class) {
 	    public ChatContext create() {
 		final WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
-		final ChatContextPresenter presenter = new ChatContextPresenter(panel, $p(RoomsAdmin.class));
+		final ChatContextPresenter presenter = new ChatContextPresenter(panel, $$(RoomsAdmin.class));
 		return presenter;
 	    }
 	});
@@ -84,8 +84,8 @@ public class ChatClientNewModule extends AbstractModule {
 	register(SingletonScope.class, new Factory<RoomsAdmin>(RoomsAdmin.class) {
 	    public RoomsAdmin create() {
 		final RoomsAdminPresenter presenter = new RoomsAdminPresenter($(ContextItems.class),
-			$(I18nUITranslationService.class), $p(StateManager.class), $(Session.class),
-			$p(ContentServiceAsync.class));
+			$(I18nUITranslationService.class), $$(StateManager.class), $(Session.class),
+			$$(ContentServiceAsync.class));
 		return presenter;
 	    }
 	});
@@ -93,8 +93,8 @@ public class ChatClientNewModule extends AbstractModule {
 	register(SingletonScope.class, new Factory<ChatClientTool>(ChatClientTool.class) {
 	    public ChatClientTool create() {
 		return new ChatClientTool($(Session.class), $(Application.class), $(I18nUITranslationService.class),
-			$(EmiteUIDialog.class), $(WorkspaceSkeleton.class), $p(GroupMembersSummary.class),
-			$(ToolSelector.class), $(WsThemePresenter.class), $p(ChatContent.class), $p(ChatContext.class));
+			$(EmiteUIDialog.class), $(WorkspaceSkeleton.class), $$(GroupMembersSummary.class),
+			$(ToolSelector.class), $(WsThemePresenter.class), $$(ChatContent.class), $$(ChatContext.class));
 	    }
 	});
 

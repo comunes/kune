@@ -56,14 +56,14 @@ public class DocumentClientNewModule extends AbstractModule {
 	register(SingletonScope.class, new Factory<DocumentClientTool>(DocumentClientTool.class) {
 	    public DocumentClientTool create() {
 		return new DocumentClientTool(i18n, $(ToolSelector.class), $(WsThemePresenter.class),
-			$(WorkspaceSkeleton.class), $p(DocumentContent.class), $p(DocumentContext.class));
+			$(WorkspaceSkeleton.class), $$(DocumentContent.class), $$(DocumentContext.class));
 	    }
 	});
 
 	register(SingletonScope.class, new Factory<AdminContext>(AdminContext.class) {
 	    public AdminContext create() {
 		final AdminContextPresenter presenter = new AdminContextPresenter($(Session.class),
-			$p(TagsSummary.class));
+			$$(TagsSummary.class));
 		final AdminContextView view = new AdminContextPanel(presenter, i18n);
 		presenter.init(view);
 		return presenter;
@@ -74,16 +74,16 @@ public class DocumentClientNewModule extends AbstractModule {
 	    public DocumentContent create() {
 		final WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
 		final DocumentContentPresenter presenter = new DocumentContentPresenter(panel, $(Session.class),
-			$(RateIt.class), $p(DocumentReader.class), $p(DocumentReaderControl.class),
-			$p(TextEditor.class), $p(FolderViewer.class), $p(FolderEditor.class));
+			$(RateIt.class), $$(DocumentReader.class), $$(DocumentReaderControl.class),
+			$$(TextEditor.class), $$(FolderViewer.class), $$(FolderEditor.class));
 		return presenter;
 	    }
 	});
 	register(SingletonScope.class, new Factory<DocumentContext>(DocumentContext.class) {
 	    public DocumentContext create() {
 		final WorkspaceDeckPanel view = new WorkspaceDeckPanel();
-		final DocumentContextPresenter presenter = new DocumentContextPresenter(view, $p(FolderContext.class),
-			$p(AdminContext.class));
+		final DocumentContextPresenter presenter = new DocumentContextPresenter(view, $$(FolderContext.class),
+			$$(AdminContext.class));
 		return presenter;
 	    }
 	});
