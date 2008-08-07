@@ -34,6 +34,7 @@ import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.client.errors.LastAdminInGroupException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.server.ParticipationData;
+import org.ourproject.kune.platf.server.access.AccessRightsService;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.GroupListMode;
@@ -51,11 +52,14 @@ import com.google.inject.Singleton;
 public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, Long> implements SocialNetworkManager {
 
     private final Group finder;
+    private final AccessRightsService accessRightsService;
 
     @Inject
-    public SocialNetworkManagerDefault(final Provider<EntityManager> provider, final Group finder) {
+    public SocialNetworkManagerDefault(final Provider<EntityManager> provider, final Group finder,
+	    final AccessRightsService accessRightsService) {
 	super(provider, SocialNetwork.class);
 	this.finder = finder;
+	this.accessRightsService = accessRightsService;
     }
 
     public void acceptJoinGroup(final User userLogged, final Group group, final Group inGroup) throws DefaultException,
@@ -252,7 +256,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     }
 
     private void checkUserLoggedIsAdmin(final User userLogged, final SocialNetwork sn) throws AccessViolationException {
-	if (!sn.isAdmin(userLogged.getUserGroup())) {
+	if (!accessRightsService.get(userLogged, sn.getAccessLists()).isAdministrable()) {
 	    throw new AccessViolationException();
 	}
     }

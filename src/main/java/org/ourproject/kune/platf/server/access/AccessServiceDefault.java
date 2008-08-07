@@ -41,16 +41,12 @@ public class AccessServiceDefault implements AccessService {
     private final AccessRightsService accessRightsService;
     private final Group groupFinder;
 
+    @Inject
     public AccessServiceDefault(final FinderService finder, final AccessRightsService accessRightsService,
 	    final Group groupFinder) {
 	this.finder = finder;
 	this.accessRightsService = accessRightsService;
 	this.groupFinder = groupFinder;
-    }
-
-    @Inject
-    public AccessServiceDefault(final FinderService finder, final Group groupFinder) {
-	this(finder, new AccessRightsServiceDefault(), groupFinder);
     }
 
     public Content accessToContent(final Long contentId, final User user, final AccessType accessType)

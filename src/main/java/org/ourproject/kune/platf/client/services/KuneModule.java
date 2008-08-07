@@ -501,7 +501,7 @@ public class KuneModule extends AbstractModule {
 	    public GroupMembersSummary create() {
 		final GroupMembersSummaryPresenter presenter = new GroupMembersSummaryPresenter(i18n,
 			$(StateManager.class), $(ImageUtils.class), $(Session.class),
-			$$(SocialNetworkServiceAsync.class), $$(UserLiveSearcher.class), $(WsThemePresenter.class));
+			$$(SocialNetworkServiceAsync.class), $$(GroupLiveSearcher.class), $(WsThemePresenter.class));
 		final GroupMembersSummaryView view = new GroupMembersSummaryPanel(presenter, i18n, ws);
 		presenter.init(view);
 		return presenter;

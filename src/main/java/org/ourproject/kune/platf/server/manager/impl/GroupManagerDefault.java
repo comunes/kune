@@ -64,135 +64,131 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
     @Inject
     public GroupManagerDefault(final Provider<EntityManager> provider, final Group finder, final User userFinder,
-            final KuneProperties kuneProperties, final DatabaseProperties properties, final ToolRegistry registry,
-            final License licenseFinder) {
-        super(provider, Group.class);
-        this.finder = finder;
-        this.userFinder = userFinder;
-        this.kuneProperties = kuneProperties;
-        this.properties = properties;
-        this.registry = registry;
-        this.licenseFinder = licenseFinder;
-    }
-
-    public Group getDefaultGroup() {
-        final String shortName = properties.getDefaultSiteShortName();
-        return findByShortName(shortName);
-    }
-
-    public Group findByShortName(final String shortName) {
-        return finder.findByShortName(shortName);
-    }
-
-    public List<Group> findAdminInGroups(final Long groupId) {
-        return finder.findAdminInGroups(groupId);
-    }
-
-    public List<Group> findCollabInGroups(final Long groupId) {
-        return finder.findCollabInGroups(groupId);
-    }
-
-    public Group createUserGroup(final User user) throws GroupNameInUseException, EmailAddressInUseException {
-        String defaultSiteWorkspaceTheme = kuneProperties.get(KuneProperties.WS_THEMES_DEF);
-        final String licenseDefId = properties.getDefaultLicense();
-        final License licenseDef = licenseFinder.findByShortName(licenseDefId);
-        final Group group = new Group(user.getShortName(), user.getName(), licenseDef, GroupType.PERSONAL);
-        User userSameEmail = null;
-        try {
-            userSameEmail = userFinder.getByEmail(user.getEmail());
-        } catch (NoResultException e) {
-            // Ok, no more with this email
-        }
-        if (userSameEmail != null) {
-            throw new EmailAddressInUseException();
-        }
-        group.setAdmissionType(AdmissionType.Closed);
-        group.setWorkspaceTheme(defaultSiteWorkspaceTheme);
-        user.setUserGroup(group);
-        initSocialNetwork(group, group);
-        try {
-            initGroup(user, group);
-            super.persist(user, User.class);
-        } catch (final EntityExistsException e) {
-            throw new GroupNameInUseException();
-        }
-        return group;
-    }
-
-    public Group createGroup(final Group group, final User user) throws GroupNameInUseException,
-            UserMustBeLoggedException {
-        String defaultSiteWorkspaceTheme = kuneProperties.get(KuneProperties.WS_THEMES_DEF);
-        if (User.isKnownUser(user)) {
-            if (group.getType().equals(GroupType.COMMUNITY)) {
-                group.setAdmissionType(AdmissionType.Open);
-            } else if (group.getType().equals(GroupType.ORGANIZATION)) {
-                group.setAdmissionType(AdmissionType.Moderated);
-            } else if (group.getType().equals(GroupType.PROJECT)) {
-                group.setAdmissionType(AdmissionType.Moderated);
-            } else if (group.getType().equals(GroupType.ORPHANED_PROJECT)) {
-                group.setAdmissionType(AdmissionType.Open);
-            }
-            String licName = group.getDefaultLicense().getShortName();
-            License license = licenseFinder.findByShortName(licName);
-            group.setDefaultLicense(license);
-            group.setWorkspaceTheme(defaultSiteWorkspaceTheme);
-            initSocialNetwork(group, user.getUserGroup());
-            initGroup(user, group);
-            return group;
-        } else {
-            throw new UserMustBeLoggedException();
-        }
-
+	    final KuneProperties kuneProperties, final DatabaseProperties properties, final ToolRegistry registry,
+	    final License licenseFinder) {
+	super(provider, Group.class);
+	this.finder = finder;
+	this.userFinder = userFinder;
+	this.kuneProperties = kuneProperties;
+	this.properties = properties;
+	this.registry = registry;
+	this.licenseFinder = licenseFinder;
     }
 
     public void changeWsTheme(final User user, final Group group, final String theme) throws AccessViolationException {
-        if (group.getSocialNetwork().isAdmin(user.getUserGroup())) {
-            group.setWorkspaceTheme(theme);
-            // Check themes...
-        } else {
-            throw new AccessViolationException();
-        }
+	// TODO: check theme
+	group.setWorkspaceTheme(theme);
+    }
+
+    public Group createGroup(final Group group, final User user) throws GroupNameInUseException,
+	    UserMustBeLoggedException {
+	final String defaultSiteWorkspaceTheme = kuneProperties.get(KuneProperties.WS_THEMES_DEF);
+	if (User.isKnownUser(user)) {
+	    if (group.getType().equals(GroupType.COMMUNITY)) {
+		group.setAdmissionType(AdmissionType.Open);
+	    } else if (group.getType().equals(GroupType.ORGANIZATION)) {
+		group.setAdmissionType(AdmissionType.Moderated);
+	    } else if (group.getType().equals(GroupType.PROJECT)) {
+		group.setAdmissionType(AdmissionType.Moderated);
+	    } else if (group.getType().equals(GroupType.ORPHANED_PROJECT)) {
+		group.setAdmissionType(AdmissionType.Open);
+	    }
+	    final String licName = group.getDefaultLicense().getShortName();
+	    final License license = licenseFinder.findByShortName(licName);
+	    group.setDefaultLicense(license);
+	    group.setWorkspaceTheme(defaultSiteWorkspaceTheme);
+	    initSocialNetwork(group, user.getUserGroup());
+	    initGroup(user, group);
+	    return group;
+	} else {
+	    throw new UserMustBeLoggedException();
+	}
+
+    }
+
+    public Group createUserGroup(final User user) throws GroupNameInUseException, EmailAddressInUseException {
+	final String defaultSiteWorkspaceTheme = kuneProperties.get(KuneProperties.WS_THEMES_DEF);
+	final String licenseDefId = properties.getDefaultLicense();
+	final License licenseDef = licenseFinder.findByShortName(licenseDefId);
+	final Group group = new Group(user.getShortName(), user.getName(), licenseDef, GroupType.PERSONAL);
+	User userSameEmail = null;
+	try {
+	    userSameEmail = userFinder.getByEmail(user.getEmail());
+	} catch (final NoResultException e) {
+	    // Ok, no more with this email
+	}
+	if (userSameEmail != null) {
+	    throw new EmailAddressInUseException();
+	}
+	group.setAdmissionType(AdmissionType.Closed);
+	group.setWorkspaceTheme(defaultSiteWorkspaceTheme);
+	user.setUserGroup(group);
+	initSocialNetwork(group, group);
+	try {
+	    initGroup(user, group);
+	    super.persist(user, User.class);
+	} catch (final EntityExistsException e) {
+	    throw new GroupNameInUseException();
+	}
+	return group;
+    }
+
+    public List<Group> findAdminInGroups(final Long groupId) {
+	return finder.findAdminInGroups(groupId);
+    }
+
+    public Group findByShortName(final String shortName) {
+	return finder.findByShortName(shortName);
+    }
+
+    public List<Group> findCollabInGroups(final Long groupId) {
+	return finder.findCollabInGroups(groupId);
+    }
+
+    public Group getDefaultGroup() {
+	final String shortName = properties.getDefaultSiteShortName();
+	return findByShortName(shortName);
     }
 
     public Group getGroupOfUserWithId(final Long userId) {
-        return userId != null ? find(User.class, userId).getUserGroup() : null;
+	return userId != null ? find(User.class, userId).getUserGroup() : null;
     }
 
     public SearchResult<Group> search(final String search) {
-        return this.search(search, null, null);
+	return this.search(search, null, null);
     }
 
     public SearchResult<Group> search(final String search, final Integer firstResult, final Integer maxResults) {
-        MultiFieldQueryParser parser = new MultiFieldQueryParser(
-                new String[] { "longName", "shortName", "publicDesc" }, new StandardAnalyzer());
-        Query query;
-        try {
-            query = parser.parse(search);
-        } catch (ParseException e) {
-            throw new RuntimeException("Error parsing search");
-        }
-        return super.search(query, firstResult, maxResults);
-    }
-
-    private void initSocialNetwork(final Group group, final Group userGroup) {
-        final SocialNetwork network = group.getSocialNetwork();
-        final AccessLists lists = network.getAccessLists();
-        lists.getEditors().setMode(GroupListMode.NOBODY);
-        lists.getViewers().setMode(GroupListMode.EVERYONE);
-        if (!group.getType().equals(GroupType.ORPHANED_PROJECT)) {
-            network.addAdmin(userGroup);
-        }
+	final MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "longName", "shortName",
+		"publicDesc" }, new StandardAnalyzer());
+	Query query;
+	try {
+	    query = parser.parse(search);
+	} catch (final ParseException e) {
+	    throw new RuntimeException("Error parsing search");
+	}
+	return super.search(query, firstResult, maxResults);
     }
 
     private void initGroup(final User user, final Group group) throws GroupNameInUseException {
-        try {
-            persist(group);
-        } catch (final EntityExistsException e) {
-            throw new GroupNameInUseException();
-        }
-        for (final ServerTool tool : registry.all()) {
-            tool.initGroup(user, group);
-        }
+	try {
+	    persist(group);
+	} catch (final EntityExistsException e) {
+	    throw new GroupNameInUseException();
+	}
+	for (final ServerTool tool : registry.all()) {
+	    tool.initGroup(user, group);
+	}
+    }
+
+    private void initSocialNetwork(final Group group, final Group userGroup) {
+	final SocialNetwork network = group.getSocialNetwork();
+	final AccessLists lists = network.getAccessLists();
+	lists.getEditors().setMode(GroupListMode.NOBODY);
+	lists.getViewers().setMode(GroupListMode.EVERYONE);
+	if (!group.getType().equals(GroupType.ORPHANED_PROJECT)) {
+	    network.addAdmin(userGroup);
+	}
     }
 
 }

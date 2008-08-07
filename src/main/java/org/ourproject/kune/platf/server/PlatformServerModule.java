@@ -31,6 +31,8 @@ import org.ourproject.kune.platf.client.rpc.I18nService;
 import org.ourproject.kune.platf.client.rpc.SiteService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.server.access.AccessRightsService;
+import org.ourproject.kune.platf.server.access.AccessRightsServiceDefault;
 import org.ourproject.kune.platf.server.access.AccessService;
 import org.ourproject.kune.platf.server.access.AccessServiceDefault;
 import org.ourproject.kune.platf.server.access.FinderService;
@@ -39,6 +41,8 @@ import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.auth.AuthenticatedMethodInterceptor;
 import org.ourproject.kune.platf.server.auth.Authorizated;
 import org.ourproject.kune.platf.server.auth.AuthorizatedMethodInterceptor;
+import org.ourproject.kune.platf.server.auth.GroupAuthorizated;
+import org.ourproject.kune.platf.server.auth.GroupAuthorizatedMethodInterceptor;
 import org.ourproject.kune.platf.server.auth.SessionService;
 import org.ourproject.kune.platf.server.auth.SessionServiceDefault;
 import org.ourproject.kune.platf.server.content.CommentManager;
@@ -94,55 +98,58 @@ import com.wideplay.warp.persist.UnitOfWork;
 public class PlatformServerModule extends AbstractExtendedModule {
     @Override
     protected void configure() {
-        install(PersistenceService.usingJpa().across(UnitOfWork.TRANSACTION).buildModule());
-        bind(KunePersistenceService.class);
+	install(PersistenceService.usingJpa().across(UnitOfWork.TRANSACTION).buildModule());
+	bind(KunePersistenceService.class);
 
-        bindManagers();
-        bindRPC();
-        bindServices();
-        bind(KuneProperties.class).to(KunePropertiesDefault.class);
-        bind(Mapper.class).to(DozerMapper.class);
-        bind(ToolRegistry.class);
+	bindManagers();
+	bindRPC();
+	bindServices();
+	bind(KuneProperties.class).to(KunePropertiesDefault.class);
+	bind(Mapper.class).to(DozerMapper.class);
+	bind(ToolRegistry.class);
 
-        bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authenticated.class),
-                outermostCall(new AuthenticatedMethodInterceptor()));
-        bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authorizated.class),
-                outermostCall(new AuthorizatedMethodInterceptor()));
+	bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authenticated.class),
+		outermostCall(new AuthenticatedMethodInterceptor()));
+	bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authorizated.class),
+		outermostCall(new AuthorizatedMethodInterceptor()));
+	bindInterceptor(Matchers.any(), Matchers.annotatedWith(GroupAuthorizated.class),
+		outermostCall(new GroupAuthorizatedMethodInterceptor()));
     }
 
     private void bindManagers() {
-        bind(UserManager.class).to(UserManagerDefault.class);
-        bind(GroupManager.class).to(GroupManagerDefault.class);
-        bind(ContentManager.class).to(ContentManagerDefault.class);
-        bind(ToolConfigurationManager.class).to(ToolConfigurationManagerDefault.class);
-        bind(ContainerManager.class).to(ContainerManagerDefault.class);
-        bind(LicenseManager.class).to(LicenseManagerDefault.class);
-        bind(SocialNetworkManager.class).to(SocialNetworkManagerDefault.class);
-        bind(XmppManager.class).to(XmppManagerDefault.class);
-        bind(RateManager.class).to(RateManagerDefault.class);
-        bind(I18nCountryManager.class).to(I18nCountryManagerDefault.class);
-        bind(I18nLanguageManager.class).to(I18nLanguageManagerDefault.class);
-        bind(I18nTranslationManager.class).to(I18nTranslationManagerDefault.class);
-        bind(TagManager.class).to(TagManagerDefault.class);
-        bind(CommentManager.class).to(CommentManagerDefault.class);
+	bind(UserManager.class).to(UserManagerDefault.class);
+	bind(GroupManager.class).to(GroupManagerDefault.class);
+	bind(ContentManager.class).to(ContentManagerDefault.class);
+	bind(ToolConfigurationManager.class).to(ToolConfigurationManagerDefault.class);
+	bind(ContainerManager.class).to(ContainerManagerDefault.class);
+	bind(LicenseManager.class).to(LicenseManagerDefault.class);
+	bind(SocialNetworkManager.class).to(SocialNetworkManagerDefault.class);
+	bind(XmppManager.class).to(XmppManagerDefault.class);
+	bind(RateManager.class).to(RateManagerDefault.class);
+	bind(I18nCountryManager.class).to(I18nCountryManagerDefault.class);
+	bind(I18nLanguageManager.class).to(I18nLanguageManagerDefault.class);
+	bind(I18nTranslationManager.class).to(I18nTranslationManagerDefault.class);
+	bind(TagManager.class).to(TagManagerDefault.class);
+	bind(CommentManager.class).to(CommentManagerDefault.class);
     }
 
     private void bindRPC() {
-        bind(SiteService.class).to(SiteRPC.class);
-        bind(GroupService.class).to(GroupRPC.class);
-        bind(ContentService.class).to(ContentRPC.class);
-        bind(UserService.class).to(UserRPC.class);
-        bind(SocialNetworkService.class).to(SocialNetworkRPC.class);
-        bind(I18nService.class).to(I18nRPC.class);
+	bind(SiteService.class).to(SiteRPC.class);
+	bind(GroupService.class).to(GroupRPC.class);
+	bind(ContentService.class).to(ContentRPC.class);
+	bind(UserService.class).to(UserRPC.class);
+	bind(SocialNetworkService.class).to(SocialNetworkRPC.class);
+	bind(I18nService.class).to(I18nRPC.class);
     }
 
     private void bindServices() {
-        bind(UserInfoService.class).to(UserInfoServiceDefault.class);
-        bind(CreationService.class).to(CreationServiceDefault.class);
-        bind(AccessService.class).to(AccessServiceDefault.class);
-        bind(FinderService.class).to(FinderServiceDefault.class);
-        bind(StateService.class).to(StateServiceDefault.class);
-        bind(I18nTranslationService.class).to(I18nTranslationServiceDefault.class);
-        bind(SessionService.class).to(SessionServiceDefault.class);
+	bind(UserInfoService.class).to(UserInfoServiceDefault.class);
+	bind(CreationService.class).to(CreationServiceDefault.class);
+	bind(AccessRightsService.class).to(AccessRightsServiceDefault.class);
+	bind(AccessService.class).to(AccessServiceDefault.class);
+	bind(FinderService.class).to(FinderServiceDefault.class);
+	bind(StateService.class).to(StateServiceDefault.class);
+	bind(I18nTranslationService.class).to(I18nTranslationServiceDefault.class);
+	bind(SessionService.class).to(SessionServiceDefault.class);
     }
 }

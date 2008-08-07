@@ -27,7 +27,7 @@ import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.access.AccessType;
 import org.ourproject.kune.platf.server.auth.Authenticated;
-import org.ourproject.kune.platf.server.auth.Authorizated;
+import org.ourproject.kune.platf.server.auth.GroupAuthorizated;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
@@ -58,7 +58,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     }
 
     @Authenticated
-    @Authorizated(accessTypeRequired = AccessType.ADMIN)
+    @GroupAuthorizated(accessTypeRequired = AccessType.ADMIN)
     @Transactional(type = TransactionType.READ_WRITE)
     public SocialNetworkResultDTO AcceptJoinGroup(final String hash, final String groupShortName,
 	    final String groupToAcceptShortName) throws DefaultException {
@@ -71,7 +71,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     }
 
     @Authenticated
-    @Authorizated(accessTypeRequired = AccessType.ADMIN)
+    @GroupAuthorizated(accessTypeRequired = AccessType.ADMIN)
     @Transactional(type = TransactionType.READ_WRITE)
     public SocialNetworkResultDTO addAdminMember(final String hash, final String groupShortName,
 	    final String groupToAddShortName) throws DefaultException {
@@ -84,7 +84,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     }
 
     @Authenticated
-    @Authorizated(accessTypeRequired = AccessType.ADMIN)
+    @GroupAuthorizated(accessTypeRequired = AccessType.ADMIN)
     @Transactional(type = TransactionType.READ_WRITE)
     public SocialNetworkResultDTO addCollabMember(final String hash, final String groupShortName,
 	    final String groupToAddShortName) throws DefaultException {
@@ -97,7 +97,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     }
 
     @Authenticated
-    @Authorizated(accessTypeRequired = AccessType.ADMIN)
+    @GroupAuthorizated(accessTypeRequired = AccessType.ADMIN)
     @Transactional(type = TransactionType.READ_WRITE)
     public SocialNetworkResultDTO addViewerMember(final String hash, final String groupShortName,
 	    final String groupToAddShortName) throws DefaultException {
@@ -110,7 +110,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     }
 
     @Authenticated
-    @Authorizated(accessTypeRequired = AccessType.ADMIN)
+    @GroupAuthorizated(accessTypeRequired = AccessType.ADMIN)
     @Transactional(type = TransactionType.READ_WRITE)
     public SocialNetworkResultDTO deleteMember(final String hash, final String groupShortName,
 	    final String groupToDeleleShortName) throws DefaultException {
@@ -123,7 +123,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     }
 
     @Authenticated
-    @Authorizated(accessTypeRequired = AccessType.ADMIN)
+    @GroupAuthorizated(accessTypeRequired = AccessType.ADMIN)
     @Transactional(type = TransactionType.READ_WRITE)
     public SocialNetworkResultDTO denyJoinGroup(final String hash, final String groupShortName,
 	    final String groupToDenyShortName) throws DefaultException {
@@ -137,7 +137,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
 
     @Authenticated(mandatory = false)
     // At least you can access as Viewer to the Group
-    @Authorizated(accessTypeRequired = AccessType.READ)
+    @GroupAuthorizated(accessTypeRequired = AccessType.READ)
     @Transactional(type = TransactionType.READ_ONLY)
     public SocialNetworkDTO getGroupMembers(final String hash, final String groupShortName) throws DefaultException {
 	final UserSession userSession = getUserSession();
@@ -148,7 +148,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
 
     @Authenticated(mandatory = false)
     // At least you can access as Viewer to the Group
-    @Authorizated(accessTypeRequired = AccessType.READ)
+    @GroupAuthorizated(accessTypeRequired = AccessType.READ)
     @Transactional(type = TransactionType.READ_ONLY)
     public ParticipationDataDTO getParticipation(final String hash, final String groupShortName)
 	    throws DefaultException {
@@ -168,7 +168,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     }
 
     @Authenticated
-    @Authorizated(accessTypeRequired = AccessType.ADMIN)
+    @GroupAuthorizated(accessTypeRequired = AccessType.ADMIN)
     @Transactional(type = TransactionType.READ_WRITE)
     public SocialNetworkResultDTO setAdminAsCollab(final String hash, final String groupShortName,
 	    final String groupToSetCollabShortName) throws DefaultException {
@@ -181,7 +181,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     }
 
     @Authenticated
-    @Authorizated(accessTypeRequired = AccessType.ADMIN)
+    @GroupAuthorizated(accessTypeRequired = AccessType.ADMIN)
     @Transactional(type = TransactionType.READ_WRITE)
     public SocialNetworkResultDTO setCollabAsAdmin(final String hash, final String groupShortName,
 	    final String groupToSetAdminShortName) throws DefaultException {

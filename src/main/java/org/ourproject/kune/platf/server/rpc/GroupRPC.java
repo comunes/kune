@@ -29,7 +29,7 @@ import org.ourproject.kune.platf.client.rpc.GroupService;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.access.AccessType;
 import org.ourproject.kune.platf.server.auth.Authenticated;
-import org.ourproject.kune.platf.server.auth.Authorizated;
+import org.ourproject.kune.platf.server.auth.GroupAuthorizated;
 import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
@@ -60,7 +60,7 @@ public class GroupRPC implements RPC, GroupService {
     }
 
     @Authenticated
-    @Authorizated(accessTypeRequired = AccessType.ADMIN)
+    @GroupAuthorizated(accessTypeRequired = AccessType.ADMIN)
     @Transactional(type = TransactionType.READ_WRITE, rollbackOn = DefaultException.class)
     public void changeGroupWsTheme(final String userHash, final String groupShortName, final String theme)
 	    throws DefaultException {

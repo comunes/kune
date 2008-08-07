@@ -18,7 +18,7 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridButton;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
-import org.ourproject.kune.workspace.client.search.UserLiveSearcher;
+import org.ourproject.kune.workspace.client.search.GroupLiveSearcher;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
@@ -42,7 +42,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
     public GroupMembersSummaryPresenter(final I18nUITranslationService i18n, final StateManager stateManager,
 	    final ImageUtils imageUtils, final Session session,
 	    final Provider<SocialNetworkServiceAsync> snServiceProvider,
-	    final Provider<UserLiveSearcher> userLiveSearcherProvider, final WsThemePresenter wsThemePresenter) {
+	    final Provider<GroupLiveSearcher> liveSearcherProvider, final WsThemePresenter wsThemePresenter) {
 	super(i18n, stateManager, imageUtils, session, snServiceProvider);
 	this.i18n = i18n;
 	this.stateManager = stateManager;
@@ -73,12 +73,12 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
 	addMember = new GridButton("images/add-green.gif", "", i18n
 		.t("Add a group or a person as member of this group"), new Slot<String>() {
 	    public void onEvent(final String parameter) {
-		userLiveSearcherProvider.get().onSelection(new Slot<LinkDTO>() {
+		liveSearcherProvider.get().onSelection(new Slot<LinkDTO>() {
 		    public void onEvent(final LinkDTO link) {
 			view.confirmAddCollab(link.getShortName(), link.getLongName());
 		    }
 		});
-		userLiveSearcherProvider.get().show();
+		liveSearcherProvider.get().show();
 	    }
 	});
 	super.addGroupOperation(gotoGroupMenuItem, false);
