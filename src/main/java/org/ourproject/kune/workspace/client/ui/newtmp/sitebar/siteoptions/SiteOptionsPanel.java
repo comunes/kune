@@ -21,8 +21,8 @@ public class SiteOptionsPanel implements SiteOptionsView {
 	    final I18nUITranslationService i18n, final Provider<I18nTranslator> translatorProvider) {
 	final PushButton optionsButton = new PushButton("");
 	// optionsButton.setText(i18n.t("Options"));
-	optionsButton.setHTML("<div style=\"text-align: center;\">" + i18n.t("Options")
-		+ "<img style=\"vertical-align: middle;\" src=\"images/arrowdown.png\" /></div>");
+	optionsButton.setHTML(i18n.t("Options")
+		+ "<img style=\"vertical-align: middle;\" src=\"images/arrowdown.png\" />");
 	optionsButton.setStyleName("k-sitebar-labellink");
 	ws.getSiteBar().addSeparator();
 	ws.getSiteBar().add(optionsButton);

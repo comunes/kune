@@ -51,8 +51,7 @@ public class SiteUserMenuPanel implements SiteUserMenuView {
     }
 
     public void setLoggedUserName(final String name) {
-	loggedUserMenu.setHTML("<div style=\"text-align: center;\">" + name
-		+ "<img style=\"vertical-align: middle;\" src=\"images/arrowdown.png\" /></div>");
+	loggedUserMenu.setHTML(name + "<img style=\"vertical-align: middle;\" src=\"images/arrowdown.png\" />");
     }
 
     public void setParticipation(final MenuItemCollection<GroupDTO> participateInGroups) {

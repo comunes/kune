@@ -232,7 +232,7 @@ public interface Images extends ImageBundle {
     @Resource("org/ourproject/kune/platf/public/images/button-help-light.png")
     AbstractImagePrototype buttonHelpLight();
 
-    @Resource("org/ourproject/kune/platf/public/images/button-sitebar-arrow-down.gif")
+    @Resource("org/ourproject/kune/platf/public/images/arrowdown.gif")
     AbstractImagePrototype buttonSitebarArrowDown();
 
     @Resource("org/ourproject/kune/platf/public/images/by80x15.png")
