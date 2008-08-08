@@ -15,6 +15,7 @@ public class SiteSignInLinkPanel implements SiteSignInLinkView {
 	signInHyperlink.setText(i18n.t("Sign in to collaborate"));
 	signInHyperlink.setTargetHistoryToken(SiteToken.signin.toString());
 	ws.getSiteBar().add(signInHyperlink);
+	ws.getSiteBar().addSpacer();
     }
 
     public void setVisible(final boolean visible) {

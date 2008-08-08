@@ -632,6 +632,12 @@ public class KuneModule extends AbstractModule {
 	    }
 	});
 
+	$(StateManager.class).addSiteToken(SiteToken.translate.toString(), new Slot<StateToken>() {
+	    public void onEvent(final StateToken previousStateToken) {
+		$(I18nTranslator.class).doShowTranslator();
+	    }
+	});
+
 	final KunePlatform platform = $(KunePlatform.class);
 	$(Application.class).init(platform.getIndexedTools());
 	$(Application.class).subscribeActions(platform.getActions());

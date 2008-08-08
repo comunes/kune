@@ -35,7 +35,7 @@ public class SiteUserMenuPanel implements SiteUserMenuView {
 	    }
 	});
 	final Item userPreferences = new Item(i18n.t("Your preferences"));
-	userPreferences.setIcon("");
+	userPreferences.setIcon("images/kune-preferences.gif");
 	userPreferences.addListener(new BaseItemListenerAdapter() {
 	    @Override
 	    public void onClick(final BaseItem item, final EventObject e) {
@@ -51,7 +51,8 @@ public class SiteUserMenuPanel implements SiteUserMenuView {
     }
 
     public void setLoggedUserName(final String name) {
-	loggedUserMenu.setText(name);
+	loggedUserMenu.setHTML("<div style=\"text-align: center;\">" + name
+		+ "<img style=\"vertical-align: middle;\" src=\"images/arrowdown.png\" /></div>");
     }
 
     public void setParticipation(final MenuItemCollection<GroupDTO> participateInGroups) {

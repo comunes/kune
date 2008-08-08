@@ -171,7 +171,7 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
 	unTransCenterPanel.add(unTransGrid);
 	transCenterPanel.add(transGrid);
 	final Frame recommFrame = new Frame("html/i18n-recom.html");
-	// recommFrame.setHeight("220");
+	recommFrame.setHeight("auto");
 	recommendationPanel.add(recommFrame);
 
 	center.add(unTransCenterPanel);

@@ -16,6 +16,5 @@ public class SiteNewGroupLinkPanel implements SiteNewGroupLinkView {
 	ws.getSiteBar().addSeparator();
 	ws.getSiteBar().add(newGroupHyperlink);
 	ws.getSiteBar().addSpacer();
-	ws.getSiteBar().addSpacer();
     }
 }

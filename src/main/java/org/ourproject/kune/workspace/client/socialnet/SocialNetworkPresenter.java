@@ -136,20 +136,23 @@ public class SocialNetworkPresenter {
     private GridItem<GroupDTO> createDefMemberMenu(final GroupDTO group, final GridGroup gridGroup) {
 	final CustomMenu<GroupDTO> menu = new CustomMenu<GroupDTO>(group);
 	final String longName = group.getLongName();
-	final String toolTip = i18n.t(group.getType().equals(GroupType.PERSONAL) ? "User nickname: [%s]"
-		: "Group short name: [%s]", group.getShortName());
-	final GridItem<GroupDTO> gridItem = new GridItem<GroupDTO>(group, gridGroup, group.getShortName(), imageUtils
-		.getImageHtml(ImageDescriptor.groupDefIcon), longName, longName, " ", longName, toolTip, menu);
-	if (!group.getType().equals(GroupType.PERSONAL)) {
+	boolean isPersonal = group.getType().equals(GroupType.PERSONAL);
+	final String toolTip = i18n.t(isPersonal ? "User nickname: [%s]" : "Group short name: [%s]", group
+		.getShortName());
+	final String imageHtml = isPersonal ? imageUtils.getImageHtml(ImageDescriptor.personDef) : imageUtils
+		.getImageHtml(ImageDescriptor.groupDefIcon);
+	final GridItem<GroupDTO> gridItem = new GridItem<GroupDTO>(group, gridGroup, group.getShortName(), imageHtml,
+		longName, longName, " ", longName, toolTip, menu);
+	if (!isPersonal) {
 	    menu.addMenuItemList(otherOperations);
 	}
-	if (session.isLogged() && !group.getType().equals(GroupType.PERSONAL)) {
+	if (session.isLogged() && !isPersonal) {
 	    menu.addMenuItemList(otherLoggedOperations);
 	}
-	if (group.getType().equals(GroupType.PERSONAL)) {
+	if (isPersonal) {
 	    menu.addMenuItemList(otherOperationsUsers);
 	}
-	if (session.isLogged() && group.getType().equals(GroupType.PERSONAL)) {
+	if (session.isLogged() && isPersonal) {
 	    menu.addMenuItemList(otherLoggedOperationsUsers);
 	}
 

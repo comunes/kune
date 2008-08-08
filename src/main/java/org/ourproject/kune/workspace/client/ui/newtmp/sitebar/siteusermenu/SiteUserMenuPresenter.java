@@ -47,11 +47,12 @@ public class SiteUserMenuPresenter implements SiteUserMenu {
     }
 
     private void addPartipation(final GroupDTO group) {
-	participateInGroups.add(new MenuItem<GroupDTO>("", group.getShortName(), new Slot<GroupDTO>() {
-	    public void onEvent(final GroupDTO param) {
-		stateManager.gotoToken(group.getShortName());
-	    }
-	}));
+	participateInGroups.add(new MenuItem<GroupDTO>("images/group-def-icon.gif", group.getShortName(),
+		new Slot<GroupDTO>() {
+		    public void onEvent(final GroupDTO param) {
+			stateManager.gotoToken(group.getShortName());
+		    }
+		}));
     }
 
     private void onUserSignIn(final UserInfoDTO userInfoDTO) {
