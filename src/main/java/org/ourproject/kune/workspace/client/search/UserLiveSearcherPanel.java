@@ -24,7 +24,7 @@ import org.ourproject.kune.platf.client.services.I18nTranslationService;
 public class UserLiveSearcherPanel extends EntityLiveSearcherPanel {
 
     public UserLiveSearcherPanel(final EntityLiveSearcherPresenter presenter, final I18nTranslationService i18n) {
-	super(presenter, EntityLiveSearcherView.SEARCH_USERS, i18n);
+	super(presenter, EntityLiveSearcherType.users, i18n);
     }
 
 }

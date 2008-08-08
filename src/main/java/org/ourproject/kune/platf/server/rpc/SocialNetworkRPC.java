@@ -21,6 +21,7 @@ package org.ourproject.kune.platf.server.rpc;
 
 import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
+import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
 import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
@@ -160,7 +161,8 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
-    public String requestJoinGroup(final String hash, final String groupShortName) throws DefaultException {
+    public SocialNetworkRequestResult requestJoinGroup(final String hash, final String groupShortName)
+	    throws DefaultException {
 	final UserSession userSession = getUserSession();
 	final User user = userSession.getUser();
 	final Group group = groupManager.findByShortName(groupShortName);

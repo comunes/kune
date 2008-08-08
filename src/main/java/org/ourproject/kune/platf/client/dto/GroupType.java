@@ -17,8 +17,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.server.domain;
+package org.ourproject.kune.platf.client.dto;
 
-public enum GroupType {
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+public enum GroupType implements IsSerializable {
     ORGANIZATION, COMMUNITY, PROJECT, ORPHANED_PROJECT, PERSONAL
 }

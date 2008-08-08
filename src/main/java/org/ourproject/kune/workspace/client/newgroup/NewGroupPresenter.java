@@ -21,6 +21,7 @@ package org.ourproject.kune.workspace.client.newgroup;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
@@ -151,15 +152,15 @@ public class NewGroupPresenter implements NewGroup {
 	view.setMessage(message, type);
     }
 
-    private String getTypeOfGroup() {
+    private GroupType getTypeOfGroup() {
 	if (view.isProject()) {
-	    return GroupDTO.PROJECT;
+	    return GroupType.PROJECT;
 	} else if (view.isOrphanedProject()) {
-	    return GroupDTO.ORPHANED_PROJECT;
+	    return GroupType.ORPHANED_PROJECT;
 	} else if (view.isOrganization()) {
-	    return GroupDTO.ORGANIZATION;
+	    return GroupType.ORGANIZATION;
 	} else {
-	    return GroupDTO.COMMUNITY;
+	    return GroupType.COMMUNITY;
 	}
     }
 

@@ -82,7 +82,8 @@ class ChatEngineXmpp implements ChatEngine {
 	if (traybarButton == null) {
 	    traybarButton = new ToolbarButton();
 	    traybarButton.setTooltip(i18n.t("Show/hide the chat window"));
-	    traybarButton.setIcon("images/emite-chat.gif");
+	    // traybarButton.setIcon("images/emite-chat.gif");
+	    traybarButton.setIcon("images/e-icon.gif");
 	    traybarButton.addListener(new ButtonListenerAdapter() {
 		@Override
 		public void onClick(final Button button, final EventObject e) {
@@ -92,9 +93,18 @@ class ChatEngineXmpp implements ChatEngine {
 			emiteDialog.show();
 		    }
 		}
-
 	    });
 	    ws.getSiteTraybar().addButton(traybarButton);
+	    emiteDialog.onChatAttended(new Slot<String>() {
+		public void onEvent(final String parameter) {
+		    traybarButton.setIcon("images/e-icon.gif");
+		}
+	    });
+	    emiteDialog.onChatUnattendedWithActivity(new Slot<String>() {
+		public void onEvent(final String parameter) {
+		    traybarButton.setIcon("images/e-icon-a.gif");
+		}
+	    });
 	}
 	emiteDialog.setEnableStatusUI(true);
 	emiteDialog.hide();

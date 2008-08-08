@@ -20,20 +20,16 @@
 
 package org.ourproject.kune.platf.client.dto;
 
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class GroupDTO implements IsSerializable {
-    public static final String ORGANIZATION = "ORGANIZATION";
-    public static final String COMMUNITY = "COMMUNITY";
-    public static final String PROJECT = "PROJECT";
-    public static final String ORPHANED_PROJECT = "ORPHANED_PROJECT";
-    public static final String PERSONAL = "PERSONAL";
 
     private Long id;
     private String shortName;
     private String longName;
     private String publicDesc;
-    private String type;
+    private GroupType type;
     private String defaultToolName;
     private Long defaultFolderId;
     private Long defaultContentId;
@@ -42,10 +38,10 @@ public class GroupDTO implements IsSerializable {
     private String tags;
 
     public GroupDTO() {
-	this(null, null, null, ORGANIZATION);
+	this(null, null, null, GroupType.ORGANIZATION);
     }
 
-    public GroupDTO(final String shortName, final String longName, final String publicDesc, final String type) {
+    public GroupDTO(final String shortName, final String longName, final String publicDesc, final GroupType type) {
 	this.shortName = shortName;
 	this.longName = longName;
 	this.publicDesc = publicDesc;
@@ -158,7 +154,7 @@ public class GroupDTO implements IsSerializable {
 	return tags;
     }
 
-    public String getType() {
+    public GroupType getType() {
 	return type;
     }
 
@@ -217,7 +213,7 @@ public class GroupDTO implements IsSerializable {
 	this.tags = tags;
     }
 
-    public void setType(final String type) {
+    public void setType(final GroupType type) {
 	this.type = type;
     }
 

@@ -49,12 +49,12 @@ public class EntityLiveSearcherPanel implements EntityLiveSearcherView {
     private static final int PAGINATION_SIZE = 10;
     private final EntityLiveSearcherPresenter presenter;
     private BasicDialog dialog;
-    private final int searchType;
+    private final EntityLiveSearcherType searchType;
     private FormPanel searchForm;
     private final I18nTranslationService i18n;
 
-    public EntityLiveSearcherPanel(final EntityLiveSearcherPresenter presenter, final int searchType,
-	    final I18nTranslationService i18n) {
+    public EntityLiveSearcherPanel(final EntityLiveSearcherPresenter presenter,
+	    final EntityLiveSearcherType searchType, final I18nTranslationService i18n) {
 	this.presenter = presenter;
 	this.searchType = searchType;
 	this.i18n = i18n;
@@ -77,9 +77,9 @@ public class EntityLiveSearcherPanel implements EntityLiveSearcherView {
 	dialog.center();
     }
 
-    private void createGroupSearchDialog(final int searchType) {
+    private void createGroupSearchDialog(final EntityLiveSearcherType searchType) {
 	String title;
-	if (searchType == EntityLiveSearcherView.SEARCH_GROUPS) {
+	if (searchType.equals(EntityLiveSearcherType.groups)) {
 	    title = i18n.t("Search existing users and groups");
 	} else {
 	    title = i18n.t("Search existing users");
@@ -90,10 +90,10 @@ public class EntityLiveSearcherPanel implements EntityLiveSearcherView {
 
 	DataProxy dataProxy = null;
 	switch (searchType) {
-	case EntityLiveSearcherView.SEARCH_GROUPS:
+	case groups:
 	    dataProxy = new HttpProxy("/kune/json/GroupJSONService/search", Connection.POST);
 	    break;
-	case EntityLiveSearcherView.SEARCH_USERS:
+	case users:
 	    dataProxy = new HttpProxy("/kune/json/UserJSONService/search", Connection.POST);
 	    break;
 	default:

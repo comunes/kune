@@ -6,6 +6,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.Toolbar;
 import com.gwtext.client.widgets.event.ContainerListener;
+import com.gwtext.client.widgets.layout.FitLayout;
 
 public class EntitySummary {
     private final Panel entityTools;
@@ -16,13 +17,14 @@ public class EntitySummary {
     public EntitySummary() {
 	mainPanel = new DefaultBorderLayout();
 	entityTools = new Panel();
+	entityTools.setLayout(new FitLayout());
 	entityTools.setAutoHeight(true);
 	entitySummary = new Panel();
-	entitySummary.setCls("k-entity-summary");
 	entityTools.setBorder(false);
 	entitySummary.setBorder(false);
 	entityTools.setAutoScroll(false);
 	entitySummary.setAutoScroll(true);
+	entitySummary.setCls("k-entity-summary");
 	trayBar = mainPanel.createBottomBar(entitySummary, "k-site-traybar");
 	mainPanel.add(entityTools, DefaultBorderLayout.Position.NORTH);
 	mainPanel.add(entitySummary, DefaultBorderLayout.Position.CENTER);
@@ -31,15 +33,16 @@ public class EntitySummary {
 
     public void addInSummary(final Widget widget) {
 	entitySummary.add(widget);
+	entitySummary.syncSize();
 	mainPanel.doLayoutIfNeeded();
     }
 
     public void addInTools(final Widget widget) {
 	entityTools.add(widget);
+	mainPanel.syncSize();
 	if (entityTools.isRendered()) {
 	    entityTools.doLayout(false);
 	}
-	mainPanel.doLayoutIfNeeded();
     }
 
     public void addListener(final ContainerListener listener) {

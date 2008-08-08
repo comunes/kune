@@ -5,6 +5,7 @@ import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.ExtElement;
 import com.gwtext.client.widgets.MessageBox;
 import com.gwtext.client.widgets.Panel;
@@ -35,8 +36,8 @@ public class WorkspaceSkeleton {
 	new Viewport(container);
     }
 
-    public Panel getEntityMainHeader() {
-	return entity.getEntityMainHeader();
+    public void addToEntityMainHeader(final Widget widget) {
+	entity.addToEntityMainHeader(widget);
     }
 
     public EntitySummary getEntitySummary() {

@@ -32,7 +32,6 @@ import org.ourproject.kune.platf.client.rpc.SiteService;
 import org.ourproject.kune.platf.client.rpc.SiteServiceAsync;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.tool.ClientTool;
 import org.ourproject.kune.platf.client.ui.WindowUtils;
 import org.ourproject.kune.platf.client.utils.PrefetchUtilities;
@@ -54,7 +53,6 @@ public class ApplicationDefault implements Application {
     private final Session session;
     private final Signal0 onApplicationStart;
     private final Signal0 onApplicationStop;
-    private StateManager stateManager;
 
     public ApplicationDefault(final Session session, final KuneErrorHandler errorHandler, final WorkspaceSkeleton ws) {
 	this.session = session;
@@ -76,8 +74,7 @@ public class ApplicationDefault implements Application {
 	return tools.get(toolName);
     }
 
-    public void init(final StateManager stateManager, final HashMap<String, ClientTool> tools) {
-	this.stateManager = stateManager;
+    public void init(final HashMap<String, ClientTool> tools) {
 	this.tools = tools;
     }
 
@@ -127,7 +124,6 @@ public class ApplicationDefault implements Application {
 		checkChatDomain(initData.getChatDomain());
 		session.setInitData(initData);
 		session.setCurrentUserInfo(initData.getUserInfo());
-		stateManager.reload();
 		RootPanel.get("kuneinitialcurtain").setVisible(false);
 	    }
 

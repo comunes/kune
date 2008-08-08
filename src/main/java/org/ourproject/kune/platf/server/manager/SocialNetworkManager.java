@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.platf.server.manager;
 
+import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.server.ParticipationData;
@@ -47,7 +48,7 @@ public interface SocialNetworkManager extends Manager<SocialNetwork, Long> {
 
     ParticipationData findParticipation(User user, Group group) throws DefaultException;
 
-    String requestToJoin(User user, Group inGroup) throws DefaultException;
+    SocialNetworkRequestResult requestToJoin(User user, Group inGroup) throws DefaultException;
 
     void setAdminAsCollab(User userLogged, Group group, Group inGroup) throws DefaultException;
 

@@ -133,6 +133,7 @@ import org.ourproject.kune.workspace.client.ui.newtmp.title.EntityTitlePresenter
 import com.calclab.emiteuimodule.client.EmiteUIModule;
 import com.calclab.suco.client.container.Container;
 import com.calclab.suco.client.modules.AbstractModule;
+import com.calclab.suco.client.modules.ModuleManager.ProviderRegisterStrategy;
 import com.calclab.suco.client.provider.Factory;
 import com.calclab.suco.client.scopes.SingletonScope;
 import com.calclab.suco.client.signal.Slot;
@@ -143,9 +144,6 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 public class KuneModule extends AbstractModule {
-    public KuneModule() {
-	super(KuneModule.class);
-    }
 
     @Override
     public void onLoad() {
@@ -594,7 +592,8 @@ public class KuneModule extends AbstractModule {
 	    }
 	});
 
-	load(new EmiteUIModule(), new DocumentClientNewModule(), new ChatClientNewModule());
+	install(ProviderRegisterStrategy.registerOnlyIfNotRegistered, new EmiteUIModule(),
+		new DocumentClientNewModule(), new ChatClientNewModule());
 
 	$(SitePublicSpaceLink.class);
 	$(SiteMessage.class);
@@ -632,7 +631,7 @@ public class KuneModule extends AbstractModule {
 	});
 
 	final KunePlatform platform = $(KunePlatform.class);
-	$(Application.class).init($(StateManager.class), platform.getIndexedTools());
+	$(Application.class).init(platform.getIndexedTools());
 	$(Application.class).subscribeActions(platform.getActions());
 	$(Application.class).start();
 

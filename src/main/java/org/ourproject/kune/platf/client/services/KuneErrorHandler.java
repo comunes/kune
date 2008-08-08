@@ -37,6 +37,7 @@ import com.calclab.suco.client.container.Provider;
 import com.calclab.suco.client.signal.Signal0;
 import com.calclab.suco.client.signal.Slot0;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
 
 public class KuneErrorHandler {
     private final Session session;
@@ -83,6 +84,8 @@ public class KuneErrorHandler {
 	    logException(e);
 	    Site.error(i18n.t("Group not found"));
 	    stateManagerProvider.get().gotoToken("");
+	} catch (final IncompatibleRemoteServiceException e) {
+	    Site.error(i18n.t("Your browser is outdated from the server software. Please reload this page."));
 	} catch (final ContentNotFoundException e) {
 	    logException(e);
 	    Site.error(i18n.t("Content not found"));

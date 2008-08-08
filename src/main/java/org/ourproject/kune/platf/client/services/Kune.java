@@ -24,12 +24,13 @@ import com.calclab.suco.client.Suco;
 import com.calclab.suco.client.container.Container;
 import com.calclab.suco.client.container.DelegatedContainer;
 import com.calclab.suco.client.modules.Module;
+import com.calclab.suco.client.modules.ModuleManager.ProviderRegisterStrategy;
 
 public class Kune extends DelegatedContainer {
 
     public static Kune create(final Module... modules) {
 	final Container container = Suco.create(modules);
-	Suco.add(container, new KuneModule());
+	Suco.install(container, ProviderRegisterStrategy.registerOnlyIfNotRegistered, new KuneModule());
 	return container.getInstance(Kune.class);
     }
 

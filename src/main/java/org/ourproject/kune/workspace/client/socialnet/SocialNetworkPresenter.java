@@ -2,7 +2,8 @@ package org.ourproject.kune.workspace.client.socialnet;
 
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
+import org.ourproject.kune.platf.client.dto.GroupType;
+import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
 import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
@@ -106,16 +107,18 @@ public class SocialNetworkPresenter {
 			session.getCurrentState().getGroup().getShortName(), new AsyncCallbackSimple<Object>() {
 			    public void onSuccess(final Object result) {
 				Site.hideProgress();
-				final String resultType = (String) result;
-				if (resultType == SocialNetworkDTO.REQ_JOIN_ACEPTED) {
+				final SocialNetworkRequestResult resultType = (SocialNetworkRequestResult) result;
+				switch (resultType) {
+				case accepted:
 				    Site.info(i18n.t("You are now member of this group"));
 				    stateManager.reload();
-				}
-				if (resultType == SocialNetworkDTO.REQ_JOIN_DENIED) {
+				    break;
+				case denied:
 				    Site.important(i18n.t("Sorry this is a closed group"));
-				}
-				if (resultType == SocialNetworkDTO.REQ_JOIN_WAITING_MODERATION) {
+				    break;
+				case moderated:
 				    Site.info(i18n.t("Requested. Waiting for admins decision"));
+				    break;
 				}
 			    }
 			});
@@ -133,20 +136,20 @@ public class SocialNetworkPresenter {
     private GridItem<GroupDTO> createDefMemberMenu(final GroupDTO group, final GridGroup gridGroup) {
 	final GridMenu<GroupDTO> menu = new GridMenu<GroupDTO>(group);
 	final String longName = group.getLongName();
-	final String toolTip = i18n.t(group.getType().equals(GroupDTO.PERSONAL) ? "User nickname: [%s]"
+	final String toolTip = i18n.t(group.getType().equals(GroupType.PERSONAL) ? "User nickname: [%s]"
 		: "Group short name: [%s]", group.getShortName());
 	final GridItem<GroupDTO> gridItem = new GridItem<GroupDTO>(group, gridGroup, group.getShortName(), imageUtils
 		.getImageHtml(ImageDescriptor.groupDefIcon), longName, longName, " ", longName, toolTip, menu);
-	if (!group.getType().equals(GroupDTO.PERSONAL)) {
+	if (!group.getType().equals(GroupType.PERSONAL)) {
 	    menu.addMenuItemList(otherOperations);
 	}
-	if (session.isLogged() && !group.getType().equals(GroupDTO.PERSONAL)) {
+	if (session.isLogged() && !group.getType().equals(GroupType.PERSONAL)) {
 	    menu.addMenuItemList(otherLoggedOperations);
 	}
-	if (group.getType().equals(GroupDTO.PERSONAL)) {
+	if (group.getType().equals(GroupType.PERSONAL)) {
 	    menu.addMenuItemList(otherOperationsUsers);
 	}
-	if (session.isLogged() && group.getType().equals(GroupDTO.PERSONAL)) {
+	if (session.isLogged() && group.getType().equals(GroupType.PERSONAL)) {
 	    menu.addMenuItemList(otherLoggedOperationsUsers);
 	}
 

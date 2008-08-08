@@ -67,7 +67,7 @@ public class DefaultBorderLayout {
 	panel.add(widget);
 	if (panel.isRendered()) {
 	    panel.syncSize();
-	    panel.doLayout();
+	    panel.doLayout(false);
 	}
 	doLayoutIfNeeded();
     }
@@ -126,5 +126,9 @@ public class DefaultBorderLayout {
 	panel.clear();
 	add(panel, widget);
 	doLayoutIfNeeded();
+    }
+
+    public void syncSize() {
+	mainPanel.syncSize();
     }
 }

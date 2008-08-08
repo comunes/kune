@@ -21,6 +21,7 @@ package org.ourproject.kune.platf.client.rpc;
 
 import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
+import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
 import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 
@@ -50,7 +51,7 @@ public interface SocialNetworkService extends RemoteService {
 
     ParticipationDataDTO getParticipation(String hash, String groupShortName) throws DefaultException;
 
-    String requestJoinGroup(String hash, String groupShortName) throws DefaultException;
+    SocialNetworkRequestResult requestJoinGroup(String hash, String groupShortName) throws DefaultException;
 
     SocialNetworkResultDTO setAdminAsCollab(String hash, String groupShortName, String groupToSetCollabShortName)
 	    throws DefaultException;

@@ -618,11 +618,11 @@
 }
 
 .k-toolselectoritem-notsel a {
-  color: blue;
+  color: #0000FF;
   padding: 0 9px;
   text-decoration: none;
 }
 
 .k-toolselectoritem-notsel a:hover {
-  text-decoration: none;
+  text-decoration: underline;
 }

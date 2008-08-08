@@ -26,7 +26,8 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
+import org.ourproject.kune.platf.client.dto.GroupType;
+import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.AlreadyGroupMemberException;
 import org.ourproject.kune.platf.client.errors.AlreadyUserMemberException;
@@ -38,7 +39,6 @@ import org.ourproject.kune.platf.server.access.AccessRightsService;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.GroupListMode;
-import org.ourproject.kune.platf.server.domain.GroupType;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
@@ -171,7 +171,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 	return new ParticipationData(groupsIsAdmin, groupsIsCollab);
     }
 
-    public String requestToJoin(final User user, final Group inGroup) throws DefaultException,
+    public SocialNetworkRequestResult requestToJoin(final User user, final Group inGroup) throws DefaultException,
 	    UserMustBeLoggedException {
 	final SocialNetwork sn = inGroup.getSocialNetwork();
 	if (!User.isKnownUser(user)) {
@@ -185,7 +185,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 	checkGroupIsNotAlreadyAMember(userGroup, sn);
 	if (isModerated(admissionType)) {
 	    sn.addPendingCollaborator(userGroup);
-	    return SocialNetworkDTO.REQ_JOIN_WAITING_MODERATION;
+	    return SocialNetworkRequestResult.moderated;
 	} else if (isOpen(admissionType)) {
 	    if (inGroup.getType().equals(GroupType.ORPHANED_PROJECT)) {
 		sn.addAdmin(userGroup);
@@ -195,9 +195,9 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 	    } else {
 		sn.addCollaborator(userGroup);
 	    }
-	    return SocialNetworkDTO.REQ_JOIN_ACEPTED;
+	    return SocialNetworkRequestResult.accepted;
 	} else if (isClosed(admissionType)) {
-	    return SocialNetworkDTO.REQ_JOIN_DENIED;
+	    return SocialNetworkRequestResult.denied;
 	} else {
 	    throw new DefaultException("State not expected in SocialNetworkManagerDefault class");
 	}
@@ -233,7 +233,12 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 
 	if (sn.isAdmin(groupToUnJoin)) {
 	    if (sn.getAccessLists().getAdmins().getList().size() == 1) {
-		throw new LastAdminInGroupException();
+		if (sn.getAccessLists().getEditors().getList().size() > 0) {
+		    throw new LastAdminInGroupException();
+		} else {
+		    inGroup.setType(GroupType.ORPHANED_PROJECT);
+		    inGroup.setAdmissionType(AdmissionType.Open);
+		}
 	    }
 	    sn.removeAdmin(groupToUnJoin);
 	} else if (sn.isCollab(groupToUnJoin)) {

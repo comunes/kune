@@ -3,9 +3,9 @@ package org.ourproject.kune.testhelper.ctx;
 import java.util.HashMap;
 import java.util.TimeZone;
 
+import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.GroupType;
 import org.ourproject.kune.platf.server.domain.I18nCountry;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;

@@ -3,7 +3,9 @@ package org.ourproject.kune.workspace.client.ui.newtmp.skel;
 import org.ourproject.kune.platf.client.ui.DefaultBorderLayout;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 
+import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.Panel;
+import com.gwtext.client.widgets.layout.FitLayout;
 
 public class Entity extends DefaultBorderLayout {
 
@@ -14,6 +16,7 @@ public class Entity extends DefaultBorderLayout {
     public Entity() {
 	entityMainHeader = new Panel();
 	entityMainHeader.setBorder(false);
+	entityMainHeader.setLayout(new FitLayout());
 	entitySummary = new EntitySummary();
 	entityWorkspace = new EntityWorkspace();
 	add(entityMainHeader, DefaultBorderLayout.Position.NORTH, 65);
@@ -21,8 +24,9 @@ public class Entity extends DefaultBorderLayout {
 	add(entitySummary.getPanel(), DefaultBorderLayout.Position.EAST, true, 150);
     }
 
-    public Panel getEntityMainHeader() {
-	return entityMainHeader;
+    public void addToEntityMainHeader(final Widget widget) {
+	entityMainHeader.add(widget);
+	doLayoutIfNeeded();
     }
 
     public EntitySummary getEntitySummary() {

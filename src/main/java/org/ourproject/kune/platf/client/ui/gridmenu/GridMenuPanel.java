@@ -22,8 +22,10 @@ import com.gwtext.client.dd.DragSource;
 import com.gwtext.client.dd.DropTarget;
 import com.gwtext.client.dd.DropTargetConfig;
 import com.gwtext.client.util.Format;
+import com.gwtext.client.widgets.Component;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.Toolbar;
+import com.gwtext.client.widgets.event.BoxComponentListenerAdapter;
 import com.gwtext.client.widgets.grid.CellMetadata;
 import com.gwtext.client.widgets.grid.ColumnConfig;
 import com.gwtext.client.widgets.grid.ColumnModel;
@@ -107,6 +109,12 @@ public class GridMenuPanel<T> extends Panel {
 	}
 	menuMap = new HashMap<String, GridMenu<T>>();
 	recordMap = new HashMap<T, Record>();
+	super.addListener(new BoxComponentListenerAdapter() {
+	    @Override
+	    public void onRender(final Component component) {
+		// Log.warn("Render grid -------------------");
+	    }
+	});
 	createGrid(emptyText, gridDragConfiguration, gridDropConfiguration);
     }
 
@@ -168,6 +176,7 @@ public class GridMenuPanel<T> extends Panel {
     public void doLayout(final boolean shallow) {
 	// Grid rendered problems with shallow false
 	super.doLayout();
+	grid.doLayout();
     }
 
     public void doLayoutIfNeeded() {
@@ -195,9 +204,7 @@ public class GridMenuPanel<T> extends Panel {
     }
 
     public void removeAll() {
-	if (grid != null) {
-	    store.removeAll();
-	}
+	store.removeAll();
 	recordMap.clear();
 	menuMap.clear();
     }
@@ -223,12 +230,10 @@ public class GridMenuPanel<T> extends Panel {
 
     @Override
     public void setWidth(final int width) {
-	if (grid != null) {
-	    // grid.setWidth(width - 27);
-	    grid.setWidth(width - 27);
-	    // super.setWidth(width - 11);
-	    doLayoutIfNeeded();
-	}
+	// grid.setWidth(width - 27);
+	grid.setWidth(width - 27);
+	// super.setWidth(width - 11);
+	doLayoutIfNeeded();
     }
 
     public void sort() {
@@ -455,4 +460,5 @@ public class GridMenuPanel<T> extends Panel {
 	final Record record = store.getRecordAt(rowIndex);
 	onDoubleClick.fire(record.getAsString(ID));
     }
+
 }

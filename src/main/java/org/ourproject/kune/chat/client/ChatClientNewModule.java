@@ -35,7 +35,6 @@ import com.calclab.suco.client.scopes.SingletonScope;
 public class ChatClientNewModule extends AbstractModule {
 
     public ChatClientNewModule() {
-	super(ChatClientNewModule.class);
     }
 
     @Override

@@ -45,7 +45,6 @@ import com.calclab.suco.client.scopes.SingletonScope;
 public class DocumentClientNewModule extends AbstractModule {
 
     public DocumentClientNewModule() {
-	super(DocumentClientNewModule.class);
     }
 
     @Override

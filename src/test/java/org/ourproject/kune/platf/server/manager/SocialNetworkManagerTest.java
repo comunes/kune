@@ -7,7 +7,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
+import org.ourproject.kune.platf.client.dto.GroupType;
+import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.AlreadyGroupMemberException;
 import org.ourproject.kune.platf.client.errors.LastAdminInGroupException;
@@ -180,9 +181,20 @@ public class SocialNetworkManagerTest extends PersistenceTest {
     }
 
     @Test(expected = LastAdminInGroupException.class)
-    public void lastAdminUnjoinGroupFails() throws Exception {
+    public void lastAdminUnjoinGroupWithCollabsFails() throws Exception {
+	socialNetworkManager.addAdmin(admin, group);
+	socialNetworkManager.requestToJoin(user, group);
+	socialNetworkManager.acceptJoinGroup(admin, userGroup, group);
+	socialNetworkManager.unJoinGroup(admin.getUserGroup(), group);
+    }
+
+    @Test
+    public void lastAdminUnjoinGroupWithoutCollabsOrphaned() throws Exception {
 	socialNetworkManager.addAdmin(admin, group);
 	socialNetworkManager.unJoinGroup(admin.getUserGroup(), group);
+	assertEquals(GroupType.ORPHANED_PROJECT, group.getType());
+	assertEquals(0, group.getSocialNetwork().getAccessLists().getAdmins().getList().size());
+	assertEquals(0, group.getSocialNetwork().getAccessLists().getEditors().getList().size());
     }
 
     @Test(expected = AccessViolationException.class)
@@ -197,8 +209,8 @@ public class SocialNetworkManagerTest extends PersistenceTest {
     public void requestJoinAClosedGroupDeny() throws Exception {
 	group.setAdmissionType(AdmissionType.Closed);
 
-	final String result = socialNetworkManager.requestToJoin(user, group);
-	assertEquals(result, SocialNetworkDTO.REQ_JOIN_DENIED);
+	final SocialNetworkRequestResult result = socialNetworkManager.requestToJoin(user, group);
+	assertEquals(result, SocialNetworkRequestResult.denied);
 	closeTransaction();
     }
 
@@ -206,8 +218,8 @@ public class SocialNetworkManagerTest extends PersistenceTest {
     public void requestJoinAModeratedGroupAddUserGroupToPending() throws Exception {
 	group.setAdmissionType(AdmissionType.Moderated);
 
-	final String result = socialNetworkManager.requestToJoin(user, group);
-	assertEquals(result, SocialNetworkDTO.REQ_JOIN_WAITING_MODERATION);
+	final SocialNetworkRequestResult result = socialNetworkManager.requestToJoin(user, group);
+	assertEquals(result, SocialNetworkRequestResult.moderated);
 	assertTrue(group.getSocialNetwork().getPendingCollaborators().getList().contains(userGroup));
 	closeTransaction();
     }
@@ -216,8 +228,8 @@ public class SocialNetworkManagerTest extends PersistenceTest {
     public void requestJoinAOpenGroupAddUserGroupToEditors() throws Exception {
 	group.setAdmissionType(AdmissionType.Open);
 
-	final String result = socialNetworkManager.requestToJoin(user, group);
-	assertEquals(result, SocialNetworkDTO.REQ_JOIN_ACEPTED);
+	final SocialNetworkRequestResult result = socialNetworkManager.requestToJoin(user, group);
+	assertEquals(result, SocialNetworkRequestResult.accepted);
 	assertTrue(group.getSocialNetwork().getAccessLists().getEditors().getList().contains(userGroup));
 	assertEquals(group.getSocialNetwork().getAccessLists().getEditors().getMode(), GroupListMode.NORMAL);
 	closeTransaction();
@@ -227,8 +239,8 @@ public class SocialNetworkManagerTest extends PersistenceTest {
     public void requestJoinAOrphanedGroupAddUserGroupToAdmins() throws Exception {
 	orphanedGroup.setAdmissionType(AdmissionType.Open);
 
-	final String result = socialNetworkManager.requestToJoin(user, orphanedGroup);
-	assertEquals(result, SocialNetworkDTO.REQ_JOIN_ACEPTED);
+	final SocialNetworkRequestResult result = socialNetworkManager.requestToJoin(user, orphanedGroup);
+	assertEquals(result, SocialNetworkRequestResult.accepted);
 	assertTrue(orphanedGroup.getSocialNetwork().getAccessLists().getAdmins().getList().contains(userGroup));
 	assertEquals(orphanedGroup.getSocialNetwork().getAccessLists().getAdmins().getMode(), GroupListMode.NORMAL);
 
@@ -240,8 +252,8 @@ public class SocialNetworkManagerTest extends PersistenceTest {
     public void requestJoinTwiceAOrphanedGroupAddUserGroupToAdmins() throws Exception {
 	orphanedGroup.setAdmissionType(AdmissionType.Open);
 
-	final String result = socialNetworkManager.requestToJoin(user, orphanedGroup);
-	assertEquals(SocialNetworkDTO.REQ_JOIN_ACEPTED, result);
+	final SocialNetworkRequestResult result = socialNetworkManager.requestToJoin(user, orphanedGroup);
+	assertEquals(SocialNetworkRequestResult.accepted, result);
 	socialNetworkManager.requestToJoin(user, orphanedGroup);
     }
 

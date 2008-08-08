@@ -65,7 +65,7 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
 			initData.getChatRoomHost());
 		chat = new ChatEngineXmpp(emiteUIDialog, chatOptions, i18n, ws);
 		groupMembersSummaryProvider.get().addUserOperation(
-			new MenuItem<GroupDTO>("images/chat-basic.gif", i18n.t("Start a chat with this member"),
+			new MenuItem<GroupDTO>("images/new-chat.gif", i18n.t("Start a chat with this member"),
 				new Slot<GroupDTO>() {
 				    public void onEvent(final GroupDTO group) {
 					emiteUIDialog.show();

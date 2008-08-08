@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.rpc.GroupService;
@@ -13,7 +14,6 @@ import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.GroupType;
 
 import com.google.inject.Inject;
 
@@ -33,7 +33,7 @@ public class GroupServiceTest extends IntegrationTest {
 	doLogin();
 
 	final GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative", "Public Desc",
-		GroupDTO.COMMUNITY);
+		GroupType.COMMUNITY);
 
 	final LicenseDTO license = new LicenseDTO();
 	license.setShortName("by-sa");
@@ -51,7 +51,7 @@ public class GroupServiceTest extends IntegrationTest {
     @Test(expected = Exception.class)
     public void createGroupNotLogged() throws Exception {
 	final GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative", "Public Desc",
-		GroupDTO.PROJECT);
+		GroupType.PROJECT);
 	service.createNewGroup(session.getHash(), group);
     }
 
@@ -59,7 +59,7 @@ public class GroupServiceTest extends IntegrationTest {
     public void createGroupNullUserHash() throws Exception {
 	doLogin();
 	final GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative", "Public Desc",
-		GroupDTO.PROJECT);
+		GroupType.PROJECT);
 	service.createNewGroup(null, group);
     }
 
@@ -68,7 +68,7 @@ public class GroupServiceTest extends IntegrationTest {
 	doLogin();
 
 	final GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative", "Public Desc",
-		GroupDTO.PROJECT);
+		GroupType.PROJECT);
 
 	final LicenseDTO license = new LicenseDTO();
 	license.setShortName("by-sa");
@@ -88,7 +88,7 @@ public class GroupServiceTest extends IntegrationTest {
 	doLogin();
 
 	final GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative", "Public Desc",
-		GroupDTO.ORGANIZATION);
+		GroupType.ORGANIZATION);
 
 	final LicenseDTO license = new LicenseDTO();
 	license.setShortName("by-sa");
@@ -108,7 +108,7 @@ public class GroupServiceTest extends IntegrationTest {
 	doLogin();
 
 	final GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative", "Public Desc",
-		GroupDTO.ORPHANED_PROJECT);
+		GroupType.ORPHANED_PROJECT);
 
 	final LicenseDTO license = new LicenseDTO();
 	license.setShortName("by-sa");

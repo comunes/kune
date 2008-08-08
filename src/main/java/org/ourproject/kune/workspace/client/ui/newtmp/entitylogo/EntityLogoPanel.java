@@ -88,7 +88,7 @@ public class EntityLogoPanel extends SimplePanel implements EntityLogoView {
 
     public EntityLogoPanel(final I18nTranslationService i18n, final WorkspaceSkeleton ws) {
 	this.i18n = i18n;
-	ws.getEntityMainHeader().add(this);
+	ws.addToEntityMainHeader(this);
     }
 
     public void setLogo(final Image image) {

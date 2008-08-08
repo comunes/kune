@@ -17,34 +17,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.app.client;
 
-import org.ourproject.kune.platf.client.services.Kune;
+package org.ourproject.kune.platf.server.auth;
 
-import com.allen_sauer.gwt.log.client.Log;
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
-public class KuneEntryPoint implements EntryPoint {
+import org.ourproject.kune.platf.server.access.AccessType;
 
-    public KuneEntryPoint() {
-    }
+import com.google.inject.BindingAnnotation;
 
-    public void onModuleLoad() {
-	Log.setUncaughtExceptionHandler();
+/**
+ * Use in RPC methods, for instance: <code>
+ * Authorizated(authLevelRequired = AuthLevelRequired.COLLAB, checkContent = true) </code>
+ * 
+ * The first parameter in the method must be the userHash, the second parameter
+ * must be a content token
+ * 
+ */
+@BindingAnnotation
+@Retention(RetentionPolicy.RUNTIME)
+public @interface ContentAuthorizated {
 
-	// At the moment, in runtime:
-	Log.setCurrentLogLevel(Log.LOG_LEVEL_DEBUG);
+    AccessType accessTypeRequired() default AccessType.READ;
 
-	DeferredCommand.addCommand(new Command() {
-	    public void execute() {
-		onModuleLoadCont();
-	    }
-	});
-    }
-
-    public void onModuleLoadCont() {
-	Kune.create();
-    }
 }

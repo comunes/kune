@@ -5,6 +5,7 @@ import java.util.List;
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
@@ -173,7 +174,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
     }
 
     private void setState(final StateDTO state) {
-	if (state.getGroup().getType().equals(GroupDTO.PERSONAL)) {
+	if (state.getGroup().getType().equals(GroupType.PERSONAL)) {
 	    view.setVisible(false);
 	} else {
 	    setGroupMembers(state.getGroupMembers(), state.getGroupRights());

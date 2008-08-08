@@ -23,13 +23,10 @@ import org.ourproject.kune.platf.client.View;
 
 public interface EntityLiveSearcherView extends View {
 
-    final public static int SEARCH_GROUPS = 1;
-    final public static int SEARCH_USERS = 2;
-
-    void show();
+    void center();
 
     void hide();
 
-    void center();
+    void show();
 
 }
