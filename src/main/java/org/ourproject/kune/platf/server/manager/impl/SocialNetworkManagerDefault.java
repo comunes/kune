@@ -20,8 +20,6 @@
 
 package org.ourproject.kune.platf.server.manager.impl;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -42,7 +40,6 @@ import org.ourproject.kune.platf.server.domain.GroupListMode;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
-import org.ourproject.kune.platf.server.users.Link;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -147,28 +144,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 	final Long groupId = group.getId();
 	final List<Group> adminInGroups = finder.findAdminInGroups(groupId);
 	final List<Group> collabInGroups = finder.findCollabInGroups(groupId);
-	final List<Link> groupsIsAdmin = new ArrayList<Link>();
-	final List<Link> groupsIsCollab = new ArrayList<Link>();
-	Iterator<Group> iter = adminInGroups.iterator();
-	while (iter.hasNext()) {
-	    final Group g = iter.next();
-	    if (group.getId() != g.getId()) {
-		// Don't self participation of group in same group
-		groupsIsAdmin
-			.add(new Link(g.getShortName(), g.getLongName(), "", g.getDefaultContent().getStateToken()));
-	    }
-
-	}
-	iter = collabInGroups.iterator();
-	while (iter.hasNext()) {
-	    final Group g = iter.next();
-	    if (group.getId() != g.getId()) {
-		groupsIsCollab.add(new Link(g.getShortName(), g.getLongName(), "", g.getDefaultContent()
-			.getStateToken()));
-	    }
-	}
-
-	return new ParticipationData(groupsIsAdmin, groupsIsCollab);
+	return new ParticipationData(adminInGroups, collabInGroups);
     }
 
     public SocialNetworkRequestResult requestToJoin(final User user, final Group inGroup) throws DefaultException,

@@ -3,6 +3,7 @@ package org.ourproject.kune.platf.client.ui.gridmenu;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.signal.Signal;
 import com.calclab.suco.client.signal.Slot;
@@ -52,7 +53,7 @@ public class GridMenuPanel<T> extends Panel {
     private static final String END_ICON_HTML = "endIconHtmlField";
     private static final String TOOLTIP = "tooltipField";
     private static final String TOOLTIPTITLE = "tooltipTitleField";
-    private final HashMap<String, GridMenu<T>> menuMap;
+    private final HashMap<String, CustomMenu<T>> menuMap;
     private final HashMap<T, Record> recordMap;
     private RecordDef recordDef;
     private GroupingStore store;
@@ -107,7 +108,7 @@ public class GridMenuPanel<T> extends Panel {
 	    bottomBar = new Toolbar();
 	    super.setBottomToolbar(bottomBar);
 	}
-	menuMap = new HashMap<String, GridMenu<T>>();
+	menuMap = new HashMap<String, CustomMenu<T>>();
 	recordMap = new HashMap<T, Record>();
 	super.addListener(new BoxComponentListenerAdapter() {
 	    @Override
@@ -391,7 +392,7 @@ public class GridMenuPanel<T> extends Panel {
 
 	    private void showMenu(final int rowIndex, final EventObject e) {
 		final Record record = store.getRecordAt(rowIndex);
-		final GridMenu<T> menu = menuMap.get(record.getAsString(ID));
+		final CustomMenu<T> menu = menuMap.get(record.getAsString(ID));
 		if (menu != null) {
 		    menu.showMenu(e);
 		}

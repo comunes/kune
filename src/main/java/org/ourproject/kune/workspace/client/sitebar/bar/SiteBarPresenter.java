@@ -193,7 +193,8 @@ public class SiteBarPresenter implements SiteBar {
 	} else {
 	    view.showLoggedUserName(user.getShortName(), user.getHomePage());
 	    view.setLogoutLinkVisible(true);
-	    view.setGroupsIsMember(user.getGroupsIsAdmin(), user.getGroupsIsCollab());
+	    // view.setGroupsIsMember(user.getGroupsIsAdmin(),
+	    // user.getGroupsIsCollab());
 	}
     }
 

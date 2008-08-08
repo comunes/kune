@@ -179,18 +179,6 @@
     <class-a>org.ourproject.kune.platf.client.dto.UserInfoDTO</class-a>
     <class-b>org.ourproject.kune.platf.server.users.UserInfo</class-b>
     <field>
-      <a>groupsIsAdmin</a>
-      <b>groupsIsAdmin</b>
-      <a-hint>org.ourproject.kune.platf.client.dto.LinkDTO</a-hint>
-      <b-hint>org.ourproject.kune.platf.server.users.Link</b-hint>
-    </field>
-    <field>
-      <a>groupsIsCollab</a>
-      <b>groupsIsCollab</b>
-      <a-hint>org.ourproject.kune.platf.client.dto.LinkDTO</a-hint>
-      <b-hint>org.ourproject.kune.platf.server.users.Link</b-hint>
-    </field>
-    <field>
       <a>language</a>
       <b>language</b>
       <a-hint>
@@ -219,18 +207,6 @@
     <class-b>
       org.ourproject.kune.platf.server.ParticipationData
     </class-b>
-    <field>
-      <a>groupsIsAdmin</a>
-      <b>groupsIsAdmin</b>
-      <a-hint>org.ourproject.kune.platf.client.dto.LinkDTO</a-hint>
-      <b-hint>org.ourproject.kune.platf.server.users.Link</b-hint>
-    </field>
-    <field>
-      <a>groupsIsCollab</a>
-      <b>groupsIsCollab</b>
-      <a-hint>org.ourproject.kune.platf.client.dto.LinkDTO</a-hint>
-      <b-hint>org.ourproject.kune.platf.server.users.Link</b-hint>
-    </field>
   </mapping>
 
   <mapping>

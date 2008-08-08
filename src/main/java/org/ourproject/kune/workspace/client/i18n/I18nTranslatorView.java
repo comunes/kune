@@ -23,10 +23,12 @@ import org.ourproject.kune.platf.client.View;
 
 public interface I18nTranslatorView extends View {
 
-    void show();
+    void close();
 
     void hide();
 
-    void close();
+    void hideTranslatorAndIcon();
+
+    void show();
 
 }

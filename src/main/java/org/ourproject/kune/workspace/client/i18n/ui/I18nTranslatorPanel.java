@@ -92,6 +92,16 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
 	dialog.hide();
     }
 
+    public void hideTranslatorAndIcon() {
+	if (dialog.isRendered()) {
+	    dialog.hide();
+	}
+	if (traybarButton != null) {
+	    traybarButton.destroy();
+	    traybarButton = null;
+	}
+    }
+
     public void show() {
 	if (dialog == null) {
 	    dialog = createDialog();

@@ -19,13 +19,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.client.ui.gridmenu;
+package org.ourproject.kune.platf.client.ui;
 
 import java.util.ArrayList;
 
-import org.ourproject.kune.platf.client.ui.MenuItem;
 
-public class GridMenuItemCollection<T> extends ArrayList<MenuItem<T>> {
+public class MenuItemCollection<T> extends ArrayList<MenuItem<T>> {
 
     private static final long serialVersionUID = 1L;
 

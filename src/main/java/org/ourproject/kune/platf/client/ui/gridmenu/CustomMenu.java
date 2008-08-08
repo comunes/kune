@@ -24,6 +24,8 @@ package org.ourproject.kune.platf.client.ui.gridmenu;
 import java.util.Iterator;
 
 import org.ourproject.kune.platf.client.ui.MenuItem;
+import org.ourproject.kune.platf.client.ui.MenuItemCollection;
+
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
@@ -33,7 +35,7 @@ import com.gwtext.client.widgets.menu.Item;
 import com.gwtext.client.widgets.menu.Menu;
 import com.gwtext.client.widgets.menu.event.BaseItemListenerAdapter;
 
-public class GridMenu<T> {
+public class CustomMenu<T> {
     private final T param;
     private final Menu menu;
 
@@ -44,7 +46,7 @@ public class GridMenu<T> {
      *                of the object asociated with this menu
      * 
      */
-    public GridMenu(final T param) {
+    public CustomMenu(final T param) {
 	this.param = param;
 	menu = new Menu();
     }
@@ -65,7 +67,7 @@ public class GridMenu<T> {
     }
 
     @SuppressWarnings("unchecked")
-    public void addMenuItemList(final GridMenuItemCollection list) {
+    public void addMenuItemList(final MenuItemCollection list) {
 	for (final Iterator iterator = list.iterator(); iterator.hasNext();) {
 	    final MenuItem item = (MenuItem) iterator.next();
 	    addMenuItem(item);

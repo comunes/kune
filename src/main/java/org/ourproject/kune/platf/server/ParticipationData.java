@@ -21,34 +21,34 @@ package org.ourproject.kune.platf.server;
 
 import java.util.List;
 
-import org.ourproject.kune.platf.server.users.Link;
+import org.ourproject.kune.platf.server.domain.Group;
 
 public class ParticipationData {
-    private List<Link> groupsIsAdmin;
-    private List<Link> groupsIsCollab;
+    private List<Group> groupsIsAdmin;
+    private List<Group> groupsIsCollab;
 
     public ParticipationData() {
 	this(null, null);
     }
 
-    public ParticipationData(final List<Link> groupsIsAdmin, final List<Link> groupsIsCollab) {
+    public ParticipationData(final List<Group> groupsIsAdmin, final List<Group> groupsIsCollab) {
 	this.groupsIsAdmin = groupsIsAdmin;
 	this.groupsIsCollab = groupsIsCollab;
     }
 
-    public List<Link> getGroupsIsAdmin() {
+    public List<Group> getGroupsIsAdmin() {
 	return groupsIsAdmin;
     }
 
-    public void setGroupsIsAdmin(final List<Link> groupsIsAdmin) {
-	this.groupsIsAdmin = groupsIsAdmin;
-    }
-
-    public List<Link> getGroupsIsCollab() {
+    public List<Group> getGroupsIsCollab() {
 	return groupsIsCollab;
     }
 
-    public void setGroupsIsCollab(final List<Link> groupsIsCollab) {
+    public void setGroupsIsAdmin(final List<Group> groupsIsAdmin) {
+	this.groupsIsAdmin = groupsIsAdmin;
+    }
+
+    public void setGroupsIsCollab(final List<Group> groupsIsCollab) {
 	this.groupsIsCollab = groupsIsCollab;
     }
 

@@ -1,5 +1,6 @@
 package org.ourproject.kune.platf.client.ui.gridmenu;
 
+
 public class GridItem<T> {
 
     private GridGroup group;
@@ -11,11 +12,11 @@ public class GridItem<T> {
     private String tooltip;
     private String tooltipTitle;
     private T item;
-    private GridMenu<T> menu;
+    private CustomMenu<T> menu;
 
     public GridItem(final T item, final GridGroup group, final String id, final String iconHtml, final String title,
 	    final String titleHtml, final String endIconHtml, final String tooltipTitle, final String tooltip,
-	    final GridMenu<T> menu) {
+	    final CustomMenu<T> menu) {
 	this.item = item;
 	this.group = group;
 	this.id = id;
@@ -48,7 +49,7 @@ public class GridItem<T> {
 	return item;
     }
 
-    public GridMenu<T> getMenu() {
+    public CustomMenu<T> getMenu() {
 	return menu;
     }
 
@@ -88,7 +89,7 @@ public class GridItem<T> {
 	this.item = item;
     }
 
-    public void setMenu(final GridMenu<T> menu) {
+    public void setMenu(final CustomMenu<T> menu) {
 	this.menu = menu;
     }
 

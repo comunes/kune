@@ -1,15 +1,14 @@
 package org.ourproject.kune.workspace.client.ui.newtmp.sitebar.siteusermenu;
 
-import java.util.List;
-
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.LinkDTO;
+import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.ui.MenuItemCollection;
 
 public interface SiteUserMenuView extends View {
 
     void setLoggedUserName(String name);
 
-    void setUseGroupsIsMember(List<LinkDTO> groupsIsAdmin, List<LinkDTO> groupsIsCollab);
+    void setParticipation(MenuItemCollection<GroupDTO> participateInGroups);
 
     void setVisible(boolean visible);
 

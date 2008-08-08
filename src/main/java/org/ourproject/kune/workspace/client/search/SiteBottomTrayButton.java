@@ -30,4 +30,8 @@ public class SiteBottomTrayButton {
 	ws.getSiteTraybar().addButton(traybarButton);
     }
 
+    public void destroy() {
+	traybarButton.destroy();
+    }
+
 }

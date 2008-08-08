@@ -23,7 +23,6 @@ import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
@@ -84,25 +83,17 @@ public class ParticipationSummaryPresenter extends SocialNetworkPresenter implem
 	final ParticipationDataDTO participation = state.getParticipation();
 	final AccessRightsDTO rights = state.getGroupRights();
 	view.clear();
-	final List<LinkDTO> groupsIsAdmin = participation.getGroupsIsAdmin();
-	final List<LinkDTO> groupsIsCollab = participation.getGroupsIsCollab();
+	final List<GroupDTO> groupsIsAdmin = participation.getGroupsIsAdmin();
+	final List<GroupDTO> groupsIsCollab = participation.getGroupsIsCollab();
 	final int numAdmins = groupsIsAdmin.size();
 	final int numCollaborators = groupsIsCollab.size();
 	if (numAdmins == 0) {
 	    collabCategory = collabOnlyCategory;
 	}
-	for (final LinkDTO link : groupsIsAdmin) {
-	    // FIXME: return GroupDTO not LinkDTO from server
-	    final GroupDTO group = new GroupDTO();
-	    group.setShortName(link.getShortName());
-	    group.setLongName(link.getLongName());
+	for (final GroupDTO group : groupsIsAdmin) {
 	    view.addItem(createGridItem(adminCategory, group, rights, unJoinMenuItem));
 	}
-	for (final LinkDTO link : groupsIsCollab) {
-	    // FIXME: return GroupDTO not LinkDTO from server
-	    final GroupDTO group = new GroupDTO();
-	    group.setShortName(link.getShortName());
-	    group.setLongName(link.getLongName());
+	for (final GroupDTO group : groupsIsCollab) {
 	    view.addItem(createGridItem(collabCategory, group, rights, unJoinMenuItem));
 	}
 	if (numAdmins > 0 || numCollaborators > 0) {

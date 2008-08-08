@@ -327,8 +327,9 @@ public class KuneModule extends AbstractModule {
 
 	register(SingletonScope.class, new Factory<SiteUserMenu>(SiteUserMenu.class) {
 	    public SiteUserMenu create() {
-		final SiteUserMenuPresenter presenter = new SiteUserMenuPresenter($(Session.class));
-		final SiteUserMenuPanel panel = new SiteUserMenuPanel(presenter, ws);
+		final SiteUserMenuPresenter presenter = new SiteUserMenuPresenter($(Session.class),
+			$(StateManager.class));
+		final SiteUserMenuPanel panel = new SiteUserMenuPanel(presenter, ws, i18n);
 		presenter.init(panel);
 		return presenter;
 	    }
@@ -356,7 +357,7 @@ public class KuneModule extends AbstractModule {
 	register(SingletonScope.class, new Factory<SiteOptions>(SiteOptions.class) {
 	    public SiteOptions create() {
 		final SiteOptionsPresenter presenter = new SiteOptionsPresenter();
-		final SiteOptionsPanel panel = new SiteOptionsPanel(presenter, ws);
+		final SiteOptionsPanel panel = new SiteOptionsPanel(presenter, ws, i18n, $$(I18nTranslator.class));
 		presenter.init(panel);
 		return presenter;
 	    }
@@ -601,6 +602,7 @@ public class KuneModule extends AbstractModule {
 	$(SiteSignInLink.class);
 	$(SiteSignOutLink.class);
 	$(SiteNewGroupLink.class);
+	$(SiteOptions.class);
 	$(SiteSearch.class);
 	$(SiteLogo.class);
 

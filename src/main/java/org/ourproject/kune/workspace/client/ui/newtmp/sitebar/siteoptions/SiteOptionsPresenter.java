@@ -4,19 +4,17 @@ import org.ourproject.kune.platf.client.View;
 
 public class SiteOptionsPresenter implements SiteOptions {
 
-private SiteOptionsView view;
+    private SiteOptionsView view;
 
-public SiteOptionsPresenter() {
-}
-
-public void init(SiteOptionsView view) {
-this.view = view;
-}
-
+    public SiteOptionsPresenter() {
+    }
 
     public View getView() {
-        return view;
+	return view;
+    }
+
+    public void init(final SiteOptionsView view) {
+	this.view = view;
     }
 
 }
-

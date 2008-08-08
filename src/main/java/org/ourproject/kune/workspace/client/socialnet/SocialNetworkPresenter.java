@@ -12,11 +12,11 @@ import org.ourproject.kune.platf.client.services.ImageUtils;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.MenuItem;
+import org.ourproject.kune.platf.client.ui.MenuItemCollection;
+import org.ourproject.kune.platf.client.ui.gridmenu.CustomMenu;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridButton;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridItem;
-import org.ourproject.kune.platf.client.ui.gridmenu.GridMenu;
-import org.ourproject.kune.platf.client.ui.gridmenu.GridMenuItemCollection;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
@@ -39,11 +39,11 @@ public class SocialNetworkPresenter {
     private final StateManager stateManager;
     private final Provider<SocialNetworkServiceAsync> snServiceProvider;
     private final Session session;
-    private final GridMenuItemCollection<GroupDTO> otherOperations;
-    private final GridMenuItemCollection<GroupDTO> otherLoggedOperations;
+    private final MenuItemCollection<GroupDTO> otherOperations;
+    private final MenuItemCollection<GroupDTO> otherLoggedOperations;
     private final ImageUtils imageUtils;
-    private final GridMenuItemCollection<GroupDTO> otherOperationsUsers;
-    private final GridMenuItemCollection<GroupDTO> otherLoggedOperationsUsers;
+    private final MenuItemCollection<GroupDTO> otherOperationsUsers;
+    private final MenuItemCollection<GroupDTO> otherLoggedOperationsUsers;
 
     public SocialNetworkPresenter(final I18nUITranslationService i18n, final StateManager stateManager,
 	    final ImageUtils imageUtils, final Session session,
@@ -55,33 +55,33 @@ public class SocialNetworkPresenter {
 	this.snServiceProvider = snServiceProvider;
 	createButtons();
 	createMenuActions();
-	otherOperationsUsers = new GridMenuItemCollection<GroupDTO>();
-	otherLoggedOperationsUsers = new GridMenuItemCollection<GroupDTO>();
-	otherOperations = new GridMenuItemCollection<GroupDTO>();
-	otherLoggedOperations = new GridMenuItemCollection<GroupDTO>();
+	otherOperationsUsers = new MenuItemCollection<GroupDTO>();
+	otherLoggedOperationsUsers = new MenuItemCollection<GroupDTO>();
+	otherOperations = new MenuItemCollection<GroupDTO>();
+	otherLoggedOperations = new MenuItemCollection<GroupDTO>();
 
     }
 
     public void addGroupOperation(final MenuItem<GroupDTO> operation, final boolean mustBeLogged) {
-	GridMenuItemCollection<GroupDTO> collection;
+	MenuItemCollection<GroupDTO> collection;
 	collection = mustBeLogged ? otherLoggedOperations : otherOperations;
 	collection.add(operation);
     }
 
     public void addUserOperation(final MenuItem<GroupDTO> operation, final boolean mustBeLogged) {
-	GridMenuItemCollection<GroupDTO> collection;
+	MenuItemCollection<GroupDTO> collection;
 	collection = mustBeLogged ? otherLoggedOperationsUsers : otherOperationsUsers;
 	collection.add(operation);
     }
 
     public void removeGroupOperation(final MenuItem<GroupDTO> operation, final boolean mustBeLogged) {
-	GridMenuItemCollection<GroupDTO> collection;
+	MenuItemCollection<GroupDTO> collection;
 	collection = mustBeLogged ? otherLoggedOperations : otherOperations;
 	collection.remove(operation);
     }
 
     public void removeUserOperation(final MenuItem<GroupDTO> operation, final boolean mustBeLogged) {
-	GridMenuItemCollection<GroupDTO> collection;
+	MenuItemCollection<GroupDTO> collection;
 	collection = mustBeLogged ? otherLoggedOperationsUsers : otherOperationsUsers;
 	collection.remove(operation);
     }
@@ -89,7 +89,7 @@ public class SocialNetworkPresenter {
     protected GridItem<GroupDTO> createGridItem(final GridGroup groupCategory, final GroupDTO group,
 	    final AccessRightsDTO rights, final MenuItem<GroupDTO>... gridMenuItems) {
 	final GridItem<GroupDTO> gridItem = createDefMemberMenu(group, groupCategory);
-	final GridMenu<GroupDTO> menu = gridItem.getMenu();
+	final CustomMenu<GroupDTO> menu = gridItem.getMenu();
 	if (rights.isAdministrable()) {
 	    for (final MenuItem<GroupDTO> item : gridMenuItems) {
 		menu.addMenuItem(item);
@@ -134,7 +134,7 @@ public class SocialNetworkPresenter {
     }
 
     private GridItem<GroupDTO> createDefMemberMenu(final GroupDTO group, final GridGroup gridGroup) {
-	final GridMenu<GroupDTO> menu = new GridMenu<GroupDTO>(group);
+	final CustomMenu<GroupDTO> menu = new CustomMenu<GroupDTO>(group);
 	final String longName = group.getLongName();
 	final String toolTip = i18n.t(group.getType().equals(GroupType.PERSONAL) ? "User nickname: [%s]"
 		: "Group short name: [%s]", group.getShortName());

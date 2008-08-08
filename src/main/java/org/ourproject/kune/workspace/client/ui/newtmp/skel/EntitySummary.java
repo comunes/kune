@@ -39,6 +39,8 @@ public class EntitySummary {
 
     public void addInTools(final Widget widget) {
 	entityTools.add(widget);
+	entityTools.expand();
+	// entitySummary.expand();
 	mainPanel.syncSize();
 	if (entityTools.isRendered()) {
 	    entityTools.doLayout(false);

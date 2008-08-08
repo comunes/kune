@@ -21,6 +21,6 @@ package org.ourproject.kune.workspace.client.i18n;
 
 public interface I18nTranslator {
 
-    void show();
+    void doShowTranslator();
 
 }
