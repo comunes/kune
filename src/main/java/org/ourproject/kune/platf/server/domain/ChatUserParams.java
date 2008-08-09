@@ -1,39 +1,27 @@
 package org.ourproject.kune.platf.server.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import org.hibernate.search.annotations.DocumentId;
-import org.hibernate.search.annotations.Indexed;
-import org.hibernate.validator.NotNull;
+import java.io.Serializable;
 
 import com.calclab.emite.client.im.roster.RosterManager;
 import com.calclab.emite.client.im.roster.RosterManager.SubscriptionMode;
 
-@Entity
-@Indexed
-@Table(name = "usersparams")
-public class UserParams {
+public class ChatUserParams implements Serializable {
 
-    @Id
-    @DocumentId
-    @GeneratedValue
-    private Long id;
+    private static final long serialVersionUID = 1L;
 
     private String avatar;
 
-    @NotNull
     private boolean publishRoster;
 
-    @NotNull
     private SubscriptionMode subscriptionMode;
 
-    @NotNull
     private String chatColor;
 
-    public UserParams(final String avatar, final boolean publishRoster, final SubscriptionMode subscriptionMode,
+    public ChatUserParams() {
+	this(null, false, SubscriptionMode.autoAcceptAll, null);
+    };
+
+    public ChatUserParams(final String avatar, final boolean publishRoster, final SubscriptionMode subscriptionMode,
 	    final String chatColor) {
 	this.avatar = avatar;
 	this.publishRoster = publishRoster;
@@ -47,10 +35,6 @@ public class UserParams {
 
     public String getChatColor() {
 	return chatColor;
-    }
-
-    public Long getId() {
-	return id;
     }
 
     public RosterManager.SubscriptionMode getSubscriptionMode() {

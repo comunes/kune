@@ -98,6 +98,9 @@ public class User implements HasId {
     @NotNull
     private TimeZone timezone;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private final CustomProperties customProperties;
+
     public User() {
 	this(null, null, null, null, null, null, null);
     }
@@ -112,6 +115,7 @@ public class User implements HasId {
 	this.language = language;
 	this.country = country;
 	this.timezone = timezone;
+	customProperties = new CustomProperties();
     }
 
     @Finder(query = "from User")
@@ -133,6 +137,10 @@ public class User implements HasId {
 
     public I18nCountry getCountry() {
 	return country;
+    }
+
+    public CustomProperties getCustomProperties() {
+	return customProperties;
     }
 
     public String getEmail() {
