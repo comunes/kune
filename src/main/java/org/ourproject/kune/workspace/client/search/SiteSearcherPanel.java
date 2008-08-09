@@ -143,7 +143,7 @@ public class SiteSearcherPanel extends AbstractSearcherPanel implements SiteSear
 
 	groupsPanel.addListener(new PanelListenerAdapter() {
 	    public void onActivate(final Panel panel) {
-		dialog.setTitle(i18n.t("Search users & groups"));
+		dialog.setTitle(i18n.t("Search users and groups"));
 		presenter.doSearch(SiteSearcherType.group_user);
 	    }
 	});

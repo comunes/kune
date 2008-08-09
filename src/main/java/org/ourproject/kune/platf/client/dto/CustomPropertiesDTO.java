@@ -1,30 +1,14 @@
-package org.ourproject.kune.platf.server.domain;
+package org.ourproject.kune.platf.client.dto;
 
 import java.util.HashMap;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.Table;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
-import org.hibernate.search.annotations.DocumentId;
-import org.hibernate.search.annotations.Indexed;
+public class CustomPropertiesDTO implements IsSerializable {
 
-@Entity
-@Indexed
-@Table(name = "customproperties")
-public class CustomProperties implements HasId {
-
-    @Id
-    @DocumentId
-    @GeneratedValue
-    private Long id;
-
-    @Lob
     private HashMap<Class<?>, Object> data;
 
-    public CustomProperties() {
+    public CustomPropertiesDTO() {
 	data = new HashMap<Class<?>, Object>();
     }
 
@@ -35,10 +19,6 @@ public class CustomProperties implements HasId {
     @SuppressWarnings("unchecked")
     public <T> T getData(final Class<T> type) {
 	return (T) data.get(type);
-    }
-
-    public Long getId() {
-	return id;
     }
 
     public <T> boolean hasPropertie(final Class<T> type) {
@@ -54,7 +34,4 @@ public class CustomProperties implements HasId {
 	this.data = data;
     }
 
-    public void setId(final Long id) {
-	this.id = id;
-    }
 }

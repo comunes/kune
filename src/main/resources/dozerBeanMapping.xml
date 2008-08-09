@@ -287,5 +287,19 @@
       <b>name</b>
 	</field>
   </mapping>
+  
+  <mapping>
+    <class-a>org.ourproject.kune.platf.client.dto.ChatUserParamsDTO</class-a>
+    <class-b>org.ourproject.kune.platf.server.domain.ChatUserParams</class-b>
+  </mapping>
 
+  <mapping>
+    <class-a>org.ourproject.kune.platf.client.dto.CustomPropertiesDTO</class-a>
+    <class-b>org.ourproject.kune.platf.server.domain.CustomProperties</class-b>
+	<field>
+      <a>data</a>
+      <b>data</b>
+    </field>
+  </mapping>
+    
 </mappings>

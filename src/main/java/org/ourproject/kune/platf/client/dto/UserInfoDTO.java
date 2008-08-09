@@ -34,6 +34,7 @@ public class UserInfoDTO implements IsSerializable {
     private I18nCountryDTO country;
     private List<GroupDTO> groupsIsAdmin;
     private List<GroupDTO> groupsIsCollab;
+    private CustomPropertiesDTO customProperties;
 
     public String getChatName() {
 	return chatName;
@@ -45,6 +46,10 @@ public class UserInfoDTO implements IsSerializable {
 
     public I18nCountryDTO getCountry() {
 	return country;
+    }
+
+    public CustomPropertiesDTO getCustomProperties() {
+	return customProperties;
     }
 
     public List<GroupDTO> getGroupsIsAdmin() {
@@ -86,6 +91,10 @@ public class UserInfoDTO implements IsSerializable {
 
     public void setCountry(final I18nCountryDTO country) {
 	this.country = country;
+    }
+
+    public void setCustomProperties(final CustomPropertiesDTO customProperties) {
+	this.customProperties = customProperties;
     }
 
     public void setGroupsIsAdmin(final List<GroupDTO> groupsIsAdmin) {

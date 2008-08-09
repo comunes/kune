@@ -1908,21 +1908,6 @@ see: http://developer.yahoo.com/yui/fonts/ */
 
 /* Sitebar */
 
-#kuneprogresspanel {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  z-index: 30000;
-}
-
-.kune-Progress {
-  background: #E5FF80;
-  border: 1px solid #E5FF80;
-  white-space: nowrap;
-  height: 16px;
-  padding: 0 3px;
-}
-
 .kune-SiteBarPanel .kune-IconHyperlink {
   white-space: nowrap;
 }

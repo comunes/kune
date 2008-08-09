@@ -21,6 +21,7 @@ package org.ourproject.kune.platf.server.users;
 
 import java.util.List;
 
+import org.ourproject.kune.platf.server.domain.CustomProperties;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.I18nCountry;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
@@ -36,6 +37,7 @@ public class UserInfo {
     private String userHash;
     private I18nLanguage language;
     private I18nCountry country;
+    private CustomProperties customProperties;
 
     public String getChatName() {
 	return chatName;
@@ -47,6 +49,10 @@ public class UserInfo {
 
     public I18nCountry getCountry() {
 	return country;
+    }
+
+    public CustomProperties getCustomProperties() {
+	return customProperties;
     }
 
     public List<Group> getGroupsIsAdmin() {
@@ -87,6 +93,10 @@ public class UserInfo {
 
     public void setCountry(final I18nCountry country) {
 	this.country = country;
+    }
+
+    public void setCustomProperties(final CustomProperties customProperties) {
+	this.customProperties = customProperties;
     }
 
     public void setGroupsIsAdmin(final List<Group> groupsIsAdmin) {

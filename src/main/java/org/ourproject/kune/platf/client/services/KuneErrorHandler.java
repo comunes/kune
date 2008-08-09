@@ -71,7 +71,7 @@ public class KuneErrorHandler {
 	    logException(e);
 	    Site.error(i18n.t("You don't have rights to do that"));
 	} catch (final SessionExpiredException e) {
-	    logException(e, true);
+	    logException(e);
 	    doSessionExpired();
 	} catch (final UserMustBeLoggedException e) {
 	    logException(e);
