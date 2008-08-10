@@ -22,20 +22,20 @@ package org.ourproject.kune.workspace.client.ui.ctx.items;
 
 import java.util.List;
 
-import org.ourproject.kune.docs.client.actions.DocsEvents;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
-import org.ourproject.kune.platf.client.dispatch.Dispatcher;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.ContentDTO;
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
-import org.ourproject.kune.platf.client.rpc.ParamCallback;
+import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
+import com.calclab.suco.client.container.Provider;
 import com.calclab.suco.client.signal.Slot;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
@@ -43,25 +43,19 @@ public class ContextItemsPresenter implements ContextItems {
     protected ContextItemsView view;
     private final I18nTranslationService i18n;
     private final StateManager stateManager;
+    private final Session session;
+    private final Provider<ContentServiceAsync> contentServiceProvider;
 
-    public ContextItemsPresenter(final I18nTranslationService i18n, final StateManager stateManager) {
+    public ContextItemsPresenter(final I18nTranslationService i18n, final StateManager stateManager,
+	    final Session session, final Provider<ContentServiceAsync> contentServiceProvider) {
 	this.i18n = i18n;
 	this.stateManager = stateManager;
+	this.session = session;
+	this.contentServiceProvider = contentServiceProvider;
     }
 
-    public void canCreate(final String typeName, final String label, final Slot<?> slot) {
-	// TODO
-    }
-
-    public void canCreate(final String typeName, final String label, final String eventName) {
-	view.addCommand(typeName, label, eventName);
-    }
-
-    public void create(final String typeName, final String value, final String eventName) {
-	if (value != null) {
-	    final Dispatcher dispatcher = DefaultDispatcher.getInstance();
-	    dispatcher.fire(eventName, value);
-	}
+    public void canCreate(final String buttonText, final String promptMessage, final Slot<String> slot) {
+	view.addCommand(buttonText, promptMessage, slot);
     }
 
     public View getView() {
@@ -73,22 +67,23 @@ public class ContextItemsPresenter implements ContextItems {
     }
 
     public void onGoUp() {
-	DefaultDispatcher.getInstance().fire(DocsEvents.GO_PARENT_FOLDER, null);
+	final StateDTO state = session.getCurrentState();
+	final StateToken token = state.getStateToken();
+	token.setDocument(null);
+	token.setFolder(state.getFolder().getParentFolderId().toString());
+	stateManager.setState(token);
     }
 
-    public void onNew(final String typeName) {
-	view.showCreationField(typeName);
-    }
-
-    public void onTitleRename(final String text, final String token) {
+    public void onTitleRename(final String newName, final String token) {
 	Site.showProgressSaving();
-	DefaultDispatcher.getInstance().fire(DocsEvents.RENAME_CONTENT,
-		new ParamCallback<String, Object>(text, new AsyncCallbackSimple<Object>() {
-		    public void onSuccess(final Object result) {
+	final StateDTO currentState = session.getCurrentState();
+	contentServiceProvider.get().rename(session.getUserHash(), currentState.getGroup().getShortName(), token,
+		newName, new AsyncCallbackSimple<String>() {
+		    public void onSuccess(final String result) {
 			stateManager.reloadContextAndTitles();
 			Site.hideProgress();
 		    }
-		}));
+		});
     }
 
     public void registerType(final String typeName, final AbstractImagePrototype image) {

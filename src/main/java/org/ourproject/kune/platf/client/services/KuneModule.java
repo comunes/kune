@@ -2,7 +2,6 @@ package org.ourproject.kune.platf.client.services;
 
 import org.ourproject.kune.chat.client.ChatClientNewModule;
 import org.ourproject.kune.docs.client.DocumentClientNewModule;
-import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.ApplicationDefault;
 import org.ourproject.kune.platf.client.app.HistoryWrapper;
@@ -185,8 +184,10 @@ public class KuneModule extends AbstractModule {
 	    }
 	}, new Factory<ContentServiceAsync>(ContentServiceAsync.class) {
 	    public ContentServiceAsync create() {
-		// FIXME
-		return ContentService.App.getInstance();
+		final ContentServiceAsync contentServiceAsync = (ContentServiceAsync) GWT.create(ContentService.class);
+		((ServiceDefTarget) contentServiceAsync)
+			.setServiceEntryPoint(GWT.getModuleBaseURL() + "ContentService");
+		return contentServiceAsync;
 	    }
 	});
 
@@ -264,19 +265,12 @@ public class KuneModule extends AbstractModule {
 	final KuneErrorHandler errorHandler = $(KuneErrorHandler.class);
 	AsyncCallbackSimple.init(errorHandler);
 
-	register(SingletonScope.class, new Factory<KunePlatform>(KunePlatform.class) {
-	    public KunePlatform create() {
-		return new KunePlatform();
-	    }
-	});
-
 	final WorkspaceSkeleton ws = $(WorkspaceSkeleton.class);
 	final Images images = $(Images.class);
 
 	register(SingletonScope.class, new Factory<Application>(Application.class) {
 	    public Application create() {
-		final Session session = $(Session.class);
-		return new ApplicationDefault(session, $(KuneErrorHandler.class), ws);
+		return new ApplicationDefault($(Session.class));
 	    }
 	});
 
@@ -452,7 +446,7 @@ public class KuneModule extends AbstractModule {
 	register(SingletonScope.class, new Factory<EntityTitlePresenter>(EntityTitlePresenter.class) {
 	    public EntityTitlePresenter create() {
 		final EntityTitlePresenter presenter = new EntityTitlePresenter(i18n, $(KuneErrorHandler.class),
-			$(StateManager.class));
+			$(StateManager.class), $(Session.class), $$(ContentServiceAsync.class));
 		final EntityTitlePanel panel = new EntityTitlePanel(ws, presenter);
 		presenter.init(panel);
 		return presenter;
@@ -586,7 +580,8 @@ public class KuneModule extends AbstractModule {
 
 	register(SingletonScope.class, new Factory<ContextItems>(ContextItems.class) {
 	    public ContextItems create() {
-		final ContextItemsPresenter presenter = new ContextItemsPresenter(i18n, $(StateManager.class));
+		final ContextItemsPresenter presenter = new ContextItemsPresenter(i18n, $(StateManager.class),
+			$(Session.class), $$(ContentServiceAsync.class));
 		final ContextItemsPanel panel = new ContextItemsPanel(presenter, i18n, $(StateManager.class));
 		presenter.init(panel);
 		return presenter;
@@ -638,9 +633,6 @@ public class KuneModule extends AbstractModule {
 	    }
 	});
 
-	final KunePlatform platform = $(KunePlatform.class);
-	$(Application.class).init(platform.getIndexedTools());
-	$(Application.class).subscribeActions(platform.getActions());
 	$(Application.class).start();
 
     }

@@ -23,14 +23,22 @@ package org.ourproject.kune.workspace.client.ui.ctx.items;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.ContainerSimpleDTO;
 
+import com.calclab.suco.client.signal.Slot;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 public interface ContextItemsView extends View {
-    void clear();
+
+    void addCommand(String buttonTitle, String promptMessage, Slot<String> slot);
 
     void addItem(String name, String type, String event, boolean editable);
 
+    void clear();
+
+    void registerType(String typeName, AbstractImagePrototype image);
+
     void selectItem(int index);
+
+    void setAbsolutePath(ContainerSimpleDTO[] absolutePath);
 
     void setControlsVisible(boolean isVisible);
 
@@ -39,13 +47,5 @@ public interface ContextItemsView extends View {
     void setParentButtonEnabled(boolean isEnabled);
 
     void setParentTreeVisible(boolean b);
-
-    void registerType(String typeName, AbstractImagePrototype image);
-
-    void addCommand(String typeName, String label, String eventName);
-
-    void showCreationField(String typeName);
-
-    void setAbsolutePath(ContainerSimpleDTO[] absolutePath);
 
 }

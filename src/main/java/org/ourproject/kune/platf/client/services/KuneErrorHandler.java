@@ -55,6 +55,12 @@ public class KuneErrorHandler {
 	this.onSessionExpired = new Signal0("onSessionExpired");
     }
 
+    public void doSessionExpired() {
+	onSessionExpired.fire();
+	getWorkspaceSkeleton().showAlertMessage(i18n.t("Session expired"),
+		i18n.t("Your session has expired. Please login again."));
+    }
+
     public WorkspaceSkeleton getWorkspaceSkeleton() {
 	return wsProvider.get();
     }
@@ -107,12 +113,6 @@ public class KuneErrorHandler {
 	    Site.error(i18n.t("Error performing operation"));
 	    GWT.log("Other kind of exception in StateManagerDefault/processErrorException", null);
 	}
-    }
-
-    private void doSessionExpired() {
-	onSessionExpired.fire();
-	getWorkspaceSkeleton().showAlertMessage(i18n.t("Session expired"),
-		i18n.t("Your session has expired. Please login again."));
     }
 
     private void logException(final Throwable e) {

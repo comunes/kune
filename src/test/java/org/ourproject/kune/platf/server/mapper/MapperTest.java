@@ -51,6 +51,8 @@ public class MapperTest {
 
     @Test
     public void customPropertiesInUserInfoMappping() {
+	// Make a custom converter instead of mapper.mapProperties
+	// http://dozer.sourceforge.net/documentation/customconverter.html
 	final UserInfo userInfo = new UserInfo();
 	final ChatUserParams userChatParams = new ChatUserParams("avatar", true, SubscriptionMode.autoAcceptAll,
 		"color");
@@ -64,6 +66,7 @@ public class MapperTest {
 
     @Test
     public void customPropertiesMappping() throws ClassNotFoundException {
+	// Make a custom converter instead of mapper.mapProperties
 	final ChatUserParams userChatParams = new ChatUserParams("avatar", true, SubscriptionMode.autoAcceptAll,
 		"color");
 	final CustomProperties customProperties = new CustomProperties();

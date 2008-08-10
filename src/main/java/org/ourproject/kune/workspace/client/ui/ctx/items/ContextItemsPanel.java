@@ -27,6 +27,7 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.HorizontalLine;
 import org.ourproject.kune.platf.client.ui.IconLabel;
 
+import com.calclab.suco.client.signal.Slot;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.DockPanel;
@@ -39,14 +40,10 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
     private final VerticalPanel controls;
     private final ItemsPanel items;
     private final ContextTopBar topBar;
-    private final ContextItemsPresenter presenter;
-    private String currentEventName;
-    private String workaroundTypeName;
     private final I18nTranslationService i18n;
 
     public ContextItemsPanel(final ContextItemsPresenter presenter, final I18nTranslationService i18n,
 	    final StateManager stateManager) {
-	this.presenter = presenter;
 	this.i18n = i18n;
 	topBar = new ContextTopBar(presenter, i18n, stateManager);
 	addTopBar(topBar);
@@ -70,17 +67,16 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
 	horizontalLine.setWidth("100%");
     }
 
-    public void addCommand(final String typeName, final String label, final String eventName) {
-	final String type = typeName;
-	final IconLabel iconLabel = new IconLabel(Images.App.getInstance().addGreen(), label);
+    public void addCommand(final String buttonText, final String promptMessage, final Slot<String> slot) {
+	final IconLabel iconLabel = new IconLabel(Images.App.getInstance().addGreen(), buttonText);
 	iconLabel.addClickListener(new ClickListener() {
 	    public void onClick(final Widget sender) {
-		currentEventName = eventName;
-		presenter.onNew(type);
+		promptName(promptMessage, slot);
 	    }
 	});
 	iconLabel.addStyleName("kune-ContextItemsPanel-LabelLink");
 	controls.add(iconLabel);
+
     }
 
     public void addItem(final String name, final String type, final String event, final boolean editable) {
@@ -89,6 +85,14 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
 
     public void clear() {
 	items.clear();
+    }
+
+    public void promptName(final String title, final Slot<String> slot) {
+	MessageBox.prompt(title, i18n.t("Please enter a name:"), new MessageBox.PromptCallback() {
+	    public void execute(final String btnID, final String text) {
+		slot.onEvent(text);
+	    }
+	});
     }
 
     public void registerType(final String typeName, final AbstractImagePrototype image) {
@@ -117,28 +121,6 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
 
     public void setParentTreeVisible(final boolean visible) {
 	topBar.firstRow.setVisible(visible);
-    }
-
-    public void showCreationField(final String typeName) {
-	String title;
-	// Workaround: gwt-ext bug, I cannot use typeName directly
-	workaroundTypeName = typeName;
-
-	// FIXME use constants!!!!
-	if (typeName.equals("docs.doc")) {
-	    title = i18n.t("Add a document");
-	} else if (typeName.equals("docs.folder")) {
-	    title = i18n.t("Add a folder");
-	} else if (typeName.equals("chat.room")) {
-	    title = i18n.t("Add a chat room");
-	} else {
-	    title = i18n.t("Add a new [%s]", typeName);
-	}
-	MessageBox.prompt(title, i18n.t("Please enter a name:"), new MessageBox.PromptCallback() {
-	    public void execute(final String btnID, final String text) {
-		presenter.create(workaroundTypeName, text, currentEventName);
-	    }
-	});
     }
 
     private void addTopBar(final Widget widget) {

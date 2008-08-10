@@ -1,4 +1,4 @@
-package org.ourproject.kune.sitebar.client.msg;
+package org.ourproject.kune.workspace.client.sitebar.msg;
 
 import org.easymock.EasyMock;
 import org.junit.Before;

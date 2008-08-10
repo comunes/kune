@@ -68,6 +68,8 @@ public interface Session {
 
     public void setInitData(InitDataDTO initData);
 
+    UserInfoDTO getCurrentUserInfo();
+
     String getUserHash();
 
     void onInitDataReceived(Slot<InitDataDTO> slot);

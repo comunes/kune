@@ -23,20 +23,20 @@ package org.ourproject.kune.docs.client.ctx.admin;
 import java.util.Date;
 import java.util.List;
 
-import org.ourproject.kune.docs.client.actions.DocsEvents;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.TagResultDTO;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
-import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.tags.TagsSummary;
+import org.ourproject.kune.workspace.client.ui.newtmp.title.EntitySubTitlePresenter;
+import org.ourproject.kune.workspace.client.ui.newtmp.title.EntityTitlePresenter;
 
 import com.calclab.suco.client.container.Provider;
 
@@ -45,14 +45,57 @@ public class AdminContextPresenter implements AdminContext {
     private AdminContextView view;
     private final Session session;
     private final Provider<TagsSummary> tagsSummaryProvider;
+    private final Provider<ContentServiceAsync> contentServiceProvider;
+    private final EntitySubTitlePresenter entitySubTitlePresenter;
+    private final EntityTitlePresenter entityTitlePresenter;
+    private final StateManager stateManager;
 
-    public AdminContextPresenter(final Session session, final Provider<TagsSummary> tagsSummaryProvider) {
+    public AdminContextPresenter(final Session session, final StateManager stateManager,
+	    final Provider<TagsSummary> tagsSummaryProvider,
+	    final Provider<ContentServiceAsync> contentServiceProvider,
+	    final EntityTitlePresenter entityTitlePresenter, final EntitySubTitlePresenter entitySubTitlePresenter) {
 	this.session = session;
+	this.stateManager = stateManager;
 	this.tagsSummaryProvider = tagsSummaryProvider;
+	this.contentServiceProvider = contentServiceProvider;
+	this.entityTitlePresenter = entityTitlePresenter;
+	this.entitySubTitlePresenter = entitySubTitlePresenter;
+    }
+
+    public void addAuthor(final String authorShortName) {
+	Site.showProgressProcessing();
+	final StateDTO currentState = session.getCurrentState();
+	contentServiceProvider.get().addAuthor(session.getUserHash(), currentState.getGroup().getShortName(),
+		currentState.getDocumentId(), authorShortName, new AsyncCallbackSimple<Object>() {
+		    public void onSuccess(final Object result) {
+			Site.hideProgress();
+			stateManager.reload();
+		    }
+		});
+    }
+
+    public void delAuthor(final String authorShortName) {
+	Site.showProgressProcessing();
+	final StateDTO currentState = session.getCurrentState();
+	contentServiceProvider.get().removeAuthor(session.getUserHash(), currentState.getGroup().getShortName(),
+		currentState.getDocumentId(), authorShortName, new AsyncCallbackSimple<Object>() {
+		    public void onSuccess(final Object result) {
+			Site.hideProgress();
+			stateManager.reload();
+		    }
+		});
     }
 
     public void doChangeLanguage(final String langCode) {
-	DefaultDispatcher.getInstance().fire(DocsEvents.SET_LANGUAGE, langCode);
+	Site.showProgressProcessing();
+	final StateDTO currentState = session.getCurrentState();
+	contentServiceProvider.get().setLanguage(session.getUserHash(), currentState.getGroup().getShortName(),
+		currentState.getDocumentId(), langCode, new AsyncCallbackSimple<I18nLanguageDTO>() {
+		    public void onSuccess(final I18nLanguageDTO lang) {
+			Site.hideProgress();
+			entitySubTitlePresenter.setContentLanguage(lang.getEnglishName());
+		    }
+		});
     }
 
     public View getView() {
@@ -63,8 +106,17 @@ public class AdminContextPresenter implements AdminContext {
 	this.view = view;
     }
 
-    public void setPublishedOn(final Date date) {
-	DefaultDispatcher.getInstance().fire(DocsEvents.SET_PUBLISHED_ON, date);
+    public void setPublishedOn(final Date publishedOn) {
+	Site.showProgressProcessing();
+	final StateDTO currentState = session.getCurrentState();
+	contentServiceProvider.get().setPublishedOn(session.getUserHash(), currentState.getGroup().getShortName(),
+		currentState.getDocumentId(), publishedOn, new AsyncCallbackSimple<Object>() {
+		    public void onSuccess(final Object result) {
+			Site.hideProgress();
+			entityTitlePresenter.setContentDate(publishedOn);
+		    }
+		});
+
     }
 
     public void setState(final StateDTO content) {
@@ -106,10 +158,9 @@ public class AdminContextPresenter implements AdminContext {
 
     public void setTags(final String tagsString) {
 	Site.showProgressProcessing();
-	final ContentServiceAsync server = ContentService.App.getInstance();
 	final StateDTO currentState = session.getCurrentState();
-	server.setTags(session.getUserHash(), currentState.getGroup().getShortName(), currentState.getDocumentId(),
-		tagsString, new AsyncCallbackSimple<List<TagResultDTO>>() {
+	contentServiceProvider.get().setTags(session.getUserHash(), currentState.getGroup().getShortName(),
+		currentState.getDocumentId(), tagsString, new AsyncCallbackSimple<List<TagResultDTO>>() {
 		    public void onSuccess(final List<TagResultDTO> result) {
 			tagsSummaryProvider.get().setGroupTags(result);
 			Site.hideProgress();

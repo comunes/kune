@@ -16,8 +16,10 @@ public class SiteUserMenuPresenter implements SiteUserMenu {
     private SiteUserMenuView view;
     private final MenuItemCollection<GroupDTO> participateInGroups;
     private final StateManager stateManager;
+    private final Session session;
 
     public SiteUserMenuPresenter(final Session session, final StateManager stateManager) {
+	this.session = session;
 	this.stateManager = stateManager;
 	participateInGroups = new MenuItemCollection<GroupDTO>();
 	session.onUserSignIn(new Slot<UserInfoDTO>() {
@@ -40,6 +42,10 @@ public class SiteUserMenuPresenter implements SiteUserMenu {
 
     public void init(final SiteUserMenuView view) {
 	this.view = view;
+    }
+
+    public void onUserHomePage() {
+	stateManager.gotoToken(session.getCurrentUserInfo().getShortName());
     }
 
     public void onUserPreferences() {

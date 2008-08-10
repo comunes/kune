@@ -20,23 +20,12 @@
 
 package org.ourproject.kune.platf.client.app;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
-import org.ourproject.kune.platf.client.dispatch.ActionEvent;
-import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.rpc.SiteService;
 import org.ourproject.kune.platf.client.rpc.SiteServiceAsync;
-import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.tool.ClientTool;
-import org.ourproject.kune.platf.client.ui.WindowUtils;
 import org.ourproject.kune.platf.client.utils.PrefetchUtilities;
 import org.ourproject.kune.workspace.client.sitebar.Site;
-import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.signal.Signal0;
@@ -48,15 +37,12 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 
 public class ApplicationDefault implements Application {
-    // private final Workspace workspace;
-    private Map<String, ClientTool> tools;
     private final Session session;
     private final Signal0 onApplicationStart;
     private final Signal0 onApplicationStop;
 
-    public ApplicationDefault(final Session session, final KuneErrorHandler errorHandler, final WorkspaceSkeleton ws) {
+    public ApplicationDefault(final Session session) {
 	this.session = session;
-	tools = new HashMap<String, ClientTool>();
 	this.onApplicationStart = new Signal0("onApplicationStart");
 	this.onApplicationStop = new Signal0("onApplicationStop");
 	Window.addWindowCloseListener(new WindowCloseListener() {
@@ -68,14 +54,6 @@ public class ApplicationDefault implements Application {
 		return null;
 	    }
 	});
-    }
-
-    public ClientTool getTool(final String toolName) {
-	return tools.get(toolName);
-    }
-
-    public void init(final HashMap<String, ClientTool> tools) {
-	this.tools = tools;
     }
 
     public void onApplicationStart(final Slot0 slot) {
@@ -98,19 +76,6 @@ public class ApplicationDefault implements Application {
 	prefetchTimer.schedule(20000);
     }
 
-    public void stop() {
-	onApplicationStop.fire();
-    }
-
-    public void subscribeActions(final ArrayList<ActionEvent<?>> actions) {
-	ActionEvent<?> actionEvent;
-
-	for (final Iterator<ActionEvent<?>> it = actions.iterator(); it.hasNext();) {
-	    actionEvent = it.next();
-	    DefaultDispatcher.getInstance().subscribe(actionEvent.event, actionEvent.action);
-	}
-    }
-
     private void getInitData() {
 	final SiteServiceAsync server = SiteService.App.getInstance();
 	server.getInitData(session.getUserHash(), new AsyncCallback<InitDataDTO>() {
@@ -121,20 +86,14 @@ public class ApplicationDefault implements Application {
 	    }
 
 	    public void onSuccess(final InitDataDTO initData) {
-		checkChatDomain(initData.getChatDomain());
 		session.setInitData(initData);
 		session.setCurrentUserInfo(initData.getUserInfo());
 		RootPanel.get("kuneinitialcurtain").setVisible(false);
 	    }
-
-	    private void checkChatDomain(final String chatDomain) {
-		final String httpDomain = WindowUtils.getLocation().getHostName();
-		if (!chatDomain.equals(httpDomain)) {
-		    Log.error("Your http domain (" + httpDomain + ") is different from the chat domain (" + chatDomain
-			    + "). This will produce problems with the chat functionality. "
-			    + "Check kune.properties on the server.");
-		}
-	    }
 	});
+    }
+
+    private void stop() {
+	onApplicationStop.fire();
     }
 }

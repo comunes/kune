@@ -32,10 +32,12 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.tool.AbstractClientTool;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
 import org.ourproject.kune.platf.client.ui.MenuItem;
+import org.ourproject.kune.platf.client.ui.WindowUtils;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummary;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.emite.client.xmpp.stanzas.XmppURI;
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
 import com.calclab.suco.client.container.Provider;
@@ -61,6 +63,7 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
 	this.chatContextProvider = chatContextProvider;
 	session.onInitDataReceived(new Slot<InitDataDTO>() {
 	    public void onEvent(final InitDataDTO initData) {
+		checkChatDomain(initData.getChatDomain());
 		final ChatOptions chatOptions = new ChatOptions(initData.getChatHttpBase(), initData.getChatDomain(),
 			initData.getChatRoomHost());
 		chat = new ChatEngineXmpp(emiteUIDialog, chatOptions, i18n, ws);
@@ -78,6 +81,15 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
 					}
 				    }
 				}), true);
+	    }
+
+	    private void checkChatDomain(final String chatDomain) {
+		final String httpDomain = WindowUtils.getLocation().getHostName();
+		if (!chatDomain.equals(httpDomain)) {
+		    Log.error("Your http domain (" + httpDomain + ") is different from the chat domain (" + chatDomain
+			    + "). This will produce problems with the chat functionality. "
+			    + "Check kune.properties on the server.");
+		}
 	    }
 	});
 	application.onApplicationStop(new Slot0() {

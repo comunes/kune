@@ -143,6 +143,8 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 	find(user, group); // check access
 	final Long groupId = group.getId();
 	final List<Group> adminInGroups = finder.findAdminInGroups(groupId);
+	// Don't show self user group
+	adminInGroups.remove(user.getUserGroup());
 	final List<Group> collabInGroups = finder.findCollabInGroups(groupId);
 	return new ParticipationData(adminInGroups, collabInGroups);
     }

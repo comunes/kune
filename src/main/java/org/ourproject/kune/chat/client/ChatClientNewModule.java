@@ -14,7 +14,6 @@ import org.ourproject.kune.chat.client.ctx.ChatContext;
 import org.ourproject.kune.chat.client.ctx.ChatContextPresenter;
 import org.ourproject.kune.chat.client.ctx.rooms.RoomsAdmin;
 import org.ourproject.kune.chat.client.ctx.rooms.RoomsAdminPresenter;
-import org.ourproject.kune.platf.client.KunePlatform;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
@@ -97,7 +96,7 @@ public class ChatClientNewModule extends AbstractModule {
 	    }
 	});
 
-	final ChatClientTool chatClientTool = $(ChatClientTool.class);
-	$(KunePlatform.class).addTool(chatClientTool);
+	$(ChatClientTool.class);
+
     }
 }

@@ -20,28 +20,33 @@
 
 package org.ourproject.kune.docs.client.cnt;
 
-import org.ourproject.kune.docs.client.actions.DocsEvents;
 import org.ourproject.kune.docs.client.cnt.folder.FolderEditor;
 import org.ourproject.kune.docs.client.cnt.folder.viewer.FolderViewer;
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReader;
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderControl;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
-import org.ourproject.kune.platf.client.dto.SaveDocumentActionParams;
 import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
+import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
+import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.rate.RateIt;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.editor.TextEditorListener;
+import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.workspace.client.sitebar.Site;
 
 import com.calclab.suco.client.container.Provider;
 import com.calclab.suco.client.signal.Signal0;
 import com.calclab.suco.client.signal.Slot0;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class DocumentContentPresenter implements DocumentContent, TextEditorListener {
     private final WorkspaceDeckView view;
+    private final StateManager stateManager;
     private StateDTO content;
     private final Session session;
     private final RateIt rateIt;
@@ -52,12 +57,20 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
     private final Provider<FolderViewer> folderViewerProvider;
     private final Signal0 onEdit;
     private final Signal0 onCancel;
+    private final Provider<ContentServiceAsync> contentServiceProvider;
+    private final I18nUITranslationService i18n;
+    private final KuneErrorHandler errorHandler;
 
-    public DocumentContentPresenter(final WorkspaceDeckView view, final Session session, final RateIt rateIt,
-	    final Provider<DocumentReader> docReaderProvider,
+    public DocumentContentPresenter(final StateManager stateManager, final I18nUITranslationService i18n,
+	    final KuneErrorHandler errorHandler, final WorkspaceDeckView view, final Session session,
+	    final RateIt rateIt, final Provider<DocumentReader> docReaderProvider,
 	    final Provider<DocumentReaderControl> docReaderControlProvider,
 	    final Provider<TextEditor> textEditorProvider, final Provider<FolderViewer> folderViewerProvider,
-	    final Provider<FolderEditor> folderEditorProvider) {
+	    final Provider<FolderEditor> folderEditorProvider,
+	    final Provider<ContentServiceAsync> contentServiceProvider) {
+	this.stateManager = stateManager;
+	this.i18n = i18n;
+	this.errorHandler = errorHandler;
 	this.view = view;
 	this.session = session;
 	this.rateIt = rateIt;
@@ -66,6 +79,7 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
 	this.textEditorProvider = textEditorProvider;
 	this.folderViewerProvider = folderViewerProvider;
 	this.folderEditorProvider = folderEditorProvider;
+	this.contentServiceProvider = contentServiceProvider;
 	this.onEdit = new Signal0("onEdit");
 	this.onCancel = new Signal0("onCancel");
     }
@@ -86,7 +100,15 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
     }
 
     public void onDelete() {
-	DefaultDispatcher.getInstance().fire(DocsEvents.DEL_CONTENT, content.getDocumentId());
+	Site.showProgressProcessing();
+	contentServiceProvider.get().delContent(session.getUserHash(),
+		session.getCurrentState().getGroup().getShortName(), content.getDocumentId(),
+		new AsyncCallbackSimple<Object>() {
+		    public void onSuccess(final Object result) {
+			Site.hideProgress();
+			stateManager.reload();
+		    }
+		});
     }
 
     public void onEdit() {
@@ -114,9 +136,27 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
 
     public void onSave(final String text) {
 	content.setContent(text);
-	DefaultDispatcher.getInstance().fire(DocsEvents.SAVE_DOCUMENT, new SaveDocumentActionParams(content, this));
-	// Re-enable rateIt widget
-	rateIt.setVisible(true);
+	Site.showProgressSaving();
+	contentServiceProvider.get().save(session.getUserHash(), session.getCurrentState().getGroup().getShortName(),
+		content.getDocumentId(), content.getContent(), new AsyncCallback<Integer>() {
+		    public void onFailure(final Throwable caught) {
+			Site.hideProgress();
+			try {
+			    throw caught;
+			} catch (final SessionExpiredException e) {
+			    errorHandler.doSessionExpired();
+			} catch (final Throwable e) {
+			    Site.error(i18n.t("Error saving document. Retrying..."));
+			    errorHandler.process(caught);
+			    onSaveFailed();
+			}
+		    }
+
+		    public void onSuccess(final Integer result) {
+			Site.hideProgress();
+			onSaved();
+		    }
+		});
     }
 
     public void onSaved() {

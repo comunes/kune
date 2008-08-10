@@ -34,6 +34,16 @@ public class SiteUserMenuPanel implements SiteUserMenuView {
 		userMenu.showAt(sender.getAbsoluteLeft(), sender.getAbsoluteTop() + 10);
 	    }
 	});
+	final Item userHomePage = new Item(i18n.t("Your homepage"));
+	userHomePage.setIcon("images/group-home.gif");
+	userHomePage.addListener(new BaseItemListenerAdapter() {
+	    @Override
+	    public void onClick(final BaseItem item, final EventObject e) {
+		super.onClick(item, e);
+		presenter.onUserHomePage();
+	    }
+	});
+	userMenu.addItem(userHomePage);
 	final Item userPreferences = new Item(i18n.t("Your preferences"));
 	userPreferences.setIcon("images/kune-preferences.gif");
 	userPreferences.addListener(new BaseItemListenerAdapter() {
@@ -55,8 +65,8 @@ public class SiteUserMenuPanel implements SiteUserMenuView {
     }
 
     public void setParticipation(final MenuItemCollection<GroupDTO> participateInGroups) {
+	userParticipation.removeAll();
 	for (final org.ourproject.kune.platf.client.ui.MenuItem<GroupDTO> groupItem : participateInGroups) {
-	    userParticipation.removeAll();
 	    final Item item = new Item(groupItem.getTitle(), new BaseItemListenerAdapter() {
 		@Override
 		public void onClick(BaseItem item, EventObject e) {

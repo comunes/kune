@@ -49,7 +49,7 @@ public class RoomsAdminPresenter implements RoomsAdmin {
 	contextItems.setParentTreeVisible(false);
 	contextItems.registerType(ChatClientTool.TYPE_CHAT, images.page());
 	contextItems.registerType(ChatClientTool.TYPE_ROOM, images.chatGreen());
-	contextItems.canCreate(ChatClientTool.TYPE_ROOM, i18n.t("New chat room"), new Slot<String>() {
+	contextItems.canCreate(i18n.t("New chat room"), i18n.t("Add a chat room"), new Slot<String>() {
 	    public void onEvent(final String name) {
 		Site.showProgressProcessing();
 		final String groupShortName = session.getCurrentState().getGroup().getShortName();

@@ -21,34 +21,72 @@
 package org.ourproject.kune.docs.client.ctx.folder;
 
 import org.ourproject.kune.docs.client.DocumentClientTool;
-import org.ourproject.kune.docs.client.actions.DocsEvents;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
+import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsImages;
+
+import com.calclab.suco.client.container.Provider;
+import com.calclab.suco.client.signal.Slot;
 
 public class FolderContextPresenter implements FolderContext {
     private final ContextItems contextItems;
 
-    public FolderContextPresenter(final ContextItems contextItems, final I18nTranslationService i18n) {
-        this.contextItems = contextItems;
-        ContextItemsImages contextImages = ContextItemsImages.App.getInstance();
-        contextItems.registerType(DocumentClientTool.TYPE_DOCUMENT, contextImages.pageWhite());
-        contextItems.registerType(DocumentClientTool.TYPE_FOLDER, contextImages.folder());
-        contextItems.canCreate(DocumentClientTool.TYPE_DOCUMENT, i18n.t("New document"), DocsEvents.ADD_DOCUMENT);
-        contextItems.canCreate(DocumentClientTool.TYPE_FOLDER, i18n.t("New folder"), DocsEvents.ADD_FOLDER);
-        contextItems.setParentTreeVisible(true);
+    public FolderContextPresenter(final ContextItems contextItems, final StateManager stateManager,
+	    final Session session, final I18nTranslationService i18n,
+	    final Provider<ContentServiceAsync> contentServiceProvider) {
+	this.contextItems = contextItems;
+	final ContextItemsImages contextImages = ContextItemsImages.App.getInstance();
+	contextItems.registerType(DocumentClientTool.TYPE_DOCUMENT, contextImages.pageWhite());
+	contextItems.registerType(DocumentClientTool.TYPE_FOLDER, contextImages.folder());
+	contextItems.canCreate(i18n.t("New document"), i18n.t("Add a document"), new Slot<String>() {
+	    public void onEvent(final String name) {
+		Site.showProgressProcessing();
+		contentServiceProvider.get().addContent(session.getUserHash(),
+			session.getCurrentState().getGroup().getShortName(),
+			session.getCurrentState().getFolder().getId(), name, new AsyncCallbackSimple<StateDTO>() {
+			    public void onSuccess(final StateDTO state) {
+				Site.info(i18n.t("Created, now you can edit the document"));
+				stateManager.setRetrievedState(state);
+				Site.hideProgress();
+			    }
+			});
+	    }
+	});
+	contextItems.canCreate(i18n.t("New folder"), i18n.t("Add a folder"), new Slot<String>() {
+	    public void onEvent(final String name) {
+		Site.showProgressProcessing();
+		contentServiceProvider.get().addFolder(session.getUserHash(),
+			session.getCurrentState().getGroup().getShortName(),
+			session.getCurrentState().getFolder().getId(), name, new AsyncCallbackSimple<StateDTO>() {
+			    public void onSuccess(final StateDTO state) {
+				Site.info(i18n.t("Folder created"));
+				stateManager.setRetrievedState(state);
+				// FIXME: Isn't using cache
+				stateManager.reloadContextAndTitles();
+				Site.hideProgress();
+			    }
+			});
+	    }
+	});
+	contextItems.setParentTreeVisible(true);
     }
 
     public View getView() {
-        return contextItems.getView();
+	return contextItems.getView();
     }
 
     public void setContainer(final StateToken state, final ContainerDTO container, final AccessRightsDTO rights) {
-        contextItems.showContainer(state, container, rights);
+	contextItems.showContainer(state, container, rights);
     }
 
 }

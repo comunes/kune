@@ -20,28 +20,14 @@
 
 package org.ourproject.kune.platf.client.app;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import org.ourproject.kune.platf.client.dispatch.ActionEvent;
-import org.ourproject.kune.platf.client.tool.ClientTool;
-
 import com.calclab.suco.client.signal.Slot0;
 
 public interface Application {
-
-    ClientTool getTool(String toolName);
-
-    void init(HashMap<String, ClientTool> tools);
 
     void onApplicationStart(Slot0 slot);
 
     void onApplicationStop(Slot0 slot);
 
     void start();
-
-    void stop();
-
-    void subscribeActions(ArrayList<ActionEvent<?>> actions);
 
 }

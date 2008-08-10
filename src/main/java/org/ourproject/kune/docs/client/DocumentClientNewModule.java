@@ -25,7 +25,8 @@ import org.ourproject.kune.docs.client.ctx.admin.AdminContextView;
 import org.ourproject.kune.docs.client.ctx.admin.ui.AdminContextPanel;
 import org.ourproject.kune.docs.client.ctx.folder.FolderContext;
 import org.ourproject.kune.docs.client.ctx.folder.FolderContextPresenter;
-import org.ourproject.kune.platf.client.KunePlatform;
+import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
+import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
@@ -37,6 +38,8 @@ import org.ourproject.kune.workspace.client.tags.TagsSummary;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.ui.newtmp.title.EntitySubTitlePresenter;
+import org.ourproject.kune.workspace.client.ui.newtmp.title.EntityTitlePresenter;
 
 import com.calclab.suco.client.modules.AbstractModule;
 import com.calclab.suco.client.provider.Factory;
@@ -62,7 +65,8 @@ public class DocumentClientNewModule extends AbstractModule {
 	register(SingletonScope.class, new Factory<AdminContext>(AdminContext.class) {
 	    public AdminContext create() {
 		final AdminContextPresenter presenter = new AdminContextPresenter($(Session.class),
-			$$(TagsSummary.class));
+			$(StateManager.class), $$(TagsSummary.class), $$(ContentServiceAsync.class),
+			$(EntityTitlePresenter.class), $(EntitySubTitlePresenter.class));
 		final AdminContextView view = new AdminContextPanel(presenter, i18n);
 		presenter.init(view);
 		return presenter;
@@ -72,9 +76,11 @@ public class DocumentClientNewModule extends AbstractModule {
 	register(SingletonScope.class, new Factory<DocumentContent>(DocumentContent.class) {
 	    public DocumentContent create() {
 		final WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
-		final DocumentContentPresenter presenter = new DocumentContentPresenter(panel, $(Session.class),
+		final DocumentContentPresenter presenter = new DocumentContentPresenter($(StateManager.class),
+			$(I18nUITranslationService.class), $(KuneErrorHandler.class), panel, $(Session.class),
 			$(RateIt.class), $$(DocumentReader.class), $$(DocumentReaderControl.class),
-			$$(TextEditor.class), $$(FolderViewer.class), $$(FolderEditor.class));
+			$$(TextEditor.class), $$(FolderViewer.class), $$(FolderEditor.class),
+			$$(ContentServiceAsync.class));
 		return presenter;
 	    }
 	});
@@ -106,7 +112,8 @@ public class DocumentClientNewModule extends AbstractModule {
 
 	register(SingletonScope.class, new Factory<FolderContext>(FolderContext.class) {
 	    public FolderContext create() {
-		final FolderContextPresenter presenter = new FolderContextPresenter($(ContextItems.class), i18n);
+		final FolderContextPresenter presenter = new FolderContextPresenter($(ContextItems.class),
+			$(StateManager.class), $(Session.class), i18n, $$(ContentServiceAsync.class));
 		return presenter;
 	    }
 	});
@@ -127,13 +134,6 @@ public class DocumentClientNewModule extends AbstractModule {
 	    }
 	});
 
-	final KunePlatform platform = $(KunePlatform.class);
-	final DocumentClientTool docClientTool = $(DocumentClientTool.class);
-	platform.addTool(docClientTool);
-
-	final Session session = $(Session.class);
-	final StateManager stateManager = $(StateManager.class);
-	platform.install(new DocsClientModule(session, stateManager, i18n));
+	$(DocumentClientTool.class);
     }
-
 }

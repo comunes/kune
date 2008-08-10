@@ -425,12 +425,6 @@
               <includes>
                 <include>**/Kune-Platform.gwt.xml**</include>
                 <include>**/I18nTranslationService**</include>
-                <include>**/Plugin.**</include>
-                <include>**/PluginManager.**</include>
-                <include>**/dispatch/**</include>
-                <include>**/Extensi*</include>
-                <include>**/PlatformEvents.**</include>
-                <include>**/BottomTrayIcon.**</include>
                 <include>**/BasicDialog.**</include>
                 <include>**/HorizontalLine.**</include>
                 <include>**/AbstractLabel.**</include>
@@ -441,11 +435,8 @@
                 <include>**/IconHyperlink*.**</include>
                 <include>**/LabelWrapper*.**</include>
                 <include>**/KuneUiUtils.**</include>
-                <include>**/RoundedBorderDecorator.**</include>
-                <include>**/HasColor.**</include>
                 <include>**/View.**</include>
                 <!--                <include>**/platf/**</include>
-                  <include>**/AbstractPresenter**</include>
                   <include>**/platf/client/extend/**</include>
                   <include>**/platf/client/*java</include>
                   <include>**/platf/client/app/**</include>

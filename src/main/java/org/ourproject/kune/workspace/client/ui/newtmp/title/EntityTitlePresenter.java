@@ -22,16 +22,16 @@ package org.ourproject.kune.workspace.client.ui.newtmp.title;
 
 import java.util.Date;
 
-import org.ourproject.kune.docs.client.actions.DocsEvents;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dispatch.DefaultDispatcher;
 import org.ourproject.kune.platf.client.dto.StateDTO;
-import org.ourproject.kune.platf.client.rpc.ParamCallback;
+import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
+import com.calclab.suco.client.container.Provider;
 import com.calclab.suco.client.signal.Slot;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -42,12 +42,17 @@ public class EntityTitlePresenter {
     private final I18nTranslationService i18n;
     private final KuneErrorHandler errorHandler;
     private final StateManager stateManager;
+    private final Provider<ContentServiceAsync> contentServiceProvider;
+    private final Session session;
 
     public EntityTitlePresenter(final I18nTranslationService i18n, final KuneErrorHandler errorHandler,
-	    final StateManager stateManager) {
+	    final StateManager stateManager, final Session session,
+	    final Provider<ContentServiceAsync> contentServiceProvider) {
 	this.i18n = i18n;
 	this.errorHandler = errorHandler;
 	this.stateManager = stateManager;
+	this.session = session;
+	this.contentServiceProvider = contentServiceProvider;
 	stateManager.onStateChanged(new Slot<StateDTO>() {
 	    public void onEvent(final StateDTO state) {
 		setState(state);
@@ -63,25 +68,26 @@ public class EntityTitlePresenter {
 	this.view = view;
     }
 
-    public void onTitleRename(final String text) {
+    public void onTitleRename(final String newName) {
 	Site.showProgressSaving();
-	final AsyncCallback<String> callback = new AsyncCallback<String>() {
-	    public void onFailure(final Throwable caught) {
-		view.restoreOldTitle();
-		errorHandler.process(caught);
-	    }
+	final StateDTO currentState = session.getCurrentState();
+	contentServiceProvider.get().rename(session.getUserHash(), currentState.getGroup().getShortName(),
+		currentState.getStateToken().getEncoded(), newName, new AsyncCallback<String>() {
+		    public void onFailure(final Throwable caught) {
+			view.restoreOldTitle();
+			errorHandler.process(caught);
+		    }
 
-	    public void onSuccess(final String result) {
-		Site.hideProgress();
-		view.setContentTitle(result);
-		stateManager.reloadContextAndTitles();
-	    }
-	};
-	DefaultDispatcher.getInstance().fire(DocsEvents.RENAME_CONTENT,
-		new ParamCallback<String, String>(text, callback));
+		    public void onSuccess(final String result) {
+			Site.hideProgress();
+			view.setContentTitle(result);
+			stateManager.reloadContextAndTitles();
+		    }
+		});
+	Site.hideProgress();
     }
 
-    private void setContentDate(final Date publishedOn) {
+    public void setContentDate(final Date publishedOn) {
 	final DateTimeFormat fmt = DateTimeFormat.getFormat("MM/dd/yyyy, Z");
 	view.setContentDate(i18n.t("Published on: [%s]", fmt.format(publishedOn)));
     }

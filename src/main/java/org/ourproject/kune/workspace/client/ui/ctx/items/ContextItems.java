@@ -30,9 +30,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 public interface ContextItems {
 
-    public void canCreate(String typeName, String label, Slot<?> slot);
-
-    public void canCreate(String typeName, String label, String eventName);
+    public void canCreate(String buttonTitle, String promptMessage, Slot<String> slot);
 
     public View getView();
 
