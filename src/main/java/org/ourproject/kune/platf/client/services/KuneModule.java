@@ -1,7 +1,7 @@
 package org.ourproject.kune.platf.client.services;
 
-import org.ourproject.kune.chat.client.ChatClientNewModule;
-import org.ourproject.kune.docs.client.DocumentClientNewModule;
+import org.ourproject.kune.chat.client.ChatClientModule;
+import org.ourproject.kune.docs.client.DocumentClientModule;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.ApplicationDefault;
 import org.ourproject.kune.platf.client.app.HistoryWrapper;
@@ -23,7 +23,6 @@ import org.ourproject.kune.platf.client.state.SessionDefault;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.state.StateManagerDefault;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
-import org.ourproject.kune.platf.client.tool.ToolSelectorPanel;
 import org.ourproject.kune.platf.client.tool.ToolSelectorPresenter;
 import org.ourproject.kune.platf.client.ui.QuickTipsHelper;
 import org.ourproject.kune.platf.client.ui.rate.RateIt;
@@ -554,8 +553,6 @@ public class KuneModule extends AbstractModule {
 	    public ToolSelector create() {
 		final ToolSelectorPresenter presenter = new ToolSelectorPresenter($(StateManager.class),
 			$(WsThemePresenter.class));
-		final ToolSelectorPanel panel = new ToolSelectorPanel(presenter, ws);
-		presenter.init(panel);
 		return presenter;
 	    }
 	});
@@ -588,8 +585,8 @@ public class KuneModule extends AbstractModule {
 	    }
 	});
 
-	install(ProviderRegisterStrategy.registerOnlyIfNotRegistered, new EmiteUIModule(),
-		new DocumentClientNewModule(), new ChatClientNewModule());
+	install(ProviderRegisterStrategy.registerOnlyIfNotRegistered, new EmiteUIModule(), new DocumentClientModule(),
+		new ChatClientModule());
 
 	$(SitePublicSpaceLink.class);
 	$(SiteMessage.class);

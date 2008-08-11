@@ -2,6 +2,7 @@ package org.ourproject.kune.workspace.client.ui.newtmp.skel;
 
 import org.ourproject.kune.platf.client.ui.DefaultBorderLayout;
 
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.Toolbar;
@@ -13,12 +14,15 @@ public class EntitySummary {
     private final Panel entitySummary;
     private final DefaultBorderLayout mainPanel;
     private final Toolbar trayBar;
+    private final VerticalPanel vpTools;
 
     public EntitySummary() {
 	mainPanel = new DefaultBorderLayout();
 	entityTools = new Panel();
 	entityTools.setLayout(new FitLayout());
 	entityTools.setAutoHeight(true);
+	vpTools = new VerticalPanel();
+	entityTools.add(vpTools);
 	entitySummary = new Panel();
 	entityTools.setBorder(false);
 	entitySummary.setBorder(false);
@@ -38,10 +42,12 @@ public class EntitySummary {
     }
 
     public void addInTools(final Widget widget) {
-	entityTools.add(widget);
-	entityTools.render(widget.getElement());
+	vpTools.add(widget);
+	// entityTools.render(widget.getElement());
 	if (entityTools.isRendered()) {
+	    entityTools.syncSize();
 	    entityTools.doLayout(false);
+	    mainPanel.doLayoutIfNeeded();
 	}
     }
 

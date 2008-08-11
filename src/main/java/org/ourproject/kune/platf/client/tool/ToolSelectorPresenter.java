@@ -2,16 +2,13 @@ package org.ourproject.kune.platf.client.tool;
 
 import java.util.HashMap;
 
-import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
 
 import com.calclab.suco.client.signal.Slot2;
 
 public class ToolSelectorPresenter implements ToolSelector {
 
-    private ToolSelectorView view;
     private final HashMap<String, ToolSelectorItem> tools;
 
     public ToolSelectorPresenter(final StateManager stateManager, final WsThemePresenter wsThemePresenter) {
@@ -26,11 +23,6 @@ public class ToolSelectorPresenter implements ToolSelector {
 		onToolChanged(oldTool, newTool);
 	    }
 	});
-	wsThemePresenter.onThemeChanged(new Slot2<WsTheme, WsTheme>() {
-	    public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
-		view.setTheme(oldTheme, newTheme);
-	    }
-	});
     }
 
     public void addTool(final ToolSelectorItem item) {
@@ -43,14 +35,6 @@ public class ToolSelectorPresenter implements ToolSelector {
 	}
 	tools.put(name, item);
 	item.setSelected(false);
-    }
-
-    public View getView() {
-	return view;
-    }
-
-    public void init(final ToolSelectorView view) {
-	this.view = view;
     }
 
     void onGroupChanged(final String newGroupName) {
