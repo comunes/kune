@@ -3,11 +3,11 @@ package org.ourproject.kune.platf.client.ui.gridmenu;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.signal.Signal;
 import com.calclab.suco.client.signal.Slot;
 import com.gwtext.client.core.EventObject;
+import com.gwtext.client.core.Ext;
 import com.gwtext.client.core.SortDir;
 import com.gwtext.client.data.ArrayReader;
 import com.gwtext.client.data.FieldDef;
@@ -306,6 +306,7 @@ public class GridMenuPanel<T> extends Panel {
     private void createGrid(final String emptyText, final GridDragConfiguration gridDragConfiguration,
 	    final GridDropConfiguration gridDropConfiguration) {
 	grid = new GridPanel();
+	grid.setId(Ext.generateId());
 	final FieldDef[] fieldDefs = new FieldDef[] { new StringFieldDef(GROUP),
 		new StringFieldDef(GROUP_TOOLTIP_TITLE), new StringFieldDef(GROUP_TOOLTIP),
 		new StringFieldDef(GROUP_ENDICON_HTML), new StringFieldDef(ID), new StringFieldDef(ICON_HTML),

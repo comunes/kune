@@ -9,11 +9,6 @@ import java.util.HashMap;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.rack.filters.rest.DefaultRESTMethodFinder;
-import org.ourproject.kune.rack.filters.rest.Parameters;
-import org.ourproject.kune.rack.filters.rest.REST;
-import org.ourproject.kune.rack.filters.rest.RESTMethod;
-import org.ourproject.kune.rack.filters.rest.RESTMethodFinder;
 
 public class TestRESTMethodFinder {
     private RESTMethodFinder finder;

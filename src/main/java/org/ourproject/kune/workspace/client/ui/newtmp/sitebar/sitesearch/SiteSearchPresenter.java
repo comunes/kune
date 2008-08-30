@@ -3,7 +3,7 @@ package org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitesearch;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.workspace.client.search.SiteSearcher;
 
-import com.calclab.suco.client.container.Provider;
+import com.calclab.suco.client.provider.Provider;
 
 public class SiteSearchPresenter implements SiteSearch {
 

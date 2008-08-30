@@ -20,7 +20,7 @@ import org.ourproject.kune.platf.client.ui.gridmenu.GridItem;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
-import com.calclab.suco.client.container.Provider;
+import com.calclab.suco.client.provider.Provider;
 import com.calclab.suco.client.signal.Slot;
 
 public class SocialNetworkPresenter {

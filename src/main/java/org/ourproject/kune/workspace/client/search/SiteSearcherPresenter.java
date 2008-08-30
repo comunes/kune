@@ -26,7 +26,7 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
-import com.calclab.suco.client.container.Provider;
+import com.calclab.suco.client.provider.Provider;
 
 public class SiteSearcherPresenter implements SiteSearcher {
 

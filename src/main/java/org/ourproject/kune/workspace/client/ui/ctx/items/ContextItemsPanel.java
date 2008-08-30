@@ -26,6 +26,7 @@ import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.HorizontalLine;
 import org.ourproject.kune.platf.client.ui.IconLabel;
+import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 
 import com.calclab.suco.client.signal.Slot;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
@@ -43,7 +44,7 @@ public class ContextItemsPanel extends DockPanel implements ContextItemsView {
     private final I18nTranslationService i18n;
 
     public ContextItemsPanel(final ContextItemsPresenter presenter, final I18nTranslationService i18n,
-	    final StateManager stateManager) {
+	    final StateManager stateManager, final WorkspaceSkeleton ws) {
 	this.i18n = i18n;
 	topBar = new ContextTopBar(presenter, i18n, stateManager);
 	addTopBar(topBar);

@@ -130,10 +130,10 @@ import org.ourproject.kune.workspace.client.ui.newtmp.title.EntityTitlePresenter
 
 import com.calclab.emiteuimodule.client.EmiteUIModule;
 import com.calclab.suco.client.container.Container;
-import com.calclab.suco.client.modules.AbstractModule;
-import com.calclab.suco.client.modules.ModuleManager.ProviderRegisterStrategy;
+import com.calclab.suco.client.module.AbstractModule;
+import com.calclab.suco.client.module.ModuleManager.ProviderRegisterStrategy;
 import com.calclab.suco.client.provider.Factory;
-import com.calclab.suco.client.scopes.SingletonScope;
+import com.calclab.suco.client.scope.SingletonScope;
 import com.calclab.suco.client.signal.Slot;
 import com.calclab.suco.client.signal.Slot0;
 import com.google.gwt.core.client.GWT;
@@ -579,7 +579,7 @@ public class KuneModule extends AbstractModule {
 	    public ContextItems create() {
 		final ContextItemsPresenter presenter = new ContextItemsPresenter(i18n, $(StateManager.class),
 			$(Session.class), $$(ContentServiceAsync.class));
-		final ContextItemsPanel panel = new ContextItemsPanel(presenter, i18n, $(StateManager.class));
+		final ContextItemsPanel panel = new ContextItemsPanel(presenter, i18n, $(StateManager.class), ws);
 		presenter.init(panel);
 		return presenter;
 	    }

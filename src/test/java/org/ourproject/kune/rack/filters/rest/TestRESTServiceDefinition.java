@@ -4,8 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.rack.filters.rest.REST;
-import org.ourproject.kune.rack.filters.rest.RESTServiceDefinition;
 
 public class TestRESTServiceDefinition {
 

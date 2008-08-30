@@ -35,7 +35,7 @@ import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
 import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsImages;
 
-import com.calclab.suco.client.container.Provider;
+import com.calclab.suco.client.provider.Provider;
 import com.calclab.suco.client.signal.Slot;
 
 public class FolderContextPresenter implements FolderContext {

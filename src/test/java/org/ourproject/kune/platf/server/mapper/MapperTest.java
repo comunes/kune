@@ -10,26 +10,21 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.dto.ChatUserParamsDTO;
 import org.ourproject.kune.platf.client.dto.CommentDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.ContainerSimpleDTO;
 import org.ourproject.kune.platf.client.dto.ContentDTO;
-import org.ourproject.kune.platf.client.dto.CustomPropertiesDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.GroupListDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
-import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.server.TestDomainHelper;
 import org.ourproject.kune.platf.server.TestHelper;
 import org.ourproject.kune.platf.server.access.AccessRights;
-import org.ourproject.kune.platf.server.domain.ChatUserParams;
 import org.ourproject.kune.platf.server.domain.Comment;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.CustomProperties;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.GroupList;
 import org.ourproject.kune.platf.server.domain.GroupListMode;
@@ -38,9 +33,7 @@ import org.ourproject.kune.platf.server.domain.Revision;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.state.State;
-import org.ourproject.kune.platf.server.users.UserInfo;
 
-import com.calclab.emite.client.im.roster.RosterManager.SubscriptionMode;
 import com.google.inject.Inject;
 
 public class MapperTest {
@@ -48,33 +41,6 @@ public class MapperTest {
     Mapper mapper;
     @Inject
     GroupManager groupManager;
-
-    @Test
-    public void customPropertiesInUserInfoMappping() {
-	// Make a custom converter instead of mapper.mapProperties
-	// http://dozer.sourceforge.net/documentation/customconverter.html
-	final UserInfo userInfo = new UserInfo();
-	final ChatUserParams userChatParams = new ChatUserParams("avatar", true, SubscriptionMode.autoAcceptAll,
-		"color");
-	final CustomProperties customProperties = new CustomProperties();
-	customProperties.setData(ChatUserParams.class, userChatParams);
-	userInfo.setCustomProperties(customProperties);
-	final UserInfoDTO map = mapper.map(userInfo, UserInfoDTO.class);
-	final ChatUserParamsDTO data = map.getCustomProperties().getData(ChatUserParamsDTO.class);
-	assertEquals("avatar", data.getAvatar());
-    }
-
-    @Test
-    public void customPropertiesMappping() throws ClassNotFoundException {
-	// Make a custom converter instead of mapper.mapProperties
-	final ChatUserParams userChatParams = new ChatUserParams("avatar", true, SubscriptionMode.autoAcceptAll,
-		"color");
-	final CustomProperties customProperties = new CustomProperties();
-	customProperties.setData(ChatUserParams.class, userChatParams);
-	final CustomPropertiesDTO map = mapper.mapProperties(customProperties);
-	final ChatUserParamsDTO data = map.getData(ChatUserParamsDTO.class);
-	assertEquals("avatar", data.getAvatar());
-    }
 
     @Before
     public void inject() {

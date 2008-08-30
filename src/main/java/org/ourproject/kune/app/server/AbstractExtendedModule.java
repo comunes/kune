@@ -19,6 +19,8 @@
  */
 package org.ourproject.kune.app.server;
 
+import static com.google.inject.name.Names.named;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.HashSet;
@@ -31,8 +33,6 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.matcher.Matcher;
-
-import static com.google.inject.name.Names.named;
 
 /**
  * An extension of AbstractModule that provides support for member injection of

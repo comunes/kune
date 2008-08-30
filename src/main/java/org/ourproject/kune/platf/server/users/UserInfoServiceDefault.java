@@ -53,7 +53,6 @@ public class UserInfoServiceDefault implements UserInfoService {
 	    info.setLanguage(language);
 	    info.setCountry(user.getCountry());
 	    info.setUserHash(userHash);
-	    info.setCustomProperties(user.getCustomProperties());
 
 	    final Group userGroup = user.getUserGroup();
 

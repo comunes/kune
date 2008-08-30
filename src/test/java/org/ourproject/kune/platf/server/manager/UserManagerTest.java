@@ -15,15 +15,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
 import org.ourproject.kune.platf.server.PersistenceTest;
-import org.ourproject.kune.platf.server.domain.ChatUserParams;
-import org.ourproject.kune.platf.server.domain.CustomProperties;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.I18nCountry;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 
-import com.calclab.emite.client.im.roster.RosterManager.SubscriptionMode;
 import com.google.inject.Inject;
 
 public class UserManagerTest extends PersistenceTest {
@@ -123,23 +120,6 @@ public class UserManagerTest extends PersistenceTest {
     public void userNameLengthIncorrect() {
 	user = new User("test1", "te", "test@example.com", "some passwd", english, gb, getTimeZone());
 	persist(user);
-    }
-
-    @Test
-    public void userSaveAndGetCustomProperties() {
-	final User user1 = userManager.createUser("test", "test 1 name", "test1@example.com", "some password", "en",
-		"GB", "GMT");
-	final ChatUserParams userChatParams = new ChatUserParams("avatar", true, SubscriptionMode.autoAcceptAll,
-		"color");
-	user1.getCustomProperties().setData(ChatUserParams.class, userChatParams);
-	persist(user1);
-	final User find = userManager.find(user1.getId());
-	final CustomProperties customProperties = find.getCustomProperties();
-	assertEquals("avatar", customProperties.getData(ChatUserParams.class).getAvatar());
-	assertEquals("color", customProperties.getData(ChatUserParams.class).getChatColor());
-	assertEquals(SubscriptionMode.autoAcceptAll, customProperties.getData(ChatUserParams.class)
-		.getSubscriptionMode());
-	assertEquals(true, customProperties.getData(ChatUserParams.class).isPublishRoster());
     }
 
     @Test

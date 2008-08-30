@@ -271,12 +271,12 @@
      <dependency>
       <groupId>com.calclab.emite</groupId>
       <artifactId>emite</artifactId>
-      <version>0.3.2</version>
+      <version>0.3.3</version>
     </dependency>
     <dependency>
       <groupId>com.calclab</groupId>
       <artifactId>suco</artifactId>
-      <version>0.3.2</version>
+      <version>0.4.0</version>
     </dependency>
   </dependencies>
   <!-- http://gwt-maven.googlecode.com/svn/docs/maven-googlewebtoolkit2-plugin/index.html -->

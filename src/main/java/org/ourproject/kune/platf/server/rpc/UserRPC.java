@@ -112,12 +112,6 @@ public class UserRPC implements RPC, UserService {
     private UserInfoDTO loadUserInfo(final User user) throws DefaultException {
 	final UserInfo userInfo = userInfoService.buildInfo(user, getUserSession().getHash());
 	final UserInfoDTO map = mapper.map(userInfo, UserInfoDTO.class);
-	try {
-	    map.setCustomProperties(mapper.mapProperties(userInfo.getCustomProperties()));
-	} catch (final ClassNotFoundException e) {
-	    e.printStackTrace();
-	    throw new DefaultException("Class not found during mapping userInfo");
-	}
 	return map;
     }
 

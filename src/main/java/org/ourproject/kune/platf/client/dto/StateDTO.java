@@ -23,7 +23,6 @@ package org.ourproject.kune.platf.client.dto;
 import java.util.Date;
 import java.util.List;
 
-
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class StateDTO implements IsSerializable {

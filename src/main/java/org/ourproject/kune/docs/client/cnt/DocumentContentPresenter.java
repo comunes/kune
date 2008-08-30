@@ -39,7 +39,7 @@ import org.ourproject.kune.workspace.client.editor.TextEditorListener;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.sitebar.Site;
 
-import com.calclab.suco.client.container.Provider;
+import com.calclab.suco.client.provider.Provider;
 import com.calclab.suco.client.signal.Signal0;
 import com.calclab.suco.client.signal.Slot0;
 import com.google.gwt.user.client.rpc.AsyncCallback;

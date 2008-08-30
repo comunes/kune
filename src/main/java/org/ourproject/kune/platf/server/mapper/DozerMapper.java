@@ -21,15 +21,12 @@
 package org.ourproject.kune.platf.server.mapper;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import net.sf.dozer.util.mapping.DozerBeanMapperSingletonWrapper;
 import net.sf.dozer.util.mapping.MapperIF;
 
-import org.ourproject.kune.platf.client.dto.CustomPropertiesDTO;
 import org.ourproject.kune.platf.client.dto.SearchResultDTO;
-import org.ourproject.kune.platf.server.domain.CustomProperties;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 
 import com.google.inject.Singleton;
@@ -54,20 +51,6 @@ public class DozerMapper implements Mapper {
 	    dest.add((T) mapper.map(o, type));
 	}
 	return dest;
-    }
-
-    public CustomPropertiesDTO mapProperties(final CustomProperties customProperties) throws ClassNotFoundException {
-	final CustomPropertiesDTO customPropertiesDTO = new CustomPropertiesDTO();
-	final HashMap<Class<?>, Object> dataMapped = new HashMap<Class<?>, Object>();
-	for (final Class<?> c : customProperties.getData().keySet()) {
-	    final Object object = customProperties.getData(c);
-	    final Class<?> destClassName = Class.forName("org.ourproject.kune.platf.client.dto." + c.getSimpleName()
-		    + "DTO");
-	    final Object objectMapped = map(object, destClassName);
-	    dataMapped.put(destClassName, objectMapped);
-	}
-	customPropertiesDTO.setData(dataMapped);
-	return customPropertiesDTO;
     }
 
     @SuppressWarnings("unchecked")
