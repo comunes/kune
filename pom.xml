@@ -31,13 +31,13 @@
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-user</artifactId>
-      <version>1.5.0</version>
+      <version>1.5.2</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-servlet</artifactId>
-      <version>1.5.0</version>
+      <version>1.5.2</version>
     </dependency>
     <!-- Use new repo -->
     <!-- http://code.google.com/p/gwt-ext/issues/detail?id=180 -->

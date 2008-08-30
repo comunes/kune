@@ -1,6 +1,10 @@
 <module>
 	<inherits name='com.google.gwt.i18n.I18N' />
 	<inherits name='com.google.gwt.user.User' />
+	
+	<!-- http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/4d38cff6b1c217c6/8fae54c512bac373?lnk=gst&q=will+not+be+serialized+because+it+is+final+#8fae54c512bac373 -->
+	<set-property name="gwt.suppressNonStaticFinalFieldWarnings" value="true" /> 
+		
 	<inherits name="org.cafesip.gwtcomp.GWTComponents" />
 
     <inherits name="com.calclab.suco.Suco" />
