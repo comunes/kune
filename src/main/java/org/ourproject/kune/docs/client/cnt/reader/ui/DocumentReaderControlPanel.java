@@ -22,51 +22,58 @@ package org.ourproject.kune.docs.client.cnt.reader.ui;
 
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderControlPresenter;
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderControlView;
-import org.ourproject.kune.platf.client.ui.CustomPushButton;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.workspace.client.ui.newtmp.skel.Toolbar;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 
-import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtext.client.core.EventObject;
+import com.gwtext.client.widgets.Button;
+import com.gwtext.client.widgets.ToolbarButton;
+import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 
-public class DocumentReaderControlPanel extends HorizontalPanel implements DocumentReaderControlView {
-    private final CustomPushButton editBtn;
-    private final CustomPushButton deleteBtn;
-    private final CustomPushButton translateBtn;
+public class DocumentReaderControlPanel implements DocumentReaderControlView {
+    private final ToolbarButton editBtn;
+    private final ToolbarButton deleteBtn;
+    private final ToolbarButton translateBtn;
+    private final Widget space1;
+    private final Widget space2;
 
     public DocumentReaderControlPanel(final DocumentReaderControlPresenter presenter,
 	    final I18nUITranslationService i18n, final WorkspaceSkeleton ws) {
-	editBtn = new CustomPushButton(i18n.tWithNT("Edit", "used in button"), new ClickListener() {
-	    public void onClick(final Widget sender) {
-		presenter.onEdit();
-		editBtn.removeStyleDependentName("up-hovering");
+	editBtn = new ToolbarButton(i18n.tWithNT("Edit", "used in button"), new ButtonListenerAdapter() {
+	    public void onClick(final Button button, final EventObject e) {
+		presenter.onEditClicked();
 	    }
 	});
 
-	deleteBtn = new CustomPushButton(i18n.tWithNT("Delete", "used in button"), new ClickListener() {
-	    public void onClick(final Widget sender) {
-		presenter.onDelete();
-		deleteBtn.removeStyleDependentName("up-hovering");
+	deleteBtn = new ToolbarButton(i18n.tWithNT("Delete", "used in button"), new ButtonListenerAdapter() {
+	    public void onClick(final Button button, final EventObject e) {
+		presenter.onDeleteClicked();
 	    }
 	});
 
-	translateBtn = new CustomPushButton(i18n.tWithNT("Translate", "used in button"), new ClickListener() {
-	    public void onClick(final Widget sender) {
-		presenter.onTranslate();
-		translateBtn.removeStyleDependentName("up-hovering");
+	translateBtn = new ToolbarButton(i18n.tWithNT("Translate", "used in button"), new ButtonListenerAdapter() {
+	    public void onClick(final Button button, final EventObject e) {
+		presenter.onTranslateClicked();
 		ws.showAlertMessage(i18n.t("Alert"), i18n.t("Sorry, this functionality is currently in development"));
 	    }
 	});
 
-	add(editBtn);
-	add(deleteBtn);
-	add(translateBtn);
-	deleteBtn.addStyleName("kune-Button-Small-lSpace");
-	translateBtn.addStyleName("kune-Button-Small-lSpace");
+	final Toolbar contentTopBar = ws.getEntityWorkspace().getContentTopBar();
+	contentTopBar.add(editBtn);
+	space1 = contentTopBar.addSpacer();
+	contentTopBar.add(deleteBtn);
+	space2 = contentTopBar.addSpacer();
+	contentTopBar.add(translateBtn);
 	setEditEnabled(false);
 	setDeleteEnabled(false);
 	setTranslateEnabled(false);
+	hide();
+    }
+
+    public void hide() {
+	this.setVisible(false);
     }
 
     public void setDeleteEnabled(final boolean isEnabled) {
@@ -82,7 +89,14 @@ public class DocumentReaderControlPanel extends HorizontalPanel implements Docum
     }
 
     public void show() {
-
+	this.setVisible(true);
     }
 
+    private void setVisible(final boolean visible) {
+	editBtn.setVisible(visible);
+	deleteBtn.setVisible(visible);
+	translateBtn.setVisible(visible);
+	space1.setVisible(visible);
+	space2.setVisible(visible);
+    }
 }

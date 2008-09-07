@@ -22,7 +22,7 @@ import org.ourproject.kune.platf.client.tool.ToolSelector;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckPanel;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummary;
-import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
+import org.ourproject.kune.workspace.client.ui.ctx.items.ContextNavigator;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
 
@@ -81,7 +81,7 @@ public class ChatClientModule extends AbstractModule {
 	});
 	register(SingletonScope.class, new Factory<RoomsAdmin>(RoomsAdmin.class) {
 	    public RoomsAdmin create() {
-		final RoomsAdminPresenter presenter = new RoomsAdminPresenter($(ContextItems.class),
+		final RoomsAdminPresenter presenter = new RoomsAdminPresenter($(ContextNavigator.class),
 			$(I18nUITranslationService.class), $$(StateManager.class), $(Session.class),
 			$$(ContentServiceAsync.class));
 		return presenter;

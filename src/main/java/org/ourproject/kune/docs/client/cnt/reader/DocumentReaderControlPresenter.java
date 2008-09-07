@@ -20,27 +20,42 @@
 
 package org.ourproject.kune.docs.client.cnt.reader;
 
-import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.docs.client.cnt.DocumentContent;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
+
+import com.calclab.suco.client.signal.Slot0;
 
 public class DocumentReaderControlPresenter implements DocumentReaderControl {
     private DocumentReaderControlView view;
+    private final DocumentContent docContent;
 
-    public View getView() {
-	return view;
+    public DocumentReaderControlPresenter(final DocumentContent docContent) {
+	this.docContent = docContent;
+	docContent.onEditing(new Slot0() {
+	    public void onEvent() {
+		view.hide();
+	    }
+	});
+	docContent.onEditCancelled(new Slot0() {
+	    public void onEvent() {
+		view.show();
+	    }
+	});
     }
 
     public void init(final DocumentReaderControlView view) {
 	this.view = view;
     }
 
-    public void onDelete() {
+    public void onDeleteClicked() {
+	// docContent.onDeleteClicked();
     }
 
-    public void onEdit() {
+    public void onEditClicked() {
+	// docContent.onEditClicked();
     }
 
-    public void onTranslate() {
+    public void onTranslateClicked() {
     }
 
     public void setRights(final AccessRightsDTO accessRights) {

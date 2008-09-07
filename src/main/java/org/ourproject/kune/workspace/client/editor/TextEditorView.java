@@ -30,6 +30,12 @@ public interface TextEditorView extends View {
 
     public String getText();
 
+    public View getToolBar();
+
+    public void saveTimerCancel();
+
+    public void scheduleSave(int delayMillis);
+
     public void setEnabled(boolean enabled);
 
     public void setEnabledCancelButton(boolean enabled);
@@ -44,12 +50,8 @@ public interface TextEditorView extends View {
 
     public void setTextSaveButton(String text);
 
+    public void setToolBarVisible(boolean visible);
+
     public void showSaveBeforeDialog();
-
-    public void scheduleSave(int delayMillis);
-
-    public void saveTimerCancel();
-
-    public View getToolBar();
 
 }

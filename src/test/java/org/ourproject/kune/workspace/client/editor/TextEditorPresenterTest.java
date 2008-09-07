@@ -64,7 +64,7 @@ public class TextEditorPresenterTest {
         viewReset();
         EasyMock.replay(view);
         listener.onSave("foo");
-        listener.onCancel();
+        listener.onEditCancelled();
         EasyMock.replay(listener);
         presenter.init(view);
         presenter.onEdit();

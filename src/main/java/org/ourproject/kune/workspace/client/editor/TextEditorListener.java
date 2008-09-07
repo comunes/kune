@@ -21,7 +21,9 @@
 package org.ourproject.kune.workspace.client.editor;
 
 public interface TextEditorListener {
-    void onCancel();
+
+    void onEditCancelled();
 
     void onSave(String text);
+
 }

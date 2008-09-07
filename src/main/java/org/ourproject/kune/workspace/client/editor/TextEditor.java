@@ -24,18 +24,18 @@ import org.ourproject.kune.platf.client.View;
 
 public interface TextEditor {
 
-    public View getView();
-
-    public View getToolBar();
-
-    public void setContent(String content);
-
     public String getContent();
+
+    public View getView();
 
     public void onSaved();
 
     public void onSaveFailed();
 
     public void reset();
+
+    public void setContent(String content);
+
+    public void setToolbarVisible(boolean visible);
 
 }

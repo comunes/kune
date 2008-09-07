@@ -20,14 +20,9 @@
 
 package org.ourproject.kune.platf.client.tool;
 
-import org.ourproject.kune.platf.client.dto.StateDTO;
 
 public interface ClientTool {
 
     String getName();
-
-    void setContent(StateDTO state);
-
-    void setContext(StateDTO state);
 
 }

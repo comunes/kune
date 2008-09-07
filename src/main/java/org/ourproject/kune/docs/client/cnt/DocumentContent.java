@@ -20,20 +20,20 @@
 
 package org.ourproject.kune.docs.client.cnt;
 
-import org.ourproject.kune.platf.client.dto.StateDTO;
-
 import com.calclab.suco.client.signal.Slot0;
 
 public interface DocumentContent {
 
-    void onCancel(Slot0 slot);
+    void onEditCancelled(Slot0 slot);
 
-    void onEdit(Slot0 slot);
+    void onDeleteClicked();
+
+    void onEditClicked();
+
+    void onEditing(Slot0 slot);
 
     void onSaved();
 
     void onSaveFailed();
-
-    void setContent(StateDTO content);
 
 }

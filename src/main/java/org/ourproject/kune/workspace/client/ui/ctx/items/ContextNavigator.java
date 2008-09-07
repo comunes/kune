@@ -18,15 +18,21 @@
  *
  */
 
-package org.ourproject.kune.docs.client.ctx.folder;
+package org.ourproject.kune.workspace.client.ui.ctx.items;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
-import org.ourproject.kune.platf.client.dto.ContainerDTO;
+import org.ourproject.kune.platf.client.actions.ClientActionDescriptor;
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
-public interface FolderContext {
-    View getView();
+public interface ContextNavigator {
 
-    void setContainer(StateToken currentState, ContainerDTO folder, AccessRightsDTO accessRightsDTO);
+    public View getView();
+
+    public void setState(StateDTO state);
+
+    void addAction(String contentTypeId, ClientActionDescriptor<StateToken> action);
+
+    void removeAction(String contentTypeId, ClientActionDescriptor<StateToken> action);
+
 }

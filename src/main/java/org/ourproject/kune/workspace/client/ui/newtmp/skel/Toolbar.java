@@ -26,9 +26,7 @@ public class Toolbar {
 
     public void add(final Widget widget) {
 	childPanel.add(widget);
-	if (container.isRendered()) {
-	    container.doLayout(false);
-	}
+	doLayoutIfNeeded();
     }
 
     public Widget addFill() {
@@ -57,8 +55,24 @@ public class Toolbar {
 	container.addClass(cls);
     }
 
+    public void doLayoutIfNeeded() {
+	if (container.isRendered()) {
+	    container.doLayout(false);
+	}
+    }
+
     public Panel getPanel() {
 	return container;
+    }
+
+    public void remove(final Widget widget) {
+	childPanel.remove(widget);
+	doLayoutIfNeeded();
+    }
+
+    public void removeAll() {
+	childPanel.clear();
+	doLayoutIfNeeded();
     }
 
 }

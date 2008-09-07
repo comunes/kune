@@ -19,6 +19,9 @@
  */
 package org.ourproject.kune.workspace.client.sitebar.login;
 
+import java.util.Date;
+
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
 import org.ourproject.kune.platf.client.ui.dialogs.InfoDialog;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
@@ -27,7 +30,9 @@ import org.ourproject.kune.workspace.client.sitebar.Site;
 import org.ourproject.kune.workspace.client.sitebar.msg.SimpleMessagePanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Label;
@@ -172,6 +177,14 @@ public class SignInPanel implements SignInView {
 		}
 	    }
 	});
+    }
+
+    public void setCookie(final String userHash) {
+	// http://code.google.com/p/google-web-toolkit-incubator/wiki/LoginSecurityFAQ
+	final long duration = Session.SESSION_DURATION;
+	final Date expires = new Date(System.currentTimeMillis() + duration);
+	Cookies.setCookie(Site.USERHASH, userHash, expires, null, "/", false);
+	GWT.log("Received hash: " + userHash, null);
     }
 
     public void setRegisterMessage(final String message, final SiteErrorType type) {

@@ -22,13 +22,12 @@ package org.ourproject.kune.docs.client.cnt.folder.viewer.ui;
 
 import org.ourproject.kune.docs.client.cnt.folder.viewer.FolderViewerView;
 import org.ourproject.kune.workspace.client.sitebar.Site;
-import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.ui.Label;
 
-public class FolderViewerPanel implements FolderViewerView {
+public class FolderViewerPanel extends Label implements FolderViewerView {
 
-    public FolderViewerPanel(final WorkspaceSkeleton ws) {
-	ws.getEntityWorkspace().setContent(new Label("Folder properties, translations ..." + Site.IN_DEVELOPMENT));
+    public FolderViewerPanel() {
+	super("Folder properties, translations ..." + Site.IN_DEVELOPMENT);
     }
 }

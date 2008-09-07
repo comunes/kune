@@ -24,12 +24,14 @@ import org.ourproject.kune.platf.client.View;
 
 public interface DocumentReaderControlView extends View {
 
-    public void setDeleteEnabled(boolean isEnabled);
+    void hide();
 
-    public void setEditEnabled(boolean isEnabled);
+    void setDeleteEnabled(boolean isEnabled);
 
-    public void setTranslateEnabled(boolean isEnabled);
+    void setEditEnabled(boolean isEnabled);
 
-    public void show();
+    void setTranslateEnabled(boolean isEnabled);
+
+    void show();
 
 }

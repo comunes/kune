@@ -336,27 +336,27 @@
     text-decoration: underline;
 }
 
-.k-entity-container-default div {
+.k-entity-context-default div {
     background: #FFD09D none repeat scroll 0% 50%;
 }
 
-.k-entity-container-green div {
+.k-entity-context-green div {
     background: #CFA none repeat scroll 0% 50%;
 }
 
-.k-entity-container-blue div {
+.k-entity-context-blue div {
     background: #AACCFF none repeat scroll 0% 50%;
 }
 
-.k-entity-container-grey div {
+.k-entity-context-grey div {
     background: #B3B3B3 none repeat scroll 0% 50%;
 }
 
-.k-entity-container-purple div {
+.k-entity-context-purple div {
     background: #DDAFE9 none repeat scroll 0% 50%;
 }
 
-.k-entity-container-red div {
+.k-entity-context-red div {
     background: #FFAAAA none repeat scroll 0% 50%;
 }
 
@@ -625,4 +625,9 @@
 
 .k-toolselectoritem-notsel a:hover {
   text-decoration: underline;
+}
+
+/* others */
+.k-linethrough {
+	text-decoration: line-through;
 }

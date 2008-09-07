@@ -29,14 +29,15 @@ import com.google.gwt.user.client.ui.ImageBundle;
  * http://code.google.com/p/google-web-toolkit/wiki/ImageBundleDesign
  * 
  */
-public interface ContextItemsImages extends ImageBundle {
+public interface ContextNavigatorImages extends ImageBundle {
 
     public static class App {
-	private static ContextItemsImages ourInstance = null;
+	private static ContextNavigatorImages ourInstance = null;
 
-	public static synchronized ContextItemsImages getInstance() {
+	@Deprecated
+	public static synchronized ContextNavigatorImages getInstance() {
 	    if (ourInstance == null) {
-		ourInstance = (ContextItemsImages) GWT.create(ContextItemsImages.class);
+		ourInstance = (ContextNavigatorImages) GWT.create(ContextNavigatorImages.class);
 	    }
 	    return ourInstance;
 	}

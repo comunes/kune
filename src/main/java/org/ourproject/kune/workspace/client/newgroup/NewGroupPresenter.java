@@ -69,7 +69,7 @@ public class NewGroupPresenter implements NewGroup {
 		    view.center();
 		    Site.hideProgress();
 		} else {
-		    stateManager.setState(previousToken);
+		    stateManager.gotoToken(previousToken);
 		    Site.info(i18n.t("Sign in or register to create a group"));
 		}
 	    }
@@ -94,12 +94,12 @@ public class NewGroupPresenter implements NewGroup {
     public void onCancel() {
 	view.hide();
 	reset();
-	stateManager.setState(previousToken);
+	stateManager.gotoToken(previousToken);
     }
 
     public void onClose() {
 	reset();
-	stateManager.setState(previousToken);
+	stateManager.gotoToken(previousToken);
     }
 
     public void onFinish() {
@@ -130,7 +130,7 @@ public class NewGroupPresenter implements NewGroup {
 	    }
 
 	    public void onSuccess(final StateToken token) {
-		stateManager.setState(token);
+		stateManager.gotoToken(token);
 		view.hide();
 		reset();
 		view.unMask();

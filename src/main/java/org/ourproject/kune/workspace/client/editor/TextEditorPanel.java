@@ -22,6 +22,7 @@ package org.ourproject.kune.workspace.client.editor;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Timer;
@@ -40,12 +41,13 @@ public class TextEditorPanel extends Composite implements TextEditorView {
     private final Timer saveTimer;
     private final I18nTranslationService i18n;
 
-    public TextEditorPanel(final TextEditorPresenter presenter, final I18nTranslationService i18n) {
+    public TextEditorPanel(final TextEditorPresenter presenter, final I18nTranslationService i18n,
+	    final WorkspaceSkeleton ws) {
 
 	this.presenter = presenter;
 	this.i18n = i18n;
 	gwtRTarea = new RichTextArea();
-	textEditorToolbar = new TextEditorToolbar(gwtRTarea, presenter, i18n);
+	textEditorToolbar = new TextEditorToolbar(gwtRTarea, presenter, i18n, ws);
 	initWidget(gwtRTarea);
 
 	gwtRTarea.setWidth("97%");
@@ -115,6 +117,10 @@ public class TextEditorPanel extends Composite implements TextEditorView {
 
     public void setTextSaveButton(final String text) {
 	textEditorToolbar.setTextSaveButton(text);
+    }
+
+    public void setToolBarVisible(final boolean visible) {
+	textEditorToolbar.setVisible(visible);
     }
 
     public void showSaveBeforeDialog() {

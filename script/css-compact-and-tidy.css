@@ -1,11 +1,28 @@
 #!/bin/bash
-#!/bin/bash
 ORIG=src/main/java/org/ourproject/kune/app/public/
 CATTMPFILE=`mktemp -t css.1.XXX` || exit 1
 CSSTMPFILE=`mktemp -t css.2.XXX` || exit 1
 DEST=src/main/java/org/ourproject/kune/app/public/css/all.css
 DEST2=src/main/java/org/ourproject/kune/app/public/css/richtext.css
-CSS='css/reset.css css/fonts-min.css js/ext/resources/css/ext-all.css js/ext/resources/css/xtheme-gray.css css/kune.css css/workspace.css css/chat.css css/docs.css css/kune-new.css'
+
+EXTTMPFILE=$ORIG/js/ext/resources/css/ext-all.css-tmp
+
+sed 's/normal 11px/normal 100\%/g' $ORIG/js/ext/resources/css/ext-all.css |\
+sed 's/bold 11px/normal 100\%/g' |\
+sed 's/normal 12px/normal 108\%/g' |\
+sed 's/bold 12px/bold 108\%/g' |\
+sed 's/font-size:11px/font-size:100\%/g' |\
+sed 's/font-size:12px/font-size:108\%/g' |\
+sed 's/ arial,tahoma,helvetica,sans-serif/ arial,sans/g' |\
+sed 's/ tahoma,arial,helvetica,sans-serif/ arial,sans/g' |\
+sed 's/ tahoma,arial,verdana,sans-serif/ arial,sans/g' |\
+sed 's/ tahoma,verdana,helvetica/ arial,sans/g' |\
+sed 's/ tahoma,arial,helvetica/ arial,sans/g' |\
+sed 's/ tahoma,arial,sans-serif/ arial,sans/g' |\
+sed 's/ \"sans serif\",tahoma,verdana,helvetica/ arial,sans/g' |\
+sed 's/ arial,helvetica,tahoma,sans-serif/ arial,sans/g' > $EXTTMPFILE
+
+CSS='css/reset.css css/fonts-min.css js/ext/resources/css/ext-all.css-tmp js/ext/resources/css/xtheme-gray.css css/kune.css css/workspace.css css/chat.css css/docs.css css/kune-new.css'
 CSS2='css/reset.css css/fonts-min.css css/base-min.css css/rte.css'
 
 function concat {
@@ -40,3 +57,5 @@ echo > $CATTMPFILE
 
 concat $CSS2
 tidy $DEST2
+
+rm $EXTTMPFILE

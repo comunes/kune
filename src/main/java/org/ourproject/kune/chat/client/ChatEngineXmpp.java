@@ -123,9 +123,8 @@ class ChatEngineXmpp implements ChatEngine {
     public void logout() {
 	if (!emiteDialog.isDialogNotStarted()) {
 	    emiteDialog.setOwnPresence(OwnStatus.offline);
-	    final UserChatOptions userChatOptions = getUserChatOptions("reset@example.com", "");
-	    emiteDialog.refreshUserInfo(userChatOptions);
-	    chatOptions.userOptions = userChatOptions;
+	    chatOptions.userOptions = getUserChatOptions("reset@example.com", "");
+	    emiteDialog.refreshUserInfo(chatOptions.userOptions);
 	    emiteDialog.setEnableStatusUI(false);
 	}
     }

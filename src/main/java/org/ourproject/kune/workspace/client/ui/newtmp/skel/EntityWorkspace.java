@@ -11,17 +11,17 @@ import com.gwtext.client.widgets.layout.AnchorLayoutData;
 
 public class EntityWorkspace extends DefaultBorderLayout {
     private final Panel content;
-    private final Panel container;
+    private final Panel context;
     private final TitleBar title;
     private final TitleBar subTitle;
     private final TitleBar bottom;
     private final Toolbar contentTopBar;
     private final Toolbar contentBottomBar;
-    private final Toolbar containerTopBar;
-    private final Toolbar containerBottomBar;
+    private final Toolbar contextTopBar;
+    private final Toolbar contextBottomBar;
     private final RoundedPanel roundedTitle;
     private final RoundedPanel roundedBottom;
-    private final DefaultBorderLayout containerWrap;
+    private final DefaultBorderLayout contextWrap;
 
     public EntityWorkspace() {
 	final Panel titles = new Panel();
@@ -48,50 +48,41 @@ public class EntityWorkspace extends DefaultBorderLayout {
 	bottomPanel.add(roundedBottom, new AnchorLayoutData("100% -" + DEF_TOOLBAR_HEIGHT));
 
 	final DefaultBorderLayout contentWrap = new DefaultBorderLayout();
-	containerWrap = new DefaultBorderLayout();
+	contextWrap = new DefaultBorderLayout();
 	contentWrap.setBorder(true);
-	containerWrap.setBorder(true);
+	contextWrap.setBorder(true);
 	content = new Panel();
-	container = new Panel();
+	context = new Panel();
 	content.setBorder(false);
-	container.setBorder(false);
-	container.setCollapsible(true);
-	content.setPaddings(5);
-	container.setPaddings(5);
+	context.setBorder(false);
+	context.setCollapsible(true);
+	content.setPaddings(7);
 	content.setAutoScroll(true);
-	container.setAutoScroll(true);
+	context.setAutoScroll(true);
 
 	contentTopBar = new Toolbar();
 	contentBottomBar = new Toolbar();
-	containerTopBar = new Toolbar();
-	containerBottomBar = new Toolbar();
+	contextTopBar = new Toolbar();
+	contextBottomBar = new Toolbar();
 	contentTopBar.addStyleName("k-toolbar-bottom-line");
 	contentBottomBar.addStyleName("k-toolbar-top-line");
-	containerTopBar.addStyleName("k-toolbar-bottom-line");
-	containerBottomBar.addStyleName("k-toolbar-top-line");
+	contextTopBar.addStyleName("k-toolbar-bottom-line");
+	contextBottomBar.addStyleName("k-toolbar-top-line");
 	contentWrap.add(contentTopBar.getPanel(), Position.NORTH, false, DEF_TOOLBAR_HEIGHT);
-	containerWrap.add(containerTopBar.getPanel(), Position.NORTH, false, DEF_TOOLBAR_HEIGHT);
+	contextWrap.add(contextTopBar.getPanel(), Position.NORTH, false, DEF_TOOLBAR_HEIGHT);
 	contentWrap.add(content, Position.CENTER);
-	containerWrap.add(container, Position.CENTER);
+	contextWrap.add(context, Position.CENTER);
 	contentWrap.add(contentBottomBar.getPanel(), Position.SOUTH, false, DEF_TOOLBAR_HEIGHT);
-	containerWrap.add(containerBottomBar.getPanel(), Position.SOUTH, false, DEF_TOOLBAR_HEIGHT);
+	contextWrap.add(contextBottomBar.getPanel(), Position.SOUTH, false, DEF_TOOLBAR_HEIGHT);
 
 	add(titles, DefaultBorderLayout.Position.NORTH, DEF_TOOLBAR_HEIGHT * 2);
 	add(contentWrap.getPanel(), DefaultBorderLayout.Position.CENTER);
-	add(containerWrap.getPanel(), DefaultBorderLayout.Position.EAST, true, 175);
+	add(contextWrap.getPanel(), DefaultBorderLayout.Position.EAST, true, 175);
 	add(bottomPanel, DefaultBorderLayout.Position.SOUTH, DEF_TOOLBAR_HEIGHT + 2);
     }
 
     public TitleBar getBottomTitle() {
 	return bottom;
-    }
-
-    public Toolbar getContainerBottomBar() {
-	return containerBottomBar;
-    }
-
-    public Toolbar getContainerTopBar() {
-	return containerTopBar;
     }
 
     public Toolbar getContentBottomBar() {
@@ -102,6 +93,14 @@ public class EntityWorkspace extends DefaultBorderLayout {
 	return contentTopBar;
     }
 
+    public Toolbar getContextBottomBar() {
+	return contextBottomBar;
+    }
+
+    public Toolbar getContextTopBar() {
+	return contextTopBar;
+    }
+
     public TitleBar getSubTitle() {
 	return subTitle;
     }
@@ -110,12 +109,12 @@ public class EntityWorkspace extends DefaultBorderLayout {
 	return title;
     }
 
-    public void setContainer(final Widget widget) {
-	setPanel(container, widget);
-    }
-
     public void setContent(final Widget widget) {
 	setPanel(content, widget);
+    }
+
+    public void setContext(final Widget widget) {
+	setPanel(context, widget);
     }
 
     public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
@@ -126,7 +125,7 @@ public class EntityWorkspace extends DefaultBorderLayout {
 	    subTitle.removeStyleDependentName(previousThemeS);
 	    bottom.removeStyleDependentName(previousThemeS);
 	    super.removeStyle("k-entityworkspace-" + previousThemeS);
-	    container.removeStyleName("k-entity-container-" + previousThemeS);
+	    context.removeStyleName("k-entity-context-" + previousThemeS);
 	}
 	super.addStyle("k-entityworkspace-" + newTheme);
 	roundedTitle.setCornerStyleName("k-entity-title-rd-" + newTheme);
@@ -134,6 +133,6 @@ public class EntityWorkspace extends DefaultBorderLayout {
 	title.addStyleDependentName(themeS);
 	subTitle.addStyleDependentName(themeS);
 	bottom.addStyleDependentName(themeS);
-	container.addStyleName("k-entity-container-" + newTheme);
+	context.addStyleName("k-entity-context-" + newTheme);
     }
 }

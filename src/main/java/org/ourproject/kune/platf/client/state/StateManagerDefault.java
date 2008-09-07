@@ -81,11 +81,15 @@ public class StateManagerDefault implements StateManager {
 	final StateToken newStateToken = session.getCurrentState().getStateToken();
 	newStateToken.setDocument(null);
 	newStateToken.setFolder(containerId.toString());
-	setState(newStateToken);
+	gotoToken(newStateToken);
+    }
+
+    public void gotoToken(final StateToken state) {
+	history.newItem(state.getEncoded());
     }
 
     public void gotoToken(final String token) {
-	setState(new StateToken(token));
+	gotoToken(new StateToken(token));
     }
 
     public void onGroupChanged(final Slot2<String, String> slot) {
@@ -131,6 +135,7 @@ public class StateManagerDefault implements StateManager {
 	onHistoryChanged(history.getToken());
     }
 
+    @Deprecated
     public void reloadContextAndTitles() {
 	contentProvider.getContent(session.getUserHash(), new StateToken(history.getToken()),
 		new AsyncCallbackSimple<StateDTO>() {
@@ -151,7 +156,6 @@ public class StateManagerDefault implements StateManager {
     public void setRetrievedState(final StateDTO content) {
 	final StateToken state = content.getStateToken();
 	contentProvider.cache(state, content);
-	setState(state);
     }
 
     public void setSocialNetwork(final SocialNetworkResultDTO socialNet) {
@@ -166,10 +170,6 @@ public class StateManagerDefault implements StateManager {
 	    state.setParticipation(userParticipation);
 	    onSocialNetworkChanged.fire(state);
 	}
-    }
-
-    public void setState(final StateToken state) {
-	history.newItem(state.getEncoded());
     }
 
     private void checkGroupAndToolChange(final StateDTO oldState, final StateDTO newState) {
@@ -187,34 +187,11 @@ public class StateManagerDefault implements StateManager {
     }
 
     private void loadContent(final StateDTO state) {
-	session.setCurrent(state);
 	onStateChanged.fire(state);
-	// final GroupDTO group = state.getGroup();
-	// app.setGroupState(group.getShortName());
-	// final boolean isAdmin = state.getGroupRights().isAdministrable();
-	// if (isAdmin) {
-	// workspace.getThemeMenuComponent().setVisible(true);
-	// } else {
-	// workspace.getThemeMenuComponent().setVisible(false);
-	// }
-	// workspace.showGroup(group, isAdmin);
-
-	// final String toolName = state.getToolName();
-	// workspace.setTool(toolName);
-
-	// final ClientTool clientTool = app.getTool(toolName);
-	// clientTool.setContent(state);
-	// clientTool.setContext(state);
-	// workspace.getContentTitleComponent().setState(state);
-	// workspace.getContentSubTitleComponent().setState(state);
-	// workspace.getContentBottomToolBarComponent().setRate(state,
-	// session.isLogged());
-	// workspace.setContent(clientTool.getContent());
-	// workspace.setContext(clientTool.getContext());
-	// workspace.getLicenseComponent().setLicense(state);
 	Site.hideProgress();
     }
 
+    @Deprecated
     private void loadContextOnly(final StateDTO state) {
 	session.setCurrent(state);
 	// /final String toolName = state.getToolName();
@@ -226,8 +203,9 @@ public class StateManagerDefault implements StateManager {
     private void onHistoryChanged(final StateToken newState) {
 	contentProvider.getContent(session.getUserHash(), newState, new AsyncCallbackSimple<StateDTO>() {
 	    public void onSuccess(final StateDTO newState) {
-		loadContent(newState);
+		session.setCurrent(newState);
 		checkGroupAndToolChange(oldState, newState);
+		loadContent(newState);
 		oldState = newState;
 	    }
 	});
@@ -238,7 +216,8 @@ public class StateManagerDefault implements StateManager {
 	    onHistoryChanged(new StateToken());
 	} else {
 	    final StateDTO currentState = session.getCurrentState();
-	    checkGroupAndToolChange(oldState, currentState);
+	    session.setCurrent(oldState);
+	    checkGroupAndToolChange(currentState, oldState);
 	    loadContent(oldState);
 	}
     }

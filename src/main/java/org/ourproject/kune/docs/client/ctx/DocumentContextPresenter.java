@@ -20,45 +20,49 @@
 
 package org.ourproject.kune.docs.client.ctx;
 
+import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.docs.client.ctx.admin.AdminContext;
-import org.ourproject.kune.docs.client.ctx.folder.FolderContext;
-import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.StateDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
+import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.workspace.client.ui.ctx.items.ContextNavigator;
 
 import com.calclab.suco.client.provider.Provider;
+import com.calclab.suco.client.signal.Slot;
 
 public class DocumentContextPresenter implements DocumentContext {
-    private final WorkspaceDeckView view;
-    private final Provider<FolderContext> folderContextProvider;
+    private DocumentContextView view;
+    private final Provider<ContextNavigator> contextNavigatorProvider;
     private final Provider<AdminContext> adminContextProvider;
 
-    public DocumentContextPresenter(final WorkspaceDeckView view, final Provider<FolderContext> folderContexProvider,
-	    final Provider<AdminContext> adminContextProvider) {
-	this.view = view;
-	this.folderContextProvider = folderContexProvider;
+    public DocumentContextPresenter(final StateManager stateManager,
+	    final Provider<ContextNavigator> contextNavigatorProvider, final Provider<AdminContext> adminContextProvider) {
+	this.contextNavigatorProvider = contextNavigatorProvider;
 	this.adminContextProvider = adminContextProvider;
+	stateManager.onStateChanged(new Slot<StateDTO>() {
+	    public void onEvent(final StateDTO state) {
+		if (DocumentClientTool.NAME.equals(state.getToolName())) {
+		    setState(state);
+		}
+	    }
+	});
     }
 
-    public View getView() {
-	return view;
-    }
-
-    public void setContext(final StateDTO content) {
-	final StateToken state = content.getStateToken();
-	folderContextProvider.get().setContainer(state, content.getFolder(), content.getFolderRights());
-	adminContextProvider.get().setState(content);
-	view.show(folderContextProvider.get().getView());
+    public void init(final DocumentContextView view) {
+	this.view = view;
     }
 
     public void showAdmin() {
 	final AdminContext adminContext = adminContextProvider.get();
-	view.show(adminContext.getView());
+	view.setContainer(adminContext.getView());
     }
 
     public void showFolders() {
-	final FolderContext folderContext = folderContextProvider.get();
-	view.show(folderContext.getView());
+	view.setContainer(contextNavigatorProvider.get().getView());
+    }
+
+    private void setState(final StateDTO state) {
+	contextNavigatorProvider.get().setState(state);
+	adminContextProvider.get().setState(state);
+	showFolders();
     }
 }

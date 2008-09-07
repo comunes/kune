@@ -34,6 +34,8 @@ public interface StateManager extends HistoryListener {
 
     void gotoContainer(Long containerId);
 
+    void gotoToken(StateToken state);
+
     void gotoToken(String token);
 
     void onGroupChanged(Slot2<String, String> slot);
@@ -53,7 +55,5 @@ public interface StateManager extends HistoryListener {
     void setRetrievedState(StateDTO content);
 
     void setSocialNetwork(SocialNetworkResultDTO socialNet);
-
-    void setState(StateToken state);
 
 }

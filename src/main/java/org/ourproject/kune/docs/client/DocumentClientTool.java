@@ -20,9 +20,7 @@
 
 package org.ourproject.kune.docs.client;
 
-import org.ourproject.kune.docs.client.cnt.DocumentContent;
 import org.ourproject.kune.docs.client.ctx.DocumentContext;
-import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.tool.AbstractClientTool;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
@@ -37,14 +35,11 @@ public class DocumentClientTool extends AbstractClientTool {
     public static final String TYPE_DOCUMENT = "docs.doc";
     public static final String NAME = "docs";
     private final Provider<DocumentContext> documentContextProvider;
-    private final Provider<DocumentContent> documentContentProvider;
 
     public DocumentClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
 	    final WsThemePresenter wsThemePresenter, final WorkspaceSkeleton ws,
-	    final Provider<DocumentContent> documentContentProvider,
 	    final Provider<DocumentContext> documentContextProvider) {
 	super(NAME, i18n.t("documents"), toolSelector, wsThemePresenter, ws);
-	this.documentContentProvider = documentContentProvider;
 	this.documentContextProvider = documentContextProvider;
     }
 
@@ -58,17 +53,6 @@ public class DocumentClientTool extends AbstractClientTool {
 
     public void onEdit() {
 	documentContextProvider.get().showAdmin();
-    }
-
-    public void setContent(final StateDTO state) {
-	documentContentProvider.get().setContent(state);
-
-	// TODO: check trigger interface (setState)
-	// trigger.setState(state.getStateToken().toString());
-    }
-
-    public void setContext(final StateDTO state) {
-	documentContextProvider.get().setContext(state);
     }
 
 }

@@ -20,11 +20,11 @@
 
 package org.ourproject.kune.docs.client.cnt;
 
+import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.docs.client.cnt.folder.FolderEditor;
 import org.ourproject.kune.docs.client.cnt.folder.viewer.FolderViewer;
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReader;
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderControl;
-import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
@@ -33,7 +33,6 @@ import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.rate.RateIt;
-import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.editor.TextEditorListener;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
@@ -41,11 +40,13 @@ import org.ourproject.kune.workspace.client.sitebar.Site;
 
 import com.calclab.suco.client.provider.Provider;
 import com.calclab.suco.client.signal.Signal0;
+import com.calclab.suco.client.signal.Slot;
 import com.calclab.suco.client.signal.Slot0;
+import com.calclab.suco.client.signal.Slot2;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class DocumentContentPresenter implements DocumentContent, TextEditorListener {
-    private final WorkspaceDeckView view;
+    private DocumentContentView view;
     private final StateManager stateManager;
     private StateDTO content;
     private final Session session;
@@ -55,15 +56,15 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
     private final Provider<FolderEditor> folderEditorProvider;
     private final Provider<TextEditor> textEditorProvider;
     private final Provider<FolderViewer> folderViewerProvider;
-    private final Signal0 onEdit;
-    private final Signal0 onCancel;
+    private final Signal0 onEditing;
+    private final Signal0 onEditCancelled;
     private final Provider<ContentServiceAsync> contentServiceProvider;
     private final I18nUITranslationService i18n;
     private final KuneErrorHandler errorHandler;
 
     public DocumentContentPresenter(final StateManager stateManager, final I18nUITranslationService i18n,
-	    final KuneErrorHandler errorHandler, final WorkspaceDeckView view, final Session session,
-	    final RateIt rateIt, final Provider<DocumentReader> docReaderProvider,
+	    final KuneErrorHandler errorHandler, final Session session, final RateIt rateIt,
+	    final Provider<DocumentReader> docReaderProvider,
 	    final Provider<DocumentReaderControl> docReaderControlProvider,
 	    final Provider<TextEditor> textEditorProvider, final Provider<FolderViewer> folderViewerProvider,
 	    final Provider<FolderEditor> folderEditorProvider,
@@ -71,7 +72,6 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
 	this.stateManager = stateManager;
 	this.i18n = i18n;
 	this.errorHandler = errorHandler;
-	this.view = view;
 	this.session = session;
 	this.rateIt = rateIt;
 	this.docReaderProvider = docReaderProvider;
@@ -80,26 +80,30 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
 	this.folderViewerProvider = folderViewerProvider;
 	this.folderEditorProvider = folderEditorProvider;
 	this.contentServiceProvider = contentServiceProvider;
-	this.onEdit = new Signal0("onEdit");
-	this.onCancel = new Signal0("onCancel");
+	this.onEditing = new Signal0("onEditing");
+	this.onEditCancelled = new Signal0("onEditCancelled");
+	stateManager.onStateChanged(new Slot<StateDTO>() {
+	    public void onEvent(final StateDTO state) {
+		if (state.getToolName().equals(DocumentClientTool.NAME)) {
+		    content = state;
+		    showContent();
+		}
+	    }
+	});
+	stateManager.onToolChanged(new Slot2<String, String>() {
+	    public void onEvent(final String oldTool, final String newTool) {
+		if (oldTool != null && oldTool.equals(DocumentClientTool.NAME)) {
+		    // Detach
+		}
+	    }
+	});
     }
 
-    public View getView() {
-	return view;
+    public void init(final DocumentContentView view) {
+	this.view = view;
     }
 
-    public void onCancel() {
-	showContent();
-	onCancel.fire();
-	// Re-enable rateIt widget
-	rateIt.setVisible(true);
-    }
-
-    public void onCancel(final Slot0 slot) {
-	onCancel.add(slot);
-    }
-
-    public void onDelete() {
+    public void onDeleteClicked() {
 	Site.showProgressProcessing();
 	contentServiceProvider.get().delContent(session.getUserHash(),
 		session.getCurrentState().getGroup().getShortName(), content.getDocumentId(),
@@ -111,7 +115,19 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
 		});
     }
 
-    public void onEdit() {
+    public void onEditCancelled() {
+	showContent();
+	onEditCancelled.fire();
+	// Re-enable rateIt widget
+	rateIt.setVisible(true);
+	textEditorProvider.get().setToolbarVisible(false);
+    }
+
+    public void onEditCancelled(final Slot0 slot) {
+	onEditCancelled.add(slot);
+    }
+
+    public void onEditClicked() {
 	session.check(new AsyncCallbackSimple<Object>() {
 	    public void onSuccess(final Object result) {
 		if (content.hasDocument()) {
@@ -119,19 +135,20 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
 		    rateIt.setVisible(false);
 		    final TextEditor editor = textEditorProvider.get();
 		    editor.setContent(content.getContent());
-		    view.show(editor.getView());
+		    editor.setToolbarVisible(true);
+		    view.setContent(editor.getView());
 		} else {
 		    final FolderEditor editor = folderEditorProvider.get();
 		    editor.setFolder(content.getFolder());
-		    view.show(editor.getView());
+		    view.setContent(editor.getView());
 		}
-		onEdit.fire();
+		onEditing.fire();
 	    }
 	});
     }
 
-    public void onEdit(final Slot0 slot) {
-	onEdit.add(slot);
+    public void onEditing(final Slot0 slot) {
+	onEditing.add(slot);
     }
 
     public void onSave(final String text) {
@@ -170,12 +187,8 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
     public void onTranslate() {
     }
 
-    public void setContent(final StateDTO content) {
-	this.content = content;
-	showContent();
-    }
-
     private void showContent() {
+	textEditorProvider.get().setToolbarVisible(false);
 	if (content.hasDocument()) {
 	    docReaderProvider.get().showDocument(content.getContent());
 	    textEditorProvider.get().reset();
@@ -185,7 +198,7 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
 	} else {
 	    final FolderViewer viewer = folderViewerProvider.get();
 	    viewer.setFolder(content.getFolder());
-	    view.show(viewer.getView());
+	    view.setContent(viewer.getView());
 	}
     }
 

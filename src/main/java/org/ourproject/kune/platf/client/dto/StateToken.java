@@ -25,8 +25,8 @@ import org.ourproject.kune.platf.client.ui.WindowUtils;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class StateToken implements IsSerializable {
+    public static final String SEPARATOR = ".";
     private static final String[] EMPTY = new String[0];
-    private static final String DOT = ".";
 
     public static String encode(final String group, final String tool, final String folder, final String document) {
 	String encoded = "";
@@ -34,13 +34,13 @@ public class StateToken implements IsSerializable {
 	    encoded += group;
 	}
 	if (tool != null) {
-	    encoded += DOT + tool;
+	    encoded += SEPARATOR + tool;
 	}
 	if (folder != null) {
-	    encoded += DOT + folder;
+	    encoded += SEPARATOR + folder;
 	}
 	if (document != null) {
-	    encoded += DOT + document;
+	    encoded += SEPARATOR + document;
 	}
 	return encoded;
     }
@@ -80,6 +80,10 @@ public class StateToken implements IsSerializable {
 	encoded = null;
     }
 
+    public StateToken clone() {
+	return new StateToken(this.getEncoded());
+    }
+
     public String getDocument() {
 	return document;
     }
@@ -103,7 +107,7 @@ public class StateToken implements IsSerializable {
 	String publicUrl = "http://";
 
 	if (group != null) {
-	    publicUrl += group + DOT;
+	    publicUrl += group + SEPARATOR;
 	}
 
 	// FIXME: Maybe get from InitData the site.domain
@@ -113,10 +117,10 @@ public class StateToken implements IsSerializable {
 	    publicUrl += tool;
 	}
 	if (folder != null) {
-	    publicUrl += DOT + folder;
+	    publicUrl += SEPARATOR + folder;
 	}
 	if (document != null) {
-	    publicUrl += DOT + document;
+	    publicUrl += SEPARATOR + document;
 	}
 
 	return publicUrl;
@@ -155,24 +159,28 @@ public class StateToken implements IsSerializable {
 	return getDocument() != null;
     }
 
-    public void setDocument(final String document) {
+    public StateToken setDocument(final String document) {
 	this.document = document;
 	encoded = null;
+	return this;
     }
 
-    public void setFolder(final String folder) {
+    public StateToken setFolder(final String folder) {
 	this.folder = folder;
 	encoded = null;
+	return this;
     }
 
-    public void setGroup(final String group) {
+    public StateToken setGroup(final String group) {
 	this.group = group;
 	encoded = null;
+	return this;
     }
 
-    public void setTool(final String tool) {
+    public StateToken setTool(final String tool) {
 	this.tool = tool;
 	encoded = null;
+	return this;
     }
 
     public String toString() {

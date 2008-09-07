@@ -29,6 +29,7 @@ public class WsThemePresenter {
 	session.onInitDataReceived(new Slot<InitDataDTO>() {
 	    public void onEvent(final InitDataDTO initData) {
 		view.setThemes(initData.getWsThemes());
+		setTheme(new WsTheme(initData.getWsThemes()[0]));
 	    }
 	});
 	stateManager.onStateChanged(new Slot<StateDTO>() {

@@ -64,6 +64,8 @@ public interface SignInView extends View {
 
     public void unMask();
 
+    void setCookie(String userHash);
+
     void setRegisterMessage(String message, SiteErrorType type);
 
     void setSignInMessage(String message, SiteErrorType type);

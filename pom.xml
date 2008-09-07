@@ -31,13 +31,13 @@
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-user</artifactId>
-      <version>1.5.2</version>
+      <version>1.5.0</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-servlet</artifactId>
-      <version>1.5.2</version>
+      <version>1.5.0</version>
     </dependency>
     <!-- Use new repo -->
     <!-- http://code.google.com/p/gwt-ext/issues/detail?id=180 -->
@@ -56,12 +56,12 @@
     <dependency>
       <groupId>com.allen_sauer.gwt.log.gwt-log</groupId>
       <artifactId>gwt-log</artifactId>
-      <version>2.5.0</version>
+      <version>2.5.2</version>
     </dependency>
     <dependency>
       <groupId>com.allen_sauer.gwt.voices.gwt-voices</groupId>
       <artifactId>gwt-voices</artifactId>
-      <version>1.5.1</version>
+      <version>1.5.5</version>
     </dependency>
 
     <!-- utilities -->

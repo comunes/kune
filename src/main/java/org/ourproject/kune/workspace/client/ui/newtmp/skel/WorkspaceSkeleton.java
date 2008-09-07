@@ -3,7 +3,9 @@ package org.ourproject.kune.workspace.client.ui.newtmp.skel;
 import org.ourproject.kune.platf.client.ui.DefaultBorderLayout;
 import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
 
-import com.google.gwt.user.client.ui.Label;
+import com.calclab.suco.client.signal.Slot0;
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.ExtElement;
@@ -32,12 +34,27 @@ public class WorkspaceSkeleton {
 	mainPanel.add(sitebar, DefaultBorderLayout.Position.NORTH, DefaultBorderLayout.DEF_TOOLBAR_HEIGHT);
 	mainPanel.add(entity.getPanel(), DefaultBorderLayout.Position.CENTER);
 	container.add(mainPanel.getPanel());
-	getEntityWorkspace().getContentTopBar().add(new Label("Sorry, kune workspace under heavy refactorization"));
 	new Viewport(container);
     }
 
     public void addToEntityMainHeader(final Widget widget) {
 	entity.addToEntityMainHeader(widget);
+    }
+
+    public void askConfirmation(final String title, final String message, final Slot0 onConfirmed, final Slot0 onCancel) {
+	MessageBox.confirm(title, message, new MessageBox.ConfirmCallback() {
+	    public void execute(final String btnID) {
+		if (btnID.equals("yes")) {
+		    DeferredCommand.addCommand(new Command() {
+			public void execute() {
+			    onConfirmed.onEvent();
+			}
+		    });
+		} else {
+		    onCancel.onEvent();
+		}
+	    }
+	});
     }
 
     public EntitySummary getEntitySummary() {
@@ -62,6 +79,15 @@ public class WorkspaceSkeleton {
 
     public void mask(final String message) {
 	extRootBody.mask(message, "x-mask-loading");
+    }
+
+    public void promptMessage(final String title, final String message, final Slot0 onEnter) {
+	MessageBox.prompt(title, message, new MessageBox.PromptCallback() {
+	    public void execute(final String btnID, final String text) {
+		// FIXME: use btnID
+		onEnter.onEvent();
+	    }
+	});
     }
 
     public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {

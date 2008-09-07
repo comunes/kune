@@ -19,8 +19,6 @@
  */
 package org.ourproject.kune.workspace.client.sitebar.login;
 
-import java.util.Date;
-
 import org.ourproject.kune.platf.client.dto.I18nCountryDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
@@ -39,7 +37,6 @@ import org.ourproject.kune.workspace.client.sitebar.rpc.UserServiceAsync;
 
 import com.calclab.emite.client.im.roster.RosterManager.SubscriptionMode;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class SignInPresenter implements SignIn {
@@ -67,7 +64,7 @@ public class SignInPresenter implements SignIn {
 	    view.center();
 	    Site.hideProgress();
 	} else {
-	    stateManager.setState(previousStateToken);
+	    stateManager.gotoToken(previousStateToken);
 	}
     }
 
@@ -95,14 +92,14 @@ public class SignInPresenter implements SignIn {
 	resetMessages();
 	reset();
 	view.hide();
-	stateManager.setState(previousStateToken);
+	stateManager.gotoToken(previousStateToken);
     }
 
     public void onClose() {
 	reset();
 	view.hideMessages();
 	if (!session.isLogged()) {
-	    stateManager.setState(previousStateToken);
+	    stateManager.gotoToken(previousStateToken);
 	}
     }
 
@@ -180,8 +177,8 @@ public class SignInPresenter implements SignIn {
 		}
 
 		public void onSuccess(final UserInfoDTO userInfoDTO) {
-		    stateManager.setState(previousStateToken);
 		    onSignIn(userInfoDTO);
+		    stateManager.gotoToken(previousStateToken);
 		    view.hide();
 		    view.unMask();
 		}
@@ -191,8 +188,9 @@ public class SignInPresenter implements SignIn {
     }
 
     private void onSignIn(final UserInfoDTO userInfoDTO) {
-	setCookie(userInfoDTO);
-	session.setUserHash(userInfoDTO.getUserHash());
+	final String userHash = userInfoDTO.getUserHash();
+	view.setCookie(userHash);
+	session.setUserHash(userHash);
 	session.setCurrentUserInfo(userInfoDTO);
 	final I18nLanguageDTO language = userInfoDTO.getLanguage();
 	i18n.changeCurrentLanguage(language.getCode());
@@ -205,14 +203,6 @@ public class SignInPresenter implements SignIn {
 
     private void resetMessages() {
 	view.hideMessages();
-    }
-
-    private void setCookie(final UserInfoDTO userInfoDTO) {
-	// http://code.google.com/p/google-web-toolkit-incubator/wiki/LoginSecurityFAQ
-	final String sessionId = userInfoDTO.getUserHash();
-	final long duration = Session.SESSION_DURATION;
-	final Date expires = new Date(System.currentTimeMillis() + duration);
-	Cookies.setCookie(Site.USERHASH, sessionId, expires, null, "/", false);
     }
 
 }

@@ -2,6 +2,7 @@ package org.ourproject.kune.platf.client.services;
 
 import org.ourproject.kune.chat.client.ChatClientModule;
 import org.ourproject.kune.docs.client.DocumentClientModule;
+import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.ApplicationDefault;
 import org.ourproject.kune.platf.client.app.HistoryWrapper;
@@ -85,9 +86,9 @@ import org.ourproject.kune.workspace.client.summary.GroupSummaryView;
 import org.ourproject.kune.workspace.client.tags.TagsSummary;
 import org.ourproject.kune.workspace.client.tags.TagsSummaryPanel;
 import org.ourproject.kune.workspace.client.tags.TagsSummaryPresenter;
-import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItems;
-import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPanel;
-import org.ourproject.kune.workspace.client.ui.ctx.items.ContextItemsPresenter;
+import org.ourproject.kune.workspace.client.ui.ctx.items.ContextNavigator;
+import org.ourproject.kune.workspace.client.ui.ctx.items.ContextNavigatorPanel;
+import org.ourproject.kune.workspace.client.ui.ctx.items.ContextNavigatorPresenter;
 import org.ourproject.kune.workspace.client.ui.newtmp.entitylogo.EntityLogo;
 import org.ourproject.kune.workspace.client.ui.newtmp.entitylogo.EntityLogoPanel;
 import org.ourproject.kune.workspace.client.ui.newtmp.entitylogo.EntityLogoPresenter;
@@ -560,7 +561,7 @@ public class KuneModule extends AbstractModule {
 	register(SingletonScope.class, new Factory<TextEditor>(TextEditor.class) {
 	    public TextEditor create() {
 		final TextEditorPresenter presenter = new TextEditorPresenter(null, true);
-		final TextEditorPanel panel = new TextEditorPanel(presenter, i18n);
+		final TextEditorPanel panel = new TextEditorPanel(presenter, i18n, ws);
 		presenter.init(panel);
 		return presenter;
 	    }
@@ -575,11 +576,18 @@ public class KuneModule extends AbstractModule {
 	    }
 	});
 
-	register(SingletonScope.class, new Factory<ContextItems>(ContextItems.class) {
-	    public ContextItems create() {
-		final ContextItemsPresenter presenter = new ContextItemsPresenter(i18n, $(StateManager.class),
-			$(Session.class), $$(ContentServiceAsync.class));
-		final ContextItemsPanel panel = new ContextItemsPanel(presenter, i18n, $(StateManager.class), ws);
+	register(SingletonScope.class, new Factory<ActionManager>(ActionManager.class) {
+	    public ActionManager create() {
+		return new ActionManager(ws);
+	    }
+	});
+
+	register(SingletonScope.class, new Factory<ContextNavigator>(ContextNavigator.class) {
+	    public ContextNavigator create() {
+		final ContextNavigatorPresenter presenter = new ContextNavigatorPresenter($(StateManager.class),
+			$(Session.class), $$(ContentServiceAsync.class), i18n);
+		final ContextNavigatorPanel panel = new ContextNavigatorPanel(presenter, i18n, $(StateManager.class),
+			ws, $$(ActionManager.class));
 		presenter.init(panel);
 		return presenter;
 	    }
