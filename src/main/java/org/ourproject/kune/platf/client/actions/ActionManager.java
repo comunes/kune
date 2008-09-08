@@ -12,7 +12,7 @@ public class ActionManager {
 	this.ws = ws;
     }
 
-    public void doAction(final ClientActionDescriptor<?> action, final Object parameter) {
+    public void doAction(final ActionDescriptor<?> action, final Object parameter) {
 	if (action.isMustBeConfirmed()) {
 	    ws.askConfirmation(action.getConfirmationTitle(), action.getConfirmationText(), new Slot0() {
 		public void onEvent() {

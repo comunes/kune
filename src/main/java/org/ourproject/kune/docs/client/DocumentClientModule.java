@@ -57,7 +57,8 @@ public class DocumentClientModule extends AbstractModule {
 	register(SingletonScope.class, new Factory<DocumentClientTool>(DocumentClientTool.class) {
 	    public DocumentClientTool create() {
 		return new DocumentClientTool(i18n, $(ToolSelector.class), $(WsThemePresenter.class),
-			$(WorkspaceSkeleton.class), $$(DocumentContext.class));
+			$(WorkspaceSkeleton.class), $$(DocumentContext.class), $(ContextNavigator.class),
+			$(Session.class), $(StateManager.class), $$(ContentServiceAsync.class));
 	    }
 	});
 

@@ -5,10 +5,7 @@ import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
 
 public class DocumentContextPanel implements DocumentContextView {
 
-    private final WorkspaceSkeleton ws;
-
     public DocumentContextPanel(final WorkspaceSkeleton ws) {
-	this.ws = ws;
     }
 
     @Deprecated

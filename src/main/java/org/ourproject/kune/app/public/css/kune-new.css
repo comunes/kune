@@ -379,7 +379,7 @@
 
 .x-toolbar td, .x-toolbar span, .x-toolbar input, .x-toolbar div, .x-toolbar select, .x-toolbar label {
     white-space: nowrap;
-    font: normal 13px arial, sans;
+    font: normal 100% arial,sans;
     line-height: 19px;
 }
 

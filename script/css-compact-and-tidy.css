@@ -8,11 +8,13 @@ DEST2=src/main/java/org/ourproject/kune/app/public/css/richtext.css
 EXTTMPFILE=$ORIG/js/ext/resources/css/ext-all.css-tmp
 
 sed 's/normal 11px/normal 100\%/g' $ORIG/js/ext/resources/css/ext-all.css |\
-sed 's/bold 11px/normal 100\%/g' |\
-sed 's/normal 12px/normal 108\%/g' |\
-sed 's/bold 12px/bold 108\%/g' |\
+sed 's/bold 11px/bold 100\%/g' |\
+sed 's/normal 12px/normal 100\%/g' |\
+sed 's/bold 12px/bold 100\%/g' |\
+sed 's/normal 10px/normal 100\%/g' |\
+sed 's/normal 9px/normal 100\%/g' |\
 sed 's/font-size:11px/font-size:100\%/g' |\
-sed 's/font-size:12px/font-size:108\%/g' |\
+sed 's/font-size:12px/font-size:100\%/g' |\
 sed 's/ arial,tahoma,helvetica,sans-serif/ arial,sans/g' |\
 sed 's/ tahoma,arial,helvetica,sans-serif/ arial,sans/g' |\
 sed 's/ tahoma,arial,verdana,sans-serif/ arial,sans/g' |\

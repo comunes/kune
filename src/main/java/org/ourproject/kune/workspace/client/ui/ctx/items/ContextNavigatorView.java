@@ -21,12 +21,12 @@
 package org.ourproject.kune.workspace.client.ui.ctx.items;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.actions.ClientActionCollection;
+import org.ourproject.kune.platf.client.actions.ActionCollection;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
 public interface ContextNavigatorView extends View {
 
-    void addItem(ContextNavigationItem contextNavigationItem);
+    void addItem(ContextNavigatorItem contextNavigatorItem);
 
     void clear();
 
@@ -34,10 +34,10 @@ public interface ContextNavigatorView extends View {
 
     void selectItem(String id);
 
-    void setBottomActions(StateToken stateToken, ClientActionCollection<StateToken> actions);
+    void setBottomActions(StateToken stateToken, ActionCollection<StateToken> actions);
 
     void setRootItem(String id, String text, StateToken stateToken);
 
-    void setTopActions(StateToken stateToken, ClientActionCollection<StateToken> actions);
+    void setTopActions(StateToken stateToken, ActionCollection<StateToken> actions);
 
 }
