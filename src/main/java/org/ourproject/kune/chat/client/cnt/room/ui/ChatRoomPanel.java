@@ -21,8 +21,8 @@
 package org.ourproject.kune.chat.client.cnt.room.ui;
 
 import org.ourproject.kune.chat.client.cnt.room.ChatRoomView;
-import org.ourproject.kune.workspace.client.sitebar.Site;
-import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.ui.Label;
 

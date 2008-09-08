@@ -21,10 +21,10 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckPanel;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummary;
-import org.ourproject.kune.workspace.client.ui.ctx.items.ContextNavigator;
-import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.ui.ctx.nav.ContextNavigator;
 
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
 import com.calclab.suco.client.module.AbstractModule;

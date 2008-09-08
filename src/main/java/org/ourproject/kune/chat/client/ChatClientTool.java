@@ -33,9 +33,9 @@ import org.ourproject.kune.platf.client.tool.AbstractClientTool;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
 import org.ourproject.kune.platf.client.ui.MenuItem;
 import org.ourproject.kune.platf.client.ui.WindowUtils;
+import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummary;
-import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.emite.client.xmpp.stanzas.XmppURI;
