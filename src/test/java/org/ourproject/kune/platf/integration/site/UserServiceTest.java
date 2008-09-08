@@ -26,7 +26,7 @@ import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.platf.server.properties.DatabaseProperties;
 import org.ourproject.kune.platf.server.users.UserInfo;
 import org.ourproject.kune.platf.server.users.UserInfoService;
-import org.ourproject.kune.workspace.client.sitebar.rpc.UserService;
+import org.ourproject.kune.workspace.client.site.rpc.UserService;
 
 import com.calclab.emite.client.im.roster.RosterManager.SubscriptionMode;
 import com.google.inject.Inject;

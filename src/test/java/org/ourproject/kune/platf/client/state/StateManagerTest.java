@@ -6,7 +6,7 @@ import org.mockito.Mockito;
 import org.ourproject.kune.platf.client.app.HistoryWrapper;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.workspace.client.sitebar.SiteToken;
+import org.ourproject.kune.workspace.client.site.SiteToken;
 
 import com.calclab.suco.client.signal.Slot;
 import com.calclab.suco.client.signal.Slot2;

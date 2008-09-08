@@ -3,7 +3,7 @@ package org.ourproject.kune.platf.integration;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.properties.DatabaseProperties;
-import org.ourproject.kune.workspace.client.sitebar.rpc.UserService;
+import org.ourproject.kune.workspace.client.site.rpc.UserService;
 
 import com.google.inject.Inject;
 
