@@ -29,6 +29,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class WorkspaceDeckPanel extends SimplePanel implements WorkspaceDeckView {
     Widget current;
 
+    @Deprecated
     public WorkspaceDeckPanel() {
 	current = new Label("Nothing");
 	add(current);

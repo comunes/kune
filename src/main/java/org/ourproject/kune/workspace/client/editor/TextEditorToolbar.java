@@ -30,7 +30,7 @@ import org.ourproject.kune.platf.client.ui.imgchooser.ImageData;
 import org.ourproject.kune.platf.client.ui.palette.ColorSelectListener;
 import org.ourproject.kune.platf.client.ui.palette.WebSafePalettePanel;
 import org.ourproject.kune.platf.client.ui.palette.WebSafePalettePresenter;
-import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Command;

@@ -1,6 +1,6 @@
 package org.ourproject.kune.workspace.client.search;
 
-import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;

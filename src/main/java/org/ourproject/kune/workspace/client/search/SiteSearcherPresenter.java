@@ -24,7 +24,7 @@ import java.util.Iterator;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.sitebar.Site;
+import org.ourproject.kune.workspace.client.site.Site;
 
 import com.calclab.suco.client.provider.Provider;
 
