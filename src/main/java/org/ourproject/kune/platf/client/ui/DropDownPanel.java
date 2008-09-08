@@ -20,7 +20,7 @@
 package org.ourproject.kune.platf.client.ui;
 
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
+import org.ourproject.kune.workspace.client.themes.WsTheme;
 
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;

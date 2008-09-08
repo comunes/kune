@@ -25,11 +25,13 @@ import org.ourproject.kune.platf.client.rpc.SiteService;
 import org.ourproject.kune.platf.client.rpc.SiteServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.utils.PrefetchUtilities;
-import org.ourproject.kune.workspace.client.sitebar.Site;
+import org.ourproject.kune.workspace.client.site.Site;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.signal.Signal0;
 import com.calclab.suco.client.signal.Slot0;
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowCloseListener;
@@ -88,7 +90,11 @@ public class ApplicationDefault implements Application {
 	    public void onSuccess(final InitDataDTO initData) {
 		session.setInitData(initData);
 		session.setCurrentUserInfo(initData.getUserInfo());
-		RootPanel.get("kuneinitialcurtain").setVisible(false);
+		DeferredCommand.addCommand(new Command() {
+		    public void execute() {
+			RootPanel.get("kuneinitialcurtain").setVisible(false);
+		    }
+		});
 	    }
 	});
     }

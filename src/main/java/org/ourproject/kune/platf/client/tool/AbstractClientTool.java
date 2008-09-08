@@ -20,8 +20,8 @@
 
 package org.ourproject.kune.platf.client.tool;
 
-import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
 public abstract class AbstractClientTool implements ClientTool {
 

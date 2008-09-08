@@ -1,6 +1,6 @@
 package org.ourproject.kune.platf.client.actions;
 
-import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.calclab.suco.client.signal.Slot0;
 

@@ -1,7 +1,7 @@
 package org.ourproject.kune.platf.client.tool;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
+import org.ourproject.kune.workspace.client.themes.WsTheme;
 
 public interface ToolSelectorItemView extends View {
 

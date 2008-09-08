@@ -25,7 +25,7 @@ import java.util.HashMap;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
-import org.ourproject.kune.workspace.client.sitebar.Site;
+import org.ourproject.kune.workspace.client.site.Site;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 

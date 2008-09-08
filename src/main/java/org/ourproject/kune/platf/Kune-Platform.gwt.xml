@@ -5,25 +5,5 @@
   <inherits name="com.google.gwt.user.UserAgent" />
 
   <public path="public" />
-  
-  <replace-with
-    class="org.ourproject.kune.platf.client.ui.CustomHorizontalSplitPanel.Impl">
-    <when-type-is
-      class="org.ourproject.kune.platf.client.ui.CustomHorizontalSplitPanel.Impl" />
-  </replace-with>
-
-  <replace-with
-    class="org.ourproject.kune.platf.client.ui.CustomHorizontalSplitPanel.ImplIE6">
-    <when-type-is
-      class="org.ourproject.kune.platf.client.ui.CustomHorizontalSplitPanel.Impl" />
-    <when-property-is name="user.agent" value="ie6" />
-  </replace-with>
-
-  <replace-with
-    class="org.ourproject.kune.platf.client.ui.CustomHorizontalSplitPanel.ImplSafari">
-    <when-type-is
-      class="org.ourproject.kune.platf.client.ui.CustomHorizontalSplitPanel.Impl" />
-    <when-property-is name="user.agent" value="safari" />
-  </replace-with>
 
 </module>

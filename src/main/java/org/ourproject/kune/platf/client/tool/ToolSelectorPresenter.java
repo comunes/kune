@@ -3,7 +3,7 @@ package org.ourproject.kune.platf.client.tool;
 import java.util.HashMap;
 
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
 import com.calclab.suco.client.signal.Slot2;
 

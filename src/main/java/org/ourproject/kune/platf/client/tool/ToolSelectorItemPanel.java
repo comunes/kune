@@ -1,8 +1,8 @@
 package org.ourproject.kune.platf.client.tool;
 
 import org.ourproject.kune.platf.client.ui.RoundedPanel;
-import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
+import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.themes.WsTheme;
 
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.Hyperlink;

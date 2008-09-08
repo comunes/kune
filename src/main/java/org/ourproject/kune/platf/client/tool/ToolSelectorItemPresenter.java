@@ -2,8 +2,8 @@ package org.ourproject.kune.platf.client.tool;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
-import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.themes.WsTheme;
+import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
 import com.calclab.suco.client.signal.Slot2;
 

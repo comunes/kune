@@ -25,7 +25,7 @@ import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.sitebar.Site;
+import org.ourproject.kune.workspace.client.site.Site;
 
 import com.calclab.suco.client.provider.Provider;
 import com.calclab.suco.client.signal.Slot;

@@ -89,7 +89,7 @@ import org.ourproject.kune.platf.server.state.StateServiceDefault;
 import org.ourproject.kune.platf.server.tool.ToolRegistry;
 import org.ourproject.kune.platf.server.users.UserInfoService;
 import org.ourproject.kune.platf.server.users.UserInfoServiceDefault;
-import org.ourproject.kune.workspace.client.sitebar.rpc.UserService;
+import org.ourproject.kune.workspace.client.site.rpc.UserService;
 
 import com.google.inject.matcher.Matchers;
 import com.wideplay.warp.persist.PersistenceService;
