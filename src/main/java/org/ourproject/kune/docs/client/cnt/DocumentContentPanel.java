@@ -1,7 +1,7 @@
 package org.ourproject.kune.docs.client.cnt;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.ui.Widget;
 

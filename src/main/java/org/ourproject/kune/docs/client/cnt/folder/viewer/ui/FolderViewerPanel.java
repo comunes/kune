@@ -21,7 +21,7 @@
 package org.ourproject.kune.docs.client.cnt.folder.viewer.ui;
 
 import org.ourproject.kune.docs.client.cnt.folder.viewer.FolderViewerView;
-import org.ourproject.kune.workspace.client.sitebar.Site;
+import org.ourproject.kune.workspace.client.site.Site;
 
 import com.google.gwt.user.client.ui.Label;
 

@@ -23,8 +23,8 @@ package org.ourproject.kune.docs.client.cnt.reader.ui;
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderControlPresenter;
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderControlView;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
-import org.ourproject.kune.workspace.client.ui.newtmp.skel.Toolbar;
-import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.skel.Toolbar;
+import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.EventObject;

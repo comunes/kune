@@ -33,10 +33,10 @@ import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.sitebar.Site;
+import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.tags.TagsSummary;
-import org.ourproject.kune.workspace.client.ui.newtmp.title.EntitySubTitlePresenter;
-import org.ourproject.kune.workspace.client.ui.newtmp.title.EntityTitlePresenter;
+import org.ourproject.kune.workspace.client.title.EntitySubTitlePresenter;
+import org.ourproject.kune.workspace.client.title.EntityTitlePresenter;
 
 import com.calclab.suco.client.provider.Provider;
 
