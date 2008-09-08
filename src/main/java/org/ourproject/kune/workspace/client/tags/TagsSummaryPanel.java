@@ -27,7 +27,7 @@ import org.ourproject.kune.platf.client.dto.TagResultDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.DropDownPanel;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
-import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;

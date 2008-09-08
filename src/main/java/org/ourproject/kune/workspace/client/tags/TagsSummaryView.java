@@ -24,7 +24,7 @@ import java.util.List;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.TagResultDTO;
-import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
+import org.ourproject.kune.workspace.client.themes.WsTheme;
 
 public interface TagsSummaryView extends View {
 
