@@ -40,9 +40,6 @@ public interface SiteService extends RemoteService {
 	    return ourInstance;
 	}
 
-	public static void setMock(final SiteServiceAsync mocked) {
-	    ourInstance = mocked;
-	}
     }
 
     InitDataDTO getInitData(String userHash) throws DefaultException;
