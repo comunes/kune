@@ -24,7 +24,7 @@ import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.docs.client.ctx.admin.AdminContext;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.ui.ctx.nav.ContextNavigator;
+import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 
 import com.calclab.suco.client.provider.Provider;
 import com.calclab.suco.client.signal.Slot;
