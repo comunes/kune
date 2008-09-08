@@ -1,4 +1,4 @@
-package org.ourproject.kune.workspace.client.ui.ctx.items;
+package org.ourproject.kune.workspace.client.ui.ctx.nav;
 
 import org.ourproject.kune.platf.client.actions.ActionCollection;
 import org.ourproject.kune.platf.client.dto.ContentStatusDTO;

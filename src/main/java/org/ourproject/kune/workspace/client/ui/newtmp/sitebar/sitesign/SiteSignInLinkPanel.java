@@ -1,8 +1,8 @@
 package org.ourproject.kune.workspace.client.ui.newtmp.sitebar.sitesign;
 
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
-import org.ourproject.kune.workspace.client.sitebar.SiteToken;
-import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.site.SiteToken;
+import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.ui.Hyperlink;
 

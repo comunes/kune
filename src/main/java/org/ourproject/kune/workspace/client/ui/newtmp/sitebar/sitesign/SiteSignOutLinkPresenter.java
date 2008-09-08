@@ -8,8 +8,8 @@ import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.workspace.client.sitebar.Site;
-import org.ourproject.kune.workspace.client.sitebar.rpc.UserServiceAsync;
+import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.workspace.client.site.rpc.UserServiceAsync;
 
 import com.calclab.suco.client.provider.Provider;
 import com.calclab.suco.client.signal.Slot;

@@ -18,17 +18,26 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.ui.newtmp.title;
+package org.ourproject.kune.workspace.client.ui.ctx.nav;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.actions.ActionCollection;
+import org.ourproject.kune.platf.client.dto.StateToken;
 
-public interface EntitySubTitleView extends View {
+public interface ContextNavigatorView extends View {
 
-    void setContentSubTitleLeft(String subTitle);
+    void addItem(ContextNavigatorItem contextNavigatorItem);
 
-    void setContentSubTitleRight(String subTitle);
+    void clear();
 
-    void setContentSubTitleLeftVisible(boolean visible);
+    void editItem(String id);
 
-    void setContentSubTitleRightVisible(boolean visible);
+    void selectItem(String id);
+
+    void setBottomActions(StateToken stateToken, ActionCollection<StateToken> actions);
+
+    void setRootItem(String id, String text, StateToken stateToken);
+
+    void setTopActions(StateToken stateToken, ActionCollection<StateToken> actions);
+
 }

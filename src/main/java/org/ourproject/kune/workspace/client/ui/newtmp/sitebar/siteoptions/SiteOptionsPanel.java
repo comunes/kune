@@ -2,7 +2,7 @@ package org.ourproject.kune.workspace.client.ui.newtmp.sitebar.siteoptions;
 
 import org.ourproject.kune.workspace.client.i18n.I18nTranslator;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
-import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.calclab.suco.client.provider.Provider;
 import com.google.gwt.user.client.Window;

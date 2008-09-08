@@ -18,7 +18,7 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.ui.ctx.items;
+package org.ourproject.kune.workspace.client.ui.ctx.nav;
 
 import java.util.HashMap;
 
@@ -28,8 +28,8 @@ import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.ui.newtmp.skel.Toolbar;
-import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.skel.Toolbar;
+import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.provider.Provider;

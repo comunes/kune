@@ -17,15 +17,30 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.ui.newtmp.licensefoot;
+
+package org.ourproject.kune.workspace.client.ui.ctx.nav;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.LicenseDTO;
+import org.ourproject.kune.platf.client.actions.ActionDescriptor;
+import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
 
-public interface EntityLicenseView extends View {
+public interface ContextNavigator {
 
-    void showLicense(String groupName, LicenseDTO licenseDTO);
+    void addAction(String contentTypeId, ActionDescriptor<StateToken> action);
 
-    void openWindow(String url);
+    void editItem(StateToken stateToken);
+
+    View getView();
+
+    void registerDraggableType(String typeId);
+
+    void registerDroppableType(String typeId);
+
+    void removeAction(String contentTypeId, ActionDescriptor<StateToken> action);
+
+    void selectItem(StateToken stateToken);
+
+    void setState(StateDTO state);
 
 }
