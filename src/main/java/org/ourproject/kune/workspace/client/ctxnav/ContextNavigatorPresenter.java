@@ -18,7 +18,7 @@
  *
  */
 
-package org.ourproject.kune.workspace.client.ui.ctx.nav;
+package org.ourproject.kune.workspace.client.ctxnav;
 
 import java.util.ArrayList;
 import java.util.HashMap;
