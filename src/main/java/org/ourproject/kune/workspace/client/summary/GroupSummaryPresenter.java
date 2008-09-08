@@ -22,8 +22,8 @@ package org.ourproject.kune.workspace.client.summary;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
-import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.themes.WsTheme;
+import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
 import com.calclab.suco.client.signal.Slot;
 import com.calclab.suco.client.signal.Slot2;
