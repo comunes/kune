@@ -7,7 +7,7 @@ import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.search.SiteSearcher;
-import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
 import com.calclab.suco.client.provider.Provider;
 

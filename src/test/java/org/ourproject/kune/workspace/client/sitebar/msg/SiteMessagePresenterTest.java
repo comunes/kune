@@ -4,6 +4,8 @@ import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
+import org.ourproject.kune.workspace.client.site.msg.SiteMessagePresenter;
+import org.ourproject.kune.workspace.client.site.msg.SiteMessageView;
 
 public class SiteMessagePresenterTest {
 
