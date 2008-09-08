@@ -9,9 +9,9 @@ import org.ourproject.kune.platf.client.ui.gridmenu.GridDragConfiguration;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridItem;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridMenuPanel;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
-import org.ourproject.kune.workspace.client.ui.newtmp.skel.EntitySummary;
-import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
+import org.ourproject.kune.workspace.client.skel.EntitySummary;
+import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.themes.WsTheme;
 
 import com.calclab.emiteuimodule.client.users.UserGridPanel;
 import com.calclab.suco.client.signal.Slot;

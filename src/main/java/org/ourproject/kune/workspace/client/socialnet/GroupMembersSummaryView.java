@@ -3,7 +3,7 @@ package org.ourproject.kune.workspace.client.socialnet;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridButton;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridItem;
-import org.ourproject.kune.workspace.client.ui.newtmp.themes.WsTheme;
+import org.ourproject.kune.workspace.client.themes.WsTheme;
 
 public interface GroupMembersSummaryView {
 

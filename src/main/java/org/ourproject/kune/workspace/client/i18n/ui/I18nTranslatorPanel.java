@@ -29,8 +29,8 @@ import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPresenter;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorView;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelector;
 import org.ourproject.kune.workspace.client.search.SiteBottomTrayButton;
-import org.ourproject.kune.workspace.client.sitebar.Site;
-import org.ourproject.kune.workspace.client.ui.newtmp.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.HorizontalPanel;

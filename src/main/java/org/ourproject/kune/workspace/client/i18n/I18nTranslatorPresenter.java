@@ -23,7 +23,7 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.workspace.client.sitebar.Site;
+import org.ourproject.kune.workspace.client.site.Site;
 
 import com.calclab.suco.client.signal.Slot0;
 import com.google.gwt.user.client.rpc.AsyncCallback;
