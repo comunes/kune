@@ -17,6 +17,12 @@
 	<inherits name='com.gwtext.GwtExt' />
 	<script src="js/ext/adapter/ext/ext-base.js" />
 	<script src="js/ext/ext-all.js" />
+	
+	<inherits name="com.gwtextux.GwtExtUx" />
+	<inherits name="com.gwtextux.UploadDialog"/>
+	<script src="js/UploadDialog/Ext.ux.UploadDialog.packed.js" />
+    <stylesheet src="js/UploadDialog/css/Ext.ux.UploadDialog.css" />
+    <script src="js/ext-ux-all-min.js" />
 
 	<!-- kune css -->
 	<stylesheet src="css/all.css" />

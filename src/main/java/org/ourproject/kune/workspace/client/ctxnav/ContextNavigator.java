@@ -33,6 +33,8 @@ public interface ContextNavigator {
 
     View getView();
 
+    void registerContentTypeIcon(String contentTypeId, String iconUrl);
+
     void registerDraggableType(String typeId);
 
     void registerDroppableType(String typeId);

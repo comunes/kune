@@ -35,6 +35,7 @@ import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.site.rpc.UserServiceAsync;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.emite.client.im.roster.RosterManager.SubscriptionMode;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -171,8 +172,7 @@ public class SignInPresenter implements SignIn {
 			view.setSignInMessage(i18n.t("Incorrect nickname/email or password"), SiteErrorType.error);
 		    } catch (final Throwable e) {
 			view.setSignInMessage("Error in login", SiteErrorType.error);
-			GWT.log("Other kind of exception in LoginFormPresenter/doLogin", null);
-			throw new RuntimeException();
+			Log.error("Other kind of exception in LoginFormPresenter/doLogin");
 		    }
 		}
 

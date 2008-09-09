@@ -32,6 +32,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.tool.AbstractClientTool;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
+import org.ourproject.kune.platf.client.ui.dialogs.FileUploader;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.site.Site;
@@ -44,20 +45,28 @@ import com.calclab.suco.client.signal.Slot;
 public class DocumentClientTool extends AbstractClientTool {
     public static final String TYPE_ROOT = "docs.root";
     public static final String TYPE_FOLDER = "docs.folder";
+    public static final String TYPE_GALLERY = "docs.gallery";
+    public static final String TYPE_BLOG = "docs.blog";
     public static final String TYPE_DOCUMENT = "docs.doc";
+    public static final String TYPE_POST = "docs.post";
+    public static final String TYPE_UPLOADEDFILE = "docs.uploaded";
+
     public static final String NAME = "docs";
+
     private final Provider<DocumentContext> documentContextProvider;
     private final ContextNavigator contextNavigator;
     private final StateManager stateManager;
     private final I18nUITranslationService i18n;
     private final Session session;
     private final Provider<ContentServiceAsync> contentServiceProvider;
+    private final Provider<FileUploader> fileUploaderProvider;
 
     public DocumentClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
 	    final WsThemePresenter wsThemePresenter, final WorkspaceSkeleton ws,
 	    final Provider<DocumentContext> documentContextProvider, final ContextNavigator contextNavigator,
 	    final Session session, final StateManager stateManager,
-	    final Provider<ContentServiceAsync> contentServiceProvider) {
+	    final Provider<ContentServiceAsync> contentServiceProvider,
+	    final Provider<FileUploader> fileUploaderProvider) {
 	super(NAME, i18n.t("documents"), toolSelector, wsThemePresenter, ws);
 	this.i18n = i18n;
 	this.documentContextProvider = documentContextProvider;
@@ -65,8 +74,10 @@ public class DocumentClientTool extends AbstractClientTool {
 	this.session = session;
 	this.stateManager = stateManager;
 	this.contentServiceProvider = contentServiceProvider;
+	this.fileUploaderProvider = fileUploaderProvider;
 	createActions();
 	registerDragDropTypes();
+	registerImageTypes();
     }
 
     public String getName() {
@@ -142,8 +153,7 @@ public class DocumentClientTool extends AbstractClientTool {
 				session.getCurrentState().getGroup().getShortName(), token.getDocument(),
 				new AsyncCallbackSimple<String>() {
 				    public void onSuccess(final String result) {
-					final StateToken parent = token.clone();
-					parent.setDocument(null);
+					final StateToken parent = token.clone().setDocument(null);
 					stateManager.gotoToken(parent);
 				    }
 				});
@@ -182,16 +192,31 @@ public class DocumentClientTool extends AbstractClientTool {
 	refresh.setIconUrl("images/nav/refresh.png");
 	refresh.setToolTip(i18n.t("Refresh"));
 
+	final ActionDescriptor<StateToken> uploadFile = new ActionDescriptor<StateToken>(AccessRolDTO.Editor,
+		ActionPosition.bootombarAndItemMenu, new Slot<StateToken>() {
+		    public void onEvent(final StateToken token) {
+			fileUploaderProvider.get().show();
+		    }
+		});
+	uploadFile.setTextDescription(i18n.t("Upload file"));
+	uploadFile.setIconUrl("images/nav/upload.png");
+	uploadFile.setToolTip(i18n.t("Upload some files (images, PDFs, etc)"));
+
 	contextNavigator.addAction(TYPE_FOLDER, go);
 	contextNavigator.addAction(TYPE_FOLDER, addDoc);
 	contextNavigator.addAction(TYPE_FOLDER, addFolder);
 	contextNavigator.addAction(TYPE_FOLDER, delContainer);
 	contextNavigator.addAction(TYPE_FOLDER, rename);
 	contextNavigator.addAction(TYPE_FOLDER, refresh);
+	contextNavigator.addAction(TYPE_FOLDER, uploadFile);
+
+	contextNavigator.addAction(TYPE_BLOG, uploadFile);
+	contextNavigator.addAction(TYPE_GALLERY, uploadFile);
 
 	contextNavigator.addAction(TYPE_ROOT, addDoc);
 	contextNavigator.addAction(TYPE_ROOT, addFolder);
 	contextNavigator.addAction(TYPE_ROOT, refresh);
+	contextNavigator.addAction(TYPE_ROOT, uploadFile);
 
 	contextNavigator.addAction(TYPE_DOCUMENT, go);
 	contextNavigator.addAction(TYPE_DOCUMENT, delContent);
@@ -202,9 +227,18 @@ public class DocumentClientTool extends AbstractClientTool {
     private void registerDragDropTypes() {
 	contextNavigator.registerDraggableType(TYPE_DOCUMENT);
 	contextNavigator.registerDraggableType(TYPE_FOLDER);
+	contextNavigator.registerDraggableType(TYPE_UPLOADEDFILE);
+
 	contextNavigator.registerDroppableType(TYPE_ROOT);
 	contextNavigator.registerDroppableType(TYPE_FOLDER);
-	contextNavigator.registerDroppableType(TYPE_DOCUMENT);
+	contextNavigator.registerDroppableType(TYPE_GALLERY);
+    }
+
+    private void registerImageTypes() {
+	contextNavigator.registerContentTypeIcon(TYPE_BLOG, "images/nav/blog.png");
+	contextNavigator.registerContentTypeIcon(TYPE_GALLERY, "images/nav/gallery.png");
+	contextNavigator.registerContentTypeIcon(TYPE_DOCUMENT, "images/nav/page.png");
+	contextNavigator.registerContentTypeIcon(TYPE_POST, "images/nav/post.png");
     }
 
 }

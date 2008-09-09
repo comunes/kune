@@ -37,7 +37,12 @@ import com.google.inject.Inject;
 public class DocumentServerTool implements ServerTool {
     public static final String TYPE_ROOT = "docs.root";
     public static final String TYPE_FOLDER = "docs.folder";
+    public static final String TYPE_GALLERY = "docs.gallery";
+    public static final String TYPE_BLOG = "docs.blog";
     public static final String TYPE_DOCUMENT = "docs.doc";
+    public static final String TYPE_POST = "docs.post";
+    public static final String TYPE_UPLOADEDFILE = "docs.uploaded";
+
     public static final String NAME = "docs";
     public static final String ROOT_NAME = "documents";
 

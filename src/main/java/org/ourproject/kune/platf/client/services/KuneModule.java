@@ -26,6 +26,8 @@ import org.ourproject.kune.platf.client.state.StateManagerDefault;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
 import org.ourproject.kune.platf.client.tool.ToolSelectorPresenter;
 import org.ourproject.kune.platf.client.ui.QuickTipsHelper;
+import org.ourproject.kune.platf.client.ui.dialogs.FileUploader;
+import org.ourproject.kune.platf.client.ui.dialogs.FileUploaderDialog;
 import org.ourproject.kune.platf.client.ui.rate.RateIt;
 import org.ourproject.kune.platf.client.ui.rate.RateItPanel;
 import org.ourproject.kune.platf.client.ui.rate.RateItPresenter;
@@ -590,6 +592,13 @@ public class KuneModule extends AbstractModule {
 			ws, $$(ActionManager.class));
 		presenter.init(panel);
 		return presenter;
+	    }
+	});
+
+	register(SingletonScope.class, new Factory<FileUploader>(FileUploader.class) {
+	    public FileUploader create() {
+		final FileUploaderDialog panel = new FileUploaderDialog(i18n, ws);
+		return panel;
 	    }
 	});
 

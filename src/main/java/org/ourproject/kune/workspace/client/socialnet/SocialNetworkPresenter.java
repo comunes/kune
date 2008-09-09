@@ -126,7 +126,7 @@ public class SocialNetworkPresenter {
 	});
 
 	unJoinButton = new GridButton("images/del.gif", i18n.t("Unjoin"), i18n
-		.t("Don't participate more as a member in this group"), new Slot<String>() {
+		.t("Don't participate more in this group"), new Slot<String>() {
 	    public void onEvent(final String parameter) {
 		removeMemberAction();
 	    }
