@@ -36,6 +36,8 @@ public interface ContextNavigatorView extends View {
 
     void setBottomActions(StateToken stateToken, ActionCollection<StateToken> actions);
 
+    void setItemText(String genId, String text);
+
     void setRootItem(String id, String text, StateToken stateToken);
 
     void setTopActions(StateToken stateToken, ActionCollection<StateToken> actions);

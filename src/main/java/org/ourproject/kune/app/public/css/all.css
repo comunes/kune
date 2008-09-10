@@ -246,7 +246,7 @@ fieldset.x-panel-collapsed .x-fieldset-bwrap{visibility:hidden;position:absolute
 .x-fieldset-body{overflow:hidden;}
 
 .x-btn{font:normal 100% arial,sans;cursor:pointer;white-space:nowrap;}
-.x-btn button{border:0 none;background:transparent;font:normal 100% arial,sans;padding-left:3px;padding-right:3px;cursor:pointer;margin:0;overflow:visible;width:auto;-moz-outline:0 none;outline:0 none;}
+.x-btn button{border:0 none;background:transparent;padding-left:3px;padding-right:3px;cursor:pointer;margin:0;overflow:visible;width:auto;-moz-outline:0 none;outline:0 none;}
 * html .ext-ie .x-btn button{width:1px;}
 .ext-gecko .x-btn button{padding-left:0;padding-right:0;}
 .ext-ie .x-btn button{padding-top:2px;}

@@ -39,6 +39,8 @@ public class InitData {
     private String defaultWsTheme;
     private String[] wsThemes;
     private String siteLogoUrl;
+    private String galleryPermittedExtensions;
+    private String maxFileSizeInMb;
 
     public String getChatDomain() {
 	return chatDomain;
@@ -60,12 +62,20 @@ public class InitData {
 	return defaultWsTheme;
     }
 
+    public String getGalleryPermittedExtensions() {
+	return galleryPermittedExtensions;
+    }
+
     public List<I18nLanguage> getLanguages() {
 	return languages;
     }
 
     public List<License> getLicenses() {
 	return licenses;
+    }
+
+    public String getMaxFileSizeInMb() {
+	return maxFileSizeInMb;
     }
 
     public String getSiteDomain() {
@@ -108,12 +118,20 @@ public class InitData {
 	this.defaultWsTheme = defaultWsTheme;
     }
 
+    public void setGalleryPermittedExtensions(final String galleryPermittedExtensions) {
+	this.galleryPermittedExtensions = galleryPermittedExtensions;
+    }
+
     public void setLanguages(final List<I18nLanguage> languages) {
 	this.languages = languages;
     }
 
     public void setLicenses(final List<License> licenses) {
 	this.licenses = licenses;
+    }
+
+    public void setMaxFileSizeInMb(final String maxFileSizeInMb) {
+	this.maxFileSizeInMb = maxFileSizeInMb;
     }
 
     public void setSiteDomain(final String siteDomain) {

@@ -29,6 +29,9 @@ public interface KuneProperties {
     public String WS_THEMES_DEF = "kune.wsthemes.default";
     public String WS_THEMES = "kune.wsthemes";
     public String SITE_LOGO_URL = "kune.sitelogourl";
+    public String UPLOAD_GALLERY_PERMITTED_EXTS = "kune.upload.gallerypermittedextensions";
+    public String UPLOAD_MAX_FILE_SIZE = "kune.upload.maxfilesizeinmegas";
+    public String UPLOAD_LOCATION = "kune.upload.location";
 
     public String get(String key);
 

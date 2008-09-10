@@ -18,11 +18,16 @@ public class FileUploadManagerDefault implements FileUploadAction {
     public static final Log log = LogFactory.getLog(FileUploadManagerDefault.class);
     private HashMap<String, File> files;
 
+    @SuppressWarnings("unchecked")
     public FormResponse onSubmit(final HttpServlet servlet, final HttpServletRequest request) {
 	for (final Map.Entry<String, File> entry : files.entrySet()) {
 	    log.info("file uploaded: " + entry.getKey());
 	}
+
 	/**
+	 * 
+	 * http://max-bazhenov.com/dev/upload-dialog-2.0/index.php
+	 * 
 	 * Server side handler.
 	 * 
 	 * The files in the queue are posted one at a time, the file field name
@@ -30,7 +35,7 @@ public class FileUploadManagerDefault implements FileUploadAction {
 	 * following properties: { success: true|false, // required error:
 	 * 'Error or success message' // optional, also can be named 'message' }
 	 */
-	return new FormResponse(HttpServletResponse.SC_OK, "{success: true, error: ''}", false);
+	return new FormResponse(HttpServletResponse.SC_OK, "{'success':true,'message':'OK'}", false);
     }
 
     public void setFileList(final HashMap<String, File> files) {

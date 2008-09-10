@@ -64,6 +64,7 @@ import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 import org.ourproject.kune.platf.server.manager.TagManager;
 import org.ourproject.kune.platf.server.manager.ToolConfigurationManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
+import org.ourproject.kune.platf.server.manager.impl.FileUploadManagerRevisited;
 import org.ourproject.kune.platf.server.manager.impl.GroupManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.I18nCountryManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.I18nLanguageManagerDefault;
@@ -107,6 +108,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
 	bind(KuneProperties.class).to(KunePropertiesDefault.class);
 	bind(Mapper.class).to(DozerMapper.class);
 	bind(ToolRegistry.class);
+	bind(FileUploadManagerRevisited.class);
 
 	bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authenticated.class),
 		outermostCall(new AuthenticatedMethodInterceptor()));

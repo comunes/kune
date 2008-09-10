@@ -35,8 +35,8 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.tags.TagsSummary;
-import org.ourproject.kune.workspace.client.title.EntitySubTitlePresenter;
-import org.ourproject.kune.workspace.client.title.EntityTitlePresenter;
+import org.ourproject.kune.workspace.client.title.EntitySubTitle;
+import org.ourproject.kune.workspace.client.title.EntityTitle;
 
 import com.calclab.suco.client.provider.Provider;
 
@@ -46,20 +46,20 @@ public class AdminContextPresenter implements AdminContext {
     private final Session session;
     private final Provider<TagsSummary> tagsSummaryProvider;
     private final Provider<ContentServiceAsync> contentServiceProvider;
-    private final EntitySubTitlePresenter entitySubTitlePresenter;
-    private final EntityTitlePresenter entityTitlePresenter;
+    private final EntitySubTitle entitySubTitle;
+    private final EntityTitle entityTitle;
     private final StateManager stateManager;
 
     public AdminContextPresenter(final Session session, final StateManager stateManager,
 	    final Provider<TagsSummary> tagsSummaryProvider,
-	    final Provider<ContentServiceAsync> contentServiceProvider,
-	    final EntityTitlePresenter entityTitlePresenter, final EntitySubTitlePresenter entitySubTitlePresenter) {
+	    final Provider<ContentServiceAsync> contentServiceProvider, final EntityTitle entityTitle,
+	    final EntitySubTitle entitySubTitle) {
 	this.session = session;
 	this.stateManager = stateManager;
 	this.tagsSummaryProvider = tagsSummaryProvider;
 	this.contentServiceProvider = contentServiceProvider;
-	this.entityTitlePresenter = entityTitlePresenter;
-	this.entitySubTitlePresenter = entitySubTitlePresenter;
+	this.entityTitle = entityTitle;
+	this.entitySubTitle = entitySubTitle;
     }
 
     public void addAuthor(final String authorShortName) {
@@ -93,7 +93,7 @@ public class AdminContextPresenter implements AdminContext {
 		currentState.getDocumentId(), langCode, new AsyncCallbackSimple<I18nLanguageDTO>() {
 		    public void onSuccess(final I18nLanguageDTO lang) {
 			Site.hideProgress();
-			entitySubTitlePresenter.setContentLanguage(lang.getEnglishName());
+			entitySubTitle.setContentLanguage(lang.getEnglishName());
 		    }
 		});
     }
@@ -113,7 +113,7 @@ public class AdminContextPresenter implements AdminContext {
 		currentState.getDocumentId(), publishedOn, new AsyncCallbackSimple<Object>() {
 		    public void onSuccess(final Object result) {
 			Site.hideProgress();
-			entityTitlePresenter.setContentDate(publishedOn);
+			entityTitle.setContentDate(publishedOn);
 		    }
 		});
 

@@ -27,7 +27,7 @@ import org.ourproject.kune.platf.client.state.StateManager;
 
 import com.calclab.suco.client.signal.Slot;
 
-public class EntitySubTitlePresenter {
+public class EntitySubTitlePresenter implements EntitySubTitle {
 
     private EntitySubTitleView view;
     private final I18nTranslationService i18n;

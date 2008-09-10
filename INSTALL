@@ -26,10 +26,17 @@ CREATE DATABASE kune_test;
 GRANT ALL PRIVILEGES ON kune_test.* TO kune@localhost IDENTIFIED BY 'db4kune';
 FLUSH PRIVILEGES;
 
+- Configure upload directory:
+
+  sudo mkdir -p /var/lib/kune/uploads/
+  sudo chown yourUser:yourUser /var/lib/kune/uploads
+
+you can use other location (see kune.properties)
+
 - Configurate hibernate-search (GNU/Linux instructions, look persistence.xml if you want to change indexes destination):
 	# yourUser is the user you are using to develop/run the application
-  sudo mkdir -p /var/lib/lucene/kune_dev/indexes
-  sudo mkdir -p /var/lib/lucene/kune_test/indexes
+  sudo mkdir -p /var/lib/kune/lucene/kune_dev/indexes
+  sudo mkdir -p /var/lib/kune/lucene/kune_test/indexes
   sudo chown yourUser:yourUser /var/lib/lucene/kune_dev/indexes
   sudo chown yourUser:yourUser /var/lib/lucene/kune_test/indexes
  

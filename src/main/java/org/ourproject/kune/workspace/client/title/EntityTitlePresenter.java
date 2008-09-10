@@ -36,7 +36,7 @@ import com.calclab.suco.client.signal.Slot;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class EntityTitlePresenter {
+public class EntityTitlePresenter implements EntityTitle {
 
     private EntityTitleView view;
     private final I18nTranslationService i18n;
@@ -68,7 +68,24 @@ public class EntityTitlePresenter {
 	this.view = view;
     }
 
-    public void onTitleRename(final String newName) {
+    public void setContentDate(final Date publishedOn) {
+	final DateTimeFormat fmt = DateTimeFormat.getFormat("MM/dd/yyyy, Z");
+	view.setContentDate(i18n.t("Published on: [%s]", fmt.format(publishedOn)));
+    }
+
+    /**
+     * Used renaming from context
+     */
+    public void setContentTitle(final String title) {
+	view.setContentTitle(title);
+    }
+
+    public void setContentTitle(final String title, final boolean editable) {
+	setContentTitle(title);
+	view.setContentTitleEditable(editable);
+    }
+
+    protected void onTitleRename(final String newName) {
 	Site.showProgressSaving();
 	final StateDTO currentState = session.getCurrentState();
 	contentServiceProvider.get().rename(session.getUserHash(), currentState.getGroup().getShortName(),
@@ -87,18 +104,8 @@ public class EntityTitlePresenter {
 	Site.hideProgress();
     }
 
-    public void setContentDate(final Date publishedOn) {
-	final DateTimeFormat fmt = DateTimeFormat.getFormat("MM/dd/yyyy, Z");
-	view.setContentDate(i18n.t("Published on: [%s]", fmt.format(publishedOn)));
-    }
-
     private void setContentDateVisible(final boolean visible) {
 	view.setDateVisible(visible);
-    }
-
-    private void setContentTitle(final String title, final boolean editable) {
-	view.setContentTitle(title);
-	view.setContentTitleEditable(editable);
     }
 
     private void setState(final StateDTO state) {

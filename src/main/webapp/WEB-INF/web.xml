@@ -46,9 +46,21 @@
         <url-pattern>/http-bind/</url-pattern>
     </servlet-mapping>
 
-    <!-- Change the servlet name and mapping with appropriate name and URL pattern respectively -->
     <servlet>
         <servlet-name>FileUploadService</servlet-name>
+        <servlet-class>
+			org.ourproject.kune.platf.server.manager.impl.FileUploadManagerRevisited
+        </servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>FileUploadService</servlet-name>
+        <url-pattern>/services/fileupload</url-pattern>
+    </servlet-mapping>
+	
+    <!-- Change the servlet name and mapping with appropriate name and URL pattern respectively -->
+    <servlet>
+        <servlet-name>FileUploadServiceOld</servlet-name>
         <servlet-class>
             org.cafesip.gwtcomp.server.FileUploadServlet
         </servlet-class>
@@ -64,8 +76,8 @@
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>FileUploadService</servlet-name>
-        <url-pattern>/services/fileupload</url-pattern>
+        <servlet-name>FileUploadServiceOld</servlet-name>
+        <url-pattern>/services/fileuploadold</url-pattern>
     </servlet-mapping>
 
 </web-app>

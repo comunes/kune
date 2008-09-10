@@ -89,6 +89,8 @@ public class SiteRPC implements RPC, SiteService {
 	data.setWsThemes(this.kuneProperties.get(KuneProperties.WS_THEMES).split(","));
 	data.setDefaultWsTheme(this.kuneProperties.get(KuneProperties.WS_THEMES_DEF));
 	data.setSiteLogoUrl(kuneProperties.get(KuneProperties.SITE_LOGO_URL));
+	data.setGalleryPermittedExtensions(kuneProperties.get(KuneProperties.UPLOAD_GALLERY_PERMITTED_EXTS));
+	data.setMaxFileSizeInMb(kuneProperties.get(KuneProperties.UPLOAD_MAX_FILE_SIZE));
 	return mapper.map(data, InitDataDTO.class);
     }
 

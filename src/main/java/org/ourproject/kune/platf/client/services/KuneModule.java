@@ -126,8 +126,10 @@ import org.ourproject.kune.workspace.client.tags.TagsSummaryPanel;
 import org.ourproject.kune.workspace.client.tags.TagsSummaryPresenter;
 import org.ourproject.kune.workspace.client.themes.WsThemePanel;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.title.EntitySubTitle;
 import org.ourproject.kune.workspace.client.title.EntitySubTitlePanel;
 import org.ourproject.kune.workspace.client.title.EntitySubTitlePresenter;
+import org.ourproject.kune.workspace.client.title.EntityTitle;
 import org.ourproject.kune.workspace.client.title.EntityTitlePanel;
 import org.ourproject.kune.workspace.client.title.EntityTitlePresenter;
 
@@ -445,8 +447,8 @@ public class KuneModule extends AbstractModule {
 	    }
 	});
 
-	register(SingletonScope.class, new Factory<EntityTitlePresenter>(EntityTitlePresenter.class) {
-	    public EntityTitlePresenter create() {
+	register(SingletonScope.class, new Factory<EntityTitle>(EntityTitle.class) {
+	    public EntityTitle create() {
 		final EntityTitlePresenter presenter = new EntityTitlePresenter(i18n, $(KuneErrorHandler.class),
 			$(StateManager.class), $(Session.class), $$(ContentServiceAsync.class));
 		final EntityTitlePanel panel = new EntityTitlePanel(ws, presenter);
@@ -455,8 +457,8 @@ public class KuneModule extends AbstractModule {
 	    }
 	});
 
-	register(SingletonScope.class, new Factory<EntitySubTitlePresenter>(EntitySubTitlePresenter.class) {
-	    public EntitySubTitlePresenter create() {
+	register(SingletonScope.class, new Factory<EntitySubTitle>(EntitySubTitle.class) {
+	    public EntitySubTitle create() {
 		final EntitySubTitlePresenter presenter = new EntitySubTitlePresenter(i18n, $(StateManager.class));
 		final EntitySubTitlePanel panel = new EntitySubTitlePanel(presenter, i18n, ws);
 		presenter.init(panel);
@@ -587,7 +589,7 @@ public class KuneModule extends AbstractModule {
 	register(SingletonScope.class, new Factory<ContextNavigator>(ContextNavigator.class) {
 	    public ContextNavigator create() {
 		final ContextNavigatorPresenter presenter = new ContextNavigatorPresenter($(StateManager.class),
-			$(Session.class), $$(ContentServiceAsync.class), i18n);
+			$(Session.class), $$(ContentServiceAsync.class), i18n, $(EntityTitle.class));
 		final ContextNavigatorPanel panel = new ContextNavigatorPanel(presenter, i18n, $(StateManager.class),
 			ws, $$(ActionManager.class));
 		presenter.init(panel);
@@ -597,7 +599,7 @@ public class KuneModule extends AbstractModule {
 
 	register(SingletonScope.class, new Factory<FileUploader>(FileUploader.class) {
 	    public FileUploader create() {
-		final FileUploaderDialog panel = new FileUploaderDialog(i18n, ws);
+		final FileUploaderDialog panel = new FileUploaderDialog(i18n, ws, $(Session.class));
 		return panel;
 	    }
 	});
@@ -621,8 +623,8 @@ public class KuneModule extends AbstractModule {
 	$(GroupSummary.class);
 
 	$(EntityLogo.class);
-	$(EntityTitlePresenter.class);
-	$(EntitySubTitlePresenter.class);
+	$(EntityTitle.class);
+	$(EntitySubTitle.class);
 	$(WsThemePresenter.class);
 	$(EntityLicensePresenter.class);
 	$(RateIt.class);

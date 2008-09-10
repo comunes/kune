@@ -34,17 +34,18 @@ import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
-import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.workspace.client.title.EntityTitle;
 
 import com.calclab.suco.client.provider.Provider;
 import com.calclab.suco.client.signal.Slot;
 import com.calclab.suco.client.signal.Slot0;
 import com.calclab.suco.client.signal.Slot2;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class ContextNavigatorPresenter implements ContextNavigator {
 
@@ -57,13 +58,16 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     private final ArrayList<String> draggables;
     private final ArrayList<String> droppables;
     private final HashMap<String, String> contentTypesIcons;
+    private final EntityTitle entityTitle;
 
     public ContextNavigatorPresenter(final StateManager stateManager, final Session session,
-	    final Provider<ContentServiceAsync> contentServiceProvider, final I18nUITranslationService i18n) {
+	    final Provider<ContentServiceAsync> contentServiceProvider, final I18nUITranslationService i18n,
+	    final EntityTitle entityTitle) {
 	this.stateManager = stateManager;
 	this.session = session;
 	this.contentServiceProvider = contentServiceProvider;
 	this.i18n = i18n;
+	this.entityTitle = entityTitle;
 	actions = new HashMap<String, ActionCollection<StateToken>>();
 	draggables = new ArrayList<String>();
 	droppables = new ArrayList<String>();
@@ -115,16 +119,27 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	});
     }
 
-    public void onTitleRename(final String newName, final String token) {
-	Site.showProgressSaving();
-	final StateDTO currentState = session.getCurrentState();
-	contentServiceProvider.get().rename(session.getUserHash(), currentState.getGroup().getShortName(), token,
-		newName, new AsyncCallbackSimple<String>() {
-		    public void onSuccess(final String result) {
-			stateManager.reloadContextAndTitles();
-			Site.hideProgress();
-		    }
-		});
+    public void onItemRename(final String token, final String newName, final String oldName) {
+	if (!newName.equals(oldName)) {
+	    Site.showProgress(i18n.t("Renaming"));
+	    final StateDTO currentState = session.getCurrentState();
+	    contentServiceProvider.get().rename(session.getUserHash(), currentState.getGroup().getShortName(), token,
+		    newName, new AsyncCallback<String>() {
+			public void onFailure(final Throwable caught) {
+			    view.setItemText(genId(new StateToken(token)), oldName);
+			    Site.error(i18n.t("Error renaming"));
+			    Site.hideProgress();
+			}
+
+			public void onSuccess(final String result) {
+			    Site.hideProgress();
+			    if (session.getCurrentState().getStateToken().getEncoded().equals(token)) {
+				// I have to update EntityTitle
+				entityTitle.setContentTitle(newName);
+			    }
+			}
+		    });
+	}
     }
 
     public void registerContentTypeIcon(final String contentTypeId, final String iconUrl) {

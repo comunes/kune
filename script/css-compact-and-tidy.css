@@ -7,7 +7,8 @@ DEST2=src/main/java/org/ourproject/kune/app/public/css/richtext.css
 
 EXTTMPFILE=$ORIG/js/ext/resources/css/ext-all.css-tmp
 
-sed 's/normal 11px/normal 100\%/g' $ORIG/js/ext/resources/css/ext-all.css |\
+sed 's/x.btn button{border:0 none;background:transparent;font:normal 11px tahoma,verdana,helvetica;/x-btn button{border:0 none;background:transparent;/g' $ORIG/js/ext/resources/css/ext-all.css |\
+sed 's/normal 11px/normal 100\%/g' |\
 sed 's/bold 11px/bold 100\%/g' |\
 sed 's/normal 12px/normal 100\%/g' |\
 sed 's/bold 12px/bold 100\%/g' |\

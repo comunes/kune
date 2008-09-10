@@ -38,11 +38,8 @@ import com.google.gwt.user.client.DeferredCommand;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.data.Node;
 import com.gwtext.client.widgets.Button;
-import com.gwtext.client.widgets.Editor;
-import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.ToolbarButton;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
-import com.gwtext.client.widgets.event.EditorListenerAdapter;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.menu.BaseItem;
 import com.gwtext.client.widgets.menu.Item;
@@ -64,10 +61,12 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
     private final WorkspaceSkeleton ws;
     private final Provider<ActionManager> actionManagerProvider;
     private final StateManager stateManager;
+    private final ContextNavigatorPresenter presenter;
 
     public ContextNavigatorPanel(final ContextNavigatorPresenter presenter, final I18nTranslationService i18n,
 	    final StateManager stateManager, final WorkspaceSkeleton ws,
 	    final Provider<ActionManager> actionManagerProvider) {
+	this.presenter = presenter;
 	this.stateManager = stateManager;
 	this.ws = ws;
 	this.actionManagerProvider = actionManagerProvider;
@@ -98,16 +97,23 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 		child.disable();
 		break;
 	    }
-	    contextMenus.put(nodeId, createItemMenu(item.getActionCollection(), item.getStateToken()));
+	    createItemMenu(nodeId, item.getActionCollection(), item.getStateToken());
 	    final TreeNode parent = treePanel.getNodeById(item.getParentId());
 	    if (parent != null) {
-		Log.info("Adding child node: " + nodeId + " to folder: " + item.getParentId());
+		// Log.info("Adding child node: " + nodeId + " to folder: " +
+		// item.getParentId());
+		child.addListener(new TreeNodeListenerAdapter() {
+		    @Override
+		    public void onTextChange(final Node node, final String text, final String oldText) {
+			presenter.onItemRename(getToken(node), text, oldText);
+		    }
+		});
 		if (!item.getStateToken().hasAll()) {
 		    child.setExpandable(true);
 		    child.addListener(new TreeNodeListenerAdapter() {
 			public void onExpand(final Node node) {
 			    treePanel.getNodeById(node.getId()).select();
-			    stateManager.gotoToken(node.getAttribute("href").substring(1));
+			    stateManager.gotoToken(getToken(node));
 			}
 		    });
 		} else {
@@ -120,7 +126,7 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 	} else {
 	    // the node already created
 	    if (contextMenus.get(nodeId) == null && item.getActionCollection() != null) {
-		contextMenus.put(nodeId, createItemMenu(item.getActionCollection(), item.getStateToken()));
+		createItemMenu(nodeId, item.getActionCollection(), item.getStateToken());
 	    }
 	}
 
@@ -156,6 +162,11 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 	setToolbarActions(toolBar, stateToken, actions);
     }
 
+    public void setItemText(final String genId, final String text) {
+	final TreeNode node = getNode(genId);
+	node.setText(text);
+    }
+
     public void setRootItem(final String id, final String text, final StateToken stateToken) {
 	if (treePanel == null || treePanel.getNodeById(id) == null) {
 	    createTreePanel(id);
@@ -167,27 +178,32 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 	setToolbarActions(toolBar, stateToken, actions);
     }
 
-    private Menu createItemMenu(final ActionCollection<StateToken> actionCollection, final StateToken stateToken) {
-	if (actionCollection != null) {
-	    final Menu menu = new Menu();
-	    // Remove if when retrieved rights of siblings
-	    for (final ActionDescriptor<StateToken> action : actionCollection) {
-		final Item item = new Item(action.getText());
-		item.setIcon(action.getIconUrl());
-		menu.addItem(item);
-		item.addListener(new BaseItemListenerAdapter() {
-		    public void onClick(final BaseItem item, final EventObject e) {
-			DeferredCommand.addCommand(new Command() {
-			    public void execute() {
-				actionManagerProvider.get().doAction(action, stateToken);
+    private void createItemMenu(final String nodeId, final ActionCollection<StateToken> actionCollection,
+	    final StateToken stateToken) {
+	DeferredCommand.addCommand(new Command() {
+	    public void execute() {
+		Menu menu = null;
+		if (actionCollection != null) {
+		    menu = new Menu();
+		    // Remove if when retrieved rights of siblings
+		    for (final ActionDescriptor<StateToken> action : actionCollection) {
+			final Item item = new Item(action.getText());
+			item.setIcon(action.getIconUrl());
+			menu.addItem(item);
+			item.addListener(new BaseItemListenerAdapter() {
+			    public void onClick(final BaseItem item, final EventObject e) {
+				DeferredCommand.addCommand(new Command() {
+				    public void execute() {
+					actionManagerProvider.get().doAction(action, stateToken);
+				    }
+				});
 			    }
 			});
 		    }
-		});
+		}
+		contextMenus.put(nodeId, menu);
 	    }
-	    return menu;
-	}
-	return null;
+	});
     }
 
     private Menu createToolbarMenu(final Toolbar bar, final String iconUrl, final String menuTitle) {
@@ -236,20 +252,10 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 	treePanel.setRootNode(root);
 	final TextField field = new TextField();
 	treeEditor = new TreeEditor(treePanel, field);
-	treeEditor.addListener(new EditorListenerAdapter() {
-	    // public boolean doBeforeComplete(final Editor source, final Object
-	    // value, final Object startValue) {
-	    // return false;
-	    // }
-
-	    public void onComplete(final Editor source, final Object value, final Object startValue) {
-		// TODO Auto-generated method stub
-	    }
-	});
-	final Panel panel = new Panel();
-	panel.setBorder(false);
-	panel.add(treePanel);
-	ws.getEntityWorkspace().setContext(panel);
+	// final Panel panel = new Panel();
+	// panel.setBorder(false);
+	// panel.add(treePanel);
+	ws.getEntityWorkspace().setContext(treePanel);
     }
 
     private void doAction(final ActionDescriptor<StateToken> action, final StateToken stateToken) {
@@ -262,6 +268,10 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 	    Log.error("Id: " + id + " not found in context navigator");
 	}
 	return node;
+    }
+
+    private String getToken(final Node node) {
+	return node.getAttribute("href").substring(1);
     }
 
     private void setToolbarActions(final Toolbar toolBar, final StateToken stateToken,
