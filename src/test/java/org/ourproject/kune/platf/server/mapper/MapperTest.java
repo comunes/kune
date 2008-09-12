@@ -19,6 +19,7 @@ import org.ourproject.kune.platf.client.dto.GroupListDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.server.TestDomainHelper;
 import org.ourproject.kune.platf.server.TestHelper;
 import org.ourproject.kune.platf.server.access.AccessRights;
@@ -37,6 +38,8 @@ import org.ourproject.kune.platf.server.state.State;
 import com.google.inject.Inject;
 
 public class MapperTest {
+    private static final String TESTTOOL = "docs";
+    private static final String TESTGROUPSHORTNAME = "grouptest";
     @Inject
     Mapper mapper;
     @Inject
@@ -49,7 +52,7 @@ public class MapperTest {
 
     @Test
     public void testCommentMapper() {
-	final Content d = createTestContent();
+	final Content d = createDefContent();
 	final Comment comment = new Comment();
 	comment.setContent(d);
 	comment.setText("Some text");
@@ -84,24 +87,23 @@ public class MapperTest {
 
     @Test
     public void testContentDescriptorMapping() {
-	final Content d = new Content();
-	d.setId(1l);
-	final Revision revision = new Revision(d);
-	revision.setTitle("title");
-	d.addRevision(revision);
+	final Content d = createDefContent();
+	final StateToken expectedToken = new StateToken(TESTGROUPSHORTNAME, TESTTOOL, "1", "1");
+	assertEquals(expectedToken, d.getStateToken());
 
 	final ContentDTO dto = mapper.map(d, ContentDTO.class);
 	assertEquals(1, (long) dto.getId());
 	assertEquals("title", dto.getTitle());
+	assertEquals(expectedToken, dto.getStateToken());
     }
 
     @Test
     public void testContentDescriptorToLinkMapping() {
-	final Content d = createTestContent();
+	final Content d = createDefContent();
 
 	final LinkDTO dto = mapper.map(d, LinkDTO.class);
 	assertEquals("title", dto.getLongName());
-	assertEquals("grouptest", dto.getShortName());
+	assertEquals(TESTGROUPSHORTNAME, dto.getShortName());
 	assertEquals("grouptest.docs.1.1", dto.getLink());
     }
 
@@ -131,13 +133,15 @@ public class MapperTest {
 
     @Test
     public void testFolderMapping() {
-	final Container container = new Container();
-	container.addChild(new Container());
-	container.addChild(new Container());
-	container.addContent(new Content());
-	container.addContent(new Content());
-	container.addContent(new Content());
-	final Container containerChild = new Container();
+	final Container container = createDefContainer();
+	final StateToken expectedToken = new StateToken(TESTGROUPSHORTNAME, TESTTOOL, 1l);
+	assertEquals(expectedToken, container.getStateToken());
+	container.addChild(createDefContainer());
+	container.addChild(createDefContainer());
+	container.addContent(createDefContent());
+	container.addContent(createDefContent());
+	container.addContent(createDefContent());
+	final Container containerChild = createDefContainer();
 	container.addChild(containerChild);
 	final List<Container> absolutePathChild = new ArrayList<Container>();
 	absolutePathChild.add(container);
@@ -147,7 +151,11 @@ public class MapperTest {
 	assertEquals(3, dto.getChilds().size());
 	assertEquals(3, dto.getContents().size());
 	assertTrue(dto.getContents().get(0) instanceof ContentDTO);
-	assertTrue(dto.getChilds().get(0) instanceof ContainerDTO);
+	assertTrue(dto.getChilds().get(0) instanceof ContainerSimpleDTO);
+	assertEquals(new StateToken(TESTGROUPSHORTNAME, TESTTOOL), dto.getChilds().get(0).getStateToken().clone()
+		.clearFolder());
+	assertEquals(expectedToken, dto.getContents().get(0).getStateToken().clone().clearDocument());
+	assertEquals(expectedToken, dto.getStateToken());
 
 	final ContainerDTO dtoChild = mapper.map(containerChild, ContainerDTO.class);
 	assertTrue(dtoChild.getAbsolutePath()[0] instanceof ContainerSimpleDTO);
@@ -200,6 +208,17 @@ public class MapperTest {
     }
 
     @Test
+    public void testStateTokenInStateMap() {
+	final StateToken stateToken = new StateToken(TESTGROUPSHORTNAME, TESTTOOL, "1", "2");
+	final StateToken stateTokenMapped = mapper.map(stateToken, StateToken.class);
+	assertEquals(stateToken, stateTokenMapped);
+	final State state = new State();
+	state.setStateToken(stateToken);
+	final StateDTO stateDTO = mapper.map(state, StateDTO.class);
+	assertEquals(stateToken, stateDTO.getStateToken());
+    }
+
+    @Test
     public void testUserToLinkMappping() {
 	final User user = new User("shortName", "longName", "", "", null, null, null);
 	final LinkDTO dto = mapper.map(user, LinkDTO.class);
@@ -232,13 +251,21 @@ public class MapperTest {
 	}
     }
 
-    private Content createTestContent() {
-	final Group group = new Group("grouptest", "This is a group Test");
+    private Container createDefContainer() {
+	return createDefContainer(createDeGroup());
+    }
+
+    private Container createDefContainer(final Group group) {
 	final Container container = new Container();
 	container.setId(1l);
-	container.setToolName("docs");
+	container.setToolName(TESTTOOL);
 	container.setOwner(group);
 	container.setName("folder");
+	return container;
+    }
+
+    private Content createDefContent() {
+	final Container container = createDefContainer(createDeGroup());
 	final Content d = new Content();
 	d.setId(1l);
 	final Revision revision = new Revision(d);
@@ -246,5 +273,10 @@ public class MapperTest {
 	d.addRevision(revision);
 	d.setContainer(container);
 	return d;
+    }
+
+    private Group createDeGroup() {
+	final Group group = new Group(TESTGROUPSHORTNAME, "This is a group Test");
+	return group;
     }
 }

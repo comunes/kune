@@ -45,11 +45,12 @@ import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
 import org.hibernate.search.annotations.Store;
+import org.ourproject.kune.platf.client.dto.StateToken;
 
 @Entity
 @Indexed
 @Table(name = "containers")
-public class Container implements HasId {
+public class Container implements HasId, HasStateToken {
     @Id
     @GeneratedValue
     @DocumentId
@@ -89,140 +90,150 @@ public class Container implements HasId {
     @OneToMany(cascade = CascadeType.ALL)
     private List<ContainerTranslation> containerTranslations;
 
-    public Container(final String title, final Group group, final String toolName) {
-        this.name = title;
-        owner = group;
-        this.toolName = toolName;
-        this.contents = new HashSet<Content>();
-        this.childs = new HashSet<Container>();
-        this.absolutePath = new ArrayList<Container>();
-    }
-
     public Container() {
-        this(null, null, null);
+	this(null, null, null);
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public Long getParentFolderId() {
-        return parent != null ? parent.getId() : null;
-    }
-
-    public Container getParent() {
-        return parent;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(final Long id) {
-        this.id = id;
-    }
-
-    public void setParent(final Container parent) {
-        this.parent = parent;
-    }
-
-    public Set<Container> getChilds() {
-        return childs;
-    }
-
-    public void setChilds(final Set<Container> childs) {
-        this.childs = childs;
-    }
-
-    public List<ContainerTranslation> getAliases() {
-        return containerTranslations;
-    }
-
-    public void setAliases(final List<ContainerTranslation> containerTranslations) {
-        this.containerTranslations = containerTranslations;
-    }
-
-    public Group getOwner() {
-        return owner;
-    }
-
-    public void setOwner(final Group owner) {
-        this.owner = owner;
-    }
-
-    public String getToolName() {
-        return toolName;
-    }
-
-    public void setToolName(final String toolName) {
-        this.toolName = toolName;
-    }
-
-    public void addContent(final Content descriptor) {
-        // FIXME: something related with lazy initialization (workaround using
-        // size())
-        contents.size();
-        contents.add(descriptor);
-    }
-
-    public String getTypeId() {
-        return typeId;
-    }
-
-    public void setTypeId(final String typeId) {
-        this.typeId = typeId;
-    }
-
-    public Set<Content> getContents() {
-        return contents;
+    public Container(final String title, final Group group, final String toolName) {
+	this.name = title;
+	owner = group;
+	this.toolName = toolName;
+	this.contents = new HashSet<Content>();
+	this.childs = new HashSet<Container>();
+	this.absolutePath = new ArrayList<Container>();
     }
 
     public void addChild(final Container child) {
-        // childs.size();
-        // childs.add(container);
-        child.setParent(this);
-        childs.add(child);
+	// childs.size();
+	// childs.add(container);
+	child.setParent(this);
+	childs.add(child);
     }
 
-    public I18nLanguage getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(final I18nLanguage language) {
-        this.language = language;
-    }
-
-    public List<ContainerTranslation> getContainerTranslations() {
-        return containerTranslations;
-    }
-
-    public void setContainerTranslations(final List<ContainerTranslation> containerTranslations) {
-        this.containerTranslations = containerTranslations;
-    }
-
-    public void setContents(final HashSet<Content> contents) {
-        this.contents = contents;
+    public void addContent(final Content descriptor) {
+	// FIXME: something related with lazy initialization (workaround using
+	// size())
+	contents.size();
+	contents.add(descriptor);
     }
 
     public List<Container> getAbsolutePath() {
-        return absolutePath;
+	return absolutePath;
     }
 
-    public void setAbsolutePath(final List<Container> absolutePath) {
-        this.absolutePath = absolutePath;
+    public List<ContainerTranslation> getAliases() {
+	return containerTranslations;
+    }
+
+    public Set<Container> getChilds() {
+	return childs;
+    }
+
+    public List<ContainerTranslation> getContainerTranslations() {
+	return containerTranslations;
+    }
+
+    public Set<Content> getContents() {
+	return contents;
+    }
+
+    public Long getId() {
+	return id;
+    }
+
+    public I18nLanguage getLanguage() {
+	return language;
+    }
+
+    public String getName() {
+	return name;
+    }
+
+    public Group getOwner() {
+	return owner;
+    }
+
+    public Container getParent() {
+	return parent;
+    }
+
+    public Long getParentFolderId() {
+	return parent != null ? parent.getId() : null;
+    }
+
+    @Transient
+    public StateToken getStateToken() {
+	return new StateToken(getOwner().getShortName(), getToolName(), getId());
+    }
+
+    @Transient
+    public String getStateTokenEncoded() {
+	return getStateToken().getEncoded();
+    }
+
+    public String getToolName() {
+	return toolName;
+    }
+
+    public String getTypeId() {
+	return typeId;
     }
 
     @Transient
     public boolean isLeaf() {
-        return childs.size() == 0 && contents.size() == 0;
+	return childs.size() == 0 && contents.size() == 0;
     }
 
     @Transient
     public boolean isRoot() {
-        return parent == null;
+	return parent == null;
+    }
+
+    public void setAbsolutePath(final List<Container> absolutePath) {
+	this.absolutePath = absolutePath;
+    }
+
+    public void setAliases(final List<ContainerTranslation> containerTranslations) {
+	this.containerTranslations = containerTranslations;
+    }
+
+    public void setChilds(final Set<Container> childs) {
+	this.childs = childs;
+    }
+
+    public void setContainerTranslations(final List<ContainerTranslation> containerTranslations) {
+	this.containerTranslations = containerTranslations;
+    }
+
+    public void setContents(final HashSet<Content> contents) {
+	this.contents = contents;
+    }
+
+    public void setId(final Long id) {
+	this.id = id;
+    }
+
+    public void setLanguage(final I18nLanguage language) {
+	this.language = language;
+    }
+
+    public void setName(final String name) {
+	this.name = name;
+    }
+
+    public void setOwner(final Group owner) {
+	this.owner = owner;
+    }
+
+    public void setParent(final Container parent) {
+	this.parent = parent;
+    }
+
+    public void setToolName(final String toolName) {
+	this.toolName = toolName;
+    }
+
+    public void setTypeId(final String typeId) {
+	this.typeId = typeId;
     }
 }

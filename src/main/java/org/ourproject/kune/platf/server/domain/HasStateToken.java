@@ -19,9 +19,10 @@
  */
 package org.ourproject.kune.platf.server.domain;
 
+import org.ourproject.kune.platf.client.dto.StateToken;
 
 public interface HasStateToken {
 
-    String getStateToken();
+    StateToken getStateToken();
 
 }

@@ -56,20 +56,15 @@ public class StateToken implements IsSerializable {
     }
 
     public StateToken(final String encoded) {
-	String[] splitted;
-	if (encoded != null && encoded.length() > 0) {
-	    splitted = encoded.split("\\.");
-	} else {
-	    splitted = EMPTY;
-	}
-	setGroup(conditionalAssign(0, splitted));
-	setTool(conditionalAssign(1, splitted));
-	setFolder(conditionalAssign(2, splitted));
-	setDocument(conditionalAssign(3, splitted));
+	parse(encoded);
     }
 
     public StateToken(final String group, final String tool) {
 	this(group, tool, null, null);
+    }
+
+    public StateToken(final String group, final String tool, final Long folder) {
+	this(group, tool, folder == null ? null : folder.toString(), null);
     }
 
     public StateToken(final String group, final String tool, final String folder, final String document) {
@@ -80,8 +75,39 @@ public class StateToken implements IsSerializable {
 	encoded = null;
     }
 
+    public StateToken clearDocument() {
+	this.document = null;
+	encoded = null;
+	return this;
+    }
+
+    public StateToken clearFolder() {
+	this.folder = null;
+	encoded = null;
+	return this;
+    }
+
     public StateToken clone() {
 	return new StateToken(this.getEncoded());
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+	if (this == obj) {
+	    return true;
+	}
+	if (obj == null) {
+	    return false;
+	}
+	final StateToken other = (StateToken) obj;
+	if (getEncoded() == null) {
+	    if (other.getEncoded() != null) {
+		return false;
+	    }
+	} else if (!getEncoded().equals(other.getEncoded())) {
+	    return false;
+	}
+	return true;
     }
 
     public String getDocument() {
@@ -159,8 +185,24 @@ public class StateToken implements IsSerializable {
 	return getDocument() != null;
     }
 
+    public StateToken setDocument(final Long document) {
+	this.document = document == null ? null : document.toString();
+	encoded = null;
+	return this;
+    }
+
     public StateToken setDocument(final String document) {
 	this.document = document;
+	encoded = null;
+	return this;
+    }
+
+    public void setEncoded(final String encoded) {
+	parse(encoded);
+    }
+
+    public StateToken setFolder(final Long folder) {
+	this.folder = folder == null ? null : folder.toString();
 	encoded = null;
 	return this;
     }
@@ -194,4 +236,18 @@ public class StateToken implements IsSerializable {
 	    return null;
 	}
     }
+
+    private void parse(final String encoded) {
+	String[] splitted;
+	if (encoded != null && encoded.length() > 0) {
+	    splitted = encoded.split("\\.");
+	} else {
+	    splitted = EMPTY;
+	}
+	setGroup(conditionalAssign(0, splitted));
+	setTool(conditionalAssign(1, splitted));
+	setFolder(conditionalAssign(2, splitted));
+	setDocument(conditionalAssign(3, splitted));
+    }
+
 }

@@ -81,7 +81,7 @@ public class GroupRPC implements RPC, GroupService {
 	final Group newGroup = groupManager.createGroup(group, user);
 	final Long defContentId = newGroup.getDefaultContent().getId();
 	contentManager.setTags(user, defContentId, groupDTO.getTags());
-	return new StateToken(newGroup.getDefaultContent().getStateToken());
+	return newGroup.getDefaultContent().getStateToken();
     }
 
     private UserSession getUserSession() {

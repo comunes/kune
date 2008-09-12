@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
+import org.ourproject.kune.platf.client.dto.ContainerSimpleDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.TagResultDTO;
@@ -65,7 +66,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 	String newTitle = "folder new name";
 	final StateDTO newState = contentService.addFolder(session.getHash(), groupShortName, folder.getId(), oldTitle);
 
-	final ContainerDTO newFolder = newState.getFolder().getChilds().get(0);
+	final ContainerSimpleDTO newFolder = newState.getFolder().getChilds().get(0);
 
 	assertEquals(oldTitle, newFolder.getName());
 
@@ -166,7 +167,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 	String newTitle = "folder new name";
 	final StateDTO newState = contentService.addFolder(session.getHash(), groupShortName, folder.getId(), oldTitle);
 
-	final ContainerDTO newFolder = newState.getFolder().getChilds().get(0);
+	final ContainerSimpleDTO newFolder = newState.getFolder().getChilds().get(0);
 
 	assertEquals(oldTitle, newFolder.getName());
 

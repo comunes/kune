@@ -62,7 +62,7 @@ public class UserInfoServiceDefault implements UserInfoService {
 
 	    final Content defaultContent = userGroup.getDefaultContent();
 	    if (defaultContent != null) {
-		info.setHomePage(defaultContent.getStateToken());
+		info.setHomePage(defaultContent.getStateToken().toString());
 	    }
 	}
 	return info;

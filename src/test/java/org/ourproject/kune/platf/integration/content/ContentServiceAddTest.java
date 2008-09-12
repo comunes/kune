@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
+import org.ourproject.kune.platf.client.dto.ContainerSimpleDTO;
 import org.ourproject.kune.platf.client.dto.ContentDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
@@ -68,8 +69,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 	assertNotNull(newState);
 
 	final ContainerDTO parentAgain = getDefaultContent().getFolder();
-	final ContainerDTO child = parentAgain.getChilds().get(0);
-	assertEquals(parent.getAbsolutePath().length + 1, child.getAbsolutePath().length);
+	final ContainerSimpleDTO child = parentAgain.getChilds().get(0);
 	assertEquals(parent.getId(), child.getParentFolderId());
 
 	assertEquals(parent.getId(), parentAgain.getId());

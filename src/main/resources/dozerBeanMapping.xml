@@ -102,7 +102,6 @@
     <field>
       <a>authors</a>
       <b>authors</b>
-
       <a-hint>
         org.ourproject.kune.platf.client.dto.UserSimpleDTO
       </a-hint>
@@ -114,12 +113,29 @@
       <a-hint>org.ourproject.kune.platf.client.dto.TagResultDTO</a-hint>
       <b-hint>org.ourproject.kune.platf.server.domain.TagResult</b-hint>
     </field>
-
+  </mapping>
+  
+  <mapping>
+    <class-a>org.ourproject.kune.platf.client.dto.StateToken</class-a>
+	<class-b>org.ourproject.kune.platf.client.dto.StateToken</class-b>
+	<field>
+    <a>encoded</a>
+    <b>encoded</b>
+    </field>
   </mapping>
 
   <mapping>
     <class-a>org.ourproject.kune.platf.client.dto.LicenseDTO</class-a>
     <class-b>org.ourproject.kune.platf.server.domain.License</class-b>
+  </mapping>
+  
+    <mapping>
+    <class-a>org.ourproject.kune.platf.client.dto.ContainerSimpleDTO</class-a>
+    <class-b>org.ourproject.kune.platf.server.domain.Container</class-b>
+    <field>
+      <a get-method="getStateToken">stateToken</a>
+      <b>stateToken</b>
+    </field>
   </mapping>
 
   <mapping>
@@ -128,6 +144,10 @@
     <field>
       <a>title</a>
       <b>lastRevision.title</b>
+    </field>
+	<field>
+      <a get-method="getStateToken">stateToken</a>
+      <b>stateToken</b>
     </field>
   </mapping>
 
@@ -143,7 +163,7 @@
       <b>shortName</b>
     </field>
     <field>
-      <a get-method="getStateToken">link</a>
+      <a get-method="getStateTokenEncoded">link</a>
       <b>link</b>
     </field>
   </mapping>
@@ -170,8 +190,13 @@
     <field>
       <a>childs</a>
       <b>childs</b>
-      <a-hint>org.ourproject.kune.platf.client.dto.ContainerDTO</a-hint>
+      <a-hint>org.ourproject.kune.platf.client.dto.ContainerSimpleDTO</a-hint>
       <b-hint>org.ourproject.kune.platf.server.domain.Container</b-hint>
+    </field>
+	
+	<field>
+      <a get-method="getStateToken">stateToken</a>
+      <b>stateToken</b>
     </field>
   </mapping>
 
@@ -292,5 +317,15 @@
     <class-a>org.ourproject.kune.platf.client.dto.ChatUserParamsDTO</class-a>
     <class-b>org.ourproject.kune.platf.server.domain.ChatUserParams</class-b>
   </mapping>
-    
+  
+  <mapping>
+    <class-a>org.ourproject.kune.platf.client.dto.ContentStatusDTO</class-a>
+    <class-b>org.ourproject.kune.platf.server.domain.ContentStatus</class-b>
+  </mapping>
+  
+  <mapping>
+    <class-a>org.ourproject.kune.platf.client.dto.AccessRolDTO</class-a>
+    <class-b>org.ourproject.kune.platf.server.access.AccessRol</class-b>
+  </mapping>
+  
 </mappings>

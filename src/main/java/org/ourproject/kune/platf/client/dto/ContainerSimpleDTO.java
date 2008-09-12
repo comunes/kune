@@ -22,45 +22,58 @@ package org.ourproject.kune.platf.client.dto;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+/**
+ * A item can be both a container or a content
+ * 
+ */
 public class ContainerSimpleDTO implements IsSerializable {
-    private Long parentFolderId;
     private Long id;
     private String name;
     private String typeId;
+    private StateToken stateToken;
+    private Long parentFolderId;
 
     public ContainerSimpleDTO() {
     }
 
-    public Long getParentFolderId() {
-        return parentFolderId;
-    }
-
-    public void setParentFolderId(final Long parentFolderId) {
-        this.parentFolderId = parentFolderId;
-    }
-
     public Long getId() {
-        return id;
+	return id;
     }
 
     public String getName() {
-        return name;
+	return name;
     }
 
-    public void setName(final String name) {
-        this.name = name;
+    public Long getParentFolderId() {
+	return parentFolderId;
     }
 
-    public void setId(final Long id) {
-        this.id = id;
+    public StateToken getStateToken() {
+	return stateToken;
     }
 
     public String getTypeId() {
-        return typeId;
+	return typeId;
+    }
+
+    public void setId(final Long id) {
+	this.id = id;
+    }
+
+    public void setName(final String name) {
+	this.name = name;
+    }
+
+    public void setParentFolderId(final Long parentFolderId) {
+	this.parentFolderId = parentFolderId;
+    }
+
+    public void setStateToken(final StateToken stateToken) {
+	this.stateToken = stateToken;
     }
 
     public void setTypeId(final String typeId) {
-        this.typeId = typeId;
+	this.typeId = typeId;
     }
 
 }

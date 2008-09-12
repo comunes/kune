@@ -29,7 +29,10 @@ import java.util.Set;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -49,13 +52,13 @@ import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
 import org.hibernate.validator.NotNull;
+import org.ourproject.kune.platf.client.dto.StateToken;
 
 @Entity
 @Table(name = "contents")
 @Indexed
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Content implements HasStateToken {
-    private static final String TOKEN_SEPARATOR = ".";
 
     @Id
     @DocumentId
@@ -81,8 +84,6 @@ public class Content implements HasStateToken {
 
     @Basic(optional = true)
     private Date deletedOn;
-
-    private boolean markForDeletion;
 
     @Basic(optional = false)
     private Date publishedOn;
@@ -113,199 +114,207 @@ public class Content implements HasStateToken {
     @OneToMany(mappedBy = "content", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Comment> comments;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ContentStatus status;
+
     public Content() {
-        translations = new ArrayList<ContentTranslation>();
-        authors = new ArrayList<User>();
-        tags = new ArrayList<Tag>();
-        comments = new HashSet<Comment>();
-        this.createdOn = System.currentTimeMillis();
-        this.lastRevision = new Revision(this);
-        accessLists = null;
-        markForDeletion = false;
-    }
-
-    public Set<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(final Set<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public void addComment(final Comment comment) {
-        // FIXME: something related with lazy initialization (workaround using
-        // size())
-        comments.size();
-        comments.add(comment);
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(final Long id) {
-        this.id = id;
-    }
-
-    public int getVersion() {
-        return version;
-    }
-
-    public void setVersion(final int version) {
-        this.version = version;
-    }
-
-    public AccessLists getAccessLists() {
-        return accessLists;
-    }
-
-    public void setAccessLists(final AccessLists accessLists) {
-        this.accessLists = accessLists;
-    }
-
-    public List<Tag> getTags() {
-        return tags;
-    }
-
-    public void setTags(final List<Tag> tags) {
-        this.tags = tags;
-    }
-
-    public License getLicense() {
-        return license;
-    }
-
-    public void setLicense(final License license) {
-        this.license = license;
-    }
-
-    public Revision getLastRevision() {
-        return lastRevision;
-    }
-
-    public void setLastRevision(final Revision revision) {
-        this.lastRevision = revision;
-    }
-
-    public List<ContentTranslation> getTranslations() {
-        return translations;
-    }
-
-    public void setTranslations(final List<ContentTranslation> translations) {
-        this.translations = translations;
-    }
-
-    public Long getCreatedOn() {
-        return createdOn;
-    }
-
-    public void setCreatedOn(final Long createdOn) {
-        this.createdOn = createdOn;
-    }
-
-    public Date getPublishedOn() {
-        return publishedOn;
-    }
-
-    public void setPublishedOn(final Date publishedOn) {
-        this.publishedOn = publishedOn;
-    }
-
-    public Container getContainer() {
-        return container;
-    }
-
-    public void setContainer(final Container container) {
-        this.container = container;
-    }
-
-    public void addRevision(final Revision revision) {
-        if (lastRevision == null) {
-            lastRevision = revision;
-        } else {
-            revision.setPrevious(lastRevision);
-            lastRevision = revision;
-        }
-    }
-
-    public String getTitle() {
-        return lastRevision.getTitle();
-    }
-
-    public String getTypeId() {
-        return typeId;
-    }
-
-    public void setTypeId(final String typeId) {
-        this.typeId = typeId;
-    }
-
-    public boolean hasAccessList() {
-        return accessLists != null;
-    }
-
-    public I18nLanguage getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(final I18nLanguage language) {
-        this.language = language;
-    }
-
-    @Transient
-    public String getStateToken() {
-        return getContainer().getOwner().getShortName() + TOKEN_SEPARATOR + getContainer().getToolName()
-                + TOKEN_SEPARATOR + getContainer().getId() + TOKEN_SEPARATOR + getId();
-    }
-
-    public List<User> getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(final List<User> authors) {
-        this.authors = authors;
+	translations = new ArrayList<ContentTranslation>();
+	authors = new ArrayList<User>();
+	tags = new ArrayList<Tag>();
+	comments = new HashSet<Comment>();
+	this.createdOn = System.currentTimeMillis();
+	this.lastRevision = new Revision(this);
+	accessLists = null;
+	status = ContentStatus.publishedOnline;
     }
 
     public void addAuthor(final User user) {
-        if (!this.authors.contains(user)) {
-            this.authors.add(user);
-        }
+	if (!this.authors.contains(user)) {
+	    this.authors.add(user);
+	}
     }
 
-    public void removeAuthor(final User user) {
-        this.authors.remove(user);
+    public void addComment(final Comment comment) {
+	// FIXME: something related with lazy initialization (workaround using
+	// size())
+	comments.size();
+	comments.add(comment);
     }
 
-    public String getTagsAsString() {
-        String tagConcatenated = "";
-        for (Iterator<Tag> iterator = tags.iterator(); iterator.hasNext();) {
-            Tag tag = iterator.next();
-            tagConcatenated = tagConcatenated + tag.getName();
-            if (iterator.hasNext()) {
-                tagConcatenated = tagConcatenated + " ";
-            }
-        }
-        return tagConcatenated;
+    public void addRevision(final Revision revision) {
+	if (lastRevision == null) {
+	    lastRevision = revision;
+	} else {
+	    revision.setPrevious(lastRevision);
+	    lastRevision = revision;
+	}
+    }
+
+    public AccessLists getAccessLists() {
+	return accessLists;
+    }
+
+    public List<User> getAuthors() {
+	return authors;
+    }
+
+    public Set<Comment> getComments() {
+	return comments;
+    }
+
+    public Container getContainer() {
+	return container;
+    }
+
+    public Long getCreatedOn() {
+	return createdOn;
     }
 
     public Date getDeletedOn() {
-        return deletedOn;
+	return deletedOn;
     }
 
-    public void setDeletedOn(final Date date) {
-        this.deletedOn = date;
+    public Long getId() {
+	return id;
     }
 
-    public boolean isMarkForDeletion() {
-        return markForDeletion;
+    public I18nLanguage getLanguage() {
+	return language;
     }
 
-    public void setMarkForDeletion(final boolean markForDeletion) {
-        this.markForDeletion = markForDeletion;
+    public Revision getLastRevision() {
+	return lastRevision;
+    }
+
+    public License getLicense() {
+	return license;
     }
 
     public Group getOwner(final Group group) {
-        return container.getOwner();
+	return container.getOwner();
+    }
+
+    public Date getPublishedOn() {
+	return publishedOn;
+    }
+
+    @Transient
+    public StateToken getStateToken() {
+	return getContainer().getStateToken().clone().setDocument(getId());
+    }
+
+    @Transient
+    public String getStateTokenEncoded() {
+	return getStateToken().getEncoded();
+    }
+
+    public ContentStatus getStatus() {
+	return status;
+    }
+
+    public List<Tag> getTags() {
+	return tags;
+    }
+
+    public String getTagsAsString() {
+	String tagConcatenated = "";
+	for (final Iterator<Tag> iterator = tags.iterator(); iterator.hasNext();) {
+	    final Tag tag = iterator.next();
+	    tagConcatenated = tagConcatenated + tag.getName();
+	    if (iterator.hasNext()) {
+		tagConcatenated = tagConcatenated + " ";
+	    }
+	}
+	return tagConcatenated;
+    }
+
+    public String getTitle() {
+	return lastRevision.getTitle();
+    }
+
+    public List<ContentTranslation> getTranslations() {
+	return translations;
+    }
+
+    public String getTypeId() {
+	return typeId;
+    }
+
+    public int getVersion() {
+	return version;
+    }
+
+    public boolean hasAccessList() {
+	return accessLists != null;
+    }
+
+    public void removeAuthor(final User user) {
+	this.authors.remove(user);
+    }
+
+    public void setAccessLists(final AccessLists accessLists) {
+	this.accessLists = accessLists;
+    }
+
+    public void setAuthors(final List<User> authors) {
+	this.authors = authors;
+    }
+
+    public void setComments(final Set<Comment> comments) {
+	this.comments = comments;
+    }
+
+    public void setContainer(final Container container) {
+	this.container = container;
+    }
+
+    public void setCreatedOn(final Long createdOn) {
+	this.createdOn = createdOn;
+    }
+
+    public void setDeletedOn(final Date date) {
+	this.deletedOn = date;
+    }
+
+    public void setId(final Long id) {
+	this.id = id;
+    }
+
+    public void setLanguage(final I18nLanguage language) {
+	this.language = language;
+    }
+
+    public void setLastRevision(final Revision revision) {
+	this.lastRevision = revision;
+    }
+
+    public void setLicense(final License license) {
+	this.license = license;
+    }
+
+    public void setPublishedOn(final Date publishedOn) {
+	this.publishedOn = publishedOn;
+    }
+
+    public void setStatus(final ContentStatus status) {
+	this.status = status;
+    }
+
+    public void setTags(final List<Tag> tags) {
+	this.tags = tags;
+    }
+
+    public void setTranslations(final List<ContentTranslation> translations) {
+	this.translations = translations;
+    }
+
+    public void setTypeId(final String typeId) {
+	this.typeId = typeId;
+    }
+
+    public void setVersion(final int version) {
+	this.version = version;
     }
 
 }

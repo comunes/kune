@@ -38,6 +38,7 @@ public class StateDTO implements IsSerializable {
     private AccessRightsDTO contentRights;
     private AccessRightsDTO folderRights;
     private AccessRightsDTO groupRights;
+    private ContentStatusDTO status;
     private boolean isRateable;
     private Double rate;
     private Integer rateByUsers;
@@ -51,224 +52,237 @@ public class StateDTO implements IsSerializable {
     private List<TagResultDTO> groupTags;
     private SocialNetworkDTO groupMembers;
     private ParticipationDataDTO participation;
+    private StateToken stateToken;
 
     public StateDTO() {
-        this(null, null, null);
+	this(null, null, null);
     }
 
     public StateDTO(final String docRef, final String title, final String content) {
-        this.documentId = docRef;
-        this.title = title;
-        this.content = content;
+	this.documentId = docRef;
+	this.title = title;
+	this.content = content;
     }
 
-    public int getVersion() {
-        return version;
+    public AccessListsDTO getAccessLists() {
+	return accessLists;
     }
 
-    public void setVersion(final int version) {
-        this.version = version;
-    }
-
-    public void setDocumentId(final String docRef) {
-        this.documentId = docRef;
-    }
-
-    public void setContent(final String content) {
-        this.content = content;
-    }
-
-    public String getDocumentId() {
-        return documentId;
+    public List<UserSimpleDTO> getAuthors() {
+	return authors;
     }
 
     public String getContent() {
-        return content;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(final String title) {
-        this.title = title;
-    }
-
-    public String getToolName() {
-        return toolName;
-    }
-
-    public void setToolName(final String toolName) {
-        this.toolName = toolName;
-    }
-
-    public GroupDTO getGroup() {
-        return this.group;
-    }
-
-    public void setGroup(final GroupDTO group) {
-        this.group = group;
+	return content;
     }
 
     public AccessRightsDTO getContentRights() {
-        return this.contentRights;
+	return this.contentRights;
     }
 
-    public void setContentRights(final AccessRightsDTO accessRights) {
-        this.contentRights = accessRights;
+    public Double getCurrentUserRate() {
+	return currentUserRate;
+    }
+
+    public String getDocumentId() {
+	return documentId;
     }
 
     public ContainerDTO getFolder() {
-        return folder;
+	return folder;
     }
 
-    public void setFolder(final ContainerDTO folder) {
-        this.folder = folder;
+    public AccessRightsDTO getFolderRights() {
+	return folderRights;
+    }
+
+    public GroupDTO getGroup() {
+	return this.group;
+    }
+
+    public SocialNetworkDTO getGroupMembers() {
+	return groupMembers;
+    }
+
+    public AccessRightsDTO getGroupRights() {
+	return groupRights;
+    }
+
+    public List<TagResultDTO> getGroupTags() {
+	return groupTags;
+    }
+
+    public I18nLanguageDTO getLanguage() {
+	return language;
+    }
+
+    public LicenseDTO getLicense() {
+	return license;
+    }
+
+    public ParticipationDataDTO getParticipation() {
+	return participation;
+    }
+
+    public Date getPublishedOn() {
+	return publishedOn;
+    }
+
+    public Double getRate() {
+	return rate;
+    }
+
+    public Integer getRateByUsers() {
+	return rateByUsers;
+    }
+
+    public SocialNetworkDTO getSocialNetwork() {
+	return socialNetwork;
     }
 
     public StateToken getStateToken() {
-        return new StateToken(group.getShortName(), toolName, folder.getId().toString(), getDocumentId());
+	return stateToken;
+    }
+
+    public ContentStatusDTO getStatus() {
+	return status;
+    }
+
+    public String getTags() {
+	return tags;
+    }
+
+    public String getTitle() {
+	return title;
+    }
+
+    public String getToolName() {
+	return toolName;
+    }
+
+    public String getTypeId() {
+	return typeId;
+    }
+
+    public int getVersion() {
+	return version;
     }
 
     // FIXME: maybe a tag in the content showing the type, think about this
     public boolean hasDocument() {
-        return documentId != null;
-    }
-
-    public AccessListsDTO getAccessLists() {
-        return accessLists;
-    }
-
-    public void setAccessLists(final AccessListsDTO accessLists) {
-        this.accessLists = accessLists;
-    }
-
-    public Double getRate() {
-        return rate;
-    }
-
-    public void setRate(final Double rate) {
-        this.rate = rate;
-    }
-
-    public Integer getRateByUsers() {
-        return rateByUsers;
-    }
-
-    public void setRateByUsers(final Integer rateByUsers) {
-        this.rateByUsers = rateByUsers;
-    }
-
-    public AccessRightsDTO getFolderRights() {
-        return folderRights;
-    }
-
-    public void setFolderRights(final AccessRightsDTO folderRights) {
-        this.folderRights = folderRights;
-    }
-
-    public String getTypeId() {
-        return typeId;
-    }
-
-    public void setTypeId(final String typeId) {
-        this.typeId = typeId;
-    }
-
-    public LicenseDTO getLicense() {
-        return license;
-    }
-
-    public void setLicense(final LicenseDTO license) {
-        this.license = license;
-    }
-
-    public SocialNetworkDTO getSocialNetwork() {
-        return socialNetwork;
-    }
-
-    public void setSocialNetwork(final SocialNetworkDTO socialNetwork) {
-        this.socialNetwork = socialNetwork;
-    }
-
-    public AccessRightsDTO getGroupRights() {
-        return groupRights;
-    }
-
-    public void setGroupRights(final AccessRightsDTO groupRights) {
-        this.groupRights = groupRights;
-    }
-
-    public Double getCurrentUserRate() {
-        return currentUserRate;
-    }
-
-    public void setCurrentUserRate(final Double currentUserRate) {
-        this.currentUserRate = currentUserRate;
+	return documentId != null;
     }
 
     public boolean isRateable() {
-        return isRateable;
+	return isRateable;
     }
 
-    public void setRateable(final boolean isRateable) {
-        this.isRateable = isRateable;
-    }
-
-    public I18nLanguageDTO getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(final I18nLanguageDTO language) {
-        this.language = language;
-    }
-
-    public Date getPublishedOn() {
-        return publishedOn;
-    }
-
-    public void setPublishedOn(final Date publishedOn) {
-        this.publishedOn = publishedOn;
-    }
-
-    public List<UserSimpleDTO> getAuthors() {
-        return authors;
+    public void setAccessLists(final AccessListsDTO accessLists) {
+	this.accessLists = accessLists;
     }
 
     public void setAuthors(final List<UserSimpleDTO> authors) {
-        this.authors = authors;
+	this.authors = authors;
     }
 
-    public String getTags() {
-        return tags;
+    public void setContent(final String content) {
+	this.content = content;
     }
 
-    public void setTags(final String tags) {
-        this.tags = tags;
+    public void setContentRights(final AccessRightsDTO accessRights) {
+	this.contentRights = accessRights;
     }
 
-    public List<TagResultDTO> getGroupTags() {
-        return groupTags;
+    public void setCurrentUserRate(final Double currentUserRate) {
+	this.currentUserRate = currentUserRate;
     }
 
-    public void setGroupTags(final List<TagResultDTO> groupTags) {
-        this.groupTags = groupTags;
+    public void setDocumentId(final String docRef) {
+	this.documentId = docRef;
     }
 
-    public SocialNetworkDTO getGroupMembers() {
-        return groupMembers;
+    public void setFolder(final ContainerDTO folder) {
+	this.folder = folder;
+    }
+
+    public void setFolderRights(final AccessRightsDTO folderRights) {
+	this.folderRights = folderRights;
+    }
+
+    public void setGroup(final GroupDTO group) {
+	this.group = group;
     }
 
     public void setGroupMembers(final SocialNetworkDTO groupMembers) {
-        this.groupMembers = groupMembers;
+	this.groupMembers = groupMembers;
     }
 
-    public ParticipationDataDTO getParticipation() {
-        return participation;
+    public void setGroupRights(final AccessRightsDTO groupRights) {
+	this.groupRights = groupRights;
+    }
+
+    public void setGroupTags(final List<TagResultDTO> groupTags) {
+	this.groupTags = groupTags;
+    }
+
+    public void setLanguage(final I18nLanguageDTO language) {
+	this.language = language;
+    }
+
+    public void setLicense(final LicenseDTO license) {
+	this.license = license;
     }
 
     public void setParticipation(final ParticipationDataDTO participation) {
-        this.participation = participation;
+	this.participation = participation;
+    }
+
+    public void setPublishedOn(final Date publishedOn) {
+	this.publishedOn = publishedOn;
+    }
+
+    public void setRate(final Double rate) {
+	this.rate = rate;
+    }
+
+    public void setRateable(final boolean isRateable) {
+	this.isRateable = isRateable;
+    }
+
+    public void setRateByUsers(final Integer rateByUsers) {
+	this.rateByUsers = rateByUsers;
+    }
+
+    public void setSocialNetwork(final SocialNetworkDTO socialNetwork) {
+	this.socialNetwork = socialNetwork;
+    }
+
+    public void setStateToken(final StateToken stateToken) {
+	this.stateToken = stateToken;
+    }
+
+    public void setStatus(final ContentStatusDTO status) {
+	this.status = status;
+    }
+
+    public void setTags(final String tags) {
+	this.tags = tags;
+    }
+
+    public void setTitle(final String title) {
+	this.title = title;
+    }
+
+    public void setToolName(final String toolName) {
+	this.toolName = toolName;
+    }
+
+    public void setTypeId(final String typeId) {
+	this.typeId = typeId;
+    }
+
+    public void setVersion(final int version) {
+	this.version = version;
     }
 
 }

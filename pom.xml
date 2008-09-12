@@ -54,7 +54,7 @@
     <dependency>
       <groupId>com.gwtextux</groupId>
       <artifactId>gwtextux</artifactId>
-      <version>0.3.0</version>
+      <version>0.3.0b</version>
     </dependency>
     <dependency>
       <groupId>com.allen_sauer.gwt.log.gwt-log</groupId>

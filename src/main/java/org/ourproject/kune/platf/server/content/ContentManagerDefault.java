@@ -38,6 +38,7 @@ import org.ourproject.kune.platf.client.ui.KuneStringUtils;
 import org.ourproject.kune.platf.server.access.FinderService;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
+import org.ourproject.kune.platf.server.domain.ContentStatus;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.Rate;
 import org.ourproject.kune.platf.server.domain.Revision;
@@ -78,14 +79,14 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
 	content.addAuthor(author);
     }
 
-    public Content createContent(final String title, final String body, final User user, final Container container) {
+    public Content createContent(final String title, final String body, final User author, final Container container) {
 	final Content descriptor = new Content();
-	descriptor.addAuthor(user);
-	descriptor.setLanguage(user.getLanguage());
+	descriptor.addAuthor(author);
+	descriptor.setLanguage(author.getLanguage());
 	// FIXME: remove this when UI take publishing into account
 	descriptor.setPublishedOn(new Date());
-	descriptor.setContainer(container);
 	container.addContent(descriptor);
+	descriptor.setContainer(container);
 	final Revision revision = new Revision(descriptor);
 	revision.setTitle(title);
 	revision.setBody(body);
@@ -95,9 +96,8 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
 
     public void delContent(final User user, final Long contentId) throws DefaultException {
 	final Content content = finder.getContent(contentId);
-	content.setMarkForDeletion(true);
+	content.setStatus(ContentStatus.inTheDustbin);
 	content.setDeletedOn(new Date());
-	// FIXME: Maybe set only visible for admins
     }
 
     public Double getRateAvg(final Content content) {

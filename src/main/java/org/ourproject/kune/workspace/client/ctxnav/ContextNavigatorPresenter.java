@@ -163,39 +163,54 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     }
 
     public void setState(final StateDTO state) {
-	final StateToken stateToken = state.getStateToken().clone();
-	final String treeId = genId(stateToken);
-
 	final ContainerDTO container = state.getFolder();
-	createTreePath(stateToken, container.getAbsolutePath());
 
-	boolean visible = false;
-	AccessRightsDTO rights = null;
-
-	String containerTreeId;
+	createTreePath(state.getStateToken(), container.getAbsolutePath(), state.getFolderRights());
 
 	if (state.hasDocument()) {
-	    rights = state.getContentRights();
-	    visible = rights.isVisible();
-	    containerTreeId = genId(stateToken.clone().setDocument(null));
+	    addItem(state.getTitle(), state.getTypeId(), state.getStatus(), state.getStateToken(), container
+		    .getStateToken(), state.getContentRights());
 	} else {
-	    rights = state.getFolderRights();
-	    visible = rights.isVisible();
-	    final Long folderId = container.getParentFolderId();
-	    containerTreeId = genId(stateToken.clone().setDocument(null).setFolder(
-		    folderId == null ? null : folderId.toString()));
+	    addItem(container.getName(), container.getTypeId(), ContentStatusDTO.publishedOnline, container
+		    .getStateToken(), container.getStateToken().clone().setFolder(container.getParentFolderId()), state
+		    .getFolderRights());
 	}
 
-	// here check deletion mark
+	for (final ContentDTO content : container.getContents()) {
+	    addItem(content.getTitle(), content.getTypeId(), content.getStatus(), content.getStateToken(), content
+		    .getStateToken().clone().clearDocument(), content.getRights());
+	}
 
+	for (final ContainerSimpleDTO siblingFolder : container.getChilds()) {
+	    addItem(siblingFolder.getName(), siblingFolder.getTypeId(), ContentStatusDTO.publishedOnline, siblingFolder
+		    .getStateToken(), siblingFolder.getStateToken().clone()
+		    .setFolder(siblingFolder.getParentFolderId()), state.getFolderRights());
+	}
+	view.selectItem(genId(state.getStateToken()));
+    }
+
+    private void addItem(final String title, final String contentTypeId, final ContentStatusDTO status,
+	    final StateToken stateToken, final StateToken parentStateToken, final AccessRightsDTO rights) {
 	final ActionCollection<StateToken> topActions = new ActionCollection<StateToken>();
 	final ActionCollection<StateToken> itemActions = new ActionCollection<StateToken>();
 	final ActionCollection<StateToken> bottomActions = new ActionCollection<StateToken>();
 
-	boolean add = false;
-	final String contentId = state.getTypeId();
+	createItemActions(rights, contentTypeId, topActions, itemActions, bottomActions);
 
-	for (final ActionDescriptor<StateToken> action : actions.get(contentId)) {
+	view.setTopActions(stateToken, topActions);
+	view.setBottomActions(stateToken, bottomActions);
+	final ContextNavigatorItem item = new ContextNavigatorItem(genId(stateToken), genId(parentStateToken),
+		getContentTypeIcon(contentTypeId), title, status, stateToken, isDraggable(contentTypeId, rights
+			.isAdministrable()), isDroppable(contentTypeId, rights.isAdministrable()), itemActions);
+	view.addItem(item);
+    }
+
+    private void createItemActions(final AccessRightsDTO rights, final String contentTypeId,
+	    final ActionCollection<StateToken> topActions, final ActionCollection<StateToken> itemActions,
+	    final ActionCollection<StateToken> bottomActions) {
+	boolean add = false;
+
+	for (final ActionDescriptor<StateToken> action : actions.get(contentTypeId)) {
 	    switch (action.getAccessRol()) {
 	    case Administrator:
 		add = rights.isAdministrable();
@@ -225,64 +240,18 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 		}
 	    }
 	}
-
-	view.setTopActions(stateToken, topActions);
-	view.setBottomActions(stateToken, bottomActions);
-
-	final ContextNavigatorItem item = new ContextNavigatorItem(treeId, containerTreeId,
-		getContentTypeIcon(contentId), state.getTitle(), visible ? ContentStatusDTO.publicVisible
-			: ContentStatusDTO.nonPublicVisible, stateToken, isDraggable(contentId, rights
-			.isAdministrable()), isDroppable(contentId, rights.isAdministrable()), itemActions);
-	view.addItem(item);
-
-	for (final ContentDTO content : container.getContents()) {
-	    final StateToken siblingToken = stateToken.clone().setDocument(content.getId().toString());
-	    final StateToken siblingParentToken = stateToken.clone().setDocument(null);
-	    // TODO: rights not correct
-	    final String contentTypeId = content.getTypeId();
-	    final ContextNavigatorItem sibling = new ContextNavigatorItem(genId(siblingToken),
-		    genId(siblingParentToken), getContentTypeIcon(contentTypeId), content.getTitle(),
-		    ContentStatusDTO.publicVisible, siblingToken, isDraggable(contentTypeId, rights.isAdministrable()),
-		    isDroppable(contentTypeId, rights.isAdministrable()), null);
-	    view.addItem(sibling);
-
-	}
-
-	for (final ContainerDTO siblingFolder : container.getChilds()) {
-	    final StateToken siblingToken = stateToken.clone().setDocument(null).setFolder(
-		    siblingFolder.getId().toString());
-	    final StateToken siblingParentToken = stateToken.clone().setDocument(null).setFolder(
-		    siblingFolder.getParentFolderId().toString());
-	    // TODO: rights not correct
-	    final String containerTypeId = container.getTypeId();
-	    final ContextNavigatorItem sibling = new ContextNavigatorItem(genId(siblingToken),
-		    genId(siblingParentToken), getContentTypeIcon(containerTypeId), siblingFolder.getName(),
-		    ContentStatusDTO.publicVisible, siblingToken,
-		    isDraggable(containerTypeId, rights.isAdministrable()), isDroppable(containerTypeId, rights
-			    .isAdministrable()), null);
-	    view.addItem(sibling);
-	}
-	view.selectItem(treeId);
     }
 
-    private void addItem(final String title, final String contentTypeId, final StateToken token,
+    private void createTreePath(final StateToken state, final ContainerSimpleDTO[] absolutePath,
 	    final AccessRightsDTO rights) {
-
-    }
-
-    private void createTreePath(final StateToken state, final ContainerSimpleDTO[] absolutePath) {
 	for (int i = 0; i < absolutePath.length; i++) {
 	    final ContainerSimpleDTO folder = absolutePath[i];
-	    final String parentFolderId = folder.getParentFolderId() == null ? null : folder.getParentFolderId()
-		    .toString();
-	    final StateToken folderStateToken = state.clone().setDocument(null).setFolder(folder.getId().toString());
-	    final StateToken parentStateToken = state.clone().setDocument(null).setFolder(parentFolderId);
+	    final StateToken folderStateToken = folder.getStateToken();
+	    final StateToken parentStateToken = state.clone().clearDocument().setFolder(folder.getParentFolderId());
+
 	    if (folder.getParentFolderId() != null) {
-		// Bad rights, draggable/droppable
-		final ContextNavigatorItem parent = new ContextNavigatorItem(genId(folderStateToken),
-			genId(parentStateToken), getContentTypeIcon(folder.getTypeId()), folder.getName(),
-			ContentStatusDTO.publicVisible, folderStateToken, false, true, null);
-		view.addItem(parent);
+		addItem(folder.getName(), folder.getTypeId(), ContentStatusDTO.publishedOnline, folderStateToken,
+			parentStateToken, rights);
 	    } else {
 		// create root folder
 		view.setRootItem(genId(folderStateToken), i18n.t("contents"), folderStateToken);

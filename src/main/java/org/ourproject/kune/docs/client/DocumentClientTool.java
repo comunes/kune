@@ -153,7 +153,7 @@ public class DocumentClientTool extends AbstractClientTool {
 				session.getCurrentState().getGroup().getShortName(), token.getDocument(),
 				new AsyncCallbackSimple<String>() {
 				    public void onSuccess(final String result) {
-					final StateToken parent = token.clone().setDocument(null);
+					final StateToken parent = token.clone().clearDocument();
 					stateManager.gotoToken(parent);
 				    }
 				});

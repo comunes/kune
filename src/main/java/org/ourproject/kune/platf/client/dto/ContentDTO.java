@@ -27,29 +27,56 @@ public class ContentDTO implements IsSerializable {
     private Long id;
     private String title;
     private String typeId;
+    private StateToken stateToken;
+    private ContentStatusDTO status;
+    private AccessRightsDTO rights;
 
     public Long getId() {
-        return id;
+	return id;
     }
 
-    public void setId(final Long id) {
-        this.id = id;
+    public AccessRightsDTO getRights() {
+	return rights;
+    }
+
+    public StateToken getStateToken() {
+	return stateToken;
+    }
+
+    public ContentStatusDTO getStatus() {
+	return status;
     }
 
     public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(final String title) {
-        this.title = title;
+	return title;
     }
 
     public String getTypeId() {
-        return typeId;
+	return typeId;
+    }
+
+    public void setId(final Long id) {
+	this.id = id;
+    }
+
+    public void setRights(final AccessRightsDTO rights) {
+	this.rights = rights;
+    }
+
+    public void setStateToken(final StateToken stateToken) {
+	this.stateToken = stateToken;
+    }
+
+    public void setStatus(final ContentStatusDTO status) {
+	this.status = status;
+    }
+
+    public void setTitle(final String title) {
+	this.title = title;
     }
 
     public void setTypeId(final String typeId) {
-        this.typeId = typeId;
+	this.typeId = typeId;
     }
 
 }

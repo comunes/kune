@@ -88,12 +88,14 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 	    child.setAllowDrag(item.isDraggable());
 	    child.setAllowDrop(item.isDroppable());
 	    switch (item.getContentStatus()) {
-	    case publicVisible:
+	    case publishedOnline:
 		child.enable();
 		break;
-	    case markForDelection:
+	    case inTheDustbin:
+	    case rejected:
 		child.setCls("k-linethrough");
-	    case nonPublicVisible:
+	    case editingInProgress:
+	    case submittedForEvaluation:
 		child.disable();
 		break;
 	    }
@@ -125,9 +127,6 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 	    }
 	} else {
 	    // the node already created
-	    if (contextMenus.get(nodeId) == null && item.getActionCollection() != null) {
-		createItemMenu(nodeId, item.getActionCollection(), item.getStateToken());
-	    }
 	}
 
     }

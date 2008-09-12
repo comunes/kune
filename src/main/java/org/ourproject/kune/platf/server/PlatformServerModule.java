@@ -54,6 +54,7 @@ import org.ourproject.kune.platf.server.content.ContentManagerDefault;
 import org.ourproject.kune.platf.server.content.CreationService;
 import org.ourproject.kune.platf.server.content.CreationServiceDefault;
 import org.ourproject.kune.platf.server.i18n.I18nTranslationServiceDefault;
+import org.ourproject.kune.platf.server.manager.FileManager;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.I18nCountryManager;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
@@ -64,6 +65,7 @@ import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 import org.ourproject.kune.platf.server.manager.TagManager;
 import org.ourproject.kune.platf.server.manager.ToolConfigurationManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
+import org.ourproject.kune.platf.server.manager.impl.FileManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.FileUploadManagerRevisited;
 import org.ourproject.kune.platf.server.manager.impl.GroupManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.I18nCountryManagerDefault;
@@ -133,6 +135,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
 	bind(I18nTranslationManager.class).to(I18nTranslationManagerDefault.class);
 	bind(TagManager.class).to(TagManagerDefault.class);
 	bind(CommentManager.class).to(CommentManagerDefault.class);
+	bind(FileManager.class).to(FileManagerDefault.class);
     }
 
     private void bindRPC() {

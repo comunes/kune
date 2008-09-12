@@ -78,8 +78,8 @@ public class StateManagerDefault implements StateManager {
     }
 
     public void gotoContainer(final Long containerId) {
-	final StateToken newStateToken = session.getCurrentState().getStateToken();
-	newStateToken.setDocument(null);
+	final StateToken newStateToken = session.getCurrentState().getStateToken().clone();
+	newStateToken.clearDocument();
 	newStateToken.setFolder(containerId.toString());
 	gotoToken(newStateToken);
     }
@@ -203,9 +203,9 @@ public class StateManagerDefault implements StateManager {
     private void onHistoryChanged(final StateToken newState) {
 	contentProvider.getContent(session.getUserHash(), newState, new AsyncCallbackSimple<StateDTO>() {
 	    public void onSuccess(final StateDTO newState) {
+		loadContent(newState);
 		session.setCurrent(newState);
 		checkGroupAndToolChange(oldState, newState);
-		loadContent(newState);
 		oldState = newState;
 	    }
 	});
