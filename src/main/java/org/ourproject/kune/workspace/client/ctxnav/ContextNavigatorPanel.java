@@ -205,7 +205,9 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 	final TreeNode item = getNode(id);
 	if (item != null) {
 	    item.select();
-	    // Errore item.ensureVisible();
+	    if (item.getParentNode() != null) {
+		item.ensureVisible();
+	    }
 	    if (item.getChildNodes().length > 0) {
 		item.expand();
 	    }

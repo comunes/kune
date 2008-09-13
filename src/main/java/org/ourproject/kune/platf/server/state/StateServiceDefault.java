@@ -30,6 +30,7 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class StateServiceDefault implements StateService {
+
     public State create(final Access access) {
 	final Content content = access.getContent();
 	final Container container = content.getContainer();

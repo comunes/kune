@@ -104,7 +104,6 @@ public class DocumentClientTool extends AbstractClientTool {
 				    public void onSuccess(final StateDTO state) {
 					contextNavigator.setState(state);
 					stateManager.setRetrievedState(state);
-					stateManager.reload();
 					contextNavigator.editItem(state.getStateToken());
 				    }
 				});
@@ -124,7 +123,6 @@ public class DocumentClientTool extends AbstractClientTool {
 				    public void onSuccess(final StateDTO state) {
 					contextNavigator.setState(state);
 					stateManager.setRetrievedState(state);
-					stateManager.reload();
 					contextNavigator.editItem(state.getStateToken());
 				    }
 				});
@@ -186,7 +184,6 @@ public class DocumentClientTool extends AbstractClientTool {
 		    public void onEvent(StateToken stateToken) {
 			stateManager.reload();
 			contextNavigator.selectItem(stateToken);
-
 		    }
 		});
 	refresh.setIconUrl("images/nav/refresh.png");

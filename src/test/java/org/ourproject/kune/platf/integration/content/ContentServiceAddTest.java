@@ -41,7 +41,8 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 	defaultContent = getDefaultContent();
 	assertEquals(1, defaultContent.getFolder().getContents().size());
 	final AccessRightsDTO cntRights = defaultContent.getContentRights();
-	final AccessRightsDTO ctxRight = defaultContent.getFolderRights();
+	final AccessRightsDTO ctxRights = defaultContent.getFolderRights();
+	final AccessRightsDTO groupRights = defaultContent.getGroupRights();
 
 	final String title = "New Content Title";
 	final StateDTO added = contentService.addContent(session.getHash(), groupName, defaultContent.getFolder()
@@ -51,12 +52,17 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 	assertEquals(title, added.getTitle());
 	assertEquals(2, contents.size());
 	assertEquals(cntRights, added.getContentRights());
-	assertEquals(ctxRight, added.getFolderRights());
+	assertEquals(ctxRights, added.getFolderRights());
+	assertEquals(groupRights, added.getGroupRights());
+	assertNotNull(added.getGroupMembers());
+	assertNotNull(added.getParticipation());
+	assertNotNull(added.getAccessLists());
 
 	final StateToken newState = added.getStateToken();
 	final StateDTO sameAgain = contentService.getContent(session.getHash(), groupName, newState);
 	assertNotNull(sameAgain);
 	assertEquals(2, sameAgain.getFolder().getContents().size());
+
     }
 
     @Test
@@ -67,6 +73,9 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 	final String title = "folder name";
 	final StateDTO newState = contentService.addFolder(session.getHash(), groupName, parent.getId(), title);
 	assertNotNull(newState);
+	assertNotNull(newState.getGroupMembers());
+	assertNotNull(newState.getParticipation());
+	assertNotNull(newState.getAccessLists());
 
 	final ContainerDTO parentAgain = getDefaultContent().getFolder();
 	final ContainerSimpleDTO child = parentAgain.getChilds().get(0);

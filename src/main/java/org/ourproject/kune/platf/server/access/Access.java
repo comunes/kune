@@ -40,21 +40,6 @@ public class Access {
 	setFolder(container);
     }
 
-    public Container getFolder() {
-	return container;
-    }
-
-    public void setContent(final Content descriptor) {
-	this.content = descriptor;
-	contentAccessLists = descriptor != null ? getContentAccessList(descriptor) : null;
-    }
-
-    public void setFolder(final Container container) {
-	this.container = container;
-	folderAccessLists = container != null ? getFolderAccessLists(container) : null;
-	groupAccessLists = folderAccessLists;
-    }
-
     public Content getContent() {
 	return content;
     }
@@ -63,42 +48,28 @@ public class Access {
 	return contentAccessLists;
     }
 
-    public AccessLists getFolderAccessLists() {
-	return folderAccessLists;
-    }
-
-    public AccessLists getGroupAccessLists() {
-	return groupAccessLists;
-    }
-
     public AccessRights getContentRights() {
 	return contentRights;
+    }
+
+    public Container getFolder() {
+	return container;
+    }
+
+    public AccessLists getFolderAccessLists() {
+	return folderAccessLists;
     }
 
     public AccessRights getFolderRights() {
 	return folderRights;
     }
 
+    public AccessLists getGroupAccessLists() {
+	return groupAccessLists;
+    }
+
     public AccessRights getGroupRights() {
 	return groupRights;
-    }
-
-    public void setContentRights(final AccessRights accessRights) {
-	this.contentRights = accessRights;
-	if (equalsAccessLists()) {
-	    this.folderRights = accessRights;
-	}
-    }
-
-    public void setFolderRights(final AccessRights accessRights) {
-	this.folderRights = accessRights;
-	if (equalsAccessLists()) {
-	    this.contentRights = accessRights;
-	}
-    }
-
-    public void setGroupRights(final AccessRights accessRights) {
-	this.groupRights = accessRights;
     }
 
     public boolean hasContentRights() {
@@ -111,6 +82,40 @@ public class Access {
 
     public boolean hasGroupRights() {
 	return groupRights != null;
+    }
+
+    public void setContent(final Content descriptor) {
+	this.content = descriptor;
+	contentAccessLists = descriptor != null ? getContentAccessList(descriptor) : null;
+    }
+
+    public void setContentRights(final AccessRights accessRights) {
+	this.contentRights = accessRights;
+	if (equalsAccessLists()) {
+	    this.folderRights = accessRights;
+	}
+    }
+
+    public void setContentWidthFolderRights(final Content content) {
+	setContent(content);
+	this.contentRights = folderRights;
+    }
+
+    public void setFolder(final Container container) {
+	this.container = container;
+	folderAccessLists = container != null ? getFolderAccessLists(container) : null;
+	groupAccessLists = folderAccessLists;
+    }
+
+    public void setFolderRights(final AccessRights accessRights) {
+	this.folderRights = accessRights;
+	if (equalsAccessLists()) {
+	    this.contentRights = accessRights;
+	}
+    }
+
+    public void setGroupRights(final AccessRights accessRights) {
+	this.groupRights = accessRights;
     }
 
     private boolean equalsAccessLists() {
@@ -128,7 +133,7 @@ public class Access {
 	if (descriptor.hasAccessList()) {
 	    accessLists = descriptor.getAccessLists();
 	} else {
-	    SocialNetwork socialNetwork = descriptor.getContainer().getOwner().getSocialNetwork();
+	    final SocialNetwork socialNetwork = descriptor.getContainer().getOwner().getSocialNetwork();
 	    accessLists = socialNetwork.getAccessLists();
 	}
 	return accessLists;
@@ -136,11 +141,6 @@ public class Access {
 
     private AccessLists getFolderAccessLists(final Container container) {
 	return container.getOwner().getSocialNetwork().getAccessLists();
-    }
-
-    public void setContentWidthFolderRights(final Content content) {
-	this.content = content;
-	this.contentRights = folderRights;
     }
 
 }

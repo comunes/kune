@@ -79,6 +79,7 @@ public class AccessServiceDefault implements AccessService {
 	}
 	final Access access = new Access(null, folder);
 	addFolderRights(access, user);
+	addGroupRights(access, user);
 	return check(access, access.getFolderRights(), accessType);
     }
 

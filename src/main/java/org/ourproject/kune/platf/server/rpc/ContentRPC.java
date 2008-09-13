@@ -150,9 +150,11 @@ public class ContentRPC implements ContentService, RPC {
 	final Group group = groupManager.findByShortName(groupShortName);
 	final UserSession userSession = getUserSession();
 	final User user = userSession.getUser();
+	final boolean userIsLoggedIn = userSession.isUserLoggedIn();
 	final Access access = accessService.getFolderAccess(group, parentFolderId, user, AccessType.EDIT);
 	access.setContentWidthFolderRights(creationService.createContent(title, "", user, access.getFolder()));
 	final State state = stateService.create(access);
+	completeState(user, userIsLoggedIn, group, state);
 	return mapState(state, user, group);
     }
 
@@ -164,7 +166,10 @@ public class ContentRPC implements ContentService, RPC {
 	final Group group = groupManager.findByShortName(groupShortName);
 	final UserSession userSession = getUserSession();
 	final User user = userSession.getUser();
-	return mapState(createFolder(groupShortName, parentFolderId, title), user, group);
+	final boolean userIsLoggedIn = userSession.isUserLoggedIn();
+	final State state = createFolder(groupShortName, parentFolderId, title);
+	completeState(user, userIsLoggedIn, group, state);
+	return mapState(state, user, group);
     }
 
     @Authenticated
@@ -175,13 +180,16 @@ public class ContentRPC implements ContentService, RPC {
 	final Group group = groupManager.findByShortName(groupShortName);
 	final UserSession userSession = getUserSession();
 	final User user = userSession.getUser();
+	final boolean userIsLoggedIn = userSession.isUserLoggedIn();
 	final String userShortName = user.getShortName();
 	final ChatConnection connection = xmppManager.login(userShortName, userSession.getUser().getPassword(),
 		userHash);
 	xmppManager.createRoom(connection, roomName, userShortName + userHash);
 	xmppManager.disconnect(connection);
 	try {
-	    return mapState(createFolder(groupShortName, parentFolderId, roomName), user, group);
+	    final State state = createFolder(groupShortName, parentFolderId, roomName);
+	    completeState(user, userIsLoggedIn, group, state);
+	    return mapState(state, user, group);
 	} catch (final ContentNotFoundException e) {
 	    xmppManager.destroyRoom(connection, roomName);
 	    throw new ContentNotFoundException();
@@ -230,19 +238,8 @@ public class ContentRPC implements ContentService, RPC {
 	    throw new ContentNotFoundException();
 	}
 	final State state = stateService.create(access);
-	if (state.isRateable()) {
-	    final Long contentId = parseId(state.getDocumentId());
-	    final Content content = contentManager.find(contentId);
-	    if (userIsLoggedIn) {
-		state.setCurrentUserRate(contentManager.getRateContent(user, content));
-	    }
-	    state.setRate(contentManager.getRateAvg(content));
-	    state.setRateByUsers(contentManager.getRateByUsers(content));
-	}
 	final Group group = state.getGroup();
-	state.setGroupTags(tagManager.getSummaryByGroup(group));
-	state.setGroupMembers(socialNetworkManager.find(user, group));
-	state.setParticipation(socialNetworkManager.findParticipation(user, group));
+	completeState(user, userIsLoggedIn, group, state);
 	return mapState(state, user, group);
     }
 
@@ -379,6 +376,22 @@ public class ContentRPC implements ContentService, RPC {
 	final Long contentId = parseId(documentId);
 	final Comment comment = commentManager.vote(voter, contentId, commentId, votePositive);
 	return mapper.map(comment, CommentDTO.class);
+    }
+
+    private void completeState(final User user, final boolean userIsLoggedIn, final Group group, final State state) {
+	if (state.isRateable()) {
+	    final Long contentId = parseId(state.getDocumentId());
+	    final Content content = contentManager.find(contentId);
+	    if (userIsLoggedIn) {
+		state.setCurrentUserRate(contentManager.getRateContent(user, content));
+	    }
+	    state.setRate(contentManager.getRateAvg(content));
+	    state.setRateByUsers(contentManager.getRateByUsers(content));
+	}
+
+	state.setGroupTags(tagManager.getSummaryByGroup(group));
+	state.setGroupMembers(socialNetworkManager.find(user, group));
+	state.setParticipation(socialNetworkManager.findParticipation(user, group));
     }
 
     private State createFolder(final String groupShortName, final Long parentFolderId, final String title)
