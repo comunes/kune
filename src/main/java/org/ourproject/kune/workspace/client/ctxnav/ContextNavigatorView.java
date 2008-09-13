@@ -21,25 +21,29 @@
 package org.ourproject.kune.workspace.client.ctxnav;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.actions.ActionCollection;
+import org.ourproject.kune.platf.client.actions.ActionDescriptor;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
 public interface ContextNavigatorView extends View {
 
+    void addButtonAction(ActionDescriptor<StateToken> action);
+
     void addItem(ContextNavigatorItem contextNavigatorItem);
+
+    void addMenuAction(ActionDescriptor<StateToken> action, boolean enable);
 
     void clear();
 
+    void disableAllMenuItems();
+
     void editItem(String id);
+
+    void removeAllButtons();
 
     void selectItem(String id);
 
-    void setBottomActions(StateToken stateToken, ActionCollection<StateToken> actions);
-
-    void setItemText(String genId, String text);
+    void setItemText(String id, String text);
 
     void setRootItem(String id, String text, StateToken stateToken);
-
-    void setTopActions(StateToken stateToken, ActionCollection<StateToken> actions);
 
 }

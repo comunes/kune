@@ -450,7 +450,8 @@ public class KuneModule extends AbstractModule {
 	register(SingletonScope.class, new Factory<EntityTitle>(EntityTitle.class) {
 	    public EntityTitle create() {
 		final EntityTitlePresenter presenter = new EntityTitlePresenter(i18n, $(KuneErrorHandler.class),
-			$(StateManager.class), $(Session.class), $$(ContentServiceAsync.class));
+			$(StateManager.class), $(Session.class), $$(ContentServiceAsync.class),
+			$$(ContextNavigator.class));
 		final EntityTitlePanel panel = new EntityTitlePanel(ws, presenter);
 		presenter.init(panel);
 		return presenter;
@@ -589,9 +590,9 @@ public class KuneModule extends AbstractModule {
 	register(SingletonScope.class, new Factory<ContextNavigator>(ContextNavigator.class) {
 	    public ContextNavigator create() {
 		final ContextNavigatorPresenter presenter = new ContextNavigatorPresenter($(StateManager.class),
-			$(Session.class), $$(ContentServiceAsync.class), i18n, $(EntityTitle.class));
-		final ContextNavigatorPanel panel = new ContextNavigatorPanel(presenter, i18n, $(StateManager.class),
-			ws, $$(ActionManager.class));
+			$(Session.class), $$(ContentServiceAsync.class), i18n, $(EntityTitle.class),
+			$$(ActionManager.class));
+		final ContextNavigatorPanel panel = new ContextNavigatorPanel(presenter, i18n, ws);
 		presenter.init(panel);
 		return presenter;
 	    }

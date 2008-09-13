@@ -43,6 +43,8 @@ public interface ContextNavigator {
 
     void selectItem(StateToken stateToken);
 
+    void setItemText(StateToken stateToken, String name);
+
     void setState(StateDTO state);
 
 }

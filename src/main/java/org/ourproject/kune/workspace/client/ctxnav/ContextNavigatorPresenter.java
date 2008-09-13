@@ -26,6 +26,7 @@ import java.util.HashMap;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.ActionCollection;
 import org.ourproject.kune.platf.client.actions.ActionDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.ContainerSimpleDTO;
@@ -55,20 +56,24 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     private final Provider<ContentServiceAsync> contentServiceProvider;
     private final I18nUITranslationService i18n;
     private final HashMap<String, ActionCollection<StateToken>> actions;
+    private final HashMap<StateToken, ActionCollection<StateToken>> actionsByItem;
     private final ArrayList<String> draggables;
     private final ArrayList<String> droppables;
     private final HashMap<String, String> contentTypesIcons;
     private final EntityTitle entityTitle;
+    private final Provider<ActionManager> actionManagerProvider;
 
     public ContextNavigatorPresenter(final StateManager stateManager, final Session session,
 	    final Provider<ContentServiceAsync> contentServiceProvider, final I18nUITranslationService i18n,
-	    final EntityTitle entityTitle) {
+	    final EntityTitle entityTitle, final Provider<ActionManager> actionManagerProvider) {
 	this.stateManager = stateManager;
 	this.session = session;
 	this.contentServiceProvider = contentServiceProvider;
 	this.i18n = i18n;
 	this.entityTitle = entityTitle;
+	this.actionManagerProvider = actionManagerProvider;
 	actions = new HashMap<String, ActionCollection<StateToken>>();
+	actionsByItem = new HashMap<StateToken, ActionCollection<StateToken>>();
 	draggables = new ArrayList<String>();
 	droppables = new ArrayList<String>();
 	contentTypesIcons = new HashMap<String, String>();
@@ -83,12 +88,24 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	actionColl.add(action);
     }
 
+    public void doAction(final ActionDescriptor<StateToken> action, final StateToken stateToken) {
+	actionManagerProvider.get().doAction(action, stateToken);
+    }
+
     public void editItem(final StateToken stateToken) {
 	view.editItem(genId(stateToken));
     }
 
+    public StateToken getCurrentStateToken() {
+	return session.getCurrentState().getStateToken();
+    }
+
     public View getView() {
 	return view;
+    }
+
+    public void gotoToken(final String token) {
+	stateManager.gotoToken(token);
     }
 
     public void init(final ContextNavigatorView view) {
@@ -96,25 +113,25 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	stateManager.onGroupChanged(new Slot2<String, String>() {
 	    public void onEvent(final String oldGroup, final String newGroup) {
 		if (oldGroup != null) {
-		    view.clear();
+		    clear();
 		}
 	    }
 	});
 	stateManager.onToolChanged(new Slot2<String, String>() {
 	    public void onEvent(final String oldTool, final String newTool) {
 		if (oldTool != null) {
-		    view.clear();
+		    clear();
 		}
 	    }
 	});
 	session.onUserSignIn(new Slot<UserInfoDTO>() {
 	    public void onEvent(final UserInfoDTO parameter) {
-		view.clear();
+		clear();
 	    }
 	});
 	session.onUserSignOut(new Slot0() {
 	    public void onEvent() {
-		view.clear();
+		clear();
 	    }
 	});
     }
@@ -126,7 +143,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	    contentServiceProvider.get().rename(session.getUserHash(), currentState.getGroup().getShortName(), token,
 		    newName, new AsyncCallback<String>() {
 			public void onFailure(final Throwable caught) {
-			    view.setItemText(genId(new StateToken(token)), oldName);
+			    setItemText(new StateToken(token), oldName);
 			    Site.error(i18n.t("Error renaming"));
 			    Site.hideProgress();
 			}
@@ -160,54 +177,73 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 
     public void selectItem(final StateToken stateToken) {
 	view.selectItem(genId(stateToken));
+	view.removeAllButtons();
+	view.disableAllMenuItems();
+	setActions(actionsByItem.get(stateToken), true);
+    }
+
+    public void setItemText(final StateToken stateToken, final String name) {
+	view.setItemText(genId(stateToken), name);
     }
 
     public void setState(final StateDTO state) {
 	final ContainerDTO container = state.getFolder();
 
-	createTreePath(state.getStateToken(), container.getAbsolutePath(), state.getFolderRights());
+	final StateToken stateToken = state.getStateToken();
+	createTreePath(stateToken, container.getAbsolutePath(), state.getFolderRights());
+
+	ActionCollection<StateToken> selectedToolbarActions;
 
 	if (state.hasDocument()) {
-	    addItem(state.getTitle(), state.getTypeId(), state.getStatus(), state.getStateToken(), container
-		    .getStateToken(), state.getContentRights());
+	    selectedToolbarActions = addItem(state.getTitle(), state.getTypeId(), state.getStatus(), stateToken,
+		    container.getStateToken(), state.getContentRights(), false);
 	} else {
-	    addItem(container.getName(), container.getTypeId(), ContentStatusDTO.publishedOnline, container
-		    .getStateToken(), container.getStateToken().clone().setFolder(container.getParentFolderId()), state
-		    .getFolderRights());
+	    selectedToolbarActions = addItem(container.getName(), container.getTypeId(),
+		    ContentStatusDTO.publishedOnline, container.getStateToken(), container.getStateToken().clone()
+			    .setFolder(container.getParentFolderId()), state.getFolderRights(), false);
 	}
 
 	for (final ContentDTO content : container.getContents()) {
 	    addItem(content.getTitle(), content.getTypeId(), content.getStatus(), content.getStateToken(), content
-		    .getStateToken().clone().clearDocument(), content.getRights());
+		    .getStateToken().clone().clearDocument(), content.getRights(), false);
 	}
 
 	for (final ContainerSimpleDTO siblingFolder : container.getChilds()) {
 	    addItem(siblingFolder.getName(), siblingFolder.getTypeId(), ContentStatusDTO.publishedOnline, siblingFolder
 		    .getStateToken(), siblingFolder.getStateToken().clone()
-		    .setFolder(siblingFolder.getParentFolderId()), state.getFolderRights());
+		    .setFolder(siblingFolder.getParentFolderId()), state.getFolderRights(), false);
 	}
-	view.selectItem(genId(state.getStateToken()));
+
+	actionsByItem.put(stateToken, selectedToolbarActions);
+
+	selectItem(stateToken);
     }
 
-    private void addItem(final String title, final String contentTypeId, final ContentStatusDTO status,
-	    final StateToken stateToken, final StateToken parentStateToken, final AccessRightsDTO rights) {
-	final ActionCollection<StateToken> topActions = new ActionCollection<StateToken>();
+    private ActionCollection<StateToken> addItem(final String title, final String contentTypeId,
+	    final ContentStatusDTO status, final StateToken stateToken, final StateToken parentStateToken,
+	    final AccessRightsDTO rights, final boolean isNodeSelected) {
+	final ActionCollection<StateToken> toolbarActions = new ActionCollection<StateToken>();
 	final ActionCollection<StateToken> itemActions = new ActionCollection<StateToken>();
-	final ActionCollection<StateToken> bottomActions = new ActionCollection<StateToken>();
 
-	createItemActions(rights, contentTypeId, topActions, itemActions, bottomActions);
+	createItemActions(rights, contentTypeId, toolbarActions, itemActions);
 
-	view.setTopActions(stateToken, topActions);
-	view.setBottomActions(stateToken, bottomActions);
+	setActions(toolbarActions, isNodeSelected);
+
 	final ContextNavigatorItem item = new ContextNavigatorItem(genId(stateToken), genId(parentStateToken),
 		getContentTypeIcon(contentTypeId), title, status, stateToken, isDraggable(contentTypeId, rights
 			.isAdministrable()), isDroppable(contentTypeId, rights.isAdministrable()), itemActions);
 	view.addItem(item);
+
+	return toolbarActions;
+    }
+
+    private void clear() {
+	view.clear();
+	actionsByItem.clear();
     }
 
     private void createItemActions(final AccessRightsDTO rights, final String contentTypeId,
-	    final ActionCollection<StateToken> topActions, final ActionCollection<StateToken> itemActions,
-	    final ActionCollection<StateToken> bottomActions) {
+	    final ActionCollection<StateToken> toolbarActionas, final ActionCollection<StateToken> itemActions) {
 	boolean add = false;
 
 	for (final ActionDescriptor<StateToken> action : actions.get(contentTypeId)) {
@@ -227,12 +263,12 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 		case topbarAndItemMenu:
 		    itemActions.add(action);
 		case topbar:
-		    topActions.add(action);
+		    toolbarActionas.add(action);
 		    break;
 		case bootombarAndItemMenu:
 		    itemActions.add(action);
 		case bottombar:
-		    bottomActions.add(action);
+		    toolbarActionas.add(action);
 		    break;
 		case itemMenu:
 		    itemActions.add(action);
@@ -251,10 +287,10 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 
 	    if (folder.getParentFolderId() != null) {
 		addItem(folder.getName(), folder.getTypeId(), ContentStatusDTO.publishedOnline, folderStateToken,
-			parentStateToken, rights);
+			parentStateToken, rights, false);
 	    } else {
 		// create root folder
-		view.setRootItem(genId(folderStateToken), i18n.t("contents"), folderStateToken);
+		view.setRootItem(genId(folderStateToken), i18n.t(folder.getName()), folderStateToken);
 	    }
 	}
     }
@@ -265,7 +301,6 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 
     private String getContentTypeIcon(final String typeId) {
 	final String icon = contentTypesIcons.get(typeId);
-	// TODO Auto-generated method stub
 	return icon == null ? "" : icon;
     }
 
@@ -277,4 +312,15 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	return administrable && droppables.contains(typeId);
     }
 
+    private void setActions(final ActionCollection<StateToken> actions, final boolean isNodeSelected) {
+	for (final ActionDescriptor<StateToken> action : actions) {
+	    if (action.isMenuAction()) {
+		view.addMenuAction(action, isNodeSelected);
+	    } else {
+		if (isNodeSelected) {
+		    view.addButtonAction(action);
+		}
+	    }
+	}
+    }
 }

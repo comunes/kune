@@ -48,8 +48,6 @@ public interface StateManager extends HistoryListener {
 
     void reload();
 
-    void reloadContextAndTitles();
-
     void removeSiteToken(String token);
 
     void setRetrievedState(StateDTO content);

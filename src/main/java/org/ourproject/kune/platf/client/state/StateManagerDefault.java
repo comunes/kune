@@ -80,7 +80,7 @@ public class StateManagerDefault implements StateManager {
     public void gotoContainer(final Long containerId) {
 	final StateToken newStateToken = session.getCurrentState().getStateToken().clone();
 	newStateToken.clearDocument();
-	newStateToken.setFolder(containerId.toString());
+	newStateToken.setFolder(containerId);
 	gotoToken(newStateToken);
     }
 
@@ -135,20 +135,6 @@ public class StateManagerDefault implements StateManager {
 	onHistoryChanged(history.getToken());
     }
 
-    @Deprecated
-    public void reloadContextAndTitles() {
-	contentProvider.getContent(session.getUserHash(), new StateToken(history.getToken()),
-		new AsyncCallbackSimple<StateDTO>() {
-		    public void onSuccess(final StateDTO newStateDTO) {
-			loadContextOnly(newStateDTO);
-			oldState = newStateDTO;
-			// workspace.getContentTitleComponent().setState(oldState);
-			// workspace.getContentSubTitleComponent().setState(oldState);
-			Site.hideProgress();
-		    }
-		});
-    }
-
     public void removeSiteToken(final String token) {
 	siteTokens.remove(token);
     }
@@ -183,21 +169,11 @@ public class StateManagerDefault implements StateManager {
 	if (oldState == null || !oldToolName.equals(newToolName)) {
 	    onToolChanged.fire(oldToolName, newToolName);
 	}
-
     }
 
     private void loadContent(final StateDTO state) {
 	onStateChanged.fire(state);
 	Site.hideProgress();
-    }
-
-    @Deprecated
-    private void loadContextOnly(final StateDTO state) {
-	session.setCurrent(state);
-	// /final String toolName = state.getToolName();
-	// /final ClientTool clientTool = app.getTool(toolName);
-	// /clientTool.setContext(state);
-	// /workspace.setContext(clientTool.getContext());
     }
 
     private void onHistoryChanged(final StateToken newState) {
