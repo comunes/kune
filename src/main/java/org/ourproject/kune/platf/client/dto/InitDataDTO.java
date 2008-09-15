@@ -36,6 +36,8 @@ public class InitDataDTO implements IsSerializable {
     private String defaultWsTheme;
     private String[] wsThemes;
     private String siteLogoUrl;
+    private String galleryPermittedExtensions;
+    private String maxFileSizeInMb;
 
     public String getChatDomain() {
 	return chatDomain;
@@ -57,12 +59,20 @@ public class InitDataDTO implements IsSerializable {
 	return defaultWsTheme;
     }
 
+    public String getGalleryPermittedExtensions() {
+	return galleryPermittedExtensions;
+    }
+
     public ArrayList<I18nLanguageSimpleDTO> getLanguages() {
 	return languages;
     }
 
     public ArrayList<LicenseDTO> getLicenses() {
 	return licenses;
+    }
+
+    public String getMaxFileSizeInMb() {
+	return maxFileSizeInMb;
     }
 
     public String getSiteDomain() {
@@ -109,12 +119,20 @@ public class InitDataDTO implements IsSerializable {
 	this.defaultWsTheme = defaultWsTheme;
     }
 
+    public void setGalleryPermittedExtensions(final String galleryPermittedExtensions) {
+	this.galleryPermittedExtensions = galleryPermittedExtensions;
+    }
+
     public void setLanguages(final ArrayList<I18nLanguageSimpleDTO> languages) {
 	this.languages = languages;
     }
 
     public void setLicenses(final ArrayList<LicenseDTO> licenses) {
 	this.licenses = licenses;
+    }
+
+    public void setMaxFileSizeInMb(final String maxFileSizeInMb) {
+	this.maxFileSizeInMb = maxFileSizeInMb;
     }
 
     public void setSiteDomain(final String siteDomain) {

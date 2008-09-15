@@ -32,11 +32,12 @@ public class StateDTO implements IsSerializable {
     private String title;
     private String toolName;
     private GroupDTO group;
-    private ContainerDTO folder;
+    private ContainerDTO container;
+    private ContainerDTO rootContainer;
     private SocialNetworkDTO socialNetwork;
     private AccessListsDTO accessLists;
     private AccessRightsDTO contentRights;
-    private AccessRightsDTO folderRights;
+    private AccessRightsDTO containerRights;
     private AccessRightsDTO groupRights;
     private ContentStatusDTO status;
     private boolean isRateable;
@@ -72,6 +73,10 @@ public class StateDTO implements IsSerializable {
 	return authors;
     }
 
+    public ContainerDTO getContainer() {
+	return container;
+    }
+
     public String getContent() {
 	return content;
     }
@@ -88,12 +93,8 @@ public class StateDTO implements IsSerializable {
 	return documentId;
     }
 
-    public ContainerDTO getFolder() {
-	return folder;
-    }
-
-    public AccessRightsDTO getFolderRights() {
-	return folderRights;
+    public AccessRightsDTO getContainerRights() {
+	return containerRights;
     }
 
     public GroupDTO getGroup() {
@@ -134,6 +135,10 @@ public class StateDTO implements IsSerializable {
 
     public Integer getRateByUsers() {
 	return rateByUsers;
+    }
+
+    public ContainerDTO getRootContainer() {
+	return rootContainer;
     }
 
     public SocialNetworkDTO getSocialNetwork() {
@@ -185,6 +190,14 @@ public class StateDTO implements IsSerializable {
 	this.authors = authors;
     }
 
+    public void setContainer(final ContainerDTO container) {
+	this.container = container;
+    }
+
+    public void setContainerRights(final AccessRightsDTO containerRights) {
+	this.containerRights = containerRights;
+    }
+
     public void setContent(final String content) {
 	this.content = content;
     }
@@ -199,14 +212,6 @@ public class StateDTO implements IsSerializable {
 
     public void setDocumentId(final String docRef) {
 	this.documentId = docRef;
-    }
-
-    public void setFolder(final ContainerDTO folder) {
-	this.folder = folder;
-    }
-
-    public void setFolderRights(final AccessRightsDTO folderRights) {
-	this.folderRights = folderRights;
     }
 
     public void setGroup(final GroupDTO group) {
@@ -251,6 +256,10 @@ public class StateDTO implements IsSerializable {
 
     public void setRateByUsers(final Integer rateByUsers) {
 	this.rateByUsers = rateByUsers;
+    }
+
+    public void setRootContainer(final ContainerDTO rootContainer) {
+	this.rootContainer = rootContainer;
     }
 
     public void setSocialNetwork(final SocialNetworkDTO socialNetwork) {

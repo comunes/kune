@@ -43,7 +43,7 @@ public class ChatContextPresenter implements ChatContext {
 
     public void setState(final StateDTO state) {
 	final RoomsAdmin rooms = roomAdminsProvider.get();
-	rooms.showRoom(state.getStateToken(), state.getFolder(), state.getFolderRights());
+	rooms.showRoom(state.getStateToken(), state.getContainer(), state.getContainerRights());
 	view.show(rooms.getView());
     }
 }

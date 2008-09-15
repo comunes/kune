@@ -54,6 +54,11 @@ public class StateServiceDefault implements StateService {
 	    state.setLanguage(container.getLanguage());
 	    state.setStateToken(container.getStateToken());
 	}
+	if (!container.isRoot()) {
+	    state.setRootContainer(container.getAbsolutePath().get(0));
+	} else {
+	    state.setRootContainer(container);
+	}
 	final Revision revision = content.getLastRevision();
 	final char[] text = revision.getBody();
 	state.setContent(text == null ? null : new String(text));
@@ -64,10 +69,10 @@ public class StateServiceDefault implements StateService {
 	}
 	state.setToolName(container.getToolName());
 	state.setGroup(container.getOwner());
-	state.setFolder(container);
+	state.setContainer(container);
 	state.setAccessLists(access.getContentAccessLists());
 	state.setContentRights(access.getContentRights());
-	state.setFolderRights(access.getFolderRights());
+	state.setContainerRights(access.getFolderRights());
 	state.setGroupRights(access.getGroupRights());
 	License contentLicense = content.getLicense();
 	if (contentLicense == null) {

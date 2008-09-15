@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.docs.server;
 
+import org.ourproject.kune.platf.client.errors.ContainerNotPermittedException;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.server.content.ContainerManager;
 import org.ourproject.kune.platf.server.content.ContentManager;
@@ -81,8 +82,9 @@ public class DocumentServerTool implements ServerTool {
 	return group;
     }
 
-    public void onCreateContainer(final Container container, final Container parent) {
-	container.setTypeId(TYPE_FOLDER);
+    public void onCreateContainer(final Container container, final Container parent, final String typeId) {
+	checkTypeId(parent.getTypeId(), typeId);
+	container.setTypeId(typeId);
     }
 
     public void onCreateContent(final Content content, final Container parent) {
@@ -92,6 +94,17 @@ public class DocumentServerTool implements ServerTool {
     @Inject
     public void register(final ToolRegistry registry) {
 	registry.register(this);
+    }
+
+    private void checkTypeId(final String parentTypeId, final String typeId) {
+	if (typeId.equals(TYPE_FOLDER) || typeId.equals(TYPE_GALLERY)) {
+	    // ok valid container
+	    if (typeId.equals(TYPE_GALLERY) && !parentTypeId.equals(TYPE_ROOT)) {
+		throw new ContainerNotPermittedException();
+	    }
+	} else {
+	    throw new ContainerNotPermittedException();
+	}
     }
 
 }

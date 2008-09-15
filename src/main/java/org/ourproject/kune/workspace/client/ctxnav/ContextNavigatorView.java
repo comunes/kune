@@ -21,16 +21,18 @@
 package org.ourproject.kune.workspace.client.ctxnav;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.actions.ActionDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionButtonDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionCollection;
+import org.ourproject.kune.platf.client.actions.ActionMenuDescriptor;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
 public interface ContextNavigatorView extends View {
 
-    void addButtonAction(ActionDescriptor<StateToken> action);
+    void addButtonAction(ActionButtonDescriptor<StateToken> action);
 
     void addItem(ContextNavigatorItem contextNavigatorItem);
 
-    void addMenuAction(ActionDescriptor<StateToken> action, boolean enable);
+    void addMenuAction(ActionMenuDescriptor<StateToken> action, boolean enable);
 
     void clear();
 
@@ -38,12 +40,12 @@ public interface ContextNavigatorView extends View {
 
     void editItem(String id);
 
-    void removeAllButtons();
+    void clearRemovableActions();
 
     void selectItem(String id);
 
     void setItemText(String id, String text);
 
-    void setRootItem(String id, String text, StateToken stateToken);
+    void setRootItem(String id, String text, StateToken stateToken, ActionCollection<StateToken> actions);
 
 }

@@ -91,6 +91,10 @@ public class SessionDefault implements Session {
 	return currentUserInfo;
     }
 
+    public String getGalleryPermittedExtensions() {
+	return initData.getGalleryPermittedExtensions();
+    }
+
     public List<I18nLanguageSimpleDTO> getLanguages() {
 	return initData.getLanguages();
     }

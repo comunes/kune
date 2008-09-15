@@ -21,6 +21,7 @@
 package org.ourproject.kune.chat.server;
 
 import org.ourproject.kune.chat.client.ChatClientTool;
+import org.ourproject.kune.platf.client.errors.ContainerNotPermittedException;
 import org.ourproject.kune.platf.server.content.ContainerManager;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
@@ -44,40 +45,49 @@ public class ChatServerTool implements ServerTool {
 
     @Inject
     public ChatServerTool(final ToolConfigurationManager configurationManager, final ContainerManager containerManager) {
-        this.configurationManager = configurationManager;
-        this.containerManager = containerManager;
+	this.configurationManager = configurationManager;
+	this.containerManager = containerManager;
     }
 
     public String getName() {
-        return NAME;
-    }
-
-    public void onCreateContainer(final Container container, final Container parent) {
-        if (!parent.getTypeId().equals(TYPE_ROOT)) {
-            throw new RuntimeException();
-        }
-        container.setTypeId(TYPE_ROOM);
-    }
-
-    public void onCreateContent(final Content content, final Container parent) {
-        if (parent.getTypeId().equals(TYPE_ROOM)) {
-            throw new RuntimeException();
-        }
-        content.setTypeId(TYPE_CHAT);
+	return NAME;
     }
 
     public Group initGroup(final User user, final Group group) {
-        ToolConfiguration config = new ToolConfiguration();
-        Container container = containerManager.createRootFolder(group, NAME, ROOT_NAME, TYPE_ROOT);
-        config.setRoot(container);
-        group.setToolConfig(NAME, config);
-        configurationManager.persist(config);
-        return group;
+	final ToolConfiguration config = new ToolConfiguration();
+	final Container container = containerManager.createRootFolder(group, NAME, ROOT_NAME, TYPE_ROOT);
+	config.setRoot(container);
+	group.setToolConfig(NAME, config);
+	configurationManager.persist(config);
+	return group;
+    }
+
+    public void onCreateContainer(final Container container, final Container parent, final String typeId) {
+	checkTypeId(parent.getTypeId(), typeId);
+	container.setTypeId(typeId);
+    }
+
+    public void onCreateContent(final Content content, final Container parent) {
+	if (parent.getTypeId().equals(TYPE_ROOM)) {
+	    throw new RuntimeException();
+	}
+	content.setTypeId(TYPE_CHAT);
     }
 
     @Inject
     public void register(final ToolRegistry registry) {
-        registry.register(this);
+	registry.register(this);
+    }
+
+    private void checkTypeId(final String parentTypeId, final String typeId) {
+	if (typeId.equals(TYPE_ROOM)) {
+	    if (!parentTypeId.equals(TYPE_ROOT)) {
+		throw new ContainerNotPermittedException();
+	    }
+	    // ok valid container
+	} else {
+	    throw new ContainerNotPermittedException();
+	}
     }
 
 }

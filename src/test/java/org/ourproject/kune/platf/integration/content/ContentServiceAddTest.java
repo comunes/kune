@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.ContainerSimpleDTO;
@@ -31,7 +32,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     @Test(expected = UserMustBeLoggedException.class)
     public void noLoggedInShouldThrowIllegalAccess() throws ContentNotFoundException, Exception {
 	defaultContent = getDefaultContent();
-	final Long folderId = defaultContent.getFolder().getId();
+	final Long folderId = defaultContent.getContainer().getId();
 	contentService.addContent(session.getHash(), groupName, folderId, "a name");
     }
 
@@ -39,20 +40,20 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     public void testAddContent() throws Exception {
 	doLogin();
 	defaultContent = getDefaultContent();
-	assertEquals(1, defaultContent.getFolder().getContents().size());
+	assertEquals(1, defaultContent.getContainer().getContents().size());
 	final AccessRightsDTO cntRights = defaultContent.getContentRights();
-	final AccessRightsDTO ctxRights = defaultContent.getFolderRights();
+	final AccessRightsDTO ctxRights = defaultContent.getContainerRights();
 	final AccessRightsDTO groupRights = defaultContent.getGroupRights();
 
 	final String title = "New Content Title";
-	final StateDTO added = contentService.addContent(session.getHash(), groupName, defaultContent.getFolder()
+	final StateDTO added = contentService.addContent(session.getHash(), groupName, defaultContent.getContainer()
 		.getId(), title);
 	assertNotNull(added);
-	final List<ContentDTO> contents = added.getFolder().getContents();
+	final List<ContentDTO> contents = added.getContainer().getContents();
 	assertEquals(title, added.getTitle());
 	assertEquals(2, contents.size());
 	assertEquals(cntRights, added.getContentRights());
-	assertEquals(ctxRights, added.getFolderRights());
+	assertEquals(ctxRights, added.getContainerRights());
 	assertEquals(groupRights, added.getGroupRights());
 	assertNotNull(added.getGroupMembers());
 	assertNotNull(added.getParticipation());
@@ -61,7 +62,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 	final StateToken newState = added.getStateToken();
 	final StateDTO sameAgain = contentService.getContent(session.getHash(), groupName, newState);
 	assertNotNull(sameAgain);
-	assertEquals(2, sameAgain.getFolder().getContents().size());
+	assertEquals(2, sameAgain.getContainer().getContents().size());
 
     }
 
@@ -69,15 +70,20 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     public void testAddFolder() throws Exception {
 	doLogin();
 	defaultContent = getDefaultContent();
-	final ContainerDTO parent = defaultContent.getFolder();
+	final ContainerDTO parent = defaultContent.getContainer();
 	final String title = "folder name";
-	final StateDTO newState = contentService.addFolder(session.getHash(), groupName, parent.getId(), title);
+	final StateDTO newState = contentService.addFolder(session.getHash(), groupName, parent.getId(), title,
+		DocumentClientTool.TYPE_FOLDER);
 	assertNotNull(newState);
 	assertNotNull(newState.getGroupMembers());
 	assertNotNull(newState.getParticipation());
 	assertNotNull(newState.getAccessLists());
+	assertNotNull(newState.getContainerRights());
+	assertNotNull(newState.getGroupRights());
+	assertNotNull(newState.getRootContainer().getContents().get(0).getRights());
+	assertNotNull(newState.getContainer().getContents().get(0).getRights());
 
-	final ContainerDTO parentAgain = getDefaultContent().getFolder();
+	final ContainerDTO parentAgain = getDefaultContent().getContainer();
 	final ContainerSimpleDTO child = parentAgain.getChilds().get(0);
 	assertEquals(parent.getId(), child.getParentFolderId());
 
@@ -89,7 +95,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     public void testAddRoom() throws Exception {
 	doLogin();
 	defaultContent = getDefaultContent();
-	final ContainerDTO parent = defaultContent.getFolder();
+	final ContainerDTO parent = defaultContent.getContainer();
 	final String roomName = "testroom";
 	final StateDTO newState = contentService.addRoom(session.getHash(), groupName, parent.getId(), roomName);
 	assertNotNull(newState);
@@ -99,15 +105,17 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     public void testAddTwoFolders() throws Exception {
 	doLogin();
 	defaultContent = getDefaultContent();
-	final ContainerDTO parent = defaultContent.getFolder();
+	final ContainerDTO parent = defaultContent.getContainer();
 	final String title = "folder name";
-	final StateDTO newState = contentService.addFolder(session.getHash(), groupName, parent.getId(), title);
+	final StateDTO newState = contentService.addFolder(session.getHash(), groupName, parent.getId(), title,
+		DocumentClientTool.TYPE_FOLDER);
 	assertNotNull(newState);
 
-	final StateDTO newState2 = contentService.addFolder(session.getHash(), groupName, parent.getId(), title);
+	final StateDTO newState2 = contentService.addFolder(session.getHash(), groupName, parent.getId(), title,
+		DocumentClientTool.TYPE_FOLDER);
 	assertNotNull(newState2);
 
-	final ContainerDTO parentAgain = getDefaultContent().getFolder();
+	final ContainerDTO parentAgain = getDefaultContent().getContainer();
 
 	assertEquals(parent.getId(), parentAgain.getId());
 	assertEquals(2, parentAgain.getChilds().size());

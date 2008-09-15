@@ -38,30 +38,30 @@ public class CreationServiceDefault implements CreationService {
 
     @Inject
     public CreationServiceDefault(final ContainerManager containerManager, final ContentManager contentManager,
-            final ToolRegistry toolRegistry) {
-        this.containerManager = containerManager;
-        this.contentManager = contentManager;
-        this.tools = toolRegistry;
+	    final ToolRegistry toolRegistry) {
+	this.containerManager = containerManager;
+	this.contentManager = contentManager;
+	this.tools = toolRegistry;
     }
 
     public Content createContent(final String title, final String body, final User user, final Container container) {
-        String toolName = container.getToolName();
-        Content content = contentManager.createContent(title, body, user, container);
-        tools.get(toolName).onCreateContent(content, container);
-        return content;
+	final String toolName = container.getToolName();
+	final Content content = contentManager.createContent(title, body, user, container);
+	tools.get(toolName).onCreateContent(content, container);
+	return content;
     }
 
     public Container createFolder(final Group group, final Long parentFolderId, final String name,
-            final I18nLanguage language) {
-        Container parent = containerManager.find(parentFolderId);
-        String toolName = parent.getToolName();
-        Container child = containerManager.createFolder(group, parent, name, language);
-        tools.get(toolName).onCreateContainer(child, parent);
-        return child;
+	    final I18nLanguage language, final String typeId) {
+	final Container parent = containerManager.find(parentFolderId);
+	final String toolName = parent.getToolName();
+	final Container child = containerManager.createFolder(group, parent, name, language);
+	tools.get(toolName).onCreateContainer(child, parent, typeId);
+	return child;
     }
 
     public Content saveContent(final User editor, final Content descriptor, final String content) {
-        return contentManager.save(editor, descriptor, content);
+	return contentManager.save(editor, descriptor, content);
     }
 
 }

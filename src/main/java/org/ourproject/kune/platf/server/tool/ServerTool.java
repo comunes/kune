@@ -33,13 +33,13 @@ import org.ourproject.kune.platf.server.domain.User;
  */
 public interface ServerTool {
 
+    public void onCreateContainer(Container container, Container parent, String typeId);
+
+    public void onCreateContent(Content content, Container parent);
+
     public void register(ToolRegistry registry);
 
     String getName();
 
     Group initGroup(User user, Group group);
-
-    public void onCreateContent(Content content, Container parent);
-
-    public void onCreateContainer(Container container, Container parent);
 }

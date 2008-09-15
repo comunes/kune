@@ -139,7 +139,7 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
 		    view.setContent(editor.getView());
 		} else {
 		    final FolderEditor editor = folderEditorProvider.get();
-		    editor.setFolder(content.getFolder());
+		    editor.setFolder(content.getContainer());
 		    view.setContent(editor.getView());
 		}
 		onEditing.fire();
@@ -197,7 +197,7 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
 	    docReaderProvider.get().show();
 	} else {
 	    final FolderViewer viewer = folderViewerProvider.get();
-	    viewer.setFolder(content.getFolder());
+	    viewer.setFolder(content.getContainer());
 	    view.setContent(viewer.getView());
 	}
     }

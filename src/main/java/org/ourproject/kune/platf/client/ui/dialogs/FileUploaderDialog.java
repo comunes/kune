@@ -1,6 +1,7 @@
 package org.ourproject.kune.platf.client.ui.dialogs;
 
 import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.ui.KuneStringUtils;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
@@ -81,8 +82,8 @@ public class FileUploaderDialog implements FileUploader {
 	dialog.hide();
     }
 
-    public void setPermittedExtensions(final String[] extensions) {
-	dialog.setPermittedExtensions(extensions);
+    public void setPermittedExtensions(final String extensions) {
+	dialog.setPermittedExtensions((String[]) KuneStringUtils.splitTags(extensions).toArray());
     }
 
     public void show() {

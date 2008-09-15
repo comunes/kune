@@ -34,19 +34,19 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public interface ContentServiceAsync {
 
     void addAuthor(String userHash, String groupShortName, String documentId, String authorShortName,
-            AsyncCallback<?> asyncCallback);
+	    AsyncCallback<?> asyncCallback);
 
     void addComment(String userHash, String groupShortName, String documentId, Long parentCommentId,
-            String commentText, AsyncCallback<CommentDTO> asyncCallback);
+	    String commentText, AsyncCallback<CommentDTO> asyncCallback);
 
     void addComment(String userHash, String groupShortName, String documentId, String commentText,
-            AsyncCallback<CommentDTO> asyncCallback);
+	    AsyncCallback<CommentDTO> asyncCallback);
 
     void addContent(String user, String groupShortName, Long parentFolderId, String name,
-            AsyncCallback<StateDTO> callback);
+	    AsyncCallback<StateDTO> callback);
 
-    void addFolder(String hash, String groupShortName, Long parentFolderId, String title,
-            AsyncCallback<StateDTO> callback);
+    void addFolder(String hash, String groupShortName, Long parentFolderId, String title, String typeId,
+	    AsyncCallback<StateDTO> callback);
 
     void addRoom(String user, String groupShortName, Long parentFolderId, String name, AsyncCallback<StateDTO> callback);
 
@@ -57,29 +57,29 @@ public interface ContentServiceAsync {
     void getSummaryTags(String userHash, String groupShortName, AsyncCallback<List<TagResultDTO>> asyncCallback);
 
     void markCommentAsAbuse(String userHash, String groupShortName, String documentId, Long commentId,
-            AsyncCallback<CommentDTO> asyncCallback);
+	    AsyncCallback<CommentDTO> asyncCallback);
 
     void rateContent(String userHash, String groupShortName, String documentId, Double value,
-            AsyncCallback<?> asyncCallback);
+	    AsyncCallback<?> asyncCallback);
 
     void removeAuthor(String userHash, String groupShortName, String documentId, String authorShortName,
-            AsyncCallback<?> asyncCallback);
+	    AsyncCallback<?> asyncCallback);
 
     void rename(String userHash, String groupShortName, String token, String newName,
-            AsyncCallback<String> asyncCallback);
+	    AsyncCallback<String> asyncCallback);
 
     void save(String user, String groupShortName, String documentId, String content,
-            AsyncCallback<Integer> asyncCallback);
+	    AsyncCallback<Integer> asyncCallback);
 
     void setLanguage(String userHash, String groupShortName, String documentId, String languageCode,
-            AsyncCallback<I18nLanguageDTO> asyncCallback);
+	    AsyncCallback<I18nLanguageDTO> asyncCallback);
 
     void setPublishedOn(String userHash, String groupShortName, String documentId, Date publishedOn,
-            AsyncCallback<?> asyncCallback);
+	    AsyncCallback<?> asyncCallback);
 
     void setTags(String userHash, String groupShortName, String documentId, String tags,
-            AsyncCallback<List<TagResultDTO>> asyncCallback);
+	    AsyncCallback<List<TagResultDTO>> asyncCallback);
 
     void voteComment(String userHash, String groupShortName, String documentId, Long commentId, boolean votePositive,
-            AsyncCallback<CommentDTO> asyncCallback);
+	    AsyncCallback<CommentDTO> asyncCallback);
 }

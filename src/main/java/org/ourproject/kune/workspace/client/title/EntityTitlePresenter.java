@@ -118,7 +118,7 @@ public class EntityTitlePresenter implements EntityTitle {
 	    setContentDateVisible(true);
 	    setContentDate(state.getPublishedOn());
 	} else {
-	    if (state.getFolder().getParentFolderId() == null) {
+	    if (state.getContainer().getParentFolderId() == null) {
 		// We translate root folder names (documents, chat room,
 		// etcetera)
 		setContentTitle(i18n.t(state.getTitle()), false);

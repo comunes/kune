@@ -24,9 +24,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.actions.ActionButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionCollection;
+import org.ourproject.kune.platf.client.actions.ActionCollectionSet;
 import org.ourproject.kune.platf.client.actions.ActionDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionManager;
+import org.ourproject.kune.platf.client.actions.ActionMenuDescriptor;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.ContainerSimpleDTO;
@@ -177,7 +180,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 
     public void selectItem(final StateToken stateToken) {
 	view.selectItem(genId(stateToken));
-	view.removeAllButtons();
+	view.clearRemovableActions();
 	view.disableAllMenuItems();
 	setActions(actionsByItem.get(stateToken), true);
     }
@@ -187,22 +190,63 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     }
 
     public void setState(final StateDTO state) {
-	final ContainerDTO container = state.getFolder();
+	final ContainerDTO container = state.getContainer();
 
 	final StateToken stateToken = state.getStateToken();
-	createTreePath(stateToken, container.getAbsolutePath(), state.getFolderRights());
+	final AccessRightsDTO containerRights = state.getContainerRights();
 
-	ActionCollection<StateToken> selectedToolbarActions;
-
-	if (state.hasDocument()) {
-	    selectedToolbarActions = addItem(state.getTitle(), state.getTypeId(), state.getStatus(), stateToken,
-		    container.getStateToken(), state.getContentRights(), false);
-	} else {
-	    selectedToolbarActions = addItem(container.getName(), container.getTypeId(),
-		    ContentStatusDTO.publishedOnline, container.getStateToken(), container.getStateToken().clone()
-			    .setFolder(container.getParentFolderId()), state.getFolderRights(), false);
+	// If root sended (container is not a root folder) process root (add
+	// childs to view)
+	final ContainerDTO root = state.getRootContainer();
+	if (root != null) {
+	    final ActionCollectionSet<StateToken> set = createItemActions(containerRights, root.getTypeId());
+	    view.setRootItem(genId(root.getStateToken()), i18n.t(root.getName()), root.getStateToken(), set
+		    .getItemActions());
+	    setActions(set.getToolbarActions(), false);
+	    createChildItems(root, containerRights);
+	    actionsByItem.put(root.getStateToken(), set.getToolbarActions());
 	}
 
+	// Do the path to our current content
+	createTreePath(stateToken, container.getAbsolutePath(), containerRights);
+
+	// Process our current content/container
+	if (state.hasDocument()) {
+	    addItem(state.getTitle(), state.getTypeId(), state.getStatus(), stateToken, container.getStateToken(),
+		    state.getContentRights(), false);
+	} else {
+	    addItem(container.getName(), container.getTypeId(), ContentStatusDTO.publishedOnline, container
+		    .getStateToken(), container.getStateToken().clone().setFolder(container.getParentFolderId()),
+		    containerRights, false);
+	}
+
+	// Process container childs
+	createChildItems(container, containerRights);
+
+	// Finaly
+	selectItem(stateToken);
+    }
+
+    private void addItem(final String title, final String contentTypeId, final ContentStatusDTO status,
+	    final StateToken stateToken, final StateToken parentStateToken, final AccessRightsDTO rights,
+	    final boolean isNodeSelected) {
+
+	final ActionCollectionSet<StateToken> set = createItemActions(rights, contentTypeId);
+	setActions(set.getToolbarActions(), isNodeSelected);
+
+	final ContextNavigatorItem item = new ContextNavigatorItem(genId(stateToken), genId(parentStateToken),
+		getContentTypeIcon(contentTypeId), title, status, stateToken, isDraggable(contentTypeId, rights
+			.isAdministrable()), isDroppable(contentTypeId, rights.isAdministrable()), set.getItemActions());
+	view.addItem(item);
+	actionsByItem.put(stateToken, set.getToolbarActions());
+    }
+
+    private void clear() {
+	view.clear();
+	actionsByItem.clear();
+    }
+
+    private void createChildItems(final ContainerDTO container, final AccessRightsDTO containerRights) {
 	for (final ContentDTO content : container.getContents()) {
 	    addItem(content.getTitle(), content.getTypeId(), content.getStatus(), content.getStateToken(), content
 		    .getStateToken().clone().clearDocument(), content.getRights(), false);
@@ -211,39 +255,12 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	for (final ContainerSimpleDTO siblingFolder : container.getChilds()) {
 	    addItem(siblingFolder.getName(), siblingFolder.getTypeId(), ContentStatusDTO.publishedOnline, siblingFolder
 		    .getStateToken(), siblingFolder.getStateToken().clone()
-		    .setFolder(siblingFolder.getParentFolderId()), state.getFolderRights(), false);
+		    .setFolder(siblingFolder.getParentFolderId()), containerRights, false);
 	}
-
-	actionsByItem.put(stateToken, selectedToolbarActions);
-
-	selectItem(stateToken);
     }
 
-    private ActionCollection<StateToken> addItem(final String title, final String contentTypeId,
-	    final ContentStatusDTO status, final StateToken stateToken, final StateToken parentStateToken,
-	    final AccessRightsDTO rights, final boolean isNodeSelected) {
-	final ActionCollection<StateToken> toolbarActions = new ActionCollection<StateToken>();
-	final ActionCollection<StateToken> itemActions = new ActionCollection<StateToken>();
-
-	createItemActions(rights, contentTypeId, toolbarActions, itemActions);
-
-	setActions(toolbarActions, isNodeSelected);
-
-	final ContextNavigatorItem item = new ContextNavigatorItem(genId(stateToken), genId(parentStateToken),
-		getContentTypeIcon(contentTypeId), title, status, stateToken, isDraggable(contentTypeId, rights
-			.isAdministrable()), isDroppable(contentTypeId, rights.isAdministrable()), itemActions);
-	view.addItem(item);
-
-	return toolbarActions;
-    }
-
-    private void clear() {
-	view.clear();
-	actionsByItem.clear();
-    }
-
-    private void createItemActions(final AccessRightsDTO rights, final String contentTypeId,
-	    final ActionCollection<StateToken> toolbarActionas, final ActionCollection<StateToken> itemActions) {
+    private ActionCollectionSet<StateToken> createItemActions(final AccessRightsDTO rights, final String contentTypeId) {
+	final ActionCollectionSet<StateToken> set = new ActionCollectionSet<StateToken>();
 	boolean add = false;
 
 	for (final ActionDescriptor<StateToken> action : actions.get(contentTypeId)) {
@@ -261,21 +278,22 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	    if (add) {
 		switch (action.getActionPosition()) {
 		case topbarAndItemMenu:
-		    itemActions.add(action);
+		    set.getItemActions().add(action);
 		case topbar:
-		    toolbarActionas.add(action);
+		    set.getToolbarActions().add(action);
 		    break;
 		case bootombarAndItemMenu:
-		    itemActions.add(action);
+		    set.getItemActions().add(action);
 		case bottombar:
-		    toolbarActionas.add(action);
+		    set.getToolbarActions().add(action);
 		    break;
 		case itemMenu:
-		    itemActions.add(action);
+		    set.getItemActions().add(action);
 		    break;
 		}
 	    }
 	}
+	return set;
     }
 
     private void createTreePath(final StateToken state, final ContainerSimpleDTO[] absolutePath,
@@ -289,8 +307,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 		addItem(folder.getName(), folder.getTypeId(), ContentStatusDTO.publishedOnline, folderStateToken,
 			parentStateToken, rights, false);
 	    } else {
-		// create root folder
-		view.setRootItem(genId(folderStateToken), i18n.t(folder.getName()), folderStateToken);
+		// Root must be already created
 	    }
 	}
     }
@@ -314,11 +331,11 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 
     private void setActions(final ActionCollection<StateToken> actions, final boolean isNodeSelected) {
 	for (final ActionDescriptor<StateToken> action : actions) {
-	    if (action.isMenuAction()) {
-		view.addMenuAction(action, isNodeSelected);
+	    if (action instanceof ActionMenuDescriptor) {
+		view.addMenuAction((ActionMenuDescriptor<StateToken>) action, isNodeSelected);
 	    } else {
 		if (isNodeSelected) {
-		    view.addButtonAction(action);
+		    view.addButtonAction((ActionButtonDescriptor<StateToken>) action);
 		}
 	    }
 	}

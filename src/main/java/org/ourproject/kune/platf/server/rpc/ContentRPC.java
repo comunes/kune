@@ -25,6 +25,7 @@ import java.util.List;
 
 import javax.persistence.NoResultException;
 
+import org.ourproject.kune.chat.server.ChatServerTool;
 import org.ourproject.kune.chat.server.managers.ChatConnection;
 import org.ourproject.kune.chat.server.managers.XmppManager;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
@@ -162,12 +163,12 @@ public class ContentRPC implements ContentService, RPC {
     @Authorizated(accessTypeRequired = AccessType.EDIT)
     @Transactional(type = TransactionType.READ_WRITE)
     public StateDTO addFolder(final String userHash, final String groupShortName, final Long parentFolderId,
-	    final String title) throws DefaultException {
+	    final String title, final String contentTypeId) throws DefaultException {
 	final Group group = groupManager.findByShortName(groupShortName);
 	final UserSession userSession = getUserSession();
 	final User user = userSession.getUser();
 	final boolean userIsLoggedIn = userSession.isUserLoggedIn();
-	final State state = createFolder(groupShortName, parentFolderId, title);
+	final State state = createFolder(groupShortName, parentFolderId, title, contentTypeId);
 	completeState(user, userIsLoggedIn, group, state);
 	return mapState(state, user, group);
     }
@@ -187,7 +188,7 @@ public class ContentRPC implements ContentService, RPC {
 	xmppManager.createRoom(connection, roomName, userShortName + userHash);
 	xmppManager.disconnect(connection);
 	try {
-	    final State state = createFolder(groupShortName, parentFolderId, roomName);
+	    final State state = createFolder(groupShortName, parentFolderId, roomName, ChatServerTool.TYPE_ROOM);
 	    completeState(user, userIsLoggedIn, group, state);
 	    return mapState(state, user, group);
 	} catch (final ContentNotFoundException e) {
@@ -394,21 +395,17 @@ public class ContentRPC implements ContentService, RPC {
 	state.setParticipation(socialNetworkManager.findParticipation(user, group));
     }
 
-    private State createFolder(final String groupShortName, final Long parentFolderId, final String title)
-	    throws DefaultException {
+    private State createFolder(final String groupShortName, final Long parentFolderId, final String title,
+	    final String typeId) throws DefaultException {
 	final UserSession userSession = getUserSession();
 	final User user = userSession.getUser();
 	final Group group = groupManager.findByShortName(groupShortName);
 
 	Access access = accessService.getFolderAccess(group, parentFolderId, user, AccessType.EDIT);
 
-	final Container container = creationService.createFolder(group, parentFolderId, title, user.getLanguage());
-	final String toolName = container.getToolName();
-	// Trying not to enter in new folder:
-	// final StateToken token = new StateToken(group.getShortName(),
-	// toolName, container.getId().toString(), null);
-	final StateToken token = new StateToken(group.getShortName(), toolName, parentFolderId.toString(), null);
-	access = accessService.getAccess(user, token, group, AccessType.READ);
+	final Container container = creationService.createFolder(group, parentFolderId, title, user.getLanguage(),
+		typeId);
+	access = accessService.getAccess(user, container.getStateToken(), group, AccessType.EDIT);
 	final State state = stateService.create(access);
 	return state;
     }
@@ -421,13 +418,20 @@ public class ContentRPC implements ContentService, RPC {
 	return userSessionProvider.get();
     }
 
+    private void mapContentRightsInstate(final User user, final AccessLists groupAccessList, final ContentDTO siblingDTO) {
+	final Content sibling = contentManager.find(siblingDTO.getId());
+	final AccessLists lists = sibling.hasAccessList() ? sibling.getAccessLists() : groupAccessList;
+	siblingDTO.setRights(mapper.map(rightsService.get(user, lists), AccessRightsDTO.class));
+    }
+
     private StateDTO mapState(final State state, final User user, final Group group) {
 	final StateDTO stateDTO = mapper.map(state, StateDTO.class);
-	final AccessLists groupAccesList = group.getSocialNetwork().getAccessLists();
-	for (final ContentDTO siblingDTO : stateDTO.getFolder().getContents()) {
-	    final Content sibling = contentManager.find(siblingDTO.getId());
-	    final AccessLists lists = sibling.hasAccessList() ? sibling.getAccessLists() : groupAccesList;
-	    siblingDTO.setRights(mapper.map(rightsService.get(user, lists), AccessRightsDTO.class));
+	final AccessLists groupAccessList = group.getSocialNetwork().getAccessLists();
+	for (final ContentDTO siblingDTO : stateDTO.getRootContainer().getContents()) {
+	    mapContentRightsInstate(user, groupAccessList, siblingDTO);
+	}
+	for (final ContentDTO siblingDTO : stateDTO.getContainer().getContents()) {
+	    mapContentRightsInstate(user, groupAccessList, siblingDTO);
 	}
 	return stateDTO;
     }

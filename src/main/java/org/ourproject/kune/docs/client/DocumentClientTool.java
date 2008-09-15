@@ -21,9 +21,14 @@
 package org.ourproject.kune.docs.client;
 
 import org.ourproject.kune.docs.client.ctx.DocumentContext;
+import org.ourproject.kune.platf.client.actions.ActionButtonDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionButtonSeparator;
 import org.ourproject.kune.platf.client.actions.ActionDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
+import org.ourproject.kune.platf.client.actions.ActionMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionPosition;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
+import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
@@ -95,30 +100,17 @@ public class DocumentClientTool extends AbstractClientTool {
     }
 
     private void createActions() {
-	final ActionDescriptor<StateToken> addFolder = new ActionDescriptor<StateToken>(AccessRolDTO.Editor,
-		ActionPosition.topbarAndItemMenu, new Slot<StateToken>() {
-		    public void onEvent(final StateToken parameter) {
-			contentServiceProvider.get().addFolder(session.getUserHash(),
-				session.getCurrentState().getGroup().getShortName(), new Long(parameter.getFolder()),
-				i18n.t("New folder"), new AsyncCallbackSimple<StateDTO>() {
-				    public void onSuccess(final StateDTO state) {
-					contextNavigator.setState(state);
-					stateManager.setRetrievedState(state);
-					contextNavigator.editItem(state.getStateToken());
-				    }
-				});
-		    }
-		});
-	addFolder.setTextDescription(i18n.t("New folder"));
-	addFolder.setParentMenuTitle(i18n.t("New"));
-	addFolder.setIconUrl("images/nav/folder_add.png");
+	final ActionMenuDescriptor<StateToken> addFolder = createFolderAction(TYPE_FOLDER, "images/nav/folder_add.png",
+		i18n.t("New folder"), i18n.t("File"), i18n.t("New"));
+	final ActionMenuDescriptor<StateToken> addGallery = createFolderAction(TYPE_GALLERY, "images/nav/gallery.png",
+		i18n.t("New gallery"), i18n.t("File"), i18n.t("New"));
 
-	final ActionDescriptor<StateToken> addDoc = new ActionDescriptor<StateToken>(AccessRolDTO.Editor,
+	final ActionMenuDescriptor<StateToken> addDoc = new ActionMenuDescriptor<StateToken>(AccessRolDTO.Editor,
 		ActionPosition.topbarAndItemMenu, new Slot<StateToken>() {
 		    public void onEvent(final StateToken token) {
 			contentServiceProvider.get().addContent(session.getUserHash(),
 				session.getCurrentState().getGroup().getShortName(),
-				session.getCurrentState().getFolder().getId(), i18n.t("New document"),
+				session.getCurrentState().getContainer().getId(), i18n.t("New document"),
 				new AsyncCallbackSimple<StateDTO>() {
 				    public void onSuccess(final StateDTO state) {
 					contextNavigator.setState(state);
@@ -130,22 +122,24 @@ public class DocumentClientTool extends AbstractClientTool {
 		    }
 		});
 	addDoc.setTextDescription(i18n.t("New document"));
-	addDoc.setParentMenuTitle(i18n.t("New"));
+	addDoc.setParentMenuTitle(i18n.t("File"));
+	addDoc.setParentSubMenuTitle(i18n.t("New"));
 	addDoc.setIconUrl("images/nav/page_add.png");
 
-	final ActionDescriptor<StateToken> delContainer = new ActionDescriptor<StateToken>(AccessRolDTO.Administrator,
-		ActionPosition.itemMenu, new Slot<StateToken>() {
+	final ActionMenuDescriptor<StateToken> delContainer = new ActionMenuDescriptor<StateToken>(
+		AccessRolDTO.Administrator, ActionPosition.topbarAndItemMenu, new Slot<StateToken>() {
 		    public void onEvent(final StateToken token) {
 			Site.info("Sorry, in development");
 		    }
 		});
-	delContainer.setTextDescription(i18n.t("Delete"));
+	delContainer.setParentMenuTitle(i18n.t("File"));
+	delContainer.setTextDescription(i18n.t("Delete folder"));
 	delContainer.setMustBeConfirmed(true);
 	delContainer.setConfirmationTitle(i18n.t("Please confirm"));
 	delContainer.setConfirmationText(i18n.t("You will delete it and also all its contents. Are you sure?"));
 
-	final ActionDescriptor<StateToken> delContent = new ActionDescriptor<StateToken>(AccessRolDTO.Administrator,
-		ActionPosition.itemMenu, new Slot<StateToken>() {
+	final ActionMenuDescriptor<StateToken> delContent = new ActionMenuDescriptor<StateToken>(
+		AccessRolDTO.Administrator, ActionPosition.topbarAndItemMenu, new Slot<StateToken>() {
 		    public void onEvent(final StateToken token) {
 			contentServiceProvider.get().delContent(session.getUserHash(),
 				session.getCurrentState().getGroup().getShortName(), token.getDocument(),
@@ -157,7 +151,8 @@ public class DocumentClientTool extends AbstractClientTool {
 				});
 		    }
 		});
-	delContent.setTextDescription(i18n.t("Delete"));
+	delContent.setParentMenuTitle(i18n.t("File"));
+	delContent.setTextDescription(i18n.t("Delete document"));
 	delContent.setMustBeConfirmed(true);
 	delContent.setConfirmationTitle(i18n.t("Please confirm"));
 	delContent.setConfirmationText(i18n.t("Are you sure?"));
@@ -179,7 +174,31 @@ public class DocumentClientTool extends AbstractClientTool {
 		});
 	rename.setTextDescription(i18n.t("Rename"));
 
-	final ActionDescriptor<StateToken> refresh = new ActionDescriptor<StateToken>(AccessRolDTO.Viewer,
+	final ActionButtonDescriptor<StateToken> goGroupHome = new ActionButtonDescriptor<StateToken>(
+		AccessRolDTO.Viewer, ActionPosition.topbar, new Slot<StateToken>() {
+		    public void onEvent(final StateToken token) {
+			stateManager.gotoToken(token.getGroup());
+		    }
+		});
+	goGroupHome.setIconUrl("images/group-home.png");
+	goGroupHome.setLeftSeparator(ActionButtonSeparator.fill);
+	goGroupHome.setRightSeparator(ActionButtonSeparator.separator);
+	goGroupHome.setEnableCondition(new ActionEnableCondition<StateToken>() {
+	    public boolean mustBeEnabled(final StateToken param) {
+		return !param.equals(session.getCurrentState().getStateToken());
+	    }
+	});
+
+	final ActionMenuDescriptor<StateToken> setAsDefGroupContent = new ActionMenuDescriptor<StateToken>(
+		AccessRolDTO.Administrator, ActionPosition.itemMenu, new Slot<StateToken>() {
+		    public void onEvent(final StateToken token) {
+			Site.info("In development");
+		    }
+		});
+	setAsDefGroupContent.setTextDescription(i18n.t("Set this as the group default page"));
+	setAsDefGroupContent.setIconUrl("images/group-home.png");
+
+	final ActionButtonDescriptor<StateToken> refresh = new ActionButtonDescriptor<StateToken>(AccessRolDTO.Viewer,
 		ActionPosition.topbar, new Slot<StateToken>() {
 		    public void onEvent(StateToken stateToken) {
 			stateManager.reload();
@@ -189,36 +208,85 @@ public class DocumentClientTool extends AbstractClientTool {
 	refresh.setIconUrl("images/nav/refresh.png");
 	refresh.setToolTip(i18n.t("Refresh"));
 
-	final ActionDescriptor<StateToken> uploadFile = new ActionDescriptor<StateToken>(AccessRolDTO.Editor,
-		ActionPosition.bootombarAndItemMenu, new Slot<StateToken>() {
-		    public void onEvent(final StateToken token) {
-			fileUploaderProvider.get().show();
-		    }
-		});
-	uploadFile.setTextDescription(i18n.t("Upload file"));
-	uploadFile.setIconUrl("images/nav/upload.png");
-	uploadFile.setToolTip(i18n.t("Upload some files (images, PDFs, etc)"));
+	final ActionDescriptor<StateToken> uploadFile = createUploadAction(i18n.t("Upload file"),
+		"images/nav/upload.png", i18n.t("Upload some files (images, PDFs, ...)"), null);
 
-	contextNavigator.addAction(TYPE_FOLDER, go);
+	session.onInitDataReceived(new Slot<InitDataDTO>() {
+	    public void onEvent(final InitDataDTO parameter) {
+		final ActionDescriptor<StateToken> uploadMedia = createUploadAction(i18n.t("Upload media"),
+			"images/nav/upload.png", i18n.t("Upload some media (images, videos)"), session
+				.getGalleryPermittedExtensions());
+		contextNavigator.addAction(TYPE_GALLERY, uploadMedia);
+	    }
+	});
+
+	// contextNavigator.addAction(TYPE_FOLDER, go);
 	contextNavigator.addAction(TYPE_FOLDER, addDoc);
 	contextNavigator.addAction(TYPE_FOLDER, addFolder);
 	contextNavigator.addAction(TYPE_FOLDER, delContainer);
 	contextNavigator.addAction(TYPE_FOLDER, rename);
+	contextNavigator.addAction(TYPE_FOLDER, goGroupHome);
 	contextNavigator.addAction(TYPE_FOLDER, refresh);
 	contextNavigator.addAction(TYPE_FOLDER, uploadFile);
 
 	contextNavigator.addAction(TYPE_BLOG, uploadFile);
-	contextNavigator.addAction(TYPE_GALLERY, uploadFile);
+	contextNavigator.addAction(TYPE_BLOG, setAsDefGroupContent);
+
+	contextNavigator.addAction(TYPE_GALLERY, goGroupHome);
 
 	contextNavigator.addAction(TYPE_ROOT, addDoc);
 	contextNavigator.addAction(TYPE_ROOT, addFolder);
+	contextNavigator.addAction(TYPE_ROOT, addGallery);
+	contextNavigator.addAction(TYPE_ROOT, goGroupHome);
 	contextNavigator.addAction(TYPE_ROOT, refresh);
 	contextNavigator.addAction(TYPE_ROOT, uploadFile);
 
-	contextNavigator.addAction(TYPE_DOCUMENT, go);
+	// contextNavigator.addAction(TYPE_DOCUMENT, go);
 	contextNavigator.addAction(TYPE_DOCUMENT, delContent);
 	contextNavigator.addAction(TYPE_DOCUMENT, rename);
+	contextNavigator.addAction(TYPE_DOCUMENT, goGroupHome);
 	contextNavigator.addAction(TYPE_DOCUMENT, refresh);
+	contextNavigator.addAction(TYPE_DOCUMENT, setAsDefGroupContent);
+    }
+
+    private ActionMenuDescriptor<StateToken> createFolderAction(final String contentTypeId, final String iconUrl,
+	    final String textDescription, final String parentMenuTitle, final String parentMenuSubtitle) {
+	final ActionMenuDescriptor<StateToken> addFolder;
+	addFolder = new ActionMenuDescriptor<StateToken>(AccessRolDTO.Editor, ActionPosition.topbarAndItemMenu,
+		new Slot<StateToken>() {
+		    public void onEvent(final StateToken parameter) {
+			contentServiceProvider.get().addFolder(session.getUserHash(),
+				session.getCurrentState().getGroup().getShortName(), new Long(parameter.getFolder()),
+				textDescription, contentTypeId, new AsyncCallbackSimple<StateDTO>() {
+				    public void onSuccess(final StateDTO state) {
+					contextNavigator.setState(state);
+					stateManager.setRetrievedState(state);
+					contextNavigator.editItem(state.getStateToken());
+				    }
+				});
+		    }
+		});
+	addFolder.setTextDescription(textDescription);
+	addFolder.setParentMenuTitle(parentMenuTitle);
+	addFolder.setParentSubMenuTitle(parentMenuSubtitle);
+	addFolder.setIconUrl(iconUrl);
+	return addFolder;
+    }
+
+    private ActionDescriptor<StateToken> createUploadAction(final String textDescription, final String iconUrl,
+	    final String toolTip, final String permitedExtensions) {
+	final ActionButtonDescriptor<StateToken> uploadFile;
+	uploadFile = new ActionButtonDescriptor<StateToken>(AccessRolDTO.Editor, ActionPosition.bootombarAndItemMenu,
+		new Slot<StateToken>() {
+		    public void onEvent(final StateToken token) {
+			fileUploaderProvider.get().setPermittedExtensions(permitedExtensions);
+			fileUploaderProvider.get().show();
+		    }
+		});
+	uploadFile.setTextDescription(textDescription);
+	uploadFile.setIconUrl(iconUrl);
+	uploadFile.setToolTip(toolTip);
+	return uploadFile;
     }
 
     private void registerDragDropTypes() {

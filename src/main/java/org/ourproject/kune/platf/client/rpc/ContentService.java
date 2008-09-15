@@ -45,7 +45,8 @@ public interface ContentService extends RemoteService {
 
     StateDTO addContent(String user, String groupShortName, Long parentFolderId, String name) throws DefaultException;
 
-    StateDTO addFolder(String hash, String groupShortName, Long parentFolderId, String title) throws DefaultException;
+    StateDTO addFolder(String hash, String groupShortName, Long parentFolderId, String typeId, String title)
+	    throws DefaultException;
 
     StateDTO addRoom(String user, String groupShortName, Long parentFolderId, String name) throws DefaultException;
 

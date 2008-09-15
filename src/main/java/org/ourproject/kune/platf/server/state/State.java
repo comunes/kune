@@ -43,9 +43,10 @@ public class State {
     private String toolName;
     private Group group;
     private Container container;
+    private Container rootContainer;
     private AccessLists accessLists;
     private AccessRights contentRights;
-    private AccessRights folderRights;
+    private AccessRights containerRights;
     private AccessRights groupRights;
     private ContentStatus status;
     private boolean isRateable;
@@ -74,6 +75,14 @@ public class State {
 	return authors;
     }
 
+    public Container getContainer() {
+	return container;
+    }
+
+    public AccessRights getContainerRights() {
+	return containerRights;
+    }
+
     public String getContent() {
 	return content;
     }
@@ -88,14 +97,6 @@ public class State {
 
     public String getDocumentId() {
 	return documentId;
-    }
-
-    public Container getFolder() {
-	return container;
-    }
-
-    public AccessRights getFolderRights() {
-	return folderRights;
     }
 
     public Group getGroup() {
@@ -138,6 +139,10 @@ public class State {
 	return rateByUsers;
     }
 
+    public Container getRootContainer() {
+	return rootContainer;
+    }
+
     public StateToken getStateToken() {
 	return stateToken;
     }
@@ -174,6 +179,14 @@ public class State {
 	this.authors = authors;
     }
 
+    public void setContainer(final Container container) {
+	this.container = container;
+    }
+
+    public void setContainerRights(final AccessRights containerRights) {
+	this.containerRights = containerRights;
+    }
+
     public void setContent(final String content) {
 	this.content = content;
     }
@@ -188,14 +201,6 @@ public class State {
 
     public void setDocumentId(final String docRef) {
 	this.documentId = docRef;
-    }
-
-    public void setFolder(final Container container) {
-	this.container = container;
-    }
-
-    public void setFolderRights(final AccessRights folderRights) {
-	this.folderRights = folderRights;
     }
 
     public void setGroup(final Group group) {
@@ -248,6 +253,10 @@ public class State {
 	} else {
 	    this.rateByUsers = 0;
 	}
+    }
+
+    public void setRootContainer(final Container rootContainer) {
+	this.rootContainer = rootContainer;
     }
 
     public void setStateToken(final StateToken stateToken) {

@@ -3,7 +3,6 @@ package org.ourproject.kune.platf.client.actions;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.services.ImageDescriptor;
 
-import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.signal.Slot;
 
 public class ActionDescriptor<T> {
@@ -17,17 +16,14 @@ public class ActionDescriptor<T> {
     private String confirmationTitle;
     private String confirmationText;
 
-    private boolean isMenuAction;
-    private String parentMenuTitle;
-    private String parentMenuIconUrl;
-    private String parentSubMenuTitle;
-
     private final Slot<T> onPerformCall;
     private final Slot<T> onNotConfirmed;
 
     private AccessRolDTO accessRol;
 
     private ActionPosition actionPosition;
+
+    private ActionEnableCondition<T> enableCondition;
 
     public ActionDescriptor(final AccessRolDTO accessRolDTO, final ActionPosition actionPosition,
 	    final Slot<T> onPerformCall) {
@@ -36,7 +32,12 @@ public class ActionDescriptor<T> {
 	this.onPerformCall = onPerformCall;
 	mustBeConfirmed = false;
 	onNotConfirmed = null;
-	isMenuAction = false;
+    }
+
+    public ActionDescriptor(final AccessRolDTO accessRolDTO, final ActionPosition actionPosition,
+	    final Slot<T> onPerformCall, final ActionEnableCondition<T> enableCondition) {
+	this(accessRolDTO, actionPosition, onPerformCall);
+	this.enableCondition = enableCondition;
     }
 
     @SuppressWarnings("unchecked")
@@ -67,6 +68,10 @@ public class ActionDescriptor<T> {
 	return confirmationTitle;
     }
 
+    public ActionEnableCondition<T> getEnableCondition() {
+	return enableCondition;
+    }
+
     public ImageDescriptor getIconDescriptor() {
 	return iconDescriptor;
     }
@@ -75,28 +80,12 @@ public class ActionDescriptor<T> {
 	return iconUrl;
     }
 
-    public String getParentMenuIconUrl() {
-	return parentMenuIconUrl;
-    }
-
-    public String getParentMenuTitle() {
-	return parentMenuTitle;
-    }
-
-    public String getParentSubMenuTitle() {
-	return parentSubMenuTitle;
-    }
-
     public String getText() {
 	return textDescription;
     }
 
     public String getToolTip() {
 	return toolTip;
-    }
-
-    public boolean isMenuAction() {
-	return isMenuAction;
     }
 
     public boolean isMustBeConfirmed() {
@@ -119,6 +108,10 @@ public class ActionDescriptor<T> {
 	this.confirmationTitle = confirmationTitle;
     }
 
+    public void setEnableCondition(final ActionEnableCondition<T> enableCondition) {
+	this.enableCondition = enableCondition;
+    }
+
     public void setIconDescriptor(final ImageDescriptor iconDescriptor) {
 	this.iconDescriptor = iconDescriptor;
     }
@@ -129,22 +122,6 @@ public class ActionDescriptor<T> {
 
     public void setMustBeConfirmed(final boolean mustBeConfirmed) {
 	this.mustBeConfirmed = mustBeConfirmed;
-    }
-
-    public void setParentMenuIconUrl(final String parentMenuIconUrl) {
-	this.parentMenuIconUrl = parentMenuIconUrl;
-    }
-
-    public void setParentMenuTitle(final String parentMenuTitle) {
-	isMenuAction = true;
-	this.parentMenuTitle = parentMenuTitle;
-    }
-
-    public void setParentSubMenuTitle(final String parentSubMenuTitle) {
-	if (parentMenuTitle == null) {
-	    Log.warn("Please set parentMenuTitle before");
-	}
-	this.parentSubMenuTitle = parentSubMenuTitle;
     }
 
     public void setTextDescription(final String textDescription) {

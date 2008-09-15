@@ -53,7 +53,7 @@ public class ChatContentPresenter implements ChatContent {
     }
 
     public void onEnterRoom() {
-	final String roomName = state.getFolder().getName();
+	final String roomName = state.getContainer().getName();
 	emiteUIDialog.joinRoom(XmppURI.uri(roomName));
     }
 

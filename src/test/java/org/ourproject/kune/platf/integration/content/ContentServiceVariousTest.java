@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
-import org.ourproject.kune.platf.client.dto.ContainerSimpleDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.TagResultDTO;
@@ -60,13 +60,14 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     public void folderRename() throws Exception {
 	doLogin();
 	defaultContent = getDefaultContent();
-	final ContainerDTO folder = defaultContent.getFolder();
+	final ContainerDTO folder = defaultContent.getContainer();
 
 	final String oldTitle = "some title";
 	String newTitle = "folder new name";
-	final StateDTO newState = contentService.addFolder(session.getHash(), groupShortName, folder.getId(), oldTitle);
+	final StateDTO newState = contentService.addFolder(session.getHash(), groupShortName, folder.getId(), oldTitle,
+		DocumentClientTool.TYPE_FOLDER);
 
-	final ContainerSimpleDTO newFolder = newState.getFolder().getChilds().get(0);
+	final ContainerDTO newFolder = newState.getContainer();
 
 	assertEquals(oldTitle, newFolder.getName());
 
@@ -80,7 +81,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 		newFolder.getId().toString(), null);
 	StateDTO folderAgain = contentService.getContent(getHash(), groupShortName, newFolderToken);
 
-	assertEquals(newTitle, folderAgain.getFolder().getName());
+	assertEquals(newTitle, folderAgain.getContainer().getName());
 
 	newTitle = "folder last name";
 
@@ -88,7 +89,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
 	folderAgain = contentService.getContent(getHash(), groupShortName, newFolderToken);
 
-	assertEquals(newTitle, folderAgain.getFolder().getName());
+	assertEquals(newTitle, folderAgain.getContainer().getName());
 
     }
 
@@ -96,7 +97,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     public void folderRenameOtherGroupFails() throws Exception {
 	doLogin();
 	defaultContent = getDefaultContent();
-	final ContainerDTO folder = defaultContent.getFolder();
+	final ContainerDTO folder = defaultContent.getContainer();
 	final StateToken folderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(), folder
 		.getId().toString(), null);
 
@@ -108,7 +109,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     public void folderRootRenameMustFail() throws Exception {
 	doLogin();
 	defaultContent = getDefaultContent();
-	final ContainerDTO folder = defaultContent.getFolder();
+	final ContainerDTO folder = defaultContent.getContainer();
 
 	final String newTitle = "folder new name";
 	final StateToken folderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(), folder
@@ -117,7 +118,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
 	assertEquals(newTitle, result);
 
-	final ContainerDTO folderAgain = getDefaultContent().getFolder();
+	final ContainerDTO folderAgain = getDefaultContent().getContainer();
 
 	assertEquals(newTitle, folderAgain.getName());
     }
@@ -161,13 +162,14 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     public void tokenRename() throws Exception {
 	doLogin();
 	defaultContent = getDefaultContent();
-	final ContainerDTO folder = defaultContent.getFolder();
+	final ContainerDTO folder = defaultContent.getContainer();
 
 	final String oldTitle = "some title";
 	String newTitle = "folder new name";
-	final StateDTO newState = contentService.addFolder(session.getHash(), groupShortName, folder.getId(), oldTitle);
+	final StateDTO newState = contentService.addFolder(session.getHash(), groupShortName, folder.getId(), oldTitle,
+		DocumentClientTool.TYPE_FOLDER);
 
-	final ContainerSimpleDTO newFolder = newState.getFolder().getChilds().get(0);
+	final ContainerDTO newFolder = newState.getContainer();
 
 	assertEquals(oldTitle, newFolder.getName());
 
@@ -182,7 +184,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
 	final StateDTO folderAgain = contentService.getContent(getHash(), groupShortName, newFolderToken);
 
-	assertEquals(newTitle, folderAgain.getFolder().getName());
+	assertEquals(newTitle, folderAgain.getContainer().getName());
     }
 
 }

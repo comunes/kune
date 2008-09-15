@@ -35,8 +35,8 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 	final StateDTO content = contentService.getContent(null, groupName, new StateToken());
 	assertNotNull(content);
 	assertNotNull(content.getGroup());
-	assertNotNull(content.getFolder());
-	assertNotNull(content.getFolder().getId());
+	assertNotNull(content.getContainer());
+	assertNotNull(content.getContainer().getId());
 	assertNotNull(content.getToolName());
 	assertNotNull(content.getDocumentId());
 	assertNotNull(content.getRateByUsers());
@@ -81,9 +81,9 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 	assertFalse(content.getContentRights().isAdministrable());
 	assertFalse(content.getContentRights().isEditable());
 	assertTrue(content.getContentRights().isVisible());
-	assertFalse(content.getFolderRights().isAdministrable());
-	assertFalse(content.getFolderRights().isEditable());
-	assertTrue(content.getFolderRights().isVisible());
+	assertFalse(content.getContainerRights().isAdministrable());
+	assertFalse(content.getContainerRights().isEditable());
+	assertTrue(content.getContainerRights().isVisible());
     }
 
     @Test
@@ -91,8 +91,8 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 	final StateDTO content = contentService.getContent(null, groupName, new StateToken("site.docs"));
 	assertNotNull(content);
 	assertNotNull(content.getGroup());
-	assertNotNull(content.getFolder());
-	assertNotNull(content.getFolder().getId());
+	assertNotNull(content.getContainer());
+	assertNotNull(content.getContainer().getId());
 	assertNotNull(content.getToolName());
     }
 }

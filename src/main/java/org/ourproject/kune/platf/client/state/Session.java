@@ -70,6 +70,8 @@ public interface Session {
 
     UserInfoDTO getCurrentUserInfo();
 
+    String getGalleryPermittedExtensions();
+
     String getUserHash();
 
     void onInitDataReceived(Slot<InitDataDTO> slot);
