@@ -1,4 +1,4 @@
-package org.ourproject.kune.workspace.client.ctxnav;
+package org.ourproject.kune.workspace.client.component;
 
 import java.util.ArrayList;
 import java.util.HashMap;

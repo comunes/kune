@@ -1,4 +1,4 @@
-package org.ourproject.kune.workspace.client.ctxnav;
+package org.ourproject.kune.workspace.client.component;
 
 import org.ourproject.kune.platf.client.actions.ActionButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionMenuDescriptor;

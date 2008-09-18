@@ -34,8 +34,11 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.gwtext.client.core.EventObject;
+import com.gwtext.client.core.ExtElement;
 import com.gwtext.client.data.Node;
 import com.gwtext.client.data.Tree;
+import com.gwtext.client.widgets.Editor;
+import com.gwtext.client.widgets.event.EditorListenerAdapter;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.menu.BaseItem;
 import com.gwtext.client.widgets.menu.Item;
@@ -55,6 +58,7 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
     private final WorkspaceSkeleton ws;
     private boolean fireOnTextChange;
     private final ContextNavigatorPresenter presenter;
+    private boolean isEditable;
 
     public ContextNavigatorPanel(final ContextNavigatorPresenter presenter, final I18nTranslationService i18n,
 	    final WorkspaceSkeleton ws) {
@@ -63,6 +67,7 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 
 	contextMenus = new HashMap<String, Menu>();
 	fireOnTextChange = true;
+	isEditable = false;
     }
 
     public void addItem(final ContextNavigatorItem item) {
@@ -160,6 +165,10 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 	}
     }
 
+    public void setEditable(final boolean editable) {
+	this.isEditable = editable;
+    }
+
     public void setFireOnTextChange(final boolean fireOnTextChange) {
 	this.fireOnTextChange = fireOnTextChange;
     }
@@ -242,7 +251,7 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 	    }
 	});
 	treePanel.setLines(false);
-	treePanel.setEnableDD(true);
+	treePanel.setEnableDD(isEditable);
 	treePanel.setRootNode(root);
 	// treePanel.setAutoScroll(true);
 	treePanel.setContainerScroll(true);
@@ -250,6 +259,11 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 
 	final TextField field = new TextField();
 	treeEditor = new TreeEditor(treePanel, field);
+	treeEditor.addListener(new EditorListenerAdapter() {
+	    public boolean doBeforeStartEdit(final Editor source, final ExtElement boundEl, final Object value) {
+		return isEditable;
+	    }
+	});
 
 	final ScrollPanel panel = new ScrollPanel();
 	// final Panel panel = new Panel();

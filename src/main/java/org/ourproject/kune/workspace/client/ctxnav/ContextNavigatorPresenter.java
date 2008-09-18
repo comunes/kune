@@ -200,9 +200,16 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 
     public void setState(final StateDTO state) {
 	final ContainerDTO container = state.getContainer();
-
 	final StateToken stateToken = state.getStateToken();
 	final AccessRightsDTO containerRights = state.getContainerRights();
+	AccessRightsDTO rights;
+
+	if (stateToken.hasAll()) {
+	    rights = state.getContentRights();
+	} else {
+	    rights = containerRights;
+	}
+	view.setEditable(rights.isEditable());
 
 	// If root sended (container is not a root folder) process root (add
 	// childs to view)
@@ -221,9 +228,11 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 
 	// Process our current content/container
 	if (state.hasDocument()) {
+	    rights = state.getContentRights();
 	    addItem(state.getTitle(), state.getTypeId(), state.getStatus(), stateToken, container.getStateToken(),
-		    state.getContentRights(), false);
+		    rights, false);
 	} else {
+	    rights = containerRights;
 	    addItem(container.getName(), container.getTypeId(), ContentStatusDTO.publishedOnline, container
 		    .getStateToken(), container.getStateToken().clone().setFolder(container.getParentFolderId()),
 		    containerRights, false);
@@ -239,6 +248,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	    setEditOnNextStateChange(false);
 	} else {
 	    selectItem(stateToken);
+
 	}
     }
 
