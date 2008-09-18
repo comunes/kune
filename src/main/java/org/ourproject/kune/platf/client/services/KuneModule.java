@@ -36,6 +36,7 @@ import org.ourproject.kune.platf.client.ui.rate.RatePresenter;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPanel;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPresenter;
+import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorToolbar;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.editor.TextEditorPanel;
 import org.ourproject.kune.workspace.client.editor.TextEditorPresenter;
@@ -589,9 +590,11 @@ public class KuneModule extends AbstractModule {
 
 	register(SingletonScope.class, new Factory<ContextNavigator>(ContextNavigator.class) {
 	    public ContextNavigator create() {
+		final ContextNavigatorToolbar contextNavigatorToolbar = new ContextNavigatorToolbar($(Session.class),
+			$$(ActionManager.class), ws);
 		final ContextNavigatorPresenter presenter = new ContextNavigatorPresenter($(StateManager.class),
 			$(Session.class), $$(ContentServiceAsync.class), i18n, $(EntityTitle.class),
-			$$(ActionManager.class));
+			$$(ActionManager.class), contextNavigatorToolbar);
 		final ContextNavigatorPanel panel = new ContextNavigatorPanel(presenter, i18n, ws);
 		presenter.init(panel);
 		return presenter;

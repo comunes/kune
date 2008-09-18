@@ -22,16 +22,17 @@ package org.ourproject.kune.platf.server.access;
 
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.DefaultException;
+import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 
 public interface AccessService {
 
-    Content accessToContent(Long contentId, User user, AccessType accessType) throws DefaultException;
+    Container accessToContainer(Long folderId, User user, AccessRol accessRol) throws DefaultException;
 
-    Access getAccess(User user, StateToken token, Group defaultGroup, AccessType accessType) throws DefaultException;
+    Content accessToContent(Long contentId, User user, AccessRol accessRol) throws DefaultException;
 
-    Access getFolderAccess(Group group, Long folderId, User user, AccessType accessType) throws DefaultException;
+    Access getAccess(User user, StateToken token, Group defaultGroup, AccessRol accessRol) throws DefaultException;
 
 }

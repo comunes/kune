@@ -139,9 +139,9 @@ public class StateManagerDefault implements StateManager {
 	siteTokens.remove(token);
     }
 
-    public void setRetrievedState(final StateDTO content) {
-	final StateToken state = content.getStateToken();
-	contentProvider.cache(state, content);
+    public void setRetrievedState(final StateDTO newState) {
+	contentProvider.cache(newState.getStateToken(), newState);
+	setState(newState);
     }
 
     public void setSocialNetwork(final SocialNetworkResultDTO socialNet) {
@@ -171,18 +171,10 @@ public class StateManagerDefault implements StateManager {
 	}
     }
 
-    private void loadContent(final StateDTO state) {
-	onStateChanged.fire(state);
-	Site.hideProgress();
-    }
-
     private void onHistoryChanged(final StateToken newState) {
 	contentProvider.getContent(session.getUserHash(), newState, new AsyncCallbackSimple<StateDTO>() {
 	    public void onSuccess(final StateDTO newState) {
-		loadContent(newState);
-		session.setCurrent(newState);
-		checkGroupAndToolChange(oldState, newState);
-		oldState = newState;
+		setState(newState);
 	    }
 	});
     }
@@ -191,10 +183,17 @@ public class StateManagerDefault implements StateManager {
 	if (oldState == null) {
 	    onHistoryChanged(new StateToken());
 	} else {
-	    final StateDTO currentState = session.getCurrentState();
-	    session.setCurrent(oldState);
-	    checkGroupAndToolChange(currentState, oldState);
-	    loadContent(oldState);
+	    final StateDTO newState = oldState;
+	    oldState = session.getCurrentState();
+	    setState(newState);
 	}
+    }
+
+    private void setState(final StateDTO newState) {
+	session.setCurrent(newState);
+	onStateChanged.fire(newState);
+	Site.hideProgress();
+	checkGroupAndToolChange(oldState, newState);
+	oldState = newState;
     }
 }

@@ -5,6 +5,7 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
 import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
 import org.ourproject.kune.platf.client.services.ImageDescriptor;
@@ -104,7 +105,7 @@ public class SocialNetworkPresenter {
 	    public void onEvent(final String parameter) {
 		Site.showProgressProcessing();
 		snServiceProvider.get().requestJoinGroup(session.getUserHash(),
-			session.getCurrentState().getGroup().getShortName(), new AsyncCallbackSimple<Object>() {
+			session.getCurrentState().getStateToken(), new AsyncCallbackSimple<Object>() {
 			    public void onSuccess(final Object result) {
 				Site.hideProgress();
 				final SocialNetworkRequestResult resultType = (SocialNetworkRequestResult) result;
@@ -183,7 +184,7 @@ public class SocialNetworkPresenter {
 		    public void onEvent(final GroupDTO group) {
 			Site.showProgressProcessing();
 			snServiceProvider.get().setAdminAsCollab(session.getUserHash(),
-				session.getCurrentState().getGroup().getShortName(), group.getShortName(),
+				session.getCurrentState().getStateToken(), group.getShortName(),
 				new AsyncCallbackSimple<SocialNetworkResultDTO>() {
 				    public void onSuccess(final SocialNetworkResultDTO result) {
 					Site.hideProgress();
@@ -198,7 +199,7 @@ public class SocialNetworkPresenter {
 		    public void onEvent(final GroupDTO group) {
 			Site.showProgressProcessing();
 			snServiceProvider.get().deleteMember(session.getUserHash(),
-				session.getCurrentState().getGroup().getShortName(), group.getShortName(),
+				session.getCurrentState().getStateToken(), group.getShortName(),
 				new AsyncCallbackSimple<SocialNetworkResultDTO>() {
 				    public void onSuccess(final SocialNetworkResultDTO result) {
 					Site.hideProgress();
@@ -217,7 +218,7 @@ public class SocialNetworkPresenter {
 		    public void onEvent(final GroupDTO group) {
 			Site.showProgressProcessing();
 			snServiceProvider.get().setCollabAsAdmin(session.getUserHash(),
-				session.getCurrentState().getGroup().getShortName(), group.getShortName(),
+				session.getCurrentState().getStateToken(), group.getShortName(),
 				new AsyncCallbackSimple<SocialNetworkResultDTO>() {
 				    public void onSuccess(final SocialNetworkResultDTO result) {
 					Site.hideProgress();
@@ -232,7 +233,7 @@ public class SocialNetworkPresenter {
 		    public void onEvent(final GroupDTO group) {
 			Site.showProgressProcessing();
 			snServiceProvider.get().AcceptJoinGroup(session.getUserHash(),
-				session.getCurrentState().getGroup().getShortName(), group.getShortName(),
+				session.getCurrentState().getStateToken(), group.getShortName(),
 				new AsyncCallbackSimple<SocialNetworkResultDTO>() {
 				    public void onSuccess(final SocialNetworkResultDTO result) {
 					Site.hideProgress();
@@ -247,7 +248,7 @@ public class SocialNetworkPresenter {
 		    public void onEvent(final GroupDTO group) {
 			Site.showProgressProcessing();
 			snServiceProvider.get().denyJoinGroup(session.getUserHash(),
-				session.getCurrentState().getGroup().getShortName(), group.getShortName(),
+				session.getCurrentState().getStateToken(), group.getShortName(),
 				new AsyncCallbackSimple<SocialNetworkResultDTO>() {
 				    public void onSuccess(final SocialNetworkResultDTO result) {
 					Site.hideProgress();
@@ -265,7 +266,7 @@ public class SocialNetworkPresenter {
 
     private void removeMemberAction(final GroupDTO groupDTO) {
 	Site.showProgressProcessing();
-	snServiceProvider.get().unJoinGroup(session.getUserHash(), groupDTO.getShortName(),
+	snServiceProvider.get().unJoinGroup(session.getUserHash(), new StateToken(groupDTO.getShortName()),
 		new AsyncCallbackSimple<SocialNetworkResultDTO>() {
 		    public void onSuccess(final SocialNetworkResultDTO result) {
 			Site.hideProgress();

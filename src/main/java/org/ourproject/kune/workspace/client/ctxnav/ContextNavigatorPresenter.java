@@ -28,6 +28,7 @@ import org.ourproject.kune.platf.client.actions.ActionButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionCollection;
 import org.ourproject.kune.platf.client.actions.ActionCollectionSet;
 import org.ourproject.kune.platf.client.actions.ActionDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.ActionMenuDescriptor;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
@@ -48,7 +49,6 @@ import org.ourproject.kune.workspace.client.title.EntityTitle;
 import com.calclab.suco.client.provider.Provider;
 import com.calclab.suco.client.signal.Slot;
 import com.calclab.suco.client.signal.Slot0;
-import com.calclab.suco.client.signal.Slot2;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class ContextNavigatorPresenter implements ContextNavigator {
@@ -65,21 +65,26 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     private final HashMap<String, String> contentTypesIcons;
     private final EntityTitle entityTitle;
     private final Provider<ActionManager> actionManagerProvider;
+    private boolean editOnNextStateChange;
+    private final ContextNavigatorToolbar toolbar;
 
     public ContextNavigatorPresenter(final StateManager stateManager, final Session session,
 	    final Provider<ContentServiceAsync> contentServiceProvider, final I18nUITranslationService i18n,
-	    final EntityTitle entityTitle, final Provider<ActionManager> actionManagerProvider) {
+	    final EntityTitle entityTitle, final Provider<ActionManager> actionManagerProvider,
+	    final ContextNavigatorToolbar contextNavigatorToolbar) {
 	this.stateManager = stateManager;
 	this.session = session;
 	this.contentServiceProvider = contentServiceProvider;
 	this.i18n = i18n;
 	this.entityTitle = entityTitle;
 	this.actionManagerProvider = actionManagerProvider;
+	this.toolbar = contextNavigatorToolbar;
 	actions = new HashMap<String, ActionCollection<StateToken>>();
 	actionsByItem = new HashMap<StateToken, ActionCollection<StateToken>>();
 	draggables = new ArrayList<String>();
 	droppables = new ArrayList<String>();
 	contentTypesIcons = new HashMap<String, String>();
+	editOnNextStateChange = false;
     }
 
     public void addAction(final String contentTypeId, final ActionDescriptor<StateToken> action) {
@@ -113,20 +118,6 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 
     public void init(final ContextNavigatorView view) {
 	this.view = view;
-	stateManager.onGroupChanged(new Slot2<String, String>() {
-	    public void onEvent(final String oldGroup, final String newGroup) {
-		if (oldGroup != null) {
-		    clear();
-		}
-	    }
-	});
-	stateManager.onToolChanged(new Slot2<String, String>() {
-	    public void onEvent(final String oldTool, final String newTool) {
-		if (oldTool != null) {
-		    clear();
-		}
-	    }
-	});
 	session.onUserSignIn(new Slot<UserInfoDTO>() {
 	    public void onEvent(final UserInfoDTO parameter) {
 		clear();
@@ -139,26 +130,40 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	});
     }
 
+    public boolean isSelected(final StateToken stateToken) {
+	return view.isSelected(genId(stateToken));
+    }
+
+    public boolean mustEditOnNextStateChange() {
+	return editOnNextStateChange;
+    }
+
     public void onItemRename(final String token, final String newName, final String oldName) {
 	if (!newName.equals(oldName)) {
 	    Site.showProgress(i18n.t("Renaming"));
-	    final StateDTO currentState = session.getCurrentState();
-	    contentServiceProvider.get().rename(session.getUserHash(), currentState.getGroup().getShortName(), token,
-		    newName, new AsyncCallback<String>() {
-			public void onFailure(final Throwable caught) {
-			    setItemText(new StateToken(token), oldName);
-			    Site.error(i18n.t("Error renaming"));
-			    Site.hideProgress();
-			}
+	    final StateToken stateToken = new StateToken(token);
+	    final AsyncCallback<String> asyncCallback = new AsyncCallback<String>() {
+		public void onFailure(final Throwable caught) {
+		    view.setFireOnTextChange(false);
+		    setItemText(stateToken, oldName);
+		    view.setFireOnTextChange(true);
+		    Site.error(i18n.t("Error renaming"));
+		    Site.hideProgress();
+		}
 
-			public void onSuccess(final String result) {
-			    Site.hideProgress();
-			    if (session.getCurrentState().getStateToken().getEncoded().equals(token)) {
-				// I have to update EntityTitle
-				entityTitle.setContentTitle(newName);
-			    }
-			}
-		    });
+		public void onSuccess(final String result) {
+		    Site.hideProgress();
+		    if (session.getCurrentState().getStateToken().getEncoded().equals(token)) {
+			// I have to update EntityTitle
+			entityTitle.setContentTitle(newName);
+		    }
+		}
+	    };
+	    if (stateToken.isComplete()) {
+		contentServiceProvider.get().renameContent(session.getUserHash(), stateToken, newName, asyncCallback);
+	    } else {
+		contentServiceProvider.get().renameContainer(session.getUserHash(), stateToken, newName, asyncCallback);
+	    }
 	}
     }
 
@@ -180,9 +185,13 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 
     public void selectItem(final StateToken stateToken) {
 	view.selectItem(genId(stateToken));
-	view.clearRemovableActions();
-	view.disableAllMenuItems();
+	toolbar.clearRemovableActions();
+	toolbar.disableAllMenuItems();
 	setActions(actionsByItem.get(stateToken), true);
+    }
+
+    public void setEditOnNextStateChange(final boolean edit) {
+	editOnNextStateChange = edit;
     }
 
     public void setItemText(final StateToken stateToken, final String name) {
@@ -224,7 +233,13 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	createChildItems(container, containerRights);
 
 	// Finaly
-	selectItem(stateToken);
+	if (mustEditOnNextStateChange()) {
+	    selectItem(stateToken);
+	    editItem(stateToken);
+	    setEditOnNextStateChange(false);
+	} else {
+	    selectItem(stateToken);
+	}
     }
 
     private void addItem(final String title, final String contentTypeId, final ContentStatusDTO status,
@@ -241,9 +256,17 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	actionsByItem.put(stateToken, set.getToolbarActions());
     }
 
+    private boolean checkEnabling(final boolean isNodeSelected, final ActionDescriptor<StateToken> action) {
+	final ActionEnableCondition<StateToken> enableCondition = action.getEnableCondition();
+	final boolean mustBeEnabled = enableCondition != null ? enableCondition.mustBeEnabled(getCurrentStateToken())
+		: true;
+	return isNodeSelected && mustBeEnabled;
+    }
+
     private void clear() {
 	view.clear();
 	actionsByItem.clear();
+	toolbar.clear();
     }
 
     private void createChildItems(final ContainerDTO container, final AccessRightsDTO containerRights) {
@@ -332,10 +355,10 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     private void setActions(final ActionCollection<StateToken> actions, final boolean isNodeSelected) {
 	for (final ActionDescriptor<StateToken> action : actions) {
 	    if (action instanceof ActionMenuDescriptor) {
-		view.addMenuAction((ActionMenuDescriptor<StateToken>) action, isNodeSelected);
+		toolbar.addMenuAction((ActionMenuDescriptor<StateToken>) action, checkEnabling(isNodeSelected, action));
 	    } else {
-		if (isNodeSelected) {
-		    view.addButtonAction((ActionButtonDescriptor<StateToken>) action);
+		if (checkEnabling(isNodeSelected, action)) {
+		    toolbar.addButtonAction((ActionButtonDescriptor<StateToken>) action);
 		}
 	    }
 	}

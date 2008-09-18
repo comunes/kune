@@ -23,7 +23,7 @@ package org.ourproject.kune.platf.server.auth;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import org.ourproject.kune.platf.server.access.AccessType;
+import org.ourproject.kune.platf.server.access.AccessRol;
 
 import com.google.inject.BindingAnnotation;
 
@@ -40,8 +40,13 @@ import com.google.inject.BindingAnnotation;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Authorizated {
 
-    AccessType accessTypeRequired() default AccessType.READ;
+    AccessRol accessRolRequired() default AccessRol.Viewer;
 
-    boolean checkContent() default false;
+    /**
+     * If the action is over a "group", "tool", "container" or over the content.
+     * 
+     * @return
+     */
+    ActionLevel actionLevel() default ActionLevel.content;
 
 }

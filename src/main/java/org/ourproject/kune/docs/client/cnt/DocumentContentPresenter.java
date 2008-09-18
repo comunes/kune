@@ -105,8 +105,7 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
 
     public void onDeleteClicked() {
 	Site.showProgressProcessing();
-	contentServiceProvider.get().delContent(session.getUserHash(),
-		session.getCurrentState().getGroup().getShortName(), content.getDocumentId(),
+	contentServiceProvider.get().delContent(session.getUserHash(), content.getStateToken(),
 		new AsyncCallbackSimple<Object>() {
 		    public void onSuccess(final Object result) {
 			Site.hideProgress();
@@ -154,8 +153,8 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
     public void onSave(final String text) {
 	content.setContent(text);
 	Site.showProgressSaving();
-	contentServiceProvider.get().save(session.getUserHash(), session.getCurrentState().getGroup().getShortName(),
-		content.getDocumentId(), content.getContent(), new AsyncCallback<Integer>() {
+	contentServiceProvider.get().save(session.getUserHash(), content.getStateToken(), content.getContent(),
+		new AsyncCallback<Integer>() {
 		    public void onFailure(final Throwable caught) {
 			Site.hideProgress();
 			try {

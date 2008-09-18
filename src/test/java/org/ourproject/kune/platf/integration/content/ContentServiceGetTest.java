@@ -13,12 +13,10 @@ import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 
 public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 
-    private String groupName;
-
     @Test
     public void contentWithLoggedUserIsEditable() throws Exception {
 	final String userHash = doLogin();
-	final StateDTO response = contentService.getContent(userHash, groupName, new StateToken());
+	final StateDTO response = contentService.getContent(userHash, new StateToken());
 	assertNotNull(response.getContentRights());
 	assertTrue(response.getContentRights().isEditable());
 	// assertTrue(response.getAccessLists().getAdmin().size() == 1);
@@ -27,12 +25,11 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
     @Before
     public void create() {
 	new IntegrationTestHelper(this);
-	groupName = getDefSiteGroupName();
     }
 
     @Test
     public void defaultCountentShouldExist() throws Exception {
-	final StateDTO content = contentService.getContent(null, groupName, new StateToken());
+	final StateDTO content = contentService.getContent(null, new StateToken());
 	assertNotNull(content);
 	assertNotNull(content.getGroup());
 	assertNotNull(content.getContainer());
@@ -45,39 +42,39 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 
     @Test
     public void noContentNotLogged() throws Exception {
-	final StateDTO response = contentService.getContent(null, null, new StateToken());
+	final StateDTO response = contentService.getContent(null, new StateToken());
 	assertNotNull(response);
     }
 
     @Test(expected = ContentNotFoundException.class)
     public void nonExistentContent() throws Exception {
-	contentService.getContent(null, groupName, new StateToken("foo foo foo"));
+	contentService.getContent(null, new StateToken("foo foo foo"));
     }
 
     @Test(expected = ContentNotFoundException.class)
     public void nonExistentContent2() throws Exception {
-	contentService.getContent(null, groupName, new StateToken("site.foofoo"));
+	contentService.getContent(null, new StateToken("site.foofoo"));
     }
 
     @Test(expected = ContentNotFoundException.class)
     public void nonExistentContent3() throws Exception {
-	contentService.getContent(null, groupName, new StateToken("site.docs.foofoo"));
+	contentService.getContent(null, new StateToken("site.docs.foofoo"));
     }
 
     @Test(expected = ContentNotFoundException.class)
     public void nonExistentContent4() throws Exception {
 	final StateDTO stateDTO = getDefaultContent();
-	contentService.getContent(null, groupName, stateDTO.getStateToken().clone().setDocument("dadaas"));
+	contentService.getContent(null, stateDTO.getStateToken().clone().setDocument("dadaas"));
     }
 
     @Test(expected = ContentNotFoundException.class)
     public void nonExistentContent5() throws Exception {
-	contentService.getContent(null, groupName, new StateToken("comm3.docs.19"));
+	contentService.getContent(null, new StateToken("comm3.docs.19"));
     }
 
     @Test
     public void notLoggedUserShouldNotEditDefaultDoc() throws Exception {
-	final StateDTO content = contentService.getContent(null, groupName, new StateToken());
+	final StateDTO content = contentService.getContent(null, new StateToken());
 	assertFalse(content.getContentRights().isAdministrable());
 	assertFalse(content.getContentRights().isEditable());
 	assertTrue(content.getContentRights().isVisible());
@@ -88,7 +85,7 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 
     @Test
     public void unknownContent() throws Exception {
-	final StateDTO content = contentService.getContent(null, groupName, new StateToken("site.docs"));
+	final StateDTO content = contentService.getContent(null, new StateToken("site.docs"));
 	assertNotNull(content);
 	assertNotNull(content.getGroup());
 	assertNotNull(content.getContainer());

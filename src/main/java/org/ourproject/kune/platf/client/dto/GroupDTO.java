@@ -20,7 +20,6 @@
 
 package org.ourproject.kune.platf.client.dto;
 
-
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class GroupDTO implements IsSerializable {
@@ -30,9 +29,7 @@ public class GroupDTO implements IsSerializable {
     private String longName;
     private String publicDesc;
     private GroupType type;
-    private String defaultToolName;
-    private Long defaultFolderId;
-    private Long defaultContentId;
+    private ContentDTO defaultContent;
     private LicenseDTO defaultLicense;
     private String workspaceTheme;
     private String tags;
@@ -56,32 +53,11 @@ public class GroupDTO implements IsSerializable {
 	    return false;
 	}
 	final GroupDTO other = (GroupDTO) obj;
-	if (defaultContentId == null) {
-	    if (other.defaultContentId != null) {
-		return false;
-	    }
-	} else if (!defaultContentId.equals(other.defaultContentId)) {
-	    return false;
-	}
-	if (defaultFolderId == null) {
-	    if (other.defaultFolderId != null) {
-		return false;
-	    }
-	} else if (!defaultFolderId.equals(other.defaultFolderId)) {
-	    return false;
-	}
 	if (defaultLicense == null) {
 	    if (other.defaultLicense != null) {
 		return false;
 	    }
 	} else if (!defaultLicense.equals(other.defaultLicense)) {
-	    return false;
-	}
-	if (defaultToolName == null) {
-	    if (other.defaultToolName != null) {
-		return false;
-	    }
-	} else if (!defaultToolName.equals(other.defaultToolName)) {
 	    return false;
 	}
 	if (id == null) {
@@ -118,20 +94,12 @@ public class GroupDTO implements IsSerializable {
 	return true;
     }
 
-    public Long getDefaultContentId() {
-	return defaultContentId;
-    }
-
-    public Long getDefaultFolderId() {
-	return defaultFolderId;
+    public ContentDTO getDefaultContent() {
+	return defaultContent;
     }
 
     public LicenseDTO getDefaultLicense() {
 	return defaultLicense;
-    }
-
-    public String getDefaultToolName() {
-	return defaultToolName;
     }
 
     public Long getId() {
@@ -165,10 +133,7 @@ public class GroupDTO implements IsSerializable {
     public int hashCode() {
 	final int prime = 31;
 	int result = 1;
-	result = prime * result + (defaultContentId == null ? 0 : defaultContentId.hashCode());
-	result = prime * result + (defaultFolderId == null ? 0 : defaultFolderId.hashCode());
 	result = prime * result + (defaultLicense == null ? 0 : defaultLicense.hashCode());
-	result = prime * result + (defaultToolName == null ? 0 : defaultToolName.hashCode());
 	result = prime * result + (id == null ? 0 : id.hashCode());
 	result = prime * result + (longName == null ? 0 : longName.hashCode());
 	result = prime * result + (publicDesc == null ? 0 : publicDesc.hashCode());
@@ -177,20 +142,12 @@ public class GroupDTO implements IsSerializable {
 	return result;
     }
 
-    public void setDefaultContentId(final Long defaultContentId) {
-	this.defaultContentId = defaultContentId;
-    }
-
-    public void setDefaultFolderId(final Long defaultFolderId) {
-	this.defaultFolderId = defaultFolderId;
+    public void setDefaultContent(final ContentDTO defaultContent) {
+	this.defaultContent = defaultContent;
     }
 
     public void setDefaultLicense(final LicenseDTO defaultLicense) {
 	this.defaultLicense = defaultLicense;
-    }
-
-    public void setDefaultToolName(final String defaultToolName) {
-	this.defaultToolName = defaultToolName;
     }
 
     public void setId(final Long id) {

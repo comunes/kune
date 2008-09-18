@@ -76,8 +76,14 @@ class ChatEngineXmpp implements ChatEngine {
 	};
 	final String initialWindowTitle = Window.getTitle();
 	chatOptions.userOptions = userChatOptions;
-	emiteDialog.start(userChatOptions, chatOptions.httpBase, chatOptions.roomHost, initialWindowTitle,
-		avatarProvider, i18n.t("Chat"));
+	if (emiteDialog.isDialogNotStarted()) {
+	    emiteDialog.start(userChatOptions, chatOptions.httpBase, chatOptions.roomHost, initialWindowTitle,
+		    avatarProvider, i18n.t("Chat"));
+	} else {
+	    emiteDialog.setEnableStatusUI(true);
+	    emiteDialog.refreshUserInfo(chatOptions.userOptions);
+
+	}
 	emiteDialog.show(OwnStatus.online);
 	if (traybarButton == null) {
 	    traybarButton = new ToolbarButton();
@@ -106,7 +112,6 @@ class ChatEngineXmpp implements ChatEngine {
 		}
 	    });
 	}
-	emiteDialog.setEnableStatusUI(true);
 	emiteDialog.hide();
 	emiteDialog.onChatAttended(new Slot<String>() {
 	    public void onEvent(final String parameter) {

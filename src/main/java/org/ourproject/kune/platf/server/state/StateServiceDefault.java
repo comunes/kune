@@ -33,7 +33,7 @@ public class StateServiceDefault implements StateService {
 
     public State create(final Access access) {
 	final Content content = access.getContent();
-	final Container container = content.getContainer();
+	final Container container = access.getContainer();
 	final State state = new State();
 
 	final Long documentId = content.getId();
@@ -72,7 +72,7 @@ public class StateServiceDefault implements StateService {
 	state.setContainer(container);
 	state.setAccessLists(access.getContentAccessLists());
 	state.setContentRights(access.getContentRights());
-	state.setContainerRights(access.getFolderRights());
+	state.setContainerRights(access.getContainerRights());
 	state.setGroupRights(access.getGroupRights());
 	License contentLicense = content.getLicense();
 	if (contentLicense == null) {

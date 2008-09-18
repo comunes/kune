@@ -90,21 +90,24 @@ public class EntityTitlePresenter implements EntityTitle {
 
     protected void onTitleRename(final String newName) {
 	Site.showProgressSaving();
-	final StateDTO currentState = session.getCurrentState();
-	final StateToken stateToken = currentState.getStateToken();
-	contentServiceProvider.get().rename(session.getUserHash(), currentState.getGroup().getShortName(),
-		stateToken.getEncoded(), newName, new AsyncCallback<String>() {
-		    public void onFailure(final Throwable caught) {
-			view.restoreOldTitle();
-			errorHandler.process(caught);
-		    }
+	final StateToken stateToken = session.getCurrentState().getStateToken();
+	final AsyncCallback<String> asyncCallback = new AsyncCallback<String>() {
+	    public void onFailure(final Throwable caught) {
+		view.restoreOldTitle();
+		errorHandler.process(caught);
+	    }
 
-		    public void onSuccess(final String result) {
-			Site.hideProgress();
-			view.setContentTitle(result);
-			contextNavigatorProvider.get().setItemText(stateToken, newName);
-		    }
-		});
+	    public void onSuccess(final String result) {
+		Site.hideProgress();
+		view.setContentTitle(result);
+		contextNavigatorProvider.get().setItemText(stateToken, newName);
+	    }
+	};
+	if (stateToken.isComplete()) {
+	    contentServiceProvider.get().renameContent(session.getUserHash(), stateToken, newName, asyncCallback);
+	} else {
+	    contentServiceProvider.get().renameContainer(session.getUserHash(), stateToken, newName, asyncCallback);
+	}
 	Site.hideProgress();
     }
 

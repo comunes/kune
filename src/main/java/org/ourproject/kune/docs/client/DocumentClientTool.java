@@ -28,6 +28,7 @@ import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionPosition;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
+import org.ourproject.kune.platf.client.dto.ContentDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
@@ -44,6 +45,7 @@ import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.provider.Provider;
 import com.calclab.suco.client.signal.Slot;
 
@@ -102,23 +104,21 @@ public class DocumentClientTool extends AbstractClientTool {
     private void createActions() {
 	final ActionMenuDescriptor<StateToken> addFolder = createFolderAction(TYPE_FOLDER, "images/nav/folder_add.png",
 		i18n.t("New folder"), i18n.t("File"), i18n.t("New"));
-	final ActionMenuDescriptor<StateToken> addGallery = createFolderAction(TYPE_GALLERY, "images/nav/gallery.png",
-		i18n.t("New gallery"), i18n.t("File"), i18n.t("New"));
+	final ActionMenuDescriptor<StateToken> addGallery = createFolderAction(TYPE_GALLERY,
+		"images/nav/gallery_add.png", i18n.t("New gallery"), i18n.t("File"), i18n.t("New"));
 
 	final ActionMenuDescriptor<StateToken> addDoc = new ActionMenuDescriptor<StateToken>(AccessRolDTO.Editor,
 		ActionPosition.topbarAndItemMenu, new Slot<StateToken>() {
 		    public void onEvent(final StateToken token) {
+			Site.showProgressProcessing();
 			contentServiceProvider.get().addContent(session.getUserHash(),
-				session.getCurrentState().getGroup().getShortName(),
-				session.getCurrentState().getContainer().getId(), i18n.t("New document"),
+				session.getCurrentState().getStateToken(), i18n.t("New document"),
 				new AsyncCallbackSimple<StateDTO>() {
 				    public void onSuccess(final StateDTO state) {
-					contextNavigator.setState(state);
+					contextNavigator.setEditOnNextStateChange(true);
 					stateManager.setRetrievedState(state);
-					contextNavigator.editItem(state.getStateToken());
 				    }
 				});
-
 		    }
 		});
 	addDoc.setTextDescription(i18n.t("New document"));
@@ -141,8 +141,7 @@ public class DocumentClientTool extends AbstractClientTool {
 	final ActionMenuDescriptor<StateToken> delContent = new ActionMenuDescriptor<StateToken>(
 		AccessRolDTO.Administrator, ActionPosition.topbarAndItemMenu, new Slot<StateToken>() {
 		    public void onEvent(final StateToken token) {
-			contentServiceProvider.get().delContent(session.getUserHash(),
-				session.getCurrentState().getGroup().getShortName(), token.getDocument(),
+			contentServiceProvider.get().delContent(session.getUserHash(), token,
 				new AsyncCallbackSimple<String>() {
 				    public void onSuccess(final String result) {
 					final StateToken parent = token.clone().clearDocument();
@@ -165,6 +164,11 @@ public class DocumentClientTool extends AbstractClientTool {
 		});
 	go.setTextDescription(i18n.t("Open"));
 	go.setIconUrl("images/nav/go.png");
+	go.setEnableCondition(new ActionEnableCondition<StateToken>() {
+	    public boolean mustBeEnabled(final StateToken currentStateToken) {
+		return !contextNavigator.isSelected(currentStateToken);
+	    }
+	});
 
 	final ActionDescriptor<StateToken> rename = new ActionDescriptor<StateToken>(AccessRolDTO.Editor,
 		ActionPosition.itemMenu, new Slot<StateToken>() {
@@ -181,22 +185,37 @@ public class DocumentClientTool extends AbstractClientTool {
 		    }
 		});
 	goGroupHome.setIconUrl("images/group-home.png");
-	goGroupHome.setLeftSeparator(ActionButtonSeparator.fill);
-	goGroupHome.setRightSeparator(ActionButtonSeparator.separator);
 	goGroupHome.setEnableCondition(new ActionEnableCondition<StateToken>() {
-	    public boolean mustBeEnabled(final StateToken param) {
-		return !param.equals(session.getCurrentState().getStateToken());
+	    public boolean mustBeEnabled(final StateToken currentStateToken) {
+		final StateToken defContentToken = session.getCurrentState().getGroup().getDefaultContent()
+			.getStateToken();
+		return !currentStateToken.equals(defContentToken);
 	    }
 	});
 
 	final ActionMenuDescriptor<StateToken> setAsDefGroupContent = new ActionMenuDescriptor<StateToken>(
 		AccessRolDTO.Administrator, ActionPosition.itemMenu, new Slot<StateToken>() {
 		    public void onEvent(final StateToken token) {
-			Site.info("In development");
+			Site.showProgressProcessing();
+			contentServiceProvider.get().setAsDefaultContent(session.getUserHash(), token,
+				new AsyncCallbackSimple<ContentDTO>() {
+				    public void onSuccess(ContentDTO defContent) {
+					session.getCurrentState().getGroup().setDefaultContent(defContent);
+					Site.hideProgress();
+					Site.info(i18n.t("Document selected as the group homepage"));
+				    }
+				});
 		    }
 		});
 	setAsDefGroupContent.setTextDescription(i18n.t("Set this as the group default page"));
 	setAsDefGroupContent.setIconUrl("images/group-home.png");
+	setAsDefGroupContent.setEnableCondition(new ActionEnableCondition<StateToken>() {
+	    public boolean mustBeEnabled(final StateToken currentStateToken) {
+		final StateToken defContentToken = session.getCurrentState().getGroup().getDefaultContent()
+			.getStateToken();
+		return !contextNavigator.isSelected(defContentToken);
+	    }
+	});
 
 	final ActionButtonDescriptor<StateToken> refresh = new ActionButtonDescriptor<StateToken>(AccessRolDTO.Viewer,
 		ActionPosition.topbar, new Slot<StateToken>() {
@@ -207,6 +226,7 @@ public class DocumentClientTool extends AbstractClientTool {
 		});
 	refresh.setIconUrl("images/nav/refresh.png");
 	refresh.setToolTip(i18n.t("Refresh"));
+	refresh.setLeftSeparator(ActionButtonSeparator.fill);
 
 	final ActionDescriptor<StateToken> uploadFile = createUploadAction(i18n.t("Upload file"),
 		"images/nav/upload.png", i18n.t("Upload some files (images, PDFs, ...)"), null);
@@ -220,7 +240,7 @@ public class DocumentClientTool extends AbstractClientTool {
 	    }
 	});
 
-	// contextNavigator.addAction(TYPE_FOLDER, go);
+	contextNavigator.addAction(TYPE_FOLDER, go);
 	contextNavigator.addAction(TYPE_FOLDER, addDoc);
 	contextNavigator.addAction(TYPE_FOLDER, addFolder);
 	contextNavigator.addAction(TYPE_FOLDER, delContainer);
@@ -229,10 +249,14 @@ public class DocumentClientTool extends AbstractClientTool {
 	contextNavigator.addAction(TYPE_FOLDER, refresh);
 	contextNavigator.addAction(TYPE_FOLDER, uploadFile);
 
+	contextNavigator.addAction(TYPE_BLOG, go);
 	contextNavigator.addAction(TYPE_BLOG, uploadFile);
 	contextNavigator.addAction(TYPE_BLOG, setAsDefGroupContent);
+	contextNavigator.addAction(TYPE_BLOG, refresh);
 
+	contextNavigator.addAction(TYPE_GALLERY, go);
 	contextNavigator.addAction(TYPE_GALLERY, goGroupHome);
+	contextNavigator.addAction(TYPE_GALLERY, refresh);
 
 	contextNavigator.addAction(TYPE_ROOT, addDoc);
 	contextNavigator.addAction(TYPE_ROOT, addFolder);
@@ -241,7 +265,7 @@ public class DocumentClientTool extends AbstractClientTool {
 	contextNavigator.addAction(TYPE_ROOT, refresh);
 	contextNavigator.addAction(TYPE_ROOT, uploadFile);
 
-	// contextNavigator.addAction(TYPE_DOCUMENT, go);
+	contextNavigator.addAction(TYPE_DOCUMENT, go);
 	contextNavigator.addAction(TYPE_DOCUMENT, delContent);
 	contextNavigator.addAction(TYPE_DOCUMENT, rename);
 	contextNavigator.addAction(TYPE_DOCUMENT, goGroupHome);
@@ -254,14 +278,14 @@ public class DocumentClientTool extends AbstractClientTool {
 	final ActionMenuDescriptor<StateToken> addFolder;
 	addFolder = new ActionMenuDescriptor<StateToken>(AccessRolDTO.Editor, ActionPosition.topbarAndItemMenu,
 		new Slot<StateToken>() {
-		    public void onEvent(final StateToken parameter) {
-			contentServiceProvider.get().addFolder(session.getUserHash(),
-				session.getCurrentState().getGroup().getShortName(), new Long(parameter.getFolder()),
-				textDescription, contentTypeId, new AsyncCallbackSimple<StateDTO>() {
+		    public void onEvent(final StateToken stateToken) {
+			Site.showProgressProcessing();
+			contentServiceProvider.get().addFolder(session.getUserHash(), stateToken, textDescription,
+				contentTypeId, new AsyncCallbackSimple<StateDTO>() {
+
 				    public void onSuccess(final StateDTO state) {
-					contextNavigator.setState(state);
+					contextNavigator.setEditOnNextStateChange(true);
 					stateManager.setRetrievedState(state);
-					contextNavigator.editItem(state.getStateToken());
 				    }
 				});
 		    }
@@ -279,7 +303,10 @@ public class DocumentClientTool extends AbstractClientTool {
 	uploadFile = new ActionButtonDescriptor<StateToken>(AccessRolDTO.Editor, ActionPosition.bootombarAndItemMenu,
 		new Slot<StateToken>() {
 		    public void onEvent(final StateToken token) {
-			fileUploaderProvider.get().setPermittedExtensions(permitedExtensions);
+			if (permitedExtensions != null) {
+			    Log.info("Permited extensions (in dev): " + permitedExtensions);
+			    fileUploaderProvider.get().setPermittedExtensions(permitedExtensions);
+			}
 			fileUploaderProvider.get().show();
 		    }
 		});

@@ -41,8 +41,6 @@ import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.auth.AuthenticatedMethodInterceptor;
 import org.ourproject.kune.platf.server.auth.Authorizated;
 import org.ourproject.kune.platf.server.auth.AuthorizatedMethodInterceptor;
-import org.ourproject.kune.platf.server.auth.GroupAuthorizated;
-import org.ourproject.kune.platf.server.auth.GroupAuthorizatedMethodInterceptor;
 import org.ourproject.kune.platf.server.auth.SessionService;
 import org.ourproject.kune.platf.server.auth.SessionServiceDefault;
 import org.ourproject.kune.platf.server.content.CommentManager;
@@ -116,8 +114,6 @@ public class PlatformServerModule extends AbstractExtendedModule {
 		outermostCall(new AuthenticatedMethodInterceptor()));
 	bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authorizated.class),
 		outermostCall(new AuthorizatedMethodInterceptor()));
-	bindInterceptor(Matchers.any(), Matchers.annotatedWith(GroupAuthorizated.class),
-		outermostCall(new GroupAuthorizatedMethodInterceptor()));
     }
 
     private void bindManagers() {

@@ -10,7 +10,6 @@ import org.ourproject.kune.platf.server.TestDomainHelper;
 
 public class ContentServiceSaveTest extends ContentServiceIntegrationTest {
 
-    private String groupName;
     private StateDTO defaultContent;
 
     @Before
@@ -18,7 +17,6 @@ public class ContentServiceSaveTest extends ContentServiceIntegrationTest {
 	new IntegrationTestHelper(this);
 
 	defaultContent = getDefaultContent();
-	groupName = defaultContent.getGroup().getShortName();
 	doLogin();
     }
 
@@ -26,9 +24,9 @@ public class ContentServiceSaveTest extends ContentServiceIntegrationTest {
     public void testSaveAndRetrieve() throws Exception {
 	final String text = "Lorem ipsum dolor sit amet";
 	final int version = defaultContent.getVersion();
-	final int currentVersion = contentService.save(getHash(), groupName, defaultContent.getDocumentId(), text);
+	final int currentVersion = contentService.save(getHash(), defaultContent.getStateToken(), text);
 	assertEquals(version + 2, currentVersion);
-	final StateDTO again = contentService.getContent(getHash(), groupName, defaultContent.getStateToken());
+	final StateDTO again = contentService.getContent(getHash(), defaultContent.getStateToken());
 	assertEquals(text, again.getContent());
 	assertEquals(0, (int) again.getRateByUsers());
 	assertEquals(new Double(0), again.getRate());
@@ -39,9 +37,9 @@ public class ContentServiceSaveTest extends ContentServiceIntegrationTest {
 	final String text = TestDomainHelper.createBigText();
 	;
 	final int version = defaultContent.getVersion();
-	final int currentVersion = contentService.save(getHash(), groupName, defaultContent.getDocumentId(), text);
+	final int currentVersion = contentService.save(getHash(), defaultContent.getStateToken(), text);
 	assertEquals(version + 2, currentVersion);
-	final StateDTO again = contentService.getContent(getHash(), groupName, defaultContent.getStateToken());
+	final StateDTO again = contentService.getContent(getHash(), defaultContent.getStateToken());
 	assertEquals(text, again.getContent());
     }
 

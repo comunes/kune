@@ -28,7 +28,7 @@ import com.google.gwt.user.client.rpc.RemoteService;
 
 public interface GroupService extends RemoteService {
 
-    void changeGroupWsTheme(String userHash, String groupShortName, String theme) throws DefaultException;
+    void changeGroupWsTheme(String userHash, StateToken groupToken, String theme) throws DefaultException;
 
     StateToken createNewGroup(String userHash, GroupDTO group) throws DefaultException;
 

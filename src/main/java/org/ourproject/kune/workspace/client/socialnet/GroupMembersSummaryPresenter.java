@@ -88,9 +88,8 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
 
     public void addCollab(final String groupShortName) {
 	Site.showProgressProcessing();
-	snServiceProvider.get().addCollabMember(session.getUserHash(),
-		session.getCurrentState().getGroup().getShortName(), groupShortName,
-		new AsyncCallbackSimple<SocialNetworkResultDTO>() {
+	snServiceProvider.get().addCollabMember(session.getUserHash(), session.getCurrentState().getStateToken(),
+		groupShortName, new AsyncCallbackSimple<SocialNetworkResultDTO>() {
 		    public void onSuccess(final SocialNetworkResultDTO result) {
 			Site.hideProgress();
 			Site.info(i18n.t("Member added as collaborator"));

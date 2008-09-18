@@ -23,12 +23,14 @@ import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
 import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.server.UserSession;
-import org.ourproject.kune.platf.server.access.AccessType;
+import org.ourproject.kune.platf.server.access.AccessRol;
+import org.ourproject.kune.platf.server.auth.ActionLevel;
 import org.ourproject.kune.platf.server.auth.Authenticated;
-import org.ourproject.kune.platf.server.auth.GroupAuthorizated;
+import org.ourproject.kune.platf.server.auth.Authorizated;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
@@ -59,78 +61,78 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     }
 
     @Authenticated
-    @GroupAuthorizated(accessTypeRequired = AccessType.ADMIN)
+    @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
-    public SocialNetworkResultDTO AcceptJoinGroup(final String hash, final String groupShortName,
+    public SocialNetworkResultDTO AcceptJoinGroup(final String hash, final StateToken groupToken,
 	    final String groupToAcceptShortName) throws DefaultException {
 	final UserSession userSession = getUserSession();
 	final User userLogged = userSession.getUser();
-	final Group group = groupManager.findByShortName(groupShortName);
+	final Group group = groupManager.findByShortName(groupToken.getGroup());
 	final Group groupToAccept = groupManager.findByShortName(groupToAcceptShortName);
 	socialNetworkManager.acceptJoinGroup(userLogged, groupToAccept, group);
 	return new SocialNetworkResultDTO(getGroupMembers(userLogged, group), getParticipation(userLogged, group));
     }
 
     @Authenticated
-    @GroupAuthorizated(accessTypeRequired = AccessType.ADMIN)
+    @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
-    public SocialNetworkResultDTO addAdminMember(final String hash, final String groupShortName,
+    public SocialNetworkResultDTO addAdminMember(final String hash, final StateToken groupToken,
 	    final String groupToAddShortName) throws DefaultException {
 	final UserSession userSession = getUserSession();
 	final User userLogged = userSession.getUser();
-	final Group group = groupManager.findByShortName(groupShortName);
+	final Group group = groupManager.findByShortName(groupToken.getGroup());
 	final Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
 	socialNetworkManager.addGroupToAdmins(userLogged, groupToAdd, group);
 	return new SocialNetworkResultDTO(getGroupMembers(userLogged, group), getParticipation(userLogged, group));
     }
 
     @Authenticated
-    @GroupAuthorizated(accessTypeRequired = AccessType.ADMIN)
+    @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
-    public SocialNetworkResultDTO addCollabMember(final String hash, final String groupShortName,
+    public SocialNetworkResultDTO addCollabMember(final String hash, final StateToken groupToken,
 	    final String groupToAddShortName) throws DefaultException {
 	final UserSession userSession = getUserSession();
 	final User userLogged = userSession.getUser();
-	final Group group = groupManager.findByShortName(groupShortName);
+	final Group group = groupManager.findByShortName(groupToken.getGroup());
 	final Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
 	socialNetworkManager.addGroupToCollabs(userLogged, groupToAdd, group);
 	return new SocialNetworkResultDTO(getGroupMembers(userLogged, group), getParticipation(userLogged, group));
     }
 
     @Authenticated
-    @GroupAuthorizated(accessTypeRequired = AccessType.ADMIN)
+    @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
-    public SocialNetworkResultDTO addViewerMember(final String hash, final String groupShortName,
+    public SocialNetworkResultDTO addViewerMember(final String hash, final StateToken groupToken,
 	    final String groupToAddShortName) throws DefaultException {
 	final UserSession userSession = getUserSession();
 	final User userLogged = userSession.getUser();
-	final Group group = groupManager.findByShortName(groupShortName);
+	final Group group = groupManager.findByShortName(groupToken.getGroup());
 	final Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
 	socialNetworkManager.addGroupToViewers(userLogged, groupToAdd, group);
 	return new SocialNetworkResultDTO(getGroupMembers(userLogged, group), getParticipation(userLogged, group));
     }
 
     @Authenticated
-    @GroupAuthorizated(accessTypeRequired = AccessType.ADMIN)
+    @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
-    public SocialNetworkResultDTO deleteMember(final String hash, final String groupShortName,
+    public SocialNetworkResultDTO deleteMember(final String hash, final StateToken groupToken,
 	    final String groupToDeleleShortName) throws DefaultException {
 	final UserSession userSession = getUserSession();
 	final User userLogged = userSession.getUser();
-	final Group group = groupManager.findByShortName(groupShortName);
+	final Group group = groupManager.findByShortName(groupToken.getGroup());
 	final Group groupToDelete = groupManager.findByShortName(groupToDeleleShortName);
 	socialNetworkManager.deleteMember(userLogged, groupToDelete, group);
 	return new SocialNetworkResultDTO(getGroupMembers(userLogged, group), getParticipation(userLogged, group));
     }
 
     @Authenticated
-    @GroupAuthorizated(accessTypeRequired = AccessType.ADMIN)
+    @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
-    public SocialNetworkResultDTO denyJoinGroup(final String hash, final String groupShortName,
+    public SocialNetworkResultDTO denyJoinGroup(final String hash, final StateToken groupToken,
 	    final String groupToDenyShortName) throws DefaultException {
 	final UserSession userSession = getUserSession();
 	final User userLogged = userSession.getUser();
-	final Group group = groupManager.findByShortName(groupShortName);
+	final Group group = groupManager.findByShortName(groupToken.getGroup());
 	final Group groupToDenyJoin = groupManager.findByShortName(groupToDenyShortName);
 	socialNetworkManager.denyJoinGroup(userLogged, groupToDenyJoin, group);
 	return new SocialNetworkResultDTO(getGroupMembers(userLogged, group), getParticipation(userLogged, group));
@@ -138,58 +140,58 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
 
     @Authenticated(mandatory = false)
     // At least you can access as Viewer to the Group
-    @GroupAuthorizated(accessTypeRequired = AccessType.READ)
+    @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Viewer)
     @Transactional(type = TransactionType.READ_ONLY)
-    public SocialNetworkDTO getGroupMembers(final String hash, final String groupShortName) throws DefaultException {
+    public SocialNetworkDTO getGroupMembers(final String hash, final StateToken groupToken) throws DefaultException {
 	final UserSession userSession = getUserSession();
 	final User user = userSession.getUser();
-	final Group group = groupManager.findByShortName(groupShortName);
+	final Group group = groupManager.findByShortName(groupToken.getGroup());
 	return getGroupMembers(user, group);
     }
 
     @Authenticated(mandatory = false)
     // At least you can access as Viewer to the Group
-    @GroupAuthorizated(accessTypeRequired = AccessType.READ)
+    @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Viewer)
     @Transactional(type = TransactionType.READ_ONLY)
-    public ParticipationDataDTO getParticipation(final String hash, final String groupShortName)
+    public ParticipationDataDTO getParticipation(final String hash, final StateToken groupToken)
 	    throws DefaultException {
 	final UserSession userSession = getUserSession();
 	final User user = userSession.getUser();
-	final Group group = groupManager.findByShortName(groupShortName);
+	final Group group = groupManager.findByShortName(groupToken.getGroup());
 	return getParticipation(user, group);
     }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
-    public SocialNetworkRequestResult requestJoinGroup(final String hash, final String groupShortName)
+    public SocialNetworkRequestResult requestJoinGroup(final String hash, final StateToken groupToken)
 	    throws DefaultException {
 	final UserSession userSession = getUserSession();
 	final User user = userSession.getUser();
-	final Group group = groupManager.findByShortName(groupShortName);
+	final Group group = groupManager.findByShortName(groupToken.getGroup());
 	return socialNetworkManager.requestToJoin(user, group);
     }
 
     @Authenticated
-    @GroupAuthorizated(accessTypeRequired = AccessType.ADMIN)
+    @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
-    public SocialNetworkResultDTO setAdminAsCollab(final String hash, final String groupShortName,
+    public SocialNetworkResultDTO setAdminAsCollab(final String hash, final StateToken groupToken,
 	    final String groupToSetCollabShortName) throws DefaultException {
 	final UserSession userSession = getUserSession();
 	final User userLogged = userSession.getUser();
-	final Group group = groupManager.findByShortName(groupShortName);
+	final Group group = groupManager.findByShortName(groupToken.getGroup());
 	final Group groupToSetCollab = groupManager.findByShortName(groupToSetCollabShortName);
 	socialNetworkManager.setAdminAsCollab(userLogged, groupToSetCollab, group);
 	return new SocialNetworkResultDTO(getGroupMembers(userLogged, group), getParticipation(userLogged, group));
     }
 
     @Authenticated
-    @GroupAuthorizated(accessTypeRequired = AccessType.ADMIN)
+    @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
-    public SocialNetworkResultDTO setCollabAsAdmin(final String hash, final String groupShortName,
+    public SocialNetworkResultDTO setCollabAsAdmin(final String hash, final StateToken groupToken,
 	    final String groupToSetAdminShortName) throws DefaultException {
 	final UserSession userSession = getUserSession();
 	final User userLogged = userSession.getUser();
-	final Group group = groupManager.findByShortName(groupShortName);
+	final Group group = groupManager.findByShortName(groupToken.getGroup());
 	final Group groupToSetAdmin = groupManager.findByShortName(groupToSetAdminShortName);
 	socialNetworkManager.setCollabAsAdmin(userLogged, groupToSetAdmin, group);
 	return new SocialNetworkResultDTO(getGroupMembers(userLogged, group), getParticipation(userLogged, group));
@@ -197,10 +199,10 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
-    public SocialNetworkResultDTO unJoinGroup(final String hash, final String groupShortName) throws DefaultException {
+    public SocialNetworkResultDTO unJoinGroup(final String hash, final StateToken groupToken) throws DefaultException {
 	final UserSession userSession = getUserSession();
 	final User userLogged = userSession.getUser();
-	final Group group = groupManager.findByShortName(groupShortName);
+	final Group group = groupManager.findByShortName(groupToken.getGroup());
 	socialNetworkManager.unJoinGroup(userLogged.getUserGroup(), group);
 	return new SocialNetworkResultDTO(getGroupMembers(userLogged, group), getParticipation(userLogged, group));
     }

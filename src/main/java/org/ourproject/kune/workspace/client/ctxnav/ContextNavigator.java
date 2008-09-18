@@ -33,6 +33,8 @@ public interface ContextNavigator {
 
     View getView();
 
+    boolean isSelected(StateToken stateToken);
+
     void registerContentTypeIcon(String contentTypeId, String iconUrl);
 
     void registerDraggableType(String typeId);
@@ -42,6 +44,8 @@ public interface ContextNavigator {
     void removeAction(String contentTypeId, ActionDescriptor<StateToken> action);
 
     void selectItem(StateToken stateToken);
+
+    void setEditOnNextStateChange(boolean edit);
 
     void setItemText(StateToken stateToken, String name);
 

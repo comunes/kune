@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AlreadyUserMemberException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
@@ -21,35 +22,35 @@ public class SocialNetworkServiceTest extends IntegrationTest {
     @Inject
     SocialNetworkService socialNetworkService;
 
-    private String groupShortName;
+    private StateToken groupToken;
 
     @Before
     public void init() {
 	new IntegrationTestHelper(this);
-	groupShortName = getDefSiteGroupName();
+	groupToken = new StateToken(getDefSiteGroupName());
     }
 
     @Test
     public void testGetGroupMembersNotLogged() throws Exception {
-	final SocialNetworkDTO groupMembers = socialNetworkService.getGroupMembers(null, groupShortName);
+	final SocialNetworkDTO groupMembers = socialNetworkService.getGroupMembers(null, groupToken);
 	assertNotNull(groupMembers);
     }
 
     @Test
     public void testGetParticipationNotLogged() throws Exception {
-	final ParticipationDataDTO participation = socialNetworkService.getParticipation(null, groupShortName);
+	final ParticipationDataDTO participation = socialNetworkService.getParticipation(null, groupToken);
 	assertNotNull(participation);
     }
 
     @Test(expected = UserMustBeLoggedException.class)
     public void testRequestJoinNoLogged() throws Exception {
-	socialNetworkService.requestJoinGroup(session.getHash(), groupShortName);
+	socialNetworkService.requestJoinGroup(session.getHash(), groupToken);
     }
 
     @Test(expected = AlreadyUserMemberException.class)
     public void testRequestJoinPersonalGroup() throws Exception {
 	doLogin();
-	socialNetworkService.requestJoinGroup(session.getHash(), groupShortName);
+	socialNetworkService.requestJoinGroup(session.getHash(), groupToken);
     }
 
 }

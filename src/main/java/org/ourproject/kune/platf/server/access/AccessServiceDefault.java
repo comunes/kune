@@ -49,38 +49,35 @@ public class AccessServiceDefault implements AccessService {
 	this.groupFinder = groupFinder;
     }
 
-    public Content accessToContent(final Long contentId, final User user, final AccessType accessType)
+    public Container accessToContainer(final Long folderId, final User user, final AccessRol accessRol)
+	    throws DefaultException {
+	final Container folder = finder.getFolder(folderId);
+	final Access access = new Access(null, folder);
+	addFolderRights(access, user);
+	addGroupRights(access, user);
+	return check(access, access.getContainerRights(), accessRol).getContainer();
+    }
+
+    public Content accessToContent(final Long contentId, final User user, final AccessRol accessRol)
 	    throws DefaultException {
 	final Content descriptor = finder.getContent(contentId);
 	final Access access = new Access(descriptor, null);
 	addContentRights(access, user);
-	return check(access, access.getContentRights(), accessType).getContent();
+	return check(access, access.getContentRights(), accessRol).getContent();
     }
 
-    public Access getAccess(final User user, final StateToken token, final Group defaultGroup,
-	    final AccessType accessType) throws DefaultException {
+    public Access getAccess(final User user, final StateToken token, final Group defaultGroup, final AccessRol accessRol)
+	    throws DefaultException {
 	checkGroupExistence(token);
 	final Content descriptor = finder.getContent(token, defaultGroup);
 	final Access access = new Access(descriptor, descriptor.getContainer());
 	addContentRights(access, user);
 	addFolderRights(access, user);
 	addGroupRights(access, user);
-	if (!isValid(accessType, access.getContentRights()) || !isValid(accessType, access.getFolderRights())) {
+	if (!isValid(accessRol, access.getContentRights()) || !isValid(accessRol, access.getContainerRights())) {
 	    throw new AccessViolationException();
 	}
 	return access;
-    }
-
-    public Access getFolderAccess(final Group group, final Long folderId, final User user, final AccessType accessType)
-	    throws DefaultException {
-	final Container folder = finder.getFolder(folderId);
-	if (!folder.getOwner().equals(group)) {
-	    throw new AccessViolationException();
-	}
-	final Access access = new Access(null, folder);
-	addFolderRights(access, user);
-	addGroupRights(access, user);
-	return check(access, access.getFolderRights(), accessType);
     }
 
     private void addContentRights(final Access access, final User user) {
@@ -90,8 +87,8 @@ public class AccessServiceDefault implements AccessService {
     }
 
     private void addFolderRights(final Access access, final User user) {
-	if (!access.hasFolderRights()) {
-	    access.setFolderRights(accessRightsService.get(user, access.getFolderAccessLists()));
+	if (!access.hasContainerRights()) {
+	    access.setContainerRights(accessRightsService.get(user, access.getContainerAccessLists()));
 	}
     }
 
@@ -101,9 +98,9 @@ public class AccessServiceDefault implements AccessService {
 	}
     }
 
-    private Access check(final Access access, final AccessRights rights, final AccessType accessType)
+    private Access check(final Access access, final AccessRights rights, final AccessRol accessRol)
 	    throws AccessViolationException {
-	if (!isValid(accessType, rights)) {
+	if (!isValid(accessRol, rights)) {
 	    throw new AccessViolationException();
 	}
 	return access;
@@ -120,13 +117,13 @@ public class AccessServiceDefault implements AccessService {
 	}
     }
 
-    private boolean isValid(final AccessType accessType, final AccessRights rights) {
-	switch (accessType) {
-	case READ:
+    private boolean isValid(final AccessRol accessRol, final AccessRights rights) {
+	switch (accessRol) {
+	case Viewer:
 	    return rights.isVisible();
-	case EDIT:
+	case Editor:
 	    return rights.isEditable();
-	case ADMIN:
+	case Administrator:
 	    return rights.isAdministrable();
 	default:
 	    return false;

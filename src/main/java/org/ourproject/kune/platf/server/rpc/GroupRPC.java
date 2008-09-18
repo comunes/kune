@@ -27,9 +27,10 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.client.rpc.GroupService;
 import org.ourproject.kune.platf.server.UserSession;
-import org.ourproject.kune.platf.server.access.AccessType;
+import org.ourproject.kune.platf.server.access.AccessRol;
+import org.ourproject.kune.platf.server.auth.ActionLevel;
 import org.ourproject.kune.platf.server.auth.Authenticated;
-import org.ourproject.kune.platf.server.auth.GroupAuthorizated;
+import org.ourproject.kune.platf.server.auth.Authorizated;
 import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
@@ -60,13 +61,13 @@ public class GroupRPC implements RPC, GroupService {
     }
 
     @Authenticated
-    @GroupAuthorizated(accessTypeRequired = AccessType.ADMIN)
+    @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE, rollbackOn = DefaultException.class)
-    public void changeGroupWsTheme(final String userHash, final String groupShortName, final String theme)
+    public void changeGroupWsTheme(final String userHash, final StateToken groupToken, final String theme)
 	    throws DefaultException {
 	final UserSession userSession = getUserSession();
 	final User user = userSession.getUser();
-	final Group group = groupManager.findByShortName(groupShortName);
+	final Group group = groupManager.findByShortName(groupToken.getGroup());
 	groupManager.changeWsTheme(user, group, theme);
     }
 

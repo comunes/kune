@@ -49,7 +49,7 @@ public class ContentProviderDefault implements ContentProvider {
 	if (catched != null) {
 	    callback.onSuccess(catched);
 	} else {
-	    server.getContent(user, newState.getGroup(), newState, callback);
+	    server.getContent(user, newState, callback);
 	}
     }
 

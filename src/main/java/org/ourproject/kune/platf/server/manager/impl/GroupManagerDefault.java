@@ -37,6 +37,7 @@ import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
+import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.GroupListMode;
 import org.ourproject.kune.platf.server.domain.License;
@@ -168,6 +169,11 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 	    throw new RuntimeException("Error parsing search");
 	}
 	return super.search(query, firstResult, maxResults);
+    }
+
+    public void setDefaultContent(final String groupShortName, final Content content) {
+	final Group group = findByShortName(groupShortName);
+	group.setDefaultContent(content);
     }
 
     private void initGroup(final User user, final Group group) throws GroupNameInUseException {

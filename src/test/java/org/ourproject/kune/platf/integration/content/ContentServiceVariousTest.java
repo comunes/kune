@@ -1,6 +1,8 @@
 package org.ourproject.kune.platf.integration.content;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -8,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
+import org.ourproject.kune.platf.client.dto.ContentDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.TagResultDTO;
@@ -19,7 +22,6 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
     private StateDTO defaultContent;
     private String groupShortName;
-    private String defDocument;
 
     @Test
     public void addRemoveAuthor() throws Exception {
@@ -27,21 +29,21 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 	assertEquals(1, authors.size());
 	final UserSimpleDTO author = authors.get(0);
 	final String authorShortName = author.getShortName();
-	contentService.removeAuthor(getHash(), groupShortName, defDocument, authorShortName);
+	contentService.removeAuthor(getHash(), defaultContent.getStateToken(), authorShortName);
 	final List<UserSimpleDTO> authors2 = getDefaultContent().getAuthors();
 	assertEquals(0, authors2.size());
-	contentService.addAuthor(getHash(), groupShortName, defDocument, authorShortName);
+	contentService.addAuthor(getHash(), defaultContent.getStateToken(), authorShortName);
 	final List<UserSimpleDTO> authors3 = getDefaultContent().getAuthors();
 	assertEquals(1, authors3.size());
-	contentService.addAuthor(getHash(), groupShortName, defDocument, authorShortName);
+	contentService.addAuthor(getHash(), defaultContent.getStateToken(), authorShortName);
 	final List<UserSimpleDTO> authors4 = getDefaultContent().getAuthors();
 	assertEquals(1, authors4.size());
     }
 
     @Test
     public void contentRateAndRetrieve() throws Exception {
-	contentService.rateContent(getHash(), groupShortName, defDocument, 4.5);
-	final StateDTO again = contentService.getContent(getHash(), groupShortName, defaultContent.getStateToken());
+	contentService.rateContent(getHash(), defaultContent.getStateToken(), 4.5);
+	final StateDTO again = contentService.getContent(getHash(), defaultContent.getStateToken());
 	assertEquals(true, again.isRateable());
 	assertEquals(new Double(4.5), again.getCurrentUserRate());
 	assertEquals(new Double(4.5), again.getRate());
@@ -50,9 +52,8 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
     @Test
     public void contentSetLanguage() throws Exception {
-	contentService.setLanguage(getHash(), groupShortName, defDocument, "es");
-	final StateDTO contentRetrieved = contentService.getContent(getHash(), groupShortName, defaultContent
-		.getStateToken());
+	contentService.setLanguage(getHash(), defaultContent.getStateToken(), "es");
+	final StateDTO contentRetrieved = contentService.getContent(getHash(), defaultContent.getStateToken());
 	assertEquals("es", contentRetrieved.getLanguage().getCode());
     }
 
@@ -60,11 +61,10 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     public void folderRename() throws Exception {
 	doLogin();
 	defaultContent = getDefaultContent();
-	final ContainerDTO folder = defaultContent.getContainer();
 
 	final String oldTitle = "some title";
 	String newTitle = "folder new name";
-	final StateDTO newState = contentService.addFolder(session.getHash(), groupShortName, folder.getId(), oldTitle,
+	final StateDTO newState = contentService.addFolder(session.getHash(), defaultContent.getStateToken(), oldTitle,
 		DocumentClientTool.TYPE_FOLDER);
 
 	final ContainerDTO newFolder = newState.getContainer();
@@ -73,24 +73,23 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
 	final StateToken folderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(),
 		newFolder.getId().toString(), null);
-	String result = contentService.rename(getHash(), groupShortName, folderToken.getEncoded(), newTitle);
+	String result = contentService.renameContainer(getHash(), folderToken, newTitle);
 
 	assertEquals(newTitle, result);
 
 	final StateToken newFolderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(),
 		newFolder.getId().toString(), null);
-	StateDTO folderAgain = contentService.getContent(getHash(), groupShortName, newFolderToken);
+	StateDTO folderAgain = contentService.getContent(getHash(), newFolderToken);
 
 	assertEquals(newTitle, folderAgain.getContainer().getName());
 
 	newTitle = "folder last name";
 
-	result = contentService.rename(getHash(), groupShortName, newFolderToken.getEncoded(), newTitle);
+	result = contentService.renameContainer(getHash(), newFolderToken, newTitle);
 
-	folderAgain = contentService.getContent(getHash(), groupShortName, newFolderToken);
+	folderAgain = contentService.getContent(getHash(), newFolderToken);
 
 	assertEquals(newTitle, folderAgain.getContainer().getName());
-
     }
 
     @Test(expected = AccessViolationException.class)
@@ -98,11 +97,11 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 	doLogin();
 	defaultContent = getDefaultContent();
 	final ContainerDTO folder = defaultContent.getContainer();
-	final StateToken folderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(), folder
+	final StateToken folderToken = new StateToken("otherGroup", defaultContent.getStateToken().getTool(), folder
 		.getId().toString(), null);
 
 	final String newTitle = "folder new name";
-	contentService.rename(getHash(), super.getSiteAdminShortName(), folderToken.getEncoded(), newTitle);
+	contentService.renameContainer(getHash(), folderToken, newTitle);
     }
 
     @Test(expected = RuntimeException.class)
@@ -114,7 +113,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 	final String newTitle = "folder new name";
 	final StateToken folderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(), folder
 		.getId().toString(), null);
-	final String result = contentService.rename(getHash(), groupShortName, folderToken.getEncoded(), newTitle);
+	final String result = contentService.renameContainer(getHash(), folderToken, newTitle);
 
 	assertEquals(newTitle, result);
 
@@ -129,13 +128,12 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 	doLogin();
 	defaultContent = getDefaultContent();
 	groupShortName = defaultContent.getStateToken().getGroup();
-	defDocument = defaultContent.getStateToken().getDocument();
     }
 
     @Test
     public void setTagsAndResults() throws Exception {
-	contentService.setTags(getHash(), groupShortName, defDocument, "bfoo cfoa afoo2");
-	final List<TagResultDTO> summaryTags = contentService.getSummaryTags(getHash(), groupShortName);
+	contentService.setTags(getHash(), defaultContent.getStateToken(), "bfoo cfoa afoo2");
+	final List<TagResultDTO> summaryTags = contentService.getSummaryTags(getHash(), defaultContent.getStateToken());
 	assertEquals(3, summaryTags.size());
 
 	TagResultDTO tagResultDTO = summaryTags.get(0);
@@ -153,9 +151,24 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
     @Test
     public void setTagsAndRetrieve() throws Exception {
-	contentService.setTags(getHash(), groupShortName, defDocument, "foo foa foo");
+	contentService.setTags(getHash(), defaultContent.getStateToken(), "foo foa foo");
 	final String tagsRetrieved = getDefaultContent().getTags();
 	assertEquals("foo foa", tagsRetrieved);
+    }
+
+    @Test
+    public void testSetAsDefContent() throws Exception {
+	doLogin();
+	defaultContent = getDefaultContent();
+
+	final StateDTO added = contentService.addContent(session.getHash(), defaultContent.getStateToken(),
+		"New Content Title");
+	assertNotNull(added);
+
+	final ContentDTO newDefContent = contentService.setAsDefaultContent(session.getHash(), added.getStateToken());
+
+	assertTrue(!defaultContent.getStateToken().equals(newDefContent.getStateToken()));
+	assertTrue(added.getStateToken().equals(newDefContent.getStateToken()));
     }
 
     @Test
@@ -166,23 +179,20 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
 	final String oldTitle = "some title";
 	String newTitle = "folder new name";
-	final StateDTO newState = contentService.addFolder(session.getHash(), groupShortName, folder.getId(), oldTitle,
+	final StateDTO newState = contentService.addFolder(session.getHash(), folder.getStateToken(), oldTitle,
 		DocumentClientTool.TYPE_FOLDER);
 
 	final ContainerDTO newFolder = newState.getContainer();
 
 	assertEquals(oldTitle, newFolder.getName());
 
-	final StateToken newFolderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(),
-		newFolder.getId().toString(), null);
-
 	newTitle = "folder last name";
 
-	final String result = contentService.rename(getHash(), groupShortName, newFolderToken.getEncoded(), newTitle);
+	final String result = contentService.renameContainer(getHash(), newState.getStateToken(), newTitle);
 
 	assertEquals(newTitle, result);
 
-	final StateDTO folderAgain = contentService.getContent(getHash(), groupShortName, newFolderToken);
+	final StateDTO folderAgain = contentService.getContent(getHash(), newState.getStateToken());
 
 	assertEquals(newTitle, folderAgain.getContainer().getName());
     }

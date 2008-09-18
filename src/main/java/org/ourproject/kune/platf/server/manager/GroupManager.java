@@ -26,25 +26,26 @@ import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.EmailAddressInUseException;
 import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
+import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 
 public interface GroupManager extends Manager<Group, Long> {
 
-    Group findByShortName(String groupName);
-
-    List<Group> findAdminInGroups(Long groupId);
-
-    List<Group> findCollabInGroups(Long groupId);
+    void changeWsTheme(User user, Group group, String theme) throws AccessViolationException;
 
     Group createGroup(Group group, User user) throws GroupNameInUseException, UserMustBeLoggedException;
 
     Group createUserGroup(User user) throws GroupNameInUseException, EmailAddressInUseException;
 
-    Group getDefaultGroup();
+    List<Group> findAdminInGroups(Long groupId);
 
-    void changeWsTheme(User user, Group group, String theme) throws AccessViolationException;
+    Group findByShortName(String groupName);
+
+    List<Group> findCollabInGroups(Long groupId);
+
+    Group getDefaultGroup();
 
     /**
      * IMPORTANT: returns null if userId is null
@@ -54,10 +55,12 @@ public interface GroupManager extends Manager<Group, Long> {
      */
     Group getGroupOfUserWithId(Long userId);
 
+    void reIndex();
+
     SearchResult<Group> search(String search);
 
     SearchResult<Group> search(String search, Integer firstResult, Integer maxResults);
 
-    void reIndex();
+    void setDefaultContent(String groupShortName, Content content);
 
 }

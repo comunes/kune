@@ -32,24 +32,24 @@ public class AuthenticatedMethodInterceptorTest extends IntegrationTest {
     @Test(expected = UserMustBeLoggedException.class)
     public void hashNullAndMandatoryMustDoNothing() throws Throwable {
 	Mockito.stub(authAnnotation.mandatory()).toReturn(true);
-	final Object[] result = { null };
-	Mockito.stub(invocation.getArguments()).toReturn(result);
+	final Object[] arguments = { null };
+	Mockito.stub(invocation.getArguments()).toReturn(arguments);
 	auth.invoke(invocation);
     }
 
     @Test
     public void hashNullAndNotMandatoryMustDoNothing() throws Throwable {
 	Mockito.stub(authAnnotation.mandatory()).toReturn(false);
-	final Object[] result = { null };
-	Mockito.stub(invocation.getArguments()).toReturn(result);
+	final Object[] arguments = { null };
+	Mockito.stub(invocation.getArguments()).toReturn(arguments);
 	auth.invoke(invocation);
     }
 
     @Test
     public void hashNullAsStringAndNotMandatoryMustDoNothing() throws Throwable {
 	Mockito.stub(authAnnotation.mandatory()).toReturn(false);
-	final Object[] result = { "null" };
-	Mockito.stub(invocation.getArguments()).toReturn(result);
+	final Object[] arguments = { "null" };
+	Mockito.stub(invocation.getArguments()).toReturn(arguments);
 	auth.invoke(invocation);
     }
 
@@ -57,8 +57,8 @@ public class AuthenticatedMethodInterceptorTest extends IntegrationTest {
     public void otherHashAndMandatoryAndLoggedMustSessionExp() throws Throwable {
 	doLogin();
 	Mockito.stub(authAnnotation.mandatory()).toReturn(true);
-	final Object[] result = { "other-hash" };
-	Mockito.stub(invocation.getArguments()).toReturn(result);
+	final Object[] arguments = { "other-hash" };
+	Mockito.stub(invocation.getArguments()).toReturn(arguments);
 	auth.invoke(invocation);
     }
 
@@ -66,16 +66,16 @@ public class AuthenticatedMethodInterceptorTest extends IntegrationTest {
     public void sameHashAndMandatoryAndLoggedMustSessionExp() throws Throwable {
 	doLogin();
 	Mockito.stub(authAnnotation.mandatory()).toReturn(true);
-	final Object[] result = { getHash() };
-	Mockito.stub(invocation.getArguments()).toReturn(result);
+	final Object[] arguments = { getHash() };
+	Mockito.stub(invocation.getArguments()).toReturn(arguments);
 	auth.invoke(invocation);
     }
 
     @Test(expected = SessionExpiredException.class)
     public void someHashAndMandatoryAndNotLoggedMustSessionExp() throws Throwable {
 	Mockito.stub(authAnnotation.mandatory()).toReturn(true);
-	final Object[] result = { "some-hash" };
-	Mockito.stub(invocation.getArguments()).toReturn(result);
+	final Object[] arguments = { "some-hash" };
+	Mockito.stub(invocation.getArguments()).toReturn(arguments);
 	auth.invoke(invocation);
     }
 }

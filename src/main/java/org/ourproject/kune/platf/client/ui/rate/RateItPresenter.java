@@ -85,8 +85,8 @@ public class RateItPresenter implements RateIt {
 	setRatePanel(newValue);
 	Site.showProgressProcessing();
 	final StateDTO currentState = session.getCurrentState();
-	contentServiceProvider.get().rateContent(session.getUserHash(), currentState.getGroup().getShortName(),
-		currentState.getDocumentId(), newValue, new AsyncCallbackSimple<Object>() {
+	contentServiceProvider.get().rateContent(session.getUserHash(), currentState.getStateToken(), newValue,
+		new AsyncCallbackSimple<Object>() {
 		    public void onSuccess(final Object result) {
 			Site.hideProgress();
 			Site.info(i18n.t("Content rated"));

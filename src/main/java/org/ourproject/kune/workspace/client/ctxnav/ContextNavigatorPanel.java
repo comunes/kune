@@ -20,36 +20,26 @@
 
 package org.ourproject.kune.workspace.client.ctxnav;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.ourproject.kune.platf.client.actions.ActionButtonDescriptor;
-import org.ourproject.kune.platf.client.actions.ActionButtonSeparator;
 import org.ourproject.kune.platf.client.actions.ActionCollection;
 import org.ourproject.kune.platf.client.actions.ActionDescriptor;
-import org.ourproject.kune.platf.client.actions.ActionMenuDescriptor;
-import org.ourproject.kune.platf.client.actions.ActionPosition;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.workspace.client.skel.Toolbar;
+import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.data.Node;
-import com.gwtext.client.widgets.Button;
-import com.gwtext.client.widgets.Panel;
-import com.gwtext.client.widgets.ToolbarButton;
-import com.gwtext.client.widgets.event.ButtonListenerAdapter;
+import com.gwtext.client.data.Tree;
 import com.gwtext.client.widgets.form.TextField;
-import com.gwtext.client.widgets.layout.FitLayout;
 import com.gwtext.client.widgets.menu.BaseItem;
 import com.gwtext.client.widgets.menu.Item;
 import com.gwtext.client.widgets.menu.Menu;
-import com.gwtext.client.widgets.menu.MenuItem;
 import com.gwtext.client.widgets.menu.event.BaseItemListenerAdapter;
 import com.gwtext.client.widgets.tree.TreeEditor;
 import com.gwtext.client.widgets.tree.TreeNode;
@@ -62,11 +52,9 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
     private TreePanel treePanel;
     private TreeEditor treeEditor;
     private final HashMap<String, Menu> contextMenus;
-    private final HashMap<String, Menu> toolbarMenus;
     private final WorkspaceSkeleton ws;
+    private boolean fireOnTextChange;
     private final ContextNavigatorPresenter presenter;
-    private final ArrayList<Widget> removableToolbarItems;
-    private final HashMap<String, Item> menuItems;
 
     public ContextNavigatorPanel(final ContextNavigatorPresenter presenter, final I18nTranslationService i18n,
 	    final WorkspaceSkeleton ws) {
@@ -74,36 +62,7 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 	this.ws = ws;
 
 	contextMenus = new HashMap<String, Menu>();
-	toolbarMenus = new HashMap<String, Menu>();
-	removableToolbarItems = new ArrayList<Widget>();
-	menuItems = new HashMap<String, Item>();
-    }
-
-    public void addButtonAction(final ActionButtonDescriptor<StateToken> action) {
-	final ActionPosition pos = action.getActionPosition();
-	final ToolbarButton button = new ToolbarButton();
-	final String text = action.getText();
-	if (text != null) {
-	    button.setText(text);
-	}
-	button.addListener(new ButtonListenerAdapter() {
-	    @Override
-	    public void onClick(final Button button, final EventObject e) {
-		doAction(action, presenter.getCurrentStateToken());
-	    }
-	});
-	button.setIcon(action.getIconUrl());
-	button.setTooltip(action.getToolTip());
-
-	final Toolbar toolbar = getToolbar(pos);
-	if (action.hasLeftSeparator()) {
-	    removableToolbarItems.add(add(toolbar, action.getLeftSeparator()));
-	}
-	toolbar.add(button);
-	if (action.hasRightSeparator()) {
-	    removableToolbarItems.add(add(toolbar, action.getRightSeparator()));
-	}
-	removableToolbarItems.add(button);
+	fireOnTextChange = true;
     }
 
     public void addItem(final ContextNavigatorItem item) {
@@ -138,7 +97,9 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 		child.addListener(new TreeNodeListenerAdapter() {
 		    @Override
 		    public void onTextChange(final Node node, final String text, final String oldText) {
-			presenter.onItemRename(getToken(node), text, oldText);
+			if (fireOnTextChange) {
+			    presenter.onItemRename(getToken(node), text, oldText);
+			}
 		    }
 		});
 		if (!item.getStateToken().hasAll()) {
@@ -164,55 +125,24 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 
     }
 
-    public void addMenuAction(final ActionMenuDescriptor<StateToken> action, final boolean enable) {
-	final String menuTitle = action.getParentMenuTitle();
-	final String menuSubTitle = action.getParentSubMenuTitle();
-	final ActionPosition pos = action.getActionPosition();
-	final String itemKey = genMenuKey(pos, menuTitle, menuSubTitle, action.getText());
-	Item item = menuItems.get(itemKey);
-	if (item == null) {
-	    item = createToolbarMenu(pos, menuTitle, menuSubTitle, action);
-	    menuItems.put(itemKey, item);
-	} else {
-	}
-	if (enable) { // && action.getEnableCondition().mustBeEnabled(param))
-	    // ) {
-	    item.enable();
-	} else {
-	    item.disable();
-	}
-	doLayoutIfNeeded(pos);
-    }
-
     public void clear() {
 	if (treePanel != null) {
 	    treePanel.clear();
+	    treePanel = null;
 	}
-	ws.getEntityWorkspace().getContextTopBar().removeAll();
-	ws.getEntityWorkspace().getContextBottomBar().removeAll();
 	contextMenus.clear();
-	toolbarMenus.clear();
-	menuItems.clear();
-	removableToolbarItems.clear();
-    }
-
-    public void clearRemovableActions() {
-	for (final Widget widget : removableToolbarItems) {
-	    widget.removeFromParent();
-	}
-	removableToolbarItems.clear();
-	doLayoutIfNeeded();
-    }
-
-    public void disableAllMenuItems() {
-	for (final Item item : menuItems.values()) {
-	    item.disable();
-	}
-	doLayoutIfNeeded();
     }
 
     public void editItem(final String id) {
 	treeEditor.startEdit(getNode(id));
+    }
+
+    public boolean isSelected(final String id) {
+	final TreeNode item = getNode(id);
+	if (item != null) {
+	    return item.isSelected();
+	}
+	return false;
     }
 
     public void selectItem(final String id) {
@@ -230,6 +160,10 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 	}
     }
 
+    public void setFireOnTextChange(final boolean fireOnTextChange) {
+	this.fireOnTextChange = fireOnTextChange;
+    }
+
     public void setItemText(final String genId, final String text) {
 	final TreeNode node = getNode(genId);
 	node.setText(text);
@@ -239,22 +173,6 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 	    final ActionCollection<StateToken> actions) {
 	if (treePanel == null || treePanel.getNodeById(id) == null) {
 	    createTreePanel(id, text, stateToken, actions);
-	}
-    }
-
-    private void add(final ActionPosition toolbar, final Widget widget) {
-	getToolbar(toolbar).add(widget);
-    }
-
-    private Widget add(final Toolbar toolbar, final ActionButtonSeparator separator) {
-	switch (separator) {
-	case fill:
-	    return toolbar.addFill();
-	case separator:
-	    return toolbar.addSeparator();
-	case spacer:
-	default:
-	    return toolbar.addSpacer();
 	}
     }
 
@@ -286,61 +204,6 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 	});
     }
 
-    private Item createToolbarMenu(final ActionPosition toolBarPos, final String menuTitle, final String menuSubTitle,
-	    final ActionMenuDescriptor<StateToken> action) {
-	final Item item = new Item(action.getText(), new BaseItemListenerAdapter() {
-	    @Override
-	    public void onClick(BaseItem item, EventObject e) {
-		doAction(action, presenter.getCurrentStateToken());
-	    }
-	});
-	item.setIcon(action.getIconUrl());
-
-	final String menuKey = genMenuKey(toolBarPos, menuTitle, null, null);
-	final String subMenuKey = genMenuKey(toolBarPos, menuTitle, menuSubTitle, null);
-	Menu menu = toolbarMenus.get(menuKey);
-	Menu subMenu = toolbarMenus.get(subMenuKey);
-	if (menuSubTitle != null) {
-	    if (subMenu == null) {
-		subMenu = new Menu();
-		final MenuItem subMenuItem = new MenuItem(menuSubTitle, subMenu);
-		if (menu == null) {
-		    menu = createToolbarMenu(toolBarPos, action.getParentMenuIconUrl(), menuTitle, menuKey);
-		}
-		menu.addItem(subMenuItem);
-		toolbarMenus.put(subMenuKey, subMenu);
-	    }
-	    subMenu.addItem(item);
-
-	} else {
-	    // Menu action without submenu
-	    if (menu == null) {
-		menu = createToolbarMenu(toolBarPos, action.getParentMenuIconUrl(), menuTitle, menuKey);
-	    }
-	    menu.addItem(item);
-	}
-	doLayoutIfNeeded(toolBarPos);
-	return item;
-    }
-
-    private Menu createToolbarMenu(final ActionPosition barPosition, final String iconUrl, final String menuTitle,
-	    final String menuKey) {
-	final Menu menu = new Menu();
-	final ToolbarButton toolbarMenu = new ToolbarButton(menuTitle);
-	if (iconUrl != null) {
-	    toolbarMenu.setIcon(iconUrl);
-	}
-	toolbarMenu.addListener(new ButtonListenerAdapter() {
-	    @Override
-	    public void onClick(final Button button, final EventObject e) {
-		menu.showAt(e.getXY());
-	    }
-	});
-	toolbarMenus.put(menuKey, menu);
-	add(barPosition, toolbarMenu);
-	return menu;
-    }
-
     private void createTreePanel(final String rootId, final String text, final StateToken stateToken,
 	    final ActionCollection<StateToken> actions) {
 	if (treePanel != null) {
@@ -351,6 +214,7 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 	treePanel.setBorder(false);
 	treePanel.setRootVisible(true);
 	treePanel.setUseArrows(true);
+	// treePanel.setSelectionModel(new MultiSelectionModel());
 	final TreeNode root = new TreeNode();
 	root.setAllowDrag(false);
 	root.setExpanded(true);
@@ -362,46 +226,46 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 	treePanel.addListener(new TreePanelListenerAdapter() {
 	    public void onContextMenu(final TreeNode node, final EventObject e) {
 		final Menu menu = contextMenus.get(node.getId());
-		if (menu != null && menu.getItems().length != 0) {
+		if (menu != null && menu.getItems().length > 0) {
 		    menu.showAt(e.getXY());
 		} else {
 		    Log.info("Empty item menu");
 		}
 	    }
+
+	    @Override
+	    public void onMoveNode(final Tree treePanel, final TreeNode node, final TreeNode oldParent,
+		    final TreeNode newParent, final int index) {
+		newParent.removeChild(node);
+		oldParent.appendChild(node);
+		Site.info("Drag & drop of contents in development");
+	    }
 	});
 	treePanel.setLines(false);
 	treePanel.setEnableDD(true);
 	treePanel.setRootNode(root);
+	// treePanel.setAutoScroll(true);
+	treePanel.setContainerScroll(true);
+	treePanel.setAutoWidth(true);
+
 	final TextField field = new TextField();
 	treeEditor = new TreeEditor(treePanel, field);
-	final Panel panel = new Panel();
-	panel.setLayout(new FitLayout());
-	panel.setBorder(false);
-	panel.setAutoScroll(true);
+
+	final ScrollPanel panel = new ScrollPanel();
+	// final Panel panel = new Panel();
+	// panel.setLayout(new FitLayout());
+	// panel.setBorder(false);
+	// panel.setAutoScroll(true);
+	// new ScrollPanel
+	panel.setWidth("100%");
+	panel.setHeight("100%");
 	panel.add(treePanel);
 
-	ws.getEntityWorkspace().setContext(treePanel);
+	ws.getEntityWorkspace().setContext(panel);
     }
 
     private void doAction(final ActionDescriptor<StateToken> action, final StateToken stateToken) {
 	presenter.doAction(action, stateToken);
-    }
-
-    private void doLayoutIfNeeded() {
-	doLayoutIfNeeded(ActionPosition.topbar);
-	doLayoutIfNeeded(ActionPosition.bottombar);
-    }
-
-    private void doLayoutIfNeeded(final ActionPosition pos) {
-	getToolbar(pos).doLayoutIfNeeded();
-    }
-
-    private String genMenuKey(final ActionPosition pos, final String menuTitle, final String menuSubTitle,
-	    final String actionText) {
-	final String basePart = "km-" + pos.toString() + "-" + menuTitle;
-	final String subMenuPart = menuSubTitle != null ? "-subm-" + menuSubTitle : "";
-	final String itemPart = actionText != null ? "-item-" + actionText : "";
-	return basePart + subMenuPart + itemPart;
     }
 
     private TreeNode getNode(final String id) {
@@ -416,15 +280,4 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 	return node.getAttribute("href").substring(1);
     }
 
-    private Toolbar getToolbar(final ActionPosition pos) {
-	switch (pos) {
-	case bootombarAndItemMenu:
-	case bottombar:
-	    return ws.getEntityWorkspace().getContextBottomBar();
-	case topbar:
-	case topbarAndItemMenu:
-	default:
-	    return ws.getEntityWorkspace().getContextTopBar();
-	}
-    }
 }

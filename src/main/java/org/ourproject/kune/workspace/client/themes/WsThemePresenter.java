@@ -49,9 +49,8 @@ public class WsThemePresenter {
 
     protected void onChangeGroupWsTheme(final WsTheme newTheme) {
 	Site.showProgressProcessing();
-	groupServiceProvider.get().changeGroupWsTheme(session.getUserHash(),
-		session.getCurrentState().getGroup().getShortName(), newTheme.getName(),
-		new AsyncCallbackSimple<Object>() {
+	groupServiceProvider.get().changeGroupWsTheme(session.getUserHash(), session.getCurrentState().getStateToken(),
+		newTheme.getName(), new AsyncCallbackSimple<Object>() {
 		    public void onSuccess(final Object result) {
 			setTheme(newTheme);
 			Site.hideProgress();

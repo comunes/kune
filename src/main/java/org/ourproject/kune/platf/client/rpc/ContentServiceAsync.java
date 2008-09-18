@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.CommentDTO;
+import org.ourproject.kune.platf.client.dto.ContentDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
@@ -33,53 +34,46 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface ContentServiceAsync {
 
-    void addAuthor(String userHash, String groupShortName, String documentId, String authorShortName,
-	    AsyncCallback<?> asyncCallback);
+    void addAuthor(String userHash, StateToken token, String authorShortName, AsyncCallback<?> asyncCallback);
 
-    void addComment(String userHash, String groupShortName, String documentId, Long parentCommentId,
-	    String commentText, AsyncCallback<CommentDTO> asyncCallback);
-
-    void addComment(String userHash, String groupShortName, String documentId, String commentText,
+    void addComment(String userHash, StateToken token, Long parentCommentId, String commentText,
 	    AsyncCallback<CommentDTO> asyncCallback);
 
-    void addContent(String user, String groupShortName, Long parentFolderId, String name,
-	    AsyncCallback<StateDTO> callback);
+    void addComment(String userHash, StateToken token, String commentText, AsyncCallback<CommentDTO> asyncCallback);
 
-    void addFolder(String hash, String groupShortName, Long parentFolderId, String title, String typeId,
-	    AsyncCallback<StateDTO> callback);
+    void addContent(String user, StateToken parentToken, String name, AsyncCallback<StateDTO> callback);
 
-    void addRoom(String user, String groupShortName, Long parentFolderId, String name, AsyncCallback<StateDTO> callback);
+    void addFolder(String hash, StateToken parentToken, String title, String typeId, AsyncCallback<StateDTO> callback);
 
-    void delContent(String userHash, String groupShortName, String documentId, AsyncCallback<?> asyncCallback);
+    void addRoom(String user, StateToken parentToken, String name, AsyncCallback<StateDTO> callback);
 
-    void getContent(String user, String groupShortName, StateToken newState, AsyncCallback<StateDTO> callback);
+    void delContent(String userHash, StateToken token, AsyncCallback<?> asyncCallback);
 
-    void getSummaryTags(String userHash, String groupShortName, AsyncCallback<List<TagResultDTO>> asyncCallback);
+    void getContent(String user, StateToken newState, AsyncCallback<StateDTO> callback);
 
-    void markCommentAsAbuse(String userHash, String groupShortName, String documentId, Long commentId,
-	    AsyncCallback<CommentDTO> asyncCallback);
+    void getSummaryTags(String userHash, StateToken groupToken, AsyncCallback<List<TagResultDTO>> asyncCallback);
 
-    void rateContent(String userHash, String groupShortName, String documentId, Double value,
-	    AsyncCallback<?> asyncCallback);
+    void markCommentAsAbuse(String userHash, StateToken token, Long commentId, AsyncCallback<CommentDTO> asyncCallback);
 
-    void removeAuthor(String userHash, String groupShortName, String documentId, String authorShortName,
-	    AsyncCallback<?> asyncCallback);
+    void rateContent(String userHash, StateToken token, Double value, AsyncCallback<?> asyncCallback);
 
-    void rename(String userHash, String groupShortName, String token, String newName,
-	    AsyncCallback<String> asyncCallback);
+    void removeAuthor(String userHash, StateToken token, String authorShortName, AsyncCallback<?> asyncCallback);
 
-    void save(String user, String groupShortName, String documentId, String content,
-	    AsyncCallback<Integer> asyncCallback);
+    void renameContainer(String userHash, StateToken token, String newName, AsyncCallback<String> asyncCallback);
 
-    void setLanguage(String userHash, String groupShortName, String documentId, String languageCode,
+    void renameContent(String userHash, StateToken token, String newName, AsyncCallback<String> asyncCallback);
+
+    void save(String user, StateToken token, String content, AsyncCallback<Integer> asyncCallback);
+
+    void setAsDefaultContent(String userHash, StateToken token, AsyncCallback<ContentDTO> asyncCallback);
+
+    void setLanguage(String userHash, StateToken token, String languageCode,
 	    AsyncCallback<I18nLanguageDTO> asyncCallback);
 
-    void setPublishedOn(String userHash, String groupShortName, String documentId, Date publishedOn,
-	    AsyncCallback<?> asyncCallback);
+    void setPublishedOn(String userHash, StateToken token, Date publishedOn, AsyncCallback<?> asyncCallback);
 
-    void setTags(String userHash, String groupShortName, String documentId, String tags,
-	    AsyncCallback<List<TagResultDTO>> asyncCallback);
+    void setTags(String userHash, StateToken token, String tags, AsyncCallback<List<TagResultDTO>> asyncCallback);
 
-    void voteComment(String userHash, String groupShortName, String documentId, Long commentId, boolean votePositive,
+    void voteComment(String userHash, StateToken token, Long commentId, boolean votePositive,
 	    AsyncCallback<CommentDTO> asyncCallback);
 }
