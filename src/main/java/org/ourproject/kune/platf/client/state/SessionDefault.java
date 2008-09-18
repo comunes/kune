@@ -29,6 +29,7 @@ import org.ourproject.kune.platf.client.dto.I18nLanguageSimpleDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.workspace.client.site.rpc.UserServiceAsync;
@@ -85,6 +86,10 @@ public class SessionDefault implements Session {
 
     public StateDTO getCurrentState() {
 	return currentState;
+    }
+
+    public StateToken getCurrentStateToken() {
+	return currentState == null ? null : currentState.getStateToken();
     }
 
     public UserInfoDTO getCurrentUserInfo() {

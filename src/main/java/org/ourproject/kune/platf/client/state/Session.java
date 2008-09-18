@@ -27,6 +27,7 @@ import org.ourproject.kune.platf.client.dto.I18nLanguageSimpleDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 
@@ -49,6 +50,8 @@ public interface Session {
     public I18nLanguageDTO getCurrentLanguage();
 
     public StateDTO getCurrentState();
+
+    public StateToken getCurrentStateToken();
 
     public List<I18nLanguageSimpleDTO> getLanguages();
 

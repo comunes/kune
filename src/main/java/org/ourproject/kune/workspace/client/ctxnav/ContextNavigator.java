@@ -21,27 +21,16 @@
 package org.ourproject.kune.workspace.client.ctxnav;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.actions.ActionDescriptor;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
 public interface ContextNavigator {
-
-    void addAction(String contentTypeId, ActionDescriptor<StateToken> action);
 
     void editItem(StateToken stateToken);
 
     View getView();
 
     boolean isSelected(StateToken stateToken);
-
-    void registerContentTypeIcon(String contentTypeId, String iconUrl);
-
-    void registerDraggableType(String typeId);
-
-    void registerDroppableType(String typeId);
-
-    void removeAction(String contentTypeId, ActionDescriptor<StateToken> action);
 
     void selectItem(StateToken stateToken);
 

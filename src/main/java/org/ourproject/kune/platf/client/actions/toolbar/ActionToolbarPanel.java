@@ -1,4 +1,4 @@
-package org.ourproject.kune.workspace.client.component;
+package org.ourproject.kune.platf.client.actions.toolbar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,9 +25,9 @@ import com.gwtext.client.widgets.menu.Menu;
 import com.gwtext.client.widgets.menu.MenuItem;
 import com.gwtext.client.widgets.menu.event.BaseItemListenerAdapter;
 
-public class EntityToolbar implements EntityToolbarView {
+public class ActionToolbarPanel implements ActionToolbarView {
 
-    protected enum ToolbarPosition {
+    public enum Position {
 	content, context
     }
 
@@ -37,9 +37,9 @@ public class EntityToolbar implements EntityToolbarView {
     private final WorkspaceSkeleton ws;
     private final Session session;
     private final Provider<ActionManager> actionManagerProvider;
-    private final ToolbarPosition position;
+    private final Position position;
 
-    public EntityToolbar(final ToolbarPosition position, final Session session,
+    public ActionToolbarPanel(final Position position, final Session session,
 	    final Provider<ActionManager> actionManagerProvider, final WorkspaceSkeleton ws) {
 	this.position = position;
 	this.session = session;
@@ -55,6 +55,7 @@ public class EntityToolbar implements EntityToolbarView {
 	final ActionPosition pos = action.getActionPosition();
 	final ToolbarButton button = new ToolbarButton();
 	final String text = action.getText();
+	final String iconUrl = action.getIconUrl();
 	if (text != null) {
 	    button.setText(text);
 	}
@@ -64,7 +65,9 @@ public class EntityToolbar implements EntityToolbarView {
 		actionManagerProvider.get().doAction(action, session.getCurrentState().getStateToken());
 	    }
 	});
-	button.setIcon(action.getIconUrl());
+	if (iconUrl != null) {
+	    button.setIcon(iconUrl);
+	}
 	button.setTooltip(action.getToolTip());
 
 	final Toolbar toolbar = getToolbar(pos);

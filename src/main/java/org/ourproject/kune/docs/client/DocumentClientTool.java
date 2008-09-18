@@ -27,6 +27,10 @@ import org.ourproject.kune.platf.client.actions.ActionDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionPosition;
+import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
+import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
+import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
+import org.ourproject.kune.platf.client.actions.DragDropContentRegistry;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.dto.ContentDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
@@ -67,13 +71,19 @@ public class DocumentClientTool extends AbstractClientTool {
     private final Session session;
     private final Provider<ContentServiceAsync> contentServiceProvider;
     private final Provider<FileUploader> fileUploaderProvider;
+    private final ContentActionRegistry contentActionRegistry;
+    private final ContextActionRegistry contextActionRegistry;
+    private final DragDropContentRegistry dragDropContentRegistry;
+    private final ContentIconsRegistry contentIconsRegistry;
 
     public DocumentClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
 	    final WsThemePresenter wsThemePresenter, final WorkspaceSkeleton ws,
 	    final Provider<DocumentContext> documentContextProvider, final ContextNavigator contextNavigator,
 	    final Session session, final StateManager stateManager,
 	    final Provider<ContentServiceAsync> contentServiceProvider,
-	    final Provider<FileUploader> fileUploaderProvider) {
+	    final Provider<FileUploader> fileUploaderProvider, final ContentActionRegistry contentActionRegistry,
+	    final ContextActionRegistry contextActionRegistry, final DragDropContentRegistry dragDropContentRegistry,
+	    final ContentIconsRegistry contentIconsRegistry) {
 	super(NAME, i18n.t("documents"), toolSelector, wsThemePresenter, ws);
 	this.i18n = i18n;
 	this.documentContextProvider = documentContextProvider;
@@ -82,6 +92,10 @@ public class DocumentClientTool extends AbstractClientTool {
 	this.stateManager = stateManager;
 	this.contentServiceProvider = contentServiceProvider;
 	this.fileUploaderProvider = fileUploaderProvider;
+	this.contentActionRegistry = contentActionRegistry;
+	this.contextActionRegistry = contextActionRegistry;
+	this.dragDropContentRegistry = dragDropContentRegistry;
+	this.contentIconsRegistry = contentIconsRegistry;
 	createActions();
 	registerDragDropTypes();
 	registerImageTypes();
@@ -102,6 +116,7 @@ public class DocumentClientTool extends AbstractClientTool {
     }
 
     private void createActions() {
+
 	final ActionMenuDescriptor<StateToken> addFolder = createFolderAction(TYPE_FOLDER, "images/nav/folder_add.png",
 		i18n.t("New folder"), i18n.t("File"), i18n.t("New"));
 	final ActionMenuDescriptor<StateToken> addGallery = createFolderAction(TYPE_GALLERY,
@@ -236,41 +251,43 @@ public class DocumentClientTool extends AbstractClientTool {
 		final ActionDescriptor<StateToken> uploadMedia = createUploadAction(i18n.t("Upload media"),
 			"images/nav/upload.png", i18n.t("Upload some media (images, videos)"), session
 				.getGalleryPermittedExtensions());
-		contextNavigator.addAction(TYPE_GALLERY, uploadMedia);
+		contextActionRegistry.addAction(TYPE_GALLERY, uploadMedia);
 	    }
 	});
 
-	contextNavigator.addAction(TYPE_FOLDER, go);
-	contextNavigator.addAction(TYPE_FOLDER, addDoc);
-	contextNavigator.addAction(TYPE_FOLDER, addFolder);
-	contextNavigator.addAction(TYPE_FOLDER, delContainer);
-	contextNavigator.addAction(TYPE_FOLDER, rename);
-	contextNavigator.addAction(TYPE_FOLDER, goGroupHome);
-	contextNavigator.addAction(TYPE_FOLDER, refresh);
-	contextNavigator.addAction(TYPE_FOLDER, uploadFile);
+	contextActionRegistry.addAction(TYPE_FOLDER, go);
+	contextActionRegistry.addAction(TYPE_FOLDER, addDoc);
+	contextActionRegistry.addAction(TYPE_FOLDER, addFolder);
+	contentActionRegistry.addAction(TYPE_FOLDER, delContainer);
+	contextActionRegistry.addAction(TYPE_FOLDER, delContainer);
+	contextActionRegistry.addAction(TYPE_FOLDER, rename);
+	contextActionRegistry.addAction(TYPE_FOLDER, goGroupHome);
+	contextActionRegistry.addAction(TYPE_FOLDER, refresh);
+	contextActionRegistry.addAction(TYPE_FOLDER, uploadFile);
 
-	contextNavigator.addAction(TYPE_BLOG, go);
-	contextNavigator.addAction(TYPE_BLOG, uploadFile);
-	contextNavigator.addAction(TYPE_BLOG, setAsDefGroupContent);
-	contextNavigator.addAction(TYPE_BLOG, refresh);
+	contextActionRegistry.addAction(TYPE_BLOG, go);
+	contextActionRegistry.addAction(TYPE_BLOG, uploadFile);
+	contextActionRegistry.addAction(TYPE_BLOG, setAsDefGroupContent);
+	contextActionRegistry.addAction(TYPE_BLOG, refresh);
 
-	contextNavigator.addAction(TYPE_GALLERY, go);
-	contextNavigator.addAction(TYPE_GALLERY, goGroupHome);
-	contextNavigator.addAction(TYPE_GALLERY, refresh);
+	contextActionRegistry.addAction(TYPE_GALLERY, go);
+	contextActionRegistry.addAction(TYPE_GALLERY, goGroupHome);
+	contextActionRegistry.addAction(TYPE_GALLERY, refresh);
 
-	contextNavigator.addAction(TYPE_ROOT, addDoc);
-	contextNavigator.addAction(TYPE_ROOT, addFolder);
-	contextNavigator.addAction(TYPE_ROOT, addGallery);
-	contextNavigator.addAction(TYPE_ROOT, goGroupHome);
-	contextNavigator.addAction(TYPE_ROOT, refresh);
-	contextNavigator.addAction(TYPE_ROOT, uploadFile);
+	contextActionRegistry.addAction(TYPE_ROOT, addDoc);
+	contextActionRegistry.addAction(TYPE_ROOT, addFolder);
+	contextActionRegistry.addAction(TYPE_ROOT, addGallery);
+	contextActionRegistry.addAction(TYPE_ROOT, goGroupHome);
+	contextActionRegistry.addAction(TYPE_ROOT, refresh);
+	contextActionRegistry.addAction(TYPE_ROOT, uploadFile);
 
-	contextNavigator.addAction(TYPE_DOCUMENT, go);
-	contextNavigator.addAction(TYPE_DOCUMENT, delContent);
-	contextNavigator.addAction(TYPE_DOCUMENT, rename);
-	contextNavigator.addAction(TYPE_DOCUMENT, goGroupHome);
-	contextNavigator.addAction(TYPE_DOCUMENT, refresh);
-	contextNavigator.addAction(TYPE_DOCUMENT, setAsDefGroupContent);
+	contextActionRegistry.addAction(TYPE_DOCUMENT, go);
+	contentActionRegistry.addAction(TYPE_DOCUMENT, delContent);
+	contextActionRegistry.addAction(TYPE_DOCUMENT, delContent);
+	contextActionRegistry.addAction(TYPE_DOCUMENT, rename);
+	contextActionRegistry.addAction(TYPE_DOCUMENT, goGroupHome);
+	contextActionRegistry.addAction(TYPE_DOCUMENT, refresh);
+	contextActionRegistry.addAction(TYPE_DOCUMENT, setAsDefGroupContent);
     }
 
     private ActionMenuDescriptor<StateToken> createFolderAction(final String contentTypeId, final String iconUrl,
@@ -317,20 +334,20 @@ public class DocumentClientTool extends AbstractClientTool {
     }
 
     private void registerDragDropTypes() {
-	contextNavigator.registerDraggableType(TYPE_DOCUMENT);
-	contextNavigator.registerDraggableType(TYPE_FOLDER);
-	contextNavigator.registerDraggableType(TYPE_UPLOADEDFILE);
+	dragDropContentRegistry.registerDraggableType(TYPE_DOCUMENT);
+	dragDropContentRegistry.registerDraggableType(TYPE_FOLDER);
+	dragDropContentRegistry.registerDraggableType(TYPE_UPLOADEDFILE);
 
-	contextNavigator.registerDroppableType(TYPE_ROOT);
-	contextNavigator.registerDroppableType(TYPE_FOLDER);
-	contextNavigator.registerDroppableType(TYPE_GALLERY);
+	dragDropContentRegistry.registerDroppableType(TYPE_ROOT);
+	dragDropContentRegistry.registerDroppableType(TYPE_FOLDER);
+	dragDropContentRegistry.registerDroppableType(TYPE_GALLERY);
     }
 
     private void registerImageTypes() {
-	contextNavigator.registerContentTypeIcon(TYPE_BLOG, "images/nav/blog.png");
-	contextNavigator.registerContentTypeIcon(TYPE_GALLERY, "images/nav/gallery.png");
-	contextNavigator.registerContentTypeIcon(TYPE_DOCUMENT, "images/nav/page.png");
-	contextNavigator.registerContentTypeIcon(TYPE_POST, "images/nav/post.png");
+	contentIconsRegistry.registerContentTypeIcon(TYPE_BLOG, "images/nav/blog.png");
+	contentIconsRegistry.registerContentTypeIcon(TYPE_GALLERY, "images/nav/gallery.png");
+	contentIconsRegistry.registerContentTypeIcon(TYPE_DOCUMENT, "images/nav/page.png");
+	contentIconsRegistry.registerContentTypeIcon(TYPE_POST, "images/nav/post.png");
     }
 
 }

@@ -3,6 +3,13 @@ package org.ourproject.kune.platf.client.services;
 import org.ourproject.kune.chat.client.ChatClientModule;
 import org.ourproject.kune.docs.client.DocumentClientModule;
 import org.ourproject.kune.platf.client.actions.ActionManager;
+import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
+import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
+import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
+import org.ourproject.kune.platf.client.actions.DragDropContentRegistry;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPresenter;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.ApplicationDefault;
 import org.ourproject.kune.platf.client.app.HistoryWrapper;
@@ -36,7 +43,6 @@ import org.ourproject.kune.platf.client.ui.rate.RatePresenter;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPanel;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPresenter;
-import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorToolbar;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.editor.TextEditorPanel;
 import org.ourproject.kune.workspace.client.editor.TextEditorPresenter;
@@ -588,14 +594,43 @@ public class KuneModule extends AbstractModule {
 	    }
 	});
 
+	register(SingletonScope.class, new Factory<ContextActionRegistry>(ContextActionRegistry.class) {
+	    public ContextActionRegistry create() {
+		return new ContextActionRegistry();
+	    }
+	});
+
+	register(SingletonScope.class, new Factory<ContentActionRegistry>(ContentActionRegistry.class) {
+	    public ContentActionRegistry create() {
+		return new ContentActionRegistry();
+	    }
+	});
+
+	register(SingletonScope.class, new Factory<DragDropContentRegistry>(DragDropContentRegistry.class) {
+	    public DragDropContentRegistry create() {
+		return new DragDropContentRegistry();
+	    }
+	});
+
+	register(SingletonScope.class, new Factory<ContentIconsRegistry>(ContentIconsRegistry.class) {
+	    public ContentIconsRegistry create() {
+		return new ContentIconsRegistry();
+	    }
+	});
+
 	register(SingletonScope.class, new Factory<ContextNavigator>(ContextNavigator.class) {
 	    public ContextNavigator create() {
-		final ContextNavigatorToolbar contextNavigatorToolbar = new ContextNavigatorToolbar($(Session.class),
-			$$(ActionManager.class), ws);
+		final ActionToolbarPanel contextNavigatorToolbar = new ActionToolbarPanel(ActionToolbarPanel.Position.context,
+			$(Session.class), $$(ActionManager.class), ws);
+		final ActionToolbar toolbar = new ActionToolbarPresenter($(Session.class),
+			contextNavigatorToolbar, $(ContextActionRegistry.class));
+
 		final ContextNavigatorPresenter presenter = new ContextNavigatorPresenter($(StateManager.class),
 			$(Session.class), $$(ContentServiceAsync.class), i18n, $(EntityTitle.class),
-			$$(ActionManager.class), contextNavigatorToolbar);
-		final ContextNavigatorPanel panel = new ContextNavigatorPanel(presenter, i18n, ws);
+			$(ContentIconsRegistry.class), $(DragDropContentRegistry.class),
+			$(ContextActionRegistry.class), toolbar);
+		final ContextNavigatorPanel panel = new ContextNavigatorPanel(presenter, i18n, ws,
+			$(ActionManager.class));
 		presenter.init(panel);
 		return presenter;
 	    }

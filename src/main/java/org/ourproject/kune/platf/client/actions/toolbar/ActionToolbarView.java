@@ -1,10 +1,10 @@
-package org.ourproject.kune.workspace.client.component;
+package org.ourproject.kune.platf.client.actions.toolbar;
 
 import org.ourproject.kune.platf.client.actions.ActionButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionMenuDescriptor;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
-public interface EntityToolbarView {
+public interface ActionToolbarView {
 
     void addButtonAction(ActionButtonDescriptor<StateToken> action);
 

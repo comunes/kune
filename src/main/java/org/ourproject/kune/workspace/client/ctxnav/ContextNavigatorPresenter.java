@@ -20,17 +20,15 @@
 
 package org.ourproject.kune.workspace.client.ctxnav;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.actions.ActionButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionCollection;
 import org.ourproject.kune.platf.client.actions.ActionCollectionSet;
-import org.ourproject.kune.platf.client.actions.ActionDescriptor;
-import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
-import org.ourproject.kune.platf.client.actions.ActionManager;
-import org.ourproject.kune.platf.client.actions.ActionMenuDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionRegistry;
+import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
+import org.ourproject.kune.platf.client.actions.DragDropContentRegistry;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.ContainerSimpleDTO;
@@ -58,46 +56,30 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     private final Session session;
     private final Provider<ContentServiceAsync> contentServiceProvider;
     private final I18nUITranslationService i18n;
-    private final HashMap<String, ActionCollection<StateToken>> actions;
     private final HashMap<StateToken, ActionCollection<StateToken>> actionsByItem;
-    private final ArrayList<String> draggables;
-    private final ArrayList<String> droppables;
-    private final HashMap<String, String> contentTypesIcons;
     private final EntityTitle entityTitle;
-    private final Provider<ActionManager> actionManagerProvider;
     private boolean editOnNextStateChange;
-    private final ContextNavigatorToolbar toolbar;
+    private final ContentIconsRegistry contentIconsRegistry;
+    private final DragDropContentRegistry dragDropContentRegistry;
+    private final ActionRegistry actionRegistry;
+    private final ActionToolbar toolbar;
 
     public ContextNavigatorPresenter(final StateManager stateManager, final Session session,
 	    final Provider<ContentServiceAsync> contentServiceProvider, final I18nUITranslationService i18n,
-	    final EntityTitle entityTitle, final Provider<ActionManager> actionManagerProvider,
-	    final ContextNavigatorToolbar contextNavigatorToolbar) {
+	    final EntityTitle entityTitle, final ContentIconsRegistry contentIconsRegistry,
+	    final DragDropContentRegistry dragDropContentRegistry, final ActionRegistry actionRegistry,
+	    final ActionToolbar toolbar) {
 	this.stateManager = stateManager;
 	this.session = session;
 	this.contentServiceProvider = contentServiceProvider;
 	this.i18n = i18n;
 	this.entityTitle = entityTitle;
-	this.actionManagerProvider = actionManagerProvider;
-	this.toolbar = contextNavigatorToolbar;
-	actions = new HashMap<String, ActionCollection<StateToken>>();
+	this.contentIconsRegistry = contentIconsRegistry;
+	this.dragDropContentRegistry = dragDropContentRegistry;
+	this.actionRegistry = actionRegistry;
+	this.toolbar = toolbar;
 	actionsByItem = new HashMap<StateToken, ActionCollection<StateToken>>();
-	draggables = new ArrayList<String>();
-	droppables = new ArrayList<String>();
-	contentTypesIcons = new HashMap<String, String>();
 	editOnNextStateChange = false;
-    }
-
-    public void addAction(final String contentTypeId, final ActionDescriptor<StateToken> action) {
-	ActionCollection<StateToken> actionColl = actions.get(contentTypeId);
-	if (actionColl == null) {
-	    actionColl = new ActionCollection<StateToken>();
-	    actions.put(contentTypeId, actionColl);
-	}
-	actionColl.add(action);
-    }
-
-    public void doAction(final ActionDescriptor<StateToken> action, final StateToken stateToken) {
-	actionManagerProvider.get().doAction(action, stateToken);
     }
 
     public void editItem(final StateToken stateToken) {
@@ -167,27 +149,10 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	}
     }
 
-    public void registerContentTypeIcon(final String contentTypeId, final String iconUrl) {
-	contentTypesIcons.put(contentTypeId, iconUrl);
-    }
-
-    public void registerDraggableType(final String type) {
-	draggables.add(type);
-    }
-
-    public void registerDroppableType(final String type) {
-	droppables.add(type);
-    }
-
-    public void removeAction(final String contentTypeId, final ActionDescriptor<StateToken> action) {
-	actions.get(contentTypeId).remove(action);
-    }
-
     public void selectItem(final StateToken stateToken) {
 	view.selectItem(genId(stateToken));
-	toolbar.clearRemovableActions();
-	toolbar.disableAllMenuItems();
-	setActions(actionsByItem.get(stateToken), true);
+	toolbar.disableMenusAndClearButtons();
+	toolbar.setActions(actionsByItem.get(stateToken), true);
     }
 
     public void setEditOnNextStateChange(final boolean edit) {
@@ -215,10 +180,11 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	// childs to view)
 	final ContainerDTO root = state.getRootContainer();
 	if (root != null) {
-	    final ActionCollectionSet<StateToken> set = createItemActions(containerRights, root.getTypeId());
+	    final ActionCollectionSet<StateToken> set = actionRegistry.selectCurrentActions(containerRights, root
+		    .getTypeId());
 	    view.setRootItem(genId(root.getStateToken()), i18n.t(root.getName()), root.getStateToken(), set
 		    .getItemActions());
-	    setActions(set.getToolbarActions(), false);
+	    toolbar.setActions(set.getToolbarActions(), false);
 	    createChildItems(root, containerRights);
 	    actionsByItem.put(root.getStateToken(), set.getToolbarActions());
 	}
@@ -252,31 +218,25 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	}
     }
 
+    protected void clear() {
+	toolbar.clear();
+	view.clear();
+	actionsByItem.clear();
+    }
+
     private void addItem(final String title, final String contentTypeId, final ContentStatusDTO status,
 	    final StateToken stateToken, final StateToken parentStateToken, final AccessRightsDTO rights,
 	    final boolean isNodeSelected) {
 
-	final ActionCollectionSet<StateToken> set = createItemActions(rights, contentTypeId);
-	setActions(set.getToolbarActions(), isNodeSelected);
+	final ActionCollectionSet<StateToken> set = actionRegistry.selectCurrentActions(rights, contentTypeId);
+	toolbar.setActions(set.getToolbarActions(), isNodeSelected);
 
 	final ContextNavigatorItem item = new ContextNavigatorItem(genId(stateToken), genId(parentStateToken),
-		getContentTypeIcon(contentTypeId), title, status, stateToken, isDraggable(contentTypeId, rights
-			.isAdministrable()), isDroppable(contentTypeId, rights.isAdministrable()), set.getItemActions());
+		contentIconsRegistry.getContentTypeIcon(contentTypeId), title, status, stateToken,
+		dragDropContentRegistry.isDraggable(contentTypeId, rights.isAdministrable()), dragDropContentRegistry
+			.isDroppable(contentTypeId, rights.isAdministrable()), set.getItemActions());
 	view.addItem(item);
 	actionsByItem.put(stateToken, set.getToolbarActions());
-    }
-
-    private boolean checkEnabling(final boolean isNodeSelected, final ActionDescriptor<StateToken> action) {
-	final ActionEnableCondition<StateToken> enableCondition = action.getEnableCondition();
-	final boolean mustBeEnabled = enableCondition != null ? enableCondition.mustBeEnabled(getCurrentStateToken())
-		: true;
-	return isNodeSelected && mustBeEnabled;
-    }
-
-    private void clear() {
-	view.clear();
-	actionsByItem.clear();
-	toolbar.clear();
     }
 
     private void createChildItems(final ContainerDTO container, final AccessRightsDTO containerRights) {
@@ -290,43 +250,6 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 		    .getStateToken(), siblingFolder.getStateToken().clone()
 		    .setFolder(siblingFolder.getParentFolderId()), containerRights, false);
 	}
-    }
-
-    private ActionCollectionSet<StateToken> createItemActions(final AccessRightsDTO rights, final String contentTypeId) {
-	final ActionCollectionSet<StateToken> set = new ActionCollectionSet<StateToken>();
-	boolean add = false;
-
-	for (final ActionDescriptor<StateToken> action : actions.get(contentTypeId)) {
-	    switch (action.getAccessRol()) {
-	    case Administrator:
-		add = rights.isAdministrable();
-		break;
-	    case Editor:
-		add = rights.isEditable();
-		break;
-	    case Viewer:
-		add = rights.isVisible();
-		break;
-	    }
-	    if (add) {
-		switch (action.getActionPosition()) {
-		case topbarAndItemMenu:
-		    set.getItemActions().add(action);
-		case topbar:
-		    set.getToolbarActions().add(action);
-		    break;
-		case bootombarAndItemMenu:
-		    set.getItemActions().add(action);
-		case bottombar:
-		    set.getToolbarActions().add(action);
-		    break;
-		case itemMenu:
-		    set.getItemActions().add(action);
-		    break;
-		}
-	    }
-	}
-	return set;
     }
 
     private void createTreePath(final StateToken state, final ContainerSimpleDTO[] absolutePath,
@@ -349,28 +272,4 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	return "k-" + token.toString().replace(StateToken.SEPARATOR, "-");
     }
 
-    private String getContentTypeIcon(final String typeId) {
-	final String icon = contentTypesIcons.get(typeId);
-	return icon == null ? "" : icon;
-    }
-
-    private boolean isDraggable(final String typeId, final boolean administrable) {
-	return administrable && draggables.contains(typeId);
-    }
-
-    private boolean isDroppable(final String typeId, final boolean administrable) {
-	return administrable && droppables.contains(typeId);
-    }
-
-    private void setActions(final ActionCollection<StateToken> actions, final boolean isNodeSelected) {
-	for (final ActionDescriptor<StateToken> action : actions) {
-	    if (action instanceof ActionMenuDescriptor) {
-		toolbar.addMenuAction((ActionMenuDescriptor<StateToken>) action, checkEnabling(isNodeSelected, action));
-	    } else {
-		if (checkEnabling(isNodeSelected, action)) {
-		    toolbar.addButtonAction((ActionButtonDescriptor<StateToken>) action);
-		}
-	    }
-	}
-    }
 }

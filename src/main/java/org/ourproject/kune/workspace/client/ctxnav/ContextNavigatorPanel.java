@@ -24,6 +24,7 @@ import java.util.HashMap;
 
 import org.ourproject.kune.platf.client.actions.ActionCollection;
 import org.ourproject.kune.platf.client.actions.ActionDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.workspace.client.site.Site;
@@ -57,13 +58,15 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
     private final HashMap<String, Menu> contextMenus;
     private final WorkspaceSkeleton ws;
     private boolean fireOnTextChange;
-    private final ContextNavigatorPresenter presenter;
     private boolean isEditable;
+    private final ActionManager actionManager;
+    private final ContextNavigatorPresenter presenter;
 
     public ContextNavigatorPanel(final ContextNavigatorPresenter presenter, final I18nTranslationService i18n,
-	    final WorkspaceSkeleton ws) {
+	    final WorkspaceSkeleton ws, final ActionManager actionManager) {
 	this.presenter = presenter;
 	this.ws = ws;
+	this.actionManager = actionManager;
 
 	contextMenus = new HashMap<String, Menu>();
 	fireOnTextChange = true;
@@ -279,7 +282,7 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
     }
 
     private void doAction(final ActionDescriptor<StateToken> action, final StateToken stateToken) {
-	presenter.doAction(action, stateToken);
+	actionManager.doAction(action, stateToken);
     }
 
     private TreeNode getNode(final String id) {

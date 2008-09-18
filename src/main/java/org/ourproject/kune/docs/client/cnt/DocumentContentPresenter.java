@@ -21,11 +21,13 @@
 package org.ourproject.kune.docs.client.cnt;
 
 import org.ourproject.kune.docs.client.DocumentClientTool;
-import org.ourproject.kune.docs.client.cnt.folder.FolderEditor;
 import org.ourproject.kune.docs.client.cnt.folder.viewer.FolderViewer;
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReader;
-import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderControl;
+import org.ourproject.kune.platf.client.actions.ActionCollectionSet;
+import org.ourproject.kune.platf.client.actions.ActionRegistry;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
@@ -51,9 +53,7 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
     private StateDTO content;
     private final Session session;
     private final RateIt rateIt;
-    private final Provider<DocumentReaderControl> docReaderControlProvider;
     private final Provider<DocumentReader> docReaderProvider;
-    private final Provider<FolderEditor> folderEditorProvider;
     private final Provider<TextEditor> textEditorProvider;
     private final Provider<FolderViewer> folderViewerProvider;
     private final Signal0 onEditing;
@@ -61,32 +61,32 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
     private final Provider<ContentServiceAsync> contentServiceProvider;
     private final I18nUITranslationService i18n;
     private final KuneErrorHandler errorHandler;
+    private final ActionToolbar toolbar;
+    private final ActionRegistry actionRegistry;
 
     public DocumentContentPresenter(final StateManager stateManager, final I18nUITranslationService i18n,
 	    final KuneErrorHandler errorHandler, final Session session, final RateIt rateIt,
-	    final Provider<DocumentReader> docReaderProvider,
-	    final Provider<DocumentReaderControl> docReaderControlProvider,
-	    final Provider<TextEditor> textEditorProvider, final Provider<FolderViewer> folderViewerProvider,
-	    final Provider<FolderEditor> folderEditorProvider,
-	    final Provider<ContentServiceAsync> contentServiceProvider) {
+	    final Provider<DocumentReader> docReaderProvider, final Provider<TextEditor> textEditorProvider,
+	    final Provider<FolderViewer> folderViewerProvider,
+	    final Provider<ContentServiceAsync> contentServiceProvider, final ActionToolbar toolbar,
+	    final ActionRegistry actionRegistry) {
 	this.stateManager = stateManager;
 	this.i18n = i18n;
 	this.errorHandler = errorHandler;
 	this.session = session;
 	this.rateIt = rateIt;
 	this.docReaderProvider = docReaderProvider;
-	this.docReaderControlProvider = docReaderControlProvider;
 	this.textEditorProvider = textEditorProvider;
 	this.folderViewerProvider = folderViewerProvider;
-	this.folderEditorProvider = folderEditorProvider;
 	this.contentServiceProvider = contentServiceProvider;
+	this.toolbar = toolbar;
+	this.actionRegistry = actionRegistry;
 	this.onEditing = new Signal0("onEditing");
 	this.onEditCancelled = new Signal0("onEditCancelled");
 	stateManager.onStateChanged(new Slot<StateDTO>() {
 	    public void onEvent(final StateDTO state) {
 		if (state.getToolName().equals(DocumentClientTool.NAME)) {
-		    content = state;
-		    showContent();
+		    setState(state);
 		}
 	    }
 	});
@@ -137,9 +137,9 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
 		    editor.setToolbarVisible(true);
 		    view.setContent(editor.getView());
 		} else {
-		    final FolderEditor editor = folderEditorProvider.get();
-		    editor.setFolder(content.getContainer());
-		    view.setContent(editor.getView());
+		    // final FolderEditor editor = folderEditorProvider.get();
+		    // editor.setFolder(content.getContainer());
+		    // view.setContent(editor.getView());
 		}
 		onEditing.fire();
 	    }
@@ -186,13 +186,25 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
     public void onTranslate() {
     }
 
+    private void setState(final StateDTO state) {
+	content = state;
+	ActionCollectionSet<StateToken> set;
+	final String typeId = content.getTypeId();
+	if (content.hasDocument()) {
+	    set = actionRegistry.selectCurrentActions(content.getContentRights(), typeId);
+	} else {
+	    set = actionRegistry.selectCurrentActions(content.getContainerRights(), typeId);
+	}
+	toolbar.disableMenusAndClearButtons();
+	toolbar.setActions(set.getToolbarActions(), true);
+	showContent();
+    }
+
     private void showContent() {
 	textEditorProvider.get().setToolbarVisible(false);
 	if (content.hasDocument()) {
 	    docReaderProvider.get().showDocument(content.getContent());
 	    textEditorProvider.get().reset();
-	    docReaderControlProvider.get().setRights(content.getContentRights());
-	    docReaderControlProvider.get().show();
 	    docReaderProvider.get().show();
 	} else {
 	    final FolderViewer viewer = folderViewerProvider.get();
