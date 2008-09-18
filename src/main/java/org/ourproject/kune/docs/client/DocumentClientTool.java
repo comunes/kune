@@ -118,9 +118,9 @@ public class DocumentClientTool extends AbstractClientTool {
     private void createActions() {
 
 	final ActionMenuDescriptor<StateToken> addFolder = createFolderAction(TYPE_FOLDER, "images/nav/folder_add.png",
-		i18n.t("New folder"), i18n.t("File"), i18n.t("New"));
+		i18n.t("New folder"), i18n.t("Folder"), i18n.t("New"));
 	final ActionMenuDescriptor<StateToken> addGallery = createFolderAction(TYPE_GALLERY,
-		"images/nav/gallery_add.png", i18n.t("New gallery"), i18n.t("File"), i18n.t("New"));
+		"images/nav/gallery_add.png", i18n.t("New gallery"), i18n.t("Folder"), i18n.t("New"));
 
 	final ActionMenuDescriptor<StateToken> addDoc = new ActionMenuDescriptor<StateToken>(AccessRolDTO.Editor,
 		ActionPosition.topbarAndItemMenu, new Slot<StateToken>() {
@@ -137,7 +137,7 @@ public class DocumentClientTool extends AbstractClientTool {
 		    }
 		});
 	addDoc.setTextDescription(i18n.t("New document"));
-	addDoc.setParentMenuTitle(i18n.t("File"));
+	addDoc.setParentMenuTitle(i18n.t("Folder"));
 	addDoc.setParentSubMenuTitle(i18n.t("New"));
 	addDoc.setIconUrl("images/nav/page_add.png");
 
@@ -147,7 +147,7 @@ public class DocumentClientTool extends AbstractClientTool {
 			Site.info("Sorry, in development");
 		    }
 		});
-	delContainer.setParentMenuTitle(i18n.t("File"));
+	delContainer.setParentMenuTitle(i18n.t("Folder"));
 	delContainer.setTextDescription(i18n.t("Delete folder"));
 	delContainer.setMustBeConfirmed(true);
 	delContainer.setConfirmationTitle(i18n.t("Please confirm"));
@@ -165,7 +165,7 @@ public class DocumentClientTool extends AbstractClientTool {
 				});
 		    }
 		});
-	delContent.setParentMenuTitle(i18n.t("File"));
+	delContent.setParentMenuTitle(i18n.t("Folder"));
 	delContent.setTextDescription(i18n.t("Delete document"));
 	delContent.setMustBeConfirmed(true);
 	delContent.setConfirmationTitle(i18n.t("Please confirm"));

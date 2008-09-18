@@ -179,15 +179,10 @@ public class ActionToolbarPanel implements ActionToolbarView {
 	    final String menuKey) {
 	final Menu menu = new Menu();
 	final ToolbarButton toolbarMenu = new ToolbarButton(menuTitle);
+	toolbarMenu.setMenu(menu);
 	if (iconUrl != null) {
 	    toolbarMenu.setIcon(iconUrl);
 	}
-	toolbarMenu.addListener(new ButtonListenerAdapter() {
-	    @Override
-	    public void onClick(final Button button, final EventObject e) {
-		menu.showAt(e.getXY());
-	    }
-	});
 	toolbarMenus.put(menuKey, menu);
 	add(barPosition, toolbarMenu);
 	return menu;
