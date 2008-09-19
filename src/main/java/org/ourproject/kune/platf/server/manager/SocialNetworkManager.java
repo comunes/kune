@@ -32,8 +32,6 @@ public interface SocialNetworkManager extends Manager<SocialNetwork, Long> {
 
     void acceptJoinGroup(User userLogged, Group group, Group inGroup) throws DefaultException;
 
-    void addAdmin(User user, Group group);
-
     void addGroupToAdmins(User userLogged, Group group, Group inGroup) throws DefaultException;
 
     void addGroupToCollabs(User userLogged, Group group, Group inGroup) throws DefaultException;
@@ -44,9 +42,9 @@ public interface SocialNetworkManager extends Manager<SocialNetwork, Long> {
 
     void denyJoinGroup(User userLogged, Group group, Group inGroup) throws DefaultException;
 
-    SocialNetwork find(User user, Group group) throws DefaultException;
-
     ParticipationData findParticipation(User user, Group group) throws DefaultException;
+
+    SocialNetwork get(User userLogged, Group group) throws DefaultException;
 
     SocialNetworkRequestResult requestToJoin(User user, Group inGroup) throws DefaultException;
 

@@ -62,14 +62,14 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
     private final I18nUITranslationService i18n;
     private final KuneErrorHandler errorHandler;
     private final ActionToolbar toolbar;
-    private final ActionRegistry actionRegistry;
+    private final ActionRegistry<StateToken> actionRegistry;
 
     public DocumentContentPresenter(final StateManager stateManager, final I18nUITranslationService i18n,
 	    final KuneErrorHandler errorHandler, final Session session, final RateIt rateIt,
 	    final Provider<DocumentReader> docReaderProvider, final Provider<TextEditor> textEditorProvider,
 	    final Provider<FolderViewer> folderViewerProvider,
 	    final Provider<ContentServiceAsync> contentServiceProvider, final ActionToolbar toolbar,
-	    final ActionRegistry actionRegistry) {
+	    final ActionRegistry<StateToken> actionRegistry) {
 	this.stateManager = stateManager;
 	this.i18n = i18n;
 	this.errorHandler = errorHandler;

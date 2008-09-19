@@ -126,7 +126,7 @@ public class Content implements HasStateToken {
 	this.createdOn = System.currentTimeMillis();
 	this.lastRevision = new Revision(this);
 	accessLists = null;
-	status = ContentStatus.publishedOnline;
+	status = ContentStatus.editingInProgress;
     }
 
     public void addAuthor(final User user) {

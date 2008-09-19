@@ -1,5 +1,7 @@
 package org.ourproject.kune.platf.client.actions;
 
-public class ContentActionRegistry extends ActionRegistry {
+import org.ourproject.kune.platf.client.dto.StateToken;
+
+public class ContentActionRegistry extends ActionRegistry<StateToken> {
 
 }

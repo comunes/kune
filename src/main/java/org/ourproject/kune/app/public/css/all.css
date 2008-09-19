@@ -3463,8 +3463,16 @@ see: http://developer.yahoo.com/yui/fonts/ */
 }
 
 /* others */
-.k-linethrough {
+.k-textlinethrough {
 	text-decoration: line-through;
+}
+
+.k-textnormal {
+    text-decoration: inherit;
+}
+
+.k-textunderline {
+    text-decoration: underline;
 }
 
 

@@ -31,6 +31,7 @@ import org.ourproject.kune.chat.server.managers.XmppManager;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.CommentDTO;
 import org.ourproject.kune.platf.client.dto.ContentDTO;
+import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
@@ -57,6 +58,7 @@ import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Comment;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
+import org.ourproject.kune.platf.server.domain.ContentStatus;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
@@ -364,6 +366,23 @@ public class ContentRPC implements ContentService, RPC {
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Editor)
     @Transactional(type = TransactionType.READ_WRITE)
+    public void setStatus(final String userHash, final StateToken token, final ContentStatusDTO status) {
+	if (status.equals(ContentStatusDTO.publishedOnline) || status.equals(ContentStatusDTO.rejected)) {
+	    throw new AccessViolationException();
+	}
+	contentManager.setStatus(parseId(token.getDocument()), ContentStatus.valueOf(status.toString()));
+    }
+
+    @Authenticated
+    @Authorizated(accessRolRequired = AccessRol.Administrator)
+    @Transactional(type = TransactionType.READ_WRITE)
+    public void setStatusAsAdmin(final String userHash, final StateToken token, final ContentStatusDTO status) {
+	contentManager.setStatus(parseId(token.getDocument()), ContentStatus.valueOf(status.toString()));
+    }
+
+    @Authenticated
+    @Authorizated(accessRolRequired = AccessRol.Editor)
+    @Transactional(type = TransactionType.READ_WRITE)
     public List<TagResultDTO> setTags(final String userHash, final StateToken token, final String tags)
 	    throws DefaultException {
 	final Long contentId = parseId(token.getDocument());
@@ -398,7 +417,7 @@ public class ContentRPC implements ContentService, RPC {
 	}
 
 	state.setGroupTags(tagManager.getSummaryByGroup(group));
-	state.setGroupMembers(socialNetworkManager.find(user, group));
+	state.setGroupMembers(socialNetworkManager.get(user, group));
 	state.setParticipation(socialNetworkManager.findParticipation(user, group));
     }
 

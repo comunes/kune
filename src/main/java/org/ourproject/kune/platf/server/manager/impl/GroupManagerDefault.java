@@ -111,7 +111,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 	final String defaultSiteWorkspaceTheme = kuneProperties.get(KuneProperties.WS_THEMES_DEF);
 	final String licenseDefId = properties.getDefaultLicense();
 	final License licenseDef = licenseFinder.findByShortName(licenseDefId);
-	final Group group = new Group(user.getShortName(), user.getName(), licenseDef, GroupType.PERSONAL);
+	final Group userGroup = new Group(user.getShortName(), user.getName(), licenseDef, GroupType.PERSONAL);
 	User userSameEmail = null;
 	try {
 	    userSameEmail = userFinder.getByEmail(user.getEmail());
@@ -121,17 +121,17 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 	if (userSameEmail != null) {
 	    throw new EmailAddressInUseException();
 	}
-	group.setAdmissionType(AdmissionType.Closed);
-	group.setWorkspaceTheme(defaultSiteWorkspaceTheme);
-	user.setUserGroup(group);
-	initSocialNetwork(group, group);
+	userGroup.setAdmissionType(AdmissionType.Closed);
+	userGroup.setWorkspaceTheme(defaultSiteWorkspaceTheme);
+	user.setUserGroup(userGroup);
+	initSocialNetwork(userGroup, userGroup);
 	try {
-	    initGroup(user, group);
+	    initGroup(user, userGroup);
 	    super.persist(user, User.class);
 	} catch (final EntityExistsException e) {
 	    throw new GroupNameInUseException();
 	}
-	return group;
+	return userGroup;
     }
 
     public List<Group> findAdminInGroups(final Long groupId) {

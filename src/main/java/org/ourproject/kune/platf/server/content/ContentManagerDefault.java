@@ -188,6 +188,11 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
 	content.setPublishedOn(publishedOn);
     }
 
+    public void setStatus(final Long contentId, final ContentStatus status) {
+	final Content content = finder.getContent(contentId);
+	content.setStatus(status);
+    }
+
     public void setTags(final User user, final Long contentId, final String tags) throws DefaultException {
 	final Content content = finder.getContent(contentId);
 	final ArrayList<String> tagsStripped = KuneStringUtils.splitTags(tags);

@@ -25,6 +25,7 @@ import java.util.Date;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
+import org.ourproject.kune.platf.server.domain.ContentStatus;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.Manager;
@@ -32,34 +33,36 @@ import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 
 public interface ContentManager extends Manager<Content, Long> {
 
-    public void addAuthor(User user, Long contentId, String authorShortName) throws DefaultException;
+    void addAuthor(User user, Long contentId, String authorShortName) throws DefaultException;
 
-    public Content createContent(String title, String body, User author, Container container);
+    Content createContent(String title, String body, User author, Container container);
 
-    public void delContent(User user, Long contentId) throws DefaultException;
+    void delContent(User user, Long contentId) throws DefaultException;
 
-    public Double getRateAvg(Content content);
+    Double getRateAvg(Content content);
 
-    public Long getRateByUsers(Content content);
+    Long getRateByUsers(Content content);
 
-    public Double getRateContent(User user, Content content);
+    Double getRateContent(User user, Content content);
 
-    public void rateContent(User rater, Long contentId, Double value) throws DefaultException;
+    void rateContent(User rater, Long contentId, Double value) throws DefaultException;
 
-    public void removeAuthor(User user, Long contentId, String authorShortName) throws DefaultException;
+    void removeAuthor(User user, Long contentId, String authorShortName) throws DefaultException;
 
-    public String renameContent(User user, Long contentId, String newName) throws DefaultException;
+    String renameContent(User user, Long contentId, String newName) throws DefaultException;
 
-    public Content save(User editor, Content descriptor, String content);
-
-    public I18nLanguage setLanguage(User user, Long contentId, String languageCode) throws DefaultException;
-
-    public void setPublishedOn(User user, Long contentId, Date publishedOn) throws DefaultException;
-
-    public void setTags(User user, Long contentId, String tags) throws DefaultException;
+    Content save(User editor, Content descriptor, String content);
 
     SearchResult<Content> search(String search);
 
     SearchResult<Content> search(String search, Integer firstResult, Integer maxResults);
+
+    I18nLanguage setLanguage(User user, Long contentId, String languageCode) throws DefaultException;
+
+    void setPublishedOn(User user, Long contentId, Date publishedOn) throws DefaultException;
+
+    void setStatus(Long contentId, ContentStatus contentStatus);
+
+    void setTags(User user, Long contentId, String tags) throws DefaultException;
 
 }

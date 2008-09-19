@@ -72,11 +72,6 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 	}
     }
 
-    public void addAdmin(final User user, final Group group) {
-	final SocialNetwork sn = group.getSocialNetwork();
-	sn.addAdmin(user.getUserGroup());
-    }
-
     public void addGroupToAdmins(final User userLogged, final Group group, final Group inGroup) throws DefaultException {
 	checkGroupAddingToSelf(group, inGroup);
 	final SocialNetwork sn = inGroup.getSocialNetwork();
@@ -131,35 +126,36 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 	}
     }
 
-    public SocialNetwork find(final User user, final Group group) throws AccessViolationException {
+    public ParticipationData findParticipation(final User userLogged, final Group group)
+	    throws AccessViolationException {
+	get(userLogged, group); // check access
+	final Long groupId = group.getId();
+	final List<Group> adminInGroups = finder.findAdminInGroups(groupId);
+	// Don't show self user group
+	adminInGroups.remove(userLogged.getUserGroup());
+	final List<Group> collabInGroups = finder.findCollabInGroups(groupId);
+	return new ParticipationData(adminInGroups, collabInGroups);
+    }
+
+    public SocialNetwork get(final User petitioner, final Group group) throws AccessViolationException {
 	final SocialNetwork sn = group.getSocialNetwork();
-	if (!sn.getAccessLists().getViewers().includes(user.getUserGroup())) {
+	if (!sn.getAccessLists().getViewers().includes(petitioner.getUserGroup())) {
 	    throw new AccessViolationException();
 	}
 	return sn;
     }
 
-    public ParticipationData findParticipation(final User user, final Group group) throws AccessViolationException {
-	find(user, group); // check access
-	final Long groupId = group.getId();
-	final List<Group> adminInGroups = finder.findAdminInGroups(groupId);
-	// Don't show self user group
-	adminInGroups.remove(user.getUserGroup());
-	final List<Group> collabInGroups = finder.findCollabInGroups(groupId);
-	return new ParticipationData(adminInGroups, collabInGroups);
-    }
-
-    public SocialNetworkRequestResult requestToJoin(final User user, final Group inGroup) throws DefaultException,
-	    UserMustBeLoggedException {
+    public SocialNetworkRequestResult requestToJoin(final User userLogged, final Group inGroup)
+	    throws DefaultException, UserMustBeLoggedException {
 	final SocialNetwork sn = inGroup.getSocialNetwork();
-	if (!User.isKnownUser(user)) {
+	if (!User.isKnownUser(userLogged)) {
 	    throw new UserMustBeLoggedException();
 	}
 	final AdmissionType admissionType = inGroup.getAdmissionType();
 	if (admissionType == null) {
 	    throw new RuntimeException();
 	}
-	final Group userGroup = user.getUserGroup();
+	final Group userGroup = userLogged.getUserGroup();
 	checkGroupIsNotAlreadyAMember(userGroup, sn);
 	if (isModerated(admissionType)) {
 	    sn.addPendingCollaborator(userGroup);
@@ -224,6 +220,11 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 	} else {
 	    throw new DefaultException("Person/Group is not a collaborator");
 	}
+    }
+
+    void addAdmin(final User newAdmin, final Group group) {
+	final SocialNetwork sn = group.getSocialNetwork();
+	sn.addAdmin(newAdmin.getUserGroup());
     }
 
     private void checkGroupAddingToSelf(final Group group, final Group inGroup) throws DefaultException {

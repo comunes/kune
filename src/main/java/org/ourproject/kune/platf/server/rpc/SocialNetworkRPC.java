@@ -208,7 +208,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     }
 
     private SocialNetworkDTO getGroupMembers(final User user, final Group group) throws DefaultException {
-	return mapper.map(socialNetworkManager.find(user, group), SocialNetworkDTO.class);
+	return mapper.map(socialNetworkManager.get(user, group), SocialNetworkDTO.class);
     }
 
     private ParticipationDataDTO getParticipation(final User user, final Group group) throws DefaultException {

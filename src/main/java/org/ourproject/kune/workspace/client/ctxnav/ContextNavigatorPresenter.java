@@ -61,13 +61,13 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     private boolean editOnNextStateChange;
     private final ContentIconsRegistry contentIconsRegistry;
     private final DragDropContentRegistry dragDropContentRegistry;
-    private final ActionRegistry actionRegistry;
+    private final ActionRegistry<StateToken> actionRegistry;
     private final ActionToolbar toolbar;
 
     public ContextNavigatorPresenter(final StateManager stateManager, final Session session,
 	    final Provider<ContentServiceAsync> contentServiceProvider, final I18nUITranslationService i18n,
 	    final EntityTitle entityTitle, final ContentIconsRegistry contentIconsRegistry,
-	    final DragDropContentRegistry dragDropContentRegistry, final ActionRegistry actionRegistry,
+	    final DragDropContentRegistry dragDropContentRegistry, final ActionRegistry<StateToken> actionRegistry,
 	    final ActionToolbar toolbar) {
 	this.stateManager = stateManager;
 	this.session = session;

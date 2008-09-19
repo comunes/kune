@@ -13,10 +13,10 @@ import com.allen_sauer.gwt.log.client.Log;
 public class ActionToolbarPresenter implements ActionToolbar {
     private final ActionToolbarPanel toolbar;
     private final Session session;
-    private final ActionRegistry actionRegistry;
+    private final ActionRegistry<StateToken> actionRegistry;
 
     public ActionToolbarPresenter(final Session session, final ActionToolbarPanel actionToolbarPanel,
-	    final ActionRegistry actionRegistry) {
+	    final ActionRegistry<StateToken> actionRegistry) {
 	this.session = session;
 	toolbar = actionToolbarPanel;
 	this.actionRegistry = actionRegistry;

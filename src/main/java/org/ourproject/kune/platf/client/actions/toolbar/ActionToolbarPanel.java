@@ -62,7 +62,7 @@ public class ActionToolbarPanel implements ActionToolbarView {
 	button.addListener(new ButtonListenerAdapter() {
 	    @Override
 	    public void onClick(final Button button, final EventObject e) {
-		actionManagerProvider.get().doAction(action, session.getCurrentState().getStateToken());
+		actionManagerProvider.get().doAction(action, session.getCurrentStateToken());
 	    }
 	});
 	if (iconUrl != null) {
@@ -143,7 +143,7 @@ public class ActionToolbarPanel implements ActionToolbarView {
 	final Item item = new Item(action.getText(), new BaseItemListenerAdapter() {
 	    @Override
 	    public void onClick(BaseItem item, EventObject e) {
-		actionManagerProvider.get().doAction(action, session.getCurrentState().getStateToken());
+		actionManagerProvider.get().doAction(action, session.getCurrentStateToken());
 	    }
 	});
 	item.setIcon(action.getIconUrl());

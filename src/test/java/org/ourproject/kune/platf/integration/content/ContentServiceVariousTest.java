@@ -58,6 +58,14 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     }
 
     @Test
+    public void defAdminDontShowAsParticipation() throws Exception {
+	doLogin();
+	final StateDTO content = contentService.getContent(getHash(), new StateToken(getSiteAdminShortName()));
+	assertEquals(0, content.getParticipation().getGroupsIsCollab().size());
+	assertEquals(1, content.getParticipation().getGroupsIsAdmin().size());
+    }
+
+    @Test
     public void folderRename() throws Exception {
 	doLogin();
 	defaultContent = getDefaultContent();

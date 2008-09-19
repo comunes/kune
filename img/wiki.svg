@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="16px"
+   height="16px"
+   id="svg2160"
+   sodipodi:version="0.32"
+   inkscape:version="0.45.1"
+   sodipodi:docbase="/Users/vjrj/Desktop"
+   sodipodi:docname="wiki.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   inkscape:export-filename="/Users/vjrj/Desktop/wikipage_add.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs2162">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient3201">
+      <stop
+         style="stop-color:#ff9900;stop-opacity:1"
+         offset="0"
+         id="stop3203" />
+      <stop
+         style="stop-color:#ffc400;stop-opacity:0;"
+         offset="1"
+         id="stop3205" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3201"
+       id="linearGradient3207"
+       x1="9.0366335"
+       y1="7.9007425"
+       x2="-6.7049499"
+       y2="14.666832"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3201"
+       id="linearGradient3417"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.6797384,0,0,0.6722173,4.432061,3.547779)"
+       x1="9.0366335"
+       y1="7.9007425"
+       x2="-6.7049499"
+       y2="14.666832" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3201"
+       id="linearGradient3485"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.6797384,0,0,0.6722173,4.432061,3.547779)"
+       x1="9.0366335"
+       y1="7.9007425"
+       x2="-6.7049499"
+       y2="14.666832" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="22.197802"
+     inkscape:cx="8"
+     inkscape:cy="8"
+     inkscape:current-layer="layer3"
+     showgrid="true"
+     inkscape:grid-bbox="true"
+     inkscape:document-units="px"
+     inkscape:window-width="1409"
+     inkscape:window-height="914"
+     inkscape:window-x="31"
+     inkscape:window-y="86" />
+  <metadata
+     id="metadata2165">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="wikipage"
+     style="display:inline">
+    <image
+       style="display:inline"
+       y="0"
+       x="0"
+       id="image3267"
+       height="16"
+       width="16"
+       sodipodi:absref="/Users/vjrj/Desktop/page_add.png"
+       xlink:href="page_add.png" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="blank"
+     style="display:none">
+    <image
+       style="display:inline"
+       y="0"
+       x="-8.8817842e-16"
+       id="image2226"
+       height="16"
+       width="16"
+       sodipodi:absref="/Users/vjrj/Desktop/page.png"
+       xlink:href="page.png"
+       inkscape:export-filename="/Users/vjrj/Desktop/wikipage.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+  </g>
+  <g
+     id="layer1"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     style="display:inline">
+    <g
+       id="g3481"
+       transform="translate(19,-7.4782179)">
+      <image
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/Users/vjrj/Desktop/wikiicon.png"
+         xlink:href="wiki.png"
+         sodipodi:absref="/Users/vjrj/Desktop/wiki.png"
+         width="16"
+         height="16"
+         id="image3413"
+         x="0"
+         y="0" />
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/Users/vjrj/Desktop/wikiicon.png"
+         sodipodi:nodetypes="cccccc"
+         id="path3362"
+         d="M 13.130693,6.917851 L 10.889575,11.9505 L 10.209836,7.9171915 L 8.170622,11.9505 L 7.490883,8.2253455 L 6.811146,9.261626"
+         style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:url(#linearGradient3485);stroke-width:1.00000012px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
+    </g>
+    <image
+       y="-0.49554455"
+       x="13.559901"
+       id="image3478"
+       height="16"
+       width="16"
+       sodipodi:absref="/Users/vjrj/Desktop/add-small.png"
+       xlink:href="add-small.png" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="w_of_wikipage"
+     style="display:inline">
+    <path
+       style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:url(#linearGradient3207);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
+       d="M 12.79703,5.013366 L 9.5,12.5 L 8.5,6.4999997 L 5.5,12.5 L 4.5,6.9584154 L 3.5,8.4999997"
+       id="path2229"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/Users/vjrj/Desktop/wikipage.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+  </g>
+</svg>

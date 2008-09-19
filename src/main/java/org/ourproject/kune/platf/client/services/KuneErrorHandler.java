@@ -22,6 +22,7 @@ package org.ourproject.kune.platf.client.services;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.AlreadyGroupMemberException;
 import org.ourproject.kune.platf.client.errors.AlreadyUserMemberException;
+import org.ourproject.kune.platf.client.errors.ContainerNotPermittedException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
 import org.ourproject.kune.platf.client.errors.LastAdminInGroupException;
@@ -95,6 +96,10 @@ public class KuneErrorHandler {
 	} catch (final ContentNotFoundException e) {
 	    logException(e);
 	    Site.error(i18n.t("Content not found"));
+	    stateManagerProvider.get().gotoToken("");
+	} catch (final ContainerNotPermittedException e) {
+	    logException(e);
+	    Site.error(i18n.t("Action not permitted in this location"));
 	    stateManagerProvider.get().gotoToken("");
 	} catch (final LastAdminInGroupException e) {
 	    logException(e);

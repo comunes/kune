@@ -26,6 +26,7 @@ import org.ourproject.kune.platf.server.content.ContainerManager;
 import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
+import org.ourproject.kune.platf.server.domain.ContentStatus;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.ToolConfiguration;
 import org.ourproject.kune.platf.server.domain.User;
@@ -38,10 +39,12 @@ import com.google.inject.Inject;
 public class DocumentServerTool implements ServerTool {
     public static final String TYPE_ROOT = "docs.root";
     public static final String TYPE_FOLDER = "docs.folder";
+    public static final String TYPE_DOCUMENT = "docs.doc";
     public static final String TYPE_GALLERY = "docs.gallery";
     public static final String TYPE_BLOG = "docs.blog";
-    public static final String TYPE_DOCUMENT = "docs.doc";
     public static final String TYPE_POST = "docs.post";
+    public static final String TYPE_WIKI = "docs.wiki";
+    public static final String TYPE_WIKIPAGE = "docs.wikipage";
     public static final String TYPE_UPLOADEDFILE = "docs.uploaded";
 
     public static final String NAME = "docs";
@@ -78,6 +81,7 @@ public class DocumentServerTool implements ServerTool {
 	descriptor.addAuthor(user);
 	descriptor.setLanguage(user.getLanguage());
 	descriptor.setTypeId(TYPE_DOCUMENT);
+	descriptor.setStatus(ContentStatus.publishedOnline);
 	group.setDefaultContent(descriptor);
 	return group;
     }
@@ -97,9 +101,12 @@ public class DocumentServerTool implements ServerTool {
     }
 
     private void checkTypeId(final String parentTypeId, final String typeId) {
-	if (typeId.equals(TYPE_FOLDER) || typeId.equals(TYPE_GALLERY)) {
+	if (typeId.equals(TYPE_FOLDER) || typeId.equals(TYPE_GALLERY) || typeId.equals(TYPE_WIKI)) {
 	    // ok valid container
 	    if (typeId.equals(TYPE_GALLERY) && !parentTypeId.equals(TYPE_ROOT)) {
+		throw new ContainerNotPermittedException();
+	    }
+	    if (typeId.equals(TYPE_WIKI) && !parentTypeId.equals(TYPE_ROOT)) {
 		throw new ContainerNotPermittedException();
 	    }
 	} else {

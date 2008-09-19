@@ -1,4 +1,4 @@
-package org.ourproject.kune.platf.server.manager;
+package org.ourproject.kune.platf.server.manager.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -12,6 +12,7 @@ import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.AlreadyGroupMemberException;
 import org.ourproject.kune.platf.client.errors.LastAdminInGroupException;
+import org.ourproject.kune.platf.server.ParticipationData;
 import org.ourproject.kune.platf.server.PersistenceTest;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Group;
@@ -23,7 +24,7 @@ import com.google.inject.Inject;
 
 public class SocialNetworkManagerTest extends PersistenceTest {
     @Inject
-    private SocialNetworkManager socialNetworkManager;
+    private SocialNetworkManagerDefault socialNetworkManager;
     private Group group;
     private Group userGroup;
     private Group orphanedGroup;
@@ -203,6 +204,26 @@ public class SocialNetworkManagerTest extends PersistenceTest {
 	socialNetworkManager.addAdmin(admin, group);
 	socialNetworkManager.acceptJoinGroup(admin, userGroup, group);
 	socialNetworkManager.deleteMember(otherUser, userGroup, group);
+    }
+
+    @Test
+    public void participationDontShowSelfGroup() {
+	group.getSocialNetwork().getAccessLists().getViewers().setMode(GroupListMode.EVERYONE);
+	user.getUserGroup().getSocialNetwork().getAccessLists().getViewers().setMode(GroupListMode.EVERYONE);
+	assertEquals(GroupListMode.EVERYONE, group.getSocialNetwork().getAccessLists().getViewers().getMode());
+	ParticipationData part = socialNetworkManager.findParticipation(User.UNKNOWN_USER, group);
+	assertFalse(part.getGroupsIsAdmin().contains(group));
+	assertFalse(part.getGroupsIsCollab().contains(group));
+
+	socialNetworkManager.addAdmin(admin, group);
+	part = socialNetworkManager.findParticipation(admin, group);
+	assertFalse(part.getGroupsIsAdmin().contains(group));
+	assertFalse(part.getGroupsIsCollab().contains(group));
+
+	socialNetworkManager.addAdmin(user, user.getUserGroup());
+	part = socialNetworkManager.findParticipation(User.UNKNOWN_USER, user.getUserGroup());
+	assertFalse(part.getGroupsIsAdmin().contains(user.getUserGroup()));
+	assertFalse(part.getGroupsIsCollab().contains(user.getUserGroup()));
     }
 
     @Test

@@ -56,10 +56,12 @@ import com.calclab.suco.client.signal.Slot;
 public class DocumentClientTool extends AbstractClientTool {
     public static final String TYPE_ROOT = "docs.root";
     public static final String TYPE_FOLDER = "docs.folder";
+    public static final String TYPE_DOCUMENT = "docs.doc";
     public static final String TYPE_GALLERY = "docs.gallery";
     public static final String TYPE_BLOG = "docs.blog";
-    public static final String TYPE_DOCUMENT = "docs.doc";
     public static final String TYPE_POST = "docs.post";
+    public static final String TYPE_WIKI = "docs.wiki";
+    public static final String TYPE_WIKIPAGE = "docs.wikipage";
     public static final String TYPE_UPLOADEDFILE = "docs.uploaded";
 
     public static final String NAME = "docs";
@@ -71,7 +73,6 @@ public class DocumentClientTool extends AbstractClientTool {
     private final Session session;
     private final Provider<ContentServiceAsync> contentServiceProvider;
     private final Provider<FileUploader> fileUploaderProvider;
-    private final ContentActionRegistry contentActionRegistry;
     private final ContextActionRegistry contextActionRegistry;
     private final DragDropContentRegistry dragDropContentRegistry;
     private final ContentIconsRegistry contentIconsRegistry;
@@ -92,7 +93,6 @@ public class DocumentClientTool extends AbstractClientTool {
 	this.stateManager = stateManager;
 	this.contentServiceProvider = contentServiceProvider;
 	this.fileUploaderProvider = fileUploaderProvider;
-	this.contentActionRegistry = contentActionRegistry;
 	this.contextActionRegistry = contextActionRegistry;
 	this.dragDropContentRegistry = dragDropContentRegistry;
 	this.contentIconsRegistry = contentIconsRegistry;
@@ -116,11 +116,13 @@ public class DocumentClientTool extends AbstractClientTool {
     }
 
     private void createActions() {
-
 	final ActionMenuDescriptor<StateToken> addFolder = createFolderAction(TYPE_FOLDER, "images/nav/folder_add.png",
-		i18n.t("New folder"), i18n.t("Folder"), i18n.t("New"));
+		i18n.t("New folder"), i18n.t("Folder"), i18n.t("New"), i18n.t("New folder"));
 	final ActionMenuDescriptor<StateToken> addGallery = createFolderAction(TYPE_GALLERY,
-		"images/nav/gallery_add.png", i18n.t("New gallery"), i18n.t("Folder"), i18n.t("New"));
+		"images/nav/gallery_add.png", i18n.t("New gallery"), i18n.t("Folder"), i18n.t("New"), i18n
+			.t("New gallery"));
+	final ActionMenuDescriptor<StateToken> addWiki = createFolderAction(TYPE_WIKI, "images/nav/wiki_add.png", i18n
+		.t("New wiki"), i18n.t("Folder"), i18n.t("New"), i18n.t("wiki"));
 
 	final ActionMenuDescriptor<StateToken> addDoc = new ActionMenuDescriptor<StateToken>(AccessRolDTO.Editor,
 		ActionPosition.topbarAndItemMenu, new Slot<StateToken>() {
@@ -258,7 +260,6 @@ public class DocumentClientTool extends AbstractClientTool {
 	contextActionRegistry.addAction(TYPE_FOLDER, go);
 	contextActionRegistry.addAction(TYPE_FOLDER, addDoc);
 	contextActionRegistry.addAction(TYPE_FOLDER, addFolder);
-	contentActionRegistry.addAction(TYPE_FOLDER, delContainer);
 	contextActionRegistry.addAction(TYPE_FOLDER, delContainer);
 	contextActionRegistry.addAction(TYPE_FOLDER, rename);
 	contextActionRegistry.addAction(TYPE_FOLDER, goGroupHome);
@@ -274,15 +275,19 @@ public class DocumentClientTool extends AbstractClientTool {
 	contextActionRegistry.addAction(TYPE_GALLERY, goGroupHome);
 	contextActionRegistry.addAction(TYPE_GALLERY, refresh);
 
+	contextActionRegistry.addAction(TYPE_WIKI, go);
+	contextActionRegistry.addAction(TYPE_WIKI, goGroupHome);
+	contextActionRegistry.addAction(TYPE_WIKI, refresh);
+
 	contextActionRegistry.addAction(TYPE_ROOT, addDoc);
 	contextActionRegistry.addAction(TYPE_ROOT, addFolder);
 	contextActionRegistry.addAction(TYPE_ROOT, addGallery);
+	contextActionRegistry.addAction(TYPE_ROOT, addWiki);
 	contextActionRegistry.addAction(TYPE_ROOT, goGroupHome);
 	contextActionRegistry.addAction(TYPE_ROOT, refresh);
 	contextActionRegistry.addAction(TYPE_ROOT, uploadFile);
 
 	contextActionRegistry.addAction(TYPE_DOCUMENT, go);
-	contentActionRegistry.addAction(TYPE_DOCUMENT, delContent);
 	contextActionRegistry.addAction(TYPE_DOCUMENT, delContent);
 	contextActionRegistry.addAction(TYPE_DOCUMENT, rename);
 	contextActionRegistry.addAction(TYPE_DOCUMENT, goGroupHome);
@@ -291,15 +296,15 @@ public class DocumentClientTool extends AbstractClientTool {
     }
 
     private ActionMenuDescriptor<StateToken> createFolderAction(final String contentTypeId, final String iconUrl,
-	    final String textDescription, final String parentMenuTitle, final String parentMenuSubtitle) {
+	    final String textDescription, final String parentMenuTitle, final String parentMenuSubtitle,
+	    final String defaultName) {
 	final ActionMenuDescriptor<StateToken> addFolder;
 	addFolder = new ActionMenuDescriptor<StateToken>(AccessRolDTO.Editor, ActionPosition.topbarAndItemMenu,
 		new Slot<StateToken>() {
 		    public void onEvent(final StateToken stateToken) {
 			Site.showProgressProcessing();
-			contentServiceProvider.get().addFolder(session.getUserHash(), stateToken, textDescription,
+			contentServiceProvider.get().addFolder(session.getUserHash(), stateToken, defaultName,
 				contentTypeId, new AsyncCallbackSimple<StateDTO>() {
-
 				    public void onSuccess(final StateDTO state) {
 					contextNavigator.setEditOnNextStateChange(true);
 					stateManager.setRetrievedState(state);
@@ -348,6 +353,8 @@ public class DocumentClientTool extends AbstractClientTool {
 	contentIconsRegistry.registerContentTypeIcon(TYPE_GALLERY, "images/nav/gallery.png");
 	contentIconsRegistry.registerContentTypeIcon(TYPE_DOCUMENT, "images/nav/page.png");
 	contentIconsRegistry.registerContentTypeIcon(TYPE_POST, "images/nav/post.png");
+	contentIconsRegistry.registerContentTypeIcon(TYPE_WIKI, "images/nav/wiki.png");
+	contentIconsRegistry.registerContentTypeIcon(TYPE_WIKIPAGE, "images/nav/wikipage.png");
     }
 
 }

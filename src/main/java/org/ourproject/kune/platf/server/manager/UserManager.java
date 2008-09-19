@@ -25,8 +25,6 @@ import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 
 public interface UserManager {
-    User login(String nickOrEmail, String passwd);
-
     /**
      * CreateUser new method with language country and timezone params
      * 
@@ -42,20 +40,22 @@ public interface UserManager {
      * @throws I18nNotFoundException
      */
     User createUser(String shortName, String longName, String email, String passwd, String language, String country,
-            String timezone) throws I18nNotFoundException;
+	    String timezone) throws I18nNotFoundException;
 
     /**
-     * IMPORTANT: if userId == null, it returns User.NONE
+     * IMPORTANT: if userId == null, it returns User.UNKNOWN_USER
      * 
      * @param userId
      * @return
      */
     User find(Long userId);
 
+    User login(String nickOrEmail, String passwd);
+
+    void reIndex();
+
     SearchResult<User> search(String search);
 
     SearchResult<User> search(String search, Integer firstResult, Integer maxResults);
-
-    void reIndex();
 
 }

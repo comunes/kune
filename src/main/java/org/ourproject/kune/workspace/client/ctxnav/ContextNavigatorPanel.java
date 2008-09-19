@@ -85,18 +85,6 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 	    child.setHref("#" + item.getStateToken().toString());
 	    child.setAllowDrag(item.isDraggable());
 	    child.setAllowDrop(item.isDroppable());
-	    switch (item.getContentStatus()) {
-	    case publishedOnline:
-		child.enable();
-		break;
-	    case inTheDustbin:
-	    case rejected:
-		child.setCls("k-linethrough");
-	    case editingInProgress:
-	    case submittedForEvaluation:
-		child.disable();
-		break;
-	    }
 	    createItemMenu(nodeId, item.getActionCollection(), item.getStateToken());
 	    final TreeNode parent = treePanel.getNodeById(item.getParentId());
 	    if (parent != null) {
@@ -124,6 +112,19 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 		    child.setLeaf(true);
 		}
 		parent.appendChild(child);
+		switch (item.getContentStatus()) {
+		case publishedOnline:
+		    child.setCls("k-textnormal");
+		    break;
+		case inTheDustbin:
+		case rejected:
+		    child.setCls("k-textlinethrough");
+		    break;
+		case editingInProgress:
+		case submittedForEvaluation:
+		    child.setCls("k-textunderline");
+		    break;
+		}
 	    } else {
 		Log.error("Error building file tree, parent folder not found");
 	    }

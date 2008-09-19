@@ -3,35 +3,34 @@ package org.ourproject.kune.platf.client.actions;
 import java.util.HashMap;
 
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
 
-public class ActionRegistry {
+public class ActionRegistry<T> {
 
-    private final HashMap<String, ActionCollection<StateToken>> actions;
+    private final HashMap<String, ActionCollection<T>> actions;
 
     public ActionRegistry() {
-	actions = new HashMap<String, ActionCollection<StateToken>>();
+	actions = new HashMap<String, ActionCollection<T>>();
     }
 
-    public void addAction(final String contentTypeId, final ActionDescriptor<StateToken> action) {
-	final ActionCollection<StateToken> actionColl = getActions(contentTypeId);
+    public void addAction(final String contentTypeId, final ActionDescriptor<T> action) {
+	final ActionCollection<T> actionColl = getActions(contentTypeId);
 	actionColl.add(action);
     }
 
-    public boolean checkEnabling(final ActionDescriptor<StateToken> action, final StateToken stateToken) {
-	final ActionEnableCondition<StateToken> enableCondition = action.getEnableCondition();
-	return enableCondition != null ? enableCondition.mustBeEnabled(stateToken) : true;
+    public boolean checkEnabling(final ActionDescriptor<T> action, final T T) {
+	final ActionEnableCondition<T> enableCondition = action.getEnableCondition();
+	return enableCondition != null ? enableCondition.mustBeEnabled(T) : true;
     }
 
-    public void removeAction(final String contentTypeId, final ActionDescriptor<StateToken> action) {
+    public void removeAction(final String contentTypeId, final ActionDescriptor<T> action) {
 	actions.get(contentTypeId).remove(action);
     }
 
-    public ActionCollectionSet<StateToken> selectCurrentActions(final AccessRightsDTO rights, final String contentTypeId) {
-	final ActionCollectionSet<StateToken> set = new ActionCollectionSet<StateToken>();
+    public ActionCollectionSet<T> selectCurrentActions(final AccessRightsDTO rights, final String contentTypeId) {
+	final ActionCollectionSet<T> set = new ActionCollectionSet<T>();
 	boolean add = false;
 
-	for (final ActionDescriptor<StateToken> action : getActions(contentTypeId)) {
+	for (final ActionDescriptor<T> action : getActions(contentTypeId)) {
 	    switch (action.getAccessRol()) {
 	    case Administrator:
 		add = rights.isAdministrable();
@@ -64,10 +63,10 @@ public class ActionRegistry {
 	return set;
     }
 
-    private ActionCollection<StateToken> getActions(final String contentTypeId) {
-	ActionCollection<StateToken> actionColl = actions.get(contentTypeId);
+    private ActionCollection<T> getActions(final String contentTypeId) {
+	ActionCollection<T> actionColl = actions.get(contentTypeId);
 	if (actionColl == null) {
-	    actionColl = new ActionCollection<StateToken>();
+	    actionColl = new ActionCollection<T>();
 	    actions.put(contentTypeId, actionColl);
 	}
 	return actionColl;

@@ -1,5 +1,12 @@
 package org.ourproject.kune.docs.client;
 
+import org.ourproject.kune.docs.client.actions.ContentEditAction;
+import org.ourproject.kune.docs.client.actions.ContentEditInProgressAction;
+import org.ourproject.kune.docs.client.actions.ContentPublishAction;
+import org.ourproject.kune.docs.client.actions.ContentRejectAction;
+import org.ourproject.kune.docs.client.actions.ContentSubmitForPublishAction;
+import org.ourproject.kune.docs.client.actions.ContentTranslationAction;
+import org.ourproject.kune.docs.client.actions.ContentTrashAction;
 import org.ourproject.kune.docs.client.cnt.DocumentContent;
 import org.ourproject.kune.docs.client.cnt.DocumentContentPanel;
 import org.ourproject.kune.docs.client.cnt.DocumentContentPresenter;
@@ -66,6 +73,28 @@ public class DocumentClientModule extends AbstractModule {
 	    }
 	});
 
+	register(SingletonScope.class, new Factory<ContentPublishAction>(ContentPublishAction.class) {
+	    public ContentPublishAction create() {
+		return new ContentPublishAction($(Session.class), $$(ContentServiceAsync.class), i18n);
+	    }
+	}, new Factory<ContentRejectAction>(ContentRejectAction.class) {
+	    public ContentRejectAction create() {
+		return new ContentRejectAction($(Session.class), $$(ContentServiceAsync.class), i18n);
+	    }
+	}, new Factory<ContentEditInProgressAction>(ContentEditInProgressAction.class) {
+	    public ContentEditInProgressAction create() {
+		return new ContentEditInProgressAction($(Session.class), $$(ContentServiceAsync.class), i18n);
+	    }
+	}, new Factory<ContentSubmitForPublishAction>(ContentSubmitForPublishAction.class) {
+	    public ContentSubmitForPublishAction create() {
+		return new ContentSubmitForPublishAction($(Session.class), $$(ContentServiceAsync.class), i18n);
+	    }
+	}, new Factory<ContentTrashAction>(ContentTrashAction.class) {
+	    public ContentTrashAction create() {
+		return new ContentTrashAction($(Session.class), $$(ContentServiceAsync.class), i18n);
+	    }
+	});
+
 	register(SingletonScope.class, new Factory<ContentEditAction>(ContentEditAction.class) {
 	    public ContentEditAction create() {
 		return new ContentEditAction(i18n);
@@ -91,6 +120,15 @@ public class DocumentClientModule extends AbstractModule {
 		$(ContentActionRegistry.class).addAction(DocumentClientTool.TYPE_DOCUMENT, $(ContentEditAction.class));
 		$(ContentActionRegistry.class).addAction(DocumentClientTool.TYPE_DOCUMENT,
 			$(ContentTranslationAction.class));
+		$(ContentActionRegistry.class).addAction(DocumentClientTool.TYPE_DOCUMENT,
+			$(ContentPublishAction.class));
+		$(ContentActionRegistry.class)
+			.addAction(DocumentClientTool.TYPE_DOCUMENT, $(ContentRejectAction.class));
+		$(ContentActionRegistry.class).addAction(DocumentClientTool.TYPE_DOCUMENT,
+			$(ContentSubmitForPublishAction.class));
+		$(ContentActionRegistry.class).addAction(DocumentClientTool.TYPE_DOCUMENT,
+			$(ContentEditInProgressAction.class));
+		$(ContentActionRegistry.class).addAction(DocumentClientTool.TYPE_DOCUMENT, $(ContentTrashAction.class));
 		presenter.init(panel);
 		return presenter;
 	    }

@@ -28,6 +28,7 @@ import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.domain.Content;
+import org.ourproject.kune.platf.server.domain.ContentStatus;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.I18nCountry;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
@@ -149,6 +150,7 @@ public class DatabaseInitializer {
 			+ "into other languages.<br><br>Thank you,<br>"
 			+ "<br>--<br><span style=\"font-style: italic;\">" + "The kune development team</span><br>");
 	contentManager.renameContent(user, defaultContent.getId(), "Welcome to kune demo");
+	contentManager.setStatus(defaultContent.getId(), ContentStatus.publishedOnline);
     }
 
     private void createLicenses() {

@@ -1,4 +1,4 @@
-package org.ourproject.kune.docs.client;
+package org.ourproject.kune.docs.client.actions;
 
 import org.ourproject.kune.platf.client.actions.ActionButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionPosition;
