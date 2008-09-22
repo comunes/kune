@@ -35,6 +35,7 @@ public class FileUploadManagerRevisited extends HttpServlet {
     @Inject
     KuneProperties kuneProperties;
 
+    @Override
     @SuppressWarnings( { "unchecked", "deprecation" })
     protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,
 	    IOException {
@@ -54,10 +55,7 @@ public class FileUploadManagerRevisited extends HttpServlet {
 
 	final ServletFileUpload upload = new ServletFileUpload(factory);
 	// maximum size before a FileUploadException will be thrown
-	// upload.setSizeMax(new
-	// Integer(kuneProperties.get(KuneProperties.UPLOAD_MAX_FILE_SIZE)) *
-	// 1024 * 1024);
-	upload.setSizeMax(5 * 1024 * 1024);
+	upload.setSizeMax(new Integer(kuneProperties.get(KuneProperties.UPLOAD_MAX_FILE_SIZE)) * 1024 * 1024);
 
 	try {
 	    final List fileItems = upload.parseRequest(req);
@@ -70,10 +68,7 @@ public class FileUploadManagerRevisited extends HttpServlet {
 		} else {
 		    final String fileName = item.getName();
 		    log.info("file: " + fileName + " fieldName: " + item.getFieldName() + " size: " + item.getSize());
-		    // item.write(new
-		    // File(kuneProperties.get(KuneProperties.UPLOAD_LOCATION),
-		    // fileName));
-		    item.write(new File("/var/lib/kune/uploads", fileName));
+		    item.write(new File(kuneProperties.get(KuneProperties.UPLOAD_LOCATION), fileName));
 		}
 	    }
 	} catch (final FileUploadException e) {

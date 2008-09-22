@@ -29,23 +29,22 @@ import org.ourproject.kune.rack.RackServletFilter;
 import com.google.inject.Injector;
 
 public abstract class InjectedFilter implements Filter {
-	private ServletContext ctx;
+    protected ServletContext ctx;
 
-	public <T> T getInstance(Class<T> type) {
-		return getInjector().getInstance(type);
-	}
+    public void destroy() {
+    }
 
-	private Injector getInjector() {
-		return (Injector) ctx.getAttribute(RackServletFilter.INJECTOR_ATTRIBUTE);
-	}
+    public <T> T getInstance(final Class<T> type) {
+	return getInjector().getInstance(type);
+    }
 
-	public void init(FilterConfig filterConfig) throws ServletException {
-		this.ctx = filterConfig.getServletContext();
-		getInjector().injectMembers(this);
-	}
+    public void init(final FilterConfig filterConfig) throws ServletException {
+	this.ctx = filterConfig.getServletContext();
+	getInjector().injectMembers(this);
+    }
 
-	public void destroy() {
-	}
-
+    private Injector getInjector() {
+	return (Injector) ctx.getAttribute(RackServletFilter.INJECTOR_ATTRIBUTE);
+    }
 
 }

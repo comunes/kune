@@ -28,6 +28,7 @@ import org.ourproject.kune.platf.client.rpc.SiteService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.server.LoggerMethodInterceptor;
 import org.ourproject.kune.platf.server.PlatformServerModule;
+import org.ourproject.kune.platf.server.manager.impl.FileUploadManagerRevisited;
 import org.ourproject.kune.platf.server.properties.PropertiesFileName;
 import org.ourproject.kune.platf.server.rest.ContentJSONService;
 import org.ourproject.kune.platf.server.rest.GroupJSONService;
@@ -62,6 +63,7 @@ public class KuneRackModule implements RackModule {
 
     public KuneRackModule(final String jpaUnit, final String propertiesFileName, final Scope sessionScope) {
 	configModule = new AbstractModule() {
+	    @Override
 	    public void configure() {
 		bindInterceptor(Matchers.any(), new NotInObject(), new LoggerMethodInterceptor());
 		bindConstant().annotatedWith(JpaUnit.class).to(jpaUnit);
@@ -94,6 +96,7 @@ public class KuneRackModule implements RackModule {
 		UserService.class, SocialNetworkService.class, I18nService.class);
 	builder.installRESTServices("^/kune/json/", TestJSONService.class, GroupJSONService.class,
 		UserJSONService.class, I18nTranslationJSONService.class, ContentJSONService.class);
+	builder.installServlet("^/kune/servlets/", FileUploadManagerRevisited.class);
 
 	builder.at("^/kune/(.*)$").install(new ForwardFilter("^/kune/(.*)$", "/gwt/org.ourproject.kune.app.Kune/{0}"));
     }

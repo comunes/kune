@@ -20,7 +20,7 @@ import com.gwtextux.client.widgets.upload.UploadDialogListenerAdapter;
 
 public class FileUploaderDialog implements FileUploader {
 
-    private static final String URL = "/services/fileupload";
+    private static final String URL = "/kune/servlets/FileUploadManagerRevisited";
 
     private UploadDialog dialog;
     private ToolbarButton traybarButton;
