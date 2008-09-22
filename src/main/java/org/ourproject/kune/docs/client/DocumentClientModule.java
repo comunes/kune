@@ -65,11 +65,10 @@ public class DocumentClientModule extends AbstractModule {
 
 	register(SingletonScope.class, new Factory<DocumentClientTool>(DocumentClientTool.class) {
 	    public DocumentClientTool create() {
+		$(DocumentClientActions.class);
 		return new DocumentClientTool(i18n, $(ToolSelector.class), $(WsThemePresenter.class),
-			$(WorkspaceSkeleton.class), $$(DocumentContext.class), $(ContextNavigator.class),
-			$(Session.class), $(StateManager.class), $$(ContentServiceAsync.class), $$(FileUploader.class),
-			$(ContentActionRegistry.class), $(ContextActionRegistry.class),
-			$(DragDropContentRegistry.class), $(ContentIconsRegistry.class));
+			$(WorkspaceSkeleton.class), $$(DocumentContext.class), $$(ContentServiceAsync.class),
+			$(ContentActionRegistry.class), $(DragDropContentRegistry.class), $(ContentIconsRegistry.class));
 	    }
 	});
 
@@ -102,6 +101,14 @@ public class DocumentClientModule extends AbstractModule {
 	}, new Factory<ContentTranslationAction>(ContentTranslationAction.class) {
 	    public ContentTranslationAction create() {
 		return new ContentTranslationAction(i18n);
+	    }
+	});
+
+	register(SingletonScope.class, new Factory<DocumentClientActions>(DocumentClientActions.class) {
+	    public DocumentClientActions create() {
+		return new DocumentClientActions($(I18nUITranslationService.class), $(ContextNavigator.class),
+			$(Session.class), $(StateManager.class), $$(ContentServiceAsync.class), $$(FileUploader.class),
+			$(ContextActionRegistry.class));
 	    }
 	});
 
