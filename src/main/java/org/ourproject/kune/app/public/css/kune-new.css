@@ -630,12 +630,15 @@
 /* others */
 .k-textlinethrough {
 	text-decoration: line-through;
+	color: red;
 }
 
 .k-textnormal {
     text-decoration: inherit;
+	color: green;
 }
 
 .k-textunderline {
     text-decoration: underline;
+	color: gray;
 }
