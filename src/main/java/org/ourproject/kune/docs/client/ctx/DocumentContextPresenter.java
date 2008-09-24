@@ -26,8 +26,8 @@ import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 
-import com.calclab.suco.client.provider.Provider;
-import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.ioc.Provider;
+import com.calclab.suco.client.listener.Listener;
 
 public class DocumentContextPresenter implements DocumentContext {
     private DocumentContextView view;
@@ -38,7 +38,7 @@ public class DocumentContextPresenter implements DocumentContext {
 	    final Provider<ContextNavigator> contextNavigatorProvider, final Provider<AdminContext> adminContextProvider) {
 	this.contextNavigatorProvider = contextNavigatorProvider;
 	this.adminContextProvider = adminContextProvider;
-	stateManager.onStateChanged(new Slot<StateDTO>() {
+	stateManager.onStateChanged(new Listener<StateDTO>() {
 	    public void onEvent(final StateDTO state) {
 		if (DocumentClientTool.NAME.equals(state.getToolName())) {
 		    setState(state);

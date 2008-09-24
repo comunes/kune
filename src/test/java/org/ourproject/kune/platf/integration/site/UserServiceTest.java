@@ -28,7 +28,7 @@ import org.ourproject.kune.platf.server.users.UserInfo;
 import org.ourproject.kune.platf.server.users.UserInfoService;
 import org.ourproject.kune.workspace.client.site.rpc.UserService;
 
-import com.calclab.emite.client.im.roster.RosterManager.SubscriptionMode;
+import com.calclab.emiteuimodule.client.SubscriptionMode;
 import com.google.inject.Inject;
 
 public class UserServiceTest extends IntegrationTest {

@@ -16,6 +16,8 @@ import com.google.gwt.user.client.ui.Widget;
 public class SiteSearchPanel implements SiteSearchView {
     private static final String SEARCH_TEXT_WIDTH_SMALL = "120";
     private static final String SEARCH_TEXT_WIDTH_BIG = "180";
+    private static final String SITE_SEARCH_BUTTON = "k-site-search-button";
+    private static final String SITE_SEARCH_TEXTBOX = "k-site-search-textbox";
 
     private final PushButton searchButton;
     private final TextBox searchTextBox;
@@ -29,7 +31,9 @@ public class SiteSearchPanel implements SiteSearchView {
 	siteBar.addSpacer();
 	siteBar.addSpacer();
 	searchButton = new PushButton(img.kuneSearchIco().createImage(), img.kuneSearchIcoPush().createImage());
+	searchButton.ensureDebugId(SITE_SEARCH_BUTTON);
 	searchTextBox = new TextBox();
+	searchTextBox.ensureDebugId(SITE_SEARCH_TEXTBOX);
 
 	siteBar.add(searchButton);
 	siteBar.addSpacer();

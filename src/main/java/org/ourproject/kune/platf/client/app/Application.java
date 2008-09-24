@@ -20,13 +20,13 @@
 
 package org.ourproject.kune.platf.client.app;
 
-import com.calclab.suco.client.signal.Slot0;
+import com.calclab.suco.client.listener.Listener0;
 
 public interface Application {
 
-    void onApplicationStart(Slot0 slot);
+    void onApplicationStart(Listener0 listener);
 
-    void onApplicationStop(Slot0 slot);
+    void onApplicationStop(Listener0 listener);
 
     void start();
 

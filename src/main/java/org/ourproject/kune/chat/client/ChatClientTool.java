@@ -38,11 +38,11 @@ import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummary;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.emite.client.xmpp.stanzas.XmppURI;
+import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
-import com.calclab.suco.client.provider.Provider;
-import com.calclab.suco.client.signal.Slot;
-import com.calclab.suco.client.signal.Slot0;
+import com.calclab.suco.client.ioc.Provider;
+import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.listener.Listener0;
 
 public class ChatClientTool extends AbstractClientTool implements ChatProvider {
     public static final String NAME = "chats";
@@ -61,7 +61,7 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
 	super(NAME, i18n.t("chat rooms"), toolSelector, wsThemePresenter, ws);
 	this.chatContentProvider = chatContentProvider;
 	this.chatContextProvider = chatContextProvider;
-	session.onInitDataReceived(new Slot<InitDataDTO>() {
+	session.onInitDataReceived(new Listener<InitDataDTO>() {
 	    public void onEvent(final InitDataDTO initData) {
 		checkChatDomain(initData.getChatDomain());
 		final ChatOptions chatOptions = new ChatOptions(initData.getChatHttpBase(), initData.getChatDomain(),
@@ -69,7 +69,7 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
 		chat = new ChatEngineXmpp(emiteUIDialog, chatOptions, i18n, ws);
 		groupMembersSummaryProvider.get().addUserOperation(
 			new MenuItem<GroupDTO>("images/new-chat.gif", i18n.t("Start a chat with this member"),
-				new Slot<GroupDTO>() {
+				new Listener<GroupDTO>() {
 				    public void onEvent(final GroupDTO group) {
 					emiteUIDialog.show();
 					if (emiteUIDialog.isLoggedIn()) {
@@ -92,17 +92,17 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
 		}
 	    }
 	});
-	application.onApplicationStop(new Slot0() {
+	application.onApplicationStop(new Listener0() {
 	    public void onEvent() {
 		chat.logout();
 	    }
 	});
-	session.onUserSignOut(new Slot0() {
+	session.onUserSignOut(new Listener0() {
 	    public void onEvent() {
 		chat.logout();
 	    }
 	});
-	session.onUserSignIn(new Slot<UserInfoDTO>() {
+	session.onUserSignIn(new Listener<UserInfoDTO>() {
 	    public void onEvent(final UserInfoDTO user) {
 		chat.login(user.getChatName(), user.getChatPassword());
 	    }

@@ -2,7 +2,7 @@ package org.ourproject.kune.platf.client.actions;
 
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-import com.calclab.suco.client.signal.Slot0;
+import com.calclab.suco.client.listener.Listener0;
 
 public class ActionManager {
 
@@ -14,11 +14,11 @@ public class ActionManager {
 
     public void doAction(final ActionDescriptor<?> action, final Object parameter) {
 	if (action.isMustBeConfirmed()) {
-	    ws.askConfirmation(action.getConfirmationTitle(), action.getConfirmationText(), new Slot0() {
+	    ws.askConfirmation(action.getConfirmationTitle(), action.getConfirmationText(), new Listener0() {
 		public void onEvent() {
 		    action.fireOnPerformCall(parameter);
 		}
-	    }, new Slot0() {
+	    }, new Listener0() {
 		public void onEvent() {
 		    action.fireOnNotConfirmed(parameter);
 		}

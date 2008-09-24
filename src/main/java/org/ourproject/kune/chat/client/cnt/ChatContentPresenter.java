@@ -28,9 +28,9 @@ import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.emite.client.xmpp.stanzas.XmppURI;
+import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
-import com.calclab.suco.client.provider.Provider;
+import com.calclab.suco.client.ioc.Provider;
 
 public class ChatContentPresenter implements ChatContent {
 

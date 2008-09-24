@@ -24,13 +24,13 @@ import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
-import com.calclab.suco.client.signal.Slot;
-import com.calclab.suco.client.signal.Slot2;
+import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.listener.Listener2;
 import com.google.gwt.user.client.HistoryListener;
 
 public interface StateManager extends HistoryListener {
 
-    void addSiteToken(String token, Slot<StateToken> whenToken);
+    void addSiteToken(String token, Listener<StateToken> whenToken);
 
     void gotoContainer(Long containerId);
 
@@ -38,13 +38,13 @@ public interface StateManager extends HistoryListener {
 
     void gotoToken(String token);
 
-    void onGroupChanged(Slot2<String, String> slot);
+    void onGroupChanged(Listener2<String, String> listener);
 
-    void onSocialNetworkChanged(Slot<StateDTO> slot);
+    void onSocialNetworkChanged(Listener<StateDTO> listener);
 
-    void onStateChanged(Slot<StateDTO> slot);
+    void onStateChanged(Listener<StateDTO> listener);
 
-    void onToolChanged(Slot2<String, String> slot);
+    void onToolChanged(Listener2<String, String> listener);
 
     void reload();
 

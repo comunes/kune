@@ -40,11 +40,11 @@ import org.ourproject.kune.workspace.client.editor.TextEditorListener;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.site.Site;
 
-import com.calclab.suco.client.provider.Provider;
-import com.calclab.suco.client.signal.Signal0;
-import com.calclab.suco.client.signal.Slot;
-import com.calclab.suco.client.signal.Slot0;
-import com.calclab.suco.client.signal.Slot2;
+import com.calclab.suco.client.ioc.Provider;
+import com.calclab.suco.client.listener.Event0;
+import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.listener.Listener0;
+import com.calclab.suco.client.listener.Listener2;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class DocumentContentPresenter implements DocumentContent, TextEditorListener {
@@ -56,8 +56,8 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
     private final Provider<DocumentReader> docReaderProvider;
     private final Provider<TextEditor> textEditorProvider;
     private final Provider<FolderViewer> folderViewerProvider;
-    private final Signal0 onEditing;
-    private final Signal0 onEditCancelled;
+    private final Event0 onEditing;
+    private final Event0 onEditCancelled;
     private final Provider<ContentServiceAsync> contentServiceProvider;
     private final I18nUITranslationService i18n;
     private final KuneErrorHandler errorHandler;
@@ -81,16 +81,16 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
 	this.contentServiceProvider = contentServiceProvider;
 	this.toolbar = toolbar;
 	this.actionRegistry = actionRegistry;
-	this.onEditing = new Signal0("onEditing");
-	this.onEditCancelled = new Signal0("onEditCancelled");
-	stateManager.onStateChanged(new Slot<StateDTO>() {
+	this.onEditing = new Event0("onEditing");
+	this.onEditCancelled = new Event0("onEditCancelled");
+	stateManager.onStateChanged(new Listener<StateDTO>() {
 	    public void onEvent(final StateDTO state) {
 		if (state.getToolName().equals(DocumentClientTool.NAME)) {
 		    setState(state);
 		}
 	    }
 	});
-	stateManager.onToolChanged(new Slot2<String, String>() {
+	stateManager.onToolChanged(new Listener2<String, String>() {
 	    public void onEvent(final String oldTool, final String newTool) {
 		if (oldTool != null && oldTool.equals(DocumentClientTool.NAME)) {
 		    // Detach
@@ -122,8 +122,8 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
 	textEditorProvider.get().setToolbarVisible(false);
     }
 
-    public void onEditCancelled(final Slot0 slot) {
-	onEditCancelled.add(slot);
+    public void onEditCancelled(final Listener0 listener) {
+	onEditCancelled.add(listener);
     }
 
     public void onEditClicked() {
@@ -146,8 +146,8 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
 	});
     }
 
-    public void onEditing(final Slot0 slot) {
-	onEditing.add(slot);
+    public void onEditing(final Listener0 listener) {
+	onEditing.add(listener);
     }
 
     public void onSave(final String text) {
@@ -196,7 +196,7 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
 	    set = actionRegistry.selectCurrentActions(content.getContainerRights(), typeId);
 	}
 	toolbar.disableMenusAndClearButtons();
-	toolbar.setActions(set.getToolbarActions(), true);
+	toolbar.showActions(set.getToolbarActions(), true);
 	showContent();
     }
 

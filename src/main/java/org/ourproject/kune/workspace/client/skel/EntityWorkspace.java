@@ -10,6 +10,11 @@ import com.gwtext.client.widgets.layout.AnchorLayout;
 import com.gwtext.client.widgets.layout.AnchorLayoutData;
 
 public class EntityWorkspace extends DefaultBorderLayout {
+    private static final String ENTITY_TITLE = "k-entity-title";
+    private static final String ENTITY_SUBTITLE = "k-entity-subtitle";
+    private static final String ENTITY_BOTTOM = "k-entity-bottom";
+    private static final String ENTITY_CONTENT = "k-entity-content";
+    private static final String ENTITY_CONTEXT = "k-entity-context";
     private final Panel content;
     private final Panel context;
     private final TitleBar title;
@@ -33,12 +38,15 @@ public class EntityWorkspace extends DefaultBorderLayout {
 
 	title = new TitleBar();
 	title.setHeight("" + (DEF_TOOLBAR_HEIGHT - 2));
-	title.setStylePrimaryName("k-entity-title");
+	title.setStylePrimaryName(ENTITY_TITLE);
+	title.ensureDebugId(ENTITY_TITLE);
 	subTitle = new TitleBar();
-	subTitle.setStylePrimaryName("k-entity-subtitle");
+	subTitle.setStylePrimaryName(ENTITY_SUBTITLE);
+	subTitle.ensureDebugId(ENTITY_SUBTITLE);
 	bottom = new TitleBar();
 	bottom.setHeight("" + (DEF_TOOLBAR_HEIGHT - 2));
-	bottom.setStylePrimaryName("k-entity-bottom");
+	bottom.setStylePrimaryName(ENTITY_BOTTOM);
+	bottom.ensureDebugId(ENTITY_BOTTOM);
 
 	roundedTitle = new RoundedPanel(title, RoundedPanel.TOPLEFT, 2);
 	roundedBottom = new RoundedPanel(bottom, RoundedPanel.BOTTOMLEFT, 2);
@@ -53,6 +61,8 @@ public class EntityWorkspace extends DefaultBorderLayout {
 	contextWrap.setBorder(true);
 	content = new Panel();
 	context = new Panel();
+	content.ensureDebugId(ENTITY_CONTENT);
+	context.ensureDebugId(ENTITY_CONTEXT);
 	content.setBorder(false);
 	context.setBorder(false);
 	context.setCollapsible(true);

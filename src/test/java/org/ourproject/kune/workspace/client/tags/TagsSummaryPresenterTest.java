@@ -9,7 +9,7 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.search.SiteSearcher;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
-import com.calclab.suco.client.provider.Provider;
+import com.calclab.suco.client.ioc.Provider;
 
 public class TagsSummaryPresenterTest {
 

@@ -53,6 +53,7 @@ import com.gwtext.client.widgets.layout.FitLayout;
 
 public class SignInPanel implements SignInView {
     private class MessagePanel extends Panel {
+	private static final String SIGNIN_MESSAGE_PANEL = "k-signin-message-panel";
 	private final SimpleMessagePanel messagesPanel;
 
 	public MessagePanel() {
@@ -60,6 +61,7 @@ public class SignInPanel implements SignInView {
 	    setBorder(false);
 	    setHeight(60);
 	    messagesPanel = new SimpleMessagePanel();
+	    messagesPanel.ensureDebugId(SIGNIN_MESSAGE_PANEL);
 	    messagesPanel.setMessage("", SiteErrorType.info, SiteErrorType.error);
 	    add(messagesPanel);
 	}
@@ -78,6 +80,9 @@ public class SignInPanel implements SignInView {
 	    super.show();
 	}
     }
+
+    private static final String USER_SIGN_IN_PANEL = "k-user-sign-in-panel";
+    private static final String USER_REGISTER_PANEL = "k-user-register-panel";
 
     private BasicDialog dialog;
     private final SignInPresenter presenter;
@@ -270,11 +275,13 @@ public class SignInPanel implements SignInView {
 	confPanel(signInPanel);
 	signInForm = new SignInForm(i18n);
 	signInPanel.add(signInForm.getForm());
+	signInPanel.ensureDebugId(USER_SIGN_IN_PANEL);
 	signInPanel.add(createNoAccountRegister());
 	messagesSignInPanel = new MessagePanel();
 	signInPanel.add(messagesSignInPanel);
 
 	final Panel registerPanel = new Panel(i18n.t("Register"));
+	registerPanel.ensureDebugId(USER_REGISTER_PANEL);
 	confPanel(registerPanel);
 
 	centerPanel.add(signInPanel);

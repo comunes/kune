@@ -14,6 +14,9 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class SitePublicSpaceLinkPanel implements SitePublicSpaceLinkView {
 
+    private static final String SITE_GOTO_PUBLIC = "k-site-goto-public";
+    private static final String SITE_CONTENT_NO_PUBLIC = "k-site-content-no-public";
+
     private final HorizontalPanel publicHP;
     private final IconLabel contentNoPublic;
     private final IconLabel gotoPublic;
@@ -23,7 +26,9 @@ public class SitePublicSpaceLinkPanel implements SitePublicSpaceLinkView {
 	    final I18nUITranslationService i18n, final Images img) {
 	publicHP = new HorizontalPanel();
 	gotoPublic = new IconLabel(img.anybody(), i18n.t("Go to Public Space"), false);
+	gotoPublic.ensureDebugId(SITE_GOTO_PUBLIC);
 	contentNoPublic = new IconLabel(img.anybody(), i18n.t("This content is not public"));
+	contentNoPublic.ensureDebugId(SITE_CONTENT_NO_PUBLIC);
 	publicHP.add(gotoPublic);
 	publicHP.add(contentNoPublic);
 	final SiteBar siteBar = ws.getSiteBar();

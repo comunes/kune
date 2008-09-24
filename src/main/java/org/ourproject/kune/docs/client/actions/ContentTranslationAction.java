@@ -7,12 +7,12 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.site.Site;
 
-import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.listener.Listener;
 
 public class ContentTranslationAction extends ActionButtonDescriptor<StateToken> {
 
     public ContentTranslationAction(final I18nUITranslationService i18n) {
-	super(AccessRolDTO.Editor, ActionPosition.topbar, new Slot<StateToken>() {
+	super(AccessRolDTO.Editor, ActionPosition.topbar, new Listener<StateToken>() {
 	    public void onEvent(final StateToken stateToken) {
 		Site.important(i18n.t("Sorry, this functionality is currently in development"));
 	    }

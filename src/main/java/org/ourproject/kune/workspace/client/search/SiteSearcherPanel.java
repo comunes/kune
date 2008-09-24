@@ -54,6 +54,7 @@ import com.gwtext.client.widgets.layout.FitLayout;
 
 public class SiteSearcherPanel extends AbstractSearcherPanel implements SiteSearcherView {
 
+    private static final String SITE_SEARCHER_DIALOG = "k-site-searcher-dialog";
     private final Window dialog;
     private final SiteSearcherPresenter presenter;
     private Store groupStore;
@@ -159,6 +160,7 @@ public class SiteSearcherPanel extends AbstractSearcherPanel implements SiteSear
 	centerPanel.setActiveItemID(panelId);
 
 	dialog.setCloseAction(Window.HIDE);
+	dialog.ensureDebugId(SITE_SEARCHER_DIALOG);
 
 	return dialog;
     }

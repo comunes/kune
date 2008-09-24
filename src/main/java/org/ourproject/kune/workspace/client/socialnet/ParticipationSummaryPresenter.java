@@ -34,9 +34,10 @@ import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
-import com.calclab.suco.client.provider.Provider;
-import com.calclab.suco.client.signal.Slot;
-import com.calclab.suco.client.signal.Slot2;
+import com.allen_sauer.gwt.log.client.Log;
+import com.calclab.suco.client.ioc.Provider;
+import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.listener.Listener2;
 
 public class ParticipationSummaryPresenter extends SocialNetworkPresenter implements ParticipationSummary {
 
@@ -56,14 +57,14 @@ public class ParticipationSummaryPresenter extends SocialNetworkPresenter implem
 	collabOnlyCategory = new GridGroup(i18n.t("collaborator in:"), " ", i18n.t("Collaborate in these groups"),
 		false);
 	super.addGroupOperation(gotoGroupMenuItem, false);
-	final Slot<StateDTO> setStateSlot = new Slot<StateDTO>() {
+	final Listener<StateDTO> setStateListener = new Listener<StateDTO>() {
 	    public void onEvent(StateDTO state) {
 		setState(state);
 	    }
 	};
-	stateManager.onStateChanged(setStateSlot);
-	stateManager.onSocialNetworkChanged(setStateSlot);
-	wsThemePresenter.onThemeChanged(new Slot2<WsTheme, WsTheme>() {
+	stateManager.onStateChanged(setStateListener);
+	stateManager.onSocialNetworkChanged(setStateListener);
+	wsThemePresenter.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
 	    public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
 		view.setTheme(oldTheme, newTheme);
 	    }
@@ -85,6 +86,8 @@ public class ParticipationSummaryPresenter extends SocialNetworkPresenter implem
 	view.clear();
 	final List<GroupDTO> groupsIsAdmin = participation.getGroupsIsAdmin();
 	final List<GroupDTO> groupsIsCollab = participation.getGroupsIsCollab();
+	Log.info("Is admin in " + groupsIsAdmin.size() + " groups.");
+	Log.info("Is collab in " + groupsIsCollab.size() + " groups.");
 	final int numAdmins = groupsIsAdmin.size();
 	final int numCollaborators = groupsIsCollab.size();
 	if (numAdmins == 0) {

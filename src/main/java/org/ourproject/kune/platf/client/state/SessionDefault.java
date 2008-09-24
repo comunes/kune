@@ -35,11 +35,11 @@ import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.workspace.client.site.rpc.UserServiceAsync;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.provider.Provider;
-import com.calclab.suco.client.signal.Signal;
-import com.calclab.suco.client.signal.Signal0;
-import com.calclab.suco.client.signal.Slot;
-import com.calclab.suco.client.signal.Slot0;
+import com.calclab.suco.client.ioc.Provider;
+import com.calclab.suco.client.listener.Event;
+import com.calclab.suco.client.listener.Event0;
+import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.listener.Listener0;
 
 public class SessionDefault implements Session {
     private String userHash;
@@ -50,18 +50,18 @@ public class SessionDefault implements Session {
     private Object[][] timezonesArray;
     private StateDTO currentState;
     private I18nLanguageDTO currentLanguage;
-    private final Signal<InitDataDTO> onInitDataReceived;
-    private final Signal<UserInfoDTO> onUserSignIn;
-    private final Signal0 onUserSignOut;
+    private final Event<InitDataDTO> onInitDataReceived;
+    private final Event<UserInfoDTO> onUserSignIn;
+    private final Event0 onUserSignOut;
     private final Provider<UserServiceAsync> userServiceProvider;
 
     public SessionDefault(final String userHash, final Provider<UserServiceAsync> userServiceProvider) {
 	this.userHash = userHash == null || userHash.equals("null") ? null : userHash;
 	this.userServiceProvider = userServiceProvider;
 	languagesArray = null;
-	this.onInitDataReceived = new Signal<InitDataDTO>("initDataReceived");
-	this.onUserSignIn = new Signal<UserInfoDTO>("onUserSignIn");
-	this.onUserSignOut = new Signal0("onUserSignOut");
+	this.onInitDataReceived = new Event<InitDataDTO>("initDataReceived");
+	this.onUserSignIn = new Event<UserInfoDTO>("onUserSignIn");
+	this.onUserSignOut = new Event0("onUserSignOut");
     }
 
     public void check(final AsyncCallbackSimple<?> callback) {
@@ -130,16 +130,16 @@ public class SessionDefault implements Session {
 	return userHash != null;
     }
 
-    public void onInitDataReceived(final Slot<InitDataDTO> slot) {
-	onInitDataReceived.add(slot);
+    public void onInitDataReceived(final Listener<InitDataDTO> listener) {
+	onInitDataReceived.add(listener);
     }
 
-    public void onUserSignIn(final Slot<UserInfoDTO> slot) {
-	onUserSignIn.add(slot);
+    public void onUserSignIn(final Listener<UserInfoDTO> listener) {
+	onUserSignIn.add(listener);
     }
 
-    public void onUserSignOut(final Slot0 slot) {
-	onUserSignOut.add(slot);
+    public void onUserSignOut(final Listener0 listener) {
+	onUserSignOut.add(listener);
     }
 
     public void setCurrent(final StateDTO currentState) {

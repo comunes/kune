@@ -3,7 +3,7 @@ package org.ourproject.kune.workspace.client.themes;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-import com.calclab.suco.client.signal.Slot2;
+import com.calclab.suco.client.listener.Listener2;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.ToolbarButton;
 import com.gwtext.client.widgets.menu.BaseItem;
@@ -28,7 +28,7 @@ public class WsThemePanel extends ToolbarButton implements WsThemeView {
 	super.setIcon("images/colors.gif");
 	super.setTooltip(i18n.t("Select Workspace theme for this group"));
 	ws.getSiteTraybar().addButton(this);
-	presenter.onThemeChanged(new Slot2<WsTheme, WsTheme>() {
+	presenter.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
 	    public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
 		ws.setTheme(oldTheme, newTheme);
 	    }

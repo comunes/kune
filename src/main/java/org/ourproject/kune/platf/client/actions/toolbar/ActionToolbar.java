@@ -9,6 +9,6 @@ public interface ActionToolbar {
 
     void disableMenusAndClearButtons();
 
-    void setActions(ActionCollection<StateToken> actionCollection, boolean isItemSelected);
+    void showActions(ActionCollection<StateToken> actionCollection, boolean isItemSelected);
 
 }

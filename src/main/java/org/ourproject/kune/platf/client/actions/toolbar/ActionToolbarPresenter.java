@@ -11,14 +11,14 @@ import org.ourproject.kune.platf.client.state.Session;
 import com.allen_sauer.gwt.log.client.Log;
 
 public class ActionToolbarPresenter implements ActionToolbar {
-    private final ActionToolbarPanel toolbar;
+    private final ActionToolbarView toolbar;
     private final Session session;
     private final ActionRegistry<StateToken> actionRegistry;
 
-    public ActionToolbarPresenter(final Session session, final ActionToolbarPanel actionToolbarPanel,
+    public ActionToolbarPresenter(final Session session, final ActionToolbarView toolbar,
 	    final ActionRegistry<StateToken> actionRegistry) {
 	this.session = session;
-	toolbar = actionToolbarPanel;
+	this.toolbar = toolbar;
 	this.actionRegistry = actionRegistry;
     }
 
@@ -31,7 +31,7 @@ public class ActionToolbarPresenter implements ActionToolbar {
 	toolbar.disableAllMenuItems();
     }
 
-    public void setActions(final ActionCollection<StateToken> actions, final boolean isItemSelected) {
+    public void showActions(final ActionCollection<StateToken> actions, final boolean isItemSelected) {
 	for (final ActionDescriptor<StateToken> action : actions) {
 	    if (action instanceof ActionMenuDescriptor) {
 		toolbar.addMenuAction((ActionMenuDescriptor<StateToken>) action, isItemSelected
@@ -48,5 +48,4 @@ public class ActionToolbarPresenter implements ActionToolbar {
 	    }
 	}
     }
-
 }

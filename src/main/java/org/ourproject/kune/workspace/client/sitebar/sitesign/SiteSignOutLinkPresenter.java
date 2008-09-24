@@ -11,9 +11,9 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.site.rpc.UserServiceAsync;
 
-import com.calclab.suco.client.provider.Provider;
-import com.calclab.suco.client.signal.Slot;
-import com.calclab.suco.client.signal.Slot0;
+import com.calclab.suco.client.ioc.Provider;
+import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.listener.Listener0;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -28,17 +28,17 @@ public class SiteSignOutLinkPresenter implements SiteSignOutLink {
 	    final Provider<KuneErrorHandler> kuneErrorHandlerProvider) {
 	this.session = session;
 	this.userServiceProvider = userServiceProvider;
-	session.onUserSignIn(new Slot<UserInfoDTO>() {
+	session.onUserSignIn(new Listener<UserInfoDTO>() {
 	    public void onEvent(final UserInfoDTO userInfoDTO) {
 		view.setVisible(true);
 	    }
 	});
-	session.onUserSignOut(new Slot0() {
+	session.onUserSignOut(new Listener0() {
 	    public void onEvent() {
 		view.setVisible(false);
 	    }
 	});
-	kuneErrorHandlerProvider.get().onSessionExpired(new Slot0() {
+	kuneErrorHandlerProvider.get().onSessionExpired(new Listener0() {
 	    public void onEvent() {
 		clientUIsignOut();
 	    }

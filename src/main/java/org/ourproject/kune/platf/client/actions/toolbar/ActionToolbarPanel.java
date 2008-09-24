@@ -13,7 +13,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.skel.Toolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-import com.calclab.suco.client.provider.Provider;
+import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;

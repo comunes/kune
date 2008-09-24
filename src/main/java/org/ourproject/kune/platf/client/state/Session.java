@@ -31,8 +31,8 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 
-import com.calclab.suco.client.signal.Slot;
-import com.calclab.suco.client.signal.Slot0;
+import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.listener.Listener0;
 
 public interface Session {
 
@@ -77,11 +77,11 @@ public interface Session {
 
     String getUserHash();
 
-    void onInitDataReceived(Slot<InitDataDTO> slot);
+    void onInitDataReceived(Listener<InitDataDTO> listener);
 
-    void onUserSignIn(Slot<UserInfoDTO> slot);
+    void onUserSignIn(Listener<UserInfoDTO> listener);
 
-    void onUserSignOut(Slot0 slot);
+    void onUserSignOut(Listener0 listener);
 
     void setCurrentUserInfo(UserInfoDTO currentUserInfo);
 

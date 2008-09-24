@@ -8,16 +8,16 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.site.Site;
 
-import com.calclab.suco.client.provider.Provider;
-import com.calclab.suco.client.signal.Signal2;
-import com.calclab.suco.client.signal.Slot;
-import com.calclab.suco.client.signal.Slot2;
+import com.calclab.suco.client.ioc.Provider;
+import com.calclab.suco.client.listener.Event2;
+import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.listener.Listener2;
 
 public class WsThemePresenter {
 
     private WsThemeView view;
     private WsTheme previousTheme;
-    private final Signal2<WsTheme, WsTheme> onThemeChanged;
+    private final Event2<WsTheme, WsTheme> onThemeChanged;
     private final Provider<GroupServiceAsync> groupServiceProvider;
     private final Session session;
 
@@ -25,14 +25,14 @@ public class WsThemePresenter {
 	    final StateManager stateManager) {
 	this.session = session;
 	this.groupServiceProvider = groupServiceProvider;
-	this.onThemeChanged = new Signal2<WsTheme, WsTheme>("onThemeChanged");
-	session.onInitDataReceived(new Slot<InitDataDTO>() {
+	this.onThemeChanged = new Event2<WsTheme, WsTheme>("onThemeChanged");
+	session.onInitDataReceived(new Listener<InitDataDTO>() {
 	    public void onEvent(final InitDataDTO initData) {
 		view.setThemes(initData.getWsThemes());
 		setTheme(new WsTheme(initData.getWsThemes()[0]));
 	    }
 	});
-	stateManager.onStateChanged(new Slot<StateDTO>() {
+	stateManager.onStateChanged(new Listener<StateDTO>() {
 	    public void onEvent(final StateDTO state) {
 		setState(state);
 	    }
@@ -43,8 +43,8 @@ public class WsThemePresenter {
 	this.view = view;
     }
 
-    public void onThemeChanged(final Slot2<WsTheme, WsTheme> slot) {
-	onThemeChanged.add(slot);
+    public void onThemeChanged(final Listener2<WsTheme, WsTheme> listener) {
+	onThemeChanged.add(listener);
     }
 
     protected void onChangeGroupWsTheme(final WsTheme newTheme) {

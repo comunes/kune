@@ -9,7 +9,7 @@ import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
-import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.listener.Listener;
 
 public class ActionRegistryTest {
 
@@ -19,22 +19,29 @@ public class ActionRegistryTest {
     private ActionDescriptor<StateToken> editorAction;
     private ActionDescriptor<StateToken> viewerAction;
 
+    @Test
+    public void actionsEmptyButNeverNull() {
+	checkActionLists(0, 0, new AccessRightsDTO(true, true, true));
+	checkActionLists(0, 0, new AccessRightsDTO(false, true, true));
+	checkActionLists(0, 0, new AccessRightsDTO(false, false, true));
+    }
+
     @Before
     public void before() {
 	registry = new ActionRegistry<StateToken>();
 	adminAction = new ActionDescriptor<StateToken>(AccessRolDTO.Administrator, ActionPosition.topbarAndItemMenu,
-		new Slot<StateToken>() {
+		new Listener<StateToken>() {
 		    public void onEvent(final StateToken parameter) {
 		    }
 		});
 	editorAction = new ActionDescriptor<StateToken>(AccessRolDTO.Editor, ActionPosition.topbarAndItemMenu,
-		new Slot<StateToken>() {
+		new Listener<StateToken>() {
 		    public void onEvent(final StateToken parameter) {
 		    }
 		});
 
 	viewerAction = new ActionDescriptor<StateToken>(AccessRolDTO.Viewer, ActionPosition.topbarAndItemMenu,
-		new Slot<StateToken>() {
+		new Listener<StateToken>() {
 		    public void onEvent(final StateToken parameter) {
 		    }
 		});

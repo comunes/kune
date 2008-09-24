@@ -25,7 +25,7 @@ import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.site.Site;
 
-import com.calclab.suco.client.signal.Slot0;
+import com.calclab.suco.client.listener.Listener0;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class I18nTranslatorPresenter implements I18nTranslator {
@@ -39,7 +39,7 @@ public class I18nTranslatorPresenter implements I18nTranslator {
 	this.session = session;
 	this.i18nService = i18nService;
 	this.i18n = i18n;
-	session.onUserSignOut(new Slot0() {
+	session.onUserSignOut(new Listener0() {
 	    public void onEvent() {
 		view.hideTranslatorAndIcon();
 	    }

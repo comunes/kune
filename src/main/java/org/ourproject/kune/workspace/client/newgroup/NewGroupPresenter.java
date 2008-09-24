@@ -33,8 +33,8 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.site.SiteToken;
 
-import com.calclab.suco.client.provider.Provider;
-import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.ioc.Provider;
+import com.calclab.suco.client.listener.Listener;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -52,7 +52,7 @@ public class NewGroupPresenter implements NewGroup {
 	this.session = session;
 	this.stateManager = stateManager;
 	this.groupServiceProvider = groupServiceProvider;
-	stateManager.addSiteToken(SiteToken.newgroup.toString(), new Slot<StateToken>() {
+	stateManager.addSiteToken(SiteToken.newgroup.toString(), new Listener<StateToken>() {
 	    public void onEvent(final StateToken previousStateToken) {
 		doNewGroup(previousStateToken);
 	    }

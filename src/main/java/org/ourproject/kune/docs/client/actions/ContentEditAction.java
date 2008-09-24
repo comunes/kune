@@ -6,12 +6,12 @@ import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 
-import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.listener.Listener;
 
 public class ContentEditAction extends ActionButtonDescriptor<StateToken> {
 
     public ContentEditAction(final I18nUITranslationService i18n) {
-	super(AccessRolDTO.Editor, ActionPosition.topbar, new Slot<StateToken>() {
+	super(AccessRolDTO.Editor, ActionPosition.topbar, new Listener<StateToken>() {
 	    public void onEvent(final StateToken stateToken) {
 	    }
 	});

@@ -1,7 +1,6 @@
 package org.ourproject.kune.platf.client.dto;
 
-import com.calclab.emite.client.im.roster.RosterManager;
-import com.calclab.emite.client.im.roster.RosterManager.SubscriptionMode;
+import com.calclab.emiteuimodule.client.SubscriptionMode;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class ChatUserParamsDTO implements IsSerializable {
@@ -34,7 +33,7 @@ public class ChatUserParamsDTO implements IsSerializable {
 	return chatColor;
     }
 
-    public RosterManager.SubscriptionMode getSubscriptionMode() {
+    public SubscriptionMode getSubscriptionMode() {
 	return subscriptionMode;
     }
 
@@ -54,7 +53,7 @@ public class ChatUserParamsDTO implements IsSerializable {
 	this.publishRoster = publishRoster;
     }
 
-    public void setSubscriptionMode(final RosterManager.SubscriptionMode subscriptionMode) {
+    public void setSubscriptionMode(final SubscriptionMode subscriptionMode) {
 	this.subscriptionMode = subscriptionMode;
     }
 

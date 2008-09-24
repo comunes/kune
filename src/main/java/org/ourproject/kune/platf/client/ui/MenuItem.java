@@ -1,19 +1,19 @@
 package org.ourproject.kune.platf.client.ui;
 
-import com.calclab.suco.client.signal.Signal;
-import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.listener.Event;
+import com.calclab.suco.client.listener.Listener;
 
 public class MenuItem<T> {
 
     final String icon;
     final String title;
-    private final Signal<T> onClick;
+    private final Event<T> onClick;
 
-    public MenuItem(final String icon, final String title, final Slot<T> slot) {
+    public MenuItem(final String icon, final String title, final Listener<T> listener) {
 	this.icon = icon;
 	this.title = title;
-	this.onClick = new Signal<T>("onClick");
-	onClick(slot);
+	this.onClick = new Event<T>("onClick");
+	onClick(listener);
     }
 
     public void fire(final T id) {
@@ -28,7 +28,7 @@ public class MenuItem<T> {
 	return title;
     }
 
-    public void onClick(final Slot<T> slot) {
-	onClick.add(slot);
+    public void onClick(final Listener<T> listener) {
+	onClick.add(listener);
     }
 }

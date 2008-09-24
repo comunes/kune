@@ -21,11 +21,11 @@ package org.ourproject.kune.workspace.client.search;
 
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 
-import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.listener.Listener;
 
 public interface EntityLiveSearcher {
 
-    void onSelection(Slot<LinkDTO> slot);
+    void onSelection(Listener<LinkDTO> listener);
 
     void show();
 

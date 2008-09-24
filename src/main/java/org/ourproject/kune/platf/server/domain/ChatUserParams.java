@@ -2,8 +2,7 @@ package org.ourproject.kune.platf.server.domain;
 
 import java.io.Serializable;
 
-import com.calclab.emite.client.im.roster.RosterManager;
-import com.calclab.emite.client.im.roster.RosterManager.SubscriptionMode;
+import com.calclab.emiteuimodule.client.SubscriptionMode;
 
 public class ChatUserParams implements Serializable {
 
@@ -37,7 +36,7 @@ public class ChatUserParams implements Serializable {
 	return chatColor;
     }
 
-    public RosterManager.SubscriptionMode getSubscriptionMode() {
+    public SubscriptionMode getSubscriptionMode() {
 	return subscriptionMode;
     }
 
@@ -57,7 +56,7 @@ public class ChatUserParams implements Serializable {
 	this.publishRoster = publishRoster;
     }
 
-    public void setSubscriptionMode(final RosterManager.SubscriptionMode subscriptionMode) {
+    public void setSubscriptionMode(final SubscriptionMode subscriptionMode) {
 	this.subscriptionMode = subscriptionMode;
     }
 

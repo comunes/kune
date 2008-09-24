@@ -21,8 +21,8 @@ import org.ourproject.kune.platf.client.ui.gridmenu.GridItem;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.site.Site;
 
-import com.calclab.suco.client.provider.Provider;
-import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.ioc.Provider;
+import com.calclab.suco.client.listener.Listener;
 
 public class SocialNetworkPresenter {
 
@@ -101,7 +101,7 @@ public class SocialNetworkPresenter {
 
     private void createButtons() {
 	requestJoin = new GridButton("images/add-green.gif", i18n.t("Participate"), i18n
-		.t("Request to participate in this group"), new Slot<String>() {
+		.t("Request to participate in this group"), new Listener<String>() {
 	    public void onEvent(final String parameter) {
 		Site.showProgressProcessing();
 		snServiceProvider.get().requestJoinGroup(session.getUserHash(),
@@ -127,7 +127,7 @@ public class SocialNetworkPresenter {
 	});
 
 	unJoinButton = new GridButton("images/del.gif", i18n.t("Unjoin"), i18n
-		.t("Don't participate more in this group"), new Slot<String>() {
+		.t("Don't participate more in this group"), new Listener<String>() {
 	    public void onEvent(final String parameter) {
 		removeMemberAction();
 	    }
@@ -162,25 +162,25 @@ public class SocialNetworkPresenter {
 
     private void createMenuActions() {
 	gotoGroupMenuItem = new MenuItem<GroupDTO>("images/group-home.gif", i18n.t("Visit this group homepage"),
-		new Slot<GroupDTO>() {
+		new Listener<GroupDTO>() {
 		    public void onEvent(final GroupDTO groupDTO) {
 			stateManager.gotoToken(groupDTO.getShortName());
 		    }
 		});
 	gotoMemberMenuItem = new MenuItem<GroupDTO>("images/group-home.gif", i18n.t("Visit this member homepage"),
-		new Slot<GroupDTO>() {
+		new Listener<GroupDTO>() {
 		    public void onEvent(final GroupDTO groupDTO) {
 			stateManager.gotoToken(groupDTO.getShortName());
 		    }
 		});
 	unJoinMenuItem = new MenuItem<GroupDTO>("images/del.gif", i18n
-		.t("Don't participate more as a member in this group"), new Slot<GroupDTO>() {
+		.t("Don't participate more as a member in this group"), new Listener<GroupDTO>() {
 	    public void onEvent(final GroupDTO groupDTO) {
 		removeMemberAction(groupDTO);
 	    }
 	});
 	changeToCollabMenuItem = new MenuItem<GroupDTO>("images/arrow-down-green.gif",
-		i18n.t("Change to collaborator"), new Slot<GroupDTO>() {
+		i18n.t("Change to collaborator"), new Listener<GroupDTO>() {
 		    public void onEvent(final GroupDTO group) {
 			Site.showProgressProcessing();
 			snServiceProvider.get().setAdminAsCollab(session.getUserHash(),
@@ -195,7 +195,7 @@ public class SocialNetworkPresenter {
 		    }
 		});
 	removeMemberMenuItem = new MenuItem<GroupDTO>("images/del.gif", i18n.t("Remove this member"),
-		new Slot<GroupDTO>() {
+		new Listener<GroupDTO>() {
 		    public void onEvent(final GroupDTO group) {
 			Site.showProgressProcessing();
 			snServiceProvider.get().deleteMember(session.getUserHash(),
@@ -214,7 +214,7 @@ public class SocialNetworkPresenter {
 		    }
 		});
 	changeToAdminMenuItem = new MenuItem<GroupDTO>("images/arrow-up-green.gif", i18n.t("Change to admin"),
-		new Slot<GroupDTO>() {
+		new Listener<GroupDTO>() {
 		    public void onEvent(final GroupDTO group) {
 			Site.showProgressProcessing();
 			snServiceProvider.get().setCollabAsAdmin(session.getUserHash(),
@@ -229,7 +229,7 @@ public class SocialNetworkPresenter {
 		    }
 		});
 	acceptJoinGroupMenuItem = new MenuItem<GroupDTO>("images/accept.gif", i18n.t("Accept this member"),
-		new Slot<GroupDTO>() {
+		new Listener<GroupDTO>() {
 		    public void onEvent(final GroupDTO group) {
 			Site.showProgressProcessing();
 			snServiceProvider.get().AcceptJoinGroup(session.getUserHash(),
@@ -244,7 +244,7 @@ public class SocialNetworkPresenter {
 		    }
 		});
 	denyJoinGroupMenuItem = new MenuItem<GroupDTO>("images/cancel.gif", i18n.t("Don't accept this member"),
-		new Slot<GroupDTO>() {
+		new Listener<GroupDTO>() {
 		    public void onEvent(final GroupDTO group) {
 			Site.showProgressProcessing();
 			snServiceProvider.get().denyJoinGroup(session.getUserHash(),

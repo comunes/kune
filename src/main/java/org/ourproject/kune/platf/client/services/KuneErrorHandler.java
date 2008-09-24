@@ -34,9 +34,9 @@ import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.provider.Provider;
-import com.calclab.suco.client.signal.Signal0;
-import com.calclab.suco.client.signal.Slot0;
+import com.calclab.suco.client.ioc.Provider;
+import com.calclab.suco.client.listener.Event0;
+import com.calclab.suco.client.listener.Listener0;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
 
@@ -44,7 +44,7 @@ public class KuneErrorHandler {
     private final Session session;
     private final I18nTranslationService i18n;
     private final Provider<WorkspaceSkeleton> wsProvider;
-    private final Signal0 onSessionExpired;
+    private final Event0 onSessionExpired;
     private final Provider<StateManager> stateManagerProvider;
 
     public KuneErrorHandler(final Session session, final I18nTranslationService i18n,
@@ -53,7 +53,7 @@ public class KuneErrorHandler {
 	this.i18n = i18n;
 	this.wsProvider = wsProvider;
 	this.stateManagerProvider = stateManagerProvider;
-	this.onSessionExpired = new Signal0("onSessionExpired");
+	this.onSessionExpired = new Event0("onSessionExpired");
     }
 
     public void doSessionExpired() {
@@ -66,8 +66,8 @@ public class KuneErrorHandler {
 	return wsProvider.get();
     }
 
-    public void onSessionExpired(final Slot0 slot) {
-	onSessionExpired.add(slot);
+    public void onSessionExpired(final Listener0 listener) {
+	onSessionExpired.add(listener);
     }
 
     public void process(final Throwable caught) {

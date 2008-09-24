@@ -30,7 +30,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 
-import com.calclab.suco.client.provider.Provider;
+import com.calclab.suco.client.ioc.Provider;
 
 public class RoomsAdminPresenter implements RoomsAdmin {
     private final ContextNavigator contextNavigator;
@@ -46,7 +46,7 @@ public class RoomsAdminPresenter implements RoomsAdmin {
 	// contextNavigator.registerType(ChatClientTool.TYPE_ROOM,
 	// images.chatGreen());
 	// contextNavigator.canCreate(i18n.t("New chat room"), i18n.t("Add a
-	// chat room"), new Slot<String>() {
+	// chat room"), new Listener<String>() {
 	// public void onEvent(final String name) {
 	// Site.showProgressProcessing();
 	// final String groupShortName =

@@ -19,9 +19,14 @@
  */
 package org.ourproject.kune.app.client;
 
-import org.ourproject.kune.platf.client.services.Kune;
+import org.ourproject.kune.chat.client.ChatClientModule;
+import org.ourproject.kune.docs.client.DocumentClientModule;
+import org.ourproject.kune.platf.client.services.KuneCoreModule;
+import org.ourproject.kune.platf.client.services.KuneModule;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.calclab.emiteuimodule.client.EmiteUIModule;
+import com.calclab.suco.client.Suco;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
@@ -45,6 +50,8 @@ public class KuneEntryPoint implements EntryPoint {
     }
 
     public void onModuleLoadCont() {
-	Kune.create();
+	Suco.install(new KuneCoreModule(), new EmiteUIModule(), new DocumentClientModule(), new ChatClientModule(),
+		new KuneModule());
+	// Suco.get(Application.class).start();
     }
 }

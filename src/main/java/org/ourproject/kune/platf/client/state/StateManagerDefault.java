@@ -33,22 +33,22 @@ import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.workspace.client.site.Site;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.signal.Signal;
-import com.calclab.suco.client.signal.Signal2;
-import com.calclab.suco.client.signal.Slot;
-import com.calclab.suco.client.signal.Slot0;
-import com.calclab.suco.client.signal.Slot2;
+import com.calclab.suco.client.listener.Event;
+import com.calclab.suco.client.listener.Event2;
+import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.listener.Listener0;
+import com.calclab.suco.client.listener.Listener2;
 
 public class StateManagerDefault implements StateManager {
     private final ContentProvider contentProvider;
     private StateDTO oldState;
     private final Session session;
     private final HistoryWrapper history;
-    private final HashMap<String, Slot<StateToken>> siteTokens;
-    private final Signal<StateDTO> onStateChanged;
-    private final Signal<StateDTO> onSocialNetworkChanged;
-    private final Signal2<String, String> onToolChanged;
-    private final Signal2<String, String> onGroupChanged;
+    private final HashMap<String, Listener<StateToken>> siteTokens;
+    private final Event<StateDTO> onStateChanged;
+    private final Event<StateDTO> onSocialNetworkChanged;
+    private final Event2<String, String> onToolChanged;
+    private final Event2<String, String> onGroupChanged;
 
     public StateManagerDefault(final ContentProvider contentProvider, final Session session,
 	    final HistoryWrapper history) {
@@ -56,25 +56,25 @@ public class StateManagerDefault implements StateManager {
 	this.session = session;
 	this.history = history;
 	this.oldState = null;
-	this.onStateChanged = new Signal<StateDTO>("onStateChanged");
-	this.onGroupChanged = new Signal2<String, String>("onGroupChanged");
-	this.onToolChanged = new Signal2<String, String>("onToolChanged");
-	this.onSocialNetworkChanged = new Signal<StateDTO>("onSocialNetworkChanged");
-	session.onUserSignIn(new Slot<UserInfoDTO>() {
+	this.onStateChanged = new Event<StateDTO>("onStateChanged");
+	this.onGroupChanged = new Event2<String, String>("onGroupChanged");
+	this.onToolChanged = new Event2<String, String>("onToolChanged");
+	this.onSocialNetworkChanged = new Event<StateDTO>("onSocialNetworkChanged");
+	session.onUserSignIn(new Listener<UserInfoDTO>() {
 	    public void onEvent(final UserInfoDTO parameter) {
 		restorePreviousState();
 	    }
 	});
-	session.onUserSignOut(new Slot0() {
+	session.onUserSignOut(new Listener0() {
 	    public void onEvent() {
 		reload();
 	    }
 	});
-	siteTokens = new HashMap<String, Slot<StateToken>>();
+	siteTokens = new HashMap<String, Listener<StateToken>>();
     }
 
-    public void addSiteToken(final String token, final Slot<StateToken> slot) {
-	siteTokens.put(token, slot);
+    public void addSiteToken(final String token, final Listener<StateToken> listener) {
+	siteTokens.put(token, listener);
     }
 
     public void gotoContainer(final Long containerId) {
@@ -92,14 +92,14 @@ public class StateManagerDefault implements StateManager {
 	gotoToken(new StateToken(token));
     }
 
-    public void onGroupChanged(final Slot2<String, String> slot) {
-	onGroupChanged.add(slot);
+    public void onGroupChanged(final Listener2<String, String> listener) {
+	onGroupChanged.add(listener);
     }
 
     public void onHistoryChanged(final String historyToken) {
-	final Slot<StateToken> tokenSlot = siteTokens.get(historyToken);
+	final Listener<StateToken> tokenListener = siteTokens.get(historyToken);
 	Log.debug("history token: " + historyToken);
-	if (tokenSlot == null) {
+	if (tokenListener == null) {
 	    onHistoryChanged(new StateToken(historyToken));
 	} else {
 	    StateToken stateToken;
@@ -110,20 +110,20 @@ public class StateManagerDefault implements StateManager {
 	    } else {
 		stateToken = oldState.getStateToken();
 	    }
-	    tokenSlot.onEvent(stateToken);
+	    tokenListener.onEvent(stateToken);
 	}
     }
 
-    public void onSocialNetworkChanged(final Slot<StateDTO> slot) {
-	onSocialNetworkChanged.add(slot);
+    public void onSocialNetworkChanged(final Listener<StateDTO> listener) {
+	onSocialNetworkChanged.add(listener);
     }
 
-    public void onStateChanged(final Slot<StateDTO> slot) {
-	onStateChanged.add(slot);
+    public void onStateChanged(final Listener<StateDTO> listener) {
+	onStateChanged.add(listener);
     }
 
-    public void onToolChanged(final Slot2<String, String> slot) {
-	onToolChanged.add(slot);
+    public void onToolChanged(final Listener2<String, String> listener) {
+	onToolChanged.add(listener);
     }
 
     /**

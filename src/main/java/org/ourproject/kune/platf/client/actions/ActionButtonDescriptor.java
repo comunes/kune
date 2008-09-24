@@ -2,7 +2,7 @@ package org.ourproject.kune.platf.client.actions;
 
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 
-import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.listener.Listener;
 
 public class ActionButtonDescriptor<T> extends ActionDescriptor<T> {
 
@@ -10,7 +10,7 @@ public class ActionButtonDescriptor<T> extends ActionDescriptor<T> {
     private ActionButtonSeparator rightSeparator;
 
     public ActionButtonDescriptor(final AccessRolDTO accessRolDTO, final ActionPosition actionPosition,
-	    final Slot<T> onPerformCall) {
+	    final Listener<T> onPerformCall) {
 	super(accessRolDTO, actionPosition, onPerformCall);
     }
 

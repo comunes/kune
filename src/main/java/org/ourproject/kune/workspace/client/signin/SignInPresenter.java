@@ -36,7 +36,7 @@ import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.site.rpc.UserServiceAsync;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.emite.client.im.roster.RosterManager.SubscriptionMode;
+import com.calclab.emiteuimodule.client.SubscriptionMode;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 

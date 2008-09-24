@@ -15,6 +15,7 @@ import org.ourproject.kune.chat.client.ctx.ChatContextPresenter;
 import org.ourproject.kune.chat.client.ctx.rooms.RoomsAdmin;
 import org.ourproject.kune.chat.client.ctx.rooms.RoomsAdminPresenter;
 import org.ourproject.kune.platf.client.app.Application;
+import org.ourproject.kune.platf.client.app.ToolGroup;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
@@ -27,9 +28,9 @@ import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummary;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
-import com.calclab.suco.client.module.AbstractModule;
-import com.calclab.suco.client.provider.Factory;
-import com.calclab.suco.client.scope.SingletonScope;
+import com.calclab.suco.client.ioc.decorator.Singleton;
+import com.calclab.suco.client.ioc.module.AbstractModule;
+import com.calclab.suco.client.ioc.module.Factory;
 
 public class ChatClientModule extends AbstractModule {
 
@@ -39,13 +40,13 @@ public class ChatClientModule extends AbstractModule {
     @Override
     public void onLoad() {
 
-	register(SingletonScope.class, new Factory<ChatInfo>(ChatInfo.class) {
+	register(Singleton.class, new Factory<ChatInfo>(ChatInfo.class) {
 	    public ChatInfo create() {
 		return new ChatInfoPanel();
 	    }
 	});
 
-	register(SingletonScope.class, new Factory<ChatContent>(ChatContent.class) {
+	register(Singleton.class, new Factory<ChatContent>(ChatContent.class) {
 	    public ChatContent create() {
 		final WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
 		final ChatContentPresenter presenter = new ChatContentPresenter($(EmiteUIDialog.class), panel,
@@ -54,7 +55,7 @@ public class ChatClientModule extends AbstractModule {
 	    }
 	});
 
-	register(SingletonScope.class, new Factory<ChatContext>(ChatContext.class) {
+	register(Singleton.class, new Factory<ChatContext>(ChatContext.class) {
 	    public ChatContext create() {
 		final WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
 		final ChatContextPresenter presenter = new ChatContextPresenter(panel, $$(RoomsAdmin.class));
@@ -62,7 +63,7 @@ public class ChatClientModule extends AbstractModule {
 	    }
 	});
 
-	register(SingletonScope.class, new Factory<ChatRoomControl>(ChatRoomControl.class) {
+	register(Singleton.class, new Factory<ChatRoomControl>(ChatRoomControl.class) {
 	    public ChatRoomControl create() {
 		final ChatRoomControlPresenter presenter = new ChatRoomControlPresenter();
 		final ChatRoomControlPanel panel = new ChatRoomControlPanel($(I18nUITranslationService.class),
@@ -72,14 +73,14 @@ public class ChatClientModule extends AbstractModule {
 	    }
 	});
 
-	register(SingletonScope.class, new Factory<ChatRoom>(ChatRoom.class) {
+	register(Singleton.class, new Factory<ChatRoom>(ChatRoom.class) {
 	    public ChatRoom create() {
 		final ChatRoomPanel panel = new ChatRoomPanel($(WorkspaceSkeleton.class));
 		final ChatRoomPresenter presenter = new ChatRoomPresenter(panel);
 		return presenter;
 	    }
 	});
-	register(SingletonScope.class, new Factory<RoomsAdmin>(RoomsAdmin.class) {
+	register(Singleton.class, new Factory<RoomsAdmin>(RoomsAdmin.class) {
 	    public RoomsAdmin create() {
 		final RoomsAdminPresenter presenter = new RoomsAdminPresenter($(ContextNavigator.class),
 			$(I18nUITranslationService.class), $$(StateManager.class), $(Session.class),
@@ -88,15 +89,13 @@ public class ChatClientModule extends AbstractModule {
 	    }
 	});
 
-	register(SingletonScope.class, new Factory<ChatClientTool>(ChatClientTool.class) {
+	register(ToolGroup.class, new Factory<ChatClientTool>(ChatClientTool.class) {
 	    public ChatClientTool create() {
 		return new ChatClientTool($(Session.class), $(Application.class), $(I18nUITranslationService.class),
 			$(EmiteUIDialog.class), $(WorkspaceSkeleton.class), $$(GroupMembersSummary.class),
 			$(ToolSelector.class), $(WsThemePresenter.class), $$(ChatContent.class), $$(ChatContext.class));
 	    }
 	});
-
-	$(ChatClientTool.class);
 
     }
 }

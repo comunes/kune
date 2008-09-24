@@ -20,17 +20,17 @@
 
 package org.ourproject.kune.docs.client.cnt;
 
-import com.calclab.suco.client.signal.Slot0;
+import com.calclab.suco.client.listener.Listener0;
 
 public interface DocumentContent {
 
-    void onEditCancelled(Slot0 slot);
+    void onEditCancelled(Listener0 listener);
 
     void onDeleteClicked();
 
     void onEditClicked();
 
-    void onEditing(Slot0 slot);
+    void onEditing(Listener0 listener);
 
     void onSaved();
 

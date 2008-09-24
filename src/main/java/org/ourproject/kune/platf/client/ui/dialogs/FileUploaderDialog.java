@@ -20,7 +20,9 @@ import com.gwtextux.client.widgets.upload.UploadDialogListenerAdapter;
 
 public class FileUploaderDialog implements FileUploader {
 
-    private static final String URL = "/kune/servlets/FileUploadManagerRevisited";
+    protected static final String SITE_FILE_UPLOADER = "k-site-file-uploader";
+
+    private static final String URL = "/kune/servlets/FileUploadManager";
 
     private UploadDialog dialog;
     private ToolbarButton traybarButton;
@@ -42,6 +44,7 @@ public class FileUploaderDialog implements FileUploader {
     public void setPermittedExtensions(final String extensions) {
 	DeferredCommand.addCommand(new Command() {
 	    public void execute() {
+		Log.error("Debugging setPerm issue, current perms: " + dialog.getPermittedExtensions());
 		final Object[] objs = KuneStringUtils.splitTags(extensions).toArray();
 		final String[] exts = new String[objs.length];
 		for (int i = 0; i < objs.length; i++) {
@@ -78,10 +81,9 @@ public class FileUploaderDialog implements FileUploader {
 
     private void createDialog(final boolean show) {
 	DeferredCommand.addCommand(new Command() {
-
 	    public void execute() {
-
 		dialog = new UploadDialog(i18n.t("File uploader"), false, true);
+		dialog.setId(SITE_FILE_UPLOADER);
 		// dialog.setUploadAutostart(true);
 		dialog.setResetOnHide(false);
 		dialog.addListener(new UploadDialogListenerAdapter() {
@@ -115,9 +117,9 @@ public class FileUploaderDialog implements FileUploader {
 			    final String filename) {
 			Log.info("Setting upload params");
 			final UrlParam param[] = new UrlParam[3];
-			param[0] = new UrlParam("userhash", userhash);
-			param[1] = new UrlParam("currentStateToken", currentStateToken);
-			param[2] = new UrlParam("filename", filename);
+			param[0] = new UrlParam(USERHASH, userhash);
+			param[1] = new UrlParam(CURRENT_STATE_TOKEN, currentStateToken);
+			param[2] = new UrlParam(FILENAME, filename);
 			dialog.setBaseParams(param);
 			dialog.setPostVarName(filename);
 		    }

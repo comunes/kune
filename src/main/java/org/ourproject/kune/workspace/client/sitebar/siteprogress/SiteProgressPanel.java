@@ -2,7 +2,7 @@ package org.ourproject.kune.workspace.client.sitebar.siteprogress;
 
 import org.ourproject.kune.workspace.client.sitebar.sitepublic.SitePublicSpaceLink;
 
-import com.calclab.suco.client.provider.Provider;
+import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.RootPanel;

@@ -38,7 +38,7 @@ import org.ourproject.kune.workspace.client.tags.TagsSummary;
 import org.ourproject.kune.workspace.client.title.EntitySubTitle;
 import org.ourproject.kune.workspace.client.title.EntityTitle;
 
-import com.calclab.suco.client.provider.Provider;
+import com.calclab.suco.client.ioc.Provider;
 
 public class AdminContextPresenter implements AdminContext {
 

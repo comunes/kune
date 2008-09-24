@@ -10,6 +10,8 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class SiteSignOutLinkPanel implements SiteSignOutLinkView {
 
+    private static final String SITE_SIGN_OUT = "k-site-sign-out";
+
     private final Label signOutLabel;
 
     public SiteSignOutLinkPanel(final SiteSignOutLinkPresenter presenter, final I18nUITranslationService i18n,
@@ -17,6 +19,7 @@ public class SiteSignOutLinkPanel implements SiteSignOutLinkView {
 	signOutLabel = new Label();
 	signOutLabel.setText(i18n.t("Sign out"));
 	signOutLabel.addStyleName("k-sitebar-labellink");
+	signOutLabel.ensureDebugId(SITE_SIGN_OUT);
 	ws.getSiteBar().add(signOutLabel);
 	signOutLabel.addClickListener(new ClickListener() {
 	    public void onClick(final Widget arg0) {

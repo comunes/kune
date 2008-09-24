@@ -31,7 +31,7 @@ import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
-import com.calclab.suco.client.provider.Provider;
+import com.calclab.suco.client.ioc.Provider;
 
 public class DocumentClientTool extends AbstractClientTool {
     public static final String TYPE_ROOT = "docs.root";

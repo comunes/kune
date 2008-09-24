@@ -5,7 +5,7 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
-import com.calclab.suco.client.signal.Slot2;
+import com.calclab.suco.client.listener.Listener2;
 
 public class ToolSelectorItemPresenter implements ToolSelectorItem {
 
@@ -34,7 +34,7 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
     public void init(final ToolSelectorItemView view) {
 	this.view = view;
 	toolSelector.addTool(this);
-	wsThemePresenter.onThemeChanged(new Slot2<WsTheme, WsTheme>() {
+	wsThemePresenter.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
 	    public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
 		setTheme(oldTheme, newTheme);
 	    }

@@ -30,7 +30,7 @@ import org.ourproject.kune.platf.client.ui.Location;
 import org.ourproject.kune.platf.client.ui.WindowUtils;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.signal.Slot0;
+import com.calclab.suco.client.listener.Listener0;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class I18nUITranslationService extends I18nTranslationService {
@@ -72,7 +72,7 @@ public class I18nUITranslationService extends I18nTranslationService {
 	return lexicon;
     }
 
-    public void init(final I18nServiceAsync i18nService, final Session session, final Slot0 onReady) {
+    public void init(final I18nServiceAsync i18nService, final Session session, final Listener0 onReady) {
 	this.i18nService = i18nService;
 	this.session = session;
 	final Location loc = WindowUtils.getLocation();

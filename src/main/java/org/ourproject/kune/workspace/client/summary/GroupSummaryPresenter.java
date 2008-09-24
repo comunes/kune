@@ -25,20 +25,20 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
-import com.calclab.suco.client.signal.Slot;
-import com.calclab.suco.client.signal.Slot2;
+import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.listener.Listener2;
 
 public class GroupSummaryPresenter implements GroupSummary {
 
     private GroupSummaryView view;
 
     public GroupSummaryPresenter(final StateManager stateManager, final WsThemePresenter wsThemePresenter) {
-	stateManager.onStateChanged(new Slot<StateDTO>() {
+	stateManager.onStateChanged(new Listener<StateDTO>() {
 	    public void onEvent(final StateDTO state) {
 		setState(state);
 	    }
 	});
-	wsThemePresenter.onThemeChanged(new Slot2<WsTheme, WsTheme>() {
+	wsThemePresenter.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
 	    public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
 		view.setTheme(oldTheme, newTheme);
 	    }

@@ -25,7 +25,7 @@ import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.StateManager;
 
-import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.listener.Listener;
 
 public class EntitySubTitlePresenter implements EntitySubTitle {
 
@@ -34,7 +34,7 @@ public class EntitySubTitlePresenter implements EntitySubTitle {
 
     public EntitySubTitlePresenter(final I18nTranslationService i18n, final StateManager stateManager) {
 	this.i18n = i18n;
-	stateManager.onStateChanged(new Slot<StateDTO>() {
+	stateManager.onStateChanged(new Listener<StateDTO>() {
 	    public void onEvent(final StateDTO state) {
 		setState(state);
 	    }

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.signal.Signal;
-import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.listener.Event;
+import com.calclab.suco.client.listener.Listener;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Ext;
 import com.gwtext.client.core.SortDir;
@@ -60,8 +60,8 @@ public class GridMenuPanel<T> extends Panel {
     private GridPanel grid;
     private final boolean grouped;
     private final boolean withCounters;
-    private final Signal<String> onClick;
-    private final Signal<String> onDoubleClick;
+    private final Event<String> onClick;
+    private final Event<String> onDoubleClick;
     private Toolbar topBar;
     private Toolbar bottomBar;
     private ColumnModel columnModel;
@@ -92,8 +92,8 @@ public class GridMenuPanel<T> extends Panel {
     public GridMenuPanel(final String emptyText, final GridDragConfiguration gridDragConfiguration,
 	    final GridDropConfiguration gridDropConfiguration, final boolean grouped, final boolean withCounters,
 	    final boolean withTopBar, final boolean withBottomBar, final boolean withEndIcon) {
-	this.onClick = new Signal<String>("onClick");
-	this.onDoubleClick = new Signal<String>("onDoubleClick");
+	this.onClick = new Event<String>("onClick");
+	this.onDoubleClick = new Event<String>("onDoubleClick");
 	this.grouped = grouped;
 	this.withCounters = withCounters;
 	this.withEndIcon = withEndIcon;
@@ -196,12 +196,12 @@ public class GridMenuPanel<T> extends Panel {
 	return topBar;
     }
 
-    public void onClick(final Slot<String> slot) {
-	onClick.add(slot);
+    public void onClick(final Listener<String> listener) {
+	onClick.add(listener);
     }
 
-    public void onDoubleClick(final Slot<String> slot) {
-	onDoubleClick.add(slot);
+    public void onDoubleClick(final Listener<String> listener) {
+	onDoubleClick.add(listener);
     }
 
     public void removeAll() {

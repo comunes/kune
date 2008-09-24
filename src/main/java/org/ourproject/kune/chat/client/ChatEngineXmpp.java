@@ -24,13 +24,13 @@ import java.util.Date;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-import com.calclab.emite.client.im.roster.RosterManager.SubscriptionMode;
-import com.calclab.emite.client.xmpp.stanzas.XmppURI;
+import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
+import com.calclab.emiteuimodule.client.SubscriptionMode;
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
 import com.calclab.emiteuimodule.client.UserChatOptions;
 import com.calclab.emiteuimodule.client.params.AvatarProvider;
 import com.calclab.emiteuimodule.client.status.OwnPresence.OwnStatus;
-import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.listener.Listener;
 import com.google.gwt.user.client.Window;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
@@ -101,24 +101,24 @@ class ChatEngineXmpp implements ChatEngine {
 		}
 	    });
 	    ws.getSiteTraybar().addButton(traybarButton);
-	    emiteDialog.onChatAttended(new Slot<String>() {
+	    emiteDialog.onChatAttended(new Listener<String>() {
 		public void onEvent(final String parameter) {
 		    traybarButton.setIcon("images/e-icon.gif");
 		}
 	    });
-	    emiteDialog.onChatUnattendedWithActivity(new Slot<String>() {
+	    emiteDialog.onChatUnattendedWithActivity(new Listener<String>() {
 		public void onEvent(final String parameter) {
 		    traybarButton.setIcon("images/e-icon-a.gif");
 		}
 	    });
 	}
 	emiteDialog.hide();
-	emiteDialog.onChatAttended(new Slot<String>() {
+	emiteDialog.onChatAttended(new Listener<String>() {
 	    public void onEvent(final String parameter) {
 		Window.setTitle(initialWindowTitle);
 	    }
 	});
-	emiteDialog.onChatUnattendedWithActivity(new Slot<String>() {
+	emiteDialog.onChatUnattendedWithActivity(new Listener<String>() {
 	    public void onEvent(final String chatTitle) {
 		Window.setTitle("(* " + chatTitle + ") " + initialWindowTitle);
 	    }

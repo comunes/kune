@@ -27,8 +27,8 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.site.Site;
 
-import com.calclab.suco.client.provider.Provider;
-import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.ioc.Provider;
+import com.calclab.suco.client.listener.Listener;
 
 public class RateItPresenter implements RateIt {
 
@@ -47,7 +47,7 @@ public class RateItPresenter implements RateIt {
 	this.session = session;
 	this.contentServiceProvider = contentServiceProvider;
 	this.stateManager = stateManager;
-	stateManager.onStateChanged(new Slot<StateDTO>() {
+	stateManager.onStateChanged(new Listener<StateDTO>() {
 	    public void onEvent(final StateDTO state) {
 		setState(state);
 	    }

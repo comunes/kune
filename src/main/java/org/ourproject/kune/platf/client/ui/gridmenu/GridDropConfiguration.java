@@ -21,18 +21,18 @@
  */
 package org.ourproject.kune.platf.client.ui.gridmenu;
 
-import com.calclab.suco.client.signal.Signal;
-import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.listener.Event;
+import com.calclab.suco.client.listener.Listener;
 
 public class GridDropConfiguration {
 
     private final String ddGroupId;
-    private final Signal<String> onDrop;
+    private final Event<String> onDrop;
 
-    public GridDropConfiguration(final String ddGroupId, final Slot<String> slot) {
+    public GridDropConfiguration(final String ddGroupId, final Listener<String> listener) {
 	this.ddGroupId = ddGroupId;
-	this.onDrop = new Signal<String>("onDrop");
-	this.onDrop(slot);
+	this.onDrop = new Event<String>("onDrop");
+	this.onDrop(listener);
     }
 
     public void fire(final String id) {
@@ -43,8 +43,8 @@ public class GridDropConfiguration {
 	return ddGroupId;
     }
 
-    public void onDrop(final Slot<String> slot) {
-	onDrop.add(slot);
+    public void onDrop(final Listener<String> listener) {
+	onDrop.add(listener);
     }
 
 }

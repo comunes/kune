@@ -29,8 +29,8 @@ import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.site.Site;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.provider.Provider;
-import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.ioc.Provider;
+import com.calclab.suco.client.listener.Listener;
 
 public class DocumentClientActions {
 
@@ -66,7 +66,7 @@ public class DocumentClientActions {
 		.t("New wiki"), i18n.t("Folder"), i18n.t("New"), i18n.t("wiki"));
 
 	final ActionMenuDescriptor<StateToken> addDoc = new ActionMenuDescriptor<StateToken>(AccessRolDTO.Editor,
-		ActionPosition.topbarAndItemMenu, new Slot<StateToken>() {
+		ActionPosition.topbarAndItemMenu, new Listener<StateToken>() {
 		    public void onEvent(final StateToken token) {
 			Site.showProgressProcessing();
 			contentServiceProvider.get().addContent(session.getUserHash(),
@@ -85,7 +85,7 @@ public class DocumentClientActions {
 	addDoc.setIconUrl("images/nav/page_add.png");
 
 	final ActionMenuDescriptor<StateToken> delContainer = new ActionMenuDescriptor<StateToken>(
-		AccessRolDTO.Administrator, ActionPosition.topbarAndItemMenu, new Slot<StateToken>() {
+		AccessRolDTO.Administrator, ActionPosition.topbarAndItemMenu, new Listener<StateToken>() {
 		    public void onEvent(final StateToken token) {
 			Site.info("Sorry, in development");
 		    }
@@ -97,7 +97,7 @@ public class DocumentClientActions {
 	delContainer.setConfirmationText(i18n.t("You will delete it and also all its contents. Are you sure?"));
 
 	final ActionMenuDescriptor<StateToken> delContent = new ActionMenuDescriptor<StateToken>(
-		AccessRolDTO.Administrator, ActionPosition.topbarAndItemMenu, new Slot<StateToken>() {
+		AccessRolDTO.Administrator, ActionPosition.topbarAndItemMenu, new Listener<StateToken>() {
 		    public void onEvent(final StateToken token) {
 			contentServiceProvider.get().delContent(session.getUserHash(), token,
 				new AsyncCallbackSimple<String>() {
@@ -115,7 +115,7 @@ public class DocumentClientActions {
 	delContent.setConfirmationText(i18n.t("Are you sure?"));
 
 	final ActionDescriptor<StateToken> go = new ActionDescriptor<StateToken>(AccessRolDTO.Viewer,
-		ActionPosition.itemMenu, new Slot<StateToken>() {
+		ActionPosition.itemMenu, new Listener<StateToken>() {
 		    public void onEvent(final StateToken token) {
 			stateManager.gotoToken(token);
 		    }
@@ -129,7 +129,7 @@ public class DocumentClientActions {
 	});
 
 	final ActionDescriptor<StateToken> rename = new ActionDescriptor<StateToken>(AccessRolDTO.Editor,
-		ActionPosition.itemMenu, new Slot<StateToken>() {
+		ActionPosition.itemMenu, new Listener<StateToken>() {
 		    public void onEvent(final StateToken stateToken) {
 			contextNavigator.editItem(stateToken);
 		    }
@@ -137,7 +137,7 @@ public class DocumentClientActions {
 	rename.setTextDescription(i18n.t("Rename"));
 
 	final ActionButtonDescriptor<StateToken> goGroupHome = new ActionButtonDescriptor<StateToken>(
-		AccessRolDTO.Viewer, ActionPosition.topbar, new Slot<StateToken>() {
+		AccessRolDTO.Viewer, ActionPosition.topbar, new Listener<StateToken>() {
 		    public void onEvent(final StateToken token) {
 			stateManager.gotoToken(token.getGroup());
 		    }
@@ -152,7 +152,7 @@ public class DocumentClientActions {
 	});
 
 	final ActionMenuDescriptor<StateToken> setAsDefGroupContent = new ActionMenuDescriptor<StateToken>(
-		AccessRolDTO.Administrator, ActionPosition.itemMenu, new Slot<StateToken>() {
+		AccessRolDTO.Administrator, ActionPosition.itemMenu, new Listener<StateToken>() {
 		    public void onEvent(final StateToken token) {
 			Site.showProgressProcessing();
 			contentServiceProvider.get().setAsDefaultContent(session.getUserHash(), token,
@@ -176,7 +176,7 @@ public class DocumentClientActions {
 	});
 
 	final ActionButtonDescriptor<StateToken> refresh = new ActionButtonDescriptor<StateToken>(AccessRolDTO.Viewer,
-		ActionPosition.topbar, new Slot<StateToken>() {
+		ActionPosition.topbar, new Listener<StateToken>() {
 		    public void onEvent(final StateToken stateToken) {
 			stateManager.reload();
 			contextNavigator.selectItem(stateToken);
@@ -189,7 +189,7 @@ public class DocumentClientActions {
 	final ActionDescriptor<StateToken> uploadFile = createUploadAction(i18n.t("Upload file"),
 		"images/nav/upload.png", i18n.t("Upload some files (images, PDFs, ...)"), null);
 
-	session.onInitDataReceived(new Slot<InitDataDTO>() {
+	session.onInitDataReceived(new Listener<InitDataDTO>() {
 	    public void onEvent(final InitDataDTO parameter) {
 		final ActionDescriptor<StateToken> uploadMedia = createUploadAction(i18n.t("Upload media"),
 			"images/nav/upload.png", i18n.t("Upload some media (images, videos)"), session
@@ -241,7 +241,7 @@ public class DocumentClientActions {
 	    final String defaultName) {
 	final ActionMenuDescriptor<StateToken> addFolder;
 	addFolder = new ActionMenuDescriptor<StateToken>(AccessRolDTO.Editor, ActionPosition.topbarAndItemMenu,
-		new Slot<StateToken>() {
+		new Listener<StateToken>() {
 		    public void onEvent(final StateToken stateToken) {
 			Site.showProgressProcessing();
 			contentServiceProvider.get().addFolder(session.getUserHash(), stateToken, defaultName,
@@ -264,7 +264,7 @@ public class DocumentClientActions {
 	    final String toolTip, final String permitedExtensions) {
 	final ActionButtonDescriptor<StateToken> uploadFile;
 	uploadFile = new ActionButtonDescriptor<StateToken>(AccessRolDTO.Editor, ActionPosition.bootombarAndItemMenu,
-		new Slot<StateToken>() {
+		new Listener<StateToken>() {
 		    public void onEvent(final StateToken token) {
 			if (permitedExtensions != null) {
 			    Log.info("Permited extensions (in dev): " + permitedExtensions);

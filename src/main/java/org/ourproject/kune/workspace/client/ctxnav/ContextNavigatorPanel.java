@@ -101,6 +101,7 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 		if (!item.getStateToken().hasAll()) {
 		    // is a container
 		    child.setExpandable(true);
+		    child.setSingleClickExpand(true);
 		    child.addListener(new TreeNodeListenerAdapter() {
 			public void onExpand(final Node node) {
 			    treePanel.getNodeById(node.getId()).select();

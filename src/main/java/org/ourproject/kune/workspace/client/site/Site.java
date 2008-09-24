@@ -25,7 +25,7 @@ import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
 import org.ourproject.kune.workspace.client.site.msg.SiteMessage;
 import org.ourproject.kune.workspace.client.sitebar.siteprogress.SiteProgress;
 
-import com.calclab.suco.client.provider.Provider;
+import com.calclab.suco.client.ioc.Provider;
 
 public class Site {
     public static final String USERHASH = "userHash";

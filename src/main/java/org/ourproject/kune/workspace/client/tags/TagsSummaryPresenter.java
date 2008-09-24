@@ -32,9 +32,9 @@ import org.ourproject.kune.workspace.client.search.SiteSearcherType;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
-import com.calclab.suco.client.provider.Provider;
-import com.calclab.suco.client.signal.Slot;
-import com.calclab.suco.client.signal.Slot2;
+import com.calclab.suco.client.ioc.Provider;
+import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.listener.Listener2;
 
 public class TagsSummaryPresenter implements TagsSummary {
 
@@ -46,12 +46,12 @@ public class TagsSummaryPresenter implements TagsSummary {
 	    final StateManager stateManager, final WsThemePresenter wsThemePresenter) {
 	this.session = session;
 	this.searcherProvider = searcherProvider;
-	stateManager.onStateChanged(new Slot<StateDTO>() {
+	stateManager.onStateChanged(new Listener<StateDTO>() {
 	    public void onEvent(final StateDTO state) {
 		setState(state);
 	    }
 	});
-	wsThemePresenter.onThemeChanged(new Slot2<WsTheme, WsTheme>() {
+	wsThemePresenter.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
 	    public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
 		view.setTheme(oldTheme, newTheme);
 	    }

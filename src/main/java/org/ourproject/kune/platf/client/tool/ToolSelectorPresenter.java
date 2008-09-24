@@ -5,7 +5,7 @@ import java.util.HashMap;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
-import com.calclab.suco.client.signal.Slot2;
+import com.calclab.suco.client.listener.Listener2;
 
 public class ToolSelectorPresenter implements ToolSelector {
 
@@ -13,12 +13,12 @@ public class ToolSelectorPresenter implements ToolSelector {
 
     public ToolSelectorPresenter(final StateManager stateManager, final WsThemePresenter wsThemePresenter) {
 	tools = new HashMap<String, ToolSelectorItem>();
-	stateManager.onGroupChanged(new Slot2<String, String>() {
+	stateManager.onGroupChanged(new Listener2<String, String>() {
 	    public void onEvent(final String oldGroupName, final String newGroupName) {
 		onGroupChanged(newGroupName);
 	    }
 	});
-	stateManager.onToolChanged(new Slot2<String, String>() {
+	stateManager.onToolChanged(new Listener2<String, String>() {
 	    public void onEvent(final String oldTool, final String newTool) {
 		onToolChanged(oldTool, newTool);
 	    }

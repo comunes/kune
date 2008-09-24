@@ -14,7 +14,7 @@ import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 
 import com.calclab.emiteuimodule.client.users.UserGridPanel;
-import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.listener.Listener;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.gwtext.client.core.EventObject;
@@ -47,7 +47,7 @@ public class GroupMembersSummaryPanel extends DropDownPanel implements GroupMemb
 		+ "<br/>" + i18n.t("Drop into a room to invite the user to join the chat room"));
 	gridMenuPanel = new GridMenuPanel<GroupDTO>(i18n.t("This is an orphaned project, if you are interested "
 		+ "please request to join to work on it"), dragConf, true, true, false, true, false);
-	gridMenuPanel.onDoubleClick(new Slot<String>() {
+	gridMenuPanel.onDoubleClick(new Listener<String>() {
 	    public void onEvent(final String groupShortName) {
 		presenter.onDoubleClick(groupShortName);
 	    }
@@ -76,7 +76,7 @@ public class GroupMembersSummaryPanel extends DropDownPanel implements GroupMemb
 		public void onClick(final Button button, final EventObject e) {
 		    DeferredCommand.addCommand(new Command() {
 			public void execute() {
-			    gridButton.getSlot().onEvent("");
+			    gridButton.getListener().onEvent("");
 			}
 		    });
 		}

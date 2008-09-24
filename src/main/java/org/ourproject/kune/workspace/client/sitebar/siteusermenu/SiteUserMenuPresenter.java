@@ -8,8 +8,8 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.MenuItem;
 import org.ourproject.kune.platf.client.ui.MenuItemCollection;
 
-import com.calclab.suco.client.signal.Slot;
-import com.calclab.suco.client.signal.Slot0;
+import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.listener.Listener0;
 
 public class SiteUserMenuPresenter implements SiteUserMenu {
 
@@ -22,13 +22,13 @@ public class SiteUserMenuPresenter implements SiteUserMenu {
 	this.session = session;
 	this.stateManager = stateManager;
 	participateInGroups = new MenuItemCollection<GroupDTO>();
-	session.onUserSignIn(new Slot<UserInfoDTO>() {
+	session.onUserSignIn(new Listener<UserInfoDTO>() {
 	    public void onEvent(final UserInfoDTO userInfoDTO) {
 		onUserSignIn(userInfoDTO);
 	    }
 
 	});
-	session.onUserSignOut(new Slot0() {
+	session.onUserSignOut(new Listener0() {
 	    public void onEvent() {
 		view.setVisible(false);
 		view.setLoggedUserName("");
@@ -54,7 +54,7 @@ public class SiteUserMenuPresenter implements SiteUserMenu {
 
     private void addPartipation(final GroupDTO group) {
 	participateInGroups.add(new MenuItem<GroupDTO>("images/group-def-icon.gif", group.getShortName(),
-		new Slot<GroupDTO>() {
+		new Listener<GroupDTO>() {
 		    public void onEvent(final GroupDTO param) {
 			stateManager.gotoToken(group.getShortName());
 		    }

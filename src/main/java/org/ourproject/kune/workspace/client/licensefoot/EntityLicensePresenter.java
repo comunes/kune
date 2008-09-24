@@ -24,7 +24,7 @@ import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.state.StateManager;
 
-import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.listener.Listener;
 
 public class EntityLicensePresenter {
 
@@ -32,7 +32,7 @@ public class EntityLicensePresenter {
     private LicenseDTO license;
 
     public EntityLicensePresenter(final StateManager stateManager) {
-	stateManager.onStateChanged(new Slot<StateDTO>() {
+	stateManager.onStateChanged(new Listener<StateDTO>() {
 	    public void onEvent(final StateDTO state) {
 		setLicense(state);
 	    }

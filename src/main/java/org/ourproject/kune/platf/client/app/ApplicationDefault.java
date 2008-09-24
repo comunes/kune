@@ -28,8 +28,8 @@ import org.ourproject.kune.platf.client.utils.PrefetchUtilities;
 import org.ourproject.kune.workspace.client.site.Site;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.signal.Signal0;
-import com.calclab.suco.client.signal.Slot0;
+import com.calclab.suco.client.listener.Event0;
+import com.calclab.suco.client.listener.Listener0;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Timer;
@@ -40,13 +40,13 @@ import com.google.gwt.user.client.ui.RootPanel;
 
 public class ApplicationDefault implements Application {
     private final Session session;
-    private final Signal0 onApplicationStart;
-    private final Signal0 onApplicationStop;
+    private final Event0 onApplicationStart;
+    private final Event0 onApplicationStop;
 
     public ApplicationDefault(final Session session) {
 	this.session = session;
-	this.onApplicationStart = new Signal0("onApplicationStart");
-	this.onApplicationStop = new Signal0("onApplicationStop");
+	this.onApplicationStart = new Event0("onApplicationStart");
+	this.onApplicationStop = new Event0("onApplicationStop");
 	Window.addWindowCloseListener(new WindowCloseListener() {
 	    public void onWindowClosed() {
 		stop();
@@ -58,12 +58,12 @@ public class ApplicationDefault implements Application {
 	});
     }
 
-    public void onApplicationStart(final Slot0 slot) {
-	onApplicationStart.add(slot);
+    public void onApplicationStart(final Listener0 listener) {
+	onApplicationStart.add(listener);
     }
 
-    public void onApplicationStop(final Slot0 slot) {
-	onApplicationStop.add(slot);
+    public void onApplicationStop(final Listener0 listener) {
+	onApplicationStop.add(listener);
     }
 
     public void start() {

@@ -20,20 +20,32 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.ui.dialogs.FileUploader;
+import org.ourproject.kune.platf.server.access.AccessRol;
+import org.ourproject.kune.platf.server.auth.ActionLevel;
+import org.ourproject.kune.platf.server.auth.Authenticated;
+import org.ourproject.kune.platf.server.auth.Authorizated;
+import org.ourproject.kune.platf.server.content.ContentManager;
+import org.ourproject.kune.platf.server.manager.FileManager;
 import org.ourproject.kune.platf.server.properties.KuneProperties;
 
 import com.google.inject.Inject;
 import com.google.inject.servlet.RequestScoped;
 
 @RequestScoped
-public class FileUploadManagerRevisited extends HttpServlet {
+public class FileUploadManager extends HttpServlet {
 
-    public static final Log log = LogFactory.getLog(FileUploadManagerRevisited.class);
+    public static final Log log = LogFactory.getLog(FileUploadManager.class);
 
     private static final long serialVersionUID = 1L;
 
     @Inject
     KuneProperties kuneProperties;
+    @Inject
+    ContentManager contentManager;
+    @Inject
+    FileManager fileManager;
 
     @Override
     @SuppressWarnings( { "unchecked", "deprecation" })
@@ -41,7 +53,7 @@ public class FileUploadManagerRevisited extends HttpServlet {
 	    IOException {
 
 	// i18n
-	String jsonResponse = createJsonResponse(true, "OK");
+	JSONObject jsonResponse = createJsonResponse(true, "OK");
 
 	final DiskFileItemFactory factory = new DiskFileItemFactory();
 	// maximum size that will be stored in memory
@@ -59,32 +71,63 @@ public class FileUploadManagerRevisited extends HttpServlet {
 
 	try {
 	    final List fileItems = upload.parseRequest(req);
+	    String userHash = null;
+	    StateToken stateToken = null;
+	    String fileName = null;
+	    FileItem file = null;
 	    for (final Iterator iterator = fileItems.iterator(); iterator.hasNext();) {
 		final FileItem item = (FileItem) iterator.next();
 		if (item.isFormField()) {
 		    final String name = item.getFieldName();
 		    final String value = item.getString();
 		    log.info("name: " + name + " value: " + value);
+		    if (name.equals(FileUploader.USERHASH)) {
+			userHash = value;
+		    }
+		    if (name.equals(FileUploader.CURRENT_STATE_TOKEN)) {
+			stateToken = new StateToken(value);
+		    }
 		} else {
-		    final String fileName = item.getName();
+		    fileName = item.getName();
 		    log.info("file: " + fileName + " fieldName: " + item.getFieldName() + " size: " + item.getSize());
-		    item.write(new File(kuneProperties.get(KuneProperties.UPLOAD_LOCATION), fileName));
+		    file = item;
 		}
 	    }
+	    createFile(userHash, stateToken, fileName, file);
 	} catch (final FileUploadException e) {
+	    // i18n
 	    jsonResponse = createJsonResponse(false, "Error: File too large");
 	} catch (final Exception e) {
+	    // i18n
 	    jsonResponse = createJsonResponse(false, "Error uploading file");
 	    e.printStackTrace();
 	}
 
 	final Writer w = new OutputStreamWriter(resp.getOutputStream());
-	w.write(jsonResponse);
+	w.write(jsonResponse.toString());
 	w.close();
 	resp.setStatus(HttpServletResponse.SC_OK);
     }
 
-    private String createJsonResponse(final boolean success, final String message) {
+    private String calculateUploadDirLocation(final StateToken stateToken) {
+	return kuneProperties.get(KuneProperties.UPLOAD_LOCATION) + File.pathSeparator + stateToken.getGroup()
+		+ File.pathSeparator + stateToken.getTool() + File.pathSeparator + stateToken.getFolder();
+    }
+
+    @Authenticated
+    @Authorizated(accessRolRequired = AccessRol.Editor, actionLevel = ActionLevel.container)
+    private JSONObject createFile(final String userHash, final StateToken stateToken, final String fileName,
+	    final FileItem fileUploadItem) throws Exception {
+	final String destDir = calculateUploadDirLocation(stateToken);
+	fileManager.mkdir(destDir);
+	final File file = fileManager.createFileWithSequentialName(destDir, fileName);
+	fileUploadItem.write(file);
+	fileUploadItem.getContentType();
+	// here ContentManager code
+	return createJsonResponse(true, "OK");
+    }
+
+    private JSONObject createJsonResponse(final boolean success, final String message) {
 	/**
 	 * 
 	 * http://max-bazhenov.com/dev/upload-dialog-2.0/index.php
@@ -106,6 +149,6 @@ public class FileUploadManagerRevisited extends HttpServlet {
 	} catch (final Exception e) {
 	    log.error("Error building response");
 	}
-	return response.toString();
+	return response;
     }
 }

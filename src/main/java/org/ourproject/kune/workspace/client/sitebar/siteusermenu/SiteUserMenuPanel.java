@@ -17,6 +17,10 @@ import com.gwtext.client.widgets.menu.event.BaseItemListenerAdapter;
 
 public class SiteUserMenuPanel implements SiteUserMenuView {
 
+    private static final String LOGGED_USER_MENU = "k-logged-user-menu";
+    private static final String USER_PREFERENCES_MENU_ITEM = "k-user-pref-menu-item";
+    private static final String USER_HOME_PAGE_MENU_ITEM = "k-user-home-page-menu-item";
+    private static final String USER_PARTICIPATION_MENU_ITEM = "k-user-participation-menu-item";
     private final PushButton loggedUserMenu;
     private final Widget separator;
     private final Menu userMenu;
@@ -25,6 +29,7 @@ public class SiteUserMenuPanel implements SiteUserMenuView {
     public SiteUserMenuPanel(final SiteUserMenuPresenter presenter, final WorkspaceSkeleton ws,
 	    final I18nUITranslationService i18n) {
 	loggedUserMenu = new PushButton("");
+	loggedUserMenu.ensureDebugId(LOGGED_USER_MENU);
 	loggedUserMenu.setStyleName("k-sitebar-labellink");
 	ws.getSiteBar().add(loggedUserMenu);
 	separator = ws.getSiteBar().addSeparator();
@@ -36,6 +41,7 @@ public class SiteUserMenuPanel implements SiteUserMenuView {
 	});
 	final Item userHomePage = new Item(i18n.t("Your homepage"));
 	userHomePage.setIcon("images/group-home.gif");
+	userHomePage.ensureDebugId(USER_HOME_PAGE_MENU_ITEM);
 	userHomePage.addListener(new BaseItemListenerAdapter() {
 	    @Override
 	    public void onClick(final BaseItem item, final EventObject e) {
@@ -45,6 +51,7 @@ public class SiteUserMenuPanel implements SiteUserMenuView {
 	});
 	userMenu.addItem(userHomePage);
 	final Item userPreferences = new Item(i18n.t("Your preferences"));
+	userPreferences.ensureDebugId(USER_PREFERENCES_MENU_ITEM);
 	userPreferences.setIcon("images/kune-preferences.gif");
 	userPreferences.addListener(new BaseItemListenerAdapter() {
 	    @Override
@@ -55,6 +62,7 @@ public class SiteUserMenuPanel implements SiteUserMenuView {
 	});
 	userMenu.addItem(userPreferences);
 	userParticipation = new Menu();
+	userParticipation.ensureDebugId(USER_PARTICIPATION_MENU_ITEM);
 	final MenuItem userParticipationItem = new MenuItem(i18n.t("Your groups"), userParticipation);
 	userParticipationItem.setIcon("");
 	userMenu.addItem(userParticipationItem);

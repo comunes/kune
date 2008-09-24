@@ -6,14 +6,14 @@ import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.state.StateManager;
 
-import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.listener.Listener;
 
 public class SitePublicSpaceLinkPresenter implements SitePublicSpaceLink {
 
     private SitePublicSpaceLinkView view;
 
     public SitePublicSpaceLinkPresenter(final StateManager stateManager) {
-	stateManager.onStateChanged(new Slot<StateDTO>() {
+	stateManager.onStateChanged(new Listener<StateDTO>() {
 	    public void onEvent(final StateDTO state) {
 		setState(state);
 	    }

@@ -1,27 +1,27 @@
 package org.ourproject.kune.platf.client.ui.gridmenu;
 
-import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.listener.Listener;
 
 public class GridButton {
 
     private final String title;
     private final String icon;
     private final String tooltip;
-    private final Slot<String> slot;
+    private final Listener<String> listener;
 
-    public GridButton(final String icon, final String title, final String tooltip, final Slot<String> slot) {
+    public GridButton(final String icon, final String title, final String tooltip, final Listener<String> listener) {
 	this.icon = icon;
 	this.title = title;
 	this.tooltip = tooltip;
-	this.slot = slot;
+	this.listener = listener;
     }
 
     public String getIcon() {
 	return icon;
     }
 
-    public Slot<String> getSlot() {
-	return slot;
+    public Listener<String> getListener() {
+	return listener;
     }
 
     public String getTitle() {

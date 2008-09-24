@@ -24,9 +24,9 @@ import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
-import com.calclab.suco.client.provider.Provider;
-import com.calclab.suco.client.signal.Slot;
-import com.calclab.suco.client.signal.Slot2;
+import com.calclab.suco.client.ioc.Provider;
+import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.listener.Listener2;
 
 public class GroupMembersSummaryPresenter extends SocialNetworkPresenter implements GroupMembersSummary {
 
@@ -49,14 +49,14 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
 	this.stateManager = stateManager;
 	this.session = session;
 	this.snServiceProvider = snServiceProvider;
-	final Slot<StateDTO> setStateSlot = new Slot<StateDTO>() {
+	final Listener<StateDTO> setStateListener = new Listener<StateDTO>() {
 	    public void onEvent(StateDTO state) {
 		setState(state);
 	    }
 	};
-	stateManager.onStateChanged(setStateSlot);
-	stateManager.onSocialNetworkChanged(setStateSlot);
-	wsThemePresenter.onThemeChanged(new Slot2<WsTheme, WsTheme>() {
+	stateManager.onStateChanged(setStateListener);
+	stateManager.onSocialNetworkChanged(setStateListener);
+	wsThemePresenter.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
 	    public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
 		view.setTheme(oldTheme, newTheme);
 	    }
@@ -72,9 +72,9 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
 		.getImageHtml(ImageDescriptor.alert), true);
 	// i18n.t("Add member")
 	addMember = new GridButton("images/add-green.gif", "", i18n
-		.t("Add a group or a person as member of this group"), new Slot<String>() {
+		.t("Add a group or a person as member of this group"), new Listener<String>() {
 	    public void onEvent(final String parameter) {
-		liveSearcherProvider.get().onSelection(new Slot<LinkDTO>() {
+		liveSearcherProvider.get().onSelection(new Listener<LinkDTO>() {
 		    public void onEvent(final LinkDTO link) {
 			view.confirmAddCollab(link.getShortName(), link.getLongName());
 		    }

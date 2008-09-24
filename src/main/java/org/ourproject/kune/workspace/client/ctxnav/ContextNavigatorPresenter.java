@@ -44,9 +44,9 @@ import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.title.EntityTitle;
 
-import com.calclab.suco.client.provider.Provider;
-import com.calclab.suco.client.signal.Slot;
-import com.calclab.suco.client.signal.Slot0;
+import com.calclab.suco.client.ioc.Provider;
+import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.listener.Listener0;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class ContextNavigatorPresenter implements ContextNavigator {
@@ -100,12 +100,12 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 
     public void init(final ContextNavigatorView view) {
 	this.view = view;
-	session.onUserSignIn(new Slot<UserInfoDTO>() {
+	session.onUserSignIn(new Listener<UserInfoDTO>() {
 	    public void onEvent(final UserInfoDTO parameter) {
 		clear();
 	    }
 	});
-	session.onUserSignOut(new Slot0() {
+	session.onUserSignOut(new Listener0() {
 	    public void onEvent() {
 		clear();
 	    }
@@ -152,7 +152,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     public void selectItem(final StateToken stateToken) {
 	view.selectItem(genId(stateToken));
 	toolbar.disableMenusAndClearButtons();
-	toolbar.setActions(actionsByItem.get(stateToken), true);
+	toolbar.showActions(actionsByItem.get(stateToken), true);
     }
 
     public void setEditOnNextStateChange(final boolean edit) {
@@ -184,7 +184,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 		    .getTypeId());
 	    view.setRootItem(genId(root.getStateToken()), i18n.t(root.getName()), root.getStateToken(), set
 		    .getItemActions());
-	    toolbar.setActions(set.getToolbarActions(), false);
+	    toolbar.showActions(set.getToolbarActions(), false);
 	    createChildItems(root, containerRights);
 	    actionsByItem.put(root.getStateToken(), set.getToolbarActions());
 	}
@@ -229,7 +229,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	    final boolean isNodeSelected) {
 
 	final ActionCollectionSet<StateToken> set = actionRegistry.selectCurrentActions(rights, contentTypeId);
-	toolbar.setActions(set.getToolbarActions(), isNodeSelected);
+	toolbar.showActions(set.getToolbarActions(), isNodeSelected);
 
 	final ContextNavigatorItem item = new ContextNavigatorItem(genId(stateToken), genId(parentStateToken),
 		contentIconsRegistry.getContentTypeIcon(contentTypeId), title, status, stateToken,

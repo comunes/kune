@@ -8,8 +8,8 @@ import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.workspace.client.site.SiteToken;
 
-import com.calclab.suco.client.signal.Slot;
-import com.calclab.suco.client.signal.Slot2;
+import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.listener.Listener2;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class StateManagerTest {
@@ -22,24 +22,24 @@ public class StateManagerTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    public void changeStateWithDifferentGroupsMustFireSlot() {
-	final Slot2<String, String> groupSlot = Mockito.mock(Slot2.class);
-	stateManager.onGroupChanged(groupSlot);
+    public void changeStateWithDifferentGroupsMustFireListener() {
+	final Listener2<String, String> groupListener = Mockito.mock(Listener2.class);
+	stateManager.onGroupChanged(groupListener);
 	stateManager.onHistoryChanged("group1.tool1");
 	stateManager.onHistoryChanged("group2.tool1");
 	// TODO, think how to test this
-	// Mockito.verify(groupSlot).onEvent("group1", "group2");
+	// Mockito.verify(groupListener).onEvent("group1", "group2");
     }
 
     @SuppressWarnings("unchecked")
     @Test
-    public void changeStateWithDifferentToolsMustFireSlot() {
-	final Slot2<String, String> toolSlot = Mockito.mock(Slot2.class);
-	stateManager.onToolChanged(toolSlot);
+    public void changeStateWithDifferentToolsMustFireListener() {
+	final Listener2<String, String> toolListener = Mockito.mock(Listener2.class);
+	stateManager.onToolChanged(toolListener);
 	stateManager.gotoToken("group1.tool1");
 	stateManager.gotoToken("group1.tool2");
 	// TODO, think how to test this
-	// Mockito.verify(toolSlot).onEvent("tool1", "tool2");
+	// Mockito.verify(toolListener).onEvent("tool1", "tool2");
     }
 
     @SuppressWarnings("unchecked")
@@ -73,12 +73,12 @@ public class StateManagerTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    public void siteTokenFirstLoadDefContentAndFireSlot() {
-	final Slot slot = Mockito.mock(Slot.class);
+    public void siteTokenFirstLoadDefContentAndFireListener() {
+	final Listener listener = Mockito.mock(Listener.class);
 	final String token = SiteToken.signin.toString();
-	stateManager.addSiteToken(token, slot);
+	stateManager.addSiteToken(token, listener);
 	stateManager.onHistoryChanged(token);
-	Mockito.verify(slot, Mockito.times(1)).onEvent(Mockito.anyObject());
+	Mockito.verify(listener, Mockito.times(1)).onEvent(Mockito.anyObject());
 	Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
 		(StateToken) Mockito.anyObject(), (AsyncCallback<StateDTO>) Mockito.anyObject());
     }

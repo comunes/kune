@@ -3,7 +3,7 @@ package org.ourproject.kune.platf.client.actions;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.services.ImageDescriptor;
 
-import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.listener.Listener;
 
 public class ActionDescriptor<T> {
 
@@ -16,8 +16,8 @@ public class ActionDescriptor<T> {
     private String confirmationTitle;
     private String confirmationText;
 
-    private final Slot<T> onPerformCall;
-    private final Slot<T> onNotConfirmed;
+    private final Listener<T> onPerformCall;
+    private final Listener<T> onNotConfirmed;
 
     private AccessRolDTO accessRol;
 
@@ -26,7 +26,7 @@ public class ActionDescriptor<T> {
     private ActionEnableCondition<T> enableCondition;
 
     public ActionDescriptor(final AccessRolDTO accessRolDTO, final ActionPosition actionPosition,
-	    final Slot<T> onPerformCall) {
+	    final Listener<T> onPerformCall) {
 	accessRol = accessRolDTO;
 	this.actionPosition = actionPosition;
 	this.onPerformCall = onPerformCall;
@@ -35,7 +35,7 @@ public class ActionDescriptor<T> {
     }
 
     public ActionDescriptor(final AccessRolDTO accessRolDTO, final ActionPosition actionPosition,
-	    final Slot<T> onPerformCall, final ActionEnableCondition<T> enableCondition) {
+	    final Listener<T> onPerformCall, final ActionEnableCondition<T> enableCondition) {
 	this(accessRolDTO, actionPosition, onPerformCall);
 	this.enableCondition = enableCondition;
     }

@@ -3,7 +3,7 @@ package org.ourproject.kune.platf.client.actions;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.signal.Slot;
+import com.calclab.suco.client.listener.Listener;
 
 public class ActionMenuDescriptor<T> extends ActionDescriptor<T> {
 
@@ -12,7 +12,7 @@ public class ActionMenuDescriptor<T> extends ActionDescriptor<T> {
     private String parentSubMenuTitle;
 
     public ActionMenuDescriptor(final AccessRolDTO accessRolDTO, final ActionPosition actionPosition,
-	    final Slot<T> onPerformCall) {
+	    final Listener<T> onPerformCall) {
 	super(accessRolDTO, actionPosition, onPerformCall);
     }
 

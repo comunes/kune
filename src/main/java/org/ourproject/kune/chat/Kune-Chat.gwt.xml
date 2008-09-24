@@ -1,6 +1,5 @@
 <module>
   <inherits name='org.ourproject.kune.platf.Kune-Platform' />
   <inherits name='org.ourproject.kune.workspace.Kune-Workspace' />
-  <inherits name="com.calclab.emite.Emite" />
   <inherits name="com.calclab.emiteuimodule.EmiteUIModule" />
 </module>
