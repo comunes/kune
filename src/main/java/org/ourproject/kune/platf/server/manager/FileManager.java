@@ -3,6 +3,11 @@ package org.ourproject.kune.platf.server.manager;
 import java.io.File;
 import java.io.IOException;
 
+import net.sf.jmimemagic.MagicException;
+import net.sf.jmimemagic.MagicMatch;
+import net.sf.jmimemagic.MagicMatchNotFoundException;
+import net.sf.jmimemagic.MagicParseException;
+
 public interface FileManager {
 
     /**
@@ -17,6 +22,8 @@ public interface FileManager {
      * @throws IOException
      */
     File createFileWithSequentialName(String dir, String fileName) throws IOException;
+
+    MagicMatch getMimeType(File file) throws MagicParseException, MagicMatchNotFoundException, MagicException;
 
     /**
      * @param dir

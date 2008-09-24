@@ -20,6 +20,16 @@ public class FileUtilsTest {
     }
 
     @Test
+    public void testFileNameWExtensionSimple() {
+	assertEquals("test", FileUtils.getFileNameWithoutExtension("test.txt", "txt"));
+    }
+
+    @Test
+    public void testFileNameWithoutExtension() {
+	assertEquals("test", FileUtils.getFileNameWithoutExtension("test", ""));
+    }
+
+    @Test
     public void testIfSeq101return102() {
 	assertEquals(SIMPLE_FILE_NAME + " 102", FileUtils.getNextSequentialFileName(SIMPLE_FILE_NAME + " 101"));
     }

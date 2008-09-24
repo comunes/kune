@@ -247,6 +247,11 @@
 			<version>2.4</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>jmimemagic</groupId>
+			<artifactId>jmimemagic</artifactId>
+			<version>0.1.2</version>
+		</dependency>
 
 		<!-- testing dependencies -->
 		<dependency>
@@ -282,7 +287,6 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
 
 	<!-- http://gwt-maven.googlecode.com/svn/docs/maven-googlewebtoolkit2-plugin/index.html -->
 	<repositories>

@@ -32,12 +32,14 @@ public interface ContextNavigator {
 
     boolean isSelected(StateToken stateToken);
 
+    void refresh(StateToken stateToken);
+
     void selectItem(StateToken stateToken);
 
     void setEditOnNextStateChange(boolean edit);
 
     void setItemText(StateToken stateToken, String name);
 
-    void setState(StateDTO state);
+    void setState(StateDTO state, boolean selectItem);
 
 }

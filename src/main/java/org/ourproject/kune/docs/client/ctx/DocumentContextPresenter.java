@@ -61,7 +61,7 @@ public class DocumentContextPresenter implements DocumentContext {
     }
 
     private void setState(final StateDTO state) {
-	contextNavigatorProvider.get().setState(state);
+	contextNavigatorProvider.get().setState(state, true);
 	adminContextProvider.get().setState(state);
 	showFolders();
     }

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.jmimemagic.MagicMatch;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.fileupload.FileItem;
@@ -20,19 +21,27 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.ourproject.kune.docs.server.DocumentServerTool;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.dialogs.upload.FileUploader;
+import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.access.AccessRol;
+import org.ourproject.kune.platf.server.access.AccessService;
 import org.ourproject.kune.platf.server.auth.ActionLevel;
 import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.auth.Authorizated;
 import org.ourproject.kune.platf.server.content.ContentManager;
+import org.ourproject.kune.platf.server.domain.Container;
+import org.ourproject.kune.platf.server.domain.Content;
+import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.FileManager;
 import org.ourproject.kune.platf.server.properties.KuneProperties;
 
 import com.google.inject.Inject;
 import com.google.inject.servlet.RequestScoped;
+import com.wideplay.warp.persist.TransactionType;
+import com.wideplay.warp.persist.Transactional;
 
 @RequestScoped
 public class FileUploadManager extends HttpServlet {
@@ -44,7 +53,11 @@ public class FileUploadManager extends HttpServlet {
     @Inject
     KuneProperties kuneProperties;
     @Inject
+    UserSession userSession;
+    @Inject
     ContentManager contentManager;
+    @Inject
+    AccessService accessService;
     @Inject
     FileManager fileManager;
     @Inject
@@ -114,20 +127,30 @@ public class FileUploadManager extends HttpServlet {
 
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Editor, actionLevel = ActionLevel.container)
+    @Transactional(type = TransactionType.READ_WRITE)
     JSONObject createFile(final String userHash, final StateToken stateToken, final String fileName,
 	    final FileItem fileUploadItem) throws Exception {
-	final String destDir = calculateUploadDirLocation(stateToken);
-	fileManager.mkdir(destDir);
-	final File file = fileManager.createFileWithSequentialName(destDir, fileName);
+	final String relDir = calculateUploadDirLocation(stateToken);
+	final String absDir = kuneProperties.get(KuneProperties.UPLOAD_LOCATION) + relDir;
+	fileManager.mkdir(absDir);
+	final File file = fileManager.createFileWithSequentialName(absDir, fileName);
 	fileUploadItem.write(file);
-	fileUploadItem.getContentType();
-	// here ContentManager code
+	final MagicMatch magic = fileManager.getMimeType(file);
+
+	// Persist
+	final User user = userSession.getUser();
+	final Container container = accessService.accessToContainer(new Long(stateToken.getFolder()), user,
+		AccessRol.Editor);
+	final Content content = contentManager.createContent(FileUtils.getFileNameWithoutExtension(file.getName(),
+		magic.getExtension()), relDir + File.separator + file.getName(), user, container);
+	content.setTypeId(DocumentServerTool.TYPE_UPLOADEDFILE);
+	content.setMimeType(magic.getMimeType());
 	return createSuccessResponse();
     }
 
     private String calculateUploadDirLocation(final StateToken stateToken) {
-	return kuneProperties.get(KuneProperties.UPLOAD_LOCATION) + File.separator + stateToken.getGroup()
-		+ File.separator + stateToken.getTool() + File.separator + stateToken.getFolder();
+	return File.separator + stateToken.getGroup() + File.separator + stateToken.getTool() + File.separator
+		+ stateToken.getFolder();
     }
 
     private JSONObject createJsonResponse(final boolean success, final String message) {

@@ -13,6 +13,7 @@ import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.UrlParam;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.ToolbarButton;
+import com.gwtext.client.widgets.Window;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtextux.client.widgets.upload.UploadDialog;
 import com.gwtextux.client.widgets.upload.UploadDialogListenerAdapter;
@@ -111,6 +112,9 @@ public class FileUploaderDialog implements FileUploaderView {
 	dialog.setId(SITE_FILE_UPLOADER);
 	// dialog.setUploadAutostart(true);
 	dialog.setResetOnHide(false);
+	dialog.setAllowCloseOnUpload(true);
+	dialog.setCloseAction(Window.HIDE);
+
 	dialog.addListener(new UploadDialogListenerAdapter() {
 	    @Override
 	    public boolean onBeforeAdd(final UploadDialog source, final String filename) {
@@ -128,6 +132,7 @@ public class FileUploaderDialog implements FileUploaderView {
 		    traybarButton.destroy();
 		    traybarButton = null;
 		}
+		presenter.onUploadComplete();
 	    }
 
 	    @Override

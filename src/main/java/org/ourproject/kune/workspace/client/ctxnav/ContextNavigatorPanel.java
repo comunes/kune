@@ -37,7 +37,8 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.ExtElement;
 import com.gwtext.client.data.Node;
-import com.gwtext.client.data.Tree;
+import com.gwtext.client.dd.DragData;
+import com.gwtext.client.dd.DragDrop;
 import com.gwtext.client.widgets.Editor;
 import com.gwtext.client.widgets.event.EditorListenerAdapter;
 import com.gwtext.client.widgets.form.TextField;
@@ -45,6 +46,7 @@ import com.gwtext.client.widgets.menu.BaseItem;
 import com.gwtext.client.widgets.menu.Item;
 import com.gwtext.client.widgets.menu.Menu;
 import com.gwtext.client.widgets.menu.event.BaseItemListenerAdapter;
+import com.gwtext.client.widgets.tree.DropNodeCallback;
 import com.gwtext.client.widgets.tree.TreeEditor;
 import com.gwtext.client.widgets.tree.TreeNode;
 import com.gwtext.client.widgets.tree.TreePanel;
@@ -238,6 +240,13 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 	root.expand();
 	createItemMenu(rootId, actions, stateToken);
 	treePanel.addListener(new TreePanelListenerAdapter() {
+	    public boolean doBeforeNodeDrop(final TreePanel treePanel, final TreeNode target, final DragData dragData,
+		    final String point, final DragDrop source, final TreeNode dropNode,
+		    final DropNodeCallback dropNodeCallback) {
+		Site.info("Drag & drop of contents in development");
+		return false;
+	    }
+
 	    public void onContextMenu(final TreeNode node, final EventObject e) {
 		final Menu menu = contextMenus.get(node.getId());
 		if (menu != null && menu.getItems().length > 0) {
@@ -245,14 +254,6 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 		} else {
 		    Log.info("Empty item menu");
 		}
-	    }
-
-	    @Override
-	    public void onMoveNode(final Tree treePanel, final TreeNode node, final TreeNode oldParent,
-		    final TreeNode newParent, final int index) {
-		newParent.removeChild(node);
-		oldParent.appendChild(node);
-		Site.info("Drag & drop of contents in development");
 	    }
 	});
 	treePanel.setLines(false);

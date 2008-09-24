@@ -30,9 +30,14 @@ public class ContentDTO implements IsSerializable {
     private StateToken stateToken;
     private ContentStatusDTO status;
     private AccessRightsDTO rights;
+    private String mimeType;
 
     public Long getId() {
 	return id;
+    }
+
+    public String getMimeType() {
+	return mimeType;
     }
 
     public AccessRightsDTO getRights() {
@@ -57,6 +62,10 @@ public class ContentDTO implements IsSerializable {
 
     public void setId(final Long id) {
 	this.id = id;
+    }
+
+    public void setMimeType(final String mimeType) {
+	this.mimeType = mimeType;
     }
 
     public void setRights(final AccessRightsDTO rights) {

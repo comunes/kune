@@ -3,6 +3,12 @@ package org.ourproject.kune.platf.server.manager.impl;
 import java.io.File;
 import java.io.IOException;
 
+import net.sf.jmimemagic.Magic;
+import net.sf.jmimemagic.MagicException;
+import net.sf.jmimemagic.MagicMatch;
+import net.sf.jmimemagic.MagicMatchNotFoundException;
+import net.sf.jmimemagic.MagicParseException;
+
 import org.ourproject.kune.platf.server.manager.FileManager;
 
 import com.google.inject.Singleton;
@@ -19,6 +25,11 @@ public class FileManagerDefault implements FileManager {
 	}
 	file.createNewFile();
 	return file;
+    }
+
+    public MagicMatch getMimeType(final File file) throws MagicParseException, MagicMatchNotFoundException,
+	    MagicException {
+	return Magic.getMagicMatch(file, true);
     }
 
     public boolean mkdir(final String dir) {

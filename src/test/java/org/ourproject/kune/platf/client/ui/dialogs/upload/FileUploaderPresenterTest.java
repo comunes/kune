@@ -20,7 +20,7 @@ public class FileUploaderPresenterTest {
     public void before() {
 	session = Mockito.mock(Session.class);
 	view = Mockito.mock(FileUploaderView.class);
-	presenter = new FileUploaderPresenter(session);
+	presenter = new FileUploaderPresenter(session, null);
 	presenter.init(view);
 	Mockito.stub(session.getUserHash()).toReturn(SOMEUSER_HASH);
     }

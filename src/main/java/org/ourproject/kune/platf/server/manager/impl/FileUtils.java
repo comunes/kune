@@ -2,6 +2,15 @@ package org.ourproject.kune.platf.server.manager.impl;
 
 public class FileUtils {
 
+    public static String getFileNameWithoutExtension(final String fileName, final String extension) {
+	final int extlength = extension.length();
+	if (extlength > 0) {
+	    return fileName.substring(0, fileName.length() - extlength - 1);
+	} else {
+	    return fileName;
+	}
+    }
+
     public static String getNextSequentialFileName(final String fileName) {
 	final int lastSpace = fileName.lastIndexOf(" ");
 	if (lastSpace != -1) {

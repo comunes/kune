@@ -37,6 +37,7 @@ import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
+import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
@@ -149,6 +150,14 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	}
     }
 
+    public void refresh(final StateToken stateToken) {
+	contentServiceProvider.get().getContent(session.getUserHash(), stateToken, new AsyncCallbackSimple<StateDTO>() {
+	    public void onSuccess(final StateDTO result) {
+		setState(result, false);
+	    }
+	});
+    }
+
     public void selectItem(final StateToken stateToken) {
 	view.selectItem(genId(stateToken));
 	toolbar.disableMenusAndClearButtons();
@@ -163,7 +172,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	view.setItemText(genId(stateToken), name);
     }
 
-    public void setState(final StateDTO state) {
+    public void setState(final StateDTO state, final boolean select) {
 	final ContainerDTO container = state.getContainer();
 	final StateToken stateToken = state.getStateToken();
 	final AccessRightsDTO containerRights = state.getContainerRights();
@@ -209,11 +218,14 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 
 	// Finaly
 	if (mustEditOnNextStateChange()) {
+	    // Code smell
 	    selectItem(stateToken);
 	    editItem(stateToken);
 	    setEditOnNextStateChange(false);
 	} else {
-	    selectItem(stateToken);
+	    if (select) {
+		selectItem(stateToken);
+	    }
 
 	}
     }

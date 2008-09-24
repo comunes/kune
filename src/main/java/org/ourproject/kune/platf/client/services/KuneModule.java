@@ -349,7 +349,8 @@ public class KuneModule extends AbstractModule {
 
 	register(Singleton.class, new Factory<FileUploader>(FileUploader.class) {
 	    public FileUploader create() {
-		final FileUploaderPresenter presenter = new FileUploaderPresenter($(Session.class));
+		final FileUploaderPresenter presenter = new FileUploaderPresenter($(Session.class),
+			$$(ContextNavigator.class));
 		final FileUploaderDialog panel = new FileUploaderDialog(presenter, i18n, $(WorkspaceSkeleton.class));
 		presenter.init(panel);
 		return presenter;

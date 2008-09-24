@@ -118,6 +118,8 @@ public class Content implements HasStateToken {
     @Column(nullable = false)
     private ContentStatus status;
 
+    private String mimeType;
+
     public Content() {
 	translations = new ArrayList<ContentTranslation>();
 	authors = new ArrayList<User>();
@@ -189,6 +191,10 @@ public class Content implements HasStateToken {
 
     public License getLicense() {
 	return license;
+    }
+
+    public String getMimeType() {
+	return mimeType;
     }
 
     public Group getOwner(final Group group) {
@@ -291,6 +297,10 @@ public class Content implements HasStateToken {
 
     public void setLicense(final License license) {
 	this.license = license;
+    }
+
+    public void setMimeType(final String mimeType) {
+	this.mimeType = mimeType;
     }
 
     public void setPublishedOn(final Date publishedOn) {
