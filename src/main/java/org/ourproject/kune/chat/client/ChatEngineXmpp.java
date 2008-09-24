@@ -25,8 +25,8 @@ import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
-import com.calclab.emiteuimodule.client.SubscriptionMode;
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
+import com.calclab.emiteuimodule.client.SubscriptionMode;
 import com.calclab.emiteuimodule.client.UserChatOptions;
 import com.calclab.emiteuimodule.client.params.AvatarProvider;
 import com.calclab.emiteuimodule.client.status.OwnPresence.OwnStatus;
@@ -132,6 +132,11 @@ class ChatEngineXmpp implements ChatEngine {
 	    emiteDialog.refreshUserInfo(chatOptions.userOptions);
 	    emiteDialog.setEnableStatusUI(false);
 	}
+    }
+
+    public void stop() {
+	// emiteDialog.destroy();
+	emiteDialog.getSession().logout();
     }
 
     private UserChatOptions getUserChatOptions(final String jid, final String passwd) {

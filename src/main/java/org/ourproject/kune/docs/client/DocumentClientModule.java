@@ -109,7 +109,7 @@ public class DocumentClientModule extends AbstractModule {
 	    }
 	});
 
-	register(Singleton.class, new Factory<DocumentClientActions>(DocumentClientActions.class) {
+	register(ToolGroup.class, new Factory<DocumentClientActions>(DocumentClientActions.class) {
 	    public DocumentClientActions create() {
 		return new DocumentClientActions($(I18nUITranslationService.class), $(ContextNavigator.class),
 			$(Session.class), $(StateManager.class), $$(ContentServiceAsync.class), $$(FileUploader.class),
@@ -160,7 +160,7 @@ public class DocumentClientModule extends AbstractModule {
 	    }
 	});
 
-	register(Singleton.class, new Factory<DocumentContext>(DocumentContext.class) {
+	register(ToolGroup.class, new Factory<DocumentContext>(DocumentContext.class) {
 	    public DocumentContext create() {
 		final DocumentContextPresenter presenter = new DocumentContextPresenter($(StateManager.class),
 			$$(ContextNavigator.class), $$(AdminContext.class));

@@ -361,19 +361,19 @@ public class KuneModule extends AbstractModule {
 	    }
 	});
 
-	register(ApplicationComponentGroup.class, new Factory<SiteLogo>(SiteLogo.class) {
-	    public SiteLogo create() {
-		final SiteLogoPresenter presenter = new SiteLogoPresenter($(Session.class));
-		final SiteLogoPanel panel = new SiteLogoPanel(presenter, ws);
+	register(ApplicationComponentGroup.class, new Factory<SiteSearch>(SiteSearch.class) {
+	    public SiteSearch create() {
+		final SiteSearchPresenter presenter = new SiteSearchPresenter($$(SiteSearcher.class));
+		final SiteSearchPanel panel = new SiteSearchPanel(presenter, ws, i18n);
 		presenter.init(panel);
 		return presenter;
 	    }
 	});
 
-	register(ApplicationComponentGroup.class, new Factory<SiteSearch>(SiteSearch.class) {
-	    public SiteSearch create() {
-		final SiteSearchPresenter presenter = new SiteSearchPresenter($$(SiteSearcher.class));
-		final SiteSearchPanel panel = new SiteSearchPanel(presenter, ws, i18n);
+	register(ApplicationComponentGroup.class, new Factory<SiteLogo>(SiteLogo.class) {
+	    public SiteLogo create() {
+		final SiteLogoPresenter presenter = new SiteLogoPresenter($(Session.class));
+		final SiteLogoPanel panel = new SiteLogoPanel(presenter, ws);
 		presenter.init(panel);
 		return presenter;
 	    }

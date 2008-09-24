@@ -27,4 +27,6 @@ public interface ChatEngine {
     void login(String jid, String passwd);
 
     void logout();
+
+    void stop();
 }

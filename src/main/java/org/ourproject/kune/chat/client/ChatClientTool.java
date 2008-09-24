@@ -94,7 +94,7 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
 	});
 	application.onApplicationStop(new Listener0() {
 	    public void onEvent() {
-		chat.logout();
+		chat.stop();
 	    }
 	});
 	session.onUserSignOut(new Listener0() {

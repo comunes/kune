@@ -22,8 +22,8 @@ public class EntitySummary {
     public EntitySummary() {
 	mainPanel = new DefaultBorderLayout();
 	entityTools = new Panel();
-	entityTools.ensureDebugId(ENTITY_TOOLS);
 	entityTools.setLayout(new FitLayout());
+	entityTools.setId(ENTITY_TOOLS);
 	entityTools.setAutoHeight(true);
 	vpTools = new VerticalPanel();
 	entityTools.add(vpTools);
@@ -33,9 +33,8 @@ public class EntitySummary {
 	entityTools.setAutoScroll(false);
 	entitySummary.setAutoScroll(true);
 	entitySummary.setCls(ENTITY_SUMMARY);
-	entitySummary.ensureDebugId(ENTITY_SUMMARY);
-	trayBar = mainPanel.createBottomBar(entitySummary, SITE_TRAYBAR);
-	trayBar.ensureDebugId(SITE_TRAYBAR);
+	entitySummary.setId(ENTITY_SUMMARY);
+	trayBar = mainPanel.createBottomBar(entitySummary, SITE_TRAYBAR, SITE_TRAYBAR);
 	mainPanel.add(entityTools, DefaultBorderLayout.Position.NORTH);
 	mainPanel.add(entitySummary, DefaultBorderLayout.Position.CENTER);
 	trayBar.addFill();

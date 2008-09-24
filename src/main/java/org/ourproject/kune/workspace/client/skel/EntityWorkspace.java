@@ -61,8 +61,8 @@ public class EntityWorkspace extends DefaultBorderLayout {
 	contextWrap.setBorder(true);
 	content = new Panel();
 	context = new Panel();
-	content.ensureDebugId(ENTITY_CONTENT);
-	context.ensureDebugId(ENTITY_CONTEXT);
+	content.setCls(ENTITY_CONTENT);
+	context.setCls(ENTITY_CONTEXT);
 	content.setBorder(false);
 	context.setBorder(false);
 	context.setCollapsible(true);

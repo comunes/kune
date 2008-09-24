@@ -85,7 +85,7 @@ import $PACKAGE.${NAME}Presenter;
 import $PACKAGE.${NAME}Panel;
 import $PACKAGE.${NAME};
 
-register(SingletonScope.class, new Factory<${NAME}>(${NAME}.class) {
+register(Singleton.class, new Factory<${NAME}>(${NAME}.class) {
     public ${NAME} create() {
 	final ${NAME}Presenter presenter = new ${NAME}Presenter();
 	final ${NAME}Panel panel = new ${NAME}Panel(presenter, ws);

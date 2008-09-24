@@ -53,10 +53,10 @@ public class DocumentClientActions {
 	this.contentServiceProvider = contentServiceProvider;
 	this.fileUploaderProvider = fileUploaderProvider;
 	this.contextActionRegistry = contextActionRegistry;
-
+	createActions();
     }
 
-    public void createActions() {
+    private void createActions() {
 	final ActionMenuDescriptor<StateToken> addFolder = createFolderAction(TYPE_FOLDER, "images/nav/folder_add.png",
 		i18n.t("New folder"), i18n.t("Folder"), i18n.t("New"), i18n.t("New folder"));
 	final ActionMenuDescriptor<StateToken> addGallery = createFolderAction(TYPE_GALLERY,

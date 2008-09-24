@@ -109,14 +109,9 @@ public class FileUploadManager extends HttpServlet {
 	resp.setStatus(HttpServletResponse.SC_OK);
     }
 
-    private String calculateUploadDirLocation(final StateToken stateToken) {
-	return kuneProperties.get(KuneProperties.UPLOAD_LOCATION) + File.pathSeparator + stateToken.getGroup()
-		+ File.pathSeparator + stateToken.getTool() + File.pathSeparator + stateToken.getFolder();
-    }
-
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Editor, actionLevel = ActionLevel.container)
-    private JSONObject createFile(final String userHash, final StateToken stateToken, final String fileName,
+    JSONObject createFile(final String userHash, final StateToken stateToken, final String fileName,
 	    final FileItem fileUploadItem) throws Exception {
 	final String destDir = calculateUploadDirLocation(stateToken);
 	fileManager.mkdir(destDir);
@@ -125,6 +120,11 @@ public class FileUploadManager extends HttpServlet {
 	fileUploadItem.getContentType();
 	// here ContentManager code
 	return createJsonResponse(true, "OK");
+    }
+
+    private String calculateUploadDirLocation(final StateToken stateToken) {
+	return kuneProperties.get(KuneProperties.UPLOAD_LOCATION) + File.pathSeparator + stateToken.getGroup()
+		+ File.pathSeparator + stateToken.getTool() + File.pathSeparator + stateToken.getFolder();
     }
 
     private JSONObject createJsonResponse(final boolean success, final String message) {

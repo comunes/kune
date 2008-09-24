@@ -275,13 +275,13 @@ public class SignInPanel implements SignInView {
 	confPanel(signInPanel);
 	signInForm = new SignInForm(i18n);
 	signInPanel.add(signInForm.getForm());
-	signInPanel.ensureDebugId(USER_SIGN_IN_PANEL);
+	signInPanel.setCls(USER_SIGN_IN_PANEL);
 	signInPanel.add(createNoAccountRegister());
 	messagesSignInPanel = new MessagePanel();
 	signInPanel.add(messagesSignInPanel);
 
 	final Panel registerPanel = new Panel(i18n.t("Register"));
-	registerPanel.ensureDebugId(USER_REGISTER_PANEL);
+	registerPanel.setCls(USER_REGISTER_PANEL);
 	confPanel(registerPanel);
 
 	centerPanel.add(signInPanel);

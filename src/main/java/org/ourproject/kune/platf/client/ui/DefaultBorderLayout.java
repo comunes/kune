@@ -81,7 +81,14 @@ public class DefaultBorderLayout {
     }
 
     public Toolbar createBottomBar(final Panel panel, final String cssStyle) {
+	return createBottomBar(panel, cssStyle, null);
+    }
+
+    public Toolbar createBottomBar(final Panel panel, final String cssStyle, final String id) {
 	final Toolbar bottomToolbar = new Toolbar();
+	if (id != null) {
+	    bottomToolbar.setId(id);
+	}
 	bottomToolbar.setHeight(DEF_TOOLBAR_HEIGHT);
 	if (cssStyle != null) {
 	    bottomToolbar.setCls(cssStyle);
@@ -95,8 +102,15 @@ public class DefaultBorderLayout {
     }
 
     public Toolbar createTopBar(final Panel panel, final String cssStyle) {
+	return createTopBar(panel, cssStyle);
+    }
+
+    public Toolbar createTopBar(final Panel panel, final String cssStyle, final String id) {
 	final Toolbar topToolbar = new Toolbar();
 	topToolbar.setHeight(DEF_TOOLBAR_HEIGHT);
+	if (id != null) {
+	    topToolbar.setId(id);
+	}
 	if (cssStyle != null) {
 	    topToolbar.setCls(cssStyle);
 	}
