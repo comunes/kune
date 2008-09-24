@@ -32,23 +32,15 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.state.StateManagerDefault;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
 import org.ourproject.kune.platf.client.tool.ToolSelectorPresenter;
-import org.ourproject.kune.platf.client.ui.QuickTipsHelper;
-import org.ourproject.kune.platf.client.ui.dialogs.FileUploader;
-import org.ourproject.kune.platf.client.ui.dialogs.FileUploaderDialog;
-import org.ourproject.kune.platf.client.ui.rate.RateIt;
-import org.ourproject.kune.platf.client.ui.rate.RateItPanel;
-import org.ourproject.kune.platf.client.ui.rate.RateItPresenter;
-import org.ourproject.kune.platf.client.ui.rate.RatePanel;
-import org.ourproject.kune.platf.client.ui.rate.RatePresenter;
+import org.ourproject.kune.platf.client.ui.dialogs.upload.FileUploader;
+import org.ourproject.kune.platf.client.ui.dialogs.upload.FileUploaderDialog;
+import org.ourproject.kune.platf.client.ui.dialogs.upload.FileUploaderPresenter;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPanel;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPresenter;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.editor.TextEditorPanel;
 import org.ourproject.kune.workspace.client.editor.TextEditorPresenter;
-import org.ourproject.kune.workspace.client.entitylogo.EntityLogo;
-import org.ourproject.kune.workspace.client.entitylogo.EntityLogoPanel;
-import org.ourproject.kune.workspace.client.entitylogo.EntityLogoPresenter;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslator;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPresenter;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorView;
@@ -61,8 +53,6 @@ import org.ourproject.kune.workspace.client.i18n.ui.LanguageSelectorPanel;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoose;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoosePanel;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoosePresenter;
-import org.ourproject.kune.workspace.client.licensefoot.EntityLicensePanel;
-import org.ourproject.kune.workspace.client.licensefoot.EntityLicensePresenter;
 import org.ourproject.kune.workspace.client.newgroup.NewGroup;
 import org.ourproject.kune.workspace.client.newgroup.NewGroupPanel;
 import org.ourproject.kune.workspace.client.newgroup.NewGroupPresenter;
@@ -82,63 +72,11 @@ import org.ourproject.kune.workspace.client.signin.SignInPanel;
 import org.ourproject.kune.workspace.client.signin.SignInPresenter;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.site.SiteToken;
-import org.ourproject.kune.workspace.client.site.msg.SiteMessage;
-import org.ourproject.kune.workspace.client.site.msg.SiteMessagePanel;
-import org.ourproject.kune.workspace.client.site.msg.SiteMessagePresenter;
-import org.ourproject.kune.workspace.client.site.msg.SiteMessageView;
 import org.ourproject.kune.workspace.client.site.rpc.UserService;
 import org.ourproject.kune.workspace.client.site.rpc.UserServiceAsync;
-import org.ourproject.kune.workspace.client.sitebar.sitelogo.SiteLogo;
-import org.ourproject.kune.workspace.client.sitebar.sitelogo.SiteLogoPanel;
-import org.ourproject.kune.workspace.client.sitebar.sitelogo.SiteLogoPresenter;
-import org.ourproject.kune.workspace.client.sitebar.sitenewgroup.SiteNewGroupLink;
-import org.ourproject.kune.workspace.client.sitebar.sitenewgroup.SiteNewGroupLinkPanel;
-import org.ourproject.kune.workspace.client.sitebar.sitenewgroup.SiteNewGroupLinkPresenter;
-import org.ourproject.kune.workspace.client.sitebar.siteoptions.SiteOptions;
-import org.ourproject.kune.workspace.client.sitebar.siteoptions.SiteOptionsPanel;
-import org.ourproject.kune.workspace.client.sitebar.siteoptions.SiteOptionsPresenter;
-import org.ourproject.kune.workspace.client.sitebar.siteprogress.SiteProgress;
-import org.ourproject.kune.workspace.client.sitebar.siteprogress.SiteProgressPanel;
-import org.ourproject.kune.workspace.client.sitebar.siteprogress.SiteProgressPresenter;
-import org.ourproject.kune.workspace.client.sitebar.sitepublic.SitePublicSpaceLink;
-import org.ourproject.kune.workspace.client.sitebar.sitepublic.SitePublicSpaceLinkPanel;
-import org.ourproject.kune.workspace.client.sitebar.sitepublic.SitePublicSpaceLinkPresenter;
-import org.ourproject.kune.workspace.client.sitebar.sitesearch.SiteSearch;
-import org.ourproject.kune.workspace.client.sitebar.sitesearch.SiteSearchPanel;
-import org.ourproject.kune.workspace.client.sitebar.sitesearch.SiteSearchPresenter;
-import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignInLink;
-import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignInLinkPanel;
-import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignInLinkPresenter;
-import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLink;
-import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLinkPanel;
-import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLinkPresenter;
-import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserMenu;
-import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserMenuPanel;
-import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserMenuPresenter;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummary;
-import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryPanel;
-import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryPresenter;
-import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryView;
-import org.ourproject.kune.workspace.client.socialnet.ParticipationSummary;
-import org.ourproject.kune.workspace.client.socialnet.ParticipationSummaryPanel;
-import org.ourproject.kune.workspace.client.socialnet.ParticipationSummaryPresenter;
-import org.ourproject.kune.workspace.client.socialnet.ParticipationSummaryView;
-import org.ourproject.kune.workspace.client.summary.GroupSummary;
-import org.ourproject.kune.workspace.client.summary.GroupSummaryPanel;
-import org.ourproject.kune.workspace.client.summary.GroupSummaryPresenter;
-import org.ourproject.kune.workspace.client.summary.GroupSummaryView;
-import org.ourproject.kune.workspace.client.tags.TagsSummary;
-import org.ourproject.kune.workspace.client.tags.TagsSummaryPanel;
-import org.ourproject.kune.workspace.client.tags.TagsSummaryPresenter;
-import org.ourproject.kune.workspace.client.themes.WsThemePanel;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
-import org.ourproject.kune.workspace.client.title.EntitySubTitle;
-import org.ourproject.kune.workspace.client.title.EntitySubTitlePanel;
-import org.ourproject.kune.workspace.client.title.EntitySubTitlePresenter;
 import org.ourproject.kune.workspace.client.title.EntityTitle;
-import org.ourproject.kune.workspace.client.title.EntityTitlePanel;
-import org.ourproject.kune.workspace.client.title.EntityTitlePresenter;
 
 import com.calclab.suco.client.ioc.decorator.Singleton;
 import com.calclab.suco.client.ioc.module.AbstractModule;
@@ -255,15 +193,8 @@ public class KuneModule extends AbstractModule {
 	    }
 	});
 
-	register(Singleton.class, new Factory<WorkspaceSkeleton>(WorkspaceSkeleton.class) {
-	    public WorkspaceSkeleton create() {
-		return new WorkspaceSkeleton();
-	    }
-	});
-
 	AsyncCallbackSimple.init($(KuneErrorHandler.class));
 
-	final WorkspaceSkeleton ws = $(WorkspaceSkeleton.class);
 	register(Singleton.class, new Factory<Application>(Application.class) {
 	    public Application create() {
 		return new ApplicationDefault($(Session.class));
@@ -274,225 +205,10 @@ public class KuneModule extends AbstractModule {
 	    }
 	});
 
-	register(ApplicationComponentGroup.class, new Factory<QuickTipsHelper>(QuickTipsHelper.class) {
-	    public QuickTipsHelper create() {
-		return new QuickTipsHelper();
-	    }
-	});
-
-	register(ApplicationComponentGroup.class, new Factory<SiteProgress>(SiteProgress.class) {
-	    public SiteProgress create() {
-		final SiteProgressPresenter presenter = new SiteProgressPresenter();
-		final SiteProgressPanel panel = new SiteProgressPanel(presenter, $$(SitePublicSpaceLink.class));
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
-
-	register(ApplicationComponentGroup.class, new Factory<Site>(Site.class) {
-	    public Site create() {
-		return new Site(i18n, $(SiteProgress.class), $$(SiteMessage.class));
-	    }
-	});
-
-	register(ApplicationComponentGroup.class, new Factory<SitePublicSpaceLink>(SitePublicSpaceLink.class) {
-	    public SitePublicSpaceLink create() {
-		final SitePublicSpaceLinkPresenter presenter = new SitePublicSpaceLinkPresenter($(StateManager.class));
-		final SitePublicSpaceLinkPanel panel = new SitePublicSpaceLinkPanel(presenter, ws, i18n,
-			$(Images.class));
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
-
-	register(ApplicationComponentGroup.class, new Factory<SiteMessage>(SiteMessage.class) {
-	    public SiteMessage create() {
-		final SiteMessagePresenter siteMessagePresenter = new SiteMessagePresenter();
-		final SiteMessageView siteMessageView = new SiteMessagePanel(siteMessagePresenter, true, i18n);
-		siteMessagePresenter.init(siteMessageView);
-		return siteMessagePresenter;
-	    }
-	});
-
-	register(ApplicationComponentGroup.class, new Factory<SiteUserMenu>(SiteUserMenu.class) {
-	    public SiteUserMenu create() {
-		final SiteUserMenuPresenter presenter = new SiteUserMenuPresenter($(Session.class),
-			$(StateManager.class));
-		final SiteUserMenuPanel panel = new SiteUserMenuPanel(presenter, ws, i18n);
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
-
-	register(ApplicationComponentGroup.class, new Factory<SiteSignInLink>(SiteSignInLink.class) {
-	    public SiteSignInLink create() {
-		final SiteSignInLinkPresenter presenter = new SiteSignInLinkPresenter($(Session.class));
-		final SiteSignInLinkPanel panel = new SiteSignInLinkPanel(presenter, i18n, ws);
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
-
-	register(ApplicationComponentGroup.class, new Factory<SiteSignOutLink>(SiteSignOutLink.class) {
-	    public SiteSignOutLink create() {
-		final SiteSignOutLinkPresenter presenter = new SiteSignOutLinkPresenter($(Session.class),
-			$$(UserServiceAsync.class), $$(KuneErrorHandler.class));
-		final SiteSignOutLinkPanel panel = new SiteSignOutLinkPanel(presenter, i18n, ws);
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
-
-	register(ApplicationComponentGroup.class, new Factory<SiteNewGroupLink>(SiteNewGroupLink.class) {
-	    public SiteNewGroupLink create() {
-		final SiteNewGroupLinkPresenter presenter = new SiteNewGroupLinkPresenter();
-		final SiteNewGroupLinkPanel panel = new SiteNewGroupLinkPanel(presenter, ws, i18n);
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
-
-	register(ApplicationComponentGroup.class, new Factory<SiteOptions>(SiteOptions.class) {
-	    public SiteOptions create() {
-		final SiteOptionsPresenter presenter = new SiteOptionsPresenter();
-		final SiteOptionsPanel panel = new SiteOptionsPanel(presenter, ws, i18n, $$(I18nTranslator.class));
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
-
-	register(ApplicationComponentGroup.class, new Factory<SiteSearch>(SiteSearch.class) {
-	    public SiteSearch create() {
-		final SiteSearchPresenter presenter = new SiteSearchPresenter($$(SiteSearcher.class));
-		final SiteSearchPanel panel = new SiteSearchPanel(presenter, ws, i18n);
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
-
-	register(ApplicationComponentGroup.class, new Factory<SiteLogo>(SiteLogo.class) {
-	    public SiteLogo create() {
-		final SiteLogoPresenter presenter = new SiteLogoPresenter($(Session.class));
-		final SiteLogoPanel panel = new SiteLogoPanel(presenter, ws);
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
-
-	register(ApplicationComponentGroup.class, new Factory<EntityLogo>(EntityLogo.class) {
-	    public EntityLogo create() {
-		final EntityLogoPresenter presenter = new EntityLogoPresenter($(StateManager.class),
-			$(WsThemePresenter.class));
-		final EntityLogoPanel panel = new EntityLogoPanel(i18n, ws);
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
-
-	register(ApplicationComponentGroup.class, new Factory<WsThemePresenter>(WsThemePresenter.class) {
-	    public WsThemePresenter create() {
-		final WsThemePresenter presenter = new WsThemePresenter($(Session.class), $$(GroupServiceAsync.class),
-			$(StateManager.class));
-		final WsThemePanel panel = new WsThemePanel(ws, presenter, i18n);
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
-
-	register(ApplicationComponentGroup.class, new Factory<EntityTitle>(EntityTitle.class) {
-	    public EntityTitle create() {
-		final EntityTitlePresenter presenter = new EntityTitlePresenter(i18n, $(KuneErrorHandler.class),
-			$(StateManager.class), $(Session.class), $$(ContentServiceAsync.class),
-			$$(ContextNavigator.class));
-		final EntityTitlePanel panel = new EntityTitlePanel(ws, presenter);
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
-
-	register(ApplicationComponentGroup.class, new Factory<EntitySubTitle>(EntitySubTitle.class) {
-	    public EntitySubTitle create() {
-		final EntitySubTitlePresenter presenter = new EntitySubTitlePresenter(i18n, $(StateManager.class));
-		final EntitySubTitlePanel panel = new EntitySubTitlePanel(presenter, i18n, ws);
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
-
-	register(ApplicationComponentGroup.class, new Factory<EntityLicensePresenter>(EntityLicensePresenter.class) {
-	    public EntityLicensePresenter create() {
-		final EntityLicensePresenter presenter = new EntityLicensePresenter($(StateManager.class));
-		final EntityLicensePanel panel = new EntityLicensePanel(presenter, i18n, ws);
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
-
-	register(ApplicationComponentGroup.class, new Factory<RatePresenter>(RatePresenter.class) {
-	    public RatePresenter create() {
-		final RatePresenter presenter = new RatePresenter($(StateManager.class));
-		final RatePanel panel = new RatePanel(null, null, i18n, ws);
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
-
-	register(ApplicationComponentGroup.class, new Factory<RateIt>(RateIt.class) {
-	    public RateIt create() {
-		final RateItPresenter presenter = new RateItPresenter(i18n, $(Session.class),
-			$$(ContentServiceAsync.class), $(StateManager.class));
-		final RateItPanel panel = new RateItPanel(presenter, i18n, ws);
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
-
-	register(ApplicationComponentGroup.class, new Factory<GroupMembersSummary>(GroupMembersSummary.class) {
-	    public GroupMembersSummary create() {
-		final GroupMembersSummaryPresenter presenter = new GroupMembersSummaryPresenter(i18n,
-			$(StateManager.class), $(ImageUtils.class), $(Session.class),
-			$$(SocialNetworkServiceAsync.class), $$(GroupLiveSearcher.class), $(WsThemePresenter.class));
-		final GroupMembersSummaryView view = new GroupMembersSummaryPanel(presenter, i18n, ws);
-		presenter.init(view);
-		return presenter;
-	    }
-	});
-
-	register(ApplicationComponentGroup.class, new Factory<GroupSummary>(GroupSummary.class) {
-	    public GroupSummary create() {
-		final GroupSummaryPresenter presenter = new GroupSummaryPresenter($(StateManager.class),
-			$(WsThemePresenter.class));
-		final GroupSummaryView view = new GroupSummaryPanel(presenter, i18n, ws);
-		presenter.init(view);
-		return presenter;
-	    }
-	});
-
-	register(ApplicationComponentGroup.class, new Factory<ParticipationSummary>(ParticipationSummary.class) {
-	    public ParticipationSummary create() {
-		final ParticipationSummaryPresenter presenter = new ParticipationSummaryPresenter(i18n,
-			$(StateManager.class), $(ImageUtils.class), $(Session.class),
-			$$(SocialNetworkServiceAsync.class), $(WsThemePresenter.class));
-		final ParticipationSummaryView view = new ParticipationSummaryPanel(presenter, i18n, ws);
-		presenter.init(view);
-		return presenter;
-	    }
-	});
-
-	register(ApplicationComponentGroup.class, new Factory<TagsSummary>(TagsSummary.class) {
-	    public TagsSummary create() {
-		final TagsSummaryPresenter presenter = new TagsSummaryPresenter($(Session.class),
-			$$(SiteSearcher.class), $(StateManager.class), $(WsThemePresenter.class));
-		final TagsSummaryPanel panel = new TagsSummaryPanel(presenter, i18n, ws);
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
-
 	register(Singleton.class, new Factory<SiteSearcher>(SiteSearcher.class) {
 	    public SiteSearcher create() {
 		final SiteSearcherPresenter presenter = new SiteSearcherPresenter($$(StateManager.class));
-		final SiteSearcherView view = new SiteSearcherPanel(presenter, i18n, ws);
+		final SiteSearcherView view = new SiteSearcherPanel(presenter, i18n, $(WorkspaceSkeleton.class));
 		presenter.init(view);
 		return presenter;
 	    }
@@ -502,7 +218,8 @@ public class KuneModule extends AbstractModule {
 	    public I18nTranslator create() {
 		final I18nTranslatorPresenter presenter = new I18nTranslatorPresenter($(Session.class),
 			$(I18nServiceAsync.class), i18n);
-		final I18nTranslatorView view = new I18nTranslatorPanel(presenter, i18n, $(LanguageSelector.class), ws);
+		final I18nTranslatorView view = new I18nTranslatorPanel(presenter, i18n, $(LanguageSelector.class),
+			$(WorkspaceSkeleton.class));
 		presenter.init(view);
 		return presenter;
 	    }
@@ -512,7 +229,7 @@ public class KuneModule extends AbstractModule {
 	    public SignIn create() {
 		final SignInPresenter presenter = new SignInPresenter($(Session.class), $(StateManager.class), i18n,
 			$(UserServiceAsync.class));
-		final SignInPanel view = new SignInPanel(presenter, i18n, ws);
+		final SignInPanel view = new SignInPanel(presenter, i18n, $(WorkspaceSkeleton.class));
 		presenter.init(view);
 		return presenter;
 	    }
@@ -566,7 +283,7 @@ public class KuneModule extends AbstractModule {
 	register(Singleton.class, new Factory<TextEditor>(TextEditor.class) {
 	    public TextEditor create() {
 		final TextEditorPresenter presenter = new TextEditorPresenter(null, true);
-		final TextEditorPanel panel = new TextEditorPanel(presenter, i18n, ws);
+		final TextEditorPanel panel = new TextEditorPanel(presenter, i18n, $(WorkspaceSkeleton.class));
 		presenter.init(panel);
 		return presenter;
 	    }
@@ -583,7 +300,7 @@ public class KuneModule extends AbstractModule {
 
 	register(Singleton.class, new Factory<ActionManager>(ActionManager.class) {
 	    public ActionManager create() {
-		return new ActionManager(ws);
+		return new ActionManager($(WorkspaceSkeleton.class));
 	    }
 	});
 
@@ -614,7 +331,8 @@ public class KuneModule extends AbstractModule {
 	register(Singleton.class, new Factory<ContextNavigator>(ContextNavigator.class) {
 	    public ContextNavigator create() {
 		final ActionToolbarPanel contextNavigatorToolbar = new ActionToolbarPanel(
-			ActionToolbarPanel.Position.context, $(Session.class), $$(ActionManager.class), ws);
+			ActionToolbarPanel.Position.context, $(Session.class), $$(ActionManager.class),
+			$(WorkspaceSkeleton.class));
 		final ActionToolbar toolbar = new ActionToolbarPresenter($(Session.class), contextNavigatorToolbar,
 			$(ContextActionRegistry.class));
 
@@ -622,8 +340,8 @@ public class KuneModule extends AbstractModule {
 			$(Session.class), $$(ContentServiceAsync.class), i18n, $(EntityTitle.class),
 			$(ContentIconsRegistry.class), $(DragDropContentRegistry.class),
 			$(ContextActionRegistry.class), toolbar);
-		final ContextNavigatorPanel panel = new ContextNavigatorPanel(presenter, i18n, ws,
-			$(ActionManager.class));
+		final ContextNavigatorPanel panel = new ContextNavigatorPanel(presenter, i18n,
+			$(WorkspaceSkeleton.class), $(ActionManager.class));
 		presenter.init(panel);
 		return presenter;
 	    }
@@ -631,8 +349,10 @@ public class KuneModule extends AbstractModule {
 
 	register(Singleton.class, new Factory<FileUploader>(FileUploader.class) {
 	    public FileUploader create() {
-		final FileUploaderDialog panel = new FileUploaderDialog(i18n, ws, $(Session.class));
-		return panel;
+		final FileUploaderPresenter presenter = new FileUploaderPresenter($(Session.class));
+		final FileUploaderDialog panel = new FileUploaderDialog(presenter, i18n, $(WorkspaceSkeleton.class));
+		presenter.init(panel);
+		return presenter;
 	    }
 	});
 
@@ -654,31 +374,6 @@ public class KuneModule extends AbstractModule {
 		$(I18nTranslator.class).doShowTranslator();
 	    }
 	});
-
-	// $(SiteProgress.class);
-	// $(Site.class);
-	// $(SitePublicSpaceLink.class);
-	// $(SiteMessage.class);
-	// $(SiteUserMenu.class);
-	// $(SiteSignInLink.class);
-	// $(SiteSignOutLink.class);
-	// $(SiteNewGroupLink.class);
-	// $(SiteOptions.class);
-	// $(SiteSearch.class);
-	// $(SiteLogo.class);
-	//
-	// $(GroupMembersSummary.class);
-	// $(ParticipationSummary.class);
-	// $(TagsSummary.class);
-	// $(GroupSummary.class);
-	//
-	// $(EntityLogo.class);
-	// $(EntityTitle.class);
-	// $(EntitySubTitle.class);
-	// $(WsThemePresenter.class);
-	// $(EntityLicensePresenter.class);
-	// $(RateIt.class);
-	// $(RatePresenter.class);
 
 	$(ApplicationComponentGroup.class).createAll();
 	$(ToolGroup.class).createAll();

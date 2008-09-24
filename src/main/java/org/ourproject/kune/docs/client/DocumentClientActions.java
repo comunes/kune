@@ -23,12 +23,11 @@ import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.platf.client.ui.dialogs.FileUploader;
+import org.ourproject.kune.platf.client.ui.dialogs.upload.FileUploader;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.site.Site;
 
-import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Listener;
 
@@ -267,8 +266,9 @@ public class DocumentClientActions {
 		new Listener<StateToken>() {
 		    public void onEvent(final StateToken token) {
 			if (permitedExtensions != null) {
-			    Log.info("Permited extensions (in dev): " + permitedExtensions);
 			    fileUploaderProvider.get().setPermittedExtensions(permitedExtensions);
+			} else {
+			    fileUploaderProvider.get().resetPermittedExtensions();
 			}
 			fileUploaderProvider.get().show();
 		    }

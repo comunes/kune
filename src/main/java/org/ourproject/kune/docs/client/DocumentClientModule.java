@@ -39,7 +39,7 @@ import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
-import org.ourproject.kune.platf.client.ui.dialogs.FileUploader;
+import org.ourproject.kune.platf.client.ui.dialogs.upload.FileUploader;
 import org.ourproject.kune.platf.client.ui.rate.RateIt;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.editor.TextEditor;

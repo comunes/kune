@@ -21,7 +21,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.ui.dialogs.FileUploader;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.ui.dialogs.upload.FileUploader;
 import org.ourproject.kune.platf.server.access.AccessRol;
 import org.ourproject.kune.platf.server.auth.ActionLevel;
 import org.ourproject.kune.platf.server.auth.Authenticated;
@@ -46,14 +47,15 @@ public class FileUploadManager extends HttpServlet {
     ContentManager contentManager;
     @Inject
     FileManager fileManager;
+    @Inject
+    I18nTranslationService i18n;
 
     @Override
     @SuppressWarnings( { "unchecked", "deprecation" })
     protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,
 	    IOException {
 
-	// i18n
-	JSONObject jsonResponse = createJsonResponse(true, "OK");
+	JSONObject jsonResponse = createSuccessResponse();
 
 	final DiskFileItemFactory factory = new DiskFileItemFactory();
 	// maximum size that will be stored in memory
@@ -95,12 +97,13 @@ public class FileUploadManager extends HttpServlet {
 	    }
 	    createFile(userHash, stateToken, fileName, file);
 	} catch (final FileUploadException e) {
-	    // i18n
-	    jsonResponse = createJsonResponse(false, "Error: File too large");
+	    jsonResponse = createJsonResponse(false, i18n.t("Error: File too large"));
+
 	} catch (final Exception e) {
-	    // i18n
-	    jsonResponse = createJsonResponse(false, "Error uploading file");
-	    e.printStackTrace();
+	    // SessionExpiredException,
+	    // UserMustBeLoggedException
+	    jsonResponse = createJsonResponse(false, i18n.t("Error uploading file"));
+	    log.info(e.getCause());
 	}
 
 	final Writer w = new OutputStreamWriter(resp.getOutputStream());
@@ -119,12 +122,12 @@ public class FileUploadManager extends HttpServlet {
 	fileUploadItem.write(file);
 	fileUploadItem.getContentType();
 	// here ContentManager code
-	return createJsonResponse(true, "OK");
+	return createSuccessResponse();
     }
 
     private String calculateUploadDirLocation(final StateToken stateToken) {
-	return kuneProperties.get(KuneProperties.UPLOAD_LOCATION) + File.pathSeparator + stateToken.getGroup()
-		+ File.pathSeparator + stateToken.getTool() + File.pathSeparator + stateToken.getFolder();
+	return kuneProperties.get(KuneProperties.UPLOAD_LOCATION) + File.separator + stateToken.getGroup()
+		+ File.separator + stateToken.getTool() + File.separator + stateToken.getFolder();
     }
 
     private JSONObject createJsonResponse(final boolean success, final String message) {
@@ -150,5 +153,9 @@ public class FileUploadManager extends HttpServlet {
 	    log.error("Error building response");
 	}
 	return response;
+    }
+
+    private JSONObject createSuccessResponse() {
+	return createJsonResponse(true, i18n.t("Success uploading"));
     }
 }
