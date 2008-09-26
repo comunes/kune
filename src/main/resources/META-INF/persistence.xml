@@ -18,7 +18,7 @@
       <property name="hibernate.connection.driver_class"
         value="com.mysql.jdbc.Driver" />
       <property name="hibernate.connection.url"
-        value="jdbc:mysql://localhost/kune_dev?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8" />
+        value="jdbc:mysql://localhost/kune_dev?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=UTF-8" />
       <property name="hibernate.connection.username" value="kune" />
       <property name="hibernate.connection.password" value="db4kune" />
       <property name="hibernate.hbm2ddl.auto" value="update" />
@@ -47,7 +47,7 @@
       <property name="hibernate.connection.driver_class"
         value="com.mysql.jdbc.Driver" />
       <property name="hibernate.connection.url"
-        value="jdbc:mysql://localhost/kune_test?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8" />
+        value="jdbc:mysql://localhost/kune_test?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=UTF-8" />
       <property name="hibernate.connection.username" value="kune" />
       <property name="hibernate.connection.password" value="db4kune" />
       <property name="hibernate.hbm2ddl.auto" value="create" />

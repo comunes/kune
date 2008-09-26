@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.platf.client.dto;
 
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class ContentDTO implements IsSerializable {
@@ -30,13 +31,13 @@ public class ContentDTO implements IsSerializable {
     private StateToken stateToken;
     private ContentStatusDTO status;
     private AccessRightsDTO rights;
-    private String mimeType;
+    private BasicMimeTypeDTO mimeType;
 
     public Long getId() {
 	return id;
     }
 
-    public String getMimeType() {
+    public BasicMimeTypeDTO getMimeType() {
 	return mimeType;
     }
 
@@ -64,7 +65,7 @@ public class ContentDTO implements IsSerializable {
 	this.id = id;
     }
 
-    public void setMimeType(final String mimeType) {
+    public void setMimeType(final BasicMimeTypeDTO mimeType) {
 	this.mimeType = mimeType;
     }
 

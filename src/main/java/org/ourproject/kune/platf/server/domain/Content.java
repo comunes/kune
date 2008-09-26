@@ -30,6 +30,7 @@ import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -118,7 +119,8 @@ public class Content implements HasStateToken {
     @Column(nullable = false)
     private ContentStatus status;
 
-    private String mimeType;
+    @Embedded
+    private BasicMimeType mimeType;
 
     public Content() {
 	translations = new ArrayList<ContentTranslation>();
@@ -193,7 +195,7 @@ public class Content implements HasStateToken {
 	return license;
     }
 
-    public String getMimeType() {
+    public BasicMimeType getMimeType() {
 	return mimeType;
     }
 
@@ -299,7 +301,7 @@ public class Content implements HasStateToken {
 	this.license = license;
     }
 
-    public void setMimeType(final String mimeType) {
+    public void setMimeType(final BasicMimeType mimeType) {
 	this.mimeType = mimeType;
     }
 

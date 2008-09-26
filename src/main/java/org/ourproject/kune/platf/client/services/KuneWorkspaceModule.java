@@ -1,5 +1,6 @@
 package org.ourproject.kune.platf.client.services;
 
+import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
@@ -231,7 +232,7 @@ public class KuneWorkspaceModule extends AbstractModule {
 	    public EntityTitle create() {
 		final EntityTitlePresenter presenter = new EntityTitlePresenter($(I18nUITranslationService.class),
 			$(KuneErrorHandler.class), $(StateManager.class), $(Session.class),
-			$$(ContentServiceAsync.class), $$(ContextNavigator.class));
+			$$(ContentServiceAsync.class), $$(ContextNavigator.class), $(ContentIconsRegistry.class));
 		final EntityTitlePanel panel = new EntityTitlePanel($(WorkspaceSkeleton.class), presenter);
 		presenter.init(panel);
 		return presenter;
@@ -259,21 +260,21 @@ public class KuneWorkspaceModule extends AbstractModule {
 	    }
 	});
 
-	register(ApplicationComponentGroup.class, new Factory<RatePresenter>(RatePresenter.class) {
-	    public RatePresenter create() {
-		final RatePresenter presenter = new RatePresenter($(StateManager.class));
-		final RatePanel panel = new RatePanel(null, null, $(I18nUITranslationService.class),
+	register(ApplicationComponentGroup.class, new Factory<RateIt>(RateIt.class) {
+	    public RateIt create() {
+		final RateItPresenter presenter = new RateItPresenter($(I18nUITranslationService.class),
+			$(Session.class), $$(ContentServiceAsync.class), $(StateManager.class));
+		final RateItPanel panel = new RateItPanel(presenter, $(I18nUITranslationService.class),
 			$(WorkspaceSkeleton.class));
 		presenter.init(panel);
 		return presenter;
 	    }
 	});
 
-	register(ApplicationComponentGroup.class, new Factory<RateIt>(RateIt.class) {
-	    public RateIt create() {
-		final RateItPresenter presenter = new RateItPresenter($(I18nUITranslationService.class),
-			$(Session.class), $$(ContentServiceAsync.class), $(StateManager.class));
-		final RateItPanel panel = new RateItPanel(presenter, $(I18nUITranslationService.class),
+	register(ApplicationComponentGroup.class, new Factory<RatePresenter>(RatePresenter.class) {
+	    public RatePresenter create() {
+		final RatePresenter presenter = new RatePresenter($(StateManager.class));
+		final RatePanel panel = new RatePanel(null, null, $(I18nUITranslationService.class),
 			$(WorkspaceSkeleton.class));
 		presenter.init(panel);
 		return presenter;

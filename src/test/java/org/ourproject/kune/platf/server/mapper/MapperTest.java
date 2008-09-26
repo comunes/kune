@@ -23,6 +23,7 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.server.TestDomainHelper;
 import org.ourproject.kune.platf.server.TestHelper;
 import org.ourproject.kune.platf.server.access.AccessRights;
+import org.ourproject.kune.platf.server.domain.BasicMimeType;
 import org.ourproject.kune.platf.server.domain.Comment;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
@@ -205,6 +206,14 @@ public class MapperTest {
 	assertEquals("nocc1", dtoNotCC.getDescription());
 	assertEquals("nocc2", dtoNotCC.getRdf());
 	assertEquals("nocc3", dtoNotCC.getImageUrl());
+    }
+
+    @Test
+    public void testMimeMapping() {
+	final Content d = createDefContent();
+	d.setMimeType(new BasicMimeType("application/pdf"));
+	final ContentDTO contentDTO = mapper.map(d, ContentDTO.class);
+	assertEquals("application/pdf", contentDTO.getMimeType().toString());
     }
 
     @Test

@@ -110,10 +110,13 @@ public class FileUploaderDialog implements FileUploaderView {
     private void createDialog(final boolean show) {
 	dialog = new UploadDialog(i18n.t("File uploader"), false, true);
 	dialog.setId(SITE_FILE_UPLOADER);
-	// dialog.setUploadAutostart(true);
-	dialog.setResetOnHide(false);
 	dialog.setAllowCloseOnUpload(true);
+	dialog.setResetOnHide(false);
+	dialog.setClosable(true);
 	dialog.setCloseAction(Window.HIDE);
+	dialog.setMinimizable(true);
+	dialog.setUploadAutostart(true);
+	// Here fails
 
 	dialog.addListener(new UploadDialogListenerAdapter() {
 	    @Override
@@ -123,6 +126,11 @@ public class FileUploaderDialog implements FileUploaderView {
 		    Site.important(i18n.t("Wait until current uploads finish to upload files in other location"));
 		}
 		return mustAdd;
+	    }
+
+	    @Override
+	    public void onMinimize(final Window source) {
+		dialog.hide();
 	    }
 
 	    @Override

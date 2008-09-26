@@ -30,6 +30,7 @@ import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.actions.DragDropContentRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
+import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.ContainerSimpleDTO;
 import org.ourproject.kune.platf.client.dto.ContentDTO;
@@ -204,11 +205,11 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	// Process our current content/container
 	if (state.hasDocument()) {
 	    rights = state.getContentRights();
-	    addItem(state.getTitle(), state.getTypeId(), state.getStatus(), stateToken, container.getStateToken(),
-		    rights, false);
+	    addItem(state.getTitle(), state.getTypeId(), state.getMimeType(), state.getStatus(), stateToken, container
+		    .getStateToken(), rights, false);
 	} else {
 	    rights = containerRights;
-	    addItem(container.getName(), container.getTypeId(), ContentStatusDTO.publishedOnline, container
+	    addItem(container.getName(), container.getTypeId(), null, ContentStatusDTO.publishedOnline, container
 		    .getStateToken(), container.getStateToken().clone().setFolder(container.getParentFolderId()),
 		    containerRights, false);
 	}
@@ -236,31 +237,32 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	actionsByItem.clear();
     }
 
-    private void addItem(final String title, final String contentTypeId, final ContentStatusDTO status,
-	    final StateToken stateToken, final StateToken parentStateToken, final AccessRightsDTO rights,
-	    final boolean isNodeSelected) {
+    private void addItem(final String title, final String contentTypeId, final BasicMimeTypeDTO mimeType,
+	    final ContentStatusDTO status, final StateToken stateToken, final StateToken parentStateToken,
+	    final AccessRightsDTO rights, final boolean isNodeSelected) {
 
 	final ActionCollectionSet<StateToken> set = actionRegistry.selectCurrentActions(rights, contentTypeId);
 	toolbar.showActions(set.getToolbarActions(), isNodeSelected);
 
+	final String contentTypeIcon = contentIconsRegistry.getContentTypeIcon(contentTypeId, mimeType);
 	final ContextNavigatorItem item = new ContextNavigatorItem(genId(stateToken), genId(parentStateToken),
-		contentIconsRegistry.getContentTypeIcon(contentTypeId), title, status, stateToken,
-		dragDropContentRegistry.isDraggable(contentTypeId, rights.isAdministrable()), dragDropContentRegistry
-			.isDroppable(contentTypeId, rights.isAdministrable()), set.getItemActions());
+		contentTypeIcon, title, status, stateToken, dragDropContentRegistry.isDraggable(contentTypeId, rights
+			.isAdministrable()), dragDropContentRegistry.isDroppable(contentTypeId, rights
+			.isAdministrable()), set.getItemActions());
 	view.addItem(item);
 	actionsByItem.put(stateToken, set.getToolbarActions());
     }
 
     private void createChildItems(final ContainerDTO container, final AccessRightsDTO containerRights) {
 	for (final ContentDTO content : container.getContents()) {
-	    addItem(content.getTitle(), content.getTypeId(), content.getStatus(), content.getStateToken(), content
-		    .getStateToken().clone().clearDocument(), content.getRights(), false);
+	    addItem(content.getTitle(), content.getTypeId(), content.getMimeType(), content.getStatus(), content
+		    .getStateToken(), content.getStateToken().clone().clearDocument(), content.getRights(), false);
 	}
 
 	for (final ContainerSimpleDTO siblingFolder : container.getChilds()) {
-	    addItem(siblingFolder.getName(), siblingFolder.getTypeId(), ContentStatusDTO.publishedOnline, siblingFolder
-		    .getStateToken(), siblingFolder.getStateToken().clone()
-		    .setFolder(siblingFolder.getParentFolderId()), containerRights, false);
+	    addItem(siblingFolder.getName(), siblingFolder.getTypeId(), null, ContentStatusDTO.publishedOnline,
+		    siblingFolder.getStateToken(), siblingFolder.getStateToken().clone().setFolder(
+			    siblingFolder.getParentFolderId()), containerRights, false);
 	}
     }
 
@@ -272,7 +274,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	    final StateToken parentStateToken = state.clone().clearDocument().setFolder(folder.getParentFolderId());
 
 	    if (folder.getParentFolderId() != null) {
-		addItem(folder.getName(), folder.getTypeId(), ContentStatusDTO.publishedOnline, folderStateToken,
+		addItem(folder.getName(), folder.getTypeId(), null, ContentStatusDTO.publishedOnline, folderStateToken,
 			parentStateToken, rights, false);
 	    } else {
 		// Root must be already created

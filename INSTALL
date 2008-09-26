@@ -16,7 +16,9 @@ For development:
   (if you're using windows as dev plaftorm... you will have to write your own script ;). the idea is to
   copy everything from target/kune-0.0.VERSIONHERE/org.ourproject.kune.app.Kune to src/main/webapp/gwt/org.ourproject.kune.app.Kune)
 
-- Make two databases in your mysql:
+- MYSQL configuration: 
+
+Make two databases in your mysql:
 
 CREATE DATABASE kune_dev;
 GRANT ALL PRIVILEGES ON kune_dev.* TO kune@localhost IDENTIFIED BY 'db4kune';
@@ -25,6 +27,15 @@ FLUSH PRIVILEGES;
 CREATE DATABASE kune_test;
 GRANT ALL PRIVILEGES ON kune_test.* TO kune@localhost IDENTIFIED BY 'db4kune';
 FLUSH PRIVILEGES;
+
+You have to configure mysql to support UTF8 by editing your c:\Windows\my.ini or /etc/my.cnf (on Unix) file:
+[mysqld]
+default-character-set=utf8
+
+Or do it per table:
+
+ALTER DATABASE kune_dev CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT COLLATE utf8_general_ci;
+ALTER DATABASE kune_test CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT COLLATE utf8_general_ci;
 
 - Configure upload directory:
 

@@ -27,6 +27,7 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.server.ParticipationData;
 import org.ourproject.kune.platf.server.access.AccessRights;
 import org.ourproject.kune.platf.server.domain.AccessLists;
+import org.ourproject.kune.platf.server.domain.BasicMimeType;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.ContentStatus;
 import org.ourproject.kune.platf.server.domain.Group;
@@ -54,6 +55,7 @@ public class State {
     private Integer rateByUsers;
     private Double currentUserRate;
     private String typeId;
+    private BasicMimeType mimeType;
     private License license;
     private I18nLanguage language;
     private List<User> authors;
@@ -121,6 +123,10 @@ public class State {
 
     public License getLicense() {
 	return license;
+    }
+
+    public BasicMimeType getMimeType() {
+	return mimeType;
     }
 
     public ParticipationData getParticipation() {
@@ -229,6 +235,10 @@ public class State {
 
     public void setLicense(final License license) {
 	this.license = license;
+    }
+
+    public void setMimeType(final BasicMimeType mimeType) {
+	this.mimeType = mimeType;
     }
 
     public void setParticipation(final ParticipationData participation) {

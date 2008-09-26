@@ -23,6 +23,7 @@ package org.ourproject.kune.workspace.client.title;
 import java.util.Date;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
@@ -46,16 +47,18 @@ public class EntityTitlePresenter implements EntityTitle {
     private final Provider<ContentServiceAsync> contentServiceProvider;
     private final Session session;
     private final Provider<ContextNavigator> contextNavigatorProvider;
+    private final ContentIconsRegistry iconsRegistry;
 
     public EntityTitlePresenter(final I18nTranslationService i18n, final KuneErrorHandler errorHandler,
 	    final StateManager stateManager, final Session session,
 	    final Provider<ContentServiceAsync> contentServiceProvider,
-	    final Provider<ContextNavigator> contextNavigatorProvider) {
+	    final Provider<ContextNavigator> contextNavigatorProvider, final ContentIconsRegistry iconsRegistry) {
 	this.i18n = i18n;
 	this.errorHandler = errorHandler;
 	this.session = session;
 	this.contentServiceProvider = contentServiceProvider;
 	this.contextNavigatorProvider = contextNavigatorProvider;
+	this.iconsRegistry = iconsRegistry;
 	stateManager.onStateChanged(new Listener<StateDTO>() {
 	    public void onEvent(final StateDTO state) {
 		setState(state);
@@ -129,6 +132,13 @@ public class EntityTitlePresenter implements EntityTitle {
 		setContentTitle(state.getTitle(), state.getContentRights().isEditable());
 	    }
 	    setContentDateVisible(false);
+	}
+	final String contentTypeIcon = iconsRegistry.getContentTypeIcon(state.getTypeId(), state.getMimeType());
+	if (contentTypeIcon.length() > 0) {
+	    view.setContentIcon(contentTypeIcon);
+	    view.setContentIconVisible(true);
+	} else {
+	    view.setContentIconVisible(false);
 	}
     }
 

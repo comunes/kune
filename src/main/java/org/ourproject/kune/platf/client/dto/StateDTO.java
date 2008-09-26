@@ -23,6 +23,7 @@ package org.ourproject.kune.platf.client.dto;
 import java.util.Date;
 import java.util.List;
 
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class StateDTO implements IsSerializable {
@@ -45,6 +46,7 @@ public class StateDTO implements IsSerializable {
     private Integer rateByUsers;
     private Double currentUserRate;
     private String typeId;
+    private BasicMimeTypeDTO mimeType;
     private LicenseDTO license;
     private I18nLanguageDTO language;
     private Date publishedOn;
@@ -77,6 +79,10 @@ public class StateDTO implements IsSerializable {
 	return container;
     }
 
+    public AccessRightsDTO getContainerRights() {
+	return containerRights;
+    }
+
     public String getContent() {
 	return content;
     }
@@ -91,10 +97,6 @@ public class StateDTO implements IsSerializable {
 
     public String getDocumentId() {
 	return documentId;
-    }
-
-    public AccessRightsDTO getContainerRights() {
-	return containerRights;
     }
 
     public GroupDTO getGroup() {
@@ -119,6 +121,10 @@ public class StateDTO implements IsSerializable {
 
     public LicenseDTO getLicense() {
 	return license;
+    }
+
+    public BasicMimeTypeDTO getMimeType() {
+	return mimeType;
     }
 
     public ParticipationDataDTO getParticipation() {
@@ -236,6 +242,10 @@ public class StateDTO implements IsSerializable {
 
     public void setLicense(final LicenseDTO license) {
 	this.license = license;
+    }
+
+    public void setMimeType(final BasicMimeTypeDTO mimeType) {
+	this.mimeType = mimeType;
     }
 
     public void setParticipation(final ParticipationDataDTO participation) {

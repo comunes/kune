@@ -39,6 +39,7 @@ public class StateServiceDefault implements StateService {
 	final Long documentId = content.getId();
 	if (documentId != null) {
 	    state.setTypeId(content.getTypeId());
+	    state.setMimeType(content.getMimeType());
 	    state.setDocumentId(documentId.toString());
 	    state.setIsRateable(true);
 	    state.setLanguage(content.getLanguage());

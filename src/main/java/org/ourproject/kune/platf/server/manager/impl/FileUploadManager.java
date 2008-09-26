@@ -3,7 +3,9 @@ package org.ourproject.kune.platf.server.manager.impl;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.List;
 
@@ -12,7 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.jmimemagic.MagicException;
 import net.sf.jmimemagic.MagicMatch;
+import net.sf.jmimemagic.MagicMatchNotFoundException;
+import net.sf.jmimemagic.MagicParseException;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.fileupload.FileItem;
@@ -32,6 +37,7 @@ import org.ourproject.kune.platf.server.auth.ActionLevel;
 import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.auth.Authorizated;
 import org.ourproject.kune.platf.server.content.ContentManager;
+import org.ourproject.kune.platf.server.domain.BasicMimeType;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.User;
@@ -47,6 +53,10 @@ import com.wideplay.warp.persist.Transactional;
 public class FileUploadManager extends HttpServlet {
 
     public static final Log log = LogFactory.getLog(FileUploadManager.class);
+
+    private static final String SLASH = File.separator;
+
+    private static final String UTF8 = "UTF-8";
 
     private static final long serialVersionUID = 1L;
 
@@ -111,12 +121,10 @@ public class FileUploadManager extends HttpServlet {
 	    createFile(userHash, stateToken, fileName, file);
 	} catch (final FileUploadException e) {
 	    jsonResponse = createJsonResponse(false, i18n.t("Error: File too large"));
-
 	} catch (final Exception e) {
-	    // SessionExpiredException,
-	    // UserMustBeLoggedException
 	    jsonResponse = createJsonResponse(false, i18n.t("Error uploading file"));
-	    log.info(e.getCause());
+	    log.info("Exception: " + e.getCause());
+	    e.printStackTrace();
 	}
 
 	final Writer w = new OutputStreamWriter(resp.getOutputStream());
@@ -128,28 +136,46 @@ public class FileUploadManager extends HttpServlet {
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Editor, actionLevel = ActionLevel.container)
     @Transactional(type = TransactionType.READ_WRITE)
-    JSONObject createFile(final String userHash, final StateToken stateToken, final String fileName,
+    Content createFile(final String userHash, final StateToken stateToken, final String fileName,
 	    final FileItem fileUploadItem) throws Exception {
-	final String relDir = calculateUploadDirLocation(stateToken);
+	final String relDir = calculateUploadDirLocation(stateToken, false);
+	final String relDirEncoded = calculateUploadDirLocation(stateToken, true);
 	final String absDir = kuneProperties.get(KuneProperties.UPLOAD_LOCATION) + relDir;
 	fileManager.mkdir(absDir);
-	final File file = fileManager.createFileWithSequentialName(absDir, fileName);
+
+	final String filenameUTF8 = new String(fileName.getBytes(), UTF8);
+	final File file = fileManager.createFileWithSequentialName(absDir, filenameUTF8);
 	fileUploadItem.write(file);
-	final MagicMatch magic = fileManager.getMimeType(file);
+	// FIXME remove file if not success
+	String mimetype = "unknown/unknown";
+	String extension = "";
+	try {
+	    final MagicMatch magicMatch = fileManager.getMimeType(file);
+	    extension = magicMatch.getExtension();
+	    mimetype = magicMatch.getMimeType();
+	} catch (final MagicParseException e) {
+	    log.info("Exception: " + e.getCause());
+	} catch (final MagicMatchNotFoundException e) {
+	    log.info("Exception: " + e.getCause());
+	} catch (final MagicException e) {
+	    log.info("Exception: " + e.getCause());
+	}
 
 	// Persist
 	final User user = userSession.getUser();
 	final Container container = accessService.accessToContainer(new Long(stateToken.getFolder()), user,
 		AccessRol.Editor);
 	final Content content = contentManager.createContent(FileUtils.getFileNameWithoutExtension(file.getName(),
-		magic.getExtension()), relDir + File.separator + file.getName(), user, container);
+		extension), relDirEncoded + SLASH + URLEncoder.encode(filenameUTF8, UTF8), user, container);
 	content.setTypeId(DocumentServerTool.TYPE_UPLOADEDFILE);
-	content.setMimeType(magic.getMimeType());
-	return createSuccessResponse();
+	content.setMimeType(new BasicMimeType(mimetype));
+	return content;
     }
 
-    private String calculateUploadDirLocation(final StateToken stateToken) {
-	return File.separator + stateToken.getGroup() + File.separator + stateToken.getTool() + File.separator
+    private String calculateUploadDirLocation(final StateToken stateToken, final boolean urlEncoded)
+	    throws UnsupportedEncodingException {
+	final String group = stateToken.getGroup();
+	return SLASH + (urlEncoded ? URLEncoder.encode(group, UTF8) : group) + SLASH + stateToken.getTool() + SLASH
 		+ stateToken.getFolder();
     }
 

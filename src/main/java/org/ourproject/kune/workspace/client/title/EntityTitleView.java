@@ -28,6 +28,10 @@ public interface EntityTitleView extends View {
 
     void setContentDate(String date);
 
+    void setContentIcon(String iconUrl);
+
+    void setContentIconVisible(boolean visible);
+
     void setContentTitle(String title);
 
     void setContentTitleEditable(boolean editable);
