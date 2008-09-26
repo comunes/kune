@@ -21,12 +21,12 @@
 package org.ourproject.kune.docs.client.cnt.reader;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
 
 public interface DocumentReader {
 
     View getView();
 
-    void show();
-
-    void showDocument(String text);
+    void showDocument(StateToken token, String text, String typeId, BasicMimeTypeDTO mimeType);
 }

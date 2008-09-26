@@ -28,6 +28,7 @@ import org.ourproject.kune.platf.client.rpc.SiteService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.server.LoggerMethodInterceptor;
 import org.ourproject.kune.platf.server.PlatformServerModule;
+import org.ourproject.kune.platf.server.manager.impl.FileDownloadManager;
 import org.ourproject.kune.platf.server.manager.impl.FileUploadManager;
 import org.ourproject.kune.platf.server.properties.PropertiesFileName;
 import org.ourproject.kune.platf.server.rest.ContentJSONService;
@@ -96,7 +97,7 @@ public class KuneRackModule implements RackModule {
 		UserService.class, SocialNetworkService.class, I18nService.class);
 	builder.installRESTServices("^/kune/json/", TestJSONService.class, GroupJSONService.class,
 		UserJSONService.class, I18nTranslationJSONService.class, ContentJSONService.class);
-	builder.installServlet("^/kune/servlets/", FileUploadManager.class);
+	builder.installServlet("^/kune/servlets/", FileUploadManager.class, FileDownloadManager.class);
 
 	builder.at("^/kune/(.*)$").install(new ForwardFilter("^/kune/(.*)$", "/gwt/org.ourproject.kune.app.Kune/{0}"));
     }

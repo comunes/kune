@@ -53,6 +53,7 @@ import org.ourproject.kune.platf.server.auth.Authorizated;
 import org.ourproject.kune.platf.server.content.CommentManager;
 import org.ourproject.kune.platf.server.content.ContainerManager;
 import org.ourproject.kune.platf.server.content.ContentManager;
+import org.ourproject.kune.platf.server.content.ContentUtils;
 import org.ourproject.kune.platf.server.content.CreationService;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Comment;
@@ -116,7 +117,7 @@ public class ContentRPC implements ContentService, RPC {
     @Transactional(type = TransactionType.READ_WRITE)
     public void addAuthor(final String userHash, final StateToken token, final String authorShortName)
 	    throws DefaultException {
-	final Long contentId = parseId(token.getDocument());
+	final Long contentId = ContentUtils.parseId(token.getDocument());
 	final UserSession userSession = getUserSession();
 	final User user = userSession.getUser();
 	contentManager.addAuthor(user, contentId, authorShortName);
@@ -129,7 +130,7 @@ public class ContentRPC implements ContentService, RPC {
 	    final String commentText) throws DefaultException {
 	final UserSession userSession = getUserSession();
 	final User author = userSession.getUser();
-	final Long contentId = parseId(token.getDocument());
+	final Long contentId = ContentUtils.parseId(token.getDocument());
 	final Comment comment = commentManager.addComment(author, contentId, commentText, parentCommentId);
 	return mapper.map(comment, CommentDTO.class);
     }
@@ -141,7 +142,7 @@ public class ContentRPC implements ContentService, RPC {
 	    throws DefaultException {
 	final UserSession userSession = getUserSession();
 	final User author = userSession.getUser();
-	final Long contentId = parseId(token.getDocument());
+	final Long contentId = ContentUtils.parseId(token.getDocument());
 	final Comment comment = commentManager.addComment(author, contentId, commentText);
 	return mapper.map(comment, CommentDTO.class);
     }
@@ -155,8 +156,8 @@ public class ContentRPC implements ContentService, RPC {
 	final UserSession userSession = getUserSession();
 	final User user = userSession.getUser();
 	final boolean userIsLoggedIn = userSession.isUserLoggedIn();
-	final Container container = accessService.accessToContainer(parseId(parentToken.getFolder()), user,
-		AccessRol.Editor);
+	final Container container = accessService.accessToContainer(ContentUtils.parseId(parentToken.getFolder()),
+		user, AccessRol.Editor);
 	final Content addedContent = creationService.createContent(title, "", user, container);
 	final Access access = accessService.getAccess(user, addedContent.getStateToken(), group, AccessRol.Editor);
 	final State state = stateService.create(access);
@@ -173,7 +174,8 @@ public class ContentRPC implements ContentService, RPC {
 	final UserSession userSession = getUserSession();
 	final User user = userSession.getUser();
 	final boolean userIsLoggedIn = userSession.isUserLoggedIn();
-	final State state = createFolder(parentToken.getGroup(), parseId(parentToken.getFolder()), title, contentTypeId);
+	final State state = createFolder(parentToken.getGroup(), ContentUtils.parseId(parentToken.getFolder()), title,
+		contentTypeId);
 	completeState(user, userIsLoggedIn, group, state);
 	return mapState(state, user, group);
     }
@@ -194,7 +196,7 @@ public class ContentRPC implements ContentService, RPC {
 	xmppManager.createRoom(connection, roomName, userShortName + userHash);
 	xmppManager.disconnect(connection);
 	try {
-	    final State state = createFolder(groupShortName, parseId(parentToken.getFolder()), roomName,
+	    final State state = createFolder(groupShortName, ContentUtils.parseId(parentToken.getFolder()), roomName,
 		    ChatServerTool.TYPE_ROOM);
 	    completeState(user, userIsLoggedIn, group, state);
 	    return mapState(state, user, group);
@@ -214,7 +216,7 @@ public class ContentRPC implements ContentService, RPC {
     @Authorizated(accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
     public void delContent(final String userHash, final StateToken token) throws DefaultException {
-	final Long contentId = parseId(token.getDocument());
+	final Long contentId = ContentUtils.parseId(token.getDocument());
 	final UserSession userSession = getUserSession();
 	final User user = userSession.getUser();
 	contentManager.delContent(user, contentId);
@@ -264,7 +266,7 @@ public class ContentRPC implements ContentService, RPC {
 	    throws DefaultException {
 	final UserSession userSession = getUserSession();
 	final User informer = userSession.getUser();
-	final Long contentId = parseId(token.getDocument());
+	final Long contentId = ContentUtils.parseId(token.getDocument());
 	final Comment comment = commentManager.markAsAbuse(informer, contentId, commentId);
 	return mapper.map(comment, CommentDTO.class);
     }
@@ -275,7 +277,7 @@ public class ContentRPC implements ContentService, RPC {
     public void rateContent(final String userHash, final StateToken token, final Double value) throws DefaultException {
 	final UserSession userSession = getUserSession();
 	final User rater = userSession.getUser();
-	final Long contentId = parseId(token.getDocument());
+	final Long contentId = ContentUtils.parseId(token.getDocument());
 
 	if (userSession.isUserLoggedIn()) {
 	    contentManager.rateContent(rater, contentId, value);
@@ -289,7 +291,7 @@ public class ContentRPC implements ContentService, RPC {
     @Transactional(type = TransactionType.READ_WRITE)
     public void removeAuthor(final String userHash, final StateToken token, final String authorShortName)
 	    throws DefaultException {
-	final Long contentId = parseId(token.getDocument());
+	final Long contentId = ContentUtils.parseId(token.getDocument());
 	final UserSession userSession = getUserSession();
 	final User user = userSession.getUser();
 	contentManager.removeAuthor(user, contentId, authorShortName);
@@ -300,7 +302,7 @@ public class ContentRPC implements ContentService, RPC {
     @Transactional(type = TransactionType.READ_WRITE)
     public String renameContainer(final String userHash, final StateToken token, final String newName)
 	    throws DefaultException {
-	return renameFolder(token.getGroup(), parseId(token.getFolder()), newName);
+	return renameFolder(token.getGroup(), ContentUtils.parseId(token.getFolder()), newName);
     }
 
     @Authenticated
@@ -311,7 +313,7 @@ public class ContentRPC implements ContentService, RPC {
 	final UserSession userSession = getUserSession();
 	final User user = userSession.getUser();
 	try {
-	    accessService.accessToContent(parseId(token.getDocument()), user, AccessRol.Editor);
+	    accessService.accessToContent(ContentUtils.parseId(token.getDocument()), user, AccessRol.Editor);
 	} catch (final NoResultException e) {
 	    throw new AccessViolationException();
 	}
@@ -324,7 +326,7 @@ public class ContentRPC implements ContentService, RPC {
     public Integer save(final String userHash, final StateToken token, final String textContent)
 	    throws DefaultException {
 
-	final Long contentId = parseId(token.getDocument());
+	final Long contentId = ContentUtils.parseId(token.getDocument());
 	final UserSession userSession = getUserSession();
 	final User user = userSession.getUser();
 	final Content content = accessService.accessToContent(contentId, user, AccessRol.Editor);
@@ -336,7 +338,7 @@ public class ContentRPC implements ContentService, RPC {
     @Authorizated(accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
     public ContentDTO setAsDefaultContent(final String userHash, final StateToken token) {
-	final Content content = contentManager.find(parseId(token.getDocument()));
+	final Content content = contentManager.find(ContentUtils.parseId(token.getDocument()));
 	groupManager.setDefaultContent(token.getGroup(), content);
 	return mapper.map(content, ContentDTO.class);
     }
@@ -346,7 +348,7 @@ public class ContentRPC implements ContentService, RPC {
     @Transactional(type = TransactionType.READ_WRITE)
     public I18nLanguageDTO setLanguage(final String userHash, final StateToken token, final String languageCode)
 	    throws DefaultException {
-	final Long contentId = parseId(token.getDocument());
+	final Long contentId = ContentUtils.parseId(token.getDocument());
 	final UserSession userSession = getUserSession();
 	final User user = userSession.getUser();
 	return mapper.map(contentManager.setLanguage(user, contentId, languageCode), I18nLanguageDTO.class);
@@ -357,7 +359,7 @@ public class ContentRPC implements ContentService, RPC {
     @Transactional(type = TransactionType.READ_WRITE)
     public void setPublishedOn(final String userHash, final StateToken token, final Date publishedOn)
 	    throws DefaultException {
-	final Long contentId = parseId(token.getDocument());
+	final Long contentId = ContentUtils.parseId(token.getDocument());
 	final UserSession userSession = getUserSession();
 	final User user = userSession.getUser();
 	contentManager.setPublishedOn(user, contentId, publishedOn);
@@ -370,14 +372,14 @@ public class ContentRPC implements ContentService, RPC {
 	if (status.equals(ContentStatusDTO.publishedOnline) || status.equals(ContentStatusDTO.rejected)) {
 	    throw new AccessViolationException();
 	}
-	contentManager.setStatus(parseId(token.getDocument()), ContentStatus.valueOf(status.toString()));
+	contentManager.setStatus(ContentUtils.parseId(token.getDocument()), ContentStatus.valueOf(status.toString()));
     }
 
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
     public void setStatusAsAdmin(final String userHash, final StateToken token, final ContentStatusDTO status) {
-	contentManager.setStatus(parseId(token.getDocument()), ContentStatus.valueOf(status.toString()));
+	contentManager.setStatus(ContentUtils.parseId(token.getDocument()), ContentStatus.valueOf(status.toString()));
     }
 
     @Authenticated
@@ -385,7 +387,7 @@ public class ContentRPC implements ContentService, RPC {
     @Transactional(type = TransactionType.READ_WRITE)
     public List<TagResultDTO> setTags(final String userHash, final StateToken token, final String tags)
 	    throws DefaultException {
-	final Long contentId = parseId(token.getDocument());
+	final Long contentId = ContentUtils.parseId(token.getDocument());
 	final UserSession userSession = getUserSession();
 	final User user = userSession.getUser();
 	final Group group = groupManager.findByShortName(token.getGroup());
@@ -400,14 +402,14 @@ public class ContentRPC implements ContentService, RPC {
 	    final boolean votePositive) throws DefaultException {
 	final UserSession userSession = getUserSession();
 	final User voter = userSession.getUser();
-	final Long contentId = parseId(token.getDocument());
+	final Long contentId = ContentUtils.parseId(token.getDocument());
 	final Comment comment = commentManager.vote(voter, contentId, commentId, votePositive);
 	return mapper.map(comment, CommentDTO.class);
     }
 
     private void completeState(final User user, final boolean userIsLoggedIn, final Group group, final State state) {
 	if (state.isRateable()) {
-	    final Long contentId = parseId(state.getDocumentId());
+	    final Long contentId = ContentUtils.parseId(state.getDocumentId());
 	    final Content content = contentManager.find(contentId);
 	    if (userIsLoggedIn) {
 		state.setCurrentUserRate(contentManager.getRateContent(user, content));
@@ -462,17 +464,9 @@ public class ContentRPC implements ContentService, RPC {
 	return stateDTO;
     }
 
-    private Long parseId(final String id) throws ContentNotFoundException {
-	try {
-	    return new Long(id);
-	} catch (final NumberFormatException e) {
-	    throw new ContentNotFoundException();
-	}
-    }
-
     private String renameContent(final String documentId, final String newName) throws ContentNotFoundException,
 	    DefaultException {
-	final Long contentId = parseId(documentId);
+	final Long contentId = ContentUtils.parseId(documentId);
 	final UserSession userSession = getUserSession();
 	final User user = userSession.getUser();
 	return contentManager.renameContent(user, contentId, newName);

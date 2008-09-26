@@ -33,11 +33,11 @@ public class FileUploadManagerTest extends ContentServiceIntegrationTest {
 
     @Test(expected = SessionExpiredException.class)
     public void testSessionExp() throws Exception {
-	fileUploadManager.createFile("otherhash", null, null, null);
+	fileUploadManager.createUploadedFile("otherhash", null, null, null);
     }
 
     @Test(expected = UserMustBeLoggedException.class)
     public void testUserMustBeAuth() throws Exception {
-	fileUploadManager.createFile(null, null, null, null);
+	fileUploadManager.createUploadedFile(null, null, null, null);
     }
 }

@@ -45,6 +45,8 @@ public class ContentManagerTest extends PersistenceTest {
     private License defLicense;
 
     public ContentManagerTest() {
+	// Testing with mysql because utf-8 normally fails with mysql and not in
+	// memory
 	super("test_db", "kune.properties");
     }
 
@@ -86,6 +88,10 @@ public class ContentManagerTest extends PersistenceTest {
 	createContentWithMime(mimetype);
     }
 
+    /**
+     * This normally fails with mysql (not configured for utf-8), see the
+     * INSTALL mysql section
+     */
     @Test
     public void testUTF8Persist() {
 	final Container container = Mockito.mock(Container.class);

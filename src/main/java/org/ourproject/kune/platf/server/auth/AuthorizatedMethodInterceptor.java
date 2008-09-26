@@ -25,12 +25,12 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
-import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.access.AccessRights;
 import org.ourproject.kune.platf.server.access.AccessRightsService;
 import org.ourproject.kune.platf.server.access.AccessRol;
 import org.ourproject.kune.platf.server.access.AccessService;
+import org.ourproject.kune.platf.server.content.ContentUtils;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
@@ -76,18 +76,20 @@ public class AuthorizatedMethodInterceptor implements MethodInterceptor {
 	switch (actionLevel) {
 	case content:
 	default:
-	    final Content content = accessService.accessToContent(parseId(token.getDocument()), user, accessRol);
+	    final Content content = accessService.accessToContent(ContentUtils.parseId(token.getDocument()), user,
+		    accessRol);
 	    if (!content.getContainer().getOwner().equals(group)) {
 		throw new AccessViolationException();
 	    }
-	    if (!content.getContainer().getId().equals(parseId(token.getFolder()))) {
+	    if (!content.getContainer().getId().equals(ContentUtils.parseId(token.getFolder()))) {
 		throw new AccessViolationException();
 	    }
 	    if (!content.getContainer().getToolName().equals(token.getTool())) {
 		throw new AccessViolationException();
 	    }
 	case container:
-	    final Container container = accessService.accessToContainer(parseId(token.getFolder()), user, accessRol);
+	    final Container container = accessService.accessToContainer(ContentUtils.parseId(token.getFolder()), user,
+		    accessRol);
 	    if (!container.getOwner().equals(group)) {
 		throw new AccessViolationException();
 	    }
@@ -116,14 +118,6 @@ public class AuthorizatedMethodInterceptor implements MethodInterceptor {
 	    return accessRights.isEditable();
 	default:
 	    return accessRights.isVisible();
-	}
-    }
-
-    private Long parseId(final String documentId) throws ContentNotFoundException {
-	try {
-	    return new Long(documentId);
-	} catch (final NumberFormatException e) {
-	    throw new ContentNotFoundException();
 	}
     }
 

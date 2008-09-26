@@ -203,9 +203,9 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
     private void showContent() {
 	textEditorProvider.get().setToolbarVisible(false);
 	if (content.hasDocument()) {
-	    docReaderProvider.get().showDocument(content.getContent());
+	    docReaderProvider.get().showDocument(content.getStateToken(), content.getContent(), content.getTypeId(),
+		    content.getMimeType());
 	    textEditorProvider.get().reset();
-	    docReaderProvider.get().show();
 	} else {
 	    final FolderViewer viewer = folderViewerProvider.get();
 	    viewer.setFolder(content.getContainer());

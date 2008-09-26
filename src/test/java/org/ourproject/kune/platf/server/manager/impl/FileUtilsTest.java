@@ -20,6 +20,36 @@ public class FileUtilsTest {
     }
 
     @Test
+    public void getExtensionBasic() {
+	assertEquals("someext", FileUtils.getFileNameExtension("file.name.with.someext", false));
+    }
+
+    @Test
+    public void getExtensionWithDot() {
+	assertEquals("", FileUtils.getFileNameExtension("file name with no ext.", false));
+    }
+
+    @Test
+    public void getExtensionWithDotBasic() {
+	assertEquals(".someext", FileUtils.getFileNameExtension("file.name.with.someext", true));
+    }
+
+    @Test
+    public void getExtensionWithDotWithFinalDot() {
+	assertEquals("", FileUtils.getFileNameExtension("file name with no ext.", true));
+    }
+
+    @Test
+    public void getExtensionWithDotWithInitialDot() {
+	assertEquals("", FileUtils.getFileNameExtension(".file name with no ext", true));
+    }
+
+    @Test
+    public void getExtensionWithInitialDot() {
+	assertEquals("", FileUtils.getFileNameExtension(".file name with no ext", false));
+    }
+
+    @Test
     public void testFileNameWExtensionSimple() {
 	assertEquals("test", FileUtils.getFileNameWithoutExtension("test.txt", "txt"));
     }

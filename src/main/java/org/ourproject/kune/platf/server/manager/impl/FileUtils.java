@@ -1,6 +1,34 @@
 package org.ourproject.kune.platf.server.manager.impl;
 
+import java.io.File;
+
+import org.ourproject.kune.platf.client.dto.StateToken;
+
 public class FileUtils {
+
+    public static final String SLASH = File.separator;
+
+    /**
+     * For filename extension info see:
+     * http://en.wikipedia.org/wiki/File_name_extension
+     * 
+     * @param fileName
+     * @return
+     */
+    public static String getFileNameExtension(final String fileName, final boolean withDot) {
+	// also we can use FilenameUtils
+	final int dotIndex = fileName.lastIndexOf(".");
+	if (dotIndex == -1 || dotIndex == 0) {
+	    return "";
+	} else {
+	    if (withDot) {
+		final String ext = fileName.substring(dotIndex);
+		return ext.length() == 1 ? "" : ext;
+	    } else {
+		return fileName.substring(dotIndex + 1);
+	    }
+	}
+    }
 
     public static String getFileNameWithoutExtension(final String fileName, final String extension) {
 	final int extlength = extension.length();
@@ -35,5 +63,9 @@ public class FileUtils {
 	    final String ext = fileName.substring(dotIndex);
 	    return getNextSequentialFileName(fileName.substring(0, dotIndex)) + ext;
 	}
+    }
+
+    public static String toDir(final StateToken stateToken) {
+	return SLASH + stateToken.getGroup() + SLASH + stateToken.getTool() + SLASH + stateToken.getFolder() + SLASH;
     }
 }

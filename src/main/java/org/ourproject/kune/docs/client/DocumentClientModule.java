@@ -173,7 +173,8 @@ public class DocumentClientModule extends AbstractModule {
 	register(Singleton.class, new Factory<DocumentReader>(DocumentReader.class) {
 	    public DocumentReader create() {
 		final DocumentReaderView view = new DocumentReaderPanel($(WorkspaceSkeleton.class));
-		final DocumentReaderPresenter presenter = new DocumentReaderPresenter(view);
+		final DocumentReaderPresenter presenter = new DocumentReaderPresenter($(Session.class), view,
+			$(I18nUITranslationService.class));
 		return presenter;
 	    }
 	});

@@ -224,8 +224,13 @@
 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
-			<version>1.4.1</version>
+			<version>1.7.0</version>
 		</dependency>
+                <dependency>
+                    <groupId>org.liquibase</groupId>
+                    <artifactId>liquibase-plugin</artifactId>
+                    <version>1.7.0.0</version>
+                </dependency> 
 
 		<!-- jetty dependencies -->
 		<dependency>
@@ -424,7 +429,7 @@
 			<plugin>
 				<groupId>org.liquibase</groupId>
 				<artifactId>liquibase-plugin</artifactId>
-				<version>1.4.1.0</version>
+				<version>1.7.0.0</version>
 				<executions>
 					<execution>
 						<phase>process-resources</phase>
@@ -447,7 +452,7 @@
 							</configuration>
 						-->
 						<goals>
-							<goal>migrate</goal>
+							<goal>update</goal>
 						</goals>
 					</execution>
 				</executions>
