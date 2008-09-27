@@ -115,8 +115,7 @@ public class FileUploaderDialog implements FileUploaderView {
 	dialog.setClosable(true);
 	dialog.setCloseAction(Window.HIDE);
 	dialog.setMinimizable(true);
-	dialog.setUploadAutostart(true);
-	// Here fails
+	dialog.setUploadAutostart(false);
 
 	dialog.addListener(new UploadDialogListenerAdapter() {
 	    @Override

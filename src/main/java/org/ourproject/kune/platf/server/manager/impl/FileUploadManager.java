@@ -12,10 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.jmimemagic.MagicException;
-import net.sf.jmimemagic.MagicMatch;
-import net.sf.jmimemagic.MagicMatchNotFoundException;
-import net.sf.jmimemagic.MagicParseException;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.fileupload.FileItem;
@@ -145,22 +141,8 @@ public class FileUploadManager extends HttpServlet {
 	    file = fileManager.createFileWithSequentialName(absDir, filenameUTF8);
 	    fileUploadItem.write(file);
 
-	    log.info("fileItem mime type: " + fileUploadItem.getContentType());
-
-	    String mimetype = "unknown/unknown";
-	    String extension = "";
-	    try {
-		final MagicMatch magicMatch = fileManager.getMimeType(file);
-
-		extension = magicMatch.getExtension();
-		mimetype = magicMatch.getMimeType();
-	    } catch (final MagicParseException e) {
-		log.info("Exception: " + e.getCause());
-	    } catch (final MagicMatchNotFoundException e) {
-		log.info("Exception: " + e.getCause());
-	    } catch (final MagicException e) {
-		log.info("Exception: " + e.getCause());
-	    }
+	    final String mimetype = fileUploadItem.getContentType();
+	    final String extension = FileUtils.getFileNameExtension(filenameUTF8, false);
 
 	    // Persist
 	    final User user = userSession.getUser();

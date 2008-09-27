@@ -1,14 +1,13 @@
 package org.ourproject.kune.platf.client.actions.toolbar;
 
-import org.ourproject.kune.platf.client.actions.ActionButtonDescriptor;
-import org.ourproject.kune.platf.client.actions.ActionMenuDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
 public interface ActionToolbarView {
 
-    void addButtonAction(ActionButtonDescriptor<StateToken> action);
+    void addButtonAction(ActionItem<StateToken> action);
 
-    void addMenuAction(ActionMenuDescriptor<StateToken> action, boolean enable);
+    void addMenuAction(ActionItem<StateToken> action, boolean enable);
 
     void clear();
 

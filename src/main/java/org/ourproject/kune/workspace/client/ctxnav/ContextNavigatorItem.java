@@ -1,6 +1,6 @@
 package org.ourproject.kune.workspace.client.ctxnav;
 
-import org.ourproject.kune.platf.client.actions.ActionCollection;
+import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
@@ -11,13 +11,13 @@ public class ContextNavigatorItem {
     private final String text;
     private final ContentStatusDTO contentStatusDTO;
     private final StateToken token;
-    private final ActionCollection<StateToken> actionCollection;
+    private final ActionItemCollection<StateToken> actionCollection;
     private final boolean allowDrag;
     private final boolean allowDrop;
 
     public ContextNavigatorItem(final String id, final String parentId, final String iconUrl, final String text,
 	    final ContentStatusDTO contentStatusDTO, final StateToken token, final boolean allowDrag,
-	    final boolean allowDrop, final ActionCollection<StateToken> actionCollection) {
+	    final boolean allowDrop, final ActionItemCollection<StateToken> actionCollection) {
 	this.id = id;
 	this.parentId = parentId;
 	this.iconUrl = iconUrl;
@@ -29,7 +29,7 @@ public class ContextNavigatorItem {
 	this.actionCollection = actionCollection;
     }
 
-    public ActionCollection<StateToken> getActionCollection() {
+    public ActionItemCollection<StateToken> getActionCollection() {
 	return actionCollection;
     }
 

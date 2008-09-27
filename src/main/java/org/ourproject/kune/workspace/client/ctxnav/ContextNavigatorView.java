@@ -21,7 +21,6 @@
 package org.ourproject.kune.workspace.client.ctxnav;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.actions.ActionCollection;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
 public interface ContextNavigatorView extends View {
@@ -42,6 +41,6 @@ public interface ContextNavigatorView extends View {
 
     void setItemText(String id, String text);
 
-    void setRootItem(String id, String text, StateToken stateToken, ActionCollection<StateToken> actions);
+    void setRootItem(String id, String text, StateToken stateToken);
 
 }

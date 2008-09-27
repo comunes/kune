@@ -21,9 +21,12 @@ public class ActionRegistryTest {
 
     @Test
     public void actionsEmptyButNeverNull() {
-	checkActionLists(0, 0, new AccessRightsDTO(true, true, true));
-	checkActionLists(0, 0, new AccessRightsDTO(false, true, true));
-	checkActionLists(0, 0, new AccessRightsDTO(false, false, true));
+	checkActionLists(0, new AccessRightsDTO(true, true, true), true);
+	checkActionLists(0, new AccessRightsDTO(true, true, true), false);
+	checkActionLists(0, new AccessRightsDTO(false, true, true), true);
+	checkActionLists(0, new AccessRightsDTO(false, true, true), false);
+	checkActionLists(0, new AccessRightsDTO(false, false, true), true);
+	checkActionLists(0, new AccessRightsDTO(false, false, true), false);
     }
 
     @Before
@@ -50,19 +53,22 @@ public class ActionRegistryTest {
     @Test
     public void testAddWhenAdmin() {
 	addDefActions();
-	checkActionLists(3, 3, new AccessRightsDTO(true, true, true));
+	checkActionLists(3, new AccessRightsDTO(true, true, true), true);
+	checkActionLists(3, new AccessRightsDTO(true, true, true), false);
     }
 
     @Test
     public void testAddWhenEditor() {
 	addDefActions();
-	checkActionLists(2, 2, new AccessRightsDTO(false, true, true));
+	checkActionLists(2, new AccessRightsDTO(false, true, true), true);
+	checkActionLists(2, new AccessRightsDTO(false, true, true), false);
     }
 
     @Test
     public void testAddWhenViewer() {
 	addDefActions();
-	checkActionLists(1, 1, new AccessRightsDTO(false, false, true));
+	checkActionLists(1, new AccessRightsDTO(false, false, true), true);
+	checkActionLists(1, new AccessRightsDTO(false, false, true), false);
     }
 
     @Test
@@ -93,11 +99,9 @@ public class ActionRegistryTest {
 	registry.addAction(DEF_CONTENT_TYPE_ID, viewerAction);
     }
 
-    private void checkActionLists(final int expectedToolActions, final int expectedItemActions,
-	    final AccessRightsDTO accessRightsDTO) {
-	assertEquals(expectedItemActions, registry.selectCurrentActions(accessRightsDTO, DEF_CONTENT_TYPE_ID)
-		.getToolbarActions().size());
-	assertEquals(expectedItemActions, registry.selectCurrentActions(accessRightsDTO, DEF_CONTENT_TYPE_ID)
-		.getItemActions().size());
+    private void checkActionLists(final int expectedActions, final AccessRightsDTO accessRightsDTO,
+	    final boolean toolbarActions) {
+	assertEquals(expectedActions, registry.getCurrentActions(new StateToken(), DEF_CONTENT_TYPE_ID,
+		accessRightsDTO, toolbarActions).size());
     }
 }

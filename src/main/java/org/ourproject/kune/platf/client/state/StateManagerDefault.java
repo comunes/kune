@@ -98,7 +98,7 @@ public class StateManagerDefault implements StateManager {
 
     public void onHistoryChanged(final String historyToken) {
 	final Listener<StateToken> tokenListener = siteTokens.get(historyToken);
-	Log.debug("history token: " + historyToken);
+	Log.debug("StateManager: history token changed (" + historyToken + ")");
 	if (tokenListener == null) {
 	    onHistoryChanged(new StateToken(historyToken));
 	} else {

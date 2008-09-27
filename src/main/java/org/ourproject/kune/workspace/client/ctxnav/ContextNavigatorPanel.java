@@ -22,8 +22,9 @@ package org.ourproject.kune.workspace.client.ctxnav;
 
 import java.util.HashMap;
 
-import org.ourproject.kune.platf.client.actions.ActionCollection;
 import org.ourproject.kune.platf.client.actions.ActionDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionItem;
+import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
@@ -47,6 +48,7 @@ import com.gwtext.client.widgets.menu.Item;
 import com.gwtext.client.widgets.menu.Menu;
 import com.gwtext.client.widgets.menu.event.BaseItemListenerAdapter;
 import com.gwtext.client.widgets.tree.DropNodeCallback;
+import com.gwtext.client.widgets.tree.MultiSelectionModel;
 import com.gwtext.client.widgets.tree.TreeEditor;
 import com.gwtext.client.widgets.tree.TreeNode;
 import com.gwtext.client.widgets.tree.TreePanel;
@@ -87,7 +89,7 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 	    child.setHref("#" + item.getStateToken().toString());
 	    child.setAllowDrag(item.isDraggable());
 	    child.setAllowDrop(item.isDroppable());
-	    createItemMenu(nodeId, item.getActionCollection(), item.getStateToken());
+	    createItemMenu(nodeId, item.getActionCollection());
 	    final TreeNode parent = treePanel.getNodeById(item.getParentId());
 	    if (parent != null) {
 		// Log.info("Adding child node: " + nodeId + " to folder: " +
@@ -185,32 +187,27 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 	node.setText(text);
     }
 
-    public void setRootItem(final String id, final String text, final StateToken stateToken,
-	    final ActionCollection<StateToken> actions) {
+    public void setRootItem(final String id, final String text, final StateToken stateToken) {
 	if (treePanel == null || treePanel.getNodeById(id) == null) {
-	    createTreePanel(id, text, stateToken, actions);
+	    createTreePanel(id, text, stateToken);
 	}
     }
 
-    private void createItemMenu(final String nodeId, final ActionCollection<StateToken> actionCollection,
-	    final StateToken stateToken) {
+    private void createItemMenu(final String nodeId, final ActionItemCollection<StateToken> actionCollection) {
 	DeferredCommand.addCommand(new Command() {
 	    public void execute() {
 		Menu menu = null;
 		if (actionCollection != null) {
 		    menu = new Menu();
 		    // Remove if when retrieved rights of siblings
-		    for (final ActionDescriptor<StateToken> action : actionCollection) {
+		    for (final ActionItem<StateToken> actionItem : actionCollection) {
+			final ActionDescriptor<StateToken> action = actionItem.getAction();
 			final Item item = new Item(action.getText());
 			item.setIcon(action.getIconUrl());
 			menu.addItem(item);
 			item.addListener(new BaseItemListenerAdapter() {
 			    public void onClick(final BaseItem item, final EventObject e) {
-				DeferredCommand.addCommand(new Command() {
-				    public void execute() {
-					doAction(action, stateToken);
-				    }
-				});
+				doAction(actionItem);
 			    }
 			});
 		    }
@@ -220,17 +217,16 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 	});
     }
 
-    private void createTreePanel(final String rootId, final String text, final StateToken stateToken,
-	    final ActionCollection<StateToken> actions) {
+    private void createTreePanel(final String rootId, final String text, final StateToken stateToken) {
 	if (treePanel != null) {
 	    clear();
 	}
 	treePanel = new TreePanel();
 	treePanel.setAnimate(true);
 	treePanel.setBorder(false);
-	treePanel.setRootVisible(true);
+	treePanel.setRootVisible(false);
 	treePanel.setUseArrows(true);
-	// treePanel.setSelectionModel(new MultiSelectionModel());
+	treePanel.setSelectionModel(new MultiSelectionModel());
 	final TreeNode root = new TreeNode();
 	root.setAllowDrag(false);
 	root.setExpanded(true);
@@ -238,7 +234,6 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 	root.setText(text);
 	root.setHref("#" + stateToken);
 	root.expand();
-	createItemMenu(rootId, actions, stateToken);
 	treePanel.addListener(new TreePanelListenerAdapter() {
 	    public boolean doBeforeNodeDrop(final TreePanel treePanel, final TreeNode target, final DragData dragData,
 		    final String point, final DragDrop source, final TreeNode dropNode,
@@ -284,8 +279,8 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 	ws.getEntityWorkspace().setContext(panel);
     }
 
-    private void doAction(final ActionDescriptor<StateToken> action, final StateToken stateToken) {
-	actionManager.doAction(action, stateToken);
+    private void doAction(final ActionItem<StateToken> actionItem) {
+	actionManager.doAction(actionItem);
     }
 
     private TreeNode getNode(final String id) {

@@ -20,11 +20,12 @@
 
 package org.ourproject.kune.workspace.client.ctxnav;
 
+import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_FOLDER;
+
 import java.util.HashMap;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.actions.ActionCollection;
-import org.ourproject.kune.platf.client.actions.ActionCollectionSet;
+import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.actions.DragDropContentRegistry;
@@ -58,7 +59,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     private final Session session;
     private final Provider<ContentServiceAsync> contentServiceProvider;
     private final I18nUITranslationService i18n;
-    private final HashMap<StateToken, ActionCollection<StateToken>> actionsByItem;
+    private final HashMap<StateToken, ActionItemCollection<StateToken>> actionsByItem;
     private final EntityTitle entityTitle;
     private boolean editOnNextStateChange;
     private final ContentIconsRegistry contentIconsRegistry;
@@ -80,7 +81,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	this.dragDropContentRegistry = dragDropContentRegistry;
 	this.actionRegistry = actionRegistry;
 	this.toolbar = toolbar;
-	actionsByItem = new HashMap<StateToken, ActionCollection<StateToken>>();
+	actionsByItem = new HashMap<StateToken, ActionItemCollection<StateToken>>();
 	editOnNextStateChange = false;
     }
 
@@ -190,30 +191,33 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	// childs to view)
 	final ContainerDTO root = state.getRootContainer();
 	if (root != null) {
-	    final ActionCollectionSet<StateToken> set = actionRegistry.selectCurrentActions(containerRights, root
-		    .getTypeId());
-	    view.setRootItem(genId(root.getStateToken()), i18n.t(root.getName()), root.getStateToken(), set
-		    .getItemActions());
-	    toolbar.showActions(set.getToolbarActions(), false);
+	    view.setRootItem(genId(root.getStateToken()), i18n.t(root.getName()), root.getStateToken());
 	    createChildItems(root, containerRights);
-	    actionsByItem.put(root.getStateToken(), set.getToolbarActions());
 	}
 
 	// Do the path to our current content
 	createTreePath(stateToken, container.getAbsolutePath(), containerRights);
 
 	// Process our current content/container
+	final ActionItemCollection<StateToken> actionItems = new ActionItemCollection<StateToken>();
 	if (state.hasDocument()) {
 	    rights = state.getContentRights();
-	    addItem(state.getTitle(), state.getTypeId(), state.getMimeType(), state.getStatus(), stateToken, container
-		    .getStateToken(), rights, false);
+	    final ActionItemCollection<StateToken> contentActions = addItem(state.getTitle(), state.getTypeId(), state
+		    .getMimeType(), state.getStatus(), stateToken, container.getStateToken(), rights, false);
+	    final ActionItemCollection<StateToken> containerActions = actionRegistry.getCurrentActions(container
+		    .getStateToken(), container.getTypeId(), containerRights, true);
+	    actionItems.addAll(containerActions);
+	    actionItems.addAll(contentActions);
+
 	} else {
 	    rights = containerRights;
-	    addItem(container.getName(), container.getTypeId(), null, ContentStatusDTO.publishedOnline, container
-		    .getStateToken(), container.getStateToken().clone().setFolder(container.getParentFolderId()),
-		    containerRights, false);
+	    final ActionItemCollection<StateToken> containerActions = addItem(container.getName(), container
+		    .getTypeId(), null, ContentStatusDTO.publishedOnline, container.getStateToken(), container
+		    .getStateToken().clone().setFolder(container.getParentFolderId()), containerRights, false);
+	    actionItems.addAll(containerActions);
 	}
 
+	actionsByItem.put(stateToken, actionItems);
 	// Process container childs
 	createChildItems(container, containerRights);
 
@@ -227,7 +231,6 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	    if (select) {
 		selectItem(stateToken);
 	    }
-
 	}
     }
 
@@ -237,20 +240,21 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	actionsByItem.clear();
     }
 
-    private void addItem(final String title, final String contentTypeId, final BasicMimeTypeDTO mimeType,
-	    final ContentStatusDTO status, final StateToken stateToken, final StateToken parentStateToken,
-	    final AccessRightsDTO rights, final boolean isNodeSelected) {
+    private ActionItemCollection<StateToken> addItem(final String title, final String contentTypeId,
+	    final BasicMimeTypeDTO mimeType, final ContentStatusDTO status, final StateToken stateToken,
+	    final StateToken parentStateToken, final AccessRightsDTO rights, final boolean isNodeSelected) {
 
-	final ActionCollectionSet<StateToken> set = actionRegistry.selectCurrentActions(rights, contentTypeId);
-	toolbar.showActions(set.getToolbarActions(), isNodeSelected);
+	final ActionItemCollection<StateToken> toolbarActions = actionRegistry.getCurrentActions(stateToken,
+		contentTypeId, rights, true);
 
-	final String contentTypeIcon = contentIconsRegistry.getContentTypeIcon(contentTypeId, mimeType);
+	final String contentTypeIcon = contentTypeId.equals(TYPE_FOLDER) ? "" : contentIconsRegistry
+		.getContentTypeIcon(contentTypeId, mimeType);
 	final ContextNavigatorItem item = new ContextNavigatorItem(genId(stateToken), genId(parentStateToken),
 		contentTypeIcon, title, status, stateToken, dragDropContentRegistry.isDraggable(contentTypeId, rights
 			.isAdministrable()), dragDropContentRegistry.isDroppable(contentTypeId, rights
-			.isAdministrable()), set.getItemActions());
+			.isAdministrable()), actionRegistry.getCurrentActions(stateToken, contentTypeId, rights, false));
 	view.addItem(item);
-	actionsByItem.put(stateToken, set.getToolbarActions());
+	return toolbarActions;
     }
 
     private void createChildItems(final ContainerDTO container, final AccessRightsDTO containerRights) {

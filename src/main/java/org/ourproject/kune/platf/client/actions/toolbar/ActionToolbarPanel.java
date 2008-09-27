@@ -5,11 +5,11 @@ import java.util.HashMap;
 
 import org.ourproject.kune.platf.client.actions.ActionButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionButtonSeparator;
+import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.ActionMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionPosition;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.skel.Toolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
@@ -35,14 +35,12 @@ public class ActionToolbarPanel implements ActionToolbarView {
     private final ArrayList<Widget> removableToolbarItems;
     private final HashMap<String, Item> menuItems;
     private final WorkspaceSkeleton ws;
-    private final Session session;
     private final Provider<ActionManager> actionManagerProvider;
     private final Position position;
 
-    public ActionToolbarPanel(final Position position, final Session session,
-	    final Provider<ActionManager> actionManagerProvider, final WorkspaceSkeleton ws) {
+    public ActionToolbarPanel(final Position position, final Provider<ActionManager> actionManagerProvider,
+	    final WorkspaceSkeleton ws) {
 	this.position = position;
-	this.session = session;
 	this.actionManagerProvider = actionManagerProvider;
 	this.ws = ws;
 	toolbarMenus = new HashMap<String, Menu>();
@@ -51,7 +49,8 @@ public class ActionToolbarPanel implements ActionToolbarView {
 
     }
 
-    public void addButtonAction(final ActionButtonDescriptor<StateToken> action) {
+    public void addButtonAction(final ActionItem<StateToken> actionItem) {
+	final ActionButtonDescriptor<StateToken> action = (ActionButtonDescriptor<StateToken>) actionItem.getAction();
 	final ActionPosition pos = action.getActionPosition();
 	final ToolbarButton button = new ToolbarButton();
 	final String text = action.getText();
@@ -62,7 +61,7 @@ public class ActionToolbarPanel implements ActionToolbarView {
 	button.addListener(new ButtonListenerAdapter() {
 	    @Override
 	    public void onClick(final Button button, final EventObject e) {
-		actionManagerProvider.get().doAction(action, session.getCurrentStateToken());
+		actionManagerProvider.get().doAction(actionItem);
 	    }
 	});
 	if (iconUrl != null) {
@@ -81,14 +80,15 @@ public class ActionToolbarPanel implements ActionToolbarView {
 	removableToolbarItems.add(button);
     }
 
-    public void addMenuAction(final ActionMenuDescriptor<StateToken> action, final boolean enable) {
+    public void addMenuAction(final ActionItem<StateToken> actionItem, final boolean enable) {
+	final ActionMenuDescriptor<StateToken> action = (ActionMenuDescriptor<StateToken>) actionItem.getAction();
 	final String menuTitle = action.getParentMenuTitle();
 	final String menuSubTitle = action.getParentSubMenuTitle();
 	final ActionPosition pos = action.getActionPosition();
 	final String itemKey = genMenuKey(pos, menuTitle, menuSubTitle, action.getText());
 	Item item = menuItems.get(itemKey);
 	if (item == null) {
-	    item = createToolbarMenu(pos, menuTitle, menuSubTitle, action);
+	    item = createToolbarMenu(pos, menuTitle, menuSubTitle, actionItem);
 	    menuItems.put(itemKey, item);
 	}
 	if (enable) {
@@ -139,11 +139,12 @@ public class ActionToolbarPanel implements ActionToolbarView {
     }
 
     private Item createToolbarMenu(final ActionPosition toolBarPos, final String menuTitle, final String menuSubTitle,
-	    final ActionMenuDescriptor<StateToken> action) {
+	    final ActionItem<StateToken> actionItem) {
+	final ActionMenuDescriptor<StateToken> action = (ActionMenuDescriptor<StateToken>) actionItem.getAction();
 	final Item item = new Item(action.getText(), new BaseItemListenerAdapter() {
 	    @Override
 	    public void onClick(BaseItem item, EventObject e) {
-		actionManagerProvider.get().doAction(action, session.getCurrentStateToken());
+		actionManagerProvider.get().doAction(actionItem);
 	    }
 	});
 	item.setIcon(action.getIconUrl());
@@ -199,7 +200,8 @@ public class ActionToolbarPanel implements ActionToolbarView {
 
     private String genMenuKey(final ActionPosition pos, final String menuTitle, final String menuSubTitle,
 	    final String actionText) {
-	final String basePart = "km-" + pos.toString() + "-" + menuTitle;
+
+	final String basePart = "km-ctx-" + pos.toString().substring(0, 2) + "-" + menuTitle;
 	final String subMenuPart = menuSubTitle != null ? "-subm-" + menuSubTitle : "";
 	final String itemPart = actionText != null ? "-item-" + actionText : "";
 	return basePart + subMenuPart + itemPart;

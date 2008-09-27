@@ -20,16 +20,16 @@ public class FileUploaderPresenter implements FileUploader {
     }
 
     public boolean checkFolderChange() {
-	final StateToken currentStateToken = session.getCurrentStateToken();
+	final StateToken currentFolderStateToken = session.getCurrentStateToken().clone().clearDocument();
 	if (sameContainer()) {
-	    view.setUploadParams(session.getUserHash(), currentStateToken.toString());
+	    view.setUploadParams(session.getUserHash(), currentFolderStateToken.toString());
 	    return true;
 	}
 	if (view.hasUploadingFiles()) {
 	    return false;
 	} else {
-	    currentUploadStateToken = currentStateToken;
-	    view.setUploadParams(session.getUserHash(), currentStateToken.toString());
+	    currentUploadStateToken = currentFolderStateToken;
+	    view.setUploadParams(session.getUserHash(), currentFolderStateToken.toString());
 	    return true;
 	}
     }

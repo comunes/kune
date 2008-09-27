@@ -5,10 +5,10 @@ import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_DOCUMENT;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_FOLDER;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_GALLERY;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_ROOT;
+import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_UPLOADEDFILE;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_WIKI;
 
 import org.ourproject.kune.platf.client.actions.ActionButtonDescriptor;
-import org.ourproject.kune.platf.client.actions.ActionButtonSeparator;
 import org.ourproject.kune.platf.client.actions.ActionDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionMenuDescriptor;
@@ -174,16 +174,16 @@ public class DocumentClientActions {
 	    }
 	});
 
-	final ActionButtonDescriptor<StateToken> refresh = new ActionButtonDescriptor<StateToken>(AccessRolDTO.Viewer,
+	final ActionMenuDescriptor<StateToken> refresh = new ActionMenuDescriptor<StateToken>(AccessRolDTO.Viewer,
 		ActionPosition.topbar, new Listener<StateToken>() {
 		    public void onEvent(final StateToken stateToken) {
 			stateManager.reload();
 			contextNavigator.selectItem(stateToken);
 		    }
 		});
+	refresh.setParentMenuTitle(i18n.t("Folder"));
+	refresh.setTextDescription(i18n.t("Refresh"));
 	refresh.setIconUrl("images/nav/refresh.png");
-	refresh.setToolTip(i18n.t("Refresh"));
-	refresh.setLeftSeparator(ActionButtonSeparator.fill);
 
 	final ActionDescriptor<StateToken> uploadFile = createUploadAction(i18n.t("Upload file"),
 		"images/nav/upload.png", i18n.t("Upload some files (images, PDFs, ...)"), null);
@@ -201,19 +201,26 @@ public class DocumentClientActions {
 	contextActionRegistry.addAction(TYPE_FOLDER, addDoc);
 	contextActionRegistry.addAction(TYPE_FOLDER, addFolder);
 	contextActionRegistry.addAction(TYPE_FOLDER, delContainer);
+	contextActionRegistry.addAction(TYPE_FOLDER, refresh);
 	contextActionRegistry.addAction(TYPE_FOLDER, rename);
 	contextActionRegistry.addAction(TYPE_FOLDER, goGroupHome);
-	contextActionRegistry.addAction(TYPE_FOLDER, refresh);
 	contextActionRegistry.addAction(TYPE_FOLDER, uploadFile);
 
 	contextActionRegistry.addAction(TYPE_BLOG, go);
 	contextActionRegistry.addAction(TYPE_BLOG, uploadFile);
-	contextActionRegistry.addAction(TYPE_BLOG, setAsDefGroupContent);
 	contextActionRegistry.addAction(TYPE_BLOG, refresh);
+	contextActionRegistry.addAction(TYPE_BLOG, setAsDefGroupContent);
 
 	contextActionRegistry.addAction(TYPE_GALLERY, go);
 	contextActionRegistry.addAction(TYPE_GALLERY, goGroupHome);
 	contextActionRegistry.addAction(TYPE_GALLERY, refresh);
+
+	contextActionRegistry.addAction(TYPE_UPLOADEDFILE, go);
+	contextActionRegistry.addAction(TYPE_UPLOADEDFILE, delContent);
+	contextActionRegistry.addAction(TYPE_UPLOADEDFILE, rename);
+	// contextActionRegistry.addAction(TYPE_UPLOADEDFILE, goGroupHome);
+	// contextActionRegistry.addAction(TYPE_UPLOADEDFILE, refresh);
+	contextActionRegistry.addAction(TYPE_UPLOADEDFILE, setAsDefGroupContent);
 
 	contextActionRegistry.addAction(TYPE_WIKI, go);
 	contextActionRegistry.addAction(TYPE_WIKI, goGroupHome);
@@ -223,15 +230,15 @@ public class DocumentClientActions {
 	contextActionRegistry.addAction(TYPE_ROOT, addFolder);
 	contextActionRegistry.addAction(TYPE_ROOT, addGallery);
 	contextActionRegistry.addAction(TYPE_ROOT, addWiki);
-	contextActionRegistry.addAction(TYPE_ROOT, goGroupHome);
 	contextActionRegistry.addAction(TYPE_ROOT, refresh);
+	contextActionRegistry.addAction(TYPE_ROOT, goGroupHome);
 	contextActionRegistry.addAction(TYPE_ROOT, uploadFile);
 
 	contextActionRegistry.addAction(TYPE_DOCUMENT, go);
 	contextActionRegistry.addAction(TYPE_DOCUMENT, delContent);
 	contextActionRegistry.addAction(TYPE_DOCUMENT, rename);
-	contextActionRegistry.addAction(TYPE_DOCUMENT, goGroupHome);
-	contextActionRegistry.addAction(TYPE_DOCUMENT, refresh);
+	// contextActionRegistry.addAction(TYPE_DOCUMENT, goGroupHome);
+	// contextActionRegistry.addAction(TYPE_DOCUMENT, refresh);
 	contextActionRegistry.addAction(TYPE_DOCUMENT, setAsDefGroupContent);
     }
 
@@ -259,16 +266,16 @@ public class DocumentClientActions {
 	return addFolder;
     }
 
-    private ActionDescriptor<StateToken> createUploadAction(final String textDescription, final String iconUrl,
+    private ActionButtonDescriptor<StateToken> createUploadAction(final String textDescription, final String iconUrl,
 	    final String toolTip, final String permitedExtensions) {
 	final ActionButtonDescriptor<StateToken> uploadFile;
 	uploadFile = new ActionButtonDescriptor<StateToken>(AccessRolDTO.Editor, ActionPosition.bootombarAndItemMenu,
 		new Listener<StateToken>() {
 		    public void onEvent(final StateToken token) {
 			if (permitedExtensions != null) {
-			    fileUploaderProvider.get().setPermittedExtensions(permitedExtensions);
+			    // fileUploaderProvider.get().setPermittedExtensions(permitedExtensions);
 			} else {
-			    fileUploaderProvider.get().resetPermittedExtensions();
+			    // fileUploaderProvider.get().resetPermittedExtensions();
 			}
 			fileUploaderProvider.get().show();
 		    }

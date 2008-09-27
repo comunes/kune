@@ -12,20 +12,26 @@ public class ActionManager {
 	this.ws = ws;
     }
 
-    public void doAction(final ActionDescriptor<?> action, final Object parameter) {
+    public void doAction(final ActionItem<?> actionItem) {
+	final ActionDescriptor<?> action = actionItem.getAction();
+	final Object item = actionItem.getItem();
 	if (action.isMustBeConfirmed()) {
 	    ws.askConfirmation(action.getConfirmationTitle(), action.getConfirmationText(), new Listener0() {
 		public void onEvent() {
-		    action.fireOnPerformCall(parameter);
+		    fire(action, item);
 		}
 	    }, new Listener0() {
 		public void onEvent() {
-		    action.fireOnNotConfirmed(parameter);
+		    action.fireOnNotConfirmed(item);
 		}
 	    });
 	} else {
-	    action.fireOnPerformCall(parameter);
+	    fire(action, item);
 	}
+    }
+
+    private void fire(final ActionDescriptor<?> action, final Object parameter) {
+	action.fireOnPerformCall(parameter);
     }
 
 }

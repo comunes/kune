@@ -331,9 +331,8 @@ public class KuneModule extends AbstractModule {
 	register(Singleton.class, new Factory<ContextNavigator>(ContextNavigator.class) {
 	    public ContextNavigator create() {
 		final ActionToolbarPanel contextNavigatorToolbar = new ActionToolbarPanel(
-			ActionToolbarPanel.Position.context, $(Session.class), $$(ActionManager.class),
-			$(WorkspaceSkeleton.class));
-		final ActionToolbar toolbar = new ActionToolbarPresenter($(Session.class), contextNavigatorToolbar,
+			ActionToolbarPanel.Position.context, $$(ActionManager.class), $(WorkspaceSkeleton.class));
+		final ActionToolbar toolbar = new ActionToolbarPresenter(contextNavigatorToolbar,
 			$(ContextActionRegistry.class));
 
 		final ContextNavigatorPresenter presenter = new ContextNavigatorPresenter($(StateManager.class),

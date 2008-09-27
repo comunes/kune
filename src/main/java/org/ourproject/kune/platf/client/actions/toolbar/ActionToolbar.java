@@ -1,6 +1,6 @@
 package org.ourproject.kune.platf.client.actions.toolbar;
 
-import org.ourproject.kune.platf.client.actions.ActionCollection;
+import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
 public interface ActionToolbar {
@@ -9,6 +9,6 @@ public interface ActionToolbar {
 
     void disableMenusAndClearButtons();
 
-    void showActions(ActionCollection<StateToken> actionCollection, boolean isItemSelected);
+    void showActions(ActionItemCollection<StateToken> actionItemCollection, boolean isItemSelected);
 
 }

@@ -26,6 +26,13 @@ public class FileUploaderPresenterTest {
     }
 
     @Test
+    public void testFirstAddFromDocInSameContainer() {
+	Mockito.stub(session.getCurrentStateToken()).toReturn(new StateToken("group.tool.1.1"));
+	assertTrue(presenter.checkFolderChange());
+	Mockito.verify(view, Mockito.times(1)).setUploadParams(SOMEUSER_HASH, "group.tool.1");
+    }
+
+    @Test
     public void testFirstAddInSameContainer() {
 	Mockito.stub(session.getCurrentStateToken()).toReturn(new StateToken("group.tool.1"));
 	assertTrue(presenter.checkFolderChange());

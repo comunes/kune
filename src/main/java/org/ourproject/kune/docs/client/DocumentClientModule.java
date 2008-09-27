@@ -120,9 +120,8 @@ public class DocumentClientModule extends AbstractModule {
 	register(ToolGroup.class, new Factory<DocumentContent>(DocumentContent.class) {
 	    public DocumentContent create() {
 		final ActionToolbarPanel contentNavigatorToolbar = new ActionToolbarPanel(
-			ActionToolbarPanel.Position.content, $(Session.class), $$(ActionManager.class),
-			$(WorkspaceSkeleton.class));
-		final ActionToolbar toolbar = new ActionToolbarPresenter($(Session.class), contentNavigatorToolbar,
+			ActionToolbarPanel.Position.content, $$(ActionManager.class), $(WorkspaceSkeleton.class));
+		final ActionToolbar toolbar = new ActionToolbarPresenter(contentNavigatorToolbar,
 			$(ContentActionRegistry.class));
 
 		final DocumentContentPresenter presenter = new DocumentContentPresenter($(StateManager.class),

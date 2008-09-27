@@ -22,45 +22,37 @@ public class ActionRegistry<T> {
 	return enableCondition != null ? enableCondition.mustBeEnabled(T) : true;
     }
 
-    public void removeAction(final String contentTypeId, final ActionDescriptor<T> action) {
-	actions.get(contentTypeId).remove(action);
-    }
-
-    public ActionCollectionSet<T> selectCurrentActions(final AccessRightsDTO rights, final String contentTypeId) {
-	final ActionCollectionSet<T> set = new ActionCollectionSet<T>();
-	boolean add = false;
+    public ActionItemCollection<T> getCurrentActions(final T item, final String contentTypeId,
+	    final AccessRightsDTO rights, final boolean toolbarItems) {
+	final ActionItemCollection<T> collection = new ActionItemCollection<T>();
 
 	for (final ActionDescriptor<T> action : getActions(contentTypeId)) {
-	    switch (action.getAccessRol()) {
-	    case Administrator:
-		add = rights.isAdministrable();
-		break;
-	    case Editor:
-		add = rights.isEditable();
-		break;
-	    case Viewer:
-		add = rights.isVisible();
-		break;
-	    }
-	    if (add) {
-		switch (action.getActionPosition()) {
-		case topbarAndItemMenu:
-		    set.getItemActions().add(action);
-		case topbar:
-		    set.getToolbarActions().add(action);
-		    break;
-		case bootombarAndItemMenu:
-		    set.getItemActions().add(action);
-		case bottombar:
-		    set.getToolbarActions().add(action);
-		    break;
-		case itemMenu:
-		    set.getItemActions().add(action);
-		    break;
+	    if (mustAdd(rights, action)) {
+		if (toolbarItems) {
+		    switch (action.getActionPosition()) {
+		    case topbarAndItemMenu:
+		    case topbar:
+		    case bootombarAndItemMenu:
+		    case bottombar:
+			collection.add(new ActionItem<T>(action, item));
+			break;
+		    }
+		} else {
+		    switch (action.getActionPosition()) {
+		    case itemMenu:
+		    case topbarAndItemMenu:
+		    case bootombarAndItemMenu:
+			collection.add(new ActionItem<T>(action, item));
+			break;
+		    }
 		}
 	    }
 	}
-	return set;
+	return collection;
+    }
+
+    public void removeAction(final String contentTypeId, final ActionDescriptor<T> action) {
+	actions.get(contentTypeId).remove(action);
     }
 
     private ActionCollection<T> getActions(final String contentTypeId) {
@@ -70,5 +62,17 @@ public class ActionRegistry<T> {
 	    actions.put(contentTypeId, actionColl);
 	}
 	return actionColl;
+    }
+
+    private boolean mustAdd(final AccessRightsDTO rights, final ActionDescriptor<T> action) {
+	switch (action.getAccessRol()) {
+	case Administrator:
+	    return rights.isAdministrable();
+	case Editor:
+	    return rights.isEditable();
+	case Viewer:
+	default:
+	    return rights.isVisible();
+	}
     }
 }

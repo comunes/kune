@@ -23,7 +23,7 @@ package org.ourproject.kune.docs.client.cnt;
 import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.docs.client.cnt.folder.viewer.FolderViewer;
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReader;
-import org.ourproject.kune.platf.client.actions.ActionCollectionSet;
+import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.dto.StateDTO;
@@ -188,15 +188,17 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
 
     private void setState(final StateDTO state) {
 	content = state;
-	ActionCollectionSet<StateToken> set;
 	final String typeId = content.getTypeId();
+	ActionItemCollection<StateToken> collection;
 	if (content.hasDocument()) {
-	    set = actionRegistry.selectCurrentActions(content.getContentRights(), typeId);
+	    collection = actionRegistry.getCurrentActions(content.getStateToken(), typeId, content.getContentRights(),
+		    true);
 	} else {
-	    set = actionRegistry.selectCurrentActions(content.getContainerRights(), typeId);
+	    collection = actionRegistry.getCurrentActions(content.getStateToken(), typeId,
+		    content.getContainerRights(), true);
 	}
 	toolbar.disableMenusAndClearButtons();
-	toolbar.showActions(set.getToolbarActions(), true);
+	toolbar.showActions(collection, true);
 	showContent();
     }
 
