@@ -63,6 +63,8 @@ public class FileDownloadManager extends HttpServlet {
 
 	final String userHash = req.getParameter("hash");
 	final StateToken stateToken = new StateToken(req.getParameter("token"));
+	final String downloadS = req.getParameter("download");
+	final boolean download = downloadS != null && downloadS.equals("true") ? true : false;
 	final Content cnt = getContentForDownload(userHash, stateToken);
 
 	final String absDir = kuneProperties.get(KuneProperties.UPLOAD_LOCATION) + FileUtils.toDir(stateToken);
@@ -70,15 +72,16 @@ public class FileDownloadManager extends HttpServlet {
 	final String absFilename = absDir + filename;
 
 	doBuildResp(resp, absFilename, cnt.getTitle(), cnt.getMimeType(), FileUtils
-		.getFileNameExtension(filename, true));
+		.getFileNameExtension(filename, true), download);
     }
 
     private void doBuildResp(final HttpServletResponse resp, final String filename, final String otherName,
-	    final BasicMimeType mimeType, final String extension) throws FileNotFoundException, IOException {
+	    final BasicMimeType mimeType, final String extension, final boolean download) throws FileNotFoundException,
+	    IOException {
 	final File file = new File(filename);
 
 	resp.setContentLength((int) file.length());
-	if (mimeType == null) {
+	if (mimeType == null || download) {
 	    resp.setContentType("application/x-download");
 	} else if (mimeType.getType().equals("image") || mimeType.toString().equals("text/plain")) {
 	    resp.setContentType(mimeType.toString());

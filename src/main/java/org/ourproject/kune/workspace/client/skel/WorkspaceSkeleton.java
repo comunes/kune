@@ -5,8 +5,8 @@ import org.ourproject.kune.workspace.client.themes.WsTheme;
 
 import com.calclab.suco.client.listener.Listener0;
 import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.DeferredCommand;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.ExtElement;
@@ -89,7 +89,8 @@ public class WorkspaceSkeleton {
 	// window.add(urlFrame);
 	// window.show();
 	// window.close();
-	Window.open(url, "", "_blank");
+	// Window.open(url, "", "_blank");
+	DOM.setElementAttribute(RootPanel.get("__download").getElement(), "src", url);
     }
 
     public void promptMessage(final String title, final String message, final Listener0 onEnter) {

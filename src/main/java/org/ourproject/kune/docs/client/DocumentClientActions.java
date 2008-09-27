@@ -334,7 +334,8 @@ public class DocumentClientActions {
     }
 
     private void downloadContent(final StateToken token) {
-	final String url = "/kune/servlets/FileDownloadManager?token=" + token + "&hash=" + session.getUserHash();
+	final String url = "/kune/servlets/FileDownloadManager?token=" + token + "&hash=" + session.getUserHash()
+		+ "&download=true";
 	ws.openUrl(url);
     }
 }
