@@ -112,7 +112,8 @@ public class DocumentClientModule extends AbstractModule {
 	register(ToolGroup.class, new Factory<DocumentClientActions>(DocumentClientActions.class) {
 	    public DocumentClientActions create() {
 		return new DocumentClientActions($(I18nUITranslationService.class), $(ContextNavigator.class),
-			$(Session.class), $(StateManager.class), $$(ContentServiceAsync.class), $$(FileUploader.class),
+			$(Session.class), $(StateManager.class), $(WorkspaceSkeleton.class),
+			$$(ContentServiceAsync.class), $$(FileUploader.class), $(ContentActionRegistry.class),
 			$(ContextActionRegistry.class));
 	    }
 	});

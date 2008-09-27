@@ -6,6 +6,7 @@ import org.ourproject.kune.workspace.client.themes.WsTheme;
 import com.calclab.suco.client.listener.Listener0;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.ExtElement;
@@ -41,7 +42,8 @@ public class WorkspaceSkeleton {
 	entity.addToEntityMainHeader(widget);
     }
 
-    public void askConfirmation(final String title, final String message, final Listener0 onConfirmed, final Listener0 onCancel) {
+    public void askConfirmation(final String title, final String message, final Listener0 onConfirmed,
+	    final Listener0 onCancel) {
 	MessageBox.confirm(title, message, new MessageBox.ConfirmCallback() {
 	    public void execute(final String btnID) {
 		if (btnID.equals("yes")) {
@@ -79,6 +81,15 @@ public class WorkspaceSkeleton {
 
     public void mask(final String message) {
 	extRootBody.mask(message, "x-mask-loading");
+    }
+
+    public void openUrl(final String url) {
+	// final Frame urlFrame = new Frame(url);
+	// final Window window = new Window();
+	// window.add(urlFrame);
+	// window.show();
+	// window.close();
+	Window.open(url, "", "_blank");
     }
 
     public void promptMessage(final String title, final String message, final Listener0 onEnter) {
