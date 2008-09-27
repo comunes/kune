@@ -60,6 +60,11 @@ public class FileUtilsTest {
     }
 
     @Test
+    public void testGetFilenameExtNull() {
+	assertEquals("", FileUtils.getFileNameExtension(null, true));
+    }
+
+    @Test
     public void testIfSeq101return102() {
 	assertEquals(SIMPLE_FILE_NAME + " 102", FileUtils.getNextSequentialFileName(SIMPLE_FILE_NAME + " 101"));
     }

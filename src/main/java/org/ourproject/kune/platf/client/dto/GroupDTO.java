@@ -29,7 +29,7 @@ public class GroupDTO implements IsSerializable {
     private String longName;
     private String publicDesc;
     private GroupType type;
-    private ContentDTO defaultContent;
+    private ContentSimpleDTO defaultContent;
     private LicenseDTO defaultLicense;
     private String workspaceTheme;
     private String tags;
@@ -94,7 +94,7 @@ public class GroupDTO implements IsSerializable {
 	return true;
     }
 
-    public ContentDTO getDefaultContent() {
+    public ContentSimpleDTO getDefaultContent() {
 	return defaultContent;
     }
 
@@ -142,7 +142,7 @@ public class GroupDTO implements IsSerializable {
 	return result;
     }
 
-    public void setDefaultContent(final ContentDTO defaultContent) {
+    public void setDefaultContent(final ContentSimpleDTO defaultContent) {
 	this.defaultContent = defaultContent;
     }
 

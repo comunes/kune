@@ -122,6 +122,11 @@ public class Content implements HasStateToken {
     @Embedded
     private BasicMimeType mimeType;
 
+    /**
+     * filename if is an uploaded content
+     */
+    private String filename;
+
     public Content() {
 	translations = new ArrayList<ContentTranslation>();
 	authors = new ArrayList<User>();
@@ -177,6 +182,10 @@ public class Content implements HasStateToken {
 
     public Date getDeletedOn() {
 	return deletedOn;
+    }
+
+    public String getFilename() {
+	return filename;
     }
 
     public Long getId() {
@@ -283,6 +292,10 @@ public class Content implements HasStateToken {
 
     public void setDeletedOn(final Date date) {
 	this.deletedOn = date;
+    }
+
+    public void setFilename(final String filename) {
+	this.filename = filename;
     }
 
     public void setId(final Long id) {

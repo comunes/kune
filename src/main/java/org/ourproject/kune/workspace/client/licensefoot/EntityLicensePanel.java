@@ -21,7 +21,7 @@ package org.ourproject.kune.workspace.client.licensefoot;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.workspace.client.skel.TitleBar;
+import org.ourproject.kune.workspace.client.skel.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.Window;
@@ -42,7 +42,7 @@ public class EntityLicensePanel implements EntityLicenseView {
 	copyright = new Label();
 	image = new Image();
 	license = new Label();
-	final TitleBar bottomTitle = ws.getEntityWorkspace().getBottomTitle();
+	final SimpleToolbar bottomTitle = ws.getEntityWorkspace().getBottomTitle();
 	bottomTitle.add(copyright);
 	bottomTitle.add(license);
 	bottomTitle.addSpacer();

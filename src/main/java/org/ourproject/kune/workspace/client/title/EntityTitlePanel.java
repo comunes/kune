@@ -22,7 +22,7 @@ package org.ourproject.kune.workspace.client.title;
 
 import org.ourproject.kune.platf.client.ui.EditableClickListener;
 import org.ourproject.kune.platf.client.ui.EditableIconLabel;
-import org.ourproject.kune.workspace.client.skel.TitleBar;
+import org.ourproject.kune.workspace.client.skel.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.ui.Image;
@@ -42,7 +42,7 @@ public class EntityTitlePanel implements EntityTitleView {
 	});
 	dateLabel = new Label();
 
-	final TitleBar wsTitle = ws.getEntityWorkspace().getTitle();
+	final SimpleToolbar wsTitle = ws.getEntityWorkspace().getTitle();
 	wsTitle.add(icon);
 	wsTitle.add(titleLabel);
 	wsTitle.addFill();

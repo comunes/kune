@@ -12,20 +12,23 @@ public class FileUtils {
      * For filename extension info see:
      * http://en.wikipedia.org/wiki/File_name_extension
      * 
-     * @param fileName
+     * @param filename
      * @return
      */
-    public static String getFileNameExtension(final String fileName, final boolean withDot) {
+    public static String getFileNameExtension(final String filename, final boolean withDot) {
 	// also we can use FilenameUtils
-	final int dotIndex = fileName.lastIndexOf(".");
+	if (filename == null) {
+	    return "";
+	}
+	final int dotIndex = filename.lastIndexOf(".");
 	if (dotIndex == -1 || dotIndex == 0) {
 	    return "";
 	} else {
 	    if (withDot) {
-		final String ext = fileName.substring(dotIndex);
+		final String ext = filename.substring(dotIndex);
 		return ext.length() == 1 ? "" : ext;
 	    } else {
-		return fileName.substring(dotIndex + 1);
+		return filename.substring(dotIndex + 1);
 	    }
 	}
     }

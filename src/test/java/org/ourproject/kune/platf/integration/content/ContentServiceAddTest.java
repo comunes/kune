@@ -11,7 +11,7 @@ import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.ContainerSimpleDTO;
-import org.ourproject.kune.platf.client.dto.ContentDTO;
+import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
@@ -48,7 +48,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 	final StateDTO added = contentService.addContent(session.getHash(), defaultContent.getContainer()
 		.getStateToken(), title);
 	assertNotNull(added);
-	final List<ContentDTO> contents = added.getContainer().getContents();
+	final List<ContentSimpleDTO> contents = added.getContainer().getContents();
 	assertEquals(title, added.getTitle());
 	assertEquals(2, contents.size());
 	assertEquals(cntRights, added.getContentRights());

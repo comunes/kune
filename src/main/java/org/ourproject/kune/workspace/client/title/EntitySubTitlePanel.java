@@ -21,7 +21,7 @@
 package org.ourproject.kune.workspace.client.title;
 
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.workspace.client.skel.TitleBar;
+import org.ourproject.kune.workspace.client.skel.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.ui.Label;
@@ -35,7 +35,7 @@ public class EntitySubTitlePanel implements EntitySubTitleView {
 	subTitleLeftLabel = new Label();
 	subTitleRightLabel = new Label();
 
-	final TitleBar wsSubTitle = ws.getEntityWorkspace().getSubTitle();
+	final SimpleToolbar wsSubTitle = ws.getEntityWorkspace().getSubTitle();
 	wsSubTitle.add(subTitleLeftLabel);
 	wsSubTitle.addFill();
 	wsSubTitle.add(subTitleRightLabel);

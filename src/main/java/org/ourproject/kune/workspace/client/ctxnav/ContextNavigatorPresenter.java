@@ -34,7 +34,7 @@ import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.ContainerSimpleDTO;
-import org.ourproject.kune.platf.client.dto.ContentDTO;
+import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
@@ -232,6 +232,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 		selectItem(stateToken);
 	    }
 	}
+	toolbar.attach();
     }
 
     protected void clear() {
@@ -258,7 +259,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     }
 
     private void createChildItems(final ContainerDTO container, final AccessRightsDTO containerRights) {
-	for (final ContentDTO content : container.getContents()) {
+	for (final ContentSimpleDTO content : container.getContents()) {
 	    addItem(content.getTitle(), content.getTypeId(), content.getMimeType(), content.getStatus(), content
 		    .getStateToken(), content.getStateToken().clone().clearDocument(), content.getRights(), false);
 	}

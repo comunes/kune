@@ -9,9 +9,13 @@ public interface ActionToolbarView {
 
     void addMenuAction(ActionItem<StateToken> action, boolean enable);
 
+    void attach();
+
     void clear();
 
     void clearRemovableActions();
+
+    void detach();
 
     void disableAllMenuItems();
 

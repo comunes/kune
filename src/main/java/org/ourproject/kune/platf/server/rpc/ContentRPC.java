@@ -30,7 +30,7 @@ import org.ourproject.kune.chat.server.managers.ChatConnection;
 import org.ourproject.kune.chat.server.managers.XmppManager;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.CommentDTO;
-import org.ourproject.kune.platf.client.dto.ContentDTO;
+import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
@@ -337,10 +337,10 @@ public class ContentRPC implements ContentService, RPC {
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
-    public ContentDTO setAsDefaultContent(final String userHash, final StateToken token) {
+    public ContentSimpleDTO setAsDefaultContent(final String userHash, final StateToken token) {
 	final Content content = contentManager.find(ContentUtils.parseId(token.getDocument()));
 	groupManager.setDefaultContent(token.getGroup(), content);
-	return mapper.map(content, ContentDTO.class);
+	return mapper.map(content, ContentSimpleDTO.class);
     }
 
     @Authenticated
@@ -446,7 +446,7 @@ public class ContentRPC implements ContentService, RPC {
 	return userSessionProvider.get();
     }
 
-    private void mapContentRightsInstate(final User user, final AccessLists groupAccessList, final ContentDTO siblingDTO) {
+    private void mapContentRightsInstate(final User user, final AccessLists groupAccessList, final ContentSimpleDTO siblingDTO) {
 	final Content sibling = contentManager.find(siblingDTO.getId());
 	final AccessLists lists = sibling.hasAccessList() ? sibling.getAccessLists() : groupAccessList;
 	siblingDTO.setRights(mapper.map(rightsService.get(user, lists), AccessRightsDTO.class));
@@ -455,10 +455,10 @@ public class ContentRPC implements ContentService, RPC {
     private StateDTO mapState(final State state, final User user, final Group group) {
 	final StateDTO stateDTO = mapper.map(state, StateDTO.class);
 	final AccessLists groupAccessList = group.getSocialNetwork().getAccessLists();
-	for (final ContentDTO siblingDTO : stateDTO.getRootContainer().getContents()) {
+	for (final ContentSimpleDTO siblingDTO : stateDTO.getRootContainer().getContents()) {
 	    mapContentRightsInstate(user, groupAccessList, siblingDTO);
 	}
-	for (final ContentDTO siblingDTO : stateDTO.getContainer().getContents()) {
+	for (final ContentSimpleDTO siblingDTO : stateDTO.getContainer().getContents()) {
 	    mapContentRightsInstate(user, groupAccessList, siblingDTO);
 	}
 	return stateDTO;

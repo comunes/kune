@@ -28,5 +28,7 @@ public interface ChatEngine {
 
     void logout();
 
+    void show();
+
     void stop();
 }

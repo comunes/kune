@@ -193,7 +193,7 @@
 
 	<mapping>
 		<class-a>
-			org.ourproject.kune.platf.client.dto.ContentDTO
+			org.ourproject.kune.platf.client.dto.ContentSimpleDTO
 		</class-a>
 		<class-b>
 			org.ourproject.kune.platf.server.domain.Content
@@ -238,7 +238,7 @@
 			<a>contents</a>
 			<b>contents</b>
 			<a-hint>
-				org.ourproject.kune.platf.client.dto.ContentDTO
+				org.ourproject.kune.platf.client.dto.ContentSimpleDTO
 			</a-hint>
 			<b-hint>
 				org.ourproject.kune.platf.server.domain.Content

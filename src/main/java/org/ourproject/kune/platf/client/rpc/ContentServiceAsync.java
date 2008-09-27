@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.CommentDTO;
-import org.ourproject.kune.platf.client.dto.ContentDTO;
+import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
@@ -66,7 +66,7 @@ public interface ContentServiceAsync {
 
     void save(String user, StateToken token, String content, AsyncCallback<Integer> asyncCallback);
 
-    void setAsDefaultContent(String userHash, StateToken token, AsyncCallback<ContentDTO> asyncCallback);
+    void setAsDefaultContent(String userHash, StateToken token, AsyncCallback<ContentSimpleDTO> asyncCallback);
 
     void setLanguage(String userHash, StateToken token, String languageCode,
 	    AsyncCallback<I18nLanguageDTO> asyncCallback);

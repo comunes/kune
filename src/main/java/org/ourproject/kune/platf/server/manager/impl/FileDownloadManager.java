@@ -68,7 +68,7 @@ public class FileDownloadManager extends HttpServlet {
 	final Content cnt = getContentForDownload(userHash, stateToken);
 
 	final String absDir = kuneProperties.get(KuneProperties.UPLOAD_LOCATION) + FileUtils.toDir(stateToken);
-	final String filename = new String(cnt.getLastRevision().getBody());
+	final String filename = cnt.getFilename();
 	final String absFilename = absDir + filename;
 
 	doBuildResp(resp, absFilename, cnt.getTitle(), cnt.getMimeType(), FileUtils

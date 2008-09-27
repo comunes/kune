@@ -17,9 +17,9 @@ public class EntityWorkspace extends DefaultBorderLayout {
     private static final String ENTITY_CONTEXT = "k-entity-context";
     private final Panel content;
     private final Panel context;
-    private final TitleBar title;
-    private final TitleBar subTitle;
-    private final TitleBar bottom;
+    private final SimpleToolbar title;
+    private final SimpleToolbar subTitle;
+    private final SimpleToolbar bottom;
     private final Toolbar contentTopBar;
     private final Toolbar contentBottomBar;
     private final Toolbar contextTopBar;
@@ -36,14 +36,14 @@ public class EntityWorkspace extends DefaultBorderLayout {
 	bottomPanel.setBorder(false);
 	bottomPanel.setLayout(new AnchorLayout());
 
-	title = new TitleBar();
+	title = new SimpleToolbar();
 	title.setHeight("" + (DEF_TOOLBAR_HEIGHT - 2));
 	title.setStylePrimaryName(ENTITY_TITLE);
 	title.ensureDebugId(ENTITY_TITLE);
-	subTitle = new TitleBar();
+	subTitle = new SimpleToolbar();
 	subTitle.setStylePrimaryName(ENTITY_SUBTITLE);
 	subTitle.ensureDebugId(ENTITY_SUBTITLE);
-	bottom = new TitleBar();
+	bottom = new SimpleToolbar();
 	bottom.setHeight("" + (DEF_TOOLBAR_HEIGHT - 2));
 	bottom.setStylePrimaryName(ENTITY_BOTTOM);
 	bottom.ensureDebugId(ENTITY_BOTTOM);
@@ -91,7 +91,7 @@ public class EntityWorkspace extends DefaultBorderLayout {
 	add(bottomPanel, DefaultBorderLayout.Position.SOUTH, DEF_TOOLBAR_HEIGHT + 2);
     }
 
-    public TitleBar getBottomTitle() {
+    public SimpleToolbar getBottomTitle() {
 	return bottom;
     }
 
@@ -111,11 +111,11 @@ public class EntityWorkspace extends DefaultBorderLayout {
 	return contextTopBar;
     }
 
-    public TitleBar getSubTitle() {
+    public SimpleToolbar getSubTitle() {
 	return subTitle;
     }
 
-    public TitleBar getTitle() {
+    public SimpleToolbar getTitle() {
 	return title;
     }
 

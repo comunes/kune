@@ -87,6 +87,7 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
 	    public void onEvent(final StateDTO state) {
 		if (state.getToolName().equals(DocumentClientTool.NAME)) {
 		    setState(state);
+		    toolbar.attach();
 		}
 	    }
 	});

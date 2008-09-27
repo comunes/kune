@@ -10,7 +10,7 @@ import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.ActionMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionPosition;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.workspace.client.skel.Toolbar;
+import org.ourproject.kune.workspace.client.skel.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.calclab.suco.client.ioc.Provider;
@@ -34,19 +34,23 @@ public class ActionToolbarPanel implements ActionToolbarView {
     private final HashMap<String, Menu> toolbarMenus;
     private final ArrayList<Widget> removableToolbarItems;
     private final HashMap<String, Item> menuItems;
-    private final WorkspaceSkeleton ws;
     private final Provider<ActionManager> actionManagerProvider;
     private final Position position;
+    private final SimpleToolbar topbar;
+    private final SimpleToolbar bottombar;
+    private final WorkspaceSkeleton ws;
 
     public ActionToolbarPanel(final Position position, final Provider<ActionManager> actionManagerProvider,
 	    final WorkspaceSkeleton ws) {
+	this.ws = ws;
+	topbar = new SimpleToolbar();
+	bottombar = new SimpleToolbar();
 	this.position = position;
 	this.actionManagerProvider = actionManagerProvider;
-	this.ws = ws;
+
 	toolbarMenus = new HashMap<String, Menu>();
 	removableToolbarItems = new ArrayList<Widget>();
 	menuItems = new HashMap<String, Item>();
-
     }
 
     public void addButtonAction(final ActionItem<StateToken> actionItem) {
@@ -69,7 +73,7 @@ public class ActionToolbarPanel implements ActionToolbarView {
 	}
 	button.setTooltip(action.getToolTip());
 
-	final Toolbar toolbar = getToolbar(pos);
+	final SimpleToolbar toolbar = getToolbar(pos);
 	if (action.hasLeftSeparator()) {
 	    removableToolbarItems.add(add(toolbar, action.getLeftSeparator()));
 	}
@@ -96,13 +100,29 @@ public class ActionToolbarPanel implements ActionToolbarView {
 	} else {
 	    item.disable();
 	}
-	doLayoutIfNeeded(pos);
+    }
+
+    public void attach() {
+	if (!topbar.isAttached()) {
+	    switch (position) {
+	    case content:
+		ws.getEntityWorkspace().getContentTopBar().add(topbar);
+		ws.getEntityWorkspace().getContentBottomBar().add(bottombar);
+		break;
+	    case context:
+	    default:
+		ws.getEntityWorkspace().getContextTopBar().add(topbar);
+		ws.getEntityWorkspace().getContextBottomBar().add(bottombar);
+	    }
+	}
     }
 
     public void clear() {
 	toolbarMenus.clear();
 	menuItems.clear();
 	removableToolbarItems.clear();
+	topbar.removeAll();
+	bottombar.removeAll();
 	getToolbar(ActionPosition.topbar).removeAll();
 	getToolbar(ActionPosition.bottombar).removeAll();
     }
@@ -112,21 +132,34 @@ public class ActionToolbarPanel implements ActionToolbarView {
 	    widget.removeFromParent();
 	}
 	removableToolbarItems.clear();
-	doLayoutIfNeeded();
+    }
+
+    public void detach() {
+	if (topbar.isAttached()) {
+	    switch (position) {
+	    case content:
+		ws.getEntityWorkspace().getContentTopBar().remove(topbar);
+		ws.getEntityWorkspace().getContentBottomBar().remove(bottombar);
+		break;
+	    case context:
+	    default:
+		ws.getEntityWorkspace().getContextTopBar().remove(topbar);
+		ws.getEntityWorkspace().getContextBottomBar().remove(bottombar);
+	    }
+	}
     }
 
     public void disableAllMenuItems() {
 	for (final Item item : menuItems.values()) {
 	    item.disable();
 	}
-	doLayoutIfNeeded();
     }
 
     private void add(final ActionPosition toolbar, final Widget widget) {
 	getToolbar(toolbar).add(widget);
     }
 
-    private Widget add(final Toolbar toolbar, final ActionButtonSeparator separator) {
+    private Widget add(final SimpleToolbar toolbar, final ActionButtonSeparator separator) {
 	switch (separator) {
 	case fill:
 	    return toolbar.addFill();
@@ -172,7 +205,6 @@ public class ActionToolbarPanel implements ActionToolbarView {
 	    }
 	    menu.addItem(item);
 	}
-	doLayoutIfNeeded(toolBarPos);
 	return item;
     }
 
@@ -189,15 +221,6 @@ public class ActionToolbarPanel implements ActionToolbarView {
 	return menu;
     }
 
-    private void doLayoutIfNeeded() {
-	doLayoutIfNeeded(ActionPosition.topbar);
-	doLayoutIfNeeded(ActionPosition.bottombar);
-    }
-
-    private void doLayoutIfNeeded(final ActionPosition pos) {
-	getToolbar(pos).doLayoutIfNeeded();
-    }
-
     private String genMenuKey(final ActionPosition pos, final String menuTitle, final String menuSubTitle,
 	    final String actionText) {
 
@@ -207,27 +230,15 @@ public class ActionToolbarPanel implements ActionToolbarView {
 	return basePart + subMenuPart + itemPart;
     }
 
-    private Toolbar getToolbar(final ActionPosition pos) {
+    private SimpleToolbar getToolbar(final ActionPosition pos) {
 	switch (pos) {
 	case bootombarAndItemMenu:
 	case bottombar:
-	    switch (position) {
-	    case content:
-		return ws.getEntityWorkspace().getContentBottomBar();
-	    case context:
-	    default:
-		return ws.getEntityWorkspace().getContextBottomBar();
-	    }
+	    return bottombar;
 	case topbar:
 	case topbarAndItemMenu:
 	default:
-	    switch (position) {
-	    case content:
-		return ws.getEntityWorkspace().getContentTopBar();
-	    case context:
-	    default:
-		return ws.getEntityWorkspace().getContextTopBar();
-	    }
+	    return topbar;
 	}
     }
 }

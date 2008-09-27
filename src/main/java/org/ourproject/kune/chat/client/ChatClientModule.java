@@ -14,6 +14,8 @@ import org.ourproject.kune.chat.client.ctx.ChatContext;
 import org.ourproject.kune.chat.client.ctx.ChatContextPresenter;
 import org.ourproject.kune.chat.client.ctx.rooms.RoomsAdmin;
 import org.ourproject.kune.chat.client.ctx.rooms.RoomsAdminPresenter;
+import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
+import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.ToolGroup;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
@@ -43,6 +45,13 @@ public class ChatClientModule extends AbstractModule {
 	register(Singleton.class, new Factory<ChatInfo>(ChatInfo.class) {
 	    public ChatInfo create() {
 		return new ChatInfoPanel();
+	    }
+	});
+
+	register(ToolGroup.class, new Factory<ChatClientActions>(ChatClientActions.class) {
+	    public ChatClientActions create() {
+		return new ChatClientActions($(I18nUITranslationService.class), $(Session.class),
+			$(ContentActionRegistry.class), $(ContextActionRegistry.class), $$(ChatClientTool.class));
 	    }
 	});
 

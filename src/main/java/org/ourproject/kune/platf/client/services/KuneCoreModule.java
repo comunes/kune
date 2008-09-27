@@ -9,7 +9,7 @@ public class KuneCoreModule extends AbstractModule {
 
     @Override
     public void onLoad() {
-	registerDecorator(ApplicationComponentGroup.class, new ApplicationComponentGroup());
-	registerDecorator(ToolGroup.class, new ToolGroup());
+	registerDecorator(ApplicationComponentGroup.class, new ApplicationComponentGroup(container));
+	registerDecorator(ToolGroup.class, new ToolGroup(container));
     }
 }

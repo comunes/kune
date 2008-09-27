@@ -148,10 +148,12 @@ public class FileUploadManager extends HttpServlet {
 	    final User user = userSession.getUser();
 	    final Container container = accessService.accessToContainer(ContentUtils.parseId(stateToken.getFolder()),
 		    user, AccessRol.Editor);
+	    final String preview = "Preview of this file (in development)";
 	    final Content content = contentManager.createContent(FileUtils.getFileNameWithoutExtension(file.getName(),
-		    extension), filenameUTF8, user, container);
+		    extension), preview, user, container);
 	    content.setTypeId(DocumentServerTool.TYPE_UPLOADEDFILE);
 	    content.setMimeType(new BasicMimeType(mimetype));
+	    content.setFilename(filenameUTF8);
 	    return content;
 	} catch (final Exception e) {
 	    if (file != null && file.exists()) {

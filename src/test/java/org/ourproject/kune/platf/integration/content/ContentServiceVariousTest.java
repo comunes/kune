@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
-import org.ourproject.kune.platf.client.dto.ContentDTO;
+import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.TagResultDTO;
@@ -173,7 +173,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 		"New Content Title");
 	assertNotNull(added);
 
-	final ContentDTO newDefContent = contentService.setAsDefaultContent(session.getHash(), added.getStateToken());
+	final ContentSimpleDTO newDefContent = contentService.setAsDefaultContent(session.getHash(), added.getStateToken());
 
 	assertTrue(!defaultContent.getStateToken().equals(newDefContent.getStateToken()));
 	assertTrue(added.getStateToken().equals(newDefContent.getStateToken()));

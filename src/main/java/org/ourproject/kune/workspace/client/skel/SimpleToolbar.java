@@ -6,12 +6,12 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class TitleBar extends Composite {
+public class SimpleToolbar extends Composite {
 
     private final HorizontalPanel childPanel;
     private final HorizontalPanel mainPanel;
 
-    public TitleBar() {
+    public SimpleToolbar() {
 	mainPanel = new HorizontalPanel();
 	childPanel = new HorizontalPanel();
 	mainPanel.add(childPanel);
@@ -44,5 +44,9 @@ public class TitleBar extends Composite {
 	emptyLabel.setStyleName("ytb-spacer");
 	this.add(emptyLabel);
 	return emptyLabel;
+    }
+
+    public void removeAll() {
+	childPanel.clear();
     }
 }

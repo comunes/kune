@@ -5,29 +5,29 @@ import com.gwtext.client.widgets.Panel;
 
 public class SiteBar extends Panel {
 
-    private final TitleBar titleBar;
+    private final SimpleToolbar simpleToolbar;
 
     public SiteBar() {
 	super.setBorder(false);
-	titleBar = new TitleBar();
-	titleBar.setStyleName("k-sitebar");
-	super.add(titleBar);
+	simpleToolbar = new SimpleToolbar();
+	simpleToolbar.setStyleName("k-sitebar");
+	super.add(simpleToolbar);
     }
 
     public void add(final Widget widget) {
-	titleBar.add(widget);
+	simpleToolbar.add(widget);
     }
 
     public Widget addFill() {
-	return titleBar.addFill();
+	return simpleToolbar.addFill();
     }
 
     public Widget addSeparator() {
-	return titleBar.addSeparator();
+	return simpleToolbar.addSeparator();
     }
 
     public Widget addSpacer() {
-	return titleBar.addSpacer();
+	return simpleToolbar.addSpacer();
     }
 
 }

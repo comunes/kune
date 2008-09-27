@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.CommentDTO;
-import org.ourproject.kune.platf.client.dto.ContentDTO;
+import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
@@ -67,7 +67,7 @@ public interface ContentService extends RemoteService {
 
     Integer save(String user, StateToken token, String content) throws DefaultException;
 
-    ContentDTO setAsDefaultContent(String userHash, StateToken token);
+    ContentSimpleDTO setAsDefaultContent(String userHash, StateToken token);
 
     I18nLanguageDTO setLanguage(String userHash, StateToken token, String languageCode) throws DefaultException;
 

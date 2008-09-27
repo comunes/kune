@@ -32,7 +32,7 @@ public class ContainerDTO implements IsSerializable {
     private Long parentFolderId;
     private ContainerSimpleDTO[] absolutePath;
     private List<ContainerSimpleDTO> childs;
-    private List<ContentDTO> contents;
+    private List<ContentSimpleDTO> contents;
 
     public ContainerDTO() {
     }
@@ -45,7 +45,7 @@ public class ContainerDTO implements IsSerializable {
 	return childs;
     }
 
-    public List<ContentDTO> getContents() {
+    public List<ContentSimpleDTO> getContents() {
 	return contents;
     }
 
@@ -77,7 +77,7 @@ public class ContainerDTO implements IsSerializable {
 	this.childs = childs;
     }
 
-    public void setContents(final List<ContentDTO> contents) {
+    public void setContents(final List<ContentSimpleDTO> contents) {
 	this.contents = contents;
     }
 

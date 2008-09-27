@@ -19,8 +19,16 @@ public class ActionToolbarPresenter implements ActionToolbar {
 	this.actionRegistry = actionRegistry;
     }
 
+    public void attach() {
+	toolbar.attach();
+    }
+
     public void clear() {
 	toolbar.clear();
+    }
+
+    public void detach() {
+	toolbar.detach();
     }
 
     public void disableMenusAndClearButtons() {

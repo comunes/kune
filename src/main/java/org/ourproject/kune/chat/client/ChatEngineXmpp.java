@@ -82,7 +82,6 @@ class ChatEngineXmpp implements ChatEngine {
 	} else {
 	    emiteDialog.setEnableStatusUI(true);
 	    emiteDialog.refreshUserInfo(chatOptions.userOptions);
-
 	}
 	emiteDialog.show(OwnStatus.online);
 	if (traybarButton == null) {
@@ -134,8 +133,12 @@ class ChatEngineXmpp implements ChatEngine {
 	}
     }
 
+    public void show() {
+	emiteDialog.show();
+    }
+
     public void stop() {
-	// emiteDialog.destroy();
+	emiteDialog.destroy();
 	emiteDialog.getSession().logout();
     }
 

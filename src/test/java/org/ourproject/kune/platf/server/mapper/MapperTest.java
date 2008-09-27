@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.CommentDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.ContainerSimpleDTO;
-import org.ourproject.kune.platf.client.dto.ContentDTO;
+import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.GroupListDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
@@ -92,7 +92,7 @@ public class MapperTest {
 	final StateToken expectedToken = new StateToken(TESTGROUPSHORTNAME, TESTTOOL, "1", "1");
 	assertEquals(expectedToken, d.getStateToken());
 
-	final ContentDTO dto = mapper.map(d, ContentDTO.class);
+	final ContentSimpleDTO dto = mapper.map(d, ContentSimpleDTO.class);
 	assertEquals(1, (long) dto.getId());
 	assertEquals("title", dto.getTitle());
 	assertEquals(expectedToken, dto.getStateToken());
@@ -151,7 +151,7 @@ public class MapperTest {
 	final ContainerDTO dto = mapper.map(container, ContainerDTO.class);
 	assertEquals(3, dto.getChilds().size());
 	assertEquals(3, dto.getContents().size());
-	assertTrue(dto.getContents().get(0) instanceof ContentDTO);
+	assertTrue(dto.getContents().get(0) instanceof ContentSimpleDTO);
 	assertTrue(dto.getChilds().get(0) instanceof ContainerSimpleDTO);
 	assertEquals(new StateToken(TESTGROUPSHORTNAME, TESTTOOL), dto.getChilds().get(0).getStateToken().clone()
 		.clearFolder());
@@ -212,8 +212,8 @@ public class MapperTest {
     public void testMimeMapping() {
 	final Content d = createDefContent();
 	d.setMimeType(new BasicMimeType("application/pdf"));
-	final ContentDTO contentDTO = mapper.map(d, ContentDTO.class);
-	assertEquals("application/pdf", contentDTO.getMimeType().toString());
+	final ContentSimpleDTO contentSimpleDTO = mapper.map(d, ContentSimpleDTO.class);
+	assertEquals("application/pdf", contentSimpleDTO.getMimeType().toString());
     }
 
     @Test

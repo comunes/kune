@@ -16,7 +16,7 @@ import org.ourproject.kune.platf.client.actions.ActionPosition;
 import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
-import org.ourproject.kune.platf.client.dto.ContentDTO;
+import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
@@ -172,8 +172,8 @@ public class DocumentClientActions {
 		    public void onEvent(final StateToken token) {
 			Site.showProgressProcessing();
 			contentServiceProvider.get().setAsDefaultContent(session.getUserHash(), token,
-				new AsyncCallbackSimple<ContentDTO>() {
-				    public void onSuccess(final ContentDTO defContent) {
+				new AsyncCallbackSimple<ContentSimpleDTO>() {
+				    public void onSuccess(final ContentSimpleDTO defContent) {
 					session.getCurrentState().getGroup().setDefaultContent(defContent);
 					Site.hideProgress();
 					Site.info(i18n.t("Document selected as the group homepage"));
