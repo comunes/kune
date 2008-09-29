@@ -10,11 +10,13 @@ import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_UPLOADEDFI
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_WIKI;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_WIKIPAGE;
 
-import org.ourproject.kune.platf.client.actions.ActionButtonDescriptor;
-import org.ourproject.kune.platf.client.actions.ActionDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
-import org.ourproject.kune.platf.client.actions.ActionMenuDescriptor;
-import org.ourproject.kune.platf.client.actions.ActionPosition;
+import org.ourproject.kune.platf.client.actions.ActionMenuItemDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarButtonAndItemDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarMenuAndItemDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
@@ -75,16 +77,17 @@ public class DocumentClientActions {
     }
 
     private void createActions() {
-	final ActionMenuDescriptor<StateToken> addFolder = createFolderAction(TYPE_FOLDER, "images/nav/folder_add.png",
-		i18n.t("New folder"), i18n.t("Folder"), i18n.t("New"), i18n.t("New folder"));
-	final ActionMenuDescriptor<StateToken> addGallery = createFolderAction(TYPE_GALLERY,
+	final ActionToolbarMenuAndItemDescriptor<StateToken> addFolder = createFolderAction(TYPE_FOLDER,
+		"images/nav/folder_add.png", i18n.t("New folder"), i18n.t("Folder"), i18n.t("New"), i18n
+			.t("New folder"));
+	final ActionToolbarMenuAndItemDescriptor<StateToken> addGallery = createFolderAction(TYPE_GALLERY,
 		"images/nav/gallery_add.png", i18n.t("New gallery"), i18n.t("Folder"), i18n.t("New"), i18n
 			.t("New gallery"));
-	final ActionMenuDescriptor<StateToken> addWiki = createFolderAction(TYPE_WIKI, "images/nav/wiki_add.png", i18n
-		.t("New wiki"), i18n.t("Folder"), i18n.t("New"), i18n.t("wiki"));
+	final ActionToolbarMenuAndItemDescriptor<StateToken> addWiki = createFolderAction(TYPE_WIKI,
+		"images/nav/wiki_add.png", i18n.t("New wiki"), i18n.t("Folder"), i18n.t("New"), i18n.t("wiki"));
 
-	final ActionMenuDescriptor<StateToken> addDoc = new ActionMenuDescriptor<StateToken>(AccessRolDTO.Editor,
-		ActionPosition.topbarAndItemMenu, new Listener<StateToken>() {
+	final ActionToolbarMenuAndItemDescriptor<StateToken> addDoc = new ActionToolbarMenuAndItemDescriptor<StateToken>(
+		AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
 		    public void onEvent(final StateToken token) {
 			Site.showProgressProcessing();
 			contentServiceProvider.get().addContent(session.getUserHash(),
@@ -102,8 +105,8 @@ public class DocumentClientActions {
 	addDoc.setParentSubMenuTitle(i18n.t("New"));
 	addDoc.setIconUrl("images/nav/page_add.png");
 
-	final ActionMenuDescriptor<StateToken> delContainer = new ActionMenuDescriptor<StateToken>(
-		AccessRolDTO.Administrator, ActionPosition.topbarAndItemMenu, new Listener<StateToken>() {
+	final ActionToolbarMenuAndItemDescriptor<StateToken> delContainer = new ActionToolbarMenuAndItemDescriptor<StateToken>(
+		AccessRolDTO.Administrator, ActionToolbarPosition.topbar, new Listener<StateToken>() {
 		    public void onEvent(final StateToken token) {
 			Site.info("Sorry, in development");
 		    }
@@ -114,8 +117,8 @@ public class DocumentClientActions {
 	delContainer.setConfirmationTitle(i18n.t("Please confirm"));
 	delContainer.setConfirmationText(i18n.t("You will delete it and also all its contents. Are you sure?"));
 
-	final ActionMenuDescriptor<StateToken> delContent = new ActionMenuDescriptor<StateToken>(
-		AccessRolDTO.Administrator, ActionPosition.topbarAndItemMenu, new Listener<StateToken>() {
+	final ActionToolbarMenuAndItemDescriptor<StateToken> delContent = new ActionToolbarMenuAndItemDescriptor<StateToken>(
+		AccessRolDTO.Administrator, ActionToolbarPosition.topbar, new Listener<StateToken>() {
 		    public void onEvent(final StateToken token) {
 			contentServiceProvider.get().delContent(session.getUserHash(), token,
 				new AsyncCallbackSimple<String>() {
@@ -131,9 +134,16 @@ public class DocumentClientActions {
 	delContent.setMustBeConfirmed(true);
 	delContent.setConfirmationTitle(i18n.t("Please confirm"));
 	delContent.setConfirmationText(i18n.t("Are you sure?"));
+	delContent.setEnableCondition(new ActionEnableCondition<StateToken>() {
+	    public boolean mustBeEnabled(final StateToken currentStateToken) {
+		final StateToken defContentToken = session.getCurrentState().getGroup().getDefaultContent()
+			.getStateToken();
+		return !currentStateToken.equals(defContentToken);
+	    }
+	});
 
-	final ActionDescriptor<StateToken> go = new ActionDescriptor<StateToken>(AccessRolDTO.Viewer,
-		ActionPosition.itemMenu, new Listener<StateToken>() {
+	final ActionMenuItemDescriptor<StateToken> go = new ActionMenuItemDescriptor<StateToken>(AccessRolDTO.Viewer,
+		new Listener<StateToken>() {
 		    public void onEvent(final StateToken token) {
 			stateManager.gotoToken(token);
 		    }
@@ -146,8 +156,8 @@ public class DocumentClientActions {
 	    }
 	});
 
-	final ActionMenuDescriptor<StateToken> renameCtn = new ActionMenuDescriptor<StateToken>(AccessRolDTO.Editor,
-		ActionPosition.topbarAndItemMenu, new Listener<StateToken>() {
+	final ActionToolbarMenuAndItemDescriptor<StateToken> renameCtn = new ActionToolbarMenuAndItemDescriptor<StateToken>(
+		AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
 		    public void onEvent(final StateToken stateToken) {
 			contextNavigator.editItem(stateToken);
 		    }
@@ -155,8 +165,8 @@ public class DocumentClientActions {
 	renameCtn.setTextDescription(i18n.t("Rename"));
 	renameCtn.setParentMenuTitle(i18n.t("File"));
 
-	final ActionMenuDescriptor<StateToken> renameCtx = new ActionMenuDescriptor<StateToken>(AccessRolDTO.Editor,
-		ActionPosition.topbarAndItemMenu, new Listener<StateToken>() {
+	final ActionToolbarMenuAndItemDescriptor<StateToken> renameCtx = new ActionToolbarMenuAndItemDescriptor<StateToken>(
+		AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
 		    public void onEvent(final StateToken stateToken) {
 			contextNavigator.editItem(stateToken);
 		    }
@@ -164,8 +174,8 @@ public class DocumentClientActions {
 	renameCtx.setTextDescription(i18n.t("Rename"));
 	renameCtx.setParentMenuTitle(i18n.t("Folder"));
 
-	final ActionButtonDescriptor<StateToken> goGroupHome = new ActionButtonDescriptor<StateToken>(
-		AccessRolDTO.Viewer, ActionPosition.topbar, new Listener<StateToken>() {
+	final ActionToolbarButtonDescriptor<StateToken> goGroupHome = new ActionToolbarButtonDescriptor<StateToken>(
+		AccessRolDTO.Viewer, ActionToolbarPosition.topbar, new Listener<StateToken>() {
 		    public void onEvent(final StateToken token) {
 			stateManager.gotoToken(token.getGroup());
 		    }
@@ -179,32 +189,16 @@ public class DocumentClientActions {
 	    }
 	});
 
-	final ActionMenuDescriptor<StateToken> setAsDefGroupContent = new ActionMenuDescriptor<StateToken>(
-		AccessRolDTO.Administrator, ActionPosition.itemMenu, new Listener<StateToken>() {
-		    public void onEvent(final StateToken token) {
-			Site.showProgressProcessing();
-			contentServiceProvider.get().setAsDefaultContent(session.getUserHash(), token,
-				new AsyncCallbackSimple<ContentSimpleDTO>() {
-				    public void onSuccess(final ContentSimpleDTO defContent) {
-					session.getCurrentState().getGroup().setDefaultContent(defContent);
-					Site.hideProgress();
-					Site.info(i18n.t("Document selected as the group homepage"));
-				    }
-				});
-		    }
-		});
-	setAsDefGroupContent.setTextDescription(i18n.t("Set this as the group default page"));
-	setAsDefGroupContent.setIconUrl("images/group-home.png");
-	setAsDefGroupContent.setEnableCondition(new ActionEnableCondition<StateToken>() {
-	    public boolean mustBeEnabled(final StateToken currentStateToken) {
-		final StateToken defContentToken = session.getCurrentState().getGroup().getDefaultContent()
-			.getStateToken();
-		return !contextNavigator.isSelected(defContentToken);
-	    }
-	});
+	final ActionToolbarMenuDescriptor<StateToken> setAsDefGroupCnt;
+	setAsDefGroupCnt = createSetAsDefContent();
+	setAsDefGroupCnt.setParentMenuTitle(i18n.t("File"));
 
-	final ActionMenuDescriptor<StateToken> refreshCtx = new ActionMenuDescriptor<StateToken>(AccessRolDTO.Viewer,
-		ActionPosition.topbar, new Listener<StateToken>() {
+	final ActionToolbarMenuDescriptor<StateToken> setAsDefGroupCxt;
+	setAsDefGroupCxt = createSetAsDefContent();
+	setAsDefGroupCxt.setParentMenuTitle(i18n.t("Folder"));
+
+	final ActionToolbarMenuDescriptor<StateToken> refreshCtx = new ActionToolbarMenuDescriptor<StateToken>(
+		AccessRolDTO.Viewer, ActionToolbarPosition.topbar, new Listener<StateToken>() {
 		    public void onEvent(final StateToken stateToken) {
 			stateManager.reload();
 			contextNavigator.selectItem(stateToken);
@@ -214,8 +208,8 @@ public class DocumentClientActions {
 	refreshCtx.setTextDescription(i18n.t("Refresh"));
 	refreshCtx.setIconUrl("images/nav/refresh.png");
 
-	final ActionMenuDescriptor<StateToken> refreshCnt = new ActionMenuDescriptor<StateToken>(AccessRolDTO.Viewer,
-		ActionPosition.topbar, new Listener<StateToken>() {
+	final ActionToolbarMenuDescriptor<StateToken> refreshCnt = new ActionToolbarMenuDescriptor<StateToken>(
+		AccessRolDTO.Viewer, ActionToolbarPosition.topbar, new Listener<StateToken>() {
 		    public void onEvent(final StateToken stateToken) {
 			stateManager.reload();
 			contextNavigator.selectItem(stateToken);
@@ -225,20 +219,20 @@ public class DocumentClientActions {
 	refreshCnt.setTextDescription(i18n.t("Refresh"));
 	refreshCnt.setIconUrl("images/nav/refresh.png");
 
-	final ActionDescriptor<StateToken> uploadFile = createUploadAction(i18n.t("Upload file"),
+	final ActionToolbarButtonAndItemDescriptor<StateToken> uploadFile = createUploadAction(i18n.t("Upload file"),
 		"images/nav/upload.png", i18n.t("Upload some files (images, PDFs, ...)"), null);
 
 	session.onInitDataReceived(new Listener<InitDataDTO>() {
 	    public void onEvent(final InitDataDTO parameter) {
-		final ActionDescriptor<StateToken> uploadMedia = createUploadAction(i18n.t("Upload media"),
-			"images/nav/upload.png", i18n.t("Upload some media (images, videos)"), session
-				.getGalleryPermittedExtensions());
+		final ActionToolbarButtonAndItemDescriptor<StateToken> uploadMedia = createUploadAction(i18n
+			.t("Upload media"), "images/nav/upload.png", i18n.t("Upload some media (images, videos)"),
+			session.getGalleryPermittedExtensions());
 		contextActionRegistry.addAction(uploadMedia, TYPE_GALLERY);
 	    }
 	});
 
-	final ActionButtonDescriptor<StateToken> download = new ActionButtonDescriptor<StateToken>(AccessRolDTO.Viewer,
-		ActionPosition.topbar, new Listener<StateToken>() {
+	final ActionToolbarButtonDescriptor<StateToken> download = new ActionToolbarButtonDescriptor<StateToken>(
+		AccessRolDTO.Viewer, ActionToolbarPosition.topbar, new Listener<StateToken>() {
 		    public void onEvent(final StateToken token) {
 			downloadContent(token);
 		    }
@@ -247,8 +241,8 @@ public class DocumentClientActions {
 	download.setToolTip(i18n.t("Download this file"));
 	download.setIconUrl("images/nav/download.png");
 
-	final ActionDescriptor<StateToken> downloadCtx = new ActionDescriptor<StateToken>(AccessRolDTO.Viewer,
-		ActionPosition.itemMenu, new Listener<StateToken>() {
+	final ActionMenuItemDescriptor<StateToken> downloadCtx = new ActionMenuItemDescriptor<StateToken>(
+		AccessRolDTO.Viewer, new Listener<StateToken>() {
 		    public void onEvent(final StateToken token) {
 			downloadContent(token);
 		    }
@@ -256,8 +250,8 @@ public class DocumentClientActions {
 	downloadCtx.setTextDescription(i18n.t("Download"));
 	downloadCtx.setIconUrl("images/nav/download.png");
 
-	final ActionMenuDescriptor<StateToken> setGroupLogo = new ActionMenuDescriptor<StateToken>(
-		AccessRolDTO.Administrator, ActionPosition.topbarAndItemMenu, new Listener<StateToken>() {
+	final ActionToolbarMenuAndItemDescriptor<StateToken> setGroupLogo = new ActionToolbarMenuAndItemDescriptor<StateToken>(
+		AccessRolDTO.Administrator, ActionToolbarPosition.topbar, new Listener<StateToken>() {
 		    public void onEvent(final StateToken token) {
 			groupServiceProvider.get().setGroupLogo(session.getUserHash(), token,
 				new AsyncCallbackSimple<GroupDTO>() {
@@ -282,19 +276,19 @@ public class DocumentClientActions {
 	    }
 	});
 
-	final ActionMenuDescriptor<StateToken> setPublishStatus = createSetStatusAction(AccessRolDTO.Administrator,
-		i18n.t("Published online"), ContentStatusDTO.publishedOnline);
-	final ActionMenuDescriptor<StateToken> setEditionInProgressStatus = createSetStatusAction(
+	final ActionToolbarMenuDescriptor<StateToken> setPublishStatus = createSetStatusAction(
+		AccessRolDTO.Administrator, i18n.t("Published online"), ContentStatusDTO.publishedOnline);
+	final ActionToolbarMenuDescriptor<StateToken> setEditionInProgressStatus = createSetStatusAction(
 		AccessRolDTO.Administrator, i18n.t("Editing in progress"), ContentStatusDTO.editingInProgress);
-	final ActionMenuDescriptor<StateToken> setRejectStatus = createSetStatusAction(AccessRolDTO.Administrator, i18n
-		.t("Rejected"), ContentStatusDTO.rejected);
-	final ActionMenuDescriptor<StateToken> setSubmittedForPublishStatus = createSetStatusAction(
+	final ActionToolbarMenuDescriptor<StateToken> setRejectStatus = createSetStatusAction(
+		AccessRolDTO.Administrator, i18n.t("Rejected"), ContentStatusDTO.rejected);
+	final ActionToolbarMenuDescriptor<StateToken> setSubmittedForPublishStatus = createSetStatusAction(
 		AccessRolDTO.Administrator, i18n.t("Submitted for publish"), ContentStatusDTO.publishedOnline);
-	final ActionMenuDescriptor<StateToken> setInTheDustBinStatus = createSetStatusAction(
+	final ActionToolbarMenuDescriptor<StateToken> setInTheDustBinStatus = createSetStatusAction(
 		AccessRolDTO.Administrator, i18n.t("In the dustbin"), ContentStatusDTO.inTheDustbin);
 
-	final ActionButtonDescriptor<StateToken> translateContent = new ActionButtonDescriptor<StateToken>(
-		AccessRolDTO.Editor, ActionPosition.topbar, new Listener<StateToken>() {
+	final ActionToolbarButtonDescriptor<StateToken> translateContent = new ActionToolbarButtonDescriptor<StateToken>(
+		AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
 		    public void onEvent(final StateToken stateToken) {
 			Site.important(i18n.t("Sorry, this functionality is currently in development"));
 		    }
@@ -303,8 +297,8 @@ public class DocumentClientActions {
 	translateContent.setToolTip(i18n.t("Translate this document to other languages"));
 	translateContent.setIconUrl("images/language.gif");
 
-	final ActionButtonDescriptor<StateToken> editContent = new ActionButtonDescriptor<StateToken>(
-		AccessRolDTO.Editor, ActionPosition.topbar, new Listener<StateToken>() {
+	final ActionToolbarButtonDescriptor<StateToken> editContent = new ActionToolbarButtonDescriptor<StateToken>(
+		AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
 		    public void onEvent(final StateToken stateToken) {
 		    }
 		});
@@ -336,7 +330,8 @@ public class DocumentClientActions {
 	contentActionRegistry.addAction(refreshCnt, contents);
 	contentActionRegistry.addAction(delContent, contents);
 	contextActionRegistry.addAction(delContainer, containersNoRoot);
-	contextActionRegistry.addAction(setAsDefGroupContent, TYPE_BLOG, TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
+	contentActionRegistry.addAction(setAsDefGroupCnt, TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
+	contentActionRegistry.addAction(setAsDefGroupCxt, TYPE_BLOG);
 	contextActionRegistry.addAction(goGroupHome, containers);
 	contentActionRegistry.addAction(setGroupLogo, TYPE_UPLOADEDFILE);
 	contextActionRegistry.addAction(downloadCtx, TYPE_UPLOADEDFILE);
@@ -345,12 +340,12 @@ public class DocumentClientActions {
 		TYPE_WIKI, TYPE_WIKIPAGE);
     }
 
-    private ActionMenuDescriptor<StateToken> createFolderAction(final String contentTypeId, final String iconUrl,
-	    final String textDescription, final String parentMenuTitle, final String parentMenuSubtitle,
-	    final String defaultName) {
-	final ActionMenuDescriptor<StateToken> addFolder;
-	addFolder = new ActionMenuDescriptor<StateToken>(AccessRolDTO.Editor, ActionPosition.topbarAndItemMenu,
-		new Listener<StateToken>() {
+    private ActionToolbarMenuAndItemDescriptor<StateToken> createFolderAction(final String contentTypeId,
+	    final String iconUrl, final String textDescription, final String parentMenuTitle,
+	    final String parentMenuSubtitle, final String defaultName) {
+	final ActionToolbarMenuAndItemDescriptor<StateToken> addFolder;
+	addFolder = new ActionToolbarMenuAndItemDescriptor<StateToken>(AccessRolDTO.Editor,
+		ActionToolbarPosition.topbar, new Listener<StateToken>() {
 		    public void onEvent(final StateToken stateToken) {
 			Site.showProgressProcessing();
 			contentServiceProvider.get().addFolder(session.getUserHash(), stateToken, defaultName,
@@ -369,10 +364,38 @@ public class DocumentClientActions {
 	return addFolder;
     }
 
-    private ActionMenuDescriptor<StateToken> createSetStatusAction(final AccessRolDTO rol,
+    private ActionToolbarMenuDescriptor<StateToken> createSetAsDefContent() {
+	final ActionToolbarMenuDescriptor<StateToken> setAsDefGroupContent;
+	setAsDefGroupContent = new ActionToolbarMenuDescriptor<StateToken>(AccessRolDTO.Administrator,
+		ActionToolbarPosition.topbar, new Listener<StateToken>() {
+		    public void onEvent(final StateToken token) {
+			Site.showProgressProcessing();
+			contentServiceProvider.get().setAsDefaultContent(session.getUserHash(), token,
+				new AsyncCallbackSimple<ContentSimpleDTO>() {
+				    public void onSuccess(final ContentSimpleDTO defContent) {
+					session.getCurrentState().getGroup().setDefaultContent(defContent);
+					Site.hideProgress();
+					Site.info(i18n.t("Document selected as the group homepage"));
+				    }
+				});
+		    }
+		});
+	setAsDefGroupContent.setTextDescription(i18n.t("Set this as the group default page"));
+	setAsDefGroupContent.setIconUrl("images/group-home.png");
+	setAsDefGroupContent.setEnableCondition(new ActionEnableCondition<StateToken>() {
+	    public boolean mustBeEnabled(final StateToken currentStateToken) {
+		final StateToken defContentToken = session.getCurrentState().getGroup().getDefaultContent()
+			.getStateToken();
+		return !currentStateToken.equals(defContentToken);
+	    }
+	});
+	return setAsDefGroupContent;
+    }
+
+    private ActionToolbarMenuAndItemDescriptor<StateToken> createSetStatusAction(final AccessRolDTO rol,
 	    final String textDescription, final ContentStatusDTO status) {
-	final ActionMenuDescriptor<StateToken> action = new ActionMenuDescriptor<StateToken>(rol,
-		ActionPosition.topbarAndItemMenu, new Listener<StateToken>() {
+	final ActionToolbarMenuAndItemDescriptor<StateToken> action = new ActionToolbarMenuAndItemDescriptor<StateToken>(
+		rol, ActionToolbarPosition.topbar, new Listener<StateToken>() {
 		    public void onEvent(final StateToken stateToken) {
 			final AsyncCallbackSimple<Object> callback = new AsyncCallbackSimple<Object>() {
 			    public void onSuccess(final Object result) {
@@ -393,15 +416,17 @@ public class DocumentClientActions {
 	return action;
     }
 
-    private ActionButtonDescriptor<StateToken> createUploadAction(final String textDescription, final String iconUrl,
-	    final String toolTip, final String permitedExtensions) {
-	final ActionButtonDescriptor<StateToken> uploadFile;
-	uploadFile = new ActionButtonDescriptor<StateToken>(AccessRolDTO.Editor, ActionPosition.bootombarAndItemMenu,
-		new Listener<StateToken>() {
+    private ActionToolbarButtonAndItemDescriptor<StateToken> createUploadAction(final String textDescription,
+	    final String iconUrl, final String toolTip, final String permitedExtensions) {
+	final ActionToolbarButtonAndItemDescriptor<StateToken> uploadFile;
+	uploadFile = new ActionToolbarButtonAndItemDescriptor<StateToken>(AccessRolDTO.Editor,
+		ActionToolbarPosition.bottombar, new Listener<StateToken>() {
 		    public void onEvent(final StateToken token) {
 			if (permitedExtensions != null) {
+			    // FIXME: can't be reset ...
 			    // fileUploaderProvider.get().setPermittedExtensions(permitedExtensions);
 			} else {
+			    // FIXME: can't be reset ...
 			    // fileUploaderProvider.get().resetPermittedExtensions();
 			}
 			fileUploaderProvider.get().show();

@@ -3,12 +3,12 @@ package org.ourproject.kune.platf.client.actions.toolbar;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.ourproject.kune.platf.client.actions.ActionButtonDescriptor;
-import org.ourproject.kune.platf.client.actions.ActionButtonSeparator;
+import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarButtonSeparator;
 import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionManager;
-import org.ourproject.kune.platf.client.actions.ActionMenuDescriptor;
-import org.ourproject.kune.platf.client.actions.ActionPosition;
+import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.workspace.client.skel.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
@@ -54,8 +54,8 @@ public class ActionToolbarPanel implements ActionToolbarView {
     }
 
     public void addButtonAction(final ActionItem<StateToken> actionItem) {
-	final ActionButtonDescriptor<StateToken> action = (ActionButtonDescriptor<StateToken>) actionItem.getAction();
-	final ActionPosition pos = action.getActionPosition();
+	final ActionToolbarButtonDescriptor<StateToken> action = (ActionToolbarButtonDescriptor<StateToken>) actionItem.getAction();
+	final ActionToolbarPosition pos = action.getActionPosition();
 	final ToolbarButton button = new ToolbarButton();
 	final String text = action.getText();
 	final String iconUrl = action.getIconUrl();
@@ -85,10 +85,10 @@ public class ActionToolbarPanel implements ActionToolbarView {
     }
 
     public void addMenuAction(final ActionItem<StateToken> actionItem, final boolean enable) {
-	final ActionMenuDescriptor<StateToken> action = (ActionMenuDescriptor<StateToken>) actionItem.getAction();
+	final ActionToolbarMenuDescriptor<StateToken> action = (ActionToolbarMenuDescriptor<StateToken>) actionItem.getAction();
 	final String menuTitle = action.getParentMenuTitle();
 	final String menuSubTitle = action.getParentSubMenuTitle();
-	final ActionPosition pos = action.getActionPosition();
+	final ActionToolbarPosition pos = action.getActionPosition();
 	final String itemKey = genMenuKey(pos, menuTitle, menuSubTitle, action.getText());
 	Item item = menuItems.get(itemKey);
 	if (item == null) {
@@ -123,8 +123,8 @@ public class ActionToolbarPanel implements ActionToolbarView {
 	removableToolbarItems.clear();
 	topbar.removeAll();
 	bottombar.removeAll();
-	getToolbar(ActionPosition.topbar).removeAll();
-	getToolbar(ActionPosition.bottombar).removeAll();
+	getToolbar(ActionToolbarPosition.topbar).removeAll();
+	getToolbar(ActionToolbarPosition.bottombar).removeAll();
     }
 
     public void clearRemovableActions() {
@@ -155,11 +155,11 @@ public class ActionToolbarPanel implements ActionToolbarView {
 	}
     }
 
-    private void add(final ActionPosition toolbar, final Widget widget) {
+    private void add(final ActionToolbarPosition toolbar, final Widget widget) {
 	getToolbar(toolbar).add(widget);
     }
 
-    private Widget add(final SimpleToolbar toolbar, final ActionButtonSeparator separator) {
+    private Widget add(final SimpleToolbar toolbar, final ActionToolbarButtonSeparator separator) {
 	switch (separator) {
 	case fill:
 	    return toolbar.addFill();
@@ -171,9 +171,9 @@ public class ActionToolbarPanel implements ActionToolbarView {
 	}
     }
 
-    private Item createToolbarMenu(final ActionPosition toolBarPos, final String menuTitle, final String menuSubTitle,
+    private Item createToolbarMenu(final ActionToolbarPosition toolBarPos, final String menuTitle, final String menuSubTitle,
 	    final ActionItem<StateToken> actionItem) {
-	final ActionMenuDescriptor<StateToken> action = (ActionMenuDescriptor<StateToken>) actionItem.getAction();
+	final ActionToolbarMenuDescriptor<StateToken> action = (ActionToolbarMenuDescriptor<StateToken>) actionItem.getAction();
 	final Item item = new Item(action.getText(), new BaseItemListenerAdapter() {
 	    @Override
 	    public void onClick(BaseItem item, EventObject e) {
@@ -208,7 +208,7 @@ public class ActionToolbarPanel implements ActionToolbarView {
 	return item;
     }
 
-    private Menu createToolbarMenu(final ActionPosition barPosition, final String iconUrl, final String menuTitle,
+    private Menu createToolbarMenu(final ActionToolbarPosition barPosition, final String iconUrl, final String menuTitle,
 	    final String menuKey) {
 	final Menu menu = new Menu();
 	final ToolbarButton toolbarMenu = new ToolbarButton(menuTitle);
@@ -221,7 +221,7 @@ public class ActionToolbarPanel implements ActionToolbarView {
 	return menu;
     }
 
-    private String genMenuKey(final ActionPosition pos, final String menuTitle, final String menuSubTitle,
+    private String genMenuKey(final ActionToolbarPosition pos, final String menuTitle, final String menuSubTitle,
 	    final String actionText) {
 
 	final String basePart = "km-ctx-" + pos.toString().substring(0, 2) + "-" + menuTitle;
@@ -230,13 +230,11 @@ public class ActionToolbarPanel implements ActionToolbarView {
 	return basePart + subMenuPart + itemPart;
     }
 
-    private SimpleToolbar getToolbar(final ActionPosition pos) {
+    private SimpleToolbar getToolbar(final ActionToolbarPosition pos) {
 	switch (pos) {
-	case bootombarAndItemMenu:
 	case bottombar:
 	    return bottombar;
 	case topbar:
-	case topbarAndItemMenu:
 	default:
 	    return topbar;
 	}

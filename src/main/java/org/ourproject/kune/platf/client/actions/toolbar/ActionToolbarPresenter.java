@@ -1,11 +1,13 @@
 package org.ourproject.kune.platf.client.actions.toolbar;
 
-import org.ourproject.kune.platf.client.actions.ActionButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
-import org.ourproject.kune.platf.client.actions.ActionMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
+import org.ourproject.kune.platf.client.actions.ActionToolbarButtonAndItemDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarMenuAndItemDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -41,17 +43,17 @@ public class ActionToolbarPresenter implements ActionToolbar {
     public void showActions(final ActionItemCollection<StateToken> actions, final boolean isItemSelected) {
 	for (final ActionItem<StateToken> actionItem : actions) {
 	    final ActionDescriptor<StateToken> action = actionItem.getAction();
-	    if (action instanceof ActionMenuDescriptor) {
+	    if (action instanceof ActionToolbarMenuDescriptor || action instanceof ActionToolbarMenuAndItemDescriptor) {
 		toolbar.addMenuAction(actionItem, isItemSelected
 			&& actionRegistry.checkEnabling(action, actionItem.getItem()));
 	    } else {
-		if (action instanceof ActionButtonDescriptor) {
+		if (action instanceof ActionToolbarButtonDescriptor
+			|| action instanceof ActionToolbarButtonAndItemDescriptor) {
 		    if (isItemSelected && actionRegistry.checkEnabling(action, actionItem.getItem())) {
 			toolbar.addButtonAction(actionItem);
 		    }
 		} else {
-		    // Code smell
-		    Log.error("Not an ActionMenuDescriptor or ActionButtonDescriptor: " + action.getText());
+		    Log.error("Code error: Not an ActionMenuDescriptor or ActionButtonDescriptor: " + action.getText());
 		}
 	    }
 	}

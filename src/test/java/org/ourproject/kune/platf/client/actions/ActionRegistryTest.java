@@ -15,9 +15,9 @@ public class ActionRegistryTest {
 
     private static final String DEF_CONTENT_TYPE_ID = "test";
     private ActionRegistry<StateToken> registry;
-    private ActionDescriptor<StateToken> adminAction;
-    private ActionDescriptor<StateToken> editorAction;
-    private ActionDescriptor<StateToken> viewerAction;
+    private ActionToolbarMenuAndItemDescriptor<StateToken> adminAction;
+    private ActionToolbarMenuAndItemDescriptor<StateToken> editorAction;
+    private ActionToolbarMenuAndItemDescriptor<StateToken> viewerAction;
 
     @Test
     public void actionsEmptyButNeverNull() {
@@ -32,18 +32,18 @@ public class ActionRegistryTest {
     @Before
     public void before() {
 	registry = new ActionRegistry<StateToken>();
-	adminAction = new ActionDescriptor<StateToken>(AccessRolDTO.Administrator, ActionPosition.topbarAndItemMenu,
+	adminAction = new ActionToolbarMenuAndItemDescriptor<StateToken>(AccessRolDTO.Administrator, ActionToolbarPosition.topbar,
 		new Listener<StateToken>() {
 		    public void onEvent(final StateToken parameter) {
 		    }
 		});
-	editorAction = new ActionDescriptor<StateToken>(AccessRolDTO.Editor, ActionPosition.topbarAndItemMenu,
+	editorAction = new ActionToolbarMenuAndItemDescriptor<StateToken>(AccessRolDTO.Editor, ActionToolbarPosition.topbar,
 		new Listener<StateToken>() {
 		    public void onEvent(final StateToken parameter) {
 		    }
 		});
 
-	viewerAction = new ActionDescriptor<StateToken>(AccessRolDTO.Viewer, ActionPosition.topbarAndItemMenu,
+	viewerAction = new ActionToolbarMenuAndItemDescriptor<StateToken>(AccessRolDTO.Viewer, ActionToolbarPosition.topbar,
 		new Listener<StateToken>() {
 		    public void onEvent(final StateToken parameter) {
 		    }

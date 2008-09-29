@@ -5,7 +5,7 @@ import org.ourproject.kune.platf.client.services.ImageDescriptor;
 
 import com.calclab.suco.client.listener.Listener;
 
-public class ActionDescriptor<T> {
+public abstract class ActionDescriptor<T> {
 
     private String iconUrl;
     private ImageDescriptor iconDescriptor;
@@ -21,23 +21,19 @@ public class ActionDescriptor<T> {
 
     private AccessRolDTO accessRol;
 
-    private ActionPosition actionPosition;
-
     private ActionEnableCondition<T> enableCondition;
 
-    public ActionDescriptor(final AccessRolDTO accessRolDTO, final ActionPosition actionPosition,
-	    final Listener<T> onPerformCall) {
+    public ActionDescriptor(final AccessRolDTO accessRolDTO, final Listener<T> onPerformCall,
+	    final ActionEnableCondition<T> enableCondition) {
+	this(accessRolDTO, onPerformCall);
+	this.enableCondition = enableCondition;
+    }
+
+    public ActionDescriptor(final AccessRolDTO accessRolDTO, final Listener<T> onPerformCall) {
 	accessRol = accessRolDTO;
-	this.actionPosition = actionPosition;
 	this.onPerformCall = onPerformCall;
 	mustBeConfirmed = false;
 	onNotConfirmed = null;
-    }
-
-    public ActionDescriptor(final AccessRolDTO accessRolDTO, final ActionPosition actionPosition,
-	    final Listener<T> onPerformCall, final ActionEnableCondition<T> enableCondition) {
-	this(accessRolDTO, actionPosition, onPerformCall);
-	this.enableCondition = enableCondition;
     }
 
     @SuppressWarnings("unchecked")
@@ -54,10 +50,6 @@ public class ActionDescriptor<T> {
 
     public AccessRolDTO getAccessRol() {
 	return accessRol;
-    }
-
-    public ActionPosition getActionPosition() {
-	return actionPosition;
     }
 
     public String getConfirmationText() {
@@ -94,10 +86,6 @@ public class ActionDescriptor<T> {
 
     public void setAccessRol(final AccessRolDTO accessRol) {
 	this.accessRol = accessRol;
-    }
-
-    public void setActionPosition(final ActionPosition actionPosition) {
-	this.actionPosition = actionPosition;
     }
 
     public void setConfirmationText(final String confirmationText) {

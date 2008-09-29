@@ -1,9 +1,9 @@
 package org.ourproject.kune.chat.client;
 
 import org.ourproject.kune.docs.client.DocumentClientTool;
-import org.ourproject.kune.platf.client.actions.ActionButtonDescriptor;
-import org.ourproject.kune.platf.client.actions.ActionButtonSeparator;
-import org.ourproject.kune.platf.client.actions.ActionPosition;
+import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarButtonSeparator;
+import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
@@ -30,8 +30,8 @@ public class ChatClientActions {
     }
 
     private void createActions() {
-	final ActionButtonDescriptor<StateToken> chatAbout = new ActionButtonDescriptor<StateToken>(
-		AccessRolDTO.Viewer, ActionPosition.topbar, new Listener<StateToken>() {
+	final ActionToolbarButtonDescriptor<StateToken> chatAbout = new ActionToolbarButtonDescriptor<StateToken>(
+		AccessRolDTO.Viewer, ActionToolbarPosition.topbar, new Listener<StateToken>() {
 		    public void onEvent(final StateToken token) {
 			chatClientToolProvider.get().getChat().joinRoom(token.toString().replaceAll("\\.", "-"),
 				session.getCurrentUserInfo().getShortName());
@@ -41,7 +41,7 @@ public class ChatClientActions {
 	// chatAbout.setTextDescription(i18n.t("Chat about"));
 	chatAbout.setIconUrl("images/emite-room.png");
 	chatAbout.setToolTip("Chat and comment this");
-	chatAbout.setLeftSeparator(ActionButtonSeparator.fill);
+	chatAbout.setLeftSeparator(ActionToolbarButtonSeparator.fill);
 
 	contentActionRegistry.addAction(chatAbout, DocumentClientTool.TYPE_DOCUMENT);
 	contentActionRegistry.addAction(chatAbout, DocumentClientTool.TYPE_GALLERY);

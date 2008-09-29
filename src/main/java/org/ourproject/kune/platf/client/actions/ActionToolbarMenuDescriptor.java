@@ -5,15 +5,20 @@ import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.listener.Listener;
 
-public class ActionMenuDescriptor<T> extends ActionDescriptor<T> {
+public class ActionToolbarMenuDescriptor<T> extends ActionToolbarDescriptor<T> {
 
     private String parentMenuTitle;
     private String parentMenuIconUrl;
     private String parentSubMenuTitle;
 
-    public ActionMenuDescriptor(final AccessRolDTO accessRolDTO, final ActionPosition actionPosition,
+    public ActionToolbarMenuDescriptor(final AccessRolDTO accessRolDTO, final ActionToolbarPosition actionToolbarPosition,
 	    final Listener<T> onPerformCall) {
-	super(accessRolDTO, actionPosition, onPerformCall);
+	super(accessRolDTO, actionToolbarPosition, onPerformCall);
+    }
+
+    public ActionToolbarMenuDescriptor(final AccessRolDTO accessRolDTO, final ActionToolbarPosition actionToolbarPosition,
+	    final Listener<T> onPerformCall, final ActionEnableCondition<T> enableCondition) {
+	super(accessRolDTO, actionToolbarPosition, onPerformCall, enableCondition);
     }
 
     public String getParentMenuIconUrl() {

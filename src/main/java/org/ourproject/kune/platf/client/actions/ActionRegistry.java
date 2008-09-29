@@ -31,21 +31,13 @@ public class ActionRegistry<T> {
 	for (final ActionDescriptor<T> action : getActions(contentTypeId)) {
 	    if (mustAdd(rights, action)) {
 		if (toolbarItems) {
-		    switch (action.getActionPosition()) {
-		    case topbarAndItemMenu:
-		    case topbar:
-		    case bootombarAndItemMenu:
-		    case bottombar:
+		    if (action instanceof ActionToolbarButtonDescriptor<?> || action instanceof ActionToolbarMenuDescriptor<?>) {
 			collection.add(new ActionItem<T>(action, item));
-			break;
 		    }
 		} else {
-		    switch (action.getActionPosition()) {
-		    case itemMenu:
-		    case topbarAndItemMenu:
-		    case bootombarAndItemMenu:
+		    if (action instanceof ActionMenuItemDescriptor<?> || action instanceof ActionToolbarMenuAndItemDescriptor<?>
+			    || action instanceof ActionToolbarButtonAndItemDescriptor<?>) {
 			collection.add(new ActionItem<T>(action, item));
-			break;
 		    }
 		}
 	    }
