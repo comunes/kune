@@ -20,6 +20,7 @@
 
 package org.ourproject.kune.platf.client.state;
 
+import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
@@ -38,7 +39,7 @@ public interface StateManager extends HistoryListener {
 
     void gotoToken(String token);
 
-    void onGroupChanged(Listener2<String, String> listener);
+    void onGroupChanged(Listener2<GroupDTO, GroupDTO> listener);
 
     void onSocialNetworkChanged(Listener<StateDTO> listener);
 

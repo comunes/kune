@@ -32,9 +32,10 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.state.StateManagerDefault;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
 import org.ourproject.kune.platf.client.tool.ToolSelectorPresenter;
-import org.ourproject.kune.platf.client.ui.dialogs.upload.FileUploader;
-import org.ourproject.kune.platf.client.ui.dialogs.upload.FileUploaderDialog;
-import org.ourproject.kune.platf.client.ui.dialogs.upload.FileUploaderPresenter;
+import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
+import org.ourproject.kune.platf.client.ui.upload.FileUploader;
+import org.ourproject.kune.platf.client.ui.upload.FileUploaderDialog;
+import org.ourproject.kune.platf.client.ui.upload.FileUploaderPresenter;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPanel;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPresenter;
@@ -353,6 +354,12 @@ public class KuneModule extends AbstractModule {
 		final FileUploaderDialog panel = new FileUploaderDialog(presenter, i18n, $(WorkspaceSkeleton.class));
 		presenter.init(panel);
 		return presenter;
+	    }
+	});
+
+	register(Singleton.class, new Factory<FileDownloadUtils>(FileDownloadUtils.class) {
+	    public FileDownloadUtils create() {
+		return new FileDownloadUtils($(Session.class));
 	    }
 	});
 

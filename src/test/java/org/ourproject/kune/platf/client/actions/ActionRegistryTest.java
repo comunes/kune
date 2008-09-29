@@ -78,7 +78,7 @@ public class ActionRegistryTest {
 		return false;
 	    }
 	});
-	registry.addAction(DEF_CONTENT_TYPE_ID, adminAction);
+	registry.addAction(adminAction, DEF_CONTENT_TYPE_ID);
 	assertTrue(!registry.checkEnabling(adminAction, new StateToken()));
     }
 
@@ -89,14 +89,14 @@ public class ActionRegistryTest {
 		return true;
 	    }
 	});
-	registry.addAction(DEF_CONTENT_TYPE_ID, adminAction);
+	registry.addAction(adminAction, DEF_CONTENT_TYPE_ID);
 	assertTrue(registry.checkEnabling(adminAction, new StateToken()));
     }
 
     private void addDefActions() {
-	registry.addAction(DEF_CONTENT_TYPE_ID, adminAction);
-	registry.addAction(DEF_CONTENT_TYPE_ID, editorAction);
-	registry.addAction(DEF_CONTENT_TYPE_ID, viewerAction);
+	registry.addAction(adminAction, DEF_CONTENT_TYPE_ID);
+	registry.addAction(editorAction, DEF_CONTENT_TYPE_ID);
+	registry.addAction(viewerAction, DEF_CONTENT_TYPE_ID);
     }
 
     private void checkActionLists(final int expectedActions, final AccessRightsDTO accessRightsDTO,

@@ -32,6 +32,7 @@ import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.Query;
 import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
+import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.client.errors.EmailAddressInUseException;
 import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
@@ -174,6 +175,14 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     public void setDefaultContent(final String groupShortName, final Content content) {
 	final Group group = findByShortName(groupShortName);
 	group.setDefaultContent(content);
+    }
+
+    public void setGroupLogo(final Group group, final Content content) {
+	if (content.getMimeType().getType().equals("image")) {
+	    group.setGroupLogo(content);
+	} else {
+	    new DefaultException("Trying to set not a image as group logo");
+	}
     }
 
     private void initGroup(final User user, final Group group) throws GroupNameInUseException {

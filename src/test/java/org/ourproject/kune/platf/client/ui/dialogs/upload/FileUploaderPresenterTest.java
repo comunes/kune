@@ -8,6 +8,8 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.ui.upload.FileUploaderPresenter;
+import org.ourproject.kune.platf.client.ui.upload.FileUploaderView;
 
 public class FileUploaderPresenterTest {
 

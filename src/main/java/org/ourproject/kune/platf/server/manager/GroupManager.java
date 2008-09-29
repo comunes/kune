@@ -63,4 +63,6 @@ public interface GroupManager extends Manager<Group, Long> {
 
     void setDefaultContent(String groupShortName, Content content);
 
+    void setGroupLogo(Group group, Content content);
+
 }

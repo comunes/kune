@@ -2,6 +2,7 @@ package org.ourproject.kune.platf.client.tool;
 
 import java.util.HashMap;
 
+import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
@@ -13,9 +14,9 @@ public class ToolSelectorPresenter implements ToolSelector {
 
     public ToolSelectorPresenter(final StateManager stateManager, final WsThemePresenter wsThemePresenter) {
 	tools = new HashMap<String, ToolSelectorItem>();
-	stateManager.onGroupChanged(new Listener2<String, String>() {
-	    public void onEvent(final String oldGroupName, final String newGroupName) {
-		onGroupChanged(newGroupName);
+	stateManager.onGroupChanged(new Listener2<GroupDTO, GroupDTO>() {
+	    public void onEvent(final GroupDTO oldGroup, final GroupDTO newGroup) {
+		onGroupChanged(newGroup.getShortName());
 	    }
 	});
 	stateManager.onToolChanged(new Listener2<String, String>() {

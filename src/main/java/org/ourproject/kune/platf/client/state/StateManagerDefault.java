@@ -23,6 +23,7 @@ package org.ourproject.kune.platf.client.state;
 import java.util.HashMap;
 
 import org.ourproject.kune.platf.client.app.HistoryWrapper;
+import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
@@ -48,7 +49,7 @@ public class StateManagerDefault implements StateManager {
     private final Event<StateDTO> onStateChanged;
     private final Event<StateDTO> onSocialNetworkChanged;
     private final Event2<String, String> onToolChanged;
-    private final Event2<String, String> onGroupChanged;
+    private final Event2<GroupDTO, GroupDTO> onGroupChanged;
 
     public StateManagerDefault(final ContentProvider contentProvider, final Session session,
 	    final HistoryWrapper history) {
@@ -57,7 +58,7 @@ public class StateManagerDefault implements StateManager {
 	this.history = history;
 	this.oldState = null;
 	this.onStateChanged = new Event<StateDTO>("onStateChanged");
-	this.onGroupChanged = new Event2<String, String>("onGroupChanged");
+	this.onGroupChanged = new Event2<GroupDTO, GroupDTO>("onGroupChanged");
 	this.onToolChanged = new Event2<String, String>("onToolChanged");
 	this.onSocialNetworkChanged = new Event<StateDTO>("onSocialNetworkChanged");
 	session.onUserSignIn(new Listener<UserInfoDTO>() {
@@ -92,7 +93,7 @@ public class StateManagerDefault implements StateManager {
 	gotoToken(new StateToken(token));
     }
 
-    public void onGroupChanged(final Listener2<String, String> listener) {
+    public void onGroupChanged(final Listener2<GroupDTO, GroupDTO> listener) {
 	onGroupChanged.add(listener);
     }
 
@@ -159,12 +160,12 @@ public class StateManagerDefault implements StateManager {
     }
 
     private void checkGroupAndToolChange(final StateDTO oldState, final StateDTO newState) {
-	final String oldGroupName = oldState != null ? oldState.getGroup().getShortName() : null;
-	final String newGroupName = newState.getGroup().getShortName();
+	final GroupDTO oldGroup = oldState != null ? oldState.getGroup() : null;
+	final GroupDTO newGroup = newState.getGroup();
 	final String oldToolName = oldState != null ? oldState.getToolName() : null;
 	final String newToolName = newState.getToolName();
-	if (oldState == null || !oldGroupName.equals(newGroupName)) {
-	    onGroupChanged.fire(oldGroupName, newGroupName);
+	if (oldState == null || !oldGroup.equals(newGroup)) {
+	    onGroupChanged.fire(oldGroup, newGroup);
 	}
 	if (oldState == null || !oldToolName.equals(newToolName)) {
 	    onToolChanged.fire(oldToolName, newToolName);

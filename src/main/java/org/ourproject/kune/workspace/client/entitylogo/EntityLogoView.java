@@ -1,17 +1,15 @@
 package org.ourproject.kune.workspace.client.entitylogo;
 
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
-
-import com.google.gwt.user.client.ui.Image;
 
 public interface EntityLogoView {
 
-    // FIXME: Don' use Image
-    public abstract void setLogo(final Image image);
+    void setLogo(StateToken stateToken, boolean clipped);
 
-    public abstract void setLogo(final String groupName);
+    void setLogo(final String groupName);
 
-    public abstract void setPutYourLogoVisible(final boolean visible);
+    void setPutYourLogoVisible(final boolean visible);
 
-    public abstract void setTheme(final WsTheme oldTheme, WsTheme newTheme);
+    void setTheme(final WsTheme oldTheme, WsTheme newTheme);
 }

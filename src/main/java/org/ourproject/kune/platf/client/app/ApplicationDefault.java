@@ -49,10 +49,10 @@ public class ApplicationDefault implements Application {
 	this.onApplicationStop = new Event0("onApplicationStop");
 	Window.addWindowCloseListener(new WindowCloseListener() {
 	    public void onWindowClosed() {
-		stop();
 	    }
 
 	    public String onWindowClosing() {
+		stop();
 		return null;
 	    }
 	});

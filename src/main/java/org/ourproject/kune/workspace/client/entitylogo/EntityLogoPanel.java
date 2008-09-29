@@ -20,11 +20,16 @@
 
 package org.ourproject.kune.workspace.client.entitylogo;
 
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.ui.dialogs.InfoDialog;
+import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 
+import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Hyperlink;
@@ -32,6 +37,7 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 public class EntityLogoPanel extends SimplePanel implements EntityLogoView {
     class EntityTextLogo extends VerticalPanel {
@@ -58,8 +64,17 @@ public class EntityLogoPanel extends SimplePanel implements EntityLogoView {
 	    putYourLogoHP.add(defTextPutYourLogoHL);
 
 	    // Set properties
-	    // TODO: Put your logo here functionality
 	    defTextPutYourLogoHL.setText(i18n.t("Put Your Logo Here"));
+	    defTextPutYourLogoHL.addClickListener(new ClickListener() {
+		public void onClick(final Widget sender) {
+		    final InfoDialog infoDialog = new InfoDialog(
+			    "Configure your group logo",
+			    "Howto configure your group logo",
+			    "For configure your group's logo just add an image to your group contents and select it as your group's logo (see menu 'File'). Whe are working into a more direct way to do that.",
+			    i18n.t("Ok"), false, false, 300, 200);
+		    infoDialog.show();
+		}
+	    });
 	    expandCell.setWidth("100%");
 	    putYourLogoHP.setCellWidth(expandCell, "100%");
 	    // TODO: link to configure the logo
@@ -83,17 +98,33 @@ public class EntityLogoPanel extends SimplePanel implements EntityLogoView {
 
     }
 
+    private static final int LOGO_ICON_DEFAULT_WIDTH = 468;
+    private static final int LOGO_ICON_DEFAULT_HEIGHT = 60;
+
     private EntityTextLogo entityTextLogo;
     private final I18nTranslationService i18n;
+    private final Provider<FileDownloadUtils> dowloadProvider;
 
-    public EntityLogoPanel(final I18nTranslationService i18n, final WorkspaceSkeleton ws) {
+    public EntityLogoPanel(final I18nTranslationService i18n, final WorkspaceSkeleton ws,
+	    final Provider<FileDownloadUtils> dowloadProvider) {
 	this.i18n = i18n;
+	this.dowloadProvider = dowloadProvider;
 	ws.addToEntityMainHeader(this);
     }
 
-    public void setLogo(final Image image) {
+    public void setLogo(final StateToken stateToken, final boolean clipped) {
 	clear();
-	add(image);
+	final String imageUrl = dowloadProvider.get().getImageUrl(stateToken);
+	Image logo;
+	if (clipped) {
+	    logo = new Image(imageUrl, 0, 0, LOGO_ICON_DEFAULT_WIDTH, LOGO_ICON_DEFAULT_HEIGHT);
+	} else {
+
+	    logo = new Image(imageUrl);
+	    logo.setWidth("" + LOGO_ICON_DEFAULT_WIDTH);
+	    logo.setHeight("" + LOGO_ICON_DEFAULT_HEIGHT);
+	}
+	add(logo);
     }
 
     public void setLogo(final String groupName) {

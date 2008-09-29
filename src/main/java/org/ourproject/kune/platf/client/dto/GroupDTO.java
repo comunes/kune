@@ -30,6 +30,7 @@ public class GroupDTO implements IsSerializable {
     private String publicDesc;
     private GroupType type;
     private ContentSimpleDTO defaultContent;
+    private ContentSimpleDTO groupLogo;
     private LicenseDTO defaultLicense;
     private String workspaceTheme;
     private String tags;
@@ -102,6 +103,10 @@ public class GroupDTO implements IsSerializable {
 	return defaultLicense;
     }
 
+    public ContentSimpleDTO getGroupLogo() {
+	return groupLogo;
+    }
+
     public Long getId() {
 	return id;
     }
@@ -148,6 +153,10 @@ public class GroupDTO implements IsSerializable {
 
     public void setDefaultLicense(final LicenseDTO defaultLicense) {
 	this.defaultLicense = defaultLicense;
+    }
+
+    public void setGroupLogo(final ContentSimpleDTO groupLogo) {
+	this.groupLogo = groupLogo;
     }
 
     public void setId(final Long id) {

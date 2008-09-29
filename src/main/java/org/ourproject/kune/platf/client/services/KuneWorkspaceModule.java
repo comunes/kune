@@ -8,6 +8,7 @@ import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.QuickTipsHelper;
+import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.rate.RateIt;
 import org.ourproject.kune.platf.client.ui.rate.RateItPanel;
 import org.ourproject.kune.platf.client.ui.rate.RateItPresenter;
@@ -209,9 +210,9 @@ public class KuneWorkspaceModule extends AbstractModule {
 	register(ApplicationComponentGroup.class, new Factory<EntityLogo>(EntityLogo.class) {
 	    public EntityLogo create() {
 		final EntityLogoPresenter presenter = new EntityLogoPresenter($(StateManager.class),
-			$(WsThemePresenter.class));
+			$(WsThemePresenter.class), $(Session.class));
 		final EntityLogoPanel panel = new EntityLogoPanel($(I18nUITranslationService.class),
-			$(WorkspaceSkeleton.class));
+			$(WorkspaceSkeleton.class), $$(FileDownloadUtils.class));
 		presenter.init(panel);
 		return presenter;
 	    }

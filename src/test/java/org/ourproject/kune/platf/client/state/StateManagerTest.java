@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.ourproject.kune.platf.client.app.HistoryWrapper;
+import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.workspace.client.site.SiteToken;
@@ -23,7 +24,7 @@ public class StateManagerTest {
     @SuppressWarnings("unchecked")
     @Test
     public void changeStateWithDifferentGroupsMustFireListener() {
-	final Listener2<String, String> groupListener = Mockito.mock(Listener2.class);
+	final Listener2<GroupDTO, GroupDTO> groupListener = Mockito.mock(Listener2.class);
 	stateManager.onGroupChanged(groupListener);
 	stateManager.onHistoryChanged("group1.tool1");
 	stateManager.onHistoryChanged("group2.tool1");

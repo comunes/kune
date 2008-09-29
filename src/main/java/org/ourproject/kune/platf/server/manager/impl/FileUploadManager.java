@@ -23,7 +23,7 @@ import org.apache.commons.logging.LogFactory;
 import org.ourproject.kune.docs.server.DocumentServerTool;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.platf.client.ui.dialogs.upload.FileUploader;
+import org.ourproject.kune.platf.client.ui.upload.FileUploader;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.access.AccessRol;
 import org.ourproject.kune.platf.server.access.AccessService;

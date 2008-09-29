@@ -12,9 +12,11 @@ public class ActionRegistry<T> {
 	actions = new HashMap<String, ActionCollection<T>>();
     }
 
-    public void addAction(final String contentTypeId, final ActionDescriptor<T> action) {
-	final ActionCollection<T> actionColl = getActions(contentTypeId);
-	actionColl.add(action);
+    public void addAction(final ActionDescriptor<T> action, final String... contentTypeIds) {
+	for (final String contentTypeId : contentTypeIds) {
+	    final ActionCollection<T> actionColl = getActions(contentTypeId);
+	    actionColl.add(action);
+	}
     }
 
     public boolean checkEnabling(final ActionDescriptor<T> action, final T T) {

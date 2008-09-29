@@ -16,7 +16,6 @@ import com.calclab.suco.client.listener.Listener;
 
 public class ChatClientActions {
 
-    private final I18nUITranslationService i18n;
     private final Session session;
     private final Provider<ChatClientTool> chatClientToolProvider;
     private final ContentActionRegistry contentActionRegistry;
@@ -24,7 +23,6 @@ public class ChatClientActions {
     public ChatClientActions(final I18nUITranslationService i18n, final Session session,
 	    final ContentActionRegistry contentActionRegistry, final ContextActionRegistry contextActionRegistry,
 	    final Provider<ChatClientTool> chatClientToolProvider) {
-	this.i18n = i18n;
 	this.session = session;
 	this.contentActionRegistry = contentActionRegistry;
 	this.chatClientToolProvider = chatClientToolProvider;
@@ -42,13 +40,13 @@ public class ChatClientActions {
 		});
 	// chatAbout.setTextDescription(i18n.t("Chat about"));
 	chatAbout.setIconUrl("images/emite-room.png");
-	chatAbout.setToolTip("Chat online about this");
+	chatAbout.setToolTip("Chat and comment this");
 	chatAbout.setLeftSeparator(ActionButtonSeparator.fill);
 
-	contentActionRegistry.addAction(DocumentClientTool.TYPE_DOCUMENT, chatAbout);
-	contentActionRegistry.addAction(DocumentClientTool.TYPE_GALLERY, chatAbout);
-	contentActionRegistry.addAction(DocumentClientTool.TYPE_WIKIPAGE, chatAbout);
-	contentActionRegistry.addAction(DocumentClientTool.TYPE_POST, chatAbout);
-	contentActionRegistry.addAction(DocumentClientTool.TYPE_UPLOADEDFILE, chatAbout);
+	contentActionRegistry.addAction(chatAbout, DocumentClientTool.TYPE_DOCUMENT);
+	contentActionRegistry.addAction(chatAbout, DocumentClientTool.TYPE_GALLERY);
+	contentActionRegistry.addAction(chatAbout, DocumentClientTool.TYPE_WIKIPAGE);
+	contentActionRegistry.addAction(chatAbout, DocumentClientTool.TYPE_POST);
+	contentActionRegistry.addAction(chatAbout, DocumentClientTool.TYPE_UPLOADEDFILE);
     }
 }

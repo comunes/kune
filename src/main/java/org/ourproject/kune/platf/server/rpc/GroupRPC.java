@@ -32,6 +32,8 @@ import org.ourproject.kune.platf.server.auth.ActionLevel;
 import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.auth.Authorizated;
 import org.ourproject.kune.platf.server.content.ContentManager;
+import org.ourproject.kune.platf.server.content.ContentUtils;
+import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
@@ -62,7 +64,7 @@ public class GroupRPC implements RPC, GroupService {
 
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
-    @Transactional(type = TransactionType.READ_WRITE, rollbackOn = DefaultException.class)
+    @Transactional(type = TransactionType.READ_WRITE)
     public void changeGroupWsTheme(final String userHash, final StateToken groupToken, final String theme)
 	    throws DefaultException {
 	final UserSession userSession = getUserSession();
@@ -83,6 +85,16 @@ public class GroupRPC implements RPC, GroupService {
 	final Long defContentId = newGroup.getDefaultContent().getId();
 	contentManager.setTags(user, defContentId, groupDTO.getTags());
 	return newGroup.getDefaultContent().getStateToken();
+    }
+
+    @Authenticated
+    @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
+    @Transactional(type = TransactionType.READ_WRITE)
+    public GroupDTO setGroupLogo(final String userHash, final StateToken token) {
+	final Group group = groupManager.findByShortName(token.getGroup());
+	final Content content = contentManager.find(ContentUtils.parseId(token.getDocument()));
+	groupManager.setGroupLogo(group, content);
+	return mapper.map(group, GroupDTO.class);
     }
 
     private UserSession getUserSession() {
