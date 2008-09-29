@@ -4,9 +4,11 @@ import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_BLOG;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_DOCUMENT;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_FOLDER;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_GALLERY;
+import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_POST;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_ROOT;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_UPLOADEDFILE;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_WIKI;
+import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_WIKIPAGE;
 
 import org.ourproject.kune.platf.client.actions.ActionButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionDescriptor;
@@ -16,19 +18,24 @@ import org.ourproject.kune.platf.client.actions.ActionPosition;
 import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
+import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
 import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
+import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
+import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
+import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.platf.client.ui.dialogs.upload.FileUploader;
+import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
+import org.ourproject.kune.platf.client.ui.upload.FileUploader;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
+import org.ourproject.kune.workspace.client.entitylogo.EntityLogo;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.site.Site;
-import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Listener;
@@ -43,22 +50,27 @@ public class DocumentClientActions {
     private final ContentActionRegistry contentActionRegistry;
     private final ContextActionRegistry contextActionRegistry;
     private final Provider<ContentServiceAsync> contentServiceProvider;
-    private final WorkspaceSkeleton ws;
+    private final Provider<GroupServiceAsync> groupServiceProvider;
+    private final Provider<FileDownloadUtils> fileDownloadProvider;
+    private final EntityLogo entityLogo;
 
     public DocumentClientActions(final I18nUITranslationService i18n, final ContextNavigator contextNavigator,
-	    final Session session, final StateManager stateManager, final WorkspaceSkeleton ws,
+	    final Session session, final StateManager stateManager,
 	    final Provider<ContentServiceAsync> contentServiceProvider,
-	    final Provider<FileUploader> fileUploaderProvider, final ContentActionRegistry contentActionRegistry,
-	    final ContextActionRegistry contextActionRegistry) {
+	    final Provider<GroupServiceAsync> groupServiceProvider, final Provider<FileUploader> fileUploaderProvider,
+	    final ContentActionRegistry contentActionRegistry, final ContextActionRegistry contextActionRegistry,
+	    final Provider<FileDownloadUtils> fileDownloadProvider, final EntityLogo entityLogo) {
 	this.i18n = i18n;
 	this.contextNavigator = contextNavigator;
 	this.session = session;
 	this.stateManager = stateManager;
-	this.ws = ws;
 	this.contentServiceProvider = contentServiceProvider;
+	this.groupServiceProvider = groupServiceProvider;
 	this.fileUploaderProvider = fileUploaderProvider;
 	this.contextActionRegistry = contextActionRegistry;
 	this.contentActionRegistry = contentActionRegistry;
+	this.fileDownloadProvider = fileDownloadProvider;
+	this.entityLogo = entityLogo;
 	createActions();
     }
 
@@ -134,14 +146,14 @@ public class DocumentClientActions {
 	    }
 	});
 
-	final ActionMenuDescriptor<StateToken> rename = new ActionMenuDescriptor<StateToken>(AccessRolDTO.Editor,
+	final ActionMenuDescriptor<StateToken> renameCtn = new ActionMenuDescriptor<StateToken>(AccessRolDTO.Editor,
 		ActionPosition.topbarAndItemMenu, new Listener<StateToken>() {
 		    public void onEvent(final StateToken stateToken) {
 			contextNavigator.editItem(stateToken);
 		    }
 		});
-	rename.setTextDescription(i18n.t("Rename"));
-	rename.setParentMenuTitle(i18n.t("File"));
+	renameCtn.setTextDescription(i18n.t("Rename"));
+	renameCtn.setParentMenuTitle(i18n.t("File"));
 
 	final ActionMenuDescriptor<StateToken> renameCtx = new ActionMenuDescriptor<StateToken>(AccessRolDTO.Editor,
 		ActionPosition.topbarAndItemMenu, new Listener<StateToken>() {
@@ -221,7 +233,7 @@ public class DocumentClientActions {
 		final ActionDescriptor<StateToken> uploadMedia = createUploadAction(i18n.t("Upload media"),
 			"images/nav/upload.png", i18n.t("Upload some media (images, videos)"), session
 				.getGalleryPermittedExtensions());
-		contextActionRegistry.addAction(TYPE_GALLERY, uploadMedia);
+		contextActionRegistry.addAction(uploadMedia, TYPE_GALLERY);
 	    }
 	});
 
@@ -244,49 +256,93 @@ public class DocumentClientActions {
 	downloadCtx.setTextDescription(i18n.t("Download"));
 	downloadCtx.setIconUrl("images/nav/download.png");
 
-	contextActionRegistry.addAction(TYPE_FOLDER, go);
-	contextActionRegistry.addAction(TYPE_FOLDER, addDoc);
-	contextActionRegistry.addAction(TYPE_FOLDER, addFolder);
-	contextActionRegistry.addAction(TYPE_FOLDER, renameCtx);
-	contextActionRegistry.addAction(TYPE_FOLDER, refreshCtx);
-	contextActionRegistry.addAction(TYPE_FOLDER, delContainer);
-	contextActionRegistry.addAction(TYPE_FOLDER, goGroupHome);
-	contextActionRegistry.addAction(TYPE_FOLDER, uploadFile);
+	final ActionMenuDescriptor<StateToken> setGroupLogo = new ActionMenuDescriptor<StateToken>(
+		AccessRolDTO.Administrator, ActionPosition.topbarAndItemMenu, new Listener<StateToken>() {
+		    public void onEvent(final StateToken token) {
+			groupServiceProvider.get().setGroupLogo(session.getUserHash(), token,
+				new AsyncCallbackSimple<GroupDTO>() {
+				    public void onSuccess(GroupDTO newGroup) {
+					Site.info("Logo selected");
+					if (session.getCurrentState().getGroup().getShortName().equals(
+						newGroup.getShortName())) {
+					    session.getCurrentState().setGroup(newGroup);
+					}
+					entityLogo.refreshGroupLogo();
+				    }
+				});
+		    }
+		});
+	setGroupLogo.setParentMenuTitle(i18n.t("File"));
+	setGroupLogo.setTextDescription(i18n.t("Set this as the group logo"));
+	setGroupLogo.setIconUrl("images/nav/picture.png");
+	setGroupLogo.setEnableCondition(new ActionEnableCondition<StateToken>() {
+	    public boolean mustBeEnabled(final StateToken param) {
+		final BasicMimeTypeDTO mime = session.getCurrentState().getMimeType();
+		return mime != null && mime.getType().equals("image");
+	    }
+	});
 
-	contextActionRegistry.addAction(TYPE_BLOG, go);
-	contextActionRegistry.addAction(TYPE_BLOG, uploadFile);
-	contextActionRegistry.addAction(TYPE_BLOG, refreshCtx);
-	contextActionRegistry.addAction(TYPE_BLOG, setAsDefGroupContent);
+	final ActionMenuDescriptor<StateToken> setPublishStatus = createSetStatusAction(AccessRolDTO.Administrator,
+		i18n.t("Published online"), ContentStatusDTO.publishedOnline);
+	final ActionMenuDescriptor<StateToken> setEditionInProgressStatus = createSetStatusAction(
+		AccessRolDTO.Administrator, i18n.t("Editing in progress"), ContentStatusDTO.editingInProgress);
+	final ActionMenuDescriptor<StateToken> setRejectStatus = createSetStatusAction(AccessRolDTO.Administrator, i18n
+		.t("Rejected"), ContentStatusDTO.rejected);
+	final ActionMenuDescriptor<StateToken> setSubmittedForPublishStatus = createSetStatusAction(
+		AccessRolDTO.Administrator, i18n.t("Submitted for publish"), ContentStatusDTO.publishedOnline);
+	final ActionMenuDescriptor<StateToken> setInTheDustBinStatus = createSetStatusAction(
+		AccessRolDTO.Administrator, i18n.t("In the dustbin"), ContentStatusDTO.inTheDustbin);
 
-	contextActionRegistry.addAction(TYPE_GALLERY, go);
-	contextActionRegistry.addAction(TYPE_GALLERY, goGroupHome);
-	contextActionRegistry.addAction(TYPE_GALLERY, refreshCtx);
+	final ActionButtonDescriptor<StateToken> translateContent = new ActionButtonDescriptor<StateToken>(
+		AccessRolDTO.Editor, ActionPosition.topbar, new Listener<StateToken>() {
+		    public void onEvent(final StateToken stateToken) {
+			Site.important(i18n.t("Sorry, this functionality is currently in development"));
+		    }
+		});
+	translateContent.setTextDescription(i18n.tWithNT("Translate", "used in button"));
+	translateContent.setToolTip(i18n.t("Translate this document to other languages"));
+	translateContent.setIconUrl("images/language.gif");
 
-	contextActionRegistry.addAction(TYPE_UPLOADEDFILE, go);
-	contextActionRegistry.addAction(TYPE_UPLOADEDFILE, setAsDefGroupContent);
-	contentActionRegistry.addAction(TYPE_UPLOADEDFILE, rename);
-	contentActionRegistry.addAction(TYPE_UPLOADEDFILE, refreshCnt);
-	contentActionRegistry.addAction(TYPE_UPLOADEDFILE, delContent);
-	contentActionRegistry.addAction(TYPE_UPLOADEDFILE, download);
-	contextActionRegistry.addAction(TYPE_UPLOADEDFILE, downloadCtx);
+	final ActionButtonDescriptor<StateToken> editContent = new ActionButtonDescriptor<StateToken>(
+		AccessRolDTO.Editor, ActionPosition.topbar, new Listener<StateToken>() {
+		    public void onEvent(final StateToken stateToken) {
+		    }
+		});
+	editContent.setTextDescription(i18n.tWithNT("Edit", "used in button"));
+	editContent.setIconUrl("images/content_edit.png");
 
-	contextActionRegistry.addAction(TYPE_WIKI, go);
-	contextActionRegistry.addAction(TYPE_WIKI, goGroupHome);
-	contextActionRegistry.addAction(TYPE_WIKI, refreshCtx);
+	final String[] all = { TYPE_ROOT, TYPE_FOLDER, TYPE_DOCUMENT, TYPE_GALLERY, TYPE_BLOG, TYPE_POST, TYPE_WIKI,
+		TYPE_WIKIPAGE, TYPE_UPLOADEDFILE };
+	final String[] containersNoRoot = { TYPE_FOLDER, TYPE_GALLERY, TYPE_BLOG, TYPE_WIKI };
+	final String[] containers = { TYPE_ROOT, TYPE_FOLDER, TYPE_GALLERY, TYPE_BLOG, TYPE_WIKI };
+	final String[] contents = { TYPE_DOCUMENT, TYPE_POST, TYPE_WIKIPAGE, TYPE_UPLOADEDFILE };
+	final String[] contentsModerated = { TYPE_DOCUMENT, TYPE_POST, TYPE_UPLOADEDFILE };
 
-	contextActionRegistry.addAction(TYPE_ROOT, addDoc);
-	contextActionRegistry.addAction(TYPE_ROOT, addFolder);
-	contextActionRegistry.addAction(TYPE_ROOT, addGallery);
-	contextActionRegistry.addAction(TYPE_ROOT, addWiki);
-	contextActionRegistry.addAction(TYPE_ROOT, refreshCtx);
-	contextActionRegistry.addAction(TYPE_ROOT, goGroupHome);
-	contextActionRegistry.addAction(TYPE_ROOT, uploadFile);
-
-	contextActionRegistry.addAction(TYPE_DOCUMENT, go);
-	contextActionRegistry.addAction(TYPE_DOCUMENT, setAsDefGroupContent);
-	contentActionRegistry.addAction(TYPE_DOCUMENT, rename);
-	contentActionRegistry.addAction(TYPE_DOCUMENT, refreshCnt);
-	contentActionRegistry.addAction(TYPE_DOCUMENT, delContent);
+	contentActionRegistry.addAction(setPublishStatus, contentsModerated);
+	contentActionRegistry.addAction(setEditionInProgressStatus, contentsModerated);
+	contentActionRegistry.addAction(setRejectStatus, contentsModerated);
+	contentActionRegistry.addAction(setSubmittedForPublishStatus, contentsModerated);
+	contentActionRegistry.addAction(setInTheDustBinStatus, contentsModerated);
+	contextActionRegistry.addAction(addDoc, TYPE_ROOT, TYPE_FOLDER);
+	contextActionRegistry.addAction(addFolder, TYPE_ROOT, TYPE_FOLDER);
+	contextActionRegistry.addAction(addGallery, TYPE_ROOT);
+	contextActionRegistry.addAction(addWiki, TYPE_ROOT);
+	contextActionRegistry.addAction(go, all);
+	contextActionRegistry.addAction(uploadFile, TYPE_ROOT, TYPE_FOLDER, TYPE_BLOG);
+	contentActionRegistry.addAction(download, TYPE_UPLOADEDFILE);
+	contextActionRegistry.addAction(renameCtx, containersNoRoot);
+	contentActionRegistry.addAction(renameCtn, contents);
+	contextActionRegistry.addAction(refreshCtx, containers);
+	contentActionRegistry.addAction(refreshCnt, contents);
+	contentActionRegistry.addAction(delContent, contents);
+	contextActionRegistry.addAction(delContainer, containersNoRoot);
+	contextActionRegistry.addAction(setAsDefGroupContent, TYPE_BLOG, TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
+	contextActionRegistry.addAction(goGroupHome, containers);
+	contentActionRegistry.addAction(setGroupLogo, TYPE_UPLOADEDFILE);
+	contextActionRegistry.addAction(downloadCtx, TYPE_UPLOADEDFILE);
+	contentActionRegistry.addAction(editContent, TYPE_DOCUMENT, TYPE_POST, TYPE_WIKIPAGE);
+	contentActionRegistry.addAction(translateContent, TYPE_DOCUMENT, TYPE_FOLDER, TYPE_GALLERY, TYPE_UPLOADEDFILE,
+		TYPE_WIKI, TYPE_WIKIPAGE);
     }
 
     private ActionMenuDescriptor<StateToken> createFolderAction(final String contentTypeId, final String iconUrl,
@@ -313,6 +369,30 @@ public class DocumentClientActions {
 	return addFolder;
     }
 
+    private ActionMenuDescriptor<StateToken> createSetStatusAction(final AccessRolDTO rol,
+	    final String textDescription, final ContentStatusDTO status) {
+	final ActionMenuDescriptor<StateToken> action = new ActionMenuDescriptor<StateToken>(rol,
+		ActionPosition.topbarAndItemMenu, new Listener<StateToken>() {
+		    public void onEvent(final StateToken stateToken) {
+			final AsyncCallbackSimple<Object> callback = new AsyncCallbackSimple<Object>() {
+			    public void onSuccess(final Object result) {
+				session.getCurrentState().setStatus(status);
+			    }
+			};
+			if (status.equals(ContentStatusDTO.publishedOnline) || status.equals(ContentStatusDTO.rejected)) {
+			    contentServiceProvider.get().setStatusAsAdmin(session.getUserHash(), stateToken, status,
+				    callback);
+			} else {
+			    contentServiceProvider.get().setStatus(session.getUserHash(), stateToken, status, callback);
+			}
+		    }
+		});
+	action.setTextDescription(textDescription);
+	action.setParentMenuTitle(i18n.t("File"));
+	action.setParentSubMenuTitle(i18n.t("Change the status"));
+	return action;
+    }
+
     private ActionButtonDescriptor<StateToken> createUploadAction(final String textDescription, final String iconUrl,
 	    final String toolTip, final String permitedExtensions) {
 	final ActionButtonDescriptor<StateToken> uploadFile;
@@ -334,8 +414,6 @@ public class DocumentClientActions {
     }
 
     private void downloadContent(final StateToken token) {
-	final String url = "/kune/servlets/FileDownloadManager?token=" + token + "&hash=" + session.getUserHash()
-		+ "&download=true";
-	ws.openUrl(url);
+	fileDownloadProvider.get().downloadFile(token);
     }
 }
