@@ -8,15 +8,14 @@ import org.ourproject.kune.platf.client.actions.ActionToolbarButtonAndItemDescri
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuAndItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
-import org.ourproject.kune.platf.client.dto.StateToken;
 
 import com.allen_sauer.gwt.log.client.Log;
 
-public class ActionToolbarPresenter implements ActionToolbar {
-    private final ActionToolbarView toolbar;
-    private final ActionRegistry<StateToken> actionRegistry;
+public class ActionToolbarPresenter<T> implements ActionToolbar<T> {
+    private final ActionToolbarView<T> toolbar;
+    private final ActionRegistry<T> actionRegistry;
 
-    public ActionToolbarPresenter(final ActionToolbarView toolbar, final ActionRegistry<StateToken> actionRegistry) {
+    public ActionToolbarPresenter(final ActionToolbarView<T> toolbar, final ActionRegistry<T> actionRegistry) {
 	this.toolbar = toolbar;
 	this.actionRegistry = actionRegistry;
     }
@@ -40,9 +39,9 @@ public class ActionToolbarPresenter implements ActionToolbar {
 	// toolbar.disableAllMenuItems();
     }
 
-    public void showActions(final ActionItemCollection<StateToken> actions, final boolean isItemSelected) {
-	for (final ActionItem<StateToken> actionItem : actions) {
-	    final ActionDescriptor<StateToken> action = actionItem.getAction();
+    public void showActions(final ActionItemCollection<T> actions, final boolean isItemSelected) {
+	for (final ActionItem<T> actionItem : actions) {
+	    final ActionDescriptor<T> action = actionItem.getAction();
 	    if (action instanceof ActionToolbarMenuDescriptor || action instanceof ActionToolbarMenuAndItemDescriptor) {
 		toolbar.addMenuAction(actionItem, isItemSelected
 			&& actionRegistry.checkEnabling(action, actionItem.getItem()));

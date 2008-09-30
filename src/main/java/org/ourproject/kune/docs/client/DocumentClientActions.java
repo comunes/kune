@@ -148,6 +148,7 @@ public class DocumentClientActions {
 			stateManager.gotoToken(token);
 		    }
 		});
+	go.setMustBeAuthenticated(false);
 	go.setTextDescription(i18n.t("Open"));
 	go.setIconUrl("images/nav/go.png");
 	go.setEnableCondition(new ActionEnableCondition<StateToken>() {
@@ -180,6 +181,7 @@ public class DocumentClientActions {
 			stateManager.gotoToken(token.getGroup());
 		    }
 		});
+	goGroupHome.setMustBeAuthenticated(false);
 	goGroupHome.setIconUrl("images/group-home.png");
 	goGroupHome.setEnableCondition(new ActionEnableCondition<StateToken>() {
 	    public boolean mustBeEnabled(final StateToken currentStateToken) {
@@ -204,6 +206,7 @@ public class DocumentClientActions {
 			contextNavigator.selectItem(stateToken);
 		    }
 		});
+	refreshCtx.setMustBeAuthenticated(false);
 	refreshCtx.setParentMenuTitle(i18n.t("Folder"));
 	refreshCtx.setTextDescription(i18n.t("Refresh"));
 	refreshCtx.setIconUrl("images/nav/refresh.png");
@@ -215,6 +218,7 @@ public class DocumentClientActions {
 			contextNavigator.selectItem(stateToken);
 		    }
 		});
+	refreshCnt.setMustBeAuthenticated(false);
 	refreshCnt.setParentMenuTitle(i18n.t("File"));
 	refreshCnt.setTextDescription(i18n.t("Refresh"));
 	refreshCnt.setIconUrl("images/nav/refresh.png");
@@ -237,6 +241,7 @@ public class DocumentClientActions {
 			downloadContent(token);
 		    }
 		});
+	download.setMustBeAuthenticated(false);
 	download.setTextDescription(i18n.t("Download"));
 	download.setToolTip(i18n.t("Download this file"));
 	download.setIconUrl("images/nav/download.png");
@@ -247,6 +252,7 @@ public class DocumentClientActions {
 			downloadContent(token);
 		    }
 		});
+	downloadCtx.setMustBeAuthenticated(false);
 	downloadCtx.setTextDescription(i18n.t("Download"));
 	downloadCtx.setIconUrl("images/nav/download.png");
 
@@ -322,12 +328,12 @@ public class DocumentClientActions {
 	contextActionRegistry.addAction(addGallery, TYPE_ROOT);
 	contextActionRegistry.addAction(addWiki, TYPE_ROOT);
 	contextActionRegistry.addAction(go, all);
-	contextActionRegistry.addAction(uploadFile, TYPE_ROOT, TYPE_FOLDER, TYPE_BLOG);
-	contentActionRegistry.addAction(download, TYPE_UPLOADEDFILE);
-	contextActionRegistry.addAction(renameCtx, containersNoRoot);
 	contentActionRegistry.addAction(renameCtn, contents);
+	contextActionRegistry.addAction(renameCtx, containersNoRoot);
 	contextActionRegistry.addAction(refreshCtx, containers);
 	contentActionRegistry.addAction(refreshCnt, contents);
+	contextActionRegistry.addAction(uploadFile, TYPE_ROOT, TYPE_FOLDER, TYPE_BLOG);
+	contentActionRegistry.addAction(download, TYPE_UPLOADEDFILE);
 	contentActionRegistry.addAction(delContent, contents);
 	contextActionRegistry.addAction(delContainer, containersNoRoot);
 	contentActionRegistry.addAction(setAsDefGroupCnt, TYPE_DOCUMENT, TYPE_UPLOADEDFILE);

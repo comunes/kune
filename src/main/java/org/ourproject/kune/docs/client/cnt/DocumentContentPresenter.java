@@ -61,14 +61,14 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
     private final Provider<ContentServiceAsync> contentServiceProvider;
     private final I18nUITranslationService i18n;
     private final KuneErrorHandler errorHandler;
-    private final ActionToolbar toolbar;
+    private final ActionToolbar<StateToken> toolbar;
     private final ActionRegistry<StateToken> actionRegistry;
 
     public DocumentContentPresenter(final StateManager stateManager, final I18nUITranslationService i18n,
 	    final KuneErrorHandler errorHandler, final Session session, final RateIt rateIt,
 	    final Provider<DocumentReader> docReaderProvider, final Provider<TextEditor> textEditorProvider,
 	    final Provider<FolderViewer> folderViewerProvider,
-	    final Provider<ContentServiceAsync> contentServiceProvider, final ActionToolbar toolbar,
+	    final Provider<ContentServiceAsync> contentServiceProvider, final ActionToolbar<StateToken> toolbar,
 	    final ActionRegistry<StateToken> actionRegistry) {
 	this.stateManager = stateManager;
 	this.i18n = i18n;
@@ -192,11 +192,11 @@ public class DocumentContentPresenter implements DocumentContent, TextEditorList
 	final String typeId = content.getTypeId();
 	ActionItemCollection<StateToken> collection;
 	if (content.hasDocument()) {
-	    collection = actionRegistry.getCurrentActions(content.getStateToken(), typeId, content.getContentRights(),
-		    true);
+	    collection = actionRegistry.getCurrentActions(content.getStateToken(), typeId, session.isLogged(), content
+		    .getContentRights(), true);
 	} else {
-	    collection = actionRegistry.getCurrentActions(content.getStateToken(), typeId,
-		    content.getContainerRights(), true);
+	    collection = actionRegistry.getCurrentActions(content.getStateToken(), typeId, session.isLogged(), content
+		    .getContainerRights(), true);
 	}
 	toolbar.disableMenusAndClearButtons();
 	toolbar.showActions(collection, true);

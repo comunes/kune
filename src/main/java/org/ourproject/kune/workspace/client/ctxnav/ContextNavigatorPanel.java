@@ -30,17 +30,21 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.themes.WsTheme;
+import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.calclab.suco.client.listener.Listener2;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
-import com.google.gwt.user.client.ui.ScrollPanel;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.ExtElement;
 import com.gwtext.client.data.Node;
 import com.gwtext.client.dd.DragData;
 import com.gwtext.client.dd.DragDrop;
+import com.gwtext.client.widgets.BoxComponent;
 import com.gwtext.client.widgets.Editor;
+import com.gwtext.client.widgets.event.ContainerListenerAdapter;
 import com.gwtext.client.widgets.event.EditorListenerAdapter;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.menu.BaseItem;
@@ -67,14 +71,20 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
     private final ContextNavigatorPresenter presenter;
 
     public ContextNavigatorPanel(final ContextNavigatorPresenter presenter, final I18nTranslationService i18n,
-	    final WorkspaceSkeleton ws, final ActionManager actionManager) {
+	    final WorkspaceSkeleton ws, final ActionManager actionManager, final WsThemePresenter wsTheme) {
 	this.presenter = presenter;
 	this.ws = ws;
 	this.actionManager = actionManager;
+	wsTheme.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
+	    public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
+		setTheme(oldTheme, newTheme);
+	    }
+	});
 
 	contextMenus = new HashMap<String, Menu>();
 	fireOnTextChange = true;
 	isEditable = false;
+
     }
 
     public void addItem(final ContextNavigatorItem item) {
@@ -193,6 +203,16 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 	}
     }
 
+    public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
+	if (treePanel != null) {
+	    if (oldTheme != null) {
+		final String previousThemeS = oldTheme.toString();
+		treePanel.removeStyleName("k-entity-context-" + previousThemeS);
+	    }
+	    treePanel.addStyleName("k-entity-context-" + newTheme);
+	}
+    }
+
     private void createItemMenu(final String nodeId, final ActionItemCollection<StateToken> actionCollection) {
 	DeferredCommand.addCommand(new Command() {
 	    public void execute() {
@@ -222,11 +242,16 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 	    clear();
 	}
 	treePanel = new TreePanel();
+	treePanel.setHeight("100%");
+	treePanel.setAutoScroll(true);
+	treePanel.setRootVisible(false);
+	treePanel.setContainerScroll(true);
 	treePanel.setAnimate(true);
 	treePanel.setBorder(false);
-	treePanel.setRootVisible(false);
 	treePanel.setUseArrows(true);
 	treePanel.setSelectionModel(new MultiSelectionModel());
+	// treePanel.setBufferResize(true;)
+	// treePanel.setId(CTX_NAVIGATOR_TREEPANEL);
 	final TreeNode root = new TreeNode();
 	root.setAllowDrag(false);
 	root.setExpanded(true);
@@ -254,9 +279,7 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 	treePanel.setLines(false);
 	treePanel.setEnableDD(isEditable);
 	treePanel.setRootNode(root);
-	// treePanel.setAutoScroll(true);
-	treePanel.setContainerScroll(true);
-	treePanel.setAutoWidth(true);
+	// treePanel.expand();
 
 	final TextField field = new TextField();
 	treeEditor = new TreeEditor(treePanel, field);
@@ -265,18 +288,27 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 		return isEditable;
 	    }
 	});
+	// test !?
+	treeEditor.setAutosize(false);
 
-	final ScrollPanel panel = new ScrollPanel();
-	// final Panel panel = new Panel();
-	// panel.setLayout(new FitLayout());
-	// panel.setBorder(false);
-	// panel.setAutoScroll(true);
-	// new ScrollPanel
-	panel.setWidth("100%");
-	panel.setHeight("100%");
-	panel.add(treePanel);
+	treePanel.addListener(new ContainerListenerAdapter() {
+	    public void onResize(final BoxComponent component, final int adjWidth, final int adjHeight,
+		    final int rawWidth, final int rawHeight) {
+		// Log.debug("tree-------w: " + adjWidth + " h: " + adjHeight);
+		treePanel.doLayout(false);
+	    }
+	});
 
-	ws.getEntityWorkspace().setContext(panel);
+	ws.getEntityWorkspace().addContextListener(new ContainerListenerAdapter() {
+	    @Override
+	    public void onResize(final BoxComponent component, final int adjWidth, final int adjHeight,
+		    final int rawWidth, final int rawHeight) {
+		// Log.debug("-------w: " + adjWidth + " h: " + adjHeight);
+		// Log.debug("---r---w: " + rawWidth + " h: " + rawHeight);
+	    }
+	});
+
+	ws.getEntityWorkspace().setContext(treePanel);
     }
 
     private void doAction(final ActionItem<StateToken> actionItem) {

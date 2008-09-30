@@ -24,18 +24,20 @@ public class ActionRegistry<T> {
 	return enableCondition != null ? enableCondition.mustBeEnabled(T) : true;
     }
 
-    public ActionItemCollection<T> getCurrentActions(final T item, final String contentTypeId,
+    public ActionItemCollection<T> getCurrentActions(final T item, final String contentTypeId, final boolean isLogged,
 	    final AccessRightsDTO rights, final boolean toolbarItems) {
 	final ActionItemCollection<T> collection = new ActionItemCollection<T>();
 
 	for (final ActionDescriptor<T> action : getActions(contentTypeId)) {
-	    if (mustAdd(rights, action)) {
+	    if (mustAdd(isLogged, rights, action)) {
 		if (toolbarItems) {
-		    if (action instanceof ActionToolbarButtonDescriptor<?> || action instanceof ActionToolbarMenuDescriptor<?>) {
+		    if (action instanceof ActionToolbarButtonDescriptor<?>
+			    || action instanceof ActionToolbarMenuDescriptor<?>) {
 			collection.add(new ActionItem<T>(action, item));
 		    }
 		} else {
-		    if (action instanceof ActionMenuItemDescriptor<?> || action instanceof ActionToolbarMenuAndItemDescriptor<?>
+		    if (action instanceof ActionMenuItemDescriptor<?>
+			    || action instanceof ActionToolbarMenuAndItemDescriptor<?>
 			    || action instanceof ActionToolbarButtonAndItemDescriptor<?>) {
 			collection.add(new ActionItem<T>(action, item));
 		    }
@@ -58,7 +60,12 @@ public class ActionRegistry<T> {
 	return actionColl;
     }
 
-    private boolean mustAdd(final AccessRightsDTO rights, final ActionDescriptor<T> action) {
+    private boolean mustAdd(final boolean isLogged, final AccessRightsDTO rights, final ActionDescriptor<T> action) {
+	if (action.mustBeAuthenticated()) {
+	    if (!isLogged) {
+		return false;
+	    }
+	}
 	switch (action.getAccessRol()) {
 	case Administrator:
 	    return rights.isAdministrable();

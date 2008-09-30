@@ -65,13 +65,13 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     private final ContentIconsRegistry contentIconsRegistry;
     private final DragDropContentRegistry dragDropContentRegistry;
     private final ActionRegistry<StateToken> actionRegistry;
-    private final ActionToolbar toolbar;
+    private final ActionToolbar<StateToken> toolbar;
 
     public ContextNavigatorPresenter(final StateManager stateManager, final Session session,
 	    final Provider<ContentServiceAsync> contentServiceProvider, final I18nUITranslationService i18n,
 	    final EntityTitle entityTitle, final ContentIconsRegistry contentIconsRegistry,
-	    final DragDropContentRegistry dragDropContentRegistry, final ActionRegistry<StateToken> actionRegistry,
-	    final ActionToolbar toolbar) {
+	    final DragDropContentRegistry dragDropContentRegistry, final ActionToolbar<StateToken> toolbar,
+	    final ActionRegistry<StateToken> actionRegistry) {
 	this.stateManager = stateManager;
 	this.session = session;
 	this.contentServiceProvider = contentServiceProvider;
@@ -205,7 +205,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	    final ActionItemCollection<StateToken> contentActions = addItem(state.getTitle(), state.getTypeId(), state
 		    .getMimeType(), state.getStatus(), stateToken, container.getStateToken(), rights, false);
 	    final ActionItemCollection<StateToken> containerActions = actionRegistry.getCurrentActions(container
-		    .getStateToken(), container.getTypeId(), containerRights, true);
+		    .getStateToken(), container.getTypeId(), session.isLogged(), containerRights, true);
 	    actionItems.addAll(containerActions);
 	    actionItems.addAll(contentActions);
 
@@ -246,14 +246,15 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	    final StateToken parentStateToken, final AccessRightsDTO rights, final boolean isNodeSelected) {
 
 	final ActionItemCollection<StateToken> toolbarActions = actionRegistry.getCurrentActions(stateToken,
-		contentTypeId, rights, true);
+		contentTypeId, session.isLogged(), rights, true);
 
 	final String contentTypeIcon = contentTypeId.equals(TYPE_FOLDER) ? "" : contentIconsRegistry
 		.getContentTypeIcon(contentTypeId, mimeType);
 	final ContextNavigatorItem item = new ContextNavigatorItem(genId(stateToken), genId(parentStateToken),
 		contentTypeIcon, title, status, stateToken, dragDropContentRegistry.isDraggable(contentTypeId, rights
 			.isAdministrable()), dragDropContentRegistry.isDroppable(contentTypeId, rights
-			.isAdministrable()), actionRegistry.getCurrentActions(stateToken, contentTypeId, rights, false));
+			.isAdministrable()), actionRegistry.getCurrentActions(stateToken, contentTypeId, session
+			.isLogged(), rights, false));
 	view.addItem(item);
 	return toolbarActions;
     }

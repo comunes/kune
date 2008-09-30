@@ -1,13 +1,12 @@
 package org.ourproject.kune.platf.client.actions.toolbar;
 
 import org.ourproject.kune.platf.client.actions.ActionItem;
-import org.ourproject.kune.platf.client.dto.StateToken;
 
-public interface ActionToolbarView {
+public interface ActionToolbarView<T> {
 
-    void addButtonAction(ActionItem<StateToken> action);
+    void addButtonAction(ActionItem<T> action);
 
-    void addMenuAction(ActionItem<StateToken> action, boolean enable);
+    void addMenuAction(ActionItem<T> action, boolean enable);
 
     void attach();
 

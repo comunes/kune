@@ -19,21 +19,24 @@ public abstract class ActionDescriptor<T> {
     private final Listener<T> onPerformCall;
     private final Listener<T> onNotConfirmed;
 
+    private boolean mustBeAuthenticated;
+
     private AccessRolDTO accessRol;
 
     private ActionEnableCondition<T> enableCondition;
+
+    public ActionDescriptor(final AccessRolDTO accessRolDTO, final Listener<T> onPerformCall) {
+	this.accessRol = accessRolDTO;
+	this.onPerformCall = onPerformCall;
+	this.mustBeConfirmed = false;
+	this.onNotConfirmed = null;
+	this.mustBeAuthenticated = true;
+    }
 
     public ActionDescriptor(final AccessRolDTO accessRolDTO, final Listener<T> onPerformCall,
 	    final ActionEnableCondition<T> enableCondition) {
 	this(accessRolDTO, onPerformCall);
 	this.enableCondition = enableCondition;
-    }
-
-    public ActionDescriptor(final AccessRolDTO accessRolDTO, final Listener<T> onPerformCall) {
-	accessRol = accessRolDTO;
-	this.onPerformCall = onPerformCall;
-	mustBeConfirmed = false;
-	onNotConfirmed = null;
     }
 
     @SuppressWarnings("unchecked")
@@ -84,6 +87,10 @@ public abstract class ActionDescriptor<T> {
 	return mustBeConfirmed;
     }
 
+    public boolean mustBeAuthenticated() {
+	return mustBeAuthenticated;
+    }
+
     public void setAccessRol(final AccessRolDTO accessRol) {
 	this.accessRol = accessRol;
     }
@@ -106,6 +113,10 @@ public abstract class ActionDescriptor<T> {
 
     public void setIconUrl(final String iconUrl) {
 	this.iconUrl = iconUrl;
+    }
+
+    public void setMustBeAuthenticated(final boolean mustBeAuthenticated) {
+	this.mustBeAuthenticated = mustBeAuthenticated;
     }
 
     public void setMustBeConfirmed(final boolean mustBeConfirmed) {

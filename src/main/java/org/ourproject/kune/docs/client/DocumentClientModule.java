@@ -27,6 +27,7 @@ import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPresenter;
 import org.ourproject.kune.platf.client.app.ToolGroup;
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
@@ -79,10 +80,10 @@ public class DocumentClientModule extends AbstractModule {
 
 	register(ToolGroup.class, new Factory<DocumentContent>(DocumentContent.class) {
 	    public DocumentContent create() {
-		final ActionToolbarPanel contentNavigatorToolbar = new ActionToolbarPanel(
+		final ActionToolbarPanel<StateToken> contentNavigatorToolbar = new ActionToolbarPanel<StateToken>(
 			ActionToolbarPanel.Position.content, $$(ActionManager.class), $(WorkspaceSkeleton.class));
-		final ActionToolbar toolbar = new ActionToolbarPresenter(contentNavigatorToolbar,
-			$(ContentActionRegistry.class));
+		final ActionToolbar<StateToken> toolbar = new ActionToolbarPresenter<StateToken>(
+			contentNavigatorToolbar, $(ContentActionRegistry.class));
 
 		final DocumentContentPresenter presenter = new DocumentContentPresenter($(StateManager.class),
 			$(I18nUITranslationService.class), $(KuneErrorHandler.class), $(Session.class),

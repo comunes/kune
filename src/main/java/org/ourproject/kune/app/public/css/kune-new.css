@@ -336,29 +336,35 @@
     text-decoration: underline;
 }
 
-.k-entity-context-default div {
+.k-entity-context-default div,  .k-entity-context-default .x-tree .x-panel-body {
     background: #FFD09D none repeat scroll 0% 50%;
 }
 
-.k-entity-context-green div {
+.k-entity-context-green div, .k-entity-context-green .x-tree .x-panel-body {
     background: #CFA none repeat scroll 0% 50%;
 }
 
-.k-entity-context-blue div {
+.k-entity-context-blue div, .k-entity-context-blue .x-tree .x-panel-body {
     background: #AACCFF none repeat scroll 0% 50%;
 }
 
-.k-entity-context-grey div {
+.k-entity-context-grey div, .k-entity-context-grey .x-tree .x-panel-body {
     background: #B3B3B3 none repeat scroll 0% 50%;
 }
 
-.k-entity-context-purple div {
+.k-entity-context-purple div, .k-entity-context-purple .x-tree .x-panel-body {
     background: #DDAFE9 none repeat scroll 0% 50%;
 }
 
-.k-entity-context-red div {
+.k-entity-context-red div, .k-entity-context-red .x-tree .x-panel-body {
     background: #FFAAAA none repeat scroll 0% 50%;
 }
+
+
+.k-entity-context-purple .x-tree .x-panel-body {
+    background: #DDAFE9 none repeat scroll 0% 50%;
+}
+
 
 .k-entity-bottom div {
     line-height: 2em;

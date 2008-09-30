@@ -6,8 +6,10 @@ import org.ourproject.kune.workspace.client.themes.WsTheme;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.Panel;
+import com.gwtext.client.widgets.event.ContainerListener;
 import com.gwtext.client.widgets.layout.AnchorLayout;
 import com.gwtext.client.widgets.layout.AnchorLayoutData;
+import com.gwtext.client.widgets.layout.FitLayout;
 
 public class EntityWorkspace extends DefaultBorderLayout {
     private static final String ENTITY_TITLE = "k-entity-title";
@@ -63,12 +65,13 @@ public class EntityWorkspace extends DefaultBorderLayout {
 	context = new Panel();
 	content.setCls(ENTITY_CONTENT);
 	context.setCls(ENTITY_CONTEXT);
+	context.setLayout(new FitLayout());
 	content.setBorder(false);
 	context.setBorder(false);
 	context.setCollapsible(true);
 	content.setPaddings(7);
 	content.setAutoScroll(true);
-	context.setAutoScroll(true);
+	// context.setAutoScroll(true);
 
 	contentTopBar = new Toolbar();
 	contentBottomBar = new Toolbar();
@@ -80,8 +83,8 @@ public class EntityWorkspace extends DefaultBorderLayout {
 	contextBottomBar.addStyleName("k-toolbar-top-line");
 	contentWrap.add(contentTopBar.getPanel(), Position.NORTH, false, DEF_TOOLBAR_HEIGHT);
 	contextWrap.add(contextTopBar.getPanel(), Position.NORTH, false, DEF_TOOLBAR_HEIGHT);
-	contentWrap.add(content, Position.CENTER);
-	contextWrap.add(context, Position.CENTER);
+	contentWrap.add(content, Position.CENTER, -1);
+	contextWrap.add(context, Position.CENTER, -1);
 	contentWrap.add(contentBottomBar.getPanel(), Position.SOUTH, false, DEF_TOOLBAR_HEIGHT);
 	contextWrap.add(contextBottomBar.getPanel(), Position.SOUTH, false, DEF_TOOLBAR_HEIGHT);
 
@@ -89,6 +92,14 @@ public class EntityWorkspace extends DefaultBorderLayout {
 	add(contentWrap.getPanel(), DefaultBorderLayout.Position.CENTER);
 	add(contextWrap.getPanel(), DefaultBorderLayout.Position.EAST, true, 175);
 	add(bottomPanel, DefaultBorderLayout.Position.SOUTH, DEF_TOOLBAR_HEIGHT + 2);
+    }
+
+    public void addContentListener(final ContainerListener listener) {
+	content.addListener(listener);
+    }
+
+    public void addContextListener(final ContainerListener listener) {
+	context.addListener(listener);
     }
 
     public SimpleToolbar getBottomTitle() {
