@@ -20,22 +20,17 @@
 
 package org.ourproject.kune.workspace.client.editor;
 
-import org.ourproject.kune.platf.client.View;
+import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.listener.Listener0;
 
 public interface TextEditor {
 
-    public String getContent();
+    void editContent(String content, Listener<String> onSave, Listener0 onEditCancelled);
 
-    public View getView();
+    void onSaved();
 
-    public void onSaved();
+    void onSaveFailed();
 
-    public void onSaveFailed();
-
-    public void reset();
-
-    public void setContent(String content);
-
-    public void setToolbarVisible(boolean visible);
+    void reset();
 
 }

@@ -54,42 +54,11 @@ public class GroupDTO implements IsSerializable {
 	    return false;
 	}
 	final GroupDTO other = (GroupDTO) obj;
-	if (defaultLicense == null) {
-	    if (other.defaultLicense != null) {
-		return false;
-	    }
-	} else if (!defaultLicense.equals(other.defaultLicense)) {
-	    return false;
-	}
-	if (id == null) {
-	    if (other.id != null) {
-		return false;
-	    }
-	} else if (!id.equals(other.id)) {
-	    return false;
-	}
-	if (longName == null) {
-	    if (other.longName != null) {
-		return false;
-	    }
-	} else if (!longName.equals(other.longName)) {
-	    return false;
-	}
-	if (publicDesc == null) {
-	    if (other.publicDesc != null) {
-		return false;
-	    }
-	} else if (!publicDesc.equals(other.publicDesc)) {
-	    return false;
-	}
 	if (shortName == null) {
 	    if (other.shortName != null) {
 		return false;
 	    }
 	} else if (!shortName.equals(other.shortName)) {
-	    return false;
-	}
-	if (type != other.type) {
 	    return false;
 	}
 	return true;
@@ -187,4 +156,7 @@ public class GroupDTO implements IsSerializable {
 	this.workspaceTheme = workspaceTheme;
     }
 
+    public String toString() {
+	return "GroupDTO[" + shortName + "]";
+    }
 }

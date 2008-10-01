@@ -28,28 +28,31 @@ public class SocialNetworkResultDTO implements IsSerializable {
     ParticipationDataDTO userParticipation;
 
     public SocialNetworkResultDTO() {
-        this(null, null);
+	this(null, null);
     }
 
     public SocialNetworkResultDTO(final SocialNetworkDTO groupMembers, final ParticipationDataDTO userParticipation) {
-        this.groupMembers = groupMembers;
-        this.userParticipation = userParticipation;
+	this.groupMembers = groupMembers;
+	this.userParticipation = userParticipation;
     }
 
     public SocialNetworkDTO getGroupMembers() {
-        return groupMembers;
-    }
-
-    public void setGroupMembers(final SocialNetworkDTO groupMembers) {
-        this.groupMembers = groupMembers;
+	return groupMembers;
     }
 
     public ParticipationDataDTO getUserParticipation() {
-        return userParticipation;
+	return userParticipation;
+    }
+
+    public void setGroupMembers(final SocialNetworkDTO groupMembers) {
+	this.groupMembers = groupMembers;
     }
 
     public void setUserParticipation(final ParticipationDataDTO userParticipation) {
-        this.userParticipation = userParticipation;
+	this.userParticipation = userParticipation;
     }
 
+    public String toString() {
+	return "SocialNetworkResultDTO[members: " + groupMembers + "; participation: " + userParticipation + "]";
+    }
 }

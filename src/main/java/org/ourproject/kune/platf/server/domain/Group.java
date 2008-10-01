@@ -281,4 +281,7 @@ public class Group implements HasId {
 	this.workspaceTheme = workspaceTheme;
     }
 
+    public String toString() {
+	return "Group[" + shortName + "]";
+    }
 }

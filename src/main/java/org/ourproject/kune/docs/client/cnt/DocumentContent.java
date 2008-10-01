@@ -20,20 +20,10 @@
 
 package org.ourproject.kune.docs.client.cnt;
 
-import com.calclab.suco.client.listener.Listener0;
-
 public interface DocumentContent {
 
-    void onEditCancelled(Listener0 listener);
+    void detach();
 
-    void onDeleteClicked();
-
-    void onEditClicked();
-
-    void onEditing(Listener0 listener);
-
-    void onSaved();
-
-    void onSaveFailed();
+    void refreshState();
 
 }

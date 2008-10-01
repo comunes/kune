@@ -30,7 +30,6 @@ import org.ourproject.kune.platf.client.ui.imgchooser.ImageData;
 import org.ourproject.kune.platf.client.ui.palette.ColorSelectListener;
 import org.ourproject.kune.platf.client.ui.palette.WebSafePalettePanel;
 import org.ourproject.kune.platf.client.ui.palette.WebSafePalettePresenter;
-import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Command;
@@ -264,11 +263,9 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
 
     private final TextEditorImages images = (TextEditorImages) GWT.create(TextEditorImages.class);
     private final EventListener listener = new EventListener();
-
     private final RichTextArea richText;
     private final RichTextArea.BasicFormatter basic;
     private final RichTextArea.ExtendedFormatter extended;
-
     private final VerticalPanel outer = new VerticalPanel();
     private final HorizontalPanel topPanel = new HorizontalPanel();
     private ToggleButton bold;
@@ -308,7 +305,7 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
      *                the rich text area to be controlled
      */
     public TextEditorToolbar(final RichTextArea richText, final TextEditorPresenter panelListener,
-	    final I18nTranslationService i18n, final WorkspaceSkeleton ws) {
+	    final I18nTranslationService i18n) {
 	this.richText = richText;
 	this.i18n = i18n;
 	this.basic = richText.getBasicFormatter();
@@ -392,8 +389,7 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
 	// i18n.t("Edit HTML")));
 	// }
 
-	ws.getEntityWorkspace().getContentTopBar().add(this);
-	super.setVisible(false);
+	// super.setVisible(false);
     }
 
     public void editHTML(final boolean edit) {

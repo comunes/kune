@@ -53,4 +53,9 @@ public class ParticipationDataDTO implements IsSerializable {
 	this.groupsIsCollab = groupsIsCollab;
     }
 
+    @Override
+    public String toString() {
+	return "ParticipationDataDTO[admin in: " + groupsIsAdmin.toString() + ", collab in: "
+		+ groupsIsCollab.toString() + "]";
+    }
 }

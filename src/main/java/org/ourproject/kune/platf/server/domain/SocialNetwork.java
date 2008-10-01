@@ -41,80 +41,83 @@ public class SocialNetwork {
     GroupList pendingCollaborators;
 
     public SocialNetwork() {
-        accessLists = new AccessLists();
-        pendingCollaborators = new GroupList();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public GroupList getPendingCollaborators() {
-        return pendingCollaborators;
-    }
-
-    public void setPendingCollaborators(final GroupList pendingCollaborators) {
-        this.pendingCollaborators = pendingCollaborators;
-    }
-
-    public void setAccessLists(final AccessLists accessList) {
-        this.accessLists = accessList;
-    }
-
-    public void setId(final Long id) {
-        this.id = id;
+	accessLists = new AccessLists();
+	pendingCollaborators = new GroupList();
     }
 
     public void addAdmin(final Group group) {
-        accessLists.addAdmin(group);
+	accessLists.addAdmin(group);
     }
 
     public void addCollaborator(final Group group) {
-        accessLists.addEditor(group);
-    }
-
-    public void addViewer(final Group group) {
-        accessLists.addViewer(group);
+	accessLists.addEditor(group);
     }
 
     public void addPendingCollaborator(final Group group) {
-        pendingCollaborators.add(group);
+	pendingCollaborators.add(group);
     }
 
-    public void removeAdmin(final Group group) {
-        accessLists.removeAdmin(group);
-    }
-
-    public void removeCollaborator(final Group group) {
-        accessLists.removeEditor(group);
-    }
-
-    public void removeViewer(final Group group) {
-        accessLists.removeViewer(group);
-    }
-
-    public void removePendingCollaborator(final Group group) {
-        pendingCollaborators.getList().remove(group);
+    public void addViewer(final Group group) {
+	accessLists.addViewer(group);
     }
 
     public AccessLists getAccessLists() {
-        return accessLists;
+	return accessLists;
+    }
+
+    public Long getId() {
+	return id;
+    }
+
+    public GroupList getPendingCollaborators() {
+	return pendingCollaborators;
     }
 
     public boolean isAdmin(final Group group) {
-        return accessLists.getAdmins().includes(group);
+	return accessLists.getAdmins().includes(group);
     }
 
     public boolean isCollab(final Group group) {
-        return accessLists.getEditors().includes(group);
-    }
-
-    public boolean isViewer(final Group group) {
-        return accessLists.getViewers().includes(group);
+	return accessLists.getEditors().includes(group);
     }
 
     public boolean isPendingCollab(final Group group) {
-        return pendingCollaborators.getList().contains(group);
+	return pendingCollaborators.getList().contains(group);
     }
 
+    public boolean isViewer(final Group group) {
+	return accessLists.getViewers().includes(group);
+    }
+
+    public void removeAdmin(final Group group) {
+	accessLists.removeAdmin(group);
+    }
+
+    public void removeCollaborator(final Group group) {
+	accessLists.removeEditor(group);
+    }
+
+    public void removePendingCollaborator(final Group group) {
+	pendingCollaborators.getList().remove(group);
+    }
+
+    public void removeViewer(final Group group) {
+	accessLists.removeViewer(group);
+    }
+
+    public void setAccessLists(final AccessLists accessList) {
+	this.accessLists = accessList;
+    }
+
+    public void setId(final Long id) {
+	this.id = id;
+    }
+
+    public void setPendingCollaborators(final GroupList pendingCollaborators) {
+	this.pendingCollaborators = pendingCollaborators;
+    }
+
+    public String toString() {
+	return "SocialNetwork[accessList: " + accessLists + "; pendingsCollabs: " + pendingCollaborators + "]";
+    }
 }

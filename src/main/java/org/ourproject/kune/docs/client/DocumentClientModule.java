@@ -35,7 +35,6 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
-import org.ourproject.kune.platf.client.ui.rate.RateIt;
 import org.ourproject.kune.platf.client.ui.upload.FileUploader;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
@@ -74,7 +73,8 @@ public class DocumentClientModule extends AbstractModule {
 		return new DocumentClientActions($(I18nUITranslationService.class), $(ContextNavigator.class),
 			$(Session.class), $(StateManager.class), $$(ContentServiceAsync.class),
 			$$(GroupServiceAsync.class), $$(FileUploader.class), $(ContentActionRegistry.class),
-			$(ContextActionRegistry.class), $$(FileDownloadUtils.class), $(EntityLogo.class));
+			$(ContextActionRegistry.class), $$(FileDownloadUtils.class), $(EntityLogo.class),
+			$$(TextEditor.class), $(KuneErrorHandler.class), $(DocumentContent.class));
 	    }
 	});
 
@@ -83,12 +83,11 @@ public class DocumentClientModule extends AbstractModule {
 		final ActionToolbarPanel<StateToken> contentNavigatorToolbar = new ActionToolbarPanel<StateToken>(
 			ActionToolbarPanel.Position.content, $$(ActionManager.class), $(WorkspaceSkeleton.class));
 		final ActionToolbar<StateToken> toolbar = new ActionToolbarPresenter<StateToken>(
-			contentNavigatorToolbar, $(ContentActionRegistry.class));
+			contentNavigatorToolbar);
 
 		final DocumentContentPresenter presenter = new DocumentContentPresenter($(StateManager.class),
-			$(I18nUITranslationService.class), $(KuneErrorHandler.class), $(Session.class),
-			$(RateIt.class), $$(DocumentReader.class), $$(TextEditor.class), $$(FolderViewer.class),
-			$$(ContentServiceAsync.class), toolbar, $(ContentActionRegistry.class));
+			$(Session.class), $$(DocumentReader.class), $$(TextEditor.class), $$(FolderViewer.class),
+			toolbar, $(ContentActionRegistry.class));
 		final DocumentContentPanel panel = new DocumentContentPanel($(WorkspaceSkeleton.class));
 		presenter.init(panel);
 		return presenter;

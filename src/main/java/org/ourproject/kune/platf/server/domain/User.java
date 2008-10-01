@@ -213,4 +213,7 @@ public class User implements HasId {
 	this.userGroup = userGroup;
     }
 
+    public String toString() {
+	return "User[" + shortName + "]";
+    }
 }

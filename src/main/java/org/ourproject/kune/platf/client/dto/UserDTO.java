@@ -153,4 +153,8 @@ public class UserDTO implements IsSerializable {
 	this.timezone = timezone;
     }
 
+    public String toString() {
+	return "UserDTO[" + shortName + "]";
+    }
+
 }

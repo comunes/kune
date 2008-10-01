@@ -21,21 +21,48 @@
 package org.ourproject.kune.workspace.client.editor;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.actions.ActionItem;
+import org.ourproject.kune.platf.client.actions.ActionItemCollection;
+import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
+import org.ourproject.kune.platf.client.dto.AccessRolDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+
+import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.listener.Listener0;
 
 public class TextEditorPresenter implements TextEditor {
     private boolean editingHtml;
     private TextEditorView view;
     private boolean savePending;
     private final boolean autoSave;
-    private final TextEditorListener listener;
     private boolean saveAndCloseConfirmed;
+    private Listener<String> onSave;
+    private Listener0 onEditCancelled;
+    private final ActionToolbar<StateToken> toolbar;
+    private ActionToolbarButtonDescriptor<StateToken> save;
+    private ActionToolbarButtonDescriptor<StateToken> close;
+    private final I18nUITranslationService i18n;
 
-    public TextEditorPresenter(final TextEditorListener listener, final boolean isAutoSave) {
-	this.listener = listener;
+    public TextEditorPresenter(final boolean isAutoSave, final ActionToolbar<StateToken> toolbar,
+	    final I18nUITranslationService i18n) {
+	this.toolbar = toolbar;
 	autoSave = isAutoSave;
+	this.i18n = i18n;
 	savePending = false;
 	editingHtml = false;
 	saveAndCloseConfirmed = false;
+	createActions();
+    }
+
+    public void editContent(final String content, final Listener<String> onSave, final Listener0 onEditCancelled) {
+	this.onSave = onSave;
+	this.onEditCancelled = onEditCancelled;
+	toolbar.attach();
+	view.attach();
+	setContent(content);
     }
 
     public String getContent() {
@@ -87,14 +114,8 @@ public class TextEditorPresenter implements TextEditor {
 	savePending = false;
 	saveAndCloseConfirmed = false;
 	view.setEnabledSaveButton(false);
-    }
-
-    public void setContent(final String html) {
-	this.view.setHTML(html);
-    }
-
-    public void setToolbarVisible(final boolean visible) {
-	view.setToolBarVisible(visible);
+	view.detach();
+	toolbar.detach();
     }
 
     protected void onCancel() {
@@ -108,7 +129,7 @@ public class TextEditorPresenter implements TextEditor {
 
     protected void onCancelConfirmed() {
 	reset();
-	listener.onEditCancelled();
+	onEditCancelled.onEvent();
     }
 
     protected void onEditHTML() {
@@ -128,6 +149,35 @@ public class TextEditorPresenter implements TextEditor {
     }
 
     protected void onSave() {
-	listener.onSave(view.getHTML());
+	onSave.onEvent(view.getHTML());
+    }
+
+    private void createActions() {
+	save = new ActionToolbarButtonDescriptor<StateToken>(AccessRolDTO.Viewer, ActionToolbarPosition.topbar,
+		new Listener<StateToken>() {
+		    public void onEvent(final StateToken token) {
+			onSave();
+		    }
+		});
+	save.setTextDescription(i18n.tWithNT("Save", "used in button"));
+	// save.setIconUrl("images/");
+
+	close = new ActionToolbarButtonDescriptor<StateToken>(AccessRolDTO.Viewer, ActionToolbarPosition.topbar,
+		new Listener<StateToken>() {
+		    public void onEvent(final StateToken token) {
+			onCancel();
+		    }
+		});
+	close.setTextDescription(i18n.tWithNT("Close", "used in button"));
+	// close.setIconUrl("images/");
+
+	final ActionItemCollection<StateToken> collection = new ActionItemCollection<StateToken>();
+	collection.add(new ActionItem<StateToken>(save, null));
+	collection.add(new ActionItem<StateToken>(close, null));
+	toolbar.showActions(collection, true);
+    }
+
+    private void setContent(final String html) {
+	this.view.setHTML(html);
     }
 }

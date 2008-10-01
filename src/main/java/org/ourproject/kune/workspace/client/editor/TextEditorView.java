@@ -24,34 +24,36 @@ import org.ourproject.kune.platf.client.View;
 
 public interface TextEditorView extends View {
 
-    public void editHTML(boolean edit);
+    void attach();
 
-    public String getHTML();
+    void detach();
 
-    public String getText();
+    void editHTML(boolean edit);
 
-    public View getToolBar();
+    String getHTML();
 
-    public void saveTimerCancel();
+    String getText();
 
-    public void scheduleSave(int delayMillis);
+    View getToolBar();
 
-    public void setEnabled(boolean enabled);
+    void saveTimerCancel();
 
-    public void setEnabledCancelButton(boolean enabled);
+    void scheduleSave(int delayMillis);
 
-    public void setEnabledSaveButton(boolean enabled);
+    void setEnabled(boolean enabled);
 
-    public void setHeight(String height);
+    void setEnabledCancelButton(boolean enabled);
 
-    public void setHTML(String html);
+    void setEnabledSaveButton(boolean enabled);
 
-    public void setText(String text);
+    void setHeight(String height);
 
-    public void setTextSaveButton(String text);
+    void setHTML(String html);
 
-    public void setToolBarVisible(boolean visible);
+    void setText(String text);
 
-    public void showSaveBeforeDialog();
+    void setTextSaveButton(String text);
+
+    void showSaveBeforeDialog();
 
 }

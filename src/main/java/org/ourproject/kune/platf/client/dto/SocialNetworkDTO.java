@@ -48,4 +48,8 @@ public class SocialNetworkDTO implements IsSerializable {
 	this.pendingCollaborators = pendingCollaborators;
     }
 
+    public String toString() {
+	return "SocialNetworkDTO[accessList: " + accessLists + "; pendingsCollabs: " + pendingCollaborators + "]";
+    }
+
 }

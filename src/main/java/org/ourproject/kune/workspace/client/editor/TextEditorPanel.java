@@ -22,17 +22,20 @@ package org.ourproject.kune.workspace.client.editor;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.ui.DefaultBorderLayout;
+import org.ourproject.kune.workspace.client.skel.Toolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowResizeListener;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RichTextArea;
 import com.gwtext.client.widgets.MessageBox;
+import com.gwtext.client.widgets.Panel;
+import com.gwtext.client.widgets.layout.FitLayout;
 
-public class TextEditorPanel extends Composite implements TextEditorView {
+public class TextEditorPanel implements TextEditorView {
     private static final String BACKCOLOR_ENABLED = "#FFF";
     private static final String BACKCOLOR_DISABLED = "#CCC";
     private final RichTextArea gwtRTarea;
@@ -40,18 +43,31 @@ public class TextEditorPanel extends Composite implements TextEditorView {
     private final TextEditorPresenter presenter;
     private final Timer saveTimer;
     private final I18nTranslationService i18n;
+    private final DefaultBorderLayout mainPanel;
+    private final WorkspaceSkeleton ws;
 
     public TextEditorPanel(final TextEditorPresenter presenter, final I18nTranslationService i18n,
 	    final WorkspaceSkeleton ws) {
-
 	this.presenter = presenter;
 	this.i18n = i18n;
+	this.ws = ws;
+	mainPanel = new DefaultBorderLayout();
+	final Panel centerPanel = new Panel();
+	centerPanel.setLayout(new FitLayout());
 	gwtRTarea = new RichTextArea();
-	textEditorToolbar = new TextEditorToolbar(gwtRTarea, presenter, i18n, ws);
-	initWidget(gwtRTarea);
-
+	// centerPanel.add(gwtRTarea);
 	gwtRTarea.setWidth("97%");
 	gwtRTarea.addStyleName("kune-TexEditorPanel-TextArea");
+
+	final Toolbar editorTopBar = new Toolbar();
+	textEditorToolbar = new TextEditorToolbar(gwtRTarea, presenter, i18n);
+	editorTopBar.add(textEditorToolbar);
+	editorTopBar.addStyleName("k-toolbar-bottom-line");
+
+	// mainPanel.add(editorTopBar.getPanel(), Position.NORTH, false,
+	// DefaultBorderLayout.DEF_TOOLBAR_HEIGHT);
+	mainPanel.add(centerPanel, DefaultBorderLayout.Position.CENTER);
+
 	adjustSize("" + (Window.getClientHeight() - 265));
 	Window.addWindowResizeListener(new WindowResizeListener() {
 	    public void onWindowResized(final int arg0, final int arg1) {
@@ -63,6 +79,15 @@ public class TextEditorPanel extends Composite implements TextEditorView {
 		presenter.onSave();
 	    }
 	};
+    }
+
+    public void attach() {
+	// ws.getEntityWorkspace().setContent(mainPanel.getPanel());
+	ws.getEntityWorkspace().setContent(gwtRTarea);
+    }
+
+    public void detach() {
+	mainPanel.getPanel().removeFromParent();
     }
 
     public void editHTML(final boolean edit) {
@@ -117,10 +142,6 @@ public class TextEditorPanel extends Composite implements TextEditorView {
 
     public void setTextSaveButton(final String text) {
 	textEditorToolbar.setTextSaveButton(text);
-    }
-
-    public void setToolBarVisible(final boolean visible) {
-	textEditorToolbar.setVisible(visible);
     }
 
     public void showSaveBeforeDialog() {

@@ -19,11 +19,6 @@ public class ActionRegistry<T> {
 	}
     }
 
-    public boolean checkEnabling(final ActionDescriptor<T> action, final T T) {
-	final ActionEnableCondition<T> enableCondition = action.getEnableCondition();
-	return enableCondition != null ? enableCondition.mustBeEnabled(T) : true;
-    }
-
     public ActionItemCollection<T> getCurrentActions(final T item, final String contentTypeId, final boolean isLogged,
 	    final AccessRightsDTO rights, final boolean toolbarItems) {
 	final ActionItemCollection<T> collection = new ActionItemCollection<T>();

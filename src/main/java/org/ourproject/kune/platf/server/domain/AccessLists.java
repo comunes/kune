@@ -32,29 +32,21 @@ import org.ourproject.kune.platf.server.access.AccessRol;
 @Entity
 @Table(name = "access_lists")
 public class AccessLists {
-    @Id
-    @GeneratedValue
-    private Long id;
-
     @OneToOne(cascade = CascadeType.ALL)
     protected GroupList admins;
+
     @OneToOne(cascade = CascadeType.ALL)
     protected GroupList editors;
     @OneToOne(cascade = CascadeType.ALL)
     protected GroupList viewers;
+    @Id
+    @GeneratedValue
+    private Long id;
 
     public AccessLists() {
 	this.admins = new GroupList();
 	this.editors = new GroupList();
 	this.viewers = new GroupList();
-    }
-
-    public Long getId() {
-	return id;
-    }
-
-    public void setId(final Long id) {
-	this.id = id;
     }
 
     public void addAdmin(final Group group) {
@@ -69,6 +61,18 @@ public class AccessLists {
 	viewers.add(group);
     }
 
+    public GroupList getAdmins() {
+	return admins;
+    }
+
+    public GroupList getEditors() {
+	return editors;
+    }
+
+    public Long getId() {
+	return id;
+    }
+
     public GroupList getList(final AccessRol rol) {
 	if (rol == AccessRol.Administrator) {
 	    return getAdmins();
@@ -77,14 +81,6 @@ public class AccessLists {
 	} else {
 	    return getViewers();
 	}
-    }
-
-    public GroupList getAdmins() {
-	return admins;
-    }
-
-    public GroupList getEditors() {
-	return editors;
     }
 
     public GroupList getViewers() {
@@ -101,5 +97,14 @@ public class AccessLists {
 
     public void removeViewer(final Group group) {
 	viewers.remove(group);
+    }
+
+    public void setId(final Long id) {
+	this.id = id;
+    }
+
+    @Override
+    public String toString() {
+	return "AccessList[admins :" + admins + "; editors: " + editors + "; viewers: " + viewers + "]";
     }
 }

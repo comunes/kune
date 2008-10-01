@@ -283,7 +283,12 @@ public class KuneModule extends AbstractModule {
 
 	register(Singleton.class, new Factory<TextEditor>(TextEditor.class) {
 	    public TextEditor create() {
-		final TextEditorPresenter presenter = new TextEditorPresenter(null, true);
+		final ActionToolbarPanel<StateToken> contentNavigatorToolbar = new ActionToolbarPanel<StateToken>(
+			ActionToolbarPanel.Position.content, $$(ActionManager.class), $(WorkspaceSkeleton.class));
+		final ActionToolbar<StateToken> toolbar = new ActionToolbarPresenter<StateToken>(
+			contentNavigatorToolbar);
+		final TextEditorPresenter presenter = new TextEditorPresenter(true, toolbar,
+			$(I18nUITranslationService.class));
 		final TextEditorPanel panel = new TextEditorPanel(presenter, i18n, $(WorkspaceSkeleton.class));
 		presenter.init(panel);
 		return presenter;
@@ -334,14 +339,14 @@ public class KuneModule extends AbstractModule {
 		final ActionToolbarPanel<StateToken> contextNavigatorToolbar = new ActionToolbarPanel<StateToken>(
 			ActionToolbarPanel.Position.context, $$(ActionManager.class), $(WorkspaceSkeleton.class));
 		final ActionToolbar<StateToken> toolbar = new ActionToolbarPresenter<StateToken>(
-			contextNavigatorToolbar, $(ContentActionRegistry.class));
+			contextNavigatorToolbar);
 
 		final ContextNavigatorPresenter presenter = new ContextNavigatorPresenter($(StateManager.class),
 			$(Session.class), $$(ContentServiceAsync.class), i18n, $(EntityTitle.class),
 			$(ContentIconsRegistry.class), $(DragDropContentRegistry.class), toolbar,
 			$(ContextActionRegistry.class));
 		final ContextNavigatorPanel panel = new ContextNavigatorPanel(presenter, i18n,
-			$(WorkspaceSkeleton.class), $(ActionManager.class), $(WsThemePresenter.class));
+			$(WorkspaceSkeleton.class), $(ActionManager.class));
 		presenter.init(panel);
 		return presenter;
 	    }

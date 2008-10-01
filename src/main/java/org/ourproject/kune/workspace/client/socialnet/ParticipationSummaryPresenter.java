@@ -86,6 +86,7 @@ public class ParticipationSummaryPresenter extends SocialNetworkPresenter implem
 	view.clear();
 	final List<GroupDTO> groupsIsAdmin = participation.getGroupsIsAdmin();
 	final List<GroupDTO> groupsIsCollab = participation.getGroupsIsCollab();
+	Log.info(participation.toString());
 	Log.info("Is admin in " + groupsIsAdmin.size() + " groups.");
 	Log.info("Is collab in " + groupsIsCollab.size() + " groups.");
 	final int numAdmins = groupsIsAdmin.size();

@@ -1,7 +1,6 @@
 package org.ourproject.kune.platf.client.actions;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -85,30 +84,6 @@ public class ActionRegistryTest {
 	addDefActions();
 	checkActionLists(0, new AccessRightsDTO(false, false, true), true);
 	checkActionLists(1, new AccessRightsDTO(false, false, true), false);
-    }
-
-    @Test
-    public void testEnablingFalse() {
-	Mockito.stub(session.isLogged()).toReturn(true);
-	adminAction.setEnableCondition(new ActionEnableCondition<StateToken>() {
-	    public boolean mustBeEnabled(final StateToken param) {
-		return false;
-	    }
-	});
-	registry.addAction(adminAction, DEF_CONTENT_TYPE_ID);
-	assertTrue(!registry.checkEnabling(adminAction, new StateToken()));
-    }
-
-    @Test
-    public void testEnablingTrue() {
-	Mockito.stub(session.isLogged()).toReturn(true);
-	adminAction.setEnableCondition(new ActionEnableCondition<StateToken>() {
-	    public boolean mustBeEnabled(final StateToken param) {
-		return true;
-	    }
-	});
-	registry.addAction(adminAction, DEF_CONTENT_TYPE_ID);
-	assertTrue(registry.checkEnabling(adminAction, new StateToken()));
     }
 
     private void addDefActions() {

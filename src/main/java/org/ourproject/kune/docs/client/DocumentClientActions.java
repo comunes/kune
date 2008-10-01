@@ -10,6 +10,7 @@ import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_UPLOADEDFI
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_WIKI;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_WIKIPAGE;
 
+import org.ourproject.kune.docs.client.cnt.DocumentContent;
 import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionMenuItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonAndItemDescriptor;
@@ -27,20 +28,25 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
+import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.upload.FileUploader;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
+import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.entitylogo.EntityLogo;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.site.Site;
 
 import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.listener.Listener0;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class DocumentClientActions {
 
@@ -55,13 +61,18 @@ public class DocumentClientActions {
     private final Provider<GroupServiceAsync> groupServiceProvider;
     private final Provider<FileDownloadUtils> fileDownloadProvider;
     private final EntityLogo entityLogo;
+    private final Provider<TextEditor> textEditorProvider;
+    private final KuneErrorHandler errorHandler;
+    private final DocumentContent documentContent;
 
     public DocumentClientActions(final I18nUITranslationService i18n, final ContextNavigator contextNavigator,
 	    final Session session, final StateManager stateManager,
 	    final Provider<ContentServiceAsync> contentServiceProvider,
 	    final Provider<GroupServiceAsync> groupServiceProvider, final Provider<FileUploader> fileUploaderProvider,
 	    final ContentActionRegistry contentActionRegistry, final ContextActionRegistry contextActionRegistry,
-	    final Provider<FileDownloadUtils> fileDownloadProvider, final EntityLogo entityLogo) {
+	    final Provider<FileDownloadUtils> fileDownloadProvider, final EntityLogo entityLogo,
+	    final Provider<TextEditor> textEditorProvider, final KuneErrorHandler errorHandler,
+	    final DocumentContent documentContent) {
 	this.i18n = i18n;
 	this.contextNavigator = contextNavigator;
 	this.session = session;
@@ -73,6 +84,9 @@ public class DocumentClientActions {
 	this.contentActionRegistry = contentActionRegistry;
 	this.fileDownloadProvider = fileDownloadProvider;
 	this.entityLogo = entityLogo;
+	this.textEditorProvider = textEditorProvider;
+	this.errorHandler = errorHandler;
+	this.documentContent = documentContent;
 	createActions();
     }
 
@@ -306,6 +320,47 @@ public class DocumentClientActions {
 	final ActionToolbarButtonDescriptor<StateToken> editContent = new ActionToolbarButtonDescriptor<StateToken>(
 		AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
 		    public void onEvent(final StateToken stateToken) {
+			session.check(new AsyncCallbackSimple<Object>() {
+			    public void onSuccess(final Object result) {
+				final TextEditor editor = textEditorProvider.get();
+				documentContent.detach();
+				editor.editContent(session.getCurrentState().getContent(), new Listener<String>() {
+				    public void onEvent(final String html) {
+					Site.showProgressSaving();
+					contentServiceProvider.get().save(session.getUserHash(), stateToken, html,
+						new AsyncCallback<Integer>() {
+						    public void onFailure(final Throwable caught) {
+							Site.hideProgress();
+							try {
+							    throw caught;
+							} catch (final SessionExpiredException e) {
+							    errorHandler.doSessionExpired();
+							} catch (final Throwable e) {
+							    Site.error(i18n.t("Error saving document. Retrying..."));
+							    errorHandler.process(caught);
+							    editor.onSaveFailed();
+							}
+						    }
+
+						    public void onSuccess(final Integer newVersion) {
+							Site.hideProgress();
+							editor.onSaved();
+							if (session.getCurrentStateToken().equals(stateToken)) {
+							    session.getCurrentState().setVersion(newVersion);
+							    session.getCurrentState().setContent(html);
+							    documentContent.refreshState();
+							}
+						    }
+						});
+				    }
+				}, new Listener0() {
+				    public void onEvent() {
+					// onClose
+					documentContent.refreshState();
+				    }
+				});
+			    }
+			});
 		    }
 		});
 	editContent.setTextDescription(i18n.tWithNT("Edit", "used in button"));

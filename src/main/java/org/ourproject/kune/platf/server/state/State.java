@@ -293,4 +293,7 @@ public class State {
 	this.typeId = typeId;
     }
 
+    public String toString() {
+	return "State[" + stateToken + "/" + typeId + "]";
+    }
 }

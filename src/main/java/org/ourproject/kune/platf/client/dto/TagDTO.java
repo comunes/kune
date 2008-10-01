@@ -26,19 +26,23 @@ public class TagDTO implements IsSerializable {
     private String name;
 
     public TagDTO() {
-        this(null);
+	this(null);
     }
 
     public TagDTO(final String name) {
-        this.name = name;
+	this.name = name;
     }
 
     public String getName() {
-        return name;
+	return name;
     }
 
     public void setName(final String name) {
-        this.name = name;
+	this.name = name;
+    }
+
+    public String toString() {
+	return name;
     }
 
 }

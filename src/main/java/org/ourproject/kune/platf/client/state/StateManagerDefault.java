@@ -63,7 +63,11 @@ public class StateManagerDefault implements StateManager {
 	this.onSocialNetworkChanged = new Event<StateDTO>("onSocialNetworkChanged");
 	session.onUserSignIn(new Listener<UserInfoDTO>() {
 	    public void onEvent(final UserInfoDTO parameter) {
-		restorePreviousState();
+		if (oldState != null) {
+		    restorePreviousState();
+		} else {
+		    reload();
+		}
 	    }
 	});
 	session.onUserSignOut(new Listener0() {
@@ -78,14 +82,8 @@ public class StateManagerDefault implements StateManager {
 	siteTokens.put(token, listener);
     }
 
-    public void gotoContainer(final Long containerId) {
-	final StateToken newStateToken = session.getCurrentState().getStateToken().clone();
-	newStateToken.clearDocument();
-	newStateToken.setFolder(containerId);
-	gotoToken(newStateToken);
-    }
-
     public void gotoToken(final StateToken state) {
+	Log.debug("StateManager: history goto-token newItem (" + state + ")");
 	history.newItem(state.getEncoded());
     }
 

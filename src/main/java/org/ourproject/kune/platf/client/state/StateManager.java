@@ -33,8 +33,6 @@ public interface StateManager extends HistoryListener {
 
     void addSiteToken(String token, Listener<StateToken> whenToken);
 
-    void gotoContainer(Long containerId);
-
     void gotoToken(StateToken state);
 
     void gotoToken(String token);
@@ -51,7 +49,7 @@ public interface StateManager extends HistoryListener {
 
     void removeSiteToken(String token);
 
-    void setRetrievedState(StateDTO content);
+    void setRetrievedState(StateDTO state);
 
     void setSocialNetwork(SocialNetworkResultDTO socialNet);
 

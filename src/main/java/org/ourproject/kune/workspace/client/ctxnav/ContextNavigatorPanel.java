@@ -30,11 +30,8 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.themes.WsTheme;
-import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.listener.Listener2;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.gwtext.client.core.EventObject;
@@ -71,15 +68,10 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
     private final ContextNavigatorPresenter presenter;
 
     public ContextNavigatorPanel(final ContextNavigatorPresenter presenter, final I18nTranslationService i18n,
-	    final WorkspaceSkeleton ws, final ActionManager actionManager, final WsThemePresenter wsTheme) {
+	    final WorkspaceSkeleton ws, final ActionManager actionManager) {
 	this.presenter = presenter;
 	this.ws = ws;
 	this.actionManager = actionManager;
-	wsTheme.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
-	    public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
-		setTheme(oldTheme, newTheme);
-	    }
-	});
 
 	contextMenus = new HashMap<String, Menu>();
 	fireOnTextChange = true;
@@ -200,16 +192,6 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
     public void setRootItem(final String id, final String text, final StateToken stateToken) {
 	if (treePanel == null || treePanel.getNodeById(id) == null) {
 	    createTreePanel(id, text, stateToken);
-	}
-    }
-
-    public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
-	if (treePanel != null) {
-	    if (oldTheme != null) {
-		final String previousThemeS = oldTheme.toString();
-		treePanel.removeStyleName("k-entity-context-" + previousThemeS);
-	    }
-	    treePanel.addStyleName("k-entity-context-" + newTheme);
 	}
     }
 
