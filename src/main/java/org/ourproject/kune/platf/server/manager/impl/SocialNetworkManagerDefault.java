@@ -132,7 +132,10 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 	final Long groupId = group.getId();
 	final List<Group> adminInGroups = finder.findAdminInGroups(groupId);
 	// Don't show self user group
-	adminInGroups.remove(userLogged.getUserGroup());
+	if (group.getType().equals(GroupType.PERSONAL)) {
+	    adminInGroups.remove(group);
+	}
+	// adminInGroups.remove(userLogged.getUserGroup());
 	final List<Group> collabInGroups = finder.findCollabInGroups(groupId);
 	return new ParticipationData(adminInGroups, collabInGroups);
     }

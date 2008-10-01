@@ -116,11 +116,7 @@ public class GroupList {
     }
 
     public String toString() {
-	String groupString = "";
-	for (final Group group : list) {
-	    groupString = groupString + group.getShortName() + ", ";
-	}
-	return "Group[(" + mode + "): " + groupString + "]";
+	return "GroupList[(" + mode + "): " + list + "]";
     }
 
 }

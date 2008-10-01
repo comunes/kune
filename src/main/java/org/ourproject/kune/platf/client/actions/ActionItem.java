@@ -16,6 +16,11 @@ public class ActionItem<T> {
 	this.item = item;
     }
 
+    public boolean checkEnabling() {
+	final ActionEnableCondition<T> enableCondition = action.getEnableCondition();
+	return enableCondition != null ? enableCondition.mustBeEnabled(getItem()) : true;
+    }
+
     public ActionDescriptor<T> getAction() {
 	return action;
     }

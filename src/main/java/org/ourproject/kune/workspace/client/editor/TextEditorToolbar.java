@@ -30,6 +30,7 @@ import org.ourproject.kune.platf.client.ui.imgchooser.ImageData;
 import org.ourproject.kune.platf.client.ui.palette.ColorSelectListener;
 import org.ourproject.kune.platf.client.ui.palette.WebSafePalettePanel;
 import org.ourproject.kune.platf.client.ui.palette.WebSafePalettePresenter;
+import org.ourproject.kune.workspace.client.site.Site;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Command;
@@ -46,7 +47,6 @@ import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.ToggleButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.gwtext.client.core.EventObject;
 import com.gwtext.client.data.ArrayReader;
 import com.gwtext.client.data.DateFieldDef;
 import com.gwtext.client.data.FieldDef;
@@ -55,18 +55,15 @@ import com.gwtext.client.data.MemoryProxy;
 import com.gwtext.client.data.RecordDef;
 import com.gwtext.client.data.Store;
 import com.gwtext.client.data.StringFieldDef;
-import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.MessageBox;
-import com.gwtext.client.widgets.ToolbarButton;
 import com.gwtext.client.widgets.MessageBox.PromptCallback;
-import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 
 /**
  * A sample toolbar for use with {@link RichTextArea}. It provides a simple UI
  * for all rich text formatting, dynamically displayed only for the available
  * functionality.
  */
-public class TextEditorToolbar extends Composite implements TextEditorToolbarView {
+public class TextEditorToolbar extends Composite {
 
     /**
      * We use an inner EventListener class to avoid exposing event methods on
@@ -230,7 +227,7 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
 
 		ic = new ImageChooser("Image Chooser", 515, 400, store);
 	    }
-
+	    Site.important("This is in development and very experimental...");
 	    ic.show(new ImageChooserCallback() {
 		public void onImageSelection(final ImageData data) {
 		    // Element el = DomHelper.append("images",
@@ -290,10 +287,8 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
     private PushButton fontColor;
     private MenuBar fonts;
     private MenuBar fontSizes;
-    private final ToolbarButton save;
-    private final ToolbarButton close;
     private WebSafePalettePanel palettePanel;
-    private final TextEditorPresenter panelListener;
+    private final TextEditorPresenter presenter;
     private PopupPanel popupPalette;
     private WebSafePalettePresenter palettePresenter;
     private final I18nTranslationService i18n;
@@ -304,42 +299,19 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
      * @param richText
      *                the rich text area to be controlled
      */
-    public TextEditorToolbar(final RichTextArea richText, final TextEditorPresenter panelListener,
+    public TextEditorToolbar(final RichTextArea richText, final TextEditorPresenter presenter,
 	    final I18nTranslationService i18n) {
 	this.richText = richText;
 	this.i18n = i18n;
 	this.basic = richText.getBasicFormatter();
 	this.extended = richText.getExtendedFormatter();
-
-	this.panelListener = panelListener;
+	this.presenter = presenter;
 
 	initWidget(outer);
 
 	outer.add(topPanel);
 	outer.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
 	setStyleName("gwt-RichTextToolbar");
-
-	save = new ToolbarButton(i18n.tWithNT("Save", "used in button"), new ButtonListenerAdapter() {
-	    @Override
-	    public void onClick(final Button button, final EventObject e) {
-		if (!save.isDisabled()) {
-		    fireSave();
-		}
-	    }
-	});
-
-	close = new ToolbarButton(i18n.tWithNT("Close", "used in button"), new ButtonListenerAdapter() {
-	    @Override
-	    public void onClick(final Button button, final EventObject e) {
-		if (!close.isDisabled()) {
-		    fireCancel();
-		}
-	    }
-	});
-
-	close.addStyleName("kune-Button-Large-lrSpace");
-	topPanel.add(save);
-	topPanel.add(close);
 
 	if (basic != null) {
 	    topPanel.add(bold = createToggleButton(images.bold(), i18n.t("Toggle Bold")));
@@ -422,26 +394,6 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
 	}
     }
 
-    public void setEnabledCloseButton(final boolean enabled) {
-	if (enabled) {
-	    close.enable();
-	} else {
-	    close.disable();
-	}
-    }
-
-    public void setEnabledSaveButton(final boolean enabled) {
-	if (enabled) {
-	    save.enable();
-	} else {
-	    save.disable();
-	}
-    }
-
-    public void setTextSaveButton(final String text) {
-	save.setText(text);
-    }
-
     public void showPalette(final Widget sender, final int left, final int top) {
 	if (palettePanel == null) {
 	    palettePresenter = new WebSafePalettePresenter();
@@ -513,20 +465,12 @@ public class TextEditorToolbar extends Composite implements TextEditorToolbarVie
 	return tb;
     }
 
-    private void fireCancel() {
-	panelListener.onCancel();
-    }
-
     private void fireEdit() {
-	panelListener.onEdit();
+	presenter.onEdit();
     }
 
     private void fireEditHTML() {
-	panelListener.onEditHTML();
-    }
-
-    private void fireSave() {
-	panelListener.onSave();
+	presenter.onEditHTML();
     }
 
     /**

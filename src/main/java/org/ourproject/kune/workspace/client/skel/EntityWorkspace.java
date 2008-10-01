@@ -28,7 +28,6 @@ public class EntityWorkspace extends DefaultBorderLayout {
     private final Toolbar contextBottomBar;
     private final RoundedPanel roundedTitle;
     private final RoundedPanel roundedBottom;
-    private final DefaultBorderLayout contextWrap;
 
     public EntityWorkspace() {
 	final Panel titles = new Panel();
@@ -58,7 +57,7 @@ public class EntityWorkspace extends DefaultBorderLayout {
 	bottomPanel.add(roundedBottom, new AnchorLayoutData("100% -" + DEF_TOOLBAR_HEIGHT));
 
 	final DefaultBorderLayout contentWrap = new DefaultBorderLayout();
-	contextWrap = new DefaultBorderLayout();
+	final DefaultBorderLayout contextWrap = new DefaultBorderLayout();
 	contentWrap.setBorder(true);
 	contextWrap.setBorder(true);
 	content = new Panel();
@@ -69,7 +68,7 @@ public class EntityWorkspace extends DefaultBorderLayout {
 	content.setBorder(false);
 	context.setBorder(false);
 	context.setCollapsible(true);
-	content.setPaddings(7);
+	// content.setPaddings(7);
 	content.setAutoScroll(true);
 	// context.setAutoScroll(true);
 

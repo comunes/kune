@@ -55,10 +55,6 @@ public class GroupListDTO implements IsSerializable {
     }
 
     public String toString() {
-	String groupString = "";
-	for (final GroupDTO group : list) {
-	    groupString = groupString + group.getShortName() + ", ";
-	}
-	return "GroupDTO[(" + mode + "): " + groupString + "]";
+	return "GroupListDTO[(" + mode + "): " + list + "]";
     }
 }

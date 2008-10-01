@@ -1,17 +1,19 @@
 package org.ourproject.kune.platf.client.actions.toolbar;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.ourproject.kune.platf.client.actions.ActionDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonSeparator;
+import org.ourproject.kune.platf.client.actions.ActionToolbarDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.workspace.client.skel.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.EventObject;
@@ -31,7 +33,7 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
     }
 
     private final HashMap<String, Menu> toolbarMenus;
-    private final ArrayList<Widget> removableToolbarItems;
+    private final HashMap<String, ToolbarButton> toolbarButtons;
     private final HashMap<String, Item> menuItems;
     private final Provider<ActionManager> actionManagerProvider;
     private final Position position;
@@ -48,11 +50,11 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
 	this.actionManagerProvider = actionManagerProvider;
 
 	toolbarMenus = new HashMap<String, Menu>();
-	removableToolbarItems = new ArrayList<Widget>();
+	toolbarButtons = new HashMap<String, ToolbarButton>();
 	menuItems = new HashMap<String, Item>();
     }
 
-    public void addButtonAction(final ActionItem<T> actionItem) {
+    public void addButtonAction(final ActionItem<T> actionItem, final boolean enable) {
 	final ActionToolbarButtonDescriptor<T> action = (ActionToolbarButtonDescriptor<T>) actionItem.getAction();
 	final ActionToolbarPosition pos = action.getActionPosition();
 	final ToolbarButton button = new ToolbarButton();
@@ -72,15 +74,16 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
 	}
 	button.setTooltip(action.getToolTip());
 
+	setEnableButton(button, enable);
 	final SimpleToolbar toolbar = getToolbar(pos);
 	if (action.hasLeftSeparator()) {
-	    removableToolbarItems.add(add(toolbar, action.getLeftSeparator()));
+	    add(toolbar, action.getLeftSeparator());
 	}
 	toolbar.add(button);
 	if (action.hasRightSeparator()) {
-	    removableToolbarItems.add(add(toolbar, action.getRightSeparator()));
+	    add(toolbar, action.getRightSeparator());
 	}
-	removableToolbarItems.add(button);
+	toolbarButtons.put(genButtonKey(pos, text), button);
     }
 
     public void addMenuAction(final ActionItem<T> actionItem, final boolean enable) {
@@ -94,11 +97,7 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
 	    item = createToolbarMenu(pos, menuTitle, menuSubTitle, actionItem);
 	    menuItems.put(itemKey, item);
 	}
-	if (enable) {
-	    item.enable();
-	} else {
-	    item.disable();
-	}
+	setEnableMenuItem(item, enable);
     }
 
     public void attach() {
@@ -119,18 +118,11 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
     public void clear() {
 	toolbarMenus.clear();
 	menuItems.clear();
-	removableToolbarItems.clear();
+	toolbarButtons.clear();
 	topbar.removeAll();
 	bottombar.removeAll();
 	getToolbar(ActionToolbarPosition.topbar).removeAll();
 	getToolbar(ActionToolbarPosition.bottombar).removeAll();
-    }
-
-    public void clearRemovableActions() {
-	for (final Widget widget : removableToolbarItems) {
-	    widget.removeFromParent();
-	}
-	removableToolbarItems.clear();
     }
 
     public void detach() {
@@ -151,6 +143,25 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
     public void disableAllMenuItems() {
 	for (final Item item : menuItems.values()) {
 	    item.disable();
+	}
+    }
+
+    public void setButtonEnable(final ActionDescriptor<T> action, final boolean enable) {
+	final ActionToolbarPosition pos = ((ActionToolbarDescriptor<T>) action).getActionPosition();
+	final ToolbarButton button = toolbarButtons.get(genButtonKey(pos, action.getText()));
+	if (button != null) {
+	    setEnableButton(button, enable);
+	} else {
+	    Log.error("Tryng to enable/disable a non existent toolbar button");
+	}
+    }
+
+    public void setMenuEnable(final ActionDescriptor<T> action, final boolean enable) {
+	final Item item = menuItems.get(genMenuKey((ActionToolbarMenuDescriptor<T>) action));
+	if (item != null) {
+	    setEnableMenuItem(item, enable);
+	} else {
+	    Log.error("Tryng to enable/disable a non existent toolbar menu item");
 	}
     }
 
@@ -220,10 +231,20 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
 	return menu;
     }
 
+    private String genButtonKey(final ActionToolbarPosition pos, final String actionText) {
+	final String basePart = "km-ctx-btn-" + pos.toString().substring(0, 2) + "-" + actionText;
+	return basePart;
+    }
+
+    private String genMenuKey(final ActionToolbarMenuDescriptor<T> action) {
+	return genMenuKey(action.getActionPosition(), action.getParentMenuTitle(), action.getParentSubMenuTitle(),
+		action.getText());
+    }
+
     private String genMenuKey(final ActionToolbarPosition pos, final String menuTitle, final String menuSubTitle,
 	    final String actionText) {
 
-	final String basePart = "km-ctx-" + pos.toString().substring(0, 2) + "-" + menuTitle;
+	final String basePart = "km-ctx-menu-" + pos.toString().substring(0, 2) + "-" + menuTitle;
 	final String subMenuPart = menuSubTitle != null ? "-subm-" + menuSubTitle : "";
 	final String itemPart = actionText != null ? "-item-" + actionText : "";
 	return basePart + subMenuPart + itemPart;
@@ -236,6 +257,22 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
 	case topbar:
 	default:
 	    return topbar;
+	}
+    }
+
+    private void setEnableButton(final ToolbarButton button, final boolean enable) {
+	if (enable) {
+	    button.enable();
+	} else {
+	    button.disable();
+	}
+    }
+
+    private void setEnableMenuItem(final Item item, final boolean enable) {
+	if (enable) {
+	    item.enable();
+	} else {
+	    item.disable();
 	}
     }
 }

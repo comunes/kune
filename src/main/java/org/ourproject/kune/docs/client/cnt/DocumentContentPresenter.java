@@ -96,7 +96,7 @@ public class DocumentContentPresenter implements DocumentContent {
 		    .getContainerRights(), true);
 	}
 	toolbar.disableMenusAndClearButtons();
-	toolbar.showActions(collection, true);
+	toolbar.setActions(collection);
 	toolbar.attach();
 	showContent();
     }

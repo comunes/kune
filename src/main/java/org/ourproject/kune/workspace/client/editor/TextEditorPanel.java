@@ -20,7 +20,6 @@
 
 package org.ourproject.kune.workspace.client.editor;
 
-import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.DefaultBorderLayout;
 import org.ourproject.kune.workspace.client.skel.Toolbar;
@@ -28,12 +27,11 @@ import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.RichTextArea;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.gwtext.client.widgets.BoxComponent;
 import com.gwtext.client.widgets.MessageBox;
-import com.gwtext.client.widgets.Panel;
-import com.gwtext.client.widgets.layout.FitLayout;
+import com.gwtext.client.widgets.event.ContainerListenerAdapter;
 
 public class TextEditorPanel implements TextEditorView {
     private static final String BACKCOLOR_ENABLED = "#FFF";
@@ -43,7 +41,7 @@ public class TextEditorPanel implements TextEditorView {
     private final TextEditorPresenter presenter;
     private final Timer saveTimer;
     private final I18nTranslationService i18n;
-    private final DefaultBorderLayout mainPanel;
+    private final VerticalPanel mainPanel;
     private final WorkspaceSkeleton ws;
 
     public TextEditorPanel(final TextEditorPresenter presenter, final I18nTranslationService i18n,
@@ -51,29 +49,30 @@ public class TextEditorPanel implements TextEditorView {
 	this.presenter = presenter;
 	this.i18n = i18n;
 	this.ws = ws;
-	mainPanel = new DefaultBorderLayout();
-	final Panel centerPanel = new Panel();
-	centerPanel.setLayout(new FitLayout());
+	mainPanel = new VerticalPanel();
+	mainPanel.setWidth("100%");
+
 	gwtRTarea = new RichTextArea();
-	// centerPanel.add(gwtRTarea);
 	gwtRTarea.setWidth("97%");
 	gwtRTarea.addStyleName("kune-TexEditorPanel-TextArea");
 
 	final Toolbar editorTopBar = new Toolbar();
+	editorTopBar.getPanel().setWidth("auto");
 	textEditorToolbar = new TextEditorToolbar(gwtRTarea, presenter, i18n);
 	editorTopBar.add(textEditorToolbar);
 	editorTopBar.addStyleName("k-toolbar-bottom-line");
 
-	// mainPanel.add(editorTopBar.getPanel(), Position.NORTH, false,
-	// DefaultBorderLayout.DEF_TOOLBAR_HEIGHT);
-	mainPanel.add(centerPanel, DefaultBorderLayout.Position.CENTER);
+	mainPanel.add(editorTopBar.getPanel());
+	mainPanel.add(gwtRTarea);
 
-	adjustSize("" + (Window.getClientHeight() - 265));
-	Window.addWindowResizeListener(new WindowResizeListener() {
-	    public void onWindowResized(final int arg0, final int arg1) {
-		adjustSize("" + (Window.getClientHeight() - 265));
+	ws.getEntityWorkspace().addContentListener(new ContainerListenerAdapter() {
+	    @Override
+	    public void onResize(final BoxComponent component, final int adjWidth, final int adjHeight,
+		    final int rawWidth, final int rawHeight) {
+		adjustSize(adjHeight);
 	    }
 	});
+
 	saveTimer = new Timer() {
 	    public void run() {
 		presenter.onSave();
@@ -82,12 +81,11 @@ public class TextEditorPanel implements TextEditorView {
     }
 
     public void attach() {
-	// ws.getEntityWorkspace().setContent(mainPanel.getPanel());
-	ws.getEntityWorkspace().setContent(gwtRTarea);
+	ws.getEntityWorkspace().setContent(mainPanel);
     }
 
     public void detach() {
-	mainPanel.getPanel().removeFromParent();
+	mainPanel.removeFromParent();
     }
 
     public void editHTML(final boolean edit) {
@@ -100,10 +98,6 @@ public class TextEditorPanel implements TextEditorView {
 
     public String getText() {
 	return gwtRTarea.getText();
-    }
-
-    public View getToolBar() {
-	return this.textEditorToolbar;
     }
 
     public void saveTimerCancel() {
@@ -120,14 +114,6 @@ public class TextEditorPanel implements TextEditorView {
 	gwtRTarea.setEnabled(enabled);
     }
 
-    public void setEnabledCancelButton(final boolean enabled) {
-	textEditorToolbar.setEnabledCloseButton(enabled);
-    }
-
-    public void setEnabledSaveButton(final boolean enabled) {
-	textEditorToolbar.setEnabledSaveButton(enabled);
-    }
-
     public void setHeight(final String height) {
 	gwtRTarea.setHeight(height);
     }
@@ -138,10 +124,6 @@ public class TextEditorPanel implements TextEditorView {
 
     public void setText(final String text) {
 	gwtRTarea.setText(text);
-    }
-
-    public void setTextSaveButton(final String text) {
-	textEditorToolbar.setTextSaveButton(text);
     }
 
     public void showSaveBeforeDialog() {
@@ -157,9 +139,8 @@ public class TextEditorPanel implements TextEditorView {
 
     }
 
-    @Deprecated
-    private void adjustSize(final String height) {
-	// While refactoring
-	// gwtRTarea.setHeight(height);
+    private void adjustSize(final int height) {
+	gwtRTarea.setHeight(""
+		+ (height - DefaultBorderLayout.DEF_TOOLBAR_HEIGHT - DefaultBorderLayout.DEF_TOOLBAR_HEIGHT - 5));
     }
 }

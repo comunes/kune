@@ -411,6 +411,41 @@ legend {
   margin-left: 10px;
 }
 
+.kune-Margin-7-trbl {
+  margin: 7px;
+}
+
+.kune-Margin-7-lr {
+  margin-left: 7px;
+  margin-right: 7px;
+}
+
+.kune-Margin-7-tl {
+  margin-top: 7px;
+  margin-left: 7px;
+}
+
+.kune-Margin-7-tb {
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+
+.kune-Margin-7-t {
+  margin-top: 7px;
+}
+
+.kune-Margin-7-r {
+  margin-right: 7px;
+}
+
+.kune-Margin-7-b {
+  margin-bottom: 7px;
+}
+
+.kune-Margin-7-l {
+  margin-left: 7px;
+}
+
 .kune-Margin-Medium-trbl {
   margin: 5px;
 }

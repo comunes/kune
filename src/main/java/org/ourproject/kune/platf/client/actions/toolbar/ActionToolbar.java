@@ -1,6 +1,7 @@
 package org.ourproject.kune.platf.client.actions.toolbar;
 
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
+import org.ourproject.kune.platf.client.actions.ActionToolbarDescriptor;
 
 public interface ActionToolbar<T> {
 
@@ -12,6 +13,8 @@ public interface ActionToolbar<T> {
 
     void disableMenusAndClearButtons();
 
-    void showActions(ActionItemCollection<T> actionItemCollection, boolean isItemSelected);
+    void setActions(ActionItemCollection<T> actionItemCollection);
+
+    void setEnableAction(ActionToolbarDescriptor<T> action, boolean enable);
 
 }

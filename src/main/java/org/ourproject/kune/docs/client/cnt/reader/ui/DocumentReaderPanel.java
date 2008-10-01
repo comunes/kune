@@ -34,6 +34,9 @@ public class DocumentReaderPanel implements DocumentReaderView {
     }
 
     public void setContent(final String content) {
-	ws.getEntityWorkspace().setContent(new HTML(content));
+	final HTML html = new HTML(content);
+	html.setStyleName("kune-Content-Main");
+	html.addStyleName("kune-Margin-7-trbl");
+	ws.getEntityWorkspace().setContent(html);
     }
 }

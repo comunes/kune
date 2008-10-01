@@ -34,25 +34,17 @@ public interface TextEditorView extends View {
 
     String getText();
 
-    View getToolBar();
-
     void saveTimerCancel();
 
     void scheduleSave(int delayMillis);
 
     void setEnabled(boolean enabled);
 
-    void setEnabledCancelButton(boolean enabled);
-
-    void setEnabledSaveButton(boolean enabled);
-
     void setHeight(String height);
 
     void setHTML(String html);
 
     void setText(String text);
-
-    void setTextSaveButton(String text);
 
     void showSaveBeforeDialog();
 

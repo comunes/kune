@@ -17,7 +17,7 @@ public class TextEditorPresenterTest {
     @Test
     public void testSave() {
 	viewInit();
-	view.setEnabledSaveButton(true);
+	// view.setEnabledSaveButton(true);
 	view.scheduleSave(10000);
 	EasyMock.expect(view.getHTML()).andReturn("foo");
 	viewReset();
@@ -35,7 +35,7 @@ public class TextEditorPresenterTest {
     @Test
     public void testSavePending() {
 	viewInit();
-	view.setEnabledSaveButton(true);
+	// view.setEnabledSaveButton(true);
 	view.scheduleSave(10000);
 	EasyMock.replay(view);
 	presenter.init(view);
@@ -46,7 +46,7 @@ public class TextEditorPresenterTest {
     @Test
     public void testSavePendingCancel() {
 	viewInit();
-	view.setEnabledSaveButton(true);
+	// view.setEnabledSaveButton(true);
 	view.scheduleSave(10000);
 	view.saveTimerCancel();
 	view.showSaveBeforeDialog();
@@ -68,7 +68,7 @@ public class TextEditorPresenterTest {
     @Test
     public void testSavePendingCancelSaveFails() {
 	viewInit();
-	view.setEnabledSaveButton(true);
+	// view.setEnabledSaveButton(true);
 	view.scheduleSave(10000);
 	view.saveTimerCancel();
 	view.showSaveBeforeDialog();
@@ -95,12 +95,12 @@ public class TextEditorPresenterTest {
     }
 
     private void viewInit() {
-	view.setEnabledSaveButton(false);
+	// view.setEnabledSaveButton(false);
 	view.setEnabled(true);
     }
 
     private void viewReset() {
 	view.saveTimerCancel();
-	view.setEnabledSaveButton(false);
+	// view.setEnabledSaveButton(false);
     }
 }

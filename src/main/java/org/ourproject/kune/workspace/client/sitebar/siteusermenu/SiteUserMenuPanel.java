@@ -41,7 +41,6 @@ public class SiteUserMenuPanel implements SiteUserMenuView {
 	});
 	final Item userHomePage = new Item(i18n.t("Your homepage"));
 	userHomePage.setIcon("images/group-home.gif");
-	userHomePage.ensureDebugId(USER_HOME_PAGE_MENU_ITEM);
 	userHomePage.addListener(new BaseItemListenerAdapter() {
 	    @Override
 	    public void onClick(final BaseItem item, final EventObject e) {
@@ -49,9 +48,10 @@ public class SiteUserMenuPanel implements SiteUserMenuView {
 		presenter.onUserHomePage();
 	    }
 	});
+	userHomePage.setId(USER_HOME_PAGE_MENU_ITEM);
 	userMenu.addItem(userHomePage);
 	final Item userPreferences = new Item(i18n.t("Your preferences"));
-	userPreferences.ensureDebugId(USER_PREFERENCES_MENU_ITEM);
+	userPreferences.setId(USER_PREFERENCES_MENU_ITEM);
 	userPreferences.setIcon("images/kune-preferences.gif");
 	userPreferences.addListener(new BaseItemListenerAdapter() {
 	    @Override
@@ -62,7 +62,7 @@ public class SiteUserMenuPanel implements SiteUserMenuView {
 	});
 	userMenu.addItem(userPreferences);
 	userParticipation = new Menu();
-	userParticipation.ensureDebugId(USER_PARTICIPATION_MENU_ITEM);
+	userParticipation.setId(USER_PARTICIPATION_MENU_ITEM);
 	final MenuItem userParticipationItem = new MenuItem(i18n.t("Your groups"), userParticipation);
 	userParticipationItem.setIcon("");
 	userMenu.addItem(userParticipationItem);

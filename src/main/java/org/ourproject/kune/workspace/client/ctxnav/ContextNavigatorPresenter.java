@@ -163,7 +163,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     public void selectItem(final StateToken stateToken) {
 	view.selectItem(genId(stateToken));
 	toolbar.disableMenusAndClearButtons();
-	toolbar.showActions(actionsByItem.get(stateToken), true);
+	toolbar.setActions(actionsByItem.get(stateToken));
     }
 
     public void setEditOnNextStateChange(final boolean edit) {

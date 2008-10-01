@@ -75,14 +75,14 @@ public class TextEditorPresenter implements TextEditor {
 
     public void init(final TextEditorView view) {
 	this.view = view;
-	this.view.setEnabledSaveButton(false);
+	toolbar.setEnableAction(save, false);
 	this.view.setEnabled(true);
     }
 
     public void onEdit() {
 	if (!savePending) {
 	    savePending = true;
-	    view.setEnabledSaveButton(true);
+	    toolbar.setEnableAction(save, true);
 	    if (autoSave) {
 		view.scheduleSave(10000);
 	    }
@@ -113,9 +113,7 @@ public class TextEditorPresenter implements TextEditor {
 	view.saveTimerCancel();
 	savePending = false;
 	saveAndCloseConfirmed = false;
-	view.setEnabledSaveButton(false);
-	view.detach();
-	toolbar.detach();
+	toolbar.setEnableAction(save, false);
     }
 
     protected void onCancel() {
@@ -129,6 +127,8 @@ public class TextEditorPresenter implements TextEditor {
 
     protected void onCancelConfirmed() {
 	reset();
+	view.detach();
+	toolbar.detach();
 	onEditCancelled.onEvent();
     }
 
@@ -174,7 +174,7 @@ public class TextEditorPresenter implements TextEditor {
 	final ActionItemCollection<StateToken> collection = new ActionItemCollection<StateToken>();
 	collection.add(new ActionItem<StateToken>(save, null));
 	collection.add(new ActionItem<StateToken>(close, null));
-	toolbar.showActions(collection, true);
+	toolbar.setActions(collection);
     }
 
     private void setContent(final String html) {

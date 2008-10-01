@@ -149,10 +149,10 @@ public class DocumentClientActions {
 	delContent.setConfirmationTitle(i18n.t("Please confirm"));
 	delContent.setConfirmationText(i18n.t("Are you sure?"));
 	delContent.setEnableCondition(new ActionEnableCondition<StateToken>() {
-	    public boolean mustBeEnabled(final StateToken currentStateToken) {
+	    public boolean mustBeEnabled(final StateToken itemToken) {
 		final StateToken defContentToken = session.getCurrentState().getGroup().getDefaultContent()
 			.getStateToken();
-		return !currentStateToken.equals(defContentToken);
+		return !itemToken.equals(defContentToken);
 	    }
 	});
 
@@ -166,8 +166,8 @@ public class DocumentClientActions {
 	go.setTextDescription(i18n.t("Open"));
 	go.setIconUrl("images/nav/go.png");
 	go.setEnableCondition(new ActionEnableCondition<StateToken>() {
-	    public boolean mustBeEnabled(final StateToken currentStateToken) {
-		return !contextNavigator.isSelected(currentStateToken);
+	    public boolean mustBeEnabled(final StateToken itemToken) {
+		return !contextNavigator.isSelected(itemToken);
 	    }
 	});
 
@@ -198,10 +198,10 @@ public class DocumentClientActions {
 	goGroupHome.setMustBeAuthenticated(false);
 	goGroupHome.setIconUrl("images/group-home.png");
 	goGroupHome.setEnableCondition(new ActionEnableCondition<StateToken>() {
-	    public boolean mustBeEnabled(final StateToken currentStateToken) {
+	    public boolean mustBeEnabled(final StateToken itemToken) {
 		final StateToken defContentToken = session.getCurrentState().getGroup().getDefaultContent()
 			.getStateToken();
-		return !currentStateToken.equals(defContentToken);
+		return !itemToken.equals(defContentToken);
 	    }
 	});
 
@@ -290,7 +290,7 @@ public class DocumentClientActions {
 	setGroupLogo.setTextDescription(i18n.t("Set this as the group logo"));
 	setGroupLogo.setIconUrl("images/nav/picture.png");
 	setGroupLogo.setEnableCondition(new ActionEnableCondition<StateToken>() {
-	    public boolean mustBeEnabled(final StateToken param) {
+	    public boolean mustBeEnabled(final StateToken itemToken) {
 		final BasicMimeTypeDTO mime = session.getCurrentState().getMimeType();
 		return mime != null && mime.getType().equals("image");
 	    }
@@ -344,19 +344,18 @@ public class DocumentClientActions {
 
 						    public void onSuccess(final Integer newVersion) {
 							Site.hideProgress();
+							session.getCurrentState().setVersion(newVersion);
+							session.getCurrentState().setContent(html);
 							editor.onSaved();
-							if (session.getCurrentStateToken().equals(stateToken)) {
-							    session.getCurrentState().setVersion(newVersion);
-							    session.getCurrentState().setContent(html);
-							    documentContent.refreshState();
-							}
 						    }
 						});
 				    }
 				}, new Listener0() {
 				    public void onEvent() {
 					// onClose
-					documentContent.refreshState();
+					if (session.getCurrentStateToken().equals(stateToken)) {
+					    documentContent.refreshState();
+					}
 				    }
 				});
 			    }
@@ -444,10 +443,10 @@ public class DocumentClientActions {
 	setAsDefGroupContent.setTextDescription(i18n.t("Set this as the group default page"));
 	setAsDefGroupContent.setIconUrl("images/group-home.png");
 	setAsDefGroupContent.setEnableCondition(new ActionEnableCondition<StateToken>() {
-	    public boolean mustBeEnabled(final StateToken currentStateToken) {
+	    public boolean mustBeEnabled(final StateToken itemToken) {
 		final StateToken defContentToken = session.getCurrentState().getGroup().getDefaultContent()
 			.getStateToken();
-		return !currentStateToken.equals(defContentToken);
+		return !itemToken.equals(defContentToken);
 	    }
 	});
 	return setAsDefGroupContent;

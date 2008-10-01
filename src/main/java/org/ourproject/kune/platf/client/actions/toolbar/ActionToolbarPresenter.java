@@ -1,59 +1,71 @@
 package org.ourproject.kune.platf.client.actions.toolbar;
 
 import org.ourproject.kune.platf.client.actions.ActionDescriptor;
-import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonAndItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuAndItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 
 import com.allen_sauer.gwt.log.client.Log;
 
 public class ActionToolbarPresenter<T> implements ActionToolbar<T> {
-    private final ActionToolbarView<T> toolbar;
+    private final ActionToolbarView<T> view;
 
     public ActionToolbarPresenter(final ActionToolbarView<T> toolbar) {
-	this.toolbar = toolbar;
+	this.view = toolbar;
     }
 
     public void attach() {
-	toolbar.attach();
-    }
-
-    public boolean checkEnabling(final ActionDescriptor<T> action, final T T) {
-	final ActionEnableCondition<T> enableCondition = action.getEnableCondition();
-	return enableCondition != null ? enableCondition.mustBeEnabled(T) : true;
+	view.attach();
     }
 
     public void clear() {
-	toolbar.clear();
+	view.clear();
     }
 
     public void detach() {
-	toolbar.detach();
+	view.detach();
     }
 
     public void disableMenusAndClearButtons() {
-	toolbar.clear();
+	view.clear();
     }
 
-    public void showActions(final ActionItemCollection<T> actions, final boolean isItemSelected) {
+    public void setActions(final ActionItemCollection<T> actions) {
 	for (final ActionItem<T> actionItem : actions) {
 	    final ActionDescriptor<T> action = actionItem.getAction();
-	    if (action instanceof ActionToolbarMenuDescriptor || action instanceof ActionToolbarMenuAndItemDescriptor) {
-		toolbar.addMenuAction(actionItem, isItemSelected && checkEnabling(action, actionItem.getItem()));
+	    if (isToolbarMenu(action)) {
+		view.addMenuAction(actionItem, actionItem.checkEnabling());
 	    } else {
-		if (action instanceof ActionToolbarButtonDescriptor
-			|| action instanceof ActionToolbarButtonAndItemDescriptor) {
-		    if (isItemSelected && checkEnabling(action, actionItem.getItem())) {
-			toolbar.addButtonAction(actionItem);
-		    }
+		if (isToolbarButton(action)) {
+		    view.addButtonAction(actionItem, actionItem.checkEnabling());
 		} else {
 		    Log.error("Code error: Not an ActionMenuDescriptor or ActionButtonDescriptor: " + action.getText());
 		}
 	    }
 	}
+    }
+
+    public void setEnableAction(final ActionToolbarDescriptor<T> action, final boolean enable) {
+	if (isToolbarMenu(action)) {
+	    view.setMenuEnable(action, enable);
+	} else {
+	    if (isToolbarButton(action)) {
+		view.setButtonEnable(action, enable);
+	    }
+	}
+
+    }
+
+    private boolean isToolbarButton(final ActionDescriptor<T> action) {
+	return action instanceof ActionToolbarButtonDescriptor
+		|| action instanceof ActionToolbarButtonAndItemDescriptor;
+    }
+
+    private boolean isToolbarMenu(final ActionDescriptor<T> action) {
+	return action instanceof ActionToolbarMenuDescriptor || action instanceof ActionToolbarMenuAndItemDescriptor;
     }
 }
