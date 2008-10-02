@@ -27,11 +27,10 @@ import org.ourproject.kune.platf.client.ui.form.FileUploadFormSample;
 import org.ourproject.kune.platf.client.ui.imgchooser.ImageChooser;
 import org.ourproject.kune.platf.client.ui.imgchooser.ImageChooserCallback;
 import org.ourproject.kune.platf.client.ui.imgchooser.ImageData;
-import org.ourproject.kune.platf.client.ui.palette.ColorSelectListener;
-import org.ourproject.kune.platf.client.ui.palette.WebSafePalettePanel;
-import org.ourproject.kune.platf.client.ui.palette.WebSafePalettePresenter;
+import org.ourproject.kune.platf.client.ui.palette.WebSafePalette;
 import org.ourproject.kune.workspace.client.site.Site;
 
+import com.calclab.suco.client.listener.Listener;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
@@ -41,7 +40,6 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.MenuBar;
-import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.ToggleButton;
@@ -112,21 +110,17 @@ public class TextEditorToolbar extends Composite {
 		});
 		showLinkPanel();
 	    } else if (sender == backColor) {
-		showPalette(sender, sender.getAbsoluteLeft(), sender.getAbsoluteTop() + 20);
-		palettePresenter.addColorSelectListener(new ColorSelectListener() {
-		    public void onColorSelected(final String color) {
+		colorPalette.show(sender.getAbsoluteLeft(), sender.getAbsoluteTop() + 20, new Listener<String>() {
+		    public void onEvent(final String color) {
 			basic.setBackColor(color);
-			popupPalette.hide();
-			palettePresenter.reset();
+			colorPalette.hide();
 		    }
 		});
 	    } else if (sender == fontColor) {
-		showPalette(sender, sender.getAbsoluteLeft(), sender.getAbsoluteTop() + 20);
-		palettePresenter.addColorSelectListener(new ColorSelectListener() {
-		    public void onColorSelected(final String color) {
+		colorPalette.show(sender.getAbsoluteLeft(), sender.getAbsoluteTop() + 20, new Listener<String>() {
+		    public void onEvent(final String color) {
 			basic.setForeColor(color);
-			popupPalette.hide();
-			palettePresenter.reset();
+			colorPalette.hide();
 		    }
 		});
 	    } else if (sender == removeLink) {
@@ -287,10 +281,8 @@ public class TextEditorToolbar extends Composite {
     private PushButton fontColor;
     private MenuBar fonts;
     private MenuBar fontSizes;
-    private WebSafePalettePanel palettePanel;
+    private final WebSafePalette colorPalette;
     private final TextEditorPresenter presenter;
-    private PopupPanel popupPalette;
-    private WebSafePalettePresenter palettePresenter;
     private final I18nTranslationService i18n;
 
     /**
@@ -300,8 +292,9 @@ public class TextEditorToolbar extends Composite {
      *                the rich text area to be controlled
      */
     public TextEditorToolbar(final RichTextArea richText, final TextEditorPresenter presenter,
-	    final I18nTranslationService i18n) {
+	    final WebSafePalette colorPalette, final I18nTranslationService i18n) {
 	this.richText = richText;
+	this.colorPalette = colorPalette;
 	this.i18n = i18n;
 	this.basic = richText.getBasicFormatter();
 	this.extended = richText.getExtendedFormatter();
@@ -392,19 +385,6 @@ public class TextEditorToolbar extends Composite {
 	    fonts.setVisible(enable);
 	    fontSizes.setVisible(enable);
 	}
-    }
-
-    public void showPalette(final Widget sender, final int left, final int top) {
-	if (palettePanel == null) {
-	    palettePresenter = new WebSafePalettePresenter();
-	    palettePanel = new WebSafePalettePanel(palettePresenter);
-	}
-	popupPalette = new PopupPanel(true, true);
-	popupPalette.setVisible(false);
-	popupPalette.show();
-	popupPalette.setPopupPosition(left, top);
-	popupPalette.setWidget(palettePanel);
-	popupPalette.setVisible(true);
     }
 
     private MenuBar createFontSizesMenu() {

@@ -20,47 +20,45 @@
 
 package org.ourproject.kune.platf.client.ui.palette;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import com.calclab.suco.client.listener.Listener;
 
-public class WebSafePalettePresenter {
+public class WebSafePalettePresenter implements WebSafePalette {
 
-    private final ArrayList<ColorSelectListener> colorSelectListeners;
+    private Listener<String> onColorSelected;
+    private WebSafePaletteView view;
 
     public WebSafePalettePresenter() {
-        colorSelectListeners = new ArrayList<ColorSelectListener>();
     }
 
-    public void addColorSelectListener(final ColorSelectListener listener) {
-        colorSelectListeners.add(listener);
+    public void hide() {
+	this.view.hide();
     }
 
-    protected void fireColorSelectListeners(final String color) {
-        for (Iterator<ColorSelectListener> it = colorSelectListeners.iterator(); it.hasNext();) {
-            (it.next()).onColorSelected(color);
-        }
+    public void init(final WebSafePaletteView view) {
+	this.view = view;
     }
 
-    public void onColorSelected(final int row, final int col) {
-        String color = getColor(row, col);
-        fireColorSelectListeners(color);
+    public void show(final int left, final int top, final Listener<String> onColorSelected) {
+	view.show(left, top);
+	this.onColorSelected = onColorSelected;
+    }
+
+    protected void onColorSelected(final int row, final int col) {
+	final String color = getColor(row, col);
+	onColorSelected.onEvent(color);
     }
 
     private String getColor(final int row, final int col) {
-        String color = null;
-        int pd = row * WebSafePaletteView.COLS + col;
-        int da = pd / 6;
-        int ra = pd % 6;
-        int aa = da - ra / 6;
-        int db = aa / 6;
-        int rb = aa % 6;
-        int rc = (db - rb / 6) % 6;
-        color = "rgb(" + ra * 51 + ", " + rc * 51 + ", " + rb * 51 + ")";
-        return color;
-    }
-
-    public void reset() {
-        colorSelectListeners.clear();
+	String color = null;
+	final int pd = row * WebSafePaletteView.COLS + col;
+	final int da = pd / 6;
+	final int ra = pd % 6;
+	final int aa = da - ra / 6;
+	final int db = aa / 6;
+	final int rb = aa % 6;
+	final int rc = (db - rb / 6) % 6;
+	color = "rgb(" + ra * 51 + ", " + rc * 51 + ", " + rb * 51 + ")";
+	return color;
     }
 
 }

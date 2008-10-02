@@ -5,16 +5,6 @@ TODO-list for kune
 
 SHORT-TERM (URGENT):
 --------------------------------------------------------------------------------
-<vjrj>
- - Room join fails
- - Revisited ExtPoint system
- -     "     Desktop
- - LoginPanel issues
- - NGPanel issues
- - use of http://google-web-toolkit-doc-1-5.googlecode.com/svn/javadoc/1.5/com/google/gwt/user/client/rpc/StatusCodeException.html
-
---> vjrj
-<vjrj/>
 <vjrj> IconHyperlink.java and IconLabel.java to gwt1.5
 <vjrj> chat add new room name validation (do a form with validation)
 --> vjrj
@@ -57,8 +47,6 @@ http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/367bdb56d
 --> vjrj
 <danigb> click in new group, reload sn innecessary
 --> vjrj
-<vjrj> Test:
-http://gwtforge.com/
 <vjrj> for dev, study jetty hot deploy (if scanIntervalSeconds > 0 also reload with client changes ... ). It will be nice to send a signal or something like that. See:
   http://jetty.mortbay.org/jetty5/faq/faq_s_200-General_t_HotDeploy.html
 See, I think is what we are looking for:

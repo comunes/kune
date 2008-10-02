@@ -28,4 +28,8 @@ public interface WebSafePaletteView {
 
     final String COLORS[] = { "0", "3", "6", "9", "C", "F" };
 
+    void hide();
+
+    void show(int left, int top);
+
 }

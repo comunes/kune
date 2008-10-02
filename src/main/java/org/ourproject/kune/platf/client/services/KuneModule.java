@@ -33,9 +33,7 @@ import org.ourproject.kune.platf.client.state.StateManagerDefault;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
 import org.ourproject.kune.platf.client.tool.ToolSelectorPresenter;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
-import org.ourproject.kune.platf.client.ui.upload.FileUploader;
-import org.ourproject.kune.platf.client.ui.upload.FileUploaderDialog;
-import org.ourproject.kune.platf.client.ui.upload.FileUploaderPresenter;
+import org.ourproject.kune.platf.client.ui.palette.WebSafePalette;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPanel;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPresenter;
@@ -287,9 +285,11 @@ public class KuneModule extends AbstractModule {
 			ActionToolbarPanel.Position.content, $$(ActionManager.class), $(WorkspaceSkeleton.class));
 		final ActionToolbar<StateToken> toolbar = new ActionToolbarPresenter<StateToken>(
 			contentNavigatorToolbar);
+
 		final TextEditorPresenter presenter = new TextEditorPresenter(true, toolbar,
 			$(I18nUITranslationService.class));
-		final TextEditorPanel panel = new TextEditorPanel(presenter, i18n, $(WorkspaceSkeleton.class));
+		final TextEditorPanel panel = new TextEditorPanel(presenter, $(I18nTranslationService.class),
+			$(WorkspaceSkeleton.class), $(WebSafePalette.class));
 		presenter.init(panel);
 		return presenter;
 	    }
@@ -347,16 +347,6 @@ public class KuneModule extends AbstractModule {
 			$(ContextActionRegistry.class));
 		final ContextNavigatorPanel panel = new ContextNavigatorPanel(presenter, i18n,
 			$(WorkspaceSkeleton.class), $(ActionManager.class));
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
-
-	register(Singleton.class, new Factory<FileUploader>(FileUploader.class) {
-	    public FileUploader create() {
-		final FileUploaderPresenter presenter = new FileUploaderPresenter($(Session.class),
-			$$(ContextNavigator.class));
-		final FileUploaderDialog panel = new FileUploaderDialog(presenter, i18n, $(WorkspaceSkeleton.class));
 		presenter.init(panel);
 		return presenter;
 	    }
