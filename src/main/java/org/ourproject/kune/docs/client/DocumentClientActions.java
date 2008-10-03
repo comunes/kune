@@ -15,6 +15,7 @@ import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionMenuItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonAndItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarButtonSeparator;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuAndItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
@@ -316,6 +317,7 @@ public class DocumentClientActions {
 	translateContent.setTextDescription(i18n.tWithNT("Translate", "used in button"));
 	translateContent.setToolTip(i18n.t("Translate this document to other languages"));
 	translateContent.setIconUrl("images/language.gif");
+	translateContent.setLeftSeparator(ActionToolbarButtonSeparator.spacer);
 
 	final ActionToolbarButtonDescriptor<StateToken> editContent = new ActionToolbarButtonDescriptor<StateToken>(
 		AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
@@ -364,6 +366,7 @@ public class DocumentClientActions {
 		});
 	editContent.setTextDescription(i18n.tWithNT("Edit", "used in button"));
 	editContent.setIconUrl("images/content_edit.png");
+	editContent.setLeftSeparator(ActionToolbarButtonSeparator.spacer);
 
 	final String[] all = { TYPE_ROOT, TYPE_FOLDER, TYPE_DOCUMENT, TYPE_GALLERY, TYPE_BLOG, TYPE_POST, TYPE_WIKI,
 		TYPE_WIKIPAGE, TYPE_UPLOADEDFILE };

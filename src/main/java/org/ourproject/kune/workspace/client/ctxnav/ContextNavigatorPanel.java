@@ -97,6 +97,14 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 		// Log.info("Adding child node: " + nodeId + " to folder: " +
 		// item.getParentId());
 		child.addListener(new TreeNodeListenerAdapter() {
+		    // @Override
+		    // public void onClick(final Node node, final EventObject e)
+		    // {
+		    // Log.info("Tree node clicked: " + getToken(node));
+		    // // treePanel.getNodeById(node.getId()).select();
+		    // presenter.gotoToken(getToken(node));
+		    // }
+
 		    @Override
 		    public void onTextChange(final Node node, final String text, final String oldText) {
 			if (fireOnTextChange) {
@@ -112,6 +120,7 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 			public void onExpand(final Node node) {
 			    treePanel.getNodeById(node.getId()).select();
 			    presenter.gotoToken(getToken(node));
+			    child.setIcon("public/nav/folder.png");
 			}
 		    });
 		} else {

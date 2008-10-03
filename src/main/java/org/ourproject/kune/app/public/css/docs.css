@@ -94,12 +94,14 @@
 .RichTextToolbar-menu {
   float: left;
   margin-top: 2px;
+  z-index: 4;
 }
 
 .RichTextToolbar-menu table {
   border-collapse: collapse;
   border-spacing: 0;
   margin: 0;
+  z-index: 4;
 }
 
 .RichTextToolbar-menu .gwt-MenuItem {
@@ -118,6 +120,7 @@
   background-color: #FFFCD5;
   border: 1px solid #D38D5F;
   cursor: default;
+  z-index: 4;
 }
 
 .RichTextToolbar-submenu .gwt-MenuItem {

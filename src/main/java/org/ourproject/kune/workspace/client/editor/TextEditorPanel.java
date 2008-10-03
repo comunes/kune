@@ -142,6 +142,6 @@ public class TextEditorPanel implements TextEditorView {
 
     private void adjustSize(final int height) {
 	gwtRTarea.setHeight(""
-		+ (height - DefaultBorderLayout.DEF_TOOLBAR_HEIGHT - DefaultBorderLayout.DEF_TOOLBAR_HEIGHT - 5));
+		+ (height - DefaultBorderLayout.DEF_TOOLBAR_HEIGHT - DefaultBorderLayout.DEF_TOOLBAR_HEIGHT));
     }
 }
