@@ -51,7 +51,6 @@ public class StateManagerTest {
 		(StateToken) Mockito.anyObject(), (AsyncCallback<StateDTO>) Mockito.anyObject());
     }
 
-    @SuppressWarnings("unchecked")
     @Before
     public void init() {
 	contentProvider = Mockito.mock(ContentProvider.class);

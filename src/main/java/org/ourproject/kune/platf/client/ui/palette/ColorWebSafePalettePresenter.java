@@ -22,12 +22,12 @@ package org.ourproject.kune.platf.client.ui.palette;
 
 import com.calclab.suco.client.listener.Listener;
 
-public class WebSafePalettePresenter implements WebSafePalette {
+public class ColorWebSafePalettePresenter implements ColorWebSafePalette {
 
     private Listener<String> onColorSelected;
     private WebSafePaletteView view;
 
-    public WebSafePalettePresenter() {
+    public ColorWebSafePalettePresenter() {
     }
 
     public void hide() {

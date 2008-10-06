@@ -1,9 +1,9 @@
 package org.ourproject.kune.platf.client.services;
 
 import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.ui.palette.WebSafePalette;
-import org.ourproject.kune.platf.client.ui.palette.WebSafePalettePanel;
-import org.ourproject.kune.platf.client.ui.palette.WebSafePalettePresenter;
+import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
+import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalettePanel;
+import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalettePresenter;
 import org.ourproject.kune.platf.client.ui.upload.FileUploader;
 import org.ourproject.kune.platf.client.ui.upload.FileUploaderDialog;
 import org.ourproject.kune.platf.client.ui.upload.FileUploaderPresenter;
@@ -19,10 +19,10 @@ public class KunePlatformModule extends AbstractModule {
 
     @Override
     protected void onLoad() {
-	register(Singleton.class, new Factory<WebSafePalette>(WebSafePalette.class) {
-	    public WebSafePalette create() {
-		final WebSafePalettePresenter presenter = new WebSafePalettePresenter();
-		final WebSafePalettePanel panel = new WebSafePalettePanel(presenter);
+	register(Singleton.class, new Factory<ColorWebSafePalette>(ColorWebSafePalette.class) {
+	    public ColorWebSafePalette create() {
+		final ColorWebSafePalettePresenter presenter = new ColorWebSafePalettePresenter();
+		final ColorWebSafePalettePanel panel = new ColorWebSafePalettePanel(presenter);
 		presenter.init(panel);
 		return presenter;
 	    }

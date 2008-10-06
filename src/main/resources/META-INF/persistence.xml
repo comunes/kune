@@ -81,7 +81,7 @@
       <property name="hibernate.search.default.directory_provider"
         value="org.hibernate.search.store.FSDirectoryProvider" />
       <property name="hibernate.search.default.indexBase"
-        value="/var/lib/lucene/kune_test/indexes" />
+        value="/var/lib/kune/lucene/kune_test/indexes" />
     </properties>
   </persistence-unit>
 </persistence>

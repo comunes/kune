@@ -27,7 +27,7 @@ import org.ourproject.kune.platf.client.ui.form.FileUploadFormSample;
 import org.ourproject.kune.platf.client.ui.imgchooser.ImageChooser;
 import org.ourproject.kune.platf.client.ui.imgchooser.ImageChooserCallback;
 import org.ourproject.kune.platf.client.ui.imgchooser.ImageData;
-import org.ourproject.kune.platf.client.ui.palette.WebSafePalette;
+import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.workspace.client.site.Site;
 
 import com.calclab.suco.client.listener.Listener;
@@ -281,7 +281,7 @@ public class TextEditorToolbar extends Composite {
     private PushButton fontColor;
     private MenuBar fonts;
     private MenuBar fontSizes;
-    private final WebSafePalette colorPalette;
+    private final ColorWebSafePalette colorPalette;
     private final TextEditorPresenter presenter;
     private final I18nTranslationService i18n;
 
@@ -292,7 +292,7 @@ public class TextEditorToolbar extends Composite {
      *                the rich text area to be controlled
      */
     public TextEditorToolbar(final RichTextArea richText, final TextEditorPresenter presenter,
-	    final WebSafePalette colorPalette, final I18nTranslationService i18n) {
+	    final ColorWebSafePalette colorPalette, final I18nTranslationService i18n) {
 	this.richText = richText;
 	this.colorPalette = colorPalette;
 	this.i18n = i18n;

@@ -33,7 +33,7 @@ import org.ourproject.kune.platf.client.state.StateManagerDefault;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
 import org.ourproject.kune.platf.client.tool.ToolSelectorPresenter;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
-import org.ourproject.kune.platf.client.ui.palette.WebSafePalette;
+import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPanel;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPresenter;
@@ -289,7 +289,7 @@ public class KuneModule extends AbstractModule {
 		final TextEditorPresenter presenter = new TextEditorPresenter(true, toolbar,
 			$(I18nUITranslationService.class));
 		final TextEditorPanel panel = new TextEditorPanel(presenter, $(I18nTranslationService.class),
-			$(WorkspaceSkeleton.class), $(WebSafePalette.class));
+			$(WorkspaceSkeleton.class), $(ColorWebSafePalette.class));
 		presenter.init(panel);
 		return presenter;
 	    }

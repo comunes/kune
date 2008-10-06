@@ -2,7 +2,7 @@ package org.ourproject.kune.platf.client.ui.palette;
 
 import com.calclab.suco.client.listener.Listener;
 
-public interface WebSafePalette {
+public interface ColorWebSafePalette {
 
     void hide();
 

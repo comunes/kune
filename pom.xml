@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.ourproject</groupId>
 	<artifactId>kune</artifactId>
@@ -42,10 +43,8 @@
 			<version>1.5.2</version>
 		</dependency>
 		<!--
-			<dependency>
-			<groupId>com.extjs</groupId>
-			<artifactId>gxt</artifactId>
-			<version>1.0-beta2</version>
+			<dependency> <groupId>com.extjs</groupId>
+			<artifactId>gxt</artifactId> <version>1.0-beta2</version>
 			</dependency>
 		-->
 		<dependency>
@@ -226,11 +225,11 @@
 			<artifactId>liquibase-core</artifactId>
 			<version>1.7.0</version>
 		</dependency>
-                <dependency>
-                    <groupId>org.liquibase</groupId>
-                    <artifactId>liquibase-plugin</artifactId>
-                    <version>1.7.0.0</version>
-                </dependency> 
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-plugin</artifactId>
+			<version>1.7.0.0</version>
+		</dependency>
 
 		<!-- jetty dependencies -->
 		<dependency>
@@ -288,7 +287,9 @@
 		</dependency>
 	</dependencies>
 
-	<!-- http://gwt-maven.googlecode.com/svn/docs/maven-googlewebtoolkit2-plugin/index.html -->
+	<!--
+		http://gwt-maven.googlecode.com/svn/docs/maven-googlewebtoolkit2-plugin/index.html
+	-->
 	<repositories>
 		<repository>
 			<id>repository.jboss.org</id>
@@ -347,6 +348,9 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.3</version>
+				<configuration>
+					<forkMode>pertest</forkMode>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -439,11 +443,8 @@
 							<verbose>true</verbose>
 						</configuration>
 						<!--
-							<configuration>
-							<verbose>true</verbose>
-							<propertiesFile>
-							src/main/resources/db/liquibase.properties
-							</propertiesFile>
+							<configuration> <verbose>true</verbose> <propertiesFile>
+							src/main/resources/db/liquibase.properties </propertiesFile>
 							</configuration>
 						-->
 						<goals>
@@ -487,7 +488,8 @@
 								<include>**/LabelWrapper*.**</include>
 								<include>**/KuneUiUtils.**</include>
 								<include>**/View.**</include>
-								<!--                <include>**/platf/**</include>
+								<!--
+									<include>**/platf/**</include>
 									<include>**/platf/client/extend/**</include>
 									<include>**/platf/client/*java</include>
 									<include>**/platf/client/app/**</include>
@@ -530,10 +532,13 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
-					<!-- Skip the normal tests, we'll run them in the integration-test phase -->
+					<forkMode>pertest</forkMode>
+					<!--
+						Skip the normal tests, we'll run them in the integration-test
+						phase
+					-->
 					<skip>true</skip>
 				</configuration>
-
 				<executions>
 					<execution>
 						<phase>integration-test</phase>
@@ -592,6 +597,7 @@
 							</value>
 						</property>
 					</systemProperties>
+					<forkMode>pertest</forkMode>
 				</configuration>
 			</plugin>
 			<plugin>

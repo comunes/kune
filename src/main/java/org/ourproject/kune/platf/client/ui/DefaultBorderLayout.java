@@ -120,7 +120,7 @@ public class DefaultBorderLayout {
 
     public void doLayoutIfNeeded() {
 	if (mainPanel.isRendered()) {
-	    mainPanel.doLayout();
+	    mainPanel.doLayout(false);
 	}
     }
 
