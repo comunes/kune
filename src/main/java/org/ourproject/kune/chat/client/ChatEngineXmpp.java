@@ -45,108 +45,112 @@ class ChatEngineXmpp implements ChatEngine {
     private ToolbarButton traybarButton;
 
     public ChatEngineXmpp(final EmiteUIDialog emiteUIDialog, final ChatOptions chatOptions,
-	    final I18nTranslationService i18n, final WorkspaceSkeleton ws) {
-	this.emiteDialog = emiteUIDialog;
-	this.chatOptions = chatOptions;
-	this.i18n = i18n;
-	this.ws = ws;
+            final I18nTranslationService i18n, final WorkspaceSkeleton ws) {
+        this.emiteDialog = emiteUIDialog;
+        this.chatOptions = chatOptions;
+        this.i18n = i18n;
+        this.ws = ws;
     }
 
     public ChatOptions getChatOptions() {
-	return chatOptions;
+        return chatOptions;
     }
 
     public void joinRoom(final String roomName, final String userAlias) {
-	if (emiteDialog.isLoggedIn()) {
-	    final XmppURI roomURI = XmppURI.uri(roomName + "@" + chatOptions.roomHost + "/"
-		    + chatOptions.userOptions.getUserJid().getNode());
-	    emiteDialog.joinRoom(roomURI);
-	} else {
-	    ws.showAlertMessage(i18n.t("Error"), i18n.t("To join a chatroom you need to be 'online'."));
-	}
+        if (emiteDialog.isLoggedIn()) {
+            final XmppURI roomURI = XmppURI.uri(roomName + "@" + chatOptions.roomHost + "/"
+                    + chatOptions.userOptions.getUserJid().getNode());
+            emiteDialog.joinRoom(roomURI);
+        } else {
+            ws.showAlertMessage(i18n.t("Error"), i18n.t("To join a chatroom you need to be 'online'."));
+        }
     }
 
     public void login(final String jid, final String passwd) {
-	final UserChatOptions userChatOptions = getUserChatOptions(jid, passwd);
-	// FIXME: Avatar provider
-	final AvatarProvider avatarProvider = new AvatarProvider() {
-	    public String getAvatarURL(XmppURI userURI) {
-		return "images/person-def.gif";
-	    }
-	};
-	final String initialWindowTitle = Window.getTitle();
-	chatOptions.userOptions = userChatOptions;
-	if (emiteDialog.isDialogNotStarted()) {
-	    emiteDialog.start(userChatOptions, chatOptions.httpBase, chatOptions.roomHost, initialWindowTitle,
-		    avatarProvider, i18n.t("Chat"));
-	} else {
-	    emiteDialog.setEnableStatusUI(true);
-	    emiteDialog.refreshUserInfo(chatOptions.userOptions);
-	}
-	emiteDialog.show(OwnStatus.online);
-	if (traybarButton == null) {
-	    traybarButton = new ToolbarButton();
-	    traybarButton.setTooltip(i18n.t("Show/hide the chat window"));
-	    // traybarButton.setIcon("images/emite-chat.gif");
-	    traybarButton.setIcon("images/e-icon.gif");
-	    traybarButton.addListener(new ButtonListenerAdapter() {
-		@Override
-		public void onClick(final Button button, final EventObject e) {
-		    if (emiteDialog.isVisible()) {
-			emiteDialog.hide();
-		    } else {
-			emiteDialog.show();
-		    }
-		}
-	    });
-	    ws.getSiteTraybar().addButton(traybarButton);
-	    emiteDialog.onChatAttended(new Listener<String>() {
-		public void onEvent(final String parameter) {
-		    traybarButton.setIcon("images/e-icon.gif");
-		}
-	    });
-	    emiteDialog.onChatUnattendedWithActivity(new Listener<String>() {
-		public void onEvent(final String parameter) {
-		    traybarButton.setIcon("images/e-icon-a.gif");
-		}
-	    });
-	}
-	emiteDialog.hide();
-	emiteDialog.onChatAttended(new Listener<String>() {
-	    public void onEvent(final String parameter) {
-		Window.setTitle(initialWindowTitle);
-	    }
-	});
-	emiteDialog.onChatUnattendedWithActivity(new Listener<String>() {
-	    public void onEvent(final String chatTitle) {
-		Window.setTitle("(* " + chatTitle + ") " + initialWindowTitle);
-	    }
-	});
+        final UserChatOptions userChatOptions = getUserChatOptions(jid, passwd);
+        // FIXME: Avatar provider
+        final AvatarProvider avatarProvider = new AvatarProvider() {
+            public String getAvatarURL(XmppURI userURI) {
+                return "images/person-def.gif";
+            }
+        };
+        final String initialWindowTitle = Window.getTitle();
+        chatOptions.userOptions = userChatOptions;
+        if (emiteDialog.isDialogNotStarted()) {
+            emiteDialog.start(userChatOptions, chatOptions.httpBase, chatOptions.roomHost, initialWindowTitle,
+                    avatarProvider, i18n.t("Chat"));
+        } else {
+            emiteDialog.setEnableStatusUI(true);
+            emiteDialog.refreshUserInfo(chatOptions.userOptions);
+        }
+        emiteDialog.show(OwnStatus.online);
+        if (traybarButton == null) {
+            traybarButton = new ToolbarButton();
+            traybarButton.setTooltip(i18n.t("Show/hide the chat window"));
+            // traybarButton.setIcon("images/emite-chat.gif");
+            traybarButton.setIcon("images/e-icon.gif");
+            traybarButton.addListener(new ButtonListenerAdapter() {
+                @Override
+                public void onClick(final Button button, final EventObject e) {
+                    if (emiteDialog.isVisible()) {
+                        emiteDialog.hide();
+                    } else {
+                        emiteDialog.show();
+                    }
+                }
+            });
+            ws.getSiteTraybar().addButton(traybarButton);
+            emiteDialog.onChatAttended(new Listener<String>() {
+                public void onEvent(final String parameter) {
+                    traybarButton.setIcon("images/e-icon.gif");
+                }
+            });
+            emiteDialog.onChatUnattendedWithActivity(new Listener<String>() {
+                public void onEvent(final String parameter) {
+                    traybarButton.setIcon("images/e-icon-a.gif");
+                }
+            });
+        }
+        emiteDialog.hide();
+        emiteDialog.onChatAttended(new Listener<String>() {
+            public void onEvent(final String parameter) {
+                Window.setTitle(initialWindowTitle);
+            }
+        });
+        emiteDialog.onChatUnattendedWithActivity(new Listener<String>() {
+            public void onEvent(final String chatTitle) {
+                Window.setTitle("(* " + chatTitle + ") " + initialWindowTitle);
+            }
+        });
     }
 
     public void logout() {
-	if (!emiteDialog.isDialogNotStarted()) {
-	    emiteDialog.setOwnPresence(OwnStatus.offline);
-	    chatOptions.userOptions = getUserChatOptions("reset@example.com", "");
-	    emiteDialog.refreshUserInfo(chatOptions.userOptions);
-	    emiteDialog.setEnableStatusUI(false);
-	}
+        if (!emiteDialog.isDialogNotStarted()) {
+            emiteDialog.setOwnPresence(OwnStatus.offline);
+            chatOptions.userOptions = getUserChatOptions("reset@example.com", "");
+            emiteDialog.refreshUserInfo(chatOptions.userOptions);
+            emiteDialog.setEnableStatusUI(false);
+        }
     }
 
     public void show() {
-	emiteDialog.show();
+        emiteDialog.show();
     }
 
     public void stop() {
-	emiteDialog.destroy();
-	emiteDialog.getSession().logout();
+        if (!emiteDialog.isDialogNotStarted()) {
+            emiteDialog.destroy();
+        }
+        if (emiteDialog.getSession().isLoggedIn()) {
+            emiteDialog.getSession().logout();
+        }
     }
 
     private UserChatOptions getUserChatOptions(final String jid, final String passwd) {
-	final String resource = "emiteui-" + new Date().getTime() + "-kune"; // +
-	// getGwtMetaProperty(GWT_PROPERTY_RELEASE);
-	// FIXME, get this from user profile
-	return new UserChatOptions(jid + "@" + chatOptions.domain, passwd, resource, "blue",
-		SubscriptionMode.autoAcceptAll, true);
+        final String resource = "emiteui-" + new Date().getTime() + "-kune"; // +
+        // getGwtMetaProperty(GWT_PROPERTY_RELEASE);
+        // FIXME, get this from user profile
+        return new UserChatOptions(jid + "@" + chatOptions.domain, passwd, resource, "blue",
+                SubscriptionMode.autoAcceptAll, true);
     }
 }

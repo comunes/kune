@@ -28,6 +28,8 @@ import com.google.gwt.user.client.ui.Label;
 public class FolderViewerPanel extends Label implements FolderViewerView {
 
     public FolderViewerPanel() {
-	super("Folder properties, translations ..." + Site.IN_DEVELOPMENT);
+        super("Folder properties, translations ..." + Site.IN_DEVELOPMENT);
+        super.setStyleName("kune-Content-Main");
+        super.addStyleName("kune-Margin-7-trbl");
     }
 }

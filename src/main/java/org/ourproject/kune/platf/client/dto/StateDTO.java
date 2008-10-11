@@ -57,254 +57,255 @@ public class StateDTO implements IsSerializable {
     private StateToken stateToken;
 
     public StateDTO() {
-	this(null, null, null);
+        this(null, null, null);
     }
 
     public StateDTO(final String docRef, final String title, final String content) {
-	this.documentId = docRef;
-	this.title = title;
-	this.content = content;
+        this.documentId = docRef;
+        this.title = title;
+        this.content = content;
     }
 
     public AccessListsDTO getAccessLists() {
-	return accessLists;
+        return accessLists;
     }
 
     public List<UserSimpleDTO> getAuthors() {
-	return authors;
+        return authors;
     }
 
     public ContainerDTO getContainer() {
-	return container;
+        return container;
     }
 
     public AccessRightsDTO getContainerRights() {
-	return containerRights;
+        return containerRights;
     }
 
     public String getContent() {
-	return content;
+        return content;
     }
 
     public AccessRightsDTO getContentRights() {
-	return this.contentRights;
+        return this.contentRights;
     }
 
     public Double getCurrentUserRate() {
-	return currentUserRate;
+        return currentUserRate;
     }
 
     public String getDocumentId() {
-	return documentId;
+        return documentId;
     }
 
     public GroupDTO getGroup() {
-	return this.group;
+        return this.group;
     }
 
     public SocialNetworkDTO getGroupMembers() {
-	return groupMembers;
+        return groupMembers;
     }
 
     public AccessRightsDTO getGroupRights() {
-	return groupRights;
+        return groupRights;
     }
 
     public List<TagResultDTO> getGroupTags() {
-	return groupTags;
+        return groupTags;
     }
 
     public I18nLanguageDTO getLanguage() {
-	return language;
+        return language;
     }
 
     public LicenseDTO getLicense() {
-	return license;
+        return license;
     }
 
     public BasicMimeTypeDTO getMimeType() {
-	return mimeType;
+        return mimeType;
     }
 
     public ParticipationDataDTO getParticipation() {
-	return participation;
+        return participation;
     }
 
     public Date getPublishedOn() {
-	return publishedOn;
+        return publishedOn;
     }
 
     public Double getRate() {
-	return rate;
+        return rate;
     }
 
     public Integer getRateByUsers() {
-	return rateByUsers;
+        return rateByUsers;
     }
 
     public ContainerDTO getRootContainer() {
-	return rootContainer;
+        return rootContainer;
     }
 
     public SocialNetworkDTO getSocialNetwork() {
-	return socialNetwork;
+        return socialNetwork;
     }
 
     public StateToken getStateToken() {
-	return stateToken;
+        return stateToken;
     }
 
     public ContentStatusDTO getStatus() {
-	return status;
+        return status;
     }
 
     public String getTags() {
-	return tags;
+        return tags;
     }
 
     public String getTitle() {
-	return title;
+        return title;
     }
 
     public String getToolName() {
-	return toolName;
+        return toolName;
     }
 
     public String getTypeId() {
-	return typeId;
+        return typeId;
     }
 
     public int getVersion() {
-	return version;
+        return version;
     }
 
     // FIXME: maybe a tag in the content showing the type, think about this
     public boolean hasDocument() {
-	return documentId != null;
+        return documentId != null;
     }
 
     public boolean isRateable() {
-	return isRateable;
+        return isRateable;
     }
 
     public void setAccessLists(final AccessListsDTO accessLists) {
-	this.accessLists = accessLists;
+        this.accessLists = accessLists;
     }
 
     public void setAuthors(final List<UserSimpleDTO> authors) {
-	this.authors = authors;
+        this.authors = authors;
     }
 
     public void setContainer(final ContainerDTO container) {
-	this.container = container;
+        this.container = container;
     }
 
     public void setContainerRights(final AccessRightsDTO containerRights) {
-	this.containerRights = containerRights;
+        this.containerRights = containerRights;
     }
 
     public void setContent(final String content) {
-	this.content = content;
+        this.content = content;
     }
 
     public void setContentRights(final AccessRightsDTO accessRights) {
-	this.contentRights = accessRights;
+        this.contentRights = accessRights;
     }
 
     public void setCurrentUserRate(final Double currentUserRate) {
-	this.currentUserRate = currentUserRate;
+        this.currentUserRate = currentUserRate;
     }
 
     public void setDocumentId(final String docRef) {
-	this.documentId = docRef;
+        this.documentId = docRef;
     }
 
     public void setGroup(final GroupDTO group) {
-	this.group = group;
+        this.group = group;
     }
 
     public void setGroupMembers(final SocialNetworkDTO groupMembers) {
-	this.groupMembers = groupMembers;
+        this.groupMembers = groupMembers;
     }
 
     public void setGroupRights(final AccessRightsDTO groupRights) {
-	this.groupRights = groupRights;
+        this.groupRights = groupRights;
     }
 
     public void setGroupTags(final List<TagResultDTO> groupTags) {
-	this.groupTags = groupTags;
+        this.groupTags = groupTags;
     }
 
     public void setLanguage(final I18nLanguageDTO language) {
-	this.language = language;
+        this.language = language;
     }
 
     public void setLicense(final LicenseDTO license) {
-	this.license = license;
+        this.license = license;
     }
 
     public void setMimeType(final BasicMimeTypeDTO mimeType) {
-	this.mimeType = mimeType;
+        this.mimeType = mimeType;
     }
 
     public void setParticipation(final ParticipationDataDTO participation) {
-	this.participation = participation;
+        this.participation = participation;
     }
 
     public void setPublishedOn(final Date publishedOn) {
-	this.publishedOn = publishedOn;
+        this.publishedOn = publishedOn;
     }
 
     public void setRate(final Double rate) {
-	this.rate = rate;
+        this.rate = rate;
     }
 
     public void setRateable(final boolean isRateable) {
-	this.isRateable = isRateable;
+        this.isRateable = isRateable;
     }
 
     public void setRateByUsers(final Integer rateByUsers) {
-	this.rateByUsers = rateByUsers;
+        this.rateByUsers = rateByUsers;
     }
 
     public void setRootContainer(final ContainerDTO rootContainer) {
-	this.rootContainer = rootContainer;
+        this.rootContainer = rootContainer;
     }
 
     public void setSocialNetwork(final SocialNetworkDTO socialNetwork) {
-	this.socialNetwork = socialNetwork;
+        this.socialNetwork = socialNetwork;
     }
 
     public void setStateToken(final StateToken stateToken) {
-	this.stateToken = stateToken;
+        this.stateToken = stateToken;
     }
 
     public void setStatus(final ContentStatusDTO status) {
-	this.status = status;
+        this.status = status;
     }
 
     public void setTags(final String tags) {
-	this.tags = tags;
+        this.tags = tags;
     }
 
     public void setTitle(final String title) {
-	this.title = title;
+        this.title = title;
     }
 
     public void setToolName(final String toolName) {
-	this.toolName = toolName;
+        this.toolName = toolName;
     }
 
     public void setTypeId(final String typeId) {
-	this.typeId = typeId;
+        this.typeId = typeId;
     }
 
     public void setVersion(final int version) {
-	this.version = version;
+        this.version = version;
     }
 
+    @Override
     public String toString() {
-	return "StateDTO[" + stateToken + "/" + typeId + "]";
+        return "StateDTO[" + stateToken + "/" + typeId + (mimeType != null ? "-" + mimeType : "") + "]";
     }
 
 }

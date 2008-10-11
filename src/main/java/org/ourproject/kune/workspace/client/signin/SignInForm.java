@@ -6,8 +6,8 @@ import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
 import com.gwtext.client.widgets.form.TextField;
 
 public class SignInForm extends DefaultForm {
-    private static final String NICKOREMAIL_FIELD = "nickOrEmail";
-    private static final String PASSWORD_FIELD = "password";
+    private static final String NICKOREMAIL_FIELD = "kune-sif-nkf";
+    private static final String PASSWORD_FIELD = "kune-sif-psf";
 
     private final TextField loginNickOrEmailField;
     private final TextField loginPassField;
@@ -21,6 +21,7 @@ public class SignInForm extends DefaultForm {
 	loginNickOrEmailField.setWidth(DEF_FIELD_WIDTH);
 	loginNickOrEmailField.setAllowBlank(false);
 	loginNickOrEmailField.setValidationEvent(false);
+	loginNickOrEmailField.setId(NICKOREMAIL_FIELD);
 	super.add(loginNickOrEmailField);
 
 	loginPassField = new TextField();
@@ -30,6 +31,7 @@ public class SignInForm extends DefaultForm {
 	loginPassField.setPassword(true);
 	loginPassField.setAllowBlank(false);
 	loginPassField.setValidationEvent(false);
+	loginPassField.setId(PASSWORD_FIELD);
 	super.add(loginPassField);
     }
 

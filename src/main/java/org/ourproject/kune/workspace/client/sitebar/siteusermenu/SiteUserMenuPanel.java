@@ -17,10 +17,10 @@ import com.gwtext.client.widgets.menu.event.BaseItemListenerAdapter;
 
 public class SiteUserMenuPanel implements SiteUserMenuView {
 
-    private static final String LOGGED_USER_MENU = "k-logged-user-menu";
-    private static final String USER_PREFERENCES_MENU_ITEM = "k-user-pref-menu-item";
-    private static final String USER_HOME_PAGE_MENU_ITEM = "k-user-home-page-menu-item";
-    private static final String USER_PARTICIPATION_MENU_ITEM = "k-user-participation-menu-item";
+    private static final String LOGGED_USER_MENU = "kune-sump-lum";
+    private static final String USER_PREFERENCES_MENU_ITEM = "kune-sump-uprmi";
+    private static final String USER_HOME_PAGE_MENU_ITEM = "kune-sump-hpmi";
+    private static final String USER_PARTICIPATION_MENU_ITEM = "kune-sump-upami";
     private final PushButton loggedUserMenu;
     private final Widget separator;
     private final Menu userMenu;

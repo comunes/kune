@@ -21,7 +21,6 @@
 package org.ourproject.kune.workspace.client.editor;
 
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.platf.client.ui.DefaultBorderLayout;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.workspace.client.skel.Toolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
@@ -46,102 +45,103 @@ public class TextEditorPanel implements TextEditorView {
     private final WorkspaceSkeleton ws;
 
     public TextEditorPanel(final TextEditorPresenter presenter, final I18nTranslationService i18n,
-	    final WorkspaceSkeleton ws, final ColorWebSafePalette colorPalette) {
-	this.presenter = presenter;
-	this.i18n = i18n;
-	this.ws = ws;
-	mainPanel = new VerticalPanel();
-	mainPanel.setWidth("100%");
+            final WorkspaceSkeleton ws, final ColorWebSafePalette colorPalette) {
+        this.presenter = presenter;
+        this.i18n = i18n;
+        this.ws = ws;
+        mainPanel = new VerticalPanel();
+        mainPanel.setWidth("100%");
 
-	gwtRTarea = new RichTextArea();
-	gwtRTarea.setWidth("97%");
-	gwtRTarea.addStyleName("kune-TexEditorPanel-TextArea");
+        gwtRTarea = new RichTextArea();
+        gwtRTarea.setWidth("97%");
+        gwtRTarea.addStyleName("kune-TexEditorPanel-TextArea");
 
-	final Toolbar editorTopBar = new Toolbar();
-	editorTopBar.getPanel().setWidth("auto");
-	textEditorToolbar = new TextEditorToolbar(gwtRTarea, presenter, colorPalette, i18n);
-	editorTopBar.add(textEditorToolbar);
-	editorTopBar.addStyleName("k-toolbar-bottom-line");
+        final Toolbar editorTopBar = new Toolbar();
+        editorTopBar.getPanel().setWidth("auto");
+        textEditorToolbar = new TextEditorToolbar(gwtRTarea, presenter, colorPalette, i18n);
+        editorTopBar.add(textEditorToolbar);
+        editorTopBar.addStyleName("k-toolbar-bottom-line");
 
-	mainPanel.add(editorTopBar.getPanel());
-	mainPanel.add(gwtRTarea);
+        mainPanel.add(editorTopBar.getPanel());
+        mainPanel.add(gwtRTarea);
 
-	ws.getEntityWorkspace().addContentListener(new ContainerListenerAdapter() {
-	    @Override
-	    public void onResize(final BoxComponent component, final int adjWidth, final int adjHeight,
-		    final int rawWidth, final int rawHeight) {
-		adjustSize(adjHeight);
-	    }
-	});
+        ws.getEntityWorkspace().addContentListener(new ContainerListenerAdapter() {
+            @Override
+            public void onResize(final BoxComponent component, final int adjWidth, final int adjHeight,
+                    final int rawWidth, final int rawHeight) {
+                adjustSize(adjHeight);
+            }
+        });
 
-	saveTimer = new Timer() {
-	    public void run() {
-		presenter.onSave();
-	    }
-	};
+        saveTimer = new Timer() {
+            @Override
+            public void run() {
+                presenter.onSave();
+            }
+        };
     }
 
     public void attach() {
-	ws.getEntityWorkspace().setContent(mainPanel);
+        ws.getEntityWorkspace().setContent(mainPanel);
     }
 
     public void detach() {
-	mainPanel.removeFromParent();
+        mainPanel.removeFromParent();
     }
 
     public void editHTML(final boolean edit) {
-	textEditorToolbar.editHTML(edit);
+        textEditorToolbar.editHTML(edit);
     }
 
     public String getHTML() {
-	return gwtRTarea.getHTML();
+        return gwtRTarea.getHTML();
     }
 
     public String getText() {
-	return gwtRTarea.getText();
+        return gwtRTarea.getText();
     }
 
     public void saveTimerCancel() {
-	saveTimer.cancel();
+        saveTimer.cancel();
     }
 
     public void scheduleSave(final int delayMillis) {
-	saveTimer.schedule(delayMillis);
+        saveTimer.schedule(delayMillis);
     }
 
     public void setEnabled(final boolean enabled) {
-	final String bgColor = enabled ? BACKCOLOR_ENABLED : BACKCOLOR_DISABLED;
-	DOM.setStyleAttribute(gwtRTarea.getElement(), "backgroundColor", bgColor);
-	gwtRTarea.setEnabled(enabled);
+        final String bgColor = enabled ? BACKCOLOR_ENABLED : BACKCOLOR_DISABLED;
+        DOM.setStyleAttribute(gwtRTarea.getElement(), "backgroundColor", bgColor);
+        gwtRTarea.setEnabled(enabled);
     }
 
     public void setHeight(final String height) {
-	gwtRTarea.setHeight(height);
+        gwtRTarea.setHeight(height);
     }
 
     public void setHTML(final String html) {
-	gwtRTarea.setHTML(html);
+        gwtRTarea.setHTML(html);
     }
 
     public void setText(final String text) {
-	gwtRTarea.setText(text);
+        gwtRTarea.setText(text);
     }
 
     public void showSaveBeforeDialog() {
-	MessageBox.confirm(i18n.t("Save confirmation"), i18n.t("Save before close?"), new MessageBox.ConfirmCallback() {
-	    public void execute(final String btnID) {
-		if (btnID.equals("yes")) {
-		    presenter.onSaveAndClose();
-		} else {
-		    presenter.onCancelConfirmed();
-		}
-	    }
-	});
+        MessageBox.confirm(i18n.t("Save confirmation"), i18n.t("Save before close?"), new MessageBox.ConfirmCallback() {
+            public void execute(final String btnID) {
+                if (btnID.equals("yes")) {
+                    presenter.onSaveAndClose();
+                } else {
+                    presenter.onCancelConfirmed();
+                }
+            }
+        });
 
     }
 
     private void adjustSize(final int height) {
-	gwtRTarea.setHeight(""
-		+ (height - DefaultBorderLayout.DEF_TOOLBAR_HEIGHT - DefaultBorderLayout.DEF_TOOLBAR_HEIGHT));
+        gwtRTarea
+                .setHeight("" + (height - WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT - WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT));
     }
 }

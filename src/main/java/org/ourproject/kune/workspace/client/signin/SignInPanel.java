@@ -53,7 +53,7 @@ import com.gwtext.client.widgets.layout.FitLayout;
 
 public class SignInPanel implements SignInView {
     private class MessagePanel extends Panel {
-	private static final String SIGNIN_MESSAGE_PANEL = "k-signin-message-panel";
+	private static final String SIGNIN_MESSAGE_PANEL = "kune-sip-mp";
 	private final SimpleMessagePanel messagesPanel;
 
 	public MessagePanel() {
@@ -81,8 +81,11 @@ public class SignInPanel implements SignInView {
 	}
     }
 
-    private static final String USER_SIGN_IN_PANEL = "k-user-sign-in-panel";
-    private static final String USER_REGISTER_PANEL = "k-user-register-panel";
+    private static final String USER_SIGN_IN_PANEL = "kune-sip-usp";
+    private static final String USER_REGISTER_PANEL = "kune-sip-rp";
+    private static final String CANCEL_BUTTON_ID = "kune-sip-cb";
+    private static final String REGISTER_BUTTON_ID = "kune-sip-rb";
+    private static final String SIGN_IN_BUTTON_ID = "kune-sip-sib";
 
     private BasicDialog dialog;
     private final SignInPresenter presenter;
@@ -298,6 +301,7 @@ public class SignInPanel implements SignInView {
 		}
 	    }
 	});
+	signInBtn.setId(SIGN_IN_BUTTON_ID);
 	dialog.addButton(signInBtn);
 
 	final Button registerBtn = new Button(i18n.t("Register"));
@@ -310,9 +314,11 @@ public class SignInPanel implements SignInView {
 	    }
 	});
 	dialog.addButton(registerBtn);
+	registerBtn.setId(REGISTER_BUTTON_ID);
 	registerBtn.hide();
 
 	final Button cancel = new Button();
+	cancel.setId(CANCEL_BUTTON_ID);
 	dialog.addButton(cancel);
 	cancel.setText(i18n.tWithNT("Cancel", "used in button"));
 	cancel.addListener(new ButtonListenerAdapter() {

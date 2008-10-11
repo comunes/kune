@@ -1,12 +1,12 @@
 package org.ourproject.kune.workspace.client.skel;
 
-import org.ourproject.kune.platf.client.ui.DefaultBorderLayout;
-
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.Toolbar;
 import com.gwtext.client.widgets.event.ContainerListener;
+import com.gwtext.client.widgets.layout.AccordionLayout;
+import com.gwtext.client.widgets.layout.AnchorLayout;
+import com.gwtext.client.widgets.layout.AnchorLayoutData;
 import com.gwtext.client.widgets.layout.FitLayout;
 
 public class EntitySummary {
@@ -15,57 +15,90 @@ public class EntitySummary {
     private static final String ENTITY_TOOLS = "k-entity-tools";
     private final Panel entityTools;
     private final Panel entitySummary;
-    private final DefaultBorderLayout mainPanel;
     private final Toolbar trayBar;
-    private final VerticalPanel vpTools;
+    private final Panel mainFitPanel;
 
     public EntitySummary() {
-	mainPanel = new DefaultBorderLayout();
-	entityTools = new Panel();
-	entityTools.setLayout(new FitLayout());
-	entityTools.setId(ENTITY_TOOLS);
-	entityTools.setAutoHeight(true);
-	vpTools = new VerticalPanel();
-	entityTools.add(vpTools);
-	entitySummary = new Panel();
-	entityTools.setBorder(false);
-	entitySummary.setBorder(false);
-	entityTools.setAutoScroll(false);
-	entitySummary.setAutoScroll(true);
-	entitySummary.setCls(ENTITY_SUMMARY);
-	entitySummary.setId(ENTITY_SUMMARY);
-	trayBar = mainPanel.createBottomBar(entitySummary, SITE_TRAYBAR, SITE_TRAYBAR);
-	mainPanel.add(entityTools, DefaultBorderLayout.Position.NORTH);
-	mainPanel.add(entitySummary, DefaultBorderLayout.Position.CENTER);
-	trayBar.addFill();
+        mainFitPanel = new Panel("");
+        mainFitPanel.setLayout(new FitLayout());
+        mainFitPanel.setBorder(false);
+        mainFitPanel.setWidth(150);
+
+        Panel anchorLayoutPanel = new Panel();
+        anchorLayoutPanel.setLayout(new AnchorLayout());
+        anchorLayoutPanel.setBorder(false);
+        anchorLayoutPanel.setWidth(150);
+        entityTools = new Panel();
+        entityTools.setLayout(new AnchorLayout());
+        entityTools.setId(ENTITY_TOOLS);
+        entityTools.setAutoHeight(true);
+        entitySummary = new Panel();
+        entityTools.setBorder(false);
+        entitySummary.setBorder(false);
+        entityTools.setAutoScroll(false);
+        entitySummary.setAutoScroll(true);
+        entitySummary.setCls(ENTITY_SUMMARY);
+        entitySummary.setId(ENTITY_SUMMARY);
+
+        trayBar = new Toolbar();
+        trayBar.setHeight(WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT);
+        trayBar.setId(SITE_TRAYBAR);
+        trayBar.setCls(SITE_TRAYBAR);
+        trayBar.addFill();
+        entitySummary.setBottomToolbar(trayBar);
+        anchorLayoutPanel.add(entityTools, new AnchorLayoutData("100%"));
+        anchorLayoutPanel.add(entitySummary, new AnchorLayoutData("100% -50"));
+        mainFitPanel.add(anchorLayoutPanel);
     }
 
     public void addInSummary(final Widget widget) {
-	entitySummary.add(widget);
-	entitySummary.syncSize();
-	mainPanel.doLayoutIfNeeded();
+        entitySummary.add(widget);
+        doLayoutIfNeeded();
     }
 
     public void addInTools(final Widget widget) {
-	vpTools.add(widget);
-	// entityTools.render(widget.getElement());
-	if (entityTools.isRendered()) {
-	    entityTools.syncSize();
-	    entityTools.doLayout(false);
-	    mainPanel.doLayoutIfNeeded();
-	}
+        entityTools.add(widget);
+        doLayoutIfNeeded();
     }
 
     public void addListener(final ContainerListener listener) {
-	entitySummary.addListener(listener);
+        entitySummary.addListener(listener);
     }
 
     public Panel getPanel() {
-	return mainPanel.getPanel();
+        return mainFitPanel;
     }
 
     public Toolbar getSiteTraybar() {
-	return trayBar;
+        return trayBar;
+    }
+
+    private Panel createAccordionPanel() {
+        Panel accordionPanel = new Panel();
+        accordionPanel.setBorder(false);
+        accordionPanel.setLayout(new AccordionLayout(true));
+
+        Panel panelOne = new Panel("Panel 1", "<p>Panel1 content!</p>");
+        panelOne.setIconCls("settings-icon");
+        accordionPanel.add(panelOne);
+
+        Panel panelTwo = new Panel("Panel 2", "<p>Panel2 content!</p>");
+        panelTwo.setIconCls("folder-icon");
+        accordionPanel.add(panelTwo);
+
+        Panel panelThree = new Panel("Panel 3", "<p>Panel3 content!</p>");
+        panelThree.setIconCls("user-add-icon");
+        accordionPanel.add(panelThree);
+
+        // accordionPanel.setCls(ENTITY_SUMMARY);
+
+        return accordionPanel;
+    }
+
+    private void doLayoutIfNeeded() {
+        if (mainFitPanel.isRendered()) {
+            mainFitPanel.doLayout();
+        }
     }
 
 }

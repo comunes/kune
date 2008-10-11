@@ -7,27 +7,31 @@ public class SiteBar extends Panel {
 
     private final SimpleToolbar simpleToolbar;
 
+    @Deprecated
     public SiteBar() {
-	super.setBorder(false);
-	simpleToolbar = new SimpleToolbar();
-	simpleToolbar.setStyleName("k-sitebar");
-	super.add(simpleToolbar);
+        // super.setLayout(new FitLayout());
+        super.setBorder(false);
+        simpleToolbar = new SimpleToolbar();
+        simpleToolbar.setStyleName("k-sitebar");
+        simpleToolbar.addSpacer();
+        super.add(simpleToolbar);
     }
 
+    @Override
     public void add(final Widget widget) {
-	simpleToolbar.add(widget);
+        simpleToolbar.add(widget);
     }
 
     public Widget addFill() {
-	return simpleToolbar.addFill();
+        return simpleToolbar.addFill();
     }
 
     public Widget addSeparator() {
-	return simpleToolbar.addSeparator();
+        return simpleToolbar.addSeparator();
     }
 
     public Widget addSpacer() {
-	return simpleToolbar.addSpacer();
+        return simpleToolbar.addSpacer();
     }
 
 }

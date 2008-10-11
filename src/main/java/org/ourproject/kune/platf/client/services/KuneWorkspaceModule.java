@@ -89,245 +89,268 @@ public class KuneWorkspaceModule extends AbstractModule {
     @Override
     protected void onLoad() {
 
-	register(ApplicationComponentGroup.class, new Factory<WorkspaceSkeleton>(WorkspaceSkeleton.class) {
-	    public WorkspaceSkeleton create() {
-		return new WorkspaceSkeleton();
-	    }
-	});
+        register(ApplicationComponentGroup.class, new Factory<WorkspaceSkeleton>(WorkspaceSkeleton.class) {
+            @Override
+            public WorkspaceSkeleton create() {
+                return new WorkspaceSkeleton();
+            }
+        });
 
-	register(ApplicationComponentGroup.class, new Factory<QuickTipsHelper>(QuickTipsHelper.class) {
-	    public QuickTipsHelper create() {
-		return new QuickTipsHelper();
-	    }
-	});
+        register(ApplicationComponentGroup.class, new Factory<QuickTipsHelper>(QuickTipsHelper.class) {
+            @Override
+            public QuickTipsHelper create() {
+                return new QuickTipsHelper();
+            }
+        });
 
-	register(ApplicationComponentGroup.class, new Factory<SiteProgress>(SiteProgress.class) {
-	    public SiteProgress create() {
-		final SiteProgressPresenter presenter = new SiteProgressPresenter();
-		final SiteProgressPanel panel = new SiteProgressPanel(presenter, $$(SitePublicSpaceLink.class));
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
+        register(ApplicationComponentGroup.class, new Factory<SiteProgress>(SiteProgress.class) {
+            @Override
+            public SiteProgress create() {
+                final SiteProgressPresenter presenter = new SiteProgressPresenter();
+                final SiteProgressPanel panel = new SiteProgressPanel(presenter, $$(SitePublicSpaceLink.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
 
-	register(ApplicationComponentGroup.class, new Factory<Site>(Site.class) {
-	    public Site create() {
-		return new Site($(I18nUITranslationService.class), $(SiteProgress.class), $$(SiteMessage.class));
-	    }
-	});
+        register(ApplicationComponentGroup.class, new Factory<Site>(Site.class) {
+            @Override
+            public Site create() {
+                return new Site($(I18nUITranslationService.class), $(SiteProgress.class), $$(SiteMessage.class));
+            }
+        });
 
-	register(ApplicationComponentGroup.class, new Factory<SitePublicSpaceLink>(SitePublicSpaceLink.class) {
-	    public SitePublicSpaceLink create() {
-		final SitePublicSpaceLinkPresenter presenter = new SitePublicSpaceLinkPresenter($(StateManager.class));
-		final SitePublicSpaceLinkPanel panel = new SitePublicSpaceLinkPanel(presenter,
-			$(WorkspaceSkeleton.class), $(I18nUITranslationService.class), $(Images.class));
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
+        register(ApplicationComponentGroup.class, new Factory<SitePublicSpaceLink>(SitePublicSpaceLink.class) {
+            @Override
+            public SitePublicSpaceLink create() {
+                final SitePublicSpaceLinkPresenter presenter = new SitePublicSpaceLinkPresenter($(StateManager.class));
+                final SitePublicSpaceLinkPanel panel = new SitePublicSpaceLinkPanel(presenter,
+                        $(WorkspaceSkeleton.class), $(I18nUITranslationService.class), $(Images.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
 
-	register(ApplicationComponentGroup.class, new Factory<SiteMessage>(SiteMessage.class) {
-	    public SiteMessage create() {
-		final SiteMessagePresenter siteMessagePresenter = new SiteMessagePresenter();
-		final SiteMessageView siteMessageView = new SiteMessagePanel(siteMessagePresenter, true,
-			$(I18nUITranslationService.class));
-		siteMessagePresenter.init(siteMessageView);
-		return siteMessagePresenter;
-	    }
-	});
+        register(ApplicationComponentGroup.class, new Factory<SiteMessage>(SiteMessage.class) {
+            @Override
+            public SiteMessage create() {
+                final SiteMessagePresenter siteMessagePresenter = new SiteMessagePresenter();
+                final SiteMessageView siteMessageView = new SiteMessagePanel(siteMessagePresenter, true,
+                        $(I18nUITranslationService.class));
+                siteMessagePresenter.init(siteMessageView);
+                return siteMessagePresenter;
+            }
+        });
 
-	register(ApplicationComponentGroup.class, new Factory<SiteUserMenu>(SiteUserMenu.class) {
-	    public SiteUserMenu create() {
-		final SiteUserMenuPresenter presenter = new SiteUserMenuPresenter($(Session.class),
-			$(StateManager.class));
-		final SiteUserMenuPanel panel = new SiteUserMenuPanel(presenter, $(WorkspaceSkeleton.class),
-			$(I18nUITranslationService.class));
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
+        register(ApplicationComponentGroup.class, new Factory<SiteUserMenu>(SiteUserMenu.class) {
+            @Override
+            public SiteUserMenu create() {
+                final SiteUserMenuPresenter presenter = new SiteUserMenuPresenter($(Session.class),
+                        $(StateManager.class));
+                final SiteUserMenuPanel panel = new SiteUserMenuPanel(presenter, $(WorkspaceSkeleton.class),
+                        $(I18nUITranslationService.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
 
-	register(ApplicationComponentGroup.class, new Factory<SiteSignInLink>(SiteSignInLink.class) {
-	    public SiteSignInLink create() {
-		final SiteSignInLinkPresenter presenter = new SiteSignInLinkPresenter($(Session.class));
-		final SiteSignInLinkPanel panel = new SiteSignInLinkPanel(presenter, $(I18nUITranslationService.class),
-			$(WorkspaceSkeleton.class));
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
+        register(ApplicationComponentGroup.class, new Factory<SiteSignInLink>(SiteSignInLink.class) {
+            @Override
+            public SiteSignInLink create() {
+                final SiteSignInLinkPresenter presenter = new SiteSignInLinkPresenter($(Session.class));
+                final SiteSignInLinkPanel panel = new SiteSignInLinkPanel(presenter, $(I18nUITranslationService.class),
+                        $(WorkspaceSkeleton.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
 
-	register(ApplicationComponentGroup.class, new Factory<SiteSignOutLink>(SiteSignOutLink.class) {
-	    public SiteSignOutLink create() {
-		final SiteSignOutLinkPresenter presenter = new SiteSignOutLinkPresenter($(Session.class),
-			$$(UserServiceAsync.class), $$(KuneErrorHandler.class));
-		final SiteSignOutLinkPanel panel = new SiteSignOutLinkPanel(presenter,
-			$(I18nUITranslationService.class), $(WorkspaceSkeleton.class));
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
+        register(ApplicationComponentGroup.class, new Factory<SiteSignOutLink>(SiteSignOutLink.class) {
+            @Override
+            public SiteSignOutLink create() {
+                final SiteSignOutLinkPresenter presenter = new SiteSignOutLinkPresenter($(Session.class),
+                        $$(UserServiceAsync.class), $$(KuneErrorHandler.class));
+                final SiteSignOutLinkPanel panel = new SiteSignOutLinkPanel(presenter,
+                        $(I18nUITranslationService.class), $(WorkspaceSkeleton.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
 
-	register(ApplicationComponentGroup.class, new Factory<SiteNewGroupLink>(SiteNewGroupLink.class) {
-	    public SiteNewGroupLink create() {
-		final SiteNewGroupLinkPresenter presenter = new SiteNewGroupLinkPresenter();
-		final SiteNewGroupLinkPanel panel = new SiteNewGroupLinkPanel(presenter, $(WorkspaceSkeleton.class),
-			$(I18nUITranslationService.class));
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
+        register(ApplicationComponentGroup.class, new Factory<SiteNewGroupLink>(SiteNewGroupLink.class) {
+            @Override
+            public SiteNewGroupLink create() {
+                final SiteNewGroupLinkPresenter presenter = new SiteNewGroupLinkPresenter();
+                final SiteNewGroupLinkPanel panel = new SiteNewGroupLinkPanel(presenter, $(WorkspaceSkeleton.class),
+                        $(I18nUITranslationService.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
 
-	register(ApplicationComponentGroup.class, new Factory<SiteOptions>(SiteOptions.class) {
-	    public SiteOptions create() {
-		final SiteOptionsPresenter presenter = new SiteOptionsPresenter();
-		final SiteOptionsPanel panel = new SiteOptionsPanel(presenter, $(WorkspaceSkeleton.class),
-			$(I18nUITranslationService.class), $$(I18nTranslator.class));
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
+        register(ApplicationComponentGroup.class, new Factory<SiteOptions>(SiteOptions.class) {
+            @Override
+            public SiteOptions create() {
+                final SiteOptionsPresenter presenter = new SiteOptionsPresenter();
+                final SiteOptionsPanel panel = new SiteOptionsPanel(presenter, $(WorkspaceSkeleton.class),
+                        $(I18nUITranslationService.class), $$(I18nTranslator.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
 
-	register(ApplicationComponentGroup.class, new Factory<SiteSearch>(SiteSearch.class) {
-	    public SiteSearch create() {
-		final SiteSearchPresenter presenter = new SiteSearchPresenter($$(SiteSearcher.class));
-		final SiteSearchPanel panel = new SiteSearchPanel(presenter, $(WorkspaceSkeleton.class),
-			$(I18nUITranslationService.class));
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
+        register(ApplicationComponentGroup.class, new Factory<SiteSearch>(SiteSearch.class) {
+            @Override
+            public SiteSearch create() {
+                final SiteSearchPresenter presenter = new SiteSearchPresenter($$(SiteSearcher.class));
+                final SiteSearchPanel panel = new SiteSearchPanel(presenter, $(WorkspaceSkeleton.class),
+                        $(I18nUITranslationService.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
 
-	register(ApplicationComponentGroup.class, new Factory<SiteLogo>(SiteLogo.class) {
-	    public SiteLogo create() {
-		final SiteLogoPresenter presenter = new SiteLogoPresenter($(Session.class));
-		final SiteLogoPanel panel = new SiteLogoPanel(presenter, $(WorkspaceSkeleton.class));
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
+        register(ApplicationComponentGroup.class, new Factory<SiteLogo>(SiteLogo.class) {
+            @Override
+            public SiteLogo create() {
+                final SiteLogoPresenter presenter = new SiteLogoPresenter($(Session.class));
+                final SiteLogoPanel panel = new SiteLogoPanel(presenter, $(WorkspaceSkeleton.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
 
-	register(ApplicationComponentGroup.class, new Factory<EntityLogo>(EntityLogo.class) {
-	    public EntityLogo create() {
-		final EntityLogoPresenter presenter = new EntityLogoPresenter($(StateManager.class),
-			$(WsThemePresenter.class), $(Session.class));
-		final EntityLogoPanel panel = new EntityLogoPanel($(I18nUITranslationService.class),
-			$(WorkspaceSkeleton.class), $$(FileDownloadUtils.class));
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
+        register(ApplicationComponentGroup.class, new Factory<EntityLogo>(EntityLogo.class) {
+            @Override
+            public EntityLogo create() {
+                final EntityLogoPresenter presenter = new EntityLogoPresenter($(StateManager.class),
+                        $(WsThemePresenter.class), $(Session.class));
+                final EntityLogoPanel panel = new EntityLogoPanel($(I18nUITranslationService.class),
+                        $(WorkspaceSkeleton.class), $$(FileDownloadUtils.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
 
-	register(ApplicationComponentGroup.class, new Factory<WsThemePresenter>(WsThemePresenter.class) {
-	    public WsThemePresenter create() {
-		final WsThemePresenter presenter = new WsThemePresenter($(Session.class), $$(GroupServiceAsync.class),
-			$(StateManager.class));
-		final WsThemePanel panel = new WsThemePanel($(WorkspaceSkeleton.class), presenter,
-			$(I18nUITranslationService.class));
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
+        register(ApplicationComponentGroup.class, new Factory<WsThemePresenter>(WsThemePresenter.class) {
+            @Override
+            public WsThemePresenter create() {
+                final WsThemePresenter presenter = new WsThemePresenter($(Session.class), $$(GroupServiceAsync.class),
+                        $(StateManager.class));
+                final WsThemePanel panel = new WsThemePanel($(WorkspaceSkeleton.class), presenter,
+                        $(I18nUITranslationService.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
 
-	register(ApplicationComponentGroup.class, new Factory<EntityTitle>(EntityTitle.class) {
-	    public EntityTitle create() {
-		final EntityTitlePresenter presenter = new EntityTitlePresenter($(I18nUITranslationService.class),
-			$(KuneErrorHandler.class), $(StateManager.class), $(Session.class),
-			$$(ContentServiceAsync.class), $$(ContextNavigator.class), $(ContentIconsRegistry.class));
-		final EntityTitlePanel panel = new EntityTitlePanel($(WorkspaceSkeleton.class), presenter);
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
+        register(ApplicationComponentGroup.class, new Factory<EntityTitle>(EntityTitle.class) {
+            @Override
+            public EntityTitle create() {
+                final EntityTitlePresenter presenter = new EntityTitlePresenter($(I18nUITranslationService.class),
+                        $(KuneErrorHandler.class), $(StateManager.class), $(Session.class),
+                        $$(ContentServiceAsync.class), $$(ContextNavigator.class), $(ContentIconsRegistry.class));
+                final EntityTitlePanel panel = new EntityTitlePanel($(WorkspaceSkeleton.class), presenter);
+                presenter.init(panel);
+                return presenter;
+            }
+        });
 
-	register(ApplicationComponentGroup.class, new Factory<EntitySubTitle>(EntitySubTitle.class) {
-	    public EntitySubTitle create() {
-		final EntitySubTitlePresenter presenter = new EntitySubTitlePresenter(
-			$(I18nUITranslationService.class), $(StateManager.class));
-		final EntitySubTitlePanel panel = new EntitySubTitlePanel(presenter, $(I18nUITranslationService.class),
-			$(WorkspaceSkeleton.class));
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
+        register(ApplicationComponentGroup.class, new Factory<EntitySubTitle>(EntitySubTitle.class) {
+            @Override
+            public EntitySubTitle create() {
+                final EntitySubTitlePresenter presenter = new EntitySubTitlePresenter(
+                        $(I18nUITranslationService.class), $(StateManager.class), false);
+                final EntitySubTitlePanel panel = new EntitySubTitlePanel(presenter, $(WorkspaceSkeleton.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
 
-	register(ApplicationComponentGroup.class, new Factory<EntityLicensePresenter>(EntityLicensePresenter.class) {
-	    public EntityLicensePresenter create() {
-		final EntityLicensePresenter presenter = new EntityLicensePresenter($(StateManager.class));
-		final EntityLicensePanel panel = new EntityLicensePanel(presenter, $(I18nUITranslationService.class),
-			$(WorkspaceSkeleton.class));
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
+        register(ApplicationComponentGroup.class, new Factory<EntityLicensePresenter>(EntityLicensePresenter.class) {
+            @Override
+            public EntityLicensePresenter create() {
+                final EntityLicensePresenter presenter = new EntityLicensePresenter($(StateManager.class));
+                final EntityLicensePanel panel = new EntityLicensePanel(presenter, $(I18nUITranslationService.class),
+                        $(WorkspaceSkeleton.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
 
-	register(ApplicationComponentGroup.class, new Factory<RateIt>(RateIt.class) {
-	    public RateIt create() {
-		final RateItPresenter presenter = new RateItPresenter($(I18nUITranslationService.class),
-			$(Session.class), $$(ContentServiceAsync.class), $(StateManager.class));
-		final RateItPanel panel = new RateItPanel(presenter, $(I18nUITranslationService.class),
-			$(WorkspaceSkeleton.class));
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
+        register(ApplicationComponentGroup.class, new Factory<RateIt>(RateIt.class) {
+            @Override
+            public RateIt create() {
+                final RateItPresenter presenter = new RateItPresenter($(I18nUITranslationService.class),
+                        $(Session.class), $$(ContentServiceAsync.class), $(StateManager.class));
+                final RateItPanel panel = new RateItPanel(presenter, $(I18nUITranslationService.class),
+                        $(WorkspaceSkeleton.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
 
-	register(ApplicationComponentGroup.class, new Factory<RatePresenter>(RatePresenter.class) {
-	    public RatePresenter create() {
-		final RatePresenter presenter = new RatePresenter($(StateManager.class));
-		final RatePanel panel = new RatePanel(null, null, $(I18nUITranslationService.class),
-			$(WorkspaceSkeleton.class));
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
+        register(ApplicationComponentGroup.class, new Factory<RatePresenter>(RatePresenter.class) {
+            @Override
+            public RatePresenter create() {
+                final RatePresenter presenter = new RatePresenter($(StateManager.class));
+                final RatePanel panel = new RatePanel(null, null, $(I18nUITranslationService.class),
+                        $(WorkspaceSkeleton.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
 
-	register(ApplicationComponentGroup.class, new Factory<GroupMembersSummary>(GroupMembersSummary.class) {
-	    public GroupMembersSummary create() {
-		final GroupMembersSummaryPresenter presenter = new GroupMembersSummaryPresenter(
-			$(I18nUITranslationService.class), $(StateManager.class), $(ImageUtils.class),
-			$(Session.class), $$(SocialNetworkServiceAsync.class), $$(GroupLiveSearcher.class),
-			$(WsThemePresenter.class));
-		final GroupMembersSummaryView view = new GroupMembersSummaryPanel(presenter,
-			$(I18nUITranslationService.class), $(WorkspaceSkeleton.class));
-		presenter.init(view);
-		return presenter;
-	    }
-	});
+        register(ApplicationComponentGroup.class, new Factory<GroupMembersSummary>(GroupMembersSummary.class) {
+            @Override
+            public GroupMembersSummary create() {
+                final GroupMembersSummaryPresenter presenter = new GroupMembersSummaryPresenter(
+                        $(I18nUITranslationService.class), $(StateManager.class), $(ImageUtils.class),
+                        $(Session.class), $$(SocialNetworkServiceAsync.class), $$(GroupLiveSearcher.class),
+                        $(WsThemePresenter.class));
+                final GroupMembersSummaryView view = new GroupMembersSummaryPanel(presenter,
+                        $(I18nUITranslationService.class), $(WorkspaceSkeleton.class));
+                presenter.init(view);
+                return presenter;
+            }
+        });
 
-	register(ApplicationComponentGroup.class, new Factory<GroupSummary>(GroupSummary.class) {
-	    public GroupSummary create() {
-		final GroupSummaryPresenter presenter = new GroupSummaryPresenter($(StateManager.class),
-			$(WsThemePresenter.class));
-		final GroupSummaryView view = new GroupSummaryPanel(presenter, $(I18nUITranslationService.class),
-			$(WorkspaceSkeleton.class));
-		presenter.init(view);
-		return presenter;
-	    }
-	});
+        register(ApplicationComponentGroup.class, new Factory<GroupSummary>(GroupSummary.class) {
+            @Override
+            public GroupSummary create() {
+                final GroupSummaryPresenter presenter = new GroupSummaryPresenter($(StateManager.class),
+                        $(WsThemePresenter.class));
+                final GroupSummaryView view = new GroupSummaryPanel(presenter, $(I18nUITranslationService.class),
+                        $(WorkspaceSkeleton.class));
+                presenter.init(view);
+                return presenter;
+            }
+        });
 
-	register(ApplicationComponentGroup.class, new Factory<ParticipationSummary>(ParticipationSummary.class) {
-	    public ParticipationSummary create() {
-		final ParticipationSummaryPresenter presenter = new ParticipationSummaryPresenter(
-			$(I18nUITranslationService.class), $(StateManager.class), $(ImageUtils.class),
-			$(Session.class), $$(SocialNetworkServiceAsync.class), $(WsThemePresenter.class));
-		final ParticipationSummaryView view = new ParticipationSummaryPanel(presenter,
-			$(I18nUITranslationService.class), $(WorkspaceSkeleton.class));
-		presenter.init(view);
-		return presenter;
-	    }
-	});
+        register(ApplicationComponentGroup.class, new Factory<ParticipationSummary>(ParticipationSummary.class) {
+            @Override
+            public ParticipationSummary create() {
+                final ParticipationSummaryPresenter presenter = new ParticipationSummaryPresenter(
+                        $(I18nUITranslationService.class), $(StateManager.class), $(ImageUtils.class),
+                        $(Session.class), $$(SocialNetworkServiceAsync.class), $(WsThemePresenter.class));
+                final ParticipationSummaryView view = new ParticipationSummaryPanel(presenter,
+                        $(I18nUITranslationService.class), $(WorkspaceSkeleton.class));
+                presenter.init(view);
+                return presenter;
+            }
+        });
 
-	register(ApplicationComponentGroup.class, new Factory<TagsSummary>(TagsSummary.class) {
-	    public TagsSummary create() {
-		final TagsSummaryPresenter presenter = new TagsSummaryPresenter($(Session.class),
-			$$(SiteSearcher.class), $(StateManager.class), $(WsThemePresenter.class));
-		final TagsSummaryPanel panel = new TagsSummaryPanel(presenter, $(I18nUITranslationService.class),
-			$(WorkspaceSkeleton.class));
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
+        register(ApplicationComponentGroup.class, new Factory<TagsSummary>(TagsSummary.class) {
+            @Override
+            public TagsSummary create() {
+                final TagsSummaryPresenter presenter = new TagsSummaryPresenter($(Session.class),
+                        $$(SiteSearcher.class), $(StateManager.class), $(WsThemePresenter.class));
+                final TagsSummaryPanel panel = new TagsSummaryPanel(presenter, $(I18nUITranslationService.class),
+                        $(WorkspaceSkeleton.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
 
     }
 }

@@ -42,7 +42,7 @@ public class EntityTitlePanel implements EntityTitleView {
 	});
 	dateLabel = new Label();
 
-	final SimpleToolbar wsTitle = ws.getEntityWorkspace().getTitle();
+	final SimpleToolbar wsTitle = ws.getEntityWorkspace().getTitleComponent();
 	wsTitle.add(icon);
 	wsTitle.add(titleLabel);
 	wsTitle.addFill();

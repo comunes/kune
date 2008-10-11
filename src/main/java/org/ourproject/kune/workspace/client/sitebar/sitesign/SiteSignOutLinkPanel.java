@@ -10,7 +10,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class SiteSignOutLinkPanel implements SiteSignOutLinkView {
 
-    private static final String SITE_SIGN_OUT = "k-site-sign-out";
+    private static final String SITE_SIGN_OUT = "k-ssolp-lb";
 
     private final Label signOutLabel;
 

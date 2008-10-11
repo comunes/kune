@@ -29,6 +29,8 @@ public interface SiteSearcherView extends View {
 
     void search(String text, SiteSearcherType currentSearch);
 
+    void setTextToSearch(String text);
+
     void show();
 
 }

@@ -20,7 +20,6 @@
 package org.ourproject.kune.workspace.client.search;
 
 import java.util.HashMap;
-import java.util.Iterator;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.state.StateManager;
@@ -36,53 +35,58 @@ public class SiteSearcherPresenter implements SiteSearcher {
     private final Provider<StateManager> stateManagerProvider;
 
     public SiteSearcherPresenter(final Provider<StateManager> stateManagerProvider) {
-	this.stateManagerProvider = stateManagerProvider;
-	searchHistory = new HashMap<String, Integer>();
-	currentSearch = SiteSearcherType.group_user;
+        this.stateManagerProvider = stateManagerProvider;
+        searchHistory = new HashMap<String, Integer>();
+        currentSearch = SiteSearcherType.group_user;
     }
 
     public void doClose() {
-	view.hide();
+        view.hide();
     }
 
     public void doGoto(final String groupShortName) {
-	stateManagerProvider.get().gotoToken(groupShortName);
+        stateManagerProvider.get().gotoToken(groupShortName);
     }
 
     public void doSearch(final SiteSearcherType typeOfSearch) {
-	doSearchOfType(view.getTextToSearch(), typeOfSearch);
+        if (view != null) {
+            String textToSearch = view.getTextToSearch();
+            if (textToSearch != null) {
+                doSearchOfType(textToSearch, typeOfSearch);
+            }
+        }
     }
 
     public void doSearch(final String text) {
-	Site.showProgressLoading();
-	searchHistory.put(text, null);
-	view.search(text, currentSearch);
-	view.show();
-	Site.hideProgress();
+        Site.showProgressLoading();
+        searchHistory.put(text, null);
+        view.search(text, currentSearch);
+        view.show();
+        Site.hideProgress();
     }
 
     public void doSearchOfType(final String text, final SiteSearcherType typeOfSearch) {
-	this.currentSearch = typeOfSearch;
-	doSearch(text);
+        view.setTextToSearch(text);
+        this.currentSearch = typeOfSearch;
+        doSearch(text);
     }
 
     public Object[][] getSearchHistory() {
-	final Object[][] objs = new Object[searchHistory.size()][1];
-	int i = 0;
-	for (final Iterator<String> iterator = searchHistory.keySet().iterator(); iterator.hasNext();) {
-	    final String search = iterator.next();
-	    final Object[] obj = new Object[] { search };
-	    objs[i++] = obj;
-	}
-	return objs;
+        final Object[][] objs = new Object[searchHistory.size()][1];
+        int i = 0;
+        for (String search : searchHistory.keySet()) {
+            final Object[] obj = new Object[] { search };
+            objs[i++] = obj;
+        }
+        return objs;
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void init(final SiteSearcherView view) {
-	this.view = view;
+        this.view = view;
     }
 
 }

@@ -20,7 +20,6 @@
 
 package org.ourproject.kune.workspace.client.title;
 
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.workspace.client.skel.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
@@ -30,39 +29,38 @@ public class EntitySubTitlePanel implements EntitySubTitleView {
     private final Label subTitleLeftLabel;
     private final Label subTitleRightLabel;
 
-    public EntitySubTitlePanel(final EntitySubTitlePresenter presenter, final I18nTranslationService i18n,
-	    final WorkspaceSkeleton ws) {
-	subTitleLeftLabel = new Label();
-	subTitleRightLabel = new Label();
+    public EntitySubTitlePanel(final EntitySubTitlePresenter presenter, final WorkspaceSkeleton ws) {
+        subTitleLeftLabel = new Label();
+        subTitleRightLabel = new Label();
 
-	final SimpleToolbar wsSubTitle = ws.getEntityWorkspace().getSubTitle();
-	wsSubTitle.add(subTitleLeftLabel);
-	wsSubTitle.addFill();
-	wsSubTitle.add(subTitleRightLabel);
+        final SimpleToolbar wsSubTitle = ws.getEntityWorkspace().getSubTitle();
+        wsSubTitle.add(subTitleLeftLabel);
+        wsSubTitle.addFill();
+        wsSubTitle.add(subTitleRightLabel);
 
-	subTitleRightLabel.setText(i18n.t("Language:"));
+        subTitleRightLabel.setText("");
 
-	subTitleLeftLabel.addStyleName("kune-Margin-Large-l");
-	subTitleLeftLabel.addStyleName("kune-ft15px");
-	subTitleRightLabel.addStyleName("kune-Margin-Large-r");
-	subTitleRightLabel.addStyleName("kune-ft12px");
+        subTitleLeftLabel.addStyleName("kune-Margin-Large-l");
+        subTitleLeftLabel.addStyleName("kune-ft15px");
+        subTitleRightLabel.addStyleName("kune-Margin-Large-r");
+        subTitleRightLabel.addStyleName("kune-ft12px");
     }
 
     public void setContentSubTitleLeft(final String subTitle) {
-	subTitleLeftLabel.setText(subTitle);
+        subTitleLeftLabel.setText(subTitle);
     }
 
     public void setContentSubTitleLeftVisible(final boolean visible) {
-	subTitleLeftLabel.setVisible(visible);
+        subTitleLeftLabel.setVisible(visible);
     }
 
     public void setContentSubTitleRight(final String subTitle) {
-	subTitleRightLabel.setText(subTitle);
+        subTitleRightLabel.setText(subTitle);
 
     }
 
     public void setContentSubTitleRightVisible(final boolean visible) {
-	subTitleRightLabel.setVisible(visible);
+        subTitleRightLabel.setVisible(visible);
     }
 
 }

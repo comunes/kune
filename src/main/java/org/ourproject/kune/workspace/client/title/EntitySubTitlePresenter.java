@@ -31,43 +31,48 @@ public class EntitySubTitlePresenter implements EntitySubTitle {
 
     private EntitySubTitleView view;
     private final I18nTranslationService i18n;
+    private final boolean showLanguage;
 
-    public EntitySubTitlePresenter(final I18nTranslationService i18n, final StateManager stateManager) {
-	this.i18n = i18n;
-	stateManager.onStateChanged(new Listener<StateDTO>() {
-	    public void onEvent(final StateDTO state) {
-		setState(state);
-	    }
-	});
+    public EntitySubTitlePresenter(final I18nTranslationService i18n, final StateManager stateManager,
+            boolean showLanguage) {
+        this.i18n = i18n;
+        this.showLanguage = showLanguage;
+        stateManager.onStateChanged(new Listener<StateDTO>() {
+            public void onEvent(final StateDTO state) {
+                setState(state);
+            }
+        });
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void init(final EntitySubTitleView view) {
-	this.view = view;
+        this.view = view;
     }
 
     public void setContentLanguage(final String langName) {
-	view.setContentSubTitleRight(i18n.t("Language: [%s]", langName));
+        if (showLanguage) {
+            view.setContentSubTitleRight(i18n.t("Language: [%s]", langName));
+        }
     }
 
     private void setState(final StateDTO state) {
-	if (state.hasDocument()) {
-	    view.setContentSubTitleLeft(i18n.tWithNT("by: [%s]", "used in a list of authors", state.getAuthors().get(0)
-		    .getName()));
-	    view.setContentSubTitleLeftVisible(true);
-	} else {
-	    view.setContentSubTitleLeftVisible(false);
-	}
-	if (state.getLanguage() != null) {
-	    final String langName = state.getLanguage().getEnglishName();
-	    setContentLanguage(langName);
-	    view.setContentSubTitleRightVisible(true);
-	} else {
-	    view.setContentSubTitleRightVisible(false);
-	}
+        if (state.hasDocument()) {
+            view.setContentSubTitleLeft(i18n.tWithNT("by: [%s]", "used in a list of authors", state.getAuthors().get(0)
+                    .getName()));
+            view.setContentSubTitleLeftVisible(true);
+        } else {
+            view.setContentSubTitleLeftVisible(false);
+        }
+        if (state.getLanguage() != null && showLanguage) {
+            final String langName = state.getLanguage().getEnglishName();
+            setContentLanguage(langName);
+            view.setContentSubTitleRightVisible(true);
+        } else {
+            view.setContentSubTitleRightVisible(false);
+        }
     }
 
 }

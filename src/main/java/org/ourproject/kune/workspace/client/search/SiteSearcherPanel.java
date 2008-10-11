@@ -66,203 +66,214 @@ public class SiteSearcherPanel extends AbstractSearcherPanel implements SiteSear
     private SiteBottomTrayButton traybarButton;
 
     public SiteSearcherPanel(final SiteSearcherPresenter initPresenter, final I18nTranslationService i18n,
-	    final WorkspaceSkeleton ws) {
-	super(i18n);
-	this.presenter = initPresenter;
-	this.ws = ws;
-	dialog = createDialog();
+            final WorkspaceSkeleton ws) {
+        super(i18n);
+        this.presenter = initPresenter;
+        this.ws = ws;
+        dialog = createDialog();
     }
 
     public String getTextToSearch() {
-	return searchField.getValueAsString();
+        return searchField.getValueAsString();
     }
 
     public void hide() {
-	dialog.hide();
+        dialog.hide();
     }
 
     public void search(final String text, final SiteSearcherType type) {
-	searchField.setValue(text);
-	switch (type) {
-	case group_user:
-	    query(groupStore, groupsGrid, text);
-	    break;
-	case content:
-	    query(contentStore, contentGrid, text);
-	    break;
-	default:
-	    break;
-	}
+        searchField.setValue(text);
+        switch (type) {
+        case group_user:
+            query(groupStore, groupsGrid, text);
+            break;
+        case content:
+            query(contentStore, contentGrid, text);
+            break;
+        default:
+            break;
+        }
+    }
+
+    public void setTextToSearch(String text) {
+        searchField.setValue(text);
     }
 
     public void show() {
-	dialog.show();
-	dialog.expand();
-	dialog.center();
-	if (traybarButton == null) {
-	    traybarButton = new SiteBottomTrayButton("images/kune-search-ico-push.gif", i18n.t("Show/hide searcher"),
-		    dialog, ws);
-	}
+        dialog.show();
+        dialog.expand();
+        dialog.center();
+        if (traybarButton == null) {
+            traybarButton = new SiteBottomTrayButton("images/kune-search-ico-push.gif", i18n.t("Show/hide searcher"),
+                    dialog, ws);
+        }
     }
 
     private Window createDialog() {
-	final Panel north = new Panel();
-	north.setHeight(50);
-	north.setBorder(false);
+        final Panel north = new Panel();
+        north.setHeight(50);
+        north.setBorder(false);
 
-	final TabPanel centerPanel = new TabPanel();
-	centerPanel.setActiveTab(0);
-	centerPanel.setAutoScroll(true);
-	centerPanel.setClosable(false);
-	centerPanel.setBorder(false);
+        final TabPanel centerPanel = new TabPanel();
+        centerPanel.setActiveTab(0);
+        centerPanel.setAutoScroll(true);
+        centerPanel.setClosable(false);
+        centerPanel.setBorder(false);
 
-	final BasicDialog dialog = new BasicDialog(i18n.t("Search"), false, false, 500, 400);
-	// dialog.setResizable(false);
-	dialog.setIconCls("search-icon");
-	final Button closeButton = new Button(i18n.tWithNT("Close", "used in button"));
-	closeButton.addListener(new ButtonListenerAdapter() {
-	    public void onClick(final Button button, final EventObject e) {
-		presenter.doClose();
-	    }
-	});
-	dialog.addButton(closeButton);
+        final BasicDialog dialog = new BasicDialog(i18n.t("Search"), false, false, 500, 400);
+        // dialog.setResizable(false);
+        dialog.setIconCls("search-icon");
+        final Button closeButton = new Button(i18n.tWithNT("Close", "used in button"));
+        closeButton.addListener(new ButtonListenerAdapter() {
+            @Override
+            public void onClick(final Button button, final EventObject e) {
+                presenter.doClose();
+            }
+        });
+        dialog.addButton(closeButton);
 
-	final Panel searchPanel = createSearchForm(presenter);
-	final Panel groupsPanel = new Panel("Groups & Users");
-	final Panel contentPanel = new Panel("Content");
-	groupsPanel.setLayout(new FitLayout());
-	contentPanel.setLayout(new FitLayout());
+        final Panel searchPanel = createSearchForm(presenter);
+        final Panel groupsPanel = new Panel("Groups & Users");
+        final Panel contentPanel = new Panel("Content");
+        groupsPanel.setLayout(new FitLayout());
+        contentPanel.setLayout(new FitLayout());
 
-	groupsGrid = createSearchPanel(SiteSearcherType.group_user);
-	contentGrid = createSearchPanel(SiteSearcherType.content);
-	groupsPanel.add(groupsGrid);
-	contentPanel.add(contentGrid);
-	centerPanel.add(groupsPanel);
-	centerPanel.add(contentPanel);
-	dialog.add(searchPanel, new BorderLayoutData(RegionPosition.NORTH));
-	dialog.add(centerPanel, new BorderLayoutData(RegionPosition.CENTER));
+        groupsGrid = createSearchPanel(SiteSearcherType.group_user);
+        contentGrid = createSearchPanel(SiteSearcherType.content);
+        groupsPanel.add(groupsGrid);
+        contentPanel.add(contentGrid);
+        centerPanel.add(groupsPanel);
+        centerPanel.add(contentPanel);
+        dialog.add(searchPanel, new BorderLayoutData(RegionPosition.NORTH));
+        dialog.add(centerPanel, new BorderLayoutData(RegionPosition.CENTER));
 
-	groupsPanel.addListener(new PanelListenerAdapter() {
-	    public void onActivate(final Panel panel) {
-		dialog.setTitle(i18n.t("Search users and groups"));
-		presenter.doSearch(SiteSearcherType.group_user);
-	    }
-	});
+        groupsPanel.addListener(new PanelListenerAdapter() {
+            @Override
+            public void onActivate(final Panel panel) {
+                dialog.setTitle(i18n.t("Search users and groups"));
+                presenter.doSearch(SiteSearcherType.group_user);
+            }
+        });
 
-	contentPanel.addListener(new PanelListenerAdapter() {
-	    public void onActivate(final Panel panel) {
-		dialog.setTitle(i18n.t("Search contents"));
-		presenter.doSearch(SiteSearcherType.content);
-	    }
-	});
+        contentPanel.addListener(new PanelListenerAdapter() {
+            @Override
+            public void onActivate(final Panel panel) {
+                dialog.setTitle(i18n.t("Search contents"));
+                presenter.doSearch(SiteSearcherType.content);
+            }
+        });
 
-	final String panelId = groupsPanel.getId();
-	centerPanel.setActiveItemID(panelId);
+        final String panelId = groupsPanel.getId();
+        centerPanel.setActiveItemID(panelId);
 
-	dialog.setCloseAction(Window.HIDE);
-	dialog.ensureDebugId(SITE_SEARCHER_DIALOG);
+        dialog.setCloseAction(Window.HIDE);
+        dialog.ensureDebugId(SITE_SEARCHER_DIALOG);
 
-	return dialog;
+        return dialog;
     }
 
     private Panel createSearchForm(final SiteSearcherPresenter presenter) {
-	final Panel searchPanel = new Panel();
-	searchPanel.setBorder(false);
+        final Panel searchPanel = new Panel();
+        searchPanel.setBorder(false);
 
-	final HorizontalPanel hp = new HorizontalPanel();
+        final HorizontalPanel hp = new HorizontalPanel();
 
-	final FormPanel form = new FormPanel();
-	form.setBorder(false);
-	form.setWidth(330);
-	form.setHideLabels(true);
+        final FormPanel form = new FormPanel();
+        form.setBorder(false);
+        form.setWidth(330);
+        form.setHideLabels(true);
 
-	searchField = new TextField();
-	searchField.setWidth(300);
-	searchField.addListener(new FieldListenerAdapter() {
+        searchField = new TextField();
+        searchField.setWidth(300);
+        searchField.addListener(new FieldListenerAdapter() {
 
-	    public void onSpecialKey(final Field field, final EventObject e) {
-		switch (e.getKey()) {
-		case KeyboardListener.KEY_ENTER:
-		    presenter.doSearch(field.getValueAsString());
-		    break;
-		}
-		e.stopEvent();
-	    }
+            @Override
+            public void onSpecialKey(final Field field, final EventObject e) {
+                switch (e.getKey()) {
+                case KeyboardListener.KEY_ENTER:
+                    presenter.doSearch(field.getValueAsString());
+                    break;
+                }
+                e.stopEvent();
+            }
 
-	});
-	form.add(searchField);
+        });
+        form.add(searchField);
 
-	final Button searchBtn = new Button(i18n.tWithNT("Search", "used in button"));
-	searchBtn.addListener(new ButtonListenerAdapter() {
-	    public void onClick(final Button button, final EventObject e) {
-		presenter.doSearch(getTextToSearch());
-	    }
-	});
-	hp.add(form);
-	hp.add(searchBtn);
-	hp.setSpacing(7);
-	hp.addStyleName("kune-Margin-Large-trbl");
-	searchPanel.add(hp);
-	return searchPanel;
+        final Button searchBtn = new Button(i18n.tWithNT("Search", "used in button"));
+        searchBtn.addListener(new ButtonListenerAdapter() {
+            @Override
+            public void onClick(final Button button, final EventObject e) {
+                presenter.doSearch(getTextToSearch());
+            }
+        });
+        hp.add(form);
+        hp.add(searchBtn);
+        hp.setSpacing(7);
+        hp.addStyleName("kune-Margin-Large-trbl");
+        searchPanel.add(hp);
+        return searchPanel;
     }
 
     private GridPanel createSearchPanel(final SiteSearcherType type) {
-	final String id = "shortName";
-	final FieldDef[] fieldDefs = new FieldDef[] { new StringFieldDef(id), new StringFieldDef("longName"),
-		new StringFieldDef("link"), new StringFieldDef("iconUrl") };
-	final Store store;
+        final String id = "shortName";
+        final FieldDef[] fieldDefs = new FieldDef[] { new StringFieldDef(id), new StringFieldDef("longName"),
+                new StringFieldDef("link"), new StringFieldDef("iconUrl") };
+        final Store store;
 
-	switch (type) {
-	case group_user:
-	    store = groupStore = createStore(fieldDefs, "/kune/json/GroupJSONService/search", id);
-	    break;
-	case content:
-	    store = contentStore = createStore(fieldDefs, "/kune/json/ContentJSONService/search", id);
-	    break;
-	default:
-	    throw new RuntimeException("Unknown type of search");
-	}
+        switch (type) {
+        case group_user:
+            store = groupStore = createStore(fieldDefs, "/kune/json/GroupJSONService/search", id);
+            break;
+        case content:
+            store = contentStore = createStore(fieldDefs, "/kune/json/ContentJSONService/search", id);
+            break;
+        default:
+            throw new RuntimeException("Unknown type of search");
+        }
 
-	final ColumnModel columnModel = new ColumnModel(new ColumnConfig[] { new ColumnConfig() {
-	    {
-		setDataIndex(id);
-		setWidth(100);
-	    }
-	}, new ColumnConfig() {
-	    {
-		setDataIndex("longName");
-		setWidth(350);
-	    }
-	} });
+        final ColumnModel columnModel = new ColumnModel(new ColumnConfig[] { new ColumnConfig() {
+            {
+                setDataIndex(id);
+                setWidth(100);
+            }
+        }, new ColumnConfig() {
+            {
+                setDataIndex("longName");
+                setWidth(350);
+            }
+        } });
 
-	// columnModel.setDefaultSortable(true);
+        // columnModel.setDefaultSortable(true);
 
-	final String gridName = type == SiteSearcherType.group_user ? "group-search" : "content-search";
+        final String gridName = type == SiteSearcherType.group_user ? "group-search" : "content-search";
 
-	final GridPanel grid = new GridPanel(gridName, 474, 250, store, columnModel);
+        final GridPanel grid = new GridPanel(gridName, 474, 250, store, columnModel);
 
-	createPagingToolbar(store, grid);
-	grid.setHideColumnHeader(true);
-	final GridView view = new GridView();
-	view.setForceFit(true);
-	view.setEmptyText(i18n.t("No results"));
-	grid.setView(view);
+        createPagingToolbar(store, grid);
+        grid.setHideColumnHeader(true);
+        final GridView view = new GridView();
+        view.setForceFit(true);
+        view.setEmptyText(i18n.t("No results"));
+        grid.setView(view);
 
-	grid.addListener(new PanelListenerAdapter() {
-	    public void onRender(final Component component) {
-		Log.debug("Loading store");
-		store.load(0, PAGINATION_SIZE);
-	    }
-	});
+        grid.addListener(new PanelListenerAdapter() {
+            @Override
+            public void onRender(final Component component) {
+                Log.debug("Loading store");
+                store.load(0, PAGINATION_SIZE);
+            }
+        });
 
-	grid.addGridCellListener(new GridCellListenerAdapter() {
-	    public void onCellClick(final GridPanel grid, final int rowIndex, final int colindex, final EventObject e) {
-		final Record record = store.getRecordAt(rowIndex);
-		final String groupShortName = record.getAsString(id);
-		presenter.doGoto(groupShortName);
-	    }
-	});
+        grid.addGridCellListener(new GridCellListenerAdapter() {
+            @Override
+            public void onCellClick(final GridPanel grid, final int rowIndex, final int colindex, final EventObject e) {
+                final Record record = store.getRecordAt(rowIndex);
+                final String groupShortName = record.getAsString(id);
+                presenter.doGoto(groupShortName);
+            }
+        });
 
-	return grid;
+        return grid;
     }
 }

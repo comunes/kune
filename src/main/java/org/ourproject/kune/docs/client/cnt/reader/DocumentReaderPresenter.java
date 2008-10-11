@@ -25,42 +25,36 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 
 public class DocumentReaderPresenter implements DocumentReader {
     private final DocumentReaderView view;
-    private final I18nUITranslationService i18n;
     private final Session session;
 
-    public DocumentReaderPresenter(final Session session, final DocumentReaderView view,
-	    final I18nUITranslationService i18n) {
-	this.session = session;
-	this.view = view;
-	this.i18n = i18n;
+    public DocumentReaderPresenter(final Session session, final DocumentReaderView view) {
+        this.session = session;
+        this.view = view;
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void showDocument(final StateToken token, final String text, final String typeId,
-	    final BasicMimeTypeDTO mimeType) {
-	if (typeId.equals(DocumentClientTool.TYPE_UPLOADEDFILE)) {
-	    if (mimeType != null) {
-		final String url = "/kune/servlets/FileDownloadManager?token=" + token + "&hash="
-			+ session.getUserHash();
-		if (mimeType.getType().equals("image")) {
-		    view.setContent("<img src=\"" + url + "\">");
-		} else if (mimeType.toString().equals("text/plain")) {
-		    view.setContent(text);
-		} else {
-		    view.setContent("<a href=\"" + url + "\">" + i18n.t("Download") + "</a>");
-		}
-	    } else {
-		view.setContent("<a href=\"" + "dd" + "\">" + i18n.t("Download") + "</a>");
-	    }
-	} else {
-	    view.setContent(text);
-	}
+            final BasicMimeTypeDTO mimeType) {
+        if (typeId.equals(DocumentClientTool.TYPE_UPLOADEDFILE)) {
+            if (mimeType != null) {
+                final String url = "/kune/servlets/FileDownloadManager?token=" + token + "&hash="
+                        + session.getUserHash();
+                if (mimeType.getType().equals("image")) {
+                    view.setContent("<img src=\"" + url + "\">");
+                } else if (mimeType.toString().equals("text/plain") || mimeType.toString().equals("application/pdf")) {
+                    view.setContent(text);
+                } else {
+                    view.setContent("");
+                }
+            }
+        } else {
+            view.setContent(text);
+        }
     }
 }

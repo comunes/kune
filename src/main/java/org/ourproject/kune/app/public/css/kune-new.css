@@ -1,23 +1,23 @@
 .k-site-traybar {
-    background: #FFF none repeat scroll 0% 50%;
+  background: #FFF none repeat scroll 0% 50%;
 }
 
 .k-sitebar .kune-IconHyperlink {
-    white-space: nowrap;
+  white-space: nowrap;
 }
 
 .k-sitebar .kune-IconHyperlink a:link {
-    cursor: pointer;
-    text-decoration: underline;
-    color: #B3B3B3;
+  cursor: pointer;
+  text-decoration: underline;
+  color: #B3B3B3;
 }
 
 .k-sitebar .kune-IconHyperlink a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .k-sitebar .kune-IconHyperlink a:visited {
-    color: #B3B3B3;
+  color: #B3B3B3;
 }
 
 .k-sitebar-labellink {
@@ -28,586 +28,606 @@
 }
 
 .k-sitebar {
-    margin-right: 10px;
-    height: 16px;
+  margin-right: 10px;
+  height: 16px;
+  background: #FFF;
 }
 
 .k-sitebar .gwt-TextBox {
-    border: 1px solid #E4A374;
-    margin: 0 15px 0 3px;
-    padding-left: 3px;
-    color: #B3B3B3;
+  border: 1px solid #E4A374;
+  margin: 0 15px 0 3px;
+  padding-left: 3px;
+  color: #B3B3B3;
 }
 
 .k-sitebar .gwt-Hyperlink a {
-    white-space: nowrap;
-    color: #B3B3B3;
-    text-decoration: underline;
-    cursor: pointer;
+  white-space: nowrap;
+  color: #B3B3B3;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .k-sitebar .gwt-PushButton {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .k-sitebar-LabelLink {
-    white-space: nowrap;
-    color: #B3B3B3;
-    cursor: pointer;
-    text-decoration: underline;
+  white-space: nowrap;
+  color: #B3B3B3;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .k-entity-summary {
-    border-left-color: #FFF;
-    border-left-width: 5px;
+  border-left-color: #FFF;
+  border-left-width: 5px;
 }
 
 .k-entitytextlogo {
-    border: 2px solid #F2F2F2;
-    height: 60px;
-    margin: 0 0 4px -1px;
-    overflow: hidden;
-    width: 468px;
+  border: 2px solid #F2F2F2;
+  height: 60px;
+  margin: 0 0 4px -1px;
+  overflow: hidden;
+  width: 468px;
 }
 
 .k-entitytextlogo .gwt-Label {
-    font-size: 167%;
-    font-weight: 700;
-    margin: 5px;
-    height: 27px;
+  font-size: 167%;
+  font-weight: 700;
+  margin: 5px;
+  height: 27px;
 }
 
 .k-entitytextlogo-default .gwt-Label {
-    color: #69312F;
+  color: #69312F;
 }
 
 .k-entitytextlogo-green .gwt-Label {
-    color: #250;
+  color: #250;
 }
 
 .k-entitytextlogo-blue .gwt-Label {
-    color: #000080;
+  color: #000080;
 }
 
 .k-entitytextlogo-grey .gwt-Label {
-    color: #1A1A1A;
+  color: #1A1A1A;
 }
 
 .k-entitytextlogo-purple .gwt-Label {
-    color: #440055;
+  color: #440055;
 }
 
 .k-entitytextlogo-red .gwt-Label {
-    color: #800000;
+  color: #800000;
 }
 
 .k-entitytextlogo .gwt-Hyperlink a {
-    color: #CCC;
-    font-size: 85%;
-    margin: 5px;
-    text-decoration: underline;
-    white-space: nowrap;
-    background-color: #FFF;
+  color: #CCC;
+  font-size: 85%;
+  margin: 5px;
+  text-decoration: underline;
+  white-space: nowrap;
+  background-color: #FFF;
 }
 
 .k-entity-default .x-layout-split {
-    background: #DD8A3D none repeat scroll 0% 50%;
+  background: #DD8A3D none repeat scroll 0% 50%;
 }
 
 .k-entity-green .x-layout-split {
-    background: #5FD35F none repeat scroll 0% 50%;
+  background: #5FD35F none repeat scroll 0% 50%;
 }
 
 .k-entity-blue .x-layout-split {
-    background: #0066FF none repeat scroll 0% 50%;
+  background: #0066FF none repeat scroll 0% 50%;
 }
 
 .k-entity-grey .x-layout-split {
-    background: #4D4D4D none repeat scroll 0% 50%;
+  background: #4D4D4D none repeat scroll 0% 50%;
 }
 
 .k-entity-purple .x-layout-split {
-    background: #660080 none repeat scroll 0% 50%;
+  background: #660080 none repeat scroll 0% 50%;
 }
 
 .k-entity-red .x-layout-split {
-    background: #D40000 none repeat scroll 0% 50%;
+  background: #D40000 none repeat scroll 0% 50%;
 }
 
 .k-entityworkspace .x-layout-split {
-    background: transparent none repeat scroll 0% 50%;
+  background: transparent none repeat scroll 0% 50%;
 }
 
 .k-entityworkspace-default .x-layout-split {
-    background: #DEAA87 none repeat scroll 0% 50%;
+  background: #DEAA87 none repeat scroll 0% 50%;
 }
 
 .k-entityworkspace-green .x-layout-split {
-    background: #DCE8AB none repeat scroll 0% 50%;
+  background: #DCE8AB none repeat scroll 0% 50%;
 }
 
 .k-entityworkspace-blue .x-layout-split {
-    background: #D5D5FF none repeat scroll 0% 50%;
+  background: #D5D5FF none repeat scroll 0% 50%;
 }
 
 .k-entityworkspace-grey .x-layout-split {
-    background: #999999 none repeat scroll 0% 50%;
+  background: #999999 none repeat scroll 0% 50%;
 }
 
 .k-entityworkspace-purple .x-layout-split {
-    background: #A793AC none repeat scroll 0% 50%;
+  background: #A793AC none repeat scroll 0% 50%;
 }
 
 .k-entityworkspace-red .x-layout-split {
-    background: #FF5555 none repeat scroll 0% 50%;
+  background: #FF5555 none repeat scroll 0% 50%;
 }
 
 .k-entity-title {
-    border-left-style: solid;
-    border-left-width: 2px;
+  border-left-style: solid;
+  border-left-width: 2px;
 }
 
 .k-entity-title div {
-    line-height: 22px;
-    white-space: nowrap;
+  line-height: 22px;
+  white-space: nowrap;
 }
 
 .k-entity-subtitle {
+
 }
 
 .k-entity-subtitle div {
-    line-height: 22px;
-    white-space: nowrap;
+  line-height: 22px;
+  white-space: nowrap;
 }
 
 .k-entity-title-rd-default {
-    background: #DD8A3D;
+  background: #DD8A3D;
 }
 
 .k-entity-title-rd-green {
-    background: #5FD35F;
+  background: #5FD35F;
 }
 
 .k-entity-title-rd-blue {
-    background: #0066FF;
+  background: #0066FF;
 }
 
 .k-entity-title-rd-grey {
-    background: #4D4D4D;
+  background: #4D4D4D;
 }
 
 .k-entity-title-rd-purple {
-    background: #660080;
+  background: #660080;
 }
 
 .k-entity-title-rd-red {
-    background: #D40000;
+  background: #D40000;
 }
 
 .k-entity-title-default {
-    background: #F1BB59 none repeat scroll 0% 50%;
-    border-left-color: #DD8A3D;
+  background: #F1BB59 none repeat scroll 0% 50%;
+  border-left-color: #DD8A3D;
 }
 
 .k-entity-title-green {
-    background: #AFA none repeat scroll 0% 50%;
-    border-left-color: #5FD35F;
+  background: #AFA none repeat scroll 0% 50%;
+  border-left-color: #5FD35F;
 }
 
 .k-entity-title-blue {
-    background: #AFDDE9 none repeat scroll 0% 50%;
-    border-left-color: #0066FF;
+  background: #AFDDE9 none repeat scroll 0% 50%;
+  border-left-color: #0066FF;
 }
 
 .k-entity-title-grey {
-    background: #CCCCCC none repeat scroll 0% 50%;
-    border-left-color: #4D4D4D;
+  background: #CCCCCC none repeat scroll 0% 50%;
+  border-left-color: #4D4D4D;
 }
 
 .k-entity-title-purple {
-    background: #DDAFE9 none repeat scroll 0% 50%;
-    border-left-color: #660080;
+  background: #DDAFE9 none repeat scroll 0% 50%;
+  border-left-color: #660080;
 }
 
 .k-entity-title-red {
-    background: #FF8080 none repeat scroll 0% 50%;
-    border-left-color: #D40000;
+  background: #FF8080 none repeat scroll 0% 50%;
+  border-left-color: #D40000;
 }
 
 .k-entity-title-default div {
-    color: #69312F;
+  color: #69312F;
 }
 
 .k-entity-title-green div {
-    color: #250;
+  color: #250;
 }
 
 .k-entity-title-blue div {
-    color: #000080;
+  color: #000080;
 }
 
 .k-entity-title-grey div {
-    color: #1A1A1A;
+  color: #1A1A1A;
 }
 
 .k-entity-title-purple div {
-    color: #440055;
+  color: #440055;
 }
 
 .k-entity-title-red div {
-    color: #800000;
+  color: #800000;
 }
 
 .k-entity-subtitle-default {
-    background: #DD8A3D none repeat scroll 0% 50%;
+  background: #DD8A3D none repeat scroll 0% 50%;
 }
 
 .k-entity-subtitle-green {
-    background: #5FD35F none repeat scroll 0% 50%;
+  background: #5FD35F none repeat scroll 0% 50%;
 }
 
 .k-entity-subtitle-blue {
-    background: #0066FF none repeat scroll 0% 50%;
+  background: #0066FF none repeat scroll 0% 50%;
 }
 
 .k-entity-subtitle-grey {
-    background: #4D4D4D none repeat scroll 0% 50%;
+  background: #4D4D4D none repeat scroll 0% 50%;
 }
 
 .k-entity-subtitle-purple {
-    background: #660080 none repeat scroll 0% 50%;
+  background: #660080 none repeat scroll 0% 50%;
 }
 
 .k-entity-subtitle-red {
-    background: #D40000 none repeat scroll 0% 50%;
+  background: #D40000 none repeat scroll 0% 50%;
 }
 
 .k-entity-subtitle-default div {
-    color: #FFF;
+  color: #FFF;
 }
 
 .k-entity-subtitle-green div {
-    color: #FFF;
+  color: #FFF;
 }
 
 .k-entity-subtitle-blue div {
-    color: #FFF;
+  color: #FFF;
 }
 
 .k-entity-subtitle-grey div {
-    color: #FFF;
+  color: #FFF;
 }
 
 .k-entity-subtitle-purple div {
-    color: #FFF;
+  color: #FFF;
 }
 
 .k-entity-subtitle-red div {
-    color: #FFF;
+  color: #FFF;
 }
 
-.k-entity-bottom-rd-default, .k-entity-bottom-default, .k-toolselectoritem-sel-default {
-    background: #DD8A3D;
+.k-entity-bottom-rd-default,.k-entity-bottom-default,.k-toolselectoritem-sel-default
+  {
+  background: #DD8A3D;
 }
 
-.k-entity-bottom-rd-green, .k-entity-bottom-green, .k-toolselectoritem-sel-green {
-    background: #5FD35F;
+.k-entity-bottom-rd-green,.k-entity-bottom-green,.k-toolselectoritem-sel-green
+  {
+  background: #5FD35F;
 }
 
-.k-entity-bottom-rd-blue, .k-entity-bottom-blue, .k-toolselectoritem-sel-blue {
-    background: #0066FF;
+.k-entity-bottom-rd-blue,.k-entity-bottom-blue,.k-toolselectoritem-sel-blue
+  {
+  background: #0066FF;
 }
 
-.k-entity-bottom-rd-grey, .k-entity-bottom-grey, .k-toolselectoritem-sel-grey {
-    background: #4D4D4D;
+.k-entity-bottom-rd-grey,.k-entity-bottom-grey,.k-toolselectoritem-sel-grey
+  {
+  background: #4D4D4D;
 }
 
-.k-entity-bottom-rd-purple, .k-entity-bottom-purple, .k-toolselectoritem-sel-purple {
-    background: #660080;
+.k-entity-bottom-rd-purple,.k-entity-bottom-purple,.k-toolselectoritem-sel-purple
+  {
+  background: #660080;
 }
 
-.k-entity-bottom-rd-red, .k-entity-bottom-red, .k-toolselectoritem-sel-red {
-    background: #D40000;
+.k-entity-bottom-rd-red,.k-entity-bottom-red,.k-toolselectoritem-sel-red
+  {
+  background: #D40000;
 }
 
 .k-entitylicensepanel-licensetext {
-    cursor: pointer;
-    margin-left: 5px;
-    text-decoration: underline;
+  cursor: pointer;
+  margin-left: 5px;
+  text-decoration: underline;
 }
 
-.k-entity-context-default div,  .k-entity-context-default .x-tree .x-panel-body {
-    background: #FFD09D none repeat scroll 0% 50%;
+.k-entity-context-default div,.k-entity-context-default .x-tree .x-panel-body
+  {
+  background: #FFD09D none repeat scroll 0% 50%;
 }
 
-.k-entity-context-green div, .k-entity-context-green .x-tree .x-panel-body {
-    background: #CFA none repeat scroll 0% 50%;
+.k-entity-context-green div,.k-entity-context-green .x-tree .x-panel-body
+  {
+  background: #CFA none repeat scroll 0% 50%;
 }
 
-.k-entity-context-blue div, .k-entity-context-blue .x-tree .x-panel-body {
-    background: #AACCFF none repeat scroll 0% 50%;
+.k-entity-context-blue div,.k-entity-context-blue .x-tree .x-panel-body
+  {
+  background: #AACCFF none repeat scroll 0% 50%;
 }
 
-.k-entity-context-grey div, .k-entity-context-grey .x-tree .x-panel-body {
-    background: #B3B3B3 none repeat scroll 0% 50%;
+.k-entity-context-grey div,.k-entity-context-grey .x-tree .x-panel-body
+  {
+  background: #B3B3B3 none repeat scroll 0% 50%;
 }
 
-.k-entity-context-purple div, .k-entity-context-purple .x-tree .x-panel-body {
-    background: #DDAFE9 none repeat scroll 0% 50%;
+.k-entity-context-purple div,.k-entity-context-purple .x-tree .x-panel-body
+  {
+  background: #DDAFE9 none repeat scroll 0% 50%;
 }
 
-.k-entity-context-red div, .k-entity-context-red .x-tree .x-panel-body {
-    background: #FFAAAA none repeat scroll 0% 50%;
+.k-entity-context-red div,.k-entity-context-red .x-tree .x-panel-body {
+  background: #FFAAAA none repeat scroll 0% 50%;
 }
-
 
 .k-entity-context-purple .x-tree .x-panel-body {
-    background: #DDAFE9 none repeat scroll 0% 50%;
+  background: #DDAFE9 none repeat scroll 0% 50%;
 }
 
-
 .k-entity-bottom div {
-    line-height: 2em;
-    color: #FFF;
+  line-height: 2em;
+  color: #FFF;
 }
 
 .k-toolbar-top-line {
-    border-top-color: rgb( 208, 208, 208 );
-    border-top-style: solid;
-    border-top-width: 1px;
+  border-top-color: rgb(208, 208, 208);
+  border-top-style: solid;
+  border-top-width: 1px;
 }
 
 .k-toolbar-bottom-line {
-    border-bottom-color: rgb( 208, 208, 208 );
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
+  border-bottom-color: rgb(208, 208, 208);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
 }
 
-.x-toolbar td, .x-toolbar span, .x-toolbar input, .x-toolbar div, .x-toolbar select, .x-toolbar label {
-    white-space: nowrap;
-    font: normal 100% arial,sans;
-    line-height: 19px;
+.x-toolbar td,.x-toolbar span,.x-toolbar input,.x-toolbar div,.x-toolbar select,.x-toolbar label
+  {
+  white-space: nowrap;
+  font: normal 100% arial, sans;
+  line-height: 19px;
 }
 
 .k-toolbar-sep {
-    padding-top: 4px;
-	padding-left: 5px;
+  padding-top: 4px;
+  padding-left: 5px;
 }
+
 /* Custom gwt-ext styles */
 .ytb-sep {
-    background-image: url(../js/ext/resources/images/default/grid/grid-split.gif);
-    background-position: center;
-    background-repeat: no-repeat;
-    display: block;
-    font-size: 1px;
-    height: 16px;
-    width: 4px;
-    overflow: hidden;
-    cursor: default;
-    margin: 0 2px 0;
-    border: 0;
+  background-image:
+    url(../js/ext/resources/images/default/grid/grid-split.gif);
+  background-position: center;
+  background-repeat: no-repeat;
+  display: block;
+  font-size: 1px;
+  height: 16px;
+  width: 4px;
+  overflow: hidden;
+  cursor: default;
+  margin: 0 2px 0;
+  border: 0;
 }
 
 .ytb-spacer {
-    width: 2px;
+  width: 2px;
 }
 
 .x-grid-group-hd {
-    border-bottom: 2px solid grey;
-    cursor: pointer;
-    padding-top: 3px;
+  border-bottom: 2px solid grey;
+  cursor: pointer;
+  padding-top: 3px;
 }
+
 /* Drop down */
 .k-dropdownouter {
-    background-color: grey;
+  background-color: grey;
 }
 
 .k-dropdownouter-members {
+
 }
 
 .k-dropdownouter-members-default {
-    background-color: #DF5244;
+  background-color: #DF5244;
 }
 
 .k-dropdownouter-members-green {
-    background-color: #008000;
+  background-color: #008000;
 }
 
 .k-dropdownouter-members-blue {
-    background-color: #5500D4;
+  background-color: #5500D4;
 }
 
 .k-dropdownouter-members-grey {
-    background-color: #4D4D4D;
+  background-color: #4D4D4D;
 }
 
 .k-dropdownouter-members-purple {
-    background-color: #672178;
+  background-color: #672178;
 }
 
 .k-dropdownouter-members-red {
-    background-color: #A02C2C;
+  background-color: #A02C2C;
 }
 
 .k-dropdownouter-part {
+
 }
 
 .k-dropdownouter-part-default {
-    background-color: #CA5842;
+  background-color: #CA5842;
 }
 
 .k-dropdownouter-part-green {
-    background-color: #00AA00;
+  background-color: #00AA00;
 }
 
 .k-dropdownouter-part-blue {
-    background-color: #6600FF;
+  background-color: #6600FF;
 }
 
 .k-dropdownouter-part-grey {
-    background-color: #666666;
+  background-color: #666666;
 }
 
 .k-dropdownouter-part-purple {
-    background-color: #892CA0;
+  background-color: #892CA0;
 }
 
 .k-dropdownouter-part-red {
-    background-color: #C83737;
+  background-color: #C83737;
 }
 
 .k-dropdownouter-tags {
+
 }
 
 .k-dropdownouter-tags-default {
-    background-color: #87501E;
+  background-color: #87501E;
 }
 
 .k-dropdownouter-tags-green {
-    background-color: #00D400;
+  background-color: #00D400;
 }
 
 .k-dropdownouter-tags-blue {
-    background-color: #9955FF;
+  background-color: #9955FF;
 }
 
 .k-dropdownouter-tags-grey {
-    background-color: #808080;
+  background-color: #808080;
 }
 
 .k-dropdownouter-tags-purple {
-    background-color: #AB37C8;
+  background-color: #AB37C8;
 }
 
 .k-dropdownouter-tags-red {
-    background-color: #D35F5F;
+  background-color: #D35F5F;
 }
 
 .k-dropdownouter-summary {
+
 }
 
 .k-dropdownouter-summary-default {
-    background-color: #9F734B;
+  background-color: #9F734B;
 }
 
 .k-dropdownouter-summary-green {
-    background-color: #4CE14C;
+  background-color: #4CE14C;
 }
 
 .k-dropdownouter-summary-blue {
-    background-color: #69A5FF;
+  background-color: #69A5FF;
 }
 
 .k-dropdownouter-summary-grey {
-    background-color: #A6A6A6;
+  background-color: #A6A6A6;
 }
 
 .k-dropdownouter-summary-purple {
-    background-color: #C473D8;
+  background-color: #C473D8;
 }
 
 .k-dropdownouter-summary-red {
-    background-color: #E08F8F;
+  background-color: #E08F8F;
 }
 
 .k-dropdowninner {
-    margin: 0 3px 1px 3px;
-    background: green;
-    background-color: #FFF;
-    /* padding: 3px; */
+  margin: 0 3px 1px 3px;
+  background: green;
+  background-color: #FFF;
+  /* padding: 3px; */
 }
 
 .k-dropdownlabel {
-    color: #FFF;
-    cursor: pointer;
+  color: #FFF;
+  cursor: pointer;
 }
 
 .k-dropdownlabel .gwt-Label {
-    margin: 0 5px 0 0;
-    width: 100%;
+  margin: 0 5px 0 0;
+  width: 100%;
 }
 
 .k-dropdownlabel img {
-    margin: 0 3px 0 1px;
+  margin: 0 3px 0 1px;
 }
+
 /* WsTheme */
 .k-wstheme-icon-default {
-    background: #FF8C00;
+  background: #FF8C00;
 }
 
 .k-wstheme-icon-green {
-    background: green;
+  background: green;
 }
 
 .k-wstheme-icon-blue {
-    background: blue;
+  background: blue;
 }
 
 .k-wstheme-icon-grey {
-    background: grey;
+  background: grey;
 }
 
 .k-wstheme-icon-purple {
-    background: purple;
+  background: purple;
 }
 
 .k-wstheme-icon-red {
-    background: red;
+  background: red;
 }
 
 /* Tool selector items */
-
 .k-toolselectoritem {
   width: auto;
-  margin-bottom: 5px;	
+  margin-bottom: 5px;
   cursor: pointer;
 }
 
 .k-toolselectoritem-sel {
+
 }
 
 .k-toolselectoritem-notsel-default {
-	background: #FFE9A5;
+  background: #FFE9A5;
 }
 
 .k-toolselectoritem-notsel-green {
-    background: #D6F4D6;
+  background: #D6F4D6;
 }
 
 .k-toolselectoritem-notsel-blue {
-    background: #D7D7F4;
+  background: #D7D7F4;
 }
 
 .k-toolselectoritem-notsel-grey {
-    background: #E6E6E6;
+  background: #E6E6E6;
 }
 
 .k-toolselectoritem-notsel-purple {
-    background: #EED7F4;
+  background: #EED7F4;
 }
 
 .k-toolselectoritem-notsel-red {
-    background: #FFD5D5;
+  background: #FFD5D5;
 }
 
 .k-toolselectoritem-sel a {
@@ -621,6 +641,7 @@
 }
 
 .k-toolselectoritem-notsel {
+
 }
 
 .k-toolselectoritem-notsel a {
@@ -635,16 +656,16 @@
 
 /* others */
 .k-textlinethrough {
-	text-decoration: line-through;
-	color: red;
+  text-decoration: line-through;
+  color: red;
 }
 
 .k-textnormal {
-    text-decoration: inherit;
-	color: green;
+  text-decoration: inherit;
+  color: green;
 }
 
 .k-textunderline {
-    text-decoration: underline;
-	color: gray;
+  text-decoration: underline;
+  color: gray;
 }

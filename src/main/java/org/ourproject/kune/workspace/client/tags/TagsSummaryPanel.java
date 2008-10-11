@@ -20,7 +20,6 @@
 
 package org.ourproject.kune.workspace.client.tags;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.TagResultDTO;
@@ -45,50 +44,49 @@ public class TagsSummaryPanel extends DropDownPanel implements TagsSummaryView {
     private final I18nTranslationService i18n;
 
     public TagsSummaryPanel(final TagsSummaryPresenter presenter, final I18nTranslationService i18n,
-	    final WorkspaceSkeleton ws) {
-	super(i18n.t("Tags"), true);
-	this.i18n = i18n;
-	setHeaderTitle(i18n.t("Keywords or terms associated with this group"));
-	this.presenter = presenter;
-	flowPanel = new FlowPanel();
-	final VerticalPanel vp = new VerticalPanel();
-	noTagsLabel = new Label(i18n.t("The contents of this group don't have any tag"));
-	vp.add(flowPanel);
-	vp.setWidth("100%");
-	vp.setCellWidth(flowPanel, "100%");
-	super.setContent(vp);
-	super.setBorderStylePrimaryName("k-dropdownouter-tags");
-	addStyleName("kune-Margin-Medium-t");
-	flowPanel.addStyleName("kune-Margin-Small-trbl");
-	ws.getEntitySummary().addInSummary(this);
+            final WorkspaceSkeleton ws) {
+        super(i18n.t("Tags"), true);
+        this.i18n = i18n;
+        setHeaderTitle(i18n.t("Keywords or terms associated with this group"));
+        this.presenter = presenter;
+        flowPanel = new FlowPanel();
+        final VerticalPanel vp = new VerticalPanel();
+        noTagsLabel = new Label(i18n.t("The contents of this group don't have any tag"));
+        vp.add(flowPanel);
+        vp.setWidth("100%");
+        vp.setCellWidth(flowPanel, "100%");
+        super.setContent(vp);
+        super.setBorderStylePrimaryName("k-dropdownouter-tags");
+        addStyleName("kune-Margin-Medium-t");
+        flowPanel.addStyleName("kune-Margin-Small-trbl");
+        ws.addInSummary(this);
     }
 
     public void setTags(final List<TagResultDTO> groupTags) {
-	DeferredCommand.addCommand(new Command() {
-	    public void execute() {
-		flowPanel.clear();
-		if (groupTags.size() == 0) {
-		    flowPanel.add(noTagsLabel);
-		} else {
-		    for (final Iterator<TagResultDTO> iterator = groupTags.iterator(); iterator.hasNext();) {
-			final TagResultDTO tagResult = iterator.next();
-			final Label label = new Label(tagResult.getName());
-			// i18n pluralization
-			if (tagResult.getCount().intValue() > 1) {
-			    KuneUiUtils.setQuickTip(label, i18n.t("[%d] items with this tag", tagResult.getCount()));
-			} else {
-			    KuneUiUtils.setQuickTip(label, i18n.t("[%d] item with this tag", tagResult.getCount()));
-			}
-			label.addClickListener(new ClickListener() {
-			    public void onClick(final Widget sender) {
-				presenter.doSearchTag(tagResult.getName());
-			    }
-			});
-			label.addStyleName("kune-TagsPanel-tag");
-			flowPanel.add(label);
-		    }
-		}
-	    }
-	});
+        DeferredCommand.addCommand(new Command() {
+            public void execute() {
+                flowPanel.clear();
+                if (groupTags.size() == 0) {
+                    flowPanel.add(noTagsLabel);
+                } else {
+                    for (final TagResultDTO tagResult : groupTags) {
+                        final Label label = new Label(tagResult.getName());
+                        // i18n pluralization
+                        if (tagResult.getCount().intValue() > 1) {
+                            KuneUiUtils.setQuickTip(label, i18n.t("[%d] items with this tag", tagResult.getCount()));
+                        } else {
+                            KuneUiUtils.setQuickTip(label, i18n.t("[%d] item with this tag", tagResult.getCount()));
+                        }
+                        label.addClickListener(new ClickListener() {
+                            public void onClick(final Widget sender) {
+                                presenter.doSearchTag(tagResult.getName());
+                            }
+                        });
+                        label.addStyleName("kune-TagsPanel-tag");
+                        flowPanel.add(label);
+                    }
+                }
+            }
+        });
     }
 }

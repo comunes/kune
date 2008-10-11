@@ -248,7 +248,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 	final ActionItemCollection<StateToken> toolbarActions = actionRegistry.getCurrentActions(stateToken,
 		contentTypeId, session.isLogged(), rights, true);
 
-	final String contentTypeIcon = contentTypeId.equals(TYPE_FOLDER) ? "" : contentIconsRegistry
+	final String contentTypeIcon = contentTypeId.equals(TYPE_FOLDER) ? null : contentIconsRegistry
 		.getContentTypeIcon(contentTypeId, mimeType);
 	final ContextNavigatorItem item = new ContextNavigatorItem(genId(stateToken), genId(parentStateToken),
 		contentTypeIcon, title, status, stateToken, dragDropContentRegistry.isDraggable(contentTypeId, rights

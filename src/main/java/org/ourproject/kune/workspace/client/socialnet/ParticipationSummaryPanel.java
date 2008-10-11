@@ -24,7 +24,6 @@ import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.DropDownPanel;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridItem;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridMenuPanel;
-import org.ourproject.kune.workspace.client.skel.EntitySummary;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.gwtext.client.widgets.BoxComponent;
@@ -35,41 +34,40 @@ public class ParticipationSummaryPanel extends DropDownPanel implements Particip
     private final GridMenuPanel<GroupDTO> gridMenuPanel;
 
     public ParticipationSummaryPanel(final ParticipationSummaryPresenter presenter, final I18nTranslationService i18n,
-	    final WorkspaceSkeleton ws) {
-	super(true);
-	// super.setHeaderText(i18n.t("Participates as..."));
-	super.setHeaderText(i18n.t("Participates in"));
-	super.setHeaderTitle(i18n.t("Groups in which participates"));
-	super.setBorderStylePrimaryName("k-dropdownouter-part");
-	super.addStyleName("kune-Margin-Medium-t");
-	gridMenuPanel = new GridMenuPanel<GroupDTO>(i18n.t("This user is not member of any group"), false, false,
-		false, false, false);
-	final EntitySummary entitySummary = ws.getEntitySummary();
-	this.setContent(gridMenuPanel);
-	entitySummary.addInSummary(this);
-	entitySummary.addListener(new ContainerListenerAdapter() {
-	    @Override
-	    public void onResize(final BoxComponent component, final int adjWidth, final int adjHeight,
-		    final int rawWidth, final int rawHeight) {
-		gridMenuPanel.setWidth(adjWidth);
-	    }
-	});
+            final WorkspaceSkeleton ws) {
+        super(true);
+        // super.setHeaderText(i18n.t("Participates as..."));
+        super.setHeaderText(i18n.t("Participates in"));
+        super.setHeaderTitle(i18n.t("Groups in which participates"));
+        super.setBorderStylePrimaryName("k-dropdownouter-part");
+        super.addStyleName("kune-Margin-Medium-t");
+        gridMenuPanel = new GridMenuPanel<GroupDTO>(i18n.t("This user is not member of any group"), false, false,
+                false, false, false);
+        this.setContent(gridMenuPanel);
+        ws.addInSummary(this);
+        ws.addListenerInEntitySummary(new ContainerListenerAdapter() {
+            @Override
+            public void onResize(final BoxComponent component, final int adjWidth, final int adjHeight,
+                    final int rawWidth, final int rawHeight) {
+                gridMenuPanel.setWidth(adjWidth);
+            }
+        });
     }
 
     public void addItem(final GridItem<GroupDTO> gridItem) {
-	gridMenuPanel.addItem(gridItem);
+        gridMenuPanel.addItem(gridItem);
     }
 
     public void clear() {
-	gridMenuPanel.removeAll();
+        gridMenuPanel.removeAll();
     }
 
     public void hide() {
-	this.setVisible(false);
+        this.setVisible(false);
     }
 
     public void show() {
-	this.setVisible(true);
+        this.setVisible(true);
     }
 
 }
