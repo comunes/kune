@@ -43,11 +43,13 @@ public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembe
         gridMenuPanel = new GridMenuPanel<GroupDTO>(i18n.t("This is an orphaned project, if you are interested "
                 + "please request to join to work on it"), dragConf, true, true, false, true, false);
         gridMenuPanel.setBorder(true);
-        gridMenuPanel.onDoubleClick(new Listener<String>() {
+        Listener<String> go = new Listener<String>() {
             public void onEvent(final String groupShortName) {
                 presenter.onDoubleClick(groupShortName);
             }
-        });
+        };
+        gridMenuPanel.onClick(go);
+        gridMenuPanel.onDoubleClick(go);
         gridMenuPanel.getBottomBar().setCls("k-blank-toolbar");
         super.add(gridMenuPanel);
         ws.addInSummary(this);

@@ -103,10 +103,6 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
         this.view = view;
     }
 
-    public void onDoubleClick(final String groupShortName) {
-        stateManager.gotoToken(groupShortName);
-    }
-
     private boolean isMember(final boolean userIsAdmin, final boolean userIsCollab) {
         return userIsAdmin || userIsCollab;
     }

@@ -27,6 +27,7 @@ import org.ourproject.kune.workspace.client.skel.SummaryPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 
+import com.calclab.suco.client.listener.Listener;
 import com.gwtext.client.widgets.BoxComponent;
 import com.gwtext.client.widgets.event.ContainerListenerAdapter;
 
@@ -42,6 +43,13 @@ public class ParticipationSummaryPanel extends SummaryPanel implements Participa
         gridMenuPanel = new GridMenuPanel<GroupDTO>(i18n.t("This user is not member of any group"), false, false,
                 false, false, false);
         gridMenuPanel.setBorder(true);
+        Listener<String> go = new Listener<String>() {
+            public void onEvent(final String groupShortName) {
+                presenter.onDoubleClick(groupShortName);
+            }
+        };
+        gridMenuPanel.onClick(go);
+        gridMenuPanel.onDoubleClick(go);
         super.add(gridMenuPanel);
         ws.addInSummary(this);
         ws.addListenerInEntitySummary(new ContainerListenerAdapter() {

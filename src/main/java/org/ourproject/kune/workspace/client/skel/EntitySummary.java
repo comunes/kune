@@ -78,9 +78,12 @@ public class EntitySummary {
             public void onHide(Component component) {
                 super.onHide(component);
                 if (accordionLayout.getActiveItem() != null && accordionLayout.getActiveItem().isHidden()) {
-                    Component firstComponent = entitySummary.getComponent(0);
-                    if (firstComponent != null) {
-                        ((Panel) firstComponent).expand(true);
+                    Panel firstComponent = null;
+                    for (Component compo : entitySummary.getComponents()) {
+                        if (compo.isVisible() && firstComponent == null) {
+                            firstComponent = (Panel) compo;
+                            firstComponent.expand(true);
+                        }
                     }
                 }
 
