@@ -1,8 +1,5 @@
 package org.ourproject.kune.workspace.client.skel;
 
-import org.ourproject.kune.workspace.client.site.Site;
-
-import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.Component;
 import com.gwtext.client.widgets.Panel;
@@ -80,9 +77,7 @@ public class EntitySummary {
             @Override
             public void onHide(Component component) {
                 super.onHide(component);
-                Site.info("Hide summary component");
                 if (accordionLayout.getActiveItem() != null && accordionLayout.getActiveItem().isHidden()) {
-                    Log.info("No active component");
                     Component firstComponent = entitySummary.getComponent(0);
                     if (firstComponent != null) {
                         ((Panel) firstComponent).expand(true);
