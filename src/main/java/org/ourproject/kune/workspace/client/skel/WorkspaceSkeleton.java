@@ -49,8 +49,8 @@ public class WorkspaceSkeleton {
         new Viewport(container);
     }
 
-    public void addInSummary(Widget widget) {
-        entity.addInSummary(widget);
+    public void addInSummary(Panel panel) {
+        entity.addInSummary(panel);
     }
 
     public void addInTools(final Widget widget) {
@@ -109,6 +109,10 @@ public class WorkspaceSkeleton {
                 onEnter.onEvent();
             }
         });
+    }
+
+    public void refreshSummary() {
+        entity.refreshSummary();
     }
 
     public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {

@@ -54,9 +54,8 @@ public class Entity {
         entityFitPanel.add(entityAnchorLayout);
     }
 
-    public void addInSummary(Widget widget) {
-        entitySummary.addInSummary(widget);
-        doLayoutIfNeeded();
+    public void addInSummary(Panel panel) {
+        entitySummary.addInSummary(panel);
     }
 
     public void addInTools(final Widget widget) {
@@ -71,6 +70,9 @@ public class Entity {
     public void addToEntityMainHeader(final Widget widget) {
         entityMainHeader.clear();
         entityMainHeader.add(widget);
+        if (entityMainHeader.isRendered()) {
+            entityMainHeader.doLayout(false);
+        }
         doLayoutIfNeeded();
     }
 
@@ -86,6 +88,10 @@ public class Entity {
         return entitySummary.getSiteTraybar();
     }
 
+    public void refreshSummary() {
+        entitySummary.doLayoutIfNeeded();
+    }
+
     public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
         if (oldTheme != null) {
             entityFitPanel.removeClass("k-entity-" + oldTheme);
@@ -96,7 +102,8 @@ public class Entity {
 
     private void doLayoutIfNeeded() {
         if (entityFitPanel.isRendered()) {
-            entityFitPanel.doLayout();
+            entityFitPanel.doLayout(false);
         }
     }
+
 }

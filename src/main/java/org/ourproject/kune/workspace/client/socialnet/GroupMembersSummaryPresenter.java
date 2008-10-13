@@ -41,143 +41,133 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
     private final StateManager stateManager;
 
     public GroupMembersSummaryPresenter(final I18nUITranslationService i18n, final StateManager stateManager,
-	    final ImageUtils imageUtils, final Session session,
-	    final Provider<SocialNetworkServiceAsync> snServiceProvider,
-	    final Provider<GroupLiveSearcher> liveSearcherProvider, final WsThemePresenter wsThemePresenter) {
-	super(i18n, stateManager, imageUtils, session, snServiceProvider);
-	this.i18n = i18n;
-	this.stateManager = stateManager;
-	this.session = session;
-	this.snServiceProvider = snServiceProvider;
-	final Listener<StateDTO> setStateListener = new Listener<StateDTO>() {
-	    public void onEvent(StateDTO state) {
-		setState(state);
-	    }
-	};
-	stateManager.onStateChanged(setStateListener);
-	stateManager.onSocialNetworkChanged(setStateListener);
-	wsThemePresenter.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
-	    public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
-		view.setTheme(oldTheme, newTheme);
-	    }
-	});
-	final String adminsTitle = i18n.t("Admins");
-	final String collabsTitle = i18n.t("Collaborators");
-	final String pendingTitle = i18n.t("Pending");
-	adminCategory = new GridGroup(adminsTitle, adminsTitle, i18n.t("People that can admin this group"), true);
-	collabCategory = new GridGroup(collabsTitle, collabsTitle, i18n
-		.t("Other people that collaborate with this group"), true);
-	pendigCategory = new GridGroup(pendingTitle, pendingTitle, i18n
-		.t("People pending to be accepted in this group by the admins"), imageUtils
-		.getImageHtml(ImageDescriptor.alert), true);
-	// i18n.t("Add member")
-	addMember = new GridButton("images/add-green.gif", "", i18n
-		.t("Add a group or a person as member of this group"), new Listener<String>() {
-	    public void onEvent(final String parameter) {
-		liveSearcherProvider.get().onSelection(new Listener<LinkDTO>() {
-		    public void onEvent(final LinkDTO link) {
-			view.confirmAddCollab(link.getShortName(), link.getLongName());
-		    }
-		});
-		liveSearcherProvider.get().show();
-	    }
-	});
-	super.addGroupOperation(gotoGroupMenuItem, false);
-	super.addUserOperation(gotoMemberMenuItem, false);
+            final ImageUtils imageUtils, final Session session,
+            final Provider<SocialNetworkServiceAsync> snServiceProvider,
+            final Provider<GroupLiveSearcher> liveSearcherProvider, final WsThemePresenter wsThemePresenter) {
+        super(i18n, stateManager, imageUtils, session, snServiceProvider);
+        this.i18n = i18n;
+        this.stateManager = stateManager;
+        this.session = session;
+        this.snServiceProvider = snServiceProvider;
+        final Listener<StateDTO> setStateListener = new Listener<StateDTO>() {
+            public void onEvent(StateDTO state) {
+                setState(state);
+            }
+        };
+        stateManager.onStateChanged(setStateListener);
+        stateManager.onSocialNetworkChanged(setStateListener);
+        wsThemePresenter.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
+            public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
+                view.setTheme(oldTheme, newTheme);
+            }
+        });
+        final String adminsTitle = i18n.t("Admins");
+        final String collabsTitle = i18n.t("Collaborators");
+        final String pendingTitle = i18n.t("Pending");
+        adminCategory = new GridGroup(adminsTitle, adminsTitle, i18n.t("People that can admin this group"), true);
+        collabCategory = new GridGroup(collabsTitle, collabsTitle, i18n
+                .t("Other people that collaborate with this group"), true);
+        pendigCategory = new GridGroup(pendingTitle, pendingTitle, i18n
+                .t("People pending to be accepted in this group by the admins"), imageUtils
+                .getImageHtml(ImageDescriptor.alert), true);
+        // i18n.t("Add member")
+        addMember = new GridButton("images/add-green.gif", "", i18n
+                .t("Add a group or a person as member of this group"), new Listener<String>() {
+            public void onEvent(final String parameter) {
+                liveSearcherProvider.get().onSelection(new Listener<LinkDTO>() {
+                    public void onEvent(final LinkDTO link) {
+                        view.confirmAddCollab(link.getShortName(), link.getLongName());
+                    }
+                });
+                liveSearcherProvider.get().show();
+            }
+        });
+        super.addGroupOperation(gotoGroupMenuItem, false);
+        super.addUserOperation(gotoMemberMenuItem, false);
     }
 
     public void addCollab(final String groupShortName) {
-	Site.showProgressProcessing();
-	snServiceProvider.get().addCollabMember(session.getUserHash(), session.getCurrentState().getStateToken(),
-		groupShortName, new AsyncCallbackSimple<SocialNetworkResultDTO>() {
-		    public void onSuccess(final SocialNetworkResultDTO result) {
-			Site.hideProgress();
-			Site.info(i18n.t("Member added as collaborator"));
-			stateManager.setSocialNetwork(result);
-		    }
+        Site.showProgressProcessing();
+        snServiceProvider.get().addCollabMember(session.getUserHash(), session.getCurrentState().getStateToken(),
+                groupShortName, new AsyncCallbackSimple<SocialNetworkResultDTO>() {
+                    public void onSuccess(final SocialNetworkResultDTO result) {
+                        Site.hideProgress();
+                        Site.info(i18n.t("Member added as collaborator"));
+                        stateManager.setSocialNetwork(result);
+                    }
 
-		});
+                });
     }
 
     public void init(final GroupMembersSummaryView view) {
-	this.view = view;
+        this.view = view;
     }
 
     public void onDoubleClick(final String groupShortName) {
-	stateManager.gotoToken(groupShortName);
+        stateManager.gotoToken(groupShortName);
     }
 
     private boolean isMember(final boolean userIsAdmin, final boolean userIsCollab) {
-	return userIsAdmin || userIsCollab;
+        return userIsAdmin || userIsCollab;
     }
 
     @SuppressWarnings("unchecked")
     private void setGroupMembers(final SocialNetworkDTO socialNetwork, final AccessRightsDTO rights) {
-	final AccessListsDTO accessLists = socialNetwork.getAccessLists();
+        final AccessListsDTO accessLists = socialNetwork.getAccessLists();
 
-	final List<GroupDTO> adminsList = accessLists.getAdmins().getList();
-	final List<GroupDTO> collabList = accessLists.getEditors().getList();
-	final List<GroupDTO> pendingCollabsList = socialNetwork.getPendingCollaborators().getList();
+        final List<GroupDTO> adminsList = accessLists.getAdmins().getList();
+        final List<GroupDTO> collabList = accessLists.getEditors().getList();
+        final List<GroupDTO> pendingCollabsList = socialNetwork.getPendingCollaborators().getList();
 
-	final int numAdmins = adminsList.size();
+        final int numAdmins = adminsList.size();
 
-	boolean userIsAdmin = rights.isAdministrable();
-	final boolean userIsCollab = !userIsAdmin && rights.isEditable();
-	final boolean userCanView = rights.isVisible();
-	boolean userIsMember = isMember(userIsAdmin, userIsCollab);
+        boolean userIsAdmin = rights.isAdministrable();
+        final boolean userIsCollab = !userIsAdmin && rights.isEditable();
+        final boolean userCanView = rights.isVisible();
+        boolean userIsMember = isMember(userIsAdmin, userIsCollab);
 
-	view.clear();
+        view.clear();
 
-	if (userIsAdmin) {
-	    view.addButton(addMember);
-	    view.addToolbarFill();
-	}
+        if (userIsAdmin) {
+            view.addButton(addMember);
+            view.addToolbarFill();
+        }
 
-	view.setDraggable(session.isLogged());
+        view.setDraggable(session.isLogged());
 
-	if (!userIsMember) {
-	    view.addButton(requestJoin);
-	} else if (userIsAdmin && numAdmins > 1 || userIsCollab) {
-	    view.addButton(unJoinButton);
-	}
+        if (!userIsMember) {
+            view.addButton(requestJoin);
+        } else if (userIsAdmin && numAdmins > 1 || userIsCollab) {
+            view.addButton(unJoinButton);
+        }
 
-	if (userCanView) {
-	    for (final GroupDTO admin : adminsList) {
-		view
-			.addItem(createGridItem(adminCategory, admin, rights, changeToCollabMenuItem,
-				removeMemberMenuItem));
-	    }
-	    for (final GroupDTO collab : collabList) {
-		view
-			.addItem(createGridItem(collabCategory, collab, rights, changeToAdminMenuItem,
-				removeMemberMenuItem));
-	    }
-	    if (userIsAdmin) {
-		for (final GroupDTO pendingCollab : pendingCollabsList) {
-		    view.addItem(createGridItem(pendigCategory, pendingCollab, rights, acceptJoinGroupMenuItem,
-			    denyJoinGroupMenuItem));
-		}
-	    }
-	}
-	setMaxSize(adminsList.size(), collabList.size(), pendingCollabsList.size(), userIsAdmin);
-	view.setVisible(true);
-    }
-
-    private void setMaxSize(final int admins, final int collabs, final int pendingCollabs, final boolean isAdmin) {
-	final int members = admins + collabs + (isAdmin ? pendingCollabs : 0);
-	if (members > 2) {
-	    view.setMaxHeigth();
-	} else {
-	    view.setDefaultHeigth();
-	}
+        if (userCanView) {
+            for (final GroupDTO admin : adminsList) {
+                view
+                        .addItem(createGridItem(adminCategory, admin, rights, changeToCollabMenuItem,
+                                removeMemberMenuItem));
+            }
+            for (final GroupDTO collab : collabList) {
+                view
+                        .addItem(createGridItem(collabCategory, collab, rights, changeToAdminMenuItem,
+                                removeMemberMenuItem));
+            }
+            if (userIsAdmin) {
+                for (final GroupDTO pendingCollab : pendingCollabsList) {
+                    view.addItem(createGridItem(pendigCategory, pendingCollab, rights, acceptJoinGroupMenuItem,
+                            denyJoinGroupMenuItem));
+                }
+            }
+        }
+        view.setVisible(true);
     }
 
     private void setState(final StateDTO state) {
-	if (state.getGroup().getType().equals(GroupType.PERSONAL)) {
-	    view.setVisible(false);
-	} else {
-	    setGroupMembers(state.getGroupMembers(), state.getGroupRights());
-	}
+        if (state.getGroup().getType().equals(GroupType.PERSONAL)) {
+            view.setVisible(false);
+        } else {
+            setGroupMembers(state.getGroupMembers(), state.getGroupRights());
+        }
     }
 
 }

@@ -3,12 +3,12 @@ package org.ourproject.kune.workspace.client.socialnet;
 import java.util.HashMap;
 
 import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.ui.DropDownPanel;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridButton;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridDragConfiguration;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridItem;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridMenuPanel;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.workspace.client.skel.SummaryPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 
@@ -24,7 +24,7 @@ import com.gwtext.client.widgets.ToolbarButton;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.event.ContainerListenerAdapter;
 
-public class GroupMembersSummaryPanel extends DropDownPanel implements GroupMembersSummaryView {
+public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembersSummaryView {
     // private static final int MAX_HEIGHT = 110;
     private final GridMenuPanel<GroupDTO> gridMenuPanel;
     private final I18nUITranslationService i18n;
@@ -33,25 +33,23 @@ public class GroupMembersSummaryPanel extends DropDownPanel implements GroupMemb
 
     public GroupMembersSummaryPanel(final GroupMembersSummaryPresenter presenter, final I18nUITranslationService i18n,
             final WorkspaceSkeleton ws) {
-        super(true);
+        super(i18n.t("Group members"), i18n.t("People and groups collaborating in this group"), ws);
         this.presenter = presenter;
         this.i18n = i18n;
-        super.setHeaderText(i18n.t("Group members"));
-        super.setHeaderTitle(i18n.t("People and groups collaborating in this group"));
-        super.setBorderStylePrimaryName("k-dropdownouter-members");
-        super.addStyleName("kune-Margin-Medium-t");
 
         final GridDragConfiguration dragConf = new GridDragConfiguration(UserGridPanel.USER_GROUP_DD, i18n
                 .t("Drop in the chat area to start a chat.")
                 + "<br/>" + i18n.t("Drop into a room to invite the user to join the chat room"));
         gridMenuPanel = new GridMenuPanel<GroupDTO>(i18n.t("This is an orphaned project, if you are interested "
                 + "please request to join to work on it"), dragConf, true, true, false, true, false);
+        gridMenuPanel.setBorder(true);
         gridMenuPanel.onDoubleClick(new Listener<String>() {
             public void onEvent(final String groupShortName) {
                 presenter.onDoubleClick(groupShortName);
             }
         });
-        this.setContent(gridMenuPanel);
+        gridMenuPanel.getBottomBar().setCls("k-blank-toolbar");
+        super.add(gridMenuPanel);
         ws.addInSummary(this);
         ws.addListenerInEntitySummary(new ContainerListenerAdapter() {
             @Override
@@ -89,12 +87,14 @@ public class GroupMembersSummaryPanel extends DropDownPanel implements GroupMemb
 
     public void addItem(final GridItem<GroupDTO> gridItem) {
         gridMenuPanel.addItem(gridItem);
+        doLayoutIfNeeded();
     }
 
     public void addToolbarFill() {
         gridMenuPanel.getBottomBar().addFill();
     }
 
+    @Override
     public void clear() {
         gridMenuPanel.removeAll();
         for (final ToolbarButton button : buttonsCache.values()) {
@@ -103,6 +103,8 @@ public class GroupMembersSummaryPanel extends DropDownPanel implements GroupMemb
             button.setVisible(false);
             button.removeFromParent();
         }
+        buttonsCache.clear();
+        doLayoutIfNeeded();
     }
 
     public void confirmAddCollab(final String groupShortName, final String groupLongName) {
@@ -121,28 +123,12 @@ public class GroupMembersSummaryPanel extends DropDownPanel implements GroupMemb
                 });
     }
 
-    public void setDefaultHeigth() {
-        // super.setContentHeight("");
-        // gridMenuPanel.setHeight("auto");
-        // gridMenuPanel.doLayoutIfNeeded();
-    }
-
+    @Override
     public void setDraggable(final boolean draggable) {
         // gridMenuPanel.setDraggable(draggable);
     }
 
-    public void setMaxHeigth() {
-        // super.setContentHeight("" + MAX_HEIGHT);
-        // gridMenuPanel.setHeight(MAX_HEIGHT - 26);
-    }
-
-    @Override
     public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
-        super.setTheme(oldTheme, newTheme);
-    }
-
-    @Override
-    public void setVisible(final boolean visible) {
-        super.setVisible(visible);
+        // super.setTheme(oldTheme, newTheme);
     }
 }

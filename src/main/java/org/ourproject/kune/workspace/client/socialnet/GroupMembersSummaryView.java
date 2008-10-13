@@ -17,13 +17,7 @@ public interface GroupMembersSummaryView {
 
     void confirmAddCollab(String groupShortName, String groupLongName);
 
-    void setContentVisible(boolean visible);
-
-    void setDefaultHeigth();
-
     void setDraggable(boolean draggable);
-
-    void setMaxHeigth();
 
     void setTheme(WsTheme oldTheme, WsTheme newTheme);
 

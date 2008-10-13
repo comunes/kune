@@ -68,399 +68,401 @@ public class GridMenuPanel<T> extends Panel {
     private final boolean withEndIcon;
 
     public GridMenuPanel(final String emptyText) {
-	this(emptyText, null, null, false, false, false, false, false);
+        this(emptyText, null, null, false, false, false, false, false);
     }
 
     public GridMenuPanel(final String emptyText, final boolean grouped, final boolean withCounters) {
-	this(emptyText, null, null, grouped, withCounters, false, false, false);
+        this(emptyText, null, null, grouped, withCounters, false, false, false);
     }
 
     public GridMenuPanel(final String emptyText, final boolean grouped, final boolean withCounters,
-	    final boolean withTopBar, final boolean withBottomBar, final boolean withEndIcon) {
-	this(emptyText, null, null, grouped, withCounters, withTopBar, withBottomBar, withEndIcon);
+            final boolean withTopBar, final boolean withBottomBar, final boolean withEndIcon) {
+        this(emptyText, null, null, grouped, withCounters, withTopBar, withBottomBar, withEndIcon);
     }
 
     public GridMenuPanel(final String emptyText, final GridDragConfiguration gridDragConfiguration) {
-	this(emptyText, gridDragConfiguration, null, false, false, false, false, false);
+        this(emptyText, gridDragConfiguration, null, false, false, false, false, false);
     }
 
     public GridMenuPanel(final String emptyText, final GridDragConfiguration dragConf, final boolean grouped,
-	    final boolean withCounters, final boolean withTopBar, final boolean withBottomBar, final boolean withEndIcon) {
-	this(emptyText, dragConf, null, grouped, withCounters, withTopBar, withBottomBar, withEndIcon);
+            final boolean withCounters, final boolean withTopBar, final boolean withBottomBar, final boolean withEndIcon) {
+        this(emptyText, dragConf, null, grouped, withCounters, withTopBar, withBottomBar, withEndIcon);
     }
 
     public GridMenuPanel(final String emptyText, final GridDragConfiguration gridDragConfiguration,
-	    final GridDropConfiguration gridDropConfiguration, final boolean grouped, final boolean withCounters,
-	    final boolean withTopBar, final boolean withBottomBar, final boolean withEndIcon) {
-	this.onClick = new Event<String>("onClick");
-	this.onDoubleClick = new Event<String>("onDoubleClick");
-	this.grouped = grouped;
-	this.withCounters = withCounters;
-	this.withEndIcon = withEndIcon;
-	super.setBorder(false);
-	super.setLayout(new FitLayout());
-	// super.setAutoScroll(true);
-	if (withTopBar) {
-	    topBar = new Toolbar();
-	    super.setTopToolbar(topBar);
-	}
-	if (withBottomBar) {
-	    bottomBar = new Toolbar();
-	    super.setBottomToolbar(bottomBar);
-	}
-	menuMap = new HashMap<String, CustomMenu<T>>();
-	recordMap = new HashMap<T, Record>();
-	super.addListener(new BoxComponentListenerAdapter() {
-	    @Override
-	    public void onRender(final Component component) {
-		// Log.warn("Render grid -------------------");
-	    }
-	});
-	createGrid(emptyText, gridDragConfiguration, gridDropConfiguration);
+            final GridDropConfiguration gridDropConfiguration, final boolean grouped, final boolean withCounters,
+            final boolean withTopBar, final boolean withBottomBar, final boolean withEndIcon) {
+        this.onClick = new Event<String>("onClick");
+        this.onDoubleClick = new Event<String>("onDoubleClick");
+        this.grouped = grouped;
+        this.withCounters = withCounters;
+        this.withEndIcon = withEndIcon;
+        super.setBorder(false);
+        super.setLayout(new FitLayout());
+        // super.setAutoScroll(true);
+        if (withTopBar) {
+            topBar = new Toolbar();
+            super.setTopToolbar(topBar);
+        }
+        if (withBottomBar) {
+            bottomBar = new Toolbar();
+            super.setBottomToolbar(bottomBar);
+        }
+        menuMap = new HashMap<String, CustomMenu<T>>();
+        recordMap = new HashMap<T, Record>();
+        super.addListener(new BoxComponentListenerAdapter() {
+            @Override
+            public void onRender(final Component component) {
+                // Log.warn("Render grid -------------------");
+            }
+        });
+        createGrid(emptyText, gridDragConfiguration, gridDropConfiguration);
     }
 
     public GridMenuPanel(final String emptyText, final GridDropConfiguration gridDropConfiguration) {
-	this(emptyText, null, gridDropConfiguration, false, false, false, false, false);
+        this(emptyText, null, gridDropConfiguration, false, false, false, false, false);
     }
 
     public GridMenuPanel(final String emptyText, final GridDropConfiguration dropConf, final boolean grouped,
-	    final boolean withCounters, final boolean withTopBar, final boolean withBottomBar, final boolean withEndIcon) {
-	this(emptyText, null, dropConf, grouped, withCounters, withTopBar, withBottomBar, withEndIcon);
+            final boolean withCounters, final boolean withTopBar, final boolean withBottomBar, final boolean withEndIcon) {
+        this(emptyText, null, dropConf, grouped, withCounters, withTopBar, withBottomBar, withEndIcon);
     }
 
     public void addItem(final GridItem<T> gridItem) {
-	final String id = gridItem.getId();
-	final Record newRecord = recordDef
-		.createRecord(id, new Object[] { gridItem.getGroup().getName(), gridItem.getGroup().getTooltipTitle(),
-			gridItem.getGroup().getTooltip(), gridItem.getGroup().getEndIconHtml(), id,
-			gridItem.getIconHtml(), gridItem.getTitle(), gridItem.getTitleHtml(),
-			gridItem.getEndIconHtml(), gridItem.getTooltipTitle(), gridItem.getTooltip() });
-	recordMap.put(gridItem.getItem(), newRecord);
-	store.addSorted(newRecord);
-	menuMap.put(id, gridItem.getMenu());
-	sort();
-	doLayoutIfNeeded();
+        final String id = gridItem.getId();
+        final Record newRecord = recordDef
+                .createRecord(id, new Object[] { gridItem.getGroup().getName(), gridItem.getGroup().getTooltipTitle(),
+                        gridItem.getGroup().getTooltip(), gridItem.getGroup().getEndIconHtml(), id,
+                        gridItem.getIconHtml(), gridItem.getTitle(), gridItem.getTitleHtml(),
+                        gridItem.getEndIconHtml(), gridItem.getTooltipTitle(), gridItem.getTooltip() });
+        recordMap.put(gridItem.getItem(), newRecord);
+        store.addSorted(newRecord);
+        menuMap.put(id, gridItem.getMenu());
+        sort();
+        doLayoutIfNeeded();
     }
 
     public void confDropInPanel(final Panel panel, final GridDropConfiguration gridDropConfiguration) {
-	// FIXME: This doesn't works :-/
-	// http://extjs.com/forum/showthread.php?t=18105
-	final DropTargetConfig dCfg = new DropTargetConfig();
-	dCfg.setTarget(true);
-	dCfg.setdDdGroup(gridDropConfiguration.getDdGroupId());
-	new DropTarget(panel, dCfg) {
-	    @Override
-	    public boolean notifyDrop(final DragSource src, final EventObject e, final DragData dragData) {
-		if (dragData instanceof GridDragData) {
-		    final GridDragData gridDragData = (GridDragData) dragData;
-		    final Record[] records = gridDragData.getSelections();
-		    for (int i = 0; i < records.length; i++) {
-			gridDropConfiguration.fire(records[i].getAsString(ID));
-		    }
-		}
-		return true;
-	    }
+        // FIXME: This doesn't works :-/
+        // http://extjs.com/forum/showthread.php?t=18105
+        final DropTargetConfig dCfg = new DropTargetConfig();
+        dCfg.setTarget(true);
+        dCfg.setdDdGroup(gridDropConfiguration.getDdGroupId());
+        new DropTarget(panel, dCfg) {
+            @Override
+            public boolean notifyDrop(final DragSource src, final EventObject e, final DragData dragData) {
+                if (dragData instanceof GridDragData) {
+                    final GridDragData gridDragData = (GridDragData) dragData;
+                    final Record[] records = gridDragData.getSelections();
+                    for (Record record : records) {
+                        gridDropConfiguration.fire(record.getAsString(ID));
+                    }
+                }
+                return true;
+            }
 
-	    @Override
-	    public String notifyEnter(final DragSource src, final EventObject e, final DragData data) {
-		return "x-tree-drop-ok-append";
-	    }
+            @Override
+            public String notifyEnter(final DragSource src, final EventObject e, final DragData data) {
+                return "x-tree-drop-ok-append";
+            }
 
-	    @Override
-	    public String notifyOver(final DragSource src, final EventObject e, final DragData data) {
-		return "x-tree-drop-ok-append";
-	    }
-	};
+            @Override
+            public String notifyOver(final DragSource src, final EventObject e, final DragData data) {
+                return "x-tree-drop-ok-append";
+            }
+        };
     }
 
     @Override
     public void doLayout(final boolean shallow) {
-	// Grid rendered problems with shallow false
-	super.doLayout();
-	grid.doLayout();
+        // Grid rendered problems with shallow false
+        grid.doLayout(false);
+        super.doLayout(false);
     }
 
     public void doLayoutIfNeeded() {
-	if (super.isRendered()) {
-	    super.doLayout();
-	}
+        if (super.isRendered()) {
+            grid.doLayout(false);
+            super.doLayout(false);
+        }
     }
 
     public Toolbar getBottomBar() {
-	assert bottomBar != null;
-	return bottomBar;
+        assert bottomBar != null;
+        return bottomBar;
     }
 
     public Toolbar getTopBar() {
-	assert topBar != null;
-	return topBar;
+        assert topBar != null;
+        return topBar;
     }
 
     public void onClick(final Listener<String> listener) {
-	onClick.add(listener);
+        onClick.add(listener);
     }
 
     public void onDoubleClick(final Listener<String> listener) {
-	onDoubleClick.add(listener);
+        onDoubleClick.add(listener);
     }
 
+    @Override
     public void removeAll() {
-	store.removeAll();
-	recordMap.clear();
-	menuMap.clear();
+        store.removeAll();
+        recordMap.clear();
+        menuMap.clear();
     }
 
     public void removeItem(final GridItem<T> gridItem) {
-	final Record record = recordMap.get(gridItem.getItem());
-	if (record != null) {
-	    menuMap.remove(record);
-	    store.remove(record);
-	    recordMap.remove(gridItem.getItem());
-	    doLayoutIfNeeded();
-	} else {
-	    Log.error("Trying to remove a non existing item: " + gridItem.getId());
-	}
+        final Record record = recordMap.get(gridItem.getItem());
+        if (record != null) {
+            menuMap.remove(record);
+            store.remove(record);
+            recordMap.remove(gridItem.getItem());
+            doLayoutIfNeeded();
+        } else {
+            Log.error("Trying to remove a non existing item: " + gridItem.getId());
+        }
     }
 
     @Override
     public void setHeight(final int height) {
-	super.setHeight(height);
-	// grid.setHeight(height);
-	doLayoutIfNeeded();
+        super.setHeight(height);
+        // grid.setHeight(height);
+        doLayoutIfNeeded();
     }
 
     @Override
     public void setWidth(final int width) {
-	// grid.setWidth(width - 27);
-	grid.setWidth(width - 27);
-	// super.setWidth(width - 11);
-	doLayoutIfNeeded();
+        // grid.setWidth(width - 27);
+        grid.setWidth(width - 27);
+        // super.setWidth(width - 11);
+        doLayoutIfNeeded();
     }
 
     public void sort() {
-	store.sort(GROUP, SortDir.ASC);
+        store.sort(GROUP, SortDir.ASC);
     }
 
     public void updateItem(final GridItem<T> gridItem) {
-	final String id = gridItem.getId();
-	final Record record = recordMap.get(gridItem.getItem());
-	if (record != null) {
-	    record.set(GROUP, gridItem.getGroup().getName());
-	    record.set(GROUP_TOOLTIP_TITLE, gridItem.getGroup().getTooltipTitle());
-	    record.set(GROUP_TOOLTIP, gridItem.getGroup().getTooltip());
-	    record.set(GROUP_ENDICON_HTML, gridItem.getGroup().getEndIconHtml());
-	    record.set(ICON_HTML, gridItem.getIconHtml());
-	    record.set(TITLE, gridItem.getTitle());
-	    record.set(TITLE_HTML, gridItem.getTitleHtml());
-	    record.set(END_ICON_HTML, gridItem.getEndIconHtml());
-	    record.set(TOOLTIPTITLE, gridItem.getTooltipTitle());
-	    record.set(TOOLTIP, gridItem.getTooltip());
-	    store.commitChanges();
-	    menuMap.put(id, gridItem.getMenu());
-	    sort();
-	    doLayoutIfNeeded();
-	} else {
-	    Log.error("Trying to update a non existing item: " + id);
-	}
+        final String id = gridItem.getId();
+        final Record record = recordMap.get(gridItem.getItem());
+        if (record != null) {
+            record.set(GROUP, gridItem.getGroup().getName());
+            record.set(GROUP_TOOLTIP_TITLE, gridItem.getGroup().getTooltipTitle());
+            record.set(GROUP_TOOLTIP, gridItem.getGroup().getTooltip());
+            record.set(GROUP_ENDICON_HTML, gridItem.getGroup().getEndIconHtml());
+            record.set(ICON_HTML, gridItem.getIconHtml());
+            record.set(TITLE, gridItem.getTitle());
+            record.set(TITLE_HTML, gridItem.getTitleHtml());
+            record.set(END_ICON_HTML, gridItem.getEndIconHtml());
+            record.set(TOOLTIPTITLE, gridItem.getTooltipTitle());
+            record.set(TOOLTIP, gridItem.getTooltip());
+            store.commitChanges();
+            menuMap.put(id, gridItem.getMenu());
+            sort();
+            doLayoutIfNeeded();
+        } else {
+            Log.error("Trying to update a non existing item: " + id);
+        }
     }
 
     private void configureDrag(final GridDragConfiguration gridDragConfiguration) {
-	// TODO: put this in GDConf
-	grid.setEnableDragDrop(true);
-	grid.setDdGroup(gridDragConfiguration.getDdGroupId());
-	grid.setDragDropText(gridDragConfiguration.getDragMessage());
+        // TODO: put this in GDConf
+        grid.setEnableDragDrop(true);
+        grid.setDdGroup(gridDragConfiguration.getDdGroupId());
+        grid.setDragDropText(gridDragConfiguration.getDragMessage());
     }
 
     private void configureDrop(final GridDropConfiguration gridDropConfiguration) {
-	// TODO: put this in GDConf
-	grid.setEnableDragDrop(true);
-	grid.setDdGroup(gridDropConfiguration.getDdGroupId());
-	final DropTargetConfig dCfg = new DropTargetConfig();
-	dCfg.setTarget(true);
-	dCfg.setdDdGroup(gridDropConfiguration.getDdGroupId());
-	new DropTarget(grid, dCfg) {
-	    @Override
-	    public boolean notifyDrop(final DragSource src, final EventObject e, final DragData dragData) {
-		if (dragData instanceof GridDragData) {
-		    final GridDragData gridDragData = (GridDragData) dragData;
-		    final Record[] records = gridDragData.getSelections();
-		    for (int i = 0; i < records.length; i++) {
-			gridDropConfiguration.fire(records[i].getAsString(ID));
-		    }
-		}
-		return true;
-	    }
+        // TODO: put this in GDConf
+        grid.setEnableDragDrop(true);
+        grid.setDdGroup(gridDropConfiguration.getDdGroupId());
+        final DropTargetConfig dCfg = new DropTargetConfig();
+        dCfg.setTarget(true);
+        dCfg.setdDdGroup(gridDropConfiguration.getDdGroupId());
+        new DropTarget(grid, dCfg) {
+            @Override
+            public boolean notifyDrop(final DragSource src, final EventObject e, final DragData dragData) {
+                if (dragData instanceof GridDragData) {
+                    final GridDragData gridDragData = (GridDragData) dragData;
+                    final Record[] records = gridDragData.getSelections();
+                    for (Record record : records) {
+                        gridDropConfiguration.fire(record.getAsString(ID));
+                    }
+                }
+                return true;
+            }
 
-	    @Override
-	    public String notifyEnter(final DragSource src, final EventObject e, final DragData data) {
-		return "x-tree-drop-ok-append";
-	    }
+            @Override
+            public String notifyEnter(final DragSource src, final EventObject e, final DragData data) {
+                return "x-tree-drop-ok-append";
+            }
 
-	    @Override
-	    public String notifyOver(final DragSource src, final EventObject e, final DragData data) {
-		return "x-tree-drop-ok-append";
-	    }
-	};
+            @Override
+            public String notifyOver(final DragSource src, final EventObject e, final DragData data) {
+                return "x-tree-drop-ok-append";
+            }
+        };
     }
 
     private void createGrid(final String emptyText, final GridDragConfiguration gridDragConfiguration,
-	    final GridDropConfiguration gridDropConfiguration) {
-	grid = new GridPanel();
-	grid.setId(Ext.generateId());
-	final FieldDef[] fieldDefs = new FieldDef[] { new StringFieldDef(GROUP),
-		new StringFieldDef(GROUP_TOOLTIP_TITLE), new StringFieldDef(GROUP_TOOLTIP),
-		new StringFieldDef(GROUP_ENDICON_HTML), new StringFieldDef(ID), new StringFieldDef(ICON_HTML),
-		new StringFieldDef(TITLE), new StringFieldDef(TITLE_HTML), new StringFieldDef(END_ICON_HTML),
-		new StringFieldDef(TOOLTIPTITLE), new StringFieldDef(TOOLTIP) };
-	recordDef = new RecordDef(fieldDefs);
+            final GridDropConfiguration gridDropConfiguration) {
+        grid = new GridPanel();
+        grid.setId(Ext.generateId());
+        final FieldDef[] fieldDefs = new FieldDef[] { new StringFieldDef(GROUP),
+                new StringFieldDef(GROUP_TOOLTIP_TITLE), new StringFieldDef(GROUP_TOOLTIP),
+                new StringFieldDef(GROUP_ENDICON_HTML), new StringFieldDef(ID), new StringFieldDef(ICON_HTML),
+                new StringFieldDef(TITLE), new StringFieldDef(TITLE_HTML), new StringFieldDef(END_ICON_HTML),
+                new StringFieldDef(TOOLTIPTITLE), new StringFieldDef(TOOLTIP) };
+        recordDef = new RecordDef(fieldDefs);
 
-	final MemoryProxy proxy = new MemoryProxy(new Object[][] {});
+        final MemoryProxy proxy = new MemoryProxy(new Object[][] {});
 
-	final ArrayReader reader = new ArrayReader(1, recordDef);
-	store = new GroupingStore(proxy, reader);
-	store.setSortInfo(new SortState(GROUP, SortDir.ASC));
-	store.setGroupField(GROUP);
-	store.setGroupOnSort(true);
-	store.load();
-	grid.setStore(store);
+        final ArrayReader reader = new ArrayReader(1, recordDef);
+        store = new GroupingStore(proxy, reader);
+        store.setSortInfo(new SortState(GROUP, SortDir.ASC));
+        store.setGroupField(GROUP);
+        store.setGroupOnSort(true);
+        store.load();
+        grid.setStore(store);
 
-	// TODO: Change this with a method that modify the html
-	final String commonTootipHtmlRender = "<span ext:qtitle=\"{1}\" ext:qtip=\"{2}\">{0}</span>";
+        // TODO: Change this with a method that modify the html
+        final String commonTootipHtmlRender = "<span ext:qtitle=\"{1}\" ext:qtip=\"{2}\">{0}</span>";
 
-	final Renderer iconHtmlRenderer = new Renderer() {
-	    public String render(Object value, CellMetadata cellMetadata, Record record, int rowIndex, int colNum,
-		    Store store) {
-		return Format.format(commonTootipHtmlRender, new String[] { record.getAsString(ICON_HTML),
-			record.getAsString(TOOLTIPTITLE), record.getAsString(TOOLTIP) });
-	    }
-	};
+        final Renderer iconHtmlRenderer = new Renderer() {
+            public String render(Object value, CellMetadata cellMetadata, Record record, int rowIndex, int colNum,
+                    Store store) {
+                return Format.format(commonTootipHtmlRender, new String[] { record.getAsString(ICON_HTML),
+                        record.getAsString(TOOLTIPTITLE), record.getAsString(TOOLTIP) });
+            }
+        };
 
-	final Renderer titleHtmlRenderer = new Renderer() {
-	    public String render(Object value, CellMetadata cellMetadata, Record record, int rowIndex, int colNum,
-		    Store store) {
-		return Format.format(commonTootipHtmlRender, new String[] { record.getAsString(TITLE_HTML),
-			record.getAsString(TOOLTIPTITLE), record.getAsString(TOOLTIP) });
-	    }
-	};
+        final Renderer titleHtmlRenderer = new Renderer() {
+            public String render(Object value, CellMetadata cellMetadata, Record record, int rowIndex, int colNum,
+                    Store store) {
+                return Format.format(commonTootipHtmlRender, new String[] { record.getAsString(TITLE_HTML),
+                        record.getAsString(TOOLTIPTITLE), record.getAsString(TOOLTIP) });
+            }
+        };
 
-	final Renderer endIconHtmlRenderer = new Renderer() {
-	    public String render(Object value, CellMetadata cellMetadata, Record record, int rowIndex, int colNum,
-		    Store store) {
-		return Format.format(commonTootipHtmlRender, new String[] { record.getAsString(END_ICON_HTML),
-			record.getAsString(TOOLTIPTITLE), record.getAsString(TOOLTIP) });
-	    }
-	};
+        final Renderer endIconHtmlRenderer = new Renderer() {
+            public String render(Object value, CellMetadata cellMetadata, Record record, int rowIndex, int colNum,
+                    Store store) {
+                return Format.format(commonTootipHtmlRender, new String[] { record.getAsString(END_ICON_HTML),
+                        record.getAsString(TOOLTIPTITLE), record.getAsString(TOOLTIP) });
+            }
+        };
 
-	final ColumnConfig iconColumn = new ColumnConfig("Icon", ICON_HTML, 24, false, iconHtmlRenderer, ICON_HTML);
-	final ColumnConfig titleColumn = new ColumnConfig("Title", TITLE_HTML, 100, true, titleHtmlRenderer, TITLE_HTML);
-	final ColumnConfig endIconColumn = new ColumnConfig("EndIcon", END_ICON_HTML, 24, false, endIconHtmlRenderer,
-		END_ICON_HTML);
-	final ColumnConfig groupColumn = new ColumnConfig(GROUP, GROUP, 0);
-	// Fixed widths?
-	iconColumn.setFixed(true);
-	titleColumn.setFixed(false);
-	endIconColumn.setFixed(true);
-	final ArrayList<ColumnConfig> columnList = new ArrayList<ColumnConfig>();
-	columnList.add(iconColumn);
-	columnList.add(titleColumn);
-	if (grouped) {
-	    columnList.add(groupColumn);
-	}
-	if (withEndIcon) {
-	    columnList.add(endIconColumn);
-	}
-	ColumnConfig[] columnsConfigs = {};
-	columnsConfigs = columnList.toArray(columnsConfigs);
-	columnModel = new ColumnModel(columnsConfigs);
-	grid.setColumnModel(columnModel);
+        final ColumnConfig iconColumn = new ColumnConfig("Icon", ICON_HTML, 24, false, iconHtmlRenderer, ICON_HTML);
+        final ColumnConfig titleColumn = new ColumnConfig("Title", TITLE_HTML, 100, true, titleHtmlRenderer, TITLE_HTML);
+        final ColumnConfig endIconColumn = new ColumnConfig("EndIcon", END_ICON_HTML, 24, false, endIconHtmlRenderer,
+                END_ICON_HTML);
+        final ColumnConfig groupColumn = new ColumnConfig(GROUP, GROUP, 0);
+        // Fixed widths?
+        iconColumn.setFixed(true);
+        titleColumn.setFixed(false);
+        endIconColumn.setFixed(true);
+        final ArrayList<ColumnConfig> columnList = new ArrayList<ColumnConfig>();
+        columnList.add(iconColumn);
+        columnList.add(titleColumn);
+        if (grouped) {
+            columnList.add(groupColumn);
+        }
+        if (withEndIcon) {
+            columnList.add(endIconColumn);
+        }
+        ColumnConfig[] columnsConfigs = {};
+        columnsConfigs = columnList.toArray(columnsConfigs);
+        columnModel = new ColumnModel(columnsConfigs);
+        grid.setColumnModel(columnModel);
 
-	grid.setAutoExpandColumn(TITLE_HTML);
-	grid.setSelectionModel(new RowSelectionModel());
+        grid.setAutoExpandColumn(TITLE_HTML);
+        grid.setSelectionModel(new RowSelectionModel());
 
-	grid.addGridRowListener(new GridRowListener() {
-	    public void onRowClick(final GridPanel grid, final int rowIndex, final EventObject e) {
-		showMenu(rowIndex, e);
-		onClick(rowIndex);
-	    }
+        grid.addGridRowListener(new GridRowListener() {
+            public void onRowClick(final GridPanel grid, final int rowIndex, final EventObject e) {
+                // showMenu(rowIndex, e);
+                onClick(rowIndex);
+            }
 
-	    public void onRowContextMenu(final GridPanel grid, final int rowIndex, final EventObject e) {
-		showMenu(rowIndex, e);
-	    }
+            public void onRowContextMenu(final GridPanel grid, final int rowIndex, final EventObject e) {
+                showMenu(rowIndex, e);
+            }
 
-	    public void onRowDblClick(final GridPanel grid, final int rowIndex, final EventObject e) {
-		onDoubleClick(rowIndex);
-	    }
+            public void onRowDblClick(final GridPanel grid, final int rowIndex, final EventObject e) {
+                onDoubleClick(rowIndex);
+            }
 
-	    private void showMenu(final int rowIndex, final EventObject e) {
-		final Record record = store.getRecordAt(rowIndex);
-		final CustomMenu<T> menu = menuMap.get(record.getAsString(ID));
-		if (menu != null) {
-		    menu.showMenu(e);
-		}
-	    }
-	});
-	grid.stripeRows(true);
-	grid.setHideColumnHeader(true);
-	// Not sure if when doLayoutIfNeeded there are problems with size and
-	// column header
-	grid.setBorder(false);
-	grid.setAutoScroll(true);
+            private void showMenu(final int rowIndex, final EventObject e) {
+                final Record record = store.getRecordAt(rowIndex);
+                final CustomMenu<T> menu = menuMap.get(record.getAsString(ID));
+                if (menu != null) {
+                    menu.showMenu(e);
+                }
+            }
+        });
+        grid.stripeRows(true);
+        grid.setHideColumnHeader(true);
+        // Not sure if when doLayoutIfNeeded there are problems with size and
+        // column header
+        grid.setBorder(false);
+        grid.setAutoScroll(true);
 
-	if (grouped) {
-	    final GroupingView groupView = new GroupingView();
-	    groupView.setForceFit(true);
-	    final String groupEndIconHtmlTpl = "{[values.rs[0].data[\"" + GROUP_ENDICON_HTML + "\"]]}";
-	    // http://www.gwt-ext.com/forum/viewtopic.php?f=7&t=1388&p=6789&hilit=setGroupTextTpl#p6789
-	    if (withCounters) {
-		groupView.setGroupTextTpl("<span style=\"overflow: hidden;\" ext:qtip=\"{[values.rs[0].data[\""
-			+ GROUP_TOOLTIP + "\"]]}\">{[values.rs[0].data[\"" + GROUP
-			+ "\"]]} ({[values.rs.length]})</span>" + groupEndIconHtmlTpl);
-	    } else {
-		groupView.setGroupTextTpl("<span style=\"overflow: hidden;\" ext:qtip=\"{[values.rs[0].data[\""
-			+ GROUP_TOOLTIP + "\"]]}\">{[values.rs[0].data[\"" + GROUP + "\"]]}</span>"
-			+ groupEndIconHtmlTpl);
-	    }
-	    // Other sample with condition:
-	    // view.setGroupTextTpl("{text} ({[values.rs.length]}
-	    // {[values.rs.length
-	    // > 1 ? \"Items\" : \"Item\"]})");
-	    groupView.setHideGroupedColumn(true);
-	    groupView.setEmptyGroupText(emptyText);
-	    groupView.setShowGroupsText(true);
-	    groupView.setEnableNoGroups(true);
-	    groupView.setEmptyText(emptyText);
-	    groupView.setGroupByText(GROUP);
-	    groupView.setIgnoreAdd(true);
-	    groupView.setEnableGrouping(true);
-	    grid.setView(groupView);
-	} else {
-	    final GridView view = new GridView();
-	    view.setForceFit(true);
-	    grid.setView(view);
-	}
+        if (grouped) {
+            final GroupingView groupView = new GroupingView();
+            groupView.setForceFit(true);
+            final String groupEndIconHtmlTpl = "{[values.rs[0].data[\"" + GROUP_ENDICON_HTML + "\"]]}";
+            // http://www.gwt-ext.com/forum/viewtopic.php?f=7&t=1388&p=6789&hilit=setGroupTextTpl#p6789
+            if (withCounters) {
+                groupView.setGroupTextTpl("<span style=\"overflow: hidden;\" ext:qtip=\"{[values.rs[0].data[\""
+                        + GROUP_TOOLTIP + "\"]]}\">{[values.rs[0].data[\"" + GROUP
+                        + "\"]]} ({[values.rs.length]})</span>" + groupEndIconHtmlTpl);
+            } else {
+                groupView.setGroupTextTpl("<span style=\"overflow: hidden;\" ext:qtip=\"{[values.rs[0].data[\""
+                        + GROUP_TOOLTIP + "\"]]}\">{[values.rs[0].data[\"" + GROUP + "\"]]}</span>"
+                        + groupEndIconHtmlTpl);
+            }
+            // Other sample with condition:
+            // view.setGroupTextTpl("{text} ({[values.rs.length]}
+            // {[values.rs.length
+            // > 1 ? \"Items\" : \"Item\"]})");
+            groupView.setHideGroupedColumn(true);
+            groupView.setEmptyGroupText(emptyText);
+            groupView.setShowGroupsText(true);
+            groupView.setEnableNoGroups(true);
+            groupView.setEmptyText(emptyText);
+            groupView.setGroupByText(GROUP);
+            groupView.setIgnoreAdd(true);
+            groupView.setEnableGrouping(true);
+            grid.setView(groupView);
+        } else {
+            final GridView view = new GridView();
+            view.setForceFit(true);
+            grid.setView(view);
+        }
 
-	grid.setAutoWidth(true);
-	grid.setAutoHeight(true);
+        grid.setAutoWidth(true);
+        grid.setAutoHeight(true);
 
-	if (gridDropConfiguration != null) {
-	    configureDrop(gridDropConfiguration);
-	}
-	if (gridDragConfiguration != null) {
-	    configureDrag(gridDragConfiguration);
-	} else {
-	    grid.setDraggable(false);
-	}
-	super.add(grid);
+        if (gridDropConfiguration != null) {
+            configureDrop(gridDropConfiguration);
+        }
+        if (gridDragConfiguration != null) {
+            configureDrag(gridDragConfiguration);
+        } else {
+            grid.setDraggable(false);
+        }
+        super.add(grid);
     }
 
     private void onClick(final int rowIndex) {
-	final Record record = store.getRecordAt(rowIndex);
-	onClick.fire(record.getAsString(ID));
+        final Record record = store.getRecordAt(rowIndex);
+        onClick.fire(record.getAsString(ID));
     }
 
     private void onDoubleClick(final int rowIndex) {
-	final Record record = store.getRecordAt(rowIndex);
-	onDoubleClick.fire(record.getAsString(ID));
+        final Record record = store.getRecordAt(rowIndex);
+        onDoubleClick.fire(record.getAsString(ID));
     }
 
 }

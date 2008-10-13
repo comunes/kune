@@ -32,8 +32,6 @@ public interface ParticipationSummaryView extends View {
 
     void hide();
 
-    void setContentVisible(boolean visible);
-
     void setTheme(WsTheme oldTheme, WsTheme newTheme);
 
     void show();

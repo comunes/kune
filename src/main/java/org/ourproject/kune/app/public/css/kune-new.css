@@ -2,6 +2,10 @@
   background: #FFF none repeat scroll 0% 50%;
 }
 
+.k-blank-toolbar {
+  background: #FFF none repeat scroll 0% 50%;
+}
+
 .k-sitebar .kune-IconHyperlink {
   white-space: nowrap;
 }
@@ -61,6 +65,7 @@
 .k-entity-summary {
   border-left-color: #FFF;
   border-left-width: 5px;
+  border-down-width: 5px;
 }
 
 .k-entitytextlogo {
@@ -669,3 +674,7 @@
   text-decoration: underline;
   color: gray;
 }
+
+.x-tool-kmenu{background-position:0 -75px;}
+
+.x-tool-kmenu-over{background-position:-15px -75px;}

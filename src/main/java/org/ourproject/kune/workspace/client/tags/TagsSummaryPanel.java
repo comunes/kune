@@ -24,9 +24,10 @@ import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.TagResultDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.platf.client.ui.DropDownPanel;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
+import org.ourproject.kune.workspace.client.skel.SummaryPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.themes.WsTheme;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
@@ -36,7 +37,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class TagsSummaryPanel extends DropDownPanel implements TagsSummaryView {
+public class TagsSummaryPanel extends SummaryPanel implements TagsSummaryView {
 
     private final FlowPanel flowPanel;
     private final TagsSummaryPresenter presenter;
@@ -45,9 +46,8 @@ public class TagsSummaryPanel extends DropDownPanel implements TagsSummaryView {
 
     public TagsSummaryPanel(final TagsSummaryPresenter presenter, final I18nTranslationService i18n,
             final WorkspaceSkeleton ws) {
-        super(i18n.t("Tags"), true);
+        super(i18n.t("Tags"), i18n.t("Keywords or terms associated with this group"), ws);
         this.i18n = i18n;
-        setHeaderTitle(i18n.t("Keywords or terms associated with this group"));
         this.presenter = presenter;
         flowPanel = new FlowPanel();
         final VerticalPanel vp = new VerticalPanel();
@@ -55,9 +55,8 @@ public class TagsSummaryPanel extends DropDownPanel implements TagsSummaryView {
         vp.add(flowPanel);
         vp.setWidth("100%");
         vp.setCellWidth(flowPanel, "100%");
-        super.setContent(vp);
-        super.setBorderStylePrimaryName("k-dropdownouter-tags");
-        addStyleName("kune-Margin-Medium-t");
+        super.add(vp);
+        // super.setBorderStylePrimaryName("k-dropdownouter-tags");
         flowPanel.addStyleName("kune-Margin-Small-trbl");
         ws.addInSummary(this);
     }
@@ -88,5 +87,9 @@ public class TagsSummaryPanel extends DropDownPanel implements TagsSummaryView {
                 }
             }
         });
+    }
+
+    public void setTheme(WsTheme oldTheme, WsTheme newTheme) {
+        // TODO Auto-generated method stub
     }
 }
