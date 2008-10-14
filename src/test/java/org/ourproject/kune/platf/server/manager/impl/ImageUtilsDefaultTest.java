@@ -131,8 +131,8 @@ public class ImageUtilsDefaultTest {
     public void testSize() throws MagickException {
         for (String image : images) {
             Dimension dimension = ImageUtilsDefault.getDimension(IMG_PATH + image);
-            assertEquals(1600, (int) dimension.getHeight());
-            assertEquals(1200, (int) dimension.getWidth());
+            assertEquals(400, (int) dimension.getHeight());
+            assertEquals(300, (int) dimension.getWidth());
         }
     }
 
