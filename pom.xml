@@ -84,6 +84,11 @@
       <artifactId>suco</artifactId>
       <version>0.5.06</version>
     </dependency>
+<dependency>
+  <groupId>jmagick</groupId>
+  <artifactId>jmagick</artifactId>
+  <version>6.2.4</version>
+</dependency>
 
     <!-- xmpp -->
     <dependency>
