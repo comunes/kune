@@ -13,22 +13,26 @@ public class FileDownloadUtils {
     private final Session session;
 
     public FileDownloadUtils(final Session session) {
-	this.session = session;
+        this.session = session;
     }
 
     public void downloadFile(final StateToken token) {
-	final String url = calculateUrl(token, true);
-	DOM.setElementAttribute(RootPanel.get("__download").getElement(), "src", url);
+        final String url = calculateUrl(token, true);
+        DOM.setElementAttribute(RootPanel.get("__download").getElement(), "src", url);
+    }
+
+    public String getImageResizedUrl(final StateToken token, ImageSize imageSize) {
+        return calculateUrl(token, false) + "&" + FileParams.IMGSIZE + "=" + imageSize;
     }
 
     public String getImageUrl(final StateToken token) {
-	return calculateUrl(token, false);
+        return calculateUrl(token, false);
     }
 
     private String calculateUrl(final StateToken token, final boolean download) {
-	final String url = DOWNLOADSERVLET + "?token=" + token + "&hash=" + session.getUserHash() + "&download="
-		+ (download ? "true" : "false");
-	return url;
+        final String url = DOWNLOADSERVLET + "?" + FileParams.TOKEN + "=" + token + "&" + FileParams.HASH + "="
+                + session.getUserHash() + "&" + FileParams.DOWNLOAD + "=" + (download ? "true" : "false");
+        return url;
     }
 
 }

@@ -24,7 +24,7 @@ import org.apache.commons.logging.LogFactory;
 import org.ourproject.kune.docs.server.DocumentServerTool;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.platf.client.ui.download.FileConstants;
+import org.ourproject.kune.platf.client.ui.download.ImageSize;
 import org.ourproject.kune.platf.client.ui.upload.FileUploader;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.access.AccessRol;
@@ -70,7 +70,7 @@ public class FileUploadManager extends HttpServlet {
 
     @Override
     @SuppressWarnings( { "unchecked", "deprecation" })
-    protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,
+    protected void doPost(final HttpServletRequest req, final HttpServletResponse response) throws ServletException,
             IOException {
 
         JSONObject jsonResponse = createSuccessResponse();
@@ -122,10 +122,13 @@ public class FileUploadManager extends HttpServlet {
             e.printStackTrace();
         }
 
-        final Writer w = new OutputStreamWriter(resp.getOutputStream());
+        final Writer w = new OutputStreamWriter(response.getOutputStream());
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html");
+        // response.setContentType("text/json");
         w.write(jsonResponse.toString());
         w.close();
-        resp.setStatus(HttpServletResponse.SC_OK);
+        response.setStatus(HttpServletResponse.SC_OK);
     }
 
     @Authenticated
@@ -205,9 +208,9 @@ public class FileUploadManager extends HttpServlet {
             String fileOrig = absDir + filename;
             String withoutExtension = FileUtils.getFileNameWithoutExtension(filename, extension);
 
-            String resizeName = absDir + withoutExtension + FileConstants.SIZED_SUFFIX + extension;
-            String thumbName = absDir + withoutExtension + FileConstants.THUMB_SUFFIX + extension;
-            String iconName = absDir + withoutExtension + FileConstants.ICON_SUFFIX + extension;
+            String resizeName = absDir + withoutExtension + "." + ImageSize.sized + "." + extension;
+            String thumbName = absDir + withoutExtension + "." + ImageSize.thumb + "." + extension;
+            String iconName = absDir + withoutExtension + "." + ImageSize.ico + "." + extension;
 
             int resizeWidth = Integer.parseInt(kuneProperties.get(KuneProperties.IMAGES_RESIZEWIDTH));
             int thumbSize = Integer.parseInt(kuneProperties.get(KuneProperties.IMAGES_THUMBSIZE));

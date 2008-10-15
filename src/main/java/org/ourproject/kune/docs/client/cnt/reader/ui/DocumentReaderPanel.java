@@ -23,20 +23,47 @@ package org.ourproject.kune.docs.client.cnt.reader.ui;
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderView;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
+import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.Widget;
 
 public class DocumentReaderPanel implements DocumentReaderView {
 
     private final WorkspaceSkeleton ws;
 
     public DocumentReaderPanel(final WorkspaceSkeleton ws) {
-	this.ws = ws;
+        this.ws = ws;
     }
 
     public void setContent(final String content) {
-	final HTML html = new HTML(content);
-	html.setStyleName("kune-Content-Main");
-	html.addStyleName("kune-Margin-7-trbl");
-	ws.getEntityWorkspace().setContent(html);
+        final HTML html = new HTML(content);
+        setDefStyle(html);
+        ws.getEntityWorkspace().setContent(html);
+    }
+
+    public void showImage(String imageUrl, String imageResizedUrl) {
+        final Image imgOrig = new Image(imageUrl);
+        final Image imgResized = new Image(imageResizedUrl);
+        setDefStyle(imgOrig);
+        setDefStyle(imgResized);
+        imgOrig.addStyleName("kune-pointer");
+        imgResized.addStyleName("kune-pointer");
+        imgResized.addClickListener(new ClickListener() {
+            public void onClick(Widget sender) {
+                ws.getEntityWorkspace().setContent(imgOrig);
+            }
+        });
+        imgOrig.addClickListener(new ClickListener() {
+            public void onClick(Widget sender) {
+                ws.getEntityWorkspace().setContent(imgResized);
+            }
+        });
+        ws.getEntityWorkspace().setContent(imgResized);
+    }
+
+    private void setDefStyle(final Widget widget) {
+        widget.setStyleName("kune-Content-Main");
+        widget.addStyleName("kune-Margin-7-trbl");
     }
 }

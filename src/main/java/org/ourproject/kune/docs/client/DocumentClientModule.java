@@ -58,77 +58,84 @@ public class DocumentClientModule extends AbstractModule {
     @Override
     public void onLoad() {
 
-	register(ToolGroup.class, new Factory<DocumentClientTool>(DocumentClientTool.class) {
-	    public DocumentClientTool create() {
-		$(DocumentClientActions.class);
-		return new DocumentClientTool($(I18nUITranslationService.class), $(ToolSelector.class),
-			$(WsThemePresenter.class), $(WorkspaceSkeleton.class), $$(DocumentContext.class),
-			$$(ContentServiceAsync.class), $(ContentActionRegistry.class),
-			$(DragDropContentRegistry.class), $(ContentIconsRegistry.class));
-	    }
-	});
+        register(ToolGroup.class, new Factory<DocumentClientTool>(DocumentClientTool.class) {
+            @Override
+            public DocumentClientTool create() {
+                $(DocumentClientActions.class);
+                return new DocumentClientTool($(I18nUITranslationService.class), $(ToolSelector.class),
+                        $(WsThemePresenter.class), $(WorkspaceSkeleton.class), $$(DocumentContext.class),
+                        $$(ContentServiceAsync.class), $(ContentActionRegistry.class),
+                        $(DragDropContentRegistry.class), $(ContentIconsRegistry.class));
+            }
+        });
 
-	register(ToolGroup.class, new Factory<DocumentClientActions>(DocumentClientActions.class) {
-	    public DocumentClientActions create() {
-		return new DocumentClientActions($(I18nUITranslationService.class), $(ContextNavigator.class),
-			$(Session.class), $(StateManager.class), $$(ContentServiceAsync.class),
-			$$(GroupServiceAsync.class), $$(FileUploader.class), $(ContentActionRegistry.class),
-			$(ContextActionRegistry.class), $$(FileDownloadUtils.class), $(EntityLogo.class),
-			$$(TextEditor.class), $(KuneErrorHandler.class), $(DocumentContent.class));
-	    }
-	});
+        register(ToolGroup.class, new Factory<DocumentClientActions>(DocumentClientActions.class) {
+            @Override
+            public DocumentClientActions create() {
+                return new DocumentClientActions($(I18nUITranslationService.class), $(ContextNavigator.class),
+                        $(Session.class), $(StateManager.class), $$(ContentServiceAsync.class),
+                        $$(GroupServiceAsync.class), $$(FileUploader.class), $(ContentActionRegistry.class),
+                        $(ContextActionRegistry.class), $$(FileDownloadUtils.class), $(EntityLogo.class),
+                        $$(TextEditor.class), $(KuneErrorHandler.class), $(DocumentContent.class));
+            }
+        });
 
-	register(ToolGroup.class, new Factory<DocumentContent>(DocumentContent.class) {
-	    public DocumentContent create() {
-		final ActionToolbarPanel<StateToken> contentNavigatorToolbar = new ActionToolbarPanel<StateToken>(
-			ActionToolbarPanel.Position.content, $$(ActionManager.class), $(WorkspaceSkeleton.class));
-		final ActionToolbar<StateToken> toolbar = new ActionToolbarPresenter<StateToken>(
-			contentNavigatorToolbar);
+        register(ToolGroup.class, new Factory<DocumentContent>(DocumentContent.class) {
+            @Override
+            public DocumentContent create() {
+                final ActionToolbarPanel<StateToken> contentNavigatorToolbar = new ActionToolbarPanel<StateToken>(
+                        ActionToolbarPanel.Position.content, $$(ActionManager.class), $(WorkspaceSkeleton.class));
+                final ActionToolbar<StateToken> toolbar = new ActionToolbarPresenter<StateToken>(
+                        contentNavigatorToolbar);
 
-		final DocumentContentPresenter presenter = new DocumentContentPresenter($(StateManager.class),
-			$(Session.class), $$(DocumentReader.class), $$(TextEditor.class), $$(FolderViewer.class),
-			toolbar, $(ContentActionRegistry.class));
-		final DocumentContentPanel panel = new DocumentContentPanel($(WorkspaceSkeleton.class));
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
+                final DocumentContentPresenter presenter = new DocumentContentPresenter($(StateManager.class),
+                        $(Session.class), $$(DocumentReader.class), $$(TextEditor.class), $$(FolderViewer.class),
+                        toolbar, $(ContentActionRegistry.class));
+                final DocumentContentPanel panel = new DocumentContentPanel($(WorkspaceSkeleton.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
 
-	register(Singleton.class, new Factory<AdminContext>(AdminContext.class) {
-	    public AdminContext create() {
-		final AdminContextPresenter presenter = new AdminContextPresenter($(Session.class),
-			$(StateManager.class), $$(TagsSummary.class), $$(ContentServiceAsync.class),
-			$(EntityTitle.class), $(EntitySubTitle.class));
-		final AdminContextView view = new AdminContextPanel(presenter, $(I18nUITranslationService.class));
-		presenter.init(view);
-		return presenter;
-	    }
-	});
+        register(Singleton.class, new Factory<AdminContext>(AdminContext.class) {
+            @Override
+            public AdminContext create() {
+                final AdminContextPresenter presenter = new AdminContextPresenter($(Session.class),
+                        $(StateManager.class), $$(TagsSummary.class), $$(ContentServiceAsync.class),
+                        $(EntityTitle.class), $(EntitySubTitle.class));
+                final AdminContextView view = new AdminContextPanel(presenter, $(I18nUITranslationService.class));
+                presenter.init(view);
+                return presenter;
+            }
+        });
 
-	register(ToolGroup.class, new Factory<DocumentContext>(DocumentContext.class) {
-	    public DocumentContext create() {
-		final DocumentContextPresenter presenter = new DocumentContextPresenter($(StateManager.class),
-			$$(ContextNavigator.class), $$(AdminContext.class));
-		final DocumentContextPanel panel = new DocumentContextPanel($(WorkspaceSkeleton.class));
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
+        register(ToolGroup.class, new Factory<DocumentContext>(DocumentContext.class) {
+            @Override
+            public DocumentContext create() {
+                final DocumentContextPresenter presenter = new DocumentContextPresenter($(StateManager.class),
+                        $$(ContextNavigator.class), $$(AdminContext.class));
+                final DocumentContextPanel panel = new DocumentContextPanel($(WorkspaceSkeleton.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
 
-	register(Singleton.class, new Factory<DocumentReader>(DocumentReader.class) {
-	    public DocumentReader create() {
-		final DocumentReaderView view = new DocumentReaderPanel($(WorkspaceSkeleton.class));
-		final DocumentReaderPresenter presenter = new DocumentReaderPresenter($(Session.class), view);
-		return presenter;
-	    }
-	});
+        register(Singleton.class, new Factory<DocumentReader>(DocumentReader.class) {
+            @Override
+            public DocumentReader create() {
+                final DocumentReaderView view = new DocumentReaderPanel($(WorkspaceSkeleton.class));
+                final DocumentReaderPresenter presenter = new DocumentReaderPresenter(view, $$(FileDownloadUtils.class));
+                return presenter;
+            }
+        });
 
-	register(Singleton.class, new Factory<FolderViewer>(FolderViewer.class) {
-	    public FolderViewer create() {
-		final FolderViewerView view = new FolderViewerPanel();
-		final FolderViewerPresenter presenter = new FolderViewerPresenter(view);
-		return presenter;
-	    }
-	});
+        register(Singleton.class, new Factory<FolderViewer>(FolderViewer.class) {
+            @Override
+            public FolderViewer create() {
+                final FolderViewerView view = new FolderViewerPanel();
+                final FolderViewerPresenter presenter = new FolderViewerPresenter(view);
+                return presenter;
+            }
+        });
     }
 }

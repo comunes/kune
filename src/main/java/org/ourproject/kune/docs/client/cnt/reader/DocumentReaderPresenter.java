@@ -24,15 +24,18 @@ import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
+import org.ourproject.kune.platf.client.ui.download.ImageSize;
+
+import com.calclab.suco.client.ioc.Provider;
 
 public class DocumentReaderPresenter implements DocumentReader {
     private final DocumentReaderView view;
-    private final Session session;
+    private final Provider<FileDownloadUtils> downloadProvider;
 
-    public DocumentReaderPresenter(final Session session, final DocumentReaderView view) {
-        this.session = session;
+    public DocumentReaderPresenter(final DocumentReaderView view, final Provider<FileDownloadUtils> downloadProvider) {
         this.view = view;
+        this.downloadProvider = downloadProvider;
     }
 
     public View getView() {
@@ -43,10 +46,10 @@ public class DocumentReaderPresenter implements DocumentReader {
             final BasicMimeTypeDTO mimeType) {
         if (typeId.equals(DocumentClientTool.TYPE_UPLOADEDFILE)) {
             if (mimeType != null) {
-                final String url = "/kune/servlets/FileDownloadManager?token=" + token + "&hash="
-                        + session.getUserHash();
+                FileDownloadUtils fileDownloadUtils = downloadProvider.get();
                 if (mimeType.getType().equals("image")) {
-                    view.setContent("<img src=\"" + url + "\">");
+                    view.showImage(fileDownloadUtils.getImageUrl(token), fileDownloadUtils.getImageResizedUrl(token,
+                            ImageSize.sized));
                 } else if (mimeType.toString().equals("text/plain") || mimeType.toString().equals("application/pdf")) {
                     view.setContent(text);
                 } else {

@@ -26,4 +26,6 @@ public interface DocumentReaderView extends View {
 
     public void setContent(String content);
 
+    public void showImage(String imageUrl, String imageResizedUrl);
+
 }
