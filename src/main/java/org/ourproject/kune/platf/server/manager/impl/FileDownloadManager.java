@@ -80,7 +80,11 @@ public class FileDownloadManager extends HttpServlet {
         if (mimeType.getType().equals("image")) {
             String imgsizePrefix = imgsize == null ? "" : "." + imgsize;
             String filenameWithoutExtension = FileUtils.getFileNameWithoutExtension(filename, extension);
-            filename = filenameWithoutExtension + imgsizePrefix + extension;
+            String filenameResized = filenameWithoutExtension + imgsizePrefix + extension;
+            if (new File(absDir + filenameResized).exists()) {
+                // thumb can fail
+                filename = filenameResized;
+            }
         }
 
         final String absFilename = absDir + filename;

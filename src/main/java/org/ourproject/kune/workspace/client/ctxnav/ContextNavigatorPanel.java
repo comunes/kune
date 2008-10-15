@@ -90,6 +90,10 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
             child.setHref("#" + item.getStateToken().toString());
             child.setAllowDrag(item.isDraggable());
             child.setAllowDrop(item.isDroppable());
+            final String tooltip = item.getTooltip();
+            if (tooltip != null) {
+                child.setTooltip(tooltip);
+            }
             createItemMenu(nodeId, item.getActionCollection());
             final TreeNode parent = treePanel.getNodeById(item.getParentId());
             if (parent != null) {

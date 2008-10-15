@@ -28,12 +28,26 @@ import com.gwtext.client.widgets.ToolTip;
 
 public class KuneUiUtils {
 
-    public static void setQuickTip(final Widget widget, final String tip) {
-        setQuickTip(widget.getElement(), tip);
+    public static String genQuickTipLabel(final String labelText, final String tipTitle, final String tipText,
+            final AbstractImagePrototype icon) {
+        // FIXME: get this from emite
+        String tipHtml = "<span style=\"vertical-align: middle;\" ext:qtip=\"" + tipText + "\"";
+        if (tipTitle != null && tipTitle.length() > 0) {
+            tipHtml += " ext:qtitle=\"" + tipTitle + "\"";
+        }
+        tipHtml += ">";
+        tipHtml += labelText;
+        tipHtml += "&nbsp;";
+        Image iconImg = new Image();
+        icon.applyTo(iconImg);
+        setQuickTip(iconImg, tipText, tipTitle);
+        tipHtml += iconImg.toString();
+        tipHtml += "</span>";
+        return tipHtml;
     }
 
-    public static void setQuickTip(final Widget widget, final String tip, final String tipTitle) {
-        setQuickTip(widget.getElement(), tip, tipTitle);
+    public static String genQuickTipWithImage(String imageResizedUrl) {
+        return new Image(imageResizedUrl).toString();
     }
 
     /**
@@ -68,22 +82,12 @@ public class KuneUiUtils {
         }
     }
 
-    public static String genQuickTipLabel(final String labelText, final String tipTitle, final String tipText,
-            final AbstractImagePrototype icon) {
-        // FIXME: get this from emite
-        String tipHtml = "<span style=\"vertical-align: middle;\" ext:qtip=\"" + tipText + "\"";
-        if (tipTitle != null && tipTitle.length() > 0) {
-            tipHtml += " ext:qtitle=\"" + tipTitle + "\"";
-        }
-        tipHtml += ">";
-        tipHtml += labelText;
-        tipHtml += "&nbsp;";
-        Image iconImg = new Image();
-        icon.applyTo(iconImg);
-        setQuickTip(iconImg, tipText, tipTitle);
-        tipHtml += iconImg.toString();
-        tipHtml += "</span>";
-        return tipHtml;
+    public static void setQuickTip(final Widget widget, final String tip) {
+        setQuickTip(widget.getElement(), tip);
+    }
+
+    public static void setQuickTip(final Widget widget, final String tip, final String tipTitle) {
+        setQuickTip(widget.getElement(), tip, tipTitle);
     }
 
 }

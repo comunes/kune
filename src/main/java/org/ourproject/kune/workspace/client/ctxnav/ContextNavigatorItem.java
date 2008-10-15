@@ -9,6 +9,7 @@ public class ContextNavigatorItem {
     private final String parentId;
     private final String iconUrl;
     private final String text;
+    private final String tooltip;
     private final ContentStatusDTO contentStatusDTO;
     private final StateToken token;
     private final ActionItemCollection<StateToken> actionCollection;
@@ -16,53 +17,58 @@ public class ContextNavigatorItem {
     private final boolean allowDrop;
 
     public ContextNavigatorItem(final String id, final String parentId, final String iconUrl, final String text,
-	    final ContentStatusDTO contentStatusDTO, final StateToken token, final boolean allowDrag,
-	    final boolean allowDrop, final ActionItemCollection<StateToken> actionCollection) {
-	this.id = id;
-	this.parentId = parentId;
-	this.iconUrl = iconUrl;
-	this.text = text;
-	this.contentStatusDTO = contentStatusDTO;
-	this.token = token;
-	this.allowDrag = allowDrag;
-	this.allowDrop = allowDrop;
-	this.actionCollection = actionCollection;
+            final String tooltip, final ContentStatusDTO contentStatusDTO, final StateToken token,
+            final boolean allowDrag, final boolean allowDrop, final ActionItemCollection<StateToken> actionCollection) {
+        this.id = id;
+        this.parentId = parentId;
+        this.iconUrl = iconUrl;
+        this.text = text;
+        this.tooltip = tooltip;
+        this.contentStatusDTO = contentStatusDTO;
+        this.token = token;
+        this.allowDrag = allowDrag;
+        this.allowDrop = allowDrop;
+        this.actionCollection = actionCollection;
     }
 
     public ActionItemCollection<StateToken> getActionCollection() {
-	return actionCollection;
+        return actionCollection;
     }
 
     public ContentStatusDTO getContentStatus() {
-	return contentStatusDTO;
+        return contentStatusDTO;
     }
 
     public String getIconUrl() {
-	return iconUrl;
+        return iconUrl;
     }
 
     public String getId() {
-	return id;
+        return id;
     }
 
     public String getParentId() {
-	return parentId;
+        return parentId;
     }
 
     public StateToken getStateToken() {
-	return token;
+        return token;
     }
 
     public String getText() {
-	return text;
+        return text;
+    }
+
+    public String getTooltip() {
+        return tooltip;
     }
 
     public boolean isDraggable() {
-	return allowDrag;
+        return allowDrag;
     }
 
     public boolean isDroppable() {
-	return allowDrop;
+        return allowDrop;
     }
 
 }
