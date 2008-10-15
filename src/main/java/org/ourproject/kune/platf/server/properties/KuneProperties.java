@@ -32,6 +32,10 @@ public interface KuneProperties {
     public String UPLOAD_GALLERY_PERMITTED_EXTS = "kune.upload.gallerypermittedextensions";
     public String UPLOAD_MAX_FILE_SIZE = "kune.upload.maxfilesizeinmegas";
     public String UPLOAD_LOCATION = "kune.upload.location";
+    public String IMAGES_RESIZEWIDTH = "kune.images.resizewidth";
+    public String IMAGES_THUMBSIZE = "kune.images.thumbsize";
+    public String IMAGES_CROPSIZE = "kune.images.cropsize";
+    public String IMAGES_ICONSIZE = "kune.images.iconsize";
 
     public String get(String key);
 

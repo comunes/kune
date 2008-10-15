@@ -11,7 +11,12 @@ public class ImageUtilsDefault {
 
     /**
      * http://en.wikipedia.org/wiki/Thumbnail
+     * 
      */
+    public static void createThumb(String fileOrig, String fileDest, int cropDimension) throws MagickException {
+        createThumb(fileOrig, fileDest, cropDimension, cropDimension);
+    }
+
     public static void createThumb(String fileOrig, String fileDest, int thumbDimension, int cropDimension)
             throws MagickException {
         if (thumbDimension < cropDimension) {
@@ -21,10 +26,10 @@ public class ImageUtilsDefault {
         Dimension origDimension = imageOrig.getDimension();
         int origHeight = origDimension.height;
         int origWidth = origDimension.width;
-        Dimension proportionalDim = calculateProportionalDim(origWidth, origHeight, thumbDimension);
+        Dimension proportionalDim = calculatePropDim(origWidth, origHeight, thumbDimension, true);
+        MagickImage scaled = scaleImage(imageOrig, proportionalDim.width, proportionalDim.height);
         int x = calculateCenteredCoordinate(proportionalDim.width, cropDimension);
         int y = calculateCenteredCoordinate(proportionalDim.height, cropDimension);
-        MagickImage scaled = scaleImage(imageOrig, proportionalDim.width, proportionalDim.height);
         cropImage(scaled, fileDest, x, y, cropDimension, cropDimension);
     }
 
@@ -53,15 +58,32 @@ public class ImageUtilsDefault {
         return scaleImage(imageOrig, fileDest, width, height);
     }
 
+    public static boolean scaleImageToMax(String fileOrig, String fileDest, int maxSize) throws MagickException {
+        MagickImage imageOrig = createImage(fileOrig);
+        Dimension origDimension = imageOrig.getDimension();
+        int origHeight = origDimension.height;
+        int origWidth = origDimension.width;
+        Dimension proportionalDim = calculatePropDim(origWidth, origHeight, maxSize, false);
+        MagickImage scaled = scaleImage(imageOrig, proportionalDim.width, proportionalDim.height);
+
+        return writeImage(scaled, fileDest);
+    }
+
     static int calculateCenteredCoordinate(int size, int crop) {
         int i = (size - crop) / 2;
         return i < 0 ? 0 : i;
     }
 
-    static Dimension calculateProportionalDim(int origWidth, int origHeight, int maxSize) {
+    static Dimension calculatePropDim(int origWidth, int origHeight, int maxSize) {
+        return calculatePropDim(origWidth, origHeight, maxSize, true);
+    }
+
+    static Dimension calculatePropDim(int origWidth, int origHeight, int maxSize, boolean toShortest) {
         boolean higher = origHeight > origWidth;
-        double height = higher ? (origHeight * maxSize / origWidth) : maxSize;
-        double width = !higher ? (origWidth * maxSize / origHeight) : maxSize;
+        int propHeight = origHeight * maxSize / origWidth;
+        int propWidth = origWidth * maxSize / origHeight;
+        double height = toShortest ? (higher ? propHeight : maxSize) : (higher ? maxSize : propHeight);
+        double width = toShortest ? (!higher ? propWidth : maxSize) : (!higher ? maxSize : propWidth);
         if ((higher && origHeight <= maxSize) || (!higher && origWidth <= maxSize)) {
             return new Dimension(origWidth, origHeight);
         }

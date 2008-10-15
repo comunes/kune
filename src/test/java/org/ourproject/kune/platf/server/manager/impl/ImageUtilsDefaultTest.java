@@ -13,9 +13,14 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- * UnsatisfiedLinkError: problem with jmagick installation (in debian, apt-get
- * install libjmagick6-jni, and add LD_LIBRARY_PATH=/usr/lib/jni/ to this test
- * environment params
+ * If you get a UnsatisfiedLinkError this is a problem with jmagick installation
+ * (in debian, apt-get install libjmagick6-jni, and add
+ * LD_LIBRARY_PATH=/usr/lib/jni/ to this test environment params or sudo ln -s
+ * /usr/lib/jni/libJMagick.so /usr/lib/libJMagick.so)
+ * 
+ * See the output of:
+ * System.out.println(System.getProperty("java.library.path")); to see when is
+ * expecting the .so/.dll
  */
 public class ImageUtilsDefaultTest {
 
@@ -56,7 +61,7 @@ public class ImageUtilsDefaultTest {
 
     @Test
     public void testProportionalHigher() {
-        Dimension proportionalDim = ImageUtilsDefault.calculateProportionalDim(500, 1000, 100);
+        Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(500, 1000, 100);
         assertEquals(100, proportionalDim.width);
         assertEquals(200, proportionalDim.height);
         assertEquals(0, ImageUtilsDefault.calculateCenteredCoordinate(proportionalDim.width, 100));
@@ -65,7 +70,7 @@ public class ImageUtilsDefaultTest {
 
     @Test
     public void testProportionalHigherLikeSamples() {
-        Dimension proportionalDim = ImageUtilsDefault.calculateProportionalDim(1200, 1600, 100);
+        Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(1200, 1600, 100);
         assertEquals(100, proportionalDim.width);
         assertEquals(133, proportionalDim.height);
         assertEquals(0, ImageUtilsDefault.calculateCenteredCoordinate(proportionalDim.width, 100));
@@ -74,7 +79,7 @@ public class ImageUtilsDefaultTest {
 
     @Test
     public void testProportionalHigherSame() {
-        Dimension proportionalDim = ImageUtilsDefault.calculateProportionalDim(20, 100, 100);
+        Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(20, 100, 100);
         assertEquals(20, proportionalDim.width);
         assertEquals(100, proportionalDim.height);
         assertEquals(0, ImageUtilsDefault.calculateCenteredCoordinate(proportionalDim.width, 100));
@@ -83,7 +88,7 @@ public class ImageUtilsDefaultTest {
 
     @Test
     public void testProportionalHigherSmaller() {
-        Dimension proportionalDim = ImageUtilsDefault.calculateProportionalDim(20, 10, 100);
+        Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(20, 10, 100);
         assertEquals(20, proportionalDim.width);
         assertEquals(10, proportionalDim.height);
         assertEquals(0, ImageUtilsDefault.calculateCenteredCoordinate(proportionalDim.width, 100));
@@ -91,8 +96,36 @@ public class ImageUtilsDefaultTest {
     }
 
     @Test
+    public void testProportionalToBiggerNormal() {
+        Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(600, 300, 300, false);
+        assertEquals(300, proportionalDim.width);
+        assertEquals(150, proportionalDim.height);
+    }
+
+    @Test
+    public void testProportionalToBiggerSame() {
+        Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(600, 300, 600, false);
+        assertEquals(600, proportionalDim.width);
+        assertEquals(300, proportionalDim.height);
+    }
+
+    @Test
+    public void testProportionalToBiggerSmaller() {
+        Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(600, 300, 700, false);
+        assertEquals(600, proportionalDim.width);
+        assertEquals(300, proportionalDim.height);
+    }
+
+    @Test
+    public void testProportionalToBiggerWider() {
+        Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(300, 600, 200, false);
+        assertEquals(100, proportionalDim.width);
+        assertEquals(200, proportionalDim.height);
+    }
+
+    @Test
     public void testProportionalWider() {
-        Dimension proportionalDim = ImageUtilsDefault.calculateProportionalDim(1000, 500, 100);
+        Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(1000, 500, 100);
         assertEquals(200, proportionalDim.width);
         assertEquals(100, proportionalDim.height);
         assertEquals(50, ImageUtilsDefault.calculateCenteredCoordinate(proportionalDim.width, 100));
@@ -101,7 +134,7 @@ public class ImageUtilsDefaultTest {
 
     @Test
     public void testProportionalWiderSame() {
-        Dimension proportionalDim = ImageUtilsDefault.calculateProportionalDim(100, 20, 100);
+        Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(100, 20, 100);
         assertEquals(100, proportionalDim.width);
         assertEquals(20, proportionalDim.height);
         assertEquals(0, ImageUtilsDefault.calculateCenteredCoordinate(proportionalDim.width, 100));
@@ -110,7 +143,7 @@ public class ImageUtilsDefaultTest {
 
     @Test
     public void testProportionalWiderSmaller() {
-        Dimension proportionalDim = ImageUtilsDefault.calculateProportionalDim(5, 10, 100);
+        Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(5, 10, 100);
         assertEquals(5, proportionalDim.width);
         assertEquals(10, proportionalDim.height);
         assertEquals(0, ImageUtilsDefault.calculateCenteredCoordinate(proportionalDim.width, 100));

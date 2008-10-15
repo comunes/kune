@@ -57,6 +57,13 @@ you can use other location (see kune.properties)
  
 - Install and run a openfire jabber server (see Appendix B for proper configuration of openfire) or ejabberd.
 
+- Install jmagick-jni. In debian: apt-get install libjmagick6-jni (version 6.2.6-0) also you need or:
+  sudo ln -s /usr/lib/jni/libJMagick.so /usr/lib/libJMagick.so
+or
+  set LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/jni in your test and in your webserver. 
+
+in Windows maybe (not checked) you need to do something similar (copy the jmagick .dll of the same version in the Windows directory)
+
 - Run jetty:
   mvn jetty:run -Dliquibase.should.run=false
 once started (and initialized the db), you can stop a run jetty with de db migrator to insert initial data and migrate:
