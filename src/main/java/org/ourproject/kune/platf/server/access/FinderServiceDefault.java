@@ -72,6 +72,14 @@ public class FinderServiceDefault implements FinderService {
         return null;
     }
 
+    public Comment getComment(final Long commentId) throws ContentNotFoundException {
+        try {
+            return commentManager.find(commentId);
+        } catch (final PersistenceException e) {
+            throw new ContentNotFoundException();
+        }
+    }
+
     public Content getContent(final Long contentId) throws ContentNotFoundException {
         try {
             return contentManager.find(contentId);
@@ -91,7 +99,8 @@ public class FinderServiceDefault implements FinderService {
         } else if (token.hasGroupAndTool()) {
             return findByRootOnGroup(token.getGroup(), token.getTool());
         } else if (token.hasGroup()) {
-            return findDefaultOfGroup(token.getGroup());
+            Content defaultOfGroup = findDefaultOfGroup(token.getGroup());
+            return defaultOfGroup == null ? Content.NO_CONTENT : defaultOfGroup;
         } else if (token.hasNothing()) {
             return findDefaultOfGroup(defaultGroup);
         } else {
@@ -102,14 +111,6 @@ public class FinderServiceDefault implements FinderService {
     public Container getFolder(final Long folderId) throws ContentNotFoundException {
         try {
             return containerManager.find(folderId);
-        } catch (final PersistenceException e) {
-            throw new ContentNotFoundException();
-        }
-    }
-
-    public Comment getComment(final Long commentId) throws ContentNotFoundException {
-        try {
-            return commentManager.find(commentId);
         } catch (final PersistenceException e) {
             throw new ContentNotFoundException();
         }

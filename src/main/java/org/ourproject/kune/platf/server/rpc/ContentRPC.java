@@ -93,133 +93,133 @@ public class ContentRPC implements ContentService, RPC {
 
     @Inject
     public ContentRPC(final Provider<UserSession> userSessionProvider, final AccessService accessService,
-	    final AccessRightsService rightsService, final StateService stateService,
-	    final CreationService creationService, final GroupManager groupManager, final XmppManager xmppManager,
-	    final ContentManager contentManager, final ContainerManager containerManager, final TagManager tagManager,
-	    final SocialNetworkManager socialNetworkManager, final CommentManager commentManager, final Mapper mapper) {
-	this.userSessionProvider = userSessionProvider;
-	this.accessService = accessService;
-	this.rightsService = rightsService;
-	this.stateService = stateService;
-	this.creationService = creationService;
-	this.groupManager = groupManager;
-	this.xmppManager = xmppManager;
-	this.contentManager = contentManager;
-	this.containerManager = containerManager;
-	this.tagManager = tagManager;
-	this.socialNetworkManager = socialNetworkManager;
-	this.commentManager = commentManager;
-	this.mapper = mapper;
+            final AccessRightsService rightsService, final StateService stateService,
+            final CreationService creationService, final GroupManager groupManager, final XmppManager xmppManager,
+            final ContentManager contentManager, final ContainerManager containerManager, final TagManager tagManager,
+            final SocialNetworkManager socialNetworkManager, final CommentManager commentManager, final Mapper mapper) {
+        this.userSessionProvider = userSessionProvider;
+        this.accessService = accessService;
+        this.rightsService = rightsService;
+        this.stateService = stateService;
+        this.creationService = creationService;
+        this.groupManager = groupManager;
+        this.xmppManager = xmppManager;
+        this.contentManager = contentManager;
+        this.containerManager = containerManager;
+        this.tagManager = tagManager;
+        this.socialNetworkManager = socialNetworkManager;
+        this.commentManager = commentManager;
+        this.mapper = mapper;
     }
 
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Editor)
     @Transactional(type = TransactionType.READ_WRITE)
     public void addAuthor(final String userHash, final StateToken token, final String authorShortName)
-	    throws DefaultException {
-	final Long contentId = ContentUtils.parseId(token.getDocument());
-	final UserSession userSession = getUserSession();
-	final User user = userSession.getUser();
-	contentManager.addAuthor(user, contentId, authorShortName);
+            throws DefaultException {
+        final Long contentId = ContentUtils.parseId(token.getDocument());
+        final UserSession userSession = getUserSession();
+        final User user = userSession.getUser();
+        contentManager.addAuthor(user, contentId, authorShortName);
     }
 
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Viewer)
     @Transactional(type = TransactionType.READ_WRITE)
     public CommentDTO addComment(final String userHash, final StateToken token, final Long parentCommentId,
-	    final String commentText) throws DefaultException {
-	final UserSession userSession = getUserSession();
-	final User author = userSession.getUser();
-	final Long contentId = ContentUtils.parseId(token.getDocument());
-	final Comment comment = commentManager.addComment(author, contentId, commentText, parentCommentId);
-	return mapper.map(comment, CommentDTO.class);
+            final String commentText) throws DefaultException {
+        final UserSession userSession = getUserSession();
+        final User author = userSession.getUser();
+        final Long contentId = ContentUtils.parseId(token.getDocument());
+        final Comment comment = commentManager.addComment(author, contentId, commentText, parentCommentId);
+        return mapper.map(comment, CommentDTO.class);
     }
 
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Viewer)
     @Transactional(type = TransactionType.READ_WRITE)
     public CommentDTO addComment(final String userHash, final StateToken token, final String commentText)
-	    throws DefaultException {
-	final UserSession userSession = getUserSession();
-	final User author = userSession.getUser();
-	final Long contentId = ContentUtils.parseId(token.getDocument());
-	final Comment comment = commentManager.addComment(author, contentId, commentText);
-	return mapper.map(comment, CommentDTO.class);
+            throws DefaultException {
+        final UserSession userSession = getUserSession();
+        final User author = userSession.getUser();
+        final Long contentId = ContentUtils.parseId(token.getDocument());
+        final Comment comment = commentManager.addComment(author, contentId, commentText);
+        return mapper.map(comment, CommentDTO.class);
     }
 
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor)
     @Transactional(type = TransactionType.READ_WRITE)
     public StateDTO addContent(final String userHash, final StateToken parentToken, final String title)
-	    throws DefaultException {
-	final Group group = groupManager.findByShortName(parentToken.getGroup());
-	final UserSession userSession = getUserSession();
-	final User user = userSession.getUser();
-	final boolean userIsLoggedIn = userSession.isUserLoggedIn();
-	final Container container = accessService.accessToContainer(ContentUtils.parseId(parentToken.getFolder()),
-		user, AccessRol.Editor);
-	final Content addedContent = creationService.createContent(title, "", user, container);
-	final Access access = accessService.getAccess(user, addedContent.getStateToken(), group, AccessRol.Editor);
-	final State state = stateService.create(access);
-	completeState(user, userIsLoggedIn, group, state);
-	return mapState(state, user, group);
+            throws DefaultException {
+        final Group group = groupManager.findByShortName(parentToken.getGroup());
+        final UserSession userSession = getUserSession();
+        final User user = userSession.getUser();
+        final boolean userIsLoggedIn = userSession.isUserLoggedIn();
+        final Container container = accessService.accessToContainer(ContentUtils.parseId(parentToken.getFolder()),
+                user, AccessRol.Editor);
+        final Content addedContent = creationService.createContent(title, "", user, container);
+        final Access access = accessService.getAccess(user, addedContent.getStateToken(), group, AccessRol.Editor);
+        final State state = stateService.create(access);
+        completeState(user, userIsLoggedIn, group, state);
+        return mapState(state, user, group);
     }
 
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor)
     @Transactional(type = TransactionType.READ_WRITE)
     public StateDTO addFolder(final String userHash, final StateToken parentToken, final String title,
-	    final String contentTypeId) throws DefaultException {
-	final Group group = groupManager.findByShortName(parentToken.getGroup());
-	final UserSession userSession = getUserSession();
-	final User user = userSession.getUser();
-	final boolean userIsLoggedIn = userSession.isUserLoggedIn();
-	final State state = createFolder(parentToken.getGroup(), ContentUtils.parseId(parentToken.getFolder()), title,
-		contentTypeId);
-	completeState(user, userIsLoggedIn, group, state);
-	return mapState(state, user, group);
+            final String contentTypeId) throws DefaultException {
+        final Group group = groupManager.findByShortName(parentToken.getGroup());
+        final UserSession userSession = getUserSession();
+        final User user = userSession.getUser();
+        final boolean userIsLoggedIn = userSession.isUserLoggedIn();
+        final State state = createFolder(parentToken.getGroup(), ContentUtils.parseId(parentToken.getFolder()), title,
+                contentTypeId);
+        completeState(user, userIsLoggedIn, group, state);
+        return mapState(state, user, group);
     }
 
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor)
     @Transactional(type = TransactionType.READ_WRITE)
     public StateDTO addRoom(final String userHash, final StateToken parentToken, final String roomName)
-	    throws DefaultException {
-	final String groupShortName = parentToken.getGroup();
-	final Group group = groupManager.findByShortName(groupShortName);
-	final UserSession userSession = getUserSession();
-	final User user = userSession.getUser();
-	final boolean userIsLoggedIn = userSession.isUserLoggedIn();
-	final String userShortName = user.getShortName();
-	final ChatConnection connection = xmppManager.login(userShortName, userSession.getUser().getPassword(),
-		userHash);
-	xmppManager.createRoom(connection, roomName, userShortName + userHash);
-	xmppManager.disconnect(connection);
-	try {
-	    final State state = createFolder(groupShortName, ContentUtils.parseId(parentToken.getFolder()), roomName,
-		    ChatServerTool.TYPE_ROOM);
-	    completeState(user, userIsLoggedIn, group, state);
-	    return mapState(state, user, group);
-	} catch (final ContentNotFoundException e) {
-	    xmppManager.destroyRoom(connection, roomName);
-	    throw new ContentNotFoundException();
-	} catch (final AccessViolationException e) {
-	    xmppManager.destroyRoom(connection, roomName);
-	    throw new AccessViolationException();
-	} catch (final GroupNotFoundException e) {
-	    xmppManager.destroyRoom(connection, roomName);
-	    throw new GroupNotFoundException();
-	}
+            throws DefaultException {
+        final String groupShortName = parentToken.getGroup();
+        final Group group = groupManager.findByShortName(groupShortName);
+        final UserSession userSession = getUserSession();
+        final User user = userSession.getUser();
+        final boolean userIsLoggedIn = userSession.isUserLoggedIn();
+        final String userShortName = user.getShortName();
+        final ChatConnection connection = xmppManager.login(userShortName, userSession.getUser().getPassword(),
+                userHash);
+        xmppManager.createRoom(connection, roomName, userShortName + userHash);
+        xmppManager.disconnect(connection);
+        try {
+            final State state = createFolder(groupShortName, ContentUtils.parseId(parentToken.getFolder()), roomName,
+                    ChatServerTool.TYPE_ROOM);
+            completeState(user, userIsLoggedIn, group, state);
+            return mapState(state, user, group);
+        } catch (final ContentNotFoundException e) {
+            xmppManager.destroyRoom(connection, roomName);
+            throw new ContentNotFoundException();
+        } catch (final AccessViolationException e) {
+            xmppManager.destroyRoom(connection, roomName);
+            throw new AccessViolationException();
+        } catch (final GroupNotFoundException e) {
+            xmppManager.destroyRoom(connection, roomName);
+            throw new GroupNotFoundException();
+        }
     }
 
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
     public void delContent(final String userHash, final StateToken token) throws DefaultException {
-	final Long contentId = ContentUtils.parseId(token.getDocument());
-	final UserSession userSession = getUserSession();
-	final User user = userSession.getUser();
-	contentManager.delContent(user, contentId);
+        final Long contentId = ContentUtils.parseId(token.getDocument());
+        final UserSession userSession = getUserSession();
+        final User user = userSession.getUser();
+        contentManager.delContent(user, contentId);
     }
 
     // Not using @Authorizated because accessService is doing this job and is
@@ -228,257 +228,258 @@ public class ContentRPC implements ContentService, RPC {
     @Authenticated(mandatory = false)
     @Transactional(type = TransactionType.READ_ONLY)
     public StateDTO getContent(final String userHash, final StateToken token) throws DefaultException {
-	Group defaultGroup;
-	final UserSession userSession = getUserSession();
-	final User user = userSession.getUser();
-	final boolean userIsLoggedIn = userSession.isUserLoggedIn();
-	if (userIsLoggedIn) {
-	    defaultGroup = groupManager.getGroupOfUserWithId(user.getId());
-	} else {
-	    defaultGroup = groupManager.getDefaultGroup();
-	}
-	Access access;
-	try {
-	    access = accessService.getAccess(user, token, defaultGroup, AccessRol.Viewer);
-	} catch (final NoResultException e) {
-	    throw new ContentNotFoundException();
-	} catch (final ToolNotFoundException e) {
-	    throw new ContentNotFoundException();
-	}
-	final State state = stateService.create(access);
-	final Group group = state.getGroup();
-	completeState(user, userIsLoggedIn, group, state);
-	return mapState(state, user, group);
+        Group defaultGroup;
+        final UserSession userSession = getUserSession();
+        final User user = userSession.getUser();
+        final boolean userIsLoggedIn = userSession.isUserLoggedIn();
+        if (userIsLoggedIn) {
+            defaultGroup = groupManager.getGroupOfUserWithId(user.getId());
+        } else {
+            defaultGroup = groupManager.getDefaultGroup();
+        }
+        Access access;
+        try {
+            access = accessService.getAccess(user, token, defaultGroup, AccessRol.Viewer);
+        } catch (final NoResultException e) {
+            throw new ContentNotFoundException();
+        } catch (final ToolNotFoundException e) {
+            throw new ContentNotFoundException();
+        }
+        final State state = stateService.create(access);
+        final Group group = state.getGroup();
+        completeState(user, userIsLoggedIn, group, state);
+        return mapState(state, user, group);
     }
 
     @Authenticated(mandatory = false)
     @Authorizated(accessRolRequired = AccessRol.Viewer)
     @Transactional(type = TransactionType.READ_ONLY)
     public List<TagResultDTO> getSummaryTags(final String userHash, final StateToken groupToken) {
-	final Group group = groupManager.findByShortName(groupToken.getGroup());
-	return getSummaryTags(group);
+        final Group group = groupManager.findByShortName(groupToken.getGroup());
+        return getSummaryTags(group);
     }
 
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Viewer)
     @Transactional(type = TransactionType.READ_WRITE)
     public CommentDTO markCommentAsAbuse(final String userHash, final StateToken token, final Long commentId)
-	    throws DefaultException {
-	final UserSession userSession = getUserSession();
-	final User informer = userSession.getUser();
-	final Long contentId = ContentUtils.parseId(token.getDocument());
-	final Comment comment = commentManager.markAsAbuse(informer, contentId, commentId);
-	return mapper.map(comment, CommentDTO.class);
+            throws DefaultException {
+        final UserSession userSession = getUserSession();
+        final User informer = userSession.getUser();
+        final Long contentId = ContentUtils.parseId(token.getDocument());
+        final Comment comment = commentManager.markAsAbuse(informer, contentId, commentId);
+        return mapper.map(comment, CommentDTO.class);
     }
 
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Viewer)
     @Transactional(type = TransactionType.READ_WRITE)
     public void rateContent(final String userHash, final StateToken token, final Double value) throws DefaultException {
-	final UserSession userSession = getUserSession();
-	final User rater = userSession.getUser();
-	final Long contentId = ContentUtils.parseId(token.getDocument());
+        final UserSession userSession = getUserSession();
+        final User rater = userSession.getUser();
+        final Long contentId = ContentUtils.parseId(token.getDocument());
 
-	if (userSession.isUserLoggedIn()) {
-	    contentManager.rateContent(rater, contentId, value);
-	} else {
-	    throw new AccessViolationException();
-	}
+        if (userSession.isUserLoggedIn()) {
+            contentManager.rateContent(rater, contentId, value);
+        } else {
+            throw new AccessViolationException();
+        }
     }
 
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Editor)
     @Transactional(type = TransactionType.READ_WRITE)
     public void removeAuthor(final String userHash, final StateToken token, final String authorShortName)
-	    throws DefaultException {
-	final Long contentId = ContentUtils.parseId(token.getDocument());
-	final UserSession userSession = getUserSession();
-	final User user = userSession.getUser();
-	contentManager.removeAuthor(user, contentId, authorShortName);
+            throws DefaultException {
+        final Long contentId = ContentUtils.parseId(token.getDocument());
+        final UserSession userSession = getUserSession();
+        final User user = userSession.getUser();
+        contentManager.removeAuthor(user, contentId, authorShortName);
     }
 
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor)
     @Transactional(type = TransactionType.READ_WRITE)
     public String renameContainer(final String userHash, final StateToken token, final String newName)
-	    throws DefaultException {
-	return renameFolder(token.getGroup(), ContentUtils.parseId(token.getFolder()), newName);
+            throws DefaultException {
+        return renameFolder(token.getGroup(), ContentUtils.parseId(token.getFolder()), newName);
     }
 
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Editor)
     @Transactional(type = TransactionType.READ_WRITE)
     public String renameContent(final String userHash, final StateToken token, final String newName)
-	    throws DefaultException {
-	final UserSession userSession = getUserSession();
-	final User user = userSession.getUser();
-	try {
-	    accessService.accessToContent(ContentUtils.parseId(token.getDocument()), user, AccessRol.Editor);
-	} catch (final NoResultException e) {
-	    throw new AccessViolationException();
-	}
-	return renameContent(token.getDocument(), newName);
+            throws DefaultException {
+        final UserSession userSession = getUserSession();
+        final User user = userSession.getUser();
+        try {
+            accessService.accessToContent(ContentUtils.parseId(token.getDocument()), user, AccessRol.Editor);
+        } catch (final NoResultException e) {
+            throw new AccessViolationException();
+        }
+        return renameContent(token.getDocument(), newName);
     }
 
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Editor)
     @Transactional(type = TransactionType.READ_WRITE)
     public Integer save(final String userHash, final StateToken token, final String textContent)
-	    throws DefaultException {
+            throws DefaultException {
 
-	final Long contentId = ContentUtils.parseId(token.getDocument());
-	final UserSession userSession = getUserSession();
-	final User user = userSession.getUser();
-	final Content content = accessService.accessToContent(contentId, user, AccessRol.Editor);
-	final Content descriptor = creationService.saveContent(user, content, textContent);
-	return descriptor.getVersion();
+        final Long contentId = ContentUtils.parseId(token.getDocument());
+        final UserSession userSession = getUserSession();
+        final User user = userSession.getUser();
+        final Content content = accessService.accessToContent(contentId, user, AccessRol.Editor);
+        final Content descriptor = creationService.saveContent(user, content, textContent);
+        return descriptor.getVersion();
     }
 
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
     public ContentSimpleDTO setAsDefaultContent(final String userHash, final StateToken token) {
-	final Content content = contentManager.find(ContentUtils.parseId(token.getDocument()));
-	groupManager.setDefaultContent(token.getGroup(), content);
-	return mapper.map(content, ContentSimpleDTO.class);
+        final Content content = contentManager.find(ContentUtils.parseId(token.getDocument()));
+        groupManager.setDefaultContent(token.getGroup(), content);
+        return mapper.map(content, ContentSimpleDTO.class);
     }
 
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Editor)
     @Transactional(type = TransactionType.READ_WRITE)
     public I18nLanguageDTO setLanguage(final String userHash, final StateToken token, final String languageCode)
-	    throws DefaultException {
-	final Long contentId = ContentUtils.parseId(token.getDocument());
-	final UserSession userSession = getUserSession();
-	final User user = userSession.getUser();
-	return mapper.map(contentManager.setLanguage(user, contentId, languageCode), I18nLanguageDTO.class);
+            throws DefaultException {
+        final Long contentId = ContentUtils.parseId(token.getDocument());
+        final UserSession userSession = getUserSession();
+        final User user = userSession.getUser();
+        return mapper.map(contentManager.setLanguage(user, contentId, languageCode), I18nLanguageDTO.class);
     }
 
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Editor)
     @Transactional(type = TransactionType.READ_WRITE)
     public void setPublishedOn(final String userHash, final StateToken token, final Date publishedOn)
-	    throws DefaultException {
-	final Long contentId = ContentUtils.parseId(token.getDocument());
-	final UserSession userSession = getUserSession();
-	final User user = userSession.getUser();
-	contentManager.setPublishedOn(user, contentId, publishedOn);
+            throws DefaultException {
+        final Long contentId = ContentUtils.parseId(token.getDocument());
+        final UserSession userSession = getUserSession();
+        final User user = userSession.getUser();
+        contentManager.setPublishedOn(user, contentId, publishedOn);
     }
 
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Editor)
     @Transactional(type = TransactionType.READ_WRITE)
     public void setStatus(final String userHash, final StateToken token, final ContentStatusDTO status) {
-	if (status.equals(ContentStatusDTO.publishedOnline) || status.equals(ContentStatusDTO.rejected)) {
-	    throw new AccessViolationException();
-	}
-	contentManager.setStatus(ContentUtils.parseId(token.getDocument()), ContentStatus.valueOf(status.toString()));
+        if (status.equals(ContentStatusDTO.publishedOnline) || status.equals(ContentStatusDTO.rejected)) {
+            throw new AccessViolationException();
+        }
+        contentManager.setStatus(ContentUtils.parseId(token.getDocument()), ContentStatus.valueOf(status.toString()));
     }
 
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
     public void setStatusAsAdmin(final String userHash, final StateToken token, final ContentStatusDTO status) {
-	contentManager.setStatus(ContentUtils.parseId(token.getDocument()), ContentStatus.valueOf(status.toString()));
+        contentManager.setStatus(ContentUtils.parseId(token.getDocument()), ContentStatus.valueOf(status.toString()));
     }
 
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Editor)
     @Transactional(type = TransactionType.READ_WRITE)
     public List<TagResultDTO> setTags(final String userHash, final StateToken token, final String tags)
-	    throws DefaultException {
-	final Long contentId = ContentUtils.parseId(token.getDocument());
-	final UserSession userSession = getUserSession();
-	final User user = userSession.getUser();
-	final Group group = groupManager.findByShortName(token.getGroup());
-	contentManager.setTags(user, contentId, tags);
-	return getSummaryTags(group);
+            throws DefaultException {
+        final Long contentId = ContentUtils.parseId(token.getDocument());
+        final UserSession userSession = getUserSession();
+        final User user = userSession.getUser();
+        final Group group = groupManager.findByShortName(token.getGroup());
+        contentManager.setTags(user, contentId, tags);
+        return getSummaryTags(group);
     }
 
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Viewer)
     @Transactional(type = TransactionType.READ_WRITE)
     public CommentDTO voteComment(final String userHash, final StateToken token, final Long commentId,
-	    final boolean votePositive) throws DefaultException {
-	final UserSession userSession = getUserSession();
-	final User voter = userSession.getUser();
-	final Long contentId = ContentUtils.parseId(token.getDocument());
-	final Comment comment = commentManager.vote(voter, contentId, commentId, votePositive);
-	return mapper.map(comment, CommentDTO.class);
+            final boolean votePositive) throws DefaultException {
+        final UserSession userSession = getUserSession();
+        final User voter = userSession.getUser();
+        final Long contentId = ContentUtils.parseId(token.getDocument());
+        final Comment comment = commentManager.vote(voter, contentId, commentId, votePositive);
+        return mapper.map(comment, CommentDTO.class);
     }
 
     private void completeState(final User user, final boolean userIsLoggedIn, final Group group, final State state) {
-	if (state.isRateable()) {
-	    final Long contentId = ContentUtils.parseId(state.getDocumentId());
-	    final Content content = contentManager.find(contentId);
-	    if (userIsLoggedIn) {
-		state.setCurrentUserRate(contentManager.getRateContent(user, content));
-	    }
-	    state.setRate(contentManager.getRateAvg(content));
-	    state.setRateByUsers(contentManager.getRateByUsers(content));
-	}
-
-	state.setGroupTags(tagManager.getSummaryByGroup(group));
-	state.setGroupMembers(socialNetworkManager.get(user, group));
-	state.setParticipation(socialNetworkManager.findParticipation(user, group));
+        if (state.isRateable()) {
+            final Long contentId = ContentUtils.parseId(state.getDocumentId());
+            final Content content = contentManager.find(contentId);
+            if (userIsLoggedIn) {
+                state.setCurrentUserRate(contentManager.getRateContent(user, content));
+            }
+            state.setRate(contentManager.getRateAvg(content));
+            state.setRateByUsers(contentManager.getRateByUsers(content));
+        }
+        state.setEnabledTools(groupManager.findEnabledTools(group.getId()));
+        state.setGroupTags(tagManager.getSummaryByGroup(group));
+        state.setGroupMembers(socialNetworkManager.get(user, group));
+        state.setParticipation(socialNetworkManager.findParticipation(user, group));
     }
 
     private State createFolder(final String groupShortName, final Long parentFolderId, final String title,
-	    final String typeId) throws DefaultException {
-	final UserSession userSession = getUserSession();
-	final User user = userSession.getUser();
-	final Group group = groupManager.findByShortName(groupShortName);
+            final String typeId) throws DefaultException {
+        final UserSession userSession = getUserSession();
+        final User user = userSession.getUser();
+        final Group group = groupManager.findByShortName(groupShortName);
 
-	accessService.accessToContainer(parentFolderId, user, AccessRol.Editor);
+        accessService.accessToContainer(parentFolderId, user, AccessRol.Editor);
 
-	final Container container = creationService.createFolder(group, parentFolderId, title, user.getLanguage(),
-		typeId);
-	final Access access = accessService.getAccess(user, container.getStateToken(), group, AccessRol.Editor);
-	final State state = stateService.create(access);
-	return state;
+        final Container container = creationService.createFolder(group, parentFolderId, title, user.getLanguage(),
+                typeId);
+        final Access access = accessService.getAccess(user, container.getStateToken(), group, AccessRol.Editor);
+        final State state = stateService.create(access);
+        return state;
     }
 
     private List<TagResultDTO> getSummaryTags(final Group group) {
-	return mapper.mapList(tagManager.getSummaryByGroup(group), TagResultDTO.class);
+        return mapper.mapList(tagManager.getSummaryByGroup(group), TagResultDTO.class);
     }
 
     private UserSession getUserSession() {
-	return userSessionProvider.get();
+        return userSessionProvider.get();
     }
 
-    private void mapContentRightsInstate(final User user, final AccessLists groupAccessList, final ContentSimpleDTO siblingDTO) {
-	final Content sibling = contentManager.find(siblingDTO.getId());
-	final AccessLists lists = sibling.hasAccessList() ? sibling.getAccessLists() : groupAccessList;
-	siblingDTO.setRights(mapper.map(rightsService.get(user, lists), AccessRightsDTO.class));
+    private void mapContentRightsInstate(final User user, final AccessLists groupAccessList,
+            final ContentSimpleDTO siblingDTO) {
+        final Content sibling = contentManager.find(siblingDTO.getId());
+        final AccessLists lists = sibling.hasAccessList() ? sibling.getAccessLists() : groupAccessList;
+        siblingDTO.setRights(mapper.map(rightsService.get(user, lists), AccessRightsDTO.class));
     }
 
     private StateDTO mapState(final State state, final User user, final Group group) {
-	final StateDTO stateDTO = mapper.map(state, StateDTO.class);
-	final AccessLists groupAccessList = group.getSocialNetwork().getAccessLists();
-	for (final ContentSimpleDTO siblingDTO : stateDTO.getRootContainer().getContents()) {
-	    mapContentRightsInstate(user, groupAccessList, siblingDTO);
-	}
-	for (final ContentSimpleDTO siblingDTO : stateDTO.getContainer().getContents()) {
-	    mapContentRightsInstate(user, groupAccessList, siblingDTO);
-	}
-	return stateDTO;
+        final StateDTO stateDTO = mapper.map(state, StateDTO.class);
+        final AccessLists groupAccessList = group.getSocialNetwork().getAccessLists();
+        for (final ContentSimpleDTO siblingDTO : stateDTO.getRootContainer().getContents()) {
+            mapContentRightsInstate(user, groupAccessList, siblingDTO);
+        }
+        for (final ContentSimpleDTO siblingDTO : stateDTO.getContainer().getContents()) {
+            mapContentRightsInstate(user, groupAccessList, siblingDTO);
+        }
+        return stateDTO;
     }
 
     private String renameContent(final String documentId, final String newName) throws ContentNotFoundException,
-	    DefaultException {
-	final Long contentId = ContentUtils.parseId(documentId);
-	final UserSession userSession = getUserSession();
-	final User user = userSession.getUser();
-	return contentManager.renameContent(user, contentId, newName);
+            DefaultException {
+        final Long contentId = ContentUtils.parseId(documentId);
+        final UserSession userSession = getUserSession();
+        final User user = userSession.getUser();
+        return contentManager.renameContent(user, contentId, newName);
     }
 
     private String renameFolder(final String groupShortName, final Long folderId, final String newName)
-	    throws DefaultException {
-	final Group group = groupManager.findByShortName(groupShortName);
-	final UserSession userSession = getUserSession();
-	final User user = userSession.getUser();
-	final Container container = accessService.accessToContainer(folderId, user, AccessRol.Editor);
-	return containerManager.renameFolder(group, container, newName);
+            throws DefaultException {
+        final Group group = groupManager.findByShortName(groupShortName);
+        final UserSession userSession = getUserSession();
+        final User user = userSession.getUser();
+        final Container container = accessService.accessToContainer(folderId, user, AccessRol.Editor);
+        return containerManager.renameFolder(group, container, newName);
     }
 
 }

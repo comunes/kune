@@ -29,7 +29,8 @@ public interface GroupServiceAsync {
 
     void changeGroupWsTheme(String userHash, StateToken groupToken, String theme, AsyncCallback<?> callback);
 
-    void createNewGroup(String userHash, GroupDTO group, AsyncCallback<StateToken> callback);
+    void createNewGroup(String userHash, GroupDTO group, String publicDesc, String tags, String[] enabledTools,
+            AsyncCallback<StateToken> callback);
 
     void setGroupLogo(String userHash, StateToken token, AsyncCallback<GroupDTO> asyncCallback);
 

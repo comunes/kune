@@ -6,6 +6,8 @@ import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import com.gwtext.client.data.SimpleStore;
 import com.gwtext.client.data.Store;
 import com.gwtext.client.widgets.form.ComboBox;
+import com.gwtext.client.widgets.form.FieldSet;
+import com.gwtext.client.widgets.form.Radio;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.form.VType;
 import com.gwtext.client.widgets.form.ValidationException;
@@ -23,6 +25,8 @@ public class RegisterForm extends DefaultForm {
     private static final String LANG_FIELD = "kune-urf-lang-f";
     private static final String COUNTRY_FIELD = "kune-urf-country-f";
     private static final String TIMEZONE_FIELD = "kune-urf-timezone-f";
+    private static final String WANNAPERSONALHOMEPAGE_FIELD = "kune-urf-wphp-f";
+    private static final String NOPERSONALHOMEPAGE_FIELD = "kune-urf-nphp-f";
 
     private final TextField shortNameRegField;
     private final TextField longNameRegField;
@@ -32,14 +36,18 @@ public class RegisterForm extends DefaultForm {
     private final ComboBox languageCombo;
     private final ComboBox countryCombo;
     private final ComboBox timezoneCombo;
+    private final Radio wantPersonalHomePage;
+    private final Radio noPersonalHomePage;
+    private final I18nUITranslationService i18n;
 
     public RegisterForm(final SignInPresenter presenter, final I18nUITranslationService i18n) {
+        this.i18n = i18n;
         super.addStyleName("kune-Margin-Large-l");
 
         shortNameRegField = new TextField();
         shortNameRegField.setFieldLabel(i18n.t("Nickname"));
         shortNameRegField.setName(NICK_FIELD);
-        shortNameRegField.setWidth(DEF_FIELD_WIDTH);
+        shortNameRegField.setWidth(DEF_SMALL_FIELD_WIDTH);
         shortNameRegField.setAllowBlank(false);
         shortNameRegField.setMinLength(3);
         shortNameRegField.setMaxLength(15);
@@ -67,7 +75,7 @@ public class RegisterForm extends DefaultForm {
         passwdRegField.setPassword(true);
         passwdRegField.setAllowBlank(false);
         passwdRegField.setMaxLength(40);
-        passwdRegField.setWidth(DEF_FIELD_WIDTH);
+        passwdRegField.setWidth(DEF_MEDIUM_FIELD_WIDTH);
         passwdRegField.setValidationEvent(false);
         passwdRegField.setId(PASSWORD_FIELD);
         add(passwdRegField);
@@ -79,7 +87,7 @@ public class RegisterForm extends DefaultForm {
         passwdRegFieldDup.setAllowBlank(false);
         passwdRegFieldDup.setMinLength(6);
         passwdRegFieldDup.setMaxLength(40);
-        passwdRegFieldDup.setWidth(DEF_FIELD_WIDTH);
+        passwdRegFieldDup.setWidth(DEF_MEDIUM_FIELD_WIDTH);
         passwdRegFieldDup.setInvalidText(i18n.t("Passwords do not match"));
         passwdRegFieldDup.setValidator(new Validator() {
             public boolean validate(final String value) throws ValidationException {
@@ -94,7 +102,7 @@ public class RegisterForm extends DefaultForm {
         emailRegField.setFieldLabel(i18n.t("Email"));
         emailRegField.setName(EMAIL_FIELD);
         emailRegField.setVtype(VType.EMAIL);
-        emailRegField.setWidth(DEF_FIELD_WIDTH);
+        emailRegField.setWidth(DEF_MEDIUM_FIELD_WIDTH);
         emailRegField.setAllowBlank(false);
         emailRegField.setValidationEvent(false);
         emailRegField.setId(EMAIL_FIELD);
@@ -116,7 +124,7 @@ public class RegisterForm extends DefaultForm {
         languageCombo.setTypeAhead(true);
         languageCombo.setTypeAheadDelay(1000);
         languageCombo.setSelectOnFocus(false);
-        languageCombo.setWidth(186);
+        languageCombo.setWidth(DEF_MEDIUM_FIELD_WIDTH);
         languageCombo.setAllowBlank(false);
         languageCombo.setValueField("abbr");
         languageCombo.setValue(presenter.getCurrentLanguage().getCode());
@@ -142,7 +150,7 @@ public class RegisterForm extends DefaultForm {
         countryCombo.setTypeAhead(true);
         countryCombo.setTypeAheadDelay(1000);
         countryCombo.setSelectOnFocus(false);
-        countryCombo.setWidth(186);
+        countryCombo.setWidth(DEF_MEDIUM_FIELD_WIDTH);
         countryCombo.setAllowBlank(false);
         countryCombo.setValueField("abbr");
         countryCombo.setPageSize(7);
@@ -167,7 +175,7 @@ public class RegisterForm extends DefaultForm {
         timezoneCombo.setTypeAhead(true);
         timezoneCombo.setTypeAheadDelay(1000);
         timezoneCombo.setSelectOnFocus(false);
-        timezoneCombo.setWidth(186);
+        timezoneCombo.setWidth(DEF_MEDIUM_FIELD_WIDTH);
         timezoneCombo.setAllowBlank(false);
         timezoneCombo.setValueField("id");
         timezoneCombo.setPageSize(7);
@@ -175,6 +183,17 @@ public class RegisterForm extends DefaultForm {
         timezoneCombo.setValidationEvent(false);
         timezoneCombo.setId(TIMEZONE_FIELD);
         add(timezoneCombo);
+
+        final FieldSet personalSpaceFieldSet = new FieldSet(i18n.t("Do you want a personal homepage?"));
+        wantPersonalHomePage = new Radio();
+        noPersonalHomePage = new Radio();
+        personalSpaceFieldSet.setCollapsible(false);
+        createRadio(personalSpaceFieldSet, wantPersonalHomePage, i18n
+                .t("Yes, I want a homepage for publish my contents."), WANNAPERSONALHOMEPAGE_FIELD);
+        wantPersonalHomePage.setChecked(true);
+        createRadio(personalSpaceFieldSet, noPersonalHomePage, i18n.t("No, I don't want. Maybe in the future."),
+                NOPERSONALHOMEPAGE_FIELD);
+        add(personalSpaceFieldSet);
     }
 
     public String getCountry() {
@@ -207,6 +226,19 @@ public class RegisterForm extends DefaultForm {
 
     public String getTimezone() {
         return timezoneCombo.getValueAsString();
+    }
+
+    public boolean wantPersonalHomepage() {
+        return wantPersonalHomePage.getValue();
+    }
+
+    private void createRadio(final FieldSet fieldSet, final Radio radio, final String radioLabel, final String radioId) {
+        radio.setName(radioId);
+        radio.setBoxLabel(i18n.t(radioLabel));
+        radio.setAutoCreate(true);
+        radio.setHideLabel(true);
+        radio.setId(radioId);
+        fieldSet.add(radio);
     }
 
 }

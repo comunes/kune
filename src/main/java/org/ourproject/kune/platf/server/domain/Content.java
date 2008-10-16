@@ -61,6 +61,8 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Content implements HasStateToken {
 
+    public static Content NO_CONTENT = new Content();
+
     @Id
     @DocumentId
     @GeneratedValue
@@ -128,218 +130,218 @@ public class Content implements HasStateToken {
     private String filename;
 
     public Content() {
-	translations = new ArrayList<ContentTranslation>();
-	authors = new ArrayList<User>();
-	tags = new ArrayList<Tag>();
-	comments = new HashSet<Comment>();
-	this.createdOn = System.currentTimeMillis();
-	this.lastRevision = new Revision(this);
-	accessLists = null;
-	status = ContentStatus.editingInProgress;
+        translations = new ArrayList<ContentTranslation>();
+        authors = new ArrayList<User>();
+        tags = new ArrayList<Tag>();
+        comments = new HashSet<Comment>();
+        this.createdOn = System.currentTimeMillis();
+        this.lastRevision = new Revision(this);
+        accessLists = null;
+        status = ContentStatus.editingInProgress;
     }
 
     public void addAuthor(final User user) {
-	if (!this.authors.contains(user)) {
-	    this.authors.add(user);
-	}
+        if (!this.authors.contains(user)) {
+            this.authors.add(user);
+        }
     }
 
     public void addComment(final Comment comment) {
-	// FIXME: something related with lazy initialization (workaround using
-	// size())
-	comments.size();
-	comments.add(comment);
+        // FIXME: something related with lazy initialization (workaround using
+        // size())
+        comments.size();
+        comments.add(comment);
     }
 
     public void addRevision(final Revision revision) {
-	if (lastRevision == null) {
-	    lastRevision = revision;
-	} else {
-	    revision.setPrevious(lastRevision);
-	    lastRevision = revision;
-	}
+        if (lastRevision == null) {
+            lastRevision = revision;
+        } else {
+            revision.setPrevious(lastRevision);
+            lastRevision = revision;
+        }
     }
 
     public AccessLists getAccessLists() {
-	return accessLists;
+        return accessLists;
     }
 
     public List<User> getAuthors() {
-	return authors;
+        return authors;
     }
 
     public Set<Comment> getComments() {
-	return comments;
+        return comments;
     }
 
     public Container getContainer() {
-	return container;
+        return container;
     }
 
     public Long getCreatedOn() {
-	return createdOn;
+        return createdOn;
     }
 
     public Date getDeletedOn() {
-	return deletedOn;
+        return deletedOn;
     }
 
     public String getFilename() {
-	return filename;
+        return filename;
     }
 
     public Long getId() {
-	return id;
+        return id;
     }
 
     public I18nLanguage getLanguage() {
-	return language;
+        return language;
     }
 
     public Revision getLastRevision() {
-	return lastRevision;
+        return lastRevision;
     }
 
     public License getLicense() {
-	return license;
+        return license;
     }
 
     public BasicMimeType getMimeType() {
-	return mimeType;
+        return mimeType;
     }
 
     public Group getOwner(final Group group) {
-	return container.getOwner();
+        return container.getOwner();
     }
 
     public Date getPublishedOn() {
-	return publishedOn;
+        return publishedOn;
     }
 
     @Transient
     public StateToken getStateToken() {
-	return getContainer().getStateToken().clone().setDocument(getId());
+        return getContainer().getStateToken().clone().setDocument(getId());
     }
 
     @Transient
     public String getStateTokenEncoded() {
-	return getStateToken().getEncoded();
+        return getStateToken().getEncoded();
     }
 
     public ContentStatus getStatus() {
-	return status;
+        return status;
     }
 
     public List<Tag> getTags() {
-	return tags;
+        return tags;
     }
 
     public String getTagsAsString() {
-	String tagConcatenated = "";
-	for (final Iterator<Tag> iterator = tags.iterator(); iterator.hasNext();) {
-	    final Tag tag = iterator.next();
-	    tagConcatenated = tagConcatenated + tag.getName();
-	    if (iterator.hasNext()) {
-		tagConcatenated = tagConcatenated + " ";
-	    }
-	}
-	return tagConcatenated;
+        String tagConcatenated = "";
+        for (final Iterator<Tag> iterator = tags.iterator(); iterator.hasNext();) {
+            final Tag tag = iterator.next();
+            tagConcatenated = tagConcatenated + tag.getName();
+            if (iterator.hasNext()) {
+                tagConcatenated = tagConcatenated + " ";
+            }
+        }
+        return tagConcatenated;
     }
 
     public String getTitle() {
-	return lastRevision.getTitle();
+        return lastRevision.getTitle();
     }
 
     public List<ContentTranslation> getTranslations() {
-	return translations;
+        return translations;
     }
 
     public String getTypeId() {
-	return typeId;
+        return typeId;
     }
 
     public int getVersion() {
-	return version;
+        return version;
     }
 
     public boolean hasAccessList() {
-	return accessLists != null;
+        return accessLists != null;
     }
 
     public void removeAuthor(final User user) {
-	this.authors.remove(user);
+        this.authors.remove(user);
     }
 
     public void setAccessLists(final AccessLists accessLists) {
-	this.accessLists = accessLists;
+        this.accessLists = accessLists;
     }
 
     public void setAuthors(final List<User> authors) {
-	this.authors = authors;
+        this.authors = authors;
     }
 
     public void setComments(final Set<Comment> comments) {
-	this.comments = comments;
+        this.comments = comments;
     }
 
     public void setContainer(final Container container) {
-	this.container = container;
+        this.container = container;
     }
 
     public void setCreatedOn(final Long createdOn) {
-	this.createdOn = createdOn;
+        this.createdOn = createdOn;
     }
 
     public void setDeletedOn(final Date date) {
-	this.deletedOn = date;
+        this.deletedOn = date;
     }
 
     public void setFilename(final String filename) {
-	this.filename = filename;
+        this.filename = filename;
     }
 
     public void setId(final Long id) {
-	this.id = id;
+        this.id = id;
     }
 
     public void setLanguage(final I18nLanguage language) {
-	this.language = language;
+        this.language = language;
     }
 
     public void setLastRevision(final Revision revision) {
-	this.lastRevision = revision;
+        this.lastRevision = revision;
     }
 
     public void setLicense(final License license) {
-	this.license = license;
+        this.license = license;
     }
 
     public void setMimeType(final BasicMimeType mimeType) {
-	this.mimeType = mimeType;
+        this.mimeType = mimeType;
     }
 
     public void setPublishedOn(final Date publishedOn) {
-	this.publishedOn = publishedOn;
+        this.publishedOn = publishedOn;
     }
 
     public void setStatus(final ContentStatus status) {
-	this.status = status;
+        this.status = status;
     }
 
     public void setTags(final List<Tag> tags) {
-	this.tags = tags;
+        this.tags = tags;
     }
 
     public void setTranslations(final List<ContentTranslation> translations) {
-	this.translations = translations;
+        this.translations = translations;
     }
 
     public void setTypeId(final String typeId) {
-	this.typeId = typeId;
+        this.typeId = typeId;
     }
 
     public void setVersion(final int version) {
-	this.version = version;
+        this.version = version;
     }
 
 }

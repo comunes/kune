@@ -64,6 +64,8 @@ public interface SignInView extends View {
 
     public void unMask();
 
+    public boolean wantPersonalHomepage();
+
     void setCookie(String userHash);
 
     void setRegisterMessage(String message, SiteErrorType type);

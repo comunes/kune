@@ -30,7 +30,8 @@ public interface GroupService extends RemoteService {
 
     void changeGroupWsTheme(String userHash, StateToken groupToken, String theme) throws DefaultException;
 
-    StateToken createNewGroup(String userHash, GroupDTO group) throws DefaultException;
+    StateToken createNewGroup(String userHash, GroupDTO group, String publicDesc, String tags, String[] enabledTools)
+            throws DefaultException;
 
     GroupDTO setGroupLogo(String userHash, StateToken token);
 

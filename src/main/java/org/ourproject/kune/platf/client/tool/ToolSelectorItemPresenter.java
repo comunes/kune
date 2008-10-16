@@ -16,42 +16,45 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
     private final String longName;
 
     public ToolSelectorItemPresenter(final String shortName, final String longName, final ToolSelector toolSelector,
-	    final WsThemePresenter wsThemePresenter) {
-	this.shortName = shortName;
-	this.longName = longName;
-	this.toolSelector = toolSelector;
-	this.wsThemePresenter = wsThemePresenter;
+            final WsThemePresenter wsThemePresenter) {
+        this.shortName = shortName;
+        this.longName = longName;
+        this.toolSelector = toolSelector;
+        this.wsThemePresenter = wsThemePresenter;
     }
 
     public String getShortName() {
-	return shortName;
+        return shortName;
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void init(final ToolSelectorItemView view) {
-	this.view = view;
-	toolSelector.addTool(this);
-	wsThemePresenter.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
-	    public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
-		setTheme(oldTheme, newTheme);
-	    }
-	});
+        this.view = view;
+        toolSelector.addTool(this);
+        wsThemePresenter.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
+            public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
+                setTheme(oldTheme, newTheme);
+            }
+        });
     }
 
     public void setGroupShortName(final String groupShortName) {
-	final StateToken token = new StateToken(groupShortName, getShortName(), null, null);
-	view.setLink(longName, token.toString());
+        final StateToken token = new StateToken(groupShortName, getShortName(), null, null);
+        view.setLink(longName, token.toString());
     }
 
     public void setSelected(final boolean selected) {
-	view.setSelected(selected);
+        view.setSelected(selected);
+    }
+
+    public void setVisible(boolean visible) {
+        view.setVisible(visible);
     }
 
     private void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
-	view.setTheme(oldTheme, newTheme);
+        view.setTheme(oldTheme, newTheme);
     }
-
 }

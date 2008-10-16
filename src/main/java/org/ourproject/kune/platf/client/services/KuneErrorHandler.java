@@ -26,6 +26,7 @@ import org.ourproject.kune.platf.client.errors.ContainerNotPermittedException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
 import org.ourproject.kune.platf.client.errors.LastAdminInGroupException;
+import org.ourproject.kune.platf.client.errors.NoDefaultContentException;
 import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.state.Session;
@@ -48,88 +49,90 @@ public class KuneErrorHandler {
     private final Provider<StateManager> stateManagerProvider;
 
     public KuneErrorHandler(final Session session, final I18nTranslationService i18n,
-	    final Provider<WorkspaceSkeleton> wsProvider, final Provider<StateManager> stateManagerProvider) {
-	this.session = session;
-	this.i18n = i18n;
-	this.wsProvider = wsProvider;
-	this.stateManagerProvider = stateManagerProvider;
-	this.onSessionExpired = new Event0("onSessionExpired");
+            final Provider<WorkspaceSkeleton> wsProvider, final Provider<StateManager> stateManagerProvider) {
+        this.session = session;
+        this.i18n = i18n;
+        this.wsProvider = wsProvider;
+        this.stateManagerProvider = stateManagerProvider;
+        this.onSessionExpired = new Event0("onSessionExpired");
     }
 
     public void doSessionExpired() {
-	onSessionExpired.fire();
-	getWorkspaceSkeleton().showAlertMessage(i18n.t("Session expired"),
-		i18n.t("Your session has expired. Please login again."));
+        onSessionExpired.fire();
+        getWorkspaceSkeleton().showAlertMessage(i18n.t("Session expired"),
+                i18n.t("Your session has expired. Please login again."));
     }
 
     public WorkspaceSkeleton getWorkspaceSkeleton() {
-	return wsProvider.get();
+        return wsProvider.get();
     }
 
     public void onSessionExpired(final Listener0 listener) {
-	onSessionExpired.add(listener);
+        onSessionExpired.add(listener);
     }
 
     public void process(final Throwable caught) {
-	Site.hideProgress();
-	try {
-	    throw caught;
-	} catch (final AccessViolationException e) {
-	    logException(e);
-	    Site.error(i18n.t("You don't have rights to do that"));
-	} catch (final SessionExpiredException e) {
-	    logException(e);
-	    doSessionExpired();
-	} catch (final UserMustBeLoggedException e) {
-	    logException(e);
-	    if (session.isLogged()) {
-		doSessionExpired();
-	    } else {
-		Site.important(i18n.t("Please sign in or register to collaborate"));
-	    }
-	} catch (final GroupNotFoundException e) {
-	    logException(e);
-	    Site.error(i18n.t("Group not found"));
-	    stateManagerProvider.get().gotoToken("");
-	} catch (final IncompatibleRemoteServiceException e) {
-	    Site.error(i18n.t("Your browser is outdated from the server software. Please reload this page."));
-	} catch (final ContentNotFoundException e) {
-	    logException(e);
-	    Site.error(i18n.t("Content not found"));
-	    stateManagerProvider.get().gotoToken("");
-	} catch (final ContainerNotPermittedException e) {
-	    logException(e);
-	    Site.error(i18n.t("Action not permitted in this location"));
-	    stateManagerProvider.get().gotoToken("");
-	} catch (final LastAdminInGroupException e) {
-	    logException(e);
-	    getWorkspaceSkeleton().showAlertMessage(
-		    i18n.t("Warning"),
-		    i18n.t("Sorry, you are the last admin of this group."
-			    + " Look for someone to substitute you appropriately as admin before unjoin this group."));
-	} catch (final AlreadyGroupMemberException e) {
-	    logException(e);
-	    Site.error(i18n.t("This group is already a group member"));
-	} catch (final AlreadyUserMemberException e) {
-	    logException(e);
-	    Site.error(i18n.t("This user is already a member of this group"));
-	} catch (final Throwable e) {
-	    logException(e, true);
-	    Site.error(i18n.t("Error performing operation"));
-	    GWT.log("Other kind of exception in StateManagerDefault/processErrorException", null);
-	}
+        Site.hideProgress();
+        try {
+            throw caught;
+        } catch (final AccessViolationException e) {
+            logException(e);
+            Site.error(i18n.t("You don't have rights to do that"));
+        } catch (final SessionExpiredException e) {
+            logException(e);
+            doSessionExpired();
+        } catch (final NoDefaultContentException e) {
+            stateManagerProvider.get().restorePreviousState();
+        } catch (final UserMustBeLoggedException e) {
+            logException(e);
+            if (session.isLogged()) {
+                doSessionExpired();
+            } else {
+                Site.important(i18n.t("Please sign in or register to collaborate"));
+            }
+        } catch (final GroupNotFoundException e) {
+            logException(e);
+            Site.error(i18n.t("Group not found"));
+            stateManagerProvider.get().gotoToken("");
+        } catch (final IncompatibleRemoteServiceException e) {
+            Site.error(i18n.t("Your browser is outdated from the server software. Please reload this page."));
+        } catch (final ContentNotFoundException e) {
+            logException(e);
+            Site.error(i18n.t("Content not found"));
+            stateManagerProvider.get().gotoToken("");
+        } catch (final ContainerNotPermittedException e) {
+            logException(e);
+            Site.error(i18n.t("Action not permitted in this location"));
+            stateManagerProvider.get().gotoToken("");
+        } catch (final LastAdminInGroupException e) {
+            logException(e);
+            getWorkspaceSkeleton().showAlertMessage(
+                    i18n.t("Warning"),
+                    i18n.t("Sorry, you are the last admin of this group."
+                            + " Look for someone to substitute you appropriately as admin before unjoin this group."));
+        } catch (final AlreadyGroupMemberException e) {
+            logException(e);
+            Site.error(i18n.t("This group is already a group member"));
+        } catch (final AlreadyUserMemberException e) {
+            logException(e);
+            Site.error(i18n.t("This user is already a member of this group"));
+        } catch (final Throwable e) {
+            logException(e, true);
+            Site.error(i18n.t("Error performing operation"));
+            GWT.log("Other kind of exception in StateManagerDefault/processErrorException", null);
+        }
     }
 
     private void logException(final Throwable e) {
-	logException(e, false);
+        logException(e, false);
     }
 
     private void logException(final Throwable e, final boolean showException) {
-	if (showException) {
-	    Log.debug("Exception in KuneErrorHandler", e);
-	} else {
-	    Log.debug(e.getMessage());
-	}
+        if (showException) {
+            Log.debug("Exception in KuneErrorHandler", e);
+        } else {
+            Log.debug(e.getMessage());
+        }
     }
 
 }

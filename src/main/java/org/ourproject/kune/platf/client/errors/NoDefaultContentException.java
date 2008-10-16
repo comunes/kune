@@ -18,38 +18,9 @@
  *
  */
 
-package org.ourproject.kune.platf.server.tool;
+package org.ourproject.kune.platf.client.errors;
 
-import java.util.Collection;
-import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import com.google.inject.Singleton;
-
-@Singleton
-public class ToolRegistry {
-    static Log log = LogFactory.getLog(ToolRegistry.class);
-
-    // TODO: ConcurrentHashMap, sure?
-    private final ConcurrentHashMap<String, ServerTool> tools;
-
-    public ToolRegistry() {
-	this.tools = new ConcurrentHashMap<String, ServerTool>();
-    }
-
-    public void register(final ServerTool tool) {
-	tools.put(tool.getName(), tool);
-    }
-
-    public Collection<ServerTool> all() {
-	return tools.values();
-    }
-
-    public ServerTool get(final String toolName) {
-	return tools.get(toolName);
-
-    }
-
+public class NoDefaultContentException extends DefaultException {
+    private static final long serialVersionUID = 1L;
 }

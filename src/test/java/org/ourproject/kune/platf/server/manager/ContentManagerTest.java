@@ -45,47 +45,47 @@ public class ContentManagerTest extends PersistenceTest {
     private License defLicense;
 
     public ContentManagerTest() {
-	// Testing with mysql because utf-8 normally fails with mysql and not in
-	// memory
-	super("test_db", "kune.properties");
+        // Testing with mysql because utf-8 normally fails with mysql and not in
+        // memory
+        super("test_db", "kune.properties");
     }
 
     @After
     public void close() {
-	if (getTransaction().isActive()) {
-	    getTransaction().rollback();
-	}
+        if (getTransaction().isActive()) {
+            getTransaction().rollback();
+        }
     }
 
     @Before
     public void insertData() throws Exception {
-	openTransaction();
-	assertEquals(0, userFinder.getAll().size());
-	assertEquals(0, groupFinder.getAll().size());
-	assertEquals(0, licenseFinder.getAll().size());
-	final I18nLanguage english = new I18nLanguage(new Long(1819), "English", "English", "en");
-	languageManager.persist(english);
-	final I18nCountry gb = new I18nCountry(new Long(75), "GB", "GBP", ".", "£%n", "", ".", "United Kingdom",
-		"western", ",");
-	countryManager.persist(gb);
-	user = userManager.createUser("username", "the user name", "email@example.com", "userPassword", "en", "GB",
-		TimeZone.getDefault().getID());
-	defLicense = new License("by-sa", "Creative Commons Attribution-ShareAlike", "",
-		"http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
-	licenseManager.persist(defLicense);
-	groupManager.createUserGroup(user);
+        openTransaction();
+        assertEquals(0, userFinder.getAll().size());
+        assertEquals(0, groupFinder.getAll().size());
+        assertEquals(0, licenseFinder.getAll().size());
+        final I18nLanguage english = new I18nLanguage(new Long(1819), "English", "English", "en");
+        languageManager.persist(english);
+        final I18nCountry gb = new I18nCountry(new Long(75), "GB", "GBP", ".", "£%n", "", ".", "United Kingdom",
+                "western", ",");
+        countryManager.persist(gb);
+        user = userManager.createUser("username", "the user name", "email@example.com", "userPassword", "en", "GB",
+                TimeZone.getDefault().getID());
+        defLicense = new License("by-sa", "Creative Commons Attribution-ShareAlike", "",
+                "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
+        licenseManager.persist(defLicense);
+        groupManager.createUserGroup(user, true);
     }
 
     @Test
     public void testBasicMimePersist() {
-	final String mimetype = "application/pdf";
-	createContentWithMime(mimetype);
+        final String mimetype = "application/pdf";
+        createContentWithMime(mimetype);
     }
 
     @Test
     public void testBasicMimePersistWithoutSubtype() {
-	final String mimetype = "application";
-	createContentWithMime(mimetype);
+        final String mimetype = "application";
+        createContentWithMime(mimetype);
     }
 
     /**
@@ -94,18 +94,18 @@ public class ContentManagerTest extends PersistenceTest {
      */
     @Test
     public void testUTF8Persist() {
-	final Container container = Mockito.mock(Container.class);
-	final Content cnt = contentManager.createContent("汉语/漢語", "汉语/漢語", user, container);
-	final Content newCnt = contentManager.find(cnt.getId());
-	assertEquals("汉语/漢語", newCnt.getTitle());
+        final Container container = Mockito.mock(Container.class);
+        final Content cnt = contentManager.createContent("汉语/漢語", "汉语/漢語", user, container);
+        final Content newCnt = contentManager.find(cnt.getId());
+        assertEquals("汉语/漢語", newCnt.getTitle());
     }
 
     private void createContentWithMime(final String mimetype) {
-	final Container container = Mockito.mock(Container.class);
-	final Content cnt = contentManager.createContent("title", "body", user, container);
-	cnt.setMimeType(new BasicMimeType(mimetype));
-	persist(cnt);
-	final Content newCnt = contentManager.find(cnt.getId());
-	assertEquals(mimetype, newCnt.getMimeType().toString());
+        final Container container = Mockito.mock(Container.class);
+        final Content cnt = contentManager.createContent("title", "body", user, container);
+        cnt.setMimeType(new BasicMimeType(mimetype));
+        persist(cnt);
+        final Content newCnt = contentManager.find(cnt.getId());
+        assertEquals(mimetype, newCnt.getMimeType().toString());
     }
 }

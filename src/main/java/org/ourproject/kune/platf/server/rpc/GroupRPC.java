@@ -20,8 +20,6 @@
 
 package org.ourproject.kune.platf.server.rpc;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.DefaultException;
@@ -47,7 +45,6 @@ import com.wideplay.warp.persist.Transactional;
 
 @Singleton
 public class GroupRPC implements RPC, GroupService {
-    private static final Log log = LogFactory.getLog(GroupRPC.class);
     private final Mapper mapper;
     private final GroupManager groupManager;
     private final Provider<UserSession> userSessionProvider;
@@ -55,50 +52,50 @@ public class GroupRPC implements RPC, GroupService {
 
     @Inject
     public GroupRPC(final Provider<UserSession> userSessionProvider, final GroupManager groupManager,
-	    final ContentManager contentManager, final Mapper mapper) {
-	this.userSessionProvider = userSessionProvider;
-	this.groupManager = groupManager;
-	this.contentManager = contentManager;
-	this.mapper = mapper;
+            final ContentManager contentManager, final Mapper mapper) {
+        this.userSessionProvider = userSessionProvider;
+        this.groupManager = groupManager;
+        this.contentManager = contentManager;
+        this.mapper = mapper;
     }
 
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
     public void changeGroupWsTheme(final String userHash, final StateToken groupToken, final String theme)
-	    throws DefaultException {
-	final UserSession userSession = getUserSession();
-	final User user = userSession.getUser();
-	final Group group = groupManager.findByShortName(groupToken.getGroup());
-	groupManager.changeWsTheme(user, group, theme);
+            throws DefaultException {
+        final UserSession userSession = getUserSession();
+        final User user = userSession.getUser();
+        final Group group = groupManager.findByShortName(groupToken.getGroup());
+        groupManager.changeWsTheme(user, group, theme);
     }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE, rollbackOn = DefaultException.class)
-    public StateToken createNewGroup(final String userHash, final GroupDTO groupDTO) throws DefaultException {
-	log.debug(groupDTO.getShortName() + groupDTO.getLongName() + groupDTO.getPublicDesc()
-		+ groupDTO.getDefaultLicense() + groupDTO.getType());
-	final UserSession userSession = getUserSession();
-	final User user = userSession.getUser();
-	final Group group = mapper.map(groupDTO, Group.class);
-	final Group newGroup = groupManager.createGroup(group, user);
-	final Long defContentId = newGroup.getDefaultContent().getId();
-	contentManager.setTags(user, defContentId, groupDTO.getTags());
-	return newGroup.getDefaultContent().getStateToken();
+    public StateToken createNewGroup(final String userHash, final GroupDTO groupDTO, String publicDesc, String tags,
+            String[] enabledTools) throws DefaultException {
+        final UserSession userSession = getUserSession();
+        final User user = userSession.getUser();
+        final Group group = mapper.map(groupDTO, Group.class);
+        final Group newGroup = groupManager.createGroup(group, user);
+        final Long defContentId = newGroup.getDefaultContent().getId();
+        contentManager.save(user, newGroup.getDefaultContent(), publicDesc);
+        contentManager.setTags(user, defContentId, tags);
+        return newGroup.getDefaultContent().getStateToken();
     }
 
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
     public GroupDTO setGroupLogo(final String userHash, final StateToken token) {
-	final Group group = groupManager.findByShortName(token.getGroup());
-	final Content content = contentManager.find(ContentUtils.parseId(token.getDocument()));
-	groupManager.setGroupLogo(group, content);
-	return mapper.map(group, GroupDTO.class);
+        final Group group = groupManager.findByShortName(token.getGroup());
+        final Content content = contentManager.find(ContentUtils.parseId(token.getDocument()));
+        groupManager.setGroupLogo(group, content);
+        return mapper.map(group, GroupDTO.class);
     }
 
     private UserSession getUserSession() {
-	return userSessionProvider.get();
+        return userSessionProvider.get();
     }
 
 }

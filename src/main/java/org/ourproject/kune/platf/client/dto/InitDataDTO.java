@@ -20,6 +20,7 @@
 package org.ourproject.kune.platf.client.dto;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
@@ -38,121 +39,139 @@ public class InitDataDTO implements IsSerializable {
     private String siteLogoUrl;
     private String galleryPermittedExtensions;
     private String maxFileSizeInMb;
+    private Collection<ToolSimpleDTO> userTools;
+    private Collection<ToolSimpleDTO> groupTools;
 
     public String getChatDomain() {
-	return chatDomain;
+        return chatDomain;
     }
 
     public String getChatHttpBase() {
-	return chatHttpBase;
+        return chatHttpBase;
     }
 
     public String getChatRoomHost() {
-	return chatRoomHost;
+        return chatRoomHost;
     }
 
     public ArrayList<I18nCountryDTO> getCountries() {
-	return countries;
+        return countries;
     }
 
     public String getDefaultWsTheme() {
-	return defaultWsTheme;
+        return defaultWsTheme;
     }
 
     public String getGalleryPermittedExtensions() {
-	return galleryPermittedExtensions;
+        return galleryPermittedExtensions;
+    }
+
+    public Collection<ToolSimpleDTO> getGroupTools() {
+        return groupTools;
     }
 
     public ArrayList<I18nLanguageSimpleDTO> getLanguages() {
-	return languages;
+        return languages;
     }
 
     public ArrayList<LicenseDTO> getLicenses() {
-	return licenses;
+        return licenses;
     }
 
     public String getMaxFileSizeInMb() {
-	return maxFileSizeInMb;
+        return maxFileSizeInMb;
     }
 
     public String getSiteDomain() {
-	return siteDomain;
+        return siteDomain;
     }
 
     public String getSiteLogoUrl() {
-	return siteLogoUrl;
+        return siteLogoUrl;
     }
 
     public String[] getTimezones() {
-	return timezones;
+        return timezones;
     }
 
     public UserInfoDTO getUserInfo() {
-	return userInfo;
+        return userInfo;
+    }
+
+    public Collection<ToolSimpleDTO> getUserTools() {
+        return userTools;
     }
 
     public String[] getWsThemes() {
-	return wsThemes;
+        return wsThemes;
     }
 
     public boolean hasUser() {
-	return getUserInfo() != null;
+        return getUserInfo() != null;
     }
 
     public void setChatDomain(final String chatDomain) {
-	this.chatDomain = chatDomain;
+        this.chatDomain = chatDomain;
     }
 
     public void setChatHttpBase(final String chatHttpBase) {
-	this.chatHttpBase = chatHttpBase;
+        this.chatHttpBase = chatHttpBase;
     }
 
     public void setChatRoomHost(final String chatRoomHost) {
-	this.chatRoomHost = chatRoomHost;
+        this.chatRoomHost = chatRoomHost;
     }
 
     public void setCountries(final ArrayList<I18nCountryDTO> countries) {
-	this.countries = countries;
+        this.countries = countries;
     }
 
     public void setDefaultWsTheme(final String defaultWsTheme) {
-	this.defaultWsTheme = defaultWsTheme;
+        this.defaultWsTheme = defaultWsTheme;
     }
 
     public void setGalleryPermittedExtensions(final String galleryPermittedExtensions) {
-	this.galleryPermittedExtensions = galleryPermittedExtensions;
+        this.galleryPermittedExtensions = galleryPermittedExtensions;
+    }
+
+    public void setGroupTools(Collection<ToolSimpleDTO> groupTools) {
+        this.groupTools = groupTools;
     }
 
     public void setLanguages(final ArrayList<I18nLanguageSimpleDTO> languages) {
-	this.languages = languages;
+        this.languages = languages;
     }
 
     public void setLicenses(final ArrayList<LicenseDTO> licenses) {
-	this.licenses = licenses;
+        this.licenses = licenses;
     }
 
     public void setMaxFileSizeInMb(final String maxFileSizeInMb) {
-	this.maxFileSizeInMb = maxFileSizeInMb;
+        this.maxFileSizeInMb = maxFileSizeInMb;
     }
 
     public void setSiteDomain(final String siteDomain) {
-	this.siteDomain = siteDomain;
+        this.siteDomain = siteDomain;
     }
 
     public void setSiteLogoUrl(final String siteLogoUrl) {
-	this.siteLogoUrl = siteLogoUrl;
+        this.siteLogoUrl = siteLogoUrl;
     }
 
     public void setTimezones(final String[] timezones) {
-	this.timezones = timezones;
+        this.timezones = timezones;
     }
 
     public void setUserInfo(final UserInfoDTO currentUser) {
-	this.userInfo = currentUser;
+        this.userInfo = currentUser;
+    }
+
+    public void setUserTools(Collection<ToolSimpleDTO> userTools) {
+        this.userTools = userTools;
     }
 
     public void setWsThemes(final String[] wsThemes) {
-	this.wsThemes = wsThemes;
+        this.wsThemes = wsThemes;
     }
 
 }

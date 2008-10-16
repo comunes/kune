@@ -10,4 +10,6 @@ public interface ToolSelectorItemView extends View {
     void setSelected(boolean selected);
 
     void setTheme(WsTheme oldTheme, WsTheme newTheme);
+
+    void setVisible(boolean visible);
 }

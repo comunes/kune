@@ -8,4 +8,6 @@ public interface ToolSelectorItem {
 
     void setSelected(boolean selected);
 
+    void setVisible(boolean visible);
+
 }

@@ -23,6 +23,7 @@ package org.ourproject.kune.platf.server.state;
 import org.ourproject.kune.platf.server.access.Access;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
+import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.Revision;
 
@@ -32,54 +33,55 @@ import com.google.inject.Singleton;
 public class StateServiceDefault implements StateService {
 
     public State create(final Access access) {
-	final Content content = access.getContent();
-	final Container container = access.getContainer();
-	final State state = new State();
+        final Content content = access.getContent();
+        final Container container = access.getContainer();
+        final State state = new State();
 
-	final Long documentId = content.getId();
-	if (documentId != null) {
-	    state.setTypeId(content.getTypeId());
-	    state.setMimeType(content.getMimeType());
-	    state.setDocumentId(documentId.toString());
-	    state.setIsRateable(true);
-	    state.setLanguage(content.getLanguage());
-	    state.setPublishedOn(content.getPublishedOn());
-	    state.setAuthors(content.getAuthors());
-	    state.setTags(content.getTagsAsString());
-	    state.setStatus(content.getStatus());
-	    state.setStateToken(content.getStateToken());
-	} else {
-	    state.setTypeId(container.getTypeId());
-	    state.setDocumentId(null);
-	    state.setIsRateable(false);
-	    state.setLanguage(container.getLanguage());
-	    state.setStateToken(container.getStateToken());
-	}
-	if (!container.isRoot()) {
-	    state.setRootContainer(container.getAbsolutePath().get(0));
-	} else {
-	    state.setRootContainer(container);
-	}
-	final Revision revision = content.getLastRevision();
-	final char[] text = revision.getBody();
-	state.setContent(text == null ? null : new String(text));
-	if (documentId != null) {
-	    state.setTitle(revision.getTitle());
-	} else {
-	    state.setTitle(container.getName());
-	}
-	state.setToolName(container.getToolName());
-	state.setGroup(container.getOwner());
-	state.setContainer(container);
-	state.setAccessLists(access.getContentAccessLists());
-	state.setContentRights(access.getContentRights());
-	state.setContainerRights(access.getContainerRights());
-	state.setGroupRights(access.getGroupRights());
-	License contentLicense = content.getLicense();
-	if (contentLicense == null) {
-	    contentLicense = container.getOwner().getDefaultLicense();
-	}
-	state.setLicense(contentLicense);
-	return state;
+        final Long documentId = content.getId();
+        if (documentId != null) {
+            state.setTypeId(content.getTypeId());
+            state.setMimeType(content.getMimeType());
+            state.setDocumentId(documentId.toString());
+            state.setIsRateable(true);
+            state.setLanguage(content.getLanguage());
+            state.setPublishedOn(content.getPublishedOn());
+            state.setAuthors(content.getAuthors());
+            state.setTags(content.getTagsAsString());
+            state.setStatus(content.getStatus());
+            state.setStateToken(content.getStateToken());
+        } else {
+            state.setTypeId(container.getTypeId());
+            state.setDocumentId(null);
+            state.setIsRateable(false);
+            state.setLanguage(container.getLanguage());
+            state.setStateToken(container.getStateToken());
+        }
+        if (!container.isRoot()) {
+            state.setRootContainer(container.getAbsolutePath().get(0));
+        } else {
+            state.setRootContainer(container);
+        }
+        final Revision revision = content.getLastRevision();
+        final char[] text = revision.getBody();
+        state.setContent(text == null ? null : new String(text));
+        if (documentId != null) {
+            state.setTitle(revision.getTitle());
+        } else {
+            state.setTitle(container.getName());
+        }
+        state.setToolName(container.getToolName());
+        Group group = container.getOwner();
+        state.setGroup(group);
+        state.setContainer(container);
+        state.setAccessLists(access.getContentAccessLists());
+        state.setContentRights(access.getContentRights());
+        state.setContainerRights(access.getContainerRights());
+        state.setGroupRights(access.getGroupRights());
+        License contentLicense = content.getLicense();
+        if (contentLicense == null) {
+            contentLicense = group.getDefaultLicense();
+        }
+        state.setLicense(contentLicense);
+        return state;
     }
 }

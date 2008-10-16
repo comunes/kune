@@ -39,11 +39,16 @@ public interface GroupManager extends Manager<Group, Long> {
 
     Group createUserGroup(User user) throws GroupNameInUseException, EmailAddressInUseException;
 
+    Group createUserGroup(User user, boolean wantPersonalHomepage) throws GroupNameInUseException,
+            EmailAddressInUseException;
+
     List<Group> findAdminInGroups(Long groupId);
 
     Group findByShortName(String groupName);
 
     List<Group> findCollabInGroups(Long groupId);
+
+    List<String> findEnabledTools(Long id);
 
     Group getDefaultGroup();
 

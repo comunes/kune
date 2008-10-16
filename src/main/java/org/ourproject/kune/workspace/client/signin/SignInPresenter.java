@@ -50,159 +50,161 @@ public class SignInPresenter implements SignIn {
     private StateToken previousStateToken;
 
     public SignInPresenter(final Session session, final StateManager stateManager, final I18nUITranslationService i18n,
-	    final UserServiceAsync userService) {
-	this.session = session;
-	this.stateManager = stateManager;
-	this.userService = userService;
-	this.i18n = i18n;
+            final UserServiceAsync userService) {
+        this.session = session;
+        this.stateManager = stateManager;
+        this.userService = userService;
+        this.i18n = i18n;
     }
 
     public void doSignIn(final StateToken previousStateToken) {
-	this.previousStateToken = previousStateToken;
-	if (!session.isLogged()) {
-	    Site.showProgressProcessing();
-	    view.show();
-	    view.center();
-	    Site.hideProgress();
-	} else {
-	    stateManager.gotoToken(previousStateToken);
-	}
+        this.previousStateToken = previousStateToken;
+        if (!session.isLogged()) {
+            Site.showProgressProcessing();
+            view.show();
+            view.center();
+            Site.hideProgress();
+        } else {
+            stateManager.gotoToken(previousStateToken);
+        }
     }
 
     public Object[][] getCountries() {
-	return session.getCountriesArray();
+        return session.getCountriesArray();
     }
 
     public I18nLanguageDTO getCurrentLanguage() {
-	return session.getCurrentLanguage();
+        return session.getCurrentLanguage();
     }
 
     public Object[][] getLanguages() {
-	return session.getLanguagesArray();
+        return session.getLanguagesArray();
     }
 
     public Object[][] getTimezones() {
-	return session.getTimezones();
+        return session.getTimezones();
     }
 
     public void init(final SignInView loginview) {
-	this.view = loginview;
+        this.view = loginview;
     }
 
     public void onCancel() {
-	resetMessages();
-	reset();
-	view.hide();
-	stateManager.gotoToken(previousStateToken);
+        resetMessages();
+        reset();
+        view.hide();
+        stateManager.gotoToken(previousStateToken);
     }
 
     public void onClose() {
-	reset();
-	view.hideMessages();
-	if (!session.isLogged()) {
-	    stateManager.gotoToken(previousStateToken);
-	}
+        reset();
+        view.hideMessages();
+        if (!session.isLogged()) {
+            stateManager.gotoToken(previousStateToken);
+        }
     }
 
     public void onFormRegister() {
-	if (view.isRegisterFormValid()) {
-	    view.maskProcessing();
+        if (view.isRegisterFormValid()) {
+            view.maskProcessing();
 
-	    final I18nLanguageDTO language = new I18nLanguageDTO();
-	    language.setCode(view.getLanguage());
+            final I18nLanguageDTO language = new I18nLanguageDTO();
+            language.setCode(view.getLanguage());
 
-	    final I18nCountryDTO country = new I18nCountryDTO();
-	    country.setCode(view.getCountry());
+            final I18nCountryDTO country = new I18nCountryDTO();
+            country.setCode(view.getCountry());
 
-	    final TimeZoneDTO timezone = new TimeZoneDTO();
-	    timezone.setId(view.getTimezone());
+            final TimeZoneDTO timezone = new TimeZoneDTO();
+            timezone.setId(view.getTimezone());
 
-	    final UserDTO user = new UserDTO(view.getLongName(), view.getShortName(), view.getRegisterPassword(), view
-		    .getEmail(), language, country, timezone, null, true, SubscriptionMode.manual, "blue");
-	    final AsyncCallback<UserInfoDTO> callback = new AsyncCallback<UserInfoDTO>() {
-		public void onFailure(final Throwable caught) {
-		    view.unMask();
-		    try {
-			throw caught;
-		    } catch (final EmailAddressInUseException e) {
-			view.setRegisterMessage(i18n.t("This email in in use by other person, try with another."),
-				SiteErrorType.error);
-		    } catch (final GroupNameInUseException e) {
-			view.setRegisterMessage(i18n.t("This name in already in use, try with a different name."),
-				SiteErrorType.error);
-		    } catch (final Throwable e) {
-			view.setRegisterMessage(i18n.t("Error during registration."), SiteErrorType.error);
-			GWT.log("Other kind of exception in user registration" + e.getMessage() + ", "
-				+ e.getLocalizedMessage(), null);
-			e.printStackTrace();
-			throw new RuntimeException();
-		    }
-		}
+            boolean wantPersonalHomepage = view.wantPersonalHomepage();
 
-		public void onSuccess(final UserInfoDTO userInfoDTO) {
-		    stateManager.gotoToken(userInfoDTO.getHomePage());
-		    onSignIn(userInfoDTO);
-		    view.hide();
-		    view.unMask();
-		    view.showWelcolmeDialog();
-		}
-	    };
-	    userService.createUser(user, callback);
-	}
+            final UserDTO user = new UserDTO(view.getLongName(), view.getShortName(), view.getRegisterPassword(), view
+                    .getEmail(), language, country, timezone, null, true, SubscriptionMode.manual, "blue");
+            final AsyncCallback<UserInfoDTO> callback = new AsyncCallback<UserInfoDTO>() {
+                public void onFailure(final Throwable caught) {
+                    view.unMask();
+                    try {
+                        throw caught;
+                    } catch (final EmailAddressInUseException e) {
+                        view.setRegisterMessage(i18n.t("This email in in use by other person, try with another."),
+                                SiteErrorType.error);
+                    } catch (final GroupNameInUseException e) {
+                        view.setRegisterMessage(i18n.t("This name in already in use, try with a different name."),
+                                SiteErrorType.error);
+                    } catch (final Throwable e) {
+                        view.setRegisterMessage(i18n.t("Error during registration."), SiteErrorType.error);
+                        GWT.log("Other kind of exception in user registration" + e.getMessage() + ", "
+                                + e.getLocalizedMessage(), null);
+                        e.printStackTrace();
+                        throw new RuntimeException();
+                    }
+                }
+
+                public void onSuccess(final UserInfoDTO userInfoDTO) {
+                    stateManager.gotoToken(userInfoDTO.getHomePage());
+                    onSignIn(userInfoDTO);
+                    view.hide();
+                    view.unMask();
+                    view.showWelcolmeDialog();
+                }
+            };
+            userService.createUser(user, wantPersonalHomepage, callback);
+        }
     }
 
     protected void onFormSignIn() {
-	if (view.isSignInFormValid()) {
-	    view.maskProcessing();
+        if (view.isSignInFormValid()) {
+            view.maskProcessing();
 
-	    final String nickOrEmail = view.getNickOrEmail();
-	    final String passwd = view.getLoginPassword();
+            final String nickOrEmail = view.getNickOrEmail();
+            final String passwd = view.getLoginPassword();
 
-	    final UserDTO user = new UserDTO();
-	    user.setShortName(nickOrEmail);
-	    user.setPassword(passwd);
+            final UserDTO user = new UserDTO();
+            user.setShortName(nickOrEmail);
+            user.setPassword(passwd);
 
-	    final AsyncCallback<UserInfoDTO> callback = new AsyncCallback<UserInfoDTO>() {
-		public void onFailure(final Throwable caught) {
-		    view.unMask();
-		    Site.hideProgress();
-		    try {
-			throw caught;
-		    } catch (final UserAuthException e) {
-			view.setSignInMessage(i18n.t("Incorrect nickname/email or password"), SiteErrorType.error);
-		    } catch (final Throwable e) {
-			view.setSignInMessage("Error in login", SiteErrorType.error);
-			Log.error("Other kind of exception in LoginFormPresenter/doLogin");
-		    }
-		}
+            final AsyncCallback<UserInfoDTO> callback = new AsyncCallback<UserInfoDTO>() {
+                public void onFailure(final Throwable caught) {
+                    view.unMask();
+                    Site.hideProgress();
+                    try {
+                        throw caught;
+                    } catch (final UserAuthException e) {
+                        view.setSignInMessage(i18n.t("Incorrect nickname/email or password"), SiteErrorType.error);
+                    } catch (final Throwable e) {
+                        view.setSignInMessage("Error in login", SiteErrorType.error);
+                        Log.error("Other kind of exception in LoginFormPresenter/doLogin");
+                    }
+                }
 
-		public void onSuccess(final UserInfoDTO userInfoDTO) {
-		    onSignIn(userInfoDTO);
-		    stateManager.gotoToken(previousStateToken);
-		    view.hide();
-		    view.unMask();
-		}
-	    };
-	    userService.login(user.getShortName(), user.getPassword(), callback);
-	}
+                public void onSuccess(final UserInfoDTO userInfoDTO) {
+                    onSignIn(userInfoDTO);
+                    stateManager.gotoToken(previousStateToken);
+                    view.hide();
+                    view.unMask();
+                }
+            };
+            userService.login(user.getShortName(), user.getPassword(), callback);
+        }
     }
 
     private void onSignIn(final UserInfoDTO userInfoDTO) {
-	final String userHash = userInfoDTO.getUserHash();
-	view.setCookie(userHash);
-	session.setUserHash(userHash);
-	session.setCurrentUserInfo(userInfoDTO);
-	final I18nLanguageDTO language = userInfoDTO.getLanguage();
-	i18n.changeCurrentLanguage(language.getCode());
-	session.setCurrentLanguage(language);
+        final String userHash = userInfoDTO.getUserHash();
+        view.setCookie(userHash);
+        session.setUserHash(userHash);
+        session.setCurrentUserInfo(userInfoDTO);
+        final I18nLanguageDTO language = userInfoDTO.getLanguage();
+        i18n.changeCurrentLanguage(language.getCode());
+        session.setCurrentLanguage(language);
     }
 
     private void reset() {
-	view.reset();
+        view.reset();
     }
 
     private void resetMessages() {
-	view.hideMessages();
+        view.hideMessages();
     }
 
 }

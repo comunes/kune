@@ -65,235 +65,245 @@ public class State {
     private SocialNetwork groupMembers;
     private ParticipationData participation;
     private StateToken stateToken;
+    private List<String> enabledTools;
 
     public State() {
     }
 
     public AccessLists getAccessLists() {
-	return accessLists;
+        return accessLists;
     }
 
     public List<User> getAuthors() {
-	return authors;
+        return authors;
     }
 
     public Container getContainer() {
-	return container;
+        return container;
     }
 
     public AccessRights getContainerRights() {
-	return containerRights;
+        return containerRights;
     }
 
     public String getContent() {
-	return content;
+        return content;
     }
 
     public AccessRights getContentRights() {
-	return contentRights;
+        return contentRights;
     }
 
     public Double getCurrentUserRate() {
-	return currentUserRate;
+        return currentUserRate;
     }
 
     public String getDocumentId() {
-	return documentId;
+        return documentId;
+    }
+
+    public List<String> getEnabledTools() {
+        return enabledTools;
     }
 
     public Group getGroup() {
-	return group;
+        return group;
     }
 
     public SocialNetwork getGroupMembers() {
-	return groupMembers;
+        return groupMembers;
     }
 
     public AccessRights getGroupRights() {
-	return groupRights;
+        return groupRights;
     }
 
     public List<TagResult> getGroupTags() {
-	return groupTags;
+        return groupTags;
     }
 
     public I18nLanguage getLanguage() {
-	return language;
+        return language;
     }
 
     public License getLicense() {
-	return license;
+        return license;
     }
 
     public BasicMimeType getMimeType() {
-	return mimeType;
+        return mimeType;
     }
 
     public ParticipationData getParticipation() {
-	return participation;
+        return participation;
     }
 
     public Date getPublishedOn() {
-	return publishedOn;
+        return publishedOn;
     }
 
     public Double getRate() {
-	return rate;
+        return rate;
     }
 
     public Integer getRateByUsers() {
-	return rateByUsers;
+        return rateByUsers;
     }
 
     public Container getRootContainer() {
-	return rootContainer;
+        return rootContainer;
     }
 
     public StateToken getStateToken() {
-	return stateToken;
+        return stateToken;
     }
 
     public ContentStatus getStatus() {
-	return status;
+        return status;
     }
 
     public String getTags() {
-	return tags;
+        return tags;
     }
 
     public String getTitle() {
-	return title;
+        return title;
     }
 
     public String getToolName() {
-	return toolName;
+        return toolName;
     }
 
     public String getTypeId() {
-	return typeId;
+        return typeId;
     }
 
     public boolean isRateable() {
-	return isRateable;
+        return isRateable;
     }
 
     public void setAccessLists(final AccessLists accessLists) {
-	this.accessLists = accessLists;
+        this.accessLists = accessLists;
     }
 
     public void setAuthors(final List<User> authors) {
-	this.authors = authors;
+        this.authors = authors;
     }
 
     public void setContainer(final Container container) {
-	this.container = container;
+        this.container = container;
     }
 
     public void setContainerRights(final AccessRights containerRights) {
-	this.containerRights = containerRights;
+        this.containerRights = containerRights;
     }
 
     public void setContent(final String content) {
-	this.content = content;
+        this.content = content;
     }
 
     public void setContentRights(final AccessRights accessRights) {
-	this.contentRights = accessRights;
+        this.contentRights = accessRights;
     }
 
     public void setCurrentUserRate(final Double currentUserRate) {
-	this.currentUserRate = currentUserRate;
+        this.currentUserRate = currentUserRate;
     }
 
     public void setDocumentId(final String docRef) {
-	this.documentId = docRef;
+        this.documentId = docRef;
+    }
+
+    public void setEnabledTools(List<String> enabledTools) {
+        this.enabledTools = enabledTools;
     }
 
     public void setGroup(final Group group) {
-	this.group = group;
+        this.group = group;
     }
 
     public void setGroupMembers(final SocialNetwork groupMembers) {
-	this.groupMembers = groupMembers;
+        this.groupMembers = groupMembers;
     }
 
     public void setGroupRights(final AccessRights groupRights) {
-	this.groupRights = groupRights;
+        this.groupRights = groupRights;
     }
 
     public void setGroupTags(final List<TagResult> groupTags) {
-	this.groupTags = groupTags;
+        this.groupTags = groupTags;
     }
 
     public void setIsRateable(final boolean isRateable) {
-	this.isRateable = isRateable;
+        this.isRateable = isRateable;
     }
 
     public void setLanguage(final I18nLanguage language) {
-	this.language = language;
+        this.language = language;
     }
 
     public void setLicense(final License license) {
-	this.license = license;
+        this.license = license;
     }
 
     public void setMimeType(final BasicMimeType mimeType) {
-	this.mimeType = mimeType;
+        this.mimeType = mimeType;
     }
 
     public void setParticipation(final ParticipationData participation) {
-	this.participation = participation;
+        this.participation = participation;
     }
 
     public void setPublishedOn(final Date publishedOn) {
-	this.publishedOn = publishedOn;
+        this.publishedOn = publishedOn;
     }
 
     public void setRate(final Double rate) {
-	if (rate != null) {
-	    this.rate = rate;
-	} else {
-	    this.rate = 0d;
-	}
+        if (rate != null) {
+            this.rate = rate;
+        } else {
+            this.rate = 0d;
+        }
     }
 
     public void setRateByUsers(final Long rateByUsers) {
-	if (rateByUsers != null) {
-	    this.rateByUsers = rateByUsers.intValue();
-	} else {
-	    this.rateByUsers = 0;
-	}
+        if (rateByUsers != null) {
+            this.rateByUsers = rateByUsers.intValue();
+        } else {
+            this.rateByUsers = 0;
+        }
     }
 
     public void setRootContainer(final Container rootContainer) {
-	this.rootContainer = rootContainer;
+        this.rootContainer = rootContainer;
     }
 
     public void setStateToken(final StateToken stateToken) {
-	this.stateToken = stateToken;
+        this.stateToken = stateToken;
     }
 
     public void setStatus(final ContentStatus status) {
-	this.status = status;
+        this.status = status;
     }
 
     public void setTags(final String tags) {
-	this.tags = tags;
+        this.tags = tags;
     }
 
     public void setTitle(final String title) {
-	this.title = title;
+        this.title = title;
     }
 
     public void setToolName(final String toolName) {
-	this.toolName = toolName;
+        this.toolName = toolName;
     }
 
     public void setTypeId(final String typeId) {
-	this.typeId = typeId;
+        this.typeId = typeId;
     }
 
+    @Override
     public String toString() {
-	return "State[" + stateToken + "/" + typeId + "]";
+        return "State[" + stateToken + "/" + typeId + "]";
     }
 }

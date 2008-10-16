@@ -80,10 +80,6 @@ public class Group implements HasId {
     @Length(min = 3, max = 50, message = "longName between 3 and 50 chars of lenght")
     private String longName;
 
-    @Field(index = Index.TOKENIZED, store = Store.NO)
-    @Length(max = 255, message = "Public desc max 255 chars of lenght")
-    private String publicDesc;
-
     @OneToOne
     private Content defaultContent;
 
@@ -102,186 +98,182 @@ public class Group implements HasId {
     private String workspaceTheme;
 
     public Group() {
-	this(null, null, null, null);
+        this(null, null, null, null);
     }
 
     public Group(final String shortName, final String longName) {
-	this(shortName, longName, null, GroupType.PROJECT);
+        this(shortName, longName, null, GroupType.PROJECT);
     }
 
     public Group(final String shortName, final String longName, final License defaultLicense, final GroupType type) {
-	this.shortName = shortName;
-	this.longName = longName;
-	this.toolsConfig = new HashMap<String, ToolConfiguration>();
-	this.socialNetwork = new SocialNetwork();
-	this.defaultLicense = defaultLicense;
-	this.type = type;
-	this.admissionType = AdmissionType.Moderated;
+        this.shortName = shortName;
+        this.longName = longName;
+        this.toolsConfig = new HashMap<String, ToolConfiguration>();
+        this.socialNetwork = new SocialNetwork();
+        this.defaultLicense = defaultLicense;
+        this.type = type;
+        this.admissionType = AdmissionType.Moderated;
     }
 
     @Override
     public boolean equals(final Object obj) {
-	if (this == obj) {
-	    return true;
-	}
-	if (obj == null) {
-	    return false;
-	}
-	if (getClass() != obj.getClass()) {
-	    return false;
-	}
-	final Group other = (Group) obj;
-	if (shortName == null) {
-	    if (other.shortName != null) {
-		return false;
-	    }
-	} else if (!shortName.equals(other.shortName)) {
-	    return false;
-	}
-	return true;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Group other = (Group) obj;
+        if (shortName == null) {
+            if (other.shortName != null) {
+                return false;
+            }
+        } else if (!shortName.equals(other.shortName)) {
+            return false;
+        }
+        return true;
     }
 
     public boolean existToolConfig(final String toolName) {
-	return toolsConfig.get(toolName) != null;
+        return toolsConfig.get(toolName) != null;
     }
 
     @Finder(query = "FROM Group g WHERE g.id IN (SELECT g.id FROM g.socialNetwork.accessLists.admins.list adm WHERE adm.id = :groupid)")
-    public List<Group> findAdminInGroups(@Named("groupid")
-    final Long groupId) {
-	return null;
+    public List<Group> findAdminInGroups(@Named("groupid") final Long groupId) {
+        return null;
     }
 
     @Finder(query = "FROM Group g WHERE g.shortName = :shortName")
-    public Group findByShortName(@Named("shortName")
-    final String shortName) {
-	return null;
+    public Group findByShortName(@Named("shortName") final String shortName) {
+        return null;
     }
 
     @Finder(query = "FROM Group g WHERE g.id IN (SELECT g.id FROM g.socialNetwork.accessLists.editors.list AS ed WHERE ed.id = :groupid)")
-    public List<Group> findCollabInGroups(@Named("groupid")
-    final Long groupId) {
-	return null;
+    public List<Group> findCollabInGroups(@Named("groupid") final Long groupId) {
+        return null;
+    }
+
+    @Finder(query = "SELECT t.root.toolName FROM ToolConfiguration t WHERE t.enabled=true AND t.root.owner.id = :groupid")
+    public List<String> findEnabledTools(@Named("groupid") final Long groupId) {
+        return null;
     }
 
     public AdmissionType getAdmissionType() {
-	return admissionType;
+        return admissionType;
     }
 
     @Finder(query = "FROM Group")
     public List<Group> getAll() {
-	return null;
+        return null;
     }
 
     public Content getDefaultContent() {
-	return defaultContent;
+        return defaultContent;
     }
 
     public License getDefaultLicense() {
-	return defaultLicense;
+        return defaultLicense;
     }
 
     public Content getGroupLogo() {
-	return groupLogo;
+        return groupLogo;
     }
 
     public Long getId() {
-	return id;
+        return id;
     }
 
     public String getLongName() {
-	return longName;
-    }
-
-    public String getPublicDesc() {
-	return publicDesc;
+        return longName;
     }
 
     public Container getRoot(final String toolName) {
-	return toolsConfig.get(toolName).getRoot();
+        return toolsConfig.get(toolName).getRoot();
     }
 
     public String getShortName() {
-	return shortName;
+        return shortName;
     }
 
     public SocialNetwork getSocialNetwork() {
-	return socialNetwork;
+        return socialNetwork;
     }
 
     public ToolConfiguration getToolConfiguration(final String name) {
-	return toolsConfig.get(name);
+        return toolsConfig.get(name);
     }
 
     public Map<String, ToolConfiguration> getToolsConfig() {
-	return toolsConfig;
+        return toolsConfig;
     }
 
     public GroupType getType() {
-	return type;
+        return type;
     }
 
     public String getWorkspaceTheme() {
-	return workspaceTheme;
+        return workspaceTheme;
     }
 
     @Override
     public int hashCode() {
-	final int prime = 31;
-	int result = 1;
-	result = prime * result + (shortName == null ? 0 : shortName.hashCode());
-	return result;
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (shortName == null ? 0 : shortName.hashCode());
+        return result;
     }
 
     public void setAdmissionType(final AdmissionType admissionType) {
-	this.admissionType = admissionType;
+        this.admissionType = admissionType;
     }
 
     public void setDefaultContent(final Content defaultContent) {
-	this.defaultContent = defaultContent;
+        this.defaultContent = defaultContent;
     }
 
     public void setDefaultLicense(final License defaultLicense) {
-	this.defaultLicense = defaultLicense;
+        this.defaultLicense = defaultLicense;
     }
 
     public void setGroupLogo(final Content groupLogo) {
-	this.groupLogo = groupLogo;
+        this.groupLogo = groupLogo;
     }
 
     public void setId(final Long id) {
-	this.id = id;
+        this.id = id;
     }
 
     public void setLongName(final String longName) {
-	this.longName = longName;
-    }
-
-    public void setPublicDesc(final String publicDesc) {
-	this.publicDesc = publicDesc;
+        this.longName = longName;
     }
 
     public void setShortName(final String shortName) {
-	this.shortName = shortName;
+        this.shortName = shortName;
     }
 
     public void setSocialNetwork(final SocialNetwork socialNetwork) {
-	this.socialNetwork = socialNetwork;
+        this.socialNetwork = socialNetwork;
     }
 
     public ToolConfiguration setToolConfig(final String name, final ToolConfiguration config) {
-	toolsConfig.put(name, config);
-	return config;
+        toolsConfig.put(name, config);
+        return config;
     }
 
     public void setType(final GroupType type) {
-	this.type = type;
+        this.type = type;
     }
 
     public void setWorkspaceTheme(final String workspaceTheme) {
-	this.workspaceTheme = workspaceTheme;
+        this.workspaceTheme = workspaceTheme;
     }
 
+    @Override
     public String toString() {
-	return "Group[" + shortName + "]";
+        return "Group[" + shortName + "]";
     }
+
 }

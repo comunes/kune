@@ -26,20 +26,24 @@ import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 
 /**
- * ATENCIÓN: las tools hay que registrarlas en el módulo correspondiente
- * marcándolas como asEagerSingleton!! y el método register tiene que tener la
- * anotacion de Inject
+ * 
+ * Tools must have a corresponding module and must be marked asEagerSingleton.
+ * The register method must have the @Inject annotation
  * 
  */
 public interface ServerTool {
 
-    public void onCreateContainer(Container container, Container parent, String typeId);
-
-    public void onCreateContent(Content content, Container parent);
-
-    public void register(ToolRegistry registry);
-
     String getName();
 
+    String getRootName();
+
     Group initGroup(User user, Group group);
+
+    void onCreateContainer(Container container, Container parent, String typeId);
+
+    void onCreateContent(Content content, Container parent);
+
+    void register(ServerToolRegistry registry);
+
+    ServerToolTarget getTarget();
 }

@@ -88,7 +88,7 @@ import org.ourproject.kune.platf.server.rpc.SocialNetworkRPC;
 import org.ourproject.kune.platf.server.rpc.UserRPC;
 import org.ourproject.kune.platf.server.state.StateService;
 import org.ourproject.kune.platf.server.state.StateServiceDefault;
-import org.ourproject.kune.platf.server.tool.ToolRegistry;
+import org.ourproject.kune.platf.server.tool.ServerToolRegistry;
 import org.ourproject.kune.platf.server.users.UserInfoService;
 import org.ourproject.kune.platf.server.users.UserInfoServiceDefault;
 import org.ourproject.kune.workspace.client.site.rpc.UserService;
@@ -108,7 +108,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
 	bindServices();
 	bind(KuneProperties.class).to(KunePropertiesDefault.class);
 	bind(Mapper.class).to(DozerMapper.class);
-	bind(ToolRegistry.class);
+	bind(ServerToolRegistry.class);
 	bind(FileUploadManager.class);
 	bind(FileDownloadManager.class);
 

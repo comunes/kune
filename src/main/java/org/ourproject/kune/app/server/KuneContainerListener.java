@@ -31,19 +31,19 @@ import java.util.logging.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.ourproject.kune.docs.server.DocumentServerTool;
 import org.ourproject.kune.platf.server.KunePersistenceService;
-import org.ourproject.kune.platf.server.tool.ToolRegistry;
+import org.ourproject.kune.platf.server.tool.ServerToolRegistry;
 import org.ourproject.kune.rack.ContainerListener;
 
 import com.google.inject.Inject;
 
 class KuneContainerListener implements ContainerListener {
 	KunePersistenceService persistenceService;
-	ToolRegistry toolRegistry;
+	ServerToolRegistry toolRegistry;
 	DocumentServerTool documentTool;
 	Logger logger;
 
 	@Inject
-	public KuneContainerListener(KunePersistenceService persistenceService, ToolRegistry toolRegistry, DocumentServerTool documentTool, Logger logger) {
+	public KuneContainerListener(KunePersistenceService persistenceService, ServerToolRegistry toolRegistry, DocumentServerTool documentTool, Logger logger) {
 		this.persistenceService = persistenceService;
 		this.toolRegistry = toolRegistry;
 		this.documentTool = documentTool;

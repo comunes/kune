@@ -55,6 +55,7 @@ public class StateDTO implements IsSerializable {
     private SocialNetworkDTO groupMembers;
     private ParticipationDataDTO participation;
     private StateToken stateToken;
+    private List<String> enabledTools;
 
     public StateDTO() {
         this(null, null, null);
@@ -96,6 +97,10 @@ public class StateDTO implements IsSerializable {
 
     public String getDocumentId() {
         return documentId;
+    }
+
+    public List<String> getEnabledTools() {
+        return enabledTools;
     }
 
     public GroupDTO getGroup() {
@@ -217,6 +222,10 @@ public class StateDTO implements IsSerializable {
 
     public void setDocumentId(final String docRef) {
         this.documentId = docRef;
+    }
+
+    public void setEnabledTools(List<String> enabledTools) {
+        this.enabledTools = enabledTools;
     }
 
     public void setGroup(final GroupDTO group) {

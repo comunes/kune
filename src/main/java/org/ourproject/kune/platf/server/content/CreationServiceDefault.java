@@ -25,7 +25,7 @@ import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.tool.ToolRegistry;
+import org.ourproject.kune.platf.server.tool.ServerToolRegistry;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -34,11 +34,11 @@ import com.google.inject.Singleton;
 public class CreationServiceDefault implements CreationService {
     private final ContainerManager containerManager;
     private final ContentManager contentManager;
-    private final ToolRegistry tools;
+    private final ServerToolRegistry tools;
 
     @Inject
     public CreationServiceDefault(final ContainerManager containerManager, final ContentManager contentManager,
-	    final ToolRegistry toolRegistry) {
+	    final ServerToolRegistry toolRegistry) {
 	this.containerManager = containerManager;
 	this.contentManager = contentManager;
 	this.tools = toolRegistry;

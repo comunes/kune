@@ -28,7 +28,7 @@ import com.google.gwt.user.client.rpc.RemoteService;
 
 public interface UserService extends RemoteService {
 
-    UserInfoDTO createUser(UserDTO user) throws DefaultException;
+    UserInfoDTO createUser(UserDTO user, boolean wantPersonalHomepage) throws DefaultException;
 
     UserInfoDTO login(String nickOrEmail, String passwd) throws DefaultException;
 

@@ -32,7 +32,8 @@ import org.ourproject.kune.platf.server.domain.ToolConfiguration;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.ToolConfigurationManager;
 import org.ourproject.kune.platf.server.tool.ServerTool;
-import org.ourproject.kune.platf.server.tool.ToolRegistry;
+import org.ourproject.kune.platf.server.tool.ServerToolRegistry;
+import org.ourproject.kune.platf.server.tool.ServerToolTarget;
 
 import com.google.inject.Inject;
 
@@ -57,61 +58,67 @@ public class DocumentServerTool implements ServerTool {
 
     @Inject
     public DocumentServerTool(final ContentManager contentManager, final ContainerManager containerManager,
-	    final ToolConfigurationManager configurationManager, final I18nTranslationService translationService) {
-	this.contentManager = contentManager;
-	this.containerManager = containerManager;
-	this.configurationManager = configurationManager;
-	this.i18n = translationService;
+            final ToolConfigurationManager configurationManager, final I18nTranslationService translationService) {
+        this.contentManager = contentManager;
+        this.containerManager = containerManager;
+        this.configurationManager = configurationManager;
+        this.i18n = translationService;
     }
 
     public String getName() {
-	return NAME;
+        return NAME;
+    }
+
+    public String getRootName() {
+        return ROOT_NAME;
+    }
+
+    public ServerToolTarget getTarget() {
+        return ServerToolTarget.forBoth;
     }
 
     public Group initGroup(final User user, final Group group) {
-	final ToolConfiguration config = new ToolConfiguration();
-	final Container container = containerManager.createRootFolder(group, NAME, ROOT_NAME, TYPE_ROOT);
-	config.setRoot(container);
-	group.setToolConfig(NAME, config);
-	configurationManager.persist(config);
-	final String longName = group.getLongName();
-	final String publicDesc = group.getPublicDesc();
-	final Content descriptor = contentManager.createContent(i18n.t("About [%s]", longName), publicDesc == null ? ""
-		: publicDesc, user, container);
-	descriptor.addAuthor(user);
-	descriptor.setLanguage(user.getLanguage());
-	descriptor.setTypeId(TYPE_DOCUMENT);
-	descriptor.setStatus(ContentStatus.publishedOnline);
-	group.setDefaultContent(descriptor);
-	return group;
+        final ToolConfiguration config = new ToolConfiguration();
+        final Container container = containerManager.createRootFolder(group, NAME, ROOT_NAME, TYPE_ROOT);
+        config.setRoot(container);
+        group.setToolConfig(NAME, config);
+        configurationManager.persist(config);
+        final String longName = group.getLongName();
+        final Content descriptor = contentManager.createContent(i18n.t("About [%s]", longName), "", user, container);
+        descriptor.addAuthor(user);
+        descriptor.setLanguage(user.getLanguage());
+        descriptor.setTypeId(TYPE_DOCUMENT);
+        descriptor.setStatus(ContentStatus.publishedOnline);
+        group.setDefaultContent(descriptor);
+        return group;
     }
 
     public void onCreateContainer(final Container container, final Container parent, final String typeId) {
-	checkTypeId(parent.getTypeId(), typeId);
-	container.setTypeId(typeId);
+        checkTypeId(parent.getTypeId(), typeId);
+        container.setTypeId(typeId);
     }
 
     public void onCreateContent(final Content content, final Container parent) {
-	content.setTypeId(TYPE_DOCUMENT);
+        content.setTypeId(TYPE_DOCUMENT);
     }
 
     @Inject
-    public void register(final ToolRegistry registry) {
-	registry.register(this);
+    public void register(final ServerToolRegistry registry) {
+        registry.register(this);
     }
 
     private void checkTypeId(final String parentTypeId, final String typeId) {
-	if (typeId.equals(TYPE_FOLDER) || typeId.equals(TYPE_GALLERY) || typeId.equals(TYPE_WIKI)) {
-	    // ok valid container
-	    if (typeId.equals(TYPE_GALLERY) && !parentTypeId.equals(TYPE_ROOT)) {
-		throw new ContainerNotPermittedException();
-	    }
-	    if (typeId.equals(TYPE_WIKI) && !parentTypeId.equals(TYPE_ROOT)) {
-		throw new ContainerNotPermittedException();
-	    }
-	} else {
-	    throw new ContainerNotPermittedException();
-	}
+        if (typeId.equals(TYPE_FOLDER) || typeId.equals(TYPE_GALLERY) || typeId.equals(TYPE_WIKI)) {
+            // ok valid container
+            if (typeId.equals(TYPE_GALLERY) && !parentTypeId.equals(TYPE_ROOT)) {
+                throw new ContainerNotPermittedException();
+            }
+            if (typeId.equals(TYPE_WIKI) && !parentTypeId.equals(TYPE_ROOT)) {
+                throw new ContainerNotPermittedException();
+            }
+        } else {
+            throw new ContainerNotPermittedException();
+        }
     }
 
 }

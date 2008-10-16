@@ -19,11 +19,13 @@
  */
 package org.ourproject.kune.platf.server;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.ourproject.kune.platf.server.domain.I18nCountry;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.License;
+import org.ourproject.kune.platf.server.tool.ToolSimple;
 import org.ourproject.kune.platf.server.users.UserInfo;
 
 public class InitData {
@@ -41,117 +43,135 @@ public class InitData {
     private String siteLogoUrl;
     private String galleryPermittedExtensions;
     private String maxFileSizeInMb;
+    private Collection<ToolSimple> userTools;
+    private Collection<ToolSimple> groupTools;
 
     public String getChatDomain() {
-	return chatDomain;
+        return chatDomain;
     }
 
     public String getChatHttpBase() {
-	return chatHttpBase;
+        return chatHttpBase;
     }
 
     public String getChatRoomHost() {
-	return chatRoomHost;
+        return chatRoomHost;
     }
 
     public List<I18nCountry> getCountries() {
-	return countries;
+        return countries;
     }
 
     public String getDefaultWsTheme() {
-	return defaultWsTheme;
+        return defaultWsTheme;
     }
 
     public String getGalleryPermittedExtensions() {
-	return galleryPermittedExtensions;
+        return galleryPermittedExtensions;
+    }
+
+    public Collection<ToolSimple> getGroupTools() {
+        return groupTools;
     }
 
     public List<I18nLanguage> getLanguages() {
-	return languages;
+        return languages;
     }
 
     public List<License> getLicenses() {
-	return licenses;
+        return licenses;
     }
 
     public String getMaxFileSizeInMb() {
-	return maxFileSizeInMb;
+        return maxFileSizeInMb;
     }
 
     public String getSiteDomain() {
-	return siteDomain;
+        return siteDomain;
     }
 
     public String getSiteLogoUrl() {
-	return siteLogoUrl;
+        return siteLogoUrl;
     }
 
     public String[] getTimezones() {
-	return timezones;
+        return timezones;
     }
 
     public UserInfo getUserInfo() {
-	return userInfo;
+        return userInfo;
+    }
+
+    public Collection<ToolSimple> getUserTools() {
+        return userTools;
     }
 
     public String[] getWsThemes() {
-	return wsThemes;
+        return wsThemes;
     }
 
     public void setChatDomain(final String chatDomain) {
-	this.chatDomain = chatDomain;
+        this.chatDomain = chatDomain;
     }
 
     public void setChatHttpBase(final String chatHttpBase) {
-	this.chatHttpBase = chatHttpBase;
+        this.chatHttpBase = chatHttpBase;
     }
 
     public void setChatRoomHost(final String chatRoomHost) {
-	this.chatRoomHost = chatRoomHost;
+        this.chatRoomHost = chatRoomHost;
     }
 
     public void setCountries(final List<I18nCountry> countries) {
-	this.countries = countries;
+        this.countries = countries;
     }
 
     public void setDefaultWsTheme(final String defaultWsTheme) {
-	this.defaultWsTheme = defaultWsTheme;
+        this.defaultWsTheme = defaultWsTheme;
     }
 
     public void setGalleryPermittedExtensions(final String galleryPermittedExtensions) {
-	this.galleryPermittedExtensions = galleryPermittedExtensions;
+        this.galleryPermittedExtensions = galleryPermittedExtensions;
+    }
+
+    public void setGroupTools(Collection<ToolSimple> groupTools) {
+        this.groupTools = groupTools;
     }
 
     public void setLanguages(final List<I18nLanguage> languages) {
-	this.languages = languages;
+        this.languages = languages;
     }
 
     public void setLicenses(final List<License> licenses) {
-	this.licenses = licenses;
+        this.licenses = licenses;
     }
 
     public void setMaxFileSizeInMb(final String maxFileSizeInMb) {
-	this.maxFileSizeInMb = maxFileSizeInMb;
+        this.maxFileSizeInMb = maxFileSizeInMb;
     }
 
     public void setSiteDomain(final String siteDomain) {
-	this.siteDomain = siteDomain;
+        this.siteDomain = siteDomain;
     }
 
     public void setSiteLogoUrl(final String siteLogoUrl) {
-	this.siteLogoUrl = siteLogoUrl;
+        this.siteLogoUrl = siteLogoUrl;
     }
 
     public void setTimezones(final String[] timezones) {
-	this.timezones = timezones;
+        this.timezones = timezones;
     }
 
     public void setUserInfo(final UserInfo currentUserInfo) {
-	this.userInfo = currentUserInfo;
+        this.userInfo = currentUserInfo;
+    }
+
+    public void setUserTools(Collection<ToolSimple> userTools) {
+        this.userTools = userTools;
     }
 
     public void setWsThemes(final String[] wsThemes) {
-	this.wsThemes = wsThemes;
+        this.wsThemes = wsThemes;
     }
 
 }

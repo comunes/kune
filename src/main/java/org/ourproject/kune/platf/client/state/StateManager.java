@@ -49,6 +49,8 @@ public interface StateManager extends HistoryListener {
 
     void removeSiteToken(String token);
 
+    void restorePreviousState();
+
     void setRetrievedState(StateDTO state);
 
     void setSocialNetwork(SocialNetworkResultDTO socialNet);

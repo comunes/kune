@@ -27,136 +27,119 @@ public class GroupDTO implements IsSerializable {
     private Long id;
     private String shortName;
     private String longName;
-    private String publicDesc;
     private GroupType type;
     private ContentSimpleDTO defaultContent;
     private ContentSimpleDTO groupLogo;
     private LicenseDTO defaultLicense;
     private String workspaceTheme;
-    private String tags;
 
     public GroupDTO() {
-	this(null, null, null, GroupType.ORGANIZATION);
+        this(null, null, GroupType.ORGANIZATION);
     }
 
-    public GroupDTO(final String shortName, final String longName, final String publicDesc, final GroupType type) {
-	this.shortName = shortName;
-	this.longName = longName;
-	this.publicDesc = publicDesc;
-	this.type = type;
+    public GroupDTO(final String shortName, final String longName, final GroupType type) {
+        this.shortName = shortName;
+        this.longName = longName;
+        this.type = type;
     }
 
+    @Override
     public boolean equals(final Object obj) {
-	if (this == obj) {
-	    return true;
-	}
-	if (obj == null) {
-	    return false;
-	}
-	final GroupDTO other = (GroupDTO) obj;
-	if (shortName == null) {
-	    if (other.shortName != null) {
-		return false;
-	    }
-	} else if (!shortName.equals(other.shortName)) {
-	    return false;
-	}
-	return true;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        final GroupDTO other = (GroupDTO) obj;
+        if (shortName == null) {
+            if (other.shortName != null) {
+                return false;
+            }
+        } else if (!shortName.equals(other.shortName)) {
+            return false;
+        }
+        return true;
     }
 
     public ContentSimpleDTO getDefaultContent() {
-	return defaultContent;
+        return defaultContent;
     }
 
     public LicenseDTO getDefaultLicense() {
-	return defaultLicense;
+        return defaultLicense;
     }
 
     public ContentSimpleDTO getGroupLogo() {
-	return groupLogo;
+        return groupLogo;
     }
 
     public Long getId() {
-	return id;
+        return id;
     }
 
     public String getLongName() {
-	return longName;
-    }
-
-    public String getPublicDesc() {
-	return publicDesc;
+        return longName;
     }
 
     public String getShortName() {
-	return shortName;
-    }
-
-    public String getTags() {
-	return tags;
+        return shortName;
     }
 
     public GroupType getType() {
-	return type;
+        return type;
     }
 
     public String getWorkspaceTheme() {
-	return workspaceTheme;
+        return workspaceTheme;
     }
 
+    @Override
     public int hashCode() {
-	final int prime = 31;
-	int result = 1;
-	result = prime * result + (defaultLicense == null ? 0 : defaultLicense.hashCode());
-	result = prime * result + (id == null ? 0 : id.hashCode());
-	result = prime * result + (longName == null ? 0 : longName.hashCode());
-	result = prime * result + (publicDesc == null ? 0 : publicDesc.hashCode());
-	result = prime * result + (shortName == null ? 0 : shortName.hashCode());
-	result = prime * result + (type == null ? 0 : type.hashCode());
-	return result;
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (defaultLicense == null ? 0 : defaultLicense.hashCode());
+        result = prime * result + (id == null ? 0 : id.hashCode());
+        result = prime * result + (longName == null ? 0 : longName.hashCode());
+        result = prime * result + (shortName == null ? 0 : shortName.hashCode());
+        result = prime * result + (type == null ? 0 : type.hashCode());
+        return result;
     }
 
     public void setDefaultContent(final ContentSimpleDTO defaultContent) {
-	this.defaultContent = defaultContent;
+        this.defaultContent = defaultContent;
     }
 
     public void setDefaultLicense(final LicenseDTO defaultLicense) {
-	this.defaultLicense = defaultLicense;
+        this.defaultLicense = defaultLicense;
     }
 
     public void setGroupLogo(final ContentSimpleDTO groupLogo) {
-	this.groupLogo = groupLogo;
+        this.groupLogo = groupLogo;
     }
 
     public void setId(final Long id) {
-	this.id = id;
+        this.id = id;
     }
 
     public void setLongName(final String name) {
-	this.longName = name;
-    }
-
-    public void setPublicDesc(final String publicDesc) {
-	this.publicDesc = publicDesc;
+        this.longName = name;
     }
 
     public void setShortName(final String shortName) {
-	this.shortName = shortName;
-    }
-
-    public void setTags(final String tags) {
-	this.tags = tags;
+        this.shortName = shortName;
     }
 
     public void setType(final GroupType type) {
-	this.type = type;
+        this.type = type;
     }
 
     public void setWorkspaceTheme(final String workspaceTheme) {
-	this.workspaceTheme = workspaceTheme;
+        this.workspaceTheme = workspaceTheme;
     }
 
+    @Override
     public String toString() {
-	return "GroupDTO[" + shortName + "]";
+        return "GroupDTO[" + shortName + "]";
     }
 }
