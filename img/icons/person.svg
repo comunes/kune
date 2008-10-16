@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   id="svg3567"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   sodipodi:docname="person.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+  <defs
+     id="defs3569">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective3575" />
+    <inkscape:perspective
+       id="perspective4643"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="380.83857"
+     inkscape:cy="884.33083"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1280"
+     inkscape:window-height="951"
+     inkscape:window-x="1280"
+     inkscape:window-y="25" />
+  <metadata
+     id="metadata3572">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g4515"
+       transform="translate(20.757622,-1.719218)"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/persons/person1-85.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         sodipodi:type="arc"
+         style="opacity:1;fill:#eeaaff;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:1.63299322;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path17249"
+         sodipodi:cx="-55.5"
+         sodipodi:cy="242.36218"
+         sodipodi:rx="12.5"
+         sodipodi:ry="12"
+         d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+         transform="matrix(3.1844753,0,0,3.3202165,480.51643,-696.54479)" />
+      <path
+         id="path17234"
+         d="M 303.77805,68.375596 C 293.58885,68.375596 283.35081,72.22062 275.58218,79.996355 C 260.15886,95.433877 260.05324,120.36456 275.25046,135.94201 C 273.08783,126.46484 275.84182,116.09285 283.21165,108.71623 C 294.60729,97.310092 312.94881,97.310092 324.34445,108.71623 C 331.71423,116.09285 334.46827,126.46484 332.30564,135.94201 C 347.50291,120.36451 347.39735,95.433877 331.97393,79.996355 C 324.20535,72.22062 313.96726,68.375596 303.77805,68.375596 z"
+         style="fill:#dbdee3;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:5.30990267;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         transform="matrix(1.0508232,1.0517911,-1.0946071,1.0956153,627.39292,-109.63872)"
+         d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+         sodipodi:ry="12"
+         sodipodi:rx="12.5"
+         sodipodi:cy="242.36218"
+         sodipodi:cx="-55.5"
+         id="path17236"
+         style="opacity:1;fill:#ff9955;fill-opacity:1;fill-rule:nonzero;stroke:#784421;stroke-width:3.49927115;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+    </g>
+    <g
+       id="g4530"
+       transform="translate(-3.267982,-5.502468)"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/persons/person6-85.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         transform="matrix(3.1844753,0,0,3.3202165,614.65933,-434.25909)"
+         d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+         sodipodi:ry="12"
+         sodipodi:rx="12.5"
+         sodipodi:cy="242.36218"
+         sodipodi:cx="-55.5"
+         id="path3603"
+         style="fill:#abc837;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:1.63299322;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+      <path
+         style="fill:#dbdee3;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:5.30990267;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         d="M 437.92095,330.6613 C 427.73175,330.6613 417.49371,334.50632 409.72508,342.28206 C 394.30176,357.71958 394.19614,382.65026 409.39336,398.22771 C 407.23073,388.75054 409.98472,378.37855 417.35455,371.00193 C 428.75019,359.59579 447.09171,359.59579 458.48735,371.00193 C 465.85713,378.37855 468.61117,388.75054 466.44854,398.22771 C 481.64581,382.65021 481.54025,357.71958 466.11683,342.28206 C 458.34825,334.50632 448.11016,330.6613 437.92095,330.6613 z"
+         id="path3605" />
+      <path
+         sodipodi:nodetypes="csssc"
+         id="path3607"
+         d="M 460.05116,364.96552 C 455.38897,371.83641 432.14686,380.28156 424.78848,372.95567 C 417.51844,365.71771 417.5378,353.91825 424.78848,346.6609 C 432.03916,339.40354 443.80837,339.40354 451.05905,346.6609 C 458.30973,353.91826 455.3126,357.26255 460.05116,364.96552 z"
+         style="fill:#ffe680;fill-opacity:1;fill-rule:nonzero;stroke:#784421;stroke-width:5.30990171;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    </g>
+    <g
+       id="g4510"
+       transform="translate(0.243294,-5.502458)"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/persons/person2-85.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         sodipodi:type="arc"
+         style="opacity:1;fill:#eeaaff;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:1.63299322;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path3628"
+         sodipodi:cx="-55.5"
+         sodipodi:cy="242.36218"
+         sodipodi:rx="12.5"
+         sodipodi:ry="12"
+         d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+         transform="matrix(3.1844753,0,0,3.3202165,608.65933,-692.76155)" />
+      <path
+         id="path3630"
+         d="M 431.92095,72.158845 C 421.73175,72.158845 411.49371,76.003865 403.72508,83.779605 C 388.30176,99.217125 388.19614,124.14781 403.39336,139.72526 C 401.23073,130.24809 403.98472,119.87609 411.35455,112.49948 C 422.75019,101.09333 441.09171,101.09333 452.48735,112.49948 C 459.85713,119.87609 462.61117,130.24809 460.44854,139.72526 C 475.64581,124.14776 475.54025,99.217125 460.11683,83.779605 C 452.34825,76.003865 442.11016,72.158845 431.92095,72.158845 z"
+         style="fill:#dbdee3;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:5.30990267;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         style="fill:#ff9955;fill-opacity:1;fill-rule:nonzero;stroke:#784421;stroke-width:5.30990171;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         d="M 454.05116,106.46307 C 449.38897,113.33396 426.14686,121.7791 418.78848,114.45323 C 411.51844,107.21527 411.5378,95.415805 418.78848,88.158448 C 426.03916,80.901092 437.80837,80.901094 445.05905,88.158453 C 452.30973,95.415815 449.3126,98.760105 454.05116,106.46307 z"
+         id="path3632"
+         sodipodi:nodetypes="csssc" />
+    </g>
+    <g
+       id="g4525"
+       transform="translate(-2.467941,-5.502459)"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/persons/person4-85.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         transform="matrix(3.1844753,0,0,3.3202165,613.65933,-561.26401)"
+         d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+         sodipodi:ry="12"
+         sodipodi:rx="12.5"
+         sodipodi:cy="242.36218"
+         sodipodi:cx="-55.5"
+         id="path3660"
+         style="opacity:1;fill:#ff5555;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:1.63299322;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+      <path
+         style="fill:#dbdee3;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:5.30990267;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         d="M 436.92095,203.65638 C 426.73175,203.65638 416.49371,207.5014 408.72508,215.27714 C 393.30176,230.71466 393.19614,255.64534 408.39336,271.22279 C 406.23073,261.74562 408.98472,251.37363 416.35455,243.99701 C 427.75019,232.59087 446.09171,232.59087 457.48735,243.99701 C 464.85713,251.37363 467.61117,261.74562 465.44854,271.22279 C 480.64581,255.64529 480.54025,230.71466 465.11683,215.27714 C 457.34825,207.5014 447.11016,203.65638 436.92095,203.65638 z"
+         id="path3662" />
+      <path
+         sodipodi:nodetypes="csssc"
+         id="path3664"
+         d="M 459.05116,237.9606 C 454.38897,244.83149 431.14686,253.27664 423.78848,245.95076 C 416.51844,238.7128 416.5378,226.91334 423.78848,219.65598 C 431.03916,212.39863 442.80837,212.39863 450.05905,219.65599 C 457.30973,226.91335 454.3126,230.25764 459.05116,237.9606 z"
+         style="fill:#da5f0e;fill-opacity:1;fill-rule:nonzero;stroke:#673030;stroke-width:5.30990171;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    </g>
+    <g
+       id="g4520"
+       transform="translate(23.468872,-2.433779)"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/persons/person3-85.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         sodipodi:type="arc"
+         style="opacity:1;fill:#ff5555;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:1.63299322;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path4476"
+         sodipodi:cx="-55.5"
+         sodipodi:cy="242.36218"
+         sodipodi:rx="12.5"
+         sodipodi:ry="12"
+         d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+         transform="matrix(3.1844753,0,0,3.3202165,478.73833,-564.33269)" />
+      <path
+         id="path4478"
+         d="M 301.99995,200.5877 C 291.81075,200.5877 281.57271,204.43272 273.80408,212.20846 C 258.38076,227.64598 258.27514,252.57666 273.47236,268.15411 C 271.30973,258.67694 274.06372,248.30495 281.43355,240.92833 C 292.82919,229.52219 311.17071,229.52219 322.56635,240.92833 C 329.93613,248.30495 332.69017,258.67694 330.52754,268.15411 C 345.72481,252.57661 345.61925,227.64598 330.19583,212.20846 C 322.42725,204.43272 312.18916,200.5877 301.99995,200.5877 z"
+         style="fill:#dbdee3;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:5.30990267;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         transform="matrix(1.0508232,1.0517911,-1.0946071,1.0956153,625.61482,22.573385)"
+         d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+         sodipodi:ry="12"
+         sodipodi:rx="12.5"
+         sodipodi:cy="242.36218"
+         sodipodi:cx="-55.5"
+         id="path4480"
+         style="opacity:1;fill:#da5f0e;fill-opacity:1;fill-rule:nonzero;stroke:#673030;stroke-width:3.49927115;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+    </g>
+    <g
+       id="g4535"
+       transform="translate(24.268845,-12.428838)"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/persons/person5-85.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         sodipodi:type="arc"
+         style="opacity:1;fill:#abc837;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:1.63299322;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path4484"
+         sodipodi:cx="-55.5"
+         sodipodi:cy="242.36218"
+         sodipodi:rx="12.5"
+         sodipodi:ry="12"
+         d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+         transform="matrix(3.1844753,0,0,3.3202165,477.73833,-427.33272)" />
+      <path
+         id="path4486"
+         d="M 300.99995,337.58767 C 290.81075,337.58767 280.57271,341.43269 272.80408,349.20843 C 257.38076,364.64595 257.27514,389.57663 272.47236,405.15408 C 270.30973,395.67691 273.06372,385.30492 280.43355,377.9283 C 291.82919,366.52216 310.17071,366.52216 321.56635,377.9283 C 328.93613,385.30492 331.69017,395.67691 329.52754,405.15408 C 344.72481,389.57658 344.61925,364.64595 329.19583,349.20843 C 321.42725,341.43269 311.18916,337.58767 300.99995,337.58767 z"
+         style="fill:#dbdee3;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:5.30990267;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         transform="matrix(1.0508232,1.0517911,-1.0946071,1.0956153,624.61482,159.57335)"
+         d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+         sodipodi:ry="12"
+         sodipodi:rx="12.5"
+         sodipodi:cy="242.36218"
+         sodipodi:cx="-55.5"
+         id="path4488"
+         style="fill:#ffe680;fill-opacity:1;fill-rule:nonzero;stroke:#784421;stroke-width:3.49927115;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+    </g>
+    <g
+       id="g4540"
+       transform="matrix(0.3764923,0,0,0.3764923,102.537,65.71322)"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/persons/person1-32.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         transform="matrix(3.1844753,0,0,3.3202165,480.51643,-696.54479)"
+         d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+         sodipodi:ry="12"
+         sodipodi:rx="12.5"
+         sodipodi:cy="242.36218"
+         sodipodi:cx="-55.5"
+         id="path4542"
+         style="opacity:1;fill:#eeaaff;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:1.63299322;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+      <path
+         style="fill:#dbdee3;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:5.30990267;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         d="M 303.77805,68.375596 C 293.58885,68.375596 283.35081,72.22062 275.58218,79.996355 C 260.15886,95.433877 260.05324,120.36456 275.25046,135.94201 C 273.08783,126.46484 275.84182,116.09285 283.21165,108.71623 C 294.60729,97.310092 312.94881,97.310092 324.34445,108.71623 C 331.71423,116.09285 334.46827,126.46484 332.30564,135.94201 C 347.50291,120.36451 347.39735,95.433877 331.97393,79.996355 C 324.20535,72.22062 313.96726,68.375596 303.77805,68.375596 z"
+         id="path4544" />
+      <path
+         sodipodi:type="arc"
+         style="opacity:1;fill:#ff9955;fill-opacity:1;fill-rule:nonzero;stroke:#784421;stroke-width:3.49927115;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path4546"
+         sodipodi:cx="-55.5"
+         sodipodi:cy="242.36218"
+         sodipodi:rx="12.5"
+         sodipodi:ry="12"
+         d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+         transform="matrix(1.0508232,1.0517911,-1.0946071,1.0956153,627.39292,-109.63872)"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+    </g>
+    <g
+       id="g4548"
+       transform="matrix(0.3764923,0,0,0.3764923,102.78397,147.43392)"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/persons/person3-32.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         transform="matrix(3.1844753,0,0,3.3202165,478.73833,-564.33269)"
+         d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+         sodipodi:ry="12"
+         sodipodi:rx="12.5"
+         sodipodi:cy="242.36218"
+         sodipodi:cx="-55.5"
+         id="path4550"
+         style="opacity:1;fill:#ff5555;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:1.63299322;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+      <path
+         style="fill:#dbdee3;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:5.30990267;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         d="M 301.99995,200.5877 C 291.81075,200.5877 281.57271,204.43272 273.80408,212.20846 C 258.38076,227.64598 258.27514,252.57666 273.47236,268.15411 C 271.30973,258.67694 274.06372,248.30495 281.43355,240.92833 C 292.82919,229.52219 311.17071,229.52219 322.56635,240.92833 C 329.93613,248.30495 332.69017,258.67694 330.52754,268.15411 C 345.72481,252.57661 345.61925,227.64598 330.19583,212.20846 C 322.42725,204.43272 312.18916,200.5877 301.99995,200.5877 z"
+         id="path4552" />
+      <path
+         sodipodi:type="arc"
+         style="opacity:1;fill:#da5f0e;fill-opacity:1;fill-rule:nonzero;stroke:#673030;stroke-width:3.49927115;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path4554"
+         sodipodi:cx="-55.5"
+         sodipodi:cy="242.36218"
+         sodipodi:rx="12.5"
+         sodipodi:ry="12"
+         d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+         transform="matrix(1.0508232,1.0517911,-1.0946071,1.0956153,625.61482,22.573385)"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+    </g>
+    <g
+       id="g4556"
+       transform="matrix(0.3764923,0,0,0.3764923,102.56045,222.8594)"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/persons/person5-32.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         transform="matrix(3.1844753,0,0,3.3202165,477.73833,-427.33272)"
+         d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+         sodipodi:ry="12"
+         sodipodi:rx="12.5"
+         sodipodi:cy="242.36218"
+         sodipodi:cx="-55.5"
+         id="path4558"
+         style="opacity:1;fill:#abc837;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:1.63299322;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+      <path
+         style="fill:#dbdee3;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:5.30990267;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         d="M 300.99995,337.58767 C 290.81075,337.58767 280.57271,341.43269 272.80408,349.20843 C 257.38076,364.64595 257.27514,389.57663 272.47236,405.15408 C 270.30973,395.67691 273.06372,385.30492 280.43355,377.9283 C 291.82919,366.52216 310.17071,366.52216 321.56635,377.9283 C 328.93613,385.30492 331.69017,395.67691 329.52754,405.15408 C 344.72481,389.57658 344.61925,364.64595 329.19583,349.20843 C 321.42725,341.43269 311.18916,337.58767 300.99995,337.58767 z"
+         id="path4560" />
+      <path
+         sodipodi:type="arc"
+         style="fill:#ffe680;fill-opacity:1;fill-rule:nonzero;stroke:#784421;stroke-width:3.49927115;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path4562"
+         sodipodi:cx="-55.5"
+         sodipodi:cy="242.36218"
+         sodipodi:rx="12.5"
+         sodipodi:ry="12"
+         d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+         transform="matrix(1.0508232,1.0517911,-1.0946071,1.0956153,624.61482,159.57335)"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+    </g>
+    <g
+       transform="matrix(0.1882461,0,0,0.1882461,52.093488,86.07207)"
+       id="g4564"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/persons/person1-16.png"
+       inkscape:export-xdpi="89.99485"
+       inkscape:export-ydpi="89.99485">
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         sodipodi:type="arc"
+         style="opacity:1;fill:#eeaaff;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:1.63299322;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path4566"
+         sodipodi:cx="-55.5"
+         sodipodi:cy="242.36218"
+         sodipodi:rx="12.5"
+         sodipodi:ry="12"
+         d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+         transform="matrix(3.1844753,0,0,3.3202165,480.51643,-696.54479)" />
+      <path
+         id="path4568"
+         d="M 303.77805,68.375596 C 293.58885,68.375596 283.35081,72.22062 275.58218,79.996355 C 260.15886,95.433877 260.05324,120.36456 275.25046,135.94201 C 273.08783,126.46484 275.84182,116.09285 283.21165,108.71623 C 294.60729,97.310092 312.94881,97.310092 324.34445,108.71623 C 331.71423,116.09285 334.46827,126.46484 332.30564,135.94201 C 347.50291,120.36451 347.39735,95.433877 331.97393,79.996355 C 324.20535,72.22062 313.96726,68.375596 303.77805,68.375596 z"
+         style="fill:#dbdee3;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:5.30990267;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         transform="matrix(1.0508232,1.0517911,-1.0946071,1.0956153,627.39292,-109.63872)"
+         d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+         sodipodi:ry="12"
+         sodipodi:rx="12.5"
+         sodipodi:cy="242.36218"
+         sodipodi:cx="-55.5"
+         id="path4570"
+         style="opacity:1;fill:#ff9955;fill-opacity:1;fill-rule:nonzero;stroke:#784421;stroke-width:3.49927115;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+    </g>
+    <g
+       transform="matrix(0.1882461,0,0,0.1882461,50.650108,192.6812)"
+       id="g4572"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/persons/person3-16.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         sodipodi:type="arc"
+         style="opacity:1;fill:#ff5555;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:1.63299322;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path4574"
+         sodipodi:cx="-55.5"
+         sodipodi:cy="242.36218"
+         sodipodi:rx="12.5"
+         sodipodi:ry="12"
+         d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+         transform="matrix(3.1844753,0,0,3.3202165,478.73833,-564.33269)" />
+      <path
+         id="path4576"
+         d="M 301.99995,200.5877 C 291.81075,200.5877 281.57271,204.43272 273.80408,212.20846 C 258.38076,227.64598 258.27514,252.57666 273.47236,268.15411 C 271.30973,258.67694 274.06372,248.30495 281.43355,240.92833 C 292.82919,229.52219 311.17071,229.52219 322.56635,240.92833 C 329.93613,248.30495 332.69017,258.67694 330.52754,268.15411 C 345.72481,252.57661 345.61925,227.64598 330.19583,212.20846 C 322.42725,204.43272 312.18916,200.5877 301.99995,200.5877 z"
+         style="fill:#dbdee3;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:5.30990267;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         transform="matrix(1.0508232,1.0517911,-1.0946071,1.0956153,625.61482,22.573385)"
+         d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+         sodipodi:ry="12"
+         sodipodi:rx="12.5"
+         sodipodi:cy="242.36218"
+         sodipodi:cx="-55.5"
+         id="path4578"
+         style="opacity:1;fill:#da5f0e;fill-opacity:1;fill-rule:nonzero;stroke:#673030;stroke-width:3.49927115;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+    </g>
+    <g
+       transform="matrix(0.1882461,0,0,0.1882461,49.838354,293.8964)"
+       id="g4580"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/persons/person5-16.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         sodipodi:type="arc"
+         style="opacity:1;fill:#abc837;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:1.63299322;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path4582"
+         sodipodi:cx="-55.5"
+         sodipodi:cy="242.36218"
+         sodipodi:rx="12.5"
+         sodipodi:ry="12"
+         d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+         transform="matrix(3.1844753,0,0,3.3202165,477.73833,-427.33272)" />
+      <path
+         id="path4584"
+         d="M 300.99995,337.58767 C 290.81075,337.58767 280.57271,341.43269 272.80408,349.20843 C 257.38076,364.64595 257.27514,389.57663 272.47236,405.15408 C 270.30973,395.67691 273.06372,385.30492 280.43355,377.9283 C 291.82919,366.52216 310.17071,366.52216 321.56635,377.9283 C 328.93613,385.30492 331.69017,395.67691 329.52754,405.15408 C 344.72481,389.57658 344.61925,364.64595 329.19583,349.20843 C 321.42725,341.43269 311.18916,337.58767 300.99995,337.58767 z"
+         style="fill:#dbdee3;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:5.30990267;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         transform="matrix(1.0508232,1.0517911,-1.0946071,1.0956153,624.61482,159.57335)"
+         d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+         sodipodi:ry="12"
+         sodipodi:rx="12.5"
+         sodipodi:cy="242.36218"
+         sodipodi:cx="-55.5"
+         id="path4586"
+         style="fill:#ffe680;fill-opacity:1;fill-rule:nonzero;stroke:#784421;stroke-width:3.49927115;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+    </g>
+    <g
+       id="g4588"
+       transform="matrix(0.3764923,0,0,0.3764923,379.16333,225.46712)"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/persons/person6-32.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         sodipodi:type="arc"
+         style="fill:#abc837;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:1.63299322;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path4590"
+         sodipodi:cx="-55.5"
+         sodipodi:cy="242.36218"
+         sodipodi:rx="12.5"
+         sodipodi:ry="12"
+         d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+         transform="matrix(3.1844753,0,0,3.3202165,614.65933,-434.25909)" />
+      <path
+         id="path4592"
+         d="M 437.92095,330.6613 C 427.73175,330.6613 417.49371,334.50632 409.72508,342.28206 C 394.30176,357.71958 394.19614,382.65026 409.39336,398.22771 C 407.23073,388.75054 409.98472,378.37855 417.35455,371.00193 C 428.75019,359.59579 447.09171,359.59579 458.48735,371.00193 C 465.85713,378.37855 468.61117,388.75054 466.44854,398.22771 C 481.64581,382.65021 481.54025,357.71958 466.11683,342.28206 C 458.34825,334.50632 448.11016,330.6613 437.92095,330.6613 z"
+         style="fill:#dbdee3;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:5.30990267;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         style="fill:#ffe680;fill-opacity:1;fill-rule:nonzero;stroke:#784421;stroke-width:5.30990171;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         d="M 460.05116,364.96552 C 455.38897,371.83641 432.14686,380.28156 424.78848,372.95567 C 417.51844,365.71771 417.5378,353.91825 424.78848,346.6609 C 432.03916,339.40354 443.80837,339.40354 451.05905,346.6609 C 458.30973,353.91826 455.3126,357.26255 460.05116,364.96552 z"
+         id="path4594"
+         sodipodi:nodetypes="csssc" />
+    </g>
+    <g
+       id="g4596"
+       transform="matrix(0.3764923,0,0,0.3764923,377.17794,64.28886)"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/persons/person2-32.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         transform="matrix(3.1844753,0,0,3.3202165,608.65933,-692.76155)"
+         d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+         sodipodi:ry="12"
+         sodipodi:rx="12.5"
+         sodipodi:cy="242.36218"
+         sodipodi:cx="-55.5"
+         id="path4598"
+         style="opacity:1;fill:#eeaaff;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:1.63299322;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+      <path
+         style="fill:#dbdee3;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:5.30990267;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         d="M 431.92095,72.158845 C 421.73175,72.158845 411.49371,76.003865 403.72508,83.779605 C 388.30176,99.217125 388.19614,124.14781 403.39336,139.72526 C 401.23073,130.24809 403.98472,119.87609 411.35455,112.49948 C 422.75019,101.09333 441.09171,101.09333 452.48735,112.49948 C 459.85713,119.87609 462.61117,130.24809 460.44854,139.72526 C 475.64581,124.14776 475.54025,99.217125 460.11683,83.779605 C 452.34825,76.003865 442.11016,72.158845 431.92095,72.158845 z"
+         id="path4600" />
+      <path
+         sodipodi:nodetypes="csssc"
+         id="path4602"
+         d="M 454.05116,106.46307 C 449.38897,113.33396 426.14686,121.7791 418.78848,114.45323 C 411.51844,107.21527 411.5378,95.415805 418.78848,88.158448 C 426.03916,80.901092 437.80837,80.901094 445.05905,88.158453 C 452.30973,95.415815 449.3126,98.760105 454.05116,106.46307 z"
+         style="fill:#ff9955;fill-opacity:1;fill-rule:nonzero;stroke:#784421;stroke-width:5.30990171;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    </g>
+    <g
+       id="g4604"
+       transform="matrix(0.3764923,0,0,0.3764923,378.93987,146.27859)"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/persons/person4-32.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         sodipodi:type="arc"
+         style="opacity:1;fill:#ff5555;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:1.63299322;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path4606"
+         sodipodi:cx="-55.5"
+         sodipodi:cy="242.36218"
+         sodipodi:rx="12.5"
+         sodipodi:ry="12"
+         d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+         transform="matrix(3.1844753,0,0,3.3202165,613.65933,-561.26401)" />
+      <path
+         id="path4608"
+         d="M 436.92095,203.65638 C 426.73175,203.65638 416.49371,207.5014 408.72508,215.27714 C 393.30176,230.71466 393.19614,255.64534 408.39336,271.22279 C 406.23073,261.74562 408.98472,251.37363 416.35455,243.99701 C 427.75019,232.59087 446.09171,232.59087 457.48735,243.99701 C 464.85713,251.37363 467.61117,261.74562 465.44854,271.22279 C 480.64581,255.64529 480.54025,230.71466 465.11683,215.27714 C 457.34825,207.5014 447.11016,203.65638 436.92095,203.65638 z"
+         style="fill:#dbdee3;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:5.30990267;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         style="fill:#da5f0e;fill-opacity:1;fill-rule:nonzero;stroke:#673030;stroke-width:5.30990171;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         d="M 459.05116,237.9606 C 454.38897,244.83149 431.14686,253.27664 423.78848,245.95076 C 416.51844,238.7128 416.5378,226.91334 423.78848,219.65598 C 431.03916,212.39863 442.80837,212.39863 450.05905,219.65599 C 457.30973,226.91335 454.3126,230.25764 459.05116,237.9606 z"
+         id="path4610"
+         sodipodi:nodetypes="csssc" />
+    </g>
+    <g
+       transform="matrix(0.1882461,0,0,0.1882461,570.98451,295.20026)"
+       id="g4612"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/persons/person6-16.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         transform="matrix(3.1844753,0,0,3.3202165,614.65933,-434.25909)"
+         d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+         sodipodi:ry="12"
+         sodipodi:rx="12.5"
+         sodipodi:cy="242.36218"
+         sodipodi:cx="-55.5"
+         id="path4614"
+         style="fill:#abc837;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:1.63299322;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+      <path
+         style="fill:#dbdee3;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:5.30990267;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         d="M 437.92095,330.6613 C 427.73175,330.6613 417.49371,334.50632 409.72508,342.28206 C 394.30176,357.71958 394.19614,382.65026 409.39336,398.22771 C 407.23073,388.75054 409.98472,378.37855 417.35455,371.00193 C 428.75019,359.59579 447.09171,359.59579 458.48735,371.00193 C 465.85713,378.37855 468.61117,388.75054 466.44854,398.22771 C 481.64581,382.65021 481.54025,357.71958 466.11683,342.28206 C 458.34825,334.50632 448.11016,330.6613 437.92095,330.6613 z"
+         id="path4616" />
+      <path
+         sodipodi:nodetypes="csssc"
+         id="path4618"
+         d="M 460.05116,364.96552 C 455.38897,371.83641 432.14686,380.28156 424.78848,372.95567 C 417.51844,365.71771 417.5378,353.91825 424.78848,346.6609 C 432.03916,339.40354 443.80837,339.40354 451.05905,346.6609 C 458.30973,353.91826 455.3126,357.26255 460.05116,364.96552 z"
+         style="fill:#ffe680;fill-opacity:1;fill-rule:nonzero;stroke:#784421;stroke-width:5.30990171;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    </g>
+    <g
+       transform="matrix(0.1882461,0,0,0.1882461,566.11399,85.35989)"
+       id="g4620"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/persons/person2-16.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         sodipodi:type="arc"
+         style="opacity:1;fill:#eeaaff;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:1.63299322;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path4622"
+         sodipodi:cx="-55.5"
+         sodipodi:cy="242.36218"
+         sodipodi:rx="12.5"
+         sodipodi:ry="12"
+         d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+         transform="matrix(3.1844753,0,0,3.3202165,608.65933,-692.76155)" />
+      <path
+         id="path4624"
+         d="M 431.92095,72.158845 C 421.73175,72.158845 411.49371,76.003865 403.72508,83.779605 C 388.30176,99.217125 388.19614,124.14781 403.39336,139.72526 C 401.23073,130.24809 403.98472,119.87609 411.35455,112.49948 C 422.75019,101.09333 441.09171,101.09333 452.48735,112.49948 C 459.85713,119.87609 462.61117,130.24809 460.44854,139.72526 C 475.64581,124.14776 475.54025,99.217125 460.11683,83.779605 C 452.34825,76.003865 442.11016,72.158845 431.92095,72.158845 z"
+         style="fill:#dbdee3;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:5.30990267;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <path
+         style="fill:#ff9955;fill-opacity:1;fill-rule:nonzero;stroke:#784421;stroke-width:5.30990171;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         d="M 454.05116,106.46307 C 449.38897,113.33396 426.14686,121.7791 418.78848,114.45323 C 411.51844,107.21527 411.5378,95.415805 418.78848,88.158448 C 426.03916,80.901092 437.80837,80.901094 445.05905,88.158453 C 452.30973,95.415815 449.3126,98.760105 454.05116,106.46307 z"
+         id="path4626"
+         sodipodi:nodetypes="csssc" />
+    </g>
+    <g
+       transform="matrix(0.1882461,0,0,0.1882461,570.17277,192.10353)"
+       id="g4628"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/persons/person4-16.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         transform="matrix(3.1844753,0,0,3.3202165,613.65933,-561.26401)"
+         d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+         sodipodi:ry="12"
+         sodipodi:rx="12.5"
+         sodipodi:cy="242.36218"
+         sodipodi:cx="-55.5"
+         id="path4630"
+         style="opacity:1;fill:#ff5555;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:1.63299322;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc"
+         inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+      <path
+         style="fill:#dbdee3;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:5.30990267;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         d="M 436.92095,203.65638 C 426.73175,203.65638 416.49371,207.5014 408.72508,215.27714 C 393.30176,230.71466 393.19614,255.64534 408.39336,271.22279 C 406.23073,261.74562 408.98472,251.37363 416.35455,243.99701 C 427.75019,232.59087 446.09171,232.59087 457.48735,243.99701 C 464.85713,251.37363 467.61117,261.74562 465.44854,271.22279 C 480.64581,255.64529 480.54025,230.71466 465.11683,215.27714 C 457.34825,207.5014 447.11016,203.65638 436.92095,203.65638 z"
+         id="path4632" />
+      <path
+         sodipodi:nodetypes="csssc"
+         id="path4634"
+         d="M 459.05116,237.9606 C 454.38897,244.83149 431.14686,253.27664 423.78848,245.95076 C 416.51844,238.7128 416.5378,226.91334 423.78848,219.65598 C 431.03916,212.39863 442.80837,212.39863 450.05905,219.65599 C 457.30973,226.91335 454.3126,230.25764 459.05116,237.9606 z"
+         style="fill:#da5f0e;fill-opacity:1;fill-rule:nonzero;stroke:#673030;stroke-width:5.30990171;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    </g>
+  </g>
+</svg>

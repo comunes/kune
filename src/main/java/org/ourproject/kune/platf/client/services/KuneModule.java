@@ -90,7 +90,7 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 public class KuneModule extends AbstractModule {
 
     @Override
-    public void onLoad() {
+    public void onInstall() {
 
         register(Singleton.class, new Factory<Session>(Session.class) {
             @Override

@@ -307,7 +307,7 @@
       org.ourproject.kune.platf.client.dto.ParticipationDataDTO
     </class-a>
     <class-b>
-      org.ourproject.kune.platf.server.ParticipationData
+      org.ourproject.kune.platf.server.sn.ParticipationData
     </class-b>
   </mapping>
 
@@ -446,4 +446,12 @@
     </class-b>
   </mapping>
 
+  <mapping>
+    <class-a>
+      org.ourproject.kune.platf.client.dto.UserBuddiesDataDTO
+    </class-a>
+    <class-b>
+      org.ourproject.kune.platf.server.sn.UserBuddiesData
+    </class-b>
+  </mapping>
 </mappings>

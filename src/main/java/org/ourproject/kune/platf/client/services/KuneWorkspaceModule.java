@@ -58,6 +58,9 @@ import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserMenu;
 import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserMenuPanel;
 import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserMenuPresenter;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.socialnet.BuddiesSummary;
+import org.ourproject.kune.workspace.client.socialnet.BuddiesSummaryPanel;
+import org.ourproject.kune.workspace.client.socialnet.BuddiesSummaryPresenter;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummary;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryPanel;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryPresenter;
@@ -87,7 +90,7 @@ import com.calclab.suco.client.ioc.module.Factory;
 
 public class KuneWorkspaceModule extends AbstractModule {
     @Override
-    protected void onLoad() {
+    protected void onInstall() {
 
         register(ApplicationComponentGroup.class, new Factory<WorkspaceSkeleton>(WorkspaceSkeleton.class) {
             @Override
@@ -323,6 +326,18 @@ public class KuneWorkspaceModule extends AbstractModule {
                 final GroupSummaryView view = new GroupSummaryPanel(presenter, $(I18nUITranslationService.class),
                         $(WorkspaceSkeleton.class));
                 presenter.init(view);
+                return presenter;
+            }
+        });
+
+        register(ApplicationComponentGroup.class, new Factory<BuddiesSummary>(BuddiesSummary.class) {
+            @Override
+            public BuddiesSummary create() {
+                final BuddiesSummaryPresenter presenter = new BuddiesSummaryPresenter($(StateManager.class),
+                        $(Session.class));
+                final BuddiesSummaryPanel panel = new BuddiesSummaryPanel(presenter, $(WorkspaceSkeleton.class),
+                        $(I18nTranslationService.class));
+                presenter.init(panel);
                 return presenter;
             }
         });

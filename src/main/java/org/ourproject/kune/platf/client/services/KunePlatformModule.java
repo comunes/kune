@@ -18,26 +18,28 @@ import com.calclab.suco.client.ioc.module.Factory;
 public class KunePlatformModule extends AbstractModule {
 
     @Override
-    protected void onLoad() {
-	register(Singleton.class, new Factory<ColorWebSafePalette>(ColorWebSafePalette.class) {
-	    public ColorWebSafePalette create() {
-		final ColorWebSafePalettePresenter presenter = new ColorWebSafePalettePresenter();
-		final ColorWebSafePalettePanel panel = new ColorWebSafePalettePanel(presenter);
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
+    protected void onInstall() {
+        register(Singleton.class, new Factory<ColorWebSafePalette>(ColorWebSafePalette.class) {
+            @Override
+            public ColorWebSafePalette create() {
+                final ColorWebSafePalettePresenter presenter = new ColorWebSafePalettePresenter();
+                final ColorWebSafePalettePanel panel = new ColorWebSafePalettePanel(presenter);
+                presenter.init(panel);
+                return presenter;
+            }
+        });
 
-	register(Singleton.class, new Factory<FileUploader>(FileUploader.class) {
-	    public FileUploader create() {
-		final FileUploaderPresenter presenter = new FileUploaderPresenter($(Session.class),
-			$$(ContextNavigator.class));
-		final FileUploaderDialog panel = new FileUploaderDialog(presenter, $(I18nUITranslationService.class),
-			$(WorkspaceSkeleton.class));
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
+        register(Singleton.class, new Factory<FileUploader>(FileUploader.class) {
+            @Override
+            public FileUploader create() {
+                final FileUploaderPresenter presenter = new FileUploaderPresenter($(Session.class),
+                        $$(ContextNavigator.class));
+                final FileUploaderDialog panel = new FileUploaderDialog(presenter, $(I18nUITranslationService.class),
+                        $(WorkspaceSkeleton.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
 
     }
 }

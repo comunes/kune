@@ -56,6 +56,7 @@ public class StateDTO implements IsSerializable {
     private ParticipationDataDTO participation;
     private StateToken stateToken;
     private List<String> enabledTools;
+    private UserBuddiesDataDTO userBuddies;
 
     public StateDTO() {
         this(null, null, null);
@@ -177,6 +178,10 @@ public class StateDTO implements IsSerializable {
 
     public String getTypeId() {
         return typeId;
+    }
+
+    public UserBuddiesDataDTO getUserBuddies() {
+        return userBuddies;
     }
 
     public int getVersion() {
@@ -306,6 +311,10 @@ public class StateDTO implements IsSerializable {
 
     public void setTypeId(final String typeId) {
         this.typeId = typeId;
+    }
+
+    public void setUserBuddies(UserBuddiesDataDTO userBuddies) {
+        this.userBuddies = userBuddies;
     }
 
     public void setVersion(final int version) {

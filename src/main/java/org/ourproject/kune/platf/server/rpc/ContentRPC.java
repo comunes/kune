@@ -32,6 +32,7 @@ import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.CommentDTO;
 import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
+import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
@@ -65,6 +66,7 @@ import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 import org.ourproject.kune.platf.server.manager.TagManager;
+import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.platf.server.state.State;
 import org.ourproject.kune.platf.server.state.StateService;
@@ -90,18 +92,21 @@ public class ContentRPC implements ContentService, RPC {
     private final SocialNetworkManager socialNetworkManager;
     private final CommentManager commentManager;
     private final AccessRightsService rightsService;
+    private final UserManager userManager;
 
     @Inject
     public ContentRPC(final Provider<UserSession> userSessionProvider, final AccessService accessService,
             final AccessRightsService rightsService, final StateService stateService,
-            final CreationService creationService, final GroupManager groupManager, final XmppManager xmppManager,
-            final ContentManager contentManager, final ContainerManager containerManager, final TagManager tagManager,
+            final CreationService creationService, final UserManager userManager, final GroupManager groupManager,
+            final XmppManager xmppManager, final ContentManager contentManager,
+            final ContainerManager containerManager, final TagManager tagManager,
             final SocialNetworkManager socialNetworkManager, final CommentManager commentManager, final Mapper mapper) {
         this.userSessionProvider = userSessionProvider;
         this.accessService = accessService;
         this.rightsService = rightsService;
         this.stateService = stateService;
         this.creationService = creationService;
+        this.userManager = userManager;
         this.groupManager = groupManager;
         this.xmppManager = xmppManager;
         this.contentManager = contentManager;
@@ -421,6 +426,9 @@ public class ContentRPC implements ContentService, RPC {
         state.setGroupTags(tagManager.getSummaryByGroup(group));
         state.setGroupMembers(socialNetworkManager.get(user, group));
         state.setParticipation(socialNetworkManager.findParticipation(user, group));
+        if (group.getType().equals(GroupType.PERSONAL)) {
+            state.setUserBuddies(userManager.getUserBuddies(group.getShortName()));
+        }
     }
 
     private State createFolder(final String groupShortName, final Long parentFolderId, final String title,

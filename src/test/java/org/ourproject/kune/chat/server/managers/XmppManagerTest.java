@@ -6,13 +6,35 @@ import static org.junit.Assert.assertNotNull;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 
 import com.google.inject.Inject;
 
-//FIXME: check this tests
-public abstract class XmppManagerTest {
+public class XmppManagerTest {
+
+    public static class OutputListener implements RoomListener {
+        Log log = LogFactory.getLog(OutputListener.class);
+        private final String name;
+        private int hits;
+
+        public OutputListener(final String name) {
+            this.name = name;
+            this.hits = 0;
+        }
+
+        public int getHits() {
+            return hits;
+        }
+
+        public void onMessage(final String from, final String to, final String body) {
+            log.debug("Al listener " + name + "ha llegado: ");
+            log.debug(from + "- " + to + ": " + body);
+            hits++;
+        }
+
+    }
 
     @Inject
     XmppManager manager;
@@ -22,18 +44,7 @@ public abstract class XmppManagerTest {
         IntegrationTestHelper.createInjector().injectMembers(this);
     }
 
-    @Test
-    public void testConnection() {
-        ChatConnection handler1 = manager.login("admin", "easyeasy", "test");
-        assertNotNull(handler1);
-    }
-
-    // @Test(expected = ChatException.class)
-    public void testUserDontExist() {
-        manager.login("user", "passowrd", "test");
-    }
-
-    // @Test
+    @Ignore
     public void testBroadcast() {
         String roomName = "roomName";
         ChatConnection conn1 = manager.login("testUser1", "easy1", "test");
@@ -58,25 +69,20 @@ public abstract class XmppManagerTest {
         assertEquals(4, listener2.getHits());
     }
 
-    public static class OutputListener implements RoomListener {
-        Log log = LogFactory.getLog(OutputListener.class);
-        private final String name;
-        private int hits;
+    @Test
+    public void testConnection() {
+        ChatConnection handler1 = manager.login("admin", "easyeasy", "test");
+        assertNotNull(handler1);
+    }
 
-        public OutputListener(final String name) {
-            this.name = name;
-            this.hits = 0;
-        }
+    @Test
+    public void testGetRoster() {
+        ChatConnection handler = manager.login("admin", "easyeasy", "test");
+        assertNotNull(manager.getRoster(handler));
+    }
 
-        public void onMessage(final String from, final String to, final String body) {
-            log.debug("Al listener " + name + "ha llegado: ");
-            log.debug(from + "- " + to + ": " + body);
-            hits++;
-        }
-
-        public int getHits() {
-            return hits;
-        }
-
+    @Test(expected = ChatException.class)
+    public void testUserDontExist() {
+        manager.login("user", "passowrd", "test");
     }
 }

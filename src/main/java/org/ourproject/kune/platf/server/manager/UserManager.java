@@ -23,6 +23,7 @@ package org.ourproject.kune.platf.server.manager;
 import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
+import org.ourproject.kune.platf.server.sn.UserBuddiesData;
 
 public interface UserManager {
     /**
@@ -40,7 +41,7 @@ public interface UserManager {
      * @throws I18nNotFoundException
      */
     User createUser(String shortName, String longName, String email, String passwd, String language, String country,
-	    String timezone) throws I18nNotFoundException;
+            String timezone) throws I18nNotFoundException;
 
     /**
      * IMPORTANT: if userId == null, it returns User.UNKNOWN_USER
@@ -49,6 +50,8 @@ public interface UserManager {
      * @return
      */
     User find(Long userId);
+
+    UserBuddiesData getUserBuddies(String shortName);
 
     User login(String nickOrEmail, String passwd);
 

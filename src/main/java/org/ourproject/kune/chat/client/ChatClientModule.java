@@ -40,71 +40,79 @@ public class ChatClientModule extends AbstractModule {
     }
 
     @Override
-    public void onLoad() {
+    public void onInstall() {
 
-	register(Singleton.class, new Factory<ChatInfo>(ChatInfo.class) {
-	    public ChatInfo create() {
-		return new ChatInfoPanel();
-	    }
-	});
+        register(Singleton.class, new Factory<ChatInfo>(ChatInfo.class) {
+            @Override
+            public ChatInfo create() {
+                return new ChatInfoPanel();
+            }
+        });
 
-	register(ToolGroup.class, new Factory<ChatClientActions>(ChatClientActions.class) {
-	    public ChatClientActions create() {
-		return new ChatClientActions($(I18nUITranslationService.class), $(Session.class),
-			$(ContentActionRegistry.class), $(ContextActionRegistry.class), $$(ChatClientTool.class));
-	    }
-	});
+        register(ToolGroup.class, new Factory<ChatClientActions>(ChatClientActions.class) {
+            @Override
+            public ChatClientActions create() {
+                return new ChatClientActions($(I18nUITranslationService.class), $(Session.class),
+                        $(ContentActionRegistry.class), $(ContextActionRegistry.class), $$(ChatClientTool.class));
+            }
+        });
 
-	register(Singleton.class, new Factory<ChatContent>(ChatContent.class) {
-	    public ChatContent create() {
-		final WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
-		final ChatContentPresenter presenter = new ChatContentPresenter($(EmiteUIDialog.class), panel,
-			$$(ChatInfo.class), $$(ChatRoom.class));
-		return presenter;
-	    }
-	});
+        register(Singleton.class, new Factory<ChatContent>(ChatContent.class) {
+            @Override
+            public ChatContent create() {
+                final WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
+                final ChatContentPresenter presenter = new ChatContentPresenter($(EmiteUIDialog.class), panel,
+                        $$(ChatInfo.class), $$(ChatRoom.class));
+                return presenter;
+            }
+        });
 
-	register(Singleton.class, new Factory<ChatContext>(ChatContext.class) {
-	    public ChatContext create() {
-		final WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
-		final ChatContextPresenter presenter = new ChatContextPresenter(panel, $$(RoomsAdmin.class));
-		return presenter;
-	    }
-	});
+        register(Singleton.class, new Factory<ChatContext>(ChatContext.class) {
+            @Override
+            public ChatContext create() {
+                final WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
+                final ChatContextPresenter presenter = new ChatContextPresenter(panel, $$(RoomsAdmin.class));
+                return presenter;
+            }
+        });
 
-	register(Singleton.class, new Factory<ChatRoomControl>(ChatRoomControl.class) {
-	    public ChatRoomControl create() {
-		final ChatRoomControlPresenter presenter = new ChatRoomControlPresenter();
-		final ChatRoomControlPanel panel = new ChatRoomControlPanel($(I18nUITranslationService.class),
-			presenter);
-		presenter.init(panel);
-		return presenter;
-	    }
-	});
+        register(Singleton.class, new Factory<ChatRoomControl>(ChatRoomControl.class) {
+            @Override
+            public ChatRoomControl create() {
+                final ChatRoomControlPresenter presenter = new ChatRoomControlPresenter();
+                final ChatRoomControlPanel panel = new ChatRoomControlPanel($(I18nUITranslationService.class),
+                        presenter);
+                presenter.init(panel);
+                return presenter;
+            }
+        });
 
-	register(Singleton.class, new Factory<ChatRoom>(ChatRoom.class) {
-	    public ChatRoom create() {
-		final ChatRoomPanel panel = new ChatRoomPanel($(WorkspaceSkeleton.class));
-		final ChatRoomPresenter presenter = new ChatRoomPresenter(panel);
-		return presenter;
-	    }
-	});
-	register(Singleton.class, new Factory<RoomsAdmin>(RoomsAdmin.class) {
-	    public RoomsAdmin create() {
-		final RoomsAdminPresenter presenter = new RoomsAdminPresenter($(ContextNavigator.class),
-			$(I18nUITranslationService.class), $$(StateManager.class), $(Session.class),
-			$$(ContentServiceAsync.class));
-		return presenter;
-	    }
-	});
+        register(Singleton.class, new Factory<ChatRoom>(ChatRoom.class) {
+            @Override
+            public ChatRoom create() {
+                final ChatRoomPanel panel = new ChatRoomPanel($(WorkspaceSkeleton.class));
+                final ChatRoomPresenter presenter = new ChatRoomPresenter(panel);
+                return presenter;
+            }
+        });
+        register(Singleton.class, new Factory<RoomsAdmin>(RoomsAdmin.class) {
+            @Override
+            public RoomsAdmin create() {
+                final RoomsAdminPresenter presenter = new RoomsAdminPresenter($(ContextNavigator.class),
+                        $(I18nUITranslationService.class), $$(StateManager.class), $(Session.class),
+                        $$(ContentServiceAsync.class));
+                return presenter;
+            }
+        });
 
-	register(ToolGroup.class, new Factory<ChatClientTool>(ChatClientTool.class) {
-	    public ChatClientTool create() {
-		return new ChatClientTool($(Session.class), $(Application.class), $(I18nUITranslationService.class),
-			$(EmiteUIDialog.class), $(WorkspaceSkeleton.class), $$(GroupMembersSummary.class),
-			$(ToolSelector.class), $(WsThemePresenter.class), $$(ChatContent.class), $$(ChatContext.class));
-	    }
-	});
+        register(ToolGroup.class, new Factory<ChatClientTool>(ChatClientTool.class) {
+            @Override
+            public ChatClientTool create() {
+                return new ChatClientTool($(Session.class), $(Application.class), $(I18nUITranslationService.class),
+                        $(EmiteUIDialog.class), $(WorkspaceSkeleton.class), $$(GroupMembersSummary.class),
+                        $(ToolSelector.class), $(WsThemePresenter.class), $$(ChatContent.class), $$(ChatContext.class));
+            }
+        });
 
     }
 }

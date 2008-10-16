@@ -20,18 +20,24 @@
 
 package org.ourproject.kune.chat.server.managers;
 
+import java.util.Collection;
+
+import org.jivesoftware.smack.RosterEntry;
+
 public interface XmppManager {
-
-    ChatConnection login(String userName, String password, String resource);
-
-    void disconnect(ChatConnection connection);
 
     Room createRoom(ChatConnection connection, String roomName, String ownerAlias);
 
+    void destroyRoom(ChatConnection conn, String roomName);
+
+    void disconnect(ChatConnection connection);
+
+    Collection<RosterEntry> getRoster(ChatConnection connection);
+
     Room joinRoom(ChatConnection connection, String roomName, String alias);
 
-    void sendMessage(Room room, String message);
+    ChatConnection login(String userName, String password, String resource);
 
-    void destroyRoom(ChatConnection conn, String roomName);
+    void sendMessage(Room room, String message);
 
 }

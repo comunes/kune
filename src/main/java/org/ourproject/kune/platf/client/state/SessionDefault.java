@@ -20,7 +20,6 @@
 
 package org.ourproject.kune.platf.client.state;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.I18nCountryDTO;
@@ -35,6 +34,7 @@ import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.workspace.client.site.rpc.UserServiceAsync;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.calclab.suco.client.event.Events;
 import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Event;
 import com.calclab.suco.client.listener.Event0;
@@ -56,150 +56,148 @@ public class SessionDefault implements Session {
     private final Provider<UserServiceAsync> userServiceProvider;
 
     public SessionDefault(final String userHash, final Provider<UserServiceAsync> userServiceProvider) {
-	this.userHash = userHash == null || userHash.equals("null") ? null : userHash;
-	this.userServiceProvider = userServiceProvider;
-	languagesArray = null;
-	this.onInitDataReceived = new Event<InitDataDTO>("initDataReceived");
-	this.onUserSignIn = new Event<UserInfoDTO>("onUserSignIn");
-	this.onUserSignOut = new Event0("onUserSignOut");
+        this.userHash = userHash == null || userHash.equals("null") ? null : userHash;
+        this.userServiceProvider = userServiceProvider;
+        languagesArray = null;
+        this.onInitDataReceived = Events.create(InitDataDTO.class, "initDataReceived");
+        this.onUserSignIn = new Event<UserInfoDTO>("onUserSignIn");
+        this.onUserSignOut = new Event0("onUserSignOut");
     }
 
     public void check(final AsyncCallbackSimple<?> callback) {
-	Log.debug("Checking session (userhash: " + getUserHash() + ")");
-	userServiceProvider.get().onlyCheckSession(getUserHash(), callback);
+        Log.debug("Checking session (userhash: " + getUserHash() + ")");
+        userServiceProvider.get().onlyCheckSession(getUserHash(), callback);
     }
 
     public List<I18nCountryDTO> getCountries() {
-	return initData.getCountries();
+        return initData.getCountries();
     }
 
     public Object[][] getCountriesArray() {
-	if (countriesArray == null) {
-	    countriesArray = mapCountries();
-	}
-	return countriesArray;
+        if (countriesArray == null) {
+            countriesArray = mapCountries();
+        }
+        return countriesArray;
     }
 
     public I18nLanguageDTO getCurrentLanguage() {
-	return currentLanguage;
+        return currentLanguage;
     }
 
     public StateDTO getCurrentState() {
-	return currentState;
+        return currentState;
     }
 
     public StateToken getCurrentStateToken() {
-	return currentState == null ? null : currentState.getStateToken();
+        return currentState == null ? null : currentState.getStateToken();
     }
 
     public UserInfoDTO getCurrentUserInfo() {
-	return currentUserInfo;
+        return currentUserInfo;
     }
 
     public String getGalleryPermittedExtensions() {
-	return initData.getGalleryPermittedExtensions();
+        return initData.getGalleryPermittedExtensions();
     }
 
     public List<I18nLanguageSimpleDTO> getLanguages() {
-	return initData.getLanguages();
+        return initData.getLanguages();
     }
 
     public Object[][] getLanguagesArray() {
-	if (languagesArray == null) {
-	    languagesArray = mapLangs();
-	}
-	return languagesArray;
+        if (languagesArray == null) {
+            languagesArray = mapLangs();
+        }
+        return languagesArray;
     }
 
     public List<LicenseDTO> getLicenses() {
-	return initData.getLicenses();
+        return initData.getLicenses();
     }
 
     public Object[][] getTimezones() {
-	if (timezonesArray == null) {
-	    mapTimezones();
-	}
-	return timezonesArray;
+        if (timezonesArray == null) {
+            mapTimezones();
+        }
+        return timezonesArray;
     }
 
     public String getUserHash() {
-	return userHash;
+        return userHash;
     }
 
     public boolean isLogged() {
-	return userHash != null;
+        return userHash != null;
     }
 
     public void onInitDataReceived(final Listener<InitDataDTO> listener) {
-	onInitDataReceived.add(listener);
+        onInitDataReceived.add(listener);
     }
 
     public void onUserSignIn(final Listener<UserInfoDTO> listener) {
-	onUserSignIn.add(listener);
+        onUserSignIn.add(listener);
     }
 
     public void onUserSignOut(final Listener0 listener) {
-	onUserSignOut.add(listener);
+        onUserSignOut.add(listener);
     }
 
     public void setCurrent(final StateDTO currentState) {
-	this.currentState = currentState;
+        this.currentState = currentState;
     }
 
     public void setCurrentLanguage(final I18nLanguageDTO currentLanguage) {
-	this.currentLanguage = currentLanguage;
+        this.currentLanguage = currentLanguage;
     }
 
     public void setCurrentState(final StateDTO currentState) {
-	this.currentState = currentState;
+        this.currentState = currentState;
     }
 
     public void setCurrentUserInfo(final UserInfoDTO currentUserInfo) {
-	this.currentUserInfo = currentUserInfo;
-	if (currentUserInfo != null) {
-	    onUserSignIn.fire(currentUserInfo);
-	} else {
-	    onUserSignOut.fire();
-	}
+        this.currentUserInfo = currentUserInfo;
+        if (currentUserInfo != null) {
+            onUserSignIn.fire(currentUserInfo);
+        } else {
+            onUserSignOut.fire();
+        }
     }
 
     public void setInitData(final InitDataDTO initData) {
-	this.initData = initData;
-	onInitDataReceived.fire(initData);
+        this.initData = initData;
+        onInitDataReceived.fire(initData);
     }
 
     public void setUserHash(final String userHash) {
-	this.userHash = userHash;
+        this.userHash = userHash;
     }
 
     private Object[][] mapCountries() {
-	final Object[][] objs = new Object[initData.getCountries().size()][1];
-	int i = 0;
-	for (final Iterator<I18nCountryDTO> iterator = initData.getCountries().iterator(); iterator.hasNext();) {
-	    final I18nCountryDTO country = iterator.next();
-	    final Object[] obj = new Object[] { country.getCode(), country.getEnglishName() };
-	    objs[i++] = obj;
-	}
-	return objs;
+        final Object[][] objs = new Object[initData.getCountries().size()][1];
+        int i = 0;
+        for (I18nCountryDTO country : initData.getCountries()) {
+            final Object[] obj = new Object[] { country.getCode(), country.getEnglishName() };
+            objs[i++] = obj;
+        }
+        return objs;
     }
 
     private Object[][] mapLangs() {
-	final Object[][] objs = new Object[initData.getLanguages().size()][1];
-	int i = 0;
-	for (final Iterator<I18nLanguageSimpleDTO> iterator = initData.getLanguages().iterator(); iterator.hasNext();) {
-	    final I18nLanguageSimpleDTO language = iterator.next();
-	    final Object[] obj = new Object[] { language.getCode(), language.getEnglishName() };
-	    objs[i++] = obj;
-	}
-	return objs;
+        final Object[][] objs = new Object[initData.getLanguages().size()][1];
+        int i = 0;
+        for (I18nLanguageSimpleDTO language : initData.getLanguages()) {
+            final Object[] obj = new Object[] { language.getCode(), language.getEnglishName() };
+            objs[i++] = obj;
+        }
+        return objs;
     }
 
     private void mapTimezones() {
-	timezonesArray = new Object[initData.getTimezones().length][1];
-	for (int i = 0; i < getTimezones().length; i++) {
-	    final Object[] obj = new Object[] { initData.getTimezones()[i] };
-	    timezonesArray[i] = obj;
-	}
+        timezonesArray = new Object[initData.getTimezones().length][1];
+        for (int i = 0; i < getTimezones().length; i++) {
+            final Object[] obj = new Object[] { initData.getTimezones()[i] };
+            timezonesArray[i] = obj;
+        }
     }
 
 }

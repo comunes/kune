@@ -23,10 +23,10 @@ package org.ourproject.kune.platf.server.manager;
 import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.DefaultException;
-import org.ourproject.kune.platf.server.ParticipationData;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.sn.ParticipationData;
 
 public interface SocialNetworkManager extends Manager<SocialNetwork, Long> {
 

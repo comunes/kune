@@ -21,10 +21,13 @@
 package org.ourproject.kune.chat.server.managers;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
 import org.jivesoftware.smack.ConnectionConfiguration;
+import org.jivesoftware.smack.Roster;
+import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
@@ -44,26 +47,6 @@ public class XmppManagerDefault implements XmppManager {
     @Inject
     public XmppManagerDefault(final ChatProperties chatProperties) {
         this.chatProperties = chatProperties;
-    }
-
-    public ChatConnection login(final String userName, final String password, final String resource) {
-        ConnectionConfiguration config = new ConnectionConfiguration(getServerName(), 5222);
-        XMPPConnection conn = new XMPPConnection(config);
-        try {
-            conn.connect();
-            conn.login(userName, password, resource, true);
-            return new XmppConnection(userName, conn);
-        } catch (XMPPException e) {
-            throw new ChatException(e);
-        }
-    }
-
-    private String getServerName() {
-        return chatProperties.getDomain();
-    }
-
-    private String getRoomName(final String room) {
-        return room + "@" + chatProperties.getRoomHost();
     }
 
     public Room createRoom(final ChatConnection conn, final String roomName, final String alias) {
@@ -90,6 +73,18 @@ public class XmppManagerDefault implements XmppManager {
         }
     }
 
+    public void disconnect(final ChatConnection connection) {
+        XmppConnection xConn = (XmppConnection) connection;
+        xConn.getConn().disconnect();
+
+    }
+
+    public Collection<RosterEntry> getRoster(ChatConnection conn) {
+        XmppConnection xConn = (XmppConnection) conn;
+        Roster roster = xConn.getConn().getRoster();
+        return roster.getEntries();
+    }
+
     public Room joinRoom(final ChatConnection connection, final String roomName, final String alias) {
         XmppConnection xConn = (XmppConnection) connection;
         MultiUserChat muc = new MultiUserChat(xConn.getConn(), getRoomName(roomName));
@@ -99,6 +94,18 @@ public class XmppManagerDefault implements XmppManager {
             XmppRoom room = new XmppRoom(muc, alias);
             muc.addMessageListener(room);
             return room;
+        } catch (XMPPException e) {
+            throw new ChatException(e);
+        }
+    }
+
+    public ChatConnection login(final String userName, final String password, final String resource) {
+        ConnectionConfiguration config = new ConnectionConfiguration(getServerName(), 5222);
+        XMPPConnection conn = new XMPPConnection(config);
+        try {
+            conn.connect();
+            conn.login(userName, password, resource, true);
+            return new XmppConnection(userName, conn);
         } catch (XMPPException e) {
             throw new ChatException(e);
         }
@@ -136,12 +143,16 @@ public class XmppManagerDefault implements XmppManager {
         muc.sendConfigurationForm(answer);
     }
 
-    private boolean isNotEmpty(final FormField field) {
-        return field.getVariable() != null;
+    private String getRoomName(final String room) {
+        return room + "@" + chatProperties.getRoomHost();
     }
 
-    private boolean isVisible(final String type) {
-        return !FormField.TYPE_HIDDEN.equals(type);
+    private String getServerName() {
+        return chatProperties.getDomain();
+    }
+
+    private boolean isNotEmpty(final FormField field) {
+        return field.getVariable() != null;
     }
 
     private boolean isNotList(final String type) {
@@ -149,9 +160,7 @@ public class XmppManagerDefault implements XmppManager {
                 && !FormField.TYPE_LIST_SINGLE.equals(type) && !isVisible(type);
     }
 
-    public void disconnect(final ChatConnection connection) {
-        XmppConnection xConn = (XmppConnection) connection;
-        xConn.getConn().disconnect();
-
+    private boolean isVisible(final String type) {
+        return !FormField.TYPE_HIDDEN.equals(type);
     }
 }

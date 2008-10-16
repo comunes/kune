@@ -71,7 +71,7 @@ public class AccessServiceDefault implements AccessService {
             throws DefaultException {
         checkGroupExistence(token);
         final Content descriptor = finder.getContent(token, defaultGroup);
-        if (descriptor.equals(Content.NO_CONTENT)) {
+        if (Content.NO_CONTENT.equals(descriptor)) {
             throw new NoDefaultContentException();
         }
         final Access access = new Access(descriptor, descriptor.getContainer());

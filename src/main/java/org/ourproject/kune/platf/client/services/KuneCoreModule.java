@@ -8,8 +8,8 @@ import com.calclab.suco.client.ioc.module.AbstractModule;
 public class KuneCoreModule extends AbstractModule {
 
     @Override
-    public void onLoad() {
-	registerDecorator(ApplicationComponentGroup.class, new ApplicationComponentGroup(container));
-	registerDecorator(ToolGroup.class, new ToolGroup(container));
+    public void onInstall() {
+        registerDecorator(ApplicationComponentGroup.class, new ApplicationComponentGroup(container));
+        registerDecorator(ToolGroup.class, new ToolGroup(container));
     }
 }

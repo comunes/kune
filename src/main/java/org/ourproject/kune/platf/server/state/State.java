@@ -24,7 +24,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.server.ParticipationData;
 import org.ourproject.kune.platf.server.access.AccessRights;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.BasicMimeType;
@@ -36,6 +35,8 @@ import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.TagResult;
 import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.sn.ParticipationData;
+import org.ourproject.kune.platf.server.sn.UserBuddiesData;
 
 public class State {
     private String documentId;
@@ -66,6 +67,7 @@ public class State {
     private ParticipationData participation;
     private StateToken stateToken;
     private List<String> enabledTools;
+    private UserBuddiesData userBuddies;
 
     public State() {
     }
@@ -176,6 +178,10 @@ public class State {
 
     public String getTypeId() {
         return typeId;
+    }
+
+    public UserBuddiesData getUserBuddies() {
+        return userBuddies;
     }
 
     public boolean isRateable() {
@@ -300,6 +306,10 @@ public class State {
 
     public void setTypeId(final String typeId) {
         this.typeId = typeId;
+    }
+
+    public void setUserBuddies(UserBuddiesData userBuddies) {
+        this.userBuddies = userBuddies;
     }
 
     @Override

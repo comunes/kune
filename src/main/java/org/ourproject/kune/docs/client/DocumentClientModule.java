@@ -56,7 +56,7 @@ public class DocumentClientModule extends AbstractModule {
     }
 
     @Override
-    public void onLoad() {
+    public void onInstall() {
 
         register(ToolGroup.class, new Factory<DocumentClientTool>(DocumentClientTool.class) {
             @Override

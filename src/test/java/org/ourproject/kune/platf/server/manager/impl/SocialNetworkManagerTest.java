@@ -12,12 +12,12 @@ import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.AlreadyGroupMemberException;
 import org.ourproject.kune.platf.client.errors.LastAdminInGroupException;
-import org.ourproject.kune.platf.server.ParticipationData;
 import org.ourproject.kune.platf.server.PersistenceTest;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.GroupListMode;
 import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.sn.ParticipationData;
 import org.ourproject.kune.testhelper.ctx.DomainContext;
 
 import com.google.inject.Inject;
