@@ -35,6 +35,7 @@ import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.calclab.suco.client.event.Events;
 import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Event0;
 import com.calclab.suco.client.listener.Listener0;
@@ -54,7 +55,7 @@ public class KuneErrorHandler {
         this.i18n = i18n;
         this.wsProvider = wsProvider;
         this.stateManagerProvider = stateManagerProvider;
-        this.onSessionExpired = new Event0("onSessionExpired");
+        this.onSessionExpired = Events.create("onSessionExpired");
     }
 
     public void doSessionExpired() {
@@ -82,6 +83,7 @@ public class KuneErrorHandler {
             logException(e);
             doSessionExpired();
         } catch (final NoDefaultContentException e) {
+            Site.info("This user don't have a homepage");
             stateManagerProvider.get().restorePreviousState();
         } catch (final UserMustBeLoggedException e) {
             logException(e);

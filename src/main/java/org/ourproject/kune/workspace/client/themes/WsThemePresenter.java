@@ -8,6 +8,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.site.Site;
 
+import com.calclab.suco.client.event.Events;
 import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Event2;
 import com.calclab.suco.client.listener.Listener;
@@ -22,56 +23,56 @@ public class WsThemePresenter {
     private final Session session;
 
     public WsThemePresenter(final Session session, final Provider<GroupServiceAsync> groupServiceProvider,
-	    final StateManager stateManager) {
-	this.session = session;
-	this.groupServiceProvider = groupServiceProvider;
-	this.onThemeChanged = new Event2<WsTheme, WsTheme>("onThemeChanged");
-	session.onInitDataReceived(new Listener<InitDataDTO>() {
-	    public void onEvent(final InitDataDTO initData) {
-		view.setThemes(initData.getWsThemes());
-		setTheme(new WsTheme(initData.getWsThemes()[0]));
-	    }
-	});
-	stateManager.onStateChanged(new Listener<StateDTO>() {
-	    public void onEvent(final StateDTO state) {
-		setState(state);
-	    }
-	});
+            final StateManager stateManager) {
+        this.session = session;
+        this.groupServiceProvider = groupServiceProvider;
+        this.onThemeChanged = Events.create(WsTheme.class, WsTheme.class, "onThemeChanged");
+        session.onInitDataReceived(new Listener<InitDataDTO>() {
+            public void onEvent(final InitDataDTO initData) {
+                view.setThemes(initData.getWsThemes());
+                setTheme(new WsTheme(initData.getWsThemes()[0]));
+            }
+        });
+        stateManager.onStateChanged(new Listener<StateDTO>() {
+            public void onEvent(final StateDTO state) {
+                setState(state);
+            }
+        });
     }
 
     public void init(final WsThemeView view) {
-	this.view = view;
+        this.view = view;
     }
 
     public void onThemeChanged(final Listener2<WsTheme, WsTheme> listener) {
-	onThemeChanged.add(listener);
+        onThemeChanged.add(listener);
     }
 
     protected void onChangeGroupWsTheme(final WsTheme newTheme) {
-	Site.showProgressProcessing();
-	groupServiceProvider.get().changeGroupWsTheme(session.getUserHash(), session.getCurrentState().getStateToken(),
-		newTheme.getName(), new AsyncCallbackSimple<Object>() {
-		    public void onSuccess(final Object result) {
-			setTheme(newTheme);
-			Site.hideProgress();
-		    }
-		});
+        Site.showProgressProcessing();
+        groupServiceProvider.get().changeGroupWsTheme(session.getUserHash(), session.getCurrentState().getStateToken(),
+                newTheme.getName(), new AsyncCallbackSimple<Object>() {
+                    public void onSuccess(final Object result) {
+                        setTheme(newTheme);
+                        Site.hideProgress();
+                    }
+                });
     }
 
     private void setState(final StateDTO state) {
-	setTheme(new WsTheme(state.getGroup().getWorkspaceTheme()));
-	if (state.getGroupRights().isAdministrable()) {
-	    view.setVisible(true);
-	} else {
-	    view.setVisible(false);
-	}
+        setTheme(new WsTheme(state.getGroup().getWorkspaceTheme()));
+        if (state.getGroupRights().isAdministrable()) {
+            view.setVisible(true);
+        } else {
+            view.setVisible(false);
+        }
     }
 
     private void setTheme(final WsTheme newTheme) {
-	if (previousTheme == null || !previousTheme.equals(newTheme)) {
-	    onThemeChanged.fire(previousTheme, newTheme);
-	}
-	previousTheme = newTheme;
+        if (previousTheme == null || !previousTheme.equals(newTheme)) {
+            onThemeChanged.fire(previousTheme, newTheme);
+        }
+        previousTheme = newTheme;
     }
 
 }

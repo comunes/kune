@@ -60,8 +60,8 @@ public class SessionDefault implements Session {
         this.userServiceProvider = userServiceProvider;
         languagesArray = null;
         this.onInitDataReceived = Events.create(InitDataDTO.class, "initDataReceived");
-        this.onUserSignIn = new Event<UserInfoDTO>("onUserSignIn");
-        this.onUserSignOut = new Event0("onUserSignOut");
+        this.onUserSignIn = Events.create(UserInfoDTO.class, "onUserSignIn");
+        this.onUserSignOut = Events.create("onUserSignOut");
     }
 
     public void check(final AsyncCallbackSimple<?> callback) {

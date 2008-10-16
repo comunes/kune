@@ -28,6 +28,7 @@ import org.ourproject.kune.platf.client.utils.PrefetchUtilities;
 import org.ourproject.kune.workspace.client.site.Site;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.calclab.suco.client.event.Events;
 import com.calclab.suco.client.listener.Event0;
 import com.calclab.suco.client.listener.Listener0;
 import com.google.gwt.user.client.Command;
@@ -44,62 +45,63 @@ public class ApplicationDefault implements Application {
     private final Event0 onApplicationStop;
 
     public ApplicationDefault(final Session session) {
-	this.session = session;
-	this.onApplicationStart = new Event0("onApplicationStart");
-	this.onApplicationStop = new Event0("onApplicationStop");
-	Window.addWindowCloseListener(new WindowCloseListener() {
-	    public void onWindowClosed() {
-	    }
+        this.session = session;
+        this.onApplicationStart = Events.create("onApplicationStart");
+        this.onApplicationStop = Events.create("onApplicationStop");
+        Window.addWindowCloseListener(new WindowCloseListener() {
+            public void onWindowClosed() {
+            }
 
-	    public String onWindowClosing() {
-		stop();
-		return null;
-	    }
-	});
+            public String onWindowClosing() {
+                stop();
+                return null;
+            }
+        });
     }
 
     public void onApplicationStart(final Listener0 listener) {
-	onApplicationStart.add(listener);
+        onApplicationStart.add(listener);
     }
 
     public void onApplicationStop(final Listener0 listener) {
-	onApplicationStop.add(listener);
+        onApplicationStop.add(listener);
     }
 
     public void start() {
-	onApplicationStart.fire();
-	PrefetchUtilities.preFetchImpImages();
-	getInitData();
-	final Timer prefetchTimer = new Timer() {
-	    public void run() {
-		PrefetchUtilities.doTasksDeferred();
-	    }
-	};
-	prefetchTimer.schedule(20000);
+        onApplicationStart.fire();
+        PrefetchUtilities.preFetchImpImages();
+        getInitData();
+        final Timer prefetchTimer = new Timer() {
+            @Override
+            public void run() {
+                PrefetchUtilities.doTasksDeferred();
+            }
+        };
+        prefetchTimer.schedule(20000);
     }
 
     private void getInitData() {
-	final SiteServiceAsync server = SiteService.App.getInstance();
-	server.getInitData(session.getUserHash(), new AsyncCallback<InitDataDTO>() {
-	    public void onFailure(final Throwable error) {
-		RootPanel.get("kuneinitialcurtain").setVisible(false);
-		Site.error("Error fetching initial data");
-		Log.debug(error.getMessage());
-	    }
+        final SiteServiceAsync server = SiteService.App.getInstance();
+        server.getInitData(session.getUserHash(), new AsyncCallback<InitDataDTO>() {
+            public void onFailure(final Throwable error) {
+                RootPanel.get("kuneinitialcurtain").setVisible(false);
+                Site.error("Error fetching initial data");
+                Log.debug(error.getMessage());
+            }
 
-	    public void onSuccess(final InitDataDTO initData) {
-		session.setInitData(initData);
-		session.setCurrentUserInfo(initData.getUserInfo());
-		DeferredCommand.addCommand(new Command() {
-		    public void execute() {
-			RootPanel.get("kuneinitialcurtain").setVisible(false);
-		    }
-		});
-	    }
-	});
+            public void onSuccess(final InitDataDTO initData) {
+                session.setInitData(initData);
+                session.setCurrentUserInfo(initData.getUserInfo());
+                DeferredCommand.addCommand(new Command() {
+                    public void execute() {
+                        RootPanel.get("kuneinitialcurtain").setVisible(false);
+                    }
+                });
+            }
+        });
     }
 
     private void stop() {
-	onApplicationStop.fire();
+        onApplicationStop.fire();
     }
 }

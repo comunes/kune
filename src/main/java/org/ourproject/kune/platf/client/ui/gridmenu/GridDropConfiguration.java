@@ -21,6 +21,7 @@
  */
 package org.ourproject.kune.platf.client.ui.gridmenu;
 
+import com.calclab.suco.client.event.Events;
 import com.calclab.suco.client.listener.Event;
 import com.calclab.suco.client.listener.Listener;
 
@@ -31,7 +32,7 @@ public class GridDropConfiguration {
 
     public GridDropConfiguration(final String ddGroupId, final Listener<String> listener) {
 	this.ddGroupId = ddGroupId;
-	this.onDrop = new Event<String>("onDrop");
+	this.onDrop = Events.create(String.class, "onDrop");
 	this.onDrop(listener);
     }
 

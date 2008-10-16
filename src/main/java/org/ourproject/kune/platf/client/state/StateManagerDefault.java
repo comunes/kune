@@ -34,6 +34,7 @@ import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.workspace.client.site.Site;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.calclab.suco.client.event.Events;
 import com.calclab.suco.client.listener.Event;
 import com.calclab.suco.client.listener.Event2;
 import com.calclab.suco.client.listener.Listener;
@@ -57,10 +58,10 @@ public class StateManagerDefault implements StateManager {
         this.session = session;
         this.history = history;
         this.oldState = null;
-        this.onStateChanged = new Event<StateDTO>("onStateChanged");
-        this.onGroupChanged = new Event2<GroupDTO, GroupDTO>("onGroupChanged");
-        this.onToolChanged = new Event2<String, String>("onToolChanged");
-        this.onSocialNetworkChanged = new Event<StateDTO>("onSocialNetworkChanged");
+        this.onStateChanged = Events.create(StateDTO.class, "onStateChanged");
+        this.onGroupChanged = Events.create(GroupDTO.class, GroupDTO.class, "onGroupChanged");
+        this.onToolChanged = Events.create(String.class, String.class, "onToolChanged");
+        this.onSocialNetworkChanged = Events.create(StateDTO.class, "onSocialNetworkChanged");
         session.onUserSignIn(new Listener<UserInfoDTO>() {
             public void onEvent(final UserInfoDTO parameter) {
                 if (oldState != null) {

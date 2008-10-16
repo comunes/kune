@@ -45,6 +45,7 @@ public class EntitySummary {
         // accordionLayout.setAnimate(true);
         // accordionLayout.setActiveOnTop(false);
         accordionLayout.setFill(true);
+        accordionLayout.setRenderHidden(true);
         // entitySummary.setAutoScroll(true);
         entitySummary.setLayout(accordionLayout);
         entitySummary.setCls(ENTITY_SUMMARY);

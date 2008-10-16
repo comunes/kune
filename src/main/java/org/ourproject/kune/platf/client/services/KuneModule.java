@@ -77,6 +77,8 @@ import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 import org.ourproject.kune.workspace.client.title.EntityTitle;
 
+import com.calclab.suco.client.event.DirectEventFactory;
+import com.calclab.suco.client.event.Events;
 import com.calclab.suco.client.ioc.decorator.Singleton;
 import com.calclab.suco.client.ioc.module.AbstractModule;
 import com.calclab.suco.client.ioc.module.Factory;
@@ -91,7 +93,7 @@ public class KuneModule extends AbstractModule {
 
     @Override
     public void onInstall() {
-
+        Events.setEventFactory(new DirectEventFactory());
         register(Singleton.class, new Factory<Session>(Session.class) {
             @Override
             public Session create() {

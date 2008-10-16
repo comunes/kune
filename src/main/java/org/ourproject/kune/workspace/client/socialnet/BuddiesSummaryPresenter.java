@@ -14,8 +14,10 @@ import com.calclab.suco.client.listener.Listener2;
 public class BuddiesSummaryPresenter implements BuddiesSummary {
 
     private BuddiesSummaryView view;
+    private final StateManager stateManager;
 
     public BuddiesSummaryPresenter(StateManager stateManager, final Session session) {
+        this.stateManager = stateManager;
         stateManager.onGroupChanged(new Listener2<GroupDTO, GroupDTO>() {
             public void onEvent(GroupDTO param1, GroupDTO param2) {
                 setState(session.getCurrentState());
@@ -29,6 +31,10 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
 
     public void init(BuddiesSummaryView view) {
         this.view = view;
+    }
+
+    public void onClick(UserSimpleDTO user) {
+        stateManager.gotoToken(user.getShortName());
     }
 
     protected void setState(StateDTO state) {

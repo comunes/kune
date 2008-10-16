@@ -103,8 +103,9 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         String domain = "@" + properties.getDomain();
         UserBuddiesData buddiesData = new UserBuddiesData();
         User user = finder.getByShortName(shortName);
-        ChatConnection connection = xmppManager.login(user.getShortName(), user.getPassword(), "kserver");
+        ChatConnection connection = xmppManager.login(user.getShortName() + domain, user.getPassword(), "kserver");
         Collection<RosterEntry> roster = xmppManager.getRoster(connection);
+        xmppManager.disconnect(connection);
         for (RosterEntry entry : roster) {
             switch (entry.getType()) {
             case both:

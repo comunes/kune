@@ -217,7 +217,6 @@ public class DocumentClientActions {
         final ActionToolbarMenuDescriptor<StateToken> refreshCtx = new ActionToolbarMenuDescriptor<StateToken>(
                 AccessRolDTO.Viewer, ActionToolbarPosition.topbar, new Listener<StateToken>() {
                     public void onEvent(final StateToken stateToken) {
-                        Site.important("Refresh with state token: " + stateToken);
                         stateManager.reload();
                         contextNavigator.selectItem(stateToken);
                     }
