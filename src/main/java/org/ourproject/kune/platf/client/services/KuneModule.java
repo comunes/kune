@@ -5,6 +5,8 @@ import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
 import org.ourproject.kune.platf.client.actions.DragDropContentRegistry;
+import org.ourproject.kune.platf.client.actions.GroupActionRegistry;
+import org.ourproject.kune.platf.client.actions.UserActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPresenter;
@@ -349,6 +351,20 @@ public class KuneModule extends AbstractModule {
             @Override
             public ContentActionRegistry create() {
                 return new ContentActionRegistry();
+            }
+        });
+
+        register(Singleton.class, new Factory<GroupActionRegistry>(GroupActionRegistry.class) {
+            @Override
+            public GroupActionRegistry create() {
+                return new GroupActionRegistry();
+            }
+        });
+
+        register(Singleton.class, new Factory<UserActionRegistry>(UserActionRegistry.class) {
+            @Override
+            public UserActionRegistry create() {
+                return new UserActionRegistry();
             }
         });
 

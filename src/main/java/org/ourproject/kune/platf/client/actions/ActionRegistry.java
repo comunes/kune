@@ -9,66 +9,66 @@ public class ActionRegistry<T> {
     private final HashMap<String, ActionCollection<T>> actions;
 
     public ActionRegistry() {
-	actions = new HashMap<String, ActionCollection<T>>();
+        actions = new HashMap<String, ActionCollection<T>>();
     }
 
-    public void addAction(final ActionDescriptor<T> action, final String... contentTypeIds) {
-	for (final String contentTypeId : contentTypeIds) {
-	    final ActionCollection<T> actionColl = getActions(contentTypeId);
-	    actionColl.add(action);
-	}
+    public void addAction(final ActionDescriptor<T> action, final String... typeIds) {
+        for (final String contentTypeId : typeIds) {
+            final ActionCollection<T> actionColl = getActions(contentTypeId);
+            actionColl.add(action);
+        }
     }
 
-    public ActionItemCollection<T> getCurrentActions(final T item, final String contentTypeId, final boolean isLogged,
-	    final AccessRightsDTO rights, final boolean toolbarItems) {
-	final ActionItemCollection<T> collection = new ActionItemCollection<T>();
+    public ActionItemCollection<T> getCurrentActions(final T item, final String typeId, final boolean isLogged,
+            final AccessRightsDTO rights, final boolean toolbarItems) {
+        final ActionItemCollection<T> collection = new ActionItemCollection<T>();
 
-	for (final ActionDescriptor<T> action : getActions(contentTypeId)) {
-	    if (mustAdd(isLogged, rights, action)) {
-		if (toolbarItems) {
-		    if (action instanceof ActionToolbarButtonDescriptor<?>
-			    || action instanceof ActionToolbarMenuDescriptor<?>) {
-			collection.add(new ActionItem<T>(action, item));
-		    }
-		} else {
-		    if (action instanceof ActionMenuItemDescriptor<?>
-			    || action instanceof ActionToolbarMenuAndItemDescriptor<?>
-			    || action instanceof ActionToolbarButtonAndItemDescriptor<?>) {
-			collection.add(new ActionItem<T>(action, item));
-		    }
-		}
-	    }
-	}
-	return collection;
+        for (final ActionDescriptor<T> action : getActions(typeId)) {
+            if (mustAdd(isLogged, rights, action)) {
+                if (toolbarItems) {
+                    if (action instanceof ActionToolbarButtonDescriptor<?>
+                            || action instanceof ActionToolbarMenuDescriptor<?>) {
+                        collection.add(new ActionItem<T>(action, item));
+                    }
+                } else {
+                    if (action instanceof ActionMenuItemDescriptor<?>
+                            || action instanceof ActionToolbarMenuAndItemDescriptor<?>
+                            || action instanceof ActionToolbarButtonAndItemDescriptor<?>) {
+                        collection.add(new ActionItem<T>(action, item));
+                    }
+                }
+            }
+        }
+        return collection;
     }
 
-    public void removeAction(final String contentTypeId, final ActionDescriptor<T> action) {
-	actions.get(contentTypeId).remove(action);
+    public void removeAction(final String typeId, final ActionDescriptor<T> action) {
+        actions.get(typeId).remove(action);
     }
 
-    private ActionCollection<T> getActions(final String contentTypeId) {
-	ActionCollection<T> actionColl = actions.get(contentTypeId);
-	if (actionColl == null) {
-	    actionColl = new ActionCollection<T>();
-	    actions.put(contentTypeId, actionColl);
-	}
-	return actionColl;
+    private ActionCollection<T> getActions(final String typeId) {
+        ActionCollection<T> actionColl = actions.get(typeId);
+        if (actionColl == null) {
+            actionColl = new ActionCollection<T>();
+            actions.put(typeId, actionColl);
+        }
+        return actionColl;
     }
 
     private boolean mustAdd(final boolean isLogged, final AccessRightsDTO rights, final ActionDescriptor<T> action) {
-	if (action.mustBeAuthenticated()) {
-	    if (!isLogged) {
-		return false;
-	    }
-	}
-	switch (action.getAccessRol()) {
-	case Administrator:
-	    return rights.isAdministrable();
-	case Editor:
-	    return rights.isEditable();
-	case Viewer:
-	default:
-	    return rights.isVisible();
-	}
+        if (action.mustBeAuthenticated()) {
+            if (!isLogged) {
+                return false;
+            }
+        }
+        switch (action.getAccessRol()) {
+        case Administrator:
+            return rights.isAdministrable();
+        case Editor:
+            return rights.isEditable();
+        case Viewer:
+        default:
+            return rights.isVisible();
+        }
     }
 }

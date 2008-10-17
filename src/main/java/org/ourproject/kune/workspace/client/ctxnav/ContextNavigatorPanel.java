@@ -20,20 +20,16 @@
 
 package org.ourproject.kune.workspace.client.ctxnav;
 
-import java.util.HashMap;
-
-import org.ourproject.kune.platf.client.actions.ActionDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionItem;
-import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionManager;
+import org.ourproject.kune.platf.client.actions.MenuItemsContainer;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
+import com.calclab.suco.client.listener.Listener;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.ExtElement;
 import com.gwtext.client.data.Node;
@@ -44,10 +40,7 @@ import com.gwtext.client.widgets.Editor;
 import com.gwtext.client.widgets.event.ContainerListenerAdapter;
 import com.gwtext.client.widgets.event.EditorListenerAdapter;
 import com.gwtext.client.widgets.form.TextField;
-import com.gwtext.client.widgets.menu.BaseItem;
-import com.gwtext.client.widgets.menu.Item;
 import com.gwtext.client.widgets.menu.Menu;
-import com.gwtext.client.widgets.menu.event.BaseItemListenerAdapter;
 import com.gwtext.client.widgets.tree.DropNodeCallback;
 import com.gwtext.client.widgets.tree.MultiSelectionModel;
 import com.gwtext.client.widgets.tree.TreeEditor;
@@ -60,12 +53,12 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 
     private TreePanel treePanel;
     private TreeEditor treeEditor;
-    private final HashMap<String, Menu> contextMenus;
     private final WorkspaceSkeleton ws;
     private boolean fireOnTextChange;
     private boolean isEditable;
     private final ActionManager actionManager;
     private final ContextNavigatorPresenter presenter;
+    private final MenuItemsContainer<StateToken> menuItemsContainer;
 
     public ContextNavigatorPanel(final ContextNavigatorPresenter presenter, final I18nTranslationService i18n,
             final WorkspaceSkeleton ws, final ActionManager actionManager) {
@@ -73,9 +66,9 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
         this.ws = ws;
         this.actionManager = actionManager;
 
-        contextMenus = new HashMap<String, Menu>();
         fireOnTextChange = true;
         isEditable = false;
+        menuItemsContainer = new MenuItemsContainer<StateToken>();
     }
 
     public void addItem(final ContextNavigatorItem item) {
@@ -94,7 +87,12 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
             if (tooltip != null) {
                 child.setTooltip(tooltip);
             }
-            createItemMenu(nodeId, item.getActionCollection());
+            menuItemsContainer.createItemMenu(nodeId, item.getActionCollection(),
+                    new Listener<ActionItem<StateToken>>() {
+                        public void onEvent(ActionItem<StateToken> actionItem) {
+                            doAction(actionItem);
+                        }
+                    });
             final TreeNode parent = treePanel.getNodeById(item.getParentId());
             if (parent != null) {
                 child.addListener(new TreeNodeListenerAdapter() {
@@ -154,7 +152,7 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
             treePanel.clear();
             treePanel = null;
         }
-        contextMenus.clear();
+        menuItemsContainer.clear();
     }
 
     public void editItem(final String id) {
@@ -205,31 +203,6 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
         }
     }
 
-    private void createItemMenu(final String nodeId, final ActionItemCollection<StateToken> actionCollection) {
-        DeferredCommand.addCommand(new Command() {
-            public void execute() {
-                Menu menu = null;
-                if (actionCollection != null) {
-                    menu = new Menu();
-                    // Remove if when retrieved rights of siblings
-                    for (final ActionItem<StateToken> actionItem : actionCollection) {
-                        final ActionDescriptor<StateToken> action = actionItem.getAction();
-                        final Item item = new Item(action.getText());
-                        item.setIcon(action.getIconUrl());
-                        menu.addItem(item);
-                        item.addListener(new BaseItemListenerAdapter() {
-                            @Override
-                            public void onClick(final BaseItem item, final EventObject e) {
-                                doAction(actionItem);
-                            }
-                        });
-                    }
-                }
-                contextMenus.put(nodeId, menu);
-            }
-        });
-    }
-
     private void createTreePanel(final String rootId, final String text, final StateToken stateToken) {
         if (treePanel != null) {
             clear();
@@ -263,7 +236,7 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 
             @Override
             public void onContextMenu(final TreeNode node, final EventObject e) {
-                final Menu menu = contextMenus.get(node.getId());
+                final Menu menu = menuItemsContainer.get(node.getId());
                 if (menu != null && menu.getItems().length > 0) {
                     menu.showAt(e.getXY());
                 } else {

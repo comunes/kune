@@ -116,55 +116,55 @@
   background-color: #FFF;
 }
 
-.k-entity-default .x-layout-split {
+.k-entity-default .x-layout-split, .k-entity-default .x-layout-collapsed {
   background: #DD8A3D none repeat scroll 0% 50%;
 }
 
-.k-entity-green .x-layout-split {
+.k-entity-green .x-layout-split, .k-entity-green .x-layout-collapsed {
   background: #5FD35F none repeat scroll 0% 50%;
 }
 
-.k-entity-blue .x-layout-split {
+.k-entity-blue .x-layout-split, .k-entity-blue .x-layout-collapsed {
   background: #0066FF none repeat scroll 0% 50%;
 }
 
-.k-entity-grey .x-layout-split {
+.k-entity-grey .x-layout-split, .k-entity-grey .x-layout-collapsed {
   background: #4D4D4D none repeat scroll 0% 50%;
 }
 
-.k-entity-purple .x-layout-split {
+.k-entity-purple .x-layout-split, .k-entity-purple .x-layout-collapsed {
   background: #660080 none repeat scroll 0% 50%;
 }
 
-.k-entity-red .x-layout-split {
+.k-entity-red .x-layout-split, .k-entity-red .x-layout-collapsed {
   background: #D40000 none repeat scroll 0% 50%;
 }
 
-.k-entityworkspace .x-layout-split {
+.k-entityworkspace .x-layout-split, .k-entityworkspace .x-layout-collapsed {
   background: transparent none repeat scroll 0% 50%;
 }
 
-.k-entityworkspace-default .x-layout-split {
+.k-entityworkspace-default .x-layout-split, .k-entityworkspace-default .x-layout-collapsed {
   background: #DEAA87 none repeat scroll 0% 50%;
 }
 
-.k-entityworkspace-green .x-layout-split {
+.k-entityworkspace-green .x-layout-split, .k-entityworkspace-green .x-layout-collapsed {
   background: #DCE8AB none repeat scroll 0% 50%;
 }
 
-.k-entityworkspace-blue .x-layout-split {
+.k-entityworkspace-blue .x-layout-split, .k-entityworkspace-blue .x-layout-collapsed {
   background: #D5D5FF none repeat scroll 0% 50%;
 }
 
-.k-entityworkspace-grey .x-layout-split {
+.k-entityworkspace-grey .x-layout-split, .k-entityworkspace-grey .x-layout-collapsed {
   background: #999999 none repeat scroll 0% 50%;
 }
 
-.k-entityworkspace-purple .x-layout-split {
+.k-entityworkspace-purple .x-layout-split, .k-entityworkspace-purple .x-layout-collapsed {
   background: #A793AC none repeat scroll 0% 50%;
 }
 
-.k-entityworkspace-red .x-layout-split {
+.k-entityworkspace-red .x-layout-split, .k-entityworkspace-red .x-layout-collapsed {
   background: #FF5555 none repeat scroll 0% 50%;
 }
 

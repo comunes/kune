@@ -27,4 +27,9 @@ public class UserBuddiesDataDTO implements IsSerializable {
     public void setOtherExternalBuddies(int otherExternalBuddies) {
         this.otherExternalBuddies = otherExternalBuddies;
     }
+
+    @Override
+    public String toString() {
+        return "UserBuddiesDataDTO[ext: " + otherExternalBuddies + " / int: " + buddies + "]";
+    }
 }

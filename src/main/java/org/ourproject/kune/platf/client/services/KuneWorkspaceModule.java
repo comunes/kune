@@ -1,6 +1,9 @@
 package org.ourproject.kune.platf.client.services;
 
+import org.ourproject.kune.chat.client.ChatClientTool;
+import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
+import org.ourproject.kune.platf.client.actions.UserActionRegistry;
 import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
@@ -334,9 +337,10 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public BuddiesSummary create() {
                 final BuddiesSummaryPresenter presenter = new BuddiesSummaryPresenter($(StateManager.class),
-                        $(Session.class));
+                        $(Session.class), $(UserActionRegistry.class), $(I18nTranslationService.class),
+                        $$(ChatClientTool.class));
                 final BuddiesSummaryPanel panel = new BuddiesSummaryPanel(presenter, $(WorkspaceSkeleton.class),
-                        $(I18nTranslationService.class));
+                        $(I18nTranslationService.class), $(ActionManager.class));
                 presenter.init(panel);
                 return presenter;
             }

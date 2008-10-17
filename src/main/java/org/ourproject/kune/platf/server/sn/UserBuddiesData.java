@@ -30,4 +30,9 @@ public class UserBuddiesData {
     public void setOtherExternalBuddies(int otherExternalBuddies) {
         this.otherExternalBuddies = otherExternalBuddies;
     }
+
+    @Override
+    public String toString() {
+        return "UserBuddiesData[ext: " + otherExternalBuddies + " / int: " + buddies + "]";
+    }
 }

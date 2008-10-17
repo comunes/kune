@@ -20,6 +20,8 @@
 package org.ourproject.kune.chat.client;
 
 public interface ChatEngine {
+    void addNewBuddie(String shortName);
+
     ChatOptions getChatOptions();
 
     void joinRoom(String roomName, String userAlias);

@@ -22,6 +22,7 @@ package org.ourproject.kune.chat.client;
 import java.util.Date;
 
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
@@ -50,6 +51,10 @@ class ChatEngineXmpp implements ChatEngine {
         this.chatOptions = chatOptions;
         this.i18n = i18n;
         this.ws = ws;
+    }
+
+    public void addNewBuddie(String shortName) {
+        Site.important("In development (emite)");
     }
 
     public ChatOptions getChatOptions() {
