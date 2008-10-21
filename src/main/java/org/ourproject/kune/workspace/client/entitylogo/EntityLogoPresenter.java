@@ -3,7 +3,6 @@ package org.ourproject.kune.workspace.client.entitylogo;
 import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
@@ -60,6 +59,7 @@ public class EntityLogoPresenter implements EntityLogo {
                                                                                                       group.getShortName())) {
                                                         // only if we are in the
                                                         // same group
+                                                        view.reloadImage(group);
                                                         currentState.setGroup(group);
                                                         setGroupLogo(group);
                                                     }
@@ -72,7 +72,7 @@ public class EntityLogoPresenter implements EntityLogo {
         if (groupFullLogo != null) {
             view.setFullLogo(groupFullLogo.getStateToken(), true);
         } else if (group.hasLogo()) {
-            view.setLogoImage(new StateToken(group.getShortName()));
+            view.setLogoImage(group.getStateToken());
             view.setLogoText(group.getLongName());
             view.setLogoImageVisible(true);
         } else {

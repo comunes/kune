@@ -1,5 +1,6 @@
 package org.ourproject.kune.workspace.client.entitylogo;
 
+import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 
@@ -11,7 +12,9 @@ public interface EntityLogoView {
     int LOGO_ICON_MIN_HEIGHT = 28;
     int LOGO_ICON_MIN_WIDTH = 468;
 
-    String LOGO_FORM_FIELD = "k-elv-ff";
+    String LOGO_FORM_FIELD = "k-elogov-ff";
+
+    void reloadImage(GroupDTO group);
 
     void setFullLogo(StateToken stateToken, boolean clipped);
 

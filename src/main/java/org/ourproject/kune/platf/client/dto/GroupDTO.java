@@ -33,6 +33,7 @@ public class GroupDTO implements IsSerializable {
     private LicenseDTO defaultLicense;
     private String workspaceTheme;
     private boolean hasLogo;
+    private StateToken stateToken;
 
     public GroupDTO() {
         this(null, null, GroupType.ORGANIZATION);
@@ -93,6 +94,13 @@ public class GroupDTO implements IsSerializable {
 
     public String getShortName() {
         return shortName;
+    }
+
+    public StateToken getStateToken() {
+        if (stateToken == null) {
+            stateToken = new StateToken(shortName);
+        }
+        return stateToken;
     }
 
     public String getWorkspaceTheme() {
